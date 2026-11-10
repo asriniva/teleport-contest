@@ -1,5 +1,11 @@
 # The Teleport Coding Challenge
 
+**Local port status:** shadow capture is restored as the default, and the build
+now links real ncurses terminfo instead of the earlier ANSI shortcut. Public
+tests: **44/44 sessions**, **11,405/11,405 screens**; no runtime errors. See the [terminal changes and current status](UPSTREAM_DIVERGENCES.md#current-status-shadow-capture-and-real-terminfo).
+
+This fork includes a reproducible wasm64 build. See [build and test instructions](nethack-c/wasm/README.md). All inherited and added changes are listed in the [upstream divergence register](UPSTREAM_DIVERGENCES.md).
+
 *A guide to porting the Mazes of Menace from C to JavaScript, for
 adventurers traveling with a small swarm of LLM coding assistants.
 [Fork it now.](https://github.com/davidbau/teleport-contest/fork)*

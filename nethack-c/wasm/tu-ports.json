@@ -1,0 +1,341 @@
+[
+  {
+    "name": "isaac64",
+    "source": "src/isaac64.c",
+    "javascript": "js/ported/isaac64.js",
+    "library": "nethack-c/wasm/tu-libraries/isaac64.js"
+  },
+  {
+    "name": "nhmd4",
+    "source": "src/nhmd4.c",
+    "javascript": "js/ported/nhmd4.js",
+    "library": "nethack-c/wasm/tu-libraries/nhmd4.js"
+  },
+  {
+    "name": "strutil",
+    "source": "src/strutil.c",
+    "javascript": "js/ported/strutil.js",
+    "library": "nethack-c/wasm/tu-libraries/strutil.js"
+  },
+  {
+    "name": "rect",
+    "source": "src/rect.c",
+    "javascript": "js/ported/rect.js",
+    "library": "nethack-c/wasm/tu-libraries/rect.js"
+  },
+  {
+    "name": "track",
+    "source": "src/track.c",
+    "javascript": "js/ported/track.js",
+    "library": "nethack-c/wasm/tu-libraries/track.js"
+  },
+  {
+    "name": "calendar",
+    "source": "src/calendar.c",
+    "javascript": "js/ported/calendar.js",
+    "reference": "prepared",
+    "library": "nethack-c/wasm/tu-libraries/calendar.js"
+  },
+  {
+    "name": "stairs",
+    "source": "src/stairs.c",
+    "javascript": "js/ported/stairs.js",
+    "library": "nethack-c/wasm/tu-libraries/stairs.js"
+  },
+  {
+    "name": "sys",
+    "source": "src/sys.c",
+    "javascript": "js/ported/sys.js",
+    "library": "nethack-c/wasm/tu-libraries/sys.js"
+  },
+  {
+    "name": "rip",
+    "source": "src/rip.c",
+    "javascript": "js/ported/rip.js",
+    "library": "nethack-c/wasm/tu-libraries/rip.js"
+  },
+  {
+    "name": "date",
+    "source": "src/date.c",
+    "javascript": "js/ported/date.js",
+    "reference": "prepared",
+    "library": "nethack-c/wasm/tu-libraries/date.js",
+    "startup": "$teleportDateInit"
+  },
+  {
+    "name": "alloc",
+    "source": "src/alloc.c",
+    "javascript": "js/ported/alloc.js",
+    "configuredFunctions": true,
+    "library": "nethack-c/wasm/tu-libraries/alloc.js"
+  },
+  {
+    "name": "utf8map",
+    "source": "src/utf8map.c",
+    "javascript": "js/ported/utf8map.js",
+    "library": "nethack-c/wasm/tu-libraries/utf8map.js"
+  },
+  {
+    "name": "drawing",
+    "source": "src/drawing.c",
+    "javascript": "js/ported/drawing.js",
+    "library": "nethack-c/wasm/tu-libraries/drawing.js",
+    "startup": "$teleportDrawingInit"
+  },
+  {
+    "name": "posixregex",
+    "source": "sys/share/posixregex.c",
+    "javascript": "js/ported/posixregex.js",
+    "library": "nethack-c/wasm/tu-libraries/posixregex.js",
+    "startup": "$teleportPosixregexInit"
+  },
+  {
+    "name": "rnd",
+    "source": "src/rnd.c",
+    "javascript": "js/ported/rnd.js",
+    "library": "nethack-c/wasm/tu-libraries/rnd.js",
+    "reference": "prepared",
+    "configuredFunctions": true
+  },
+  {
+    "name": "ioctl",
+    "source": "sys/share/ioctl.c",
+    "javascript": "js/ported/ioctl.js",
+    "library": "nethack-c/wasm/tu-libraries/ioctl.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "unixtty",
+    "source": "sys/share/unixtty.c",
+    "javascript": "js/ported/unixtty.js",
+    "library": "nethack-c/wasm/tu-libraries/unixtty.js",
+    "reference": "prepared",
+    "configuredFunctions": true
+  },
+  {
+    "name": "were",
+    "source": "src/were.c",
+    "javascript": "js/ported/were.js",
+    "library": "nethack-c/wasm/tu-libraries/were.js"
+  },
+  {
+    "name": "extralev",
+    "source": "src/extralev.c",
+    "javascript": "js/ported/extralev.js",
+    "library": "nethack-c/wasm/tu-libraries/extralev.js"
+  },
+  {
+    "name": "mplayer",
+    "source": "src/mplayer.c",
+    "javascript": "js/ported/mplayer.js",
+    "library": "nethack-c/wasm/tu-libraries/mplayer.js"
+  },
+  {
+    "name": "exper",
+    "source": "src/exper.c",
+    "javascript": "js/ported/exper.js",
+    "library": "nethack-c/wasm/tu-libraries/exper.js"
+  },
+  {
+    "name": "mkmap",
+    "source": "src/mkmap.c",
+    "javascript": "js/ported/mkmap.js",
+    "library": "nethack-c/wasm/tu-libraries/mkmap.js"
+  },
+  {
+    "name": "getline",
+    "source": "win/tty/getline.c",
+    "javascript": "js/ported/getline.js",
+    "library": "nethack-c/wasm/tu-libraries/getline.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "write",
+    "source": "src/write.c",
+    "javascript": "js/ported/write.js",
+    "library": "nethack-c/wasm/tu-libraries/write.js"
+  },
+  {
+    "name": "mdlib",
+    "source": "src/mdlib.c",
+    "javascript": "js/ported/mdlib.js",
+    "library": "nethack-c/wasm/tu-libraries/mdlib.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "quest",
+    "source": "src/quest.c",
+    "javascript": "js/ported/quest.js",
+    "library": "nethack-c/wasm/tu-libraries/quest.js"
+  },
+  {
+    "name": "minion",
+    "source": "src/minion.c",
+    "javascript": "js/ported/minion.js",
+    "library": "nethack-c/wasm/tu-libraries/minion.js"
+  },
+  {
+    "name": "iactions",
+    "source": "src/iactions.c",
+    "javascript": "js/ported/iactions.js",
+    "library": "nethack-c/wasm/tu-libraries/iactions.js"
+  },
+  {
+    "name": "selvar",
+    "source": "src/selvar.c",
+    "javascript": "js/ported/selvar.js",
+    "library": "nethack-c/wasm/tu-libraries/selvar.js"
+  },
+  {
+    "name": "steal",
+    "source": "src/steal.c",
+    "javascript": "js/ported/steal.js",
+    "library": "nethack-c/wasm/tu-libraries/steal.js"
+  },
+  {
+    "name": "sit",
+    "source": "src/sit.c",
+    "javascript": "js/ported/sit.js",
+    "library": "nethack-c/wasm/tu-libraries/sit.js"
+  },
+  {
+    "name": "fountain",
+    "source": "src/fountain.c",
+    "javascript": "js/ported/fountain.js",
+    "library": "nethack-c/wasm/tu-libraries/fountain.js"
+  },
+  {
+    "name": "objects",
+    "source": "src/objects.c",
+    "javascript": "js/ported/objects.js",
+    "library": "nethack-c/wasm/tu-libraries/objects.js",
+    "data": [
+      "js/ported/objects-data.js"
+    ]
+  },
+  {
+    "name": "monst",
+    "source": "src/monst.c",
+    "javascript": "js/ported/monst.js",
+    "library": "nethack-c/wasm/tu-libraries/monst.js",
+    "startup": "$teleportMonstInit",
+    "data": [
+      "js/ported/monst-data.js"
+    ]
+  },
+  {
+    "name": "shknam",
+    "source": "src/shknam.c",
+    "javascript": "js/ported/shknam.js",
+    "library": "nethack-c/wasm/tu-libraries/shknam.js",
+    "configuredFunctions": true,
+    "startup": "$teleportShknamInit"
+  },
+  {
+    "name": "rumors",
+    "source": "src/rumors.c",
+    "javascript": "js/ported/rumors.js",
+    "library": "nethack-c/wasm/tu-libraries/rumors.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "music",
+    "source": "src/music.c",
+    "javascript": "js/ported/music.js",
+    "library": "nethack-c/wasm/tu-libraries/music.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "version",
+    "source": "src/version.c",
+    "javascript": "js/ported/version.js",
+    "library": "nethack-c/wasm/tu-libraries/version.js",
+    "configuredFunctions": true,
+    "startup": "$teleportVersionInit"
+  },
+  {
+    "name": "coloratt",
+    "source": "src/coloratt.c",
+    "javascript": "js/ported/coloratt.js",
+    "library": "nethack-c/wasm/tu-libraries/coloratt.js",
+    "configuredFunctions": true,
+    "startup": "$teleportColorattInit"
+  },
+  {
+    "name": "priest",
+    "source": "src/priest.c",
+    "javascript": "js/ported/priest.js",
+    "library": "nethack-c/wasm/tu-libraries/priest.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "light",
+    "source": "src/light.c",
+    "javascript": "js/ported/light.js",
+    "library": "nethack-c/wasm/tu-libraries/light.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "lock",
+    "source": "src/lock.c",
+    "javascript": "js/ported/lock.js",
+    "library": "nethack-c/wasm/tu-libraries/lock.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "steed",
+    "source": "src/steed.c",
+    "javascript": "js/ported/steed.js",
+    "library": "nethack-c/wasm/tu-libraries/steed.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "wizard",
+    "source": "src/wizard.c",
+    "javascript": "js/ported/wizard.js",
+    "library": "nethack-c/wasm/tu-libraries/wizard.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "worm",
+    "source": "src/worm.c",
+    "javascript": "js/ported/worm.js",
+    "library": "nethack-c/wasm/tu-libraries/worm.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "o_init",
+    "source": "src/o_init.c",
+    "javascript": "js/ported/o_init.js",
+    "library": "nethack-c/wasm/tu-libraries/o_init.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "ball",
+    "source": "src/ball.c",
+    "javascript": "js/ported/ball.js",
+    "library": "nethack-c/wasm/tu-libraries/ball.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "mcastu",
+    "source": "src/mcastu.c",
+    "javascript": "js/ported/mcastu.js",
+    "library": "nethack-c/wasm/tu-libraries/mcastu.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "dbridge",
+    "source": "src/dbridge.c",
+    "javascript": "js/ported/dbridge.js",
+    "library": "nethack-c/wasm/tu-libraries/dbridge.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "mondata",
+    "source": "src/mondata.c",
+    "javascript": "js/ported/mondata.js",
+    "library": "nethack-c/wasm/tu-libraries/mondata.js",
+    "configuredFunctions": true
+  }
+]

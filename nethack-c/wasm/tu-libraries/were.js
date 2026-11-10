@@ -1,0 +1,72 @@
+// Game-call, variadic and shared-storage ABI only; were.c algorithms are JS.
+addToLibrary({
+  $teleportWereServices__deps: ['Mgender', 'Monnam', 'an', 'canseemon', 'healmon', 'is_fainted', 'makemon', 'mon_break_armor', 'monflee', 'monnear', 'monster_nearby', 'newsym', 'night', 'onscary', 'paranoid_query', 'pmname', 'polymon', 'possibly_unwield', 'rehumanize', 'set_mon_data', 'set_uasmon', 'strcpy', 'tamedog', 'teleport_were_feel', 'teleport_were_global', 'teleport_were_hear', 'teleport_were_impossible', 'teleport_were_monster_bit', 'teleport_were_pline', 'teleport_were_rn2', 'teleport_were_rnd', 'teleport_were_roleplay_deaf', 'teleport_were_set_monster_bit', 'teleport_were_sprintf', 'unconscious', 'wake_nearto', '$stringToUTF8OnStack', '$stackAlloc'],
+  $teleportWereServices: function() {
+    var text = value => typeof value === 'string' ? BigInt(stringToUTF8OnStack(value)) : BigInt(value || 0);
+    var pointer = value => BigInt(value ? value.address ?? value : 0);
+    var callers = { were_change: 0, new_were: 1, were_summon: 2, you_unwere: 3 };
+    return {
+      heap: () => HEAPU8,
+      stackAlloc: size => stackAlloc(size),
+      global: index => Number(_teleport_were_global(index)),
+      monsterBit: (mon, index) => _teleport_were_monster_bit(BigInt(mon), index),
+      setMonsterBit: (mon, index, value) => _teleport_were_set_monster_bit(BigInt(mon), index, value),
+      roleplayDeaf: () => _teleport_were_roleplay_deaf(),
+      rn2: (value, line, caller) => _teleport_were_rn2(value, line, callers[caller]),
+      rnd: (value, line, caller) => _teleport_were_rnd(value, line, callers[caller]),
+      rn1: (x, y, line, caller) => _teleport_were_rn2(x, line, callers[caller]) + y,
+      impossible: (format, name) => _teleport_were_impossible(text(format), text(name)),
+      pline: (format, a, b) => _teleport_were_pline(text(format), text(a), text(b)),
+      You_hear: (format, name) => _teleport_were_hear(text(format), text(name)),
+      You_feel: format => _teleport_were_feel(text(format)),
+      Sprintf: (output, format, name) => _teleport_were_sprintf(BigInt(output), text(format), text(name)),
+      Strcpy: (output, value) => Number(_strcpy(BigInt(output), text(value))),
+      Mgender: mon => _Mgender(pointer(mon)),
+      pmname: (pm, gender) => Number(_pmname(pointer(pm), gender)),
+      canseemon: mon => _canseemon(pointer(mon)),
+      Monnam: mon => Number(_Monnam(pointer(mon))),
+      set_mon_data: (mon, pm) => _set_mon_data(pointer(mon), pointer(pm)),
+      healmon: (mon, amount, over) => _healmon(pointer(mon), amount, over),
+      newsym: (x, y) => _newsym(x, y),
+      mon_break_armor: (mon, poly) => _mon_break_armor(pointer(mon), poly),
+      possibly_unwield: (mon, poly) => _possibly_unwield(pointer(mon), poly),
+      onscary: (x, y, mon) => _onscary(x, y, pointer(mon)),
+      monnear: (mon, x, y) => _monnear(pointer(mon), x, y),
+      monflee: (mon, turns, first, message) => _monflee(pointer(mon), turns, first, message),
+      makemon: (pm, x, y, flags) => Number(_makemon(pointer(pm), x, y, Number(flags) >>> 0)),
+      tamedog: (mon, object, force) => _tamedog(pointer(mon), pointer(object), force),
+      an: name => Number(_an(text(name))),
+      paranoid_query: (paranoid, message) => _paranoid_query(Number(paranoid), text(message)),
+      monster_nearby: () => _monster_nearby(),
+      polymon: pm => _polymon(pm),
+      rehumanize: () => _rehumanize(),
+      set_uasmon: () => _set_uasmon(),
+      night: () => _night(),
+      wake_nearto: (x, y, distance) => _wake_nearto(x, y, distance),
+      unconscious: () => _unconscious(),
+      is_fainted: () => _is_fainted(),
+    };
+  },
+  $teleportWereCall__deps: ['$teleportWereServices', '$stackSave', '$stackRestore'],
+  $teleportWereCall: function(name, ...args) {
+    var stack = stackSave();
+    try { return Module['nethackPorted'].were(teleportWereServices(), name, ...args); }
+    finally { stackRestore(stack); }
+  },
+  were_change__deps: ['$teleportWereCall'], were_change__sig: 'vp',
+  were_change: function(mon) { teleportWereCall('were_change', mon); },
+  counter_were__deps: ['$teleportWereCall'], counter_were__sig: 'ii',
+  counter_were: function(pm) { return teleportWereCall('counter_were', pm); },
+  were_beastie__deps: ['$teleportWereCall'], were_beastie__sig: 'ii',
+  were_beastie: function(pm) { return teleportWereCall('were_beastie', pm); },
+  new_were__deps: ['$teleportWereCall'], new_were__sig: 'vp',
+  new_were: function(mon) { teleportWereCall('new_were', mon); },
+  were_summon__deps: ['$teleportWereCall'], were_summon__sig: 'ipipp',
+  were_summon: function(ptr, yours, visible, genbuf) { return teleportWereCall('were_summon', ptr, yours, visible, genbuf); },
+  you_were__deps: ['$teleportWereCall'], you_were__sig: 'v',
+  you_were: function() { teleportWereCall('you_were'); },
+  you_unwere__deps: ['$teleportWereCall'], you_unwere__sig: 'vi',
+  you_unwere: function(purify) { teleportWereCall('you_unwere', purify); },
+  set_ulycn__deps: ['$teleportWereCall'], set_ulycn__sig: 'vi',
+  set_ulycn: function(which) { teleportWereCall('set_ulycn', which); },
+});
