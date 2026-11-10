@@ -1,0 +1,6471 @@
+{
+  "schema": {
+    "Race": {
+      "ctype": "struct Race",
+      "fields": [
+        {
+          "name": "mnum",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "Role": {
+      "ctype": "struct Role",
+      "fields": [
+        {
+          "name": "filecode",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "align": {
+      "ctype": "struct align",
+      "fields": [
+        {
+          "name": "type",
+          "ctype": "aligntyp",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "any": {
+      "ctype": "union any",
+      "fields": [
+        {
+          "name": "a_int",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "branch": {
+      "ctype": "struct branch",
+      "fields": [
+        {
+          "name": "next",
+          "ctype": "struct branch *",
+          "canonical": "struct branch *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "id",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "type",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "end1",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "end2",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "end1_up",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "cemetery": {
+      "ctype": "struct cemetery",
+      "fields": [
+        {
+          "name": "next",
+          "ctype": "struct cemetery *",
+          "canonical": "struct cemetery *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "who",
+          "ctype": "char[49]",
+          "canonical": "char[49]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "how",
+          "ctype": "char[101]",
+          "canonical": "char[101]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "frpx",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "frpy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "bonesknown",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "const_globals": {
+      "ctype": "struct const_globals",
+      "fields": [
+        {
+          "name": "zeroany",
+          "ctype": "const anything",
+          "canonical": "union any",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "couple": {
+      "ctype": "struct couple",
+      "fields": [
+        {
+          "name": "base",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "rand",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "d_flags": {
+      "ctype": "struct d_flags",
+      "fields": [
+        {
+          "name": "town",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "hellish",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "maze_like",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "rogue_like",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "align",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "3"
+        },
+        {
+          "name": "unconnected",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        }
+      ]
+    },
+    "d_level": {
+      "ctype": "struct d_level",
+      "fields": [
+        {
+          "name": "dnum",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "dlevel",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "dest_area": {
+      "ctype": "struct dest_area",
+      "fields": [
+        {
+          "name": "lx",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ly",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "hx",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "hy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "nlx",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "nly",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "nhx",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "nhy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "dgn_topology": {
+      "ctype": "struct dgn_topology",
+      "fields": [
+        {
+          "name": "d_oracle_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_bigroom_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_rogue_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_medusa_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_stronghold_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_valley_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_wiz1_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_wiz2_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_wiz3_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_juiblex_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_orcus_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_baalzebub_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_asmodeus_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_portal_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_sanctum_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_earth_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_water_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_fire_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_air_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_astral_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_tower_dnum",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_sokoban_dnum",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_mines_dnum",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_quest_dnum",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_tutorial_dnum",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_qstart_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_qlocate_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_nemesis_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_knox_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_mineend_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_sokoend_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "dlevel_t": {
+      "ctype": "dlevel_t",
+      "fields": [
+        {
+          "name": "locations",
+          "ctype": "struct rm[80][21]",
+          "canonical": "struct rm[80][21]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "monsters",
+          "ctype": "struct monst *[80][21]",
+          "canonical": "struct monst *[80][21]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "buriedobjlist",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "bonesinfo",
+          "ctype": "struct cemetery *",
+          "canonical": "struct cemetery *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "flags",
+          "ctype": "struct levelflags",
+          "canonical": "struct levelflags",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "dungeon": {
+      "ctype": "struct dungeon",
+      "fields": [
+        {
+          "name": "dname",
+          "ctype": "char[24]",
+          "canonical": "char[24]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "proto",
+          "ctype": "char[15]",
+          "canonical": "char[15]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "fill_lvl",
+          "ctype": "char[15]",
+          "canonical": "char[15]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "themerms",
+          "ctype": "char[15]",
+          "canonical": "char[15]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "boneid",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "flags",
+          "ctype": "d_flags",
+          "canonical": "struct d_flags",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "entry_lev",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "num_dunlevs",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "dunlev_ureached",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ledger_start",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "depth_start",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "exclusion_zone": {
+      "ctype": "struct exclusion_zone",
+      "fields": [
+        {
+          "name": "zonetype",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "lx",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ly",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "hx",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "hy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "next",
+          "ctype": "struct exclusion_zone *",
+          "canonical": "struct exclusion_zone *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "flag": {
+      "ctype": "struct flag",
+      "fields": [
+        {
+          "name": "debug",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_flags": {
+      "ctype": "struct instance_flags",
+      "fields": [
+        {
+          "name": "last_msg",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "window_inited",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "terrain_typ",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "menu_requested",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_f": {
+      "ctype": "struct instance_globals_f",
+      "fields": [
+        {
+          "name": "ftrap",
+          "ctype": "struct trap *",
+          "canonical": "struct trap *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_b": {
+      "ctype": "struct instance_globals_saved_b",
+      "fields": [
+        {
+          "name": "branches",
+          "ctype": "branch *",
+          "canonical": "struct branch *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_d": {
+      "ctype": "struct instance_globals_saved_d",
+      "fields": [
+        {
+          "name": "dungeons",
+          "ctype": "dungeon[16]",
+          "canonical": "struct dungeon[16]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "dungeon_topology",
+          "ctype": "struct dgn_topology",
+          "canonical": "struct dgn_topology",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "dndest",
+          "ctype": "dest_area",
+          "canonical": "struct dest_area",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_e": {
+      "ctype": "struct instance_globals_saved_e",
+      "fields": [
+        {
+          "name": "exclusion_zones",
+          "ctype": "struct exclusion_zone *",
+          "canonical": "struct exclusion_zone *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_i": {
+      "ctype": "struct instance_globals_saved_i",
+      "fields": [
+        {
+          "name": "inv_pos",
+          "ctype": "coord",
+          "canonical": "struct nhcoord",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_l": {
+      "ctype": "struct instance_globals_saved_l",
+      "fields": [
+        {
+          "name": "lastseentyp",
+          "ctype": "schar[80][21]",
+          "canonical": "signed char[80][21]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "level",
+          "ctype": "dlevel_t",
+          "canonical": "dlevel_t",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "level_info",
+          "ctype": "struct linfo[512]",
+          "canonical": "struct linfo[512]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_m": {
+      "ctype": "struct instance_globals_saved_m",
+      "fields": [
+        {
+          "name": "mapseenchn",
+          "ctype": "mapseen *",
+          "canonical": "struct mapseen *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_n": {
+      "ctype": "struct instance_globals_saved_n",
+      "fields": [
+        {
+          "name": "n_dgns",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_q": {
+      "ctype": "struct instance_globals_saved_q",
+      "fields": [
+        {
+          "name": "quest_status",
+          "ctype": "struct q_score",
+          "canonical": "struct q_score",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_r": {
+      "ctype": "struct instance_globals_saved_r",
+      "fields": [
+        {
+          "name": "rooms",
+          "ctype": "struct mkroom[82]",
+          "canonical": "struct mkroom[82]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_s": {
+      "ctype": "struct instance_globals_saved_s",
+      "fields": [
+        {
+          "name": "sp_levchn",
+          "ctype": "s_level *",
+          "canonical": "struct s_level *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_t": {
+      "ctype": "struct instance_globals_saved_t",
+      "fields": [
+        {
+          "name": "tune",
+          "ctype": "char[6]",
+          "canonical": "char[6]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_u": {
+      "ctype": "struct instance_globals_saved_u",
+      "fields": [
+        {
+          "name": "updest",
+          "ctype": "dest_area",
+          "canonical": "struct dest_area",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_u": {
+      "ctype": "struct instance_globals_u",
+      "fields": [
+        {
+          "name": "urole",
+          "ctype": "struct Role",
+          "canonical": "struct Role",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "urace",
+          "ctype": "struct Race",
+          "canonical": "struct Race",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "lchoice": {
+      "ctype": "struct lchoice",
+      "fields": [
+        {
+          "name": "idx",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "lev",
+          "ctype": "schar[512]",
+          "canonical": "signed char[512]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "playerlev",
+          "ctype": "schar[512]",
+          "canonical": "signed char[512]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "dgn",
+          "ctype": "xint16[512]",
+          "canonical": "short[512]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "menuletter",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "level_map": {
+      "ctype": "struct level_map",
+      "fields": [
+        {
+          "name": "lev_name",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "lev_spec",
+          "ctype": "d_level *",
+          "canonical": "struct d_level *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "levelflags": {
+      "ctype": "struct levelflags",
+      "fields": [
+        {
+          "name": "hardfloor",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "sokoban_rules",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        }
+      ]
+    },
+    "linfo": {
+      "ctype": "struct linfo",
+      "fields": [
+        {
+          "name": "flags",
+          "ctype": "unsigned char",
+          "canonical": "unsigned char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "mapseen": {
+      "ctype": "struct mapseen",
+      "fields": [
+        {
+          "name": "next",
+          "ctype": "struct mapseen *",
+          "canonical": "struct mapseen *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "br",
+          "ctype": "branch *",
+          "canonical": "struct branch *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "lev",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "feat",
+          "ctype": "struct mapseen_feat",
+          "canonical": "struct mapseen_feat",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "flags",
+          "ctype": "struct mapseen_flags",
+          "canonical": "struct mapseen_flags",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "custom",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "custom_lth",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "msrooms",
+          "ctype": "struct mapseen_rooms[82]",
+          "canonical": "struct mapseen_rooms[82]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "final_resting_place",
+          "ctype": "struct cemetery *",
+          "canonical": "struct cemetery *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "mapseen_feat": {
+      "ctype": "struct mapseen_feat",
+      "fields": [
+        {
+          "name": "nfount",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "nsink",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "naltar",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "nthrone",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "ngrave",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "ntree",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "nshop",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "ntemple",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "msalign",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "shoptype",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "5"
+        }
+      ]
+    },
+    "mapseen_flags": {
+      "ctype": "struct mapseen_flags",
+      "fields": [
+        {
+          "name": "notreachable",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "forgot",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "knownbones",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "oracle",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "sokosolved",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "bigroom",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "castle",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "castletune",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "valley",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "msanctum",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "ludios",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "roguelevel",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "quest_summons",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "questing",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "vibrating_square",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        }
+      ]
+    },
+    "mapseen_rooms": {
+      "ctype": "struct mapseen_rooms",
+      "fields": [
+        {
+          "name": "seen",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "untended",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        }
+      ]
+    },
+    "mi": {
+      "ctype": "struct mi",
+      "fields": [
+        {
+          "name": "item",
+          "ctype": "anything",
+          "canonical": "union any",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "mkroom": {
+      "ctype": "struct mkroom",
+      "fields": [
+        {
+          "name": "rtype",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "orig_rtype",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "monst": {
+      "ctype": "struct monst",
+      "fields": [
+        {
+          "name": "data",
+          "ctype": "struct permonst *",
+          "canonical": "struct permonst *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mx",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "my",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mappearance",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "m_ap_type",
+          "ctype": "uchar",
+          "canonical": "unsigned char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "nh_file": {
+      "ctype": "struct nh_file",
+      "fields": [
+        {
+          "name": "mode",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "nhcoord": {
+      "ctype": "struct nhcoord",
+      "fields": [
+        {
+          "name": "x",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "y",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "nhl_sandbox_info": {
+      "ctype": "struct nhl_sandbox_info",
+      "fields": [
+        {
+          "name": "flags",
+          "ctype": "uint32_t",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "memlimit",
+          "ctype": "uint32_t",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "steps",
+          "ctype": "uint32_t",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "perpcall",
+          "ctype": "uint32_t",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "obj": {
+      "ctype": "struct obj",
+      "fields": [
+        {
+          "name": "nobj",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ox",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "permonst": {
+      "ctype": "struct permonst",
+      "fields": [
+        {
+          "name": "mflags1",
+          "ctype": "unsigned long",
+          "canonical": "unsigned long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "prop": {
+      "ctype": "struct prop",
+      "fields": [
+        {
+          "name": "extrinsic",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "blocked",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "intrinsic",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "proto_dungeon": {
+      "ctype": "struct proto_dungeon",
+      "fields": [
+        {
+          "name": "tmpdungeon",
+          "ctype": "struct tmpdungeon[16]",
+          "canonical": "struct tmpdungeon[16]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "tmplevel",
+          "ctype": "struct tmplevel[50]",
+          "canonical": "struct tmplevel[50]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "final_lev",
+          "ctype": "s_level *[50]",
+          "canonical": "struct s_level *[50]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "tmpbranch",
+          "ctype": "struct tmpbranch[32]",
+          "canonical": "struct tmpbranch[32]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "start",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "n_levs",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "n_brs",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "q_score": {
+      "ctype": "struct q_score",
+      "fields": [
+        {
+          "name": "got_quest",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "leader_is_dead",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        }
+      ]
+    },
+    "rm": {
+      "ctype": "struct rm",
+      "fields": [
+        {
+          "name": "typ",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "seenv",
+          "ctype": "uchar",
+          "canonical": "unsigned char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "flags",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "5"
+        }
+      ]
+    },
+    "s_level": {
+      "ctype": "struct s_level",
+      "fields": [
+        {
+          "name": "next",
+          "ctype": "struct s_level *",
+          "canonical": "struct s_level *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "dlevel",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "proto",
+          "ctype": "char[15]",
+          "canonical": "char[15]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "boneid",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "rndlevs",
+          "ctype": "uchar",
+          "canonical": "unsigned char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "flags",
+          "ctype": "d_flags",
+          "canonical": "struct d_flags",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "shclass": {
+      "ctype": "struct shclass",
+      "fields": [
+        {
+          "name": "name",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "annotation",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "stairway": {
+      "ctype": "struct stairway",
+      "fields": [
+        {
+          "name": "tolev",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "up",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "u_traversed",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "tmpbranch": {
+      "ctype": "struct tmpbranch",
+      "fields": [
+        {
+          "name": "name",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "lev",
+          "ctype": "struct couple",
+          "canonical": "struct couple",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "chain",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "type",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "up",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "tmpdungeon": {
+      "ctype": "struct tmpdungeon",
+      "fields": [
+        {
+          "name": "name",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "protoname",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "lev",
+          "ctype": "struct couple",
+          "canonical": "struct couple",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "flags",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "chance",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "levels",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "branches",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "entry_lev",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "boneschar",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "align",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "tmplevel": {
+      "ctype": "struct tmplevel",
+      "fields": [
+        {
+          "name": "name",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "chainlvl",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "lev",
+          "ctype": "struct couple",
+          "canonical": "struct couple",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "chance",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "rndlevs",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "chain",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "flags",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "boneschar",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "trap": {
+      "ctype": "struct trap",
+      "fields": [
+        {
+          "name": "ntrap",
+          "ctype": "struct trap *",
+          "canonical": "struct trap *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "tx",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ty",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ttyp",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "5"
+        },
+        {
+          "name": "tseen",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        }
+      ]
+    },
+    "u_event": {
+      "ctype": "struct u_event",
+      "fields": [
+        {
+          "name": "qcalled",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "qexpelled",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "qcompleted",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "uheard_tune",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        }
+      ]
+    },
+    "u_have": {
+      "ctype": "struct u_have",
+      "fields": [
+        {
+          "name": "amulet",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        }
+      ]
+    },
+    "window_procs": {
+      "ctype": "struct window_procs",
+      "fields": [
+        {
+          "name": "win_create_nhwindow",
+          "ctype": "winid (*)(int)",
+          "canonical": "int (*)(int)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_clear_nhwindow",
+          "ctype": "void (*)(winid)",
+          "canonical": "void (*)(winid)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_display_nhwindow",
+          "ctype": "void (*)(winid, boolean)",
+          "canonical": "void (*)(winid, boolean)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_destroy_nhwindow",
+          "ctype": "void (*)(winid)",
+          "canonical": "void (*)(winid)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_putstr",
+          "ctype": "void (*)(winid, int, const char *)",
+          "canonical": "void (*)(winid, int, char *)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_start_menu",
+          "ctype": "void (*)(winid, unsigned long)",
+          "canonical": "void (*)(winid, unsigned long)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_end_menu",
+          "ctype": "void (*)(winid, const char *)",
+          "canonical": "void (*)(winid, char *)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_cliparound",
+          "ctype": "void (*)(int, int)",
+          "canonical": "void (*)(int, int)",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "you": {
+      "ctype": "struct you",
+      "fields": [
+        {
+          "name": "ux",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ux0",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uy0",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uz",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uz0",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ulevel",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "urooms",
+          "ctype": "char[5]",
+          "canonical": "char[5]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uprops",
+          "ctype": "struct prop[69]",
+          "canonical": "struct prop[69]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "umonster",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "umonnum",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uswallow",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "uinwater",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "uundetected",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "uevent",
+          "ctype": "struct u_event",
+          "canonical": "struct u_event",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uhave",
+          "ctype": "struct u_have",
+          "canonical": "struct u_have",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ualign",
+          "ctype": "align",
+          "canonical": "struct align",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ustuck",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "usteed",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    }
+  },
+  "globals": [
+    {
+      "name": "svd",
+      "ctype": "struct instance_globals_saved_d",
+      "canonical": "struct instance_globals_saved_d"
+    },
+    {
+      "name": "svn",
+      "ctype": "struct instance_globals_saved_n",
+      "canonical": "struct instance_globals_saved_n"
+    },
+    {
+      "name": "stderr",
+      "ctype": "FILE *const",
+      "canonical": "struct _IO_FILE *"
+    },
+    {
+      "name": "svs",
+      "ctype": "struct instance_globals_saved_s",
+      "canonical": "struct instance_globals_saved_s"
+    },
+    {
+      "name": "svb",
+      "ctype": "struct instance_globals_saved_b",
+      "canonical": "struct instance_globals_saved_b"
+    },
+    {
+      "name": "svt",
+      "ctype": "struct instance_globals_saved_t",
+      "canonical": "struct instance_globals_saved_t"
+    },
+    {
+      "name": "svl",
+      "ctype": "struct instance_globals_saved_l",
+      "canonical": "struct instance_globals_saved_l"
+    },
+    {
+      "name": "svi",
+      "ctype": "struct instance_globals_saved_i",
+      "canonical": "struct instance_globals_saved_i"
+    },
+    {
+      "name": "svm",
+      "ctype": "struct instance_globals_saved_m",
+      "canonical": "struct instance_globals_saved_m"
+    },
+    {
+      "name": "flags",
+      "ctype": "struct flag",
+      "canonical": "struct flag"
+    },
+    {
+      "name": "emptystr",
+      "ctype": "char[]",
+      "canonical": "char[]"
+    },
+    {
+      "name": "iflags",
+      "ctype": "struct instance_flags",
+      "canonical": "struct instance_flags"
+    },
+    {
+      "name": "gu",
+      "ctype": "struct instance_globals_u",
+      "canonical": "struct instance_globals_u"
+    },
+    {
+      "name": "WIN_MAP",
+      "ctype": "winid",
+      "canonical": "int"
+    },
+    {
+      "name": "windowprocs",
+      "ctype": "volatile struct window_procs",
+      "canonical": "struct window_procs"
+    },
+    {
+      "name": "u",
+      "ctype": "struct you",
+      "canonical": "struct you"
+    },
+    {
+      "name": "svu",
+      "ctype": "struct instance_globals_saved_u",
+      "canonical": "struct instance_globals_saved_u"
+    },
+    {
+      "name": "cg",
+      "ctype": "const struct const_globals",
+      "canonical": "struct const_globals"
+    },
+    {
+      "name": "nul_glyphinfo",
+      "ctype": "const glyph_info",
+      "canonical": "struct glyphinfo"
+    },
+    {
+      "name": "gf",
+      "ctype": "struct instance_globals_f",
+      "canonical": "struct instance_globals_f"
+    },
+    {
+      "name": "sve",
+      "ctype": "struct instance_globals_saved_e",
+      "canonical": "struct instance_globals_saved_e"
+    },
+    {
+      "name": "svq",
+      "ctype": "struct instance_globals_saved_q",
+      "canonical": "struct instance_globals_saved_q"
+    },
+    {
+      "name": "svr",
+      "ctype": "struct instance_globals_saved_r",
+      "canonical": "struct instance_globals_saved_r"
+    },
+    {
+      "name": "vowels",
+      "ctype": "const char[]",
+      "canonical": "char[]"
+    },
+    {
+      "name": "shtypes",
+      "ctype": "const struct shclass[]",
+      "canonical": "struct shclass[]"
+    }
+  ],
+  "enums": [
+    "AGGRAVATE_MONSTER",
+    "AIR",
+    "ALTAR",
+    "ASCENDED",
+    "BLINDED",
+    "CLOUD",
+    "CORR",
+    "DBWALL",
+    "DELPHI",
+    "DOOR",
+    "DRAWBRIDGE_DOWN",
+    "DRAWBRIDGE_UP",
+    "ESCAPED",
+    "FLYING",
+    "FOOT",
+    "FOUNTAIN",
+    "GRAVE",
+    "HALLUC",
+    "HALLUC_RES",
+    "LEVITATION",
+    "LR_DOWNTELE",
+    "LR_UPTELE",
+    "MAGIC_PORTAL",
+    "MAX_TYPE",
+    "M_AP_FURNITURE",
+    "PM_DWARF",
+    "ROOM",
+    "SDOOR",
+    "SHOPBASE",
+    "SINK",
+    "TEMPLE",
+    "THRONE",
+    "TREE",
+    "VAULT",
+    "VIBRATING_SQUARE"
+  ],
+  "layoutKeys": [
+    "pointerSize",
+    "longSize",
+    "intSize",
+    "charSigned",
+    "littleEndian",
+    "size:dlevel_t",
+    "size:struct Race",
+    "size:struct Role",
+    "size:struct align",
+    "size:struct branch",
+    "size:struct cemetery",
+    "size:struct const_globals",
+    "size:struct couple",
+    "size:struct d_flags",
+    "size:struct d_level",
+    "size:struct dest_area",
+    "size:struct dgn_topology",
+    "size:struct dungeon",
+    "size:struct exclusion_zone",
+    "size:struct flag",
+    "size:struct instance_flags",
+    "size:struct instance_globals_f",
+    "size:struct instance_globals_saved_b",
+    "size:struct instance_globals_saved_d",
+    "size:struct instance_globals_saved_e",
+    "size:struct instance_globals_saved_i",
+    "size:struct instance_globals_saved_l",
+    "size:struct instance_globals_saved_m",
+    "size:struct instance_globals_saved_n",
+    "size:struct instance_globals_saved_q",
+    "size:struct instance_globals_saved_r",
+    "size:struct instance_globals_saved_s",
+    "size:struct instance_globals_saved_t",
+    "size:struct instance_globals_saved_u",
+    "size:struct instance_globals_u",
+    "size:struct lchoice",
+    "size:struct level_map",
+    "size:struct levelflags",
+    "size:struct linfo",
+    "size:struct mapseen",
+    "size:struct mapseen_feat",
+    "size:struct mapseen_flags",
+    "size:struct mapseen_rooms",
+    "size:struct mi",
+    "size:struct mkroom",
+    "size:struct monst",
+    "size:struct nh_file",
+    "size:struct nhcoord",
+    "size:struct nhl_sandbox_info",
+    "size:struct obj",
+    "size:struct permonst",
+    "size:struct prop",
+    "size:struct proto_dungeon",
+    "size:struct q_score",
+    "size:struct rm",
+    "size:struct s_level",
+    "size:struct shclass",
+    "size:struct stairway",
+    "size:struct tmpbranch",
+    "size:struct tmpdungeon",
+    "size:struct tmplevel",
+    "size:struct trap",
+    "size:struct u_event",
+    "size:struct u_have",
+    "size:struct window_procs",
+    "size:struct you",
+    "size:union any",
+    "AGGRAVATE_MONSTER",
+    "AIR",
+    "ALTAR",
+    "ASCENDED",
+    "BLINDED",
+    "CLOUD",
+    "CORR",
+    "DBWALL",
+    "DELPHI",
+    "DOOR",
+    "DRAWBRIDGE_DOWN",
+    "DRAWBRIDGE_UP",
+    "ESCAPED",
+    "FLYING",
+    "FOOT",
+    "FOUNTAIN",
+    "GRAVE",
+    "HALLUC",
+    "HALLUC_RES",
+    "LEVITATION",
+    "LR_DOWNTELE",
+    "LR_UPTELE",
+    "MAGIC_PORTAL",
+    "MAX_TYPE",
+    "M_AP_FURNITURE",
+    "PM_DWARF",
+    "ROOM",
+    "SDOOR",
+    "SHOPBASE",
+    "SINK",
+    "TEMPLE",
+    "THRONE",
+    "TREE",
+    "VAULT",
+    "VIBRATING_SQUARE"
+  ],
+  "sizes": [
+    "dlevel_t",
+    "struct Race",
+    "struct Role",
+    "struct align",
+    "struct branch",
+    "struct cemetery",
+    "struct const_globals",
+    "struct couple",
+    "struct d_flags",
+    "struct d_level",
+    "struct dest_area",
+    "struct dgn_topology",
+    "struct dungeon",
+    "struct exclusion_zone",
+    "struct flag",
+    "struct instance_flags",
+    "struct instance_globals_f",
+    "struct instance_globals_saved_b",
+    "struct instance_globals_saved_d",
+    "struct instance_globals_saved_e",
+    "struct instance_globals_saved_i",
+    "struct instance_globals_saved_l",
+    "struct instance_globals_saved_m",
+    "struct instance_globals_saved_n",
+    "struct instance_globals_saved_q",
+    "struct instance_globals_saved_r",
+    "struct instance_globals_saved_s",
+    "struct instance_globals_saved_t",
+    "struct instance_globals_saved_u",
+    "struct instance_globals_u",
+    "struct lchoice",
+    "struct level_map",
+    "struct levelflags",
+    "struct linfo",
+    "struct mapseen",
+    "struct mapseen_feat",
+    "struct mapseen_flags",
+    "struct mapseen_rooms",
+    "struct mi",
+    "struct mkroom",
+    "struct monst",
+    "struct nh_file",
+    "struct nhcoord",
+    "struct nhl_sandbox_info",
+    "struct obj",
+    "struct permonst",
+    "struct prop",
+    "struct proto_dungeon",
+    "struct q_score",
+    "struct rm",
+    "struct s_level",
+    "struct shclass",
+    "struct stairway",
+    "struct tmpbranch",
+    "struct tmpdungeon",
+    "struct tmplevel",
+    "struct trap",
+    "struct u_event",
+    "struct u_have",
+    "struct window_procs",
+    "struct you",
+    "union any"
+  ],
+  "dependencies": {
+    "debugcore": {
+      "type": "boolean (const char *, boolean)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "getchar": {
+      "type": "int (void)",
+      "ret": "int",
+      "params": []
+    },
+    "sfo_int": {
+      "type": "void (NHFILE *, int *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "int *",
+          "canonical": "int *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_dungeon": {
+      "type": "void (NHFILE *, struct dungeon *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct dungeon *",
+          "canonical": "struct dungeon *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_dgn_topology": {
+      "type": "void (NHFILE *, struct dgn_topology *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct dgn_topology *",
+          "canonical": "struct dgn_topology *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_char": {
+      "type": "void (NHFILE *, char *, const char *, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a3",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "sfo_branch": {
+      "type": "void (NHFILE *, struct branch *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct branch *",
+          "canonical": "struct branch *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_linfo": {
+      "type": "void (NHFILE *, struct linfo *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct linfo *",
+          "canonical": "struct linfo *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_nhcoord": {
+      "type": "void (NHFILE *, struct nhcoord *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct nhcoord *",
+          "canonical": "struct nhcoord *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "free": {
+      "type": "void (void *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "void *",
+          "canonical": "void *"
+        }
+      ]
+    },
+    "savecemetery": {
+      "type": "void (NHFILE *, struct cemetery **)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct cemetery **",
+          "canonical": "struct cemetery **"
+        }
+      ]
+    },
+    "sfi_int": {
+      "type": "void (NHFILE *, int *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "int *",
+          "canonical": "int *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_dungeon": {
+      "type": "void (NHFILE *, struct dungeon *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct dungeon *",
+          "canonical": "struct dungeon *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_dgn_topology": {
+      "type": "void (NHFILE *, struct dgn_topology *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct dgn_topology *",
+          "canonical": "struct dgn_topology *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_char": {
+      "type": "void (NHFILE *, char *, const char *, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a3",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "alloc": {
+      "type": "long *(unsigned int)",
+      "ret": "long *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "sfi_branch": {
+      "type": "void (NHFILE *, struct branch *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct branch *",
+          "canonical": "struct branch *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_linfo": {
+      "type": "void (NHFILE *, struct linfo *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct linfo *",
+          "canonical": "struct linfo *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_nhcoord": {
+      "type": "void (NHFILE *, struct nhcoord *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct nhcoord *",
+          "canonical": "struct nhcoord *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "strcmp": {
+      "type": "int (const char *, const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "strncmpi": {
+      "type": "int (const char *, const char *, int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "rng_log_enabled": {
+      "type": "boolean (void)",
+      "ret": "signed char",
+      "params": []
+    },
+    "rng_log_set_caller": {
+      "type": "void (const char *, int, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "rn2": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "memset": {
+      "type": "void *(void *, int, unsigned long)",
+      "ret": "void *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "void *",
+          "canonical": "void *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        }
+      ]
+    },
+    "strcpy": {
+      "type": "char *(char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "lua_getfield": {
+      "type": "int (lua_State *, int, const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "lua_type": {
+      "type": "int (lua_State *, int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "lua_len": {
+      "type": "void (lua_State *, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "lua_tointegerx": {
+      "type": "lua_Integer (lua_State *, int, int *)",
+      "ret": "long long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "int *",
+          "canonical": "int *"
+        }
+      ]
+    },
+    "lua_settop": {
+      "type": "void (lua_State *, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "lua_pushinteger": {
+      "type": "void (lua_State *, lua_Integer)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "lua_Integer",
+          "canonical": "long long"
+        }
+      ]
+    },
+    "lua_gettable": {
+      "type": "int (lua_State *, int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "luaL_checkoption": {
+      "type": "int (lua_State *, int, const char *, const char *const *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a3",
+          "type": "const char *const *",
+          "canonical": "char * *"
+        }
+      ]
+    },
+    "get_table_option": {
+      "type": "int (lua_State *, const char *, const char *, const char *const *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a3",
+          "type": "const char *const *",
+          "canonical": "char * *"
+        }
+      ]
+    },
+    "get_table_str": {
+      "type": "char *(lua_State *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "get_table_str_opt": {
+      "type": "char *(lua_State *, const char *, char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "get_table_int": {
+      "type": "int (lua_State *, const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "get_table_int_opt": {
+      "type": "int (lua_State *, const char *, int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "strncmp": {
+      "type": "int (const char *, const char *, unsigned long)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        }
+      ]
+    },
+    "nhl_init": {
+      "type": "lua_State *(nhl_sandbox_info *)",
+      "ret": "struct lua_State *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "nhl_sandbox_info *",
+          "canonical": "struct nhl_sandbox_info *"
+        }
+      ]
+    },
+    "nhl_loadlua": {
+      "type": "boolean (lua_State *, const char *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "strcat": {
+      "type": "char *(char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "lua_getglobal": {
+      "type": "int (lua_State *, const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "lua_gettop": {
+      "type": "int (lua_State *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        }
+      ]
+    },
+    "lua_pushnil": {
+      "type": "void (lua_State *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        }
+      ]
+    },
+    "lua_next": {
+      "type": "int (lua_State *, int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "nhl_done": {
+      "type": "void (lua_State *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "lua_State *",
+          "canonical": "struct lua_State *"
+        }
+      ]
+    },
+    "stairway_at": {
+      "type": "stairway *(coordxy, coordxy)",
+      "ret": "struct stairway *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "goto_level": {
+      "type": "void (d_level *, boolean, boolean, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "d_level *",
+          "canonical": "struct d_level *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "done": {
+      "type": "void (int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "body_part": {
+      "type": "const char *(int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "makeplural": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "isok": {
+      "type": "int (coordxy, coordxy)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "map_location": {
+      "type": "void (coordxy, coordxy, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "see_nearby_objects": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "place_lregion": {
+      "type": "void (coordxy, coordxy, coordxy, coordxy, coordxy, coordxy, coordxy, coordxy, xint16, d_level *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a3",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a4",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a5",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a6",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a7",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a8",
+          "type": "xint16",
+          "canonical": "short"
+        },
+        {
+          "name": "a9",
+          "type": "d_level *",
+          "canonical": "struct d_level *"
+        }
+      ]
+    },
+    "switch_terrain": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "stairway_find_special_dir": {
+      "type": "stairway *(boolean)",
+      "ret": "struct stairway *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "in_rooms": {
+      "type": "char *(coordxy, coordxy, int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "db_under_typ": {
+      "type": "schar (int)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "dmgtype_fromattack": {
+      "type": "struct attack *(struct permonst *, int, int)",
+      "ret": "struct attack *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct permonst *",
+          "canonical": "struct permonst *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "is_pool": {
+      "type": "boolean (coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "hliquid": {
+      "type": "const char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "is_ice": {
+      "type": "boolean (coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "is_lava": {
+      "type": "boolean (coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "On_stairs": {
+      "type": "boolean (coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "rnd": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "strstri": {
+      "type": "char *(const char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "eos": {
+      "type": "char *(char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "add_menu": {
+      "type": "void (winid, const glyph_info *, const union any *, char, char, int, int, const char *, unsigned int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "winid",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "const glyph_info *",
+          "canonical": "struct glyphinfo *"
+        },
+        {
+          "name": "a2",
+          "type": "const union any *",
+          "canonical": "union any *"
+        },
+        {
+          "name": "a3",
+          "type": "char",
+          "canonical": "char"
+        },
+        {
+          "name": "a4",
+          "type": "char",
+          "canonical": "char"
+        },
+        {
+          "name": "a5",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a6",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a7",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a8",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "add_menu_heading": {
+      "type": "void (winid, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "winid",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "select_menu": {
+      "type": "int (winid, int, menu_item **)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "winid",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "menu_item **",
+          "canonical": "struct mi **"
+        }
+      ]
+    },
+    "strlen": {
+      "type": "unsigned long (const char *)",
+      "ret": "unsigned long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "getlin": {
+      "type": "void (const char *, char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "describe_level": {
+      "type": "int (char *, int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "strsubst": {
+      "type": "char *(char *, const char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "trimspaces": {
+      "type": "char *(char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "mungspaces": {
+      "type": "char *(char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "dupstr": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_xint16": {
+      "type": "void (NHFILE *, xint16 *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "xint16 *",
+          "canonical": "short *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_int16": {
+      "type": "void (NHFILE *, int16 *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "int16 *",
+          "canonical": "short *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_xint16": {
+      "type": "void (NHFILE *, xint16 *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "xint16 *",
+          "canonical": "short *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_int16": {
+      "type": "void (NHFILE *, int16 *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "int16 *",
+          "canonical": "short *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_d_level": {
+      "type": "void (NHFILE *, struct d_level *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct d_level *",
+          "canonical": "struct d_level *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_mapseen_feat": {
+      "type": "void (NHFILE *, struct mapseen_feat *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct mapseen_feat *",
+          "canonical": "struct mapseen_feat *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_mapseen_flags": {
+      "type": "void (NHFILE *, struct mapseen_flags *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct mapseen_flags *",
+          "canonical": "struct mapseen_flags *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_unsigned": {
+      "type": "void (NHFILE *, unsigned int *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "unsigned int *",
+          "canonical": "unsigned int *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_mapseen_rooms": {
+      "type": "void (NHFILE *, struct mapseen_rooms *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct mapseen_rooms *",
+          "canonical": "struct mapseen_rooms *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_d_level": {
+      "type": "void (NHFILE *, struct d_level *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct d_level *",
+          "canonical": "struct d_level *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_mapseen_feat": {
+      "type": "void (NHFILE *, struct mapseen_feat *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct mapseen_feat *",
+          "canonical": "struct mapseen_feat *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_mapseen_flags": {
+      "type": "void (NHFILE *, struct mapseen_flags *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct mapseen_flags *",
+          "canonical": "struct mapseen_flags *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_unsigned": {
+      "type": "void (NHFILE *, unsigned int *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "unsigned int *",
+          "canonical": "unsigned int *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfi_mapseen_rooms": {
+      "type": "void (NHFILE *, struct mapseen_rooms *, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct mapseen_rooms *",
+          "canonical": "struct mapseen_rooms *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "restcemetery": {
+      "type": "void (NHFILE *, struct cemetery **)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "struct cemetery **",
+          "canonical": "struct cemetery **"
+        }
+      ]
+    },
+    "canseemon": {
+      "type": "int (struct monst *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "cmap_to_type": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "altarmask_at": {
+      "type": "int (coordxy, coordxy)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "is_drawbridge_wall": {
+      "type": "int (coordxy, coordxy)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "shop_keeper": {
+      "type": "struct monst *(char)",
+      "ret": "struct monst *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char",
+          "canonical": "char"
+        }
+      ]
+    },
+    "inhishop": {
+      "type": "int (struct monst *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "findpriest": {
+      "type": "struct monst *(char)",
+      "ret": "struct monst *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char",
+          "canonical": "char"
+        }
+      ]
+    },
+    "inhistemple": {
+      "type": "boolean (struct monst *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "strchr": {
+      "type": "char *(const char *, int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "an": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "align_gname": {
+      "type": "const char *(aligntyp)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "aligntyp",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "highc": {
+      "type": "char (char)",
+      "ret": "char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char",
+          "canonical": "char"
+        }
+      ]
+    },
+    "add_menu_str": {
+      "type": "void (winid, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "winid",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "ldrname": {
+      "type": "const char *(void)",
+      "ret": "char *",
+      "params": []
+    },
+    "formatkiller": {
+      "type": "void (char *, unsigned int, int, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    }
+  },
+  "variadics": [
+    {
+      "site": 0,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "int",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "dumpit"
+    },
+    {
+      "site": 1,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "dumpit"
+    },
+    {
+      "site": 2,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "dumpit"
+    },
+    {
+      "site": 3,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "dumpit"
+    },
+    {
+      "site": 4,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "dumpit"
+    },
+    {
+      "site": 5,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "dumpit"
+    },
+    {
+      "site": 6,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "dumpit"
+    },
+    {
+      "site": 7,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "dumpit"
+    },
+    {
+      "site": 8,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "dumpit"
+    },
+    {
+      "site": 9,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "int",
+        "char *",
+        "int",
+        "int",
+        "int",
+        "int",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "dumpit"
+    },
+    {
+      "site": 10,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "dumpit"
+    },
+    {
+      "site": 11,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "restore_dungeon"
+    },
+    {
+      "site": 12,
+      "function": "panic",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "dname_to_dnum"
+    },
+    {
+      "site": 13,
+      "function": "panic",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "find_branch"
+    },
+    {
+      "site": 14,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "parent_dnum"
+    },
+    {
+      "site": 15,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "level_range"
+    },
+    {
+      "site": 16,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "level_range"
+    },
+    {
+      "site": 17,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "correct_branch_type"
+    },
+    {
+      "site": 18,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "insert_branch"
+    },
+    {
+      "site": 19,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "pick_level"
+    },
+    {
+      "site": 20,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "get_dgn_flags"
+    },
+    {
+      "site": 21,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "get_dgn_flags"
+    },
+    {
+      "site": 22,
+      "function": "pline",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "init_dungeon_levels"
+    },
+    {
+      "site": 23,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "init_dungeon_levels"
+    },
+    {
+      "site": 24,
+      "function": "pline",
+      "types": [
+        "char *",
+        "int",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "init_dungeon_levels"
+    },
+    {
+      "site": 25,
+      "function": "panic",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeon_levels"
+    },
+    {
+      "site": 26,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeon_levels"
+    },
+    {
+      "site": 27,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeon_levels"
+    },
+    {
+      "site": 28,
+      "function": "pline",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "init_dungeon_branches"
+    },
+    {
+      "site": 29,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "init_dungeon_branches"
+    },
+    {
+      "site": 30,
+      "function": "panic",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeon_branches"
+    },
+    {
+      "site": 31,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeon_branches"
+    },
+    {
+      "site": 32,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeon_branches"
+    },
+    {
+      "site": 33,
+      "function": "pline",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "init_dungeon_dungeons"
+    },
+    {
+      "site": 34,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "init_dungeon_dungeons"
+    },
+    {
+      "site": 35,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeon_dungeons"
+    },
+    {
+      "site": 36,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeon_dungeons"
+    },
+    {
+      "site": 37,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "fixup_level_locations"
+    },
+    {
+      "site": 38,
+      "function": "panic",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeons"
+    },
+    {
+      "site": 39,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "init_dungeons"
+    },
+    {
+      "site": 40,
+      "function": "panic",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeons"
+    },
+    {
+      "site": 41,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeons"
+    },
+    {
+      "site": 42,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeons"
+    },
+    {
+      "site": 43,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeons"
+    },
+    {
+      "site": 44,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "init_dungeons"
+    },
+    {
+      "site": 45,
+      "function": "pline",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "init_dungeons"
+    },
+    {
+      "site": 46,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "ledger_to_dnum"
+    },
+    {
+      "site": 47,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "builds_up"
+    },
+    {
+      "site": 48,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "earth_sense"
+    },
+    {
+      "site": 49,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "get_level"
+    },
+    {
+      "site": 50,
+      "function": "panic",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "dungeon_branch"
+    },
+    {
+      "site": 51,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "In_W_tower"
+    },
+    {
+      "site": 52,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "tport_menu"
+    },
+    {
+      "site": 53,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_branch"
+    },
+    {
+      "site": 54,
+      "function": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "char *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, int, char *, size_t, const char *, ...)",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 55,
+      "function": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, int, char *, size_t, const char *, ...)",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 56,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 57,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 58,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 59,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 60,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 61,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 62,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "recbranch_mapseen"
+    },
+    {
+      "site": 63,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "recbranch_mapseen"
+    },
+    {
+      "site": 64,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "print_level_annotation"
+    },
+    {
+      "site": 65,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "query_annotation"
+    },
+    {
+      "site": 66,
+      "function": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, int, char *, size_t, const char *, ...)",
+      "owner": "query_annotation"
+    },
+    {
+      "site": 67,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "long"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "overview_stats"
+    },
+    {
+      "site": 68,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "long",
+        "long"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "overview_stats"
+    },
+    {
+      "site": 69,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "long"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "overview_stats"
+    },
+    {
+      "site": 70,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "long",
+        "long"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "overview_stats"
+    },
+    {
+      "site": 71,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "overview_stats"
+    },
+    {
+      "site": 72,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "long",
+        "long"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "overview_stats"
+    },
+    {
+      "site": 73,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "endgamelevelname"
+    },
+    {
+      "site": 74,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "endgamelevelname"
+    },
+    {
+      "site": 75,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "tunesuffix"
+    },
+    {
+      "site": 76,
+      "function": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, int, char *, size_t, const char *, ...)",
+      "owner": "tunesuffix"
+    },
+    {
+      "site": 77,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 78,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 79,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 80,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 81,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 82,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 83,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 84,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 85,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 86,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 87,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 88,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 89,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 90,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 91,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 92,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 93,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 94,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 95,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 96,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 97,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 98,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 99,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 100,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 101,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 102,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 103,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 104,
+      "function": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, int, char *, size_t, const char *, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 105,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 106,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 107,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 108,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 109,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 110,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 111,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 112,
+      "function": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, int, char *, size_t, const char *, ...)",
+      "owner": "print_mapseen"
+    },
+    {
+      "site": 113,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "print_mapseen"
+    }
+  ],
+  "statics": [
+    {
+      "name": "branch_id",
+      "type": "int",
+      "size": "4",
+      "js": "0"
+    },
+    {
+      "name": "level_map",
+      "type": "struct level_map[27]",
+      "size": "(C.sizes[\"struct level_map\"]*27)",
+      "js": "[[C.literal(\"air\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_air_level\").address],[C.literal(\"asmodeus\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_asmodeus_level\").address],[C.literal(\"astral\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_astral_level\").address],[C.literal(\"baalz\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_baalzebub_level\").address],[C.literal(\"bigrm\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_bigroom_level\").address],[C.literal(\"castle\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_stronghold_level\").address],[C.literal(\"earth\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_earth_level\").address],[C.literal(\"fakewiz1\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_portal_level\").address],[C.literal(\"fire\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_fire_level\").address],[C.literal(\"juiblex\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_juiblex_level\").address],[C.literal(\"knox\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_knox_level\").address],[C.literal(\"medusa\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_medusa_level\").address],[C.literal(\"oracle\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_oracle_level\").address],[C.literal(\"orcus\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_orcus_level\").address],[C.literal(\"rogue\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_rogue_level\").address],[C.literal(\"sanctum\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_sanctum_level\").address],[C.literal(\"valley\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_valley_level\").address],[C.literal(\"water\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_water_level\").address],[C.literal(\"wizard1\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_wiz1_level\").address],[C.literal(\"wizard2\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_wiz2_level\").address],[C.literal(\"wizard3\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_wiz3_level\").address],[C.literal(\"minend\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_mineend_level\").address],[C.literal(\"soko1\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_sokoend_level\").address],[C.literal(\"x-strt\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_qstart_level\").address],[C.literal(\"x-loca\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_qlocate_level\").address],[C.literal(\"x-goal\"),C.field(C.field(C.svd,\"instance_globals_saved_d\",\"dungeon_topology\").address,\"dgn_topology\",\"d_nemesis_level\").address],[C.literal(\"\"),0]]"
+    },
+    {
+      "name": "flagstrs",
+      "type": "char *[6]",
+      "size": "(8*6)",
+      "js": "[C.literal(\"town\"),C.literal(\"hellish\"),C.literal(\"mazelike\"),C.literal(\"roguelike\"),C.literal(\"unconnected\"),0]"
+    },
+    {
+      "name": "flagstrs2i",
+      "type": "int[6]",
+      "size": "(4*6)",
+      "js": "[1,2,4,8,16,0]"
+    },
+    {
+      "name": "dgnaligns",
+      "type": "char *[6]",
+      "size": "(8*6)",
+      "js": "[C.literal(\"unaligned\"),C.literal(\"noalign\"),C.literal(\"lawful\"),C.literal(\"neutral\"),C.literal(\"chaotic\"),0]"
+    },
+    {
+      "name": "dgnaligns2i",
+      "type": "int[6]",
+      "size": "(4*6)",
+      "js": "[0,0,(C.i32((4<<4))),(C.i32((2<<4))),(C.i32((1<<4))),0]"
+    },
+    {
+      "name": "brdirstr",
+      "type": "char *[3]",
+      "size": "(8*3)",
+      "js": "[C.literal(\"up\"),C.literal(\"down\"),0]"
+    },
+    {
+      "name": "brdirstr2i",
+      "type": "int[3]",
+      "size": "(4*3)",
+      "js": "[C.i32((C.i8(1))),C.i32((C.i8(0))),C.i32((C.i8(0)))]"
+    },
+    {
+      "name": "brtypes",
+      "type": "char *[5]",
+      "size": "(8*5)",
+      "js": "[C.literal(\"stair\"),C.literal(\"portal\"),C.literal(\"no_down\"),C.literal(\"no_up\"),0]"
+    },
+    {
+      "name": "brtypes2i",
+      "type": "int[5]",
+      "size": "(4*5)",
+      "js": "[0,3,2,1,0]"
+    }
+  ],
+  "literals": [
+    "",
+    "\n#%d \"%s\" (%s):\n",
+    "\nBranches:\n",
+    "\nDone\n",
+    "\nSpecial levels:\n",
+    " ",
+    "   ",
+    "      ",
+    "    %s",
+    "    depth_start %d, ledger_start %d\n",
+    "    flags:%s%s%s\n",
+    "    num_dunlevs %d, dunlev_ureached %d\n",
+    "   %s to %s",
+    " \"%s\"",
+    " (no way back...)",
+    " (play %s to open or close drawbridge)",
+    " (tune %s)",
+    " (unknown)",
+    " <- You %s here.",
+    " [%s]",
+    " hellish",
+    " her ",
+    " herself",
+    " himself",
+    " his ",
+    " level",
+    " maze_like",
+    " rogue_like",
+    " to ",
+    " to %s",
+    " to Vlad's tower",
+    " town",
+    " your ",
+    " yourself",
+    "\" file!",
+    "%c %s to %s: %d",
+    "%c %s: %d",
+    "%d: %s, end1 %d %d, end2 %d %d, %s\n",
+    "%s",
+    "%s (%d): ",
+    "%s%s",
+    "%s%s %s%s",
+    "%s%s %s%s and %s %s%s",
+    "%s%s to %s",
+    "%s%s%s, %s%c",
+    "%s%s.",
+    "%s%s:",
+    "%s%syou, %s%c",
+    "%s:",
+    "%s: %s %d",
+    "%s: %s %d to %d",
+    "%s: levels %d to %d",
+    "%s: levels %d up to %d",
+    "%sA primitive area.",
+    "%sA very big room.",
+    "%sCompleted quest for %s.",
+    "%sFort Ludios.",
+    "%sGateway to Moloch's Sanctum.",
+    "%sGiven quest by %s.",
+    "%sHome%s.",
+    "%sLevel %d:",
+    "%sMoloch's Sanctum.",
+    "%sOracle of Delphi.",
+    "%sSummoned by %s.",
+    "%sThe castle%s.",
+    "%sValley of the Dead.",
+    "'nhl_init' failed; can't continue.",
+    "(unknown)",
+    ", ",
+    ", entrance from below",
+    ", entrance on %d",
+    ", level %d",
+    ".",
+    "...",
+    "5-note tune",
+    "Air",
+    "Astral Plane",
+    "BRANCH[%i]:%s,(%i,%i)",
+    "CHAINBRANCH:%s",
+    "CHAINLEVEL: %s",
+    "Can't note branch for unseen level (%d, %d)",
+    "Cannot open dungeon description - \"%s",
+    "Connection",
+    "Could not chain branch %s to level %s",
+    "Could not chain level %s to %s",
+    "Couldn't resolve dungeon number for name \"%s\".",
+    "DUNGEON[%i]: %s, base=(%i,%i)",
+    "Dlvl:",
+    "Earth",
+    "Final resting place for",
+    "Fire",
+    "Floating branches",
+    "IGNORING %s",
+    "Invocation position @ (%d,%d), hero @ (%d,%d)",
+    "LEVEL[%i]:%s,(%i,%i)",
+    "Level teleport to where:",
+    "No boundary for Wizard's Tower?",
+    "No portal found.",
+    "One way stair",
+    "One way stairs down",
+    "One way stairs up",
+    "Plane of %s",
+    "Portal",
+    "Portal @ (%d,%d), hero @ (%d,%d)",
+    "Replace annotation \"%.30s%s\" with?",
+    "Sealed portal",
+    "Sokoban",
+    "Solved",
+    "Stair",
+    "Stairs down",
+    "Stairs up",
+    "The ",
+    "The Gnomish Mines",
+    "The Quest",
+    "The Tutorial",
+    "Two branches on the same level?",
+    "Unsolved",
+    "Vlad's Tower",
+    "Water",
+    "What do you want to call %s?",
+    "a",
+    "air",
+    "air bubble",
+    "alignment",
+    "altar",
+    "an",
+    "annotations, text",
+    "are",
+    "asmodeus",
+    "assign_rnd_level",
+    "astral",
+    "baalz",
+    "base",
+    "bigrm",
+    "bonetag",
+    "bottom",
+    "branch",
+    "branch_count",
+    "branches",
+    "branchtype",
+    "bridge",
+    "builds_up: can't find branch for dungeon %d",
+    "castle",
+    "ceiling",
+    "cemetery, size %ld",
+    "chainlevel",
+    "chance",
+    "chaotic",
+    "checking(%i):%s",
+    "cloud",
+    "correct_branch_type: unknown branch type",
+    "delphi",
+    "depth",
+    "dgn_entrance: can't find entrance to %s",
+    "direction",
+    "doorway",
+    "down",
+    "dummy",
+    "dungeon",
+    "dungeon is not a lua table",
+    "dungeon.c",
+    "dungeon.lua",
+    "dungeon[%i] is not a lua table",
+    "dungeon[%i].branches is not an array of hashes",
+    "dungeon[%i].branches[%i] is not a hash",
+    "dungeon[%i].levels is not an array of hashes",
+    "dungeon[%i].levels[%i] is not a hash",
+    "dungeon_count",
+    "earth",
+    "end1 down",
+    "end1 up",
+    "entry",
+    "exclusion-hx",
+    "exclusion-hy",
+    "exclusion-lx",
+    "exclusion-ly",
+    "exclusion-zonetype",
+    "exclusion_count",
+    "expanse above",
+    "fakewiz1",
+    "find_branch: can't find %s",
+    "fire",
+    "flags",
+    "flags is not an array or string",
+    "flags:%s%s%s%s\n",
+    "flags[%i] is not a string",
+    "flames above",
+    "floor",
+    "fountain",
+    "gehennom",
+    "general, size %ld",
+    "get_level: can't find parent dungeon",
+    "grave",
+    "ground",
+    "headstone",
+    "hell",
+    "hellish",
+    "husk",
+    "ice",
+    "induced_align",
+    "init_castle_tune",
+    "init_dungeon lua DONE (n_levs=%i, n_brs=%i)",
+    "init_dungeon:  couldn't place levels",
+    "init_dungeon: too many branches",
+    "init_dungeon: too many special levels",
+    "init_dungeon_dungeons",
+    "init_dungeons: too many dungeons",
+    "init_level",
+    "insert_branch: not found",
+    "juiblex",
+    "knox",
+    "lava",
+    "lawful",
+    "left from",
+    "level",
+    "level ",
+    "level information count larger (%d) than allocated size",
+    "level number out of range [ledger_to_dnum(%d)]",
+    "level_info_count",
+    "level_range: base value out of range",
+    "level_range: empty chain level!",
+    "levels",
+    "lvlfill",
+    "many",
+    "mapseen-branch_index",
+    "mapseen-custom",
+    "mapseen-custom_lth",
+    "mapseen-d_level",
+    "mapseen-feat",
+    "mapseen-flags",
+    "mapseen-msrooms",
+    "mapseen_count",
+    "maw",
+    "mazelike",
+    "medusa",
+    "minend",
+    "name",
+    "neutral",
+    "nlevels",
+    "no",
+    "no end1",
+    "no end2",
+    "no_down",
+    "no_up",
+    "noalign",
+    "nonesuch",
+    "notes \"%s\"",
+    "on %d, %d; ",
+    "oracle",
+    "orcus",
+    "parent_dlevel",
+    "parent_dnum: couldn't resolve branch.",
+    "pick_level:  ran out of valid levels",
+    "place_level",
+    "portal",
+    "print_dungeon",
+    "print_mapseen",
+    "protofile",
+    "query_annotation",
+    "range",
+    "remember this level as %s.",
+    "rock cavern",
+    "rogue",
+    "roguelike",
+    "s",
+    "sanctum",
+    "sense something below your %s.",
+    "shop",
+    "shop's ceiling",
+    "shop?",
+    "sink",
+    "sky",
+    "soko1",
+    "some",
+    "stair",
+    "stairs",
+    "svd.dungeon_topology",
+    "svi.inv_pos",
+    "svl.level_info",
+    "temple",
+    "temple's ceiling",
+    "the ",
+    "themerooms",
+    "this dungeon level",
+    "throne",
+    "town",
+    "tree",
+    "tune",
+    "tunesuffix",
+    "u_on_newpos: trying to place hero off map <%d,%d>",
+    "unaligned",
+    "unconnected",
+    "unknown",
+    "unknown plane #%d",
+    "untended shop",
+    "up",
+    "valley",
+    "vault's ceiling",
+    "wall",
+    "water",
+    "water above",
+    "water's surface",
+    "were",
+    "wizard1",
+    "wizard2",
+    "wizard3",
+    "x-",
+    "x-goal",
+    "x-loca",
+    "x-strt"
+  ],
+  "literalBytes": 4435,
+  "callbackCalls": [
+    {
+      "site": 0,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "init_dungeons"
+    },
+    {
+      "site": 1,
+      "type": "void (*)(int, int)",
+      "types": [
+        "int",
+        "int"
+      ],
+      "ret": "void",
+      "owner": "u_on_newpos"
+    },
+    {
+      "site": 2,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "print_branch"
+    },
+    {
+      "site": 3,
+      "type": "winid (*)(int)",
+      "types": [
+        "int"
+      ],
+      "ret": "int",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 4,
+      "type": "void (*)(winid, unsigned long)",
+      "types": [
+        "int",
+        "unsigned long"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 5,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 6,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 7,
+      "type": "void (*)(winid, const char *)",
+      "types": [
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 8,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 9,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 10,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 11,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 12,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 13,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 14,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 15,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 16,
+      "type": "void (*)(winid, boolean)",
+      "types": [
+        "int",
+        "signed char"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 17,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "print_dungeon"
+    },
+    {
+      "site": 18,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "overview_stats"
+    },
+    {
+      "site": 19,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "overview_stats"
+    },
+    {
+      "site": 20,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "overview_stats"
+    },
+    {
+      "site": 21,
+      "type": "winid (*)(int)",
+      "types": [
+        "int"
+      ],
+      "ret": "int",
+      "owner": "show_overview"
+    },
+    {
+      "site": 22,
+      "type": "void (*)(winid, unsigned long)",
+      "types": [
+        "int",
+        "unsigned long"
+      ],
+      "ret": "void",
+      "owner": "show_overview"
+    },
+    {
+      "site": 23,
+      "type": "void (*)(winid, const char *)",
+      "types": [
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "show_overview"
+    },
+    {
+      "site": 24,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "show_overview"
+    }
+  ],
+  "dynamicVariadics": [
+    {
+      "site": 0,
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "owner": "u_on_newpos",
+      "targets": [
+        "panic",
+        "impossible"
+      ]
+    }
+  ],
+  "nativeFunctionPointers": [],
+  "ownedFunctionPointers": [],
+  "functionTypes": {
+    "dumpit": "void (void)",
+    "save_dungeon": "void (NHFILE *, boolean, boolean)",
+    "restore_dungeon": "void (NHFILE *)",
+    "dname_to_dnum": "xint16 (const char *)",
+    "find_level": "s_level *(const char *)",
+    "find_branch": "int (const char *, struct proto_dungeon *)",
+    "parent_dnum": "xint16 (const char *, struct proto_dungeon *)",
+    "level_range": "int (xint16, int, int, int, struct proto_dungeon *, int *)",
+    "parent_dlevel": "xint16 (const char *, struct proto_dungeon *)",
+    "correct_branch_type": "int (struct tmpbranch *)",
+    "insert_branch": "void (branch *, boolean)",
+    "add_branch": "branch *(int, int, struct proto_dungeon *)",
+    "add_level": "void (s_level *)",
+    "init_level": "void (int, int, struct proto_dungeon *)",
+    "possible_places": "int (int, boolean *, struct proto_dungeon *)",
+    "pick_level": "xint16 (boolean *, int)",
+    "place_level": "boolean (int, struct proto_dungeon *)",
+    "get_dgn_flags": "int (lua_State *)",
+    "get_dgn_align": "int (lua_State *)",
+    "init_dungeon_levels": "void (lua_State *, struct proto_dungeon *, int)",
+    "init_dungeon_branches": "void (lua_State *, struct proto_dungeon *, int)",
+    "init_dungeon_set_entry": "void (struct proto_dungeon *, int)",
+    "init_dungeon_set_depth": "void (struct proto_dungeon *, int)",
+    "init_dungeon_dungeons": "boolean (lua_State *, struct proto_dungeon *, int)",
+    "init_castle_tune": "void (void)",
+    "fixup_level_locations": "void (void)",
+    "free_proto_dungeon": "void (struct proto_dungeon *)",
+    "init_dungeons": "void (void)",
+    "dunlev": "xint16 (d_level *)",
+    "dunlevs_in_dungeon": "xint16 (d_level *)",
+    "deepest_lev_reached": "xint16 (boolean)",
+    "ledger_no": "xint16 (d_level *)",
+    "maxledgerno": "xint16 (void)",
+    "ledger_to_dnum": "xint16 (xint16)",
+    "ledger_to_dlev": "xint16 (xint16)",
+    "depth": "schar (d_level *)",
+    "on_level": "boolean (d_level *, d_level *)",
+    "Is_special": "s_level *(d_level *)",
+    "Is_branchlev": "branch *(d_level *)",
+    "builds_up": "boolean (d_level *)",
+    "next_level": "void (boolean)",
+    "prev_level": "void (boolean)",
+    "earth_sense": "void (void)",
+    "u_on_newpos": "void (coordxy, coordxy)",
+    "u_on_rndspot": "void (int)",
+    "Is_botlevel": "boolean (d_level *)",
+    "Can_dig_down": "boolean (d_level *)",
+    "Can_fall_thru": "boolean (d_level *)",
+    "Can_rise_up": "boolean (coordxy, coordxy, d_level *)",
+    "has_ceiling": "boolean (d_level *)",
+    "avoid_ceiling": "boolean (d_level *)",
+    "ceiling": "const char *(coordxy, coordxy)",
+    "surface": "const char *(coordxy, coordxy)",
+    "get_level": "void (d_level *, int)",
+    "In_quest": "boolean (d_level *)",
+    "In_mines": "boolean (d_level *)",
+    "dungeon_branch": "branch *(const char *)",
+    "at_dgn_entrance": "boolean (const char *)",
+    "In_V_tower": "boolean (d_level *)",
+    "On_W_tower_level": "boolean (d_level *)",
+    "In_W_tower": "boolean (coordxy, coordxy, d_level *)",
+    "In_hell": "boolean (d_level *)",
+    "find_hell": "void (d_level *)",
+    "goto_hell": "void (boolean, boolean)",
+    "single_level_branch": "boolean (d_level *)",
+    "assign_level": "void (d_level *, d_level *)",
+    "assign_rnd_level": "void (d_level *, d_level *, int)",
+    "induced_align": "unsigned int (int)",
+    "Invocation_lev": "boolean (d_level *)",
+    "level_difficulty": "xint16 (void)",
+    "lev_by_name": "schar (const char *)",
+    "unplaced_floater": "boolean (struct dungeon *)",
+    "unreachable_level": "boolean (d_level *, boolean)",
+    "tport_menu": "void (winid, char *, struct lchoice *, d_level *, boolean)",
+    "br_string": "const char *(int)",
+    "chr_u_on_lvl": "char (d_level *)",
+    "print_branch": "void (winid, int, int, int, boolean, struct lchoice *)",
+    "print_dungeon": "schar (boolean, schar *, xint16 *)",
+    "recbranch_mapseen": "void (d_level *, d_level *)",
+    "get_annotation": "char *(d_level *)",
+    "print_level_annotation": "void (void)",
+    "query_annotation": "void (d_level *)",
+    "donamelevel": "int (void)",
+    "free_exclusions": "void (void)",
+    "save_exclusions": "void (NHFILE *)",
+    "load_exclusions": "void (NHFILE *)",
+    "find_mapseen": "mapseen *(d_level *)",
+    "find_mapseen_by_str": "mapseen *(const char *)",
+    "rm_mapseen": "void (int)",
+    "save_mapseen": "void (NHFILE *, mapseen *)",
+    "load_mapseen": "mapseen *(NHFILE *)",
+    "overview_stats": "void (winid, const char *, long *, long *)",
+    "remdun_mapseen": "void (int)",
+    "init_mapseen": "void (d_level *)",
+    "interest_mapseen": "boolean (mapseen *)",
+    "update_lastseentyp": "void (coordxy, coordxy)",
+    "update_mapseen_for": "int (coordxy, coordxy)",
+    "count_feat_lastseentyp": "void (mapseen *, coordxy, coordxy)",
+    "recalc_mapseen": "void (void)",
+    "mapseen_temple": "void (struct monst *)",
+    "room_discovered": "void (int)",
+    "dooverview": "int (void)",
+    "show_overview": "void (int, int)",
+    "traverse_mapseenchn": "void (int, winid, int, int, int *)",
+    "seen_string": "const char *(xint16, const char *)",
+    "br_string2": "const char *(branch *)",
+    "endgamelevelname": "const char *(char *, int)",
+    "shop_string": "const char *(int)",
+    "tunesuffix": "char *(mapseen *, char *, size_t)",
+    "print_mapseen": "void (winid, mapseen *, int, int, boolean)"
+  }
+}

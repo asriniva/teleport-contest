@@ -157,7 +157,6 @@ MKROOM_META(MAX_SUBROOMS,MAX_SUBROOMS),
 MKROOM_META(MM_ASLEEP,MM_ASLEEP),
 MKROOM_META(MM_NOGRP,MM_NOGRP),
 MKROOM_META(MORGUE,MORGUE),
-MKROOM_META(NHFILE,NHFILE),
 MKROOM_META(NON_PM,NON_PM),
 MKROOM_META(NO_MM_FLAGS,NO_MM_FLAGS),
 MKROOM_META(NUMMONS,NUMMONS),
@@ -338,11 +337,11 @@ _Static_assert(sizeof(((struct shclass*)0)->symb)==1,"shop_symb width");
 _Static_assert(((__typeof__(((struct shclass*)0)->symb))-1 < 0),"shop_symb signedness");
 _Static_assert(sizeof(((struct class_sym*)0)->sym)==1,"sym_sym width");
 _Static_assert(((__typeof__(((struct class_sym*)0)->sym))-1 < 0),"sym_sym signedness");
-_Static_assert(sizeof(((d_level*)0)->dnum)==1,"level_dnum width");
+_Static_assert(sizeof(((d_level*)0)->dnum)==2,"level_dnum width");
 _Static_assert(((__typeof__(((d_level*)0)->dnum))-1 < 0),"level_dnum signedness");
-_Static_assert(sizeof(((d_level*)0)->dlevel)==1,"level_dlevel width");
+_Static_assert(sizeof(((d_level*)0)->dlevel)==2,"level_dlevel width");
 _Static_assert(((__typeof__(((d_level*)0)->dlevel))-1 < 0),"level_dlevel signedness");
-_Static_assert(sizeof(((struct you*)0)->uz)==2,"u_uz width");
+_Static_assert(sizeof(((struct you*)0)->uz)==4,"u_uz width");
 _Static_assert(sizeof(((__typeof__(svn)*)0)->nroom)==4,"nroom width");
 _Static_assert(((__typeof__(((__typeof__(svn)*)0)->nroom))-1 < 0),"nroom signedness");
 _Static_assert(sizeof(((__typeof__(gs)*)0)->subrooms)==8,"subrooms width");
@@ -350,7 +349,7 @@ _Static_assert(sizeof(((__typeof__(gs)*)0)->stairs)==8,"stairs width");
 _Static_assert(sizeof(((__typeof__(gn)*)0)->nsubroom)==4,"nsubroom width");
 _Static_assert(((__typeof__(((__typeof__(gn)*)0)->nsubroom))-1 < 0),"nsubroom signedness");
 _Static_assert(sizeof(((__typeof__(svd)*)0)->doors)==8,"doors width");
-_Static_assert(sizeof(((__typeof__(svd)*)0)->dungeon_topology.d_astral_level)==2,"astral width");
+_Static_assert(sizeof(((__typeof__(svd)*)0)->dungeon_topology.d_astral_level)==4,"astral width");
 _Static_assert(sizeof(((__typeof__(flags)*)0)->debug)==1,"wizard width");
 _Static_assert(((__typeof__(((__typeof__(flags)*)0)->debug))-1 < 0),"wizard signedness");
 size_t probe_context_size(void){return sizeof(struct mkroom);}

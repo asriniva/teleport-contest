@@ -1,0 +1,33 @@
+{
+  "name": "pray",
+  "source": "src/pray.c",
+  "javascript": "js/ported/pray.js",
+  "library": "nethack-c/wasm/tu-libraries/pray.js",
+  "configuredFunctions": true,
+  "reference": "prepared",
+  "probeContext": false,
+  "probeExtraExports": [
+    "_teleport_pray_global",
+    "_teleport_pray_read",
+    "_teleport_pray_write",
+    "_teleport_pray_address",
+    "_teleport_pray_copy",
+    "_teleport_pray_call_rng",
+    "_teleport_pray_call_window",
+    "_teleport_pray_literal_storage",
+    "_teleport_pray_literal_capacity",
+    "_teleport_pray_function0",
+    "_teleport_pray_function1"
+  ],
+  "adapterSources": [
+    "js/ported/pray-runtime.js",
+    "scripts/tu-pray-layout.h",
+    "nethack-c/wasm/tu-fragments/pray-support.c",
+    "nethack-c/wasm/tu-fragments/pray-types.h",
+    "nethack-c/wasm/tu-fragments/pray-source-data.h",
+    "nethack-c/wasm/tu-fragments/pray-schema.json",
+    "nethack-c/wasm/tu-fragments/pray-provenance.json",
+    "nethack-c/wasm/tu-fragments/pray-check-source.py",
+    "nethack-c/wasm/tu-fragments/pray-check-members.mjs"
+  ]
+}

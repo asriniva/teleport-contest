@@ -67,6 +67,10 @@ const regex = await load(pathToFileURL(path.join(services, 'posix-regex.js')));
 const runtime = await load(pathToFileURL(path.join(translated, 'js-runtime.js')));
 const lua = await load(pathToFileURL(path.join(services, 'lua/lua.js')));
 const bytecode = await load(pathToFileURL(path.join(services, 'lua-bytecode-vm.js')));
+const timezone = await load(pathToFileURL(path.join(services, 'timezone-info.js')));
+const luaOS = await load(pathToFileURL(path.join(services, 'lua-os-library.js')));
+const luaOSServices = await load(pathToFileURL(path.join(services, 'wasm-lua-os-services.js')));
+const luaABI = await load(pathToFileURL(path.join(services, 'wasm-lua-runtime.js')));
 const gameFiles = await load(pathToFileURL(path.join(services, 'game-files.js')));
 await evaluate(compress);
 await evaluate(terminfo);
@@ -74,6 +78,10 @@ await evaluate(regex);
 await evaluate(runtime);
 await evaluate(lua);
 await evaluate(bytecode);
+await evaluate(timezone);
+await evaluate(luaOS);
+await evaluate(luaOSServices);
+await evaluate(luaABI);
 await evaluate(gameFiles);
 context.codec = compress.namespace;
 context.terminalServices = terminfo.namespace;
@@ -81,6 +89,10 @@ context.regexServices = regex.namespace;
 context.runtimeServices = runtime.namespace;
 context.luaServices = lua.namespace;
 context.bytecodeServices = bytecode.namespace;
+context.timezoneServices = timezone.namespace;
+context.luaOSLibrary = luaOS.namespace;
+context.luaOSServices = luaOSServices.namespace;
+context.luaABI = luaABI.namespace;
 context.gameFiles = gameFiles.namespace;
 
 vm.runInContext(`
@@ -151,8 +163,21 @@ vm.runInContext(`
     const result = compiled.call(compiled.loadBinary(bytes, '@reloaded.lua'));
     if (result[0] !== 45n || result[1] !== '\\x78\\x56\\x34\\x12')
         throw Error('Standalone Lua compile/dump/load/execute failed');
-    if (state.libc.format('%.12a', 1.1) !== '0x1.199999999999ap+0')
+    if (state.libc.format('%a', 1.1) !== '0x1.199999999999ap+0')
         throw Error('Standalone C floating-point formatting failed');
+    const historical = timezoneServices.lookupTimezone('America/New_York', -880000000n);
+    if (historical.abbreviation !== 'EWT' || historical.offset !== -14400)
+        throw Error('Standalone historical timezone data failed');
+    const osHost = luaOSServices.createLuaOSServices({
+        osTimezone: () => 'America/New_York', osTMLayout: () => 0,
+        sortClock: () => 1000n, osClockRate: () => 1000n, sortTime: () => 0n,
+        heap: () => { throw Error('Calendar unexpectedly uses C memory'); },
+    });
+    luaOSLibrary.openLuaOS(compiled, osHost);
+    const dates = compiled.execute('return os.date("!%Y|%C|%G|%g",-62198755200),os.date("!%Y",67768036160140800),os.time({year=2000,month=2,day=29,hour=12})');
+    if (dates[0] !== '-001|-0|-002|02' || dates[1] !== '2147485547' || dates[2] !== 951843600n)
+        throw Error('Standalone native Lua calendar/strftime failed');
+    if (typeof luaABI.createWasmLuaRuntime() !== 'object') throw Error('Lua ABI provider requires a host before binding');
 `, context, { timeout: 5000 });
 
 console.log(`PASS: ${modules.size} production dependency modules load and execute with host imports, dynamic loading, Wasm, network, and Node globals unavailable.`);

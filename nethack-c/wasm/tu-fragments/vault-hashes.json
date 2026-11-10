@@ -1,0 +1,11 @@
+{
+  "js/ported/vault.js": "b1b114127dc264efdabadfe0e809f2368427c1fd537b80b3949d71eee1b85ea6",
+  "js/ported/vault-runtime.js": "eaa8a3e9e57bf3c6370526a56c645255734298ec9afe4bb6813e7673edea97cd",
+  "nethack-c/wasm/tu-libraries/vault.js": "6d995b7bfd3cc691e91d336bde9fd351cc7d2569cb2a76331bed93a223f10ad6",
+  "nethack-c/wasm/tu-fragments/vault-support.inc": "3a668695b218633305224444cdcb9d3925694e828ba21d027e2a7cb37a4a3291",
+  "scripts/tu-vault-layout.h": "04a385c359a2473aa4b76f0661c0ab428475806c6cc0a2a00003f82fd6459054",
+  "nethack-c/wasm/tu-fragments/vault-metadata.py": "8123eec4d4257045388788ff2a13474dcd6f274ef06a0f392ae351f92bc5ff8e",
+  "scripts/tu-vault-probe.c": "4e4c7cdad366f260655f342ddbde04ed5b3c99971050d4d5a78d5b5a8d106a40",
+  "scripts/test-tu-vault.mjs": "34bc72b667b7ebe3a2631fc89293ae4fc63abb2c84390cd3c153ada1acb69a7a",
+  "nethack-c/upstream/src/vault.c": "490406d3195819eec9d155ed7d1e6119ab98571bf1e9879831d40dfbe9a4368f"
+}

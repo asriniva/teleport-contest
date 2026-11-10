@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {checkTrapSource} from '../nethack-c/wasm/tu-fragments/trap-source-check.mjs';
+import {trapSchema as schema} from '../js/ported/trap.js';
+const result=checkTrapSource();
+assert.equal(schema.functions.length,124);
+assert.equal(Object.keys(schema.data).length,19);
+assert.deepEqual(schema.data.trapname__halu_trapnames.type.array,[62]);
+assert.deepEqual(schema.data.trapnote__tnbuf.type.array,[12]);
+assert.deepEqual(schema.data.trapname__roletrap.type.array,[33]);
+assert.equal(schema.data.trapeffect_landmine__recursive_mine.initial,0);
+assert.equal(schema.constants.ALL_TRAPS??-1,-1);
+console.log(JSON.stringify({...result,sourceDataTablesChecked:true,nativeHost:'pending'}));

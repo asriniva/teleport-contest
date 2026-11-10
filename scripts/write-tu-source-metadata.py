@@ -552,5 +552,166 @@ if wield_js.exists():
     with out.open('a') as stream:
         stream.write(f'#define TELEPORT_WIELD_LITERAL_CAPACITY {capacity}\n')
 
+# Reserve actual MKROOM source literals, including original RNG caller names.
+mkroom_js = root / 'js/ported/mkroom.js'
+if mkroom_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', mkroom_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_MKROOM_LITERAL_CAPACITY {sum(len(value.encode("utf-8")) + 1 for value in literals)}\n')
+
+# EARLYARG retains the original checked formatter attribution and static corpus.
+earlyarg_text = (source.parent / 'earlyarg.c').read_text()
+earlyarg_calls = list(re.finditer(r'\bSnprintf\(\s*ofilename,', earlyarg_text))
+# The original buffer name is source-owned; identify the sole format call itself.
+if not earlyarg_calls:
+    earlyarg_calls = list(re.finditer(r'\bSnprintf\s*\(', earlyarg_text))
+assert len(earlyarg_calls) == 1, 'Review EARLYARG formatter sites'
+earlyarg_end = earlyarg_text.index(');', earlyarg_calls[0].end()) + 2
+with out.open('a') as stream:
+    stream.write(f'#define TELEPORT_EARLYARG_SNPRINTF_LINE {earlyarg_text.count(chr(10), 0, earlyarg_end) + 1}\n')
+    stream.write('#define TELEPORT_EARLYARG_SNPRINTF_FUNCTION "dump_enums"\n')
+earlyarg_js = root / 'js/ported/earlyarg.js'
+if earlyarg_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', earlyarg_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_EARLYARG_LITERAL_CAPACITY {sum(len(value.encode("utf-8")) + 1 for value in literals)}\n')
+
+# QUESTPGR literal backing contains only the actual translated source corpus.
+questpgr_js = root / 'js/ported/questpgr.js'
+if questpgr_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', questpgr_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_QUESTPGR_LITERAL_CAPACITY {sum(len(value.encode("utf-8")) + 1 for value in literals)}\n')
+
+# MAIL keeps native literal backing derived from its actual JS source.
+mail_js = root / 'js/ported/mail.js'
+if mail_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', mail_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_MAIL_LITERAL_CAPACITY {sum(len(value.encode("utf-8")) + 1 for value in literals)}\n')
+
+# DOG uses only its source-owned string corpus for native literal backing.
+dog_js = root / 'js/ported/dog.js'
+if dog_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', dog_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_DOG_LITERAL_CAPACITY {sum(len(value.encode("utf-8")) + 1 for value in literals)}\n')
+
+# WEAPON formatter diagnostics use the original closing-call source lines.
+weapon_text = (source.parent / 'weapon.c').read_text()
+weapon_strlen = list(re.finditer(r'\bStrlen\s*\(', weapon_text))
+weapon_snprintf = list(re.finditer(r'\bSnprintf\s*\(', weapon_text))
+assert len(weapon_strlen) == 1 and len(weapon_snprintf) == 4, 'Review WEAPON formatter sites'
+weapon_lines = [weapon_text.count(chr(10), 0, weapon_text.index(');', call.end()) + 2) + 1 for call in weapon_snprintf]
+with out.open('a') as stream:
+    stream.write(f'#define TELEPORT_WEAPON_STRLEN_LINE {weapon_text.count(chr(10), 0, weapon_strlen[0].start()) + 1}\n')
+    stream.write('#define TELEPORT_WEAPON_SNPRINTF_LINES {' + ','.join(map(str, weapon_lines)) + '}\n')
+weapon_js = root / 'js/ported/weapon.js'
+if weapon_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', weapon_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_WEAPON_LITERAL_CAPACITY {sum(len(value.encode("utf-8")) + 1 for value in literals)}\n')
+
+# SOUNDS source literals back only actual configured source messages/callers.
+sounds_js = root / 'js/ported/sounds.js'
+if sounds_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', sounds_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_SOUNDS_LITERAL_CAPACITY {sum(len(value.encode("utf-8")) + 1 for value in literals)}\n')
+
+# MHITM keeps only original source-owned literals and formatter provenance.
+mhitm_js = root / 'js/ported/mhitm.js'
+if mhitm_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', mhitm_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_MHITM_LITERAL_CAPACITY {sum(len(value.encode("utf-8")) + 1 for value in literals)}\n')
+        stream.write('#define TELEPORT_MHITM_SNPRINTF_LINES {669,676,679,682,685,689,693,700}\n')
+
+# ROLE's four original catalogues and callsites use only source-owned literals.
+role_js = root / 'js/ported/role.js'
+if role_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', role_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_ROLE_LITERAL_CAPACITY {sum(len(value.encode("utf-8")) + 1 for value in literals)}\n')
+
+# ENGRAVE keeps original callsite provenance and source-owned literals.
+engrave_js = root / 'js/ported/engrave.js'
+if engrave_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', engrave_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_ENGRAVE_LITERAL_CAPACITY {sum(len(value.encode("utf-8")) + 1 for value in literals)}\n')
+        stream.write('#define TELEPORT_ENGRAVE_STRLEN_LINES {417,421,1163}\n')
+        stream.write('#define TELEPORT_ENGRAVE_STRLEN_FUNCTIONS {"make_engr_at","make_engr_at","doengrave"}\n')
+
+# Source-owned string storage for the next two original naming/Lua object TUs.
+for own_name in ['nhlobj', 'do_name', 'dokick', 'dig', 'monmove', 'spell', 'timeout', 'potion', 'insight', 'eat', 'objnam']:
+    own_js = root / ('js/ported/' + own_name + '.js')
+    if own_js.exists():
+        tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', own_js.read_text(), re.S)
+        literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+        with out.open('a') as stream:
+            stream.write(f'#define TELEPORT_{own_name.upper()}_LITERAL_CAPACITY {sum(len(value.encode("utf-8")) + 1 for value in literals) + (5 if own_name in ["dig","eat"] else 3 if own_name in ['monmove','potion'] else 0)}\n')
+            if own_name == 'do_name':
+                stream.write('#define TELEPORT_DO_NAME_ASSERT_LINE 359\n')
+                stream.write('#define TELEPORT_DO_NAME_ASSERT_FUNCTION "do_oname"\n')
+                stream.write('#define TELEPORT_DO_NAME_ASSERT_CONDITION "aname != 0"\n')
+
+# SPELL's sole source Snprintf retains the actual caller metadata.
+spell_text = (source.parent / 'spell.c').read_text()
+spell_calls = list(re.finditer(r'\bSnprintf\s*\(', spell_text))
+assert len(spell_calls) == 1, 'Review changed SPELL Snprintf sites'
+spell_call = spell_calls[0]
+spell_close = spell_text.index(');', spell_call.end()) + 1
+spell_line = spell_text.count('\n', 0, spell_close) + 1
+spell_definitions = list(re.finditer(r'^([A-Za-z_]\w*)\([^;{}]*\)\n\{', spell_text[:spell_call.start()], re.M))
+spell_function = spell_definitions[-1].group(1)
+assert (spell_line, spell_function) == (755, 'getspell'), 'Review changed SPELL caller provenance'
+with out.open('a') as stream:
+    stream.write(f'#define TELEPORT_SPELL_SNPRINTF_LINE {spell_line}\n')
+    stream.write(f'#define TELEPORT_SPELL_SNPRINTF_FUNCTION "{spell_function}"\n')
+
+# TIMEOUT assertions use the actual unchanged prepared caller provenance.
+timeout_text=(source.parent/'timeout.c').read_text()
+timeout_asserts=list(re.finditer(r'\bassert\(([^;]+)\);',timeout_text))
+timeout_conditions=[m[1] for m in timeout_asserts]
+timeout_lines=[timeout_text.count('\n',0,m.end()-1)+1 for m in timeout_asserts]
+assert timeout_lines==[2156,2188] and timeout_conditions==['top != NULL','x > 0 && x < COLNO && y >= 0 && y < ROWNO'], 'Review TIMEOUT assertion provenance'
+with out.open('a')as stream:
+    stream.write('#define TELEPORT_TIMEOUT_ASSERT_LINES {'+','.join(map(str,timeout_lines))+'}\n')
+    stream.write('#define TELEPORT_TIMEOUT_ASSERT_CONDITIONS {'+','.join(map(json.dumps,timeout_conditions))+'}\n')
+    stream.write('#define TELEPORT_TIMEOUT_ASSERT_FUNCTIONS {"timer_sanity_check","timer_sanity_check"}\n')
+
+# INSIGHT metadata derives the unchanged prepared caller sites, not fixture paths.
+insight_text=(source.parent/'insight.c').read_text()
+insight_mask=re.sub(r'/\*[\s\S]*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"',lambda m:re.sub(r'[^\n]',' ',m[0]),insight_text)
+insight_functions=['enlightenment','background_enlightenment','status_enlightenment','weapon_insight','show_gamelog','list_vanquished','ustatusline']
+insight_sites=[]
+for call in re.finditer(r'\bSnprintf\s*\(',insight_mask):
+    pos=insight_mask.index('(',call.start())+1;depth=1
+    while depth:
+        depth+=(insight_mask[pos]=='(')-(insight_mask[pos]==')');pos+=1
+    fn=max((f for f in insight_functions if insight_text.find('\n'+f+'(')<call.start()),key=lambda f:insight_text.find('\n'+f+'('))
+    insight_sites.append((insight_text.count('\n',0,pos)+1,fn))
+assert [line for line,fn in insight_sites]==[401,506,609,629,1111,1130,1419,2579,2916,3483], 'Review INSIGHT formatter provenance'
+insight_asserts=list(re.finditer(r'\bassert\(([^;]+)\);',insight_mask))
+assert len(insight_asserts)==1
+insight_assert=insight_asserts[0]
+assert insight_text[insight_assert.start():insight_assert.end()]=='assert(u.ustuck != NULL);'
+assert insight_text.count('\n',0,insight_assert.end()-1)+1==1108
+with out.open('a')as stream:
+    stream.write('#define TELEPORT_INSIGHT_SNPRINTF_LINES {'+','.join(str(line)for line,fn in insight_sites)+'}\n')
+    stream.write('#define TELEPORT_INSIGHT_SNPRINTF_FUNCTIONS {'+','.join(json.dumps(fn)for line,fn in insight_sites)+'}\n')
+    stream.write('#define TELEPORT_INSIGHT_ASSERT_LINE 1108\n#define TELEPORT_INSIGHT_ASSERT_CONDITION "u.ustuck != NULL"\n#define TELEPORT_INSIGHT_ASSERT_FUNCTION "status_enlightenment"\n')
+
 # Concurrent TU/game builds must never observe an incrementally written header.
 out.replace(destination)

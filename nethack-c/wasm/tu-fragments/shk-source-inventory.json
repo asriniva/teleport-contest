@@ -1,0 +1,3599 @@
+{
+  "sourceSha256": "b2b5b82934b15c1a4a3c9474a650ff5800a83f0b9634696fdf080d0458f16e1b",
+  "configuredSha256": "1aa0218ec7fdb2563ad556e81ac01d25056a4b859e6a68e0c20226dc12c9b8e2",
+  "functions": [
+    {
+      "name": "money2mon",
+      "linkage": "public",
+      "type": {
+        "qualType": "long (struct monst *, long)"
+      },
+      "parameters": [
+        {
+          "name": "mon",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "amount",
+          "type": {
+            "qualType": "long"
+          }
+        }
+      ]
+    },
+    {
+      "name": "money2u",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *, long)"
+      },
+      "parameters": [
+        {
+          "name": "mon",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "amount",
+          "type": {
+            "qualType": "long"
+          }
+        }
+      ]
+    },
+    {
+      "name": "next_shkp",
+      "linkage": "static",
+      "type": {
+        "qualType": "struct monst *(struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "withbill",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shkgone",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_residency",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "zero_out",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "replshk",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "mtmp2",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "restshk",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "ghostly",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "clear_unpaid_obj",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "clear_unpaid",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "list",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "clear_no_charge_obj",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "clear_no_charge",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "list",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "clear_no_charge_pets",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "setpaid",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "record_price_quote",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (int, unsigned long, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "otyp",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "price",
+          "type": {
+            "qualType": "unsigned long"
+          }
+        },
+        {
+          "name": "buyprice",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "append_price_quote",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (char *, char **, int)"
+      },
+      "parameters": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "eos",
+          "type": {
+            "qualType": "char **"
+          }
+        },
+        {
+          "name": "otyp",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "addupbill",
+      "linkage": "static",
+      "type": {
+        "qualType": "long (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "call_kops",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "nearshop",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "inside_shop",
+      "linkage": "public",
+      "type": {
+        "qualType": "char (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "u_left_shop",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (char *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "leavestring",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "newlev",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "credit_report",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *, int, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "idx",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "silent",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "remote_burglary",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rob_shop",
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "deserted_shop",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (char *)"
+      },
+      "parameters": [
+        {
+          "name": "enterstring",
+          "type": {
+            "qualType": "char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "u_entered_shop",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (char *)"
+      },
+      "parameters": [
+        {
+          "name": "enterstring",
+          "type": {
+            "qualType": "char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pick_pick",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "same_price",
+      "linkage": "public",
+      "type": {
+        "qualType": "boolean (struct obj *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "obj1",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "obj2",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shop_debt",
+      "linkage": "static",
+      "type": {
+        "qualType": "long (struct eshk *)"
+      },
+      "parameters": [
+        {
+          "name": "eshkp",
+          "type": {
+            "qualType": "struct eshk *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shopper_financial_report",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "inhishop",
+      "linkage": "public",
+      "type": {
+        "qualType": "int (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shop_keeper",
+      "linkage": "public",
+      "type": {
+        "qualType": "struct monst *(char)"
+      },
+      "parameters": [
+        {
+          "name": "rmno",
+          "type": {
+            "qualType": "char"
+          }
+        }
+      ]
+    },
+    {
+      "name": "find_objowner",
+      "linkage": "public",
+      "type": {
+        "qualType": "struct monst *(struct obj *, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tended_shop",
+      "linkage": "public",
+      "type": {
+        "qualType": "boolean (struct mkroom *)"
+      },
+      "parameters": [
+        {
+          "name": "sroom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "noisy_shop",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct mkroom *)"
+      },
+      "parameters": [
+        {
+          "name": "sroom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "onbill",
+      "linkage": "static",
+      "type": {
+        "qualType": "struct bill_x *(struct obj *, struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "silent",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "onshopbill",
+      "linkage": "public",
+      "type": {
+        "qualType": "boolean (struct obj *, struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "silent",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "is_unpaid",
+      "linkage": "public",
+      "type": {
+        "qualType": "boolean (struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "delete_contents",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "obfree",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "merge",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "check_credit",
+      "linkage": "static",
+      "type": {
+        "qualType": "long (long, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "tmp",
+          "type": {
+            "qualType": "long"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pay",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (long, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "tmp",
+          "type": {
+            "qualType": "long"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "home_shk",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "killkops",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "angry_shk_exists",
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "pacify_shk",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "clear_surcharge",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rile_shk",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rouse_shk",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "verbosely",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "make_happy_shk",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "silentkops",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "make_happy_shoppers",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (boolean)"
+      },
+      "parameters": [
+        {
+          "name": "silentkops",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "hot_pursuit",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "make_angry_shk",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "ox",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "oy",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sortbill_cmp",
+      "linkage": "static",
+      "type": {
+        "qualType": "int (const void *, const void *)"
+      },
+      "parameters": [
+        {
+          "name": "vptr1",
+          "type": {
+            "qualType": "const void *"
+          }
+        },
+        {
+          "name": "vptr2",
+          "type": {
+            "qualType": "const void *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cheapest_item",
+      "linkage": "static",
+      "type": {
+        "qualType": "long (int, Bill *)"
+      },
+      "parameters": [
+        {
+          "name": "ibillct",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "ibill",
+          "type": {
+            "qualType": "Bill *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "make_itemized_bill",
+      "linkage": "static",
+      "type": {
+        "qualType": "int (struct monst *, Bill **)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "ibill_p",
+          "type": {
+            "qualType": "Bill **"
+          }
+        }
+      ]
+    },
+    {
+      "name": "menu_pick_pay_items",
+      "linkage": "static",
+      "type": {
+        "qualType": "int (int, Bill *)"
+      },
+      "parameters": [
+        {
+          "name": "ibillct",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "ibill",
+          "type": {
+            "qualType": "Bill *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dopay",
+      "linkage": "public",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "pay_billed_items",
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (struct monst *, int, Bill *, boolean, boolean *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "ibillct",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "ibill",
+          "type": {
+            "qualType": "Bill *"
+          }
+        },
+        {
+          "name": "stashed_gold",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "paid_p",
+          "type": {
+            "qualType": "boolean *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_bill",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (int, int, Bill *, struct eshk *, struct bill_x *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "indx",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "ibillct",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "ibill",
+          "type": {
+            "qualType": "Bill *"
+          }
+        },
+        {
+          "name": "eshkp",
+          "type": {
+            "qualType": "struct eshk *"
+          }
+        },
+        {
+          "name": "bp",
+          "type": {
+            "qualType": "struct bill_x *"
+          }
+        },
+        {
+          "name": "paiditem",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dopayobj",
+      "linkage": "static",
+      "type": {
+        "qualType": "int (struct monst *, struct bill_x *, struct obj *, int, boolean, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "bp",
+          "type": {
+            "qualType": "struct bill_x *"
+          }
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "which",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "itemize",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "unseen",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "buy_container",
+      "linkage": "static",
+      "type": {
+        "qualType": "int (struct monst *, int, int, Bill *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "indx",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "ibillct",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "ibill",
+          "type": {
+            "qualType": "Bill *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "reject_purchase",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, struct obj *, long)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "billed_quan",
+          "type": {
+            "qualType": "long"
+          }
+        }
+      ]
+    },
+    {
+      "name": "insufficient_funds",
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (struct monst *, struct obj *, long)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "item",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "cost",
+          "type": {
+            "qualType": "long"
+          }
+        }
+      ]
+    },
+    {
+      "name": "paybill",
+      "linkage": "public",
+      "type": {
+        "qualType": "boolean (int, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "croaked",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "silently",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "inherits",
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (struct monst *, int, int, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "numsk",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "croaked",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "silently",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_repo_loc",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "finish_paybill",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "bp_to_obj",
+      "linkage": "static",
+      "type": {
+        "qualType": "struct obj *(struct bill_x *)"
+      },
+      "parameters": [
+        {
+          "name": "bp",
+          "type": {
+            "qualType": "struct bill_x *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "find_oid",
+      "linkage": "public",
+      "type": {
+        "qualType": "struct obj *(unsigned int)"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "type": {
+            "qualType": "unsigned int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_cost_of_shop_item",
+      "linkage": "public",
+      "type": {
+        "qualType": "long (struct obj *, int *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "nochrg",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_pricing_units",
+      "linkage": "static",
+      "type": {
+        "qualType": "long (struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "oid_price_adjustment",
+      "linkage": "public",
+      "type": {
+        "qualType": "int (struct obj *, unsigned int)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "oid",
+          "type": {
+            "qualType": "unsigned int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_cost",
+      "linkage": "static",
+      "type": {
+        "qualType": "long (struct obj *, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "contained_cost",
+      "linkage": "public",
+      "type": {
+        "qualType": "long (struct obj *, struct monst *, long, boolean, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "price",
+          "type": {
+            "qualType": "long"
+          }
+        },
+        {
+          "name": "usell",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "unpaid_only",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "contained_gold",
+      "linkage": "public",
+      "type": {
+        "qualType": "long (struct obj *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "even_if_unknown",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dropped_container",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct obj *, struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "sale",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "picked_container",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "special_stock",
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (struct obj *, struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "quietly",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_cost",
+      "linkage": "static",
+      "type": {
+        "qualType": "long (struct obj *, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "gem_learned",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "parameters": [
+        {
+          "name": "oindx",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "alter_cost",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *, long)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "amt",
+          "type": {
+            "qualType": "long"
+          }
+        }
+      ]
+    },
+    {
+      "name": "unpaid_cost",
+      "linkage": "public",
+      "type": {
+        "qualType": "long (struct obj *, uchar)"
+      },
+      "parameters": [
+        {
+          "name": "unp_obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "cost_type",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar"
+          }
+        }
+      ]
+    },
+    {
+      "name": "add_one_tobill",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct obj *, boolean, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "dummy",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "add_to_billobjs",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "bill_box_content",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct obj *, boolean, boolean, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "ininv",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "dummy",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shk_names_obj",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, struct obj *, const char *, long, const char *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "fmt",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "amt",
+          "type": {
+            "qualType": "long"
+          }
+        },
+        {
+          "name": "arg",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "billable",
+      "linkage": "public",
+      "type": {
+        "qualType": "boolean (struct monst **, struct obj *, char, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkpp",
+          "type": {
+            "qualType": "struct monst **"
+          }
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "roomno",
+          "type": {
+            "qualType": "char"
+          }
+        },
+        {
+          "name": "reset_nocharge",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "addtobill",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *, boolean, boolean, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "ininv",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "dummy",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "silent",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "append_honorific",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (char *)"
+      },
+      "parameters": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "splitbill",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sub_one_frombill",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct obj *, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "subfrombill",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "stolen_container",
+      "linkage": "static",
+      "type": {
+        "qualType": "long (struct obj *, struct monst *, long, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "price",
+          "type": {
+            "qualType": "long"
+          }
+        },
+        {
+          "name": "ininv",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "stolen_value",
+      "linkage": "public",
+      "type": {
+        "qualType": "long (struct obj *, coordxy, coordxy, boolean, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "peaceful",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "silent",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "donate_gold",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (long, struct monst *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "gltmp",
+          "type": {
+            "qualType": "long"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "selling",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sellobj_state",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "parameters": [
+        {
+          "name": "deliberate",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sellobj",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "doinvbill",
+      "linkage": "public",
+      "type": {
+        "qualType": "int (int)"
+      },
+      "parameters": [
+        {
+          "name": "mode",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "corpsenm_price_adj",
+      "linkage": "static",
+      "type": {
+        "qualType": "long (struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getprice",
+      "linkage": "static",
+      "type": {
+        "qualType": "long (struct obj *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "shk_buying",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shkcatch",
+      "linkage": "public",
+      "type": {
+        "qualType": "struct monst *(struct obj *, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "add_damage",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (coordxy, coordxy, long)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "cost",
+          "type": {
+            "qualType": "long"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shk_impaired",
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "repairable_damage",
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (struct damage *, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "dam",
+          "type": {
+            "qualType": "struct damage *"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "find_damage",
+      "linkage": "static",
+      "type": {
+        "qualType": "struct damage *(struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "discard_damage_struct",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct damage *)"
+      },
+      "parameters": [
+        {
+          "name": "dam",
+          "type": {
+            "qualType": "struct damage *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "discard_damage_owned_by",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shk_fixes_damage",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "litter_getpos",
+      "linkage": "static",
+      "type": {
+        "qualType": "uint8 (uint8 *, coordxy, coordxy, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "litter",
+          "type": {
+            "qualType": "uint8 *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "litter_scatter",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (uint8 *, coordxy, coordxy, struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "litter",
+          "type": {
+            "qualType": "uint8 *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "litter_newsyms",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (uint8 *, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "litter",
+          "type": {
+            "qualType": "uint8 *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "repair_damage",
+      "linkage": "static",
+      "type": {
+        "qualType": "int (struct monst *, struct damage *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "tmp_dam",
+          "type": {
+            "qualType": "struct damage *"
+          }
+        },
+        {
+          "name": "catchup",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fix_shop_damage",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "shk_move",
+      "linkage": "public",
+      "type": {
+        "qualType": "int (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "after_shk_move",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "is_fshk",
+      "linkage": "public",
+      "type": {
+        "qualType": "boolean (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shopdig",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "parameters": [
+        {
+          "name": "fall",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "makekops",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (coord *)"
+      },
+      "parameters": [
+        {
+          "name": "mm",
+          "type": {
+            "qualType": "coord *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getcad",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, const char *, coordxy, coordxy, boolean, boolean, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "dmgstr",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "uinshp",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "animal",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "pursue",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pay_for_damage",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (const char *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "dmgstr",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "cant_mollify",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "costly_spot",
+      "linkage": "public",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "costly_adjacent",
+      "linkage": "public",
+      "type": {
+        "qualType": "boolean (struct monst *, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shop_object",
+      "linkage": "public",
+      "type": {
+        "qualType": "struct obj *(coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "price_quote",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "first_obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shk_embellish",
+      "linkage": "static",
+      "type": {
+        "qualType": "const char *(struct obj *, long)"
+      },
+      "parameters": [
+        {
+          "name": "itm",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "cost",
+          "type": {
+            "qualType": "long"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shk_chat",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "kops_gone",
+      "linkage": "static",
+      "type": {
+        "qualType": "void (boolean)"
+      },
+      "parameters": [
+        {
+          "name": "silent",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cost_per_charge",
+      "linkage": "static",
+      "type": {
+        "qualType": "long (struct monst *, struct obj *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "shkp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "altusage",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "check_unpaid_usage",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "altusage",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "check_unpaid",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "costly_gold",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (coordxy, coordxy, long, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "amount",
+          "type": {
+            "qualType": "long"
+          }
+        },
+        {
+          "name": "silent",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "block_door",
+      "linkage": "public",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "block_entry",
+      "linkage": "public",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shk_your",
+      "linkage": "public",
+      "type": {
+        "qualType": "char *(char *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shk_Your",
+      "linkage": "public",
+      "type": {
+        "qualType": "char *(char *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shk_owns",
+      "linkage": "static",
+      "type": {
+        "qualType": "char *(char *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mon_owns",
+      "linkage": "static",
+      "type": {
+        "qualType": "char *(char *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cad",
+      "linkage": "static",
+      "type": {
+        "qualType": "const char *(boolean)"
+      },
+      "parameters": [
+        {
+          "name": "altusage",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "globby_bill_fixup",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *, struct obj *)"
+      },
+      "parameters": [
+        {
+          "name": "obj_absorber",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "obj_absorbed",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "use_unpaid_trapobj",
+      "linkage": "public",
+      "type": {
+        "qualType": "void (struct obj *, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    }
+  ],
+  "defines": [
+    "NOTPARMDECL",
+    "NO_TIMED_DELAY",
+    "MACOS",
+    "NOPANICTRACE",
+    "NO_FILE_LINKS"
+  ],
+  "activeCPP": [],
+  "statics": [
+    {
+      "name": "and_its_contents",
+      "sourceName": "and_its_contents",
+      "type": "char[18]",
+      "size": "(1*18)",
+      "js": "C.literal(\" and its contents\")"
+    },
+    {
+      "name": "the_contents_of",
+      "sourceName": "the_contents_of",
+      "type": "char[17]",
+      "size": "(1*17)",
+      "js": "C.literal(\"the contents of \")"
+    },
+    {
+      "name": "angrytexts",
+      "sourceName": "angrytexts",
+      "type": "char *[3]",
+      "size": "(8*3)",
+      "js": "[C.literal(\"quite upset\"),C.literal(\"ticked off\"),C.literal(\"furious\")]"
+    },
+    {
+      "name": "credit_report.credit_snap",
+      "sourceName": "credit_snap",
+      "type": "long[2][3]",
+      "size": "((8*2)*3)",
+      "js": "[[0n,0n,0n],[0n,0n,0n]]"
+    },
+    {
+      "name": "u_entered_shop.empty_shops",
+      "sourceName": "empty_shops",
+      "type": "char[5]",
+      "size": "(1*5)",
+      "js": null
+    },
+    {
+      "name": "pick_pick.pickmovetime",
+      "sourceName": "pickmovetime",
+      "type": "long",
+      "size": "8",
+      "js": "0n"
+    },
+    {
+      "name": "no_money",
+      "sourceName": "no_money",
+      "type": "char[30]",
+      "size": "(1*30)",
+      "js": "C.literal(\"Moreover, you%s have no gold.\")"
+    },
+    {
+      "name": "not_enough_money",
+      "sourceName": "not_enough_money",
+      "type": "char[47]",
+      "size": "(1*47)",
+      "js": "C.literal(\"Besides, you don't have enough to interest %s.\")"
+    },
+    {
+      "name": "make_itemized_bill.zerosbi",
+      "sourceName": "zerosbi",
+      "type": "struct sortbill_item",
+      "size": "C.sizes[\"struct sortbill_item\"]",
+      "js": null
+    },
+    {
+      "name": "append_honorific.honored",
+      "sourceName": "honored",
+      "type": "char *[5]",
+      "size": "(8*5)",
+      "js": "[C.literal(\"good\"),C.literal(\"honored\"),C.literal(\"most gracious\"),C.literal(\"esteemed\"),C.literal(\"most renowned and sacred\")]"
+    },
+    {
+      "name": "makekops.k_mndx",
+      "sourceName": "k_mndx",
+      "type": "short[4]",
+      "size": "(2*4)",
+      "js": "[C.i16(C.PM_KEYSTONE_KOP),C.i16(C.PM_KOP_SERGEANT),C.i16(C.PM_KOP_LIEUTENANT),C.i16(C.PM_KOP_KAPTAIN)]"
+    },
+    {
+      "name": "Izchak_speaks",
+      "sourceName": "Izchak_speaks",
+      "type": "char *[9]",
+      "size": "(8*9)",
+      "js": "[C.literal(\"%s says: 'These shopping malls give me a headache.'\"),C.literal(\"%s says: 'Slow down.  Think clearly.'\"),C.literal(\"%s says: 'You need to take things one at a time.'\"),C.literal(\"%s says: 'I don't like poofy coffee... give me Colombian Supremo.'\"),C.literal(\"%s says that getting the devteam's agreement on anything is difficult.\"),C.literal(\"%s says that he has noticed those who serve their deity will prosper.\"),C.literal(\"%s says: 'Don't try to steal from me - I have friends in high places!'\"),C.literal(\"%s says: 'You may well need something from this shop in the future.'\"),C.literal(\"%s comments about the Valley of the Dead as being a gateway.\")]"
+    }
+  ],
+  "loggedRNGOrigins": [
+    "820",
+    "1865",
+    "1938",
+    "2600",
+    "3611",
+    "4661",
+    "4833",
+    "4924",
+    "5119",
+    "5155",
+    "5166",
+    "5218",
+    "5297",
+    "5470",
+    "5471",
+    "5596",
+    "5708",
+    "5715",
+    "5717",
+    "5721",
+    "5723"
+  ],
+  "MemberExprCount": 2649,
+  "pointerOperations": [
+    {
+      "owner": "shkgone",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 10621,
+          "col": 23,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 10623,
+          "col": 25,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "append_price_quote",
+      "kind": "CompoundAssignOperator",
+      "opcode": "+=",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 16963,
+          "line": 465,
+          "col": 5,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 16989,
+          "col": 31,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "append_price_quote",
+      "kind": "CompoundAssignOperator",
+      "opcode": "+=",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 17072,
+          "line": 468,
+          "col": 9,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 17215,
+          "line": 470,
+          "col": 53,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "append_price_quote",
+      "kind": "CompoundAssignOperator",
+      "opcode": "+=",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 17324,
+          "line": 473,
+          "col": 9,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 17409,
+          "line": 474,
+          "col": 53,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "append_price_quote",
+      "kind": "CompoundAssignOperator",
+      "opcode": "+=",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 17519,
+          "line": 479,
+          "col": 9,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 17672,
+          "line": 481,
+          "col": 54,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "append_price_quote",
+      "kind": "CompoundAssignOperator",
+      "opcode": "+=",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 17764,
+          "line": 483,
+          "col": 9,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 17858,
+          "line": 484,
+          "col": 54,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "append_price_quote",
+      "kind": "CompoundAssignOperator",
+      "opcode": "+=",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 17872,
+          "line": 487,
+          "col": 5,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 17897,
+          "col": 30,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "append_price_quote",
+      "kind": "CompoundAssignOperator",
+      "opcode": "+=",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 17994,
+          "line": 491,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 18002,
+          "col": 17,
+          "tokLen": 4
+        }
+      }
+    },
+    {
+      "owner": "addupbill",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "struct bill_x *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 18229,
+          "line": 504,
+          "col": 9,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 18231,
+          "col": 11,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "shop_debt",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "struct bill_x *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 34025,
+          "col": 58,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 34027,
+          "col": 60,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "find_objowner",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 38152,
+          "col": 43,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 38154,
+          "col": 45,
+          "tokLen": 8
+        }
+      }
+    },
+    {
+      "owner": "onbill",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "struct bill_x *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 38976,
+          "col": 28,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 38978,
+          "col": 30,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "pacify_shk",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "struct bill_x *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 45513,
+          "line": 1355,
+          "col": 13,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 45515,
+          "col": 15,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "rile_shk",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "struct bill_x *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 45984,
+          "line": 1374,
+          "col": 13,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 45986,
+          "col": 15,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "buy_container",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "struct bill_x *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 82468,
+          "col": 59,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 82470,
+          "col": 61,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "gem_learned",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "struct bill_x *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 112734,
+          "line": 3228,
+          "col": 13,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 112736,
+          "col": 15,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "unpaid_cost",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 114591,
+          "col": 34,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 114595,
+          "col": 38,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "doinvbill",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "struct bill_x *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 145835,
+          "col": 27,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 145837,
+          "col": 29,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "doinvbill",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "struct bill_x *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 146230,
+          "col": 23,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 146232,
+          "col": 25,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "add_damage",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 151144,
+          "col": 56,
+          "tokLen": 5
+        },
+        "end": {
+          "offset": 151149,
+          "col": 61,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "pay_for_damage",
+      "kind": "UnaryOperator",
+      "opcode": "++",
+      "type": {
+        "qualType": "char *"
+      },
+      "pointer": true,
+      "range": {
+        "begin": {
+          "offset": 176995,
+          "col": 42,
+          "tokLen": 3
+        },
+        "end": {
+          "offset": 176998,
+          "col": 45,
+          "tokLen": 2
+        }
+      }
+    }
+  ]
+}

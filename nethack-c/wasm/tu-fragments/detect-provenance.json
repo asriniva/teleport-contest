@@ -1,0 +1,28 @@
+{
+  "sourceSHA256": "d2b923635909fd59d4731ce59094a575a688f4421ff2056f9cb1759cb853c9e7",
+  "productionProfile": {
+    "cwd": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/wasm64-build/tree/src",
+    "command": [
+      "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/upstream/emscripten/emcc",
+      "-O2",
+      "-g",
+      "-sMEMORY64=1",
+      "-DNOTPARMDECL",
+      "-DNO_TIMED_DELAY",
+      "-DMACOS",
+      "-DNOPANICTRACE",
+      "-DNO_FILE_LINKS",
+      "-I../include",
+      "-I/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/ncurses-wasm64-build/include",
+      "-include",
+      "/Users/arj/Desktop/nethack_comp/teleport-contest/nethack-c/wasm/native-terminal.h",
+      "detect.c"
+    ],
+    "inputSpelling": "detect.c",
+    "forcedHeader": "nethack-c/wasm/native-terminal.h"
+  },
+  "recordedRoot": "/Users/arj/Desktop/nethack_comp/teleport-contest",
+  "sourceBytes": 85268,
+  "sourceLines": 2418,
+  "scope": "PAR08 DETECT96/J102; original class parameter/local mappings distinct; native pending"
+}

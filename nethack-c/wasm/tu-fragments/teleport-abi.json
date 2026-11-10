@@ -1,0 +1,5966 @@
+{
+  "names": [
+    "m_blocks_teleporting",
+    "noteleport_level",
+    "goodpos_onscary",
+    "goodpos",
+    "enexto",
+    "enexto_gpflags",
+    "enexto_core",
+    "tele_jump_ok",
+    "teleok",
+    "teleds",
+    "collect_coords",
+    "safe_teleds",
+    "vault_tele",
+    "teleport_pet",
+    "tele_to_rnd_pet",
+    "tele",
+    "scrolltele",
+    "dotelecmd",
+    "dotele",
+    "level_tele",
+    "domagicportal",
+    "tele_trap",
+    "level_tele_trap",
+    "rloc_pos_ok",
+    "rloc_to_core",
+    "rloc_to",
+    "rloc_to_flag",
+    "stairway_find_forwiz",
+    "rloc",
+    "control_mon_tele",
+    "mvault_tele",
+    "tele_restrict",
+    "mtele_trap",
+    "mlevel_tele_trap",
+    "rloco",
+    "random_teleport_level",
+    "u_teleport_mon"
+  ],
+  "private": [
+    "m_blocks_teleporting",
+    "goodpos_onscary",
+    "tele_jump_ok",
+    "teleok",
+    "vault_tele",
+    "rloc_pos_ok",
+    "rloc_to_core",
+    "stairway_find_forwiz",
+    "mvault_tele"
+  ],
+  "functions": {
+    "m_blocks_teleporting": {
+      "type": {
+        "qualType": "boolean (struct monst *)"
+      },
+      "args": [
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ]
+      ]
+    },
+    "noteleport_level": {
+      "type": {
+        "qualType": "boolean (struct monst *)"
+      },
+      "args": [
+        [
+          "mon",
+          {
+            "qualType": "struct monst *"
+          }
+        ]
+      ]
+    },
+    "goodpos_onscary": {
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, struct permonst *)"
+      },
+      "args": [
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "mptr",
+          {
+            "qualType": "struct permonst *"
+          }
+        ]
+      ]
+    },
+    "goodpos": {
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, struct monst *, mmflags_nht)"
+      },
+      "args": [
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "gpflags",
+          {
+            "desugaredQualType": "unsigned int",
+            "qualType": "mmflags_nht",
+            "typeAliasDeclId": "0xb5531e8c0"
+          }
+        ]
+      ]
+    },
+    "enexto": {
+      "type": {
+        "qualType": "boolean (coord *, coordxy, coordxy, struct permonst *)"
+      },
+      "args": [
+        [
+          "cc",
+          {
+            "qualType": "coord *"
+          }
+        ],
+        [
+          "xx",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "yy",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "mdat",
+          {
+            "qualType": "struct permonst *"
+          }
+        ]
+      ]
+    },
+    "enexto_gpflags": {
+      "type": {
+        "qualType": "boolean (coord *, coordxy, coordxy, struct permonst *, mmflags_nht)"
+      },
+      "args": [
+        [
+          "cc",
+          {
+            "qualType": "coord *"
+          }
+        ],
+        [
+          "xx",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "yy",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "mdat",
+          {
+            "qualType": "struct permonst *"
+          }
+        ],
+        [
+          "entflags",
+          {
+            "desugaredQualType": "unsigned int",
+            "qualType": "mmflags_nht",
+            "typeAliasDeclId": "0xb5531e8c0"
+          }
+        ]
+      ]
+    },
+    "enexto_core": {
+      "type": {
+        "qualType": "boolean (coord *, coordxy, coordxy, struct permonst *, mmflags_nht)"
+      },
+      "args": [
+        [
+          "cc",
+          {
+            "qualType": "coord *"
+          }
+        ],
+        [
+          "xx",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "yy",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "mdat",
+          {
+            "qualType": "struct permonst *"
+          }
+        ],
+        [
+          "entflags",
+          {
+            "desugaredQualType": "unsigned int",
+            "qualType": "mmflags_nht",
+            "typeAliasDeclId": "0xb5531e8c0"
+          }
+        ]
+      ]
+    },
+    "tele_jump_ok": {
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, coordxy, coordxy)"
+      },
+      "args": [
+        [
+          "x1",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "y1",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "x2",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "y2",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ]
+      ]
+    },
+    "teleok": {
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, boolean)"
+      },
+      "args": [
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "trapok",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xb54eaf290"
+          }
+        ]
+      ]
+    },
+    "teleds": {
+      "type": {
+        "qualType": "void (coordxy, coordxy, int)"
+      },
+      "args": [
+        [
+          "nux",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "nuy",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "teleds_flags",
+          {
+            "qualType": "int"
+          }
+        ]
+      ]
+    },
+    "collect_coords": {
+      "type": {
+        "qualType": "int (coord *, coordxy, coordxy, int, unsigned int, boolean (*)(coordxy, coordxy))"
+      },
+      "args": [
+        [
+          "ccc",
+          {
+            "qualType": "coord *"
+          }
+        ],
+        [
+          "cx",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "cy",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "maxradius",
+          {
+            "qualType": "int"
+          }
+        ],
+        [
+          "cc_flags",
+          {
+            "qualType": "unsigned int"
+          }
+        ],
+        [
+          "filter",
+          {
+            "qualType": "boolean (*)(coordxy, coordxy)"
+          }
+        ]
+      ]
+    },
+    "safe_teleds": {
+      "type": {
+        "qualType": "boolean (int)"
+      },
+      "args": [
+        [
+          "teleds_flags",
+          {
+            "qualType": "int"
+          }
+        ]
+      ]
+    },
+    "vault_tele": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "teleport_pet": {
+      "type": {
+        "qualType": "boolean (struct monst *, boolean)"
+      },
+      "args": [
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "force_it",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xb54eaf290"
+          }
+        ]
+      ]
+    },
+    "tele_to_rnd_pet": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "tele": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "scrolltele": {
+      "type": {
+        "qualType": "void (struct obj *)"
+      },
+      "args": [
+        [
+          "scroll",
+          {
+            "qualType": "struct obj *"
+          }
+        ]
+      ]
+    },
+    "dotelecmd": {
+      "type": {
+        "qualType": "int (void)"
+      },
+      "args": []
+    },
+    "dotele": {
+      "type": {
+        "qualType": "int (boolean)"
+      },
+      "args": [
+        [
+          "break_the_rules",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xb54eaf290"
+          }
+        ]
+      ]
+    },
+    "level_tele": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "domagicportal": {
+      "type": {
+        "qualType": "void (struct trap *)"
+      },
+      "args": [
+        [
+          "ttmp",
+          {
+            "qualType": "struct trap *"
+          }
+        ]
+      ]
+    },
+    "tele_trap": {
+      "type": {
+        "qualType": "void (struct trap *)"
+      },
+      "args": [
+        [
+          "trap",
+          {
+            "qualType": "struct trap *"
+          }
+        ]
+      ]
+    },
+    "level_tele_trap": {
+      "type": {
+        "qualType": "void (struct trap *, unsigned int)"
+      },
+      "args": [
+        [
+          "trap",
+          {
+            "qualType": "struct trap *"
+          }
+        ],
+        [
+          "trflags",
+          {
+            "qualType": "unsigned int"
+          }
+        ]
+      ]
+    },
+    "rloc_pos_ok": {
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, struct monst *)"
+      },
+      "args": [
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ]
+      ]
+    },
+    "rloc_to_core": {
+      "type": {
+        "qualType": "void (struct monst *, coordxy, coordxy, unsigned int)"
+      },
+      "args": [
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "rlocflags",
+          {
+            "qualType": "unsigned int"
+          }
+        ]
+      ]
+    },
+    "rloc_to": {
+      "type": {
+        "qualType": "void (struct monst *, coordxy, coordxy)"
+      },
+      "args": [
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ]
+      ]
+    },
+    "rloc_to_flag": {
+      "type": {
+        "qualType": "void (struct monst *, coordxy, coordxy, unsigned int)"
+      },
+      "args": [
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xb54eaf158"
+          }
+        ],
+        [
+          "rlocflags",
+          {
+            "qualType": "unsigned int"
+          }
+        ]
+      ]
+    },
+    "stairway_find_forwiz": {
+      "type": {
+        "qualType": "stairway *(boolean, boolean)"
+      },
+      "args": [
+        [
+          "isladder",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xb54eaf290"
+          }
+        ],
+        [
+          "up",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xb54eaf290"
+          }
+        ]
+      ]
+    },
+    "rloc": {
+      "type": {
+        "qualType": "boolean (struct monst *, unsigned int)"
+      },
+      "args": [
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "rlocflags",
+          {
+            "qualType": "unsigned int"
+          }
+        ]
+      ]
+    },
+    "control_mon_tele": {
+      "type": {
+        "qualType": "boolean (struct monst *, coord *, unsigned int, boolean)"
+      },
+      "args": [
+        [
+          "mon",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "cc_p",
+          {
+            "qualType": "coord *"
+          }
+        ],
+        [
+          "rlocflags",
+          {
+            "qualType": "unsigned int"
+          }
+        ],
+        [
+          "via_rloc",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xb54eaf290"
+          }
+        ]
+      ]
+    },
+    "mvault_tele": {
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "args": [
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ]
+      ]
+    },
+    "tele_restrict": {
+      "type": {
+        "qualType": "boolean (struct monst *)"
+      },
+      "args": [
+        [
+          "mon",
+          {
+            "qualType": "struct monst *"
+          }
+        ]
+      ]
+    },
+    "mtele_trap": {
+      "type": {
+        "qualType": "void (struct monst *, struct trap *, int)"
+      },
+      "args": [
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "trap",
+          {
+            "qualType": "struct trap *"
+          }
+        ],
+        [
+          "in_sight",
+          {
+            "qualType": "int"
+          }
+        ]
+      ]
+    },
+    "mlevel_tele_trap": {
+      "type": {
+        "qualType": "int (struct monst *, struct trap *, boolean, int)"
+      },
+      "args": [
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "trap",
+          {
+            "qualType": "struct trap *"
+          }
+        ],
+        [
+          "force_it",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xb54eaf290"
+          }
+        ],
+        [
+          "in_sight",
+          {
+            "qualType": "int"
+          }
+        ]
+      ]
+    },
+    "rloco": {
+      "type": {
+        "qualType": "boolean (struct obj *)"
+      },
+      "args": [
+        [
+          "obj",
+          {
+            "qualType": "struct obj *"
+          }
+        ]
+      ]
+    },
+    "random_teleport_level": {
+      "type": {
+        "qualType": "int (void)"
+      },
+      "args": []
+    },
+    "u_teleport_mon": {
+      "type": {
+        "qualType": "boolean (struct monst *, boolean)"
+      },
+      "args": [
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "give_feedback",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xb54eaf290"
+          }
+        ]
+      ]
+    }
+  },
+  "externalCalls": [
+    "Amonnam",
+    "In_W_tower",
+    "In_hell",
+    "In_mines",
+    "In_quest",
+    "Is_botlevel",
+    "Monnam",
+    "On_W_tower_level",
+    "You",
+    "You_cant",
+    "You_feel",
+    "Your",
+    "accessible",
+    "acurr",
+    "add_menu",
+    "addinv",
+    "addtobill",
+    "assign_level",
+    "atoi",
+    "buried_ball_to_punishment",
+    "canseemon",
+    "check_capacity",
+    "check_special_room",
+    "clamp_hole_destination",
+    "closed_door",
+    "costly_adjacent",
+    "costly_spot",
+    "debugcore",
+    "deltrap",
+    "depth",
+    "digit",
+    "discover_object",
+    "dist2",
+    "distmin",
+    "dochugw",
+    "docrt",
+    "done",
+    "drag_ball",
+    "dunlevs_in_dungeon",
+    "eos",
+    "exercise",
+    "fill_pit",
+    "find_hell",
+    "find_objowner",
+    "findgd",
+    "flooreffects",
+    "free",
+    "get_iter_mons",
+    "get_level",
+    "get_mleash",
+    "getlin",
+    "getpos",
+    "hideunder",
+    "impossible",
+    "in_out_region",
+    "in_rooms",
+    "inhishop",
+    "inhistemple",
+    "invocation_message",
+    "is_exclusion_zone",
+    "is_home_elemental",
+    "is_lava",
+    "is_pool",
+    "is_waterwall",
+    "isok",
+    "known_spell",
+    "learnscroll",
+    "ledger_no",
+    "lev_by_name",
+    "m_in_air",
+    "m_into_limbo",
+    "m_unleash",
+    "make_angry_shk",
+    "make_blinded",
+    "make_confused",
+    "make_stunned",
+    "may_passwall",
+    "maybe_unhide_at",
+    "migrate_to_level",
+    "mintrap",
+    "mksobj",
+    "mon_has_amulet",
+    "mon_nam",
+    "mon_track_clear",
+    "morehungry",
+    "move_bc",
+    "near_capacity",
+    "newsym",
+    "next_to_u",
+    "noit_mon_nam",
+    "nomul",
+    "notice_all_mons",
+    "obj_extract_self",
+    "on_level",
+    "onscary",
+    "onshopbill",
+    "place_monster",
+    "place_object",
+    "place_worm_tail_randomly",
+    "placebc",
+    "pline",
+    "pline_mon",
+    "print_dungeon",
+    "prinv",
+    "remove_worm",
+    "reset_utrap",
+    "revive_corpse",
+    "rn2",
+    "rnd",
+    "rng_log_enabled",
+    "rng_log_set_caller",
+    "rnl",
+    "schedule_goto",
+    "search_special",
+    "see_monsters",
+    "seetrap",
+    "select_menu",
+    "sengr_at",
+    "sensemon",
+    "set_apparxy",
+    "set_mon_data",
+    "set_msg_xy",
+    "set_ustuck",
+    "settrack",
+    "shieldeff",
+    "single_level_branch",
+    "sobj_at",
+    "somexyspace",
+    "spelleffects",
+    "spoteffects",
+    "sprintf",
+    "stolen_value",
+    "strcat",
+    "strchr",
+    "strcmp",
+    "strcpy",
+    "subfrombill",
+    "surface",
+    "switch_terrain",
+    "t_at",
+    "tport_spell",
+    "u_left_shop",
+    "u_locomotion",
+    "u_on_newpos",
+    "uleftvault",
+    "unconscious",
+    "unplacebc",
+    "unstuck",
+    "update_monster_region",
+    "update_player_regions",
+    "vault_occupied",
+    "verbalize",
+    "vision_recalc",
+    "yelp",
+    "yn_function"
+  ],
+  "memberTypes": [
+    [
+      "a_int",
+      "int"
+    ],
+    [
+      "amulet",
+      "unsigned int"
+    ],
+    [
+      "blessed",
+      "unsigned int"
+    ],
+    [
+      "blocked",
+      "long"
+    ],
+    [
+      "botl",
+      "signed char"
+    ],
+    [
+      "c_shudder_for_moment",
+      "const char *const"
+    ],
+    [
+      "corpsenm",
+      "int"
+    ],
+    [
+      "current_wand",
+      "struct obj *"
+    ],
+    [
+      "cursed",
+      "unsigned int"
+    ],
+    [
+      "d_astral_level",
+      "struct d_level"
+    ],
+    [
+      "d_medusa_level",
+      "struct d_level"
+    ],
+    [
+      "d_mineend_level",
+      "struct d_level"
+    ],
+    [
+      "d_qlocate_level",
+      "struct d_level"
+    ],
+    [
+      "d_qstart_level",
+      "struct d_level"
+    ],
+    [
+      "d_sanctum_level",
+      "struct d_level"
+    ],
+    [
+      "d_sokoban_dnum",
+      "short"
+    ],
+    [
+      "d_stronghold_level",
+      "struct d_level"
+    ],
+    [
+      "d_tutorial_dnum",
+      "short"
+    ],
+    [
+      "d_valley_level",
+      "struct d_level"
+    ],
+    [
+      "d_water_level",
+      "struct d_level"
+    ],
+    [
+      "data",
+      "struct permonst *"
+    ],
+    [
+      "debug",
+      "signed char"
+    ],
+    [
+      "debug_fuzzer",
+      "signed char"
+    ],
+    [
+      "depth_start",
+      "int"
+    ],
+    [
+      "dlevel",
+      "short"
+    ],
+    [
+      "dndest",
+      "struct dest_area"
+    ],
+    [
+      "dnum",
+      "short"
+    ],
+    [
+      "dst",
+      "struct d_level"
+    ],
+    [
+      "dungeon_topology",
+      "struct dgn_topology"
+    ],
+    [
+      "dungeons",
+      "dungeon[16]"
+    ],
+    [
+      "dunlev_ureached",
+      "short"
+    ],
+    [
+      "epri",
+      "struct epri *"
+    ],
+    [
+      "eshk",
+      "struct eshk *"
+    ],
+    [
+      "extrinsic",
+      "long"
+    ],
+    [
+      "female",
+      "signed char"
+    ],
+    [
+      "flags",
+      "struct d_flags"
+    ],
+    [
+      "flags",
+      "struct levelflags"
+    ],
+    [
+      "format",
+      "int"
+    ],
+    [
+      "geno",
+      "unsigned short"
+    ],
+    [
+      "his",
+      "const char *const"
+    ],
+    [
+      "hx",
+      "short"
+    ],
+    [
+      "hy",
+      "short"
+    ],
+    [
+      "in_mklev",
+      "signed char"
+    ],
+    [
+      "intrinsic",
+      "long"
+    ],
+    [
+      "invent",
+      "struct obj *"
+    ],
+    [
+      "invoked",
+      "unsigned int"
+    ],
+    [
+      "isladder",
+      "signed char"
+    ],
+    [
+      "ispriest",
+      "unsigned int"
+    ],
+    [
+      "isshk",
+      "unsigned int"
+    ],
+    [
+      "iswiz",
+      "unsigned int"
+    ],
+    [
+      "item",
+      "union any"
+    ],
+    [
+      "killer",
+      "struct kinfo"
+    ],
+    [
+      "last_msg",
+      "int"
+    ],
+    [
+      "launch",
+      "struct nhcoord"
+    ],
+    [
+      "level",
+      "dlevel_t"
+    ],
+    [
+      "locations",
+      "struct rm[80][21]"
+    ],
+    [
+      "lx",
+      "short"
+    ],
+    [
+      "ly",
+      "short"
+    ],
+    [
+      "m_ap_type",
+      "unsigned char"
+    ],
+    [
+      "m_id",
+      "unsigned int"
+    ],
+    [
+      "mconf",
+      "unsigned int"
+    ],
+    [
+      "menu_requested",
+      "signed char"
+    ],
+    [
+      "menudesc",
+      "const char *const"
+    ],
+    [
+      "menulet",
+      "const char"
+    ],
+    [
+      "mextra",
+      "struct mextra *"
+    ],
+    [
+      "mflags1",
+      "unsigned long"
+    ],
+    [
+      "mflags2",
+      "unsigned long"
+    ],
+    [
+      "mflags3",
+      "unsigned short"
+    ],
+    [
+      "mhp",
+      "int"
+    ],
+    [
+      "minvent",
+      "struct obj *"
+    ],
+    [
+      "mleashed",
+      "unsigned int"
+    ],
+    [
+      "mlet",
+      "char"
+    ],
+    [
+      "mnum",
+      "short"
+    ],
+    [
+      "mon_notices_blocked",
+      "int"
+    ],
+    [
+      "mon_telecontrol",
+      "signed char"
+    ],
+    [
+      "monlist",
+      "struct monst *"
+    ],
+    [
+      "monsters",
+      "struct monst *[80][21]"
+    ],
+    [
+      "moves",
+      "long"
+    ],
+    [
+      "mpeaceful",
+      "unsigned int"
+    ],
+    [
+      "msound",
+      "unsigned char"
+    ],
+    [
+      "mstate",
+      "long"
+    ],
+    [
+      "mstrategy",
+      "unsigned long"
+    ],
+    [
+      "mtame",
+      "signed char"
+    ],
+    [
+      "mtrapped",
+      "unsigned int"
+    ],
+    [
+      "mx",
+      "short"
+    ],
+    [
+      "my",
+      "short"
+    ],
+    [
+      "n_dgns",
+      "int"
+    ],
+    [
+      "name",
+      "char[256]"
+    ],
+    [
+      "next",
+      "struct stairway *"
+    ],
+    [
+      "nhx",
+      "short"
+    ],
+    [
+      "nhy",
+      "short"
+    ],
+    [
+      "nlx",
+      "short"
+    ],
+    [
+      "nly",
+      "short"
+    ],
+    [
+      "nmon",
+      "struct monst *"
+    ],
+    [
+      "no_charge",
+      "unsigned int"
+    ],
+    [
+      "nobj",
+      "struct obj *"
+    ],
+    [
+      "noteleport",
+      "unsigned int"
+    ],
+    [
+      "num_dunlevs",
+      "short"
+    ],
+    [
+      "oc_oc2",
+      "signed char"
+    ],
+    [
+      "occupation",
+      "int (*)(void)"
+    ],
+    [
+      "oerodeproof",
+      "unsigned int"
+    ],
+    [
+      "once",
+      "unsigned int"
+    ],
+    [
+      "otyp",
+      "short"
+    ],
+    [
+      "ox",
+      "short"
+    ],
+    [
+      "oy",
+      "short"
+    ],
+    [
+      "pmnames",
+      "const char *[3]"
+    ],
+    [
+      "roomno",
+      "unsigned int"
+    ],
+    [
+      "shoproom",
+      "signed char"
+    ],
+    [
+      "shroom",
+      "signed char"
+    ],
+    [
+      "stairs",
+      "stairway *"
+    ],
+    [
+      "stasis_until",
+      "long"
+    ],
+    [
+      "sx",
+      "short"
+    ],
+    [
+      "sy",
+      "short"
+    ],
+    [
+      "tolev",
+      "struct d_level"
+    ],
+    [
+      "travelcc",
+      "struct nhcoord"
+    ],
+    [
+      "tseen",
+      "unsigned int"
+    ],
+    [
+      "ttyp",
+      "unsigned int"
+    ],
+    [
+      "typ",
+      "signed char"
+    ],
+    [
+      "ucamefrom",
+      "struct d_level"
+    ],
+    [
+      "uen",
+      "int"
+    ],
+    [
+      "uevent",
+      "struct u_event"
+    ],
+    [
+      "uhave",
+      "struct u_have"
+    ],
+    [
+      "uhunger",
+      "int"
+    ],
+    [
+      "ulevel",
+      "int"
+    ],
+    [
+      "umonnum",
+      "int"
+    ],
+    [
+      "umonster",
+      "int"
+    ],
+    [
+      "unconnected",
+      "unsigned int"
+    ],
+    [
+      "unpaid",
+      "unsigned int"
+    ],
+    [
+      "up",
+      "signed char"
+    ],
+    [
+      "updest",
+      "struct dest_area"
+    ],
+    [
+      "uprops",
+      "struct prop[69]"
+    ],
+    [
+      "urole",
+      "struct Role"
+    ],
+    [
+      "urooms",
+      "char[5]"
+    ],
+    [
+      "ushops",
+      "char[5]"
+    ],
+    [
+      "ushops0",
+      "char[5]"
+    ],
+    [
+      "usteed",
+      "struct monst *"
+    ],
+    [
+      "ustuck",
+      "struct monst *"
+    ],
+    [
+      "uswallow",
+      "unsigned int"
+    ],
+    [
+      "utrap",
+      "unsigned int"
+    ],
+    [
+      "utraptype",
+      "unsigned int"
+    ],
+    [
+      "ux",
+      "short"
+    ],
+    [
+      "ux0",
+      "short"
+    ],
+    [
+      "uy",
+      "short"
+    ],
+    [
+      "uy0",
+      "short"
+    ],
+    [
+      "uz",
+      "struct d_level"
+    ],
+    [
+      "uz0",
+      "struct d_level"
+    ],
+    [
+      "verbose",
+      "signed char"
+    ],
+    [
+      "vision_full_recalc",
+      "signed char"
+    ],
+    [
+      "viz_array",
+      "seenV **"
+    ],
+    [
+      "where",
+      "signed char"
+    ],
+    [
+      "win_create_nhwindow",
+      "winid (*volatile)(int)"
+    ],
+    [
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)"
+    ],
+    [
+      "win_display_nhwindow",
+      "void (*volatile)(winid, boolean)"
+    ],
+    [
+      "win_end_menu",
+      "void (*volatile)(winid, const char *)"
+    ],
+    [
+      "win_start_menu",
+      "void (*volatile)(winid, unsigned long)"
+    ],
+    [
+      "wormno",
+      "unsigned int"
+    ],
+    [
+      "x",
+      "short"
+    ],
+    [
+      "y",
+      "short"
+    ],
+    [
+      "youmonst",
+      "struct monst"
+    ],
+    [
+      "zeroany",
+      "const union any"
+    ],
+    [
+      "zeromonst",
+      "const struct monst"
+    ]
+  ],
+  "staticLocals": [
+    [
+      "dotelecmd",
+      "tports",
+      {
+        "qualType": "const struct tporttypes[4]"
+      }
+    ],
+    [
+      "level_tele",
+      "get_there_from",
+      {
+        "qualType": "const char[19]"
+      }
+    ],
+    [
+      "tele_trap",
+      "in_tele_trap",
+      {
+        "desugaredQualType": "signed char",
+        "qualType": "boolean",
+        "typeAliasDeclId": "0xb54eaf290"
+      }
+    ]
+  ],
+  "records": {
+    "monster": [
+      "struct monst",
+      [
+        "nmon",
+        "data",
+        "mx",
+        "my",
+        "wormno",
+        "m_id",
+        "mtame",
+        "mstate",
+        "mleashed",
+        "iswiz",
+        "isshk",
+        "ispriest",
+        "mpeaceful",
+        "minvent",
+        "mstrategy",
+        "mconf",
+        "mtrapped",
+        "mhp",
+        "m_ap_type"
+      ]
+    ],
+    "permonst": [
+      "struct permonst",
+      [
+        "mlet",
+        "mflags1",
+        "mflags2",
+        "mflags3",
+        "geno",
+        "pmnames",
+        "msound"
+      ]
+    ],
+    "object": [
+      "struct obj",
+      [
+        "cursed",
+        "blessed",
+        "where",
+        "ox",
+        "oy",
+        "oerodeproof",
+        "otyp",
+        "nobj",
+        "no_charge",
+        "unpaid",
+        "corpsenm"
+      ]
+    ],
+    "trap": [
+      "struct trap",
+      [
+        "ttyp",
+        "once",
+        "tseen",
+        "teledest",
+        "dst"
+      ]
+    ],
+    "coord": [
+      "coord",
+      [
+        "x",
+        "y"
+      ]
+    ],
+    "level": [
+      "d_level",
+      [
+        "dnum",
+        "dlevel"
+      ]
+    ],
+    "stair": [
+      "stairway",
+      [
+        "next",
+        "sx",
+        "sy",
+        "isladder",
+        "up",
+        "tolev"
+      ]
+    ],
+    "menu": [
+      "menu_item",
+      [
+        "item",
+        "count"
+      ]
+    ],
+    "any": [
+      "anything",
+      [
+        "a_int"
+      ]
+    ],
+    "eshk": [
+      "struct eshk",
+      [
+        "shoproom"
+      ]
+    ],
+    "epri": [
+      "struct epri",
+      [
+        "shroom"
+      ]
+    ],
+    "dungeon": [
+      "dungeon",
+      [
+        "depth_start",
+        "num_dunlevs",
+        "dunlev_ureached",
+        "flags.unconnected"
+      ]
+    ],
+    "objclass": [
+      "struct objclass",
+      [
+        "oc_level"
+      ]
+    ],
+    "rm": [
+      "struct rm",
+      [
+        "typ",
+        "roomno"
+      ]
+    ]
+  },
+  "ptrfields": {
+    "monster.nmon": "monster",
+    "monster.data": "permonst",
+    "monster.minvent": "object",
+    "object.nobj": "object",
+    "stair.next": "stair",
+    "permonst.pmnames": "chararray"
+  },
+  "addressfields": {
+    "trap.teledest": "coord",
+    "trap.dst": "level",
+    "stair.tolev": "level",
+    "menu.item": "any"
+  },
+  "longfields": {
+    "monster.mstate": "l",
+    "monster.mstrategy": "u",
+    "permonst.mflags1": "u",
+    "permonst.mflags2": "u",
+    "menu.count": "l"
+  },
+  "globalfields": [
+    "ETeleportation",
+    "HConfusion",
+    "HStun",
+    "HTeleportation",
+    "WIN_MESSAGE",
+    "disp.botl",
+    "flags.verbose",
+    "gi.in_mklev",
+    "gi.invent",
+    "go.occupation",
+    "gv.vision_full_recalc",
+    "iflags.debug_fuzzer",
+    "iflags.last_msg",
+    "iflags.menu_requested",
+    "iflags.mon_telecontrol",
+    "svd.dndest.hx",
+    "svd.dndest.hy",
+    "svd.dndest.lx",
+    "svd.dndest.ly",
+    "svd.dndest.nhx",
+    "svd.dndest.nhy",
+    "svd.dndest.nlx",
+    "svd.dndest.nly",
+    "svk.killer.format",
+    "svk.killer.name",
+    "svl.level.flags.noteleport",
+    "svl.level.flags.stasis_until",
+    "svm.moves",
+    "svn.n_dgns",
+    "svu.updest.hx",
+    "svu.updest.hy",
+    "svu.updest.lx",
+    "svu.updest.ly",
+    "svu.updest.nhx",
+    "svu.updest.nhy",
+    "svu.updest.nlx",
+    "svu.updest.nly",
+    "u.uen",
+    "u.uevent.invoked",
+    "u.uhave.amulet",
+    "u.uhunger",
+    "u.ulevel",
+    "u.umonster",
+    "u.urooms",
+    "u.ushops",
+    "u.ushops0",
+    "u.uswallow",
+    "u.utrap",
+    "u.utraptype",
+    "u.ux",
+    "u.ux0",
+    "u.uy",
+    "u.uy0"
+  ],
+  "globalpointers": {
+    "gi.invent": "object",
+    "go.occupation": "pointer",
+    "u.urooms": "pointer",
+    "u.ushops": "pointer",
+    "u.ushops0": "pointer",
+    "svk.killer.name": "pointer"
+  },
+  "globallongs": [
+    "ETeleportation",
+    "HConfusion",
+    "HStun",
+    "HTeleportation",
+    "svl.level.flags.stasis_until",
+    "svm.moves"
+  ],
+  "addresses": {
+    "gy.youmonst": "monster",
+    "cg.zeroany": "any",
+    "cg.zeromonst": "monster",
+    "gc.current_wand": "object*",
+    "u.ustuck": "monster*",
+    "u.usteed": "monster*",
+    "gs.stairs": "stair*",
+    "iflags.travelcc": "coord",
+    "u.uz": "level",
+    "u.uz0": "level",
+    "u.ucamefrom": "level",
+    "astral_level": "level",
+    "medusa_level": "level",
+    "mineend_level": "level",
+    "qlocate_level": "level",
+    "qstart_level": "level",
+    "sanctum_level": "level",
+    "valley_level": "level",
+    "nul_glyphinfo": "pointer",
+    "shudder_for_moment": "pointer",
+    "uball": "object*",
+    "uchain": "object*",
+    "uarmf": "object*",
+    "fmon": "monster*"
+  },
+  "hero": [
+    "Amphibious",
+    "Antimagic",
+    "Blind",
+    "Blinded",
+    "Confusion",
+    "Fire_resistance",
+    "Flying",
+    "Hallucination",
+    "Inhell",
+    "Levitation",
+    "Passes_walls",
+    "Punished",
+    "Stunned",
+    "Swimming",
+    "Teleport_control",
+    "Teleportation",
+    "Upolyd",
+    "Wwalking",
+    "wizard"
+  ],
+  "constants": [
+    "AMULET_OF_YENDOR",
+    "ATR_NONE",
+    "A_STR",
+    "A_WIS",
+    "BOLT_LIM",
+    "BOULDER",
+    "BUFSZ",
+    "CC_INCL_CENTER",
+    "CC_NO_FLAGS",
+    "CC_RING_PAIRS",
+    "CC_SKIP_INACCS",
+    "CC_SKIP_MONS",
+    "CC_UNSHUFFLED",
+    "COLNO",
+    "CORPSE",
+    "DIED",
+    "ECMD_OK",
+    "ECMD_TIME",
+    "FALSE",
+    "FORCETRAP",
+    "GP_ALLOW_U",
+    "GP_ALLOW_XY",
+    "GP_AVOID_MONPOS",
+    "GP_CHECKSCARY",
+    "HOLE",
+    "I_SPECIAL",
+    "LEVEL_TELEP",
+    "LR_MONGEN",
+    "MAGIC_PORTAL",
+    "MENU_BEHAVE_STANDARD",
+    "MENU_ITEMFLAGS_NONE",
+    "MENU_ITEMFLAGS_SELECTED",
+    "MIGR_PORTAL",
+    "MIGR_RANDOM",
+    "MM_IGNORELAVA",
+    "MM_IGNOREWATER",
+    "M_AP_NOTHING",
+    "NEUTRAL",
+    "NHW_MENU",
+    "NO_COLOR",
+    "NO_KILLER_PREFIX",
+    "NO_MM_FLAGS",
+    "NO_TRAP",
+    "NO_TRAP_FLAGS",
+    "OBJ_FREE",
+    "PICK_ONE",
+    "PM_FLOATING_EYE",
+    "PM_MINOTAUR",
+    "PM_WIZARD",
+    "RLOC_ERR",
+    "RLOC_MSG",
+    "RLOC_NOMSG",
+    "RLOC_NONE",
+    "ROWNO",
+    "SCR_SCARE_MONSTER",
+    "SHOPBASE",
+    "SLT_ENCUMBER",
+    "SPE_TELEPORT_AWAY",
+    "STRAT_APPEARMSG",
+    "S_ANGEL",
+    "S_EEL",
+    "S_ELEMENTAL",
+    "S_HUMAN",
+    "S_MIMIC",
+    "S_VAMPIRE",
+    "TELEDS_ALLOW_DRAG",
+    "TELEDS_TELEPORT",
+    "TELEP_TRAP",
+    "TEMPLE",
+    "TIMEOUT",
+    "TRAPDOOR",
+    "TRUE",
+    "TT_BURIEDBALL",
+    "UTOTYPE_ATSTAIRS",
+    "UTOTYPE_NONE",
+    "UTOTYPE_PORTAL",
+    "VAULT",
+    "VIASITTING",
+    "VIBRATING_SQUARE",
+    "WAN_TELEPORTATION",
+    "OBJ_FLOOR",
+    "OBJ_INVENT",
+    "PM_DEATH",
+    "STONE",
+    "ROOM",
+    "POOL",
+    "MOAT",
+    "LAVAPOOL",
+    "WATER",
+    "DOOR",
+    "ALTAR",
+    "D_CLOSED",
+    "TELEPORT",
+    "TELEPORT_CONTROL",
+    "LEVITATION",
+    "FLYING",
+    "WWALKING",
+    "SWIMMING",
+    "PASSES_WALLS",
+    "ANTIMAGIC",
+    "STUNNED",
+    "CONFUSION",
+    "BLINDED",
+    "HALLUC",
+    "FIRE_RES",
+    "M1_SWIM",
+    "M1_AMORPHOUS",
+    "M1_WALLWALK",
+    "M1_NOEYES",
+    "M1_TPORT",
+    "M1_TPORT_CNTRL",
+    "M2_DEMON",
+    "M2_LORD",
+    "M2_PRINCE",
+    "spe_Fresh",
+    "spe_Unknown",
+    "voice_deity",
+    "Trap_Effect_Finished",
+    "Trap_Moved_Mon"
+  ],
+  "dependencies": {
+    "ACURR": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "Amonnam": {
+      "ret": "char *",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "DEADMONSTER": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct monst*"
+        }
+      ]
+    },
+    "IS_ALTAR": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "In_W_tower": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "In_endgame": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "d_level*"
+        }
+      ]
+    },
+    "In_hell": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "In_mines": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "In_quest": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "In_sokoban": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "d_level*"
+        }
+      ]
+    },
+    "In_tutorial": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "d_level*"
+        }
+      ]
+    },
+    "Is_botlevel": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "Is_stronghold": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "d_level*"
+        }
+      ]
+    },
+    "Is_waterlevel": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "d_level*"
+        }
+      ]
+    },
+    "MON_AT": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "coordxy"
+        },
+        {
+          "qualType": "coordxy"
+        }
+      ]
+    },
+    "Monnam": {
+      "ret": "char *",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "On_W_tower_level": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "Role_if": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "Strcat": {
+      "ret": "char *",
+      "args": [
+        {
+          "qualType": "char *restrict"
+        },
+        {
+          "qualType": "const char *restrict"
+        }
+      ]
+    },
+    "Strcpy": {
+      "ret": "char *",
+      "args": [
+        {
+          "qualType": "char *restrict"
+        },
+        {
+          "qualType": "const char *restrict"
+        }
+      ]
+    },
+    "ZAP_POS": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "accessible": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "add_menu": {
+      "ret": "void",
+      "args": [
+        {
+          "desugaredQualType": "int",
+          "qualType": "winid",
+          "typeAliasDeclId": "0xb55027bd0"
+        },
+        {
+          "qualType": "const glyph_info *"
+        },
+        {
+          "qualType": "const union any *"
+        },
+        {
+          "qualType": "char"
+        },
+        {
+          "qualType": "char"
+        },
+        {
+          "qualType": "int"
+        },
+        {
+          "qualType": "int"
+        },
+        {
+          "qualType": "const char *"
+        },
+        {
+          "qualType": "unsigned int"
+        }
+      ]
+    },
+    "addinv": {
+      "ret": "struct obj *",
+      "args": [
+        {
+          "qualType": "struct obj *"
+        }
+      ]
+    },
+    "addtobill": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct obj *"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "amorphous": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "assign_level": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "d_level *"
+        },
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "atoi": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "const char *"
+        }
+      ]
+    },
+    "buried_ball_to_punishment": {
+      "ret": "void",
+      "args": []
+    },
+    "can_teleport": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "canseemon": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "canspotmon": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct monst*"
+        }
+      ]
+    },
+    "carried": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct obj*"
+        }
+      ]
+    },
+    "check_capacity": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "const char *"
+        }
+      ]
+    },
+    "check_special_room": {
+      "ret": "void",
+      "args": [
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "clamp_hole_destination": {
+      "ret": "d_level *",
+      "args": [
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "closed_door": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "control_teleport": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "costly_adjacent": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "costly_spot": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "couldsee": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "coordxy"
+        },
+        {
+          "qualType": "coordxy"
+        }
+      ]
+    },
+    "create_nhwindow": {
+      "ret": "winid",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "deltrap": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct trap *"
+        }
+      ]
+    },
+    "depth": {
+      "ret": "schar",
+      "args": [
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "destroy_nhwindow": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "winid"
+        }
+      ]
+    },
+    "digit": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "char"
+        }
+      ]
+    },
+    "display_nhwindow": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "winid"
+        },
+        {
+          "qualType": "boolean"
+        }
+      ]
+    },
+    "distmin": {
+      "ret": "int",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "distu": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "coordxy"
+        },
+        {
+          "qualType": "coordxy"
+        }
+      ]
+    },
+    "dochugw": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "docrt": {
+      "ret": "void",
+      "args": []
+    },
+    "done": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "drag_ball": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "qualType": "int *"
+        },
+        {
+          "qualType": "coordxy *"
+        },
+        {
+          "qualType": "coordxy *"
+        },
+        {
+          "qualType": "coordxy *"
+        },
+        {
+          "qualType": "coordxy *"
+        },
+        {
+          "qualType": "boolean *"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "dunlev_reached": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "d_level*"
+        }
+      ]
+    },
+    "dunlevs_in_dungeon": {
+      "ret": "xint16",
+      "args": [
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "end_menu": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "winid"
+        },
+        {
+          "qualType": "const char*"
+        }
+      ]
+    },
+    "engulfing_u": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct monst*"
+        }
+      ]
+    },
+    "eos": {
+      "ret": "char *",
+      "args": [
+        {
+          "qualType": "char *"
+        }
+      ]
+    },
+    "exercise": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "int"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "fill_pit": {
+      "ret": "void",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "find_hell": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "find_objowner": {
+      "ret": "struct monst *",
+      "args": [
+        {
+          "qualType": "struct obj *"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "findgd": {
+      "ret": "struct monst *",
+      "args": []
+    },
+    "flooreffects": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "struct obj *"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "qualType": "const char *"
+        }
+      ]
+    },
+    "free": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "void *"
+        }
+      ]
+    },
+    "get_iter_mons": {
+      "ret": "struct monst *",
+      "args": [
+        {
+          "qualType": "boolean (*)(struct monst *)"
+        }
+      ]
+    },
+    "get_level": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "d_level *"
+        },
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "get_mleash": {
+      "ret": "struct obj *",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "getlin": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "const char *"
+        },
+        {
+          "qualType": "char *"
+        }
+      ]
+    },
+    "getpos": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "coord *"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        },
+        {
+          "qualType": "const char *"
+        }
+      ]
+    },
+    "haseyes": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "hideunder": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "in_out_region": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "in_rooms": {
+      "ret": "char *",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "inhishop": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "inhistemple": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "invocation_message": {
+      "ret": "void",
+      "args": []
+    },
+    "is_covetous": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "is_dlord": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "is_dprince": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "is_exclusion_zone": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "xint16",
+          "typeAliasDeclId": "0xb54eaf1c0"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "is_hole": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "is_home_elemental": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "struct permonst *"
+        }
+      ]
+    },
+    "is_lava": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "is_pit": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "is_pool": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "is_rider": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "is_silent": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "is_swimmer": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "is_waterwall": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "is_xport": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "isok": {
+      "ret": "int",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "known_spell": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "short"
+        }
+      ]
+    },
+    "learnscroll": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct obj *"
+        }
+      ]
+    },
+    "ledger_no": {
+      "ret": "xint16",
+      "args": [
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "lev_by_name": {
+      "ret": "schar",
+      "args": [
+        {
+          "qualType": "const char *"
+        }
+      ]
+    },
+    "likes_lava": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "m_in_air": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "m_into_limbo": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "m_next2u": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct monst*"
+        }
+      ]
+    },
+    "m_unleash": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "make_angry_shk": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "make_blinded": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "long"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "make_confused": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "long"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "make_stunned": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "long"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "may_passwall": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "maybe_unhide_at": {
+      "ret": "void",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "migrate_to_level": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "xint16",
+          "typeAliasDeclId": "0xb54eaf1c0"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "xint16",
+          "typeAliasDeclId": "0xb54eaf1c0"
+        },
+        {
+          "qualType": "coord *"
+        }
+      ]
+    },
+    "mintrap": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        },
+        {
+          "qualType": "unsigned int"
+        }
+      ]
+    },
+    "mksobj": {
+      "ret": "struct obj *",
+      "args": [
+        {
+          "qualType": "int"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "mon_has_amulet": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "mon_nam": {
+      "ret": "char *",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "mon_offmap": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct monst*"
+        }
+      ]
+    },
+    "mon_track_clear": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "morehungry": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "move_bc": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "int"
+        },
+        {
+          "qualType": "int"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "near_capacity": {
+      "ret": "int",
+      "args": []
+    },
+    "newsym": {
+      "ret": "void",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "next_to_u": {
+      "ret": "boolean",
+      "args": []
+    },
+    "noit_mon_nam": {
+      "ret": "char *",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "nomul": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "notice_all_mons": {
+      "ret": "void",
+      "args": [
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "obj_extract_self": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct obj *"
+        }
+      ]
+    },
+    "on_level": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "d_level *"
+        },
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "onscary": {
+      "ret": "boolean",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "onshopbill": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "struct obj *"
+        },
+        {
+          "qualType": "struct monst *"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "passes_walls": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "place_monster": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "place_object": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct obj *"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "place_worm_tail_randomly": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "placebc": {
+      "ret": "void",
+      "args": []
+    },
+    "print_dungeon": {
+      "ret": "schar",
+      "args": [
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        },
+        {
+          "qualType": "schar *"
+        },
+        {
+          "qualType": "xint16 *"
+        }
+      ]
+    },
+    "prinv": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "const char *"
+        },
+        {
+          "qualType": "struct obj *"
+        },
+        {
+          "qualType": "long"
+        }
+      ]
+    },
+    "remove_worm": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "reset_utrap": {
+      "ret": "void",
+      "args": [
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "revive_corpse": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "struct obj *"
+        }
+      ]
+    },
+    "schedule_goto": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "d_level *"
+        },
+        {
+          "qualType": "int"
+        },
+        {
+          "qualType": "const char *"
+        },
+        {
+          "qualType": "const char *"
+        }
+      ]
+    },
+    "search_special": {
+      "ret": "struct mkroom *",
+      "args": [
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "schar",
+          "typeAliasDeclId": "0xb54e03c48"
+        }
+      ]
+    },
+    "see_monsters": {
+      "ret": "void",
+      "args": []
+    },
+    "seetrap": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct trap *"
+        }
+      ]
+    },
+    "select_menu": {
+      "ret": "int",
+      "args": [
+        {
+          "desugaredQualType": "int",
+          "qualType": "winid",
+          "typeAliasDeclId": "0xb55027bd0"
+        },
+        {
+          "qualType": "int"
+        },
+        {
+          "qualType": "menu_item **"
+        }
+      ]
+    },
+    "sengr_at": {
+      "ret": "struct engr *",
+      "args": [
+        {
+          "qualType": "const char *"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "sensemon": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "set_apparxy": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "set_mon_data": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        },
+        {
+          "qualType": "struct permonst *"
+        }
+      ]
+    },
+    "set_msg_xy": {
+      "ret": "void",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "set_ustuck": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "settrack": {
+      "ret": "void",
+      "args": []
+    },
+    "shieldeff": {
+      "ret": "void",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "single_level_branch": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "d_level *"
+        }
+      ]
+    },
+    "sobj_at": {
+      "ret": "struct obj *",
+      "args": [
+        {
+          "qualType": "int"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "somexyspace": {
+      "ret": "boolean",
+      "args": [
+        {
+          "qualType": "struct mkroom *"
+        },
+        {
+          "qualType": "coord *"
+        }
+      ]
+    },
+    "spelleffects": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "int"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "spoteffects": {
+      "ret": "void",
+      "args": [
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "start_menu": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "winid"
+        },
+        {
+          "qualType": "unsigned long"
+        }
+      ]
+    },
+    "stolen_value": {
+      "ret": "long",
+      "args": [
+        {
+          "qualType": "struct obj *"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "strchr": {
+      "ret": "char *",
+      "args": [
+        {
+          "qualType": "const char *"
+        },
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "strcmp": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "const char *"
+        },
+        {
+          "qualType": "const char *"
+        }
+      ]
+    },
+    "subfrombill": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct obj *"
+        },
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "surface": {
+      "ret": "const char *",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "switch_terrain": {
+      "ret": "void",
+      "args": []
+    },
+    "t_at": {
+      "ret": "struct trap *",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "throws_rocks": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "tport_spell": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "u_at": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "coordxy"
+        },
+        {
+          "qualType": "coordxy"
+        }
+      ]
+    },
+    "u_left_shop": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "char *"
+        },
+        {
+          "desugaredQualType": "signed char",
+          "qualType": "boolean",
+          "typeAliasDeclId": "0xb54eaf290"
+        }
+      ]
+    },
+    "u_locomotion": {
+      "ret": "const char *",
+      "args": [
+        {
+          "qualType": "const char *"
+        }
+      ]
+    },
+    "u_on_newpos": {
+      "ret": "void",
+      "args": [
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        },
+        {
+          "desugaredQualType": "short",
+          "qualType": "coordxy",
+          "typeAliasDeclId": "0xb54eaf158"
+        }
+      ]
+    },
+    "uhis": {
+      "ret": "const char*",
+      "args": []
+    },
+    "uleftvault": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "unconscious": {
+      "ret": "boolean",
+      "args": []
+    },
+    "unique_corpstat": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "struct permonst*"
+        }
+      ]
+    },
+    "unplacebc": {
+      "ret": "void",
+      "args": []
+    },
+    "unstuck": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "update_monster_region": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "update_player_regions": {
+      "ret": "void",
+      "args": []
+    },
+    "vault_occupied": {
+      "ret": "char",
+      "args": [
+        {
+          "qualType": "char *"
+        }
+      ]
+    },
+    "vision_recalc": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "int"
+        }
+      ]
+    },
+    "within_bounded_area": {
+      "ret": "int",
+      "args": [
+        {
+          "qualType": "coordxy"
+        },
+        {
+          "qualType": "coordxy"
+        },
+        {
+          "qualType": "coordxy"
+        },
+        {
+          "qualType": "coordxy"
+        },
+        {
+          "qualType": "coordxy"
+        },
+        {
+          "qualType": "coordxy"
+        }
+      ]
+    },
+    "y_n": {
+      "ret": "char",
+      "args": [
+        {
+          "qualType": "const char*"
+        }
+      ]
+    },
+    "yelp": {
+      "ret": "void",
+      "args": [
+        {
+          "qualType": "struct monst *"
+        }
+      ]
+    },
+    "ynq": {
+      "ret": "char",
+      "args": [
+        {
+          "qualType": "const char*"
+        }
+      ]
+    }
+  },
+  "literals": [
+    "",
+    "\u001b",
+    " [type a number or name]",
+    " [type a number, name, or ? for a menu]",
+    " and %s",
+    " close by",
+    " closer to you",
+    " farther away",
+    " next to you",
+    "%s",
+    "%s %s%s%s!",
+    "%s %s.",
+    "%s a level teleport trap!",
+    "%s avoids the %s.",
+    "%s destination.",
+    "%s in agony as your body begins to warp...",
+    "%s is leashed, without a leash.",
+    "%s onto",
+    "%s onto the teleportation trap.",
+    "%s resists your magic!",
+    "%s seems disoriented.",
+    "%s seems to shimmer for a moment.",
+    "%s seems very disoriented for a moment.",
+    "%s shudders for a moment.",
+    "%s suddenly disappears!",
+    "%s vanishes and reappears%s.",
+    "%s vanishes!",
+    "%s.",
+    "%sdisoriented.",
+    "(In fact, you're on Cloud 9!)",
+    "*",
+    ", and you gather up all your possessions",
+    "<%d,%d> is not considered viable; force anyway?",
+    "?",
+    "A mysterious force prevents %s from teleporting!",
+    "A mysterious force prevents you from teleporting!",
+    "A mysterious force prevents you teleporting %s!",
+    "An energized cloud of dust begins to coalesce.",
+    "Being unconscious, you cannot control your teleport.",
+    "Elbereth",
+    "Endgame prerequisite:",
+    "Go to Nowhere.  Are you sure?",
+    "Jump in?",
+    "Oops...",
+    "Override?",
+    "Picking random",
+    "Resuming regular play.",
+    "Sorry...",
+    "Suddenly, %s %s.",
+    "Teleport %s @ <%d,%d> where?",
+    "There is a level teleporter here. Trigger it?",
+    "This is a vault teleport, usable once only.",
+    "Thou art early, but we'll admit thee.",
+    "To what level do you want to teleport?",
+    "Unfortunately, you don't know how to fly.",
+    "Using derived",
+    "Where do %s want to be teleported?",
+    "Which way do you want to teleport?",
+    "You feel dizzier.",
+    "You feel slightly dizzy.",
+    "You materialize on a different level!",
+    "Your concentration falters from carrying so much.",
+    "a different",
+    "a wrenching sensation.",
+    "activated a magic portal!",
+    "and %s teleport together.",
+    "anywhere",
+    "appears",
+    "are no longer inside %s!",
+    "are not able to teleport at will",
+    "are now high above the clouds...",
+    "are too weak from hunger",
+    "arrive in heaven.",
+    "arrives",
+    "attempt to teleport hero to be near a pet on no-teleport level",
+    "body rematerializes%s.",
+    "briefly feel %s.",
+    "can't cast that spell",
+    "cease to exist.",
+    "centered",
+    "collect_coords",
+    "collect_coords(,%d,%d,%d,,)=%d",
+    "committed suicide",
+    "debug mode; ignore restrictions",
+    "deliriously happy.",
+    "disappears out of sight",
+    "disoriented for a moment.",
+    "dizzy for a moment, but nothing happens...",
+    "don't know that spell",
+    "enexto(\"%s\",%d,%d,0x%08lx) failed",
+    "enexto() called with null mdat",
+    "even more ",
+    "fall",
+    "falls into a hole",
+    "falls through a trap door",
+    "find yourself back on the surface",
+    "float gently down to earth",
+    "fly down to the ground",
+    "for a teleport spell",
+    "get there from %s.",
+    "goodpos",
+    "here",
+    "hole",
+    "jump",
+    "lack the energy",
+    "lack the strength",
+    "leash goes slack.",
+    "level_tele",
+    "materialize in %s location!",
+    "mlevel_tele_trap",
+    "mlevel_tele_trap: unexpected trap type (%d)",
+    "normal ^T on demand; no spell, obey restrictions",
+    "oriented",
+    "plummet a few thousand feet to your death.",
+    "possessions land on the %s with a thud.",
+    "random_teleport_level",
+    "rloc",
+    "rloc(): couldn't relocate monster",
+    "rloco",
+    "safe_teleds",
+    "scream",
+    "scrolltele",
+    "step",
+    "suddenly ",
+    "tele_to_rnd_pet",
+    "teleported out of the dungeon and fell to %s death",
+    "the desired position",
+    "the same",
+    "to teleport",
+    "trap",
+    "trigger",
+    "try ^T without having it; no spell",
+    "u_teleport_mon",
+    "very disoriented for a moment.",
+    "via spellcast; no intrinsic teleport",
+    "went to heaven prematurely",
+    "where to teleport %s",
+    "writhe",
+    "you"
+  ],
+  "capacity": 3131,
+  "services": {
+    "ACURR": {
+      "c": "teleport_teleport_dep_ACURR",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "Amonnam": {
+      "c": "teleport_teleport_dep_Amonnam",
+      "ret": "s",
+      "args": [
+        "p"
+      ]
+    },
+    "DEADMONSTER": {
+      "c": "teleport_teleport_dep_DEADMONSTER",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "IS_ALTAR": {
+      "c": "teleport_teleport_dep_IS_ALTAR",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "In_W_tower": {
+      "c": "teleport_teleport_dep_In_W_tower",
+      "ret": "b",
+      "args": [
+        "h",
+        "h",
+        "p"
+      ]
+    },
+    "In_endgame": {
+      "c": "teleport_teleport_dep_In_endgame",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "In_hell": {
+      "c": "teleport_teleport_dep_In_hell",
+      "ret": "b",
+      "args": [
+        "p"
+      ]
+    },
+    "In_mines": {
+      "c": "teleport_teleport_dep_In_mines",
+      "ret": "b",
+      "args": [
+        "p"
+      ]
+    },
+    "In_quest": {
+      "c": "teleport_teleport_dep_In_quest",
+      "ret": "b",
+      "args": [
+        "p"
+      ]
+    },
+    "In_sokoban": {
+      "c": "teleport_teleport_dep_In_sokoban",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "In_tutorial": {
+      "c": "teleport_teleport_dep_In_tutorial",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "Is_botlevel": {
+      "c": "teleport_teleport_dep_Is_botlevel",
+      "ret": "b",
+      "args": [
+        "p"
+      ]
+    },
+    "Is_stronghold": {
+      "c": "teleport_teleport_dep_Is_stronghold",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "Is_waterlevel": {
+      "c": "teleport_teleport_dep_Is_waterlevel",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "MON_AT": {
+      "c": "teleport_teleport_dep_MON_AT",
+      "ret": "i",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "Monnam": {
+      "c": "teleport_teleport_dep_Monnam",
+      "ret": "s",
+      "args": [
+        "p"
+      ]
+    },
+    "On_W_tower_level": {
+      "c": "teleport_teleport_dep_On_W_tower_level",
+      "ret": "b",
+      "args": [
+        "p"
+      ]
+    },
+    "Role_if": {
+      "c": "teleport_teleport_dep_Role_if",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "Strcat": {
+      "c": "teleport_teleport_dep_Strcat",
+      "ret": "s",
+      "args": [
+        "s",
+        "s"
+      ]
+    },
+    "Strcpy": {
+      "c": "teleport_teleport_dep_Strcpy",
+      "ret": "s",
+      "args": [
+        "s",
+        "s"
+      ]
+    },
+    "ZAP_POS": {
+      "c": "teleport_teleport_dep_ZAP_POS",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "accessible": {
+      "c": "teleport_teleport_dep_accessible",
+      "ret": "b",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "add_menu": {
+      "c": "teleport_teleport_dep_add_menu",
+      "ret": "v",
+      "args": [
+        "i",
+        "p",
+        "p",
+        "b",
+        "b",
+        "i",
+        "i",
+        "s",
+        "u"
+      ]
+    },
+    "addinv": {
+      "c": "teleport_teleport_dep_addinv",
+      "ret": "p",
+      "args": [
+        "p"
+      ]
+    },
+    "addtobill": {
+      "c": "teleport_teleport_dep_addtobill",
+      "ret": "v",
+      "args": [
+        "p",
+        "b",
+        "b",
+        "b"
+      ]
+    },
+    "amorphous": {
+      "c": "teleport_teleport_dep_amorphous",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "assign_level": {
+      "c": "teleport_teleport_dep_assign_level",
+      "ret": "v",
+      "args": [
+        "p",
+        "p"
+      ]
+    },
+    "atoi": {
+      "c": "teleport_teleport_dep_atoi",
+      "ret": "i",
+      "args": [
+        "s"
+      ]
+    },
+    "buried_ball_to_punishment": {
+      "c": "teleport_teleport_dep_buried_ball_to_punishment",
+      "ret": "v",
+      "args": []
+    },
+    "can_teleport": {
+      "c": "teleport_teleport_dep_can_teleport",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "canseemon": {
+      "c": "teleport_teleport_dep_canseemon",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "canspotmon": {
+      "c": "teleport_teleport_dep_canspotmon",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "carried": {
+      "c": "teleport_teleport_dep_carried",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "check_capacity": {
+      "c": "teleport_teleport_dep_check_capacity",
+      "ret": "b",
+      "args": [
+        "s"
+      ]
+    },
+    "check_special_room": {
+      "c": "teleport_teleport_dep_check_special_room",
+      "ret": "v",
+      "args": [
+        "b"
+      ]
+    },
+    "clamp_hole_destination": {
+      "c": "teleport_teleport_dep_clamp_hole_destination",
+      "ret": "p",
+      "args": [
+        "p"
+      ]
+    },
+    "closed_door": {
+      "c": "teleport_teleport_dep_closed_door",
+      "ret": "b",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "control_teleport": {
+      "c": "teleport_teleport_dep_control_teleport",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "costly_adjacent": {
+      "c": "teleport_teleport_dep_costly_adjacent",
+      "ret": "b",
+      "args": [
+        "p",
+        "h",
+        "h"
+      ]
+    },
+    "costly_spot": {
+      "c": "teleport_teleport_dep_costly_spot",
+      "ret": "b",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "couldsee": {
+      "c": "teleport_teleport_dep_couldsee",
+      "ret": "i",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "create_nhwindow": {
+      "c": "teleport_teleport_dep_create_nhwindow",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "deltrap": {
+      "c": "teleport_teleport_dep_deltrap",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "depth": {
+      "c": "teleport_teleport_dep_depth",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "destroy_nhwindow": {
+      "c": "teleport_teleport_dep_destroy_nhwindow",
+      "ret": "v",
+      "args": [
+        "i"
+      ]
+    },
+    "digit": {
+      "c": "teleport_teleport_dep_digit",
+      "ret": "b",
+      "args": [
+        "b"
+      ]
+    },
+    "display_nhwindow": {
+      "c": "teleport_teleport_dep_display_nhwindow",
+      "ret": "v",
+      "args": [
+        "i",
+        "b"
+      ]
+    },
+    "distmin": {
+      "c": "teleport_teleport_dep_distmin",
+      "ret": "i",
+      "args": [
+        "h",
+        "h",
+        "h",
+        "h"
+      ]
+    },
+    "distu": {
+      "c": "teleport_teleport_dep_distu",
+      "ret": "i",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "dochugw": {
+      "c": "teleport_teleport_dep_dochugw",
+      "ret": "i",
+      "args": [
+        "p",
+        "b"
+      ]
+    },
+    "docrt": {
+      "c": "teleport_teleport_dep_docrt",
+      "ret": "v",
+      "args": []
+    },
+    "done": {
+      "c": "teleport_teleport_dep_done",
+      "ret": "v",
+      "args": [
+        "i"
+      ]
+    },
+    "drag_ball": {
+      "c": "teleport_teleport_dep_drag_ball",
+      "ret": "b",
+      "args": [
+        "h",
+        "h",
+        "p",
+        "p",
+        "p",
+        "p",
+        "p",
+        "p",
+        "b"
+      ]
+    },
+    "dunlev_reached": {
+      "c": "teleport_teleport_dep_dunlev_reached",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "dunlevs_in_dungeon": {
+      "c": "teleport_teleport_dep_dunlevs_in_dungeon",
+      "ret": "h",
+      "args": [
+        "p"
+      ]
+    },
+    "end_menu": {
+      "c": "teleport_teleport_dep_end_menu",
+      "ret": "v",
+      "args": [
+        "i",
+        "s"
+      ]
+    },
+    "engulfing_u": {
+      "c": "teleport_teleport_dep_engulfing_u",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "eos": {
+      "c": "teleport_teleport_dep_eos",
+      "ret": "s",
+      "args": [
+        "s"
+      ]
+    },
+    "exercise": {
+      "c": "teleport_teleport_dep_exercise",
+      "ret": "v",
+      "args": [
+        "i",
+        "b"
+      ]
+    },
+    "fill_pit": {
+      "c": "teleport_teleport_dep_fill_pit",
+      "ret": "v",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "find_hell": {
+      "c": "teleport_teleport_dep_find_hell",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "find_objowner": {
+      "c": "teleport_teleport_dep_find_objowner",
+      "ret": "p",
+      "args": [
+        "p",
+        "h",
+        "h"
+      ]
+    },
+    "findgd": {
+      "c": "teleport_teleport_dep_findgd",
+      "ret": "p",
+      "args": []
+    },
+    "flooreffects": {
+      "c": "teleport_teleport_dep_flooreffects",
+      "ret": "b",
+      "args": [
+        "p",
+        "h",
+        "h",
+        "s"
+      ]
+    },
+    "free": {
+      "c": "teleport_teleport_dep_free",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "get_iter_mons": {
+      "c": "teleport_teleport_dep_get_iter_mons",
+      "ret": "p",
+      "args": [
+        "p"
+      ]
+    },
+    "get_level": {
+      "c": "teleport_teleport_dep_get_level",
+      "ret": "v",
+      "args": [
+        "p",
+        "i"
+      ]
+    },
+    "get_mleash": {
+      "c": "teleport_teleport_dep_get_mleash",
+      "ret": "p",
+      "args": [
+        "p"
+      ]
+    },
+    "getlin": {
+      "c": "teleport_teleport_dep_getlin",
+      "ret": "v",
+      "args": [
+        "s",
+        "s"
+      ]
+    },
+    "getpos": {
+      "c": "teleport_teleport_dep_getpos",
+      "ret": "i",
+      "args": [
+        "p",
+        "b",
+        "s"
+      ]
+    },
+    "haseyes": {
+      "c": "teleport_teleport_dep_haseyes",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "hideunder": {
+      "c": "teleport_teleport_dep_hideunder",
+      "ret": "b",
+      "args": [
+        "p"
+      ]
+    },
+    "in_out_region": {
+      "c": "teleport_teleport_dep_in_out_region",
+      "ret": "b",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "in_rooms": {
+      "c": "teleport_teleport_dep_in_rooms",
+      "ret": "s",
+      "args": [
+        "h",
+        "h",
+        "i"
+      ]
+    },
+    "inhishop": {
+      "c": "teleport_teleport_dep_inhishop",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "inhistemple": {
+      "c": "teleport_teleport_dep_inhistemple",
+      "ret": "b",
+      "args": [
+        "p"
+      ]
+    },
+    "invocation_message": {
+      "c": "teleport_teleport_dep_invocation_message",
+      "ret": "v",
+      "args": []
+    },
+    "is_covetous": {
+      "c": "teleport_teleport_dep_is_covetous",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "is_dlord": {
+      "c": "teleport_teleport_dep_is_dlord",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "is_dprince": {
+      "c": "teleport_teleport_dep_is_dprince",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "is_exclusion_zone": {
+      "c": "teleport_teleport_dep_is_exclusion_zone",
+      "ret": "b",
+      "args": [
+        "h",
+        "h",
+        "h"
+      ]
+    },
+    "is_hole": {
+      "c": "teleport_teleport_dep_is_hole",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "is_home_elemental": {
+      "c": "teleport_teleport_dep_is_home_elemental",
+      "ret": "b",
+      "args": [
+        "p"
+      ]
+    },
+    "is_lava": {
+      "c": "teleport_teleport_dep_is_lava",
+      "ret": "b",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "is_pit": {
+      "c": "teleport_teleport_dep_is_pit",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "is_pool": {
+      "c": "teleport_teleport_dep_is_pool",
+      "ret": "b",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "is_rider": {
+      "c": "teleport_teleport_dep_is_rider",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "is_silent": {
+      "c": "teleport_teleport_dep_is_silent",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "is_swimmer": {
+      "c": "teleport_teleport_dep_is_swimmer",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "is_waterwall": {
+      "c": "teleport_teleport_dep_is_waterwall",
+      "ret": "b",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "is_xport": {
+      "c": "teleport_teleport_dep_is_xport",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "isok": {
+      "c": "teleport_teleport_dep_isok",
+      "ret": "i",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "known_spell": {
+      "c": "teleport_teleport_dep_known_spell",
+      "ret": "i",
+      "args": [
+        "h"
+      ]
+    },
+    "learnscroll": {
+      "c": "teleport_teleport_dep_learnscroll",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "ledger_no": {
+      "c": "teleport_teleport_dep_ledger_no",
+      "ret": "h",
+      "args": [
+        "p"
+      ]
+    },
+    "lev_by_name": {
+      "c": "teleport_teleport_dep_lev_by_name",
+      "ret": "i",
+      "args": [
+        "s"
+      ]
+    },
+    "likes_lava": {
+      "c": "teleport_teleport_dep_likes_lava",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "m_in_air": {
+      "c": "teleport_teleport_dep_m_in_air",
+      "ret": "b",
+      "args": [
+        "p"
+      ]
+    },
+    "m_into_limbo": {
+      "c": "teleport_teleport_dep_m_into_limbo",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "m_next2u": {
+      "c": "teleport_teleport_dep_m_next2u",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "m_unleash": {
+      "c": "teleport_teleport_dep_m_unleash",
+      "ret": "v",
+      "args": [
+        "p",
+        "b"
+      ]
+    },
+    "make_angry_shk": {
+      "c": "teleport_teleport_dep_make_angry_shk",
+      "ret": "v",
+      "args": [
+        "p",
+        "h",
+        "h"
+      ]
+    },
+    "make_blinded": {
+      "c": "teleport_teleport_dep_make_blinded",
+      "ret": "v",
+      "args": [
+        "l",
+        "b"
+      ]
+    },
+    "make_confused": {
+      "c": "teleport_teleport_dep_make_confused",
+      "ret": "v",
+      "args": [
+        "l",
+        "b"
+      ]
+    },
+    "make_stunned": {
+      "c": "teleport_teleport_dep_make_stunned",
+      "ret": "v",
+      "args": [
+        "l",
+        "b"
+      ]
+    },
+    "may_passwall": {
+      "c": "teleport_teleport_dep_may_passwall",
+      "ret": "b",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "maybe_unhide_at": {
+      "c": "teleport_teleport_dep_maybe_unhide_at",
+      "ret": "v",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "migrate_to_level": {
+      "c": "teleport_teleport_dep_migrate_to_level",
+      "ret": "v",
+      "args": [
+        "p",
+        "h",
+        "h",
+        "p"
+      ]
+    },
+    "mintrap": {
+      "c": "teleport_teleport_dep_mintrap",
+      "ret": "i",
+      "args": [
+        "p",
+        "u"
+      ]
+    },
+    "mksobj": {
+      "c": "teleport_teleport_dep_mksobj",
+      "ret": "p",
+      "args": [
+        "i",
+        "b",
+        "b"
+      ]
+    },
+    "mon_has_amulet": {
+      "c": "teleport_teleport_dep_mon_has_amulet",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "mon_nam": {
+      "c": "teleport_teleport_dep_mon_nam",
+      "ret": "s",
+      "args": [
+        "p"
+      ]
+    },
+    "mon_offmap": {
+      "c": "teleport_teleport_dep_mon_offmap",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "mon_track_clear": {
+      "c": "teleport_teleport_dep_mon_track_clear",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "morehungry": {
+      "c": "teleport_teleport_dep_morehungry",
+      "ret": "v",
+      "args": [
+        "i"
+      ]
+    },
+    "move_bc": {
+      "c": "teleport_teleport_dep_move_bc",
+      "ret": "v",
+      "args": [
+        "i",
+        "i",
+        "h",
+        "h",
+        "h",
+        "h"
+      ]
+    },
+    "near_capacity": {
+      "c": "teleport_teleport_dep_near_capacity",
+      "ret": "i",
+      "args": []
+    },
+    "newsym": {
+      "c": "teleport_teleport_dep_newsym",
+      "ret": "v",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "next_to_u": {
+      "c": "teleport_teleport_dep_next_to_u",
+      "ret": "b",
+      "args": []
+    },
+    "noit_mon_nam": {
+      "c": "teleport_teleport_dep_noit_mon_nam",
+      "ret": "s",
+      "args": [
+        "p"
+      ]
+    },
+    "nomul": {
+      "c": "teleport_teleport_dep_nomul",
+      "ret": "v",
+      "args": [
+        "i"
+      ]
+    },
+    "notice_all_mons": {
+      "c": "teleport_teleport_dep_notice_all_mons",
+      "ret": "v",
+      "args": [
+        "b"
+      ]
+    },
+    "obj_extract_self": {
+      "c": "teleport_teleport_dep_obj_extract_self",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "on_level": {
+      "c": "teleport_teleport_dep_on_level",
+      "ret": "b",
+      "args": [
+        "p",
+        "p"
+      ]
+    },
+    "onscary": {
+      "c": "teleport_teleport_dep_onscary",
+      "ret": "b",
+      "args": [
+        "h",
+        "h",
+        "p"
+      ]
+    },
+    "onshopbill": {
+      "c": "teleport_teleport_dep_onshopbill",
+      "ret": "b",
+      "args": [
+        "p",
+        "p",
+        "b"
+      ]
+    },
+    "passes_walls": {
+      "c": "teleport_teleport_dep_passes_walls",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "place_monster": {
+      "c": "teleport_teleport_dep_place_monster",
+      "ret": "v",
+      "args": [
+        "p",
+        "h",
+        "h"
+      ]
+    },
+    "place_object": {
+      "c": "teleport_teleport_dep_place_object",
+      "ret": "v",
+      "args": [
+        "p",
+        "h",
+        "h"
+      ]
+    },
+    "place_worm_tail_randomly": {
+      "c": "teleport_teleport_dep_place_worm_tail_randomly",
+      "ret": "v",
+      "args": [
+        "p",
+        "h",
+        "h"
+      ]
+    },
+    "placebc": {
+      "c": "teleport_teleport_dep_placebc",
+      "ret": "v",
+      "args": []
+    },
+    "print_dungeon": {
+      "c": "teleport_teleport_dep_print_dungeon",
+      "ret": "i",
+      "args": [
+        "b",
+        "p",
+        "p"
+      ]
+    },
+    "prinv": {
+      "c": "teleport_teleport_dep_prinv",
+      "ret": "v",
+      "args": [
+        "s",
+        "p",
+        "l"
+      ]
+    },
+    "remove_worm": {
+      "c": "teleport_teleport_dep_remove_worm",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "reset_utrap": {
+      "c": "teleport_teleport_dep_reset_utrap",
+      "ret": "v",
+      "args": [
+        "b"
+      ]
+    },
+    "revive_corpse": {
+      "c": "teleport_teleport_dep_revive_corpse",
+      "ret": "b",
+      "args": [
+        "p"
+      ]
+    },
+    "schedule_goto": {
+      "c": "teleport_teleport_dep_schedule_goto",
+      "ret": "v",
+      "args": [
+        "p",
+        "i",
+        "s",
+        "s"
+      ]
+    },
+    "search_special": {
+      "c": "teleport_teleport_dep_search_special",
+      "ret": "p",
+      "args": [
+        "b"
+      ]
+    },
+    "see_monsters": {
+      "c": "teleport_teleport_dep_see_monsters",
+      "ret": "v",
+      "args": []
+    },
+    "seetrap": {
+      "c": "teleport_teleport_dep_seetrap",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "select_menu": {
+      "c": "teleport_teleport_dep_select_menu",
+      "ret": "i",
+      "args": [
+        "i",
+        "i",
+        "p"
+      ]
+    },
+    "sengr_at": {
+      "c": "teleport_teleport_dep_sengr_at",
+      "ret": "p",
+      "args": [
+        "s",
+        "h",
+        "h",
+        "b"
+      ]
+    },
+    "sensemon": {
+      "c": "teleport_teleport_dep_sensemon",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "set_apparxy": {
+      "c": "teleport_teleport_dep_set_apparxy",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "set_mon_data": {
+      "c": "teleport_teleport_dep_set_mon_data",
+      "ret": "v",
+      "args": [
+        "p",
+        "p"
+      ]
+    },
+    "set_msg_xy": {
+      "c": "teleport_teleport_dep_set_msg_xy",
+      "ret": "v",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "set_ustuck": {
+      "c": "teleport_teleport_dep_set_ustuck",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "settrack": {
+      "c": "teleport_teleport_dep_settrack",
+      "ret": "v",
+      "args": []
+    },
+    "shieldeff": {
+      "c": "teleport_teleport_dep_shieldeff",
+      "ret": "v",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "single_level_branch": {
+      "c": "teleport_teleport_dep_single_level_branch",
+      "ret": "b",
+      "args": [
+        "p"
+      ]
+    },
+    "sobj_at": {
+      "c": "teleport_teleport_dep_sobj_at",
+      "ret": "p",
+      "args": [
+        "i",
+        "h",
+        "h"
+      ]
+    },
+    "somexyspace": {
+      "c": "teleport_teleport_dep_somexyspace",
+      "ret": "b",
+      "args": [
+        "p",
+        "p"
+      ]
+    },
+    "spelleffects": {
+      "c": "teleport_teleport_dep_spelleffects",
+      "ret": "i",
+      "args": [
+        "i",
+        "b",
+        "b"
+      ]
+    },
+    "spoteffects": {
+      "c": "teleport_teleport_dep_spoteffects",
+      "ret": "v",
+      "args": [
+        "b"
+      ]
+    },
+    "start_menu": {
+      "c": "teleport_teleport_dep_start_menu",
+      "ret": "v",
+      "args": [
+        "i",
+        "l"
+      ]
+    },
+    "stolen_value": {
+      "c": "teleport_teleport_dep_stolen_value",
+      "ret": "l",
+      "args": [
+        "p",
+        "h",
+        "h",
+        "b",
+        "b"
+      ]
+    },
+    "strchr": {
+      "c": "teleport_teleport_dep_strchr",
+      "ret": "s",
+      "args": [
+        "s",
+        "i"
+      ]
+    },
+    "strcmp": {
+      "c": "teleport_teleport_dep_strcmp",
+      "ret": "i",
+      "args": [
+        "s",
+        "s"
+      ]
+    },
+    "subfrombill": {
+      "c": "teleport_teleport_dep_subfrombill",
+      "ret": "v",
+      "args": [
+        "p",
+        "p"
+      ]
+    },
+    "surface": {
+      "c": "teleport_teleport_dep_surface",
+      "ret": "s",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "switch_terrain": {
+      "c": "teleport_teleport_dep_switch_terrain",
+      "ret": "v",
+      "args": []
+    },
+    "t_at": {
+      "c": "teleport_teleport_dep_t_at",
+      "ret": "p",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "throws_rocks": {
+      "c": "teleport_teleport_dep_throws_rocks",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "tport_spell": {
+      "c": "teleport_teleport_dep_tport_spell",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "u_at": {
+      "c": "teleport_teleport_dep_u_at",
+      "ret": "i",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "u_left_shop": {
+      "c": "teleport_teleport_dep_u_left_shop",
+      "ret": "v",
+      "args": [
+        "s",
+        "b"
+      ]
+    },
+    "u_locomotion": {
+      "c": "teleport_teleport_dep_u_locomotion",
+      "ret": "s",
+      "args": [
+        "s"
+      ]
+    },
+    "u_on_newpos": {
+      "c": "teleport_teleport_dep_u_on_newpos",
+      "ret": "v",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "uhis": {
+      "c": "teleport_teleport_dep_uhis",
+      "ret": "s",
+      "args": []
+    },
+    "uleftvault": {
+      "c": "teleport_teleport_dep_uleftvault",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "unconscious": {
+      "c": "teleport_teleport_dep_unconscious",
+      "ret": "b",
+      "args": []
+    },
+    "unique_corpstat": {
+      "c": "teleport_teleport_dep_unique_corpstat",
+      "ret": "i",
+      "args": [
+        "p"
+      ]
+    },
+    "unplacebc": {
+      "c": "teleport_teleport_dep_unplacebc",
+      "ret": "v",
+      "args": []
+    },
+    "unstuck": {
+      "c": "teleport_teleport_dep_unstuck",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "update_monster_region": {
+      "c": "teleport_teleport_dep_update_monster_region",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "update_player_regions": {
+      "c": "teleport_teleport_dep_update_player_regions",
+      "ret": "v",
+      "args": []
+    },
+    "vault_occupied": {
+      "c": "teleport_teleport_dep_vault_occupied",
+      "ret": "b",
+      "args": [
+        "s"
+      ]
+    },
+    "vision_recalc": {
+      "c": "teleport_teleport_dep_vision_recalc",
+      "ret": "v",
+      "args": [
+        "i"
+      ]
+    },
+    "within_bounded_area": {
+      "c": "teleport_teleport_dep_within_bounded_area",
+      "ret": "i",
+      "args": [
+        "h",
+        "h",
+        "h",
+        "h",
+        "h",
+        "h"
+      ]
+    },
+    "y_n": {
+      "c": "teleport_teleport_dep_y_n",
+      "ret": "b",
+      "args": [
+        "s"
+      ]
+    },
+    "yelp": {
+      "c": "teleport_teleport_dep_yelp",
+      "ret": "v",
+      "args": [
+        "p"
+      ]
+    },
+    "ynq": {
+      "c": "teleport_teleport_dep_ynq",
+      "ret": "b",
+      "args": [
+        "s"
+      ]
+    },
+    "get": {
+      "c": "teleport_teleport_get",
+      "ret": "l",
+      "args": [
+        "i"
+      ]
+    },
+    "set": {
+      "c": "teleport_teleport_set",
+      "ret": "v",
+      "args": [
+        "i",
+        "l"
+      ]
+    },
+    "address": {
+      "c": "teleport_teleport_address",
+      "ret": "p",
+      "args": [
+        "i"
+      ]
+    },
+    "hero": {
+      "c": "teleport_teleport_hero",
+      "ret": "l",
+      "args": [
+        "i"
+      ]
+    },
+    "recordGet": {
+      "c": "teleport_teleport_record_get",
+      "ret": "l",
+      "args": [
+        "i",
+        "i",
+        "p"
+      ]
+    },
+    "recordSet": {
+      "c": "teleport_teleport_record_set",
+      "ret": "v",
+      "args": [
+        "i",
+        "i",
+        "p",
+        "l"
+      ]
+    },
+    "array": {
+      "c": "teleport_teleport_array",
+      "ret": "p",
+      "args": [
+        "i",
+        "i",
+        "i"
+      ]
+    },
+    "m_at": {
+      "c": "teleport_teleport_mat",
+      "ret": "p",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "remove_monster": {
+      "c": "teleport_teleport_remove_monster",
+      "ret": "v",
+      "args": [
+        "h",
+        "h"
+      ]
+    },
+    "pmname": {
+      "c": "teleport_teleport_pmname",
+      "ret": "p",
+      "args": [
+        "p",
+        "i"
+      ]
+    },
+    "ESHK": {
+      "c": "teleport_teleport_eshk",
+      "ret": "p",
+      "args": [
+        "p"
+      ]
+    },
+    "EPRI": {
+      "c": "teleport_teleport_epri",
+      "ret": "p",
+      "args": [
+        "p"
+      ]
+    },
+    "copy": {
+      "c": "teleport_teleport_copy",
+      "ret": "v",
+      "args": [
+        "p",
+        "p",
+        "l"
+      ]
+    },
+    "callFilter": {
+      "c": "teleport_teleport_filter",
+      "ret": "i",
+      "args": [
+        "p",
+        "h",
+        "h"
+      ]
+    },
+    "blocker": {
+      "c": "teleport_teleport_blocker",
+      "ret": "p",
+      "args": []
+    },
+    "notice_mon_off": {
+      "c": "teleport_teleport_notice_off",
+      "ret": "v",
+      "args": []
+    },
+    "notice_mon_on": {
+      "c": "teleport_teleport_notice_on",
+      "ret": "v",
+      "args": []
+    },
+    "SetVoice": {
+      "c": "teleport_teleport_setvoice",
+      "ret": "v",
+      "args": [
+        "p",
+        "i",
+        "i",
+        "i"
+      ]
+    },
+    "makeknown": {
+      "c": "teleport_teleport_makeknown",
+      "ret": "v",
+      "args": [
+        "i"
+      ]
+    },
+    "rngCaller": {
+      "c": "teleport_teleport_rng_caller",
+      "ret": "v",
+      "args": [
+        "i",
+        "s"
+      ]
+    },
+    "drawRn2": {
+      "c": "teleport_teleport_rn2",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "drawRnd": {
+      "c": "teleport_teleport_rnd",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "drawRnl": {
+      "c": "teleport_teleport_rnl",
+      "ret": "i",
+      "args": [
+        "i"
+      ]
+    },
+    "Sprintf": {
+      "c": "teleport_teleport_format",
+      "ret": "v",
+      "args": [
+        "p",
+        "s",
+        "s",
+        "s"
+      ]
+    },
+    "impossibleInt": {
+      "c": "teleport_teleport_impossible_int",
+      "ret": "v",
+      "args": [
+        "s",
+        "i"
+      ]
+    },
+    "You1": {
+      "c": "teleport_teleport_you1",
+      "ret": "v",
+      "args": [
+        "s"
+      ]
+    },
+    "pline_mon": {
+      "c": "teleport_teleport_pline_mon",
+      "ret": "v",
+      "args": [
+        "p",
+        "s",
+        "s",
+        "s"
+      ]
+    },
+    "debugEnabled": {
+      "c": "teleport_teleport_debug_enabled",
+      "ret": "i",
+      "args": []
+    },
+    "debugpline0": {
+      "c": "teleport_teleport_debug0",
+      "ret": "v",
+      "args": [
+        "s"
+      ]
+    },
+    "debugInts": {
+      "c": "teleport_teleport_debug_ints",
+      "ret": "v",
+      "args": [
+        "s",
+        "i",
+        "i",
+        "i",
+        "i"
+      ]
+    },
+    "debugFail": {
+      "c": "teleport_teleport_debug_fail",
+      "ret": "v",
+      "args": [
+        "s",
+        "s",
+        "i",
+        "i",
+        "l"
+      ]
+    },
+    "pline": {
+      "c": "teleport_teleport_pline",
+      "ret": "v",
+      "args": [
+        "s",
+        "s",
+        "s",
+        "s",
+        "s"
+      ]
+    },
+    "You": {
+      "c": "teleport_teleport_You",
+      "ret": "v",
+      "args": [
+        "s",
+        "s",
+        "s",
+        "s",
+        "s"
+      ]
+    },
+    "You_cant": {
+      "c": "teleport_teleport_You_cant",
+      "ret": "v",
+      "args": [
+        "s",
+        "s",
+        "s",
+        "s",
+        "s"
+      ]
+    },
+    "You_feel": {
+      "c": "teleport_teleport_You_feel",
+      "ret": "v",
+      "args": [
+        "s",
+        "s",
+        "s",
+        "s",
+        "s"
+      ]
+    },
+    "Your": {
+      "c": "teleport_teleport_Your",
+      "ret": "v",
+      "args": [
+        "s",
+        "s",
+        "s",
+        "s",
+        "s"
+      ]
+    },
+    "verbalize": {
+      "c": "teleport_teleport_verbalize",
+      "ret": "v",
+      "args": [
+        "s",
+        "s",
+        "s",
+        "s",
+        "s"
+      ]
+    },
+    "impossible": {
+      "c": "teleport_teleport_impossible",
+      "ret": "v",
+      "args": [
+        "s",
+        "s",
+        "s",
+        "s",
+        "s"
+      ]
+    }
+  },
+  "sigs": {
+    "m_blocks_teleporting": "ip",
+    "noteleport_level": "ip",
+    "goodpos_onscary": "iiip",
+    "goodpos": "iiipi",
+    "enexto": "ipiip",
+    "enexto_gpflags": "ipiipi",
+    "enexto_core": "ipiipi",
+    "tele_jump_ok": "iiiii",
+    "teleok": "iiii",
+    "teleds": "viii",
+    "collect_coords": "ipiiiip",
+    "safe_teleds": "ii",
+    "vault_tele": "v",
+    "teleport_pet": "ipi",
+    "tele_to_rnd_pet": "v",
+    "tele": "v",
+    "scrolltele": "vp",
+    "dotelecmd": "i",
+    "dotele": "ii",
+    "level_tele": "v",
+    "domagicportal": "vp",
+    "tele_trap": "vp",
+    "level_tele_trap": "vpi",
+    "rloc_pos_ok": "iiip",
+    "rloc_to_core": "vpiii",
+    "rloc_to": "vpii",
+    "rloc_to_flag": "vpiii",
+    "stairway_find_forwiz": "pii",
+    "rloc": "ipi",
+    "control_mon_tele": "ippii",
+    "mvault_tele": "vp",
+    "tele_restrict": "ip",
+    "mtele_trap": "vppi",
+    "mlevel_tele_trap": "ippii",
+    "rloco": "ip",
+    "random_teleport_level": "i",
+    "u_teleport_mon": "ipi"
+  }
+}

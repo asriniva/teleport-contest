@@ -28,23 +28,30 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--regex', action='store_true', help='Replace configured musl regex with the JS service too')
     parser.add_argument('--lua', action='store_true', help='Experimental JS Lua; implies --regex and omits liblua')
+    parser.add_argument('--base-root', type=Path, help='Read-only coherent checkout/build to snapshot instead of the active checkout')
+    parser.add_argument('--lua-snapshot', type=Path, help='Frozen Lua service/ABI overlay checkout (default: current checkout)')
     parser.add_argument('--output', type=Path, help='Distinct output directory (default depends on --regex)')
     args = parser.parse_args()
+    source_root = (args.base_root or ROOT).resolve()
+    lua_root = (args.lua_snapshot or ROOT).resolve()
+    for path in [source_root,lua_root]:
+        assert path == ROOT or ROOT in path.parents, 'Input checkout must be inside this workspace'
+    built = source_root / '.cache/wasm64-build'
     if args.lua:
         args.regex = True
     WORK = (args.output or ROOT / ('.cache/js-lua-game' if args.lua else '.cache/js-dependency-game-regex' if args.regex else '.cache/js-dependency-game')).resolve()
     assert WORK != ROOT and ROOT in WORK.parents, 'Output must be a separate directory inside the checkout'
     SNAPSHOT = WORK / 'snapshot'
     WORK.mkdir(parents=True, exist_ok=True)
-    manifest_path = ROOT / 'js/wasm/build.json'
+    manifest_path = source_root / 'js/wasm/build.json'
     original_manifest = manifest_path.read_bytes()
     active = json.loads(original_manifest)
     ports = active['javascriptTranslationUnits']
     for port in ports:
-        assert digest(ROOT / port['javascript']) == port['sha256'], f"Built JS has changed: {port['name']}"
-        assert digest(BUILT / 'tree' / port['source']) == port['preparedCSourceSha256'], f"Prepared source changed: {port['name']}"
+        assert digest(source_root / port['javascript']) == port['sha256'], f"Built JS has changed: {port['name']}"
+        assert digest(built / 'tree' / port['source']) == port['preparedCSourceSha256'], f"Prepared source changed: {port['name']}"
     for relative, expected in active.get('javascriptDependencies', {}).get('sourceSha256', {}).items():
-        assert digest(ROOT / relative) == expected, f'Built dependency/ABI source has changed: {relative}; wait for a consistent active build'
+        assert digest(source_root / relative) == expected, f'Built dependency/ABI source has changed: {relative}; wait for a consistent active build'
     inputs = {}
 
     def copy(source, destination):
@@ -57,44 +64,49 @@ def main():
 
     # Preserve the complete prepared source/object tree as evidence, never
     # invoke its makefiles. No hard links: another build may replace objects.
-    for source in sorted((BUILT / 'tree').rglob('*')):
+    for source in sorted((built / 'tree').rglob('*')):
         if source.is_file():
-            copy(source, SNAPSHOT / 'prepared' / source.relative_to(BUILT / 'tree'))
-    for source in sorted((BUILT / 'assets').rglob('*')):
+            copy(source, SNAPSHOT / 'prepared' / source.relative_to(built / 'tree'))
+    for source in sorted((built / 'assets').rglob('*')):
         if source.is_file():
-            copy(source, SNAPSHOT / 'assets' / source.relative_to(BUILT / 'assets'))
-    for source in sorted((ROOT / 'js').glob('*.js')):
+            copy(source, SNAPSHOT / 'assets' / source.relative_to(built / 'assets'))
+    for source in sorted((source_root / 'js').glob('*.js')):
         copy(source, SNAPSHOT / 'js' / source.name)
     for directory in ['ported', 'services']:
-        for source in sorted((ROOT / 'js' / directory).rglob('*')):
+        for source in sorted((source_root / 'js' / directory).rglob('*')):
             if source.is_file():
-                copy(source, SNAPSHOT / 'js' / directory / source.relative_to(ROOT / 'js' / directory))
+                copy(source, SNAPSHOT / 'js' / directory / source.relative_to(source_root / 'js' / directory))
     for port in ports:
-        copy(ROOT / port['library'], SNAPSHOT / port['library'])
+        copy(source_root / port['library'], SNAPSHOT / port['library'])
         for data in port.get('data', []):
-            copy(ROOT / data, SNAPSHOT / data)
+            copy(source_root / data, SNAPSHOT / data)
     for file in ['js/wasm/build.json', 'js/wasm/link-objects.txt', 'js/wasm/tu-layouts.json', 'js/wasm/drawing-constants.json',
-                 'scripts/build-js-dependency-game.py',
                  'nethack-c/wasm/runtime.js', 'nethack-c/wasm/compile-defines.json',
                  'nethack-c/wasm/dependency-library.js', 'nethack-c/wasm/dependency-bridge.c']:
-        copy(ROOT / file, SNAPSHOT / file)
-    copy(BUILT / 'liblua-wasm64.a', SNAPSHOT / 'liblua-wasm64.a')
+        copy(source_root / file, SNAPSHOT / file)
+    copy(ROOT / 'scripts/build-js-dependency-game.py', SNAPSHOT / 'scripts/build-js-dependency-game.py')
+    copy(built / 'liblua-wasm64.a', SNAPSHOT / 'liblua-wasm64.a')
     # Preserve additional ABI libraries selected by the actual built manifest,
     # including concurrent native-libc compatibility work. Their algorithms
     # and selection are independent of this Lua migration.
     extra_libraries = []
     for relative, expected in active.get('javascriptDependencies', {}).get('sourceSha256', {}).items():
         if relative.startswith('nethack-c/wasm/') and relative.endswith('-library.js') and relative != 'nethack-c/wasm/dependency-library.js':
-            assert digest(ROOT / relative) == expected, f'Built ABI library changed: {relative}'
-            copy(ROOT / relative, SNAPSHOT / relative)
+            assert digest(source_root / relative) == expected, f'Built ABI library changed: {relative}'
+            copy(source_root / relative, SNAPSHOT / relative)
             extra_libraries.append(relative)
     if args.lua:
+        for source in sorted((lua_root / 'js/services').rglob('*')):
+            if source.is_file() and (source.relative_to(lua_root / 'js/services').parts[0] == 'lua'
+                    or source.name.startswith(('lua-', 'wasm-lua-'))
+                    or source.name in ['c-float-format.js','timezone-info.js','native-timezone-data.js']):
+                copy(source, SNAPSHOT / 'js/services' / source.relative_to(lua_root / 'js/services'))
         for file in ['nethack-c/wasm/lua-bridge.c', 'nethack-c/wasm/lua-library.js']:
-            copy(ROOT / file, SNAPSHOT / file)
+            copy(lua_root / file, SNAPSHOT / file)
     # Retain the exact original executable for same-baseline performance tests.
-    assert digest(ROOT / 'js/wasm/nethack.wasm') == active['wasmSha256']
+    assert digest(source_root / 'js/wasm/nethack.wasm') == active['wasmSha256']
     for filename in ['nethack.mjs', 'nethack.wasm']:
-        copy(ROOT / 'js/wasm' / filename, SNAPSHOT / 'base-wasm' / filename)
+        copy(source_root / 'js/wasm' / filename, SNAPSHOT / 'base-wasm' / filename)
     assert manifest_path.read_bytes() == original_manifest, 'Active build changed while snapshotting; retry after completion'
     for relative, sha256 in inputs.items():
         assert digest(ROOT / relative) == sha256, f'Concurrent input edit: {relative}'
@@ -173,7 +185,8 @@ import layouts from './snapshot/js/wasm/tu-layouts.json' with { type: 'json' };
 export default options => createBase({ ...options, nethackPorted: createPortedRuntime(layouts), nethackDependencies: createWasmDependencyRuntime({regex:true}) });
 """)
     evidence = {
-        'status': 'experimental-not-active', 'baseBuild': active,
+        'status': 'experimental-not-active', 'baseRoot': str(source_root.relative_to(ROOT)),
+        'luaSnapshot': str(lua_root.relative_to(ROOT)) if args.lua else None, 'baseBuild': active,
         'javascriptTranslationUnits': len(ports), 'inputSha256': inputs,
         'linkedInputs': [str(path.relative_to(WORK)) for path in link_inputs] + ['dependency-bridge.o'] + [str(path.relative_to(WORK)) for path in lua_inputs],
         'removedLinkInputs': ['compress-service.o', 'libtinfo.a'] + (['liblua-wasm64.a'] if args.lua else []),

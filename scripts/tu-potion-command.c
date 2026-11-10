@@ -1,0 +1,11 @@
+/* Actual cmd.c dependencies; only unrelated controlled world symbols renamed. */
+#define set_occupation teleport_potion_dependency_set_occupation
+#define cmdq_add_ec teleport_potion_dependency_cmdq_add_ec
+#define cmdq_add_key teleport_potion_dependency_cmdq_add_key
+#define getdir teleport_potion_dependency_getdir
+#define movecmd teleport_potion_dependency_movecmd
+#define cmd_from_dir teleport_potion_dependency_cmd_from_dir
+#define dxdy_moveok teleport_potion_dependency_dxdy_moveok
+#define cmdq_peek teleport_potion_dependency_cmdq_peek
+#define yn_function teleport_potion_dependency_yn_function
+#include "cmd.c"

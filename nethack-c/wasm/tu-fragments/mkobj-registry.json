@@ -1,0 +1,31 @@
+{
+  "name": "mkobj",
+  "source": "src/mkobj.c",
+  "javascript": "js/ported/mkobj.js",
+  "library": "nethack-c/wasm/tu-libraries/mkobj.js",
+  "configuredFunctions": true,
+  "reference": "prepared",
+  "probeContext": false,
+  "probeExtraExports": [
+    "_teleport_mkobj_global",
+    "_teleport_mkobj_read",
+    "_teleport_mkobj_write",
+    "_teleport_mkobj_address",
+    "_teleport_mkobj_copy",
+    "_teleport_mkobj_literal_storage",
+    "_teleport_mkobj_literal_capacity"
+  ],
+  "adapterSources": [
+    "js/ported/mkobj-runtime.js",
+    "scripts/tu-mkobj-layout.h",
+    "nethack-c/wasm/tu-fragments/mkobj-abi-asserts.h",
+    "nethack-c/wasm/tu-fragments/mkobj-check-members.mjs",
+    "nethack-c/wasm/tu-fragments/mkobj-check-source.py",
+    "nethack-c/wasm/tu-fragments/mkobj-fixture-constants.json",
+    "nethack-c/wasm/tu-fragments/mkobj-provenance.json",
+    "nethack-c/wasm/tu-fragments/mkobj-schema.json",
+    "nethack-c/wasm/tu-fragments/mkobj-source-data.h",
+    "nethack-c/wasm/tu-fragments/mkobj-support.c",
+    "nethack-c/wasm/tu-fragments/mkobj-types.h"
+  ]
+}

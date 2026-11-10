@@ -1,0 +1,250 @@
+/* Original configured DECL reference, source-independent typed foreign consumer in separate TU. */
+#include "hack.h"
+#include <stdio.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <emscripten/stack.h>
+#include "tu-decl-layout.h"
+static char tracebuf[1024];
+void raw_printf(const char*fmt,...){va_list ap;va_start(ap,fmt);vsnprintf(tracebuf,sizeof tracebuf,fmt,ap);va_end(ap);}
+#ifndef HYBRID_DECL
+#include "../.cache/wasm64-build/tree/src/decl.c"
+void*teleport_decl_storage(int i){switch(i){
+case 0:return (void*)&nhcb_name;
+case 1:return (void*)&nhcb_counts;
+case 2:return (void*)&c_color_names;
+case 3:return (void*)&c_obj_colors;
+case 4:return (void*)&c_common_strings;
+case 5:return (void*)&disclosure_options;
+case 6:return (void*)&emptystr;
+case 7:return (void*)&flags;
+case 8:return (void*)&hexdd;
+case 9:return (void*)&xdir;
+case 10:return (void*)&ydir;
+case 11:return (void*)&zdir;
+case 12:return (void*)&dirs_ord;
+case 13:return (void*)&has_strong_rngseed;
+case 14:return (void*)&head_engr;
+case 15:return (void*)&iflags;
+case 16:return (void*)&a11y;
+case 17:return (void*)&materialnm;
+case 18:return (void*)&quitchars;
+case 19:return (void*)&shield_static;
+case 20:return (void*)&u;
+case 21:return (void*)&ubirthday;
+case 22:return (void*)&urealtime;
+case 23:return (void*)&uwep;
+case 24:return (void*)&uarm;
+case 25:return (void*)&uswapwep;
+case 26:return (void*)&uquiver;
+case 27:return (void*)&uarmu;
+case 28:return (void*)&uskin;
+case 29:return (void*)&uarmc;
+case 30:return (void*)&uarmh;
+case 31:return (void*)&uarms;
+case 32:return (void*)&uarmg;
+case 33:return (void*)&uarmf;
+case 34:return (void*)&uamul;
+case 35:return (void*)&uright;
+case 36:return (void*)&uleft;
+case 37:return (void*)&ublindf;
+case 38:return (void*)&uchain;
+case 39:return (void*)&uball;
+case 40:return (void*)&vowels;
+case 41:return (void*)&WIN_MESSAGE;
+case 42:return (void*)&WIN_STATUS;
+case 43:return (void*)&WIN_MAP;
+case 44:return (void*)&WIN_INVEN;
+case 45:return (void*)&ynchars;
+case 46:return (void*)&ynqchars;
+case 47:return (void*)&ynaqchars;
+case 48:return (void*)&ynNaqchars;
+case 49:return (void*)&rightleftchars;
+case 50:return (void*)&hidespinchars;
+case 51:return (void*)&yn_number;
+case 52:return (void*)&ARGV0;
+case 53:return (void*)&urole_init_data;
+case 54:return (void*)&urace_init_data;
+case 55:return (void*)&disp;
+case 56:return (void*)&g_init_a;
+case 57:return (void*)&g_init_b;
+case 58:return (void*)&g_init_c;
+case 59:return (void*)&g_init_d;
+case 60:return (void*)&g_init_e;
+case 61:return (void*)&g_init_f;
+case 62:return (void*)&g_init_g;
+case 63:return (void*)&g_init_h;
+case 64:return (void*)&g_init_i;
+case 65:return (void*)&g_init_j;
+case 66:return (void*)&g_init_k;
+case 67:return (void*)&g_init_l;
+case 68:return (void*)&g_init_m;
+case 69:return (void*)&g_init_n;
+case 70:return (void*)&g_init_o;
+case 71:return (void*)&g_init_p;
+case 72:return (void*)&g_init_q;
+case 73:return (void*)&g_init_r;
+case 74:return (void*)&g_init_s;
+case 75:return (void*)&g_init_t;
+case 76:return (void*)&g_init_u;
+case 77:return (void*)&g_init_v;
+case 78:return (void*)&g_init_w;
+case 79:return (void*)&g_init_x;
+case 80:return (void*)&g_init_y;
+case 81:return (void*)&g_init_z;
+case 82:return (void*)&init_svb;
+case 83:return (void*)&init_svc;
+case 84:return (void*)&init_svd;
+case 85:return (void*)&init_sve;
+case 86:return (void*)&init_svh;
+case 87:return (void*)&init_svi;
+case 88:return (void*)&init_svk;
+case 89:return (void*)&init_svl;
+case 90:return (void*)&init_svm;
+case 91:return (void*)&init_svn;
+case 92:return (void*)&init_svo;
+case 93:return (void*)&init_svp;
+case 94:return (void*)&init_svq;
+case 95:return (void*)&init_svr;
+case 96:return (void*)&init_svs;
+case 97:return (void*)&init_svt;
+case 98:return (void*)&init_svu;
+case 99:return (void*)&init_svx;
+case 100:return (void*)&init_svw;
+case 101:return (void*)&init_svy;
+case 102:return (void*)&init_program_state;
+case 103:return (void*)&ga;
+case 104:return (void*)&gb;
+case 105:return (void*)&gc;
+case 106:return (void*)&gd;
+case 107:return (void*)&ge;
+case 108:return (void*)&gf;
+case 109:return (void*)&gg;
+case 110:return (void*)&gh;
+case 111:return (void*)&gi;
+case 112:return (void*)&gj;
+case 113:return (void*)&gk;
+case 114:return (void*)&gl;
+case 115:return (void*)&gm;
+case 116:return (void*)&gn;
+case 117:return (void*)&go;
+case 118:return (void*)&gp;
+case 119:return (void*)&gq;
+case 120:return (void*)&gr;
+case 121:return (void*)&gs;
+case 122:return (void*)&gt;
+case 123:return (void*)&gu;
+case 124:return (void*)&gv;
+case 125:return (void*)&gw;
+case 126:return (void*)&gx;
+case 127:return (void*)&gy;
+case 128:return (void*)&gz;
+case 129:return (void*)&svb;
+case 130:return (void*)&svc;
+case 131:return (void*)&svd;
+case 132:return (void*)&sve;
+case 133:return (void*)&svh;
+case 134:return (void*)&svi;
+case 135:return (void*)&svk;
+case 136:return (void*)&svl;
+case 137:return (void*)&svm;
+case 138:return (void*)&svn;
+case 139:return (void*)&svo;
+case 140:return (void*)&svp;
+case 141:return (void*)&svq;
+case 142:return (void*)&svr;
+case 143:return (void*)&svs;
+case 144:return (void*)&svt;
+case 145:return (void*)&svu;
+case 146:return (void*)&svw;
+case 147:return (void*)&svx;
+case 148:return (void*)&svy;
+case 149:return (void*)&program_state;
+case 150:return (void*)&cg;
+case 151:return (void*)&hands_obj;
+default:abort();}}
+void*teleport_decl_public_address(int i){return teleport_decl_storage(i);}
+#else
+extern void*teleport_decl_storage(int);
+extern void*teleport_decl_public_address(int);
+#endif
+uintptr_t probe_stack(void){return emscripten_stack_get_current();}
+const char*probe_trace(void){return tracebuf;}
+void probe_action(int n){switch(n){case 0:program_state_init();break;case 1:decl_globals_init();break;case 2:sa_victual(NULL);break;case 3:sa_victual(&svc.context.victual);break;default:abort();}}
+void probe_dirty_reset(int byte){
+memset(&flags,byte,sizeof flags);
+memset(&iflags,byte,sizeof iflags);
+memset(&a11y,byte,sizeof a11y);
+memset(&u,byte,sizeof u);
+memset(&ubirthday,byte,sizeof ubirthday);
+memset(&urealtime,byte,sizeof urealtime);
+memset(&disp,byte,sizeof disp);
+memset(&ga,byte,sizeof ga);
+memset(&gb,byte,sizeof gb);
+memset(&gc,byte,sizeof gc);
+memset(&gd,byte,sizeof gd);
+memset(&ge,byte,sizeof ge);
+memset(&gf,byte,sizeof gf);
+memset(&gg,byte,sizeof gg);
+memset(&gh,byte,sizeof gh);
+memset(&gi,byte,sizeof gi);
+memset(&gj,byte,sizeof gj);
+memset(&gk,byte,sizeof gk);
+memset(&gl,byte,sizeof gl);
+memset(&gm,byte,sizeof gm);
+memset(&gn,byte,sizeof gn);
+memset(&go,byte,sizeof go);
+memset(&gp,byte,sizeof gp);
+memset(&gq,byte,sizeof gq);
+memset(&gr,byte,sizeof gr);
+memset(&gs,byte,sizeof gs);
+memset(&gt,byte,sizeof gt);
+memset(&gu,byte,sizeof gu);
+memset(&gv,byte,sizeof gv);
+memset(&gw,byte,sizeof gw);
+memset(&gx,byte,sizeof gx);
+memset(&gy,byte,sizeof gy);
+memset(&gz,byte,sizeof gz);
+memset(&svb,byte,sizeof svb);
+memset(&svc,byte,sizeof svc);
+memset(&svd,byte,sizeof svd);
+memset(&sve,byte,sizeof sve);
+memset(&svh,byte,sizeof svh);
+memset(&svi,byte,sizeof svi);
+memset(&svk,byte,sizeof svk);
+memset(&svl,byte,sizeof svl);
+memset(&svm,byte,sizeof svm);
+memset(&svn,byte,sizeof svn);
+memset(&svo,byte,sizeof svo);
+memset(&svp,byte,sizeof svp);
+memset(&svq,byte,sizeof svq);
+memset(&svr,byte,sizeof svr);
+memset(&svs,byte,sizeof svs);
+memset(&svt,byte,sizeof svt);
+memset(&svu,byte,sizeof svu);
+memset(&svw,byte,sizeof svw);
+memset(&svx,byte,sizeof svx);
+memset(&svy,byte,sizeof svy);
+uwep=&hands_obj;
+uarm=&hands_obj;
+uswapwep=&hands_obj;
+uquiver=&hands_obj;
+uarmu=&hands_obj;
+uskin=&hands_obj;
+uarmc=&hands_obj;
+uarmh=&hands_obj;
+uarms=&hands_obj;
+uarmg=&hands_obj;
+uarmf=&hands_obj;
+uamul=&hands_obj;
+uright=&hands_obj;
+uleft=&hands_obj;
+ublindf=&hands_obj;
+uchain=&hands_obj;
+uball=&hands_obj;
+WIN_MESSAGE=10;WIN_STATUS=11;WIN_MAP=12;WIN_INVEN=13;
+}
+void probe_retained(int n){nhcb_counts[0]=n;nhcb_counts[3]=-n;yn_number=100000L+n;has_strong_rngseed=(n&1);head_engr=(struct engr*)&hands_obj;ARGV0="foreign argv";emptystr[0]=(char)(n%26+65);hands_obj.otyp=n;program_state.gameover=n;}
+void probe_dirty_program(int n){memset(&program_state,n,sizeof program_state);}
+static void*growth;void probe_grow(void){growth=malloc(40*1024*1024);if(!growth)abort();*(volatile unsigned char*)growth=1;}
+int probe_links(int n){switch(n){case 0:return gv.valuables[0].list==gg.gems;case 1:return gv.valuables[0].size==SIZE(gg.gems);case 2:return gv.valuables[1].list==ga.amulets;case 3:return gv.valuables[1].size==SIZE(ga.amulets);case 4:return gv.valuables[2].list==NULL&&gv.valuables[2].size==0;case 5:return gs.subrooms==&svr.rooms[MAXNROFROOMS+1];case 6:return &hands_obj!=&cg.zeroobj;default:return 0;}}

@@ -1,0 +1,21 @@
+{
+  "js/ported/getpos.js": "36bb32ec0dc3c1f97e458c3ae07240a9395ae4253e5a02e31a2231a120d675a4",
+  "js/ported/getpos-runtime.js": "9d02e0c44a60a9cd4026f2d54d54ce33e7e6e7b10038537ff93ca47600aaa16c",
+  "nethack-c/wasm/tu-libraries/getpos.js": "25c628e36e33d0048f74e2ec3d672fd78fdb67b395e3d464bfa2e28855afa475",
+  "nethack-c/wasm/tu-fragments/getpos-support.inc": "8f4999644f77b7fdd24ed790c0dbf3bd6e59dcdb86a34fac5a35fe40311827a1",
+  "scripts/tu-getpos-layout.h": "8c37016cd6dd0a002dbf988debd395a86d31102fb7adb1c69e8ba047ed1357bb",
+  "scripts/tu-getpos-probe.c": "0c32f099fc19fcc31c19771bca1094a1894526362ad24f9c778700dfc951108e",
+  "scripts/test-tu-getpos.mjs": "a8b2c6bc0852e705bf8909ebad49446834519b9ac68b9599e56af70a508a73b1",
+  "nethack-c/wasm/tu-fragments/getpos-probe-dependencies.c": "c14f7c71627562ed3d5587e3e0922beb80bde34ba2e24f93bcfee2cbfb89c542",
+  "nethack-c/wasm/tu-fragments/getpos-metadata.py": "4458f8f91dab6fe25e88d390d880ac027f2844175350ce5dbd0c11c008ee8e64",
+  "nethack-c/wasm/tu-fragments/getpos-runtime-method.inc": "693ad9ba457717b357f70932280eac14654386f5f6a6153f5ddcedfd3d09c0a3",
+  "nethack-c/upstream/src/getpos.c": "084d58880158ce5b538bec6e334a5c21b8584adda7d39b0393e6502d16b7c646",
+  "nethack-c/upstream/src/glyphs.c": "bb6315507e7b88790b4a5556b3c95003b554cb797c6acd06fe26ac389c710654",
+  ".cache/wasm64-build/tree/src/hacklib.c": "78e81aedddb93a6bc8d966f3f586e689ae05c335d34dba36af6abb95700d5ec4",
+  ".cache/wasm64-build/tree/include/hack.h": "5743a1707ce05e7a9a90e61657fde0ac066d48591f5d4fe80b1bdf959d94bce9",
+  ".cache/wasm64-build/tree/include/extern.h": "385f7478000f79ff137f2b6be533eef7b518b47a00b0d8c7e35ea52c877dec2e",
+  ".cache/wasm64-build/tree/include/display.h": "36e9f838d3298d047e0605abcf2deb627eb79c18aa72f770d5289c34f3692b4c",
+  ".cache/wasm64-build/tree/include/global.h": "8ff55a3c6ee5cc18d00f1982146080d81e9e3dc9e369ab1ffc79890c07b8a8d0",
+  ".cache/wasm64-build/tree/include/flag.h": "bb28a3f835f3b38119f95311d76b535ef5053f3fffa42372d9f7b1c4c917806f",
+  "nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2"
+}

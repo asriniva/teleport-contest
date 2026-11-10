@@ -1,0 +1,1133 @@
+{
+  "schema": {
+    "flag": {
+      "ctype": "struct flag",
+      "fields": [
+        {
+          "name": "debug",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_flags": {
+      "ctype": "struct instance_flags",
+      "fields": [
+        {
+          "name": "window_inited",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_l": {
+      "ctype": "struct instance_globals_l",
+      "fields": [
+        {
+          "name": "locknum",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "lock",
+          "ctype": "char[46]",
+          "canonical": "char[46]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_h": {
+      "ctype": "struct instance_globals_saved_h",
+      "fields": [
+        {
+          "name": "hackpid",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_p": {
+      "ctype": "struct instance_globals_saved_p",
+      "fields": [
+        {
+          "name": "plname",
+          "ctype": "char[32]",
+          "canonical": "char[32]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "sinfo": {
+      "ctype": "struct sinfo",
+      "fields": [
+        {
+          "name": "preserve_locks",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "stat": {
+      "ctype": "struct stat",
+      "fields": [
+        {
+          "name": "st_dev",
+          "ctype": "dev_t",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_mode",
+          "ctype": "mode_t",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_nlink",
+          "ctype": "nlink_t",
+          "canonical": "unsigned long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_uid",
+          "ctype": "uid_t",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_gid",
+          "ctype": "gid_t",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_rdev",
+          "ctype": "dev_t",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_size",
+          "ctype": "off_t",
+          "canonical": "long long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_blksize",
+          "ctype": "blksize_t",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_blocks",
+          "ctype": "blkcnt_t",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_atim",
+          "ctype": "struct timespec",
+          "canonical": "struct timespec",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_mtim",
+          "ctype": "struct timespec",
+          "canonical": "struct timespec",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_ctim",
+          "ctype": "struct timespec",
+          "canonical": "struct timespec",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "st_ino",
+          "ctype": "ino_t",
+          "canonical": "unsigned long long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "sysopt_s": {
+      "ctype": "struct sysopt_s",
+      "fields": [
+        {
+          "name": "shellers",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "timespec": {
+      "ctype": "struct timespec",
+      "fields": [
+        {
+          "name": "tv_sec",
+          "ctype": "time_t",
+          "canonical": "long long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "tv_nsec",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "window_procs": {
+      "ctype": "struct window_procs",
+      "fields": [
+        {
+          "name": "name",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_exit_nhwindows",
+          "ctype": "void (*)(const char *)",
+          "canonical": "void (*)( char *)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_suspend_nhwindows",
+          "ctype": "void (*)(const char *)",
+          "canonical": "void (*)( char *)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_resume_nhwindows",
+          "ctype": "void (*)(void)",
+          "canonical": "void (*)(void)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_wait_synch",
+          "ctype": "void (*)(void)",
+          "canonical": "void (*)(void)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_raw_print",
+          "ctype": "void (*)(const char *)",
+          "canonical": "void (*)( char *)",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    }
+  },
+  "globals": [
+    {
+      "name": "program_state",
+      "ctype": "struct sinfo",
+      "canonical": "struct sinfo"
+    },
+    {
+      "name": "gl",
+      "ctype": "struct instance_globals_l",
+      "canonical": "struct instance_globals_l"
+    },
+    {
+      "name": "windowprocs",
+      "ctype": "volatile struct window_procs",
+      "canonical": "struct window_procs"
+    },
+    {
+      "name": "svp",
+      "ctype": "struct instance_globals_saved_p",
+      "canonical": "struct instance_globals_saved_p"
+    },
+    {
+      "name": "iflags",
+      "ctype": "struct instance_flags",
+      "canonical": "struct instance_flags"
+    },
+    {
+      "name": "ynchars",
+      "ctype": "const char[]",
+      "canonical": "char[]"
+    },
+    {
+      "name": "stdout",
+      "ctype": "FILE *const",
+      "canonical": "struct _IO_FILE *"
+    },
+    {
+      "name": "svh",
+      "ctype": "struct instance_globals_saved_h",
+      "canonical": "struct instance_globals_saved_h"
+    },
+    {
+      "name": "sysopt",
+      "ctype": "struct sysopt_s",
+      "canonical": "struct sysopt_s"
+    },
+    {
+      "name": "flags",
+      "ctype": "struct flag",
+      "canonical": "struct flag"
+    }
+  ],
+  "enums": [],
+  "layoutKeys": [
+    "pointerSize",
+    "longSize",
+    "intSize",
+    "charSigned",
+    "littleEndian",
+    "size:struct flag",
+    "size:struct instance_flags",
+    "size:struct instance_globals_l",
+    "size:struct instance_globals_saved_h",
+    "size:struct instance_globals_saved_p",
+    "size:struct sinfo",
+    "size:struct stat",
+    "size:struct sysopt_s",
+    "size:struct timespec",
+    "size:struct window_procs"
+  ],
+  "sizes": [
+    "struct flag",
+    "struct instance_flags",
+    "struct instance_globals_l",
+    "struct instance_globals_saved_h",
+    "struct instance_globals_saved_p",
+    "struct sinfo",
+    "struct stat",
+    "struct sysopt_s",
+    "struct timespec",
+    "struct window_procs"
+  ],
+  "dependencies": {
+    "fstat": {
+      "type": "int (int, struct stat *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "struct stat *",
+          "canonical": "struct stat *"
+        }
+      ]
+    },
+    "time": {
+      "type": "time_t (time_t *)",
+      "ret": "long long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "time_t *",
+          "canonical": "long long *"
+        }
+      ]
+    },
+    "read": {
+      "type": "ssize_t (int, void *, size_t)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "void *",
+          "canonical": "void *"
+        },
+        {
+          "name": "a2",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        }
+      ]
+    },
+    "set_levelfile_name": {
+      "type": "void (char *, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "fqname": {
+      "type": "const char *(const char *, int, int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "unlink": {
+      "type": "int (const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "strcmp": {
+      "type": "int (const char *, const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "isatty": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "getenv": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "lock_file": {
+      "type": "boolean (const char *, int, int)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "getuid": {
+      "type": "uid_t (void)",
+      "ret": "unsigned int",
+      "params": []
+    },
+    "__errno_location": {
+      "type": "int *(void)",
+      "ret": "int *",
+      "params": []
+    },
+    "perror": {
+      "type": "void (const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "unlock_file": {
+      "type": "void (const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "close": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "yn_function": {
+      "type": "char (const char *, const char *, char, boolean)",
+      "ret": "char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "char",
+          "canonical": "char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "fflush": {
+      "type": "int (FILE *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "FILE *",
+          "canonical": "struct _IO_FILE *"
+        }
+      ]
+    },
+    "getchar": {
+      "type": "int (void)",
+      "ret": "int",
+      "params": []
+    },
+    "putchar": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "creat": {
+      "type": "int (const char *, mode_t)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "mode_t",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "write": {
+      "type": "ssize_t (int, const void *, size_t)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "const void *",
+          "canonical": "void *"
+        },
+        {
+          "name": "a2",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        }
+      ]
+    },
+    "lowc": {
+      "type": "char (char)",
+      "ret": "char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char",
+          "canonical": "char"
+        }
+      ]
+    },
+    "strchr": {
+      "type": "char *(const char *, int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "delete_levelfile": {
+      "type": "void (int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "nh_terminate": {
+      "type": "void (int) __attribute__((noreturn))",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "check_user_string": {
+      "type": "boolean (const char *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "exit": {
+      "type": "void (int) __attribute__((noreturn))",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "fork": {
+      "type": "pid_t (void)",
+      "ret": "int",
+      "params": []
+    },
+    "getgid": {
+      "type": "gid_t (void)",
+      "ret": "unsigned int",
+      "params": []
+    },
+    "setgid": {
+      "type": "int (gid_t)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "gid_t",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "setuid": {
+      "type": "int (uid_t)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "uid_t",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "chdir": {
+      "type": "int (const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "teleport_native_signal": {
+      "type": "void (*(int, void (*)(int)))(int)",
+      "ret": "void (*)(int)",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "void (*)(int)",
+          "canonical": "void (*)(int)"
+        }
+      ],
+      "wrapper": "teleport_unixunix_dep_signal"
+    },
+    "wait": {
+      "type": "pid_t (int *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int *",
+          "canonical": "int *"
+        }
+      ]
+    },
+    "stat": {
+      "type": "int (const char *restrict, struct stat *restrict)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "struct stat *restrict",
+          "canonical": "struct stat *"
+        }
+      ]
+    }
+  },
+  "variadics": [
+    {
+      "site": 0,
+      "function": "error",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "getlock"
+    },
+    {
+      "site": 1,
+      "function": "error",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "getlock"
+    },
+    {
+      "site": 2,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "unsigned int",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "getlock"
+    },
+    {
+      "site": 3,
+      "function": "open",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "int (const char *, int, ...)",
+      "owner": "getlock"
+    },
+    {
+      "site": 4,
+      "function": "error",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "getlock"
+    },
+    {
+      "site": 5,
+      "function": "error",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "getlock"
+    },
+    {
+      "site": 6,
+      "function": "open",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "int (const char *, int, ...)",
+      "owner": "getlock"
+    },
+    {
+      "site": 7,
+      "function": "error",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "getlock"
+    },
+    {
+      "site": 8,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "getlock"
+    },
+    {
+      "site": 9,
+      "function": "error",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "getlock"
+    },
+    {
+      "site": 10,
+      "function": "error",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "getlock"
+    },
+    {
+      "site": 11,
+      "function": "error",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "getlock"
+    },
+    {
+      "site": 12,
+      "function": "error",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "getlock"
+    },
+    {
+      "site": 13,
+      "function": "error",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "getlock"
+    },
+    {
+      "site": 14,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "ask_about_panic_save"
+    },
+    {
+      "site": 15,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "ask_about_panic_save"
+    },
+    {
+      "site": 16,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "ask_about_panic_save"
+    },
+    {
+      "site": 17,
+      "function": "Norep",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "dosh"
+    },
+    {
+      "site": 18,
+      "function": "execl",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (const char *, const char *, ...)",
+      "owner": "dosh"
+    },
+    {
+      "site": 19,
+      "function": "execl",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (const char *, const char *, ...)",
+      "owner": "dosh"
+    },
+    {
+      "site": 20,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "child"
+    }
+  ],
+  "statics": [
+    {
+      "name": "buf",
+      "sourceName": "buf",
+      "owner": null,
+      "public": false,
+      "sourceType": "struct stat",
+      "type": "struct stat",
+      "size": "C.sizes[\"struct stat\"]",
+      "js": "0"
+    },
+    {
+      "name": "getlock.destroy_old_game_prompt",
+      "sourceName": "destroy_old_game_prompt",
+      "owner": "getlock",
+      "public": false,
+      "sourceType": "const char[72]",
+      "type": "char[72]",
+      "size": "(1*72)",
+      "js": "C.literal(\"There is already a game in progress under your name.  Destroy old game?\")"
+    },
+    {
+      "name": "ask_about_panic_save.Instead_prompt",
+      "sourceName": "Instead_prompt",
+      "owner": "ask_about_panic_save",
+      "public": false,
+      "sourceType": "const char[26]",
+      "type": "char[26]",
+      "size": "(1*26)",
+      "js": "C.literal(\"Start a new game instead?\")"
+    }
+  ],
+  "literals": [
+    "",
+    "\n%s [yn] ",
+    "%s",
+    "%s [yn] (n) ",
+    "%u%s",
+    "/bin/sh",
+    "Cannot open %s",
+    "Couldn't destroy old game.",
+    "Fork failed.  Try again.",
+    "HOME",
+    "It might be recoverable with demi-divine intervention.",
+    "NOMUX_MARKERS",
+    "SHELL",
+    "Start a new game instead?",
+    "There is already a game in progress under your name.  Destroy old game?",
+    "There is no regular save file but there is a panic one.",
+    "Too many hacks running now.",
+    "Unavailable command '!'.",
+    "You must play from a terminal.",
+    "cannot close lock (%s)",
+    "cannot creat lock file (%s).",
+    "cannot write lock (%s)",
+    "perm",
+    "sh",
+    "sh: cannot execute.",
+    "tty",
+    "yn\u001bq",
+    "ynq\n"
+  ],
+  "literalBytes": 542,
+  "callbackCalls": [
+    {
+      "site": 0,
+      "type": "void (*)(void)",
+      "types": [],
+      "ret": "void",
+      "owner": "getlock"
+    },
+    {
+      "site": 1,
+      "type": "void (*)(const char *)",
+      "types": [
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "ask_about_panic_save"
+    },
+    {
+      "site": 2,
+      "type": "void (*)(const char *)",
+      "types": [
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "dosh"
+    },
+    {
+      "site": 3,
+      "type": "void (*)(const char *)",
+      "types": [
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "child"
+    },
+    {
+      "site": 4,
+      "type": "void (*)(const char *)",
+      "types": [
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "child"
+    },
+    {
+      "site": 5,
+      "type": "void (*)(void)",
+      "types": [],
+      "ret": "void",
+      "owner": "child"
+    },
+    {
+      "site": 6,
+      "type": "void (*)(void)",
+      "types": [],
+      "ret": "void",
+      "owner": "child"
+    }
+  ],
+  "dynamicVariadics": [],
+  "nativeFunctionPointers": [
+    "done1"
+  ],
+  "ownedFunctionPointers": [],
+  "functionTypes": {
+    "veryold": "int (int)",
+    "eraseoldlocks": "int (void)",
+    "getlock": "void (void)",
+    "ask_about_panic_save": "void (void)",
+    "regularize": "void (char *)",
+    "dosh": "int (void)",
+    "child": "int (int)",
+    "file_exists": "boolean (const char *)"
+  }
+}

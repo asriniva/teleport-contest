@@ -9,11 +9,17 @@ calls**, **1,483/1,483 animation frames**, no runtime errors. The remaining
 Wasm engine is **not an eligible contest submission**. See the
 [current status and limitations](UPSTREAM_DIVERGENCES.md#active-frozen-infrastructure-restoration-fr01fr04).
 
-**Dependency migration:** the regular build now uses JavaScript compression,
-terminfo and POSIX regex, with all 44 recordings still exact. Lua and the
-remaining C/Wasm runtime are still required. An independent JavaScript memory,
-calendar and regular-file runtime is tested separately; the JavaScript Lua
-implementation is partial and is not selected by the game. See
+**Dependency migration:** JavaScript compression, terminfo, POSIX regex and
+configured Lua now pass the full dependency suite. The frozen liblua-free game
+passes all44 recordings,378 original level loads and wizard OS/debug probes
+exactly. The normal builder now selects JavaScript Lua; `--c-lua` retains the
+reference option. The accepted 110-TU game also passes all44 recordings and full
+integration under the original30/45-second limits. All683 declared artifact/source
+hashes and the same1,322 inputs for both gates are verified; scorer metadata was
+included before testing. Its298 literal local module dependencies resolve in the
+copied archive. The earlier98-TU acceptance remains separate historical evidence.
+Later staged ports require fresh game gates. Remaining game
+C/Wasm memory and callback transport still needs migration. See
 [dependency/runtime scope](nethack-c/wasm/README.md#javascript-dependencies-and-runtime-migration).
 
 **Native parity tests:** all 53 existing suites pass directly against host-native

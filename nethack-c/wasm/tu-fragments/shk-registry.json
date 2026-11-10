@@ -1,0 +1,25 @@
+{
+  "name": "shk",
+  "source": "src/shk.c",
+  "javascript": "js/ported/shk.js",
+  "library": "nethack-c/wasm/tu-libraries/shk.js",
+  "configuredFunctions": true,
+  "reference": "pristine",
+  "probeContext": false,
+  "adapterSources": [
+    "js/ported/shk-runtime.js",
+    "scripts/tu-shk-layout.h",
+    "nethack-c/wasm/tu-fragments/shk-types.h",
+    "nethack-c/wasm/tu-fragments/shk-support.c",
+    "nethack-c/wasm/tu-fragments/shk-schema.json",
+    "nethack-c/wasm/tu-fragments/shk-source-ast.json",
+    "nethack-c/wasm/tu-fragments/shk-source-inventory.json",
+    "nethack-c/wasm/tu-fragments/shk-source-check.py",
+    "nethack-c/wasm/tu-fragments/shk-check-metadata.mjs"
+  ],
+  "nativeStorageSources": [
+    {
+      "source": "nethack-c/wasm/tu-fragments/shk-support.c"
+    }
+  ]
+}

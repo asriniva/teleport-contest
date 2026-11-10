@@ -21,6 +21,10 @@ PIN = '16ff59115315917b93185d026aeefea06db9b0f4'
 MAKE = shutil.which('gmake') or shutil.which('make')
 JOBS = str(min(os.cpu_count() or 2, 8))
 C_DEPENDENCIES = '--c-dependencies' in sys.argv
+if '--js-lua' in sys.argv and '--c-lua' in sys.argv:
+    raise SystemExit('Choose only one of --js-lua and --c-lua')
+JS_LUA = '--c-lua' not in sys.argv and (not C_DEPENDENCIES or '--js-lua' in sys.argv)
+EMSCRIPTEN_ONLY_PROBES = '--emscripten-only-probes' in sys.argv
 DEPENDENCY_BACKEND = 'c' if C_DEPENDENCIES else 'javascript'
 
 
@@ -133,14 +137,22 @@ if not native_abi_stamp.exists() or native_abi_stamp.read_text().strip()!=native
 emcc = SDK / 'upstream/emscripten/emcc'
 emar = SDK / 'upstream/emscripten/emar'
 lua = TREE / 'lib/lua-5.4.8/src'
-run([MAKE, 'clean'], cwd=lua)
-run([MAKE, '-j' + JOBS, 'a', f'CC={emcc}', f'AR={emar} rcu', f'RANLIB={SDK}/upstream/emscripten/emranlib', 'MYCFLAGS=-O2 -sMEMORY64=1', 'SYSCFLAGS=-DLUA_USE_POSIX'], cwd=lua)
 wasm_lua = BUILD / 'liblua-wasm64.a'
-shutil.copy2(lua / 'liblua.a', wasm_lua)
+# Original-C quest fixtures need an independent Lua archive even when the
+# selected game uses JavaScript Lua. It is not a game link input in that mode.
+if not JS_LUA or not wasm_lua.exists():
+    run([MAKE, 'clean'], cwd=lua)
+    run([MAKE, '-j' + JOBS, 'a', f'CC={emcc}', f'AR={emar} rcu', f'RANLIB={SDK}/upstream/emscripten/emranlib', 'MYCFLAGS=-O2 -sMEMORY64=1', 'SYSCFLAGS=-DLUA_USE_POSIX'], cwd=lua)
+    shutil.copy2(lua / 'liblua.a', wasm_lua)
 (TREE / 'src/wasm').mkdir(exist_ok=True)
 bridge = TREE / 'src/wasm/bridge.o'
 run([emcc, '-O2', '-sMEMORY64=1', '-c', ROOT / 'nethack-c/wasm/bridge.c', '-o', bridge])
 dependency_objects = []
+if JS_LUA:
+    lua_bridge = TREE / 'src/wasm/lua-bridge.o'
+    run([emcc, '-O2', '-g', '-std=gnu17', '-sMEMORY64=1', '-I' + str(lua),
+         '-c', ROOT / 'nethack-c/wasm/lua-bridge.c', '-o', lua_bridge])
+    dependency_objects.append(lua_bridge)
 os.environ['TELEPORT_JS_REGEX'] = '0' if C_DEPENDENCIES else '1'
 if C_DEPENDENCIES:
     codec = TREE / 'src/wasm/compress-service.o'
@@ -161,16 +173,28 @@ dependency_mode = BUILD / 'dependency-mode.js'
 link_flags = shlex.join([str(bridge), *map(str, dependency_objects), str(tu_support), '-O2', '-g', '-sMEMORY64=1', '-sMODULARIZE=1', '-sEXPORT_ES6=1', '-sENVIRONMENT=node,web', '-sINVOKE_RUN=0', '-sEXIT_RUNTIME=1', '-sALLOW_MEMORY_GROWTH=1', '-sSTACK_SIZE=4194304', '-sEXPORTED_RUNTIME_METHODS=FS,ENV,callMain', '--emit-symbol-map', '--post-js', str(ROOT / 'nethack-c/wasm/runtime.js'), '--post-js', str(dependency_mode), '--embed-file', str(assets) + '@/nethack'])
 if not C_DEPENDENCIES:
     link_flags += ' --js-library ' + shlex.quote(str(ROOT / 'nethack-c/wasm/dependency-library.js'))
+if JS_LUA:
+    link_flags += ' --js-library ' + shlex.quote(str(ROOT / 'nethack-c/wasm/lua-library.js'))
 link_flags += ' --js-library ' + shlex.quote(str(ROOT / 'nethack-c/wasm/native-libc-library.js'))
 if 'wasm/hacklib.a: wasm/hacklib.o' not in (TREE / 'src/Makefile').read_text():
     with (TREE / 'src/Makefile').open('a') as f:
         f.write('\nwasm/hacklib.a: wasm/hacklib.o\n\t' + str(emar) + ' rcs $@ $<\n')
 # Sequentially gated whole-TU ports. The excluded object has no C fallback.
 ports = json.loads((ROOT / 'nethack-c/wasm/tu-ports.json').read_text())
+# Keep JS-initialized const storage separate from every C reader. Otherwise
+# frontend optimization can fold zero fields before JavaScript initialization.
+for port in ports:
+    for storage in port.get('nativeStorageSources', []):
+        assert not any(flag.startswith('-flto') for flag in shlex.split(flags)), 'JS-initialized const backing requires separate non-LTO storage'
+        storage_object = TREE / 'src/wasm' / (Path(storage['source']).stem + '.o')
+        run([emcc, *shlex.split(flags), *['-D' + define for define in storage.get('defines', [])],
+             '-I' + str(TREE / 'include'), '-c', ROOT / storage['source'], '-o', storage_object])
+        link_flags += ' ' + shlex.quote(str(storage_object))
 regex_transport = ('ported-posixregex-direct-js' if any(port['name'] == 'posixregex' for port in ports)
                    else 'compiled-libc' if C_DEPENDENCIES else 'wasm-libc-js-bridge')
 dependency_mode.write_text("Module['nethackDependencyBackend'] = " + json.dumps(DEPENDENCY_BACKEND)
-                           + ";\nModule['nethackRegexTransport'] = " + json.dumps(regex_transport) + ';\n')
+                           + ";\nModule['nethackRegexTransport'] = " + json.dumps(regex_transport)
+                           + ";\nModule['nethackLuaBackend'] = " + json.dumps('javascript' if JS_LUA else 'c') + ';\n')
 makefile = TREE / 'src/Makefile'
 text = makefile.read_text()
 start, end = '# BEGIN JAVASCRIPT TUS', '# END JAVASCRIPT TUS'
@@ -182,7 +206,8 @@ objects = ' '.join('$(TARGETPFX)' + Path(port['source']).stem + '.o' for port in
 archive_exclusions = 'TARGET_HACKLIB :=\n' if any(port['name'] == 'hacklib' for port in ports) else ''
 text += f'\n{start}\nifeq ($(TARGETPFX),wasm/)\nHOBJ := $(filter-out {objects},$(HOBJ))\nDATE_O := $(filter-out {objects},$(DATE_O))\n{archive_exclusions}endif\n.PHONY: teleport-link-objects\nteleport-link-objects:\n\t@$(foreach obj,$(HOBJ) $(DATE_O) $(TARGET_HACKLIB),echo $(obj);)\n{end}\n'
 makefile.write_text(text)
-run([sys.executable, '-B', ROOT / 'scripts/build-tu-probes.py'], cwd=ROOT)
+run([sys.executable, '-B', ROOT / 'scripts/build-tu-probes.py',
+     *(['--emscripten-only'] if EMSCRIPTEN_ONLY_PROBES else [])], cwd=ROOT)
 run(['node', ROOT / 'scripts/write-tu-layouts.mjs'], cwd=ROOT)
 startups = [port['startup'] for port in ports if port.get('startup')]
 if startups:
@@ -196,7 +221,11 @@ for port in ports:
         assert 'wasm/hacklib.a' not in link_objects.splitlines()
 (OUT / 'link-objects.txt').write_text(link_objects)
 (TREE / 'src/Sysunix').unlink(missing_ok=True)
-run([MAKE, '-j' + JOBS, 'nethack', 'TARGETPFX=wasm/', f'TARGET_CC={emcc}', f'TARGET_CFLAGS={flags}', f'TARGET_LINK={emcc}', f'TARGET_LFLAGS={link_flags}', f'GAMEBIN={OUT}/nethack.mjs', f'LUALIBS={wasm_lua} -lm', f'WINLIB={terminfo_library if C_DEPENDENCIES else ""}', 'TARGET_LIBS=', 'AUTOLIBS='], cwd=TREE / 'src')
+run([MAKE, '-j' + JOBS, 'nethack', 'TARGETPFX=wasm/', f'TARGET_CC={emcc}', f'TARGET_CFLAGS={flags}', f'TARGET_LINK={emcc}', f'TARGET_LFLAGS={link_flags}', f'GAMEBIN={OUT}/nethack.mjs', f'LUALIBS={"" if JS_LUA else wasm_lua} -lm', f'WINLIB={terminfo_library if C_DEPENDENCIES else ""}', 'TARGET_LIBS=', 'AUTOLIBS='], cwd=TREE / 'src')
+lua_sources = sorted({str(path.relative_to(ROOT)) for path in (ROOT / 'js/services').rglob('*.js')
+                      if path.parent.name == 'lua' or path.name.startswith(('lua-', 'wasm-lua-'))
+                      or path.name in {'c-float-format.js', 'timezone-info.js', 'native-timezone-data.js'}}
+                     | {'nethack-c/wasm/lua-bridge.c', 'nethack-c/wasm/lua-library.js'})
 dependency_sources = [
     'js/services/unix-compress.js', 'js/services/terminfo.js', 'js/services/terminfo-data.js',
     'js/services/posix-regex.js', 'js/services/wasm-dependency-runtime.js',
@@ -231,9 +260,16 @@ c_debug_regex_dependencies = ({
     'bridge': 'direct NetHack JS regex wrappers; opaque per-Module regex handles',
 } if regex_transport == 'ported-posixregex-direct-js' else {})
 manifest = {
+    'probeBuildBackends': ['emscripten-reference', 'emscripten-hybrid']
+        + ([] if EMSCRIPTEN_ONLY_PROBES else ['native-c']),
     'nativeAbiSha256': native_abi_hash,
     'upstream': PIN, 'emscripten': '4.0.10', 'clang': compiler.strip(), 'memory64': 1,
     'dependencyBackend': DEPENDENCY_BACKEND,
+    'lua': 'javascript-lua-5.4.8-bytecode' if JS_LUA else 'compiled-c-lua-5.4.8',
+    'luaBackend': 'javascript' if JS_LUA else 'c',
+    'javascriptLua': {'sourceSha256': {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in lua_sources},
+                      'reference': 'Native macOS Lua 5.4.8; original NetHack sandbox policy and C callbacks',
+                      'abi': 'memory64 C stack/callback transport; algorithms in JavaScript'} if JS_LUA else None,
     'terminalCapabilities': 'ncurses-6.5-terminfo' if C_DEPENDENCIES else 'javascript-terminfo-pinned-entry',
     'ncursesSha256': NCURSES_SHA256,
     'ncursesRole': 'runtime-library' if C_DEPENDENCIES else 'headers-and-reference-only',
@@ -252,13 +288,15 @@ manifest = {
         'linkEnvironment': {'TELEPORT_JS_REGEX': '1'},
         'bridge': 'numeric tparm intptr_t ABI; batched C tputs callbacks; opaque regex_t handles; MEMFS codec adapter',
     },
-    'removedCompiledDependencies': [] if C_DEPENDENCIES else ['ncompress codec', 'ncurses libtinfo', 'musl TRE regex algorithms'],
+    'removedCompiledDependencies': ([] if C_DEPENDENCIES else ['ncompress codec', 'ncurses libtinfo', 'musl TRE regex algorithms'])
+        + (['Lua interpreter/compiler/standard libraries'] if JS_LUA else []),
     'gamePlatform': 'MacOS', 'replayDst': 'inherit-native-parser-clock',
     'defaultRecordingEpoch': '1777723200', 'recordingProfile': 'public-recordings-with-environment-overrides',
-    'javascriptTranslationUnits': [{**port, **({'javascriptDataSha256': {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in port['data']}} if port.get('data') else {}), 'sha256': hashlib.sha256((ROOT / port['javascript']).read_bytes()).hexdigest(), 'abiLibrarySha256': hashlib.sha256((ROOT / port['library']).read_bytes()).hexdigest(), 'preparedCSourceSha256': hashlib.sha256((TREE / port['source']).read_bytes()).hexdigest()} for port in ports],
+    'javascriptTranslationUnits': [{**port, **({'nativeStorageSourceSha256': {storage['source']: hashlib.sha256((ROOT / storage['source']).read_bytes()).hexdigest() for storage in port['nativeStorageSources']}} if port.get('nativeStorageSources') else {}), **({'javascriptDataSha256': {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in port['data']}} if port.get('data') else {}), 'adapterSourceSha256': {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in port.get('adapterSources', [])}, 'sha256': hashlib.sha256((ROOT / port['javascript']).read_bytes()).hexdigest(), 'abiLibrarySha256': hashlib.sha256((ROOT / port['library']).read_bytes()).hexdigest(), 'preparedCSourceSha256': hashlib.sha256((TREE / port['source']).read_bytes()).hexdigest()} for port in ports],
     'sourceDateEpoch': os.environ['SOURCE_DATE_EPOCH'],
     'wasmSha256': hashlib.sha256((OUT / 'nethack.wasm').read_bytes()).hexdigest(),
 }
 (OUT / 'build.json').write_text(json.dumps(manifest, indent=2) + '\n')
+run([sys.executable, '-B', ROOT / 'scripts/check-wasm-provenance.py'], cwd=ROOT)
 native_abi_stamp.write_text(native_abi_hash+'\n')
 print('Built', OUT / 'nethack.mjs')

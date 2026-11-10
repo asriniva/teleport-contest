@@ -359,5 +359,1419 @@
     "javascript": "js/ported/wield.js",
     "library": "nethack-c/wasm/tu-libraries/wield.js",
     "configuredFunctions": true
+  },
+  {
+    "name": "mkroom",
+    "source": "src/mkroom.c",
+    "javascript": "js/ported/mkroom.js",
+    "library": "nethack-c/wasm/tu-libraries/mkroom.js",
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/mkroom-runtime.js",
+      "nethack-c/wasm/tu-mkroom-support.inc"
+    ]
+  },
+  {
+    "name": "sfstruct",
+    "source": "src/sfstruct.c",
+    "javascript": "js/ported/sfstruct.js",
+    "library": "nethack-c/wasm/tu-libraries/sfstruct.js",
+    "configuredFunctions": true,
+    "startup": "$teleportSfstructInit",
+    "configuredFunctionHeaders": [
+      "include/sfmacros.h"
+    ],
+    "adapterSources": [
+      "js/ported/sfstruct-runtime.js",
+      "nethack-c/wasm/tu-sfstruct-support.inc",
+      "nethack-c/wasm/tu-sfstruct-support.h"
+    ]
+  },
+  {
+    "name": "earlyarg",
+    "source": "src/earlyarg.c",
+    "javascript": "js/ported/earlyarg.js",
+    "library": "nethack-c/wasm/tu-libraries/earlyarg.js",
+    "configuredFunctions": true,
+    "startup": "$teleportEarlyargInit",
+    "adapterSources": [
+      "js/ported/earlyarg-runtime.js",
+      "nethack-c/wasm/tu-earlyarg-support.inc",
+      "nethack-c/wasm/tu-earlyarg-support.h"
+    ]
+  },
+  {
+    "name": "report",
+    "source": "src/report.c",
+    "javascript": "js/ported/report.js",
+    "library": "nethack-c/wasm/tu-libraries/report.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "adapterSources": [
+      "js/ported/report-runtime.js",
+      "nethack-c/wasm/tu-fragments/report.support.c",
+      "nethack-c/wasm/tu-fragments/report.storage.h"
+    ]
+  },
+  {
+    "name": "bones",
+    "source": "src/bones.c",
+    "javascript": "js/ported/bones.js",
+    "library": "nethack-c/wasm/tu-libraries/bones.js",
+    "configuredFunctions": true,
+    "probeContext": false,
+    "probeExtraExports": [
+      "_teleport_bones_read",
+      "_teleport_bones_write",
+      "_teleport_bones_global"
+    ],
+    "adapterSources": [
+      "js/ported/bones-runtime.js",
+      "nethack-c/wasm/tu-fragments/bones-support.c",
+      "nethack-c/wasm/tu-fragments/bones-source-data.h"
+    ]
+  },
+  {
+    "name": "explode",
+    "source": "src/explode.c",
+    "javascript": "js/ported/explode.js",
+    "library": "nethack-c/wasm/tu-libraries/explode.js",
+    "configuredFunctions": true,
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/explode-runtime.js",
+      "nethack-c/wasm/tu-fragments/explode-support.inc"
+    ]
+  },
+  {
+    "name": "questpgr",
+    "source": "src/questpgr.c",
+    "javascript": "js/ported/questpgr.js",
+    "library": "nethack-c/wasm/tu-libraries/questpgr.js",
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/questpgr-runtime.js",
+      "nethack-c/wasm/tu-questpgr-support.inc"
+    ]
+  },
+  {
+    "name": "symbols",
+    "source": "src/symbols.c",
+    "javascript": "js/ported/symbols.js",
+    "library": "nethack-c/wasm/tu-libraries/symbols.js",
+    "configuredFunctions": true,
+    "startup": "$teleportSymbolsInit",
+    "adapterSources": [
+      "js/ported/symbols-runtime.js",
+      "nethack-c/wasm/tu-symbols-support.inc",
+      "nethack-c/wasm/tu-symbols-support.h"
+    ]
+  },
+  {
+    "name": "mail",
+    "source": "src/mail.c",
+    "javascript": "js/ported/mail.js",
+    "library": "nethack-c/wasm/tu-libraries/mail.js",
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/mail-runtime.js",
+      "nethack-c/wasm/tu-mail-support.inc",
+      "nethack-c/wasm/tu-mail-support.h"
+    ],
+    "probeContext": false
+  },
+  {
+    "name": "pline",
+    "source": "src/pline.c",
+    "javascript": "js/ported/pline.js",
+    "library": "nethack-c/wasm/tu-libraries/pline.js",
+    "reference": "prepared",
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/pline-runtime.js",
+      "nethack-c/wasm/tu-fragments/pline-support.c",
+      "nethack-c/wasm/tu-fragments/pline-source-data.h",
+      "nethack-c/wasm/tu-fragments/pline-source-check.mjs"
+    ]
+  },
+  {
+    "name": "attrib",
+    "source": "src/attrib.c",
+    "javascript": "js/ported/attrib.js",
+    "library": "nethack-c/wasm/tu-libraries/attrib.js",
+    "configuredFunctions": true,
+    "startup": "$teleportAttribInit",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/attrib-runtime.js",
+      "nethack-c/wasm/tu-fragments/attrib-support.inc",
+      "scripts/tu-attrib-layout.h",
+      "nethack-c/wasm/tu-fragments/attrib-metadata.py"
+    ]
+  },
+  {
+    "name": "sfbase",
+    "source": "src/sfbase.c",
+    "javascript": "js/ported/sfbase.js",
+    "library": "nethack-c/wasm/tu-libraries/sfbase.js",
+    "reference": "prepared",
+    "configuredFunctions": true,
+    "configuredFunctionHeaders": [
+      "include/sfmacros.h"
+    ],
+    "probeContext": false,
+    "probeExtraExports": [
+      "_teleport_sfbase_global",
+      "_teleport_sfbase_buffer"
+    ],
+    "adapterSources": [
+      "js/ported/sfbase-runtime.js",
+      "nethack-c/wasm/tu-fragments/sfbase-support.c",
+      "nethack-c/wasm/tu-fragments/sfbase-source-data.h",
+      "nethack-c/wasm/tu-fragments/sfbase-source-check.mjs"
+    ]
+  },
+  {
+    "name": "dog",
+    "source": "src/dog.c",
+    "javascript": "js/ported/dog.js",
+    "library": "nethack-c/wasm/tu-libraries/dog.js",
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/dog-runtime.js",
+      "nethack-c/wasm/tu-dog-support.inc"
+    ]
+  },
+  {
+    "name": "region",
+    "source": "src/region.c",
+    "javascript": "js/ported/region.js",
+    "library": "nethack-c/wasm/tu-libraries/region.js",
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/region-runtime.js",
+      "nethack-c/wasm/tu-region-support.inc",
+      "scripts/tu-region-layout.h"
+    ]
+  },
+  {
+    "name": "weapon",
+    "source": "src/weapon.c",
+    "javascript": "js/ported/weapon.js",
+    "library": "nethack-c/wasm/tu-libraries/weapon.js",
+    "configuredFunctions": true,
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/weapon-runtime.js",
+      "nethack-c/wasm/tu-weapon-support.inc",
+      "scripts/tu-weapon-layout.h"
+    ]
+  },
+  {
+    "name": "vault",
+    "source": "src/vault.c",
+    "javascript": "js/ported/vault.js",
+    "library": "nethack-c/wasm/tu-libraries/vault.js",
+    "configuredFunctions": true,
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/vault-runtime.js",
+      "nethack-c/wasm/tu-fragments/vault-support.inc",
+      "scripts/tu-vault-layout.h",
+      "nethack-c/wasm/tu-fragments/vault-metadata.py"
+    ]
+  },
+  {
+    "name": "u_init",
+    "source": "src/u_init.c",
+    "javascript": "js/ported/u_init.js",
+    "library": "nethack-c/wasm/tu-libraries/u_init.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/u_init-runtime.js",
+      "nethack-c/wasm/tu-fragments/u_init-support.c",
+      "scripts/tu-u_init-layout.h",
+      "nethack-c/wasm/tu-fragments/u_init-source-check.mjs"
+    ]
+  },
+  {
+    "name": "sounds",
+    "source": "src/sounds.c",
+    "javascript": "js/ported/sounds.js",
+    "library": "nethack-c/wasm/tu-libraries/sounds.js",
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/sounds-runtime.js",
+      "nethack-c/wasm/tu-sounds-support.inc",
+      "scripts/tu-sounds-layout.h"
+    ]
+  },
+  {
+    "name": "save",
+    "source": "src/save.c",
+    "javascript": "js/ported/save.js",
+    "library": "nethack-c/wasm/tu-libraries/save.js",
+    "configuredFunctions": true,
+    "probeContext": false,
+    "probeExtraExports": [
+      "_teleport_save_global",
+      "_teleport_save_read",
+      "_teleport_save_write",
+      "_teleport_save_address"
+    ],
+    "adapterSources": [
+      "js/ported/save-runtime.js",
+      "nethack-c/wasm/tu-fragments/save-support.c",
+      "nethack-c/wasm/tu-fragments/save-source-data.h",
+      "nethack-c/wasm/tu-fragments/save-schema.json",
+      "nethack-c/wasm/tu-fragments/save-source-check.mjs",
+      "scripts/tu-save-layout.h"
+    ]
+  },
+  {
+    "name": "mhitm",
+    "source": "src/mhitm.c",
+    "javascript": "js/ported/mhitm.js",
+    "library": "nethack-c/wasm/tu-libraries/mhitm.js",
+    "configuredFunctions": true,
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/mhitm-runtime.js",
+      "scripts/tu-mhitm-layout.h",
+      "nethack-c/wasm/tu-mhitm-support.inc",
+      "scripts/check-mhitm-data.mjs"
+    ]
+  },
+  {
+    "name": "getpos",
+    "source": "src/getpos.c",
+    "javascript": "js/ported/getpos.js",
+    "library": "nethack-c/wasm/tu-libraries/getpos.js",
+    "configuredFunctions": true,
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/getpos-runtime.js",
+      "scripts/tu-getpos-layout.h",
+      "nethack-c/wasm/tu-fragments/getpos-support.inc",
+      "nethack-c/wasm/tu-fragments/getpos-metadata.py",
+      "nethack-c/wasm/tu-fragments/getpos-probe-dependencies.c"
+    ]
+  },
+  {
+    "name": "allmain",
+    "source": "src/allmain.c",
+    "javascript": "js/ported/allmain.js",
+    "library": "nethack-c/wasm/tu-libraries/allmain.js",
+    "configuredFunctions": true,
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/allmain-runtime.js",
+      "scripts/tu-allmain-layout.h",
+      "nethack-c/wasm/tu-fragments/allmain-support.c",
+      "nethack-c/wasm/tu-fragments/allmain-source-check.mjs"
+    ],
+    "reference": "prepared"
+  },
+  {
+    "name": "mthrowu",
+    "source": "src/mthrowu.c",
+    "javascript": "js/ported/mthrowu.js",
+    "library": "nethack-c/wasm/tu-libraries/mthrowu.js",
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/mthrowu-runtime.js",
+      "nethack-c/wasm/tu-mthrowu-support.inc",
+      "scripts/tu-mthrowu-layout.h",
+      "scripts/check-mthrowu-data.mjs"
+    ]
+  },
+  {
+    "name": "role",
+    "source": "src/role.c",
+    "javascript": "js/ported/role.js",
+    "library": "nethack-c/wasm/tu-libraries/role.js",
+    "configuredFunctions": true,
+    "startup": "$teleportRoleInit",
+    "nativeStorageSources": [
+      {
+        "source": "nethack-c/wasm/tu-role-storage.c",
+        "defines": [
+          "TELEPORT_PORT_ROLE_STORAGE"
+        ]
+      }
+    ],
+    "adapterSources": [
+      "js/ported/role-runtime.js",
+      "nethack-c/wasm/tu-role-support.inc",
+      "nethack-c/wasm/tu-role-storage.c",
+      "scripts/tu-role-layout.h",
+      "scripts/check-role-data.mjs"
+    ]
+  },
+  {
+    "name": "engrave",
+    "source": "src/engrave.c",
+    "javascript": "js/ported/engrave.js",
+    "library": "nethack-c/wasm/tu-libraries/engrave.js",
+    "configuredFunctions": true,
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/engrave-runtime.js",
+      "nethack-c/wasm/tu-engrave-support.inc",
+      "nethack-c/wasm/tu-engrave-support.h",
+      "scripts/tu-engrave-layout.h",
+      "scripts/check-engrave-data.mjs"
+    ]
+  },
+  {
+    "name": "glyphs",
+    "source": "src/glyphs.c",
+    "javascript": "js/ported/glyphs.js",
+    "library": "nethack-c/wasm/tu-libraries/glyphs.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/glyphs-runtime.js",
+      "nethack-c/wasm/tu-fragments/glyphs-support.c",
+      "scripts/tu-glyphs-layout.h",
+      "nethack-c/wasm/tu-fragments/glyphs-source-check.mjs",
+      "nethack-c/wasm/tu-fragments/glyphs-fixture-data.h"
+    ]
+  },
+  {
+    "name": "topten",
+    "source": "src/topten.c",
+    "javascript": "js/ported/topten.js",
+    "library": "nethack-c/wasm/tu-libraries/topten.js",
+    "configuredFunctions": true,
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/topten-runtime.js",
+      "nethack-c/wasm/tu-fragments/topten-support.inc",
+      "nethack-c/wasm/tu-fragments/topten-types.h",
+      "scripts/tu-topten-layout.h",
+      "nethack-c/wasm/tu-fragments/topten-metadata.py"
+    ]
+  },
+  {
+    "name": "dogmove",
+    "source": "src/dogmove.c",
+    "javascript": "js/ported/dogmove.js",
+    "library": "nethack-c/wasm/tu-libraries/dogmove.js",
+    "configuredFunctions": true,
+    "probeContext": false,
+    "probeExtraExports": [
+      "_probe_clear_area",
+      "_probe_qm",
+      "_probe_nofetch",
+      "_teleport_dogmove_global",
+      "_teleport_dogmove_read",
+      "_teleport_dogmove_write",
+      "_teleport_dogmove_address"
+    ],
+    "adapterSources": [
+      "js/ported/dogmove-runtime.js",
+      "nethack-c/wasm/tu-fragments/dogmove-support.c",
+      "nethack-c/wasm/tu-fragments/dogmove-source-data.h",
+      "nethack-c/wasm/tu-fragments/dogmove-schema.json",
+      "nethack-c/wasm/tu-fragments/dogmove-source-check.mjs",
+      "scripts/tu-dogmove-layout.h"
+    ]
+  },
+  {
+    "name": "windows",
+    "source": "src/windows.c",
+    "javascript": "js/ported/windows.js",
+    "library": "nethack-c/wasm/tu-libraries/windows.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/windows-runtime.js",
+      "scripts/tu-windows-layout.h",
+      "nethack-c/wasm/tu-fragments/windows-support.c",
+      "nethack-c/wasm/tu-fragments/windows-source-data.h",
+      "nethack-c/wasm/tu-fragments/windows-source-check.mjs",
+      "nethack-c/wasm/tu-fragments/windows-probe-consumer.c"
+    ],
+    "startup": "$teleportWindowsInit"
+  },
+  {
+    "name": "cfgfiles",
+    "source": "src/cfgfiles.c",
+    "javascript": "js/ported/cfgfiles.js",
+    "library": "nethack-c/wasm/tu-libraries/cfgfiles.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/cfgfiles-runtime.js",
+      "scripts/tu-cfgfiles-layout.h",
+      "nethack-c/wasm/tu-fragments/cfgfiles-support.c",
+      "nethack-c/wasm/tu-fragments/cfgfiles-types.h",
+      "nethack-c/wasm/tu-fragments/cfgfiles-source-data.h",
+      "nethack-c/wasm/tu-fragments/cfgfiles-schema.json",
+      "nethack-c/wasm/tu-fragments/cfgfiles-source-check.mjs"
+    ],
+    "probeExtraExports": [
+      "_teleport_cfgfiles_global",
+      "_teleport_cfgfiles_read",
+      "_teleport_cfgfiles_write",
+      "_teleport_cfgfiles_address"
+    ]
+  },
+  {
+    "name": "restore",
+    "source": "src/restore.c",
+    "javascript": "js/ported/restore.js",
+    "library": "nethack-c/wasm/tu-libraries/restore.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": true,
+    "adapterSources": [
+      "js/ported/restore-runtime.js",
+      "nethack-c/wasm/tu-restore-support.inc",
+      "scripts/tu-restore-layout.h",
+      "scripts/check-restore-data.mjs",
+      "nethack-c/wasm/tu-restore-types.h"
+    ]
+  },
+  {
+    "name": "nhlobj",
+    "source": "src/nhlobj.c",
+    "javascript": "js/ported/nhlobj.js",
+    "library": "nethack-c/wasm/tu-libraries/nhlobj.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": true,
+    "adapterSources": [
+      "js/ported/nhlobj-runtime.js",
+      "nethack-c/wasm/tu-nhlobj-support.inc",
+      "scripts/tu-nhlobj-layout.h",
+      "scripts/check-nhlobj-data.mjs"
+    ]
+  },
+  {
+    "name": "do_name",
+    "source": "src/do_name.c",
+    "javascript": "js/ported/do_name.js",
+    "library": "nethack-c/wasm/tu-libraries/do_name.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/do_name-runtime.js",
+      "nethack-c/wasm/tu-do_name-support.inc",
+      "scripts/tu-do_name-layout.h",
+      "scripts/check-do_name-data.mjs"
+    ],
+    "startup": "$teleportDoNameInit"
+  },
+  {
+    "name": "vision",
+    "source": "src/vision.c",
+    "javascript": "js/ported/vision.js",
+    "library": "nethack-c/wasm/tu-libraries/vision.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": true,
+    "adapterSources": [
+      "js/ported/vision-runtime.js",
+      "nethack-c/wasm/tu-vision-support.inc",
+      "scripts/tu-vision-layout.h",
+      "scripts/check-vision-data.mjs",
+      "nethack-c/wasm/tu-vision-storage.c"
+    ],
+    "startup": "$teleportVisionInit",
+    "nativeStorageSources": [
+      {
+        "source": "nethack-c/wasm/tu-vision-storage.c",
+        "defines": [
+          "TELEPORT_PORT_VISION_STORAGE"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "mkmaze",
+    "source": "src/mkmaze.c",
+    "javascript": "js/ported/mkmaze.js",
+    "library": "nethack-c/wasm/tu-libraries/mkmaze.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/mkmaze-runtime.js",
+      "nethack-c/wasm/tu-fragments/mkmaze-schema.json",
+      "nethack-c/wasm/tu-fragments/mkmaze-source-metadata.json"
+    ],
+    "nativeStorageSources": [
+      {
+        "source": "nethack-c/wasm/tu-fragments/mkmaze-support.c"
+      }
+    ],
+    "probeExtraExports": [
+      "_teleport_mkmaze_global",
+      "_teleport_mkmaze_read",
+      "_teleport_mkmaze_write",
+      "_teleport_mkmaze_address",
+      "_teleport_mkmaze_layout",
+      "_teleport_mkmaze_storage"
+    ]
+  },
+  {
+    "name": "dokick",
+    "source": "src/dokick.c",
+    "javascript": "js/ported/dokick.js",
+    "library": "nethack-c/wasm/tu-libraries/dokick.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/dokick-runtime.js",
+      "scripts/tu-dokick-layout.h",
+      "nethack-c/wasm/tu-dokick-support.inc"
+    ]
+  },
+  {
+    "name": "dig",
+    "source": "src/dig.c",
+    "javascript": "js/ported/dig.js",
+    "library": "nethack-c/wasm/tu-libraries/dig.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "adapterSources": [
+      "js/ported/dig-runtime.js",
+      "scripts/tu-dig-layout.h",
+      "scripts/tu-dig-command.c",
+      "scripts/tu-dig-hack.c",
+      "scripts/check-dig-data.mjs",
+      "nethack-c/wasm/tu-dig-support.inc"
+    ]
+  },
+  {
+    "name": "end",
+    "source": "src/end.c",
+    "javascript": "js/ported/end.js",
+    "library": "nethack-c/wasm/tu-libraries/end.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/end-runtime.js",
+      "nethack-c/wasm/tu-fragments/end-support.inc",
+      "scripts/tu-end-layout.h",
+      "nethack-c/wasm/tu-fragments/end-metadata.py"
+    ]
+  },
+  {
+    "name": "polyself",
+    "source": "src/polyself.c",
+    "javascript": "js/ported/polyself.js",
+    "library": "nethack-c/wasm/tu-libraries/polyself.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "probeExtraExports": [
+      "_probe_copy_permonst",
+      "_probe_vision",
+      "_probe_equipment",
+      "_probe_pointer",
+      "_probe_lines",
+      "_teleport_polyself_global",
+      "_teleport_polyself_read",
+      "_teleport_polyself_write",
+      "_teleport_polyself_address",
+      "_probe_call_set_uasmon",
+      "_probe_call_float_vs_flight",
+      "_probe_call_steed_vs_stealth",
+      "_probe_call_check_strangling",
+      "_probe_call_polyman",
+      "_probe_call_change_sex",
+      "_probe_call_livelog_newform",
+      "_probe_call_newman",
+      "_probe_call_polyself",
+      "_probe_call_polymon",
+      "_probe_call_uasmon_maxStr",
+      "_probe_call_dropp",
+      "_probe_call_break_armor",
+      "_probe_call_drop_weapon",
+      "_probe_call_rehumanize",
+      "_probe_call_dobreathe",
+      "_probe_call_dospit",
+      "_probe_call_doremove",
+      "_probe_call_dospinweb",
+      "_probe_call_dosummon",
+      "_probe_call_dogaze",
+      "_probe_call_dohide",
+      "_probe_call_dopoly",
+      "_probe_call_domindblast",
+      "_probe_call_uunstick",
+      "_probe_call_skinback",
+      "_probe_call_mbodypart",
+      "_probe_call_body_part",
+      "_probe_call_poly_gender",
+      "_probe_call_ugolemeffects",
+      "_probe_call_armor_to_dragon",
+      "_probe_call_polysense",
+      "_probe_call_ugenocided",
+      "_probe_call_udeadinside"
+    ],
+    "adapterSources": [
+      "js/ported/polyself-runtime.js",
+      "nethack-c/wasm/tu-fragments/polyself-support.c",
+      "nethack-c/wasm/tu-fragments/polyself-source-data.h",
+      "nethack-c/wasm/tu-fragments/polyself-schema.json",
+      "nethack-c/wasm/tu-fragments/polyself-source-check.mjs",
+      "scripts/tu-polyself-layout.h",
+      "scripts/check-polyself-data.mjs"
+    ]
+  },
+  {
+    "name": "wizcmds",
+    "source": "src/wizcmds.c",
+    "javascript": "js/ported/wizcmds.js",
+    "library": "nethack-c/wasm/tu-libraries/wizcmds.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "probeExtraExports": [
+      "_probe_call_wiz_wish",
+      "_probe_call_wiz_identify",
+      "_probe_call_makemap_unmakemon",
+      "_probe_call_makemap_remove_mons",
+      "_probe_call_wiz_makemap",
+      "_probe_call_wiz_map",
+      "_probe_call_wiz_genesis",
+      "_probe_call_wiz_where",
+      "_probe_call_wiz_detect",
+      "_probe_call_wiz_kill",
+      "_probe_call_wiz_load_lua",
+      "_probe_call_wiz_load_splua",
+      "_probe_call_wiz_level_tele",
+      "_probe_call_wiz_flip_level",
+      "_probe_call_wiz_level_change",
+      "_probe_call_wiz_telekinesis",
+      "_probe_call_wiz_panic",
+      "_probe_call_wiz_fuzzer",
+      "_probe_call_wiz_polyself",
+      "_probe_call_wiz_show_seenv",
+      "_probe_call_wiz_show_vision",
+      "_probe_call_wiz_show_wmodes",
+      "_probe_call_wiz_map_levltyp",
+      "_probe_call_wiz_levltyp_legend",
+      "_probe_call_wiz_smell",
+      "_probe_call_wiz_intrinsic",
+      "_probe_call_wiz_rumor_check",
+      "_probe_call_size_obj",
+      "_probe_call_count_obj",
+      "_probe_call_obj_chain",
+      "_probe_call_mon_invent_chain",
+      "_probe_call_contained_stats",
+      "_probe_call_size_monst",
+      "_probe_call_mon_chain",
+      "_probe_call_misc_stats",
+      "_probe_call_you_sanity_check",
+      "_probe_call_levl_sanity_check",
+      "_probe_call_sanity_check",
+      "_probe_call_migrsort_cmp",
+      "_probe_call_list_migrating_mons",
+      "_probe_call_wiz_show_stats",
+      "_probe_call_wiz_display_macros",
+      "_probe_call_wiz_show_nhuuid",
+      "_probe_call_wiz_mon_diff",
+      "_probe_call_wiz_objprobs",
+      "_probe_call_wiz_migrate_mons",
+      "_probe_call_wiz_custom",
+      "_probe_call_wizcustom_callback",
+      "_teleport_wizcmds_global",
+      "_teleport_wizcmds_read",
+      "_teleport_wizcmds_write",
+      "_teleport_wizcmds_address"
+    ],
+    "adapterSources": [
+      "js/ported/wizcmds-runtime.js",
+      "nethack-c/wasm/tu-fragments/wizcmds-support.c",
+      "nethack-c/wasm/tu-fragments/wizcmds-schema.json",
+      "nethack-c/wasm/tu-fragments/wizcmds-source-data.h",
+      "nethack-c/wasm/tu-fragments/wizcmds-source-check.mjs",
+      "nethack-c/wasm/tu-fragments/wizcmds-metadata.py",
+      "scripts/tu-wizcmds-layout.h",
+      "scripts/check-wizcmds-data.mjs"
+    ]
+  },
+  {
+    "name": "detect",
+    "source": "src/detect.c",
+    "javascript": "js/ported/detect.js",
+    "library": "nethack-c/wasm/tu-libraries/detect.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "probeExtraExports": [
+      "_teleport_detect_global",
+      "_teleport_detect_read",
+      "_teleport_detect_write",
+      "_teleport_detect_address",
+      "_teleport_detect_copy",
+      "_teleport_detect_call_rng",
+      "_teleport_detect_call_window",
+      "_teleport_detect_literal_storage",
+      "_teleport_detect_literal_capacity",
+      "_teleport_detect_function0",
+      "_teleport_detect_function1",
+      "_teleport_detect_function2",
+      "_teleport_detect_function3"
+    ],
+    "adapterSources": [
+      "js/ported/detect-runtime.js",
+      "scripts/tu-detect-layout.h",
+      "nethack-c/wasm/tu-fragments/detect-support.c",
+      "nethack-c/wasm/tu-fragments/detect-types.h",
+      "nethack-c/wasm/tu-fragments/detect-source-data.h",
+      "nethack-c/wasm/tu-fragments/detect-schema.json",
+      "nethack-c/wasm/tu-fragments/detect-provenance.json",
+      "nethack-c/wasm/tu-fragments/detect-check-source.py",
+      "nethack-c/wasm/tu-fragments/detect-check-members.mjs"
+    ]
+  },
+  {
+    "name": "teleport",
+    "source": "src/teleport.c",
+    "javascript": "js/ported/teleport.js",
+    "library": "nethack-c/wasm/tu-libraries/teleport.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/teleport-runtime.js",
+      "scripts/tu-teleport-layout.h",
+      "nethack-c/wasm/tu-fragments/teleport-support.c",
+      "nethack-c/wasm/tu-fragments/teleport-source-data.h",
+      "nethack-c/wasm/tu-fragments/teleport-source-data.json",
+      "nethack-c/wasm/tu-fragments/teleport-source-check.py",
+      "nethack-c/wasm/tu-fragments/teleport-abi.json",
+      "nethack-c/wasm/tu-fragments/teleport-probe-options.json"
+    ]
+  },
+  {
+    "source": "src/mklev.c",
+    "javascript": "js/ported/mklev.js",
+    "library": "nethack-c/wasm/tu-libraries/mklev.js",
+    "adapterSources": [
+      "js/ported/mklev-runtime.js",
+      "nethack-c/wasm/tu-fragments/mklev-schema.json",
+      "nethack-c/wasm/tu-fragments/mklev-source-metadata.json"
+    ],
+    "nativeStorageSources": [
+      {
+        "source": "nethack-c/wasm/tu-fragments/mklev-support.c"
+      }
+    ],
+    "name": "mklev",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "probeExtraExports": [
+      "_teleport_mklev_global",
+      "_teleport_mklev_read",
+      "_teleport_mklev_write",
+      "_teleport_mklev_address",
+      "_teleport_mklev_layout",
+      "_teleport_mklev_storage"
+    ]
+  },
+  {
+    "name": "monmove",
+    "source": "src/monmove.c",
+    "javascript": "js/ported/monmove.js",
+    "library": "nethack-c/wasm/tu-libraries/monmove.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "adapterSources": [
+      "js/ported/monmove-runtime.js",
+      "scripts/tu-monmove-layout.h",
+      "scripts/tu-monmove-command.c",
+      "scripts/check-monmove-data.mjs",
+      "nethack-c/wasm/tu-monmove-support.inc"
+    ]
+  },
+  {
+    "name": "spell",
+    "source": "src/spell.c",
+    "javascript": "js/ported/spell.js",
+    "library": "nethack-c/wasm/tu-libraries/spell.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/spell-runtime.js",
+      "scripts/tu-spell-layout.h",
+      "scripts/check-spell-data.mjs",
+      "nethack-c/wasm/tu-spell-support.inc"
+    ]
+  },
+  {
+    "name": "do",
+    "source": "src/do.c",
+    "javascript": "js/ported/do.js",
+    "library": "nethack-c/wasm/tu-libraries/do.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": true,
+    "adapterSources": [
+      "js/ported/do-runtime.js",
+      "nethack-c/wasm/tu-do-support.inc",
+      "nethack-c/wasm/tu-do-varargs.inc",
+      "scripts/tu-do-layout.h",
+      "scripts/check-do-data.mjs"
+    ]
+  },
+  {
+    "name": "timeout",
+    "source": "src/timeout.c",
+    "javascript": "js/ported/timeout.js",
+    "library": "nethack-c/wasm/tu-libraries/timeout.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/timeout-runtime.js",
+      "scripts/tu-timeout-layout.h",
+      "scripts/check-timeout-data.mjs",
+      "nethack-c/wasm/tu-timeout-support.inc"
+    ]
+  },
+  {
+    "name": "potion",
+    "source": "src/potion.c",
+    "javascript": "js/ported/potion.js",
+    "library": "nethack-c/wasm/tu-libraries/potion.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "adapterSources": [
+      "js/ported/potion-runtime.js",
+      "scripts/tu-potion-layout.h",
+      "scripts/tu-potion-command.c",
+      "scripts/check-potion-data.mjs",
+      "nethack-c/wasm/tu-potion-support.inc"
+    ]
+  },
+  {
+    "name": "pray",
+    "source": "src/pray.c",
+    "javascript": "js/ported/pray.js",
+    "library": "nethack-c/wasm/tu-libraries/pray.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "probeExtraExports": [
+      "_teleport_pray_global",
+      "_teleport_pray_read",
+      "_teleport_pray_write",
+      "_teleport_pray_address",
+      "_teleport_pray_copy",
+      "_teleport_pray_call_rng",
+      "_teleport_pray_call_window",
+      "_teleport_pray_literal_storage",
+      "_teleport_pray_literal_capacity",
+      "_teleport_pray_function0",
+      "_teleport_pray_function1"
+    ],
+    "adapterSources": [
+      "js/ported/pray-runtime.js",
+      "scripts/tu-pray-layout.h",
+      "nethack-c/wasm/tu-fragments/pray-support.c",
+      "nethack-c/wasm/tu-fragments/pray-types.h",
+      "nethack-c/wasm/tu-fragments/pray-source-data.h",
+      "nethack-c/wasm/tu-fragments/pray-schema.json",
+      "nethack-c/wasm/tu-fragments/pray-provenance.json",
+      "nethack-c/wasm/tu-fragments/pray-check-source.py",
+      "nethack-c/wasm/tu-fragments/pray-check-members.mjs"
+    ]
+  },
+  {
+    "source": "src/dothrow.c",
+    "javascript": "js/ported/dothrow.js",
+    "library": "nethack-c/wasm/tu-libraries/dothrow.js",
+    "adapterSources": [
+      "js/ported/dothrow-runtime.js",
+      "nethack-c/wasm/tu-fragments/dothrow-schema.json",
+      "nethack-c/wasm/tu-fragments/dothrow-source-metadata.json",
+      "scripts/check-dothrow-source.py",
+      "scripts/check-dothrow-imports.mjs"
+    ],
+    "nativeStorageSources": [
+      {
+        "source": "nethack-c/wasm/tu-fragments/dothrow-support.c"
+      }
+    ],
+    "name": "dothrow",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "probeExtraExports": [
+      "_teleport_dothrow_global",
+      "_teleport_dothrow_read",
+      "_teleport_dothrow_write",
+      "_teleport_dothrow_address",
+      "_teleport_dothrow_layout",
+      "_teleport_dothrow_storage"
+    ]
+  },
+  {
+    "name": "pager",
+    "source": "src/pager.c",
+    "javascript": "js/ported/pager.js",
+    "library": "nethack-c/wasm/tu-libraries/pager.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "startup": "$teleportPagerInit",
+    "nativeStorageSources": [
+      {
+        "source": "nethack-c/wasm/tu-fragments/pager-storage.c",
+        "defines": [
+          "TELEPORT_PORT_PAGER_STORAGE"
+        ]
+      }
+    ],
+    "adapterSources": [
+      "js/ported/pager-runtime.js",
+      "scripts/tu-pager-layout.h",
+      "nethack-c/wasm/tu-fragments/pager-support.c",
+      "nethack-c/wasm/tu-fragments/pager-storage.c",
+      "nethack-c/wasm/tu-fragments/pager-probe-consumer.c",
+      "nethack-c/wasm/tu-fragments/pager-source-data.json",
+      "nethack-c/wasm/tu-fragments/pager-source-check.py",
+      "nethack-c/wasm/tu-fragments/pager-abi.json",
+      "nethack-c/wasm/tu-fragments/pager-probe-options.json"
+    ]
+  },
+  {
+    "name": "muse",
+    "source": "src/muse.c",
+    "javascript": "js/ported/muse.js",
+    "library": "nethack-c/wasm/tu-libraries/muse.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "probeExtraExports": [
+      "_teleport_muse_global",
+      "_teleport_muse_read",
+      "_teleport_muse_write",
+      "_teleport_muse_address",
+      "_teleport_muse_copy",
+      "_teleport_muse_call_rng",
+      "_teleport_muse_call_window",
+      "_teleport_muse_call_object",
+      "_teleport_muse_call_monster",
+      "_teleport_muse_call_buzz",
+      "_teleport_muse_call_cursor",
+      "_teleport_muse_literal_storage",
+      "_teleport_muse_literal_capacity",
+      "_teleport_muse_function0",
+      "_teleport_muse_function1",
+      "_teleport_muse_function2",
+      "_teleport_muse_function3",
+      "_teleport_muse_function4",
+      "_teleport_muse_function5",
+      "_teleport_muse_function6",
+      "_teleport_muse_function7",
+      "_teleport_muse_function8"
+    ],
+    "adapterSources": [
+      "js/ported/muse-runtime.js",
+      "scripts/tu-muse-layout.h",
+      "nethack-c/wasm/tu-fragments/muse-support.c",
+      "nethack-c/wasm/tu-fragments/muse-types.h",
+      "nethack-c/wasm/tu-fragments/muse-source-data.h",
+      "nethack-c/wasm/tu-fragments/muse-schema.json",
+      "nethack-c/wasm/tu-fragments/muse-provenance.json",
+      "nethack-c/wasm/tu-fragments/muse-check-source.py",
+      "nethack-c/wasm/tu-fragments/muse-check-members.mjs",
+      "nethack-c/wasm/tu-fragments/muse-fixture-constants.json"
+    ]
+  },
+  {
+    "name": "dungeon",
+    "source": "src/dungeon.c",
+    "javascript": "js/ported/dungeon.js",
+    "library": "nethack-c/wasm/tu-libraries/dungeon.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "nativeStorageSources": [
+      {
+        "source": "nethack-c/wasm/tu-fragments/dungeon-support.c"
+      }
+    ],
+    "probeExtraExports": [
+      "_teleport_dungeon_global",
+      "_teleport_dungeon_read",
+      "_teleport_dungeon_write",
+      "_teleport_dungeon_address",
+      "_teleport_dungeon_layout",
+      "_teleport_dungeon_storage"
+    ],
+    "adapterSources": [
+      "js/ported/dungeon-runtime.js",
+      "nethack-c/wasm/tu-fragments/dungeon-schema.json",
+      "nethack-c/wasm/tu-fragments/dungeon-source-metadata.json",
+      "scripts/check-dungeon-source.py",
+      "scripts/check-dungeon-imports.mjs"
+    ]
+  },
+  {
+    "name": "makemon",
+    "source": "src/makemon.c",
+    "javascript": "js/ported/makemon.js",
+    "library": "nethack-c/wasm/tu-libraries/makemon.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/makemon-runtime.js",
+      "nethack-c/wasm/tu-fragments/makemon-support.inc",
+      "nethack-c/wasm/tu-fragments/makemon-runtime-method.inc",
+      "nethack-c/wasm/tu-fragments/makemon-integration.md",
+      "nethack-c/wasm/tu-fragments/makemon-metadata.py",
+      "scripts/tu-makemon-layout.h"
+    ]
+  },
+  {
+    "name": "mhitu",
+    "source": "src/mhitu.c",
+    "javascript": "js/ported/mhitu.js",
+    "library": "nethack-c/wasm/tu-libraries/mhitu.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "probeExtraExports": [
+      "_probe_attributes",
+      "_probe_copy_permonst",
+      "_probe_vision",
+      "_probe_equipment",
+      "_probe_pointer",
+      "_probe_canonical",
+      "_teleport_mhitu_global",
+      "_teleport_mhitu_read",
+      "_teleport_mhitu_write",
+      "_teleport_mhitu_address",
+      "_probe_call_hitmsg",
+      "_probe_call_missmu",
+      "_probe_call_mswings_verb",
+      "_probe_call_mswings",
+      "_probe_call_mpoisons_subj",
+      "_probe_call_u_slow_down",
+      "_probe_call_wildmiss",
+      "_probe_call_expels",
+      "_probe_call_getmattk",
+      "_probe_call_calc_mattacku_vars",
+      "_probe_call_mtrapped_in_pit",
+      "_probe_call_mattacku",
+      "_probe_call_summonmu",
+      "_probe_call_diseasemu",
+      "_probe_call_u_slip_free",
+      "_probe_call_magic_negation",
+      "_probe_call_hitmu",
+      "_probe_call_gulp_blnd_check",
+      "_probe_call_gulpmu",
+      "_probe_call_explmu",
+      "_probe_call_gazemu",
+      "_probe_call_mdamageu",
+      "_probe_call_could_seduce",
+      "_probe_call_doseduce",
+      "_probe_call_mayberem",
+      "_probe_call_assess_dmg",
+      "_probe_call_mon_avoiding_this_attack",
+      "_probe_call_ranged_attk_available",
+      "_probe_call_passiveum",
+      "_probe_call_cloneu"
+    ],
+    "adapterSources": [
+      "js/ported/mhitu-runtime.js",
+      "nethack-c/wasm/tu-fragments/mhitu-support.c",
+      "nethack-c/wasm/tu-fragments/mhitu-source-data.h",
+      "nethack-c/wasm/tu-fragments/mhitu-schema.json",
+      "nethack-c/wasm/tu-fragments/mhitu-source-check.mjs",
+      "scripts/tu-mhitu-layout.h",
+      "scripts/check-mhitu-data.mjs"
+    ]
+  },
+  {
+    "name": "artifact",
+    "source": "src/artifact.c",
+    "javascript": "js/ported/artifact.js",
+    "library": "nethack-c/wasm/tu-libraries/artifact.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "probeExtraExports": [
+      "_probe_call_hack_artifacts",
+      "_probe_call_init_artifacts",
+      "_probe_call_save_artifacts",
+      "_probe_call_restore_artifacts",
+      "_probe_call_artiname",
+      "_probe_call_mk_artifact",
+      "_probe_call_dispose_of_orig_obj",
+      "_probe_call_artifact_name",
+      "_probe_call_exist_artifact",
+      "_probe_call_artifact_exists",
+      "_probe_call_found_artifact",
+      "_probe_call_find_artifact",
+      "_probe_call_nartifact_exist",
+      "_probe_call_artifact_origin",
+      "_probe_call_spec_ability",
+      "_probe_call_confers_luck",
+      "_probe_call_arti_reflects",
+      "_probe_call_shade_glare",
+      "_probe_call_restrict_name",
+      "_probe_call_attacks",
+      "_probe_call_defends",
+      "_probe_call_defends_when_carried",
+      "_probe_call_protects",
+      "_probe_call_set_artifact_intrinsic",
+      "_probe_call_touch_artifact",
+      "_probe_call_arti_immune",
+      "_probe_call_bane_applies",
+      "_probe_call_spec_applies",
+      "_probe_call_spec_m2",
+      "_probe_call_spec_abon",
+      "_probe_call_spec_dbon",
+      "_probe_call_discover_artifact",
+      "_probe_call_undiscovered_artifact",
+      "_probe_call_disp_artifact_discoveries",
+      "_probe_call_dump_artifact_info",
+      "_probe_call_Mb_hit",
+      "_probe_call_artifact_hit",
+      "_probe_call_invoke_ok",
+      "_probe_call_doinvoke",
+      "_probe_call_nothing_special",
+      "_probe_call_invoke_taming",
+      "_probe_call_invoke_healing",
+      "_probe_call_invoke_energy_boost",
+      "_probe_call_invoke_untrap",
+      "_probe_call_invoke_charge_obj",
+      "_probe_call_invoke_create_portal",
+      "_probe_call_invoke_create_ammo",
+      "_probe_call_invoke_banish",
+      "_probe_call_invoke_fling_poison",
+      "_probe_call_invoke_storm_spell",
+      "_probe_call_invoke_blinding_ray",
+      "_probe_call_arti_invoke_cost_pw",
+      "_probe_call_arti_invoke_cost",
+      "_probe_call_arti_invoke",
+      "_probe_call_finesse_ahriman",
+      "_probe_call_artifact_light",
+      "_probe_call_arti_speak",
+      "_probe_call_artifact_has_invprop",
+      "_probe_call_arti_cost",
+      "_probe_call_abil_to_adtyp",
+      "_probe_call_abil_to_spfx",
+      "_probe_call_what_gives",
+      "_probe_call_glow_color",
+      "_probe_call_glow_strength",
+      "_probe_call_glow_verb",
+      "_probe_call_Sting_effects",
+      "_probe_call_retouch_object",
+      "_probe_call_untouchable",
+      "_probe_call_retouch_equipment",
+      "_probe_call_count_surround_traps",
+      "_probe_call_mkot_trap_warn",
+      "_probe_call_is_magic_key",
+      "_probe_call_has_magic_key",
+      "_probe_call_is_art",
+      "_probe_call_get_artifact",
+      "_probe_call_permapoisoned",
+      "_teleport_artifact_global",
+      "_teleport_artifact_read",
+      "_teleport_artifact_write",
+      "_teleport_artifact_address"
+    ],
+    "adapterSources": [
+      "js/ported/artifact-runtime.js",
+      "nethack-c/wasm/tu-fragments/artifact-support.c",
+      "nethack-c/wasm/tu-fragments/artifact-schema.json",
+      "nethack-c/wasm/tu-fragments/artifact-source-data.h",
+      "nethack-c/wasm/tu-fragments/artifact-source-check.mjs",
+      "nethack-c/wasm/tu-fragments/artifact-metadata.py",
+      "scripts/tu-artifact-layout.h",
+      "scripts/check-artifact-data.mjs"
+    ]
+  },
+  {
+    "name": "decl",
+    "source": "src/decl.c",
+    "javascript": "js/ported/decl.js",
+    "library": "nethack-c/wasm/tu-libraries/decl.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "startup": "$teleportDeclInit",
+    "nativeStorageSources": [
+      {
+        "source": "nethack-c/wasm/tu-fragments/decl-storage.c"
+      }
+    ],
+    "adapterSources": [
+      "js/ported/decl-runtime.js",
+      "scripts/tu-decl-layout.h",
+      "scripts/tu-decl-probe.c",
+      "scripts/tu-decl-probe-consumer.c",
+      "scripts/test-tu-decl.mjs",
+      "scripts/check-decl-data.mjs",
+      "nethack-c/wasm/tu-fragments/decl-support.c",
+      "nethack-c/wasm/tu-fragments/decl-schema.json",
+      "nethack-c/wasm/tu-fragments/decl-source-check.mjs",
+      "nethack-c/wasm/tu-fragments/decl-source-data.h"
+    ],
+    "probeExtraExports": [
+      "_teleport_decl_storage",
+      "_teleport_decl_public_address",
+      "_teleport_decl_layout_count",
+      "_teleport_decl_layout_name",
+      "_teleport_decl_layout_value"
+    ]
+  },
+  {
+    "name": "do_wear",
+    "source": "src/do_wear.c",
+    "javascript": "js/ported/do_wear.js",
+    "library": "nethack-c/wasm/tu-libraries/do_wear.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": true,
+    "adapterSources": [
+      "js/ported/do_wear-runtime.js",
+      "nethack-c/wasm/tu-do_wear-support.inc",
+      "nethack-c/wasm/tu-do_wear-varargs.inc",
+      "scripts/tu-do_wear-layout.h",
+      "scripts/check-do_wear-data.mjs"
+    ]
+  },
+  {
+    "name": "insight",
+    "source": "src/insight.c",
+    "javascript": "js/ported/insight.js",
+    "library": "nethack-c/wasm/tu-libraries/insight.js",
+    "startup": "$teleportInsightInit",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/insight-runtime.js",
+      "scripts/tu-insight-layout.h",
+      "scripts/check-insight-data.mjs",
+      "nethack-c/wasm/tu-insight-support.inc"
+    ]
+  },
+  {
+    "name": "read",
+    "source": "src/read.c",
+    "javascript": "js/ported/read.js",
+    "library": "nethack-c/wasm/tu-libraries/read.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/read-runtime.js",
+      "nethack-c/wasm/tu-fragments/read-support.inc",
+      "nethack-c/wasm/tu-fragments/read-metadata.py",
+      "scripts/tu-read-layout.h"
+    ]
+  },
+  {
+    "name": "apply",
+    "source": "src/apply.c",
+    "javascript": "js/ported/apply.js",
+    "library": "nethack-c/wasm/tu-libraries/apply.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/apply-runtime.js",
+      "nethack-c/wasm/tu-fragments/apply-support.inc",
+      "nethack-c/wasm/tu-fragments/apply-metadata.py",
+      "scripts/tu-apply-layout.h"
+    ]
+  },
+  {
+    "name": "eat",
+    "source": "src/eat.c",
+    "javascript": "js/ported/eat.js",
+    "library": "nethack-c/wasm/tu-libraries/eat.js",
+    "configuredFunctions": true,
+    "startup": "$teleportEatInit",
+    "nativeStorageSources": [
+      {
+        "source": "nethack-c/wasm/tu-eat-storage.c",
+        "defines": [
+          "TELEPORT_PORT_EAT_STORAGE"
+        ]
+      }
+    ],
+    "adapterSources": [
+      "js/ported/eat-runtime.js",
+      "nethack-c/wasm/tu-eat-support.inc",
+      "nethack-c/wasm/tu-eat-storage.c",
+      "scripts/tu-eat-layout.h",
+      "scripts/check-eat-data.mjs"
+    ],
+    "reference": "prepared"
+  },
+  {
+    "name": "objnam",
+    "source": "src/objnam.c",
+    "javascript": "js/ported/objnam.js",
+    "library": "nethack-c/wasm/tu-libraries/objnam.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/objnam-runtime.js",
+      "nethack-c/wasm/tu-objnam-support.inc",
+      "scripts/tu-objnam-layout.h",
+      "scripts/check-objnam-data.mjs"
+    ]
+  },
+  {
+    "name": "mkobj",
+    "source": "src/mkobj.c",
+    "javascript": "js/ported/mkobj.js",
+    "library": "nethack-c/wasm/tu-libraries/mkobj.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "probeExtraExports": [
+      "_teleport_mkobj_global",
+      "_teleport_mkobj_read",
+      "_teleport_mkobj_write",
+      "_teleport_mkobj_address",
+      "_teleport_mkobj_copy",
+      "_teleport_mkobj_literal_storage",
+      "_teleport_mkobj_literal_capacity"
+    ],
+    "adapterSources": [
+      "js/ported/mkobj-runtime.js",
+      "scripts/tu-mkobj-layout.h",
+      "nethack-c/wasm/tu-fragments/mkobj-abi-asserts.h",
+      "nethack-c/wasm/tu-fragments/mkobj-check-members.mjs",
+      "nethack-c/wasm/tu-fragments/mkobj-check-source.py",
+      "nethack-c/wasm/tu-fragments/mkobj-fixture-constants.json",
+      "nethack-c/wasm/tu-fragments/mkobj-provenance.json",
+      "nethack-c/wasm/tu-fragments/mkobj-schema.json",
+      "nethack-c/wasm/tu-fragments/mkobj-source-data.h",
+      "nethack-c/wasm/tu-fragments/mkobj-support.c",
+      "nethack-c/wasm/tu-fragments/mkobj-types.h",
+      "js/ported/mkobj-dispatch.js",
+      "js/ported/mkobj-dispatch-data.js",
+      "scripts/test-tu-mkobj-dispatch-loader.mjs",
+      "scripts/test-tu-mkobj-dispatch-witness.mjs",
+      "scripts/check-mkobj-dispatch.mjs"
+    ]
   }
 ]

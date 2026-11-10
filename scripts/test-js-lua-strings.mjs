@@ -76,7 +76,10 @@ function compare(source) {
   }
   const vm = createLua({ baseError: true, baseMeta: true });
   const result = vm.execute(source, '@strings.lua');
-  assert.equal(result.map(encoded).join('\n'), expected, source);
+  assert.equal(result.map(encoded).join('\n'), native, 'Darwin '+source);
+  const alternate=createLua({baseError:true,baseMeta:true});alternate.floatPolicy='musl';
+  assert.equal(alternate.execute(source,'@strings-musl.lua').map(encoded).join('\n'),expected,'configured-musl '+source);
+  vm.heap.close();alternate.heap.close();
   cases++; values += result.length;
 }
 const literal = text => '"' + Array.from(text, c => '\\x' + c.charCodeAt(0).toString(16).padStart(2, '0')).join('') + '"';
@@ -131,7 +134,7 @@ for (const expression of ['string.format("%.s","abc")','string.format("%.0s","ab
   'string.format("%s",setmetatable({},{__tostring=function()return "custom" end}))',
   'string.format("%p %p %p",nil,17,true)','string.format("a\\0b%%c")']) compare('return ' + expression);
 for (const format of ['%+u','%#d','%.1c','%0s','%1q','%100d','%.100f','%--#s','%n','%F','%','%..f'])
-  compare(`local ok,e=pcall(string.format,${literal(format)},17);return ok,ok and e or type(e)`);
+  compare(`local ok,e=pcall(string.format,${literal(format)},17);return ok,e`);
 let seed = 0x1a2b3c4d;
 const random = () => { seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5; return seed >>> 0; };
 const floating = bits => {
@@ -153,4 +156,4 @@ for (let i = 0; i < 250; i++) {
 }
 compare('local t=coroutine.create(function()end);local a=string.format("%p",t);return a~="(null)",a==string.format("%p",t),string.format("%p",coroutine.running())~="(null)"');
 fs.writeFileSync(path.join(work, 'platform-differences.json'), JSON.stringify(platformDifferences, null, 2) + '\n');
-console.log(`PASS: ${cases} configured Lua string cases / ${values} byte- and bit-identical values, each also executed natively; ${platformDifferences.length} measured host-format differences. Packing widths1–16, endianness, alignment, floats, strings, boundaries and rejected inputs.`);
+console.log(`PASS: ${cases} native macOS Lua string cases / ${values} byte- and bit-identical values, plus ${cases} explicit configured-musl comparisons; ${platformDifferences.length} measured platform differences. Packing widths1–16, endianness, alignment, floats, strings, boundaries and rejected inputs.`);

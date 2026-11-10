@@ -1,0 +1,384 @@
+{
+  "reservation": "TU94/J100 POLYSELF",
+  "status": "Complete private EmC first pass; not selected or integrated",
+  "source": {
+    "source": "src/polyself.c",
+    "preparedSha256": "2f2f3dc74c2cbdd122f7a1401bd3e4e77efbc37ff6c499371cb8e57c9e39a5c8",
+    "upstreamIdentical": true,
+    "lines": 2286,
+    "bytes": 84776,
+    "configuredFunctions": [
+      {
+        "name": "set_uasmon",
+        "line": 38,
+        "params": "void"
+      },
+      {
+        "name": "float_vs_flight",
+        "line": 131,
+        "params": "void"
+      },
+      {
+        "name": "steed_vs_stealth",
+        "line": 158,
+        "params": "void"
+      },
+      {
+        "name": "check_strangling",
+        "line": 168,
+        "params": "boolean on"
+      },
+      {
+        "name": "polyman",
+        "line": 200,
+        "params": "const char *fmt, const char *arg"
+      },
+      {
+        "name": "change_sex",
+        "line": 273,
+        "params": "void"
+      },
+      {
+        "name": "livelog_newform",
+        "line": 307,
+        "params": "boolean viapoly, int oldgend, int newgend"
+      },
+      {
+        "name": "newman",
+        "line": 336,
+        "params": "void"
+      },
+      {
+        "name": "polyself",
+        "line": 469,
+        "params": "int psflags"
+      },
+      {
+        "name": "polymon",
+        "line": 735,
+        "params": "int mntmp"
+      },
+      {
+        "name": "uasmon_maxStr",
+        "line": 1077,
+        "params": "void"
+      },
+      {
+        "name": "dropp",
+        "line": 1123,
+        "params": "struct obj *obj"
+      },
+      {
+        "name": "break_armor",
+        "line": 1157,
+        "params": "void"
+      },
+      {
+        "name": "drop_weapon",
+        "line": 1305,
+        "params": "int alone"
+      },
+      {
+        "name": "rehumanize",
+        "line": 1367,
+        "params": "void"
+      },
+      {
+        "name": "dobreathe",
+        "line": 1421,
+        "params": "void"
+      },
+      {
+        "name": "dospit",
+        "line": 1450,
+        "params": "void"
+      },
+      {
+        "name": "doremove",
+        "line": 1481,
+        "params": "void"
+      },
+      {
+        "name": "dospinweb",
+        "line": 1497,
+        "params": "void"
+      },
+      {
+        "name": "dosummon",
+        "line": 1624,
+        "params": "void"
+      },
+      {
+        "name": "dogaze",
+        "line": 1642,
+        "params": "void"
+      },
+      {
+        "name": "dohide",
+        "line": 1777,
+        "params": "void"
+      },
+      {
+        "name": "dopoly",
+        "line": 1877,
+        "params": "void"
+      },
+      {
+        "name": "domindblast",
+        "line": 1894,
+        "params": "void"
+      },
+      {
+        "name": "uunstick",
+        "line": 1941,
+        "params": "void"
+      },
+      {
+        "name": "skinback",
+        "line": 1954,
+        "params": "boolean silently"
+      },
+      {
+        "name": "mbodypart",
+        "line": 1972,
+        "params": "struct monst *mon, int part"
+      },
+      {
+        "name": "body_part",
+        "line": 2143,
+        "params": "int part"
+      },
+      {
+        "name": "poly_gender",
+        "line": 2149,
+        "params": "void"
+      },
+      {
+        "name": "ugolemeffects",
+        "line": 2160,
+        "params": "int damtype, int dam"
+      },
+      {
+        "name": "armor_to_dragon",
+        "line": 2191,
+        "params": "int atyp"
+      },
+      {
+        "name": "polysense",
+        "line": 2236,
+        "params": "void"
+      },
+      {
+        "name": "ugenocided",
+        "line": 2265,
+        "params": "void"
+      },
+      {
+        "name": "udeadinside",
+        "line": 2273,
+        "params": "void"
+      }
+    ],
+    "conditions": {
+      "STATUS_HILITES": true,
+      "DUMB": false,
+      "explicitIfZeroBlocks": 3
+    },
+    "status": "inventory complete; implementation/probes pending"
+  },
+  "registryEntry": {
+    "name": "polyself",
+    "source": "src/polyself.c",
+    "javascript": "js/ported/polyself.js",
+    "library": "nethack-c/wasm/tu-libraries/polyself.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "probeExtraExports": [
+      "_probe_copy_permonst",
+      "_probe_vision",
+      "_probe_equipment",
+      "_probe_pointer",
+      "_probe_lines",
+      "_teleport_polyself_global",
+      "_teleport_polyself_read",
+      "_teleport_polyself_write",
+      "_teleport_polyself_address"
+    ],
+    "adapterSources": [
+      "js/ported/polyself-runtime.js",
+      "nethack-c/wasm/tu-fragments/polyself-support.c",
+      "nethack-c/wasm/tu-fragments/polyself-source-data.h",
+      "nethack-c/wasm/tu-fragments/polyself-schema.json",
+      "nethack-c/wasm/tu-fragments/polyself-source-check.mjs",
+      "scripts/tu-polyself-layout.h",
+      "scripts/check-polyself-data.mjs"
+    ]
+  },
+  "runtime": {
+    "import": "import { callPolyself } from './polyself-runtime.js';",
+    "method": "polyself(services,name,...args) { return callPolyself(services, layouts.polyself, name, ...args); }",
+    "nativeSupport": "Compile nethack-c/wasm/tu-fragments/polyself-support.c after excluding original src/polyself.c. Its C code is typed field/global/literal/variadic transport only.",
+    "layout": "Include scripts/tu-polyself-layout.h in actual typed layout provider and serialize polyself_layout values into layouts.polyself. Constants carry constwidth_NAME metadata; signed64 values must not be lossy.",
+    "privateAliases": {
+      "armor_to_dragon": "teleport_polyself_armor_to_dragon",
+      "break_armor": "teleport_polyself_break_armor",
+      "check_strangling": "teleport_polyself_check_strangling",
+      "drop_weapon": "teleport_polyself_drop_weapon",
+      "dropp": "teleport_polyself_dropp",
+      "newman": "teleport_polyself_newman",
+      "polyman": "teleport_polyself_polyman",
+      "polysense": "teleport_polyself_polysense"
+    },
+    "startup": "None; immutable original arrays remain JS and native string backing is per-Module, lazily interned."
+  },
+  "validation": {
+    "probeBuild": ".cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-tu-polyself.mjs --build",
+    "sourceGuard": ".cache/emsdk/node/24.19.0_64bit/bin/node scripts/check-polyself-data.mjs",
+    "differential": ".cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-tu-polyself.mjs",
+    "results": {
+      "status": "EmC controlled first pass only; native host and whole game pending",
+      "cases": 567,
+      "comparisons": 8947,
+      "functions": [
+        "set_uasmon",
+        "float_vs_flight",
+        "steed_vs_stealth",
+        "check_strangling",
+        "polyman",
+        "change_sex",
+        "livelog_newform",
+        "newman",
+        "polyself",
+        "polymon",
+        "uasmon_maxStr",
+        "dropp",
+        "break_armor",
+        "drop_weapon",
+        "rehumanize",
+        "dobreathe",
+        "dospit",
+        "doremove",
+        "dospinweb",
+        "dosummon",
+        "dogaze",
+        "dohide",
+        "dopoly",
+        "domindblast",
+        "uunstick",
+        "skinback",
+        "mbodypart",
+        "body_part",
+        "poly_gender",
+        "ugolemeffects",
+        "armor_to_dragon",
+        "polysense",
+        "ugenocided",
+        "udeadinside"
+      ],
+      "rngSitesCovered": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "rngSitesMissing": [],
+      "rawFilename": "polyself.c",
+      "nativeReference": "original prepared source compiled with identical game defines; private exact include-prefix mapping only"
+    },
+    "abi": {
+      "records": 42,
+      "accessedFields": 149,
+      "globals": 37,
+      "foreignDeclarations": 175,
+      "directTypedForeignBindings": 158,
+      "actualVariadicSignatures": 27,
+      "headerMacros": 166
+    }
+  },
+  "divergences": {
+    "location": [
+      "js/ported/polyself.js",
+      "js/ported/polyself-runtime.js",
+      "nethack-c/wasm/tu-libraries/polyself.js",
+      "scripts/tu-polyself-layout.h",
+      "scripts/tu-polyself-probe.c",
+      "scripts/test-tu-polyself.mjs",
+      "scripts/check-polyself-data.mjs",
+      "nethack-c/wasm/tu-fragments/polyself-support.c",
+      "nethack-c/wasm/tu-fragments/polyself-schema.json",
+      "nethack-c/wasm/tu-fragments/polyself-source-check.mjs",
+      "nethack-c/wasm/tu-fragments/polyself-source-data.h",
+      "nethack-c/wasm/tu-fragments/polyself-integration.json"
+    ],
+    "reason": "Authorized source-faithful translation of active configured POLYSELF, all form/anatomy/equipment/command policy remains JavaScript.",
+    "effect": "No active game change while private; intended replacement preserves the configured original routines through typed memory64 transport.",
+    "implementation": [
+      "Original function names, formal bindings/order and all 218 original block comments retained across all 34 routines. The C local class is named mclass because class is reserved in JavaScript.",
+      "The eight original static helpers are module exports for JS composition and typed private probes; no original gameplay body remains in support C.",
+      "Original newman dead and polyself selection/retry/special-form joins are explicit JS labels/joins, with no native gameplay fallback.",
+      "C char arrays use native stack buffers; 47 intra-TU calls preserve automatic-storage lifetime through callLocal stack scopes.",
+      "Signed64 fields/constants use BigInt; complete attribute structs copy native bytes; record identity is canonical by type/native address within a call.",
+      "Observed C &&/|| values and C !! array indices are canonical integers; conditions preserve short-circuit evaluation.",
+      "Header macros remain explicit JavaScript; native helper code is generated field/global/address/read/write, literal backing, exact original variadic signatures and RNG attribution.",
+      "Production filename is derived from fresh configured CPP invoked as basename polyself.c; private original-source include prefix mapping produces that exact spelling. Raw trace filenames are compared without normalization.",
+      "Generated varargs wrappers intentionally forward dynamic formats and the exact original argument list. Clang -Wformat-security is scoped off only around these wrappers; no injected %s argument."
+    ],
+    "inheritedSourceChanges": "Prepared source is byte-identical to pinned upstream polyself.c; selected STATUS_HILITES is enabled, DUMB is disabled, three original #if0 blocks remain inactive.",
+    "coverage": [
+      "All 34 configured routines and all 31 source RNG sites execute in the original-C oracle.",
+      "567 controlled cases / 8947 return, full relevant native-state, exact dependency-argument trace, stack, identity, growth/reentry and negative-control checks.",
+      "Both early and nested newman dead joins, class retry and all four special polyself joins are directly covered."
+    ],
+    "limitations": [
+      "Native-host independent oracle is pending; Emscripten compiled C is the reference for this first pass.",
+      "Full game integration, original-deadline checks and recording equivalence are pending root integration.",
+      "Controlled foreign dependencies do not establish every real game callback outcome or exhaustive branch coverage.",
+      "Injected JavaScript exceptions validate binding/stack cleanup; this is not a native panic/longjmp equivalence claim.",
+      "Pointer snapshot normalization is restricted to typed pointers/known native regions and text content; scalar coincidence negative controls remain strict."
+    ],
+    "verification": "See validation commands, raw private logs and first-pass-results.json. Historical failed fixture/draft logs are retained separately; final passing gate does not erase them."
+  },
+  "ownedPaths": [
+    "js/ported/polyself.js",
+    "js/ported/polyself-runtime.js",
+    "nethack-c/wasm/tu-libraries/polyself.js",
+    "scripts/tu-polyself-layout.h",
+    "scripts/tu-polyself-probe.c",
+    "scripts/test-tu-polyself.mjs",
+    "scripts/check-polyself-data.mjs",
+    "nethack-c/wasm/tu-fragments/polyself-support.c",
+    "nethack-c/wasm/tu-fragments/polyself-schema.json",
+    "nethack-c/wasm/tu-fragments/polyself-source-check.mjs",
+    "nethack-c/wasm/tu-fragments/polyself-source-data.h",
+    "nethack-c/wasm/tu-fragments/polyself-integration.json"
+  ],
+  "sharedFilesEdited": false
+}

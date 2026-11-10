@@ -1,0 +1,96 @@
+/* Compiler metadata only; all GLYPHS algorithms/data remain JS. */
+#ifndef TELEPORT_GLYPHS_LAYOUT_H
+#define TELEPORT_GLYPHS_LAYOUT_H
+#include "hack.h"
+#include <stddef.h>
+#include <stdint.h>
+struct teleport_glyphs_find {
+ unsigned findtype;int val,loadsyms_offset,loadsyms_count;int*extraval;uint32 color;
+ const char*unicode_val;void(*callback)(int,struct teleport_glyphs_find*);
+ unsigned restype;genericptr_t reserved;
+};
+struct teleport_glyphs_cache {int glyphnum;char*id;};
+struct teleport_glyphs_meta {const char*name;long value;};
+#define GLYPHS_META(k,v) {#k,(long)(v)}
+static const struct teleport_glyphs_meta teleport_glyphs_layout[]={
+GLYPHS_META(BUFSZ,BUFSZ),
+GLYPHS_META(CLR_BLACK,CLR_BLACK),
+GLYPHS_META(FALSE,FALSE),
+GLYPHS_META(GLYPH_ALTAR_OFF,GLYPH_ALTAR_OFF),
+GLYPHS_META(GLYPH_CMAP_A_OFF,GLYPH_CMAP_A_OFF),
+GLYPHS_META(GLYPH_CMAP_B_OFF,GLYPH_CMAP_B_OFF),
+GLYPHS_META(GLYPH_CMAP_C_OFF,GLYPH_CMAP_C_OFF),
+GLYPHS_META(GLYPH_CMAP_GEH_OFF,GLYPH_CMAP_GEH_OFF),
+GLYPHS_META(GLYPH_CMAP_KNOX_OFF,GLYPH_CMAP_KNOX_OFF),
+GLYPHS_META(GLYPH_CMAP_MAIN_OFF,GLYPH_CMAP_MAIN_OFF),
+GLYPHS_META(GLYPH_CMAP_MINES_OFF,GLYPH_CMAP_MINES_OFF),
+GLYPHS_META(GLYPH_CMAP_OFF,GLYPH_CMAP_OFF),
+GLYPHS_META(GLYPH_CMAP_SOKO_OFF,GLYPH_CMAP_SOKO_OFF),
+GLYPHS_META(GLYPH_CMAP_STONE_OFF,GLYPH_CMAP_STONE_OFF),
+GLYPHS_META(GLYPH_EXPLODE_OFF,GLYPH_EXPLODE_OFF),
+GLYPHS_META(GLYPH_OBJ_OFF,GLYPH_OBJ_OFF),
+GLYPHS_META(GLYPH_OBJ_PILETOP_OFF,GLYPH_OBJ_PILETOP_OFF),
+GLYPHS_META(GLYPH_SWALLOW_OFF,GLYPH_SWALLOW_OFF),
+GLYPHS_META(GLYPH_WARNING_OFF,GLYPH_WARNING_OFF),
+GLYPHS_META(GLYPH_ZAP_OFF,GLYPH_ZAP_OFF),
+GLYPHS_META(GOLD_PIECE,GOLD_PIECE),
+GLYPHS_META(H_UTF8,H_UTF8),
+GLYPHS_META(LAND_MINE,LAND_MINE),
+GLYPHS_META(MAXPCHARS,MAXPCHARS),
+GLYPHS_META(MAX_GLYPH,MAX_GLYPH),
+GLYPHS_META(NH_BASIC_COLOR,NH_BASIC_COLOR),
+GLYPHS_META(NO_GLYPH,NO_GLYPH),
+GLYPHS_META(NULL,0),
+GLYPHS_META(NUM_GRAPHICS,NUM_GRAPHICS),
+GLYPHS_META(NUM_OBJECTS,NUM_OBJECTS),
+GLYPHS_META(POT_GAIN_ABILITY,POT_GAIN_ABILITY),
+GLYPHS_META(POT_WATER,POT_WATER),
+GLYPHS_META(QBUFSZ,QBUFSZ),
+GLYPHS_META(RIN_ADORNMENT,RIN_ADORNMENT),
+GLYPHS_META(RIN_PROTECTION_FROM_SHAPE_CHAN,RIN_PROTECTION_FROM_SHAPE_CHAN),
+GLYPHS_META(SCR_BLANK_PAPER,SCR_BLANK_PAPER),
+GLYPHS_META(SCR_ENCHANT_ARMOR,SCR_ENCHANT_ARMOR),
+GLYPHS_META(SCR_MAIL,SCR_MAIL),
+GLYPHS_META(SCR_STINKING_CLOUD,SCR_STINKING_CLOUD),
+GLYPHS_META(SLIME_MOLD,SLIME_MOLD),
+GLYPHS_META(SPE_BLANK_PAPER,SPE_BLANK_PAPER),
+GLYPHS_META(SPE_DIG,SPE_DIG),
+GLYPHS_META(SYM_MON,SYM_MON),
+GLYPHS_META(SYM_OC,SYM_OC),
+GLYPHS_META(SYM_PCHAR,SYM_PCHAR),
+GLYPHS_META(S_altar,S_altar),
+GLYPHS_META(S_digbeam,S_digbeam),
+GLYPHS_META(S_expl_br,S_expl_br),
+GLYPHS_META(S_expl_tl,S_expl_tl),
+GLYPHS_META(S_grave,S_grave),
+GLYPHS_META(S_ndoor,S_ndoor),
+GLYPHS_META(S_stone,S_stone),
+GLYPHS_META(S_sw_br,S_sw_br),
+GLYPHS_META(S_sw_tl,S_sw_tl),
+GLYPHS_META(S_vbeam,S_vbeam),
+GLYPHS_META(S_vwall,S_vwall),
+GLYPHS_META(TRUE,TRUE),
+GLYPHS_META(WAN_LIGHT,WAN_LIGHT),
+GLYPHS_META(WAN_LIGHTNING,WAN_LIGHTNING),
+GLYPHS_META(altar_other,altar_other),
+GLYPHS_META(custom_count,custom_count),
+GLYPHS_META(custom_nhcolor,custom_nhcolor),
+GLYPHS_META(custom_none,custom_none),
+GLYPHS_META(custom_symbols,custom_symbols),
+GLYPHS_META(custom_ureps,custom_ureps),
+GLYPHS_META(do_custom_colors,do_custom_colors),
+GLYPHS_META(do_custom_symbols,do_custom_symbols),
+GLYPHS_META(pointerSize,sizeof(void*)),
+GLYPHS_META(longSize,sizeof(long)),
+GLYPHS_META(sizeSize,sizeof(size_t)),
+GLYPHS_META(intSize,sizeof(int)),
+GLYPHS_META(uint32Size,sizeof(uint32)),
+GLYPHS_META(charSigned,(char)-1<0),
+GLYPHS_META(findSize,sizeof(struct teleport_glyphs_find)),
+GLYPHS_META(cacheEntrySize,sizeof(struct teleport_glyphs_cache)),
+GLYPHS_META(detailSize,sizeof(struct customization_detail)),
+GLYPHS_META(unicodeSize,sizeof(struct unicode_representation)),
+GLYPHS_META(mapSize,sizeof(glyph_map)),
+};
+#undef GLYPHS_META
+#endif

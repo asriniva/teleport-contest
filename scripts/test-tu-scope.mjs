@@ -18,7 +18,7 @@ const { parse, version } = await import(pathToFileURL(join(sdk,
 // imported or accessed through the TU's explicit C environment.
 const builtins = new Set([
     'undefined', 'NaN', 'Infinity', 'Math', 'BigInt', 'Number', 'Boolean',
-    'Int8Array', 'Int32Array', 'Uint8Array', 'BigUint64Array',
+    'Int8Array', 'Int16Array', 'Int32Array', 'Uint8Array', 'BigUint64Array',
 ]);
 
 function checkSource(source, filename) {
@@ -178,6 +178,7 @@ function checkSource(source, filename) {
 // Tiny in-memory tooling fixtures, independent of game algorithms.
 const fixtures = [
     ['bare C globals', 'import { C } from "x"; C.distant_name(C.obj, doname); if (uarm) C.f(uarmf);', ['doname', 'uarm', 'uarmf']],
+    ['standard signed16 array and unknown size', 'const values=new Int16Array(10); values[0]=1; sizeof;', ['sizeof']],
     ['typeof policy', 'typeof missing;', ['missing']],
     ['property and label names', 'import { C } from "x"; top: for (let i=0;i<2;i++) { C.uarm; C[i]; break top; }', []],
     ['shorthand and computed references', 'const local=1; ({plain: local, local, [missingKey]: missingValue});', ['missingKey', 'missingValue']],

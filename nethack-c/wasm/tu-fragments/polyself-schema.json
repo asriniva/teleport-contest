@@ -1,0 +1,4005 @@
+{
+  "schema": {
+    "d_level": {
+      "ctype": "struct d_level",
+      "fields": [
+        {
+          "name": "dnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dlevel",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "RoleName": {
+      "ctype": "struct RoleName",
+      "fields": [
+        {
+          "name": "m",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "f",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "vptrs": {
+      "ctype": "union vptrs",
+      "fields": [
+        {
+          "name": "v_nexthere",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "flag": {
+      "ctype": "struct flag",
+      "fields": [
+        {
+          "name": "confirm",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "debug",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "female",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "safe_dog",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "verbose",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "trap": {
+      "ctype": "struct trap",
+      "fields": [
+        {
+          "name": "ttyp",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "madeby_u",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        }
+      ]
+    },
+    "window_procs": {
+      "ctype": "struct window_procs",
+      "fields": [
+        {
+          "name": "wincap2",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "attribs": {
+      "ctype": "struct attribs",
+      "fields": [
+        {
+          "name": "a",
+          "d": {
+            "a": [
+              6
+            ],
+            "e": {
+              "t": "i8"
+            }
+          },
+          "ctype": "schar[6]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "obj": {
+      "ctype": "struct obj",
+      "fields": [
+        {
+          "name": "nobj",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "v",
+          "d": {
+            "s": "vptrs"
+          },
+          "ctype": "union vptrs",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "otyp",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "quan",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "spe",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oclass",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "lamplit",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "in_use",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "corpsenm",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "owornmask",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "objclass": {
+      "ctype": "struct objclass",
+      "fields": [
+        {
+          "name": "oc_material",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "oc_subtyp",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "attack": {
+      "ctype": "struct attack",
+      "fields": [
+        {
+          "name": "aatyp",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "adtyp",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "damn",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "damd",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "permonst": {
+      "ctype": "struct permonst",
+      "fields": [
+        {
+          "name": "mlet",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mlevel",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "geno",
+          "d": {
+            "t": "u16"
+          },
+          "ctype": "unsigned short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mattk",
+          "d": {
+            "a": [
+              6
+            ],
+            "e": {
+              "s": "attack"
+            }
+          },
+          "ctype": "struct attack[6]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "msound",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "msize",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mresists",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mflags1",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mflags2",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mflags3",
+          "d": {
+            "t": "u16"
+          },
+          "ctype": "unsigned short",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "warntype_info": {
+      "ctype": "struct warntype_info",
+      "fields": [
+        {
+          "name": "polyd",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "species",
+          "d": {
+            "p": "permonst"
+          },
+          "ctype": "struct permonst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "speciesidx",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "prop": {
+      "ctype": "struct prop",
+      "fields": [
+        {
+          "name": "extrinsic",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "blocked",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "intrinsic",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "monst": {
+      "ctype": "struct monst",
+      "fields": [
+        {
+          "name": "nmon",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "data",
+          "d": {
+            "p": "permonst"
+          },
+          "ctype": "struct permonst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "m_id",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "cham",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "m_lev",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mx",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "my",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mhp",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mappearance",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "m_ap_type",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mtame",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "minvis",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mcan",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mcansee",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "msleeping",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mstun",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mcanmove",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mconf",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mpeaceful",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "minvent",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "display_hints": {
+      "ctype": "struct display_hints",
+      "fields": [
+        {
+          "name": "botl",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "context_info": {
+      "ctype": "struct context_info",
+      "fields": [
+        {
+          "name": "warntype",
+          "d": {
+            "s": "warntype_info"
+          },
+          "ctype": "struct warntype_info",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "rm": {
+      "ctype": "struct rm",
+      "fields": [
+        {
+          "name": "typ",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "u_conduct": {
+      "ctype": "struct u_conduct",
+      "fields": [
+        {
+          "name": "polyselfs",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "c_common_strings": {
+      "ctype": "struct c_common_strings",
+      "fields": [
+        {
+          "name": "c_thats_enough_tries",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *const",
+          "bit": false,
+          "const": true
+        },
+        {
+          "name": "c_shudder_for_moment",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *const",
+          "bit": false,
+          "const": true
+        },
+        {
+          "name": "c_Never_mind",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *const",
+          "bit": false,
+          "const": true
+        },
+        {
+          "name": "c_the_your",
+          "d": {
+            "a": [
+              2
+            ],
+            "e": {
+              "p": ""
+            }
+          },
+          "ctype": "const char *const[2]",
+          "bit": false,
+          "const": true
+        }
+      ]
+    },
+    "Role": {
+      "ctype": "struct Role",
+      "fields": [
+        {
+          "name": "name",
+          "d": {
+            "s": "RoleName"
+          },
+          "ctype": "struct RoleName",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "dgn_topology": {
+      "ctype": "struct dgn_topology",
+      "fields": [
+        {
+          "name": "d_water_level",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "d_air_level",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "d_astral_level",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "Race": {
+      "ctype": "struct Race",
+      "fields": [
+        {
+          "name": "noun",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "adj",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "individual",
+          "d": {
+            "s": "RoleName"
+          },
+          "ctype": "struct RoleName",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "selfmask",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "attrmax",
+          "d": {
+            "a": [
+              6
+            ],
+            "e": {
+              "t": "i16"
+            }
+          },
+          "ctype": "xint16[6]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "Gender": {
+      "ctype": "struct Gender",
+      "fields": [
+        {
+          "name": "adj",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_i": {
+      "ctype": "struct instance_globals_i",
+      "fields": [
+        {
+          "name": "invent",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "you": {
+      "ctype": "struct you",
+      "fields": [
+        {
+          "name": "ux",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uy",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dx",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dy",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dz",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uz",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ulevel",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ulevelmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "utrap",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "utraptype",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uhunger",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uprops",
+          "d": {
+            "a": [
+              69
+            ],
+            "e": {
+              "s": "prop"
+            }
+          },
+          "ctype": "struct prop[69]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "umonster",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "umonnum",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mh",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mhmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mtimedone",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "macurr",
+          "d": {
+            "s": "attribs"
+          },
+          "ctype": "struct attribs",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mamax",
+          "d": {
+            "s": "attribs"
+          },
+          "ctype": "struct attribs",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ulycn",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uswallow",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "uinwater",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "uundetected",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mfemale",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "uconduct",
+          "d": {
+            "s": "u_conduct"
+          },
+          "ctype": "struct u_conduct",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "acurr",
+          "d": {
+            "s": "attribs"
+          },
+          "ctype": "struct attribs",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "amax",
+          "d": {
+            "s": "attribs"
+          },
+          "ctype": "struct attribs",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uhp",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uhpmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uen",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uenmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uhpinc",
+          "d": {
+            "a": [
+              30
+            ],
+            "e": {
+              "t": "i16"
+            }
+          },
+          "ctype": "xint16[30]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ueninc",
+          "d": {
+            "a": [
+              30
+            ],
+            "e": {
+              "t": "i16"
+            }
+          },
+          "ctype": "xint16[30]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uexp",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ustuck",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "usteed",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "twoweap",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mcham",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_m": {
+      "ctype": "struct instance_globals_m",
+      "fields": [
+        {
+          "name": "multi",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "cmdcount_nht",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "multi_reason",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "dlevel_t": {
+      "ctype": "dlevel_t",
+      "fields": [
+        {
+          "name": "locations",
+          "d": {
+            "a": [
+              80,
+              21
+            ],
+            "e": {
+              "s": "rm"
+            }
+          },
+          "ctype": "struct rm[80][21]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "objects",
+          "d": {
+            "a": [
+              80,
+              21
+            ],
+            "e": {
+              "p": "obj"
+            }
+          },
+          "ctype": "struct obj *[80][21]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "monlist",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_n": {
+      "ctype": "struct instance_globals_n",
+      "fields": [
+        {
+          "name": "nomovemsg",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "kinfo": {
+      "ctype": "struct kinfo",
+      "fields": [
+        {
+          "name": "format",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "name",
+          "d": {
+            "a": [
+              256
+            ],
+            "e": {
+              "t": "i8"
+            }
+          },
+          "ctype": "char[256]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "mvitals": {
+      "ctype": "struct mvitals",
+      "fields": [
+        {
+          "name": "mvflags",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_s": {
+      "ctype": "struct instance_globals_s",
+      "fields": [
+        {
+          "name": "sex_change_ok",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "sinfo": {
+      "ctype": "struct sinfo",
+      "fields": [
+        {
+          "name": "restoring",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_u": {
+      "ctype": "struct instance_globals_u",
+      "fields": [
+        {
+          "name": "urole",
+          "d": {
+            "s": "Role"
+          },
+          "ctype": "struct Role",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "urace",
+          "d": {
+            "s": "Race"
+          },
+          "ctype": "struct Race",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_v": {
+      "ctype": "struct instance_globals_v",
+      "fields": [
+        {
+          "name": "viz_array",
+          "d": {
+            "p": ""
+          },
+          "ctype": "seenV **",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "vision_full_recalc",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_w": {
+      "ctype": "struct instance_globals_w",
+      "fields": [
+        {
+          "name": "were_changes",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_y": {
+      "ctype": "struct instance_globals_y",
+      "fields": [
+        {
+          "name": "youmonst",
+          "d": {
+            "s": "monst"
+          },
+          "ctype": "struct monst",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_c": {
+      "ctype": "struct instance_globals_saved_c",
+      "fields": [
+        {
+          "name": "context",
+          "d": {
+            "s": "context_info"
+          },
+          "ctype": "struct context_info",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_d": {
+      "ctype": "struct instance_globals_saved_d",
+      "fields": [
+        {
+          "name": "dungeon_topology",
+          "d": {
+            "s": "dgn_topology"
+          },
+          "ctype": "struct dgn_topology",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_k": {
+      "ctype": "struct instance_globals_saved_k",
+      "fields": [
+        {
+          "name": "killer",
+          "d": {
+            "s": "kinfo"
+          },
+          "ctype": "struct kinfo",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_l": {
+      "ctype": "struct instance_globals_saved_l",
+      "fields": [
+        {
+          "name": "level",
+          "d": {
+            "s": "dlevel_t"
+          },
+          "ctype": "dlevel_t",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_m": {
+      "ctype": "struct instance_globals_saved_m",
+      "fields": [
+        {
+          "name": "mvitals",
+          "d": {
+            "a": [
+              383
+            ],
+            "e": {
+              "s": "mvitals"
+            }
+          },
+          "ctype": "struct mvitals[383]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_p": {
+      "ctype": "struct instance_globals_saved_p",
+      "fields": [
+        {
+          "name": "pl_character",
+          "d": {
+            "a": [
+              32
+            ],
+            "e": {
+              "t": "i8"
+            }
+          },
+          "ctype": "char[32]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    }
+  },
+  "globals": [
+    {
+      "name": "mons",
+      "d": {
+        "a": [
+          384
+        ],
+        "e": {
+          "s": "permonst"
+        }
+      }
+    },
+    {
+      "name": "u",
+      "d": {
+        "s": "you"
+      }
+    },
+    {
+      "name": "gy",
+      "d": {
+        "s": "instance_globals_y"
+      }
+    },
+    {
+      "name": "uwep",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "gu",
+      "d": {
+        "s": "instance_globals_u"
+      }
+    },
+    {
+      "name": "program_state",
+      "d": {
+        "s": "sinfo"
+      }
+    },
+    {
+      "name": "windowprocs",
+      "d": {
+        "s": "window_procs"
+      }
+    },
+    {
+      "name": "gw",
+      "d": {
+        "s": "instance_globals_w"
+      }
+    },
+    {
+      "name": "disp",
+      "d": {
+        "s": "display_hints"
+      }
+    },
+    {
+      "name": "uamul",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "flags",
+      "d": {
+        "s": "flag"
+      }
+    },
+    {
+      "name": "gm",
+      "d": {
+        "s": "instance_globals_m"
+      }
+    },
+    {
+      "name": "svk",
+      "d": {
+        "s": "instance_globals_saved_k"
+      }
+    },
+    {
+      "name": "svp",
+      "d": {
+        "s": "instance_globals_saved_p"
+      }
+    },
+    {
+      "name": "genders",
+      "d": {
+        "a": [
+          0
+        ],
+        "e": {
+          "s": "Gender"
+        }
+      }
+    },
+    {
+      "name": "gs",
+      "d": {
+        "s": "instance_globals_s"
+      }
+    },
+    {
+      "name": "uarmg",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uarm",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "c_common_strings",
+      "d": {
+        "s": "c_common_strings"
+      }
+    },
+    {
+      "name": "svm",
+      "d": {
+        "s": "instance_globals_saved_m"
+      }
+    },
+    {
+      "name": "uskin",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "ynchars",
+      "d": {
+        "a": [
+          0
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    },
+    {
+      "name": "svd",
+      "d": {
+        "s": "instance_globals_saved_d"
+      }
+    },
+    {
+      "name": "uball",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "gv",
+      "d": {
+        "s": "instance_globals_v"
+      }
+    },
+    {
+      "name": "gi",
+      "d": {
+        "s": "instance_globals_i"
+      }
+    },
+    {
+      "name": "uarmc",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uarmu",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uarmh",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "objects",
+      "d": {
+        "a": [
+          482
+        ],
+        "e": {
+          "s": "objclass"
+        }
+      }
+    },
+    {
+      "name": "uarms",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uarmf",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "ublindf",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uswapwep",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "svl",
+      "d": {
+        "s": "instance_globals_saved_l"
+      }
+    },
+    {
+      "name": "gn",
+      "d": {
+        "s": "instance_globals_n"
+      }
+    },
+    {
+      "name": "svc",
+      "d": {
+        "s": "instance_globals_saved_c"
+      }
+    }
+  ],
+  "constants": [
+    "ACID_RES",
+    "ACID_VENOM",
+    "AD_ACID",
+    "AD_ANY",
+    "AD_BLND",
+    "AD_COLD",
+    "AD_CONF",
+    "AD_DGST",
+    "AD_DISE",
+    "AD_DRST",
+    "AD_ELEC",
+    "AD_FIRE",
+    "AD_HALU",
+    "AD_MAGM",
+    "AD_RBRE",
+    "AIR",
+    "ALCHEMY_SMOCK",
+    "AMULET_OF_STRANGULATION",
+    "AMULET_OF_UNCHANGING",
+    "ANTIMAGIC",
+    "ANTI_MAGIC",
+    "ARM",
+    "ARROW_TRAP",
+    "AT_BREA",
+    "AT_CLAW",
+    "AT_ENGL",
+    "AT_EXPL",
+    "AT_GAZE",
+    "AT_SPIT",
+    "AT_WEAP",
+    "A_CON",
+    "A_DEX",
+    "A_STR",
+    "A_WIS",
+    "BEAR_TRAP",
+    "BLACK_DRAGON_SCALES",
+    "BLACK_DRAGON_SCALE_MAIL",
+    "BLINDED",
+    "BLINDING_VENOM",
+    "BLND_RES",
+    "BLUE_DRAGON_SCALES",
+    "BLUE_DRAGON_SCALE_MAIL",
+    "BOLT_LIM",
+    "BUFSZ",
+    "CLOUD",
+    "COLD_RES",
+    "CONFUSION",
+    "CORPSE",
+    "COULD_SEE",
+    "DART_TRAP",
+    "DIED",
+    "DISINT_RES",
+    "DISMOUNT_POLY",
+    "DRAIN_RES",
+    "ECMD_CANCEL",
+    "ECMD_OK",
+    "ECMD_TIME",
+    "EYE",
+    "FEMALE",
+    "FINGER",
+    "FINGERTIP",
+    "FIRE_RES",
+    "FIRE_TRAP",
+    "FLYING",
+    "FOOT",
+    "FOUNTAIN",
+    "FREE_ACTION",
+    "FROMFORM",
+    "FROMOUTSIDE",
+    "FROMRACE",
+    "GENOCIDED",
+    "GOLD_DRAGON_SCALES",
+    "GOLD_DRAGON_SCALE_MAIL",
+    "GRAY_DRAGON_SCALES",
+    "GRAY_DRAGON_SCALE_MAIL",
+    "GREEN_DRAGON_SCALES",
+    "GREEN_DRAGON_SCALE_MAIL",
+    "G_GENOD",
+    "G_UNIQ",
+    "HAIR",
+    "HALLUC",
+    "HALLUC_RES",
+    "HAND",
+    "HANDED",
+    "HEAD",
+    "HOLE",
+    "INFRAVISION",
+    "INVIS",
+    "I_SPECIAL",
+    "KILLED_BY",
+    "KILLED_BY_AN",
+    "LANDMINE",
+    "LEATHER",
+    "LEG",
+    "LEVEL_TELEP",
+    "LEVITATION",
+    "LL_CONDUCT",
+    "LL_MINORAC",
+    "LOW_PM",
+    "LS_MONSTER",
+    "M1_AMORPHOUS",
+    "M1_ANIMAL",
+    "M1_CLING",
+    "M1_CONCEAL",
+    "M1_FLY",
+    "M1_HIDE",
+    "M1_HUMANOID",
+    "M1_MINDLESS",
+    "M1_NOEYES",
+    "M1_NOHANDS",
+    "M1_NOHEAD",
+    "M1_OVIPAROUS",
+    "M1_REGEN",
+    "M1_SEE_INVIS",
+    "M1_SLITHY",
+    "M1_SWIM",
+    "M1_TPORT",
+    "M1_TPORT_CNTRL",
+    "M1_UNSOLID",
+    "M1_WALLWALK",
+    "M2_DWARF",
+    "M2_ELF",
+    "M2_FEMALE",
+    "M2_GIANT",
+    "M2_GNOME",
+    "M2_HUMAN",
+    "M2_JEWELS",
+    "M2_MALE",
+    "M2_NEUTER",
+    "M2_NOPOLY",
+    "M2_ORC",
+    "M2_PNAME",
+    "M2_STRONG",
+    "M2_UNDEAD",
+    "M2_WERE",
+    "M3_INFRAVISION",
+    "MAGIC_PORTAL",
+    "MAGIC_TRAP",
+    "MALE",
+    "MAXULEV",
+    "MR_ACID",
+    "MR_COLD",
+    "MR_DISINT",
+    "MR_ELEC",
+    "MR_FIRE",
+    "MR_POISON",
+    "MR_SLEEP",
+    "MR_STONE",
+    "MS_SHRIEK",
+    "MUMMY_WRAPPING",
+    "MZ_HUGE",
+    "MZ_SMALL",
+    "M_AP_FURNITURE",
+    "M_AP_NOTHING",
+    "M_AP_OBJECT",
+    "M_AP_TYPMASK",
+    "NATTK",
+    "NECK",
+    "NEUTRAL",
+    "NON_PM",
+    "NOSE",
+    "NO_KILLER_PREFIX",
+    "NO_PART",
+    "NO_TRAP_FLAGS",
+    "NUMMONS",
+    "ORANGE_DRAGON_SCALES",
+    "ORANGE_DRAGON_SCALE_MAIL",
+    "PASSES_WALLS",
+    "PIT",
+    "PM_AIR_ELEMENTAL",
+    "PM_ALIGNED_CLERIC",
+    "PM_AMOROUS_DEMON",
+    "PM_ARCHEOLOGIST",
+    "PM_BABY_GOLD_DRAGON",
+    "PM_BABY_GRAY_DRAGON",
+    "PM_BABY_PURPLE_WORM",
+    "PM_BAT",
+    "PM_BLACK_DRAGON",
+    "PM_BLACK_LIGHT",
+    "PM_BLUE_DRAGON",
+    "PM_CAVE_SPIDER",
+    "PM_CHICKATRICE",
+    "PM_CLERIC",
+    "PM_COCKATRICE",
+    "PM_DWARF",
+    "PM_ELECTRIC_EEL",
+    "PM_ELF",
+    "PM_FIRE_ELEMENTAL",
+    "PM_FIRE_VORTEX",
+    "PM_FLAMING_SPHERE",
+    "PM_FLESH_GOLEM",
+    "PM_FLOATING_EYE",
+    "PM_FOG_CLOUD",
+    "PM_GHOUL",
+    "PM_GIANT",
+    "PM_GIANT_BAT",
+    "PM_GIANT_EEL",
+    "PM_GIANT_SPIDER",
+    "PM_GNOME",
+    "PM_GOLD_DRAGON",
+    "PM_GRAY_DRAGON",
+    "PM_GREEN_DRAGON",
+    "PM_GREEN_ELF",
+    "PM_GREEN_SLIME",
+    "PM_GREMLIN",
+    "PM_GREY_ELF",
+    "PM_HILL_GIANT",
+    "PM_HILL_ORC",
+    "PM_HUMAN",
+    "PM_IRON_GOLEM",
+    "PM_JELLYFISH",
+    "PM_KI_RIN",
+    "PM_KRAKEN",
+    "PM_MANES",
+    "PM_MARILITH",
+    "PM_MASTER_MIND_FLAYER",
+    "PM_MASTODON",
+    "PM_MEDUSA",
+    "PM_MIND_FLAYER",
+    "PM_MORDOR_ORC",
+    "PM_MUMAK",
+    "PM_ORANGE_DRAGON",
+    "PM_ORC",
+    "PM_ORC_CAPTAIN",
+    "PM_OWLBEAR",
+    "PM_PURPLE_WORM",
+    "PM_RAVEN",
+    "PM_RED_DRAGON",
+    "PM_ROTHE",
+    "PM_SALAMANDER",
+    "PM_SHARK",
+    "PM_SHOCKING_SPHERE",
+    "PM_SHRIEKER",
+    "PM_SILVER_DRAGON",
+    "PM_STALKER",
+    "PM_STONE_GIANT",
+    "PM_STONE_GOLEM",
+    "PM_URUK_HAI",
+    "PM_VAMPIRE",
+    "PM_VAMPIRE_BAT",
+    "PM_VAMPIRE_LEADER",
+    "PM_VLAD_THE_IMPALER",
+    "PM_WHITE_DRAGON",
+    "PM_WINGED_GARGOYLE",
+    "PM_WOLF",
+    "PM_YELLOW_DRAGON",
+    "POISON_RES",
+    "POLYMORPH",
+    "POLYMORPH_CONTROL",
+    "POLY_CONTROLLED",
+    "POLY_LOW_CTRL",
+    "POLY_MONSTER",
+    "POLY_REVERT",
+    "POLY_TRAP",
+    "PROT_FROM_SHAPE_CHANGERS",
+    "P_SABER",
+    "P_SHORT_SWORD",
+    "QBUFSZ",
+    "REASSESS_ONLY",
+    "RED_DRAGON_SCALES",
+    "RED_DRAGON_SCALE_MAIL",
+    "REFLECTING",
+    "REGENERATION",
+    "ROCKTRAP",
+    "ROLLING_BOULDER_TRAP",
+    "ROOM",
+    "RUBBER_HOSE",
+    "RUST_TRAP",
+    "SEE_INVIS",
+    "SHOCK_RES",
+    "SHOPBASE",
+    "SHOP_WEB_COST",
+    "SICK",
+    "SICK_ALL",
+    "SICK_RES",
+    "SILVER_DRAGON_SCALES",
+    "SILVER_DRAGON_SCALE_MAIL",
+    "SLEEP_RES",
+    "SLIMED",
+    "SLP_GAS_TRAP",
+    "SPECIAL_PM",
+    "SPIKED_PIT",
+    "SQKY_BOARD",
+    "STAIRS",
+    "STEALTH",
+    "STONED",
+    "STONE_RES",
+    "STONING",
+    "STRANGE_OBJECT",
+    "STRANGLED",
+    "STUNNED",
+    "SWIMMING",
+    "S_ANGEL",
+    "S_BLOB",
+    "S_CENTAUR",
+    "S_COCKATRICE",
+    "S_DOG",
+    "S_DRAGON",
+    "S_EEL",
+    "S_ELEMENTAL",
+    "S_EYE",
+    "S_FELINE",
+    "S_FUNGUS",
+    "S_GHOST",
+    "S_GIANT",
+    "S_GOLEM",
+    "S_HUMAN",
+    "S_JELLY",
+    "S_LEPRECHAUN",
+    "S_LIGHT",
+    "S_MIMIC",
+    "S_MUMMY",
+    "S_NYMPH",
+    "S_ORC",
+    "S_PUDDING",
+    "S_QUANTMECH",
+    "S_RODENT",
+    "S_SPIDER",
+    "S_UNICORN",
+    "S_VAMPIRE",
+    "S_VORTEX",
+    "S_WORM",
+    "S_YETI",
+    "S_ZOMBIE",
+    "TELEPAT",
+    "TELEPORT",
+    "TELEPORT_CONTROL",
+    "TELEP_TRAP",
+    "TOE",
+    "TRAPDOOR",
+    "TT_BEARTRAP",
+    "TT_BURIEDBALL",
+    "TT_INFLOOR",
+    "TT_LAVA",
+    "TT_PIT",
+    "TT_WEB",
+    "UNCHANGING",
+    "VIBRATING_SQUARE",
+    "WARN_OF_MON",
+    "WC2_FLUSH_STATUS",
+    "WC2_HILITE_STATUS",
+    "WEAPON_CLASS",
+    "WEB",
+    "WHITE_DRAGON_SCALES",
+    "WHITE_DRAGON_SCALE_MAIL",
+    "W_ARMU",
+    "YELLOW_DRAGON_SCALES",
+    "YELLOW_DRAGON_SCALE_MAIL"
+  ],
+  "probeConstants": [
+    "COULD_SEE",
+    "PM_ARCHEOLOGIST",
+    "ROOM"
+  ],
+  "literals": [
+    "",
+    " ",
+    " and weapon",
+    " dragon ",
+    "%.10s %.30s",
+    "%s",
+    "%s %s off!",
+    "%s %s through %s.",
+    "%s %s your %s!",
+    "%s %s!",
+    "%s can no longer contain you.",
+    "%s falls to the %s!",
+    "%s falls, unsupported!",
+    "%s into %s",
+    "%s is getting more and more confused.",
+    "%s is no longer in your clutches.",
+    "%s loses its grip on you.",
+    "%s now feels soothing.",
+    "%s reverts to scales as you merge with them.",
+    "%s seems not to notice your gaze.",
+    "%s tears apart!",
+    "%s touch %s.",
+    "*",
+    "A wave of psychic energy pours out.",
+    "Become %s?",
+    "Become what kind of monster? [type the name]",
+    "But none arrive.",
+    "Gazing at the awake %s is not a very good idea.",
+    "Hiding under %s%s is a fatal mistake...",
+    "I've never heard of such monsters.",
+    "No longer petrify-resistant, you",
+    "Really %s %s?",
+    "Strangely, you feel better than before.",
+    "Swallower has no engulfing attack?",
+    "The slime burns away!",
+    "Use the command #%s to %s.",
+    "Webbing over trap type %d?",
+    "You feel like a new %s!",
+    "You no longer seem to be petrifying.",
+    "You return to %s form!",
+    "You turn to stone!",
+    "You turn to stone...",
+    "Your new form doesn't seem healthy enough to survive.",
+    "abdomen",
+    "addled",
+    "aligned",
+    "anal fin",
+    "and %s return gently to the %s.",
+    "anterior segment",
+    "appendage",
+    "are frozen by %s gaze!",
+    "are no longer being strangled.",
+    "are no longer stuck in the %s.",
+    "are not chained to anything!",
+    "are pushed",
+    "arm",
+    "armor falls around you!",
+    "attack",
+    "attack %s with a fiery gaze!",
+    "avoid gazing at %s.",
+    "backbone",
+    "bad attack type in dospit",
+    "bad breath attack?",
+    "bad spit attack?",
+    "ball and chain are buried firmly in the %s.",
+    "beam",
+    "bear trap",
+    "became experience level %d as a new %s",
+    "become much too small for your shirt!",
+    "begins constricting",
+    "being held",
+    "bill",
+    "blood",
+    "body",
+    "body transforms, but there is still slime on you.",
+    "book lung",
+    "boots %s off your feet!",
+    "boots fall away!",
+    "break out of your armor!",
+    "breathe.  Sorry.",
+    "buried ball is no longer bound to you.",
+    "call upon your brethren for help!",
+    "can no longer hold your shield!",
+    "cannot spin webs while stuck in a trap.",
+    "cap area",
+    "caudal fin",
+    "center",
+    "central core",
+    "cephalothorax",
+    "cerebral area",
+    "change shape",
+    "changed form for the first time, becoming %s",
+    "cilia",
+    "clasp on your %s breaks open!",
+    "claw",
+    "claw tip",
+    "clawed",
+    "clitellum",
+    "concentrate but lack the energy to maintain doing so.",
+    "concentrate.",
+    "condemned",
+    "confuse",
+    "cornea",
+    "corpse",
+    "currents",
+    "dark spot",
+    "dead",
+    "deliberately meeting Medusa's gaze",
+    "digestive tract",
+    "dogaze",
+    "domindblast",
+    "don't have enough energy to breathe!",
+    "dorsal fin",
+    "drop",
+    "drop your gloves%s!",
+    "edge",
+    "emit a mental blast",
+    "empty",
+    "engulfed",
+    "equator",
+    "eye",
+    "face",
+    "fail",
+    "fail to transform!",
+    "fall",
+    "feathers",
+    "feel like",
+    "female ",
+    "fin",
+    "find you must %s %s %s!",
+    "finger",
+    "fingertip",
+    "finned",
+    "fire doesn't burn %s!",
+    "foot",
+    "foreclaw",
+    "forehoof",
+    "foreleg",
+    "forelimb",
+    "forked tongue",
+    "fountain is not deep enough to hide in.",
+    "freezes, shatters and ",
+    "fries and ",
+    "front",
+    "frozen by a monster's gaze",
+    "fur",
+    "gaze at anything you can see.",
+    "gaze at monsters",
+    "gaze at no place in particular.",
+    "gaze attack %d?",
+    "gaze confuses %s!",
+    "gill",
+    "gills",
+    "grasp",
+    "grasped",
+    "hair",
+    "hand",
+    "handed",
+    "have triggered a trap!",
+    "head",
+    "hemolymph",
+    "hide",
+    "hide or to spin a web",
+    "hide while you're %s.",
+    "hiding under %s%s",
+    "holding someone",
+    "holding that creature",
+    "hole",
+    "hoof tip",
+    "hooved",
+    "horn%s",
+    "hypha",
+    "ignites and ",
+    "interior",
+    "is no %s to hide in here.",
+    "is nothing to hide under here.",
+    "is nowhere to hide above you.",
+    "is nowhere to hide beneath you.",
+    "juices",
+    "killed while stuck in creature form",
+    "knot on your %s is pulled apart!",
+    "labrum",
+    "lack the energy to send forth a call for help!",
+    "lack the energy to use your special gaze!",
+    "ladder",
+    "large scale",
+    "large scale tip",
+    "latent telepathy",
+    "lava",
+    "lay an egg",
+    "leading edge",
+    "leg",
+    "length",
+    "life force",
+    "light headed",
+    "light sensitive cell",
+    "lock in on %s %s.",
+    "lower appendage",
+    "lower current",
+    "lower pseudopod",
+    "lower tentacle",
+    "lower tentacle tip",
+    "lung",
+    "make the web thicker.",
+    "male ",
+    "mane",
+    "mbodypart: bad part %d",
+    "merge with your scaly armor.",
+    "middle",
+    "mind",
+    "minor current",
+    "monster",
+    "multiply in a fountain",
+    "must be on %s ground to spin a web.",
+    "mycelium",
+    "mystery part",
+    "neck",
+    "new ",
+    "newman",
+    "no longer feel sick.",
+    "nose",
+    "nostril",
+    "old form was not healthy enough to survive.",
+    "olfactory nerve",
+    "optic nerve",
+    "orient yourself on the web.",
+    "over stretched",
+    "pair of ",
+    "palped",
+    "paw",
+    "pawed",
+    "pectoral fin",
+    "pedipalp",
+    "peduncle",
+    "pelvic axillary",
+    "pelvic fin",
+    "pierce",
+    "played out",
+    "polyman",
+    "polymon",
+    "polymorph into %s.",
+    "polymorph into any of those.",
+    "polymorphed",
+    "polyself",
+    "posterior",
+    "posterior segment",
+    "posterior setae",
+    "premaxillary",
+    "prostomium",
+    "pseudopod",
+    "pseudopod extension",
+    "pseudopod extremity",
+    "pseudopod root",
+    "random",
+    "rather %s-ish.",
+    "ray",
+    "rayed",
+    "rear claw",
+    "rear claw tip",
+    "rear hoof",
+    "rear hoof tip",
+    "rear leg",
+    "rear limb",
+    "rear paw",
+    "rear region",
+    "rear scale",
+    "region",
+    "release",
+    "release web fluid inside %s.",
+    "remove an iron ball",
+    "retina",
+    "reverting to unhealthy %s form",
+    "rhizome",
+    "rhizome tip",
+    "riding %s",
+    "ripples",
+    "rock seems to no longer trap you.",
+    "root",
+    "rotational",
+    "s",
+    "scale gap",
+    "scale gapped",
+    "scales",
+    "see anything to gaze at.",
+    "see where to gaze at %s.",
+    "seep right through your shirt!",
+    "segment",
+    "segmented",
+    "self-genocide",
+    "sensor",
+    "setae",
+    "shirt rips to shreds!",
+    "shriek",
+    "shrink out of your %s!",
+    "sit",
+    "skin",
+    "skin returns to its original form.",
+    "slide",
+    "slip free of the buried ball and chain.",
+    "slip out of the iron chain.",
+    "solid",
+    "spawn in the water",
+    "spin a web",
+    "spin a web, covering up the pit.",
+    "spin a web, jamming the trigger.",
+    "spin a web.",
+    "spine",
+    "spit venom",
+    "spores",
+    "sporulated",
+    "spun out",
+    "squeaky board is muffled.",
+    "stairs",
+    "stalk",
+    "stiffen momentarily under %s gaze.",
+    "still constricts",
+    "stomach",
+    "strand",
+    "stranded",
+    "summon help",
+    "surface",
+    "swallowed",
+    "swirl",
+    "swirled",
+    "sword",
+    "system shock",
+    "tarsus",
+    "telepathy",
+    "tentacle",
+    "tentacle tip",
+    "tentacled",
+    "the",
+    "toe",
+    "transform into %s.",
+    "transformed",
+    "trap door",
+    "trapped",
+    "trunk",
+    "turn into",
+    "unsuccessful polymorph",
+    "use your breath weapon",
+    "use your horn",
+    "uunstick: no ustuck?",
+    "vestigial limb",
+    "viscous",
+    "visual area",
+    "water",
+    "weapon",
+    "web",
+    "web %sis swept away!",
+    "web dissolves into %s.",
+    "web fails to impede access to the %s.",
+    "web over the %s.",
+    "webbing vanishes!",
+    "wing",
+    "wing tip",
+    "winged"
+  ],
+  "rngSites": [
+    {
+      "function": "polyman",
+      "line": 256,
+      "kind": "rn1",
+      "offset": 9112
+    },
+    {
+      "function": "newman",
+      "line": 342,
+      "kind": "rn1",
+      "offset": 11916
+    },
+    {
+      "function": "newman",
+      "line": 361,
+      "kind": "rn2",
+      "offset": 12740
+    },
+    {
+      "function": "newman",
+      "line": 390,
+      "kind": "rn1",
+      "offset": 13858
+    },
+    {
+      "function": "newman",
+      "line": 404,
+      "kind": "rn1",
+      "offset": 14399
+    },
+    {
+      "function": "newman",
+      "line": 414,
+      "kind": "rn1",
+      "offset": 14735
+    },
+    {
+      "function": "polyself",
+      "line": 490,
+      "kind": "rn2",
+      "offset": 17508
+    },
+    {
+      "function": "polyself",
+      "line": 492,
+      "kind": "rnd",
+      "offset": 17591
+    },
+    {
+      "function": "polyself",
+      "line": 554,
+      "kind": "rn2",
+      "offset": 19903
+    },
+    {
+      "function": "polyself",
+      "line": 556,
+      "kind": "rn2",
+      "offset": 20011
+    },
+    {
+      "function": "polyself",
+      "line": 558,
+      "kind": "rn2",
+      "offset": 20120
+    },
+    {
+      "function": "polyself",
+      "line": 601,
+      "kind": "rn2",
+      "offset": 22450
+    },
+    {
+      "function": "polyself",
+      "line": 674,
+      "kind": "rn2",
+      "offset": 25878
+    },
+    {
+      "function": "polyself",
+      "line": 675,
+      "kind": "rn2",
+      "offset": 25938
+    },
+    {
+      "function": "polyself",
+      "line": 678,
+      "kind": "rn2",
+      "offset": 26128
+    },
+    {
+      "function": "polyself",
+      "line": 702,
+      "kind": "rn1",
+      "offset": 26926
+    },
+    {
+      "function": "polyself",
+      "line": 712,
+      "kind": "rn2",
+      "offset": 27315
+    },
+    {
+      "function": "polymon",
+      "line": 792,
+      "kind": "rn2",
+      "offset": 30022
+    },
+    {
+      "function": "polymon",
+      "line": 813,
+      "kind": "rn1",
+      "offset": 30772
+    },
+    {
+      "function": "polymon",
+      "line": 861,
+      "kind": "d",
+      "offset": 32627
+    },
+    {
+      "function": "polymon",
+      "line": 866,
+      "kind": "rnd",
+      "offset": 32773
+    },
+    {
+      "function": "polymon",
+      "line": 868,
+      "kind": "d",
+      "offset": 32816
+    },
+    {
+      "function": "polymon",
+      "line": 897,
+      "kind": "rn1",
+      "offset": 33673
+    },
+    {
+      "function": "polymon",
+      "line": 956,
+      "kind": "rnl",
+      "offset": 36362
+    },
+    {
+      "function": "dogaze",
+      "line": 1715,
+      "kind": "d",
+      "offset": 62983
+    },
+    {
+      "function": "dogaze",
+      "line": 1722,
+      "kind": "rn2",
+      "offset": 63309
+    },
+    {
+      "function": "dogaze",
+      "line": 1741,
+      "kind": "rn2",
+      "offset": 64130
+    },
+    {
+      "function": "dogaze",
+      "line": 1743,
+      "kind": "d",
+      "offset": 64175
+    },
+    {
+      "function": "domindblast",
+      "line": 1921,
+      "kind": "rn2",
+      "offset": 70711
+    },
+    {
+      "function": "domindblast",
+      "line": 1921,
+      "kind": "rn2",
+      "offset": 70723
+    },
+    {
+      "function": "domindblast",
+      "line": 1922,
+      "kind": "rnd",
+      "offset": 70752
+    }
+  ],
+  "headerMacros": {
+    "ACURR": {
+      "params": [
+        "x"
+      ],
+      "expression": "(env.acurr(x))",
+      "original": "(acurr(x))"
+    },
+    "BFlying": {
+      "params": null,
+      "expression": "env.u.uprops[env.FLYING].blocked",
+      "original": "u.uprops[FLYING].blocked"
+    },
+    "BLevitation": {
+      "params": null,
+      "expression": "env.u.uprops[env.LEVITATION].blocked",
+      "original": "u.uprops[LEVITATION].blocked"
+    },
+    "BStealth": {
+      "params": null,
+      "expression": "env.u.uprops[env.STEALTH].blocked",
+      "original": "u.uprops[STEALTH].blocked"
+    },
+    "BZ_OFS_AD": {
+      "params": [
+        "adtyp"
+      ],
+      "expression": "(env.abs((adtyp) - env.AD_MAGM) % 10)",
+      "original": "(abs((adtyp) - AD_MAGM) % 10)"
+    },
+    "BZ_U_BREATH": {
+      "params": [
+        "bztyp"
+      ],
+      "expression": "(20 + (bztyp))",
+      "original": "(20 + (bztyp))"
+    },
+    "HBlinded": {
+      "params": null,
+      "expression": "env.u.uprops[env.BLINDED].intrinsic",
+      "original": "u.uprops[BLINDED].intrinsic"
+    },
+    "EBlinded": {
+      "params": null,
+      "expression": "env.u.uprops[env.BLINDED].extrinsic",
+      "original": "u.uprops[BLINDED].extrinsic"
+    },
+    "BBlinded": {
+      "params": null,
+      "expression": "env.u.uprops[env.BLINDED].blocked",
+      "original": "u.uprops[BLINDED].blocked"
+    },
+    "Blind": {
+      "params": null,
+      "expression": "((env.HBlinded || env.EBlinded) && !env.BBlinded)",
+      "original": "((HBlinded || EBlinded) && !BBlinded)"
+    },
+    "HConfusion": {
+      "params": null,
+      "expression": "env.u.uprops[env.CONFUSION].intrinsic",
+      "original": "u.uprops[CONFUSION].intrinsic"
+    },
+    "Confusion": {
+      "params": null,
+      "expression": "env.HConfusion",
+      "original": "HConfusion"
+    },
+    "DEADMONSTER": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean(((mon).mhp < 1)))",
+      "original": "((mon)->mhp < 1)"
+    },
+    "EFlying": {
+      "params": null,
+      "expression": "env.u.uprops[env.FLYING].extrinsic",
+      "original": "u.uprops[FLYING].extrinsic"
+    },
+    "ELevitation": {
+      "params": null,
+      "expression": "env.u.uprops[env.LEVITATION].extrinsic",
+      "original": "u.uprops[LEVITATION].extrinsic"
+    },
+    "HFlying": {
+      "params": null,
+      "expression": "env.u.uprops[env.FLYING].intrinsic",
+      "original": "u.uprops[FLYING].intrinsic"
+    },
+    "is_flyer": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_FLY) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_FLY) != 0L)"
+    },
+    "Flying": {
+      "params": null,
+      "expression": "((env.HFlying || env.EFlying || (env.u.usteed && env.is_flyer(env.u.usteed.data))) && !env.BFlying)",
+      "original": "((HFlying || EFlying || (u.usteed && is_flyer(u.usteed->data))) && !BFlying)"
+    },
+    "Free_action": {
+      "params": null,
+      "expression": "env.u.uprops[env.FREE_ACTION].extrinsic",
+      "original": "u.uprops[FREE_ACTION].extrinsic"
+    },
+    "HLevitation": {
+      "params": null,
+      "expression": "env.u.uprops[env.LEVITATION].intrinsic",
+      "original": "u.uprops[LEVITATION].intrinsic"
+    },
+    "HWarn_of_mon": {
+      "params": null,
+      "expression": "env.u.uprops[env.WARN_OF_MON].intrinsic",
+      "original": "u.uprops[WARN_OF_MON].intrinsic"
+    },
+    "HHallucination": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALLUC].intrinsic",
+      "original": "u.uprops[HALLUC].intrinsic"
+    },
+    "HHalluc_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALLUC_RES].intrinsic",
+      "original": "u.uprops[HALLUC_RES].intrinsic"
+    },
+    "EHalluc_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALLUC_RES].extrinsic",
+      "original": "u.uprops[HALLUC_RES].extrinsic"
+    },
+    "Halluc_resistance": {
+      "params": null,
+      "expression": "(env.HHalluc_resistance || env.EHalluc_resistance)",
+      "original": "(HHalluc_resistance || EHalluc_resistance)"
+    },
+    "Hallucination": {
+      "params": null,
+      "expression": "(env.HHallucination && !env.Halluc_resistance)",
+      "original": "(HHallucination && !Halluc_resistance)"
+    },
+    "IS_AIR": {
+      "params": [
+        "typ"
+      ],
+      "expression": "Number(Boolean(((typ) == env.AIR || (typ) == env.CLOUD)))",
+      "original": "((typ) == AIR || (typ) == CLOUD)"
+    },
+    "IS_FOUNTAIN": {
+      "params": [
+        "typ"
+      ],
+      "expression": "Number(Boolean(((typ) == env.FOUNTAIN)))",
+      "original": "((typ) == FOUNTAIN)"
+    },
+    "astral_level": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_astral_level)",
+      "original": "(svd.dungeon_topology.d_astral_level)"
+    },
+    "In_endgame": {
+      "params": [
+        "x"
+      ],
+      "expression": "Number(Boolean(((x).dnum == env.astral_level.dnum)))",
+      "original": "((x)->dnum == astral_level.dnum)"
+    },
+    "HInvis": {
+      "params": null,
+      "expression": "env.u.uprops[env.INVIS].intrinsic",
+      "original": "u.uprops[INVIS].intrinsic"
+    },
+    "EInvis": {
+      "params": null,
+      "expression": "env.u.uprops[env.INVIS].extrinsic",
+      "original": "u.uprops[INVIS].extrinsic"
+    },
+    "BInvis": {
+      "params": null,
+      "expression": "env.u.uprops[env.INVIS].blocked",
+      "original": "u.uprops[INVIS].blocked"
+    },
+    "Invis": {
+      "params": null,
+      "expression": "((env.HInvis || env.EInvis) && !env.BInvis)",
+      "original": "((HInvis || EInvis) && !BInvis)"
+    },
+    "Lassigned": {
+      "params": [
+        "y"
+      ],
+      "expression": "Number(Boolean(((y).dlevel || (y).dnum)))",
+      "original": "((y)->dlevel || (y)->dnum)"
+    },
+    "Lcheck": {
+      "params": [
+        "x",
+        "z"
+      ],
+      "expression": "Number(Boolean((env.Lassigned(z) && env.on_level(x, z))))",
+      "original": "(Lassigned(z) && on_level(x, z))"
+    },
+    "air_level": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_air_level)",
+      "original": "(svd.dungeon_topology.d_air_level)"
+    },
+    "Is_airlevel": {
+      "params": [
+        "x"
+      ],
+      "expression": "(env.Lcheck(x, env.air_level))",
+      "original": "(Lcheck(x, &air_level))"
+    },
+    "Is_dragon_scales": {
+      "params": [
+        "obj"
+      ],
+      "expression": "Number(Boolean(((obj).otyp >= env.GRAY_DRAGON_SCALES && (obj).otyp <= env.YELLOW_DRAGON_SCALES)))",
+      "original": "((obj)->otyp >= GRAY_DRAGON_SCALES && (obj)->otyp <= YELLOW_DRAGON_SCALES)"
+    },
+    "Is_dragon_mail": {
+      "params": [
+        "obj"
+      ],
+      "expression": "Number(Boolean(((obj).otyp >= env.GRAY_DRAGON_SCALE_MAIL && (obj).otyp <= env.YELLOW_DRAGON_SCALE_MAIL)))",
+      "original": "((obj)->otyp >= GRAY_DRAGON_SCALE_MAIL && (obj)->otyp <= YELLOW_DRAGON_SCALE_MAIL)"
+    },
+    "Is_dragon_armor": {
+      "params": [
+        "obj"
+      ],
+      "expression": "Number(Boolean((env.Is_dragon_scales(obj) || env.Is_dragon_mail(obj))))",
+      "original": "(Is_dragon_scales(obj) || Is_dragon_mail(obj))"
+    },
+    "water_level": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_water_level)",
+      "original": "(svd.dungeon_topology.d_water_level)"
+    },
+    "Is_waterlevel": {
+      "params": [
+        "x"
+      ],
+      "expression": "(env.Lcheck(x, env.water_level))",
+      "original": "(Lcheck(x, &water_level))"
+    },
+    "Levitation": {
+      "params": null,
+      "expression": "((env.HLevitation || env.ELevitation) && !env.BLevitation)",
+      "original": "((HLevitation || ELevitation) && !BLevitation)"
+    },
+    "M_AP_TYPE": {
+      "params": [
+        "m"
+      ],
+      "expression": "((m).m_ap_type & env.M_AP_TYPMASK)",
+      "original": "((m)->m_ap_type & M_AP_TYPMASK)"
+    },
+    "Never_mind": {
+      "params": null,
+      "expression": "env.c_common_strings.c_Never_mind",
+      "original": "c_common_strings.c_Never_mind"
+    },
+    "HPasses_walls": {
+      "params": null,
+      "expression": "env.u.uprops[env.PASSES_WALLS].intrinsic",
+      "original": "u.uprops[PASSES_WALLS].intrinsic"
+    },
+    "EPasses_walls": {
+      "params": null,
+      "expression": "env.u.uprops[env.PASSES_WALLS].extrinsic",
+      "original": "u.uprops[PASSES_WALLS].extrinsic"
+    },
+    "Passes_walls": {
+      "params": null,
+      "expression": "(env.HPasses_walls || env.EPasses_walls)",
+      "original": "(HPasses_walls || EPasses_walls)"
+    },
+    "HPolymorph_control": {
+      "params": null,
+      "expression": "env.u.uprops[env.POLYMORPH_CONTROL].intrinsic",
+      "original": "u.uprops[POLYMORPH_CONTROL].intrinsic"
+    },
+    "EPolymorph_control": {
+      "params": null,
+      "expression": "env.u.uprops[env.POLYMORPH_CONTROL].extrinsic",
+      "original": "u.uprops[POLYMORPH_CONTROL].extrinsic"
+    },
+    "Polymorph_control": {
+      "params": null,
+      "expression": "(env.HPolymorph_control || env.EPolymorph_control)",
+      "original": "(HPolymorph_control || EPolymorph_control)"
+    },
+    "HProtection_from_shape_changers": {
+      "params": null,
+      "expression": "env.u.uprops[env.PROT_FROM_SHAPE_CHANGERS].intrinsic",
+      "original": "u.uprops[PROT_FROM_SHAPE_CHANGERS].intrinsic"
+    },
+    "EProtection_from_shape_changers": {
+      "params": null,
+      "expression": "env.u.uprops[env.PROT_FROM_SHAPE_CHANGERS].extrinsic",
+      "original": "u.uprops[PROT_FROM_SHAPE_CHANGERS].extrinsic"
+    },
+    "Protection_from_shape_changers": {
+      "params": null,
+      "expression": "(env.HProtection_from_shape_changers || env.EProtection_from_shape_changers)",
+      "original": "(HProtection_from_shape_changers || EProtection_from_shape_changers)"
+    },
+    "Punished": {
+      "params": null,
+      "expression": "(env.uball != 0)",
+      "original": "(uball != 0)"
+    },
+    "Role_switch": {
+      "params": null,
+      "expression": "(env.gu.urole.mnum)",
+      "original": "(gu.urole.mnum)"
+    },
+    "STR18": {
+      "params": [
+        "x"
+      ],
+      "expression": "(18 + (x))",
+      "original": "(18 + (x))"
+    },
+    "STR19": {
+      "params": [
+        "x"
+      ],
+      "expression": "(100 + (x))",
+      "original": "(100 + (x))"
+    },
+    "HSee_invisible": {
+      "params": null,
+      "expression": "env.u.uprops[env.SEE_INVIS].intrinsic",
+      "original": "u.uprops[SEE_INVIS].intrinsic"
+    },
+    "ESee_invisible": {
+      "params": null,
+      "expression": "env.u.uprops[env.SEE_INVIS].extrinsic",
+      "original": "u.uprops[SEE_INVIS].extrinsic"
+    },
+    "See_invisible": {
+      "params": null,
+      "expression": "(env.HSee_invisible || env.ESee_invisible)",
+      "original": "(HSee_invisible || ESee_invisible)"
+    },
+    "Sick": {
+      "params": null,
+      "expression": "env.u.uprops[env.SICK].intrinsic",
+      "original": "u.uprops[SICK].intrinsic"
+    },
+    "HSick_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.SICK_RES].intrinsic",
+      "original": "u.uprops[SICK_RES].intrinsic"
+    },
+    "ESick_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.SICK_RES].extrinsic",
+      "original": "u.uprops[SICK_RES].extrinsic"
+    },
+    "Sick_resistance": {
+      "params": null,
+      "expression": "(env.HSick_resistance || env.ESick_resistance || env.defended(env.gy.youmonst, env.AD_DISE))",
+      "original": "(HSick_resistance || ESick_resistance || defended(&gy.youmonst, AD_DISE))"
+    },
+    "Slimed": {
+      "params": null,
+      "expression": "env.u.uprops[env.SLIMED].intrinsic",
+      "original": "u.uprops[SLIMED].intrinsic"
+    },
+    "HStone_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.STONE_RES].intrinsic",
+      "original": "u.uprops[STONE_RES].intrinsic"
+    },
+    "EStone_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.STONE_RES].extrinsic",
+      "original": "u.uprops[STONE_RES].extrinsic"
+    },
+    "Stone_resistance": {
+      "params": null,
+      "expression": "(env.HStone_resistance || env.EStone_resistance)",
+      "original": "(HStone_resistance || EStone_resistance)"
+    },
+    "Stoned": {
+      "params": null,
+      "expression": "env.u.uprops[env.STONED].intrinsic",
+      "original": "u.uprops[STONED].intrinsic"
+    },
+    "Strangled": {
+      "params": null,
+      "expression": "env.u.uprops[env.STRANGLED].intrinsic",
+      "original": "u.uprops[STRANGLED].intrinsic"
+    },
+    "HStun": {
+      "params": null,
+      "expression": "env.u.uprops[env.STUNNED].intrinsic",
+      "original": "u.uprops[STUNNED].intrinsic"
+    },
+    "Stunned": {
+      "params": null,
+      "expression": "env.HStun",
+      "original": "HStun"
+    },
+    "HSwimming": {
+      "params": null,
+      "expression": "env.u.uprops[env.SWIMMING].intrinsic",
+      "original": "u.uprops[SWIMMING].intrinsic"
+    },
+    "ESwimming": {
+      "params": null,
+      "expression": "env.u.uprops[env.SWIMMING].extrinsic",
+      "original": "u.uprops[SWIMMING].extrinsic"
+    },
+    "is_swimmer": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_SWIM) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_SWIM) != 0L)"
+    },
+    "Swimming": {
+      "params": null,
+      "expression": "(env.HSwimming || env.ESwimming || (env.u.usteed && env.is_swimmer(env.u.usteed.data)))",
+      "original": "(HSwimming || ESwimming || (u.usteed && is_swimmer(u.usteed->data)))"
+    },
+    "U_AP_TYPE": {
+      "params": null,
+      "expression": "(env.gy.youmonst.m_ap_type & env.M_AP_TYPMASK)",
+      "original": "(gy.youmonst.m_ap_type & M_AP_TYPMASK)"
+    },
+    "Upolyd": {
+      "params": null,
+      "expression": "(env.u.umonnum != env.u.umonster)",
+      "original": "(u.umonnum != u.umonster)"
+    },
+    "Ugender": {
+      "params": null,
+      "expression": "((env.Upolyd ? env.u.mfemale : env.flags.female) ? 1 : 0)",
+      "original": "((Upolyd ? u.mfemale : flags.female) ? 1 : 0)"
+    },
+    "Unaware": {
+      "params": null,
+      "expression": "(env.gm.multi < 0 && (env.unconscious() || env.is_fainted()))",
+      "original": "(gm.multi < 0 && (unconscious() || is_fainted()))"
+    },
+    "HUnchanging": {
+      "params": null,
+      "expression": "env.u.uprops[env.UNCHANGING].intrinsic",
+      "original": "u.uprops[UNCHANGING].intrinsic"
+    },
+    "EUnchanging": {
+      "params": null,
+      "expression": "env.u.uprops[env.UNCHANGING].extrinsic",
+      "original": "u.uprops[UNCHANGING].extrinsic"
+    },
+    "Unchanging": {
+      "params": null,
+      "expression": "(env.HUnchanging || env.EUnchanging)",
+      "original": "(HUnchanging || EUnchanging)"
+    },
+    "Underwater": {
+      "params": null,
+      "expression": "(env.u.uinwater)",
+      "original": "(u.uinwater)"
+    },
+    "VIA_WINDOWPORT": {
+      "params": [],
+      "expression": "Number(Boolean(((env.windowprocs.wincap2 & (env.WC2_HILITE_STATUS | env.WC2_FLUSH_STATUS)) != 0)))",
+      "original": "((windowprocs.wincap2 & (WC2_HILITE_STATUS | WC2_FLUSH_STATUS)) != 0)"
+    },
+    "humanoid": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_HUMANOID) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_HUMANOID) != 0L)"
+    },
+    "noncorporeal": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).mlet == env.S_GHOST)))",
+      "original": "((ptr)->mlet == S_GHOST)"
+    },
+    "WrappingAllowed": {
+      "params": [
+        "mptr"
+      ],
+      "expression": "Number(Boolean((env.humanoid(mptr) && (mptr).msize >= env.MZ_SMALL && (mptr).msize <= env.MZ_HUGE && !env.noncorporeal(mptr) && (mptr).mlet != env.S_CENTAUR && (mptr) != env.mons[env.PM_WINGED_GARGOYLE] && (mptr) != env.mons[env.PM_MARILITH])))",
+      "original": "(humanoid(mptr) && (mptr)->msize >= MZ_SMALL && (mptr)->msize <= MZ_HUGE && !noncorporeal(mptr) && (mptr)->mlet != S_CENTAUR && (mptr) != &mons[PM_WINGED_GARGOYLE] && (mptr) != &mons[PM_MARILITH])"
+    },
+    "You1": {
+      "params": [
+        "cstr"
+      ],
+      "expression": "env.You(\"%s\", cstr)",
+      "original": "You(\"%s\", cstr)"
+    },
+    "amorphous": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_AMORPHOUS) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_AMORPHOUS) != 0L)"
+    },
+    "can_breathe": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "env.attacktype(ptr, env.AT_BREA)",
+      "original": "attacktype(ptr, AT_BREA)"
+    },
+    "can_teleport": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_TPORT) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_TPORT) != 0L)"
+    },
+    "canspotmon": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean((env.canseemon(mon) || env.sensemon(mon))))",
+      "original": "(canseemon(mon) || sensemon(mon))"
+    },
+    "nohands": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_NOHANDS) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_NOHANDS) != 0L)"
+    },
+    "verysmall": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).msize < env.MZ_SMALL)))",
+      "original": "((ptr)->msize < MZ_SMALL)"
+    },
+    "cantwield": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.nohands(ptr) || env.verysmall(ptr))))",
+      "original": "(nohands(ptr) || verysmall(ptr))"
+    },
+    "control_teleport": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_TPORT_CNTRL) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_TPORT_CNTRL) != 0L)"
+    },
+    "could_twoweap": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((( ((ptr).mattk[0].aatyp == env.AT_WEAP) + ((ptr).mattk[1].aatyp == env.AT_WEAP) + ((ptr).mattk[2].aatyp == env.AT_WEAP) ) > 1)))",
+      "original": "(( ((ptr)->mattk[0].aatyp == AT_WEAP) + ((ptr)->mattk[1].aatyp == AT_WEAP) + ((ptr)->mattk[2].aatyp == AT_WEAP) ) > 1)"
+    },
+    "digests": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.dmgtype_fromattack((ptr), env.AD_DGST, env.AT_ENGL) != 0)))",
+      "original": "(dmgtype_fromattack((ptr), AD_DGST, AT_ENGL) != 0)"
+    },
+    "lays_eggs": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_OVIPAROUS) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_OVIPAROUS) != 0L)"
+    },
+    "eggs_in_water": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.lays_eggs(ptr) && (ptr).mlet == env.S_EEL && env.is_swimmer(ptr))))",
+      "original": "(lays_eggs(ptr) && (ptr)->mlet == S_EEL && is_swimmer(ptr))"
+    },
+    "emits_light": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "(((ptr).mlet == env.S_LIGHT || (ptr) == env.mons[env.PM_FLAMING_SPHERE] || (ptr) == env.mons[env.PM_SHOCKING_SPHERE] || (ptr) == env.mons[env.PM_BABY_GOLD_DRAGON] || (ptr) == env.mons[env.PM_FIRE_VORTEX]) ? 1 : ((ptr) == env.mons[env.PM_FIRE_ELEMENTAL] || (ptr) == env.mons[env.PM_GOLD_DRAGON]) ? 1 : 0)",
+      "original": "(((ptr)->mlet == S_LIGHT || (ptr) == &mons[PM_FLAMING_SPHERE] || (ptr) == &mons[PM_SHOCKING_SPHERE] || (ptr) == &mons[PM_BABY_GOLD_DRAGON] || (ptr) == &mons[PM_FIRE_VORTEX]) ? 1 : ((ptr) == &mons[PM_FIRE_ELEMENTAL] || (ptr) == &mons[PM_GOLD_DRAGON]) ? 1 : 0)"
+    },
+    "flaming": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr) == env.mons[env.PM_FIRE_VORTEX] || (ptr) == env.mons[env.PM_FLAMING_SPHERE] || (ptr) == env.mons[env.PM_FIRE_ELEMENTAL] || (ptr) == env.mons[env.PM_SALAMANDER])))",
+      "original": "((ptr) == &mons[PM_FIRE_VORTEX] || (ptr) == &mons[PM_FLAMING_SPHERE] || (ptr) == &mons[PM_FIRE_ELEMENTAL] || (ptr) == &mons[PM_SALAMANDER])"
+    },
+    "fmon": {
+      "params": null,
+      "expression": "env.svl.level.monlist",
+      "original": "svl.level.monlist"
+    },
+    "has_head": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_NOHEAD) == 0n)))",
+      "original": "(((ptr)->mflags1 & M1_NOHEAD) == 0L)"
+    },
+    "has_horns": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.num_horns(ptr) > 0)))",
+      "original": "(num_horns(ptr) > 0)"
+    },
+    "haseyes": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_NOEYES) == 0n)))",
+      "original": "(((ptr)->mflags1 & M1_NOEYES) == 0L)"
+    },
+    "helpless": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean(((mon).msleeping || !(mon).mcanmove)))",
+      "original": "((mon)->msleeping || !(mon)->mcanmove)"
+    },
+    "hides_under": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_CONCEAL) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_CONCEAL) != 0L)"
+    },
+    "infravision": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "(((ptr).mflags3 & env.M3_INFRAVISION))",
+      "original": "(((ptr)->mflags3 & M3_INFRAVISION))"
+    },
+    "is_animal": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_ANIMAL) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_ANIMAL) != 0L)"
+    },
+    "is_bat": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr) == env.mons[env.PM_BAT] || (ptr) == env.mons[env.PM_GIANT_BAT] || (ptr) == env.mons[env.PM_VAMPIRE_BAT])))",
+      "original": "((ptr) == &mons[PM_BAT] || (ptr) == &mons[PM_GIANT_BAT] || (ptr) == &mons[PM_VAMPIRE_BAT])"
+    },
+    "is_clinger": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_CLING) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_CLING) != 0L)"
+    },
+    "is_dwarf": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_DWARF) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_DWARF) != 0L)"
+    },
+    "is_elf": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_ELF) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_ELF) != 0L)"
+    },
+    "is_female": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_FEMALE) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_FEMALE) != 0L)"
+    },
+    "is_flimsy": {
+      "params": [
+        "otmp"
+      ],
+      "expression": "Number(Boolean((env.objects[(otmp).otyp].oc_material <= env.LEATHER || (otmp).otyp == env.RUBBER_HOSE)))",
+      "original": "(objects[(otmp)->otyp].oc_material <= LEATHER || (otmp)->otyp == RUBBER_HOSE)"
+    },
+    "is_floater": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).mlet == env.S_EYE || (ptr).mlet == env.S_LIGHT)))",
+      "original": "((ptr)->mlet == S_EYE || (ptr)->mlet == S_LIGHT)"
+    },
+    "is_giant": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_GIANT) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_GIANT) != 0L)"
+    },
+    "is_gnome": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_GNOME) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_GNOME) != 0L)"
+    },
+    "is_golem": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).mlet == env.S_GOLEM)))",
+      "original": "((ptr)->mlet == S_GOLEM)"
+    },
+    "is_hider": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_HIDE) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_HIDE) != 0L)"
+    },
+    "is_male": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_MALE) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_MALE) != 0L)"
+    },
+    "is_mind_flayer": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr) == env.mons[env.PM_MIND_FLAYER] || (ptr) == env.mons[env.PM_MASTER_MIND_FLAYER])))",
+      "original": "((ptr) == &mons[PM_MIND_FLAYER] || (ptr) == &mons[PM_MASTER_MIND_FLAYER])"
+    },
+    "is_neuter": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_NEUTER) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_NEUTER) != 0L)"
+    },
+    "is_orc": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_ORC) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_ORC) != 0L)"
+    },
+    "is_placeholder": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr) == env.mons[env.PM_ORC] || (ptr) == env.mons[env.PM_GIANT] || (ptr) == env.mons[env.PM_ELF] || (ptr) == env.mons[env.PM_HUMAN])))",
+      "original": "((ptr) == &mons[PM_ORC] || (ptr) == &mons[PM_GIANT] || (ptr) == &mons[PM_ELF] || (ptr) == &mons[PM_HUMAN])"
+    },
+    "is_sword": {
+      "params": [
+        "otmp"
+      ],
+      "expression": "Number(Boolean((otmp.oclass == env.WEAPON_CLASS && env.objects[otmp.otyp].oc_skill >= env.P_SHORT_SWORD && env.objects[otmp.otyp].oc_skill <= env.P_SABER)))",
+      "original": "(otmp->oclass == WEAPON_CLASS && objects[otmp->otyp].oc_skill >= P_SHORT_SWORD && objects[otmp->otyp].oc_skill <= P_SABER)"
+    },
+    "is_undead": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_UNDEAD) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_UNDEAD) != 0L)"
+    },
+    "likes_gems": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_JEWELS) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_JEWELS) != 0L)"
+    },
+    "is_unicorn": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).mlet == env.S_UNICORN && env.likes_gems(ptr))))",
+      "original": "((ptr)->mlet == S_UNICORN && likes_gems(ptr))"
+    },
+    "is_vampire": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).mlet == env.S_VAMPIRE)))",
+      "original": "((ptr)->mlet == S_VAMPIRE)"
+    },
+    "is_vampshifter": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean(((mon).cham == env.PM_VAMPIRE || (mon).cham == env.PM_VAMPIRE_LEADER || (mon).cham == env.PM_VLAD_THE_IMPALER)))",
+      "original": "((mon)->cham == PM_VAMPIRE || (mon)->cham == PM_VAMPIRE_LEADER || (mon)->cham == PM_VLAD_THE_IMPALER)"
+    },
+    "is_were": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_WERE) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_WERE) != 0L)"
+    },
+    "is_whirly": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).mlet == env.S_VORTEX || (ptr) == env.mons[env.PM_AIR_ELEMENTAL])))",
+      "original": "((ptr)->mlet == S_VORTEX || (ptr) == &mons[PM_AIR_ELEMENTAL])"
+    },
+    "ismnum": {
+      "params": [
+        "x"
+      ],
+      "expression": "Number(Boolean(((x) >= env.LOW_PM && (x) < env.NUMMONS)))",
+      "original": "((x) >= LOW_PM && (x) < NUMMONS)"
+    },
+    "levl": {
+      "params": null,
+      "expression": "env.svl.level.locations",
+      "original": "svl.level.locations"
+    },
+    "likes_lava": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((ptr == env.mons[env.PM_FIRE_ELEMENTAL] || ptr == env.mons[env.PM_SALAMANDER])))",
+      "original": "(ptr == &mons[PM_FIRE_ELEMENTAL] || ptr == &mons[PM_SALAMANDER])"
+    },
+    "makeknown": {
+      "params": [
+        "x"
+      ],
+      "expression": "env.discover_object((x), 1, 1, 1)",
+      "original": "discover_object((x), TRUE, TRUE, TRUE)"
+    },
+    "mdistu": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.distu((mon).mx, (mon).my)",
+      "original": "distu((mon)->mx, (mon)->my)"
+    },
+    "mindless": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_MINDLESS) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_MINDLESS) != 0L)"
+    },
+    "weirdnonliving": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.is_golem(ptr) || (ptr).mlet == env.S_VORTEX)))",
+      "original": "(is_golem(ptr) || (ptr)->mlet == S_VORTEX)"
+    },
+    "nonliving": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.is_undead(ptr) || (ptr) == env.mons[env.PM_MANES] || env.weirdnonliving(ptr))))",
+      "original": "(is_undead(ptr) || (ptr) == &mons[PM_MANES] || weirdnonliving(ptr))"
+    },
+    "passes_walls": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_WALLWALK) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_WALLWALK) != 0L)"
+    },
+    "perceives": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_SEE_INVIS) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_SEE_INVIS) != 0L)"
+    },
+    "pline1": {
+      "params": [
+        "cstr"
+      ],
+      "expression": "env.pline(\"%s\", cstr)",
+      "original": "pline(\"%s\", cstr)"
+    },
+    "plur": {
+      "params": [
+        "x"
+      ],
+      "expression": "(((x) == 1) ? \"\" : \"s\")",
+      "original": "(((x) == 1) ? \"\" : \"s\")"
+    },
+    "pm_invisible": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr) == env.mons[env.PM_STALKER] || (ptr) == env.mons[env.PM_BLACK_LIGHT])))",
+      "original": "((ptr) == &mons[PM_STALKER] || (ptr) == &mons[PM_BLACK_LIGHT])"
+    },
+    "polyok": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_NOPOLY) == 0n)))",
+      "original": "(((ptr)->mflags2 & M2_NOPOLY) == 0L)"
+    },
+    "regenerates": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_REGEN) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_REGEN) != 0L)"
+    },
+    "resists_fire": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.Resists_Elem(mon, env.FIRE_RES)",
+      "original": "Resists_Elem(mon, FIRE_RES)"
+    },
+    "shudder_for_moment": {
+      "params": null,
+      "expression": "env.c_common_strings.c_shudder_for_moment",
+      "original": "c_common_strings.c_shudder_for_moment"
+    },
+    "slithy": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_SLITHY) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_SLITHY) != 0L)"
+    },
+    "strongmonst": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_STRONG) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_STRONG) != 0L)"
+    },
+    "telepathic": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr) == env.mons[env.PM_FLOATING_EYE] || (ptr) == env.mons[env.PM_MIND_FLAYER] || (ptr) == env.mons[env.PM_MASTER_MIND_FLAYER])))",
+      "original": "((ptr) == &mons[PM_FLOATING_EYE] || (ptr) == &mons[PM_MIND_FLAYER] || (ptr) == &mons[PM_MASTER_MIND_FLAYER])"
+    },
+    "thats_enough_tries": {
+      "params": null,
+      "expression": "env.c_common_strings.c_thats_enough_tries",
+      "original": "c_common_strings.c_thats_enough_tries"
+    },
+    "the_your": {
+      "params": null,
+      "expression": "env.c_common_strings.c_the_your",
+      "original": "c_common_strings.c_the_your"
+    },
+    "touch_petrifies": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr) == env.mons[env.PM_COCKATRICE] || (ptr) == env.mons[env.PM_CHICKATRICE])))",
+      "original": "((ptr) == &mons[PM_COCKATRICE] || (ptr) == &mons[PM_CHICKATRICE])"
+    },
+    "type_is_pname": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_PNAME) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_PNAME) != 0L)"
+    },
+    "unsolid": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_UNSOLID) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_UNSOLID) != 0L)"
+    },
+    "webmaker": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr) == env.mons[env.PM_CAVE_SPIDER] || (ptr) == env.mons[env.PM_GIANT_SPIDER])))",
+      "original": "((ptr) == &mons[PM_CAVE_SPIDER] || (ptr) == &mons[PM_GIANT_SPIDER])"
+    },
+    "wizard": {
+      "params": null,
+      "expression": "env.flags.debug",
+      "original": "flags.debug"
+    },
+    "y_n": {
+      "params": [
+        "query"
+      ],
+      "expression": "env.yn_function(query, env.ynchars, 110, 1)",
+      "original": "yn_function(query, ynchars, 'n', TRUE)"
+    },
+    "your_race": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.ulong(env.gu.urace.selfmask)) != 0n)))",
+      "original": "(((ptr)->mflags2 & gu.urace.selfmask) != 0L)"
+    }
+  },
+  "variadicABI": {
+    "Your_pppp": {
+      "name": "Your",
+      "types": [
+        "const char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_p": {
+      "name": "You",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "urgent_pline_pp": {
+      "name": "urgent_pline",
+      "types": [
+        "const char *",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "sprintf_pppp": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "const char *",
+        "const char *",
+        "char *"
+      ],
+      "ret": "int"
+    },
+    "livelog_printf_lppp": {
+      "name": "livelog_printf",
+      "types": [
+        "long",
+        "const char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "urgent_pline_p": {
+      "name": "urgent_pline",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "livelog_printf_lpip": {
+      "name": "livelog_printf",
+      "types": [
+        "long",
+        "const char *",
+        "int",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "Your_p": {
+      "name": "Your",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "You_pp": {
+      "name": "You",
+      "types": [
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_pp": {
+      "name": "pline",
+      "types": [
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_p": {
+      "name": "pline",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "You_cant_p": {
+      "name": "You_cant",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "You_cant_pp": {
+      "name": "You_cant",
+      "types": [
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "Your_pp": {
+      "name": "Your",
+      "types": [
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "sprintf_ppp": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "const char *",
+        "const char *"
+      ],
+      "ret": "int"
+    },
+    "You_feel_pp": {
+      "name": "You_feel",
+      "types": [
+        "const char *",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "livelog_printf_lpp": {
+      "name": "livelog_printf",
+      "types": [
+        "long",
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_ppp": {
+      "name": "You",
+      "types": [
+        "const char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_ppp": {
+      "name": "pline",
+      "types": [
+        "const char *",
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_The_p": {
+      "name": "pline_The",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "pline_The_pp": {
+      "name": "pline_The",
+      "types": [
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "Your_ppp": {
+      "name": "Your",
+      "types": [
+        "const char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_pppp": {
+      "name": "You",
+      "types": [
+        "const char *",
+        "const char *",
+        "const char *",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "impossible_p": {
+      "name": "impossible",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "impossible_pi": {
+      "name": "impossible",
+      "types": [
+        "const char *",
+        "int"
+      ],
+      "ret": "void"
+    },
+    "There_pp": {
+      "name": "There",
+      "types": [
+        "const char *",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "There_p": {
+      "name": "There",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    }
+  }
+}

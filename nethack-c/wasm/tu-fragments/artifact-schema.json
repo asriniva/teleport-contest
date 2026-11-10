@@ -1,0 +1,6808 @@
+{
+  "headerMacros": {
+    "HAntimagic": {
+      "params": null,
+      "expression": "env.u.uprops[env.ANTIMAGIC].intrinsic",
+      "original": "u.uprops[ANTIMAGIC].intrinsic"
+    },
+    "EAntimagic": {
+      "params": null,
+      "expression": "env.u.uprops[env.ANTIMAGIC].extrinsic",
+      "original": "u.uprops[ANTIMAGIC].extrinsic"
+    },
+    "Antimagic": {
+      "params": null,
+      "expression": "Number(Boolean((env.HAntimagic || env.EAntimagic)))",
+      "original": "(HAntimagic || EAntimagic)"
+    },
+    "BInvis": {
+      "params": null,
+      "expression": "env.u.uprops[env.INVIS].blocked",
+      "original": "u.uprops[INVIS].blocked"
+    },
+    "HBlinded": {
+      "params": null,
+      "expression": "env.u.uprops[env.BLINDED].intrinsic",
+      "original": "u.uprops[BLINDED].intrinsic"
+    },
+    "EBlinded": {
+      "params": null,
+      "expression": "env.u.uprops[env.BLINDED].extrinsic",
+      "original": "u.uprops[BLINDED].extrinsic"
+    },
+    "BBlinded": {
+      "params": null,
+      "expression": "env.u.uprops[env.BLINDED].blocked",
+      "original": "u.uprops[BLINDED].blocked"
+    },
+    "Blind": {
+      "params": null,
+      "expression": "Number(Boolean(((env.HBlinded || env.EBlinded) && !env.BBlinded)))",
+      "original": "((HBlinded || EBlinded) && !BBlinded)"
+    },
+    "Blinded": {
+      "params": null,
+      "expression": "Number(Boolean((env.HBlinded && !env.BBlinded)))",
+      "original": "(HBlinded && !BBlinded)"
+    },
+    "BlindedTimeout": {
+      "params": null,
+      "expression": "(env.HBlinded & env.TIMEOUT)",
+      "original": "(HBlinded & TIMEOUT)"
+    },
+    "HCold_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.COLD_RES].intrinsic",
+      "original": "u.uprops[COLD_RES].intrinsic"
+    },
+    "ECold_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.COLD_RES].extrinsic",
+      "original": "u.uprops[COLD_RES].extrinsic"
+    },
+    "Cold_resistance": {
+      "params": null,
+      "expression": "Number(Boolean((env.HCold_resistance || env.ECold_resistance)))",
+      "original": "(HCold_resistance || ECold_resistance)"
+    },
+    "DEADMONSTER": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean(((mon).mhp < 1)))",
+      "original": "((mon)->mhp < 1)"
+    },
+    "HDrain_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.DRAIN_RES].intrinsic",
+      "original": "u.uprops[DRAIN_RES].intrinsic"
+    },
+    "EDrain_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.DRAIN_RES].extrinsic",
+      "original": "u.uprops[DRAIN_RES].extrinsic"
+    },
+    "Drain_resistance": {
+      "params": null,
+      "expression": "Number(Boolean((env.HDrain_resistance || env.EDrain_resistance)))",
+      "original": "(HDrain_resistance || EDrain_resistance)"
+    },
+    "EBlnd_resist": {
+      "params": null,
+      "expression": "env.u.uprops[env.BLND_RES].extrinsic",
+      "original": "u.uprops[BLND_RES].extrinsic"
+    },
+    "EEnergy_regeneration": {
+      "params": null,
+      "expression": "env.u.uprops[env.ENERGY_REGENERATION].extrinsic",
+      "original": "u.uprops[ENERGY_REGENERATION].extrinsic"
+    },
+    "EHalf_physical_damage": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALF_PHDAM].extrinsic",
+      "original": "u.uprops[HALF_PHDAM].extrinsic"
+    },
+    "EHalf_spell_damage": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALF_SPDAM].extrinsic",
+      "original": "u.uprops[HALF_SPDAM].extrinsic"
+    },
+    "ELevitation": {
+      "params": null,
+      "expression": "env.u.uprops[env.LEVITATION].extrinsic",
+      "original": "u.uprops[LEVITATION].extrinsic"
+    },
+    "EProtection": {
+      "params": null,
+      "expression": "env.u.uprops[env.PROTECTION].extrinsic",
+      "original": "u.uprops[PROTECTION].extrinsic"
+    },
+    "EReflecting": {
+      "params": null,
+      "expression": "env.u.uprops[env.REFLECTING].extrinsic",
+      "original": "u.uprops[REFLECTING].extrinsic"
+    },
+    "ERegeneration": {
+      "params": null,
+      "expression": "env.u.uprops[env.REGENERATION].extrinsic",
+      "original": "u.uprops[REGENERATION].extrinsic"
+    },
+    "ESearching": {
+      "params": null,
+      "expression": "env.u.uprops[env.SEARCHING].extrinsic",
+      "original": "u.uprops[SEARCHING].extrinsic"
+    },
+    "EStealth": {
+      "params": null,
+      "expression": "env.u.uprops[env.STEALTH].extrinsic",
+      "original": "u.uprops[STEALTH].extrinsic"
+    },
+    "ETelepat": {
+      "params": null,
+      "expression": "env.u.uprops[env.TELEPAT].extrinsic",
+      "original": "u.uprops[TELEPAT].extrinsic"
+    },
+    "ETeleport_control": {
+      "params": null,
+      "expression": "env.u.uprops[env.TELEPORT_CONTROL].extrinsic",
+      "original": "u.uprops[TELEPORT_CONTROL].extrinsic"
+    },
+    "EWarn_of_mon": {
+      "params": null,
+      "expression": "env.u.uprops[env.WARN_OF_MON].extrinsic",
+      "original": "u.uprops[WARN_OF_MON].extrinsic"
+    },
+    "EWarning": {
+      "params": null,
+      "expression": "env.u.uprops[env.WARNING].extrinsic",
+      "original": "u.uprops[WARNING].extrinsic"
+    },
+    "HFire_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.FIRE_RES].intrinsic",
+      "original": "u.uprops[FIRE_RES].intrinsic"
+    },
+    "EFire_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.FIRE_RES].extrinsic",
+      "original": "u.uprops[FIRE_RES].extrinsic"
+    },
+    "Fire_resistance": {
+      "params": null,
+      "expression": "Number(Boolean((env.HFire_resistance || env.EFire_resistance)))",
+      "original": "(HFire_resistance || EFire_resistance)"
+    },
+    "HConfusion": {
+      "params": null,
+      "expression": "env.u.uprops[env.CONFUSION].intrinsic",
+      "original": "u.uprops[CONFUSION].intrinsic"
+    },
+    "HLevitation": {
+      "params": null,
+      "expression": "env.u.uprops[env.LEVITATION].intrinsic",
+      "original": "u.uprops[LEVITATION].intrinsic"
+    },
+    "HStun": {
+      "params": null,
+      "expression": "env.u.uprops[env.STUNNED].intrinsic",
+      "original": "u.uprops[STUNNED].intrinsic"
+    },
+    "HHallucination": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALLUC].intrinsic",
+      "original": "u.uprops[HALLUC].intrinsic"
+    },
+    "HHalluc_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALLUC_RES].intrinsic",
+      "original": "u.uprops[HALLUC_RES].intrinsic"
+    },
+    "EHalluc_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALLUC_RES].extrinsic",
+      "original": "u.uprops[HALLUC_RES].extrinsic"
+    },
+    "Halluc_resistance": {
+      "params": null,
+      "expression": "Number(Boolean((env.HHalluc_resistance || env.EHalluc_resistance)))",
+      "original": "(HHalluc_resistance || EHalluc_resistance)"
+    },
+    "Hallucination": {
+      "params": null,
+      "expression": "Number(Boolean((env.HHallucination && !env.Halluc_resistance)))",
+      "original": "(HHallucination && !Halluc_resistance)"
+    },
+    "Has_contents": {
+      "params": [
+        "o"
+      ],
+      "expression": "Number(Boolean(( (o).cobj != 0)))",
+      "original": "( (o)->cobj != (struct obj *) 0)"
+    },
+    "Hate_silver": {
+      "params": null,
+      "expression": "Number(Boolean((env.u.ulycn >= env.LOW_PM || env.hates_silver(env.gy.youmonst.data))))",
+      "original": "(u.ulycn >= LOW_PM || hates_silver(gy.youmonst.data))"
+    },
+    "IS_ALTAR": {
+      "params": [
+        "typ"
+      ],
+      "expression": "Number(Boolean(((typ) == env.ALTAR)))",
+      "original": "((typ) == ALTAR)"
+    },
+    "IS_DOOR": {
+      "params": [
+        "typ"
+      ],
+      "expression": "Number(Boolean(((typ) == env.DOOR)))",
+      "original": "((typ) == DOOR)"
+    },
+    "astral_level": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_astral_level)",
+      "original": "(svd.dungeon_topology.d_astral_level)"
+    },
+    "In_endgame": {
+      "params": [
+        "x"
+      ],
+      "expression": "Number(Boolean(((x).dnum == env.astral_level.dnum)))",
+      "original": "((x)->dnum == astral_level.dnum)"
+    },
+    "Inhell": {
+      "params": null,
+      "expression": "env.In_hell(env.u.uz)",
+      "original": "In_hell(&u.uz)"
+    },
+    "Is_container": {
+      "params": [
+        "o"
+      ],
+      "expression": "Number(Boolean(((o).otyp >= env.LARGE_BOX && (o).otyp <= env.BAG_OF_TRICKS)))",
+      "original": "((o)->otyp >= LARGE_BOX && (o)->otyp <= BAG_OF_TRICKS)"
+    },
+    "Is_dragon_scales": {
+      "params": [
+        "obj"
+      ],
+      "expression": "Number(Boolean(((obj).otyp >= env.GRAY_DRAGON_SCALES && (obj).otyp <= env.YELLOW_DRAGON_SCALES)))",
+      "original": "((obj)->otyp >= GRAY_DRAGON_SCALES && (obj)->otyp <= YELLOW_DRAGON_SCALES)"
+    },
+    "Is_dragon_mail": {
+      "params": [
+        "obj"
+      ],
+      "expression": "Number(Boolean(((obj).otyp >= env.GRAY_DRAGON_SCALE_MAIL && (obj).otyp <= env.YELLOW_DRAGON_SCALE_MAIL)))",
+      "original": "((obj)->otyp >= GRAY_DRAGON_SCALE_MAIL && (obj)->otyp <= YELLOW_DRAGON_SCALE_MAIL)"
+    },
+    "Is_dragon_armor": {
+      "params": [
+        "obj"
+      ],
+      "expression": "Number(Boolean((env.Is_dragon_scales(obj) || env.Is_dragon_mail(obj))))",
+      "original": "(Is_dragon_scales(obj) || Is_dragon_mail(obj))"
+    },
+    "BLevitation": {
+      "params": null,
+      "expression": "env.u.uprops[env.LEVITATION].blocked",
+      "original": "u.uprops[LEVITATION].blocked"
+    },
+    "Levitation": {
+      "params": null,
+      "expression": "Number(Boolean(((env.HLevitation || env.ELevitation) && !env.BLevitation)))",
+      "original": "((HLevitation || ELevitation) && !BLevitation)"
+    },
+    "HHalf_physical_damage": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALF_PHDAM].intrinsic",
+      "original": "u.uprops[HALF_PHDAM].intrinsic"
+    },
+    "Half_physical_damage": {
+      "params": null,
+      "expression": "Number(Boolean((env.HHalf_physical_damage || env.EHalf_physical_damage)))",
+      "original": "(HHalf_physical_damage || EHalf_physical_damage)"
+    },
+    "Maybe_Half_Phys": {
+      "params": [
+        "dmg"
+      ],
+      "expression": "(env.Half_physical_damage ? Math.trunc((Number(dmg) + 1) / 2) : dmg)",
+      "original": "((Half_physical_damage) ? (((dmg) + 1) / 2) : (dmg))"
+    },
+    "NH_BLACK": {
+      "params": null,
+      "expression": "env.c_color_names.c_black",
+      "original": "c_color_names.c_black"
+    },
+    "Never_mind": {
+      "params": null,
+      "expression": "env.c_common_strings.c_Never_mind",
+      "original": "c_common_strings.c_Never_mind"
+    },
+    "OBJ_DESCR": {
+      "params": [
+        "obj"
+      ],
+      "expression": "(env.obj_descr[(obj).oc_descr_idx].oc_descr)",
+      "original": "(obj_descr[(obj).oc_descr_idx].oc_descr)"
+    },
+    "P_MAX_SKILL": {
+      "params": [
+        "type"
+      ],
+      "expression": "(env.u.weapon_skills[type].max_skill)",
+      "original": "(u.weapon_skills[type].max_skill)"
+    },
+    "HPoison_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.POISON_RES].intrinsic",
+      "original": "u.uprops[POISON_RES].intrinsic"
+    },
+    "EPoison_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.POISON_RES].extrinsic",
+      "original": "u.uprops[POISON_RES].extrinsic"
+    },
+    "Poison_resistance": {
+      "params": null,
+      "expression": "Number(Boolean((env.HPoison_resistance || env.EPoison_resistance)))",
+      "original": "(HPoison_resistance || EPoison_resistance)"
+    },
+    "Race_if": {
+      "params": [
+        "X"
+      ],
+      "expression": "Number(Boolean((env.gu.urace.mnum == (X))))",
+      "original": "(gu.urace.mnum == (X))"
+    },
+    "Role_if": {
+      "params": [
+        "X"
+      ],
+      "expression": "Number(Boolean((env.gu.urole.mnum == (X))))",
+      "original": "(gu.urole.mnum == (X))"
+    },
+    "Role_switch": {
+      "params": null,
+      "expression": "(env.gu.urole.mnum)",
+      "original": "(gu.urole.mnum)"
+    },
+    "SPELL_LEV_PW": {
+      "params": [
+        "lvl"
+      ],
+      "expression": "((lvl) * 5)",
+      "original": "((lvl) * 5)"
+    },
+    "Sfi_arti_info": {
+      "params": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expression": "env.sfi_arti_info(a, b, c)",
+      "original": "sfi_arti_info(a, b, c)"
+    },
+    "Sfi_short": {
+      "params": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expression": "env.sfi_short(a, b, c)",
+      "original": "sfi_short(a, b, c)"
+    },
+    "Sfo_arti_info": {
+      "params": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expression": "env.sfo_arti_info(a, b, c)",
+      "original": "sfo_arti_info(a, b, c)"
+    },
+    "Sfo_xint16": {
+      "params": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expression": "env.sfo_xint16(a, b, c)",
+      "original": "sfo_xint16(a, b, c)"
+    },
+    "HShock_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.SHOCK_RES].intrinsic",
+      "original": "u.uprops[SHOCK_RES].intrinsic"
+    },
+    "EShock_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.SHOCK_RES].extrinsic",
+      "original": "u.uprops[SHOCK_RES].extrinsic"
+    },
+    "Shock_resistance": {
+      "params": null,
+      "expression": "Number(Boolean((env.HShock_resistance || env.EShock_resistance)))",
+      "original": "(HShock_resistance || EShock_resistance)"
+    },
+    "Sick": {
+      "params": null,
+      "expression": "env.u.uprops[env.SICK].intrinsic",
+      "original": "u.uprops[SICK].intrinsic"
+    },
+    "Slimed": {
+      "params": null,
+      "expression": "env.u.uprops[env.SLIMED].intrinsic",
+      "original": "u.uprops[SLIMED].intrinsic"
+    },
+    "HStone_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.STONE_RES].intrinsic",
+      "original": "u.uprops[STONE_RES].intrinsic"
+    },
+    "EStone_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.STONE_RES].extrinsic",
+      "original": "u.uprops[STONE_RES].extrinsic"
+    },
+    "Stone_resistance": {
+      "params": null,
+      "expression": "Number(Boolean((env.HStone_resistance || env.EStone_resistance)))",
+      "original": "(HStone_resistance || EStone_resistance)"
+    },
+    "Upolyd": {
+      "params": null,
+      "expression": "(env.u.umonnum != env.u.umonster)",
+      "original": "(u.umonnum != u.umonster)"
+    },
+    "amorphous": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_AMORPHOUS) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_AMORPHOUS) != 0L)"
+    },
+    "bigmonst": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).msize >= env.MZ_LARGE)))",
+      "original": "((ptr)->msize >= MZ_LARGE)"
+    },
+    "cansee": {
+      "params": [
+        "x",
+        "y"
+      ],
+      "expression": "Number(Boolean(((env.gv.viz_array[y][x] & env.IN_SIGHT) != 0)))",
+      "original": "((gv.viz_array[y][x] & IN_SIGHT) != 0)"
+    },
+    "canspotmon": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean((env.canseemon(mon) || env.sensemon(mon))))",
+      "original": "(canseemon(mon) || sensemon(mon))"
+    },
+    "carried": {
+      "params": [
+        "o"
+      ],
+      "expression": "Number(Boolean(((o).where == env.OBJ_INVENT)))",
+      "original": "((o)->where == OBJ_INVENT)"
+    },
+    "couldsee": {
+      "params": [
+        "x",
+        "y"
+      ],
+      "expression": "Number(Boolean(((env.gv.viz_array[y][x] & env.COULD_SEE) != 0)))",
+      "original": "((gv.viz_array[y][x] & COULD_SEE) != 0)"
+    },
+    "engulfing_u": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean((env.u.uswallow && (env.u.ustuck == (mon)))))",
+      "original": "(u.uswallow && (u.ustuck == (mon)))"
+    },
+    "fakename": {
+      "params": null,
+      "expression": "env.c_common_strings.c_fakename",
+      "original": "c_common_strings.c_fakename"
+    },
+    "fmon": {
+      "params": null,
+      "expression": "env.svl.level.monlist",
+      "original": "svl.level.monlist"
+    },
+    "glyph_is_trap": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) >= (env.GLYPH_TRAP_OFF) && (glyph) < ((env.GLYPH_TRAP_OFF) + env.MAXTCHARS))))",
+      "original": "((glyph) >= (GLYPH_TRAP_OFF) && (glyph) < ((GLYPH_TRAP_OFF) + MAXTCHARS))"
+    },
+    "has_head": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_NOHEAD) == 0n)))",
+      "original": "(((ptr)->mflags1 & M1_NOHEAD) == 0L)"
+    },
+    "is_covetous": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "(((ptr).mflags3 & env.M3_COVETOUS))",
+      "original": "(((ptr)->mflags3 & M3_COVETOUS))"
+    },
+    "is_demon": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_DEMON) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_DEMON) != 0L)"
+    },
+    "is_lord": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_LORD) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_LORD) != 0L)"
+    },
+    "is_dlord": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.is_demon(ptr) && env.is_lord(ptr))))",
+      "original": "(is_demon(ptr) && is_lord(ptr))"
+    },
+    "is_prince": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_PRINCE) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_PRINCE) != 0L)"
+    },
+    "is_dprince": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.is_demon(ptr) && env.is_prince(ptr))))",
+      "original": "(is_demon(ptr) && is_prince(ptr))"
+    },
+    "is_mplayer": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr) >= env.mons[env.PM_ARCHEOLOGIST]) && ((ptr) <= env.mons[env.PM_WIZARD]))))",
+      "original": "(((ptr) >= &mons[PM_ARCHEOLOGIST]) && ((ptr) <= &mons[PM_WIZARD]))"
+    },
+    "ismnum": {
+      "params": [
+        "x"
+      ],
+      "expression": "Number(Boolean(((x) >= env.LOW_PM && (x) < env.NUMMONS)))",
+      "original": "((x) >= LOW_PM && (x) < NUMMONS)"
+    },
+    "levl": {
+      "params": null,
+      "expression": "env.svl.level.locations",
+      "original": "svl.level.locations"
+    },
+    "nhUse": {
+      "params": [
+        "arg"
+      ],
+      "expression": "((arg))",
+      "original": "((void) (arg))"
+    },
+    "noncorporeal": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).mlet == env.S_GHOST)))",
+      "original": "((ptr)->mlet == S_GHOST)"
+    },
+    "is_undead": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_UNDEAD) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_UNDEAD) != 0L)"
+    },
+    "is_golem": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).mlet == env.S_GOLEM)))",
+      "original": "((ptr)->mlet == S_GOLEM)"
+    },
+    "weirdnonliving": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.is_golem(ptr) || (ptr).mlet == env.S_VORTEX)))",
+      "original": "(is_golem(ptr) || (ptr)->mlet == S_VORTEX)"
+    },
+    "nonliving": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.is_undead(ptr) || (ptr) == env.mons[env.PM_MANES] || env.weirdnonliving(ptr))))",
+      "original": "(is_undead(ptr) || (ptr) == &mons[PM_MANES] || weirdnonliving(ptr))"
+    },
+    "nothing_happens": {
+      "params": null,
+      "expression": "env.c_common_strings.c_nothing_happens",
+      "original": "c_common_strings.c_nothing_happens"
+    },
+    "nothing_seems_to_happen": {
+      "params": null,
+      "expression": "env.c_common_strings.c_nothing_seems_to_happen",
+      "original": "c_common_strings.c_nothing_seems_to_happen"
+    },
+    "pline1": {
+      "params": [
+        "cstr"
+      ],
+      "expression": "env.pline(\"%s\", cstr)",
+      "original": "pline(\"%s\", cstr)"
+    },
+    "race_hostile": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.gu.urace.hatemask) != 0n)))",
+      "original": "(((ptr)->mflags2 & gu.urace.hatemask) != 0L)"
+    },
+    "resists_cold": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.Resists_Elem(mon, env.COLD_RES)",
+      "original": "Resists_Elem(mon, COLD_RES)"
+    },
+    "resists_elec": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.Resists_Elem(mon, env.SHOCK_RES)",
+      "original": "Resists_Elem(mon, SHOCK_RES)"
+    },
+    "resists_fire": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.Resists_Elem(mon, env.FIRE_RES)",
+      "original": "Resists_Elem(mon, FIRE_RES)"
+    },
+    "resists_poison": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.Resists_Elem(mon, env.POISON_RES)",
+      "original": "Resists_Elem(mon, POISON_RES)"
+    },
+    "resists_ston": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.Resists_Elem(mon, env.STONE_RES)",
+      "original": "Resists_Elem(mon, STONE_RES)"
+    },
+    "strcmpi": {
+      "params": [
+        "a",
+        "b"
+      ],
+      "expression": "env.strncmpi((a), (b), -1)",
+      "original": "strncmpi((a), (b), -1)"
+    },
+    "tutorial_dnum": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_tutorial_dnum)",
+      "original": "(svd.dungeon_topology.d_tutorial_dnum)"
+    },
+    "u_wield_art": {
+      "params": [
+        "art"
+      ],
+      "expression": "env.is_art(env.uwep, art)",
+      "original": "is_art(uwep, art)"
+    },
+    "verbalize1": {
+      "params": [
+        "cstr"
+      ],
+      "expression": "env.verbalize(\"%s\", cstr)",
+      "original": "verbalize(\"%s\", cstr)"
+    }
+  },
+  "schema": {
+    "Align": {
+      "ctype": "struct Align",
+      "fields": [
+        {
+          "name": "value",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "aligntyp",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "flag": {
+      "ctype": "struct flag",
+      "fields": [
+        {
+          "name": "initalign",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "verbose",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "female",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "artifact": {
+      "ctype": "struct artifact",
+      "fields": [
+        {
+          "name": "otyp",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "role",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "alignment",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "aligntyp",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "name",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "spfx",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "gift_value",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "race",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "gen_spe",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "cspfx",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mtype",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "attk",
+          "d": {
+            "s": "attack"
+          },
+          "ctype": "struct attack",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "defn",
+          "d": {
+            "s": "attack"
+          },
+          "ctype": "struct attack",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "cary",
+          "d": {
+            "s": "attack"
+          },
+          "ctype": "struct attack",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "inv_prop",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "cost",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "acolor",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "Role": {
+      "ctype": "struct Role",
+      "fields": [
+        {
+          "name": "mnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "questarti",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_u": {
+      "ctype": "struct instance_globals_u",
+      "fields": [
+        {
+          "name": "urole",
+          "d": {
+            "s": "Role"
+          },
+          "ctype": "struct Role",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "urace",
+          "d": {
+            "s": "Race"
+          },
+          "ctype": "struct Race",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "obj": {
+      "ctype": "struct obj",
+      "fields": [
+        {
+          "name": "otyp",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oeroded",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "oeroded2",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "oartifact",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "spe",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "otrapped",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "age",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "where",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "xint8",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ox",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oy",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "owornmask",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "quan",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "nobj",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "known",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "blessed",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "cursed",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "bknown",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "owt",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oclass",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "lamplit",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "corpsenm",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "cobj",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "v",
+          "d": {
+            "s": "vptrs"
+          },
+          "ctype": "union vptrs",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "objclass": {
+      "ctype": "struct objclass",
+      "fields": [
+        {
+          "name": "oc_unique",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "oc_class",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oc_subtyp",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oc_material",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "oc_name_known",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "oc_descr_idx",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oc_oprop",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oc_cost",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "arti_info": {
+      "ctype": "struct arti_info",
+      "fields": [
+        {
+          "name": "exists",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "found",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "wish",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "gift",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "viadip",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "named",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "lvldef",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "bones",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "rndm",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        }
+      ]
+    },
+    "permonst": {
+      "ctype": "struct permonst",
+      "fields": [
+        {
+          "name": "mflags2",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mflags3",
+          "d": {
+            "t": "u16"
+          },
+          "ctype": "unsigned short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mlet",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mflags1",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "maligntyp",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "aligntyp",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mr",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "msize",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "msound",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "Race": {
+      "ctype": "struct Race",
+      "fields": [
+        {
+          "name": "hatemask",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "selfmask",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "skills": {
+      "ctype": "struct skills",
+      "fields": [
+        {
+          "name": "max_skill",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "skill",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "you": {
+      "ctype": "struct you",
+      "fields": [
+        {
+          "name": "weapon_skills",
+          "d": {
+            "a": [
+              38
+            ],
+            "e": {
+              "s": "skills"
+            }
+          },
+          "ctype": "struct skills[38]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ugifts",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uprops",
+          "d": {
+            "a": [
+              69
+            ],
+            "e": {
+              "s": "prop"
+            }
+          },
+          "ctype": "struct prop[69]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "xray_range",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ualign",
+          "d": {
+            "s": "align"
+          },
+          "ctype": "align",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ulycn",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "umonnum",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "umonster",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uenmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uen",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uenpeak",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ustuck",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ux",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uy",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uswallow",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mh",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uhp",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uhpmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ucreamed",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mhmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uz",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uhave",
+          "d": {
+            "s": "u_have"
+          },
+          "ctype": "struct u_have",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dx",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dy",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dz",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "twoweap",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "usteed",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "objdescr": {
+      "ctype": "struct objdescr",
+      "fields": [
+        {
+          "name": "oc_descr",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_b": {
+      "ctype": "struct instance_globals_saved_b",
+      "fields": [
+        {
+          "name": "bases",
+          "d": {
+            "a": [
+              20
+            ],
+            "e": {
+              "t": "i32"
+            }
+          },
+          "ctype": "int[20]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "attack": {
+      "ctype": "struct attack",
+      "fields": [
+        {
+          "name": "aatyp",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "adtyp",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "damn",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "damd",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "prop": {
+      "ctype": "struct prop",
+      "fields": [
+        {
+          "name": "extrinsic",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "intrinsic",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "blocked",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_i": {
+      "ctype": "struct instance_globals_i",
+      "fields": [
+        {
+          "name": "invent",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "sinfo": {
+      "ctype": "struct sinfo",
+      "fields": [
+        {
+          "name": "restoring",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "warntype_info": {
+      "ctype": "struct warntype_info",
+      "fields": [
+        {
+          "name": "obj",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "context_info": {
+      "ctype": "struct context_info",
+      "fields": [
+        {
+          "name": "warntype",
+          "d": {
+            "s": "warntype_info"
+          },
+          "ctype": "struct warntype_info",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_c": {
+      "ctype": "struct instance_globals_saved_c",
+      "fields": [
+        {
+          "name": "context",
+          "d": {
+            "s": "context_info"
+          },
+          "ctype": "struct context_info",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_v": {
+      "ctype": "struct instance_globals_v",
+      "fields": [
+        {
+          "name": "vision_full_recalc",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "viz_array",
+          "d": {
+            "p": ""
+          },
+          "ctype": "seenV **",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_y": {
+      "ctype": "struct instance_globals_y",
+      "fields": [
+        {
+          "name": "youmonst",
+          "d": {
+            "s": "monst"
+          },
+          "ctype": "struct monst",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "align": {
+      "ctype": "struct align",
+      "fields": [
+        {
+          "name": "type",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "aligntyp",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "record",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "monst": {
+      "ctype": "struct monst",
+      "fields": [
+        {
+          "name": "data",
+          "d": {
+            "p": "permonst"
+          },
+          "ctype": "struct permonst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mx",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "my",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mhp",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mstun",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mconf",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "minvent",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "m_lev",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mhpmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "nmon",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "msleeping",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mtame",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mpeaceful",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_s": {
+      "ctype": "struct instance_globals_s",
+      "fields": [
+        {
+          "name": "spec_dbon_applies",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "window_procs": {
+      "ctype": "struct window_procs",
+      "fields": [
+        {
+          "name": "win_putstr",
+          "d": {
+            "f": true
+          },
+          "ctype": "void (*)(winid, int, const char *)",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "win_create_nhwindow",
+          "d": {
+            "f": true
+          },
+          "ctype": "winid (*)(int)",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "win_start_menu",
+          "d": {
+            "f": true
+          },
+          "ctype": "void (*)(winid, unsigned long)",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "win_end_menu",
+          "d": {
+            "f": true
+          },
+          "ctype": "void (*)(winid, const char *)",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "win_destroy_nhwindow",
+          "d": {
+            "f": true
+          },
+          "ctype": "void (*)(winid)",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "color_and_attr": {
+      "ctype": "struct color_and_attr",
+      "fields": [
+        {
+          "name": "attr",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_flags": {
+      "ctype": "struct instance_flags",
+      "fields": [
+        {
+          "name": "menu_headings",
+          "d": {
+            "s": "color_and_attr"
+          },
+          "ctype": "color_attr",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "display_hints": {
+      "ctype": "struct display_hints",
+      "fields": [
+        {
+          "name": "botl",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_m": {
+      "ctype": "struct instance_globals_m",
+      "fields": [
+        {
+          "name": "multi_reason",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mkot_trap_warn_count",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_n": {
+      "ctype": "struct instance_globals_n",
+      "fields": [
+        {
+          "name": "nomovemsg",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "notonhead",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "c_common_strings": {
+      "ctype": "struct c_common_strings",
+      "fields": [
+        {
+          "name": "c_fakename",
+          "d": {
+            "a": [
+              2
+            ],
+            "e": {
+              "p": ""
+            }
+          },
+          "ctype": "const char *const[2]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "c_Never_mind",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *const",
+          "bit": false,
+          "const": true
+        },
+        {
+          "name": "c_nothing_seems_to_happen",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *const",
+          "bit": false,
+          "const": true
+        },
+        {
+          "name": "c_nothing_happens",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *const",
+          "bit": false,
+          "const": true
+        }
+      ]
+    },
+    "c_color_names": {
+      "ctype": "struct c_color_names",
+      "fields": [
+        {
+          "name": "c_black",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *const",
+          "bit": false,
+          "const": true
+        }
+      ]
+    },
+    "const_globals": {
+      "ctype": "struct const_globals",
+      "fields": [
+        {
+          "name": "zeroobj",
+          "d": {
+            "s": "obj"
+          },
+          "ctype": "const struct obj",
+          "bit": false,
+          "const": true
+        },
+        {
+          "name": "zeroany",
+          "d": {
+            "s": "any"
+          },
+          "ctype": "const anything",
+          "bit": false,
+          "const": true
+        }
+      ]
+    },
+    "instance_globals_saved_n": {
+      "ctype": "struct instance_globals_saved_n",
+      "fields": [
+        {
+          "name": "n_dgns",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "dungeon": {
+      "ctype": "struct dungeon",
+      "fields": [
+        {
+          "name": "dunlev_ureached",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dname",
+          "d": {
+            "a": [
+              24
+            ],
+            "e": {
+              "t": "i8"
+            }
+          },
+          "ctype": "char[24]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "depth_start",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "entry_lev",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_d": {
+      "ctype": "struct instance_globals_saved_d",
+      "fields": [
+        {
+          "name": "dungeons",
+          "d": {
+            "a": [
+              16
+            ],
+            "e": {
+              "s": "dungeon"
+            }
+          },
+          "ctype": "dungeon[16]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dungeon_topology",
+          "d": {
+            "s": "dgn_topology"
+          },
+          "ctype": "struct dgn_topology",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "dgn_topology": {
+      "ctype": "struct dgn_topology",
+      "fields": [
+        {
+          "name": "d_tutorial_dnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "d_astral_level",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "any": {
+      "ctype": "union any",
+      "fields": [
+        {
+          "name": "a_int",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "mi": {
+      "ctype": "struct mi",
+      "fields": [
+        {
+          "name": "item",
+          "d": {
+            "s": "any"
+          },
+          "ctype": "anything",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "d_level": {
+      "ctype": "struct d_level",
+      "fields": [
+        {
+          "name": "dnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dlevel",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "u_have": {
+      "ctype": "struct u_have",
+      "fields": [
+        {
+          "name": "amulet",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        }
+      ]
+    },
+    "dlevel_t": {
+      "ctype": "dlevel_t",
+      "fields": [
+        {
+          "name": "monlist",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "locations",
+          "d": {
+            "a": [
+              80,
+              21
+            ],
+            "e": {
+              "s": "rm"
+            }
+          },
+          "ctype": "struct rm[80][21]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "objects",
+          "d": {
+            "a": [
+              80,
+              21
+            ],
+            "e": {
+              "p": "obj"
+            }
+          },
+          "ctype": "struct obj *[80][21]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_l": {
+      "ctype": "struct instance_globals_saved_l",
+      "fields": [
+        {
+          "name": "level",
+          "d": {
+            "s": "dlevel_t"
+          },
+          "ctype": "dlevel_t",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "q_score": {
+      "ctype": "struct q_score",
+      "fields": [
+        {
+          "name": "killed_nemesis",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_q": {
+      "ctype": "struct instance_globals_saved_q",
+      "fields": [
+        {
+          "name": "quest_status",
+          "d": {
+            "s": "q_score"
+          },
+          "ctype": "struct q_score",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_m": {
+      "ctype": "struct instance_globals_saved_m",
+      "fields": [
+        {
+          "name": "moves",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "rm": {
+      "ctype": "struct rm",
+      "fields": [
+        {
+          "name": "lit",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "waslit",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "typ",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "flags",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_w": {
+      "ctype": "struct instance_globals_w",
+      "fields": [
+        {
+          "name": "warn_obj_cnt",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "vptrs": {
+      "ctype": "union vptrs",
+      "fields": [
+        {
+          "name": "v_nexthere",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "glyphinfo": {
+      "ctype": "struct glyphinfo",
+      "fields": []
+    },
+    "nhcoord": {
+      "ctype": "struct nhcoord",
+      "fields": []
+    }
+  },
+  "globals": [
+    {
+      "name": "aligns",
+      "d": {
+        "a": [
+          0
+        ],
+        "e": {
+          "s": "Align"
+        }
+      }
+    },
+    {
+      "name": "flags",
+      "d": {
+        "s": "flag"
+      }
+    },
+    {
+      "name": "artilist",
+      "d": {
+        "a": [
+          35
+        ],
+        "e": {
+          "s": "artifact"
+        }
+      }
+    },
+    {
+      "name": "gu",
+      "d": {
+        "s": "instance_globals_u"
+      }
+    },
+    {
+      "name": "artiexist",
+      "d": {
+        "a": [
+          34
+        ],
+        "e": {
+          "s": "arti_info"
+        }
+      }
+    },
+    {
+      "name": "artidisco",
+      "d": {
+        "a": [
+          33
+        ],
+        "e": {
+          "t": "i16"
+        }
+      }
+    },
+    {
+      "name": "objects",
+      "d": {
+        "a": [
+          482
+        ],
+        "e": {
+          "s": "objclass"
+        }
+      }
+    },
+    {
+      "name": "mons",
+      "d": {
+        "a": [
+          384
+        ],
+        "e": {
+          "s": "permonst"
+        }
+      }
+    },
+    {
+      "name": "u",
+      "d": {
+        "s": "you"
+      }
+    },
+    {
+      "name": "zero_artiexist",
+      "d": {
+        "s": "arti_info"
+      }
+    },
+    {
+      "name": "obj_descr",
+      "d": {
+        "a": [
+          482
+        ],
+        "e": {
+          "s": "objdescr"
+        }
+      }
+    },
+    {
+      "name": "svb",
+      "d": {
+        "s": "instance_globals_saved_b"
+      }
+    },
+    {
+      "name": "gi",
+      "d": {
+        "s": "instance_globals_i"
+      }
+    },
+    {
+      "name": "program_state",
+      "d": {
+        "s": "sinfo"
+      }
+    },
+    {
+      "name": "svc",
+      "d": {
+        "s": "instance_globals_saved_c"
+      }
+    },
+    {
+      "name": "gv",
+      "d": {
+        "s": "instance_globals_v"
+      }
+    },
+    {
+      "name": "gy",
+      "d": {
+        "s": "instance_globals_y"
+      }
+    },
+    {
+      "name": "gs",
+      "d": {
+        "s": "instance_globals_s"
+      }
+    },
+    {
+      "name": "windowprocs",
+      "d": {
+        "s": "window_procs"
+      }
+    },
+    {
+      "name": "iflags",
+      "d": {
+        "s": "instance_flags"
+      }
+    },
+    {
+      "name": "disp",
+      "d": {
+        "s": "display_hints"
+      }
+    },
+    {
+      "name": "gm",
+      "d": {
+        "s": "instance_globals_m"
+      }
+    },
+    {
+      "name": "gn",
+      "d": {
+        "s": "instance_globals_n"
+      }
+    },
+    {
+      "name": "c_common_strings",
+      "d": {
+        "s": "c_common_strings"
+      }
+    },
+    {
+      "name": "c_color_names",
+      "d": {
+        "s": "c_color_names"
+      }
+    },
+    {
+      "name": "cg",
+      "d": {
+        "s": "const_globals"
+      }
+    },
+    {
+      "name": "svn",
+      "d": {
+        "s": "instance_globals_saved_n"
+      }
+    },
+    {
+      "name": "svd",
+      "d": {
+        "s": "instance_globals_saved_d"
+      }
+    },
+    {
+      "name": "nul_glyphinfo",
+      "d": {
+        "s": "glyphinfo"
+      }
+    },
+    {
+      "name": "svl",
+      "d": {
+        "s": "instance_globals_saved_l"
+      }
+    },
+    {
+      "name": "svq",
+      "d": {
+        "s": "instance_globals_saved_q"
+      }
+    },
+    {
+      "name": "svm",
+      "d": {
+        "s": "instance_globals_saved_m"
+      }
+    },
+    {
+      "name": "uwep",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "gw",
+      "d": {
+        "s": "instance_globals_w"
+      }
+    },
+    {
+      "name": "uarmg",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uleft",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uright",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uswapwep",
+      "d": {
+        "p": "obj"
+      }
+    }
+  ],
+  "constants": [
+    "ACID_VENOM",
+    "AD_ACID",
+    "AD_COLD",
+    "AD_DISE",
+    "AD_DISN",
+    "AD_DRLI",
+    "AD_DRST",
+    "AD_ELEC",
+    "AD_FIRE",
+    "AD_HALU",
+    "AD_MAGM",
+    "AD_PHYS",
+    "AD_PLYS",
+    "AD_SLEE",
+    "AD_SLOW",
+    "AD_STON",
+    "AD_STUN",
+    "AFTER_LAST_ARTIFACT",
+    "ALTAR",
+    "AMULET_OF_ESP",
+    "ANTIMAGIC",
+    "ARROW",
+    "ART_EXCALIBUR",
+    "ART_GRIMTOOTH",
+    "ART_MASTER_KEY_OF_THIEVERY",
+    "ART_NONARTIFACT",
+    "ART_ORCRIST",
+    "ART_STING",
+    "ART_STORMBRINGER",
+    "ART_SUNSWORD",
+    "ART_TSURUGI_OF_MURAMASA",
+    "ART_VORPAL_BLADE",
+    "ATHAME",
+    "ATR_NONE",
+    "AT_MAGC",
+    "A_CON",
+    "A_NONE",
+    "A_WIS",
+    "BAG_OF_TRICKS",
+    "BANISH",
+    "BATTLE_AXE",
+    "BELL_OF_OPENING",
+    "BLACK_DRAGON_SCALES",
+    "BLINDED",
+    "BLINDING_RAY",
+    "BLINDING_VENOM",
+    "BLND_RES",
+    "BLUE_DRAGON_SCALES",
+    "BOW",
+    "BROADSWORD",
+    "BUFSZ",
+    "CHARGE_OBJ",
+    "COLD_RES",
+    "COLNO",
+    "CONFLICT",
+    "CONFUSION",
+    "COULD_SEE",
+    "CREATE_AMMO",
+    "CREATE_PORTAL",
+    "CREDIT_CARD",
+    "CRYSTAL_BALL",
+    "DISINT_RES",
+    "DISMOUNT_THROWN",
+    "DOOR",
+    "DRAIN_RES",
+    "D_TRAPPED",
+    "ECMD_CANCEL",
+    "ECMD_OK",
+    "ECMD_TIME",
+    "ELVEN_BROADSWORD",
+    "ELVEN_DAGGER",
+    "ENERGY_BOOST",
+    "ENERGY_REGENERATION",
+    "ENLIGHTENING",
+    "ENL_GAMEINPROGRESS",
+    "FAKE_AMULET_OF_YENDOR",
+    "FALSE",
+    "FIRESTORM",
+    "FIRE_RES",
+    "FLING_POISON",
+    "GETOBJ_ALLOWCNT",
+    "GETOBJ_EXCLUDE",
+    "GETOBJ_PROMPT",
+    "GETOBJ_SUGGEST",
+    "GLYPH_TRAP_OFF",
+    "GOLD_DRAGON_SCALES",
+    "GOLD_DRAGON_SCALE_MAIL",
+    "GRAY_DRAGON_SCALES",
+    "GRAY_DRAGON_SCALE_MAIL",
+    "GREEN_DRAGON_SCALES",
+    "HALF_PHDAM",
+    "HALF_SPDAM",
+    "HALLUC",
+    "HALLUC_RES",
+    "HEALING",
+    "HELM_OF_BRILLIANCE",
+    "INVIS",
+    "IN_SIGHT",
+    "I_SPECIAL",
+    "KATANA",
+    "KILLED_BY",
+    "LARGE_BOX",
+    "LAST_PROP",
+    "LEASH",
+    "LENSES",
+    "LEVITATION",
+    "LEV_TELE",
+    "LL_ARTIFACT",
+    "LONG_MAX",
+    "LONG_SWORD",
+    "LOW_PM",
+    "LUCKSTONE",
+    "M1_AMORPHOUS",
+    "M1_NOHEAD",
+    "M2_DEMON",
+    "M2_LORD",
+    "M2_PRINCE",
+    "M2_UNDEAD",
+    "M2_WERE",
+    "M3_COVETOUS",
+    "MACE",
+    "MAGICENLIGHTENMENT",
+    "MAXTCHARS",
+    "MENU_BEHAVE_STANDARD",
+    "MENU_ITEMFLAGS_NONE",
+    "MIGR_RANDOM",
+    "MIRROR",
+    "MORNING_STAR",
+    "MS_NEMESIS",
+    "MZ_LARGE",
+    "NECK",
+    "NHW_MENU",
+    "NON_PM",
+    "NOTELL",
+    "NO_COLOR",
+    "NO_ROOM",
+    "NROFARTIFACTS",
+    "NUMMONS",
+    "NUM_OBJECTS",
+    "OBJ_CONTAINED",
+    "OBJ_FLOOR",
+    "OBJ_INVENT",
+    "OBJ_MINVENT",
+    "ONAME_BONES",
+    "ONAME_GIFT",
+    "ONAME_KNOW_ARTI",
+    "ONAME_LEVEL_DEF",
+    "ONAME_NO_FLAGS",
+    "ONAME_RANDOM",
+    "ONAME_VIA_DIP",
+    "ONAME_VIA_NAMING",
+    "ONAME_WISH",
+    "ORANGE_DRAGON_SCALES",
+    "ORCISH_DAGGER",
+    "PICK_ONE",
+    "PM_ARCHEOLOGIST",
+    "PM_BARBARIAN",
+    "PM_CAVE_DWELLER",
+    "PM_CLAY_GOLEM",
+    "PM_CLERIC",
+    "PM_ELF",
+    "PM_GREMLIN",
+    "PM_HEALER",
+    "PM_JABBERWOCK",
+    "PM_KNIGHT",
+    "PM_MANES",
+    "PM_MONK",
+    "PM_ORC",
+    "PM_RANGER",
+    "PM_ROGUE",
+    "PM_SAMURAI",
+    "PM_TOURIST",
+    "PM_VALKYRIE",
+    "PM_WATER_ELEMENTAL",
+    "PM_WIZARD",
+    "POISON_RES",
+    "PROTECTION",
+    "P_BASIC",
+    "P_EXPERT",
+    "P_SKILLED",
+    "QUARTERSTAFF",
+    "RED_DRAGON_SCALES",
+    "REFLECTING",
+    "REGENERATION",
+    "RING_CLASS",
+    "RIN_INCREASE_DAMAGE",
+    "ROWNO",
+    "RUNESWORD",
+    "SCR_TAMING",
+    "SEARCHING",
+    "SHOCK_RES",
+    "SICK",
+    "SICK_ALL",
+    "SILVER",
+    "SILVER_MACE",
+    "SILVER_SABER",
+    "SKELETON_KEY",
+    "SLIMED",
+    "SNOWSTORM",
+    "SPE_CONE_OF_COLD",
+    "SPE_FIREBALL",
+    "SPFX_ATTK",
+    "SPFX_BEHEAD",
+    "SPFX_DALIGN",
+    "SPFX_DBONUS",
+    "SPFX_DCLAS",
+    "SPFX_DFLAG1",
+    "SPFX_DFLAG2",
+    "SPFX_DMONS",
+    "SPFX_DRLI",
+    "SPFX_EREGEN",
+    "SPFX_ESP",
+    "SPFX_HALRES",
+    "SPFX_HPHDAM",
+    "SPFX_HSPDAM",
+    "SPFX_INTEL",
+    "SPFX_LUCK",
+    "SPFX_NOGEN",
+    "SPFX_PROTECT",
+    "SPFX_REFLECT",
+    "SPFX_REGEN",
+    "SPFX_RESTR",
+    "SPFX_SEARCH",
+    "SPFX_SPEAK",
+    "SPFX_STLTH",
+    "SPFX_TCTRL",
+    "SPFX_WARN",
+    "SPFX_XRAY",
+    "STEALTH",
+    "STONE_RES",
+    "STRANGE_OBJECT",
+    "STUNNED",
+    "S_DRAGON",
+    "S_GHOST",
+    "S_GOLEM",
+    "S_IMP",
+    "S_OGRE",
+    "S_TROLL",
+    "S_VORTEX",
+    "TAMING",
+    "TELEPAT",
+    "TELEPORT_CONTROL",
+    "TIMEOUT",
+    "TOOL_CLASS",
+    "TRUE",
+    "TSURUGI",
+    "UNTRAP",
+    "WAND_CLASS",
+    "WARNING",
+    "WARN_OF_MON",
+    "WAR_HAMMER",
+    "WEAPON_CLASS",
+    "WHITE_DRAGON_SCALES",
+    "WIN_ERR",
+    "W_AMUL",
+    "W_ARM",
+    "W_ARMC",
+    "W_ARMF",
+    "W_ARMG",
+    "W_ARMH",
+    "W_ARMS",
+    "W_ARMU",
+    "W_ART",
+    "W_ARTI",
+    "W_BALL",
+    "W_QUIVER",
+    "W_RINGL",
+    "W_RINGR",
+    "W_SADDLE",
+    "W_SWAPWEP",
+    "W_TOOL",
+    "W_WEP",
+    "YELLOW_DRAGON_SCALES",
+    "YELLOW_DRAGON_SCALE_MAIL"
+  ],
+  "variadicABI": {
+    "impossible_pi": {
+      "name": "impossible",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "ret": "void"
+    },
+    "livelog_printf_jppp": {
+      "name": "livelog_printf",
+      "types": [
+        "long",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_pp": {
+      "name": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "sprintf_ppp": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "int"
+    },
+    "pline_pp": {
+      "name": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "impossible_p": {
+      "name": "impossible",
+      "types": [
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "sprintf_ppppp": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "int"
+    },
+    "nh_snprintf_pipjpppppppppp": {
+      "name": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "nh_snprintf_pipjppp": {
+      "name": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_The_ppp": {
+      "name": "pline_The",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_p": {
+      "name": "You",
+      "types": [
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_The_pp": {
+      "name": "pline_The",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_ppp": {
+      "name": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_ppppi": {
+      "name": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "int"
+      ],
+      "ret": "void"
+    },
+    "pline_The_pppi": {
+      "name": "pline_The",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "int"
+      ],
+      "ret": "void"
+    },
+    "pline_pppp": {
+      "name": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_p": {
+      "name": "pline",
+      "types": [
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_The_pppp": {
+      "name": "pline_The",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_feel_ppp": {
+      "name": "You_feel",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_feel_p": {
+      "name": "You_feel",
+      "types": [
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_feel_pp": {
+      "name": "You_feel",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "Your_pp": {
+      "name": "Your",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "Your_p": {
+      "name": "Your",
+      "types": [
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "verbalize_pp": {
+      "name": "verbalize",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_cant_ppp": {
+      "name": "You_cant",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_The_ppi": {
+      "name": "pline_The",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "ret": "void"
+    }
+  },
+  "literals": [
+    "",
+    "  %-36.36s%s",
+    "  %s\t%s",
+    "  %s [%s %s]",
+    " -",
+    " and ",
+    " anymore",
+    " bones",
+    " carried by a monster",
+    " gift",
+    " hero knows;",
+    " in a container",
+    " in a shop",
+    " lvldef",
+    " named",
+    " on the floor",
+    " random",
+    " viadip",
+    " wish",
+    "!  A hail of magic missiles strikes",
+    "!  Lightning strikes",
+    "%s",
+    "%s %s %s in a cloud of brimstone!",
+    "%s %s %s%c",
+    "%s %s slightly.",
+    "%s %s!",
+    "%s beheads %s!",
+    "%s beyond your control!",
+    "%s blade drains your %s!",
+    "%s blade draws the %s from %s!",
+    "%s cuts %s in half!",
+    "%s cuts deeply into %s!",
+    "%s cuts deeply into you!",
+    "%s cuts you in half!",
+    "%s decapitates %s!",
+    "%s drains your %s!",
+    "%s draws the %s from %s!",
+    "%s is %s.",
+    "%s is insightful.",
+    "%s slices through %s %s.",
+    "%s slices through your %s.",
+    "%s stops %s.",
+    "%s to the %s.",
+    "%s your grasp!",
+    "%s:",
+    "%sbetter.",
+    "After losing your gloves, you",
+    "Artifacts",
+    "Cleaver",
+    "Demonbane",
+    "Dragonbane",
+    "Excalibur",
+    "Fire Brand",
+    "Frost Brand",
+    "Giantslayer",
+    "Good job Henry, but that wasn't Anne.",
+    "Grayswandir",
+    "Grimtooth",
+    "It is lit here now.",
+    "Key feels %s%c",
+    "Magicbane",
+    "Mb_hit",
+    "Mjollnir",
+    "Most of the",
+    "NetHack rumors file closed for renovation.",
+    "Ogresmasher",
+    "Open a portal to which dungeon?",
+    "Orcrist",
+    "Snickersnee",
+    "Some of the",
+    "Somehow, %s misses wildly.",
+    "Somehow, %s misses you wildly.",
+    "Somehow, you miss %s wildly.",
+    "Sting",
+    "Sting_effects",
+    "Stormbringer",
+    "Suddenly %s out.",
+    "Sunsword",
+    "The",
+    "The Eye of the Aethiopica",
+    "The Eyes of the Overworld",
+    "The Heart of Ahriman",
+    "The Longbow of Diana",
+    "The Magic Mirror of Merlin",
+    "The Master Key of Thievery",
+    "The Mitre of Holiness",
+    "The Orb of Detection",
+    "The Orb of Fate",
+    "The Platinum Yendorian Express Card",
+    "The Sceptre of Might",
+    "The Staff of Aesculapius",
+    "The Tsurugi of Muramasa",
+    "The razor-sharp blade",
+    "Trollsbane",
+    "Unknown invoke power %d.",
+    "Vorpal Blade",
+    "Weird weapon special attack.",
+    "Werebane",
+    "[%s%s%s%s%s%s%s%s%s]",
+    "a silver ring",
+    "a silver wand",
+    "a surge of power, but nothing seems to happen.",
+    "abil_to_adtyp",
+    "abil_to_spfx",
+    "absorb magical energy!",
+    "amaze",
+    "an %s drain your %s!",
+    "animating force",
+    "are",
+    "are blasted by %s power!",
+    "are surrounded by a shimmering sphere!",
+    "arti_cost",
+    "arti_immune",
+    "arti_invoke",
+    "arti_invoke without obj",
+    "arti_invoke_cost",
+    "arti_invoke_cost_pw",
+    "arti_reflects",
+    "arti_speak",
+    "artidisco",
+    "artiexist",
+    "artifact.c",
+    "artifact.h",
+    "artifact_exists",
+    "artifact_has_invprop",
+    "artifact_hit",
+    "artifact_light",
+    "artifact_name",
+    "artifact_origin",
+    "artilist.h",
+    "artiname",
+    "attacking yourself with weapon?",
+    "attacks",
+    "bane_applies",
+    "being scared stiff",
+    "better.",
+    "body seems to unfade...",
+    "body takes on a %s transparency...",
+    "burns",
+    "cancel",
+    "charge",
+    "confers_luck",
+    "confused",
+    "cool",
+    "couldn't discover artifact (%d)",
+    "count_surround_traps",
+    "defends",
+    "defends_when_carried",
+    "demons",
+    "disappear",
+    "discover_artifact",
+    "disp_artifact_discoveries",
+    "dispose_of_orig_obj",
+    "doinvoke",
+    "drained...",
+    "dump_artifact_info",
+    "evade",
+    "exist_artifact",
+    "exists;",
+    "fall",
+    "fiery blade %s %s%c",
+    "find_artifact",
+    "finesse_ahriman",
+    "flicker",
+    "found %s%s",
+    "found_artifact",
+    "found_artifact: artifact doesn't exist yet? (%d)",
+    "found_artifact: invalid artifact index! (%d)",
+    "freezes",
+    "get_artifact",
+    "gleam",
+    "glimmer",
+    "glow_color",
+    "glow_strength",
+    "glow_verb",
+    "hack.h",
+    "hack_artifacts",
+    "handle %s%s!",
+    "handling %s",
+    "has_magic_key",
+    "hits",
+    "hot",
+    "ice-cold blade %s %s%c",
+    "imaginary widget hits%s %s%c",
+    "ing",
+    "init_artifacts",
+    "invalid artifact origin: %4o",
+    "invoke",
+    "invoke_banish",
+    "invoke_blinding_ray",
+    "invoke_charge_obj",
+    "invoke_create_ammo",
+    "invoke_create_portal",
+    "invoke_energy_boost",
+    "invoke_fling_poison",
+    "invoke_healing",
+    "invoke_ok",
+    "invoke_storm_spell",
+    "invoke_taming",
+    "invoke_untrap",
+    "is_art",
+    "is_magic_key",
+    "life",
+    "life drainage",
+    "like a rabble-rouser.",
+    "like fire",
+    "lose magical energy!",
+    "magic-absorbing blade %s %s!",
+    "magr != 0",
+    "massive hammer hits%s %s%c",
+    "mk_artifact",
+    "mkot_trap_warn",
+    "nartifact_exist",
+    "non-aligned",
+    "normal",
+    "nothing_special",
+    "object",
+    "otmp != 0",
+    "permapoisoned",
+    "probe",
+    "prod",
+    "protects",
+    "purge",
+    "quiver",
+    "re-energized.",
+    "release %s!",
+    "resist",
+    "restore_artifacts",
+    "restrict_name",
+    "retouch_equipment",
+    "retouch_object",
+    "save_artifacts",
+    "scare",
+    "set_artifact_intrinsic",
+    "shade_glare",
+    "slice %s wide open!",
+    "slice deeply into %s!",
+    "slightly ",
+    "slightly warm",
+    "spec_ability",
+    "spec_abon",
+    "spec_applies",
+    "spec_dbon",
+    "spec_m2",
+    "strange",
+    "stun",
+    "stunned",
+    "that %s %s ignoring you.",
+    "the ",
+    "the tension decrease around you.",
+    "tickle",
+    "touch_artifact",
+    "touching %s",
+    "unaligned",
+    "undiscovered_artifact",
+    "unholy blade",
+    "untouchable",
+    "vaporizes part of",
+    "very disoriented for a moment.",
+    "very hot",
+    "very warm",
+    "warm",
+    "weightless for a moment.",
+    "what_gives",
+    "whisper",
+    "you"
+  ],
+  "functions": [
+    {
+      "name": "hack_artifacts",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": true,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "art",
+          "type": {
+            "qualType": "struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "alignmnt",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "c01aacf962342e6f3592dd0e1b2a48f2b7cd71feeb04ef68036bab57a17854f9"
+    },
+    {
+      "name": "init_artifacts",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "astSha256": "e9434da05d2842f6255f3f9c90eb7b1c96db9decdf2d3faf3e3174a68061ee2a"
+    },
+    {
+      "name": "save_artifacts",
+      "type": {
+        "qualType": "void (NHFILE *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "nhfp",
+          "type": {
+            "qualType": "NHFILE *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "f1f9cbbc7182e3eea4c4104ac77dd6b6c95c4e9dc944ff66780df007b62ec5cf"
+    },
+    {
+      "name": "restore_artifacts",
+      "type": {
+        "qualType": "void (NHFILE *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "nhfp",
+          "type": {
+            "qualType": "NHFILE *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "98286eff164ebf062bffb6420f14b8fa71e636affa4ce229611d42ea42588237"
+    },
+    {
+      "name": "artiname",
+      "type": {
+        "qualType": "const char *(int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "artinum",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "ba747eea3d2e2a0115ddb2b2876a6b7f07444a4b44589f8cd37716b1c39d8d14"
+    },
+    {
+      "name": "mk_artifact",
+      "type": {
+        "qualType": "struct obj *(struct obj *, aligntyp, uchar, boolean)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "alignment",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "aligntyp",
+            "typeAliasDeclId": "0x7e335db10"
+          }
+        },
+        {
+          "name": "max_giftvalue",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7e328bcb8"
+          }
+        },
+        {
+          "name": "adjust_spe",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "a",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "m",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "n",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "altn",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "by_align",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "o_typ",
+          "type": {
+            "qualType": "short"
+          },
+          "static": false
+        },
+        {
+          "name": "unique",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "eligible",
+          "type": {
+            "qualType": "short[33]"
+          },
+          "static": false
+        },
+        {
+          "name": "skill_compatibility",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x7e330b1c0"
+          },
+          "static": false
+        },
+        {
+          "name": "skill",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x7e328bc48"
+          },
+          "static": false
+        },
+        {
+          "name": "artiobj",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        },
+        {
+          "name": "new_spe",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "d76f70ab9cfb84e580abd2160fc4793b9925fff0f304e5ccabca3a23a9bf6a7b"
+    },
+    {
+      "name": "dispose_of_orig_obj",
+      "type": {
+        "qualType": "void (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "82c48f8282891387ecd6be4dd9b369c07061631da0c91804956989f0b87a89cc"
+    },
+    {
+      "name": "artifact_name",
+      "type": {
+        "qualType": "const char *(const char *, short *, boolean)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "name",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "otyp_p",
+          "type": {
+            "qualType": "short *"
+          }
+        },
+        {
+          "name": "fuzzy",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "a",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "aname",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "3a4f34df31d8239b80c134268a9f44d915e3b79a68d7c3e48c4ead1aaa9a1e7d"
+    },
+    {
+      "name": "exist_artifact",
+      "type": {
+        "qualType": "boolean (int, const char *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otyp",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "a",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "arex",
+          "type": {
+            "qualType": "struct arti_info *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "b51367e408af0fef7a894e24682cd688d805b92c9a1e62de9bad707995e567ff"
+    },
+    {
+      "name": "artifact_exists",
+      "type": {
+        "qualType": "void (struct obj *, const char *, boolean, unsigned int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "mod",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          }
+        },
+        {
+          "name": "flgs",
+          "type": {
+            "qualType": "unsigned int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "a",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "m",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "8dbcc924aa5717e1a13807a95e5aec03efda000497709c124bb35178617b122d"
+    },
+    {
+      "name": "found_artifact",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "a",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "dd1c338d4f7fc203d93cc1a33971b1739a19bb0f0211c871bf22de818bb8ddcc"
+    },
+    {
+      "name": "find_artifact",
+      "type": {
+        "qualType": "void (struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "a",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "where",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "8c8bc76c8fe8bebf6d6c2fac62fae23d70ce24f2f5276b3b55d5211b8f698414"
+    },
+    {
+      "name": "nartifact_exist",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "a",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "39997036e38daf118c13507281370d134a0d2ad54eb96f9b55350fb6c742082b"
+    },
+    {
+      "name": "artifact_origin",
+      "type": {
+        "qualType": "void (struct obj *, unsigned int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "arti",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "aflags",
+          "type": {
+            "qualType": "unsigned int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "ct",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "a",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "ffae2eda576fda7fc7e0082d5475a8d835d17f4d57c46c2daf86ba4c855e2ed0"
+    },
+    {
+      "name": "spec_ability",
+      "type": {
+        "qualType": "boolean (struct obj *, unsigned long)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "abil",
+          "type": {
+            "qualType": "unsigned long"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "arti",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "6eac1426f504503b7551bd36e668f1895c5679f07b9c06b71d5f1d7a66a4d251"
+    },
+    {
+      "name": "confers_luck",
+      "type": {
+        "qualType": "boolean (struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "9549df9f14b71697f943ef308003e32fc529489eac9c098c61118f3e0d12c7d5"
+    },
+    {
+      "name": "arti_reflects",
+      "type": {
+        "qualType": "boolean (struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "arti",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "3a7d61cfc9dd79c577488aa946e7cd9da367d7a240c93fedcc327998fb0d24ae"
+    },
+    {
+      "name": "shade_glare",
+      "type": {
+        "qualType": "boolean (struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "arti",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "e98a403d10f4d1a871f02c295e4dc1ed7f315bb93cf526168fa68a70dc81c2ec"
+    },
+    {
+      "name": "restrict_name",
+      "type": {
+        "qualType": "boolean (struct obj *, const char *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "a",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "aname",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "odesc",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "other",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "sametype",
+          "type": {
+            "qualType": "boolean[481]"
+          },
+          "static": false
+        },
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "lo",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "hi",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "otyp",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "ocls",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "c0538f2c3b6c279117c2a2111af085cefca434253f4495532e9d807df0219e42"
+    },
+    {
+      "name": "attacks",
+      "type": {
+        "qualType": "boolean (int, struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "adtyp",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "weap",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "880aa6421627f6a52a42731bc8da29a41c85a58102ea7851bb0239a20b694f4b"
+    },
+    {
+      "name": "defends",
+      "type": {
+        "qualType": "boolean (int, struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "adtyp",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "weap",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "otyp",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "8185a6411b1c0c2893c329503d3f569136fb56ecfde17fb6a11fae4f56d4ee54"
+    },
+    {
+      "name": "defends_when_carried",
+      "type": {
+        "qualType": "boolean (int, struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "adtyp",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "weap",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "ee342866aba6db2aad45f7d96f719a62319f564897f248deda5ee409cd0b665b"
+    },
+    {
+      "name": "protects",
+      "type": {
+        "qualType": "boolean (struct obj *, boolean)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "being_worn",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "arti",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "5b31512ed51fc737030ee7a0c9bf36fc74151b2f247f80a4cfe4cacc71bea363"
+    },
+    {
+      "name": "set_artifact_intrinsic",
+      "type": {
+        "qualType": "void (struct obj *, boolean, long)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "on",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          }
+        },
+        {
+          "name": "wp_mask",
+          "type": {
+            "qualType": "long"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "mask",
+          "type": {
+            "qualType": "long *"
+          },
+          "static": false
+        },
+        {
+          "name": "art",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "oart",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        },
+        {
+          "name": "dtyp",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7e328bcb8"
+          },
+          "static": false
+        },
+        {
+          "name": "spfx",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "82a74224fc6509b2ea3e82302cc4d817f07a7e82408897bfce497d44966c71ca"
+    },
+    {
+      "name": "touch_artifact",
+      "type": {
+        "qualType": "int (struct obj *, struct monst *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "mon",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "oart",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "badclass",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "badalign",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "self_willed",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "yours",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "dmg",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "tmp",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "ba30254d26a2d220f6e42a5d89bf0498d84e3fafb67f191f4617a7858fc48db8"
+    },
+    {
+      "name": "arti_immune",
+      "type": {
+        "qualType": "boolean (struct obj *, int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "dtyp",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "weap",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "6ef66c4a0becc048057235b6c4b34f88340e31788cce4718c002ca41fc77607a"
+    },
+    {
+      "name": "bane_applies",
+      "type": {
+        "qualType": "boolean (const struct artifact *, struct monst *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "oart",
+          "type": {
+            "qualType": "const struct artifact *"
+          }
+        },
+        {
+          "name": "mon",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "atmp",
+          "type": {
+            "qualType": "struct artifact"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "de68bfb38d4df4f9c618167bd91d4c48862353bf2b1ce5f56ae49aa7bdb38178"
+    },
+    {
+      "name": "spec_applies",
+      "type": {
+        "qualType": "int (const struct artifact *, struct monst *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "weap",
+          "type": {
+            "qualType": "const struct artifact *"
+          }
+        },
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "ptr",
+          "type": {
+            "qualType": "struct permonst *"
+          },
+          "static": false
+        },
+        {
+          "name": "yours",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "b1317a56786c679e1318eb17e711ed80b438342ab9131e4079e0d61fe74506c0"
+    },
+    {
+      "name": "spec_m2",
+      "type": {
+        "qualType": "long (struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "artifact",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "54d367043bf13c2dce7ee22f7ba5dc3849e48453a3cee9151dd19c784bcf2149"
+    },
+    {
+      "name": "spec_abon",
+      "type": {
+        "qualType": "int (struct obj *, struct monst *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "mon",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "weap",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "a278c9cedd670a90dc91a3778712e66c9667dcd165680929b1e1b1256dddcd0b"
+    },
+    {
+      "name": "spec_dbon",
+      "type": {
+        "qualType": "int (struct obj *, struct monst *, int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "mon",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "tmp",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "weap",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "fbc0d0f3296c447d4f6f08007d4ab7a8bef84813fb18ef95fbd969a7722c035b"
+    },
+    {
+      "name": "discover_artifact",
+      "type": {
+        "qualType": "void (xint16)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "m",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x7e330b1c0"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "8b246861a226a36886fd06b87001c7e592a0ad418063c48eb896821b968be520"
+    },
+    {
+      "name": "undiscovered_artifact",
+      "type": {
+        "qualType": "boolean (xint16)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "m",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x7e330b1c0"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "9fc76c0d1f0eea1d193779a4406bbe791c6f217378c329492b833fad3a9bcdff"
+    },
+    {
+      "name": "disp_artifact_discoveries",
+      "type": {
+        "qualType": "int (winid)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "tmpwin",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7e3027bd0"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "m",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "otyp",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "algnstr",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "e22dc19f7591ec6ff93aea7899155c49bdd9306167c96ff271f2e0548aa76414"
+    },
+    {
+      "name": "dump_artifact_info",
+      "type": {
+        "qualType": "void (winid)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "tmpwin",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7e3027bd0"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "m",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "buf2",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "9e5e2b2c0d3ca787bbb733bf1e95be28fc8eaa1b5bcc174fcf3ef6ab0d5a777f"
+    },
+    {
+      "name": "Mb_hit",
+      "type": {
+        "qualType": "boolean (struct monst *, struct monst *, struct obj *, int *, int, boolean, char *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "magr",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "mdef",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "mb",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "dmgptr",
+          "type": {
+            "qualType": "int *"
+          }
+        },
+        {
+          "name": "dieroll",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "vis",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          }
+        },
+        {
+          "name": "hittee",
+          "type": {
+            "qualType": "char *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "old_mdat",
+          "type": {
+            "qualType": "struct permonst *"
+          },
+          "static": false
+        },
+        {
+          "name": "verb",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "youattack",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "youdefend",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "resisted",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "do_stun",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "do_confuse",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "result",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "attack_indx",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "fakeidx",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "scare_dieroll",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "45d287853dd556c1f0056d90596abf72048d075b291c03cf8fe8fa6053e5e731"
+    },
+    {
+      "name": "artifact_hit",
+      "type": {
+        "qualType": "boolean (struct monst *, struct monst *, struct obj *, int *, int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "magr",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "mdef",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "dmgptr",
+          "type": {
+            "qualType": "int *"
+          }
+        },
+        {
+          "name": "dieroll",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "youattack",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "youdefend",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "vis",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "realizes_damage",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "wepdesc",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "you",
+          "type": {
+            "qualType": "const char[4]"
+          },
+          "static": true
+        },
+        {
+          "name": "hittee",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "itemdmg",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "itemdmg",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "itemdmg",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "behead_msg",
+          "type": {
+            "qualType": "const char *const[2]"
+          },
+          "static": true
+        },
+        {
+          "name": "life",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "m_lev",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "mhpmax",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "drain",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "otmpname",
+          "type": {
+            "qualType": "char *"
+          },
+          "static": false
+        },
+        {
+          "name": "oldhpmax",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "otmpname",
+          "type": {
+            "qualType": "char *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "cbf29a4ba614bc88b0f8060530bd89c43e6defc90eea92bfec383308987b67dd"
+    },
+    {
+      "name": "invoke_ok",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "c64503634845aa2e09343861313c0ebaf57c5582d39a64f590bf7c6f5383bb0a"
+    },
+    {
+      "name": "doinvoke",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "938c54d70c2434b0e60c4ac3ff226d720b062e3a0e6e89fda3fc1f73101e41ff"
+    },
+    {
+      "name": "nothing_special",
+      "type": {
+        "qualType": "void (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "acfb6b5b4c1bb3732e28f86c22ee05332854d1049a15ff3a303ccd388f34e913"
+    },
+    {
+      "name": "invoke_taming",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "pseudo",
+          "type": {
+            "qualType": "struct obj"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "e6e15b7dcb7e06eae733e615fd5868ae374710dd8bb89d91143ec28f2b095c6e"
+    },
+    {
+      "name": "invoke_healing",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "healamt",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "creamed",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "a8fd1aaf6bb7e2abd1ad60d5ece79a3582322dc86f613cf3fee87e90bad55fc9"
+    },
+    {
+      "name": "invoke_energy_boost",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "epboost",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "e922404e7608d45d470242febb15bee6c86cd68746c2469760149a1971b98ce0"
+    },
+    {
+      "name": "invoke_untrap",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "9eb44696fb0cb999a04417b6065e38df262aa0552dd329a5f83093fe8d2e5a45"
+    },
+    {
+      "name": "invoke_charge_obj",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "oart",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        },
+        {
+          "name": "b_effect",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "87700188c363fab34554621599a33676da23a0b98d2e5e7ed5af6fc8c4eca83f"
+    },
+    {
+      "name": "invoke_create_portal",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "num_ok_dungeons",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "last_ok_dungeon",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "newlev",
+          "type": {
+            "desugaredQualType": "struct d_level",
+            "qualType": "d_level",
+            "typeAliasDeclId": "0x7e3364e98"
+          },
+          "static": false
+        },
+        {
+          "name": "tmpwin",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7e3027bd0"
+          },
+          "static": false
+        },
+        {
+          "name": "any",
+          "type": {
+            "desugaredQualType": "union any",
+            "qualType": "anything",
+            "typeAliasDeclId": "0x7e3028d58"
+          },
+          "static": false
+        },
+        {
+          "name": "clr",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "selected",
+          "type": {
+            "qualType": "menu_item *"
+          },
+          "static": false
+        },
+        {
+          "name": "n",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "eb97db610fcb4f5e1380afc74e4c7b20f3862c7a684529bf5d7eff8c8edc9441"
+    },
+    {
+      "name": "invoke_create_ammo",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "23133e3ff660f63b14fe524a0722f1e204202d98c8a2f4cd49b9977c5309d5f3"
+    },
+    {
+      "name": "invoke_banish",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "nvanished",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "nstayed",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        },
+        {
+          "name": "mtmp2",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        },
+        {
+          "name": "dest",
+          "type": {
+            "desugaredQualType": "struct d_level",
+            "qualType": "d_level",
+            "typeAliasDeclId": "0x7e3364e98"
+          },
+          "static": false
+        },
+        {
+          "name": "chance",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "subject",
+          "type": {
+            "qualType": "char[7]"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "ae1190efdce017019044656b8a06400e41ea60eb62fe9fa254c664bff4c11aa7"
+    },
+    {
+      "name": "invoke_fling_poison",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "venom",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "5a724fe44edb0d03681d3030e31db74ef2709a8faafd5964336c0f6c46313138"
+    },
+    {
+      "name": "invoke_storm_spell",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "oart",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "storm",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "skill",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "expertise",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "2d6089f2cb0751258aed6abe75698007af84a6f49df5222796b6664638657aae"
+    },
+    {
+      "name": "invoke_blinding_ray",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "vulnerable",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "damg",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "fe821e6d4626d6a5451572bb9ac1007121fe6f5f6f50a3a4b55a460b6281941e"
+    },
+    {
+      "name": "arti_invoke_cost_pw",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "oart",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "21d7a39beb269c701a2aaef414901aa43bd6e726c47c1da9fdb3027f7e9ead18"
+    },
+    {
+      "name": "arti_invoke_cost",
+      "type": {
+        "qualType": "boolean (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "pw_cost",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "424fd71d11b798f0e09a099c905d8d86b344d98c6b1c5bf9eb80154a8b2b1c91"
+    },
+    {
+      "name": "arti_invoke",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "oart",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "res",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "eprop",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "iprop",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "on",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "ec6168332612c8b5aac7be94263ab78dff9e240478db56f6eb97a9a75649fe18"
+    },
+    {
+      "name": "finesse_ahriman",
+      "type": {
+        "qualType": "boolean (struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "oart",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "save_Lev",
+          "type": {
+            "qualType": "struct prop"
+          },
+          "static": false
+        },
+        {
+          "name": "result",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "b78ae8a6daa2fa4baf5385d99b9dca0c9a8541525aa8cffc7617d28d469780e5"
+    },
+    {
+      "name": "artifact_light",
+      "type": {
+        "qualType": "boolean (struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "8c9654506cca26db2b9e299c06fe97e1dd5cae4d2beb6a1e40ebea48cb554bc2"
+    },
+    {
+      "name": "arti_speak",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "oart",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "line",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "469efb9d86d45c5e6f08ace54d15aa946fa523d34bf46a50d05cd567cdac8cf3"
+    },
+    {
+      "name": "artifact_has_invprop",
+      "type": {
+        "qualType": "boolean (struct obj *, uchar)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "inv_prop",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7e328bcb8"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "arti",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "5c97e8c70fabb6e85f837effb8b4e991d4dabd4bc4b35cca095ca80adb87e9ad"
+    },
+    {
+      "name": "arti_cost",
+      "type": {
+        "qualType": "long (struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "b9a0bdc85f7378ffbe57a57c686453b6fabded8be4c3e7eef29fdc1753c0b475"
+    },
+    {
+      "name": "abil_to_adtyp",
+      "type": {
+        "qualType": "uchar (long *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "abil",
+          "type": {
+            "qualType": "long *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "abil2adtyp",
+          "type": {
+            "qualType": "struct abil2adtyp_tag[7]"
+          },
+          "static": false
+        },
+        {
+          "name": "k",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "d334fc13ddcdd2f7dead7263e3397f40c033c4587ca5b49722598ef5739c83a8"
+    },
+    {
+      "name": "abil_to_spfx",
+      "type": {
+        "qualType": "unsigned long (long *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "abil",
+          "type": {
+            "qualType": "long *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "abil2spfx",
+          "type": {
+            "qualType": "const struct abil2spfx_tag[12]"
+          },
+          "static": true
+        },
+        {
+          "name": "k",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "1b2e386268413b33a0a25e93c523d2d2b46be97cf2aef2cae34e2c3ed3a1b0ce"
+    },
+    {
+      "name": "what_gives",
+      "type": {
+        "qualType": "struct obj *(long *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "abil",
+          "type": {
+            "qualType": "long *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        },
+        {
+          "name": "dtyp",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7e328bcb8"
+          },
+          "static": false
+        },
+        {
+          "name": "spfx",
+          "type": {
+            "qualType": "unsigned long"
+          },
+          "static": false
+        },
+        {
+          "name": "wornbits",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "wornmask",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "art",
+          "type": {
+            "qualType": "const struct artifact *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "d674cd501311eca84986bdfaa3b80fbf42e321b63d551d0fbfe93bf946ebaa55"
+    },
+    {
+      "name": "glow_color",
+      "type": {
+        "qualType": "const char *(int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "arti_indx",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "colornum",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "colorstr",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "915e261f6209b3f8c6b36eb70684c8f8fe35cb8338efa2699a4228f31933cc08"
+    },
+    {
+      "name": "glow_strength",
+      "type": {
+        "qualType": "int (int)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "count",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "2b93920be0e1a882220531e51453147b7b53647631303ed50d8fb90ceebe2d0e"
+    },
+    {
+      "name": "glow_verb",
+      "type": {
+        "qualType": "const char *(int, boolean)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "count",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "ingsfx",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "resbuf",
+          "type": {
+            "qualType": "char[20]"
+          },
+          "static": true
+        }
+      ],
+      "astSha256": "1094f26bf994550114fcc9113aef5b75e039b5712e9548f879098ec7b296102a"
+    },
+    {
+      "name": "Sting_effects",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "orc_count",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "oldstr",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "newstr",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "3026d7a6d6c2930c570203073059eae4ed867a992374100169e1d37db7e353ad"
+    },
+    {
+      "name": "retouch_object",
+      "type": {
+        "qualType": "int (struct obj **, boolean)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "objp",
+          "type": {
+            "qualType": "struct obj **"
+          }
+        },
+        {
+          "name": "loseit",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "dmg",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "tmp",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "ag",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "bane",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "what",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "449f1d73bdc9217e623534ce4fc4986fb14a5212ee11f39da375dbdb2031d325"
+    },
+    {
+      "name": "untouchable",
+      "type": {
+        "qualType": "boolean (struct obj *, boolean)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "drop_untouchable",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "art",
+          "type": {
+            "qualType": "struct artifact *"
+          },
+          "static": false
+        },
+        {
+          "name": "beingworn",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "carryeffect",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "invoked",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "wearmask",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "aa1f2d6934182272ac86a85e71445ccd614e9b5f85960b2f9442e40b019db1e8"
+    },
+    {
+      "name": "retouch_equipment",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "dropflag",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "nesting",
+          "type": {
+            "qualType": "int"
+          },
+          "static": true
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        },
+        {
+          "name": "dropit",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "had_gloves",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7e330b290"
+          },
+          "static": false
+        },
+        {
+          "name": "had_rings",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "6803a40925e5d279e755f1c350a37be6a1d18ac91f306090aac21296a354f0db"
+    },
+    {
+      "name": "count_surround_traps",
+      "type": {
+        "qualType": "int (coordxy, coordxy)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7e330b158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7e330b158"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "levp",
+          "type": {
+            "qualType": "struct rm *"
+          },
+          "static": false
+        },
+        {
+          "name": "o",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        },
+        {
+          "name": "dx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7e330b158"
+          },
+          "static": false
+        },
+        {
+          "name": "dy",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7e330b158"
+          },
+          "static": false
+        },
+        {
+          "name": "glyph",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "ret",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "ec572ce662f09760222ec67512b103824ad7c6290571773a44eb1dce8587fbba"
+    },
+    {
+      "name": "mkot_trap_warn",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "heat",
+          "type": {
+            "qualType": "const char *const[7]"
+          },
+          "static": true
+        },
+        {
+          "name": "idx",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "ntraps",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "75ca55a57b0c5e36af73679447dd844b4b3112d94e9fb9aeea3cfdeb228b62f9"
+    },
+    {
+      "name": "is_magic_key",
+      "type": {
+        "qualType": "boolean (struct monst *, struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "mon",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "ccaed15415644c3541764ca18e0b94c29d9a48d8e867178d6b4f02676fdb3866"
+    },
+    {
+      "name": "has_magic_key",
+      "type": {
+        "qualType": "struct obj *(struct monst *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "mon",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "o",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        },
+        {
+          "name": "key",
+          "type": {
+            "qualType": "short"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "5b0baeda090fec3b371f88d6f1854e5822213e79dfe6586439c353d848288122"
+    },
+    {
+      "name": "is_art",
+      "type": {
+        "qualType": "boolean (struct obj *, int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "art",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "524798d605d1812a1a5558e642f7f87af86a26cc88a2e99d5edf4c927058fb69"
+    },
+    {
+      "name": "get_artifact",
+      "type": {
+        "qualType": "struct artifact *(struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "artidx",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "91e3cd760460bf016aa867fb4b7c33809f8a068c213c071347e51b160052c66b"
+    },
+    {
+      "name": "permapoisoned",
+      "type": {
+        "qualType": "boolean (struct obj *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [],
+      "astSha256": "1a93e209485e0176cd3a79a8cbe358c26d46e23c3d2844f1efc5b6be7475b62f"
+    }
+  ],
+  "preparedSha256": "f0cf8f78bb68f305394e3cd9ccb8080cb15c147582b7f5f55888f4acdfe10141"
+}

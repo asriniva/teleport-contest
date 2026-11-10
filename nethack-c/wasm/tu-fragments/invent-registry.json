@@ -1,0 +1,22 @@
+{
+  "name": "invent",
+  "source": "src/invent.c",
+  "javascript": "js/ported/invent.js",
+  "library": "nethack-c/wasm/tu-libraries/invent.js",
+  "configuredFunctions": true,
+  "reference": "pristine",
+  "probeContext": false,
+  "adapterSources": [
+    "js/ported/invent-runtime.js",
+    "scripts/tu-invent-layout.h",
+    "nethack-c/wasm/tu-fragments/invent-support.c",
+    "nethack-c/wasm/tu-fragments/invent-schema.json",
+    "nethack-c/wasm/tu-fragments/invent-source-inventory.json",
+    "nethack-c/wasm/tu-fragments/invent-source-check.py"
+  ],
+  "nativeStorageSources": [
+    {
+      "source": "nethack-c/wasm/tu-fragments/invent-support.c"
+    }
+  ]
+}

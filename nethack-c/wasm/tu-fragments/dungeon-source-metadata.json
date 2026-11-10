@@ -1,0 +1,2391 @@
+{
+  "sourceSHA256": "4b3e7b2a8afa70fc442a99fd79551982836def70864f738085926f3f326906e9",
+  "functions": [
+    {
+      "name": "dumpit",
+      "line": 91,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "save_dungeon",
+      "line": 149,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (NHFILE *, boolean, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "nhfp",
+          "type": {
+            "qualType": "NHFILE *"
+          }
+        },
+        {
+          "name": "perform_write",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        },
+        {
+          "name": "free_data",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "restore_dungeon",
+      "line": 211,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (NHFILE *)"
+      },
+      "parameters": [
+        {
+          "name": "nhfp",
+          "type": {
+            "qualType": "NHFILE *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dname_to_dnum",
+      "line": 284,
+      "linkage": "static",
+      "type": {
+        "qualType": "xint16 (const char *)"
+      },
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "find_level",
+      "line": 300,
+      "linkage": "external",
+      "type": {
+        "qualType": "s_level *(const char *)"
+      },
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "find_branch",
+      "line": 311,
+      "linkage": "static",
+      "type": {
+        "qualType": "int (const char *, struct proto_dungeon *)"
+      },
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "parent_dnum",
+      "line": 346,
+      "linkage": "static",
+      "type": {
+        "qualType": "xint16 (const char *, struct proto_dungeon *)"
+      },
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "level_range",
+      "line": 380,
+      "linkage": "static",
+      "type": {
+        "qualType": "int (xint16, int, int, int, struct proto_dungeon *, int *)"
+      },
+      "parameters": [
+        {
+          "name": "dgn",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x9e4ea61c0"
+          }
+        },
+        {
+          "name": "base",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "randc",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "chain",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        },
+        {
+          "name": "adjusted_base",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "parent_dlevel",
+      "line": 415,
+      "linkage": "static",
+      "type": {
+        "qualType": "xint16 (const char *, struct proto_dungeon *)"
+      },
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "correct_branch_type",
+      "line": 440,
+      "linkage": "static",
+      "type": {
+        "qualType": "int (struct tmpbranch *)"
+      },
+      "parameters": [
+        {
+          "name": "tbr",
+          "type": {
+            "qualType": "struct tmpbranch *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "insert_branch",
+      "line": 463,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (branch *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "new_branch",
+          "type": {
+            "qualType": "branch *"
+          }
+        },
+        {
+          "name": "extract_first",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "add_branch",
+      "line": 514,
+      "linkage": "static",
+      "type": {
+        "qualType": "branch *(int, int, struct proto_dungeon *)"
+      },
+      "parameters": [
+        {
+          "name": "dgn",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "child_entry_level",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "add_level",
+      "line": 545,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (s_level *)"
+      },
+      "parameters": [
+        {
+          "name": "new_lev",
+          "type": {
+            "qualType": "s_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_level",
+      "line": 566,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (int, int, struct proto_dungeon *)"
+      },
+      "parameters": [
+        {
+          "name": "dgn",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "proto_index",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "possible_places",
+      "line": 598,
+      "linkage": "static",
+      "type": {
+        "qualType": "int (int, boolean *, struct proto_dungeon *)"
+      },
+      "parameters": [
+        {
+          "name": "idx",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "map",
+          "type": {
+            "qualType": "boolean *"
+          }
+        },
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pick_level",
+      "line": 632,
+      "linkage": "static",
+      "type": {
+        "qualType": "xint16 (boolean *, int)"
+      },
+      "parameters": [
+        {
+          "name": "map",
+          "type": {
+            "qualType": "boolean *"
+          }
+        },
+        {
+          "name": "nth",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "place_level",
+      "line": 666,
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (int, struct proto_dungeon *)"
+      },
+      "parameters": [
+        {
+          "name": "proto_index",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_dgn_flags",
+      "line": 744,
+      "linkage": "static",
+      "type": {
+        "qualType": "int (lua_State *)"
+      },
+      "parameters": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_dgn_align",
+      "line": 781,
+      "linkage": "static",
+      "type": {
+        "qualType": "int (lua_State *)"
+      },
+      "parameters": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_dungeon_levels",
+      "line": 797,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (lua_State *, struct proto_dungeon *, int)"
+      },
+      "parameters": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        },
+        {
+          "name": "dngidx",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_dungeon_branches",
+      "line": 867,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (lua_State *, struct proto_dungeon *, int)"
+      },
+      "parameters": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        },
+        {
+          "name": "dngidx",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_dungeon_set_entry",
+      "line": 933,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct proto_dungeon *, int)"
+      },
+      "parameters": [
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        },
+        {
+          "name": "dngidx",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_dungeon_set_depth",
+      "line": 960,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct proto_dungeon *, int)"
+      },
+      "parameters": [
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        },
+        {
+          "name": "dngidx",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_dungeon_dungeons",
+      "line": 997,
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (lua_State *, struct proto_dungeon *, int)"
+      },
+      "parameters": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        },
+        {
+          "name": "dngidx",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_castle_tune",
+      "line": 1111,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "fixup_level_locations",
+      "line": 1122,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "free_proto_dungeon",
+      "line": 1185,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct proto_dungeon *)"
+      },
+      "parameters": [
+        {
+          "name": "pd",
+          "type": {
+            "qualType": "struct proto_dungeon *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_dungeons",
+      "line": 1205,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "dunlev",
+      "line": 1325,
+      "linkage": "external",
+      "type": {
+        "qualType": "xint16 (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dunlevs_in_dungeon",
+      "line": 1332,
+      "linkage": "external",
+      "type": {
+        "qualType": "xint16 (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "deepest_lev_reached",
+      "line": 1339,
+      "linkage": "external",
+      "type": {
+        "qualType": "xint16 (boolean)"
+      },
+      "parameters": [
+        {
+          "name": "noquest",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ledger_no",
+      "line": 1376,
+      "linkage": "external",
+      "type": {
+        "qualType": "xint16 (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "maxledgerno",
+      "line": 1392,
+      "linkage": "external",
+      "type": {
+        "qualType": "xint16 (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "ledger_to_dnum",
+      "line": 1402,
+      "linkage": "external",
+      "type": {
+        "qualType": "xint16 (xint16)"
+      },
+      "parameters": [
+        {
+          "name": "ledgerno",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x9e4ea61c0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ledger_to_dlev",
+      "line": 1422,
+      "linkage": "external",
+      "type": {
+        "qualType": "xint16 (xint16)"
+      },
+      "parameters": [
+        {
+          "name": "ledgerno",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x9e4ea61c0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "depth",
+      "line": 1431,
+      "linkage": "external",
+      "type": {
+        "qualType": "schar (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "on_level",
+      "line": 1439,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *, d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev1",
+          "type": {
+            "qualType": "d_level *"
+          }
+        },
+        {
+          "name": "lev2",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Is_special",
+      "line": 1448,
+      "linkage": "external",
+      "type": {
+        "qualType": "s_level *(d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Is_branchlev",
+      "line": 1464,
+      "linkage": "external",
+      "type": {
+        "qualType": "branch *(d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "builds_up",
+      "line": 1477,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "next_level",
+      "line": 1497,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (boolean)"
+      },
+      "parameters": [
+        {
+          "name": "at_stairs",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "prev_level",
+      "line": 1518,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (boolean)"
+      },
+      "parameters": [
+        {
+          "name": "at_stairs",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "earth_sense",
+      "line": 1548,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "u_on_newpos",
+      "line": 1568,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "u_on_rndspot",
+      "line": 1605,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "parameters": [
+        {
+          "name": "upflag",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Is_botlevel",
+      "line": 1643,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Can_dig_down",
+      "line": 1649,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Can_fall_thru",
+      "line": 1662,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Can_rise_up",
+      "line": 1674,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        },
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "has_ceiling",
+      "line": 1690,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "avoid_ceiling",
+      "line": 1701,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ceiling",
+      "line": 1714,
+      "linkage": "external",
+      "type": {
+        "qualType": "const char *(coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "surface",
+      "line": 1750,
+      "linkage": "external",
+      "type": {
+        "qualType": "const char *(coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_level",
+      "line": 1802,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (d_level *, int)"
+      },
+      "parameters": [
+        {
+          "name": "newlevel",
+          "type": {
+            "qualType": "d_level *"
+          }
+        },
+        {
+          "name": "levnum",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "In_quest",
+      "line": 1849,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "In_mines",
+      "line": 1856,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dungeon_branch",
+      "line": 1870,
+      "linkage": "external",
+      "type": {
+        "qualType": "branch *(const char *)"
+      },
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "at_dgn_entrance",
+      "line": 1897,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (const char *)"
+      },
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "In_V_tower",
+      "line": 1907,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "On_W_tower_level",
+      "line": 1914,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "In_W_tower",
+      "line": 1923,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        },
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "In_hell",
+      "line": 1942,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "find_hell",
+      "line": 1949,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "goto_hell",
+      "line": 1957,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (boolean, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "at_stairs",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        },
+        {
+          "name": "falling",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "single_level_branch",
+      "line": 1967,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "assign_level",
+      "line": 1978,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (d_level *, d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "dest",
+          "type": {
+            "qualType": "d_level *"
+          }
+        },
+        {
+          "name": "src",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "assign_rnd_level",
+      "line": 1986,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (d_level *, d_level *, int)"
+      },
+      "parameters": [
+        {
+          "name": "dest",
+          "type": {
+            "qualType": "d_level *"
+          }
+        },
+        {
+          "name": "src",
+          "type": {
+            "qualType": "d_level *"
+          }
+        },
+        {
+          "name": "range",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "induced_align",
+      "line": 1999,
+      "linkage": "external",
+      "type": {
+        "qualType": "unsigned int (int)"
+      },
+      "parameters": [
+        {
+          "name": "pct",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invocation_lev",
+      "line": 2017,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "level_difficulty",
+      "line": 2027,
+      "linkage": "external",
+      "type": {
+        "qualType": "xint16 (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "lev_by_name",
+      "line": 2098,
+      "linkage": "external",
+      "type": {
+        "qualType": "schar (const char *)"
+      },
+      "parameters": [
+        {
+          "name": "nam",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "unplaced_floater",
+      "line": 2175,
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (struct dungeon *)"
+      },
+      "parameters": [
+        {
+          "name": "dptr",
+          "type": {
+            "qualType": "struct dungeon *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "unreachable_level",
+      "line": 2190,
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (d_level *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "lvl_p",
+          "type": {
+            "qualType": "d_level *"
+          }
+        },
+        {
+          "name": "unplaced",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tport_menu",
+      "line": 2204,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (winid, char *, struct lchoice *, d_level *, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x9e5027bd0"
+          }
+        },
+        {
+          "name": "entry",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "lchoices",
+          "type": {
+            "qualType": "struct lchoice *"
+          }
+        },
+        {
+          "name": "lvl_p",
+          "type": {
+            "qualType": "d_level *"
+          }
+        },
+        {
+          "name": "cannotreach",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "br_string",
+      "line": 2240,
+      "linkage": "static",
+      "type": {
+        "qualType": "const char *(int)"
+      },
+      "parameters": [
+        {
+          "name": "type",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "chr_u_on_lvl",
+      "line": 2256,
+      "linkage": "static",
+      "type": {
+        "qualType": "char (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "dlev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "print_branch",
+      "line": 2263,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (winid, int, int, int, boolean, struct lchoice *)"
+      },
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x9e5027bd0"
+          }
+        },
+        {
+          "name": "dnum",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "lower_bound",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "upper_bound",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "bymenu",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        },
+        {
+          "name": "lchoices_p",
+          "type": {
+            "qualType": "struct lchoice *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "print_dungeon",
+      "line": 2290,
+      "linkage": "external",
+      "type": {
+        "qualType": "schar (boolean, schar *, xint16 *)"
+      },
+      "parameters": [
+        {
+          "name": "bymenu",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        },
+        {
+          "name": "rlev",
+          "type": {
+            "qualType": "schar *"
+          }
+        },
+        {
+          "name": "rdgn",
+          "type": {
+            "qualType": "xint16 *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "recbranch_mapseen",
+      "line": 2446,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (d_level *, d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "source",
+          "type": {
+            "qualType": "d_level *"
+          }
+        },
+        {
+          "name": "dest",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_annotation",
+      "line": 2478,
+      "linkage": "static",
+      "type": {
+        "qualType": "char *(d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "print_level_annotation",
+      "line": 2489,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "query_annotation",
+      "line": 2500,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "donamelevel",
+      "line": 2571,
+      "linkage": "external",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "free_exclusions",
+      "line": 2582,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "save_exclusions",
+      "line": 2596,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (NHFILE *)"
+      },
+      "parameters": [
+        {
+          "name": "nhfp",
+          "type": {
+            "qualType": "NHFILE *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "load_exclusions",
+      "line": 2617,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (NHFILE *)"
+      },
+      "parameters": [
+        {
+          "name": "nhfp",
+          "type": {
+            "qualType": "NHFILE *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "find_mapseen",
+      "line": 2640,
+      "linkage": "static",
+      "type": {
+        "qualType": "mapseen *(d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "find_mapseen_by_str",
+      "line": 2652,
+      "linkage": "static",
+      "type": {
+        "qualType": "mapseen *(const char *)"
+      },
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rm_mapseen",
+      "line": 2665,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "parameters": [
+        {
+          "name": "ledger_num",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "save_mapseen",
+      "line": 2695,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (NHFILE *, mapseen *)"
+      },
+      "parameters": [
+        {
+          "name": "nhfp",
+          "type": {
+            "qualType": "NHFILE *"
+          }
+        },
+        {
+          "name": "mptr",
+          "type": {
+            "qualType": "mapseen *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "load_mapseen",
+      "line": 2721,
+      "linkage": "static",
+      "type": {
+        "qualType": "mapseen *(NHFILE *)"
+      },
+      "parameters": [
+        {
+          "name": "nhfp",
+          "type": {
+            "qualType": "NHFILE *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "overview_stats",
+      "line": 2761,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (winid, const char *, long *, long *)"
+      },
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x9e5027bd0"
+          }
+        },
+        {
+          "name": "statsfmt",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "total_count",
+          "type": {
+            "qualType": "long *"
+          }
+        },
+        {
+          "name": "total_size",
+          "type": {
+            "qualType": "long *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "remdun_mapseen",
+      "line": 2811,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "parameters": [
+        {
+          "name": "dnum",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_mapseen",
+      "line": 2835,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "interest_mapseen",
+      "line": 2880,
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (mapseen *)"
+      },
+      "parameters": [
+        {
+          "name": "mptr",
+          "type": {
+            "qualType": "mapseen *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_lastseentyp",
+      "line": 2927,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_mapseen_for",
+      "line": 2943,
+      "linkage": "external",
+      "type": {
+        "qualType": "int (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "count_feat_lastseentyp",
+      "line": 2951,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (mapseen *, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "mptr",
+          "type": {
+            "qualType": "mapseen *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x9e4ea6158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "recalc_mapseen",
+      "line": 3075,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "mapseen_temple",
+      "line": 3267,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "priest",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "room_discovered",
+      "line": 3282,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "parameters": [
+        {
+          "name": "roomno",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dooverview",
+      "line": 3294,
+      "linkage": "external",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "show_overview",
+      "line": 3305,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (int, int)"
+      },
+      "parameters": [
+        {
+          "name": "why",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "reason",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "traverse_mapseenchn",
+      "line": 3344,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (int, winid, int, int, int *)"
+      },
+      "parameters": [
+        {
+          "name": "viewendgame",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x9e5027bd0"
+          }
+        },
+        {
+          "name": "why",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "reason",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "lastdun_p",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "seen_string",
+      "line": 3368,
+      "linkage": "static",
+      "type": {
+        "qualType": "const char *(xint16, const char *)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x9e4ea61c0"
+          }
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "br_string2",
+      "line": 3388,
+      "linkage": "static",
+      "type": {
+        "qualType": "const char *(branch *)"
+      },
+      "parameters": [
+        {
+          "name": "br",
+          "type": {
+            "qualType": "branch *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "endgamelevelname",
+      "line": 3410,
+      "linkage": "external",
+      "type": {
+        "qualType": "const char *(char *, int)"
+      },
+      "parameters": [
+        {
+          "name": "outbuf",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "indx",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shop_string",
+      "line": 3441,
+      "linkage": "static",
+      "type": {
+        "qualType": "const char *(int)"
+      },
+      "parameters": [
+        {
+          "name": "rtype",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tunesuffix",
+      "line": 3460,
+      "linkage": "static",
+      "type": {
+        "qualType": "char *(mapseen *, char *, size_t)"
+      },
+      "parameters": [
+        {
+          "name": "mptr",
+          "type": {
+            "qualType": "mapseen *"
+          }
+        },
+        {
+          "name": "outbuf",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "bsz",
+          "type": {
+            "desugaredQualType": "unsigned long",
+            "qualType": "size_t",
+            "typeAliasDeclId": "0x9e4d9c918"
+          }
+        }
+      ]
+    },
+    {
+      "name": "print_mapseen",
+      "line": 3516,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (winid, mapseen *, int, int, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x9e5027bd0"
+          }
+        },
+        {
+          "name": "mptr",
+          "type": {
+            "qualType": "mapseen *"
+          }
+        },
+        {
+          "name": "final",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "how",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "printdun",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x9e4ea6290"
+          }
+        }
+      ]
+    }
+  ],
+  "defines": [
+    "NOTPARMDECL",
+    "NO_TIMED_DELAY",
+    "MACOS",
+    "NOPANICTRACE",
+    "NO_FILE_LINKS"
+  ],
+  "activeCPP": [
+    "DEBUG",
+    "PANICTRACE",
+    "NOPANICTRACE",
+    "NOTPARMDECL",
+    "NO_TIMED_DELAY",
+    "MACOS",
+    "NO_FILE_LINKS",
+    "TELEPORT_NATIVE_PLATFORM_ABI",
+    "CLIPPING"
+  ],
+  "inactiveCPP": [
+    "DDEBUG",
+    "SFCTOOL",
+    "DLBRSRC",
+    "DLB",
+    "PREFIXES_IN_USE",
+    "WIN32",
+    "EDIT_GETLIN",
+    "MICRO",
+    "STUPID",
+    "SPECIALIZATION"
+  ],
+  "aliases": {
+    "drawbridgemask": "flags"
+  },
+  "rng": [
+    {
+      "function": "parent_dlevel",
+      "file": "\"dungeon.c\"",
+      "line": 426
+    },
+    {
+      "function": "init_level",
+      "file": "\"dungeon.c\"",
+      "line": 572
+    },
+    {
+      "function": "place_level",
+      "file": "\"dungeon.c\"",
+      "line": 687
+    },
+    {
+      "function": "init_dungeon_dungeons",
+      "file": "\"dungeon.c\"",
+      "line": 1022
+    },
+    {
+      "function": "init_dungeon_dungeons",
+      "file": "\"dungeon.c\"",
+      "line": 1074
+    },
+    {
+      "function": "init_castle_tune",
+      "file": "\"dungeon.c\"",
+      "line": 1116
+    },
+    {
+      "function": "assign_rnd_level",
+      "file": "\"dungeon.c\"",
+      "line": 1989
+    },
+    {
+      "function": "assign_rnd_level",
+      "file": "\"dungeon.c\"",
+      "line": 1989
+    },
+    {
+      "function": "induced_align",
+      "file": "\"dungeon.c\"",
+      "line": 2005
+    },
+    {
+      "function": "induced_align",
+      "file": "\"dungeon.c\"",
+      "line": 2009
+    },
+    {
+      "function": "induced_align",
+      "file": "\"dungeon.c\"",
+      "line": 2012
+    }
+  ],
+  "compilerInputHashes": {
+    "nethack-c/upstream/src/dungeon.c": "4b3e7b2a8afa70fc442a99fd79551982836def70864f738085926f3f326906e9",
+    ".cache/wasm64-build/tree/src/dungeon.c": "4b3e7b2a8afa70fc442a99fd79551982836def70864f738085926f3f326906e9",
+    "nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",
+    "nethack-c/wasm/native-terminal.h": "16eceb17caf6e70d0e8e6b36f23daebdb30f7ace18676d482c8376fccf6dceeb",
+    "nethack-c/wasm/build.py": "7f7d2856ecc84c0ee4a4c402b8145e178c9fa05f73baae2761167bf2ebfb3a0d",
+    ".cache/wasm64-build/tree/include/mcastu.h": "ffe15f5e89de7f561b92052ccfdaf8556c1e6d80a6dbb35675fb997c67deebe4",
+    ".cache/wasm64-build/tree/include/nhregex.h": "a2936fd291537090773d861c083c3574c7a0a798c688e87dedb4405f73de653f",
+    ".cache/wasm64-build/tree/include/stairs.h": "fe016a6ef8194099d504bbf48f58e1e3c6a923413a07c28377409cacc1e2b42b",
+    ".cache/wasm64-build/tree/include/sfprocs.h": "89f96065e62ea60dbc46dbef2f9762242a8562b189dbcd6038af063424438b56",
+    ".cache/wasm64-build/tree/include/monattk.h": "00c2283c2687f2dd5fa8a3088623cd621822289018c0072db9cad5a2a94883ba",
+    ".cache/wasm64-build/tree/include/youprop.h": "9c4e25bc385c405226085ae3526dc165bd9397ce922b8a18a46f67de21683a2f",
+    ".cache/wasm64-build/tree/include/trap.h": "469afec3e29d7aec1aa8efd407ad23d24ef069010820082b5596537b9290eb6b",
+    ".cache/wasm64-build/tree/include/sym.h": "cea14c200c9f1e90ebe890804b46af7005c889d90917cb0608ad6058614e3db4",
+    ".cache/wasm64-build/tree/include/monst.h": "08e9e2251ac5c3beedb8700dd56287f9f397b506851ceb44a37e41b6d80067a6",
+    ".cache/wasm64-build/tree/include/wintype.h": "e5bfd60534831210bdace1ba6eaef62f65d16dab8d8ac0fcddadebd000d53698",
+    ".cache/wasm64-build/tree/include/align.h": "963176a750f3e58ca29d4b5b13f2eaf51fefdbf66b7a1a681401092dd72f7cb2",
+    ".cache/wasm64-build/tree/include/sfmacros.h": "4ea0c088308a08b002b553d7633b3b729aee66d4c71b2974751d6b3eccfbb209",
+    ".cache/wasm64-build/tree/include/amiconf.h": "beb7f834ff25a85cd9558eac49ce8de20ceff678e47fbbc10cb978bf18face59",
+    ".cache/wasm64-build/tree/include/defsym.h": "009ae2e8921fa4c376fe0ae3b4a42407421274fc15d1a8834c6ae519dad82f87",
+    ".cache/wasm64-build/tree/include/warnings.h": "ccf0c3e66bb442b0d8c05844103065fccf3fa7a894bba007425258e1d089f981",
+    ".cache/wasm64-build/tree/include/sp_lev.h": "a48d5bd2d9a5b20b474b790d52f4f19179678c87ec0b51019e39dc6684d7a6bf",
+    ".cache/wasm64-build/tree/include/attrib.h": "f20418d80bc2983e3d9af6cc9a02d30f57aa6b54116691a8e4ebebd425de757d",
+    ".cache/wasm64-build/tree/include/tcap.h": "eeb713779ef8a1483efbea0427cf4eb7549365d2bc1b010107912d982a1e235d",
+    ".cache/wasm64-build/tree/include/vmsconf.h": "a15f393613c8b63278a83748fa4b130e3826d65c7156b6f20ca2c61a0794e20e",
+    ".cache/wasm64-build/tree/include/windconf.h": "eddba5996f97ff32ce554236be187de0147ab8b7fffa4d31c40fc0d00354947b",
+    ".cache/wasm64-build/tree/include/config.h": "5585d9c88d7ea21a9a78b45616cc31ae4ea680cb7b34026f70f92b91288a499f",
+    ".cache/wasm64-build/tree/include/fnamesiz.h": "bd41c47c66e4213835bc1f052d831f8643bc7e7cb9aae0effb27f41edf1b5c35",
+    ".cache/wasm64-build/tree/include/hack.h": "5743a1707ce05e7a9a90e61657fde0ac066d48591f5d4fe80b1bdf959d94bce9",
+    ".cache/wasm64-build/tree/include/winami.h": "eb0864330b27a436acf3bb092ee1ea492a890d4a6cfc9604a25ffdb3f73df754",
+    ".cache/wasm64-build/tree/include/spell.h": "dc1e454c0214ea1cc20f4ea1e19cd4447a5ca9533610769fafe8cdd60206b37f",
+    ".cache/wasm64-build/tree/include/objclass.h": "101f92e0024e4404033845fb15171f8ed4b79374907a6a172b4eb7b026e1eb52",
+    ".cache/wasm64-build/tree/include/global.h": "8ff55a3c6ee5cc18d00f1982146080d81e9e3dc9e369ab1ffc79890c07b8a8d0",
+    ".cache/wasm64-build/tree/include/decl.h": "4782c5f522f6de63503cda131c0e2485aef31506d83dcfb32defeebf984fb470",
+    ".cache/wasm64-build/tree/include/tile2x11.h": "c8c658c56a08ec43bf8eb0b81673f04f380537a722dae4963be2a9d318ff4cb7",
+    ".cache/wasm64-build/tree/include/skills.h": "d67ac10770b8aff667c163e93020b8974e53f12eede903f10bf026d351b2c238",
+    ".cache/wasm64-build/tree/include/isaac64.h": "3d51f55fbe014cce77b53f7dec22d7ed11cab709f085a9ebfac87eeebb1f0e66",
+    ".cache/wasm64-build/tree/include/permonst.h": "bcdb24d041e3df909cf483efb576fa7fc5e18debf03d11e8e43c1aa87c655bf4",
+    ".cache/wasm64-build/tree/include/patchlevel.h": "4389b12b496c9611fb392ee509d0ebaad2f10449ff3ef697f1ad416a207b0a97",
+    ".cache/wasm64-build/tree/include/quest.h": "87b6649d82b6fd4a24d004fcd48c1d9650345e719cf8dc196ae6c99b483e2a5a",
+    ".cache/wasm64-build/tree/include/weight.h": "ac168750ddcde6c592ccbeaaf44c59921cc1f73ed36d269f20364b0e08b91cd1",
+    ".cache/wasm64-build/tree/include/flag.h": "bb28a3f835f3b38119f95311d76b535ef5053f3fffa42372d9f7b1c4c917806f",
+    ".cache/wasm64-build/tree/include/context.h": "e1303b7309e556c65e41ec120b704079da6a0c9ef73a08745663f7b923ad7eef",
+    ".cache/wasm64-build/tree/include/date.h": "0f6070303295e22d4e1a9855eeb3901c5346d66976050d6b2c8a7a12be3d15c0",
+    ".cache/wasm64-build/tree/include/seffects.h": "f64099054ab366a1eaccd58901a98cef49a84c1f047c5923de20b4432654de02",
+    ".cache/wasm64-build/tree/include/color.h": "f7ab4cdf5113898bf58ba85217f5d693b8564c232ff706ee894fdf070a3a105b",
+    ".cache/wasm64-build/tree/include/func_tab.h": "6c47ccb85277800274a4b7f860ff6e1c25b75c5cb55d860745b7479f6f6105ba",
+    ".cache/wasm64-build/tree/include/coord.h": "f8788b777ea0fc8e4f5df40ce7b9add1a255c5846bdd1393518f7ea14ef6e3d2",
+    ".cache/wasm64-build/tree/include/dlb.h": "5fd4e1563e5836cb707b691fe2d197e8d1619fc1d1ab8d77c0002a443049f7e9",
+    ".cache/wasm64-build/tree/include/obj.h": "a4d1b994c5acd6fe04d411485d84491553d6df02dfbd7480181a15a7a05456e2",
+    ".cache/wasm64-build/tree/include/vision.h": "415b7e5751194cb7de57c192103d396a2971400e603fd62bf56330304014ac13",
+    ".cache/wasm64-build/tree/include/xwindow.h": "3a646862b59bc886df8775065c75a55324c611c01f43f57eb6f6b2345564aec6",
+    ".cache/wasm64-build/tree/include/mextra.h": "e78bdfa21d4fd7718f1a25ed8f1ef466c96c2bd49f2069af7d1ab346148a1229",
+    ".cache/wasm64-build/tree/include/artilist.h": "5375cf830dac26aefd5dbefe1ab5bd79a1f1988b770e7a4dee61b6453c1dd3d3",
+    ".cache/wasm64-build/tree/include/dungeon.h": "e48eaafdb22fc82121de702086c40c3245d6aeb9fe5556712ee1e2f18744a308",
+    ".cache/wasm64-build/tree/include/config1.h": "b9e97cefc8fcfe4f36a1145ebfb655099f2afd2591227fa5f93b3f4dc0071042",
+    ".cache/wasm64-build/tree/include/objects.h": "eb573ca76f7afe35d6420b958333fbb3c44911415df4e0034e6367456e2913cb",
+    ".cache/wasm64-build/tree/include/artifact.h": "9cc7056e7808ff2e28732c74d58ae47fe2513e4ccc5b5073b544f58a2495ccff",
+    ".cache/wasm64-build/tree/include/tradstdc.h": "a1246d1acdf317c36990946e1d8bde33f63e3ba779ed5696a4ee03c7ac4f4401",
+    ".cache/wasm64-build/tree/include/selvar.h": "49b8be43b8bfd7b4f18cb59d1179e8ad28a708a06c0fbc985c65b365ab9a3acf",
+    ".cache/wasm64-build/tree/include/mkroom.h": "7baf848feb30c94c196e6bee2ee7f0a83822ad92042dd855b74d212fde514f5a",
+    ".cache/wasm64-build/tree/include/display.h": "36e9f838d3298d047e0605abcf2deb627eb79c18aa72f770d5289c34f3692b4c",
+    ".cache/wasm64-build/tree/include/mail.h": "8041ce36aef1bb8d49984e0e51f62fb31cd8edf559b19ab963853ef31f2f5ac2",
+    ".cache/wasm64-build/tree/include/optlist.h": "23dafb109132dd63bbfe704b39fac8cccaaeee31a0dbd895c7ba928bd92af9b8",
+    ".cache/wasm64-build/tree/include/nhlua.h": "48553ca9ab16ac2928479cabdf51d7f090fc38e1641dd5d97d819f612c6d87d9",
+    ".cache/wasm64-build/tree/include/rect.h": "dee168e068baa3aa15748725752d07659f8cb4e471116f7fab4acf080dc69f90",
+    ".cache/wasm64-build/tree/include/savefile.h": "6847e12dca1eb25b38baa69f6227554669f8a64f5966a1879a5cf2b23732749e",
+    ".cache/wasm64-build/tree/include/engrave.h": "1c5617162ea649a0305df8d997b7a1075b35c9b3b97311cdfeebbd60bb9c482e",
+    ".cache/wasm64-build/tree/include/lint.h": "bb08d5658f43c87c2b5129a33cb4e3264693e68d3cd654c67a5ecd757c98adcc",
+    ".cache/wasm64-build/tree/include/monflag.h": "89e4ef1dc1cd46fa8d81ff833351934c666420abdf902286bdacdca0bb171d88",
+    ".cache/wasm64-build/tree/include/hacklib.h": "d9bf2b0ae2003c0611d2b9a351fdbbb30d58def2ecccc1235d4ed1e7b52e3c53",
+    ".cache/wasm64-build/tree/include/mfndpos.h": "4711c0e5c67ae88a6a28c776bc542d0d06452d742456964b77913e896b5f56f5",
+    ".cache/wasm64-build/tree/include/you.h": "d19cfa0233582f1ad550b9dfc788f26166f3ff21225e3d8a0cd43b6de2094289",
+    ".cache/wasm64-build/tree/include/botl.h": "c26c637bcb8b2615e82fbc0804175cd8c87f63a3caf35c742e0a6fa410a31009",
+    ".cache/wasm64-build/tree/include/sys.h": "e193f46309925a4b14394a503b3e9a7bc19e5745bb539137ca10ec0898e3951b",
+    ".cache/wasm64-build/tree/include/unixconf.h": "0cbf3370472b030e8583e922e05e8e055738896954cbbdc1e1e18d0938559723",
+    ".cache/wasm64-build/tree/include/wintty.h": "96898d81147193d8d3785756011ae13f40967cbe947bf5fe35f3f2f4e6f15f89",
+    ".cache/wasm64-build/tree/include/mondata.h": "6f1ca3db69a5cfbe425859fe1c7decfa1da1fdac45af9d8a84be5f0f8c9c21f2",
+    ".cache/wasm64-build/tree/include/rm.h": "da2ae88d704a358474c6986a3f4763e62053b96a6e60a475879029e658996af7",
+    ".cache/wasm64-build/tree/include/prop.h": "682e85c7ab20c1dc7b30115b2a3e850d564cc2ed341edfa782fec9d0dfea0761",
+    ".cache/wasm64-build/tree/include/winprocs.h": "eebf4dbb4149d3a153a1dc815795baabe33a59d13362e00089d21ee9ce89983c",
+    ".cache/wasm64-build/tree/include/cstd.h": "ef5e61d5eb7d1a5194c4a4544745a45893ccbea4c1cf083792235f562e173fc2",
+    ".cache/wasm64-build/tree/include/tileset.h": "9fb5634389613e2528704caba09c21cd2007179f3f6528fcfb8977f1ee332282",
+    ".cache/wasm64-build/tree/include/wincurs.h": "d58fd52046a1d35b24e65d4eecc2cef851c370f1248f40d2e58eec1a9d04fcd8",
+    ".cache/wasm64-build/tree/include/extern.h": "385f7478000f79ff137f2b6be533eef7b518b47a00b0d8c7e35ea52c877dec2e",
+    ".cache/wasm64-build/tree/include/region.h": "adc4682b6a15213f71f3bb534b8705c4385153ca9db7512c118474b0fb4f1191",
+    ".cache/wasm64-build/tree/include/nhmd4.h": "e82ec33c65922977be2346fcc136ec34ed8e29947e4477741a21301f146391a0",
+    ".cache/wasm64-build/tree/include/sndprocs.h": "4d105334e499c3fb4af00fcd1acf48802a8db5ccf799bd31bfafc2afaa286654",
+    ".cache/wasm64-build/tree/include/timeout.h": "5f76ff41cc5435cc8a3e30b28f51c6adbfe42e2bf4a0354ba0a9f850a5ce515a",
+    ".cache/wasm64-build/tree/include/pcconf.h": "c8f22aca7458c1527fbb8362efbb725744ede2edb92185381b7de21fd8693b99",
+    ".cache/wasm64-build/tree/include/integer.h": "e88805c10f195e6de63b8c5cb46049f466ef040de9987a6ab61c36ef977f515a",
+    ".cache/wasm64-build/tree/include/monsters.h": "c63db922770c96a9956d221f364ba4368a9f81f81c8d64ed28251a0506d4a906",
+    ".cache/wasm64-build/tree/include/winX.h": "9ff1338cceced7f5335379d90cdebadc6e1065d64c4509cf518c0f497ff0f28d",
+    ".cache/wasm64-build/tree/include/xwindowp.h": "af1dac3806cd2199b2e5127b41ac2ae56e5443ef4b7835fd69f6ea4ae5411db6",
+    ".cache/wasm64-build/tree/include/micro.h": "4d9579d27ae8dd08ca562810e87d40c2984dfa92c5c3b51839ee2f4882080b6b",
+    ".cache/wasm64-build/tree/include/dgn_file.h": "ac01f085ac0827ee4720e9071d13a3fb9a274ced57d373e013a04a1f211d5551"
+  },
+  "scope": "TU111/J117 all110 actual configured dungeon.c functions; native Lua/serialization/window/catalogue dependencies remain external; zero backing/type-only/ABI transport C only; isolated controlled world proof, not native/fullgame/public equivalence"
+}

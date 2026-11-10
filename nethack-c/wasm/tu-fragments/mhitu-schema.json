@@ -1,0 +1,4403 @@
+{
+  "schema": {
+    "sysopt_s": {
+      "ctype": "struct sysopt_s",
+      "fields": [
+        {
+          "name": "seduce",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "d_level": {
+      "ctype": "struct d_level",
+      "fields": [
+        {
+          "name": "dnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dlevel",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "align": {
+      "ctype": "struct align",
+      "fields": [
+        {
+          "name": "type",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "aligntyp",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "nhcoord": {
+      "ctype": "struct nhcoord",
+      "fields": [
+        {
+          "name": "x",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "y",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "flag": {
+      "ctype": "struct flag",
+      "fields": [
+        {
+          "name": "female",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "verbose",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "trap": {
+      "ctype": "struct trap",
+      "fields": [
+        {
+          "name": "ttyp",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        }
+      ]
+    },
+    "window_procs": {
+      "ctype": "struct window_procs",
+      "fields": [
+        {
+          "name": "win_display_nhwindow",
+          "d": {
+            "f": true
+          },
+          "ctype": "void (*)(winid, boolean)",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "attribs": {
+      "ctype": "struct attribs",
+      "fields": []
+    },
+    "obj": {
+      "ctype": "struct obj",
+      "fields": [
+        {
+          "name": "nobj",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ox",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oy",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "otyp",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "quan",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "spe",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oclass",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "where",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "xint8",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "cursed",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "dknown",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "otrapped",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "greased",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "corpsenm",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "owornmask",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "objclass": {
+      "ctype": "struct objclass",
+      "fields": [
+        {
+          "name": "oc_name_known",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "oc_dir",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "oc_subtyp",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oc_oc2",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "attack": {
+      "ctype": "struct attack",
+      "fields": [
+        {
+          "name": "aatyp",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "adtyp",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "damn",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "damd",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "permonst": {
+      "ctype": "struct permonst",
+      "fields": [
+        {
+          "name": "pmnames",
+          "d": {
+            "a": [
+              3
+            ],
+            "e": {
+              "p": ""
+            }
+          },
+          "ctype": "const char *[3]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "pmidx",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "const enum monnums",
+          "bit": false,
+          "const": true
+        },
+        {
+          "name": "mlet",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mlevel",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mattk",
+          "d": {
+            "a": [
+              6
+            ],
+            "e": {
+              "s": "attack"
+            }
+          },
+          "ctype": "struct attack[6]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "msize",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mflags1",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mflags2",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "prop": {
+      "ctype": "struct prop",
+      "fields": [
+        {
+          "name": "extrinsic",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "blocked",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "intrinsic",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "monst": {
+      "ctype": "struct monst",
+      "fields": [
+        {
+          "name": "data",
+          "d": {
+            "p": "permonst"
+          },
+          "ctype": "struct permonst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "m_id",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "cham",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "m_lev",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mx",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "my",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mux",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "muy",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mhp",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mhpmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mappearance",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "m_ap_type",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mtame",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "seen_resistance",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mspec_used",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "female",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "minvis",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mcan",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mundetected",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mcansee",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mcloned",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mflee",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mstun",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mconf",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mpeaceful",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mtrapped",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "wormno",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "minvent",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mw",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "misc_worn_check",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "weapon_check",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "mhitm_data": {
+      "ctype": "struct mhitm_data",
+      "fields": [
+        {
+          "name": "damage",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "hitflags",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "done",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "permdmg",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "specialdmg",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "display_hints": {
+      "ctype": "struct display_hints",
+      "fields": [
+        {
+          "name": "botl",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "rm": {
+      "ctype": "struct rm",
+      "fields": []
+    },
+    "instance_globals_b": {
+      "ctype": "struct instance_globals_b",
+      "fields": [
+        {
+          "name": "bhitpos",
+          "d": {
+            "s": "nhcoord"
+          },
+          "ctype": "coord",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "c_common_strings": {
+      "ctype": "struct c_common_strings",
+      "fields": [
+        {
+          "name": "c_something",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *const",
+          "bit": false,
+          "const": true
+        },
+        {
+          "name": "c_Something",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *const",
+          "bit": false,
+          "const": true
+        },
+        {
+          "name": "c_vision_clears",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *const",
+          "bit": false,
+          "const": true
+        }
+      ]
+    },
+    "u_roleplay": {
+      "ctype": "struct u_roleplay",
+      "fields": [
+        {
+          "name": "deaf",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "Role": {
+      "ctype": "struct Role",
+      "fields": [
+        {
+          "name": "mnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "dgn_topology": {
+      "ctype": "struct dgn_topology",
+      "fields": [
+        {
+          "name": "d_rogue_level",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_h": {
+      "ctype": "struct instance_globals_h",
+      "fields": [
+        {
+          "name": "hitmsg_mid",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "hitmsg_prev",
+          "d": {
+            "p": "attack"
+          },
+          "ctype": "struct attack *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "Gender": {
+      "ctype": "struct Gender",
+      "fields": [
+        {
+          "name": "he",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "him",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "his",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_i": {
+      "ctype": "struct instance_globals_i",
+      "fields": [
+        {
+          "name": "invent",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "you": {
+      "ctype": "struct you",
+      "fields": [
+        {
+          "name": "ux",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uy",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uz",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "utotype",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ulevel",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "utrap",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "utraptype",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uprops",
+          "d": {
+            "a": [
+              69
+            ],
+            "e": {
+              "s": "prop"
+            }
+          },
+          "ctype": "struct prop[69]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "umonster",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "umonnum",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mh",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mhmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uswldtim",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uswallow",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "uinwater",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "uundetected",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mfemale",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "uinvulnerable",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "uroleplay",
+          "d": {
+            "s": "u_roleplay"
+          },
+          "ctype": "struct u_roleplay",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ualign",
+          "d": {
+            "s": "align"
+          },
+          "ctype": "align",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uac",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uspellprot",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uhp",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uhpmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uen",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uenmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uenpeak",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ublessed",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "usleep",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ustuck",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "usteed",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_m": {
+      "ctype": "struct instance_globals_m",
+      "fields": [
+        {
+          "name": "multi",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "cmdcount_nht",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mswallower",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mhitu_dieroll",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "dlevel_t": {
+      "ctype": "dlevel_t",
+      "fields": [
+        {
+          "name": "objects",
+          "d": {
+            "a": [
+              80,
+              21
+            ],
+            "e": {
+              "p": "obj"
+            }
+          },
+          "ctype": "struct obj *[80][21]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "monsters",
+          "d": {
+            "a": [
+              80,
+              21
+            ],
+            "e": {
+              "p": "monst"
+            }
+          },
+          "ctype": "struct monst *[80][21]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_n": {
+      "ctype": "struct instance_globals_n",
+      "fields": [
+        {
+          "name": "nomovemsg",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "notonhead",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "kinfo": {
+      "ctype": "struct kinfo",
+      "fields": [
+        {
+          "name": "format",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "name",
+          "d": {
+            "a": [
+              256
+            ],
+            "e": {
+              "t": "i8"
+            }
+          },
+          "ctype": "char[256]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "mvitals": {
+      "ctype": "struct mvitals",
+      "fields": [
+        {
+          "name": "mvflags",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_s": {
+      "ctype": "struct instance_globals_s",
+      "fields": [
+        {
+          "name": "stoned",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "skipdrin",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_u": {
+      "ctype": "struct instance_globals_u",
+      "fields": [
+        {
+          "name": "urole",
+          "d": {
+            "s": "Role"
+          },
+          "ctype": "struct Role",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_v": {
+      "ctype": "struct instance_globals_v",
+      "fields": [
+        {
+          "name": "viz_array",
+          "d": {
+            "p": ""
+          },
+          "ctype": "seenV **",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_y": {
+      "ctype": "struct instance_globals_y",
+      "fields": [
+        {
+          "name": "youmonst",
+          "d": {
+            "s": "monst"
+          },
+          "ctype": "struct monst",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_d": {
+      "ctype": "struct instance_globals_saved_d",
+      "fields": [
+        {
+          "name": "dungeon_topology",
+          "d": {
+            "s": "dgn_topology"
+          },
+          "ctype": "struct dgn_topology",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_k": {
+      "ctype": "struct instance_globals_saved_k",
+      "fields": [
+        {
+          "name": "killer",
+          "d": {
+            "s": "kinfo"
+          },
+          "ctype": "struct kinfo",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_l": {
+      "ctype": "struct instance_globals_saved_l",
+      "fields": [
+        {
+          "name": "level",
+          "d": {
+            "s": "dlevel_t"
+          },
+          "ctype": "dlevel_t",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_m": {
+      "ctype": "struct instance_globals_saved_m",
+      "fields": [
+        {
+          "name": "moves",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mvitals",
+          "d": {
+            "a": [
+              383
+            ],
+            "e": {
+              "s": "mvitals"
+            }
+          },
+          "ctype": "struct mvitals[383]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_p": {
+      "ctype": "struct instance_globals_saved_p",
+      "fields": [
+        {
+          "name": "plname",
+          "d": {
+            "a": [
+              32
+            ],
+            "e": {
+              "t": "i8"
+            }
+          },
+          "ctype": "char[32]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    }
+  },
+  "globals": [
+    {
+      "name": "gy",
+      "d": {
+        "s": "instance_globals_y"
+      }
+    },
+    {
+      "name": "u",
+      "d": {
+        "s": "you"
+      }
+    },
+    {
+      "name": "gh",
+      "d": {
+        "s": "instance_globals_h"
+      }
+    },
+    {
+      "name": "flags",
+      "d": {
+        "s": "flag"
+      }
+    },
+    {
+      "name": "objects",
+      "d": {
+        "a": [
+          482
+        ],
+        "e": {
+          "s": "objclass"
+        }
+      }
+    },
+    {
+      "name": "genders",
+      "d": {
+        "a": [
+          0
+        ],
+        "e": {
+          "s": "Gender"
+        }
+      }
+    },
+    {
+      "name": "uwep",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "gv",
+      "d": {
+        "s": "instance_globals_v"
+      }
+    },
+    {
+      "name": "disp",
+      "d": {
+        "s": "display_hints"
+      }
+    },
+    {
+      "name": "mons",
+      "d": {
+        "a": [
+          384
+        ],
+        "e": {
+          "s": "permonst"
+        }
+      }
+    },
+    {
+      "name": "sysopt",
+      "d": {
+        "s": "sysopt_s"
+      }
+    },
+    {
+      "name": "gb",
+      "d": {
+        "s": "instance_globals_b"
+      }
+    },
+    {
+      "name": "gn",
+      "d": {
+        "s": "instance_globals_n"
+      }
+    },
+    {
+      "name": "svl",
+      "d": {
+        "s": "instance_globals_saved_l"
+      }
+    },
+    {
+      "name": "svp",
+      "d": {
+        "s": "instance_globals_saved_p"
+      }
+    },
+    {
+      "name": "c_common_strings",
+      "d": {
+        "s": "c_common_strings"
+      }
+    },
+    {
+      "name": "gm",
+      "d": {
+        "s": "instance_globals_m"
+      }
+    },
+    {
+      "name": "gs",
+      "d": {
+        "s": "instance_globals_s"
+      }
+    },
+    {
+      "name": "svd",
+      "d": {
+        "s": "instance_globals_saved_d"
+      }
+    },
+    {
+      "name": "svm",
+      "d": {
+        "s": "instance_globals_saved_m"
+      }
+    },
+    {
+      "name": "uarmc",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uarm",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uarmu",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uarmh",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "gi",
+      "d": {
+        "s": "instance_globals_i"
+      }
+    },
+    {
+      "name": "gu",
+      "d": {
+        "s": "instance_globals_u"
+      }
+    },
+    {
+      "name": "uball",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "windowprocs",
+      "d": {
+        "s": "window_procs"
+      }
+    },
+    {
+      "name": "WIN_MESSAGE",
+      "d": {
+        "t": "i32"
+      }
+    },
+    {
+      "name": "uchain",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "svk",
+      "d": {
+        "s": "instance_globals_saved_k"
+      }
+    },
+    {
+      "name": "uarmg",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "ynchars",
+      "d": {
+        "a": [
+          0
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    },
+    {
+      "name": "uleft",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uright",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uarmf",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "uarms",
+      "d": {
+        "p": "obj"
+      }
+    },
+    {
+      "name": "c_sa_no",
+      "d": {
+        "a": [
+          6
+        ],
+        "e": {
+          "s": "attack"
+        }
+      }
+    }
+  ],
+  "fieldAliases": {
+    "a_can": {
+      "original": "oc_oc2",
+      "records": [
+        "objclass"
+      ],
+      "canonicalField": "oc_oc2"
+    },
+    "oc_skill": {
+      "original": "oc_subtyp",
+      "records": [
+        "objclass"
+      ],
+      "canonicalField": "oc_subtyp"
+    },
+    "opoisoned": {
+      "original": "otrapped",
+      "records": [
+        "obj"
+      ],
+      "canonicalField": "otrapped"
+    }
+  },
+  "configuredBodies": {
+    "algorithm": "Exact non-line-marker lines emitted while CPP owner is basename mhitu.c; includes expanded active function/global bodies; no header bodies",
+    "sha256": "34a87f65eef17440a6ddbfe1a0d285d7e3f3ef713141c21921cf50539db6ceeb",
+    "bytes": 87916,
+    "activeStringTokens": [
+      "\"!\"",
+      "\"%s %s you %s.\"",
+      "\"smiles at\"",
+      "\"talks to\"",
+      "\"touches\"",
+      "\"engagingly\"",
+      "\"seductively\"",
+      "\"bites\"",
+      "\".\"",
+      "\"kicks\"",
+      "\"stings\"",
+      "\"butts\"",
+      "\"touches you\"",
+      "\"tentacles suck your brain\"",
+      "\"explodes\"",
+      "\"hits\"",
+      "\" again\"",
+      "\"\"",
+      "\"%s %s%s%s\"",
+      "\"%s pretends to be friendly.\"",
+      "\"%s %smisses!\"",
+      "\"just \"",
+      "\"\"",
+      "\"mhitu.c\"",
+      "\"bashes with\"",
+      "\"lashes\"",
+      "\"thrusts\"",
+      "\"swings\"",
+      "\"%s %s %s%s %s.\"",
+      "\"one of \"",
+      "\"\"",
+      "\"attack\"",
+      "\"weapon\"",
+      "\"contact\"",
+      "\"gaze\"",
+      "\"bite\"",
+      "\"sting\"",
+      "\"slow down.\"",
+      "\"quickness feels less natural.\"",
+      "\"%s attacks you without knowing your location?\"",
+      "\"snaps\"",
+      "\"kicks\"",
+      "\"lunges\"",
+      "\"swings\"",
+      "\"%s tries to touch you and misses!\"",
+      "\"mhitu.c\"",
+      "\"%s %s wildly and misses!\"",
+      "\"%s attacks a spot beside you.\"",
+      "\"%s strikes at %s!\"",
+      "\"empty water\"",
+      "\"thin air\"",
+      "\"%s %s wildly!\"",
+      "\"%s smiles %s at your %sdisplaced image...\"",
+      "\"engagingly\"",
+      "\"seductively\"",
+      "\"invisible \"",
+      "\"\"",
+      "\"%s strikes at your %sdisplaced image and misses you!\"",
+      "\"invisible \"",
+      "\"\"",
+      "\"%s reaches towards your distorted image.\"",
+      "\"%s is fooled by water reflections and misses!\"",
+      "\"get regurgitated!\"",
+      "\"%s unfolds and you are released!\"",
+      "\"Swallower has no engulfing attack?\"",
+      "\" in a shower of sparks\"",
+      "\" in a blast of frost\"",
+      "\" with a squelch\"",
+      "\"get expelled from %s%s!\"",
+      "\"Brrooaa...  You land hard at some distance.\"",
+      "\"mhitu.c\"",
+      "\"fall from the %s!\"",
+      "\"%s draws back as you drop!\"",
+      "\"blow glances off %s %s.\"",
+      "\"mhitu.c\"",
+      "\"%s is hit by a falling piercer (you)!\"",
+      "\"mhitu.c\"",
+      "\"%s is almost hit by a falling piercer (you)!\"",
+      "\"It tries to move where you are hiding.\"",
+      "\"Wait, %s!  There's a hidden %s named %s there!\"",
+      "\"Wait, %s!  There's a %s named %s hiding under %s!\"",
+      "\"hiding under nothing?\"",
+      "\"It gets stuck on you.\"",
+      "\"Wait, %s!  That's a %s named %s!\"",
+      "\"%s %s!\"",
+      "\"tries to pick you up\"",
+      "\"disturbs you\"",
+      "\"Wait, %s!  That %s is really %s named %s!\"",
+      "\"You appear to be %s again.\"",
+      "\"yourself\"",
+      "\"mhitu.c\"",
+      "\"%s loosens its grip slightly.\"",
+      "\"%s starts to attack you, but pulls back.\"",
+      "\"%s move nearby.\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"%s gulps some air!\"",
+      "\"%s lunges forward and recoils!\"",
+      "\"a %s nearby.\"",
+      "\"rushing noise\"",
+      "\"splat\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"The combat suddenly awakens you.\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"creature\"",
+      "\"%s summons help!\"",
+      "\"hemmed in.\"",
+      "\"But none comes.\"",
+      "\"%s %s!\"",
+      "\"\"",
+      "\" from nowhere\"",
+      "\"hemmed in.\"",
+      "\"%s appears\"",
+      "\"%s appear\"",
+      "\"%s%s!\"",
+      "\"a slight illness.\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"%s %s your %s %s!\"",
+      "\"slips off of\"",
+      "\"grabs you, but cannot hold onto\"",
+      "\"greased\"",
+      "\"slippery\"",
+      "\"mhitu.c\"",
+      "\"grease wears off.\"",
+      "\"the water\"",
+      "\"It\"",
+      "\"%s was hidden under %s!\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"%s %s forward and plucks you off %s!\"",
+      "\"lunges\"",
+      "\"whirls\"",
+      "\"flows\"",
+      "\"oozes\"",
+      "\"surges\"",
+      "\"%s %s!\"",
+      "\"swallows you whole\"",
+      "\"folds itself around you\"",
+      "\"engulfs you\"",
+      "\"are released from the %s!\"",
+      "\"web\"",
+      "\"trap\"",
+      "\"leashes\"",
+      "\"leash\"",
+      "\"%s %s loose.\"",
+      "\"snap\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"%s totally digests you!\"",
+      "\"%s%s digests you!\"",
+      "\" thoroughly\"",
+      "\" utterly\"",
+      "\"\"",
+      "\"are laden with moisture and %s\"",
+      "\"are smoldering out!\"",
+      "\"find it mildly uncomfortable.\"",
+      "\"feel comforted.\"",
+      "\"can barely breathe!\"",
+      "\"are %s!\"",
+      "\"being squashed\"",
+      "\"pummeled with debris\"",
+      "\"are covered with a seemingly harmless goo.\"",
+      "\"Ouch!  You've been slimed!\"",
+      "\"are covered in slime!  It burns!\"",
+      "\"see in here!\"",
+      "\"%s\"",
+      "\"mhitu.c\"",
+      "\"air around you crackles with electricity.\"",
+      "\"seem unhurt.\"",
+      "\"mhitu.c\"",
+      "\"mildly chilly.\"",
+      "\"are freezing to death!\"",
+      "\"mhitu.c\"",
+      "\"mildly hot.\"",
+      "\"are burning to a crisp!\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"%s very hurriedly %s you!\"",
+      "\"regurgitates\"",
+      "\"releases\"",
+      "\"expels\"",
+      "\"get %s!\"",
+      "\"regurgitated\"",
+      "\"released\"",
+      "\"expelled\"",
+      "\"Obviously %s doesn't like your taste.\"",
+      "\"mhitu.c\"",
+      "\"%s explodes at a spot in %s!\"",
+      "\"It\"",
+      "\"empty water\"",
+      "\"thin air\"",
+      "\"mhitu.c\"",
+      "\"are blinded by a blast of light!\"",
+      "\"%s\"",
+      "\"get the impression it was not terribly bright.\"",
+      "\"are caught in a blast of kaleidoscopic light!\"",
+      "\"%s.\"",
+      "\"are freaked out\"",
+      "\"seem unaffected\"",
+      "\"unknown exploder damage type %d\"",
+      "\"seem unaffected by it.\"",
+      "\"confused\"",
+      "\"stunned\"",
+      "\"puzzled\"",
+      "\"dazzled\"",
+      "\"irritated\"",
+      "\"inflamed\"",
+      "\"tired\"",
+      "\"dulled\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"Someone seems overdue for a serpent cut.\"",
+      "\"%s %s.\"",
+      "\"doesn't look all that ugly\"",
+      "\"gazes ineffectually\"",
+      "\"%s gaze is reflected by your %s.\"",
+      "\"The gaze is reflected away by %s %s!\"",
+      "\"%s doesn't seem to notice that %s gaze was reflected.\"",
+      "\"%s is turned to stone!\"",
+      "\"meet %s gaze.\"",
+      "\"You turn to stone...\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"%s gaze confuses you!\"",
+      "\"are getting more and more confused.\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"%s stares piercingly at you!\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"are blinded by %s radiance!\"",
+      "\"%s\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"%s attacks you with a fiery gaze!\"",
+      "\"fire doesn't feel hot!\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"Gaze attack %d?\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"%s looks %s%s.\"",
+      "\"mhitu.c\"",
+      "\"\"",
+      "\"quite \"",
+      "\"mhitu.c\"",
+      "\"a bit \"",
+      "\"somewhat \"",
+      "\"mdamageu for negative damage? (%d)\"",
+      "\"%s acts as though %s has got a %sheadache.\"",
+      "\"severe \"",
+      "\"\"",
+      "\"%s seems dismayed at your lack of response.\"",
+      "\"Someone caresses you...\"",
+      "\"very attracted to %s.\"",
+      "\"She\"",
+      "\"He\"",
+      "\"gloves\"",
+      "\"mhitu.c\"",
+      "\"\\\"That \"",
+      "\" looks pretty.  May I have it?\\\"\"",
+      "\"ring\"",
+      "\"%s decides she'd like %s, and takes it.\"",
+      "\"gloves\"",
+      "\"mhitu.c\"",
+      "\"\\\"That \"",
+      "\" looks pretty.  Would you wear it for me?\\\"\"",
+      "\"ring\"",
+      "\"%s decides you'd look prettier wearing %s,\"",
+      "\"and puts it on your finger.\"",
+      "\"%s puts %s on your right %s.\"",
+      "\"%s puts %s on your left %s.\"",
+      "\"%s replaces %s with %s.\"",
+      "\"%s replaces %s with %s.\"",
+      "\"ring replacement\"",
+      "\"%s %s%s.\"",
+      "\"seems to murmur into your ear\"",
+      "\"murmurs sweet nothings into your ear\"",
+      "\"murmurs in your ear\"",
+      "\"\"",
+      "\", while helping you undress\"",
+      "\"boots\"",
+      "\"gloves\"",
+      "\"shield\"",
+      "\"shirt\"",
+      "\"You're such a %s; I wish...\"",
+      "\"sweet lady\"",
+      "\"nice guy\"",
+      "\"Well, then you owe me %s%s!\"",
+      "\"twelve pairs of gloves\"",
+      "\" and eleven more pairs of gloves\"",
+      "\"\"",
+      "\"%s appears to sigh.\"",
+      "\"Time stands still while you and %s lie in each other's arms...\"",
+      "\"mhitu.c\"",
+      "\"%s seems to have enjoyed it more than you...\"",
+      "\"mhitu.c\"",
+      "\"drained of energy.\"",
+      "\"mhitu.c\"",
+      "\"are down in the dumps.\"",
+      "\"senses are dulled.\"",
+      "\"out of shape.\"",
+      "\"overexertion\"",
+      "\"have a curious feeling...\"",
+      "\"exhausted.\"",
+      "\"mhitu.c\"",
+      "\"exhaustion\"",
+      "\"mhitu.c\"",
+      "\"seem to have enjoyed it more than %s...\"",
+      "\"mhitu.c\"",
+      "\"raised to your full potential.\"",
+      "\"mhitu.c\"",
+      "\"good enough to do it again.\"",
+      "\"will always remember %s...\"",
+      "\"That was a very educational experience.\"",
+      "\"restored to health!\"",
+      "\"mhitu.c\"",
+      "\"%s demands that you pay %s, but you refuse...\"",
+      "\"%s tries to take your gold, but fails...\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"It's on the house!\"",
+      "\"No charge.\"",
+      "\"%s takes %ld %s for services rendered!\"",
+      "\"mhitu.c\"",
+      "\"%s takes off your %s.\"",
+      "\"mhitu.c\"",
+      "\"\\\"Shall I remove your %s, %s?\\\"\"",
+      "\"mhitu.c\"",
+      "\"lover\"",
+      "\"mhitu.c\"",
+      "\"dear\"",
+      "\"sweetheart\"",
+      "\"let me run my fingers through your %s\"",
+      "\"Take off your %s; %s.\"",
+      "\"let's get a little closer\"",
+      "\"it's in the way\"",
+      "\"let me rub your feet\"",
+      "\"they're too clumsy\"",
+      "\"let me massage you\"",
+      "\"%s dies!\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"%s is splashed by %s%s!\"",
+      "\"\"",
+      "\"your \"",
+      "\"acid\"",
+      "\"%s is not affected.\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"%s turns to stone!\"",
+      "\"mhitu.c\"",
+      "\"explode!\"",
+      "\"mhitu.c\"",
+      "\"mhitu.c\"",
+      "\"As a blind %s, you cannot defend yourself.\"",
+      "\"Your gaze is reflected by %s %s.\"",
+      "\"%s is frozen by your gaze!\"",
+      "\"%s is frozen by you.\"",
+      "\"%s is mildly chilly.\"",
+      "\"%s is suddenly very cold!\"",
+      "\"mhitu.c\"",
+      "\"%s %s.\"",
+      "\"stagger\"",
+      "\"%s is mildly warm.\"",
+      "\"%s is suddenly very hot!\"",
+      "\"%s is slightly tingled.\"",
+      "\"%s is jolted with your electricity!\""
+    ],
+    "branchFacts": {
+      "PM_BEHOLDER": false,
+      "ranged_attk_assessed": false
+    }
+  },
+  "constants": [
+    "ACID_RES",
+    "AD_ACID",
+    "AD_ANY",
+    "AD_BLND",
+    "AD_COLD",
+    "AD_CONF",
+    "AD_DGST",
+    "AD_DISE",
+    "AD_DREN",
+    "AD_DRIN",
+    "AD_DRLI",
+    "AD_ELEC",
+    "AD_ENCH",
+    "AD_FAMN",
+    "AD_FIRE",
+    "AD_HALU",
+    "AD_PEST",
+    "AD_PHYS",
+    "AD_PLYS",
+    "AD_POLY",
+    "AD_SEDU",
+    "AD_SITM",
+    "AD_SSEX",
+    "AD_STCK",
+    "AD_STON",
+    "AD_STUN",
+    "AD_WRAP",
+    "AMULET_OF_GUARDING",
+    "ART_SNICKERSNEE",
+    "ART_STORMBRINGER",
+    "ART_VORPAL_BLADE",
+    "AT_BITE",
+    "AT_BOOM",
+    "AT_BREA",
+    "AT_BUTT",
+    "AT_CLAW",
+    "AT_ENGL",
+    "AT_EXPL",
+    "AT_GAZE",
+    "AT_HUGS",
+    "AT_KICK",
+    "AT_MAGC",
+    "AT_NONE",
+    "AT_SPIT",
+    "AT_STNG",
+    "AT_TENT",
+    "AT_TUCH",
+    "AT_WEAP",
+    "A_CHA",
+    "A_CHAOTIC",
+    "A_CON",
+    "A_DEX",
+    "A_INT",
+    "A_STR",
+    "A_WIS",
+    "BLINDED",
+    "BOLT_LIM",
+    "BOULDER",
+    "BUFSZ",
+    "BULLWHIP",
+    "COLD_RES",
+    "CONFLICT",
+    "CONFUSION",
+    "CORPSE",
+    "COULD_SEE",
+    "DEAF",
+    "DETECT_MONSTERS",
+    "DIED",
+    "DISMOUNT_ENGULFED",
+    "DISPLACED",
+    "EGG",
+    "ERODE_CORRODE",
+    "FAST",
+    "FEMALE",
+    "FIRE_RES",
+    "GOLD_PIECE",
+    "G_EXTINCT",
+    "HAIR",
+    "HALF_PHDAM",
+    "HALLUC",
+    "HALLUC_RES",
+    "HAND",
+    "INVIS",
+    "IN_SIGHT",
+    "KILLED_BY",
+    "LARGEST_INT",
+    "LEFT_RING",
+    "LONG_SWORD",
+    "M1_AMORPHOUS",
+    "M1_AMPHIBIOUS",
+    "M1_ANIMAL",
+    "M1_BREATHLESS",
+    "M1_CONCEAL",
+    "M1_HIDE",
+    "M1_NOEYES",
+    "M1_NOLIMBS",
+    "M1_SEE_INVIS",
+    "M1_SWIM",
+    "M1_THICK_HIDE",
+    "M1_UNSOLID",
+    "M2_DEMON",
+    "M2_GREEDY",
+    "M2_HUMAN",
+    "M2_MINION",
+    "M2_ORC",
+    "M2_UNDEAD",
+    "M2_WERE",
+    "MAGICAL_BREATHING",
+    "MALE",
+    "MM_EDOG",
+    "MM_NOMSG",
+    "MZ_HUGE",
+    "M_AP_NOTHING",
+    "M_AP_OBJECT",
+    "M_AP_TYPMASK",
+    "M_ATTK_AGR_DIED",
+    "M_ATTK_AGR_DONE",
+    "M_ATTK_DEF_DIED",
+    "M_ATTK_HIT",
+    "M_ATTK_MISS",
+    "M_SEEN_ACID",
+    "M_SEEN_COLD",
+    "M_SEEN_ELEC",
+    "M_SEEN_FIRE",
+    "NATTK",
+    "NEED_HTH_WEAPON",
+    "NEED_WEAPON",
+    "NEUTRAL",
+    "NON_PM",
+    "NO_MINVENT",
+    "OBJ_FREE",
+    "OILSKIN_CLOAK",
+    "PIERCE",
+    "PIT",
+    "PM_AIR_ELEMENTAL",
+    "PM_ALIGNED_CLERIC",
+    "PM_AMOROUS_DEMON",
+    "PM_ARCHON",
+    "PM_BALROG",
+    "PM_BLACK_LIGHT",
+    "PM_CHICKATRICE",
+    "PM_CLERIC",
+    "PM_COCKATRICE",
+    "PM_FIRE_ELEMENTAL",
+    "PM_FIRE_VORTEX",
+    "PM_FLAMING_SPHERE",
+    "PM_FLOATING_EYE",
+    "PM_FOG_CLOUD",
+    "PM_HIGH_CLERIC",
+    "PM_HUMAN",
+    "PM_LEPRECHAUN",
+    "PM_MEDUSA",
+    "PM_RED_DRAGON",
+    "PM_SALAMANDER",
+    "PM_SHADE",
+    "PM_STONE_GOLEM",
+    "PM_TRAPPER",
+    "PM_VAMPIRE",
+    "PM_VAMPIRE_LEADER",
+    "PM_VIOLET_FUNGUS",
+    "PM_VLAD_THE_IMPALER",
+    "PRONOUN_HALLU",
+    "PRONOUN_NO_IT",
+    "PROTECTION",
+    "PROT_FROM_SHAPE_CHANGERS",
+    "P_LANCE",
+    "P_NONE",
+    "P_POLEARMS",
+    "P_SPEAR",
+    "P_WHIP",
+    "QBUFSZ",
+    "REFLECTING",
+    "RIGHT_RING",
+    "RIN_ADORNMENT",
+    "RLOC_MSG",
+    "RLOC_NOMSG",
+    "SEE_INVIS",
+    "SHOCK_RES",
+    "SICK",
+    "SICK_NONVOMITABLE",
+    "SICK_RES",
+    "SLASH",
+    "SLOW_DIGESTION",
+    "SPEAR",
+    "SPIKED_PIT",
+    "STONE_RES",
+    "STONING",
+    "STUNNED",
+    "S_EEL",
+    "S_MIMIC",
+    "S_NYMPH",
+    "S_PIERCER",
+    "S_VORTEX",
+    "TELEDS_ALLOW_DRAG",
+    "TIMEOUT",
+    "TOOL_CLASS",
+    "TOWEL",
+    "TT_PIT",
+    "TT_WEB",
+    "WEAPON_CLASS",
+    "WEB",
+    "WORN_HELMET",
+    "W_ACCESSORY",
+    "W_AMUL",
+    "W_ARM",
+    "W_ARMG",
+    "W_ARMOR",
+    "W_WEP",
+    "XKILL_NOMSG"
+  ],
+  "probeConstants": [
+    "BULLWHIP",
+    "COULD_SEE",
+    "LONG_SWORD",
+    "PM_HUMAN",
+    "PM_RED_DRAGON",
+    "P_SPEAR",
+    "SLASH",
+    "SPEAR",
+    "WEB",
+    "W_ARM"
+  ],
+  "literals": [
+    "",
+    " again",
+    " and eleven more pairs of gloves",
+    " from nowhere",
+    " in a blast of frost",
+    " in a shower of sparks",
+    " looks pretty.  May I have it?\"",
+    " looks pretty.  Would you wear it for me?\"",
+    " thoroughly",
+    " utterly",
+    " with a squelch",
+    "!",
+    "\"Shall I remove your %s, %s?\"",
+    "\"That ",
+    "%s",
+    "%s %s %s%s %s.",
+    "%s %s forward and plucks you off %s!",
+    "%s %s loose.",
+    "%s %s wildly and misses!",
+    "%s %s wildly!",
+    "%s %s you %s.",
+    "%s %s your %s %s!",
+    "%s %s!",
+    "%s %s%s%s",
+    "%s %s%s.",
+    "%s %s.",
+    "%s %smisses!",
+    "%s acts as though %s has got a %sheadache.",
+    "%s appear",
+    "%s appears",
+    "%s appears to sigh.",
+    "%s attacks a spot beside you.",
+    "%s attacks you with a fiery gaze!",
+    "%s attacks you without knowing your location?",
+    "%s decides she'd like %s, and takes it.",
+    "%s decides you'd look prettier wearing %s,",
+    "%s demands that you pay %s, but you refuse...",
+    "%s dies!",
+    "%s doesn't seem to notice that %s gaze was reflected.",
+    "%s draws back as you drop!",
+    "%s explodes at a spot in %s!",
+    "%s gaze confuses you!",
+    "%s gaze is reflected by your %s.",
+    "%s gulps some air!",
+    "%s is almost hit by a falling piercer (you)!",
+    "%s is fooled by water reflections and misses!",
+    "%s is frozen by you.",
+    "%s is frozen by your gaze!",
+    "%s is hit by a falling piercer (you)!",
+    "%s is jolted with your electricity!",
+    "%s is mildly chilly.",
+    "%s is mildly warm.",
+    "%s is not affected.",
+    "%s is slightly tingled.",
+    "%s is splashed by %s%s!",
+    "%s is suddenly very cold!",
+    "%s is suddenly very hot!",
+    "%s is turned to stone!",
+    "%s looks %s%s.",
+    "%s loosens its grip slightly.",
+    "%s lunges forward and recoils!",
+    "%s move nearby.",
+    "%s pretends to be friendly.",
+    "%s puts %s on your left %s.",
+    "%s puts %s on your right %s.",
+    "%s reaches towards your distorted image.",
+    "%s replaces %s with %s.",
+    "%s seems dismayed at your lack of response.",
+    "%s seems to have enjoyed it more than you...",
+    "%s smiles %s at your %sdisplaced image...",
+    "%s stares piercingly at you!",
+    "%s starts to attack you, but pulls back.",
+    "%s strikes at %s!",
+    "%s strikes at your %sdisplaced image and misses you!",
+    "%s summons help!",
+    "%s takes %ld %s for services rendered!",
+    "%s takes off your %s.",
+    "%s totally digests you!",
+    "%s tries to take your gold, but fails...",
+    "%s tries to touch you and misses!",
+    "%s turns to stone!",
+    "%s unfolds and you are released!",
+    "%s very hurriedly %s you!",
+    "%s was hidden under %s!",
+    "%s%s digests you!",
+    "%s%s!",
+    "%s.",
+    ", while helping you undress",
+    ".",
+    "As a blind %s, you cannot defend yourself.",
+    "Brrooaa...  You land hard at some distance.",
+    "But none comes.",
+    "Gaze attack %d?",
+    "He",
+    "It",
+    "It gets stuck on you.",
+    "It tries to move where you are hiding.",
+    "It's on the house!",
+    "No charge.",
+    "Obviously %s doesn't like your taste.",
+    "Ouch!  You've been slimed!",
+    "She",
+    "Someone caresses you...",
+    "Someone seems overdue for a serpent cut.",
+    "Swallower has no engulfing attack?",
+    "Take off your %s; %s.",
+    "That was a very educational experience.",
+    "The combat suddenly awakens you.",
+    "The gaze is reflected away by %s %s!",
+    "Time stands still while you and %s lie in each other's arms...",
+    "Wait, %s!  That %s is really %s named %s!",
+    "Wait, %s!  That's a %s named %s!",
+    "Wait, %s!  There's a %s named %s hiding under %s!",
+    "Wait, %s!  There's a hidden %s named %s there!",
+    "Well, then you owe me %s%s!",
+    "You appear to be %s again.",
+    "You turn to stone...",
+    "You're such a %s; I wish...",
+    "Your gaze is reflected by %s %s.",
+    "a %s nearby.",
+    "a bit ",
+    "a slight illness.",
+    "acid",
+    "air around you crackles with electricity.",
+    "and puts it on your finger.",
+    "are %s!",
+    "are blinded by %s radiance!",
+    "are blinded by a blast of light!",
+    "are burning to a crisp!",
+    "are caught in a blast of kaleidoscopic light!",
+    "are covered in slime!  It burns!",
+    "are covered with a seemingly harmless goo.",
+    "are down in the dumps.",
+    "are freaked out",
+    "are freezing to death!",
+    "are getting more and more confused.",
+    "are laden with moisture and %s",
+    "are released from the %s!",
+    "are smoldering out!",
+    "attack",
+    "bashes with",
+    "being squashed",
+    "bite",
+    "bites",
+    "blow glances off %s %s.",
+    "boots",
+    "butts",
+    "can barely breathe!",
+    "confused",
+    "contact",
+    "creature",
+    "dazzled",
+    "dear",
+    "diseasemu",
+    "disturbs you",
+    "doesn't look all that ugly",
+    "doseduce",
+    "drained of energy.",
+    "dulled",
+    "empty water",
+    "engagingly",
+    "engulfs you",
+    "exhausted.",
+    "exhaustion",
+    "expelled",
+    "expels",
+    "explmu",
+    "explode!",
+    "explodes",
+    "fall from the %s!",
+    "feel comforted.",
+    "find it mildly uncomfortable.",
+    "fire doesn't feel hot!",
+    "flows",
+    "folds itself around you",
+    "gaze",
+    "gazemu",
+    "gazes ineffectually",
+    "get %s!",
+    "get expelled from %s%s!",
+    "get regurgitated!",
+    "get the impression it was not terribly bright.",
+    "gloves",
+    "good enough to do it again.",
+    "grabs you, but cannot hold onto",
+    "grease wears off.",
+    "greased",
+    "gulpmu",
+    "have a curious feeling...",
+    "hemmed in.",
+    "hiding under nothing?",
+    "hitflags",
+    "hitmu",
+    "hits",
+    "i32",
+    "inflamed",
+    "invisible ",
+    "irritated",
+    "it's in the way",
+    "just ",
+    "kicks",
+    "lashes",
+    "leash",
+    "leashes",
+    "let me massage you",
+    "let me rub your feet",
+    "let me run my fingers through your %s",
+    "let's get a little closer",
+    "lover",
+    "lunges",
+    "mattacku",
+    "mayberem",
+    "mdamageu for negative damage? (%d)",
+    "meet %s gaze.",
+    "mhitm_data",
+    "mhmax",
+    "mildly chilly.",
+    "mildly hot.",
+    "mswings_verb",
+    "murmurs in your ear",
+    "murmurs sweet nothings into your ear",
+    "nhcoord",
+    "nice guy",
+    "one of ",
+    "oozes",
+    "out of shape.",
+    "overexertion",
+    "passiveum",
+    "pummeled with debris",
+    "puzzled",
+    "quickness feels less natural.",
+    "quite ",
+    "raised to your full potential.",
+    "regurgitated",
+    "regurgitates",
+    "released",
+    "releases",
+    "restored to health!",
+    "ring",
+    "ring replacement",
+    "rushing noise",
+    "seductively",
+    "see in here!",
+    "seem to have enjoyed it more than %s...",
+    "seem unaffected",
+    "seem unaffected by it.",
+    "seem unhurt.",
+    "seems to murmur into your ear",
+    "senses are dulled.",
+    "severe ",
+    "shield",
+    "shirt",
+    "slippery",
+    "slips off of",
+    "slow down.",
+    "smiles at",
+    "snap",
+    "snaps",
+    "somewhat ",
+    "splat",
+    "stagger",
+    "sting",
+    "stings",
+    "stunned",
+    "summonmu",
+    "surges",
+    "swallows you whole",
+    "sweet lady",
+    "sweetheart",
+    "swings",
+    "talks to",
+    "tentacles suck your brain",
+    "the water",
+    "they're too clumsy",
+    "thin air",
+    "thrusts",
+    "tired",
+    "touches",
+    "touches you",
+    "trap",
+    "tries to pick you up",
+    "twelve pairs of gloves",
+    "u_slip_free",
+    "uhpmax",
+    "unknown exploder damage type %d",
+    "very attracted to %s.",
+    "weapon",
+    "web",
+    "whirls",
+    "wildmiss",
+    "will always remember %s...",
+    "your ",
+    "yourself"
+  ],
+  "rngSites": [
+    {
+      "function": "mswings_verb",
+      "line": 116,
+      "kind": "rn2",
+      "offset": 4304
+    },
+    {
+      "function": "wildmiss",
+      "line": 218,
+      "kind": "rn2",
+      "offset": 7921
+    },
+    {
+      "function": "mattacku",
+      "line": 534,
+      "kind": "rn2",
+      "offset": 19937
+    },
+    {
+      "function": "mattacku",
+      "line": 604,
+      "kind": "rnd",
+      "offset": 23206
+    },
+    {
+      "function": "mattacku",
+      "line": 607,
+      "kind": "d",
+      "offset": 23363
+    },
+    {
+      "function": "mattacku",
+      "line": 709,
+      "kind": "AC_VALUE",
+      "offset": 27606
+    },
+    {
+      "function": "mattacku",
+      "line": 806,
+      "kind": "rnd",
+      "offset": 31415
+    },
+    {
+      "function": "mattacku",
+      "line": 848,
+      "kind": "rnd",
+      "offset": 33105
+    },
+    {
+      "function": "mattacku",
+      "line": 912,
+      "kind": "rnd",
+      "offset": 35832
+    },
+    {
+      "function": "mattacku",
+      "line": 940,
+      "kind": "rn2",
+      "offset": 36818
+    },
+    {
+      "function": "summonmu",
+      "line": 968,
+      "kind": "rn2",
+      "offset": 37649
+    },
+    {
+      "function": "summonmu",
+      "line": 979,
+      "kind": "rn2",
+      "offset": 38149
+    },
+    {
+      "function": "summonmu",
+      "line": 982,
+      "kind": "rn2",
+      "offset": 38311
+    },
+    {
+      "function": "summonmu",
+      "line": 989,
+      "kind": "rn2",
+      "offset": 38551
+    },
+    {
+      "function": "diseasemu",
+      "line": 1039,
+      "kind": "rn1",
+      "offset": 40282
+    },
+    {
+      "function": "u_slip_free",
+      "line": 1066,
+      "kind": "rn2",
+      "offset": 41035
+    },
+    {
+      "function": "u_slip_free",
+      "line": 1077,
+      "kind": "rn2",
+      "offset": 41563
+    },
+    {
+      "function": "hitmu",
+      "line": 1187,
+      "kind": "d",
+      "offset": 45278
+    },
+    {
+      "function": "hitmu",
+      "line": 1189,
+      "kind": "d",
+      "offset": 45406
+    },
+    {
+      "function": "hitmu",
+      "line": 1209,
+      "kind": "rnd",
+      "offset": 46024
+    },
+    {
+      "function": "hitmu",
+      "line": 1233,
+      "kind": "rn2",
+      "offset": 46986
+    },
+    {
+      "function": "gulpmu",
+      "line": 1292,
+      "kind": "d",
+      "offset": 48892
+    },
+    {
+      "function": "gulpmu",
+      "line": 1385,
+      "kind": "rn2",
+      "offset": 52825
+    },
+    {
+      "function": "gulpmu",
+      "line": 1392,
+      "kind": "rnd",
+      "offset": 53066
+    },
+    {
+      "function": "gulpmu",
+      "line": 1488,
+      "kind": "rn2",
+      "offset": 56582
+    },
+    {
+      "function": "gulpmu",
+      "line": 1503,
+      "kind": "rn2",
+      "offset": 57057
+    },
+    {
+      "function": "gulpmu",
+      "line": 1518,
+      "kind": "rn2",
+      "offset": 57517
+    },
+    {
+      "function": "gulpmu",
+      "line": 1539,
+      "kind": "rn2",
+      "offset": 58159
+    },
+    {
+      "function": "gulpmu",
+      "line": 1552,
+      "kind": "rnd",
+      "offset": 58458
+    },
+    {
+      "function": "explmu",
+      "line": 1603,
+      "kind": "d",
+      "offset": 60047
+    },
+    {
+      "function": "explmu",
+      "line": 1627,
+      "kind": "rnd",
+      "offset": 60863
+    },
+    {
+      "function": "gazemu",
+      "line": 1698,
+      "kind": "rn2",
+      "offset": 63826
+    },
+    {
+      "function": "gazemu",
+      "line": 1712,
+      "kind": "rn2",
+      "offset": 64397
+    },
+    {
+      "function": "gazemu",
+      "line": 1760,
+      "kind": "rn2",
+      "offset": 66325
+    },
+    {
+      "function": "gazemu",
+      "line": 1765,
+      "kind": "d",
+      "offset": 66502
+    },
+    {
+      "function": "gazemu",
+      "line": 1767,
+      "kind": "rn2",
+      "offset": 66574
+    },
+    {
+      "function": "gazemu",
+      "line": 1779,
+      "kind": "rn2",
+      "offset": 67010
+    },
+    {
+      "function": "gazemu",
+      "line": 1784,
+      "kind": "d",
+      "offset": 67186
+    },
+    {
+      "function": "gazemu",
+      "line": 1786,
+      "kind": "rn2",
+      "offset": 67258
+    },
+    {
+      "function": "gazemu",
+      "line": 1797,
+      "kind": "rn1",
+      "offset": 67673
+    },
+    {
+      "function": "gazemu",
+      "line": 1801,
+      "kind": "rn2",
+      "offset": 67979
+    },
+    {
+      "function": "gazemu",
+      "line": 1804,
+      "kind": "d",
+      "offset": 68067
+    },
+    {
+      "function": "gazemu",
+      "line": 1815,
+      "kind": "rnd",
+      "offset": 68621
+    },
+    {
+      "function": "gazemu",
+      "line": 1825,
+      "kind": "rn2",
+      "offset": 68956
+    },
+    {
+      "function": "gazemu",
+      "line": 1827,
+      "kind": "rn1",
+      "offset": 69019
+    },
+    {
+      "function": "gazemu",
+      "line": 1829,
+      "kind": "d",
+      "offset": 69109
+    },
+    {
+      "function": "gazemu",
+      "line": 1838,
+      "kind": "d",
+      "offset": 69532
+    },
+    {
+      "function": "gazemu",
+      "line": 1844,
+      "kind": "rn2",
+      "offset": 69723
+    },
+    {
+      "function": "gazemu",
+      "line": 1846,
+      "kind": "rn2",
+      "offset": 69810
+    },
+    {
+      "function": "gazemu",
+      "line": 1888,
+      "kind": "rn2",
+      "offset": 71160
+    },
+    {
+      "function": "gazemu",
+      "line": 1889,
+      "kind": "rn2",
+      "offset": 71188
+    },
+    {
+      "function": "gazemu",
+      "line": 1893,
+      "kind": "rn2",
+      "offset": 71434
+    },
+    {
+      "function": "gazemu",
+      "line": 1894,
+      "kind": "rn2",
+      "offset": 71508
+    },
+    {
+      "function": "doseduce",
+      "line": 2032,
+      "kind": "rn2",
+      "offset": 75753
+    },
+    {
+      "function": "doseduce",
+      "line": 2063,
+      "kind": "rn2",
+      "offset": 77126
+    },
+    {
+      "function": "doseduce",
+      "line": 2178,
+      "kind": "rn2",
+      "offset": 82298
+    },
+    {
+      "function": "doseduce",
+      "line": 2182,
+      "kind": "rn2",
+      "offset": 82512
+    },
+    {
+      "function": "doseduce",
+      "line": 2186,
+      "kind": "rnd",
+      "offset": 82629
+    },
+    {
+      "function": "doseduce",
+      "line": 2219,
+      "kind": "rn1",
+      "offset": 83647
+    },
+    {
+      "function": "doseduce",
+      "line": 2225,
+      "kind": "rnd",
+      "offset": 83830
+    },
+    {
+      "function": "doseduce",
+      "line": 2227,
+      "kind": "rn2",
+      "offset": 83957
+    },
+    {
+      "function": "doseduce",
+      "line": 2231,
+      "kind": "rnd",
+      "offset": 84107
+    },
+    {
+      "function": "doseduce",
+      "line": 2265,
+      "kind": "rn2",
+      "offset": 85096
+    },
+    {
+      "function": "doseduce",
+      "line": 2276,
+      "kind": "rnd",
+      "offset": 85533
+    },
+    {
+      "function": "doseduce",
+      "line": 2278,
+      "kind": "rnd",
+      "offset": 85597
+    },
+    {
+      "function": "doseduce",
+      "line": 2300,
+      "kind": "rn2",
+      "offset": 86242
+    },
+    {
+      "function": "mayberem",
+      "line": 2325,
+      "kind": "rn2",
+      "offset": 87012
+    },
+    {
+      "function": "mayberem",
+      "line": 2328,
+      "kind": "rn2",
+      "offset": 87196
+    },
+    {
+      "function": "mayberem",
+      "line": 2328,
+      "kind": "rn2",
+      "offset": 87216
+    },
+    {
+      "function": "passiveum",
+      "line": 2456,
+      "kind": "d",
+      "offset": 90961
+    },
+    {
+      "function": "passiveum",
+      "line": 2458,
+      "kind": "d",
+      "offset": 91057
+    },
+    {
+      "function": "passiveum",
+      "line": 2465,
+      "kind": "rn2",
+      "offset": 91277
+    },
+    {
+      "function": "passiveum",
+      "line": 2477,
+      "kind": "rn2",
+      "offset": 91827
+    },
+    {
+      "function": "passiveum",
+      "line": 2479,
+      "kind": "rn2",
+      "offset": 91895
+    },
+    {
+      "function": "passiveum",
+      "line": 2523,
+      "kind": "rn2",
+      "offset": 93299
+    },
+    {
+      "function": "passiveum",
+      "line": 2537,
+      "kind": "rn2",
+      "offset": 93793
+    },
+    {
+      "function": "passiveum",
+      "line": 2539,
+      "kind": "rn2",
+      "offset": 93892
+    },
+    {
+      "function": "passiveum",
+      "line": 2570,
+      "kind": "rn2",
+      "offset": 95304
+    }
+  ],
+  "headerMacros": {
+    "ACURR": {
+      "params": [
+        "x"
+      ],
+      "expression": "(env.acurr(x))",
+      "original": "(acurr(x))"
+    },
+    "HAcid_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.ACID_RES].intrinsic",
+      "original": "u.uprops[ACID_RES].intrinsic"
+    },
+    "EAcid_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.ACID_RES].extrinsic",
+      "original": "u.uprops[ACID_RES].extrinsic"
+    },
+    "Acid_resistance": {
+      "params": null,
+      "expression": "(env.HAcid_resistance || env.EAcid_resistance)",
+      "original": "(HAcid_resistance || EAcid_resistance)"
+    },
+    "HMagical_breathing": {
+      "params": null,
+      "expression": "env.u.uprops[env.MAGICAL_BREATHING].intrinsic",
+      "original": "u.uprops[MAGICAL_BREATHING].intrinsic"
+    },
+    "EMagical_breathing": {
+      "params": null,
+      "expression": "env.u.uprops[env.MAGICAL_BREATHING].extrinsic",
+      "original": "u.uprops[MAGICAL_BREATHING].extrinsic"
+    },
+    "amphibious": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_AMPHIBIOUS) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_AMPHIBIOUS) != 0L)"
+    },
+    "Amphibious": {
+      "params": null,
+      "expression": "(env.HMagical_breathing || env.EMagical_breathing || env.amphibious(env.gy.youmonst.data))",
+      "original": "(HMagical_breathing || EMagical_breathing || amphibious(gy.youmonst.data))"
+    },
+    "HBlinded": {
+      "params": null,
+      "expression": "env.u.uprops[env.BLINDED].intrinsic",
+      "original": "u.uprops[BLINDED].intrinsic"
+    },
+    "EBlinded": {
+      "params": null,
+      "expression": "env.u.uprops[env.BLINDED].extrinsic",
+      "original": "u.uprops[BLINDED].extrinsic"
+    },
+    "BBlinded": {
+      "params": null,
+      "expression": "env.u.uprops[env.BLINDED].blocked",
+      "original": "u.uprops[BLINDED].blocked"
+    },
+    "Blind": {
+      "params": null,
+      "expression": "((env.HBlinded || env.EBlinded) && !env.BBlinded)",
+      "original": "((HBlinded || EBlinded) && !BBlinded)"
+    },
+    "Blinded": {
+      "params": null,
+      "expression": "(env.HBlinded && !env.BBlinded)",
+      "original": "(HBlinded && !BBlinded)"
+    },
+    "breathless": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_BREATHLESS) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_BREATHLESS) != 0L)"
+    },
+    "Breathless": {
+      "params": null,
+      "expression": "(env.HMagical_breathing || env.EMagical_breathing || env.breathless(env.gy.youmonst.data))",
+      "original": "(HMagical_breathing || EMagical_breathing || breathless(gy.youmonst.data))"
+    },
+    "HCold_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.COLD_RES].intrinsic",
+      "original": "u.uprops[COLD_RES].intrinsic"
+    },
+    "ECold_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.COLD_RES].extrinsic",
+      "original": "u.uprops[COLD_RES].extrinsic"
+    },
+    "Cold_resistance": {
+      "params": null,
+      "expression": "(env.HCold_resistance || env.ECold_resistance)",
+      "original": "(HCold_resistance || ECold_resistance)"
+    },
+    "HConflict": {
+      "params": null,
+      "expression": "env.u.uprops[env.CONFLICT].intrinsic",
+      "original": "u.uprops[CONFLICT].intrinsic"
+    },
+    "EConflict": {
+      "params": null,
+      "expression": "env.u.uprops[env.CONFLICT].extrinsic",
+      "original": "u.uprops[CONFLICT].extrinsic"
+    },
+    "Conflict": {
+      "params": null,
+      "expression": "(env.HConflict || env.EConflict)",
+      "original": "(HConflict || EConflict)"
+    },
+    "HConfusion": {
+      "params": null,
+      "expression": "env.u.uprops[env.CONFUSION].intrinsic",
+      "original": "u.uprops[CONFUSION].intrinsic"
+    },
+    "Confusion": {
+      "params": null,
+      "expression": "env.HConfusion",
+      "original": "HConfusion"
+    },
+    "DEADMONSTER": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean(((mon).mhp < 1)))",
+      "original": "((mon)->mhp < 1)"
+    },
+    "DISTANCE_ATTK_TYPE": {
+      "params": [
+        "atyp"
+      ],
+      "expression": "Number(Boolean(((atyp) == env.AT_SPIT || (atyp) == env.AT_BREA || (atyp) == env.AT_MAGC || (atyp) == env.AT_GAZE)))",
+      "original": "((atyp) == AT_SPIT || (atyp) == AT_BREA || (atyp) == AT_MAGC || (atyp) == AT_GAZE)"
+    },
+    "HDeaf": {
+      "params": null,
+      "expression": "env.u.uprops[env.DEAF].intrinsic",
+      "original": "u.uprops[DEAF].intrinsic"
+    },
+    "EDeaf": {
+      "params": null,
+      "expression": "env.u.uprops[env.DEAF].extrinsic",
+      "original": "u.uprops[DEAF].extrinsic"
+    },
+    "Deaf": {
+      "params": null,
+      "expression": "(env.HDeaf || env.EDeaf || env.u.uroleplay.deaf)",
+      "original": "(HDeaf || EDeaf || u.uroleplay.deaf)"
+    },
+    "HDetect_monsters": {
+      "params": null,
+      "expression": "env.u.uprops[env.DETECT_MONSTERS].intrinsic",
+      "original": "u.uprops[DETECT_MONSTERS].intrinsic"
+    },
+    "EDetect_monsters": {
+      "params": null,
+      "expression": "env.u.uprops[env.DETECT_MONSTERS].extrinsic",
+      "original": "u.uprops[DETECT_MONSTERS].extrinsic"
+    },
+    "Detect_monsters": {
+      "params": null,
+      "expression": "(env.HDetect_monsters || env.EDetect_monsters)",
+      "original": "(HDetect_monsters || EDetect_monsters)"
+    },
+    "HDisplaced": {
+      "params": null,
+      "expression": "env.u.uprops[env.DISPLACED].intrinsic",
+      "original": "u.uprops[DISPLACED].intrinsic"
+    },
+    "EDisplaced": {
+      "params": null,
+      "expression": "env.u.uprops[env.DISPLACED].extrinsic",
+      "original": "u.uprops[DISPLACED].extrinsic"
+    },
+    "Displaced": {
+      "params": null,
+      "expression": "(env.HDisplaced || env.EDisplaced)",
+      "original": "(HDisplaced || EDisplaced)"
+    },
+    "EProtection": {
+      "params": null,
+      "expression": "env.u.uprops[env.PROTECTION].extrinsic",
+      "original": "u.uprops[PROTECTION].extrinsic"
+    },
+    "HFast": {
+      "params": null,
+      "expression": "env.u.uprops[env.FAST].intrinsic",
+      "original": "u.uprops[FAST].intrinsic"
+    },
+    "EFast": {
+      "params": null,
+      "expression": "env.u.uprops[env.FAST].extrinsic",
+      "original": "u.uprops[FAST].extrinsic"
+    },
+    "Fast": {
+      "params": null,
+      "expression": "(env.HFast || env.EFast)",
+      "original": "(HFast || EFast)"
+    },
+    "HFire_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.FIRE_RES].intrinsic",
+      "original": "u.uprops[FIRE_RES].intrinsic"
+    },
+    "EFire_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.FIRE_RES].extrinsic",
+      "original": "u.uprops[FIRE_RES].extrinsic"
+    },
+    "Fire_resistance": {
+      "params": null,
+      "expression": "(env.HFire_resistance || env.EFire_resistance)",
+      "original": "(HFire_resistance || EFire_resistance)"
+    },
+    "HHallucination": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALLUC].intrinsic",
+      "original": "u.uprops[HALLUC].intrinsic"
+    },
+    "HProtection": {
+      "params": null,
+      "expression": "env.u.uprops[env.PROTECTION].intrinsic",
+      "original": "u.uprops[PROTECTION].intrinsic"
+    },
+    "HStun": {
+      "params": null,
+      "expression": "env.u.uprops[env.STUNNED].intrinsic",
+      "original": "u.uprops[STUNNED].intrinsic"
+    },
+    "HHalf_physical_damage": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALF_PHDAM].intrinsic",
+      "original": "u.uprops[HALF_PHDAM].intrinsic"
+    },
+    "EHalf_physical_damage": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALF_PHDAM].extrinsic",
+      "original": "u.uprops[HALF_PHDAM].extrinsic"
+    },
+    "Half_physical_damage": {
+      "params": null,
+      "expression": "(env.HHalf_physical_damage || env.EHalf_physical_damage)",
+      "original": "(HHalf_physical_damage || EHalf_physical_damage)"
+    },
+    "HHalluc_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALLUC_RES].intrinsic",
+      "original": "u.uprops[HALLUC_RES].intrinsic"
+    },
+    "EHalluc_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALLUC_RES].extrinsic",
+      "original": "u.uprops[HALLUC_RES].extrinsic"
+    },
+    "Halluc_resistance": {
+      "params": null,
+      "expression": "(env.HHalluc_resistance || env.EHalluc_resistance)",
+      "original": "(HHalluc_resistance || EHalluc_resistance)"
+    },
+    "Hallucination": {
+      "params": null,
+      "expression": "(env.HHallucination && !env.Halluc_resistance)",
+      "original": "(HHallucination && !Halluc_resistance)"
+    },
+    "Inhell": {
+      "params": null,
+      "expression": "env.In_hell(env.u.uz)",
+      "original": "In_hell(&u.uz)"
+    },
+    "HInvis": {
+      "params": null,
+      "expression": "env.u.uprops[env.INVIS].intrinsic",
+      "original": "u.uprops[INVIS].intrinsic"
+    },
+    "EInvis": {
+      "params": null,
+      "expression": "env.u.uprops[env.INVIS].extrinsic",
+      "original": "u.uprops[INVIS].extrinsic"
+    },
+    "BInvis": {
+      "params": null,
+      "expression": "env.u.uprops[env.INVIS].blocked",
+      "original": "u.uprops[INVIS].blocked"
+    },
+    "Invis": {
+      "params": null,
+      "expression": "((env.HInvis || env.EInvis) && !env.BInvis)",
+      "original": "((HInvis || EInvis) && !BInvis)"
+    },
+    "Lassigned": {
+      "params": [
+        "y"
+      ],
+      "expression": "Number(Boolean(((y).dlevel || (y).dnum)))",
+      "original": "((y)->dlevel || (y)->dnum)"
+    },
+    "Lcheck": {
+      "params": [
+        "x",
+        "z"
+      ],
+      "expression": "Number(Boolean((env.Lassigned(z) && env.on_level(x, z))))",
+      "original": "(Lassigned(z) && on_level(x, z))"
+    },
+    "rogue_level": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_rogue_level)",
+      "original": "(svd.dungeon_topology.d_rogue_level)"
+    },
+    "Is_rogue_level": {
+      "params": [
+        "x"
+      ],
+      "expression": "(env.Lcheck(x, env.rogue_level))",
+      "original": "(Lcheck(x, &rogue_level))"
+    },
+    "MON_WEP": {
+      "params": [
+        "mon"
+      ],
+      "expression": "((mon).mw)",
+      "original": "((mon)->mw)"
+    },
+    "Maybe_Half_Phys": {
+      "params": [
+        "dmg"
+      ],
+      "expression": "((env.Half_physical_damage)?Math.trunc((dmg+1)/2):dmg)",
+      "original": "((Half_physical_damage) ? (((dmg) + 1) / 2) : (dmg))"
+    },
+    "HProtection_from_shape_changers": {
+      "params": null,
+      "expression": "env.u.uprops[env.PROT_FROM_SHAPE_CHANGERS].intrinsic",
+      "original": "u.uprops[PROT_FROM_SHAPE_CHANGERS].intrinsic"
+    },
+    "EProtection_from_shape_changers": {
+      "params": null,
+      "expression": "env.u.uprops[env.PROT_FROM_SHAPE_CHANGERS].extrinsic",
+      "original": "u.uprops[PROT_FROM_SHAPE_CHANGERS].extrinsic"
+    },
+    "Protection_from_shape_changers": {
+      "params": null,
+      "expression": "(env.HProtection_from_shape_changers || env.EProtection_from_shape_changers)",
+      "original": "(HProtection_from_shape_changers || EProtection_from_shape_changers)"
+    },
+    "Punished": {
+      "params": null,
+      "expression": "(env.uball != 0)",
+      "original": "(uball != 0)"
+    },
+    "HReflecting": {
+      "params": null,
+      "expression": "env.u.uprops[env.REFLECTING].intrinsic",
+      "original": "u.uprops[REFLECTING].intrinsic"
+    },
+    "EReflecting": {
+      "params": null,
+      "expression": "env.u.uprops[env.REFLECTING].extrinsic",
+      "original": "u.uprops[REFLECTING].extrinsic"
+    },
+    "Reflecting": {
+      "params": null,
+      "expression": "(env.HReflecting || env.EReflecting)",
+      "original": "(HReflecting || EReflecting)"
+    },
+    "Role_if": {
+      "params": [
+        "X"
+      ],
+      "expression": "Number(Boolean((env.gu.urole.mnum == (X))))",
+      "original": "(gu.urole.mnum == (X))"
+    },
+    "SIZE": {
+      "params": [
+        "x"
+      ],
+      "expression": "x.length",
+      "original": "(int)(sizeof(x) / sizeof(x[0]))"
+    },
+    "SYSOPT_SEDUCE": {
+      "params": null,
+      "expression": "env.sysopt.seduce",
+      "original": "sysopt.seduce"
+    },
+    "HSee_invisible": {
+      "params": null,
+      "expression": "env.u.uprops[env.SEE_INVIS].intrinsic",
+      "original": "u.uprops[SEE_INVIS].intrinsic"
+    },
+    "ESee_invisible": {
+      "params": null,
+      "expression": "env.u.uprops[env.SEE_INVIS].extrinsic",
+      "original": "u.uprops[SEE_INVIS].extrinsic"
+    },
+    "See_invisible": {
+      "params": null,
+      "expression": "(env.HSee_invisible || env.ESee_invisible)",
+      "original": "(HSee_invisible || ESee_invisible)"
+    },
+    "SetVoice": {
+      "params": [
+        "mon",
+        "tone",
+        "vol",
+        "moreinfo"
+      ],
+      "expression": "undefined",
+      "original": ""
+    },
+    "HShock_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.SHOCK_RES].intrinsic",
+      "original": "u.uprops[SHOCK_RES].intrinsic"
+    },
+    "EShock_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.SHOCK_RES].extrinsic",
+      "original": "u.uprops[SHOCK_RES].extrinsic"
+    },
+    "Shock_resistance": {
+      "params": null,
+      "expression": "(env.HShock_resistance || env.EShock_resistance)",
+      "original": "(HShock_resistance || EShock_resistance)"
+    },
+    "Sick": {
+      "params": null,
+      "expression": "env.u.uprops[env.SICK].intrinsic",
+      "original": "u.uprops[SICK].intrinsic"
+    },
+    "HSick_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.SICK_RES].intrinsic",
+      "original": "u.uprops[SICK_RES].intrinsic"
+    },
+    "ESick_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.SICK_RES].extrinsic",
+      "original": "u.uprops[SICK_RES].extrinsic"
+    },
+    "Sick_resistance": {
+      "params": null,
+      "expression": "(env.HSick_resistance || env.ESick_resistance || env.defended(env.gy.youmonst, env.AD_DISE))",
+      "original": "(HSick_resistance || ESick_resistance || defended(&gy.youmonst, AD_DISE))"
+    },
+    "HSlow_digestion": {
+      "params": null,
+      "expression": "env.u.uprops[env.SLOW_DIGESTION].intrinsic",
+      "original": "u.uprops[SLOW_DIGESTION].intrinsic"
+    },
+    "ESlow_digestion": {
+      "params": null,
+      "expression": "env.u.uprops[env.SLOW_DIGESTION].extrinsic",
+      "original": "u.uprops[SLOW_DIGESTION].extrinsic"
+    },
+    "Slow_digestion": {
+      "params": null,
+      "expression": "(env.HSlow_digestion || env.ESlow_digestion)",
+      "original": "(HSlow_digestion || ESlow_digestion)"
+    },
+    "Something": {
+      "params": null,
+      "expression": "env.c_common_strings.c_Something",
+      "original": "c_common_strings.c_Something"
+    },
+    "Soundeffect": {
+      "params": [
+        "seid",
+        "vol"
+      ],
+      "expression": "undefined",
+      "original": ""
+    },
+    "HStone_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.STONE_RES].intrinsic",
+      "original": "u.uprops[STONE_RES].intrinsic"
+    },
+    "EStone_resistance": {
+      "params": null,
+      "expression": "env.u.uprops[env.STONE_RES].extrinsic",
+      "original": "u.uprops[STONE_RES].extrinsic"
+    },
+    "Stone_resistance": {
+      "params": null,
+      "expression": "(env.HStone_resistance || env.EStone_resistance)",
+      "original": "(HStone_resistance || EStone_resistance)"
+    },
+    "U_AP_TYPE": {
+      "params": null,
+      "expression": "(env.gy.youmonst.m_ap_type & env.M_AP_TYPMASK)",
+      "original": "(gy.youmonst.m_ap_type & M_AP_TYPMASK)"
+    },
+    "Upolyd": {
+      "params": null,
+      "expression": "(env.u.umonnum != env.u.umonster)",
+      "original": "(u.umonnum != u.umonster)"
+    },
+    "Ugender": {
+      "params": null,
+      "expression": "((env.Upolyd ? env.u.mfemale : env.flags.female) ? 1 : 0)",
+      "original": "((Upolyd ? u.mfemale : flags.female) ? 1 : 0)"
+    },
+    "Unaware": {
+      "params": null,
+      "expression": "(env.gm.multi < 0 && (env.unconscious() || env.is_fainted()))",
+      "original": "(gm.multi < 0 && (unconscious() || is_fainted()))"
+    },
+    "Underwater": {
+      "params": null,
+      "expression": "(env.u.uinwater)",
+      "original": "(u.uinwater)"
+    },
+    "Your1": {
+      "params": [
+        "cstr"
+      ],
+      "expression": "env.Your(\"%s\", cstr)",
+      "original": "Your(\"%s\", cstr)"
+    },
+    "amorphous": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_AMORPHOUS) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_AMORPHOUS) != 0L)"
+    },
+    "cansee": {
+      "params": [
+        "x",
+        "y"
+      ],
+      "expression": "Number(Boolean(((env.gv.viz_array[y][x] & env.IN_SIGHT) != 0)))",
+      "original": "((gv.viz_array[y][x] & IN_SIGHT) != 0)"
+    },
+    "canspotmon": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean((env.canseemon(mon) || env.sensemon(mon))))",
+      "original": "(canseemon(mon) || sensemon(mon))"
+    },
+    "digests": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.dmgtype_fromattack((ptr), env.AD_DGST, env.AT_ENGL) != 0)))",
+      "original": "(dmgtype_fromattack((ptr), AD_DGST, AT_ENGL) != 0)"
+    },
+    "display_nhwindow": {
+      "params": null,
+      "expression": "env.services.displayWindow",
+      "original": "(*windowprocs.win_display_nhwindow)"
+    },
+    "enfolds": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.dmgtype_fromattack((ptr), env.AD_WRAP, env.AT_ENGL) != 0)))",
+      "original": "(dmgtype_fromattack((ptr), AD_WRAP, AT_ENGL) != 0)"
+    },
+    "flaming": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr) == env.mons[env.PM_FIRE_VORTEX] || (ptr) == env.mons[env.PM_FLAMING_SPHERE] || (ptr) == env.mons[env.PM_FIRE_ELEMENTAL] || (ptr) == env.mons[env.PM_SALAMANDER])))",
+      "original": "((ptr) == &mons[PM_FIRE_VORTEX] || (ptr) == &mons[PM_FLAMING_SPHERE] || (ptr) == &mons[PM_FIRE_ELEMENTAL] || (ptr) == &mons[PM_SALAMANDER])"
+    },
+    "haseyes": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_NOEYES) == 0n)))",
+      "original": "(((ptr)->mflags1 & M1_NOEYES) == 0L)"
+    },
+    "hides_under": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_CONCEAL) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_CONCEAL) != 0L)"
+    },
+    "is_animal": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_ANIMAL) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_ANIMAL) != 0L)"
+    },
+    "is_demon": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_DEMON) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_DEMON) != 0L)"
+    },
+    "is_hider": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_HIDE) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_HIDE) != 0L)"
+    },
+    "is_human": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_HUMAN) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_HUMAN) != 0L)"
+    },
+    "is_minion": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_MINION) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_MINION) != 0L)"
+    },
+    "is_orc": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_ORC) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_ORC) != 0L)"
+    },
+    "is_pit": {
+      "params": [
+        "ttyp"
+      ],
+      "expression": "Number(Boolean(((ttyp) == env.PIT || (ttyp) == env.SPIKED_PIT)))",
+      "original": "((ttyp) == PIT || (ttyp) == SPIKED_PIT)"
+    },
+    "is_pole": {
+      "params": [
+        "otmp"
+      ],
+      "expression": "Number(Boolean(((otmp.oclass == env.WEAPON_CLASS || otmp.oclass == env.TOOL_CLASS) && (env.objects[otmp.otyp].oc_skill == env.P_POLEARMS || env.objects[otmp.otyp].oc_skill == env.P_LANCE || env.is_art(otmp, env.ART_SNICKERSNEE)))))",
+      "original": "((otmp->oclass == WEAPON_CLASS || otmp->oclass == TOOL_CLASS) && (objects[otmp->otyp].oc_skill == P_POLEARMS || objects[otmp->otyp].oc_skill == P_LANCE || is_art(otmp, ART_SNICKERSNEE)))"
+    },
+    "is_swimmer": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_SWIM) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_SWIM) != 0L)"
+    },
+    "is_undead": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_UNDEAD) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_UNDEAD) != 0L)"
+    },
+    "is_vampshifter": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean(((mon).cham == env.PM_VAMPIRE || (mon).cham == env.PM_VAMPIRE_LEADER || (mon).cham == env.PM_VLAD_THE_IMPALER)))",
+      "original": "((mon)->cham == PM_VAMPIRE || (mon)->cham == PM_VAMPIRE_LEADER || (mon)->cham == PM_VLAD_THE_IMPALER)"
+    },
+    "is_weptool": {
+      "params": [
+        "o"
+      ],
+      "expression": "Number(Boolean(((o).oclass == env.TOOL_CLASS && env.objects[(o).otyp].oc_skill != env.P_NONE)))",
+      "original": "((o)->oclass == TOOL_CLASS && objects[(o)->otyp].oc_skill != P_NONE)"
+    },
+    "is_were": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_WERE) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_WERE) != 0L)"
+    },
+    "is_wet_towel": {
+      "params": [
+        "o"
+      ],
+      "expression": "Number(Boolean(((o).otyp == env.TOWEL && (o).spe > 0)))",
+      "original": "((o)->otyp == TOWEL && (o)->spe > 0)"
+    },
+    "is_whirly": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).mlet == env.S_VORTEX || (ptr) == env.mons[env.PM_AIR_ELEMENTAL])))",
+      "original": "((ptr)->mlet == S_VORTEX || (ptr) == &mons[PM_AIR_ELEMENTAL])"
+    },
+    "likes_gold": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_GREEDY) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_GREEDY) != 0L)"
+    },
+    "m_at": {
+      "params": [
+        "x",
+        "y"
+      ],
+      "expression": "(env.svl.level.monsters[x][y])",
+      "original": "(svl.level.monsters[x][y])"
+    },
+    "perceives": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_SEE_INVIS) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_SEE_INVIS) != 0L)"
+    },
+    "m_canseeu": {
+      "params": [
+        "m"
+      ],
+      "expression": "Number(Boolean(((!env.Invis || env.perceives((m).data)) && !env.Underwater && env.couldsee((m).mx, (m).my))))",
+      "original": "((!Invis || perceives((m)->data)) && !Underwater && couldsee((m)->mx, (m)->my))"
+    },
+    "m_next2u": {
+      "params": [
+        "m"
+      ],
+      "expression": "Number(Boolean((env.distu((m).mx,(m).my) <= 2)))",
+      "original": "(distu((m)->mx,(m)->my) <= 2)"
+    },
+    "m_seenres": {
+      "params": [
+        "mon",
+        "mask"
+      ],
+      "expression": "((mon).seen_resistance & (mask))",
+      "original": "((mon)->seen_resistance & (mask))"
+    },
+    "makeknown": {
+      "params": [
+        "x"
+      ],
+      "expression": "env.discover_object((x), 1, 1, 1)",
+      "original": "discover_object((x), TRUE, TRUE, TRUE)"
+    },
+    "max": {
+      "params": [
+        "a",
+        "b"
+      ],
+      "expression": "((a) > (b) ? (a) : (b))",
+      "original": "((a) > (b) ? (a) : (b))"
+    },
+    "mdistu": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.distu((mon).mx, (mon).my)",
+      "original": "distu((mon)->mx, (mon)->my)"
+    },
+    "mhe": {
+      "params": [
+        "mtmp"
+      ],
+      "expression": "(env.genders[env.pronoun_gender(mtmp, env.PRONOUN_HALLU)].he)",
+      "original": "(genders[pronoun_gender(mtmp, PRONOUN_HALLU)].he)"
+    },
+    "mhis": {
+      "params": [
+        "mtmp"
+      ],
+      "expression": "(env.genders[env.pronoun_gender(mtmp, env.PRONOUN_HALLU)].his)",
+      "original": "(genders[pronoun_gender(mtmp, PRONOUN_HALLU)].his)"
+    },
+    "min": {
+      "params": [
+        "x",
+        "y"
+      ],
+      "expression": "((x) < (y) ? (x) : (y))",
+      "original": "((x) < (y) ? (x) : (y))"
+    },
+    "monsndx": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "((ptr).pmidx)",
+      "original": "((ptr)->pmidx)"
+    },
+    "noit_mhim": {
+      "params": [
+        "mtmp"
+      ],
+      "expression": "(env.genders[env.pronoun_gender(mtmp, (env.PRONOUN_NO_IT | env.PRONOUN_HALLU))].him)",
+      "original": "(genders[pronoun_gender(mtmp, (PRONOUN_NO_IT | PRONOUN_HALLU))].him)"
+    },
+    "nolimbs": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_NOLIMBS) == env.M1_NOLIMBS)))",
+      "original": "(((ptr)->mflags1 & M1_NOLIMBS) == M1_NOLIMBS)"
+    },
+    "remove_monster": {
+      "params": [
+        "x",
+        "y"
+      ],
+      "expression": "env.svl.level.monsters[x][y] = 0",
+      "original": "svl.level.monsters[x][y] = (struct monst *) 0"
+    },
+    "resists_acid": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.Resists_Elem(mon, env.ACID_RES)",
+      "original": "Resists_Elem(mon, ACID_RES)"
+    },
+    "resists_cold": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.Resists_Elem(mon, env.COLD_RES)",
+      "original": "Resists_Elem(mon, COLD_RES)"
+    },
+    "resists_elec": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.Resists_Elem(mon, env.SHOCK_RES)",
+      "original": "Resists_Elem(mon, SHOCK_RES)"
+    },
+    "resists_fire": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.Resists_Elem(mon, env.FIRE_RES)",
+      "original": "Resists_Elem(mon, FIRE_RES)"
+    },
+    "resists_ston": {
+      "params": [
+        "mon"
+      ],
+      "expression": "env.Resists_Elem(mon, env.STONE_RES)",
+      "original": "Resists_Elem(mon, STONE_RES)"
+    },
+    "something": {
+      "params": null,
+      "expression": "env.c_common_strings.c_something",
+      "original": "c_common_strings.c_something"
+    },
+    "thick_skinned": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_THICK_HIDE) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_THICK_HIDE) != 0L)"
+    },
+    "touch_petrifies": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr) == env.mons[env.PM_COCKATRICE] || (ptr) == env.mons[env.PM_CHICKATRICE])))",
+      "original": "((ptr) == &mons[PM_COCKATRICE] || (ptr) == &mons[PM_CHICKATRICE])"
+    },
+    "u_at": {
+      "params": [
+        "x",
+        "y"
+      ],
+      "expression": "Number(Boolean(((x) == env.u.ux && (y) == env.u.uy)))",
+      "original": "((x) == u.ux && (y) == u.uy)"
+    },
+    "unsolid": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags1 & env.M1_UNSOLID) != 0n)))",
+      "original": "(((ptr)->mflags1 & M1_UNSOLID) != 0L)"
+    },
+    "vision_clears": {
+      "params": null,
+      "expression": "env.c_common_strings.c_vision_clears",
+      "original": "c_common_strings.c_vision_clears"
+    },
+    "y_n": {
+      "params": [
+        "query"
+      ],
+      "expression": "env.yn_function(query, env.ynchars, 110, 1)",
+      "original": "yn_function(query, ynchars, 'n', TRUE)"
+    }
+  },
+  "variadicABI": {
+    "pline_mon_ppppp": {
+      "name": "pline_mon",
+      "types": [
+        "struct monst *",
+        "const char *",
+        "char *",
+        "char *",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "pline_mon_pppppp": {
+      "name": "pline_mon",
+      "types": [
+        "struct monst *",
+        "const char *",
+        "char *",
+        "char *",
+        "char *",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "pline_mon_ppp": {
+      "name": "pline_mon",
+      "types": [
+        "struct monst *",
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_mon_pppp": {
+      "name": "pline_mon",
+      "types": [
+        "struct monst *",
+        "const char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_mon_ppppppp": {
+      "name": "pline_mon",
+      "types": [
+        "struct monst *",
+        "const char *",
+        "char *",
+        "const char *",
+        "char *",
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_p": {
+      "name": "You",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "Your_p": {
+      "name": "Your",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "impossible_pp": {
+      "name": "impossible",
+      "types": [
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_pp": {
+      "name": "pline",
+      "types": [
+        "const char *",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "pline_ppp": {
+      "name": "pline",
+      "types": [
+        "const char *",
+        "const char *",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "pline_pppp": {
+      "name": "pline",
+      "types": [
+        "const char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "impossible_p": {
+      "name": "impossible",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "You_ppp": {
+      "name": "You",
+      "types": [
+        "const char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_p": {
+      "name": "pline",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "You_pp": {
+      "name": "You",
+      "types": [
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "Your_ppp": {
+      "name": "Your",
+      "types": [
+        "const char *",
+        "char *",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "pline_ppppp": {
+      "name": "pline",
+      "types": [
+        "const char *",
+        "char *",
+        "const char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "sprintf_ppp": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "const char *",
+        "const char *"
+      ],
+      "ret": "int"
+    },
+    "You_feel_pp": {
+      "name": "You_feel",
+      "types": [
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_hear_pp": {
+      "name": "You_hear",
+      "types": [
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_feel_p": {
+      "name": "You_feel",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "pline_The_p": {
+      "name": "pline_The",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "urgent_pline_pppp": {
+      "name": "urgent_pline",
+      "types": [
+        "const char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "urgent_pline_ppp": {
+      "name": "urgent_pline",
+      "types": [
+        "const char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_The_ppp": {
+      "name": "pline_The",
+      "types": [
+        "const char *",
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "You_cant_p": {
+      "name": "You_cant",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "Your_pp": {
+      "name": "Your",
+      "types": [
+        "const char *",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "impossible_pi": {
+      "name": "impossible",
+      "types": [
+        "const char *",
+        "int"
+      ],
+      "ret": "void"
+    },
+    "urgent_pline_p": {
+      "name": "urgent_pline",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "verbalize_pp": {
+      "name": "verbalize",
+      "types": [
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "verbalize_ppp": {
+      "name": "verbalize",
+      "types": [
+        "const char *",
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "urgent_pline_pp": {
+      "name": "urgent_pline",
+      "types": [
+        "const char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "verbalize_p": {
+      "name": "verbalize",
+      "types": [
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "pline_mon_ppplp": {
+      "name": "pline_mon",
+      "types": [
+        "struct monst *",
+        "const char *",
+        "char *",
+        "long",
+        "const char *"
+      ],
+      "ret": "void"
+    },
+    "sprintf_pppp": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "const char *",
+        "const char *",
+        "char *"
+      ],
+      "ret": "int"
+    }
+  }
+}

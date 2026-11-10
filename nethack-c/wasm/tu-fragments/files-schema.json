@@ -1,0 +1,3339 @@
+{
+  "names": [
+    "nh_basename",
+    "fname_encode",
+    "fname_decode",
+    "fqname",
+    "validate_prefix_locations",
+    "fopen_datafile",
+    "init_nhfile",
+    "new_nhfile",
+    "free_nhfile",
+    "close_nhfile",
+    "rewind_nhfile",
+    "viable_nhfile",
+    "nhclose",
+    "set_levelfile_name",
+    "create_levelfile",
+    "open_levelfile",
+    "delete_levelfile",
+    "clearlocks",
+    "strcmp_wrap",
+    "set_bonesfile_name",
+    "set_bonestemp_name",
+    "create_bonesfile",
+    "commit_bonesfile",
+    "open_bonesfile",
+    "delete_bonesfile",
+    "compress_bonesfile",
+    "set_savefile_name",
+    "save_savefile_name",
+    "set_error_savefile",
+    "create_savefile",
+    "open_savefile",
+    "delete_savefile",
+    "restore_saved_game",
+    "get_freeing_nhfile",
+    "check_panic_save",
+    "plname_from_file",
+    "get_saved_games",
+    "free_saved_games",
+    "redirect",
+    "docompress_file",
+    "nh_compress",
+    "nh_uncompress",
+    "problematic_savefile",
+    "doconvert_file",
+    "nh_sfconvert",
+    "nh_sfunconvert",
+    "make_converted_name",
+    "delete_convertedfile",
+    "free_convert_filenames",
+    "contains_directory",
+    "lock_file",
+    "unlock_file",
+    "fopen_wizkit_file",
+    "wizkit_addinv",
+    "proc_wizkit_line",
+    "read_wizkit",
+    "fopen_sym_file",
+    "read_sym_file",
+    "check_recordfile",
+    "paniclog",
+    "testinglog",
+    "do_deferred_showpaths",
+    "debugcore",
+    "reveal_paths",
+    "choose_passage",
+    "read_tribute",
+    "Death_quote",
+    "livelog_add"
+  ],
+  "private": [
+    "new_nhfile",
+    "free_nhfile",
+    "viable_nhfile",
+    "strcmp_wrap",
+    "set_bonesfile_name",
+    "set_bonestemp_name",
+    "redirect",
+    "docompress_file",
+    "problematic_savefile",
+    "doconvert_file",
+    "make_converted_name",
+    "fopen_wizkit_file",
+    "wizkit_addinv",
+    "fopen_sym_file",
+    "choose_passage"
+  ],
+  "schema": {
+    "Align": {
+      "ctype": "struct Align",
+      "fields": [
+        {
+          "name": "filecode",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "Gender": {
+      "ctype": "struct Gender",
+      "fields": [
+        {
+          "name": "filecode",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "Race": {
+      "ctype": "struct Race",
+      "fields": [
+        {
+          "name": "filecode",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "Role": {
+      "ctype": "struct Role",
+      "fields": [
+        {
+          "name": "filecode",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mnum",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "align": {
+      "ctype": "struct align",
+      "fields": [
+        {
+          "name": "type",
+          "ctype": "aligntyp",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "context_info": {
+      "ctype": "struct context_info",
+      "fields": [
+        {
+          "name": "novel",
+          "ctype": "struct novel_tracking",
+          "canonical": "struct novel_tracking",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "d_level": {
+      "ctype": "struct d_level",
+      "fields": [
+        {
+          "name": "dnum",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "dlevel",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "dirent": {
+      "ctype": "struct dirent",
+      "fields": [
+        {
+          "name": "d_name",
+          "ctype": "char[256]",
+          "canonical": "char[256]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "dungeon": {
+      "ctype": "struct dungeon",
+      "fields": [
+        {
+          "name": "boneid",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "fieldlevel_content": {
+      "ctype": "struct fieldlevel_content",
+      "fields": [
+        {
+          "name": "deflt",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "binary",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "flag": {
+      "ctype": "struct flag",
+      "fields": [
+        {
+          "name": "debug",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "explore",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "female",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "flock": {
+      "ctype": "struct flock",
+      "fields": [
+        {
+          "name": "l_type",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false
+        },
+        {
+          "name": "l_whence",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false
+        },
+        {
+          "name": "l_start",
+          "ctype": "off_t",
+          "canonical": "long long",
+          "bit": false
+        },
+        {
+          "name": "l_len",
+          "ctype": "off_t",
+          "canonical": "long long",
+          "bit": false
+        },
+        {
+          "name": "l_pid",
+          "ctype": "pid_t",
+          "canonical": "int",
+          "bit": false
+        }
+      ]
+    },
+    "instance_flags": {
+      "ctype": "struct instance_flags",
+      "fields": [
+        {
+          "name": "last_msg",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "window_inited",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_b": {
+      "ctype": "struct instance_globals_b",
+      "fields": [
+        {
+          "name": "bones",
+          "ctype": "char[15]",
+          "canonical": "char[15]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_c": {
+      "ctype": "struct instance_globals_c",
+      "fields": [
+        {
+          "name": "chosen_symset_start",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "chosen_symset_end",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_d": {
+      "ctype": "struct instance_globals_d",
+      "fields": [
+        {
+          "name": "deferred_showpaths",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "deferred_showpaths_dir",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_h": {
+      "ctype": "struct instance_globals_h",
+      "fields": [
+        {
+          "name": "hname",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_i": {
+      "ctype": "struct instance_globals_i",
+      "fields": [
+        {
+          "name": "invent",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_l": {
+      "ctype": "struct instance_globals_l",
+      "fields": [
+        {
+          "name": "lock",
+          "ctype": "char[46]",
+          "canonical": "char[46]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_n": {
+      "ctype": "struct instance_globals_n",
+      "fields": [
+        {
+          "name": "nesting",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_s": {
+      "ctype": "struct instance_globals_s",
+      "fields": [
+        {
+          "name": "symset",
+          "ctype": "struct symsetentry[2]",
+          "canonical": "struct symsetentry[2]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "symset_count",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "symset_which_set",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "SAVEF",
+          "ctype": "char[54]",
+          "canonical": "char[54]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_c": {
+      "ctype": "struct instance_globals_saved_c",
+      "fields": [
+        {
+          "name": "context",
+          "ctype": "struct context_info",
+          "canonical": "struct context_info",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_d": {
+      "ctype": "struct instance_globals_saved_d",
+      "fields": [
+        {
+          "name": "dungeons",
+          "ctype": "dungeon[16]",
+          "canonical": "struct dungeon[16]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_l": {
+      "ctype": "struct instance_globals_saved_l",
+      "fields": [
+        {
+          "name": "level_info",
+          "ctype": "struct linfo[512]",
+          "canonical": "struct linfo[512]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_m": {
+      "ctype": "struct instance_globals_saved_m",
+      "fields": [
+        {
+          "name": "moves",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_n": {
+      "ctype": "struct instance_globals_saved_n",
+      "fields": [
+        {
+          "name": "n_dgns",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_p": {
+      "ctype": "struct instance_globals_saved_p",
+      "fields": [
+        {
+          "name": "plname",
+          "ctype": "char[32]",
+          "canonical": "char[32]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_u": {
+      "ctype": "struct instance_globals_u",
+      "fields": [
+        {
+          "name": "urole",
+          "ctype": "struct Role",
+          "canonical": "struct Role",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "urace",
+          "ctype": "struct Race",
+          "canonical": "struct Race",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_w": {
+      "ctype": "struct instance_globals_w",
+      "fields": [
+        {
+          "name": "wizkit",
+          "ctype": "char[128]",
+          "canonical": "char[128]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "linfo": {
+      "ctype": "struct linfo",
+      "fields": [
+        {
+          "name": "flags",
+          "ctype": "unsigned char",
+          "canonical": "unsigned char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "nh_file": {
+      "ctype": "struct nh_file",
+      "fields": [
+        {
+          "name": "fd",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mode",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ftype",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "fnidx",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "rcount",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "wcount",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "structlevel",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "fieldlevel",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "addinfo",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "eof",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "bendian",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "fpdef",
+          "ctype": "FILE *",
+          "canonical": "struct _IO_FILE *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "fplog",
+          "ctype": "FILE *",
+          "canonical": "struct _IO_FILE *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "fpdebug",
+          "ctype": "FILE *",
+          "canonical": "struct _IO_FILE *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "style",
+          "ctype": "struct fieldlevel_content",
+          "canonical": "struct fieldlevel_content",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "nhfpconvert",
+          "ctype": "struct nh_file *",
+          "canonical": "struct nh_file *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "novel_tracking": {
+      "ctype": "struct novel_tracking",
+      "fields": [
+        {
+          "name": "id",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "count",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "pasg",
+          "ctype": "xint8[30]",
+          "canonical": "signed char[30]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "obj": {
+      "ctype": "struct obj",
+      "fields": [
+        {
+          "name": "ox",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oclass",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "bknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "owornmask",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "s_level": {
+      "ctype": "struct s_level",
+      "fields": [
+        {
+          "name": "boneid",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "sfstatus_to_msg": {
+      "ctype": "struct sfstatus_to_msg",
+      "fields": [
+        {
+          "name": "sfstatus",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false
+        },
+        {
+          "name": "msg",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false
+        }
+      ]
+    },
+    "sinfo": {
+      "ctype": "struct sinfo",
+      "fields": [
+        {
+          "name": "done_hup",
+          "ctype": "volatile int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "preserve_locks",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "in_self_recover",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "in_paniclog",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "wizkit_wishing",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "symsetentry": {
+      "ctype": "struct symsetentry",
+      "fields": [
+        {
+          "name": "name",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "explicitly",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        }
+      ]
+    },
+    "sysopt_s": {
+      "ctype": "struct sysopt_s",
+      "fields": [
+        {
+          "name": "debugfiles",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "bones_pools",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "livelog",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "bonesformat",
+          "ctype": "int[2]",
+          "canonical": "int[2]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "window_procs": {
+      "ctype": "struct window_procs",
+      "fields": [
+        {
+          "name": "wp_id",
+          "ctype": "enum wp_ids",
+          "canonical": "enum wp_ids",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_create_nhwindow",
+          "ctype": "winid (*)(int)",
+          "canonical": "int (*)(int)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_clear_nhwindow",
+          "ctype": "void (*)(winid)",
+          "canonical": "void (*)(winid)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_display_nhwindow",
+          "ctype": "void (*)(winid, boolean)",
+          "canonical": "void (*)(winid, boolean)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_destroy_nhwindow",
+          "ctype": "void (*)(winid)",
+          "canonical": "void (*)(winid)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_putstr",
+          "ctype": "void (*)(winid, int, const char *)",
+          "canonical": "void (*)(winid, int, char *)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_mark_synch",
+          "ctype": "void (*)(void)",
+          "canonical": "void (*)(void)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_wait_synch",
+          "ctype": "void (*)(void)",
+          "canonical": "void (*)(void)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_raw_print",
+          "ctype": "void (*)(const char *)",
+          "canonical": "void (*)( char *)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_putmsghistory",
+          "ctype": "void (*)(const char *, boolean)",
+          "canonical": "void (*)( char *, boolean)",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "you": {
+      "ctype": "struct you",
+      "fields": [
+        {
+          "name": "ualign",
+          "ctype": "align",
+          "canonical": "struct align",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    }
+  },
+  "globals": [
+    {
+      "name": "gl",
+      "ctype": "struct instance_globals_l",
+      "canonical": "struct instance_globals_l"
+    },
+    {
+      "name": "svl",
+      "ctype": "struct instance_globals_saved_l",
+      "canonical": "struct instance_globals_saved_l"
+    },
+    {
+      "name": "program_state",
+      "ctype": "struct sinfo",
+      "canonical": "struct sinfo"
+    },
+    {
+      "name": "svn",
+      "ctype": "struct instance_globals_saved_n",
+      "canonical": "struct instance_globals_saved_n"
+    },
+    {
+      "name": "sysopt",
+      "ctype": "struct sysopt_s",
+      "canonical": "struct sysopt_s"
+    },
+    {
+      "name": "ubirthday",
+      "ctype": "time_t",
+      "canonical": "long long"
+    },
+    {
+      "name": "svd",
+      "ctype": "struct instance_globals_saved_d",
+      "canonical": "struct instance_globals_saved_d"
+    },
+    {
+      "name": "gu",
+      "ctype": "struct instance_globals_u",
+      "canonical": "struct instance_globals_u"
+    },
+    {
+      "name": "gb",
+      "ctype": "struct instance_globals_b",
+      "canonical": "struct instance_globals_b"
+    },
+    {
+      "name": "flags",
+      "ctype": "struct flag",
+      "canonical": "struct flag"
+    },
+    {
+      "name": "gs",
+      "ctype": "struct instance_globals_s",
+      "canonical": "struct instance_globals_s"
+    },
+    {
+      "name": "svp",
+      "ctype": "struct instance_globals_saved_p",
+      "canonical": "struct instance_globals_saved_p"
+    },
+    {
+      "name": "stderr",
+      "ctype": "FILE *const",
+      "canonical": "struct _IO_FILE *"
+    },
+    {
+      "name": "windowprocs",
+      "ctype": "volatile struct window_procs",
+      "canonical": "struct window_procs"
+    },
+    {
+      "name": "iflags",
+      "ctype": "struct instance_flags",
+      "canonical": "struct instance_flags"
+    },
+    {
+      "name": "WIN_MESSAGE",
+      "ctype": "winid",
+      "canonical": "int"
+    },
+    {
+      "name": "gn",
+      "ctype": "struct instance_globals_n",
+      "canonical": "struct instance_globals_n"
+    },
+    {
+      "name": "gw",
+      "ctype": "struct instance_globals_w",
+      "canonical": "struct instance_globals_w"
+    },
+    {
+      "name": "hands_obj",
+      "ctype": "struct obj",
+      "canonical": "struct obj"
+    },
+    {
+      "name": "gi",
+      "ctype": "struct instance_globals_i",
+      "canonical": "struct instance_globals_i"
+    },
+    {
+      "name": "gc",
+      "ctype": "struct instance_globals_c",
+      "canonical": "struct instance_globals_c"
+    },
+    {
+      "name": "gd",
+      "ctype": "struct instance_globals_d",
+      "canonical": "struct instance_globals_d"
+    },
+    {
+      "name": "gh",
+      "ctype": "struct instance_globals_h",
+      "canonical": "struct instance_globals_h"
+    },
+    {
+      "name": "svc",
+      "ctype": "struct instance_globals_saved_c",
+      "canonical": "struct instance_globals_saved_c"
+    },
+    {
+      "name": "u",
+      "ctype": "struct you",
+      "canonical": "struct you"
+    },
+    {
+      "name": "genders",
+      "ctype": "const struct Gender[]",
+      "canonical": "struct Gender[]"
+    },
+    {
+      "name": "aligns",
+      "ctype": "const struct Align[]",
+      "canonical": "struct Align[]"
+    },
+    {
+      "name": "svm",
+      "ctype": "struct instance_globals_saved_m",
+      "canonical": "struct instance_globals_saved_m"
+    }
+  ],
+  "enums": [
+    "COIN_CLASS",
+    "PM_CLERIC",
+    "exportascii",
+    "historical",
+    "invlet_basic",
+    "wp_tty"
+  ],
+  "layoutKeys": [
+    "pointerSize",
+    "longSize",
+    "intSize",
+    "charSigned",
+    "littleEndian",
+    "size:struct Align",
+    "size:struct Gender",
+    "size:struct Race",
+    "size:struct Role",
+    "size:struct align",
+    "size:struct context_info",
+    "size:struct d_level",
+    "size:struct dirent",
+    "size:struct dungeon",
+    "size:struct fieldlevel_content",
+    "size:struct flag",
+    "size:struct flock",
+    "size:struct instance_flags",
+    "size:struct instance_globals_b",
+    "size:struct instance_globals_c",
+    "size:struct instance_globals_d",
+    "size:struct instance_globals_h",
+    "size:struct instance_globals_i",
+    "size:struct instance_globals_l",
+    "size:struct instance_globals_n",
+    "size:struct instance_globals_s",
+    "size:struct instance_globals_saved_c",
+    "size:struct instance_globals_saved_d",
+    "size:struct instance_globals_saved_l",
+    "size:struct instance_globals_saved_m",
+    "size:struct instance_globals_saved_n",
+    "size:struct instance_globals_saved_p",
+    "size:struct instance_globals_u",
+    "size:struct instance_globals_w",
+    "size:struct linfo",
+    "size:struct nh_file",
+    "size:struct novel_tracking",
+    "size:struct obj",
+    "size:struct s_level",
+    "size:struct sfstatus_to_msg",
+    "size:struct sinfo",
+    "size:struct symsetentry",
+    "size:struct sysopt_s",
+    "size:struct window_procs",
+    "size:struct you",
+    "COIN_CLASS",
+    "PM_CLERIC",
+    "exportascii",
+    "historical",
+    "invlet_basic",
+    "wp_tty"
+  ],
+  "sizes": [
+    "struct Align",
+    "struct Gender",
+    "struct Race",
+    "struct Role",
+    "struct align",
+    "struct context_info",
+    "struct d_level",
+    "struct dirent",
+    "struct dungeon",
+    "struct fieldlevel_content",
+    "struct flag",
+    "struct flock",
+    "struct instance_flags",
+    "struct instance_globals_b",
+    "struct instance_globals_c",
+    "struct instance_globals_d",
+    "struct instance_globals_h",
+    "struct instance_globals_i",
+    "struct instance_globals_l",
+    "struct instance_globals_n",
+    "struct instance_globals_s",
+    "struct instance_globals_saved_c",
+    "struct instance_globals_saved_d",
+    "struct instance_globals_saved_l",
+    "struct instance_globals_saved_m",
+    "struct instance_globals_saved_n",
+    "struct instance_globals_saved_p",
+    "struct instance_globals_u",
+    "struct instance_globals_w",
+    "struct linfo",
+    "struct nh_file",
+    "struct novel_tracking",
+    "struct obj",
+    "struct s_level",
+    "struct sfstatus_to_msg",
+    "struct sinfo",
+    "struct symsetentry",
+    "struct sysopt_s",
+    "struct window_procs",
+    "struct you"
+  ],
+  "dependencies": {
+    "strrchr": {
+      "type": "char *(const char *, int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "strncpy": {
+      "type": "char *(char *, const char *, unsigned long)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        }
+      ]
+    },
+    "strchr": {
+      "type": "char *(const char *, int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "fopen": {
+      "type": "FILE *(const char *, const char *)",
+      "ret": "struct _IO_FILE *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "fclose": {
+      "type": "int (FILE *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "FILE *",
+          "canonical": "struct _IO_FILE *"
+        }
+      ]
+    },
+    "alloc": {
+      "type": "long *(unsigned int)",
+      "ret": "long *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "memset": {
+      "type": "void *(void *, int, unsigned long)",
+      "ret": "void *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "void *",
+          "canonical": "void *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        }
+      ]
+    },
+    "free": {
+      "type": "void (void *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "void *",
+          "canonical": "void *"
+        }
+      ]
+    },
+    "lseek": {
+      "type": "off_t (int, off_t, int)",
+      "ret": "long long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "off_t",
+          "canonical": "long long"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "rewind": {
+      "type": "void (FILE *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "FILE *",
+          "canonical": "struct _IO_FILE *"
+        }
+      ]
+    },
+    "close_check": {
+      "type": "boolean (int)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "bclose": {
+      "type": "void (int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "close": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "eos": {
+      "type": "char *(char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "creat": {
+      "type": "int (const char *, mode_t)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "mode_t",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "__errno_location": {
+      "type": "int *(void)",
+      "ret": "int *",
+      "params": []
+    },
+    "unlink": {
+      "type": "int (const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "teleport_native_signal": {
+      "type": "void (*(int, void (*)(int)))(int)",
+      "ret": "void (*)(int)",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "void (*)(int)",
+          "canonical": "void (*)(int)"
+        }
+      ]
+    },
+    "sethanguphandler": {
+      "type": "void (void (*)(int))",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "void (*)(int)",
+          "canonical": "void (*)(int)"
+        }
+      ]
+    },
+    "maxledgerno": {
+      "type": "xint16 (void)",
+      "ret": "short",
+      "params": []
+    },
+    "strcmp": {
+      "type": "int (const char *, const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "strcpy": {
+      "type": "char *(char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "In_quest": {
+      "type": "boolean (d_level *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "d_level *",
+          "canonical": "struct d_level *"
+        }
+      ]
+    },
+    "Is_special": {
+      "type": "s_level *(d_level *)",
+      "ret": "struct s_level *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "d_level *",
+          "canonical": "struct d_level *"
+        }
+      ]
+    },
+    "rename": {
+      "type": "int (const char *, const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "getuid": {
+      "type": "uid_t (void)",
+      "ret": "unsigned int",
+      "params": []
+    },
+    "regularize": {
+      "type": "void (char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "strlen": {
+      "type": "unsigned long (const char *)",
+      "ret": "unsigned long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "strcat": {
+      "type": "char *(char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sfo_char": {
+      "type": "void (NHFILE *, char *, const char *, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a3",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "validate": {
+      "type": "int (NHFILE *, const char *, boolean)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "get_plname_from_file": {
+      "type": "void (NHFILE *, char *, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "NHFILE *",
+          "canonical": "struct nh_file *"
+        },
+        {
+          "name": "a1",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "opendir": {
+      "type": "DIR *(const char *)",
+      "ret": "struct __dirstream *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "readdir": {
+      "type": "struct dirent *(DIR *)",
+      "ret": "struct dirent *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "DIR *",
+          "canonical": "struct __dirstream *"
+        }
+      ]
+    },
+    "closedir": {
+      "type": "int (DIR *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "DIR *",
+          "canonical": "struct __dirstream *"
+        }
+      ]
+    },
+    "nh_deterministic_qsort": {
+      "type": "void (void *, size_t, size_t, int (*)(const void *, const void *))",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "void *",
+          "canonical": "void *"
+        },
+        {
+          "name": "a1",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        },
+        {
+          "name": "a2",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        },
+        {
+          "name": "a3",
+          "type": "int (*)(const void *, const void *)",
+          "canonical": "int (*)( void *, void *)"
+        }
+      ]
+    },
+    "freopen": {
+      "type": "FILE *(const char *restrict, const char *restrict, FILE *restrict)",
+      "ret": "struct _IO_FILE *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "FILE *restrict",
+          "canonical": "struct _IO_FILE *"
+        }
+      ]
+    },
+    "strerror": {
+      "type": "char *(int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "nh_terminate": {
+      "type": "void (int) __attribute__((noreturn))",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "teleport_compress_file": {
+      "type": "int (const char *, const char *, int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "more": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "nh_getenv": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "c_eos": {
+      "type": "const char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sleep": {
+      "type": "unsigned int (unsigned int)",
+      "ret": "unsigned int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "access": {
+      "type": "int (const char *, int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "observe_object": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "inv_cnt": {
+      "type": "int (boolean)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "merge_choice": {
+      "type": "struct obj *(struct obj *, struct obj *)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "add_to_migration": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "addinv": {
+      "type": "struct obj *(struct obj *)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "readobjnam": {
+      "type": "struct obj *(char *, struct obj *)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "wish_history_add": {
+      "type": "void (char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "config_error_init": {
+      "type": "void (boolean, const char *, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "parse_conf_file": {
+      "type": "boolean (FILE *, boolean (*)(char *))",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "FILE *",
+          "canonical": "struct _IO_FILE *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean (*)(char *)",
+          "canonical": "signed char (*)(char *)"
+        }
+      ]
+    },
+    "config_error_done": {
+      "type": "int (void)",
+      "ret": "int",
+      "params": []
+    },
+    "proc_symset_line": {
+      "type": "boolean (char *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "fuzzymatch": {
+      "type": "boolean (const char *, const char *, const char *, boolean)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "strncmpi": {
+      "type": "int (const char *, const char *, int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "clear_symsetentry": {
+      "type": "void (int, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "getnow": {
+      "type": "time_t (void)",
+      "ret": "long long",
+      "params": []
+    },
+    "version_string": {
+      "type": "char *(char *, size_t)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        }
+      ]
+    },
+    "yyyymmdd": {
+      "type": "long (time_t)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "time_t",
+          "canonical": "long long"
+        }
+      ]
+    },
+    "hhmmss": {
+      "type": "long (time_t)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "time_t",
+          "canonical": "long long"
+        }
+      ]
+    },
+    "freedynamicdata": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "l_nhcore_done": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "after_opt_showpaths": {
+      "type": "void (const char *) __attribute__((noreturn))",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "pmatch": {
+      "type": "boolean (const char *, const char *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "strstr": {
+      "type": "char *(const char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "s_suffix": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "set_configfile_name": {
+      "type": "void (const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "get_configfile": {
+      "type": "char *(void)",
+      "ret": "char *",
+      "params": []
+    },
+    "getcwd": {
+      "type": "char *(char *, size_t)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        }
+      ]
+    },
+    "copynchars": {
+      "type": "void (char *, const char *, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "get_default_configfile": {
+      "type": "const char *(void)",
+      "ret": "char *",
+      "params": []
+    },
+    "rng_log_enabled": {
+      "type": "boolean (void)",
+      "ret": "signed char",
+      "params": []
+    },
+    "rng_log_set_caller": {
+      "type": "void (const char *, int, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "rn2": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "fgets": {
+      "type": "char *(char *restrict, int, FILE *restrict)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "FILE *restrict",
+          "canonical": "struct _IO_FILE *"
+        }
+      ]
+    },
+    "strip_newline": {
+      "type": "char *(char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "mungspaces": {
+      "type": "char *(char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "atoi": {
+      "type": "int (const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "timet_to_seconds": {
+      "type": "long (time_t)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "time_t",
+          "canonical": "long long"
+        }
+      ]
+    }
+  },
+  "variadics": [
+    {
+      "site": 0,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "fname_encode"
+    },
+    {
+      "site": 1,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "fname_encode"
+    },
+    {
+      "site": 2,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "init_nhfile"
+    },
+    {
+      "site": 3,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "init_nhfile"
+    },
+    {
+      "site": 4,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "close_nhfile"
+    },
+    {
+      "site": 5,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "viable_nhfile"
+    },
+    {
+      "site": 6,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "set_levelfile_name"
+    },
+    {
+      "site": 7,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "create_levelfile"
+    },
+    {
+      "site": 8,
+      "function": "open",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (const char *, int, ...)",
+      "owner": "open_levelfile"
+    },
+    {
+      "site": 9,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "open_levelfile"
+    },
+    {
+      "site": 10,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "unsigned int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "set_bonesfile_name"
+    },
+    {
+      "site": 11,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "set_bonesfile_name"
+    },
+    {
+      "site": 12,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "set_bonesfile_name"
+    },
+    {
+      "site": 13,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "set_bonesfile_name"
+    },
+    {
+      "site": 14,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "set_bonestemp_name"
+    },
+    {
+      "site": 15,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "create_bonesfile"
+    },
+    {
+      "site": 16,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "commit_bonesfile"
+    },
+    {
+      "site": 17,
+      "function": "open",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (const char *, int, ...)",
+      "owner": "open_bonesfile"
+    },
+    {
+      "site": 18,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "set_savefile_name"
+    },
+    {
+      "site": 19,
+      "function": "open",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (const char *, int, ...)",
+      "owner": "open_savefile"
+    },
+    {
+      "site": 20,
+      "function": "sscanf",
+      "types": [
+        "char *",
+        "char *",
+        "int *",
+        "char *"
+      ],
+      "prototype": "int (const char *restrict, const char *restrict, ...)",
+      "owner": "get_saved_games"
+    },
+    {
+      "site": 21,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "get_saved_games"
+    },
+    {
+      "site": 22,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "char *",
+        "char *",
+        "int",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "redirect"
+    },
+    {
+      "site": 23,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "docompress_file"
+    },
+    {
+      "site": 24,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "problematic_savefile"
+    },
+    {
+      "site": 25,
+      "function": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, int, char *, size_t, const char *, ...)",
+      "owner": "make_converted_name"
+    },
+    {
+      "site": 26,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "lock_file"
+    },
+    {
+      "site": 27,
+      "function": "open",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "int (const char *, int, ...)",
+      "owner": "lock_file"
+    },
+    {
+      "site": 28,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "lock_file"
+    },
+    {
+      "site": 29,
+      "function": "fcntl",
+      "types": [
+        "int",
+        "int",
+        "struct flock *"
+      ],
+      "prototype": "int (int, int, ...)",
+      "owner": "lock_file"
+    },
+    {
+      "site": 30,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "lock_file"
+    },
+    {
+      "site": 31,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "lock_file"
+    },
+    {
+      "site": 32,
+      "function": "fcntl",
+      "types": [
+        "int",
+        "int",
+        "struct flock *"
+      ],
+      "prototype": "int (int, int, ...)",
+      "owner": "unlock_file"
+    },
+    {
+      "site": 33,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "unlock_file"
+    },
+    {
+      "site": 34,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "fopen_wizkit_file"
+    },
+    {
+      "site": 35,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "fopen_wizkit_file"
+    },
+    {
+      "site": 36,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "fopen_wizkit_file"
+    },
+    {
+      "site": 37,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "fopen_wizkit_file"
+    },
+    {
+      "site": 38,
+      "function": "config_error_add",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "proc_wizkit_line"
+    },
+    {
+      "site": 39,
+      "function": "config_error_add",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "read_sym_file"
+    },
+    {
+      "site": 40,
+      "function": "open",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (const char *, int, ...)",
+      "owner": "check_recordfile"
+    },
+    {
+      "site": 41,
+      "function": "open",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (const char *, int, ...)",
+      "owner": "check_recordfile"
+    },
+    {
+      "site": 42,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "check_recordfile"
+    },
+    {
+      "site": 43,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "char *",
+        "long",
+        "long",
+        "int",
+        "int",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "paniclog"
+    },
+    {
+      "site": 44,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "testinglog"
+    },
+    {
+      "site": 45,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "reveal_paths"
+    },
+    {
+      "site": 46,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "reveal_paths"
+    },
+    {
+      "site": 47,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "reveal_paths"
+    },
+    {
+      "site": 48,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "reveal_paths"
+    },
+    {
+      "site": 49,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "reveal_paths"
+    },
+    {
+      "site": 50,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "reveal_paths"
+    },
+    {
+      "site": 51,
+      "function": "raw_printf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "reveal_paths"
+    },
+    {
+      "site": 52,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "read_tribute"
+    },
+    {
+      "site": 53,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "read_tribute"
+    },
+    {
+      "site": 54,
+      "function": "You_feel",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "read_tribute"
+    },
+    {
+      "site": 55,
+      "function": "pline",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "read_tribute"
+    },
+    {
+      "site": 56,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "read_tribute"
+    },
+    {
+      "site": 57,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "read_tribute"
+    },
+    {
+      "site": 58,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "read_tribute"
+    },
+    {
+      "site": 59,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "livelog_add"
+    },
+    {
+      "site": 60,
+      "function": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "long",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "long",
+        "long",
+        "long",
+        "char *"
+      ],
+      "prototype": "int (FILE *restrict, const char *restrict, ...)",
+      "owner": "livelog_add"
+    }
+  ],
+  "callbacks": [
+    {
+      "site": 0,
+      "type": "void (*)(void)",
+      "ret": "void",
+      "types": []
+    },
+    {
+      "site": 1,
+      "type": "void (*)(winid)",
+      "ret": "void",
+      "types": [
+        "winid"
+      ]
+    },
+    {
+      "site": 2,
+      "type": "void (*)(const char *)",
+      "ret": "void",
+      "types": [
+        "const char *"
+      ]
+    },
+    {
+      "site": 3,
+      "type": "void (*)(void)",
+      "ret": "void",
+      "types": []
+    },
+    {
+      "site": 4,
+      "type": "void (*)(void)",
+      "ret": "void",
+      "types": []
+    },
+    {
+      "site": 5,
+      "type": "void (*)(void)",
+      "ret": "void",
+      "types": []
+    },
+    {
+      "site": 6,
+      "type": "void (*)(void)",
+      "ret": "void",
+      "types": []
+    },
+    {
+      "site": 7,
+      "type": "void (*)(const char *)",
+      "ret": "void",
+      "types": [
+        "const char *"
+      ]
+    },
+    {
+      "site": 8,
+      "type": "void (*)(const char *)",
+      "ret": "void",
+      "types": [
+        "const char *"
+      ]
+    },
+    {
+      "site": 9,
+      "type": "winid (*)(int)",
+      "ret": "winid",
+      "types": [
+        "int"
+      ]
+    },
+    {
+      "site": 10,
+      "type": "void (*)(winid, int, const char *)",
+      "ret": "void",
+      "types": [
+        "winid",
+        "int",
+        "const char *"
+      ]
+    },
+    {
+      "site": 11,
+      "type": "void (*)(winid, boolean)",
+      "ret": "void",
+      "types": [
+        "winid",
+        "boolean"
+      ]
+    },
+    {
+      "site": 12,
+      "type": "void (*)(const char *, boolean)",
+      "ret": "void",
+      "types": [
+        "const char *",
+        "boolean"
+      ]
+    },
+    {
+      "site": 13,
+      "type": "void (*)(winid)",
+      "ret": "void",
+      "types": [
+        "winid"
+      ]
+    }
+  ],
+  "statics": [
+    {
+      "name": "nh_basename.basebuf",
+      "sourceName": "basebuf",
+      "type": "char[80]",
+      "size": "(1*80)",
+      "js": null
+    },
+    {
+      "name": "fname_encode.hexdigits",
+      "sourceName": "hexdigits",
+      "type": "char[17]",
+      "size": "(1*17)",
+      "js": "C.literal(\"0123456789ABCDEF\")"
+    },
+    {
+      "name": "fname_decode.hexdigits",
+      "sourceName": "hexdigits",
+      "type": "char[17]",
+      "size": "(1*17)",
+      "js": "C.literal(\"0123456789ABCDEF\")"
+    },
+    {
+      "name": "bei",
+      "sourceName": "bei",
+      "type": "int",
+      "size": "4",
+      "js": "1"
+    },
+    {
+      "name": "sf2msg",
+      "sourceName": "sf2msg",
+      "type": "struct sfstatus_to_msg[10]",
+      "size": "(C.sizes[\"struct sfstatus_to_msg\"]*10)",
+      "js": "[[0,C.literal(\"everything matches\")],[1,C.literal(\"outdated savefile\")],[2,C.literal(\"savefile critical byte-count mismatch\")],[3,C.literal(\"Windows x64 savefile on x86\")],[4,C.literal(\"Unix 64 savefile on x86\")],[5,C.literal(\"x86 savefile on Unix 64\")],[6,C.literal(\"x86 savefile on Windows x64\")],[7,C.literal(\"Unix 64 savefile on Windows x64\")],[8,C.literal(\"Windows x64 savefile on Unix 64\")],[9,C.literal(\"generic savefile mismatch\")]]"
+    },
+    {
+      "name": "cvtinit",
+      "sourceName": "cvtinit",
+      "type": "signed char",
+      "size": "1",
+      "js": "C.i8(0)"
+    },
+    {
+      "name": "unconverted_filename",
+      "sourceName": "unconverted_filename",
+      "type": "char *",
+      "size": "8",
+      "js": "0"
+    },
+    {
+      "name": "converted_filename",
+      "sourceName": "converted_filename",
+      "type": "char *",
+      "size": "8",
+      "js": "0"
+    },
+    {
+      "name": "lockfd",
+      "sourceName": "lockfd",
+      "type": "int",
+      "size": "4",
+      "js": "C.i32((-1))"
+    },
+    {
+      "name": "sflock",
+      "sourceName": "sflock",
+      "type": "struct flock",
+      "size": "C.sizes[\"struct flock\"]",
+      "js": null
+    }
+  ],
+  "literals": [
+    "",
+    "\n%s is %s %s\n",
+    "    \"%s\"",
+    "    \"%s/%s\"",
+    " -_",
+    "# closing\n",
+    "# closing, not viable\n",
+    "%c%02X",
+    "%c%s",
+    "%d%63s",
+    "%s\n%s\n",
+    "%s %08ld %06ld %d %c: %s %s\n",
+    "%s %s%s:",
+    "%s%s%s",
+    "%s/%s",
+    "%u",
+    "-d",
+    ".%c",
+    ".%d",
+    ".Z",
+    ".bn",
+    ".e",
+    ".exportascii",
+    ".log",
+    ".xxxxxx",
+    "/",
+    "/usr/bin/compress",
+    "/usr/games/lib/nethackdir",
+    "0",
+    "0123456789ABCDEF",
+    "; passage #%d]",
+    "Access to %s denied (%d).",
+    "Bad wizkit item: \"%.60s\"",
+    "Basic data files%s are in many separate files.",
+    "Can't remove fcntl lock on %s.",
+    "Cannot create bones \"%s\", id %s (errno %d).",
+    "Cannot create file \"%s\" for level %d (errno %d).",
+    "Cannot open file \"%s\" for level %d (errno %d).",
+    "Cannot open file %s.  Is NetHack installed correctly?",
+    "Cannot open live log file!",
+    "Couldn't open default gw.wizkit file %s (%d).",
+    "Couldn't open requested wizkit file %s (%d).",
+    "Death",
+    "Death Quotes",
+    "Default symbols",
+    "HACKDIR",
+    "HOME",
+    "I give up.  Sorry.",
+    "It seems to be %s of \"%s\"!",
+    "It's %s of \"%s\"!",
+    "Missing finish for symset \"%s\"",
+    "NETHACKDIR",
+    "NOTE: The %s above is missing or inaccessible!",
+    "NetHack",
+    "Some other process has an unnatural grip on %s.",
+    "TRIED TO NEST LOCKS",
+    "The loadable symbols file:",
+    "Unable to uncompress %s",
+    "Unix 64 savefile on Windows x64",
+    "Unix 64 savefile on x86",
+    "WIZKIT",
+    "Waiting for release of fcntl lock on %s.  (%d retries left.)",
+    "Warning - Unclosed fieldlevel file being reinitialized",
+    "Warning - Unclosed structlevel file being reinitialized",
+    "Warning: cannot write scoreboard file '%s'",
+    "Windows x64 savefile on Unix 64",
+    "Windows x64 savefile on x86",
+    "Your personal configuration file%s:",
+    "[%s, by Terry Pratchett]",
+    "a",
+    "an",
+    "an incomprehensible foreign translation",
+    "bon",
+    "choose_passage",
+    "couldn't rename %s to %s.",
+    "default",
+    "e ",
+    "everything matches",
+    "files.c",
+    "freopen of %s for %scompress failed; (%d) %s\n",
+    "generic savefile mismatch",
+    "livelog",
+    "lltype=%ld\tname=%s\trole=%s\trace=%s\tgender=%s\talign=%s\tturns=%ld\tstarttime=%ld\tcurtime=%ld\tmessage=%s\n",
+    "make_converted_name",
+    "not supported",
+    "outdated savefile",
+    "paniclog",
+    "passage ",
+    "r",
+    "read_tribute %s, %s, %d.",
+    "record",
+    "save",
+    "save/%d%s",
+    "save/99999.e",
+    "savefile critical byte-count mismatch",
+    "savefile_name",
+    "section ",
+    "symbols",
+    "sysconf",
+    "system configuration file",
+    "title ",
+    "too overwhelmed to continue!",
+    "tribute",
+    "tribute file error: bad %% command, line %d.",
+    "un",
+    "unknown",
+    "x86 savefile on Unix 64",
+    "x86 savefile on Windows x64"
+  ],
+  "literalBytes": 2145,
+  "functionAddresses": [
+    "proc_symset_line",
+    "proc_wizkit_line",
+    "strcmp_wrap"
+  ],
+  "functionTypes": {
+    "nh_basename": "const char *(const char *, boolean)",
+    "fname_encode": "char *(const char *, char, char *, char *, int)",
+    "fname_decode": "char *(char, char *, char *, int)",
+    "fqname": "const char *(const char *, int, int)",
+    "validate_prefix_locations": "int (char *)",
+    "fopen_datafile": "FILE *(const char *, const char *, int)",
+    "init_nhfile": "void (NHFILE *)",
+    "new_nhfile": "NHFILE *(void)",
+    "free_nhfile": "void (NHFILE *)",
+    "close_nhfile": "void (NHFILE *)",
+    "rewind_nhfile": "void (NHFILE *)",
+    "viable_nhfile": "NHFILE *(NHFILE *)",
+    "nhclose": "int (int)",
+    "set_levelfile_name": "void (char *, int)",
+    "create_levelfile": "NHFILE *(int, char *)",
+    "open_levelfile": "NHFILE *(int, char *)",
+    "delete_levelfile": "void (int)",
+    "clearlocks": "void (void)",
+    "strcmp_wrap": "int (const void *, const void *)",
+    "set_bonesfile_name": "char *(char *, d_level *)",
+    "set_bonestemp_name": "char *(void)",
+    "create_bonesfile": "NHFILE *(d_level *, char **, char *)",
+    "commit_bonesfile": "void (d_level *)",
+    "open_bonesfile": "NHFILE *(d_level *, char **)",
+    "delete_bonesfile": "int (d_level *)",
+    "compress_bonesfile": "void (void)",
+    "set_savefile_name": "void (boolean)",
+    "save_savefile_name": "void (NHFILE *)",
+    "set_error_savefile": "void (void)",
+    "create_savefile": "NHFILE *(void)",
+    "open_savefile": "NHFILE *(void)",
+    "delete_savefile": "int (void)",
+    "restore_saved_game": "NHFILE *(void)",
+    "get_freeing_nhfile": "NHFILE *(void)",
+    "check_panic_save": "int (void)",
+    "plname_from_file": "char *(const char *, boolean)",
+    "get_saved_games": "char **(void)",
+    "free_saved_games": "void (char **)",
+    "redirect": "void (const char *, const char *, FILE *, boolean)",
+    "docompress_file": "void (const char *, boolean)",
+    "nh_compress": "void (const char *)",
+    "nh_uncompress": "void (const char *)",
+    "problematic_savefile": "NHFILE *(int, const char *)",
+    "doconvert_file": "int (const char *, int, boolean)",
+    "nh_sfconvert": "void (const char *)",
+    "nh_sfunconvert": "void (const char *)",
+    "make_converted_name": "boolean (const char *)",
+    "delete_convertedfile": "int (const char *)",
+    "free_convert_filenames": "void (void)",
+    "contains_directory": "boolean (const char *)",
+    "lock_file": "boolean (const char *, int, int)",
+    "unlock_file": "void (const char *)",
+    "fopen_wizkit_file": "FILE *(void)",
+    "wizkit_addinv": "void (struct obj *)",
+    "proc_wizkit_line": "boolean (char *)",
+    "read_wizkit": "void (void)",
+    "fopen_sym_file": "FILE *(void)",
+    "read_sym_file": "int (int)",
+    "check_recordfile": "void (const char *)",
+    "paniclog": "void (const char *, const char *)",
+    "testinglog": "void (const char *, const char *, const char *)",
+    "do_deferred_showpaths": "void (int) __attribute__((noreturn))",
+    "debugcore": "boolean (const char *, boolean)",
+    "reveal_paths": "void (int)",
+    "choose_passage": "int (int, unsigned int)",
+    "read_tribute": "boolean (const char *, const char *, int, char *, int, unsigned int)",
+    "Death_quote": "boolean (char *, int)",
+    "livelog_add": "void (long, const char *)"
+  }
+}

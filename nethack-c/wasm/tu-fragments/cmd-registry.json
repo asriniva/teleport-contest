@@ -1,0 +1,35 @@
+{
+  "name": "cmd",
+  "source": "src/cmd.c",
+  "javascript": "js/ported/cmd.js",
+  "library": "nethack-c/wasm/tu-libraries/cmd.js",
+  "configuredFunctions": true,
+  "reference": "pristine",
+  "probeContext": false,
+  "probeExtraExports": [
+    "_teleport_cmd_global",
+    "_teleport_cmd_read",
+    "_teleport_cmd_write",
+    "_teleport_cmd_address",
+    "_teleport_cmd_copy",
+    "_teleport_cmd_literal_storage",
+    "_teleport_cmd_literal_capacity"
+  ],
+  "nativeStorageSources": [
+    {
+      "source": "nethack-c/wasm/tu-fragments/cmd-public-storage.c"
+    }
+  ],
+  "adapterSources": [
+    "js/ported/cmd-runtime.js",
+    "scripts/tu-cmd-layout.h",
+    "nethack-c/wasm/tu-fragments/cmd-check-members.mjs",
+    "nethack-c/wasm/tu-fragments/cmd-check-source.py",
+    "nethack-c/wasm/tu-fragments/cmd-dispatch.js",
+    "nethack-c/wasm/tu-fragments/cmd-provenance.json",
+    "nethack-c/wasm/tu-fragments/cmd-schema.json",
+    "nethack-c/wasm/tu-fragments/cmd-source-data.h",
+    "nethack-c/wasm/tu-fragments/cmd-support.c",
+    "nethack-c/wasm/tu-fragments/cmd-types.h"
+  ]
+}

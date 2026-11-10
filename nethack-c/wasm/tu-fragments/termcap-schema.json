@@ -1,0 +1,2550 @@
+{
+  "headerMacros": {
+    "AS": {
+      "params": null,
+      "expression": "env.gt.tc_gbl_data.tc_AS",
+      "originalExpansion": "gt.tc_gbl_data.tc_AS"
+    },
+    "AE": {
+      "params": null,
+      "expression": "env.gt.tc_gbl_data.tc_AE",
+      "originalExpansion": "gt.tc_gbl_data.tc_AE"
+    },
+    "CO": {
+      "params": null,
+      "expression": "env.gt.tc_gbl_data.tc_CO",
+      "originalExpansion": "gt.tc_gbl_data.tc_CO"
+    },
+    "LI": {
+      "params": null,
+      "expression": "env.gt.tc_gbl_data.tc_LI",
+      "originalExpansion": "gt.tc_gbl_data.tc_LI"
+    },
+    "nh_CM": {
+      "params": null,
+      "expression": "env.tc_lcl_data.tc_CM",
+      "originalExpansion": "tc_lcl_data.tc_CM"
+    },
+    "nh_ND": {
+      "params": null,
+      "expression": "env.tc_lcl_data.tc_ND",
+      "originalExpansion": "tc_lcl_data.tc_ND"
+    },
+    "nh_CD": {
+      "params": null,
+      "expression": "env.tc_lcl_data.tc_CD",
+      "originalExpansion": "tc_lcl_data.tc_CD"
+    },
+    "nh_HI": {
+      "params": null,
+      "expression": "env.tc_lcl_data.tc_HI",
+      "originalExpansion": "tc_lcl_data.tc_HI"
+    },
+    "nh_HE": {
+      "params": null,
+      "expression": "env.tc_lcl_data.tc_HE",
+      "originalExpansion": "tc_lcl_data.tc_HE"
+    },
+    "nh_US": {
+      "params": null,
+      "expression": "env.tc_lcl_data.tc_US",
+      "originalExpansion": "tc_lcl_data.tc_US"
+    },
+    "nh_UE": {
+      "params": null,
+      "expression": "env.tc_lcl_data.tc_UE",
+      "originalExpansion": "tc_lcl_data.tc_UE"
+    },
+    "ul_hack": {
+      "params": null,
+      "expression": "env.tc_lcl_data.tc_ul_hack",
+      "originalExpansion": "tc_lcl_data.tc_ul_hack"
+    }
+  },
+  "schema": {
+    "flag": {
+      "ctype": "struct flag",
+      "fields": [
+        {
+          "name": "null",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "silent",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "tc_gbl_data": {
+      "ctype": "struct tc_gbl_data",
+      "fields": [
+        {
+          "name": "tc_CO",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "tc_LI",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "tc_AS",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "tc_AE",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_t": {
+      "ctype": "struct instance_globals_t",
+      "fields": [
+        {
+          "name": "tc_gbl_data",
+          "d": {
+            "s": "tc_gbl_data"
+          },
+          "ctype": "struct tc_gbl_data",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "tc_lcl_data": {
+      "ctype": "struct tc_lcl_data",
+      "fields": [
+        {
+          "name": "tc_ND",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "tc_ul_hack",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "tc_CM",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "tc_US",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "tc_UE",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "tc_HI",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "tc_HE",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "tc_CD",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "symsetentry": {
+      "ctype": "struct symsetentry",
+      "fields": [
+        {
+          "name": "handling",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "enum symset_handling_types",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_s": {
+      "ctype": "struct instance_globals_s",
+      "fields": [
+        {
+          "name": "symset",
+          "d": {
+            "a": [
+              2
+            ],
+            "e": {
+              "s": "symsetentry"
+            }
+          },
+          "ctype": "struct symsetentry[2]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_c": {
+      "ctype": "struct instance_globals_c",
+      "fields": [
+        {
+          "name": "currentgraphics",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "Cmd",
+          "d": {
+            "s": "cmd"
+          },
+          "ctype": "struct cmd",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "cmd": {
+      "ctype": "struct cmd",
+      "fields": [
+        {
+          "name": "num_pad",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "DisplayDesc": {
+      "ctype": "struct DisplayDesc",
+      "fields": [
+        {
+          "name": "cury",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "curx",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "nomux_cell": {
+      "ctype": "nomux_cell",
+      "fields": [
+        {
+          "name": "ch",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "fg",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "unsigned char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "attr",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "unsigned char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "decgfx",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "unsigned char",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_flags": {
+      "ctype": "struct instance_flags",
+      "fields": [
+        {
+          "name": "wc2_darkgray",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "debug_fuzzer",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "xint8",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "colorcount",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "uint32_t",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "ti_map_entry": {
+      "ctype": "TELEPORT_TERMCAP_TI_MAP_TYPE",
+      "fields": [
+        {
+          "name": "nh_color",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "nh_bright_color",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ti_color",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    }
+  },
+  "globals": [
+    {
+      "name": "tbuf",
+      "d": {
+        "a": [
+          512
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    },
+    {
+      "name": "flags",
+      "d": {
+        "s": "flag"
+      }
+    },
+    {
+      "name": "PC",
+      "d": {
+        "t": "i8"
+      }
+    },
+    {
+      "name": "BC",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "HO",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "gt",
+      "d": {
+        "s": "instance_globals_t"
+      }
+    },
+    {
+      "name": "tc_lcl_data",
+      "d": {
+        "s": "tc_lcl_data"
+      }
+    },
+    {
+      "name": "CE",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "UP",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "XD",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "SO",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "SE",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "ZH",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "ZR",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "SG",
+      "d": {
+        "t": "i32"
+      }
+    },
+    {
+      "name": "nullstr",
+      "d": {
+        "a": [
+          1
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    },
+    {
+      "name": "TI",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "TE",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "VS",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "VE",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "KS",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "KE",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "MR",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "MB",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "MD",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "MH",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "ME",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "nh_VI",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "nh_VE",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "nh_Ic",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "dynamic_HIHE",
+      "d": {
+        "t": "i8"
+      }
+    },
+    {
+      "name": "CL",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "tty_standout_on",
+      "d": {
+        "a": [
+          16
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    },
+    {
+      "name": "tty_standout_off",
+      "d": {
+        "a": [
+          16
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    },
+    {
+      "name": "gs",
+      "d": {
+        "s": "instance_globals_s"
+      }
+    },
+    {
+      "name": "gc",
+      "d": {
+        "s": "instance_globals_c"
+      }
+    },
+    {
+      "name": "HE_resets_AS",
+      "d": {
+        "t": "i8"
+      }
+    },
+    {
+      "name": "decgraphics_mode_callback",
+      "d": {
+        "f": true
+      }
+    },
+    {
+      "name": "utf8graphics_mode_callback",
+      "d": {
+        "f": true
+      }
+    },
+    {
+      "name": "ttyDisplay",
+      "d": {
+        "p": "DisplayDesc"
+      }
+    },
+    {
+      "name": "BASE_WINDOW",
+      "d": {
+        "t": "i32"
+      }
+    },
+    {
+      "name": "stdout",
+      "d": {
+        "p": ""
+      }
+    },
+    {
+      "name": "nomux_seq",
+      "d": {
+        "t": "i32"
+      }
+    },
+    {
+      "name": "nomux_anim_id",
+      "d": {
+        "t": "i32"
+      }
+    },
+    {
+      "name": "nomux_buf",
+      "d": {
+        "a": [
+          24,
+          80
+        ],
+        "e": {
+          "s": "nomux_cell"
+        }
+      }
+    },
+    {
+      "name": "nomux_fg_cur",
+      "d": {
+        "t": "u8"
+      }
+    },
+    {
+      "name": "nomux_attr_cur",
+      "d": {
+        "t": "u8"
+      }
+    },
+    {
+      "name": "nomux_decgfx_cur",
+      "d": {
+        "t": "u8"
+      }
+    },
+    {
+      "name": "iflags",
+      "d": {
+        "s": "instance_flags"
+      }
+    },
+    {
+      "name": "nomux_out",
+      "d": {
+        "a": [
+          6144
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    },
+    {
+      "name": "nomux_raw_active",
+      "d": {
+        "t": "i32"
+      }
+    },
+    {
+      "name": "nomux_raw_row",
+      "d": {
+        "t": "i32"
+      }
+    },
+    {
+      "name": "nomux_raw_col",
+      "d": {
+        "t": "i32"
+      }
+    },
+    {
+      "name": "ospeed",
+      "d": {
+        "t": "i16"
+      }
+    },
+    {
+      "name": "tmspc10",
+      "d": {
+        "a": [
+          15
+        ],
+        "e": {
+          "t": "i16"
+        }
+      }
+    },
+    {
+      "name": "hilites",
+      "d": {
+        "a": [
+          16
+        ],
+        "e": {
+          "p": ""
+        }
+      }
+    },
+    {
+      "name": "nilstring",
+      "d": {
+        "a": [
+          1
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    },
+    {
+      "name": "ti_map",
+      "d": {
+        "a": [
+          6
+        ],
+        "e": {
+          "s": "ti_map_entry"
+        }
+      }
+    },
+    {
+      "name": "nulstr",
+      "d": {
+        "a": [
+          1
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    }
+  ],
+  "constants": [
+    "ATR_BLINK",
+    "ATR_BOLD",
+    "ATR_DIM",
+    "ATR_INVERSE",
+    "ATR_ITALIC",
+    "ATR_ULINE",
+    "BRIGHT",
+    "BUFSZ",
+    "CLR_BLACK",
+    "CLR_BLUE",
+    "CLR_BRIGHT_BLUE",
+    "CLR_BRIGHT_CYAN",
+    "CLR_BRIGHT_GREEN",
+    "CLR_BRIGHT_MAGENTA",
+    "CLR_BROWN",
+    "CLR_CYAN",
+    "CLR_GRAY",
+    "CLR_GREEN",
+    "CLR_MAGENTA",
+    "CLR_MAX",
+    "CLR_ORANGE",
+    "CLR_RED",
+    "CLR_WHITE",
+    "CLR_YELLOW",
+    "COLNO",
+    "COLOR_BLACK",
+    "COLOR_BLUE",
+    "COLOR_CYAN",
+    "COLOR_GREEN",
+    "COLOR_MAGENTA",
+    "COLOR_RED",
+    "COLOR_WHITE",
+    "COLOR_YELLOW",
+    "HL_BLINK",
+    "HL_BOLD",
+    "HL_DIM",
+    "HL_ULINE",
+    "H_DEC",
+    "LONG_MAX",
+    "NO_COLOR",
+    "QBUFSZ",
+    "ROWNO"
+  ],
+  "variadicABI": {
+    "error_p": {
+      "name": "error",
+      "types": [
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "error_pp": {
+      "name": "error",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "fprintf_pppiiiij": {
+      "name": "fprintf",
+      "types": [
+        "struct _IO_FILE *",
+        "char *",
+        "char *",
+        "int",
+        "int",
+        "int",
+        "int",
+        "unsigned long"
+      ],
+      "ret": "int"
+    },
+    "sprintf_pp": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "ret": "int"
+    },
+    "sprintf_ppi": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "ret": "int"
+    },
+    "tparm_pi": {
+      "name": "tparm",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "ret": "char *"
+    },
+    "nh_snprintf_pipjpjjj": {
+      "name": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "long",
+        "long",
+        "long"
+      ],
+      "ret": "void"
+    },
+    "nh_snprintf_pipjpi": {
+      "name": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "int"
+      ],
+      "ret": "void"
+    }
+  },
+  "literals": [
+    "",
+    "\b",
+    "\u000e",
+    "\u000f",
+    "\u001b)0",
+    "\u001b=",
+    "\u001b>",
+    "\u001b[%dm",
+    "\u001b[0m",
+    "\u001b[1m",
+    "\u001b[22m",
+    "\u001b[24m",
+    "\u001b[27m",
+    "\u001b[38;2;%ld;%ld;%ldm",
+    "\u001b[38;5;%dm",
+    "\u001b[39m",
+    "\u001b[4m",
+    "\u001b[7m",
+    "\u001b]7777;KIND=%s;SEQ=%d;ANIM=%d;CX=%d;CY=%d;LEN=%zu\u0007",
+    "$<50>",
+    "../win/tty/termcap.c",
+    "50",
+    "5620",
+    ";3%d",
+    ";4%d",
+    "AF",
+    "Can't get TERM.",
+    "Co",
+    "Ic",
+    "NETHACK_NO_DELAY",
+    "NOMUX_MARKERS",
+    "NetHack can't have OS.",
+    "NetHack needs CL.",
+    "NetHack needs CM or UP or HO.",
+    "Playing NetHack on terminals without CM is suspect.",
+    "Sf",
+    "TERM",
+    "TERMCAP entry too big...\n",
+    "Terminal must backspace.",
+    "Unknown terminal type: %s.",
+    "Unknown terminal type: .  ",
+    "WEBHACK_NO_DELAY",
+    "ZH",
+    "ZR",
+    "ae",
+    "anim",
+    "as",
+    "backsp",
+    "bc",
+    "bs",
+    "builtin",
+    "cd",
+    "ce",
+    "cl",
+    "cl_end",
+    "cl_eos",
+    "cm",
+    "cmov",
+    "co",
+    "eA",
+    "e_atr2str",
+    "emit24bit",
+    "emit256",
+    "graph_off",
+    "graph_on",
+    "hack.h",
+    "ho",
+    "home",
+    "init_hilite",
+    "input",
+    "ke",
+    "kill_hilite",
+    "ks",
+    "le",
+    "li",
+    "m",
+    "mb",
+    "md",
+    "me",
+    "mh",
+    "mr",
+    "nd",
+    "nocmov",
+    "nomux_capture_screen",
+    "nomux_capture_write_input_boundary",
+    "nomux_capture_write_screen",
+    "nomux_clear_screen",
+    "nomux_clear_to_eol",
+    "nomux_emit_marker",
+    "nomux_end_attr",
+    "nomux_end_fg",
+    "nomux_enter_raw_mode",
+    "nomux_get_cursor",
+    "nomux_markers_enabled",
+    "nomux_putch",
+    "nomux_raw_emit",
+    "nomux_raw_emit_eol",
+    "nomux_raw_putch",
+    "nomux_set_attr",
+    "nomux_set_fg",
+    "nomux_sgr_fg",
+    "os",
+    "pc",
+    "s_atr2str",
+    "se",
+    "sg",
+    "so",
+    "st52",
+    "standoutbeg",
+    "standoutend",
+    "tcap.h",
+    "te",
+    "term_attr_fixup",
+    "term_clear_screen",
+    "term_curs_set",
+    "term_end_attr",
+    "term_end_color",
+    "term_end_extracolor",
+    "term_end_raw_bold",
+    "term_end_screen",
+    "term_shutdown",
+    "term_start_attr",
+    "term_start_bgcolor",
+    "term_start_color",
+    "term_start_extracolor",
+    "term_start_raw_bold",
+    "term_start_screen",
+    "term_startup",
+    "ti",
+    "tty_decgraphics_termcap_fixup",
+    "tty_delay_output",
+    "tty_nhbell",
+    "tty_number_pad",
+    "tw52",
+    "ue",
+    "ul",
+    "up",
+    "us",
+    "ve",
+    "vi",
+    "wintty.h",
+    "xd",
+    "xputc",
+    "xputs"
+  ],
+  "functions": [
+    {
+      "name": "term_startup",
+      "type": {
+        "qualType": "void (int *, int *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "wid",
+          "type": {
+            "qualType": "int *"
+          }
+        },
+        {
+          "name": "hgt",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "term",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "tptr",
+          "type": {
+            "qualType": "char *"
+          },
+          "static": false
+        },
+        {
+          "name": "tbufptr",
+          "type": {
+            "qualType": "char *"
+          },
+          "static": false
+        },
+        {
+          "name": "pc",
+          "type": {
+            "qualType": "char *"
+          },
+          "static": false
+        },
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        2482,
+        10636
+      ],
+      "astSha256": "a6c646cd870d997957eb96eb5f12d929f5f0206df22338eb04c201cf2a3139a0"
+    },
+    {
+      "name": "term_shutdown",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        10773,
+        11152
+      ],
+      "astSha256": "7a48182d7f2daf227f16a7207f517ac537fa870df7f46d53fb1cb5a19387c20b"
+    },
+    {
+      "name": "tty_number_pad",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "state",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        11154,
+        11550
+      ],
+      "astSha256": "8ad6c1f98871d68e7d60216e9b9c211a3e62aaf90947ddd3480c0b51302cd311"
+    },
+    {
+      "name": "tty_decgraphics_termcap_fixup",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": true,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "ctrlN",
+          "type": {
+            "qualType": "char[2]"
+          },
+          "static": true
+        },
+        {
+          "name": "ctrlO",
+          "type": {
+            "qualType": "char[2]"
+          },
+          "static": true
+        },
+        {
+          "name": "appMode",
+          "type": {
+            "qualType": "char[3]"
+          },
+          "static": true
+        },
+        {
+          "name": "numMode",
+          "type": {
+            "qualType": "char[3]"
+          },
+          "static": true
+        },
+        {
+          "name": "ae",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        12019,
+        15640
+      ],
+      "astSha256": "e0e8d7442ef70782f677f17f33b5f2ccc41b0c5db21f68bca778522286ed1b27"
+    },
+    {
+      "name": "term_start_screen",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        16466,
+        17361
+      ],
+      "astSha256": "ba88a9bf8888b4cd2c8bf34cb55051cbf74505196238e99c34a15807b46b41e7"
+    },
+    {
+      "name": "term_end_screen",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        17363,
+        17448
+      ],
+      "astSha256": "91674eae4be2b90796dcc492efb0e42f6328c040904d71abc304f3217e556cbc"
+    },
+    {
+      "name": "nocmov",
+      "type": {
+        "qualType": "void (int, int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        17817,
+        19188
+      ],
+      "astSha256": "fd6246212038f0798230c09e56991cba83ded4eebb2d8071a7a257a16be96f29"
+    },
+    {
+      "name": "cmov",
+      "type": {
+        "qualType": "void (int, int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        19190,
+        19300
+      ],
+      "astSha256": "fb764ff8c03da1585a4333c0e73c869d949dbcd0b1c8265d558094cd1163a091"
+    },
+    {
+      "name": "xputc",
+      "type": {
+        "qualType": "int (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "c",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        19369,
+        20329
+      ],
+      "astSha256": "01290c884b853c241a14398ffc31c2055fbd6f38e6121d289d293e93e0de051f"
+    },
+    {
+      "name": "nomux_markers_enabled",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": true,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "cached",
+          "type": {
+            "qualType": "int"
+          },
+          "static": true
+        },
+        {
+          "name": "ev",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        21610,
+        21831
+      ],
+      "astSha256": "864d628b8a2378edc1cfa3a78c3f21ebd0683584a915ee627f7ba881ea156cfc"
+    },
+    {
+      "name": "nomux_emit_marker",
+      "type": {
+        "qualType": "void (const char *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "kind",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "scr",
+          "type": {
+            "qualType": "char *"
+          },
+          "static": false
+        },
+        {
+          "name": "cx",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "cy",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "scr_len",
+          "type": {
+            "desugaredQualType": "unsigned long",
+            "qualType": "size_t",
+            "typeAliasDeclId": "0x980d78918"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        22018,
+        22653
+      ],
+      "astSha256": "c248aa780ffea3d1f357765cd1522349a43bd7e952ef67734f2cd966d5a81d24"
+    },
+    {
+      "name": "nomux_capture_write_screen",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        22837,
+        22930
+      ],
+      "astSha256": "d0805d85754ccdf2a9a6ca92343e7ffd7e54f586820de29e4a31fd5d12bbfe32"
+    },
+    {
+      "name": "nomux_capture_write_input_boundary",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        23138,
+        23236
+      ],
+      "astSha256": "4ac2eeed742b280b5a9c4a1fbaeadd7f83bab41d5beb55ef3a5a4afe4e2634b3"
+    },
+    {
+      "name": "nomux_clear_screen",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "r",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "c",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        23439,
+        23700
+      ],
+      "astSha256": "8e1ad7b0c6cd3925e7dded158468c56910e37fb0e92e01ee54a69b03e7007b9e"
+    },
+    {
+      "name": "nomux_clear_to_eol",
+      "type": {
+        "qualType": "void (int, int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "row",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "col",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "c",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        23702,
+        24602
+      ],
+      "astSha256": "7685982f79e5d0879c11f1b726db888a27dd604c70b9b9269ae3720363b78ed7"
+    },
+    {
+      "name": "nomux_putch",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "ch",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "row",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "col",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        24604,
+        25005
+      ],
+      "astSha256": "dc0a00ce285c07fdf2377c7ad1a8d43c3261eed01ebf38349833e65e6acbeb23"
+    },
+    {
+      "name": "nomux_set_attr",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "attr",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        25007,
+        25216
+      ],
+      "astSha256": "93c53b20800356340a017b044c31adb538c1592ce49252a21e18fa8b17f11276"
+    },
+    {
+      "name": "nomux_end_attr",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        25217,
+        25266
+      ],
+      "astSha256": "efe9d5a650299a2d03b1894fbbc1a130c561c22d5f73f630e82476c1c75da9c7"
+    },
+    {
+      "name": "nomux_set_fg",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "color",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        25267,
+        25883
+      ],
+      "astSha256": "6035ae9e01d6872ea477df81b743cb5a2356422aafaeeb035eb3cdf5ded41ea0"
+    },
+    {
+      "name": "nomux_end_fg",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        25884,
+        25929
+      ],
+      "astSha256": "4e2b0fd13775fb3001717b505089393c1b8fe2f1a49429db955edb5107e57c46"
+    },
+    {
+      "name": "nomux_sgr_fg",
+      "type": {
+        "qualType": "int (int)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "fg",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        25931,
+        26076
+      ],
+      "astSha256": "9ca9079d1ccf4de6a4bc0a47dfec2509700219b86a93e2fc2e5ff805e0157dcf"
+    },
+    {
+      "name": "nomux_capture_screen",
+      "type": {
+        "qualType": "char *(void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "p",
+          "type": {
+            "qualType": "char *"
+          },
+          "static": false
+        },
+        {
+          "name": "row",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "col",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "end",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "cur_fg",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "cur_attr",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "in_dec",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "c",
+          "type": {
+            "qualType": "nomux_cell *"
+          },
+          "static": false
+        },
+        {
+          "name": "ch",
+          "type": {
+            "qualType": "char"
+          },
+          "static": false
+        },
+        {
+          "name": "fg",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "at",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        26111,
+        28870
+      ],
+      "astSha256": "430120698ef7be5ef9e5bea891cfacd49741146503c712553d12e83574bced4d"
+    },
+    {
+      "name": "nomux_enter_raw_mode",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        29637,
+        29973
+      ],
+      "astSha256": "34eb9913b2cff7c652b05be57507fa54d8e421db99881a1e2522f42bca743740"
+    },
+    {
+      "name": "nomux_raw_putch",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "ch",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        29975,
+        30543
+      ],
+      "astSha256": "010575e7c628c23da4eb6b6daabb77b9d8b9e5ebfd3bb3006abd02765f006622"
+    },
+    {
+      "name": "nomux_raw_emit",
+      "type": {
+        "qualType": "void (const char *, int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "bold",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "p",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        31361,
+        32986
+      ],
+      "astSha256": "a8f14b8ea603c1abb4f0009a8c10bf9a63307d75631d9b013ab417559e011923"
+    },
+    {
+      "name": "nomux_raw_emit_eol",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        32988,
+        33070
+      ],
+      "astSha256": "41aa0f9ef00c2875c442ea4a091cdb40592da88b1066f228c39858bea9dfba9f"
+    },
+    {
+      "name": "nomux_get_cursor",
+      "type": {
+        "qualType": "void (int *, int *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "cx",
+          "type": {
+            "qualType": "int *"
+          }
+        },
+        {
+          "name": "cy",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        33072,
+        33313
+      ],
+      "astSha256": "675b9cfd6603227b936749d8e9b21a0947911bf5d5282d1ddace7b2552326d71"
+    },
+    {
+      "name": "xputs",
+      "type": {
+        "qualType": "void (const char *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        33342,
+        33453
+      ],
+      "astSha256": "a22de4a2d4cd2ccb4f2f721d22539133c3081ec2413f731e2e978ec6b4d555fd"
+    },
+    {
+      "name": "cl_end",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "cx",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        33455,
+        33990
+      ],
+      "astSha256": "c5ca20e455bb2e1c5ddaa7d2f026b6144eaa2d6fb68fe8c7f204d1394c3e40e8"
+    },
+    {
+      "name": "term_clear_screen",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        33992,
+        34351
+      ],
+      "astSha256": "614eef5db168ce2588dd828a3f6d421dc6208b96da89fdbb52f8014c6d8862c5"
+    },
+    {
+      "name": "home",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        34353,
+        34568
+      ],
+      "astSha256": "714f54908b982cdcc75eb51b5149aa636834e5200a7297123bcf97ba81574d89"
+    },
+    {
+      "name": "standoutbeg",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        34570,
+        34627
+      ],
+      "astSha256": "464556bf0403581b6de98caeaba267f6c0eb63ca84f1b64f5f1fea84da456752"
+    },
+    {
+      "name": "standoutend",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        34629,
+        34686
+      ],
+      "astSha256": "60b08b8f5f841c962d0a303ccfcfec1d39d50bc96aa8be77f1b17f2e71ea2e93"
+    },
+    {
+      "name": "backsp",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        35085,
+        35121
+      ],
+      "astSha256": "b910f72de4dd1787592c7ef9a23c1c583498761fede07f2026fd5db506f535bf"
+    },
+    {
+      "name": "tty_nhbell",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        35123,
+        35268
+      ],
+      "astSha256": "aa716d5e8698862d737ab757b03cc382a09be463e1c215bbdc2a17b9bdd08b9a"
+    },
+    {
+      "name": "graph_on",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        35288,
+        35396
+      ],
+      "astSha256": "fcaae21da38a354f1b4b9f9eeadfa97b5632f902251e821d8ab6674af584b108"
+    },
+    {
+      "name": "graph_off",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        35398,
+        35507
+      ],
+      "astSha256": "d03c4cc50ed6929e624ad70361c32bcd2d85c52f0032eb29c572a24f74d99e18"
+    },
+    {
+      "name": "tty_delay_output",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "no_delay",
+          "type": {
+            "qualType": "int"
+          },
+          "static": true
+        },
+        {
+          "name": "no_delay_env",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "cmlen",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        35969,
+        38019
+      ],
+      "astSha256": "b06ee28ac721770d2ad10cd61a9ff80cbea029c67faf8392b1e22268160cfe0b"
+    },
+    {
+      "name": "cl_eos",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "r",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "cy",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        38061,
+        38615
+      ],
+      "astSha256": "14e66e84af3c18a2ad05774f92bdebf3ad4be0ce37f11dfe28880357cec4057a"
+    },
+    {
+      "name": "init_hilite",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": true,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "c",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "colors",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "setf",
+          "type": {
+            "qualType": "char *"
+          },
+          "static": false
+        },
+        {
+          "name": "scratch",
+          "type": {
+            "qualType": "char *"
+          },
+          "static": false
+        },
+        {
+          "name": "md_len",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "work",
+          "type": {
+            "qualType": "char *"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        41505,
+        44892
+      ],
+      "astSha256": "21157828183b04a37503c1cfff712ad7089c1b76a3de9322a52ab2b92fba1c31"
+    },
+    {
+      "name": "kill_hilite",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": true,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "c",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        44894,
+        46779
+      ],
+      "astSha256": "57d46bf9a75a66398a0670e3f5476f995f0149e25fd3132807aee993ce0d5745"
+    },
+    {
+      "name": "s_atr2str",
+      "type": {
+        "qualType": "char *(int)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "n",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        53953,
+        54774
+      ],
+      "astSha256": "81b6aa49716547b40ccf457eeeb6a0b847ee8eab56d15471d48b4ec1956c2514"
+    },
+    {
+      "name": "e_atr2str",
+      "type": {
+        "qualType": "char *(int)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "n",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        54776,
+        55394
+      ],
+      "astSha256": "efd72800de80fff602b7232e1abe0bdbad7612936f1c246c0d181a167c47b7a1"
+    },
+    {
+      "name": "term_attr_fixup",
+      "type": {
+        "qualType": "int (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "msk",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        55525,
+        56076
+      ],
+      "astSha256": "6aac1da458818b6a3db79cdec3cec09223f594964e7dcfe959c87c96a01e8b0e"
+    },
+    {
+      "name": "term_start_attr",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "attr",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "astr",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        56078,
+        56289
+      ],
+      "astSha256": "08e6a4818d8159dd47c6ee3cd425626efb62daf991074d60f9afb24752964830"
+    },
+    {
+      "name": "term_end_attr",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "attr",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "astr",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        56291,
+        56496
+      ],
+      "astSha256": "94852d9e2b819db0397537956bb2c0de4d0dc0affc61933658cb27fa9706f7c6"
+    },
+    {
+      "name": "term_start_raw_bold",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "soOn",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        56615,
+        56742
+      ],
+      "astSha256": "0159d8ac60c8d150316140d4fbb0f37badb049cc7b4f9e2f64174f4519504ecf"
+    },
+    {
+      "name": "term_end_raw_bold",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "soOff",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        56823,
+        56952
+      ],
+      "astSha256": "0d56ba77970192e135bb7d96f2053c3bb808d0b9885384b628d36d7026e9201a"
+    },
+    {
+      "name": "term_end_color",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        56954,
+        57071
+      ],
+      "astSha256": "be06ade6ccb0b4bdd8144117ba4ac3b84f7dbec4cc4cf75cc28782dd16fdbc88"
+    },
+    {
+      "name": "term_start_color",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "color",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [],
+      "byteRange": [
+        57073,
+        57339
+      ],
+      "astSha256": "07677f82908f397887c02641da6eb3190e41fc7043d2f2d300cc62b0d896990f"
+    },
+    {
+      "name": "term_start_bgcolor",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "color",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "tmp",
+          "type": {
+            "qualType": "char[8]"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        57341,
+        57462
+      ],
+      "astSha256": "9adb12fd09c267eed5c75707d92c0c00817dd0b62cc710961e441fc46642721c"
+    },
+    {
+      "name": "term_curs_set",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "visibility",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "vis",
+          "type": {
+            "qualType": "int"
+          },
+          "static": true
+        }
+      ],
+      "byteRange": [
+        57490,
+        57728
+      ],
+      "astSha256": "f22d74977ab28159d0b712b988ed159b2e804c93b9f2b4ef6de2325dbbb024ee"
+    },
+    {
+      "name": "emit24bit",
+      "type": {
+        "qualType": "void (long)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "mcolor",
+          "type": {
+            "qualType": "long"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "tcolorbuf",
+          "type": {
+            "qualType": "char[128]"
+          },
+          "static": true
+        }
+      ],
+      "byteRange": [
+        58908,
+        59209
+      ],
+      "astSha256": "c696bebdeae841f4a961dba2287bf4e6b3b872370c32cb11fd5d5eb44c721c99"
+    },
+    {
+      "name": "emit256",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "color256idx",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "tcolorbuf",
+          "type": {
+            "qualType": "char[128]"
+          },
+          "static": true
+        }
+      ],
+      "byteRange": [
+        59211,
+        59391
+      ],
+      "astSha256": "7fe8b5b0d60e58b65ef452c4b796ba9f138a98903621e2ffea66c768cf2bbfb4"
+    },
+    {
+      "name": "term_start_extracolor",
+      "type": {
+        "qualType": "void (uint32, uint16)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "customcolor",
+          "type": {
+            "desugaredQualType": "unsigned int",
+            "qualType": "uint32",
+            "typeAliasDeclId": "0x980ea0e68"
+          }
+        },
+        {
+          "name": "color256idx",
+          "type": {
+            "desugaredQualType": "unsigned short",
+            "qualType": "uint16",
+            "typeAliasDeclId": "0x980ea0d98"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "mcolor",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        }
+      ],
+      "byteRange": [
+        59393,
+        59647
+      ],
+      "astSha256": "c88b04df4a4b9414a5f3b137bc790a064d58662b41de53fbccac5ef48482440a"
+    },
+    {
+      "name": "term_end_extracolor",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "byteRange": [
+        59649,
+        59709
+      ],
+      "astSha256": "74356a9c87a44e509d4ad7312ca45b0f02738bc7e95760746d84d263f3cfe2d2"
+    }
+  ],
+  "preparedSha256": "bed864170a5747cf1e04585be62412c498f36ac9f261ac835b8a3df84a763b0e",
+  "staticBuffers": {
+    "tty_decgraphics_termcap_fixup.ctrlN": 2,
+    "tty_decgraphics_termcap_fixup.ctrlO": 2,
+    "tty_decgraphics_termcap_fixup.appMode": 3,
+    "tty_decgraphics_termcap_fixup.numMode": 3,
+    "emit24bit.tcolorbuf": 128,
+    "emit256.tcolorbuf": 128
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "In_hell": 100,
+  "In_mines": 101,
+  "Mgender": 102,
+  "altarmask_at": 103,
+  "costly_spot": 104,
+  "db_under_typ": 105,
+  "display_inventory": 106,
+  "do_reqmenu": 107,
+  "doextlist": 108,
+  "doextversion": 109,
+  "doset": 110,
+  "doset_simple": 111,
+  "is_drawbridge_wall": 112,
+  "is_treefruit": 113,
+  "ok_to_quest": 114,
+  "sticks": 115,
+  "trapped_chest_at": 116,
+  "trapped_door_at": 117
+}

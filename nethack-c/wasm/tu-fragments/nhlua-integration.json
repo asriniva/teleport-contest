@@ -1,0 +1,153 @@
+{
+  "reservation": "TU118/J124 NHLUA exclusive",
+  "status": "Complete frozen private configured Emscripten first pass; selected build unchanged; native host and whole-game integration pending",
+  "source": {
+    "path": "src/nhlua.c",
+    "preparedSha256": "cf4403c39d709de3a0aaf8c1797bbead24d88db4b927e798e2237285722a9c24",
+    "pristineSha256": "cf161f30beb1147102cb9a137997acea715bdec9d7b16dc44082518d5ec257e1",
+    "preparedEqualsPristine": false,
+    "inheritedDifference": "Prepared source contains the inherited Lua RNG-context helpers and caller metadata. Raw prepared-vs-pristine diff is retained privately.",
+    "functionNamesOrderFormals": 94,
+    "public": 36,
+    "static": 58,
+    "comments": 286,
+    "dataObjects": 27,
+    "fileDataImagesComparedToC": 16,
+    "localStaticObjects": 11,
+    "luaIntCallbacks": 44,
+    "nativeFunctionPointerIdentities": 58,
+    "typedCallSites": 526,
+    "privateWindowIndirectSites": 9,
+    "configuredProfile": {
+      "NHL_SANDBOX": true,
+      "LUA_VERSION_RELEASE_NUM": 50408,
+      "NHL_SB_STEPSIZE": 1000,
+      "inactive": [
+        "DUMPLOG",
+        "SFCTOOL",
+        "notyet",
+        "DLB"
+      ]
+    },
+    "activeBodySha256": "22c20b37bded3eda52311a3da2d5990fce5052744eaca0fda358563d0716825a"
+  },
+  "integration": {
+    "removeObject": "nhlua.o",
+    "keepExistingLuaInterpreterProviderAndShim": true,
+    "nativeSources": [
+      "nethack-c/wasm/tu-fragments/nhlua-support.c"
+    ],
+    "nativeIncludeDirectories": [
+      "scripts",
+      "nethack-c/wasm/tu-fragments"
+    ],
+    "jsLibraries": [
+      "nethack-c/wasm/tu-libraries/nhlua.js"
+    ],
+    "runtimeImport": {
+      "module": "js/ported/nhlua-runtime.js",
+      "export": "callNhlua"
+    },
+    "runtimeDispatch": "Module.nethackPorted.nhlua = (services, name, ...args) => callNhlua(services, name, ...args)",
+    "initialization": "Each Module initializes its private typed buffers from authoritative JS source data before its first NHLUA body executes. Native support has zero-only writable typed backing, real callback addresses and fixed layout metadata. Immutable metadata is decoded locally and committed as a frozen map per actual Module only after ABI validation and source-data initialization; failed-ABI retry and instance isolation are tested. Memory views are fresh.",
+    "forbidden": "Do not retain original nhlua.o as an algorithm fallback; do not alter Lua82 or any inactive configuration branch."
+  },
+  "nativeBoundary": {
+    "allowed": [
+      "typed foreign-call thunks",
+      "typed zero storage and actual global addresses",
+      "actual ABI layout/width/sign checks",
+      "native function-pointer trampolines",
+      "generic native setjmp frame over JS dynamic extent"
+    ],
+    "sourcePolicy": "All 94 original bodies remain JS with the original names/order/formals/comments and expanded configured macro semantics.",
+    "continuation": "One localized continuation at the original nhl_pcall setjmp site holds the exact nud->jb and native frame; no copied buffer restoration, policy extraction, prefix replay or returned setjmp frame.",
+    "fatalContract": "Quota and allocator-panic Modules are abandoned; no Lua API or close after fatal panic. The original fatal quota jump bypasses the frozen hook callback-frame epilogue. Ordinary protected LuaError reuse is checked separately."
+  },
+  "sourceQuirksPreserved": [
+    "Unsigned32 statctr multiplication wraps before long64 widening.",
+    "Allocator refuses only when current used memory is strictly above its limit; size_t is explicitly narrowed to unsigned32 for re_alloc.",
+    "Configured re_alloc is returns_nonnull and fatal on OOM; NULL-injection into that foreign dependency is excluded.",
+    "The source unconditional else-if NHL_SB_VERSION test remains unchanged.",
+    "ustruct exposes original byte-width reads including coordxy low-byte behavior.",
+    "get_table_boolean string choices return the original option indices.",
+    "nhl_clearfromtable retains its original nil pushes and relative stack behavior.",
+    "The source same-L==gl.luacore variable stack quirk remains unchanged.",
+    "free_tutorial releases buffers but does not independently clear gmst_stored; tests end that lifecycle without later restoration."
+  ],
+  "validation": {
+    "c": {
+      "cases": 402,
+      "checks": 2073,
+      "executedBodies": 94,
+      "nativeEntryNames": 83,
+      "result": ".cache/nhlua-author/source-result-c.json"
+    },
+    "js": {
+      "cases": 402,
+      "checks": 2073,
+      "executedBodies": 94,
+      "nativeEntryNames": 83,
+      "result": ".cache/nhlua-author/source-result-js.json"
+    }
+  },
+  "commands": [
+    ".cache/emsdk/node/24.19.0_64bit/bin/node scripts/check-nhlua-data.mjs",
+    ".cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-tu-nhlua.mjs --build",
+    ".cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-tu-nhlua.mjs --backend=js --build"
+  ],
+  "evidenceScope": [
+    "Both modes compare actual configured original C against JS bodies with separate no-LTO typed C consumers.",
+    "The exact same NetHack nhlib.lua and nhcore.lua inputs execute in both modes.",
+    "All 16 file-scope C data images are compared using byte values/string bytes/callback identities, without sorting foreign outputs.",
+    "All 24 ustruct projections have distinct nonzero native field inputs.",
+    "Rejected ABI metadata remains unpublished; a genuine retry succeeds and per-Module numeric metadata maps are frozen and isolated.",
+    "Nonempty inventory/tutorial/stairs/monster chains, real heap growth and same-/cross-Module reentry are directed.",
+    "Source guards check actual fresh basename CPP bodies/literals, original source SHA, function/formal order, comments and tables.",
+    "The native C oracle includes the original source without type/function macro renaming; only the exact private include-directory prefix maps to the production basename."
+  ],
+  "unverified": [
+    "Independent native-host C ABI/parity",
+    "Whole-game mixed candidate behavior and recording equivalence",
+    "Unconfigured branches and universal Lua conformance",
+    "Byte-for-byte equality of unordered multi-key native Lua serialization across independently seeded C Lua Modules"
+  ],
+  "historicalDiagnostics": {
+    "raw": ".cache/nhlua-author/*failure*.json and historical build/run logs",
+    "multiKeyIteration": "Raw native-Lua key-order differences preserved; no sorting/output normalization. Deterministic serialization witnesses use a single key; ordinary cross-state variable behavior is compared directly.",
+    "tutorialLifecycle": "Retired fixture freed the tutorial snapshot then later attempted tutorial_leave; actual original C asserted. Corrected cleanup runs at lifecycle end.",
+    "nonnullContract": "A new, never-run NULL-injection branch in re_alloc produced a returns_nonnull compile warning and was removed. Final construction failure transport uses the dependency's legal nonreturning panic.",
+    "filename": "A private prefix construction dropped its trailing slash and left /nhlua.c. The exact prefix was corrected; raw trace mismatch retained."
+  },
+  "ownedFiles": [
+    "js/ported/nhlua.js",
+    "js/ported/nhlua-runtime.js",
+    "nethack-c/wasm/tu-libraries/nhlua.js",
+    "nethack-c/wasm/tu-fragments/nhlua-support.c",
+    "nethack-c/wasm/tu-fragments/nhlua-support.h",
+    "nethack-c/wasm/tu-fragments/nhlua-schema.json",
+    "nethack-c/wasm/tu-fragments/nhlua-source-data.h",
+    "nethack-c/wasm/tu-fragments/nhlua-source-check.mjs",
+    "nethack-c/wasm/tu-fragments/nhlua-integration.json",
+    "scripts/tu-nhlua-layout.h",
+    "scripts/tu-nhlua-probe.c",
+    "scripts/tu-nhlua-probe-consumer.c",
+    "scripts/test-tu-nhlua.mjs",
+    "scripts/check-nhlua-data.mjs"
+  ],
+  "frozenLua82": {
+    "manifest": ".cache/js-lua-final-freeze/manifest.json",
+    "sha256": "95e1a8eba61a156e1c6339b3bd617ff46427887fc6f5be898f444c7daf9d69b6",
+    "parentRecheck": ".cache/lua82-parent-recheck-post110.json",
+    "liveInputs": 82,
+    "production": 46,
+    "tests": 36,
+    "changedByNhlua": 0
+  },
+  "completionGates": [
+    "Parent verifies all 14 handoff hashes and reruns both configured backend gates.",
+    "Parent integrates on an isolated coherent game base using the existing frozen Lua82 dependency.",
+    "Original recording/public/integration/deadline gates pass unchanged before selection.",
+    "Independent native-host proof remains separately pending."
+  ]
+}

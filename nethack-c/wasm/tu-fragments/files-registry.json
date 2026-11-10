@@ -1,0 +1,22 @@
+{
+  "name": "files",
+  "source": "src/files.c",
+  "javascript": "js/ported/files.js",
+  "library": "nethack-c/wasm/tu-libraries/files.js",
+  "configuredFunctions": true,
+  "reference": "prepared",
+  "probeContext": false,
+  "adapterSources": [
+    "js/ported/files-runtime.js",
+    "scripts/tu-files-layout.h",
+    "nethack-c/wasm/tu-fragments/files-support.c",
+    "nethack-c/wasm/tu-fragments/files-schema.json",
+    "nethack-c/wasm/tu-fragments/files-source-inventory.json",
+    "nethack-c/wasm/tu-fragments/files-source-check.py"
+  ],
+  "nativeStorageSources": [
+    {
+      "source": "nethack-c/wasm/tu-fragments/files-support.c"
+    }
+  ]
+}

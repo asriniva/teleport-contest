@@ -144,6 +144,8 @@ int lua_isnumber(lua_State *L,int i) { return D1(L,"lua_isnumber",i); }
 int lua_isstring(lua_State *L,int i) { return D1(L,"lua_isstring",i); }
 int lua_isinteger(lua_State *L,int i) { return D1(L,"lua_isinteger",i); }
 int lua_iscfunction(lua_State *L,int i) { return D1(L,"lua_iscfunction",i); }
+int lua_isuserdata(lua_State *L,int i) { int type=lua_type(L,i); return type==LUA_TUSERDATA || type==LUA_TLIGHTUSERDATA; }
+int lua_rawequal(lua_State *L,int a,int b) { return D2(L,"lua_rawequal",a,b); }
 int lua_toboolean(lua_State *L,int i) { return D1(L,"lua_toboolean",i); }
 lua_Integer lua_tointegerx(lua_State *L,int i,int *valid) { return (lua_Integer)D2(L,"lua_tointegerx",i,valid); }
 lua_Number lua_tonumberx(lua_State *L,int i,int *valid) { return bits_number(D2(L,"lua_tonumberx",i,valid)); }

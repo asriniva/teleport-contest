@@ -1,0 +1,114 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {spawnSync} from 'node:child_process';
+import {Session} from 'node:inspector';
+import {callTrap,createTrapEnvironment} from '../js/ported/trap-runtime.js';
+import {trapSchema as schema} from '../js/ported/trap.js';
+import {C,R,T} from '../js/ported/c-runtime.js';
+const directory=resolve('.cache/trap-author');await mkdir(directory,{recursive:true});
+const helpers='trace clear option stack buffer object mon_pointer trap trap_live hero level coord global seed catalogue copy_monster setup catalogue_witness layout_count layout_name layout_value data callback trap_consumer trap_obj_consumer enum unsigned_product compound_narrow typed_field typed_get stride native_constant'.split(' ');
+if(process.argv.includes('--build')){
+ const defs=JSON.parse(await readFile('nethack-c/wasm/compile-defines.json','utf8'));
+ await writeFile(resolve(directory,'probe-library.js'),"addToLibrary({probe_js_event__sig:'v',probe_js_event:function(){Module.trapProbeEvent();},probe_js_fatal__deps:['$UTF8ToString'],probe_js_fatal__sig:'vp',probe_js_fatal:function(message){throw new Error('fixture-fatal:'+UTF8ToString(Number(message)));}});\n");
+ for(const mode of ['reference','hybrid']){
+  const args=['-O2','-g','-fno-lto','-Wl,--wrap=free','-sMEMORY64=1','-sMODULARIZE=1','-sENVIRONMENT=node','-sALLOW_MEMORY_GROWTH=1','-sEXPORTED_RUNTIME_METHODS=HEAPU8','-sEXPORTED_FUNCTIONS='+JSON.stringify([...schema.functions.map(f=>'_probe_call_'+f.name),...helpers.map(n=>'_probe_'+n)]),'--no-entry',...defs.map(x=>'-D'+x),'-I'+resolve('.cache/wasm64-build/tree/include'),'-I'+resolve('.cache/ncurses-wasm64-build/include'),'-I'+resolve('scripts'),'-I'+resolve('nethack-c/wasm/tu-fragments'),'-include',resolve('nethack-c/wasm/native-terminal.h'),'-fmacro-prefix-map='+process.cwd()+'/scripts/../.cache/wasm64-build/tree/src/=',resolve('scripts/tu-trap-probe.c'),resolve('scripts/tu-trap-probe-consumer.c'),resolve('.cache/wasm64-build/tree/src/objects.c'),resolve('.cache/wasm64-build/tree/src/monst.c'),'--js-library',resolve(directory,'probe-library.js')];
+  if(mode==='hybrid')args.push('-DHYBRID_TRAP=1','--js-library',resolve('nethack-c/wasm/tu-libraries/trap.js'));
+  args.push('-o',resolve(directory,'probe-'+mode+'.mjs'));const command=resolve('.cache/emsdk/upstream/emscripten/emcc'),result=spawnSync(command,args,{encoding:'utf8',maxBuffer:32*1024*1024});
+  await writeFile(resolve(directory,'final-build-'+mode+'.json'),JSON.stringify({command,args},null,2)+'\n');await writeFile(resolve(directory,'final-build-'+mode+'.log'),result.stdout+result.stderr);assert.equal(result.status,0,result.stderr);
+ }
+}
+const session=new Session();session.connect();const post=(method,params={})=>new Promise((ok,no)=>session.post(method,params,(e,r)=>e?no(e):ok(r)));await post('Profiler.enable');await post('Profiler.startPreciseCoverage',{callCount:true,detailed:true});
+const factories=await Promise.all(['reference','hybrid'].map(async name=>(await import(pathToFileURL(resolve(directory,'probe-'+name+'.mjs')))).default));
+const serviceByModule=new WeakMap();const runtime={trap:(services,name,...args)=>{serviceByModule.set(services.moduleKey,services);return callTrap(services,name,...args);}};
+const modules=await Promise.all(factories.map(f=>f({nethackPorted:runtime})));modules.forEach(m=>m._probe_setup());
+const text=(m,p)=>{p=Number(p);if(!p)return null;let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.subarray(p,end)).toString('latin1');};
+const globals=Object.keys(schema.foreignGlobals),foreignOptions=JSON.parse(await readFile(resolve(directory,'foreign-option-indices.json'),'utf8'));
+const field=(record,name)=>schema.records[record].fields.find(f=>f.name===name);
+const global=(m,name)=>Number(m._probe_global(globals.indexOf(name)));
+const at=(m,base,record,...path)=>{let offset=Number(base),rec=record;for(const name of path){const f=field(rec,name);assert(f,rec+'.'+name);offset+=f.offset;rec=f.type.record;}return offset;};
+const set=(m,p,type,v)=>{const dv=new DataView(m.HEAPU8.buffer),names={i8:'setInt8',u8:'setUint8',i16:'setInt16',u16:'setUint16',i32:'setInt32',u32:'setUint32',i64:'setBigInt64',u64:'setBigUint64'};dv[names[type]??'setBigUint64'](Number(p),typeof type==='object'||type.endsWith('64')?BigInt(v):Number(v),true);};
+const get=(m,p,type)=>{const dv=new DataView(m.HEAPU8.buffer),names={i8:'getInt8',u8:'getUint8',i16:'getInt16',u16:'getUint16',i32:'getInt32',u32:'getUint32',i64:'getBigInt64',u64:'getBigUint64'};return dv[names[type]??'getBigUint64'](Number(p),true);};
+const put=(m,p,record,name,v)=>{const f=field(record,name);if(f.bits!==null){let old=0n;for(let i=0;i<Math.ceil((f.bitOffset+f.bits)/8);i++)old|=BigInt(m.HEAPU8[Number(p)+f.offset+i])<<BigInt(8*i);const mask=((1n<<BigInt(f.bits))-1n)<<BigInt(f.bitOffset);old=old&~mask|(BigInt(v)<<BigInt(f.bitOffset)&mask);for(let i=0;i<Math.ceil((f.bitOffset+f.bits)/8);i++)m.HEAPU8[Number(p)+f.offset+i]=Number(old>>BigInt(8*i)&255n);}else set(m,Number(p)+f.offset,f.type,v);};
+const nativeConstants=Object.fromEntries(['W_ARMF','ROLL','LAUNCH_UNSEEN','LAUNCH_KNOWN','DAGGER'].map((n,i)=>[n,Number(modules[0]._probe_native_constant(i))]));
+const constant=name=>{assert(Object.hasOwn(schema.constants,name)||Object.hasOwn(nativeConstants,name),name);return schema.constants[name]??nativeConstants[name];};
+const object=m=>m._probe_object(0),monster=m=>m._probe_mon_pointer(0),trap=m=>m._probe_trap(0),hero=m=>m._probe_hero(),level=m=>m._probe_level(0),coord=m=>m._probe_coord(0),buffer=m=>m._probe_buffer();
+let cases=0,checks=0;const evidence=[],entered=new Set();
+function compare(label,values){assert.deepEqual(values[1],values[0],label);checks++;assert.equal(C,undefined);checks++;evidence.push({label,values});}
+function identity(m,p){p=Number(p);if(!p)return null;for(const [name,fn,n]of [['obj',i=>m._probe_object(i),16],['mon',i=>m._probe_mon_pointer(i),8],['trap',i=>m._probe_trap(i),16],['level',i=>m._probe_level(i),8],['coord',i=>m._probe_coord(i),8]])for(let i=0;i<n;i++)if(p===Number(fn(i)))return name+':'+i;return 'other-nonnull';}
+function snapshot(m){return {u:['ux','uy','utrap','utraptype','uhp','uhpmax','uen','uenmax','ucreamed'].map(n=>get(m,at(m,global(m,'u'),'you',n),field('you',n).type)),objects:Array.from({length:3},(_,i)=>{const p=m._probe_object(i);return ['otyp','quan','spe','greased','oeroded','oeroded2','in_use','owornmask'].map(n=>readField(m,p,'obj',n));}),traps:Array.from({length:3},(_,i)=>!m._probe_trap_live(i)?'freed':['tx','ty','ttyp','tseen','once','madeby_u'].map(n=>readField(m,m._probe_trap(i),'trap',n))),mon:['mhp','mhpmax','mtrapped','msleeping','mcanmove','mfrozen'].map(n=>readField(m,monster(m),'monst',n))};}
+function readField(m,p,rec,name){const f=field(rec,name);if(f.bits!==null){let v=0n;for(let i=0;i<Math.ceil((f.bitOffset+f.bits)/8);i++)v|=BigInt(m.HEAPU8[Number(p)+f.offset+i])<<BigInt(8*i);return Number(v>>BigInt(f.bitOffset)&((1n<<BigInt(f.bits))-1n));}return get(m,Number(p)+f.offset,f.type);}
+function call(name,...args){assert.equal(args.length,schema.functions.find(f=>f.name===name).parameters.length,name+' fixture arity');cases++;entered.add(name);const values=modules.map(m=>{m._probe_clear();const before=m._probe_stack();const result=m['_probe_call_'+name](...args.map(v=>typeof v==='function'?v(m):v));assert.equal(m._probe_stack(),before,name+' native stack');checks++;const ret=schema.functions.find(f=>f.name===name).returnType;return {result:ret.includes('*')?(ret.includes('char')?text(m,result):identity(m,result)):result,trace:text(m,m._probe_trace()),state:snapshot(m)};});try{compare(name,values);}catch(error){writeFile(resolve(directory,'failure-'+cases+'.json'),JSON.stringify({name,args:args.map(v=>typeof v==='function'?'pointer':v),values},(_,v)=>typeof v==='bigint'?v.toString()+'n':v,2));throw error;}return values;}
+modules.forEach(m=>{assert.equal(m._probe_catalogue_witness(),1);checks++;});
+const layouts=modules.map(m=>Object.fromEntries(Array.from({length:Number(m._probe_layout_count())},(_,i)=>[text(m,m._probe_layout_name(BigInt(i))),Number(m._probe_layout_value(BigInt(i)))])));compare('actual C layout metadata',layouts);
+for(let type=-1;type<27;type++){call('floor_trigger',type);call('into_vs_onto',type);call('count_traps',type);}
+call('t_at',10,10);call('unconscious');call('launch_in_progress');call('trap_sanity_check');call('wearing_iron_shoes',monster);call('m_easy_escape_pit',monster);call('dng_bottom',level);call('clamp_hole_destination',level);call('hole_destination',level);
+for(const [time,type]of [[0,0],[1,1],[1000,2],[4294967295,7]]){call('set_utrap',time,type);call('reset_utrap',0);}
+for(let t=1;t<24;t++){modules.forEach(m=>put(m,trap(m),'trap','ttyp',t));call('trapname',t,1);call('m_harmless_trap',monster,trap);call('immune_to_trap',monster,t);call('check_in_air',monster,0);}
+call('unsqueak_ok',object);call('acid_damage',object);call('water_damage',object,0n,0);call('fire_damage',object,0,10,10);
+call('conjoined_pits',trap,m=>m._probe_trap(1),0);call('adj_nonconjoined_pit',trap);call('uteetering_at_seen_pit',trap);call('uescaped_shaft',trap);call('isclearpath',coord,1,1,0);
+// Directed source branches share typed fixture state and preserve physical RNG caller logs.
+function reset(){modules.forEach(m=>{m._probe_setup();m._probe_option(499,1);});}
+function setObjectType(m,p,typ){put(m,p,'obj','otyp',typ);put(m,p,'obj','oclass',readField(m,m._probe_catalogue(0,typ),'objclass','oc_class'));}
+for(let seed=0;seed<8;seed++)for(const who of [hero,monster]){reset();modules.forEach(m=>{m._probe_seed(seed);put(m,trap(m),'trap','ttyp',constant('RUST_TRAP'));});call('trapeffect_rust_trap',who,trap,0);}
+for(const [fn,type]of Object.entries({trapeffect_arrow_trap:'ARROW_TRAP',trapeffect_dart_trap:'DART_TRAP',trapeffect_rocktrap:'ROCKTRAP',trapeffect_sqky_board:'SQKY_BOARD',trapeffect_bear_trap:'BEAR_TRAP',trapeffect_slp_gas_trap:'SLP_GAS_TRAP',trapeffect_fire_trap:'FIRE_TRAP',trapeffect_pit:'PIT',trapeffect_hole:'HOLE',trapeffect_telep_trap:'TELEP_TRAP',trapeffect_level_telep:'LEVEL_TELEP',trapeffect_web:'WEB',trapeffect_statue_trap:'STATUE_TRAP',trapeffect_magic_trap:'MAGIC_TRAP',trapeffect_anti_magic:'ANTI_MAGIC',trapeffect_poly_trap:'POLY_TRAP',trapeffect_landmine:'LANDMINE',trapeffect_rolling_boulder_trap:'ROLLING_BOULDER_TRAP',trapeffect_magic_portal:'MAGIC_PORTAL',trapeffect_vibrating_square:'VIBRATING_SQUARE'}))for(const who of [monster,hero]){reset();modules.forEach(m=>put(m,trap(m),'trap','ttyp',constant(type)));call(fn,who,trap,0);}
+const string=m=>{const p=buffer(m);m.HEAPU8.set(Buffer.from('fixture item\0','latin1'),Number(p));return p;};
+function property(m,name,value){const props=field('you','uprops');const rec=props.type.of.record,prop=schema.records[rec];set(m,global(m,'u')+props.offset+constant(name)*prop.size+field(rec,'intrinsic').offset,'i64',BigInt(value));}
+const directed=[
+ ['grease_protect',object,0n,hero],['mk_trap_statue',10,10],['maketrap',10,10,constant('PIT')],['fall_through',0,0],
+ ['animate_statue',object,10,10,0,buffer],['keep_saddle_with_steedcorpse',200,object,m=>m._probe_object(1)],['trapeffect_selector',monster,trap,0],['choose_trapnote',trap],
+ ['launch_drop_spot',object,10,10],['force_launch_placement'],['find_random_launch_coord',trap,coord],['mkroll_launch',trap,10,10,constant('BOULDER'),1n],['mintrap',monster,0],
+ ['instapetrify',string],['minstapetrify',monster,0],['float_up'],['float_down',0n,0n],['climb_pit'],['fire_damage_chain',object,0,0,10,10],['lava_damage',object,10,10],['pot_acid_damage',object,0,0],['water_damage_chain',object,0],['emergency_disrobe',buffer],
+ ['rnd_nextto_goodpos',buffer,m=>buffer(m)+8n,monster],['back_on_ground',0],['rescued_from_terrain',constant('DROWNING')],['drown'],['dountrap'],['could_untrap',0,0],['untrap_prob',trap],['cnv_trap_obj',constant('BEARTRAP'),1,trap,0],['move_into_trap',trap],['try_disarm',trap,0],['reward_untrap',trap,monster],
+ ['disarm_holdingtrap',trap],['disarm_landmine',trap],['disarm_squeaky_board',trap],['disarm_shooting_trap',trap,constant('ARROW')],['try_lift',monster,trap,0,0],['help_monster_out',monster,trap],['disarm_box',object,0,0],['untrap_box',object,0,0],['untrap',0,10,10,object],['openholdingtrap',monster,buffer],['closeholdingtrap',monster,buffer],['openfallingtrap',monster,0,buffer],['chest_trap',object,constant('HEAD'),0],['delfloortrap',trap],['b_trapped',string,constant('HEAD')],['lava_effects'],['sink_into_lava'],['sokoban_guilt'],['maybe_finish_sokoban'],['trap_ice_effects',10,10,1]
+];
+for(const [name,...args]of directed){
+ reset();modules.forEach(m=>{m._probe_option(498,1);put(m,global(m,'flags'),'flag','explore',1);if(['animate_statue'].includes(name)){setObjectType(m,object(m),constant('STATUE'));put(m,object(m),'obj','corpsenm',constant('PM_GREMLIN'));}if(name==='disarm_holdingtrap')put(m,trap(m),'trap','ttyp',constant('BEAR_TRAP'));if(name==='disarm_landmine')put(m,trap(m),'trap','ttyp',constant('LANDMINE'));if(name==='disarm_squeaky_board')put(m,trap(m),'trap','ttyp',constant('SQKY_BOARD'));if(['chest_trap','disarm_box','untrap_box','untrap'].includes(name))setObjectType(m,object(m),constant('CHEST'));if(name==='lava_effects')property(m,'WWALKING',1);});
+ call(name,...args);
+}
+// Independently compiled scalar conversions and typed native field reads.
+reset();call('floor_trigger',constant('PIT'));
+const transport=createTrapEnvironment(serviceByModule.get(modules[1]),{initialized:true});
+for(const value of [-4294967297n,-2147483649n,-1n,0n,1n,2147483648n,4294967295n,4294967296n])for(const [which,type]of [[0,'i32'],[1,'u32'],[2,'u32'],[3,schema.records.permonst.fields.find(f=>f.name==='pmidx').type]]){cases++;compare('native enum conversion '+which,[Number(modules[0]._probe_enum(which,value)),transport.cast(type,value)]);}
+for(const [a,b,d]of [[18446744073709551615n,3n,7n],[9223372036854775808n,2n,3n],[4294967297n,4294967297n,11n]]){cases++;compare('unsigned64 multiply wraps before divide',[modules[0]._probe_unsigned_product(a,b,d),transport.binary('u64','/',transport.binary('u64','*',a,b),d)]);}
+for(const [a,d]of [[2147483647,2147483648n],[-2147483648,1n],[-1,-4294967296n],[1,9223372036854775807n]]){cases++;compare('compound long before int narrowing',[modules[0]._probe_compound_narrow(a,d),transport.cast('i32',transport.binary('i64','-',transport.cast('i64',a),d))]);}
+const coordRecord=field('trap','launch').type.record;
+const projections=[['trap','ttyp'],['trap','tseen'],['trap','once'],['trap','madeby_u'],['vlaunchinfo','v_launch_otyp'],[coordRecord,'x'],[coordRecord,'y'],['vlaunchinfo','v_conjoined'],['vlaunchinfo','v_tnote'],[coordRecord,'x'],[coordRecord,'y']];
+for(let which=0;which<projections.length;which++)for(const value of [-65537n,-32769n,-1n,0n,1n,31n,255n,32768n,65535n,65536n]){
+ const [rec,name]=projections[which],f=field(rec,name),t=trap(modules[1]);const base=which<4?Number(t):which>=9?at(modules[1],t,'trap','launch'):at(modules[1],t,'trap','vl');
+ if(f.bits!==null)transport.setBit(base+f.offset,f.bitOffset,f.bits,value);else transport.write(base+f.offset,f.type,value);cases++;
+ compare('native bitfield/union alias '+which,[modules[0]._probe_typed_field(which,trap(modules[0]),value),modules[1]._probe_typed_get(which,t)]);
+ // Read through the production helper as well, independently of the test's native writer.
+ const got=f.bits!==null?transport.bit(base+f.offset,f.bitOffset,f.bits):transport.read(base+f.offset,f.type);
+ compare('production field decoder '+which,[modules[1]._probe_typed_get(which,t),BigInt(got)]);
+}
+for(const [i,rec]of ['rm','obj','monst','trap','permonst',coordRecord,'d_level'].entries()){cases++;compare('native pointer stride '+rec,[Number(modules[0]._probe_stride(i)),transport.sizeof({record:rec})]);}
+function sourceData(m,p,d){p=Number(p);if(typeof d==='string')return get(m,p,d);if(d.pointer)return text(m,get(m,p,d));if(d.array){const child=d.array.length===1?d.of:{array:d.array.slice(1),of:d.of};return Array.from({length:d.array[0]},(_,i)=>sourceData(m,p+i*transport.sizeof(child),child));}throw Error('Unexpected source-data type');}
+for(const [i,[name,d]]of Object.entries(schema.data).filter(([,d])=>!d.staticLocal).entries()){cases++;compare('complete original file-static image '+name,modules.map(m=>sourceData(m,m._probe_data(i),d.type)));}
+reset();for(let note=0;note<12;note++){modules.forEach(m=>put(m,at(m,trap(m),'trap','vl'),'vlaunchinfo','v_tnote',note));call('trapnote',trap,note%2);}
+// Native catalogue pointer identity differs from a byte-identical allocated copy.
+const identityLogs=[];
+for(const copy of [false,true]){reset();modules.forEach(m=>{put(m,monster(m),'monst','data',copy?m._probe_copy_monster(0,constant('PM_GREMLIN')):m._probe_catalogue(1,constant('PM_GREMLIN')));m._probe_seed(1);put(m,trap(m),'trap','ttyp',constant('RUST_TRAP'));});identityLogs.push(call('trapeffect_rust_trap',monster,trap,0)[0].trace);}
+assert.notEqual(identityLogs[0],identityLogs[1],'Same-content copied permonst must not become a catalogue pointer');checks++;
+// Nonnull foreign record return and recursive native callback boundaries.
+for(const positive of [false,true]){reset();modules.forEach(m=>{m._probe_option(foreignOptions.which_armor,Number(positive));setObjectType(m,object(m),constant('IRON_SHOES'));put(m,object(m),'obj','owornmask',BigInt(constant('W_ARMF')));});const result=call('wearing_iron_shoes',monster);assert.equal(result[0].result,Number(positive));checks++;}
+for(const positive of [false,true]){reset();modules.forEach(m=>{m._probe_option(foreignOptions.makemon,Number(positive));setObjectType(m,object(m),constant('STATUE'));put(m,object(m),'obj','corpsenm',constant('PM_GREMLIN'));});call('animate_statue',object,10,10,0,buffer);call('mk_trap_statue',10,10);}
+for(const name of ['DAGGER','POT_OIL','CAN_OF_GREASE']){reset();modules.forEach(m=>setObjectType(m,object(m),constant(name)));cases++;compare('separate no-LTO source callback '+name,modules.map(m=>m._probe_trap_obj_consumer(m._probe_callback(0),object(m))));}
+// Both the unseen-launch goto and the adjacent native fallthrough paths.
+for(const style of [constant('ROLL')|constant('LAUNCH_UNSEEN'),constant('ROLL')|constant('LAUNCH_KNOWN'),constant('ROLL'),0]){
+ reset();modules.forEach(m=>{setObjectType(m,object(m),constant('BOULDER'));put(m,object(m),'obj','ox',10);put(m,object(m),'obj','oy',10);m._probe_option(foreignOptions.sobj_at,1);});call('launch_obj',constant('BOULDER'),10,10,11,10,style);
+}
+// Exact forward-jump paths: survivable water walking and repeated explore-mode saves.
+for(const walking of [false,true]){reset();modules.forEach(m=>{put(m,global(m,'flags'),'flag','explore',1);m._probe_option(498,1);if(walking)property(m,'WWALKING',1);});call('lava_effects');}
+const auxiliary=await factories[1]({nethackPorted:runtime});
+reset();const originalHeaps=modules.map(m=>m.HEAPU8.buffer);
+for(const m of modules){m.trapProbeEvent=()=>{const previous=[C,R,T];assert.equal(auxiliary._probe_call_floor_trigger(constant('PIT')),1);assert.deepEqual([C,R,T],previous);assert.equal(m._probe_call_floor_trigger(constant('ARROW_TRAP')),1);assert.deepEqual([C,R,T],previous);checks+=4;};m._probe_option(500,1);m._probe_option(501,1);}
+call('grease_protect',object,string,hero);modules.forEach((m,i)=>{assert.notEqual(m.HEAPU8.buffer,originalHeaps[i]);checks++;});
+// Failed validation cannot publish metadata. A valid retry on the same new Module succeeds.
+let invalid=true;const retry=await factories[1]({nethackPorted:{trap:(services,name,...args)=>callTrap(invalid?{...services,layout:{...services.layout,pointerSize:4}}:services,name,...args)}});
+assert.throws(()=>retry._probe_call_floor_trigger(constant('PIT')),/TRAP ABI pointerSize/);assert.equal(retry.teleportTrapTransport.layout,undefined);assert.deepEqual([C,R,T],[undefined,undefined,undefined]);invalid=false;assert.equal(retry._probe_call_floor_trigger(constant('PIT')),1);assert(Object.isFrozen(retry.teleportTrapTransport.layout));assert.notEqual(retry.teleportTrapTransport.layout,modules[1].teleportTrapTransport.layout);checks+=6;cases++;
+// Real fatal source control flow: abandon each fresh Module after the nonreturning foreign effect.
+const fatals=[];for(const factory of factories){const m=await factory({nethackPorted:runtime});m._probe_setup();m._probe_clear();const trace=m._probe_trace();let error;try{m._probe_call_instapetrify(string(m));}catch(e){error=e.message;}assert.equal(error,'fixture-fatal:done');assert.deepEqual([C,R,T],[undefined,undefined,undefined]);checks+=2;fatals.push({error,trace:text(m,trace)});/* No further native calls on the fatal Module. */}cases++;compare('fatal instapetrify source trace',fatals);
+const coverage=await post('Profiler.takePreciseCoverage');await post('Profiler.stopPreciseCoverage');session.disconnect();const bodies=[...new Set(coverage.result.filter(s=>s.url.endsWith('/js/ported/trap.js')).flatMap(s=>s.functions).filter(f=>schema.functions.some(s=>s.name===f.functionName)&&f.ranges[0].count>0).map(f=>f.functionName))];
+const result={status:'PASS interim directed cases; remaining bodies pending',cases,checks,bodyCoverage:bodies,missingBodies:schema.functions.map(f=>f.name).filter(n=>!bodies.includes(n)),evidence,scope:'Configured original C versus JS policy; real catalogue globals initializers, controlled other foreign effects; native host/game pending'};await writeFile(resolve(directory,'source-result.json'),JSON.stringify(result,(_,v)=>typeof v==='bigint'?v.toString()+'n':v,2)+'\n');console.log(`TRAP interim ${cases} cases / ${checks} checks, ${bodies.length}/124 bodies`);

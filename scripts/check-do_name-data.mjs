@@ -1,0 +1,13 @@
+// Source-preservation guard, not an equivalence proof or replacement for C tests.
+import assert from 'node:assert/strict';import{readFileSync}from'node:fs';import * as data from '../js/ported/do_name.js';
+const source=readFileSync(new URL('../nethack-c/upstream/src/do_name.c',import.meta.url),'utf8'),js=readFileSync(new URL('../js/ported/do_name.js',import.meta.url),'utf8');
+const strip=s=>s.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g,'');
+for(const key of ['ghostnames','hcolors','hliquids','coynames','sir_Terry_novels']){const body=new RegExp('(?:static (?:NEARDATA )?const char \\*const )'+key+'\\[\\] = \\{([\\s\\S]*?)\\};').exec(source)?.[1];assert.ok(body,key);const expected=[...strip(body).matchAll(/"(?:\\.|[^"\\])*"/g)].map(m=>JSON.parse(m[0]));assert.deepEqual(data[key],expected,key);}
+assert.equal(data.NUMMBUF,Number(/#define NUMMBUF (\d+)/.exec(source)[1]));assert.equal(data.bogon_codes,JSON.parse(/const char bogon_codes\[\] = ("[^"\n]*")/.exec(source)[1]));
+for(const key of ['v','snd']){const body=new RegExp('static const char \\*const '+key+'\\[\\] = \\{([\\s\\S]*?)\\};').exec(source)[1];const expected=[...strip(body).matchAll(/"(?:\\.|[^"\\])*"/g)].map(m=>m[0]);const actual=new RegExp('const '+key+' = \\[([\\s\\S]*?)\\];').exec(js)[1];assert.deepEqual([...strip(actual).matchAll(/"(?:\\.|[^"\\])*"/g)].map(m=>m[0]),expected,key);}
+for(const comment of source.match(/\/\*[\s\S]*?\*\//g)??[])assert.ok(js.includes(comment),'Original block comment changed');
+const assertions=[...source.matchAll(/(?<![\w])assert\(([^\n]+)\);/g)].filter(m=>m[1]==='aname != 0');assert.equal(assertions.length,1);assert.equal(source.slice(0,assertions[0].index).split('\n').length,359);
+assert.match(js,/docallcmd: \{/);assert.match(js,/break docallcmd;/);assert.doesNotMatch(strip(js),/goto\b/);
+const rng=[['rndghostname',774],['x_monnam',881],['rndcolor',1472],['roguename',1437],['rndorcname',1543],['rndorcname',1549],['rndorcname',1550],['noveltitle',1615]];for(const[fn,line]of rng)assert.ok(js.includes(`${line}, '${fn}'`),'Missing source attribution '+fn+':'+line);
+const support=readFileSync(new URL('../nethack-c/wasm/tu-do_name-support.inc',import.meta.url),'utf8');assert.match(support,/TELEPORT_DO_NAME_ASSERT_LINE/);assert.match(support,/TELEPORT_REFERENCE_DO_NAME/);assert.match(support,/static char teleport_do_name_buffers\[5\]\[BUFSZ\],teleport_do_name_rndbuf\[BUFSZ\];/);assert.match(support,/const char bogon_codes\[6\]=\{0\};/);
+console.log('DO_NAME data/source guard passed: five file tables, two local tables, bogon codes, five-buffer bound, original comments, callback storage and source attribution.');

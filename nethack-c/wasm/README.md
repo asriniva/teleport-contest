@@ -48,7 +48,8 @@ use host Clang 21 (Apple Clang 21.0.0 on the development machine); that is the
 same major frontend version, not an identical Apple/LLVM revision. Emscripten's
 bundled Clang has only the WebAssembly backend and cannot build host tools.
 
-Both Lua 5.4.8 and NetHack are compiled and linked with `-sMEMORY64=1`, true
+The remaining NetHack C and Lua API transport are compiled and linked with
+`-sMEMORY64=1`, true
 64-bit WebAssembly with 64-bit pointers and longs. Compile-time assertions in
 `bridge.c` enforce the LP64 layout. The SDK supplies Node 24 for execution;
 Node 22's default runtime does not enable memory64. The scoring wrapper selects
@@ -57,7 +58,10 @@ the SDK runtime, including for scorer child processes.
 The build verifies upstream commit `16ff59115315917b93185d026aeefea06db9b0f4`,
 applies the existing six recorder patches, and pins `SOURCE_DATE_EPOCH` to
 `1777723200`. It first builds the native recorder and data generators, then
-builds Lua and NetHack for wasm64. All work happens in `.cache/wasm64-build/`;
+builds the mixed NetHack game for wasm64. The optional `--c-lua` reference
+selects compiled Lua5.4.8. Clean builds retain a C Lua archive for independent
+quest test fixtures; it is omitted from the default game link. The default Lua
+algorithms are JavaScript. All work happens in `.cache/wasm64-build/`;
 the upstream submodule is never edited. The generated module and Wasm binary
 live under `js/wasm/`; `build.json` records the compiler and binary checksum.
 Run the default build for a clean rebuild; `--resume` is a development shortcut
@@ -80,7 +84,8 @@ module rather than launching `pbcopy`. A virtual root
 account replaces Emscripten's unsupported Unix account lookup, while retaining
 NetHack's normal sysconf authorization checks.
 The game combines translated JavaScript units with the remaining patched C
-implementation; Lua is still compiled C. Data files are
+implementation; the default Lua algorithms are JavaScript behind typed C API
+transport. Data files are
 embedded in the Wasm artifact. Each segment gets a fresh module and MEMFS;
 changed files are serialized through the frozen storage API. The transient-file
 filter preserves bones; the JavaScript ncompress-compatible service provides
@@ -148,9 +153,9 @@ remain unchanged. Browser integration is unverified.
 
 ## JavaScript dependencies and runtime migration
 
-The regular build selects JavaScript compression, terminfo and regex. Its
+The regular build selects JavaScript compression, terminfo, regex and configured Lua. Its
 manifest records service hashes, ABI flags and `dependencyBackend: javascript`.
-The Wasm link omits ncompress, libtinfo and musl's TRE regex algorithms. Small
+The Wasm link omits ncompress, libtinfo, musl's TRE regex algorithms and liblua. Small
 C forwarders still adapt native pointers, varargs and tty callbacks; they are
 needed while C game callers remain. The adapter supplies per-segment services,
 input boundaries, recorder snapshots, profile setup and save/bones transport.
@@ -180,10 +185,43 @@ MD4, calendar and regex-wrapper translations execute through this provider witho
 Wasm. Save/bones payloads match actual MEMFS, including binary data and deletion.
 This provider is not yet the game backend. Its filesystem excludes symlinks,
 devices, sockets and mounts; time follows the configured host-Date/DST policy;
-libc formatting is currently integer/byte-string only. Lua's separate parser,
-interpreter and C-stack model execute real scripts and coroutines, but lack
-complete GC/finalization, table layout/iteration fidelity, C-pointer integration
-and other facilities. It remains a partial replacement with no game score claim.
+libc includes tested native-compatible integer and floating formatting.
+
+The configured JavaScript Lua implementation has all83 Lua5.4.8 opcodes,
+an incremental reader/compiler with exact native instructions/debug metadata,
+binary chunks, incremental/generational GC, weak tables/finalizers/close,
+native table layout and a typed memory64 C-API callback/error provider.
+The frozen final candidate passes the complete dependency suite, all44 public
+recordings,126 original level scripts at three seeds (378 actual loads), and
+wizard OS/debug probes. Native allocator gates cover131 original sources,
+binary chunks, startup, exact diagnostics, callback-visible memory counts,
+allocation refusal and cleanup. Its46 production/36 test inputs remain fixed.
+The normal builder defaults to JavaScript Lua. The accepted110-TU game passes
+full integration with the original30-second worker limits and all44 recordings
+exactly under the original45-second session limits, without diagnostic loaders
+or timeout overrides. Its683 declared artifact/source hashes and the same1,322
+inputs for both gates remain unchanged; scorer metadata was included before
+testing. Accepted evidence is `.cache/tu110-warn-fixed-gate-snapshot/acceptance.json`;
+the full build manifest SHA256 is `5e402d6f8a7620da484a121e7c7d348ed458899a0fa7abb84cfc98816be9e001`.
+Acorn AST traversal resolves298 literal local module dependencies in that copy;
+configured SDK/tooling and dynamic file access remain outside that closure.
+The earlier98-TU acceptance and its later public metadata supplement remain
+separate historical evidence. The110-TU batch has57 first-pass native checks
+pending;53 historical native suites do not establish fresh aggregate native parity.
+Later staged ports need fresh component and full-game gates.
+All46 selected Lua production hashes match the final private freeze.
+`--c-lua` retains compiled Lua for comparisons, while
+`--c-dependencies` selects it unless `--js-lua` is explicit. The manifest records
+the actual selected backend and Lua source hashes. Historical private candidates
+remain separate from the final `.cache/js-lua-game-final/acceptance.json` evidence.
+
+Wizard OS functions use JS native-macOS calendar, IANA2026c timezone data and
+C-locale strftime, including historical and extreme-year behavior. Native
+strftime notices are preserved: this software was developed by the University
+of California, Berkeley. Clock/current time and file operations remain injected
+platform services. Original NetHack NEVER filters still remove process, locale,
+environment and debug-hook facilities; inactive package/io libraries and general
+C continuations are outside the configured replacement scope.
 
 After setup and a regular build, run the standalone oracle suites with:
 
@@ -203,9 +241,11 @@ has not been rebuilt/revalidated in this migration. Rebuild normally to restore
 the default. Candidate tooling stages its own build and frozen scorer under
 `.cache/` and does not alter the active game outputs.
 
-Remaining work is to complete and integrate Lua with actual NetHack callbacks,
-expand ordinary-memory struct/global/libc coverage, move remaining filesystem
-calls/startup onto that runtime, and rerun the same recording gates at each step.
+Remaining work is migrating the other game translation units, expanding
+ordinary-memory struct/global/libc coverage and moving remaining filesystem
+calls/startup onto that runtime. Replace each native pointer/callback seam as
+its callers move, then remove the corresponding Emscripten code. Rerun the same
+recording gates at each step.
 The adapter contract remains useful after Wasm removal; its Emscripten-specific
 pointer and module portions should disappear as their callers migrate.
 

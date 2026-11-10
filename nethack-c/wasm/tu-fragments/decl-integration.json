@@ -1,0 +1,452 @@
+{
+  "reservation": "TU113/J119 DECL",
+  "status": "Frozen complete private configured EmC first pass; native host and whole-game integration pending",
+  "source": {
+    "path": "src/decl.c",
+    "sha256": "4855daf7884706b74e694aff3e8373418706793265084727bd78abe44693d96e",
+    "bytes": 34105,
+    "lines": 1205,
+    "preparedEqualsUpstream": true,
+    "configuredBody": {
+      "sha256": "e5f3eec123788f88610d3df9f91ac1bb382dbca877790ce8eae5ead7030e5085",
+      "bytes": 21081,
+      "nonWhitespaceCharacters": 15185,
+      "activeStringTokens": [
+        "\"cmd_before\"",
+        "\"level_enter\"",
+        "\"level_leave\"",
+        "\"end_turn\"",
+        "\"black\"",
+        "\"amber\"",
+        "\"golden\"",
+        "\"light blue\"",
+        "\"red\"",
+        "\"green\"",
+        "\"silver\"",
+        "\"blue\"",
+        "\"purple\"",
+        "\"white\"",
+        "\"orange\"",
+        "\"black\"",
+        "\"red\"",
+        "\"green\"",
+        "\"brown\"",
+        "\"blue\"",
+        "\"magenta\"",
+        "\"cyan\"",
+        "\"gray\"",
+        "\"transparent\"",
+        "\"orange\"",
+        "\"bright green\"",
+        "\"yellow\"",
+        "\"bright blue\"",
+        "\"bright magenta\"",
+        "\"bright cyan\"",
+        "\"white\"",
+        "\"Nothing happens.\"",
+        "\"Nothing seems to happen.\"",
+        "\"That's enough tries!\"",
+        "\"That is a silly thing to %s.\"",
+        "\"shudder for a moment.\"",
+        "\"something\"",
+        "\"Something\"",
+        "\"You can move again.\"",
+        "\"Never mind.\"",
+        "\"vision quickly clears.\"",
+        "\"the\"",
+        "\"your\"",
+        "\"mon\"",
+        "\"you\"",
+        "\"iavgco\"",
+        "\"00112233445566778899aAbBcCdDeEfF\"",
+        "\"mysterious\"",
+        "\"liquid\"",
+        "\"wax\"",
+        "\"organic\"",
+        "\"flesh\"",
+        "\"paper\"",
+        "\"cloth\"",
+        "\"leather\"",
+        "\"wooden\"",
+        "\"bone\"",
+        "\"dragonhide\"",
+        "\"iron\"",
+        "\"metal\"",
+        "\"copper\"",
+        "\"silver\"",
+        "\"gold\"",
+        "\"platinum\"",
+        "\"mithril\"",
+        "\"plastic\"",
+        "\"glass\"",
+        "\"gemstone\"",
+        "\"stone\"",
+        "\" \\r\\n\\033\"",
+        "\"aeiouAEIOU\"",
+        "\"yn\"",
+        "\"ynq\"",
+        "\"ynaq\"",
+        "\"yn#aq\"",
+        "\"rl\"",
+        "\"hsq\"",
+        "\"Undefined\"",
+        "\"L\"",
+        "\"N\"",
+        "\"C\"",
+        "\"Xxx\"",
+        "\"home\"",
+        "\"locate\"",
+        "\"something\"",
+        "\"undefined\"",
+        "\"something\"",
+        "\"Xxx\"",
+        "\"bonesnn.xxx.le\"",
+        "\"1lock\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_a\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_b\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_c\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_d\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_e\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_f\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_g\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_h\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_i\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_j\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_k\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_l\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_m\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_n\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_o\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_p\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_q\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_r\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_s\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_t\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_u\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_v\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_w\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_x\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_y\"",
+        "\"decl_globals_init: %s.havestate not True.\"",
+        "\"g_init_z\""
+      ]
+    },
+    "branchFacts": {
+      "DLB": null,
+      "DLBLIB": null,
+      "DLBRSRC": null,
+      "VERSION_IN_DLB_FILENAME": null,
+      "DLBFILE": null,
+      "DLBFILE2": null,
+      "PREFIXES_IN_USE": null,
+      "WIN32": null,
+      "STATUS_HILITES": {
+        "params": null,
+        "body": ""
+      },
+      "CHANGE_COLOR": null,
+      "PANICTRACE": {
+        "params": null,
+        "body": ""
+      },
+      "UNDEFINED_PTR": {
+        "params": null,
+        "body": "NULL"
+      },
+      "UNDEFINED_VALUE": {
+        "params": null,
+        "body": "0"
+      },
+      "UNDEFINED_VALUES": {
+        "params": null,
+        "body": "{ 0 }"
+      },
+      "RDBMODE": null,
+      "WRTMODE": null,
+      "dlb": null,
+      "dlb_init": null,
+      "dlb_fopen": null,
+      "dlb_fread": null
+    }
+  },
+  "configuredFunctions": [
+    {
+      "name": "program_state_init",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "storageClass": null,
+      "line": 1074,
+      "initialized": true,
+      "initializerKind": "CompoundStmt",
+      "params": []
+    },
+    {
+      "name": "decl_globals_init",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "storageClass": null,
+      "line": 1080,
+      "initialized": true,
+      "initializerKind": "CompoundStmt",
+      "params": []
+    },
+    {
+      "name": "sa_victual",
+      "type": {
+        "qualType": "void (volatile struct victual_info *)"
+      },
+      "storageClass": null,
+      "line": 1199,
+      "initialized": true,
+      "initializerKind": "ParmVarDecl",
+      "params": [
+        {
+          "name": "context_victual",
+          "type": {
+            "qualType": "volatile struct victual_info *"
+          }
+        }
+      ]
+    }
+  ],
+  "data": {
+    "objects": 152,
+    "staticTemplates": 49,
+    "nativeStorageBytes": 353008,
+    "nativeStaticTemplateBytes": 174312,
+    "nativePublicBytes": 178696,
+    "records": 132,
+    "fields": 1501,
+    "bitfields": 169,
+    "originalComments": 698,
+    "initializerValues": "Named source-derived JavaScript aggregates, enums/scalar constant expressions from actual compiler AST, selected union members and implicit zero fill. No native expected output/byte image is embedded in production.",
+    "initializerSha256": "b57a4a6d4e57d774bda077845fe1be9299c147c09f226efb4ce0f4d30f99a294"
+  },
+  "registryEntry": {
+    "name": "decl",
+    "source": "src/decl.c",
+    "javascript": "js/ported/decl.js",
+    "library": "nethack-c/wasm/tu-libraries/decl.js",
+    "configuredFunctions": true,
+    "reference": "prepared",
+    "probeContext": false,
+    "startup": "$teleportDeclInit",
+    "nativeStorageSources": [
+      {
+        "source": "nethack-c/wasm/tu-fragments/decl-storage.c"
+      }
+    ],
+    "adapterSources": [
+      "js/ported/decl-runtime.js",
+      "scripts/tu-decl-layout.h",
+      "scripts/tu-decl-probe.c",
+      "scripts/tu-decl-probe-consumer.c",
+      "scripts/test-tu-decl.mjs",
+      "scripts/check-decl-data.mjs",
+      "nethack-c/wasm/tu-fragments/decl-support.c",
+      "nethack-c/wasm/tu-fragments/decl-schema.json",
+      "nethack-c/wasm/tu-fragments/decl-source-check.mjs",
+      "nethack-c/wasm/tu-fragments/decl-source-data.h"
+    ]
+  },
+  "runtime": {
+    "import": "import {initializeDecl,callDecl} from './decl-runtime.js';",
+    "methods": [
+      "initializeDecl(services) { return initializeDecl(services, layouts.decl); }",
+      "decl(services,name,...args) { return callDecl(services, layouts.decl, name, ...args); }"
+    ],
+    "nativeSupport": "Include or separately compile nethack-c/wasm/tu-fragments/decl-support.c once in game transport after excluding original src/decl.c. Compile decl-storage.c separately without LTO, as supported by nativeStorageSources; do not inline it into a C consumer translation unit.",
+    "layout": "Serialize all teleport_decl_layout_count/name/value entries from original-C reference into layouts.decl; uint64 values may be decimal strings/BigInt or exact Numbers. The runtime converts widths and signed WIN_ERR explicitly. Test fixture intentionally exposes these exact production metadata functions, rather than parallel guessed layout data.",
+    "probeIntegration": "The standalone --build command is complete and tested. Shared build-tu-probes.py needs a new explicit DECL branch invoking the same separately compiled probe.c + probe-consumer.c + support.c (+ storage.c for HYBRID_DECL only), same forced native-terminal include and no-LTO flags. Do not combine or LTO the consumer/storage. write-tu-layouts.mjs needs a DECL branch using teleport_decl_layout_*; no shared files were edited.",
+    "serviceContract": "moduleKey is actual Module; heap() supplies current HEAPU8; storage(i)/publicAddress(i) expose same typed native address; literal(string) supplies per-Module stable NUL-terminated bytes; raw_printf and exit retain original scalar C error calls.",
+    "resetSemantics": "One-time image initialization is separate from original explicit resets. program_state_init copies its template only. decl_globals_init copies its 46 group templates, repairs valuables/subrooms pointers using typed actual strides, clears exact ZERO/equipment targets, sets window IDs and role/race templates. Globals omitted by upstream retain mutations. sa_victual is the exact original documented no-op."
+  },
+  "startup": {
+    "mechanism": "$teleportDeclInit postset registers addOnInit; include startup explicitly even if DECL functions are otherwise dead. This calls initializeDecl once per Module; it does not call original reset routines early.",
+    "sdkEvidence": [
+      {
+        "path": ".cache/emsdk/upstream/emscripten/src/preamble.js",
+        "lines": "162-170",
+        "fact": "ATINITS executes before wasmExports[__wasm_call_ctors] in initRuntime."
+      },
+      {
+        "path": ".cache/emsdk/upstream/emscripten/src/lib/libcore.js",
+        "lines": "2294-2302",
+        "fact": "onInits runtime callback dispatch is unshifted into ATINITS; addOnInit adds per-Module callbacks."
+      },
+      {
+        "path": "scripts/tu-decl-probe-consumer.c",
+        "fact": "Separate C object, normal public header loads in constructor before any DECL source call."
+      }
+    ],
+    "proof": "Original and JS constructor snapshots match all 64 slots; no-startup negative control executes the same real constructor and differs from original. All 152 object images compare before any DECL routine call. Per-call public C readers continue matching after resets/growth.",
+    "boundary": "This proves current configured SDK before-C-constructor availability, not preRun access before initRuntime or arbitrary new earlier JavaScript consumers. Existing other startup initializers write their own source-owned data; DECL must precede any future startup consumer needing DECL values."
+  },
+  "transportDivergences": [
+    {
+      "location": "decl-storage.c",
+      "change": "All public/source-static native gameplay initializers replaced with aligned writable zero-only unsigned-char backing plus source-qualified typed symbol aliases; private templates use teleport_decl_private_* transport symbols.",
+      "reason": "JavaScript is the sole owner of original initializer values while native consumers retain actual public addresses and source readonly views.",
+      "effect": "No original initialized-data fallback; JS writes writable backing, never C casts/assignments through true const objects or const subobjects. Public C readers remain separate without LTO.",
+      "limits": "Compiler alias extension is platform-specific, validated here on configured Emscripten; independent native host still pending."
+    },
+    {
+      "location": "decl-runtime.js / decl.js",
+      "change": "Source local structure assignments/ZERO/macros use typed live memory copying/zeroing; source initializer images are separate named JavaScript values.",
+      "reason": "Preserve byte widths/padding, aliases, scalar sign/bitfields, unique object addresses and per-Module resets.",
+      "effect": "Fresh memory access after growth, const-correct views, no independent shadow game state."
+    },
+    {
+      "location": "tu-libraries/decl.js",
+      "change": "Byte/string/literal/static-storage startup and scalar error transport only.",
+      "reason": "Make JS-owned data available to foreign C readers before source routines and C constructors."
+    }
+  ],
+  "pointerReturnAudit": {
+    "foreignFunctions": {
+      "raw_printf": "void (const char *, ...)",
+      "exit": "noreturn void (int)",
+      "memset": "void * (void *, int, unsigned long)"
+    },
+    "recordPointerReturnProjections": 0,
+    "opaqueHandling": "memset return is ignored; no guessed record wrapping of void/char pointer returns. The one record-pointer parameter context_victual is genuinely unused by original sa_victual; tested with NULL and real svc.context.victual.",
+    "typedAddressWitnesses": [
+      "All 152 public/native backing address pairs identical",
+      "hands_obj remains distinct from cg.zeroobj despite equal initial content",
+      "valuables lists equal gg.gems/ga.amulets and correct actual counts",
+      "subrooms equals &svr.rooms[MAXNROFROOMS+1] with actual native mkroom stride"
+    ]
+  },
+  "validation": {
+    "cases": 31,
+    "comparisons": 7134,
+    "scope": "configured original Emscripten C vs JavaScript",
+    "nativeHost": "pending",
+    "wholeGame": "pending",
+    "storageObjects": 152,
+    "storageBytes": 353008,
+    "separateNoLtoForeignConstructor": true,
+    "startupProof": {
+      "beforeAnyDeclSourceCall": true,
+      "foreignConstructorRuns": 1,
+      "foreignConstructorComparedSlots": 64,
+      "initialComparedObjects": 152,
+      "noStartupNegative": {
+        "foreignConstructorRuns": 1,
+        "slot0": "0",
+        "originalSlot0": "-1",
+        "mismatchRequired": true
+      }
+    },
+    "retainedPreGrowthViews": true,
+    "sourceGuard": {
+      "functions": 3,
+      "originalComments": 698,
+      "globals": 152,
+      "staticTemplates": 49,
+      "storageBytes": 353008,
+      "records": 132,
+      "fields": 1501,
+      "bitfields": 169,
+      "sourceSha256": "4855daf7884706b74e694aff3e8373418706793265084727bd78abe44693d96e",
+      "configuredBodySha256": "e5f3eec123788f88610d3df9f91ac1bb382dbca877790ce8eae5ead7030e5085",
+      "initializerSha256": "b57a4a6d4e57d774bda077845fe1be9299c147c09f226efb4ce0f4d30f99a294"
+    },
+    "commands": {
+      "build": ".cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-tu-decl.mjs --build",
+      "compare": ".cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-tu-decl.mjs",
+      "sourceGuard": ".cache/emsdk/node/24.19.0_64bit/bin/node scripts/check-decl-data.mjs"
+    },
+    "wholeGameIntegration": "pending",
+    "coverage": [
+      "Initial full data bytes plus semantic pointer targets and string-sharing equivalence before first DECL function",
+      "Separate no-LTO C constructor and post-startup public foreign readers",
+      "All original copy/reset groups after six dirty byte patterns; const subobject audit before fixture memset",
+      "Retained globals intentionally omitted by reset, independent program_state reset",
+      "Both NULL and non-NULL original sa_victual calls",
+      "Actual native heap growth/current views",
+      "Readonly source views reject writes without memory changes, unknown record fields fail",
+      "Module isolation and nested same-Module C/R/T restoration",
+      "No-startup negative control uses genuine foreign C constructor",
+      "Fresh production CPP owner bodies/literals/macros and all132 native record layouts including169 bitfields"
+    ],
+    "notClaimed": [
+      "MAGICCHECK failure branch cannot be induced through legal valid immutable template mutation; original branch/text/order retained and source guarded",
+      "No portable standard-C claim for linker typed aliases; compiler extension explicitly used",
+      "No inactive DLB algorithm enabled or counted",
+      "No native-host or full-game recording/deadline proof"
+    ]
+  },
+  "rawEvidence": {
+    "firstBuild": ".cache/decl-author/first-build-test.log",
+    "firstFailure": "The malloc/free growth fixture was optimized away; all preceding data/reset/constructor assertions had passed. Test fixed with observable volatile escaped allocation. No production/oracle behavior changed.",
+    "secondBuild": ".cache/decl-author/build-test-2.log",
+    "secondFailure": "Readonly test used nonexistent Role.malenum field; corrected fixture to actual compiler field Role.mnum and made record views non-extensible to reject typos. Native source/output expectations unchanged.",
+    "passing": ".cache/decl-author/final-current-test.log"
+  },
+  "scope": {
+    "sharedFilesEdited": false,
+    "selectedBuildEdited": false,
+    "frozenLuaEdited": false,
+    "frozenPolyselfEdited": false,
+    "frozenMhituEdited": false
+  },
+  "ownedFiles": [
+    "js/ported/decl.js",
+    "js/ported/decl-runtime.js",
+    "nethack-c/wasm/tu-libraries/decl.js",
+    "scripts/tu-decl-layout.h",
+    "scripts/tu-decl-probe.c",
+    "scripts/tu-decl-probe-consumer.c",
+    "scripts/test-tu-decl.mjs",
+    "scripts/check-decl-data.mjs",
+    "nethack-c/wasm/tu-fragments/decl-support.c",
+    "nethack-c/wasm/tu-fragments/decl-storage.c",
+    "nethack-c/wasm/tu-fragments/decl-schema.json",
+    "nethack-c/wasm/tu-fragments/decl-source-check.mjs",
+    "nethack-c/wasm/tu-fragments/decl-source-data.h",
+    "nethack-c/wasm/tu-fragments/decl-integration.json"
+  ],
+  "fileHashesExceptThisManifest": {
+    "js/ported/decl.js": "712ab685590434f9719888ce090cdecdd27e22c399c599854df0d2ec4fe7ca88",
+    "js/ported/decl-runtime.js": "0af217623e8b759b4923d614abd4fde5bccdff12b6dbb3aaa0912f690dad909a",
+    "nethack-c/wasm/tu-libraries/decl.js": "59719632ae9a88bc1749255dfbf2206bd451585b99894f406cbcf5694fe7fe68",
+    "scripts/tu-decl-layout.h": "654580287738222781cf2d30023cdcfdc924f9a7e251269e6c72354607bc88fb",
+    "scripts/tu-decl-probe.c": "5e02e925b3ae95d7f6ce8931d789fcce478c88f13b380a6b076bdecea6260660",
+    "scripts/tu-decl-probe-consumer.c": "ecdb53e171c38f50761674bf59581164f2183ab79d02e212e75b84c5ead9c9a5",
+    "scripts/test-tu-decl.mjs": "4df7cfa042f315003c027794ead5e32a1c1e3ee4f8069a69cdeebad0f442e8c6",
+    "scripts/check-decl-data.mjs": "29bf306aab2ab793d845a00efa42d77f00a617bfef9fbfbc6b3b6f9a3030f2d3",
+    "nethack-c/wasm/tu-fragments/decl-support.c": "a2965830e0c55ea49464b0b980593da2315845090830c4e7c190f94a30955dc9",
+    "nethack-c/wasm/tu-fragments/decl-storage.c": "aa531b605dfec82507b375f2bc557d427a183fe8907408e4c4887af6f28540a1",
+    "nethack-c/wasm/tu-fragments/decl-schema.json": "da0e297d4ca49b40e0d05fe17761167ec56833b71cafe96e7a8190a9da6b449f",
+    "nethack-c/wasm/tu-fragments/decl-source-check.mjs": "8724ecfb8778172852059ae907f708854c3a5c7fa0f63588a63478719ddd964f",
+    "nethack-c/wasm/tu-fragments/decl-source-data.h": "75fd02941d3782ad6899db74206c723118f013ec80d8cfabebb76c94302a6c61"
+  }
+}

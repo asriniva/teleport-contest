@@ -1,0 +1,6060 @@
+{
+  "headerMacros": {
+    "DEADMONSTER": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean(((mon).mhp < 1)))",
+      "original": "((mon)->mhp < 1)"
+    },
+    "EBONES": {
+      "params": [
+        "mon"
+      ],
+      "expression": "((mon).mextra.ebones)",
+      "original": "((mon)->mextra->ebones)"
+    },
+    "EDOG": {
+      "params": [
+        "mon"
+      ],
+      "expression": "((mon).mextra.edog)",
+      "original": "((mon)->mextra->edog)"
+    },
+    "EGD": {
+      "params": [
+        "mon"
+      ],
+      "expression": "((mon).mextra.egd)",
+      "original": "((mon)->mextra->egd)"
+    },
+    "EMIN": {
+      "params": [
+        "mon"
+      ],
+      "expression": "((mon).mextra.emin)",
+      "original": "((mon)->mextra->emin)"
+    },
+    "EPRI": {
+      "params": [
+        "mon"
+      ],
+      "expression": "((mon).mextra.epri)",
+      "original": "((mon)->mextra->epri)"
+    },
+    "ESHK": {
+      "params": [
+        "mon"
+      ],
+      "expression": "((mon).mextra.eshk)",
+      "original": "((mon)->mextra->eshk)"
+    },
+    "HConfusion": {
+      "params": null,
+      "expression": "env.u.uprops[env.CONFUSION].intrinsic",
+      "original": "u.uprops[CONFUSION].intrinsic"
+    },
+    "HHallucination": {
+      "params": null,
+      "expression": "env.u.uprops[env.HALLUC].intrinsic",
+      "original": "u.uprops[HALLUC].intrinsic"
+    },
+    "IS_DOOR": {
+      "params": [
+        "typ"
+      ],
+      "expression": "Number(Boolean(((typ) == env.DOOR)))",
+      "original": "((typ) == DOOR)"
+    },
+    "IS_ROOM": {
+      "params": [
+        "typ"
+      ],
+      "expression": "Number(Boolean(((typ) >= env.ROOM)))",
+      "original": "((typ) >= ROOM)"
+    },
+    "IS_WALL": {
+      "params": [
+        "typ"
+      ],
+      "expression": "Number(Boolean(((typ) && (typ) <= env.DBWALL)))",
+      "original": "((typ) && (typ) <= DBWALL)"
+    },
+    "astral_level": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_astral_level)",
+      "original": "(svd.dungeon_topology.d_astral_level)"
+    },
+    "In_endgame": {
+      "params": [
+        "x"
+      ],
+      "expression": "Number(Boolean(((x).dnum == env.astral_level.dnum)))",
+      "original": "((x)->dnum == astral_level.dnum)"
+    },
+    "sokoban_dnum": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_sokoban_dnum)",
+      "original": "(svd.dungeon_topology.d_sokoban_dnum)"
+    },
+    "In_sokoban": {
+      "params": [
+        "x"
+      ],
+      "expression": "Number(Boolean(((x).dnum == env.sokoban_dnum)))",
+      "original": "((x)->dnum == sokoban_dnum)"
+    },
+    "IndexOk": {
+      "params": [
+        "idx",
+        "array"
+      ],
+      "expression": "Number(Boolean(((idx) >= 0 && (idx) < env.SIZE(array))))",
+      "original": "((idx) >= 0 && (idx) < SIZE(array))"
+    },
+    "Lassigned": {
+      "params": [
+        "y"
+      ],
+      "expression": "Number(Boolean(((y).dlevel || (y).dnum)))",
+      "original": "((y)->dlevel || (y)->dnum)"
+    },
+    "Lcheck": {
+      "params": [
+        "x",
+        "z"
+      ],
+      "expression": "Number(Boolean((env.Lassigned(z) && env.on_level(x, z))))",
+      "original": "(Lassigned(z) && on_level(x, z))"
+    },
+    "knox_level": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_knox_level)",
+      "original": "(svd.dungeon_topology.d_knox_level)"
+    },
+    "Is_knox": {
+      "params": [
+        "x"
+      ],
+      "expression": "(env.Lcheck(x, env.knox_level))",
+      "original": "(Lcheck(x, &knox_level))"
+    },
+    "stronghold_level": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_stronghold_level)",
+      "original": "(svd.dungeon_topology.d_stronghold_level)"
+    },
+    "Is_stronghold": {
+      "params": [
+        "x"
+      ],
+      "expression": "(env.Lcheck(x, env.stronghold_level))",
+      "original": "(Lcheck(x, &stronghold_level))"
+    },
+    "MGIVENNAME": {
+      "params": [
+        "mon"
+      ],
+      "expression": "((mon).mextra.mgivenname)",
+      "original": "((mon)->mextra->mgivenname)"
+    },
+    "Never_mind": {
+      "params": null,
+      "expression": "env.c_common_strings.c_Never_mind",
+      "original": "c_common_strings.c_Never_mind"
+    },
+    "OBJ_NAME": {
+      "params": [
+        "obj"
+      ],
+      "expression": "(env.obj_descr[(obj).oc_name_idx].oc_name)",
+      "original": "(obj_descr[(obj).oc_name_idx].oc_name)"
+    },
+    "OMAILCMD": {
+      "params": [
+        "o"
+      ],
+      "expression": "((o).oextra.omailcmd)",
+      "original": "((o)->oextra->omailcmd)"
+    },
+    "OMONST": {
+      "params": [
+        "o"
+      ],
+      "expression": "((o).oextra.omonst)",
+      "original": "((o)->oextra->omonst)"
+    },
+    "ONAME": {
+      "params": [
+        "o"
+      ],
+      "expression": "((o).oextra.oname)",
+      "original": "((o)->oextra->oname)"
+    },
+    "Role_if": {
+      "params": [
+        "X"
+      ],
+      "expression": "Number(Boolean((env.gu.urole.mnum == (X))))",
+      "original": "(gu.urole.mnum == (X))"
+    },
+    "Slimed": {
+      "params": null,
+      "expression": "env.u.uprops[env.SLIMED].intrinsic",
+      "original": "u.uprops[SLIMED].intrinsic"
+    },
+    "Sokoban": {
+      "params": null,
+      "expression": "env.svl.level.flags.sokoban_rules",
+      "original": "svl.level.flags.sokoban_rules"
+    },
+    "Stoned": {
+      "params": null,
+      "expression": "env.u.uprops[env.STONED].intrinsic",
+      "original": "u.uprops[STONED].intrinsic"
+    },
+    "Underwater": {
+      "params": null,
+      "expression": "(env.u.uinwater)",
+      "original": "(u.uinwater)"
+    },
+    "Upolyd": {
+      "params": null,
+      "expression": "(env.u.umonnum != env.u.umonster)",
+      "original": "(u.umonnum != u.umonster)"
+    },
+    "Vomiting": {
+      "params": null,
+      "expression": "env.u.uprops[env.VOMITING].intrinsic",
+      "original": "u.uprops[VOMITING].intrinsic"
+    },
+    "HWarn_of_mon": {
+      "params": null,
+      "expression": "env.u.uprops[env.WARN_OF_MON].intrinsic",
+      "original": "u.uprops[WARN_OF_MON].intrinsic"
+    },
+    "EWarn_of_mon": {
+      "params": null,
+      "expression": "env.u.uprops[env.WARN_OF_MON].extrinsic",
+      "original": "u.uprops[WARN_OF_MON].extrinsic"
+    },
+    "Warn_of_mon": {
+      "params": null,
+      "expression": "Number(Boolean((env.HWarn_of_mon || env.EWarn_of_mon)))",
+      "original": "(HWarn_of_mon || EWarn_of_mon)"
+    },
+    "canspotmon": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean((env.canseemon(mon) || env.sensemon(mon))))",
+      "original": "(canseemon(mon) || sensemon(mon))"
+    },
+    "fmon": {
+      "params": null,
+      "expression": "env.svl.level.monlist",
+      "original": "svl.level.monlist"
+    },
+    "fobj": {
+      "params": null,
+      "expression": "env.svl.level.objlist",
+      "original": "svl.level.objlist"
+    },
+    "glyph_is_cmap": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) >= env.GLYPH_CMAP_STONE_OFF && (glyph) < (env.GLYPH_CMAP_C_OFF + ((env.S_goodpos - env.S_digbeam) + 1)))))",
+      "original": "((glyph) >= GLYPH_CMAP_STONE_OFF && (glyph) < (GLYPH_CMAP_C_OFF + ((S_goodpos - S_digbeam) + 1)))"
+    },
+    "glyph_is_cmap_zap": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) >= env.GLYPH_ZAP_OFF && (glyph) < ((env.NUM_ZAP << 2) + env.GLYPH_ZAP_OFF))))",
+      "original": "((glyph) >= GLYPH_ZAP_OFF && (glyph) < ((NUM_ZAP << 2) + GLYPH_ZAP_OFF))"
+    },
+    "glyph_is_invisible": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) == env.GLYPH_INVISIBLE)))",
+      "original": "((glyph) == GLYPH_INVISIBLE)"
+    },
+    "glyph_is_normal_male_monster": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) >= env.GLYPH_MON_MALE_OFF && (glyph) < (env.GLYPH_MON_MALE_OFF + env.NUMMONS))))",
+      "original": "((glyph) >= GLYPH_MON_MALE_OFF && (glyph) < (GLYPH_MON_MALE_OFF + NUMMONS))"
+    },
+    "glyph_is_normal_female_monster": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) >= env.GLYPH_MON_FEM_OFF && (glyph) < (env.GLYPH_MON_FEM_OFF + env.NUMMONS))))",
+      "original": "((glyph) >= GLYPH_MON_FEM_OFF && (glyph) < (GLYPH_MON_FEM_OFF + NUMMONS))"
+    },
+    "glyph_is_normal_monster": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean((env.glyph_is_normal_male_monster(glyph) || env.glyph_is_normal_female_monster(glyph))))",
+      "original": "(glyph_is_normal_male_monster(glyph) || glyph_is_normal_female_monster(glyph))"
+    },
+    "glyph_is_male_pet": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) >= env.GLYPH_PET_MALE_OFF && (glyph) < (env.GLYPH_PET_MALE_OFF + env.NUMMONS))))",
+      "original": "((glyph) >= GLYPH_PET_MALE_OFF && (glyph) < (GLYPH_PET_MALE_OFF + NUMMONS))"
+    },
+    "glyph_is_female_pet": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) >= env.GLYPH_PET_FEM_OFF && (glyph) < (env.GLYPH_PET_FEM_OFF + env.NUMMONS))))",
+      "original": "((glyph) >= GLYPH_PET_FEM_OFF && (glyph) < (GLYPH_PET_FEM_OFF + NUMMONS))"
+    },
+    "glyph_is_pet": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean((env.glyph_is_male_pet(glyph) || env.glyph_is_female_pet(glyph))))",
+      "original": "(glyph_is_male_pet(glyph) || glyph_is_female_pet(glyph))"
+    },
+    "glyph_is_ridden_male_monster": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) >= env.GLYPH_RIDDEN_MALE_OFF && (glyph) < (env.GLYPH_RIDDEN_MALE_OFF + env.NUMMONS))))",
+      "original": "((glyph) >= GLYPH_RIDDEN_MALE_OFF && (glyph) < (GLYPH_RIDDEN_MALE_OFF + NUMMONS))"
+    },
+    "glyph_is_ridden_female_monster": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) >= env.GLYPH_RIDDEN_FEM_OFF && (glyph) < (env.GLYPH_RIDDEN_FEM_OFF + env.NUMMONS))))",
+      "original": "((glyph) >= GLYPH_RIDDEN_FEM_OFF && (glyph) < (GLYPH_RIDDEN_FEM_OFF + NUMMONS))"
+    },
+    "glyph_is_ridden_monster": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean((env.glyph_is_ridden_male_monster(glyph) || env.glyph_is_ridden_female_monster(glyph))))",
+      "original": "(glyph_is_ridden_male_monster(glyph) || glyph_is_ridden_female_monster(glyph))"
+    },
+    "glyph_is_detected_male_monster": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) >= env.GLYPH_DETECT_MALE_OFF && (glyph) < (env.GLYPH_DETECT_MALE_OFF + env.NUMMONS))))",
+      "original": "((glyph) >= GLYPH_DETECT_MALE_OFF && (glyph) < (GLYPH_DETECT_MALE_OFF + NUMMONS))"
+    },
+    "glyph_is_detected_female_monster": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) >= env.GLYPH_DETECT_FEM_OFF && (glyph) < (env.GLYPH_DETECT_FEM_OFF + env.NUMMONS))))",
+      "original": "((glyph) >= GLYPH_DETECT_FEM_OFF && (glyph) < (GLYPH_DETECT_FEM_OFF + NUMMONS))"
+    },
+    "glyph_is_detected_monster": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean((env.glyph_is_detected_male_monster(glyph) || env.glyph_is_detected_female_monster(glyph))))",
+      "original": "(glyph_is_detected_male_monster(glyph) || glyph_is_detected_female_monster(glyph))"
+    },
+    "glyph_is_monster": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean((env.glyph_is_normal_monster(glyph) || env.glyph_is_pet(glyph) || env.glyph_is_ridden_monster(glyph) || env.glyph_is_detected_monster(glyph))))",
+      "original": "(glyph_is_normal_monster(glyph) || glyph_is_pet(glyph) || glyph_is_ridden_monster(glyph) || glyph_is_detected_monster(glyph))"
+    },
+    "glyph_is_normal_piletop_obj": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) == env.GLYPH_OBJ_PILETOP_OFF || ((glyph) > env.GLYPH_OBJ_PILETOP_OFF + env.FIRST_OBJECT - 1 && (glyph) < (env.GLYPH_OBJ_PILETOP_OFF + env.NUM_OBJECTS)))))",
+      "original": "((glyph) == GLYPH_OBJ_PILETOP_OFF || ((glyph) > GLYPH_OBJ_PILETOP_OFF + FIRST_OBJECT - 1 && (glyph) < (GLYPH_OBJ_PILETOP_OFF + NUM_OBJECTS)))"
+    },
+    "glyph_is_normal_object": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) == env.GLYPH_OBJ_OFF || ((glyph) >= env.GLYPH_OBJ_OFF + env.FIRST_OBJECT - 1 && (glyph) < (env.GLYPH_OBJ_OFF + env.NUM_OBJECTS)) || env.glyph_is_normal_piletop_obj(glyph))))",
+      "original": "((glyph) == GLYPH_OBJ_OFF || ((glyph) >= GLYPH_OBJ_OFF + FIRST_OBJECT - 1 && (glyph) < (GLYPH_OBJ_OFF + NUM_OBJECTS)) || glyph_is_normal_piletop_obj(glyph))"
+    },
+    "glyph_is_normal_generic_obj": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) > env.GLYPH_OBJ_OFF && (glyph) < env.GLYPH_OBJ_OFF + env.FIRST_OBJECT - 1)))",
+      "original": "((glyph) > GLYPH_OBJ_OFF && (glyph) < GLYPH_OBJ_OFF + FIRST_OBJECT - 1)"
+    },
+    "glyph_is_piletop_generic_obj": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((glyph) > env.GLYPH_OBJ_PILETOP_OFF && (glyph) < env.GLYPH_OBJ_PILETOP_OFF + env.FIRST_OBJECT - 1)))",
+      "original": "((glyph) > GLYPH_OBJ_PILETOP_OFF && (glyph) < GLYPH_OBJ_PILETOP_OFF + FIRST_OBJECT - 1)"
+    },
+    "glyph_is_generic_object": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean((env.glyph_is_normal_generic_obj(glyph) || env.glyph_is_piletop_generic_obj(glyph))))",
+      "original": "(glyph_is_normal_generic_obj(glyph) || glyph_is_piletop_generic_obj(glyph))"
+    },
+    "glyph_is_male_statue_piletop": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean((((glyph) >= env.GLYPH_STATUE_MALE_PILETOP_OFF) && ((glyph) < (env.GLYPH_STATUE_MALE_PILETOP_OFF + env.NUMMONS)))))",
+      "original": "(((glyph) >= GLYPH_STATUE_MALE_PILETOP_OFF) && ((glyph) < (GLYPH_STATUE_MALE_PILETOP_OFF + NUMMONS)))"
+    },
+    "glyph_is_male_statue": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((((glyph) >= env.GLYPH_STATUE_MALE_OFF) && ((glyph) < (env.GLYPH_STATUE_MALE_OFF + env.NUMMONS))) || env.glyph_is_male_statue_piletop(glyph))))",
+      "original": "((((glyph) >= GLYPH_STATUE_MALE_OFF) && ((glyph) < (GLYPH_STATUE_MALE_OFF + NUMMONS))) || glyph_is_male_statue_piletop(glyph))"
+    },
+    "glyph_is_fem_statue_piletop": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean((((glyph) >= env.GLYPH_STATUE_FEM_PILETOP_OFF) && ((glyph) < (env.GLYPH_STATUE_FEM_PILETOP_OFF + env.NUMMONS)))))",
+      "original": "(((glyph) >= GLYPH_STATUE_FEM_PILETOP_OFF) && ((glyph) < (GLYPH_STATUE_FEM_PILETOP_OFF + NUMMONS)))"
+    },
+    "glyph_is_fem_statue": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((((glyph) >= env.GLYPH_STATUE_FEM_OFF) && ((glyph) < (env.GLYPH_STATUE_FEM_OFF + env.NUMMONS))) || env.glyph_is_fem_statue_piletop(glyph))))",
+      "original": "((((glyph) >= GLYPH_STATUE_FEM_OFF) && ((glyph) < (GLYPH_STATUE_FEM_OFF + NUMMONS))) || glyph_is_fem_statue_piletop(glyph))"
+    },
+    "glyph_is_statue": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean((env.glyph_is_male_statue(glyph) || env.glyph_is_fem_statue(glyph))))",
+      "original": "(glyph_is_male_statue(glyph) || glyph_is_fem_statue(glyph))"
+    },
+    "glyph_is_body_piletop": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean((((glyph) >= env.GLYPH_BODY_PILETOP_OFF) && ((glyph) < (env.GLYPH_BODY_PILETOP_OFF + env.NUMMONS)))))",
+      "original": "(((glyph) >= GLYPH_BODY_PILETOP_OFF) && ((glyph) < (GLYPH_BODY_PILETOP_OFF + NUMMONS)))"
+    },
+    "glyph_is_body": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean(((((glyph) >= env.GLYPH_BODY_OFF) && ((glyph) < (env.GLYPH_BODY_OFF + env.NUMMONS))) || env.glyph_is_body_piletop(glyph))))",
+      "original": "((((glyph) >= GLYPH_BODY_OFF) && ((glyph) < (GLYPH_BODY_OFF + NUMMONS))) || glyph_is_body_piletop(glyph))"
+    },
+    "glyph_is_object": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "Number(Boolean((env.glyph_is_normal_object(glyph) || env.glyph_is_generic_object(glyph) || env.glyph_is_statue(glyph) || env.glyph_is_body(glyph))))",
+      "original": "(glyph_is_normal_object(glyph) || glyph_is_generic_object(glyph) || glyph_is_statue(glyph) || glyph_is_body(glyph))"
+    },
+    "glyph_to_mon": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "(env.glyph_is_normal_female_monster(glyph) ? ((glyph) - env.GLYPH_MON_FEM_OFF) : env.glyph_is_normal_male_monster(glyph) ? ((glyph) - env.GLYPH_MON_MALE_OFF) : env.glyph_is_female_pet(glyph) ? ((glyph) - env.GLYPH_PET_FEM_OFF) : env.glyph_is_male_pet(glyph) ? ((glyph) - env.GLYPH_PET_MALE_OFF) : env.glyph_is_detected_female_monster(glyph) ? ((glyph) - env.GLYPH_DETECT_FEM_OFF) : env.glyph_is_detected_male_monster(glyph) ? ((glyph) - env.GLYPH_DETECT_MALE_OFF) : env.glyph_is_ridden_female_monster(glyph) ? ((glyph) - env.GLYPH_RIDDEN_FEM_OFF) : env.glyph_is_ridden_male_monster(glyph) ? ((glyph) - env.GLYPH_RIDDEN_MALE_OFF) : env.NUMMONS)",
+      "original": "(glyph_is_normal_female_monster(glyph) ? ((glyph) - GLYPH_MON_FEM_OFF) : glyph_is_normal_male_monster(glyph) ? ((glyph) - GLYPH_MON_MALE_OFF) : glyph_is_female_pet(glyph) ? ((glyph) - GLYPH_PET_FEM_OFF) : glyph_is_male_pet(glyph) ? ((glyph) - GLYPH_PET_MALE_OFF) : glyph_is_detected_female_monster(glyph) ? ((glyph) - GLYPH_DETECT_FEM_OFF) : glyph_is_detected_male_monster(glyph) ? ((glyph) - GLYPH_DETECT_MALE_OFF) : glyph_is_ridden_female_monster(glyph) ? ((glyph) - GLYPH_RIDDEN_FEM_OFF) : glyph_is_ridden_male_monster(glyph) ? ((glyph) - GLYPH_RIDDEN_MALE_OFF) : NUMMONS)"
+    },
+    "glyph_to_obj": {
+      "params": [
+        "glyph"
+      ],
+      "expression": "(env.glyph_is_body(glyph) ? env.CORPSE : env.glyph_is_statue(glyph) ? env.STATUE : env.glyph_is_generic_object(glyph) ? ((glyph) - (env.glyph_is_piletop_generic_obj(glyph) ? env.GLYPH_OBJ_PILETOP_OFF : env.GLYPH_OBJ_OFF)) : env.glyph_is_normal_object(glyph) ? ((glyph) - (env.glyph_is_normal_piletop_obj(glyph) ? env.GLYPH_OBJ_PILETOP_OFF : env.GLYPH_OBJ_OFF)) : env.NUM_OBJECTS)",
+      "original": "(glyph_is_body(glyph) ? CORPSE : glyph_is_statue(glyph) ? STATUE : glyph_is_generic_object(glyph) ? ((glyph) - (glyph_is_piletop_generic_obj(glyph) ? GLYPH_OBJ_PILETOP_OFF : GLYPH_OBJ_OFF)) : glyph_is_normal_object(glyph) ? ((glyph) - (glyph_is_normal_piletop_obj(glyph) ? GLYPH_OBJ_PILETOP_OFF : GLYPH_OBJ_OFF)) : NUM_OBJECTS)"
+    },
+    "has_mgivenname": {
+      "params": [
+        "mon"
+      ],
+      "expression": "Number(Boolean(((mon).mextra && env.MGIVENNAME(mon))))",
+      "original": "((mon)->mextra && MGIVENNAME(mon))"
+    },
+    "levl": {
+      "params": null,
+      "expression": "env.svl.level.locations",
+      "original": "svl.level.locations"
+    },
+    "m_at": {
+      "params": [
+        "x",
+        "y"
+      ],
+      "expression": "(env.svl.level.monsters[x][y])",
+      "original": "(svl.level.monsters[x][y])"
+    },
+    "mines_dnum": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_mines_dnum)",
+      "original": "(svd.dungeon_topology.d_mines_dnum)"
+    },
+    "monsndx": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "((ptr).pmidx)",
+      "original": "((ptr)->pmidx)"
+    },
+    "next2u": {
+      "params": [
+        "px",
+        "py"
+      ],
+      "expression": "Number(Boolean((env.distu((px),(py)) <= 2)))",
+      "original": "(distu((px),(py)) <= 2)"
+    },
+    "is_undead": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((((ptr).mflags2 & env.M2_UNDEAD) != 0n)))",
+      "original": "(((ptr)->mflags2 & M2_UNDEAD) != 0L)"
+    },
+    "is_golem": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean(((ptr).mlet == env.S_GOLEM)))",
+      "original": "((ptr)->mlet == S_GOLEM)"
+    },
+    "weirdnonliving": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.is_golem(ptr) || (ptr).mlet == env.S_VORTEX)))",
+      "original": "(is_golem(ptr) || (ptr)->mlet == S_VORTEX)"
+    },
+    "nonliving": {
+      "params": [
+        "ptr"
+      ],
+      "expression": "Number(Boolean((env.is_undead(ptr) || (ptr) == env.mons[env.PM_MANES] || env.weirdnonliving(ptr))))",
+      "original": "(is_undead(ptr) || (ptr) == &mons[PM_MANES] || weirdnonliving(ptr))"
+    },
+    "pline1": {
+      "params": [
+        "cstr"
+      ],
+      "expression": "env.pline(\"%s\", cstr)",
+      "original": "pline(\"%s\", cstr)"
+    },
+    "plur": {
+      "params": [
+        "x"
+      ],
+      "expression": "(((x) == 1) ? \"\" : \"s\")",
+      "original": "(((x) == 1) ? \"\" : \"s\")"
+    },
+    "qsort": {
+      "params": [
+        "base",
+        "nmemb",
+        "size",
+        "compar"
+      ],
+      "expression": "env.nh_deterministic_qsort((base), (nmemb), (size), (compar))",
+      "original": "nh_deterministic_qsort((base), (nmemb), (size), (compar))"
+    },
+    "quest_dnum": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_quest_dnum)",
+      "original": "(svd.dungeon_topology.d_quest_dnum)"
+    },
+    "strcmpi": {
+      "params": [
+        "a",
+        "b"
+      ],
+      "expression": "env.strncmpi((a), (b), -1)",
+      "original": "strncmpi((a), (b), -1)"
+    },
+    "tower_dnum": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_tower_dnum)",
+      "original": "(svd.dungeon_topology.d_tower_dnum)"
+    },
+    "u_at": {
+      "params": [
+        "x",
+        "y"
+      ],
+      "expression": "Number(Boolean(((x) == env.u.ux && (y) == env.u.uy)))",
+      "original": "((x) == u.ux && (y) == u.uy)"
+    },
+    "uhis": {
+      "params": [],
+      "expression": "(env.genders[env.flags.female ? 1 : 0].his)",
+      "original": "(genders[flags.female ? 1 : 0].his)"
+    },
+    "valley_level": {
+      "params": null,
+      "expression": "(env.svd.dungeon_topology.d_valley_level)",
+      "original": "(svd.dungeon_topology.d_valley_level)"
+    },
+    "wizard": {
+      "params": null,
+      "expression": "env.flags.debug",
+      "original": "flags.debug"
+    },
+    "y_n": {
+      "params": [
+        "query"
+      ],
+      "expression": "env.yn_function(query, env.ynchars, 110, 1)",
+      "original": "yn_function(query, ynchars, 'n', TRUE)"
+    },
+    "ynq": {
+      "params": [
+        "query"
+      ],
+      "expression": "env.yn_function(query, env.ynqchars, 113, 1)",
+      "original": "yn_function(query, ynqchars, 'q', TRUE)"
+    }
+  },
+  "schema": {
+    "flag": {
+      "ctype": "struct flag",
+      "fields": [
+        {
+          "name": "debug",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "verbose",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "female",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "suppress_alert",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_flags": {
+      "ctype": "struct instance_flags",
+      "fields": [
+        {
+          "name": "override_ID",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "debug_mongen",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "autodescribe",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "menu_requested",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "debug_fuzzer",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "xint8",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "cmdassist",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "sanity_no_check",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "colorcount",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "uint32_t",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "permonst": {
+      "ctype": "struct permonst",
+      "fields": [
+        {
+          "name": "pmidx",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "const enum monnums",
+          "bit": false,
+          "const": true
+        },
+        {
+          "name": "geno",
+          "d": {
+            "t": "u16"
+          },
+          "ctype": "unsigned short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mflags2",
+          "d": {
+            "t": "u64"
+          },
+          "ctype": "unsigned long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mlet",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "difficulty",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mlevel",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "pmnames",
+          "d": {
+            "a": [
+              3
+            ],
+            "e": {
+              "p": ""
+            }
+          },
+          "ctype": "const char *[3]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "monst": {
+      "ctype": "struct monst",
+      "fields": [
+        {
+          "name": "data",
+          "d": {
+            "p": "permonst"
+          },
+          "ctype": "struct permonst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "isgd",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mhp",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "isshk",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mextra",
+          "d": {
+            "p": "mextra"
+          },
+          "ctype": "struct mextra *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mstate",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "nmon",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ispriest",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mtame",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mx",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "my",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "minvent",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "wormno",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "mux",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "muy",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "m_id",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mtrack",
+          "d": {
+            "a": [
+              4
+            ],
+            "e": {
+              "s": "nhcoord"
+            }
+          },
+          "ctype": "coord[4]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "mvitals": {
+      "ctype": "struct mvitals",
+      "fields": [
+        {
+          "name": "mvflags",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "born",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_m": {
+      "ctype": "struct instance_globals_saved_m",
+      "fields": [
+        {
+          "name": "mvitals",
+          "d": {
+            "a": [
+              383
+            ],
+            "e": {
+              "s": "mvitals"
+            }
+          },
+          "ctype": "struct mvitals[383]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "you": {
+      "ctype": "struct you",
+      "fields": [
+        {
+          "name": "uz",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ux",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uy",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uprops",
+          "d": {
+            "a": [
+              69
+            ],
+            "e": {
+              "s": "prop"
+            }
+          },
+          "ctype": "struct prop[69]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "usteed",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uswallow",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "ustuck",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "utotype",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ulevel",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ulevelmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dx",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dy",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uhp",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uhpmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uen",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uenmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "uinwater",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "uswldtim",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "umonnum",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "umonster",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mh",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mhmax",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "eshk": {
+      "ctype": "struct eshk",
+      "fields": [
+        {
+          "name": "shoplevel",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "mextra": {
+      "ctype": "struct mextra",
+      "fields": [
+        {
+          "name": "eshk",
+          "d": {
+            "p": "eshk"
+          },
+          "ctype": "struct eshk *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "epri",
+          "d": {
+            "p": "epri"
+          },
+          "ctype": "struct epri *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "egd",
+          "d": {
+            "p": "egd"
+          },
+          "ctype": "struct egd *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mgivenname",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "emin",
+          "d": {
+            "p": "emin"
+          },
+          "ctype": "struct emin *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "edog",
+          "d": {
+            "p": "edog"
+          },
+          "ctype": "struct edog *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "ebones",
+          "d": {
+            "p": "ebones"
+          },
+          "ctype": "struct ebones *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "dlevel_t": {
+      "ctype": "dlevel_t",
+      "fields": [
+        {
+          "name": "monlist",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "monsters",
+          "d": {
+            "a": [
+              80,
+              21
+            ],
+            "e": {
+              "p": "monst"
+            }
+          },
+          "ctype": "struct monst *[80][21]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "locations",
+          "d": {
+            "a": [
+              80,
+              21
+            ],
+            "e": {
+              "s": "rm"
+            }
+          },
+          "ctype": "struct rm[80][21]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "flags",
+          "d": {
+            "s": "levelflags"
+          },
+          "ctype": "struct levelflags",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "objlist",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "buriedobjlist",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "damagelist",
+          "d": {
+            "p": "damage"
+          },
+          "ctype": "struct damage *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "bonesinfo",
+          "d": {
+            "p": "cemetery"
+          },
+          "ctype": "struct cemetery *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_l": {
+      "ctype": "struct instance_globals_saved_l",
+      "fields": [
+        {
+          "name": "level",
+          "d": {
+            "s": "dlevel_t"
+          },
+          "ctype": "dlevel_t",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_m": {
+      "ctype": "struct instance_globals_m",
+      "fields": [
+        {
+          "name": "migrating_mons",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "migrating_objs",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "mydogs",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "epri": {
+      "ctype": "struct epri",
+      "fields": [
+        {
+          "name": "shrlevel",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "egd": {
+      "ctype": "struct egd",
+      "fields": [
+        {
+          "name": "gdlevel",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "prop": {
+      "ctype": "struct prop",
+      "fields": [
+        {
+          "name": "intrinsic",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "extrinsic",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "accessibility_data": {
+      "ctype": "struct accessibility_data",
+      "fields": [
+        {
+          "name": "mon_notices_blocked",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_f": {
+      "ctype": "struct instance_globals_f",
+      "fields": [
+        {
+          "name": "ftrap",
+          "d": {
+            "p": "trap"
+          },
+          "ctype": "struct trap *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "trap": {
+      "ctype": "struct trap",
+      "fields": [
+        {
+          "name": "ntrap",
+          "d": {
+            "p": "trap"
+          },
+          "ctype": "struct trap *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "tseen",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        }
+      ]
+    },
+    "engr": {
+      "ctype": "struct engr",
+      "fields": [
+        {
+          "name": "nxt_engr",
+          "d": {
+            "p": "engr"
+          },
+          "ctype": "struct engr *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "nhcoord": {
+      "ctype": "struct nhcoord",
+      "fields": [
+        {
+          "name": "x",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "y",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "coordxy",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "Role": {
+      "ctype": "struct Role",
+      "fields": [
+        {
+          "name": "mnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_u": {
+      "ctype": "struct instance_globals_u",
+      "fields": [
+        {
+          "name": "urole",
+          "d": {
+            "s": "Role"
+          },
+          "ctype": "struct Role",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "kinfo": {
+      "ctype": "struct kinfo",
+      "fields": [
+        {
+          "name": "name",
+          "d": {
+            "a": [
+              256
+            ],
+            "e": {
+              "t": "i8"
+            }
+          },
+          "ctype": "char[256]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "format",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "next",
+          "d": {
+            "p": "kinfo"
+          },
+          "ctype": "struct kinfo *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_k": {
+      "ctype": "struct instance_globals_saved_k",
+      "fields": [
+        {
+          "name": "killer",
+          "d": {
+            "s": "kinfo"
+          },
+          "ctype": "struct kinfo",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "Gender": {
+      "ctype": "struct Gender",
+      "fields": [
+        {
+          "name": "his",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "context_info": {
+      "ctype": "struct context_info",
+      "fields": [
+        {
+          "name": "mon_moving",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "warntype",
+          "d": {
+            "s": "warntype_info"
+          },
+          "ctype": "struct warntype_info",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_c": {
+      "ctype": "struct instance_globals_saved_c",
+      "fields": [
+        {
+          "name": "context",
+          "d": {
+            "s": "context_info"
+          },
+          "ctype": "struct context_info",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "c_common_strings": {
+      "ctype": "struct c_common_strings",
+      "fields": [
+        {
+          "name": "c_Never_mind",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *const",
+          "bit": false,
+          "const": true
+        }
+      ]
+    },
+    "window_procs": {
+      "ctype": "struct window_procs",
+      "fields": [
+        {
+          "name": "win_create_nhwindow",
+          "d": {
+            "f": true
+          },
+          "ctype": "winid (*)(int)",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "win_putstr",
+          "d": {
+            "f": true
+          },
+          "ctype": "void (*)(winid, int, const char *)",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "win_display_nhwindow",
+          "d": {
+            "f": true
+          },
+          "ctype": "void (*)(winid, boolean)",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "win_destroy_nhwindow",
+          "d": {
+            "f": true
+          },
+          "ctype": "void (*)(winid)",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "wp_id",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "enum wp_ids",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "name",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "win_start_menu",
+          "d": {
+            "f": true
+          },
+          "ctype": "void (*)(winid, unsigned long)",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "win_end_menu",
+          "d": {
+            "f": true
+          },
+          "ctype": "void (*)(winid, const char *)",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "rm": {
+      "ctype": "struct rm",
+      "fields": [
+        {
+          "name": "seenv",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "typ",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "schar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "flags",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_v": {
+      "ctype": "struct instance_globals_v",
+      "fields": [
+        {
+          "name": "viz_array",
+          "d": {
+            "p": ""
+          },
+          "ctype": "seenV **",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "d_level": {
+      "ctype": "struct d_level",
+      "fields": [
+        {
+          "name": "dnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dlevel",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "s_level": {
+      "ctype": "struct s_level",
+      "fields": [
+        {
+          "name": "proto",
+          "d": {
+            "a": [
+              15
+            ],
+            "e": {
+              "t": "i8"
+            }
+          },
+          "ctype": "char[15]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "flags",
+          "d": {
+            "s": "d_flags"
+          },
+          "ctype": "d_flags",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "d_flags": {
+      "ctype": "struct d_flags",
+      "fields": [
+        {
+          "name": "maze_like",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "hellish",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "town",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "rogue_like",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        }
+      ]
+    },
+    "levelflags": {
+      "ctype": "struct levelflags",
+      "fields": [
+        {
+          "name": "nfountains",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "nsinks",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "has_vault",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "has_shop",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "has_temple",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "has_court",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "has_zoo",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "has_morgue",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "has_barracks",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "has_beehive",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "has_swamp",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "noteleport",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "hardfloor",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "nommap",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "hero_memory",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "shortsighted",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "graveyard",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "is_maze_lev",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "is_cavernous_lev",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "arboreal",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        },
+        {
+          "name": "sokoban_rules",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "unsigned int",
+          "bit": true,
+          "const": false
+        }
+      ]
+    },
+    "symdef": {
+      "ctype": "struct symdef",
+      "fields": [
+        {
+          "name": "sym",
+          "d": {
+            "t": "u8"
+          },
+          "ctype": "uchar",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "dgn_topology": {
+      "ctype": "struct dgn_topology",
+      "fields": [
+        {
+          "name": "d_mines_dnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "d_sokoban_dnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "d_quest_dnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "d_knox_level",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "d_tower_dnum",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "xint16",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "d_astral_level",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "d_stronghold_level",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "d_valley_level",
+          "d": {
+            "s": "d_level"
+          },
+          "ctype": "d_level",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_d": {
+      "ctype": "struct instance_globals_saved_d",
+      "fields": [
+        {
+          "name": "dungeon_topology",
+          "d": {
+            "s": "dgn_topology"
+          },
+          "ctype": "struct dgn_topology",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "dungeons",
+          "d": {
+            "a": [
+              16
+            ],
+            "e": {
+              "s": "dungeon"
+            }
+          },
+          "ctype": "dungeon[16]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "dungeon": {
+      "ctype": "struct dungeon",
+      "fields": [
+        {
+          "name": "dname",
+          "d": {
+            "a": [
+              24
+            ],
+            "e": {
+              "t": "i8"
+            }
+          },
+          "ctype": "char[24]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_y": {
+      "ctype": "struct instance_globals_y",
+      "fields": [
+        {
+          "name": "youmonst",
+          "d": {
+            "s": "monst"
+          },
+          "ctype": "struct monst",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "const_globals": {
+      "ctype": "struct const_globals",
+      "fields": [
+        {
+          "name": "zeroany",
+          "d": {
+            "s": "any"
+          },
+          "ctype": "const anything",
+          "bit": false,
+          "const": true
+        }
+      ]
+    },
+    "any": {
+      "ctype": "union any",
+      "fields": [
+        {
+          "name": "a_int",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "mi": {
+      "ctype": "struct mi",
+      "fields": [
+        {
+          "name": "item",
+          "d": {
+            "s": "any"
+          },
+          "ctype": "anything",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "count",
+          "d": {
+            "t": "i64"
+          },
+          "ctype": "long",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "warntype_info": {
+      "ctype": "struct warntype_info",
+      "fields": [
+        {
+          "name": "speciesidx",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "species",
+          "d": {
+            "p": "permonst"
+          },
+          "ctype": "struct permonst *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "display_hints": {
+      "ctype": "struct display_hints",
+      "fields": [
+        {
+          "name": "botl",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "boolean",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "obj": {
+      "ctype": "struct obj",
+      "fields": [
+        {
+          "name": "oextra",
+          "d": {
+            "p": "oextra"
+          },
+          "ctype": "struct oextra *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "nobj",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "cobj",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "oextra": {
+      "ctype": "struct oextra",
+      "fields": [
+        {
+          "name": "oname",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "omonst",
+          "d": {
+            "p": "monst"
+          },
+          "ctype": "struct monst *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "omailcmd",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_i": {
+      "ctype": "struct instance_globals_i",
+      "fields": [
+        {
+          "name": "invent",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "damage": {
+      "ctype": "struct damage",
+      "fields": [
+        {
+          "name": "next",
+          "d": {
+            "p": "damage"
+          },
+          "ctype": "struct damage *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "cemetery": {
+      "ctype": "struct cemetery",
+      "fields": [
+        {
+          "name": "next",
+          "d": {
+            "p": "cemetery"
+          },
+          "ctype": "struct cemetery *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "objclass": {
+      "ctype": "struct objclass",
+      "fields": [
+        {
+          "name": "oc_uname",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oc_class",
+          "d": {
+            "t": "i8"
+          },
+          "ctype": "char",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oc_prob",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "oc_name_idx",
+          "d": {
+            "t": "i16"
+          },
+          "ctype": "short",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "sinfo": {
+      "ctype": "struct sinfo",
+      "fields": [
+        {
+          "name": "in_sanity_check",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_b": {
+      "ctype": "struct instance_globals_b",
+      "fields": [
+        {
+          "name": "billobjs",
+          "d": {
+            "p": "obj"
+          },
+          "ctype": "struct obj *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_saved_n": {
+      "ctype": "struct instance_globals_saved_n",
+      "fields": [
+        {
+          "name": "nhuuid",
+          "d": {
+            "a": [
+              37
+            ],
+            "e": {
+              "t": "i8"
+            }
+          },
+          "ctype": "char[37]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "objdescr": {
+      "ctype": "struct objdescr",
+      "fields": [
+        {
+          "name": "oc_name",
+          "d": {
+            "p": ""
+          },
+          "ctype": "const char *",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "symsetentry": {
+      "ctype": "struct symsetentry",
+      "fields": [
+        {
+          "name": "name",
+          "d": {
+            "p": ""
+          },
+          "ctype": "char *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "handling",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "enum symset_handling_types",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_s": {
+      "ctype": "struct instance_globals_s",
+      "fields": [
+        {
+          "name": "symset",
+          "d": {
+            "a": [
+              2
+            ],
+            "e": {
+              "s": "symsetentry"
+            }
+          },
+          "ctype": "struct symsetentry[2]",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "showsyms",
+          "d": {
+            "a": [
+              196
+            ],
+            "e": {
+              "t": "u8"
+            }
+          },
+          "ctype": "nhsym[196]",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "instance_globals_c": {
+      "ctype": "struct instance_globals_c",
+      "fields": [
+        {
+          "name": "currentgraphics",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "glyph_map_entry": {
+      "ctype": "struct glyph_map_entry",
+      "fields": [
+        {
+          "name": "u",
+          "d": {
+            "p": "unicode_representation"
+          },
+          "ctype": "struct unicode_representation *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "customcolor",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "uint32",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "sym",
+          "d": {
+            "s": "classic_representation"
+          },
+          "ctype": "struct classic_representation",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "classic_representation": {
+      "ctype": "struct classic_representation",
+      "fields": [
+        {
+          "name": "symidx",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "color",
+          "d": {
+            "t": "i32"
+          },
+          "ctype": "int",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "unicode_representation": {
+      "ctype": "struct unicode_representation",
+      "fields": [
+        {
+          "name": "utf8str",
+          "d": {
+            "p": ""
+          },
+          "ctype": "uint8 *",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "utf32ch",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "uint32",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "nhl_sandbox_info": {
+      "ctype": "struct nhl_sandbox_info",
+      "fields": [
+        {
+          "name": "flags",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "uint32_t",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "memlimit",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "uint32_t",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "steps",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "uint32_t",
+          "bit": false,
+          "const": false
+        },
+        {
+          "name": "perpcall",
+          "d": {
+            "t": "u32"
+          },
+          "ctype": "uint32_t",
+          "bit": false,
+          "const": false
+        }
+      ]
+    },
+    "glyphinfo": {
+      "ctype": "struct glyphinfo",
+      "fields": []
+    },
+    "emin": {
+      "ctype": "struct emin",
+      "fields": []
+    },
+    "edog": {
+      "ctype": "struct edog",
+      "fields": []
+    },
+    "ebones": {
+      "ctype": "struct ebones",
+      "fields": []
+    }
+  },
+  "globals": [
+    {
+      "name": "flags",
+      "d": {
+        "s": "flag"
+      }
+    },
+    {
+      "name": "unavailcmd",
+      "d": {
+        "a": [
+          0
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    },
+    {
+      "name": "iflags",
+      "d": {
+        "s": "instance_flags"
+      }
+    },
+    {
+      "name": "svm",
+      "d": {
+        "s": "instance_globals_saved_m"
+      }
+    },
+    {
+      "name": "u",
+      "d": {
+        "s": "you"
+      }
+    },
+    {
+      "name": "svl",
+      "d": {
+        "s": "instance_globals_saved_l"
+      }
+    },
+    {
+      "name": "gm",
+      "d": {
+        "s": "instance_globals_m"
+      }
+    },
+    {
+      "name": "a11y",
+      "d": {
+        "s": "accessibility_data"
+      }
+    },
+    {
+      "name": "gf",
+      "d": {
+        "s": "instance_globals_f"
+      }
+    },
+    {
+      "name": "head_engr",
+      "d": {
+        "p": "engr"
+      }
+    },
+    {
+      "name": "ynqchars",
+      "d": {
+        "a": [
+          0
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    },
+    {
+      "name": "gu",
+      "d": {
+        "s": "instance_globals_u"
+      }
+    },
+    {
+      "name": "svk",
+      "d": {
+        "s": "instance_globals_saved_k"
+      }
+    },
+    {
+      "name": "genders",
+      "d": {
+        "a": [
+          0
+        ],
+        "e": {
+          "s": "Gender"
+        }
+      }
+    },
+    {
+      "name": "mons",
+      "d": {
+        "a": [
+          384
+        ],
+        "e": {
+          "s": "permonst"
+        }
+      }
+    },
+    {
+      "name": "svc",
+      "d": {
+        "s": "instance_globals_saved_c"
+      }
+    },
+    {
+      "name": "c_common_strings",
+      "d": {
+        "s": "c_common_strings"
+      }
+    },
+    {
+      "name": "ynchars",
+      "d": {
+        "a": [
+          0
+        ],
+        "e": {
+          "t": "i8"
+        }
+      }
+    },
+    {
+      "name": "windowprocs",
+      "d": {
+        "s": "window_procs"
+      }
+    },
+    {
+      "name": "gv",
+      "d": {
+        "s": "instance_globals_v"
+      }
+    },
+    {
+      "name": "defsyms",
+      "d": {
+        "a": [
+          106
+        ],
+        "e": {
+          "s": "symdef"
+        }
+      }
+    },
+    {
+      "name": "svd",
+      "d": {
+        "s": "instance_globals_saved_d"
+      }
+    },
+    {
+      "name": "levltyp",
+      "d": {
+        "a": [
+          39
+        ],
+        "e": {
+          "p": ""
+        }
+      }
+    },
+    {
+      "name": "gy",
+      "d": {
+        "s": "instance_globals_y"
+      }
+    },
+    {
+      "name": "cg",
+      "d": {
+        "s": "const_globals"
+      }
+    },
+    {
+      "name": "nul_glyphinfo",
+      "d": {
+        "s": "glyphinfo"
+      }
+    },
+    {
+      "name": "disp",
+      "d": {
+        "s": "display_hints"
+      }
+    },
+    {
+      "name": "gi",
+      "d": {
+        "s": "instance_globals_i"
+      }
+    },
+    {
+      "name": "objects",
+      "d": {
+        "a": [
+          482
+        ],
+        "e": {
+          "s": "objclass"
+        }
+      }
+    },
+    {
+      "name": "WIN_MESSAGE",
+      "d": {
+        "t": "i32"
+      }
+    },
+    {
+      "name": "program_state",
+      "d": {
+        "s": "sinfo"
+      }
+    },
+    {
+      "name": "gb",
+      "d": {
+        "s": "instance_globals_b"
+      }
+    },
+    {
+      "name": "svn",
+      "d": {
+        "s": "instance_globals_saved_n"
+      }
+    },
+    {
+      "name": "obj_descr",
+      "d": {
+        "a": [
+          482
+        ],
+        "e": {
+          "s": "objdescr"
+        }
+      }
+    },
+    {
+      "name": "gs",
+      "d": {
+        "s": "instance_globals_s"
+      }
+    },
+    {
+      "name": "gc",
+      "d": {
+        "s": "instance_globals_c"
+      }
+    },
+    {
+      "name": "known_handling",
+      "d": {
+        "a": [
+          0
+        ],
+        "e": {
+          "p": ""
+        }
+      }
+    },
+    {
+      "name": "glyphmap",
+      "d": {
+        "a": [
+          9624
+        ],
+        "e": {
+          "s": "glyph_map_entry"
+        }
+      }
+    }
+  ],
+  "constants": [
+    "AD_PHYS",
+    "ARM",
+    "ARTICLE_A",
+    "ARTICLE_THE",
+    "ARTICLE_YOUR",
+    "ATR_NONE",
+    "BLINDED",
+    "BUFSZ",
+    "COLBUFSZ",
+    "COLNO",
+    "CONFUSION",
+    "CORPSE",
+    "CORR",
+    "COULD_SEE",
+    "DBWALL",
+    "DEAF",
+    "DIED",
+    "DOOR",
+    "ECMD_CANCEL",
+    "ECMD_OK",
+    "FALSE",
+    "FIRE_RES",
+    "FIRST_OBJECT",
+    "FLYING",
+    "GLIB",
+    "GLYPH_BODY_OFF",
+    "GLYPH_BODY_PILETOP_OFF",
+    "GLYPH_CMAP_C_OFF",
+    "GLYPH_CMAP_STONE_OFF",
+    "GLYPH_DETECT_FEM_OFF",
+    "GLYPH_DETECT_MALE_OFF",
+    "GLYPH_INVISIBLE",
+    "GLYPH_MON_FEM_OFF",
+    "GLYPH_MON_MALE_OFF",
+    "GLYPH_OBJ_OFF",
+    "GLYPH_OBJ_PILETOP_OFF",
+    "GLYPH_PET_FEM_OFF",
+    "GLYPH_PET_MALE_OFF",
+    "GLYPH_RIDDEN_FEM_OFF",
+    "GLYPH_RIDDEN_MALE_OFF",
+    "GLYPH_STATUE_FEM_OFF",
+    "GLYPH_STATUE_FEM_PILETOP_OFF",
+    "GLYPH_STATUE_MALE_OFF",
+    "GLYPH_STATUE_MALE_PILETOP_OFF",
+    "GLYPH_ZAP_OFF",
+    "G_EXTINCT",
+    "G_UNIQ",
+    "HALLUC",
+    "HALLUC_RES",
+    "IN_SIGHT",
+    "KILLED_BY",
+    "LEVITATION",
+    "LONG_MAX",
+    "LOW_PM",
+    "M2_UNDEAD",
+    "MAXOCLASSES",
+    "MAXULEV",
+    "MAX_GLYPH",
+    "MENU_BEHAVE_STANDARD",
+    "MENU_ITEMFLAGS_NONE",
+    "MIGR_EXACT_XY",
+    "MIGR_RANDOM",
+    "MM_NOMSG",
+    "MON_ENDGAME_MIGR",
+    "MON_LIMBO",
+    "MON_MIGRATING",
+    "MON_OFFMAP",
+    "NEUTRAL",
+    "NHL_SB_DEBUGGING",
+    "NHL_SB_SAFE",
+    "NHW_MENU",
+    "NHW_TEXT",
+    "NO_COLOR",
+    "NO_GLYPH",
+    "NUMMONS",
+    "NUM_OBJECTS",
+    "NUM_ZAP",
+    "PICK_ANY",
+    "PICK_NONE",
+    "PM_GRID_BUG",
+    "PM_MANES",
+    "PM_SAMURAI",
+    "POLY_CONTROLLED",
+    "PRIMARYSET",
+    "PROT_FROM_SHAPE_CHANGERS",
+    "QBUFSZ",
+    "ROOM",
+    "ROWNO",
+    "SDOOR",
+    "SICK",
+    "SICK_NONVOMITABLE",
+    "SICK_VOMITABLE",
+    "SLIMED",
+    "STATUE",
+    "STONE",
+    "STONED",
+    "STUNNED",
+    "SUPPRESS_HALLUCINATION",
+    "SUPPRESS_IT",
+    "SUPPRESS_SADDLE",
+    "S_GOLEM",
+    "S_VORTEX",
+    "S_digbeam",
+    "S_fountain",
+    "S_goodpos",
+    "S_rslant",
+    "S_sink",
+    "S_vbeam",
+    "TEMP_LIT",
+    "TIMEOUT",
+    "TRUE",
+    "UTOTYPE_NONE",
+    "VOMITING",
+    "WARN_OF_MON",
+    "WIN_ERR",
+    "WM_MASK",
+    "WWALKING",
+    "XKILL_NOMSG",
+    "fuzzer_impossible_continue",
+    "fuzzer_impossible_panic",
+    "wp_tty"
+  ],
+  "variadicABI": {
+    "pline_pp": {
+      "name": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "impossible_p": {
+      "name": "impossible",
+      "types": [
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "sprintf_ppp": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "int"
+    },
+    "You_ppp": {
+      "name": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_ppp": {
+      "name": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "There_p": {
+      "name": "There",
+      "types": [
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "sscanf_pppp": {
+      "name": "sscanf",
+      "types": [
+        "char *",
+        "char *",
+        "int *",
+        "char *"
+      ],
+      "ret": "int"
+    },
+    "You_p": {
+      "name": "You",
+      "types": [
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "pline_p": {
+      "name": "pline",
+      "types": [
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "panic_p": {
+      "name": "panic",
+      "types": [
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "sprintf_ppi": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "ret": "int"
+    },
+    "sprintf_ppiii": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "int"
+    },
+    "sprintf_ppii": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "ret": "int"
+    },
+    "sprintf_ppip": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "char *"
+      ],
+      "ret": "int"
+    },
+    "You_pp": {
+      "name": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "sprintf_pppj": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "long"
+      ],
+      "ret": "int"
+    },
+    "sprintf_pppp": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "int"
+    },
+    "pline_pppi": {
+      "name": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "int"
+      ],
+      "ret": "void"
+    },
+    "sprintf_pppjj": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "long",
+        "long"
+      ],
+      "ret": "int"
+    },
+    "sprintf_ppj": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "unsigned long"
+      ],
+      "ret": "int"
+    },
+    "impossible_pii": {
+      "name": "impossible",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "ret": "void"
+    },
+    "pline_pipii": {
+      "name": "pline",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "int",
+        "int"
+      ],
+      "ret": "void"
+    },
+    "sprintf_ppiiii": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "int"
+    },
+    "nh_snprintf_pipjppiiiii": {
+      "name": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "char *",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "void"
+    },
+    "nh_snprintf_pipjpiidp": {
+      "name": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "int",
+        "int",
+        "double",
+        "char *"
+      ],
+      "ret": "void"
+    },
+    "sprintf_pppjp": {
+      "name": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "long",
+        "char *"
+      ],
+      "ret": "int"
+    },
+    "nh_snprintf_pipjppppp": {
+      "name": "nh_snprintf",
+      "types": [
+        "char *",
+        "int",
+        "char *",
+        "unsigned long",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "ret": "void"
+    }
+  },
+  "literals": [
+    "",
+    "                             count  bytes",
+    "     sym   clr customcolor unicode utf8",
+    "    glyph  glyph identifier                        ",
+    "    glyph  glyph identifier                             sym   clr customcolor unicode utf8",
+    "  %s",
+    "  Grand total",
+    "  Misc total",
+    "  Miscellaneous",
+    "  Mon total",
+    "  Monsters, base size %ld",
+    "  Obj total",
+    "  Objects, base size %ld",
+    "  Over total",
+    "  Overview",
+    " \"%s\"",
+    " %c - %-28s",
+    " %c:%d",
+    " %s",
+    " <%d>",
+    " <0,0>",
+    " [index:level]:",
+    " at <%d,%d>",
+    " barracks",
+    " cave",
+    " dungeon",
+    " endgame",
+    " exceeds defsyms[%d] bounds (MAX_GLYPH = %d)",
+    " exceeds mons[%d] bounds",
+    " exceeds objects[%d] bounds",
+    " gehennom",
+    " graveyard",
+    " hellish",
+    " hive",
+    " invoke",
+    " ludios",
+    " maze",
+    " mazelike",
+    " mines",
+    " morgue",
+    " named %s",
+    " noDig",
+    " noMMap",
+    " noMem",
+    " noTport",
+    " quest",
+    " roguelike",
+    " shop",
+    " shortsight",
+    " sokoban",
+    " sokoban-rules",
+    " still",
+    " swamp",
+    " sync failure, returned NO_GLYPH (%d)",
+    " temple",
+    " throne",
+    " to %d:%d",
+    " tower",
+    " town",
+    " tree",
+    " vault",
+    " vlad",
+    " zoo",
+    "#levelchange",
+    "#terrain encodings:",
+    "#wizcustom",
+    "#wizintrinsic",
+    "%-18s [%3d:%2d]: calculated: %2d, hardcoded: %2d (%+d)",
+    "%-27s  %4ld  %6ld",
+    "%-27s [%li]",
+    "%011lx",
+    "%02x",
+    "%4d / %4d (%6.2f%%): %s",
+    "%c%s",
+    "%d mon%s pending for current level, %d for next level, %d for others.",
+    "%d%c",
+    "%s",
+    "%s %s %s %s",
+    "%s %s!",
+    "%s is %s.",
+    "%s own player",
+    "%s to not give off any smell.",
+    "%s:",
+    "%s: colorcount=%ld %s",
+    "%s?",
+    "'\\%03d' %02d",
+    "'other' levels",
+    ", active",
+    ", handler=%s",
+    "--",
+    "---------------------------  ----- -------",
+    ".lua",
+    "0123",
+    "All migrating monsters:",
+    "Can't get there from here.",
+    "Commit suicide",
+    "Crash test (#panic).",
+    "Current memory statistics:",
+    "D:%d,L:%d",
+    "Display macro issues:",
+    "Do you want to call panic() after impossible()?",
+    "Do you want to call panic() and end your game?",
+    "Do you want to start fuzz testing?",
+    "Flags: 0x%x could see, 0x%x in sight, 0x%x temp lit",
+    "Flip 0=randomly, 1=vertically, 2=horizontally, 3=both:",
+    "How many random monsters to migrate to next level? [0]",
+    "Kill %.110s?",
+    "List which?",
+    "Load which des lua file?",
+    "Load which lua file?",
+    "Monster%s migrating to %s:",
+    "Next monster",
+    "No display macro issues detected.",
+    "No monster difficulty discrepancies were detected.",
+    "No monsters currently migrating.",
+    "None.",
+    "Perform seppuku",
+    "Pick a monster to hurtle.",
+    "Pick a monster to smell.",
+    "Pick first monster to slay",
+    "Review of monster difficulty ratings",
+    "Review of monster difficulty ratings [index:level]:",
+    "That monster seems",
+    "The NHUUID for this game is { %s }.",
+    "The fuzz tester will make NetHack execute random keypresses.",
+    "Timeout for %s %s %d.",
+    "To what experience level do you want to be set?",
+    "U+%04lx",
+    "Which intrinsics?",
+    "You are%s %s.",
+    "You seem",
+    "[%04d] %-44s",
+    "[Precede any selection with a count to increment by other than %d.]",
+    "a monster",
+    "a q",
+    "are already as experienced as you can get.",
+    "are already as inexperienced as you can get.",
+    "are already that experienced.",
+    "are incapable of detecting odors in your present form.",
+    "billobjs",
+    "bones history, size %ld",
+    "buried",
+    "can move the cursor to a monster that you want to smell.",
+    "contained",
+    "contained_stats",
+    "count_obj",
+    "current hero energy (%d) better than maximum? (%d)",
+    "current hero health (%d) better than maximum? (%d)",
+    "current hero health as monster (%d) better than maximum? (%d)",
+    "current level",
+    "default",
+    "delayed killer%s, size %ld",
+    "destroy",
+    "destroyed",
+    "don't smell any monster there.",
+    "engravings, size %ld+text",
+    "fmon",
+    "fobj",
+    "func_tab.h",
+    "glyph_is_cmap() / glyph_to_cmap(glyph=%d)",
+    "glyph_is_cmap() / glyph_to_cmap(glyph=%d) sync failure, returned NO_GLYPH (%d)",
+    "glyph_is_cmap_zap(glyph=%d) returned non-zap cmap %d",
+    "glyph_to_cmap(glyph=%d) returns %d",
+    "glyph_to_cmap(glyph=%d) returns %d exceeds defsyms[%d] bounds (MAX_GLYPH = %d)",
+    "glyph_to_mon(glyph=%d) returns %d",
+    "glyph_to_mon(glyph=%d) returns %d exceeds mons[%d] bounds",
+    "glyph_to_obj(glyph=%d) returns %d",
+    "glyph_to_obj(glyph=%d) returns %d exceeds objects[%d] bounds",
+    "hack.h",
+    "increased by",
+    "invent",
+    "is no conventional way out of this mode.",
+    "is no monster there.",
+    "kill",
+    "killed",
+    "levl[%i][%i] vision blocking",
+    "levl_sanity_check",
+    "light sources, size %ld",
+    "list_migrating_mons",
+    "makemap_remove_mons",
+    "makemap_remove_mons: 'fmon' did not get emptied?",
+    "makemap_unmakemon",
+    "migrating",
+    "migrating minvent",
+    "migrating obj",
+    "migrsort_cmp",
+    "minvent",
+    "misc_stats",
+    "mon_chain",
+    "mon_invent_chain",
+    "mon_notices_blocked<0",
+    "mydogs",
+    "next level",
+    "obj_chain",
+    "object type names, text",
+    "poor",
+    "poor, unseen",
+    "regions, size %ld+%ld*rect+N",
+    "s",
+    "sanity_check",
+    "sanity_check: swallowed by nothing?",
+    "sanity_check: you over monster",
+    "set to",
+    "shop damage, size %ld",
+    "size_monst",
+    "size_obj",
+    "surreptitiously sniff under your %s.",
+    "the ",
+    "timers, size %ld",
+    "traps, size %ld",
+    "tty",
+    "turning into slime",
+    "turning into stone",
+    "unknown",
+    "unreachable",
+    "unseen",
+    "vomiting",
+    "which direction?",
+    "wiz_custom",
+    "wiz_detect",
+    "wiz_display_macros",
+    "wiz_flip_level",
+    "wiz_fuzzer",
+    "wiz_genesis",
+    "wiz_identify",
+    "wiz_intrinsic",
+    "wiz_kill",
+    "wiz_level_change",
+    "wiz_level_tele",
+    "wiz_levltyp_legend",
+    "wiz_load_lua",
+    "wiz_load_splua",
+    "wiz_makemap",
+    "wiz_map",
+    "wiz_map_levltyp",
+    "wiz_migrate_mons",
+    "wiz_mon_diff",
+    "wiz_objprobs",
+    "wiz_panic",
+    "wiz_polyself",
+    "wiz_rumor_check",
+    "wiz_show_nhuuid",
+    "wiz_show_seenv",
+    "wiz_show_stats",
+    "wiz_show_vision",
+    "wiz_show_wmodes",
+    "wiz_smell",
+    "wiz_telekinesis",
+    "wiz_where",
+    "wiz_wish",
+    "wizcmds.c",
+    "wizcustom_callback",
+    "you_sanity_check"
+  ],
+  "functions": [
+    {
+      "name": "wiz_wish",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "save_verbose",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "5d6965031aa04971d70b5991f6f265019ca44935ebfe5ce4d79fa3a5053f96ed"
+    },
+    {
+      "name": "wiz_identify",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "astSha256": "3fb5d400c01b1c3b6338e3a5e7b58437096896ddb724dde390f790ea5ed3100c"
+    },
+    {
+      "name": "makemap_unmakemon",
+      "type": {
+        "qualType": "void (struct monst *, boolean)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "migratory",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "ndx",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "d4f6e92e073949aae42406b5324c849231326f0e1c45d97039a231f76d6802bf"
+    },
+    {
+      "name": "makemap_remove_mons",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        },
+        {
+          "name": "mprev",
+          "type": {
+            "qualType": "struct monst **"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "b9d284826a3a6bdeee488f69418edc4de39201141c3feac6b54c41bd8040fde6"
+    },
+    {
+      "name": "wiz_makemap",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "was_in_W_tower",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "4a145b0952dcffbe94357469b3d2f44284af1c585825079148dbf75568fdd4ab"
+    },
+    {
+      "name": "wiz_map",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "t",
+          "type": {
+            "qualType": "struct trap *"
+          },
+          "static": false
+        },
+        {
+          "name": "ep",
+          "type": {
+            "qualType": "struct engr *"
+          },
+          "static": false
+        },
+        {
+          "name": "save_Hconf",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "save_Hhallu",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "751e490aac6f97d7001f0126fdc3db763f336c8886320a29c2ae7c7dd925f3d7"
+    },
+    {
+      "name": "wiz_genesis",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "mongen_saved",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "0832cc38720277fbb4acb3d2d1d6dbc80abc50e38c2af3b9427b2ed9357dd407"
+    },
+    {
+      "name": "wiz_where",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "astSha256": "76114fd9d4a3fe4e0efd4ab1ec0257dedf6c96b46edbd130895e5b3aae520fc0"
+    },
+    {
+      "name": "wiz_detect",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "astSha256": "70e115e24959367329089a6acf4af3ba39ad315cca05962beb9c93c616f66107"
+    },
+    {
+      "name": "wiz_kill",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        },
+        {
+          "name": "cc",
+          "type": {
+            "desugaredQualType": "struct nhcoord",
+            "qualType": "coord",
+            "typeAliasDeclId": "0x844dc5558"
+          },
+          "static": false
+        },
+        {
+          "name": "ans",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "c",
+          "type": {
+            "qualType": "char"
+          },
+          "static": false
+        },
+        {
+          "name": "qbuf",
+          "type": {
+            "qualType": "char[128]"
+          },
+          "static": false
+        },
+        {
+          "name": "prompt",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "save_verbose",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        },
+        {
+          "name": "save_autodescribe",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        },
+        {
+          "name": "uarehere",
+          "type": {
+            "desugaredQualType": "struct d_level",
+            "qualType": "d_level",
+            "typeAliasDeclId": "0x844e174d8"
+          },
+          "static": false
+        },
+        {
+          "name": "tame",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "seen",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "flgs",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "articl",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "adjs",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "Mn",
+          "type": {
+            "qualType": "char *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "b75802576116e0b42f7b19ca61f43e5ffefcd6fc1b6b81d275968b615a6019dc"
+    },
+    {
+      "name": "wiz_load_lua",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "sbi",
+          "type": {
+            "desugaredQualType": "struct nhl_sandbox_info",
+            "qualType": "nhl_sandbox_info",
+            "typeAliasDeclId": "0x844dfa8d8"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "8f7e9290deef87b7bde21072d3b1b154d588439be247c320fa89c0cc1c83caf2"
+    },
+    {
+      "name": "wiz_load_splua",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "8962a4b71d5f3a152ca28f13b22b0489bc90dc960397cc28e59aecc225924b7b"
+    },
+    {
+      "name": "wiz_level_tele",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "astSha256": "b5af2b02c40f820702bd1e7405e2c1c822397f54fc9d4c53c79197761c35df9c"
+    },
+    {
+      "name": "wiz_flip_level",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "choices",
+          "type": {
+            "qualType": "const char[5]"
+          },
+          "static": true
+        },
+        {
+          "name": "prmpt",
+          "type": {
+            "qualType": "const char[55]"
+          },
+          "static": true
+        },
+        {
+          "name": "c",
+          "type": {
+            "qualType": "char"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "55f644b0bcb40cff12fb22e6a9f6d5d0a4cb93907428cef138b335d25de9c2a8"
+    },
+    {
+      "name": "wiz_level_change",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "dummy",
+          "type": {
+            "qualType": "char"
+          },
+          "static": false
+        },
+        {
+          "name": "newlevel",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "ret",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "4555e04115cc7e0540c5830517e988bb172417be2cb04570752828bd675a0cd1"
+    },
+    {
+      "name": "wiz_telekinesis",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "ans",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "cc",
+          "type": {
+            "desugaredQualType": "struct nhcoord",
+            "qualType": "coord",
+            "typeAliasDeclId": "0x844dc5558"
+          },
+          "static": false
+        },
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "18c204b846e6ac18bcb841fa3e064fb82ec7307cc463153d852291ab63c36a03"
+    },
+    {
+      "name": "wiz_panic",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "astSha256": "b252e99cabdba7390fa5a792f5267e7b0b6dab292721202bcf74e7e9b59c5af3"
+    },
+    {
+      "name": "wiz_fuzzer",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "astSha256": "0b31baaf61f44e35f508fe96ccd56d1241e2324d461f6e2971821f07b01cbed0"
+    },
+    {
+      "name": "wiz_polyself",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "astSha256": "b30e71103389f3aab9efc04dcc7b893fc7ae45242058ca45143f691bdb804560"
+    },
+    {
+      "name": "wiz_show_seenv",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          },
+          "static": false
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "startx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "stopx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "curx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "v",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "row",
+          "type": {
+            "qualType": "char[81]"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "3734a5613f3b729cb59b6042e7dedf39d3efe7eda815c632e6ace20ccec3eb9e"
+    },
+    {
+      "name": "wiz_show_vision",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          },
+          "static": false
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "v",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "row",
+          "type": {
+            "qualType": "char[81]"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "e60915447089fd2dfbf854be185f94a3994ae7752f87af1be744378a3132a7b3"
+    },
+    {
+      "name": "wiz_show_wmodes",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          },
+          "static": false
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "row",
+          "type": {
+            "qualType": "char[81]"
+          },
+          "static": false
+        },
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "struct rm *"
+          },
+          "static": false
+        },
+        {
+          "name": "istty",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "c7a726e1ea63b6a8692756b2aedc82523753d0e236f030e5cc4e2218718da2bf"
+    },
+    {
+      "name": "wiz_map_levltyp",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          },
+          "static": false
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "terrain",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "row",
+          "type": {
+            "qualType": "char[81]"
+          },
+          "static": false
+        },
+        {
+          "name": "istty",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        },
+        {
+          "name": "dsc",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "slev",
+          "type": {
+            "qualType": "s_level *"
+          },
+          "static": false
+        },
+        {
+          "name": "brname",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "abd6024fb797c9594d1821aed739408e4b603150ff33588742c835adc81b95c7"
+    },
+    {
+      "name": "wiz_levltyp_legend",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          },
+          "static": false
+        },
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "j",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "last",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "c",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "dsc",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "fmt",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "d877d18494c6b9faf9d3155bcb9339cc189d8a30cfebb5d48c14001e01f047ab"
+    },
+    {
+      "name": "wiz_smell",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        },
+        {
+          "name": "mptr",
+          "type": {
+            "qualType": "struct permonst *"
+          },
+          "static": false
+        },
+        {
+          "name": "ans",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "glyph",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "cc",
+          "type": {
+            "desugaredQualType": "struct nhcoord",
+            "qualType": "coord",
+            "typeAliasDeclId": "0x844dc5558"
+          },
+          "static": false
+        },
+        {
+          "name": "is_you",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "be9119f482aa307b1d921aca9eb1b622a31e542afe5d71113a74a17ac90c27d4"
+    },
+    {
+      "name": "wiz_intrinsic",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "wizintrinsic",
+          "type": {
+            "qualType": "const char[14]"
+          },
+          "static": true
+        },
+        {
+          "name": "fmt",
+          "type": {
+            "qualType": "const char[14]"
+          },
+          "static": true
+        },
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          },
+          "static": false
+        },
+        {
+          "name": "any",
+          "type": {
+            "desugaredQualType": "union any",
+            "qualType": "anything",
+            "typeAliasDeclId": "0x844c16428"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "j",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "n",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "amt",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "typ",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "p",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "oldtimeout",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "newtimeout",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "propname",
+          "type": {
+            "qualType": "const char *"
+          },
+          "static": false
+        },
+        {
+          "name": "pick_list",
+          "type": {
+            "qualType": "menu_item *"
+          },
+          "static": false
+        },
+        {
+          "name": "clr",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "789043fa843eca204d19f7e4810d50fcca44ea9efd8873610f3205a35d62ac0e"
+    },
+    {
+      "name": "wiz_rumor_check",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "astSha256": "166ee74a47794eab38e036bddf89eb2f0c409d68f1da41453815a06e159dd381"
+    },
+    {
+      "name": "size_obj",
+      "type": {
+        "qualType": "int (struct obj *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "otmp",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "sz",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "c9651b8c4ea031bcdd67f78e787cba18fa29d0d32b2a858e82d01f9ad7f8d069"
+    },
+    {
+      "name": "count_obj",
+      "type": {
+        "qualType": "void (struct obj *, long *, long *, boolean, boolean)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "chain",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "total_count",
+          "type": {
+            "qualType": "long *"
+          }
+        },
+        {
+          "name": "total_size",
+          "type": {
+            "qualType": "long *"
+          }
+        },
+        {
+          "name": "top",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          }
+        },
+        {
+          "name": "recurse",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "count",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "size",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "obj",
+          "type": {
+            "qualType": "struct obj *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "41e5a7a9c6ad9f477018a1e6e7267be9be580e5b5d13aea5d0f9c5144fc5cc9d"
+    },
+    {
+      "name": "obj_chain",
+      "type": {
+        "qualType": "void (winid, const char *, struct obj *, boolean, long *, long *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          }
+        },
+        {
+          "name": "src",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "chain",
+          "type": {
+            "qualType": "struct obj *"
+          }
+        },
+        {
+          "name": "force",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          }
+        },
+        {
+          "name": "total_count",
+          "type": {
+            "qualType": "long *"
+          }
+        },
+        {
+          "name": "total_size",
+          "type": {
+            "qualType": "long *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "count",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "size",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "9659b12910e43ab7a51e5bfab8155296b4396af3c4b944b104c6ecf7e405869f"
+    },
+    {
+      "name": "mon_invent_chain",
+      "type": {
+        "qualType": "void (winid, const char *, struct monst *, long *, long *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          }
+        },
+        {
+          "name": "src",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "chain",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "total_count",
+          "type": {
+            "qualType": "long *"
+          }
+        },
+        {
+          "name": "total_size",
+          "type": {
+            "qualType": "long *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "count",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "size",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "mon",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "20163ce38f651def33cba20c8aa1f56c27f5808dc8a8747e4964a85f38b2fa88"
+    },
+    {
+      "name": "contained_stats",
+      "type": {
+        "qualType": "void (winid, const char *, long *, long *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          }
+        },
+        {
+          "name": "src",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "total_count",
+          "type": {
+            "qualType": "long *"
+          }
+        },
+        {
+          "name": "total_size",
+          "type": {
+            "qualType": "long *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "count",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "size",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "mon",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "3de11192ccd8bd4a8914b1d8ba7150a2e1264ad18c50e21d878260f48c8b686b"
+    },
+    {
+      "name": "size_monst",
+      "type": {
+        "qualType": "int (struct monst *, boolean)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "incl_wsegs",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "sz",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "ad6deffa6172015d1bfd63bc227f326cc7f5549b56c030f6a8c0018087f941f4"
+    },
+    {
+      "name": "mon_chain",
+      "type": {
+        "qualType": "void (winid, const char *, struct monst *, boolean, long *, long *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          }
+        },
+        {
+          "name": "src",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "chain",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "force",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          }
+        },
+        {
+          "name": "total_count",
+          "type": {
+            "qualType": "long *"
+          }
+        },
+        {
+          "name": "total_size",
+          "type": {
+            "qualType": "long *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "count",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "size",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "mon",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        },
+        {
+          "name": "incl_wsegs",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "d3a4fd8658c3722b172e8ecaf64a467a71798e9a5d92dd69a51a8d129b7719f1"
+    },
+    {
+      "name": "misc_stats",
+      "type": {
+        "qualType": "void (winid, long *, long *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          }
+        },
+        {
+          "name": "total_count",
+          "type": {
+            "qualType": "long *"
+          }
+        },
+        {
+          "name": "total_size",
+          "type": {
+            "qualType": "long *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "hdrbuf",
+          "type": {
+            "qualType": "char[128]"
+          },
+          "static": false
+        },
+        {
+          "name": "count",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "size",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "idx",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "tt",
+          "type": {
+            "qualType": "struct trap *"
+          },
+          "static": false
+        },
+        {
+          "name": "sd",
+          "type": {
+            "qualType": "struct damage *"
+          },
+          "static": false
+        },
+        {
+          "name": "k",
+          "type": {
+            "qualType": "struct kinfo *"
+          },
+          "static": false
+        },
+        {
+          "name": "bi",
+          "type": {
+            "qualType": "struct cemetery *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "12ee0ba09eacf15f21b09079cebe8bc613d26a0467aa8fccbf4cda08e886dd66"
+    },
+    {
+      "name": "you_sanity_check",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": true,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "7f347567d5abb82aed1148347c00abef93dc6de07549191331f4a8d16b077762"
+    },
+    {
+      "name": "levl_sanity_check",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": true,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "503d374851b8a84f7e62a68fe9f7a4c5852390b4f8b79309842088f5f3b64906"
+    },
+    {
+      "name": "sanity_check",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "astSha256": "35fced2ad47234aae199a545c0bdf0fc6a9c829820cb46c244b8f6dab093ff42"
+    },
+    {
+      "name": "migrsort_cmp",
+      "type": {
+        "qualType": "int (const void *, const void *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "vptr1",
+          "type": {
+            "qualType": "const void *"
+          }
+        },
+        {
+          "name": "vptr2",
+          "type": {
+            "qualType": "const void *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "m1",
+          "type": {
+            "qualType": "const struct monst *"
+          },
+          "static": false
+        },
+        {
+          "name": "m2",
+          "type": {
+            "qualType": "const struct monst *"
+          },
+          "static": false
+        },
+        {
+          "name": "d1",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "l1",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "d2",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "l2",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "1468ffea21546e707b2809a783ea0a27bb655cb8e0a85e4641c716643f69d0b0"
+    },
+    {
+      "name": "list_migrating_mons",
+      "type": {
+        "qualType": "void (d_level *)"
+      },
+      "static": true,
+      "parameters": [
+        {
+          "name": "nextlevl",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          },
+          "static": false
+        },
+        {
+          "name": "showit",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        },
+        {
+          "name": "n",
+          "type": {
+            "qualType": "unsigned int"
+          },
+          "static": false
+        },
+        {
+          "name": "xyloc",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x844dc5000"
+          },
+          "static": false
+        },
+        {
+          "name": "c",
+          "type": {
+            "qualType": "char"
+          },
+          "static": false
+        },
+        {
+          "name": "prmpt",
+          "type": {
+            "qualType": "char[10]"
+          },
+          "static": false
+        },
+        {
+          "name": "xtra",
+          "type": {
+            "qualType": "char[10]"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        },
+        {
+          "name": "marray",
+          "type": {
+            "qualType": "struct monst **"
+          },
+          "static": false
+        },
+        {
+          "name": "here",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "nxtlv",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "other",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "7f60896a474c71ef75f77fc30787fc2069e9c7d9467a800c2f53becd142bc781"
+    },
+    {
+      "name": "wiz_show_stats",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          },
+          "static": false
+        },
+        {
+          "name": "total_obj_size",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "total_obj_count",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "total_mon_size",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "total_mon_count",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "total_ovr_size",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "total_ovr_count",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "total_misc_size",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        },
+        {
+          "name": "total_misc_count",
+          "type": {
+            "qualType": "long"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "94dbda0c3fae267053c94651511ac1ee8bc324e9cd9ff0f8b038ebabd4758d2f"
+    },
+    {
+      "name": "wiz_display_macros",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "display_issues",
+          "type": {
+            "qualType": "const char[22]"
+          },
+          "static": true
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          },
+          "static": false
+        },
+        {
+          "name": "glyph",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "test",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "trouble",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "no_glyph",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "max_glyph",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "8e5f135ae47be40190bf475025ac0c5f49c15e607ff93063b5cd216532ed7c22"
+    },
+    {
+      "name": "wiz_show_nhuuid",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [],
+      "astSha256": "c128412c70a7658b58d994481d4fcb8cd5d89548640cbc01e09bac8db8ff4bbd"
+    },
+    {
+      "name": "wiz_mon_diff",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "window_title",
+          "type": {
+            "qualType": "const char[52]"
+          },
+          "static": true
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          },
+          "static": false
+        },
+        {
+          "name": "mhardcoded",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "mcalculated",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "trouble",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "cnt",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "mdiff",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "mlev",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "ptr",
+          "type": {
+            "qualType": "struct permonst *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "2f899965720a849c26828bf8d0da4b1e4da4a3fe1642f68041d86bd053c96a3e"
+    },
+    {
+      "name": "wiz_objprobs",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "win",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "probsum",
+          "type": {
+            "qualType": "int[18]"
+          },
+          "static": false
+        },
+        {
+          "name": "otyp",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "oclass",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "c3e09896acc556ace45247aa21c39703ee87e230baf9fa845783f99637a1a635"
+    },
+    {
+      "name": "wiz_migrate_mons",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "mcount",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "inbuf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "ptr",
+          "type": {
+            "qualType": "struct permonst *"
+          },
+          "static": false
+        },
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          },
+          "static": false
+        },
+        {
+          "name": "use_random_mon",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        },
+        {
+          "name": "mongen_saved",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x844dc5130"
+          },
+          "static": false
+        },
+        {
+          "name": "tolevel",
+          "type": {
+            "desugaredQualType": "struct d_level",
+            "qualType": "d_level",
+            "typeAliasDeclId": "0x844e174d8"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "c60af3adbe6b616cfd5e652eb273ec83526edaa9adecd3bbf6006c64294dc11e"
+    },
+    {
+      "name": "wiz_custom",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "static": false,
+      "parameters": [],
+      "locals": [
+        {
+          "name": "wizcustom",
+          "type": {
+            "qualType": "const char[11]"
+          },
+          "static": true
+        },
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "bufa",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "n",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "pick_list",
+          "type": {
+            "qualType": "menu_item *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "5a6bb238d2a78c038461446aa1fbc3ff76ac0a01272980edc892cb44c5f3ac20"
+    },
+    {
+      "name": "wizcustom_callback",
+      "type": {
+        "qualType": "void (winid, int, char *)"
+      },
+      "static": false,
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x844c15280"
+          }
+        },
+        {
+          "name": "glyphnum",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "id",
+          "type": {
+            "qualType": "char *"
+          }
+        }
+      ],
+      "locals": [
+        {
+          "name": "cgm",
+          "type": {
+            "qualType": "glyph_map *"
+          },
+          "static": false
+        },
+        {
+          "name": "clr",
+          "type": {
+            "qualType": "int"
+          },
+          "static": false
+        },
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "bufa",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "bufb",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "bufc",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "bufd",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "bufu",
+          "type": {
+            "qualType": "char[256]"
+          },
+          "static": false
+        },
+        {
+          "name": "any",
+          "type": {
+            "desugaredQualType": "union any",
+            "qualType": "anything",
+            "typeAliasDeclId": "0x844c16428"
+          },
+          "static": false
+        },
+        {
+          "name": "cp",
+          "type": {
+            "qualType": "uint8 *"
+          },
+          "static": false
+        }
+      ],
+      "astSha256": "c62baa06b08fbd06d20eca93d0d06e0bce1a7bce5ea09380f1b37aa642964cb1"
+    }
+  ],
+  "preparedSha256": "4611d620caedc59dc270f5d6b6f9a2497831dc88325edc90f3770e75afd9b71f"
+}

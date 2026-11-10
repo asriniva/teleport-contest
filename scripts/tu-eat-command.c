@@ -1,0 +1,12 @@
+/* Actual cmd.c dependencies; only unrelated controlled world symbols renamed. */
+#define set_occupation teleport_eat_dependency_set_occupation
+#define cmdq_add_ec teleport_eat_dependency_cmdq_add_ec
+#define cmdq_add_key teleport_eat_dependency_cmdq_add_key
+#define getdir teleport_eat_dependency_getdir
+#define movecmd teleport_eat_dependency_movecmd
+#define cmd_from_dir teleport_eat_dependency_cmd_from_dir
+#define dxdy_moveok teleport_eat_dependency_dxdy_moveok
+#define cmdq_peek teleport_eat_dependency_cmdq_peek
+#define yn_function teleport_eat_dependency_yn_function
+#define paranoid_query teleport_eat_world_paranoid_query
+#include "cmd.c"

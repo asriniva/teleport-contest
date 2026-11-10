@@ -1,0 +1,843 @@
+{
+  "status": "PRIVATE_EMC_FIRST_PASS_FROZEN",
+  "tu": "TU101/J107 MAKEMON",
+  "scope": "41 configured original entrypoints reached; 8794 exact controlled EmC C/hybrid comparisons; incomplete branch coverage; native-host/shared/public/production boundaries pending",
+  "production": {
+    "js/ported/makemon.js": {
+      "sha256": "f88948f12832888a3352ed42ef04c71dc2cc1cbb57f8ae78a8fd895619f832f8",
+      "bytes": 100374
+    },
+    "js/ported/makemon-runtime.js": {
+      "sha256": "33a74420a0e505e675a25c998f27dc00a9d40df0c26417e4c17e2e54a215f7b8",
+      "bytes": 36108
+    },
+    "nethack-c/wasm/tu-libraries/makemon.js": {
+      "sha256": "29c3b7770f9daab16dd9c6adcda1bfcd1025484466b1ac5ccf3b7c21abf3adf0",
+      "bytes": 21617
+    },
+    "nethack-c/wasm/tu-fragments/makemon-support.inc": {
+      "sha256": "de19d3be6489c15b31b7e4832f5bb64f02cb645f16a0577efc99a17571237a93",
+      "bytes": 8152
+    },
+    "nethack-c/wasm/tu-fragments/makemon-runtime-method.inc": {
+      "sha256": "543eba0001564bb6d1f4832e2e67c5c17dcee2312e65801856a238b06475af4f",
+      "bytes": 179
+    },
+    "nethack-c/wasm/tu-fragments/makemon-integration.md": {
+      "sha256": "d442f48b7ffd56168aeca1afbcb1ea44c889432337fc65e1368add73449b0d76",
+      "bytes": 7838
+    }
+  },
+  "testsAndGuards": {
+    "scripts/tu-makemon-layout.h": {
+      "sha256": "3cd68b886e324f598661309ab17ddc19068ac6f0caeffbe604b3b57051b49487",
+      "bytes": 50351
+    },
+    "scripts/tu-makemon-probe.c": {
+      "sha256": "4890d8571c2e17a2a38dc9287398d8511f8ed7f32863496a9feaf6211b34f606",
+      "bytes": 23053
+    },
+    "scripts/test-tu-makemon.mjs": {
+      "sha256": "561e5744d179bca0efcb100b693837d1cc7910a8576d6c8e3b40eb13119ae7e0",
+      "bytes": 9803
+    },
+    "nethack-c/wasm/tu-fragments/makemon-metadata.py": {
+      "sha256": "11bdec81f22183939ba375245a0b303b02dd3f975db4491fafac87e86053e3ac",
+      "bytes": 6577
+    }
+  },
+  "preparedAndBuildDependencies": {
+    ".cache/makemon-author/sort-dependency.c": {
+      "sha256": "551ab9637ef4f88d759b666433604e30c35d7e59e301fb550c7c51451ad84b21",
+      "bytes": 2055
+    },
+    ".cache/wasm64-build/tree/include/.gitattributes": {
+      "sha256": "f55628a6d5588dc8b5229f96fe35510b6f2994e0d8fecfff986e8ad913122b54",
+      "bytes": 237
+    },
+    ".cache/wasm64-build/tree/include/.gitignore": {
+      "sha256": "d310f80a900db464038bec0a8f3d46110c56ec73db3a29976c359e84ac5f5ea8",
+      "bytes": 555
+    },
+    ".cache/wasm64-build/tree/include/align.h": {
+      "sha256": "963176a750f3e58ca29d4b5b13f2eaf51fefdbf66b7a1a681401092dd72f7cb2",
+      "bytes": 2588
+    },
+    ".cache/wasm64-build/tree/include/amiconf.h": {
+      "sha256": "beb7f834ff25a85cd9558eac49ce8de20ceff678e47fbbc10cb978bf18face59",
+      "bytes": 5384
+    },
+    ".cache/wasm64-build/tree/include/artifact.h": {
+      "sha256": "9cc7056e7808ff2e28732c74d58ae47fe2513e4ccc5b5073b544f58a2495ccff",
+      "bytes": 4392
+    },
+    ".cache/wasm64-build/tree/include/artilist.h": {
+      "sha256": "5375cf830dac26aefd5dbefe1ab5bd79a1f1988b770e7a4dee61b6453c1dd3d3",
+      "bytes": 14847
+    },
+    ".cache/wasm64-build/tree/include/attrib.h": {
+      "sha256": "f20418d80bc2983e3d9af6cc9a02d30f57aa6b54116691a8e4ebebd425de757d",
+      "bytes": 1266
+    },
+    ".cache/wasm64-build/tree/include/botl.h": {
+      "sha256": "c26c637bcb8b2615e82fbc0804175cd8c87f63a3caf35c742e0a6fa410a31009",
+      "bytes": 10324
+    },
+    ".cache/wasm64-build/tree/include/color.h": {
+      "sha256": "f7ab4cdf5113898bf58ba85217f5d693b8564c232ff706ee894fdf070a3a105b",
+      "bytes": 2294
+    },
+    ".cache/wasm64-build/tree/include/config.h": {
+      "sha256": "5585d9c88d7ea21a9a78b45616cc31ae4ea680cb7b34026f70f92b91288a499f",
+      "bytes": 26328
+    },
+    ".cache/wasm64-build/tree/include/config1.h": {
+      "sha256": "b9e97cefc8fcfe4f36a1145ebfb655099f2afd2591227fa5f93b3f4dc0071042",
+      "bytes": 5470
+    },
+    ".cache/wasm64-build/tree/include/context.h": {
+      "sha256": "e1303b7309e556c65e41ec120b704079da6a0c9ef73a08745663f7b923ad7eef",
+      "bytes": 7644
+    },
+    ".cache/wasm64-build/tree/include/coord.h": {
+      "sha256": "f8788b777ea0fc8e4f5df40ce7b9add1a255c5846bdd1393518f7ea14ef6e3d2",
+      "bytes": 433
+    },
+    ".cache/wasm64-build/tree/include/cstd.h": {
+      "sha256": "ef5e61d5eb7d1a5194c4a4544745a45893ccbea4c1cf083792235f562e173fc2",
+      "bytes": 2731
+    },
+    ".cache/wasm64-build/tree/include/date.h": {
+      "sha256": "0f6070303295e22d4e1a9855eeb3901c5346d66976050d6b2c8a7a12be3d15c0",
+      "bytes": 749
+    },
+    ".cache/wasm64-build/tree/include/decl.h": {
+      "sha256": "4782c5f522f6de63503cda131c0e2485aef31506d83dcfb32defeebf984fb470",
+      "bytes": 34805
+    },
+    ".cache/wasm64-build/tree/include/defsym.h": {
+      "sha256": "009ae2e8921fa4c376fe0ae3b4a42407421274fc15d1a8834c6ae519dad82f87",
+      "bytes": 24205
+    },
+    ".cache/wasm64-build/tree/include/dgn_file.h": {
+      "sha256": "ac01f085ac0827ee4720e9071d13a3fb9a274ced57d373e013a04a1f211d5551",
+      "bytes": 1848
+    },
+    ".cache/wasm64-build/tree/include/display.h": {
+      "sha256": "36e9f838d3298d047e0605abcf2deb627eb79c18aa72f770d5289c34f3692b4c",
+      "bytes": 47005
+    },
+    ".cache/wasm64-build/tree/include/dlb.h": {
+      "sha256": "5fd4e1563e5836cb707b691fe2d197e8d1619fc1d1ab8d77c0002a443049f7e9",
+      "bytes": 3881
+    },
+    ".cache/wasm64-build/tree/include/dungeon.h": {
+      "sha256": "e48eaafdb22fc82121de702086c40c3245d6aeb9fe5556712ee1e2f18744a308",
+      "bytes": 10758
+    },
+    ".cache/wasm64-build/tree/include/engrave.h": {
+      "sha256": "1c5617162ea649a0305df8d997b7a1075b35c9b3b97311cdfeebbd60bb9c482e",
+      "bytes": 1974
+    },
+    ".cache/wasm64-build/tree/include/extern.h": {
+      "sha256": "385f7478000f79ff137f2b6be533eef7b518b47a00b0d8c7e35ea52c877dec2e",
+      "bytes": 175910
+    },
+    ".cache/wasm64-build/tree/include/flag.h": {
+      "sha256": "bb28a3f835f3b38119f95311d76b535ef5053f3fffa42372d9f7b1c4c917806f",
+      "bytes": 29819
+    },
+    ".cache/wasm64-build/tree/include/fnamesiz.h": {
+      "sha256": "bd41c47c66e4213835bc1f052d831f8643bc7e7cb9aae0effb27f41edf1b5c35",
+      "bytes": 2138
+    },
+    ".cache/wasm64-build/tree/include/func_tab.h": {
+      "sha256": "6c47ccb85277800274a4b7f860ff6e1c25b75c5cb55d860745b7479f6f6105ba",
+      "bytes": 2131
+    },
+    ".cache/wasm64-build/tree/include/global.h": {
+      "sha256": "8ff55a3c6ee5cc18d00f1982146080d81e9e3dc9e369ab1ffc79890c07b8a8d0",
+      "bytes": 20030
+    },
+    ".cache/wasm64-build/tree/include/hack.h": {
+      "sha256": "5743a1707ce05e7a9a90e61657fde0ac066d48591f5d4fe80b1bdf959d94bce9",
+      "bytes": 58384
+    },
+    ".cache/wasm64-build/tree/include/hacklib.h": {
+      "sha256": "d9bf2b0ae2003c0611d2b9a351fdbbb30d58def2ecccc1235d4ed1e7b52e3c53",
+      "bytes": 3992
+    },
+    ".cache/wasm64-build/tree/include/integer.h": {
+      "sha256": "e88805c10f195e6de63b8c5cb46049f466ef040de9987a6ab61c36ef977f515a",
+      "bytes": 4488
+    },
+    ".cache/wasm64-build/tree/include/isaac64.h": {
+      "sha256": "3d51f55fbe014cce77b53f7dec22d7ed11cab709f085a9ebfac87eeebb1f0e66",
+      "bytes": 3260
+    },
+    ".cache/wasm64-build/tree/include/lint.h": {
+      "sha256": "bb08d5658f43c87c2b5129a33cb4e3264693e68d3cd654c67a5ecd757c98adcc",
+      "bytes": 3141
+    },
+    ".cache/wasm64-build/tree/include/mail.h": {
+      "sha256": "8041ce36aef1bb8d49984e0e51f62fb31cd8edf559b19ab963853ef31f2f5ac2",
+      "bytes": 845
+    },
+    ".cache/wasm64-build/tree/include/mcastu.h": {
+      "sha256": "ffe15f5e89de7f561b92052ccfdaf8556c1e6d80a6dbb35675fb997c67deebe4",
+      "bytes": 1598
+    },
+    ".cache/wasm64-build/tree/include/mextra.h": {
+      "sha256": "e78bdfa21d4fd7718f1a25ed8f1ef466c96c2bd49f2069af7d1ab346148a1229",
+      "bytes": 9207
+    },
+    ".cache/wasm64-build/tree/include/mfndpos.h": {
+      "sha256": "4711c0e5c67ae88a6a28c776bc542d0d06452d742456964b77913e896b5f56f5",
+      "bytes": 1575
+    },
+    ".cache/wasm64-build/tree/include/micro.h": {
+      "sha256": "4d9579d27ae8dd08ca562810e87d40c2984dfa92c5c3b51839ee2f4882080b6b",
+      "bytes": 491
+    },
+    ".cache/wasm64-build/tree/include/mkroom.h": {
+      "sha256": "7baf848feb30c94c196e6bee2ee7f0a83822ad92042dd855b74d212fde514f5a",
+      "bytes": 5149
+    },
+    ".cache/wasm64-build/tree/include/monattk.h": {
+      "sha256": "00c2283c2687f2dd5fa8a3088623cd621822289018c0072db9cad5a2a94883ba",
+      "bytes": 4711
+    },
+    ".cache/wasm64-build/tree/include/mondata.h": {
+      "sha256": "6f1ca3db69a5cfbe425859fe1c7decfa1da1fdac45af9d8a84be5f0f8c9c21f2",
+      "bytes": 14764
+    },
+    ".cache/wasm64-build/tree/include/monflag.h": {
+      "sha256": "89e4ef1dc1cd46fa8d81ff833351934c666420abdf902286bdacdca0bb171d88",
+      "bytes": 11025
+    },
+    ".cache/wasm64-build/tree/include/monst.h": {
+      "sha256": "08e9e2251ac5c3beedb8700dd56287f9f397b506851ceb44a37e41b6d80067a6",
+      "bytes": 12413
+    },
+    ".cache/wasm64-build/tree/include/monsters.h": {
+      "sha256": "c63db922770c96a9956d221f364ba4368a9f81f81c8d64ed28251a0506d4a906",
+      "bytes": 190371
+    },
+    ".cache/wasm64-build/tree/include/nhlua.h": {
+      "sha256": "48553ca9ab16ac2928479cabdf51d7f090fc38e1641dd5d97d819f612c6d87d9",
+      "bytes": 239
+    },
+    ".cache/wasm64-build/tree/include/nhmd4.h": {
+      "sha256": "e82ec33c65922977be2346fcc136ec34ed8e29947e4477741a21301f146391a0",
+      "bytes": 1059
+    },
+    ".cache/wasm64-build/tree/include/nhregex.h": {
+      "sha256": "a2936fd291537090773d861c083c3574c7a0a798c688e87dedb4405f73de653f",
+      "bytes": 583
+    },
+    ".cache/wasm64-build/tree/include/obj.h": {
+      "sha256": "a4d1b994c5acd6fe04d411485d84491553d6df02dfbd7480181a15a7a05456e2",
+      "bytes": 26902
+    },
+    ".cache/wasm64-build/tree/include/objclass.h": {
+      "sha256": "101f92e0024e4404033845fb15171f8ed4b79374907a6a172b4eb7b026e1eb52",
+      "bytes": 7820
+    },
+    ".cache/wasm64-build/tree/include/objects.h": {
+      "sha256": "eb573ca76f7afe35d6420b958333fbb3c44911415df4e0034e6367456e2913cb",
+      "bytes": 95055
+    },
+    ".cache/wasm64-build/tree/include/optlist.h": {
+      "sha256": "23dafb109132dd63bbfe704b39fac8cccaaeee31a0dbd895c7ba928bd92af9b8",
+      "bytes": 46241
+    },
+    ".cache/wasm64-build/tree/include/patchlevel.h": {
+      "sha256": "4389b12b496c9611fb392ee509d0ebaad2f10449ff3ef697f1ad416a207b0a97",
+      "bytes": 25704
+    },
+    ".cache/wasm64-build/tree/include/pcconf.h": {
+      "sha256": "c8f22aca7458c1527fbb8362efbb725744ede2edb92185381b7de21fd8693b99",
+      "bytes": 8818
+    },
+    ".cache/wasm64-build/tree/include/permonst.h": {
+      "sha256": "bcdb24d041e3df909cf483efb576fa7fc5e18debf03d11e8e43c1aa87c655bf4",
+      "bytes": 3500
+    },
+    ".cache/wasm64-build/tree/include/prop.h": {
+      "sha256": "682e85c7ab20c1dc7b30115b2a3e850d564cc2ed341edfa782fec9d0dfea0761",
+      "bytes": 5585
+    },
+    ".cache/wasm64-build/tree/include/quest.h": {
+      "sha256": "87b6649d82b6fd4a24d004fcd48c1d9650345e719cf8dc196ae6c99b483e2a5a",
+      "bytes": 2297
+    },
+    ".cache/wasm64-build/tree/include/rect.h": {
+      "sha256": "dee168e068baa3aa15748725752d07659f8cb4e471116f7fab4acf080dc69f90",
+      "bytes": 386
+    },
+    ".cache/wasm64-build/tree/include/region.h": {
+      "sha256": "adc4682b6a15213f71f3bb534b8705c4385153ca9db7512c118474b0fb4f1191",
+      "bytes": 2992
+    },
+    ".cache/wasm64-build/tree/include/rm.h": {
+      "sha256": "da2ae88d704a358474c6986a3f4763e62053b96a6e60a475879029e658996af7",
+      "bytes": 20436
+    },
+    ".cache/wasm64-build/tree/include/savefile.h": {
+      "sha256": "6847e12dca1eb25b38baa69f6227554669f8a64f5966a1879a5cf2b23732749e",
+      "bytes": 28360
+    },
+    ".cache/wasm64-build/tree/include/seffects.h": {
+      "sha256": "f64099054ab366a1eaccd58901a98cef49a84c1f047c5923de20b4432654de02",
+      "bytes": 6001
+    },
+    ".cache/wasm64-build/tree/include/selvar.h": {
+      "sha256": "49b8be43b8bfd7b4f18cb59d1179e8ad28a708a06c0fbc985c65b365ab9a3acf",
+      "bytes": 366
+    },
+    ".cache/wasm64-build/tree/include/sfmacros.h": {
+      "sha256": "4ea0c088308a08b002b553d7633b3b729aee66d4c71b2974751d6b3eccfbb209",
+      "bytes": 1564
+    },
+    ".cache/wasm64-build/tree/include/sfprocs.h": {
+      "sha256": "89f96065e62ea60dbc46dbef2f9762242a8562b189dbcd6038af063424438b56",
+      "bytes": 6299
+    },
+    ".cache/wasm64-build/tree/include/skills.h": {
+      "sha256": "d67ac10770b8aff667c163e93020b8974e53f12eede903f10bf026d351b2c238",
+      "bytes": 4657
+    },
+    ".cache/wasm64-build/tree/include/sndprocs.h": {
+      "sha256": "4d105334e499c3fb4af00fcd1acf48802a8db5ccf799bd31bfafc2afaa286654",
+      "bytes": 11111
+    },
+    ".cache/wasm64-build/tree/include/sp_lev.h": {
+      "sha256": "a48d5bd2d9a5b20b474b790d52f4f19179678c87ec0b51019e39dc6684d7a6bf",
+      "bytes": 5201
+    },
+    ".cache/wasm64-build/tree/include/spell.h": {
+      "sha256": "dc1e454c0214ea1cc20f4ea1e19cd4447a5ca9533610769fafe8cdd60206b37f",
+      "bytes": 1240
+    },
+    ".cache/wasm64-build/tree/include/stairs.h": {
+      "sha256": "fe016a6ef8194099d504bbf48f58e1e3c6a923413a07c28377409cacc1e2b42b",
+      "bytes": 661
+    },
+    ".cache/wasm64-build/tree/include/sym.h": {
+      "sha256": "cea14c200c9f1e90ebe890804b46af7005c889d90917cb0608ad6058614e3db4",
+      "bytes": 5209
+    },
+    ".cache/wasm64-build/tree/include/sys.h": {
+      "sha256": "e193f46309925a4b14394a503b3e9a7bc19e5745bb539137ca10ec0898e3951b",
+      "bytes": 2424
+    },
+    ".cache/wasm64-build/tree/include/tcap.h": {
+      "sha256": "eeb713779ef8a1483efbea0427cf4eb7549365d2bc1b010107912d982a1e235d",
+      "bytes": 1688
+    },
+    ".cache/wasm64-build/tree/include/tile2x11.h": {
+      "sha256": "c8c658c56a08ec43bf8eb0b81673f04f380537a722dae4963be2a9d318ff4cb7",
+      "bytes": 767
+    },
+    ".cache/wasm64-build/tree/include/tileset.h": {
+      "sha256": "9fb5634389613e2528704caba09c21cd2007179f3f6528fcfb8977f1ee332282",
+      "bytes": 1501
+    },
+    ".cache/wasm64-build/tree/include/timeout.h": {
+      "sha256": "5f76ff41cc5435cc8a3e30b28f51c6adbfe42e2bf4a0354ba0a9f850a5ce515a",
+      "bytes": 2715
+    },
+    ".cache/wasm64-build/tree/include/tradstdc.h": {
+      "sha256": "a1246d1acdf317c36990946e1d8bde33f63e3ba779ed5696a4ee03c7ac4f4401",
+      "bytes": 18528
+    },
+    ".cache/wasm64-build/tree/include/trap.h": {
+      "sha256": "469afec3e29d7aec1aa8efd407ad23d24ef069010820082b5596537b9290eb6b",
+      "bytes": 4609
+    },
+    ".cache/wasm64-build/tree/include/unixconf.h": {
+      "sha256": "0cbf3370472b030e8583e922e05e8e055738896954cbbdc1e1e18d0938559723",
+      "bytes": 14656
+    },
+    ".cache/wasm64-build/tree/include/vision.h": {
+      "sha256": "415b7e5751194cb7de57c192103d396a2971400e603fd62bf56330304014ac13",
+      "bytes": 2556
+    },
+    ".cache/wasm64-build/tree/include/vmsconf.h": {
+      "sha256": "a15f393613c8b63278a83748fa4b130e3826d65c7156b6f20ca2c61a0794e20e",
+      "bytes": 10383
+    },
+    ".cache/wasm64-build/tree/include/warnings.h": {
+      "sha256": "ccf0c3e66bb442b0d8c05844103065fccf3fa7a894bba007425258e1d089f981",
+      "bytes": 4951
+    },
+    ".cache/wasm64-build/tree/include/weight.h": {
+      "sha256": "ac168750ddcde6c592ccbeaaf44c59921cc1f73ed36d269f20364b0e08b91cd1",
+      "bytes": 1731
+    },
+    ".cache/wasm64-build/tree/include/winX.h": {
+      "sha256": "9ff1338cceced7f5335379d90cdebadc6e1065d64c4509cf518c0f497ff0f28d",
+      "bytes": 20883
+    },
+    ".cache/wasm64-build/tree/include/winami.h": {
+      "sha256": "eb0864330b27a436acf3bb092ee1ea492a890d4a6cfc9604a25ffdb3f73df754",
+      "bytes": 4785
+    },
+    ".cache/wasm64-build/tree/include/wincurs.h": {
+      "sha256": "d58fd52046a1d35b24e65d4eecc2cef851c370f1248f40d2e58eec1a9d04fcd8",
+      "bytes": 9983
+    },
+    ".cache/wasm64-build/tree/include/windconf.h": {
+      "sha256": "eddba5996f97ff32ce554236be187de0147ab8b7fffa4d31c40fc0d00354947b",
+      "bytes": 9056
+    },
+    ".cache/wasm64-build/tree/include/winprocs.h": {
+      "sha256": "eebf4dbb4149d3a153a1dc815795baabe33a59d13362e00089d21ee9ce89983c",
+      "bytes": 18220
+    },
+    ".cache/wasm64-build/tree/include/wintty.h": {
+      "sha256": "96898d81147193d8d3785756011ae13f40967cbe947bf5fe35f3f2f4e6f15f89",
+      "bytes": 12974
+    },
+    ".cache/wasm64-build/tree/include/wintype.h": {
+      "sha256": "e5bfd60534831210bdace1ba6eaef62f65d16dab8d8ac0fcddadebd000d53698",
+      "bytes": 7724
+    },
+    ".cache/wasm64-build/tree/include/xwindow.h": {
+      "sha256": "3a646862b59bc886df8775065c75a55324c611c01f43f57eb6f6b2345564aec6",
+      "bytes": 3763
+    },
+    ".cache/wasm64-build/tree/include/xwindowp.h": {
+      "sha256": "af1dac3806cd2199b2e5127b41ac2ae56e5443ef4b7835fd69f6ea4ae5411db6",
+      "bytes": 1573
+    },
+    ".cache/wasm64-build/tree/include/you.h": {
+      "sha256": "d19cfa0233582f1ad550b9dfc788f26166f3ff21225e3d8a0cd43b6de2094289",
+      "bytes": 25173
+    },
+    ".cache/wasm64-build/tree/include/youprop.h": {
+      "sha256": "9c4e25bc385c405226085ae3526dc165bd9397ce922b8a18a46f67de21683a2f",
+      "bytes": 17700
+    },
+    ".cache/wasm64-build/tree/src/decl.c": {
+      "sha256": "4855daf7884706b74e694aff3e8373418706793265084727bd78abe44693d96e",
+      "bytes": 34105
+    },
+    ".cache/wasm64-build/tree/src/drawing.c": {
+      "sha256": "959357d4c9652eeae51b19d826ec961163679b9961ef8df1df94d674b6ded4a4",
+      "bytes": 4481
+    },
+    ".cache/wasm64-build/tree/src/hacklib.c": {
+      "sha256": "78e81aedddb93a6bc8d966f3f586e689ae05c335d34dba36af6abb95700d5ec4",
+      "bytes": 29705
+    },
+    ".cache/wasm64-build/tree/src/makemon.c": {
+      "sha256": "04bb46b793cb7a724544ed5860f57116e4661ce5d052a1321d90dc0167d3ffc3",
+      "bytes": 92978
+    },
+    ".cache/wasm64-build/tree/src/monst.c": {
+      "sha256": "87d36f109b24f83d4e9c9c10193b977afe3aa8f2938d4fa92e4fbc28b353547d",
+      "bytes": 3010
+    },
+    ".cache/wasm64-build/tree/src/objects.c": {
+      "sha256": "1f1cc8de922d1f41f688da28b8d88d80eca2884619283b60f38418e7b965b340",
+      "bytes": 981
+    },
+    ".cache/wasm64-build/tree/src/role.c": {
+      "sha256": "d6f9341da2a6dff5197442f78cb322c8b22437c95646c44350810fbc058f25a8",
+      "bytes": 102977
+    },
+    "js/ported/c-runtime.js": {
+      "sha256": "e92b19ae10dcb45dfcf4793765818dcbe2acf4f8eb44de60df8609a18997de47",
+      "bytes": 651
+    },
+    "nethack-c/upstream/src/makemon.c": {
+      "sha256": "04bb46b793cb7a724544ed5860f57116e4661ce5d052a1321d90dc0167d3ffc3",
+      "bytes": 92978
+    },
+    "nethack-c/wasm/compile-defines.json": {
+      "sha256": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",
+      "bytes": 88
+    },
+    "scripts/native-test-assert.mjs": {
+      "sha256": "b7c0266077eddd8f8f6d9ed35f4278743401719bfc83813465cdebb369724cb2",
+      "bytes": 2146
+    }
+  },
+  "privateReproductionAndHistory": {
+    ".cache/makemon-author/all.c": {
+      "sha256": "2d0f9e4603d55c667316c27a6f39a4e47f96aeb537d9f3d4f57468228853273c",
+      "bytes": 558923
+    },
+    ".cache/makemon-author/ast.json": {
+      "sha256": "050866849881201ba08de49569fb4e10f9f81db8379b2ae80b01b6e22e65a1ae",
+      "bytes": 79721350
+    },
+    ".cache/makemon-author/bits.c": {
+      "sha256": "4c44d08b99fe30e44c3ff325b74168aa79c3596b5204884998debeffc11bb668",
+      "bytes": 3783
+    },
+    ".cache/makemon-author/build.py": {
+      "sha256": "614d90f7e9546db26cac4a81f4455379d9ebf8db1959df411a060af4685e87c6",
+      "bytes": 2392
+    },
+    ".cache/makemon-author/divergence-handoff.md": {
+      "sha256": "ba4cc20d33540f5f080e2880580a46da413dd227b0b3ed86d16c2e11387c5f74",
+      "bytes": 2669
+    },
+    ".cache/makemon-author/failure-1794307564117.json": {
+      "sha256": "b23333e4f32b70b8be673abf4f0bdb1b980787ba0e2b8a6e036950704d1f2655",
+      "bytes": 16256
+    },
+    ".cache/makemon-author/failure-1794307693822.json": {
+      "sha256": "cb9924fe10182c94bed3d2136b8f552762004d58b2a51545b49a6dd8f2ec2554",
+      "bytes": 100499
+    },
+    ".cache/makemon-author/failure-1794307777054.json": {
+      "sha256": "1d075fda96a9f75b71e39679285a919b377b7a5a35aa3e0e177fd0e04a7c6207",
+      "bytes": 16165
+    },
+    ".cache/makemon-author/failure-1794308093540.json": {
+      "sha256": "2ccd03534db4b4f75b762c272674894ae960e9429922325b88bb4eb2ad4d60c4",
+      "bytes": 28877
+    },
+    ".cache/makemon-author/failure-1794308919319.json": {
+      "sha256": "7582c18657c075c0be45c39270e7526708ba5d644df5d671a15dce96a3b876f4",
+      "bytes": 16266
+    },
+    ".cache/makemon-author/foreign-functions.json": {
+      "sha256": "c975f175f32e840c44169692ef7ccd79a3e2478f4f119fa4459a55ee4c7adf9b",
+      "bytes": 8456
+    },
+    ".cache/makemon-author/freeze.py": {
+      "sha256": "2e375cb5534043016ff2139d17bd716dd888bac34f9b3cd35f3517aaccfb475a",
+      "bytes": 3077
+    },
+    ".cache/makemon-author/functions.json": {
+      "sha256": "ce2233eb0cc2d6cf8f076604c5248a16fb7f6aaadc1d1aa9b22535ec7c473d1d",
+      "bytes": 50717283
+    },
+    ".cache/makemon-author/hybrid-attempt-1.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-10.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-11.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-12.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-13.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-14.log": {
+      "sha256": "1840951258c7620bf581fb57c713a0ac285c9893a045855c4f934f23ff4bd1f7",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-2.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-3.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-4.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-5.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-6.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-7.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-8.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-attempt-9.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-build.log": {
+      "sha256": "1840951258c7620bf581fb57c713a0ac285c9893a045855c4f934f23ff4bd1f7",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/hybrid-command.json": {
+      "sha256": "a7136d31b1c0b749cb52a85f4bf62cc3f85018c485c06353b72c0f64894284da",
+      "bytes": 1633
+    },
+    ".cache/makemon-author/hybrid-input-hashes.json": {
+      "sha256": "7f570a2291dd538ac88ea171c46ce7a7cfae9073120f5524bfd116b82383b2a4",
+      "bytes": 11788
+    },
+    ".cache/makemon-author/hybrid.mjs": {
+      "sha256": "98f24ee353a2ae5a9a56003a03ff63dcbd431b0acd32c8c1217ae1142982fd64",
+      "bytes": 42479
+    },
+    ".cache/makemon-author/hybrid.wasm": {
+      "sha256": "96585296d71c88631a2a8a74be61a1745ea4779c8f607153b583860c97b4ff9f",
+      "bytes": 141973
+    },
+    ".cache/makemon-author/inventory.json": {
+      "sha256": "d3d8877c9f4ff95b13a85d749349f350d89407b737dd0d9455425b5ce102a55f",
+      "bytes": 15463
+    },
+    ".cache/makemon-author/macro-audit.json": {
+      "sha256": "bdfef7445da129da46cc2d8ebf59d3e647dab90f578959a353512b532919b49f",
+      "bytes": 706
+    },
+    ".cache/makemon-author/macros.txt": {
+      "sha256": "fdd834998fca73b2f469951359d1dee1f012311ead9a435b51e4282fa0d32be9",
+      "bytes": 180409
+    },
+    ".cache/makemon-author/make-binding.py": {
+      "sha256": "6738ba05f8a859884f8bf82169fe50b4f0d50d9e127b1d481c5ebe8844097830",
+      "bytes": 10917
+    },
+    ".cache/makemon-author/make-probe.py": {
+      "sha256": "8ef6287cd9e61f124cfafb20409c015cdab137ca75f0311f9c73d6bef17f2915",
+      "bytes": 18172
+    },
+    ".cache/makemon-author/make-schema.py": {
+      "sha256": "93cab1e724839d03e91a3de713be68f117d0d0e538ebcc0b73c95ca84886c3df",
+      "bytes": 5841
+    },
+    ".cache/makemon-author/metadata-attempt-1.log": {
+      "sha256": "03deec8b98a89c3065e5a7b8fd2a647221bae2d1ee3188391f371be45af1def5",
+      "bytes": 152
+    },
+    ".cache/makemon-author/metadata-attempt-2.log": {
+      "sha256": "3d32d64952037fd6893fb453ad5e241333837f32470d11641f66f81e0f4319a1",
+      "bytes": 178
+    },
+    ".cache/makemon-author/metadata-final.log": {
+      "sha256": "3d32d64952037fd6893fb453ad5e241333837f32470d11641f66f81e0f4319a1",
+      "bytes": 178
+    },
+    ".cache/makemon-author/native-wrappers.json": {
+      "sha256": "287dfc02c27234c7d8bd2f5d15ca27ae284d55e7397ea32a7a2847421fab1b60",
+      "bytes": 9722
+    },
+    ".cache/makemon-author/negative-summary.json": {
+      "sha256": "05dba493308eb0c471f02debccb4300dd98a1614bfa3f033838323495a874223",
+      "bytes": 1368
+    },
+    ".cache/makemon-author/port-core.py": {
+      "sha256": "02bb0944a9d6b4d3a5a4ae460b05be18693d1ecd4c07d1ce661a7d51e43fde22",
+      "bytes": 15213
+    },
+    ".cache/makemon-author/reference-attempt-1.log": {
+      "sha256": "e83eddbb6bf27bfb29339e05d5bf3e29a78dd9c1311039b96f029e4279f8f352",
+      "bytes": 5824
+    },
+    ".cache/makemon-author/reference-attempt-10.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-11.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-12.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-13.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-14.log": {
+      "sha256": "1840951258c7620bf581fb57c713a0ac285c9893a045855c4f934f23ff4bd1f7",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-2.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-3.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-4.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-5.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-6.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-7.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-8.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-attempt-9.log": {
+      "sha256": "f346a7a16d6a8a161e1ecf7f84d7a6cd4e89e502fd14ccc0dabbaab69a41c41e",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-build.log": {
+      "sha256": "1840951258c7620bf581fb57c713a0ac285c9893a045855c4f934f23ff4bd1f7",
+      "bytes": 2228
+    },
+    ".cache/makemon-author/reference-command.json": {
+      "sha256": "13e089c97f4f9b6eacd1a34d0ab09794225e1d619ecf1fb4f0a06ebefd3bf1a7",
+      "bytes": 1554
+    },
+    ".cache/makemon-author/reference-input-hashes.json": {
+      "sha256": "7f570a2291dd538ac88ea171c46ce7a7cfae9073120f5524bfd116b82383b2a4",
+      "bytes": 11788
+    },
+    ".cache/makemon-author/reference.mjs": {
+      "sha256": "f897702752952d30096821901c92fe6eb1c0a6d935a994403410032905a80a4d",
+      "bytes": 15413
+    },
+    ".cache/makemon-author/reference.wasm": {
+      "sha256": "13f8653c08d62f47db24c629e85086205f844c9dcd060df6ee2351a95a9f4199",
+      "bytes": 176282
+    },
+    ".cache/makemon-author/regenerated-core.js": {
+      "sha256": "f88948f12832888a3352ed42ef04c71dc2cc1cbb57f8ae78a8fd895619f832f8",
+      "bytes": 100374
+    },
+    ".cache/makemon-author/run-negative.py": {
+      "sha256": "c8d1faba8c6fe7e064c0c49d0f5a3c9ae0288c4ec75efaa396d8b2a76fb59045",
+      "bytes": 1580
+    },
+    ".cache/makemon-author/runtime-base.inc": {
+      "sha256": "cb4136cd4109f13a55136b47da5f5c4853cc3025baaaf155ecec4db1f3b5596b",
+      "bytes": 2973
+    },
+    ".cache/makemon-author/schema.json": {
+      "sha256": "635fdd276479074fa2114a1b74d0401d4401e2f94f8c05c568c243696a85c59f",
+      "bytes": 44918
+    },
+    ".cache/makemon-author/scope-final.log": {
+      "sha256": "ad497073a4fd7d8deb7d3fa534acb373edb6ea8d2afe18215f47f93ebd1f1271",
+      "bytes": 82
+    },
+    ".cache/makemon-author/scope.log": {
+      "sha256": "ad497073a4fd7d8deb7d3fa534acb373edb6ea8d2afe18215f47f93ebd1f1271",
+      "bytes": 82
+    },
+    ".cache/makemon-author/scope.mjs": {
+      "sha256": "b6106e90c4071c0436c4ed543f162b71a8c00ef95c11eed3d267ebf5e88b8a5f",
+      "bytes": 10405
+    },
+    ".cache/makemon-author/sort-dependency.c": {
+      "sha256": "551ab9637ef4f88d759b666433604e30c35d7e59e301fb550c7c51451ad84b21",
+      "bytes": 2055
+    },
+    ".cache/makemon-author/storage-audit.json": {
+      "sha256": "8a6a3f8e4762e266bb3c1eaf3ab488738b07be47b6220b1b30f0f7df25b1c212",
+      "bytes": 2607
+    },
+    ".cache/makemon-author/storage-audit.py": {
+      "sha256": "727dd4b28fcae001a976801334fb579cc6580dd276f258b59e2536ab9684a3c0",
+      "bytes": 4635
+    },
+    ".cache/makemon-author/summary.json": {
+      "sha256": "2f75bd33abdc222d56c866728e1749525a27336c4107c27212689fd74bd57e31",
+      "bytes": 1029
+    },
+    ".cache/makemon-author/toolchain.txt": {
+      "sha256": "213df36e3597ae21529432b056190e6497f1f4d0f0aeee0cfc48b55c85a241d5",
+      "bytes": 331
+    },
+    ".cache/makemon-author/unit-attempt-1.log": {
+      "sha256": "15a87f4b8925fceeccefc0ed0e6058807785d044134379403571e15682bffac6",
+      "bytes": 32042
+    },
+    ".cache/makemon-author/unit-attempt-10.log": {
+      "sha256": "3539de41e6038886f6ed3f23d36989833934041d69f4ec4ef58536784752a5a2",
+      "bytes": 84
+    },
+    ".cache/makemon-author/unit-attempt-11.log": {
+      "sha256": "5c64856274c1deccde583700bd91599a8bf0cc4b7b84a4631f838a17df39de77",
+      "bytes": 863
+    },
+    ".cache/makemon-author/unit-attempt-12.log": {
+      "sha256": "31882a48a77524b15f6f556040374f52cdcf55d9bc7cc08aa77029893c84c4be",
+      "bytes": 84
+    },
+    ".cache/makemon-author/unit-attempt-13.log": {
+      "sha256": "ad46e88d8b3a4e19f18f5f90acb66e3c15cadb656d6c8bee3d6243316803af5c",
+      "bytes": 84
+    },
+    ".cache/makemon-author/unit-attempt-14.log": {
+      "sha256": "a06507798e043bfc2972c738c7c351532657aae6ec106018c0d84c8720cf899d",
+      "bytes": 84
+    },
+    ".cache/makemon-author/unit-attempt-2.log": {
+      "sha256": "89d643d685db86e193973a26c7007221e54c37c15df9269ab8e9013d1e57757f",
+      "bytes": 743
+    },
+    ".cache/makemon-author/unit-attempt-3.log": {
+      "sha256": "cd10c7ed90cc59826aa54fd2c1036ba289549e99c642d1e9c178e04f4799e974",
+      "bytes": 2437
+    },
+    ".cache/makemon-author/unit-attempt-4.log": {
+      "sha256": "e5b48859bc28effa0f2eb1789f8660c455aaf8d50fcdca77e95a851893a7ff32",
+      "bytes": 44319
+    },
+    ".cache/makemon-author/unit-attempt-5.log": {
+      "sha256": "88132c9687c31ba39d3f09d72bd12b006e60c10b2e8c3733e50d49f78baa2432",
+      "bytes": 1043
+    },
+    ".cache/makemon-author/unit-attempt-6.log": {
+      "sha256": "9b9b3721304ccf6d9538abdd0b1837b9618941dfd47f4b7b1c22d4a3e9238629",
+      "bytes": 1161
+    },
+    ".cache/makemon-author/unit-attempt-7.log": {
+      "sha256": "90d09c5ffb497257546716e2388cc5fc6ead846e57abebc172e9bf26128712e2",
+      "bytes": 1403
+    },
+    ".cache/makemon-author/unit-attempt-8.log": {
+      "sha256": "f7e2adfb9cad1ba0cb61a92711cf51eab2af172ca6cca3a06c5bd03bb2669339",
+      "bytes": 1861
+    },
+    ".cache/makemon-author/unit-attempt-9.log": {
+      "sha256": "f7e2adfb9cad1ba0cb61a92711cf51eab2af172ca6cca3a06c5bd03bb2669339",
+      "bytes": 1861
+    },
+    ".cache/makemon-author/unit-final.log": {
+      "sha256": "df3bef4655cdb590fc18bf0f2e3469f533ae4cd5ce07f13354336f00a9837d86",
+      "bytes": 84
+    },
+    ".cache/makemon-author/write-runtime.py": {
+      "sha256": "ccd400cb8d564247ae7927b5be1b913570c9155e16d86b9c15052e286d7ed729",
+      "bytes": 13292
+    },
+    ".cache/makemon-author/wrong-core-loader.mjs": {
+      "sha256": "f51c8f20cf86241331cd5585488b69389b0f3488f1bcc15a4239ed8c9cee37ee",
+      "bytes": 491
+    },
+    ".cache/makemon-author/wrong-core-negative.log": {
+      "sha256": "1018580eaba9ff39a962990146d2acc0e074166afaf0085aa77c1e0cc84c0670",
+      "bytes": 1024
+    }
+  },
+  "historicalEvidence": "Attempt/failure files are retained raw history, not asserted to pass. Current summary/logs and input hashes identify the frozen successful final run.",
+  "exclusions": "Manifest excludes itself. No shared registry/build/default/Lua46 or earlier port edits by this author."
+}

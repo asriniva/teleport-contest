@@ -1,0 +1,7025 @@
+{
+  "schema": {
+    "Gender": {
+      "ctype": "struct Gender",
+      "fields": [
+        {
+          "name": "his",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "Role": {
+      "ctype": "struct Role",
+      "fields": [
+        {
+          "name": "mnum",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "achievement_tracking": {
+      "ctype": "struct achievement_tracking",
+      "fields": [
+        {
+          "name": "mines_prize_oid",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "soko_prize_oid",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "any": {
+      "ctype": "union any",
+      "fields": [
+        {
+          "name": "a_obj",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "c_common_strings": {
+      "ctype": "struct c_common_strings",
+      "fields": [
+        {
+          "name": "c_nothing_happens",
+          "ctype": "const char *const",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "class_sym": {
+      "ctype": "struct class_sym",
+      "fields": [
+        {
+          "name": "name",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "const_globals": {
+      "ctype": "struct const_globals",
+      "fields": [
+        {
+          "name": "zeroobj",
+          "ctype": "const struct obj",
+          "canonical": "struct obj",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "zeromonst",
+          "ctype": "const struct monst",
+          "canonical": "struct monst",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "context_info": {
+      "ctype": "struct context_info",
+      "fields": [
+        {
+          "name": "ident",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "current_fruit",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "made_amulet",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "tin",
+          "ctype": "struct tin_info",
+          "canonical": "struct tin_info",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "objsplit",
+          "ctype": "struct obj_split",
+          "canonical": "struct obj_split",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "achieveo",
+          "ctype": "struct achievement_tracking",
+          "canonical": "struct achievement_tracking",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "d_level": {
+      "ctype": "struct d_level",
+      "fields": [
+        {
+          "name": "dnum",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "dlevel",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "dgn_topology": {
+      "ctype": "struct dgn_topology",
+      "fields": [
+        {
+          "name": "d_rogue_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_water_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "d_air_level",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "dlevel_t": {
+      "ctype": "dlevel_t",
+      "fields": [
+        {
+          "name": "locations",
+          "ctype": "struct rm[80][21]",
+          "canonical": "struct rm[80][21]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "objects",
+          "ctype": "struct obj *[80][21]",
+          "canonical": "struct obj *[80][21]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "objlist",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "buriedobjlist",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "monlist",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "flag": {
+      "ctype": "struct flag",
+      "fields": [
+        {
+          "name": "made_fruit",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "icp": {
+      "ctype": "struct icp",
+      "fields": [
+        {
+          "name": "iprob",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "iclass",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_flags": {
+      "ctype": "struct instance_flags",
+      "fields": [
+        {
+          "name": "partly_eaten_hack",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "last_msg",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "override_ID",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "suppress_price",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "returning_missile",
+          "ctype": "genericptr_t",
+          "canonical": "void *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_b": {
+      "ctype": "struct instance_globals_b",
+      "fields": [
+        {
+          "name": "billobjs",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_c": {
+      "ctype": "struct instance_globals_c",
+      "fields": [
+        {
+          "name": "current_wand",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_i": {
+      "ctype": "struct instance_globals_i",
+      "fields": [
+        {
+          "name": "in_mklev",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "invent",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_k": {
+      "ctype": "struct instance_globals_k",
+      "fields": [
+        {
+          "name": "kickedobj",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_m": {
+      "ctype": "struct instance_globals_m",
+      "fields": [
+        {
+          "name": "migrating_objs",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mydogs",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "migrating_mons",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mkcorpstat_norevive",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_o": {
+      "ctype": "struct instance_globals_o",
+      "fields": [
+        {
+          "name": "objs_deleted",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oclass_prob_totals",
+          "ctype": "short[18]",
+          "canonical": "short[18]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oldcap",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_b": {
+      "ctype": "struct instance_globals_saved_b",
+      "fields": [
+        {
+          "name": "bases",
+          "ctype": "int[20]",
+          "canonical": "int[20]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_c": {
+      "ctype": "struct instance_globals_saved_c",
+      "fields": [
+        {
+          "name": "context",
+          "ctype": "struct context_info",
+          "canonical": "struct context_info",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_d": {
+      "ctype": "struct instance_globals_saved_d",
+      "fields": [
+        {
+          "name": "dungeon_topology",
+          "ctype": "struct dgn_topology",
+          "canonical": "struct dgn_topology",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_l": {
+      "ctype": "struct instance_globals_saved_l",
+      "fields": [
+        {
+          "name": "level",
+          "ctype": "dlevel_t",
+          "canonical": "dlevel_t",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_m": {
+      "ctype": "struct instance_globals_saved_m",
+      "fields": [
+        {
+          "name": "moves",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mvitals",
+          "ctype": "struct mvitals[383]",
+          "canonical": "struct mvitals[383]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_t": {
+      "ctype": "struct instance_globals_t",
+      "fields": [
+        {
+          "name": "thrownobj",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_u": {
+      "ctype": "struct instance_globals_u",
+      "fields": [
+        {
+          "name": "urole",
+          "ctype": "struct Role",
+          "canonical": "struct Role",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_v": {
+      "ctype": "struct instance_globals_v",
+      "fields": [
+        {
+          "name": "viz_array",
+          "ctype": "seenV **",
+          "canonical": "unsigned char **",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_z": {
+      "ctype": "struct instance_globals_z",
+      "fields": [
+        {
+          "name": "zombify",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "monst": {
+      "ctype": "struct monst",
+      "fields": [
+        {
+          "name": "nmon",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "data",
+          "ctype": "struct permonst *",
+          "canonical": "struct permonst *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "m_id",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mnum",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mx",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "my",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mhp",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mhpmax",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mcan",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "mleashed",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "ispriest",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "wormno",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "5"
+        },
+        {
+          "name": "mstate",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "minvent",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mw",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mextra",
+          "ctype": "struct mextra *",
+          "canonical": "struct mextra *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "mvitals": {
+      "ctype": "struct mvitals",
+      "fields": [
+        {
+          "name": "mvflags",
+          "ctype": "uchar",
+          "canonical": "unsigned char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "obj": {
+      "ctype": "struct obj",
+      "fields": [
+        {
+          "name": "nobj",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "v",
+          "ctype": "union vptrs",
+          "canonical": "union vptrs",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "cobj",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "o_id",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ox",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "otyp",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "owt",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "quan",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "spe",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oclass",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oartifact",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "where",
+          "ctype": "xint8",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "timed",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "cursed",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "blessed",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "unpaid",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "no_charge",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "recharged",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "3"
+        },
+        {
+          "name": "lamplit",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "known",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "dknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "bknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "rknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "cknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "lknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "tknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "nomerge",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "oeroded",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "oeroded2",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "oerodeproof",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "olocked",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "otrapped",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "globby",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "greased",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "in_use",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "bypass",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "pickup_prev",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "how_lost",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "3"
+        },
+        {
+          "name": "corpsenm",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "usecount",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oeaten",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "age",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "owornmask",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "lua_ref_cnt",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "omigr_from_dnum",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "omigr_from_dlevel",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oextra",
+          "ctype": "struct oextra *",
+          "canonical": "struct oextra *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "obj_split": {
+      "ctype": "struct obj_split",
+      "fields": [
+        {
+          "name": "parent_oid",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "child_oid",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "objclass": {
+      "ctype": "struct objclass",
+      "fields": [
+        {
+          "name": "oc_name_idx",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oc_merge",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "oc_uses_known",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "oc_magic",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "oc_charged",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "oc_unique",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "oc_big",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "oc_dir",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "3"
+        },
+        {
+          "name": "oc_material",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "5"
+        },
+        {
+          "name": "oc_subtyp",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oc_oprop",
+          "ctype": "uchar",
+          "canonical": "unsigned char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oc_class",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oc_prob",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oc_weight",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oc_cost",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "objdescr": {
+      "ctype": "struct objdescr",
+      "fields": [
+        {
+          "name": "oc_name",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "oextra": {
+      "ctype": "struct oextra",
+      "fields": [
+        {
+          "name": "oname",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "omonst",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "omailcmd",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "omid",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "permonst": {
+      "ctype": "struct permonst",
+      "fields": [
+        {
+          "name": "pmidx",
+          "ctype": "const enum monnums",
+          "canonical": "enum monnums",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mlet",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mlevel",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "geno",
+          "ctype": "unsigned short",
+          "canonical": "unsigned short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "cwt",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "cnutrit",
+          "ctype": "unsigned short",
+          "canonical": "unsigned short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "msize",
+          "ctype": "uchar",
+          "canonical": "unsigned char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mflags2",
+          "ctype": "unsigned long",
+          "canonical": "unsigned long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "prop": {
+      "ctype": "struct prop",
+      "fields": [
+        {
+          "name": "extrinsic",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "blocked",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "intrinsic",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "rm": {
+      "ctype": "struct rm",
+      "fields": [
+        {
+          "name": "typ",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "sinfo": {
+      "ctype": "struct sinfo",
+      "fields": [
+        {
+          "name": "freeingdata",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "tin_info": {
+      "ctype": "struct tin_info",
+      "fields": [
+        {
+          "name": "tin",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "o_id",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "vptrs": {
+      "ctype": "union vptrs",
+      "fields": [
+        {
+          "name": "v_nexthere",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "v_ocontainer",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "v_ocarry",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "you": {
+      "ctype": "struct you",
+      "fields": [
+        {
+          "name": "ux",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uz",
+          "ctype": "d_level",
+          "canonical": "struct d_level",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ushops",
+          "ctype": "char[5]",
+          "canonical": "char[5]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uprops",
+          "ctype": "struct prop[69]",
+          "canonical": "struct prop[69]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uswallow",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "twoweap",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    }
+  },
+  "globals": [
+    {
+      "name": "cg",
+      "ctype": "const struct const_globals",
+      "canonical": "struct const_globals"
+    },
+    {
+      "name": "svm",
+      "ctype": "struct instance_globals_saved_m",
+      "canonical": "struct instance_globals_saved_m"
+    },
+    {
+      "name": "gi",
+      "ctype": "struct instance_globals_i",
+      "canonical": "struct instance_globals_i"
+    },
+    {
+      "name": "objects",
+      "ctype": "struct objclass[482]",
+      "canonical": "struct objclass[482]"
+    },
+    {
+      "name": "svd",
+      "ctype": "struct instance_globals_saved_d",
+      "canonical": "struct instance_globals_saved_d"
+    },
+    {
+      "name": "u",
+      "ctype": "struct you",
+      "canonical": "struct you"
+    },
+    {
+      "name": "svb",
+      "ctype": "struct instance_globals_saved_b",
+      "canonical": "struct instance_globals_saved_b"
+    },
+    {
+      "name": "go",
+      "ctype": "struct instance_globals_o",
+      "canonical": "struct instance_globals_o"
+    },
+    {
+      "name": "obj_descr",
+      "ctype": "struct objdescr[482]",
+      "canonical": "struct objdescr[482]"
+    },
+    {
+      "name": "mons",
+      "ctype": "struct permonst[384]",
+      "canonical": "struct permonst[384]"
+    },
+    {
+      "name": "svc",
+      "ctype": "struct instance_globals_saved_c",
+      "canonical": "struct instance_globals_saved_c"
+    },
+    {
+      "name": "svl",
+      "ctype": "struct instance_globals_saved_l",
+      "canonical": "struct instance_globals_saved_l"
+    },
+    {
+      "name": "flags",
+      "ctype": "struct flag",
+      "canonical": "struct flag"
+    },
+    {
+      "name": "gu",
+      "ctype": "struct instance_globals_u",
+      "canonical": "struct instance_globals_u"
+    },
+    {
+      "name": "gz",
+      "ctype": "struct instance_globals_z",
+      "canonical": "struct instance_globals_z"
+    },
+    {
+      "name": "iflags",
+      "ctype": "struct instance_flags",
+      "canonical": "struct instance_flags"
+    },
+    {
+      "name": "gv",
+      "ctype": "struct instance_globals_v",
+      "canonical": "struct instance_globals_v"
+    },
+    {
+      "name": "uwep",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uswapwep",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "gm",
+      "ctype": "struct instance_globals_m",
+      "canonical": "struct instance_globals_m"
+    },
+    {
+      "name": "gb",
+      "ctype": "struct instance_globals_b",
+      "canonical": "struct instance_globals_b"
+    },
+    {
+      "name": "hands_obj",
+      "ctype": "struct obj",
+      "canonical": "struct obj"
+    },
+    {
+      "name": "gt",
+      "ctype": "struct instance_globals_t",
+      "canonical": "struct instance_globals_t"
+    },
+    {
+      "name": "gk",
+      "ctype": "struct instance_globals_k",
+      "canonical": "struct instance_globals_k"
+    },
+    {
+      "name": "program_state",
+      "ctype": "struct sinfo",
+      "canonical": "struct sinfo"
+    },
+    {
+      "name": "c_common_strings",
+      "ctype": "const struct c_common_strings",
+      "canonical": "struct c_common_strings"
+    },
+    {
+      "name": "gc",
+      "ctype": "struct instance_globals_c",
+      "canonical": "struct instance_globals_c"
+    },
+    {
+      "name": "uchain",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uball",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "genders",
+      "ctype": "const struct Gender[]",
+      "canonical": "struct Gender[]"
+    },
+    {
+      "name": "uskin",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uarm",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uarmc",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uarmh",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uarms",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uarmg",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uarmf",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uarmu",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uquiver",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uamul",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uleft",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uright",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "ublindf",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "def_oc_syms",
+      "ctype": "const struct class_sym[18]",
+      "canonical": "struct class_sym[18]"
+    }
+  ],
+  "enums": [
+    "ALTAR",
+    "AMULET_CLASS",
+    "AMULET_OF_CHANGE",
+    "AMULET_OF_RESTFUL_SLEEP",
+    "AMULET_OF_STRANGULATION",
+    "AMULET_OF_YENDOR",
+    "APPLE",
+    "ARMOR_CLASS",
+    "BAG_OF_HOLDING",
+    "BAG_OF_TRICKS",
+    "BALL_CLASS",
+    "BANANA",
+    "BELL_OF_OPENING",
+    "BLINDED",
+    "BLINDFOLD",
+    "BOULDER",
+    "BRASS_LANTERN",
+    "BURIED_UNDER_ICE",
+    "CANDELABRUM_OF_INVOCATION",
+    "CANDY_BAR",
+    "CAN_OF_GREASE",
+    "CHAIN_CLASS",
+    "CHEST",
+    "COIN_CLASS",
+    "COPPER",
+    "CORPSE",
+    "COST_SINGLEOBJ",
+    "COST_UNBLSS",
+    "COST_UNCURS",
+    "CRYSTAL_BALL",
+    "DILITHIUM_CRYSTAL",
+    "DRAGON_HIDE",
+    "DRUM_OF_EARTHQUAKE",
+    "EGG",
+    "ELVEN_SHIELD",
+    "EUCALYPTUS_LEAF",
+    "EXPENSIVE_CAMERA",
+    "FIGURINE",
+    "FIG_TRANSFORM",
+    "FIRE_HORN",
+    "FIRE_RES",
+    "FOOD_CLASS",
+    "FOOD_RATION",
+    "FROST_HORN",
+    "FUMBLE_BOOTS",
+    "GAUNTLETS_OF_FUMBLING",
+    "GEM_CLASS",
+    "GLASS",
+    "GLOB_OF_BLACK_PUDDING",
+    "GLOB_OF_BROWN_PUDDING",
+    "GLOB_OF_GRAY_OOZE",
+    "GLOB_OF_GREEN_SLIME",
+    "GOLD_PIECE",
+    "GRAY_DRAGON_SCALES",
+    "HALLUC",
+    "HALLUC_RES",
+    "HATCH_EGG",
+    "HEAVY_IRON_BALL",
+    "HELM_OF_OPPOSITE_ALIGNMENT",
+    "HORN_OF_PLENTY",
+    "ICE",
+    "ICE_BOX",
+    "IRON",
+    "IRONBARS",
+    "KELP_FROND",
+    "LARGE_BOX",
+    "LEASH",
+    "LENSES",
+    "LEVITATION_BOOTS",
+    "LIQUID",
+    "LOADSTONE",
+    "LOW_PM",
+    "LS_OBJECT",
+    "LUCKSTONE",
+    "LUMP_OF_ROYAL_JELLY",
+    "MAGIC_FLUTE",
+    "MAGIC_HARP",
+    "MAGIC_LAMP",
+    "MAGIC_MARKER",
+    "MEAT_RING",
+    "NON_PM",
+    "NOT_ON_ICE",
+    "NUMMONS",
+    "OILSKIN_SACK",
+    "OIL_LAMP",
+    "ORANGE",
+    "ORCISH_SHIELD",
+    "PEAR",
+    "PLASTIC",
+    "PLNMSG_OBJ_GLOWS",
+    "PM_ARCHEOLOGIST",
+    "PM_DEATH",
+    "PM_FAMINE",
+    "PM_GRAY_OOZE",
+    "PM_HUMAN",
+    "PM_LICHEN",
+    "PM_LIZARD",
+    "PM_PESTILENCE",
+    "PM_SAMURAI",
+    "PM_WIZARD",
+    "POTION_CLASS",
+    "POT_BOOZE",
+    "POT_OIL",
+    "POT_SICKNESS",
+    "POT_WATER",
+    "P_BOW",
+    "P_SHURIKEN",
+    "RANDOM_CLASS",
+    "REVIVE_MON",
+    "RING_CLASS",
+    "RIN_AGGRAVATE_MONSTER",
+    "RIN_HUNGER",
+    "RIN_POLYMORPH",
+    "RIN_TELEPORTATION",
+    "ROCK",
+    "ROCK_CLASS",
+    "ROT_CORPSE",
+    "SACK",
+    "SADDLE",
+    "SCROLL_CLASS",
+    "SCR_MAIL",
+    "SET_ON_ICE",
+    "SHIELD_OF_REFLECTION",
+    "SHOPBASE",
+    "SHRINK_GLOB",
+    "SLIME_MOLD",
+    "SPBOOK_CLASS",
+    "SPECIAL_PM",
+    "SPE_BLANK_PAPER",
+    "SPE_NOVEL",
+    "SPLINT_MAIL",
+    "STATUE",
+    "S_TROLL",
+    "S_altar",
+    "S_brdnstair",
+    "S_brupstair",
+    "S_dnstair",
+    "S_sink",
+    "S_throne",
+    "S_trwall",
+    "S_upstair",
+    "S_vwall",
+    "TALLOW_CANDLE",
+    "TIMER_OBJECT",
+    "TIN",
+    "TINNING_KIT",
+    "TOOL_CLASS",
+    "TOWEL",
+    "UNICORN_HORN",
+    "VENOM_CLASS",
+    "WAND_CLASS",
+    "WAN_CANCELLATION",
+    "WAN_FIRE",
+    "WAN_LIGHT",
+    "WAN_LIGHTNING",
+    "WAN_STASIS",
+    "WAN_WISHING",
+    "WAX_CANDLE",
+    "WEAPON_CLASS",
+    "WOOD",
+    "WORM_TOOTH",
+    "YELLOW_DRAGON_SCALES",
+    "ZOMBIFY_MON"
+  ],
+  "sizes": [
+    "dlevel_t",
+    "enum monnums",
+    "struct Gender",
+    "struct Role",
+    "struct achievement_tracking",
+    "struct c_common_strings",
+    "struct class_sym",
+    "struct const_globals",
+    "struct context_info",
+    "struct d_level",
+    "struct dgn_topology",
+    "struct flag",
+    "struct icp",
+    "struct instance_flags",
+    "struct instance_globals_b",
+    "struct instance_globals_c",
+    "struct instance_globals_i",
+    "struct instance_globals_k",
+    "struct instance_globals_m",
+    "struct instance_globals_o",
+    "struct instance_globals_saved_b",
+    "struct instance_globals_saved_c",
+    "struct instance_globals_saved_d",
+    "struct instance_globals_saved_l",
+    "struct instance_globals_saved_m",
+    "struct instance_globals_t",
+    "struct instance_globals_u",
+    "struct instance_globals_v",
+    "struct instance_globals_z",
+    "struct monst",
+    "struct mvitals",
+    "struct obj",
+    "struct obj_split",
+    "struct objclass",
+    "struct objdescr",
+    "struct oextra",
+    "struct permonst",
+    "struct prop",
+    "struct rm",
+    "struct sinfo",
+    "struct tin_info",
+    "struct you",
+    "union any",
+    "union vptrs"
+  ],
+  "dependencies": {
+    "alloc": {
+      "type": "long *(unsigned int)",
+      "ret": "long *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "free": {
+      "type": "void (void *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "void *",
+          "canonical": "void *"
+        }
+      ]
+    },
+    "dealloc_mextra": {
+      "type": "void (struct monst *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "dupstr": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "erosion_matters": {
+      "type": "boolean (struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "rng_log_enabled": {
+      "type": "boolean (void)",
+      "ret": "signed char",
+      "params": []
+    },
+    "rng_log_set_caller": {
+      "type": "void (const char *, int, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "rn2": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "on_level": {
+      "type": "boolean (d_level *, d_level *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "d_level *",
+          "canonical": "struct d_level *"
+        },
+        {
+          "name": "a1",
+          "type": "d_level *",
+          "canonical": "struct d_level *"
+        }
+      ]
+    },
+    "In_hell": {
+      "type": "boolean (d_level *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "d_level *",
+          "canonical": "struct d_level *"
+        }
+      ]
+    },
+    "rnd": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "rnd_class": {
+      "type": "int (int, int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "obj_to_any": {
+      "type": "anything *(struct obj *)",
+      "ret": "union any *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "stop_timer": {
+      "type": "long (short, union any *)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "short",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "union any *",
+          "canonical": "union any *"
+        }
+      ]
+    },
+    "level_difficulty": {
+      "type": "xint16 (void)",
+      "ret": "short",
+      "params": []
+    },
+    "rndmonst_adj": {
+      "type": "struct permonst *(int, int)",
+      "ret": "struct permonst *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "oname": {
+      "type": "struct obj *(struct obj *, const char *, unsigned int)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "__assert_fail": {
+      "type": "void (const char *, const char *, int, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a3",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "memcpy": {
+      "type": "void *(void *, const void *, unsigned long)",
+      "ret": "void *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "void *restrict",
+          "canonical": "void *"
+        },
+        {
+          "name": "a1",
+          "type": "const void *restrict",
+          "canonical": "void *"
+        },
+        {
+          "name": "a2",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        }
+      ]
+    },
+    "copy_mextra": {
+      "type": "void (struct monst *, struct monst *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a1",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "splitbill": {
+      "type": "void (struct obj *, struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "obj_split_timers": {
+      "type": "void (struct obj *, struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "obj_sheds_light": {
+      "type": "boolean (struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "obj_split_light_source": {
+      "type": "void (struct obj *, struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "oid_price_adjustment": {
+      "type": "int (struct obj *, unsigned int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "merged": {
+      "type": "int (struct obj **, struct obj **)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj **",
+          "canonical": "struct obj **"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj **",
+          "canonical": "struct obj **"
+        }
+      ]
+    },
+    "unpaid_cost": {
+      "type": "long (struct obj *, uchar)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "uchar",
+          "canonical": "unsigned char"
+        }
+      ]
+    },
+    "shop_keeper": {
+      "type": "struct monst *(char)",
+      "ret": "struct monst *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char",
+          "canonical": "char"
+        }
+      ]
+    },
+    "subfrombill": {
+      "type": "void (struct obj *, struct monst *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "addtobill": {
+      "type": "void (struct obj *, boolean, boolean, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "alter_cost": {
+      "type": "void (struct obj *, long)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "long",
+          "canonical": "long"
+        }
+      ]
+    },
+    "get_obj_location": {
+      "type": "boolean (struct obj *, coordxy *, coordxy *, int)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy *",
+          "canonical": "short *"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy *",
+          "canonical": "short *"
+        },
+        {
+          "name": "a3",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "costly_spot": {
+      "type": "boolean (coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "in_rooms": {
+      "type": "char *(coordxy, coordxy, int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "billable": {
+      "type": "boolean (struct monst **, struct obj *, char, boolean)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst **",
+          "canonical": "struct monst **"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a2",
+          "type": "char",
+          "canonical": "char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "simpleonames": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "stolen_value": {
+      "type": "long (struct obj *, coordxy, coordxy, boolean, boolean)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a4",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "strchr": {
+      "type": "char *(const char *, int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "rne": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "permapoisoned": {
+      "type": "boolean (struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "nartifact_exist": {
+      "type": "int (void)",
+      "ret": "int",
+      "params": []
+    },
+    "mk_artifact": {
+      "type": "struct obj *(struct obj *, aligntyp, uchar, boolean)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "aligntyp",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a2",
+          "type": "uchar",
+          "canonical": "unsigned char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "undead_to_corpse": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "can_be_hatched": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "dead_species": {
+      "type": "boolean (int, boolean)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "set_tin_variety": {
+      "type": "void (struct obj *, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "assign_candy_wrapper": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "In_quest": {
+      "type": "boolean (d_level *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "d_level *",
+          "canonical": "struct d_level *"
+        }
+      ]
+    },
+    "noveltitle": {
+      "type": "const char *(int *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int *",
+          "canonical": "int *"
+        }
+      ]
+    },
+    "obj_stop_timers": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "attach_fig_transform_timeout": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "attach_egg_hatch_timeout": {
+      "type": "void (struct obj *, long)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "long",
+          "canonical": "long"
+        }
+      ]
+    },
+    "rnz": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "zombie_form": {
+      "type": "int (struct permonst *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct permonst *",
+          "canonical": "struct permonst *"
+        }
+      ]
+    },
+    "start_timer": {
+      "type": "boolean (long, short, short, union any *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "long",
+          "canonical": "long"
+        },
+        {
+          "name": "a1",
+          "type": "short",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "short",
+          "canonical": "short"
+        },
+        {
+          "name": "a3",
+          "type": "union any *",
+          "canonical": "union any *"
+        }
+      ]
+    },
+    "is_ice": {
+      "type": "boolean (coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "eating_glob": {
+      "type": "boolean (struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "Yname2": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "strcpy": {
+      "type": "char *(char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "near_capacity": {
+      "type": "int (void)",
+      "ret": "int",
+      "params": []
+    },
+    "newsym": {
+      "type": "void (coordxy, coordxy)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "strncmp": {
+      "type": "int (const char *, const char *, unsigned long)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        }
+      ]
+    },
+    "strsubst": {
+      "type": "char *(char *, const char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "update_inventory": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "encumber_msg": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "remove_worn_item": {
+      "type": "void (struct obj *, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "stop_occupation": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "useupall": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "setmnotwielded": {
+      "type": "void (struct monst *, struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "maybe_unhide_at": {
+      "type": "void (coordxy, coordxy)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "obfree": {
+      "type": "void (struct obj *, struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "arti_light_radius": {
+      "type": "int (struct obj *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "obj_adjust_light_radius": {
+      "type": "void (struct obj *, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "otense": {
+      "type": "char *(struct obj *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "abs": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "confers_luck": {
+      "type": "boolean (struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "set_moreluck": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "reset_remarm": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "drop_uswapwep": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "book_cursed": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "eaten_stat": {
+      "type": "int (int, struct obj *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "g_at": {
+      "type": "struct obj *(coordxy, coordxy)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "depth": {
+      "type": "schar (d_level *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "d_level *",
+          "canonical": "struct d_level *"
+        }
+      ]
+    },
+    "rloco": {
+      "type": "boolean (struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "forget_temple_entry": {
+      "type": "void (struct monst *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "tt_oname": {
+      "type": "struct obj *(struct obj *)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "isok": {
+      "type": "int (coordxy, coordxy)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "safe_typename": {
+      "type": "char *(int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "obj_no_longer_held": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "block_point": {
+      "type": "void (int, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "find_objowner": {
+      "type": "struct monst *(struct obj *, coordxy, coordxy)",
+      "ret": "struct monst *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "costly_adjacent": {
+      "type": "boolean (struct monst *, coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "debugcore": {
+      "type": "boolean (const char *, boolean)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "doname": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "s_suffix": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "xname": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "The": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "recalc_block_point": {
+      "type": "void (coordxy, coordxy)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "extract_from_minvent": {
+      "type": "void (struct monst *, struct obj *, boolean, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "safe_oname": {
+      "type": "const char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "artifact_exists": {
+      "type": "void (struct obj *, const char *, boolean, unsigned int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a3",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "freeinv": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "maybe_reset_pick": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "del_light_source": {
+      "type": "void (int, union any *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "union any *",
+          "canonical": "union any *"
+        }
+      ]
+    },
+    "consume_obj_charge": {
+      "type": "void (struct obj *, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "vtense": {
+      "type": "char *(const char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "aobjnam": {
+      "type": "char *(struct obj *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "hold_another_object": {
+      "type": "struct obj *(struct obj *, const char *, const char *, const char *)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a3",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "can_reach_floor": {
+      "type": "boolean (boolean)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "hitfloor": {
+      "type": "void (struct obj *, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "doaltarobj": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "Doname2": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "surface": {
+      "type": "const char *(coordxy, coordxy)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "dropy": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "discover_object": {
+      "type": "void (int, boolean, boolean, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "is_pool_or_lava": {
+      "type": "boolean (coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "is_pool": {
+      "type": "boolean (coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "find_mid": {
+      "type": "struct monst *(unsigned int, unsigned int)",
+      "ret": "struct monst *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        },
+        {
+          "name": "a1",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "mon_pmname": {
+      "type": "const char *(struct monst *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "onshopbill": {
+      "type": "boolean (struct obj *, struct monst *, boolean)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "Mgender": {
+      "type": "int (struct monst *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "pmname": {
+      "type": "const char *(struct permonst *, int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct permonst *",
+          "canonical": "struct permonst *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "pronoun_gender": {
+      "type": "int (struct monst *, unsigned int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a1",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "strstri": {
+      "type": "char *(const char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "strcat": {
+      "type": "char *(char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "x_monnam": {
+      "type": "char *(struct monst *, int, const char *, int, boolean)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a3",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a4",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "fmt_ptr": {
+      "type": "char *(const void *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const void *",
+          "canonical": "void *"
+        }
+      ]
+    },
+    "eos": {
+      "type": "char *(char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "strlen": {
+      "type": "unsigned long (const char *)",
+      "ret": "unsigned long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "copynchars": {
+      "type": "void (char *, const char *, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "makesingular": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "sobj_at": {
+      "type": "struct obj *(int, coordxy, coordxy)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "mergable": {
+      "type": "boolean (struct obj *, struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "nxtobj": {
+      "type": "struct obj *(struct obj *, int, boolean)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "globby_bill_fixup": {
+      "type": "void (struct obj *, struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "obj_typename": {
+      "type": "char *(int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "makeplural": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    }
+  },
+  "variadics": [
+    {
+      "site": 0,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "mkobj"
+    },
+    {
+      "site": 1,
+      "function": "panic",
+      "types": [
+        "char *",
+        "char *",
+        "long",
+        "long"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "splitobj"
+    },
+    {
+      "site": 2,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "replace_object"
+    },
+    {
+      "site": 3,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "costly_alteration"
+    },
+    {
+      "site": 4,
+      "function": "verbalize",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "costly_alteration"
+    },
+    {
+      "site": 5,
+      "function": "verbalize",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "costly_alteration"
+    },
+    {
+      "site": 6,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "mksobj_init"
+    },
+    {
+      "site": 7,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "int",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "start_glob_timeout"
+    },
+    {
+      "site": 8,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "int",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "shrink_glob"
+    },
+    {
+      "site": 9,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "shrink_glob"
+    },
+    {
+      "site": 10,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "shrink_glob"
+    },
+    {
+      "site": 11,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "shrink_glob"
+    },
+    {
+      "site": 12,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "maybe_adjust_light"
+    },
+    {
+      "site": 13,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "long",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "weight"
+    },
+    {
+      "site": 14,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "mkcorpstat"
+    },
+    {
+      "site": 15,
+      "function": null,
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "calleeType": "void (*)(const char *, ...)",
+      "owner": "place_object"
+    },
+    {
+      "site": 16,
+      "function": "panic",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "place_object"
+    },
+    {
+      "site": 17,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "long",
+        "long"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "peek_at_iced_corpse_age"
+    },
+    {
+      "site": 18,
+      "function": "pline",
+      "types": [
+        "char *",
+        "long"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "peek_at_iced_corpse_age"
+    },
+    {
+      "site": 19,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "obj_timer_checks"
+    },
+    {
+      "site": 20,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "obj_timer_checks"
+    },
+    {
+      "site": 21,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "remove_object"
+    },
+    {
+      "site": 22,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "obj_extract_self"
+    },
+    {
+      "site": 23,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "extract_nobj"
+    },
+    {
+      "site": 24,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "extract_nexthere"
+    },
+    {
+      "site": 25,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "add_to_minv"
+    },
+    {
+      "site": 26,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "add_to_container"
+    },
+    {
+      "site": 27,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "add_to_migration"
+    },
+    {
+      "site": 28,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "add_to_migration"
+    },
+    {
+      "site": 29,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "add_to_buried"
+    },
+    {
+      "site": 30,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "dealloc_obj"
+    },
+    {
+      "site": 31,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "dealloc_obj"
+    },
+    {
+      "site": 32,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "dealloc_obj"
+    },
+    {
+      "site": 33,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "dealloc_obj"
+    },
+    {
+      "site": 34,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "dealloc_obj"
+    },
+    {
+      "site": 35,
+      "function": "panic",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "dobjsfree"
+    },
+    {
+      "site": 36,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "hornoplenty"
+    },
+    {
+      "site": 37,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "hornoplenty"
+    },
+    {
+      "site": 38,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "hornoplenty"
+    },
+    {
+      "site": 39,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "hornoplenty"
+    },
+    {
+      "site": 40,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "obj_sanity_check"
+    },
+    {
+      "site": 41,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "obj_sanity_check"
+    },
+    {
+      "site": 42,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "int",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "obj_sanity_check"
+    },
+    {
+      "site": 43,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "obj_sanity_check"
+    },
+    {
+      "site": 44,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "objlist_sanity"
+    },
+    {
+      "site": 45,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "long"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "objlist_sanity"
+    },
+    {
+      "site": 46,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "unsigned int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "objlist_sanity"
+    },
+    {
+      "site": 47,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "unsigned int",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "objlist_sanity"
+    },
+    {
+      "site": 48,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "unsigned int",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "objlist_sanity"
+    },
+    {
+      "site": 49,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "unsigned int",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "objlist_sanity"
+    },
+    {
+      "site": 50,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "char *",
+        "unsigned int",
+        "char *",
+        "unsigned int",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "mon_obj_sanity"
+    },
+    {
+      "site": 51,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "insane_obj_bits"
+    },
+    {
+      "site": 52,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "where_name"
+    },
+    {
+      "site": 53,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "insane_object"
+    },
+    {
+      "site": 54,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "insane_object"
+    },
+    {
+      "site": 55,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "check_contained"
+    },
+    {
+      "site": 56,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "check_contained"
+    },
+    {
+      "site": 57,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "check_contained"
+    },
+    {
+      "site": 58,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int",
+        "long",
+        "unsigned int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "check_glob"
+    },
+    {
+      "site": 59,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "long"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "sanity_check_worn"
+    },
+    {
+      "site": 60,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "long"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "sanity_check_worn"
+    },
+    {
+      "site": 61,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "long",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "sanity_check_worn"
+    },
+    {
+      "site": 62,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "sanity_check_worn"
+    },
+    {
+      "site": 63,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "obj_nexto"
+    },
+    {
+      "site": 64,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "obj_absorb"
+    },
+    {
+      "site": 65,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "obj_meld"
+    },
+    {
+      "site": 66,
+      "function": "You_see",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "pudding_merge_message"
+    },
+    {
+      "site": 67,
+      "function": "Your",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "pudding_merge_message"
+    },
+    {
+      "site": 68,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "pudding_merge_message"
+    },
+    {
+      "site": 69,
+      "function": "You_hear",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "pudding_merge_message"
+    }
+  ],
+  "data": {
+    "mkobjprobs": {
+      "type": "struct icp[11]",
+      "initializer": "[[10,C.i8(C.WEAPON_CLASS)],[11,C.i8(C.ARMOR_CLASS)],[20,C.i8(C.FOOD_CLASS)],[8,C.i8(C.TOOL_CLASS)],[7,C.i8(C.GEM_CLASS)],[16,C.i8(C.POTION_CLASS)],[16,C.i8(C.SCROLL_CLASS)],[4,C.i8(C.SPBOOK_CLASS)],[4,C.i8(C.WAND_CLASS)],[3,C.i8(C.RING_CLASS)],[1,C.i8(C.AMULET_CLASS)]]"
+    },
+    "boxiprobs": {
+      "type": "struct icp[9]",
+      "initializer": "[[18,C.i8(C.GEM_CLASS)],[15,C.i8(C.FOOD_CLASS)],[18,C.i8(C.POTION_CLASS)],[18,C.i8(C.SCROLL_CLASS)],[12,C.i8(C.SPBOOK_CLASS)],[7,C.i8(C.COIN_CLASS)],[6,C.i8(C.WAND_CLASS)],[5,C.i8(C.RING_CLASS)],[1,C.i8(C.AMULET_CLASS)]]"
+    },
+    "rogueprobs": {
+      "type": "struct icp[7]",
+      "initializer": "[[12,C.i8(C.WEAPON_CLASS)],[12,C.i8(C.ARMOR_CLASS)],[22,C.i8(C.FOOD_CLASS)],[22,C.i8(C.POTION_CLASS)],[22,C.i8(C.SCROLL_CLASS)],[5,C.i8(C.WAND_CLASS)],[5,C.i8(C.RING_CLASS)]]"
+    },
+    "hellprobs": {
+      "type": "struct icp[10]",
+      "initializer": "[[20,C.i8(C.WEAPON_CLASS)],[20,C.i8(C.ARMOR_CLASS)],[16,C.i8(C.FOOD_CLASS)],[12,C.i8(C.TOOL_CLASS)],[10,C.i8(C.GEM_CLASS)],[1,C.i8(C.POTION_CLASS)],[1,C.i8(C.SCROLL_CLASS)],[8,C.i8(C.WAND_CLASS)],[8,C.i8(C.RING_CLASS)],[4,C.i8(C.AMULET_CLASS)]]"
+    },
+    "zerooextra": {
+      "type": "struct oextra",
+      "initializer": "[0,C.ptr(0),C.ptr(0),C.u32(0)]"
+    },
+    "alteration_verbs": {
+      "type": "char *[20]",
+      "initializer": "[C.literal(\"cancel\"),C.literal(\"drain\"),C.literal(\"uncharge\"),C.literal(\"unbless\"),C.literal(\"uncurse\"),C.literal(\"disenchant\"),C.literal(\"degrade\"),C.literal(\"dilute\"),C.literal(\"erase\"),C.literal(\"burn\"),C.literal(\"neutralize\"),C.literal(\"destroy\"),C.literal(\"splatter\"),C.literal(\"bite\"),C.literal(\"open\"),C.literal(\"break the lock on\"),C.literal(\"rust\"),C.literal(\"rot\"),C.literal(\"tarnish\"),C.literal(\"crack\")]"
+    },
+    "dknowns": {
+      "type": "char[10]",
+      "initializer": "[C.i8(C.WAND_CLASS),C.i8(C.RING_CLASS),C.i8(C.POTION_CLASS),C.i8(C.SCROLL_CLASS),C.i8(C.GEM_CLASS),C.i8(C.SPBOOK_CLASS),C.i8(C.WEAPON_CLASS),C.i8(C.TOOL_CLASS),C.i8(C.VENOM_CLASS),C.i8(0)]"
+    },
+    "treefruits": {
+      "type": "int[5]",
+      "initializer": "[C.APPLE,C.ORANGE,C.PEAR,C.BANANA,C.EUCALYPTUS_LEAF]"
+    },
+    "ofmt0": {
+      "type": "char[17]",
+      "initializer": "C.literal(\"%s obj %s %s: %s\")"
+    },
+    "ofmt3": {
+      "type": "char[24]",
+      "initializer": "C.literal(\"%s [not null] %s %s: %s\")"
+    },
+    "mfmt1": {
+      "type": "char[18]",
+      "initializer": "C.literal(\"%s obj %s %s (%s)\")"
+    },
+    "mfmt2": {
+      "type": "char[24]",
+      "initializer": "C.literal(\"%s obj %s %s (%s) *not*\")"
+    },
+    "obj_state_names": {
+      "type": "char *[10]",
+      "initializer": "[C.literal(\"free\"),C.literal(\"floor\"),C.literal(\"contained\"),C.literal(\"invent\"),C.literal(\"minvent\"),C.literal(\"migrating\"),C.literal(\"buried\"),C.literal(\"onbill\"),C.literal(\"luafree\"),C.literal(\"deleted\")]"
+    }
+  },
+  "localStatics": [
+    {
+      "owner": "where_name",
+      "name": "unknown",
+      "type": "char[32]",
+      "initializer": null
+    },
+    {
+      "owner": "sanity_check_worn",
+      "name": "wearbits",
+      "type": "unsigned long[18]",
+      "initializer": "[C.u64(1n),C.u64(2n),C.u64(4n),C.u64(8n),C.u64(16n),C.u64(32n),C.u64(64n),C.u64(256n),C.u64(512n),C.u64(1024n),C.u64(65536n),C.u64(131072n),C.u64(262144n),C.u64(524288n),C.u64(1048576n),C.u64(2097152n),C.u64(4194304n),C.u64(0)]"
+    }
+  ],
+  "localStaticPointers": [],
+  "backings": [
+    {
+      "name": "mkobjprobs",
+      "type": "struct icp[11]",
+      "symbol": "mkobj_data_mkobjprobs"
+    },
+    {
+      "name": "boxiprobs",
+      "type": "struct icp[9]",
+      "symbol": "mkobj_data_boxiprobs"
+    },
+    {
+      "name": "rogueprobs",
+      "type": "struct icp[7]",
+      "symbol": "mkobj_data_rogueprobs"
+    },
+    {
+      "name": "hellprobs",
+      "type": "struct icp[10]",
+      "symbol": "mkobj_data_hellprobs"
+    },
+    {
+      "name": "zerooextra",
+      "type": "struct oextra",
+      "symbol": "mkobj_data_zerooextra"
+    },
+    {
+      "name": "alteration_verbs",
+      "type": "char *[20]",
+      "symbol": "mkobj_data_alteration_verbs"
+    },
+    {
+      "name": "dknowns",
+      "type": "char[10]",
+      "symbol": "mkobj_data_dknowns"
+    },
+    {
+      "name": "treefruits",
+      "type": "int[5]",
+      "symbol": "mkobj_data_treefruits"
+    },
+    {
+      "name": "ofmt0",
+      "type": "char[17]",
+      "symbol": "mkobj_data_ofmt0"
+    },
+    {
+      "name": "ofmt3",
+      "type": "char[24]",
+      "symbol": "mkobj_data_ofmt3"
+    },
+    {
+      "name": "mfmt1",
+      "type": "char[18]",
+      "symbol": "mkobj_data_mfmt1"
+    },
+    {
+      "name": "mfmt2",
+      "type": "char[24]",
+      "symbol": "mkobj_data_mfmt2"
+    },
+    {
+      "name": "obj_state_names",
+      "type": "char *[10]",
+      "symbol": "mkobj_data_obj_state_names"
+    },
+    {
+      "name": "where_name.unknown",
+      "type": "char[32]",
+      "symbol": "mkobj_local_where_name_unknown"
+    },
+    {
+      "name": "sanity_check_worn.wearbits",
+      "type": "unsigned long[18]",
+      "symbol": "mkobj_local_sanity_check_worn_wearbits"
+    }
+  ],
+  "sourceParameters": {
+    "init_oextra": [
+      {
+        "name": "oex",
+        "ctype": "struct oextra *",
+        "canonical": "struct oextra *"
+      }
+    ],
+    "newoextra": [],
+    "dealloc_oextra": [
+      {
+        "name": "o",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "newomonst": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "free_omonst": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "newomid": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "free_omid": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "new_omailcmd": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "response_cmd",
+        "ctype": "const char *",
+        "canonical": "char *"
+      }
+    ],
+    "free_omailcmd": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "may_generate_eroded": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "mkobj_erosions": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "mkobj_at": [
+      {
+        "name": "let",
+        "ctype": "char",
+        "canonical": "char"
+      },
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "artif",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      }
+    ],
+    "mksobj_at": [
+      {
+        "name": "otyp",
+        "ctype": "int",
+        "canonical": "int"
+      },
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "init",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      },
+      {
+        "name": "artif",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      }
+    ],
+    "mksobj_migr_to_species": [
+      {
+        "name": "otyp",
+        "ctype": "int",
+        "canonical": "int"
+      },
+      {
+        "name": "mflags2",
+        "ctype": "unsigned int",
+        "canonical": "unsigned int"
+      },
+      {
+        "name": "init",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      },
+      {
+        "name": "artif",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      }
+    ],
+    "mkobj": [
+      {
+        "name": "oclass",
+        "ctype": "int",
+        "canonical": "int"
+      },
+      {
+        "name": "artif",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      }
+    ],
+    "mkbox_cnts": [
+      {
+        "name": "box",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "rndmonnum": [],
+    "rndmonnum_adj": [
+      {
+        "name": "minadj",
+        "ctype": "int",
+        "canonical": "int"
+      },
+      {
+        "name": "maxadj",
+        "ctype": "int",
+        "canonical": "int"
+      }
+    ],
+    "copy_oextra": [
+      {
+        "name": "obj2",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "obj1",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "splitobj": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "num",
+        "ctype": "long",
+        "canonical": "long"
+      }
+    ],
+    "next_ident": [],
+    "nextoid": [
+      {
+        "name": "oldobj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "newobj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "unsplitobj": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "clear_splitobjs": [],
+    "replace_object": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "unknwn_contnr_contents": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "bill_dummy_object": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "costly_alteration": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "alter_type",
+        "ctype": "int",
+        "canonical": "int"
+      }
+    ],
+    "clear_dknown": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "unknow_object": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "mksobj_init": [
+      {
+        "name": "obj",
+        "ctype": "struct obj **",
+        "canonical": "struct obj **"
+      },
+      {
+        "name": "artif",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      }
+    ],
+    "mksobj": [
+      {
+        "name": "otyp",
+        "ctype": "int",
+        "canonical": "int"
+      },
+      {
+        "name": "init",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      },
+      {
+        "name": "artif",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      }
+    ],
+    "stone_object_type": [
+      {
+        "name": "mappearance",
+        "ctype": "unsigned int",
+        "canonical": "unsigned int"
+      }
+    ],
+    "stone_furniture_type": [
+      {
+        "name": "mappearance",
+        "ctype": "unsigned int",
+        "canonical": "unsigned int"
+      }
+    ],
+    "set_corpsenm": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "id",
+        "ctype": "int",
+        "canonical": "int"
+      }
+    ],
+    "rider_revival_time": [
+      {
+        "name": "body",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "retry",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      }
+    ],
+    "start_corpse_timeout": [
+      {
+        "name": "body",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "item_on_ice": [
+      {
+        "name": "item",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "start_glob_timeout": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "when",
+        "ctype": "long",
+        "canonical": "long"
+      }
+    ],
+    "shrink_glob": [
+      {
+        "name": "arg",
+        "ctype": "anything *",
+        "canonical": "union any *"
+      },
+      {
+        "name": "expire_time",
+        "ctype": "long",
+        "canonical": "long"
+      }
+    ],
+    "shrinking_glob_gone": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "maybe_adjust_light": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "old_range",
+        "ctype": "int",
+        "canonical": "int"
+      }
+    ],
+    "bless": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "unbless": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "curse": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "uncurse": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "blessorcurse": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "chance",
+        "ctype": "int",
+        "canonical": "int"
+      }
+    ],
+    "bcsign": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "set_bknown": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "onoff",
+        "ctype": "unsigned int",
+        "canonical": "unsigned int"
+      }
+    ],
+    "weight": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "rnd_treefruit_at": [
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      }
+    ],
+    "is_treefruit": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "mkgold": [
+      {
+        "name": "amount",
+        "ctype": "long",
+        "canonical": "long"
+      },
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      }
+    ],
+    "fixup_oil": [
+      {
+        "name": "potion",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "source",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "mkcorpstat": [
+      {
+        "name": "objtype",
+        "ctype": "int",
+        "canonical": "int"
+      },
+      {
+        "name": "mtmp",
+        "ctype": "struct monst *",
+        "canonical": "struct monst *"
+      },
+      {
+        "name": "ptr",
+        "ctype": "struct permonst *",
+        "canonical": "struct permonst *"
+      },
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "corpstatflags",
+        "ctype": "unsigned int",
+        "canonical": "unsigned int"
+      }
+    ],
+    "corpse_revive_type": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "obj_attach_mid": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "mid",
+        "ctype": "unsigned int",
+        "canonical": "unsigned int"
+      }
+    ],
+    "save_mtraits": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "mtmp",
+        "ctype": "struct monst *",
+        "canonical": "struct monst *"
+      }
+    ],
+    "get_mtraits": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "copyof",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      }
+    ],
+    "mk_tt_object": [
+      {
+        "name": "objtype",
+        "ctype": "int",
+        "canonical": "int"
+      },
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      }
+    ],
+    "mk_named_object": [
+      {
+        "name": "objtype",
+        "ctype": "int",
+        "canonical": "int"
+      },
+      {
+        "name": "ptr",
+        "ctype": "struct permonst *",
+        "canonical": "struct permonst *"
+      },
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "nm",
+        "ctype": "const char *",
+        "canonical": "char *"
+      }
+    ],
+    "is_flammable": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "is_rottable": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "place_object": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      }
+    ],
+    "recreate_pile_at": [
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      }
+    ],
+    "obj_ice_effects": [
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "do_buried",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      }
+    ],
+    "peek_at_iced_corpse_age": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "obj_timer_checks": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "force",
+        "ctype": "int",
+        "canonical": "int"
+      }
+    ],
+    "remove_object": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "discard_minvent": [
+      {
+        "name": "mtmp",
+        "ctype": "struct monst *",
+        "canonical": "struct monst *"
+      },
+      {
+        "name": "uncreate_artifacts",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      }
+    ],
+    "obj_extract_self": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "extract_nobj": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "head_ptr",
+        "ctype": "struct obj **",
+        "canonical": "struct obj **"
+      }
+    ],
+    "extract_nexthere": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "head_ptr",
+        "ctype": "struct obj **",
+        "canonical": "struct obj **"
+      }
+    ],
+    "add_to_minv": [
+      {
+        "name": "mon",
+        "ctype": "struct monst *",
+        "canonical": "struct monst *"
+      },
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "add_to_container": [
+      {
+        "name": "container",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "add_to_migration": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "add_to_buried": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "container_weight": [
+      {
+        "name": "object",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "dealloc_obj": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "dealloc_obj_real": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "dobjsfree": [],
+    "hornoplenty": [
+      {
+        "name": "horn",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "tipping",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      },
+      {
+        "name": "targetbox",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "obj_sanity_check": [],
+    "objlist_sanity": [
+      {
+        "name": "objlist",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "wheretype",
+        "ctype": "int",
+        "canonical": "int"
+      },
+      {
+        "name": "mesg",
+        "ctype": "const char *",
+        "canonical": "char *"
+      }
+    ],
+    "shop_obj_sanity": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "mesg",
+        "ctype": "const char *",
+        "canonical": "char *"
+      }
+    ],
+    "mon_obj_sanity": [
+      {
+        "name": "monlist",
+        "ctype": "struct monst *",
+        "canonical": "struct monst *"
+      },
+      {
+        "name": "mesg",
+        "ctype": "const char *",
+        "canonical": "char *"
+      }
+    ],
+    "insane_obj_bits": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "mon",
+        "ctype": "struct monst *",
+        "canonical": "struct monst *"
+      }
+    ],
+    "nomerge_exception": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "where_name": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "insane_object": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "fmt",
+        "ctype": "const char *",
+        "canonical": "char *"
+      },
+      {
+        "name": "mesg",
+        "ctype": "const char *",
+        "canonical": "char *"
+      },
+      {
+        "name": "mon",
+        "ctype": "struct monst *",
+        "canonical": "struct monst *"
+      }
+    ],
+    "init_dummyobj": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "otyp",
+        "ctype": "short",
+        "canonical": "short"
+      },
+      {
+        "name": "oquan",
+        "ctype": "long",
+        "canonical": "long"
+      }
+    ],
+    "check_contained": [
+      {
+        "name": "container",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "mesg",
+        "ctype": "const char *",
+        "canonical": "char *"
+      }
+    ],
+    "check_glob": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "mesg",
+        "ctype": "const char *",
+        "canonical": "char *"
+      }
+    ],
+    "sanity_check_worn": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "obj_nexto": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ],
+    "obj_nexto_xy": [
+      {
+        "name": "obj",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "x",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "y",
+        "ctype": "coordxy",
+        "canonical": "short"
+      },
+      {
+        "name": "recurs",
+        "ctype": "boolean",
+        "canonical": "signed char"
+      }
+    ],
+    "obj_absorb": [
+      {
+        "name": "obj1",
+        "ctype": "struct obj **",
+        "canonical": "struct obj **"
+      },
+      {
+        "name": "obj2",
+        "ctype": "struct obj **",
+        "canonical": "struct obj **"
+      }
+    ],
+    "obj_meld": [
+      {
+        "name": "obj1",
+        "ctype": "struct obj **",
+        "canonical": "struct obj **"
+      },
+      {
+        "name": "obj2",
+        "ctype": "struct obj **",
+        "canonical": "struct obj **"
+      }
+    ],
+    "pudding_merge_message": [
+      {
+        "name": "otmp",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      },
+      {
+        "name": "otmp2",
+        "ctype": "struct obj *",
+        "canonical": "struct obj *"
+      }
+    ]
+  },
+  "sourceReturns": {
+    "init_oextra": "void",
+    "newoextra": "struct oextra *",
+    "dealloc_oextra": "void",
+    "newomonst": "void",
+    "free_omonst": "void",
+    "newomid": "void",
+    "free_omid": "void",
+    "new_omailcmd": "void",
+    "free_omailcmd": "void",
+    "may_generate_eroded": "signed char",
+    "mkobj_erosions": "void",
+    "mkobj_at": "struct obj *",
+    "mksobj_at": "struct obj *",
+    "mksobj_migr_to_species": "struct obj *",
+    "mkobj": "struct obj *",
+    "mkbox_cnts": "void",
+    "rndmonnum": "int",
+    "rndmonnum_adj": "int",
+    "copy_oextra": "void",
+    "splitobj": "struct obj *",
+    "next_ident": "unsigned int",
+    "nextoid": "unsigned int",
+    "unsplitobj": "struct obj *",
+    "clear_splitobjs": "void",
+    "replace_object": "void",
+    "unknwn_contnr_contents": "struct obj *",
+    "bill_dummy_object": "void",
+    "costly_alteration": "void",
+    "clear_dknown": "void",
+    "unknow_object": "void",
+    "mksobj_init": "void",
+    "mksobj": "struct obj *",
+    "stone_object_type": "signed char",
+    "stone_furniture_type": "signed char",
+    "set_corpsenm": "void",
+    "rider_revival_time": "long",
+    "start_corpse_timeout": "void",
+    "item_on_ice": "int",
+    "start_glob_timeout": "void",
+    "shrink_glob": "void",
+    "shrinking_glob_gone": "void",
+    "maybe_adjust_light": "void",
+    "bless": "void",
+    "unbless": "void",
+    "curse": "void",
+    "uncurse": "void",
+    "blessorcurse": "void",
+    "bcsign": "int",
+    "set_bknown": "void",
+    "weight": "int",
+    "rnd_treefruit_at": "struct obj *",
+    "is_treefruit": "signed char",
+    "mkgold": "struct obj *",
+    "fixup_oil": "void",
+    "mkcorpstat": "struct obj *",
+    "corpse_revive_type": "int",
+    "obj_attach_mid": "struct obj *",
+    "save_mtraits": "struct obj *",
+    "get_mtraits": "struct monst *",
+    "mk_tt_object": "struct obj *",
+    "mk_named_object": "struct obj *",
+    "is_flammable": "signed char",
+    "is_rottable": "signed char",
+    "place_object": "void",
+    "recreate_pile_at": "void",
+    "obj_ice_effects": "void",
+    "peek_at_iced_corpse_age": "long",
+    "obj_timer_checks": "void",
+    "remove_object": "void",
+    "discard_minvent": "void",
+    "obj_extract_self": "void",
+    "extract_nobj": "void",
+    "extract_nexthere": "void",
+    "add_to_minv": "int",
+    "add_to_container": "struct obj *",
+    "add_to_migration": "void",
+    "add_to_buried": "void",
+    "container_weight": "void",
+    "dealloc_obj": "void",
+    "dealloc_obj_real": "void",
+    "dobjsfree": "void",
+    "hornoplenty": "int",
+    "obj_sanity_check": "void",
+    "objlist_sanity": "void",
+    "shop_obj_sanity": "void",
+    "mon_obj_sanity": "void",
+    "insane_obj_bits": "void",
+    "nomerge_exception": "signed char",
+    "where_name": "char *",
+    "insane_object": "void",
+    "init_dummyobj": "struct obj *",
+    "check_contained": "void",
+    "check_glob": "void",
+    "sanity_check_worn": "void",
+    "obj_nexto": "struct obj *",
+    "obj_nexto_xy": "struct obj *",
+    "obj_absorb": "struct obj *",
+    "obj_meld": "struct obj *",
+    "pudding_merge_message": "void"
+  },
+  "literals": [
+    "",
+    " bypass",
+    " glob %d,quan=%ld,owt=%u ",
+    " held by mon %s (%s)",
+    " in_use",
+    " inside your pack",
+    " nomerge",
+    " nxtbldr",
+    " obj ",
+    " slightly",
+    "%%s boulder@<%d,%d> %%s %%s: not on top",
+    "%%s boulder@<%d,%d> %%s %%s: on/in %s",
+    "%%s obj@<%d,%d> %%s %%s: %%s@<%d,%d>",
+    "%s",
+    "%s %s %s%s.",
+    "%s %s out.",
+    "%s %s to the %s.",
+    "%s %s%s lighter.",
+    "%s %s.",
+    "%s [not null] %s %s: %s",
+    "%s fades away.",
+    "%s is no longer on ice at <%d,%d>.",
+    "%s is now on ice at <%d,%d>.",
+    "%s no_charge obj inside untended shop! %s %s: %s",
+    "%s no_charge obj not inside tended shop! %s %s: %s",
+    "%s no_charge obj not on floor! %s %s: %s",
+    "%s no_charge obj on shop bill! %s %s: %s",
+    "%s obj %s %s (%s)",
+    "%s obj %s %s (%s) *not*",
+    "%s obj %s %s: %s",
+    "%s obj %s in container %s, not %s",
+    "%s obj both unpaid and no_charge! %s %s: %s",
+    "%s obj contains something! %s %s: %s",
+    "%s unpaid obj inside untended shop! %s %s: %s",
+    "%s unpaid obj not carried! %s %s: %s",
+    "%s unpaid obj not inside tended shop! %s %s: %s",
+    "%s unpaid obj not on shop bill! %s %s: %s",
+    "(null)",
+    "A ",
+    "A potion",
+    "Calculating weight of %ld %s?",
+    "Effective age of corpse: %ld.",
+    "It",
+    "Oops!  %s away from you!",
+    "Oops!  %s out of your reach!",
+    "Oops!  %s to the floor!",
+    "Some food",
+    "Some potions",
+    "The ",
+    "The %s age has ice modifications: otmp->age = %ld, returning %ld.",
+    "The %s%s coalesce%s.",
+    "They",
+    "You %s %s %s, you pay for %s!",
+    "You %s %s, you pay for %s!",
+    "a faint sloshing sound.",
+    "add_to_buried: obj where=%d, not free",
+    "add_to_container: obj where=%d, not free",
+    "add_to_migration: obj where=%d, not free",
+    "add_to_minv: obj where=%d, not free",
+    "adjacent ",
+    "alt weapon",
+    "alternate weapon",
+    "amulet",
+    "armor",
+    "bad horn o' plenty",
+    "ball",
+    "becomes",
+    "bill sanity",
+    "bite",
+    "blessorcurse",
+    "blindfold",
+    "boots",
+    "boulder sanity",
+    "break the lock on",
+    "brighter",
+    "buried",
+    "buried sanity",
+    "burn",
+    "cancel",
+    "chain",
+    "chained ball",
+    "cloak",
+    "contained",
+    "contained ",
+    "copy_oextra",
+    "crack",
+    "current_wand sanity",
+    "dealloc_obj with cobj",
+    "dealloc_obj with hands_obj",
+    "dealloc_obj with nobj",
+    "dealloc_obj: obj already deleted (type=%d)",
+    "dealloc_obj: obj not free (type=%d, where=%d)",
+    "degrade",
+    "deleted",
+    "deleted object sanity",
+    "destroy",
+    "dilute",
+    "disenchant",
+    "dissolves completely",
+    "dobjsfree: obj where=%d, not OBJ_DELETED",
+    "drain",
+    "drop",
+    "erase",
+    "extract_nexthere: object lost",
+    "extract_nobj: object lost",
+    "failed sanity check: container holds its parent",
+    "failed sanity check: container holds itself",
+    "flagged%s%s%s%s",
+    "floor",
+    "floor sanity",
+    "free",
+    "gloves",
+    "gm.mydogs sanity [not empty]",
+    "has_omonst(obj2)",
+    "helm",
+    "hornoplenty",
+    "how_lost=%d obj in inventory!",
+    "invalid alteration type (%d)",
+    "invent",
+    "invent sanity",
+    "it",
+    "kickedobj sanity",
+    "lava",
+    "leashmon:%u %s leashed by %s leash,",
+    "leashmon:%u no monst for %s leash,",
+    "leashmon=%u %s not leashed,",
+    "leashmon=%u no monst,",
+    "left ring",
+    "less brightly",
+    "location sanity",
+    "luafree",
+    "making corpstat type %d",
+    "migrating",
+    "migrating minvent sanity",
+    "migrating sanity",
+    "minvent",
+    "minvent sanity",
+    "mk_tt_object",
+    "mkbox_cnts",
+    "mkgold",
+    "mkobj",
+    "mkobj.c",
+    "mkobj_erosions",
+    "mksobj",
+    "mksobj tried to make type %d, class %d.",
+    "mksobj_init",
+    "monst (%s: %u) wielding %s (%u) not in %s inventory",
+    "monst alt weapon?",
+    "monst quiver?",
+    "much ",
+    "mydogs minvent sanity",
+    "nested ",
+    "neutralize",
+    "next_ident",
+    "non-empty container",
+    "nowhere",
+    "null!",
+    "obj_absorb: not called with two actual objects",
+    "obj_extract_self, where=%d",
+    "obj_meld",
+    "obj_meld: not called with two actual objects",
+    "obj_nexto: wasn't given an object to check",
+    "obj_nexto_xy",
+    "onbill",
+    "open",
+    "pack reaches out and grabs something!",
+    "parts of the floor melting!",
+    "place_object",
+    "place_object: \"%s\" [%d] off map <%d,%d>",
+    "place_object: obj \"%s\" [%d] not free",
+    "primary weapon",
+    "probtype error, oclass=%d i=%d",
+    "quiver",
+    "remove_object: obj where=%d, not on floor",
+    "replace_object: obj position",
+    "returning_missile sanity",
+    "rider_revival_time",
+    "right ring",
+    "ring",
+    "rnd_treefruit_at",
+    "rndmonnum_adj",
+    "rot",
+    "rust",
+    "saddle",
+    "secondary weapon",
+    "seems",
+    "shield",
+    "shine",
+    "shirt",
+    "shrink obj ",
+    "shrink_glob for non-glob [%d: %s]?",
+    "shrinks",
+    "skin",
+    "slip",
+    "spill",
+    "splatter",
+    "splitobj [cobj=%s num=%ld quan=%ld]",
+    "start_corpse_timeout",
+    "start_glob_timeout",
+    "start_glob_timeout for non-glob [%d: %s]?",
+    "suit",
+    "tarnish",
+    "that",
+    "them",
+    "those",
+    "thrownobj sanity",
+    "unbless",
+    "uncharge",
+    "uncurse",
+    "unknown[%d]",
+    "unpaid object migrating to another level? [%s]",
+    "water",
+    "weapon",
+    "worn (%s %s)",
+    "worn mask (bogus)) 0x%08lx",
+    "worn mask (multiple) 0x%08lx",
+    "worn mask 0x%08lx",
+    "worn mask 0x%08lx != %s",
+    "x >= 0 && x < COLNO && y >= 0 && y < ROWNO"
+  ],
+  "literalBytes": 4084,
+  "functionTypes": {
+    "init_oextra": "void (struct oextra *)",
+    "newoextra": "struct oextra *(void)",
+    "dealloc_oextra": "void (struct obj *)",
+    "newomonst": "void (struct obj *)",
+    "free_omonst": "void (struct obj *)",
+    "newomid": "void (struct obj *)",
+    "free_omid": "void (struct obj *)",
+    "new_omailcmd": "void (struct obj *, const char *)",
+    "free_omailcmd": "void (struct obj *)",
+    "may_generate_eroded": "boolean (struct obj *)",
+    "mkobj_erosions": "void (struct obj *)",
+    "mkobj_at": "struct obj *(char, coordxy, coordxy, boolean)",
+    "mksobj_at": "struct obj *(int, coordxy, coordxy, boolean, boolean)",
+    "mksobj_migr_to_species": "struct obj *(int, unsigned int, boolean, boolean)",
+    "mkobj": "struct obj *(int, boolean)",
+    "mkbox_cnts": "void (struct obj *)",
+    "rndmonnum": "int (void)",
+    "rndmonnum_adj": "int (int, int)",
+    "copy_oextra": "void (struct obj *, struct obj *)",
+    "splitobj": "struct obj *(struct obj *, long)",
+    "next_ident": "unsigned int (void)",
+    "nextoid": "unsigned int (struct obj *, struct obj *)",
+    "unsplitobj": "struct obj *(struct obj *)",
+    "clear_splitobjs": "void (void)",
+    "replace_object": "void (struct obj *, struct obj *)",
+    "unknwn_contnr_contents": "struct obj *(struct obj *)",
+    "bill_dummy_object": "void (struct obj *)",
+    "costly_alteration": "void (struct obj *, int)",
+    "clear_dknown": "void (struct obj *)",
+    "unknow_object": "void (struct obj *)",
+    "mksobj_init": "void (struct obj **, boolean)",
+    "mksobj": "struct obj *(int, boolean, boolean)",
+    "stone_object_type": "boolean (unsigned int)",
+    "stone_furniture_type": "boolean (unsigned int)",
+    "set_corpsenm": "void (struct obj *, int)",
+    "rider_revival_time": "long (struct obj *, boolean)",
+    "start_corpse_timeout": "void (struct obj *)",
+    "item_on_ice": "int (struct obj *)",
+    "start_glob_timeout": "void (struct obj *, long)",
+    "shrink_glob": "void (anything *, long)",
+    "shrinking_glob_gone": "void (struct obj *)",
+    "maybe_adjust_light": "void (struct obj *, int)",
+    "bless": "void (struct obj *)",
+    "unbless": "void (struct obj *)",
+    "curse": "void (struct obj *)",
+    "uncurse": "void (struct obj *)",
+    "blessorcurse": "void (struct obj *, int)",
+    "bcsign": "int (struct obj *)",
+    "set_bknown": "void (struct obj *, unsigned int)",
+    "weight": "int (struct obj *)",
+    "rnd_treefruit_at": "struct obj *(coordxy, coordxy)",
+    "is_treefruit": "boolean (struct obj *)",
+    "mkgold": "struct obj *(long, coordxy, coordxy)",
+    "fixup_oil": "void (struct obj *, struct obj *)",
+    "mkcorpstat": "struct obj *(int, struct monst *, struct permonst *, coordxy, coordxy, unsigned int)",
+    "corpse_revive_type": "int (struct obj *)",
+    "obj_attach_mid": "struct obj *(struct obj *, unsigned int)",
+    "save_mtraits": "struct obj *(struct obj *, struct monst *)",
+    "get_mtraits": "struct monst *(struct obj *, boolean)",
+    "mk_tt_object": "struct obj *(int, coordxy, coordxy)",
+    "mk_named_object": "struct obj *(int, struct permonst *, coordxy, coordxy, const char *)",
+    "is_flammable": "boolean (struct obj *)",
+    "is_rottable": "boolean (struct obj *)",
+    "place_object": "void (struct obj *, coordxy, coordxy)",
+    "recreate_pile_at": "void (coordxy, coordxy)",
+    "obj_ice_effects": "void (coordxy, coordxy, boolean)",
+    "peek_at_iced_corpse_age": "long (struct obj *)",
+    "obj_timer_checks": "void (struct obj *, coordxy, coordxy, int)",
+    "remove_object": "void (struct obj *)",
+    "discard_minvent": "void (struct monst *, boolean)",
+    "obj_extract_self": "void (struct obj *)",
+    "extract_nobj": "void (struct obj *, struct obj **)",
+    "extract_nexthere": "void (struct obj *, struct obj **)",
+    "add_to_minv": "int (struct monst *, struct obj *)",
+    "add_to_container": "struct obj *(struct obj *, struct obj *)",
+    "add_to_migration": "void (struct obj *)",
+    "add_to_buried": "void (struct obj *)",
+    "container_weight": "void (struct obj *)",
+    "dealloc_obj": "void (struct obj *)",
+    "dealloc_obj_real": "void (struct obj *)",
+    "dobjsfree": "void (void)",
+    "hornoplenty": "int (struct obj *, boolean, struct obj *)",
+    "obj_sanity_check": "void (void)",
+    "objlist_sanity": "void (struct obj *, int, const char *)",
+    "shop_obj_sanity": "void (struct obj *, const char *)",
+    "mon_obj_sanity": "void (struct monst *, const char *)",
+    "insane_obj_bits": "void (struct obj *, struct monst *)",
+    "nomerge_exception": "boolean (struct obj *)",
+    "where_name": "const char *(struct obj *)",
+    "insane_object": "void (struct obj *, const char *, const char *, struct monst *)",
+    "init_dummyobj": "struct obj *(struct obj *, short, long)",
+    "check_contained": "void (struct obj *, const char *)",
+    "check_glob": "void (struct obj *, const char *)",
+    "sanity_check_worn": "void (struct obj *)",
+    "obj_nexto": "struct obj *(struct obj *)",
+    "obj_nexto_xy": "struct obj *(struct obj *, coordxy, coordxy, boolean)",
+    "obj_absorb": "struct obj *(struct obj **, struct obj **)",
+    "obj_meld": "struct obj *(struct obj **, struct obj **)",
+    "pudding_merge_message": "void (struct obj *, struct obj *)"
+  },
+  "functionPointers": {
+    "panic": "void (const char *, ...) __attribute__((noreturn))",
+    "impossible": "void (const char *, ...)"
+  },
+  "callbackTypes": [
+    "void (const char *, ...)"
+  ],
+  "functionAstHashes": {
+    "init_oextra": "10aa55b9ee8d85f393c6f4c0882bbc23206688016b2ba4e4e82f757f3fb4f51d",
+    "newoextra": "26f338e5884a3107e1729aacaa4f69e14d21a904dd3336ff53247a248a6a52b2",
+    "dealloc_oextra": "df6b0b1dd9ec8debb273c7df7fcd21a2466b682ac2ec4837101da723cb56274a",
+    "newomonst": "9a1f77a2dd961243336a2a98817dd37548be0ff84e414b635495f562a6a96e38",
+    "free_omonst": "bb6b9cf294471a7b76f74b099c09497269546477cc36f064dd01317d98a602d4",
+    "newomid": "7c1c42c9feb7ea1c33ee64ec433d538589f72de946b48199d07c4cfe5f2a7e2c",
+    "free_omid": "720875a2d5c30581332b5581fd5a1465609a6f8d0e2af8f35e7e29e9f959d822",
+    "new_omailcmd": "5b4e5806793f2b62aec775ccb15ed8b9b2b056c204b72850c72fbb696605787a",
+    "free_omailcmd": "e12f04ae3a629320c5066b299a66726ba92ba8477640827ed8b27b152f099124",
+    "may_generate_eroded": "4cabdd31718a59049bc5c84171ef2667ab69ea08e0be9607e5dd2ac104c98e5a",
+    "mkobj_erosions": "8b3417ad4f6fb82b3366d591a1ceab224cf12a08fa9c7727d4fde26160abd60e",
+    "mkobj_at": "8dff5e8cb443801e53fae940e690e6eb9d2e0c58145822b546d329df52b41195",
+    "mksobj_at": "3b8ddf30939d97b9dea37eb3ea5b959d7c7973ba7d6cadc32575d89fd294682b",
+    "mksobj_migr_to_species": "2dff2586dbb62e14c0b55bad61a4b98a4bcafbf2f848477520eea35380e23f64",
+    "mkobj": "b9a5990a0d9524a54ad348ff4ce3cf46608459a94dde006d4132d041c42e0683",
+    "mkbox_cnts": "5a5517c53e2e49facb517a2d47076c2f1a5163d8948b7496ecba381baafff7bb",
+    "rndmonnum": "8a76762b3a636e6b1d63a0f1231d99db00f626d80efa64cfd47c07d10eff87a1",
+    "rndmonnum_adj": "42a43accc2daef06b82fdf1ef820669149a79a3374d0aeaa557fdbb955ec3bc9",
+    "copy_oextra": "62fa56e07a4cfda17ec44017d9b1c69807cde0bb055708d1035703c55e2f578a",
+    "splitobj": "6eab31c9e28a0f31dd3796f4fd7fb09d00443408520a9ed792db08feace5981c",
+    "next_ident": "3dd32dfc747f1862525e73a7c95d839de1c60d8f85d9dfc535c0acb39470fa36",
+    "nextoid": "07f6a232233df085e65fc818d48af2cc92ec3dc0f73bbd2d031ad769170396e8",
+    "unsplitobj": "2baa5e1ab45248cdfff3b94feb1657a0d214c2fd40460a8f0777434bd38fb0a4",
+    "clear_splitobjs": "bccc9386afbb5a74d61cafe3e4064475b1727933850d1345a4d0573a7cacf460",
+    "replace_object": "702f94e3be100fb576d744899579170cc02a190a0e4b1afa6f1d3e1f05e48b45",
+    "unknwn_contnr_contents": "a4aec87625b9df8f624575085ed15d91982497009f55c567a7c8c2bd24b707cc",
+    "bill_dummy_object": "869ef6472a66b4549030713f4889e31fbdece89f6dab90d9a59b5c7e272b9ea1",
+    "costly_alteration": "369ee9664daa7a5370fc1c570862d85e00a0ecd192fc3f4baa1743adc184219d",
+    "clear_dknown": "6b3aecd7342ec799cf1a73fd2a2bd188ec6900409ed48d0d42d7612da2e11a6c",
+    "unknow_object": "6f31b255ea39dcb237ad5431def3a2abfd60e9822893803e7ef28885c806d011",
+    "mksobj_init": "e53a7a0154c6b05a87f9b2921b72c639168b28b4754520c048825aaf46e3e6df",
+    "mksobj": "75f872097671411ce1133dc41a85f76ae977548241d76da451468a48f6f2c4f0",
+    "stone_object_type": "b86bc22e2d7c3f1d03c3eb8795b4534e498ea4e0ffb187a6d740b745f4f32067",
+    "stone_furniture_type": "6bc2b15d35558dd7ca63b186ac3f1f5339a08a67ed08b73cc2ca5b69ae7fc35d",
+    "set_corpsenm": "b5ee24593ad4809e6fb443c765db51fc84e6cf3a9a9c716033e1c86870ee68f0",
+    "rider_revival_time": "8579c433cfd5ea5304eb86d678dd934ec64bee5bfa6f309e881ea902cb008db1",
+    "start_corpse_timeout": "e361da1affdc0602f5ee5f230d17c77eae437a7fe34ae95485abf44d74f7b55f",
+    "item_on_ice": "a2ae5fa900e5f092767f34a62f11d97c5bca0f6bea626750976a8981177ed46c",
+    "start_glob_timeout": "9fe7704c435ceb4d3b32c74977f3369b993b62513a8ed653d98e1090655aff43",
+    "shrink_glob": "a5a731444eef0c973a75aa4ea078158aaa13a757a5bddfb56b4e24f9f8c17de0",
+    "shrinking_glob_gone": "0b3e9ccc8ecf982457e84858067d2ab339b9630fe26b78c60b0da2c014e6746c",
+    "maybe_adjust_light": "1332f174899fde0084e7fa68c24ef33b5c06e5af74a4087e794fe5d5e49795f5",
+    "bless": "f8fd37dce276da1087613ed9d906af3ba5c5e422e03518c9df2b7d14555720be",
+    "unbless": "fb4861ba2cb1869fdec6d3d24abce00bfef6e5b872c323159b7fc631e2591f28",
+    "curse": "f00ea58f459e0823aad8b57a6315b09bd3ccd161ec88b538ef4d6fd6eb98d417",
+    "uncurse": "11ccaf62fc016eecdaf04e16e319df6ea485b50e236405d1effbb916323889d0",
+    "blessorcurse": "38a3cc4636d4b1ea773c49693b76e4739bbfa94f502e5f79bb8a5c9a6d704a98",
+    "bcsign": "e71bbe10760c3d81495e4e993a12dc6fb3391be20201abf20c0a8e1544038b35",
+    "set_bknown": "059115bb79e7d164104623dbe1a957afe631652d9c1728d2eebd449536e33717",
+    "weight": "abf85e67621c7f043060e6b502a4cad0cd886523aec88e80dd61835e628185e2",
+    "rnd_treefruit_at": "c93f5f5044129bcafdac3e1dfdd1f8313d38ea45d553b4c434d038686840cd6a",
+    "is_treefruit": "5ed6bc6c480b51b6404c2b1603c5387fc047d3d0c34f6778afe31c9e47496dc1",
+    "mkgold": "468dc7fbb3f9bccf3084160e77b5cb3322a80b7ecdd02b034ec35d5ab473746c",
+    "fixup_oil": "7b9bbccca1f7d81fb7e583c6dd883d243bf2efdd0e24e93ce3695cbec3424648",
+    "mkcorpstat": "2c2098b8fa2903501453306ffd18ebcd197f930cd6962e57731b80a9147b6e52",
+    "corpse_revive_type": "d34152cbfb233b506cc567d666256866d0561f032b31b9a831fc43cc75bb6f02",
+    "obj_attach_mid": "b2812db53d1e2f7ff87bccd37d7ee0558b94c22da87ee367c0cd3983ad27d497",
+    "save_mtraits": "f55ad5fd8a7037d4d505481de2c8f4cf34e910931287ce3c87fa14846f852e1d",
+    "get_mtraits": "347376d66743e48381d24abf8f02c06e6775b5a8f7fa5861ae28ddba77bd5eb6",
+    "mk_tt_object": "cb7e3c1680a637937b580b0f226aa01054a448384e09ba688024a2eb3225bed0",
+    "mk_named_object": "54d6acbb2e25dcbe1ae9a5b5ca17505fa614eb4cc40e8739c1f0964a1c4969fc",
+    "is_flammable": "bcbcfa0e71a88966a5a9798ab9c18ddf67c40c28dc6b1813788434852833fe86",
+    "is_rottable": "06cef92e1eafe611ac59e7d2de4b83945e99053aaaec0277e019ae671bee4371",
+    "place_object": "9074e80ca8fe3c962bacbdf437debe9d0d9d7d945ad69451d019d90e68c97b24",
+    "recreate_pile_at": "a8f36718f92555a30de429f7d161a4aa12c99dc18804a7e687ae537c67d8b95e",
+    "obj_ice_effects": "d156529f71d019775b9dc5494451ba3fe834f39a596df303fee40514a1f23042",
+    "peek_at_iced_corpse_age": "f943dad8b71398d4d3170f189ea3acfd7972282b86404c04593e16e617657385",
+    "obj_timer_checks": "62fc0c2830f474c3a3d13be78a9ea8d0d53bdc8a2bb42eae69d75bbe462a4f1e",
+    "remove_object": "77b81f0d5a2ccc776504546a41765770ccf125e42f796ac75ee0eafe7af45b95",
+    "discard_minvent": "23d8533adb1517400f79426a651230bb635199fae29a082bfff09ae1d1fffbdf",
+    "obj_extract_self": "9eb6f9f35b6aca3e5d57f70633f3d10f5c7f6416cfa92138a3389aaf3ddce9f3",
+    "extract_nobj": "25fbe7a7e293cd90a4789792daebd8273aeaa76e9e429d08764b7102236da71d",
+    "extract_nexthere": "b25a6054b7b8985dbb860bfaf4a4ff617835e491ccd1dd0b31761b8583d3c497",
+    "add_to_minv": "e736695488b1fc5913866141beda126e348957587777cc2e0f08d3624065d398",
+    "add_to_container": "2ff4b5244021a90adf99238b8bcdb23cc18c99303abc3d7e4c2cae0be808f7a7",
+    "add_to_migration": "44f11a1957a169faa04850b9287f106f54221e6cf76400949f42878bc50ef8dd",
+    "add_to_buried": "0aa4ab0baf49b68af5c5522af3c60d315242b5e2fe44ae090534851d35c0cf50",
+    "container_weight": "6c2c6cead091e6df39a95805c03294c6cfd6e7aaee9e8cac8f916d232dde71c2",
+    "dealloc_obj": "9694e0d0564e5434d23c3ccf3330226997118a6c94024c4e7c01368fbabc5fca",
+    "dealloc_obj_real": "e600a3413aa80a37aeaaab0167f91b3bf361f459752e12c4b7d32421669e6312",
+    "dobjsfree": "c02a662c496f0b158d3cef69403f8882c698e7fe9af4352e01c8c667bce6daea",
+    "hornoplenty": "e9449ab78efc461c8c6cde2fc9ba8954fd31583c85f3eaac628d8505b975b53e",
+    "obj_sanity_check": "e7573e4fa227a0ec84c5cbbf7c5374f3fa68c67168a089c2de623660b57152b7",
+    "objlist_sanity": "06ac14b9b673db76c6a5965d2bf408a312f0d51701690f2cc685bdaf74b1793d",
+    "shop_obj_sanity": "bb6e6c1640b2d834dd9e14f41e29571c135fdd0e919bd12027650dfd2811d4e3",
+    "mon_obj_sanity": "63dc24fcf5edcdec8d6b277c15678ebe2bfccac51f1fd85502457c1200fd7e85",
+    "insane_obj_bits": "a093035050b0d5d3e336dfe226a0b761940fe8f9139f76adc5ae5b40cbed2953",
+    "nomerge_exception": "9f49ce51b8cda4c89b0b7b8e0b340b950ada831eb048e4b00a17017650f2c62f",
+    "where_name": "a8982ab86a47cdca549218cc6ffa934d57b490622edced5667c06bf1f22d1d91",
+    "insane_object": "ee7ceae52552c75bfd9bf87ca39c00980a85d60e653e689425ad30c43f9e36bd",
+    "init_dummyobj": "0264d1cc0ad378d1234c17b432b8d8acbf201df7e12114dad28b35b95f384584",
+    "check_contained": "b69c86763a45f574d3bc2266f3bc454efa69bb56597377a09e45f29a1edc0889",
+    "check_glob": "d29aef85b7326531ab71f628aa453fced8111a330554af53a58d23f45efb9525",
+    "sanity_check_worn": "9b221f79bbe489c2892f7ab1c7ca7084a1c11c28d633721ecd620978cf5fc242",
+    "obj_nexto": "7cc33ad8eeb09f753fee5d6be56f8ac2081f85406c674aad39dfdbf1ea211288",
+    "obj_nexto_xy": "5e03856b14789fcf9a037927bdfbab4debeab462e8998365e4c68d52de94d5ce",
+    "obj_absorb": "4782021c7a30c7bb825e8c25edf60221464d68860fa818996dd5928cf6c16e51",
+    "obj_meld": "85ef4266ae420dd3b026ac922fbaa07fee89f10d732f78a9664531999cdba0a6",
+    "pudding_merge_message": "5fd35746b8c4b8812a3de666600c95bf4a7fbeab90ba07e3fa6e9b9b1d121535"
+  },
+  "privateAstHashes": {
+    "mkobjprobs": "bf4d5cddcdfb8e57a329633d5e762e96926f14ce4b9c4a48e8376f5b04e8ca14",
+    "boxiprobs": "b8e5b5051b95b89a67f5108a511c5fd2bd5704ea1433256ceaefd88ba2b9c929",
+    "rogueprobs": "425d5306bd0ab5cd11a0e6d33f6dcf5ae4d63524f60cb81487fafd3f210c3a26",
+    "hellprobs": "c4f42336f5a4a89fe6c87ed5f25d0997a66969ab191bb6b716cf50a06e6a1ae3",
+    "zerooextra": "5d666b6a50f8318a97b22c2a33188c2721fe5775da1bc9290a9729e834e955e7",
+    "alteration_verbs": "bca807d40a1c7ac053f58d2bb6a17cb66fa040b30049800e4b38e3b9b02b7024",
+    "dknowns": "8edd285a5907c275601cf78ea9a18ede9a9a21a50b7ee70d4ef1aeea462a21b4",
+    "treefruits": "767e70f003767a2a7dc38005215043a9883bc011dfc465b567a1b755df32f3a0",
+    "ofmt0": "ec7275c7f690e486911a87e10828a48bfd604d85ca38e15afd91ad383a6e2f10",
+    "ofmt3": "4845285d4c3fe19419b4e81746dcccd3e5bae9daf3384474e165f5e625c5a285",
+    "mfmt1": "a32222be6eb5bb1df9b0f1bff2dbab3794ec3642a572a0cbe468cba62b42b86e",
+    "mfmt2": "a11abaab1dab60f4cef5ca6061bcd4a48d1253b857fcb24ea1ea45cbd88c9caf",
+    "obj_state_names": "052edaceb163e6df69e63b8233f6f4edecfdd3365e6e963b976084e4e7943f1b"
+  },
+  "allDependencyTypes": {
+    "dealloc_mextra": "void (struct monst *)",
+    "artifact_exists": "void (struct obj *, const char *, boolean, unsigned int)",
+    "is_pool": "boolean (coordxy, coordxy)",
+    "isok": "int (coordxy, coordxy)",
+    "copynchars": "void (char *, const char *, int)",
+    "setmnotwielded": "void (struct monst *, struct obj *)",
+    "xname": "char *(struct obj *)",
+    "safe_oname": "const char *(struct obj *)",
+    "oid_price_adjustment": "int (struct obj *, unsigned int)",
+    "Yname2": "char *(struct obj *)",
+    "impossible": "void (const char *, ...)",
+    "hold_another_object": "struct obj *(struct obj *, const char *, const char *, const char *)",
+    "strcat": "char *(char *, const char *)",
+    "You_hear": "void (const char *, ...)",
+    "In_quest": "boolean (d_level *)",
+    "obj_split_light_source": "void (struct obj *, struct obj *)",
+    "simpleonames": "char *(struct obj *)",
+    "zombie_form": "int (struct permonst *)",
+    "safe_typename": "char *(int)",
+    "vtense": "char *(const char *, const char *)",
+    "hitfloor": "void (struct obj *, boolean)",
+    "onshopbill": "boolean (struct obj *, struct monst *, boolean)",
+    "assign_candy_wrapper": "void (struct obj *)",
+    "dead_species": "boolean (int, boolean)",
+    "nartifact_exist": "int (void)",
+    "useupall": "void (struct obj *)",
+    "erosion_matters": "boolean (struct obj *)",
+    "noveltitle": "const char *(int *)",
+    "strchr": "char *(const char *, int)",
+    "update_inventory": "void (void)",
+    "book_cursed": "void (struct obj *)",
+    "remove_worn_item": "void (struct obj *, boolean)",
+    "del_light_source": "void (int, union any *)",
+    "sprintf": "int (char *restrict, const char *restrict, ...)",
+    "obj_stop_timers": "void (struct obj *)",
+    "arti_light_radius": "int (struct obj *)",
+    "stolen_value": "long (struct obj *, coordxy, coordxy, boolean, boolean)",
+    "obj_split_timers": "void (struct obj *, struct obj *)",
+    "globby_bill_fixup": "void (struct obj *, struct obj *)",
+    "rnd": "int (int)",
+    "merged": "int (struct obj **, struct obj **)",
+    "g_at": "struct obj *(coordxy, coordxy)",
+    "makeplural": "char *(const char *)",
+    "is_pool_or_lava": "boolean (coordxy, coordxy)",
+    "splitbill": "void (struct obj *, struct obj *)",
+    "drop_uswapwep": "void (void)",
+    "eos": "char *(char *)",
+    "maybe_reset_pick": "void (struct obj *)",
+    "makesingular": "char *(const char *)",
+    "obj_adjust_light_radius": "void (struct obj *, int)",
+    "mergable": "boolean (struct obj *, struct obj *)",
+    "strsubst": "char *(char *, const char *, const char *)",
+    "rnd_class": "int (int, int)",
+    "mon_pmname": "const char *(struct monst *)",
+    "rne": "int (int)",
+    "aobjnam": "char *(struct obj *, const char *)",
+    "eaten_stat": "int (int, struct obj *)",
+    "pline": "void (const char *, ...)",
+    "strcpy": "char *(char *, const char *)",
+    "confers_luck": "boolean (struct obj *)",
+    "obfree": "void (struct obj *, struct obj *)",
+    "maybe_unhide_at": "void (coordxy, coordxy)",
+    "rndmonst_adj": "struct permonst *(int, int)",
+    "set_tin_variety": "void (struct obj *, int)",
+    "level_difficulty": "xint16 (void)",
+    "dupstr": "char *(const char *)",
+    "verbalize": "void (const char *, ...)",
+    "discover_object": "void (int, boolean, boolean, boolean)",
+    "mk_artifact": "struct obj *(struct obj *, aligntyp, uchar, boolean)",
+    "stop_timer": "long (short, union any *)",
+    "doname": "char *(struct obj *)",
+    "attach_fig_transform_timeout": "void (struct obj *)",
+    "abs": "int (int)",
+    "nxtobj": "struct obj *(struct obj *, int, boolean)",
+    "panic": "void (const char *, ...) __attribute__((noreturn))",
+    "The": "char *(const char *)",
+    "recalc_block_point": "void (coordxy, coordxy)",
+    "is_ice": "boolean (coordxy, coordxy)",
+    "dropy": "void (struct obj *)",
+    "memcpy": "void *(void *, const void *, unsigned long)",
+    "In_hell": "boolean (d_level *)",
+    "forget_temple_entry": "void (struct monst *)",
+    "find_objowner": "struct monst *(struct obj *, coordxy, coordxy)",
+    "doaltarobj": "void (struct obj *)",
+    "obj_no_longer_held": "void (struct obj *)",
+    "on_level": "boolean (d_level *, d_level *)",
+    "pmname": "const char *(struct permonst *, int)",
+    "freeinv": "void (struct obj *)",
+    "billable": "boolean (struct monst **, struct obj *, char, boolean)",
+    "strstri": "char *(const char *, const char *)",
+    "near_capacity": "int (void)",
+    "reset_remarm": "void (void)",
+    "copy_mextra": "void (struct monst *, struct monst *)",
+    "oname": "struct obj *(struct obj *, const char *, unsigned int)",
+    "undead_to_corpse": "int (int)",
+    "debugcore": "boolean (const char *, boolean)",
+    "Mgender": "int (struct monst *)",
+    "strlen": "unsigned long (const char *)",
+    "otense": "char *(struct obj *, const char *)",
+    "unpaid_cost": "long (struct obj *, uchar)",
+    "permapoisoned": "boolean (struct obj *)",
+    "newsym": "void (coordxy, coordxy)",
+    "subfrombill": "void (struct obj *, struct monst *)",
+    "rn2": "int (int)",
+    "in_rooms": "char *(coordxy, coordxy, int)",
+    "can_reach_floor": "boolean (boolean)",
+    "consume_obj_charge": "void (struct obj *, boolean)",
+    "encumber_msg": "void (void)",
+    "attach_egg_hatch_timeout": "void (struct obj *, long)",
+    "pronoun_gender": "int (struct monst *, unsigned int)",
+    "stop_occupation": "void (void)",
+    "You_see": "void (const char *, ...)",
+    "free": "void (void *)",
+    "Doname2": "char *(struct obj *)",
+    "x_monnam": "char *(struct monst *, int, const char *, int, boolean)",
+    "find_mid": "struct monst *(unsigned int, unsigned int)",
+    "addtobill": "void (struct obj *, boolean, boolean, boolean)",
+    "__assert_fail": "void (const char *, const char *, int, const char *)",
+    "rnz": "int (int)",
+    "rng_log_enabled": "boolean (void)",
+    "sobj_at": "struct obj *(int, coordxy, coordxy)",
+    "surface": "const char *(coordxy, coordxy)",
+    "start_timer": "boolean (long, short, short, union any *)",
+    "obj_typename": "char *(int)",
+    "s_suffix": "char *(const char *)",
+    "alter_cost": "void (struct obj *, long)",
+    "strncmp": "int (const char *, const char *, unsigned long)",
+    "obj_to_any": "anything *(struct obj *)",
+    "Your": "void (const char *, ...)",
+    "rng_log_set_caller": "void (const char *, int, const char *)",
+    "can_be_hatched": "int (int)",
+    "fmt_ptr": "char *(const void *)",
+    "depth": "schar (d_level *)",
+    "tt_oname": "struct obj *(struct obj *)",
+    "rloco": "boolean (struct obj *)",
+    "alloc": "long *(unsigned int)",
+    "get_obj_location": "boolean (struct obj *, coordxy *, coordxy *, int)",
+    "costly_adjacent": "boolean (struct monst *, coordxy, coordxy)",
+    "extract_from_minvent": "void (struct monst *, struct obj *, boolean, boolean)",
+    "block_point": "void (int, int)",
+    "eating_glob": "boolean (struct obj *)",
+    "set_moreluck": "void (void)",
+    "obj_sheds_light": "boolean (struct obj *)",
+    "costly_spot": "boolean (coordxy, coordxy)",
+    "shop_keeper": "struct monst *(char)"
+  },
+  "configuredMacroDefinitions": {
+    "ARTICLE_A": " 2",
+    "A_NONE": " (-128)",
+    "BUFSZ": " 256",
+    "BURIED_TOO": " 0x2",
+    "Blind": " ((HBlinded || EBlinded) && !BBlinded)",
+    "COLNO": " 80",
+    "CONTAINED_TOO": " 0x1",
+    "CORPSTAT_FEMALE": " 1",
+    "CORPSTAT_INIT": " 0x08",
+    "CORPSTAT_MALE": " 2",
+    "CORPSTAT_NEUTER": " 3",
+    "CORPSTAT_NONE": " 0x00",
+    "CORPSTAT_SPE_VAL": " 0x07",
+    "DEADMONSTER": "(mon) ((mon)->mhp < 1)",
+    "DEBUG": " ",
+    "DISABLE_WARNING_FORMAT_NONLITERAL": " _Pragma(\"clang diagnostic push\") _Pragma(\"clang diagnostic ignored \\\"-Wformat-nonliteral\\\"\")",
+    "DUMMY": " { 0 }",
+    "EPRI": "(mon) ((mon)->mextra->epri)",
+    "EXACT_NAME": " 0x1F",
+    "FALLTHROUGH": " __attribute__((fallthrough))",
+    "FALSE": " ((boolean) 0)",
+    "FM_FMON": " 0x01",
+    "G_GONE": " (G_GENOD | G_EXTINCT)",
+    "G_HELL": " 0x0400",
+    "G_NOCORPSE": " 0x0010",
+    "G_NOGEN": " 0x0200",
+    "G_NOHELL": " 0x0800",
+    "G_UNIQ": " 0x1000",
+    "HIGHEST_GLOB": " GLOB_OF_BLACK_PUDDING",
+    "Hallucination": " (HHallucination && !Halluc_resistance)",
+    "Has_contents": "(o) ( (o)->cobj != (struct obj *) 0)",
+    "IS_ALTAR": "(typ) ((typ) == ALTAR)",
+    "I_SPECIAL": " 0x20000000L",
+    "Inhell": " In_hell(&u.uz)",
+    "Is_airlevel": "(x) (Lcheck(x, &air_level))",
+    "Is_candle": "(otmp) (otmp->otyp == TALLOW_CANDLE || otmp->otyp == WAX_CANDLE)",
+    "Is_container": "(o) ((o)->otyp >= LARGE_BOX && (o)->otyp <= BAG_OF_TRICKS)",
+    "Is_dragon_scales": "(obj) ((obj)->otyp >= GRAY_DRAGON_SCALES && (obj)->otyp <= YELLOW_DRAGON_SCALES)",
+    "Is_mbag": "(o) ((o)->otyp == BAG_OF_HOLDING || (o)->otyp == BAG_OF_TRICKS)",
+    "Is_pudding": "(o) (o->otyp == GLOB_OF_GRAY_OOZE || o->otyp == GLOB_OF_BROWN_PUDDING || o->otyp == GLOB_OF_GREEN_SLIME || o->otyp == GLOB_OF_BLACK_PUDDING)",
+    "Is_rogue_level": "(x) (Lcheck(x, &rogue_level))",
+    "Is_waterlevel": "(x) (Lcheck(x, &water_level))",
+    "LARGEST_INT": " 32767",
+    "LOST_NONE": " 0",
+    "LOWEST_GLOB": " GLOB_OF_GRAY_OOZE",
+    "M": "(c) ((c) - 128)",
+    "MAIL_STRUCTURES": " ",
+    "MAX_OIL_IN_FLASK": " 400",
+    "MIGR_TO_SPECIES": " 4096",
+    "MON_DETACH": " 0x02",
+    "MON_NOWEP": "(mon) ((mon)->mw = (struct obj *) 0)",
+    "MON_WEP": "(mon) ((mon)->mw)",
+    "NEARDATA": " ",
+    "NH_DEVEL_STATUS": " NH_STATUS_RELEASED",
+    "NH_STATUS_RELEASED": " 0",
+    "NOBJ_STATES": " 10",
+    "NODIR": " 1",
+    "NULL": " ((void*)0)",
+    "OBJ_BURIED": " 6",
+    "OBJ_CONTAINED": " 2",
+    "OBJ_DELETED": " 9",
+    "OBJ_FLOOR": " 1",
+    "OBJ_FREE": " 0",
+    "OBJ_INVENT": " 3",
+    "OBJ_LUAFREE": " 8",
+    "OBJ_MIGRATING": " 5",
+    "OBJ_MINVENT": " 4",
+    "OBJ_NAME": "(obj) (obj_descr[(obj).oc_name_idx].oc_name)",
+    "OBJ_ONBILL": " 7",
+    "OMAILCMD": "(o) ((o)->oextra->omailcmd)",
+    "OMID": "(o) ((o)->oextra->omid)",
+    "OMONST": "(o) ((o)->oextra->omonst)",
+    "ONAME": "(o) ((o)->oextra->oname)",
+    "ONAME_NO_FLAGS": " 0U",
+    "ONAME_SKIP_INVUPD": " 0x0200U",
+    "PRINTF_F_PTR": "(f,v) PRINTF_F(f, v)",
+    "QBUFSZ": " 128",
+    "RANDOM_TIN": " (-2)",
+    "RESTORE_WARNING_FORMAT_NONLITERAL": " _Pragma(\"clang diagnostic pop\")",
+    "ROLL_FROM": "(array) array[rn2(SIZE(array))]",
+    "ROT_AGE": " (250L)",
+    "ROWNO": " 21",
+    "Role_if": "(X) (gu.urole.mnum == (X))",
+    "SIZE": "(x) (int)(sizeof(x) / sizeof(x[0]))",
+    "SPBOOK_no_NOVEL": " (0 - (int) SPBOOK_CLASS)",
+    "SPINACH_TIN": " (-1)",
+    "SetVoice": "(mon,tone,vol,moreinfo) ",
+    "Soundeffect": "(seid,vol) ",
+    "Sprintf": " (void) sprintf",
+    "Strcat": " (void) strcat",
+    "Strcpy": " (void) strcpy",
+    "TAINT_AGE": " (50L)",
+    "TROLL_REVIVE_CHANCE": " 37",
+    "TRUE": " ((boolean) 1)",
+    "W_AMUL": " 0x00010000L",
+    "W_ARM": " 0x00000001L",
+    "W_ARMC": " 0x00000002L",
+    "W_ARMF": " 0x00000020L",
+    "W_ARMG": " 0x00000010L",
+    "W_ARMH": " 0x00000004L",
+    "W_ARMOR": " (W_ARM | W_ARMC | W_ARMH | W_ARMS | W_ARMG | W_ARMF | W_ARMU)",
+    "W_ARMS": " 0x00000008L",
+    "W_ARMU": " 0x00000040L",
+    "W_ART": " 0x00001000L",
+    "W_ARTI": " 0x00002000L",
+    "W_BALL": " 0x00200000L",
+    "W_CHAIN": " 0x00400000L",
+    "W_QUIVER": " 0x00000200L",
+    "W_RING": " (W_RINGL | W_RINGR)",
+    "W_RINGL": " 0x00020000L",
+    "W_RINGR": " 0x00040000L",
+    "W_SADDLE": " 0x00100000L",
+    "W_SWAPWEP": " 0x00000400L",
+    "W_TOOL": " 0x00080000L",
+    "W_WEAPONS": " (W_WEP | W_SWAPWEP | W_QUIVER)",
+    "W_WEP": " 0x00000100L",
+    "assert": "(x) ((void)((x) || (__assert_fail(#x, __FILE__, __LINE__, __func__),0)))",
+    "bimanual": "(otmp) ((otmp->oclass == WEAPON_CLASS || otmp->oclass == TOOL_CLASS) && objects[otmp->otyp].oc_bimanual)",
+    "cansee": "(x,y) ((gv.viz_array[y][x] & IN_SIGHT) != 0)",
+    "carried": "(o) ((o)->where == OBJ_INVENT)",
+    "d": "(n,x) (rng_log_enabled() ? (rng_log_set_caller(__FILE__, __LINE__, __func__), d((n),(x))) : d((n),(x)))",
+    "debugpline1": "(fmt,arg) ifdebug(pline(fmt, arg))",
+    "debugpline3": "(fmt,a1,a2,a3) ifdebug(pline(fmt, a1, a2, a3))",
+    "fmon": " svl.level.monlist",
+    "fobj": " svl.level.objlist",
+    "fromsink": " corpsenm",
+    "has_omailcmd": "(o) ((o)->oextra && OMAILCMD(o))",
+    "has_omid": "(o) ((o)->oextra && OMID(o))",
+    "has_omonst": "(o) ((o)->oextra && OMONST(o))",
+    "has_oname": "(o) ((o)->oextra && ONAME(o))",
+    "is_corrodeable": "(otmp) (objects[otmp->otyp].oc_material == COPPER || objects[otmp->otyp].oc_material == IRON)",
+    "is_crackable": "(otmp) (objects[(otmp)->otyp].oc_material == GLASS && (otmp)->oclass == ARMOR_CLASS)",
+    "is_damageable": "(otmp) (is_rustprone(otmp) || is_flammable(otmp) || is_rottable(otmp) || is_corrodeable(otmp) || is_crackable(otmp))",
+    "is_female": "(ptr) (((ptr)->mflags2 & M2_FEMALE) != 0L)",
+    "is_human": "(ptr) (((ptr)->mflags2 & M2_HUMAN) != 0L)",
+    "is_male": "(ptr) (((ptr)->mflags2 & M2_MALE) != 0L)",
+    "is_mines_prize": "(o) ((o)->o_id == svc.context.achieveo.mines_prize_oid)",
+    "is_multigen": "(otmp) (otmp->oclass == WEAPON_CLASS && objects[otmp->otyp].oc_skill >= -P_SHURIKEN && objects[otmp->otyp].oc_skill <= -P_BOW)",
+    "is_neuter": "(ptr) (((ptr)->mflags2 & M2_NEUTER) != 0L)",
+    "is_poisonable": "(otmp) ((otmp->oclass == WEAPON_CLASS && objects[otmp->otyp].oc_skill >= -P_SHURIKEN && objects[otmp->otyp].oc_skill <= -P_BOW) || permapoisoned(otmp))",
+    "is_rider": "(ptr) ((ptr) == &mons[PM_DEATH] || (ptr) == &mons[PM_FAMINE] || (ptr) == &mons[PM_PESTILENCE])",
+    "is_rustprone": "(otmp) (objects[otmp->otyp].oc_material == IRON)",
+    "is_soko_prize": "(o) ((o)->o_id == svc.context.achieveo.soko_prize_oid)",
+    "ismnum": "(x) ((x) >= LOW_PM && (x) < NUMMONS)",
+    "kill": " teleport_native_kill",
+    "leashmon": " corpsenm",
+    "levl": " svl.level.locations",
+    "makeknown": "(x) discover_object((x), TRUE, TRUE, TRUE)",
+    "max": "(a,b) ((a) > (b) ? (a) : (b))",
+    "mcarried": "(o) ((o)->where == OBJ_MINVENT)",
+    "mhis": "(mtmp) (genders[pronoun_gender(mtmp, PRONOUN_HALLU)].his)",
+    "migr_species": " corpsenm",
+    "monsndx": "(ptr) ((ptr)->pmidx)",
+    "newmonst": "() (struct monst *) alloc(sizeof (struct monst))",
+    "newobj": "() (struct obj *) alloc(sizeof (struct obj))",
+    "next_boulder": " corpsenm",
+    "nexthere": " v.v_nexthere",
+    "nhUse": "(arg) ((void) (arg))",
+    "norevive": " oeroded2",
+    "nothing_happens": " c_common_strings.c_nothing_happens",
+    "novelidx": " corpsenm",
+    "ocarry": " v.v_ocarry",
+    "ocontainer": " v.v_ocontainer",
+    "odiluted": " oeroded",
+    "on_ice": " recharged",
+    "opoisoned": " otrapped",
+    "orotten": " oeroded",
+    "pline1": "(cstr) pline(\"%s\", cstr)",
+    "rn1": "(x,y) (rn2(x) + (y))",
+    "rn2": "(x) (rng_log_enabled() ? (rng_log_set_caller(__FILE__, __LINE__, __func__), rn2(x)) : rn2(x))",
+    "rnd": "(x) (rng_log_enabled() ? (rng_log_set_caller(__FILE__, __LINE__, __func__), rnd(x)) : rnd(x))",
+    "rne": "(x) (rng_log_enabled() ? (rng_log_set_caller(__FILE__, __LINE__, __func__), rne(x)) : rne(x))",
+    "rnz": "(x) (rng_log_enabled() ? (rng_log_set_caller(__FILE__, __LINE__, __func__), rnz(x)) : rnz(x))",
+    "something": " c_common_strings.c_something",
+    "special_corpse": "(num) (((num) == PM_LIZARD || (num) == PM_LICHEN) || (mons[num].mlet == S_TROLL || is_rider(&mons[num])))",
+    "spestudied": " usecount",
+    "staticfn": " static",
+    "verysmall": "(ptr) ((ptr)->msize < MZ_SMALL)",
+    "wizard": " flags.debug"
+  },
+  "rngSites": [
+    [
+      "mkobj_erosions",
+      202
+    ],
+    [
+      "mkobj_erosions",
+      205
+    ],
+    [
+      "mkobj_erosions",
+      209
+    ],
+    [
+      "mkobj_erosions",
+      211
+    ],
+    [
+      "mkobj_erosions",
+      214
+    ],
+    [
+      "mkobj_erosions",
+      219
+    ],
+    [
+      "mkobj",
+      280
+    ],
+    [
+      "mkobj",
+      289
+    ],
+    [
+      "mkbox_cnts",
+      338
+    ],
+    [
+      "mkbox_cnts",
+      354
+    ],
+    [
+      "mkbox_cnts",
+      362
+    ],
+    [
+      "mkbox_cnts",
+      362
+    ],
+    [
+      "rndmonnum_adj",
+      409
+    ],
+    [
+      "next_ident",
+      521
+    ],
+    [
+      "next_ident",
+      528
+    ],
+    [
+      "mksobj_init",
+      877
+    ],
+    [
+      "mksobj_init",
+      878
+    ],
+    [
+      "mksobj_init",
+      879
+    ],
+    [
+      "mksobj_init",
+      880
+    ],
+    [
+      "mksobj_init",
+      881
+    ],
+    [
+      "mksobj_init",
+      883
+    ],
+    [
+      "mksobj_init",
+      886
+    ],
+    [
+      "mksobj_init",
+      889
+    ],
+    [
+      "mksobj_init",
+      915
+    ],
+    [
+      "mksobj_init",
+      927
+    ],
+    [
+      "mksobj_init",
+      946
+    ],
+    [
+      "mksobj_init",
+      971
+    ],
+    [
+      "mksobj_init",
+      981
+    ],
+    [
+      "mksobj_init",
+      982
+    ],
+    [
+      "mksobj_init",
+      995
+    ],
+    [
+      "mksobj_init",
+      995
+    ],
+    [
+      "mksobj_init",
+      1001
+    ],
+    [
+      "mksobj_init",
+      1012
+    ],
+    [
+      "mksobj_init",
+      1013
+    ],
+    [
+      "mksobj_init",
+      1014
+    ],
+    [
+      "mksobj_init",
+      1026
+    ],
+    [
+      "mksobj_init",
+      1029
+    ],
+    [
+      "mksobj_init",
+      1033
+    ],
+    [
+      "mksobj_init",
+      1038
+    ],
+    [
+      "mksobj_init",
+      1056
+    ],
+    [
+      "mksobj_init",
+      1063
+    ],
+    [
+      "mksobj_init",
+      1086
+    ],
+    [
+      "mksobj_init",
+      1090
+    ],
+    [
+      "mksobj_init",
+      1092
+    ],
+    [
+      "mksobj_init",
+      1093
+    ],
+    [
+      "mksobj_init",
+      1094
+    ],
+    [
+      "mksobj_init",
+      1095
+    ],
+    [
+      "mksobj_init",
+      1098
+    ],
+    [
+      "mksobj_init",
+      1121
+    ],
+    [
+      "mksobj_init",
+      1124
+    ],
+    [
+      "mksobj_init",
+      1131
+    ],
+    [
+      "mksobj_init",
+      1132
+    ],
+    [
+      "mksobj_init",
+      1133
+    ],
+    [
+      "mksobj_init",
+      1135
+    ],
+    [
+      "mksobj_init",
+      1135
+    ],
+    [
+      "mksobj_init",
+      1135
+    ],
+    [
+      "mksobj_init",
+      1139
+    ],
+    [
+      "mksobj_init",
+      1139
+    ],
+    [
+      "mksobj_init",
+      1141
+    ],
+    [
+      "mksobj_init",
+      1143
+    ],
+    [
+      "mksobj_init",
+      1146
+    ],
+    [
+      "mksobj_init",
+      1155
+    ],
+    [
+      "mksobj",
+      1222
+    ],
+    [
+      "rider_revival_time",
+      1379
+    ],
+    [
+      "start_corpse_timeout",
+      1413
+    ],
+    [
+      "start_corpse_timeout",
+      1420
+    ],
+    [
+      "start_corpse_timeout",
+      1428
+    ],
+    [
+      "start_glob_timeout",
+      1487
+    ],
+    [
+      "blessorcurse",
+      1846
+    ],
+    [
+      "blessorcurse",
+      1847
+    ],
+    [
+      "rnd_treefruit_at",
+      1986
+    ],
+    [
+      "mkgold",
+      2008
+    ],
+    [
+      "mkgold",
+      2010
+    ],
+    [
+      "mk_tt_object",
+      2241
+    ],
+    [
+      "hornoplenty",
+      2867
+    ],
+    [
+      "hornoplenty",
+      2880
+    ],
+    [
+      "obj_nexto_xy",
+      3680
+    ],
+    [
+      "obj_nexto_xy",
+      3681
+    ],
+    [
+      "obj_meld",
+      3790
+    ]
+  ],
+  "reservedBindingMappings": [
+    {
+      "owner": "mkobj_at",
+      "kind": "ParmVarDecl",
+      "original": "let",
+      "javascript": "let_",
+      "type": "char",
+      "declID": "0x7435c8cc8",
+      "offset": 7457
+    },
+    {
+      "owner": "mksobj_init",
+      "kind": "VarDecl",
+      "original": "let",
+      "javascript": "let_",
+      "type": "char",
+      "declID": "0x7435e6130",
+      "offset": 28649
+    },
+    {
+      "owner": "mksobj",
+      "kind": "VarDecl",
+      "original": "let",
+      "javascript": "let_",
+      "type": "char",
+      "declID": "0x7435fc758",
+      "offset": 39578
+    }
+  ],
+  "pointerPostfixSites": [
+    {
+      "owner": "mkobj",
+      "type": "const struct icp *",
+      "opcode": "++",
+      "offset": 8756
+    },
+    {
+      "owner": "mkbox_cnts",
+      "type": "const struct icp *",
+      "opcode": "++",
+      "offset": 10733
+    }
+  ]
+}

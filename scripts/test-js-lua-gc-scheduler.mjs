@@ -72,14 +72,14 @@ function kernel(op){sync();const before=read(1,0),result=BigInt(wasm._probe_kern
 const graph={restartCollection:()=>kernel(0),hasGray:()=>Boolean(kernel(1)),propagateOne:()=>kernel(2),atomic:()=>kernel(3),enterSweep:()=>kernel(4),beginSweepList:n=>kernel(n==='finobj'?8:9),sweep:n=>{const result=kernel(n==='allgc'?5:n==='finobj'?6:7);return{count:Number(result&0xffffffffn),done:Boolean(result>>32n)};},checkSizes:()=>kernel(10),hasFinalizers:()=>Boolean(kernel(11)),finalizeOne:()=>kernel(12),enterIncremental:()=>kernel(13),sweepToOld:()=>kernel(14),youngCollection:()=>kernel(15),finishGeneration:()=>kernel(16)};
 wasm._probe_init(0);wasm._probe_init(1);
 scheduler=new LuaGCScheduler({graph,getBytes:()=>read(1,0),debt:read(1,1),estimate:read(1,2),state:Number(read(1,3)),mode:Number(read(1,4)),stop:Number(read(1,5))});
-const names=['bytes','debt','estimate','state','mode','stop','stopem','emergency','lastatomic','pause','stepmul','stepsize','minor','major','finalizers'];let comparisons=0,steps=0;const phases=new Set();const actions=[];
-function compare(label){sync();for(let field=0;field<names.length;field++){assert.equal(read(1,field),read(0,field),`${label}: ${names[field]} JS${read(1,field)} native${read(0,field)}`);comparisons++;}phases.add(scheduler.state);}
-function control(op,a=0,b=0,c=0){const want=wasm._probe_control(0,op,a,b,c),got=scheduler.control(op,a,b,c);actions.push([op,a,b,c]);assert.equal(got,want,`control${actions.length} ${op}(${a},${b},${c}) stepsize${scheduler.stepsize} phase${scheduler.state}/${read(0,3)} debt${scheduler.debt}/${read(0,1)} return`);compare(`control${actions.length}:${op}`);if(op===GC_OP.STEP)steps++;}
-function allocate(count,base){wasm._probe_allocate(0,count,base);sync();const before=read(1,0);wasm._probe_allocate(1,count,base);scheduler.allocated(read(1,0)-before);compare(`allocate${count}:${base}`);}
-function drop(count,base){wasm._probe_drop(0,count,base);sync();const before=read(1,0);wasm._probe_drop(1,count,base);scheduler.allocated(read(1,0)-before);compare(`drop${count}:${base}`);}
-function finalizers(count){wasm._probe_finalizers(0,count);sync();const before=read(1,0);wasm._probe_finalizers(1,count);scheduler.allocated(read(1,0)-before);compare(`finalizers${count}`);}
-function check(){wasm._probe_check(0);scheduler.check();compare('automatic allocation checkpoint');}
-function mutate(index){wasm._probe_mutate(0,index);sync();const before=read(1,0);wasm._probe_mutate(1,index);scheduler.allocated(read(1,0)-before);compare('old-to-young barrier');}
+const names=['bytes','debt','estimate','state','mode','stop','stopem','emergency','lastatomic','pause','stepmul','stepsize','minor','major','finalizers'];let comparisons=0,steps=0;const phases=new Set();const actions=[],nativeOperations=[],nativeSnapshots=[];
+function compare(label,operation='I'){nativeOperations.push(operation);nativeSnapshots.push(names.map((_,field)=>read(0,field).toString()));sync();for(let field=0;field<names.length;field++){assert.equal(read(1,field),read(0,field),`${label}: ${names[field]} JS${read(1,field)} native${read(0,field)}`);comparisons++;}phases.add(scheduler.state);}
+function control(op,a=0,b=0,c=0){const want=wasm._probe_control(0,op,a,b,c),got=scheduler.control(op,a,b,c);actions.push([op,a,b,c]);assert.equal(got,want,`control${actions.length} ${op}(${a},${b},${c}) stepsize${scheduler.stepsize} phase${scheduler.state}/${read(0,3)} debt${scheduler.debt}/${read(0,1)} return`);compare(`control${actions.length}:${op}`,`C ${op} ${a} ${b} ${c}`);if(op===GC_OP.STEP)steps++;}
+function allocate(count,base){wasm._probe_allocate(0,count,base);sync();const before=read(1,0);wasm._probe_allocate(1,count,base);scheduler.allocated(read(1,0)-before);compare(`allocate${count}:${base}`,`A ${count} ${base}`);}
+function drop(count,base){wasm._probe_drop(0,count,base);sync();const before=read(1,0);wasm._probe_drop(1,count,base);scheduler.allocated(read(1,0)-before);compare(`drop${count}:${base}`,`D ${count} ${base}`);}
+function finalizers(count){wasm._probe_finalizers(0,count);sync();const before=read(1,0);wasm._probe_finalizers(1,count);scheduler.allocated(read(1,0)-before);compare(`finalizers${count}`,`F ${count}`);}
+function check(){wasm._probe_check(0);scheduler.check();compare('automatic allocation checkpoint','K');}
+function mutate(index){wasm._probe_mutate(0,index);sync();const before=read(1,0);wasm._probe_mutate(1,index);scheduler.allocated(read(1,0)-before);compare('old-to-young barrier',`M ${index}`);}
 compare('initial');control(GC_OP.COLLECT);control(GC_OP.INC,200,100,1);allocate(350,0);finalizers(27);drop(175,0);
 for(let i=0;i<450;i++)control(GC_OP.STEP,0);
 for(const value of [0,1,3,4,5,199,201,1023,1024,-1,-5,-2147483648,2147483647]){control(GC_OP.SETPAUSE,value);control(GC_OP.SETSTEPMUL,value);}
@@ -88,11 +88,27 @@ for(let i=0;i<120;i++){allocate(1,400+i);check();}
 control(GC_OP.STOP);allocate(12,900);check();control(GC_OP.ISRUNNING);control(GC_OP.STEP,-1);control(GC_OP.STEP,1);control(GC_OP.RESTART);
 control(GC_OP.GEN,20,100);for(let i=0;i<30;i++){allocate(4,1000+i*4);if(i%3===0)drop(2,1000+i*4);check();if(i%5===0)mutate(1000);}
 finalizers(23);control(GC_OP.STEP,0);allocate(1000,0);check();drop(900,0);control(GC_OP.STEP,1024);control(GC_OP.STEP,0);control(GC_OP.COLLECT);
-control(GC_OP.INC,200,100,1);finalizers(13);wasm._probe_emergency(0);scheduler.fullCollect(true);compare('emergency suppresses finalizers');control(GC_OP.COLLECT);
+control(GC_OP.INC,200,100,1);finalizers(13);wasm._probe_emergency(0);scheduler.fullCollect(true);compare('emergency suppresses finalizers','E');control(GC_OP.COLLECT);
 for(const size of [1,4,13,62,63,64,255,-1]){control(GC_OP.INC,200,100,size);allocate(1,1600);control(GC_OP.STEP,0);control(GC_OP.COLLECT);}
 for(const args of [[-1,-1],[256,1024],[0,0],[1,1]]){control(GC_OP.GEN,...args);control(GC_OP.GEN,0,0);control(GC_OP.INC,0,0,0);}
 control(GC_OP.COUNT);control(GC_OP.COUNTB);control(12345);
 wasm._probe_close(0);wasm._probe_close(1);
+// The same unmodified C scheduler trace is also executed by the actual macOS
+// compiler/libc, rather than inferring host equivalence from configured Wasm.
+const hostSource=path.join(work,'host-probe.c'),hostPath=path.join(work,'host-probe');
+fs.writeFileSync(hostSource,`#include <stdio.h>
+void probe_init(int);void probe_close(int);long long probe_read(int,int);int probe_control(int,int,int,int,int);
+void probe_allocate(int,int,int);void probe_drop(int,int,int);void probe_finalizers(int,int);void probe_check(int);void probe_mutate(int,int);void probe_emergency(int);
+int main(void){char op;int a,b,c,d;probe_init(0);while(scanf(" %c",&op)==1){switch(op){
+case 'C':scanf("%d%d%d%d",&a,&b,&c,&d);probe_control(0,a,b,c,d);break;
+case 'A':scanf("%d%d",&a,&b);probe_allocate(0,a,b);break;case 'D':scanf("%d%d",&a,&b);probe_drop(0,a,b);break;
+case 'F':scanf("%d",&a);probe_finalizers(0,a);break;case 'K':probe_check(0);break;
+case 'M':scanf("%d",&a);probe_mutate(0,a);break;case 'E':probe_emergency(0);break;}
+for(int i=0;i<15;i++)printf(i?" %lld":"%lld",probe_read(0,i));puts("");}probe_close(0);return 0;}`);
+run(process.env.CC||path.join(root,'.cache/wasm64-build/host-cc'),['-O2','-Dluai_makeseed(L)=0','-I'+src,...sources,hostSource,'-lm','-o',hostPath]);
+const hostLines=run(hostPath,[],{input:nativeOperations.join('\n')+'\n'}).trimEnd().split('\n');assert.equal(hostLines.length,nativeSnapshots.length);
+let nativeHostComparisons=0;for(let i=0;i<hostLines.length;i++){const fields=hostLines[i].split(' ');for(let field=0;field<names.length;field++){assert.equal(fields[field],nativeSnapshots[i][field],`macOS scheduler ${nativeOperations[i]} field${names[field]} trace${i}`);nativeHostComparisons++;}}
+
 // Independently compare generation age/list helpers to the actual C static
 // functions, including open/closed upvalues and retained thread gray links.
 let ageCases=0,randomState=0x51a82c6f;function random(){randomState^=randomState<<13;randomState^=randomState>>>17;randomState^=randomState<<5;return randomState>>>0;}
@@ -160,5 +176,5 @@ for(const mode of [GC_MODE.INC,GC_MODE.GEN]){
  s.control(GC_OP.COLLECT);checkGraph(finalized===26,'normal collection runs the pending emergency finalizer');
  heap.close();checkGraph(heap.memoryTracker.bytes===0,'finalizer graph close releases all storage');
 }
-fs.writeFileSync(path.join(work,'validated.json'),JSON.stringify({comparisons,steps,ageCases,graphChecks,phases:[...phases],actions},null,2)+'\n');
-console.log(`PASS: ${comparisons} pinned-native collector fields/returns; ${steps} real incremental steps, ${ageCases} native generation/list cases, ${graphChecks} production JS graph checks, automatic allocation checkpoints, minors/majors, barriers, finalizers, emergency policy, byte debt and parameter wrapping. Graph kernels are private native-oracle helpers, not production dependencies.`);
+fs.writeFileSync(path.join(work,'validated.json'),JSON.stringify({comparisons,nativeHostComparisons,steps,ageCases,graphChecks,phases:[...phases],actions},null,2)+'\n');
+console.log(`PASS: ${comparisons} configured-C collector fields/returns + ${nativeHostComparisons} actual macOS collector fields; ${steps} real incremental steps, ${ageCases} native generation/list cases, ${graphChecks} production JS graph checks, automatic allocation checkpoints, minors/majors, barriers, finalizers, emergency policy, byte debt and parameter wrapping. Graph kernels are private native-oracle helpers, not production dependencies.`);

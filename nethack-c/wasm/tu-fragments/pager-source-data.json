@@ -1,0 +1,8329 @@
+{
+  "names": [
+    "is_swallow_sym",
+    "append_str",
+    "self_lookat",
+    "monhealthdescr",
+    "trap_description",
+    "mhidden_description",
+    "object_from_map",
+    "look_at_object",
+    "look_at_monster",
+    "waterbody_name",
+    "ice_descr",
+    "lookat",
+    "ia_checkfile",
+    "checkfile",
+    "add_cmap_descr",
+    "do_screen_description",
+    "add_quoted_engraving",
+    "do_look",
+    "look_region_nearby",
+    "look_all",
+    "look_traps",
+    "look_engrs",
+    "do_supplemental_info",
+    "dowhatis",
+    "doquickwhatis",
+    "doidtrap",
+    "whatdoes_help",
+    "dowhatdoes_core",
+    "dowhatdoes",
+    "docontact",
+    "dispfile_help",
+    "dispfile_shelp",
+    "dispfile_optionfile",
+    "dispfile_optmenu",
+    "dispfile_license",
+    "dispfile_debughelp",
+    "dispfile_usagehelp",
+    "hmenu_doextversion",
+    "hmenu_dohistory",
+    "hmenu_dowhatis",
+    "hmenu_dowhatdoes",
+    "hmenu_doextlist",
+    "domenucontrols",
+    "dohelp",
+    "setopt_cmd",
+    "dohistory"
+  ],
+  "private": [
+    "is_swallow_sym",
+    "append_str",
+    "trap_description",
+    "look_at_object",
+    "look_at_monster",
+    "lookat",
+    "checkfile",
+    "add_cmap_descr",
+    "add_quoted_engraving",
+    "look_region_nearby",
+    "look_all",
+    "look_traps",
+    "look_engrs",
+    "do_supplemental_info",
+    "whatdoes_help",
+    "docontact",
+    "dispfile_help",
+    "dispfile_shelp",
+    "dispfile_optionfile",
+    "dispfile_optmenu",
+    "dispfile_license",
+    "dispfile_debughelp",
+    "dispfile_usagehelp",
+    "hmenu_doextversion",
+    "hmenu_dohistory",
+    "hmenu_dowhatis",
+    "hmenu_dowhatdoes",
+    "hmenu_doextlist",
+    "domenucontrols",
+    "setopt_cmd"
+  ],
+  "functions": {
+    "is_swallow_sym": {
+      "type": {
+        "qualType": "boolean (int)"
+      },
+      "args": [
+        [
+          "c",
+          {
+            "qualType": "int"
+          }
+        ]
+      ]
+    },
+    "append_str": {
+      "type": {
+        "qualType": "int (char *, const char *)"
+      },
+      "args": [
+        [
+          "buf",
+          {
+            "qualType": "char *"
+          }
+        ],
+        [
+          "new_str",
+          {
+            "qualType": "const char *"
+          }
+        ]
+      ]
+    },
+    "self_lookat": {
+      "type": {
+        "qualType": "char *(char *)"
+      },
+      "args": [
+        [
+          "outbuf",
+          {
+            "qualType": "char *"
+          }
+        ]
+      ]
+    },
+    "monhealthdescr": {
+      "type": {
+        "qualType": "char *(struct monst *, boolean, char *)"
+      },
+      "args": [
+        [
+          "mon",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "addspace",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xbeae17290"
+          }
+        ],
+        [
+          "outbuf",
+          {
+            "qualType": "char *"
+          }
+        ]
+      ]
+    },
+    "trap_description": {
+      "type": {
+        "qualType": "void (char *, int, coordxy, coordxy)"
+      },
+      "args": [
+        [
+          "outbuf",
+          {
+            "qualType": "char *"
+          }
+        ],
+        [
+          "tnum",
+          {
+            "qualType": "int"
+          }
+        ],
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ]
+      ]
+    },
+    "mhidden_description": {
+      "type": {
+        "qualType": "void (struct monst *, unsigned int, char *)"
+      },
+      "args": [
+        [
+          "mon",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "mhid_flags",
+          {
+            "qualType": "unsigned int"
+          }
+        ],
+        [
+          "outbuf",
+          {
+            "qualType": "char *"
+          }
+        ]
+      ]
+    },
+    "object_from_map": {
+      "type": {
+        "qualType": "boolean (int, coordxy, coordxy, struct obj **)"
+      },
+      "args": [
+        [
+          "glyph",
+          {
+            "qualType": "int"
+          }
+        ],
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "obj_p",
+          {
+            "qualType": "struct obj **"
+          }
+        ]
+      ]
+    },
+    "look_at_object": {
+      "type": {
+        "qualType": "void (char *, coordxy, coordxy, int)"
+      },
+      "args": [
+        [
+          "buf",
+          {
+            "qualType": "char *"
+          }
+        ],
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "glyph",
+          {
+            "qualType": "int"
+          }
+        ]
+      ]
+    },
+    "look_at_monster": {
+      "type": {
+        "qualType": "void (char *, char *, struct monst *, coordxy, coordxy)"
+      },
+      "args": [
+        [
+          "buf",
+          {
+            "qualType": "char *"
+          }
+        ],
+        [
+          "monbuf",
+          {
+            "qualType": "char *"
+          }
+        ],
+        [
+          "mtmp",
+          {
+            "qualType": "struct monst *"
+          }
+        ],
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ]
+      ]
+    },
+    "waterbody_name": {
+      "type": {
+        "qualType": "const char *(coordxy, coordxy)"
+      },
+      "args": [
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ]
+      ]
+    },
+    "ice_descr": {
+      "type": {
+        "qualType": "char *(coordxy, coordxy, char *)"
+      },
+      "args": [
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "outbuf",
+          {
+            "qualType": "char *"
+          }
+        ]
+      ]
+    },
+    "lookat": {
+      "type": {
+        "qualType": "struct permonst *(coordxy, coordxy, char *, char *)"
+      },
+      "args": [
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "buf",
+          {
+            "qualType": "char *"
+          }
+        ],
+        [
+          "monbuf",
+          {
+            "qualType": "char *"
+          }
+        ]
+      ]
+    },
+    "ia_checkfile": {
+      "type": {
+        "qualType": "boolean (struct obj *)"
+      },
+      "args": [
+        [
+          "otmp",
+          {
+            "qualType": "struct obj *"
+          }
+        ]
+      ]
+    },
+    "checkfile": {
+      "type": {
+        "qualType": "boolean (char *, struct permonst *, unsigned int, char *)"
+      },
+      "args": [
+        [
+          "inp",
+          {
+            "qualType": "char *"
+          }
+        ],
+        [
+          "pm",
+          {
+            "qualType": "struct permonst *"
+          }
+        ],
+        [
+          "chkflags",
+          {
+            "qualType": "unsigned int"
+          }
+        ],
+        [
+          "supplemental_name",
+          {
+            "qualType": "char *"
+          }
+        ]
+      ]
+    },
+    "add_cmap_descr": {
+      "type": {
+        "qualType": "int (int, int, int, int, coord, const char *, const char *, boolean *, const char **, char *)"
+      },
+      "args": [
+        [
+          "found",
+          {
+            "qualType": "int"
+          }
+        ],
+        [
+          "idx",
+          {
+            "qualType": "int"
+          }
+        ],
+        [
+          "glyph",
+          {
+            "qualType": "int"
+          }
+        ],
+        [
+          "article",
+          {
+            "qualType": "int"
+          }
+        ],
+        [
+          "cc",
+          {
+            "desugaredQualType": "struct nhcoord",
+            "qualType": "coord",
+            "typeAliasDeclId": "0xbeae176b8"
+          }
+        ],
+        [
+          "x_str",
+          {
+            "qualType": "const char *"
+          }
+        ],
+        [
+          "prefix",
+          {
+            "qualType": "const char *"
+          }
+        ],
+        [
+          "hit_trap",
+          {
+            "qualType": "boolean *"
+          }
+        ],
+        [
+          "firstmatch",
+          {
+            "qualType": "const char **"
+          }
+        ],
+        [
+          "out_str",
+          {
+            "qualType": "char *"
+          }
+        ]
+      ]
+    },
+    "do_screen_description": {
+      "type": {
+        "qualType": "int (coord, boolean, int, char *, const char **, struct permonst **)"
+      },
+      "args": [
+        [
+          "cc",
+          {
+            "desugaredQualType": "struct nhcoord",
+            "qualType": "coord",
+            "typeAliasDeclId": "0xbeae176b8"
+          }
+        ],
+        [
+          "looked",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xbeae17290"
+          }
+        ],
+        [
+          "sym",
+          {
+            "qualType": "int"
+          }
+        ],
+        [
+          "out_str",
+          {
+            "qualType": "char *"
+          }
+        ],
+        [
+          "firstmatch",
+          {
+            "qualType": "const char **"
+          }
+        ],
+        [
+          "for_supplement",
+          {
+            "qualType": "struct permonst **"
+          }
+        ]
+      ]
+    },
+    "add_quoted_engraving": {
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, char *, boolean)"
+      },
+      "args": [
+        [
+          "x",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "y",
+          {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0xbeae17158"
+          }
+        ],
+        [
+          "buf",
+          {
+            "qualType": "char *"
+          }
+        ],
+        [
+          "force",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xbeae17290"
+          }
+        ]
+      ]
+    },
+    "do_look": {
+      "type": {
+        "qualType": "int (int, coord *)"
+      },
+      "args": [
+        [
+          "mode",
+          {
+            "qualType": "int"
+          }
+        ],
+        [
+          "click_cc",
+          {
+            "qualType": "coord *"
+          }
+        ]
+      ]
+    },
+    "look_region_nearby": {
+      "type": {
+        "qualType": "void (coordxy *, coordxy *, coordxy *, coordxy *, boolean)"
+      },
+      "args": [
+        [
+          "lo_x",
+          {
+            "qualType": "coordxy *"
+          }
+        ],
+        [
+          "lo_y",
+          {
+            "qualType": "coordxy *"
+          }
+        ],
+        [
+          "hi_x",
+          {
+            "qualType": "coordxy *"
+          }
+        ],
+        [
+          "hi_y",
+          {
+            "qualType": "coordxy *"
+          }
+        ],
+        [
+          "nearby",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xbeae17290"
+          }
+        ]
+      ]
+    },
+    "look_all": {
+      "type": {
+        "qualType": "void (boolean, boolean)"
+      },
+      "args": [
+        [
+          "nearby",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xbeae17290"
+          }
+        ],
+        [
+          "do_mons",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xbeae17290"
+          }
+        ]
+      ]
+    },
+    "look_traps": {
+      "type": {
+        "qualType": "void (boolean)"
+      },
+      "args": [
+        [
+          "nearby",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xbeae17290"
+          }
+        ]
+      ]
+    },
+    "look_engrs": {
+      "type": {
+        "qualType": "void (boolean)"
+      },
+      "args": [
+        [
+          "nearby",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xbeae17290"
+          }
+        ]
+      ]
+    },
+    "do_supplemental_info": {
+      "type": {
+        "qualType": "void (char *, struct permonst *, boolean)"
+      },
+      "args": [
+        [
+          "name",
+          {
+            "qualType": "char *"
+          }
+        ],
+        [
+          "pm",
+          {
+            "qualType": "struct permonst *"
+          }
+        ],
+        [
+          "without_asking",
+          {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0xbeae17290"
+          }
+        ]
+      ]
+    },
+    "dowhatis": {
+      "type": {
+        "qualType": "int (void)"
+      },
+      "args": []
+    },
+    "doquickwhatis": {
+      "type": {
+        "qualType": "int (void)"
+      },
+      "args": []
+    },
+    "doidtrap": {
+      "type": {
+        "qualType": "int (void)"
+      },
+      "args": []
+    },
+    "whatdoes_help": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "dowhatdoes_core": {
+      "type": {
+        "qualType": "char *(char, char *)"
+      },
+      "args": [
+        [
+          "q",
+          {
+            "qualType": "char"
+          }
+        ],
+        [
+          "cbuf",
+          {
+            "qualType": "char *"
+          }
+        ]
+      ]
+    },
+    "dowhatdoes": {
+      "type": {
+        "qualType": "int (void)"
+      },
+      "args": []
+    },
+    "docontact": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "dispfile_help": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "dispfile_shelp": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "dispfile_optionfile": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "dispfile_optmenu": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "dispfile_license": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "dispfile_debughelp": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "dispfile_usagehelp": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "hmenu_doextversion": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "hmenu_dohistory": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "hmenu_dowhatis": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "hmenu_dowhatdoes": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "hmenu_doextlist": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "domenucontrols": {
+      "type": {
+        "qualType": "void (void)"
+      },
+      "args": []
+    },
+    "dohelp": {
+      "type": {
+        "qualType": "int (void)"
+      },
+      "args": []
+    },
+    "setopt_cmd": {
+      "type": {
+        "qualType": "char *(char *)"
+      },
+      "args": [
+        [
+          "outbuf",
+          {
+            "qualType": "char *"
+          }
+        ]
+      ]
+    },
+    "dohistory": {
+      "type": {
+        "qualType": "int (void)"
+      },
+      "args": []
+    }
+  },
+  "sourceSha256": "92d078a4c4e0f81bf91c07b91383e848427eeed37b9877fa34d8564774b8952b",
+  "memberExprs": [
+    [
+      "add_cmap_descr",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "add_cmap_descr",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "add_cmap_descr",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "add_cmap_descr",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "add_cmap_descr",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "add_cmap_descr",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "add_cmap_descr",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "add_cmap_descr",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "add_cmap_descr",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "add_cmap_descr",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "add_cmap_descr",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "add_cmap_descr",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "add_cmap_descr",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "add_cmap_descr",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "add_cmap_descr",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "add_cmap_descr",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "add_cmap_descr",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "add_cmap_descr",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "add_cmap_descr",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "add_cmap_descr",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "add_cmap_descr",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "add_cmap_descr",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "add_cmap_descr",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "add_cmap_descr",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "add_cmap_descr",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "add_cmap_descr",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "add_cmap_descr",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "add_cmap_descr",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "add_cmap_descr",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "add_cmap_descr",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "add_cmap_descr",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "add_cmap_descr",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "add_cmap_descr",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "add_cmap_descr",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "add_cmap_descr",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "add_cmap_descr",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "add_cmap_descr",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "add_cmap_descr",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "add_cmap_descr",
+      "youmonst",
+      "struct monst",
+      false,
+      "struct instance_globals_y"
+    ],
+    [
+      "add_quoted_engraving",
+      "engr_txt",
+      "char *[3]",
+      true,
+      "struct engr *"
+    ],
+    [
+      "add_quoted_engraving",
+      "eread",
+      "unsigned int",
+      true,
+      "struct engr *"
+    ],
+    [
+      "checkfile",
+      "oc_name",
+      "const char *",
+      false,
+      "struct objdescr"
+    ],
+    [
+      "checkfile",
+      "pmnames",
+      "const char *[3]",
+      true,
+      "struct permonst *"
+    ],
+    [
+      "checkfile",
+      "win_create_nhwindow",
+      "winid (*volatile)(int)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "checkfile",
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "checkfile",
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "checkfile",
+      "win_display_nhwindow",
+      "void (*volatile)(winid, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "checkfile",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dispfile_debughelp",
+      "win_display_file",
+      "void (*volatile)(const char *, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dispfile_help",
+      "win_display_file",
+      "void (*volatile)(const char *, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dispfile_license",
+      "win_display_file",
+      "void (*volatile)(const char *, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dispfile_optionfile",
+      "win_display_file",
+      "void (*volatile)(const char *, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dispfile_optmenu",
+      "win_display_file",
+      "void (*volatile)(const char *, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dispfile_shelp",
+      "win_display_file",
+      "void (*volatile)(const char *, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dispfile_usagehelp",
+      "win_display_file",
+      "void (*volatile)(const char *, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "a_char",
+      "char",
+      false,
+      "anything"
+    ],
+    [
+      "do_look",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "do_look",
+      "help",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "do_look",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "do_look",
+      "invent",
+      "struct obj *",
+      false,
+      "struct instance_globals_i"
+    ],
+    [
+      "do_look",
+      "invlet",
+      "char",
+      true,
+      "struct obj *"
+    ],
+    [
+      "do_look",
+      "item",
+      "union any",
+      true,
+      "menu_item *"
+    ],
+    [
+      "do_look",
+      "key",
+      "char",
+      false,
+      "struct _cmd_queue"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "lootabc",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "nobj",
+      "struct obj *",
+      true,
+      "struct obj *"
+    ],
+    [
+      "do_look",
+      "typ",
+      "int",
+      false,
+      "struct _cmd_queue"
+    ],
+    [
+      "do_look",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "do_look",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "do_look",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "do_look",
+      "uswallow",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "do_look",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "do_look",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "do_look",
+      "verbose",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "verbose",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "verbose",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "verbose",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "verbose",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "verbose",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_look",
+      "win_create_nhwindow",
+      "winid (*volatile)(int)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "do_look",
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "do_look",
+      "win_end_menu",
+      "void (*volatile)(winid, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "do_look",
+      "win_putmixed",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "do_look",
+      "win_start_menu",
+      "void (*volatile)(winid, unsigned long)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "do_look",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_look",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_look",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_look",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_look",
+      "x",
+      "short",
+      true,
+      "coord *"
+    ],
+    [
+      "do_look",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_look",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_look",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_look",
+      "y",
+      "short",
+      true,
+      "coord *"
+    ],
+    [
+      "do_look",
+      "zeroany",
+      "const union any",
+      false,
+      "const struct const_globals"
+    ],
+    [
+      "do_look",
+      "zeroany",
+      "const union any",
+      false,
+      "const struct const_globals"
+    ],
+    [
+      "do_screen_description",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "do_screen_description",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_qstart_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_rogue_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_rogue_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_rogue_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_rogue_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_rogue_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_rogue_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_sokoban_dnum",
+      "short",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "do_screen_description",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "do_screen_description",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "do_screen_description",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "do_screen_description",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "do_screen_description",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "do_screen_description",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "do_screen_description",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "do_screen_description",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "do_screen_description",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "do_screen_description",
+      "explain",
+      "const char *const",
+      false,
+      "const struct class_sym"
+    ],
+    [
+      "do_screen_description",
+      "explain",
+      "const char *const",
+      false,
+      "const struct class_sym"
+    ],
+    [
+      "do_screen_description",
+      "explain",
+      "const char *const",
+      false,
+      "const struct class_sym"
+    ],
+    [
+      "do_screen_description",
+      "explain",
+      "const char *const",
+      false,
+      "const struct class_sym"
+    ],
+    [
+      "do_screen_description",
+      "explain",
+      "const char *const",
+      false,
+      "const struct class_sym"
+    ],
+    [
+      "do_screen_description",
+      "explain",
+      "const char *const",
+      false,
+      "const struct class_sym"
+    ],
+    [
+      "do_screen_description",
+      "explain",
+      "const char *const",
+      false,
+      "const struct class_sym"
+    ],
+    [
+      "do_screen_description",
+      "explanation",
+      "const char *const",
+      false,
+      "const struct symdef"
+    ],
+    [
+      "do_screen_description",
+      "explanation",
+      "const char *const",
+      false,
+      "const struct symdef"
+    ],
+    [
+      "do_screen_description",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "do_screen_description",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "do_screen_description",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "do_screen_description",
+      "gameover",
+      "int",
+      false,
+      "struct sinfo"
+    ],
+    [
+      "do_screen_description",
+      "glyph",
+      "int",
+      false,
+      "glyph_info"
+    ],
+    [
+      "do_screen_description",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "do_screen_description",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "do_screen_description",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "do_screen_description",
+      "mnum",
+      "short",
+      false,
+      "struct Race"
+    ],
+    [
+      "do_screen_description",
+      "mnum",
+      "short",
+      false,
+      "struct Race"
+    ],
+    [
+      "do_screen_description",
+      "ov_primary_syms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_o"
+    ],
+    [
+      "do_screen_description",
+      "ov_primary_syms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_o"
+    ],
+    [
+      "do_screen_description",
+      "ov_rogue_syms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_o"
+    ],
+    [
+      "do_screen_description",
+      "ov_rogue_syms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_o"
+    ],
+    [
+      "do_screen_description",
+      "showrace",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "do_screen_description",
+      "showsyms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_s"
+    ],
+    [
+      "do_screen_description",
+      "showsyms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_s"
+    ],
+    [
+      "do_screen_description",
+      "showsyms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_s"
+    ],
+    [
+      "do_screen_description",
+      "showsyms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_s"
+    ],
+    [
+      "do_screen_description",
+      "showsyms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_s"
+    ],
+    [
+      "do_screen_description",
+      "showsyms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_s"
+    ],
+    [
+      "do_screen_description",
+      "showsyms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_s"
+    ],
+    [
+      "do_screen_description",
+      "sym",
+      "const char",
+      false,
+      "const struct class_sym"
+    ],
+    [
+      "do_screen_description",
+      "sym",
+      "const char",
+      false,
+      "const struct class_sym"
+    ],
+    [
+      "do_screen_description",
+      "sym",
+      "const char",
+      false,
+      "const struct class_sym"
+    ],
+    [
+      "do_screen_description",
+      "sym",
+      "const char",
+      false,
+      "const struct class_sym"
+    ],
+    [
+      "do_screen_description",
+      "sym",
+      "const unsigned char",
+      false,
+      "const struct symdef"
+    ],
+    [
+      "do_screen_description",
+      "sym",
+      "const unsigned char",
+      false,
+      "const struct symdef"
+    ],
+    [
+      "do_screen_description",
+      "terrainmode",
+      "unsigned int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "do_screen_description",
+      "terrainmode",
+      "unsigned int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "do_screen_description",
+      "terrainmode",
+      "unsigned int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "do_screen_description",
+      "terrainmode",
+      "unsigned int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "do_screen_description",
+      "terrainmode",
+      "unsigned int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "do_screen_description",
+      "ttychar",
+      "int",
+      false,
+      "glyph_info"
+    ],
+    [
+      "do_screen_description",
+      "ttychar",
+      "int",
+      false,
+      "glyph_info"
+    ],
+    [
+      "do_screen_description",
+      "uinwater",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "umonnum",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "umonster",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "urace",
+      "struct Race",
+      false,
+      "struct instance_globals_u"
+    ],
+    [
+      "do_screen_description",
+      "urace",
+      "struct Race",
+      false,
+      "struct instance_globals_u"
+    ],
+    [
+      "do_screen_description",
+      "uswallow",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "do_screen_description",
+      "warnsyms",
+      "nhsym[6]",
+      false,
+      "struct instance_globals_w"
+    ],
+    [
+      "do_screen_description",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "x",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_screen_description",
+      "y",
+      "short",
+      false,
+      "coord"
+    ],
+    [
+      "do_supplemental_info",
+      "mflags2",
+      "unsigned long",
+      true,
+      "struct permonst *"
+    ],
+    [
+      "do_supplemental_info",
+      "win_create_nhwindow",
+      "winid (*volatile)(int)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "do_supplemental_info",
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "do_supplemental_info",
+      "win_display_nhwindow",
+      "void (*volatile)(winid, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "do_supplemental_info",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "fmtd_wizard_list",
+      "char *",
+      false,
+      "struct sysopt_s"
+    ],
+    [
+      "docontact",
+      "fmtd_wizard_list",
+      "char *",
+      false,
+      "struct sysopt_s"
+    ],
+    [
+      "docontact",
+      "support",
+      "char *",
+      false,
+      "struct sysopt_s"
+    ],
+    [
+      "docontact",
+      "support",
+      "char *",
+      false,
+      "struct sysopt_s"
+    ],
+    [
+      "docontact",
+      "win_create_nhwindow",
+      "winid (*volatile)(int)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "win_display_nhwindow",
+      "void (*volatile)(winid, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "docontact",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dohelp",
+      "a_int",
+      "int",
+      false,
+      "anything"
+    ],
+    [
+      "dohelp",
+      "a_int",
+      "int",
+      false,
+      "anything"
+    ],
+    [
+      "dohelp",
+      "debug",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "dohelp",
+      "f",
+      "void (*const)(void)",
+      false,
+      "const struct (unnamed struct at pager.c:2830:14)"
+    ],
+    [
+      "dohelp",
+      "f",
+      "void (*const)(void)",
+      false,
+      "const struct (unnamed struct at pager.c:2830:14)"
+    ],
+    [
+      "dohelp",
+      "f",
+      "void (*const)(void)",
+      false,
+      "const struct (unnamed struct at pager.c:2830:14)"
+    ],
+    [
+      "dohelp",
+      "f",
+      "void (*const)(void)",
+      false,
+      "const struct (unnamed struct at pager.c:2830:14)"
+    ],
+    [
+      "dohelp",
+      "hideusage",
+      "int",
+      false,
+      "struct sysopt_s"
+    ],
+    [
+      "dohelp",
+      "item",
+      "union any",
+      false,
+      "menu_item"
+    ],
+    [
+      "dohelp",
+      "text",
+      "const char *const",
+      false,
+      "const struct (unnamed struct at pager.c:2830:14)"
+    ],
+    [
+      "dohelp",
+      "text",
+      "const char *const",
+      false,
+      "const struct (unnamed struct at pager.c:2830:14)"
+    ],
+    [
+      "dohelp",
+      "text",
+      "const char *const",
+      false,
+      "const struct (unnamed struct at pager.c:2830:14)"
+    ],
+    [
+      "dohelp",
+      "text",
+      "const char *const",
+      false,
+      "const struct (unnamed struct at pager.c:2830:14)"
+    ],
+    [
+      "dohelp",
+      "text",
+      "const char *const",
+      false,
+      "const struct (unnamed struct at pager.c:2830:14)"
+    ],
+    [
+      "dohelp",
+      "win_create_nhwindow",
+      "winid (*volatile)(int)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dohelp",
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dohelp",
+      "win_end_menu",
+      "void (*volatile)(winid, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dohelp",
+      "win_start_menu",
+      "void (*volatile)(winid, unsigned long)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dohelp",
+      "zeroany",
+      "const union any",
+      false,
+      "const struct const_globals"
+    ],
+    [
+      "dohistory",
+      "win_display_file",
+      "void (*volatile)(const char *, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "doidtrap",
+      "dx",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "doidtrap",
+      "dy",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "doidtrap",
+      "dz",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "doidtrap",
+      "dz",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "doidtrap",
+      "ftrap",
+      "struct trap *",
+      false,
+      "struct instance_globals_f"
+    ],
+    [
+      "doidtrap",
+      "madeby_u",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "doidtrap",
+      "madeby_u",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "doidtrap",
+      "ntrap",
+      "struct trap *",
+      true,
+      "struct trap *"
+    ],
+    [
+      "doidtrap",
+      "tseen",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "doidtrap",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "doidtrap",
+      "tx",
+      "short",
+      true,
+      "struct trap *"
+    ],
+    [
+      "doidtrap",
+      "ty",
+      "short",
+      true,
+      "struct trap *"
+    ],
+    [
+      "doidtrap",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "doidtrap",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "domenucontrols",
+      "win_create_nhwindow",
+      "winid (*volatile)(int)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "domenucontrols",
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "domenucontrols",
+      "win_display_nhwindow",
+      "void (*volatile)(winid, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "dowhatdoes",
+      "altmeta",
+      "signed char",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "dowhatdoes",
+      "altmeta",
+      "signed char",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "ice_descr",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "ice_descr",
+      "decor_levitate_override",
+      "signed char",
+      false,
+      "struct instance_globals_d"
+    ],
+    [
+      "ice_descr",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "ice_descr",
+      "flags",
+      "unsigned int",
+      false,
+      "struct rm"
+    ],
+    [
+      "ice_descr",
+      "ice_rating",
+      "signed char",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "ice_descr",
+      "ice_rating",
+      "signed char",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "ice_descr",
+      "ice_rating",
+      "signed char",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "ice_descr",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "ice_descr",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "ice_descr",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "ice_descr",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "ice_descr",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "ice_descr",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "ice_descr",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "ice_descr",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "ice_descr",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "ice_descr",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "ice_descr",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "ice_descr",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "ice_descr",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "ice_descr",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "ice_descr",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "ice_descr",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "ice_descr",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "ice_descr",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "ice_descr",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "ice_descr",
+      "viz_array",
+      "seenV **",
+      false,
+      "struct instance_globals_v"
+    ],
+    [
+      "ice_descr",
+      "xray_range",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "ice_descr",
+      "xray_range",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "is_swallow_sym",
+      "showsyms",
+      "nhsym[196]",
+      false,
+      "struct instance_globals_s"
+    ],
+    [
+      "look_all",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "explanation",
+      "const char *const",
+      false,
+      "const struct symdef"
+    ],
+    [
+      "look_all",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "getpos_coords",
+      "int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "look_all",
+      "getpos_coords",
+      "int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "look_all",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_all",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_all",
+      "monsters",
+      "struct monst *[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uswallow",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uswallow",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uundetected",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uundetected",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_all",
+      "win_create_nhwindow",
+      "winid (*volatile)(int)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_all",
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_all",
+      "win_display_nhwindow",
+      "void (*volatile)(winid, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_all",
+      "win_putmixed",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_all",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_all",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_at_monster",
+      "context",
+      "struct context_info",
+      false,
+      "struct instance_globals_saved_c"
+    ],
+    [
+      "look_at_monster",
+      "context",
+      "struct context_info",
+      false,
+      "struct instance_globals_saved_c"
+    ],
+    [
+      "look_at_monster",
+      "data",
+      "struct permonst *",
+      false,
+      "struct monst"
+    ],
+    [
+      "look_at_monster",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_at_monster",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_at_monster",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_at_monster",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_at_monster",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_at_monster",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "look_at_monster",
+      "isshk",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "m_ap_type",
+      "unsigned char",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "mflags2",
+      "unsigned long",
+      true,
+      "struct permonst *"
+    ],
+    [
+      "look_at_monster",
+      "mfrozen",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "mleashed",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "mpeaceful",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "msleeping",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "mstrategy",
+      "unsigned long",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "mtame",
+      "signed char",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "mtrapped",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "mundetected",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "mx",
+      "short",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "mx",
+      "short",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "mx",
+      "short",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "my",
+      "short",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "my",
+      "short",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "my",
+      "short",
+      true,
+      "struct monst *"
+    ],
+    [
+      "look_at_monster",
+      "obj",
+      "unsigned long",
+      false,
+      "struct warntype_info"
+    ],
+    [
+      "look_at_monster",
+      "polyd",
+      "unsigned long",
+      false,
+      "struct warntype_info"
+    ],
+    [
+      "look_at_monster",
+      "save_uswallow",
+      "unsigned int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "look_at_monster",
+      "tseen",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_at_monster",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_at_monster",
+      "umonnum",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "look_at_monster",
+      "umonster",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "look_at_monster",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_at_monster",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_at_monster",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_at_monster",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_at_monster",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_at_monster",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "look_at_monster",
+      "ustuck",
+      "struct monst *",
+      false,
+      "struct you"
+    ],
+    [
+      "look_at_monster",
+      "uswallow",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "look_at_monster",
+      "viz_array",
+      "seenV **",
+      false,
+      "struct instance_globals_v"
+    ],
+    [
+      "look_at_monster",
+      "warntype",
+      "struct warntype_info",
+      false,
+      "struct context_info"
+    ],
+    [
+      "look_at_monster",
+      "warntype",
+      "struct warntype_info",
+      false,
+      "struct context_info"
+    ],
+    [
+      "look_at_monster",
+      "youmonst",
+      "struct monst",
+      false,
+      "struct instance_globals_y"
+    ],
+    [
+      "look_at_object",
+      "arboreal",
+      "unsigned int",
+      false,
+      "struct levelflags"
+    ],
+    [
+      "look_at_object",
+      "c_something",
+      "const char *const",
+      false,
+      "const struct c_common_strings"
+    ],
+    [
+      "look_at_object",
+      "dknown",
+      "unsigned int",
+      true,
+      "struct obj *"
+    ],
+    [
+      "look_at_object",
+      "flags",
+      "struct levelflags",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_at_object",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_at_object",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_at_object",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_at_object",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_at_object",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_at_object",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_at_object",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_at_object",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_at_object",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_at_object",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_at_object",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_at_object",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_at_object",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_at_object",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_at_object",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_at_object",
+      "oc_name",
+      "const char *",
+      false,
+      "struct objdescr"
+    ],
+    [
+      "look_at_object",
+      "otyp",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "look_at_object",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_at_object",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_at_object",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_at_object",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_at_object",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_at_object",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_at_object",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_at_object",
+      "where",
+      "signed char",
+      true,
+      "struct obj *"
+    ],
+    [
+      "look_at_object",
+      "where",
+      "signed char",
+      true,
+      "struct obj *"
+    ],
+    [
+      "look_engrs",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_engrs",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_engrs",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_engrs",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_engrs",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_engrs",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_engrs",
+      "d_sokoban_dnum",
+      "short",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_engrs",
+      "d_sokoban_dnum",
+      "short",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_engrs",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_engrs",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_engrs",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_engrs",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_engrs",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_engrs",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_engrs",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_engrs",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_engrs",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_engrs",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_engrs",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_engrs",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_engrs",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_engrs",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_engrs",
+      "engr_x",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_x",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_x",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_x",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_x",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_x",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_x",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_x",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_x",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_x",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_y",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_y",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_y",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_y",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_y",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_y",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_y",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_y",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_y",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "engr_y",
+      "short",
+      true,
+      "struct engr *"
+    ],
+    [
+      "look_engrs",
+      "getpos_coords",
+      "int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "look_engrs",
+      "getpos_coords",
+      "int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "look_engrs",
+      "lastseentyp",
+      "schar[80][21]",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "look_engrs",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_engrs",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_engrs",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_engrs",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_engrs",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_engrs",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_engrs",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_engrs",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_engrs",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_engrs",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_engrs",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "look_engrs",
+      "seenv",
+      "unsigned char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_engrs",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_engrs",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_engrs",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_engrs",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_engrs",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_engrs",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_engrs",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_engrs",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_engrs",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_engrs",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "look_engrs",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_engrs",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_engrs",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_engrs",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_engrs",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_engrs",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_engrs",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_engrs",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_engrs",
+      "win_create_nhwindow",
+      "winid (*volatile)(int)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_engrs",
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_engrs",
+      "win_display_nhwindow",
+      "void (*volatile)(winid, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_engrs",
+      "win_putmixed",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_engrs",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_engrs",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_region_nearby",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_region_nearby",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_region_nearby",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_region_nearby",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_region_nearby",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_region_nearby",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_region_nearby",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_region_nearby",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "look_traps",
+      "d_air_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_traps",
+      "d_air_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_traps",
+      "d_air_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_traps",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_traps",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_traps",
+      "d_knox_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_traps",
+      "d_sokoban_dnum",
+      "short",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_traps",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_traps",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_traps",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "look_traps",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_traps",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_traps",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_traps",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_traps",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_traps",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_traps",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "look_traps",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_traps",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_traps",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_traps",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_traps",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_traps",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_traps",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_traps",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_traps",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_traps",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "look_traps",
+      "getpos_coords",
+      "int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "look_traps",
+      "getpos_coords",
+      "int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "look_traps",
+      "tseen",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "ttyp",
+      "unsigned int",
+      true,
+      "struct trap *"
+    ],
+    [
+      "look_traps",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_traps",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_traps",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_traps",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_traps",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_traps",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "look_traps",
+      "viz_array",
+      "seenV **",
+      false,
+      "struct instance_globals_v"
+    ],
+    [
+      "look_traps",
+      "win_create_nhwindow",
+      "winid (*volatile)(int)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_traps",
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_traps",
+      "win_display_nhwindow",
+      "void (*volatile)(winid, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_traps",
+      "win_putmixed",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_traps",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "look_traps",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "lookat",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "d_air_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "d_air_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "d_air_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "d_astral_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "d_astral_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "d_astral_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "lookat",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "lookat",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "lookat",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "lookat",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "lookat",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "lookat",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "lookat",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "lookat",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "lookat",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "lookat",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "lookat",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "lookat",
+      "explanation",
+      "const char *const",
+      false,
+      "const struct symdef"
+    ],
+    [
+      "lookat",
+      "explanation",
+      "const char *const",
+      false,
+      "const struct symdef"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "female",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "lookat",
+      "flags",
+      "unsigned int",
+      false,
+      "struct rm"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "lookat",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "lookat",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "lookat",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "lookat",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "lookat",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "lookat",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "lookat",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "lookat",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "lookat",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "lookat",
+      "mnum",
+      "short",
+      false,
+      "struct Race"
+    ],
+    [
+      "lookat",
+      "mnum",
+      "short",
+      false,
+      "struct Role"
+    ],
+    [
+      "lookat",
+      "monsters",
+      "struct monst *[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "lookat",
+      "pmidx",
+      "const enum monnums",
+      true,
+      "struct permonst *"
+    ],
+    [
+      "lookat",
+      "save_uswallow",
+      "unsigned int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "lookat",
+      "save_uswallow",
+      "unsigned int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "lookat",
+      "seenv",
+      "unsigned char",
+      false,
+      "struct rm"
+    ],
+    [
+      "lookat",
+      "terrainmode",
+      "unsigned int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "lookat",
+      "terrainmode",
+      "unsigned int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "lookat",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "lookat",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "lookat",
+      "uinwater",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uinwater",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "umonnum",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "umonster",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "urace",
+      "struct Race",
+      false,
+      "struct instance_globals_u"
+    ],
+    [
+      "lookat",
+      "urole",
+      "struct Role",
+      false,
+      "struct instance_globals_u"
+    ],
+    [
+      "lookat",
+      "ustuck",
+      "struct monst *",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "ustuck",
+      "struct monst *",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "ustuck",
+      "struct monst *",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "ustuck",
+      "struct monst *",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uswallow",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uswallow",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uswallow",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uundetected",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uundetected",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "lookat",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "mhidden_description",
+      "c_something",
+      "const char *const",
+      false,
+      "const struct c_common_strings"
+    ],
+    [
+      "mhidden_description",
+      "c_something",
+      "const char *const",
+      false,
+      "const struct c_common_strings"
+    ],
+    [
+      "mhidden_description",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "data",
+      "struct permonst *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "explanation",
+      "const char *const",
+      false,
+      "const struct symdef"
+    ],
+    [
+      "mhidden_description",
+      "flags",
+      "struct levelflags",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "mhidden_description",
+      "glyph",
+      "int",
+      false,
+      "struct rm"
+    ],
+    [
+      "mhidden_description",
+      "glyph",
+      "int",
+      true,
+      "NhRegion *"
+    ],
+    [
+      "mhidden_description",
+      "hero_memory",
+      "unsigned int",
+      false,
+      "struct levelflags"
+    ],
+    [
+      "mhidden_description",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "mhidden_description",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "mhidden_description",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "mhidden_description",
+      "m_ap_type",
+      "unsigned char",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "m_ap_type",
+      "unsigned char",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "m_ap_type",
+      "unsigned char",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "m_ap_type",
+      "unsigned char",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "m_ap_type",
+      "unsigned char",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "mappearance",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "mappearance",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "mflags1",
+      "unsigned long",
+      true,
+      "struct permonst *"
+    ],
+    [
+      "mhidden_description",
+      "mflags1",
+      "unsigned long",
+      true,
+      "struct permonst *"
+    ],
+    [
+      "mhidden_description",
+      "mflags1",
+      "unsigned long",
+      true,
+      "struct permonst *"
+    ],
+    [
+      "mhidden_description",
+      "mflags1",
+      "unsigned long",
+      true,
+      "struct permonst *"
+    ],
+    [
+      "mhidden_description",
+      "mflags1",
+      "unsigned long",
+      true,
+      "struct permonst *"
+    ],
+    [
+      "mhidden_description",
+      "mlet",
+      "char",
+      true,
+      "struct permonst *"
+    ],
+    [
+      "mhidden_description",
+      "mlet",
+      "char",
+      true,
+      "struct permonst *"
+    ],
+    [
+      "mhidden_description",
+      "mundetected",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "mx",
+      "short",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "my",
+      "short",
+      true,
+      "struct monst *"
+    ],
+    [
+      "mhidden_description",
+      "oc_name",
+      "const char *",
+      false,
+      "struct objdescr"
+    ],
+    [
+      "mhidden_description",
+      "otyp",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "mhidden_description",
+      "quan",
+      "long",
+      true,
+      "struct obj *"
+    ],
+    [
+      "mhidden_description",
+      "uundetected",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "mhidden_description",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "mhidden_description",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "mhidden_description",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "mhidden_description",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "mhidden_description",
+      "where",
+      "signed char",
+      true,
+      "struct obj *"
+    ],
+    [
+      "mhidden_description",
+      "xray_range",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "mhidden_description",
+      "xray_range",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "mhidden_description",
+      "youmonst",
+      "struct monst",
+      false,
+      "struct instance_globals_y"
+    ],
+    [
+      "object_from_map",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "object_from_map",
+      "buriedobjlist",
+      "struct obj *",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "object_from_map",
+      "context",
+      "struct context_info",
+      false,
+      "struct instance_globals_saved_c"
+    ],
+    [
+      "object_from_map",
+      "corpsenm",
+      "int",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "corpsenm",
+      "int",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "corpsenm",
+      "int",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "corpsenm",
+      "int",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "current_fruit",
+      "int",
+      false,
+      "struct context_info"
+    ],
+    [
+      "object_from_map",
+      "dknown",
+      "unsigned int",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "object_from_map",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "object_from_map",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "object_from_map",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "object_from_map",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "object_from_map",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "object_from_map",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "object_from_map",
+      "m_ap_type",
+      "unsigned char",
+      true,
+      "struct monst *"
+    ],
+    [
+      "object_from_map",
+      "m_ap_type",
+      "unsigned char",
+      true,
+      "struct monst *"
+    ],
+    [
+      "object_from_map",
+      "m_ap_type",
+      "unsigned char",
+      true,
+      "struct monst *"
+    ],
+    [
+      "object_from_map",
+      "mappearance",
+      "unsigned int",
+      true,
+      "struct monst *"
+    ],
+    [
+      "object_from_map",
+      "mcorpsenm",
+      "int",
+      true,
+      "struct mextra *"
+    ],
+    [
+      "object_from_map",
+      "mcorpsenm",
+      "int",
+      true,
+      "struct mextra *"
+    ],
+    [
+      "object_from_map",
+      "mcorpsenm",
+      "int",
+      true,
+      "struct mextra *"
+    ],
+    [
+      "object_from_map",
+      "mextra",
+      "struct mextra *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "object_from_map",
+      "mextra",
+      "struct mextra *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "object_from_map",
+      "mextra",
+      "struct mextra *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "object_from_map",
+      "mextra",
+      "struct mextra *",
+      true,
+      "struct monst *"
+    ],
+    [
+      "object_from_map",
+      "monsters",
+      "struct monst *[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "object_from_map",
+      "no_charge",
+      "unsigned int",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "nobj",
+      "struct obj *",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "oc_class",
+      "char",
+      false,
+      "struct objclass"
+    ],
+    [
+      "object_from_map",
+      "oc_name",
+      "const char *",
+      false,
+      "struct objdescr"
+    ],
+    [
+      "object_from_map",
+      "oc_name_idx",
+      "short",
+      false,
+      "struct objclass"
+    ],
+    [
+      "object_from_map",
+      "oclass",
+      "char",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "otyp",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "otyp",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "otyp",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "otyp",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "otyp",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "otyp",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "otyp",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "otyp",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "ox",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "ox",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "oy",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "oy",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "quan",
+      "long",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "spe",
+      "signed char",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "spe",
+      "signed char",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "terrainmode",
+      "unsigned int",
+      false,
+      "struct instance_flags"
+    ],
+    [
+      "object_from_map",
+      "timed",
+      "short",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "object_from_map",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "object_from_map",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "object_from_map",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "object_from_map",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "object_from_map",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "object_from_map",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "object_from_map",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "object_from_map",
+      "where",
+      "signed char",
+      true,
+      "struct obj *"
+    ],
+    [
+      "object_from_map",
+      "where",
+      "signed char",
+      true,
+      "struct obj *"
+    ],
+    [
+      "self_lookat",
+      "adj",
+      "const char *",
+      false,
+      "struct Race"
+    ],
+    [
+      "self_lookat",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "self_lookat",
+      "blocked",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "self_lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "self_lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "self_lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "self_lookat",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "self_lookat",
+      "female",
+      "signed char",
+      false,
+      "struct flag"
+    ],
+    [
+      "self_lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "self_lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "self_lookat",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "self_lookat",
+      "m_ap_type",
+      "unsigned char",
+      false,
+      "struct monst"
+    ],
+    [
+      "self_lookat",
+      "mfemale",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "plname",
+      "char[32]",
+      false,
+      "struct instance_globals_saved_p"
+    ],
+    [
+      "self_lookat",
+      "umonnum",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "umonnum",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "umonnum",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "umonnum",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "umonster",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "umonster",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "umonster",
+      "int",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "urace",
+      "struct Race",
+      false,
+      "struct instance_globals_u"
+    ],
+    [
+      "self_lookat",
+      "usteed",
+      "struct monst *",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "usteed",
+      "struct monst *",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "utrap",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "uundetected",
+      "unsigned int",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "ux",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "uy",
+      "short",
+      false,
+      "struct you"
+    ],
+    [
+      "self_lookat",
+      "youmonst",
+      "struct monst",
+      false,
+      "struct instance_globals_y"
+    ],
+    [
+      "self_lookat",
+      "youmonst",
+      "struct monst",
+      false,
+      "struct instance_globals_y"
+    ],
+    [
+      "waterbody_name",
+      "d_juiblex_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "d_juiblex_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "d_juiblex_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "d_medusa_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "d_medusa_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "d_medusa_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "d_qstart_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "d_qstart_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "d_qstart_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "d_water_level",
+      "struct d_level",
+      false,
+      "struct dgn_topology"
+    ],
+    [
+      "waterbody_name",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "waterbody_name",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "waterbody_name",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "waterbody_name",
+      "dlevel",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "waterbody_name",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "waterbody_name",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "waterbody_name",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "waterbody_name",
+      "dnum",
+      "short",
+      true,
+      "d_level *"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "dungeon_topology",
+      "struct dgn_topology",
+      false,
+      "struct instance_globals_saved_d"
+    ],
+    [
+      "waterbody_name",
+      "extrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "waterbody_name",
+      "flags",
+      "unsigned int",
+      false,
+      "struct rm"
+    ],
+    [
+      "waterbody_name",
+      "gameover",
+      "int",
+      false,
+      "struct sinfo"
+    ],
+    [
+      "waterbody_name",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "waterbody_name",
+      "intrinsic",
+      "long",
+      false,
+      "struct prop"
+    ],
+    [
+      "waterbody_name",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "waterbody_name",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "waterbody_name",
+      "level",
+      "dlevel_t",
+      false,
+      "struct instance_globals_saved_l"
+    ],
+    [
+      "waterbody_name",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "waterbody_name",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "waterbody_name",
+      "locations",
+      "struct rm[80][21]",
+      false,
+      "dlevel_t"
+    ],
+    [
+      "waterbody_name",
+      "mnum",
+      "short",
+      false,
+      "struct Role"
+    ],
+    [
+      "waterbody_name",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "waterbody_name",
+      "typ",
+      "signed char",
+      false,
+      "struct rm"
+    ],
+    [
+      "waterbody_name",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "waterbody_name",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "waterbody_name",
+      "uprops",
+      "struct prop[69]",
+      false,
+      "struct you"
+    ],
+    [
+      "waterbody_name",
+      "urole",
+      "struct Role",
+      false,
+      "struct instance_globals_u"
+    ],
+    [
+      "waterbody_name",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "waterbody_name",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "waterbody_name",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "waterbody_name",
+      "uz",
+      "struct d_level",
+      false,
+      "struct you"
+    ],
+    [
+      "whatdoes_help",
+      "win_create_nhwindow",
+      "winid (*volatile)(int)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "whatdoes_help",
+      "win_destroy_nhwindow",
+      "void (*volatile)(winid)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "whatdoes_help",
+      "win_display_nhwindow",
+      "void (*volatile)(winid, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "whatdoes_help",
+      "win_display_nhwindow",
+      "void (*volatile)(winid, boolean)",
+      false,
+      "volatile struct window_procs"
+    ],
+    [
+      "whatdoes_help",
+      "win_putstr",
+      "void (*volatile)(winid, int, const char *)",
+      false,
+      "volatile struct window_procs"
+    ]
+  ],
+  "pointerOps": [
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "UnaryOperator",
+      "++",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "UnaryOperator",
+      "++",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "UnaryOperator",
+      "++",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "UnaryOperator",
+      "++",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "UnaryOperator",
+      "++",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "CompoundAssignOperator",
+      "+=",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "UnaryOperator",
+      "++",
+      "char *"
+    ],
+    [
+      "checkfile",
+      "UnaryOperator",
+      "++",
+      "char *"
+    ],
+    [
+      "whatdoes_help",
+      "UnaryOperator",
+      "++",
+      "char *"
+    ]
+  ],
+  "active": [
+    "DUMPLOG_CORE",
+    "ALTMETA",
+    "UNIX",
+    "SHELL",
+    "SUSPEND",
+    "TTY_GRAPHICS",
+    "HANGUPHANDLING",
+    "STATUS_HILITES",
+    "CLIPPING",
+    "DEBUG",
+    "NODIAG",
+    "INSURANCE",
+    "SAFERHANGUP",
+    "MACOS",
+    "__EMSCRIPTEN__"
+  ],
+  "inactive": [
+    "PORT_HELP",
+    "DLB",
+    "DLBLIB",
+    "DLBRSRC",
+    "VMS",
+    "WIZARD"
+  ],
+  "rngSites": [],
+  "suptext1": [
+    "%s is a member of a marauding horde of orcs",
+    "rumored to have brutally attacked and plundered",
+    "the ordinarily sheltered town that is located ",
+    "deep within The Gnomish Mines.",
+    "",
+    "The members of that vicious horde proudly and ",
+    "defiantly acclaim their allegiance to their",
+    "leader %s in their names."
+  ],
+  "suptext2": [
+    "\"%s\" is the common dungeon name of",
+    "a nefarious orc who is known to acquire property",
+    "from thieves and sell it off for profit.",
+    "",
+    "The perpetrator was last seen hanging around the",
+    "stairs leading to the Gnomish Mines."
+  ],
+  "icetyp": [
+    "solid",
+    "sturdy",
+    "steady",
+    "unsteady",
+    "thin",
+    "slushy"
+  ],
+  "helpMenu": [
+    [
+      "hmenu_doextversion",
+      "About NetHack (version information)."
+    ],
+    [
+      "dispfile_help",
+      "Long description of the game and commands."
+    ],
+    [
+      "dispfile_shelp",
+      "List of game commands."
+    ],
+    [
+      "hmenu_dohistory",
+      "Concise history of NetHack."
+    ],
+    [
+      "hmenu_dowhatis",
+      "Info on a character in the game display."
+    ],
+    [
+      "hmenu_dowhatdoes",
+      "Info on what a given key does."
+    ],
+    [
+      "option_help",
+      "List of game options."
+    ],
+    [
+      "dispfile_optionfile",
+      "Longer explanation of game options."
+    ],
+    [
+      "dispfile_optmenu",
+      "Using the %s command to set options."
+    ],
+    [
+      "dokeylist",
+      "Full list of keyboard commands."
+    ],
+    [
+      "hmenu_doextlist",
+      "List of extended commands."
+    ],
+    [
+      "domenucontrols",
+      "List menu control keys."
+    ],
+    [
+      "dispfile_usagehelp",
+      "Description of NetHack's command line."
+    ],
+    [
+      "dispfile_license",
+      "The NetHack license."
+    ],
+    [
+      "docontact",
+      "Support information."
+    ],
+    [
+      "dispfile_debughelp",
+      "List of wizard-mode commands."
+    ]
+  ],
+  "staticStrings": {
+    "invisexplain": "remembered, unseen, creature",
+    "altinvisexplain": "unseen creature",
+    "append_str.sep": " or ",
+    "do_screen_description.mon_interior": "the interior of a monster",
+    "do_screen_description.unreconnoitered": "unreconnoitered"
+  },
+  "publicInitializer": "a monster, object or location",
+  "snprintfSites": [
+    [
+      "mhidden_description",
+      277
+    ],
+    [
+      "look_at_object",
+      407
+    ],
+    [
+      "waterbody_name",
+      572
+    ],
+    [
+      "waterbody_name",
+      577
+    ],
+    [
+      "waterbody_name",
+      580
+    ],
+    [
+      "waterbody_name",
+      585
+    ],
+    [
+      "waterbody_name",
+      603
+    ],
+    [
+      "waterbody_name",
+      606
+    ],
+    [
+      "do_screen_description",
+      1619
+    ],
+    [
+      "add_quoted_engraving",
+      1660
+    ],
+    [
+      "add_quoted_engraving",
+      1663
+    ],
+    [
+      "look_engrs",
+      2190
+    ]
+  ]
+}

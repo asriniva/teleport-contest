@@ -67,6 +67,480 @@ def artifact(path):
     return data
 
 
+def source_integrity(hashes):
+    result = []
+    for path, expected in sorted(hashes.items()):
+        artifact(ROOT / path)
+        observed = READS.get(path, {}).get('sha256')
+        result.append({'path': path, 'manifest_sha256': expected,
+                       'observed_sha256': observed, 'matches': observed == expected})
+    return result
+
+
+def declared_manifest_sources(manifest):
+    """Collect the selected artifact provenance scope, including JS-only inputs."""
+    hashes = {}
+
+    def add(path, digest):
+        value = Path(path)
+        if value.is_absolute() or '..' in value.parts:
+            raise ValueError('Invalid declared source path: ' + path)
+        if path in hashes and hashes[path] != digest:
+            raise ValueError('Conflicting declared source hashes: ' + path)
+        hashes[path] = digest
+
+    def collect(value):
+        if isinstance(value, dict):
+            for key, child in value.items():
+                if key in ['sourceSha256', 'adapterSourceSha256', 'javascriptDataSha256',
+                           'nativeStorageSourceSha256'] and isinstance(child, dict):
+                    for path, digest in child.items():
+                        add(path, digest)
+                else:
+                    collect(child)
+        elif isinstance(value, list):
+            for child in value:
+                collect(child)
+
+    collect(manifest)
+    for field, path in {
+        'nativeAbiSha256': 'nethack-c/wasm/native-terminal.h',
+        'ncursesSha256': '.cache/ncurses-6.5.tar.gz',
+        'terminfoEntrySha256': 'nethack-c/wasm/terminfo/x/xterm-256color',
+        'compressionSourceSha256': 'nethack-c/wasm/vendor/ncompress/compress.c',
+    }.items():
+        if field in manifest:
+            add(path, manifest[field])
+    for port in manifest.get('javascriptTranslationUnits', []):
+        add(port['javascript'], port['sha256'])
+        add(port['library'], port['abiLibrarySha256'])
+        add('.cache/wasm64-build/tree/' + port['source'], port['preparedCSourceSha256'])
+    if manifest.get('wasmSha256'):
+        add('js/wasm/nethack.wasm', manifest['wasmSha256'])
+    return hashes
+
+
+def private_lua_evidence(directory='.cache/js-lua-game-automatic', historical=True):
+    """Recorded frozen candidate evidence, never an attestation of current JS."""
+    base = ROOT / directory
+    manifest_path = base / 'build.json'
+    if not manifest_path.is_file():
+        return {'available': False, 'path': relative(base)}
+    manifest = json.loads(read(manifest_path))
+    artifact(base / 'nethack.wasm')
+    snapshot = manifest.get('luaSnapshot', '')
+    prefix = snapshot.rstrip('/') + '/'
+    hashes = {path: value for path, value in manifest.get('inputSha256', {}).items()
+              if snapshot and path.startswith(prefix)}
+    frozen = source_integrity(hashes)
+    current = []
+    for entry in frozen:
+        path = entry['path'][len(prefix):]
+        artifact(ROOT / path)
+        observed = READS.get(path, {}).get('sha256')
+        current.append({'path': path, 'snapshot_sha256': entry['manifest_sha256'],
+                        'current_sha256': observed, 'matches_snapshot': observed == entry['manifest_sha256']})
+    summaries, raw_summaries = {}, {}
+    for key, name in [('public', 'public-summary.json'), ('all_levels', 'all-level-tests/summary.json'),
+                      ('wizard', 'wizard-tests/summary.json')]:
+        path = base / name
+        if not path.is_file():
+            summaries[key] = {'available': False, 'path': relative(path)}
+            continue
+        data = json.loads(read(path))
+        raw_summaries[key] = data
+        groups = data.get('groups', [])
+        summaries[key] = {'available': True, 'path': relative(path),
+                          'sha256': READS[relative(path)]['sha256'],
+                          **{k: data[k] for k in ('passed', 'total', 'metrics', 'errors') if k in data}}
+        if groups:
+            summaries[key].update(group_count=len(groups),
+                                  script_loads=sum(len(group.get('files', [])) for group in groups),
+                                  unique_script_count=len({f for group in groups for f in group.get('files', [])}),
+                                  seeds=sorted({group['seed'] for group in groups}),
+                                  screens=sum(group.get('screens', 0) for group in groups),
+                                  rng=sum(group.get('rng', 0) for group in groups),
+                                  animation_frames=sum(group.get('animationFrames', 0) for group in groups),
+                                  groups=groups)
+    result = {'available': True, 'path': relative(base), 'status': manifest.get('status'),
+            'historical_candidate': historical,
+            'manifest_sha256': READS[relative(manifest_path)]['sha256'],
+            'manifest_wasm_sha256': manifest.get('wasmSha256'),
+            'wasm_matches_manifest': READS.get(relative(base / 'nethack.wasm'), {}).get('sha256') == manifest.get('wasmSha256'),
+            'removed_link_inputs': manifest.get('removedLinkInputs', []),
+            'snapshot': snapshot, 'frozen_source_integrity': frozen,
+            'current_sources_compared_with_frozen_snapshot': current,
+            'recorded_validation': summaries,
+            'scope_limit': 'Recorded private results, not rerun by this audit and not evidence for a different selected game binary. Adjacent build/summary files are hashed independently. Newer current sources are not covered when their hashes differ from the frozen snapshot.'}
+    acceptance_path = base / 'acceptance.json'
+    if acceptance_path.is_file():
+        acceptance = json.loads(read(acceptance_path))
+        freeze_path = ROOT / snapshot / 'manifest.json'
+        freeze = json.loads(read(freeze_path)) if freeze_path.is_file() else {}
+        production = freeze.get('productionSha256', {})
+        overlay = source_integrity({relative(base / 'snapshot' / path): value
+                                    for path, value in production.items()})
+        dependency_log = ROOT / '.cache/js-dependencies-final.log'
+        if not historical and dependency_log.is_file():
+            artifact(dependency_log)
+        result['acceptance'] = {
+            'path': relative(acceptance_path), 'sha256': READS[relative(acceptance_path)]['sha256'],
+            'recorded': acceptance,
+            'wasm_matches_candidate_manifest': acceptance.get('wasmSha256') == manifest.get('wasmSha256'),
+            'wasm_matches_candidate_artifact': acceptance.get('wasmSha256') == READS.get(relative(base / 'nethack.wasm'), {}).get('sha256'),
+            'freeze_manifest_matches_acceptance': bool(freeze) and acceptance.get('freezeManifestSha256') == READS.get(relative(freeze_path), {}).get('sha256'),
+            'public_metrics_match_summary': acceptance.get('public') == raw_summaries.get('public'),
+            'level_totals_match_summary': acceptance.get('levelSweep') == {
+                'groups': summaries.get('all_levels', {}).get('group_count'),
+                'loads': summaries.get('all_levels', {}).get('script_loads'),
+                'seeds': len(summaries.get('all_levels', {}).get('seeds', [])),
+                'screens': summaries.get('all_levels', {}).get('screens'),
+                'rng': summaries.get('all_levels', {}).get('rng'),
+                'animationFrames': summaries.get('all_levels', {}).get('animation_frames')},
+            'wizard_groups_match_summary': acceptance.get('wizardGroups') == summaries.get('wizard', {}).get('group_count'),
+            'production_overlay_integrity': overlay,
+            'all_production_overlay_hashes_match': bool(overlay) and all(entry['matches'] for entry in overlay),
+            'dependency_suite_log': ({'path': relative(dependency_log), **READS[relative(dependency_log)]}
+                                     if not historical and dependency_log.is_file() else None),
+            'scope_limit': 'Acceptance is owner-recorded evidence tied here to the private Wasm, freeze manifest, overlay and recorded summaries. This audit does not rerun the acceptance gates or transfer their result to a newly linked production artifact.'}
+    return result
+
+
+def lua_differential_summaries():
+    """Record local test outputs without treating them as a source-bound run."""
+    summaries = []
+    for name, directory, script in [
+        ('auxiliary_errors', 'js-lua-aux-memory', 'test-js-lua-aux-memory.mjs'),
+        ('format_buffer', 'js-lua-format-memory', 'test-js-lua-format-memory.mjs'),
+        ('utf8_buffer', 'js-lua-utf8-memory', 'test-js-lua-utf8-memory.mjs'),
+        ('format_utf8_diagnostics', 'js-lua-format-utf8-errors', 'test-js-lua-format-utf8-errors.mjs'),
+        ('pack_os_buffer_and_diagnostics', 'js-lua-pack-os-memory', 'test-js-lua-pack-os-memory.mjs'),
+        ('retained_string_table_consumers', 'js-dependency-lua/consumer-memory', 'test-js-lua-consumer-memory.mjs'),
+        ('retained_string_table_consumer_diagnostics', 'js-dependency-lua/consumer-memory-errors', 'test-js-lua-consumer-memory.mjs'),
+        ('reader_callbacks', 'js-lua-debug/reader-runtime', 'test-js-lua-reader-runtime.mjs'),
+        ('sort_stack_and_diagnostics', 'js-lua-sort-memory', 'test-js-lua-sort-memory.mjs'),
+    ]:
+        path = ROOT / '.cache' / directory / 'summary.json'
+        entry = {'name': name, 'test': evidence('scripts/' + script),
+                 'path': relative(path), 'available': path.is_file()}
+        if path.is_file():
+            data = json.loads(read(path))
+            entry.update(sha256=READS[relative(path)]['sha256'],
+                         case_count=len(data.get('cases', [])),
+                         allocation_refusal_schedules=data.get('refusals'),
+                         cases=data.get('cases', []))
+            if 'diagnosticFailures' in data:
+                entry['diagnostic_failures'] = data['diagnosticFailures']
+        summaries.append(entry)
+    return {'summaries': summaries,
+            'scope_limit': 'Local recorded summaries are not executed by this audit and do not contain a complete source-hash binding. Case filters and success-only diagnostic runs can replace them. Inspect case/refusal counts and rerun the exact final source snapshot; these files are separate from whole-game candidate evidence.'}
+
+
+def lua_core_freeze_evidence():
+    path = ROOT / '.cache/js-dependency-lua/core-freeze-manifest.json'
+    if not path.is_file():
+        return {'available': False, 'path': relative(path)}
+    data = json.loads(read(path))
+    integrity = source_integrity({entry['path']: entry['sha256'] for entry in data.get('files', [])})
+    return {'available': True, 'path': relative(path),
+            'sha256': READS[relative(path)]['sha256'],
+            'milestone': data.get('milestone'), 'scope': data.get('scope'),
+            'recorded_verification': data.get('verification'),
+            'source_integrity': integrity,
+            'all_listed_sources_match': bool(integrity) and all(entry['matches'] for entry in integrity),
+            'scope_limit': 'Owner-recorded scoped verification with listed source/test hashes, not a fresh audit test run. This is not the complete final VM/library/ABI source snapshot or whole-game validation.'}
+
+
+def lua_incremental_freeze_evidence():
+    path = ROOT / '.cache/js-lua-debug/incremental-freeze.json'
+    if not path.is_file():
+        return {'available': False, 'path': relative(path)}
+    data = json.loads(read(path))
+    files = data.get('ownedFiles', []) + data.get('coordinatedDependencies', [])
+    integrity = source_integrity({entry['path']: entry['sha256'] for entry in files})
+    return {'available': True, 'path': relative(path), 'sha256': READS[relative(path)]['sha256'],
+            'status': data.get('status'), 'recorded_gates': data.get('gates'), 'scope': data.get('scope'),
+            'source_integrity': integrity,
+            'all_listed_sources_match': bool(integrity) and all(entry['matches'] for entry in integrity),
+            'scope_limit': 'Owner-recorded compiler/VM/base/debug verification and listed source/test hashes; not a fresh audit run or whole-game acceptance.'}
+
+
+def lua_aggregate_freeze_evidence():
+    base = ROOT / '.cache/js-lua-final-freeze'
+    path = base / 'manifest.json'
+    if not path.is_file():
+        return {'available': False, 'path': relative(path)}
+    data = json.loads(read(path))
+    hashes = data.get('sourceSha256', {})
+    current = source_integrity(hashes)
+    frozen = source_integrity({relative(base / name): value for name, value in hashes.items()})
+    return {'available': True, 'path': relative(path), 'sha256': READS[relative(path)]['sha256'],
+            'status': data.get('status'), 'base_root': data.get('baseRoot'),
+            'production_count': len(data.get('productionSha256', {})),
+            'production_paths': sorted(data.get('productionSha256', {})),
+            'test_count': len(data.get('testSha256', {})), 'total_count': len(hashes),
+            'current_source_integrity': current, 'frozen_source_integrity': frozen,
+            'all_current_sources_match': bool(current) and all(entry['matches'] for entry in current),
+            'all_frozen_sources_match': bool(frozen) and all(entry['matches'] for entry in frozen),
+            'base_known_limitation': data.get('baseKnownLimitation'),
+            'base_investigation_history': data.get('baseInvestigationHistory', []),
+            'scope_limit': 'Frozen production/test input evidence for the final private candidate. A retained investigation retraction is history, not an active limitation. This manifest does not certify a newly linked selected production artifact.'}
+
+
+def accepted_production_98_evidence(active):
+    """Bind accepted 98-TU evidence to its exact captured sources and runtime."""
+    base = ROOT / '.cache/tu98-fixed-gate-snapshot'
+    acceptance_path = base / 'acceptance.json'
+    if not acceptance_path.is_file():
+        return {'available': False, 'path': relative(base)}
+    acceptance = json.loads(read(acceptance_path))
+    manifest_path = base / 'js/wasm/build.json'
+    manifest = json.loads(read(manifest_path))
+    captured_path = base / 'captured-input-hashes.json'
+    captured = json.loads(read(captured_path))
+    public_captured_path = base / 'public-input-hashes.json'
+    public_captured = json.loads(read(public_captured_path))
+    supplement_path = base / 'public-capture-supplement.json'
+    supplement = json.loads(read(supplement_path))
+    declared = declared_manifest_sources(manifest)
+    declared_integrity = source_integrity({relative(base / path): value for path, value in declared.items()})
+    captured_integrity = source_integrity({relative(base / path): value for path, value in captured.items()})
+    public_integrity = source_integrity({relative(base / path): value for path, value in public_captured.items()})
+    # The unchanged public runner embeds its JSON after this marker in its log.
+    results_path = base / 'public.log'
+    public_log = read(results_path)
+    results = json.loads(public_log.split('__RESULTS_JSON__\n', 1)[1]).get('results', [])
+    totals = {}
+    for result in results:
+        for name, metric in result.get('metrics', {}).items():
+            total = totals.setdefault(name, {'matched': 0, 'total': 0})
+            total['matched'] += metric['matched']
+            total['total'] += metric['total']
+    all_public_exact = bool(results) and all(result.get('passed') and not result.get('error')
+        and all(metric['matched'] == metric['total'] for metric in result.get('metrics', {}).values())
+        for result in results)
+    checks = {
+        'accepted_status': acceptance.get('status') == 'accepted',
+        'manifest_matches_acceptance': READS[relative(manifest_path)]['sha256'] == acceptance.get('manifestSha256'),
+        'captured_manifest_matches_acceptance': captured.get('js/wasm/build.json') == acceptance.get('manifestSha256'),
+        'wasm_matches_acceptance': manifest.get('wasmSha256') == acceptance.get('wasmSha256'),
+        'runtime_matches_acceptance': captured.get('js/ported/wasm-runtime.js') == acceptance.get('runtimeSha256'),
+        'engrave_runtime_matches_acceptance': captured.get('js/ported/engrave-runtime.js') == acceptance.get('engraveRuntimeSha256'),
+        'windows_runtime_matches_acceptance': captured.get('js/ported/windows-runtime.js') == acceptance.get('windowsRuntimeSha256'),
+        'monmove_runtime_matches_acceptance': captured.get('js/ported/monmove-runtime.js') == acceptance.get('monmoveRuntimeSha256'),
+        'mkmaze_source_matches_acceptance': captured.get('js/ported/mkmaze.js') == acceptance.get('mkmazeSourceSha256'),
+        'tu_count_matches_acceptance': len(manifest.get('javascriptTranslationUnits', [])) == acceptance.get('translationUnits'),
+        'captured_file_count_matches_acceptance': len(captured) == acceptance.get('capturedFiles') == acceptance.get('unchangedCapturedFiles'),
+        'all_captured_declared_sources_match': bool(declared_integrity) and all(entry['matches'] for entry in declared_integrity),
+        'all_captured_files_match': bool(captured_integrity) and all(entry['matches'] for entry in captured_integrity),
+        'all_public_captured_files_match': bool(public_integrity) and all(entry['matches'] for entry in public_integrity),
+        'public_file_count_matches_acceptance': len(public_captured) == acceptance.get('publicInputFiles') == acceptance.get('unchangedPublicInputFiles'),
+        'public_capture_preserves_base_inputs': all(public_captured.get(path) == value for path, value in captured.items()),
+        'only_public_supplement_is_scorer_metadata': set(public_captured) - set(captured) == {'.teleport/repo-metadata.json'},
+        'scorer_metadata_matches_acceptance': public_captured.get('.teleport/repo-metadata.json') == acceptance.get('scorerMetadataSha256') == supplement.get('addedFileSha256'),
+        'supplement_records_separate_scopes': supplement.get('baseCaptureInputs') == len(captured) and supplement.get('publicInputFiles') == len(public_captured) and supplement.get('addedFile') == '.teleport/repo-metadata.json' and supplement.get('allBaseInputsUnchangedAfterIntegration') is True and supplement.get('frozenHarnessChanged') is False,
+        'all_public_results_exact': all_public_exact,
+        'all_44_public_recordings_present': len(results) == 44,
+        'public_metrics_match_acceptance': {name: metric['total'] for name, metric in totals.items()} == acceptance.get('metrics'),
+    }
+    integration_path = base / 'integration.log'
+    integration_result_path = base / 'integration-result.json'
+    integration_result = json.loads(read(integration_result_path))
+    provenance_path = base / 'provenance-after.log'
+    import_path = base / 'production-import-audit.json'
+    integration = read(integration_path)
+    # Record the captured provenance log and independently recheck its hashes.
+    if provenance_path.is_file():
+        read(provenance_path)
+        provenance_log = {'path': relative(provenance_path), **READS[relative(provenance_path)]}
+    else:
+        provenance_log = {'available': False, 'verification': 'all_captured_declared_sources_match'}
+    imports = json.loads(read(import_path))
+    checks.update(integration_recorded_passed=acceptance.get('integration', '').startswith('passed'),
+                  integration_log_pass_marker='passed' in integration.lower(),
+                  integration_original_deadlines=integration_result.get('exitCode') == 0 and integration_result.get('originalHarness') is True and integration_result.get('diagnosticLoaders') is False and integration_result.get('workerDeadlineSeconds') == 30 and integration_result.get('allCapturedHashesUnchanged') == len(captured),
+                  recorded_c_lua_algorithms_absent=imports.get('cInterpreterSymbolsAbsent') is True)
+    matched = (all(checks.values())
+               and active['manifest_file_sha256'] == acceptance.get('manifestSha256')
+               and active['all_manifest_declared_artifact_and_source_hashes_match'])
+    return {'available': True, 'path': relative(base),
+            'acceptance_path': relative(acceptance_path),
+            'acceptance_sha256': READS[relative(acceptance_path)]['sha256'],
+            'recorded_acceptance': acceptance, 'binding_checks': checks,
+            'selected_manifest_matches_accepted_manifest': active['manifest_file_sha256'] == acceptance.get('manifestSha256'),
+            'selected_artifact_and_runtime_match_accepted_snapshot': matched,
+            'accepted_manifest_sha256': READS[relative(manifest_path)]['sha256'],
+            'accepted_lua_backend': manifest.get('luaBackend'),
+            'accepted_lua_source_count': len((manifest.get('javascriptLua') or {}).get('sourceSha256', {})),
+            'declared_provenance_count': len(declared), 'declared_provenance_integrity': declared_integrity,
+            'captured_inputs_path': relative(captured_path),
+            'captured_inputs_sha256': READS[relative(captured_path)]['sha256'],
+            'captured_input_count': len(captured), 'captured_input_integrity': captured_integrity,
+            'public_capture': {'path': relative(public_captured_path), 'sha256': READS[relative(public_captured_path)]['sha256'],
+                               'count': len(public_captured), 'integrity': public_integrity,
+                               'supplement_path': relative(supplement_path), 'supplement_sha256': READS[relative(supplement_path)]['sha256'],
+                               'recorded_supplement': supplement},
+            'public_results': {'path': relative(results_path), 'sha256': READS[relative(results_path)]['sha256'],
+                               'passed': sum(bool(result.get('passed')) for result in results),
+                               'total': len(results), 'metrics': totals,
+                               'errors': [result.get('error') for result in results if result.get('error')]},
+            'integration': {'path': relative(integration_path), 'sha256': READS[relative(integration_path)]['sha256'],
+                            'recorded_status': acceptance.get('integration'), 'log_contains_pass': 'passed' in integration.lower()},
+            'provenance_log': provenance_log,
+            'import_audit': {'path': relative(import_path), 'sha256': READS[relative(import_path)]['sha256'],
+                             'recorded': imports},
+            'module_capture': {'recorded_literal_closure_verified_in_copy': acceptance.get('literalModuleClosureVerifiedInCopy'),
+                               'recorded_resolved_module_files': acceptance.get('resolvedModuleFiles'),
+                               'limitation': 'Recorded Acorn AST traversal of literal local imports/exports; the audit rechecks captured hashes, not JavaScript parsing. SDK/tooling and dynamic file access are outside that closure.'},
+            'scope_limit': 'Recorded acceptance for this exact captured 98-TU manifest, Wasm and JS/runtime/source set, not a fresh audit replay. Integration covers the original968 inputs; public scoring covers969 including the later identical scorer metadata supplement. Equal Wasm alone is insufficient. Later builds or source changes are not covered when the selected manifest or declared source hashes differ; native parity for the new TUs remains as disclosed in acceptance.'}
+
+
+def accepted_production_evidence(active):
+    """Verify the accepted 110-TU capture; retain the separate 98-TU history."""
+    base = ROOT / '.cache/tu110-warn-fixed-gate-snapshot'
+    acceptance_path = base / 'acceptance.json'
+    if not acceptance_path.is_file():
+        return accepted_production_98_evidence(active)
+    acceptance = json.loads(read(acceptance_path))
+    identity = acceptance['identity']
+    manifest_path = base / 'js/wasm/build.json'
+    manifest = json.loads(read(manifest_path))
+    captured_path = base / 'captured-input-hashes.json'
+    captured = json.loads(read(captured_path))
+    declared = declared_manifest_sources(manifest)
+    declared_integrity = source_integrity({relative(base / p): h for p, h in declared.items()})
+    captured_integrity = source_integrity({relative(base / p): h for p, h in captured.items()})
+    integration_path = base / 'integration.log'
+    integration_log = read(integration_path)
+    integration_result_path = base / 'integration-result.json'
+    integration_result = json.loads(read(integration_result_path))
+    command_path = base / 'original-command-contract.json'
+    command_record = json.loads(read(command_path))
+    command = acceptance['commandContract']
+    # The immutable pre-terminal command record says pending. The final receipt
+    # records the actual exit; all other command/environment fields must agree.
+    recorded_public_exit = command_record['public']['exitCode']
+    command_record['public']['exitCode'] = command['public']['exitCode']
+    public_path = base / 'public.log'
+    public_log = read(public_path)
+    public_data = json.loads(public_log.split('__RESULTS_JSON__\n', 1)[1])
+    parsed_path = base / 'public-results.json'
+    parsed_public = json.loads(read(parsed_path))
+    results = public_data.get('results', [])
+    required_metrics = {'rngCalls', 'screens', 'cellsOnly', 'cursors', 'animFrames'}
+    totals = {key: {'matched': 0, 'total': 0} for key in required_metrics}
+    all_exact = bool(results)
+    for result in results:
+        metrics = result.get('metrics', {})
+        all_exact &= (result.get('passed') is True and not result.get('error')
+                      and set(metrics) == required_metrics)
+        for key, metric in metrics.items():
+            if key not in totals:
+                all_exact = False
+                continue
+            matched, total = metric.get('matched'), metric.get('total')
+            valid = (type(matched) is int and type(total) is int
+                     and matched == total and total >= 0)
+            all_exact &= valid
+            if valid:
+                totals[key]['matched'] += matched
+                totals[key]['total'] += total
+    import_path = base / '.cache/tu110-warn-fixed-production-import-audit.json'
+    imports = json.loads(read(import_path))
+    closure_path = base / '.cache/next-game-import-closure.json'
+    closure = json.loads(read(closure_path))
+    critical = ['js/wasm/build.json', 'js/wasm/nethack.wasm',
+                'js/wasm/nethack.mjs.symbols', 'js/wasm/link-objects.txt',
+                '.teleport/repo-metadata.json', 'scripts/test-wasm.mjs',
+                'scripts/score-wasm.sh', '.cache/tu110-warn-fixed-production-import-audit.json',
+                '.cache/next-game-import-closure.json']
+    integration_command, public_command = command['integration'], command['public']
+    checks = {
+        'accepted_110_receipt': acceptance.get('acceptedTranslationUnits') == identity.get('translationUnits') == 110,
+        'manifest_matches_acceptance': READS[relative(manifest_path)]['sha256'] == identity.get('manifestSha256'),
+        'captured_manifest_matches_acceptance': captured.get('js/wasm/build.json') == identity.get('manifestSha256'),
+        'wasm_matches_acceptance': manifest.get('wasmSha256') == captured.get('js/wasm/nethack.wasm') == identity.get('wasmSha256'),
+        'runtime_matches_acceptance': captured.get('js/ported/wasm-runtime.js') == identity.get('runtimeSha256'),
+        'engrave_runtime_matches_acceptance': captured.get('js/ported/engrave-runtime.js') == identity.get('engraveRuntimeSha256'),
+        'tu_count_matches_acceptance': len(manifest.get('javascriptTranslationUnits', [])) == 110,
+        'declared_count_matches_acceptance': len(declared) == acceptance.get('declaredProvenanceHashes') == 683,
+        'captured_file_count_matches_acceptance': len(captured) == identity.get('capturedFiles') == acceptance.get('allCapturedInputsUnchanged') == 1322,
+        'critical_inputs_in_base_capture': all(p in captured for p in critical),
+        'all_captured_declared_sources_match': bool(declared_integrity) and all(e['matches'] for e in declared_integrity),
+        'all_captured_files_match': bool(captured_integrity) and all(e['matches'] for e in captured_integrity),
+        'no_changed_inputs_recorded': acceptance.get('changedInputs') == [],
+        'integration_receipt_matches_acceptance': integration_result == acceptance.get('integration'),
+        'integration_log_matches_receipt': READS[relative(integration_path)]['sha256'] == integration_result.get('logSha256'),
+        'integration_log_pass_marker': 'passed' in integration_log.lower(),
+        'integration_covers_base_capture': integration_result.get('exitCode') == 0 and integration_result.get('allCapturedInputsUnchanged') == len(captured),
+        'command_record_matches_final_receipt': command_record == command and recorded_public_exit in ['pending', 0],
+        'integration_original_deadlines': (integration_command.get('originalHarness') is True
+            and integration_command.get('workerDeadlineSeconds') == 30
+            and integration_command.get('diagnosticLoaders') is False
+            and integration_command.get('timeoutOverride') is None
+            and integration_command.get('exitCode') == 0
+            and integration_command.get('session') == integration_result.get('session')
+            and integration_command.get('command', [])[1:] == ['scripts/test-wasm.mjs']),
+        'public_original_deadlines': (public_command.get('originalHarness') is True
+            and public_command.get('sessionDeadlineSeconds') == 45
+            and public_command.get('diagnosticLoaders') is False
+            and public_command.get('timeoutOverride') is None
+            and public_command.get('exitCode') == acceptance.get('publicExitCode') == 0
+            and public_command.get('command') == ['bash', 'scripts/score-wasm.sh']
+            and public_command.get('environment', {}).get('TZ') == 'America/New_York'),
+        'ambient_diagnostic_options_absent': set(command.get('ambientDiagnosticOptionsAbsent', [])) == {'SESSION_REPLAY_TIMEOUT_MS', 'NODE_OPTIONS'},
+        'public_log_matches_acceptance': READS[relative(public_path)]['sha256'] == acceptance.get('publicLogSha256'),
+        'parsed_public_matches_original_log': parsed_public == public_data,
+        'all_public_results_exact': bool(all_exact),
+        'all_44_distinct_recordings_present': len(results) == len({r.get('session') for r in results}) == acceptance.get('publicPassed') == acceptance.get('publicTotal') == 44,
+        'public_metrics_match_acceptance': {k: v['total'] for k, v in totals.items()} == acceptance.get('exactMetricTotals'),
+        'no_public_failures_recorded': acceptance.get('failures') == [],
+        'recorded_import_audit_passed': (imports.get('translationUnits') == 110 and imports.get('allOriginalObjectsAbsent') is True
+            and len(imports.get('ports', [])) == 23
+            and all(p.get('originalObjectAbsent') is True and p.get('privateAliasesAbsent') is True for p in imports['ports'])),
+        'recorded_c_lua_algorithms_absent': imports.get('luaBackend') == manifest.get('luaBackend') == 'javascript' and imports.get('cInterpreterSymbolsAbsent') is True,
+        'literal_module_closure_matches_acceptance': (len(closure.get('files', [])) == acceptance.get('literalModuleClosure', {}).get('files') == 298
+            and closure.get('nonliteralImports') == [] and acceptance.get('literalModuleClosure', {}).get('nonliteralExpressions') == 0
+            and all(p in captured for p in closure['files'])),
+    }
+    selected_matches = active['manifest_file_sha256'] == identity.get('manifestSha256')
+    matched = bool(all(checks.values()) and selected_matches
+                   and active['all_manifest_declared_artifact_and_source_hashes_match'])
+    historical_path = ROOT / '.cache/tu98-fixed-gate-snapshot/acceptance.json'
+    read(historical_path)
+    return {
+        'available': True, 'path': relative(base),
+        'acceptance_path': relative(acceptance_path), 'acceptance_sha256': READS[relative(acceptance_path)]['sha256'],
+        'recorded_acceptance': acceptance, 'binding_checks': checks,
+        'selected_manifest_matches_accepted_manifest': selected_matches,
+        'selected_artifact_and_runtime_match_accepted_snapshot': matched,
+        'accepted_manifest_sha256': READS[relative(manifest_path)]['sha256'],
+        'accepted_lua_backend': manifest.get('luaBackend'),
+        'accepted_lua_source_count': len((manifest.get('javascriptLua') or {}).get('sourceSha256', {})),
+        'declared_provenance_count': len(declared), 'declared_provenance_integrity': declared_integrity,
+        'captured_inputs_path': relative(captured_path), 'captured_inputs_sha256': READS[relative(captured_path)]['sha256'],
+        'captured_input_count': len(captured), 'captured_input_integrity': captured_integrity,
+        'public_capture': {'path': relative(captured_path), 'sha256': READS[relative(captured_path)]['sha256'],
+                           'count': len(captured), 'integrity': captured_integrity,
+                           'same_as_integration_capture': True, 'scorer_metadata_present_before_both_gates': True,
+                           'supplement_path': None},
+        'public_results': {'path': relative(public_path), 'sha256': READS[relative(public_path)]['sha256'],
+                           'passed': sum(r.get('passed') is True for r in results), 'total': len(results), 'metrics': totals,
+                           'errors': [r.get('error') for r in results if r.get('error')]},
+        'integration': {'path': relative(integration_path), 'sha256': READS[relative(integration_path)]['sha256'],
+                        'recorded': integration_result, 'command_contract': command, 'command_contract_path': relative(command_path),
+                        'command_contract_sha256': READS[relative(command_path)]['sha256']},
+        'import_audit': {'path': relative(import_path), 'sha256': READS[relative(import_path)]['sha256'], 'recorded': imports},
+        'module_capture': {'path': relative(closure_path), 'sha256': READS[relative(closure_path)]['sha256'],
+                           'recorded_literal_closure_verified_in_copy': checks['literal_module_closure_matches_acceptance'],
+                           'recorded_resolved_module_files': len(closure.get('files', [])),
+                           'limitation': 'Recorded Acorn literal local import/export traversal, not rerun by this audit; SDK/tooling and dynamic file access remain outside it.'},
+        'historical_acceptance': {'path': relative(historical_path), 'sha256': READS[relative(historical_path)]['sha256'],
+                                  'scope': 'Separate 98-TU history with 968 integration inputs and later 969-input public supplement; not the 110-TU capture scope.'},
+        'scope_limit': 'Recorded acceptance for the exact captured 110-TU manifest, Wasm and JS/runtime/source set, not a fresh replay. Both original timed gates cover the same1322 inputs, including scorer metadata. Equal Wasm alone is insufficient. Current source changes invalidate selected matching; 57 new native checks remain pending and53 historical native suites are not a fresh110 aggregate proof.',
+    }
+
+
 def strip_comments(text):
     # Retain newlines and string literals, so line evidence remains accurate.
     pattern = r'/\*[\s\S]*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\''
@@ -130,6 +604,8 @@ def collect_tu_dependencies(game_tokens, active=None, paths=None):
                 entry['selected_resolution'] = 'C regex_t ABI forwarder to selected JavaScript ERE; not compiled TRE algorithms'
             elif symbol in TERMINFO and active['built_dependency_backend'] == 'javascript':
                 entry['selected_resolution'] = 'Selected JavaScript terminfo; tparm/tputs retain C vararg/callback ABI forwarders'
+            elif category == 'lua' and active['built_lua_backend'] == 'javascript':
+                entry['selected_resolution'] = 'Selected JavaScript Lua algorithms through C API/callback/storage ABI; literal name does not establish individual semantic coverage'
             elif symbol in active['symbol_map']['javascript_import_names']:
                 entry['selected_resolution'] = 'Imported JavaScript function name observed in selected Wasm artifact'
             elif symbol in active['symbol_map']['defined_wasm_function_names']:
@@ -277,12 +753,9 @@ def active_inventory(manifest):
     for entry in surface['imports']:
         if entry['kind'] == 'function':
             entry['symbol_map_name'] = indexed.get(entry['function_index'])
-    dependency_hashes = manifest.get('javascriptDependencies', {}).get('sourceSha256', {})
-    integrity = []
-    for path, expected in sorted(dependency_hashes.items()):
-        read(ROOT / path)
-        observed = READS.get(path, {}).get('sha256')
-        integrity.append({'path': path, 'manifest_sha256': expected, 'observed_sha256': observed, 'matches': observed == expected})
+    integrity = source_integrity((manifest.get('javascriptDependencies') or {}).get('sourceSha256', {}))
+    lua_integrity = source_integrity((manifest.get('javascriptLua') or {}).get('sourceSha256', {}))
+    declared_integrity = source_integrity(declared_manifest_sources(manifest))
     groups = []
     for category, names in sorted(LIBC.items()):
         entries = sorted(names & defined)
@@ -290,6 +763,14 @@ def active_inventory(manifest):
                        'interpretation': 'C ABI forwarding to selected JavaScript regex' if category == 'regex' and selected == 'javascript'
                        else 'Names defined in selected Wasm; aliases/inlined and internal support routines are additional.'})
     lua_names = sorted(name for name in defined if re.match(r'^lua(?:_|[A-Z])', name))
+    lua_internals = sorted(name for name in lua_names if re.match(r'^lua[BCDEFGHMOSTUVXYZ]_', name))
+    lua_backend = manifest.get('luaBackend')
+    lua_basis = 'explicit build.json luaBackend'
+    if lua_backend is None:
+        lua_backend = ('javascript' if manifest.get('javascriptLua') else 'c' if lua_internals else 'unresolved')
+        lua_basis = ('legacy manifest: javascriptLua metadata' if manifest.get('javascriptLua') else
+                     'legacy manifest: defined internal Lua algorithm symbols' if lua_internals else
+                     'legacy manifest has no explicit Lua backend; no conclusive symbol evidence')
     algorithms = {
         'compression': sorted(name for name in defined if name.startswith(('ncompress_', 'compress.', 'decompress.'))),
         'terminfo': sorted(name for name in defined if name.startswith(('_nc_', '_nc_tinfo_'))),
@@ -307,7 +788,20 @@ def active_inventory(manifest):
         'configured_default_dependency_backend': 'javascript' if "DEPENDENCY_BACKEND = 'c' if C_DEPENDENCIES else 'javascript'" in build else 'unresolved',
         'alternate_reference_backend_flag': '--c-dependencies' if "'--c-dependencies' in sys.argv" in build else None,
         'built_dependency_backend': selected,
-        'built_implementations': {key: manifest.get(key) for key in ['terminalCapabilities', 'compression', 'regex', 'ncursesRole', 'compressionSourceRole']},
+        'built_lua_backend': lua_backend,
+        'configured_default_lua_backend': ('javascript' if "JS_LUA = '--c-lua' not in sys.argv and (not C_DEPENDENCIES or '--js-lua' in sys.argv)" in build else 'unresolved'),
+        'alternate_c_lua_backend_flag': '--c-lua' if "'--c-lua' in sys.argv" in build else None,
+        'lua_build_default_is_not_selected_artifact_evidence': True,
+        'lua_backend_selection': {'manifest_luaBackend': manifest.get('luaBackend'),
+                                  'manifest_lua': manifest.get('lua'),
+                                  'manifest_javascriptLua': manifest.get('javascriptLua'),
+                                  'resolved_backend': lua_backend, 'basis': lua_basis,
+                                  'javascript_provenance_recorded': bool((manifest.get('javascriptLua') or {}).get('sourceSha256')),
+                                  'defined_internal_algorithm_count': len(lua_internals),
+                                  'backend_matches_internal_symbol_observation': (not bool(lua_internals) if lua_backend == 'javascript' else bool(lua_internals) if lua_backend == 'c' else None),
+                                  'symbol_observation_limit': 'Symbol names are consistency evidence; API forwarders can remain compiled and symbol-map pairing is limited as described below.',
+                                  'adapter_selection_evidence': evidence('js/wasm-adapter.js', "buildMetadata.luaBackend === 'javascript'")},
+        'built_implementations': {key: manifest.get(key) for key in ['terminalCapabilities', 'compression', 'regex', 'ncursesRole', 'compressionSourceRole', 'lua', 'luaBackend']},
         'manifest_removed_compiled_dependencies': manifest.get('removedCompiledDependencies', []),
         'build_time_and_reference_dependencies': [
             {'name': 'ncurses 6.5', 'role': 'Default builder still builds the reference libtinfo archive and generated headers; selected JS link omits that archive.',
@@ -319,11 +813,19 @@ def active_inventory(manifest):
              'evidence': [evidence(build_path, 'Native data generators'), evidence(build_path, '--embed-file')]},
         ],
         'manifest_dependency_source_integrity': integrity,
+        'manifest_lua_source_integrity': lua_integrity,
+        'manifest_file_sha256': READS.get('js/wasm/build.json', {}).get('sha256'),
+        'manifest_declared_artifact_and_source_integrity': declared_integrity,
+        'manifest_declared_artifact_and_source_count': len(declared_integrity),
+        'all_manifest_declared_artifact_and_source_hashes_match': bool(declared_integrity) and all(entry['matches'] for entry in declared_integrity),
+        'provenance_binding_requirement': 'A final validation summary must bind this exact build manifest and its declared JS/runtime/source hashes as well as the Wasm artifact. JS-only corrections can preserve the Wasm SHA, so matching Wasm alone does not pair a recording result with the selected runtime.',
         'wasm_artifact_matches_manifest': READS.get(relative(binary_path), {}).get('sha256') == manifest.get('wasmSha256'),
         'recorded_public_validation': {
             'available': recording is not None, 'path': relative(recording_path),
             **({key: recording.get(key) for key in ['sessions', 'passed', 'errors', 'metrics', 'wasmSha256', 'dependencyBackend']} if recording else {}),
             'matches_selected_wasm_artifact': bool(recording and recording.get('wasmSha256') == READS.get(relative(binary_path), {}).get('sha256')),
+            'binding_strength': 'Historical Wasm-only pairing; insufficient to validate changed JavaScript/runtime sources.',
+            'final_selected_validation_entry': 'accepted_production_validation',
             'scope_limit': 'Recorded result, not a fresh run. Wasm hash pairs the binary; current adapter/service JS is not cryptographically included in that summary.'},
         'wasm_import_surface': surface,
         'symbol_map': {'path': relative(symbols_path), 'name_count': len(indexed),
@@ -334,8 +836,10 @@ def active_inventory(manifest):
         'remaining_game_object_count': len(engine_objects), 'remaining_game_objects': engine_objects,
         'defined_wasm_teleport_helper_prefix_count': sum(name.startswith('teleport_') for name in defined),
         'external_c_residuals': [
-            {'dependency': 'Lua 5.4.8', 'selected_status': 'compiled C interpreter/runtime retained',
+            {'dependency': 'Lua 5.4.8', 'selected_status': ('JavaScript Lua algorithms selected; C ABI/callback/storage bridge retained' if lua_backend == 'javascript' else 'compiled C interpreter/runtime retained' if lua_backend == 'c' else 'unresolved'),
              'compiled_lua_prefix_name_count': len(lua_names), 'compiled_lua_prefix_names': lua_names,
+             'defined_internal_algorithm_names': lua_internals,
+             'symbol_limit': 'Lua API names can be C ABI forwarders in a JS Lua build; API prefix counts alone do not identify the algorithm backend.',
              'compiled_library_openers': sorted(name for name in defined if name.startswith('luaopen_')),
              'evidence': [evidence(build_path, 'wasm_lua = '), evidence(build_path, 'LUALIBS=')]},
             {'dependency': 'C libc/system support', 'selected_status': 'compiled/runtime services retained',
@@ -457,15 +961,15 @@ def service_inventory(active):
     services = []
     for path in sorted((ROOT / 'js/services').rglob('*.js')):
         text = texts[path] if path in texts else read(path)
-        selected_algorithm = path in selected_sources and active['built_dependency_backend'] == 'javascript'
+        selected_algorithm = path in selected_sources
         if selected_algorithm:
             status = 'selected_game_javascript_dependency_or_abi_adapter'
         elif path.name == 'game-files.js' and path in adapter_graph:
             status = 'selected_game_transport_with_injected_emscripten_filesystem'
         elif path in standalone_graph:
             status = 'standalone_provider_only_not_selected_game_runtime'
-        elif path.parent.name == 'lua':
-            status = 'partial_standalone_lua_only_not_selected_game_interpreter'
+        elif path.parent.name == 'lua' or path.name.startswith(('lua-', 'wasm-lua-')):
+            status = 'javascript_lua_implementation_or_provider_not_recorded_as_selected_source'
         else:
             status = 'present_but_selected_runtime_use_unresolved'
         services.append({'path': relative(path), 'physical_lines': len(text.splitlines()),
@@ -478,17 +982,43 @@ def service_inventory(active):
     lapi = texts.get(lapi_path, '')
     methods = sorted(set(re.findall(r'^\s{2}((?:lua|luaL)_\w+)\s*\(', strip_comments(lapi), re.M)))
     unsupported = sorted(set(re.findall(r'^\s{2}((?:lua|luaL)_\w+)\([^\n]*?\)\s*\{\s*return this\.unsupported\(', strip_comments(lapi), re.M)))
+    provider = texts.get(ROOT / 'js/services/wasm-lua-runtime.js', '')
+    provider_cases = sorted(set(re.findall(r"\bcase\s+'((?:lua|luaL)_\w+)'|\boperation\s*===\s*'((?:lua|luaL)_\w+)'", strip_comments(provider))))
+    provider_names = {name for pair in provider_cases for name in pair if name}
     lua_limits = []
-    for path in sorted((ROOT / 'js/services/lua').glob('*.js')):
+    for path in sorted(path for path in texts if path.parent.name == 'lua' or path.name.startswith(('lua-', 'wasm-lua-'))):
         text = texts.get(path, '')
         for line, value in enumerate(text.splitlines(), 1):
-            if re.search(r'NOT a complete|Missing:|full C stack|GC/finaliz|table hashing|tail calls|goto/<close>|unfinished|not simulated|await deterministic', value):
+            if re.search(r'cadence|heap parity|parity is|arbitrary source|transport budget|host-work|resource limit|not native', value, re.I):
                 lua_limits.append({'path': relative(path), 'line': line, 'excerpt': value.strip()[:260]})
     tests = ['scripts/test-js-compress.mjs', 'scripts/test-js-terminfo.mjs', 'scripts/test-js-posix-regex.mjs',
              'scripts/test-js-runtime.mjs', 'scripts/test-js-runtime-regex.mjs', 'scripts/test-js-time.mjs', 'scripts/test-js-vfs.mjs',
              'scripts/test-js-lua.mjs', 'scripts/test-js-lua-api.mjs', 'scripts/test-js-dependency-isolation.mjs']
+    tests = sorted(set(tests + [relative(path) for path in (ROOT / 'scripts').glob('test-js-lua*.mjs')]))
     for path in tests:
         read(ROOT / path)
+    final_candidate = private_lua_evidence('.cache/js-lua-game-final', historical=False)
+    aggregate_freeze = lua_aggregate_freeze_evidence()
+    acceptance = final_candidate.get('acceptance', {})
+    private_gates = final_candidate.get('recorded_validation', {})
+    final_binding_checks = ['wasm_matches_candidate_manifest', 'wasm_matches_candidate_artifact',
+                            'freeze_manifest_matches_acceptance', 'public_metrics_match_summary',
+                            'level_totals_match_summary', 'wizard_groups_match_summary',
+                            'all_production_overlay_hashes_match']
+    final_acceptance_matches = bool(acceptance) and all(acceptance.get(key) for key in final_binding_checks)
+    final_recorded_passes = (private_gates.get('public', {}).get('passed', 0) > 0
+                             and private_gates['public'].get('passed') == private_gates['public'].get('total')
+                             and not private_gates['public'].get('errors')
+                             and all(private_gates.get(key, {}).get('group_count', 0) > 0
+                                     and private_gates[key].get('passed') == private_gates[key].get('group_count')
+                                     for key in ['all_levels', 'wizard']))
+    final_private_verified = final_acceptance_matches and final_recorded_passes
+    frozen_production_hashes = {entry['path']: entry['manifest_sha256']
+                               for entry in aggregate_freeze.get('current_source_integrity', [])
+                               if entry['path'] in aggregate_freeze.get('production_paths', [])}
+    selected_lua_hashes = {entry['path']: entry['manifest_sha256']
+                          for entry in active['manifest_lua_source_integrity']}
+    selected_lua_matches_final = bool(frozen_production_hashes) and selected_lua_hashes == frozen_production_hashes
     return {
         'method': 'Literal static imports plus selected manifest source hashes and inspected provider wiring. Imports may be conditional and do not establish executed call closure.',
         'modules': services,
@@ -503,21 +1033,97 @@ def service_inventory(active):
                             'VFS excludes device/socket/symlink/mount/lock/ownership/ACL/chmod services'],
             'evidence': [evidence('js/ported/js-runtime.js', 'new CMemory'), evidence('js/ported/js-runtime.js', 'new CVFS'),
                          evidence('js/ported/js-runtime.js', 'calendar:'), evidence('js/ported/js-runtime.js', 'posixregex:')]},
-        'partial_lua': {
-            'selected_game_interpreter_replaced': False,
-            'entrypoint': 'js/services/lua/lua.js', 'api_entrypoint': 'js/services/lua/lapi.js',
-            'implementation_form': 'Bounded Lua 5.4 AST interpreter and partial C API, not a complete opcode VM or drop-in C ABI replacement.',
+        'lua': {
+            'selected_game_interpreter_replaced': active['built_lua_backend'] == 'javascript',
+            'selected_backend': active['built_lua_backend'],
+            'entrypoint': 'js/services/lua-bytecode-vm.js', 'api_entrypoint': 'js/services/lua/lapi.js',
+            'source_compiler': 'js/services/lua-incremental-parser.js',
+            'source_compiler_components': ['js/services/lua-incremental-lexer.js',
+                                           'js/services/lua-incremental-parser.js',
+                                           'js/services/lua-incremental-codegen.js',
+                                           'js/services/lua-parser-errors.js',
+                                           'js/services/lua-compiler-allocations.js'],
+            'source_compiler_compatibility_entrypoint': 'js/services/lua-source-compiler.js',
+            'binary_chunk_codec': 'js/services/lua-codegen.js',
+            'abi_provider': 'js/services/wasm-lua-runtime.js',
+            'abi_bridge': ['nethack-c/wasm/lua-bridge.c', 'nethack-c/wasm/lua-library.js'],
+            'implementation_form': 'Lua 5.4.8 register VM implementing all 83 opcodes, direct demand-reader lexer/parser/expression-descriptor code generation with native allocation operations interleaved during parsing, binary chunk codec, C API facade and real memory64 C ABI/callback provider. The AST interpreter remains a separate execution path, not the game candidate VM.',
+            'compiler_limit': 'Native compiler parity is differentially tested for the compared corpus; this is a JavaScript compiler, not a runtime native compiler subprocess. Arbitrary source equivalence is not proven by inventory.',
+            'opcode_names': re.search(r"LUA_OPCODES = Object.freeze\('([^']+)'", texts.get(ROOT / 'js/services/lua-codegen.js', ''))[1].split(),
+            'private_automatic_candidate': private_lua_evidence(),
+            'private_final_candidate': final_candidate,
+            'recorded_aggregate_freeze': aggregate_freeze,
+            'final_current_source_candidate': {'status': ('selected_javascript_artifact_and_runtime_match_accepted_production_snapshot'
+                                                         if active['built_lua_backend'] == 'javascript'
+                                                         and active['accepted_production_validation'].get('selected_artifact_and_runtime_match_accepted_snapshot')
+                                                         else 'selected_javascript_has_live_source_changes_after_accepted_production_snapshot'
+                                                         if active['built_lua_backend'] == 'javascript'
+                                                         and active['accepted_production_validation'].get('selected_manifest_matches_accepted_manifest')
+                                                         and not active['all_manifest_declared_artifact_and_source_hashes_match']
+                                                         else 'selected_javascript_final_private_candidate_verified_production_artifact_gates_separate'
+                                                         if active['built_lua_backend'] == 'javascript' and final_private_verified
+                                                         else 'final_private_candidate_verified_selected_backend_' + active['built_lua_backend']
+                                                         if final_private_verified else 'pending_final_snapshot_game_validation'),
+                                               'selected_backend': active['built_lua_backend'],
+                                               'recorded_private_gates_passed_and_acceptance_bindings_match': final_private_verified,
+                                               'current_sources_match_final_freeze': aggregate_freeze.get('all_current_sources_match', False),
+                                               'selected_lua_manifest_matches_final_production_freeze': selected_lua_matches_final,
+                                               'selected_artifact_and_runtime_match_accepted_production_snapshot': active['accepted_production_validation'].get('selected_artifact_and_runtime_match_accepted_snapshot', False),
+                                               'selected_wasm_is_private_candidate': READS.get('js/wasm/nethack.wasm', {}).get('sha256') == final_candidate.get('manifest_wasm_sha256'),
+                                               'selected_public_summary_matches_selected_wasm': active['recorded_public_validation']['matches_selected_wasm_artifact'],
+                                               'historical_candidate_is_final_evidence': False,
+                                               'requirement': 'Read the actual selected build manifest and validate its final Lua source hashes plus binary-specific public/integration gates. The accepted private candidate is a separately linked frozen game; historical automatic results and private candidate results do not by themselves validate a new production artifact.'},
+            'recorded_local_differential_summaries': lua_differential_summaries(),
+            'recorded_core_freeze': lua_core_freeze_evidence(),
+            'recorded_incremental_freeze': lua_incremental_freeze_evidence(),
             'method_names_observed_in_lapi_class': methods,
             'direct_explicit_unsupported_methods': unsupported,
+            'facade_unsupported_methods_with_explicit_abi_provider_dispatch': sorted(set(unsupported) & provider_names),
+            'unsupported_interpretation': 'Facade methods can deliberately require host ABI facilities supplied by wasm-lua-runtime.js. Their standalone exception is not evidence that the game ABI lacks them; dispatch-name presence is also not semantic certification.',
             'direct_explicit_unsupported_method_count': len(unsupported),
             'additional_complete_library_opener_unsupported': 'luaL_openlibs' if "luaL_openlibs() { throw" in lapi else None,
             'explicit_unsupported_count_including_complete_library_opener': len(unsupported) + int("luaL_openlibs() { throw" in lapi),
-            'configured_call_limit': 'lua_resetthread occurs under notyet/#if0 and luaL_openlibs is in the inactive non-sandbox branch. Their explicit unsupported methods are not configured-game blockers.',
+            'configured_call_limit': 'lua_resetthread occurs under notyet/#if0 and luaL_openlibs is in the inactive non-sandbox branch. The standalone luaL_openlibs exception is not a configured-game blocker; configured libraries are opened individually through the ABI provider.',
             'source_declared_limitations': lua_limits,
-            'remaining_gates': ['Complete NetHack-used API semantics and bind game nh/des/selection/object callbacks',
-                                'Preserve table hashing/iteration/holed-length behavior', 'GC/finalizers/memory accounting and configured limits',
-                                'Exact instruction hooks, continuation/finalization, diagnostics and remaining syntax/library behavior',
-                                'Differentially execute original scripts and level/quest generation before selecting this interpreter'],
+            'allocation_verification_scope': {
+                'completed_differential_gates': ['Original C-compiled binary chunk loading/close for all 131 original scripts',
+                                                 'Bytecode VM: 119 native execution/478-value cases and 119 exact opcode traces covering 334264 instruction boundaries, plus all 131 original native-compiled chunks',
+                                                 'Bare bytecode runtime full allocator callback transcripts in INC and GEN, constructor/load/runtime refusal and COUNT threshold probes',
+                                                 'Complete eight retained library opener and ordered requiref-chain allocation/free transcripts',
+                                                 'Direct incremental source parser/codegen: 296 source cases with whole-string and one-byte readers; 1490 native prototypes and 113502 instructions including constants/register/upvalue/debug/local fields',
+                                                 'Original 131 source scripts and 168 additional language/lexer/control-flow sources with complete source-load/close allocator transcripts; 250 refusal schedules and 2177 COUNT thresholds',
+                                                 'Chunked source reader: 393 valid traces covering 736017 callbacks and 55 invalid traces plus 504 refusal schedules; binary reader: 9 native traces plus 99 refusal schedules and 96 malformed-input traces',
+                                                 'Retained Lua load(reader): 18 full allocator/result traces and 337 refusal schedules, including source consumption order, reader errors, forced collection, COUNT observations and nesting boundaries',
+                                                 'Native dump: 262 writer transcripts, 84061 block writes and 64 writer-refusal positions; retained debug/base: 62 cases and 201 values; debug hooks: 1482 events across 35 mask/count combinations',
+                                                 'Real LuaL_Buffer/UBox formatting, UTF8 char and retained pack/OS consumers, with exact result/free/allocation transcripts and permanent refusal schedules',
+                                                 'Actual string.format/UTF8 auxiliary error strings, type/source/alias/method/C-caller naming, native check ordering and allocator/refusal sequences',
+                                                 'Sort actual C temporary stack slots/reused bytecode storage: 300 native comparator/table/GC/entropy traces plus 10 full allocator/result/error transcripts and 150 refusal schedules'],
+                'not_blanket_certified': ['Arbitrary source/reader inputs and failure schedules outside the differential corpora',
+                                          'All retained-library input combinations, temporary buffers and resource quotas outside their directed corpora',
+                                          'Arbitrary weak/finalizer/userdata/thread graphs and whole-game native heap/cadence parity'],
+                'evidence': [evidence('scripts/test-js-lua-memory.mjs', 'complete allocation/free callback transcript'),
+                             evidence('scripts/test-js-lua-memory.mjs', 'eight original standard-library opener'),
+                             evidence('scripts/test-js-lua-incremental.mjs'),
+                             evidence('scripts/test-js-lua-bytecode.mjs'),
+                             evidence('scripts/test-js-lua-source-memory.mjs'),
+                             evidence('scripts/test-js-lua-reader.mjs'),
+                             evidence('scripts/test-js-lua-reader-runtime.mjs'),
+                             evidence('scripts/test-js-lua-format-utf8-errors.mjs'),
+                             evidence('scripts/test-js-lua-sort.mjs'),
+                             evidence('scripts/test-js-lua-sort-memory.mjs'),
+                             evidence('js/services/lua-aux-error.js'),
+                             evidence('js/services/lua-buffer.js'),
+                             evidence('js/services/lua-compiler-allocations.js')],
+                'scope_limit': 'Gates reported by the implementing owner and encoded in differential assertions; this inventory does not execute them. Their existence is not a blanket equivalence claim.'},
+            'remaining_gates': ['Retain explicit limits beyond the completed source/reader/library/GC differential corpora; these comparisons do not prove arbitrary native heap parity',
+                                'C library work does not fetch Lua opcodes; optional host-work guards are not native instruction hooks',
+                                'The accepted production snapshot and final private candidate have separate evidence; any later link or runtime/source change needs its own final source-hash, recording and integration checks',
+                                'Treat actual selected luaBackend/javascriptLua metadata and matching source hashes as selection evidence; a changed builder default or a private acceptance alone is insufficient',
+                                'Remaining C game, memory64 ABI, allocator, host services and MEMFS still prevent whole-game JavaScript independence'],
+            'provider_evidence': [evidence('js/services/wasm-lua-runtime.js', 'createWasmLuaRuntime'),
+                                  evidence('js/services/lua-bytecode-vm.js', 'compileLuaIncremental'),
+                                  evidence('nethack-c/wasm/lua-bridge.c'),
+                                  evidence('js/services/lua/lmem.js', 'cadence/heap parity')],
         },
         'game_file_transport': {'selected_in_adapter': ROOT / 'js/services/game-files.js' in adapter_graph,
                                 'filesystem_currently_supplied': 'Emscripten module.FS/MEMFS',
@@ -530,7 +1136,7 @@ def service_inventory(active):
 
 
 def active_source_paths(active):
-    return [entry['path'] for entry in active['manifest_dependency_source_integrity']]
+    return [entry['path'] for entry in active['manifest_dependency_source_integrity'] + active['manifest_lua_source_integrity']]
 
 
 def lua_inventory(tree):
@@ -558,6 +1164,22 @@ def lua_inventory(tree):
             'evidence': location(nhlua, text, match.start())})
     read(tree / 'include/config.h')
     read(tree / 'include/global.h')
+    debug_source = tree / 'lib/lua-5.4.8/src/ldblib.c'
+    debug_text = read(debug_source)
+    debug_table = re.search(r'\bdblib\[\]\s*=\s*\{([\s\S]*?)\n\};', debug_text)
+    debug_exports = re.findall(r'\{\s*"([^"]+)"\s*,', debug_table[1]) if debug_table else []
+    never = {entry['name']: [item['function'] for item in entry['entries'] if item['condition'] == 'NEVER']
+             for entry in filters}
+    retained_debug = sorted(set(debug_exports) - set(never.get('ct_debug_debug', [])))
+    wizard_libraries = {
+        'os': sorted(item['function'] for group in filters if group['name'].startswith('ct_os_')
+                     for item in group['entries'] if item['condition'] == 'IFFLAG'),
+        'debug': retained_debug,
+        'base_file_and_dynamic_loading': ['dofile', 'load', 'loadfile'],
+        'never_removed_even_with_ALL': never,
+        'io_library': 'not opened: luaopen_io is inside #ifdef notyet; retained base loadfile/dofile are separate',
+        'package_library': 'not opened by nhlL_openlibs',
+    }
     return {'api_observations': [{'name': name, 'sites': sites} for name, sites in sorted(calls.items())],
             'unique_api_name_count': len(calls), 'sandbox_initializers': initializers,
             'sandbox_filters': filters,
@@ -565,7 +1187,19 @@ def lua_inventory(tree):
             'scope_assessment': {
                 'confidence': 'medium: source/configuration review; not preprocessed or dynamically instrumented',
                 'normal_states': ['restricted base', 'coroutine', 'table', 'string', 'math', 'utf8'],
-                'additional_states': ['wizard debugging enables debug.traceback', 'version information state'],
+                'additional_states': ['wizard SAFE|DEBUGGING expands to ALL before library filtering', 'version information state'],
+                'wizard_flag_expansion': {
+                    'input': 'NHL_SB_SAFE | NHL_SB_DEBUGGING',
+                    'steps': ['DEBUGGING adds NHL_SB_DB_SAFE (0x00002000)',
+                              'DB_SAFE intersects NHL_SB_ALL (0x0000ffff)',
+                              'if (NHL_SB_ALL & lflags) sets lflags to uint32_t(-1)',
+                              'IFFLAG entries survive; NEVER entries are still removed'],
+                    'retained_libraries': wizard_libraries,
+                    'retained_debug_function_count': len(retained_debug),
+                    'evidence': [evidence(relative(nhlua), 'if (NHL_SB_DEBUGGING & lflags)'),
+                                 evidence(relative(nhlua), 'if (NHL_SB_ALL & lflags)'),
+                                 evidence(relative(tree / 'src/wizcmds.c'), 'NHL_SB_SAFE | NHL_SB_DEBUGGING'),
+                                 evidence(relative(debug_source), 'dblib[]')]},
                 'inactive_observed_states_and_calls': [
                     {'name': 'string-only pattern matching state', 'condition': '#ifdef notyet',
                      'evidence': evidence(relative(nhlua), 'start_luapat(void)')},
@@ -574,7 +1208,8 @@ def lua_inventory(tree):
                     {'name': 'luaL_openlibs', 'condition': 'non-sandbox #else branch; prepared config enables NHL_SANDBOX',
                      'configured_game_blocker': False, 'evidence': evidence(relative(nhlua), 'luaL_openlibs(L);')},
                 ],
-                'not_normally_requested': ['io', 'os', 'package/module loader'],
+                'not_opened_in_configured_sandbox': ['io library (#ifdef notyet)', 'package/module loader'],
+                'os_scope': 'Absent from ordinary SAFE initialization, but all six retained OS functions are reachable through actual configured wizard SAFE|DEBUGGING expansion.',
                 'preserve': ['Lua 5.4.8 integer/float semantics and strings', 'parser/compiler and VM',
                              'core garbage collector and userdata lifecycle/finalization; these are not removable standard-library features',
                              'tables, iteration, metamethods, userdata and object identity',
@@ -584,9 +1219,9 @@ def lua_inventory(tree):
                              'Lua patterns, coroutine/table/string/math/UTF-8 behavior',
                              'seeded math.random and NetHack RNG call ordering',
                              'original level/quest scripts and NetHack nh/des/selection/object bindings'],
-                'unresolved': ['Actual reachable opcode/API/library subset',
-                               'Effects of compiled conditionals and alternate sandbox flags',
-                               'Exact heap accounting/GC effects of an alternative interpreter',
+                'unresolved': ['Reachability beyond public, level-script and wizard differential corpora',
+                               'Inactive/alternate compiled branches are not proven by lexical API matches',
+                               'Native allocation sequence, GC cadence and C-library quota boundaries beyond the completed directed differential corpora',
                                'Ordering and numeric corner cases beyond the public recordings'],
                 'evidence': [evidence(relative(nhlua), 'nhlL_openlibs(L, sbi->flags)'),
                              evidence(relative(tree / 'include/config.h'), '#define NHL_SANDBOX'),
@@ -610,6 +1245,7 @@ def build_report():
     ports = json.loads(read(ROOT / 'nethack-c/wasm/tu-ports.json') or '[]')
     manifest = json.loads(read(ROOT / 'js/wasm/build.json') or '{}')
     active = active_inventory(manifest)
+    active['accepted_production_validation'] = accepted_production_evidence(active)
     service_sets = []
     for category, names in sorted(LIBC.items()):
         observations = []
@@ -618,7 +1254,7 @@ def build_report():
                 observations.append(name)
         service_sets.append({'category': category, 'game_text_tokens': observations})
     report = {
-        'schema_version': 2,
+        'schema_version': 3,
         'generator': 'scripts/audit-js-dependencies.py',
         'purpose': 'Read-only migration inventory; no production implementation or defaults changed.',
         'snapshot': {'configured_js_tu_count': len(ports),
@@ -640,6 +1276,7 @@ def build_report():
         'source_sizes': source_sizes(tree, active),
         'tu_dependencies': collect_tu_dependencies(game_tokens, active),
         'dependency_abi_library': collect_tu_dependencies(game_tokens, active, [ROOT / 'nethack-c/wasm/dependency-library.js']),
+        'lua_abi_library': collect_tu_dependencies(game_tokens, active, [ROOT / 'nethack-c/wasm/lua-library.js']),
         'runtime_observations': collect_runtime(),
         'compiled_service_candidates': {'method': 'Known libc/terminfo names matched as tokens in prepared C/headers; not calls or reachable closure.',
                                         'libc_groups': service_sets, 'terminfo_game_tokens': sorted(TERMINFO & game_tokens)},
@@ -649,6 +1286,7 @@ def build_report():
             {'name': 'remaining_game_code', 'disposition': 'port incrementally; coordinate with active TU work', 'evidence': ['js/wasm/link-objects.txt', 'nethack-c/wasm/tu-ports.json']},
             {'name': 'c_abi_and_linear_memory', 'disposition': 'preserve addresses/layout/integer semantics initially; replace C helpers and Wasm memory ownership', 'evidence': ['nethack-c/wasm/tu-support.c', 'js/ported/wasm-runtime.js']},
             {'name': 'libc_regex_time_files', 'disposition': 'JS regex selected through C ABI forwarders; compiled libc/time/MEMFS remain selected. Standalone bounded JS services do not replace the active game runtime.', 'evidence': ['nethack-c/wasm/tu-libraries/posixregex.js', 'nethack-c/wasm/tu-libraries/calendar.js', 'js/ported/js-runtime.js']},
+            {'name': 'lua_algorithms_and_abi', 'disposition': 'Selected Lua backend: ' + active['built_lua_backend'] + '. Complete 83-opcode JavaScript VM/compiler and ABI provider exist; final frozen private candidate acceptance is recorded separately from both historical automatic results and selected production artifact validation. C memory/callback transport remains even when Lua algorithms are JavaScript.', 'evidence': ['js/services/lua-bytecode-vm.js', 'js/services/lua-incremental-parser.js', 'js/services/wasm-lua-runtime.js', 'nethack-c/wasm/lua-bridge.c']},
             {'name': 'assets', 'disposition': 'embed generated game data and pinned terminal entry as JS-accessible assets; native generators remain development-only', 'evidence': ['nethack-c/wasm/build.py']},
             {'name': 'replay_adapter_environment_startup', 'disposition': 'Game-file transport extracted and selected; active adapter still supplies Emscripten FS/ENV/startup/callMain/unwind. Standalone VFS/time/memory provider is separate.', 'evidence': ['js/wasm-adapter.js', 'js/services/game-files.js', 'js/ported/js-runtime.js']},
             {'name': 'terminfo_capabilities', 'disposition': 'Pinned-entry JS terminfo selected; ncurses headers/data/reference build retained, C libtinfo excluded from selected runtime. C vararg/callback ABI support remains.', 'evidence': ['nethack-c/wasm/build.py', 'nethack-c/wasm/dependency-bridge.c', 'js/services/terminfo.js']},
@@ -675,11 +1313,18 @@ def build_report():
             'Full libc/formatting/time/filesystem/transitive-helper inventory remains open beyond curated token categories.',
             'Lua inactive branches, scripts loaded through generated data, runtime aliases and alternate flags need dynamic/preprocessed evidence.',
             'Compression/terminfo/ERE are selected in the active build manifest; the audit does not rerun their validation suites.',
-            'Standalone memory/time/VFS and partial Lua presence does not replace the selected game Emscripten runtime or compiled Lua.',
+            'JavaScript Lua implementation and frozen private validation are distinct from selected build.json luaBackend/javascriptLua provenance. Backend read from selected artifacts: ' + active['built_lua_backend'] + '.',
+            'JavaScript Lua algorithm replacement does not remove the remaining game Wasm/Emscripten runtime, native-backed ABI storage or host file/time services.',
         ],
     }
     report['javascript_service_inventory'] = service_inventory(active)
-    lua_candidate = report['javascript_service_inventory']['partial_lua']
+    changed_inputs = [entry['path'] for entry in active['manifest_declared_artifact_and_source_integrity']
+                      if not entry['matches']]
+    if changed_inputs:
+        report['unresolved'].append('Selected manifest has live artifact/source hash mismatches: '
+                                    + ', '.join(changed_inputs)
+                                    + '. Accepted production snapshot remains separately bound; its score is not transferred to these changed live inputs.')
+    lua_candidate = report['javascript_service_inventory']['lua']
     required_lua_names = [entry['name'] for entry in report['lua']['api_observations']]
     observed_lua_names = set(lua_candidate['method_names_observed_in_lapi_class'])
     lua_candidate['c_call_names_observed_including_inactive_branches'] = required_lua_names
@@ -692,15 +1337,24 @@ def build_report():
         'compression': 'selected_javascript_configured_scope',
         'terminfo': 'selected_javascript_pinned_entry_scope',
         'regex_time': 'regex_selected_javascript_time_standalone_only',
-        'lua': 'partial_standalone_interpreter_compiled_lua_still_selected',
+        'lua': ('selected_javascript_vm_compiler_abi_final_private_and_production_evidence_separate' if active['built_lua_backend'] == 'javascript'
+                else 'final_private_javascript_candidate_accepted_production_selection_pending'
+                if lua_candidate['final_current_source_candidate']['recorded_private_gates_passed_and_acceptance_bindings_match']
+                else 'private_javascript_candidate_selected_backend_' + active['built_lua_backend']),
         'startup_capture_persistence': 'game_file_transport_extracted_active_memfs_retained',
-        'independence': 'not_achieved_wasm_emscripten_and_compiled_lua_remain',
+        'independence': 'not_achieved_wasm_emscripten_remain_selected_lua_' + active['built_lua_backend'],
     }
     for entry in report['migration_backlog']:
         entry['current_status'] = backlog_status[entry['id']]
     report['migration_backlog'][3]['action'] = 'Retain selected JS codec and differential gates; replace remaining MEMFS/C ABI dependence during standalone runtime integration.'
     report['migration_backlog'][4]['action'] = 'Retain pinned-entry JS terminfo; remove remaining tparm/tputs C ABI support when game callers and callback state are JS-owned.'
     report['migration_backlog'][5]['action'] = 'Keep configured JS ERE selected; wire the separately implemented JS calendar/time provider into the active game through controlled integration.'
+    report['migration_backlog'][6]['action'] = 'Retain accepted final private Lua snapshot and completed compiler/reader/runtime/library regression gates. Read actual selected build metadata and source hashes, then validate the newly linked production artifact before claiming promotion complete. Preserve actual wizard ALL expansion and NEVER filters.'
+    report['migration_backlog'][6]['gate'] += ['Final private frozen candidate: 44 public recordings, all 126 level scripts at three seeds, three wizard seed groups and immutable full dependency runner accepted; selected production build has separate artifact and integration gates', 'Completed native source allocation/refusal, reader, automatic GC and C-library buffer/error differential corpora remain required regression gates; broader inputs are not blanket certified']
+    if active['accepted_production_validation'].get('selected_artifact_and_runtime_match_accepted_snapshot'):
+        report['migration_backlog'][6]['current_status'] = 'selected_javascript_lua_artifact_and_runtime_match_accepted_production_snapshot'
+        report['migration_backlog'][6]['selected_acceptance_snapshot'] = active['accepted_production_validation']['path']
+        report['migration_backlog'][6]['action'] = 'Retain selected JavaScript Lua with accepted production manifest/runtime/source bindings and completed regression gates. Revalidate later links or changed JavaScript/runtime sources; equal Wasm alone is insufficient. Preserve actual wizard ALL expansion and NEVER filters.'
     runtime_markers = {
         'nethack-c/wasm/build.py': 'link_flags = ',
         'nethack-c/wasm/build_terminfo.py': "'--with-termlib'",

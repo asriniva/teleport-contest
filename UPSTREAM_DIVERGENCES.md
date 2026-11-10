@@ -1,9 +1,92 @@
 # Upstream divergence register
 
-Maintained inventory as of 2026-11-09. This register describes the implementation
+**Accepted checkpoint: 110 translation units plus JavaScript Lua.** The normal
+mixed memory64 build passes unchanged original integration, including all original
+30-second workers, and all44 public sessions within the original45-second limit.
+Every metric is exact: 792,838 RNG calls;11,405 screens/cells/cursors;1,483 animation
+frames. All1,322 captured inputs are present before both gates and remain unchanged
+through both. Provenance verifies683declared artifact/source hashes; the literal
+JavaScript closure has298files and0nonliteral imports. No harness, recordings,
+expected values or deadlines changed.
+
+Evidence: `.cache/tu110-warn-fixed-gate-snapshot/acceptance.json`, including the
+actual original command/deadline/no-loader contract. Wasm SHA256
+`f98a4c95a72afba893e904faafae87b27c3c0f3ee8fce0266e62edd88a81fc34`;
+manifest `5e402d6f8a7620da484a121e7c7d348ed458899a0fa7abb84cfc98816be9e001`.
+All110 original C objects, HACKLIBarchive and five checked C Lua interpreter
+symbols are absent; new ports have actual JS imports and no private test aliases.
+The12-port batch initially passed39,610 controlled C/JS comparisons; subsequent
+six-adapter cache suites pass40,856 and POTION passes2,465 after its metadata fix.
+These scopes overlap and are not an additive aggregate. Native equivalence remains
+pending for57first-pass ports;53native suites are historical baseline evidence,
+not a fresh110-file native result.
+
+The accepted adapter repairs cache validated environments while forwarding each
+call to its current services and restoring outer services after native reentry or
+exceptions. They preserve source function bodies and direct-constructor behavior;
+no heap field values are cached. POTION adds the compiler-derived WARN_OF_MON
+property index and rejects missing property metadata before gameplay. All66 POTION
+core bodies remain unchanged. Prior timeout and41/44 snapshots remain immutable;
+seed0360's42.43-second profiled replay is diagnostic, separate from the passing
+original public gate. Configured SDK/external tooling remains required: this is
+not a complete toolchain capture.
+
+**Current workspace is staging the next batch:** registry114 currently adds
+DO_WEAR, INSIGHT, READ and APPLY; their four fresh shared suites pass27,175
+comparisons. Live source/runtime/layout inputs are ahead of the old game manifest
+and require a fresh closed-batch build. The accepted110 claims above apply to
+the immutable captured snapshot, not these partially integrated live files.
+
+**Parallel work:** nine authors across three existing chats own disjoint files:
+MON, ZAP, BOTL, SHK, SP_LEV, PICKUP, UHITM, TRAP and HACK. Completed private
+handoffs remain pending shared integration; corrected INVENT catalogue/formal
+proof and separate service/record-view candidates retain their original histories.
+ROOT owns serialized selection/build/gates. OPTIONS133/J139 is reserved for the
+BOTL author after freeze and read-only scope review. Global next134/J140.
+
+NHLSEL84 remains
+unselected with its documented original-source unary use-after-free mismatch.
+Inactive DLB has zero configured function bodies and is not counted.
+The harness, recordings and pristine upstream source stay unchanged.
+
+Maintained inventory as of 2026-11-10. This register describes the implementation
 currently on disk, including incomplete behavior and defects. It must be updated
 with every divergence; proposed changes must be explained before edits begin.
 See [the working instructions](AGENTS.md).
+
+**Lua default and validation:** the builder now defaults to JavaScript Lua,
+with `--c-lua` as the explicit reference option. The frozen liblua-free candidate
+passes the complete dependency suite, all44 recordings,378 original-level loads
+and3 wizard probe groups, with82 unchanged captured inputs. The earlier accepted root
+artifact selected81 TUs with JavaScript Lua; accepted87 is bound above. That81 build passed
+417 declared hashes, integration and all44 public recordings with every metric
+exact. The earlier43/44 failure is preserved separately with its door-alias fix.
+Private Lua proofs and selected artifact proofs remain separate in DEP03 below.
+
+**Historical81 provenance:**81-TU actual root build passes417declared hashes and563unchanged captured files before/after integration and all44 public recordings. Evidence `.cache/tu81-door-fixed-gate-snapshot/acceptance.json` binds full manifest SHA256c1244d85b3b0d0b582f57e8a30cc2a5420893b0a4982e851ce3271dd091442ed and runtime identities, because JS-only fixes leave the compiled Wasm hash unchanged. Earlier77/75/70/67v3 checkpoints and failed81 bundle remain preserved. Original timeouts and frozen comparator are unchanged.
+
+**Historical81 migration checkpoint:**81 accepted TUs (twenty-eight new EmC-first-pass ports). Integration/all44 public sessions pass792,838 RNG calls,11,405 screens/cells/cursors and1,483 animation frames exactly. New28nativeparitypending;53-suite nativeproof below covers earlierbaselineonly. New ENGRAVE/GLYPHS/TOPTEN/DOGMOVE use actual JS imports with all81 original objects excluded; private aliases and C Lua interpreter symbols are absent. DOGMOVE central wiring and doormask field alias are corrected; the measured ENGRAVE wrapper cache is applied. The earlier43/44 seed0014 failure remains at `.cache/tu81-active-gate-snapshot/failure.json`; a closed-door regression rejects the old adapter. Sourcepolicy staysJS; typed C memory/call bridges remain temporary. Nine authors continue on disjoint unregistered files.
+
+**Historical87 pre-acceptance staging:**the registry and shared adapters then selected87 TUs, adding
+WINDOWS/CFGFILES/RESTORE/NHLOBJ/DO_NAME/VISION. All six shared comparisons pass
+and the real87 game builds with466 declared hashes. Initial integration hit
+the unchanged30-second New York worker timeout. The measured WINDOWS cache is
+now promoted; a fresh normal build passes466hashes and all original integration checks pass. Fresh shared
+WINDOWS passes9,209comparisons/73bodies. Those44public recordings subsequently passed as bound above. Historical616-input failed capture:
+`.cache/tu87-gate-snapshot/failure.json`. The81 acceptance above binds its recorded artifact/source identities; its copy
+has the transitive-helper limitation stated above. Fresh87 capture has620inputs
+and passes copied-tree252module closure verification. Fresh87 acceptance is
+bound above; new native parity remains pending.
+
+**Capture completeness correction:**the root81 results remain actual44/44
+results, but its563-file copy and the failed87 616-file copy omit the shared
+utf8-runtime.js helper because the capture used TU filename prefixes. They
+cannot be described as self-contained replay bundles. Declared-hash and
+captured-file checks cover exactly their recorded inputs; they do not prove
+import completeness. Preserve these copies unchanged. Future capture will
+check transitive local imports, with a negative test for this omission.
+
+**SAVE cleanup report corrected:** the reported sign-loss defect was a misdiagnosis. Actual Wasm i64 export is -8n, existing Number conversion is -8, and frozen75/77 layouts both contain -8. No observed cleanup mismatch exists. Stronger both-argument fixture checks and explicit signed-carrier conversion are verification/portability improvements; original75 recording proof remains valid. Misdiagnosis history is retained below.
 
 **Native parity correction complete for the existing suites (NP01):** the user rejected accepting
 native/JavaScript behavioral differences. The prior green native reports used
@@ -84,29 +167,35 @@ scorer result is `.cache/native-parity-final-public-results.json`. Native oracle
 provenance remains the original host-compiled source with the previously
 documented inherited contest patches and controlled probe dependencies.
 
-**Dependency migration (DEP01–DEP02):** the regular mixed build now selects
-JavaScript compression, terminfo and POSIX regex, omitting the corresponding C
+**Dependency migration (DEP01–DEP03):** the regular mixed build now selects
+JavaScript compression, terminfo, POSIX regex and configured Lua, omitting the corresponding C
 algorithms. Its fresh full run passes44/44 public sessions,11405 screens/cursors,
 792838 RNG calls and1483 animation frames, with no errors. Ordinary-JS memory,
-calendar and regular-file services run separately; JavaScript Lua remains
-partial and inactive in the game. Compiled Lua, remaining game C, libc and the
-Emscripten runtime are still required. This is not a Wasm-free submission.
+calendar and regular-file services run separately. JavaScript Lua passes its
+complete dependency suite, all378 original-level loads, wizard probes and
+the selected81-TU game gates. C Lua remains an explicit reference option and
+development oracle archive; it is absent from the selected game link.
+Remaining game C, libc and the Emscripten runtime are still required.
+This is not a Wasm-free submission.
 
-**DEP03 now in progress:** the user explicitly requested completing the
-remaining Lua/runtime migration. Planned source additions are a real Lua C ABI
+**DEP03 configured Lua replacement complete:** the user explicitly requested completing the
+remaining Lua/runtime migration. Implemented additions include a real Lua C ABI
 bridge (`nethack-c/wasm/lua-bridge.c`, `lua-library.js`,
 `js/services/wasm-lua-runtime.js`), rooted Lua GC/finalizers/close and native
 userdata ownership, debug/allocator/sandbox services (`lua-debug.js`), remaining
 string formatting/packing helpers, dedicated native differential tests and a
-separate linked game candidate without liblua. Existing production defaults
-stay selected until native ABI/lifecycle/RNG/limit and unchanged recording
-gates pass. This planning entry authorizes no no-op lifecycle/disabled limits;
-unfinished services remain explicitly incomplete. Exact results follow as
-implemented. Other concurrent game-TU changes remain separately recorded.
+selected game without liblua. The final frozen private candidate passes44/44
+public recordings,378 original special-level loads and3 wizard OS/debug probe
+groups. Completed native allocation gates cover all131 original source/binary
+chunks, runtime, eight-library registration and temporary-buffer consumers,
+including refusal/error cleanup. The selected81-TU game also passes complete
+integration and all44 recordings. Inactive libraries and general C continuations
+remain outside the configured scope; remaining game/runtime migration is separate.
+Exact evidence follows in DEP03. Concurrent game-TU changes remain separately recorded.
 
 ## Full existing-case native correction (NT04–NT06)
 
-**Active migration (J59): WIELD/TU53.** All12,804 target comparisons and34,122 focused native assertions pass; supplementary1,538 observations match. Preserved replay inputs pass44/44 public sessions and game integration. The later53-suite native diagnostic passes1,503,578 assertions, but concurrent source changes prevent certifying one frozen live revision. NP01–NP02 resolve the earlier oracle question: native C is required; EmC-only libc differences are diagnostic. The user confirms the terminal baseline is fixed. WIELD remains pending a coherent fresh build/native/integration/public gate; MKROOM translation has not begun.
+**Current TU staging (J59–J62):** WIELD/TU53 is complete:12,808 EmC comparisons,34,137 focused native assertions,actual memory64 mixed link and21public+2callback imports,plus the reused native owner53-suite/14three-way/full integration/44-session gates. Current independent work is MKROOM/TU54,SFSTRUCT/TU55,EARLYARG/TU56. Latest user direction supersedes the earlier blocking native/sequential policy: EmC first-pass equivalence and actual mixed linking come first; native macOS failures remain explicit follow-up work. Existing native runtime fixes remain selected. Root coordinates shared build promotion and reuses other owners' verified results.
 
 **Historical validation (J58), superseded by NP01–NP03:** WORN's saved52-suite report used native/platform amendments that the user subsequently rejected. Its1,498,045-assertion pass does not establish direct native parity. Its separate full-game integration and44-session recording results remain historical build evidence. Evidence: `.cache/test-wasm-worn.log`, `.cache/native-existing-runs/68308-1794286304795/results.json`, `.cache/worn-public.stdout.txt`. Current strict native parity must be established by the NP aggregate above.
 
@@ -1902,7 +1991,7 @@ DEP02 independent runtime provider (not selected by the game):
   WebAssembly/process/Buffer/fetch unavailable. Native tools/compiled C are
   used only by development oracles. Browser execution remains unverified.
 
-DEP02 partial Lua milestone (inactive in the game):
+Historical DEP02 partial Lua milestone (superseded by completed DEP03 below):
 
 - `js/services/lua/` provides13 modules for byte strings/int64/float values,
   lexer/parser, AST execution, array/hash tables, base/math/string/pattern/UTF8
@@ -1957,7 +2046,7 @@ DEP02 partial Lua milestone (inactive in the game):
   The selected game continues linking real liblua; no Lua recording-equivalence
   claim or dependency-completion claim is made.
 
-DEP02 audit refresh now records the actual selected module,52 configured versus
+Historical DEP02 audit refresh recorded the then-selected module,52 configured versus
 51 built game TUs (WORN is configured but pending),89 linked game C objects,
 563 imported JS functions and5413 defined Wasm functions at this snapshot.
 Import/definition sections are parsed separately; C forwarding symbols are not
@@ -1972,7 +2061,7 @@ Ghostty is inactive. Static prefix/token counts and symbol absence alone do not
 prove a complete closure. Audit regeneration and `--check` pass with no missing
 inputs; concurrent TU work can legitimately stale this measured snapshot.
 
-Next dependency gates are real Lua lifecycle/debug/native-callback integration,
+At that checkpoint, the next gates were real Lua lifecycle/debug/native-callback integration,
 then broader ordinary-memory globals/structs/libc/stdio/startup coverage and
 connecting the tested VFS behind game file calls. Each selected change requires
 the same unchanged recording gate. The backend-independent runSegment/replay/
@@ -1981,7 +2070,7 @@ the adapter retire only when their actual native callers disappear. Compiled
 Lua and remaining Emscripten/libc/game C are still needed. No frozen file,
 recording or pristine upstream submodule modification is part of DEP02.
 
-Lua integration readiness review identifies concrete ordering: first bridge
+Historical Lua integration readiness review identified concrete ordering: first bridge
 header-expanded C API symbols/state/string/out-parameter/function-table ABI;
 then native-backed userdata with rooted collection/once-only finalization;
 then allocator userdata, sandbox accounting/limits, real debug/error hooks and
@@ -1999,17 +2088,173 @@ without liblua; level/theme/core/quest/save/restore and all44 recordings then
 gate selection. No C API success labels imply that this work is already done.
 
 
-### DEP03 — Remaining Lua implementation and live ABI integration (in progress)
+### DEP03 — Configured Lua implementation and live ABI integration (complete)
 
 The user explicitly required continuing beyond the partial DEP02 milestone.
-Work resumes on real lifecycle/weak references/finalizers/close and managed
+This work completed real lifecycle/weak references/finalizers/close and managed
 roots, actual C pointer/callback/error ABI, debug/source/opcode/resource policy,
 Lua text compilation and bytecode execution, remaining string facilities, and
-a liblua-free game candidate. Native tools/chunks remain development oracles;
+a liblua-free selected game. Native tools/chunks remain development oracles;
 there is no production native compiler or recorded script-result substitution.
-The regular game remains on compiled Lua until complete integration gates pass.
+The complete dependency, private-game and selected-game gates pass below.
 
-First DEP03 implementation evidence:
+The normal builder now defaults to JavaScript Lua. `--c-lua` selects the
+compiled reference; `--c-dependencies` keeps C Lua unless `--js-lua` is explicit.
+Clean builds still create the C Lua reference archive for original-C quest
+fixtures; it is omitted from the JavaScript Lua game link. Resume builds reuse
+that pinned test archive. This fixes a missing-reference-archive clean-build
+dependency, without adding compiled Lua algorithms to the selected game.
+Conflicting Lua flags are rejected. The selected JavaScript path omits the C
+Lua archive, compiles only the typed Lua C transport and links its JS library.
+The adapter imports/constructs the provider only when the built manifest
+selects JavaScript Lua. Manifests record the backend and all46 Lua service/ABI
+source hashes separately. The actual selected81-TU JavaScript-Lua game passes
+full integration under unchanged30-second worker limits and all44 public
+recordings:792838 RNG,11405 screens/cells/cursors,1483 animations,0errors.
+All417 declared artifact/source hashes and563 captured inputs remain unchanged
+before and after those gates. Accepted evidence is
+`.cache/tu81-door-fixed-gate-snapshot/acceptance.json`; its full manifest SHA256 is
+`c1244d85b3b0d0b582f57e8a30cc2a5420893b0a4982e851ce3271dd091442ed`.
+All46 selected Lua sources equal the final private freeze. The rejected43/44
+bundle is preserved separately: a missing DOGMOVE doormask/flags runtime alias
+caused that failure; the Lua inputs were unchanged. ENGRAVE wrapper caching
+restored the original timing limit without changing Lua or the harness. Details
+and regression evidence remain in PAR07. Manifest/source identity is required
+because these external-JS fixes do not change the compiled Wasm hash.
+The listed563-file81 archive later proved to omit a transitive UTF8 helper;
+its hashes and actual-root validation results remain preserved, but that copy
+is not a self-contained import closure. The capture correction is recorded in
+PAR09; future complete archives use an independent AST import-closure check.
+
+The final frozen private candidate
+`9463052f31ed4197f51c50f1018fc79e717bd854bc639d5160368e04498172a9`
+uses the coherent75-TU baseline plus46 frozen production Lua inputs. All82
+production/test inputs remained unchanged through the complete dependency
+suite (exit0), all44 recordings (792838 RNG,11405 screens/cells/cursors,
+1483 animations,0errors), all126 original levels at3seeds (378 loads,
+14289 screens/cursors,1131885 RNG) and3 wizard OS/debug groups. Every game metric
+matches compiled Lua. Source overlay hashes and absence of C interpreter,
+compiler and collector symbols are verified. Evidence is
+`.cache/js-lua-game-final/acceptance.json` and
+`.cache/js-lua-final-freeze/manifest.json`. An initially reported SAVE-layout
+concern was independently retracted: captured values were already correct;
+no baseline behavioral exception was accepted.
+
+The automatic-GC private candidate `5284afce5e9e4a94f4999ac9bdbe62be7ac989a2c8cb17ec455f0a7b3904acdd`
+passes all44 public recordings exactly (11405 screens/cursors,792838 RNG
+records,1483 animation frames). Its unchanged53-TU baseline is the coherent
+read-only `wield-gate-snapshot-v2`. It also passes every126 original special
+level script at three seeds:378 loads,14289 screens/cursors and1131885 RNG
+records. This frozen candidate predates subsequent allocation/OS work;
+those live changes require a new candidate gate.
+
+Wizard OS date services now use pure JS native-macOS calendar, timezone and
+strftime algorithms. Native IANA2026c data contains599 names/341 deduplicated
+tables, with source hashes; timezone tests pass27349 native cases plus82047
+forced `%z` cases. The calendar port passes12425 native gmtime/localtime/mktime
+comparisons, including signed-int32 tm years beyond Date's range. Strftime
+passes24565 native comparisons with C-locale formats, BC/large years, ISO
+weeks, timezone names and buffer boundaries. Its Apple/UCB-derived source
+retains the full notices: this software was developed by the University of
+California, Berkeley. Lua OS integration passes130 actual native cases
+through the memory64 C ABI in each of seven time zones (New York, UTC,
+Los Angeles, Dublin, Berlin, Sydney, Apia);48 measured Emscripten platform differences are
+retained as evidence. The previous C-formatter path failed five new wide-year
+cases; the JS formatter fixes them. Explicit alternate musl policy remains
+available. Lua5.4.8 preserves literal NULs in os.date formats; individual
+strftime calls retain C string termination. Date/time policies are JS;
+clock/current-time and file operations still use scoped platform services.
+Unsupported timezone identifiers and POSIX DST specifications without rules
+raise explicit timezone errors rather than silently choosing UTC.
+The dependency isolation gate now loads60 production modules, including the
+Lua ABI/OS provider graph, with Node, network, dynamic imports, generated code
+and WebAssembly unavailable. It executes calendar/strftime at BC and maximum
+tm-year boundaries through injected timezone services without C linear memory.
+The mixed game still uses Emscripten for remaining C translation units and
+scoped platform transports.
+Native library registration follows original `luaL_Reg`
+order/capacity and `luaL_requiref` publication timing. The C-ABI OS opener
+registers all11 original names before NetHack applies its actual filter;
+the five NEVER entries are explicit unavailable callbacks and are erased
+before configured scripts execute. Process execution, process exit,
+environment lookup, locale changes and temporary-name creation are not
+implemented Lua facilities. Standalone `openLuaOS` exposes only the retained
+six functions. Library-allocation/temporary-buffer gates pass as recorded below.
+The common `lua-buffer.js` ports native1024-byte LP64 `LuaL_Buffer`/UBox
+construction, registry metatable, raw allocator growth, close and finalization.
+Raw backing blocks are excluded from Lua GCCOUNT as in native `resizebox`;
+allocation callbacks still observe them. Its12 native complete allocator/free
+transcript fixtures and75 allocation-refusal schedules pass, including errors,
+numeric additions, repeated buffers and automatic GC. Error cleanup is deferred
+until the protected boundary actually unwinds its Lua/C frames, preserving
+handler-before-close order and native call-frame reuse. Native `lua_error`
+treats the interned memory-error string specially, so raw backing refusal
+correctly returns ERRMEM. Formatter/pack/date and other library consumers have
+separate completed gates below; the helper gate alone does not certify their
+quota behavior. Pack/date consumers initially passed14 complete native
+allocator/result transcripts and165 permanent allocation-refusal schedules,
+covering inline/growth boundaries, repeated buffers, numeric coercion,
+200 arguments, padding and date's250-byte per-conversion reservation.
+The prior explicit10-million-byte pack output bound is removed; the internal
+packing helper now requires its owning VM and uses native buffer allocation
+behavior. Date formatting uses the shared buffer too.
+
+Source allocation gates now compare all131 original text scripts through
+load and close, including50,449 callbacks with exact types, sizes, frees and
+logical pointer identities. Directed sources additionally pass250 refusal
+schedules and2177 actual GCCOUNT threshold probes. Binary loading/runtime,
+all eight library openers, and the ordered/cached `luaL_requiref` chain have
+separate complete native allocator/free transcript gates. These tests cover
+the observed fixtures, not arbitrary host allocator addresses or every
+possible Lua program.
+The former eager `load(reader)` path has been replaced with an actual demand
+reader, lexer, parser and native code generator. Native callback positions,
+callback-visible memory counts, early syntax-error stop and compiler cleanup
+are now compared directly:393 original text loads across1/7/33-byte readers
+produce736,017 exact callback events;55 invalid-source traces and504 failure
+schedules pass. Nine binary demand-reader traces and99 failure schedules pass.
+Retained Lua-callback reader and parser-depth boundary checks pass18 cases
+and337 refusal schedules. These inputs are included in the final82-input freeze
+and completed dependency/game gates above. The previous
+valid-source-only milestone remains in `.cache/js-lua-validsource-freeze`.
+
+`lua-aux-error.js` ports native199-byte BuffFS formatting, argument/type errors,
+method-self naming and loaded-module function search. Its16 complete native
+result/allocator transcripts and168 failure schedules pass, including long
+messages, custom type names and aliases. Formatter/UTF8 consumers pass45 exact
+native error/result/allocation transcripts and430 permanent refusal schedules;
+the original formatter/UTF8 memory suites also pass38 transcripts and285
+refusals. The string suite now checks actual messages for12 rejected formats,
+not only their error types. Base protected calls use native target frame slots
+and actual unwind/shrink ordering. The buffer raw-allocation refusal path now
+performs the native fixed-memory-message push/checkGC before raising ERRMEM.
+Pack/unpack/date/time consumers pass49 complete native result/allocation traces
+and535 refusal schedules, including long unpacked strings,2000 unpack results,
+malformed formats, precise argument errors and grown-buffer error cleanup.
+The shared LuaL_Buffer helper separately passes12 transcripts and75 refusals.
+No arbitrary-program allocation-equivalence claim follows from these fixtures.
+The retained core-library gate now passes122 full native value/error-byte/allocator/free
+transcripts and1718 permanent allocation-refusal schedules. The API gate
+passes35 snapshots, including a10,000,001-byte userdata allocation with exact
+native header/payload COUNT and writes; the previous artificial10MB cap is
+removed. Native allocator quota and representable host-memory limits remain.
+No-argument randomseed uses injected actual clock and opaque thread identity;
+round-tripping the returned native seeds produces60 exact RNG outputs in each
+VM. Host pointer values and entropy inputs remain environment-dependent.
+Native `os.time(table,...)` now performs actual `lua_settop(1)`
+through `vm.setHostStackTop`, releasing ignored arguments before field
+callbacks and collection. A new ignored-long-argument/collecting-metamethod
+regression exposed a shared finalizer stack issue: C callbacks used their
+reserved call-frame limit instead of the actual stack top. The core fallback
+now uses C argumentTop/checkTop while preserving Lua-frame and explicit scoped
+stack behavior. The normal transcript and all41 refusal schedules pass. Emergency collection
+was wrongly blocked during a finalizer; the corrected collector still suppresses
+automatic/nested ordinary collection but allows the native emergency full-GC
+path when a finalizer call allocation fails. Both ignored-argument regressions
+are retained in the49-case consumer gate.
+
+
+Historical first DEP03 implementation evidence (superseded by the gates above):
 
 - `scripts/build-js-dependency-game.py --lua` creates an isolated candidate
   using the current built manifest/object tree, implies JS regex, compiles
@@ -2111,6 +2356,67 @@ The refreshed string gate now passes1551 cases/3141 values and records14 host
 format differences after adding precision11/12 and thread-pointer coverage.
 These replace the earlier1550/3138/9 totals above; actual target-format
 comparisons remain exact.
+
+DEP03 native-target correction: the user subsequently required native macOS
+equivalence and explicit Emscripten library comparisons in the cooperating TU
+chat. The shared floating formatter now defaults to Darwin and ports Apple's
+actual `_hdtoa.c` discarded-next-nibble hexadecimal rounding behavior and
+Darwin NaN sign suppression; the source URL/hash/BSD notice are retained.
+Explicit `floatPolicy: 'musl'` remains for alternate-platform tests only.
+This supersedes the earlier default configured-musl choice above. Actual
+native C and actual memory64 musl each pass14388 snprintf comparisons;
+490 platform differences are recorded. Lua strings pass1551 native macOS
+cases/3141 values plus1551 explicit configured-musl cases;14 differences
+remain recorded. The1294 original-C standalone runtime comparisons still pass.
+The43-module isolation graph executes compile/dump/reload and this native
+formatter with host imports, Wasm, Node and network unavailable.
+
+DEP03 lifecycle/compiler milestone: real phase scheduling now passes33056
+configured original-C comparisons and13005 native macOS field/return checks,
+including463 actual STEP calls, allocation-debt checkpoints, mode transitions,
+minor/major/emergency collection and640 generational age/list cases;28 real
+JS graph checks pass separately. The ordinary-JS core now activates phased
+collection and secured allocation safepoints by default. Core verification
+currently passes155 execution cases/1402 values,131 original script parses,
+33 native C-API snapshots and34 lifecycle cases under full/incremental/
+generational collection, plus6 step/mode/automatic/barrier cases. These are
+real graph traversal/sweep/finalizer phases, not STEP aliases for full GC.
+Exact native bytecode heap-allocation cadence and source-compiler transient
+reservations remain active work; these results do not establish identical
+native quota thresholds. Native opcode compilation passes an expanded strict
+corpus (including all131 originals):295 cases/744 prototypes/56740 instructions,
+with constants/registers/upvalues/locals/line metadata all exact. Invalid
+source diagnostics and the retained wizard facilities are still being tested.
+
+DEP03 additional game behavior gate: `scripts/test-js-lua-game.mjs` creates
+private adapters that only select the snapshotted compiled-Lua/JS-Lua module
+factory and add the original wizard command-line switch. It runs43 original
+special-level scripts across3 seeds (129 actual script loads), comparing4818
+screens/cursors,409771 RNG calls and all animations exactly. It records actual
+FS script reads, not merely typed command names. No scripts, recordings,
+frozen harness or active adapters are edited. Results belong to the earlier
+`.cache/js-lua-game-opcodes/` snapshot; current automatic-GC changes require a
+fresh candidate and rerun. `--all-levels` adds the complete126 special-level
+input list; that expanded execution gate is not yet claimed to pass.
+
+DEP03 configured wizard closure correction: actual preprocessing and link
+inspection identify63 Lua/API undefined names across11 native objects, all
+provided by the82-symbol bridge at that audit point. Continuation arguments
+are zero/NULL; resetthread/io/openlibs are inactive. However, SAFE|DEBUGGING
+adds DB_SAFE before the `NHL_SB_ALL & lflags` test, so original code expands
+that wizard state to all internal flags. The earlier claim that OS and broader
+debug/base unsafe facilities were inactive is wrong and superseded here.
+Preserve the original flag behavior. New `lua-debug-library.js` and
+`lua-base-io.js` implement retained debug/live locals/upvalues/metatables/
+userdata/registry and load/loadfile/dofile using explicit FS callbacks.
+`lua-os-library.js` implements the retained clock/date/difftime/time/remove/
+rename algorithms with scoped platform bindings in `wasm-lua-os-services.js`;
+the C bridge only supplies scalar/layout/libc calls, never Lua algorithms.
+Native calendar/errno differences are explicit. Exact timezone abbreviations
+and remaining OS tests are in progress. Original NEVER filters still remove
+process execution, exit, environment, locale, temporary-name and debug hook
+control entries; IO remains disabled by original preprocessing. Native debug/
+loading tests and actual wizard-command integration must pass before cutover.
 
 ### J56 — mondata.c monster metadata, predicates and names (in progress)
 
@@ -2523,3 +2829,2837 @@ J61 candidate correction before implementation: DLB is disabled in the actual pr
 J60 MKROOM translation begins under the user's explicitly staged Emscripten-C first-pass/native-later workflow. All 30 configured original functions, parameters, local names and source comments remain the policy boundaries; native C continues as the independent oracle and no native mismatch is waived. The sole readonly four-row squadprob table moves to readable JavaScript symbolic data. shrine_pos retains a stable per-Module native zero-backed coord buffer, with all room/door/stair/grid views read freshly. The four gotos become minimal labeled blocks/continue in the same original functions; pointer iteration and signed pointer difference use runtime ABI adapters, and source sq invocations expand inline with the original macro text retained. Native automatic coordinates and serialization references retain scoped addressable storage; original native dependency calls and full room serialization remain native. Root owns shared integration and all builds. No compilation or behavioral pass is claimed by this announcement.
 
 SFSTRUCT migration begins (independent TU work): translate the configured historical serializers and buffered descriptor IO from src/sfstruct.c into readable JavaScript, expanding the original SF_A/SF_C/SF_X macros into the same native function boundaries. JS will own the original descriptor bookkeeping and serializer procedure-table definitions; native storage, actual native IO, pointer normalization dependencies and typed diagnostics remain ABI services. DLB remains disabled and deferred; no DLB configuration, upstream source, frozen harness or recording changes. Validation is pending original Emscripten-C differential probes; native-platform diagnostics will follow the requested first pass.
+
+TU56 EARLYARG implementation begins (in progress, unverified): port all twelve configured original src/earlyarg.c functions into js/ported/earlyarg.js with the original function boundaries, parameters, comments and control flow. C pointer cells for argc/argv/hackdir remain live views; local addressable argc/argv values use scoped boxes. Necessary JS goto adaptation in lopt uses labelled exits retaining its three original error outcomes. The active enum dump catalogues and earlyopts become readable authoritative JS data expanded from the configured source headers; only externally consumed monsdump/objdump receive native zero-only storage populated at startup. The mutable ArgVal_novalue string retains stable writable native backing. Typed native dependency/vararg bridges and real original callbacks remain; no parsing, option policy or enumeration algorithm moves into C helpers. New isolated original-EmC versus mixed-JS fixture tests will capture argument mutation, termination, output, callbacks and growth; native differences are deferred explicitly under the user’s EmC-first direction. Locations and integration contract: .cache/earlyarg-integration-plan.md plus the new EARLYARG core/runtime/library/support include, layout/probe/test files. No frozen harness, upstream source, terminal configuration or game defaults are changed. No build or equivalence claim is made yet.
+
+J59 WIELD complete under latest staging, with additional native evidence: private clean memory64 artifact ec2b91913fa2483a71afafacca3fa64d8f47cf5e92ed39e666db3109a3b83127 builds (.cache/wield-gate-snapshot-v2/.cache/clock-signal-build.log); all479source-input hashes unchanged and all53 ABI binding hashes equal actual sources. Focused originalEmC/hybrid12,808 comparisons pass includingstoredweight (.cache/wield-emc-first-pass.log there). Reuse native parity owner's completed report29670-1794291036512 (53/53,1,496,451assertions,0fail),14three-way libc regressions,gameintegration and44/44 public allmetrics exact onliveartifact caa9037891a506d73717bba31f1309c7758d83a17dd3a3080b83d25c9bc9edd7. That artifact has currentWIELDcorehash and compilednethackCalendarTime callback; allkeyWIELD/clock/runtime/native-librarysources equal the private capture. Actual live Wasm importaudit confirms all21public+2productioncallbacks, no5privatealiases, and no wield.o. Do not attribute live44results to the distinct private artifact; no redundant public/native aggregate rerun was made. Native owner created scripts/test-native-library-differences.mjs after coordination; this chat's paused duplicate proposal created no file. Frozen harness/recordings and pristine upstream remain unchanged.
+
+
+PAR01 — parallel generation batch (REPORT, BONES, EXPLODE), in progress. User instructions verified directly in migration chat01a1be24: collaborate, avoid duplicate work, use more subagents, and stage new translations against Emscripten C before correcting later native failures. This batch owns only unique js/ported/{report,bones,explode}{,-runtime}.js, their tu-libraries, layout/probe/test files and separately named C-support/integration fragments. Preserve every configured original function boundary, parameter, name, comment and source data/control flow; no C algorithm fallback or frozen/upstream edits. The migration chat retains shared TU registry/build/layout-generator/tu-support/main-runtime integration and actual mixed-link gates. This batch will run only source/AST/syntax and isolated TU checks, with EmC differential and native results explicitly distinguished. No game build or behavioral pass is claimed for unintegrated source generation. Existing NP01–NP03 fixes and diagnostics remain intact. Exact components, limitations and checks follow as implemented.
+
+J60–J65 explicit staged build tooling: scripts/build-tu-probes.py --emscripten-only compiles the actual original-C and C→JS memory64 probes while deferring native addon/oracle compilation; incompatible native-only/supplementary flags are rejected. nethack-c/build-wasm.sh --emscripten-only-probes forwards that option and records actual probeBuildBackends in build.json. Ordinary build defaults and strict native test commands are unchanged. This implements the latest user's EmC-first/native-later staging without relabeling native results or suppressing native failures. Syntax passes; targeted flag/build behavior awaits execution.
+
+J63–J65 additional authorized team: the user explicitly requested more than three subagents. This chat has three active slots; the completed native parity chat verified the human authorization and assigned its own three subagents to REPORT(src/report.c),BONES(src/bones.c),EXPLODE(src/explode.c). Six independent TU assignments now run across two existing chats, with no new user-owned chat created. The second team owns unique TU files and integration notes only; root here retains shared registry/build/layout/runtime includes. No duplicate runtime/Lua/native work or concurrent shared build is authorized. Each target remains In progress until actual first-pass EmC/mixed-link verification; no native or public equivalence is inferred from generated source.
+
+J60–J65 targeted first-pass driver: scripts/test-tu-first-pass.sh TU[ ...] validates requested names through the probe builder, rebuilds only their real EmC and JS-hybrid probes, regenerates actual compiler-derived layouts and runs each existing per-TU test with TELEPORT_NATIVE_TESTS=0. Missing arguments fail explicitly. This driver intentionally does not claim native parity, a game link or public equivalence; those stages remain separate. Normal strict native/full commands remain unchanged. Bash/Python syntax and mutually exclusive build-flag rejection pass (.cache/first-pass-option-check.log exit2 expected); actual new-TU comparisons await completed fixtures.
+
+J60–J61 root first-pass integration: register configured MKROOM30functions and SFSTRUCT145functions, self-contained runtime dispatch and ABI-only support includes; SFSTRUCT startup initializes JS-authoritative procedure tables in native zero backing. Add actual generic compiler layouts, signed MKROOM selector constants and source-derived MKROOM literal capacity. Probe fixtures include actual original source via TELEPORT_REFERENCE_TU; SFSTRUCT reference suppresses duplicate zero table/restore globals and both modes intercept only the same seven external IO calls. MKROOM uses original object/monster/allocator/prepared-hacklib dependencies. The original mkroom.o/sfstruct.o are excluded only in the mixed game; original C remains in reference probes. No backend, terminal, compiler feature or frozen harness changes. Compilation/differential/linking pending; registration does not imply acceptance.
+
+J60–J61 first compiler review: MKROOM30 source/function/comment checks and all55 lexical TUs pass. Its first link exposed duplicate controlled fixture def_oc_syms/shtypes against existing ABI zero backing; mark both probe modes TELEPORT_REFERENCE_DRAWING/SHKNAM so the same fixture tables supply the dependency, without changing real game tables. SFSTRUCT validator initially selected only17 source-file definitions because128 serializers are expanded at include/sfmacros.h invocation locations. Add explicit configuredFunctionHeaders provenance for that header and select only actual compiler output attributed to the TU or that declared owning header. This strengthens the count toall145; it is not a waived/mocked function inventory. Add the independent MKROOM source-table/macros checker to probe builds. No source algorithm or frozen harness change; corrected compile/source gates pending.
+
+SFSTRUCT comment-preservation follow-up: restore the original inactive-guard block comments (`UNIX`, both SYSV notes, and `SFLOGGING`) verbatim in the JavaScript translation. A read-only comparison confirms every original sfstruct.c block comment and its multiplicity is retained. No executable code, serialization behavior, ABI, fixture, harness, or compiler change; the already compiled first-pass probes remain applicable to this comment-only edit.
+
+J60 MKROOM first authorized Emscripten-C/hybrid run exposed a test-only pointer transport mismatch: the real hybrid allocator returns a JavaScript Number address, while the fixture char-pointer export takes the raw memory64 i64 representation. The SHOPTYPE test now converts that allocated address to BigInt at the fixture call/free boundary, retaining its exact value. No production algorithm, fixture behavior, expected value or compiler configuration changes. Behavioral retry follows on the same compiled probes.
+
+SFSTRUCT first-pass startup correction: the initial hybrid factory exposed a missing Emscripten `$addOnInit` dependency in the new library startup hook. Add that declared runtime dependency, matching the existing table-initialization hooks. No source serialization/IO decision or C ABI changes; rebuild of the hybrid probe is required before repeating the original-C comparison.
+
+J60 MKROOM first-pass behavioral verification: the authorized same-probe retry exits0 with1,527 Emscripten-C/hybrid comparisons (.cache/first-pass-mkroom-unit.log). This covers all30 original entry points, all four goto destinations, exact RNG attribution/state/trace, four source squad rows, normalized whole-room bytes and raw terrain, object/monster field effects, static shrine coordinates, recursive serialization/link reconstruction, aliased native nroom mutation and real40MiB allocation followed by an existing terrain-view store. Apart from the test-only pointer-wire conversion above, no production correction was required. Inputs are frozen for root integration. Host-native discrepancies remain subject to a later explicit run; neither native nor final mixed-game/public completion is claimed by this first-pass result.
+
+
+### PAR01-REPORT — generated prepared REPORT TU, integration pending
+
+Locations: `js/ported/report.js`, `report-runtime.js`,
+`nethack-c/wasm/tu-libraries/report.js`,
+`nethack-c/wasm/tu-fragments/report.{support.c,storage.h,integration.md}`,
+`scripts/tu-report-{probe.c,layout.h}` and `scripts/test-tu-report.mjs`.
+All ten configured prepared C functions are translated in original order.
+REPORT algorithms, including SWR_ADD and URI rollback, remain JS; C helpers
+supply only globals, zero-only private-array backing, formatting/dependency ABI.
+Private static counters/cursors are per Module, retain original repeated-call
+behavior, and add no allocation/OOM branch. Pointer refs, unsigned saved-message
+index, C char signedness and MD4 context widths use compiler metadata. `in` is
+necessarily spelled `in_` as a JS reserved binding; forward gotos use labeled
+blocks. Inactive original comments are retained in a footer. Prepared source
+contains inherited Emscripten platform adaptations (CommonCrypto guard,
+nhmd4/readlink selection, suppressed submit backtrace loop), distinct from the
+pristine upstream source; no upstream/prepared source was edited here.
+
+Verification: own isolated -O2 memory64 C and mixed C/JS probes compile, excluding
+original REPORT in hybrid. 410 prepared Emscripten-C/JS comparisons pass for
+encoding/guards/out-refs/truncation, saved ring edge cases, hash bytes/failures/
+chunk/once behavior, controlled launch URL/argv/errno/status, signals, fallback,
+normal stack and environment cleanup. Logs `.cache/report-isolated-build.log`
+and `.cache/report-isolated-test.log`. Inventory/order/comments checked with
+only the explicitly named reserved-parameter exception; lexical scope/syntax
+checks pass. Both probe modes force the production native ABI header to compare
+the same configured representation. Hash is an original C dependency in both
+isolated probes; production has the pre-existing JS nhmd4 replacement.
+
+Limits: not yet registered/promoted or verified in the actual mixed game. No
+new native or public recording result is claimed. Native-only CommonCrypto/
+argv and libc backtrace branches are unimplemented and rejected by the runtime,
+not accepted as equal; native correction remains a later explicit gate under
+the current first-pass staging instruction. Child-exit probe uses controlled
+EM_JS exception and needs a native exit-capture adapter before full native
+execution. Real external browser launching/signal delivery/VFS binary hashing
+remain integration checks. Exact shared edits/evidence are in the integration
+fragment; no shared registry, build, layout, runtime or game artifacts were
+changed by this REPORT generation task.
+
+
+PAR01-REPORT refinement (supersedes the local-arrow macro expansion above):
+SWR_ADD now expands its exact statements at all eight original callsites inside
+submit_web_report's labeled full block, with each original goto full rendered
+as break full. Its original macro text remains in a comment. No extra algorithm
+function or flag return is introduced. Reference-only _Static_asserts in the
+probe compare actual original sizeof bid/sizeof url (visible after including
+prepared report.c) with the mirrored ABI backing arrays; a source-size drift
+now fails compilation rather than only checking the mirror against itself.
+Both isolated -O2 memory64 modules rebuilt successfully with those assertions.
+The same 410 differential comparisons, original inventory/order/comments with
+only in-to-in_ binding exception, lexical scope and syntax checks pass again.
+Integration instructions updated; native/game/public limitations unchanged.
+
+J60–J61 first-pass unit results: MKROOM passes1,527 originalEmC/hybrid comparisons (.cache/first-pass-mkroom-unit.log), including40MiB growth through a retained terrain view and mutation of original room count during serialization; the sole fix was test-only Number→BigInt at a raw memory64 export. SFSTRUCT passes5,294 comparisons after adding the missing $addOnInit dependency (.cache/first-pass-sfstruct-unit.log), all145 source boundaries/comments and68type pairs through direct/native tablecalls, actual file IO, EOF/error/ownership andeightgrowth/reentry stages. All55registered source/function/order/parameter/comment checks and lexical checks pass. Both remain In progress until actualmixedgame link; native-platform checks deferred by latestuserstaging.
+
+J66–J67 parallel pipeline: the authors with passing MKROOM/SFSTRUCT isolated units now begin independent QUESTPGR(src/questpgr.c) and SYMBOLS(src/symbols.c), keeping six agents producing unique TU work while root integrates the completed unit stages. Own-file isolated compiler/test scratch is authorized; shared registry/probe cache/game output remains serialized by root. Preserve originalfunctions/comments/flow and actualexternalmutablearray/state aliases. QUESTPGR uses existing Lua API as dependency without touching Lua owner files; SYMBOLS preserves existing drawing/UTF8 dependencies. No new TU is claimed passed from generation alone; first-pass/native/public stages remain distinct.
+
+TU56 EARLYARG mutable catalogue refinement (unverified): initial values and names of monsdump/objdump remain authoritative JS literal data, serialized into zero-only native storage at startup. Because the original globals are nonconst, subsequent JS dump_enums accesses now use fresh native row views for their int value and char-pointer name fields; external C writes are visible immediately, including after memory growth. The eight private catalogues remain JS-only, with no new native mirrors. The isolated fixture adds only native field setters, and the unit mutates/restores a value and name pointer in each public table and compares complete enum output. No parser policy, catalogue initializer or lookup algorithm moves into C. Runtime/fixture/unit/integration-plan edits remain within the announced EARLYARG scope; syntax-only verification follows, no build or equivalence claim yet.
+
+SYMBOLS migration begins (independent TU work): port the 27 configured src/symbols.c functions with original boundaries, parser control flow, native symbol-array aliases and callback identities. JS becomes authoritative for known_handling, known_restrictions and loadsyms; zero native backing remains for actual external C consumers. DEC/UTF8 callbacks and saved-symbol list head retain live native backing. Existing DRAWING/UTF8MAP dependencies remain unchanged. Original EmC differential verification is the requested first pass; native-host diagnostics follow later. No upstream, terminal configuration, frozen harness or recording changes.
+
+J66 QUESTPGR translation begins as an independent whole-TU Emscripten-C first-pass task. All21 configured original functions, parameters, local names, comments and policy remain in JavaScript. Existing native Lua APIs remain dependencies; no Lua runtime/service/bridge file changes. Original com_pager_core cleanup and fallback gotos become one labeled main block and one retry loop, preserving shared cleanup exactly once without a policy helper or flag. Numeric C character pointers use fresh signed-byte loads/stores; char** output and address-of the stinky_nemesis local use ABI references, with explicit getter/setter accessors solely for the local's C address semantics. Original two static function-local option arrays remain local readable data, and native option calls receive scoped pointer-array storage. Native automatic sandbox/buffer lifetimes use scoped call frames; returned allocated text remains heap-owned. Isolated fixtures will use real compiled Lua5.4.8 and clearly documented controlled qtext/world dependencies. No behavioral or mixed-game pass is claimed before testing.
+
+TU56 EARLYARG static verification: the independent configured-C preprocessing check scripts/check-earlyarg-data.mjs passes all1,204rows across ten JS catalogues (counts388/482/106/61/60/17/18/17/35/20). All twelve source function names/order and the original block-comment set are retained; the existing lexical scope checker logic applied to the new core reports no undeclared identifiers. Core/runtime/library/unit/projection script syntax and reference/hybrid fixture/layout/support C frontend syntax pass. The support include produces the expected dynamic-format warning at its typed error(format) forwarder; the only caller supplies the unchanged original fixed diagnostic. No game/probe linking, behavioral execution, native parity or public-recording equivalence is claimed yet. Owned files are frozen for parent integration.
+
+
+### PAR01-EXPLODE — EXPLODE generated first pass (staged, not promoted)
+
+- Locations: `js/ported/explode.js`, `explode-runtime.js`,
+  `nethack-c/wasm/tu-libraries/explode.js`, `tu-fragments/explode-*`,
+  `scripts/tu-explode-{probe.c,layout.h}`, `scripts/test-tu-explode.mjs`.
+- Exact change/effect: generate all eight configured original `src/explode.c`
+  functions with original names/order/parameters and every block comment;
+  preserve the column-first explosion table and control flow. Prepared and
+  pristine EXPLODE sources remain byte-identical. Typed heap/global/bitfield,
+  header-macro, varargs and RNG-provenance adapters connect unchanged game
+  dependencies; no original EXPLODE function or algorithm is retained in C
+  hybrid support. C long quantities use BigInt, 32-bit product uses Math.imul,
+  scalar widths and nine table constants are checked against compiler metadata.
+  The source-derived literal pool is 63 unique strings/945 NUL-terminated bytes;
+  non-source dynamic strings are rejected. Configured Soundeffect remains its
+  original no-op; integrated sound configurations are explicitly rejected.
+- Verification: isolated actual memory64 reference and hybrid links succeed;
+  the hybrid fixture excludes original explode.c. 7,607 EmC/JS comparisons pass
+  with exact event/message, damage, object, monster, killer and RNG state,
+  including animation coordinates, quantity splitting/motion/destruction,
+  death/oil paths, collisions/shop movement, real memory growth and overflow.
+  Source-inventory/order/parameter/all-comment, lexical scope and JS syntax
+  checks pass. The read-only metadata checker verifies all eight original RNG
+  call-site line/function pairs and both Snprintf source locations. Fixture
+  traces normalize only compiler __FILE__ directories to the source basename.
+- Limits/current state: no shared registry/build/runtime file was edited by this
+  parallel generator. The production game mixed link, public recordings and
+  native macOS oracle have not been run for this TU. It is staged, not promoted.
+  Controlled dependency fixtures are not independent proof of their underlying
+  game algorithms. Recursive/reentrant explosion callbacks, hallucinated-name
+  retries, multi-boulder restacking, and all bones/lifesave/equipment/trap/shop
+  permutations remain unverified. Integration recipe and exact pending gates:
+  `nethack-c/wasm/tu-fragments/explode-integration.md`.
+
+
+PAR01-EXPLODE verification follow-up: static review caught the original C `uchar typ`
+conversion in scatter: signed `rm.typ` must convert to unsigned8 before ZAP_POS.
+The JS now explicitly narrows that assignment with `& 255`. Added regressions
+with 0x7f/0x80/0xff terrain across eight RNG seeds. Final focused gate passes
+**9,095 EmC/JS comparisons**, superseding the 7,607-case checkpoint above. A
+negative-control copy removing only this conversion fails the new `unsigned
+terrain local` case, confirming the regression's sensitivity. Original function/
+comment/scope and RNG/literal metadata checks remain passing. Native macOS and
+production promotion are still pending for this TU.
+
+J62–J63 root integration: register EARLYARG12functions/1,204JS catalogue rows and REPORT10configured prepared-source functions. EARLYARG startup initializes actual externallymutable enum arrays from authoritative JS, then uses live native aliases; readonlyprivatecatalogues remainJS-only. Add actual source-derived formatting attribution/literal capacity, exactperTU probe exports/dependencies, source-data projection checker and standalone dispatcher/startup. REPORT reuses the otherteam's410isolatedchecks and controlled syscall recipe, paired forcednativeABI in both originalEmC/hybrid modes; no additional originalreport.c is linked in hybrid. Layouts add actual compiler metadata and configuration path strings. Root includes only ABI/helper fragments; originalearlyarg.o/report.o excluded from mixedgame through registry. The source checker allows only exact REPORT/swr_add_uricoded parameter in→in_ because in is reservedJS; originalothernames/signature preserved. REPORT's nativeMacOS CommonCrypto/backtrace and fixtureexit adapter remain explicit later work; its current EmC-only suite must not be counted as nativepass. No frozen/upstream edits, no broad parameter waiver or native success claim; first shared compilation/linking pending.
+
+
+PAR02 — next authorized parallel generation batch: PLINE(src/pline.c) and ATTRIB(src/attrib.c). Continuing the user's explicit request for faster parallel generation, the migration owner assigns these two non-overlapping TUs after REPORT/EXPLODE first-pass handoff. This team owns only each TU's core/runtime/library/layout/probe/test and separate support/source-data/integration fragments. Shared production registration/link/layout/dispatcher changes stay with the migration chat. Preserve original configured functions/order/parameters/comments and source algorithms in JS; use typed-only C/ABI storage and dependency boundaries, no original-TU fallback. New source remains staged until isolated EmC differential and actual mixed-game gates; Native/public coverage remains separately reported. No production default or existing native correction is changed by this planning entry. Exact scope/results follow as implemented.
+
+TU56 EARLYARG first EmC differential gate passes: the root-built original-C and actual imported-JS memory64 probes complete6,860 comparisons across option parsing, every authoritative catalogue, mutable public catalogue cells, argv identity/order changes, argc and char*** updates, shared mutable no-value backing, diagnostics and captured termination, all original function entries, native dependency reentry and memory growth (.cache/first-pass-earlyarg-unit.log). Initial execution caught a test setup call passing a Number to an unwrapped memory64 pointer argument; the unit now explicitly passes BigInt for its allocated C-string arguments and native table-name setters. No expected C result, production algorithm, fixture C policy or compiled artifact changed to resolve that test-interface error. Static1,204-row projection/source/scope checks and root probe compilation also pass. Native macOS differential correction and mixed-game/public gates remain pending under the staged migration; controlled external callbacks do not prove actual OS process exit/chdir/version/glyph-output integration. Owned production/test files are frozen again.
+
+PAR02 continuation: the BONES author takes SFBASE(src/sfbase.c) as a third disjoint serializer TU after the BONES1,465-check handoff. Ownership was announced to the migration chat; only SFBASE-unique core/runtime/library/layout/probe/test/source-data/support/integration files are in scope. Shared integration stays serialized with that owner. No completion/native/public claim is made for new staged SFBASE code.
+
+
+PAR01-BONES — generated all16 configured original source functions/parameters/order/comments in js/ported/bones.js, with typed live field/bitfield/global/header-macro and existing-dependency access through bones-runtime.js, tu-libraries/bones.js and tu-fragments/bones-support.c. C addressable locals copy back in finally; pointer views preserve alias identity and signed-long fields use BigInt. Source-derived371-byte literal storage and five RNG site/caller checks are in bones-source-data.h/bones-source-check.mjs. Actual isolated reference/hybrid memory64 links exclude original bones.c on the JS side. Focused1,465 EmC/JS state/trace/return/stack/raw-extension checks pass, covering11/16functions, name sanitization/filters, eligibility, nested object resets, death inventory drop, ghostly changes, monster extension ownership and heap growth during out-param calls. Peer review found a time_t64 calendar seam incorrectly narrowed to int32; fixed to BigInt64 and verified0,2147483648,-2147483649,9007199254740997 through actual memory64 calls. The actual AST typedef audit and peer source review found no further concrete wiring defect. Full savebones/getbones file/world paths, oracle relocation/removal, production link, native C and public recordings remain unverified for this new TU;38inactive controlled fixture dependencies do not provide production capabilities. Exact integration and limits: nethack-c/wasm/tu-fragments/bones-integration.md. Evidence: .cache/bones-work/test.log and verified-inputs.json. Shared integration/build artifacts were untouched by this author.
+
+PAR01 handoff complete:34configuredsourcebodies (REPORT10/BONES16/EXPLODE8) generated with private memory64mixed links and explicit EmC comparisons410/1465/9095. Source/scope/syntax/data guards pass. REPORTmacro/staticarray and BONES time64/EXPLODE uchar fixes were reviewed and rechecked. This is completion of the independent generation/handoff assignment, not a production/native/public promotion. Those shared gates remain with the migration owner, which has begun integrating ready recipes. PAR02 authors continue PLINE/ATTRIB/SFBASE independently.
+
+
+### MAIL / J70 — configured nine-function JS port (in progress)
+
+The actual MEMORY64/MACOS build enables MAIL/UNIX with MAILPATH `/usr/mail/` and DEF_MAILREADER `/usr/bin/mailx`; SIMPLE_MAIL, SERVER_ADMIN_MSG, VMS, and non-UNIX delivery are inactive. The nine configured original functions remain in source order. `mail_text` and the delivery record are JS authoritative; private mailbox/stat/last-check state is isolated by actual Module. Native zero-only stat storage and fresh typed views retain the signed 64-bit mtime/size values. Original header grid/property macros expand in JS; native movement, naming, stat/passwd/uid, window, and child/exec/termination dependencies stay actual native dependencies. Three original gotos use labelled JS blocks/loops, with no new game-logic helpers. Source-disabled SetVoice arguments remain unevaluated.
+
+The controlled MAIL fixture will intercept mailbox OS/dependency calls and process-launch boundaries; it must never send mail, launch a reader, or emit a real OS notification. Its results establish equivalence of the translated code against the original C under those controlled dependencies, not behavior of a real user's mailbox, reader, or OS notification service. No upstream, frozen harness, terminal, compiler flag, or native-parity backend changes are authorized by this port. Checks are pending; this entry is not a completion claim.
+
+J64–J65 root integration: register BONES16 and EXPLODE8 configured originals; include only their typed ABI/support fragments and original-header macros, never originalC bodies in hybrid. Reuse otherteam1465focusedBONES/9095EXPLODE results, with BONES11/16coverage/full-world limits explicit. Rootaddsactualper-Module dispatch/view caches and scoped typedargument conversion; BONESiter_mons productioncallback preserves originalprivateentry. Probe registry permits context-free metadata (no invented context-size function) and explicit actual rawhelper exports; bothTUs use actual named layoutdescriptors. Add source-derivedliteral/RNGguards from their owningteam. AllsixnewTUs now record actualadapter/runtime/helper source hashes alongside core and linkedbinding hashes. EARLYARG6860andREPORT410sharedchecks pass; source/lexical57pass before theseentries. Newshared59compilation, sourcechecks and mixedgame/public gates pending; nativechecks remainlater and no old53nativeproof is claimed for59TUs.
+
+J66 fixture dependency detail: `scripts/tu-questpgr-lua.c` includes the unchanged prepared `src/nhlua.c`, renaming only `nhl_init`, `nhl_loadlua`, and `nhl_done` so the test fixture controls world setup and quest text input. The real Lua 5.4.8 engine, `get_table_str_opt`, `get_table_option`, Lua function-valued text execution, and their original C dependencies remain compiled. The fixture is not a replacement Lua implementation or a claim about the full game's sandbox initialization. Test free counters observe actual release calls; no expected game result is substituted.
+
+
+### Parallel migration ownership and six-TU integration checkpoint
+
+Root serializes shared promotion while six authors work across two existing teams. QUESTPGR is frozen ready (21 original functions, 4,727 EmC/hybrid comparisons with actual Lua5.4.8); SYMBOLS, PLINE, ATTRIB, MAIL and SFBASE remain independently owned. No additional terminal, harness or upstream changes are introduced by this coordination. The six registered additions MKROOM/SFSTRUCT/EARLYARG/REPORT/BONES/EXPLODE now form an actual 59-TU mixed memory64 game, Wasm `c85e5bf29d7383f77066b2bf7f3ad138386589411482aef768ff12ee5c8a1dd9`. Actual link objects exclude all six original C objects; selected source and ABI hashes match the manifest (159 captured files, `.cache/six-tu-first-pass-input-hashes.json`). Integration `.cache/integration-six-tu-first-pass.log` passes; public scoring is still running. New native-macOS tests remain explicitly pending under the user-directed EmC-first workflow; the earlier 53-suite native result does not cover these additions.
+
+SYMBOLS first-pass details: the prepared header defines strcmpi(a,b) as strncmpi(a,b,-1), so a typed native macro forwarder retains that real dependency; strncmpi length is int32, not size_t. The original loadsyms table contains two S_invisible rows: preserve both rows and the first-match result, including their shared name-pointer alias. All original block comments, 27 function names/order/parameters and native callback/list backing are retained. Isolated original EmC/hybrid builds and complete differential unit pass under .cache/symbols-author; native-host validation and the parent mixed-game link remain pending. Fixture glyph/UI/reader callbacks are controlled; the reader uses actual FILE IO and calls the original parser through native C→JS, while actual drawing/allocator/hacklib/strutil dependencies are linked. Allocation poisoning and free tracking are test-only; no production policy or upstream/harness change.
+
+J72/TU66 DOG plan before implementation: all 21 configured original `src/dog.c` functions and their pet/migration/taming policy move into their original JavaScript boundaries. The sole private `failed_arrivals` pointer is per actual Wasm Module; native monster, object, EDOG and extension storage stays live in C memory. Pointer-to-link locals become typed live link references; the address of the private pointer used by native `relmon` is represented by an actively borrowed native cell with fresh read/write-through during callbacks, synchronized on release, rather than a second persistent list. Original `iter_mons(set_mon_lastmove)` uses a fixed C ABI trampoline into that same original JS function, preserving callback identity. Source addressable coordinate/level locals use compiler-derived native stack storage with scoped caller lifetimes. Original header macros and C integer/long/mask widths are explicitly represented outside the TU where necessary; no pet policy is added to C helpers. First-pass evidence is original Emscripten C versus JS; native and actual mixed-game link remain separate gates.
+
+Six-TU checkpoint accepted: `.cache/public-six-tu-first-pass-results.json` contains44/44 passing sessions, all792,838 RNG calls,11,405 screen/cell/cursor snapshots and1,483 animation frames matching. The159 captured selected sources/artifacts remained unchanged through both runs. `.cache/six-tu-first-pass-import-audit.json` records live JS imports16MKROOM/141SFSTRUCT/2EARLYARG/7REPORT/9BONES/5EXPLODE, with no private test aliases. BONES focused coverage remains11/16functions; successful public saves/restores do not prove all world/file branches. Native validation remains pending. Next shared changes register QUESTPGR (and ready SYMBOLS) in the TU list, add their typed support includes and main dispatch, derive actual compiler layouts, and add reproducible C/hybrid probe recipes. Original C objects will be excluded only after those real probes compile; production behavior is intended to match the prepared Emscripten C.
+
+MAIL J70 first-pass checkpoint: isolated pristine-C and imported-JS MEMORY64 probes pass 1,086 comparisons, including exact stat struct bytes/padding, source state/RNG/grid traces, high signed64 values, aliased coord output, both cleanup labels, controlled child/exec termination, fourteen native callback/reentry/growth boundaries, and separate Module state. Source function inventory/order/parameters/all block comments and lexical scope checks pass. Correction to the planned description above: four goto statements share three destinations, represented by one retry loop and two labelled blocks. Actual Clang d_level.dnum and vision row limits are signed16; actual stat mtime/size are signed64. Fixture OS/UI/geometry/naming callbacks are controlled; real mailbox/process/terminal behavior and native parity are not established. Mixed-game linkage/integration/public checks remain pending; no claim of completing the TU gate.
+
+MAIL shared first-pass integration: register configured src/mail.c replacement, include tu-mail-support.inc and typed dispatch, actual compiler-derived stat/account/geometry layouts and MAILPATH/DEF_MAILREADER strings, source-derived literal capacity, and reproducible real C/hybrid probes. Production OS dependencies retain actual process account via getuid/getpwuid; TELEPORT_MAIL_PROBE redirects controlled dependencies only in test builds. Nine original functions and1,086 private EmC comparisons pass; shared link/public and native checks remain pending until recorded. No real mail or reader execution is performed by fixtures.
+
+REGION migration plan (TU67 / J73, announced before implementation): replace all 33 configured functions from `src/region.c` with readable JavaScript while retaining original function boundaries, names, parameters, comments, and control flow. Region rectangles, monster-ID arrays, optional strings, unions, global region lists, and serializer cells retain actual native memory backing. The two original callback entries remain JavaScript function identities with typed native trampolines where C invokes them; no region policy is moved into C helpers. Private isolated Emscripten-C versus hybrid probes will establish the first pass; native-host diagnostics remain explicitly deferred. Original upstream source and the frozen harness remain unchanged.
+
+62-TU shared-probe checkpoint: QUESTPGR4,727, SYMBOLS7,363 and MAIL1,086 comparisons pass using reproducibly compiled original EmC and hybrid modules. QUESTPGR test now includes the actual compiler-derived context size in its strict layout comparison; SYMBOLS NO_COLOR and QUESTPGR negative constants are signed64-decoded, M2_PNAME retained as unsigned64 decimal text. MAIL has no context-size API, recorded probeContext:false instead of invented size. Common zero MONST/DRAWING backing is suppressed only in probes that supply actual/fixture backing, avoiding duplicate symbols; ncurses headers remain reference/header dependencies. No test expectation is waived. Actual62-TU source/comment and scope checks pass; mixed game/public/native results remain pending.
+
+
+### WEAPON / J74 — forty-function JS port (in progress)
+
+Actual MEMORY64/MACOS preprocessing selects forty original weapon/skill functions. The translation will retain every configured function, parameter, comment and source control structure. File-local weapon preference and skill-name tables are JS authoritative. The externally returned `throw_and_return_weapon *` needs stable zero-only native record backing populated from JS and live typed views; original field identity remains observable. Native menu pointer cells/anything unions and silver-hit long output pointers remain addressable and preserve aliasing across dependency calls/growth. Original TU macros P_NAME/Oselect expand at their original source calls instead of adding game-logic helpers. Integer division/narrow stores and signed64 worn masks remain explicit. Existing native damage/artifact/inventory/naming/menu/status dependencies remain actual calls.
+
+The first pass compares original Emscripten C and imported JS under controlled external dependencies, documenting exactly which dependencies are controlled. It does not establish native macOS library parity or full game equivalence. No upstream, frozen harness, terminal, build configuration, Lua or shared native backend change belongs to this TU. Checks pending; not a completed migration gate.
+
+62-TU actual mixed-link checkpoint: `.cache/build-wasm-62-tu-first-pass.log` succeeds with Clang21/Emscripten4.0.10/MEMORY64=1, Wasm `e0a721fd81b1788db0fcbcbaa8e300c3cf85d7c7e8e8933b7f8c8a9e36cc08d9`. Original QUESTPGR/SYMBOLS/MAIL objects are absent from actual link list; actual JS imports7/15/4 and no private test aliases (`.cache/62-tu-first-pass-import-audit.json`).175 selected source/artifact hashes match build metadata (`.cache/62-tu-first-pass-input-hashes.json`), including actual JS catalogue data. Integration and public scoring remain pending until separately recorded. Production Lua selection is unchanged while its owner adds optional build wiring independently; no candidate Lua result is claimed for this game.
+
+
+### PAR02-PLINE — generated configured messaging TU, integration pending
+
+Locations: `js/ported/pline{,-runtime}.js`, PLINE typed JS library, compiler
+layout/probe/test scripts, and `nethack-c/wasm/tu-fragments/pline-*` support,
+source-data guards and integration recipe. All31 configured original function
+boundaries/order/parameters and active comments are retained; inactive platform
+comments remain in a footer. Each of19 variadic entries keeps the original
+`...the_args` name. Prepared pline.c is byte-identical to pristine and guarded;
+no upstream/prepared source, shared registry, build, layout writer, runtime
+or game artifact was edited by this task.
+
+PLINE decisions remain JS: formatting/truncation selection, history allocation/
+reuse/free, message suppression and flags, accessibility prefixes, You-buffer
+management, signed64 gamelog/livelog lists, impossible feedback, handler process
+flow, and original recursion state. Forward gotos use a labeled block; source
+YouPrefix/YouMessage macros expand in their owning functions, with literal
+sizeof lengths guarded. Static in_pline/use-handler decisions are per Module.
+C helpers provide only typed field/global/varargs/libc/header/dependency ABI and
+563-byte source-derived zero-only literal storage. Current memory64 external
+va_list packets are preserved; the single-%s fast path reads its actual pointer,
+and four exact source-internal format shapes use a typed standard-libc helper.
+No JS printf parser or C PLINE fallback. Signed64 flags/time, unsigned64 window
+caps, signed coords, pointer identity and fresh heap access are explicit.
+
+Verification: own -O2 memory64 C and hybrid modules compile, with pline.c absent
+from hybrid.1,620 configured EmC/JS comparisons pass in
+`.cache/pline-first-pass/test.log`; compiler log is build.log in that directory.
+Coverage includes real mixed typed varargs (long beyond53 bits, floats, width,
+precision, pointer/percent/raw bytes), all wrapper/prefixes, ring/ownership,
+suppression and history ordering, bit63 window capability flags, accessibility,
+truncation/panic, saved counters, signed64 log fields, feedback/report/assert,
+actual memory growth, nested UI/vision callbacks, shared-bridge module isolation,
+and controlled handler parent/fork-failure/child-exec/termination.29 C entry
+points are actual JS imports; private vpline/vraw bodies execute inside JS.
+Inventory/order/parameters/comments, lexical scope, syntax and source-data guards
+pass. Guards check13 macro expansions, three private big buffers, exact literal
+allowlist/capacity, original static initializers and no RNG sites; a size mutation
+is rejected.
+
+Limits: first pass only, not yet registered/promoted into actual mixed game.
+Native formatting and native va_list layout/packing remain unverified and
+must be fixed explicitly; no native/public/whole-game pass is claimed. Current
+sound-specific inactive branches are rejected if enabled. Fixture OS operations
+are controlled and EM_JS exceptions need a native exit-capture adapter before
+native execution. Actual handler/VFS/terminal behavior remains an integration
+gate. Full exact integration recipe is `tu-fragments/pline-integration.md`.
+
+Concurrent-source gate correction: optional Lua build wiring also added three provider/import lines and one diagnostic field to shared js/wasm-adapter.js during62-TU public scoring. Active C-Lua ignores the optional provider, and the run passes44/44, but source inputs changed; `.cache/public-62-tu-diagnostic-results.json` is explicitly diagnostic. Root preserved other-owner edits and captured `.cache/tu62-gate-snapshot` with231 copied JS/frozen/test/metadata files. Its adapter is the exact originally captured pre-Lua hash, verified against the175-input manifest where those files are copied. The same e0a721fd Wasm is used. Stable snapshot integration/public rerun will establish the gate; no frozen-harness or source-algorithm edits were made to obtain this snapshot. Lua owner has frozen shared adapter/build.py pending coordination.
+
+62-TU fixed-snapshot acceptance: `.cache/tu62-gate-snapshot/acceptance.json` records integration PASS,44/44 unchanged public sessions, all792,838 RNG calls/11,405 screens,cells,cursors/1,483 animation frames exact, and231 unchanged captured copied inputs. Wasm e0a721fd81b1788db0fcbcbaa8e300c3cf85d7c7e8e8933b7f8c8a9e36cc08d9; actual source object/import audit remains `.cache/62-tu-first-pass-import-audit.json`. QUESTPGR/SYMBOLS/MAIL now meet EmC-first plus actual mixed-link gate. Native remains pending for all nine new TUs. Next authorized promotion registers PLINE and ready ATTRIB, their typed ABI support and main runtime dispatch, actual layout extraction and original-C/hybrid probe recipes; messaging/attribute policy stays in original named JS functions.
+
+
+### PAR02-ATTRIB — Attribute management generated first pass (staged)
+
+- Locations: `js/ported/attrib.js`, `attrib-runtime.js`,
+  `nethack-c/wasm/tu-libraries/attrib.js`, `tu-fragments/attrib-*`,
+  `scripts/tu-attrib-{probe.c,layout.h}`, `scripts/test-tu-attrib.mjs`.
+- Exact change/effect: generate all34 configured original ATTRIB functions with
+  original order/names/parameters, every block comment, source arrays and control
+  flow. Prepared/pristine `src/attrib.c` remain byte-identical. JS owns18 innate
+  tables/62 rows, attribute/poison/exercise strings and original local role map.
+  Typed C support contains only field/header-macro/varargs/RNG/assert ABI and
+  zero-only backing. No original ATTRIB function or table initializer remains
+  in hybrid C. Public `attrname[6]` uses mutable zero storage aliased to its C
+  linker symbol, populated through a real addOnInit module hook before first
+  ATTRIB call. Per-Module innate pointers reference live property longs.
+  Signed char/unsigned fields retain widths,64-bit masks/quantities/turns use
+  BigInt; fresh heap views support growth/reentry. The original forward goto
+  becomes a labelled block/break with its common tail retained. Original
+  configured debugpline showdebug uses TRUE and restores last_msg.
+- Source-derived guards:18 tables/62 rows,125 literals/1650 NUL-terminated bytes,
+  all26 RNG source-line/function pairs, assertion origin, actual startup hook,
+  scalar/array ABI dimensions and char signedness. Dynamic formatted strings
+  remain C pointers; non-source JS literals are rejected by the binding pool.
+- Verification: isolated memory64 reference and hybrid links pass; original
+  attrib.c is included only in reference. Latest focused gate passes18,224
+  EmC/JS comparisons (supersedes18,097 checkpoint), exercising all34 functions,
+  table startup/read-before-first-call, role/race ability thresholds, property
+  descriptions, HP/luck/poison/exercise/alignment, exact messages/events/state,
+  wide long masks, signed-byte limits, actual memory growth, nested C→JS calls,
+  Module isolation and dependency-exception scope/stack cleanup. A negative
+  control reading unsigned hunger as signed fails the unsigned-hunger case.
+  Source/order/parameters/all-comments, lexical scope, data and syntax pass.
+- Measured compiler limit: upstream adalign signed addition can overflow;
+  configured Clang -O2 optimizes away its overflow guard. JS retains a temporary
+  mathematical sum until typed int32 store to match the actual EmC result while
+  preserving original branch syntax. Boundary regression retained; native
+  macOS behavior for these undefined C cases is not claimed or waived.
+- Current state/limits: staged only; no shared registry/build/runtime or game
+  artifact edited by this generator. Production object exclusion/mixed link,
+  public recordings and native macOS are pending. The first-pass test throws
+  under TELEPORT_NATIVE_TESTS=1 until a real native oracle is integrated, so it
+  cannot be silently counted as a native pass. Controlled dependencies do not
+  prove underlying game algorithms; complete lifesave/rehumanization/retouch,
+  exotic callback mutations, probability distributions and all invalid/overflow
+  inputs remain unverified. Exact integration/startup/hash/export instructions:
+  `nethack-c/wasm/tu-fragments/attrib-integration.md`.
+
+PLINE/ATTRIB shared staging: 31/34 configured functions from frozen authors are registered; typed helpers and bridge/environment dispatch are linked from shared support/runtime, and actual compiler layouts/probe recipes are reproducible. PLINE preserves memory64 va_list packets and uses typed libc formatting; native va_list transport remains pending. ATTRIB startup populates zero-only native attrname/table backing from JS before other C callers can read it. Source/table/literal/RNG/startup checks are build guards, and ATTRIB has probeContext:false because it exports no context API. PLINE shared EmC1,620 comparisons pass; ATTRIB shared probes, real mixed link/public and both native passes remain pending. No source algorithms move back to C.
+
+
+PAR03 — authorized parallel continuation: VAULT(src/vault.c) is assigned to the ATTRIB author after its frozen18,224-check handoff. Only VAULT-specific core/runtime/library/layout/probe/test and support/source-data/integration fragments are owned here; shared registry/build/runtime promotion remains the migration owner. Preserve all configured original function boundaries/parameters/order/comments/data/control flow and keep source algorithms in JS. Typed ABI/dependency access only in C; no original vault.c fallback. Isolated EmC-first reference/hybrid memory64 checks will precede handoff; production/native/public checks remain separately reported. Native compatibility and frozen harness are unchanged by this assignment.
+
+Parallel ownership continuation: ATTRIB author moves to VAULT; PLINE author performs a bounded independent review of SFBASE source/data/ABI while its owner completes its large macro-expanded port, then selects another unique file. DOG/REGION/WEAPON remain root-team-owned. Shared64-TU build is serialized at root; no inactive file is counted as a completed game TU.
+
+Parallel reservations TU70/J76 U_INIT and TU71/J77 SAVE are assigned to the PLINE and SFBASE authors respectively after their prior handoffs/review. These are work reservations, not completion claims; actual configured inventories, adaptations and test evidence will be documented by each author before/with edits. Shared promotion stays at root.
+
+PAR03 continuation — U_INIT(src/u_init.c) and SAVE(src/save.c) were reserved and confirmed by the migration owner as TU70/TU71 after PLINE/SFBASE handoff. Unique TU core/runtime/library/layout/probe/test/support/source-data/integration files only; shared build/registry/runtime promotion remains serialized there. U_INIT must use prepared-source provenance: inherited recording patch replaces time(&ubirthday) with ubirthday=getnow(), so pristine and compiled source differ. SAVE currently equals pristine. Preserve every configured original function/order/parameter/comment/source table/control flow; no original-TU algorithm fallback. Isolated actual EmC/hybrid memory64 comparisons, data/source/ABI guards and explicit pending native/game/public limitations are required before handoff. Existing native correction and frozen infrastructure remain unchanged.
+
+64-TU actual mixed-link checkpoint: `.cache/build-wasm-64-tu-first-pass.log` succeeds, Wasm `611a1aba1e3d08bc67e3797f6676d97e316191aeb5dc8c271e90d7cb78a2fcd3`. All64 core/ABI/data/adapter hashes match build metadata; actual link excludes pline.o/attrib.o; import audit finds25PLINE/23ATTRIB live JS functions and no private test aliases. `.cache/tu64-gate-snapshot` copies233 JS/frozen/test/metadata inputs before integration/public, keeping parallel work outside this gate. Snapshot contains the Lua owner's optional lazy-provider adapter wiring; actual game still selects C Lua and never loads evolving candidate Lua sources. Integration/public remain pending, native remains pending for11new TUs.
+
+Ledger clarification: row IDs are stable work-reservation identifiers; parallel promotion may finish a higher ID first. Accepted TU totals count actual selected/linked registry entries, and do not count pending reservations as completed ports.
+
+REGION ABI refinement before final first-pass checks: header visibility and distance macros are expanded in the JavaScript environment using the live native vision rows and the existing native `dist2` function. `make_gas_cloud` passes only the two original cloud symbols to `cmap_to_glyph`; both use the original header's cmap-b offset arithmetic, with compiled range guards rather than a new C glyph-policy helper. Region decisions and original function boundaries stay in JavaScript. The original callback table remains JavaScript-only because it has no external C consumer.
+
+64-TU fixed-snapshot acceptance: `.cache/tu64-gate-snapshot/acceptance.json` records integration PASS and44/44 public sessions, every792,838 RNG call/11,405 screens,cells,cursors/1,483 animation frame exact,233 copied inputs unchanged. Wasm611a1aba1e3d08bc67e3797f6676d97e316191aeb5dc8c271e90d7cb78a2fcd3. PLINE and ATTRIB now meet user-directed EmC-first plus mixed-game gate; native transport/library parity remains pending for11new TUs. No test-harness, recording, or pristine-upstream edits were required. Next shared changes will integrate frozen SFBASE and ready DOG/REGION under the same typed-ABI/layout/probe process.
+
+REGION glyph-branch clarification from the actual compiled constants: ordinary `S_cloud` uses the cmap-b offset and `S_poisoncloud` uses cmap-c. The JavaScript header expansion preserves the original `< S_arrow_trap + MAXTCHARS` branch and both compiled offsets; its guards reject changed source inputs or symbol ranges. This corrects the preceding plan's assumption that both symbols occupied cmap-b; the original native differential oracle remains authoritative.
+
+J72 DOG implementation detail: native ordinary `weapon_check` and `skills.skill` are signed16, `permonst.msize` unsigned8, hero polymorph indices signed32, `flags.moonphase` unsigned32, and `program_state.in_moveloop` signed32, all guarded against the compiler rather than inferred from their usage. The original one assertion's condition/function/physical line and all 18 RNG sites are checked against pristine source by `scripts/check-dog-data.mjs`. The isolated fixture controls world effects while keeping actual monster/object catalogues, true native allocation and native structs/bitfields; its 19,585 EmC comparisons are first-pass evidence, with host-native differences and full game linkage still separate gates. No native expected result or source algorithm was rewritten to obtain the pass.
+
+SFBASE shared staging (PAR02): all239 configured functions are in JS, including130 source-owned sfmacros.h serializer expansions, six direct serializers,73 original configured empty norm_ptrs bodies and30 value/logger/table routines. Register explicit include/sfmacros.h ownership; retain original names/order/parameters/comments/control flow. Add typed ABI/zero-only external table backing,26 distinct original static buffers, actual stdio/nh_snprintf/function-pointer dependencies, perModule live NHFILE/table views and stack-scoped main dispatch. sf_log size_t stays unsigned64 BigInt before pointer conversion; version_info receives a typed view. Existing SFSTRUCT startup supplies its historical tables; no new SFBASE startup or C algorithm fallback. Exact frozen recipe/limitations: nethack-c/wasm/tu-fragments/sfbase-integration.md. Private10,818 comparisons/all239 bodies plus source/data/ABI/peer checks pass; shared probes, actual mixed game, public and native checks remain pending. Source metadata/build guard validates actual CPP formatter closing-line attribution and original buffers/literal corpus; no runtime read of C source.
+
+REGION isolated first pass is ready: all 33 configured function boundaries/order and every original block comment (including multiplicity) match. The original EmC implementation and hybrid with real C callers pass 23,980 state/trace/setup comparisons; this is a comparison count, not claimed branch coverage. Tests exercise full region/rectangle/ID-list state, allocation/free, both callback identities, native typed serializer records and union bytes, signed64 time, aliased stats outputs, exact RNG attribution, six real heap-growth callback locations, native reentry, and separate Modules sharing one dispatcher. World/status/UI/death/teleport effects and serializer dependencies are controlled fixtures; no real-game save/death behavior or native-host equivalence is claimed at this stage. Root mixed-game integration and public gates remain pending. All files are outside pristine upstream and the frozen harness.
+
+DOG shared staging (J72): all21 original functions/comments/control flow in JS; typed native field/bit/allocator/catalogue dependencies stay outside core. Add perModule failed-arrival pointer state with scoped native borrowed-cell aliasing for original relmon callbacks, fixed iter_mons trampoline into original JS set_mon_lastmove, source-derived literal capacity and RNG/enum/assertion guards. Registry exclusion/typed main dispatch and compiler-derived raw64 mask/signed NON_PM layouts are reproducible. No new startup/catalogue initializer. Private19,585 comparisons pass (all species food predicates, all21 entries, aliases/reentry/growth/timers/high masks); shared EmC, real mixed game/public/native pending. Exact recipe/limits .cache/dog-integration-plan.md.
+
+REGION shared staging (J73): all33 original functions/parameters/block comments/order retain source algorithms in JS, with original readonly callback array pointing to actual JS functions and no unnecessary C callback mirror. Add typed actual region/rectangle/monster/NHFILE/anything views, compiler-derived layouts with signed NO_CALLBACK, main dispatch and original-C/hybrid probe recipes. Header cansee/distu/cmap expansions run in JS via fresh native visibility data, actual dist2 and compiler glyph offsets. Controlled fixture world/UI/damage/serialization callbacks are explicitly limited;23,980 private comparisons pass, shared/mixed/public/native pending. Exact private recipe/limits .cache/region-integration-plan.md. SOUNDS TU72/J78 is the next unique author reservation, not yet a completed port.
+
+J78/TU72 SOUNDS plan before implementation: all 28 currently configured original functions and original text/control remain in `sounds.js`; inactive USER_SOUNDS, speech, automapping and third-party backend bodies remain inactive. Original disabled Soundeffect/SetVoice macros do not evaluate arguments. File/local message arrays and nosound_procs/soundlib_choices are authoritative readable JS data; private sound-procedure source bytes are populated lazily into zero-only C backing per actual Module, while exported live soundprocs remains native and initially zero. Original struct assignment copies every native byte including padding; existing opaque callback addresses remain raw64 and use typed native invokers. The sole active tiphat goto uses nested labelled done/nada blocks to reach one common message and one original final return without a new flag, helper, or duplicated message. String pointers and scoped native automatic buffers use fresh heap views; size_t filename arithmetic is uint64 and original nh_snprintf source context remains explicit. Actual native dependencies stay native; controlled isolated world fixtures provide EmC-first evidence, with host-native and real mixed-game linkage separate gates.
+
+REGION integration check caught a malformed `sizeof(NhRegion *)` translation in `add_region`'s second-capacity `memcpy` branch. It is corrected to the compiled `pointerSize`; a focused 12-region test now forces native list reallocation, checks every retained region identity, removal after growth, and all 26 actual frees. The two local signed16 cloud coordinate arrays remain standard JavaScript `Int16Array` instances: they do not escape or acquire native aliases, and preserve the original narrowing. No library, native ABI, fixture, upstream or frozen-harness changes were needed for this correction.
+
+REGION pre-promotion correction: actual shared lexical gate detected an undeclared sizeof left in add_region's second-capacity memcpy path; private23,980 comparisons did not exercise that branch. Author replaces it with actual compiler-derived pointer size and adds more-than10-region allocation/copy/removal coverage before refreeze. Promotion is held. Separately the scope checker now allows standard JavaScript Int16Array alongside its existing signed8/signed32/unsigned arrays; a tooling fixture confirms that this legitimate constructor passes while an undeclared sizeof still fails. This is a checker false-positive correction, not an expected-result waiver or game behavior change.
+
+REGION refrozen after correction: only original sizeof(NhRegion*) expression becomes C.pointerSize; no extra coordinate-array ABI was introduced. Targeted12-active-region growth fromcapacity10→20 preserves every existing slot, original unordered removal and full26-free accounting; actual shared EmC unit now24,060 comparisons PASS. Source/callback/comment and67-TU lexical checks (12fixtures) pass. MTHROWU TU73/J79 is reserved to that author; configured count is not yet claimed.
+
+MTHROWU migration plan (TU73 / J79, announced before implementation): replace all 28 functions actually present in the configured `src/mthrowu.c` with equivalent readable JavaScript, preserving original names, signatures/parameters, ordering, block comments, function boundaries and control flow. The two readonly breath-description tables become authoritative JavaScript data. Projectile/combat decisions remain in those original functions; native monster/object chains, equipment, mutable `obj **` outputs and callback tokens keep real ABI backing. Isolated original-EmC versus hybrid fixtures establish the first pass; controlled external combat/world dependencies and deferred native-host diagnostics will be documented explicitly. No pristine upstream or frozen harness edits.
+
+REGION regression evidence: `.cache/region-author/negative-loader.mjs` restores only malformed sizeof through a read-only Node module-load transformation; `.cache/region-author/negative.log` fails ReferenceError at the capacity-copy branch. Frozen source remains fixed. MTHROWU configured Clang AST confirms28 original functions, zero gotos; preliminary rough count22 was not a completion claim.
+
+67-TU build metadata correction: actual mixed game linked, but final provenance hashing failed because root registered nonexistent tu-region-support.h; actual owned header is scripts/tu-region-layout.h. Correct registry adapterSources to that actual header, retain source/runtime/helper hashes, and add early existence validation for every registered core/library/data/adapter provenance input before any probe compilation. This changes tooling/provenance only. The initial run is not claimed as a complete reproducible build; a full resume rerun must succeed before testing/promotion.
+
+WEAPON J74 first-pass checkpoint: forty source functions and all original comments/parameters/order/quoted literals preserved,9private tables/147rows guarded. Private original-EmC/imported-JS suite passes11,450 exact comparisons. Necessary ABI adaptations include stable native arwep record and six-byte classifier backing initialized from JS per Module, fresh signed16/unsigned16 skill views, signed64 output/masks (verified2^60 and aliased output), full anything bytes, scoped menu buffers/pointer cells, unsigned64 window start flags, actual native format varargs and fixed original doname identity. P_NAME/Oselect remain inline source logic, not new helper algorithms.
+
+Fixture-controlled artifact/monster/naming/menu/status dependencies are explicit in .cache/weapon-integration-plan.md; actual original allocation/string libc/dist2/Strlen/catalogues remain compiled dependencies. Source panic invariant paths, native allocation/free,14callback/reentry/growth stages and separate Modules pass. A synthetic481-weight iron ball is excluded: released C assumes160-unit increments and divides down to a zero rnd bound for a1-unit increment (undefined remainder). No source behavior was changed to accommodate it. Mixed-game/public/native-macOS parity and full foreign-dependency behavior remain pending.
+
+
+### MHITM / J80 — twenty-two-function JS port (in progress)
+
+The actual MEMORY64/MACOS configuration selects22original functions. All source functions, parameters, comments, attack/status/control flow and the single passivemm assess_dmg goto remain in the JS translation. The goto becomes one labelled block with a break to the same damage-assessment point. Two immutable message strings stay JS authoritative. Original local attack/int-result arrays and mhitm_data records need scoped native backing because existing getmattk/adtyping/knockback functions receive their addresses; field views and the interior hitflags pointer remain live, preserving aliasing across native writes/reentry/growth. No attack or damage-type algorithm is reimplemented in ABI C helpers. The original other-TU dependency functions remain actual native calls in production.
+
+First-pass comparison uses pristine C and imported JS under controlled external combat/death/movement/status/UI dependencies, explicitly recording those fixture limits. Native clock/global move/strategy/armor widths and raw pointer identity must retain the actual compiler layouts. No terminal/audio/compiler-configuration/frozen-harness/upstream/Lua/native-backend edits belong to this port. Tests/gates pending.
+
+PAR04 reservations confirmed by the migration owner: after the current VAULT and U_INIT handoffs freeze, those authors will take GETPOS(src/getpos.c), TU75/J81, and ALLMAIN(src/allmain.c), TU76/J82, respectively. Only each TU-specific JS core/runtime, typed library/support/layout, probe/test/source-data and integration fragments are in scope. Actual configured function inventories will be established before completion counts. Preserve source function boundaries/order/parameters/comments/data/control flow; source algorithms stay in JS and C is restricted to typed ABI/header/dependency access and zero-only backing. Private configured EmC reference/hybrid checks precede any shared promotion. Native-macOS, actual mixed-game and public-recording gates remain separately pending until run by the migration owner. Root owns MHITM74/J80; no overlapping edits or shared builds are authorized to these authors. These are reservations, not passing or production-capability claims.
+
+67-TU first integration failure: root exposed REGION dispatcher as region while its actual binding calls callRegion. Isolated fixture supplied its own correctly named dispatcher, so its unit did not validate central wiring. Correct main runtime method to callRegion; add source-derived static binding-call validation against actual createPortedRuntime API to write-tu-layouts, with a negative tooling fixture that reproduces this exact mismatch. No translated REGION algorithm, C code or Wasm bytes change. Initial `.cache/tu67-gate-snapshot/integration.log` is a preserved failure; corrected full snapshot will use a new path/version and must pass fresh integration/public before acceptance.
+
+WEAPON shared staging (J74):40 original functions/parameters/comments/control flow and nine JS-owned source tables/147rows; typed native arwep/kebabable backing is lazily initialized perModule for original return pointers/strchr, other seven private tables stay JS-only. Add self-contained callWeapon dispatch, actual compiler-derived layouts, source-derived literal capacity and original Strlen/Snprintf closing-line diagnostics, true long*/anything/menu output aliases and existing native dependency calls. No startup/C algorithm fallback. Private11,450 EmC comparisons/source/data/ABI pass; shared/mixed/public/native pending. Probe source guards suppress common zero catalogues only when actual objects/monst/drawing C is linked. probeContext:false matches actual no-context export. Exact recipe/limits .cache/weapon-integration-plan.md.
+
+
+### PAR03-U_INIT / J76 — frozen first-pass source delivery
+
+Locations: js/ported/u_init{,-runtime}.js, nethack-c/wasm/tu-libraries/u_init.js,
+scripts/tu-u_init-{probe.c,layout.h}, scripts/test-tu-u_init.mjs and unique
+u_init-* support/source-check/integration fragments. All17 configured original
+functions/order/parameters/comments/control flow are preserved;40 JS-owned
+catalogues contain445 rows/1432 cells, plus the3 original local arrays. Typed C
+helpers only expose actual globals/bitfields/header macros/dependency calls and
+fixed zero-only static ABI storage. Actual private-source field-type/offset/size
+and array-size assertions guard mirrors in reference compilation; source/data
+checks reject catalogue/literal/RNG drift. No original TU algorithm fallback,
+new feature-disable flag, malloc-backed static table, terminal/transport/frozen
+harness/Lua change or shared build promotion is included.
+
+Reference provenance: pristine u_init.c differs from actual prepared source by
+the inherited birthday patch replacing time(&ubirthday) with ubirthday=getnow().
+This delivery preserves that documented game-clock behavior; it does not claim
+pristine wall-clock behavior. The guard accepts exactly this adaptation.
+Signed64 time_t (actual EmC long long), long quantities/umoney0/moves/roleplay
+counters use BigInt; compiler-narrowed fields remain typed C lvalues. All26 RNG
+sites retain prepared source lines/callers, including ROLL_FROM's header macro.
+Private static table addresses are per-Module zero-only backing initialized from
+JS before invoking any callback-capable dependency. Stack structs copy bytes;
+mutable game-catalogue/state aliases remain live across callbacks and heap growth.
+
+Evidence: .cache/u_init-first-pass/test.log records5,463 configured Emscripten-C/
+JS comparisons passing. All17 original routines and every table cell are tested;
+13roles×5races×3seeds, repeated init/rerolls, pauper/nudist/blind/discovery, all
+skill tables, filters including1001retries, racial/gear/spell/quantity/merge
+paths, signed64 clock/money/copied roleplay/moves extremes, first-call C reentry,
+heap growth, normal stack/environment cleanup and separate real Modules pass.
+The unchanged suite rejects a separate wrong-JS Number(getnow()) negative
+control at birthday9007199254740997→9007199254740996; delivered sources and
+expected checks remain unchanged. Source/function/order/parameter/all-comment,
+lexical scope and exact source/data guards pass.152 source/header/adapter input
+hashes and actual17JS-import/mixed-link proof are captured. Hybrid compiler
+dependencies exclude original u_init.c. Hybrid Wasm SHA256:
+cd5e8b69f0ca2876caee457087888658e2786e36dc75d53254d41d7d522030b6.
+
+Limits: external character/inventory/skill/weight/HP/energy/hunger/magic/name/
+debug/allocation routines are controlled fixtures; libc and the actual original
+object catalogue are compiled dependencies. A fixture EM_JS throw bypasses the
+outer C frame epilogue, so post-throw C SP equality is not asserted; normal-return
+SP checks are strict and the JS bridge always restores its own stack/environment.
+Full foreign-dependency integration, native-macOS, actual mixed-game and public
+recording gates remain pending.5,463 is first-pass TU evidence, not native or
+production-equivalence evidence. Exact promotion recipe and flags/exports are
+in nethack-c/wasm/tu-fragments/u_init-integration.md; no shared files promoted.
+
+
+### PAR03-VAULT frozen private handoff — 25 functions, configured EmC first pass
+
+Replace all25 configured original src/vault.c functions with source-faithful JS in js/ported/vault.js; preserve original function order/parameters/block comments, arrays/control flow and algorithms. Typed live memory64 fields/output aliases, header macros, varargs/dependency calls and zero-only literal storage live in vault-runtime.js, tu-libraries/vault.js, tu-fragments/vault-support.inc and tu-vault-layout.h. Original/pristine prepared source bytes are equal; no upstream, shared registry/build/runtime, frozen harness or production artifact edit belongs to this handoff. No original-C algorithm fallback. Geometry/list/ownership/guard/gold logic stays in original JS functions. Original gotos lower to labelled blocks/radius/retry loops; native automatic buffers/coords and struct field copies preserve real alias semantics. Preserve unsigned32 parentmid/m_id, signed16 coords, signed8 terrain, uchar local typ/flags and signed64 gold; typed views refresh after callbacks/growth and environments/literals remain per Module. Source-derived guard verifies80strings/1934bytes, all6 RNG sites and12 private aliases; no source-owned static array exists in this profile.
+
+Private actual memory64 reference/hybrid modules compile/link. All25 entrypoints exercised;3,584 configured Emscripten-C/JS setup/state/trace comparisons PASS, source/order/parameter/every-block-comment and lexical11fixture guards, data guard and syntax pass. Snapshot includes all fixture EGD/fakecorr/grid/monster/object state, exact traces/RNG and actual allocation/free counts. Cases include ring-abandon/forward-proceed/backward-retry, typed widths/large gold, heap growth, nested C->JS and Module isolation. Read-only negative control removing only uchar terrain narrowing fails unchanged C comparison: broken JS1 versus C-2; .cache/vault-uchar-negative.log. Fixture-only -Dfree=teleport_probe_free records real frees symmetrically; production typed free wrapper uses actual libc free without that flag. No expectation waiver accepts implementation mismatch.
+
+Controlled world/naming/input/movement/inventory/status/message dependencies limit this evidence; actual mixed-game linkage/source exclusion, fullgame interactions, public recordings and native macOS remain pending. Native-mode staged test throws explicitly rather than falsely passing EmC evidence. JS throw cleanup verifies binding-entry stack/finally and C-environment restoration; synthetic outer C caller frame cannot return on JS throw and is explicitly reset by fixture, not claimed as general C exception unwinding. Every exotic branch/callback mutation, invalid state, FCSIZ overflow and all compiler overflow profiles are not exhausted. Exact integration/probe/free-flag/startup/hash/coverage/limits recipe: nethack-c/wasm/tu-fragments/vault-integration.md; vault-hashes.json freezes owned inputs. Parent owns shared integration/promotion; this is not a native or production-equivalence claim.
+
+WEAPON shared checkpoint:11,450 actual C/hybrid comparisons pass;68-TU inventory/comments/scope and static ABI-dispatch contracts pass. MHITM TU74/J80 (22 configured functions) is assigned to that author; future GETPOS75/J81 and ALLMAIN76/J82 are reserved for VAULT/U_INIT authors after frozen handoffs. These reservations are not completion claims.
+
+67-TU full fixed-snapshot acceptance: `.cache/tu67-gate-snapshot-v2/acceptance.json` records integration PASS,44/44 public sessions with every792,838RNG/11,405screens,cells,cursors/1,483animation frame exact,676 copied source hashes unchanged. Wasma184b879f6a9ce99e76d7c0379c355371d77cb4f9186e1e8412ed4034a756c8c; actualJSimports159SFBASE/15DOG/18REGION, no test aliases and all3originalobjects excluded. Initial metadata path and central dispatcher mistakes are preserved failure evidence, corrected before this acceptance. Full private preparedTREE/assets/probes/terminfo/compiler cache now supplies a current read-only67TU baseline to Lua owner; old53snapshot remains unchanged. Native parity remains pending for14new TUs. Next shared integration is ready WEAPON/VAULT/U_INIT, preserving U_INIT's inherited prepared birthday-clock patch.
+
+PAR04-ALLMAIN inventory before implementation: src/allmain.c prepared/pristine byte-identical,1003lines,16configured functions: early_init,moveloop_preamble,u_calc_moveamt,maybe_generate_rnd_mon,moveloop_core,maybe_do_tutorial,moveloop,regen_pw,regen_hp,stop_occupation,init_sound_disp_gamewindows,newgame,welcome,interrupt_multi,timet_to_seconds,timet_delta. Actual CRASHREPORT/SAFERHANGUP/STATUS_HILITES/TTY_PERM_INVENT branches are in scope; inactive POSITIONBAR/MICRO/WIN32 code is not an active-feature claim. Preserve Module-local mvl_wtcap/mvl_change, occupation/window callback behavior, signed64 move/time masks and difftime conversion, C integer division and RNG attribution/order. U_CAN_REGEN source macro logic stays expanded in regen_hp; Lua calls remain typed dependencies owned by the separate dependency team. Only ALLMAIN-specific files/private links are authorized here; no completed behavior, native or production claim is made at inventory stage.
+
+PAR04-GETPOS inventory before implementation: src/getpos.c prepared/pristine byte-identical,1169lines,22configured original functions (8public/14private). JS owns gloc_descr6x4,gloc_filtertxt3 and original local fastmovemode2,dirnames4x2,pick_chars_def4pairs,mMoOdDxX_def12,view_filters3 data. Preserve signed16 coordinates/schar8, command-queue struct copies, anything/menu backing, private30/16byte static-buffer aliases, perModule hilite state and retained raw callback identities. Floodfill/qsort/valid/hilite callbacks require stable typed callback connections across C/JS reentry; nested getpos labels and cursor/input cleanup remain within original bodies. Only unique GETPOS files/private EmC probes are in scope; typed helpers/backing do not replace source algorithms, and production/native/public validation is pending.
+
+VAULT/U_INIT shared staging (PAR03): register25/17 original functions with typed memory64 libraries/support/actual layouts and central runtime methods vault/u_init. VAULT environment stays perModule, with actual EGD/corridor/monster/object/output pointer aliases and fixture-only free tracking; original guard/dialogue/ownership decisions remain JS. U_INIT retains40 JS-owned private catalogues/445rows/1432cells, fixed zero-only backing populated once perModule before callback-capable operations, no new startup. Its reference explicitly uses prepared C with inherited time(&ubirthday)→getnow() patch; signed64 birthday/time/quantities remain BigInt. Original C objects are excluded by registry, no fallback. Source/data/literal/RNG/provenance and central-dispatch checks run during shared builds. Both have no context-size export (probeContext:false). PrivateVAULT3,584/U_INIT5,463 comparisons pass, source/data/negative controls pass; shared/mixed/public/native pending. Exact recipes nethack-c/wasm/tu-fragments/{vault,u_init}-integration.md.
+
+70-TU shared probe checkpoint: WEAPON11,450/VAULT3,584/U_INIT5,463 comparisons pass (20,497total); actual70-TU source inventory/comments/scope and central binding-method contracts pass. Original prepared birthday-clock adaptation stays explicit; no native pass is inferred. Next actual mixed-game link/public validation is pending.
+
+MTHROWU implementation adaptations: native `obj **` locals and damage outputs use addressable cells, so callbacks can replace the exact original pointer/value while execution is nested. Repeated calls to original functions which own native scratch buffers restore their own stack frame on return. The original function-local `do_not_annoy` long persists per actual Module; it is not reset by unrelated fixture setup. Header macros (including projectile glyph selection and its indirect display RNG) expand in the JavaScript environment; packed fields and native printf/callback calls use typed ABI helpers only. These are representation/lifetime adaptations, not new combat policy or changed function boundaries.
+
+
+PAR03-U_INIT shared-reference correction: initial support used the generic
+TELEPORT_REFERENCE_TU guard for private original struct/array assertions. Root's
+70-TU build exposed those assertions in unrelated shared reference probes,
+where private u_init.c declarations are absent. This was an integration defect,
+not an original algorithm difference. Support now gates those assertions on
+TELEPORT_U_INIT_VALIDATE_SOURCE, defined only in the U_INIT fixture immediately
+after including actual original u_init.c. Every actual original field-type,
+offset/sizeof/array-size assertion remains active there. Source checker and
+recipe enforce the isolated gate. The unchanged5,463 C/JS checks pass again;
+standalone support-only syntax under generic TELEPORT_REFERENCE_TU passes
+without original u_init.c. A separate wrong8-row mirror is compile-rejected
+against actual Archeologist9rows (72!=64), preserving the guard's sensitivity.
+Private proof: .cache/u_init-first-pass/private-guard-proof.log. Core algorithms,
+Wasm bytes/hashes, expected results and native/game/public pending limits are
+unchanged. No shared build or registry was edited by this correction.
+
+67-TU manifest integrity correction: Lua owner checked selected javascriptDependencies hashes and found exactly one mismatch in67v2: wasm-runtime.js was corrected from region to callRegion after the game build, and the public run used that fixed runtime with676 unchanged captured sources, but build.json retained the earlier runtime hash. Port core/ABI/data/adapter checks alone did not catch this selected central dependency. Preserve v2 unchanged as successful behavior/stale-manifest evidence, revoke its coherent-manifest handoff, clone v3 and run a full private67build plus fresh integration/public. Require every selected javascriptDependencies hash as well as TU source/binding/adapter/data hashes to match before handoff. No oracle/test expectations are changed.
+
+PAR04 continuation reservation confirmed by migration owner: after SAVE's frozen handoff, its author takes DOGMOVE(src/dogmove.c), TU77/J83. Establish actual configured inventory and pristine/prepared provenance before implementation. Only DOGMOVE-specific JS core/runtime, typed library/support/layout, probe/test/source-data and integration fragments/private builds are in scope. Preserve source boundaries/order/parameters/comments/data/control flow, JS-owned algorithms, and explicit dependency/coverage limits; no original DOGMOVE C fallback. Shared registry/build/runtime/native/public gates remain serialized at root; this reservation makes no completion or feature-parity claim. GETPOS75/J81 and ALLMAIN76/J82 remain independently owned.
+
+Private67v3 rebuild setup: include the pinned ncurses6.5 archive as a read-only shared input, alongside existing pinned Lua archive/SDK/upstream/recordings. The initial full-snapshot copy omitted this archive even though it copied generated ncurses headers/library; the private build correctly rejected that incomplete setup before compiling. Add the immutable archive link and rerun, retaining integrity checks and private compiler cache. U_INIT scoped guard fix separately passes unchanged5,463 shared checks; unrelated reference-probe syntax passes and a wrong original table-size negative compile is still rejected.
+
+Parallel reservation TU77/J83 DOGMOVE is assigned after SAVE handoff; configured inventory/provenance are required before claiming scope or edits. No completed-TU count changes from this reservation. Shared70 build and private67 manifest-correct rebuild run in separate trees/caches while six authors continue unique files.
+
+Reusable provenance verification: scripts/check-wasm-provenance.py reads the actual build manifest, recursively checks all selected sourceSha256 maps (including central runtime and regex/dependency sources), every TU core/library/adapter/data input, each actual prepared C source and the game Wasm digest. Missing files, conflicting declared hashes and stale inputs fail. build.py runs it after manifest creation; standard test-wasm.sh runs it before further tests. The preserved67v2 snapshot is a meaningful negative control: the checker rejects exactly stale js/ported/wasm-runtime.js. This adds build/test validation, not game behavior or a provenance rewrite. In-flight builds loaded older build.py and will be checked explicitly before capture.
+
+Provenance checker also validates manifest-declared forced native ABI header, pinned ncurses archive, actual terminfo entry and ncompress source digests, preserving each declared runtime/reference role. Fresh private67v3 and70 snapshots pass all266/286 declared artifact/source hashes respectively; their integration runs now pass. This validates tool inputs as well as selected JS, not a claim of native parity.
+
+SOUNDS TU72/J78 implementation checkpoint: all28 configured original functions remain in original order with exact parameters/block comments; source-owned18 text arrays, nosound_procs/soundlib_choices and local ".wav" stay readable JS. Current optional speech/user-sound/integrated backends stay inactive with unevaluated macro arguments. Necessary representation changes are the original tiphat/nada common-tail label adaptation, native byte pointer loops/interned literals, BigInt size_t filename arithmetic, original integer HP division truncation, scoped native scratch, and lazy per-actual-Module private zero sound-proc backing/full-byte native struct assignment. Exported native soundprocs is initially zero; opaque callback tokens retain all64bits. Native C string pointer stores intern original literals (including multi_reason) before writing actual pointer slots. Independent compiler field/global type guards and exact source/data/RNG/diagnostic checks pass; private original EmC-C vsJS15,200 comparisons pass. Actual mixed-game/native/public gates remain pending; no native parity or completed shared migration is inferred. Integration recipe .cache/sounds-integration-plan.md; only unique SOUNDS files and this append were edited.
+
+ROLE TU78/J84 reserved to the SOUNDS author after its frozen15,200-comparison handoff. Actual configured47functions and native-visible roles14/races6/genders4/aligns4 catalogues are established before edits. Initial inventory identifies14RNGsites/five assertions/seven setup gotos; original catalogue startup, full-byte struct assignments and menu/selection policy remain required. Reservation is not a completion claim.
+
+ROLE TU78/J84 implementation plan (before production edits): transfer all47 actually configured src/role.c functions with original order/names/parameters/locals/comments/control and keep current tty/menu configuration unchanged. Four original native-visible catalogues (roles14/races6/genders4/aligns4) become readable source-derived JS positional field records with original symbolic expressions/comments, serialized into zero-only native backing before external C reads; no native initializer mirror. Native struct assignments copy all bytes including padding, native monster catalogue mutations remain visible, and static/local strings retain stable native addresses. The seven original genl_player_setup gotos use setup_done labeled block plus makepicks retry loop, preserving one shared decrement/return with no new control flags/helpers. Native pointer-to-pointer menus/anything/local buffers use fresh typed views and scoped scratch. Original external dependencies/stdio/window/RNG/assertions remain actual C. Private original EmC-C first-pass tests precede root mixed-game validation; native-host parity remains pending, not silently waived. Only unique ROLE files/private artifacts and this append are in scope; shared integration remains root-owned.
+
+Fresh coherent full checkpoints accepted:67v3 rebuilt privately from fixed sources, Wasm17fac46893f8bd369c7a6c637b7de443146139cf82d9864e514a777b0e158295,266 declared hashes verified/676 captured files unchanged;70 mixed game Wasme37f6e14fca53520d503e263e0ce5ac1f2bdb6c9ee3d18d68c1199a9b1e8c4c0,286 declared hashes verified/724 captured files unchanged. Both integration PASS and44/44 unchanged recordings every792,838RNG/11,405screens,cells,cursors/1,483animations exact; acceptance/provenance/public-results/input-hash files are in their checkpoint directories.67v2's stale central-runtime manifest is preserved historical failure and superseded for Lua handoff, no provenance rewritten. Actual70 imports27WEAPON/12VAULT/3U_INIT with no private aliases and originalobjects absent. All17new ports remain native-pending;53-suite native baseline proof is not extended.
+
+PAR04-DOGMOVE inventory before implementation: src/dogmove.c pristine/prepared byte-identical,1547lines,20original configured functions (droppables through quickmimic), no configured function-header extension. Actual CPP has25 RNG sites, including distinct invocations sharing lines418/447/1257. Preserve source nofetch[4] and qm[9] JS-owned catalogues and droppables persistent dummy obj copied from cg.zeroobj, Module-local identities, signed64 score_targ/time arithmetic, recursive reachability/wantdoor callback/local int output references, original dog_move forward goto joins and temporary pet/hero appearance state. Only DOGMOVE-specific core/runtime/library/layout/probe/test/data/support/integration fragments and private builds are in scope. Original source decisions remain JS; typed/header/dependency access and zero-only backing do not replace algorithms. Actual dependency mutations, native-macOS, production/public and unexercised world paths remain pending; no completion claim is made at this inventory stage. Root owns ROLE78/J84; GETPOS75/J81 and ALLMAIN76/J82 remain independently owned.
+
+SOUNDS shared staging (J78):28 original configured functions and source-owned text/tables move intoJS, with header-disabled speech/effect/user-sound features retaining original no-argument-evaluation scope. No new feature disablement/startup. Native soundprocs remains initiallyzero, private source record is initialized from JS lazily perModule; original full-byte assignments, opaque init/exit tokens and six actual get_iter_mons callback identities use typed ABI outside core. Add source-derived literal backing, exact sourceRNG/Snprintf guards, compiler layouts/raw64 masks and sounds dispatch. Actual object/monster catalogue and native allocation/string dependencies are reference fixtures, controlled world/UI/room callbacks explicitly limited. Private15,200 comparisons/source/data/ABI pass; shared/mixed/public/native pending. Exact contract .cache/sounds-integration-plan.md.
+
+J80 MHITM first-pass implementation evidence: all22 original functions/comments/order/parameters and source message literals are preserved in mhitm.js. Necessary differences are native addressable local attack/int[NATTK]/mhitm_data records, exact interior &hitflags pointer, scoped scratch lifetime, raw64 masks/live typed global/grid views, source RNG/Snprintf call metadata, and a labelled block for passivemm's sole assess_dmg goto. Header macros remain JS adapters; actual foreign attack/death/movement/resistance/naming dependencies remain native. No new combat algorithm or source table lives in native support. One explicit RNG operation discriminator preserves original valid d(0,0); dice count0 cannot mean rn2. Private original-C/imported-JS EmC probes pass3,326 exact comparisons with actual initialized object/monster catalogues,14 real-growth/reentry callback sites and separate Modules. Source/data/scope checks pass. Native parity/shared mixed-game/public gates and unselected world branches remain pending; fixture foreign effects are controlled, not a substitute full-game oracle. Initial missing catalogue initialization/fixture constant issues were caught and corrected before freeze, with independent witnesses retained. Exact owned files, metadata/imports/private aliases, recipe and limitations: .cache/mhitm-integration-plan.md. Upstream and frozen harness remain unchanged.
+
+
+### PAR04-GETPOS frozen private handoff — 22 functions, configured EmC first pass
+
+All22 configured original src/getpos.c functions retain boundaries/order/params/block comments and source algorithms in js/ported/getpos.js. Seven readonly source tables remain JS authoritative in original scopes; both TU macros remain JS. Typed live fields, retained raw callback tokens, native output/command/anything/menu aliases, private perModule enum/callback state and header access live in getpos-runtime/library/support/layout. Static30/16byte return/format buffers keep actual zero-only native storage and original persistent alias. Production C->JS comparator/floodfill callback imports dispatch to the original JS functions; no original GETPOS C fallback or replacement algorithm support exists. Source-derived guards verify108strings/2272bytes,14private inventory,zero RNG sites and actual CPP Snprintf closing-line origins280/705. Pristine/prepared getpos.c bytes are equal.
+
+Source gotos lower to same-tail flags/labels preserving call order and cleanup. External bindings, internal original functions owning native automatic buffers, and menu/input iteration blocks each have explicit stack save/finally restoration matching C lifetimes. A real1,658-menu case caught missing iteration cleanup corrupting native state; fixed code retains unchanged C expectations. Typed signed16/schar conversions, unsigned map color/symbol fields and full native struct copies preserve configured ABI. No source/harness/shared registry/build/runtime or production artifact edits belong to this handoff.
+
+Actual isolated memory64 reference/hybrid compile/link and9,241 exact setup/state/trace comparisons PASS, all22 entries exercised. Source/order/params/all comments, lexical11fixture, data/CPP, syntax and whitespace checks pass. Full map/filter/glyph/coord/flags/private state, sorted arrays, actual allocations/frees, ordered menus/input/callback/comparator traces and retained-buffer content are compared. Cases include all target/filter classes, names/help modes, source glyph conversion, clamped movement, queued/repeat/mouse/control jumps,1,658menu iterations,2,000input iterations, growth/output aliases, nested reentry, Module isolation and synthetic dependency throws. Read-only negative loader removes only menu cleanup and fails the large-menu case with Wasm memory-out-of-bounds; .cache/getpos-automatic-negative.log. No expected-result waiver.
+
+Configured prepared hack.h already substitutes nh_deterministic_qsort, implemented by actual prepared hacklib.c stable-index wrapper around libc qsort. This inherited accepted adaptation is not new here and is explicitly part of the EmC reference; actual glyph_to_cmap/sgn/libc/sort dependencies are compiled. Probe-only HACKLIB wrapper renames unrelated traced fixture functions, -Dfree=teleport_probe_free tracks real symmetric frees, and --wrap=nh_deterministic_qsort records real comparator calls; production uses neither test flag. Controlled window/input/description/selection/travel/dungeon/map dependencies limit evidence. Real mixed-game exclusion/import closure, public recordings, full interactions and pristine native-macOS/libc sort behavior remain pending; staged native mode explicitly throws. Synthetic JS exceptions restore binding C-environment/entry stack but bypass the outer C fixture return; its frame is explicitly reset by test, not claimed as general C exception unwinding. Other compiler/character/layout/backend profiles, every world/glyph/callback mutation and inherited globally stateful sort reentry are unverified. Exact files/flags/integration/lifetimes/limits: nethack-c/wasm/tu-fragments/getpos-integration.md; hashes in getpos-hashes.json. Parent owns shared promotion.
+
+
+PAR05 SOUNDS shared-probe backing correction (2026-11-10): `scripts/build-tu-probes.py` now defines `TELEPORT_REFERENCE_SYS` for both SOUNDS isolated modes. The SOUNDS fixture already owns `sysopt`; the existing guard suppresses only duplicate common support storage. No source algorithm, fixture expectation, production flag, or game behavior changes. Initial shared probe link failed duplicate `sysopt`; corrected shared comparisons pending. ENGRAVE TU80/J86 reserved for the frozen-MHITM author; TOPTEN79/J85 reserved for the frozen-GETPOS author, keeping six authors on disjoint files. Native parity remains a later pass.
+
+PAR05 reservation before implementation: migration owner confirmed TOPTEN(src/topten.c), TU79/J85, for the GETPOS author after its frozen22-function/9241-comparison handoff. Only TOPTEN-specific JS core/runtime, typed library/support/layout, probe/test/source-data and integration fragments/private builds are in scope. Establish actual configured inventory and pristine/prepared provenance before implementation; preserve original source boundaries/order/parameters/comments/data/control flow and ranking/file/parser/output decisions in JS. Typed ABI/header/dependency calls and original-size zero backing do not replace source algorithms. Shared registry/build/runtime/native/public gates remain at root; score-file/real filesystem and native behavior are not claimed before actual validation. Root holds its TU80/J86 next assignment; avoid existing ROLE/MTHROWU/SOUNDS/MHITM and DOGMOVE/ALLMAIN ownership. Accepted U_INIT70 source remains frozen; bounded internal automatic-storage retention is tracked separately without edits or a demonstrated unbounded-loop failure.
+
+PAR05 SAVE shared staging: register all26 source bodies, exclude original save.o, include typed support once, add per-Module canonical environment and exact typed argument conversion with stack restoration, guarded compiler layouts and raw64 SIG_IGN metadata. Shared probe uses original-source-including fixture only in reference and HYBRID_SAVE only in JS mode; no original-C algorithm fallback. Preserve SAVE focused serializer witnesses and typed-pointer-only normalization limits documented in `nethack-c/wasm/tu-fragments/save-integration.md`; shared O2/game/public/native remain pending. SOUNDS corrected shared build now passes15,200 comparisons unchanged; 71 bindings pass central dispatch audit.
+
+J86 ENGRAVE reservation/inventory before implementation: configured actual memory64/MACOS preprocessing retains all34 original src/engrave.c functions (1,770lines; SFCTOOL inactive). Source rubouts48 and blind_writing9x21 remain JS-authoritative readonly data. Planned necessary adaptations: live native engraving linked-list/text-pointer fields, private doengrave context layout with native buffers, exact uint32/size_t/long widths, scoped native output refs, original local exit goto→labelled block, stable native bytes for private encoded text, and typed getobj/occupation callback trampolines invoking original JS stylus_ok/engrave. Original foreign OS/UI/item/rumor/serialization dependencies remain actual native calls with controlled isolated fixtures, no engraving algorithms C. No shared registration/build/compiler/frozen/upstream change. Work is in progress; no equivalence claim until private tests and later shared/public gates. Exact contracts/limits will be maintained in .cache/engrave-integration-plan.md.
+
+SAVE probe-link correction: its isolated fixture supplies native globals including soundprocs; compiling all common backing duplicated that storage after SOUNDS staging. Compile only SAVE-specific support in these two probes, matching the private recipe, while production includes that support once via common support. No fixture/source/expectation edits. Initial shared-link diagnostic remains in execution history; the rerun log replaces the failed log.
+
+
+### PAR04-ALLMAIN / J82 — frozen sixteen-function first pass
+
+Locations: js/ported/allmain{,-runtime}.js, nethack-c/wasm/tu-libraries/allmain.js,
+scripts/tu-allmain-{probe.c,layout.h}, scripts/test-tu-allmain.mjs and unique
+allmain-* support/source-check/integration fragments. Actual prepared/pristine
+allmain.c are byte-identical1003lines. All16 configured original function names,
+order, parameters, comments, local data and control flow remain JS. The2 original
+private mutable file statics retain0 initializers as JS source data and per-Module
+state.3 U_CAN_REGEN macro uses are expanded within original regen_hp boundaries.
+No original ALLMAIN C body/algorithm fallback, new compiler disable flag,
+terminal/native-service/Lua/frozen-harness change or shared promotion is included.
+
+Typed C exposes98 actual global/bitfield lvalues, live record/interior pointers,
+function-pointer/window callbacks, actual header macros/dependencies, fixed-source
+formatting and zero-only31literal/636byte backing. All12 compiler-audited64bit
+long/time fields remain BigInt, including iflags.hilite_delta, u.usleep and unsigned
+size_t context.tribute.tributesz; compiler size/signedness guards and actual callback
+reads check these. Original signed-short writes and integer division/truncation are
+preserved. Actual libc difftime receives full time_t before the original typed
+(double→long) cast; JS does not round input timestamps. Out-of-range floating cast
+is original C undefined behavior, not claimed portable equivalence.16 RNG sites
+preserve compiler closing-line/caller origins and logger-before-bound order;
+RNG-consuming depth/night/ACURR callbacks exercise that order. Multiline rn2 uses
+actual closing line166 rather than opening164; this code correction retained
+unchanged C expectations.
+
+One source-local automatic lifetime issue was corrected before freeze: direct
+newgame→welcome now uses a scoped runtime callLocal bridge so welcome's BUFSZ
+buffer is reclaimed on return, before later newgame callbacks. Original welcome
+body/call order is retained. Actual callback SP checks and an unchanged-suite
+negative control detect the prior retained256bytes. No frozen U_INIT lifetime
+change was made; its bounded-temporary observation was referred to integration
+owner review separately.
+
+Evidence: .cache/allmain-first-pass/test.log records4,963 configured Emscripten-C/
+JS comparisons passing. All16source routines invoked, true infinite moveloop
+terminated only by controlled callback. Movement/encumbrance/steed/speed/short
+narrowing, regen/energy/eel/sleep, preamble/calendar/resume, occupation/menu/window,
+newgame/reroll/tutorial/welcome, billion-turn exit, unsigned64 capabilities, long
+counters and nearby>53bit libc difftime, Lua dependency ABI, RNG bound callbacks,
+growth/reentry, separate Modules, normal stack and exceptional C-environment
+cleanup pass. The unchanged suite rejects separate Number(time_t) negative:
+9007199254740997-9007199254740996 yields1 in original C,0 in faulty JS. A separate
+unscoped-welcome negative is also rejected. Delivered core/expected checks remain
+unchanged by negatives. Source/parameter/order/all-comment/scope/data/config guards
+pass.151 source/header/adapter hashes, actual16original JS imports and hybrid
+compiler dependencies excluding original allmain.c are captured. Generic shared
+reference support-only syntax also passes without original ALLMAIN source visible.
+Hybrid Wasm SHA256:530ba238daebc5db5cd4af9b3922ed4b14cbf324d2de9b8538656bfcd91ddee3.
+
+Limits: external game/startup/UI/mail/sound/calendar/monster/HP/energy/occupation/
+Lua/signal/assert/termination/string-helper dependencies are controlled fixtures;
+actual libc difftime/string-format/allocator dependencies are linked. No real OS
+signal or message send occurs. C fixture EM_JS throws skip the outer C frame's
+normal epilogue; post-throw C SP equality is not asserted. Normal-return stack
+checks stay strict, bridge stack/C-scope finally cleanup remains. Actual full-game,
+foreign-dependency/Lua behavior, native-macOS and public recording parity remain
+pending.4,963 is first-pass TU evidence, not native/production equivalence. Exact
+registry/dispatcher/support/layout/export/flags/sourceguard recipe is recorded in
+nethack-c/wasm/tu-fragments/allmain-integration.md. No shared build files promoted.
+
+PAR05-TOPTEN inventory before implementation: src/topten.c pristine/prepared byte-identical,1487lines,24actualconfigured functions,7public(formatkiller,observable_depth,topten,prscore,get_rnd_toptenentry,tt_oname,tt_doppel) and17private. XLOGFILE/LOGFILE enabled; UPDATE_RECORD_IN_PLACE/NO_SCAN_BRACK/VMS/AMIGA/TOS inactive. JS owns16 killed_by_prefix strings, actual readentry fmt/fmt32/fmt33 and writeentry fmt32/fmt33/fmt0/fmtX, achievement/conduct source catalogues and switch/call order, perModule tt_head and zero-record initializer. Preserve signed64 points/dates/time_t, private tt_buf alias, linkedlist ownership/error joins, writable argv char** and record/log/xlog rewriting decisions. Typed FILE*/fscanf/sscanf/fprintf/record access seams do not replace source parser or ranking algorithms. Private fixture will use actual temporary FILE/libc behavior with explicit path/lock/UI/world boundaries; real production persistence, native and public-game validation remain pending.
+
+PAR05 next reservation confirmed by migration owner: GLYPHS(src/glyphs.c), TU81/J87, assigned to ALLMAIN author after its frozen16-function/4963-comparison handoff. Establish actual configured inventory/provenance/source tables before edits. Unique GLYPHS implementation/typed ABI/probe/data/support/integration files/private builds only, all original algorithms in JS, no original-TU fallback; shared registry/build/runtime/native/public gates remain serialized at root. ENGRAVE80/J86 is independently root-owned. Accepted U_INIT70 remains unchanged; separate bounded storage-lifetime note is not an authorized silent edit to its frozen inputs.
+
+SAVE explicit SDK/native library difference: shared O2 hybrid inherited native-terminal.h SIG_IGN=1 while independent SDK-C reference uses raw UINT64(-2). Unchanged tests correctly fail hangup callback token after1,735 checks (`.cache/first-pass-save-mixed-sigign-negative.log`). Exclude SAVE isolated hybrid from the generic native-header preinclude so both comparison modules use actual SDK SIG_IGN, matching EmC-first policy. Production still preincludes native macOS ABI and obtains actual compiler sentinel via typed teleport_save_sig_ign; no hardcoded sentinel or disabled signal behavior. Native/full game gates remain pending.
+
+PAR05 MHITM/GETPOS/ALLMAIN shared staging: register22/22/16 original bodies and remove corresponding C objects; wire tested perModule dispatch, native typed support and exact compiler layouts/guards. Preserve MHITM explicit zero-dice discriminator and original source-derived literal/format backing; GETPOS two production callback identities and inherited deterministic sort, test-only free/sort witnesses; ALLMAIN actual signed64 layout, native-header profile and scoped internal welcome buffer. No startup hooks, source patches, frozen-harness edits or production flags added. Private counts3,326/9,241/4,963 remain focused controlled-dependency evidence; shared/game/public/native checks pending. SAVE corrected shared O2 SDK pair now passes2,007 unchanged comparisons.
+
+PAR05-GLYPHS inventory before implementation: src/glyphs.c pristine/prepared byte-identical,1324lines,27configured original functions (to_custom_symset_entry_callback through reset_customcolors). ENHANCED_SYMBOLS active; TEST_GLYPHNAMES and inactive alternative shuffle are not active-feature claims. Preserve zero_find aggregate, nonzero_black long constant, two offset ints and five local naming-text arrays (altar/zap/swallow/explosion type/explosion position). Keep size_t64 cache/hash/loop arithmetic distinct from unsigned32 rotation and signedchar byte contributions; retain heap cache/name/list/Unicode aliases, stable callback/function/static-find identity, local nag statics/reentry and duplicate-description shuffle ownership. Original6byte UTF8 temporary,4QBUFSZ parser temporaries and NUM_OBJECTS shuffle storage require native automatic lifetimes including internal calls/callbacks. Actual loadsyms/enum/object/monster catalogues are external dependencies, not GLYPHS algorithm fallbacks. Only GLYPHS-specific files/private builds are in scope; shared promotion remains root-owned. Native, fullgame/public and independent foreign-dependency behavior are unverified at inventory stage.
+
+PAR05 shared gate status:75 registered source/scope checks and75 binding-method contracts PASS. Five new shared EmC suites pass SOUNDS15,200/SAVE2,007/MHITM3,326/GETPOS9,241/ALLMAIN4,963. Actual75-TU game build in progress; accepted checkpoint remains70. Root review found ALLMAIN unit snapshot used %d for long64 u.usleep (compiler warning); original author is authorized to correct only fixture format and add high64 witness, followed by private/shared reruns before acceptance. Frozen contest harness/recordings remain untouched. Six active distinct authors now MTHROWU73, DOGMOVE77, ROLE78, TOPTEN79, ENGRAVE80 and GLYPHS81.
+
+
+PAR04-ALLMAIN scoped fixture correction: root's shared Wformat audit found
+the duplicate ;flags:%d/%d/%d/%d snapshot third slot passed signed long64
+u.usleep to %d. Corrected exactly that slot to %ld in tu-allmain-probe.c;
+production core/runtime/library/support and other warnings remain unchanged.
+Four independent raw-snapshot witnesses (2147483648,-2147483649,
+9007199254740997,-9007199254740997 in each actual C/JS Module) preserve
+full original long values. Fresh private build/unchanged prior checks plus
+12new checks pass4,975; source guard enforces full-width snapshot formatting.
+Both precision/lifetime negative controls are rejected again. Current fixture
+hybrid SHA2567a8dcffa4fe6f45609cc2a2f4fd96c1114646b2c4197f551a4d6dd05219d1185;
+reference e87154e547c510f7f5ca777601e00d3260577b71ae38c6c071015f59f058b24f.
+Fresh151input hashes/recipe updated. Earlier4,963 fixture artifacts are historical;
+no new game/native/public equivalence is claimed. Root owns shared75gate rerun.
+
+PAR05 ALLMAIN fixture correction verified: original author changed only the third flags snapshot slot %d→%ld for actual long64 u.usleep and added independent raw C/JS snapshot witnesses2147483648,-2147483649,+/-9007199254740997. Shared O2 pair now4,975 comparisons PASS; original precision/welcome negative controls retained. Production core/runtime/library/support unchanged. Actual75-TU mixed link succeeds: SOUNDS22/SAVE8/MHITM12/GETPOS10/ALLMAIN9 live imports, original C objects and private test aliases absent. Immutable75 snapshot will rebuild to capture the changed source guard hash before game/public acceptance; no stale-manifest result will be promoted.
+
+
+MTHROWU first-pass evidence (TU73/J79): actual original prepared C and JS-import hybrid isolated memory64 O2 modules pass15,525 comparisons. All28 original functions, names/parameters/order/block comments and the two file/two local table orders are retained; lexical scope passes. Every monster species is tested for multishot and every object record for bars classification; pointer-cell replacement, native inventory/floor ownership and true frees, signed8 booleans, quantities beyond2^53 and bit63 masks, exact RNG traces, five native-callback48MiB growth/reentry stages, persistent return warning state and same-dispatcher two-Module isolation are checked. Native catalogues/alloc/hacklib remain actual; external world/combat/naming/visibility/status/beam callbacks are controlled fixtures, with no fatal death/OOM/UB guarantee. Root shared mixed/public and deferred native-host gates remain unclaimed. Exact recipe/schema/exports are in .cache/mthrowu-integration-plan.md. No pristine upstream or frozen harness changes.
+
+PAR06 MTHROWU shared staging:28 configured original projectile functions/order/comments/control and original readonly breath/local arrays remain JS. Add callMthrowu dispatch,504-key compiler layout signed64 decode, perModule function-local do_not_annoy state and typed native field/pointer/callback/varargs support; no startup. Probe links actual object/monster catalogues, allocator/hacklib and owned ABI only; NEED_VARARGS is the helper prototype switch in both isolated modes, production common support already defines it. Private15,525 comparisons are controlled-world component evidence; shared/game/public/native pending. Current75 immutable snapshot is unaffected by live76th registration. DLB inventory found0configuredfunctions; noenableflags/noemptyport/noacceptedcount. Reservation82/J88 reassigned RESTORE; NHLOBJ83/J89 reserved to ROLE author, NHLSEL84/J90 to otherteam.
+
+PAR06 reservation correction before implementation (TU82/J88): current memory64 preprocessing still has neither DLB nor DLBLIB; src/dlb.c contributes zero configured functions. No optional flag was enabled and no empty-object migration was counted. Reservation82 is reassigned to active src/restore.c: actual compiler AST confirms32 original functions, zero goto, including SELECTSAVED restore_menu. RESTORE reconstruction/ID mapping/time/menu decisions will remain in the original JS functions; native object/monster/global storage, serializer buffers/pointer outputs, field packing and external world/UI/file operations use actual typed ABI. Existing SAVE/SFBASE/SFSTRUCT ports are dependencies/context and remain untouched. Private original-EmC versus hybrid checks precede root mixed-game/public promotion; native-host compatibility remains deferred explicitly.
+
+PAR06 MTHROWU shared verification: actual original-C/hybrid O2 pairs pass15,525 comparisons unchanged; central76-binding audit, all76 original source/function/comment checks and lexical checks pass. Only registered/staged, no76-game/public/native acceptance yet. Private75checkpoint rebuilt to Wasmb25afd5ac4714c0a71f2007bd17ec8f7f94236b134b0da68fd481cdce6e6181b;754capturedsourcesunchanged and323declaredhashespass. Integration passes; public ongoing. Source75snapshot remains read-only except uncaptured result logs/audits.
+
+PAR05 final75acceptance: `.cache/tu75-gate-snapshot/acceptance.json` records Wasmb25afd5ac4714c0a71f2007bd17ec8f7f94236b134b0da68fd481cdce6e6181b;754sourcehashesunchanged;323declaredartifact/sourcehashespass before/after; fullintegrationPASS;44/44publicsessions all792,838RNG/11,405screens,cells,cursors/1,483animationsexact. Liveimports22SOUNDS/8SAVE/12MHITM/10GETPOS/9ALLMAIN, originalCobjects/privatealiasesabsent. Frozen-source snapshot preserves correctedSAVE SDKprobeSIG_IGN distinction and ALLMAIN4975full64fixture proof. New22ports remainnativepending; earlier53native proof notextended. Source files in this snapshot remain read-only.
+
+PAR06 ROLE backing preparation: add explicit optional registry nativeStorageSources to game builder. Each declared zero-only storage file compiles separately with pinned game flags and its exact defines, then links as a separate object. Reject LTO for this path: frontend constant-folding of same-TU const zero catalogue readers was demonstrated by actual O2 IR literal0 vs separate extern load (`.cache/role-author/folding-{same,extern}.ll`). This prevents C readers bypassing JS catalogue initialization; no initialized C table mirror or original algorithm is added. Not yet selected for a port; ROLE shared integration/private53,612 final freeze pending. Current75accepted snapshot untouched.
+
+PAR06 storage provenance: optional nativeStorageSources paths are preflighted before probe compilation, automatically hashed into nativeStorageSourceSha256 in each selected-port manifest, and included by reusable provenance verification. This prevents separately linked backing from escaping source accountability even if omitted from adapterSources. Existing ports without the field keep prior compiler/link behavior. Production behavior checks await the ROLE game batch; builder Python syntax checks pass.
+
+ROLE TU78/J84 frozen implementation checkpoint:47 configured original functions preserve order/parameters/comments/control, with four native-visible catalogues kept source-derived/readable in role.js (14/6/4/4 rows). Native zero-only tables live in dedicated tu-role-storage.c, compiled separately only for game/ROLE hybrid with TELEPORT_PORT_ROLE_STORAGE and without LTO; common support has extern/address access only. Actual emcc-O2 evidence shows a same-TU const-zero reader folds to literal0 while the separated extern reader loads native memory, so this separation is required for JS startup initialization. Startup initializeRole populates before C consumers. Necessary language adaptations include canonicalizing three original C logical expressions before boolean8 casts, char/native pointer views and stride increment, strict-JS octal escape representation, full-byte Role/Race/anything copies, scoped menu/local pointer cells, and the documented shared-tail/retry labels. Zero-vararg native message helpers forward original format values; all actual libc/hacklib/Strlen dependencies remain native. Final private original EmC-C/JS53,612 comparisons and47-function/source/data/RNG/assert/Strlen/type guards pass. Native-host and root mixed-game/public gates remain explicitly pending; no expected outputs or original C algorithms were changed. Recipe and separate-storage compiler proof: .cache/role-integration-plan.md and .cache/role-author/folding-{same,extern}.ll.
+
+PAR06 ROLE shared staging:47 configured original functions and four original JS-authoritative catalogues (roles14/races6/genders4/aligns4) register with original C object excluded. Exact startup $teleportRoleInit/addOnInit packs JS source values into dedicated native zero-only storage before C main; perModule state shared with role dispatcher, no callback imports. Build compiles storage separately only game/ROLEhybrid under TELEPORT_PORT_ROLE_STORAGE and refuses LTO. Native compiler expr_N/M2 values retained as raw64 strings, six negative ordinary enums signed, all typed fields/padding/fullstructcopies/provenance remain audited. Isolated probes use real initialized objects/monst/alloc/hacklib/strutil and controlled menus/world with exact alias-aware traces; no dynamic-pointer-range heuristics. Source-derived literal pool, actual source15RNG/fiveassert/sixStrlen sites guarded. Private53,612 PASS; shared O2/game/public/native pending. NHLOBJ83 author begins unique next file; no changes to frozen75 snapshot.
+
+PAR06 ROLE shared-probe recipe correction: root initially compiled the owned support include as an independent input without its private wrapper hack.h include, causing undeclared native types/globals. Preserved `.cache/first-pass-role-missing-header.log`; add exact hack.h preinclude to ROLE hybrid isolated command, matching the private wrapper. Production common support already includes hack.h; no production/core/expectation changes. Shared rerun pending.
+
+NHLOBJ TU83/J89 plan before implementation: actual src/nhlobj.c has21 configured functions (3public/18private), no goto/RNG/assert/Snprintf. Preserve original userdata/object ownership, reference-count and merge quirks, timer operations, Lua stack/control/comments and every original boundary. Two private Lua registration catalogues (methods16/meta2 including sentinels) are readable JS-owned records with original function identities, lazily packed into zero native luaL_Reg backing using16 typed native trampolines; no callback algorithm moves to C. Real Lua5.4.8 C APIs and original nhlua accessors remain dependencies; no Lua runtime/service/bridge files are edited. Native struct _lua_obj views, unsigned32 refs, signed64 quantities/timers/Lua integers, compiler fields/bitfields and address-taken coordinate/boolean cells stay fresh across growth/reentry. Necessary representation adaptations include strict-JS reserved local class→class_, source-local lobj_is_ok macro expansion, native pointer equality and scoped native scratch, Lua header macro expansion outside core, and fixed Lua CFunction ABI trampolines back to the same original JS functions. Private original EmC-C first-pass evidence precedes root mixed-game validation; native-host parity remains pending. Only unique NHLOBJ files/private artifacts and this append are in scope.
+
+PAR06 shared ROLE verification: corrected isolated O2 builds and53,612 exact EmC/JS comparisons PASS;77binding contract auditPASS. Stage private77-source snapshot/fullgamebuild with original MTHROWU/ROLE objects excluded, explicit once-perModule ROLE startup and separately compiled zero storage. Root live sources may continue independent integration only after snapshot capture; snapshot sources remain immutable. Accepted75/nativepending22 remains until77actualmixed/public/provenance gate.
+
+PAR06 storage provenance negative control: `.cache/native-storage-provenance-check.log` verifies unchanged separately tracked C backing is accepted and an actual deliberate backing-source mutation is rejected; no accepted snapshot was edited. Actual private77 builder command compiles tu-role-storage.c as its own memory64-O2 object under only its positive define, noLTO. ENGRAVE private2,709 preliminary comparisons observed; finalrecipe/review/shared/public pending. Next DO_NAME85/J91 reservation for its author, NHLSEL84 remains secondteam; IDs remain reservations, not completions.
+
+PAR06 queue reservation: secondteam WINDOWS86/J92 after next frozen DOGMOVE/GLYPHS handoff, with active configured inventory required before implementation; NHLSEL84 reserved there, DO_NAME85 here. ROOT private77 gate does not own/edit those pending source files. Only75TUs accepted so far.
+
+J86 ENGRAVE frozen first-pass evidence:34 original functions/order/params/comments preserved;48rubouts and9x21encoded rows are JS-authoritative with source data/literal/context checks. Necessary native-addressability adapters retain linked engraving text interiors, original private context buffers, exact64-bit clocks/size_t/long refs, uint32 seed/xint16 implicit parameter narrowing, scoped scratch, actual native packed fields and existing dependencies. Only one original exit label becomes a labelled block; no engraving policy is moved to C. Separate real native callback trampolines invoke original JS selector/occupation functions; indirect rumor RNG preserves native rn2 identity. Lazy Module-specific readonly encoded byte backing remains stable. Private actual initialized-catalogue C/imported-JS pair passes2,712 exact comparisons,16 real-growth/reentry stages and alias/lifetime/callback/status/save-call checks. Native parity, shared game/public gates and unselected world states pending. Foreign world/UI/naming/wand/save-wire-format behavior is controlled in the isolated fixture, explicitly not claimed fully verified. Native differential caught and fixed lower-case enum omission, actual hero skill stride, and bimanual class guard; fixture inventory ownership was corrected before freeze. Complete files/contracts/metadata/sourceguards/recipe/limits: .cache/engrave-integration-plan.md. Pristine and frozen harness unchanged.
+
+J91 DO_NAME reservation/inventory before implementation: actual memory64/MACOS configured source src/do_name.c retains55 original functions (1,663lines), including seven private originals; no active source omission. Planned JS-authoritative ghost/color/liquid/coyote/orc/novel name tables, original five-slot native BUFSZ buffer pool and static rndmonnam buffer with JS perModule index, live native mextra/oextra allocation/ONAME/MGIVENNAME aliases, exact reference output pointers/callback identities and source menu/getobj/UI dependencies. Original naming/article/hallucination/grammar decisions remain in JS; C only native layout/packed fields/zero storage/typed true dependencies. Existing EDIT_GETLIN and sound macro configuration preserved. Original docallcmd backward retry goto becomes the same labelled loop; exact source function boundaries/comments/strings/control retained. Own unique DO_NAME files/private EmC-first tests only; shared builders/registry/runtime and upstream/frozen remain untouched. Work not yet complete; native/shared/public parity pending. Contract/limits maintained in .cache/do_name-integration-plan.md.
+
+
+### PAR05-GLYPHS frozen first-pass handoff (2026-11-10)
+
+Location: `js/ported/glyphs{,-runtime}.js`, `nethack-c/wasm/tu-libraries/glyphs.js`,
+`scripts/tu-glyphs-{probe.c,layout.h}`, `scripts/test-tu-glyphs.mjs`, and unique
+`nethack-c/wasm/tu-fragments/glyphs-*` support/data/source guard/integration recipe.
+Prepared/pristine glyphs.c are byte-identical (1,324 lines). Actual configured
+profile includes ENHANCED_SYMBOLS, excludes TEST_GLYPHNAMES and source #if0
+alternative shuffle. All27 configured original functions/names/order/parameters/
+comments/control flow are JS; no original GLYPHS C body or initialized C data
+fallback in hybrid. JS owns enum/static/private table/array initializers and
+unsigned32 hash, size_t64 probing, parser/shuffle/Unicode/customization decisions.
+Typed C ABI exposes records/globals/header macros/dependencies/callback/formatting
+calls and exact zero-only storage (3 mutable find records,91 literals/909 bytes).
+This explicitly avoids const-zero initialized C mirrors that LLVM may fold.
+Source-private ABI assertions use only TELEPORT_GLYPHS_VALIDATE_SOURCE after the
+actual source include, never the shared generic reference flag.
+
+Behavior/evidence: isolated actual -O2 memory64 original-C↔JS hybrid (original TU
+excluded) passes41,354 comparisons and invokes all27 original source bodies.
+Cmap domain, full generated glyph-name dump/cache lookups, original duplicate ID
+lookup, source symbol catalogue, Unicode/RGB, feature gates, customization linked
+list mutation/cleanup, shuffled/duplicate-description ownership, callback
+reentry/actual heap growth, stack/environment cleanup and per-Module state are
+compared without normalization or native waivers. Optimized actual C reads see
+JS private record writes; signed32 backing witnesses pass. Source/order/params/
+all-comment/scope guards pass, with5 exact text arrays,2 offsets,6 UTF8 bytes,
+8 actual CPP format origins,91 exact literals and extracted real catalogues.
+Generic TELEPORT_REFERENCE_TU support-only syntax passes without original private
+types; wrong mirror val width is compile-rejected by actual-source assertions.
+Unchanged final suite rejects a private faulty arithmetic hash rotation:
+C3120682645 vs wrongJS4294967180. Initial differential dump caught and corrected
+a lexical generator bug which had changed a source whitespace literal; no C
+reference or expected output was relaxed. Logs/hashes/recipe live under
+`.cache/glyphs-first-pass/` and `glyphs-integration.md`.
+
+Limits: UI/configuration/assert/panic/dump/allocator interfaces are controlled
+fixtures; original prepared utf8map/coloratt/hacklib dependencies and original
+object/monster/symbol catalogues are real C. Wizard listing is callback-terminated
+after first delivered entry, separate full dump/cache generation is compared.
+OOM/cache exhaustion/every malformed input are not exhausted. Native-host,
+foreign callers, mixed game/public recordings and production artifact validation
+remain pending; historical53-suite native evidence is not extended to this TU.
+No shared registry/build/runtime/native-compatibility service/GETPOS or other
+frozen port was edited. Parent integration alone promotes this frozen recipe.
+
+RETRACTED DIAGNOSIS (corrected below), PAR06 SAVE cleanup defect/correction in progress: secondteam independently found DISP_FREEMEM negative enum sign lost through size_t→Number, then coordxy0 instead of-8. Existing fixture name-only tmp_at trace maskedargs. Root independently inspected every actual descriptor: onlynegativeDISP_FREEMEM=-8; all signeddecoded valuesNumber-safe. Live layout writer converts SAVE ordinary descriptors via BigInt.asIntN(64) before Number, with rawSIG_IGN exception retained; source algorithms unchanged. Original author corrects owned fixture/private layout checks and addsactual-arg regression. Frozen75/77 remainunchanged;77notpromoteduntilfixednextcheckpoint, public75score44remains true with statedcoveragegap.
+
+J91 inventory correction before translation: original docallcmd's single goto is forward from queued-command handling to the switch after menu construction, not a retry. Planned adaptation is therefore a labelled block break which skips exactly the original menu code. Public bogon_codes[] is read from other C TUs, so its JS-authoritative six bytes require startup population into zero-only native storage; private name buffers/tables remain lazy. Private docall_xname is an actual safe_qbuf callback and needs a distinct production native→JS trampoline; public name_ok/call_ok can retain original callable import identities. Exact source assertion in do_oname is line359, condition aname != 0.
+
+PAR06 SAVE report correction: direct inspection of actual _probe_layout_value shows -8n, not positiveuint64, because Wasm i64 returns signed BigInt bits irrespective of C size_t declaration. Existing Number(-8n) is exact; both frozen75/77 tu-layouts.json contain DISP_FREEMEM:-8. Prior root/secondteam cleanup-bug allegation was false and is retracted. No production behavior mismatch/fix was demonstrated; accepted75 remains valid and77gate mayproceed. Both-arg tmp_at traces, explicit signed-before-Number and positiveuint64carrier checks are useful stronger verification only, not a repaired game defect. No accepted snapshot changed.
+
+PAR07 ENGRAVE shared staging:34 original configured bodies/order/parameters/comments and48rubouts/9x21encoded source arrays remain JS; register/exclude original engrave.o, wire tested perModule callEngrave through actual engrave namespace, include typed support/context layout mirror. Preserve separate two production callback identities for original stylus selection/occupation, native original rn2 pointer for indirect random-text dependency, exact18RNG/3Strlen diagnostics, source-derived literal capacity and compiler ENGRAVEFILE/EPITAPHFILE plus lowercase text enums. Actual native catalogues/allocator/strings in controlled fixture; same-Module record save/restore witnesses do not prove actual save wire format. Private2,712 comparisons/sourceguards PASS; shared/mixed/public/native pending. Accepted75/77snapshots unchanged;77integration/public nowrunning afterretractionofincorrectSAVEbugclaim.
+
+
+PAR07 WINDOWS TU86/J92 configured inventory and scope before implementation: prepared and pristine src/windows.c are byte-identical (1,903 lines). Actual memory64 preprocessing, including the configured ncurses wintty.h include path, yields73 original functions. Active TTY_GRAPHICS/HANGUPHANDLING/STATUS_HILITES/CLIPPING/SYSCF/SAFERHANGUP/ENHANCED_SYMBOLS and inactive WINCHAIN/DUMPLOG/DUMPHTML/other graphics/POSITIONBAR/CHANGE_COLOR/TTY_PERM_INVENT remain unchanged. Configured dump wrappers remain; inactive dump_fmtstr is not enabled. JS will retain original functions/order/parameters/comments/control, winchoices two-row table, initialized hup_procs, private callback state, five-by-fifteen status fieldorder, twenty-byte encglyph buffer and zerowri initializer. Public volatile windowprocs, four27-element status arrays, callback identities and original full-struct copy/alias behavior require exact native zero backing and typed access, never C algorithm/table fallback. JS-authoritative public zerowri initialization must run at startup before foreign C consumers; lazy-only initialization is insufficient. Typed ABI retains unsignedlong64 window capabilities/menu behavior, signedlong64 condition/counts, time_t64, signedshort coordxy and signedchar boolean. Strict-JS reserved parameter let becomes let_ only in genl_message_menu with explicit source-checker exception. Only unique WINDOWS core/runtime/library/layout/probe/test/support/data/sourceguard/recipe and private .cache/windows-first-pass artifacts are authorized; shared builders/registry/common support/runtime and frozen ports remain root-owned. Actual original Emscripten-C versus hybrid comparison, configured-source/data/CPP/ABI/scope guards and a failing unchanged-suite negative control precede handoff. Native-host, mixed game/public recordings and foreign caller validation remain pending; no completion or equivalence is claimed by this inventory.
+
+PAR07 WINDOWS inventory clarification before translation:73 bodies classify35 public/38 internal by compiler linkage, including hup_ctrl_nhwindow with prior static declaration. ALTMETA/DEBUG are active; DLB/TERMLIB/NO_TERMS inactive, so original dlb macros remain stdio and has_color omits the inactive hilites-pointer test. window_procs has51 configured fields including46 callback slots and colors[16]. Preserve source-inline WINDOW_TYPE_MAXLEN50, gl.last_winchoice table-slot identity, volatile full-table copies before callbacks, saved exit/history callbacks, bot-disable restoration, static encglyph pointer identity, menu pointer outputs and command-queue ownership. Actual tty consumers share status arrays; invent.c copies zerowri. Their early-consumer initialization proof is required in the handoff.
+
+PAR07 GLYPHS shared staging:27 original configured source functions/order/comments/control and allhash/cache/parser/color/shuffle algorithms remain JS; register/exclude original glyphs.o, wire createGlyphsBridge/perModule glyphs dispatch, mutable zero-only native backing with optimized reader witnesses, one exact sourceprivate callback identity plus17public imports. Actualreference-private record assertions guarded only TELEPORT_GLYPHS_VALIDATE_SOURCE; no generic reference guard. Probe uses actual prepared UTF8MAP/COLORATT/HACKLIB and source-derived cataloguefixture, native-header profile,1MiBstack and private free/fprintf tracking only. Source91literals909bytes/8format origins/enum/data/hash/temporarylifetimes guarded. Private41,354 PASS plus wronghash negative; shared/game/public/native pending. GETPOS fixture retains original C glyphs oracledependency for firstpass, not a claim of JS dependency integration. SAVE stronger2023 verification addedshared probe_disp_freemem export; production implementation files unchanged.
+
+
+PAR05-TOPTEN frozen private handoff:24 original configured functions (7public/17private), pristine/prepared src/topten.c byte-identical, all original function boundaries/order/parameters and106 block comments preserved. Source algorithms,16prefixes/7record formats/29achievement cases/20conduct entries remain JS-authoritative. Typed support supplies actual memory64 fields, mutable zero-only private record backing, native libc FILE parsing/formatting and compiler-derived21 printf ABI shapes, actual dependency calls and exact RNG/Strlen/Snprintf origin. DLB=0 actual header init/cleanup remain no-ops; inactive NO_SCAN_BRACK/UPDATE_RECORD_IN_PLACE branches are not enabled. Signed64 points/dates/times/masks retain BigInt; signed32 UID and signedchar bytes narrow explicitly. Static tt_buf native alias is retained perModule; no public table requires startup. Internal readentry/xlog/output helper and three pbuf automatic lifetimes are restored at original scope exits. Source-only178string/2636byte pool, actual CPP/AST/config/type/private-layout guards, source inventory/comments, lexical scope and JS syntax checks PASS. Actual isolated -O2 memory64 EmC reference versus hybrid excluding originalTOPTEN passes9,931 unchanged state/return/trace/text comparisons, exercising all24 entries plus200record lifetime, signed64 extrema, argv writes, heap growth, reentry and separateModules. Private fixture -Dfree=teleport_probe_free and --wrap=fclose count/capture real libc allocations/streams symmetrically; production uses neither flag. Read-only negative loader removes readentry stack restoration and unchanged suite rejects the named many-record case with Wasm OOB; fixed source/expectations remain unchanged. Recipe nethack-c/wasm/tu-fragments/topten-integration.md, exact dispatcher topten-runtime-method.inc and final topten-hashes.json define parent-only integration. No shared registry/build/runtime/layout/native-compatibility/frozen port/production artifact was changed. Limits: controlled path/lock/date/depth/rank/name/world/UI/RNG dependencies; native-host, full-game/public recordings, actual named/durable scorefile IO/concurrent locking/close failures, all allocator failures and every path/profile remain pending. Synthetic JS throw verifies binding stack/environment cleanup but cannot unwind outer C fixture frame; test explicitly restores its own outer frame after checking. TELEPORT_NATIVE_TESTS=1 rejects this staged EmC fixture rather than reporting native success.
+
+
+PAR07 NHLSEL TU84/J90 inventory/scope before implementation: exact source src/nhlsel.c (its header says nhlua.c) is1,051lines, pristine/prepared byte-identical SHA256ce93cdb316eb18ae4ad32238076ab61cec319973a5cff049ce95289a54239ec5. Actual memory64 compiler configures33 bodies:3public l_selection_check/l_selection_push_copy/l_selection_register and30private; original #if0 l_selection_to/ipairs stay disabled. Preserve all98block comments,66literals/653UTF8+NUL bytes and zero direct TU RNG origins. Original methods25rows including sentinel, meta9including sentinel, growdirs/growdirs2i7each and gradtypes/gradtypes2i3each are JS-authoritative. Actual Lua5.4.8 dependency ABI retains signed64lua_Integer/doublelua_Number, memory64pointers, signedshort16coordxy/signedchar8boolean, native selection int32dimensions/bounds/map pointer. Preserve source userdata ownership/GC/deep map copies, original Lua stack/macros/option behavior, callback alias ties (__add/__bor and area/fillrect), source SP_COORD_PACK byte masking and signed64result, exact header random-pack expansion and forward iterator early-exit control. Native zero-only callback/option backing is populated from JS before registration; no early foreign source data requires a global startup hook. Real Lua C APIs and original selvar/mapfrag dependencies remain actual where feasible; controlled world/nhlua effects must be listed explicitly. C helpers may supply typed ABI/header expansion/true dependencies/zero storage only, never original selection algorithms or initialized registration tables. Automatic NhRect/coord/output and per-point storage must retain source lifetime under LuaGC/reentry. Only unique NHLSEL source/runtime/library/layout/probe/test/metadata/support/recipe and private artifacts are authorized; shared builders/runtime/support, Lua subsystem and frozen ports stay untouched. Actual original EmC/hybrid comparisons, source/comment/order/parameter/data/CPP/type/scope guards and an unchanged-oracle wrong-code negative control precede handoff. Native-host/mixed-game/public and complete foreign-world behavior remain pending, with no count/equivalence claim from inventory alone.
+
+PAR06 final77acceptance: `.cache/tu77-gate-snapshot/acceptance.json`, Wasmec9f44af668e683a2f3b7c9e1e65e9d1ae607a14c5dfafb11d5807c1b97214a0;784sourcesunchanged,338declaredhashespass, integrationretryPASS and44/44public every792838RNG/11405screens,cells,cursors/1483animationsexact. Initial concurrenttimezoneETIMEDOUT retained, no testlimit/oracle/harnesschanges. Actualimports16MTHROWU/14ROLE withnativezeroROLEstoragecompiledseparately andoriginalobjects/privatealiasesabsent. Nativepending24. Next79sourcefreeze usesLuaowner default-JS/fallback changes afterindependent44public/378level/3wizard/full-dependency gates; normal rebuildselectsJSLua, explicit--c-lua retainsC and--c-dependencies impliesC unless--js-lua requested. DevelopmentC-Luareferencearchive remains available forQUESTPGR probes butisnotlinkedtoJSgame. No accepted snapshot is edited.
+
+
+PAR07 CFGFILES TU87/J93 configured inventory and scope before implementation: src/cfgfiles.c is2,076lines/54,661bytes, pristine=prepared SHA25602b8a704da0e0fa86fd085ef0ce81bd7c60edde0d70ae937a9411de07e95ab47. Actual memory64 CPP/AST yields92 source-owned bodies (23external/69static), no header-generated bodies. Original config_error_add/vconfig_error_add are configured here despite a stale moved-to-pline comment. JS will retain all original functions/order/parameters/comments/control and eight static-data objects: two ignore flags, default_configfile .nethackrc, configfile[256], const59-row config_line_stmt with original callback identities, disregarded_config_lines[59], and error frame/message roots. Six automatic buffers retain source sizes256/256/105uchar/1024/128/1280 and lifetimes. The59-row source table is JS-authoritative, with native zero-only callback/descriptor backing if required; avoid constzero reader folding or initialized C table mirrors. Actual UNIX/MACOS/SYSCF/SYSCF_FILE=sysconf/DEBUG/PANICTRACE/STATUS_HILITES remain enabled; NOCWD_ASSUMPTIONS/SFCTOOL/USER_SOUNDS/DUMPLOG/QT_GRAPHICS/__APPLE__ remain disabled. Preserve one rn2 choose_random_part origin atline480,72 referenced dependency names including2builtins,73 accessed native fields, source parser pointer slicing/mutation/continuations, nested reentrant parse file/string callbacks, exact file/errno behavior and native error frame/message ownership including Lua error-table exports. Typed adapters retain memory64 va_list void pointer, signed/unsignedlong64 and size_t64, actual stdio/formatting and real Lua5.4 C API dependencies; no parser/control algorithm moves to C and no Lua subsystem replacement/edit is in scope. Only unique CFGFILES core/runtime/library/layout/probe/test/support/data/metadata/sourceguard/recipe/private cache artifacts are authorized; shared generators/runtime/registry/common support and frozen ports stay untouched. Private actual original EmC versus imported-JS links must exclude original bodies and compare parsing/file/error/state/callback/lifetime behavior with controlled dependency limits listed explicitly, plus configured source/data/CPP/type/scope guards and unchanged-oracle injected-regression rejection. Native-host, production/full-world/public recording checks remain pending, with no equivalence claim from inventory or build alone.
+
+PAR07 TOPTEN/DOGMOVE shared staging:24ranking/file/parser/conduct/achievement functions and20pet-AI source functions register with originalCobjects excluded; original boundaries/comments/control/data stayJS. TOPTEN perModule native aliases/argv/file streams use exact tested dispatcher, 178source literal/21varargshape/3RNG/formattermetadata guard; actual stdio/HACKLIB/ROLE/STRUTIL in controlled filefixture, production free/fclose unwrapped. DOGMOVE exact typed args/canonicalperModule pointers/stackscopes/BigIntscore return and native wantdoor callback retained; nofetch4/qm9/persistentmutable dummy/source25RNG withlazybound/164ABI assertions guarded. Probe support compiledonce, no originalfallback; signedordinarymetadata retained. Private9,931/2,429 PASS; shared/game/public/nativepending. Next normal ACTIVE root81+JS-Lua build will hold selectedregistry/runtime frozen through gates; sixauthorscontinueunregisteredprivatefiles. No old79runtimecopiedovernew81source.
+
+PAR07 NHLSEL unresolved source defect observed during actual Lua comparison: configured Lua5.4.8 lvm.c invokes unary TM_UNM/TM_BNOT with the same rb operand twice. In original pristine=prepared nhlsel.c l_selection_clone, sel=check(1), a new userdata is pushed, tmp=check(2), tmp->map is freed, then sel->map is copied by dupstr. With those two original arguments aliased, tmp==sel and the copy reads freed storage. Ordinary-allocator original-C and JS runs both corrupt the original selection but produce differing allocator-dependent bytes. This path is a retained failing diagnostic, not passing equivalence or a platform waiver. Defined one-argument/new forms and binary paths are tested separately; no complete unary/full NHLSEL parity is claimed. The author is recording actual alias and free-before-copy event witnesses and preserving raw failure artifacts. No upstream/source algorithm, expected maps, allocator or selected81 production file is changed to hide this defect. Native-host characterization remains pending.
+
+PAR07 NHLSEL actual failure provenance: .cache/nhlsel-uaf-evidence/{upstream-uaf-program.lua,upstream-uaf-raw.json,upstream-uaf-events.log,failing-run.log} preserve the ordinary-allocator failing program, full unnormalized reference/hybrid outputs and actual dependency events. Both actual traces end free:argalias1:map11:map21;dupstr:argalias1:map11:map21:after-free1. Symmetric wrappers call __real_free/__real_dupstr; no allocator quarantine. Original modules and eight owned/build source copies are frozen there. Independent verification of177all-input-hashes entries, substituting only frozen source-snapshot copies for those eight recorded owned paths, reports zero mismatches; manifest SHA2565a0805776628045c72ef7f1b7d035fc0685ccd557c737816174cd0595a553706, rawJSON2667f042e88c9f1c1991dd2a8ec43dcff4bc8ad524fcff36e83fde26afdf9257. Later live owned sources may evolve for defined-corpus tests; frozen copies remain the failing-case inputs. Lua owner confirms production unaryG retains [value,value] for both operators, so no caller adjustment hides the source alias/UAF. This is diagnostic proof, not a repaired source defect or passing native/full unary parity.
+
+J91 DO_NAME TU85 first-pass implementation detail: all55 configured original functions/order/parameters and every original block comment now retained in readable JS, with seven source tables (five file constants/two original local constants) JS-authoritative and source data guard. Necessary representation adapters use native pointer cells for short artifact output, char bogus-name code, object-pointer output, class oc_uname and menu records; native full object/anything/queued-command byte copies preserve padding and aliases. Eight-bit char formal narrowing, exact header glyph pile-boundary exclusion, pointer-to-row visibility lookup and temporary Hallucination-resistance/minvis state are explicit live-field adapters. Original forward docallcmd goto becomes labelled block break at identical switch, not a retry. Static five-buffer row counter is peractualModule JS and zero-only native buffers retain aliasing; public bogon_codes zero6bytes is JS-populated at startup for native rumor consumers. Native safe_qbuf/getobj callback identities and distinct live docall_xname trampoline call original JS functions; no naming policies added to C. Own memory64 C-versus-JS fixture currently1496 exact comparisons across all55 entries/17proven growth+reentry stages passes. The fixture initializes original name allocator's uninitialized storage as a caller before inspecting strings; no undefined byte comparisons. Foreign names/grammar/artifacts/map/UI/wipeout are controlled dependencies explicitly limited in .cache/do_name-integration-plan.md; native host/shared game/public gates remain pending. All original files/frozen harness unchanged. Final guards and freeze pending.
+
+PAR07 actual81 first-candidate wiring failure: preserved `.cache/81-first-candidate` artifact/source snapshot +timezone trace. ROOT omitted third dogmove namespace argument when calling createDogmoveEnvironment; component test correctly suppliedit. Real replay failed TypeError reading nofetch in1.77s; no Lua/performance defect inferred. Correct centralcall passes original JS namespace, withno frozencomponent/core changes. Add development-only Acorn required-factory-argument checker, hooked into shared layout generation; actual oldcall negative +missingnamespacefixture reject, fixedcalls pendingverification. Doesnotchange contestharness, sourcepolicy or replayexpectations. Selected81/Lua inputs stayfrozen exceptthisannouncedrootwiring/toolrepair; freshcoherentbuild/gates required.
+
+J91 DO_NAME final first-pass handoff:1,519 exact EmC state/trace/result/scratch comparisons PASS; all55 original function inventories/parameters/order/comments and Acornscope plus native-width/configuration/data/source guards PASS. Final cases independently observe old returned buffer overwrites after five rows and separateModule storage, signedchar256→0, real header glyphboundary exclusions, and17actual nativecallback stages with measured memory growth/reentry. A deliberate JS-only obj_pmname output change is rejected against unchanged originalC, proving comparator sensitivity. No originalC/frozen/backend changes, no native-host/full-game/public equivalence claim; those remain root/backlog gates. FROZEN files and full isolated/shared integration recipe are listed in .cache/do_name-integration-plan.md; native char buffers/public bogon zero storage stayABI-only and all original naming policies/data remainJS.
+
+NHLOBJ TU83/J89 frozen private first-pass handoff:21 original configured functions (3public/18private), all original boundaries/order/parameters/block comments and both Lua registration tables (16methods/2meta including NULL sentinels) retain JS authority. Source-only local class→class_ is the necessary strict-JS rename; no parameter waiver. Source lobj_is_ok and Lua header macros expand at original/body or ABI boundary respectively; native pointer equality, signed coordinate/boolean address cells and scoped buffers preserve aliases/lifetimes. Private mutable zero-only luaL_Reg backing is lazily populated before first consumer peractualModule;16 distinct native Lua CFunction trampolines invoke the same original JS functions with no policy in C. Original unsigned32 object refs, signedint refs temporaries, signed64 quantities/masks/timers/Lua integers and source inventory-merge/null-next quirks remain unchanged. Actual unmodified C Lua5.4.8 plus original nhlua/sp_lev/drawing/hack/cmd/objects/monst/alloc/hacklib/strutil dependencies compare against importedJS in isolated memory64 builds:2,787 exact state/bytes/identity/return/trace/Lua text comparisons PASS, including real userdata/GC/protected metatables, all object-class rows, timers/errors, callback growth/reentry,96 buffer lifetimes and Module isolation. Source/data/scope/type/syntax guards pass; unchanged unit rejects injected wrong refcount increment (native1 vsfaultyJS2). Details/exports/build flags/frozen hashes in .cache/nhlobj-integration-plan.md; artifacts .cache/nhlobj-author. Controlled external object/name/transfer/merge/weight/timer/bury/UI world is explicitly limited; actual Lua allocator/VM/errors and native catalogues/geometry/parser dependencies are real. Source invalid-null burial/undefined pointer inputs are not repaired/tested as valid. Native-host/shared game/public/production JS-Lua integration remain pending; no shared registry/build/runtime/Lua service/frozen earlier port changed. Parent alone promotes this frozen recipe.
+
+PAR07 CFGFILES macro filename provenance correction before changing private compilation: the initial isolated3309-handler corpus exposed debugcore __FILE__ spelling differences from fixture include paths (absolute scripts/../prepared/src/cfgfiles.c) versus direct-relative AST preprocessing (.cache/.../src/cfgfiles.c). Neither arbitrary spelling defines production. Read-only inspection confirms build.py runs make in TREE/src, Makefile compiles the cfgfiles.c prerequisite via $<, with no file/macro-prefix-map, hence actual production macro filename is cfgfiles.c. The unique/private JS extractor will use the same basename/cwd source spelling; private included-source compilation may apply an exact narrowly scoped macro-prefix-map to that production basename. Full debugcore filename observation and initial raw mismatch remain retained; no trace normalization, expected waiver or shared production flag is authorized. Fresh production-equivalent CPP verification and differential rerun are required before a pass claim.
+
+
+PAR07-NHLSEL source translation frozen for handoff, parity INCOMPLETE:33 configured original bodies (3public/30private including28 Lua callbacks), all98 comments/order/parameters/control and source tables retained in js/ported/nhlsel.js. Pristine/prepared1,051line src/nhlsel.c bytes are identical. Typed runtime/library/support preserve memory64 pointer, signed64 LuaInteger/long, signedshort16 coordinates, signedchar8 terrain/boolean, full struct+deep map copies, exact Lua stack/header macros and perModule callback/option identities with JS-authoritative mutable zero backing. No startup is needed for private tables; actual consumers run only after population. Actual -O2 memory64 original-C and hybrid excluding original NHLSEL compile with actual prepared Lua5.4.8/selvar/rect/sp_lev/nhlua/hacklib/alloc/strutil dependencies.734 defined-corpus state/return/trace/lifetime comparisons PASS, all33 entries exercised, including signed64 extrema, clone independence, actual Lua errors/GC/mapfragment/options/callbacks, signed terrain,13,272 repeated iterator callbacks, heap growth/reentry/separateModules. Original data/CPP/AST/type/reference-table assertions/source-comments/scope/JSsyntax guards pass. Read-only wrong getpoint x+1 negative fails unchanged C trace (5,6/393221 versus6,6/393222), retained .cache/nhlsel-wrong-point-negative.log. Synthetic foreign JS throw verifies environment and binding-finally stack restoration; subsequent Lua invoke frame handling is not general native unwinding, and fixture resets only its own interrupted outer frame.
+
+Retained NHLSEL unary failure is NOT passed/normalized/repaired: original nhlsel.c138/142/144/146 with not270-273 and Lua lvm.c1555/1566 aliases both userdata args, frees shared map then dupstr reads freed bytes. Ordinary-allocator C/JS outputs differ; identical actual alias/free-before-duplicate events and raw outputs/modules/8source snapshot/177input hashes remain immutable at .cache/nhlsel-uaf-evidence. Separate .cache/nhlsel-uaf-replay copies those frozen inputs plus explicitly captured c-runtime.js helper (missing from initial177manifest), hashes every replay input and imports no evolving live NHLSEL runtime/test. Verified `python3 -B nethack-c/wasm/tu-fragments/nhlsel-replay-uaf.py` retains exit1 and reproduces differing map/bounds plus identical actual dependency witness. Replay log/raw files live outside immutable evidence. Defined-corpus passing count excludes this expressly unresolved undefined-memory path and does not imply whole unary/TU acceptance.
+
+Integration recipe nethack-c/wasm/tu-fragments/nhlsel-integration.md, exact dispatcher nhlsel-runtime-method.inc and nhlsel-hashes.json are parent-only staging inputs; shared selected81 freeze/registry/build/runtime/support/production/nativecompatibility/frozen ports unchanged. Fixture-only --wrap=get_location_coord/nhl_pcall_handle controls world/callback policy while executing actual Lua; --wrap=free/dupstr observes real ordinary operations symmetrically with no quarantine. Production uses none of those flags. Limitations: controlled world/callback failure policy, no exhaustive Lua allocation/OOM/coroutine/every malformed argument proof, source unary/alias UAF unresolved, native-host/full-game/public recordings/cross-TU and production verification pending. Staged TELEPORT_NATIVE_TESTS=1 explicitly rejects rather than counting EmC as native.
+
+J96 DOKICK TU90 inventory before implementation: collision-free src/dokick.c1,971lines has22original source functions (kicking, objectimpact and interleveldelivery), one forward goto kick_monster→doit, immutable kick_passes_thru and local flyingcoinmsg strings, no discovered mutable TUstaticstate. All original boundaries/params/order/comments/locals/control will remain readableJS. TU is_bigfoot/martial macros expandinline at their original expression sites; localDELIVER_PM mask staysJS; no kicking/ship/shop logic moves into C. Necessary native ABI adapters retain live gk.kickedobj/gg.gate_str/list/equipment pointers, whole native local records and outputrefs, ESHKlong64bill state, char8/coord16/int32/long64 conversions, actual combat/trap/shop/map/format/RNG dependencies and source attribution. Single forwardjump becomes labelledblockbreak atsame source point. Only unique DOKICK core/runtime/support/library/layout/probe/unit/guard/private recipe files owned here; no frozen/prepared/upstream/sharedbuild/backend/oracle changes. Actual EmC-C versus imported-JS private tests and explicit foreignfixture limits required; native/shared/public gates pending. Heavy private builds coordinated with root during separate Lua performance run.
+
+PAR07 ENGRAVE adapter cache promotion: profiling the actual corrected81-TU New York worker identified repeated createEngraveEnvironment construction (about6.07s self time), rather than Lua execution, as the largest measured hotspot. js/ported/engrave-runtime.js now caches only that wrapper environment by actual Module and layout identity; dynamic native-field/heap getters and per-call stack save/restore remain unchanged. Original engraving functions/data/control flow and frozen contest harness/timeouts are unchanged. Reviewed private candidate SHA2565302ab1e65187ba80f2d45e7ccda27f37479cca1adfdbbed94294bc010434c6c passes2,712 EmC differential comparisons, including16 actual growth/reentry stages and separate instances, and the exact New York worker in22.430s under the unchanged30s deadline (baseline profiled30.395s). Evidence .cache/js-lua-perf; fresh coherent selected81 build/integration/public gates pending. Native ENGRAVE fixture is not available, so no native parity claim. An attempted missing-fixture native check wrote a failure to the rolling .cache/native-tu-results.json; that file is not accepted historical evidence. Original immutable native-existing run reports remain preserved. Lua46 production inputs remain frozen.
+
+PAR07 factory argument guard verified: scripts/check-tu-dispatch.mjs passes84 actual central calls and rejects the missing-namespace negative fixture (.cache/81-factory-arity-fixed.log). Unixtty has an explicitly optional fourth vaPointer supplied alternatively through packet.nativeVaList; its narrow checker rule verifies both function arity4 and the actual fallback expression before accepting3 arguments. No general argument waiver or component source change is applied. Spread calls and value/type correctness remain outside this static check; actual replay gates are still required.
+
+DIG TU89/J95 inventory before implementation: actual configured src/dig.c has34 source-owned functions across2,329 lines, with two forward goto cleanup sites inside private dig occupation, no mutable TU static state and no startup catalogue. Preserve every original function/order/parameter/local/comment/control branch. Original dig_types enum is JS-authoritative; local readonly d_target six-string table and other local literals stay in original scope with stable native literal addresses where used as pointers. Planned necessary control adaptation is a labelled block covering only the dig.effort>100 work before cleanup; the two original gotos break to the single original cleanup tail without new state flag/helper or duplicate policy. Private dig occupation and watchman_canseeu callback tokens require native ABI trampolines back into the same original JS functions, with unknown occupation identities preserved raw64. Typed layout/bitfield/cell adapters retain native coordinates/boolean fields, integer compound stores, signed64 time/masks/object quantities, actual inventory/floor/buried object ownership and fresh views after native callbacks/growth. Native terrain/object/monster/UI/vision/effect dependencies remain dependencies; no DIG algorithm in C/runtime helpers. Only unique DIG core/runtime/library/support/layout/fixture/test/sourceguard/private-recipe files and this append are owned; shared registry/build/runtime/Lua/frozen ports stay untouched. Isolated original EmC-C versus hybrid component evidence plus source/data/scope/type/negative guards precedes parent-only mixed-game integration. Native-host/public/full-world parity remains pending; this inventory claims no validation.
+
+PAR07 cache scope: generated service objects may be recreated, but configured callers provide equivalent closures over the same Module exports, live heap and literal state. Caching by Module/layout consequently retains those equivalent first closures. Deliberately replacing callback behavior under the same Module/layout identity is not supported by this cache and is not claimed; memory growth/reentry and separate Modules remain tested. Unregistered author files can change outside the selected81 import closure without changing this production gate.
+
+RESTORE TU82/J88 frozen isolated first pass: all32 original functions/order/parameters/blockcomments retained, 1,063 actual EmC-C versus imported-JS comparisons pass with warning-free private builds. Native bucket/list/union/scratch/output-reference transport preserves original widths and whole-record bytes; pointer ID arguments narrow unsigned32, private level arguments narrow signed8, original assigned-level guards and DEBUG message-state restoration remain in JS at their original sites. A read-only wrong-portal-endpoint mutation is rejected, with source hash unchanged. Actual original catalogues/hacklib and native allocation/free backing are used; scripted typed serializer inputs and controlled world/UI/status effects are fixture limits, not a full savefile/backend or native-host claim. Exact frozen files/exports/flags/evidence are in .cache/restore-integration-plan.md; parent shared/mixed/public integration is pending. No DLB flag or empty-object port was added.
+
+VISION TU91/J97 inventory before implementation: actual configured src/vision.c has19 functions across2,200 lines (11 public/8 private), with MACRO_CPATH active and EXTEND_SPINE inactive. Preserve original function/order/parameters/local names/comments and Algorithm C in readable JS; the four configured q?_path macro bodies expand inline at their original call sites, with their forward exits converted only into labelled-block breaks, without adding quadrant helper functions or changing the compiler flag. Two vision_recalc forward cleanup jumps require local labelled blocks and one original common tail. circle_data137 and circle_start16 become authoritative JS readonly data with zero native backing for existing light.c consumers. Mutable workspace/row pointers must remain addressable and aliased by native gv.viz_array/rmin/rmax and callbacks, with actual Module ownership and fresh views after growth. Native dependencies retain their ABI/control boundaries; no vision algorithm moves into C helpers. Only unique VISION files/private outputs and this append are owned; selected/shared/Lua/registry/build defaults remain untouched. EmC-first isolated checks, source/schema/data/negative controls and explicit fixture limits precede parent mixed/public gates; native-host checks remain deferred.
+
+
+PAR08 MKMAZE TU88/J94 inventory/scope before implementation: src/mkmaze.c pristine=prepared2,110lines SHA256a2d6341107238f6e45b9305854f5dd4a34427f381558d9ecbc91578acdfbcab0. Actual production-equivalent memory64 -O2 CPP/AST uses forced native-terminal.h, ncurses include, prepared TREE/src cwd and basename mkmaze.c; all compiler captures exit0 with empty diagnostics.44configured functions22public/22private, exact names/order/parameters/linkage in .cache/mkmaze-first-pass/functions.json; complete data/dependency/lifetime proof in inventory-notes.txt. SFCTOOL/MICRO/EXTRA_SANITY_CHECKS remain inactive; recursive walkfrom active. PANICTRACE is active through headers despite NOPANICTRACE input. JS owns all original maze/wall/special-level/orc-booty/bubble algorithms, source macros/control/comments and14static initializers: spine_array[16],orcfruit[2],hero_bubble,water_pos/air_pos/up,bm2..bm8/bmask[7]. Packed full rm assignments, fixed bitmap bytes, stable literal/data aliases and perModule persistent hero_bubble/up are preserved; C provides typed ABI/true dependency/header/zero backing only, no algorithm or initialized table mirror. Preserve72actual RNG recorder origins including multiline1136/1144/1152 and same-line distinct draws; source lazy evaluation/order remains observable. Typed native views retain signedshort coordxy/signedchar boolean/typ, long/size_t/pointer64, packed rm8/bubble40/container24/NHFILE88 and29global roots/105trueexternal functions. Local loc_f selects only owned JS wall predicates and does not escape. Automatic addressable coordinates/levels/refs/buffers and per-recursive-frame dirs retain lifetime; native bubble/container doubly-linked ownership, full native cell copies and typed save/restore bytes remain source-faithful. Original forward joins,200tries then scan, traversal order toggles and edge behavior are preserved without unsolicited hardening. Scope is unique MKMAZE core/runtime/library/layout/probe/test/support/data/sourceguard/recipe and private artifacts only; no selected81/shared/frozen files. During current integration quiet window, source-only work is authorized; heavy compile/tests wait for root clear. Afterwards actual original EmC/imported-JS -O2 links excluding original TU, full-map recursion/bubble/serialization/callback/lifetime/64bit/Module witnesses, source/data/CPP/type/RNG/scope guards and unchanged-oracle injected regression must precede handoff. Native-host/full-game/public/complete foreign-world behavior remains pending and must not be inferred from inventory or build success.
+
+
+### PAR07-WINDOWS frozen first-pass handoff (2026-11-10)
+
+Location: `js/ported/windows{,-runtime}.js`, `nethack-c/wasm/tu-libraries/windows.js`,
+`scripts/tu-windows-{probe.c,layout.h}`, `scripts/test-tu-windows.mjs`, unique
+`nethack-c/wasm/tu-fragments/windows-*` typed support/source-data/independent C
+consumer/guard/integration recipe. Prepared/pristine windows.c are byte-identical
+(1,903 lines). Actual TTY/HANGUPHANDLING/STATUS_HILITES/CLIPPING/SYSCF/SAFERHANGUP/
+ENHANCED_SYMBOLS/ALTMETA/DEBUG profile has73 configured bodies (35 public/38
+internal, including inherited-static hup_ctrl_nhwindow). WINCHAIN/DUMPLOG/DUMPHTML/
+other graphics/POSITIONBAR/CHANGE_COLOR/TTY_PERM_INVENT/DLB/TERMLIB/NO_TERMS inactive.
+All original configured names/order/parameters/comments/control flow/algorithms
+remain JS, with only genl_message_menu C parameter `let` escaped as `let_`.
+JS owns winchoices,HUP callback table,5x15 fieldorder,zerowri initializer,private
+state and static buffer semantics. No original WINDOWS C body or initialized C
+data mirror in hybrid. Typed ABI/header/dependency C only, mutable zero-only
+public symbols retain volatile windowprocs/shared tty status-array/zerowri
+addresses; full volatile proc copies precede original callbacks.91 services,
+51 proc fields/46 callback signatures,18 live globals,43 literals/662 exact
+zero-only bytes and20-byte encbuf. Owned addOnInit startup calls central windows
+initialize before main/normal C callers; no arbitrary pre-addOnInit foreign
+constructor ordering claim. Actual zerowri is mutable, so no const storage TU.
+
+Evidence: final actual -O2 memory64 original-C↔JS suite passes9,209 comparisons,
+all73 bodies invoked. Independently compiled optimized C invent-like full
+zerowri copy reads NO_COLOR before explicit init/first WINDOWS body; shared tty
+status aliases and >53-bit signed flags/unsigned capabilities/counts tested.
+All46 callback identities after choose/hangup/dump copying, previous-interface
+exit/history, status layout/conditions/public-array mutation, glyph encodings/
+static alias, class/color/select paths, actual CMDQ_KEY ownership, controlled
+file/dump behavior,1,200 menu entries with real C callback-relative stack proof,
+heap growth/reentry/foreign throw environment cleanup and Module isolation pass.
+Source/comment/name/order/parameter/scope and fresh actual CPP/data guards pass.
+Wrong startup NO_COLOR0 is rejected by unchanged C consumer (0 vs8); wrong
+internal stack restoration is rejected by unchanged C trace (0 vs-32,-64,...).
+Wrong private choice size is compile-rejected; generic reference support syntax
+passes with private assertions gated solely on WINDOWS-specific source flag.
+
+Final origin audit found earlier debug fixture basename normalization had hidden
+raw include-path spelling differences. Historical raw binaries/coverage gap are
+preserved in debug-origin-coverage-gap.json. Parent verified production make
+compiles windows.c from TREE/src; fresh CPP confirms __FILE__=`windows.c`.
+Only private fixture uses exact macro-prefix-map from artificial included path
+to that basename; typed source-data header agrees, no production flags changed.
+Fixture now compares full file bytes. Rebuilt original/hybrid literals exactly
+windows.c and final9209/negatives pass; debug-origin-proof.json records both
+hashes. Earlier basename-only score is not claimed as exact-origin coverage.
+
+Configured NONNULLPTRS on genl_status_enablefield covers pointer args2/3;
+inherited actual Clang NonNullAttr and -Werror=nonnull prove null fmt arg3 is
+invalid. Its original O2 mismatch remains invalid-null-enablefield.log. Separate
+valid test calls with nonnull fmt, then mutates public status_fieldfmt alias to
+NULL and compares original update fallback; not claimed as null-enablefield
+coverage. No C oracle/expected-result normalization or native waiver.
+
+Limits: UI/stdio/regex/map_glyphinfo/allocator/queue are controlled foreign fixtures;
+actual drawing/hacklib dependencies linked. DUMPLOG stays off; private FILE pointer
+injection tests configured wrappers without claiming enabled dump facilities.
+Malformed inputs/OOM/native-host/real foreign tty+invent end-to-end/mixed game/
+public recordings remain unverified; historical native53 proof is not extended.
+Foreign JS throws are diagnostic, not a native C exception claim. Shared selected
+81 files/registry/builders/common runtime/other frozen ports untouched. Parent
+promotion remains unapplied. Recipe and final hashes: windows-integration.md,
+`.cache/windows-first-pass/input-hashes.json`.
+
+PAR07 DOGMOVE closed-door defect and correction: the failed81 root bundle scores43/44, with seed0014 first RNG divergence at index17324/step441 (native dog_goal575 rn2(4), JS dog_goal554 rn2(8)); no exception/timeout. Original rm.h defines doormask as flags, but dogmove-runtime.js omitted that alias while can_reach_location retained the original .doormask expression. Undefined bitwise masking allowed closed/locked doors through reachability. Add a live getter/setter alias to the existing compiler-described rm.flags field; no source function/data/control/RNG policy changes. scripts/test-tu-dogmove.mjs adds an actual obstructed column with its sole doorway open/closed/locked/combined using measured constants/record locations: unchanged C rejects the old JS return1 versus native0. Fixed original-C/hybrid suite passes2,469 comparisons; private unchanged frozen scorer exactly matches seed0014 all59,178 RNG,714screens/cells/cursors and995animations. Evidence .cache/dogmove-door-diagnostic/{promotion.json,closed-door-baseline.log,closed-door-fixed.log,scorer-one.json,baseline-raw.json,candidate-raw.json}; failed560-input81 bundle remains immutable. Selected adapter promotion is announced; fresh normal build and full integration/public gates pending, native-host parity pending. No frozen harness/reference/source/oracle adjustment.
+
+
+PAR07-WINDOWS final runner/provenance clarification: direct
+`TELEPORT_NATIVE_TESTS=1` now fails before Module creation because there is no
+native fixture backend; explicit first-pass shared invocation must set
+`WINDOWS_PROBE_DIR=.cache/tu-probes TELEPORT_NATIVE_TESTS=0` to avoid accidentally
+reusing private artifacts. Final unchanged first-pass suite still passes9,209,
+startup/scope negatives still reject. For the historical debug-origin gap,
+JSON preserves the old binary SHA256 values and extracted raw filename strings,
+not the complete previous binary byte files (which the targeted rebuild
+replaced). Current full binaries and exact-origin proof are preserved and
+hashed. This corrects the earlier shorthand “raw binaries ... in JSON”.
+
+J96 DOKICK ABI audit detail before first-pass freeze: native schema independently asserts actualfield widths/signs (including int32hero dx/dy and uint32permonst.cwt), and the runtime retains true native is_unpaid/In_mines/Is_botlevel dependencies rather than substituting predicates. Public gg.gate_str is a native character-pointer field; original JS source literal assignments intern stable Module-local native strings while preserving NULL and avoiding any fixed gate-text decision in C. Two original watchman callbacks use distinct live imports through actual native iterator calls; fixed native naming callback identities and bhit's two originalNULLcallbacks/native &gk.kickedobj cell remain typed ABI. Fixture RNG output retains the entire filename; private compiler prefix-maps the exact actual source include prefix to original productionbasename dokick.c, instead of stripping trace paths or guessing oracle text. Private source/ABI authoring continues while shared timing/test work pauses heavy local runs; no passingfull/native/publicclaim yet.
+
+VISION91/J97 implementation adaptations before final tests: original Algorithm C and four active quadrant macro bodies remain in the19 JS functions; forward exits use only labelled local blocks, with the original common refresh tail and dark-square update tail retained once. Original setter-macro assertions retain native __assert_fail expression/function/line transport. Native array proxies and scalar references preserve true pointer aliases and signed8/coord16 storage; original `(boolean) canseemon` explicitly narrows signed8. Terrain doormask is the original rm.flags alias, and NULL optional range pointers remain0 rather than truthy wrappers. Twelve native globals are addressable, with private workspaces zero-backed because native gv exposes their live row/range pointers. Both circle catalogues are JS-authoritative; a dedicated zero-only tu-vision-storage.c must compile separately, without LTO, so optimized foreign readers cannot fold zeros. Production helper code contains no visibility policy. Current measured preliminary run26,966 EmC comparisons passed before final signed-boolean/startup-constructor witnesses; final evidence remains pending, and no shared/public/native claims are made.
+
+J96 DOKICK C-logical representation correction announced before edit: original C &&/|| values are canonicalint0/1, whereas JS can return the last operand (notably native strchr's pointer when passed to stolen_value's boolean parameter). The readable JS TU will explicitly apply Number(Boolean(...)) only to value-observed original logical expressions (assignment/argument/return/numeric use); direct if/loop/conditional tests already have matching truth semantics and remain unchanged. Short-circuiting, operand order and evaluation counts are retained, with no new TU helper function and no C policy fallback. Raw native boolean parameter conversions still preserve signedbyte lowbits; this fix targets logical operators specifically rather than blanket normalizing all C.boolean inputs. First-pass full replay pending after rootquietwindow.
+
+
+PAR08 TELEPORT TU95/J101 inventory/scope before implementation: src/teleport.c pristine=prepared2,294lines SHA256e1d9d4255ac148caa4618dc4f275ddf5417d2a2830beca738c3821cf7678e5c8. Actual production memory64 CPP/AST uses forced native-terminal.h, ncurses include, TREE/src cwd and basename teleport.c;37configured bodies28public/9private, exact source order/signatures/linkage in .cache/teleport-first-pass/inventory.md and schema.json. Source-defined NEW_ENEXTO stays active, old MAX_GOOD15 branch and #if0 bodies inactive; DEBUG/runtime wizard behavior unchanged. Fresh configured CPP proves22active RNG recorder sites (raw23minusoldbranch), with original closing lines including header rn1 expansion2118; exact list retained in inventory. JS preserves original functions/names/order/parameters/comments/control, source-local spell/menu macros and three static objects: dotelecmd tports[4], level_tele get_there_from[19], tele_trap recursion guard. No public initialized source data requires startup. Typed native ABI retains coordxy16/boolean8signed, mmflags_nht/rlocflags/cc_flags/trflags32unsigned, property/move/stasis/mstate/ref masks64signed and monster flags/strategy64unsigned. Preserve canonical addresses of hero/monster species/native map/list/object/stair/epri/eshk aliases; monster/object deletion, revival and trap callbacks retain source lifetime and ownership. Native-addressable whole-map coordinate arrays, zero-monster copies, ball-drag outputs, rooms/menu pointers/buffers/levels require source-scoped storage, including repeated calls. Original collect_coords boolean filter and private m_blocks_teleporting native callback identity are retained; dynamic window callbacks remain live typed ABI. Original goto joins and all placement/retry/level/control policies remain source-faithful JS, without unsolicited repairs or C algorithm/table fallback. Only unique TELEPORT source/runtime/library/layout/probe/test/support/data/sourceguard/recipe/private outputs are authorized. Current quiet window permits source-only work; heavy compiles/tests wait for clear. Afterwards actual original EmC/hybrid links must exclude teleport.c and compare source behavior, aliases/typed pointer-only representation, full RNG provenance, widths, callbacks/growth/reentry/stack/Module state, plus source/data/CPP/ABI/scope guards and unchanged-oracle wrong-code rejection. Native-host/production/mixed-game/public and full foreign-world behavior remain pending. Shared/selected81/frozen WINDOWS and all other ports remain untouched.
+
+VISION91/J97 final ABI audit: opaque genericptr_t callback payloads and native varg cells now preserve full64bit BigInt transport, without dereference or policy changes; their two import ABI parameters use raw i64 rather than pointer-to-Number conversion. Focused native callback witnesses include2^53+1,0xa5abcdef12345678 and all-ones bits, using actual C callbacks and exact trace/state comparisons. Current prior27048 comparisons/startup/folding/negative guards passed; final added-payload rebuild verification pending. These opaque pointer bit conversions are pinned memory64 ABI evidence, not cross-platform pointer-representation claims.
+
+PAR08 WINDOWS/CFGFILES shared staging: register the two prepared-source original-function translations with native C objects excluded; install exact windows dispatcher/startup and cfgfiles namespace/environment dispatch, per-Module state and entry stack cleanup. Native zero-only public/private backing and typed support are included once; original source algorithms/data remain JS. Compiler-owned signed metadata is decoded before Number and rejected if not exactly representable; no raw pointer/unsigned64 payload is routed through metadata. Private probes preserve actual production basename filenames via exact private-only maps and full diagnostic traces, actual configured native-terminal/ncurses header profile in BOTH modes, separate optimized WINDOWS foreign consumer and real CFGFILES stdio/varargs. Private wrapper macros/free tracing do not apply to production. Add only the exact WINDOWS genl_message_menu let-to-let_ checker exception, leaving all other parameters exact. Owned source-data headers/guards and all runtime/support/layout/consumer files are provenance inputs; no duplicate source-data output is added to the generic metadata generator. The shared first-pass wrapper explicitly selects its newly built probe directory. Prior isolated evidence/limits remain in both frozen recipes; actual shared differential, mixed-game/public and native-host gates are pending at staging, never inferred from registration or build. NHLSEL remains unselected with separately documented unresolved source behavior. No policy fallback or disabled facility is introduced.
+
+VISION TU91/J97 frozen first-pass evidence: warning-free private memory64 reference/hybrid builds and27,128 comparisons PASS, all19 original boundaries/order/parameters/blockcomments plus source tables/external display matrix/lexical guards PASS. Native pre-C-constructor and optimized foreign-read witnesses observe both authoritative JS circle tables, and compiler folding proof requires dedicated separate zero storage without LTO. A read-only negative removing the original signed8 boolean cast is rejected; source hash remains unchanged. Complete opaque64 callback payloads, native aliases/output-cell aliasing, full grids/helpers/bounds/terrain, native callbacks/three actual growth stages and same-dispatcher second-Module independence are measured. Exact hashes/exports/deps/startup recipe and controlled-world/fatal/native-host limits are .cache/vision-integration-plan.md. Native-host, actual mixed-game/default/public recording and performance gates remain parent-owned/pending; no selected/shared/frozen source changed.
+
+
+PAR08 DETECT TU96/J102 configured inventory/scope before implementation: src/detect.c pristine=prepared2,418lines/85,268bytes SHA256d2b923635909fd59d4731ce59094a575a688f4421ff2056f9cb1759cb853c9e7. Actual production -O2 memory64 CPP/AST with forced native-terminal.h, ncurses include, TREE/src cwd/input detect.c confirms42source-owned bodies24external/18static; DUMPLOG-only dump_map stays excluded. Exact names/order/parameters/linkage/types and field/dependency facts are retained in .cache/detect-first-pass/inventory.json and functions.json. JS owns all original algorithms/control/comments, persistent dummytrap and four-row level_detects with live topology d_level-pointer aliases. Six char[256] automatic buffers, addressable coordxy/int cells and six full record assignments (four obj,two rm) require exact native copies/lifetime. Actual22logged RNG expansions include three rnl and original duplicated conditional Maybe_Half_Phys rnd expression at1250; retain conditional evaluation, original filename/origins and bare rn2 function pointers in random_object/random_monster, plus rn2_on_display_rng identity. FOUND_FLASH_COUNT6 is captured at use before original EOF undef. Typed ABI covers131accessed fields/39records,116external functions and30global roots including2private. Preserve detecting(findone/openone) callback identity, native outref copyback, crystal-ball obj** deletion/useup/clear semantics, map/vision/property restoration and full64-bit timeouts/narrow unsigned counters. Explicit rm.doormask/wall_info-to-flags, arboreal_sdoor-to-candig and obj.nexthere-to-v.v_nexthere mappings must be verified; no missing-alias coercion. Source object_detect parameter class is reserved in strictJS: document class-to-class_ only for that exact function/parameter and stage the matching narrow checker exception later; other parameters remain exact. Five original gotos to two labels retain equivalent labeled control, source-local glyph_is_gascloud caller assignment remains JS, and value-producing logical operators canonicalize0/1 while preserving short circuit. Unique DETECT core/runtime/library/layout/probe/test/support/data/metadata/sourceguard/recipe/private outputs only; no shared/selected81/frozen integration edits. Actual original-C/imported-JS -O2memory64 comparisons excluding detect.c, full source/data/CPP/type/RNG/alias/scope guards, ownership/callback/reentry/growth/stack/Module/64-bit witnesses and unchanged-oracle injected regression rejection precede handoff. Pointer representation comparisons may map only typed selected fields to known regions/offsets; scalars/padding/unknown data stay raw. Native-host/mixed-game/public/complete foreign-world behavior remain explicitly pending.
+
+DO TU98/J104 inventory before implementation: actual configured src/do.c has44 original functions (30 public/14 private),2,488lines and four forward cleanup gotos, with no file-static mutable state/catalogue. Reservation97/J103 was concurrently assigned MKLEV; DO98/J104 is the collision-free corrected reservation, no code/file overlap. Preserve all original function/order/parameter/local/comment/control boundaries; four forward exits become local labelled-block breaks to their single original tails. Native drop/getobj/occupation callbacks retain actual ABI identities and point to original JS functions; equipment/object-reference cells, object split/unsplit/inventory/floor ownership, native level/state/serializer dependencies and source counter/mask narrowing remain live. Native world/UI/status/files/death effects are dependencies, not new C policy helpers. Only unique DO core/runtime/library/support/layout/fixture/unit/data-guard/private output/recipe files and this append are owned; selected/shared/registry/build/Lua/frozen ports remain unchanged. Isolated EmC-first source/data/schema/scope/behavior checks precede parent mixed/public gates; native-host compatibility is deferred and actual world/IO limits must be explicit.
+
+
+PAR09 END TU92/J98 private implementation scope: preserve all29 actually configured original end.c functions and231 block comments, with deaths[16], ends[16] and death_fixups[2] owned by readable JS. Prepared source SHA2569190178742d65ea579645cfa365573a1c3f59cff7a5504856631c42a0c169296 includes the inherited tty include, tricky-wizard replay-message suppression and final NOMUX_CAPTURE boundary; pristine source is separately recorded. Necessary representation changes are reserved identifier in→in_, native automatic buffers/char** output aliases, whole-record copies, signed64 scoring, per-Module cat/abort recursion state and typed signal/process/dependency transport. Header logical results and emptygrave→rm.flags storage alias are audited explicitly. Unique end.js/end-runtime.js, tu-libraries/end.js, end-* support/layout/probe/test/source guards and .cache/end-author files are private and unselected; no shared registry/build/runtime/Lua46 changes. Initial original EmC-C/imported-JS gate passes1,015 exact result/state/byte/trace comparisons across29 entrypoints, including controlled exit/abort, killer lists, container traversal and actual growth/reentry. Final source/type/data/alias/Module/negative guards remain in progress. Controlled world/UI/process fixtures are not native-host, full-world or selected-game proof. Exact inventory and inherited differences: .cache/end-author/divergence-handoff.md.
+
+PAR09 WIZCMDS TU93/J99 private implementation scope: translate all48 actual configured original wizcmds.c functions (13static), with DEBUG and ENHANCED_SYMBOLS still active, preserving original order/names/parameters/comments/control and source data. Prepared source SHA2564611d620caedc59dc270f5d6b6f9a2497831dc88325edc90f3770e75afd9b71f and compiler inventory are in .cache/wizcmds-author. Only unique wizcmds.js/wizcmds-runtime.js, tu-libraries/wizcmds.js, wizcmds-* support/schema/layout/probe/test/source-check files and private artifacts are authorized. C remains typed ABI/storage/dependency transport; wizard commands, Lua invocation, menu/diagnostic policies stay JS. Canonical C logical-expression results and actual configured header aliases are audited; basename CPP/debug origins must reproduce production without trace normalization. Source/runtime/fixtures are being authored; no passing equivalence, native-host, shared or public gate is claimed. No selected artifact, frozen Lua input or shared registry/runtime/build edit is part of this work.
+
+PAR09 POLYSELF TU94/J100 private implementation scope: actual2286-line src/polyself.c is pristine/prepared identical, SHA2562f2f3dc74c2cbdd122f7a1401bd3e4e77efbc37ff6c499371cb8e57c9e39a5c8. All34 configured functions and218 original comments remain readable JS; STATUS_HILITES stays enabled, DUMB and three#if0 bodies stay inactive. Original form/equipment/ability/anatomy/control algorithms remain JS; native support supplies actual fields/globals/literal storage and typed foreign calls. Preserve native widths, signed64 property masks, source automatic lifetimes, canonical pointer identity, C logical0/1 values and actual header aliases. Unique polyself.js/polyself-runtime.js, tu-libraries/polyself.js, polyself-* support/schema/layout/probe/test/source-check files and .cache/polyself-author artifacts remain private/unselected. Initial34-entrypoint gate passes306 return/state/dependency-trace/stack comparisons; directed form/equipment/pointer/RNG/growth/reentry checks remain underway. An original-C fixture failure from a nullable were_summon output was preserved and its controlled stub corrected; no original-source/oracle expectation was altered. Typed no-extra-argument varargs wrappers retain exact formatting semantics. Controlled dependencies and this initial EmC gate do not establish native-host or whole-game parity. Exact plan/ownership: .cache/polyself-author/plan-and-divergence-handoff.json.
+
+PAR08 RESTORE/NHLOBJ/DO_NAME shared staging: register original configured translations, compiler layouts, exact typed libraries/support and source guards; original C objects will be excluded by the normal mixed builder. RESTORE library's actual method is callRestore; NHLOBJ uses nhlobj; DO_NAME uses do_name plus initializeDoName startup to populate original public bogon_codes before foreign consumers. Source-owned naming literals/assert attribution are generated; negative constants decoded signed and raw naming masks retained64. Isolated shared probes use each owned minimal ABI support rather than unrelated common backing: RESTORE retains tracked actual malloc/free and actual hacklib/catalogues; NHLOBJ retains actual Lua5.4.8/nhlua/sp_lev/hack/cmd/catalogues; DO_NAME retains original alloc/hacklib/strutil/catalogues. VISION additionally preserves its19original visibility functions and exactcallVision/initializeVision hook, circle startup data is JSauthoritative into dedicatedzeroCstorage/separateobject/noLTO followingROLE; actualhacklib/monst and native constructor/foreignread probes remain. No source algorithm or frozen expected result changes. All previous isolated limitations remain; new shared O2 differential, real mixed game/public and native-host gates remain pending at registration. NHLSEL's original unary UAF remains unselected, separately preserved.
+
+PAR08 DETECT reserved-local clarification before generation: actual use_crystal_ball also declares local int class at source1330. Preserve its exact compiler declaration identity/type/scope/lifetime with the straightforward JS local name class_, recorded explicitly in the owned sourceguard. This local adaptation is separate from object_detect's fixed parameter mapping and requires no added shared parameter-checker exception. No generic name waiver or new container/algorithm is introduced.
+
+PAR08 shared CFGFILES probe export correction: generic build-tu-probes.py requested _malloc/_free for every fixture, but the actual frozen CFGFILES recipe exports only its probe/typed-field API while --wrap=free traces real deallocations. The first shared reference link rejects undefined exported _free (.cache/87-first-pass-initial-export-failure.log). Omit those two unused direct exports only for this fixture, matching its verified private recipe; actual allocator and wrapping/trace remain unchanged. Test uses stack/scratch/stdio probe API, not those exports. No source algorithm, component fixture, production game flags, frozen harness or expected output changes. Shared differential rerun pending.
+
+J96 DOKICK TU90 frozen private first-pass evidence: both original-C/imported-JS O2 memory64 modules pass2,217 exact comparisons across all22originalfunctions, with16independently reached native callback/reentry+actual-growth stages, full source RNG filenames/lines/callers, stack cleanup and shared-dispatcher secondModule. Both live watchman native iterator callbacks are directly witnessed, distinct from test-only aliases; bhit mutates actual native &gk.kickedobj, find_drawbridge outputs use fresh signed16 native cells, named two-item migration preserves native ownership/list traversal. Source/data guard verifies pristine=prepared, all original comments/order/parameters, both authoritativeJS string projections and70original RNG callsites; native field width/signedness and lexical checks pass. An unchanged-oracle negative changing only the JS kickstr text is rejected with exact returned-string mismatch. Full recipe/exports/deps/types/lifetimes/limits are .cache/dokick-integration-plan.md. Fixtures control foreign combat/shop/trap/ownership/UI behavior and do not prove every actual foreignworld branch, fatal paths, terminal behavior or real allocation/free accounting. Original obj_delivery noscatter uses MIGR_WITH_HERO9, so the finalscatter branch is not reachable through tested valid named fixed-arrival routes; source policy stays unchanged and no branch-coverage claim is made. Reachable coin scatter and sink makemon have explicit native callback/growth witnesses instead. No startup/state cache, native algorithm fallback, source/header/frozen backend edits or shared selected81 changes. Parent-owned actualgame/native-host/shared/public gates remain pending.
+
+J105 SPELL TU99 configured inventory before implementation: reserved collision-free src/spell.c2,427lines has43actual configured source functions, verified memory64CPP with shared compile-defines; pristine=prepared SHA256db3d0148ecfe49c89d56381b028606c02c65a7657489006efdc81f239f38181c. Preserve all original function boundaries/order/params/localnames/blockcomments/control, including deadbook's single forward raise_dead jump, local chain-lightning queue/zap records, readonly source spell-sort catalogue and original spellbook/order/context state. Native ABI must retain externally visible live spell arrays/book-pointer refs, original occupation/comparator/getpos callbacks, byvalue chain-lightning records and addressable locals, int/coord/boolean narrowing, signed64 energy/timeouts/masks/counts and fresh memory after growth/reentry. All casting/selection/learning/lightning/sort/protection policies remain original JS; native helpers only storage/layout/packedfields and actual foreign dependencies. Value-observed C logical operators require canonical0/1 while preserving short circuit. Production basename spell.c and original physical source RNG/format sites retained; disabled code and sound retain original configured behavior/no argument evaluation. Only unique SPELL core/runtime/library/supportfragment/layout/probe/unit/data/source guards/private recipe files owned here; no shared registry/root runtime/builds/frozen/selected81 edits. Actual imported-JS versus unchanged original EmC-C private first pass precedes parent-owned native-host/mixed/public gates, all pending initially.
+
+PAR08 shared adapter-language correction: root introduced -x c for four existing .inc adapter inputs followed by -x none. The pinned Emscripten driver compiles inputs separately with the final language arguments; it therefore treated RESTORE .inc as a linker input and asserted that its object was missing. Preserved .cache/87-first-pass-language-reset-failure.log. Remove only those four resets, matching the already-used ENGRAVE/ROLE C-include build pattern. Read-only emcc.py inspection confirms actual static archives are recognized before the forced-language fallback, so NHLOBJ retains its real Lua archive. No new C shim, algorithm, component source, oracle expectation or production flag change. Shared differential rerun pending.
+
+PAR08 DO_NAME startup-link dependency correction: fresh shared O2 probe compiled but its startup postset raised ReferenceError addOnInit is not defined (.cache/87-first-pass-do-name-startup-failure.log). Declare $addOnInit explicitly in the new $teleportDoNameInit dependency list, matching previously solved SFSTRUCT/ROLE startup hooks. All original naming source functions/data and typed call signatures are unchanged. Prior private1519-comparison evidence alone did not establish this shared-profile startup contract; rerun fresh shared DO_NAME and remaining VISION gate. Earlier four shared suites completed unchanged: WINDOWS9209,CFGFILES5054,RESTORE1063,NHLOBJ2787. No frozen harness/oracle/output expectation changes; game/public/native still pending for87 selection.
+
+PAR08 DO_NAME startup coverage extension: private hybrid artifact omitted both addOnInit/initializeDoName because its helper was not rooted, so the original1519 direct-function comparisons did not test production startup (author independently confirmed generated artifact). Fresh shared rooted dependency correction passes all1519; VISION shared27,128 also passes. Add only a native-constructor six-byte observation of public bogon_codes to the DO_NAME comparison fixture and its test/export list, comparing original-C constructor bytes directly against hybrid before any naming call. This tests foreign-consumer ordering rather than asserting an implementation spelling; original source, constants and game code remain unchanged. New shared regression result pending; component native-host/game/public still pending.
+
+PAR08 shared87 first-pass checkpoint: fresh O2 original-C/hybrid pairs pass WINDOWS9,209;CFGFILES5,054;RESTORE1,063;NHLOBJ2,787;DO_NAME1,525;VISION27,128. DO_NAME constructor witness proves all6originalpublicbytes before any naming source call, and read-only no-op-startup negative fails at byte0 (hybrid0/native45), .cache/do-name-startup-check/negative.log. Source/core/oracle unchanged. Detailed earlier shared failures and repairs remain preserved; native parity still pending. Normal default87 mixed-game build now running .cache/build-wasm-87-jslua.log; selected87 sources frozen through future gates. Accepted81 sourcebundle remains immutable and its score is not transferred to87. NextwaveDOKICK/DIG staging stays unapplied.
+
+
+PAR09 END frozen first-pass completion: end-integration.md and end-hashes.json now bind29 configured functions,1,094 exact EmC-C/hybrid comparisons plus1 separate binding-exception cleanup witness, all-entrypoint reachability and141 hashed production/test/private/dependency/artifact inputs. Parent independently reran the unit gate and verified all141 hashes (manifest fd6ccae26666f5e62c2aea7e77ee3ca49e0c5bce35f3a0cd4eb49859329a4a3f). Source/order/parameter/comment/data/actualCPP/type/macro/rawfilename/scope checks pass; unchanged oracle rejects a read-only wrong-wordcount mutation. Core SHA256f84fc00c64b2aae4af7abdf6db1a5945d1dd3c66e9e616a9eb38b6d14d455220. Controlled real C fixture termination is not real host exit; native-host/shared-game/public and complete world/profile/branch/allocation-failure coverage remain pending. This supersedes the initial1,015-comparison authoring entry without changing accepted Lua/game inputs.
+
+PAR08 legacy isolated-support collision repair: the normal87 builder regenerates all earlier probe pairs. RIP reference initially failed duplicate windowprocs because its fixture already owns the window table and newly added common WINDOWS support also defines it; preserve .cache/build-wasm-87-legacy-window-storage-failure.log. build-tu-probes.py now defines TELEPORT_ISOLATED_PROBE, used solely around the six newly appended adapter includes in common tu-support.c. Each new WINDOWS/CFGFILES/RESTORE/NHLOBJ/DO_NAME/VISION pair already links its own adapter explicitly and keeps all source APIs, storage, callbacks, tests and startup witnesses. Earlier isolated subjects retain their original fixture-owned storage; unrelated new adapter code is not injected there. Production game compilation does not define this flag and includes all87 adapters. No original algorithms, frozen harness/recordings, expected outputs or test cases are removed; complete regeneration/differential and real game gates pending.
+
+
+J95 DIG TU89 frozen private first-pass completion: all34 configured original functions and223 block comments preserve source/order/params/control, with two cleanup gotos represented by one labelled block/two breaks and full native trap assignment copied byte-for-byte including padding. Original EmC-C/imported-JS O2 memory64 pair passes5,052 comparisons; source/local-table/RNG/DEBUG/file-origin/type/scope guards pass, three data mutations and dropped-conjoined-copy behavioral mutation are rejected. Actual native catalogues/allocator/string/command geometry/object-to-any/attack helpers retained; only foreign world effects are controlled. Exact source RNG30origins and DEBUG3sites use production basename dig.c by verified isolated compiler prefix-map, never trace rewriting. Writable fresh native vision row proxies fix the discovered view adapter omission. Output aliases, NULL, stale trailing message bytes, native heap growth/reentry and module isolation are covered; extra hybrid-only zero-page invariant never reads nativeMac address0. Recipe/exports/wrappers/types/limitations/hashes: .cache/dig-integration-plan.md and .cache/dig-author/hashes.json. No shared integration/source selection edits; native-host/shared mixed/game/public remain parent-owned pending.
+
+
+J106 MONMOVE TU100 configured inventory before implementation: collision-free src/monmove.c2,396lines has52actual configured original functions, SHA256a7dae4554a30b51e0971ae32086c7494da8e3b8c18ee0e6d4a875f4a8baaf613. Preserve every original function/order/params/localnames/comment/control; JS-authoritative readonly practical/magical class-symbol lists and TU-local flees_light/UnblockDoor expressions stay original scope/expanded in original functions, no new policy helpers. No mutable TU static state/startup. Three gotos become minimal labels: finish_search skips only original search block then reaches one shared tail; not_special skips original specialized-monster block then reaches original common movement; nxti continues existing candidate loop. No added control flag/helper or duplicated branch policy. Native mfndpos/coord/int output refs preserve actual aliases; native object/monster/terrain/vision live fields fresh after calls/growth/reentry; properties/masks/time signedness, int/coord/boolean narrowing and source logical0/1 results remain exact. All movement/combat/item/search/hiding policy stays original JS functions, true foreign dependencies remain native; stable strings/native full-byte autos and original physical RNG/DEBUG/assert diagnostics retained. Unique owned files/private EmC-C-first differential/source/scope/negative recipe only; parent owns shared registry/build/layout/selection and subsequent native-host/mixed/public gates.
+
+PAR08 MKLEV97/J103 scope before implementation: pristine/prepared src/mklev.c identical2661lines SHA2569958b95e15d0a6e27cac80c07a8bb8eac54ef239a51af3992cff303a615731a4. Actual production O2/memory64 forced native-terminal/ncurses CPP/AST/layout capture exit0; TREE/src cwd and basename mklev.c. Unique JS core will retain all57configured functions(37static/20public),243comments,6JS-authoritative statics,97RNG origins including same-line1063/2378, fivegotos/foursharedjoins, recursion and exact source names/order/params/data/control. Runtime/library/typed support preserve perModule mktrap_err, packedrm8 fullcopies, mkroom224 native pointerdiff long64, doors/rmarr allocation/ownership, all initialized automatic ri[41]/sandbox16/coords and native scratch lifetimes. Seven compiler memberalias seams explicitly guarded. qsort mkroom_cmp remains JS via true native callback; reseed_random receives actual rn2/display native identities. Real native Lua lifecycle, windowcallbacks and local source errfunc panic/impossible selection use typed callback/variadic transports, with no C sort/Lua/RNG algorithm, initialized table mirror or original-TU fallback. Only unique mklev core/runtime/library/ABI-schema-metadata and private fixture/build/test/source/import/negative files; selected87/shared builders/registry/commonruntime/support and frozenMKMAZE untouched. Actual original configured C/hybrid comparisons across all57, room/map/door/sort ties/Lua/growth/reentry/long64/stack paths and unchanged-oracle injected regression required. Pointer canonicalization restricted to explicit compiler-typed selected slots/knownregion+exactoffset; all scalars/padding/unselected bytes raw plus scalar-address witness. Controlled-world limits will be explicit. Native/fullgame/public remain pending and no build/syntax result implies equivalence. Read-only inventory proof .cache/mklev-first-pass/inventory-notes.txt and associated actual command/input manifests.
+
+
+PAR09 MAKEMON TU101/J107 reservation before implementation: read-only actual compiler inventory selected src/makemon.c,41 configured functions (28public/13private),2614lines92978bytes, pristine/prepared identical SHA25604bb46b793cb7a724544ed5860f57116e4661ce5d052a1321d90dc0167d3ffc3. Comparative PRAY inventory had45functions2721lines. Preserve original function names/order/parameters/comments and all source generation policy/control/RNG origins in JS; four forward gotos require reviewed joins. Source generation arrays/init flag, oldmoves cache, zero mextra template and readonly syms/furnsyms require explicit per-Module/typed backing ownership and source-faithful initialization. Only unique MAKEMON core/runtime/library/support/layout/probe/test/recipe and .cache/makemon-author files are authorized; no selected87, shared registry/build/runtime, frozen END or Lua46 edits. Native C remains typed ABI/storage/dependency transport, not monster-generation policy. Source/profile/type/data/lifetime/growth/reentry/Module and unchanged-oracle negative guards plus isolated original EmC-C/JS first-pass tests are required before a frozen handoff. Inventory is not implementation or parity evidence; native-host/shared/full-game/public gates remain pending. Root confirmed collision-free101 reservation before code.
+
+
+PAR09 private87 performance diagnostic and capture correction: actual root87 integration hits the unchanged30-second New York worker deadline and is not accepted. Exact direct worker with CPU profiling passes behavioral assertions in43.871s; WINDOWS adapter accounts for14.233s self time (typed views7.572s, environment construction4.983s), while Lua VM self time is0.243s. A private callWindows-only environment cache keyed by actual Module/layout passes the unchanged9,209-comparison73-body WINDOWS suite and the exact worker in25.092s under the original30s subprocess limit. Live getters/current heap, native callback fields, source algorithms and per-call stack save/finally remain unchanged. Direct constructor/initialize APIs remain unchanged; deliberately replacing service callback policy under the same Module/layout identity is outside this cache contract. Candidate SHA25672285746357e70a161b365fdd2c687bb6cbfd3a834a00dbe45f0b700df9f6251;23-artifact private handoff .cache/tu87-performance/handoff-manifest.json SHA256afa4a25b7c61a99f7d282e298240f58199ad1ef4e927693f4fcb7a73baaa368d. Root owns review/promotion and fresh full gates; no selected file was changed by this diagnostic. Its253-file regex-discovered import/artifact map stayed unchanged, and actual466 declared hashes pass; regex traversal is explicitly not AST-complete source-closure proof. Attempting the616-file87 archive exposed an omitted utf8-runtime.js import. That failed diagnostic and archive are preserved; the563-file81 archive has the same omission. Actual-root81 integration/44-recording results remain valid, but those earlier copied archives are not claimed self-contained or complete transitive-import captures. Root is preparing AST-based closure capture with an omitted-helper negative control. Neither original failure nor capture map is silently rewritten.
+
+J105 SPELL representation audit during source-only quiet window: the original catalogue has9rows (8sort choices plus the final menu-only reassignment choice), and all262blockcomments remain in exact order. Actual field assertions caught flags.menu_style signedchar8, structskills.skill signed16, obj.spestudied/usecount signed32, obj.novelidx/corpsenm signed32 and objclass.oc_weight unsigned32; adapters now match actual headers. Novel title output therefore passes the original native int* field, not a short/mirror. SPELLMENU_SORT's MAXSPELL macro expands at use under the active environment, avoiding any module-load read before C ABI binding. Source HConfusion/BlindedTimeout plus int RNG arithmetic explicitly promotes the RNG result to signedlong64 before addition; native forwarding retains actual C width. Local spellsortmenu variable `let` becomes `let_` solely because strictJS reserves it; function parameters/names stay original. Native window start flags remain unsignedlong64, and nh_delay_output macro uses the actual existing window callback via typed forwarding. These are ABI/header-expression changes only; no casting/learning policy, compiler configuration or original source changed. First complete private EmC equivalence remains pending quiet-clear/link/test, not claimed from source guards.
+
+
+PAR09 WIZCMDS private ABI review before testing: all48 function drafts and156 source comments are present, with actual DEBUG_MIGRATING_MONS/DEBUG/ENHANCED_SYMBOLS enabled bodies now explicitly guarded. The initially omitted debug migration body was restored before any equivalence claim. Source review distinguishes original WINDOWPORT(tty) in wiz_show_wmodes from the separate name comparison in wiz_map_levltyp; a proposed conflation was rejected against pinned C. Diagnostic source contexts are1816/1856/2021 and the sole RNG origin1036, derived from actual CPP/AST. Parent-authored66-record/38-native-global adapter retains true enum signedness, modifiable pointer-to-const fields versus const pointer fields, pointer-sized seenV** rows, full native automatic/union/record bytes, live long/int/pointer outputs, real callback identities and27 compiler-derived variadic shapes (including double, preserving fractional output). Fourteen extra source/helper sizes include sizeof-only records; C support contains only typed access/storage/true dependency/window/varargs transport. Actual foreign134 prototypes, field widths/signs and configured profile have compile-time guards; latest full prototype compile is pending the quiet-window release. Private metadata includes header macro originals; source/data/CPP/body/profile and wrong-code guards belong to the component gate. No active87/Lua46/source oracle or selected runtime change is part of this unselected work.
+
+PAR08 proposed next-wave MKMAZE/DOKICK/DIG registration: original prepared TUs excluded from mixed game; JS algorithms/data, typed ABI and native dependencies retained. DOKICK/DIG support included once in common support, no startup; MKMAZE uses separately compiled nativeStorageSources ABI/zero backing and owns its metadata, no shared layout payload. Dispatch supplies exact services/layout/name signatures. Shared probe builders force actual native-terminal/ncurses profile in both modes, preserve source basename through private-only exact filename maps and full traces. DOKICK signed ordinary metadata decoded before Number, raw64 W_/M1_/M2_/DF_ stored as decimal strings, safe-integer guard. MKMAZE shared tests select newly built artifacts by directory; original private default retained. Prior isolated configured-C comparisons remain 199 MKMAZE plus growth/reentry,2217 DOKICK and5052 DIG under each recorded profile; DIG uses only its minimal own adapter, actual cmd/hack dependency wrappers and native context/typedraw64 metadata; actual shared comparisons/game/native/public pending. In particular frozen DOKICK and DIG private builds omitted forced native-terminal.h; production-profile reproof pending rather than inferred. DIG source guard now also forces actual native-terminal.h in this integration proposal; frozen private guard lacked it, so the modified guard must run after quiet and its old pass is not transferred. No waivers, native algorithm fallback or startup suppression. This entry is part of UNAPPLIED staging until integration owner applies.
+
+
+PAR09 POLYSELF frozen first-pass completion: all12 owned files are copied/hash-bound in .cache/polyself-author/frozen-manifest.json SHA2567ac22f9eb138acc3727851dccec5589c356c50d105824bfc1d997118bd4a4152. Fresh warning-free original-C/hybrid rebuild and final current-hash run pass567 cases/8,947 controlled comparisons across all34 configured routines and all31 actual RNG sites. Parent independently verified12 hashes and reran the567-case unit gate. Cases cover true typed arguments/full relevant native state, canonical-vs-copied species identity, anatomy/equipment/forms/control joins, signed64 properties, allRNG source origins, real heap growth, callback-bound mutation, reentry, separateModules and binding cleanup; a scalar-address versus pointer mutation is rejected. Source/config/profile/218comment/parameter/macro/width/sign/foreign158prototype guards pass. Exact source/adaptations/probe recipe and foreign-fixture limits are in tu-fragments/polyself-integration.json SHA2564211a72f75af39b4a990734289854d830ac7eed91d644bc57214e89b4fd3e802. Native-host/shared-game/public and complete world/config/branch equivalence remain pending; frozen handoff is queued after91. Selected87/Lua46 are unchanged.
+
+J104 DO98 authoring detail: the 44 original functions use typed native field and callback transport. The source-private list includes `dosinkring`; `polymorph_sink` remains public, matching the actual configured AST. The 139 configured formatted calls carry an ABI-only call-site descriptor selecting 54 exact promoted native argument shapes; native `sprintf`/`nh_snprintf`/message formatters still perform formatting. Zero-argument native shape calls use an explicitly typed function pointer to avoid applying a source-literal warning to a transport parameter. Original RNG caller metadata uses the production basename `do.c`; private compilation maps only the actual source directory prefix. Native `drop` and `wipeoff` callback trampolines call the same original JS functions, while writable pointer cells copy back even on unwind. The damage macro remains inline so Half_physical_damage is read before its selected RNG expression. The private fixture controls external world, inventory-list, status, naming, file and Lua API responses, using real objects/monster/drawing catalogues and native allocation; it does not establish equivalence of those controlled dependencies or the whole game. No shared runtime, frozen source, optional feature flag or Lua implementation was changed by this author.
+
+91 integration correction: shared DIG hybrid probes now generate a dedicated
+`dig-support.c` including hack.h, generated source locations, and the original
+typed adapter fragment. This restores its private wrapper context without forcing
+that include order onto other dependency TUs. Production game support already
+includes the fragment inside hack.h context. Standalone production-profile syntax
+passes; fresh four-pair differential run is pending. No JS/C game policy changed.
+
+PAR08 PRAY102/J108 scope before implementation: pristine/prepared src/pray.c identical95286bytes/2721lines SHA2566d9729fb4c9e7fbed44f355f85a241ccc527e73d53913ca4efb904e23f999f03. Actual production forced native-terminal/ncurses/TREE-src basename pray.c O2-g memory64 AST45bodies(15public/30static), no headergeneratedbodies;164true dependency names,42external/5privateglobals,158usedfields,31loggedRNGexpansions incld473/ROLL_FROM1425 and2unloggeddisplaydraws. Unique core/runtime/library/nativeABI/probe/layout/data/guard/privatebuilder files preserve all45source boundaries/order/params/comments/control, fiveTUstatics Moloch/godvoices4/turn_undead_range/turn_undead_msg_cnt/hallu_gods14 andfive functionstatic char arrays;8automatic256bytebuffers retain lifetime. JS owns algorithms/header macrobehavior/tables, C only typedfields/headerfacts/zero backing/true dependencies/callback/varargsABI, no policy or original fallback. Preserve prayer_done nativecallback stored ga.afternmv and maybe_turn_mon_iter native iteration callback into sameJSbodies, signed8alignment/intublesscnt/long64movesquantities/timeouts/ALIGNLIM, longswitch0n/1n/2n promotions, compiler rm.altarmask and obj.nexthere aliases, equipment/species pointeridentity and callback mutation/ownership/fatalpaths. Repeated trouble-repair loops stayoriginal and fixtures must mutate actualstate rather than cap/simplify. Actualoriginalconfigured C/hybrid O2-g comparisons/all45, source/ABI/data/callback/RNG/stack/reentry/growth/widecases and unchangedoracle wrongcode negative required; allcontrolledworld/native/fullgame/publiclimits explicit. No shared/current91/frozenDETECT orotherport edits. Read-only inventory .cache/pray-first-pass captured actualcompiler inputs before this announced scope.
+
+J105 SPELL TU99 frozen first-pass evidence: actual original-C/imported-JS O2memory64 links and3,158exact comparisons PASS/all43original functions, with16independently reached native→JS reentry+measured-growth stages, full original RNG filename/closingline/function traces, stack/scoped binding cleanup and two actual Module pairs interleaving saved teleport values. Original43boundaries/order/params/all262orderedblockcomments,31source RNG sites,9native-vs-JS catalogue rows/static string, independent native field widths/signs and lexical/data/CPP guards PASS. Actual native occupation pointer+unrelated identity, iterator/getpos/walk/native deterministic-qsort callbacks and byvalue lightning/output-cell aliasing are covered; production callback imports are distinct from24test-onlyaliases. A deliberate wrong JS mnemonic return is rejected against unchanged C. Native comparison exposed current display.h's non-linear cmap_to_glyph(S_goodpos); sole constant call now expands exact S_goodpos-S_digbeam+GLYPH_CMAP_C_OFF, retaining compiled constants and full trace (no glyph normalization). Complete source/tests/types/provenance/dependencies/exports/limitations recipe is .cache/spell-integration-plan.md. Only unique SPELL files and append-safe notes changed. Native helpers contain typed fields/storage/actual dependencies/callback ABI, no original spell policies; private saved state remains peractualModuleJS with live native public spellbook/context/order aliases. Foreign combat/effects/UI/ownership are controlled fixtures and not full-world or all-branch proof; fatal/invalid inputs/private padding/native-host/shared/actualgame/public remain explicitly unclaimed/pending. No startup/native table mirror or original-source/compiler/backend/frozen selected87 changes.
+
+PAR08 DOTHROW105/J111 scope before implementation: pristine/prepared src/dothrow.c identical2735lines SHA2561fb4be7ca03d4d4256a7637fcaab3ec3048f7c71928a4b5577ab6477ed28bc06. Actual production O2-g memory64 forced native-terminal/ncurses/TREE-src basename captures AST/CPP/layout0/emptydiagnostics. Unique JS core retains39configured bodies(23public/16static),333comments,5source-scoped gem_accept stringstatics,33RNGorigins including1991/1992 doubles,3actualmemberaliases and9gotos/3sharedjoins. Allalgorithms/data JS; typedABI/header/native dependency/callback/vararg/zero backing only inC, no initializedalgorithmtable or originalfallback. Preserve212directdependencies plusnative doswapweapon/dowield references, 6indirect calls/generalwalk_path predicate and4nativewindowdelays; owned throw_ok/dofire/hurtle_step/mhurtle_step addresses remain realpersistent nativecallbacks into originalJS. getobj/queuedcmdq callback timing and actual xname/singular identities remain. Native full8byte save_osplit automatic aggregatecopy, coordinate/buffer/outref frames and bhit obj** replacement/free/sync preserve ownership of thrownobj/returning_missile/equipment andlong64quantities/masks/properties/shopstate. Nested-entry petrify target and cancellation/unsplit joins retain effects/lifetimes once withoutpolicyduplication. Actual original/hybrid all39 comparisons, pathoctants/clipping/callbacks/queue/ownership/breakage/shop/gem/fatal/long64/growth/reentry/Module/frame/RNG/nativebyte witnesses and unchangedoracle negative required. Only compiler-typed selected pointers canonicalized toknownregion+offset; allscalar/padding/unknown/unselected bytesraw plusaddress-scalar witness. Controlledworld and native/fullgame/publiclimits explicit. Unique source/runtime/library/ABI/schema/metadata/probe/test/guard/privatebuilder files only; no selected91/shared/frozenMKLEV/MKMAZE/otherport edits. Inventoryproof .cache/dothrow-first-pass/inventory-notes.txt recordedbeforethisGO.
+
+PAR09 ARTIFACT107/J113 ABI split before implementation: exclusive source src/artifact.c has76 configured functions,2843lines99540bytes SHA256f0cf8f78bb68f305394e3cd9ccb8080cb15c147582b7f5f55888f4acdfe10141. Agent owns original JS core/source metadata/guards/private probes; parent owns artifact-runtime.js, tu-library/artifact.js, typed artifact support/schema/source-data/layout and private ABI generation. Preserve configured branches/macros, original functions/params/control/comments, original initialized table policy in JS and exact signedness/addresses/record bytes/save IO. Native support may allocate uninitialized typed backing for private artifact arrays and stable20-byte output; it must contain no original artifact algorithm/table initializer. Per-Module JS state retains touch_blasted/nesting and source initialization. True foreign dependencies and callback/varargs transport remain native. Original-C configured memory64 differential/source/type/lifetime/growth/reentry/Module and negative controls required; native-host/shared/game/public remain pending. No shared active registry/build/central runtime, frozen WIZ/POLY or Lua82 edits are part of private authoring.
+
+### J112 — TIMEOUT TU106 independent first-pass work (2026-11-10)
+
+Reserved src/timeout.c, 54 configured original functions under the unchanged game defines and memory64 headers. All original functions, names, parameters, order, comments and control flow move to readable JS. The property catalogue, dialogue strings and nine-row timeout callback catalogue become JS-authoritative; no callback scheduling, timeout selection, illness, burning, hatching or save policy remains in new native helpers. Existing gt.timer_base/svt.timer_id and native allocated timer/object/monster records remain live native storage with fresh typed field views. Full anything unions, pointer-to-link cells, addressable automatic output fields and signed/unsigned 64-bit time/ID stores preserve source aliasing across native callbacks and memory growth. Native callback trampolines may invoke the three original local timer functions (hatch_egg, burn_object, cleanup_burn); foreign timer functions remain actual native dependencies with original callback identities. Necessary C/JS representations and fixture limits will be recorded before the frozen handoff. Private isolated original-EmC/imported-JS equivalence comes first; native-host/shared/game/public acceptance remains pending root integration. No pristine/prepared C, compiler flags, frozen harness, existing ports or shared integration files are changed by this independent work.
+
+PAR08 proposed next-batch DETECT/TELEPORT/MKLEV integration: JS owns all42/37/57configured source algorithms/data; original C excluded from hybrid/game. DETECT/TELEPORT typed ABI support included once under isolated-probe guard, owned fixtures include their own support exactly once. MKLEV uses separate nativeStorageSources ABI/zero backing/self-owned metadata; actual deterministic sort prefix from preparedhacklib is PRIVATE TEST dependency only, never production algorithm fallback. Exact central namespaces/WeakMap/call signatures/entry-finally and pointer return conversion preserved. Only DETECT object_detect int class fixed parameter becomes class_ with original-formal assertion; blocklocal same-name mapping stays narrow guarded source and requires no shared exception. Both original/hybrid fixtures use actual O2-g memory64/forcednative/ncurses profile, private-only exact basename maps/fulltraces and exact actualexports with no generic malloc/free forDETECT/MKLEV. Signedordinary metadata decoded before Number/safeinteger checked; MKLEV owns ownmetadata. TELEPORT sourceprivate validation uses unique flag, no leaked#line; debugheader timing remains actualC. Actual frozen isolatedproof1267DETECT/2910TELEPORT/307MKLEV plusgrowth cases and negatives remainisolated EmC evidence; shared actualpairs/game/native/public requiredafterapply, not transferred. Controlledworld/pointer-normalization/snapshot limits retained in three exactrecipes; no assertion waiver/native fallback/startup suppression. Proposal UNAPPLIED untilrootreviewapply.
+
+### PAR08-TELEPORT — frozen isolated first-pass implementation (TU95/J101)
+
+Scope was announced/documented before edits. All37 actual configured functions
+(28 public,9 private) retain original names/order/parameters/block comments in
+`js/ported/teleport.js`; `teleport-runtime.js`, the typed JS library, layout,
+teleport-support/source-data/ABI metadata, controlled C probe and differential
+test are the unique associated artifacts. No shared registry/builder/layout
+writer/common support/central runtime/production artifact or frozen port was
+edited by this author; integration remains owner-controlled. Completion text is
+provided here for the integration owner's atomic register append, honoring the
+current no-shared-writes instruction.
+
+Prepared/pristine src/teleport.c are identical2,294 lines, SHA256
+`e1d9d4255ac148caa4618dc4f275ddf5417d2a2830beca738c3821cf7678e5c8`.
+The actual reference is the prepared memory64 Emscripten production profile with
+compile-defines.json, forced native-terminal.h and ncurses headers, production
+cwd TREE/src input basename teleport.c. PRIVATE reference-fixture macro-prefix
+mapping aligns its absolute include spelling to that actual production basename;
+full filename/closing-line/function RNG traces are compared, never basename-only
+normalized. No production compiler flag was changed.
+
+JS owns NEW_ENEXTO collection/shuffling/search/goto/control, source tports4 table,
+static get_there_from19 and per-Module trap recursion guard. Native backing is
+typed automatic storage and exact-source-corpus zero-only static byte storage;
+C exposes header/field/dependency/function-pointer/varargs ABI, not TELEPORT
+algorithms or initialized data mirrors. Canonical live address wrappers preserve
+monster/object/level/stair aliases; C widths include signed16 coordinates,
+signed8 booleans, unsigned32 flags and actual signed/unsigned64 fields. Observed
+C logical values are canonical0/1. Header debug timing was corrected before
+freeze: debugcore→save last_msg→lazy args→typed print→restore only on normal
+return. An independent read-only review found no further concrete issue, and the
+actual C callback mutation case rejects the old eager adapter. No #line state
+leaks into later common-support fragments.
+
+Fresh -O2 -g original/hybrid links pass2,910 unchanged-oracle comparisons; all37
+bodies andall22 RNG sites execute. C snapshots/consumers read actual native
+buffers/scalars,64bit fields, coordinate tails and zero-monster bytes including
+padding. Cases cover geometry/RNG/filter/iterator/window callbacks, growth,
+reentry/live callback replacement, menus/static data, both Modules sharing one
+bridge, traps/guard persistence after throw, prompt/goto paths, long timeouts,
+controlled inventory/billing/revival, repeated buffers and stack restoration.
+The hybrid imports all37 JS source bodies and actual compiler dependencies
+exclude original teleport.c; reference imports none. Source/order/parameters/all
+comments, lexical scope, fresh CPP/profile/signature/linkage,1108 MemberExpr/type/
+member-macro alias records, source literals/table/static data and exact22 origin
+guards pass. Generic-reference support-only syntax passes without private source
+scope. TELEPORT_NATIVE_TESTS=1 rejects before Module creation.
+
+Two negative controls fail the unchanged C suite: discarded collect_coords RNG
+fails configured enexto full trace; eager debug arguments fail debug macro
+argument ordering full trace. No original/expected output, comparison granularity
+or failures were normalized, waived or amended to pass.
+
+Evidence/recipe: `nethack-c/wasm/tu-fragments/teleport-integration.md` and
+`.cache/teleport-first-pass/{test.log,source-data.log,build.log,import-proof.json,
+negative.log,negative-debug.log,negative-summary.log,input-hashes.json}`. Final
+reference Wasm SHA256
+`4de730a8e5db5afcdc7d697e1667d8e4fbf5e9a7574201b63151361fa9572c94`;
+hybrid `8092dac0f065efc41a5d8b39f6b6a895726112aba34de734e246c142fccdf6d9`.
+Clang -O2 is active; -g causes the compiler's documented limited Binaryen postlink
+optimization warning. Earlier no-g -O2 passed the then-current2,220 checks; that
+smaller historical run is not the expanded final corpus.
+
+Limitations: isolated Emscripten-C first pass only. Native-macOS/full-game/public
+TELEPORT acceptance is pending. Foreign UI/placement/room/spell/AI/death/shop/
+level/object effects are controlled fixtures; no real OS UI is sent, traps/
+objects use static fixture storage, and actual world deallocation/complete world
+integration/all branches are unverified. Callback-throw tests establish original
+persistent guard semantics, not arbitrary C nonlocal-exit cleanup parity. No
+pristine-native equivalence or full playable-world support is claimed.
+
+
+
+J106 MONMOVE TU100 frozen private first-pass handoff: all52configured original functions/parameters/order and293blockcomments preserve source policy, with only three minimal label edges and full coordinate struct-byte assignment/typed native local refs. O2 memory64 unchanged original EmC-C/imported-JS pair passes5,455 comparisons; all52entrypoints, catalogue matrices, successful search, all3goto edges, positive callback-driven door visibility and3witnessed real growth/reentry stages, aliases/NULL, exactlong>2^53/bit63 masks and separateModules covered. Source guard includes all active configured literals: global.h always defines MAIL_STRUCTURES even when MAIL disabled, so original mail-daemon branch is active and retained/positively tested; initial wrong draft assumption caught before positive evidence. Wrong cached-visibility read-only mutation fails original postmov message/native-call trace; two data mutations rejected. Fresh compiler field/type/macro/RNG50/basename/assert/source/scope guards pass. Runtime view mfndpos renamed candidateData to avoid shadowing actual native mfndpos dependency. No source algorithms moved into C or shared files modified. Recipe .cache/monmove-integration-plan.md; regenerable cache-only staging helper/patch current-tree anchors .cache/monmove-author/stage-integration.py; root alone may apply. Controlled foreign-world limitations/native-host/shared pair/mixed/public pending explicit.
+
+PAR08 PAGER103/J109 scope before implementation (DLB103 inactiveaudit superseded,not counted/enabled): actual production source src/pager.c pristineprepared identical2967lines SHA25692d078a4c4e0f81bf91c07b91383e848427eeed37b9877fa34d8564774b8952b. Freshproductionbasename CPP/AST/O2LLVM46bodies(16public/30private),116foreignFnrefs; DUMPLOG_CORE/ALTMETA/UNIX/SHELL/SUSPEND/TTY/CLIPPING/DEBUGactive, PORT_HELP/VMS/DLB/backendsinactive. Actualmonhealthdescr retains nhUse/NULonly; inactiveoldhealth/whatdoes_cond/cmdhelpinterpreter not enabled. NoownloggedRNGsites buthallucinatedmon_to_glyph passesdisplayRNGnativecallback andforeignrndmonnam remains, so no RNG-freeclaim. Unique core/runtime/library/ABI/layout/probe/test/sourceguard/data/consumer/storage/integration/privatebuilder preserveall46 originalboundaries/order/params/comments/control/gotos/data. JSalgorithms/tables; C typedABI/realnative dependencies/headerfacts/zero backing only,nofilepolicy/originalfallback. Publicwhat_is_a_location30bytes initializedJS beforeforeignCconsumer via separatelycompiledzero-onlystorage/nativeStorageSources and actualoptimizedexternconsumer/startupnegative proof; privateinvis/altinvis/suptextarrays9/7/help_menu17withNULLsentinels andsource-scopedstaticstrings/lookbuf256/oncebool retain lifetime/identity. Actualcoord-byval LLVMptrABI fordo_screen_description/add_cmap_descr requirescopybeforereentrantcallbacks,includingprivateJSdirectcalls. Keephelpmenulocal/foreign voidcallbacks,nativexname/singular andcommandintfunctionidentities; volatilewindowprocs fresh. Realfopen/fgets/fseek/fclose/sscanf becauseDLBoff; unsignedtxt_offset%8lx,signedlongfileoffsets/quantities/time/propertyandcallbackownershipbuffers remainexact. ActualoriginalconfiguredC/hybridall46/readableMEMFSdatafiles/UI/callbacks/parsererrorcleanup/growth/reentry/long64/stack/Module/startupconsumers andunchangedoracle negative required. Controlledworld/native/fullgame/publiclimits explicit. Noactive96/shared/frozenTELEPORT/otherport edits. Readonlyproof .cache/pager-first-pass actualcapture; announcedscope precedesGO.
+
+PAR09 dependency audit accepted87 binding update: scripts/audit-js-dependencies.py now reads .cache/tu87-windows-fixed-gate-snapshot, parses original public.log JSON marker, rechecks466 declared and620 captured hashes, binds WINDOWS runtime and exactly44 recording results, records252-module literal closure scope, and treats absent standalone provenance.log as optional without inventing evidence. dependency-inventory.json regenerated with zero missing inputs. Focused checks pass all accepted87 bindings and reject unchanged manifest with changed live JS as well as changed manifest; current later staged sources receive no transferred acceptance. README and wasm README Lua-only evidence paragraphs now point to accepted87, preserving earlier81 history/omitted-import caveat. This audit is recorded evidence verification, not a new replay or a native-host parity claim.
+
+
+J114 POTION TU108 configured scope before implementation: src/potion.c2,930lines, actual configured66functions (29public/37private), pristine/prepared SHA25605176768623072e3e1337fc23b91e1f3991980dbefb4ca2fc44c0fe6d1115aa9. Preserve every original function/order/name/params/localnames/blockcomments/control, full timeout/status/drinking/dipping/impact/wish/splitting policies in original JS bodies. JS-authoritative readonly vismsg/eyemsg/bottlenames/hbottlenames plus local Dip_ and per-actualModule mutable drink_ok_extra; stable native literal addresses, no C policy/data mirrors. Two potionhit cross-case gotos use nested do_illness/do_healing labels inside effect_done, single original healing/illness bodies after original switch, same original cureblind setup and anger/cleanup tail; more_dips labels original oil-only if and breaks to original common tail. No new state flag/helper/duplicated algorithm. Native selector callbacks drink_ok/dip_ok/dip_hands_ok map exact original JS function identities; typed actual native mon**/property-long refs preserve native aliases and same intra-JS lifetime, scoped automatic strings/struct copies preserve padding and reentry/growth. int/boolean/coord narrowing, signedlong/unsigned masks/size_t and original RNG/Snprintf/assert physical origins/compiler basename remain exact. Sound-disabled arguments stay unevaluated; actual foreign source dependencies/native catalogue/field storage kept, no Lua/service/shared registry edits. Unique private EmC-C-first differential/source/scope/negative recipe preceding parent-owned native-host/shared/mixed/public acceptance; no evidence claimed yet.
+
+DETECT fixture validity follow-up (proposal, not yet applied): original reset
+`memset((void*)&mons,0,sizeof mons)` crosses actual permonst const enum pmidx.
+This is fixture-only; no production/core discrepancy was observed. Existing
+1267EmC comparisons remain observed evidence with this C-validity limitation,
+not a new native-parity claim. Proposed reset excludes that exact const span,
+with a separate nonzero-initialized const-member witness/volatile byte reads and
+fresh unchanged comparisons. Frozen manifest is preserved; new fixture evidence
+will be bound separately. All98game/public/native proofs remain pending.
+
+DETECT fixture-only const correction now applied: reset excludes the actual
+const pmidx byte span and clears the same mutable fields/padding. Separate
+initialized nonzero PM_HUMAN/volatile-byte witness passes reference+hybrid and
+rejects old whole-reset0. Unchanged private1267suite and wrong-field negative
+pass; root fresh sharedpair+two witnesses are pending. Builder adds only the
+fixture probe_const_reset export. Production source, JS policy, original C,
+existing unit expectations and frozen contest harness remain unchanged. Evidence
+.cache/detect-const-reset-proposal/proof.json binds exact before/new hashes;
+older frozen37/90/18manifest stays preserved, no native/fullgame inference.
+
+
+DO TU98 / J104 final private EmC first-pass evidence: all 44 original functions pass 1,719 exact comparisons against unchanged prepared C, including full native obj_meld output-cell replacement/deletion in both directions. A fresh two-mode memory64 compile is warning-free. All 296 original block comments, original boundaries/order/parameter names and scoped immutable message data pass the source guard; private lexical guard passes. Temporary in-memory Boolean and unscoped-drop mutations are independently rejected without changing source. Actual mixed-game/public acceptance and native-host checks remain pending root integration; controlled world/UI/naming/level-file/Lua fixtures are not evidence of those complete engines. Final recipe and component hashes are in `.cache/do-integration-plan.md` and `.cache/do-author/hashes.json`.
+
+WIZ production callback transport correction promoted after independent
+2baseline/22artifact hashes and actual private748+indirectCcallback witness.
+`wizcmds-support.c` functionpointer/referencealias now names distinct
+teleport_wizcmds_callback_migrsort_cmp; `tu-libraries/wizcmds.js` adds its typed
+ipp forwarder to the same original JS comparator. Private aliases remain for
+fixtures and must DCE in the next game. Current98Wasm was not rebuilt yet.
+Fresh root sharedWIZpair is running; failed98snapshot remains immutable.
+Separate semantic NYdiagnostic fails after3.208s at healer340missing shop;
+runtime owner traces firstRNG/screen divergence against accepted87. No timeout
+relaxation/expected-output edit. Heavy compilation pause lifted during functional
+debug so9authors continue unselected ports; selected algorithms stay frozen.
+
+
+DO_WEAR TU110 / J116 reservation and configured inventory, before implementation: src/do_wear.c has 79 configured original functions (31 private), 3,504 source lines, no goto statements, one 15-entry immutable takeoff_order table and immutable message strings. Two actual file-static ints Narmorpieces/Naccessories require per-Module JS ownership; native equipment/property/context storage remains live. Original on/off, getobj and occupation function-pointer boundaries will use typed native ABI trampolines into their same JS functions, preserving callback identities and reentry. Private EmC-C/JS authoring follows frozen DO handoff; no optional configuration or shared integration changes are authorized by this reservation. All original boundaries/comments/control and actual native dependencies remain required; first-pass status is not mixed-game/public acceptance.
+
+PAR08 MUSE TU112/J118 scope before implementation: pristine=prepared src/muse.c122,192bytes/3,309lines SHAdf896ef2da5f5685353e788fad9c5d54d393927101e0053eccc269a564a99a26. Actual production TREE/src cwd,input muse.c,O2-g memory64,currentdefines,ncurses,forced native-terminal.h captures44source-owned bodies(15public/29static),208true dependencies,35globals,45records/165accessedfields,50logged RNG expansions plus display RNG2639. Original names/order/parameters/comments/control/data retained in unique JS core/runtime; typed C/header ABI/native dependencies/zero backing only,no source algorithm fallback or initialized algorithm table. No TU statics; three local statics retain distinct source lifetimes: empty immutable pointer and char21/16 buffers;192source literals3496bytes. Preserve53source macro occurrences/at-use scoped nomore and m_flee definitions/undef, five gotos to botm/try_again/skipmsg with uncapped backward retries, exact value-producing C0/1 and inline duplicated/conditional RNG evaluation. Actual native callback identities doname/ansimpleoname/mbhitm/bhito/linedup_chk_corpse/buzz/buzz_force_miss/xname and seven indirect sites/five exact prototypes retain delayed effects/volatile window callbacks. Automatic coordxy[10][2]/[2][8],char256x7/20/40 and complete odummy=cg.zeroobj copy require native storage/copy/lifetime. obj** zhitm/container extraction/reinsertion/split/consume ownership, full64 masks/quantities/times/properties/size_t and exact native weapon/permonst identities stay explicit. Compiler aliases rm.doormask-to-flags and obj.nexthere union mappings require guards; pointer compound +=/-= must scale by pointee sizeof, with actual configured AST audit. Original/import-only actual O2 memory64 comparisons for all44, source/CPP/data/type/member/RNG/import guards, ownership/callback/growth/reentry/Module/frame/wide scalar and exact unknown64 pointer/rawbyte mismatch witnesses plus unchanged-oracle deliberate-regression rejection precede handoff. Only explicit compiler-typed known pointers map to declared region/offset or actual callback identity; unknown/scalar/padding bytes stay exact, char-content regions explicit. Controlled dependency-world limitations and native-host/fullgame/public unverified status remain explicit. Unique MUSE files/private outputs only; no selected98/shared integration/frozen PRAY edits. Read-only actual inventory .cache/muse-first-pass precedes this scope and implementation GO.
+
+98 semantic diagnosis: exactseed0002NY/January340 compares immutable87/98,
+first2157RNGentries identical to frozenoriginalC; atindex2157/step8 oldCpet_type
+expectsrn2(2)=0 but98continuesmineralize rn2(1000). Earlierterrainstate defect
+found in MKMAZE get_level_extends: struct rm* compound +=ROWNO must multiply
+by8-byte pointee size; two JS sites incorrectly added21bytes instead of168.
+Private2line candidate905eb004386a82f0a689cd6d947d9eb96dc35af8b417bd7a897c81d490e01be3
+returns C extents[19,2,61,18] versus oldJS[19,7,61,13] and matches full packed
+boundary map. Previous199tests invoked helper using scratch outputs not included
+in compared snapshot; new durable test must explicitly check all4coords/8bytes
+and non-symmetric map. Actualgame candidate validation and strengthened suites
+are pending; noselectedMKMAZE edit yet. ReadonlytypedAST audits found no other
+nonbyte pointercompoundcase in checked ownedTUs; no blanketregeneration.
+
+J112 frozen handoff: TIMEOUT106 private EmC original-C/imported-JS first pass passes1,770 exact comparisons/all54 original functions, all258 ordered blockcomments/name/order/parameter/scope checks, full catalogues/27 RNG sites,2 assertions and nine real reentry+memory-growth stages. Actual native timer/count serializer writes, full64 unions/time/IDs, local/foreign callback dispatch and wrong returned-property-name rejection are covered. Necessary recorder-header ordering is explicit inline comma sequencing before argument evaluation, with duplicate-attribution metadata suppressed; native acurr now follows caller attribution exactly. No extra source function/arrow or native scheduler/status/burning/hatching/save algorithm was introduced. Independent configured Clang AST found10 scalar-only +=/-= sites, no pointer stride case. Exact integration/typed metadata/deps/aliases/private recipe and controlled-fixture/fatal/save-wire-format limits are .cache/timeout-integration-plan.md; hashes .cache/timeout-author/frozen-sha256.txt. Native-host/shared/game/public remain pending root. Source/pristine/prepared/compiler/frozen harness and selected SPELL98 unchanged.
+
+
+PAR08-MUSE configured-inventory refinement (implementation milestone, no behavior pass):
+The actual compiler-backed ABI resolves42 canonical native records/165 accessed
+fields; the initial45 tally counted anonymous/typedef aliases separately. Source
+string data totals3,496bytes:3,459 ordinary literal bytes plus two distinct local
+static char arrays21+16=37bytes; the third local static is an immutable char pointer.
+The true dependency set has195 fixed services plus13 variadic dependency names,
+with135 actual original variadic call sites. Exact configured CallExpr auditing
+finds9 indirect CALL SITES using6 native callback prototypes and9 function
+DESIGNATORS; the initial7/5/8 count omitted two rn2_on_display_rng calls produced
+by the original mon_to_glyph macro at source2639. Those two display draws remain
+unlogged and distinct from50 original logged RNG expansions. All44 source bodies
+and typed ABI are generated; syntax checks pass, while actual original/import
+behavior, guards, negative control, native-host/full-game/public gates remain
+pending. Source algorithm/data/control requirements and unique private ownership
+are unchanged. This refinement supersedes the earlier approximate counts only.
+
+### J120 — INSIGHT TU114 independent first-pass work (2026-11-10)
+
+Reserved src/insight.c,46 configured original functions under the unchanged actual game defines/MEMORY64 headers (3506 source lines,no gotos). All original functions/names/parameters/order/comments/control and enlightenment/conduct/achievement/gamelog/vanquished/genocide/probing policy move to readable JS. Output convenience macros expand at their original calls without adding TU functions. Source strings/catalogues/achievement rows and local readonly data stay JS-authoritative; native hu_stat/enc_stat remain actual external data dependencies. The external const vanqorders[8][3] table has native options.c readers, so zero-only native pointer storage must be populated once per actual Module from the JS rows before game consumers execute, with explicit startup dependencies and independent native constructor/read witnesses. Two private static return buffers (size_str40,piousness32) retain stable native zero storage and perModule lifetime; no new native formatting or game policy algorithm. Existing enlightenment/gamelog/hero/monster globals remain fresh pointer-backed views, full64 flags/conduct/time and exact native widths. Native deterministic qsort must invoke original JS vanqsort_cmp through a typed native trampoline with actual short-index pointers. Private EmC original-C/imported-JS equivalence comes first; native/shared/game/public acceptance remains pending root. Work is unique INSIGHT files/private outputs only, no pristine/prepared C/compiler/frozen harness/shared registry changes.
+
+PAR08 DUNGEON TU111/J117 scope before implementation: pristine=prepared src/dungeon.c3734lines SHA4b3e7b2a8afa70fc442a99fd79551982836def70864f738085926f3f326906e9. Actual production O2-g memory64 TREE/src cwd/basename dungeon.c/currentdefines/ncurses/forcednative-terminal captures110source bodies(44static/66public),331comments,10static declarations,11logged RNG origins(includingtwoalternatives1989),117true dependencies/114typed variadic sites/26indirect sites(25nativewindow plus selectedpanic/impossible),25evaluatedglobals. PANICTRACE remainsactive despiteNOPANICTRACE input; inactiveDDEBUG/DLB/EDIT_GETLIN alternatives stayexcluded, no sourcegotos. Unique JS core/runtime owns all original algorithms/names/order/formals/comments/control/data: persistent branch_id and level_map26topology-address rows plus sentinel, eight option tables preserve perModule lifetime/exactnativealiases. Typed C/type-only ownrecord/header/layout/field/true dependency/vararg/window transport and zero backing only; no initialized source table/original fallback/Lua parser/placement/serialization algorithm in C. Live local extern shtypes remains true nativeglobal, sizeof-only tune is not invented runtime dependency; const native data/stderr identity preserved. Explicit drawbridgemask-to-rm.flags alias guard and actual configured pointer arithmetic/compound scaling audit required. Native pointer/long/size_t8,coordxy2,boolean1,lua_Integer64 remain exact; source-owned proto_dungeon3952/lchoice2056/level_map16 are type-only ABI. Distinct recursive boolean map[33] frames retain uncapped placement/backtracking order; full d_level4/anything8/cemetery184 aggregate copies and scalar menu IDs, addressable params/items**, linked lists/allocation IDs/free order/annotation lengths/packed mapseen fields/80x21 terrain and native callbacks retain source effects/lifetimes. Actual original C vs import-only hybrid all110 controlled-O2memory64 tests, recursive success/failure/topology/ledger/statics; controlled Lua sandbox-stack-load-close lifecycle; branch/exclusion/cemetery save buffers/ownership; fullpackedmapseen/UI/annotation/menu callbacks; long64/narrow/50MBgrowth/reentry/Module/stack/error checks and freshCPP/source/prototype/data/member/RNG/import guards plus unchanged-oracle wrong-code rejection precede handoff. Only explicit compiler-typed known pointer fields normalize to actualdeclaredregion/allocationID+offset or callback identity; unknown64 remainexact beforeNumber and preserve rawbytes, scalars/padding/unselected data raw, unsafe-pointer/scalar-address mismatch witnesses required. Controlled Lua/world/serializer limitations explicit, no native-host/fullgame/public equivalence inferred. Unique DUNGEON files/privateoutputs only, selected98/shared/frozenMKMAZE/MKLEV/DOTHROW unchanged. Read-only inventory .cache/dungeon-first-pass/inventory-notes.txt SHA49a665bdd0cd17286e604964f6c1c2147f55312e96c45135fcc065735deff5db precedes this scope/GO.
+
+J120 data representation detail: private vanqsort_cmp's seven-byte punctclasses (six compiler-derived class selectors plusNUL) must be addressable for its original native strchr and pointer subtraction. It will remain JS-authoritative data copied once into stable zero-only native bytes perModule; no class/name sorting logic or C initializer table moves into the adapter. Actual configured AST confirms11 scalar-only +=/-= sites, no pointer-compound scaling case. Current CHRONICLE/DUMPLOG/DEBUG active; NO_ENLGHT_CONTRACTIONS/SCORE_ON_BOTL absent from unchanged compiler configuration.
+
+PAR09 frozen next-wave private proofs: MAKEMON101/J107 final configured original-C/hybrid gate8,794 checks/all41entrypoints, actualfullAST/literal/type/profile/279comment/188RNG-origin guards and21targetconststorage audit pass. Latest207-input hash manifest tu-fragments/makemon-hashes.json SHA5632f7ccfb9a81a78b3165dbded7ff68bb15eb0306eee4c629bfff723e728801 corrects handoff metadata only: MAIL and MAIL_STRUCTURES both active. MHITU104/J110 final623cases/7,179checks/all30activefunctions/all78RNGsites,12-inputfreeze .cache/mhitu-author/frozen-manifest.json SHAacc47e50e3ad2fcf2c23fe765f8df1b086071d5f5ec74cc447dd4da47db75c41; true permonst.pmidx const construction preserved and actual a_can/oc_skill/opoisoned aliases guarded. Parent independently verified all207/12hashes and reran both unchanged final gates. Both remain native-host/shared-game/public pending. Neither private proof transfers accepted87 status or changes selected98. READ109/J115 and DECL113/J119 are exclusive subsequent private assignments; inactive DLB has zero configured code and is not enabled or counted.
+
+PAR09 actual98 diagnostic and WIZ transport correction: normal98 compile succeeded but import audit rejected privatefixture name teleport_wizcmds_test_migrsort_cmp in the production C sorting callback. Private two-file correction creates teleport_wizcmds_callback_migrsort_cmp with identical ipp JS forwarding and C callback address, preserving private aliases/reference/comparator source. Fresh frozen143case/748check suite plus real C callback-address/indirect-call witness pass; original31-inputfreeze preserved. Root promoted only reviewed transport patch SHA47e3d84dd81a4c3454104ab47ed8fbf766e84cb645736544642d1dfebf50215f, with fresh game build/gates still required. Original98failed snapshot remains immutable. Readonly original30-second NY diagnostic instead failed a real semantic assertion in3.208s, all968inputs unchanged; exact copied87/98 replay first diverges at RNGindex2157,step8, extra mineralize calls. Private MKMAZE record-pointer stride correction moves first divergence to4390,step53,m_move bound32vs20; it is not a full pass. Readonly caller/history instrumentation leaves every candidate RNG/screen/cursor unchanged and records cnt5/j0/history at4390; source owners retain fixes. Evidence .cache/tu98-performance/first-divergence-manifest.json and monmove-history-manifest.json. No oracle/comparator/deadline normalization or acceptance transfer.
+
+PAR09 private98 performance continuation: readonly loaders combine reviewed MKMAZE native record stride and MONMOVE typed foreign-return corrections; both minimal and complete MONMOVE candidates restore all18,244 RNG calls/341 screens/341 cursors exactly to accepted87 in seed0002's first340 moves. The unchanged30-second NY worker still times out, including a coordinated quiet run. A separately authorized NON-GATE60-second CPU-profile diagnostic completes original behavioral assertions in38.080s; sampled garbage collection5.289s and repeated MONMOVE record construction motivate type/address view reuse. Root's MONMOVE author supplied private late-publication candidate SHA256df2aaaddf4e915dd3a0e71556b4eeaa21006cc56ce2fe154f6c03fe28904a528: live getters/current heap/callback fields remain live, per-environment type/address views are reused, and construction errors cannot publish partial views. Author's5,548 original-C checks include mutation, same-address free/reuse, growth/reentry, separateModules and repeated invalid-width rejection. Parent's readonly actual-game capture remains exact18,244/341/341; unchanged original NY worker passes29.844885s under current author load, with968 snapshot files and all5 private inputs hash-verified unchanged. Evidence .cache/tu98-performance/cache-v2-{capture,worker}-result.json, cache-v2-loader.mjs and complete-profile-analysis.json. No selected source was edited by these diagnostics; root alone owns promotion/rebuild. The0.155s timing margin and incomplete full recording suite prevent any full98 acceptance claim. Prior failures, original artifacts and superseded candidates remain unchanged.
+
+PAR09 ARTIFACT frozen first-pass and private callback review: original76-function/344-comment core is frozen with12 sources,111 configured profile inputs and40 proof artifacts in .cache/artifact-author/handoff.json SHA2566278dc2e53de5cb94265ff51c5c9f3d2b8578bb8a468a9c8b6dcf88aa32d9d72; parent verified all163 entries and independently reran381 cases/3,261 original-C/hybrid state/trace/result/stack checks across all76 routines. JS owns original initialized artifact table and source state; native storage is zero-only typed backing, with full native field widths, exact pointer/struct/save addresses and actual foreign callback transport. The original111-file profile capture omits27 transitively included Lua C headers and is explicitly not a complete C-header closure. A separate PRIVATE two-file production invoke_ok callback correction names teleport_artifact_callback_invoke_ok and adds identical ip forwarding while preserving private fixture aliases and unchanged source policy. Candidate .cache/artifact-callback-fix/manifest.json SHA2565f4b95436c2b934768e4e983cfc7b5bf951de140ead549357b8cf57edfb70cb6 binds173 files including those27 exact headers. Parent verified173 hashes, reviewed the two-file diff, reran381/3,261 unchanged comparisons, and independently passed actual C pointer identity/6 indirect calls/3 original result cases/positive-and-NULL which_armor typed projection, with zero private test imports in the production-only projection. Patch SHA256ba35f040b8fd09f6a64fd9a18ce977780f497164eca7c83bd91ab6b7329257c4 remains UNAPPLIED; original163-input handoff remains immutable. Full-game/native-host/shared integration and complete branch/configuration coverage remain pending; accepted87 status does not transfer.
+
+J120 immediate macro-inventory correction: the actual saved compiler -dM output has CHRONICLE/DEBUG defined and **DUMPLOG absent** (as are NO_ENLGHT_CONTRACTIONS/SCORE_ON_BOTL). The preceding prospective DUMPLOG-active phrase is superseded; no code had been authored from it. The translation will retain the original DUMPLOG-only bodies as inactive comments under this actual configuration, without changing flags.
+
+PAR08 corrected98 timing diagnostic: the original New York timezone worker
+with the two private loader corrections hit its unchanged 30-second deadline
+(30.0247s) while all nine authors were allowed heavy builds. No assertion failed
+before termination. This is a failed timing run, not acceptance and not yet an
+isolated performance conclusion. Evidence `.cache/tu98-performance/two-fix-worker-result.json`
+binds all 968 unchanged captured files and three unchanged loader/candidate hashes.
+A bounded quiet repeat is being coordinated; no harness/deadline changes.
+
+PAR08 queue reservation only: FILES TU115/J121 is exclusively reserved for
+the other coordinator's PAGER author after its final frozen handoff. Actual
+configured source inventory and announced scope are required before code edits;
+this is not an implemented, selected, or passing TU. NHLSEL84 remains held with
+its documented upstream unary use-after-free mismatch; DLB has zero configured
+bodies and is not counted. Next unallocated reservation is TU116/J122.
+
+PAR08 quiet timing result: after all nine authors acknowledged no active heavy
+jobs, the same original New York 30-second worker still timed out at 30.0277s.
+No assertion output preceded termination. All 968 captured files and three
+loader/candidate hashes stayed unchanged. Evidence:
+`.cache/tu98-performance/two-fix-quiet-worker-result.json`. This establishes a
+quiet timing failure; the exact seed0002 behavior remains separately verified.
+All authors have resumed. A separate bounded CPU-profile diagnostic will locate
+the slowdown; it is not a gate and does not change the original worker deadline.
+
+PAR08 MONMOVE structured return repair promoted by ROOT: four owned files
+only (`monmove-runtime.js`, `tu-monmove-probe.c`, `test-tu-monmove.mjs`,
+`check-monmove-data.mjs`). Preserve original52 JS movement bodies unchanged.
+Project actual native `gettrack` coord*, `autoreturn_weapon` const struct pointer,
+and typedef stairway* returns from `stairway_at`/`stairway_find_dir` through the
+existing live coordinate/arw/stair views; preserve null and native field widths.
+Expose actual rm.h `wall_info` lvalue alias to `flags`, without a separate stored
+field. Fixture now supports real growth/reentry at its controlled gettrack
+boundary. Canonical tests cover all positive/null/nontracking cases, history slots,
+all four return types, iron-bar short-circuit, actual heap growth/reentry and a
+second independent Module. Source guard requires actual configured declarations
+and alias definition. Author's fresh pair passes5536; four deleted adapters fail
+C differential assertions and deleted stairway_find_dir conversion fails at the
+executed native clear_path argument boundary. All six bundle hashes and four
+before/after promotion hashes independently verified. Exact complete candidate
+c1a2658fb36a1e5fff362780662f3e2bfb1f9fadbd4972909b87d0a75c4597cb also
+preserves all18244 RNG/341screens/cursors of the accepted87 seed0002 capture
+(`.cache/tu98-performance/complete-comparison.json`). Fresh shared pair is next;
+no native/full98/public acceptance is claimed. Original harness/reference/Csource
+and preserved968-input failed98 snapshot remain unchanged.
+
+PAR08 repaired98 shared proof: fresh normal shared MONMOVE5536 comparisons
+pass with all98 binding contracts/source guards; MKMAZE201/MKLEV307 and WIZ748
+fresh repair proofs are preserved separately. Eleven new suites now total31,437
+comparisons, plus END binding error and two DETECT const witnesses. This is
+EmC-first proof; native/full44/public acceptance remains pending. A bounded
+non-gate original-NY diagnostic with full adapters completed correctly in38.0805s
+under author-heavy load; profile identified MONMOVE record-view construction and
+allocation/GC among main costs. Original quiet30s failure remains a failure.
+Original MONMOVE author is preparing a private live-view reuse candidate; no
+performance change has been promoted. Evidence complete-profile-worker-result.json
+and complete-ny-diagnostic.cpuprofile under `.cache/tu98-performance`.
+
+PAR08 queue reservation: MKOBJ TU116/J122 exclusively follows frozen MUSE
+under the other migration coordinator; actual configured inventory/scope precedes
+implementation. FILES115 remains reserved for the PAGER author. These reservations
+are not selected/passing counts; next unallocated reservation is117/J123.
+
+PAR08 MONMOVE view reuse promoted after ROOT review: runtime, canonical test
+and source guard only. A Map local to each existing per-Module environment keys
+views by actual schema type and native linear-memory address. Every scalar,
+bitfield, pointer, array and heap-buffer read remains live; no native game value
+or gameplay decision is cached. Publish only after all field/alias construction
+and ABI width checks succeed, so caught constructor failures cannot leave a
+partial cached record. Views remain retained until that environment/Module is
+collected; no eviction or complete long-session memory bound is claimed.
+Native free/reuse at the same address reads the replacement record through the
+same typed live view. Different types and Modules keep distinct identities.
+Private unchanged-C tests pass5548 including mutation/reuse/growth/reentry/
+Module checks and repeated invalid-width rejection. Earlier9cf early-publish
+candidate is preserved and rejected on the second failed-constructor retry;
+it was never promoted. Runtime df2aaaddf4e915dd3a0e71556b4eeaa21006cc56ce2fe154f6c03fe28904a528
+matches actual accepted87 seed0002 all18244RNG/341screens/cursors with all968
+snapshot+5diagnostic inputs unchanged; evidence cache-v2-capture-result.json.
+Original source52bodies, native/C libraries, harness and recordings are unchanged.
+Fresh shared tests and original30s timing remain pending; no full98 acceptance.
+
+PAR08 FILES TU115/J121 scope before implementation: actual production CPP/AST inventory68configured src/files.c bodies(53public/15private),3725prepared lines. Pristine SHA5295af5df75ed1f67c9898d9d56a2cad6a35da68e511b5e5ab35886db6f9f2a5 differs from prepared SHA460967cdbc2c5c73d29e7148efcb8ee4c3a60fe548a152fe3e4a3f5fe549e96d ONLY inherited __EMSCRIPTEN__ docompress_file dispatch to teleport_compress_file instead of native fork/exec/wait. Reference is prepared; native subprocess branch remains unverified, no process/compression policy fallback or identical-executable claim. Active COMPRESS/usr/bin/compress/.Z,SELECTSAVED,NO_FILE_LINKS,USE_FCNTL,INSURANCE,SAFERHANGUP,LIVELOG; inactiveZLIB_COMP/PREFIXES_IN_USE/SFCTOOL/DLB/Windows/VMS/FQN8x512 alternatives stayexcluded. Unique JS core/runtime retains all68 original boundaries/names/order/formals/comments/control/data: sf2msg10rows,bei1,cvtinitFALSE,converted/unconverted filename pointers,lockfd-1,sflock; localbasebuf80/two distinctmutablehexdigits17 buffers preserve source lifetimes/identities. Two logged RNG origins choose_passage retain exactbasename/line/caller and evaluation; actualMAXPASSAGES30/signed8pasg stores retained despite stale20comment and intermediatexint16casts. Twoactualpointercompound+=sites arechar*bytes only, guard exactAST/pointee types. C only typedheaders/layout/field/dependency/varargs/callback transport/native zero backing, no source file/locking/save/compression policy algorithm fallback. Preserve NHFILE fieldlevel/dirent/flock/obj/level layouts, fullnativecopies/alias lifetimes/errno/stdio/fd and directory errorcleanup; LP64 offsets/counts/moves/times/livelog andflocklonglong widths. Real strcmp_wrap deterministic-sort callback, symbol/config/wizkit parser callback identities and volatilewindowcallbacks remainexact. Actual prepared-original C versus import-only JS O2memory64 all68, controllednativefile/dir/fd/error/locking/compression services and callbacks/ownership/stack/growth/reentry/Module/wide/narrow/canonicalpointer cases plus freshCPP/source/data/type/member/RNG/import guards and unchanged-oracle wrong-code rejection required beforefreeze. Positive/null nativepointer returns and exactcompilerselected fieldprojections requirewitnesses; selectedtypedknownpointer identities maponlydeclaredregion/offset,unknown64/rawscalar/paddingbytes preserved withcollision/unsafe/scalar-address witnesses. Controlled filesystem/dependency-world/codec/subprocess limits recorded; native-host/fullgame/publicunverified. Unique FILES core/runtime/library/probe/layout/test/fragments/private outputs only, no selected98/shared/frozenPAGER edits. Read-only .cache/files-first-pass inventory/config/source-diff precedes this scope and GO.
+
+
+## Historical status notes retained before the repaired 98 build
+
+The following paragraphs are superseded chronological notes, not current status.
+Their original wording and evidence references are retained for audit.
+
+**Repaired98 rebuild starting; accepted checkpoint remains87.** Fresh shared
+MONMOVE5548 and all98 contract/source checks pass after live-view reuse; eleven
+new suites total31,449 comparisons plus END1/DETECT2 extra witnesses. The actual
+immutable98 candidate with reviewed MKMAZE and MONMOVE corrections passes the
+original New York30s worker in29.844885s under author load, without any harness
+or deadline change. All968snapshot+5private input hashes remain unchanged;
+cache-v2-worker-result.json preserves the exact command/result. The0.155s timing
+margin is narrow; no full integration/44-session acceptance is inferred.
+The normal mixed98 build is rerunning with the promoted WIZ production callback,
+MKMAZE pointer stride and MONMOVE typed return/alias/live-view fixes. Old failed98
+snapshot remains immutable. Native parity for45 first-pass ports remains pending.
+
+**Private replay repair is exact for the original failing session.** A loader
+combines the promoted MKMAZE pointer-stride fix with an unpromoted MONMOVE
+`gettrack` return adapter. The actual native function returns `coord *`; the
+adapter previously exposed its numeric address while the original JS body reads
+`cp.x`/`cp.y`, producing zero destinations. The candidate wraps the native pointer
+in the existing live coordinate view, with null preserved. Original-C differential
+checks including positive/null/nontracking cases pass 5,507 comparisons. The
+immutable 98-build replay now exactly matches accepted87 for all 18,244 RNG calls,
+341 screens and cursors, and supplied replay inputs. ROOT independently compared
+the complete arrays; 968 captured inputs plus four diagnostic sources remain
+unchanged. Evidence: `.cache/tu98-performance/two-fix-capture-result.json` and
+`seed0002-98-two-fixes.json`. This is one-session causal evidence, not the 44-session
+acceptance gate. Related structured-pointer return adapters and the native
+`rm.wall_info` alias are under focused original-C review before promotion.
+
+**Selected 98 repair; acceptance remains at 87.** The normal 98-file build
+passes, but its preserved replay fails semantically. ROOT has promoted the
+MKMAZE `get_level_extends` correction at both original pointer increments:
+`struct rm * += ROWNO` now adds `21 * sizeof(struct rm)` (168 bytes), rather
+than 21 bytes. Function boundaries and control flow are unchanged. The canonical
+unit suite now checks all four output cells (all eight bytes), plus an asymmetric
+80-by-21 packed terrain map; the previous suite invoked this function without
+checking these output cells. Private original-C comparisons pass 201 checks,
+unchanged MKLEV 307 pass, and reverting the correction triggers an actual
+assertion failure. Reproducible corrected private emitter and 28 verified bundle
+hashes: `.cache/mklev-mineralize-regression/integration-recipe.json` and
+`final-hashes.json`. Fresh shared MKMAZE 201 and MKLEV 307 checks now pass
+(`.cache/98-mkmaze-stride-fixed-shared-retry.log`); no new native/public pass
+is claimed. The first invocation used uppercase probe names and was rejected
+before building; its log is retained separately. The immutable 98-game candidate moves its first RNG difference from
+2157 to 4390, where monster movement requests `rn2(20)` instead of `rn2(32)`;
+the original author is investigating actual candidate/history state. Captured
+inputs and the accepted 87 checkpoint remain unchanged.
+
+WIZCMDS's production comparator transport was separately renamed to
+`teleport_wizcmds_callback_migrsort_cmp`; the private unit alias remains separate,
+and the original comparator algorithm is unchanged. Fresh shared 748 checks
+pass (`.cache/98-wiz-production-callback-shared.log`). The actual game has not
+yet been rebuilt with either promoted repair. The status paragraphs below retain
+the earlier failed-build history; they do not describe current source fixes.
+
+**98 normal build passes; import audit blocks acceptance.**561declared hashes
+verify;968captured inputs are unchanged and274literal module dependencies resolve
+in the copied tree. All98original objects/HACKLIBarchive/C Lua interpreter keys
+are absent; all11newports have actualJSimports. WIZ native sorting references
+`teleport_wizcmds_test_migrsort_cmp`; this is a production callback mistakenly
+sharing its private fixture entry name. Other10newports have no testalias imports.
+A separate production callback entry is being checked privately without changing
+the original comparator algorithm. Failed evidence:
+`.cache/tu98-gate-snapshot/failure.json`. Original integration/public have not run;
+no98/native acceptance is claimed. Accepted87remains preserved.
+
+
+**98 batch full build running.** All98 original function/order/parameter/comment
+checks pass; eleven new shared suites pass31,354comparisons total. DETECT's
+fixture const reset is corrected and fresh1267comparisons plus both direct
+nonzero-const witnesses pass. The unchanged private negative rejects wrongfield;
+old-reset witness0 is preserved. Actual98full game build/integration/public and
+45new-first-pass native parity remain pending; accepted87is preserved separately.
+No more ports enter this build batch. Nine authors continue the next wave.
+
+
+Live selection98: DETECT1267/TELEPORT2910/MKLEV307/MONMOVE5455 fresh shared
+comparisons pass. SPELL fresh shared3158comparisons and all98sourceguards now pass;
+preview-helper missing layout/metadata anchors were corrected and verified
+before writes. SPELL preserves43source functions, scoped native ABI, six live
+callback imports, original755/getspell Snprintf origin, perModule private state;
+no startup or original C fallback. Eight current inputs are bound before shared
+promotion. Native/full-game/public gates for this batch remain pending; the98build batch
+is closed to additional ports so independent authors continue the next wave. DETECT
+fixture const-field clearing is under narrow validity review; no production
+failure was observed. Accepted87whole-game44/44proof is preserved.
+
+
+Historical93 registration added POLYSELF/WIZCMDS. Their exact91-based
+patch, six baselines and frozen handoff hashes verify. Fresh shared original-C/hybrid
+comparisons pass POLY8947/WIZ748 and all93sourceguards pass; existing91shared proofs and accepted87whole-game proof
+remain separate. New layout serialization preserves compiler-width64 constants
+as signed decimal strings for runtime signed/unsigned interpretation. Typed
+support/probe/source-profile wiring is added, with no frozen harness or upstream
+source changes. DETECT/TELEPORT/MKLEV are rebasing for the same next game batch.
+
+
+**Current whole-game checkpoint:87 TUs plus JavaScript Lua.** Fresh normal build,
+original integration (unchanged30s workers), and44/44public recordings pass every
+metric:792,838RNG calls;11,405screens/cells/cursors;1,483animation frames.
+All466declared hashes and620captured inputs remain unchanged across gates.
+The252literal module dependencies resolve in the copied tree. Evidence:
+`.cache/tu87-windows-fixed-gate-snapshot/acceptance.json` (manifest SHA256
+23c9c4f589d79f5a92a4ffa75b627a147f27aef190ae2456c1629e175bebfa27).
+All87original C objects and C Lua interpreter symbols are absent; six new ports
+have actual JS imports without private-test aliases. Native parity remains
+pending for34first-pass TUs;53native suites cover the historical baseline only.
+
+**Previous91 shared checkpoint (whole-game gates pending).** MKMAZE/DOKICK/DIG/END are
+registered and all91function/order/parameter/comment checks pass. Their fresh
+shared original-C/imported-JS comparisons pass199/2217/5052/1094 respectively;
+END additionally passes one binding-error witness. Production-header profiles
+are recorded explicitly. END's process/signal/backtrace effects are controlled
+in fixtures; real OS shutdown behavior remains unverified. Frozen POLY/DETECT/
+TELEPORT are being staged for the same next whole-game batch, each requiring
+fresh shared comparisons before the normal build and public gates. Nine authors
+continue independent files; reservations are not accepted-port counts.
+
+**Binding performance correction:**`js/ported/windows-runtime.js` now caches
+its environment by actual Module and immutable layout identity. Source functions
+are unchanged; heap views, native fields/callbacks and per-call stack restoration
+remain live. Equivalent generated services retain their first closures; replacing
+service policy or mutating layout contents under the same identities is outside
+this contract. The exact private candidate passes9209comparisons including real
+growth/reentry/Module isolation; unchanged New York assertions complete in25.092s
+under the original30s deadline versus43.871s. Fresh shared9209 and whole-game
+integration/public gates also pass. Handoff `.cache/tu87-performance/handoff-manifest.json`;
+selected runtime SHA72285746357e70a161b365fdd2c687bb6cbfd3a834a00dbe45f0b700df9f6251.
+
+**Capture correction:**older81/failed87 copies omitted `utf8-runtime.js` because
+of a TU-filename filter. Their actual gate results and recorded-input hashes
+remain valid, but those copies are not self-contained replay bundles; preserve
+them unchanged. `scripts/check-js-import-closure.mjs` now parses static imports,
+re-exports and literal dynamic imports. New87capture includes all252resolved
+module files, unions explicit artifacts, and verifies copied-tree resolution.
+No nonliteral import expressions were found; nonliteral/runtime file access is
+outside static completeness and requires explicit seeds. A missing-UTF8 negative
+fails (`.cache/tu87-import-closure-negative.log`). Configured SDK/external tooling
+is still required to replay; this is not a claim to capture the entire toolchain.
+
+**Integration corrections retained:**the obsolete END preview failed independent
+baseline/patch checks before any writes; corrected90-based patch and141frozen
+handoff hashes verify. DIG's first shared hybrid compile missed the hack.h context
+of its private wrapper. `scripts/build-tu-probes.py` now emits dedicated
+`dig-support.c` including hack.h, generated source locations and the unchanged
+adapter fragment; other dependency include order and game policy stay unchanged.
+Fresh5052comparisons pass. Failure `.cache/91-four-first-pass-dig-link-failure.log`
+is a compile failure despite its filename. Superseded staging notes remain in
+`.cache/migration-91-status-history.md`; original logs/artifacts are preserved.
+
+
+PAR08 MKOBJ TU116/J122 scope before implementation: pristine=prepared src/mkobj.c135398bytes/3851lines SHA49c2de3bcf1125be55f11c17ffc4f614956f5288a5edfb56b2248b7fcaa3b488. Actual production basename/cwdTREE/src/O2-gmemory64/currentdefines/ncurses/forcednative-terminal AST99sourcebodies(78public/21static),43canonicalrecords167fields,145truedependencies,44external+13sourceprivatevariables,79loggedRNG,no goto/pointercompoundassign. Two actual conststructicp* postfixincrements stridecompiler sizeof(icp). Unique JS core/runtime retains original algorithms/names/order/formals/comments/control/data,13TUstatics(fouricpprobabilitytables11/9/7/10,zerooextra,alteration_verbs20,dknowns10,treefruits5,ofmt0/3,mfmt1/2,obj_state_names10),where_name.unknownchar32 and sanity_check_worn.wearbitsulong18 source identities/lifetimes;219literals4084bytes,ninewhole-recordcopies. Native zero backing mustmutable/separatelycompiled where needed topreventconstzero O2folding; no initialized C algorithm tables/sourcefallback. One actual variadic functionpointer site place_object selects nativepanic/impossible with typed per-site transport. splitobj.num/start_glob_timeout.when/shrink_glob.expire_time/mkgold.amount/init_dummyobj.oquan retainBigInt long64, as do rider_revival_time/peek_at_iced_corpse_age returns; genericargs.map(ptr) forbiddenforlongscalars. obj_to_any returns canonical unionany* numeric typedaddress, not guessedJSprojection. Only sourcefixedparam mkobj_at(let,x,y,artif) useslet-to-let_ sharedcheckerexception; separate let locals mksobj_init/mksobj map byexactDeclIDs, no globalstringreplacement. Source mkgold max repeatsdepth() whenselected; rn1wand-offset nativefieldreads follow RNG peractualCPP, preservecanonicalC0/1/shortcircuit/RNGorigins. Compileralias/activeunion/nobj/nexthere/container/carrier fields, obj** destruction/mergeclearing, allocation/free/realloc/oextra andtimer/anythinglifetimes/fullcopies/quantities/masks/ages remainexact. Actual originalC/import-onlyhybridO2memory64 all99, source/data/type/member/prototype/RNG/import/scope guards, ownership/callback/staticbuffer/timer/positive-nullreturns/fullcopy/longparams/widefields/growth/reentry/Module/stack plus unchanged-oracle wrong-code rejection requiredbeforefreeze. Normalizeonly explicittypedknownpointerregions/offsets, unknown64 rawbytesbeforeNumber; scalar/padding/unselected/anything-inactiveunionfields raw, collision/unsafe/scalar-address witnesses. Controlledworld/allocator/timer/dependency limits andnativehost/fullgame/publicunverified status explicit. UniqueMKOBJfiles/privateartifacts only; no selected98/shared/frozenMUSEwrites. Read-only .cache/mkobj-first-pass inventory precedes this scope/GO.
+
+PAR08 documentation consolidation: current summaries now separate accepted87, selected98 rebuild, and unselected private proofs. PORTING_PROGRESS rows88–116 reflect actual shared/private/reserved states; prior status paragraphs remain verbatim in historical appendices. No code, gates or expected outputs change. Reservation IDs are not completed counts.
+
+
+POTION TU108/J114 private EmC first-pass handoff (2026-11-10): all 66 configured potion.c functions remain in original order/boundaries with original parameters, locals, comments and source policy. JS owns only the four original readonly message/bottle tables and per-Module drink_ok_extra static. Native addressable locals, full zeroobj byte copy, fresh pointer views, exact signed/unsigned widths and source-site varargs/RNG adapters are ABI/language adaptations. Forward goto labels in potionhit and potion_dip use minimal nested blocks/shared tails, with no extracted policy helpers or duplicated effect bodies. C rn1/min/max/Maybe_Half_Phys evaluation order is expanded at original call sites (including reevaluation and callback visibility). The private oracle compiles the unchanged source plus original object/monster/allocator/hacklib/cmd dependencies; the cmd include wrapper renames only nine unrelated controlled-world hooks, leaving actual isok and all dependency algorithms unchanged. Private O2 memory64 pair passes 2,425 comparisons covering all 66 functions, full automatic-object bytes, native aliases, growth, original split_mon callback reentry and separate actual Modules; four deliberately wrong semantic variants fail unchanged-C comparisons. Source/data/parameter/comment/RNG and lexical checks pass. These results are EmC first-pass evidence only; actual native platform parity and root shared mixed-game/link/public gates remain pending. Exact owned files, recipe, metadata and limitations: .cache/potion-integration-plan.md.
+
+PAR08 scorer-wrapper capture correction: the repaired98 original integration
+passed against all968 unchanged captured inputs. The first original score-wasm
+wrapper then exited2 BEFORE any session because the capture omitted existing
+`.teleport/repo-metadata.json`. Copy the identical repository metadata
+(`category: agentic`) as a supplemental input; no harness/game/category edits.
+The base968-input capture manifest remains unchanged. Separate
+public-input-hashes.json binds all968 plus metadata (969 total), and
+public-capture-supplement.json records addition AFTER integration/before scoring.
+Original wrapper failure log is preserved. Future capture-next-game.py explicitly
+seeds metadata. Integration proof covers968 before/after; full scorer proof will
+cover969 before/after. Do not claim969 existed before integration. Runtime source,
+artifact and resolved import closure are unchanged.
+
+PAR08 queue reservation: EAT TU117/J123 exclusively follows frozen POTION
+for ROOT's author. Actual configured inventory and announced scope precede code;
+POTION's frozen2425/all66 handoff remains unselected pending next shared batch.
+Next unallocated reservation118/J124. No current98 source/build changes.
+
+PAR08 queue reservation: NHLUA TU118/J124 exclusively follows frozen DECL
+under the Lua/runtime coordinator. Reuse existing JavaScript Lua/API and earlier
+NHLOBJ/NHLSEL work; do not reimplement the interpreter. Configured inventory and
+announced scope precede code. NHLSEL84's original unary use-after-free stays
+explicitly incomplete. Next reservation119/J125; current98 selection unchanged.
+
+PAR09 DECL113/J119 frozen private completion: all14 owned inputs are hash-bound in .cache/decl-author/frozen-manifest.json SHA2569ce5986b1959bae04525cbcec85a1646acc01021f35afd59d2eb8f494fbea86a; integration recipe SHA256e9fd8ce0e416300e9040982075caaa3d38f7cd79dca250cb841ae72e1a16e61a. Fresh separately compiled no-LTO original-C/hybrid gate passes31 state cases/7,134 comparisons over all152 source objects,49 templates and353,008 bytes. Parent independently verified14 source hashes and reran31/7,134. Configured body/literal/profile/fullAST guards bind3 active functions,698 comments,132 records,1,501 fields and169 bitfields. JavaScript owns original initializer values; C provides aligned writable zero-only backing with compiler-specific source-qualified typed aliases. No write casts through true const objects or initialized C fallback. SDK addOnInit ordering is proved separately: a no-LTO foreign C constructor reads64 slots before any DECL source function, and all152 initial objects match; removing JS startup causes the same real constructor to differ (slot0 zero versus original UINT64_MAX). Explicit source resets retain upstream omissions, pointer rebasing/actual strides, readonly views, shared string identity and separate-Module lifetime. Live pre-growth views, foreign C mutation/readback and nested C/R/T binding restoration pass. Historical discarded fixture-growth and sharing failures remain recorded. No shared selected98/Lua/frozen prior-port files changed; native-host, shared integration and full-game/public remain pending. Final private log .cache/decl-author/parent-independent-rerun.log; metadata gives exact separate storage/consumer and startup integration requirements.
+
+
+EAT TU117/J123 scope announced before translation (2026-11-10): actual configured src/eat.c SHA256 2e3da760f9f3921c5209741992c8c73cbb14e795190b4e31dc8c0f6d1330f5d7 yields77 functions (37 public40 private), not a partial eating subsystem. Preserve all original boundaries/names/parameters/local names/comments/control; source-owned hu_stat/tintxts/foodwords and local readonly tables remain authoritative JS. Per-Module TU static cells and nativezero stable message/table backing are ABI transport; live victual/tin/occupation/function identities remain native-visible. Three forward target labels will use minimal labelled blocks/shared tails, no policy helper or new control flag. EmC-C first-pass private work is authorized; actual native parity and root shared/mixed/full/public gates remain pending. Exact scope/provenance and upcoming adaptations: .cache/eat-integration-plan.md.
+
+PAR09 dependency audit accepted98 checkpoint: scripts/audit-js-dependencies.py now binds .cache/tu98-fixed-gate-snapshot/acceptance.json to its actual manifest29358f6a70a4f840b43a70813b71b402c68fd079c54dce3802e859b0efca822f, Wasm62ff5f7d2c8d8994d5364e477b7cf618ad2c9b5a9587eabfb3a395690acd0eac, reviewed MONMOVE/MKMAZE/WINDOWS/ENGRAVE/runtime identities,561 declared hashes and968 integration inputs. It separately rechecks969 public inputs and the exact scorer-metadata supplement, requiring every base input unchanged and rejecting a false969-before-integration scope. Original wrapper preflight failure remains in the snapshot; no harness/category/comparator changes occurred. The audit reads actual production-import-audit.json, provenance-after.log and original integration-result.json, binding exit0/original30-second workers/no diagnostic loaders, all44 results and exact792,838 RNG/11,405 screens,cursors,cells/1,483 animations. It records274 Acorn literal-module closure evidence without claiming to reparse JavaScript or capture the full SDK/header closure. Focused accepted-binding, changed-manifest, changed-selected-source and false-supplement-scope checks pass; evidence .cache/dependency-audit-98-review.json. Audit SHA521671f1390923c70f2ce0977b0f231c5956818ae29c6573c24ffc7dfcff03b6; generated inventory SHA930b7f16c248a1857418ee2823fa4d090dcfe0300d1e0f9a633fc84866ec4a3b records configured/built98, zero missing inputs and exact current acceptance match. README and wasm README Lua paragraphs now cite this accepted checkpoint. Older87 and failed98 artifacts remain historical; later source changes lose live acceptance matching. New45 first-pass ports remain independent native-host parity pending.
+
+PAR08 next110 batch promotion step1: register frozen DO44 original functions
+as selected99; six reviewed integration files only. Add callDo namespace/import,
+compiler layout reader/signed constants, typed support/varargs wrapper and
+normal/shared source guards. The normal mixed linker excludes do.o from the next
+build; current executable remains accepted98 until the closed110 build. Allnine
+frozen DO component hashes and six shared baselines independently match; patch
+checks before application. No DO algorithm edits, startup initializer or original
+C fallback. Private1719proof remains separate; fresh shared DO comparison is next.
+
+PAR08 next110 promotion step2: register frozen TIMEOUT54original functions,
+selected100. Six regenerated integration files add exact timeout dispatch,
+compiler-generic layout reader with signed/raw64 constants, original-source
+literal/assertion provenance, shared first-pass profile and guarded typed support.
+All8 frozen components independently hash-match; no source algorithms or local
+JS-owned timer tables changed. Seven foreign callbacks use actual typed native
+identities; no new production trampolines/private imports/startup table mirror.
+Private1770proof remains separate; fresh shared pair is next. Actual executable
+and accepted evidence remain98 until the closed110 build.
+
+PAR08 next110 promotion step3: register frozen POTION66 original functions,
+selected101, six refreshed integration files. Exact potion namespace/bindings,
+compiler layouts/raw64 constants, source literal metadata and dedicated typed
+support wrappers are installed. Both probe modes keep the frozen actual forced
+native-terminal header/profile; use true objects/monst/alloc/hacklib plus the
+POTION cmd dependency wrapper with true isok. No gameplay fallback. ROOTverified
+all18 frozen handoff hashes and six shared baselines before application. Its
+existing header defines probe_context_size and the default autoexport is retained;
+review's initial suspected omission was rejected without code changes. Actual
+layout-reader/metadata/binding postconditions now explicit. Private2425/all66 +4
+semantic negatives remain separate; fresh shared DO/TIMEOUT/POTION is next.
+Current executable/accepted checkpoint remain98; next closed target110.
+
+PAR09 NHLUA118/J124 scope before implementation: exclusive src/nhlua.c actual configured inventory has94 functions(36public/58static),44 int(lua_State*) callbacks plus allocator/hook/warning callbacks,16 file statics/11 block statics,142 true foreign dependencies including54 existing Lua ABI APIs,143 referenced fields and286 prepared comments. Prepared SHA256cf4403c39d709de3a0aaf8c1797bbead24d88db4b927e798e2237285722a9c24 differs from pristinecf161f30beb1147102cb9a137997acea715bdec9d7b16dc44082518d5ec257e1 by inherited patches; raw diff is preserved in .cache/nhlua-author. Actual NHL_SANDBOX/Lua5.4.8/1000-instruction profile remains active; DUMPLOG/SFCTOOL/notyet/DLB stay inactive. Proposed unique source/core/runtime/library/support/layout/probe/guard/test/recipe paths are recorded in plan-and-divergence-handoff.json before production edits. Preserve original algorithms/names/order/formals/comments/macros/flags/source quirks and native widths/addresses/data lifetimes:41-row nh_functions table,3 u rows,9 consts,35 mapchar rows,24 ustruct rows and9 sandbox arrays/60rows. Existing frozen82 Lua VM/compiler/library/API sources and native Lua API shim remain unchanged true dependencies; this work replaces the game-facing NHLUA policy, not the interpreter again. First gate is actual native setjmp/longjmp quota scope invoking a JS continuation with the real setjmp result; original step/statctr/memory-limit/panic decisions stay JS, no copied C nhl_pcall/nhl_hookfn policy. Prove this boundary with compiled Lua and the frozen JS Lua provider before broader translation. Allocator size_t/pointer callbacks, debug lua_Debug fields/RNG caller context, warning fragments, file/save buffers, tutorial snapshots/nonempty chains and real cleanup require directed actual-C checks. Preserve strict current-used>memlimit policy and original fatal behavior, without claiming safe continuation after panic. No selected98/shared/DECLfrozen/prior-port/Lua82 edits; NHLSEL84 existing unary-UAF mismatch remains parked and unpromoted. Native/shared/full-game and full branch/profile parity remain pending until actual gates.
+
+PAR08 DO integration redundant build-check correction: first shared three-port
+run stopped BEFORE compilation because MKLEV's unchanged compiler-profile guard
+pins nethack-c/wasm/build.py. The DO proposal had added importast+four lines to
+invoke check-do-data there. Normal build.py already invokes build-tu-probes.py,
+whose selected firstpass_name loop now includes DO and executes the same guard.
+Remove only the redundant five lines; build.py bytes now exactly match accepted98.
+Keep DO's source guard in the normal/shared probe route, and retain all frozen
+compiler profile hashes/settings/guards unchanged. No TU algorithm or9DOinputs
+changed. Initial failure remains .cache/110-root-three-shared.log; corrected run
+will use a new log. Historical six-file DO proposal remains preserved.
+
+PAR08 next110 fresh shared step1 PASS: DO1719/TIMEOUT1770/POTION2425
+original-C/imported-JS comparisons (5914total), all101 dispatch bindings and89
+central factory contracts pass; missing-namespace negative rejects. Every target
+pair was freshly compiled in the shared builder. Canonical test's old printed
+TIMEOUT word "shared pending" is its static label; this actual log is fresh shared
+proof. Initial duplicate-buildguard failure remains preserved. Frozen gameplay
+source, harness and accepted98snapshot stay unchanged. Nine next batch entries
+remain unapplied; real mixed110/full integration/public/native gates pending.
+
+PAR08 progress inventory update: three newly registered shared passes distinguished from accepted98; DISPLAY119 and APPLY120 reservations recorded, nextfree121/J127. Documentation only; no code/gate changes.
+
+PAR09 READ109/J115 frozen private completion: nethack-c/wasm/tu-fragments/read-hashes.json SHA2562da30cba98b034ab4110acbd41ee15472970e7547656da48f77a4cebb950e596 binds226 inputs(6 production/4 tests+guards/103 dependencies/113 private proof+history). Final configured original-C/hybrid gate passes8,766 comparisons across all62 original entrypoints; source/CPP/fullAST/types/literals/367comments/7tables148entries/46RNGorigins/scope/9targetconststorage/macro-order and unchanged-oracle wrong-code guards pass. Production-only linked projection separately passes9 checks with zero _test_ imports, four production-named callbacks, actual C pointer identity and indirect C invocation. Typed-return matrix covers all8 positive native identities/aliases and C writes to6 writable records; legal NULL cases cover6 nullable functions only. Actual mkobj/mksobj ReturnsNonNullAttr is guarded; discarded artificial-NULL probes and warning logs are retained as invalid provisional history, not final evidence. Parent independently verified226 hashes, reran8,766 and production9/4callbacks/zero_test_imports, then reverified every frozen input unchanged. Original source prepared/pristine SHAec15ad773e50f5d466ddc20515b441c9ddb4e99449abd1f34fa43a14e6a8b2c4 remains identical. Eleven source printf-format warnings remain documented; no invalid-NONNULL warning remains. Handoff read-integration.md describes exact runtime/support/layout/probe requirements and bounded fixture assumptions. Native-host/shared-game/public, full branch/configuration coverage and allocator/process boundaries remain pending. READ is excluded from the closed110 batch; later integration requires fresh gates. Agent moves only to exclusive APPLY120/J126 read-only actual-profile inventory before scope/implementation; READ/MAKEMON/END/Lua82/shared selected inputs stay frozen.
+
+PAR08 TIMEOUT terminal-header compile collision repair: aggregate production
+support syntax with unchanged forced native-terminal.h exposes curses macro
+`lines`, colliding with a local assertion-forwarding array in
+nethack-c/wasm/tu-timeout-support.inc. Rename only its declaration and use to
+`assert_lines`; original source functions/assert conditions/line provenance and
+terminal settings remain unchanged. Preserve old frozen8-file manifest and old
+support bytes at .cache/timeout-header-collision/support-before.inc; new before/
+after hashes in repair.json. Private isolated/shared1770previousproof did not
+exercise this aggregate header namespace. Fresh1770 and aggregate syntax rechecks
+are required; no earlier proof is silently transferred to the new support bytes.
+
+DO_WEAR110/J116 private first-pass handoff: all79 original functions/order/formals and351 block comments preserved,15-row takeoff_order/static strings JS-authoritative,2 counters per actual Module, retained native60-byte delayed-message storage. Actual -O2 original-C/imported-JS pair passes5,704 exact comparisons/all79 entries; source/data/lexical checks pass and build diagnostics empty. Directed checks observe complete source-used numeric fields, signed8/bit63/native property masks, real queued/menu/object frees, obj** replacement, native callback equipment mutation,48MiB actual growth+reentry/nonempty scope restoration and two actual Modules sharing one dispatcher. Original MOREWORN macro expansion corrected to one block so else binding matches do/while; original int cast and logical C result widths retained. One-vs1000 menu callbacks have constant native stack spans4896C/4512JS; three in-memory semantic negatives assert-fail and removing per-callee scratch triggers pinned Wasm bounds trap. Controlled foreign world/UI/status effects and fatal/undefined inputs are explicit limits, native-host/mixed-game/public gates pending. Frozen9files/source hashes and exact root recipe in .cache/do_wear-integration-plan.md/.cache/do_wear-author; no shared or frozen DO edits.
+
+J120 private INSIGHT handoff: all46 configured original functions, all442 ordered block comments, JS-authoritative8x3 external vanqorders/33 achievement rows and10 exact source formatter sites now have original-EmC/imported-JS first-pass checks. Public native vanqorders backing is zero-only and populated from JS before native constructors with explicit addOnInit rooting; size_str/piousness/classifier static byte buffers retain stable per-Module native addresses. Prepared deterministic qsort calls the original private JS comparator through a typed C trampoline, distinct from test aliases. Source list_vanquished's short array and list_genocided/num_gone's int arrays preserve their different original native strides. Actual configured Clang FieldDecl bit metadata replaced an overbroad member-name heuristic exposed by populated gamelog.flags: that field remains signed-long64; no log-selection algorithm moved C. Full wide conduct/time/log values, all properties, real native tables, constructor access, independent Modules, and three actual reentry/growth stages are checked; negative attrval-threshold mutation is rejected by native C. Native formatter source arrays use source_lines to avoid the demonstrated unrelated curses lines macro collision. Owned integration recipe and explicit controlled-dependency/fatal/inactive/signed-overflow/native-pending limits are in .cache/insight-integration-plan.md. No shared registration or whole-game/native acceptance is claimed by this private handoff.
+
+PAR09 APPLY120/J126 scope before implementation: root-reserved exclusive src/apply.c prepared/pristine identical SHA3599e3ce2ea7ce4dac10730dc1a5496114a363dc951d5c1f0289a8575b40e24b,4558lines155854bytes. Actual production-cwd/basename CPP/fullAST captures76 configured functions(28public48private),371 comments,73 active RNG calls with one inactive #if0 site,320 true foreign functions,198 distinct field/type uses,49 globals including source constants,13 immutable static declarations,5 fadeness entries and41 automatic arrays/records. Actual AST has zero pointer arithmetic/compound/increment sites. Sixteen own function-value targets and7 foreign targets need real native callback addresses; three forward gotos join two original shared tails. Exact pre-edit artifacts/commands/paths are bound in .cache/apply-author/pre-edit-handoff.json SHAaf5a9485117c83615647bd0a57fc20ef4d1ed2187ce3129c8ea0a1f16fd967e7. Source algorithms/names/order/formals/control/comments/static data remain JavaScript; C supplies only typed native memory/lifetime/callback/variadic transport and actual foreign dependencies. Key gates include obj** replacement/deletion, HBlinded long* aliases, canonical coord/stairway/attack returns, timer/occupation/getpos callback lifetime, per-Module storage and live reads after growth/reentry. Actual Maybe_Half_Phys with rnd/rn1 at2082/3865 must read the native property before RNG; rn1 draws before offset; TimedTrouble repeated native long/property reads and observed logical values retain original C semantics. MAIL/MAIL_STRUCTURES/DEBUG_MIGRATING profile facts are captured; actual empty Soundeffect/SetVoice expansions erase unused argument evaluation. Unique APPLY files/private scratch only; original-C memory64 differential all76/production-no-test-import/callback/alias/lifetime/source+type+profile/conststorage/wrong-code guards precede frozen proof. READ226/MAKEMON/END/Lua82/shared selected inputs stay frozen. Native-host/shared/full-game/public, complete branch/configuration and invalid/process/allocator boundaries remain pending.
+
+PAR08 UNAPPLIED PRAY/DOTHROW/PAGER/MUSE/DUNGEON integration proposal:45/39/46/44/110 configured JS bodies retain source algorithms/data, original C excluded. PRAY common typed support/WeakMap environment and signed ordinary metadata; DOTHROW separate nativeStorageSources ABI and own metadata; PAGER one common typed adapter, separate non-LTO zero public storage and JS startup before normal callers. MUSE common typed support/WeakMap and signed ordinary layout; DUNGEON separate nativeStorageSources ABI/own metadata. All owned fixtures use actual production O2-g memory64/native header/ncurses and exact private basename maps. PRAY/PAGER self-include support; DOTHROW links its own ABI separately. PAGER real foreign hacklib/drawing/glyphs/strutil dependencies plus optimized extern consumer remain separate; no PAGER C algorithm fallback. Normal-build source guards, explicit owned probe exports/context exclusions, compiler layout reader/safe integers, real central dispatch, provenance and shared runner directories are staged together with AST anchors/baseline hashes/postconditions. Isolated proof2037/244/2905/1875/267 and negative controls remain component evidence; actual shared/game/native/public gates required after owner promotion. No native or fullgame parity is inferred from this unapplied proposal.
+
+
+## PAR08-PAGER frozen component (TU103/J109; integration pending)
+
+Location: js/ported/pager.js,pager-runtime.js; tu-libraries/pager.js; owned
+PAGER probe/layout/test and tu-fragments/pager-* files. Scope was announced and
+recorded before edits. Prepared/pristine pager.c are identical (2967 lines;
+92d078a4c4e0f81bf91c07b91383e848427eeed37b9877fa34d8564774b8952b).
+All46 configured source functions (16public/30private), original boundaries,
+params/order/comments/control/data remain JS; disabled health/interpreter, DLB
+and PORT_HELP stay inactive. C only exposes typed/header/dependency/storage ABI.
+
+Public what_is_a_location[30] uses JS-authoritative startup with separate zero-only
+C backing/noLTO and an optimized extern-only consumer. True coord by-value copies
+are native-sized even on source-local JS calls. Signed/unsigned64 fields, uchar
+command narrowing, real libc stdio/scanf/formatting, volatile callbacks and native
+function identities remain typed. The mon_to_glyph header helper retains original
+live u.ustuck expression under the actual configured compiler; C does not mandate
++ operand order, and no native-ordering claim is made. Per-invocation keyed native
+automatic slots reuse repeated line buffers; original DUMMY={0} zeros all bytes.
+
+Actual O2-g memory64 C/hybrid gate passes2905 comparisons/all46 bodies. Genuine
+foreign strutil.c pmatch ensures successful parser coverage, including6000 lines
+with explicit Csuccess/final-line/count and constant native stack-depth witnesses.
+Startup/byval/live-header/automatic-lifetime wrong-code variants all fail unchanged
+C expectations; reference Wasm stays unchanged. Source/scope/fresh production CPP/
+AST/config/1013 member aliases/types/17byte-pointer+=/8byte-pointer++/data guards
+pass, generic-reference support syntax passes; all46 hybrid source imports are
+verified, original pager.c excluded from hybrid and zero reference source imports.
+Unknown Number-colliding pointers retain exact64 IDs/rawbytes without dereference;
+address-shaped scalars stay raw. Direct unsupported-native invocation rejects.
+
+Prior development2672 counts had a documented fixture gap: generic pmatchFALSE
+prevented supposed success scenarios from rendering. A content-only6000-line
+wrong-code test also missed stack accumulation. Both failed coverage assumptions
+are preserved privately and superseded by genuine pmatch and native stack-delta
+witnesses, not reclassified as successful checks. Integration recipe/evidence:
+tu-fragments/pager-integration.md and .cache/pager-first-pass/input-hashes.json.
+Controlled naming/world/UI/allocation effects are fixture dependencies; real OS
+messages are not sent. Native-macOS, full-game/public and uncontrolled-world parity
+remain pending. No shared/selected/frozen artifact was edited by this author.
+
+
+PAR08 next110 promotion step4: ROOTverified all15readyartifact hashes and
+all528 frozen inputs/read sources. All6 code baselines matched exactly; the full
+7file proposal was initially rejected because otherauthors appended only to the
+shared Markdown. Verified original Markdown prefix/hash, applied checked6code
+files, then appended the reviewed proposal text while preserving every concurrent
+entry. No code-baseline waiver. First101 registry rows unchanged; selected106adds
+PRAY/DOTHROW/PAGER/MUSE/DUNGEON. All284 originalJSbodies stayfrozen. Add typed
+namespaces/layout/profile/metadata/startup/storage hooks together. Private33command
+proofs include10fixture+5generic reference contexts and106bindings/factory92;
+corrected101/106 aggregate both88warnings. No actualshared/game/native acceptance
+is inferred; freshshared five suites runnext. Previous fullpatch baseline rejection
+was beforeanywrites; incidental test invocation then rejected unregisterednames
+before compilation and is preserved at .cache/110-five-shared.log. Actualaccepted
+executable remains98; closed nexttarget110.
+
+PAR08 TIMEOUT native assertion helper reproof complete: fresh shared1770pass,
+all101bindings/factory89contracts pass. Aggregate actualforced-terminal-header
+101baseline and106proposal bothcompile exit0 with88warnings each. New bridge
+bytes are separately bound in repair.json; old frozen8manifest remains historical.
+No originalC/JS function bodies, assertion provenance or terminalconfig changed.
+
+BOTL TU121/J127 exclusive scope before implementation: actual configured src/botl.c is pristine-identical SHA256765fe13d7ee604c606c6920bce9bcb2a8a82299dbd56073b2b90101409409360,76 functions(32public/44private),4,582lines/361blockcomments.22 goto sites stay within the original two status-highlight menu functions; preserve original retry labels/control mechanically without new policy helpers. No source RNG calls. JS-authoritative original data comprises enc_stat6, initblstats27, condition_aliases6, conditions30, initial mutable condtests30/cond_idx30, terrain_descr47 and fieldids_alias22, with original local arrays/strings. Public C-consumed tables retain exact typed native backing; const storage goes in a separate zero-only native TU/noLTO with O2 foreign-read/startup witnesses, not common same-TU const initializers. Module-owned private caches/counters/hilite-list, actual union bytes, returned static buffers and borrowed output aliases preserve source lifetimes and widths. Actual native deterministic qsort invokes dedicated production comparator trampolines into original JS functions; private test aliases stay unrooted in game. Native status/window callbacks/allocator/string/format engines remain actual dependencies, foreign fixtures controlled and explicit. EmC-first private artifacts only; no frozen DO/DO_WEAR or selected/shared/profile/Lua edits. Native-host/mixed/public acceptance remains pending.
+
+PAR08-DISPLAY119/J125 scope announced: translate all71 configured original display.c functions and all23 source-owned storage declarations in JS, preserving names/order/formals/323comments, configured control/macros/24 display RNG expansions and7headeraliases. Actual production O2/g/memory64/ncurses/forced native-terminal.h capture has pristine/prepared identical SHA256 c40bea2174713159eb7aa7b3b443f176a48282866c31d658449a1b2092145423; inventory .cache/display-first-pass/inventory-notes.txt. Seven public initialized objects (nul_glyphinfo,glyphmap[9624],zapcolors,altarcolors,explodecolors,wallcolors,seenv_matrix) require eager perModule JS initialization before native constructors/readers, separate non-LTO typed zero backing and actual optimized extern-reader constructor proof before first display body. Native dependencies/window callbacks remain typed transports, including real iter_mons callback identity; full glyph maps/buffers/colors/dirty state, source pointer strides, independent function-static caches and tmp_at ownership require isolated unchanged-original/import comparisons and wrong-code controls. Initialization writes use JS native-memory views rather than C writes through const objects; external mutable wallcolors must remain live without reinitialization. No terminal/harness/terminfo/transport changes. This is scope/implementation GO, not a behavior pass; native-host/full-game/public verification pending. Unique-file implementation by reserved DISPLAY author; root owns selection/integration. Root explicitly permits this append-only scope record during selected-code freeze.
+
+PAR09 NHLUA pre-core nonlocal architecture checkpoint: private strict prototype passes10 cases/30 four-way comparisons(native C scope versus JavaScript continuation, each using compiled Lua and frozen JS Lua). Native jump_scope keeps the actual caller-provided jmp_buf and live C frame over JS dynamic extent; legal if(setjmp(*jb)) returns only zero/nonzero, matching the configured original nhl_pcall boolean test and sole longjmp(...,1). Native/JS volatile or captured live values, actual stack restoration, nested distinct states, real40MB growth, ordinary LuaError callback restoration/reuse and an overwritten same-buffer/no-auto-restore witness pass. Fatal quota Modules are not reused or closed because the original fatal jump bypasses the frozen hook callback-frame epilogue. Source-local structural adaptation is exactly one continuation inside original nhl_pcall at its2281 setjmp site: original prelude/name/perpcall mutations remain before the jump point; original panic block, lua_pcall/remove/logging/return tail remain in the same exported function within the continuation. No prefix replay, extracted source-policy helper, returned setjmp frame or C NHLUA algorithm fallback. Proposed body SHA092ce568795d4f481ae07167323119af272f5d2ce8e8518c5b9ea5f576aca249 is recorded before production core edits; unsigned32 statctr multiplication occurs before long64 widening. Initial pointer Number/BigInt fixture conversion and invalid standard-C setjmp-context/unused-buffer assertions are preserved as discarded prototype history, not evidence. Parent reviewed actual strict code/proposal and authorizes broader unique NHLUA translation under the earlier scope. Snapshot/command/binary binding is being preserved separately; this is bounded transport feasibility, not original94-function/game/native-host parity. Frozen82 and source oracle remain unchanged.
+
+PAR08 next110 promotion step5: ROOTverified six exactcurrent shared baselines,
+eight previewhashes, five handoffmanifest hashes, patch/helper hashes and both
+original ARTIFACToverride baselines before106→110promotion. First106registryrows
+unchanged. Register MAKEMON41/MHITU30/ARTIFACT76/DECL3originalfunctions (DECLalso
+152 initialized objects). Core algorithms stay frozenJS. Typed support/layout/
+profiles/normalguards/dispatcher hooks installed; DECL adds separatezero-only
+native storage/noLTO and JS startup before optimizednativeconstructor readers.
+ARTIFACT's original invoke_ok uses a distinctproduction callback forwardingentry,
+not its isolatedtestalias; its exacttwofile correction was separately proven with
+realCidentity/indirect calls and0privateimports. OriginalfrozenARTIFACTmanifest
+is retained as historical and new bytes bound by callbackcandidate manifest.
+Actualforced-terminal aggregate110Csyntax passed; privateargv/syntax/staticproof
+is not actualshared or whole-game acceptance. Fresh shared four pair comparisons
+are next, then normalclosed110build/fullintegration/public. Existingaccepted98
+artifact/evidence remain immutable; nativependingnew ports explicit.
+
+PAR08 CLOSED110sharedcheckpoint PASS: all12 freshly compiled EmC-C/imported-JS
+suites pass39610total: DO1719/TIMEOUT1770/POTION2425/PRAY2037/DOTHROW244/
+PAGER2905/MUSE1875/DUNGEON267/MAKEMON8794/MHITU7179/ARTIFACT3261/DECL7134.
+All110centralbindingmethods/staticcontracts and93factorycalls pass, with missing
+namespace negative rejection. Componentunitdispatch vs actualmainfactoryexecution
+remain distinct scopes; realgamegates are next. TIMEOUTnativehelper newbytes also
+fresh1770+aggregateheader reproof. No additionalports enter closed110. Normal
+mixed110 buildstarts, originals excluded byregistry; accepted98snapshot untouched.
+Nativepending57first-passports;53nativehistoricalbaseline notfreshaggregate.
+
+J129 OBJNAM TU123 scope announced before implementation: actual configured src/objnam.c has87 original functions/5700lines/49 active gotos. The unique parallel port will preserve every configured function/name/parameter/order/comment/control edge in readable JS; native support is limited to actual dependency calls, typed fields/packed bits/storage/function-pointer ABI. The12 native byte buffers, PREFIX interior pointers and original buffer index/recursion counters retain actual per-Module lifetimes. Readonly grammar/naming catalogues are JS authoritative; original Concat/bounded-size macros and wish/name policies expand inline in the original JS functions, with no C parser/naming fallback. Callback identities and arbitrary native callbacks, local typed readobjnam structure, full object/name-pointer alias restoration, signed/unsigned64 values and original source diagnostic/RNG metadata require explicit adapters and original-EmC comparisons. Actual Clang inventory sees only byte-stride char* compound pointer additions/subtractions; other pointer operations remain type-audited. Unique first-pass artifacts and controlled foreign-dependency limits will be documented in .cache/objnam-integration-plan.md; native/shared/game/public gates are later work. Frozen INSIGHT/TIMEOUT history and selected shared build inputs remain untouched.
+
+PAR09 HACK122/J128 scope before implementation: exclusive src/hack.c prepared/pristine identical SHA547cab9e7aaa922aa5bb8b5ad38696f9f74e3e1e31c264509a9448a689cb4665,4575lines164548bytes. Actual configured CPP/AST has95 functions(56public39static),488 comments,66 records267fields42bitfields,45 referenced roots,278 typed foreign dependencies,183 variadic sites and16 indirect sites. Inventory manifest .cache/hack-author/inventory-manifest.json SHA f88cd5c5fa2ac59cc57af33e5d5d48253b05085947e8cd822b0f3997640312c1 binds126 actual included inputs; plan.md/source-metadata/compiler-profile precede production edits. DEBUG is enabled: both travel debug bodies remain active. Native coordxy is int16 and boolean signedchar; actual travel scratch is16800bytes. Preserve original algorithms/names/formals/order/control/comments and weightlist plus10 local-static declarations, including spoteffects recursion, persistent in_rooms char5 and fixed strings/tables. Own qsort comparators notice_mons_cmp/cmp_weights require production-named true native callback identities; foreign dokick/do_reqmenu and ga.afternmv invocation retain actual addresses/signatures. All13 pointer-arithmetic sites require compiler-derived byte/record strides, including permonst subtraction/NODIAG, mkroom and room-character pointers; no generic unscaled addition. Twenty RNG sites retain caller origin, rn1 evaluation order and Maybe_Half_Phys property-before-RNG semantics. Directed record-return and alias checks include NhRegion*, shared gt.tmp_anything union identity and rm field aliases, with native-width/bitfield values, recursion/reentry/growth/Module/static/stack cleanup. Proposed14 unique production/probe/guard/recipe paths in plan.md and .cache/hack-author only are authorized; source policy stays JS and C supplies typed ABI/native storage/foreign callback/format transport. Actual configured original-C differential/source+type+profile/data/conststorage and unchanged-oracle negatives precede freezing. Existing selected110, four-port helper, source oracles and frozen prior ports/Lua82 stay unchanged. Native-host/shared/full-game/public, complete branch/profile and process/allocator boundaries remain pending.
+
+J129 inventory terminology correction before OBJNAM core edits: source xname_full/doname_full are persistent overflow-diagnostic counters (suppressing repeated paniclog messages), not recursion-depth counters. They remain original JS per-Module statics with exact int stores/increments and no entry reset; no behavior changes are implied by the corrected label.
+
+## PAR08-FILES — complete 68-body private Emscripten first pass; native pending
+
+Location: `js/ported/files{,-runtime}.js`, `nethack-c/wasm/tu-libraries/files.js`,
+`scripts/tu-files-{layout.h,probe.c}`, `scripts/test-tu-files.mjs`, owned
+`tu-fragments/files-*`, private `.cache/files-first-pass/`.
+
+Exact change: 68 configured original FILES functions (53 public / 15 private)
+now have JS source algorithms/control/data, original names/order/parameters and
+all block comments. Typed C code handles original struct/header access, callback/
+vararg ABI and zero-only storage, with no original-TU C algorithm fallback or
+initialized source-table mirror. This is private/unselected until the integration
+owner applies its separate registry/runtime/build wiring. No selected98/shared
+builder/runtime/support/source or frozen PAGER/other-TU file was edited here.
+
+Provenance: pristine src/files.c SHA256
+5295af5df75ed1f67c9898d9d56a2cad6a35da68e511b5e5ab35886db6f9f2a5;
+prepared compiled src/files.c SHA256
+460967cdbc2c5c73d29e7148efcb8ee4c3a60fe548a152fe3e4a3f5fe549e96d.
+The inherited prepared-only __EMSCRIPTEN__ compression dispatch uses external
+teleport_compress_file; original fork/exec/wait subprocess code is inactive.
+The reference uses the actual prepared profile, not an untouched executable.
+No upstream source or native compatibility service was modified by this port.
+
+Behavior/adapters: keep source private static aliases and exact initializers,
+source signed8 MAXPASSAGES30 storage despite stale source comments/casts,
+LP64 long parameters/counters/clocks, byte and char** pointer scaling, live
+windowprocs/function-pointer identities and real file/parser/error cleanup.
+Fixed automatic slots are reserved once per source invocation and reused at
+original declaration points; recursive/reentrant calls have separate frames.
+Native C callback delta checks exposed/corrected the initial lazy filename
+reservation and accumulating uid cells. Literal backing is source-derived2145
+bytes, with stable non-null empty pointers and distinct mutable hexdigits arrays.
+Runtime memory views refresh after growth and reject unsafe pointer addresses/
+metadata rather than rounding; unsupported scalar transport rejects explicitly.
+
+Verification actually run: fresh -O2 -g memory64 reference/hybrid links;1,420
+checks invoke all68 bodies and compare unchanged original C output, trace,
+state, filesystem effects, long64 filecell fields/cursor positions and typed
+bones-id alias offsets. Real libc stdio/directory/sscanf/qsort and genuine
+hacklib/strutil dependencies are used. Positive sorted-save names,32 save
+extractions with constant C-library scan stack delta and6000 tribute output
+callbacks prevent null-only or accumulating-buffer claims. Cases include both
+logged RNG sites/full filenames, high64 masks/clocks/birthdays/moves/counts,
+signed8 passage return, save/bones paths/errors, lock retries/nesting/HUP,
+wizkit/symbol callbacks, codec dispatch success/failure cleanup, callback
+reentry/growth/mutation/throw and pre-fixture-cleanup bridge frame checks,
+static aliases, Module isolation, safe metadata and unsupported types.
+
+Source/config/ABI evidence: actual production basename/forced-native/ncurses
+CPP and AST preserve all68 boundaries,377 MemberExpr aliases,47 compound/
+increment/decrement records (two pointer += are char* scale1),14 exact qualified
+callback signatures,10 JS-owned source static initializers,2 exact RNG origin
+sites and Snprintf make_converted_name closing line2151. Source/scope guards,
+generic-reference support isolation and actual import audit pass. Reference
+has0 JS TU imports; hybrid has68 and excludes original files.c. A direct
+TELEPORT_NATIVE_TESTS=1 invocation explicitly rejects before creating Modules.
+
+Wrong-code evidence: three private JS mutations are rejected by the unchanged
+C suite/reference Wasm: unsigned signed8 passage reads, Number-rounded long
+ll_type, and accumulating uid cells. Exact logs and immutable before/after
+reference hashes are in `.cache/files-first-pass/negative-proof.json`.
+`coverage-history.json` preserves that the first unsigned-return negative
+unexpectedly passed the earlier1,416 checks; an explicit valid C context of
+signed0x80 passage slots closed that missing-return coverage, and now rejects
+the same wrong variant. No expected normalization, platform waiver or replacement
+oracle was introduced. Passing earlier functional counts were not evidence of
+that missing negative-control property.
+
+Limits: these are isolated actual Emscripten C comparisons, not native OS,
+full-game or public acceptance. Game/config/object/clock/signal/termination/
+codec/RNG dependencies are controlled; the codec fixture copies bytes to
+observe dispatch/cleanup and does not validate production compression bytes.
+Native subprocess behavior, real multiprocess contention, native UID/permissions/
+platform stdio/directory order/compiler operand order, complete production
+world dependencies and native/full/public gates remain pending. Dereferenceable
+runtime pointers must fit exact JS addresses; unsafe64 observation-only pointer
+IDs/raw bytes are retained without dereference, while scalar/padding bytes stay
+raw. Undefined C behavior is not a portable equivalence claim. A parent bounded
+read-only sample review reported no concrete issue, not exhaustive proof.
+
+Integration recipe and exact registry proposal are
+`nethack-c/wasm/tu-fragments/files-integration.md` and `files-registry.json`.
+Compile support once through nativeStorageSources; fixture already includes it.
+No public startup hook/external layouts argument is required. Parent owns
+shared application, atomic append of this entry and native/public promotion.
+
+
+PAR08 replay capture tooling generalized before110gates: capture-next-game.py
+now selects the actual built count's shared comparison receipt (tu110 for110),
+rather than the previous fixedtu98receipt, and includes the selected unit entry
+points' common native-test-backend helper. Earlier accepted98capture/script remain
+immutable. Existing metadata seed from scorer-wrapper correction retained. This
+changes evidence collection only, no game, compiler flags, harness or recordings.
+
+J129 OBJNAM control/addressability detail (unselected first-pass work): source goto targets inside the object-class switch require a small labeled redispatch loop selecting only the original ring/charge case, rather than duplicating the naming policy. Wish-parser start/retry/search transitions use a local label selector with the original return-code cases and source bodies unchanged in JS. Other forward jumps become labeled block exits. Configured Clang expression types determine character loads/stores, signed/unsigned widths, pointer strides and full-record copies; original header/TU macro expressions expand in the JS source, with no native naming/parser fallback. Original private readonly tables remain JS data; pointer/record adapters only represent their address/index semantics. Local char scratch/output cells retain native scoped backing and original callback arguments retain opaque native identities.
+
+PAR08 closed110 original-integration failure: the normal mixed build completed;
+its unchanged New York30-second worker returned ETIMEDOUT. No behavioral pass
+is inferred and public110scoring has not run. All1114snapshot input hashes are
+unchanged after integration; failure.json binds the original log and identity.
+Accepted98remains preserved. Allnineauthors resumed private migrations; runtime
+coordinator owns bounded NON-GATE profiling, with no harness/deadline changes.
+
+PAR08-MKOBJ implements99 configured source bodies preserving all original names,
+order/parameters/comments/data/control/algorithms; three exact decl-scoped let_
+renames as previously scoped, with only mkobj_at fixedparameter exception. Final
+actual original/import-only O2-g memory64 proof1,636 comparisons/all99 direct;
+source/scope/CPP/data/width/type/prototype/member/import guards pass.43 records/
+167fields,44externalglobals,137fixed+8variadicdeps/70sites,79RNG,179macros,
+275 compiled assertions;1,409 actual JS field accesses.13JS data factories/zero
+backings,4,084literal+176localstatic bytes;5longargs/2longreturns remain BigInt;
+both icp* increments scale by native sizeof. Wrong obj.quan unchanged-suite
+control fails actual mkobj_at trace; exact original reference artifacts unchanged.
+Ownership/merge/reallocation/obj**/timer/alias/growth/reentry/Module/rawunsafe64
+and scalar-address witnesses are explicit. Added prefree spy exposes compiler
+builtin-free DSE and is excluded only with preserved raw failure/IR evidence;
+source zero assignment/UAF comment retained, all live bytes and actual frees
+still compared, post-free/native UAF not claimed. Controlled external fixture
+limits and private free interposition are documented. No selected/shared/frozen
+TU edits. Native/full-game/production/public pending. Post-gate exact hash capture
+is .cache/mkobj-first-pass/verified-inputs.json; no unavailable pre/post unchanged
+snapshot claimed. The1631 candidate had two invalid caller contexts and is superseded by corrected1636 proof; preserved history is not accepted equivalence. Freeze files unless an integration defect is authorized.
+
+PAR08 private DUNGEON performance proposal (not selected): measured original110
+NON-GATE profile completed New York behavior checks in59.189s with1114unchanged
+inputs; callDungeon accounts for5.030sampled self seconds. Private tooling under
+.cache/tu110-dungeon-services proposes reusing the service object in its existing
+per-Module literal state, avoiding per-call service allocations/prototype changes.
+Heap/native accesses remain deferred; original110function bodies and all native
+source remain unchanged. Service closures remain retained for Module lifetime.
+Private differential/live-memory/reentry/Module-isolation checks are required;
+this proposal is neither promoted nor accepted. Original30-second failure remains.
+
+PAR08-INVENT124/J130 scope announced and implementation GO: translate all119 configured invent.c bodies (87public/32private), preserving original names/order/parameters/comments, data, control and callbacks. Pristine/prepared byte-identical SHA256 0b93d6ce1abb5b63ed7ea07c26a57e1016c6cef0fc2ef0e4016e6622054524b5; actual memory64/current-defines/ncurses/forced native-terminal profile, TREE/src cwd/basename invent.c. Actual CPP has TTY_PERM_INVENT/DUMPLOG/OBSOLETE_HANDLING/CORE_INVENT inactive, MAIL_STRUCTURES/ENHANCED_SYMBOLS active; the initial inferred active TTY_PERM_INVENT claim is retracted. Own11 private globals/12 private static locals remain JS-initialized with compiler-sized zero backing, no owned public startup data. Foreign mutable WINDOWS zerowri remains its existing symbol/state and is copied in full48bytes (tocore32/fromcore16) with padding/alias/mutation proof, never redefined/reinitialized. Exactly xprname and let_to_name formal char let become let_, with two separately scoped local let renames; no generic checker waiver. Five long64 value formals, long* output and count_contents long return preserve BigInt, native scalar/anything8 bytes remain raw, typed unknown pointer64 identities retained before Number. Actual25 pointer operations include2 Loot* increments with24byte stride and1 char* +=; guards must retain1,782 actual MemberExpr/header aliases,70indirect expressions/20function identities,2logged RNG origins and3 expanded display RNG sites with original repeated reads/order/global effects. Gotos/shared cleanup/retry/menu loops and source USE_RATING macro remain source JS algorithms, no C policy fallback or caps. Inherited header qsort redirection to true nh_deterministic_qsort is documented separately from pristine source equality. Scope: unique INVENT core/runtime/library/ABI/probe/tests/fragments/cache only, actual O2 original/import comparisons all119 valid caller contexts, ownership/merge/sort/selection/live callback/stack/growth/reentry/Module and unchanged-oracle negative controls before freeze. No selected110/other-frozen/registry/build/profile/harness/terminal edits. Native-host/full-game/public and uncontrolled foreign-world behavior remain pending; inventory is not behavior proof. Exact inventory .cache/invent-first-pass/inventory.md. Root owns later selection/integration.
+
+PAR08 DUNGEON private proposal revision: candidate-library reuse passed267actual
+C/JS comparisons and271compiled service-identity observations, plus controlled
+live-memory/growth/reentry/Module checks. It is NOT promoted: freshly supplied
+mutable callback overrides could persist across later calls on a reused service
+object. Stable-forwarding runtime proposal replaces that approach privately:
+one stable proxy per actualModule forwards to current call services, with outer
+services restored in finally after native reentry/exceptions; environment state
+publishes only after constructor validation. Originallibrary/core stay unchanged.
+Old-probe negative attempt failed earlier on stack-layout assertion, so it is
+retained as an invalid control; matched-settings original probes rebuilt instead.
+Second-proposal differential/performance/originaldeadline proofs remain pending.
+
+PAR08 DUNGEON forwarding private checkpoint: unchanged comparison bodies pass267
+actual EmC-C/imported-JS comparisons/all110configuredfunctions using freshly
+compiled matched-settings original library probes. Additional actual-native
+reentry/current-service/outer-restoration/nested-exception/later-call-isolation
+and stack witnesses pass. Zero-prototype-mutation witness passes; originalruntime
+fails its exact intended AssertionError.48source/artifact/evidence hashes are
+frozen in .cache/tu110-dungeon-services/manifest.json (4dbf8f3d574bd7f9f6c5025a5926ed41867e94b120b9d3fcfdd874c36b7d5abc).
+Canonical runtime candidate SHA e7c6a13b572ed0aae8fc67e7e08352a8cab251b9d0f51d4e8c3188bc5af97f39;
+selected original remains d1f51f78998095947136f19056bbc65b75731fb1d6ff5ac7bf527664903b0fd9.
+No shared promotion; actual-game timing, originaldeadline/public/native pending.
+
+PAR08 extra DUNGEON private negative: removing only outer-services restoration
+from a private copy causes the unchanged actual-native reentry witness to fail
+its intended assertion (outer reads1 vs4). Evidence is frozen separately under
+.cache/tu110-dungeon-forwarding-negative/proof.json; original48file proposal
+manifest remains unchanged. ROOT also independently reviewed MKOBJ recipe/DSE
+limits and verified166/166frozen handoff entries in .cache/mkobj-root-review.json.
+Neither review changes selected sources or establishes full-game/native parity.
+
+PAR08 DUNGEON NON-GATE microbenchmark: identical freshly compiled native hybrid
+transport, original vs private forwarding runtime,4096dunlev entries per trial,
+3alternating-order trials after512warmup each. Means134.879ms original vs15.080ms
+candidate; exact3n return sums and native stack restoration checked every trial.
+Current author load; one-function micro result is NOT full-game timing/deadline
+proof. Raw trials/script/hashes under .cache/tu110-dungeon-micro. Selected sources
+and original110failure stay unchanged; combined game diagnostic remains pending.
+
+PAR08 private TIMEOUT performance proposal: original110profile measured1.075s
+self in repeated createTimeoutEnvironment. Private tooling under .cache/tu110-
+timeout-cache proposes reusing environments by actualModule/layoutidentity with
+stable current-service forwarding and finally restoration, publishing only after
+construction completes. Direct constructor and54originalTIMEOUTbodies unchanged;
+compiler layout objects assumed immutable, per-liveModule/layout state retained.
+Unchanged1770comparison suite plus service/reentry/failure/growth/Module witnesses
+and actualgame timing are required. No selectedsource/registry/harness changes.
+
+PAR08 next reservation: PICKUP126/J132 is exclusively assigned to the DISPLAY
+author after finalDISPLAYfreeze and independent coordinator review. Readonly
+configured source/function/header/dependency/control-flow inventory comes first;
+announce/document concrete scope and C/JS exceptions before implementation GO.
+Reservation is not a completed/selected/accepted TU. Next free127/J133.
+
+PAR08 private TIMEOUT cache checkpoint: unchanged1770actual EmC comparisons/all54
+functions PASS, including existing real growth/native reentry matrices. Extra
+actual-Module/layout-isolation/reuse/current-service/nested-failure/late-publication/
+valid-retry/stack witnesses pass. Originalruntime is rejected at intended14vs7
+constructor reuse; removing only service restoration fails intended B.nomul vs
+A.nomul outer callback assertion. Freeze/limits are recorded in .cache/tu110-
+timeout-cache/review.json and manifest.json. No selectedsource edits; native,
+full-game/performance/originaldeadline/public remain pending.
+
+PAR08-DISPLAY119/J125 FINAL PRIVATE FROZEN: all71 original configured display.c bodies (54public/17static,323comments) and23 source-owned objects are JS algorithms/data, preserving original names/order/formals/control,13gotos/5shared joins,24display-RNG expansions and7actual header aliases. Pristine/prepared SHA c40bea2174713159eb7aa7b3b443f176a48282866c31d658449a1b2092145423. Support typed ABI/private zero backing is included once; seven public zero objects MUST compile separately in display-storage.c via non-LTO nativeStorageSources to prevent frontend const-zero folding. Eager initializeDisplay/addOnInit writes all308125 public bytes before native constructors/first body; actual separate optimized extern constructor, fresh Modules and mutable wallcolors/no-reset witness pass. Post-split actual O2-g memory64 unchanged original/import comparison139 top-level state/results plus22528 separate inner wall-result assertions, all71 direct functions; full80x21 packed map/gbuf and9624glyph rows; actual4byte coord-by-value/native callback mutation, borrowed48byte callback lifetime/raw padding, native function identities, tmp_at ownership/160bound/styles, wide64/raw unknown-pointer and scalar witnesses/growth/reentry/stack cleanup pass. Wrong-source and omitted-eager-init controls each produce real AssertionError with original C/referenceWasm/test unchanged. Fresh source/import/full CPP+macro identity and9file regeneration pass. Initial inventory/build.py history is preserved: old7dc84c... exact reconstructed transitional importast+4redundantDOguard lines; current7f7d... equals accepted98, with compiler flags/source/headers unchanged, no profile waiver. Initial stable done_hup persistent-lock inference is retracted: _suppress_map_output exits before flushing assignment; both source checks retained, no asynchronous-lock proof. Valid trap/swallowed/seenv callers corrected and defined diagnostic wall cases separated from normal inputs. Stack clearing is an explicit controlled fixture precondition; arbitrary production indeterminate stack/padding/native terminal/world behavior unproven. Freed bytes excluded after lifetime, exact events/live bytes retained; no blanket pointer/scalar/padding masking. Native-host/full-game/public pending. Recipe .cache/display-first-pass/integration-recipe.json SHA68b1d4df80b17c8bea00f16597e32ba76b93080d4ee1a5810be55818aa70de60; final-hashes.json SHA68f1fe4eb900eb1be95a005b38574d8742b6d21ba801be8a6f33d7e55f0a686a and proof-hashes.json SHA74b5739f79ffdef0e97a85ced85737f4eaa6b92bbbafe34b7842c9e169990cdd independently verify13durable+35proof entries/0mismatch. Historical pre-storage-split proof remains component context only; post-split proof authoritative. Frozen owner files/cache unchanged after review; root alone owns later selection/integration. No selected/harness/terminal/transport changes.
+
+PAR08-CMD125/J131 scope announced and implementation GO: translate148 configured cmd.c bodies (102public/46static), all original names/order/formals/comments/data/control; pristine/prepared191110bytes/5704lines SHAa14c0fc8706bd9957f8f4aab7f9e2abbd30eb5f4e43166b90a8bfeb25094a7ce. Actual O2-g memory64/current-defines/native-terminal/ncurses/TREEsrc-basenamed profile; TTY_GRAPHICS active, CURSES_GRAPHICS inactive; no parameter checker exception needed. Actual56records197fields45external globals,282dependencies including96 initializer-only,172native function designators (48owned+124foreign),119indirect calls/14combined prototype forms and131typed vararg sites remain true typed/native identities, never JS closures/C algorithm fallback. Three public objects extcmdlist[171],levltyp[39],unavailcmd[26] require eager JS initialization before any foreign reader and separate non-LTO public zero storage/optimized extern-reader constructor proof; seven private globals/21static locals remain source JS initializers with typed zero backing, no initialized C table mirror. Two source-private anonymous-record aliases must match exact compiler record IDs. Source25pointer increments are16ext_func_tab* stride48 plus9char* byte steps (initial17struct count corrected); move_funcs[10][3] function-pointer array must retain row24/whole240 and array classification before pointer classification. Two fixed64 scalars/time_t/long dependencies/count*outref stay BigInt;11full-record copies, active raw anything8 variants/padding and exact typed unknown64 identities retain source behavior. Preserve9gotos/7labels/shared tails/declaration lifetimes/uncapped retries,22logged RNG/187transitive macros and exact lazy/repeated CPP evaluation. Known upstream handler_rebind_keys_add automatic cmdstr is uninitialized before Strcat on ordinary/unbind branches; preserve source/uninitialized storage without zeroing/compiler/oracle/normalization waiver, explicitly leave these paths UNPROVEN. Defined cancellation and CMD_PARAM/Snprintf paths provide valid cases; all-boundary coverage is not all-path proof. Scope unique CMD core/runtime/library/typed ABI/storage/probes/tests/guards/fragments/private cache only. Require actual original/import comparison with meaningful valid contexts, public startup/native aliases, live tables/queues/list ownership/selection/outrefs/64bit/strides/growth/reentry/stack/Modules and unchanged-oracle negatives before freeze. No selected110/shared registry/build/profile/native service/harness/other frozen edits or extra game jobs. Native-host/production/full-game/public remain pending. Exact reviewed inventory .cache/cmd-first-pass/proposed-scope.md; root owns later selection/integration.
+
+PAR08 private DOG performance proposal: latest combined110profile measures2.390s
+self in createDogEnvironment. .cache/tu110-dog-cache proposes environment reuse
+by actualModule/layoutidentity, preserving existing dogState/failed-arrivals and
+nested borrow cells. Stable forwarding uses current call services and restores
+outer services in finally; state publishes after validation. Original constructor/
+state/core APIs and all source algorithms unchanged. Compiler layout immutable
+assumption and per-liveModule/layout retention explicit. Original differential
+suite plus cache/reentry/borrow/Module/failure witnesses and game timing required;
+no selectedsource, registry, terminal or harness edits.
+
+J129 OBJNAM fixture validity: catalogue reset calls actual objects/monster initializers, then explicitly assigns native name/description row indices and class bases as valid game-initialized fixture data; the raw original objects initializer leaves those indices zero until the separate original object-init TU runs. The source naming algorithms still run unchanged. A deliberately saturated 200-byte name remains a bounded-formatter/shortening case, but is not combined with aobjnam/Tobjnam's unbounded verb strcat: the unchanged C reference itself trapped on that invalid overflow combination. Bounded ordinary verb cases remain. This does not alter the C reference or JS policy.
+
+PAR09 private110 performance proposals: original selected110 NY30 ETIMEDOUT is preserved, acceptance remains98. ARTIFACT private runtime cache05a9f1acb105ee666af1b70ca0168a388f35692b95681164365ab63811ba4075 retains original76-body JS policy and fresh direct-constructor API, reusing fully validated environments by actual Module and immutable layout identity with a stable forwarding Proxy to current per-call services; nested services restore in finally and constructor failures never publish. Unchanged381cases/3261checks plus actual native-state/Module/layout/override/error/growth/reentry witnesses PASS. Original-runtime reuse and removed-restoration controls fail exact intended assertions. Frozen15-file manifest984af0bcecc074c930771dc8d0dd595e8e0681e016e92d2cdd51ffdff0282698. Combined with ROOT DUNGEONe7c6a13b private runtime only, original NY30 still times out; authorized NON-GATE60s profile completes original behavioral replay in40.940711s versus original59.189205s profile under author load. All1114 frozen snapshot inputs and four candidate/loader/script inputs unchanged; diagnostic loader and longer budget are NOT acceptance. Evidence .cache/tu110-performance/combined-candidate and combined-profile. No selected source/core/harness changes. Native-host/original deadline/full integration/public pending.
+
+PAR09 private MAKEMON/MHITU performance scope: now authoring isolated UNAPPLIED runtime-only caches in .cache/tu110-performance/{makemon-cache,mhitu-cache}; no source-core, original C/reference, frozen handoff, selected library/runtime or shared harness edits. Cache actual Module plus immutable layout identity only after complete constructor success, preserve fresh direct API, current live heap, JS-owned source state and per-call service overrides/nested/error restoration. Require original8794/7179 comparison suites plus native/Module/layout/service/lifetime/constructor failure and intended negative controls before review. Full-game/native-host/performance acceptance unproven. ROOT owns separate DOG/TIMEOUT candidates and later integration.
+
+PAR09 HACK ABI refinement: typed runtime/support/layout now syntax-check under actual configured memory64 profile. Source-local TRAVP0/1/2 remain JS policy; configured-empty voice/sound and FALLTHROUGH attributes erase without argument evaluation; two active assertions retain exact expression/file/line/function context and native __assert_fail. Dynamic ACURRSTR and SHOP_WALL_DMG remain runtime getters, latter promoting int to native long64 before multiplication. Callback address conversion compares actual native function identities. These are pre-parity authoring results, not accepted behavior. Parent retains six ABI files, original source-body/probe author retains remaining files. APPLY dependency inventory refinement319true FunctionDecl roots plus windowprocs indirect replaces initial320-root classification; historical pre-edit inventory remains preserved. No selected110 changes.
+
+PAR08 private DOG cache checkpoint: unchanged19,585actual EmC comparisons/all21
+originalentries PASS, including migration/borrowed failed-arrivals/growth/reentry/
+independentModule matrices. Extra actualModule/layout-isolation/reuse/fresh direct
+constructor/bad-construction retry/current-service/native reentry/nested-exception/
+stack witnesses PASS. Originalruntime intended reuse4vs2negative and missing-
+restoration intended outerRNG/UI BvsAnegative both reject. Frozen evidence under
+.cache/tu110-dog-cache/review.json and manifest.json. Original state and constructor
+APIs, all corebodies unchanged. No selectedsource changes or full-game/native claim.
+
+PAR08 ROOT independently verified frozen READ226and FILES224hashentries with no
+mismatches; .cache/read-files-root-review.json binds the exact manifests. READ's
+invalidNONNULLhistory and controlled foreign boundaries remain explicit; FILES
+preserves prepared compression dispatch, not pristine fork/exec behavior.
+MON127/J133 is now exclusively reserved for EATauthor AFTER finalEATfreeze and
+ROOTreview; readonly configured inventory/scope before implementation GO.
+Reservation not completion; next free128/J134. EATcurrent6426/private77entry and
+six actual wrong-code rejections are provisional until final handoff, not selected.
+
+J123 EAT numeric refinement before freeze: the original unsigned oeaten right-shift and the conditional unsigned glob-weight right-shift require JavaScript >>>, since >> would sign-extend values whose high uint32 bit is set even when normalized after the shift. Both original functions/expressions remain in place; independent unchanged-C high-bit oeaten/weight cases cover this defined unsigned behavior. No selected/shared inputs changed.
+
+J129 OBJNAM environment lifetime: the owned runtime caches its typed environment by actual Module, as already used for hot translated utility environments. The factory captures only Module-bound native dependency getters, immutable compiler layout, and original static-buffer/table state; no source argument, native automatic/scratch pointer or DataView/HEAP view is cached. Every actual field/byte access reacquires current memory, live global/equipment pointers are read at use, and each original scratch-owning call still saves/restores its native frame. Two-Module, native reentry and real memory-growth tests are required before freeze. This removes repeated layout/closure construction without changing source naming/wish policy or adding a shared runtime cache.
+
+PAR09 MAKEMON/MHITU private cache checkpoint: unchanged8794/all41 and7179/all30 configured EmC comparisons PASS. Added actual native same-TU reentry/current callbacks/exception and stack restoration, per-Module/layout reuse/isolation, late or invalid constructor repeated refusal followed by valid retry, and fresh direct APIs PASS. Exact original-runtime controls12vs6/6vs3 and missing-restoration outer3vs1/read-scope assertions fail. Constructor-count fixture initially assumed one pointerSize access versus actual three; raw failure retained and only witness expectation corrected. Native/core policy unchanged. MAKEMON35captured-input manifest4706d4c47383bed928b8e2bd5358ab49f2f4f02282483ac2a7edb15e6a87a6d6; MHITU33manifest2bc4461c60a87c4bdbd412b2a16713df12cd31740eea7483a469611bf3bce58a. Independently inspected ROOT DOG/TIMEOUT diffs and verified28/26 frozen input hashes. Combined6private runtime NY30 under authorload still ETIMEDOUT30.050371; all1114base snapshot/9diagnostic candidate-script inputs unchanged,178reviewed frozen inputs verified. Evidence .cache/tu110-performance/six-candidate. No selected promotion, full-game/native/public acceptance or original-deadline pass claimed.
+
+PAR08 UHITM128/J134 exclusively reserved for runtimecoordinator APPLYauthor AFTER
+finalAPPLYfreeze and independent parent review; readonly configured inventory and
+scope before implementation GO. PICKUP126/MON127 preserved. Next free129/J135.
+ROOT independently verified ARTIFACT15/MAKEMON35/MHITU33private cache manifest
+entries, zero mismatch, in .cache/tu110-six-runtime-root-review.json. All six
+runtime proposals remain private; author-load six-candidate NY30diagnostic timed
+out. A bounded quiet rerun is being coordinated before more optimization/promotion;
+originalfailed110snapshot/harness/deadline unchanged.
+
+PAR08-PICKUP126/J132 scope announced and implementation GO, with heavy work held during the current quiet timing diagnostic: translate66 configured pickup.c bodies (31public/35static), original names/order/formals/all478comments/control and10 private persistent objects, no owned public initialized storage. Pristine/prepared4057lines SHA915da0f8fce16461cc42a0035f7ef3e9847fc8f8ee3708a7f017ad6587383134; actual O2-g memory64/current defines/ncurses/forced native-terminal/TREEsrc-basename profile, accepted98 build.py7f7d...; inactive #if0 bodies remain excluded. Preserve source13primary recorder origins/26enabled-disabled alternative calls (not26draws) and5actual display-RNG calls (initial4count corrected),6raw/header aliases,11gotos/8labels/sharedcleanup and exact repeated/lazy CPP evaluation. Actual160fields/42foreign globals,203native obligations (199called including13vararg families/120sites plus4address-only),42indirect sites and9owned+8native callback identities remain typed real dependencies/callable native addresses. Actual menu_item24bytes (anything8,longcount8,itemflags4,padding4), Loot24,obj112,coord4,glyph_info48 and all whole-record copies/raw active scalar unions/padding remain exact; no16byte menu assumption. Seven pointer increments use actual char1/Loot24/menu_item24/char-pointer8 strides; zero pointer compound assignments;61unary sites have no dereferenced operand, but addressable *itemcount/long*/boolean*/obj**/menu_item** updates retain one native lvalue and source lifetime. Full64quantities/ages/timers/losses/counts stay BigInt. Native source/autopick/menu/sort/filter/selection/container chains, allocation/free/split/merge/substitution, icebox/quantum/magic-bag recursion/destruction and original commoncleanup require meaningful valid contexts, alias/liveness/outref/stack/callback/growth/reentry/Module proof. Crucial in_container current_container must be live/nonNULL because carried() is evaluated before its later null guard; preserve source and do not count accidental zero-page reads or reorder a repair. Source diagnostic/fallback and invalid/undefined caller paths stay distinct. External DISPLAY nul_glyphinfo and all other world state remain live foreign symbols, never reinitialized here. Unique PICKUP JS core/runtime/library/typedzeroABI/schema/fixture/builder/guards/cache only, no source algorithm or initialized-table C fallback/caps. Require actual original/import O2 memory64 comparisons all66 valid boundaries, fresh source/CPP/input/type/data/RNG/alias/control/import guards and unchanged-oracle AssertionError negative before freeze. Controlled world/window/menu/regex/ownership limits explicit; no native-host/full-game/public/production proof inferred. No selected110/shared registry/build/profile/harness/terminal/other-frozen changes or extra game jobs; root owns later integration. Exact reviewed inventory .cache/pickup-first-pass/inventory-notes.txt SHA967f63706dcc7eb2973dc58a9eaf73350560d5a2cadff9d3404dda3ef6d1b544.
+
+J123 EAT first-pass frozen handoff: all77 configured original functions (37public/40private), original order/formals/comments/control and source-authoritative hu_stat7/tintxts16/foodwords22/localpalatable5 data now pass7,332 unchanged Emscripten-C/JS comparisons. Actual native storage, RNG/diagnostic provenance, full victual byte copies, native string pointers/Strlen/free ownership, retouch local obj** replacement, known/opaque callback identities, memory growth/reentry, independently instantiated Modules, actual unsigned shifts and positive trap/terrain/rotten aliases are covered. Eight private wrong-code variants are rejected by actual C-vs-JS AssertionErrors, not syntax failures. Full recipe and exact frozen manifest: .cache/eat-integration-plan.md / .cache/eat-author/hashes.json. Native hu_stat/msgbuf/zero-victual zero backing is isolated in a positive-guarded separate non-LTO storage C file; all initialized values and original algorithms stay JS. No selected/shared file, native baseline, deadline, recording or expectation was changed. External world/status/UI dependencies are controlled fixture callbacks; no all-path/downstream-native/full-game/native-host acceptance claim. Root independent review/shared pair/actual mixed link/original integration/public gates remain pending.
+
+PAR09 APPLY120/J126 final private freeze independently reviewed: all238manifest inputs match d98ea21bf76881e7d9a4fae4bac82adacfa9c4fc5b47316f6b9b9093aec4a049; parent reran unchanged original9183C/hybrid comparisons/all76 and separateproduction104/zero_test_imports/all16actualtypedCcallbackidentities, then rehashed238unchanged. All371source comments ordered/exact,13statics and fadeness5,73activeRNG represented72line/functionpairs,27typedrecordreturns with positive/native-write/alias and only legalNULL witnesses,4property-before-RNG mutations,11const-safe reset targets, actualgrowth/reentry/Modules/stack/C-R-T restoration; original C reference unchanged, controlled foreign-world fixtures. Wrong-JS-fadeness negative rejects original gate. Original10format-nonliteral build warnings remain documented. Native-host/shared game/public/fullbranch/productionallocator/foreign-engine boundaries pending. Repro/unapplied recipe apply-integration.md; parent proof .cache/apply-parent-review.json. Root alone owns future selection, APPLY is outside closed110.
+
+PAR09 next exclusive reservation UHITM128/J134 assigned to frozenAPPLY author after independent238review. Readonly actual configured source/CPP/AST/header/dependency/control inventory first; exact scope and C-JS exceptions will be announced/documented before implementation GO. Preliminary pristine/prepared source6447lines/240440bytes; actual configured counts pending. Retain all original bodies/data/comments/callbackidentities/sharedtails and source-local lifetimes; no selected110/runtime/shared writes or extra game jobs. PICKUP126/MON127 reservations preserved; global nextfree129/J135.
+
+PAR09 six-cache private replay checkpoint: exact same6candidate runtime hashes pass original NY worker under unchanged30second timeout in29.0684527seconds, exit0, correctshopkeeper and identical winter/summer replay. Qualification is explicitly limited confidence:8of9authors plus coordinators confirmed drained at GO; ninth unconfirmed until afterward. Do not retroactively claim full verified quiet. All1114frozen base inputs and10candidate/script/qualification inputs unchanged,178reviewed frozen inputs verified. Fresh .cache/tu110-performance/six-candidate-quiet records; all prior timeout/profile evidence immutable. Diagnostic loader means not acceptance; ROOT alone will promote reviewed files and run fresh normal110/no-loader original integration/public gates. Old candidate manifests bind original selected before-images; after authorized ROOT promotion those originals remain verifiable in immutable tu110-gate-snapshot instead of rewriting old manifests.
+
+PAR08 selected110 performance promotion: six exact reviewed runtime adapters
+ARTIFACT/DUNGEON/MAKEMON/MHITU/DOG/TIMEOUT now reuse validated environments by
+actualModule and immutablelayoutidentity where externally supplied. Stable proxy
+forwards current per-call services; finally restores outer services on nested
+calls/exceptions; failed constructors do not publish partial cache entries.
+Native memory/heap/bitfield/pointer reads remain live. DOG original private
+failed-arrivals/borrow cells preserved. Direct constructor APIs, exported names/
+parameters and all six original coreJS files are byte-identical to old110;
+SDKAcorn source comparison proves API/constructor fidelity. Lifetime: cache
+entries retained for liveModule/layout; no bounded-memory/eviction claim.
+All unchanged six suites plus cache/current-service/reentry/growth/Module/error/
+negative witnesses pass (full scopes in component reviews). Exact6 private
+NY30diagnostic passed29.068s;8of9authors explicitly drained at start, ninth then
+unconfirmed and later acknowledged prior terminal compiler. Qualification stays
+unchanged. This loader diagnostic is NOT normal acceptance. Original110failure
+and all1114inputs preserved. .cache/tu110-cache-promotion/receipt.json binds six
+before/after hashes, original immutable snapshots and patch. Original component
+manifests retain pre-promotion baseline entries; verify those against saved old
+files rather than rewriting historical manifests. Current build metadata must
+be refreshed by the normal110build, then original no-loader integration/public
+must pass before accepting110. Native57first-passports still pending; accepted98
+remains unchanged. No C/terminal/harness/recording/pristine-source edits.
+EATfrozen49hashes and requiredstartup/separatenonLTO storage independently
+reviewed (.cache/eat-root-review.json); MON127readonlyinventory authorized.
+
+PAR09 UHITM128/J134 exact scope announced and implementation GO: prepared/pristine src/uhitm.c are byte-identical SHA4cc2f8a0ffe0121801a777978a9a555a063db720e0fe972308fb6ab0e96feb12,6447lines/240440bytes. Actual configured cwd/basename CPP/fullAST inventory102original bodies(65public37private),783comments,316trueforeign FunctionDecl callees plus indirect windowprocs root,2279expandedcalls,274field/typepairs,47globals including sourceTUconst,6statics,33automatic records/arrays,18record-return contracts,11gotos/8labels. ExpandedRNG161unique source sites/158line-function pairs requires original-token attribution guard. Sole source pointer arithmetic char*p++ at do_attack483 retains stride1. MAIL/MAIL_STRUCTURES/DEBUG/DEBUG_MIGRATING_MONS active; configured voice/sound/playnotes arguments erase; actual rn1/min/HalfPhys conditional evaluation and explicit source Snprintf/file/assert context retained. All102original names/order/formals/data/comments/algorithms/header expressions/control remainJS. hmonas reentry gotos/sharedpassivedone tail require faithful explicit CFG, no duplicated tail/policy; local pointers and _hitmon_data/mhitm_data preserve actual storage/copy identity; object**/permonst**/int* use real native cells; long64 masks use BigInt. Persistent hitum_cleave.clockwise, escaped gulpum.msgbuf[BUFSZ] assigned gn.nomovemsg, and that_is_a_mimic.generic source objects preserve lifetime/identity using JS initialization plus typed zero-only backing where real C aliases escape. Actual rn2_on_display_rng callback and retained xname/Finish_digestion function values retain native typed identities and routing, not closures or C body fallback. C is typed ABI/storage/trueforeign transport only; no policy stub/disabled branch/new cap/oracle normalization. mksobj actual ReturnsNonNull forbids artificial NULL contracts; audit const-safe fixture writes and source-defined bytes. Owned unique UHITM core/runtime/library/support/layout/metadata/probe/test/recipe/hash paths and .cache/uhitm-author only; frozen APPLY/READ/END/Lua82 and selected/shared files untouched. Require meaningful original-C/JS direct/callback/branch/RNG/state/alias/typedreturn/persistentbuffer/64bit/stride/growth/reentry/Modules/stack and unchanged-oracle negative proofs before freeze. Completebranch/native-host/productionallocator/actualforeignengine/sharedgame/public remain unproven. Exact parent-verified preedit0a30d4428cba0e546d7efb3ca323bc302f6de6643dfdf19116c261c326bff816. No shared selection/registry/build/harness or duplicate game jobs.
+
+### PAR08-INVENT final private first-pass implementation (TU124/J130)
+
+Scope was announced and recorded before implementation. Only unique INVENT
+sources/fragments/probe/test and .cache/invent-first-pass were written; no
+selected/shared builders/registry/runtime/profile/source or frozen FILES was
+changed by this author. Pristine and prepared invent.c remain identical, SHA
+0b93d6ce1abb5b63ed7ea07c26a57e1016c6cef0fc2ef0e4016e6622054524b5.
+
+Location: js/ported/invent.js, invent-runtime.js; tu-libraries/invent.js;
+tu-fragments/invent-{support.c,schema.json,source-inventory.json,source-check.py,
+registry.json,integration.md,probe-consumer.c}; scripts/tu-invent-{layout.h,
+probe.c}, test-tu-invent.mjs. All119 configured source bodies (87 public32
+private), original order/comments/names/parameters/control/source data remain
+JS. Only source formal char let becomes let_ in xprname/let_to_name; two named
+local let declarations similarly use let_. No generic rename or algorithm waiver.
+
+Runtime changes: typed memory64/header/global/function/callback/varargs ABI,
+zero-only backing for11 private globals+12 static locals, JS-owned exact
+initializers, fixed native automatic slots with declaration-time initialization,
+full48 foreign WINDOWS zerowri copy, true24-byte Loot strides, native pointer
+aliases and signed/unsigned64 transport. No owned public startup hook: existing
+WINDOWS zerowri startup remains authoritative and is never reset/redefined by
+production INVENT. C support contains only types/fields/header ABI/dependencies/
+zero storage, not source algorithms or initialized source-table mirrors.
+
+Actual profile: forced native-terminal.h/ncurses/current compile defines,
+memory64, TREE/src basename invent.c. TTY_PERM_INVENT is INACTIVE (the initial
+source-only inference was corrected from actual CPP before implementation),
+while permanent-inventory functions themselves remain configured. DUMPLOG,
+OBSOLETE_HANDLING, CORE_INVENT and DLB backends remain inactive. No production
+flag is changed. Private fixture include spelling is macro-prefix-mapped only
+to the real production basename; exact own logged RNG filename/line/owner is
+compared without normalization.
+
+Verification:1,337 actual O2-g Emscripten memory64 original-C vs hybrid checks,
+all119 entrypoints and all20 exact native function pointer identities called;
+real hacklib/strutil/objects/monst/drawing/libc plus explicit controlled foreign
+game/naming/command/menu/ownership boundaries. Full482 original initialized
+unshuffled catalogue classifications, sorting/filtering/nexthere, nonempty
+chains/menu redo/split/64bit output, callback growth/reentry/throws, perModule
+static aliases,16-menu constant native SPdelta, separate optimized foreign48
+writer/full-byte backend consumer, unknown64 colliding-pointer exact IDs/raw8
+bytes with raw scalar/padding witnesses. Fresh guards verify1782 MemberExprs,
+172 compound/inc/dec sites,1 char-pointer +=,2 Loot*++, all23 source initializers,
+2 exact logged RNG origins,3 display-glyph source sites,2 Snprintf lines,
+source comments/order/parameters, scope and0/119 original/hybrid TU imports.
+Generic-reference support isolation passes. Direct native-test mode rejects
+before Module creation rather than mislabeling Emscripten results.
+
+A real corpus failure found an increment-through-parenthesized-pointer emitter
+bug (tally_BUCX scalar treated as a cell); fixed by evaluating the typed native
+lvalue once with original postfix value. First diagnostic is retained and the
+same defect is reproduced as an unchanged-oracle negative. Whole initialized
+{0} automatic buffers are zeroed; uninitialized source autos are not generally
+initialized. Fixture pack order was corrected from literal backslash/octal text
+to valid native class codes; no expected value or original C algorithm changed.
+Four wrong variants (round cost through Number; partial32/48 request copy;
+scalar-as-cell; repeated fixed-auto allocation) fail the unchanged suite,
+reference SHA identical before/after each variant.
+
+Reference WASM SHA:ace8086005a54b677ab5438e38c362b732aa7d1a2b573426bb1e8695d2fe86bd
+Hybrid WASM SHA:9500b73a63b5ecb32ec305b80766681a038eb5455f1763a0d564c59c25bc1a98
+Exact recipe and final dependency/input hash manifest are adjacent/in private
+cache. Parent integration owner must append this entry atomically; no active
+selection is performed by this handoff.
+
+Limitations: invoking all functions is not exhaustive branch coverage. Native
+executable, full-game/public behavior, uncontrolled foreign dependencies, all
+recursive merge/destruction cases, arbitrary nested original qsort reentry,
+undefined signed overflow and invalid/uninitialized caller behavior remain
+unverified. No native/full-game/public pass is claimed, no expected-result
+waivers or cross-platform mismatch normalization are introduced.
+
+
+PAR08 exact historical cache proof preservation during normal rebuild: all201
+entries across six component manifests and ARTIFACT16supplement copied into186
+content-addressed exact byte objects under .cache/tu110-cache-promotion/frozen-
+evidence; receipt.json maps original paths/versions/sources. No missing versions;
+pre-promotion selected baselines read from immutable old110/before copies.
+Original manifests remain unchanged while shared probe outputs are regenerated.
+SHK129/J135 exclusively reserved for INVENTauthor after parent237hashreview;
+readonly configured inventory/scope before implementation GO. Nextfree130/J136;
+PICKUP126/MON127/UHITM128 preserved. Reservations are not completed TU counts.
+
+PAR09 ROOT authorized six-cache promotion independently reviewed: all6currentselected afterhashes, original beforecopies and immutable original110snapshot beforehashes match receipt .cache/tu110-cache-promotion/receipt.json; all6sourcecore identities unchanged. Parent review .cache/tu110-performance/promotion-parent-review.json SHA8932cbe1dbce6529772d36397615d9ccc47279922543ae3ab29c4ea61f033470. Old frozen manifests/history not rewritten; MAKEMON before-runtime remains verifiable against immutable snapshot. APPLY238 andREAD226 inputs still fully match live. Fresh normalbuild/original no-loader integration/public pending; accepted98 remains historical accepted checkpoint.
+
+PAR09 HACK in-progress closure corrections: first bounded original-C/JS comparisons exposed missing N_DIRS/N_DIRS_Z after restoring Clang ConditionalOperator variable initializers, and a missing distu runtime macro. Native constant closure regenerated from actual latest core; distu projects exact header dist2 with coordxy signed16 casts on both inputs. Structural presence checker .cache/hack-abi-author/check-closure.mjs checks all695current C.identifier references against synthetic shape and declared service keys, zero missing; synthetic check is structural only, never policy/native equivalence. RuntimeJS/supportC/layoutC syntax pass actual configured memory64 flags. SixABI files held stable for source author's rebuilt private comparisons. All raw early fixture failures and traversal mismatch retained; no selectedHACK or full parity claim.
+
+PAR08 fresh promoted shared gate PASS: actual normal110build verifies683declared
+artifact/source hashes; unchanged Wasmf98a4c95a72afba893e904faafae87b27c3c0f3ee8fce0266e62edd88a81fc34,
+manifest32fa93da4d5ce2494f788856592432962b34b4a45a3075222f93557c14689208.
+All6fresh shared suites PASS40,856 (ARTIFACT3261/DUNGEON267/MAKEMON8794/MHITU7179/
+DOG19585/TIMEOUT1770);110bindings/93factorycalls/negativefixture pass. Exactfresh
+probe/runtime/source hashes and log bound in .cache/tu110-cache-shared-comparisons.json.
+Private capture-fixed-game.py extends existing capture recipe with six-promotion
+receipt/source-fidelity/private diagnostic qualification/fresh shared receipt/log
+and186content-addressed historical proof objects, preserving old recipes/snapshots.
+Evidence collection only; normal original no-loader integration/public still
+pending. No accepted110claim; accepted98/native pending scopes unchanged.
+
+J129 OBJNAM private fixture correction: the controlled foreign tin_variety_txt now always writes its int output (-1 for its no-match result), matching the actual dependency contract in eat.c. The earlier no-write stub exposed uninitialized native local bytes after stronger snapshots; no original OBJNAM algorithm or expected result was changed.
+
+PAR09 HACK extended structural audit found a source-local alias defect before directed ice parity: checking all245 transitive header-macro env roots identified recharged as absent. Actual header #define on_ice recharged transforms the function-local name; draft JS declared local recharged but erroneously accessed C.on_ice/global env.recharged. No fake runtime global will be supplied. Source author is correcting consistent DeclRef/declaration binding, then parent will remove obsolete source-local header projection and rerun structural/native checks. Raw .cache/hack-abi-author/closure-check-with-macros.log preserved. First94initialroutes674checks are reachability context only; directed/native/growth/callback/static lifetime/full branch/shared/public remain open.
+
+PAR08 MON127/J133 implementation scope reviewed BEFORE GO: actualsource129
+functions97public/32private,717originalcomments,source0ab56f908ac2147a5e57970250b99f90d47f2ec32fbdfb1a6fab04c33167bd01,
+inventorySHA25ae12e0bd09a5eb348f8da9152d95556d9213ccb5f583bcec4d0053a87c73a8. Preserve original names/formals/function
+boundaries/control/data/comments; no reserved-name exceptions. Sixgotos become
+nested shared-default blocks/retry loop/cleanup block in original3functions,
+no policyhelpers/flags/duplicate tails.4iterator APIs preserve native opaque
+callback tokens and original shared/nonreentrant itermonarr behavior via3typed
+ABI-only bool/void/boolxy invocation shims. PerModule original2iterator statics
+and local long64counter; no startupcatalogue. Address-taken locals use native
+cells/writeback with exact aliases; full6mextra+museum/mfndpos/animal-buffer byte
+copies include padding.27structured native returns require actualtyped views;
+all61records/253fields/53packed fields must follow compiler types. Preserve77RNG
+origins/7asserts/2Snprintf closinglines and actualsourcebasename. Inactive warning/
+development/sound code staysinactive; existing SHKNAM cataloguenotduplicated.
+ActualEmC-Cdiffs require valid life/ownership contexts, nonsymmetric movement and
+iterator mutation/reentry/typedreturn/source/memory/negative guards. PureJSoriginal
+algorithms, typedCtransport/trueforeign native dependencies only; native/shared/
+game/public unclaimed until own gates. EAT49freeze preserved; MON unselected.
+
+
+### PAR08 proposed unselected FILES/INVENT/DISPLAY service restoration (not applied)
+
+- Location: cache-only candidates and exact before/after hashes in
+  `.cache/unselected-service-restoration/proposal-inputs.json`; the frozen
+  `js/ported/{files,invent,display}-runtime.js` files and original manifests
+  remain unchanged. This is added workspace adapter work, not an inherited
+  upstream source patch.
+- Exact proposed change: replace mutation of the cached environment prototype
+  with a stable forwarding object per Module and save/restore the current
+  services around every call using `finally`. DISPLAY still initializes its
+  seven public objects eagerly once before native constructors. Source bodies,
+  native typed storage, C reference, expected results and compiler flags are
+  unchanged.
+- Reason/effect: the old wrappers close memory/field services over the first
+  services object and leave a nested call's prototype active after return or
+  exception. Forwarding should make both closure-based and inherited service
+  lookups use the current invocation, then restore the caller's services.
+- Verification: initial read-only audit and candidate generation only. Positive
+  actual-C callback/reentry/exception, startup, Module isolation and existing
+  frozen parity-suite reruns are pending. No observed production game failure
+  or native-host parity is claimed by this proposal; no selected file is edited.
+  The frozen handoffs remain historical and must not be silently rehashed.
+
+PAR09 HACK source-local on_ice correction synchronized: compiler declaration-ID bindings now retain original local name and every declaration/reference resolves consistently; no C.on_ice/C.recharged surrogate exists. Parent regenerated only actual current dependency closure; all694C roots plus244transitive macro-env roots structurally present, zero missing. JS/runtime/support/layout syntax pass. All95 initialroutes including full native dump_weights/qsort now have passing author comparisons (directed cases still growing); source __LINE__ closing-invocation and adjacent-literal tokenization fixes preserve actual original traces, raw prior failures retained. Original same-Module8-byte union scalar/upper bytes and actual full pointer identities are asserted; no source memory zeroed after calls or broad padding mask. HACK remains private/unselected, no completebranch/native/fullgame claim.
+
+
+### PAR08 SHK129/J135 implementation scope (announced before implementation)
+
+- Parent read the full actual-profile inventory `.cache/shk-first-pass/inventory.md` (SHA256 `b7cc910682e77a4837828336320f7ea975ead1a1df0cbd660ace3c72214bd90d`).
+  Pristine/prepared `src/shk.c` match at
+  `b2b5b82934b15c1a4a3c9474a650ff5800a83f0b9634696fdf080d0458f16e1b`;
+  actual -O2 -g memory64, forced native-terminal/ncurses/source-cwd basename
+  CPP/AST/layout capture succeeds, final CPP is byte-identical to initial
+  unoptimized capture. This is inventory evidence, not behavior equivalence.
+- Authorized unique SHK implementation: all137 compiler-identified functions
+  (73public/64private), original ordering/names/formals/comments/control/data in
+  JS; typed C header/ABI/dependency seams and zero-only fixed native backing.
+  No reserved formal/local renames. Preserve six private globals, six local
+  statics, all11 original JS icost record rows, credit_snap long[2][3] first-
+  dimension2/stride24, and distinct source-declaration storage for sellobj's
+  two lexical qbufs. Foreign shtypes is not owned; no public startup table or
+  source algorithm/data fallback is added to C.
+- ABI obligations: fifteen exact signed/unsigned64 formals, seventeen long
+  returns, Bill32/bill_x24/eshk4960 full layouts/copies, all21 pointer operations
+  with real pointee strides,2649 actual member aliases,23 typed native indirect
+  calls/six function identities,164 foreign calls,21 exact logged RNG origins,
+  two actual Snprintf sites, shared gotos and source CPP repeated evaluation.
+  The valid bill_p sentinel `(struct bill_x*)-1000` retains exact bits
+  18446744073709550616 for cast/read/write/equality; dereference-address validity
+  is checked separately. Unknown pointers/scalars/padding stay raw before any
+  safe-address conversion. Stable per-Module forwarding restores services in
+  finally across callbacks/exceptions; automatic slots belong to each original
+  source invocation, with declaration timing and identity retained.
+- Preserve inherited/source quirks rather than silently fixing them: alter_cost
+  can repeat the current shopkeeper without a cap; sortbill_cmp narrows its
+  long difference to int; sellobj subtracts `(offer<0L)` as written. Source
+  nontermination, LONG_MIN negation/overflow, invalid nonnull callers and
+  uncontrolled ownership are not certified by finite valid fixtures. The
+  inherited deterministic qsort reentry limitation and active production sleep
+  remain explicit. Any fixture sleep substitute must be logged and excludes
+  wall-clock timing equivalence.
+- Scope is unique js/ported/shk*, wasm/tu-libraries/shk*, scripts/tu-shk* and
+  test-tu-shk, tu-fragments/shk-* and .cache/shk-first-pass only. No selected,
+  shared registry/build/layout/checker/profile/central support or frozen source
+  changes. Exact SHK-specific compiler-range handling is required for the
+  conservative parser's144 false count versus137 actual bodies; no global
+  checker waiver. Root handles any shared integration correction later.
+- Required first-pass proof: actual original optimized Emscripten C versus a
+  hybrid excluding shk.c, meaningful valid contexts for all137 boundaries and
+  positive billing/menu/sorting/credit/ownership/damage/sentinel/64-bit/RNG/
+  callback/stack/growth/Module paths, full source/ABI/member/data/import guards
+  and unchanged-C wrong-code rejects. Controlled foreign-world boundaries and
+  unexecuted branches must be named. Native-host, full-game and public gates
+  for this new translation remain pending; no existing expectation is weakened.
+
+PAR08 ZAP130/J136 scope reviewed/announced BEFORE implementation GO. Actual
+compilerAST85functions60public/25private/782comments,source6447lines/pristine=
+prepared;inventorySHA95d9b834a5877a6d8fa58322a7d4d06aff7ed05dd1a2ff356637acde2280a206.
+Preserve original names/formals/boundaries/data/comments/control.11gotos within
+bhit6/dobuzz2/zap_over_floor1/makewish2 lower inline with original sharedtails,
+including mounted-target redirect; no newpolicyhelpers/flags. No sourcepointer
+arithmetic/stride changes. JSowns flash_types30/charged_objs4/immutabletexts;
+external destroy_strings7x3 needs separatezero native pointertable/nonLTOstorage
+plus JSstartup BEFORE optimizednative TRAPconsumers, ctorproof required. Private
+wish_history20/index perModuleJS, actualnative stringalloc/free preserved; stable
+whatbuf50/flash_str BUFSZ zero backing initialized from JSsource. Source local
+20row destroy_items records remain localJS only if addresses neverescape perAST;
+full coord/anything/object byte assignments and all observednativealiases remain.
+Privatezap_ok gets distinctproductionnative trampoline for realgetobj; public
+bhitm/bhito/melt_ice_away identities reused; bhit/bhitpile arbitrarycallbacks via
+exactint(mon*,obj*)/int(obj*,obj*) ABI-onlyinvokers. Addressable bool8/coord16/int32/
+obj**/mon** cells preserve writeback/destruction/reentry and liveviews. Actual399
+foreign dependencies remain typed boundaries, not Cpolicyfallback.114distinct
+expandedRNGsites/38functions (227ASTconditionalcopies),1assert1369/1Snprintf6388/
+noStrlen preserve exactsourcebasename/physicaltokens. Genericregex97miscounts12
+case(...) labels; privateguard uses actualAST85/anchoreddefinitions and future
+sharedchecker correction is a separate reviewed change, no sourcecountwaiver.
+StableModule/layout env/currentservices/finally restoration/latepublication and
+validCcaller/source/data/width/ownership/growth/reentry/negative proofs required.
+No native/shared/game/public claims before gates; OBJNAM8freeze preserved.
+
+
+### PAR08 unselected service-restoration proposal verified (still not applied)
+
+- Separate review receipt `.cache/unselected-service-restoration/review.json`
+  SHA256 `19e5d47dedad6b4cb3fa1f607a622bf239963276780c1dbc5444708db3b992ed`
+  pins21 candidate/proof artifacts. All509 entries in the original four frozen
+  manifests verify unchanged after testing; originals/manifests were not edited.
+- Candidates pass unchanged original optimized-C result suites: FILES1420,
+  INVENT1337, DISPLAY139 =2896 comparisons across258 functions, plus22528 wall
+  result assertions and the optimized seven-public-object/308125-byte DISPLAY
+  constructor observations. No expected result or C fixture/oracle is changed.
+- Added invocation ownership witness returns real native method results without
+  modification: identical27349 calls,269 native callback reentries and2443903
+  native ABI/dependency lookups in candidate/three isolated-revert runs. Fixed
+  adapters have zero stale-owner lookups; reverting FILES alone yields87012,
+  INVENT alone47505, DISPLAY alone2103240; other two ports stay at zero in each
+  negative. Each revert fails the ownership assertion after old C snapshots
+  still pass. This exposes an adapter lifetime defect, not an observed game
+  recording mismatch or a C algorithm change.
+- An additional real C window-print callback reenters imported show_glyph and
+  throws from its isok dependency. Entry through callDisplay verifies the full
+  native callback frame cleanup, restored services, later new-service call and
+  no startup reinitialization: candidate6calls/1nested/4221lookups/zero stale/
+  two propagated throws; old DISPLAY fails ownership with3681 stale lookups.
+  This does not claim automatic unwinding of arbitrary raw exported-C callers.
+- Initial instrumentation gave a same-proxy internal initializeDisplay call a
+  second invocation label; those initial logs remain historical. Final witness
+  treats the same proxy as its existing invocation. Final isolated proofs above
+  all have identical call/reentry/method counts. Native-host/full-game/public
+  validation for these unselected ports remains pending. Original generators
+  reproduce historical adapters; a later promotion must retain this separate
+  correction and record new provenance rather than rewrite old proofs.
+
+
+### PAR08 CMD125/J131 frozen first-pass handoff
+
+PAR08-CMD source-faithful148/102public46static functions implemented preserving
+original names/order/formals/comments/algorithms/control; no parameter exceptions.
+56records197fields45globals,282deps including96 initializer-only,172 native designator
+identities/13callbacktypes/119calls,22loggedRNG,10TU+21localJSinitializers12778literalbytes;
+2 anonymous type aliases exact source offsets;16 structptrincrements/native48,
+row24/whole240 functionarray,2fixedlongargs/native64typedABI.3public source tables
+use REQUIRED separate nonLTO zero backing with eager addOnInit BEFORE optimized
+foreign constructors; omitted-init unchanged check rejects0vs35. Current actual
+O2-g memory64 C/importhybrid proof1562 comparisons/all148 defined entry points,
+source/scope/member/import/width/data/prototype/CPP guards pass;wrongJS omission
+fails unchanged reference trace with before/after6source/test/reference hashes.
+Parameterizedbindings/queuecopies/frees/largecounts/byvaluecoord/nativecallback
+reentry/growth/throw service-restoration/newservices/Module/raw64/scalar observers
+pass within controlleddependency limits. Source's uninitializedcmdstr ordinary/
+unbind branches remain untouched UNPROVEN; definedcancel/CMD_PARAM exercised.
+RawexportedC caller resume after arbitraryJSthrow UNPROVEN, preserved diagnostic;
+callCmd boundary finally tested. No native/fullgame/public/production claim or
+selected/shared/frozen edits; final manifest records exact inputs/artifacts.
+
+Parent independently read the full recipe/registry/dispatch and verified all168
+manifest entries (39inputs/102header-profile/27artifacts), zero mismatches. Manifest
+`.cache/cmd-first-pass/verified-inputs.json` SHA256
+`e69cd4ed68020108a4c2ebb984db809a17ddd2d40182f502a9e075366864cc44`;
+parent review `.cache/cmd-parent-review.json`. Unselected and unapplied.
+
+PAR08 original cached110 public gate FAILED41/44; full original integrationPASS,
+all1314capturedinputs unchanged. .cache/tu110-cache-fixed-gate-snapshot/failure.json
+preserves2POTIONTypeErrors (seed0108wizardextcmd/seed4500knight) plusSEPARATE
+seed0360worldtour original45s ETIMEDOUT. No accepted110claim; accepted98remains.
+POTIONdiagnosis: runtimeEWarn_of_mon maps WARN_OF_MON, but compiler layout metadata
+omits that enum. Basic-map audit finds this is its sole missing constant. Earlier
+2425checks left uwepNULL in blindness cases, hiding the short-circuited access.
+Announced fix: exportactualC WARN_OF_MON via POTION_META (no hardcoded32), validate
+all basic property metadata indices before constructing getters, add actualC/JS
+wielded-weapon/warningmask/blindness cases plus missing-metadata negative. Core66
+functions/algorithms unchanged. Before3files saved .cache/potion-warn-regression;
+original18manifest retainedhistorical. Freshshared/normalbuild/integration/public
+required. Runtimecoordinator owns worldtour timing diagnosis separately, no harness
+or deadline changes. Bothdefects remain unresolved until actual proof.
+
+PAR09 HACK directed member-alias correction: actual compiled MemberExpr/source-spelling audit30sites identifies obj.next_boulder→corpsenm, rm.wall_info/drawbridgemask/looted/doormask→flags, trap.launch2→vl.v_launch2, obj.nexthere→v.v_nexthere. Runtime now forwards these exact aliases to live compiler-derived fields, never unrelated JS properties. Unknown record string reads/writes reject explicitly; numeric pointer indexing and symbol reflection preserved. Internal localRef introspection uses hasOwnProperty so typed native record arguments are not mistaken for source fields. Unused unsupported ocarry/ocontainer getters removed from this TU's projection. Runtime792776f4123510b6c4bd1a6d2076c7efc70b3e196a363324ac83478f16c99b2f, JS syntax/structural694+244closure pass; remaining5ABI bytes unchanged. Positive nonzero/native alias and strict refusal/full parity reruns pending; raw boulder native corpsenm1vsJS0 mismatch preserved. No selected source changes.
+
+PAR09 frozen Lua dependency integrity rechecked after NHLUA authoring and selected six-cache promotion: all82live inputs(46production36tests) match original freeze95e1a8eba61a156e1c6339b3bd617ff46427887fc6f5be898f444c7daf9d69b6. .cache/lua82-parent-recheck-post110.json records source rehash only, no regression rerun; historical original freeze status retained verbatim. NHLUA newsource tests currently384cases/2030checks/all94underboth compiled Lua/frozenJS provider; final layout-metadata cache, newvalidlifecycle fixtures and handoff still in progress, no freeze/shared/native claim.
+
+PAR09 root110 original full integration passed with no diagnostic loader/original three30second workers,1314captured inputs including scorer metadata. Original public run then failed41of44, all1314unchanged: two actual POTION EWarn_of_mon missing WARN_OF_MON metadata crashes and separate seed0360spawn ETIMEDOUT. Accepted98 remains. ROOT owns exact POTION metadata/constructor-validation/native regression correction; parent owns bounded seed0360single-worker timing/profile diagnosis after fixed artifacts. Original scorer default45second worker timeout/CLI were inspected unchanged; accepted98 same world-tour case was exact120639RNG/833screens+cells+cursors/12animations,39418.49reported segment milliseconds/832moves. Proposed NON-GATE60s profile will preserve original45failure, no harness/session/deadline/source edits, exact capture before/after and no duplicate fullsuite. Plan .cache/tu110-seed0360-diagnostic/plan.json; actual execution awaits ROOT fixedPOTION artifact handoff.
+
+POTION regression fixture correction: the first directed warning-slot run stopped in fixture setup because W_ARM was not exported. It now uses W_SADDLE, an existing actual-C exported nonweapon mask; no invented mask or gameplay change. The failed setup log is retained in .cache/potion-warn-regression/attempt1-missing-test-mask.log. Behavioral verification is pending the rerun.
+
+POTION WARN regression component reproof PASS: 2,465 comparisons across all66 original entrypoints. The original 66-body JS core is unchanged; compiler-derived WARN_OF_MON metadata and adapter startup validation are the production repair. .cache/potion-warn-regression/comparison-receipt.json binds source/runtime/test/layout/log hashes. .cache/capture-warn-fixed-game.py extends the existing immutable capture recipe with that receipt, regression logs and pre-edit files; it does not alter the frozen test harness. Normal rebuilt game and original integration/public results remain pending.
+
+
+### J129 separate unselected OBJNAM nested-record address repair candidate
+
+Original source objnam.c3761 tests Is_rogue_level(&u.uz); dungeon.h110/111/129 expands Lassigned(&rogue_level) before the actual on_level call. The frozen generic fieldRef represented every non-bitfield address as only {address,value}; dereferencing a record's dnum/dlevel therefore yielded undefined and skipped the assigned-level branch. An isolated fixture adds only actual native Rogue-level assignment and a valid wizard locked-door request: unchanged original C produces a doorless doorway, frozen JS a locked door. Exact old-runtime differential failure is preserved in .cache/objnam-record-witness/witness.log. No original C, reference expected value or frozen eight input is modified.
+
+Announced separate ABI candidate only: fieldRef returns the existing fresh record view for record fields, numeric address for arrays, and existing scalar/pointer reference box otherwise. All source policy remains unchanged. Candidate runtime and import-loader reside solely in .cache/objnam-record-witness; root alone may select a later repair. Positive witness and full frozen9268 comparison suite will be run against this candidate, with separate receipt/hashes; this is not a retroactive claim about the original freeze. This site is3761 (the earlier agent shorthand3760 is corrected here).
+
+Reservation132/J138: frozen NHLUA author next owns TRAP read-only scope inventory first; source/ABI/control-flow review and public announcement precede implementation. Global next133/J139. Normal110 WARN-fixed build and preflight audits pass; immutable .cache/tu110-warn-fixed-gate-snapshot captures1322inputs, manifest5e402d6f8a7620da484a121e7c7d348ed458899a0fa7abb84cfc98816be9e001. Integration/public still pending.
+
+J129 separate candidate evidence complete: .cache/objnam-record-witness/receipt.json verifies every original eight-file hash unchanged. Old-runtime actual C differential rejects assigned-Rogue locked-door input; candidate passes that same positive witness and the full9268 comparison suite. Shared/game/native selection remains pending and root-owned.
+
+
+### PAR08 INVENT catalogue claim RETRACTED; addressed-pointer correction pending
+
+- The frozen INVENT recipe's statement that its real upstream objects/monster
+  catalogues were initialized is incorrect. Parent source/build review found
+  that scripts/tu-invent-probe.c never calls objects_globals_init or
+  monst_globals_init. The linked unchanged prepared objects.c/monst.c declare
+  zero global arrays and explicit initialization functions; no automatic
+  constructor supplies these values. probe_class read those zero rows.
+- Consequently the historical1337/all119 comparisons and482 index iterations
+  establish only their controlled zero-catalogue context, not real initialized
+  catalogue classification or positive merging. Existing manifests, code, logs
+  and original reference artifacts remain unchanged as historical evidence.
+  The separate service-restoration proof retains its actual invocation-owner
+  observations, but its INVENT result comparisons inherit this limitation.
+- A new positive merge fixture precondition correctly rejected the uninitialized
+  pair in original C; that diagnostic is preserved. Read-only AST/emitted review
+  separately identifies8 direct &obj parameter sites in addinv_core0/stackobj/
+  doorganize_core that lack real native formal cells, plus &uquiver incorrectly
+  passed as the global pointer value. Corrected emitter/core candidates live
+  only under .cache/invent-addressed-formals; no frozen or selected edit.
+- Proposed fixture correction: a separate copy calls the actual upstream object
+  and monster globals initialization functions before reset/body execution.
+  Both original-C and hybrid builds use identical fixture startup; the original
+  invent.c algorithm remains unchanged, no expected value/normalization waiver.
+  After the current root heavy-job hold clears, pin that new actual reference
+  and require positive inventory/quiver/floor/organize merges, native formal
+  replacement/quantity/global-cell observations and old-code rejection. No
+  fresh real-catalogue/native-host/full-game/public pass is claimed yet.
+
+Fixed110 timing qualification: all9authors and bothcoordinators explicitly acknowledged actual heavy-job drain before .cache/tu110-warn-fixed-gate-snapshot/quiet.json start2026-11-10T14:27:20UTC. Light drafting remains allowed; host-wide external load is unmeasured. Sole seed0360 CPU-profile replay has a bounded60-second diagnostic timeout and cannot waive the original45-second public scorer gate. Original integration/public runs remain pending.
+
+
+### PAR08 SP_LEV131/J137 scope announced before implementation
+
+- Parent read full actual-profile scope `.cache/sp-lev-first-pass/proposed-scope.md` SHA256 `b8f8b68648d141853ec252f700fe58e3b497fd9ba6ba690d149e14307b40540d`.
+  Pristine/prepared src/sp_lev.c match198220bytes/6504lines at
+  `91c684ab995f82d4775dcc83576abf36c25be5b2c205cddfaa46445328f4ce25`.
+  Actual production O2-g MEMORY64/defines/ncurses/forced-native-header compiler
+  capture uses TREE/src cwd and input basename. Inventory is not parity proof.
+- Unique assigned implementation: all142 configured functions (64public/78static),
+  names/order/formals/comments/control/data/CPP in JS;80 exact record identities/
+  376fields/33true foreign globals,210dependencies(206fixed+4vararg),73logged RNG
+  expansions,13gotos/7labels retained without caps or replacement policies.
+  Eleven TU+50local static objects/factories,395source literals/4698bytes and
+  all34registered Lua callbacks in the35-row table stay JS-owned with native
+  zero backing and exact callable native identities. No public source data
+  object/startup constructor obligation. Two anonymous table type-only aliases
+  bind actual source offsets124387/135018; generic reference guards must not leak.
+- Exactly two JS LOCAL binding exceptions: create_monster char class at60085 and
+  find_objtype char class at108327 become class_; native fields and all source
+  formals retain original names. No parameter-checker exception or broad rename.
+- Required ABI/value evidence: get_unpacked_coord returns unpacked_coord16/align4
+  BY VALUE, not a persistent alias; typed sret/caller-copy seam must preserve a
+  prior full value across later calls/reentry without C algorithm fallback.
+  Three fixedlong args/two lua_Integer64 returns retain BigInt; four direct
+  address-of expressions bind three original formal cells with own invocation
+  lifetimes. Five unsigned32 compound stores compute in long64 before narrowing;
+  all66 compound types are guarded. Four pointerincrements scale1/224/8/8, two
+  (*npoints)++ sites use one typed cell and original postfix result. Actual record
+  field addresses/views and compiler enum signedness are measured, not guessed.
+- Canonical aliases/full copies/selection and retained Lua callback payloads,
+  ten-slot container stack, native ownership, valid map/species/room/parser
+  contexts, exact RNG/CPP evaluation, automatic declaration identity/timing and
+  per-Module forwarding with call-scoped finally services restoration are required.
+  Bare zero/error dependency returns causing uninitialized source paths are not
+  valid coverage. Linked dependencies need real initialization or explicit
+  controlled-model classification; no 'real catalogue' claim from mere linking.
+- Existing read-only memory64 C Lua archive may be a true dependency in BOTH
+  isolated component modes, with exact hash/profile bound and actual parser/
+  table/error/callback/stack proof. This does not establish production JS-Lua
+  equivalence or authorize selecting C Lua, changing Lua bridges/services/profile,
+  or compiling it for production. Game/world controlled boundaries stay explicit.
+- Only unique sp_lev source/runtime/library/probe/layout/test/tu-fragments and
+  .cache/sp-lev-first-pass files may change. No shared registry/build/layoutwriter/
+  support/mainruntime/native-service/default/Lua/frozen/selected writes or game
+  jobs. Current root HOLD permits source drafting only; no new heavy compiler,
+  test or generator until explicit CLEAR.
+- First-pass acceptance requires actual unchanged optimized Emscripten C versus
+  hybrid excluding sp_lev.c, meaningful valid142boundary contexts and positive
+  sret/coordinate/corridor/callback/parser/ownership/RNG/width/stride/growth/
+  stack/service/Module/raw64 proofs, fresh source/data/ABI/member/import guards
+  and unchanged-C deliberate wrong-code rejection. All untested branches,
+  uncontrolled worlds, native-host, production/fullgame/public remain pending.
+
+
+### PAR09 private fixture catalogue scope clarification (read-only review)
+
+Actual startup review distinguishes deliberately controlled native tables from
+production catalogue initialization; linking a data source alone is not proof
+that initialization ran. This note narrows coverage claims only. Existing frozen
+manifests, inputs, logs, recordings and reference sources remain unchanged.
+
+- ARTIFACT, MHITU and HACK private probes explicitly define synthetic monster
+  and object tables and reset mutable fields to controlled values. Their native
+  table addresses, const pmidx construction, pointer/copy identity, typed fields
+  and translated algorithms are tested in that controlled world. They do not
+  establish equivalence across the real initialized game catalogues. HACK's
+  logged decl_globals_init/init_objects dependencies are controlled fixtures.
+- NHLUA's frozen probe explicitly defines synthetic slot-zero monster/object
+  names and controlled player/dungeon/list state, without linking or calling
+  production object/monster initialization. Its 402 cases/2,073 comparisons per
+  Lua backend cover that source/ABI context. The 16 complete static images are
+  NHLUA-owned data, not the full game catalogues. The nonnull objects[].oc_uname
+  free/reset branch remains an unwitnessed directed case. Frozen14/323 inputs
+  are not changed to hide or repair this limitation; independent parent replay
+  and native-host/full-game/public acceptance remain pending for this port.
+- MAKEMON, READ, APPLY and UHITM actual fixture resets call both original
+  monst_globals_init and objects_globals_init. For UHITM this copies real static
+  species/object data into native arrays, while object/monster instances, HP,
+  weights and dependency results remain controlled. It does not run the separate
+  init_objects/o_init description-index setup, shuffle, item generation or full
+  startup. Its getmattk dependency is controlled rather than production attack
+  generation. Actual initializers do not imply exhaustive game-world coverage.
+
+Verification: read actual probe definitions, reset/setup bodies and recorded
+build inputs during the root's heavy-work hold. No compiler, game or test job
+was started for this review. Mixed-game acceptance remains specific to the
+root's exact selected snapshot and original timed gates.
+
+
+J136 ZAP unselected fixture/setup refinements (announced before edits): the optimized native table witness uses a separate test-only C consumer of exactly trap.c4525/4533's extern expression destroy_strings[dindx][obj->quan>1L]. All21native cells and both quantity cases across7rows are compared with unchanged original C before any source call; a missing/delayed startup must fail. This certifies external data ABI/startup visibility, not the full foreign fire_damage algorithm. Native zero-only storage remains separate and non-LTO. The source-private20-row destruction descriptors use JS row records because no address escapes in the configured AST; the original initializing, sampling and two-pass source loops remain in core unchanged. Native layout records/cells remain for actually observed addresses/full copies.
+
+The unique ZAP services factory may memoize its immutable native dependency closures on the actual Module; it captures no invocation arguments, heap view, global/equipment address or stack frame. Heap/global/stack/literal functions remain live and Module-bound. The environment still forwards through the per-entry current-service slot, including changed overrides and nested finally restoration, with constructor validation before publication. Direct constructors stay fresh. Factory identity, callbacks, real growth and two Modules will be checked before freeze. No selected runtime, original source or timeout changes.
+
+
+### PAR08 SP_LEV initializer-only ABI metadata refinement (before generation)
+
+The actual MemberExpr census remains80record identities/376accessedfields.
+Source-only drafting identified two additional existing HEADER records required
+for original JS data initialization: luaL_Reg name/func fields (the35-row source
+callback table) and all4 uint32 fields of nhl_sandbox_info (load_special.sbi).
+Expose these2 compiler-derived record layouts/+6 fields as typed initializer
+transport; they add no source algorithm or C initialized table mirror. Other
+source record initializers must follow the full compiler declaration order and
+implicit-zero rules, not an accessed-field subset's order. No production output,
+compiler/test/generator run occurred for this refinement during root HOLD.
+
+J136 ZAP cache draft refined before regeneration: only the internally owned canonical Module-bound dependency packet is memoized. Every services-factory call returns a fresh Object.create(packet) facade, so caller property overrides create facade-own properties and do not persist into later source entries. The environment current-service slot points to the actual current facade and is restored in finally across native reentry/exceptions. Private tests will check facade identity/override isolation as well as real growth and independent Modules. No selected edits.
+
+
+Historical accepted98 checkpoint detail, superseded by accepted110 above:
+
+**Historical accepted checkpoint: 98 translation units plus JavaScript Lua.** The normal
+mixed memory64 build, unchanged original integration (all original 30-second
+workers) and original public scorer pass. Every metric is exact across all44
+sessions: 792,838 RNG calls;11,405 screens/cells/cursors;1,483 animation frames.
+The captured tree verifies561declared artifact/source hashes and274literal local
+module dependencies. All968base input hashes stay unchanged across integration
+and scoring; all969public inputs stay unchanged across scoring. The extra file
+is identical existing repository category metadata added after integration;
+`public-capture-supplement.json` preserves the explicit before/after scope and
+initial wrapper-preflight failure. No harness, category or expected values changed.
+
+Evidence: `.cache/tu98-fixed-gate-snapshot/acceptance.json`. Wasm SHA256
+`62ff5f7d2c8d8994d5364e477b7cf618ad2c9b5a9587eabfb3a395690acd0eac`;
+full manifest `29358f6a70a4f840b43a70813b71b402c68fd079c54dce3802e859b0efca822f`.
+All98original C objects, HACKLIBarchive and checked C Lua interpreter symbols are
+absent; eleven newports have actual JS imports and no private test aliases.
+Eleven new shared EmC-C/JS suites pass31,449 comparisons, plus END1/DETECT2
+extra witnesses. Native parity remains pending for45first-pass ports;53native
+suites are historical baseline evidence, not a fresh98-file native result.
+
+The accepted repair preserves original function bodies/boundaries/comments:
+MKMAZE scales two struct-pointer increments correctly and tests all eight native
+output bytes; WIZCMDS separates its real sorting callback from private test entry;
+MONMOVE projects four structured native pointer returns, exposes the actual
+wall_info/flags alias and reuses fully validated live views by address/type within
+one Module. Fields/heap/pointers stay live; views remain retained for the Module
+lifetime. Full repair, negative tests and timing/capture limitations remain in the
+entries below. Original failed98snapshot remains immutable. Historical accepted87
+at `.cache/tu87-windows-fixed-gate-snapshot/acceptance.json` remains preserved;
+older81/failed87 copies omit a helper and are not self-contained replay bundles.
+Configured SDK/external tooling is still required; not a full toolchain capture.
+
+
+Next shared batch proposal after accepted110: READ, DO_WEAR, INSIGHT, FILES, MKOBJ, DISPLAY, INVENT, EAT, APPLY, OBJNAM, CMD and NHLUA (target122 only if all required handoffs pass). ROOT owns shared promotion; coordinators prepare unapplied, exact-baseline subsets FILES/DISPLAY/INVENT and NHLUA. Corrected INVENT real-startup/formal proofs and all candidate service/record-view tests are prerequisites, not waived. ROOT prepares other8 including per-call MKOBJ service forwarding. Changes will add reviewed registry/build/probe/layout/metadata entries and main-runtime imports/dispatch/startup hooks, preserving original C exclusions and native zero-storage/non-LTO requirements. Normal mixed build, component comparisons and unchanged original integration/public gates remain required before acceptance; current executable/accepted checkpoint remains110 until actual selection.
+
+
+### PAR08 PICKUP126/J132 frozen controlled first-pass handoff
+
+- Parent read the full .cache/pickup-first-pass/integration-recipe.json and
+  CALLER_CONTEXT_AND_LIMITS.md, then independently verified12durable+46proof
+  hashes, zero mismatches. Recipe SHA256
+  b25f168284ad46fb672f02291c1af7cb34aa909a5f3c7a6e3f3c9fd057603215;
+  final-hashes c9ba2e75cb3a54a3140c2811d44397776431bbfa830975a3c3e80bb0575fdaf3;
+  proof-hashes c4e2628b9c0ead6fec78206aaba22545860863cebd789a31f93292a5522c88f6.
+  Parent receipt .cache/pickup-parent-review.json. Unselected, no shared writes.
+- All66 source bodies(31public35private),478comments,10private objects/source
+  enum0..4, aliases/fullcopies/11gotos8labels remain JS-source faithful. No public
+  storage/startup hook. Stable per-Module forwarding restores current services
+  in finally and initializes private backing once. Native C is typed ABI/header/
+  dependency/zero storage only,203native obligations/42globals/120varargsites/
+  42indirectsites with real source/native callable identities.
+- Final252 actual original optimized Emscripten-C/hybrid state-result comparisons
+  reach all66 configured boundaries; all13 primary RNG origins and positive
+  display draws observed (all5 display sites statically guarded, not exhausted).
+  Source/wholeCPP/member/width/data/metadata-key/import guards pass, output-only
+  regeneration10artifacts is byte-identical. Wrong-source, stale-service and
+  exact-old-promotion controls each produce actual AssertionErrors against
+  unchanged source/C-Wasm/comparison artifacts.
+- A real carry_count emitter bug was fixed: int stored lhs computed in long
+  must promote BEFORE -= and narrow the store. Positive gold path and exact old
+  code negative retain the failure. All31 compound compute types/61 unarycells/
+  addressed count formal/109address DeclRefs are guarded; only nonlocal direct
+  variable address is the record nul_glyphinfo, no scalar-global-address seam.
+- Historical impossible INCLUDE_HERO/PICK_ANY fakehero selection was rejected;
+  final uses source-valid PICK_NONE borrowed112-byte fakehero observations and
+  swallowed-monster worn-item rejection for actual24-byte menu compaction/full
+  padding. Positive queued native callback, goto/ownership/saddle/quantum/icebox,
+  long64 counts/raw64/scalar and changed-services/reentry/exception/stack/growth/
+  independent-Module witnesses are controlled component proof, not all branches.
+- Foreign catalogues/world/UI/sorting/naming/shop/timers/regex are explicitly
+  controlled native models (138explicit/42neutral), not linked real initialized
+  production databases. Source-relevant class/pmidx rows are populated as fixture
+  models; no upstream full-catalogue startup claim. Zeroed65536-byte scratch is
+  an explicit raw-padding precondition, not arbitrary-stack equivalence. Freed
+  payloads are not read after lifetime; lifetime/size/identity metadata compares.
+  Native-host/fullgame/public/save-file/uncontrolled dependency proof remains
+  pending. Existing DISPLAY nul_glyphinfo initialization is outside this TU.
+
+Reservation134/J140: frozen PICKUP author owns UNIXRES (verify actual configured sys/unix/unixres.c source/link) read-only scope first via existing coordinator; no other outside TU claim. OPTIONS133/J139 remains reserved for BOTL author after freeze. Global next135/J141. Actual game still has Unix/TTY source objects outside src/*.c; source-directory count alone cannot establish completion.
+
+
+### PAR09 accepted110 dependency audit and independent NHLUA review
+
+The dependency evidence reader now selects the actual accepted110 snapshot at
+.cache/tu110-warn-fixed-gate-snapshot and retains the separate98-TU reader/history.
+It verifies the683 declared provenance hashes and all1322 captured inputs, actual
+original integration/public logs and parsed44 results, exact five metric totals,
+original30/45 command/deadline/no-loader/no-override receipts, captured production
+import audit and298-file literal closure. Scorer metadata is in the base1322
+capture before both gates; no98-style public supplement is invented for110.
+Matching selected evidence also requires the exact manifest and all current
+declared source/artifact hashes. A later staged build receives no transferred
+acceptance. README dependency paragraphs identify this exact110 acceptance;
+57 first-pass native checks remain pending, with53 historical baseline suites.
+This report change does not modify game behavior or the frozen accepted inputs.
+Focused positive and rejection checks plus regenerated inventory are pending.
+
+Parent independently reviewed NHLUA118/J124's frozen private first pass after
+the root CLEAR: all323 live and frozen input hashes matched before and after,
+all14 owned files unchanged, source checks passed, and no-build replays against
+both compiled Lua and frozen JavaScript Lua each passed402cases/2073checks with
+all94 body coverage. Receipt .cache/nhlua-parent-review/review.json SHA256
+25e30f25f6e61ee2e94b1043f06a04e61ca3f45295d12552a61459b253f60b21 binds
+original freeze f95cbc46c8c099a1f698bc3f6272969be5e00324433f77ecb2ac755c83a20ccf.
+Synthetic-world/catalogue scope, unwitnessed nonnull object-name cleanup, fatal
+instance abandonment and unordered multi-key serialization limitations remain
+explicit. Native-host and selected-game/public NHLUA acceptance remain pending.
+The next integration proposal is private and unapplied; root alone promotes it.
+
+
+### J127 — BOTL121 frozen EmC-first component proof
+
+BOTL preserves all 76 configured original functions/order/formals and 361 true block comments; eleven initializer datasets move to readable JS. Public const data uses dedicated zero-only native storage in a separate object/no LTO, initialized from JS before constructors; two O2 foreign C reads verify startup. Compiler-derived widths/signedness preserve unsigned enum fields and the original uint64 percentage multiply wrap. Native pointer/union accesses, role strides, menu selection projection, lexical automatic storage reuse, original retry labels, and distinct production comparator trampolines retain source behavior. Raw Module-bound service closures return fresh per-call facades; nested current-service forwarding restores in finally without leaking overrides. No source policy or formatting algorithm moved into native helpers.
+
+Actual full-profile original EmC/imported-JS proof passes 3,607 exact comparisons across all 76 functions, source/data and lexical guards, and six observed negative controls. One/24 retry stack spans remain C3440/3440 and JS1520/1520 (within-implementation equality). Real initialized roles/objects/monsters, allocator/free, formatting and deterministic sorting are used; remaining UI/naming/world dependencies are controlled typed fixtures. Reentry, exceptions, growth, alias/high-bit stores, table aliases and a second actual Module are covered. Native-host and mixed-game/public acceptance remain later gates; no fatal/OOM/undefined-input claim. Frozen manifest/recipe: .cache/botl-author/hashes.json and .cache/botl-integration-plan.md.
+
+
+### PAR08 SP_LEV anonymous header-record alias refinement
+
+First generation stopped before output on three anonymous HEADER record
+identities already within the80-record actual MemberExpr census. Derive exact
+type-only aliases with typeof-parent-member: sp_lev_corridor_end for corridor
+src/dest's shared sp_lev.h:186 three-short record; sp_lev_lregion_inarea and
+sp_lev_lregion_delarea for the distinct hack.h:880/883 four-coordxy records.
+Guard parent/field/compiler RecordDecl identity/full layout instead of inventing
+struct tags or collapsing same-looking types. No new source algorithm/data,
+source/formal rename, compiler flag or C initialized mirror. The initial stopped
+generation diagnostic remains historical. Two source-private table aliases,
+two exact local class_ renames and initializer-only2header/+6field scope remain.
+
+
+### PAR09 TRAP132/J138 configured scope and production authorization
+
+Configured original src/trap.c prepared==pristine SHA256
+1f6af30bbd0b75a2e4c043098355c1f4eff2a841de27aecdc9f47343d4d5402c,
+7211lines/254718bytes; actual CPP/Clang inventory has124 bodies(65public/59static),
+643 comments,6 file objects and13 local-static objects (including trapnote.tnbuf12),
+229 referenced fields,353 foreign declarations,52 external globals,27 switches,
+5 gotos,50 compound operations and90 pointer-return callee names. Active body
+SHA2565ae9422cb2fa6d78351c090b97a9b42e586ff93e2fc8dcaf9fdf5dc8ee3aa35c.
+Both MAIL and MAIL_STRUCTURES are defined, so SCR_MAIL acid/water branches remain
+active. Original #if0 join_adjacent_pits/float_up text remains inactive.
+
+After completing the private unapplied NHLUA integration proposal, the exclusive
+author may implement only the14 unique paths listed in
+.cache/trap-author/configured-scope.json and .cache/trap-author scratch. Preserve
+all124 original function names/order/formals/comments/control and source policies
+in JS, including trap dispatch/damage/erosion/lava/water/lifesaving/launch and
+original5 goto edges. No source policy moves into native helpers. JS owns all19
+source data objects; mutable recursive_mine, roletrap33, tnbuf12 and zero_vl retain
+per-Module source lifetimes. Native code provides typed calls, original callback
+identities, field/bit/union/address transport and zero-only backing as required.
+Actual negative ALL_TRAPS enum remains signed, unlike nonnegative result/immunity
+enums. Compound compute types are narrowed only at the original store; pointers
+use actual byte/record strides, aggregate field addresses remain record views,
+all five union aliases and bitfield narrowing require positive native witnesses.
+
+Validation requires an unchanged configured Emscripten original-C/imported-JS pair,
+separate no-LTO native caller, exact state/results/foreign/RNG origin, all124
+bodies, source/data/literal/type/profile guards and unchanged-oracle wrong-code
+rejection. Pointer-return paths need positive identities/aliases/writes and only
+legal NULL cases. Real native growth, nested reentry, service/stack restoration,
+Module isolation and persistent buffers must be observed. Catalogue fixtures
+must actually initialize required production data or clearly identify controlled
+synthetic fields; never claim initialization from linking alone or mutate const
+subobjects in fixture reset. All branch/native-host/game/public completeness
+remains unclaimed until separately verified. No shared registry/build/mainruntime,
+Lua82, frozen NHLUA14/323, source oracle or accepted110 inputs may change.
+
+
+PAR09 accepted110 dependency audit verification completed: all31 immutable
+acceptance binding checks pass. The12 focused checks in
+.cache/test-dependency-audit-110.py verify the positive binding and reject a
+changed selected manifest/source,1323-input integration scope,60-second public
+waiver, diagnostic loader, changed runtime hash, wrong metric total, uncaptured
+import proof and nonliteral module; separate98 history still verifies968/969
+scopes. Receipt .cache/dependency-audit-110-review.json SHA256
+2cc5b8273a0bb11c74806f937de9ce2d1948a4aea5cef59831f6bde5294a0bfc binds audit
+0d15f8c7872a16922ae1343b0568570c14377cb6133dde48e3bea593454126c4. Regenerated
+dependency-inventory.json (SHA2565eafa87fc0846d1b6ff0152725840fc0e7acd4676140f0d1dc14dee60a4786a7)
+records9601 unique dependency symbols and zero missing inputs. Current selected
+source matching correctly reports false: root has begun the next shared batch
+after110 acceptance. The immutable110 result remains accepted; the current
+staged source changes have no transferred gate result. No frozen input changed.
+
+READ/APPLY shared wiring: extend existing END/MAKEMON generated module-wrapper pattern so frozen component tests load newly built shared pairs through per-port directories, copying only their unchanged captured test-input JSON. No frozen unit or oracle expectation edits. Main runtime imports their owned dispatchers without extra argument conversion; common support adds typed fragments. Shared builder executes their existing exact-source/data guards and self-contained original-C/hybrid fixture builds with real object/monster source and original basename-prefix mapping. Layout reader must reject any raw signed64 value that cannot round-trip exactly through Number; no rounded constant accepted. Compilers/build profile and frozen contest harness remain unchanged.
+
+
+### PAR08 UNIXRES134/J140 retired as UNPORTED_INACTIVE (read-only evidence)
+
+Parent read complete .cache/unixres-first-pass/inventory-notes.txt and receipt,
+then independently verified all27proof hashes, zero mismatches. Receipt SHA256
+a7073d9dedc51b82c3e8fcac31c74373012bf12da31fc460a4c810dd115a6491;
+proof manifest f2081ccc65d9fe4c96ac4f87346e057cd9dbf57a15f5891587dfe1c8f8fdac6c;
+parent review .cache/unixres-parent-review.json. Source sys/unix/unixres.c is
+unchanged pristine/prepared SHA0cb4545fb2c7565c600f1fd16406728dd5459408c4f1ae660e78966ca60a7dbd.
+Actual gmake production cwd TREE/src/input ../sys/unix/unixres.c compiles with
+current O2-g memory64/defines/ncurses/forced-native profile. Fresh358-byte object
+is byte-identical to actual game wasm/unixres.o at SHA256
+a63b81d21024f9fb1fff3057dd864a37e01b95de418d47c1cc9a31661fdb4663:
+no symbols/function/code/data/global/export sections, only imported memory/custom
+metadata. Actual CPP/AST has0bodies/0storage/0dependencies/callbacks/RNG.
+GETRES_SUPPORT and GNOME_GRAPHICS are both absent; SVR4 being active does not
+enable their enclosing feature guard. NOPANICTRACE does not disable PANICTRACE.
+The9textual names/14platform alternatives remain inactive and UNPORTED; no JS,
+wrapper/stub/registry credit, feature enablement, privilege change or native
+runtime equivalence is added. Source's saved-id fallback limitations and failed-
+output uninitialized reads are documented if a future profile activates them.
+An initial wrong /usr/bin/make dry-run's host-license failure is retained; the
+actual /opt/homebrew/bin/gmake command and private compiler capture succeeded.
+No whole-game/public/native privilege test was run for this empty source.
+Root explicitly assigned the same author UNIXUNIX135/J141 read-only actual
+../sys/unix/unixunix.c inventory next; implementation requires a fresh scope.
+
+PAR08-OPTIONS133/J139 scope reviewed beforeGO: actualconfigured224functions45public179private/10225lines/36file+30localstatics/174distinctforeigndependency names (earlier245IDs included own redeclarations). All original formals/names/control/comments preserved; sole reserved LOCAL handler_perminv_mode char let6015 becomes let_, no formal exception.12gotoedges in7functions use originallabelled retry/forward exits, shared tails once; automaticdeclaration slots bounded perinvocation. Privateallopt_init/allopt218rows217options+sentinel/105handleridentities remain JS-authoritative with exact int(int,int,boolean,char*,char*) callbacks and true boolean* lvalues; explicit original allopt_array_init timing/copy/ambiguities/globalwrites/heed/do_init/onceflag stays in source, no eager policy constructor. No foreign consumer of privatearrays: any data-copy representation follows actual address/byte observability, no artificial native policy/mirror/trampoline. Only publicdata zero wcolors_opt4 and options_set_window_colors_flag (SAVE1175consumer) retain live nativebacking. Real native callback tokens init_random rn2/display, cmd_from_func/cmdname_from_func do_reqmenu stayactualidentities.3wideargument signatures/no widereturn;4addressedchar**formals;23compoundassignments typedpromotion/narrowing;75pointerarithmetic sites with sole16byte xtra_cntrls* ++; originalfruitadd RNG8273 attribution. Scope .cache/options-author/{scope-supplement.md,scope-census.json,inventory-command.json,ast.json}; uniqueimplementationGO after thisentry, no selected/shared edits. EmCfirstpass guards/differential/negative proofs before mixed/native/public claims.
+
+
+### PAR08 SP_LEV full initializer field/active-union metadata completion
+
+Actual MemberExpr census remains80records/376fields. Typed initialization schema
+is now82records/386fields: the prior luaL_Reg/nhl_sandbox_info6 fields, plus
+previously unaccessed object.x, object.y, object.invis and str_or_len.len.
+The latter four are required by lspo_object's original static const object
+zeroobject initializer (source3553–3572, offsets111025–111568), including nested
+Str_or_Len unions. They complete original compiler declaration order; they add
+no source algorithm or record definition. The generator records the actual AST-
+selected union member and initializes only that member, preserving pointer bits
+instead of sequentially overwriting union variants. Full ordered field lists/
+active member IDs must be guarded. Syntax passes; actual C caller/sret/Lua and
+behavioral comparisons remain pending at this refinement milestone.
+
+READ/APPLY wiring correction: first shared-four attempt failed in unrelated INSIGHT reference common-support compilation because newly included READ/APPLY fragments interpret generic TELEPORT_REFERENCE_TU as their own self-contained reference and reference private C names. Their common-support includes are now excluded under TELEPORT_REFERENCE_TU; actual READ/APPLY reference fixtures include their owned support themselves and remain self-contained. Normal game/hybrid include typed fragments, original gameplay bodies/fixtures unchanged. Failed log preserved .cache/tu122-root-staging/first-four-attempt1-reference-support-scope.log; fresh component rerun pending.
+
+INSIGHT shared probe correction: inherited unapplied helper copied DOKICK common-support recipe, but INSIGHT fixture already owns attrname; first reference link duplicated that symbol. Shared INSIGHT pair now uses only its owned typed-support fragment plus actual alloc/hacklib/strutil/object/monster/drawing sources, matching frozen private build ownership. No C/JS gameplay body, frozen fixture, oracle or compiler-profile edit. Attempt2 duplicate-symbol log retained; rerun pending.
+
+
+### PAR09 HACK122/UHITM128 frozen independent parent checks
+
+HACK122/J128 freeze .cache/hack-author/handoff.json SHA256
+d9b6a0d73369ca5986e10c35a40a6e09b615c0840fd954f662b161d9692842b0 binds14
+source files,132 profile inputs,127 artifacts/history and57 parent ABI/generator/
+proof/template inputs. Parent verified all330 current and immutable copied
+hashes plus4 toolchain hashes before and after independently replaying the
+unchanged pair:390cases/4086 exact comparisons/all95 routines,20 RNG origins.
+Author separately rebuilt callback-only production transport:13 checks/two native
+comparator identities/zero private test imports; source488comment/CPP/AST/data
+guards,58 const-safe reset targets,282 scalar assertions and695+244 structural
+closure pass. Receipt .cache/hack-parent-review.json SHA256
+62cfa642792f6723efc640f9f16a86b13e9f3e00039a1fb02174592cc677a086. Current
+callHack creates an environment per boundary; real hot movement deadlines are
+unverified. Synthetic catalogues/foreign world/native-host/shared/game/public
+remain outside this private proof. All14 source files are held unchanged.
+
+UHITM128/J134 freeze tu-fragments/uhitm-hashes.json SHA256
+e75237984e2513d8cc7da667482afa9044a217061096f25b064f363f3a4e03a9 binds295
+files:6 production/recipe,4 tests/guards,102 dependencies and183 private
+reproduction/history. Parent independently verified all295 hashes before/after,
+replayed7858 comparisons/all102 routines and production204/all65 public functions,
+3 actual native callbacks/zero private test imports. The detector positively
+finds37 private hybrid imports. Receipt .cache/uhitm-parent-review/review.json
+SHA256a1464edb01600d8bb04878e3a7598c84b6297444abe974096a50706ac7c63028.
+Author's corrected TOWEL default-weight witness reaches the original unsigned32
+addition before division and rejects a no-wrap mutation; an earlier heavy-ball
+fixture missed that arm and remains historical, not evidence for this boundary.
+Actual783comments/CPP/AST/data/158 RNG-origin/aliases/regeneration/scope/13 mutable
+const-reset and negative controls pass. Ten format-forwarding warnings remain;
+no nonnull/noreturn/type warnings. Catalogue initialization is original static
+copy, not separate init_objects/full startup; inherited const pmidx memcpy is
+explicit. Native-host/shared/game/public/full branches/real foreign algorithms
+and production allocator schedules remain pending. These ports are not added
+to the root's closed next12-file batch by this private completion.
+
+
+### J139/PAR08 — OPTIONS private record representation refinement
+
+The file-static allopt_init/allopt records retain zero-only native backing because original allopt_array_init performs a real memcpy and their fields contain live native boolean-address and function-pointer values. JavaScript remains the only configured initializer authority; no C source-data or option-policy mirror is retained. The 105 distinct handler tokens use typed production trampolines that enter the same original JavaScript functions; private test aliases remain separate. This representation preserves actual byte-copy, pointer-cell and callback-identity boundaries rather than adding native arrays solely for test observation. Original allopt_array_init still controls ambiguity setup, live default writes, heed_all_options, each do_init callback, and its once flag; data packing does not pre-run those algorithms. Full table/pointer/callback/source-data checks and negative controls are required before the component is frozen.
+
+MKOBJ shared dispatcher implementation: add mkobj-dispatch.js plus schema-derived ABI-category data (five signed-long argument positions,24 pointer returns) without modifying the166frozen original source/proof inputs. Cache one fully constructed environment per actual Module; require unchanged layout identity; stable forwarding proxy reads the current call services and restores outer services and native stack in finally, including exceptions/native reentry. Existing direct createMkobjEnvironment API/core functions unchanged. A cached typed-environment accessor permits fixture observers to use the exact active views; it adds no source policy. New dispatcher requires fresh unchanged-C99-function comparisons and explicit actual-native reentry/override/growth/throw negatives before selection.
+
+
+### PAR09 NHLUA unapplied shared integration proposal
+
+Private .cache/nhlua-parent-integration/prepare.py renders7 shared before/after
+files and one new fixture library, with exact accepted110 base hashes plus
+fresh current-target before hashes. It writes only private rendered copies and
+a patch, rejects double registration/changed anchors/concurrent drift, and
+requires explicit --capture-current plus a fresh output to rebase root's other
+ports. Original accepted110 rendering and pre-anchor-fix generator remain
+historical. Root is sole promoter; no selected change is made here.
+
+Proposed registry/central probe/layout/source-metadata/build/support/mainruntime
+wiring exposes original94 functions and27 data objects, excludes nhlua.o,
+includes frozen typed nhlua-support.c, adds required scripts/fragment include
+paths and explicit -sSUPPORT_LONGJMP=emscripten at support compile and game link.
+The existing live C setjmp frame remains active across the one localized JS
+continuation at original nhl_pcall; no source policy or returned-frame jump
+substitute is introduced. NHLUA-owned private source data is initialized lazily
+after native ABI validation, with no extra global startup hook. Lua82 providers,
+interpreter/shims/defaults remain unchanged. The central isolated pair links
+existing compiled Lua as the true common reference dependency only, not as
+production Lua selection, and refuses a native-host claim. One new fixture-only
+JS library is byte-identical to the frozen private library.
+
+Parent reviewed the rendered changes. JS/Python syntax passes. Accepted110
+support plus NHLUA passes actual memory64 C syntax preflight;91 warnings are
+89 nonliteral format forwarders plus existing ROLE/END qualifier warnings. The
+first current112 preflight failed on missing yet-ungenerated INSIGHT metadata;
+raw failure is retained and is not reported as NHLUA parity evidence. Full
+central compile/link, callback/import/provenance and selected original timed
+gates remain pending root promotion.
+
+Private prepare-central-replay.py relocates the frozen402/2073 harness only by
+rebasing static import URLs and output/factory-wrapper directory, with a
+reviewable relocation.patch. It points at fresh central NHLUA reference/hybrid
+artifacts and must run without --build after those exist. Comparison bodies,
+expectations and source code are unchanged. This is a component check, distinct
+from the original unmodified full-game harness/deadline gates.
+
+PAR08 UNIXUNIX135/J141 proposed source-only scope reviewed before implementation: exact eight configured functions and three private objects (202 bytes), no public startup/RNG, original names/order/formals/62 comments and five gotos retained. Actual ../sys/unix/unixunix.c input/cwd/production profile; pristine 0a434dc320dadf31c1bdf40e086386032918b65157799155abfe77ca6edc4784 differs from prepared 42b526bbed87ae89acdd655cb08426bdf66d1b7d138d16be4e63b8592bab8ecd only by inherited 006 NOMUX tty bypass, not a new feature. Typed stat104/timespec16/time_t long-long64, errno/FILE/native fd/path borrows, volatile window callbacks, native signal-return function-pointer ABI and retained done1 remain genuine dependencies. JS source algorithms only; native C supplies typed ABI/zero backing/dependency calls, no algorithm fallback or initialized source table. Unique files/cache only; terminal/transport/signal implementation/harness/profile/shared selected files unchanged. Planned full-byte traces/widths/ownership/513-cleanup/lock-cap/goto/error/valid callbacks/reentry/growth/service-restoration checks and unchanged-oracle negatives; controlled native dependency models are not real subprocess/privilege/fullgame/native-host acceptance. Full scope SHA6fb9bb351c7ea76b8e9530474567d69812d4204a155a1217c397a34bd220cb99 read; author GO follows this append.
+
+### PAR08-SHK129/J135 private implementation/evidence — frozen
+
+All137 configured shk.c bodies (73public/64static) now live source-faithfully in
+JS, with original order/formals/560comments/control and JS-authoritative source
+arrays. Pristine=prepared SHA b2b5b82934b15c1a4a3c9474a650ff5800a83f0b9634696fdf080d0458f16e1b.
+No original SHK algorithm fallback exists. Source-private native zero backing and
+56typed records/215fields,40foreignglobals,149ordinary dependencies,250vararg
+sites,23callbacks are ABI-only; original164 foreign names reconcile149+15 distinct
+variadic targets. Initial inventory's six function identities omitted conditional
+Doname2; actual seven are documented and independently invoked through typed C.
+
+Actual -O2 -g memory64 Emscripten original-C versus hybrid excluding shk.c passes
+385checks/332differential cases, all137functions and all21 full-source RNG origins.
+High64/scalar/pointer/sentinel, data/stride, valid billing/ownership/pricing/damage,
+menu/callback growth/reentry/throw, stack/service-restoration and Module isolation
+proofs pass. Every source literal C key/field/size/static/callback has metadata;
+CPP/source/comments/member/scope/import and standalone context guards pass.
+Four wrong JS variants reject the same unchanged C binary and expectations.
+Original source SHK public/native/full-game integration remains pending; these
+are NOT native executable results and no public/full-game pass is claimed.
+
+The first observed addressed-formal &shkp mismatch is preserved and corrected
+with once-per-invocation native cells/reloads; sentinel value transport is exact
+uint64 separately from safe-address dereference. Distinct sellobj qbuf DeclIDs,
+Bill32/bill_x24, credit_snap row24 and automatic icost11x8 are guarded. Stable
+per-Module service forwarding restores call scope in finally. Source quirks and
+normal-only state restoration remain literal, including potentially nonterminating
+alter_cost repeat-current-shop path, narrowing sort difference and sellobj boolean
+subtraction. Undefined overflow/invalid NONNULL callers are unclaimed.
+
+Historical early zero-catalogue/invalid-caller fixture counts are explicitly
+superseded, not accepted as final proof. Final fixture invokes genuine object/
+monster initializers, resets controlled world state, uses real valid billed/
+container/glob/spellbook inputs; two zero-payment diagnostics remain explicit.
+Foreign game/naming/ownership/menu/RNG boundaries remain controlled; real libc
+and inherited hacklib helpers/qsort are linked. Sleep is logged without waiting;
+native timing and arbitrary nested qsort are unverified. Implementation, exact
+integration recipe, source guards, provenance/negative logs and hash manifest are
+owned unique files only. No shared/selected/frozen prior TU was modified here.
+
+PAR08 SHK parent review: full final integration recipe read, independently verified all258 frozen SHA256 entries with zero mismatches; manifest2ae8f28f41006bc8753756ff847b3c7bb4c3c8df2a6007714c59edb4a69aae5d. Parent receipt .cache/shk-parent-review.json. Shared selection/native/fullgame/public pending; no subsequent author assignment without ROOT reservation.
+
+PAR08 SP_LEV131/J137 type-scope refinement before implementation: find_objtype function-local struct objclasspfx at source3479–3482 is already one of80 original MemberExpr records but its C tag is not visible to global ABI support. Add only exact type-only sp_lev_objclasspfx alias for const char *prefix/char class, actual16/align8 with original declaration/recordID/range/fullfield guards; no initializer mirror/new record/algorithm/formal rename. Preserve first compiler diagnostic. Fixture-only macro-name collisions and foreign dependency signatures must use actual original prototypes. This is an ABI seam, not added level-generation behavior or native/fullgame acceptance.
+
+
+### PAR09 TERMCAP136/J142 configured scope and production authorization
+
+Actual win/tty/termcap.c configured CPP/Clang inventory has56 source bodies
+(45public/11private),243 prepared comments,12 directly projected records/32fields,
+59 roots,33 foreign functions,29 vararg sites,23 pointer operations, no source
+goto/direct RNG/indirect call expression. A57th AST definition is header inline
+__isspace, excluded by exact source-byte ranges. All offsets use bytes because
+inherited comments contain UTF-8 em dashes. Production source spelling is
+../win/tty/termcap.c from TREE/src, retained in diagnostics and macro origins.
+
+Prepared bed864170a5747cf1e04585be62412c498f36ac9f261ac835b8a3df84a763b0e
+(1987lines/59765bytes) reconstructs exactly from pristine
+c0f16adb55fc2d7a00371165396d9fcbe89237600b68b0663fb47c38c9841ada
+(1604lines/45100bytes), the10 inherited006 patch hunks and the2 already-selected
+build.py Emscripten capture-transport replacements. No unexplained source edit.
+Parent verified all19 scope inputs in inventory-manifest.json
+SHA25636bae937c5d6b03bae51165c9971991875251f9aabac33ac22b625317721b7e2.
+
+GO only the14 unique paths in .cache/termcap-author/plan.md and that private
+scratch. Preserve all56 original names/order/formals/comments/algorithms and
+original data in JS; C retains typed zero backing, native callbacks/fields and
+foreign calls only. Preserve actual TERMINFO/TERMLIB/TTY_GRAPHICS/NOMUX_CAPTURE/
+ASCIIGRAPH/CLIPPING/UNIX/MACOS/DEBUG/NO_TIMED_DELAY branches. ANSI_DEFAULT/MICRO/
+CHANGE_COLOR/TIMED_DELAY stay inactive. No fixed-ANSI substitution, new emulator,
+input/capture/normalization schedule, frozen harness, default or source-oracle edit.
+
+Keep capability policy distinct from byte I/O, inherited shadow/capture state
+and the original6144-byte serializer plus existing outer encoding. Preserve
+actual terminfo query/error/fallback order, opaque stdout transport,1920 native
+grid cells, foreground/attribute/DEC/raw state and animation/marker boundaries.
+Public capability pointers/grid/IDs remain genuine native backing while C
+consumers exist. Private512-byte tgetstr area,16-byte standout copies,two distinct
+128-byte color buffers,stable6144 snapshot and source-static cached decisions
+retain lifetime/identity without invented resets. Source tmspc10/ti_map readonly
+tables are JS authoritative; ti_map_entry uses measured original unnamed shape,
+not a guessed struct. Real xputc/tty_decgraphics_termcap_fixup callbacks and foreign
+tty_utf8graphics_fixup identity require native indirect witnesses. All widths,
+interior pointers/8-versus16-color allocation/free aliases, const safety and
+actual tparm varargs must remain faithful without silently repairing reference
+ABI behavior. Preserve post-return original native wire code as unreachable in
+this Emscripten profile, without claiming it was exercised.
+
+Required private unchanged-C/JS comparisons include actual pinned terminfo
+dependency behavior, startup/error/fallback/ownership, callback and byte order,
+all grid fields/exact serializer bytes/return identity, raw/DEC/color/capture
+contexts, real growth/nested reentry/Module isolation, fresh source/profile/data/
+ABI guards and wrong-code rejection. Original buffer limits and defined-input
+scope stay explicit. Shared selected game, native-host/fullgame/public and
+original deadline acceptance remain separate pending gates. Frozen HACK14/330,
+Lua82, earlier ports, shared registry/runtime/build/adapter/emulator/harness stay
+unchanged during private authoring.
+
+
+### PAR09 TOPL137/J143 configured scope and production authorization
+
+Actual win/tty/topl.c scope is15 original functions(10public/5private),80prepared
+comments,137CallExpr(116direct/21indirect window calls),33 true foreign functions,
+29 field/type pairs in9 records,15 foreign globals plus source-owned snapshot_mesgs,
+6 byte-stride char-pointer operations,1goto/1label,no enum/RNG expressions.
+Prepared d355faebfb41d9e61e784f1ef29050a55c5ca45cd066f2f47688c6b7b7cee566
+(738lines/23995bytes) differs from pristine
+7abe4855c351b90048261752bab6bcc329f6fa236da1cca0cc48e362b6ff5d6d solely
+by the inherited8-line NOMUX shadow cursor save/decrement/call/restore hook.
+Actual source spelling ../win/tty/topl.c from TREE/src is retained, with byte-
+accurate UTF-8 comment offsets. DUMPLOG_CORE is active although DUMPLOG is absent;
+NOMUX_CAPTURE is active and WIN32CON absent. Compiler constants verify pointer/
+long8,signedchar,WinDesc144/DisplayDesc60. Scope handoff SHA256
+df20554751eb3ac119ead9a789c276c5d63b64b6aac98c5e2b8c0f61131de45f.
+
+GO only11 unique source/test paths plus .cache/topl-author in that scope.
+Preserve all15 original names/formals/order/comments/control and active message,
+input,history,dumplog,capability and shadow policies in JS. Native support has
+only typed actual foreign calls,live fields/bit/address/callback/stack transport
+and zero backing as required; no new native policy,ANSIshortcut,emulator/harness/
+source-oracle/default edit. Three mutable statics(snapshot_mesgs,nxtidx,initd)
+persist perModule; native history array/string pointer identities, transfer/free/
+locking must remain original. Four automatic char buffers40/256/128/2 retain
+stack lifetime through reentry. Four volatile window function-pointer fields
+are read at actual call time, not cached across retargeting.
+
+AppendLongDigit retains actual signedlong64 threshold/multiple evaluation;
+WinDesc long versus DisplayDesc short,char/uchar key conversions and byte
+pointer arithmetic use measured types. The single clean_up goto joins one
+original cleanup tail; preserve uppercase/hidden/control-P/numeric/backspace/
+overflow/escape/default/retry behavior. ActualReturnsNonNull alloc/eos positive
+identities remain valid; no illegal NULL fixture returns. Full15-function
+controlled original-C/JS comparisons and production0_test projection precede
+freeze, with real growth/nested reentry/Module isolation,history/snapshot/alias/
+ownership/window-retarget/nomux order, fresh source/type/profile/data/const
+guards and unchanged-oracle wrong-code rejection. Native-host/fullgame/public/
+production allocator/full branch coverage remain pending. Frozen UHITM295,
+Lua82,earlier ports and shared selected integration files remain unchanged.
+
+PAR09 TERMCAP bounded implementation split: parent owns termcap-runtime.js,
+tu-libraries/termcap.js,termcap-support.c,termcap-schema.json,termcap-source-data.h,
+scripts/tu-termcap-layout.h plus .cache/termcap-abi-author; exclusive source author
+owns original JS body/metadata/guards/probe/tests/recipe/hashes. All six are private
+unselected work. Coordinate the source-level API/types before generation; shared
+mainruntime/build/registry integration remains root-only.
+
+OBJNAM candidate promoted only after separate actualC Rogue-level witness and original9268suite pass: runtime fieldRef now projects record-valued fields as native records, arrays as addresses and scalars as references. Original readobjnam3761 Is_rogue_level(&u.uz) and headerLassigned behavior preserved; no sourcepolicybody edit. Original8 preimages copied .cache/tu122-root-staging/objnam-promotion/before, oldmanifests/failedwitness/binaryreceipts unchanged; promotionreceipt binds candidatef298d39365333295160047b9e412152629e807b0b52a86ce3f061339e242f28d. Fresh shared pair and game gates remain pending.
+
+PAR08 UNIXUNIX135/J141 adapter namespace correction before freeze: first actual veryold comparison exposed native read/write dependency keys overwriting generic memory ABI helpers of the same name, so typed stat access called native read with record-kind instead of fd and diverged trace/errno. Separate internal ABI keys abiRead/abiWrite/abiAddress/abiGlobal/abiLayout/abiStorage, retain source C.read/C.write actual native syscall dependency names and original algorithms. Add exact disjoint-key guard; preserve focused veryold failure and old-adapter unchanged-C negative. Unique unselected files only, no shared/frozen/native-service changes, no native-host/fullgame acceptance inferred.
+
+PAR08 corrected INVENT cache-only follow-up verified, unapplied: real objects_globals_init/monst_globals_init supply actual unshuffled upstream table classes; old237 historical zero-catalogue claim remains RETRACTED. Actual1341 comparisons/all119 pass with eight addressed-obj-formal expressions fixed through three initialized native cells plus actual address of uquiver. Original core fails original existing organize test after true initialization; isolated oldglobal-address fails new quiver precedence with two eligible stacks. Four positive valid incoming/floor/organize/quiver cases prove quantity5/survivor identities. Fourteen pre-pinned inputs remain exact after all final controls, including both original/hybrid C binaries/test/fixture/oldcore/oldmanifest/newcore; receipt5e97396a1e0d4ef9f38d448cfbdb93ff196d7c8fa44b586ff6e5ede6edc308bd. Actual source algorithms unchanged, no native-host proof. Combined FILES/INVENT/DISPLAY forwarding checks2900comparisons/all258/27357calls/269real-native reentries/2447807lookups/0stale/10throws; isolated oldINVENT51155stale. Prior19e5d47 service receipt preserved with prior zero-world limits, not rewritten.
+
+PAR08 four-TU FILES/DISPLAY/INVENT/CMD UNAPPLIED preview ready: generator .cache/stage-files-display-invent.py has cache-only output/no apply capability. Original677 frozen entries verified0mismatch; current114-to118 proposal18files. Private42 checks pass syntax/source-order/formals/comments/scope/static dispatcher/factory bindings/common production+isolated/both-mode original/hybrid fixture syntax/separate storage and optimized consumers; staged actual existing suites1420+139+1341+1562=4462 comparisons/all406, plus22528 DISPLAY inner checks. Six strict-default/explicit-native negative runs reject missing FILES/DISPLAY/INVENT native fixture before factory creation; explicit0 diagnostics pass. Evidence plan5bdf4dd052f1f95c82a778a10952573531b0b28a24ee4265899daf7f25272243/result011d3a03a92d46b68a2caa8f16dc50a9b4ae18d563050acd96ca5725f5ce53e6. Proposed DISPLAY-only exact71 top-level source-parser seam separately checks four original-goto lexical helpers. ROOT must regenerate against latest shared registry/runtime/build/docs then independently promote and rebuild actual shared fixtures/fullgame/native/public original gates; these preview checks are not those gates.
+
+PAR08 read-only direct-global-address audit: twelve owned units/992 compiler-inventoried source functions/86 direct address-of nonlocal VarDecl sites. Only scalar/pointer objects are FILES private constint bei, correctly native static address for endian byte read, and INVENT uquiver, corrected in separate preview above. Remaining84 sites whole records; this does not certify member-address views/prototypes/all remaining TUs. Inventory .cache/compound-promotion-audit/global-address-results.json SHAb3710605b58addf90058fbd397eafa88760303fe0dc649db9abbdf0d85aaf912. No selected or frozen source edits.
+
+Shared source-preservation checker correction: actualcurrent116 scan stopped at accepted MAKEMON mkclass because generic checker lacked previously used strict-JS keyword mapping. Add only exact expected formals for mkclass(class,spc),mkclass_aligned(class,spc,atyp),mkclass_poly(class) ->class_ and next MKOBJ mkobj_at(let,x,y,artif)->let_. All other names/order remain exact; no C/JS body or frozen contest harness/oracle changes. Earlier failed general scan retained structure-pre-mkobj.log, not called a passing guard. Owned compiler-derived component guards remain distinct.
+
+Generic preservation parser ARTIFACT correction: legacy regex counted indented nxtobj for-update continuation as a C definition and counted required JS initializeArtifactData(C) as an original C function. ARTIFACT-only C definitions now require original column1 and exactly76; JS excludes exactlyone initializer with its exact(C) signature. Existing dedicated artifact-source-check independently validates original76functions/data. No original functions or initializer code changed; failed scan preserved structure-keywords-fixed.log, no whole-source-check pass claimed until rerun.
+
+PAR08 UNIXUNIX135/J141 isolated signal fixture context seam approved after exact flag/history review: BOTH private diagnostic links add -Wl,--table-base=2, supported by bundled wasm-ld help (default address-taken function base1). This reserves actual raw0 NULL and raw1 SIG_IGN so actual native done1 gets a valid non-sentinel function identity, never relabels identities or changes expectations. Old both Wasm/mjs/build/test files retained and independently7/7 verified in history/pre-table-reservation; referencee8852842695b165852d031023d7038eaf90975fcab177e697a2ac518585eb183/hybrid60ff3a7825b67735593d858398b9d9e9baa8331dadbc51e20db30afaf452e896 and 1-vs2 failure remain historical. No production linker/profile/signal implementation change; valid controlled callback-table proof only, not native-host/fullgame signal support. Strict undefined/1 native-before-factory rejection required; explicit0 diagnostic only.
+
+PAR08 SP_LEV131/J137 private Lua allocator instrumentation correction timing/limits: author applied before parent exact review; old raw Lua __wrap_free abort log retained SHA4652d79545b0418bfebfde1fe316f79f572dccbcbf1bbaa53233ad197d13ab06 but pre-change binaries overwritten and old binary hashes UNAVAILABLE, no preservation/unchanged-old-binary claim. Current2376/138 count provisional. Parent reviewed actual lauxlib.c1026–1034/1108–1116 and lapi lua_setallocf: genuine luaL_newstate stays, including panic/warn hooks; afterwards exact native allocator uses real realloc and __real_free for Lua-owned frees, same allocation semantics, to avoid stale dead game-tracker row falsely claiming reused Lua address. Game __wrap_free tracking/doublefree rejection unchanged; both modes same genuine interpreter, no source/runtime/production/library algorithm change. Currentpost-change binaries+fixture/generator/Lua source+diagnostic pinned before fresh work in allocator-parent-review.json. Fresh final comparisons/provenance/controls required; dead payload/unknown pointers/native-host/fullgame claims excluded.
+
+PAR08 UNIXMAIN138/J144 proposed scope fully reviewed/announced before GO: actual sys/unix/unixmain.c input ../sys/unix/unixmain.c from TREE/src/O2-gmemory64/currentforcedheader/ncurses, exact15functions12public3private/104prepared101pristinecomments,69foreignnames65ordinary4varargtargets13sites/17foreignglobals/17records37fields92Members/5volatilewindowcallbacks/2nativeidentities/9pointerincrements. Preparedc029938f38987424493931fb7719abdb43a6deb82289a393c2bd94fa74c41bfa differspristine9c8a9a498acaffee6ce62d44a5e07977d2ec4852f29a77a1fbabdea0fd9f2165 by inherited R03 RNGinit/W08 virtual-root passwd/R01 envseed only; virtualaccount is not hostlookup/privilege support. Source main stays main inJS; realtoolchain symbol __main_argc_argv/callMain/argv/ExitStatus contract must be proved. Direct typed JS entry alias preferred; iftoolchain requires, unique tiny Cmain forwarding exactlyonce to importedteleport_unixmain_main is permitted ABI-only shell, allsourcepolicy/control remainsJS/no originalalgorithm fallback. No sharedentry/runtime/build edits byauthor. Three privateJS statics(passwd48/pointercache8/loginbuf256), no ownedpublicstartup/constructors. Actual mutablepasswd escape/opaqueconsumer, addressedargc/argv/dir cells, originalhnamealias, backwardattempt_restore joins, realvolatilecallbacks/sigaction152/nativefunctionpointer-return/sentinels/time_tlonglong/unsignedseed64/partialreadstrongflag quirks preserved. Unreachable W08 hostaccountcode remainsliteral/unclaimed, emptyconfiguredget_nhuuid is not UUIDsupport. Native libc/MEMFS/foreign controlleddeps only, no hostaccount/entropy/process/terminal shortcuts, no alternate boot orretrycaps. Unique source/ABI/probe/guard/cache outputs; strictdefaultnative rejects beforefactory unless explicit0diagnostic. Required all15entry/actualfactorycallMainexit/typedfullbytes/RNGseed/account/option/restore/argv/callbackgrowthreentrythrowscope/pointerwidth/unchangedCnegative evidence; nativehost/fullgame/public/uncontrolleddeps remainROOTfuturework. ScopeSHA d5669642d7116b9033c25d8b516c6c75190bf5a43de8ebd6b95ac14bd648e7cf fullyread;88receiptentries independently0mismatch and actualpreparedsource separatelypinned in .cache/unixmain-parent-scope-review.json (preparedpath absentinitial88receipt; additivefuturecapture required, oldreceiptunchanged).
+
+PAR08 UNIXUNIX private table-slot setting correction before next link: initial authorized -Wl,--table-base=2 was ineffective; both actual probe_done_id values remained1 and new >1 assertion FAILED, no waiver. Actual pinned SDK tools/building.py250 appends --table-base=settings.TABLE_BASE after caller args, default1 from src/settings.js279. Replace ONLY BOTH private diagnostic links with actual -sTABLE_BASE=2; same explicit valid callback context NULL0/SIG_IGN1/nativefunction>=2, no source/identity/expected/production setting change. Intermediate failing logs/both binaries+hashes must be retained before next run. Fresh actual exported IDs/assertion/driver effective command and originalC/hybrid comparisons/unchanged-C wrongJS callback negative required; actual native-host/production signal delivery still unproved.
+
+
+PAR09 TERMCAP initial typed ABI design/verification: all source-owned native
+backing is zero-only; tmspc10 and public ti_map backing is legally mutable for
+JS source initialization while source policy retains readonly use. ti_map's
+three-int native shape is derived in original ti_color/nh_color/nh_bright_color
+order; reference metadata uses actual __typeof__(ti_map[0]), and production
+metadata uses its named typed storage projection. Other public data keeps
+original linkage; private file objects use unique typed backing, and six
+function-static control/color buffers have separate stable native addresses.
+Native reference source-local buffers are witnessed through actual original
+returns/published pointers, not confused with helper backing.
+
+callTermcap reuses an adapter per actual Module/layout identity with a service
+Proxy that forwards current get/has and restores prior call services in finally.
+Direct createTermcapEnvironment remains fresh. All memory reads remain current
+through growth; source-owned cache decisions persist separately. This prevents
+rebuilding typed views at every terminal byte boundary. Positive reentry/
+override/exception/retry/Module/layout/cache witnesses remain pending. Source
+function objects assigned to native callback globals map through exact native
+function pointers, including the foreign UTF8 graphics callback. tparm retains
+its actual one-int vararg packing; no long-width repair is introduced.
+
+Initial support/layout memory64 syntax and JS library/runtime syntax pass;
+structural closure has165 source C.identifier roots and2 macro roots with zero
+missing, using synthetic shape only. A review caught accidental nettermcapPorted
+from draft mechanical prefix conversion; generator/output are corrected to the
+real nethackPorted key. Independent dispatch tests execute all56 entries plus
+the production static callback and reject the deliberate wrong-key copy. These
+are transport/syntax checks, not C/JS policy/game acceptance. Initial missing
+macro-input/declaration and draft generator diagnostics are retained privately.
+
+
+### J136 / ZAP TU130 — private EmC freeze (2026-11-10)
+
+The unique ZAP port is frozen at 1,467 exact actual EmC C/imported-JS comparisons across all 85 configured functions (60 public/25 private), preserving all 782 ordered block comments, original parameter names/order, three authoritative tables and eleven inline goto adaptations. All 21 destroy_strings cells and the separate optimized native external singular/plural consumer are checked before any original function call; this is not a claim covering all TRAP fire_damage. The external zero-only table translation unit must compile without LTO. Changed source algorithm, same-length JS table mutation and missing eager startup are each rejected by actual assertion witnesses. Scope/data/source/Node and forced production terminal-header syntax checks pass.
+
+Per-Module/external-layout environment caching uses a current-service forwarding slot with finally restoration and late constructor publication. Each library invocation receives a fresh facade over its internal immutable-by-ownership Module packet; overrides, native nested reentry/growth, exception restoration, constructor retry, direct constructor freshness and two Modules are exercised. Address-taken pointer/scalar locals use native cells, full record/union copies preserve bytes, nested record addresses retain field views and uint64 identities remain exact.
+
+Evidence and reproducible integration recipe: .cache/zap-integration-plan.md, .cache/zap-author/frozen-sha256.json (ten owned inputs), artifact-receipt.json (actual four compiled module artifacts, original C/runtime/Node and logs), negative-receipt.json. Foreign dependency limit: 399 total, 371 autogenerated controlled + six manual controlled recorder/RNG/panic functions, 22 real original/helper/libc dependencies. Invalid original C callers and deliberate fatal paths are excluded. Native parity, shared build, whole-game integration and public acceptance remain pending; frozen OBJNAM original eight inputs and its separate record-address candidate are unchanged.
+
+MKOBJ shared fixture export correction: first freshshared link failed because generic malloc/free exports conflict with its actual --wrap=free observer. Suppress those two automatic exports only for MKOBJ, matching the original frozen fixture exportlist; retain native realfree/wrapper ownership and all declared APIs. No source/reference/expectedvalues edits; failed log mkobj-shared-attempt1-free-export.log retained. Generic DECL preservation guard separately recognizes exactly ZERO(value)/MAGICCHECK(xx,name), original C macro helpers checked by dedicated DECL guard; all three originalfunctions/formals/order remain exact. No fullguardPASS until rerun.
+
+PAR08 UNIXUNIX135/J141 parent review rejected current100-case handoff for exact source-initialization fidelity: original veryold time_t date and int lockedpid declarations have no initializer, but JS C.local(type,0) and unconditional runtimecellwrite added zero stores. Remove only these implicit automatic-cell initializations; addressedformals/explicit source initializers remain initialized, source data/control/dependencies unchanged. Native stack bytes for uninitialized cells must remain untouched, not freshzero. Add actual AST initializer distinction guard and witness seededcellbytes across allocation/explicitinitialization, genuine old-zero wrongJS rejection with unchanged C source/oracles, thenfresh suite/guards/provenance. BEFORE edits parent independently verified60original+60snapshot byteidenticalfiles, all12durable46proof plusboth manifests at history/pre-uninitialized-cell-correction/snapshot-receipt.json SHA2c3396c6d6d2f40bd8c022853fcb3321c556929256816d821d81f274b900d855. Prior100 evidence is HISTORICAL_NOT_PARENT_ACCEPTED; originalmanifests retained in snapshot, newrevision mustnot pretend oldchecksproved removedwrites. Also prepare explicit UNAPPLIEDintegration obligations/supportownership/actualsys-source centraldispatch/inline metadata/sharedfixture directory; no sharedpromotion/nativebackend/productionflags. Nativehost/production/fullgame/public remain pending.
+
+
+PAR09 TERMCAP fresh native-size guards measure all12 projected record sizes
+with actual configured memory64 compiler LLVM constants (no source policy
+execution), including nomux_cell4,DisplayDesc60,tc_lcl_data64,ti_map_entry12.
+Runtime rejects different sizes before source initialization; fields also retain
+actual width/signedness C assertions. Reference fixture compilation exposed
+that unchanged termcap.c undefines TRUE/FALSE before its late curses include.
+Core now retains each original site's actual IntegerLiteral expansion0/1, and
+all six ABI outputs were refreshed to remove current-header boolean assumptions.
+Source/header oracles remain unchanged; initial standalone syntax proof had not
+covered the source-late include context. Raw failing fixture build is preserved.
+
+
+### WINTTY TU139/J145 implementation scope — announced before implementation
+
+The configured `win/tty/wintty.c` migration is authorized for its 72 original functions, preserving their boundaries, names, control flow and all 589 prepared-source comments. The reference is the prepared source (5,398 lines), including the inherited capture patch; pristine upstream has 5,322 lines and 587 comments. The inherited difference is 17 additive hunks, +76/-0, reproduced independently. Source diagnostics must use the real build path `../win/tty/wintty.c`. Full reviewed inventory: `.cache/wintty-inventory/scope.md`.
+
+Planned adapters provide JS-authoritative initialization of the original window catalogue into 416-byte native backing with 46 genuine callable function slots, live shared global aliases, persistent native stdout/compression buffers, and a typed private SIGWINCH callback. The single original interior-switch goto requires structured dispatch; the reserved formal `let` requires a documented JS spelling exception while preserving its position and function boundary. Native record copies, menu ownership, signed and unsigned 64-bit values, current-service restoration, memory growth and separate Module state require directed checks. No implementation parity or public acceptance is claimed yet.
+
+Terminal capability selection, existing terminfo dependencies, original stdio scheduling, inherited input/output capture and shadow serialization remain separate and unchanged in policy. This author must not introduce an ANSI capability shortcut, emulator, new terminal defaults or harness changes. Verification must cover actual C comparisons, optimized startup consumers, native callback/reentry, input ordering, menu/status copies and adapter lifetime. Emscripten C is the first-pass oracle; native macOS differences remain explicitly pending.

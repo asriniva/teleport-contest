@@ -1,0 +1,9 @@
+#ifndef TELEPORT_TRAP_SOURCE_DATA_H
+#define TELEPORT_TRAP_SOURCE_DATA_H
+/* Actual configured source/profile facts; no native policy or initializer fallback. */
+#define TELEPORT_TRAP_SOURCE_SHA256 "1f6af30bbd0b75a2e4c043098355c1f4eff2a841de27aecdc9f47343d4d5402c"
+#define TELEPORT_TRAP_SOURCE_FUNCTIONS 124
+#define TELEPORT_TRAP_SOURCE_COMMENTS 643
+#define TELEPORT_TRAP_DATA_OBJECTS 19
+#define TELEPORT_TRAP_NATIVE_LITERAL_CAPACITY 13610
+#endif

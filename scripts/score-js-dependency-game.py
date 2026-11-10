@@ -31,12 +31,12 @@ def main():
     stage.mkdir(exist_ok=True)
     shutil.copytree(ROOT / 'frozen', stage / 'frozen', dirs_exist_ok=True)
     shutil.copytree(ROOT / 'sessions', stage / 'sessions', dirs_exist_ok=True)
-    shutil.copytree(ROOT / 'js', stage / 'js', dirs_exist_ok=True,
+    shutil.copytree(build / 'snapshot/js', stage / 'js', dirs_exist_ok=True,
                     ignore=shutil.ignore_patterns('nethack.mjs', 'nethack.wasm', 'vendor'))
     shutil.copytree(ROOT / '.teleport', stage / '.teleport', dirs_exist_ok=True)
     (stage / 'package.json').write_text('{"type":"module"}\n')
     (stage / 'js/jsmain.js').write_text('export { runWasmSegment as runSegment } from "./wasm-adapter.js";\n')
-    adapter = ROOT / 'js/wasm-adapter.js'
+    adapter = build / 'snapshot/js/wasm-adapter.js'
     source = adapter.read_text()
     original = "await import('./wasm/nethack.mjs')"
     if source.count(original) != 1:

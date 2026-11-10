@@ -3167,3 +3167,100 @@ static char teleport_wield_literals[TELEPORT_WIELD_LITERAL_CAPACITY + sizeof "s"
 void *teleport_wield_literal_storage(void) { return teleport_wield_literals; }
 size_t teleport_wield_literal_capacity(void) { return sizeof teleport_wield_literals; }
 #endif
+
+#include "tu-mkroom-support.inc"
+#include "tu-sfstruct-support.inc"
+
+#include "tu-earlyarg-support.inc"
+#include "tu-fragments/report.support.c"
+
+#include "tu-fragments/bones-support.c"
+#include "tu-fragments/explode-support.inc"
+
+#include "tu-questpgr-support.inc"
+#include "tu-symbols-support.inc"
+
+#include "tu-mail-support.inc"
+
+#include "tu-fragments/pline-support.c"
+
+#include "tu-fragments/attrib-support.inc"
+
+#include "tu-fragments/sfbase-support.c"
+
+#include "tu-dog-support.inc"
+
+#include "tu-region-support.inc"
+
+#include "tu-weapon-support.inc"
+
+#include "tu-fragments/vault-support.inc"
+#include "tu-fragments/u_init-support.c"
+
+#include "tu-sounds-support.inc"
+
+#include "tu-fragments/save-support.c"
+
+#include "tu-mhitm-support.inc"
+#include "tu-fragments/getpos-support.inc"
+#include "tu-fragments/allmain-support.c"
+
+#include "tu-mthrowu-support.inc"
+
+#include "tu-role-support.inc"
+
+#include "tu-engrave-support.inc"
+
+#include "tu-fragments/glyphs-support.c"
+
+#include "tu-fragments/topten-support.inc"
+#include "tu-fragments/dogmove-support.c"
+
+#ifndef TELEPORT_ISOLATED_PROBE
+#include "tu-fragments/makemon-support.inc"
+#include "tu-fragments/mhitu-support.c"
+#include "tu-fragments/artifact-support.c"
+#include "tu-fragments/decl-support.c"
+#include "tu-fragments/polyself-support.c"
+#include "tu-fragments/wizcmds-support.c"
+#include "tu-fragments/end-support.inc"
+#include "tu-fragments/windows-support.c"
+
+#include "tu-fragments/cfgfiles-support.c"
+
+#include "tu-do-support.inc"
+#include "tu-do_wear-support.inc"
+#include "tu-restore-support.inc"
+
+#include "tu-nhlobj-support.inc"
+
+#include "tu-do_name-support.inc"
+
+#include "tu-vision-support.inc"
+#include "tu-dokick-support.inc"
+#include "tu-insight-support.inc"
+#include "tu-timeout-support.inc"
+#include "tu-dig-support.inc"
+#include "tu-spell-support.inc"
+#include "tu-monmove-support.inc"
+#include "tu-potion-support.inc"
+#include "tu-fragments/detect-support.c"
+#include "tu-fragments/teleport-support.c"
+#include "tu-fragments/pray-support.c"
+#include "tu-fragments/pager-support.c"
+#include "tu-fragments/muse-support.c"
+#endif /* TELEPORT_ISOLATED_PROBE: each new isolated fixture links its own adapter */
+
+#ifndef TELEPORT_REFERENCE_TU
+#include "tu-fragments/read-support.inc"
+#include "tu-fragments/apply-support.inc"
+#endif
+
+#ifndef TELEPORT_REFERENCE_TU
+#include "tu-eat-support.inc"
+#include "tu-objnam-support.inc"
+#endif
+
+#ifndef TELEPORT_REFERENCE_TU
+#include "tu-fragments/mkobj-support.c"
+#endif

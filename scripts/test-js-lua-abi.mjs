@@ -83,6 +83,14 @@ int main(void){
   safe_libs(L);luaL_checkversion(L);
   lua_setwarnf(L,warn,warnings);lua_warning(L,"one",1);lua_warning(L,"two",0);printf("warning-callback:%s\n",warnings);
   lua_pushinteger(L,INT64_MIN);lua_pushinteger(L,INT64_MAX);lua_pushnumber(L,1.25);lua_pushboolean(L,0);lua_pushboolean(L,-1);dump(L,"scalars");lua_settop(L,0);
+  const uintptr_t opaque_values[]={0,1,UINT64_C(0x8000000000000000),UINT64_MAX};
+  for(int i=0;i<4;i++){void *opaque=(void*)opaque_values[i];lua_pushlightuserdata(L,opaque);lua_pushlightuserdata(L,opaque);
+    printf("lightuserdata-%d:%d,%d,%d,%d,%d\n",i,lua_type(L,-1)==LUA_TLIGHTUSERDATA,lua_isuserdata(L,-1),lua_touserdata(L,-1)==opaque,lua_topointer(L,-1)==opaque,lua_rawequal(L,-1,-2));lua_settop(L,0);}
+  lua_pushlightuserdata(L,(void*)UINT64_C(0xfedcba9876543210));lua_setglobal(L,"opaque1");lua_pushlightuserdata(L,(void*)UINT64_C(0xfedcba9876543210));lua_setglobal(L,"opaque2");
+  luaL_loadstring(L,"local t={};local w=setmetatable({},{__mode='v'});do local a={};w[1]=a;t[opaque1]=a end;t[opaque2]=23;collectgarbage();return opaque1==opaque2,t[opaque1],w[1]==nil");lua_call(L,0,LUA_MULTRET);dump(L,"lightuserdata-table-key");lua_settop(L,0);
+  lua_pushlightuserdata(L,(void*)0);lua_newtable(L);lua_pushinteger(L,73);lua_setfield(L,-2,"tag");lua_setmetatable(L,-2);lua_settop(L,0);
+  lua_pushlightuserdata(L,(void*)UINT64_MAX);int have_mt=lua_getmetatable(L,-1);lua_getfield(L,-1,"tag");lua_pushboolean(L,have_mt);dump(L,"lightuserdata-shared-metatable");lua_settop(L,0);
+  lua_pushlightuserdata(L,(void*)0);lua_pushnil(L);lua_setmetatable(L,-2);lua_pushboolean(L,lua_getmetatable(L,-1));dump(L,"lightuserdata-clear-metatable");lua_settop(L,0);
   char bytes[]={'a',0,(char)0x80,(char)0xff};const char *first=lua_pushlstring(L,bytes,4);bytes[0]='z';size_t n=0;const char *again=lua_tolstring(L,-1,&n);
   lua_pushboolean(L,first==again);lua_pushinteger(L,n);dump(L,"byte-string-copy");lua_settop(L,0);
   lua_pushinteger(L,17);size_t sn;lua_tolstring(L,-1,&sn);lua_pushinteger(L,sn);dump(L,"number-string");lua_settop(L,0);

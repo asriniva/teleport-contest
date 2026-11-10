@@ -1,0 +1,7323 @@
+{
+  "schema": {
+    "Gender": {
+      "ctype": "struct Gender",
+      "fields": [
+        {
+          "name": "his",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "Role": {
+      "ctype": "struct Role",
+      "fields": [
+        {
+          "name": "mnum",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "any": {
+      "ctype": "union any",
+      "fields": [
+        {
+          "name": "a_void",
+          "ctype": "genericptr_t",
+          "canonical": "void *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_obj",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_monst",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_int",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_xint16",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_xint8",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_char",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_schar",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_uchar",
+          "ctype": "uchar",
+          "canonical": "unsigned char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_uint",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_long",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_ulong",
+          "ctype": "unsigned long",
+          "canonical": "unsigned long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_coordxy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_iptr",
+          "ctype": "int *",
+          "canonical": "int *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_xint16ptr",
+          "ctype": "xint16 *",
+          "canonical": "short *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_xint8ptr",
+          "ctype": "xint8 *",
+          "canonical": "signed char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_lptr",
+          "ctype": "long *",
+          "canonical": "long *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_coordxyptr",
+          "ctype": "coordxy *",
+          "canonical": "short *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_ulptr",
+          "ctype": "unsigned long *",
+          "canonical": "unsigned long *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_uptr",
+          "ctype": "unsigned int *",
+          "canonical": "unsigned int *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_string",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_nfunc",
+          "ctype": "int (*)(void)",
+          "canonical": "int (*)(void)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_mask32",
+          "ctype": "unsigned long",
+          "canonical": "unsigned long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_int64",
+          "ctype": "int64",
+          "canonical": "long long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "a_uint64",
+          "ctype": "uint64",
+          "canonical": "unsigned long long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "autopickup_exception": {
+      "ctype": "struct autopickup_exception",
+      "fields": [
+        {
+          "name": "regex",
+          "ctype": "struct nhregex *",
+          "canonical": "struct nhregex *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "grab",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "next",
+          "ctype": "struct autopickup_exception *",
+          "canonical": "struct autopickup_exception *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "c_common_strings": {
+      "ctype": "struct c_common_strings",
+      "fields": [
+        {
+          "name": "c_nothing_happens",
+          "ctype": "const char *const",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "c_nothing_seems_to_happen",
+          "ctype": "const char *const",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "c_something",
+          "ctype": "const char *const",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "class_sym": {
+      "ctype": "struct class_sym",
+      "fields": [
+        {
+          "name": "sym",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "classic_representation": {
+      "ctype": "struct classic_representation",
+      "fields": [
+        {
+          "name": "color",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "symidx",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "const_globals": {
+      "ctype": "struct const_globals",
+      "fields": [
+        {
+          "name": "zeroobj",
+          "ctype": "const struct obj",
+          "canonical": "struct obj",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "zeroany",
+          "ctype": "const anything",
+          "canonical": "union any",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "context_info": {
+      "ctype": "struct context_info",
+      "fields": [
+        {
+          "name": "run",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "nopick",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mon_moving",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "display_hints": {
+      "ctype": "struct display_hints",
+      "fields": [
+        {
+          "name": "botl",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "dlevel_t": {
+      "ctype": "dlevel_t",
+      "fields": [
+        {
+          "name": "locations",
+          "ctype": "struct rm[80][21]",
+          "canonical": "struct rm[80][21]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "objects",
+          "ctype": "struct obj *[80][21]",
+          "canonical": "struct obj *[80][21]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "monsters",
+          "ctype": "struct monst *[80][21]",
+          "canonical": "struct monst *[80][21]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "objlist",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "flags",
+          "ctype": "struct levelflags",
+          "canonical": "struct levelflags",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "flag": {
+      "ctype": "struct flag",
+      "fields": [
+        {
+          "name": "female",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "goldX",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "invlet_constant",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mention_decor",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "nopick_dropped",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "pickup",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "pickup_stolen",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "pickup_thrown",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "sortpack",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "verbose",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "autounlock",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "paranoia_bits",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "pickup_burden",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "sortloot",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "inv_order",
+          "ctype": "char[18]",
+          "canonical": "char[18]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "pickup_types",
+          "ctype": "char[18]",
+          "canonical": "char[18]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "menu_style",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "lootabc",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "glyph_map_entry": {
+      "ctype": "struct glyph_map_entry",
+      "fields": [
+        {
+          "name": "glyphflags",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "sym",
+          "ctype": "struct classic_representation",
+          "canonical": "struct classic_representation",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "customcolor",
+          "ctype": "uint32",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "color256idx",
+          "ctype": "uint16",
+          "canonical": "unsigned short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "tileidx",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "u",
+          "ctype": "struct unicode_representation *",
+          "canonical": "struct unicode_representation *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "glyphinfo": {
+      "ctype": "struct glyphinfo",
+      "fields": [
+        {
+          "name": "glyph",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ttychar",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "framecolor",
+          "ctype": "uint32",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "gm",
+          "ctype": "glyph_map",
+          "canonical": "struct glyph_map_entry",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_flags": {
+      "ctype": "struct instance_flags",
+      "fields": [
+        {
+          "name": "last_msg",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "suppress_price",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "defer_decor",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "menu_head_objsym",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "menu_requested",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "prev_decor",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "cmdassist",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_a": {
+      "ctype": "struct instance_globals_a",
+      "fields": [
+        {
+          "name": "apelist",
+          "ctype": "struct autopickup_exception *",
+          "canonical": "struct autopickup_exception *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "A_first_hint",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "A_second_hint",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "abort_looting",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_b": {
+      "ctype": "struct instance_globals_b",
+      "fields": [
+        {
+          "name": "bucx_filter",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_c": {
+      "ctype": "struct instance_globals_c",
+      "fields": [
+        {
+          "name": "current_container",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "class_filter",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_d": {
+      "ctype": "struct instance_globals_d",
+      "fields": [
+        {
+          "name": "decor_fumble_override",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "decor_levitate_override",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_i": {
+      "ctype": "struct instance_globals_i",
+      "fields": [
+        {
+          "name": "invent",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_l": {
+      "ctype": "struct instance_globals_l",
+      "fields": [
+        {
+          "name": "loot_reset_justpicked",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_m": {
+      "ctype": "struct instance_globals_m",
+      "fields": [
+        {
+          "name": "multi",
+          "ctype": "cmdcount_nht",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "multi_reason",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mrg_to_wielded",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_n": {
+      "ctype": "struct instance_globals_n",
+      "fields": [
+        {
+          "name": "nomovemsg",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_o": {
+      "ctype": "struct instance_globals_o",
+      "fields": [
+        {
+          "name": "otg_temp",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "otg_otmp",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oldcap",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_p": {
+      "ctype": "struct instance_globals_p",
+      "fields": [
+        {
+          "name": "picked_filter",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "pickup_encumbrance",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_s": {
+      "ctype": "struct instance_globals_s",
+      "fields": [
+        {
+          "name": "sellobj_first",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "shop_filter",
+          "ctype": "boolean",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_c": {
+      "ctype": "struct instance_globals_saved_c",
+      "fields": [
+        {
+          "name": "context",
+          "ctype": "struct context_info",
+          "canonical": "struct context_info",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_l": {
+      "ctype": "struct instance_globals_saved_l",
+      "fields": [
+        {
+          "name": "lastseentyp",
+          "ctype": "schar[80][21]",
+          "canonical": "signed char[80][21]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "level",
+          "ctype": "dlevel_t",
+          "canonical": "dlevel_t",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_saved_m": {
+      "ctype": "struct instance_globals_saved_m",
+      "fields": [
+        {
+          "name": "moves",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_t": {
+      "ctype": "struct instance_globals_t",
+      "fields": [
+        {
+          "name": "this_title",
+          "ctype": "const char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_u": {
+      "ctype": "struct instance_globals_u",
+      "fields": [
+        {
+          "name": "urole",
+          "ctype": "struct Role",
+          "canonical": "struct Role",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_v": {
+      "ctype": "struct instance_globals_v",
+      "fields": [
+        {
+          "name": "val_for_n_or_more",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "valid_menu_classes",
+          "ctype": "char[24]",
+          "canonical": "char[24]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "instance_globals_y": {
+      "ctype": "struct instance_globals_y",
+      "fields": [
+        {
+          "name": "youmonst",
+          "ctype": "struct monst",
+          "canonical": "struct monst",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "levelflags": {
+      "ctype": "struct levelflags",
+      "fields": [
+        {
+          "name": "sokoban_rules",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        }
+      ]
+    },
+    "mi": {
+      "ctype": "struct mi",
+      "fields": [
+        {
+          "name": "item",
+          "ctype": "anything",
+          "canonical": "union any",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "count",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "itemflags",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "monst": {
+      "ctype": "struct monst",
+      "fields": [
+        {
+          "name": "data",
+          "ctype": "struct permonst *",
+          "canonical": "struct permonst *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "female",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "mcan",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "mpeaceful",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "minvent",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "nhcoord": {
+      "ctype": "struct nhcoord",
+      "fields": [
+        {
+          "name": "x",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "y",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "obj": {
+      "ctype": "struct obj",
+      "fields": [
+        {
+          "name": "nobj",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "v",
+          "ctype": "union vptrs",
+          "canonical": "union vptrs",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "cobj",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "o_id",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ox",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "otyp",
+          "ctype": "short",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "owt",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "quan",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "spe",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oclass",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "invlet",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oartifact",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "where",
+          "ctype": "xint8",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "timed",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "cursed",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "blessed",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "unpaid",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "no_charge",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "recharged",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "3"
+        },
+        {
+          "name": "lamplit",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "known",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "dknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "bknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "rknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "cknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "lknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "tknown",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "nomerge",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "oeroded",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "oeroded2",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "2"
+        },
+        {
+          "name": "oerodeproof",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "olocked",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "obroken",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "otrapped",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "globby",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "greased",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "in_use",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "bypass",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "pickup_prev",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "ghostly",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "how_lost",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "3"
+        },
+        {
+          "name": "named_how",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "corpsenm",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "usecount",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oeaten",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "age",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "owornmask",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "lua_ref_cnt",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "omigr_from_dnum",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "omigr_from_dlevel",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oextra",
+          "ctype": "struct oextra *",
+          "canonical": "struct oextra *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "objclass": {
+      "ctype": "struct objclass",
+      "fields": [
+        {
+          "name": "oc_name_known",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "oc_subtyp",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "oc_class",
+          "ctype": "char",
+          "canonical": "char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "oextra": {
+      "ctype": "struct oextra",
+      "fields": [
+        {
+          "name": "omonst",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "permonst": {
+      "ctype": "struct permonst",
+      "fields": [
+        {
+          "name": "pmidx",
+          "ctype": "const enum monnums",
+          "canonical": "enum monnums",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "msize",
+          "ctype": "uchar",
+          "canonical": "unsigned char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mflags1",
+          "ctype": "unsigned long",
+          "canonical": "unsigned long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "mflags2",
+          "ctype": "unsigned long",
+          "canonical": "unsigned long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "prop": {
+      "ctype": "struct prop",
+      "fields": [
+        {
+          "name": "extrinsic",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "blocked",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "intrinsic",
+          "ctype": "long",
+          "canonical": "long",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "rm": {
+      "ctype": "struct rm",
+      "fields": [
+        {
+          "name": "typ",
+          "ctype": "schar",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "flags",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "5"
+        }
+      ]
+    },
+    "skills": {
+      "ctype": "struct skills",
+      "fields": [
+        {
+          "name": "skill",
+          "ctype": "xint16",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "sortloot_item": {
+      "ctype": "struct sortloot_item",
+      "fields": [
+        {
+          "name": "obj",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "str",
+          "ctype": "char *",
+          "canonical": "char *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "indx",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "orderclass",
+          "ctype": "int8",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "subclass",
+          "ctype": "int8",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "disco",
+          "ctype": "int8",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "inuse",
+          "ctype": "int8",
+          "canonical": "signed char",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "trap": {
+      "ctype": "struct trap",
+      "fields": [
+        {
+          "name": "ttyp",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "5"
+        }
+      ]
+    },
+    "vptrs": {
+      "ctype": "union vptrs",
+      "fields": [
+        {
+          "name": "v_nexthere",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "v_ocontainer",
+          "ctype": "struct obj *",
+          "canonical": "struct obj *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "v_ocarry",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "window_procs": {
+      "ctype": "struct window_procs",
+      "fields": [
+        {
+          "name": "win_create_nhwindow",
+          "ctype": "winid (*)(int)",
+          "canonical": "int (*)(int)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_clear_nhwindow",
+          "ctype": "void (*)(winid)",
+          "canonical": "void (*)(winid)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_display_nhwindow",
+          "ctype": "void (*)(winid, boolean)",
+          "canonical": "void (*)(winid, boolean)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_destroy_nhwindow",
+          "ctype": "void (*)(winid)",
+          "canonical": "void (*)(winid)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_putstr",
+          "ctype": "void (*)(winid, int, const char *)",
+          "canonical": "void (*)(winid, int, char *)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_start_menu",
+          "ctype": "void (*)(winid, unsigned long)",
+          "canonical": "void (*)(winid, unsigned long)",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "win_end_menu",
+          "ctype": "void (*)(winid, const char *)",
+          "canonical": "void (*)(winid, char *)",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    },
+    "you": {
+      "ctype": "struct you",
+      "fields": [
+        {
+          "name": "ux",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uy",
+          "ctype": "coordxy",
+          "canonical": "short",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "dz",
+          "ctype": "int",
+          "canonical": "int",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "ushops",
+          "ctype": "char[5]",
+          "canonical": "char[5]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uprops",
+          "ctype": "struct prop[69]",
+          "canonical": "struct prop[69]",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "uswallow",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "uinwater",
+          "ctype": "unsigned int",
+          "canonical": "unsigned int",
+          "bit": true,
+          "bitWidth": "1"
+        },
+        {
+          "name": "ustuck",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "usteed",
+          "ctype": "struct monst *",
+          "canonical": "struct monst *",
+          "bit": false,
+          "bitWidth": null
+        },
+        {
+          "name": "weapon_skills",
+          "ctype": "struct skills[38]",
+          "canonical": "struct skills[38]",
+          "bit": false,
+          "bitWidth": null
+        }
+      ]
+    }
+  },
+  "globals": [
+    {
+      "name": "windowprocs",
+      "ctype": "volatile struct window_procs",
+      "canonical": "struct window_procs"
+    },
+    {
+      "name": "def_oc_syms",
+      "ctype": "const struct class_sym[18]",
+      "canonical": "struct class_sym[18]"
+    },
+    {
+      "name": "gi",
+      "ctype": "struct instance_globals_i",
+      "canonical": "struct instance_globals_i"
+    },
+    {
+      "name": "uarmg",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "mons",
+      "ctype": "struct permonst[384]",
+      "canonical": "struct permonst[384]"
+    },
+    {
+      "name": "u",
+      "ctype": "struct you",
+      "canonical": "struct you"
+    },
+    {
+      "name": "gy",
+      "ctype": "struct instance_globals_y",
+      "canonical": "struct instance_globals_y"
+    },
+    {
+      "name": "WIN_MESSAGE",
+      "ctype": "winid",
+      "canonical": "int"
+    },
+    {
+      "name": "gd",
+      "ctype": "struct instance_globals_d",
+      "canonical": "struct instance_globals_d"
+    },
+    {
+      "name": "iflags",
+      "ctype": "struct instance_flags",
+      "canonical": "struct instance_flags"
+    },
+    {
+      "name": "svl",
+      "ctype": "struct instance_globals_saved_l",
+      "canonical": "struct instance_globals_saved_l"
+    },
+    {
+      "name": "flags",
+      "ctype": "struct flag",
+      "canonical": "struct flag"
+    },
+    {
+      "name": "uchain",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "svc",
+      "ctype": "struct instance_globals_saved_c",
+      "canonical": "struct instance_globals_saved_c"
+    },
+    {
+      "name": "gv",
+      "ctype": "struct instance_globals_v",
+      "canonical": "struct instance_globals_v"
+    },
+    {
+      "name": "gc",
+      "ctype": "struct instance_globals_c",
+      "canonical": "struct instance_globals_c"
+    },
+    {
+      "name": "gb",
+      "ctype": "struct instance_globals_b",
+      "canonical": "struct instance_globals_b"
+    },
+    {
+      "name": "gs",
+      "ctype": "struct instance_globals_s",
+      "canonical": "struct instance_globals_s"
+    },
+    {
+      "name": "gp",
+      "ctype": "struct instance_globals_p",
+      "canonical": "struct instance_globals_p"
+    },
+    {
+      "name": "gu",
+      "ctype": "struct instance_globals_u",
+      "canonical": "struct instance_globals_u"
+    },
+    {
+      "name": "gm",
+      "ctype": "struct instance_globals_m",
+      "canonical": "struct instance_globals_m"
+    },
+    {
+      "name": "c_common_strings",
+      "ctype": "const struct c_common_strings",
+      "canonical": "struct c_common_strings"
+    },
+    {
+      "name": "ynaqchars",
+      "ctype": "const char[]",
+      "canonical": "char[]"
+    },
+    {
+      "name": "ynNaqchars",
+      "ctype": "const char[]",
+      "canonical": "char[]"
+    },
+    {
+      "name": "yn_number",
+      "ctype": "long",
+      "canonical": "long"
+    },
+    {
+      "name": "ga",
+      "ctype": "struct instance_globals_a",
+      "canonical": "struct instance_globals_a"
+    },
+    {
+      "name": "nul_glyphinfo",
+      "ctype": "const glyph_info",
+      "canonical": "struct glyphinfo"
+    },
+    {
+      "name": "cg",
+      "ctype": "const struct const_globals",
+      "canonical": "struct const_globals"
+    },
+    {
+      "name": "gt",
+      "ctype": "struct instance_globals_t",
+      "canonical": "struct instance_globals_t"
+    },
+    {
+      "name": "go",
+      "ctype": "struct instance_globals_o",
+      "canonical": "struct instance_globals_o"
+    },
+    {
+      "name": "objects",
+      "ctype": "struct objclass[482]",
+      "canonical": "struct objclass[482]"
+    },
+    {
+      "name": "ynqchars",
+      "ctype": "const char[]",
+      "canonical": "char[]"
+    },
+    {
+      "name": "disp",
+      "ctype": "struct display_hints",
+      "canonical": "struct display_hints"
+    },
+    {
+      "name": "uwep",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uball",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "gl",
+      "ctype": "struct instance_globals_l",
+      "canonical": "struct instance_globals_l"
+    },
+    {
+      "name": "uswapwep",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "uquiver",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    },
+    {
+      "name": "svm",
+      "ctype": "struct instance_globals_saved_m",
+      "canonical": "struct instance_globals_saved_m"
+    },
+    {
+      "name": "genders",
+      "ctype": "const struct Gender[]",
+      "canonical": "struct Gender[]"
+    },
+    {
+      "name": "gn",
+      "ctype": "struct instance_globals_n",
+      "canonical": "struct instance_globals_n"
+    },
+    {
+      "name": "uarmh",
+      "ctype": "struct obj *",
+      "canonical": "struct obj *"
+    }
+  ],
+  "enums": [
+    "ALTAR",
+    "AMULET_OF_YENDOR",
+    "A_WIS",
+    "BAG_OF_HOLDING",
+    "BAG_OF_TRICKS",
+    "BELL_OF_OPENING",
+    "BLINDED",
+    "BOULDER",
+    "BRASS_LANTERN",
+    "CANDELABRUM_OF_INVOCATION",
+    "CAN_OF_GREASE",
+    "CHEST",
+    "COIN_CLASS",
+    "CONFUSION",
+    "CORPSE",
+    "CQ_CANNED",
+    "CRAM_RATION",
+    "DRAWBRIDGE_UP",
+    "EXT_ENCUMBER",
+    "FIRST_OBJECT",
+    "FIRST_REAL_GEM",
+    "FIRST_SPELL",
+    "FOOD_RATION",
+    "FOOT",
+    "FUMBLING",
+    "GETOBJ_DOWNPLAY",
+    "GETOBJ_EXCLUDE",
+    "GETOBJ_EXCLUDE_SELECTABLE",
+    "GETOBJ_SUGGEST",
+    "GLYPH_BODY_OFF",
+    "GLYPH_BODY_PILETOP_OFF",
+    "GLYPH_MON_FEM_OFF",
+    "GLYPH_MON_MALE_OFF",
+    "GLYPH_OBJ_OFF",
+    "GLYPH_OBJ_PILETOP_OFF",
+    "GLYPH_STATUE_FEM_OFF",
+    "GLYPH_STATUE_FEM_PILETOP_OFF",
+    "GLYPH_STATUE_MALE_OFF",
+    "GLYPH_STATUE_MALE_PILETOP_OFF",
+    "GOLD_PIECE",
+    "GRAVE",
+    "HALF_PHDAM",
+    "HALLUC",
+    "HALLUC_RES",
+    "HAND",
+    "HORN_OF_PLENTY",
+    "HVY_ENCUMBER",
+    "ICE",
+    "ICE_BOX",
+    "LARGE_BOX",
+    "LAST_GLASS_GEM",
+    "LAST_SPELL",
+    "LAVAPOOL",
+    "LAVAWALL",
+    "LEASH",
+    "LEMBAS_WAFER",
+    "LOADSTONE",
+    "MAGIC_LAMP",
+    "MOD_ENCUMBER",
+    "NUMMONS",
+    "NUM_OBJECTS",
+    "OIL_LAMP",
+    "PIT",
+    "PLNMSG_BACK_ON_GROUND",
+    "PLNMSG_OBJNAM_ONLY",
+    "PM_CHICKATRICE",
+    "PM_CLERIC",
+    "PM_COCKATRICE",
+    "PM_DEATH",
+    "PM_FAMINE",
+    "PM_HOUSECAT",
+    "PM_ICE_TROLL",
+    "PM_PESTILENCE",
+    "PM_STONE_GOLEM",
+    "POOL",
+    "POTION_CLASS",
+    "POT_OIL",
+    "P_BASIC",
+    "P_PICK_AXE",
+    "P_RIDING",
+    "REVIVE_MON",
+    "ROT_CORPSE",
+    "SCR_SCARE_MONSTER",
+    "SHOPBASE",
+    "SHRINK_GLOB",
+    "SLT_ENCUMBER",
+    "SPE_BOOK_OF_THE_DEAD",
+    "SPE_WIZARD_LOCK",
+    "SPIKED_PIT",
+    "STAIRS",
+    "STATUE",
+    "STONE",
+    "STONE_RES",
+    "STUNNED",
+    "TALLOW_CANDLE",
+    "THRONE",
+    "TOOL_CLASS",
+    "VENOM_CLASS",
+    "WAN_CANCELLATION",
+    "WAX_CANDLE",
+    "WEAPON_CLASS",
+    "invlet_basic",
+    "st_all",
+    "st_corpse",
+    "st_gloves",
+    "st_petrifies",
+    "st_resists"
+  ],
+  "layoutKeys": [
+    "pointerSize",
+    "longSize",
+    "intSize",
+    "charSigned",
+    "littleEndian",
+    "size:dlevel_t",
+    "size:struct Gender",
+    "size:struct Role",
+    "size:struct autopickup_exception",
+    "size:struct c_common_strings",
+    "size:struct class_sym",
+    "size:struct classic_representation",
+    "size:struct const_globals",
+    "size:struct context_info",
+    "size:struct display_hints",
+    "size:struct flag",
+    "size:struct glyph_map_entry",
+    "size:struct glyphinfo",
+    "size:struct instance_flags",
+    "size:struct instance_globals_a",
+    "size:struct instance_globals_b",
+    "size:struct instance_globals_c",
+    "size:struct instance_globals_d",
+    "size:struct instance_globals_i",
+    "size:struct instance_globals_l",
+    "size:struct instance_globals_m",
+    "size:struct instance_globals_n",
+    "size:struct instance_globals_o",
+    "size:struct instance_globals_p",
+    "size:struct instance_globals_s",
+    "size:struct instance_globals_saved_c",
+    "size:struct instance_globals_saved_l",
+    "size:struct instance_globals_saved_m",
+    "size:struct instance_globals_t",
+    "size:struct instance_globals_u",
+    "size:struct instance_globals_v",
+    "size:struct instance_globals_y",
+    "size:struct levelflags",
+    "size:struct mi",
+    "size:struct monst",
+    "size:struct nhcoord",
+    "size:struct obj",
+    "size:struct objclass",
+    "size:struct oextra",
+    "size:struct permonst",
+    "size:struct prop",
+    "size:struct rm",
+    "size:struct skills",
+    "size:struct sortloot_item",
+    "size:struct trap",
+    "size:struct window_procs",
+    "size:struct you",
+    "size:union any",
+    "size:union vptrs",
+    "ALTAR",
+    "AMULET_OF_YENDOR",
+    "A_WIS",
+    "BAG_OF_HOLDING",
+    "BAG_OF_TRICKS",
+    "BELL_OF_OPENING",
+    "BLINDED",
+    "BOULDER",
+    "BRASS_LANTERN",
+    "CANDELABRUM_OF_INVOCATION",
+    "CAN_OF_GREASE",
+    "CHEST",
+    "COIN_CLASS",
+    "CONFUSION",
+    "CORPSE",
+    "CQ_CANNED",
+    "CRAM_RATION",
+    "DRAWBRIDGE_UP",
+    "EXT_ENCUMBER",
+    "FIRST_OBJECT",
+    "FIRST_REAL_GEM",
+    "FIRST_SPELL",
+    "FOOD_RATION",
+    "FOOT",
+    "FUMBLING",
+    "GETOBJ_DOWNPLAY",
+    "GETOBJ_EXCLUDE",
+    "GETOBJ_EXCLUDE_SELECTABLE",
+    "GETOBJ_SUGGEST",
+    "GLYPH_BODY_OFF",
+    "GLYPH_BODY_PILETOP_OFF",
+    "GLYPH_MON_FEM_OFF",
+    "GLYPH_MON_MALE_OFF",
+    "GLYPH_OBJ_OFF",
+    "GLYPH_OBJ_PILETOP_OFF",
+    "GLYPH_STATUE_FEM_OFF",
+    "GLYPH_STATUE_FEM_PILETOP_OFF",
+    "GLYPH_STATUE_MALE_OFF",
+    "GLYPH_STATUE_MALE_PILETOP_OFF",
+    "GOLD_PIECE",
+    "GRAVE",
+    "HALF_PHDAM",
+    "HALLUC",
+    "HALLUC_RES",
+    "HAND",
+    "HORN_OF_PLENTY",
+    "HVY_ENCUMBER",
+    "ICE",
+    "ICE_BOX",
+    "LARGE_BOX",
+    "LAST_GLASS_GEM",
+    "LAST_SPELL",
+    "LAVAPOOL",
+    "LAVAWALL",
+    "LEASH",
+    "LEMBAS_WAFER",
+    "LOADSTONE",
+    "MAGIC_LAMP",
+    "MOD_ENCUMBER",
+    "NUMMONS",
+    "NUM_OBJECTS",
+    "OIL_LAMP",
+    "PIT",
+    "PLNMSG_BACK_ON_GROUND",
+    "PLNMSG_OBJNAM_ONLY",
+    "PM_CHICKATRICE",
+    "PM_CLERIC",
+    "PM_COCKATRICE",
+    "PM_DEATH",
+    "PM_FAMINE",
+    "PM_HOUSECAT",
+    "PM_ICE_TROLL",
+    "PM_PESTILENCE",
+    "PM_STONE_GOLEM",
+    "POOL",
+    "POTION_CLASS",
+    "POT_OIL",
+    "P_BASIC",
+    "P_PICK_AXE",
+    "P_RIDING",
+    "REVIVE_MON",
+    "ROT_CORPSE",
+    "SCR_SCARE_MONSTER",
+    "SHOPBASE",
+    "SHRINK_GLOB",
+    "SLT_ENCUMBER",
+    "SPE_BOOK_OF_THE_DEAD",
+    "SPE_WIZARD_LOCK",
+    "SPIKED_PIT",
+    "STAIRS",
+    "STATUE",
+    "STONE",
+    "STONE_RES",
+    "STUNNED",
+    "TALLOW_CANDLE",
+    "THRONE",
+    "TOOL_CLASS",
+    "VENOM_CLASS",
+    "WAN_CANCELLATION",
+    "WAX_CANDLE",
+    "WEAPON_CLASS",
+    "invlet_basic",
+    "st_all",
+    "st_corpse",
+    "st_gloves",
+    "st_petrifies",
+    "st_resists"
+  ],
+  "sizes": [
+    "dlevel_t",
+    "struct Gender",
+    "struct Role",
+    "struct autopickup_exception",
+    "struct c_common_strings",
+    "struct class_sym",
+    "struct classic_representation",
+    "struct const_globals",
+    "struct context_info",
+    "struct display_hints",
+    "struct flag",
+    "struct glyph_map_entry",
+    "struct glyphinfo",
+    "struct instance_flags",
+    "struct instance_globals_a",
+    "struct instance_globals_b",
+    "struct instance_globals_c",
+    "struct instance_globals_d",
+    "struct instance_globals_i",
+    "struct instance_globals_l",
+    "struct instance_globals_m",
+    "struct instance_globals_n",
+    "struct instance_globals_o",
+    "struct instance_globals_p",
+    "struct instance_globals_s",
+    "struct instance_globals_saved_c",
+    "struct instance_globals_saved_l",
+    "struct instance_globals_saved_m",
+    "struct instance_globals_t",
+    "struct instance_globals_u",
+    "struct instance_globals_v",
+    "struct instance_globals_y",
+    "struct levelflags",
+    "struct mi",
+    "struct monst",
+    "struct nhcoord",
+    "struct obj",
+    "struct objclass",
+    "struct oextra",
+    "struct permonst",
+    "struct prop",
+    "struct rm",
+    "struct skills",
+    "struct sortloot_item",
+    "struct trap",
+    "struct window_procs",
+    "struct you",
+    "union any",
+    "union vptrs"
+  ],
+  "dependencies": {
+    "doname": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "strchr": {
+      "type": "char *(const char *, int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "def_char_to_objclass": {
+      "type": "int (char)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char",
+          "canonical": "char"
+        }
+      ]
+    },
+    "count_unpaid": {
+      "type": "int (struct obj *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "tally_BUCX": {
+      "type": "void (struct obj *, boolean, int *, int *, int *, int *, int *, int *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a2",
+          "type": "int *",
+          "canonical": "int *"
+        },
+        {
+          "name": "a3",
+          "type": "int *",
+          "canonical": "int *"
+        },
+        {
+          "name": "a4",
+          "type": "int *",
+          "canonical": "int *"
+        },
+        {
+          "name": "a5",
+          "type": "int *",
+          "canonical": "int *"
+        },
+        {
+          "name": "a6",
+          "type": "int *",
+          "canonical": "int *"
+        },
+        {
+          "name": "a7",
+          "type": "int *",
+          "canonical": "int *"
+        }
+      ]
+    },
+    "getlin": {
+      "type": "void (const char *, char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "display_inventory": {
+      "type": "char (const char *, boolean)",
+      "ret": "char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "strcmp": {
+      "type": "int (const char *, const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "poly_when_stoned": {
+      "type": "boolean (struct permonst *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct permonst *",
+          "canonical": "struct permonst *"
+        }
+      ]
+    },
+    "polymon": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "corpse_xname": {
+      "type": "char *(struct obj *, const char *, unsigned int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "killer_xname": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "instapetrify": {
+      "type": "void (const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "revive_corpse": {
+      "type": "boolean (struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "exercise": {
+      "type": "void (int, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "db_under_typ": {
+      "type": "schar (int)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "dfeature_at": {
+      "type": "const char *(coordxy, coordxy, char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "waterbody_name": {
+      "type": "const char *(coordxy, coordxy)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "strcpy": {
+      "type": "char *(char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "an": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "upstart": {
+      "type": "char *(char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "back_on_ground": {
+      "type": "void (boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "nomul": {
+      "type": "void (int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "flush_screen": {
+      "type": "void (int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "look_here": {
+      "type": "int (int, unsigned int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "read_engr_at": {
+      "type": "void (coordxy, coordxy)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "set_bknown": {
+      "type": "void (struct obj *, unsigned int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "is_worn": {
+      "type": "boolean (struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "unconscious": {
+      "type": "boolean (void)",
+      "ret": "signed char",
+      "params": []
+    },
+    "is_pool": {
+      "type": "boolean (coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "is_lava": {
+      "type": "boolean (coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "t_at": {
+      "type": "struct trap *(coordxy, coordxy)",
+      "ret": "struct trap *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "can_reach_floor": {
+      "type": "boolean (boolean)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "uteetering_at_seen_pit": {
+      "type": "boolean (struct trap *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct trap *",
+          "canonical": "struct trap *"
+        }
+      ]
+    },
+    "uescaped_shaft": {
+      "type": "boolean (struct trap *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct trap *",
+          "canonical": "struct trap *"
+        }
+      ]
+    },
+    "free": {
+      "type": "void (void *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "void *",
+          "canonical": "void *"
+        }
+      ]
+    },
+    "safe_qbuf": {
+      "type": "char *(char *, const char *, const char *, struct obj *, char *(*)(struct obj *), char *(*)(struct obj *), const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a3",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a4",
+          "type": "char *(*)(struct obj *)",
+          "canonical": "char *(*)(struct obj *)"
+        },
+        {
+          "name": "a5",
+          "type": "char *(*)(struct obj *)",
+          "canonical": "char *(*)(struct obj *)"
+        },
+        {
+          "name": "a6",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "yn_function": {
+      "type": "char (const char *, const char *, char, boolean)",
+      "ret": "char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "char",
+          "canonical": "char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "hideunder": {
+      "type": "boolean (struct monst *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "newsym_force": {
+      "type": "void (coordxy, coordxy)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "makesingular": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "regex_match": {
+      "type": "boolean (const char *, struct nhregex *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "struct nhregex *",
+          "canonical": "struct nhregex *"
+        }
+      ]
+    },
+    "costly_spot": {
+      "type": "boolean (coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "alloc": {
+      "type": "long *(unsigned int)",
+      "ret": "long *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "sortloot": {
+      "type": "Loot *(struct obj **, unsigned int, boolean, boolean (*)(struct obj *))",
+      "ret": "struct sortloot_item *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj **",
+          "canonical": "struct obj **"
+        },
+        {
+          "name": "a1",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean (*)(struct obj *)",
+          "canonical": "signed char (*)(struct obj *)"
+        }
+      ]
+    },
+    "add_menu_str": {
+      "type": "void (winid, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "winid",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "strkitten": {
+      "type": "char *(char *, char)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "char",
+          "canonical": "char"
+        }
+      ]
+    },
+    "will_feel_cockatrice": {
+      "type": "boolean (struct obj *, boolean)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "unsortloot": {
+      "type": "void (Loot **)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "Loot **",
+          "canonical": "struct sortloot_item **"
+        }
+      ]
+    },
+    "let_to_name": {
+      "type": "char *(char, boolean, boolean)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char",
+          "canonical": "char"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "add_menu_heading": {
+      "type": "void (winid, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "winid",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "rn2_on_display_rng": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "map_glyphinfo": {
+      "type": "void (coordxy, coordxy, int, unsigned int, glyph_info *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a3",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        },
+        {
+          "name": "a4",
+          "type": "glyph_info *",
+          "canonical": "struct glyphinfo *"
+        }
+      ]
+    },
+    "doname_with_price": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "add_menu": {
+      "type": "void (winid, const glyph_info *, const union any *, char, char, int, int, const char *, unsigned int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "winid",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "const glyph_info *",
+          "canonical": "struct glyphinfo *"
+        },
+        {
+          "name": "a2",
+          "type": "const union any *",
+          "canonical": "union any *"
+        },
+        {
+          "name": "a3",
+          "type": "char",
+          "canonical": "char"
+        },
+        {
+          "name": "a4",
+          "type": "char",
+          "canonical": "char"
+        },
+        {
+          "name": "a5",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a6",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a7",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a8",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "dmgtype_fromattack": {
+      "type": "struct attack *(struct permonst *, int, int)",
+      "ret": "struct attack *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct permonst *",
+          "canonical": "struct permonst *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "self_lookat": {
+      "type": "char *(char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "select_menu": {
+      "type": "int (winid, int, menu_item **)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "winid",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "menu_item **",
+          "canonical": "struct mi **"
+        }
+      ]
+    },
+    "ysimple_name": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "count_buc": {
+      "type": "int (struct obj *, int, boolean (*)(struct obj *))",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "boolean (*)(struct obj *)",
+          "canonical": "signed char (*)(struct obj *)"
+        }
+      ]
+    },
+    "debugcore": {
+      "type": "boolean (const char *, boolean)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "__assert_fail": {
+      "type": "void (const char *, const char *, int, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a3",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "paranoid_ynq": {
+      "type": "char (boolean, const char *, boolean)",
+      "ret": "char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "weight": {
+      "type": "int (struct obj *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "money_cnt": {
+      "type": "long (struct obj *)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "max_capacity": {
+      "type": "int (void)",
+      "ret": "int",
+      "params": []
+    },
+    "xname": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "the": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "otense": {
+      "type": "char *(struct obj *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "body_part": {
+      "type": "const char *(int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "inv_cnt": {
+      "type": "int (boolean)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "carrying": {
+      "type": "struct obj *(int)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "merge_choice": {
+      "type": "struct obj *(struct obj *, struct obj *)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "nxtobj": {
+      "type": "struct obj *(struct obj *, int, boolean)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "near_capacity": {
+      "type": "int (void)",
+      "ret": "int",
+      "params": []
+    },
+    "calc_capacity": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "observe_object": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "touch_artifact": {
+      "type": "int (struct obj *, struct monst *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "splitobj": {
+      "type": "struct obj *(struct obj *, long)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "long",
+          "canonical": "long"
+        }
+      ]
+    },
+    "unbless": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "trycall": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "useupf": {
+      "type": "void (struct obj *, long)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "long",
+          "canonical": "long"
+        }
+      ]
+    },
+    "fix_ghostly_obj": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "get_obj_location": {
+      "type": "boolean (struct obj *, coordxy *, coordxy *, int)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy *",
+          "canonical": "short *"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy *",
+          "canonical": "short *"
+        },
+        {
+          "name": "a3",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "obj_extract_self": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "newsym": {
+      "type": "void (coordxy, coordxy)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "in_rooms": {
+      "type": "char *(coordxy, coordxy, int)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "addtobill": {
+      "type": "void (struct obj *, boolean, boolean, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "addinv": {
+      "type": "struct obj *(struct obj *)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "remote_burglary": {
+      "type": "void (coordxy, coordxy)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "prinv": {
+      "type": "void (const char *, struct obj *, long)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a2",
+          "type": "long",
+          "canonical": "long"
+        }
+      ]
+    },
+    "stagger": {
+      "type": "const char *(const struct permonst *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const struct permonst *",
+          "canonical": "struct permonst *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "rider_cant_reach": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "cant_reach_floor": {
+      "type": "void (coordxy, coordxy, boolean, boolean, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a4",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "hliquid": {
+      "type": "const char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "freehand": {
+      "type": "int (void)",
+      "ret": "int",
+      "params": []
+    },
+    "isok": {
+      "type": "int (coordxy, coordxy)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "The": {
+      "type": "char *(const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "autokey": {
+      "type": "struct obj *(boolean)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "pick_lock": {
+      "type": "int (struct obj *, coordxy, coordxy, struct obj *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a3",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "u_have_forceable_weapon": {
+      "type": "boolean (void)",
+      "ret": "signed char",
+      "params": []
+    },
+    "cmdq_add_ec": {
+      "type": "void (int, int (*)(void))",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "int (*)(void)",
+          "canonical": "int (*)(void)"
+        }
+      ]
+    },
+    "rng_log_enabled": {
+      "type": "boolean (void)",
+      "ret": "signed char",
+      "params": []
+    },
+    "rng_log_set_caller": {
+      "type": "void (const char *, int, const char *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "rnd": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "losehp": {
+      "type": "void (int, const char *, schar)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "schar",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "discover_object": {
+      "type": "void (int, boolean, boolean, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "check_capacity": {
+      "type": "boolean (const char *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "rn2": {
+      "type": "int (int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "sobj_at": {
+      "type": "struct obj *(int, coordxy, coordxy)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "feel_cockatrice": {
+      "type": "void (struct obj *, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "get_adjacent_loc": {
+      "type": "int (const char *, const char *, coordxy, coordxy, coord *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a3",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a4",
+          "type": "coord *",
+          "canonical": "struct nhcoord *"
+        }
+      ]
+    },
+    "ceiling": {
+      "type": "const char *(coordxy, coordxy)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "mon_nam": {
+      "type": "char *(struct monst *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "remove_worn_item": {
+      "type": "void (struct obj *, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "dropx": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "g_at": {
+      "type": "struct obj *(coordxy, coordxy)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "dist2": {
+      "type": "int (coordxy, coordxy, coordxy, coordxy)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a3",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "freeinv": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "add_to_container": {
+      "type": "struct obj *(struct obj *, struct obj *)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "boxlock": {
+      "type": "boolean (struct obj *, struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "courtmon": {
+      "type": "struct permonst *(void)",
+      "ret": "struct permonst *",
+      "params": []
+    },
+    "makemon": {
+      "type": "struct monst *(struct permonst *, coordxy, coordxy, mmflags_nht)",
+      "ret": "struct monst *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct permonst *",
+          "canonical": "struct permonst *"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a3",
+          "type": "mmflags_nht",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "add_to_minv": {
+      "type": "int (struct monst *, struct obj *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "which_armor": {
+      "type": "struct obj *(struct monst *, long)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a1",
+          "type": "long",
+          "canonical": "long"
+        }
+      ]
+    },
+    "x_monnam": {
+      "type": "char *(struct monst *, int, const char *, int, boolean)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a3",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a4",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "extract_from_minvent": {
+      "type": "void (struct monst *, struct obj *, boolean, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "thesimpleoname": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "hold_another_object": {
+      "type": "struct obj *(struct obj *, const char *, const char *, const char *)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a3",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "scatter": {
+      "type": "long (coordxy, coordxy, int, unsigned int, struct obj *)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a3",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        },
+        {
+          "name": "a4",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "Tobjnam": {
+      "type": "char *(struct obj *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "welded": {
+      "type": "int (struct obj *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "weldmsg": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "setuwep": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "setuswapwep": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "setuqwep": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "obj_is_burning": {
+      "type": "boolean (struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "snuff_lit": {
+      "type": "boolean (struct obj *)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "sellobj_state": {
+      "type": "void (int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "sellobj": {
+      "type": "void (struct obj *, coordxy, coordxy)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "obj_to_any": {
+      "type": "anything *(struct obj *)",
+      "ret": "union any *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "stop_timer": {
+      "type": "long (short, union any *)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "short",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "union any *",
+          "canonical": "union any *"
+        }
+      ]
+    },
+    "obfree": {
+      "type": "void (struct obj *, struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "useup": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "obj_here": {
+      "type": "boolean (struct obj *, coordxy, coordxy)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "d": {
+      "type": "int (int, int)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "bot": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "pick_pick": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "get_mtraits": {
+      "type": "struct monst *(struct obj *, boolean)",
+      "ret": "struct monst *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "start_corpse_timeout": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "start_glob_timeout": {
+      "type": "void (struct obj *, long)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "long",
+          "canonical": "long"
+        }
+      ]
+    },
+    "Doname2": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "shop_keeper": {
+      "type": "struct monst *(char)",
+      "ret": "struct monst *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char",
+          "canonical": "char"
+        }
+      ]
+    },
+    "stolen_value": {
+      "type": "long (struct obj *, coordxy, coordxy, boolean, boolean)",
+      "ret": "long",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a2",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a4",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "set_malign": {
+      "type": "void (struct monst *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "canseemon": {
+      "type": "int (struct monst *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "sensemon": {
+      "type": "int (struct monst *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "Monnam": {
+      "type": "char *(struct monst *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "christen_monst": {
+      "type": "struct monst *(struct monst *, const char *)",
+      "ret": "struct monst *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "more_experienced": {
+      "type": "void (int, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "newexplevel": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "rndmonnam": {
+      "type": "char *(char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "set_corpsenm": {
+      "type": "void (struct obj *, int)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        }
+      ]
+    },
+    "oname": {
+      "type": "struct obj *(struct obj *, const char *, unsigned int)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "strncmp": {
+      "type": "int (const char *, const char *, unsigned long)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "size_t",
+          "canonical": "unsigned long"
+        }
+      ]
+    },
+    "update_inventory": {
+      "type": "void (void)",
+      "ret": "void",
+      "params": []
+    },
+    "chest_trap": {
+      "type": "boolean (struct obj *, int, boolean)",
+      "ret": "signed char",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "currency": {
+      "type": "const char *(long)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "long",
+          "canonical": "long"
+        }
+      ]
+    },
+    "Ysimple_name2": {
+      "type": "char *(struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "strcat": {
+      "type": "char *(char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *restrict",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *restrict",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "container_contents": {
+      "type": "void (struct obj *, boolean, boolean, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a2",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a3",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "getobj": {
+      "type": "struct obj *(const char *, int (*)(struct obj *), unsigned int)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "int (*)(struct obj *)",
+          "canonical": "int (*)(struct obj *)"
+        },
+        {
+          "name": "a2",
+          "type": "unsigned int",
+          "canonical": "unsigned int"
+        }
+      ]
+    },
+    "unsplitobj": {
+      "type": "struct obj *(struct obj *)",
+      "ret": "struct obj *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "askchain": {
+      "type": "int (struct obj **, const char *, int, int (*)(struct obj *), int (*)(struct obj *), int, const char *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj **",
+          "canonical": "struct obj **"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a2",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a3",
+          "type": "int (*)(struct obj *)",
+          "canonical": "int (*)(struct obj *)"
+        },
+        {
+          "name": "a4",
+          "type": "int (*)(struct obj *)",
+          "canonical": "int (*)(struct obj *)"
+        },
+        {
+          "name": "a5",
+          "type": "int",
+          "canonical": "int"
+        },
+        {
+          "name": "a6",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "vtense": {
+      "type": "char *(const char *, const char *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "const char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "const char *",
+          "canonical": "char *"
+        }
+      ]
+    },
+    "surface": {
+      "type": "const char *(coordxy, coordxy)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "coordxy",
+          "canonical": "short"
+        },
+        {
+          "name": "a1",
+          "type": "coordxy",
+          "canonical": "short"
+        }
+      ]
+    },
+    "consume_obj_charge": {
+      "type": "void (struct obj *, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "tiphat": {
+      "type": "int (void)",
+      "ret": "int",
+      "params": []
+    },
+    "hitfloor": {
+      "type": "void (struct obj *, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "doaltarobj": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "dropy": {
+      "type": "void (struct obj *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "bagotricks": {
+      "type": "int (struct obj *, boolean, int *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a2",
+          "type": "int *",
+          "canonical": "int *"
+        }
+      ]
+    },
+    "hornoplenty": {
+      "type": "int (struct obj *, boolean, struct obj *)",
+      "ret": "int",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        },
+        {
+          "name": "a2",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    },
+    "check_unpaid_usage": {
+      "type": "void (struct obj *, boolean)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "boolean",
+          "canonical": "signed char"
+        }
+      ]
+    },
+    "subfrombill": {
+      "type": "void (struct obj *, struct monst *)",
+      "ret": "void",
+      "params": [
+        {
+          "name": "a0",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        },
+        {
+          "name": "a1",
+          "type": "struct monst *",
+          "canonical": "struct monst *"
+        }
+      ]
+    },
+    "Shk_Your": {
+      "type": "char *(char *, struct obj *)",
+      "ret": "char *",
+      "params": [
+        {
+          "name": "a0",
+          "type": "char *",
+          "canonical": "char *"
+        },
+        {
+          "name": "a1",
+          "type": "struct obj *",
+          "canonical": "struct obj *"
+        }
+      ]
+    }
+  },
+  "variadics": [
+    {
+      "site": 0,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "simple_look"
+    },
+    {
+      "site": 1,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "simple_look"
+    },
+    {
+      "site": 2,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "query_classes"
+    },
+    {
+      "site": 3,
+      "function": "There",
+      "types": [
+        "char *",
+        "int",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "query_classes"
+    },
+    {
+      "site": 4,
+      "function": "You",
+      "types": [
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "query_classes"
+    },
+    {
+      "site": 5,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "fatal_corpse_mistake"
+    },
+    {
+      "site": 6,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "rider_corpse_revival"
+    },
+    {
+      "site": 7,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "describe_decor"
+    },
+    {
+      "site": 8,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "describe_decor"
+    },
+    {
+      "site": 9,
+      "function": "Norep",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "describe_decor"
+    },
+    {
+      "site": 10,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "describe_decor"
+    },
+    {
+      "site": 11,
+      "function": "You",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "pickup"
+    },
+    {
+      "site": 12,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "pickup"
+    },
+    {
+      "site": 13,
+      "function": "There",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "pickup"
+    },
+    {
+      "site": 14,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "query_objlist"
+    },
+    {
+      "site": 15,
+      "function": "You_cant",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "query_objlist"
+    },
+    {
+      "site": 16,
+      "function": "You_cant",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "query_objlist"
+    },
+    {
+      "site": 17,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "query_category"
+    },
+    {
+      "site": 18,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "query_category"
+    },
+    {
+      "site": 19,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "query_category"
+    },
+    {
+      "site": 20,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "query_category"
+    },
+    {
+      "site": 21,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "delta_cwt"
+    },
+    {
+      "site": 22,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "carry_count"
+    },
+    {
+      "site": 23,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "carry_count"
+    },
+    {
+      "site": 24,
+      "function": "There",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "carry_count"
+    },
+    {
+      "site": 25,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "lift_object"
+    },
+    {
+      "site": 26,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "lift_object"
+    },
+    {
+      "site": 27,
+      "function": "Your",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "lift_object"
+    },
+    {
+      "site": 28,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "lift_object"
+    },
+    {
+      "site": 29,
+      "function": "impossible",
+      "types": [
+        "char *",
+        "long",
+        "long"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "pickup_object"
+    },
+    {
+      "site": 30,
+      "function": "You_cant",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "pickup_object"
+    },
+    {
+      "site": 31,
+      "function": "pline_The",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "pickup_object"
+    },
+    {
+      "site": 32,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "pickup_prinv"
+    },
+    {
+      "site": 33,
+      "function": "Your",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "encumber_msg"
+    },
+    {
+      "site": 34,
+      "function": "You",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "encumber_msg"
+    },
+    {
+      "site": 35,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "encumber_msg"
+    },
+    {
+      "site": 36,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "encumber_msg"
+    },
+    {
+      "site": 37,
+      "function": "Your",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "encumber_msg"
+    },
+    {
+      "site": 38,
+      "function": "Your",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "encumber_msg"
+    },
+    {
+      "site": 39,
+      "function": "You",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "encumber_msg"
+    },
+    {
+      "site": 40,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "encumber_msg"
+    },
+    {
+      "site": 41,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "able_to_loot"
+    },
+    {
+      "site": 42,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "able_to_loot"
+    },
+    {
+      "site": 43,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "able_to_loot"
+    },
+    {
+      "site": 44,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "do_loot_cont"
+    },
+    {
+      "site": 45,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "do_loot_cont"
+    },
+    {
+      "site": 46,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "do_loot_cont"
+    },
+    {
+      "site": 47,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "do_loot_cont"
+    },
+    {
+      "site": 48,
+      "function": "You",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 49,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 50,
+      "function": "You",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 51,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 52,
+      "function": "You_cant",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 53,
+      "function": "You",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 54,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 55,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 56,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "reverse_loot"
+    },
+    {
+      "site": 57,
+      "function": "verbalize",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "reverse_loot"
+    },
+    {
+      "site": 58,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "reverse_loot"
+    },
+    {
+      "site": 59,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "reverse_loot"
+    },
+    {
+      "site": 60,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "loot_mon"
+    },
+    {
+      "site": 61,
+      "function": "You_cant",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "loot_mon"
+    },
+    {
+      "site": 62,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "loot_mon"
+    },
+    {
+      "site": 63,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "loot_mon"
+    },
+    {
+      "site": 64,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "in_container"
+    },
+    {
+      "site": 65,
+      "function": "You",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "in_container"
+    },
+    {
+      "site": 66,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "in_container"
+    },
+    {
+      "site": 67,
+      "function": "Norep",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "in_container"
+    },
+    {
+      "site": 68,
+      "function": "pline_The",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "in_container"
+    },
+    {
+      "site": 69,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "in_container"
+    },
+    {
+      "site": 70,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "in_container"
+    },
+    {
+      "site": 71,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "in_container"
+    },
+    {
+      "site": 72,
+      "function": "livelog_printf",
+      "types": [
+        "long",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (long, const char *, ...)",
+      "owner": "in_container"
+    },
+    {
+      "site": 73,
+      "function": "urgent_pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "in_container"
+    },
+    {
+      "site": 74,
+      "function": "panic",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...) __attribute__((noreturn))",
+      "owner": "in_container"
+    },
+    {
+      "site": 75,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "in_container"
+    },
+    {
+      "site": 76,
+      "function": "impossible",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "out_container"
+    },
+    {
+      "site": 77,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "mbag_item_gone"
+    },
+    {
+      "site": 78,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "mbag_item_gone"
+    },
+    {
+      "site": 79,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "observe_quantum_cat"
+    },
+    {
+      "site": 80,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "observe_quantum_cat"
+    },
+    {
+      "site": 81,
+      "function": "pline_The",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "observe_quantum_cat"
+    },
+    {
+      "site": 82,
+      "function": "You",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "u_handsy"
+    },
+    {
+      "site": 83,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "u_handsy"
+    },
+    {
+      "site": 84,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "use_container"
+    },
+    {
+      "site": 85,
+      "function": "You",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "use_container"
+    },
+    {
+      "site": 86,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "use_container"
+    },
+    {
+      "site": 87,
+      "function": "You",
+      "types": [
+        "char *",
+        "long",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "use_container"
+    },
+    {
+      "site": 88,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "use_container"
+    },
+    {
+      "site": 89,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "use_container"
+    },
+    {
+      "site": 90,
+      "function": "You",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "use_container"
+    },
+    {
+      "site": 91,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "use_container"
+    },
+    {
+      "site": 92,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "menu_loot"
+    },
+    {
+      "site": 93,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "menu_loot"
+    },
+    {
+      "site": 94,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "in_or_out_menu"
+    },
+    {
+      "site": 95,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "in_or_out_menu"
+    },
+    {
+      "site": 96,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "in_or_out_menu"
+    },
+    {
+      "site": 97,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "in_or_out_menu"
+    },
+    {
+      "site": 98,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "in_or_out_menu"
+    },
+    {
+      "site": 99,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "in_or_out_menu"
+    },
+    {
+      "site": 100,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "dotip"
+    },
+    {
+      "site": 101,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "dotip"
+    },
+    {
+      "site": 102,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "dotip"
+    },
+    {
+      "site": 103,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "dotip"
+    },
+    {
+      "site": 104,
+      "function": "pline_The",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "dotip"
+    },
+    {
+      "site": 105,
+      "function": "pline",
+      "types": [
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "dotip"
+    },
+    {
+      "site": 106,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "dotip"
+    },
+    {
+      "site": 107,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "tipcontainer"
+    },
+    {
+      "site": 108,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "tipcontainer"
+    },
+    {
+      "site": 109,
+      "function": "livelog_printf",
+      "types": [
+        "long",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (long, const char *, ...)",
+      "owner": "tipcontainer"
+    },
+    {
+      "site": 110,
+      "function": "urgent_pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "tipcontainer"
+    },
+    {
+      "site": 111,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "tipcontainer"
+    },
+    {
+      "site": 112,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *",
+        "int"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "tipcontainer"
+    },
+    {
+      "site": 113,
+      "function": "You",
+      "types": [
+        "char *",
+        "long",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "tipcontainer"
+    },
+    {
+      "site": 114,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "tipcontainer_gettarget"
+    },
+    {
+      "site": 115,
+      "function": "sprintf",
+      "types": [
+        "char *",
+        "char *",
+        "char *"
+      ],
+      "prototype": "int (char *restrict, const char *restrict, ...)",
+      "owner": "tipcontainer_gettarget"
+    },
+    {
+      "site": 116,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "tipcontainer_checks"
+    },
+    {
+      "site": 117,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "tipcontainer_checks"
+    },
+    {
+      "site": 118,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "tipcontainer_checks"
+    },
+    {
+      "site": 119,
+      "function": "pline",
+      "types": [
+        "char *",
+        "char *"
+      ],
+      "prototype": "void (const char *, ...)",
+      "owner": "tipcontainer_checks"
+    }
+  ],
+  "statics": [
+    {
+      "name": "slightloadpfx",
+      "sourceName": "slightloadpfx",
+      "owner": null,
+      "public": false,
+      "sourceType": "const char[26]",
+      "type": "char[26]",
+      "size": "(1*26)",
+      "js": "C.literal(\"You have a little trouble\")"
+    },
+    {
+      "name": "moderateloadpfx",
+      "sourceName": "moderateloadpfx",
+      "owner": null,
+      "public": false,
+      "sourceType": "const char[17]",
+      "type": "char[17]",
+      "size": "(1*17)",
+      "js": "C.literal(\"You have trouble\")"
+    },
+    {
+      "name": "nearloadpfx",
+      "sourceName": "nearloadpfx",
+      "owner": null,
+      "public": false,
+      "sourceType": "const char[22]",
+      "type": "char[22]",
+      "size": "(1*22)",
+      "js": "C.literal(\"You have much trouble\")"
+    },
+    {
+      "name": "overloadpfx",
+      "sourceName": "overloadpfx",
+      "owner": null,
+      "public": false,
+      "sourceType": "const char[28]",
+      "type": "char[28]",
+      "size": "(1*28)",
+      "js": "C.literal(\"You have extreme difficulty\")"
+    },
+    {
+      "name": "add_valid_menu_class.vmc_count",
+      "sourceName": "vmc_count",
+      "owner": "add_valid_menu_class",
+      "public": false,
+      "sourceType": "int",
+      "type": "int",
+      "size": "4",
+      "js": "0"
+    },
+    {
+      "name": "autopick_testobj.costly",
+      "sourceName": "costly",
+      "owner": "autopick_testobj",
+      "public": false,
+      "sourceType": "boolean",
+      "type": "signed char",
+      "size": "1",
+      "js": "(C.i8(0))"
+    },
+    {
+      "name": "observe_quantum_cat.sc",
+      "sourceName": "sc",
+      "owner": "observe_quantum_cat",
+      "public": false,
+      "sourceType": "const char[19]",
+      "type": "char[19]",
+      "size": "(1*19)",
+      "js": "C.literal(\"Schroedinger's Cat\")"
+    },
+    {
+      "name": "explain_container_prompt.explaintext",
+      "sourceName": "explaintext",
+      "owner": "explain_container_prompt",
+      "public": false,
+      "sourceType": "const char *const[14]",
+      "type": "char *[14]",
+      "size": "(8*14)",
+      "js": "[C.literal(\"Container actions:\"),C.literal(\"\"),C.literal(\" : -- Look: examine contents\"),C.literal(\" o -- Out: take things out\"),C.literal(\" i -- In: put things in\"),C.literal(\" b -- Both: first take things out, then put things in\"),C.literal(\" r -- Reversed: put things in, then take things out\"),C.literal(\" s -- Stash: put one item in\"),C.literal(\"\"),C.literal(\" n -- Next: loot next selected container\"),C.literal(\" q -- Quit: finished\"),C.literal(\" ? -- Help: display this text.\"),C.literal(\"\"),0]"
+    },
+    {
+      "name": "in_or_out_menu.lootchars",
+      "sourceName": "lootchars",
+      "owner": "in_or_out_menu",
+      "public": false,
+      "sourceType": "const char[10]",
+      "type": "char[10]",
+      "size": "(1*10)",
+      "js": "C.literal(\"_:oibrsnq\")"
+    },
+    {
+      "name": "in_or_out_menu.abc_chars",
+      "sourceName": "abc_chars",
+      "owner": "in_or_out_menu",
+      "public": false,
+      "sourceType": "const char[10]",
+      "type": "char[10]",
+      "size": "(1*10)",
+      "js": "C.literal(\"_:abcdenq\")"
+    }
+  ],
+  "literals": [
+    "",
+    "\u001b",
+    " ",
+    "    ",
+    "    (if no other choices are picked, 'a' is implied)",
+    "    (ignored unless some other choices are also picked)",
+    " (except gold)",
+    " : -- Look: examine contents",
+    " ? -- Help: display this text.",
+    " and gradually %s",
+    " and immediately %s away",
+    " any more",
+    " b -- Both: first take things out, then put things in",
+    " else",
+    " here, tip it?",
+    " i -- In: put things in",
+    " is empty.  Do what with it?",
+    " n ",
+    " n -- Next: loot next selected container",
+    " o -- Out: take things out",
+    " or ?",
+    " q -- Quit: finished",
+    " r -- Reversed: put things in, then take things out",
+    " s -- Stash: put one item in",
+    "%s",
+    "%s %s",
+    "%s %s ",
+    "%s %s %s, but %s%s%s%s.",
+    "%s %s disappear!",
+    "%s %s securely sealed.",
+    "%s %s to loot.",
+    "%s %s to the %s.",
+    "%s %s vanished!",
+    "%s %s%shere to loot.",
+    "%s Creatures",
+    "%s attached to your pet.",
+    "%s cannot be confined in such trappings.",
+    "%s inside the box is dead!",
+    "%s inside the box is still alive!",
+    "%s into %s.",
+    "%s is %sempty.",
+    "%s is empty.",
+    "%s is locked.",
+    "%s locked.",
+    "%s move a handspan with this load!",
+    "%s out%c",
+    "%s to loot on the %s.",
+    "%s under your heavy load.  Movement is very hard.",
+    "%s under your load.  Movement is still very hard.",
+    "%s what type of objects?",
+    "%s what?",
+    "%s%c",
+    "%s%s",
+    "%s.",
+    "%sbox is now empty.",
+    "%sput in, then take out",
+    "%stake out, then put in",
+    "*pick_list != NULL",
+    ".  Continue?",
+    ":",
+    "<in> no gc.current_container?",
+    "<out> no gc.current_container?",
+    "?",
+    "All types",
+    "All worn and wielded types",
+    "An object spills",
+    "An object tumbles",
+    "As %s %s inside, you are blasted by a magical explosion!",
+    "As you put %s inside, you are blasted by a magical explosion!",
+    "At your %s, the corpse suddenly moves...",
+    "Auto-select every item being worn or wielded",
+    "Auto-select every relevant item",
+    "Being confused, you find nothing to loot.",
+    "Container actions:",
+    "Do what with ",
+    "Do you want to remove the saddle from %s?",
+    "Engulfed",
+    "Hmmm, %s turns out to be locked.",
+    "Invalid loot location",
+    "It develops a huge set of teeth and bites you!",
+    "Items known to be Blessed",
+    "Items known to be Cursed",
+    "Items known to be Uncursed",
+    "Items of unknown Bless/Curse status",
+    "Items you just picked up",
+    "Just picked up: %s",
+    "Look inside %s",
+    "Loot in what direction?",
+    "Loot which containers?",
+    "No relevant items selected.",
+    "Nothing interesting happens.",
+    "Objects spill",
+    "Objects tumble",
+    "Ok, now there is loot here.",
+    "Pick %d of what?",
+    "Pick up ",
+    "Pick up what?",
+    "Put in",
+    "Really autoselect All?",
+    "Schroedinger's Cat",
+    "Some %s %s onto the %s%s.",
+    "Swallowed",
+    "Take out",
+    "Thank you for your contribution to reduce the debt.",
+    "That would be an interesting topological exercise.",
+    "The exchequer accepts your contribution.",
+    "There is ",
+    "There is %s here.",
+    "This",
+    "Tip which container?",
+    "Touching %s is a fatal mistake.",
+    "Unpaid items",
+    "Unpaid items already used up",
+    "What kinds of thing do you want to %s? [%s]",
+    "Where to tip the contents of %s",
+    "Without a free %s, you cannot loot anything.",
+    "Without limbs, you cannot %s anything.",
+    "You can't tip %s while carrying so much.",
+    "You cannot %s %s you are wearing.",
+    "You drop %s!",
+    "You find old loot:",
+    "You have a little trouble",
+    "You have extreme difficulty",
+    "You have much trouble",
+    "You have trouble",
+    "_:abcdenq",
+    "_:oibrsnq",
+    "a container",
+    "acquire",
+    "another",
+    "are",
+    "are %s objects here.",
+    "are carrying too much stuff to pick up %s %s.",
+    "are no %c's %s.",
+    "are physically incapable of picking anything up.",
+    "attempted acquisition",
+    "b",
+    "both reversed; ",
+    "both; ",
+    "burn",
+    "can barely",
+    "can only %s %s of the %s %s.",
+    "can't even",
+    "can't.  The saddle seems to be stuck to %s.",
+    "cannot %s things that are deep in the %s.",
+    "cannot fit %s into %s.",
+    "cannot get your %s around this %s.",
+    "carefully open %s...",
+    "carnivorous bag",
+    "carry",
+    "container",
+    "crumbs",
+    "delta_cwt: obj not inside container?",
+    "dissipate",
+    "do nothing",
+    "do that without limbs.",
+    "do_loot_cont",
+    "doloot_core",
+    "don't find anything",
+    "don't have anything%s to %s.",
+    "done",
+    "doorway",
+    "drop",
+    "drop %s.",
+    "else ",
+    "even one ",
+    "grease",
+    "have",
+    "have no %c's.",
+    "have no free %s.",
+    "have no hands!",
+    "have to be at a container to loot it.",
+    "here",
+    "housecat",
+    "i",
+    "in %s",
+    "in_container",
+    "in_container:  bag not found.",
+    "inside",
+    "is too heavy for you to ",
+    "is_boh_item_gone",
+    "it",
+    "it ",
+    "just blew up %s bag of holding",
+    "just blew up %s bag of holding via tipping",
+    "knapsack cannot accommodate any more items%s.",
+    "lava",
+    "lift",
+    "lifting",
+    "loot",
+    "loot anything %sthere with %s in the way.",
+    "loot next container",
+    "loot_mon",
+    "lying here",
+    "magical explosion",
+    "many",
+    "mbag_explodes",
+    "menu_loot",
+    "more",
+    "movements are now unencumbered.",
+    "movements are only slowed slightly by your load.",
+    "movements are slowed slightly because of your load.",
+    "must be kidding.",
+    "must put it down to unlock.",
+    "n",
+    "need to dig up the grave to effectively loot it...",
+    "notice",
+    "now ",
+    "o",
+    "observe_quantum_cat",
+    "oil",
+    "on the floor",
+    "one",
+    "open %s...",
+    "open door",
+    "opening a container",
+    "otmp != 0",
+    "owe %ld %s for lost merchandise.",
+    "pick",
+    "pick %s up.",
+    "pick up",
+    "pick yourself up!",
+    "pickup.c",
+    "pickup_object: count %ld > quan %ld?",
+    "pool of water",
+    "put %s in",
+    "put %s into %s.",
+    "put in",
+    "q",
+    "query_category",
+    "query_category: no single object match",
+    "query_category: too many categories",
+    "raise",
+    "rebalance your load.  Movement is difficult.",
+    "rebalance your load.  Movement is still difficult.",
+    "refrigerate",
+    "removing",
+    "reverse_loot",
+    "rs",
+    "s",
+    "scroll%s %s to dust as you %s %s up.",
+    "see",
+    "several",
+    "simple_look(null)",
+    "some",
+    "spill",
+    "stagger",
+    "stash",
+    "stash one item into %s",
+    "stone%s won't leave your person.",
+    "swamp",
+    "t",
+    "take %s off of %s.",
+    "take %s out",
+    "take out",
+    "them",
+    "there",
+    "think %s brushed your %s.",
+    "tip",
+    "tip something being carried",
+    "tipcontainer",
+    "tipping a container",
+    "touch",
+    "tumble",
+    "turn",
+    "uBUCXP",
+    "venom",
+    "water",
+    "wax",
+    "you cannot "
+  ],
+  "literalBytes": 5198,
+  "callbackCalls": [
+    {
+      "site": 0,
+      "type": "winid (*)(int)",
+      "types": [
+        "int"
+      ],
+      "ret": "int",
+      "owner": "simple_look"
+    },
+    {
+      "site": 1,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "simple_look"
+    },
+    {
+      "site": 2,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "simple_look"
+    },
+    {
+      "site": 3,
+      "type": "void (*)(winid, boolean)",
+      "types": [
+        "int",
+        "signed char"
+      ],
+      "ret": "void",
+      "owner": "simple_look"
+    },
+    {
+      "site": 4,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "simple_look"
+    },
+    {
+      "site": 5,
+      "type": "boolean (*)(struct obj *)",
+      "types": [
+        "struct obj *"
+      ],
+      "ret": "signed char",
+      "owner": "collect_obj_classes"
+    },
+    {
+      "site": 6,
+      "type": "void (*)(winid, boolean)",
+      "types": [
+        "int",
+        "signed char"
+      ],
+      "ret": "void",
+      "owner": "fatal_corpse_mistake"
+    },
+    {
+      "site": 7,
+      "type": "boolean (*)(struct obj *)",
+      "types": [
+        "struct obj *"
+      ],
+      "ret": "signed char",
+      "owner": "query_objlist"
+    },
+    {
+      "site": 8,
+      "type": "winid (*)(int)",
+      "types": [
+        "int"
+      ],
+      "ret": "int",
+      "owner": "query_objlist"
+    },
+    {
+      "site": 9,
+      "type": "void (*)(winid, unsigned long)",
+      "types": [
+        "int",
+        "unsigned long"
+      ],
+      "ret": "void",
+      "owner": "query_objlist"
+    },
+    {
+      "site": 10,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "query_objlist"
+    },
+    {
+      "site": 11,
+      "type": "boolean (*)(struct obj *)",
+      "types": [
+        "struct obj *"
+      ],
+      "ret": "signed char",
+      "owner": "query_objlist"
+    },
+    {
+      "site": 12,
+      "type": "void (*)(winid, const char *)",
+      "types": [
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "query_objlist"
+    },
+    {
+      "site": 13,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "query_objlist"
+    },
+    {
+      "site": 14,
+      "type": "boolean (*)(struct obj *)",
+      "types": [
+        "struct obj *"
+      ],
+      "ret": "signed char",
+      "owner": "query_category"
+    },
+    {
+      "site": 15,
+      "type": "winid (*)(int)",
+      "types": [
+        "int"
+      ],
+      "ret": "int",
+      "owner": "query_category"
+    },
+    {
+      "site": 16,
+      "type": "void (*)(winid, unsigned long)",
+      "types": [
+        "int",
+        "unsigned long"
+      ],
+      "ret": "void",
+      "owner": "query_category"
+    },
+    {
+      "site": 17,
+      "type": "boolean (*)(struct obj *)",
+      "types": [
+        "struct obj *"
+      ],
+      "ret": "signed char",
+      "owner": "query_category"
+    },
+    {
+      "site": 18,
+      "type": "void (*)(winid, const char *)",
+      "types": [
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "query_category"
+    },
+    {
+      "site": 19,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "query_category"
+    },
+    {
+      "site": 20,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "lift_object"
+    },
+    {
+      "site": 21,
+      "type": "winid (*)(int)",
+      "types": [
+        "int"
+      ],
+      "ret": "int",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 22,
+      "type": "void (*)(winid, unsigned long)",
+      "types": [
+        "int",
+        "unsigned long"
+      ],
+      "ret": "void",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 23,
+      "type": "void (*)(winid, const char *)",
+      "types": [
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 24,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "doloot_core"
+    },
+    {
+      "site": 25,
+      "type": "winid (*)(int)",
+      "types": [
+        "int"
+      ],
+      "ret": "int",
+      "owner": "explain_container_prompt"
+    },
+    {
+      "site": 26,
+      "type": "void (*)(winid, int, const char *)",
+      "types": [
+        "int",
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "explain_container_prompt"
+    },
+    {
+      "site": 27,
+      "type": "void (*)(winid, boolean)",
+      "types": [
+        "int",
+        "signed char"
+      ],
+      "ret": "void",
+      "owner": "explain_container_prompt"
+    },
+    {
+      "site": 28,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "explain_container_prompt"
+    },
+    {
+      "site": 29,
+      "type": "int (*)(struct obj *)",
+      "types": [
+        "struct obj *"
+      ],
+      "ret": "int",
+      "owner": "menu_loot"
+    },
+    {
+      "site": 30,
+      "type": "winid (*)(int)",
+      "types": [
+        "int"
+      ],
+      "ret": "int",
+      "owner": "in_or_out_menu"
+    },
+    {
+      "site": 31,
+      "type": "void (*)(winid, unsigned long)",
+      "types": [
+        "int",
+        "unsigned long"
+      ],
+      "ret": "void",
+      "owner": "in_or_out_menu"
+    },
+    {
+      "site": 32,
+      "type": "void (*)(winid, const char *)",
+      "types": [
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "in_or_out_menu"
+    },
+    {
+      "site": 33,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "in_or_out_menu"
+    },
+    {
+      "site": 34,
+      "type": "winid (*)(int)",
+      "types": [
+        "int"
+      ],
+      "ret": "int",
+      "owner": "choose_tip_container_menu"
+    },
+    {
+      "site": 35,
+      "type": "void (*)(winid, unsigned long)",
+      "types": [
+        "int",
+        "unsigned long"
+      ],
+      "ret": "void",
+      "owner": "choose_tip_container_menu"
+    },
+    {
+      "site": 36,
+      "type": "void (*)(winid, const char *)",
+      "types": [
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "choose_tip_container_menu"
+    },
+    {
+      "site": 37,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "choose_tip_container_menu"
+    },
+    {
+      "site": 38,
+      "type": "winid (*)(int)",
+      "types": [
+        "int"
+      ],
+      "ret": "int",
+      "owner": "tipcontainer_gettarget"
+    },
+    {
+      "site": 39,
+      "type": "void (*)(winid, unsigned long)",
+      "types": [
+        "int",
+        "unsigned long"
+      ],
+      "ret": "void",
+      "owner": "tipcontainer_gettarget"
+    },
+    {
+      "site": 40,
+      "type": "void (*)(winid, const char *)",
+      "types": [
+        "int",
+        "char *"
+      ],
+      "ret": "void",
+      "owner": "tipcontainer_gettarget"
+    },
+    {
+      "site": 41,
+      "type": "void (*)(winid)",
+      "types": [
+        "int"
+      ],
+      "ret": "void",
+      "owner": "tipcontainer_gettarget"
+    }
+  ],
+  "dynamicVariadics": [],
+  "nativeFunctionPointers": [
+    "Yname2",
+    "Ysimple_name2",
+    "ansimpleoname",
+    "doforce",
+    "doname",
+    "is_worn",
+    "yname",
+    "ysimple_name"
+  ],
+  "ownedFunctionPointers": [
+    "all_but_uchain",
+    "allow_all",
+    "allow_category",
+    "ck_bag",
+    "in_container",
+    "n_or_more",
+    "out_container",
+    "stash_ok",
+    "tip_ok"
+  ],
+  "functionTypes": {
+    "simple_look": "void (struct obj *, boolean)",
+    "collect_obj_classes": "int (char *, struct obj *, boolean, boolean (*)(struct obj *), int *)",
+    "query_classes": "boolean (char *, boolean *, boolean *, const char *, struct obj *, boolean, int *)",
+    "u_safe_from_fatal_corpse": "boolean (struct obj *, int)",
+    "fatal_corpse_mistake": "boolean (struct obj *, boolean)",
+    "rider_corpse_revival": "boolean (struct obj *, boolean)",
+    "force_decor": "void (boolean)",
+    "deferred_decor": "void (boolean)",
+    "describe_decor": "boolean (void)",
+    "check_here": "void (boolean)",
+    "n_or_more": "boolean (struct obj *)",
+    "menu_class_present": "boolean (int)",
+    "add_valid_menu_class": "void (int)",
+    "all_but_uchain": "boolean (struct obj *)",
+    "allow_all": "boolean (struct obj *)",
+    "allow_category": "boolean (struct obj *)",
+    "is_worn_by_type": "boolean (struct obj *)",
+    "reset_justpicked": "void (struct obj *)",
+    "count_justpicked": "int (struct obj *)",
+    "find_justpicked": "struct obj *(struct obj *)",
+    "pickup": "int (int)",
+    "check_autopickup_exceptions": "struct autopickup_exception *(struct obj *)",
+    "autopick_testobj": "boolean (struct obj *, boolean)",
+    "autopick": "int (struct obj *, int, menu_item **)",
+    "query_objlist": "int (const char *, struct obj **, int, menu_item **, int, boolean (*)(struct obj *))",
+    "query_category": "int (const char *, struct obj *, int, menu_item **, int)",
+    "count_categories": "int (struct obj *, int)",
+    "delta_cwt": "int (struct obj *, struct obj *)",
+    "carry_count": "long (struct obj *, struct obj *, long, boolean, int *, int *)",
+    "lift_object": "int (struct obj *, struct obj *, long *, boolean)",
+    "pickup_object": "int (struct obj *, long, boolean)",
+    "pick_obj": "struct obj *(struct obj *)",
+    "pickup_prinv": "void (struct obj *, long, const char *)",
+    "encumber_msg": "void (void)",
+    "container_at": "int (coordxy, coordxy, boolean)",
+    "able_to_loot": "boolean (coordxy, coordxy, boolean)",
+    "mon_beside": "boolean (coordxy, coordxy)",
+    "do_loot_cont": "int (struct obj **, int, int)",
+    "doloot": "int (void)",
+    "doloot_core": "int (void)",
+    "reverse_loot": "boolean (void)",
+    "loot_mon": "int (struct monst *, int *, boolean *)",
+    "mbag_explodes": "boolean (struct obj *, int)",
+    "is_boh_item_gone": "boolean (void)",
+    "do_boh_explosion": "void (struct obj *, boolean)",
+    "boh_loss": "long (struct obj *, boolean)",
+    "in_container": "int (struct obj *)",
+    "ck_bag": "int (struct obj *)",
+    "out_container": "int (struct obj *)",
+    "removed_from_icebox": "void (struct obj *)",
+    "mbag_item_gone": "long (boolean, struct obj *, boolean)",
+    "observe_quantum_cat": "void (struct obj *, boolean, boolean)",
+    "container_gone": "boolean (int (*)(struct obj *))",
+    "explain_container_prompt": "void (boolean)",
+    "u_handsy": "boolean (void)",
+    "stash_ok": "int (struct obj *)",
+    "use_container": "int (struct obj **, boolean, boolean)",
+    "traditional_loot": "int (boolean)",
+    "menu_loot": "int (int, boolean)",
+    "in_or_out_menu": "char (const char *, struct obj *, boolean, boolean, boolean, boolean)",
+    "tip_ok": "int (struct obj *)",
+    "choose_tip_container_menu": "int (void)",
+    "dotip": "int (void)",
+    "tipcontainer": "void (struct obj *)",
+    "tipcontainer_gettarget": "struct obj *(struct obj *, boolean *)",
+    "tipcontainer_checks": "int (struct obj *, struct obj *, boolean)"
+  }
+}

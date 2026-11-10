@@ -1,0 +1,2958 @@
+{
+  "productionProfile": {
+    "cwd": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/wasm64-build/tree/src",
+    "command": [
+      "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/upstream/emscripten/emcc",
+      "-O2",
+      "-g",
+      "-sMEMORY64=1",
+      "-DNOTPARMDECL",
+      "-DNO_TIMED_DELAY",
+      "-DMACOS",
+      "-DNOPANICTRACE",
+      "-DNO_FILE_LINKS",
+      "-I../include",
+      "-I/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/ncurses-wasm64-build/include",
+      "-include",
+      "/Users/arj/Desktop/nethack_comp/teleport-contest/nethack-c/wasm/native-terminal.h",
+      "cmd.c"
+    ],
+    "inputSpelling": "cmd.c",
+    "forcedHeader": "nethack-c/wasm/native-terminal.h"
+  },
+  "sourceSHA256": "a14c0fc8706bd9957f8f4aab7f9e2abbd30eb5f4e43166b90a8bfeb25094a7ce",
+  "sourceBytes": 191110,
+  "sourceLines": 5704,
+  "pristineEqual": true,
+  "functionCount": 148,
+  "functions": [
+    {
+      "name": "doprev_message",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "timed_occupation",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "reset_occupations",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "set_occupation",
+      "type": {
+        "qualType": "void (int (*)(void), const char *, cmdcount_nht)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "fn",
+          "type": {
+            "qualType": "int (*)(void)"
+          }
+        },
+        {
+          "name": "txt",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "xtime",
+          "type": {
+            "desugaredQualType": "long",
+            "qualType": "cmdcount_nht",
+            "typeAliasDeclId": "0x7b0450380"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdq_add_ec",
+      "type": {
+        "qualType": "void (int, int (*)(void))"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "q",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "fn",
+          "type": {
+            "qualType": "int (*)(void)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdq_add_key",
+      "type": {
+        "qualType": "void (int, char)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "q",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "key",
+          "type": {
+            "qualType": "char"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdq_add_dir",
+      "type": {
+        "qualType": "void (int, schar, schar, schar)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "q",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "dx",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x7b0ddec48"
+          }
+        },
+        {
+          "name": "dy",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x7b0ddec48"
+          }
+        },
+        {
+          "name": "dz",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x7b0ddec48"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdq_add_userinput",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "q",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdq_add_int",
+      "type": {
+        "qualType": "void (int, int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "q",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "val",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdq_shift",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "q",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdq_reverse",
+      "type": {
+        "qualType": "struct _cmd_queue *(struct _cmd_queue *)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "head",
+          "type": {
+            "qualType": "struct _cmd_queue *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdq_copy",
+      "type": {
+        "qualType": "struct _cmd_queue *(int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "q",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdq_pop",
+      "type": {
+        "qualType": "struct _cmd_queue *(void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "cmdq_peek",
+      "type": {
+        "qualType": "struct _cmd_queue *(int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "q",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdq_clear",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "q",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pgetchar",
+      "type": {
+        "qualType": "char (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "extcmd_initiator",
+      "type": {
+        "qualType": "char (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "can_do_extcmd",
+      "type": {
+        "qualType": "boolean (const struct ext_func_tab *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "extcmd",
+          "type": {
+            "qualType": "const struct ext_func_tab *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "doextcmd",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "doc_extcmd_flagstr",
+      "type": {
+        "qualType": "char *(winid, const struct ext_func_tab *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "menuwin",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7b0c17bd0"
+          }
+        },
+        {
+          "name": "efp",
+          "type": {
+            "qualType": "const struct ext_func_tab *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "doextlist",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "extcmd_via_menu",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "domonability",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "enter_explore_mode",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "makemap_prepost",
+      "type": {
+        "qualType": "void (boolean, boolean)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "pre",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        },
+        {
+          "name": "wiztower",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "levltyp_to_name",
+      "type": {
+        "qualType": "const char *(int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "typ",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "doterrain",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "u_have_seen_whole_selection",
+      "type": {
+        "qualType": "boolean (struct selectionvar *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "sel",
+          "type": {
+            "qualType": "struct selectionvar *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "u_have_seen_bounds_selection",
+      "type": {
+        "qualType": "boolean (struct selectionvar *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "sel",
+          "type": {
+            "qualType": "struct selectionvar *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "u_can_see_whole_selection",
+      "type": {
+        "qualType": "boolean (struct selectionvar *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "sel",
+          "type": {
+            "qualType": "struct selectionvar *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dolookaround_floodfill_findroom",
+      "type": {
+        "qualType": "int (coordxy, coordxy)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lookaround_known_room",
+      "type": {
+        "qualType": "void (coordxy, coordxy)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dolookaround",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "dotoggleoption",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "set_move_cmd",
+      "type": {
+        "qualType": "void (int, int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "dir",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "run",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "do_move_west",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_move_northwest",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_move_north",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_move_northeast",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_move_east",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_move_southeast",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_move_south",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_move_southwest",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_rush_west",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_rush_northwest",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_rush_north",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_rush_northeast",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_rush_east",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_rush_southeast",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_rush_south",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_rush_southwest",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_run_west",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_run_northwest",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_run_north",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_run_northeast",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_run_east",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_run_southeast",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_run_south",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_run_southwest",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_reqmenu",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_rush",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_run",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_fight",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "do_repeat",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "extcmds_getentry",
+      "type": {
+        "qualType": "struct ext_func_tab *(int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdbind_get",
+      "type": {
+        "qualType": "struct Cmd_bind *(uchar)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "key",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7b0ddecb8"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdbind_add",
+      "type": {
+        "qualType": "void (uchar, const struct ext_func_tab *, boolean)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "key",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7b0ddecb8"
+          }
+        },
+        {
+          "name": "extcmd",
+          "type": {
+            "qualType": "const struct ext_func_tab *"
+          }
+        },
+        {
+          "name": "user",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdbind_remove",
+      "type": {
+        "qualType": "void (uchar)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "key",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7b0ddecb8"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdbind_freeall",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "cmdbind_swapkeys",
+      "type": {
+        "qualType": "void (uchar, uchar)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "key1",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7b0ddecb8"
+          }
+        },
+        {
+          "name": "key2",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7b0ddecb8"
+          }
+        }
+      ]
+    },
+    {
+      "name": "count_bind_keys",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "get_changed_key_binds",
+      "type": {
+        "qualType": "void (strbuf_t *)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "sbuf",
+          "type": {
+            "qualType": "strbuf_t *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "handler_rebind_keys_add",
+      "type": {
+        "qualType": "void (boolean)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "keyfirst",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "handler_rebind_keys",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "handler_change_autocompletions",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "extcmds_match",
+      "type": {
+        "qualType": "int (const char *, int, int **)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "findstr",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "ecmflags",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "matchlist",
+          "type": {
+            "qualType": "int **"
+          }
+        }
+      ]
+    },
+    {
+      "name": "key2extcmddesc",
+      "type": {
+        "qualType": "const char *(uchar)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "key",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7b0ddecb8"
+          }
+        }
+      ]
+    },
+    {
+      "name": "bind_mousebtn",
+      "type": {
+        "qualType": "boolean (int, const char *)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "btn",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "command",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "bind_key",
+      "type": {
+        "qualType": "boolean (uchar, const char *, boolean)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "key",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7b0ddecb8"
+          }
+        },
+        {
+          "name": "command",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "user",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "bind_key_fn",
+      "type": {
+        "qualType": "boolean (uchar, int (*)(void))"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "key",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7b0ddecb8"
+          }
+        },
+        {
+          "name": "fn",
+          "type": {
+            "qualType": "int (*)(void)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "commands_init",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "keylist_func_has_key",
+      "type": {
+        "qualType": "boolean (const struct ext_func_tab *, boolean *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "extcmd",
+          "type": {
+            "qualType": "const struct ext_func_tab *"
+          }
+        },
+        {
+          "name": "skip_keys_used",
+          "type": {
+            "qualType": "boolean *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "keylist_putcmds",
+      "type": {
+        "qualType": "int (winid, boolean, int, int, boolean *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "datawin",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7b0c17bd0"
+          }
+        },
+        {
+          "name": "docount",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        },
+        {
+          "name": "incl_flags",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "excl_flags",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "keys_used",
+          "type": {
+            "qualType": "boolean *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dokeylist",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "ext_func_tab_from_func",
+      "type": {
+        "qualType": "const struct ext_func_tab *(int (*)(void))"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "fn",
+          "type": {
+            "qualType": "int (*)(void)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmd_from_dir",
+      "type": {
+        "qualType": "char (int, int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "dir",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "mode",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmd_from_func",
+      "type": {
+        "qualType": "char (int (*)(void))"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "fn",
+          "type": {
+            "qualType": "int (*)(void)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmd_from_ecname",
+      "type": {
+        "qualType": "char *(const char *)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "ecname",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ecname_from_fn",
+      "type": {
+        "qualType": "const char *(int (*)(void))"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "fn",
+          "type": {
+            "qualType": "int (*)(void)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cmdname_from_func",
+      "type": {
+        "qualType": "const char *(int (*)(void), char *, boolean)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "fn",
+          "type": {
+            "qualType": "int (*)(void)"
+          }
+        },
+        {
+          "name": "outbuf",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "fullname",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "bind_specialkey",
+      "type": {
+        "qualType": "boolean (uchar, const char *)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "key",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7b0ddecb8"
+          }
+        },
+        {
+          "name": "command",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "spkey_name",
+      "type": {
+        "qualType": "const char *(int)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "nhkf",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "key2txt",
+      "type": {
+        "qualType": "char *(uchar, char *)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "c",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7b0ddecb8"
+          }
+        },
+        {
+          "name": "txt",
+          "type": {
+            "qualType": "char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "parseautocomplete",
+      "type": {
+        "qualType": "void (char *, boolean)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "autocomplete",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "condition",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "all_options_autocomplete",
+      "type": {
+        "qualType": "void (strbuf_t *)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "sbuf",
+          "type": {
+            "qualType": "strbuf_t *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "count_autocompletions",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "lock_mouse_buttons",
+      "type": {
+        "qualType": "void (boolean)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "savebtns",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "reset_commands",
+      "type": {
+        "qualType": "void (boolean)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "initial",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_rest_on_space",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "accept_menu_prefix",
+      "type": {
+        "qualType": "boolean (const struct ext_func_tab *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "ec",
+          "type": {
+            "qualType": "const struct ext_func_tab *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "randomkey",
+      "type": {
+        "qualType": "char (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "random_response",
+      "type": {
+        "qualType": "void (char *, int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "buf",
+          "type": {
+            "qualType": "char *"
+          }
+        },
+        {
+          "name": "sz",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rnd_extcmd_idx",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "reset_cmd_vars",
+      "type": {
+        "qualType": "void (boolean)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "reset_cmdq",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rhack",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "key",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "xytodir",
+      "type": {
+        "qualType": "int (int, int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dirtocoord",
+      "type": {
+        "qualType": "void (coord *, int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "cc",
+          "type": {
+            "qualType": "coord *"
+          }
+        },
+        {
+          "name": "dd",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "movecmd",
+      "type": {
+        "qualType": "int (char, int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "sym",
+          "type": {
+            "qualType": "char"
+          }
+        },
+        {
+          "name": "mode",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dxdy_moveok",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "redraw_cmd",
+      "type": {
+        "qualType": "boolean (char)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "c",
+          "type": {
+            "qualType": "char"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_adjacent_loc",
+      "type": {
+        "qualType": "int (const char *, const char *, coordxy, coordxy, coord *)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "prompt",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "emsg",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "cc",
+          "type": {
+            "qualType": "coord *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getdir",
+      "type": {
+        "qualType": "int (const char *)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "show_direction_keys",
+      "type": {
+        "qualType": "void (winid, char, boolean)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7b0c17bd0"
+          }
+        },
+        {
+          "name": "centerchar",
+          "type": {
+            "qualType": "char"
+          }
+        },
+        {
+          "name": "nodiag",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "help_dir",
+      "type": {
+        "qualType": "boolean (char, uchar, const char *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "sym",
+          "type": {
+            "qualType": "char"
+          }
+        },
+        {
+          "name": "spkey",
+          "type": {
+            "desugaredQualType": "unsigned char",
+            "qualType": "uchar",
+            "typeAliasDeclId": "0x7b0ddecb8"
+          }
+        },
+        {
+          "name": "msg",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "confdir",
+      "type": {
+        "qualType": "void (boolean)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "force_impairment",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "directionname",
+      "type": {
+        "qualType": "const char *(int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "dir",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "isok",
+      "type": {
+        "qualType": "int (coordxy, coordxy)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "doherecmdmenu",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "dotherecmdmenu",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "mcmd_addmenu",
+      "type": {
+        "qualType": "void (winid, int, const char *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7b0c17bd0"
+          }
+        },
+        {
+          "name": "act",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "txt",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "there_cmd_menu_self",
+      "type": {
+        "qualType": "int (winid, coordxy, coordxy, int *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7b0c17bd0"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "act",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "there_cmd_menu_next2u",
+      "type": {
+        "qualType": "int (winid, coordxy, coordxy, int, int *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7b0c17bd0"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "mod",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "act",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "there_cmd_menu_far",
+      "type": {
+        "qualType": "int (winid, coordxy, coordxy, int)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7b0c17bd0"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "mod",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "there_cmd_menu_common",
+      "type": {
+        "qualType": "int (winid, coordxy, coordxy, int, int *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7b0c17bd0"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "mod",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "act",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "act_on_act",
+      "type": {
+        "qualType": "void (int, coordxy, coordxy)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "act",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "dx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "dy",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "there_cmd_menu",
+      "type": {
+        "qualType": "char (coordxy, coordxy, int)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "mod",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "here_cmd_menu",
+      "type": {
+        "qualType": "char (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "click_to_cmd",
+      "type": {
+        "qualType": "void (coordxy, coordxy, int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x7b0e5a158"
+          }
+        },
+        {
+          "name": "mod",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "domouseaction",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "get_count",
+      "type": {
+        "qualType": "char (const char *, char, long, cmdcount_nht *, unsigned int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "allowchars",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "inkey",
+          "type": {
+            "qualType": "char"
+          }
+        },
+        {
+          "name": "maxcount",
+          "type": {
+            "qualType": "long"
+          }
+        },
+        {
+          "name": "count",
+          "type": {
+            "qualType": "cmdcount_nht *"
+          }
+        },
+        {
+          "name": "gc_flags",
+          "type": {
+            "qualType": "unsigned int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "hangup",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "sig_unused",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "end_of_input",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "readchar_core",
+      "type": {
+        "qualType": "char (coordxy *, coordxy *, int *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "mod",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "readchar",
+      "type": {
+        "qualType": "char (void)"
+      },
+      "storageClass": null,
+      "parameters": []
+    },
+    {
+      "name": "readchar_poskey",
+      "type": {
+        "qualType": "char (coordxy *, coordxy *, int *)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "mod",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dotravel",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "dotravel_target",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "doclicklook",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "yn_menuable_resp",
+      "type": {
+        "qualType": "boolean (const char *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "resp",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "yn_func_menu_opt",
+      "type": {
+        "qualType": "void (winid, char, const char *, char)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "win",
+          "type": {
+            "desugaredQualType": "int",
+            "qualType": "winid",
+            "typeAliasDeclId": "0x7b0c17bd0"
+          }
+        },
+        {
+          "name": "key",
+          "type": {
+            "qualType": "char"
+          }
+        },
+        {
+          "name": "text",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "def",
+          "type": {
+            "qualType": "char"
+          }
+        }
+      ]
+    },
+    {
+      "name": "yn_function_menu",
+      "type": {
+        "qualType": "boolean (const char *, const char *, char, char *)"
+      },
+      "storageClass": "static",
+      "parameters": [
+        {
+          "name": "query",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "resp",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "def",
+          "type": {
+            "qualType": "char"
+          }
+        },
+        {
+          "name": "res",
+          "type": {
+            "qualType": "char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "yn_function",
+      "type": {
+        "qualType": "char (const char *, const char *, char, boolean)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "query",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "resp",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "def",
+          "type": {
+            "qualType": "char"
+          }
+        },
+        {
+          "name": "addcmdq",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "paranoid_ynq",
+      "type": {
+        "qualType": "char (boolean, const char *, boolean)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "be_paranoid",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        },
+        {
+          "name": "prompt",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "accept_q",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "paranoid_query",
+      "type": {
+        "qualType": "boolean (boolean, const char *)"
+      },
+      "storageClass": null,
+      "parameters": [
+        {
+          "name": "be_paranoid",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x7b0e5a290"
+          }
+        },
+        {
+          "name": "prompt",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dosuspend_core",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "dosh_core",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    },
+    {
+      "name": "dummyfunction",
+      "type": {
+        "qualType": "int (void)"
+      },
+      "storageClass": "static",
+      "parameters": []
+    }
+  ],
+  "pointerIncrements": [
+    {
+      "function": "doc_extcmd_flagstr",
+      "range": {
+        "begin": {
+          "offset": 15601,
+          "col": 14,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 15602,
+          "col": 15,
+          "tokLen": 2
+        }
+      },
+      "type": "char *"
+    },
+    {
+      "function": "doc_extcmd_flagstr",
+      "range": {
+        "begin": {
+          "offset": 15654,
+          "col": 18,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 15655,
+          "col": 19,
+          "tokLen": 2
+        }
+      },
+      "type": "char *"
+    },
+    {
+      "function": "doc_extcmd_flagstr",
+      "range": {
+        "begin": {
+          "offset": 15712,
+          "col": 18,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 15713,
+          "col": 19,
+          "tokLen": 2
+        }
+      },
+      "type": "char *"
+    },
+    {
+      "function": "doc_extcmd_flagstr",
+      "range": {
+        "begin": {
+          "offset": 15736,
+          "col": 14,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 15737,
+          "col": 15,
+          "tokLen": 2
+        }
+      },
+      "type": "char *"
+    },
+    {
+      "function": "doextlist",
+      "range": {
+        "begin": {
+          "offset": 19060,
+          "col": 49,
+          "tokLen": 3
+        },
+        "end": {
+          "offset": 19063,
+          "col": 52,
+          "tokLen": 2
+        }
+      },
+      "type": "const struct ext_func_tab *"
+    },
+    {
+      "function": "extcmd_via_menu",
+      "range": {
+        "begin": {
+          "offset": 24754,
+          "col": 45,
+          "tokLen": 3
+        },
+        "end": {
+          "offset": 24757,
+          "col": 48,
+          "tokLen": 2
+        }
+      },
+      "type": "const struct ext_func_tab *"
+    },
+    {
+      "function": "bind_mousebtn",
+      "range": {
+        "begin": {
+          "offset": 90099,
+          "col": 47,
+          "tokLen": 6
+        },
+        "end": {
+          "offset": 90105,
+          "col": 53,
+          "tokLen": 2
+        }
+      },
+      "type": "struct ext_func_tab *"
+    },
+    {
+      "function": "bind_key",
+      "range": {
+        "begin": {
+          "offset": 91312,
+          "line": 2686,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 91313,
+          "col": 10,
+          "tokLen": 2
+        }
+      },
+      "type": "char *"
+    },
+    {
+      "function": "bind_key",
+      "range": {
+        "begin": {
+          "offset": 91370,
+          "col": 47,
+          "tokLen": 6
+        },
+        "end": {
+          "offset": 91376,
+          "col": 53,
+          "tokLen": 2
+        }
+      },
+      "type": "struct ext_func_tab *"
+    },
+    {
+      "function": "bind_key_fn",
+      "range": {
+        "begin": {
+          "offset": 92805,
+          "col": 47,
+          "tokLen": 6
+        },
+        "end": {
+          "offset": 92811,
+          "col": 53,
+          "tokLen": 2
+        }
+      },
+      "type": "struct ext_func_tab *"
+    },
+    {
+      "function": "commands_init",
+      "range": {
+        "begin": {
+          "offset": 93190,
+          "col": 47,
+          "tokLen": 6
+        },
+        "end": {
+          "offset": 93196,
+          "col": 53,
+          "tokLen": 2
+        }
+      },
+      "type": "struct ext_func_tab *"
+    },
+    {
+      "function": "keylist_putcmds",
+      "range": {
+        "begin": {
+          "offset": 96112,
+          "col": 47,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 96114,
+          "col": 49,
+          "tokLen": 6
+        }
+      },
+      "type": "const struct ext_func_tab *"
+    },
+    {
+      "function": "dokeylist",
+      "range": {
+        "begin": {
+          "offset": 98508,
+          "col": 47,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 98510,
+          "col": 49,
+          "tokLen": 6
+        }
+      },
+      "type": "const struct ext_func_tab *"
+    },
+    {
+      "function": "ext_func_tab_from_func",
+      "range": {
+        "begin": {
+          "offset": 102416,
+          "col": 47,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 102418,
+          "col": 49,
+          "tokLen": 6
+        }
+      },
+      "type": "const struct ext_func_tab *"
+    },
+    {
+      "function": "cmd_from_ecname",
+      "range": {
+        "begin": {
+          "offset": 103961,
+          "col": 47,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 103963,
+          "col": 49,
+          "tokLen": 6
+        }
+      },
+      "type": "const struct ext_func_tab *"
+    },
+    {
+      "function": "ecname_from_fn",
+      "range": {
+        "begin": {
+          "offset": 104462,
+          "col": 47,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 104464,
+          "col": 49,
+          "tokLen": 6
+        }
+      },
+      "type": "const struct ext_func_tab *"
+    },
+    {
+      "function": "cmdname_from_func",
+      "range": {
+        "begin": {
+          "offset": 105028,
+          "col": 47,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 105030,
+          "col": 49,
+          "tokLen": 6
+        }
+      },
+      "type": "const struct ext_func_tab *"
+    },
+    {
+      "function": "cmdname_from_func",
+      "range": {
+        "begin": {
+          "offset": 105732,
+          "col": 53,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 105734,
+          "col": 55,
+          "tokLen": 6
+        }
+      },
+      "type": "const struct ext_func_tab *"
+    },
+    {
+      "function": "parseautocomplete",
+      "range": {
+        "begin": {
+          "offset": 109729,
+          "col": 10,
+          "tokLen": 5
+        },
+        "end": {
+          "offset": 109734,
+          "col": 15,
+          "tokLen": 2
+        }
+      },
+      "type": "char *"
+    },
+    {
+      "function": "parseautocomplete",
+      "range": {
+        "begin": {
+          "offset": 110136,
+          "line": 3266,
+          "col": 9,
+          "tokLen": 12
+        },
+        "end": {
+          "offset": 110148,
+          "col": 21,
+          "tokLen": 2
+        }
+      },
+      "type": "char *"
+    },
+    {
+      "function": "parseautocomplete",
+      "range": {
+        "begin": {
+          "offset": 110327,
+          "col": 41,
+          "tokLen": 3
+        },
+        "end": {
+          "offset": 110330,
+          "col": 44,
+          "tokLen": 2
+        }
+      },
+      "type": "struct ext_func_tab *"
+    },
+    {
+      "function": "all_options_autocomplete",
+      "range": {
+        "begin": {
+          "offset": 111187,
+          "col": 41,
+          "tokLen": 3
+        },
+        "end": {
+          "offset": 111190,
+          "col": 44,
+          "tokLen": 2
+        }
+      },
+      "type": "struct ext_func_tab *"
+    },
+    {
+      "function": "count_autocompletions",
+      "range": {
+        "begin": {
+          "offset": 111606,
+          "col": 41,
+          "tokLen": 3
+        },
+        "end": {
+          "offset": 111609,
+          "col": 44,
+          "tokLen": 2
+        }
+      },
+      "type": "struct ext_func_tab *"
+    },
+    {
+      "function": "readchar_core",
+      "range": {
+        "begin": {
+          "offset": 175445,
+          "col": 16,
+          "tokLen": 14
+        },
+        "end": {
+          "offset": 175459,
+          "col": 30,
+          "tokLen": 2
+        }
+      },
+      "type": "const char *"
+    },
+    {
+      "function": "readchar_core",
+      "range": {
+        "begin": {
+          "offset": 176579,
+          "col": 34,
+          "tokLen": 14
+        },
+        "end": {
+          "offset": 176593,
+          "col": 48,
+          "tokLen": 2
+        }
+      },
+      "type": "const char *"
+    }
+  ],
+  "pointerCompoundAssignments": [],
+  "dereferencedIncrements": [],
+  "headerHashes": {
+    ".cache/wasm64-build/tree/include/align.h": "963176a750f3e58ca29d4b5b13f2eaf51fefdbf66b7a1a681401092dd72f7cb2",
+    ".cache/wasm64-build/tree/include/amiconf.h": "beb7f834ff25a85cd9558eac49ce8de20ceff678e47fbbc10cb978bf18face59",
+    ".cache/wasm64-build/tree/include/artifact.h": "9cc7056e7808ff2e28732c74d58ae47fe2513e4ccc5b5073b544f58a2495ccff",
+    ".cache/wasm64-build/tree/include/artilist.h": "5375cf830dac26aefd5dbefe1ab5bd79a1f1988b770e7a4dee61b6453c1dd3d3",
+    ".cache/wasm64-build/tree/include/attrib.h": "f20418d80bc2983e3d9af6cc9a02d30f57aa6b54116691a8e4ebebd425de757d",
+    ".cache/wasm64-build/tree/include/botl.h": "c26c637bcb8b2615e82fbc0804175cd8c87f63a3caf35c742e0a6fa410a31009",
+    ".cache/wasm64-build/tree/include/color.h": "f7ab4cdf5113898bf58ba85217f5d693b8564c232ff706ee894fdf070a3a105b",
+    ".cache/wasm64-build/tree/include/config.h": "5585d9c88d7ea21a9a78b45616cc31ae4ea680cb7b34026f70f92b91288a499f",
+    ".cache/wasm64-build/tree/include/config1.h": "b9e97cefc8fcfe4f36a1145ebfb655099f2afd2591227fa5f93b3f4dc0071042",
+    ".cache/wasm64-build/tree/include/context.h": "e1303b7309e556c65e41ec120b704079da6a0c9ef73a08745663f7b923ad7eef",
+    ".cache/wasm64-build/tree/include/coord.h": "f8788b777ea0fc8e4f5df40ce7b9add1a255c5846bdd1393518f7ea14ef6e3d2",
+    ".cache/wasm64-build/tree/include/cstd.h": "ef5e61d5eb7d1a5194c4a4544745a45893ccbea4c1cf083792235f562e173fc2",
+    ".cache/wasm64-build/tree/include/date.h": "0f6070303295e22d4e1a9855eeb3901c5346d66976050d6b2c8a7a12be3d15c0",
+    ".cache/wasm64-build/tree/include/decl.h": "4782c5f522f6de63503cda131c0e2485aef31506d83dcfb32defeebf984fb470",
+    ".cache/wasm64-build/tree/include/defsym.h": "009ae2e8921fa4c376fe0ae3b4a42407421274fc15d1a8834c6ae519dad82f87",
+    ".cache/wasm64-build/tree/include/dgn_file.h": "ac01f085ac0827ee4720e9071d13a3fb9a274ced57d373e013a04a1f211d5551",
+    ".cache/wasm64-build/tree/include/display.h": "36e9f838d3298d047e0605abcf2deb627eb79c18aa72f770d5289c34f3692b4c",
+    ".cache/wasm64-build/tree/include/dlb.h": "5fd4e1563e5836cb707b691fe2d197e8d1619fc1d1ab8d77c0002a443049f7e9",
+    ".cache/wasm64-build/tree/include/dungeon.h": "e48eaafdb22fc82121de702086c40c3245d6aeb9fe5556712ee1e2f18744a308",
+    ".cache/wasm64-build/tree/include/engrave.h": "1c5617162ea649a0305df8d997b7a1075b35c9b3b97311cdfeebbd60bb9c482e",
+    ".cache/wasm64-build/tree/include/extern.h": "385f7478000f79ff137f2b6be533eef7b518b47a00b0d8c7e35ea52c877dec2e",
+    ".cache/wasm64-build/tree/include/flag.h": "bb28a3f835f3b38119f95311d76b535ef5053f3fffa42372d9f7b1c4c917806f",
+    ".cache/wasm64-build/tree/include/fnamesiz.h": "bd41c47c66e4213835bc1f052d831f8643bc7e7cb9aae0effb27f41edf1b5c35",
+    ".cache/wasm64-build/tree/include/func_tab.h": "6c47ccb85277800274a4b7f860ff6e1c25b75c5cb55d860745b7479f6f6105ba",
+    ".cache/wasm64-build/tree/include/global.h": "8ff55a3c6ee5cc18d00f1982146080d81e9e3dc9e369ab1ffc79890c07b8a8d0",
+    ".cache/wasm64-build/tree/include/hack.h": "5743a1707ce05e7a9a90e61657fde0ac066d48591f5d4fe80b1bdf959d94bce9",
+    ".cache/wasm64-build/tree/include/hacklib.h": "d9bf2b0ae2003c0611d2b9a351fdbbb30d58def2ecccc1235d4ed1e7b52e3c53",
+    ".cache/wasm64-build/tree/include/integer.h": "e88805c10f195e6de63b8c5cb46049f466ef040de9987a6ab61c36ef977f515a",
+    ".cache/wasm64-build/tree/include/isaac64.h": "3d51f55fbe014cce77b53f7dec22d7ed11cab709f085a9ebfac87eeebb1f0e66",
+    ".cache/wasm64-build/tree/include/lint.h": "bb08d5658f43c87c2b5129a33cb4e3264693e68d3cd654c67a5ecd757c98adcc",
+    ".cache/wasm64-build/tree/include/mail.h": "8041ce36aef1bb8d49984e0e51f62fb31cd8edf559b19ab963853ef31f2f5ac2",
+    ".cache/wasm64-build/tree/include/mcastu.h": "ffe15f5e89de7f561b92052ccfdaf8556c1e6d80a6dbb35675fb997c67deebe4",
+    ".cache/wasm64-build/tree/include/mextra.h": "e78bdfa21d4fd7718f1a25ed8f1ef466c96c2bd49f2069af7d1ab346148a1229",
+    ".cache/wasm64-build/tree/include/mfndpos.h": "4711c0e5c67ae88a6a28c776bc542d0d06452d742456964b77913e896b5f56f5",
+    ".cache/wasm64-build/tree/include/micro.h": "4d9579d27ae8dd08ca562810e87d40c2984dfa92c5c3b51839ee2f4882080b6b",
+    ".cache/wasm64-build/tree/include/mkroom.h": "7baf848feb30c94c196e6bee2ee7f0a83822ad92042dd855b74d212fde514f5a",
+    ".cache/wasm64-build/tree/include/monattk.h": "00c2283c2687f2dd5fa8a3088623cd621822289018c0072db9cad5a2a94883ba",
+    ".cache/wasm64-build/tree/include/mondata.h": "6f1ca3db69a5cfbe425859fe1c7decfa1da1fdac45af9d8a84be5f0f8c9c21f2",
+    ".cache/wasm64-build/tree/include/monflag.h": "89e4ef1dc1cd46fa8d81ff833351934c666420abdf902286bdacdca0bb171d88",
+    ".cache/wasm64-build/tree/include/monst.h": "08e9e2251ac5c3beedb8700dd56287f9f397b506851ceb44a37e41b6d80067a6",
+    ".cache/wasm64-build/tree/include/monsters.h": "c63db922770c96a9956d221f364ba4368a9f81f81c8d64ed28251a0506d4a906",
+    ".cache/wasm64-build/tree/include/nhlua.h": "48553ca9ab16ac2928479cabdf51d7f090fc38e1641dd5d97d819f612c6d87d9",
+    ".cache/wasm64-build/tree/include/nhmd4.h": "e82ec33c65922977be2346fcc136ec34ed8e29947e4477741a21301f146391a0",
+    ".cache/wasm64-build/tree/include/nhregex.h": "a2936fd291537090773d861c083c3574c7a0a798c688e87dedb4405f73de653f",
+    ".cache/wasm64-build/tree/include/obj.h": "a4d1b994c5acd6fe04d411485d84491553d6df02dfbd7480181a15a7a05456e2",
+    ".cache/wasm64-build/tree/include/objclass.h": "101f92e0024e4404033845fb15171f8ed4b79374907a6a172b4eb7b026e1eb52",
+    ".cache/wasm64-build/tree/include/objects.h": "eb573ca76f7afe35d6420b958333fbb3c44911415df4e0034e6367456e2913cb",
+    ".cache/wasm64-build/tree/include/optlist.h": "23dafb109132dd63bbfe704b39fac8cccaaeee31a0dbd895c7ba928bd92af9b8",
+    ".cache/wasm64-build/tree/include/patchlevel.h": "4389b12b496c9611fb392ee509d0ebaad2f10449ff3ef697f1ad416a207b0a97",
+    ".cache/wasm64-build/tree/include/pcconf.h": "c8f22aca7458c1527fbb8362efbb725744ede2edb92185381b7de21fd8693b99",
+    ".cache/wasm64-build/tree/include/permonst.h": "bcdb24d041e3df909cf483efb576fa7fc5e18debf03d11e8e43c1aa87c655bf4",
+    ".cache/wasm64-build/tree/include/prop.h": "682e85c7ab20c1dc7b30115b2a3e850d564cc2ed341edfa782fec9d0dfea0761",
+    ".cache/wasm64-build/tree/include/quest.h": "87b6649d82b6fd4a24d004fcd48c1d9650345e719cf8dc196ae6c99b483e2a5a",
+    ".cache/wasm64-build/tree/include/rect.h": "dee168e068baa3aa15748725752d07659f8cb4e471116f7fab4acf080dc69f90",
+    ".cache/wasm64-build/tree/include/region.h": "adc4682b6a15213f71f3bb534b8705c4385153ca9db7512c118474b0fb4f1191",
+    ".cache/wasm64-build/tree/include/rm.h": "da2ae88d704a358474c6986a3f4763e62053b96a6e60a475879029e658996af7",
+    ".cache/wasm64-build/tree/include/savefile.h": "6847e12dca1eb25b38baa69f6227554669f8a64f5966a1879a5cf2b23732749e",
+    ".cache/wasm64-build/tree/include/seffects.h": "f64099054ab366a1eaccd58901a98cef49a84c1f047c5923de20b4432654de02",
+    ".cache/wasm64-build/tree/include/selvar.h": "49b8be43b8bfd7b4f18cb59d1179e8ad28a708a06c0fbc985c65b365ab9a3acf",
+    ".cache/wasm64-build/tree/include/sfmacros.h": "4ea0c088308a08b002b553d7633b3b729aee66d4c71b2974751d6b3eccfbb209",
+    ".cache/wasm64-build/tree/include/sfprocs.h": "89f96065e62ea60dbc46dbef2f9762242a8562b189dbcd6038af063424438b56",
+    ".cache/wasm64-build/tree/include/skills.h": "d67ac10770b8aff667c163e93020b8974e53f12eede903f10bf026d351b2c238",
+    ".cache/wasm64-build/tree/include/sndprocs.h": "4d105334e499c3fb4af00fcd1acf48802a8db5ccf799bd31bfafc2afaa286654",
+    ".cache/wasm64-build/tree/include/sp_lev.h": "a48d5bd2d9a5b20b474b790d52f4f19179678c87ec0b51019e39dc6684d7a6bf",
+    ".cache/wasm64-build/tree/include/spell.h": "dc1e454c0214ea1cc20f4ea1e19cd4447a5ca9533610769fafe8cdd60206b37f",
+    ".cache/wasm64-build/tree/include/stairs.h": "fe016a6ef8194099d504bbf48f58e1e3c6a923413a07c28377409cacc1e2b42b",
+    ".cache/wasm64-build/tree/include/sym.h": "cea14c200c9f1e90ebe890804b46af7005c889d90917cb0608ad6058614e3db4",
+    ".cache/wasm64-build/tree/include/sys.h": "e193f46309925a4b14394a503b3e9a7bc19e5745bb539137ca10ec0898e3951b",
+    ".cache/wasm64-build/tree/include/tcap.h": "eeb713779ef8a1483efbea0427cf4eb7549365d2bc1b010107912d982a1e235d",
+    ".cache/wasm64-build/tree/include/tile2x11.h": "c8c658c56a08ec43bf8eb0b81673f04f380537a722dae4963be2a9d318ff4cb7",
+    ".cache/wasm64-build/tree/include/tileset.h": "9fb5634389613e2528704caba09c21cd2007179f3f6528fcfb8977f1ee332282",
+    ".cache/wasm64-build/tree/include/timeout.h": "5f76ff41cc5435cc8a3e30b28f51c6adbfe42e2bf4a0354ba0a9f850a5ce515a",
+    ".cache/wasm64-build/tree/include/tradstdc.h": "a1246d1acdf317c36990946e1d8bde33f63e3ba779ed5696a4ee03c7ac4f4401",
+    ".cache/wasm64-build/tree/include/trap.h": "469afec3e29d7aec1aa8efd407ad23d24ef069010820082b5596537b9290eb6b",
+    ".cache/wasm64-build/tree/include/unixconf.h": "0cbf3370472b030e8583e922e05e8e055738896954cbbdc1e1e18d0938559723",
+    ".cache/wasm64-build/tree/include/vision.h": "415b7e5751194cb7de57c192103d396a2971400e603fd62bf56330304014ac13",
+    ".cache/wasm64-build/tree/include/vmsconf.h": "a15f393613c8b63278a83748fa4b130e3826d65c7156b6f20ca2c61a0794e20e",
+    ".cache/wasm64-build/tree/include/warnings.h": "ccf0c3e66bb442b0d8c05844103065fccf3fa7a894bba007425258e1d089f981",
+    ".cache/wasm64-build/tree/include/weight.h": "ac168750ddcde6c592ccbeaaf44c59921cc1f73ed36d269f20364b0e08b91cd1",
+    ".cache/wasm64-build/tree/include/winX.h": "9ff1338cceced7f5335379d90cdebadc6e1065d64c4509cf518c0f497ff0f28d",
+    ".cache/wasm64-build/tree/include/winami.h": "eb0864330b27a436acf3bb092ee1ea492a890d4a6cfc9604a25ffdb3f73df754",
+    ".cache/wasm64-build/tree/include/wincurs.h": "d58fd52046a1d35b24e65d4eecc2cef851c370f1248f40d2e58eec1a9d04fcd8",
+    ".cache/wasm64-build/tree/include/windconf.h": "eddba5996f97ff32ce554236be187de0147ab8b7fffa4d31c40fc0d00354947b",
+    ".cache/wasm64-build/tree/include/winprocs.h": "eebf4dbb4149d3a153a1dc815795baabe33a59d13362e00089d21ee9ce89983c",
+    ".cache/wasm64-build/tree/include/wintty.h": "96898d81147193d8d3785756011ae13f40967cbe947bf5fe35f3f2f4e6f15f89",
+    ".cache/wasm64-build/tree/include/wintype.h": "e5bfd60534831210bdace1ba6eaef62f65d16dab8d8ac0fcddadebd000d53698",
+    ".cache/wasm64-build/tree/include/xwindow.h": "3a646862b59bc886df8775065c75a55324c611c01f43f57eb6f6b2345564aec6",
+    ".cache/wasm64-build/tree/include/xwindowp.h": "af1dac3806cd2199b2e5127b41ac2ae56e5443ef4b7835fd69f6ea4ae5411db6",
+    ".cache/wasm64-build/tree/include/you.h": "d19cfa0233582f1ad550b9dfc788f26166f3ff21225e3d8a0cd43b6de2094289",
+    ".cache/wasm64-build/tree/include/youprop.h": "9c4e25bc385c405226085ae3526dc165bd9397ce922b8a18a46f67de21683a2f",
+    ".cache/ncurses-wasm64-build/include/config.h": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".cache/ncurses-wasm64-build/include/curses.h": "a2d32dcf9eb6b630cd3d9e14161ff2c378c922c1282e342b70e49fedee5db82c",
+    ".cache/ncurses-wasm64-build/include/hashsize.h": "3d0a04f0bf84ff1c8b775b39ac28c7a813964e7a0df380767795701db406c061",
+    ".cache/ncurses-wasm64-build/include/ncurses_cfg.h": "66ec2e1845f122e6db49c9ec6f7c5e717298b9c76153f9cce86ba6c14e699092",
+    ".cache/ncurses-wasm64-build/include/ncurses_def.h": "1cff0da3682d5c7cd297fd26cb09648690279eb4f549e8af422a7756f7ac57d8",
+    ".cache/ncurses-wasm64-build/include/ncurses_dll.h": "8ce112a66482f18fa5e0378b46a4f028b21a80f8e6c43815c562ad0d6b7ed727",
+    ".cache/ncurses-wasm64-build/include/parametrized.h": "849e0d72ee005acae7628ffe05e0784ebc9463658ba73f9a39ca199ae8f96b66",
+    ".cache/ncurses-wasm64-build/include/term.h": "bb3cc663684daf037a3d179f07a547e1c3a7b31f8520c19f000c992f4dbf63bc",
+    ".cache/ncurses-wasm64-build/include/termcap.h": "6ab2d763ee6ba86cd4ee15ee2a2e93a60e1856e96c4230d9680c282d530a0ae6",
+    ".cache/ncurses-wasm64-build/include/unctrl.h": "33d97eb149fae7822e266b99aba1f1652b29b09aa8d934cf399cab59aa720e7a",
+    "nethack-c/wasm/native-terminal.h": "16eceb17caf6e70d0e8e6b36f23daebdb30f7ace18676d482c8376fccf6dceeb",
+    "nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2"
+  },
+  "actualArtifacts": {
+    "cmd-ast.json": "95d4e115377c7f52239d6c91c200c53e805b3ac12d837facf1513b7f45a51672",
+    "cmd.i": "51141b1972d09b93d7ef0e6b217337e764e177ba642d0916c7245542bfe6d500",
+    "configured.c": "041c76f45b18f5d640fdd8254da86c247d5f83dc800f0b9014cfd8bec447f847",
+    "final-macros.txt": "5fcf5565b2ebd75f7e6f20e161cf43859813296f7015bd7743368dc025e20a35",
+    "record-layouts.txt": "c127a348d9b31a6b11cf7b8dc062afb08e64c1e28480fe772f1d83efd7f3f800"
+  },
+  "privatePrefixMap": "-fmacro-prefix-map=/Users/arj/Desktop/nethack_comp/teleport-contest/scripts/../.cache/wasm64-build/tree/src/=",
+  "limitations": [
+    "Configured Emscripten comparison only; native/full-game/production/public pending",
+    "handler_rebind_keys_add ordinary/unbind cmdstr branches undefined and unproven",
+    "Arbitrary JS exceptions through raw exported C caller not resumability proof; callCmd entry/finally boundary tested"
+  ]
+}

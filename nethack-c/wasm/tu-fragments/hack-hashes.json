@@ -1,0 +1,37 @@
+{
+  "status": "private configured Emscripten original-C first pass passed; not selected",
+  "reservation": {
+    "translationUnit": 122,
+    "javascriptUnit": 128
+  },
+  "sourceSha256": "547cab9e7aaa922aa5bb8b5ad38696f9f74e3e1e31c264509a9448a689cb4665",
+  "files": {
+    "js/ported/hack.js": "fd8f6ebac018ae471b378d597c679f3c21ce3a33d83b5b815d97433f26453abf",
+    "js/ported/hack-runtime.js": "792776f4123510b6c4bd1a6d2076c7efc70b3e196a363324ac83478f16c99b2f",
+    "nethack-c/wasm/tu-libraries/hack.js": "6bfde9942d2b88d33da37c21c65abcb037447d4e3f507297a67532c3ac6d9f1d",
+    "nethack-c/wasm/tu-fragments/hack-support.c": "96ac1f586baaa384f44baf031f931cdee9e27b414c24af20767b3098c382615c",
+    "nethack-c/wasm/tu-fragments/hack-schema.json": "313661a301f57d05999c093175824fad955b5723255495ff7b2b156cfd80b266",
+    "nethack-c/wasm/tu-fragments/hack-source-data.h": "8f7531d7c1e7c3f483d1753f69c9af107a694ee1164b5bddb4bdb300437cd85c",
+    "nethack-c/wasm/tu-fragments/hack-metadata.py": "15e2fa28a81ac39bc1241dde3be6828844f2ca8ab0056110b071d20bd120ac3b",
+    "nethack-c/wasm/tu-fragments/hack-source-check.mjs": "e21bc25de78e7e028924a9a489f968811e84bab6d99b7eb42c83db475ab79490",
+    "nethack-c/wasm/tu-fragments/hack-integration.json": "1e793a09e641dc2119909ec7b3ffad942593ae2ca57f5fdf24663bac0cb76e47",
+    "scripts/tu-hack-layout.h": "4db157564b0feeb9d087fbd09879ccf45952884bda33238541bbeda64ae3156e",
+    "scripts/tu-hack-probe.c": "328056b4694cb833453bc37e844c03bbdcf5b7848d861408e70fef6b9a0b1461",
+    "scripts/test-tu-hack.mjs": "42a42df146764f0fa6e3212154990e9bb45c15020ec4e784b060dbc0dd4bd4fd",
+    "scripts/check-hack-data.mjs": "e11595babef2f5191eb3f4b2c52a916d4898fadb9d8219c44420f1cd0129df1b"
+  },
+  "selfHashPolicy": "This file excludes itself; the immutable handoff manifest binds all fourteen files, including this one.",
+  "evidence": {
+    "canonical": ".cache/hack-author/summary.json",
+    "callbacks": ".cache/hack-author/callback-witness.json",
+    "sourceGuard": ".cache/hack-author/source-guard-final.log",
+    "reset": ".cache/hack-author/reset-audit.json",
+    "regeneration": ".cache/hack-author/regeneration.json"
+  },
+  "pending": [
+    "independent native macOS oracle",
+    "shared registration/build",
+    "real catalogue initialization",
+    "whole-game integration and unchanged public recording/deadline gates"
+  ]
+}

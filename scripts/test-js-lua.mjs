@@ -72,6 +72,8 @@ function compare(name, source, { vm = createLua({ baseError: true, baseMeta: tru
 }
 
 const core = [
+  ['nan-sign-in-pack',`return string.pack("d",-(0/0))`],
+  ['nan-payload-pack',String.raw`local n=string.unpack('<d',"\x01\x00\x00\x00\x00\x00\xf0\x7f");return string.pack('<d',n),string.pack('<d',-n),math.type(n)`],
   ['longstring-identity','local a=string.rep("a",100);local b=string.rep("a",100);return a==b,rawequal(a,b),host_samepointer(a,b),host_samepointer(a,tostring(a)),#a,tonumber(string.rep("0",100).."17")'],
   ['longstring-literal-identity','local a="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";local b="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";local function f()return "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"end;return host_samepointer(a,b),host_samepointer(a,f())'],
   ['longstring-content-table-key','local a=string.rep("k",100);local b=string.rep("k",100);local t={[a]=17};local key=next(t);return t[b],host_samepointer(a,key),host_samepointer(b,key),table.concat({a,b})==a..b'],
@@ -138,7 +140,7 @@ const core = [
   ['utf8-codes', 'local t={};for p,c in utf8.codes(utf8.char(65,0xe9,0x1f600))do t[#t+1]=p;t[#t+1]=c end;return table.unpack(t)'],
   ['utf8-strict-lax', 'local s=utf8.char(0xd800,0x110000,0x7fffffff);local n,p=utf8.len(s);return n,p,utf8.len(s,1,-1,true),utf8.codepoint(s,1,-1,true)'],
   ['utf8-invalid', 'local n,p=utf8.len("a\\128");local a=pcall(utf8.codepoint,"\\192\\128");local b=pcall(utf8.offset,"a\\128",1,2);return n,p,a,b'],
-  ['float-domain-bits','return 0/0,-(0/0),math.log(-1),math.sqrt(-1),math.asin(2),math.acos(2),tostring(0/0),tostring(math.log(-1))'],
+  ['float-domain-bits','return 0/0,-(0/0),math.log(-1),math.sqrt(-1),math.asin(2),math.acos(2),tostring(0/0),tostring(math.log(-1)),tostring(-(0/0))'],
   ['float-decimal-halfways','return tostring(1.00000000000005),tostring(9.99999999999995),tostring(99999999999999.5),tostring(0.0000999999999999995),tostring(2.2250738585072014e-308),tostring(4.9406564584124654e-324),tostring(1.7976931348623157e308)'],
   ['float-string-formatting', 'return tostring(0.0),tostring(-0.0),tostring(1.25),tostring(1e-5),tostring(1e-4),tostring(1e13),tostring(1e14),tostring(2.5e-5),tostring(1.234567890123456),tostring(4503599627370496.0)'],
   ['coroutine-arguments', 'local co=coroutine.create(function(a,...)local x,y=coroutine.yield(a+1,...);return x*2,y end);local a,b,c,d=coroutine.resume(co,3,4,nil);local e,f,g=coroutine.resume(co,7,8);return a,b,c,d,e,f,g,coroutine.status(co)'],
@@ -270,4 +272,4 @@ for (const unsupported of ['::label:: goto label']) assert.throws(() => parse(un
 
 console.log(`PASS: ${cases} execution cases / ${values} returned values match native Lua5.4.8 bit-for-bit; all ${scripts} original scripts parse in both engines.`);
 console.log('PASS: original nhlib helper execution and RNG trace, original quest data and bigrm-4 diagnostic callback trace, host callbacks, sandbox globals, instruction bound and explicit unsupported-syntax rejection.');
-console.log('Incomplete core: no production NetHack bindings, C continuations, full C-pointer ABI, native allocator cadence/GC scheduling, randomized sort pivots, AST opcode emission or exact seeded table hash iteration. GC/close has separate native differential suite. No game/default integration or recording-equivalence claim.');
+console.log('Incomplete core: no production NetHack bindings, C continuations, full C-pointer ABI, native allocator layout/cadence, AST opcode emission or exact seeded table hash iteration. GC/close/phase controls have separate native differential suites. No game/default integration or recording-equivalence claim.');

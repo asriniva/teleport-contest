@@ -1,0 +1,23 @@
+// Independent development projection check; never supplies runtime catalogue data.
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import path from 'node:path';
+const root=fileURLToPath(new URL('../',import.meta.url));
+const sdk=process.env.EMSDK||path.join(root,'.cache/emsdk');
+const {parse}=await import(pathToFileURL(path.join(sdk,'upstream/emscripten/node_modules/acorn/dist/acorn.mjs')).href);
+const c=readFileSync(path.join(root,'.cache/wasm64-build/tree/src/mkroom.c'),'utf8');
+const js=readFileSync(path.join(root,'js/ported/mkroom.js'),'utf8');
+const original=c.match(/squadprob\[\]\s*=\s*\{([\s\S]*?)\};/);assert.ok(original);
+const expected=[...original[1].matchAll(/\{\s*(PM_\w+)\s*,\s*(\d+)\s*\}/g)].map(m=>({pm:m[1],prob:Number(m[2])}));
+const ast=parse(js,{ecmaVersion:'latest',sourceType:'module'});
+const declaration=ast.body.find(n=>n.type==='ExportNamedDeclaration'&&n.declaration?.declarations?.some(d=>d.id.name==='squadprob'));
+assert.ok(declaration,'Original readonly squadprob is exported readable data');
+const init=declaration.declaration.declarations.find(d=>d.id.name==='squadprob').init;
+assert.equal(init.type,'ArrayExpression');
+const actual=init.elements.map(row=>{assert.equal(row.type,'ObjectExpression');return Object.fromEntries(row.properties.map(p=>{assert.equal(p.value.type,'Literal');return[p.key.name,p.value.value];}));});
+assert.deepEqual(actual,expected);assert.equal(expected.length,4);
+assert.ok(js.includes('#define sq(x) ((x) * (x))'),'Original TU macro retained as text');
+assert.ok(js.includes('i = C.int(distval * distval);'),'Original sq body expanded at its single caller');
+assert.equal(ast.body.filter(n=>n.type==='ExportNamedDeclaration'&&n.declaration?.type==='FunctionDeclaration').length,30);
+console.log('MKROOM: four original squad rows, local sq expansion and 30 function boundaries checked.');

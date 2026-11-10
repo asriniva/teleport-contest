@@ -1,0 +1,1607 @@
+{
+  "sourceSHA256": "a2d6341107238f6e45b9305854f5dd4a34427f381558d9ecbc91578acdfbcab0",
+  "functions": [
+    {
+      "name": "iswall",
+      "line": 45,
+      "linkage": "static",
+      "type": {
+        "qualType": "int (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "iswall_or_stone",
+      "line": 59,
+      "linkage": "static",
+      "type": {
+        "qualType": "int (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "is_solid",
+      "line": 70,
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_levltyp",
+      "line": 77,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, schar)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "newtyp",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_levltyp_lit",
+      "line": 125,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, schar, schar)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "typ",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar"
+          }
+        },
+        {
+          "name": "lit",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar"
+          }
+        }
+      ]
+    },
+    {
+      "name": "extend_spine",
+      "line": 166,
+      "linkage": "static",
+      "type": {
+        "qualType": "int (int (*)[3], int, int, int)"
+      },
+      "parameters": [
+        {
+          "name": "locale",
+          "type": {
+            "qualType": "int (*)[3]"
+          }
+        },
+        {
+          "name": "wall_there",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "dx",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "dy",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wall_cleanup",
+      "line": 198,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (coordxy, coordxy, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x1",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y1",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "x2",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y2",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fix_wall_spines",
+      "line": 229,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (coordxy, coordxy, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x1",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y1",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "x2",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y2",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wallification",
+      "line": 290,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (coordxy, coordxy, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x1",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y1",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "x2",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y2",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "okay",
+      "line": 297,
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "dir",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "maze0xy",
+      "line": 309,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (coord *)"
+      },
+      "parameters": [
+        {
+          "name": "cc",
+          "type": {
+            "qualType": "coord *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "is_exclusion_zone",
+      "line": 317,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (xint16, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "type",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "bad_location",
+      "line": 341,
+      "linkage": "external",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, coordxy, coordxy, coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nlx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nly",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nhx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nhy",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "place_lregion",
+      "line": 356,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (coordxy, coordxy, coordxy, coordxy, coordxy, coordxy, coordxy, coordxy, xint16, d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "lx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "ly",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "hx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "hy",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nlx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nly",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nhx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nhy",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "rtype",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16"
+          }
+        },
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "put_lregion_here",
+      "line": 413,
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy, coordxy, coordxy, coordxy, coordxy, xint16, boolean, d_level *)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nlx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nly",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nhx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "nhy",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "rtype",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16"
+          }
+        },
+        {
+          "name": "oneshot",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        },
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "d_level *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "baalz_fixup",
+      "line": 475,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "fixup_special",
+      "line": 570,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "check_ransacked",
+      "line": 707,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (const char *)"
+      },
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "migrate_orc",
+      "line": 717,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *, unsigned long)"
+      },
+      "parameters": [
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "mflags",
+          "type": {
+            "qualType": "unsigned long"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shiny_orc_stuff",
+      "line": 748,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct monst *)"
+      },
+      "parameters": [
+        {
+          "name": "mtmp",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "migr_booty_item",
+      "line": 780,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (int, const char *)"
+      },
+      "parameters": [
+        {
+          "name": "otyp",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "gang",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "stolen_booty",
+      "line": 799,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "maze_inbounds",
+      "line": 894,
+      "linkage": "static",
+      "type": {
+        "qualType": "boolean (coordxy, coordxy)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "maze_remove_deadends",
+      "line": 904,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (xint16)"
+      },
+      "parameters": [
+        {
+          "name": "typ",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16"
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_maze",
+      "line": 950,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (int, int, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "corrwid",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "wallthick",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "rmdeadends",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pick_vibrasquare_location",
+      "line": 1042,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "populate_maze",
+      "line": 1097,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "makemaz",
+      "line": 1127,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (const char *)"
+      },
+      "parameters": [
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "walkfrom",
+      "line": 1279,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (coordxy, coordxy, schar)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "typ",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mazexy",
+      "line": 1316,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (coord *)"
+      },
+      "parameters": [
+        {
+          "name": "cc",
+          "type": {
+            "qualType": "coord *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_level_extends",
+      "line": 1353,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (coordxy *, coordxy *, coordxy *, coordxy *)"
+      },
+      "parameters": [
+        {
+          "name": "left",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "top",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "right",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "bottom",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "bound_digging",
+      "line": 1441,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "mkportal",
+      "line": 1464,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (coordxy, coordxy, xint16, xint16)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "todnum",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16"
+          }
+        },
+        {
+          "name": "todlevel",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fumaroles",
+      "line": 1484,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "movebubbles",
+      "line": 1539,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "water_friction",
+      "line": 1689,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "save_waterlevel",
+      "line": 1723,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (NHFILE *)"
+      },
+      "parameters": [
+        {
+          "name": "nhfp",
+          "type": {
+            "qualType": "NHFILE *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "restore_waterlevel",
+      "line": 1750,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (NHFILE *)"
+      },
+      "parameters": [
+        {
+          "name": "nhfp",
+          "type": {
+            "qualType": "NHFILE *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_wportal",
+      "line": 1802,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "setup_waterlevel",
+      "line": 1812,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "unsetup_waterlevel",
+      "line": 1860,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "mk_bubble",
+      "line": 1873,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (coordxy, coordxy, int)"
+      },
+      "parameters": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "n",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "maybe_adjust_hero_bubble",
+      "line": 1929,
+      "linkage": "external",
+      "type": {
+        "qualType": "void (void)"
+      },
+      "parameters": []
+    },
+    {
+      "name": "mv_bubble",
+      "line": 1952,
+      "linkage": "static",
+      "type": {
+        "qualType": "void (struct bubble *, coordxy, coordxy, boolean)"
+      },
+      "parameters": [
+        {
+          "name": "b",
+          "type": {
+            "qualType": "struct bubble *"
+          }
+        },
+        {
+          "name": "dx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "dy",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy"
+          }
+        },
+        {
+          "name": "ini",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean"
+          }
+        }
+      ]
+    }
+  ],
+  "rng": [
+    {
+      "function": "set_levltyp_lit",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 139
+    },
+    {
+      "function": "maze0xy",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 311
+    },
+    {
+      "function": "maze0xy",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 312
+    },
+    {
+      "function": "place_lregion",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 396
+    },
+    {
+      "function": "place_lregion",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 397
+    },
+    {
+      "function": "fixup_special",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 654
+    },
+    {
+      "function": "fixup_special",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 671
+    },
+    {
+      "function": "migrate_orc",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 732
+    },
+    {
+      "function": "migrate_orc",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 736
+    },
+    {
+      "function": "shiny_orc_stuff",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 757
+    },
+    {
+      "function": "shiny_orc_stuff",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 759
+    },
+    {
+      "function": "shiny_orc_stuff",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 764
+    },
+    {
+      "function": "shiny_orc_stuff",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 772
+    },
+    {
+      "function": "migr_booty_item",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 790
+    },
+    {
+      "function": "migr_booty_item",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 792
+    },
+    {
+      "function": "stolen_booty",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 820
+    },
+    {
+      "function": "stolen_booty",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 822
+    },
+    {
+      "function": "stolen_booty",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 823
+    },
+    {
+      "function": "stolen_booty",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 826
+    },
+    {
+      "function": "stolen_booty",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 828
+    },
+    {
+      "function": "stolen_booty",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 831
+    },
+    {
+      "function": "stolen_booty",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 843
+    },
+    {
+      "function": "stolen_booty",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 858
+    },
+    {
+      "function": "stolen_booty",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 877
+    },
+    {
+      "function": "stolen_booty",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 881
+    },
+    {
+      "function": "maze_remove_deadends",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 939
+    },
+    {
+      "function": "create_maze",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 961
+    },
+    {
+      "function": "create_maze",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 964
+    },
+    {
+      "function": "pick_vibrasquare_location",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1075
+    },
+    {
+      "function": "pick_vibrasquare_location",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1076
+    },
+    {
+      "function": "populate_maze",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1102
+    },
+    {
+      "function": "populate_maze",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1104
+    },
+    {
+      "function": "populate_maze",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1106
+    },
+    {
+      "function": "populate_maze",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1110
+    },
+    {
+      "function": "populate_maze",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1114
+    },
+    {
+      "function": "populate_maze",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1118
+    },
+    {
+      "function": "populate_maze",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1122
+    },
+    {
+      "function": "makemaz",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1136
+    },
+    {
+      "function": "makemaz",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1144
+    },
+    {
+      "function": "makemaz",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1152
+    },
+    {
+      "function": "makemaz",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1198
+    },
+    {
+      "function": "makemaz",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1200
+    },
+    {
+      "function": "makemaz",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1201
+    },
+    {
+      "function": "walkfrom",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1304
+    },
+    {
+      "function": "mazexy",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1330
+    },
+    {
+      "function": "mazexy",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1331
+    },
+    {
+      "function": "fumaroles",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1486
+    },
+    {
+      "function": "fumaroles",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1500
+    },
+    {
+      "function": "fumaroles",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1501
+    },
+    {
+      "function": "fumaroles",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1504
+    },
+    {
+      "function": "fumaroles",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1504
+    },
+    {
+      "function": "movebubbles",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1660
+    },
+    {
+      "function": "movebubbles",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1675
+    },
+    {
+      "function": "movebubbles",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1675
+    },
+    {
+      "function": "water_friction",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1694
+    },
+    {
+      "function": "water_friction",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1697
+    },
+    {
+      "function": "water_friction",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1701
+    },
+    {
+      "function": "water_friction",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1707
+    },
+    {
+      "function": "water_friction",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1711
+    },
+    {
+      "function": "setup_waterlevel",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1847
+    },
+    {
+      "function": "setup_waterlevel",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1848
+    },
+    {
+      "function": "setup_waterlevel",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1850
+    },
+    {
+      "function": "setup_waterlevel",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1851
+    },
+    {
+      "function": "setup_waterlevel",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1856
+    },
+    {
+      "function": "mk_bubble",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1909
+    },
+    {
+      "function": "mk_bubble",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1910
+    },
+    {
+      "function": "maybe_adjust_hero_bubble",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1937
+    },
+    {
+      "function": "mv_bubble",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 1959
+    },
+    {
+      "function": "mv_bubble",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 2102
+    },
+    {
+      "function": "mv_bubble",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 2102
+    },
+    {
+      "function": "mv_bubble",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 2103
+    },
+    {
+      "function": "mv_bubble",
+      "file": [
+        "\"mkmaze.c\""
+      ],
+      "line": 2104
+    }
+  ],
+  "defines": [
+    "NOTPARMDECL",
+    "NO_TIMED_DELAY",
+    "MACOS",
+    "NOPANICTRACE",
+    "NO_FILE_LINKS"
+  ],
+  "activeCPP": [
+    "PANICTRACE",
+    "NOTPARMDECL",
+    "NO_TIMED_DELAY",
+    "MACOS",
+    "NOPANICTRACE",
+    "NO_FILE_LINKS",
+    "TELEPORT_NATIVE_PLATFORM_ABI",
+    "DEBUG",
+    "UNIX",
+    "TTY_GRAPHICS"
+  ],
+  "inactiveCPP": [
+    "SFCTOOL",
+    "MICRO",
+    "EXTRA_SANITY_CHECKS"
+  ],
+  "memberAliases": {
+    "arboreal_sdoor": "candig",
+    "nexthere": "v.v_nexthere",
+    "wall_info": "flags"
+  }
+}

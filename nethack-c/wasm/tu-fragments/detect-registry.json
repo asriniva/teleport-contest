@@ -1,0 +1,35 @@
+{
+  "name": "detect",
+  "source": "src/detect.c",
+  "javascript": "js/ported/detect.js",
+  "library": "nethack-c/wasm/tu-libraries/detect.js",
+  "configuredFunctions": true,
+  "reference": "prepared",
+  "probeContext": false,
+  "probeExtraExports": [
+    "_teleport_detect_global",
+    "_teleport_detect_read",
+    "_teleport_detect_write",
+    "_teleport_detect_address",
+    "_teleport_detect_copy",
+    "_teleport_detect_call_rng",
+    "_teleport_detect_call_window",
+    "_teleport_detect_literal_storage",
+    "_teleport_detect_literal_capacity",
+    "_teleport_detect_function0",
+    "_teleport_detect_function1",
+    "_teleport_detect_function2",
+    "_teleport_detect_function3"
+  ],
+  "adapterSources": [
+    "js/ported/detect-runtime.js",
+    "scripts/tu-detect-layout.h",
+    "nethack-c/wasm/tu-fragments/detect-support.c",
+    "nethack-c/wasm/tu-fragments/detect-types.h",
+    "nethack-c/wasm/tu-fragments/detect-source-data.h",
+    "nethack-c/wasm/tu-fragments/detect-schema.json",
+    "nethack-c/wasm/tu-fragments/detect-provenance.json",
+    "nethack-c/wasm/tu-fragments/detect-check-source.py",
+    "nethack-c/wasm/tu-fragments/detect-check-members.mjs"
+  ]
+}

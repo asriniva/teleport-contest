@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {checkNhluaSource} from '../nethack-c/wasm/tu-fragments/nhlua-source-check.mjs';
+import {nhluaSchema as schema} from '../js/ported/nhlua.js';
+const result=checkNhluaSource();
+const dimensions=name=>schema.data[name].type.array;
+for(const [name,count] of Object.entries({nhcore_call_names:7,nhcore_call_available:7,char2typ:35,nhl_functions:41,nhl_consts:9,nhl_u_functions:3,nhl_meta_u_index__ustruct:24}))assert.deepEqual(dimensions(name),[count]);
+assert.equal(schema.records.nhl_user_data.size,232);
+assert.equal(schema.records.lua_Debug.size,136);
+const registration=schema.data.nhl_functions.initial;
+assert.equal(registration.filter(row=>row.func).length,40);
+assert.deepEqual(registration.at(-1),{name:0,func:0});
+console.log(JSON.stringify({...result,registrations:40,configuredTablesChecked:true,nativeHost:'pending'}));

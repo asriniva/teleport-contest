@@ -1,0 +1,726 @@
+{
+  "scope": "TU92/J98 END private first-pass; no shared/default/Lua edits",
+  "configuredFunctions": 29,
+  "publicFunctions": 15,
+  "privateFunctions": 14,
+  "comparisons": 1094,
+  "bindingExceptionWitnesses": 1,
+  "nativeHost": "pending",
+  "sharedGame": "pending",
+  "publicRecordings": "pending",
+  "production": [
+    {
+      "path": "js/ported/end.js",
+      "sha256": "f84fc00c64b2aae4af7abdf6db1a5945d1dd3c66e9e616a9eb38b6d14d455220",
+      "bytes": 64162
+    },
+    {
+      "path": "js/ported/end-runtime.js",
+      "sha256": "5699956ba6558103b5908eead267b414f7f97863127d5308d7816538e9d4876d",
+      "bytes": 31086
+    },
+    {
+      "path": "nethack-c/wasm/tu-libraries/end.js",
+      "sha256": "e312b534569c11a57fe722c6106a95de96978f366ee845706d4d286a93727ab0",
+      "bytes": 21250
+    },
+    {
+      "path": "nethack-c/wasm/tu-fragments/end-support.inc",
+      "sha256": "afdab3f2d70c997e7abdcb3260b16c322a057c6e3f2e0ab3ed032867c61ece98",
+      "bytes": 6730
+    },
+    {
+      "path": "nethack-c/wasm/tu-fragments/end-runtime-method.inc",
+      "sha256": "f7e019fbc757dd9b0bfdbfb8c95233154cc769051a1cd8bdfa035767976d2f72",
+      "bytes": 171
+    }
+  ],
+  "testAndGuard": [
+    {
+      "path": "scripts/tu-end-layout.h",
+      "sha256": "55c4a8464a1bf741ffacb759d52a327ff8bcd91454718bb4b7fb85b329e8e464",
+      "bytes": 44177
+    },
+    {
+      "path": "scripts/tu-end-probe.c",
+      "sha256": "6a11d7501f992cbc5e46709cdcfe292c5ac24a4f4d744bb2ae8b587b136f189d",
+      "bytes": 25957
+    },
+    {
+      "path": "scripts/test-tu-end.mjs",
+      "sha256": "aa4f0233bfb93ae7b2c002659b2c29ef73cd21158101ebe6a5dd8e53cad712b6",
+      "bytes": 12570
+    },
+    {
+      "path": "nethack-c/wasm/tu-fragments/end-metadata.py",
+      "sha256": "2009a7f4fdf92f78dcacd03c55317b60e08b926b80359ee861d45a5da6fc4836",
+      "bytes": 7738
+    },
+    {
+      "path": "nethack-c/wasm/tu-fragments/end-integration.md",
+      "sha256": "77e92b7ef7088ec7c017b6c6fda6c4c341d0819b012e540f42138d45a6251b58",
+      "bytes": 10153
+    }
+  ],
+  "privateReproductionAndEvidence": [
+    {
+      "path": ".cache/end-author/divergence-handoff.md",
+      "sha256": "2ef5010f29e123e065ea9a26a2b86cde2b22e8a88bc5593319a002cfe1ee03a5",
+      "bytes": 4128
+    },
+    {
+      "path": ".cache/end-author/inventory.json",
+      "sha256": "96e23662bb36d279f4f391bce48ad36f9a4b40fc18d230b181c9c359c0fbbbfa",
+      "bytes": 75282
+    },
+    {
+      "path": ".cache/end-author/schema.json",
+      "sha256": "55a7bf1c1513d15191b567abae024c2eb8aeea74b4c50f600f4043499f575e99",
+      "bytes": 35742
+    },
+    {
+      "path": ".cache/end-author/build.py",
+      "sha256": "e37a036c6c9b794700bf778d7caf0f0e0b2b804fb396f579275a48790cd41004",
+      "bytes": 1541
+    },
+    {
+      "path": ".cache/end-author/make-probe.py",
+      "sha256": "051f7d778a39ba33b1bdb595924fb313415ed6451c92270fdd1fca01f8cc38e9",
+      "bytes": 22317
+    },
+    {
+      "path": ".cache/end-author/make-binding.py",
+      "sha256": "77b2994ff7af063684bd4146e2660f9b6122848af61de5d1672b22d5c4e315f6",
+      "bytes": 13406
+    },
+    {
+      "path": ".cache/end-author/make-schema.py",
+      "sha256": "b0141a9047e1f77bd2cc5ef9c5bd5c57ae68c895f6e451ac099043d1f661f575",
+      "bytes": 4978
+    },
+    {
+      "path": ".cache/end-author/write-runtime.py",
+      "sha256": "736c01d1212aa7e093d3340616806fa4e1d115287e6032a21b9b0db9b71bb9ac",
+      "bytes": 11626
+    },
+    {
+      "path": ".cache/end-author/port-core.py",
+      "sha256": "fce75d84f516c1d9fdf65ddeeabbb17ff5e74906c45d32b4151d5a0c0b024fe0",
+      "bytes": 13431
+    },
+    {
+      "path": ".cache/end-author/scope.mjs",
+      "sha256": "96f771b2d5b59698eb0e7471d81b843fd2b63465f88e550d6a4a845f1dcecfb8",
+      "bytes": 10401
+    },
+    {
+      "path": ".cache/end-author/wrong-core-loader.mjs",
+      "sha256": "d011ec9d227dd51281de8a669f5ebfe0b1cf3285faa8fd7f77a298e6c59490c6",
+      "bytes": 311
+    },
+    {
+      "path": ".cache/end-author/final-input-hashes.json",
+      "sha256": "ad7d4d67f22650bfe5b4233af89c122d2b3213731cf5b16690e18c0744cac79f",
+      "bytes": 1067
+    },
+    {
+      "path": ".cache/end-author/reference-command.json",
+      "sha256": "95cfbcd406eba599fbb326db752821fce51b503ac48e87d0b39dbe4f83ea71ab",
+      "bytes": 1609
+    },
+    {
+      "path": ".cache/end-author/hybrid-command.json",
+      "sha256": "95efa2b2b810357eb718df05c4af803b4eccc8fefcff00940133f84188c94216",
+      "bytes": 1684
+    },
+    {
+      "path": ".cache/end-author/summary.json",
+      "sha256": "10548ec1e5d43a0b7b5a6c7d5522c0fbbe8ba9d73cf0c1a66f346e70647fc457",
+      "bytes": 1114
+    },
+    {
+      "path": ".cache/end-author/negative-summary.json",
+      "sha256": "e1334626b460c79bb0b6dfb88fca5eeb959391b9c9ff6face4320017ef0d13a6",
+      "bytes": 177
+    },
+    {
+      "path": ".cache/end-author/unit.log",
+      "sha256": "19a5f8df9a1d805dd80e4462f117118dbe07494ff40dd55596ba67eeb174e958",
+      "bytes": 151
+    },
+    {
+      "path": ".cache/end-author/metadata.log",
+      "sha256": "6defc0d7e61f5b60d56e647bc925fe26194f7ab0f504b7c65718a132a329a591",
+      "bytes": 175
+    },
+    {
+      "path": ".cache/end-author/scope.log",
+      "sha256": "ad497073a4fd7d8deb7d3fa534acb373edb6ea8d2afe18215f47f93ebd1f1271",
+      "bytes": 82
+    },
+    {
+      "path": ".cache/end-author/wrong-core-negative.log",
+      "sha256": "f14e96f9c89a5c79bce955cffad8be9be13786e9950351f44abb85babfe9827d",
+      "bytes": 956
+    },
+    {
+      "path": ".cache/end-author/reference-build.log",
+      "sha256": "ebea7be21379bb1d96f722a90e7db12b689ae4d65d86b71a0aa10e7f83470670",
+      "bytes": 22699
+    },
+    {
+      "path": ".cache/end-author/hybrid-build.log",
+      "sha256": "f5e48700c5805aa3dbfec1526cd651e97bfc0d6b449f863ef308a3b84ff83ff4",
+      "bytes": 22412
+    }
+  ],
+  "preparedDependencyProfile": [
+    {
+      "path": "nethack-c/upstream/src/end.c",
+      "sha256": "86076b732d630a31f1c596548631f1af8d033f2aa8bb5987daa53eb0bc02a424",
+      "bytes": 68186
+    },
+    {
+      "path": ".cache/wasm64-build/tree/src/end.c",
+      "sha256": "9190178742d65ea579645cfa365573a1c3f59cff7a5504856631c42a0c169296",
+      "bytes": 68996
+    },
+    {
+      "path": ".cache/wasm64-build/tree/src/objects.c",
+      "sha256": "1f1cc8de922d1f41f688da28b8d88d80eca2884619283b60f38418e7b965b340",
+      "bytes": 981
+    },
+    {
+      "path": ".cache/wasm64-build/tree/src/monst.c",
+      "sha256": "87d36f109b24f83d4e9c9c10193b977afe3aa8f2938d4fa92e4fbc28b353547d",
+      "bytes": 3010
+    },
+    {
+      "path": "nethack-c/wasm/compile-defines.json",
+      "sha256": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",
+      "bytes": 88
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/align.h",
+      "sha256": "963176a750f3e58ca29d4b5b13f2eaf51fefdbf66b7a1a681401092dd72f7cb2",
+      "bytes": 2588
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/amiconf.h",
+      "sha256": "beb7f834ff25a85cd9558eac49ce8de20ceff678e47fbbc10cb978bf18face59",
+      "bytes": 5384
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/artifact.h",
+      "sha256": "9cc7056e7808ff2e28732c74d58ae47fe2513e4ccc5b5073b544f58a2495ccff",
+      "bytes": 4392
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/artilist.h",
+      "sha256": "5375cf830dac26aefd5dbefe1ab5bd79a1f1988b770e7a4dee61b6453c1dd3d3",
+      "bytes": 14847
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/attrib.h",
+      "sha256": "f20418d80bc2983e3d9af6cc9a02d30f57aa6b54116691a8e4ebebd425de757d",
+      "bytes": 1266
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/botl.h",
+      "sha256": "c26c637bcb8b2615e82fbc0804175cd8c87f63a3caf35c742e0a6fa410a31009",
+      "bytes": 10324
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/color.h",
+      "sha256": "f7ab4cdf5113898bf58ba85217f5d693b8564c232ff706ee894fdf070a3a105b",
+      "bytes": 2294
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/config.h",
+      "sha256": "5585d9c88d7ea21a9a78b45616cc31ae4ea680cb7b34026f70f92b91288a499f",
+      "bytes": 26328
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/config1.h",
+      "sha256": "b9e97cefc8fcfe4f36a1145ebfb655099f2afd2591227fa5f93b3f4dc0071042",
+      "bytes": 5470
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/context.h",
+      "sha256": "e1303b7309e556c65e41ec120b704079da6a0c9ef73a08745663f7b923ad7eef",
+      "bytes": 7644
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/coord.h",
+      "sha256": "f8788b777ea0fc8e4f5df40ce7b9add1a255c5846bdd1393518f7ea14ef6e3d2",
+      "bytes": 433
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/cstd.h",
+      "sha256": "ef5e61d5eb7d1a5194c4a4544745a45893ccbea4c1cf083792235f562e173fc2",
+      "bytes": 2731
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/date.h",
+      "sha256": "0f6070303295e22d4e1a9855eeb3901c5346d66976050d6b2c8a7a12be3d15c0",
+      "bytes": 749
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/decl.h",
+      "sha256": "4782c5f522f6de63503cda131c0e2485aef31506d83dcfb32defeebf984fb470",
+      "bytes": 34805
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/defsym.h",
+      "sha256": "009ae2e8921fa4c376fe0ae3b4a42407421274fc15d1a8834c6ae519dad82f87",
+      "bytes": 24205
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/dgn_file.h",
+      "sha256": "ac01f085ac0827ee4720e9071d13a3fb9a274ced57d373e013a04a1f211d5551",
+      "bytes": 1848
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/display.h",
+      "sha256": "36e9f838d3298d047e0605abcf2deb627eb79c18aa72f770d5289c34f3692b4c",
+      "bytes": 47005
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/dlb.h",
+      "sha256": "5fd4e1563e5836cb707b691fe2d197e8d1619fc1d1ab8d77c0002a443049f7e9",
+      "bytes": 3881
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/dungeon.h",
+      "sha256": "e48eaafdb22fc82121de702086c40c3245d6aeb9fe5556712ee1e2f18744a308",
+      "bytes": 10758
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/engrave.h",
+      "sha256": "1c5617162ea649a0305df8d997b7a1075b35c9b3b97311cdfeebbd60bb9c482e",
+      "bytes": 1974
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/extern.h",
+      "sha256": "385f7478000f79ff137f2b6be533eef7b518b47a00b0d8c7e35ea52c877dec2e",
+      "bytes": 175910
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/flag.h",
+      "sha256": "bb28a3f835f3b38119f95311d76b535ef5053f3fffa42372d9f7b1c4c917806f",
+      "bytes": 29819
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/fnamesiz.h",
+      "sha256": "bd41c47c66e4213835bc1f052d831f8643bc7e7cb9aae0effb27f41edf1b5c35",
+      "bytes": 2138
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/func_tab.h",
+      "sha256": "6c47ccb85277800274a4b7f860ff6e1c25b75c5cb55d860745b7479f6f6105ba",
+      "bytes": 2131
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/global.h",
+      "sha256": "8ff55a3c6ee5cc18d00f1982146080d81e9e3dc9e369ab1ffc79890c07b8a8d0",
+      "bytes": 20030
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/hack.h",
+      "sha256": "5743a1707ce05e7a9a90e61657fde0ac066d48591f5d4fe80b1bdf959d94bce9",
+      "bytes": 58384
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/hacklib.h",
+      "sha256": "d9bf2b0ae2003c0611d2b9a351fdbbb30d58def2ecccc1235d4ed1e7b52e3c53",
+      "bytes": 3992
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/integer.h",
+      "sha256": "e88805c10f195e6de63b8c5cb46049f466ef040de9987a6ab61c36ef977f515a",
+      "bytes": 4488
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/isaac64.h",
+      "sha256": "3d51f55fbe014cce77b53f7dec22d7ed11cab709f085a9ebfac87eeebb1f0e66",
+      "bytes": 3260
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/lint.h",
+      "sha256": "bb08d5658f43c87c2b5129a33cb4e3264693e68d3cd654c67a5ecd757c98adcc",
+      "bytes": 3141
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/mail.h",
+      "sha256": "8041ce36aef1bb8d49984e0e51f62fb31cd8edf559b19ab963853ef31f2f5ac2",
+      "bytes": 845
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/mcastu.h",
+      "sha256": "ffe15f5e89de7f561b92052ccfdaf8556c1e6d80a6dbb35675fb997c67deebe4",
+      "bytes": 1598
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/mextra.h",
+      "sha256": "e78bdfa21d4fd7718f1a25ed8f1ef466c96c2bd49f2069af7d1ab346148a1229",
+      "bytes": 9207
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/mfndpos.h",
+      "sha256": "4711c0e5c67ae88a6a28c776bc542d0d06452d742456964b77913e896b5f56f5",
+      "bytes": 1575
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/micro.h",
+      "sha256": "4d9579d27ae8dd08ca562810e87d40c2984dfa92c5c3b51839ee2f4882080b6b",
+      "bytes": 491
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/mkroom.h",
+      "sha256": "7baf848feb30c94c196e6bee2ee7f0a83822ad92042dd855b74d212fde514f5a",
+      "bytes": 5149
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/monattk.h",
+      "sha256": "00c2283c2687f2dd5fa8a3088623cd621822289018c0072db9cad5a2a94883ba",
+      "bytes": 4711
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/mondata.h",
+      "sha256": "6f1ca3db69a5cfbe425859fe1c7decfa1da1fdac45af9d8a84be5f0f8c9c21f2",
+      "bytes": 14764
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/monflag.h",
+      "sha256": "89e4ef1dc1cd46fa8d81ff833351934c666420abdf902286bdacdca0bb171d88",
+      "bytes": 11025
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/monst.h",
+      "sha256": "08e9e2251ac5c3beedb8700dd56287f9f397b506851ceb44a37e41b6d80067a6",
+      "bytes": 12413
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/monsters.h",
+      "sha256": "c63db922770c96a9956d221f364ba4368a9f81f81c8d64ed28251a0506d4a906",
+      "bytes": 190371
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/nhlua.h",
+      "sha256": "48553ca9ab16ac2928479cabdf51d7f090fc38e1641dd5d97d819f612c6d87d9",
+      "bytes": 239
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/nhmd4.h",
+      "sha256": "e82ec33c65922977be2346fcc136ec34ed8e29947e4477741a21301f146391a0",
+      "bytes": 1059
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/nhregex.h",
+      "sha256": "a2936fd291537090773d861c083c3574c7a0a798c688e87dedb4405f73de653f",
+      "bytes": 583
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/obj.h",
+      "sha256": "a4d1b994c5acd6fe04d411485d84491553d6df02dfbd7480181a15a7a05456e2",
+      "bytes": 26902
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/objclass.h",
+      "sha256": "101f92e0024e4404033845fb15171f8ed4b79374907a6a172b4eb7b026e1eb52",
+      "bytes": 7820
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/objects.h",
+      "sha256": "eb573ca76f7afe35d6420b958333fbb3c44911415df4e0034e6367456e2913cb",
+      "bytes": 95055
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/optlist.h",
+      "sha256": "23dafb109132dd63bbfe704b39fac8cccaaeee31a0dbd895c7ba928bd92af9b8",
+      "bytes": 46241
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/patchlevel.h",
+      "sha256": "4389b12b496c9611fb392ee509d0ebaad2f10449ff3ef697f1ad416a207b0a97",
+      "bytes": 25704
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/pcconf.h",
+      "sha256": "c8f22aca7458c1527fbb8362efbb725744ede2edb92185381b7de21fd8693b99",
+      "bytes": 8818
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/permonst.h",
+      "sha256": "bcdb24d041e3df909cf483efb576fa7fc5e18debf03d11e8e43c1aa87c655bf4",
+      "bytes": 3500
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/prop.h",
+      "sha256": "682e85c7ab20c1dc7b30115b2a3e850d564cc2ed341edfa782fec9d0dfea0761",
+      "bytes": 5585
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/quest.h",
+      "sha256": "87b6649d82b6fd4a24d004fcd48c1d9650345e719cf8dc196ae6c99b483e2a5a",
+      "bytes": 2297
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/rect.h",
+      "sha256": "dee168e068baa3aa15748725752d07659f8cb4e471116f7fab4acf080dc69f90",
+      "bytes": 386
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/region.h",
+      "sha256": "adc4682b6a15213f71f3bb534b8705c4385153ca9db7512c118474b0fb4f1191",
+      "bytes": 2992
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/rm.h",
+      "sha256": "da2ae88d704a358474c6986a3f4763e62053b96a6e60a475879029e658996af7",
+      "bytes": 20436
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/savefile.h",
+      "sha256": "6847e12dca1eb25b38baa69f6227554669f8a64f5966a1879a5cf2b23732749e",
+      "bytes": 28360
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/seffects.h",
+      "sha256": "f64099054ab366a1eaccd58901a98cef49a84c1f047c5923de20b4432654de02",
+      "bytes": 6001
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/selvar.h",
+      "sha256": "49b8be43b8bfd7b4f18cb59d1179e8ad28a708a06c0fbc985c65b365ab9a3acf",
+      "bytes": 366
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/sfmacros.h",
+      "sha256": "4ea0c088308a08b002b553d7633b3b729aee66d4c71b2974751d6b3eccfbb209",
+      "bytes": 1564
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/sfprocs.h",
+      "sha256": "89f96065e62ea60dbc46dbef2f9762242a8562b189dbcd6038af063424438b56",
+      "bytes": 6299
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/skills.h",
+      "sha256": "d67ac10770b8aff667c163e93020b8974e53f12eede903f10bf026d351b2c238",
+      "bytes": 4657
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/sndprocs.h",
+      "sha256": "4d105334e499c3fb4af00fcd1acf48802a8db5ccf799bd31bfafc2afaa286654",
+      "bytes": 11111
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/sp_lev.h",
+      "sha256": "a48d5bd2d9a5b20b474b790d52f4f19179678c87ec0b51019e39dc6684d7a6bf",
+      "bytes": 5201
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/spell.h",
+      "sha256": "dc1e454c0214ea1cc20f4ea1e19cd4447a5ca9533610769fafe8cdd60206b37f",
+      "bytes": 1240
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/stairs.h",
+      "sha256": "fe016a6ef8194099d504bbf48f58e1e3c6a923413a07c28377409cacc1e2b42b",
+      "bytes": 661
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/sym.h",
+      "sha256": "cea14c200c9f1e90ebe890804b46af7005c889d90917cb0608ad6058614e3db4",
+      "bytes": 5209
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/sys.h",
+      "sha256": "e193f46309925a4b14394a503b3e9a7bc19e5745bb539137ca10ec0898e3951b",
+      "bytes": 2424
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/tcap.h",
+      "sha256": "eeb713779ef8a1483efbea0427cf4eb7549365d2bc1b010107912d982a1e235d",
+      "bytes": 1688
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/tile2x11.h",
+      "sha256": "c8c658c56a08ec43bf8eb0b81673f04f380537a722dae4963be2a9d318ff4cb7",
+      "bytes": 767
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/tileset.h",
+      "sha256": "9fb5634389613e2528704caba09c21cd2007179f3f6528fcfb8977f1ee332282",
+      "bytes": 1501
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/timeout.h",
+      "sha256": "5f76ff41cc5435cc8a3e30b28f51c6adbfe42e2bf4a0354ba0a9f850a5ce515a",
+      "bytes": 2715
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/tradstdc.h",
+      "sha256": "a1246d1acdf317c36990946e1d8bde33f63e3ba779ed5696a4ee03c7ac4f4401",
+      "bytes": 18528
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/trap.h",
+      "sha256": "469afec3e29d7aec1aa8efd407ad23d24ef069010820082b5596537b9290eb6b",
+      "bytes": 4609
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/unixconf.h",
+      "sha256": "0cbf3370472b030e8583e922e05e8e055738896954cbbdc1e1e18d0938559723",
+      "bytes": 14656
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/vision.h",
+      "sha256": "415b7e5751194cb7de57c192103d396a2971400e603fd62bf56330304014ac13",
+      "bytes": 2556
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/vmsconf.h",
+      "sha256": "a15f393613c8b63278a83748fa4b130e3826d65c7156b6f20ca2c61a0794e20e",
+      "bytes": 10383
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/warnings.h",
+      "sha256": "ccf0c3e66bb442b0d8c05844103065fccf3fa7a894bba007425258e1d089f981",
+      "bytes": 4951
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/weight.h",
+      "sha256": "ac168750ddcde6c592ccbeaaf44c59921cc1f73ed36d269f20364b0e08b91cd1",
+      "bytes": 1731
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/winX.h",
+      "sha256": "9ff1338cceced7f5335379d90cdebadc6e1065d64c4509cf518c0f497ff0f28d",
+      "bytes": 20883
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/winami.h",
+      "sha256": "eb0864330b27a436acf3bb092ee1ea492a890d4a6cfc9604a25ffdb3f73df754",
+      "bytes": 4785
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/wincurs.h",
+      "sha256": "d58fd52046a1d35b24e65d4eecc2cef851c370f1248f40d2e58eec1a9d04fcd8",
+      "bytes": 9983
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/windconf.h",
+      "sha256": "eddba5996f97ff32ce554236be187de0147ab8b7fffa4d31c40fc0d00354947b",
+      "bytes": 9056
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/winprocs.h",
+      "sha256": "eebf4dbb4149d3a153a1dc815795baabe33a59d13362e00089d21ee9ce89983c",
+      "bytes": 18220
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/wintty.h",
+      "sha256": "96898d81147193d8d3785756011ae13f40967cbe947bf5fe35f3f2f4e6f15f89",
+      "bytes": 12974
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/wintype.h",
+      "sha256": "e5bfd60534831210bdace1ba6eaef62f65d16dab8d8ac0fcddadebd000d53698",
+      "bytes": 7724
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/xwindow.h",
+      "sha256": "3a646862b59bc886df8775065c75a55324c611c01f43f57eb6f6b2345564aec6",
+      "bytes": 3763
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/xwindowp.h",
+      "sha256": "af1dac3806cd2199b2e5127b41ac2ae56e5443ef4b7835fd69f6ea4ae5411db6",
+      "bytes": 1573
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/you.h",
+      "sha256": "d19cfa0233582f1ad550b9dfc788f26166f3ff21225e3d8a0cd43b6de2094289",
+      "bytes": 25173
+    },
+    {
+      "path": ".cache/wasm64-build/tree/include/youprop.h",
+      "sha256": "9c4e25bc385c405226085ae3526dc165bd9397ce922b8a18a46f67de21683a2f",
+      "bytes": 17700
+    },
+    {
+      "path": ".cache/ncurses-wasm64-build/include/config.h",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".cache/ncurses-wasm64-build/include/curses.h",
+      "sha256": "a2d32dcf9eb6b630cd3d9e14161ff2c378c922c1282e342b70e49fedee5db82c",
+      "bytes": 83297
+    },
+    {
+      "path": ".cache/ncurses-wasm64-build/include/hashsize.h",
+      "sha256": "3d0a04f0bf84ff1c8b775b39ac28c7a813964e7a0df380767795701db406c061",
+      "bytes": 119
+    },
+    {
+      "path": ".cache/ncurses-wasm64-build/include/ncurses_cfg.h",
+      "sha256": "66ec2e1845f122e6db49c9ec6f7c5e717298b9c76153f9cce86ba6c14e699092",
+      "bytes": 7383
+    },
+    {
+      "path": ".cache/ncurses-wasm64-build/include/ncurses_def.h",
+      "sha256": "1cff0da3682d5c7cd297fd26cb09648690279eb4f549e8af422a7756f7ac57d8",
+      "bytes": 13942
+    },
+    {
+      "path": ".cache/ncurses-wasm64-build/include/ncurses_dll.h",
+      "sha256": "8ce112a66482f18fa5e0378b46a4f028b21a80f8e6c43815c562ad0d6b7ed727",
+      "bytes": 4183
+    },
+    {
+      "path": ".cache/ncurses-wasm64-build/include/parametrized.h",
+      "sha256": "849e0d72ee005acae7628ffe05e0784ebc9463658ba73f9a39ca199ae8f96b66",
+      "bytes": 7074
+    },
+    {
+      "path": ".cache/ncurses-wasm64-build/include/term.h",
+      "sha256": "bb3cc663684daf037a3d179f07a547e1c3a7b31f8520c19f000c992f4dbf63bc",
+      "bytes": 40986
+    },
+    {
+      "path": ".cache/ncurses-wasm64-build/include/termcap.h",
+      "sha256": "6ab2d763ee6ba86cd4ee15ee2a2e93a60e1856e96c4230d9680c282d530a0ae6",
+      "bytes": 3468
+    },
+    {
+      "path": ".cache/ncurses-wasm64-build/include/unctrl.h",
+      "sha256": "33d97eb149fae7822e266b99aba1f1652b29b09aa8d934cf399cab59aa720e7a",
+      "bytes": 3177
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".cache/end-author/reference.mjs",
+      "sha256": "75887519e1d1a57d7adeb138644556efa295fed1db72a0fc25e5e834db338be6",
+      "bytes": 13603
+    },
+    {
+      "path": ".cache/end-author/reference.wasm",
+      "sha256": "e882ab6802decf866a6c8ac519f101b4925bedd25a47ac8aac340b3d725d879b",
+      "bytes": 91222
+    },
+    {
+      "path": ".cache/end-author/hybrid.mjs",
+      "sha256": "e4db3402fd1a258cbf72e32c737a2fca48e1e4595641389733382c431db2b517",
+      "bytes": 41093
+    },
+    {
+      "path": ".cache/end-author/hybrid.wasm",
+      "sha256": "3e084cdbd9c361304edde7c362eaa447fdc4e7fd2e5650057a6de333c6e9f944",
+      "bytes": 85244
+    }
+  ]
+}
