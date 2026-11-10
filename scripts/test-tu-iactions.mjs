@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('iactions', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/iactions-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/iactions-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/iactions-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import * as actions from '../js/ported/iactions.js';
@@ -9,7 +11,7 @@ const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',impor
 const modules=[await referenceFactory(),await hybridFactory({nethackPorted:createPortedRuntime(layouts)})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function bytes(m,p,n){p=Number(p);if(n===undefined){if(!p)return null;let e=p;while(m.HEAPU8[e])e++;n=e-p;}return Buffer.from(m.HEAPU8.slice(p,p+n));}
 function snapshot(m){return {rows:Array.from({length:m._probe_menu_count()},(_,i)=>({id:m._probe_menu_action(i),letter:m._probe_menu_letter(i),text:bytes(m,m._probe_menu_text(i)),anything:bytes(m,m._probe_menu_any(i),Number(m._probe_any_size()))})),output:[0,1].map(i=>bytes(m,m._probe_output(i),Number(m._probe_output_size()))),freed:m._probe_freed(),live:m._probe_live(),trace:bytes(m,m._probe_trace()).toString('hex')};}
-function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){const result=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(result[1],result[0],`${name}(${args})`);state();comparisons++;return result[0];}
 function reset(){call('reset');}
 function item(type=layout.DAGGER,{quantity=1n,worn=0n,known=0,dknown=0,lit=0,unpaid=0,cknown=0,artifact=0,spe=0,letter=97}={}){call('item',type,quantity,worn,known,dknown,lit,unpaid,cknown,artifact,spe,letter);}
@@ -45,7 +47,7 @@ reset();call('equipment',0,1,layout.LONG_SWORD);call('equipment',1,2,layout.LONG
 reset();item(layout.ARROW,{quantity:9007199254740993n});call('equipment',2,1,layout.LONG_SWORD);call('equipment',0,2,layout.BOW);call('run');assert.ok(has(layout.IA_FIRE_OBJ));assert.ok(snapshot(modules[0]).rows.find(r=>r.id===layout.IA_FIRE_OBJ).text.toString().includes('Shoot'));
 reset();call('select',1,layout.IA_WHATIS_OBJ,1n);call('run');assert.equal(call('freed'),1);assert.ok(trace().includes('dowhatis'));
 reset();call('option',12,1);call('run');assert.ok(call('menu_count')>3);assert.ok(trace().includes('dodrop'));assert.ok(trace().includes(`key:${layout.CQ_CANNED}:98;`));
-reset();item(layout.DAGGER,{unpaid:1});call('option',6,1);call('option',7,1);call('option',13,1);const callbackSizes=modules.map(m=>m.HEAPU8.byteLength);call('run');modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>callbackSizes[i]));assert.ok(trace().includes('shop:-128;'));assert.ok(has(layout.IA_BUY_OBJ));
+reset();item(layout.DAGGER,{unpaid:1});call('option',6,1);call('option',7,1);call('option',13,1);const callbackSizes=modules.map(m=>allocationMetric(m));call('run');modules.forEach((m,i)=>assert.ok(allocationMetric(m)>callbackSizes[i]));assert.ok(trace().includes('shop:-128;'));assert.ok(has(layout.IA_BUY_OBJ));
 reset();const saved=snapshot(modules[0]);modules[1]._probe_push(layout.IA_EAT_OBJ);assert.deepEqual(snapshot(modules[0]),saved);reset();
-const sizes=modules.map(m=>m.HEAPU8.byteLength),grown=modules.map(m=>m._malloc(BigInt(m.HEAPU8.byteLength)+16n*1024n*1024n));assert.ok(grown.every(Boolean));modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>sizes[i]));item(layout.POT_OIL,{quantity:9007199254740993n});call('known',1);call('names',3,2);call('select',2,layout.IA_QUAFF_OBJ,9223372036854775807n);call('run');assert.equal(call('freed'),1);modules.forEach((m,i)=>m._free(grown[i]));state();
-console.log(`IACTIONS: ${comparisons} original-C/hybrid catalogue, naming, menu-union, selection ownership and command-queue comparisons passed.`);
+const sizes=modules.map(m=>allocationMetric(m)),grown=modules.map(m=>m._malloc(BigInt(allocationMetric(m))+16n*1024n*1024n));assert.ok(grown.every(Boolean));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));item(layout.POT_OIL,{quantity:9007199254740993n});call('known',1);call('names',3,2);call('select',2,layout.IA_QUAFF_OBJ,9223372036854775807n);call('run');assert.equal(call('freed'),1);modules.forEach((m,i)=>m._free(grown[i]));state();
+console.log(`IACTIONS: ${comparisons} ${referenceLabel}/hybrid catalogue, naming, menu-union, selection ownership and command-queue comparisons checked.`);

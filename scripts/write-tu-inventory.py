@@ -41,7 +41,7 @@ def main():
         cells = [cell.strip() for cell in line.split("|")]
         if len(cells) >= 7 and cells[1].isdigit():
             source, state = cells[2].strip("`"), cells[4]
-            if state not in ("Passed", "In progress"):
+            if state not in ("Passed", "In progress", "Canonical restored"):
                 raise ValueError(f"Unrecognized migration state: {state!r}")
             if not (UPSTREAM / source).is_file():
                 raise ValueError(f"Missing ledger source: {source}")
@@ -68,9 +68,10 @@ def main():
         "`TARGET_HACKLIB` separately from `HOBJ`. Selection can include a pending",
         "replacement and does not certify its gates have passed.",
         "",
-        f"Migration ledger: **{counts['Passed']} Passed**, **{counts['In progress']} In progress**,",
+        f"Migration ledger: **{counts['Passed']} Passed**, **{counts['Canonical restored']} Canonical restored**, **{counts['In progress']} In progress**,",
         f"**{len(sources) - len(states)} Not started** across all inventoried sources.",
-        "Only `Passed` in [PORTING_PROGRESS.md](PORTING_PROGRESS.md) establishes completion;",
+        "`Passed` in [PORTING_PROGRESS.md](PORTING_PROGRESS.md) records validated translations;",
+        "`Canonical restored` records reused frozen infrastructure separately.",
         "registry membership alone does not. Sources outside the selected game are",
         "labelled `Other target / utility`; their compilation and portability are unverified.",
         "",
@@ -94,7 +95,7 @@ def main():
                      f"{scope} | {states.get(path, 'Not started')} |")
     (ROOT / "TU_INVENTORY.md").write_text("\n".join(lines) + "\n")
     print(f"{len(sources)} original C sources; {len(game_paths)} uniquely mapped game sources; "
-          f"{counts['Passed']} passed; {counts['In progress']} in progress; "
+          f"{counts['Passed']} passed; {counts['Canonical restored']} canonical restored; {counts['In progress']} in progress; "
           f"{len(ambiguous)} ambiguous; {len(missing)} unmatched")
 
 

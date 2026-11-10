@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('mkmap', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/mkmap-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/mkmap-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/mkmap-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -11,7 +13,7 @@ const stacks = modules.map(m => m._probe_stack());
 let comparisons = 0;
 function bytes(m, ptr, length) { const start = Number(ptr); if(length === undefined) { let end=start;while(m.HEAPU8[end])end++;length=end-start;}return Buffer.from(m.HEAPU8.slice(start,start+length)); }
 function snapshot(m) {return {storage:Array.from({length:5},(_,i)=>bytes(m,m._probe_snapshot_pointer(i),Number(m._probe_snapshot_size(i)))),scalars:Array.from({length:7},(_,i)=>m._probe_scalar(i)),random:m._probe_rng_state()>>>0,count:m._probe_rng_count(),trace:bytes(m,m._probe_trace()).toString('hex')};}
-function state() {assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function state() {assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args) {const values=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(values[1],values[0],`${name}(${args})`);state();comparisons++;return values[0];}
 function both(name,...args) {modules.forEach(m=>m['_probe_'+name](...args));}
 function reset(seed=1){call('reset',seed);}
@@ -57,4 +59,4 @@ for(const [smooth,join,wall] of [[0,1,256],[256,256,1],[255,255,-1]]){reset(37);
 reset(17);call('options',0,0,1);call('lit',-1);call('init',layout.STONE);call('fill',layout.STONE,layout.ROOM);call('pass',2,layout.STONE,layout.ROOM);
 reset(7);const isolated=snapshot(modules[0]);modules[1]._probe_init(layout.TREE);assert.deepEqual(snapshot(modules[0]),isolated);reset(7);
 const grown=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(grown.every(Boolean));call('init',layout.STONE);call('fill',layout.STONE,layout.ROOM);call('pass',2,layout.STONE,layout.ROOM);call('join',layout.STONE,layout.ROOM);modules.forEach((m,i)=>m._free(grown[i]));state();
-console.log(`MKMAP: ${comparisons} original-C/hybrid terrain, scratch-buffer, flood, room-copy, lighting and RNG-site comparisons passed.`);
+console.log(`MKMAP: ${comparisons} ${referenceLabel}/hybrid terrain, scratch-buffer, flood, room-copy, lighting and RNG-site comparisons checked.`);

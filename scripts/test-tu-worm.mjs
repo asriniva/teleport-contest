@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('worm', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/worm-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/worm-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/worm-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -12,7 +14,7 @@ function text(m,p){if(!p)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;r
 function bytes(m,p,n){return Buffer.from(m.HEAPU8.slice(Number(p),Number(p)+n));}
 function normalize(m,s){const known=new Map();for(let i=0;i<8;i++)known.set(`0x${BigInt(m._probe_pointer(0,i)).toString(16)}`,`<mon${i}>`);return s.replace(/0x[0-9a-f]+/gi,token=>known.get(token.toLowerCase())??token);}
 function snapshot(m){return {state:text(m,m._probe_snapshot()),trace:normalize(m,text(m,m._probe_trace())),rng:m._probe_rng_state()>>>0,count:m._probe_rng_count(),io:bytes(m,m._probe_pointer(2,0),m._probe_io_length()),position:m._probe_io_position(-1)};}
-function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){const idx={hero:1,monster_field:2,prop:2,set_time:1}[name];if(idx!==undefined)args[idx]=BigInt(args[idx]);const out=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(out[1],out[0],`${name}:${args}`);comparisons++;check();return out[0];}
 function reset(s=1){call('reset',s);}
 function act(op,i=0,a=0,b=0,c=0,d=0){return call('action',op,i,a,b,c,d);}
@@ -88,7 +90,7 @@ linear(4);time(1,-((1n<<53n)+7n));mf(0,2,1);act(1,1,0);time(2,(1n<<53n)+9n);mode
 for(const input of [0,1])for(const nested of [0,1]){linear(2);mf(1,21);if(input){mode(L.WRITING|L.FREEING);act(11);mode(L.READING);}else mode(L.WRITING);opt(20,2);opt(22,nested);const before=modules[0]._probe_free_count();act(input?12:11);assert.equal(fields('w1')[0],nested?'1107':'1100');assert.equal(act(19),2n);assert.equal(modules[0]._probe_free_count(),before+1);assert.ok(trace().includes(`after-alias:${nested?1107:1100};`));assert.equal(modules[0]._probe_rng_count(),0);if(nested){assert.ok(trace().includes('same-time-address:1;'));assert.ok(trace().includes('nested-time:1107;'));}}
 
 // Growth/reentry preserves real lists, borrowed cells, map rows and allocator ownership across callbacks.
-for(const stage of [1,2,3,4,5,6,7,8,9,10]){linear(3);opt(30,stage);opt(31,stage);const before=modules.map(m=>m.HEAPU8.byteLength);if(stage===1)act(26);else if(stage===2){time(1,1);mf(1,21);act(4);}else if(stage===3){hero(0,18);act(7);}else if(stage===4){rng([19,0,...Array(30).fill(0)]);act(8,0,18,10,1);}else if(stage===5){act(16);act(17,0,20,10);}else if(stage===6)act(10,0,1);else if(stage===7)act(3,0,1);else if(stage===8||stage===10){mode(L.WRITING);act(11);}else{mode(L.WRITING|L.FREEING);act(11);mode(L.READING);act(12);}assert.ok(trace().includes(`grew:${stage};`),`growth stage ${stage}`);assert.ok(trace().includes('nested-slot:'));modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>before[i]));}
+for(const stage of [1,2,3,4,5,6,7,8,9,10]){linear(3);opt(30,stage);opt(31,stage);const before=modules.map(m=>allocationMetric(m));if(stage===1)act(26);else if(stage===2){time(1,1);mf(1,21);act(4);}else if(stage===3){hero(0,18);act(7);}else if(stage===4){rng([19,0,...Array(30).fill(0)]);act(8,0,18,10,1);}else if(stage===5){act(16);act(17,0,20,10);}else if(stage===6)act(10,0,1);else if(stage===7)act(3,0,1);else if(stage===8||stage===10){mode(L.WRITING);act(11);}else{mode(L.WRITING|L.FREEING);act(11);mode(L.READING);act(12);}assert.ok(trace().includes(`grew:${stage};`),`growth stage ${stage}`);assert.ok(trace().includes('nested-slot:'));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));}
 setup(1);opt(0,0);mf(1,21);rng([0,0,0]);act(4);assert.ok(trace().includes('@;'));
 linear(2);time(1,(1n<<53n)+3n);const held=snapshot(modules[1]);const other=await hybridFactory({nethackPorted:runtime});other._probe_reset(77);other._probe_monster_field(0,0,1n);other._probe_action(1,0,2,0,0,0);assert.equal(other._probe_action(19,0,0,0,0,0),2n);other._probe_action(6,0,0,0,0,0);assert.equal(other._probe_free_count(),3);assert.deepEqual(snapshot(modules[1]),held);comparisons+=3;check();
-console.log(`WORM C/hybrid differential: ${comparisons} comparisons passed`);
+console.log(`WORM ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);

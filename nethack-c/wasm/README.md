@@ -11,15 +11,16 @@ for every inherited patch, additional source change, build setting, compatibilit
 replacement and known limitation. The reference submodule is unedited, but the
 source copy used to build the executable is modified.
 
-**Current change:** shadow capture is again the default. The build retains
-NetHack's TERMINFO/TERMLIB path and links real wasm64 ncurses terminfo, using a
-pinned macOS xterm-256color database entry. The earlier ANSI shortcut and custom
-tputs stub are removed. Public results after recorder encoding, bones and recording-clock fixes:
-**44/44 sessions**, **11,405/11,405 screens**, **792,838/792,838 RNG calls**,
-**1,483/1,483 animation frames**; no
-runtime errors. Capability parity and timezone/macOS checks pass. The historical
-22/44 shadow+ANSI and 0/44 Ghostty+ANSI scores describe the earlier builds.
-See [active changes N01–N05](../../UPSTREAM_DIVERGENCES.md#current-status-shadow-capture-and-real-terminfo).
+**Current change:** all three frozen file copies, canonical PRNG/VFS use, and
+scoring overlays remain restored. The extra screen conversion has been reverted:
+input and animation snapshots again use the original recorder shadow encoding,
+without DEC-to-Unicode conversion or canonical Terminal reserialization. Ghostty
+remains removed from the active game adapter. Verified public result: **44/44
+sessions**, **11,405/11,405 screens and cursors**, **792,838/792,838 RNG calls**,
+**1,483/1,483 animation frames**, no runtime errors. Recorder/profile checks and
+timezone/macOS/bones integration pass. The 25/44 result belongs to the reverted
+FR03 path. Real ncurses terminfo and the remaining Wasm engine are unchanged. See
+[FR01–FR05](../../UPSTREAM_DIVERGENCES.md#active-frozen-infrastructure-restoration-fr01fr04).
 
 From the repository root:
 
@@ -129,26 +130,72 @@ processes, compares each replay under simulated winter and summer clocks, and
 checks the macOS apple message, option layout, corpse prompt and version/help
 features. The full public suite still checks the unchanged frozen comparator.
 
-## Temporary terminal backend
+## Historical terminal backend
 
-Ghostty is retained only for explicit diagnostic use; it is no longer the
-default or downloaded by normal setup. To enable it:
+Ghostty's implementation and setup script remain as standalone development
+artifacts. The active game adapter no longer selects it, including when
+`TELEPORT_TERMINAL=ghostty` is set. All scoring screens use the restored recorder
+shadow encoding. `node scripts/test-terminal.mjs` can still exercise the emulator
+separately after its dependency is installed.
 
-```sh
-bash nethack-c/setup-terminal.sh
-TELEPORT_TERMINAL=ghostty bash scripts/score-wasm.sh
-```
+`bash scripts/test-wasm.sh` checks native/Wasm terminfo, recorder screen
+encoding, and timezone/macOS regressions. The frozen harness and recordings
+remain unchanged. Browser integration is unverified.
 
-The existing `write(bytes)`, `writeByte(byte)`, `snapshot()` and `dispose()`
-interface remains available for replacing this optional emulator with pure JS.
-Its Unix tty LF conversion, G1 initialization and serialization choices are
-listed under G01–G08 in the register. They are not used by shadow capture.
+## Native C parity coverage
 
-`bash scripts/test-wasm.sh` compares the actual native and wasm64 terminfo API
-results, verifies default shadow capture, and runs timezone/macOS regressions.
-With explicit Ghostty mode it additionally runs the emulator's focused checks.
-The frozen harness and recordings remain unchanged. Browser integration is
-unverified.
+`npm run test:native` (or `bash scripts/test-native-tu.sh`) rebuilds and runs
+shared behavioral scenarios for every one of the **50** registered ported C
+translation units. To select TUs, use `bash scripts/test-native-tu.sh were rnd`.
+The main `test:wasm` command also requires these checks to pass.
+
+Validation on 2026-11-09: **50/50 native scenario groups**, **106,676 observations**,
+all four additional pristine-source variants, and **50/50** existing detailed
+Emscripten suites pass. An intentionally mutated JS RNG is rejected; source
+preservation and lexical-scope checks pass.
+
+Each scenario is compiled three ways: a real host executable using the native
+Clang/libc/ABI, Emscripten C, and Emscripten C calling the JavaScript implementation.
+The native executable produces fresh expected output. Tests compare results,
+string/byte content, fixture callback traces, RNG consumption and selected state;
+they never compare process addresses. Missing binaries, crashes, empty output,
+mismatches, changed source or stale case files fail the test. Per-TU build
+commands/source hashes and mismatch transcripts live under
+`.cache/tu-probes/native-oracles/`; `.cache/native-tu-results.json` records results.
+
+The previous `test-tu-*.mjs` suites compared **Emscripten C against JavaScript**.
+Their result labels now say so. Native coverage supplements those detailed
+suites; it does **not** replay every existing assertion on the host. Existing
+full-game recordings came from the native **patched recorder**, not pristine
+NetHack. The terminfo and compression interoperability suites already used
+native libraries/tools independently.
+
+For 46 TUs, the compiled algorithm source is byte-identical to upstream, checked
+at build time. Four TUs also get a separate executable compiled directly from
+the pristine upstream algorithm:
+
+| TU | Native upstream check and deliberate recorder distinction |
+| --- | --- |
+| `calendar` | Explicit-date formatting/parsing matches upstream. A fixed fixture clock makes native execution reproducible. Separately assert that upstream ignores `NETHACK_FIXED_DATETIME` while the recorder honors it. |
+| `date` | Version/build metadata matches upstream with compiler build time pinned via `SOURCE_DATE_EPOCH`; the prepared source retains its inherited fixed-banner patch. |
+| `rnd` | Seeded core/display draws, dice, luck and scaling match upstream. Upstream has no recorder logging inspectors, so those unused probe inspectors are omitted from its test wrapper, without adding fake logging functions. |
+| `unixtty` | Terminal state transitions match upstream with NOMUX disabled. The existing Emscripten suite still tests recorder-only NOMUX synthesis; that path is not a claim of pristine upstream equivalence. |
+
+These are isolated **native algorithm** oracles, sharing the existing fixture
+callbacks and prepared NetHack configuration headers. They are not pristine,
+independently configured whole-game executables. Native support excludes the
+Wasm-to-JavaScript ABI adapter. Two harmless global-storage fixtures remain for
+getline/ioctl; version uses the existing controlled metadata/regex dependency.
+Native stack/heap helper headers provide a real frame address and a fixture
+allocation size only; Wasm linear-memory growth and stack restoration remain
+covered by the detailed Emscripten tests.
+
+Host-specific constants are checked semantically: terminal traces validate
+`_PC_VDISABLE` before spelling it symbolically, and system initialization checks
+both configured `PANICTRACE_LIBC` branches, including preservation when absent.
+The native scenarios run in UTC; the existing Emscripten calendar suite retains
+its five-timezone coverage. These checks establish only the exercised behavior,
+not exhaustive native equivalence or a new full-game score.
 
 ## Compression service and recording profile
 

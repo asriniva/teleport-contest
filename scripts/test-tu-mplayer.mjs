@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('mplayer', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/mplayer-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/mplayer-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/mplayer-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -12,7 +14,7 @@ const stacks = modules.map(module => module._probe_stack());
 let comparisons = 0;
 function scope() {
     assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
-    modules.forEach((module, i) => assert.equal(module._probe_stack(), stacks[i]));
+    modules.forEach((module, i) => assertStackRestored(module, stacks[i]));
 }
 function bytes(module, pointer) {
     if (!pointer) return null;
@@ -142,12 +144,12 @@ for (const peaceful of [0, 1]) for (const sameRole of [0, 1]) for (const copied 
 // Disabled logging at a new site preserves its old caller annotation.
 call('reset', 1); rng([0]); dev(); existing(layout.PM_ARCHEOLOGIST, 'Player', 1); call('option', 10, 0); call('clear'); rng([0]); call('talk', 0, 0, 0);
 assert.ok(trace().includes(':dev_name;'));
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 verifyLiteral();
 call('reset', 99); call('option', 1, 1); call('option', 6, 1); call('make', layout.PM_WIZARD, 10, 11, 1); call('create', 2, 0);
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
 const before = state(); independent._probe_reset(2); independent._probe_make(layout.PM_KNIGHT, 10, 11, 0); independent._probe_create(1, 0);
 assert.deepEqual(state(), before); scope(); comparisons++;
-console.log(`MPLAYER: ${comparisons} original-C/hybrid developer-name, role-equipment, temporary-copy, retry, talk-identity and RNG-site comparisons passed.`);
+console.log(`MPLAYER: ${comparisons} ${referenceLabel}/hybrid developer-name, role-equipment, temporary-copy, retry, talk-identity and RNG-site comparisons checked.`);

@@ -18,7 +18,7 @@ const { parse, version } = await import(pathToFileURL(join(sdk,
 // imported or accessed through the TU's explicit C environment.
 const builtins = new Set([
     'undefined', 'NaN', 'Infinity', 'Math', 'BigInt', 'Number', 'Boolean',
-    'Int32Array', 'Uint8Array', 'BigUint64Array',
+    'Int8Array', 'Int32Array', 'Uint8Array', 'BigUint64Array',
 ]);
 
 function checkSource(source, filename) {

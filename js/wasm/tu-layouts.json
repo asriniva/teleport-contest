@@ -6954,5 +6954,30 @@
     "PM_GHOST": 287,
     "config_DEBUG": 1,
     "config_MAKEDEFS_C": 0
+  },
+  "hacklib": {
+    "size": 8,
+    "pointerSize": 8,
+    "sizeSize": 8,
+    "ssizeSize": 8,
+    "intSize": 4,
+    "shortSize": 2,
+    "longSize": 8,
+    "longLongSize": 8,
+    "charSize": 1,
+    "booleanSize": 1,
+    "coordSize": 2,
+    "qsortIndexSize": 8,
+    "qsortIndexIdx": 0,
+    "qsortIndexIdxSize": 8,
+    "BUFSZ": 256,
+    "BUFSIZ": 1024,
+    "LARGEST_INT": 32767,
+    "VISCTRL_NBUF": 5,
+    "TABSIZ": 32,
+    "MAX_D": 5,
+    "config_MACOS": 1,
+    "config_STRNCMPI": 0,
+    "config_STRSTRI": 0
   }
 }

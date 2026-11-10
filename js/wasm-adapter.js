@@ -1,6 +1,5 @@
 // Execute the compiled recorder inside a fresh Emscripten MEMFS per segment.
 // Only seed, date, options, keys and the shared VFS cross this boundary.
-import { createTerminalBackend } from './terminal-backend.js';
 import { setStorageForTesting, vfsReadFile, vfsWriteFile } from './storage.js';
 import { encodeRecorderScreen, recordingClockEpoch, shouldPersistGameFile } from './wasm-replay-support.js';
 import { recordingProfile, profileSysconf } from './recording-profile.js';
@@ -34,14 +33,10 @@ function decode(text) {
 }
 
 export async function runWasmSegment(input) {
-    const useShadow = !(typeof process !== 'undefined' && process.env?.TELEPORT_TERMINAL === 'ghostty');
-    const terminal = useShadow ? null : await createTerminalBackend();
-    try {
-        return await runWithTerminal(input, terminal);
-    } finally { terminal?.dispose(); }
+    return runWithTerminal(input);
 }
 
-async function runWithTerminal(input, terminal) {
+async function runWithTerminal(input) {
     const { default: createNethack } = await import('./wasm/nethack.mjs');
     // Emscripten recognizes this control-flow token without setting Node's
     // exit code to 1; the MEMFS state remains available for capture/persistence.
@@ -62,7 +57,6 @@ async function runWithTerminal(input, terminal) {
     const module = await createNethack({
         nethackPorted: createPortedRuntime(tuLayouts),
         noInitialRun: true,
-        stdout: terminal ? byte => terminal.writeByte(byte) : undefined,
         print: line => { diagnostics.push(line); if (diagnostics.length > 40) diagnostics.shift(); },
         printErr: line => diagnostics.push(line),
         teleportReadKey() {
@@ -71,10 +65,9 @@ async function runWithTerminal(input, terminal) {
             return key === 13 ? 10 : key;
         },
         teleportCapture(screen, x, y, animation) {
-            // The boundary hook supplies timing only for the emulator path.
-            // Its shadow-buffer screen/cursor are ignored.
-            const frame = terminal ? terminal.snapshot()
-                : { screen: encodeRecorderScreen(screen), cursor: [x, y, 1] };
+            // Preserve the recorder shadow snapshot and its original encoding.
+            // Ghostty is no longer selectable by the active adapter.
+            const frame = { screen: encodeRecorderScreen(screen), cursor: [x, y, 1] };
             if (animation) {
                 pendingAnimations.push(frame);
             } else {
@@ -146,9 +139,7 @@ async function runWithTerminal(input, terminal) {
         }
     }
     vfsWriteFile(STATE_PATH, JSON.stringify(state));
-    const terminalDiagnostics = terminal ? {
-        backend: 'libghostty-vt 1.0.0',
-    } : { backend: 'shadow' };
+    const terminalDiagnostics = { backend: 'shadow' };
     return {
         getTerminalDiagnostics: () => terminalDiagnostics,
         getScreens: () => screens, getCursors: () => cursors,

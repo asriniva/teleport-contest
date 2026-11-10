@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('steed', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/steed-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/steed-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/steed-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -10,7 +12,7 @@ const modules=[await referenceFactory(),await hybridFactory({nethackPorted:runti
 const stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){if(!p)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function snapshot(m){return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),rng:m._probe_rng_state()>>>0,count:m._probe_rng_count()};}
-function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){const idx={object:2,hero:1,prop:2,monster_field:2}[name];if(idx!==undefined)args[idx]=BigInt(args[idx]);const out=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(out[1],out[0],`${name}:${args}`);comparisons++;check();return out[0];}
 function reset(s=1){call('reset',s);}
 function act(op,i=0,a=0,b=0,c=0){return call('action',op,i,a,b,c);}
@@ -105,9 +107,9 @@ reset();act(13,0,1);
 for(const kind of ['normal','invalid','self-overlap','overlap','steed','dismounting','dead','guard','dead-guard']){reset();let x=12,y=10;if(kind==='invalid'){x=-1;y=40;}if(kind==='self-overlap')x=11;if(kind==='overlap'){mf(20,12,1);mf(25,1,1);}if(kind==='steed')hero(6,0);if(kind==='dismounting'){hero(6,0);hero(19,1);}if(kind==='dead')mf(2,0);if(kind==='guard'||kind==='dead-guard'){mf(8,1);x=y=0;if(kind==='dead-guard')mf(2,0);}mf(23,(1n<<53n)+1n);act(14,0,x,y);}
 
 // Growth and native reentry occur inside the source's live ownership and coordinate operations.
-for(const stage of [1,2,3,4,5,6,7,8,9,10,11,12,13]){reset();opt(30,stage);opt(31,stage);const before=modules.map(m=>m.HEAPU8.byteLength);if(stage===1){act(3,0,0);prop(L.WOUNDED_LEGS,0,1);hero(14,1);act(6,0,1);}else if(stage===2){obj(0,9,1);act(2);}else if(stage===3)act(3,0,-1);else if(stage===4||stage===5)act(3,0,0);else if(stage===6){act(3,0,0);act(6,0,1);}else if(stage===7||stage===8){act(3,0,0);act(6,0,1);}else{act(3,0,0);mf(25,0);mf(20,10);hero(6,0);if(stage===10){opt(14,0);act(10,0,L.DISMOUNT_POLY);}else if(stage===11){opt(20,1);act(10,0,L.DISMOUNT_GENERIC);}else if(stage===12){hero(8,3);hero(9,L.TT_PIT);act(10,0,L.DISMOUNT_GENERIC);}else act(10,0,L.DISMOUNT_GENERIC);}assert.ok(trace().includes(`grew:${stage};`),`growth stage ${stage}`);assert.ok(trace().includes('nested-ride:'));modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>before[i]));}
+for(const stage of [1,2,3,4,5,6,7,8,9,10,11,12,13]){reset();opt(30,stage);opt(31,stage);const before=modules.map(m=>allocationMetric(m));if(stage===1){act(3,0,0);prop(L.WOUNDED_LEGS,0,1);hero(14,1);act(6,0,1);}else if(stage===2){obj(0,9,1);act(2);}else if(stage===3)act(3,0,-1);else if(stage===4||stage===5)act(3,0,0);else if(stage===6){act(3,0,0);act(6,0,1);}else if(stage===7||stage===8){act(3,0,0);act(6,0,1);}else{act(3,0,0);mf(25,0);mf(20,10);hero(6,0);if(stage===10){opt(14,0);act(10,0,L.DISMOUNT_POLY);}else if(stage===11){opt(20,1);act(10,0,L.DISMOUNT_GENERIC);}else if(stage===12){hero(8,3);hero(9,L.TT_PIT);act(10,0,L.DISMOUNT_GENERIC);}else act(10,0,L.DISMOUNT_GENERIC);}assert.ok(trace().includes(`grew:${stage};`),`growth stage ${stage}`);assert.ok(trace().includes('nested-ride:'));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));}
 reset();opt(0,0);act(2);assert.ok(trace().includes('rn2:100:')&&trace().includes('@;'));
 modules.forEach((m,i)=>{assert.equal(m._probe_pointer(9,0),classifierPointers[i]);assert.deepEqual(Buffer.from(m.HEAPU8.slice(Number(m._probe_pointer(9,0)),Number(m._probe_pointer(9,0))+7)),classifiers[i]);});comparisons++;
 saddled();act(6,0,1);const held=snapshot(modules[1]);
 const other=await hybridFactory({nethackPorted:runtime});other._probe_reset(77);other._probe_action(3,0,0,0,0);assert.equal(other._probe_action(6,0,1,0,0),1n);assert.equal(fields('hero',other)[4],'0');other._probe_action(10,0,L.DISMOUNT_GENERIC,0,0);assert.equal(fields('hero',other)[4],'-1');assert.deepEqual(snapshot(modules[1]),held);comparisons+=4;check();
-console.log(`STEED C/hybrid differential: ${comparisons} comparisons passed`);
+console.log(`STEED ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);

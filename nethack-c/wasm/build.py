@@ -151,7 +151,8 @@ if start in text:
     _, _, after = tail.partition(end)
     text = before + after
 objects = ' '.join('$(TARGETPFX)' + Path(port['source']).stem + '.o' for port in ports)
-text += f'\n{start}\nifeq ($(TARGETPFX),wasm/)\nHOBJ := $(filter-out {objects},$(HOBJ))\nDATE_O := $(filter-out {objects},$(DATE_O))\nendif\n.PHONY: teleport-link-objects\nteleport-link-objects:\n\t@$(foreach obj,$(HOBJ) $(DATE_O) $(TARGET_HACKLIB),echo $(obj);)\n{end}\n'
+archive_exclusions = 'TARGET_HACKLIB :=\n' if any(port['name'] == 'hacklib' for port in ports) else ''
+text += f'\n{start}\nifeq ($(TARGETPFX),wasm/)\nHOBJ := $(filter-out {objects},$(HOBJ))\nDATE_O := $(filter-out {objects},$(DATE_O))\n{archive_exclusions}endif\n.PHONY: teleport-link-objects\nteleport-link-objects:\n\t@$(foreach obj,$(HOBJ) $(DATE_O) $(TARGET_HACKLIB),echo $(obj);)\n{end}\n'
 makefile.write_text(text)
 run([sys.executable, '-B', ROOT / 'scripts/build-tu-probes.py'], cwd=ROOT)
 run(['node', ROOT / 'scripts/write-tu-layouts.mjs'], cwd=ROOT)
@@ -163,6 +164,8 @@ for port in ports:
 link_objects = run([MAKE, '-s', 'teleport-link-objects', 'TARGETPFX=wasm/'], cwd=TREE / 'src', capture_output=True, text=True).stdout
 for port in ports:
     assert 'wasm/' + Path(port['source']).stem + '.o' not in link_objects.splitlines()
+    if port['name'] == 'hacklib':
+        assert 'wasm/hacklib.a' not in link_objects.splitlines()
 (OUT / 'link-objects.txt').write_text(link_objects)
 (TREE / 'src/Sysunix').unlink(missing_ok=True)
 run([MAKE, '-j' + JOBS, 'nethack', 'TARGETPFX=wasm/', f'TARGET_CC={emcc}', f'TARGET_CFLAGS={flags}', f'TARGET_LINK={emcc}', f'TARGET_LFLAGS={link_flags}', f'GAMEBIN={OUT}/nethack.mjs', f'LUALIBS={wasm_lua} -lm', f'WINLIB={terminfo_library}', 'TARGET_LIBS=', 'AUTOLIBS='], cwd=TREE / 'src')

@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('isaac64', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/isaac64-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/isaac64-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/isaac64-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 
@@ -75,9 +77,9 @@ for (const [i, module] of modules.entries()) {
     const view = new DataView(module.HEAPU8.buffer);
     view.setUint32(Number(original[i]) + layouts.isaac64.n, 0, true);
     for (const field of ['a', 'b', 'c']) view.setBigUint64(Number(original[i]) + layouts.isaac64[field], (1n << 64n) - 1n, true);
-    const oldBuffer = module.HEAPU8.buffer;
+    const oldBuffer = memoryCheckpoint(module);
     module._malloc(40n * 1024n * 1024n);
-    assert.notEqual(module.HEAPU8.buffer, oldBuffer);
+    assertMemoryGrowth(module, oldBuffer);
 }
 draw(original, 700);
-console.log(`ISAAC64: ${comparisons} original-C versus hybrid output/state comparisons passed.`);
+console.log(`ISAAC64: ${comparisons} ${referenceLabel} versus hybrid output/state comparisons checked.`);

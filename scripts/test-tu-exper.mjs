@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('exper', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/exper-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/exper-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/exper-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -12,7 +14,7 @@ const stacks = modules.map(module => module._probe_stack());
 let comparisons = 0;
 function scope() {
     assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
-    modules.forEach((module, i) => assert.equal(module._probe_stack(), stacks[i]));
+    modules.forEach((module, i) => assertStackRestored(module, stacks[i]));
 }
 function bytes(module, pointer) {
     let end = Number(pointer); while (module.HEAPU8[end]) end++;
@@ -128,11 +130,11 @@ for (const level of [1, 9, 10, 19, 29, 30]) {
 }
 // Different-site disabled logging retains the preceding newpw annotation.
 reset(); rng([0]); call('power'); call('option', 10, 0); call('clear'); call('random_experience', 0); assert.ok(trace().includes(':newpw;'));
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 reset(); hero(5, 10000n, 0n, 1); call('plus', 1); textCall('lose', 'after-growth', 0);
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
 const before = state(); independent._probe_reset(99); independent._probe_plus(0); independent._probe_more(100, 1); independent._probe_new_level();
 assert.deepEqual(state(), before); scope(); comparisons++;
-console.log(`EXPER: ${comparisons} original-C/hybrid threshold, energy, attack-XP, score, level-change, assertion and RNG-site comparisons passed.`);
+console.log(`EXPER: ${comparisons} ${referenceLabel}/hybrid threshold, energy, attack-XP, score, level-change, assertion and RNG-site comparisons checked.`);

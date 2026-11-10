@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('rip', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/rip-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/rip-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/rip-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -53,7 +55,7 @@ function run({ name = 'Player', money = 100n, death = 'killed by a newt', date =
         inputs(module, name, money, death, date);
         const stack = module._probe_stack();
         module._probe_run(window, how, when);
-        assert.equal(module._probe_stack(), stack, 'C/JS wrappers must restore the stack');
+        assertStackRestored(module, stack, 'C/JS wrappers must restore the stack');
         return snapshot(module);
     });
     assert.deepEqual(results[1], results[0]); scope(); comparisons++;
@@ -101,9 +103,9 @@ for (let i = 0; i < 100; i++) {
     const death = Array.from({ length: Math.min(layout.BUFSZ - 1, i * 3) }, (_, j) => (j + i) % 13 === 0 ? ' ' : String.fromCharCode(65 + (j % 26))).join('');
     run({ name: `Player ${i}`, money: BigInt(i) * 123456789n, death, date: BigInt(10000 * i + 101), window: i % 3, how: i, when: BigInt(-i) });
 }
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 run({ name: 'After growth', death: 'killed after memory grew', window: 0 });
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
 const before = modules.map(snapshot);
@@ -111,4 +113,4 @@ inputs(independent, 'Independent', 42n, 'independent death', 19991231n);
 independent._probe_run(3, 19, -123n);
 assert.equal(Number(independent._probe_head()), 0);
 assert.deepEqual(modules.map(snapshot), before); scope(); comparisons++;
-console.log(`RIP: ${comparisons} original-C/hybrid byte-exact tombstone, callback, allocation and stack comparisons passed.`);
+console.log(`RIP: ${comparisons} ${referenceLabel}/hybrid byte-exact tombstone, callback, allocation and stack comparisons checked.`);

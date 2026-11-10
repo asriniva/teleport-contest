@@ -1,14 +1,16 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('mcastu', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import refFactory from '../.cache/tu-probes/mcastu-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/mcastu-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/mcastu-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
 import * as core from '../js/ported/mcastu.js';
-const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.mcastu,runtime=createPortedRuntime(layouts),modules=[await refFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
+const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.mcastu,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 const text=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');};
 const snap=m=>({state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),rng:m._probe_rng_state()>>>0,count:m._probe_rng_count()});
-function check(){assert.deepEqual(snap(modules[1]),snap(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function check(){assert.deepEqual(snap(modules[1]),snap(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){if(['set_monster','hero'].includes(name))args[1]=BigInt(args[1]);if(name==='prop')args[2]=BigInt(args[2]);const r=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(r[1],r[0],name+':'+args);comparisons++;check();return r[0];}
 const reset=(s=1)=>call('reset',s),opt=(k,v)=>call('option',k,v),mon=(k,v)=>call('set_monster',k,v),hero=(k,v)=>call('hero',k,v),prop=(p,k,v)=>call('prop',p,k,v),att=(k,v)=>call('attack',k,v),act=(op,a=0,b=0,c=0)=>Number(call('action',op,a,b,c));
 const trace=()=>text(modules[0],modules[0]._probe_trace()),state=()=>text(modules[0],modules[0]._probe_snapshot());
@@ -57,7 +59,7 @@ for(const visible of [0,1])for(const mode of [0,1,2,3]){reset();opt(1,visible);o
 reset();opt(24,1);att(0,L.AD_FIRE);rng(Array(30).fill(99));act(0,1,1);assert.ok(trace().includes('castmu:Caster,lvl:25,spell:0'));assert.ok(state().includes(';lastmsg:0;'));
 
 // Each native boundary reenters JS and forces actual memory growth; effects and scratch outputs remain coherent.
-for(let stage=1;stage<=16;stage++){reset();opt(30,stage);opt(31,stage);const before=modules.map(m=>m.HEAPU8.byteLength);rng(Array(100).fill(1));if(stage===1)act(14);else if(stage===2){prop(L.ANTIMAGIC,0,1);act(17,9);}else if(stage===3)act(23,9,L.MCAST_PSI_BOLT);else if(stage===4)act(6,9);else if(stage===5)act(11,9);else if(stage===6){opt(7,1);act(9);}else if(stage===7)act(10);else if(stage===8)act(12);else if(stage===9)act(22);else if(stage===10||stage===11||stage===12)act(15,9);else if(stage===13)act(16,9);else if(stage===14||stage===15)act(19);else{att(0,L.AD_FIRE);act(3);}assert.ok(trace().includes(`grow:${stage};`));assert.ok(trace().includes('reenter:'));modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>before[i]));}
+for(let stage=1;stage<=16;stage++){reset();opt(30,stage);opt(31,stage);const before=modules.map(m=>allocationMetric(m));rng(Array(100).fill(1));if(stage===1)act(14);else if(stage===2){prop(L.ANTIMAGIC,0,1);act(17,9);}else if(stage===3)act(23,9,L.MCAST_PSI_BOLT);else if(stage===4)act(6,9);else if(stage===5)act(11,9);else if(stage===6){opt(7,1);act(9);}else if(stage===7)act(10);else if(stage===8)act(12);else if(stage===9)act(22);else if(stage===10||stage===11||stage===12)act(15,9);else if(stage===13)act(16,9);else if(stage===14||stage===15)act(19);else{att(0,L.AD_FIRE);act(3);}assert.ok(trace().includes(`grow:${stage};`));assert.ok(trace().includes('reenter:'));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));}
 reset();opt(0,0);act(14);assert.ok(trace().includes('@;'));
 reset();mon(5,1);act(8);const held=snap(modules[1]),other=await hybridFactory({nethackPorted:runtime});other._probe_reset(8);other._probe_set_monster(5,1n);other._probe_action(8,0,0,0);other._probe_action(13,8,0,0);assert.ok(text(other,other._probe_trace()).includes('clone;'));assert.deepEqual(snap(modules[1]),held);comparisons+=2;check();
-console.log(`MCASTU C/hybrid differential: ${comparisons} comparisons passed`);
+console.log(`MCASTU ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);

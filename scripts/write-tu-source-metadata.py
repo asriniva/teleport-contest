@@ -483,3 +483,19 @@ if mondata_js.exists():
     with out.open('a') as stream:
         stream.write(f'#define TELEPORT_MONDATA_LITERAL_CAPACITY {capacity}\n')
 
+
+hacklib_text = (source.parent / 'hacklib.c').read_text()
+assert re.search(r'struct\s+nh_qsort_index\s*\{\s*size_t\s+idx;\s*\};', hacklib_text), 'Review inherited qsort index fields'
+assert re.findall(r'^#define VISCTRL_NBUF (\d+)$', hacklib_text, re.M) == ['5'], 'Review visctrl dimensions'
+assert re.findall(r'^#define TABSIZ (0x[0-9A-Fa-f]+)', hacklib_text, re.M) == ['0x20'], 'Review signed nibble table dimensions'
+assert re.findall(r'^#define MAX_D (\d+)$', hacklib_text, re.M) == ['5'], 'Review datamodel dimensions'
+assert len(re.findall(r'static\s+char\s+buf\[BUFSZ\];', hacklib_text)) == 2, 'Review hacklib suffix buffers'
+assert re.findall(r'static\s+char\s+visctrl_bufs\[VISCTRL_NBUF\]\[(\d+)\];', hacklib_text) == ['5'], 'Review hacklib visctrl backing'
+assert re.findall(r'static\s+char\s+buf\[(\d+)\];', hacklib_text) == ['13'], 'Review hacklib sitoa backing'
+hacklib_js = root / 'js/ported/hacklib.js'
+if hacklib_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', hacklib_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    capacity = sum(len(value.encode('utf-8')) + 1 for value in literals)
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_HACKLIB_LITERAL_CAPACITY {capacity}\n')

@@ -1,8 +1,10 @@
-import assert from 'node:assert/strict';
+import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('calendar', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import referenceFactory from '../.cache/tu-probes/calendar-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/calendar-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/calendar-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -36,7 +38,7 @@ if (!process.argv.includes('--worker')) {
         }
         function scope() {
             assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
-            modules.forEach((module, i) => assert.equal(module._probe_stack(), initialStack[i], 'C stack must be restored'));
+            modules.forEach((module, i) => assertStackRestored(module, initialStack[i], 'C stack must be restored'));
         }
         function allocate(module, text) {
             if (text === null) return 0;
@@ -108,11 +110,11 @@ if (!process.argv.includes('--worker')) {
             assert.equal(parse('19691231235959'), 0n);
         }
         // Datestr survives both stack restoration and memory growth.
-        const old = modules.map(module => module.HEAPU8.buffer);
+        const old = modules.map(module => memoryCheckpoint(module));
         const before = format(1777723200n);
         modules.forEach(module => module._malloc(40n * 1024n * 1024n));
         modules.forEach((module, i) => {
-            assert.notEqual(module.HEAPU8.buffer, old[i]);
+            assertMemoryGrowth(module, old[i]);
             assert.equal(cstring(module, datePointers[i]), before);
         });
         format(1n); parse('20261101013000'); scope();
@@ -120,6 +122,6 @@ if (!process.argv.includes('--worker')) {
         const kept = cstring(modules[1], datePointers[1]);
         independent._probe_format(946684800n);
         assert.equal(cstring(modules[1], datePointers[1]), kept);
-        console.log(`CALENDAR ${process.env.TZ}: ${comparisons} effective-C/hybrid clock, parsing and calendar comparisons passed.`);
+        console.log(`CALENDAR ${process.env.TZ}: ${comparisons} effective-C/hybrid clock, parsing and calendar comparisons checked.`);
     } finally { globalThis.Date = NativeDate; }
 }

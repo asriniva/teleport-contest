@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('track', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/track-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/track-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/track-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -128,9 +130,9 @@ call('init');
 for (const [x, y] of [[-32768, -32768], [32767, 32767], [-1, 0], [80, 21]]) {
     hero(x, y); query(x, y);
 }
-const old = modules.map(module => module.HEAPU8.buffer);
+const old = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, old[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, old[i]));
 state(); hero(5, 5); query(6, 6);
 call('save', layout.WRITING | layout.FREEING);
 assert.deepEqual(call('rest'), [0, 0]);
@@ -143,4 +145,4 @@ independent._probe_init(); independent._probe_hero(1, 2, -1, -1); independent._p
 assert.equal(independentRuntime.trackState.utcnt, 1);
 assert.deepEqual(state(), before);
 scope();
-console.log(`TRACK: ${comparisons} original-C/hybrid ring-buffer, pointer and serialization comparisons passed.`);
+console.log(`TRACK: ${comparisons} ${referenceLabel}/hybrid ring-buffer, pointer and serialization comparisons checked.`);

@@ -17,4 +17,4 @@ fi
 # Match the recorder default, while honoring an explicit process timezone.
 export TZ="${TZ:-America/New_York}"
 cd "$ROOT"
-exec node frozen/ps_test_runner.mjs "${@:-sessions/}"
+exec bash frozen/score.sh "$@"

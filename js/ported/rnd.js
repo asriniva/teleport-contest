@@ -11,7 +11,7 @@
    context because the macros don't fire inside rnd.c. */
 
 import { C } from './c-runtime.js';
-import { isaac64_init, isaac64_next_uint64 } from './isaac64.js';
+import { isaac64_init, isaac64_next_uint64 } from '../isaac64.js';
 
 /* JavaScript translation of the effective recorder-patched rnd.c. All twenty
  * active function boundaries remain unchanged. Per-game C.rndState owns the
@@ -165,8 +165,8 @@ export function init_isaac64(seed, fn)
         new_rng_state[i] = Number(seed & 0xFFn);
         seed >>= 8n;
     }
-    isaac64_init(state.rnglist[rngindx].rng_state, new_rng_state,
-                 C.ULONG_SIZE);
+    // The frozen JS initializer returns its context rather than filling a C pointer.
+    state.rnglist[rngindx].rng_state = isaac64_init(new_rng_state);
 }
 
 function RND(x)

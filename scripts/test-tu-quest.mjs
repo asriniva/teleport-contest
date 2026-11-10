@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('quest', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/quest-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/quest-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/quest-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -8,7 +10,7 @@ const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',impor
 const modules=[await referenceFactory(),await hybridFactory({nethackPorted:createPortedRuntime(layouts)})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function bytes(m,p,n){p=Number(p);if(n===undefined){let e=p;while(m.HEAPU8[e])e++;n=e-p;}return Buffer.from(m.HEAPU8.slice(p,p+n));}
 function snapshot(m){return {raw:[0,1].map(n=>bytes(m,m._probe_state_pointer(n),Number(m._probe_state_size(n)))),quest:Array.from({length:14},(_,n)=>m._probe_qget(n)),scalars:Array.from({length:7},(_,n)=>m._probe_scalar(n)),strategy:BigInt.asUintN(64,m._probe_strategy()),traps:Array.from({length:5},(_,n)=>m._probe_trap_chain(n)),items:Array.from({length:5},(_,n)=>[0,1,2].map(k=>m._probe_item_bit(n,k))),rng:m._probe_rng_count(),random:m._probe_rng_state()>>>0,trace:bytes(m,m._probe_trace()).toString('hex')};}
-function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){const result=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(result[1],result[0],`${name}(${args})`);state();comparisons++;return result[0];}
 function reset(seed=1){call('reset',seed);}
 function rng(values){modules.forEach(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});state();}
@@ -59,5 +61,5 @@ for(const sound of [layout.MS_NEMESIS,layout.MS_GUARDIAN])for(const sleep of [0,
 reset();call('option',3,1);action(0);assert.equal(call('qget',2),1);
 reset();call('option',7,0);call('qset',4,7);call('qset',10,1);rng([0]);action(12);
 reset();const saved=snapshot(modules[0]);modules[1]._probe_qset(1,7);assert.deepEqual(snapshot(modules[0]),saved);reset();
-const sizes=modules.map(m=>m.HEAPU8.byteLength),pointers=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(pointers.every(Boolean));modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>sizes[i]));action(9);victim(layout.MS_NEMESIS);action(17);call('inventory',7);action(8,0);modules.forEach((m,i)=>m._free(pointers[i]));state();
-console.log(`QUEST: ${comparisons} original-C/hybrid quest-state, dispatch, dialogue, expulsion, monster and RNG-site comparisons passed.`);
+const sizes=modules.map(m=>allocationMetric(m)),pointers=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(pointers.every(Boolean));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));action(9);victim(layout.MS_NEMESIS);action(17);call('inventory',7);action(8,0);modules.forEach((m,i)=>m._free(pointers[i]));state();
+console.log(`QUEST: ${comparisons} ${referenceLabel}/hybrid quest-state, dispatch, dialogue, expulsion, monster and RNG-site comparisons checked.`);

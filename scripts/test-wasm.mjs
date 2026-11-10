@@ -26,15 +26,9 @@ function segmentInput(segment, storage, count = segment.moves.length) {
 
 if (!process.argv.includes('--timezone-worker')) {
     const terminalSmoke = await runSegment(inputFor('seed8000-tourist-starter', 1));
-    if (process.env.TELEPORT_TERMINAL === 'ghostty') {
-        assert.equal(terminalSmoke.getTerminalDiagnostics().backend, 'libghostty-vt 1.0.0');
-        assert.match(terminalSmoke.getScreens()[0], /┌──────┐/,
-            'Boundary screens must use the emulator output, not shadow-screen strings');
-    } else {
-        assert.equal(terminalSmoke.getTerminalDiagnostics().backend, 'shadow');
-        assert.match(terminalSmoke.getScreens()[0], /\x0elqqqqqqk\x0f/,
-            'Default boundary screens must come from the recorder shadow grid');
-    }
+    assert.equal(terminalSmoke.getTerminalDiagnostics().backend, 'shadow');
+    assert.match(terminalSmoke.getScreens()[0], /\x0elqqqqqqk\x0f/,
+        'Boundary screens must retain recorder shadow encoding without glyph conversion');
 
     for (const zone of Object.keys(expectedShops)) {
         const child = spawnSync(process.execPath, [fileURLToPath(import.meta.url), '--timezone-worker'], {
@@ -43,7 +37,7 @@ if (!process.argv.includes('--timezone-worker')) {
         assert.equal(child.status, 0, `${zone}: ${child.error || child.stderr || child.stdout}`);
         process.stdout.write(child.stdout);
     }
-    if (process.env.TELEPORT_TERMINAL !== 'ghostty') {
+    {
         const segment = loadSession('seed0002-healer-reflection-drummer').segments[0];
         const menu = await runSegment(segmentInput(segment, new InMemoryStorage(), 585));
         assert.deepEqual(decodeScreen(menu.getScreens()[585]), decodeScreen(segment.steps[585].screen),

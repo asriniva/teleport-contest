@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { BigUint64Array, DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('rnd', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/rnd-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/rnd-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/rnd-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -17,7 +19,7 @@ const files = [new Set(), new Set()], paths = new Set();
 let callerStorage = [[], []], comparisons = 0;
 function scope() {
     assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
-    modules.forEach((module, i) => assert.equal(module._probe_stack(), stacks[i]));
+    modules.forEach((module, i) => assertStackRestored(module, stacks[i]));
 }
 function bytes(module, pointer) {
     if (!pointer) return null;
@@ -164,9 +166,9 @@ caller(null, -1, 'ignored-without-file'); logInit(null, 'false'); loggedDraws();
 const oldCount = call('count'); logInit('/missing-directory/log', '1'); assert.equal(call('enabled'), 0); loggedDraws(); assert.equal(call('count'), oldCount);
 logInit('/rnd-b.log', 'yes'); loggedDraws(); logInit('/rnd-b.log', '1'); loggedDraws();
 caller('shuffle.c', 99, 'shuffle'); shuffle(50000); logs();
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 state(); loggedDraws(); shuffle(1024); logs();
 const independentRuntime = createPortedRuntime(layouts);
 const independent = await hybridFactory({ nethackPorted: independentRuntime });
@@ -180,4 +182,4 @@ modules.forEach((module, i) => {
     callerStorage[i].forEach(pointer => { if (pointer) module._free(pointer); });
 });
 scope();
-console.log(`RND: ${comparisons} original-C/hybrid full-ISAAC-state, random-operation, seeding, shuffle and byte-exact log comparisons passed.`);
+console.log(`RND: ${comparisons} ${referenceLabel}/hybrid full-ISAAC-state, random-operation, seeding, shuffle and byte-exact log comparisons checked.`);

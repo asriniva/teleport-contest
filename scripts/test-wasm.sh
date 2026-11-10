@@ -59,11 +59,10 @@ node scripts/test-tu-ball.mjs
 node scripts/test-tu-mcastu.mjs
 node scripts/test-tu-dbridge.mjs
 node scripts/test-tu-mondata.mjs
+node scripts/test-tu-hacklib.mjs
+node scripts/test-native-existing.mjs
 node scripts/test-version-bridge.mjs
 python3 scripts/test-terminfo.py
 node scripts/test-wasm-replay-support.mjs
 node scripts/test-compress.mjs
-if [[ "${TELEPORT_TERMINAL:-shadow}" == ghostty ]]; then
-    node scripts/test-terminal.mjs
-fi
 exec node scripts/test-wasm.mjs

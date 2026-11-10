@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('posixregex', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/posixregex-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/posixregex-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/posixregex-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -12,7 +14,7 @@ const stacks = modules.map(module => module._probe_stack());
 let comparisons = 0;
 function scope() {
     assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
-    modules.forEach((module, i) => assert.equal(module._probe_stack(), stacks[i]));
+    modules.forEach((module, i) => assertStackRestored(module, stacks[i]));
 }
 function bytes(module, pointer) {
     let end = Number(pointer);
@@ -117,9 +119,9 @@ const regexes = init(); assert.equal(compile('^literal$', regexes).status, 1);
 modules.forEach((module, i) => module._probe_set_err(BigInt(regexes[i]), 73));
 assert.deepEqual(match('different', regexes), { status: 0, err: 73 });
 assert.deepEqual(match('literal', regexes), { status: 1, err: 73 });
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 assert.deepEqual(match('literal', regexes), { status: 1, err: 73 });
 error(regexes); free(regexes);
 for (let i = 0; i < 50; i++) {
@@ -134,4 +136,4 @@ assert.equal(independent._probe_compile(BigInt(pattern), BigInt(independentRegex
 assert.equal(independent._probe_match(BigInt(string), BigInt(independentRegex)), 1);
 independent._probe_free(BigInt(independentRegex)); independent._free(pattern); independent._free(string);
 scope(); comparisons++;
-console.log(`POSIXREGEX: ${comparisons} original-C/hybrid native-engine, error-buffer, lifecycle and startup comparisons passed.`);
+console.log(`POSIXREGEX: ${comparisons} ${referenceLabel}/hybrid native-engine, error-buffer, lifecycle and startup comparisons checked.`);

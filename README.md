@@ -1,8 +1,13 @@
 # The Teleport Coding Challenge
 
-**Local port status:** shadow capture is restored as the default, and the build
-now links real ncurses terminfo instead of the earlier ANSI shortcut. Public
-tests: **44/44 sessions**, **11,405/11,405 screens**; no runtime errors. See the [terminal changes and current status](UPSTREAM_DIVERGENCES.md#current-status-shadow-capture-and-real-terminfo).
+**Local port status:** all three fixed infrastructure files match `frozen/`.
+The canonical PRNG/VFS and scoring overlays remain restored. The extra screen
+conversion has been reverted: screens again use the original recorder shadow
+encoding, and Ghostty stays removed from the active runtime. Verified result:
+**44/44 sessions**, **11,405/11,405 screens and cursors**, **792,838/792,838 RNG
+calls**, **1,483/1,483 animation frames**, no runtime errors. The remaining
+Wasm engine is **not an eligible contest submission**. See the
+[current status and limitations](UPSTREAM_DIVERGENCES.md#active-frozen-infrastructure-restoration-fr01fr04).
 
 This fork includes a reproducible wasm64 build. See [build and test instructions](nethack-c/wasm/README.md). All inherited and added changes are listed in the [upstream divergence register](UPSTREAM_DIVERGENCES.md).
 
@@ -341,7 +346,7 @@ your PRNG match percentage as advisory progress.
 
 ### What's frozen
 
-Two files in your fork are overlaid from the canonical copy before
+Three files in your fork are overlaid from the canonical copy before
 every scoring run:
 
 | File | Why frozen |

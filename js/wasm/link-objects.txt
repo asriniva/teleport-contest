@@ -39,7 +39,6 @@ wasm/mkmaze.o
 wasm/mkobj.o
 wasm/mkroom.o
 wasm/mon.o
-wasm/mondata.o
 wasm/monmove.o
 wasm/mthrowu.o
 wasm/muse.o
@@ -88,4 +87,3 @@ wasm/unixres.o
 wasm/termcap.o
 wasm/topl.o
 wasm/wintty.o
-wasm/hacklib.a

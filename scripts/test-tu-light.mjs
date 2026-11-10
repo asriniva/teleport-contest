@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('light', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/light-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/light-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/light-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -60,7 +62,7 @@ function snapshot(m){return {
 function check(){
     assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));
     assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);
-    modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;
+    modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;
 }
 function call(name,...args){
     if(['object','monster_field','ls'].includes(name))args[2]=BigInt(args[2]);
@@ -219,7 +221,7 @@ reset();act(28);assert.match(trace(),/<none>/);call('option',8,1);assert.equal(a
 // Actual native boundaries grow memory/reenter while native field pointers live.
 for(const stage of [1,2,3,4,5,6]){
     reset();add('obj');call('option',30,stage);call('option',31,stage);
-    const sizes=modules.map(m=>m.HEAPU8.byteLength);
+    const sizes=modules.map(m=>allocationMetric(m));
     if(stage===1)act(4);
     if(stage===2){object(0,9,11);act(4);}
     if(stage===3)act(5,0,11,10);
@@ -227,10 +229,10 @@ for(const stage of [1,2,3,4,5,6]){
     if(stage===5){object(0,8,L.OBJ_FLOOR);act(10,L.RANGE_LEVEL);}
     if(stage===6){id('obj');act(2,L.LS_OBJECT);}
     assert.match(trace(),/nested-any:/);assert.match(trace(),new RegExp('grew:'+stage));
-    modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>sizes[i]));
+    modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));
 }
 reset();add('obj');const before=snapshot(modules[1]),other=await hybridFactory({nethackPorted:runtime});other._probe_reset();
 assert.equal(other._probe_node_count(),0);new DataView(other.HEAPU8.buffer).setBigUint64(Number(other._probe_union_pointer()),other._probe_pointer(0,1),true);
 other._probe_action(1,11,10,3,L.LS_OBJECT,0);assert.equal(other._probe_node_count(),1);
 assert.deepEqual(snapshot(modules[1]),before);check();reset();
-console.log(`LIGHT: ${comparisons} original-C/hybrid native-list, vision, union, serialization, ownership and callback comparisons passed.`);
+console.log(`LIGHT: ${comparisons} ${referenceLabel}/hybrid native-list, vision, union, serialization, ownership and callback comparisons checked.`);

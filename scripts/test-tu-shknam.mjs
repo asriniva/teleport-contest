@@ -1,13 +1,15 @@
-import assert from 'node:assert/strict';
+import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('shknam', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/shknam-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/shknam-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/shknam-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.shknam,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){if(p===0n||p===0)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function snapshot(m){return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),output:text(m,m._probe_output()),count:m._probe_rng_count(),rng:m._probe_rng_state()>>>0};}
-function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 const longs={mbit:[2],hero:[1],prop:[2]};
 function call(name,...args){args=args.map((v,i)=>longs[name]?.includes(i)?BigInt(v):v);const r=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(r[1],r[0],`${name}(${args})`);check();comparisons++;return r[0];}
 function reset(seed=1){call('reset',seed);}
@@ -61,11 +63,11 @@ reset();room();call('option',4,1);assert.equal(act(8),-1);
 for(const mask of [L.D_NODOOR,L.D_LOCKED,L.D_TRAPPED])for(const secret of [0,1])for(const tribute of [0,1]){reset();room(0,1,3,L.SHOPBASE+9);call('cell',1,3,secret?L.SDOOR:L.DOOR,mask,0,0,-1);call('hero',4,tribute);rng(Array(100).fill(99));act(10,0,9);assert.equal(globals(3),1n);if(mask===L.D_NODOOR)assert.equal(cell(1,3)[3],L.D_ISOPEN);if(mask===L.D_TRAPPED)assert.equal(cell(1,3)[3],L.D_LOCKED);if(tribute){assert.equal(globals(5),1n);assert.equal((trace().match(new RegExp('mksobj:'+L.SPE_NOVEL+':','g'))||[]).length,1);}}
 reset();room();call('hero',8,1);rng(Array(100).fill(99));act(10,0,0);assert.match(trace(),/gone:1/);assert.equal(mon(0,1),0n);
 // Native makemon reenters neweshk and expands memory before shkinit writes it.
-reset();room();call('option',17,1);call('option',18,1);rng(Array(50).fill(0));const sizes=modules.map(m=>m.HEAPU8.byteLength);act(8);modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>sizes[i]));assert.match(trace(),/nested-new;.*grew;/);assert.equal(mon(0,3),1n);modules.forEach(m=>assert.ok(m._probe_extra_pointer(63)!==0n));
+reset();room();call('option',17,1);call('option',18,1);rng(Array(50).fill(0));const sizes=modules.map(m=>allocationMetric(m));act(8);modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));assert.match(trace(),/nested-new;.*grew;/);assert.equal(mon(0,3),1n);modules.forEach(m=>assert.ok(m._probe_extra_pointer(63)!==0n));
 // Hundreds of nested vegetarian generation calls must release each scratch
 // frame before the next item, rather than accumulating a megabyte of C stack.
 reset();call('room',0,2,2,40,18,1,0,0,L.SHOPBASE+10);call('door',0,1,3);for(let x=2;x<=40;x++)for(let y=2;y<=18;y++)modules.forEach(m=>m._probe_cell(x,y,L.ROOM,0,0,L.ROOMOFFSET,-1));check();call('cell',1,3,L.DOOR,L.D_NODOOR,0,0,-1);call('option',20,1);call('option',21,1);act(10,0,10);const deltas=[...trace().matchAll(/callback-stack:(-?\d+);/g)].map(m=>Number(m[1]));assert.ok(deltas.length>600);assert.ok(deltas.every(d=>d===0));
 // Saleability across every shop/catalogue type, including custom food payloads.
 for(let shop=0;shop<tableCount-1;shop++){reset();name(0,'shopkeeper');call('mbit',0,1,1);modules.forEach(m=>{const p=Number(m._probe_extra_pointer(0));new DataView(m.HEAPU8.buffer).setInt32(p+L.eshk_shoptype,L.SHOPBASE+shop,true);});for(let type=0;type<L.NUM_OBJECTS;type+=7){call('obj',type,L.PM_LICHEN,0);act(11);}}
 reset();call('option',0,0);rng([0]);act(12);const saved=snapshot(modules[0]);modules[1]._probe_hero(0,1n);assert.deepEqual(snapshot(modules[0]),saved);reset();
-console.log(`SHKNAM: ${comparisons} original-C/hybrid shop catalogue, names, stock, geometry, allocation and RNG-site comparisons passed.`);
+console.log(`SHKNAM: ${comparisons} ${referenceLabel}/hybrid shop catalogue, names, stock, geometry, allocation and RNG-site comparisons checked.`);

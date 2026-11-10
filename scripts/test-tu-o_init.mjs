@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('o_init', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/o_init-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/o_init-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/o_init-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -12,7 +14,7 @@ const stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){if(!p)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function normalizedIO(m){const b=Buffer.from(m.HEAPU8.slice(Number(m._probe_pointer(3,0)),Number(m._probe_pointer(3,0))+m._probe_io_length()));const records=(L.MAXOCLASSES+2)*L.baseElementSize+L.NUM_OBJECTS*L.discoElementSize;for(let i=0;i<L.NUM_OBJECTS;i++){const p=records+i*L.objectClassSize+L.cls_oc_uname;if(p+8<=b.length)b.writeBigUInt64LE(b.readBigUInt64LE(p)?1n:0n,p);}return b;}
 function snapshot(m){return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),rng:m._probe_rng_state()>>>0,count:m._probe_rng_count(),io:normalizedIO(m),position:m._probe_io_position(-1)};}
-function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){const idx={record:2,object:1,hero:1,prop:2}[name];if(idx!==undefined)args[idx]=BigInt(args[idx]);const out=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(out[1],out[0],`${name}:${args}`);comparisons++;check();return out[0];}
 function reset(s=1){call('reset',s);}
 function act(op,a=0,b=0,c=0,d=0){return call('action',op,a,b,c,d);}
@@ -106,7 +108,7 @@ for(const operation of [22,24])for(const selected of [-1,1]){setup();known(L.POT
 reset();hero(5,1);rec(L.POT_HEALING,3,1);act(3);assert.equal(value(L.POT_HEALING,3),0);assert.ok(trace().includes('name is pre-known despite alternate description'));
 
 // Real heap growth and native reentry at dependency boundaries, including inside actual qsort comparisons.
-for(const stage of [1,2,3,4,5,6,7,8,9,10,11,12,13]){setup();opt(30,stage);opt(31,stage);const before=modules.map(x=>x.HEAPU8.byteLength);if(stage===1||stage===2){hero(6,1);rec(L.DIAMOND,3,0);act(12,L.DIAMOND,1,0,1);}else if(stage===3)act(18,L.POT_HEALING);else if(stage===4){input(1,'');act(19,L.POT_HEALING);}else if(stage===5)act(16,L.POT_HEALING);else if(stage===6||stage===7){sorted(0,'  zebra');sorted(1,'* apple');act(21,2,0);}else if(stage===8){known(L.POT_HEALING);act(22);}else if(stage===9||stage===10){opt(12,1);call('pick_input',0,111);act(17,1);}else if(stage===11){known(L.POT_HEALING);opt(12,1);call('pick_input',0,L.POT_HEALING);act(25);}else{uname(L.POT_HEALING,'growth');if(stage===12){call('nhfile',0,L.WRITING);act(9);}else{call('nhfile',0,L.WRITING|L.FREEING);act(9);call('nhfile',0,L.READING);act(10);}}assert.ok(trace().includes(`grew:${stage};`),`growth ${stage}`);assert.ok(trace().includes('nested-sort:'));modules.forEach((x,i)=>assert.ok(x.HEAPU8.byteLength>before[i]));}
+for(const stage of [1,2,3,4,5,6,7,8,9,10,11,12,13]){setup();opt(30,stage);opt(31,stage);const before=modules.map(x=>allocationMetric(x));if(stage===1||stage===2){hero(6,1);rec(L.DIAMOND,3,0);act(12,L.DIAMOND,1,0,1);}else if(stage===3)act(18,L.POT_HEALING);else if(stage===4){input(1,'');act(19,L.POT_HEALING);}else if(stage===5)act(16,L.POT_HEALING);else if(stage===6||stage===7){sorted(0,'  zebra');sorted(1,'* apple');act(21,2,0);}else if(stage===8){known(L.POT_HEALING);act(22);}else if(stage===9||stage===10){opt(12,1);call('pick_input',0,111);act(17,1);}else if(stage===11){known(L.POT_HEALING);opt(12,1);call('pick_input',0,L.POT_HEALING);act(25);}else{uname(L.POT_HEALING,'growth');if(stage===12){call('nhfile',0,L.WRITING);act(9);}else{call('nhfile',0,L.WRITING|L.FREEING);act(9);call('nhfile',0,L.READING);act(10);}}assert.ok(trace().includes(`grew:${stage};`),`growth ${stage}`);assert.ok(trace().includes('nested-sort:'));modules.forEach((x,i)=>assert.ok(allocationMetric(x)>before[i]));}
 reset();opt(0,0);act(3);assert.ok(trace().includes('@;'));
 setup();known(L.POT_HEALING);const held=snapshot(modules[1]);const other=await hybridFactory({nethackPorted:runtime});other._probe_reset(77);other._probe_action(3,0,0,0,0);other._probe_record(L.POT_HEALING,3,0n);other._probe_action(12,L.POT_HEALING,1,1,1);assert.equal(other._probe_row_value(L.POT_HEALING,3),1n);other._probe_action(22,0,0,0,0);assert.deepEqual(snapshot(modules[1]),held);comparisons+=2;check();
-console.log(`O_INIT C/hybrid differential: ${comparisons} comparisons passed`);
+console.log(`O_INIT ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);

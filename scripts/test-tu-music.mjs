@@ -1,13 +1,15 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('music', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/music-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/music-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/music-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.music,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){if(!p)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function snapshot(m){return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),rng:m._probe_rng_state()>>>0,count:m._probe_rng_count()};}
-function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 const longs={hero:1,monster_field:2,prop:2};
 function call(name,...args){args=args.map((v,i)=>longs[name]===i?BigInt(v):v);const out=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(out[1],out[0],`${name}:${args}`);check();comparisons++;return out[0];}
 function reset(seed=1){call('reset',seed);}
@@ -69,9 +71,9 @@ for(const bridge of [L.DRAWBRIDGE_DOWN,L.DRAWBRIDGE_UP]){reset();hero(14,9);hero
 reset();hero(8,2);call('option',18,'n'.charCodeAt(0));call('option',19,'q'.charCodeAt(0));assert.equal(action(12),L.ECMD_OK);
 for(const typ of [...instruments,L.BELL]){reset();instr(typ);assert.equal(action(13),L.ins_no_instrument);}
 // Real native callbacks reenter a public function and grow memory mid-call.
-reset();monster(0,L.PM_HUMAN);mf(0,5,1);call('option',30,1);call('option',31,1);const sizes=modules.map(m=>m.HEAPU8.byteLength);action(0,0,1);assert.match(trace(),/nested;/);assert.match(trace(),/grew;/);modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>sizes[i]));
+reset();monster(0,L.PM_HUMAN);mf(0,5,1);call('option',30,1);call('option',31,1);const sizes=modules.map(m=>allocationMetric(m));action(0,0,1);assert.match(trace(),/nested;/);assert.match(trace(),/grew;/);modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));
 reset();call('option',31,1);instr(L.FIRE_HORN);hero(9,1);action(10);assert.match(trace(),/grew;/);assert.match(trace(),/ubuzz:.*:1;/);
 reset();call('option',0,0);monster(0,L.PM_HUMAN);action(2,3);assert.match(trace(),/@;/);
 // Actual native song context and private startup state remain isolated per Module.
 reset();rng([0,6]);action(11);const before=snapshot(modules[1]),other=await hybridFactory({nethackPorted:runtime});other._probe_reset(1);assert.deepEqual(snapshot(modules[1]),before);other._probe_action(11,0,0,0);assert.deepEqual(snapshot(modules[1]),before);check();
-console.log(`MUSIC: ${comparisons} original-C/hybrid monster, pit, quake, instrument, tune, state and RNG-site comparisons passed.`);
+console.log(`MUSIC: ${comparisons} ${referenceLabel}/hybrid monster, pit, quake, instrument, tune, state and RNG-site comparisons checked.`);

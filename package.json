@@ -8,7 +8,8 @@
     "play": "echo 'Open index.html in a browser to play'",
     "setup:wasm": "bash nethack-c/setup-wasm.sh",
     "build:wasm": "bash nethack-c/build-wasm.sh",
-    "test:wasm": "bash scripts/test-wasm.sh"
+    "test:wasm": "bash scripts/test-wasm.sh",
+    "test:native": "bash scripts/test-native-tu.sh"
   },
   "engines": {
     "node": ">=22.0.0"

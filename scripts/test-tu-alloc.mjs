@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('alloc', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/alloc-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/alloc-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/alloc-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T, withCEnvironment } from '../js/ported/c-runtime.js';
@@ -11,7 +13,7 @@ let comparisons = 0;
 const stacks = modules.map(module => module._probe_stack());
 function scope() {
     assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
-    modules.forEach((module, i) => assert.equal(module._probe_stack(), stacks[i], 'Normal and longjmp exits restore C stack'));
+    modules.forEach((module, i) => assertStackRestored(module, stacks[i], 'Normal and longjmp exits restore C stack'));
 }
 function cbytes(module, pointer) {
     let end = Number(pointer);
@@ -147,9 +149,9 @@ for (let i = 0; i < addresses.length * 4; i++) {
     });
     assert.deepEqual(results[1], results[0]); scope(); comparisons++;
 }
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 operation(module => module._probe_alloc(128, 0)); free(pointers());
 const after = modules.map(module => cbytes(module, module._probe_format(0xabcdefn)));
 assert.deepEqual(after[1], after[0]); scope(); comparisons++;
@@ -175,4 +177,4 @@ withCEnvironment(outer, () => {
     restored();
 });
 scope();
-console.log(`ALLOC: ${comparisons} original-C/hybrid alignment, memory, failure, pointer-pool and integer-cast comparisons passed.`);
+console.log(`ALLOC: ${comparisons} ${referenceLabel}/hybrid alignment, memory, failure, pointer-pool and integer-cast comparisons checked.`);

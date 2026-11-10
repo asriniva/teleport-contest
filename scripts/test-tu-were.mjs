@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('were', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/were-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/were-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/were-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -12,7 +14,7 @@ const stacks = modules.map(module => module._probe_stack());
 let comparisons = 0;
 function scope() {
     assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
-    modules.forEach((module, i) => assert.equal(module._probe_stack(), stacks[i]));
+    modules.forEach((module, i) => assertStackRestored(module, stacks[i]));
 }
 function bytes(module, pointer) {
     let end = Number(pointer); while (module.HEAPU8[end]) end++;
@@ -129,12 +131,12 @@ for (const current of [layout.PM_WEREWOLF, layout.PM_HUMAN_WEREWOLF, layout.PM_W
     }
 }
 for (const pm of [-1, layout.PM_WEREWOLF, layout.PM_WERERAT]) { reset(); call('lycanthrope', pm); assert.equal(state().lycan, pm); assert.ok(trace().includes(`uasmon:${pm};`)); }
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 reset(); mon(layout.PM_HUMAN_WEREWOLF, { asleep: 1, move: 0 }); rng([0]); call('change');
 reset(); rng([4, 0, 1, 0, 0]); call('summon', layout.PM_WEREWOLF, 1, 1);
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
 const before = state(); independent._probe_reset(); independent._probe_change(); independent._probe_you();
 assert.deepEqual(state(), before); scope(); comparisons++;
-console.log(`WERE: ${comparisons} original-C/hybrid mapping, monster, player-property, summoning, callback and RNG-site comparisons passed.`);
+console.log(`WERE: ${comparisons} ${referenceLabel}/hybrid mapping, monster, player-property, summoning, callback and RNG-site comparisons checked.`);

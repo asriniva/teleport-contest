@@ -2973,3 +2973,47 @@ static char teleport_mondata_literals[TELEPORT_MONDATA_LITERAL_CAPACITY];
 void *teleport_mondata_literal_storage(void) { return teleport_mondata_literals; }
 size_t teleport_mondata_literal_capacity(void) { return sizeof teleport_mondata_literals; }
 #endif
+
+/* HACKLIB: zero storage and typed libc/callback ABI; utilities remain JS. */
+static char teleport_hacklib_suffix[BUFSZ];
+static char teleport_hacklib_ing[BUFSZ];
+static char teleport_hacklib_visctrl[5][5];
+static char teleport_hacklib_sitoa[13];
+void *teleport_hacklib_storage(int index)
+{
+    switch (index) {
+    case 0: return teleport_hacklib_suffix;
+    case 1: return teleport_hacklib_ing;
+    case 2: return teleport_hacklib_visctrl;
+    case 3: return teleport_hacklib_sitoa;
+    default: return 0;
+    }
+}
+extern int teleport_hacklib_compare(const void *, const void *);
+int teleport_hacklib_comparator(const void *a, const void *b)
+{ return teleport_hacklib_compare(a, b); }
+uintptr_t teleport_hacklib_callback_pointer(void)
+{ return (uintptr_t) teleport_hacklib_comparator; }
+int teleport_hacklib_call_comparator(uintptr_t token, const void *a, const void *b)
+{ return ((int (QSORTCALLBACK *)(const void *, const void *)) token)(a, b); }
+void teleport_hacklib_qsort(void *base, size_t count, size_t size)
+{ (qsort)(base, count, size, teleport_hacklib_comparator); }
+void *teleport_hacklib_malloc(size_t size) { return malloc(size); }
+void teleport_hacklib_free(void *value) { free(value); }
+void *teleport_hacklib_memcpy(void *dst, const void *src, size_t size)
+{ return memcpy(dst, src, size); }
+int teleport_hacklib_vsnprintf(char *out, size_t size, const char *fmt, va_list args)
+{ return vsnprintf(out, size, fmt, args); }
+void teleport_hacklib_format(char *out, const char *fmt, int value)
+{ Sprintf(out, fmt, value); }
+int teleport_hacklib_isupper(int value) { return isupper(value); }
+int teleport_hacklib_tolower(int value) { return tolower(value); }
+ssize_t teleport_hacklib_read(int fd, void *buf, size_t count)
+{ return read(fd, buf, count); }
+ssize_t teleport_hacklib_write(int fd, const void *buf, size_t count)
+{ return write(fd, buf, count); }
+#ifdef TELEPORT_HACKLIB_LITERAL_CAPACITY
+static char teleport_hacklib_literals[TELEPORT_HACKLIB_LITERAL_CAPACITY];
+void *teleport_hacklib_literal_storage(void) { return teleport_hacklib_literals; }
+size_t teleport_hacklib_literal_capacity(void) { return sizeof teleport_hacklib_literals; }
+#endif

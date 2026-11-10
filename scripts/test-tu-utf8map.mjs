@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('utf8map', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/utf8map-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/utf8map-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/utf8map-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -13,7 +15,7 @@ const tracked = new Set([0, 1, 2, 3, 7, layout.MAX_GLYPH - 1]);
 let comparisons = 0;
 function scope() {
     assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
-    modules.forEach((module, i) => assert.equal(module._probe_stack(), stacks[i]));
+    modules.forEach((module, i) => assertStackRestored(module, stacks[i]));
 }
 function bytes(module, pointer) {
     if (!pointer) return null;
@@ -172,13 +174,13 @@ call('reset', layout.PRIMARYSET, 0); assert.equal(state().gbuf, 0); assert.ok(st
 assert.equal(Buffer.from(state().trace, 'hex').toString(), `apply:${layout.PRIMARYSET}:${layout.do_custom_symbols}:live=0;`);
 call('reset', layout.ROGUESET, 1);
 assert.equal(state().maps.find(map => map.index === 7).text, Buffer.from('SNOW').toString('hex'), 'Nested customization callback can reenter set_map_u');
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 state(); set(1, 0x41, 'after growth'); mixed('\\GABCD0001', 64); custom('main', 10, 0x99, 'grown', 0); call('reset', 0, 1);
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
 const before = state();
 const pointer = allocate(independent, 'Independent'); independent._probe_set(1, 0x41, BigInt(pointer)); independent._free(pointer);
 independent._probe_reset(0, 1); independent._probe_cleanup();
 assert.deepEqual(state(), before); call('cleanup'); scope(); comparisons++;
-console.log(`UTF8MAP: ${comparisons} original-C/hybrid parser, raw-byte, map, customization, callback and lifecycle comparisons passed.`);
+console.log(`UTF8MAP: ${comparisons} ${referenceLabel}/hybrid parser, raw-byte, map, customization, callback and lifecycle comparisons checked.`);

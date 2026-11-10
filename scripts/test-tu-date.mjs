@@ -1,8 +1,10 @@
-import assert from 'node:assert/strict';
+import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('date', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import referenceFactory from '../.cache/tu-probes/date-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/date-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/date-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -23,7 +25,7 @@ if (!process.argv.includes('--worker')) {
     const initialStack = modules.map(module => module._probe_stack());
     function scope() {
         assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
-        modules.forEach((module, i) => assert.equal(module._probe_stack(), initialStack[i]));
+        modules.forEach((module, i) => assertStackRestored(module, initialStack[i]));
     }
     function bytes(module, pointer) {
         if (!pointer) return null;
@@ -138,9 +140,9 @@ if (!process.argv.includes('--worker')) {
         }
     }
     env('NETHACK_REAL_BUILD_DATE', null);
-    const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+    const oldBuffers = modules.map(module => memoryCheckpoint(module));
     modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-    modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+    modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
     state(); populate(cases[3], 'after growth', null); release();
     const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
     const before = state();
@@ -149,5 +151,5 @@ if (!process.argv.includes('--worker')) {
     independent._probe_inputs(1n, 2n, 3n, 4n, BigInt(pointer)); independent._free(pointer);
     independent._probe_populate(); independent._probe_release();
     assert.deepEqual(state(), before); scope(); comparisons++;
-    console.log(`DATE (${process.env.TZ}): ${comparisons} original-C/hybrid layout, build metadata, version, lifecycle and stack comparisons passed.`);
+    console.log(`DATE (${process.env.TZ}): ${comparisons} ${referenceLabel}/hybrid layout, build metadata, version, lifecycle and stack comparisons checked.`);
 }

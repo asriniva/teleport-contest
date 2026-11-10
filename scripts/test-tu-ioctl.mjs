@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('ioctl', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/ioctl-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/ioctl-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/ioctl-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -12,7 +14,7 @@ const stacks = modules.map(module => module._probe_stack());
 let shellerStorage = [0, 0], comparisons = 0;
 function scope() {
     assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
-    modules.forEach((module, i) => assert.equal(module._probe_stack(), stacks[i]));
+    modules.forEach((module, i) => assertStackRestored(module, stacks[i]));
 }
 function bytes(module, pointer) {
     let end = Number(pointer);
@@ -112,13 +114,13 @@ for (const previous of [signal.default, signal.ignore, signal.error, (1n << 53n)
         }
     }
 }
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 state(); fill('input', 0xf0); call('options', 0, 0, 0, 1, signal.default); call('get'); call('set'); call('suspend');
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
 const before = state();
 independent._probe_options(0, 0, 0, 0, signal.default); independent._probe_get(); independent._probe_set(); independent._probe_suspend();
 assert.deepEqual(state(), before); scope(); comparisons++;
 modules.forEach((module, i) => { module._probe_shellers(0n); if (shellerStorage[i]) module._free(shellerStorage[i]); });
-console.log(`IOCTL: ${comparisons} original-C/hybrid termios-byte, native-call-order, authorization and signal-handler comparisons passed.`);
+console.log(`IOCTL: ${comparisons} ${referenceLabel}/hybrid termios-byte, native-call-order, authorization and signal-handler comparisons checked.`);

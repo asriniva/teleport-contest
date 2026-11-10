@@ -1,4 +1,4 @@
-// isaac64 ABI declarations only; game logic is in js/ported/isaac64.js.
+// ISAAC64 ABI declarations only; the runtime delegates to canonical js/isaac64.js.
 addToLibrary({
   isaac64_init__sig: 'vppi',
   isaac64_init: function(_ctx, _seed, _nseed) {

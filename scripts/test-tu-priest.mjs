@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('priest', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/priest-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/priest-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/priest-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -23,7 +25,7 @@ function snapshot(m){return {
 function check(){
     assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));
     assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);
-    modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;
+    modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;
 }
 function call(name,...args){
     const longIndex={monster_field:2,hero:1,prop:2,epri:2,moves:0}[name];
@@ -275,7 +277,7 @@ for(const ghostly of [0,1,256])for(const loaded of [0,1]){
 // Native callbacks can reenter source or grow memory during real C ABI calls.
 for(const stage of [1,2,3,4,5,6,7,8]){
     reset();if(stage!==1&&stage!==3)priest();
-    call('option',30,stage);call('option',31,stage);const sizes=modules.map(m=>m.HEAPU8.byteLength);
+    call('option',30,stage);call('option',31,stage);const sizes=modules.map(m=>allocationMetric(m));
     if(stage===1){call('add_monster',0,L.PM_HUMAN,11,10);act(0);}
     if(stage===2){candidates([[12,10,1n<<60n]]);act(2,0,0,1,0,0,13,10);}
     if(stage===3){rng([0,0,0]);act(7,0,0,12,10,0);}
@@ -285,7 +287,7 @@ for(const stage of [1,2,3,4,5,6,7,8]){
     if(stage===7){rng(Array(100).fill(0));act(13,0,L.ROOMOFFSET);}
     if(stage===8)act(5);
     assert.match(trace(),/nested-temple:/);assert.match(trace(),new RegExp('grew:'+stage));
-    modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>sizes[i]));
+    modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));
 }
 reset();priest();call('option',0,0);candidates([[12,10,0n]]);act(2,0,0,0,0,0,13,10);assert.match(trace(),/@;/);
 // Shared runtime caches must not share native monster extensions or hero state.
@@ -294,4 +296,4 @@ assert.equal(other._probe_pointer(2,0),0n);other._probe_add_monster(0,L.PM_HUMAN
 other._probe_action(0,0,0,0,0,0,0,0);assert.notEqual(other._probe_pointer(2,0),0n);
 assert.deepEqual(snapshot(modules[1]),before);other._probe_action(1,0,0,0,0,0,0,0);
 assert.deepEqual(snapshot(modules[1]),before);check();reset();
-console.log(`PRIEST: ${comparisons} original-C/hybrid extension, movement, temple, donation, ownership and RNG-site comparisons passed.`);
+console.log(`PRIEST: ${comparisons} ${referenceLabel}/hybrid extension, movement, temple, donation, ownership and RNG-site comparisons checked.`);

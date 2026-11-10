@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('minion', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/minion-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/minion-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/minion-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {elementals_initial} from '../js/ported/minion.js';
@@ -9,7 +11,7 @@ const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',impor
 const modules=[await referenceFactory(),await hybridFactory({nethackPorted:createPortedRuntime(layouts)})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function bytes(m,p,n){p=Number(p);if(n===undefined){if(!p)return null;let e=p;while(m.HEAPU8[e])e++;n=e-p;}if(!p)return null;return Buffer.from(m.HEAPU8.slice(p,p+n));}
 function snapshot(m){return {monsters:Array.from({length:32},(_,i)=>({fields:Array.from({length:14},(_,f)=>m._probe_mon_field(i,f)),strategy:BigInt.asUintN(64,m._probe_strategy(i)),emin:bytes(m,m._probe_emin_pointer(i),Number(m._probe_emin_size()))})),equipment:[0,1,2,3].map(i=>bytes(m,m._probe_object_pointer(i),Number(m._probe_object_size()))),cash:m._probe_cash_value(),pets:m._probe_pets(),botl:m._probe_botl(),created:m._probe_count(),rng:m._probe_rng_count(),random:m._probe_rng_state()>>>0,trace:bytes(m,m._probe_trace()).toString('hex')};}
-function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){const result=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(result[1],result[0],`${name}(${args})`);state();comparisons++;return result[0];}
 function reset(seed=1){call('reset',seed);}
 function rng(values){modules.forEach(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});state();}
@@ -59,5 +61,5 @@ for(const conflict of [0n,1n])for(const record of [8,9])for(const pets of [-1n,0
 for(const deaf of [0n,1n])for(const roledeaf of [0,1])for(const cure of [0,1])for(const blind of [0n,1n])for(const weapon of [0,1])for(const shield of [0,1])for(const spe of [-128,3,4,127]){reset();call('properties',deaf,blind,0n,roledeaf,0,0);call('option',14,cure);call('option',15,weapon);call('option',16,shield);call('equip',spe,shield?layout.SILVER_SABER:layout.SHIELD_OF_REFLECTION);rng(Array(128).fill(0));act(10);}
 reset();rng(Array(128).fill(0));act(10);assert.equal(call('count'),1);assert.equal(call('mon_field',1,5),10);assert.equal(call('pets'),2n);assert.ok(call('mon_field',1,9)>30);assert.ok(trace().includes('bless:0;'));
 reset();call('option',19,0);rng(Array(64).fill(1));act(1,1);
-reset();const saved=snapshot(modules[0]);modules[1]._probe_cash(1n);assert.deepEqual(snapshot(modules[0]),saved);reset();call('emin',0,0);const pointers=modules.map(m=>m._probe_emin_pointer(0)),sizes=modules.map(m=>m.HEAPU8.byteLength),grown=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(grown.every(Boolean));modules.forEach((m,i)=>{assert.ok(m.HEAPU8.byteLength>sizes[i]);assert.equal(m._probe_emin_pointer(0),pointers[i]);});act(1,1);call('emin',0,1);input('7');call('bribe');modules.forEach((m,i)=>m._free(grown[i]));state();
-console.log(`MINION: ${comparisons} original-C/hybrid emin, summoning, demon-money, scanf, guardian and callback/RNG-site comparisons passed.`);
+reset();const saved=snapshot(modules[0]);modules[1]._probe_cash(1n);assert.deepEqual(snapshot(modules[0]),saved);reset();call('emin',0,0);const pointers=modules.map(m=>m._probe_emin_pointer(0)),sizes=modules.map(m=>allocationMetric(m)),grown=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(grown.every(Boolean));modules.forEach((m,i)=>{assert.ok(allocationMetric(m)>sizes[i]);assert.equal(m._probe_emin_pointer(0),pointers[i]);});act(1,1);call('emin',0,1);input('7');call('bribe');modules.forEach((m,i)=>m._free(grown[i]));state();
+console.log(`MINION: ${comparisons} ${referenceLabel}/hybrid emin, summoning, demon-money, scanf, guardian and callback/RNG-site comparisons checked.`);

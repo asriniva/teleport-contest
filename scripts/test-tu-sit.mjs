@@ -1,13 +1,15 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('sit', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/sit-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/sit-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/sit-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.sit,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function snapshot(m){return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),count:m._probe_rng_count(),rng:m._probe_rng_state()>>>0};}
-function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 const longs={obj:[2],obit:[2],hero:[1],prop:[2]};
 function call(name,...args){args=args.map((a,i)=>longs[name]?.includes(i)?BigInt(a):a);const r=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(r[1],r[0],`${name}(${args})`);state();comparisons++;return r[0];}
 function reset(seed=1){call('reset',seed);}
@@ -45,7 +47,7 @@ for(const resist of [0,1]){reset();if(resist)call('prop',L.DRAIN_RES,0,1);act(5,
 reset();call('hero',22,1);act(5,8);assert.ok(!trace().includes('goto:'));assert.match(trace(),/disoriented/);
 for(const pm of [L.PM_HUMAN,L.PM_VAMPIRE]){reset();call('species',pm,1);act(5,11);assert.equal(trace().includes('poly:'),pm!==L.PM_VAMPIRE);}
 reset();call('option',1,1);rng([4,0]);act(4);assert.match(trace(),/wish;/);assert.ok(!trace().includes('yn:'));
-reset();call('prop',L.CONFUSION,0,(1n<<53n)+1n);obj(0,L.GOLD_PIECE,7n);inventory([0]);call('option',20,1);call('option',21,1);const before=modules.map(m=>m.HEAPU8.byteLength);act(5,10);assert.equal(prop(L.CONFUSION),(1n<<53n)+1n);assert.equal(of(0,3),BigInt(L.OBJ_DELETED));modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>before[i]));assert.match(trace(),/nested-begin;.*nested-end;grew;/);
+reset();call('prop',L.CONFUSION,0,(1n<<53n)+1n);obj(0,L.GOLD_PIECE,7n);inventory([0]);call('option',20,1);call('option',21,1);const before=modules.map(m=>allocationMetric(m));act(5,10);assert.equal(prop(L.CONFUSION),(1n<<53n)+1n);assert.equal(of(0,3),BigInt(L.OBJ_DELETED));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));assert.match(trace(),/nested-begin;.*nested-end;grew;/);
 // Egg creation checks sex, precise food boundary, species, water and timers callback.
 for(const female of [0,1])for(const energy of [-1,0,1])for(const halluc of [0,1]){reset();call('hero',0,female);call('hero',27,energy);if(halluc)call('prop',L.HALLUC,0,1);const result=act(6);if(female&&energy>=0){assert.equal(result,L.ECMD_TIME);assert.equal(of(15,5),1n);assert.equal(of(15,2),1n);assert.equal(of(15,6),17n);assert.equal(of(15,10),1n);assert.match(trace(),/species:16:/);assert.equal(hero(11),BigInt(energy));}else assert.equal(result,L.ECMD_OK);}
 for(const pm of [L.PM_GIANT_EEL,L.PM_ELECTRIC_EEL,L.PM_COCKATRICE])for(const water of [0,1,2])for(const poly of [0,1]){reset();call('hero',0,1);call('species',pm,poly);if(water===1)call('hero',19,1);if(water===2)call('hero',25,1);const result=act(6);if(pm!==L.PM_COCKATRICE&&water&&poly)assert.equal(result,L.ECMD_OK);}
@@ -77,4 +79,4 @@ for(let target=0;target<properties.length;target++)for(let start=0;start<11;star
 for(const property of [L.TELEPAT,L.SEE_INVIS])for(const backup of [0,1])for(const halluc of [0,1]){reset();call('prop',property,0,L.INTRINSIC);call('prop',property,1,backup);call('prop',L.BLINDED,0,1);if(halluc)call('prop',L.HALLUC,0,1);rng([properties.indexOf(property)]);assert.equal(act(3),property);assert.equal(trace().includes('see-monsters;'),!backup);if(property===L.SEE_INVIS)assert.equal(trace().includes('mimic-block;'),!backup);}
 reset();for(const property of properties)call('prop',property,0,L.INTRINSIC);rng([0]);assert.equal(act(3),L.FIRE_RES);assert.ok(prop(L.TELEPORT)&BigInt(L.INTRINSIC));
 reset();call('option',0,0);rng([0]);act(3);const saved=snapshot(modules[0]);modules[1]._probe_hero(7,-9n);assert.deepEqual(snapshot(modules[0]),saved);reset();
-console.log(`SIT: ${comparisons} original-C/hybrid throne, terrain, egg, property, curse and RNG-site comparisons passed.`);
+console.log(`SIT: ${comparisons} ${referenceLabel}/hybrid throne, terrain, egg, property, curse and RNG-site comparisons checked.`);

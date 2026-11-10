@@ -142,6 +142,9 @@ export function decompressUnixZ(input) {
         if (free_ent > maxcode) {
             posbits = align(posbits, boff, n_bits);
             boff = posbits;
+            // Preserve ncompress's historical 9-bit saturation behavior too:
+            // maxbits=9 advances to a 10-bit packing width at free_ent=512.
+            // Both the pinned C and macOS compress streams exercise this.
             ++n_bits;
             maxcode = n_bits === maxbits ? maxmaxcode : (1 << n_bits) - 1;
         }

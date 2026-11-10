@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('rect', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/rect-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/rect-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/rect-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R } from '../js/ported/c-runtime.js';
@@ -139,9 +141,9 @@ assert.equal(cstring(modules[1], modules[1]._probe_diagnostic_message()), 'n_rec
 for (let i = 0; i < 20; i++) random();
 
 // Views/proxies created before growth must read the new buffer afterward.
-const old = modules.map(module => module.HEAPU8.buffer);
+const old = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, old[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, old[i]));
 state();
 call('init');
 random();
@@ -161,4 +163,4 @@ assert.deepEqual({ ...runtime.rectState.rect[0] }, before);
 modules[1]._probe_free();
 assert.equal(C, undefined);
 assert.equal(R, undefined);
-console.log(`RECT: ${comparisons} original-C/hybrid geometry, state, pointer and RNG comparisons passed.`);
+console.log(`RECT: ${comparisons} ${referenceLabel}/hybrid geometry, state, pointer and RNG comparisons checked.`);

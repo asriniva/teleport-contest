@@ -10,9 +10,18 @@ Bindings, layout access and test helpers belong outside the translated file.
 Proceed sequentially: original-C differential checks → real mixed C/JS link →
 full public tests. A failing gate blocks the next TU.
 
+**Frozen infrastructure restoration:** active ISAAC64 delegates to the canonical
+frozen implementation through an ABI adapter; its independent port is inactive
+historical source. The extra screen conversion has been reverted under FR05;
+original recorder shadow encoding is restored, and Ghostty stays removed from
+the active adapter. Full production scoring passes **44/44 sessions**, all
+11,405 screens/cursors, 792,838 RNG calls and 1,483 animation frames matching,
+with no runtime errors; integration checks pass. The 25/44 result belongs to the
+reverted FR03 conversion. See FR01–FR05 in the divergence register.
+
 | Order | C TU | JS replacement | State | Validation |
 |---|---|---|---|---|
-| 1 | src/isaac64.c | js/ported/isaac64.js | Passed | 39,830 C/hybrid output/state comparisons; actual C object excluded and JS imports verified; 44/44 public sessions; integration suite passed |
+| 1 | src/isaac64.c | js/isaac64.js via ABI adapter | Canonical restored | 39,830 C/hybrid output/state comparisons plus 962 rnd checks; every public RNG call matches; FR03 screen conversion scored 25/44; FR05 restores 44/44 with all RNG/screen/cursor/animation comparisons matching |
 | 2 | src/nhmd4.c | js/ported/nhmd4.js | Passed | Four identical function boundaries; 1,287 C/hybrid state/digest checks including RFC vectors; actual C object excluded and all three public JS imports verified; 44/44 public sessions; integration suite passed |
 | 3 | src/strutil.c | js/ported/strutil.js | Passed | Nine original functions/comments preserved; 8,352 C/hybrid buffer/pattern/guard comparisons; clean build with C object excluded and active JS imports verified; 44/44 public sessions; integration suite passed |
 | 4 | src/rect.c | js/ported/rect.js | Passed | Ten original functions/comments; 3,644 C/hybrid geometry/state/pointer/RNG comparisons; mixed link excludes C object and uses active JS imports; 44/44 public sessions; integration suite passed |
@@ -111,10 +120,14 @@ claimed as completed game TUs merely because they exist.
 
 | 49 | src/dbridge.c | js/ported/dbridge.js | Passed | Twenty-eight configured functions; 11,669 C/hybrid terrain/entity/alias/transition/RNG/callback comparisons; all14 public imports, dbridge.o/14 private aliases excluded; 44/44 public sessions; full integration passed |
 
-| 50 | src/mondata.c | js/ported/mondata.js | In progress | Fifty-nine configured monster-data/predicate/name functions and original source tables; gates pending |
+| 50 | src/mondata.c | js/ported/mondata.js | Passed | All59 functions/comments; 200,754 Emscripten-C/hybrid checks plus6,146 native/Emscripten/JS observations; mondata.o excluded,55 live public imports/private alias excluded; full integration and strict current FR05 output44/44, all11405screens/cursors,792838RNG,1483animations exact; final input hashes match |
 
-Forty-nine configured game TUs have passed. The runtime still
-contains the remaining NetHack C, Lua, ncurses and compression code.
+The ledger currently records 49 validated translations and one restored canonical
+module (ISAAC64). Mondata has passed its strict current-output gate.
+The runtime still contains the remaining NetHack C, Lua, ncurses and compression
+code. Public 44/44 results on earlier rows describe the historical recording
+encoder. FR03 temporarily changed the active Terminal path and scored25/44;
+FR05 reverts that conversion; full production recording validation now passes44/44.
 
 Reproduce from the prepared SDK: `bash nethack-c/build-wasm.sh`, then
 `bash scripts/test-wasm.sh` and `bash scripts/score-wasm.sh`. The TU probes use
@@ -126,6 +139,24 @@ are used by native utilities and differential probes.
 Per-build evidence lives in `js/wasm/build.json` (source hashes) and
 `js/wasm/link-objects.txt` (actual game HOBJ list). Last logs:
 `.cache/build-wasm-dbridge.log`, `.cache/test-wasm-dbridge.log`,
-`.cache/dbridge-public.stderr.txt`. Latest validated Wasm SHA-256:
+`.cache/dbridge-public.stderr.txt`. Historical last strict44/44 Wasm SHA-256:
 `a62a9eafa669c48aef3d8fee5847ec4078313f9a24f060e1504af449c358b405`.
 
+
+Current mondata build: `.cache/build-wasm-mondata.log`; full integration passes
+`.cache/test-wasm-mondata.log`. Historical FR03 encoder public result25/44 is
+`.cache/mondata-public.stdout.txt`; isolated historical-encoder diagnostic44/44
+is `.cache/mondata-historical-encoder-public.stdout.txt`. Both use current Wasm
+SHA-256 `2de0fb0e2f7a0a87efd507b31c990486f38c04a8381d519b22f947b9c7856e1b`.
+The diagnostic originally left production defaults unchanged. FR05 now restores
+the original recorder encoder in production. The full production run after this
+restoration passes44/44, with all screens/cursors/RNG/animations matching and no
+runtime errors; timezone/macOS/profile/bones integration also passes.
+
+Mondata strict current-output evidence: `.cache/mondata-active-public.stdout.txt`
+(44/44, every metric exact), `.cache/mondata-active-replay-support.log` and
+`.cache/mondata-active-integration.log` (pass). Final hashes match the inputs
+in `.cache/mondata-active-input-hashes.json`. Loader experiments are inactive
+diagnostics. The active output uses original shadow/RLE, not Terminal serialize.
+
+| 51 | src/hacklib.c | js/ported/hacklib.js | In progress | Fifty configured utility functions including two inherited deterministic-sort functions; all gates pending |

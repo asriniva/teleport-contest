@@ -17,9 +17,10 @@ JS replacements. The prepared `src/Makefile` links `DATE_O` and
 `TARGET_HACKLIB` separately from `HOBJ`. Selection can include a pending
 replacement and does not certify its gates have passed.
 
-Migration ledger: **49 Passed**, **1 In progress**,
-**256 Not started** across all inventoried sources.
-Only `Passed` in [PORTING_PROGRESS.md](PORTING_PROGRESS.md) establishes completion;
+Migration ledger: **49 Passed**, **1 Canonical restored**, **1 In progress**,
+**255 Not started** across all inventoried sources.
+`Passed` in [PORTING_PROGRESS.md](PORTING_PROGRESS.md) records validated translations;
+`Canonical restored` records reused frozen infrastructure separately.
 registry membership alone does not. Sources outside the selected game are
 labelled `Other target / utility`; their compilation and portability are unverified.
 
@@ -129,11 +130,11 @@ No ambiguous game object names.
 | [src/getpos.c](nethack-c/upstream/src/getpos.c) | 1169 | Current game | Not started |
 | [src/glyphs.c](nethack-c/upstream/src/glyphs.c) | 1324 | Current game | Not started |
 | [src/hack.c](nethack-c/upstream/src/hack.c) | 4575 | Current game | Not started |
-| [src/hacklib.c](nethack-c/upstream/src/hacklib.c) | 1015 | Current game | Not started |
+| [src/hacklib.c](nethack-c/upstream/src/hacklib.c) | 1015 | Current game | In progress |
 | [src/iactions.c](nethack-c/upstream/src/iactions.c) | 716 | Current game | Passed |
 | [src/insight.c](nethack-c/upstream/src/insight.c) | 3506 | Current game | Not started |
 | [src/invent.c](nethack-c/upstream/src/invent.c) | 5679 | Current game | Not started |
-| [src/isaac64.c](nethack-c/upstream/src/isaac64.c) | 180 | Current game | Passed |
+| [src/isaac64.c](nethack-c/upstream/src/isaac64.c) | 180 | Current game | Canonical restored |
 | [src/light.c](nethack-c/upstream/src/light.c) | 985 | Current game | Passed |
 | [src/lock.c](nethack-c/upstream/src/lock.c) | 1320 | Current game | Passed |
 | [src/mail.c](nethack-c/upstream/src/mail.c) | 803 | Current game | Not started |
@@ -149,7 +150,7 @@ No ambiguous game object names.
 | [src/mkobj.c](nethack-c/upstream/src/mkobj.c) | 3851 | Current game | Not started |
 | [src/mkroom.c](nethack-c/upstream/src/mkroom.c) | 1099 | Current game | Not started |
 | [src/mon.c](nethack-c/upstream/src/mon.c) | 6088 | Current game | Not started |
-| [src/mondata.c](nethack-c/upstream/src/mondata.c) | 1671 | Current game | In progress |
+| [src/mondata.c](nethack-c/upstream/src/mondata.c) | 1671 | Current game | Passed |
 | [src/monmove.c](nethack-c/upstream/src/monmove.c) | 2396 | Current game | Not started |
 | [src/monst.c](nethack-c/upstream/src/monst.c) | 89 | Current game | Passed |
 | [src/mplayer.c](nethack-c/upstream/src/mplayer.c) | 379 | Current game | Passed |

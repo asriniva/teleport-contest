@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('stairs', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/stairs-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/stairs-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/stairs-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -163,9 +165,9 @@ for (let i = 0; i < 120; i++) {
     if (i % 7 === 0) { queries(entry[0], entry[1], entry[4], entry[5]); mark(0, 1); describe(0, i % 2); }
 }
 const before = state();
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 assert.deepEqual(state(), before);
 queries(0, 0, 1, 3); describe(0, 1); call('add', 77, 19, 0, 1, 2, 5);
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
@@ -174,4 +176,4 @@ independent._probe_init(); independent._probe_hero(1, 1, 1); independent._probe_
 assert.equal(nodes(independent).length, 1);
 independent._probe_free(); assert.deepEqual(state(), unchanged);
 call('free'); assert.equal(state().nodes.length, 0); scope();
-console.log(`STAIRS: ${comparisons} original-C/hybrid list, pointer, placement and description comparisons passed.`);
+console.log(`STAIRS: ${comparisons} ${referenceLabel}/hybrid list, pointer, placement and description comparisons checked.`);

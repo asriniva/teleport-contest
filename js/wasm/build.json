@@ -138,7 +138,7 @@
       "library": "nethack-c/wasm/tu-libraries/rnd.js",
       "reference": "prepared",
       "configuredFunctions": true,
-      "sha256": "54bde8f69ffce24a9ac98dcabb4c8ed314cb99de8574a977e93c466e7e464050",
+      "sha256": "f5cd370dfb29fd9445e830897e8b527b4fd582ddea59e504d8ff6cc05f3e8d33",
       "preparedCSourceSha256": "77adb14810de4e9580c0ced9bb6a48ef8bb15daf818fcfb9c78a0a8516121087"
     },
     {
@@ -448,8 +448,27 @@
       "configuredFunctions": true,
       "sha256": "91844831154f6d128e50d762d0763ecf2b3b845111e91ae5d0e537d10d25bd27",
       "preparedCSourceSha256": "b1dbdca4e2fc9e5a2a17ed5d0c80d79f900ea5997dd0b2c4a3171977bee0260f"
+    },
+    {
+      "name": "mondata",
+      "source": "src/mondata.c",
+      "javascript": "js/ported/mondata.js",
+      "library": "nethack-c/wasm/tu-libraries/mondata.js",
+      "configuredFunctions": true,
+      "sha256": "8c4392e371881e3d57d8db03e42e4e4831b665bab808604eef8a7e0a0cc5ac20",
+      "preparedCSourceSha256": "c7a19d003c169fed7dde555ecad9069627f059309142b7d8104314572f90a685"
+    },
+    {
+      "name": "hacklib",
+      "source": "src/hacklib.c",
+      "javascript": "js/ported/hacklib.js",
+      "library": "nethack-c/wasm/tu-libraries/hacklib.js",
+      "reference": "prepared",
+      "configuredFunctions": true,
+      "sha256": "308c32f2c959a8aadcb816d333ea5faf2aad90c9325523ae6a5551bd9d4963e3",
+      "preparedCSourceSha256": "78e81aedddb93a6bc8d966f3f586e689ae05c335d34dba36af6abb95700d5ec4"
     }
   ],
   "sourceDateEpoch": "1777723200",
-  "wasmSha256": "a62a9eafa669c48aef3d8fee5847ec4078313f9a24f060e1504af449c358b405"
+  "wasmSha256": "435c47c8a2cd42ac6aeaab327a8e0b6c66916c171255bd29a04924bd780af52e"
 }

@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('mondata', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/mondata-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/mondata-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/mondata-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -8,7 +10,7 @@ import * as core from '../js/ported/mondata.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.mondata,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 const text=(m,p)=>{if(!p)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');};
 const snap=m=>({state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),rng:m._probe_rng_state()>>>0,count:m._probe_rng_count()});
-function check(){assert.deepEqual(snap(modules[1]),snap(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function check(){assert.deepEqual(snap(modules[1]),snap(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){if(['set_monster','object'].includes(name))args[2]=BigInt(args[2]);if(['hero','permonst'].includes(name))args[1]=BigInt(args[1]);if(name==='prop')args[2]=BigInt(args[2]);const r=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(r[1],r[0],name+':'+args);comparisons++;check();return r[0];}
 function act(op,pm=L.PM_HUMAN,a=0,b=0,v=0n){return Number(call('action',op,pm,a,b,BigInt(v)));}
 function fast(op,pm=L.PM_HUMAN,a=0,b=0,v=0n){const r=modules.map(m=>m._probe_action(op,pm,a,b,BigInt(v)));assert.equal(r[1],r[0],`${op}:${pm}:${a}:${b}`);comparisons++;return Number(r[0]);}
@@ -58,6 +60,7 @@ reset();opt(21,1);assert.equal(act(36),0);
 // Hallucinatory pronouns, raceptr role/race distinction and all grownup pairs.
 for(const who of [0,3])for(const flags of [0,1,2,3,255])for(const visible of [0,1]){reset();opt(7,visible);mon(who,7,1);prop(L.HALLUC,0,1);rng([3]);act(37,L.PM_HUMAN,who);act(38,L.PM_HUMAN,who,flags);}
 for(const row of core.grownups.slice(0,-1)){reset();const [a,b]=row.map(k=>typeof k==='string'?L[k]:k);assert.equal(act(42,a,b),1);}
+reset();assert.equal(act(42,L.PM_HUMAN,L.PM_HUMAN),1);assert.equal(act(42,L.PM_HUMAN,L.PM_LICH),0);assert.ok(Number.isSafeInteger(L.PM_ELF));const letter=p=>new DataView(modules[0].HEAPU8.buffer).getUint8(Number(modules[0]._probe_pointer(0,p))+L.pm_mlet);assert.equal(letter(L.PM_HUMAN),letter(L.PM_ELF));assert.equal(act(42,L.PM_HUMAN,L.PM_ELF),0);
 reset();hero(8,L.PM_LICH);assert.equal(act(43,L.PM_HUMAN,3),L.PM_LICH);hero(1,L.PM_BAT);assert.equal(act(43,L.PM_HUMAN,3),L.PM_HUMAN);
 
 // Raw signed8 trap knowledge casts intentionally retain -128 and zero out high-only low-byte-empty masks.
@@ -69,7 +72,7 @@ for(const cha of [3,12,25])for(const level of [1,10,50])for(const roll of [0,18,
 for(let damage=0;damage<256;damage++){reset();act(49,L.PM_HUMAN,damage);act(50,L.PM_HUMAN,damage);rng([7]);act(58,L.PM_HUMAN,damage);}
 
 // Controlled native callbacks cause actual growth and reenter source predicates without replacing policy.
-for(let stage=1;stage<=10;stage++){reset();opt(30,stage);opt(31,stage);const before=modules.map(m=>m.HEAPU8.byteLength);if(stage===1){rng([0]);act(54);}else if(stage===2){obj(0,2,1);equip(3,0);act(5,L.PM_HUMAN,0,L.AD_FIRE);}else if(stage===3){obj(0,2,1);obj(0,4,0);act(10);}else if(stage===4)act(5,L.PM_HUMAN,0,L.AD_FIRE);else if(stage===5){obj(0,0,L.BLINDING_VENOM);obj(1,0,L.HELMET);obj(1,1,BigInt(L.W_ARMH));obj(0,3,1);obj(0,4,0);opt(19,L.AT_SPIT);opt(20,0);act(11,L.PM_HUMAN,-1,0);}else if(stage===6)act(38,L.PM_HUMAN,0,0);else if(stage===7)act(54);else if(stage===8){hero(11,10);hero(12,10);hero(13,L.PIT);act(57);}else if(stage===9){input('not a species');act(35);}else{input('dogs');act(36);}assert.ok(trace().includes(`grow:${stage};`),`growth${stage}`);assert.ok(trace().includes('nested:'));modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>before[i]));}
+for(let stage=1;stage<=10;stage++){reset();opt(30,stage);opt(31,stage);const before=modules.map(m=>allocationMetric(m));if(stage===1){rng([0]);act(54);}else if(stage===2){obj(0,2,1);equip(3,0);act(5,L.PM_HUMAN,0,L.AD_FIRE);}else if(stage===3){obj(0,2,1);obj(0,4,0);act(10);}else if(stage===4)act(5,L.PM_HUMAN,0,L.AD_FIRE);else if(stage===5){obj(0,0,L.BLINDING_VENOM);obj(1,0,L.HELMET);obj(1,1,BigInt(L.W_ARMH));obj(0,3,1);obj(0,4,0);opt(19,L.AT_SPIT);opt(20,0);act(11,L.PM_HUMAN,-1,0);}else if(stage===6)act(38,L.PM_HUMAN,0,0);else if(stage===7)act(54);else if(stage===8){hero(11,10);hero(12,10);hero(13,L.PIT);act(57);}else if(stage===9){input('not a species');act(35);}else{input('dogs');act(36);}assert.ok(trace().includes(`grow:${stage};`),`growth${stage}`);assert.ok(trace().includes('nested:'));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));}
 reset();opt(0,0);rng([0]);act(54);assert.ok(trace().includes('@;'));
 reset();mon(0,14,0x80);const held=snap(modules[1]),other=await hybridFactory({nethackPorted:runtime});other._probe_reset(9);other._probe_action(56,L.PM_HUMAN,0,L.ALL_TRAPS,0n);assert.equal(other._probe_action(55,L.PM_HUMAN,0,L.ALL_TRAPS,0n),-1n);other._probe_action(0,L.PM_BAT,0,0,0n);assert.deepEqual(snap(modules[1]),held);comparisons+=2;check();
-console.log(`MONDATA C/hybrid differential: ${comparisons} comparisons passed`);
+console.log(`MONDATA ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);

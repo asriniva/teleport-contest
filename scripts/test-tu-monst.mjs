@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('monst', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/monst-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/monst-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/monst-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -9,7 +11,7 @@ const modules=[await referenceFactory(),await hybridFactory({nethackPorted:runti
 function string(m,p){if(p===0n||p===0)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function bytes(m,p,size){return Buffer.from(m.HEAPU8.slice(Number(p),Number(p)+size));}
 function snapshot(m){const count=m._probe_count(),alias=new Map(),names=[],values=[],attacks=[];let next=0;for(let row=0;row<count;row++){values.push(Array.from({length:m._probe_field_count()},(_,f)=>m._probe_value(row,f)));attacks.push(Array.from({length:L.NATTK},(_,a)=>Array.from({length:4},(_,f)=>m._probe_attack(row,a,f))));names.push(Array.from({length:L.NUM_MGENDERS},(_,g)=>{const p=m._probe_name(row,g);if(p===0n)return {value:null,alias:-1};const key=p.toString();if(!alias.has(key))alias.set(key,next++);return {value:string(m,p),alias:alias.get(key)};}));}const raw=bytes(m,m._probe_monsters(),count*L.monsterSize);for(let row=0;row<count;row++)raw.fill(0,row*L.monsterSize+L.pmnames,row*L.monsterSize+L.pmnames+L.pointerSize*L.NUM_MGENDERS);return {values,attacks,names,raw,constants:[0,1].map(w=>({raw:bytes(m,m._probe_constants(w),L.NATTK*L.attackSize),fields:Array.from({length:L.NATTK},(_,a)=>Array.from({length:4},(_,f)=>m._probe_constant_attack(w,a,f)))}))};}
-function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function init(){modules.forEach(m=>m._probe_init());check();}
 for(const m of modules){assert.equal(m._probe_count(),L.rowCount);assert.equal(m._probe_count(),L.NUMMONS+1);for(let i=0;i<m._probe_layout_count();i++){const key=string(m,m._probe_layout_name(i));const raw=m._probe_layout_value(i);assert.equal(typeof L[key]==='string'?BigInt.asUintN(64,raw).toString():Number(BigInt.asIntN(64,raw)),L[key],key);}}
 assert.equal(L.NUM_MGENDERS,3);assert.equal(L.NATTK,6);
@@ -30,5 +32,5 @@ for(let row=0;row<L.rowCount;row++){for(let f=0;f<fields.length;f++){const value
 // poisoned pointers before reinitialization.
 for(const seed of [0,1,0xffffffff]){modules.forEach(m=>m._probe_poison(seed));init();assert.deepEqual(snapshot(modules[0]),oracle);stable();}
 const other=await hybridFactory({nethackPorted:runtime}),otherStack=other._probe_stack();const fresh=snapshot(other);assert.ok(fresh.raw.every(b=>b===0));assert.deepEqual(fresh.constants,before.constants);other._probe_init();assert.deepEqual(snapshot(other),oracle);modules[1]._probe_names(0,2);modules[1]._probe_mutate_attack(0,0,0,255);assert.deepEqual(snapshot(other),oracle);assert.deepEqual(snapshot(modules[0]),oracle);modules[1]._probe_init();check();
-const sizes=modules.map(m=>m.HEAPU8.byteLength),allocations=modules.map(m=>m._malloc(BigInt(m.HEAPU8.byteLength+16*1024*1024)));modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>sizes[i]));init();assert.deepEqual(snapshot(modules[0]),oracle);stable();assert.deepEqual(snapshot(other),oracle);modules.forEach((m,i)=>m._free(allocations[i]));assert.equal(other._probe_stack(),otherStack);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);
-console.log(`MONST: ${comparisons} original-C/hybrid full-catalogue, startup attacks, flags, aliases, padding and reinitialization comparisons passed.`);
+const sizes=modules.map(m=>allocationMetric(m)),allocations=modules.map(m=>m._malloc(BigInt(allocationMetric(m)+16*1024*1024)));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));init();assert.deepEqual(snapshot(modules[0]),oracle);stable();assert.deepEqual(snapshot(other),oracle);modules.forEach((m,i)=>m._free(allocations[i]));assertStackRestored(other, otherStack);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);
+console.log(`MONST: ${comparisons} ${referenceLabel}/hybrid full-catalogue, startup attacks, flags, aliases, padding and reinitialization comparisons checked.`);

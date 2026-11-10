@@ -7,6 +7,12 @@ from pathlib import Path
 import subprocess
 import sys
 
+from native_tu_oracles import build_oracle
+from importlib import util as importlib_util
+addon_spec=importlib_util.spec_from_file_location("native_addon_builder", Path(__file__).with_name("build-native-addon.py"))
+addon_builder=importlib_util.module_from_spec(addon_spec)
+addon_spec.loader.exec_module(addon_builder)
+
 root = Path(__file__).resolve().parents[1]
 sdk = Path(os.environ.get('EMSDK', root / '.cache/emsdk'))
 work = root / '.cache/tu-probes'
@@ -21,12 +27,15 @@ if (root / 'js/ported/mondata.js').exists():
         [str(sdk / 'upstream/emscripten/em-config'), 'NODE_JS'], text=True))
     assert isinstance(node_command, list) and all(isinstance(part, str) for part in node_command)
     subprocess.run([*node_command, str(root / 'scripts/check-mondata-data.mjs')], check=True)
+    if (root / 'js/ported/hacklib.js').exists():
+        subprocess.run([*node_command, str(root / 'scripts/check-hacklib-data.mjs')], check=True)
 
 defines = ['-D' + name for name in json.loads((root / 'nethack-c/wasm/compile-defines.json').read_text())]
 base = [sdk / 'upstream/emscripten/emcc', '-O2', '-sMEMORY64=1', '-sMODULARIZE=1', *defines,
         '-sENVIRONMENT=node,web', '-sALLOW_MEMORY_GROWTH=1', '--no-entry',
         '-sEXPORTED_RUNTIME_METHODS=HEAPU8', '-I' + str(include), '-I' + str(work)]
 probes = {
+    'hacklib': ([], ['layout_count', 'layout_name', 'layout_value', 'reset', 'input', 'pointer', 'snapshot', 'action', 'sort_setup', 'sort_action', 'comparator_pointer', 'sort_state', 'alloc_option', 'alloc_count', 'fd_action', 'io_trace', 'stack', 'trace', 'table_count', 'table']),
     'mondata': ([], ['layout_count', 'layout_name', 'layout_value', 'reset', 'trace', 'snapshot', 'option', 'rng_pointer', 'rng_length', 'rng_count', 'rng_state', 'set_monster', 'hero', 'prop', 'object', 'equip', 'attack', 'permonst', 'input', 'action', 'pointer', 'table', 'table_count', 'stack']),
     'dbridge': ([], ['layout_count', 'layout_name', 'layout_value', 'reset', 'trace', 'snapshot', 'option', 'rng_pointer', 'rng_length', 'rng_count', 'rng_state', 'set_monster', 'hero', 'prop', 'terrain', 'add_monster', 'add_object', 'trap', 'entity', 'action', 'pointer', 'stack']),
     'mcastu': ([], ['layout_count', 'layout_name', 'layout_value', 'reset', 'trace', 'snapshot', 'option', 'rng_pointer', 'rng_length', 'rng_count', 'rng_state', 'set_monster', 'hero', 'prop', 'attack', 'action', 'pointer', 'table', 'table_count', 'stack']),
@@ -79,7 +88,8 @@ probes = {
     'stairs': (['sx', 'sy', 'tolev', 'up', 'isladder', 'u_traversed', 'next', 'dnum', 'dlevel', 'uz'], ['coordxy_size', 'bool_size', 'bool_signed', 'level_size', 'level_field_size', 'init', 'hero', 'add', 'head', 'free', 'at', 'find', 'find_from', 'find_dir', 'find_type_dir', 'find_special_dir', 'special', 'up', 'down', 'on', 'ladder', 'on_up', 'on_down', 'known', 'describe', 'description_buffer', 'trace']),
 }
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--native-only', action='store_true', help='Build only native and matching Wasm oracle drivers')
+parser.add_argument('--native-only', action='store_true', help='Build full native APIs for the existing tests')
+parser.add_argument('--supplementary-only', action='store_true', help='Historical smaller native scenarios; not the full existing test cases')
 parser.add_argument('--only', action='append', choices=probes, help='Rebuild only this TU (repeatable); default rebuilds every registered TU')
 options = parser.parse_args()
 requested = options.only
@@ -93,7 +103,10 @@ for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
     exports += ['_probe_offset_' + field for field in fields]
     for mode in ['reference', 'hybrid']:
         args = base + ['-sEXPORTED_FUNCTIONS=' + ','.join(exports), root / ('scripts/tu-' + name + '-probe.c')]
-        if name in ['objects', 'monst']:
+        if name == 'hacklib':
+            args += [root / 'nethack-c/wasm/tu-support.c', '-sEXPORTED_RUNTIME_METHODS=HEAPU8,FS']
+            args += ['-D' + call + '=teleport_probe_' + call for call in ['malloc', 'free', 'read', 'write']]
+        elif name in ['objects', 'monst']:
             args += [root / 'nethack-c/wasm/tu-support.c']
         elif name == 'sit':
             args += [root / 'nethack-c/upstream/src/objects.c', root / 'nethack-c/upstream/src/monst.c', root / 'nethack-c/upstream/src/alloc.c', root / 'nethack-c/upstream/src/hacklib.c', root / 'nethack-c/upstream/src/drawing.c', root / 'nethack-c/wasm/tu-support.c', '-DTELEPORT_REFERENCE_DRAWING']
@@ -195,7 +208,7 @@ for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
                 args += ['-DTELEPORT_REFERENCE_DRAWING']
             if name == 'posixregex':
                 args += ['-DTELEPORT_REFERENCE_POSIXREGEX']
-            if name in ['rect', 'track', 'posixregex', 'rnd', 'unixtty', 'extralev', 'mplayer', 'exper', 'mkmap', 'getline', 'write', 'mdlib', 'quest', 'minion', 'iactions', 'selvar', 'steal', 'sit', 'fountain', 'shknam', 'rumors', 'music', 'version', 'coloratt', 'priest', 'light', 'lock', 'steed', 'wizard', 'worm', 'o_init', 'ball', 'mcastu', 'dbridge', 'mondata']:
+            if name in ['rect', 'track', 'posixregex', 'rnd', 'unixtty', 'extralev', 'mplayer', 'exper', 'mkmap', 'getline', 'write', 'mdlib', 'quest', 'minion', 'iactions', 'selvar', 'steal', 'sit', 'fountain', 'shknam', 'rumors', 'music', 'version', 'coloratt', 'priest', 'light', 'lock', 'steed', 'wizard', 'worm', 'o_init', 'ball', 'mcastu', 'dbridge', 'mondata', 'hacklib']:
                 args += ['-DTELEPORT_REFERENCE_TU']
             else:
                 source_tree = root / ('.cache/wasm64-build/tree' if port.get('reference') == 'prepared' else 'nethack-c/upstream')
@@ -204,10 +217,12 @@ for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
             args += ['--js-library', root / port['library']]
             if port.get('startup'):
                 args += ['-sDEFAULT_LIBRARY_FUNCS_TO_INCLUDE=' + json.dumps([port['startup']])]
-        if not options.native_only:
+        if not options.native_only and not options.supplementary_only:
             subprocess.run(list(map(str, args + ['-o', work / (name + '-' + mode + '.mjs')])), check=True,
                            env={**os.environ, 'SOURCE_DATE_EPOCH': '1777723200'} if name == 'date' else None)
-        from native_tu_oracles import build_oracle
-        build_oracle(root, work, name, mode, args)
+        if options.supplementary_only:
+            build_oracle(root, work, name, mode, args)
+        elif mode == 'reference':
+            addon_builder.build(name, args)
 
-    print('Built original-C and C→JS', name, 'probes.')
+    print('Built Emscripten C, C→JS and native', name, 'probes.')

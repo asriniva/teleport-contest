@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('write', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/write-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/write-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/write-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -9,7 +11,7 @@ const modules=[await referenceFactory(),await hybridFactory({nethackPorted:creat
 let comparisons=0;
 function bytes(m,p,n){p=Number(p);if(n===undefined){if(!p)return null;let e=p;while(m.HEAPU8[e])e++;n=e-p;}return Buffer.from(m.HEAPU8.slice(p,p+n));}
 function snapshot(m){return {storage:Array.from({length:4},(_,i)=>bytes(m,m._probe_snapshot_pointer(i),Number(m._probe_snapshot_size(i)))),scalars:Array.from({length:3},(_,i)=>m._probe_scalar(i)),literate:m._probe_literate(),random:m._probe_rng_state()>>>0,count:m._probe_rng_count(),knowledge:Array.from({length:layout.NUM_OBJECTS},(_,i)=>[m._probe_known(i),m._probe_encountered(i)]),trace:bytes(m,m._probe_trace()).toString('hex')};}
-function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){const values=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(values[1],values[0],`${name}(${args})`);state();comparisons++;return values[0];}
 function textCall(name,text,...args){const results=modules.map(m=>{let p=0;if(text!==null){const b=Buffer.isBuffer(text)?text:Buffer.from(text);p=m._malloc(BigInt(b.length+1));m.HEAPU8.set(b,Number(p));m.HEAPU8[Number(p)+b.length]=0;}const result=m['_probe_'+name](...args,BigInt(p));if(p)m._free(p);return result;});assert.deepEqual(results[1],results[0]);state();comparisons++;return results[0];}
 function reset(seed=1){call('reset',seed);}
@@ -59,4 +61,4 @@ prepare(layout.SCR_IDENTIFY);call('option',2,1);call('write');
 prepare(layout.SCR_IDENTIFY,0,0);call('option',4,0);rng([0,1]);call('write');
 reset();const saved=snapshot(modules[0]);modules[1]._probe_pen(1,0,0,1);assert.deepEqual(snapshot(modules[0]),saved);reset();
 const allocated=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(allocated.every(Boolean));object(layout.SPE_FORCE_BOLT);call('paper',layout.SPE_BLANK_PAPER,1,1,0,0);textCall('input',name(layout.SPE_FORCE_BOLT));rng([0]);call('write');modules.forEach((m,i)=>m._free(allocated[i]));state();
-console.log(`WRITE: ${comparisons} original-C/hybrid costs, selection, naming, ink, knowledge, conduct and callback/RNG-trace comparisons passed.`);
+console.log(`WRITE: ${comparisons} ${referenceLabel}/hybrid costs, selection, naming, ink, knowledge, conduct and callback/RNG-trace comparisons checked.`);

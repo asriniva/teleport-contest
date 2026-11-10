@@ -1,13 +1,15 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('steal', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/steal-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/steal-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/steal-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.steal,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function snapshot(m){return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),output:Buffer.from(m.HEAPU8.slice(Number(m._probe_output()),Number(m._probe_output())+L.BUFSZ+32)),rng:m._probe_rng_state()>>>0,count:m._probe_rng_count()};}
-function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 const longs={obj:[2],obit:[2],mbit:[2],hero:[1],prop:[2],action:[3,4]};
 function call(name,...args){args=args.map((v,i)=>longs[name]?.includes(i)?BigInt(v):v);const values=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(values[1],values[0],`${name}(${args})`);state();comparisons++;return values[0];}
 function reset(seed=1){call('reset',seed);}
@@ -73,6 +75,6 @@ for(const dead of [0,1])for(const tame of [0,1])for(const effects of [0,1])for(c
 for(const migrating of [0,1]){reset();obj(0,L.LONG_SWORD,1n,L.OBJ_MINVENT);obj(1,L.AMULET_OF_YENDOR,1n,L.OBJ_MINVENT);obj(2,L.LONG_SWORD,1n,L.OBJ_MINVENT);call('obit',2,8,1);minv([0,1,2]);if(migrating)call('mbit',0,7,0);act(11);assert.equal(mf(0,1),1n);assert.equal(of(0,0),0n);}
 for(const guard of [0,1])for(const pet of [0,1,256])for(const show of [0,1]){reset();obj(0,L.GOLD_PIECE,50n,L.OBJ_MINVENT);obj(1,L.LONG_SWORD,1n,L.OBJ_MINVENT);obj(2,L.LEATHER_ARMOR,1n,L.OBJ_MINVENT);call('obit',2,7,L.W_ARM);minv([0,1,2]);call('mbit',0,3,guard);act(12,-1,BigInt(show),BigInt(pet));if((pet&255)!==0)assert.equal(mf(0,1),3n);else assert.equal(mf(0,1),0n);if(guard)assert.equal(of(0,7),BigInt(L.OBJ_DELETED));}
 // Native inventory callback reenters an imported function and grows memory.
-reset();obj(0,L.LONG_SWORD,1n,L.OBJ_FREE);call('hero',0,-1);str('reason','frozen solid');call('option',29,1);call('option',30,1);call('option',15,1);call('option',20,1);const before=modules.map(m=>m.HEAPU8.byteLength);act(7,0);modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>before[i]));assert.match(trace(),/nested:1;grow;snuff:11:10;/);
+reset();obj(0,L.LONG_SWORD,1n,L.OBJ_FREE);call('hero',0,-1);str('reason','frozen solid');call('option',29,1);call('option',30,1);call('option',15,1);call('option',20,1);const before=modules.map(m=>allocationMetric(m));act(7,0);modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));assert.match(trace(),/nested:1;grow;snuff:11:10;/);
 reset();call('option',0,0);act(0,-1,99999n);const saved=snapshot(modules[0]);modules[1]._probe_hero(0,-5n);assert.deepEqual(snapshot(modules[0]),saved);reset();
-console.log(`STEAL: ${comparisons} original-C/hybrid inventory, equipment, callback, ownership, gold and RNG-site comparisons passed.`);
+console.log(`STEAL: ${comparisons} ${referenceLabel}/hybrid inventory, equipment, callback, ownership, gold and RNG-site comparisons checked.`);

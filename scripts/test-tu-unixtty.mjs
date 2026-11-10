@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('unixtty', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/unixtty-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/unixtty-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/unixtty-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -14,7 +16,7 @@ const stacks = modules.map(module => module._probe_stack());
 let comparisons = 0;
 function scope() {
     assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
-    modules.forEach((module, i) => assert.equal(module._probe_stack(), stacks[i]));
+    modules.forEach((module, i) => assertStackRestored(module, stacks[i]));
 }
 function bytes(module, pointer) {
     let end = Number(pointer); while (module.HEAPU8[end]) end++;
@@ -133,13 +135,13 @@ for (const window of [0, 1]) for (const restore of [0, 1]) for (const nested of 
     assert.equal(cleanups, window && nested ? 1 : restore ? 1 : 0, 'Nested window cleanup prevents duplicate settty');
     assert.equal(text.startsWith('window-exit:<null>;'), Boolean(window));
 }
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 state(); call('options', 0, 0, layout.B38400, -1n, 1, 1); call('get'); call('fast'); call('off'); call('on'); set(null);
 call('iflags', 0, 0, 1); needed(1); call('error', 1);
 const independentRuntime = createPortedRuntime(layouts), independent = await hybridFactory({ nethackPorted: independentRuntime });
 const beforeIndependent = state(); independent._probe_fixup(); independent._probe_options(0, 0, layout.B50, 0n, 1, 0);
 independent._probe_get(); independent._probe_fast(); independent._probe_set(0n);
 assert.deepEqual(state(), beforeIndependent); scope(); comparisons++;
-console.log(`UNIXTTY: ${comparisons} original-C/hybrid terminal-byte, baud, control-flag, variadic-error and nested-cleanup comparisons passed.`);
+console.log(`UNIXTTY: ${comparisons} ${referenceLabel}/hybrid terminal-byte, baud, control-flag, variadic-error and nested-cleanup comparisons checked.`);

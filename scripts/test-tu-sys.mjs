@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('sys', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/sys-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/sys-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/sys-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
@@ -139,12 +141,12 @@ for (const [name, field] of Object.entries(layout.fields)) {
 }
 assert.equal(released.sys.crashreporturl, populated.sys.crashreporturl, 'Original release leaves this pointer unchanged');
 
-const oldBuffers = modules.map(module => module.HEAPU8.buffer);
+const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, oldBuffers[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 state(); call('populate', 789); environment('after-growth.c'); initExpected('after-growth.c'); call('release');
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
 const before = state();
 independent._probe_populate(987); independent._probe_init(); independent._probe_seduce(-1); independent._probe_release();
 assert.deepEqual(state(), before); scope();
-console.log(`SYS: ${comparisons} original-C/hybrid configured-field, environment, initialization and release comparisons passed.`);
+console.log(`SYS: ${comparisons} ${referenceLabel}/hybrid configured-field, environment, initialization and release comparisons checked.`);

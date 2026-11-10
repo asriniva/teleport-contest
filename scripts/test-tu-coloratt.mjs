@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('coloratt', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/coloratt-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/coloratt-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/coloratt-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -9,7 +11,7 @@ function text(m,p){if(!p)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;r
 function bytes(m,p,n){return Buffer.from(m.HEAPU8.slice(Number(p),Number(p)+Number(n)));}
 function table(m){const rows=[],raw=[],names=[];for(let t=0;t<4;t++){const count=m._probe_table_count(t),size=[L.colorEntrySize,L.nameEntrySize,L.nameEntrySize,L.color256Size][t],base=Number(m._probe_pointer(t)),r=bytes(m,base,count*size);rows.push(Array.from({length:count},(_,i)=>[text(m,m._probe_table_name(t,i)),...Array.from({length:t===0?6:t===3?2:1},(_,f)=>m._probe_table_value(t,i,f).toString())]));if(t!==3)for(let i=0;i<count;i++){const off=t===0?L.color_name:L.name_name,p=new DataView(m.HEAPU8.buffer).getBigUint64(base+i*size+off,true);names.push(p);r.fill(0,i*size+off,i*size+off+L.pointerSize);}raw.push(r);}return {rows,raw,aliases:names.map(p=>names.map(q=>p===q))};}
 function snapshot(m){return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),output:bytes(m,m._probe_output(),m._probe_output_size())};}
-function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){const out=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(out[1],out[0],name);check();comparisons++;return out[0];}
 function reset(){call('reset');}
 function act(op,a=0,b=0,x=0,y=0,s=''){const out=modules.map(m=>{let p=0;if(s!==null){const v=Buffer.from(s+'\0','latin1');p=Number(m._malloc(BigInt(v.length)));m.HEAPU8.set(v,p);}try{return m._probe_action(op,a,b,x,y,BigInt(p));}finally{if(p)m._free(p);}});assert.deepEqual(out[1],out[0],`action${op}:${s}`);check();comparisons++;return out[0];}
@@ -52,8 +54,8 @@ for(const count of [-1,0,1,2]){reset();call('option',1,count);picks(count===2?[1
 reset();call('option',1,2);picks([16,2]);assert.equal(act(9,L.NO_COLOR),BigInt(L.CLR_RED));
 for(const colorCount of [-1,0,1,2])for(const attrCount of [-1,0,1,2]){reset();call('option',3,L.CLR_BLUE);call('option',4,L.ATR_DIM);call('option',1,colorCount);call('option',2,attrCount);picks([2,3],[2,3]);const r=act(3,0,0,0,0,'Pick style');if(colorCount<0||attrCount<0){assert.equal(r,0n);assert.equal(fields()[0],String(L.CLR_BLUE));assert.equal(fields()[1],String(L.ATR_DIM));}else assert.equal(r,1n);}
 // Native callback frames may grow memory/reenter while menus/rules are live.
-for(const stage of [1,2,3,4]){reset();call('option',30,stage);call('option',31,stage);const sizes=modules.map(m=>m.HEAPU8.byteLength);if(stage<=2){call('option',1,1);picks([2]);act(8,L.ATR_NONE);}else if(stage===3){act(11,L.CLR_RED,0,0,0,'red');act(13);}else act(6,0,0,0,0,'unknown');assert.match(trace(),new RegExp('grew:'+stage));assert.match(trace(),/nested-count:/);modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>sizes[i]));}
+for(const stage of [1,2,3,4]){reset();call('option',30,stage);call('option',31,stage);const sizes=modules.map(m=>allocationMetric(m));if(stage<=2){call('option',1,1);picks([2]);act(8,L.ATR_NONE);}else if(stage===3){act(11,L.CLR_RED,0,0,0,'red');act(13);}else act(6,0,0,0,0,'unknown');assert.match(trace(),new RegExp('grew:'+stage));assert.match(trace(),/nested-count:/);modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));}
 assert.deepEqual(table(modules[0]),initial);assert.deepEqual(table(modules[1]),initial);
 // One runtime must initialize independent native catalogues and staticbuffers.
 reset();call('option',3,L.CLR_RED);call('option',4,L.ATR_BOLD);act(1);act(11,L.CLR_RED,0,0,0,'primary');const before=snapshot(modules[1]),other=await hybridFactory({nethackPorted:runtime});assert.deepEqual(table(other),initial);other._probe_reset();assert.equal(other._probe_action(15,0,0,0,0,0n),0n);other._probe_option(3,L.CLR_BLUE);other._probe_action(1,0,0,0,0,0n);assert.equal(text(other,other._probe_output()),'blue&none');assert.deepEqual(snapshot(modules[1]),before);check();
-reset();console.log(`COLORATT: ${comparisons} original-C/hybrid catalogue, parsing, native-POSIX rules, menus, ownership and RGB comparisons passed.`);
+reset();console.log(`COLORATT: ${comparisons} ${referenceLabel}/hybrid catalogue, parsing, native-POSIX rules, menus, ownership and RGB comparisons checked.`);

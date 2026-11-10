@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('strutil', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/strutil-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/strutil-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/strutil-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 import { C } from '../js/ported/c-runtime.js';
@@ -147,11 +149,11 @@ for (const length of [0, 1, 255, layout.largestInt - 1, layout.largestInt, layou
 // already exists. C and JS must both continue using the new linear-memory views.
 const growing = contexts();
 append(growing, 'before-growth\n');
-const previous = modules.map(module => module.HEAPU8.buffer);
+const previous = modules.map(module => memoryCheckpoint(module));
 call(growing, 'reserve', 40 * 1024 * 1024);
-modules.forEach((module, i) => assert.notEqual(module.HEAPU8.buffer, previous[i]));
+modules.forEach((module, i) => assertMemoryGrowth(module, previous[i]));
 append(growing, 'after-growth');
 call(growing, 'crlf');
 call(growing, 'empty');
 release(growing);
-console.log(`STRUTIL: ${comparisons} original-C/hybrid buffer, byte-pattern and fatal-length comparisons passed.`);
+console.log(`STRUTIL: ${comparisons} ${referenceLabel}/hybrid buffer, byte-pattern and fatal-length comparisons checked.`);

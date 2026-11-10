@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('selvar', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/selvar-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/selvar-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/selvar-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -9,7 +11,7 @@ const runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),awa
 function bytes(m,p,n){p=Number(p);if(!p)return null;return Buffer.from(m.HEAPU8.slice(p,p+n));}
 function text(m,p){let a=Number(p),e=a;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(a,e));}
 function snapshot(m){return {slots:Array.from({length:8},(_,i)=>({exists:m._probe_pointer(i)!==0n,fields:Array.from({length:7},(_,f)=>m._probe_field(i,f)),map:bytes(m,m._probe_map(i),layout.COLNO*layout.ROWNO+1)})),rect:bytes(m,m._probe_rect(),Number(m._probe_rect_size())),coords:[m._probe_coord(0),m._probe_coord(1)],description:bytes(m,m._probe_description_pointer(),Number(m._probe_description_size())),random:m._probe_rng_state()>>>0,count:m._probe_rng_count(),trace:text(m,m._probe_trace()).toString('hex')};}
-function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));const ref=modules[0]._probe_callback_identity(),raw=BigInt(runtime.selvarState.selection_flood_check_func);assert.equal(raw===0n?0:raw===modules[1]._probe_callback_pointer(1)?1:raw===modules[1]._probe_callback_pointer(2)?2:99,ref);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));const ref=modules[0]._probe_callback_identity(),raw=BigInt(runtime.selvarState.selection_flood_check_func);assert.equal(raw===0n?0:raw===modules[1]._probe_callback_pointer(1)?1:raw===modules[1]._probe_callback_pointer(2)?2:99,ref);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){const result=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(result[1],result[0],`${name}(${args})`);state();comparisons++;return result[0];}
 function both(name,...args){modules.forEach(m=>m['_probe_'+name](...args));}
 function reset(seed=1){call('reset',seed);}
@@ -55,7 +57,7 @@ for(const rough of [-128,-1,0,1,2,8,127,128,255])for(const rec of [0,1,3,5,128,2
 for(const valid of [0,1]){fresh();call('new',1);rect(0,2,3,4);call('option',1,1);call('iterate',0,valid);assert.equal(selected(modules[0],1),9);}
 fresh();rect(2,3,4,5);assert.equal(call('irregular',0),0);assert.equal(call('description',0),1);assert.equal(text(modules[0],modules[0]._probe_description_pointer()).toString(),'square 3 by 3');call('set',0,3,4,0);assert.equal(call('irregular',0),1);call('description',0);call('newsyms',0);
 for(const coder of [0,1])for(const fallback of [-1,2])for(const room of [-1,0,2]){fresh();call('room',0,2,2,6,6);call('room',2,10,4,13,8);call('coder',coder,fallback);for(let x=2;x<=13;x++)for(let y=2;y<=8;y++)both('cell',x,y,layout.ROOM,0,(x+y)%3===0?1:0,x>=10?5:3);state();call('fromroom',2,room);}
-fresh();call('new',1);terrain(2,2,6,6);call('flood_callback',1);call('option',1,1);call('option',2,1);const before=modules.map(m=>m.HEAPU8.byteLength);call('flood',0,3,3,1);modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>before[i]));assert.ok(selected(modules[0])>0);
+fresh();call('new',1);terrain(2,2,6,6);call('flood_callback',1);call('option',1,1);call('option',2,1);const before=modules.map(m=>allocationMetric(m));call('flood',0,3,3,1);modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));assert.ok(selected(modules[0])>0);
 fresh();call('option',3,0);rect(2,2,4,4);call('filter',0,1,50);
 fresh();const saved=snapshot(modules[0]);modules[1]._probe_set(0,3,3,1);assert.deepEqual(snapshot(modules[0]),saved);reset();
-console.log(`SELVAR: ${comparisons} original-C/hybrid selection-map, bounds, geometry, float32, callback and RNG-site comparisons passed.`);
+console.log(`SELVAR: ${comparisons} ${referenceLabel}/hybrid selection-map, bounds, geometry, float32, callback and RNG-site comparisons checked.`);

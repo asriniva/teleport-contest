@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('getline', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/getline-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/getline-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/getline-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -9,7 +11,7 @@ const runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),awa
 const stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function bytes(m,p,n){p=Number(p);if(n===undefined){let e=p;while(m.HEAPU8[e])e++;n=e-p;}return Buffer.from(m.HEAPU8.slice(p,p+n));}
 function snapshot(m){return {storage:Array.from({length:5},(_,i)=>bytes(m,m._probe_snapshot_pointer(i),Number(m._probe_snapshot_size(i)))),scalars:Array.from({length:6},(_,i)=>m._probe_scalar(i)),trace:bytes(m,m._probe_trace()).toString('hex')};}
-function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));if(runtime.getlineState)assert.equal(Number(runtime.getlineState.suppress_history),modules[0]._probe_history());assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));if(runtime.getlineState)assert.equal(Number(runtime.getlineState.suppress_history),modules[0]._probe_history());assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 function call(name,...args){const values=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(values[1],values[0],`${name}(${args})`);state();comparisons++;return values[0];}
 function textCall(name,text,...args){const values=modules.map(m=>{let p=0;if(text!==null){const data=Buffer.isBuffer(text)?text:Buffer.from(text);p=m._malloc(BigInt(data.length+1));m.HEAPU8.set(data,Number(p));m.HEAPU8[Number(p)+data.length]=0;}const result=m['_probe_'+name](BigInt(p),...args);if(p)m._free(p);return result;});assert.deepEqual(values[1],values[0]);state();comparisons++;return values[0];}
 function input(values){modules.forEach(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_input_pointer()),values.length).set(values);m._probe_input_length(values.length);});state();}
@@ -46,4 +48,4 @@ reset();call('option',12,1);input([]);textCall('wait',null);
 reset();input(Array.from({length:6000},()=>[99,8]).flat().concat(10));textCall('hooked','#',1);assert.equal(answer().length,0);
 reset();const saved=snapshot(modules[0]);modules[1]._probe_option(10,33);assert.deepEqual(snapshot(modules[0]),saved);reset();
 const allocations=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(allocations.every(Boolean));input([99,111,10]);textCall('hooked','#',1);input([10]);textCall('wait',null);modules.forEach((m,i)=>m._free(allocations[i]));state();
-console.log(`GETLINE: ${comparisons} original-C/hybrid input, completion, prompt-state, history, wait and callback-trace comparisons passed.`);
+console.log(`GETLINE: ${comparisons} ${referenceLabel}/hybrid input, completion, prompt-state, history, wait and callback-trace comparisons checked.`);

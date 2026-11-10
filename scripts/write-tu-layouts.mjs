@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const fields = {
+    hacklib: [],
     mondata: [],
     dbridge: [],
     mcastu: [],
@@ -150,7 +151,7 @@ for (const { name } of JSON.parse(fs.readFileSync(root + 'nethack-c/wasm/tu-port
         if (probe._probe_int_size() !== 4 || probe._probe_lua_integer_size() !== 8 || probe._probe_ull_size() !== 8)
             throw new Error('Review changed allocation integer widths');
     }
-    if (['utf8map', 'drawing', 'posixregex', 'rnd', 'ioctl', 'unixtty', 'were', 'extralev', 'mplayer', 'exper', 'mkmap', 'getline', 'write', 'mdlib', 'quest', 'minion', 'iactions', 'selvar', 'steal', 'sit', 'fountain', 'objects', 'monst', 'shknam', 'rumors', 'music', 'version', 'coloratt', 'priest', 'light', 'lock', 'steed', 'wizard', 'worm', 'o_init', 'ball', 'mcastu', 'dbridge', 'mondata'].includes(name)) {
+    if (['utf8map', 'drawing', 'posixregex', 'rnd', 'ioctl', 'unixtty', 'were', 'extralev', 'mplayer', 'exper', 'mkmap', 'getline', 'write', 'mdlib', 'quest', 'minion', 'iactions', 'selvar', 'steal', 'sit', 'fountain', 'objects', 'monst', 'shknam', 'rumors', 'music', 'version', 'coloratt', 'priest', 'light', 'lock', 'steed', 'wizard', 'worm', 'o_init', 'ball', 'mcastu', 'dbridge', 'mondata', 'hacklib'].includes(name)) {
         for (let i = 0; i < probe._probe_layout_count(); i++) {
             let pointer = Number(probe._probe_layout_name(i)), end = pointer;
             while (probe.HEAPU8[end]) end++;

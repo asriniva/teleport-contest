@@ -17,7 +17,13 @@ function command(executable, args, expected = [0]) {
 const oracle = path.join(work, 'compress-oracle');
 // Pin libc buffer sizes to the current Emscripten service, even on hosts whose
 // native BUFSIZ differs: ncompress's ratio checkpoints depend on batching.
-command(process.env.CC || 'cc', ['-O2', '-std=gnu17', '-DIBUFSIZ=1024', '-DOBUFSIZ=1024',
+const hostCC = path.join(root, '.cache/wasm64-build/host-cc');
+const cltCC = '/Library/Developer/CommandLineTools/usr/bin/clang';
+const cltSDK = '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk';
+const compiler = process.env.CC || (fs.existsSync(hostCC) ? hostCC
+    : process.platform === 'darwin' && fs.existsSync(cltCC) ? cltCC : 'cc');
+const compilerArgs = !process.env.CC && compiler === cltCC ? ['-isysroot', cltSDK] : [];
+command(compiler, [...compilerArgs, '-O2', '-std=gnu17', '-DIBUFSIZ=1024', '-DOBUFSIZ=1024',
     path.join(root, 'nethack-c/wasm/compress-service.c'),
     path.join(root, 'scripts/compress-probe.c'), '-o', oracle]);
 let comparisons = 0;
@@ -83,11 +89,11 @@ for (const [index, original] of fixtures.entries()) {
     }
     // Both directions with the OS implementation; compressed byte identity is
     // required against pinned ncompress above, not against another encoder.
-    const jsFile = path.join(work, `js-${index}.Z`);
-    fs.writeFileSync(jsFile, js.bytes);
-    command('/usr/bin/uncompress', ['-f', jsFile]);
-    equal(fs.readFileSync(jsFile.slice(0, -2)), original, `OS decode fixture ${index}`);
     if (original.length > 0) {
+        const jsFile = path.join(work, `js-${index}.Z`);
+        fs.writeFileSync(jsFile, js.bytes);
+        command('/usr/bin/uncompress', ['-f', jsFile]);
+        equal(fs.readFileSync(jsFile.slice(0, -2)), original, `OS decode fixture ${index}`);
         for (let bits = 9; bits <= 16; ++bits) {
             const nativeFile = path.join(work, 'native');
             fs.writeFileSync(nativeFile, original);
@@ -103,11 +109,54 @@ for (const [index, original] of fixtures.entries()) {
 assert.ok(clearCount > 0, 'Adaptive dictionary resets are exercised');
 assert.deepEqual([...widths].sort((a, b) => a - b), [9, 10, 11, 12, 13, 14, 15, 16]);
 
+// Crossing the ratio arithmetic's 0x007fffff threshold selects ncompress's
+// overflow-avoiding calculation. No OS-tool matrix needed for this fixture.
+const large = Buffer.concat(Array.from({ length: 8 }, () => noise));
+const largeJS = compressUnixZ(large), largeC = reference(large);
+assert.equal(largeJS.status, largeC.status);
+equal(largeJS.bytes, largeC.bytes, 'Large-input ratio arithmetic matches pinned encoder');
+equal(decompressUnixZ(largeJS.bytes).bytes, large, 'Large-input round trip');
+
 // Constructed non-block 9-bit fixture; code 256 is an ordinary dictionary
 // entry here, not CLEAR. Codes 65,66,256 decode to "ABAB".
 const nonblock = Uint8Array.from([0x1f, 0x9d, 0x09, 65, 132, 0, 4]);
 equal(decompressUnixZ(nonblock).bytes, Buffer.from('ABAB'), 'Non-block mode dictionary code 256');
 equal(reference(nonblock, true).bytes, Buffer.from('ABAB'), 'Pinned non-block oracle');
+// Independent non-block stream generator emits only literal codes. It forces
+// every dictionary-width transition and saturation, without sharing the
+// production encoder (which deliberately emits only block-mode 16-bit files).
+for (const maxBits of [9, 12, 16]) {
+    let bits = 9, next = 256, maximum = 511, bit = 24, base = 24;
+    const literal = noise.subarray(0, 80000), packed = Buffer.alloc(literal.length * 3 + 100);
+    packed.set([0x1f, 0x9d, maxBits]);
+    for (let i = 0; i < literal.length; ++i) {
+        if (next > maximum) {
+            bit += (bits * 8 - (bit - base) % (bits * 8)) % (bits * 8);
+            base = bit;
+            maximum = ++bits === maxBits ? 1 << maxBits : (1 << bits) - 1;
+        }
+        for (let j = 0; j < bits; ++j) packed[(bit + j) >> 3] |= ((literal[i] >> j) & 1) << ((bit + j) & 7);
+        bit += bits;
+        if (i && next < (1 << maxBits)) ++next;
+    }
+    const stream = packed.subarray(0, Math.ceil(bit / 8));
+    const decoded = decompressUnixZ(stream), native = reference(stream, true);
+    assert.equal(decoded.status, 0); assert.equal(native.status, 0);
+    equal(decoded.bytes, literal, `Non-block ${maxBits}-bit saturated stream`);
+    equal(native.bytes, literal, `Pinned non-block ${maxBits}-bit saturated oracle`);
+}
+for (const flag of [0x20, 0x40, 0x60]) {
+    const stream = compressUnixZ(fixtures[4]).bytes;
+    stream[2] |= flag;
+    assert.equal(reference(stream, true).status, 0);
+    equal(decompressUnixZ(stream).bytes, fixtures[4], 'Ignore reserved header bits like pinned service');
+}
+for (const original of [Buffer.alloc(0), Buffer.from('x'), noise.subarray(0, 200)]) {
+    const file = path.join(work, 'no-shrink');
+    fs.writeFileSync(file, original); fs.rmSync(file + '.Z', { force: true });
+    assert.equal(compressUnixZ(original).status, command('/usr/bin/compress', [file], [0, 2]).status,
+        'Unforced native CLI no-shrink status');
+}
 const invalid = [[], [0x1f], [0x1f, 0x9d, 0x90], [0x1f, 0x9d, 0x90, 0],
     [0x1f, 0x9d, 0x91, 0, 0], [0x1f, 0x9d, 0x88, 0, 0],
     [0x1f, 0x9d, 0x90, 0xff, 0xff], [0x1f, 0x9d, 0x90, 65, 254, 3]];

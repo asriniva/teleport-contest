@@ -1,5 +1,5 @@
 // Temporary ABI bridge while the remaining translation units are C/Wasm.
-import * as isaac64 from './isaac64.js';
+import * as isaac64 from '../isaac64.js';
 import * as nhmd4 from './nhmd4.js';
 import * as strutil from './strutil.js';
 import * as rect from './rect.js';
@@ -45,6 +45,8 @@ import * as light from './light.js';
 import { createLightEnvironment } from './light-runtime.js';
 import * as lock from './lock.js';
 import { createLockEnvironment } from './lock-runtime.js';
+import * as hacklib from './hacklib.js';
+import { createHacklibState, createHacklibEnvironment } from './hacklib-runtime.js';
 import * as mondata from './mondata.js';
 import { createMondataEnvironment } from './mondata-runtime.js';
 import * as dbridge from './dbridge.js';
@@ -231,6 +233,13 @@ export function createPortedRuntime(layouts) {
     const musicStates = new WeakMap();
     const versionStates = new WeakMap();
     const colorattStates = new WeakMap();
+    const hacklibEnvironments = new WeakMap();
+    const hacklibStates = new WeakMap();
+    const hacklibState = services => {
+        if (!hacklibStates.has(services.moduleKey))
+            hacklibStates.set(services.moduleKey, createHacklibState(services, layouts.hacklib, hacklib));
+        return hacklibStates.get(services.moduleKey);
+    };
     const ballStates = new WeakMap();
     const ballState = services => {
         if (!ballStates.has(services.moduleKey))
@@ -289,6 +298,16 @@ export function createPortedRuntime(layouts) {
             if (dateInitialized) throw new Error('Version metadata already initialized');
             initializeDate(services, layouts.date, date.nomakedefs_initial);
             dateInitialized = true;
+        },
+        hacklibState,
+        hacklib(services, name, ...args) {
+            let environment = hacklibEnvironments.get(services.moduleKey);
+            if (!environment) {
+                environment = createHacklibEnvironment(services, layouts.hacklib, hacklib, hacklibState(services));
+                hacklibEnvironments.set(services.moduleKey, environment);
+            }
+            const result = withCEnvironment(environment, hacklib[name], ...args);
+            return typeof result === 'string' ? services.literal(result) : result?.address ?? result ?? 0;
         },
         mondata(services, name, ...args) {
             const environment = createMondataEnvironment(services, layouts.mondata, mondata);
@@ -964,17 +983,33 @@ export function createPortedRuntime(layouts) {
             return stringCall(services, name, ...args);
         },
         isaac64_init(heap, _ctx, _seed, _nseed) {
-            isaac64.isaac64_init(context(heap, _ctx), seed(heap, _seed, _nseed), _nseed);
+            // The frozen initializer owns the algorithm; only copy its result
+            // into the C ABI context used by the remaining Wasm callers.
+            const initialized = isaac64.isaac64_init(seed(heap, _seed, _nseed));
+            const target = context(heap, _ctx);
+            target.r.set(initialized.r);
+            target.m.set(initialized.m);
+            for (const field of ['a', 'b', 'c', 'n']) target[field] = initialized[field];
         },
         isaac64_reseed(heap, _ctx, _seed, _nseed) {
-            isaac64.isaac64_reseed(context(heap, _ctx), seed(heap, _seed, _nseed), _nseed);
+            isaac64.isaac64_reseed(context(heap, _ctx), seed(heap, _seed, _nseed));
         },
         isaac64_next_uint64(heap, _ctx) {
             return isaac64.isaac64_next_uint64(context(heap, _ctx));
         },
         isaac64_next_uint(heap, _ctx, _n) {
             // A Wasm i64 crosses the JS ABI as signed even for C uint64_t.
-            return isaac64.isaac64_next_uint(context(heap, _ctx), BigInt.asUintN(64, _n));
+            // The frozen bounded helper mixes BigInt with the Number literal 1.
+            // Keep the frozen file untouched; adapt the C bound here while all
+            // random draws still come from the canonical generator.
+            const target = context(heap, _ctx), bound = BigInt.asUintN(64, _n);
+            let value, remainder, multiple;
+            do {
+                value = isaac64.isaac64_next_uint64(target);
+                remainder = value % bound;
+                multiple = value - remainder;
+            } while (BigInt.asUintN(64, multiple + bound - 1n) < multiple);
+            return remainder;
         },
         nhmd4_init(heap, ctx) {
             nhmd4.nhmd4_init(nhmd4Context(heap, ctx, layouts.nhmd4));

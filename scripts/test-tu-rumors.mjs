@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('rumors', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/rumors-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/rumors-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/rumors-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
@@ -8,7 +10,7 @@ const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',impor
 function text(m,p){if(p===0n||p===0)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function caps(m){const counts=[0,1,2].map(f=>m._probe_cap_count(f)),p=m._probe_cap_pointer();return {counts,exists:p!==0n,names:p===0n?[]:Array.from({length:counts[2]},(_,i)=>text(m,m._probe_cap_name(i)))};}
 function snapshot(m){return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),output:Buffer.from(m.HEAPU8.slice(Number(m._probe_output()),Number(m._probe_output())+Number(m._probe_output_size()))),saved:Buffer.from(m.HEAPU8.slice(Number(m._probe_saved_pointer()),Number(m._probe_saved_pointer())+Number(m._probe_saved_size()))),caps:caps(m),rng:m._probe_rng_state()>>>0,count:m._probe_rng_count()};}
-function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 const longs={hero:[1],prop:[2]};
 function call(name,...args){args=args.map((v,i)=>longs[name]?.includes(i)?BigInt(v):v);const out=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(out[1],out[0],`${name}(${args})`);check();comparisons++;return out[0];}
 function reset(seed=1){call('reset',seed);}
@@ -66,8 +68,8 @@ reset();defaults();call('option',13,1);act(16);assert.ok(caps(modules[0]).counts
 reset();defaults();call('remove',2);act(16);assert.equal(caps(modules[0]).counts[1],0);act(9);assert.equal(call('free_count'),1);
 reset();defaults();call('hero',6,1);call('option',10,1);act(16);assert.match(trace(),/Capitalized monster type names/);
 // Real read callback grows memory; native exercise reenters another source path.
-reset();defaults();call('option',11,1);call('option',12,1);rng([0,0]);const sizes=modules.map(m=>m.HEAPU8.byteLength);act(0,1,1);assert.match(trace(),/nested-cap:1/);modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>sizes[i]));
+reset();defaults();call('option',11,1);call('option',12,1);rng([0,0]);const sizes=modules.map(m=>allocationMetric(m));act(0,1,1);assert.match(trace(),/nested-cap:1/);modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));
 // Shared runtime must key private CapMons ownership by actual native module.
 reset();defaults();act(16);const referenceCaps=caps(modules[0]),other=await hybridFactory({nethackPorted:runtime});other._probe_reset(1);assert.equal(caps(other).exists,false);assert.deepEqual(caps(modules[1]),referenceCaps);other._probe_action(16,0,0,0n,0n,0,0n);assert.ok(caps(other).exists);assert.deepEqual(caps(modules[1]),referenceCaps);other._probe_action(9,0,0,0n,0n,0,0n);assert.deepEqual(caps(modules[1]),referenceCaps);check();
 reset();call('option',1,0);defaults();rng([0,0]);act(0,1,1);const savedState=snapshot(modules[0]);modules[1]._probe_hero(0,7n);assert.deepEqual(snapshot(modules[0]),savedState);reset();
-console.log(`RUMORS: ${comparisons} original-C/hybrid native-file, oracle, consultation, cache, ownership and RNG-site comparisons passed.`);
+console.log(`RUMORS: ${comparisons} ${referenceLabel}/hybrid native-file, oracle, consultation, cache, ownership and RNG-site comparisons checked.`);

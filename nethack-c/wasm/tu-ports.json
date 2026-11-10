@@ -337,5 +337,13 @@
     "javascript": "js/ported/mondata.js",
     "library": "nethack-c/wasm/tu-libraries/mondata.js",
     "configuredFunctions": true
+  },
+  {
+    "name": "hacklib",
+    "source": "src/hacklib.c",
+    "javascript": "js/ported/hacklib.js",
+    "library": "nethack-c/wasm/tu-libraries/hacklib.js",
+    "reference": "prepared",
+    "configuredFunctions": true
   }
 ]

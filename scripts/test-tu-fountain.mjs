@@ -1,13 +1,15 @@
-import assert from 'node:assert/strict';
+import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('fountain', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/fountain-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/fountain-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/fountain-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.fountain,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function snapshot(m){return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),count:m._probe_rng_count(),rng:m._probe_rng_state()>>>0};}
-function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));comparisons++;}
+function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}
 const longs={obj:[2],obit:[2],hero:[1],prop:[2]};
 function call(name,...args){args=args.map((v,i)=>longs[name]?.includes(i)?BigInt(v):v);const out=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(out[1],out[0],`${name}(${args})`);state();comparisons++;return out[0];}
 function reset(seed=1){call('reset',seed);}
@@ -36,7 +38,7 @@ for(const difficulty of [0,19,20])for(const roll of [0,79,99])for(const gender o
 for(const drinking of [0,1,2]){reset();act(4,drinking);assert.equal(call('counter'),0);assert.match(trace(),drinking?/thirst is quenched/:/sprays all over/);reset();gushArea();rng(Array(12).fill(0));act(4,drinking);assert.equal(call('counter'),3);assert.equal((trace().match(/Water gushes forth/g)||[]).length,1);assert.match(trace(),/before:0;.*after:1;before:1;.*after:2;before:2;.*after:3;/);assert.equal(cell(12,12)[2],L.POOL);assert.equal(cell(12,12)[3],0);}
 for(const guard of ['odd','hero','random','terrain','boulder','door','trap']){reset();call('terrain',12,12,L.ROOM,31,0);let x=12,y=12;if(guard==='odd')x=13;if(guard==='hero')x=y=10;if(guard==='random')rng([1]);else rng([0]);if(guard==='terrain')call('terrain',12,12,L.SINK,1,0);if(guard==='boulder')call('option',5,1);if(guard==='door')call('option',6,1);if(guard==='trap'){call('trap',L.PIT);call('option',7,0);}act(5,x,y);assert.equal(call('counter'),0);}
 reset();call('terrain',12,12,L.ROOM,31,0);obj(0,L.LONG_SWORD,1n,L.OBJ_FLOOR);call('obit',0,10,1);call('mbit',0,3,1);call('trap',L.PIT);rng([0]);act(5,12,12);assert.equal(call('counter'),1);assert.match(trace(),/deltrap:.*water-chain:1:1;liquid:1;/);assert.equal(mf(0,1),19n);
-reset();gushArea();call('prop',L.GLIB,0,123);call('option',28,1);call('option',29,1);rng(Array(20).fill(0));const before=modules.map(m=>m.HEAPU8.byteLength);act(4,1);modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>before[i]));assert.equal(call('counter'),3);assert.equal(prop(L.GLIB),0n);assert.match(trace(),/nested-wash:.*grew;/);
+reset();gushArea();call('prop',L.GLIB,0,123);call('option',28,1);call('option',29,1);rng(Array(20).fill(0));const before=modules.map(m=>allocationMetric(m));act(4,1);modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));assert.equal(call('counter'),3);assert.equal(prop(L.GLIB),0n);assert.match(trace(),/nested-wash:.*grew;/);
 // Gem loot flag and watch warnings, including deaf/group pronouns.
 for(const blind of [0,1]){reset();if(blind)call('prop',L.BLINDED,0,1);act(6);assert.equal(of(22,3),BigInt(L.OBJ_FLOOR));assert.ok(cell()[4]&L.F_LOOTED);}
 for(const watch of [0,1])for(const peaceful of [0,1])for(const visible of [0,1])for(const deaf of [0,1]){reset();call('mon',0,watch?L.PM_WATCHMAN:L.PM_HUMAN);call('mbit',0,1,peaceful);call('option',22,visible);if(deaf)call('hero',8,1);call('option',3,3);assert.equal(act(7,0),watch&&peaceful&&visible?1:0);if(watch&&peaceful&&visible&&deaf)assert.match(trace(),/their arms/);}
@@ -74,4 +76,4 @@ for(const hands of [0,1]){reset();call('terrain',10,10,L.SINK,0,0);call('prop',L
 reset();obj(0,L.LEATHER_GLOVES);rng([1]);act(14,0);assert.match(trace(),/hold the fixture item/);
 for(const blind of [0,1])for(const deaf of [0,1])for(const looted of [0,1]){reset();call('terrain',10,10,L.SINK,looted?L.S_LRING:0,0);if(blind)call('prop',L.BLINDED,0,1);if(deaf)call('hero',8,1);act(15,10,10);assert.ok(cell()[4]&L.S_LRING);assert.equal(trace().includes('mkobj-at:'),!looted);if(blind&&deaf)assert.match(trace(),/splashes you in the face/);}
 reset();call('option',0,0);rng([1]);act(13);const saved=snapshot(modules[0]);modules[1]._probe_hero(2,-3n);assert.deepEqual(snapshot(modules[0]),saved);reset();
-console.log(`FOUNTAIN: ${comparisons} original-C/hybrid fountain, sink, callback, property, inventory and RNG-site comparisons passed.`);
+console.log(`FOUNTAIN: ${comparisons} ${referenceLabel}/hybrid fountain, sink, callback, property, inventory and RNG-site comparisons checked.`);

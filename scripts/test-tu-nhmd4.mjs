@@ -1,6 +1,8 @@
-import assert from 'node:assert/strict';
+import { DataView, Uint8Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
+const referenceFactory = referenceBackend('nhmd4', emscriptenReferenceFactory);
+import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
-import referenceFactory from '../.cache/tu-probes/nhmd4-reference.mjs';
+import emscriptenReferenceFactory from '../.cache/tu-probes/nhmd4-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/nhmd4-hybrid.mjs';
 import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
 
@@ -96,9 +98,9 @@ for (const [i, module] of modules.entries()) {
     view.setUint32(Number(pointers[i]) + layout.lo, 0x1ffffffd, true);
     view.setUint32(Number(pointers[i]) + layout.hi, 0xffffffff, true);
     module.HEAPU8.copyWithin(Number(copies[i]), Number(pointers[i]), Number(pointers[i]) + layout.size);
-    const previous = module.HEAPU8.buffer;
+    const previous = memoryCheckpoint(module);
     module._malloc(40n * 1024n * 1024n);
-    assert.notEqual(module.HEAPU8.buffer, previous);
+    assertMemoryGrowth(module, previous);
 }
 update(pointers, Uint8Array.of(1, 2, 3, 4));
 update(independent, Uint8Array.of(5, 6));
@@ -106,4 +108,4 @@ update(copies, Uint8Array.of(1, 2, 3, 4));
 const digest = final(pointers);
 final(copies, digest);
 final(independent);
-console.log(`NHMD4: ${comparisons} original-C/hybrid state and digest comparisons passed, including RFC vectors.`);
+console.log(`NHMD4: ${comparisons} ${referenceLabel}/hybrid state and digest comparisons checked, including RFC vectors.`);
