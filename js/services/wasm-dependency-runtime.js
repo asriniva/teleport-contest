@@ -2,12 +2,17 @@
 // Algorithms are in the standalone byte/string services, which know no Wasm.
 import { createTerminfo } from './terminfo.js';
 import { compressUnixZ, decompressUnixZ } from './unix-compress.js';
+import { compilePosixRegex, execPosixRegex, nativeRegexError, freePosixRegex } from './posix-regex.js';
 
-export function createWasmDependencyRuntime() {
+export function createWasmDependencyRuntime({ regex = false } = {}) {
     const terminfo = createTerminfo();
     const capabilityPointers = new Map();
     const calls = { tgetent: 0, tgetflag: 0, tgetnum: 0, tgetstr: 0, tparm: 0, tgoto: 0, tputs: 0, compress: 0, decompress: 0 };
+    const regexHandles = new Map();
+    if (regex) Object.assign(calls, { regcomp: 0, regexec: 0, regerror: 0, regfree: 0 });
+    const requireRegex = () => { if (!regex) throw new Error('JS regex dependency is disabled in this build'); };
     let expansion = 0, expansionSize = 0;
+    let output = 0, outputSize = 0;
     const string = (services, pointer) => {
         pointer = Number(pointer);
         if (!pointer) return null;
@@ -78,13 +83,57 @@ export function createWasmDependencyRuntime() {
         },
         tputs(services, value, lines, callback) {
             ++calls.tputs;
-            return terminfo.tputs(string(services, value), lines, byte => services.emit(callback, byte));
+            return terminfo.tputs(string(services, value), lines, services.callback
+                ? services.callback(callback) : byte => services.emit(callback, byte));
+        },
+        tputsPrepare(services, pointer, lines) {
+            ++calls.tputs;
+            const value = string(services, pointer);
+            if (value === null) return 0;
+            let prepared = '';
+            terminfo.tputs(value, lines, byte => { prepared += String.fromCharCode(byte); });
+            if (prepared.length + 1 > outputSize) {
+                if (output) services.free(output);
+                outputSize = Math.max(256, prepared.length + 1);
+                output = services.malloc(outputSize);
+                if (!output) throw new Error('JS terminfo output allocation failed');
+            }
+            writeString(services, output, prepared);
+            return output;
+        },
+        regcomp(services, re, pattern, flags) {
+            requireRegex(); ++calls.regcomp;
+            re = Number(re);
+            if (regexHandles.has(re)) freePosixRegex(regexHandles.get(re));
+            regexHandles.delete(re);
+            const compiled = compilePosixRegex(string(services, pattern), flags, true);
+            if (!compiled.status) regexHandles.set(re, compiled.handle);
+            return compiled.status;
+        },
+        regexec(services, re, text, count, matches, flags) {
+            requireRegex(); ++calls.regexec;
+            if (Number(count) !== 0 || Number(matches) !== 0)
+                throw new RangeError('Configured JS regex supports REG_NOSUB boolean matching only');
+            return execPosixRegex(regexHandles.get(Number(re)), string(services, text), flags);
+        },
+        regerror(services, code, re, destination, size) {
+            requireRegex(); ++calls.regerror;
+            const message = nativeRegexError(code), required = message.length + 1;
+            size = Number(size); destination = Number(destination);
+            if (size > 0) writeString(services, destination, message.slice(0, size - 1));
+            return required;
+        },
+        regfree(services, re) {
+            requireRegex(); ++calls.regfree;
+            re = Number(re);
+            if (regexHandles.has(re)) freePosixRegex(regexHandles.get(re));
+            regexHandles.delete(re);
         },
         compressFile(services, filename, compressed, unpack) {
             ++calls[unpack ? 'decompress' : 'compress'];
             const plain = string(services, filename), packed = string(services, compressed);
             const source = unpack ? packed : plain, destination = unpack ? plain : packed;
-            let input, output;
+            let input, output, status = 1;
             try {
                 // Preserve the existing service's open/read source before
                 // destination creation; file cleanup/prompts remain in files.c.
@@ -101,14 +150,19 @@ export function createWasmDependencyRuntime() {
                 const encoded = unpack ? decompressUnixZ(bytes) : compressUnixZ(bytes);
                 if (encoded.bytes.length && services.FS.write(output, encoded.bytes, 0, encoded.bytes.length, 0) !== encoded.bytes.length)
                     throw new Error('incomplete output write');
-                return encoded.status;
+                status = encoded.status;
+                if (encoded.error) services.printErr(`${source}: ${encoded.error}`);
             } catch (error) {
                 services.printErr(`${source}: ${error.message || error}`);
-                return 1;
+                status = 1;
             } finally {
-                if (output) services.FS.close(output);
-                if (input) services.FS.close(input);
+                for (const stream of [output, input]) {
+                    if (!stream) continue;
+                    try { services.FS.close(stream); }
+                    catch (error) { services.printErr(`${source}: ${error.message || error}`); status = 1; }
+                }
             }
+            return status;
         },
     };
 }

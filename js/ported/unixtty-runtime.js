@@ -8,13 +8,20 @@ export function createUnixttyEnvironment(services, layout, state, vaPointer) {
         || layout.CHAR_BIT !== 8 || layout.ccSize !== 1 || !layout.POSIX_TYPES
         || !layout.USG || layout.BSD || layout.AUX || layout.LINUX)
         throw new Error('Review changed unixtty ABI or platform configuration');
+    for(const key of ['ECHO','CBRKMASK','STRIPHI','EXTABS','CS7'])
+        if(!Number.isInteger(layout[key])||layout[key]<0||layout[key]>0xffffffff)
+            throw new Error('Review native terminal mask width: '+key);
     const view = () => new DataView(services.heap().buffer);
     function unsigned(at, width) {
-        return width === 8 ? Number(view().getBigUint64(at, true))
+        // Active terminal masks occupy the low 32 bits. Avoid rounding the
+        // low bits of a poisoned/native 64-bit flag word through Number.
+        return width === 8 ? view().getUint32(at, true)
             : view()['getUint' + width * 8](at, true);
     }
     function setUnsigned(at, width, value) {
-        if (width === 8) view().setBigUint64(at, BigInt.asUintN(64, BigInt(value)), true);
+        // All assignments here are low-mask bit operations; preserve the
+        // untouched high half just as native 64-bit &= and |= do.
+        if (width === 8) view().setUint32(at, Number(value) >>> 0, true);
         else view()['setUint' + width * 8](at, Number(value), true);
     }
     function term(pointer) {

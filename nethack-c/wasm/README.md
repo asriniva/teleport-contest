@@ -19,7 +19,8 @@ remains removed from the active game adapter. Verified public result: **44/44
 sessions**, **11,405/11,405 screens and cursors**, **792,838/792,838 RNG calls**,
 **1,483/1,483 animation frames**, no runtime errors. Recorder/profile checks and
 timezone/macOS/bones integration pass. The 25/44 result belongs to the reverted
-FR03 path. Real ncurses terminfo and the remaining Wasm engine are unchanged. See
+FR03 path. The default build now uses JavaScript terminfo, compression and regex;
+the remaining mixed Wasm engine is still required. See
 [FR01–FR05](../../UPSTREAM_DIVERGENCES.md#active-frozen-infrastructure-restoration-fr01fr04).
 
 From the repository root:
@@ -62,11 +63,12 @@ live under `js/wasm/`; `build.json` records the compiler and binary checksum.
 Run the default build for a clean rebuild; `--resume` is a development shortcut
 after the native preparation stage has already succeeded.
 
-The terminal path keeps NetHack's original terminfo capability lookup and uses
-ncurses 6.5 compiled to wasm64. Its real headers and library replace the ANSI
-bypass and stub tputs. A pinned entry copied from this Mac's native database is
-embedded in MEMFS; TERMINFO points to it and LINES/COLUMNS specify 24/80. Native
-macOS reports ncurses 6.0; historical database/library identity is unverified.
+The terminal path keeps NetHack's original capability queries and tty logic.
+The default JavaScript terminfo service implements the configured ncurses 6.5
+interfaces against the same pinned entry copied from this Mac's native database.
+Real ncurses headers are still built for the C callers and reference tests;
+its library is omitted from the default game link. LINES/COLUMNS specify 24/80.
+Native macOS reports ncurses 6.0; historical database/library identity is unverified.
 See [dependency provenance and build options](terminfo/README.md). Replay keys
 and shadow snapshots cross the C/JS callbacks at existing recorder boundaries.
 Shadow capture is the default. NetHack is compiled with `MACOS` game features, including its apple
@@ -77,10 +79,12 @@ walkers and debugger paths are disabled, and paste-buffer writes stay in the
 module rather than launching `pbcopy`. A virtual root
 account replaces Emscripten's unsupported Unix account lookup, while retaining
 NetHack's normal sysconf authorization checks.
-The game logic and PRNG remain the patched C implementation. Data files are
+The game combines translated JavaScript units with the remaining patched C
+implementation; Lua is still compiled C. Data files are
 embedded in the Wasm artifact. Each segment gets a fresh module and MEMFS;
-changed files are serialized through the frozen storage API. The transient-file filter preserves bones; an in-process ncompress library
-provides native-compatible .Z compression. All public save/bones sequences and
+changed files are serialized through the frozen storage API. The transient-file
+filter preserves bones; the JavaScript ncompress-compatible service provides
+native-compatible .Z compression. All public save/bones sequences and
 RNG traces match. Module
 termination does not change the host scoring process's exit status.
 
@@ -142,69 +146,162 @@ separately after its dependency is installed.
 encoding, and timezone/macOS regressions. The frozen harness and recordings
 remain unchanged. Browser integration is unverified.
 
+## JavaScript dependencies and runtime migration
+
+The regular build selects JavaScript compression, terminfo and regex. Its
+manifest records service hashes, ABI flags and `dependencyBackend: javascript`.
+The Wasm link omits ncompress, libtinfo and musl's TRE regex algorithms. Small
+C forwarders still adapt native pointers, varargs and tty callbacks; they are
+needed while C game callers remain. The adapter supplies per-segment services,
+input boundaries, recorder snapshots, profile setup and save/bones transport.
+`js/services/game-files.js` now owns the unchanged filesystem-independent
+`{files, deleted}` persistence format. Screen capture and encoding are unchanged.
+
+The integrated path passes all **44/44 public recordings**, including all
+**11,405 screens/cursors**, **792,838 RNG calls** and **1,483 animation frames**.
+Focused checks cover actual wasm64 service calls, heap growth/reentry, codec
+errors and statuses, save/bones restoration, timezones, profiles and version
+commands. Public recordings establish that corpus only. Browser execution is
+unverified. An earlier unoptimized two-service candidate hit one replay timeout;
+the session passed alone, and both the optimized three-service candidate and
+regular build subsequently passed the full unchanged suite.
+
+Scope remains explicit: terminfo uses the pinned entry, without full ncurses
+terminal discovery, baud padding or TTY timing. Regex implements the configured
+`REG_EXTENDED | REG_NOSUB` byte/C-locale interface; other compile flags, capture
+offsets and Unicode locales are unsupported. The numeric tparm shim preserves
+the existing wasm64 caller/library varargs behavior, including packed-int quirks;
+it is not a generic string-varargs interface. Narrow bridges do not remove Wasm.
+
+Independent runtime work is available in `js/ported/js-runtime.js`: ordinary
+JavaScript-owned byte memory, scoped allocation, a bounded libc subset, calendar
+services and `CVFS` regular files/directories. Existing alloc, strutil, ISAAC64,
+MD4, calendar and regex-wrapper translations execute through this provider without Module or
+Wasm. Save/bones payloads match actual MEMFS, including binary data and deletion.
+This provider is not yet the game backend. Its filesystem excludes symlinks,
+devices, sockets and mounts; time follows the configured host-Date/DST policy;
+libc formatting is currently integer/byte-string only. Lua's separate parser,
+interpreter and C-stack model execute real scripts and coroutines, but lack
+complete GC/finalization, table layout/iteration fidelity, C-pointer integration
+and other facilities. It remains a partial replacement with no game score claim.
+
+After setup and a regular build, run the standalone oracle suites with:
+
+```sh
+npm run test:dependencies
+python3 -B scripts/audit-js-dependencies.py --check
+```
+
+Production services use no Node imports, host files, subprocesses, network or
+Wasm. Development tests compile reference C and use native tools. The isolation
+test disables those capabilities while executing production modules. The runner
+uses the SDK's memory64 Node for configured C oracles; `DEPENDENCY_TEST_NODE`
+can separately select Node22 for standalone tests. For the previous compiled
+dependency path, `bash nethack-c/build-wasm.sh --resume --c-dependencies` selects
+an explicit diagnostic build; that alternate selection
+has not been rebuilt/revalidated in this migration. Rebuild normally to restore
+the default. Candidate tooling stages its own build and frozen scorer under
+`.cache/` and does not alter the active game outputs.
+
+Remaining work is to complete and integrate Lua with actual NetHack callbacks,
+expand ordinary-memory struct/global/libc coverage, move remaining filesystem
+calls/startup onto that runtime, and rerun the same recording gates at each step.
+The adapter contract remains useful after Wasm removal; its Emscripten-specific
+pointer and module portions should disappear as their callers migrate.
+
 ## Native C parity coverage
 
-`npm run test:native` (or `bash scripts/test-native-tu.sh`) rebuilds and runs
-shared behavioral scenarios for every one of the **50** registered ported C
-translation units. To select TUs, use `bash scripts/test-native-tu.sh were rnd`.
-The main `test:wasm` command also requires these checks to pass.
+`npm run test:native` (or `bash scripts/test-native-tu.sh`) now runs the
+**existing `test-tu-*.mjs` cases** with native C selected as their reference.
+Use `bash scripts/test-native-tu.sh were rnd` to select suites. The same files
+use native C by default. `TELEPORT_NATIVE_TESTS=0` explicitly selects the
+Emscripten-C diagnostic; its libc differences are not alternative expected JS
+behavior. `test:wasm` requires native parity and the three-way library gate.
+The smaller hand-written scenarios from the earlier implementation are retired
+from the main test path. Their historical 50/50 result did **not** establish
+native coverage of every existing case.
 
-Validation on 2026-11-09: **50/50 native scenario groups**, **106,676 observations**,
-all four additional pristine-source variants, and **50/50** existing detailed
-Emscripten suites pass. An intentionally mutated JS RNG is rejected; source
-preservation and lexical-scope checks pass.
+**Current validation:** all **53 native suites completed and passed**, with
+**1,496,451 assertions and zero failures**. All original case loops compare
+directly with native C, including native terminal/layout bytes, regex diagnostics
+and complete sorting callback traces. The native reference is unchanged; fixes
+are in JS/runtime/ABI code. The earlier 32-pass/19-fail run exposed these defects;
+later reports that accepted platform-specific results were rejected and are
+superseded. Current evidence is
+`.cache/native-existing-runs/29670-1794291036512/results.json`.
+The final run's exact completion/pass/failure counts are also recorded in
+`.cache/native-existing-results.json`; per-run logs and results are isolated
+under `.cache/native-existing-runs/<run-id>/`. Assertion reports distinguish a
+suite that finished its cases and found mismatches from one that crashed,
+failed to load, or stopped before completion.
 
-Each scenario is compiled three ways: a real host executable using the native
-Clang/libc/ABI, Emscripten C, and Emscripten C calling the JavaScript implementation.
-The native executable produces fresh expected output. Tests compare results,
-string/byte content, fixture callback traces, RNG consumption and selected state;
-they never compare process addresses. Missing binaries, crashes, empty output,
-mismatches, changed source or stale case files fail the test. Per-TU build
-commands/source hashes and mismatch transcripts live under
-`.cache/tu-probes/native-oracles/`; `.cache/native-tu-results.json` records results.
+The same built game passes integration and all 44 unchanged public recordings:
+792,838 RNG calls, 11,405 screens/cursors/cells and 1,483 animation frames match.
+`scripts/test-native-library-differences.mjs` separately executes 14 native-C,
+Emscripten-C and JS cases covering pointer formatting, overflowing bribe scans,
+ERE parsing/errors/matches and calendar limits. It requires JS=native and
+explicitly retains each observed SDK difference; ordinary shared cases must
+match in all three. The native terminal transport test checks both compilers'
+actual layout descriptors and OS-boundary conversion. Both tests run in the
+full native command. This is the tested configured macOS C behavior, not a
+claim of full native OS or arbitrary locale/TZ emulation.
 
-The previous `test-tu-*.mjs` suites compared **Emscripten C against JavaScript**.
-Their result labels now say so. Native coverage supplements those detailed
-suites; it does **not** replay every existing assertion on the host. Existing
-full-game recordings came from the native **patched recorder**, not pristine
-NetHack. The terminfo and compression interoperability suites already used
-native libraries/tools independently.
+The native backend uses host Clang, libc and ABI through a test-only Node-API
+library. It calls the original probe methods and reads/writes actual native
+memory; it does not implement NetHack algorithms. Each instance loads a private
+library copy so native globals remain isolated. Generated bindings preserve
+64-bit integer bit patterns and translate their exported wire representation,
+without translating native behavioral results. Source/header hashes reject
+stale native binaries. Build commands and provenance are saved in each
+`*-full-native-build.json` file.
 
-For 46 TUs, the compiled algorithm source is byte-identical to upstream, checked
-at build time. Four TUs also get a separate executable compiled directly from
-the pristine upstream algorithm:
+The case loops, input tables and behavioral assertions remain in the existing
+test files. Native mode collects assertion failures and exits nonzero after
+later cases execute; Emscripten mode retains the original fail-fast assertions.
+Native assertions, failed assertions, completed suites, and passed suites are
+separate report fields. Calendar/date workers retain all five existing timezones.
 
-| TU | Native upstream check and deliberate recorder distinction |
-| --- | --- |
-| `calendar` | Explicit-date formatting/parsing matches upstream. A fixed fixture clock makes native execution reproducible. Separately assert that upstream ignores `NETHACK_FIXED_DATETIME` while the recorder honors it. |
-| `date` | Version/build metadata matches upstream with compiler build time pinned via `SOURCE_DATE_EPOCH`; the prepared source retains its inherited fixed-banner patch. |
-| `rnd` | Seeded core/display draws, dice, luck and scaling match upstream. Upstream has no recorder logging inspectors, so those unused probe inspectors are omitted from its test wrapper, without adding fake logging functions. |
-| `unixtty` | Terminal state transitions match upstream with NOMUX disabled. The existing Emscripten suite still tests recorder-only NOMUX synthesis; that path is not a claim of pristine upstream equivalence. |
+Architecture-specific checks have explicit counterparts rather than simulated
+Wasm behavior: native allocation requests are measured while the same allocation
+operations execute, and the native stack pointer is checked before/after each C
+call. Native address zero cannot be inspected as a Wasm guard page; the existing
+NULL-output case instead verifies that the native call returns safely. The
+version fixture's intentionally mutable regex identifier uses writable native
+storage. Its NULL banner case calls the upstream function indirectly so the
+probe can observe the return without its `NONNULL` annotation removing the
+caller's guard; this is invalid game metadata, not a claim about a valid live
+game state. The native clock fixture follows the test's simulated clock.
 
-These are isolated **native algorithm** oracles, sharing the existing fixture
-callbacks and prepared NetHack configuration headers. They are not pristine,
-independently configured whole-game executables. Native support excludes the
-Wasm-to-JavaScript ABI adapter. Two harmless global-storage fixtures remain for
-getline/ioctl; version uses the existing controlled metadata/regex dependency.
-Native stack/heap helper headers provide a real frame address and a fixture
-allocation size only; Wasm linear-memory growth and stack restoration remain
-covered by the detailed Emscripten tests.
+Native log files use an isolated directory under `.cache/native-fs/`, retaining
+host stdio behavior. The HACKLIB device tests use the existing controlled device
+callbacks around the real native C copy algorithm; ordinary descriptors still
+use host syscalls. Exper's intentional assertion cases are captured through the
+host's assertion entry point as well as Emscripten's. These are fixture changes,
+not game changes.
 
-Host-specific constants are checked semantically: terminal traces validate
-`_PC_VDISABLE` before spelling it symbolically, and system initialization checks
-both configured `PANICTRACE_LIBC` branches, including preservation when absent.
-The native scenarios run in UTC; the existing Emscripten calendar suite retains
-its five-timezone coverage. These checks establish only the exercised behavior,
-not exhaustive native equivalence or a new full-game score.
+The full native reference shares the prepared configuration headers and the
+existing controlled dependencies. Most algorithm sources are byte-identical to
+upstream; calendar/date/RNG/terminal setup and the newly ported deterministic
+sort retain their documented recorder changes. Full native logging/recording
+cases therefore target the **native patched recorder**, not a pristine whole
+game. The older supplemental pristine-source checks for four TUs remain
+historical additional evidence and do not cover every full-suite case.
+
+Representative unresolved differences include native vs Emscripten pointer
+formatting, calendar parsing/DST, regex diagnostics and terminal ABI/constants,
+overflowing bribe input, and some property/callback branches. These results
+require investigation; a failing suite is not automatically a single port bug.
+No new full-game recording score is claimed.
 
 ## Compression service and recording profile
 
-`compress-service.c` calls pinned ncompress 5.0 in process, compiled for wasm64.
-NetHack retains its `.Z` filename handling, cleanup and failure prompts; only
-fork/exec/wait is replaced. Codec code is vendored unchanged with checksums and
-license in [vendor/ncompress](vendor/ncompress/README.md). Native compress and
-uncompress interoperate with it; compressed bytes need not be identical across
-implementations. .Z has no checksum, so not every damaged stream is detectable.
+The default build calls `js/services/unix-compress.js` through the dependency
+bridge and MEMFS file adapter. NetHack retains its `.Z` filename handling,
+cleanup, failure prompts and statuses 0/1/2. Configured encoding is byte-identical
+to pinned ncompress 5.0, and native compress/uncompress interoperate. The original
+vendored codec remains available for diagnostic C builds and reference tests;
+see [vendor/ncompress](vendor/ncompress/README.md). .Z has no checksum, so not
+every damaged stream is detectable.
 
 `js/recording-profile.js` centralizes virtual HOME and sysconf values. Defaults
 use the contest-documented recording HOME, WIZARDS=* and no SUPPORT override.

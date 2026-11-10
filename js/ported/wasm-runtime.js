@@ -5,6 +5,11 @@ import * as strutil from './strutil.js';
 import * as rect from './rect.js';
 import * as track from './track.js';
 import * as calendar from './calendar.js';
+import { cAddress, writeNativePointer, scanNativeLong, nativeSystemOptions } from '../services/native-c-compat.js';
+import { createCTime } from '../services/c-time.js';
+import { createNativeRegexLibc } from '../services/native-regex-libc.js';
+import { nativeQsort } from '../services/native-qsort.js';
+import { createNativeTerminal } from '../services/native-terminal.js';
 import * as stairs from './stairs.js';
 import * as sys from './sys.js';
 import * as rip from './rip.js';
@@ -45,6 +50,10 @@ import * as light from './light.js';
 import { createLightEnvironment } from './light-runtime.js';
 import * as lock from './lock.js';
 import { createLockEnvironment } from './lock-runtime.js';
+import * as wield from './wield.js';
+import { createWieldEnvironment } from './wield-runtime.js';
+import * as worn from './worn.js';
+import { createWornEnvironment } from './worn-runtime.js';
 import * as hacklib from './hacklib.js';
 import { createHacklibState, createHacklibEnvironment } from './hacklib-runtime.js';
 import * as mondata from './mondata.js';
@@ -226,6 +235,8 @@ function configuredFields(services, pointer, fields, intSize) {
 }
 
 export function createPortedRuntime(layouts) {
+    const nativeTerminal = createNativeTerminal();
+    const nativeRegexServices = createNativeRegexLibc();
     const objectsStates = new WeakMap();
     const monstStates = new WeakMap();
     const shknamStates = new WeakMap();
@@ -233,6 +244,8 @@ export function createPortedRuntime(layouts) {
     const musicStates = new WeakMap();
     const versionStates = new WeakMap();
     const colorattStates = new WeakMap();
+    const mondataEnvironments = new WeakMap();
+    const dbridgeEnvironments = new WeakMap();
     const hacklibEnvironments = new WeakMap();
     const hacklibStates = new WeakMap();
     const hacklibState = services => {
@@ -261,7 +274,7 @@ export function createPortedRuntime(layouts) {
     let drawingInitialized = false;
     let dateInitialized = false;
     let rndState, rndEnvironment;
-    let posixregexInitialized = false;
+    const posixregexInitialized = new WeakSet();
     const allocState = { ptrbufidx: 0 };
     const dateState = { nomakedefs_populated: 0 };
     // New views on every ABI call: WebAssembly memory.grow detaches old views.
@@ -294,10 +307,43 @@ export function createPortedRuntime(layouts) {
         return context;
     };
     return {
+        nativeQsort(services,base,count,size) { return nativeQsort(services.heap,base,count,size,services.compare); },
+        nativeTerminal(services,name,...args) {return nativeTerminal(services,name,...args);},
+        nativeRegex(services,name,...args) {return nativeRegexServices(services)[name](...args);},
         initializeDate(services) {
             if (dateInitialized) throw new Error('Version metadata already initialized');
             initializeDate(services, layouts.date, date.nomakedefs_initial);
             dateInitialized = true;
+        },
+        wield(services, name, ...args) {
+            const environment = createWieldEnvironment(services, layouts.wield, wield);
+            if (['setuwep', 'cant_wield_corpse', 'ready_weapon', 'setuqwep',
+                'setuswapwep', 'ready_ok', 'wield_ok', 'finish_splitting',
+                'wield_tool', 'chwepon', 'welded', 'weldmsg', 'mwelded'].includes(name))
+                args[0] = environment.object(args[0]);
+            if (name === 'set_twoweap') args[0] = Number(args[0]) << 24 >> 24;
+            const result = withCEnvironment(environment, wield[name], ...args);
+            return typeof result === 'string' ? services.literal(result) : result?.address ?? result ?? 0;
+        },
+        worn(services, name, ...args) {
+            const environment = createWornEnvironment(services, layouts.worn, worn);
+            if (['setworn', 'setnotworn', 'wearslot', 'bypass_obj', 'bypass_objlist',
+                'nxt_unbypassed_obj', 'clear_bypass'].includes(name))
+                args[0] = environment.object(args[0]);
+            if (['mon_set_minvis', 'mon_adjust_speed', 'update_mon_extrinsics',
+                'find_mac', 'm_dowear', 'which_armor', 'mon_break_armor',
+                'racial_exception', 'extract_from_minvent', 'm_lose_armor',
+                'm_dowear_type', 'extra_pref'].includes(name))
+                args[0] = environment.monster(args[0]);
+            if (['update_mon_extrinsics', 'racial_exception', 'extract_from_minvent',
+                'm_lose_armor', 'extra_pref'].includes(name))
+                args[1] = environment.object(args[1]);
+            if (name === 'mon_adjust_speed') args[2] = environment.object(args[2]);
+            if (name === 'nxt_unbypassed_loot') {
+                args[0] = environment.loot(args[0]); args[1] = environment.object(args[1]);
+            }
+            const result = withCEnvironment(environment, worn[name], ...args);
+            return typeof result === 'string' ? services.literal(result) : result?.address ?? result ?? 0;
         },
         hacklibState,
         hacklib(services, name, ...args) {
@@ -310,7 +356,11 @@ export function createPortedRuntime(layouts) {
             return typeof result === 'string' ? services.literal(result) : result?.address ?? result ?? 0;
         },
         mondata(services, name, ...args) {
-            const environment = createMondataEnvironment(services, layouts.mondata, mondata);
+            let environment = mondataEnvironments.get(services.moduleKey);
+            if (!environment) {
+                environment = createMondataEnvironment(services, layouts.mondata, mondata);
+                mondataEnvironments.set(services.moduleKey, environment);
+            }
             if (['attacktype_fordmg', 'attacktype', 'noattacks', 'poly_when_stoned',
                 'ranged_attk', 'mstrength', 'mstrength_ranged_attk', 'hates_silver',
                 'hates_blessings', 'passes_bars', 'can_track', 'sliparm', 'breakarm',
@@ -337,7 +387,11 @@ export function createPortedRuntime(layouts) {
             return typeof result === 'string' ? services.literal(result) : result?.address ?? result ?? 0;
         },
         dbridge(services, name, ...args) {
-            const environment = createDbridgeEnvironment(services, layouts.dbridge);
+            let environment = dbridgeEnvironments.get(services.moduleKey);
+            if (!environment) {
+                environment = createDbridgeEnvironment(services, layouts.dbridge);
+                dbridgeEnvironments.set(services.moduleKey, environment);
+            }
             if (['find_drawbridge', 'get_wall_for_db'].includes(name)) {
                 args[0] = environment.coordPointer(args[0]); args[1] = environment.coordPointer(args[1]);
             }
@@ -388,6 +442,11 @@ export function createPortedRuntime(layouts) {
         wormState,
         worm(services, name, ...args) {
             const environment = createWormEnvironment(services, layouts.worm, wormState(services));
+            environment.fmt_ptr = value => {
+                const out = services.fmt_ptr(value);
+                writeNativePointer(services.heap(), out, value);
+                return out;
+            };
             if (['initworm', 'worm_move', 'worm_nomove', 'wormgone', 'wormhitu',
                 'cutworm', 'see_wsegs', 'detect_wsegs', 'place_wsegs', 'sanity_check_worm',
                 'remove_worm', 'place_worm_tail_randomly', 'size_wseg', 'count_wsegs',
@@ -444,6 +503,11 @@ export function createPortedRuntime(layouts) {
         },
         light(services, name, ...args) {
             const environment = createLightEnvironment(services, layouts.light);
+            environment.fmt_ptr = value => {
+                const out = services.fmt_ptr(value);
+                writeNativePointer(services.heap(), out, value);
+                return out;
+            };
             if (['new_light_source', 'new_light_core'].includes(name)) args[4] = environment.anything(args[4]);
             if (name === 'del_light_source') args[1] = environment.anything(args[1]);
             if (name === 'delete_ls') args[0] = environment.lightSource(args[0]);
@@ -515,6 +579,18 @@ export function createPortedRuntime(layouts) {
             if (!versionStates.has(services.moduleKey))
                 versionStates.set(services.moduleKey, createVersionState(services, layouts.version, version));
             const environment = createVersionEnvironment(services, layouts.version, versionStates.get(services.moduleKey));
+            environment.Snprintf = (out, size, format, ...values) => {
+                // Native formatting preserves the source before writing an
+                // aliased destination; the Emscripten formatter clears it first.
+                if (format === '%s' && cAddress(values[0]) === cAddress(out)) {
+                    const heap = services.heap(), start = cAddress(out);
+                    let end = start; while (heap[end]) end++;
+                    const copy = services.stackAlloc(end - start + 1);
+                    services.heap().set(heap.slice(start, end + 1), copy);
+                    values[0] = copy;
+                }
+                return services.Snprintf(out, size, format, ...values);
+            };
             if (['version_string', 'getversionstring', 'status_version'].includes(name)) args[1] = environment.size_t(args[1]);
             if (name === 'status_version') args[2] = environment.boolean(args[2]);
             if (name === 'early_version_info') args[0] = environment.boolean(args[0]);
@@ -694,6 +770,10 @@ export function createPortedRuntime(layouts) {
         },
         minion(services, name, ...args) {
             const environment = createMinionEnvironment(services, layouts.minion, minion);
+            environment.sscanf = (input, format, out) => {
+                if (format !== '%ld') throw new Error('Review native minion scan format');
+                return scanNativeLong(services.heap(), input, out);
+            };
             if (['newemin', 'free_emin', 'msummon', 'demon_talk', 'bribe', 'lose_guardian_angel'].includes(name)) args[0] = environment.monster(args[0]);
             if (['monster_census', 'dprince', 'dlord', 'ndemon'].includes(name)) args[0] = args[0] << 24 >> 24;
             if (name === 'summon_minion') args = args.map(value => value << 24 >> 24);
@@ -785,13 +865,17 @@ export function createPortedRuntime(layouts) {
             if (name === 'shuffle_int_array') args[0] = rndEnvironment.intArray(args[0]);
             return withCEnvironment(rndEnvironment, rnd[name], ...args);
         },
+        nativeRegexDiagnostics(moduleKey) {
+            return nativeRegexServices.diagnostics(moduleKey);
+        },
         initializePosixregex(services) {
-            if (posixregexInitialized) throw new Error('POSIX regex identifier already initialized');
+            const key=services.moduleKey ?? services;
+            if (posixregexInitialized.has(key)) throw new Error('POSIX regex identifier already initialized');
             initializePosixregex(services, layouts.posixregex, posixregex.regex_id);
-            posixregexInitialized = true;
+            posixregexInitialized.add(key);
         },
         posixregex(services, name, ...args) {
-            const environment = createPosixregexEnvironment(services, layouts.posixregex);
+            const environment = createPosixregexEnvironment({...services,...nativeRegexServices(services)}, layouts.posixregex);
             if (name === 'regex_compile' || name === 'regex_match') args[1] = environment.regex(args[1]);
             else if (name !== 'regex_init') args[0] = environment.regex(args[0]);
             return withCEnvironment(environment, posixregex[name], ...args);
@@ -812,6 +896,8 @@ export function createPortedRuntime(layouts) {
         alloc(services, name, ...args) {
             const layout = layouts.alloc;
             const environment = Object.assign(Object.create(services), layout, { allocState });
+            environment.Sprintf = (out, format, value) => format === '%p'
+                ? writeNativePointer(services.heap(), out, value) : services.Sprintf(out, format, value);
             environment.ptrbuf = Array.from({ length: layout.PTRBUFCNT }, (_, i) => services.buffers() + i * layout.PTRBUFSIZ);
             return withCEnvironment(environment, alloc[name], ...args);
         },
@@ -855,7 +941,7 @@ export function createPortedRuntime(layouts) {
             // This original function has no active body or global accesses.
             if (name === 'sysopt_seduce_set') return sys[name](...args);
             const layout = layouts.sys;
-            const environment = Object.assign(Object.create(services), layout.constants, layout.strings);
+            const environment = Object.assign(Object.create(services), layout.constants, layout.strings, nativeSystemOptions);
             environment.LL_NONE = BigInt(layout.constants.LL_NONE);
             environment.sysopt = configuredFields(services, services.sysPointer(), layout.fields, layout.intSize);
             environment.gc = configuredFields(services, services.gcPointer(), layout.gcFields, layout.intSize);
@@ -925,16 +1011,15 @@ export function createPortedRuntime(layouts) {
         calendar(services, name, ...args) {
             const layout = layouts.calendar;
             const environment = Object.create(services);
+            const nativeTime = createCTime({native:true});
             const tm = pointer => pointer ? signedFields(services, pointer, layout.fields, layout.intSize) : 0;
             Object.defineProperties(environment, {
                 HEAPU8: { get: () => services.heap() },
                 HEAP8: { get: () => services.signedHeap() },
-                localtime: { value: date => tm(services.localtimePointer(date)) },
-                mktime: { value: value => services.mktimePointer(value.address) },
+                localtime: { value: date => nativeTime.localtime(date) },
+                mktime: { value: value => nativeTime.mktime(value) },
                 tmCopy: { value: value => {
-                    const pointer = services.stackAlloc(layout.size);
-                    services.heap().copyWithin(pointer, value.address, value.address + layout.size);
-                    return tm(pointer);
+                    return {...value};
                 } },
             });
             return withCEnvironment(environment, calendar[name], ...args);

@@ -42,8 +42,20 @@ int (rn2)(int n){int v=draw(n);append("rn2:%d:%d@%s;",n,v,caller);return v;}
 static void callback(int stage){if(opts[30]==stage){char b[BUFSZ];opts[30]=0;get_sortdisco(b,FALSE);append("nested-sort:%s;",b);}if(opts[31]==stage&&!growth){growth=malloc(emscripten_get_heap_size()+16UL*1024*1024);if(!growth)abort();append("grew:%d;",stage);}}
 void teleport_probe_free(void *p){int i,kind=0;if(!p)return;for(i=0;i<NUM_OBJECTS;i++)if(objects[i].oc_uname==p){kind=1;break;}for(i=0;i<n_active;i++)if(active_picks[i]==p){kind=2;active_picks[i]=NULL;break;}if(sort_active)kind=4;else if(!kind)kind=3;free_counts[0]++;free_counts[kind]++;append("free:%d;",kind);callback(7);free(p);}
 static int (*sort_compare)(const void*,const void*);
+/* Test-only copied callback observations survive the source's subsequent free. */
+static struct {size_t first,second;int result;} compare_records[8192];
+static char compare_text[1048576];
+static int compare_count;
+static size_t compare_text_used;
 extern void __real_nh_deterministic_qsort(void*,size_t,size_t,int(*)(const void*,const void*));
-static int compare_proxy(const void *a,const void *b){int r;callback(6);r=sort_compare(a,b);append("compare:%d;",r);return r;}
+static int compare_proxy(const void *a,const void *b){int r,index;size_t first,second,n;const char *left,*right;callback(6);
+    left=*(const char*const*)a;right=*(const char*const*)b;
+    if(compare_count>=SIZE(compare_records))abort();index=compare_count++;
+    first=compare_text_used;n=strlen(left)+1;if(n>sizeof compare_text-compare_text_used)abort();memcpy(compare_text+compare_text_used,left,n);compare_text_used+=n;
+    second=compare_text_used;n=strlen(right)+1;if(n>sizeof compare_text-compare_text_used)abort();memcpy(compare_text+compare_text_used,right,n);compare_text_used+=n;
+    r=sort_compare(a,b);compare_records[index].first=first;compare_records[index].second=second;compare_records[index].result=r;
+    append("compare:%d;",r);return r;
+}
 void __wrap_nh_deterministic_qsort(void *base,size_t n,size_t size,int(*cmp)(const void*,const void*)){append("qsort:%zu:%zu;",n,size);sort_compare=cmp;sort_active=1;__real_nh_deterministic_qsort(base,n,size,compare_proxy);sort_active=0;}
 xint16 ledger_no(d_level *d){append("ledger:%d:%d;",d->dnum,d->dlevel);return opts[1];}
 xint16 maxledgerno(void){append("maxledger; ");return opts[2];}
@@ -101,7 +113,7 @@ extern void teleport_o_init_test_append(char*,int),teleport_o_init_test_uniq(int
 #define oclass_to_name teleport_o_init_test_class
 #endif
 #include "tu-o_init-layout.h"
-void probe_reset(unsigned s){int i;for(i=0;i<NUM_OBJECTS;i++)if(objects[i].oc_uname)free(objects[i].oc_uname);for(i=0;i<n_active;i++)if(active_picks[i])free(active_picks[i]);for(i=0;i<NUM_OBJECTS;i++)if(lines[i])free(lines[i]);if(growth)free(growth);growth=NULL;WIN_MESSAGE=7;memset(&svb,0,sizeof svb);memset(&svd,0,sizeof svd);memset(&go,0,sizeof go);memset(&iflags,0,sizeof iflags);memset(&flags,0,sizeof flags);memset(&program_state,0,sizeof program_state);memset(&u,0,sizeof u);memset(&gu,0,sizeof gu);memset(&svc,0,sizeof svc);memset(&obj,0,sizeof obj);memset(&nhfile,0,sizeof nhfile);memset(opts,0,sizeof opts);memset(lines,0,sizeof lines);memset(free_counts,0,sizeof free_counts);objects_globals_init();monst_globals_init();opts[0]=1;opts[1]=0;opts[2]=50;opts[3]=-1;opts[9]=1;opts[12]=opts[13]=-1;opts[14]=opts[15]='n';u.uz.dnum=1;u.uz.dlevel=2;flags.discosort='o';for(i=1;i<MAXOCLASSES;i++)flags.inv_order[i-1]=i;flags.inv_order[MAXOCLASSES-1]=0;nhfile.mode=WRITING;windowprocs.win_create_nhwindow=create_window;windowprocs.win_start_menu=start_window;windowprocs.win_end_menu=end_window;windowprocs.win_destroy_nhwindow=destroy_window;windowprocs.win_display_nhwindow=display_window;windowprocs.win_clear_nhwindow=clear_window;windowprocs.win_putstr=put_window;windowprocs.win_wait_synch=wait_window;seed=s;nroll=rollidx=n_active=pick_call=pick_count=io_pos=io_len=sort_active=0;last_string=NULL;low=high=-99;output[0]=type_override[0]=compare_a[0]=compare_b[0]=tracebuf[0]=statebuf[0]=caller[0]=0;}
+void probe_reset(unsigned s){int i;for(i=0;i<NUM_OBJECTS;i++)if(objects[i].oc_uname)free(objects[i].oc_uname);for(i=0;i<n_active;i++)if(active_picks[i])free(active_picks[i]);for(i=0;i<NUM_OBJECTS;i++)if(lines[i])free(lines[i]);if(growth)free(growth);growth=NULL;WIN_MESSAGE=7;memset(&svb,0,sizeof svb);memset(&svd,0,sizeof svd);memset(&go,0,sizeof go);memset(&iflags,0,sizeof iflags);memset(&flags,0,sizeof flags);memset(&program_state,0,sizeof program_state);memset(&u,0,sizeof u);memset(&gu,0,sizeof gu);memset(&svc,0,sizeof svc);memset(&obj,0,sizeof obj);memset(&nhfile,0,sizeof nhfile);memset(opts,0,sizeof opts);memset(lines,0,sizeof lines);memset(free_counts,0,sizeof free_counts);objects_globals_init();monst_globals_init();opts[0]=1;opts[1]=0;opts[2]=50;opts[3]=-1;opts[9]=1;opts[12]=opts[13]=-1;opts[14]=opts[15]='n';u.uz.dnum=1;u.uz.dlevel=2;flags.discosort='o';for(i=1;i<MAXOCLASSES;i++)flags.inv_order[i-1]=i;flags.inv_order[MAXOCLASSES-1]=0;nhfile.mode=WRITING;windowprocs.win_create_nhwindow=create_window;windowprocs.win_start_menu=start_window;windowprocs.win_end_menu=end_window;windowprocs.win_destroy_nhwindow=destroy_window;windowprocs.win_display_nhwindow=display_window;windowprocs.win_clear_nhwindow=clear_window;windowprocs.win_putstr=put_window;windowprocs.win_wait_synch=wait_window;seed=s;nroll=rollidx=n_active=pick_call=pick_count=io_pos=io_len=sort_active=0;compare_count=0;compare_text_used=0;last_string=NULL;low=high=-99;output[0]=type_override[0]=compare_a[0]=compare_b[0]=tracebuf[0]=statebuf[0]=caller[0]=0;}
 const char *probe_trace(void){return tracebuf;}
 void probe_option(int k,int v){opts[k]=v;}
 int *probe_rng_pointer(void){return rolls;}
@@ -136,3 +148,8 @@ if(t==0)return SIZE(uniq_objs);if(t==1)return sizeof disco_order_let;if(t==2)ret
 return 0;}
 const char *probe_snapshot(void){int i,j;char *p=statebuf;p+=sprintf(p,"state:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d;out:%s;counts:%d:%d:%d:%d:%d;",flags.discosort,flags.menu_style,iflags.menu_requested,program_state.in_moveloop,program_state.gameover,low,high,obj.dknown,obj.known,pick_call,output,free_counts[0],free_counts[1],free_counts[2],free_counts[3],free_counts[4]);for(i=0;i<MAXOCLASSES+2;i++)p+=sprintf(p,"b:%d;",svb.bases[i]);for(i=0;i<MAXOCLASSES;i++)p+=sprintf(p,"prob:%d;",go.oclass_prob_totals[i]);for(i=0;i<NUM_OBJECTS;i++){unsigned char raw[sizeof(struct objclass)];uintptr_t present=objects[i].oc_uname!=NULL;memcpy(raw,&objects[i],sizeof raw);memcpy(raw+offsetof(struct objclass,oc_uname),&present,sizeof present);p+=sprintf(p,"r%d:%d:",i,svd.disco[i]);for(j=0;j<sizeof raw;j++)p+=sprintf(p,"%02x",raw[j]);p+=sprintf(p,":%s;",objects[i].oc_uname?objects[i].oc_uname:"<NULL>");}p+=sprintf(p,"lines:");for(i=0;i<32;i++)p+=sprintf(p,"%d,",lines[i]!=NULL);return statebuf;}
 uintptr_t probe_stack(void){return emscripten_stack_get_current();}
+
+int probe_compare_count(void){return compare_count;}
+const char *probe_compare_text(int index,int side){return compare_text+(side?compare_records[index].second:compare_records[index].first);}
+int probe_compare_result(int index){return compare_records[index].result;}
+int probe_compare_again(int index){const char *left=probe_compare_text(index,0),*right=probe_compare_text(index,1);return sort_compare(&left,&right);}

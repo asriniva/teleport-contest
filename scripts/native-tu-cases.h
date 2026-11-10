@@ -26,7 +26,6 @@ static void oracle_bytes(const void *data, size_t size) {
 time_t teleport_oracle_time(time_t *out) { time_t fixed=1768478400L; if(out)*out=fixed; return fixed; }
 #endif
 #if ORACLE_IOCTL && defined(TELEPORT_NATIVE_ORACLE)
-__typeof__(gt) gt;
 struct sysopt_s sysopt;
 #endif
 #if ORACLE_GETLINE && defined(TELEPORT_NATIVE_ORACLE)
@@ -275,6 +274,33 @@ void probe_native_oracle(void) {
     for(int mode=0;mode<4;mode++){probe_reset();for(int i=0;i<8;i++){sortbuf[16+i*8]=(unsigned char)((7-i)%3);sortbuf[17+i*8]=(unsigned char)i;}probe_sort_action(8,8,mode,0);oracle_bytes(sortbuf+16,64);oracle_number(alloc_calls);oracle_number(free_calls);}
     for(int mask=1;mask<=3;mask++){probe_reset();probe_alloc_option(0,mask);probe_sort_action(3,8,0,0);oracle_number(alloc_calls);oracle_number(free_calls);oracle_bytes(sortbuf+16,24);}
     {FILE *in=tmpfile(),*out=tmpfile();for(int i=0;i<BUFSIZ+7;i++)fputc(i&255,in);fflush(in);rewind(in);oracle_number(probe_fd_action(fileno(in),fileno(out)));rewind(out);int c;while((c=fgetc(out))!=EOF)oracle_number(c);fclose(in);fclose(out);}
+#elif ORACLE_WORN
+    /* Public behavior and stable fixture identities, never reference-only tables. */
+    for(int typ=0;typ<NUM_OBJECTS;typ++){probe_reset(1);probe_object(0,0,typ);oracle_number(probe_action(7,0,0,0,0));}
+    {const long masks[]={W_ARM,W_ARMC,W_ARMH,W_ARMS,W_ARMG,W_ARMF,W_ARMU,W_RINGL,W_RINGR,W_WEP,W_SWAPWEP,W_QUIVER,W_AMUL,W_TOOL,W_BALL,W_CHAIN};
+     for(int i=0;i<16;i++){probe_reset(1);probe_link(0,0);probe_object(0,12,OBJ_INVENT);probe_action(1,0,0,0,masks[i]);oracle_number(probe_action(4,0,0,0,masks[i]));oracle_number(probe_action(5,0,0,0,masks[i]));probe_action(0,0,0,0,0);oracle_text(probe_snapshot());probe_action(2,0,0,0,0);probe_action(3,0,0,0,0);oracle_text(probe_snapshot());}}
+    for(int cat=-1;cat<=10;cat++){probe_reset(1);oracle_number(probe_action(6,0,cat,0,0));}
+    for(int speed=-4;speed<=2;speed++){probe_reset(1);probe_action(9,0,0,0,0);probe_action(10,0,speed,-1,0);oracle_text(probe_snapshot());oracle_text(probe_trace());}
+    probe_reset(1);probe_object(0,0,ALCHEMY_SMOCK);probe_object(0,12,OBJ_MINVENT);probe_object(0,13,0);probe_object(0,1,W_ARMC);probe_set_monster(0,1,0);probe_set_monster(0,2,W_ARMC);probe_action(11,0,0,1,0);probe_action(11,0,0,0,0);oracle_text(probe_snapshot());
+    for(int creation=0;creation<2;creation++){probe_reset(1);probe_object(0,0,SPEED_BOOTS);probe_object(0,12,OBJ_MINVENT);probe_object(0,13,0);probe_set_monster(0,1,0);probe_action(14,0,creation,0,W_ARMF);oracle_number(probe_action(12,0,0,0,0));oracle_number(probe_action(15,0,0,0,W_ARMF));oracle_number(probe_action(24,0,0,0,0));probe_action(13,0,creation,0,0);oracle_text(probe_snapshot());oracle_text(probe_trace());}
+    probe_reset(1);probe_object(0,4,1);probe_object(0,5,2);probe_object(0,6,1);probe_object(1,6,1);probe_object(2,6,1);probe_link(0,0);probe_action(17,0,0,0,0);probe_action(19,0,0,0,0);probe_action(20,0,1,0,0);oracle_number(probe_action(21,0,0,0,0));probe_loot(0,3);probe_loot(1,1);probe_loot(2,-1);oracle_number(probe_action(22,0,0,0,0));probe_action(18,0,0,0,0);oracle_text(probe_snapshot());
+    probe_reset(1);probe_set_monster(0,0,PM_HOBBIT);probe_object(0,0,ELVEN_CLOAK);oracle_number(probe_action(25,0,0,0,0));probe_object(0,12,OBJ_MINVENT);probe_object(0,13,0);probe_set_monster(0,1,0);probe_action(16,0,0,1,0);oracle_text(probe_snapshot());
+    probe_reset(1);probe_object(0,12,OBJ_MINVENT);probe_object(0,13,0);probe_object(0,1,W_ARMH);probe_set_monster(0,1,0);probe_set_monster(0,2,W_ARMH);probe_action(26,0,0,1,0);oracle_text(probe_snapshot());
+    probe_reset(1);probe_link(0,0);probe_object(0,12,OBJ_INVENT);probe_action(1,0,0,0,W_ARMH);probe_action(8,0,0,0,0);oracle_text(probe_trace());
+    probe_reset(1);probe_set_monster(0,0,PM_STONE_GOLEM);probe_action(23,0,1,0,0);oracle_text(probe_snapshot());oracle_text(probe_trace());
+#elif ORACLE_WIELD
+    /* Actual public/private source entries, stable fixture identities only. */
+    for(int type=0;type<NUM_OBJECTS;type++){probe_reset(1);probe_object(0,0,type);oracle_number(probe_action(6,0,0,0,0));oracle_number(probe_action(7,0,0,0,0));probe_action(0,0,0,0,0);oracle_text(probe_snapshot());probe_action(18,0,0,0,0);}
+    for(int op=0;op<26;op++){probe_reset(1);probe_object(0,0,LONG_SWORD);probe_object(1,0,DAGGER);probe_object(0,12,OBJ_INVENT);probe_object(1,12,OBJ_INVENT);probe_object(0,4,1);probe_link(0,0);probe_set_monster(8,0,PM_MARILITH);probe_option(19,0);
+        if(op==1){probe_object(0,0,CORPSE);probe_object(0,16,PM_COCKATRICE);}
+        if(op==14||op==15||op==17||op==21){probe_action(0,0,0,0,0);probe_action(5,1,0,0,0);}
+        if(op==15||op==21)probe_hero(1,1);
+        if(op>=18&&op<=20)probe_action(op==18?0:op==19?5:4,0,0,0,0);
+        if(op==22||op==23||op==24||op==25){probe_action(0,0,0,0,0);probe_object(0,7,1);}
+        oracle_number(probe_action(op,0,op==22?1:0,0,0));oracle_text(probe_snapshot());oracle_text(probe_trace());}
+    for(int op=9;op<=11;op+=2)for(int child=0;child<2;child++){probe_reset(1);probe_object(0,0,LONG_SWORD);probe_object(0,3,7);probe_object(0,12,OBJ_INVENT);probe_link(0,0);if(child)probe_action(op==9?0:4,0,0,0,0);probe_option(19,0);probe_option(20,2);oracle_number(probe_action(op,0,0,0,0));oracle_text(probe_snapshot());oracle_text(probe_trace());}
+    for(int type=0;type<2;type++){probe_reset(1);probe_object(0,0,type?CRYSKNIFE:WORM_TOOTH);probe_object(0,3,9007199254740993L);probe_action(0,0,0,0,0);oracle_number(probe_action(22,-1,type?-1:1,0,0));oracle_text(probe_snapshot());}
+    probe_reset(1);probe_object(0,0,LONG_SWORD);probe_object(0,1,(long)(1UL<<63)|W_WEP);probe_action(24,0,0,0,0);oracle_text(probe_snapshot());
 #else
 #error Native behavior case is required for every registered TU
 #endif

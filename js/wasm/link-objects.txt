@@ -76,10 +76,8 @@ wasm/uhitm.o
 wasm/vault.o
 wasm/vision.o
 wasm/weapon.o
-wasm/wield.o
 wasm/windows.o
 wasm/wizcmds.o
-wasm/worn.o
 wasm/zap.o
 wasm/unixmain.o
 wasm/unixunix.o

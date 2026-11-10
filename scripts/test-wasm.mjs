@@ -27,8 +27,79 @@ function segmentInput(segment, storage, count = segment.moves.length) {
 if (!process.argv.includes('--timezone-worker')) {
     const terminalSmoke = await runSegment(inputFor('seed8000-tourist-starter', 1));
     assert.equal(terminalSmoke.getTerminalDiagnostics().backend, 'shadow');
+    const build = JSON.parse(fs.readFileSync(new URL('../js/wasm/build.json', import.meta.url)));
+    const dependencies = terminalSmoke.getDependencyDiagnostics();
+    assert.equal(dependencies.backend, build.dependencyBackend || 'c', 'Diagnostics identify the compiled dependency backend');
+    if (dependencies.backend === 'javascript') {
+        for (const name of ['tgetent', 'tgetstr', 'tputs'])
+            assert.ok(dependencies.calls[name] > 0, `Game actually invoked JS ${name}`);
+        const wasm = new WebAssembly.Module(fs.readFileSync(new URL('../js/wasm/nethack.wasm', import.meta.url)));
+        const imports = new Set(WebAssembly.Module.imports(wasm).map(item => item.name));
+        for (const name of ['tgetent', 'tgetstr', 'tgetnum', 'tgetflag', 'tgoto',
+            'teleport_js_tparm', 'teleport_js_tputs', 'teleport_compress_file'])
+            assert.ok(imports.has(name), `Regular game imports JS dependency ${name}`);
+        const symbols = fs.readFileSync(new URL('../js/wasm/nethack.mjs.symbols', import.meta.url), 'utf8')
+            .split('\n').map(line => line.slice(line.indexOf(':') + 1));
+        const regexBridgeImports = ['teleport_js_regcomp', 'teleport_js_regexec',
+            'teleport_js_regerror', 'teleport_js_regfree'];
+        if (build.regexTransport === 'ported-posixregex-direct-js') {
+            assert.equal(build.regex, 'javascript-native-macos-compatible-ERE-C-locale');
+            assert.ok(build.javascriptTranslationUnits.some(port => port.name === 'posixregex'),
+                'Direct regex transport registers the original NetHack JS wrapper TU');
+            for (const name of ['regex_init', 'regex_compile', 'regex_match', 'regex_error_desc', 'regex_free'])
+                assert.ok(imports.has(name), `Game enters the JS NetHack wrapper ${name}`);
+            for (const name of regexBridgeImports)
+                assert.ok(!imports.has(name), `Direct regex transport prunes obsolete bridge ${name}`);
+            for (const name of ['regcomp', 'regexec', 'regerror', 'regfree'])
+                assert.ok(!symbols.includes(name), `Direct regex transport excludes compiled libc entry ${name}`);
+        } else {
+            assert.equal(build.regexTransport, 'wasm-libc-js-bridge', 'Build identifies its exact regex transport');
+            for (const name of regexBridgeImports)
+                assert.ok(imports.has(name), `Legacy libc transport imports JS dependency ${name}`);
+        }
+        assert.ok(!symbols.some(name => name.startsWith('tre_')), 'Regular game excludes compiled TRE algorithms');
+        for (const name of ['ncompress_encode', 'ncompress_decode', 'setupterm', '_nc_read_entry', '_nc_tparm_analyze'])
+            assert.ok(!symbols.includes(name), `Regular game excludes compiled dependency ${name}`);
+    } else assert.equal(dependencies.calls, null, 'C reference mode must not claim JS dependency execution');
     assert.match(terminalSmoke.getScreens()[0], /\x0elqqqqqqk\x0f/,
         'Boundary screens must retain recorder shadow encoding without glyph conversion');
+
+    // Real configuration and inventory screens verify both the selected
+    // regex calls and their visible effect, independently of bridge names.
+    const plainInventory = await runSegment(inputFor('seed8000-tourist-starter', 11));
+    const coloredInput = inputFor('seed8000-tourist-starter', 11);
+    coloredInput.nethackrc += '\nMENUCOLOR="gold (pieces|coins)$"=red&bold\n';
+    const coloredInventory = await runSegment(coloredInput);
+    if (build.regexTransport === 'ported-posixregex-direct-js') {
+        const regex = coloredInventory.getDependencyDiagnostics().regex;
+        assert.equal(regex.transport, build.regexTransport);
+        assert.equal(regex.backend, build.regex);
+        assert.ok(regex.calls.regcomp > 0, 'Actual game invokes the direct JS regex compiler');
+        assert.ok(regex.calls.regexec > 0, 'Actual inventory invokes direct JS regex matching');
+        if (coloredInventory.getDependencyDiagnostics().backend === 'javascript')
+            assert.deepEqual(Object.fromEntries(Object.keys(regex.calls).map(name =>
+                [name, coloredInventory.getDependencyDiagnostics().calls[name]])), regex.calls,
+                'Flat diagnostics count the selected regex path');
+    }
+    const plainGrid = decodeScreen(plainInventory.getScreens()[11]);
+    const coloredGrid = decodeScreen(coloredInventory.getScreens()[11]);
+    const rowText = row => row.map(cell => cell.ch).join('');
+    assert.deepEqual(coloredGrid.map(rowText), plainGrid.map(rowText),
+        'A menu regex changes styling without changing game text');
+    const goldRow = plainGrid.findIndex(row => rowText(row).includes('gold pieces'));
+    assert.ok(goldRow >= 0, 'Actual inventory contains a gold-pieces entry');
+    const goldColumn = rowText(plainGrid[goldRow]).indexOf('gold pieces');
+    for (let column = goldColumn; column < goldColumn + 'gold pieces'.length; column++) {
+        assert.equal(coloredGrid[goldRow][column].color, 1, 'ERE-selected gold entry is red');
+        assert.equal(coloredGrid[goldRow][column].attr, 2, 'ERE-selected gold entry is bold');
+        assert.notDeepEqual(coloredGrid[goldRow][column], plainGrid[goldRow][column],
+            'The configured rule visibly changes the selected entry');
+    }
+    for (let row = 0; row < plainGrid.length; row++) if (row !== goldRow)
+        assert.deepEqual(coloredGrid[row], plainGrid[row], 'Nonmatching inventory rows retain their styles');
+    assert.deepEqual(coloredInventory.getRngLog(), plainInventory.getRngLog(),
+        'Menu regex matching does not change gameplay RNG');
+    console.log('Actual inventory ERE alternation selects red/bold gold text without gameplay changes.');
 
     for (const zone of Object.keys(expectedShops)) {
         const child = spawnSync(process.execPath, [fileURLToPath(import.meta.url), '--timezone-worker'], {
@@ -44,7 +115,9 @@ if (!process.argv.includes('--timezone-worker')) {
             'Actual spell heading must match the recording, including its skipped inverse spaces');
         const bones = loadSession('seed5006-tourist-stress-disaster');
         const storage = new InMemoryStorage();
-        await runSegment(segmentInput(bones.segments[0], storage));
+        const deathGame = await runSegment(segmentInput(bones.segments[0], storage));
+        if (deathGame.getDependencyDiagnostics().backend === 'javascript')
+            assert.ok(deathGame.getDependencyDiagnostics().calls.compress > 0, 'Game bones persistence uses JS compression');
         const saved = JSON.parse(storage.getItem('vfs:/teleport-wasm64-state.json'));
         assert.ok(saved.files['/nethack/bonD0.3.Z'], 'Death segment must retain its successfully compressed bones file');
         assert.ok(!saved.files['/nethack/bonD0.3'], 'Successful compression removes the raw source');

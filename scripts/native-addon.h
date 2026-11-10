@@ -32,6 +32,7 @@ void *teleport_native_calloc(size_t n,size_t size){native_allocations++;native_r
 static uint64_t native_integer(napi_env env,napi_value v){
     napi_valuetype type;napi_typeof(env,v,&type);
     if(type==napi_bigint){uint64_t n;bool lossless;napi_get_value_bigint_uint64(env,v,&n,&lossless);return n;}
+    if(type==napi_boolean){bool n=false;napi_get_value_bool(env,v,&n);return n?1:0;}
     double n=0;napi_get_value_double(env,v,&n);return (uint64_t)(int64_t)n;
 }
 static napi_value native_void(napi_env env){napi_value v;napi_get_undefined(env,&v);return v;}

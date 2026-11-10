@@ -345,5 +345,19 @@
     "library": "nethack-c/wasm/tu-libraries/hacklib.js",
     "reference": "prepared",
     "configuredFunctions": true
+  },
+  {
+    "name": "worn",
+    "source": "src/worn.c",
+    "javascript": "js/ported/worn.js",
+    "library": "nethack-c/wasm/tu-libraries/worn.js",
+    "configuredFunctions": true
+  },
+  {
+    "name": "wield",
+    "source": "src/wield.c",
+    "javascript": "js/ported/wield.js",
+    "library": "nethack-c/wasm/tu-libraries/wield.js",
+    "configuredFunctions": true
   }
 ]

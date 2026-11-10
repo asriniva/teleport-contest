@@ -1,16 +1,19 @@
 """Generate typed Node-API bindings for the existing C probe exports."""
 import argparse
+import ast
 import json
 import hashlib
 import os
-import re
 from pathlib import Path
 import subprocess
 import sys
 
 root=Path(__file__).resolve().parents[1]
 work=root/'.cache/tu-probes/native-oracles'
-node_headers=root/'.cache/emsdk/node/24.19.0_64bit/include/node'
+sdk=Path(os.environ.get('EMSDK',root/'.cache/emsdk'))
+node_command=ast.literal_eval(subprocess.check_output([str(sdk/'upstream/emscripten/em-config'),'NODE_JS'],text=True))
+node_headers=Path(node_command[0]).resolve().parents[1]/'include/node'
+assert (node_headers/'node_api.h').exists(), 'The configured SDK Node distribution needs its Node-API headers'
 
 def decode_stream(text):
     decoder=json.JSONDecoder(); position=0
@@ -51,7 +54,7 @@ def build(name, reference_args=None):
     # The real native globals supplied by the previous scenario driver are
     # also needed when all of the existing probe methods are exported.
     storage=''
-    if name=='ioctl':storage='__typeof__(gt) gt;struct sysopt_s sysopt;\n'
+    if name=='ioctl':storage='struct sysopt_s sysopt;\n'
     if name=='getline':storage='char erase_char,kill_char;\n'
     if name=='version':
         symbol='_regex_id' if sys.platform=='darwin' else 'regex_id'
@@ -108,6 +111,8 @@ def build(name, reference_args=None):
     port=next(p for p in json.loads((root/'nethack-c/wasm/tu-ports.json').read_text()) if p['name']==name)
     tracked=[root/('scripts/tu-'+name+'-probe.c'),root/'scripts/native-addon.h',root/'.cache/wasm64-build/tree'/port['source'],root/'nethack-c/upstream'/port['source']]
     tracked+=sorted((root/'.cache/wasm64-build/tree/include').glob('*.h'))
+    probe_layout=root/('scripts/tu-'+name+'-layout.h')
+    if probe_layout.exists():tracked.append(probe_layout)
     if name=='hacklib':tracked+=[root/'scripts/native-hacklib-io.h']
     hashes={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in tracked}
     body=(root/'.cache/wasm64-build/tree'/port['source']).read_bytes()

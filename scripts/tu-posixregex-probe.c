@@ -19,3 +19,18 @@ int probe_err(struct nhregex *regex) { return regex->err; }
 void probe_set_err(struct nhregex *regex, int err) { regex->err = err; }
 void probe_free(struct nhregex *regex) { regex_free(regex); }
 size_t probe_stack(void) { return emscripten_stack_get_current(); }
+
+/* Independent dependency observations: no nhregex wrapper policy is copied. */
+int probe_dependency_compile(const char *pattern, struct nhregex *regex)
+{
+    return regcomp(&regex->re, pattern, REG_EXTENDED | REG_NOSUB);
+}
+int probe_dependency_match(const char *text, struct nhregex *regex)
+{
+    return regexec(&regex->re, text, 0, NULL, 0);
+}
+size_t probe_dependency_error(int status, struct nhregex *regex,
+                              char *buffer, size_t capacity)
+{
+    return regerror(status, &regex->re, buffer, capacity);
+}

@@ -1,16 +1,63 @@
 {
+  "nativeAbiSha256": "16eceb17caf6e70d0e8e6b36f23daebdb30f7ace18676d482c8376fccf6dceeb",
   "upstream": "16ff59115315917b93185d026aeefea06db9b0f4",
   "emscripten": "4.0.10",
   "clang": "clang version 21.0.0git (https:/github.com/llvm/llvm-project 8f7e57485ee73205e108d74abb5565d5c63beaca)\nTarget: x86_64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/upstream/bin",
   "memory64": 1,
-  "terminalCapabilities": "ncurses-6.5-terminfo",
+  "dependencyBackend": "javascript",
+  "terminalCapabilities": "javascript-terminfo-pinned-entry",
   "ncursesSha256": "136d91bc269a9a5785e5f9e980bc76ab57428f604ce3e5a5a90cebc767971cc6",
+  "ncursesRole": "headers-and-reference-only",
   "terminfoEntrySha256": "e2525d133091a1ac38b2ad4eecd8df48eee31789c8fafac0ed99bcd6b746d8ce",
-  "gamePlatform": "MacOS",
-  "replayDst": "inherit-fixed-recording-clock",
-  "defaultRecordingEpoch": "1777723200",
-  "compression": "ncompress-5.0-in-process-LZW-Z",
+  "compression": "javascript-ncompress-5.0-LZW-Z",
   "compressionSourceSha256": "41f593dcc4e21a3d2686010a554687231a498291268791c8db412bf5b5e5087f",
+  "compressionSourceRole": "reference-only",
+  "regex": "javascript-native-macos-compatible-ERE-C-locale",
+  "regexTransport": "ported-posixregex-direct-js",
+  "javascriptDependencies": {
+    "sourceSha256": {
+      "js/services/unix-compress.js": "1da7e9a3f9765b873332d33ea691077d4bc9c9231fd679677ea68a082c021958",
+      "js/services/terminfo.js": "1ee8cccfc3911bbb5acb4b0b74353a3af2e2be9974ab896de98579ccc6aa637e",
+      "js/services/terminfo-data.js": "2daf95e4faa0d71484a1d774b1a00bc0454b35552bfacde2efcb98381d73b2d1",
+      "js/services/posix-regex.js": "a95c5c6bca5bf2fade60f06d888dc3be8c2e6cc2813dbeb1dc25dd090821abeb",
+      "js/services/wasm-dependency-runtime.js": "72dc3dc32e93a7c07b4232f98616bf17395b1e521045d1a6a1b125c6f2847805",
+      "js/services/native-c-compat.js": "1b87b4b198f09da9ca7dc5133926f3154ee4855929e4e5eb590340e749d9c2b8",
+      "js/services/native-regex-libc.js": "f0421d2e05e36e84420269f2708e80942b6185e56f3601c9293e5fb23cd5b56e",
+      "js/services/native-qsort.js": "c33be22f1de1bcdefd11bf1fe0304e75769b7c07993789140fa10cf9d82cab19",
+      "js/services/c-time.js": "0980974f4053a54dbc6221a12eb41b6d20feccd7ef12c359fb27b255718de61a",
+      "js/ported/wasm-runtime.js": "f8207441c1b1e88ab9c18589f6d5d3af3496fb3397b93efb14345001727c386b",
+      "js/ported/posixregex.js": "3389499c549a670141e87d8dcb42d1caf50419a24c7e8a7751a8bfdfcecfcf41",
+      "js/ported/posixregex-runtime.js": "567795a5ccac27c7109b250e1e88f8b050da006f163d916f72173901660ee1bf",
+      "js/wasm-adapter.js": "6f35145093c982196200e31eb4372c0f742ab7f3ea07268dcbf152b5f4c2f53f",
+      "nethack-c/wasm/tu-libraries/posixregex.js": "87aa34b88528241696e021091644a10707dfc364b52057e4dd443de80195d178",
+      "nethack-c/wasm/native-libc-library.js": "5fb9ef22a0d07d24eb89fe36fd92e7f28e50c3998e95dfe6c0ebd3c1047c7054",
+      "js/services/native-terminal.js": "357f528376047661a1c29032aca07d964d1e0257acc75c0235792ed1b27b53dc",
+      "js/services/native-terminal-abi.json": "660f6d0949661295d56077bd0c99ed53336f077c50eb7258dd09bae20476302e",
+      "nethack-c/wasm/native-terminal.h": "16eceb17caf6e70d0e8e6b36f23daebdb30f7ace18676d482c8376fccf6dceeb",
+      "nethack-c/wasm/dependency-library.js": "6cc460ea2bee0b9ccaa7285ab684f12a1bdc0e7935bd0f104aeb8924a4da10c3",
+      "nethack-c/wasm/dependency-bridge.c": "7cba01a3b15fb13208e27bcac77d6da39edd2fec15bc27e5c448921a4e32803c"
+    },
+    "compressionReference": "public-domain ncompress 5.0, block-mode 16-bit .Z",
+    "terminfoReference": "ncurses 6.5 termcap API; unchanged pinned xterm-256color entry",
+    "regexReference": "Native macOS ERE behavior; REG_EXTENDED|REG_NOSUB; C locale",
+    "abiCompileFlags": [
+      "-std=gnu17",
+      "-sMEMORY64=1",
+      "-DTELEPORT_JS_REGEX=1"
+    ],
+    "linkEnvironment": {
+      "TELEPORT_JS_REGEX": "1"
+    },
+    "bridge": "numeric tparm intptr_t ABI; batched C tputs callbacks; opaque regex_t handles; MEMFS codec adapter"
+  },
+  "removedCompiledDependencies": [
+    "ncompress codec",
+    "ncurses libtinfo",
+    "musl TRE regex algorithms"
+  ],
+  "gamePlatform": "MacOS",
+  "replayDst": "inherit-native-parser-clock",
+  "defaultRecordingEpoch": "1777723200",
   "recordingProfile": "public-recordings-with-environment-overrides",
   "javascriptTranslationUnits": [
     {
@@ -59,7 +106,7 @@
       "javascript": "js/ported/calendar.js",
       "reference": "prepared",
       "library": "nethack-c/wasm/tu-libraries/calendar.js",
-      "sha256": "1e475c7d82dce8bbf7bb188e4c77143b211aa53fcb264650a64cd542cc337ee9",
+      "sha256": "3dc51bb6b44f12255074944817ce5fee783e8ed9cc03c0f078efc027ce5cd743",
       "preparedCSourceSha256": "5ef88878eedd42a7ab59fa374dc4e01798a448b72acace9c7a8d26c5ae883b17"
     },
     {
@@ -147,7 +194,7 @@
       "javascript": "js/ported/ioctl.js",
       "library": "nethack-c/wasm/tu-libraries/ioctl.js",
       "configuredFunctions": true,
-      "sha256": "fe8bdd7533c0122138c5e2bb51c21c3b9c97c0f945f9d3a334b56772d10c60f8",
+      "sha256": "89d44c5c4d088128a608d2ccb37c3666c2f3acea1144242386f3dd1e5dbb4926",
       "preparedCSourceSha256": "fdbffc60327dfcf3d1ed4c1673a9e85829b9d7996e3615413219cd76862a2142"
     },
     {
@@ -467,8 +514,26 @@
       "configuredFunctions": true,
       "sha256": "308c32f2c959a8aadcb816d333ea5faf2aad90c9325523ae6a5551bd9d4963e3",
       "preparedCSourceSha256": "78e81aedddb93a6bc8d966f3f586e689ae05c335d34dba36af6abb95700d5ec4"
+    },
+    {
+      "name": "worn",
+      "source": "src/worn.c",
+      "javascript": "js/ported/worn.js",
+      "library": "nethack-c/wasm/tu-libraries/worn.js",
+      "configuredFunctions": true,
+      "sha256": "43624f0cf7f2fa808f0bba08d0bc123d693bf951570f8872298d7670a7a00008",
+      "preparedCSourceSha256": "0414baea25644ea52cc7b628dff4ab1a533eada1523405eaabe7d7555bc3d4cf"
+    },
+    {
+      "name": "wield",
+      "source": "src/wield.c",
+      "javascript": "js/ported/wield.js",
+      "library": "nethack-c/wasm/tu-libraries/wield.js",
+      "configuredFunctions": true,
+      "sha256": "7c4052a40ad20eec5b6a5918597dc800165cb77694472e7aa0b8aed112f54583",
+      "preparedCSourceSha256": "dccf8af84cf299ac659ab07ee6c106d9c8f9726d1fca1360a4df81d576adbd4c"
     }
   ],
   "sourceDateEpoch": "1777723200",
-  "wasmSha256": "435c47c8a2cd42ac6aeaab327a8e0b6c66916c171255bd29a04924bd780af52e"
+  "wasmSha256": "caa9037891a506d73717bba31f1309c7758d83a17dd3a3080b83d25c9bc9edd7"
 }

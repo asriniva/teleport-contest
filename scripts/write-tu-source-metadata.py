@@ -11,7 +11,8 @@ source = root / '.cache/wasm64-build/tree/src/rect.c'
 lines = source.read_text().splitlines()
 calls = [i for i, line in enumerate(lines, 1) if 'rn2(rect_cnt)' in line]
 assert len(calls) == 1, 'Review changed rectangle RNG call sites'
-out = root / '.cache/tu-probes/tu-source-locations.h'
+destination = root / '.cache/tu-probes/tu-source-locations.h'
+out = destination.with_name(f'.tu-source-locations-{os.getpid()}.h')
 out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text('/* Generated from the actual prepared C source; do not edit. */\n'
                '#define TELEPORT_RECT_RNG_FILE "rect.c"\n'
@@ -499,3 +500,57 @@ if hacklib_js.exists():
     capacity = sum(len(value.encode('utf-8')) + 1 for value in literals)
     with out.open('a') as stream:
         stream.write(f'#define TELEPORT_HACKLIB_LITERAL_CAPACITY {capacity}\n')
+
+
+# Preserve the configured worn.c local constants and original diagnostic site.
+worn_text = (source.parent / 'worn.c').read_text()
+assert re.findall(r'^#define IGNORE_SLOTS (.+)$', worn_text, re.M) == ['(W_ART | W_ARTI | W_SADDLE | W_BALL| W_CHAIN)'], 'Review worn sanity mask'
+assert re.findall(r'^#define RACE_EXCEPTION (.+)$', worn_text, re.M) == ['TRUE'], 'Review worn racial exception flag'
+worn_active = re.sub(r'/\*.*?\*/|//[^\n]*', lambda match: '\n' * match.group().count('\n'), worn_text, flags=re.S)
+assert not re.search(r'\bassert\s*\(', worn_active), 'Review changed worn assertions'
+worn_rng = list(re.finditer(r'\brnl\(3\)', worn_active))
+assert len(worn_rng) == 1, 'Review changed worn RNG sites'
+worn_formats = list(re.finditer(r'\bSnprintf\(buf, sizeof buf, " removes %s and", oldarm\)', worn_active))
+assert len(worn_formats) == 1, 'Review changed worn formatting sites'
+with out.open('a') as stream:
+    stream.write(f'#define TELEPORT_WORN_RNL_LINE {worn_active.count(chr(10), 0, worn_rng[0].end()) + 1}\n')
+    stream.write('#define TELEPORT_WORN_RNL_FUNCTION "mon_break_armor"\n')
+    stream.write(f'#define TELEPORT_WORN_SNPRINTF_LINE {worn_active.count(chr(10), 0, worn_formats[0].end()) + 1}\n')
+    stream.write('#define TELEPORT_WORN_SNPRINTF_FUNCTION "m_dowear_type"\n')
+worn_js = root / 'js/ported/worn.js'
+if worn_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', worn_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    capacity = sum(len(value.encode('utf-8')) + 1 for value in literals)
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_WORN_LITERAL_CAPACITY {capacity}\n')
+
+
+# Preserve all configured wield.c RNG sites and source-local macros.
+wield_text = (source.parent / 'wield.c').read_text()
+wield_macros = dict(re.findall(r'^#define\s+(erodeable_wep|will_weld|TWOWEAPOK)\([^\n]*?\)\s+((?:[^\n]*\\\n)*[^\n]*)', wield_text, re.M))
+wield_expected_macros = {
+    'erodeable_wep': '((optr)->oclass == WEAPON_CLASS || is_weptool(optr) || (optr)->otyp == HEAVY_IRON_BALL || (optr)->otyp == IRON_CHAIN)',
+    'will_weld': '((optr)->cursed && (erodeable_wep(optr) || (optr)->otyp == TIN_OPENER))',
+    'TWOWEAPOK': '(((obj)->oclass == WEAPON_CLASS) ? !(is_launcher(obj) || is_ammo(obj) || is_missile(obj)) : is_weptool(obj))',
+}
+assert {key: ' '.join(value.replace('\\\n', ' ').split()) for key, value in wield_macros.items()} == wield_expected_macros, 'Review changed wield TU macros'
+wield_active = re.sub(r'/\*.*?\*/|//[^\n]*', lambda match: '\n' * match.group().count('\n'), wield_text, flags=re.S)
+assert not re.search(r'\b(?:assert|Snprintf)\s*\(', wield_active), 'Review changed wield diagnostic sites'
+assert len(re.findall(r'\b(?:rnd|rn2)\s*\(', wield_active)) == 3, 'Review changed wield RNG count'
+for kind, expression, function in [('RND', r'\brnd\(20\)', 'dotwoweapon'), ('RN2_ENCHANT', r'\brn2\(3\)', 'chwepon'), ('RN2_ELVEN', r'\brn2\(7\)', 'chwepon')]:
+    sites = list(re.finditer(expression, wield_active))
+    assert len(sites) == 1, 'Review wield RNG site: ' + kind
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_WIELD_{kind}_LINE {wield_active.count(chr(10), 0, sites[0].end()) + 1}\n')
+        stream.write(f'#define TELEPORT_WIELD_{kind}_FUNCTION "{function}"\n')
+wield_js = root / 'js/ported/wield.js'
+if wield_js.exists():
+    tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', wield_js.read_text(), re.S)
+    literals = {ast.literal_eval(token.group()) for token in tokens if token.group()[0] in ['"', "'"]}
+    capacity = sum(len(value.encode('utf-8')) + 1 for value in literals)
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_WIELD_LITERAL_CAPACITY {capacity}\n')
+
+# Concurrent TU/game builds must never observe an incrementally written header.
+out.replace(destination)

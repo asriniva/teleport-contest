@@ -94,3 +94,16 @@ void probe_io_length(unsigned n){io_size=n;}
 void probe_io_position(unsigned n){io_position=n;}
 uintptr_t probe_stack(void){return emscripten_stack_get_current();}
 const char *probe_snapshot(void){char *p=statebuf;unsigned i;p+=sprintf(p,"state:%d:%d:%u:%u:%lu:%lu:%lu;",gc.converted_savefile_loaded,mismatch,io_size,io_position,fixture_version.incarnation,fixture_version.feature_set,fixture_version.entity_count);p+=sprintf(p,"csc:");for(i=0;i<sizeof cscbuf;i++)p+=sprintf(p,"%02x",cscbuf[i]);p+=sprintf(p,";lua:%s:%s;nhfile:%d:%d:%d:%d:%d;",gl.lua_ver,gl.lua_copyright,fixture_file.mode,fixture_file.structlevel,fixture_file.fieldlevel,fixture_file.fnidx,fixture_file.fd);return statebuf;}
+/* Test-only libc dependency witness for the inherited overlapping %s fallback.
+ * No VERSION selection, metadata, substitution, or formatting policy is here. */
+static unsigned char fallback_witness[8193];
+char *probe_fallback_witness(size_t size)
+{
+    char *out=(char *)fallback_witness+1;
+    memset(fallback_witness,0xa5,sizeof fallback_witness);
+    strcpy(out,"5.0.7-fallback");
+    nh_snprintf("version_string",25,out,size,"%s",out);
+    return out;
+}
+void *probe_fallback_witness_base(void){return fallback_witness;}
+size_t probe_fallback_witness_size(void){return sizeof fallback_witness-1;}

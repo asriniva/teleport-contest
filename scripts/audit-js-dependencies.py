@@ -56,6 +56,17 @@ def evidence(path, marker=None):
             **({'marker': marker, 'marker_found': at >= 0} if marker else {})}
 
 
+def artifact(path):
+    """Hash a binary artifact without treating its contents as source text."""
+    if not path.is_file():
+        MISSING.add(relative(path))
+        return None
+    data = path.read_bytes()
+    result = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+    READS[relative(path)] = result
+    return data
+
+
 def strip_comments(text):
     # Retain newlines and string literals, so line evidence remains accurate.
     pattern = r'/\*[\s\S]*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\''
@@ -95,11 +106,11 @@ def classify(symbol, game_tokens):
     return 'unclassified', 'low'
 
 
-def collect_tu_dependencies(game_tokens):
+def collect_tu_dependencies(game_tokens, active=None, paths=None):
     libraries = []
     users = defaultdict(list)
     dependency_pattern = re.compile(r'([\w$]+)__deps\s*:\s*\[([^\]]*)\]', re.S)
-    for path in sorted((ROOT / 'nethack-c/wasm/tu-libraries').glob('*.js')):
+    for path in sorted(paths if paths is not None else (ROOT / 'nethack-c/wasm/tu-libraries').glob('*.js')):
         text = read(path)
         groups = []
         for match in dependency_pattern.finditer(strip_comments(text)):
@@ -113,8 +124,19 @@ def collect_tu_dependencies(game_tokens):
     symbols = []
     for symbol, uses in sorted(users.items()):
         category, confidence = classify(symbol, game_tokens)
-        symbols.append({'symbol': symbol, 'category': category, 'confidence': confidence,
-                        'uses': uses})
+        entry = {'symbol': symbol, 'category': category, 'confidence': confidence, 'uses': uses}
+        if active:
+            if symbol in LIBC['regex'] and active['built_dependency_backend'] == 'javascript':
+                entry['selected_resolution'] = 'C regex_t ABI forwarder to selected JavaScript ERE; not compiled TRE algorithms'
+            elif symbol in TERMINFO and active['built_dependency_backend'] == 'javascript':
+                entry['selected_resolution'] = 'Selected JavaScript terminfo; tparm/tputs retain C vararg/callback ABI forwarders'
+            elif symbol in active['symbol_map']['javascript_import_names']:
+                entry['selected_resolution'] = 'Imported JavaScript function name observed in selected Wasm artifact'
+            elif symbol in active['symbol_map']['defined_wasm_function_names']:
+                entry['selected_resolution'] = 'Defined Wasm function name observed; transitive implementation unresolved'
+            else:
+                entry['selected_resolution'] = 'Unresolved by literal name; aliases/inlining/link elimination may apply'
+        symbols.append(entry)
     return {'method': 'Literal __deps arrays; no preprocessing, linker closure, or call graph.',
             'classification_limitations': [
                 'Game candidates are exact token matches in prepared game C/header text, not definitions or calls.',
@@ -127,10 +149,11 @@ def collect_tu_dependencies(game_tokens):
 
 
 def collect_runtime():
-    paths = [ROOT / 'js/wasm-adapter.js', ROOT / 'js/terminal-backend.js',
+    paths = [ROOT / 'js/wasm-adapter.js',
              ROOT / 'js/wasm-replay-support.js', ROOT / 'js/recording-profile.js',
              ROOT / 'nethack-c/wasm/runtime.js']
     paths += sorted((ROOT / 'js/ported').glob('*runtime.js'))
+    paths += sorted((ROOT / 'js/services').rglob('*.js'))
     results = []
     patterns = {
         'esm_import': r'''\bimport\s+(?:[\s\S]*?\s+from\s+)?['"]([^'"]+)['"]|\bimport\(\s*['"]([^'"]+)['"]''',
@@ -178,7 +201,175 @@ def collect_compiled_service_sites(tree):
                         for (name, category), occurrences in sorted(sites.items())]}
 
 
-def source_sizes(tree):
+def wasm_surface(binary):
+    """Read declared imports/counts only; never instantiate or execute Wasm."""
+    if binary is None:
+        return {'available': False, 'imports': [], 'function_import_count': 0, 'defined_function_count': 0}
+    if binary[:8] != b'\0asm\x01\0\0\0':
+        raise ValueError('Unrecognized selected Wasm artifact')
+    at = 8
+
+    def leb():
+        nonlocal at
+        value, shift = 0, 0
+        while True:
+            byte = binary[at]; at += 1
+            value |= (byte & 127) << shift
+            if not byte & 128:
+                return value
+            shift += 7
+            if shift > 70:
+                raise ValueError('Invalid Wasm LEB integer')
+
+    def name():
+        nonlocal at
+        length = leb(); value = binary[at:at + length].decode('utf-8'); at += length
+        return value
+
+    def limits():
+        flags = leb(); minimum = leb()
+        return {'flags': flags, 'minimum': minimum, **({'maximum': leb()} if flags & 1 else {})}
+
+    imports, defined, function_index = [], 0, 0
+    while at < len(binary):
+        section = binary[at]; at += 1
+        length = leb(); end = at + length
+        if section == 2:
+            for _ in range(leb()):
+                entry = {'module': name(), 'field': name()}
+                kind = binary[at]; at += 1
+                if kind == 0:
+                    entry.update(kind='function', function_index=function_index, type_index=leb())
+                    function_index += 1
+                elif kind == 1:
+                    element = binary[at]; at += 1
+                    entry.update(kind='table', element_type=element, limits=limits())
+                elif kind == 2:
+                    entry.update(kind='memory', limits=limits())
+                elif kind == 3:
+                    entry.update(kind='global', value_type=binary[at], mutable=bool(binary[at + 1])); at += 2
+                elif kind == 4:
+                    entry.update(kind='tag', attribute=leb(), type_index=leb())
+                else:
+                    raise ValueError('Unrecognized Wasm import kind')
+                imports.append(entry)
+        elif section == 3:
+            defined = leb()
+        at = end
+    return {'available': True, 'imports': imports, 'function_import_count': function_index,
+            'defined_function_count': defined,
+            'limitation': 'Section declarations establish import/definition boundaries, not semantic equivalence or source provenance.'}
+
+
+def active_inventory(manifest):
+    build_path = 'nethack-c/wasm/build.py'
+    build = read(ROOT / build_path)
+    selected = manifest.get('dependencyBackend', 'unrecorded')
+    binary_path = ROOT / 'js/wasm/nethack.wasm'
+    binary = artifact(binary_path)
+    surface = wasm_surface(binary)
+    symbols_path = ROOT / 'js/wasm/nethack.mjs.symbols'
+    symbol_text = read(symbols_path)
+    indexed = {int(m[1]): m[2] for m in re.finditer(r'^(\d+):(.+)$', symbol_text, re.M)}
+    imported_count = surface['function_import_count']
+    imported = {name for index, name in indexed.items() if index < imported_count}
+    defined = {name for index, name in indexed.items() if index >= imported_count}
+    for entry in surface['imports']:
+        if entry['kind'] == 'function':
+            entry['symbol_map_name'] = indexed.get(entry['function_index'])
+    dependency_hashes = manifest.get('javascriptDependencies', {}).get('sourceSha256', {})
+    integrity = []
+    for path, expected in sorted(dependency_hashes.items()):
+        read(ROOT / path)
+        observed = READS.get(path, {}).get('sha256')
+        integrity.append({'path': path, 'manifest_sha256': expected, 'observed_sha256': observed, 'matches': observed == expected})
+    groups = []
+    for category, names in sorted(LIBC.items()):
+        entries = sorted(names & defined)
+        groups.append({'category': category, 'defined_wasm_names': entries,
+                       'interpretation': 'C ABI forwarding to selected JavaScript regex' if category == 'regex' and selected == 'javascript'
+                       else 'Names defined in selected Wasm; aliases/inlined and internal support routines are additional.'})
+    lua_names = sorted(name for name in defined if re.match(r'^lua(?:_|[A-Z])', name))
+    algorithms = {
+        'compression': sorted(name for name in defined if name.startswith(('ncompress_', 'compress.', 'decompress.'))),
+        'terminfo': sorted(name for name in defined if name.startswith(('_nc_', '_nc_tinfo_'))),
+        'regex': sorted(name for name in defined if name.startswith(('tre_', '__tre_'))),
+    }
+    adapter = read(ROOT / 'js/wasm-adapter.js')
+    abi_source = 'nethack-c/wasm/dependency-bridge.c'
+    abi = read(ROOT / abi_source)
+    abi_names = [m[1] for m in re.finditer(r'\b(tparm|tputs|regcomp|regexec|regerror|regfree)\s*\([^;{}]*\)\s*\{', strip_comments(abi))]
+    allocator = sorted(name for name in defined if re.search(r'(?:^dl(?:malloc|calloc|realloc|free)$|^emmalloc|^_?emscripten_builtin_(?:malloc|calloc|realloc|free)|^__libc_(?:malloc|free))', name))
+    engine_objects = read(ROOT / 'js/wasm/link-objects.txt').splitlines()
+    recording_path = ROOT / '.cache/js-dependencies-active-public-summary.json'
+    recording = json.loads(read(recording_path)) if recording_path.is_file() else None
+    return {
+        'configured_default_dependency_backend': 'javascript' if "DEPENDENCY_BACKEND = 'c' if C_DEPENDENCIES else 'javascript'" in build else 'unresolved',
+        'alternate_reference_backend_flag': '--c-dependencies' if "'--c-dependencies' in sys.argv" in build else None,
+        'built_dependency_backend': selected,
+        'built_implementations': {key: manifest.get(key) for key in ['terminalCapabilities', 'compression', 'regex', 'ncursesRole', 'compressionSourceRole']},
+        'manifest_removed_compiled_dependencies': manifest.get('removedCompiledDependencies', []),
+        'build_time_and_reference_dependencies': [
+            {'name': 'ncurses 6.5', 'role': 'Default builder still builds the reference libtinfo archive and generated headers; selected JS link omits that archive.',
+             'evidence': [evidence(build_path, 'terminfo_include, terminfo_library = build_terminfo'),
+                          evidence(build_path, 'WINLIB={terminfo_library if C_DEPENDENCIES else')]},
+            {'name': 'ncompress 5.0 source', 'role': 'Pinned source hash/reference and optional --c-dependencies codec; selected JS link uses dependency-bridge.o instead.',
+             'evidence': [evidence(build_path, 'codec_source_hash = '), evidence(build_path, 'if C_DEPENDENCIES:')]},
+            {'name': 'native NetHack generators and host compiler', 'role': 'Generate embedded game assets and reference executables; not production runtime services.',
+             'evidence': [evidence(build_path, 'Native data generators'), evidence(build_path, '--embed-file')]},
+        ],
+        'manifest_dependency_source_integrity': integrity,
+        'wasm_artifact_matches_manifest': READS.get(relative(binary_path), {}).get('sha256') == manifest.get('wasmSha256'),
+        'recorded_public_validation': {
+            'available': recording is not None, 'path': relative(recording_path),
+            **({key: recording.get(key) for key in ['sessions', 'passed', 'errors', 'metrics', 'wasmSha256', 'dependencyBackend']} if recording else {}),
+            'matches_selected_wasm_artifact': bool(recording and recording.get('wasmSha256') == READS.get(relative(binary_path), {}).get('sha256')),
+            'scope_limit': 'Recorded result, not a fresh run. Wasm hash pairs the binary; current adapter/service JS is not cryptographically included in that summary.'},
+        'wasm_import_surface': surface,
+        'symbol_map': {'path': relative(symbols_path), 'name_count': len(indexed),
+                       'declared_function_total': imported_count + surface['defined_function_count'],
+                       'index_coverage_matches_artifact': set(indexed) == set(range(imported_count + surface['defined_function_count'])),
+                       'javascript_import_names': sorted(imported), 'defined_wasm_function_names': sorted(defined),
+                       'freshness_limit': 'Symbol map is not hashed in the build manifest. Count/index agreement is a consistency check, not cryptographic pairing.'},
+        'remaining_game_object_count': len(engine_objects), 'remaining_game_objects': engine_objects,
+        'defined_wasm_teleport_helper_prefix_count': sum(name.startswith('teleport_') for name in defined),
+        'external_c_residuals': [
+            {'dependency': 'Lua 5.4.8', 'selected_status': 'compiled C interpreter/runtime retained',
+             'compiled_lua_prefix_name_count': len(lua_names), 'compiled_lua_prefix_names': lua_names,
+             'compiled_library_openers': sorted(name for name in defined if name.startswith('luaopen_')),
+             'evidence': [evidence(build_path, 'wasm_lua = '), evidence(build_path, 'LUALIBS=')]},
+            {'dependency': 'C libc/system support', 'selected_status': 'compiled/runtime services retained',
+             'curated_defined_function_groups': groups, 'allocator_implementation_names': allocator,
+             'capability_limit': 'Defined native-looking names can be Emscripten wrappers or stubs. Their presence does not establish host process/filesystem capabilities or complete POSIX behavior.',
+             'evidence': [evidence('nethack-c/wasm/tu-libraries/calendar.js', "'mktime'"),
+                          evidence('nethack-c/wasm/dependency-library.js', "'$FS'")]},
+            {'dependency': 'ncurses terminfo, ncompress, musl TRE algorithms',
+             'selected_status': 'JavaScript selected; C ABI support remains' if selected == 'javascript' else 'Compiled reference backend or unresolved',
+             'known_algorithm_prefix_names_still_defined': algorithms,
+             'retained_c_forwarder_definitions': sorted(set(abi_names)),
+             'retained_c_terminfo_globals': ['ospeed', 'PC', 'BC', 'UP'],
+             'retained_services': ['C varargs decoding', 'C output callback dispatch', 'malloc/free/strlen/memcpy and C-backed output buffers', 'opaque regex_t storage and forwarder ABI'],
+             'warning': 'Algorithm-prefix absence alone does not prove removal. Manifest selection, source/ABI evidence and binary import boundaries are independent evidence.',
+             'evidence': [evidence(build_path, 'if C_DEPENDENCIES:'), evidence(abi_source, 'int tputs('), evidence(abi_source, 'char *tparm(')]},
+        ],
+        'emscripten_residuals': {
+            'status': 'selected game still requires Wasm/Emscripten',
+            'services': ['memory64 linear heap/stack and allocator', 'C ABI/global/static storage and callback table',
+                         'MEMFS and file/stdio/syscall services', 'ENV/environment construction',
+                         'embedded assets/startup constructors/callMain', 'time/timezone Date delegates',
+                         'input-exhaustion unwind, exit, signals and longjmp helpers'],
+            'import_names': sorted(name for name in imported if name.startswith(('__wasi_', '__syscall_', '_emscripten', 'emscripten_', '_tzset_', '_mktime_', '_localtime_', '_gmtime_', '_abort_'))),
+            'evidence': [evidence('js/wasm-adapter.js', "await import('./wasm/nethack.mjs')"),
+                         evidence('js/wasm-adapter.js', 'module.callMain'),
+                         evidence(build_path, '-sEXPORTED_RUNTIME_METHODS=FS,ENV,callMain')]},
+        'ghostty': {'selected': False if 'createTerminalBackend' not in adapter and "import { createTerminalBackend" not in adapter else 'unresolved',
+                    'standalone_diagnostic_file_present': (ROOT / 'js/terminal-backend.js').is_file(),
+                    'evidence': [evidence('js/wasm-adapter.js', "const terminalDiagnostics = { backend: 'shadow' }")],
+                    'limitation': 'This is an adapter source observation; historical standalone diagnostic artifacts are not active runtime dependencies.'},
+    }
+
+
+def source_sizes(tree, active=None):
     lua = tree / 'lib/lua-5.4.8/src'
     makefile = read(lua / 'Makefile')
     groups = {}
@@ -226,7 +417,9 @@ def source_sizes(tree):
                             'internal_header': size([regex / 'tre.h']),
                             'excluded_siblings': ['fnmatch.c', 'glob.c']},
         'ncurses_6_5': {
-            'linked_library': 'libtinfo.a only; curses UI library is not linked by build.py',
+            'library_measurement_role': 'Reference/C-backend libtinfo archive; selected JS backend uses its headers/data, not the C library.'
+                if active and active['built_dependency_backend'] == 'javascript'
+                else 'Configured libtinfo archive; curses UI library is not selected.',
             'configured_archive_object_count': len(objects),
             'configured_archive_source_files': size(object_sources),
             'unresolved_archive_objects': unresolved,
@@ -234,6 +427,110 @@ def source_sizes(tree):
             'pinned_entry': {'path': 'nethack-c/wasm/terminfo/x/xterm-256color',
                              'bytes': len((ROOT / 'nethack-c/wasm/terminfo/x/xterm-256color').read_bytes())},
             'closure_warning': 'Archive membership includes unused objects. Six central files omit supporting routines. Neither number proves the needed reachable terminfo subset.'}}
+
+
+def service_inventory(active):
+    sources = [path for path in sorted((ROOT / 'js').rglob('*.js'))
+               if '/wasm/' not in relative(path) and '/vendor/' not in relative(path)]
+    texts = {path: read(path) for path in sources}
+    edges, importers = defaultdict(list), defaultdict(list)
+    for importer, text in texts.items():
+        for match in re.finditer(r'''\b(?:from\s*|import\(\s*)['"]([^'"]+)['"]''', strip_comments(text)):
+            if not match[1].startswith('.'):
+                continue
+            target = (importer.parent / match[1]).resolve()
+            edges[importer].append(target)
+            importers[target].append(location(importer, text, match.start()))
+
+    def reachable(start):
+        seen, pending = set(), [ROOT / start]
+        while pending:
+            path = pending.pop()
+            if path in seen:
+                continue
+            seen.add(path); pending.extend(edges[path])
+        return seen
+
+    adapter_graph = reachable('js/wasm-adapter.js')
+    standalone_graph = reachable('js/ported/js-runtime.js')
+    selected_sources = {ROOT / path for path in active_source_paths(active)}
+    services = []
+    for path in sorted((ROOT / 'js/services').rglob('*.js')):
+        text = texts[path] if path in texts else read(path)
+        selected_algorithm = path in selected_sources and active['built_dependency_backend'] == 'javascript'
+        if selected_algorithm:
+            status = 'selected_game_javascript_dependency_or_abi_adapter'
+        elif path.name == 'game-files.js' and path in adapter_graph:
+            status = 'selected_game_transport_with_injected_emscripten_filesystem'
+        elif path in standalone_graph:
+            status = 'standalone_provider_only_not_selected_game_runtime'
+        elif path.parent.name == 'lua':
+            status = 'partial_standalone_lua_only_not_selected_game_interpreter'
+        else:
+            status = 'present_but_selected_runtime_use_unresolved'
+        services.append({'path': relative(path), 'physical_lines': len(text.splitlines()),
+                         'status': status, 'reachable_from_adapter_by_literal_import_graph': path in adapter_graph,
+                         'reachable_from_standalone_provider_by_literal_import_graph': path in standalone_graph,
+                         'selected_build_manifest_source': path in selected_sources,
+                         'exports_observed': sorted(set(re.findall(r'\bexport\s+(?:async\s+)?(?:function|class|const|let)\s+(\w+)', strip_comments(text)))),
+                         'static_js_import_sites': importers[path]})
+    lapi_path = ROOT / 'js/services/lua/lapi.js'
+    lapi = texts.get(lapi_path, '')
+    methods = sorted(set(re.findall(r'^\s{2}((?:lua|luaL)_\w+)\s*\(', strip_comments(lapi), re.M)))
+    unsupported = sorted(set(re.findall(r'^\s{2}((?:lua|luaL)_\w+)\([^\n]*?\)\s*\{\s*return this\.unsupported\(', strip_comments(lapi), re.M)))
+    lua_limits = []
+    for path in sorted((ROOT / 'js/services/lua').glob('*.js')):
+        text = texts.get(path, '')
+        for line, value in enumerate(text.splitlines(), 1):
+            if re.search(r'NOT a complete|Missing:|full C stack|GC/finaliz|table hashing|tail calls|goto/<close>|unfinished|not simulated|await deterministic', value):
+                lua_limits.append({'path': relative(path), 'line': line, 'excerpt': value.strip()[:260]})
+    tests = ['scripts/test-js-compress.mjs', 'scripts/test-js-terminfo.mjs', 'scripts/test-js-posix-regex.mjs',
+             'scripts/test-js-runtime.mjs', 'scripts/test-js-runtime-regex.mjs', 'scripts/test-js-time.mjs', 'scripts/test-js-vfs.mjs',
+             'scripts/test-js-lua.mjs', 'scripts/test-js-lua-api.mjs', 'scripts/test-js-dependency-isolation.mjs']
+    for path in tests:
+        read(ROOT / path)
+    return {
+        'method': 'Literal static imports plus selected manifest source hashes and inspected provider wiring. Imports may be conditional and do not establish executed call closure.',
+        'modules': services,
+        'standalone_provider': {
+            'path': 'js/ported/js-runtime.js', 'selected_by_active_adapter': ROOT / 'js/ported/js-runtime.js' in adapter_graph,
+            'translated_subsystems': [name + '.c' for name in sorted(set(re.findall(r'''\bimport\s+\*\s+as\s+\w+\s+from\s+['"]\./([^'"]+)\.js['"]''', strip_comments(texts[ROOT / 'js/ported/js-runtime.js']))))],
+            'services': ['JavaScript-owned ArrayBuffer memory', 'bounded LP64 strings/integer formatting/parsing',
+                         'Date-based calendar/time compatibility', 'regular-file/directory VFS and stream facade',
+                         'per-instance environment and scoped C bindings', 'opaque-handle configured ERE through unchanged posixregex translation'],
+            'limitations': ['Not the complete game state/global layout/runtime', 'No C stdio layer or full libc',
+                            'No full IANA/POSIX per-instance timezone database or strftime',
+                            'VFS excludes device/socket/symlink/mount/lock/ownership/ACL/chmod services'],
+            'evidence': [evidence('js/ported/js-runtime.js', 'new CMemory'), evidence('js/ported/js-runtime.js', 'new CVFS'),
+                         evidence('js/ported/js-runtime.js', 'calendar:'), evidence('js/ported/js-runtime.js', 'posixregex:')]},
+        'partial_lua': {
+            'selected_game_interpreter_replaced': False,
+            'entrypoint': 'js/services/lua/lua.js', 'api_entrypoint': 'js/services/lua/lapi.js',
+            'implementation_form': 'Bounded Lua 5.4 AST interpreter and partial C API, not a complete opcode VM or drop-in C ABI replacement.',
+            'method_names_observed_in_lapi_class': methods,
+            'direct_explicit_unsupported_methods': unsupported,
+            'direct_explicit_unsupported_method_count': len(unsupported),
+            'additional_complete_library_opener_unsupported': 'luaL_openlibs' if "luaL_openlibs() { throw" in lapi else None,
+            'explicit_unsupported_count_including_complete_library_opener': len(unsupported) + int("luaL_openlibs() { throw" in lapi),
+            'configured_call_limit': 'lua_resetthread occurs under notyet/#if0 and luaL_openlibs is in the inactive non-sandbox branch. Their explicit unsupported methods are not configured-game blockers.',
+            'source_declared_limitations': lua_limits,
+            'remaining_gates': ['Complete NetHack-used API semantics and bind game nh/des/selection/object callbacks',
+                                'Preserve table hashing/iteration/holed-length behavior', 'GC/finalizers/memory accounting and configured limits',
+                                'Exact instruction hooks, continuation/finalization, diagnostics and remaining syntax/library behavior',
+                                'Differentially execute original scripts and level/quest generation before selecting this interpreter'],
+        },
+        'game_file_transport': {'selected_in_adapter': ROOT / 'js/services/game-files.js' in adapter_graph,
+                                'filesystem_currently_supplied': 'Emscripten module.FS/MEMFS',
+                                'standalone_vfs_replaces_active_memfs': False,
+                                'payload': 'Existing {files,deleted} transport; binary base64; persistence filter injected by adapter',
+                                'evidence': [evidence('js/wasm-adapter.js', "from './services/game-files.js'"),
+                                             evidence('js/wasm-adapter.js', 'captureGameFiles(module.FS')]},
+        'test_entrypoints': tests,
+        'verification_limit': 'The inventory records test entrypoints, not a fresh test run or coverage/equivalence certification.'}
+
+
+def active_source_paths(active):
+    return [entry['path'] for entry in active['manifest_dependency_source_integrity']]
 
 
 def lua_inventory(tree):
@@ -268,13 +565,21 @@ def lua_inventory(tree):
             'scope_assessment': {
                 'confidence': 'medium: source/configuration review; not preprocessed or dynamically instrumented',
                 'normal_states': ['restricted base', 'coroutine', 'table', 'string', 'math', 'utf8'],
-                'additional_states': ['wizard debugging enables debug.traceback', 'string-only pattern matching state', 'version information state'],
+                'additional_states': ['wizard debugging enables debug.traceback', 'version information state'],
+                'inactive_observed_states_and_calls': [
+                    {'name': 'string-only pattern matching state', 'condition': '#ifdef notyet',
+                     'evidence': evidence(relative(nhlua), 'start_luapat(void)')},
+                    {'name': 'lua_resetthread', 'condition': '#ifdef notyet and nested #if0',
+                     'configured_game_blocker': False, 'evidence': evidence(relative(nhlua), 'lua_resetthread(luapat)')},
+                    {'name': 'luaL_openlibs', 'condition': 'non-sandbox #else branch; prepared config enables NHL_SANDBOX',
+                     'configured_game_blocker': False, 'evidence': evidence(relative(nhlua), 'luaL_openlibs(L);')},
+                ],
                 'not_normally_requested': ['io', 'os', 'package/module loader'],
                 'preserve': ['Lua 5.4.8 integer/float semantics and strings', 'parser/compiler and VM',
                              'core garbage collector and userdata lifecycle/finalization; these are not removable standard-library features',
                              'tables, iteration, metamethods, userdata and object identity',
                              'C API stack and callbacks used by NetHack', 'registry/upvalues/metatables',
-                             'errors/protected calls/tracebacks and thread reset',
+                             'errors/protected calls/tracebacks',
                              'instruction hooks and memory limits for configured sandbox states',
                              'Lua patterns, coroutine/table/string/math/UTF-8 behavior',
                              'seeded math.random and NetHack RNG call ordering',
@@ -290,6 +595,8 @@ def lua_inventory(tree):
 
 
 def build_report():
+    READS.clear()
+    MISSING.clear()
     tree = ROOT / '.cache/wasm64-build/tree'
     game_tokens = set()
     for base in ['src', 'include', 'sys/unix', 'win/tty']:
@@ -302,6 +609,7 @@ def build_report():
     read(ROOT / 'nethack-c/wasm/tu-support.c')
     ports = json.loads(read(ROOT / 'nethack-c/wasm/tu-ports.json') or '[]')
     manifest = json.loads(read(ROOT / 'js/wasm/build.json') or '{}')
+    active = active_inventory(manifest)
     service_sets = []
     for category, names in sorted(LIBC.items()):
         observations = []
@@ -310,14 +618,17 @@ def build_report():
                 observations.append(name)
         service_sets.append({'category': category, 'game_text_tokens': observations})
     report = {
-        'schema_version': 1,
+        'schema_version': 2,
         'generator': 'scripts/audit-js-dependencies.py',
         'purpose': 'Read-only migration inventory; no production implementation or defaults changed.',
         'snapshot': {'configured_js_tu_count': len(ports),
                      'built_js_tu_count': len(manifest.get('javascriptTranslationUnits', [])),
                      'built_emscripten': manifest.get('emscripten'), 'built_upstream': manifest.get('upstream'),
                      'configured_port_names': [p['name'] for p in ports],
+                     'configured_only_port_names': sorted(set(p['name'] for p in ports) - set(p['name'] for p in manifest.get('javascriptTranslationUnits', []))),
+                     'built_only_port_names': sorted(set(p['name'] for p in manifest.get('javascriptTranslationUnits', [])) - set(p['name'] for p in ports)),
                      'build_and_config_can_differ': True},
+        'selected_runtime': active,
         'source_provenance': {
             'pristine_reference': 'nethack-c/upstream',
             'measured_game_and_lua': '.cache/wasm64-build/tree',
@@ -326,8 +637,9 @@ def build_report():
             'evidence': [evidence('nethack-c/wasm/build.py', "PIN = "),
                          evidence('nethack-c/wasm/build.py', "for patch in sorted"),
                          evidence('nethack-c/wasm/build.py', "replace('include/unixconf.h'")]},
-        'source_sizes': source_sizes(tree),
-        'tu_dependencies': collect_tu_dependencies(game_tokens),
+        'source_sizes': source_sizes(tree, active),
+        'tu_dependencies': collect_tu_dependencies(game_tokens, active),
+        'dependency_abi_library': collect_tu_dependencies(game_tokens, active, [ROOT / 'nethack-c/wasm/dependency-library.js']),
         'runtime_observations': collect_runtime(),
         'compiled_service_candidates': {'method': 'Known libc/terminfo names matched as tokens in prepared C/headers; not calls or reachable closure.',
                                         'libc_groups': service_sets, 'terminfo_game_tokens': sorted(TERMINFO & game_tokens)},
@@ -336,13 +648,13 @@ def build_report():
         'runtime_layers': [
             {'name': 'remaining_game_code', 'disposition': 'port incrementally; coordinate with active TU work', 'evidence': ['js/wasm/link-objects.txt', 'nethack-c/wasm/tu-ports.json']},
             {'name': 'c_abi_and_linear_memory', 'disposition': 'preserve addresses/layout/integer semantics initially; replace C helpers and Wasm memory ownership', 'evidence': ['nethack-c/wasm/tu-support.c', 'js/ported/wasm-runtime.js']},
-            {'name': 'libc_regex_time_files', 'disposition': 'replace required behavior through explicit JS services and differential tests', 'evidence': ['nethack-c/wasm/tu-libraries/posixregex.js', 'nethack-c/wasm/tu-libraries/calendar.js']},
+            {'name': 'libc_regex_time_files', 'disposition': 'JS regex selected through C ABI forwarders; compiled libc/time/MEMFS remain selected. Standalone bounded JS services do not replace the active game runtime.', 'evidence': ['nethack-c/wasm/tu-libraries/posixregex.js', 'nethack-c/wasm/tu-libraries/calendar.js', 'js/ported/js-runtime.js']},
             {'name': 'assets', 'disposition': 'embed generated game data and pinned terminal entry as JS-accessible assets; native generators remain development-only', 'evidence': ['nethack-c/wasm/build.py']},
-            {'name': 'replay_adapter_environment_startup', 'disposition': 'retain runSegment boundary, deterministic inputs, per-instance isolation, capture, persistence; replace Emscripten loader/FS/ENV/callMain/unwind', 'evidence': ['js/wasm-adapter.js', 'js/wasm-replay-support.js', 'js/recording-profile.js']},
-            {'name': 'terminfo_capabilities', 'disposition': 'replace libtinfo behavior required by current game; no curses UI rewrite', 'evidence': ['nethack-c/wasm/build_terminfo.py']},
+            {'name': 'replay_adapter_environment_startup', 'disposition': 'Game-file transport extracted and selected; active adapter still supplies Emscripten FS/ENV/startup/callMain/unwind. Standalone VFS/time/memory provider is separate.', 'evidence': ['js/wasm-adapter.js', 'js/services/game-files.js', 'js/ported/js-runtime.js']},
+            {'name': 'terminfo_capabilities', 'disposition': 'Pinned-entry JS terminfo selected; ncurses headers/data/reference build retained, C libtinfo excluded from selected runtime. C vararg/callback ABI support remains.', 'evidence': ['nethack-c/wasm/build.py', 'nethack-c/wasm/dependency-bridge.c', 'js/services/terminfo.js']},
             {'name': 'input_output_transport', 'disposition': 'preserve keyboard byte mapping and input-exhaustion boundary', 'evidence': ['nethack-c/wasm/bridge.c', 'js/wasm-adapter.js']},
             {'name': 'shadow_screen_capture', 'disposition': 'preserve inherited default capture and frame timing separately from transport/terminfo', 'evidence': ['nethack-c/wasm/build.py', 'js/wasm-adapter.js']},
-            {'name': 'optional_ghostty_emulation', 'disposition': 'diagnostic path selected by TELEPORT_TERMINAL=ghostty currently executes separate Wasm; remove from final runtime or implement JS equivalent if retained', 'evidence': ['js/terminal-backend.js', 'js/wasm-adapter.js']},
+            {'name': 'historical_ghostty_emulation', 'disposition': 'Removed from active adapter selection/import path. Historical standalone diagnostic file remains outside selected game runtime.', 'evidence': ['js/wasm-adapter.js']},
             {'name': 'snapshot_serialization', 'disposition': 'preserve recorder encoding/cursor/animation/RNG log conventions independently of terminal emulation', 'evidence': ['js/wasm-replay-support.js', 'js/wasm-adapter.js']},
         ],
         'migration_backlog': [
@@ -359,12 +671,36 @@ def build_report():
         'unresolved': [
             'Static analysis does not establish reachable function closure, external dependency completeness, or standalone JavaScript independence.',
             'Prepared source, configuration, generated build manifest and active files may change concurrently; hashes record the inputs actually read.',
-            'Terminfo source/archive membership is not a linker-reachable subset; linker map/call graph work remains.',
+            'Reference terminfo archive sizes are historical/C-backend scope, not active JS implementation size or runtime closure.',
             'Full libc/formatting/time/filesystem/transitive-helper inventory remains open beyond curated token categories.',
             'Lua inactive branches, scripts loaded through generated data, runtime aliases and alternate flags need dynamic/preprocessed evidence.',
-            'No JS library candidate has been validated or selected by this inventory.',
+            'Compression/terminfo/ERE are selected in the active build manifest; the audit does not rerun their validation suites.',
+            'Standalone memory/time/VFS and partial Lua presence does not replace the selected game Emscripten runtime or compiled Lua.',
         ],
     }
+    report['javascript_service_inventory'] = service_inventory(active)
+    lua_candidate = report['javascript_service_inventory']['partial_lua']
+    required_lua_names = [entry['name'] for entry in report['lua']['api_observations']]
+    observed_lua_names = set(lua_candidate['method_names_observed_in_lapi_class'])
+    lua_candidate['c_call_names_observed_including_inactive_branches'] = required_lua_names
+    lua_candidate['name_matches_only_not_semantic_coverage'] = sorted(set(required_lua_names) & observed_lua_names)
+    lua_candidate['observed_names_not_matching_lapi_class_methods'] = sorted(set(required_lua_names) - observed_lua_names)
+    backlog_status = {
+        'boundary_inventory': 'inventory_updated_remaining_closure_work',
+        'js_memory_state': 'bounded_subsystems_on_standalone_provider_not_selected_game',
+        'bounded_services': 'implemented_bounded_standalone_services_not_full_libc',
+        'compression': 'selected_javascript_configured_scope',
+        'terminfo': 'selected_javascript_pinned_entry_scope',
+        'regex_time': 'regex_selected_javascript_time_standalone_only',
+        'lua': 'partial_standalone_interpreter_compiled_lua_still_selected',
+        'startup_capture_persistence': 'game_file_transport_extracted_active_memfs_retained',
+        'independence': 'not_achieved_wasm_emscripten_and_compiled_lua_remain',
+    }
+    for entry in report['migration_backlog']:
+        entry['current_status'] = backlog_status[entry['id']]
+    report['migration_backlog'][3]['action'] = 'Retain selected JS codec and differential gates; replace remaining MEMFS/C ABI dependence during standalone runtime integration.'
+    report['migration_backlog'][4]['action'] = 'Retain pinned-entry JS terminfo; remove remaining tparm/tputs C ABI support when game callers and callback state are JS-owned.'
+    report['migration_backlog'][5]['action'] = 'Keep configured JS ERE selected; wire the separately implemented JS calendar/time provider into the active game through controlled integration.'
     runtime_markers = {
         'nethack-c/wasm/build.py': 'link_flags = ',
         'nethack-c/wasm/build_terminfo.py': "'--with-termlib'",
@@ -374,32 +710,15 @@ def build_report():
         'js/wasm-adapter.js': 'runWasmSegment',
         'js/wasm-replay-support.js': 'encodeRecorderScreen',
         'js/recording-profile.js': 'recordingProfile',
-        'js/terminal-backend.js': 'WebAssembly.compile',
+        'js/ported/js-runtime.js': 'createJsRuntime',
+        'js/services/game-files.js': 'captureGameFiles',
+        'js/services/terminfo.js': 'createTerminfo',
+        'nethack-c/wasm/dependency-bridge.c': 'int tputs(',
         'nethack-c/wasm/tu-libraries/posixregex.js': "'regcomp'",
         'nethack-c/wasm/tu-libraries/calendar.js': "'mktime'",
     }
     for layer in report['runtime_layers']:
         layer['evidence'] = [evidence(path, runtime_markers.get(path)) for path in layer['evidence']]
-    # Presence is not integration or compatibility proof. Observe exact static
-    # import strings only; do not assume dynamic strings or aliases are absent.
-    js_sources = [p for p in sorted((ROOT / 'js').rglob('*.js'))
-                  if '/wasm/' not in relative(p) and '/vendor/' not in relative(p)]
-    source_texts = {p: read(p) for p in js_sources}
-    candidates = []
-    for path in sorted((ROOT / 'js/services').glob('*.js')):
-        text = read(path)
-        importers = []
-        for importer, imported_text in source_texts.items():
-            if importer == path:
-                continue
-            for match in re.finditer(r'''\b(?:from\s*|import\(\s*)['"]([^'"]+)['"]''', strip_comments(imported_text)):
-                if match[1].startswith('.') and (importer.parent / match[1]).resolve() == path.resolve():
-                    importers.append(location(importer, imported_text, match.start()))
-        candidates.append({'path': relative(path), 'physical_lines': len(text.splitlines()),
-                           'exports_observed': sorted(set(re.findall(r'\bexport\s+(?:async\s+)?(?:function|class|const|let)\s+(\w+)', strip_comments(text)))),
-                           'static_js_import_sites': importers,
-                           'status': 'candidate present; inventory does not establish runtime integration, equivalence or completion'})
-    report['standalone_service_candidates'] = candidates
     # Evidence exists separately from layer descriptions, including optional files.
     for path in ['js/wasm/link-objects.txt', 'nethack-c/wasm/compile-defines.json']:
         read(ROOT / path)

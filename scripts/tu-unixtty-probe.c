@@ -71,7 +71,7 @@ static void capture_exit(const char *message)
 #endif
 #include "tu-unixtty-layout.h"
 
-void probe_options(int get, int set, speed_t speed, long disabled, int tty, int nested)
+void probe_options(int get, int set, unsigned int speed, long disabled, int tty, int nested)
 {
     get_status = get; set_status = set; fixture_speed = speed;
     disabled_character = disabled; nested_exit = nested;

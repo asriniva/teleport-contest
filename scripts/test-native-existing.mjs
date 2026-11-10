@@ -8,6 +8,9 @@ const ports = JSON.parse(readFileSync(new URL('nethack-c/wasm/tu-ports.json', ro
 const selected = process.argv.slice(2);
 if (!selected.every(name => ports.some(port => port.name === name))) throw new Error('Unknown native test suite');
 const names = ports.map(p => p.name).filter(name => (!selected.length || selected.includes(name)) && existsSync(new URL(`test-tu-${name}.mjs`, import.meta.url)));
+for (const name of names) {
+    if (!readFileSync(new URL(`test-tu-${name}.mjs`, import.meta.url), 'utf8').includes('referenceBackend(')) throw new Error(`${name}: existing suite has no native reference selection`);
+}
 const runId = `${process.pid}-${Date.now()}`;
 const directory = new URL(`native-existing-runs/${runId}/`, cache);
 mkdirSync(directory, { recursive: true });
@@ -39,7 +42,8 @@ const reports = readdirSync(cache).filter(file => /^native-assertions-.*\.json$/
 });
 for (const result of results) {
     const matching = reports.filter(report => report.test === fileURLToPath(new URL(`test-tu-${result.name}.mjs`, import.meta.url)));
-    result.completed = matching.length > 0 && matching.every(r => r.completed) && matching.some(r => r.nativeInstances > 0);
+    result.expectedReports = ['calendar', 'date'].includes(result.name) ? 6 : 1;
+    result.completed = matching.length === result.expectedReports && matching.every(r => r.completed) && matching.some(r => r.nativeInstances > 0);
     result.assertions = matching.reduce((n, r) => n + r.assertions, 0);
     result.assertionFailures = matching.reduce((n, r) => n + r.failures, 0);
     result.reports = matching.map(r => r.pid);
@@ -47,9 +51,9 @@ for (const result of results) {
 }
 results.sort((a, b) => names.indexOf(a.name) - names.indexOf(b.name));
 const passed = results.filter(r => r.passed).length, completed = results.filter(r => r.completed).length;
-const summary = { runId, passed, failed: results.length - passed, completed, assertions: results.reduce((n, r) => n + r.assertions, 0), assertionFailures: results.reduce((n, r) => n + r.assertionFailures, 0), results };
+const summary = { runId, selection: selected.length ? selected : null, passed, failed: results.length - passed, completed, assertions: results.reduce((n, r) => n + r.assertions, 0), assertionFailures: results.reduce((n, r) => n + r.assertionFailures, 0), results };
 writeFileSync(new URL('results.json', directory), JSON.stringify(summary, null, 2) + '\n');
-writeFileSync(new URL('native-existing-results.json', cache), JSON.stringify(summary, null, 2) + '\n');
+writeFileSync(new URL(selected.length ? 'native-existing-selected-results.json' : 'native-existing-results.json', cache), JSON.stringify(summary, null, 2) + '\n');
 console.log(`Existing native suites: ${completed}/${results.length} completed; ${passed} passed, ${results.length - passed} failed. ${summary.assertions} assertions, ${summary.assertionFailures} assertion failures.`);
 console.log(`Report: ${fileURLToPath(new URL('results.json', directory))}`);
 if (passed !== results.length) process.exitCode = 1;

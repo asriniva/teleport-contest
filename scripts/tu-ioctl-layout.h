@@ -2,6 +2,8 @@
 #include <termios.h>
 #include <signal.h>
 #include <stdint.h>
+#include <stddef.h>
+#include <sys/ioctl.h>
 
 /* Match the POSIX ioctl.c header-selection branch before testing TIOCGWINSZ. */
 #if defined(POSIX_TYPES)
@@ -35,6 +37,10 @@ static const struct {
     { "POSIX_TYPES", 1 },
     { "SUSPEND", 1 },
     { "SYSCF", 1 },
+    { "TIOCGWINSZ", TIOCGWINSZ },
+    { "winsizeSize", sizeof(struct winsize) },
+    { "winsizeRow", offsetof(struct winsize,ws_row) },
+    { "winsizeColumn", offsetof(struct winsize,ws_col) },
 #if defined(TIOCGWINSZ) && !defined(AVOID_WIN_IOCTL)
     { "USE_WIN_IOCTL", 1 },
 #else

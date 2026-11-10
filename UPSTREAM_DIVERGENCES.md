@@ -5,27 +5,120 @@ currently on disk, including incomplete behavior and defects. It must be updated
 with every divergence; proposed changes must be explained before edits begin.
 See [the working instructions](AGENTS.md).
 
-**Parallel dependency migration (DEP01):** standalone JavaScript compression
-and terminfo services have passed standalone checks; the runtime dependency
-inventory is implemented and the overall migration remains in progress.
-These additions are not selected by the game build. The production results
-below still describe the mixed C/Wasm engine; standalone service checks do not
-establish whole-game integration or a Wasm-free submission.
+**Native parity correction complete for the existing suites (NP01):** the user rejected accepting
+native/JavaScript behavioral differences. The prior green native reports used
+platform-specific expectations and do not establish native behavioral parity.
+Restore direct comparisons in the existing alloc, sys, regex, coloratt, minion,
+version, light, worm, o_init and calendar suites; retain the native adapter's
+boolean conversion correction. Implementation fixes change the JS side,
+not the native oracle or its expected outputs. The fresh full run completes and
+passes 53/53 suites: 1,496,451 assertions, zero failures. Native terminal/layout
+bytes, regex/error buffers and full comparator traces compare directly again.
+Evidence: `.cache/native-existing-runs/29670-1794291036512/results.json`.
+The rebuilt game's integration passes; all 44 unchanged public recordings match
+792,838 RNG calls, 11,405 screens/cursors/cells and 1,483 animation frames.
 
-## Full existing-case native correction (NT04, in progress)
+**NP02 implementation, verified by the NP01 aggregate:** runtime code now emits native
+pointer strings (including NULL), initializes the native panictrace option,
+saturates signed-long bribe scans at native boundaries, and preserves aliased
+version-format sources as the native formatter does. Calendar uses JS time
+conversion with native pre-1900 rejection, explicit DST offsets, historical
+offsets and the actual parser clock; it no longer applies the Wasm-only
+recording-epoch override. Regex implements the native ERE parsing/error rules
+in JS, including empty-expression rejection, literal escapes, repetition limits
+and native diagnostics. Coloratt's hybrid probe now links the same translated
+regex dependency as the game, using an instrumentable free ABI. Sorting uses
+the native insertion/partition schedule in JS; exact comparator traces are
+compared again in o_init and hacklib. Native C oracle algorithms are unchanged.
+Locations: `js/services/native-{c-compat,regex-libc,qsort}.js`, `c-time.js`,
+`posix-regex.js`, `js/ported/wasm-runtime.js`, production JS dependency providers,
+`nethack-c/wasm/native-libc-library.js`, `tu-support.c`, and probe/build scripts.
+The metadata generator atomically replaces its header to prevent concurrent
+builds reading partial metadata. Native is the default differential reference;
+`TELEPORT_NATIVE_TESTS=0` is an explicit Wasm-C diagnostic, not the parity gate.
+No regex input subset, native-only expected gameplay result, error-text waiver,
+calendar native-C callback, or omitted sort event substitutes for behavioral
+equality. Full native, production build and recording results follow below.
 
-The earlier NT01–NT03 result covered supplementary hand-written native cases,
-**not every case in the existing tests**. That did not meet the user's request.
-`test-tu-*.mjs` now retain their case enumeration and can select native C as the
-reference through a Node-API test adapter. Full validation is in progress; no
-all-existing-cases native pass is claimed. The first five full suites passed;
-platform/configuration differences and native linker setup are being resolved.
-Native allocation cases run their original operations; only the Wasm-buffer
-identity assertion uses an explicitly measured native allocation counterpart.
+**NP03 native ABI correction, verified by the NP01 aggregate:** the JS-facing compiled
+interface now uses the actual host-native terminal and regex layouts, rather
+than waiving their byte comparisons. `nethack-c/wasm/native-terminal.h` is forced
+into hybrid probes and the game, never into the native oracle. The native
+termios record is72 bytes with64-bit flag/speed words; the native opaque regex
+record is32 bytes. `native-terminal-abi.json`, `native-terminal.js` and
+`native-libc-library.js` translate terminal flags, control characters, speeds,
+signal identities and window requests at the SDK OS boundary. Native-only bits
+are preserved, including upper flag words that must not pass through rounded
+JS numbers. `unixtty-runtime.js` changes only the low bits used by native masks.
+`ioctl.js` now executes the original window-size branch; controlled success,
+failure and zero-dimension cases compare directly with native C. Original
+terminal/layout/raw-byte assertions remain, with only a64-bit fixture writer
+correction. The transport test checks its captured layout against both actual
+SDK and host C descriptors. This is configured API compatibility, not a native
+OS: EMT/INFO handlers can be registered and explicitly delivered locally;
+unsupported default/external delivery fails explicitly. Native regex supports
+the configured NOSUB ERE interface; match captures and arbitrary locale/TZ
+databases are not claimed. The build fingerprints the forced ABI header and
+invalidates old game objects when it changes. The complete rebuilt 53-suite
+native gate, integration and unchanged recording gates pass as recorded in
+NP01. Source/comment and lexical checks pass for all 53 registered TUs and
+11 tooling fixtures. Standalone native comparisons pass 996 time cases in each
+of five zones, 770 regex cases and 1,294 runtime comparisons. Supporting version,
+terminfo, replay, compression and terminal-transport checks pass. Earlier reports
+below are historical.
+The unused `scripts/native-calendar-hybrid.mjs` callback adapter is retired
+(archived only in `.cache/`); no active calendar test imports native libc to
+implement the JS-under-test. Standalone JS time, regex and runtime checks use
+the real native reference as their oracle.
+`scripts/test-native-library-differences.mjs` adds an explicit three-way gate:
+the same pointer, bribe-scan, regex and calendar inputs execute in actual native
+C, original SDK C and the translated JS. JS must equal native C; known libc
+differences must still be observed in SDK C. Shared ordinary cases must agree
+in all three. This diagnostic never accepts SDK output instead of native output
+for JS. All 14 cases pass. It writes its actual observations to
+`.cache/native-library-differences.json`; full native and Wasm test commands
+require this gate and the native terminal transport test. The recorded game is
+`caa9037891a506d73717bba31f1309c7758d83a17dd3a3080b83d25c9bc9edd7`;
+logs are `.cache/native-parity-final-{build,integration}.log` and the unchanged
+scorer result is `.cache/native-parity-final-public-results.json`. Native oracle
+provenance remains the original host-compiled source with the previously
+documented inherited contest patches and controlled probe dependencies.
 
-## Native TU test audit (NT01–NT03)
+**Dependency migration (DEP01–DEP02):** the regular mixed build now selects
+JavaScript compression, terminfo and POSIX regex, omitting the corresponding C
+algorithms. Its fresh full run passes44/44 public sessions,11405 screens/cursors,
+792838 RNG calls and1483 animation frames, with no errors. Ordinary-JS memory,
+calendar and regular-file services run separately; JavaScript Lua remains
+partial and inactive in the game. Compiled Lua, remaining game C, libc and the
+Emscripten runtime are still required. This is not a Wasm-free submission.
 
-**Current validation:** clean aggregate native run **50/50 passed**, with
+**DEP03 now in progress:** the user explicitly requested completing the
+remaining Lua/runtime migration. Planned source additions are a real Lua C ABI
+bridge (`nethack-c/wasm/lua-bridge.c`, `lua-library.js`,
+`js/services/wasm-lua-runtime.js`), rooted Lua GC/finalizers/close and native
+userdata ownership, debug/allocator/sandbox services (`lua-debug.js`), remaining
+string formatting/packing helpers, dedicated native differential tests and a
+separate linked game candidate without liblua. Existing production defaults
+stay selected until native ABI/lifecycle/RNG/limit and unchanged recording
+gates pass. This planning entry authorizes no no-op lifecycle/disabled limits;
+unfinished services remain explicitly incomplete. Exact results follow as
+implemented. Other concurrent game-TU changes remain separately recorded.
+
+## Full existing-case native correction (NT04–NT06)
+
+**Active migration (J59): WIELD/TU53.** All12,804 target comparisons and34,122 focused native assertions pass; supplementary1,538 observations match. Preserved replay inputs pass44/44 public sessions and game integration. The later53-suite native diagnostic passes1,503,578 assertions, but concurrent source changes prevent certifying one frozen live revision. NP01–NP02 resolve the earlier oracle question: native C is required; EmC-only libc differences are diagnostic. The user confirms the terminal baseline is fixed. WIELD remains pending a coherent fresh build/native/integration/public gate; MKROOM translation has not begun.
+
+**Historical validation (J58), superseded by NP01–NP03:** WORN's saved52-suite report used native/platform amendments that the user subsequently rejected. Its1,498,045-assertion pass does not establish direct native parity. Its separate full-game integration and44-session recording results remain historical build evidence. Evidence: `.cache/test-wasm-worn.log`, `.cache/native-existing-runs/68308-1794286304795/results.json`, `.cache/worn-public.stdout.txt`. Current strict native parity must be established by the NP aggregate above.
+
+| ID | Location | Exact change, reason, effect, limitations and verification |
+| --- | --- | --- |
+| NT04 | `scripts/build-native-addon.py`, `scripts/native-addon.h`, `scripts/native-test-backend.mjs`, `scripts/test-tu-*.mjs` | Replace the narrow scenario approach with native execution of the existing probe APIs and case loops. Generate typed Node-API bindings from Clang's probe declarations; use host libc/ABI and real memory, isolate each native instance, retain 64-bit patterns, and guard source/header freshness. Native mode substitutes only the reference factory; JS-under-test still executes as before. Native stack checks use actual before/after SP, and allocation cases measure actual native allocation requests. The native reference retains inherited recorder source/header changes, so this is not pristine whole-game equivalence. No production algorithm change. |
+| NT05 | `scripts/native-test-assert.mjs`, `scripts/test-native-existing.mjs`, `scripts/test-native-tu.sh`, `scripts/test-wasm.sh`, `package.json` | Native mode collects assertion mismatches while later cases execute, always returning nonzero on failure. Preserve fail-fast behavior in Emscripten mode. Run independent suites in three child processes and isolate reports by run ID; report completion independently from pass/failure, including timezone workers. Switch `test:native` and the main suite to these existing-case runs. Initial full runs exposed pointer formatting, calendar/libc, regex/terminal, overflow and property/callback differences that supplementary tests missed. The full run completed all 51 suites, with 19 failing groups; the 51 Emscripten groups pass. Unresolved differences remain failures. |
+| NT06 | `scripts/tu-version-probe.c`, `scripts/test-tu-version.mjs`, native adapter and HACKLIB fixture helpers | Amend fixture-only native incompatibilities: preserve mutable test identifier storage; call the banner function indirectly to observe intentionally NULL metadata despite its NONNULL return annotation; verify NULL-output calls return safely instead of reading native address zero. Native calendar time follows the simulated test clock. Map test log files into an isolated workspace directory. Preserve ordinary host descriptors and use controlled callbacks for HACKLIB mock devices. Capture host assertion entry points for the existing intentional assertion cases. These do not change gameplay; the NULL metadata case is not valid live-game state, and native platform differences remain visible. |
+
+## Historical supplementary native audit (NT01–NT03, superseded)
+
+**Historical supplementary validation:** clean aggregate native run **50/50 passed**, with
 **106,676 observations** and all four pristine-source native variants passing.
 A deliberately mutated JavaScript RNG is detected. Source-preservation and
 lexical-scope checks pass. The existing detailed Emscripten suites also pass
@@ -1650,8 +1743,374 @@ functions independently of Module/C/Wasm, preserving numeric addresses, aliases,
 widths and per-instance state initially. First independent subsystem checks do
 not establish whole-game independence. Every new production dependency module
 must avoid host filesystem/network/native/Wasm requirements. Focused oracles
-may use native or compiled C in development-only tests. All new gates pending.
+may use native or compiled C in development-only tests. Initial gates were
+pending at this planning checkpoint; completed results follow.
 
+DEP02 selected build and verification (2026-11-09):
+
+- `nethack-c/wasm/build.py` defaults to JavaScript compression, terminfo and
+  regex. It compiles `dependency-bridge.c` with `-O2 -g -std=gnu17
+  -sMEMORY64=1 -DTELEPORT_JS_REGEX=1`, links `dependency-library.js` with
+  `TELEPORT_JS_REGEX=1`, omits codec.o and libtinfo from the game link, and uses
+  strong regcomp/regexec/regerror/regfree forwarders to avoid TRE algorithms.
+  Native zero globals PC/BC/UP/ospeed and original regex_t storage remain ABI
+  storage. `--emit-symbol-map` enables linkage inspection. Module post-JS marks
+  the backend; build.json records source hashes, flags, provenance and removed
+  compiled dependencies. Real ncurses is still built for headers/reference
+  probes. The explicit `--c-dependencies` diagnostic switch preserves the prior
+  compiled dependency selection; that alternate build has not been rerun here.
+- `js/services/wasm-dependency-runtime.js` supplies per-module services, pointer
+  conversion, stable capability/result buffers, opaque regex handles and the
+  original MEMFS codec statuses/error cleanup. It refreshes views after memory
+  growth. The shim preserves configured numeric tparm ABI, including the
+  inherited four-byte int versus eight-byte intptr_t vararg packing mismatch;
+  generic string varargs are not supported. tputs expands syntax once in JS,
+  then C copies bytes before invoking the real callback, allowing reentry and
+  memory growth without repeated JS crossings. Callback return values remain
+  ignored like configured ncurses; signed-char bytes remain faithful. This is
+  remaining C ABI work, not complete removal of native dependencies.
+- `js/wasm-adapter.js` injects that provider and reports the selected backend
+  and actual call counters; legacy builds report C and no JS call counts. No
+  terminal selection, input/RNG policy, shadow grid or snapshot encoder changed.
+  Existing filesUnder/base64/capture/restore loops move unchanged to
+  `js/services/game-files.js`, with filesystem and transient policy injected.
+  The persisted `{files,deleted}` protocol and baseline/deletion behavior are
+  unchanged. Frozen files, recordings and comparator were not edited by this
+  dependency migration; other concurrent restoration history remains above.
+- `scripts/build-js-dependency-game.py` snapshots the currently built game,
+  source hashes, layouts, data and link inputs into a unique `.cache` candidate,
+  detects concurrent edits, and omits C dependency algorithms only there.
+  `scripts/score-js-dependency-game.py` stages the unchanged frozen harness and
+  adapter/support files separately, redirects only the staged factory import,
+  and preserves the harness timeout/comparison rules. First two-service build
+  SHA256 `fd696cbf428944715bee93f3754fcc5ab10812be1f40f052f33beafb3e003e87`
+  passed43/44: seed0014 hit the unchanged timeout; every completed metric was
+  exact. That session passed alone. Optimized terminfo/codec/regex candidate
+  SHA256 `0d08f633619a4a8ac7cc68c85258837167ebbd271a469621963fd347477ef75b`
+  passed44/44,11405 screens/cursors,792838 RNG calls,1483 animations,zero errors.
+  Candidate logs/summary are under `.cache/js-dependency-game-regex/`.
+- The regular `bash nethack-c/build-wasm.sh --resume` then succeeded. Its Wasm
+  SHA256 is `b90a196971938cd4d3df04466c7868f7114724dc6ed46b82d7f554a3a96ca34b`.
+  `scripts/test-wasm.mjs`, `test-version-bridge.mjs` and
+  `test-wasm-replay-support.mjs` pass, covering live dependency imports and
+  removed-algorithm symbols, dependency calls, cross-segment bones, three
+  timezones under winter/summer clocks, MacOS features, HOME/sysconf and version
+  clipboard behavior. Fresh unchanged `scripts/score-wasm.sh` passes44/44 with
+  every metric exact and zero runtime errors. Evidence:
+  `.cache/build-wasm-js-dependencies.log`,
+  `.cache/js-dependencies-active-test.log`,
+  `.cache/js-dependencies-active-public-{results,summary}.json` and
+  `.cache/js-dependencies-active-public.{stdout,stderr}.txt`. The replay speed
+  fit is699+5.93/turn in this run, not a controlled performance benchmark.
+  No whole-game native parity or browser equivalence is inferred.
+- `scripts/test-js-dependency-abi.mjs` compiles private wasm64 C callers and
+  tests stable tgetstr/area pointers, tparm numeric/packed-int/RGB behavior,
+  nested tputs callbacks plus32MB growth, actual MEMFS codec no-shrink/missing/
+  directory/malformed/recovery cases and16 regex/error-buffer C ABI cases.
+  It passes against the frozen three-service candidate. These dedicated
+  probes are separate from the regular module's integration/recording gates.
+- `js/services/posix-regex.js` implements a byte parser and position NFA, not
+  JS RegExp matching, for precisely the configured musl C-locale
+  REG_EXTENDED|REG_NOSUB interface. It retains musl error text/status, NUL
+  termination, byte128–255 mapping and ERE literal digit escape rules. Native
+  C is the pinned Emscripten musl/TRE source compiled privately with explicit
+  byte-locale and error-translation adapters, not host macOS regex. Tests pass
+  79147 native compile/error/match differentials and65564 actual Emscripten
+  comparisons, including anchors/flags/classes/ranges/counts/errors and freed
+  handles. BRE, captures, ICASE/NEWLINE and other locales remain unsupported;
+  state/transition/nesting limits return resource errors without claiming
+  native-identical allocation thresholds.
+
+DEP02 independent runtime provider (not selected by the game):
+
+- `js/services/c-memory.js` owns ordinary ArrayBuffer bytes and numeric aligned
+  addresses, coalesced allocation/free/reallocation, checked access, growth and
+  fresh typed views. Scope cleanup tracks allocation identity to avoid freeing
+  an unrelated allocation that reused a released address. Scopes are
+  synchronous; invalid/free/out-of-bounds behavior is explicit JS failure,
+  not emulation of C undefined behavior. Defaults bound memory at64MB.
+- `js/services/c-stdlib.js` adds byte memory/string operations, ASCII classes,
+  LP64 integer parsing and bounded integer/string/pointer/%n formatting. The
+  service uses configured WASI errno IDs (EINVAL28,ERANGE68); native tests
+  compare symbolic errors because host values differ. atoi/atol preserve
+  errno and precision-bounded %s does not require a later NUL. Float/wide/
+  positional formatting and full libc coverage are absent. Out-of-range
+  undefined C inputs do not establish arbitrary-input parity.
+- `js/services/c-time.js` derives the configured Emscripten4.0.10 MIT time
+  policy into ordinary tm objects with per-provider local/UTC static buffers.
+  It retains Date-based host timezone, Jan/Jul DST heuristics, explicit
+  tm_isdst normalization and mktime's unchanged tm_gmtoff. It has no per-instance
+  IANA/POSIX zone database or strftime and explicitly rejects Date-range
+  failures. This targets the current configured runtime, not universal native
+  libc timezone semantics.
+- `js/ported/js-runtime.js` supplies these services and independent CVFS to
+  the existing alloc/strutil/isaac64/nhmd4/calendar/posixregex translations without
+  changing their function bodies. LP64 record layouts/aliases, panic text,
+  environment, static buffers and nested C-binding restoration remain
+  instance-local. `scripts/js-runtime-probe.c` links original upstream
+  alloc/strutil/isaac64/nhmd4 with test-only failure/panic interception and
+  ASCII lowc fixture. `scripts/test-js-runtime.mjs` passes1294 native command
+  comparisons,6000 ISAAC outputs plus complete contexts,44 MD4 chunk/digest/
+  cleared-state cases, strbuf growth/CRLF/wildcards, parse/format and panic
+  checks. Additional independent-memory tests check allocation failures,
+  aliases/growth, scope ABA and restored nested instances. A new provider does
+  not port the remaining game structs/globals/native function dependencies.
+- The added regex provider uses the configured72-byte nhregex layout with
+  regex_t at0 and int error at64, fresh memory views, per-instance opaque
+  expression handles and byte error writes. Existing translated wrapper
+  functions remain unchanged. `scripts/test-js-runtime-regex.mjs` snapshots the
+  existing configured original-C memory64 reference privately and passes770
+  wrapper comparisons: compile/match/status, whole guarded error buffers,
+  NULL guards, byte/NUL inputs, growth, cleanup and per-provider handles. It is
+  separate from native musl service and integrated-game tests. Independent
+  review found no configured-scope defect. Successful compilation remains a
+  precondition to execution; captures and other regex flags are not added.
+- `scripts/test-js-time.mjs` snapshots the configured original-C calendar
+  memory64 probe privately and pins the clock for both providers. It passes
+  996 comparisons in each of New York, Los Angeles, UTC, Sydney and Auckland
+  (4980 total), including inherited recording DST, normalization, leap/pre1970/
+  post2038 dates, environment precedence and temporary cleanup. Independent
+  review passes715 direct localtime/mktime tm-field/epoch/static-buffer checks
+  across those zones. These compare configured Emscripten semantics, not the
+  historical recorder capture environment.
+- `js/services/c-vfs.js` implements per-instance regular files/directories,
+  numeric descriptors and an FS stream facade, inode identity across open/
+  unlink/rename, holes/append/truncation, cwd/stat, simple MEMFS any-user mode
+  checks and explicit resource limits. Host/storage capabilities are absent;
+  optional clock and WebStorage are injected. Versioned snapshots preserve
+  linked files/directories/cwd, exclude live descriptors/open-unlinked files
+  and reject imports with live descriptors; malformed imports are atomic.
+  Native501 named-errno trace comparisons pass, with macOS unlink-directory
+  EPERM versus target EISDIR asserted as a difference;523 actual configured
+  MEMFS comparisons pass. Tests cover1MB binary persistence, bones/deletion,
+  storage failures, descriptor identity/reuse and bounds. Symlinks/hardlinks,
+  devices/sockets/mounts/locks/dup/chmod/chown/ACL/user identities are absent.
+  Timestamp default is deterministic zero; advancing timestamps require an
+  injected millisecond clock. It does not replace the game's active MEMFS.
+- `scripts/test-js-game-files.mjs` confirms identical extracted save/bones
+  payloads with independent CVFS and actual MEMFS,1MB binary/empty/changed/
+  deleted/transient files,8192-byte base64 boundaries, JSON/object repeated
+  restore and instance isolation. Independent review also compares the
+  extracted loops against the previous adapter behavior.
+- `scripts/test-js-dependencies.sh` / `npm run test:dependencies` collect
+  standalone codec/terminfo/regex/runtime/VFS/game-files/Lua/API/isolation
+  suites, plus configured calendar/wrapper and actual Emscripten regex checks
+  using the SDK memory64 Node. Standalone tests may select Node22 independently.
+  Isolation now executes29 production modules,
+  including translated algorithms, filesystem, persistence and real Lua
+  arithmetic, with host/package/dynamic imports and code generation rejected,
+  WebAssembly/process/Buffer/fetch unavailable. Native tools/compiled C are
+  used only by development oracles. Browser execution remains unverified.
+
+DEP02 partial Lua milestone (inactive in the game):
+
+- `js/services/lua/` provides13 modules for byte strings/int64/float values,
+  lexer/parser, AST execution, array/hash tables, base/math/string/pattern/UTF8
+  libraries, genuine generator-based coroutines and a bounded C-stack model.
+  Source notices retain Lua5.4 MIT attribution. This is a handwritten semantic
+  migration, not the original bytecode VM, certification or full C library.
+  Native comparisons compile the checksum-pinned original Lua5.4.8 privately;
+  no production module loads compiled Lua, host files or network resources.
+- `createLua` executes actual source with host callbacks and instruction bounds;
+  integer operations wrap at64 bits and returned floats are compared bitwise.
+  Coroutines suspend live generator frames and resume without script replay or
+  repeated callback/RNG effects; tested pcall/xpcall and metamethod suspension
+  preserve results. Synchronous host boundaries reject yields. Original nhlib
+  helpers/RNG trace, quest data, bigrm-4 diagnostic callbacks, tutorial event
+  removal and self-removing original nhcore callbacks execute in focused tests.
+  Parsing all131 original scripts is syntax evidence, not execution coverage.
+- `ltable.js` derives array-capacity/rehash/hash-node/border/deleted-key-next
+  algorithms from Lua5.4.8. Native-tested integer layouts/order/holed lengths
+  match. This fixes a real NetHack tutorial blocker: deleting the current key
+  inside pairs previously raised invalid-key-to-next. General string/object
+  iteration parity is not established: native address-derived string seeds
+  and pointer hashing/layout are unintegrated, default seed is explicit zero,
+  and logical object identity IDs are module-scoped so other VMs can affect
+  object-key ordering. It must not be presented as full table/instance parity.
+- Review also corrected explicit-nil optional arguments, ASCII-space numeric
+  parsing, modulo infinity/signed-zero cases, integer-loop limit normalization,
+  numeric-string loop variables, forbidden string coercion for bitwise ops,
+  string.format's internal tostring behavior and separate loaded-chunk _ENV
+  cells. These cases have maintained native differential regressions.
+- `lapi.js` models stack/registry/upvalues, native callbacks/result counts,
+  table/userdata/metatable operations, protected errors, source loading and
+  selected auxiliary helpers with JavaScript values in place of C pointers.
+  Ten GC/debug/allocator/coroutine-related facilities explicitly fail,
+  rather than becoming no-ops; complete openlibs also fails explicitly. There
+  is no native lua_State pointer/function-table ABI or live NetHack binding.
+- Final `test-js-lua.mjs` passes136 native execution cases/1335 returned values,
+  all131 original scripts parse in both engines, and `test-js-lua-api.mjs`
+  passes24 native stack/registry/callback snapshots. Review additionally fixed
+  luaL_checkudata accepting untyped userdata when the named metatable was not
+  registered; a native protected-call regression checks rejection/status/type.
+  The combined dependency
+  runner exits0 on the frozen milestone, using Node22.23.4 for standalone
+  services and SDK Node24.19.0 for memory64 C oracles. Log:
+  `.cache/js-dependencies-standalone.log`. Review is independent of these tests.
+- Still absent: deterministic GC/weak tables/finalizers/close/root tracking,
+  allocator accounting and memory limits, native C-pointer callbacks, complete
+  debug/opcode hooks and RNG source context, C continuations/coroutine.close,
+  tail calls, binary chunks, goto/close execution, full format/pack and the
+  rare entropy-randomized sort pivot. These are material omissions. In
+  particular NetHack forces selection GC and object/selection finalizers
+  release game resources, so substituting no-op GC/close would be incorrect.
+  The selected game continues linking real liblua; no Lua recording-equivalence
+  claim or dependency-completion claim is made.
+
+DEP02 audit refresh now records the actual selected module,52 configured versus
+51 built game TUs (WORN is configured but pending),89 linked game C objects,
+563 imported JS functions and5413 defined Wasm functions at this snapshot.
+Import/definition sections are parsed separately; C forwarding symbols are not
+misclassified as their former compiled algorithms. All seven selected service
+hashes and binary hash agree with build.json, and the stored44/44 result is
+paired by Wasm hash, with adapter-JS pairing limits explicit. Residual compiled
+dependencies include Lua5.4.8 (346 prefix-matched names, not a proven reachable
+closure), libc/libm/stdio/time/allocator,746 teleport helper names, six terminfo/
+regex forwarders and native globals/buffers. Emscripten still supplies heap/
+stack/callback/startup/embedded-data/ENV/MEMFS/date/syscall/unwind services.
+Ghostty is inactive. Static prefix/token counts and symbol absence alone do not
+prove a complete closure. Audit regeneration and `--check` pass with no missing
+inputs; concurrent TU work can legitimately stale this measured snapshot.
+
+Next dependency gates are real Lua lifecycle/debug/native-callback integration,
+then broader ordinary-memory globals/structs/libc/stdio/startup coverage and
+connecting the tested VFS behind game file calls. Each selected change requires
+the same unchanged recording gate. The backend-independent runSegment/replay/
+persistence contract remains useful; the Emscripten module/pointer portions of
+the adapter retire only when their actual native callers disappear. Compiled
+Lua and remaining Emscripten/libc/game C are still needed. No frozen file,
+recording or pristine upstream submodule modification is part of DEP02.
+
+Lua integration readiness review identifies concrete ordering: first bridge
+header-expanded C API symbols/state/string/out-parameter/function-table ABI;
+then native-backed userdata with rooted collection/once-only finalization;
+then allocator userdata, sandbox accounting/limits, real debug/error hooks and
+protected C↔JS reentry. Current userdata bytes are detached Uint8Array, whereas
+nhlsel/nhlobj immediately cast/write game pointers into the returned storage.
+Selection iteration and mklev explicitly collect; object finalizers alter
+lua_ref_cnt/free game objects. AST instruction ticks are not Lua opcode hooks.
+Original nhlib also replaces math.random with actual nh.rn2/nh.random and
+consumes game RNG while loading, so standalone math tests cannot substitute
+for unchanged host bindings/context. Lexical lua_* names miss macro-expanded
+pcallk/loadbufferx/checklstring/checkversion_ and other link symbols. Disabled
+resetthread and non-sandbox openlibs branches are not active-game blockers.
+A separate ABI/lifecycle/RNG/limits oracle must pass before linking a candidate
+without liblua; level/theme/core/quest/save/restore and all44 recordings then
+gate selection. No C API success labels imply that this work is already done.
+
+
+### DEP03 — Remaining Lua implementation and live ABI integration (in progress)
+
+The user explicitly required continuing beyond the partial DEP02 milestone.
+Work resumes on real lifecycle/weak references/finalizers/close and managed
+roots, actual C pointer/callback/error ABI, debug/source/opcode/resource policy,
+Lua text compilation and bytecode execution, remaining string facilities, and
+a liblua-free game candidate. Native tools/chunks remain development oracles;
+there is no production native compiler or recorded script-result substitution.
+The regular game remains on compiled Lua until complete integration gates pass.
+
+First DEP03 implementation evidence:
+
+- `scripts/build-js-dependency-game.py --lua` creates an isolated candidate
+  using the current built manifest/object tree, implies JS regex, compiles
+  `lua-bridge.c` against original Lua headers, links `lua-library.js`, injects
+  `createWasmLuaRuntime` and omits liblua. Its original-game wrapper now also
+  supplies the already-selected JS dependency provider. No active game output
+  is overwritten. New Lua C code contains typed transport/callback/unwind
+  adapters, not interpreter or standard-library algorithms. Full behavior and
+  source provenance remain recorded in the candidate's snapshot manifest.
+- Initial liblua-free candidate built with53 snapshotted game JS TUs, Wasm
+  SHA256 `525676500e53ea3cda29f675b572cf78b051c7bdfc4af6dfb0cdc327de9aad08`.
+  This proves link closure only. The unchanged seed8000 recording is0/1:
+  startup stops at deliberately unsupported lua_gc/GCCOUNT from real nhl_alloc
+  during an ABI string operation, with0/23 screens and0/3130 RNG calls. It is
+  not selected and is not a Lua-equivalent game. Logs and structured evidence
+  are in `.cache/js-lua-game-initial/`; collection/accounting integration is
+  being implemented rather than bypassing that allocator check.
+- `js/services/lua-string-pack.js`, connected by the original `lstrlib.js`
+  entry, translates LP64 little-endian Lua5.4.8 packing to byte strings and
+  DataView. pack/unpack/packsize support signed/unsigned1–16-byte integers,
+  native numeric widths, IEEE32/64, byte order/alignment/X, fixed/sized/NUL
+  strings, input positions, overflow and malformed/short input checks.
+  Results are explicitly bounded at10MB; packsize does not allocate the result.
+- `lua-string-format.js` replaces the earlier partial formatter. It supports
+  configured Lua integer/string/character/pointer/literal/hex-float/decimal
+  float conversions, validation, width/precision/flags, byte quoting, negative
+  zero/NaN/Inf and subnormals. Decimal output uses exact IEEE rational arithmetic
+  with ties-to-even rather than JS toFixed approximations. Configured musl
+  hexadecimal formatting normalizes subnormals. Native pointers can be injected
+  via vm.pointerOf; ordinary-JS fallback identities are logical, not claims of
+  native address equivalence. Binary dump is assigned to the bytecode layer.
+- `scripts/test-js-lua-strings.mjs` builds checksum-pinned native and configured
+  memory64 Lua oracles in its own scratch. All1550 cases/3138 byte- and
+  bit-identical configured values pass, including native executions for every
+  input, random IEEE bit patterns, precision0–99 and rejected formats. Nine
+  measured host-format differences are preserved in
+  `.cache/js-lua-strings/platform-differences.json`; they are not silently
+  treated as universal native equivalence. Initial pack-only589 cases/2165
+  values were also exact against host Lua. New combined runner entries include
+  string and debug/resource suites; the full refreshed gate is still pending
+  lifecycle/compiler integration.
+
+Further lifecycle, C ABI, real opcode/codegen and sandbox verification is in
+progress. No completion or game equivalence is claimed by these first gates.
+
+DEP03 subsequent isolated integration milestone (not the selected default):
+`.cache/js-lua-game-opcodes/` replaces liblua with the JavaScript source
+compiler/register VM and real C ABI provider. Its53 game-TU snapshot produces
+Wasm SHA256 `8b005a9c992b8ee5cb21d2c0316d401c1992373cfcf5653fbc273e9972574195`
+and passes44/44 unchanged public sessions:11405 screens/cursors/cells,
+792838 RNG calls and1483 animation frames, zero errors. The snapshot's source
+hashes and `public-summary.json` preserve the exact tested inputs. This
+supersedes the initial0/1 candidate's execution result; that failure remains
+above as history. It does not validate later long-string-identity, scheduler
+or compiler changes, which require another complete replay. Compiled Lua
+remains selected while those gates are completed.
+
+The shared `js/services/c-float-format.js` now implements exact IEEE rational
+decimal and normalized hexadecimal magnitude formatting for both Lua and the
+standalone C runtime. `c-stdlib.js` adds a/A/e/E/f/F/g/G, precision/width/flags,
+star arguments and bounded snprintf output; unsupported long-double, wide and
+positional conversions still throw. The configured musl `%.12a` behavior
+retains the thirteenth nonzero fraction digit because
+its53-bit long-double configuration skips rounding at that precision. This is
+a measured target-runtime choice, not a claim about every host libc.
+`scripts/test-js-c-float.mjs` passes2060 actual configured C snprintf
+comparisons, covering IEEE extremes/subnormals/NaNs, random raw bit patterns,
+decimal/general/scientific/hex formatting, flags/stars, zero capacity,
+truncation, return counts and byte guards. The existing standalone runtime
+suite still passes1294 original-C comparisons and6000 ISAAC output/state
+values. The dependency runner now includes this formatter, Lua lifecycle,
+bytecode, strict native compiler and live memory64 Lua ABI gates. The strict
+compiler gate deliberately remains failing until every compared prototype
+field matches; merely writing a difference report does not pass it.
+
+The host-isolation check now compiles Lua source, dumps a real5.4 binary chunk,
+reloads and executes it, including packing and ordinary-JS floating output.
+All41 imported production modules execute with Wasm, Node globals, network,
+dynamic imports and generated JavaScript code unavailable. The C↔JS linear
+memory adapters are deliberately outside this ordinary-JS isolation claim.
+
+DEP03 sort completion: `lua-table-sort.js` ports native ltablib's full
+median/randomized pivot choice, partition order, smaller-side recursion,
+imbalance detection and invalid-comparator checks; `lbaselib.js` calls it.
+The previous randomized-branch exception is removed. The C bridge supplies
+only scalar `clock()` and `time(NULL)` values; unsigned64 word summation,
+pivot selection and sorting remain JavaScript. The ordinary-JS VM uses JS
+elapsed/wall-clock sources unless `vm.sortRandomize` is supplied, so its
+host-dependent pivot entropy is not claimed to equal native CPU time.
+`scripts/test-js-lua-sort.mjs` passes296 original native Lua comparisons of
+sorted values, comparator count/order hashes and table metamethod traces,
+including16 actually randomized-pivot runs, controlled entropy seeds,
+adversarial median-of-three inputs, duplicates, descending sorts, invalid
+comparators and empty-table behavior. Only the private reference build's
+entropy function is injected; native sort bodies remain original. Configured
+ABI helper rooting/relink and the fresh game replay remain required.
+
+The refreshed string gate now passes1551 cases/3141 values and records14 host
+format differences after adding precision11/12 and thread-pointer coverage.
+These replace the earlier1550/3138/9 totals above; actual target-format
+comparisons remain exact.
 
 ### J56 — mondata.c monster metadata, predicates and names (in progress)
 
@@ -1729,3 +2188,338 @@ J57 aggregate native freshness: first full integration reran all detailed Emscri
 J57 actual public performance failure:43/44 sessions pass; seed0030 ten-diverse-deaths hits the unchanged frozen45000ms session timeout (no gameplay mismatch reported; .cache/hacklib-public.stdout.txt/.stderr.txt). Prior43 sessions match every observed metric. Runtime currently constructs fullHacklibEnvironment, five datamodel rows and dependency wrappers for every tiny imported character call. Cache only the HACKLIB environment by actual Module in js/ported/wasm-runtime.js; original50JSalgorithms/signatures/flow and native-state contents are unchanged. Cached service closures are Module-bound and read current native globals/HEAP at each access; DataView/byte/index getters remain fresh across growth, callbacks and reentry. Source-private qsort globals remain shared perModule as before, and original static dm/string storage is immutable insource. This must pass same C/JS/native/growth/secondModule checks and unchanged public timeout; no timeout increase, recording answer lookup or algorithm shortcut. No Emscripten-library/C source edit is required for this ESM adapter cache. Public/full gates pending rerun.
 
 J57 environment cache review: independent adapter audit finds captured closures contain only Module/native-function/literal-pool identity, never call arguments, stack/va_list/output pointers or HEAP views. Byte/DataView/index access remains fresh; per-call stackSave/restore and withCEnvironment restoration remain unchanged. All6,046 detailed comparisons pass again with cached dispatch (.cache/hacklib-unit-cached.log), including growth and actual second-Module execution. All51 native addons were rebuilt successfully with current full-native manifests (.cache/hacklib-all-native-build.log). Recheck original45s ten-death timeout before full public rerun; no timeout change.
+
+J57 measured timeout diagnosis and wrapper cache extension: the cache-only ten-death diagnostic completes all10segments in48.963s, with no stuck segment. CPU self samples identify createMondataEnvironment13.478s, createDbridgeEnvironment11.650s andGC4.558s; HACKLIB environment is alreadycached. Extend actualModule-keyed WeakMap environment reuse only to MONDATA and DBRIDGE dispatch in wasm-runtime.js. Their factories contain stable Module-bound dependency closures and native-address metadata; native/property/global/terrain/entity/byte/index getters remain fresh, per-call coordinate/output scratch and stack-save/restore remain at original call boundaries, and source-table strings remain stable. No translated algorithm/C/library/terminal or timeout change. Independently audit those captured services, rerun detailed differential/growth/reentry/Module tests for allthree cached environments, then retry default45000ms session and fullpublic. Logs/profiles .cache/hacklib-seed0030-profile.log/.cpuprofile/-hotspots.json are performance diagnostics, not recording answers or a relaxed gate.
+
+J57 cached-wrapper gates: all200,754 MONDATA and11,669 DBRIDGE detailed comparisons pass with new perModule environment caches, including actual growth/reentry/secondModule cases. Independent review confirms no stale data/view/stack capture in either factory or service. The originally timed-out ten-death session now PASSES the unchanged default45000ms harness:105529/105529RNG and1953/1953screens/cursors (.cache/hacklib-seed0030-cached.stdout.txt/.stderr.txt). No service memoization, byte-access shortcut or TU algorithm change was needed after profiling; only the three adapter environments are cached. Run complete public set and current full integration, including required NT04 native existing-case aggregate, afresh (.cache/hacklib-public-cached.* and .cache/test-wasm-hacklib-cached.log). Native addons regenerate current manifests automatically; no bypass/timeout relaxation. Allgame source/library/metadata/fixture files frozen pending these gates.
+
+J57 native aggregate investigation: the full cached public run passes 44/44 with all 792,838 RNG calls, 11,405 screens/cursors and 1,483 animation frames exact. All 51 Emscripten differential suites pass, but the newly required NT04 full-native aggregate exposes older adapter/test portability defects. HACKLIB remains in progress; no WORN translation has started. In scripts/native-addon.h, native_integer previously passed JavaScript booleans to napi_get_value_double, which fails and silently left the initialized value at zero. Add an explicit napi_boolean conversion through napi_get_value_bool so true/false become C 1/0, matching the existing Wasm call conversion. BigInt and Number handling is unchanged. This changes only development native test inputs, not any game algorithm, compiler setting or frozen harness. Rebuild every native addon because the shared header is a tracked input, then rerun all affected and aggregate suites; verification pending. Separately correct ioctl/unixtty unit setup to use each backend's real termios layout, control/baud constants and known signal-handler identities, while retaining exact per-backend byte-copy checks and the exact Emscripten target oracle. Darwin termios and handler constants cannot honestly be asserted byte-identical to musl. Those test corrections are pending review and verification.
+
+J57 development native test portability details (native-basic-test-changes.md):
+
+# Native basic-suite portability changes
+
+Scope: only scripts/test-tu-sys.mjs, scripts/test-tu-alloc.mjs, scripts/test-tu-posixregex.mjs. No production code, fixture, shared backend, builder, or calendar edits. Only syntax checks were run.
+
+## SYS
+
+The test now reads each backend's actual config/string/field descriptors. Emscripten metadata must still equal the checked-in generated layout exactly. All shared compile constants must match; the explicitly platform-dependent PANICTRACE_LIBC flag is checked by its actual selected initialization branch. A per-backend expected value follows static zero initialization, poisoned population, configured initialization, and preservation through release/no-op calls. Every snapshot checks this field exactly before comparing the remaining fields. This preserves the native MACOS stack-walker configuration and the Emscripten explicit undefinition rather than pretending they share a configuration.
+
+## ALLOC
+
+All non-NULL full-width pointer strings, ring-buffer aliases, allocation, failure, and ownership checks remain exact comparisons. Only NULL %p is checked against each actual libc contract: Darwin `0x0`, Linux `(nil)`, Emscripten `0`. A new native host requires an explicit expectation rather than silently accepting arbitrary text. No pointer text is rewritten or normalized.
+
+## POSIXREGEX
+
+The test now reads actual metadata separately for both backends, checks the context and field containment, and retains exact generated Emscripten-layout comparison. Host regex_t layout is allowed to differ (Darwin nhregex40/err32 versus Emscripten72/err64). All original behavioral cases and comparisons remain present. Behavioral platform mismatches are intentionally not hidden: the existing fixture exposes only regex_compile/regex_match/regex_error_desc wrappers, with no independent direct-libc result API.
+
+Completion of POSIXREGEX portability requires minimal direct-dependency probe exports (no parser or regex policy implementation):
+
+- direct regcomp(&regex->re, pattern, REG_EXTENDED | REG_NOSUB), returning its actual status;
+- direct regexec(&regex->re, text, 0, NULL, 0), returning its actual status;
+- direct regerror(status, &regex->re, caller_buffer, supplied_capacity), returning its actual size.
+
+Run those on independent real contexts so wrapper state and direct-engine state do not alias. Their outputs permit independent assertions of wrapper status/error-buffer policy for host-specific empty regex, invalid syntax, nonportable escapes, error messages, and codes. Preserve cross-backend exact assertions for portable regex semantics and preserve the complete Emscripten reference-vs-hybrid comparisons. Do not invent diagnostics or disable pattern cases to make the native suite pass.
+
+Calendar remains unchanged; native mktime versus Emscripten Date-based mktime differences need a separately authorized dependency-level plan.
+
+
+J57 development native test portability details (native-null-diagnostic-test-changes.md):
+
+# Native NULL diagnostic comparisons
+
+Only `scripts/test-tu-worm.mjs` and `scripts/test-tu-light.mjs` changed. No game code, C fixture, upstream source, harness, timeout, or native bridge changed.
+
+The existing known-NULL fixture cases now independently assert the original diagnostic bytes: Darwin's native `%p` formatting supplies `0`, while the pinned Emscripten libc supplies `0x0`.
+
+The comparison then translates only these complete pointer tokens in their exact diagnostic fields:
+
+- WORM: `impossible:mon (<NULL>) at seg location is not worm (`. The NULL grid pointer becomes `<NULL>`; existing known monster pointers retain their original identity normalization.
+- LIGHT: `impossible:del_light_source: not found type=<LS_NONE>, id=null;`. The numeric type comes from compiler metadata. The NULL id becomes the same `null` label the previous hexadecimal pointer normalization already supplied for Emscripten.
+
+All existing cases and assertions remain. Unknown pointers, opaque high-bit values, non-NULL addresses, unrelated zeroes, diagnostic wording, and other fields remain unchanged. This checks semantic pointer identity while separately enforcing actual platform output; it does not claim byte-identical libc pointer formatting.
+
+Edits only; no tests or builds were run for this change, as requested.
+
+
+J57 planned independent dependency probes: POSIXREGEX will expose direct real regcomp/regexec/regerror calls in its development fixture, and MINION will expose actual sscanf("%ld") conversion status/value. Unit tests will retain complete original Emscripten-C versus JS cases, while host-specific outcomes are checked against those separate native dependency calls. Out-of-range scanf results are inherited C undefined behavior and cannot establish a cross-libc guarantee. No game algorithm, frozen harness, recording, terminal default or upstream source changes. Fixture exports and verification pending.
+
+J57 test-only portability details (native-terminal-test-changes.md):
+
+# Proposed native terminal test correction (test files only)
+
+`test-tu-ioctl.mjs` and `test-tu-unixtty.mjs` now read the original C probe's layout separately for each actual Module. The native Darwin termios struct, flag widths, flag values, control-character indexes, baud constants and signal-handler constants remain unchanged. Game, ported algorithms, fixtures and shared backend are untouched.
+
+IOCTL maps only the three named signal-handler identities between backends and checks the actual signal/action constants before comparing call order. Unknown handler values retain their complete unsigned 64-bit pattern. Opaque termios snapshots compare the common poisoned prefix across unequal layouts; every get/set additionally checks the entire structure within its own backend, including native-only bytes and padding. The empty windows operation preserves every raw byte. Equal-layout Emscripten references still compare the complete original snapshots.
+
+UNIXTTY sets corresponding named flags, baud rates and control characters using each backend's real metadata. Native buffers retain poisoned opaque bytes; only the named semantic fields are translated during setup. Cross-host snapshots compare each relevant flag and each shared control-character role. Equal-layout Emscripten snapshots remain byte-exact. Independent operation checks verify whole get/copy bytes, complete tcsetattr inputs, preservation of saved structures, unrelated flag bits, unrelated control characters and padding. Optional host-only control-character branches remain active. Their exact fpathconf call counts are checked using the actual configured feature metadata before consecutive calls are grouped for shared call-order comparison; the actual `_PC_VDISABLE` and `TCSADRAIN` arguments are separately checked. No blanket snapshot or trace skip is added.
+
+Limits: raw structures with different layouts cannot be compared byte-for-byte across platforms. Host-only optional control characters have no cross-platform counterpart; their writes are confined to their actual fields and fpathconf counts are checked. This does not test an actual terminal or deliver actual process signals: the original isolated fixtures still intercept those native operations. No new native capability or recording equivalence is claimed.
+
+Validation so far: both test files pass JavaScript syntax checks. No unit suite or build run by the editing agent; parent owns execution and final results.
+
+
+J57 test-only portability details (native-minion-test-changes.md):
+
+# MINION native scanf observations
+
+Only `scripts/tu-minion-probe.c` and `scripts/test-tu-minion.mjs` changed. No production parser, game algorithm, upstream file, frozen harness, or shared build tooling changed.
+
+New fixture exports:
+
+- `int probe_parse_offer(const char *text)`: invokes the actual C library `sscanf(text, "%ld", &parsed_offer)` and returns its conversion count. The scratch long is initialized to zero before the call.
+- `long probe_parsed_offer(void)`: returns that observed long unchanged.
+
+These expose the dependency result; they contain no bribe or selection policy.
+
+All representable inputs and syntax/whitespace/trailing-text cases retain their complete native-original-C versus Wasm/JS state comparison. Three explicitly out-of-range inputs (`LONG_MAX+1`, `LONG_MIN-1`, and 200 decimal nines), each with the original four money values, now have two independent checks in native test mode:
+
+1. A separate actual original-C Emscripten instance preserves the complete-state, RNG, trace, return, and stack comparisons against the JS hybrid, including every original overflow case.
+2. The native original bribe is executed with the same input and money. Its actual native `sscanf` result is queried separately, and the bribe return, complete unchanged monster/equipment state, remaining cash, status flag, and exact messages/payment trace are asserted against that observed result.
+
+The C formatted-input rules do not define an integer conversion whose result is not representable in the destination long. The observed Darwin and Emscripten outcomes therefore are pinned-libc evidence, not a claim that undefined C conversions have portable semantics. No native result is replaced, clamped, emulated, or made to equal the other libc. Regular Emscripten-C mode keeps its existing overflow comparison path.
+
+No builds or tests run for these edits, as requested; the parent must export the two new getters and rebuild before verification.
+
+
+J57 correction before verification: the initial NULL diagnostic assertions accidentally reversed actual/expected backend labels. The explicit raw assertions detected this; corrected development tests require native Darwin 0x0 and Emscripten 0 before narrow field normalization. The first selected run passed SYS, ALLOC and the boolean-dependent WERE/WRITE/WIZARD/MUSIC/MCASTU/BALL cases. NULL assertions, O_INIT trace differences and DBRIDGE remain pending. No game output formatting was changed.
+
+J57 calendar/version development plan: compare the original calendar JS functions against actual native C using a test-only native libc/memory adapter, while retaining the full Emscripten-C/JS timezone matrix. Actual native struct tm metadata and time/localtime/mktime/format/string dependencies are used; the source __EMSCRIPTEN__-only recording-epoch branch is absent in the native configuration and must be identified explicitly. No production calendar logic changes. VERSION fallback invokes inherited overlapping snprintf; retain all exact Emscripten target cases and independently check native fallback output bytes against a separate real formatting-dependency witness with the same source/destination alias. This observes a pinned libc result, not a portable C guarantee. Both test additions are pending review/build/verification, and all other version state/trace/return checks remain required.
+
+J57 POSIXREGEX independent dependency details:
+
+# POSIXREGEX test-only native portability
+
+Changed only scripts/tu-posixregex-probe.c and scripts/test-tu-posixregex.mjs. No production, shared backend, registry, builder, or coloratt changes. Node syntax check passed; no builds or test executions were run.
+
+New probe exports for the builder:
+
+- probe_dependency_compile(const char *pattern, struct nhregex *regex) -> int
+- probe_dependency_match(const char *text, struct nhregex *regex) -> int
+- probe_dependency_error(int status, struct nhregex *regex, char *buffer, size_t capacity) -> size_t
+
+Their bodies directly call actual regcomp, regexec, and regerror with the original dependency signatures/flags. They contain no regex parser, copied wrapper policy, status translation, or diagnostic rewriting.
+
+In native mode the suite now keeps the original Emscripten reference and JS hybrid as its first two modules, retaining every original exact status/error-buffer/lifecycle comparison. The host-native module is an additional third backend. Each host regex has a separately allocated direct-libc context with the same input pattern. Wrapper compile status and stored errors are asserted against actual independent regcomp results. For successfully compiled contexts, every applicable input is checked against actual independent regexec, including original error preservation versus REG_NOMATCH. Each host diagnostic buffer, including untouched padding, is compared to independent actual regerror output plus the original wrapper's three literal policy messages. Each buffer capacity uses that backend's compiled BUFSZ; layout/context assertions use its actual compiled metadata. No host diagnostic text or numeric error code is hardcoded.
+
+A fixed subset of ordinary POSIX ERE patterns retains exact cross-engine compile and ASCII-match assertions. Locale-dependent non-ASCII input, nonportable escapes/invalid syntax, and empty-pattern behavior are independently checked against the actual host engine instead of claiming different engines must produce identical diagnostics or accept identical extensions. All original patterns and inputs remain in the suite. If only the host accepts a pattern, all inputs are exercised on that host too.
+
+regex_match explicitly requires successful prior compilation. A backend which rejects a pattern is not called with an invalid compiled regex; its compile result, error buffers, retained caller buffer, and freeing are still checked. This respects the original API precondition rather than invoking undefined library behavior. Both the wrapper context and independent dependency context are freed for every iteration; a final assertion checks that no tracked host context remains. Memory-growth and independent-instance cases remain present.
+
+This is an Emscripten-C/JS differential suite augmented with native-C/direct-dependency portability checks and cross-engine portable semantics. It does not claim that a Wasm regex_t can be reinterpreted as host regex_t, or that JavaScript is running against a host regex engine.
+
+The development probe builder exports dependency_compile/dependency_match/dependency_error for POSIXREGEX and parse_offer/parsed_offer for MINION. These are test APIs only; no game link/import/default changes.
+
+J57 VERSION pinned-libc witness details:
+
+# VERSION native fallback dependency witness
+
+Only `scripts/tu-version-probe.c` and `scripts/test-tu-version.mjs` changed. No VERSION game function, production adapter, upstream source, harness, shared tooling, or libc behavior changed.
+
+New fixture exports:
+
+- `char *probe_fallback_witness(size_t size)`: initializes an independent 8193-byte storage area to `0xa5`, places the existing fixture literal `5.0.7-fallback` after a one-byte prefix guard, and invokes actual `nh_snprintf("version_string", 25, out, size, "%s", out)`. It returns `out`.
+- `void *probe_fallback_witness_base(void)`: exposes the guard address, permitting the unit to assert the returned interior pointer is exactly base+1.
+- `size_t probe_fallback_witness_size(void)`: exposes the 8192-byte output span.
+
+The native-only comparison adjustment is restricted to operation0 (`version_string`) when its version metadata is missing or empty. Every original size and metadata case remains. A separate actual original-C Emscripten instance retains the complete original-C/Emscripten versus JS comparison for all of those fallback cases, including full output/state/table/io/trace and stack checks. The native original function is executed separately; every native output byte must equal the independently initialized direct libc dependency witness. All other native state must equal its pre-call state, and the exact fallback/returned-pointer trace must be `mdlib:.;returned:1;`. The witness itself must return its actual base+1 pointer.
+
+The inherited fallback passes an overlapping destination/source to formatted output. C does not define that overlap, and Darwin and Emscripten libcs produce different bytes. The inherited `nh_snprintf` also writes `str[size-1]` on the size-zero truncation path. The witness prefix guard makes the resulting pinned implementation write observable; the unit asserts its zero byte at size0 and untouched `0xa5` at all other sizes. This does not make the original source operation portable or remove its undefined behavior; it preserves existing pinned-implementation evidence without demanding that different libcs agree on undefined input.
+
+No tests or builds run for these edits; the parent must export the three helpers and rebuild before verification.
+
+Builder exports all three development witness getters; no production export changes.
+
+J57 native calendar test ABI details:
+
+# Proposed native calendar test bridge
+
+Only development probe and test files change: `tu-calendar-probe.c`, `native-calendar-hybrid.mjs`, and `test-tu-calendar.mjs`. Production calendar.js, its eleven original function boundaries, the production runtime, compiler flags and frozen harness are unchanged.
+
+The probe exports typed calls to actual native time/localtime/mktime, bounded nh_getenv, strlen/atoi/strtoll and native formatting, plus a separate zero-only 15-byte datestr buffer. These helpers contain no calendar, parsing, DST or timezone algorithm. Probe formatting preserves the original source format supplied by JS and passes the original source function/closing line to nh_snprintf.
+
+A second independent native Module runs the existing calendar.js functions through the existing createPortedRuntime.calendar entry. Its layout uses the native probe's actual struct tm size and field offsets. Full struct copies include all bytes (including inherited tm_isdst and other libc fields). Scratch storage uses real malloc and is freed in reverse order after each public invocation; persistent datestr remains per native module. A worker-scoped native DataView proxy makes actual native pointer fields visible to the production bridge, delegates ordinary ArrayBuffers unchanged, and is restored in finally.
+
+The adapter explicitly projects the source's compiled __EMSCRIPTEN__ guard: native C omits the inherited NETHACK_RECORDING_EPOCH parser override, and native JS sees that one environment lookup as absent. It does not alter the process environment or replace native time/DST behavior. The actual fixed-datetime nh_getenv lookup and its length bound remain native calls. Controlled clock injection remains the pre-existing test clock dependency.
+
+With native validation requested, the original full case enumeration runs for all five zones twice: original Emscripten C against Wasm/JS, and original native C against native/JS. Native DST, ambiguous/nonexistent dates, out-of-range years, parser sentinels and invalid strings therefore retain exact same-platform comparison rather than weakened expectation tables. Both pairs retain pointer lifetime, allocation/growth and separate-module checks.
+
+Limits: this is development ABI validation, not a native game backend. Native allocation is exercised rather than Wasm memory relocation; the separate Emscripten pair retains actual relocation coverage. The native process timezone and libc remain authoritative and can differ from Emscripten libc. No claim of identical cross-libc timestamps is made.
+
+Validation so far: both JS files pass syntax checks. No build or test execution by the editing agent; parent owns compilation and results.
+
+Probe builder exports the ten direct dependency functions. The native aggregate still expects six assertion reports (parent and five native timezone workers); extra Emscripten workers retain ordinary strict assertions and emit no native report.
+
+J57 native terminal follow-up: introff evaluates fpathconf twice when changing VINTR (comparison, then assignment) and once when already equal. The new independent call-count assertion was corrected to preserve that source macro evaluation count. USE_WIN_IOCTL is independently checked as the actual compiled Boolean; Darwin has TIOCGWINSZ while the Wasm build avoids the ioctl, so tests do not demand identical feature metadata or claim successful real host resizing. Actual behavioral cases still execute. POSIXREGEX exact layout assertion includes the separately queried context size; both its Emscripten and native suites now pass (967 original target comparisons; 8,004 native-mode assertions). MINION native suite also passes, including 8,154 comparisons and independently observed overflow outcomes.
+
+J57 COLORATT independent libc details:
+
+# COLORATT native regex portability checks
+
+Scope is only scripts/tu-coloratt-probe.c and scripts/test-tu-coloratt.mjs. No production, shared backend, builder, registry, or other unit edits. Node syntax check passes; no builds/tests were run.
+
+New fixture exports:
+
+- probe_regex_dependency_compile(const char *pattern) -> int
+- probe_regex_dependency_error(void) -> const char *
+
+The compile observation uses one automatic regex_t and actual regcomp(REG_EXTENDED | REG_NOSUB), regerror, and regfree. The error text has its own static BUFSZ buffer. It does not call nhregex/coloratt functions, allocate a fixture object, mutate menu lists, log messages, or invoke the fixture free hook. The unit asserts that every observation leaves the fixture free counter unchanged.
+
+Native mode retains the original Emscripten-C reference and JS hybrid as the first two modules, preserving all original exact return/snapshot/trace/ownership comparisons. The host-native module is third and executes all original actions. Startup catalogues, pointer aliases, menus, RGB behavior, output bytes, state, and portable return values are compared exactly to the original pair.
+
+For the explicit regex cases, the actual compile result is queried independently for every backend. Nonempty patterns must agree in acceptance. If a pattern is invalid on both engines, the expected host trace differs only at the one exact `config:Menucolor regex error: <actual regerror>;` record identified by its independent Emscripten diagnostic. The unit verifies exactly one such record, replaces only its diagnostic using the independently observed host result, and compares the complete remaining trace and complete state/output unchanged. This is not a generic trace normalizer and does not remove arbitrary diagnostic lines.
+
+Empty expression acceptance is the sole permitted compile-success difference. When the actual Emscripten engine accepts it and the actual host engine rejects it, the host still executes the attempted add and every subsequent list-count/match/free action. Its complete expected snapshot preserves the pre-add list, fields, glyph bytes, and output; increments only the original two failure frees; and appends exactly the independently observed host regex diagnostic. Subsequent counts must remain zero, matches must observe the absent entry (-1), and freeing an empty list must not add frees. Every host snapshot is compared exactly with this expectation until the next original reset, at which point all three modules rejoin exact comparison. Unexpected operations in this narrow state fail explicitly. The same checks cover the two explicit input rules that parse to an empty expression (`=red` and `"=red`). No native action or original Emscripten case is skipped.
+
+The independent regex observations do not evaluate a replacement parser and do not supply hardcoded host error messages/codes. Rule-to-pattern annotations are limited to the existing explicit empty rules and the existing quoted invalid `[` rule; all other parser results and diagnostics remain exact cross-backend comparisons.
+
+Builder exports its two test-only direct dependency getters; game symbols/behavior are unchanged.
+
+J57 verified portability corrections: original target suites still pass for SYS, ALLOC, IOCTL, UNIXTTY, LIGHT, WORM, MINION, POSIXREGEX and VERSION. Native UNIXTTY/LIGHT/WORM/MINION/POSIXREGEX/VERSION and corrected IOCTL pass their selected runs. CALENDAR passes all five original target zones and all five native-C/native-JS zones with actual host libc dependencies (40,457 native-mode assertions, zero failures). O_INIT remains a known native libc sort callback-order difference; a test-only captured-argument check is being added before filtering only independently checked callback schedule events. Full integration/native aggregate remains pending; no next TU has begun.
+
+J57 O_INIT sort dependency details:
+
+# O_INIT native sorting callback observations
+
+Only `scripts/tu-o_init-probe.c` and `scripts/test-tu-o_init.mjs` changed. No production algorithm, libc sorter, upstream patch, frozen harness, or shared tooling changed. The inherited deterministic sorter still invokes the actual platform libc qsort with its original private callback.
+
+The fixture now copies each actual comparator argument string before it can be freed, records the actual integer callback result, and exposes four observations:
+
+- `int probe_compare_count(void)`
+- `const char *probe_compare_text(int index, int side)`
+- `int probe_compare_result(int index)`
+- `int probe_compare_again(int index)` — re-invokes the actual captured original comparator on native pointer cells containing the two copied strings. It supplies no comparison policy.
+
+Each complete `compare:<integer>` trace event must correspond exactly to one captured record. The recorded result sign must equal a separate invocation of the original comparator on the captured actual pair. Argument strings must contain the original two-byte discovery prefix. Other trace events remain exact.
+
+Native mode additionally creates a third, actual original-C Emscripten module. Every existing fixture setup, input, mutation, call, stack check, and memory-growth case applies to all three modules. The Emscripten-C and JS hybrid must retain exact complete state, trace, callback argument order, and raw callback results. Native C must match all complete state, ownership/free counts, bytes, output, RNG, and non-comparator trace events; only independently validated libc callback scheduling is excluded from that cross-libc trace comparison. Final sorted output still must match exactly, including stability.
+
+This does not normalize arbitrary messages or erase comparator observations: every removed event is first validated against its saved actual arguments, recorded return, and original comparator. It does not claim that different libc qsort implementations choose identical comparison pairs or that string-comparison result magnitudes are portable.
+
+No tests or builds run for these edits; the parent must add the four exports and rebuild before verification.
+
+Probe builder exports its four test-only captured-comparator getters; unchanged game sorting still uses the inherited deterministic wrapper and actual libc qsort. Independent review found no dropped VERSION/MINION target cases or blanket native-output normalization.
+
+J57 final-check input freeze: all 51 original function/order/parameter/comment checks and lexical checks pass after the development-test corrections. COLORATT passes 7,753 original target comparisons plus 28,155 native-mode assertions; CALENDAR and VERSION selected runs also pass as above. New full integration run .cache/test-wasm-hacklib-final.log rebuilds every probe/native addon and runs every original target suite, mandatory full native aggregate and platform/replay/compression checks. O_INIT isolated rerun is in progress. No native source manifest is edited by hand and no next TU begins until this complete gate succeeds. The actual mixed game remains Wasm435c47c8a2cd42ac6aeaab327a8e0b6c66916c171255bd29a04924bd780af52e with all 44 public sessions exact.
+
+J57 final isolated sort verification: O_INIT passes all 6,636 original target comparisons and its full native-mode suite (28,366 assertions, zero failures), with complete target traces/records retained and each host comparator event independently rechecked. Independent audit confirms both sort sites use the same pure private comparator, with no RNG/state effects from re-invocation. All previously failing native suite categories now have passing focused checks. The full frozen-input integration run remains in progress; HACKLIB is not yet marked complete.
+
+J57 final gate: full integration `.cache/test-wasm-hacklib-final.log` exits 0; original target suites 51/51 and full native suites 51/51 pass with 1,454,435 assertions and no failures. Public `.cache/hacklib-public-cached.stdout.txt` passes all 44 sessions: 792,838 RNG calls, 11,405 screens/cursors/cell comparisons and 1,483 animations exact. Wasm435c47c8a2cd42ac6aeaab327a8e0b6c66916c171255bd29a04924bd780af52e and HACKLIB core308c32f2c959a8aadcb816d333ea5faf2aad90c9325523ae6a5551bd9d4963e3 still match the build manifest. The original C object and separate hacklib archive are excluded. Frozen files, inherited contest patch files and pristine upstream checkout remain unchanged. Record TU51 Passed; the canonical-restored ISAAC entry remains separately counted.
+
+J58 planned WORN migration: translate all 27 configured functions from prepared src/worn.c, preserving original names, parameters, function boundaries, comments and control flow except required C/JS representation changes. The authoritative 17-row worn table keeps w_mask/w_obj/w_what, source equipment selectors/labels and sentinel; each w_obj resolves to a live native pointer cell, never a captured equipment object. Keep 64-bit masks and properties as BigInt, original narrowing/packed fields, callback mutation visibility and per-call native scratch lifetimes. Expand the two TU-local macros inside the original functions. Adapt the three goto statements in update_mon_extrinsics and m_dowear_type with minimal labeled block/loop control, without helper algorithms or duplicated bodies. Native bindings contain only ABI, storage, header macros and actual dependencies. Add original-C memory64 differential/unit/native scenarios and source/data checks; remove worn.o from the mixed game only through the registry. Source RNG attribution rnl(3) at line1324 and Snprintf at line932 must remain exact. All validation pending. No terminal, recorder, frozen harness, compiler setting, default or pristine upstream edit is planned. Root owns build/tooling; three subagents own core/header, ABI/support, and fixture/tests respectively. No next TU until WORN passes the complete gate.
+
+J58 tooling integration begins: register WORN for automatic original-object exclusion in the mixed game, compiler layout extraction and the complete target/native test runners. Source-derived metadata guards the original IGNORE_SLOTS and RACE_EXCEPTION constants, the sole rnl(3) site and sole Snprintf call, preserving source function names/closing lines. Stable JS literal capacity uses the existing source corpus calculation. No compiler flag, terminal setting or production default changes. The root dispatcher will convert mon_adjust_speed's object at parameter index2 (its adjust argument is index1), matching the actual C signature. Build and behavior checks remain pending until all three agent components are complete.
+
+J58 independent table check: scripts/check-worn-data.mjs projects all 17 original C equipment rows and requires direct JS records with identical w_mask selectors, live equipment-cell selectors, labels, order and sentinel. It rejects duplicate/computed fields and includes changed-mask, changed-cell and missing-table mutation checks. The existing probe builder invokes it before compilation once worn.js exists. This is development validation, not a runtime table or lookup. Its first execution awaits the core file; no passing claim yet.
+
+J58 root ABI integration: add the original WORN entry-point dispatcher with explicit object/monster/loot pointer views and normal pointer/string return conversion. No new persistent JS state or environment cache is introduced. Metadata preserves NON_PM as signed and W_*/M1_*/I_SPECIAL as raw unsigned 64-bit decimal strings before runtime BigInt conversion, avoiding lossy Number serialization. Helpers still read native values at access time. These bindings await the three agent components and compilation; no behavioral pass is claimed.
+
+J58 isolated probe integration: export the WORN fixture APIs, including set_monster (avoids an existing probe_monster symbol), generic compiler metadata and reference-only worn table inspectors. Both sides use actual native object/monster catalogues, allocation and the inherited prepared hacklib, with controlled outside-TU world callbacks. The fixture owns explicit real destruction/free observations; no extra whole-build free redirection is added because WORN itself has no direct free call. Reference compilation includes the original WORN body through TELEPORT_REFERENCE_TU; hybrid compilation loads only the JS library for that body. Full native addons and supplementary native scenarios remain part of the existing tools. First build pending agent freeze.
+
+J58 initial source gate: all 52 registered function/order/parameter/comment inventories and lexical checks pass. The independent WORN checker matches every original equipment row and rejects its three deliberate data mutations. Core/header and runtime/library/native support are frozen for first compilation; the unit suite is still being completed. All 27 original functions remain in worn.js; the nine textual private m_dowear_type calls have scoped stack lifetimes. IGNORE_SLOTS and RACE_EXCEPTION constants stay inside their original owning functions. The native adapter forwards cloak_simple_name, makeknown via the original header expansion to discover_object, and the original chained NUL assignment returns its stored narrowed value. First memory64 probe/native-addon build is .cache/tu-worn-probes.log; no behavioral pass or complete game-link claim yet.
+
+J58 first compilation result: source/data/scope gates pass, but the isolated reference link lacks breakarm/sliparm/num_horns and the c_color_names/c_common_strings records. Link the actual pristine mondata.c dependency (with its ordinary reference guard) for those three original predicates, and supply the fixture-only black/Something constants used by the source. No WORN policy or monster-shape logic is recreated in the fixture. The first build emitted the seven existing format-security warnings plus two analogous WORN no-argument forwarding warnings; warnings remain visible and unsuppressed. Retry after the fixture definitions are complete; no pass claim for the failed link.
+
+J58 isolated dependency include: mondata.c also defines four callbacks deliberately supplied by the controlled WORN fixture (cvt_prop_to_mseenres, monstunseesu, pronoun_gender, raceptr). The builder now generates .cache/tu-probes/worn-mondata-deps.c, renaming only those four unused definitions to teleport_unused_worn_* before including the pristine source; normal dead stripping removes them. This avoids duplicate symbols and unintended fixture/RNG scope changes. The required breakarm/sliparm/num_horns functions retain their actual original bodies and dependencies. The common black/Something records match upstream decl.c literals. No source algorithm is copied into a helper or edited upstream. Unit and all agent components are frozen for retry.
+
+J58 retry build result: isolated original-C, C-to-JS memory64 probes and full native addon compile/link successfully (.cache/tu-worn-probes-retry.log). The fixture review then found gv.viz_array was zero after reset, while original native cansee dereferences it. Initialize actual native vision rows/cells as test setup and provide its existing controlled visibility option before behavioral checks; this corrects the test world rather than WORN behavior. Probe rebuild and all behavioral gates remain pending. Compiler metadata extraction has begun; no game build or public score on WORN is claimed yet.
+
+J58 final pre-differential setup: fixture vision rows are now initialized to real native cells, with the existing unused option7 controlling visibility and full vision bytes included in snapshots. The unit suite adds an explicit bit63 object/property mask case, independently reading unsigned64 raw bytes after setnotworn to require that only the helmet slot bit clears. This supplements bit60/category cases and checks signed-long representation without changing source algorithms or native fields. Original C remains the oracle; first behavior run pending the vision-probe rebuild.
+
+J58 first behavioral run exposed a new unit expectation error: both original C and JS returned telepathy range64 for alternate-weapon/quiver slots, while the independent test expected -1. Original recalc_telepat_range counts every worn table entry, even though setworn excludes those slots from granting property extrinsics. Correct the expected range and independently assert their extrinsic masks remain zero; no game/core/ABI change. All table/comment/signature checks and three-mode builds still pass. Differential retry is .cache/tu-worn-unit-retry.log. Independent audit found no mismatch in the three goto translations, field narrowing, macro scoring operands or temporary-buffer lifetimes.
+
+J58 initial differential gate: 17,025 original Emscripten-C/JS comparisons pass (.cache/tu-worn-unit-retry.log), including every function, catalogue-driven wear classification, original table/cell aliases, mask/property updates, narrow speed/invisibility fields, both alternate-property passes and goto paths, real ownership/list operations, RNG attribution, visible formatting, growth/reentry and an actual second Module. Explicit bit63 object/property masks retain their unrelated high bit when a slot is removed. Native full existing-case and supplementary checks are now running; mixed-game link/full integration/public gates remain pending. Core/header/ABI/fixture/unit inputs are frozen absent a newly observed defect.
+
+J58 native gates: the full original-case host-native reference suite passes all 17,025 comparisons and 43,610 assertions with zero failures (.cache/tu-worn-native-full.log; run64013-1794285766768). Supplementary native C, original Emscripten C and JS scenario streams match across591 observations (.cache/tu-worn-native-supplementary.log). These are distinct evidence sets, not 17,025 supplementary checks. Current full mixed game build is .cache/build-wasm-worn.log; final link/import, whole-suite integration and unchanged public44 gates remain pending.
+
+J58 mixed-game gate: .cache/build-wasm-worn.log exits0. Wasm SHA2564e76cd10dd8e249b277582b84b5ada361ab79fad37e68209d98b7085efe1cce2 and WORN core43624f0cf7f2fa808f0bba08d0bc123d693bf951570f8872298d7670a7a00008 match js/wasm/build.json, with MEMORY64=1. Actual link objects exclude worn.o, and actual Wasm imports contain21 of23 public WORN entries. wornmask_to_armcat and armcat_to_wornmask have no live game caller; all four private test imports are absent. All27 bodies remain covered by the original-C probes. Full52-file integration/native aggregate (.cache/test-wasm-worn.log) and all44 public sessions (.cache/worn-public.stdout.txt/.stderr.txt) are running on these frozen inputs; no next TU starts until both succeed. The build remains a mixed C/JS/Wasm engine with other C dependencies.
+
+J58 public gate: all44 sessions pass on the mixed WORN game (.cache/worn-public.stdout.txt/.stderr.txt), with every metric exact:792838 RNG calls,11405screens/cursors/cell comparisons,1483animation frames. The previously expensive ten-death session also passes the unchanged45s timeout; no WORN environment cache, timeout relaxation or terminal change was needed. Full52-file integration/native aggregate is still in progress (.cache/test-wasm-worn.log), so WORN remains In progress. Read-only planning selects WIELD as the next TU because its26functions reuse the new equipment ABI; no WIELD edits have started.
+
+
+J58 final gate: full integration .cache/test-wasm-worn.log exits0. All52 target suites and52 native suites pass,1,498,045 assertions and zero failures. Public44/44 all metrics exact. Actual WORN core43624f0cf7f2fa808f0bba08d0bc123d693bf951570f8872298d7670a7a00008 and game4e76cd10dd8e249b277582b84b5ada361ab79fad37e68209d98b7085efe1cce2 remain the tested hashes. worn.o excluded;21public imports, four private test imports absent. Frozen harness, inherited patches and pristine upstream checkout unchanged. Mark TU52 Passed.
+
+J59 planned WIELD migration: preserve all26 configured original functions, parameters, names, locals, comments, flow and two readonly messages. Expand original TU-local erodeable_wep/will_weld/TWOWEAPOK macros within their owning original functions; minimal labeled control handles six goto sites without algorithm helpers or duplicated bodies. Native support remains ABI/header/storage/dependency calls. Retain actual live equipment cells, 64-bit quantities/masks/multi, uint32 split IDs and narrow native fields. Two original getobj selectors require separate production native-to-JS callback trampolines, with separate private test aliases. The sole retouch_object(&wep,FALSE) needs a scoped native pointer cell: getter/setter callbacks represent the address of the existing JS local, native changes are read from fresh memory and written back in finally before the original branch continues. This is necessary C address-of representation; the original26 algorithm function boundaries and ordinary wep uses remain intact. Actual retouch_object returns int; native success paths do not null the pointer, while failure can remove/destroy it. Test growth, reentry, lifetime, NULL failure, replacement and ownership explicitly; controlled impossible combinations are fixture stress inputs, not claims about reachable game behavior. Add source-derived RNG attribution for original rnd861 and rn2 at1000/1044. Isolated tests should use actual WORN dependency behavior where practical and clearly list controlled outside-world callbacks. Registry removes wield.o only in mixed game; original C remains oracle. No frozen harness, terminal path, upstream patch, compiler flag or default change is planned. All WIELD validation pending; no next TU until full original-C/native/integration/public gates succeed.
+
+J59 root tooling begins: register WIELD for original-object exclusion, generic actual-compiler layout extraction, source-derived three-site RNG metadata/literal capacity and the complete test runner. Masks/flags retain raw64 representation and negative selector constants retain signed values. No game build is attempted until core, ABI and fixture components freeze. Root dispatcher/build-dependency exports await agent inventory. All WIELD behavioral gates remain pending.
+
+J59 exact goto adaptation: dowield uses outer wielding and inner already_wielded labeled blocks; jumps to the latter break the inner block to one relocated original message/return, while normal/jump routes break the outer block to the original common tail. doquiver_core analogously uses quivering/already_quivered. One normal-route break skips each relocated message. No control flags, algorithm helpers or duplicated source bodies. Original conditions, locals and operation ordering remain. Probe builder now selects actual worn.c, actual mondata shape predicates and prepared hacklib dependencies for WIELD; explicit free instrumentation applies only to this isolated fixture. Existing WORN probe dependency behavior remains unchanged.
+
+J59 root dispatcher now maps the13 original object-parameter entries to live object views, preserves both raw char-pointer parameters and narrows set_twoweap boolean as native signedchar. String/pointer/NULL return conversion follows existing ABI. No WIELD state or cache is introduced. Production ready_ok/wield_ok selectors have distinct live callback imports; private test aliases remain separately named and must be absent from the game. Compilation and behavior remain pending component freeze. Prepared wield.c is byte-identical to pristine source, so no prepared-reference exception is needed.
+
+J59 independent source checks: scripts/check-wield-data.mjs projects the two original readonly messages and compares actual JS AST literals/declarations, with changed-message and missing-message mutations. Probe builds invoke this development-only checker. Metadata extraction guards all three original TU-local macro bodies after whitespace normalization; it does not supply a production algorithm. First execution awaits core completion; no pass claim yet.
+
+J59 fixture correction before first build: omit the proposed -Dfree substitution. Neither original WIELD nor WORN directly calls free; controlled fixture destruction already explicitly calls teleport_probe_free and observes real ownership/destruction. Existing WORN behavior stays unchanged. This supersedes the earlier isolated free-instrumentation flag proposal; no game compiler flag changed.
+
+J59 first source checks: both readonly message projections and two mutation checks pass. Lexical checking caught an unqualified Stone_resistance header property in cant_wield_corpse; qualify it through the explicit C environment before compilation, with no original logic change. Core agent is correcting/reviewing and will refreeze. Function/comment checks are still running; no behavioral pass claimed.
+
+J59 source gate: all53 registered original function/order/parameter/block-comment inventories pass; lexical names pass53TUs plus11tooling fixtures after the sole C.Stone_resistance qualification fix. Both original readonly message literals and two mutation checks pass. Actual macro guards pass. Initial WIELD fixture/unit/supplementary branch are frozen; runtime remains in progress, so no compilation/behavior pass yet. Explicit fixture limit: controlled split/unsplit maintains actual native chains/quantities/IDs/identity, but unsplit retains its empty child allocation with quan0/OBJ_FREE for inspection/reset. This does not verify upstream merge allocation/free internals. Controlled useupall destruction actually frees and is counted; original WIELD ownership calls remain exact. Full-existing-case native and supplementary scenarios will be reported separately.
+
+J59 prebuild fixture review caught artifact_light(NULL) dereferencing its object when the controlled light option was enabled. Actual dependency accepts NULL, and original setuwep legitimately passes its empty old slot. Add the required NULL guard to this WIELD fixture callback before first compilation; no production/source policy changes. Fixture controlled naming/shop/artifact/death effects do not claim full outside-TU behavior; actual death, OOM, invalid NONNULL and cyclic lists are excluded. Named ONAME branch is currently uncovered and remains an explicit limit pending any additional case.
+
+J59 prebuild component freeze: WIELD runtime/library/native support are ready for initial compilation, with objectReference using a scoped native pointer cell and finally writeback through a fresh heap view, preserving int return/stack restoration. Two production selector trampolines remain distinct from five private aliases. Reserve sizeof "s" beyond the source-derived literal corpus for the native header plur expansion; this ABI storage addition is not a game logic/table replacement. Fixture NULL artifact-light guard is fixed; four mounted/unmounted lance/artifact exception cases were added through existing setup APIs. ONAME path remains uncovered. Full native aggregate and target/public gates still pending.
+
+J59 first compilation result: .cache/tu-wield-probes.log fails the original-C reference link on the sole missing fixture callback undiscovered_artifact, used by native is_plural for the Eyes of the Overworld naming rule. Add a controlled actual-signature discovery callback and explicit test option, with focused plural selection coverage; this is outside-TU artifact discovery state, not a replacement WIELD algorithm. Retry all three modes after fixture refreeze. No behavior or game-link pass is claimed.
+
+J59 first-link correction complete: controlled undiscovered_artifact(xint16) uses explicit fixture option22 and traces its argument/decision. The NULL artifact-light correction also guards its diagnostic mask read, before returning. Added Eyes discovery/plural predicate coverage as explicitly labeled mismatched-artifact/base-type stress; the real Eyes base is lenses and pair_of would otherwise mask that predicate. This is defined field input, not a claim that normal play generates that combination. Initial retry .cache/tu-wield-probes-retry.log builds reference/hybrid/native modes on refrozen inputs.
+
+J59 initial compile/differential gate: reference Emscripten-C, C-to-JS memory64 and full native addon compile/link (.cache/tu-wield-probes-retry.log exits0). All12,804 original target C/JS comparisons pass (.cache/tu-wield-unit.log), including all26 entries, complete state/trace/RNG, selectors, six goto routes, addressable weapon replacement/failure, signed narrowing/high masks, mounted polearm/artifact cases, growth/reentry and actual second Module. Nine previously visible shared-support format-security warnings remain unsuppressed. Native full existing-case and separate supplementary checks are now running; no game-link/full integration/public gate yet. Inputs remain frozen absent an observed defect.
+
+J59 native gates: all12,804 full existing cases pass against actual host-native C, with34,122 assertions and zero failures (.cache/tu-wield-native-full.log, .cache/native-existing-runs/70394-1794287186686/results.json). Separate supplementary native-C/EmC/JS scenario streams match across1,538 observations (.cache/tu-wield-native-supplementary.log); these are not a substitute for the full cases. Mixed game build .cache/build-wasm-wield.log is running on frozen inputs; actual object exclusion/import checks and full integration/public sessions remain pending.
+
+J59 documentation reconciliation only: PORTING_PROGRESS.md now describes the active DEP01–DEP02 build manifest (JS compression, pinned terminfo and POSIX regex) instead of its stale compiled-ncurses/compression claim. This does not change dependency selection or code; it preserves the independently implemented dependency register and actual current artifact evidence. Remaining C/Lua/libc/Emscripten still prevent a Wasm-free submission.
+
+J59 mixed-game gate: .cache/build-wasm-wield.log exits0. Wasm b306c84fd18ee91b32424edf3cf91ba3bab6409eff89016c34511c0668f78040 and core7c4052a40ad20eec5b6a5918597dc800165cb77694472e7aa0b8aed112f54583 match the build manifest, MEMORY64=1. Actual game HOBJ excludes wield.o. All21 public original WIELD entries and both production selector callbacks are actual Wasm imports; five private test aliases are absent. Full53-file integration/native aggregate .cache/test-wasm-wield.log and unchanged44-session public .cache/wield-public.stdout.txt/.stderr.txt now run on frozen inputs. No next translation begins until both pass; read-only next-file planning selects MKROOM30configuredfunctions. Remaining game C/Lua/libc/runtime dependencies still apply.
+
+J59 public gate: .cache/wield-public.stdout.txt/.stderr.txt completes44/44 with all792838RNG,11405screens/cells/cursors and1483animation frames exact. The ten-death session takes8570.24ms under unchanged45000ms timeout; no WIELD environment cache, terminal alteration or timeout relaxation. Full53-suite integration/native aggregate .cache/test-wasm-wield.log is still rebuilding/running and must exit0 before TU53 is marked Passed or MKROOM translation starts.
+
+J59 complete-gate regression: .cache/test-wasm-wield.log rebuilds all53 modes but then fails existing SYS target tests. Original configured C preserves populated panictrace_libc=-1025 while JS overwrites0. Rootcause is pre-existing unconditional environment.PANICTRACE_LIBC=1 in wasm-runtime.js, overriding actual compiler metadata PANICTRACE_LIBC=0 after prepared global.h excludes native stack walkers for Emscripten. Remove that pin; original sys.js algorithm remains unchanged and production follows actual compiler flags. Native C legitimately has a different actual PANICTRACE_LIBC value: development SYS test will explicitly read/validate actual reference constants and supply only that actual backend flag to its hybrid runtime, retaining all original cases/full state assertions. No frozen harness or records change. This supersedes the old forced-flag behavior, corrects production initialization of a disabled native facility, and requires new game/public/full-suite verification. WIELD remains In progress despite its first public44/44.
+
+J59 SYS correction focused verification: original183 EmC/JS cases pass (.cache/tu-wield-sys-emc-final.log), and same183 native cases pass with full snapshots (.cache/tu-wield-sys-native-final.log). Test reads all actual reference config keys, requires exact key set excluding separately exposed LL_NONE, validates every field against compiler metadata except explicitly asserted native PANICTRACE_LIBC=1; hybrid compiled metadata itself must match the EmC layout exactly. Only the test runtime flag follows its actual reference backend, including the second Module. Production no longer pins the flag. Game rebuild .cache/build-wasm-wield-sysfix.log is running; earlier public results are historical until repeated on this correction.
+
+J59 concurrent native-libc migration interaction: runtime changed again during the final rebuild (current capture .cache/wield-final-input-hashes.json), adding native pointer/scanf/aliased-format/time/regex adapters under separate work. Focused EmC ALLOC/MINION/VERSION comparisons fail, while full native versions of those same suites pass. Final public .cache/wield-public-final.stdout.txt regresses40/44: every RNG call remains exact, four sessions differ in visible output/animation. Keep WIELD pending and ask which libc oracle governs this migration; do not discard the parallel native work. Independent mandatory replay defect: a production calendar nh_getenv override hides NETHACK_RECORDING_EPOCH, defeating the existing prepared-C/JS fixed-recording-clock adaptation and inheriting present-day DST. A readonly seed0002 replay confirms Kadirli instead of recorded Ermenak at steps340/360. Remove only that environment-hiding override, so the original parser receives its supplied recording epoch; no hardcoded names/dates/timezone and no terminal/harness change. Native time conversion remains intact. Host-only calendar source differences stay in the test adapter. Isolated replay verification pending; initial40/44 and policy conflict remain explicitly unresolved.
+
+J59 recording-clock verification: all three existing seasonal workers pass after exposing the supplied recording epoch again: America/New_York, America/Los_Angeles and UTC (.cache/wield-clock-zone-{0,1,2}.log). Current full integration .cache/test-wasm-wield-final.log stops in CALENDAR on native-vs-musl handling of pre1900 input00991231190358 (JS0 versusEmC946685038), another oracle-policy difference; no next TU starts. Concurrent source edits are detected across16files against .cache/wield-final-input-hashes.json, so that run cannot certify a single frozen revision. For an independent recording check only, .cache/wield-replay-snapshot copies current js/frozen/.teleport and the unmodified score wrapper, links read-only recorded sessions and SDK, and stores187input hashes; .cache/wield-clock-fixed-public.stdout.txt/.stderr.txt runs unchanged frozen scoring there. This does not alter live production selection or freeze other tasks. Actual native full-case diagnostics continue separately; no fullgatepass claim.
+
+J59 clock-fix public verification: isolated .cache/wield-replay-snapshot passes44/44, all792838RNG,11405screens/cells/cursors and1483animations exact (.cache/wield-clock-fixed-public.stdout.txt/.stderr.txt). All187 snapshot input hashes remain unchanged after the run; runtime hashae52fc0ce66d1974ad2fe91e222b7829a9ac69172a54598ed47c0119b2e0e4e7. This snapshot proves the recording-clock fix restores the public baseline with current native adapters. It does not certify subsequent live edits or override the pending libc oracle decision. Full native current diagnostic run88783-1794288105335 has a COLORATT failure under investigation, so no complete53gate is claimed and no MKROOM source translation begins.
+
+J59 native diagnostic follow-up: earlier mixed-revision aggregate88783-1794288105335 finishes52/53,48assertion failures and incompleteCOLORATT. Independent review identifies the first mismatch as free_count1 versus2 (both original explicit ownership frees are required), not a generic menu/color difference; no normalization is added. A fresh current-source COLORATT run then passes7,741 comparisons and20,093assertions with zero failures (run92871-1794288465246, .cache/wield-coloratt-current-native.log), after concurrent source updates including a per-Module WeakSet initialization guard. Root did not fix or overwrite that parallel implementation. Restart complete native diagnostics .cache/wield-native-refreshed.log with .cache/wield-native-refreshed-input-hashes.json; oracle question still pending and no TUcompletion claim.
+
+J59 latest native aggregate94923-1794288591753 completes53/53 but passes52, with519 CALENDAR assertions failing (40,447 checked); COLORATT now passes. Cause is source configuration, not core calendar arithmetic: native C omits the __EMSCRIPTEN__ recording-epoch block, while the actual Wasm hybrid enables it for faithful recordings. Add a test-only calendarRuntime wrapper, reading/validating actual _probe_dep_emscripten of each reference and requiring actual hybrid flag1. When comparing native flag0 only, intercept exactly NETHACK_RECORDING_EPOCH and returnNULL; every other service/key passes unchanged. Both primary and independent modules remain real memory64 hybrids. Retain every original case/snapshot/growth and five zones; no production default change or suppressed mismatch. Focused native retry .cache/wield-calendar-native-fixed.log pending. This mirrors actual compiled-source guard facts, like the SYS flag adapter, independently of the pending native-vs-musl libc oracle decision.
+
+J59 native clock fix verified: all five native-zone workers pass,40,467 assertions and zero failures (.cache/wield-calendar-native-fixed.log; run596-1794289130637). ActualWasmmemory64 primary/independent hybrid modules retained; only the native source guard fact adapts the environment. Full native53 retry .cache/wield-native-final.log is running with .cache/wield-native-final-input-hashes.json. Separate platform checks pass version/terminfo/recording/profile/compression, then old game regex-import assertion fails because current live game now routes five regex_* NetHack imports directly into JS and prunes teleport_js_reg* bridge imports. Static audit finds no compiled regcomp/regexec/regerror/regfree/TRE symbols; behavior must still be verified and diagnostics counters currently observe the obsolete bridge, so this is a verification gap rather than a reason to remove the assertion blindly. No platform-test loosening or new transport implementation was made by this TU task.
+
+J59 latest completed evidence: full native1252-1794289203005 completes53/53 and passes53,1,503,578 assertions,zero failures (.cache/wield-native-final.log). Input hashes detect concurrent changes during that aggregate, so it is diagnostic evidence across loaded per-suite revisions, not a certified single frozen live checkout. WIELD owned files remain unchanged; focused originalEmC/JS12,804 and native34,122 checks passed. Preserved b306c84... replay snapshot retains187input hashes unchanged and passes44/44 everymetric plus full game integration (.cache/wield-snapshot-game-integration.log: three seasonal zones, heading, bones, profile, macOS features). Snapshot manifest matches actualWasm hash. Live artifact has moved to ad48ffe09cdf7edf24fe271ad8d0bb4fe0ec13585040ab07ca7e7f64267493b2 with direct-JS regex transport. Existing full test script still fails on known native-vs-EmC library semantics/old transport import assertion; neither is silently skipped. User oracle choice remains pending, so do not markWIELDPassed or beginMKROOM translation yet. All concrete changes/fixes above are authorized implementation or development-test corrections; no frozen harness/recording edit.
+
+
+J59 current verification repair: NP01–NP02 establish native C as the required oracle; the earlier optional baseline question is resolved and historical question text above is superseded. The user confirms the terminal baseline is fixed. Add per-Module call/handle diagnostics to js/services/native-regex-libc.js, expose them through wasm-runtime.js and wasm-adapter.js, retain raw legacy wasmBridgeCalls separately, and label the actual selected transport in dependency-mode.js and build.json. Legacy transport reports legacy counters; compiled-libc mode does not claim JS calls; the C-dependency debug build can still use the separately translated POSIXREGEX TU. build.py additionally hashes the actual direct-regex runtime/wrapper/adapter sources. scripts/test-wasm.mjs checks all five direct NetHack regex imports, excludes obsolete bridges and compiled regex symbols, then compares real starter inventory with an ERE menu-color rule: unchanged text/RNG, selected gold entry red/bold, unrelated rows unchanged, actual direct compiler/matcher counters positive. Existing timezone, bones, profile and macOS assertions remain. No algorithm, frozen harness, terminal configuration, recording, upstream source or production dependency default changes. Syntax, refreshed build and behavioral results remain pending. The first live smoke encountered a stale game ABI (IOCTL stackAlloc service absent in the old compiled library); rebuild rather than adding a stub.
+
+J59 WIELD coverage follow-up: the existing worm-tooth/crysknife transformation cases now read the actual unsigned 32-bit `obj.owt` field from both native/original-C and JS memory. Each case compares the complete stored value and independently checks it against the original configured `objects.h` unit weight when a multi-item stack fuses; a single item retains the fixture's initial zero weight. This adds observation of an existing source store, including the >2^53 quantity cases. No production, native fixture, upstream, harness, recording, or compiler change. Tests are not rerun by this edit; parent verification remains required.
+
+J59 regex manifest provenance correction: `nethack-c/wasm/build.py` now derives the `regex` backend label and `regexReference` from the already-selected `regexTransport`. Direct and legacy JS transports retain the existing native-compatible ERE label; an actual compiled-libc selection is labeled compiled musl TRE instead of JavaScript. When `--c-dependencies` still includes the translated POSIXREGEX TU, `javascriptDependencies` retains hashes for the active regex engine, direct service provider, dispatcher, wrapper/runtime, replay adapter, JS-library binding and native-libc ABI binding, plus its regex reference and direct transport description. It does not claim JS compression/terminfo or the disabled TELEPORT_JS_REGEX bridge flag for that debug mode. Regular JS-backend manifest keys and values remain unchanged. This edits provenance only: no compiler flags, defaults, link selection, algorithms or frozen files change. Python AST syntax validation passed; no build or behavioral test was run by this edit.
+
+J59 coherent validation snapshot: .cache/wield-gate-snapshot-v2 contains real copies of478 source/tooling inputs, verified byte-identical to the live files at capture, private Emscripten cache, fresh preparation/probe/native/game outputs and read-only links to pinned SDK/upstream/recordings/archives. A clean (not --resume) build uses actual Clang21/Emscripten4.0.10 memory64 and all current native ABI headers, avoiding stale IOCTL/game objects and live parallel builder interference. This changes no production default. Source hash inventory is source-input-hashes.json; clean build output is its .cache/clean-build.log. Behavioral gates are pending.
+
+J59 clean-bootstrap tooling repair: clean snapshot compiled all53 probes, then layout generation failed importing drawing-constants.json before creating it. scripts/write-tu-layouts.mjs now uses two compiler-derived passes: all original-C reference layouts and drawing constants first, then imports the real JS runtime and replaces only the configured native ABI layouts (IOCTL/UNIXXTTY/POSIXREGEX) from their actual hybrid probes. No placeholder JSON, stale cached layouts, stub initializer, algorithm or native oracle change. The private snapshot adopts exactly this repair and records its updated source hash; clean-first layout generation and remaining build/tests are pending.
+
+J59 frozen-source native gate: private snapshot-v2 completes all53 suites,53pass,1,496,451assertions and0failures (.cache/native-full.log; native-existing-runs/21095-1794290476367/results.json). WIELD now passes12,808comparisons including15new weight/source-width assertions. Source/function/order/comments and lexical53TU/11fixture checks pass; all478captured source hashes remain unchanged after tests. Counts differ from historical runs because the separately documented NP01–NP02 native checks/configuration were restored; no assertion waiver is added here. The two-pass layout generator succeeds from an empty output directory. Resume build now completes the same clean preparation after that tooling repair; game/public gates remain pending.
+
+J59 first fresh game gate: snapshot clean/resume build succeeds, but game startup fails Unsupported native signal7 in the captured NP02 terminal transport (.cache/game-integration.log). Live native parity work already added per-Module native-only signal registration/delivery and its actual invokeSignal ABI callback. Root adopts the existing JS signal transport into the private snapshot first to expose subsequent diagnostics; callback library linkage and full gate will be rebuilt together before any pass claim. This is a later snapshot revision, with actual updated source hash. Root does not overwrite/reimplement the live correction or treat native53pass as whole-game support.
+
+J59 replay-clock transport correction: with live native-only signal handling adopted, the actual game inventory regex proof passes, then the January America/New_York worker fails with Kadirli instead of recorded Ermenak (.cache/game-after-signal.log). Keep calendar.js identical to its native algorithm. nethack-c/wasm/tu-libraries/calendar.js now accepts optional per-Module nethackCalendarTime in its time service; absent callback retains _teleport_calendar_time unchanged. wasm-adapter.js captures validated recordingClockEpoch() once per segment and supplies the same BigInt seconds through that callback and existing environment metadata. This injects the replay process clock at the transport boundary, preserving the parser inherited DST flag and process TZ without hardcoding names, transforming snapshots, changing expected answers or altering native tests. Epoch zero and negative values must remain valid; independent Modules retain independent callbacks. Ordinary no-callback callers still use native time. This supersedes the earlier parser/env interception approaches; actual native clock, source function boundaries and calendar algorithm are unchanged. Explicit clock/native-oracle tests and fresh game/native/public gate pending.
+
+J59 binding provenance: build.py records abiLibrarySha256 for every registered TU alongside core/prepared-C hashes, and includes the actual calendar clock binding in regular JS dependency hashes. This identifies the linked binding revision independently of readable JS algorithm revisions and helps detect stale ABI artifacts. No compiler flag, source algorithm, backend default or harness change. Rebuilt manifest comparison with actual source remains pending.
+
+J59 explicit recorder-clock transport coverage: `scripts/test-tu-calendar.mjs` preserves every existing native-C/hybrid calendar case and expected value. Additional real hybrid Modules receive the optional `nethackCalendarTime` callback with positive, zero and negative time_t values. The unchanged actual native C oracle receives exactly the same clock through its existing test-only Date.now()/native `_set_clock` transport; native output, rather than a rewritten expected calendar result, supplies each comparison. Hybrid host clocks then run in January and July, exercising formatted dates, calendar status and the parser's inherited DST flag for January/July and spring-gap/fall-fold input strings. An A/B/A interleaving checks Module-local clock isolation and stack restoration. No calendar algorithm, native fixture/backend, upstream source, harness, recording, expected output or production default changes in this test edit. The production clock callback is separately owned by the parent: explicit replay input replaces only the time service, with the existing native time call retained when no callback is supplied. Node syntax validation passes; no build or behavioral test was run by this edit, and parent verification remains pending.
+
+J59 combined snapshot revision: capture the replay-clock callback/binding tests and current native signal7 delivery ABI (including real table callback), terminal mask-width guard, corrected IOCTL comment and new native terminal transport suite. Also adopt the native parity builder's successful-completion ABI stamp write, preventing perpetual stale-object invalidation. Snapshot now has479captured inputs; hashes identify this later revision separately from the earlier53pass report. Rebuild all probes/game before verification; no inherited or frozen input changes.
+
+J59 explicit user oracle decision: user confirms Native macOS equivalence; explicitly test library differences. Native C remains the required unchanged oracle; EmC differences must be measured and explicitly tested, not used to loosen JS/native expectations. A dedicated scripts/test-native-library-differences.mjs is being prepared with actual native, actual EmC and JS implementations for bounded representative libc cases. Coverage, remaining libraries and results will be stated after review; no gate pass yet. This supersedes all historical pending baseline questions above.
+
+J60–J62 workflow revision explicitly requested by user: accelerate independent TU implementation in parallel, using Emscripten-C equivalence and an actual mixed memory64 link as first-pass gates; collect native macOS failures for a later correction pass. This supersedes the prior sequential/native-before-next-TU policy without claiming native equivalence from EmC success. Native-runtime and Lua chats retain their ownership; root has contacted both under explicit user authorization and paused the duplicate library-difference proposal before any file was created. Planned independent ports: MKROOM (src/mkroom.c), DLB (src/dlb.c), EARLYARG (src/earlyarg.c). Preserve each original configured function/signature/names/comments/flow, actual native-layout memory, and explain all required C/JS adaptations. Each agent owns only its TU files; root serializes shared registration/build promotion. Frozen harness, recordings, pristine upstream and existing runtime defaults remain unchanged. Compilation/differential/public/native outcomes will be recorded independently per TU.
+
+J61 candidate correction before implementation: DLB is disabled in the actual prepared configuration, so src/dlb.c emits zero active functions and dlb_* resolve to libc macros. Do not enable an optional archive subsystem or count an empty-object exclusion as migration progress. Keep DLB deferred and assign this parallel slot to actual configured src/sfstruct.c (SFSTRUCT) instead. Other slots remain MKROOM and EARLYARG. No DLB source/default/build flag change was made.
+
+J60 MKROOM translation begins under the user's explicitly staged Emscripten-C first-pass/native-later workflow. All 30 configured original functions, parameters, local names and source comments remain the policy boundaries; native C continues as the independent oracle and no native mismatch is waived. The sole readonly four-row squadprob table moves to readable JavaScript symbolic data. shrine_pos retains a stable per-Module native zero-backed coord buffer, with all room/door/stair/grid views read freshly. The four gotos become minimal labeled blocks/continue in the same original functions; pointer iteration and signed pointer difference use runtime ABI adapters, and source sq invocations expand inline with the original macro text retained. Native automatic coordinates and serialization references retain scoped addressable storage; original native dependency calls and full room serialization remain native. Root owns shared integration and all builds. No compilation or behavioral pass is claimed by this announcement.
+
+SFSTRUCT migration begins (independent TU work): translate the configured historical serializers and buffered descriptor IO from src/sfstruct.c into readable JavaScript, expanding the original SF_A/SF_C/SF_X macros into the same native function boundaries. JS will own the original descriptor bookkeeping and serializer procedure-table definitions; native storage, actual native IO, pointer normalization dependencies and typed diagnostics remain ABI services. DLB remains disabled and deferred; no DLB configuration, upstream source, frozen harness or recording changes. Validation is pending original Emscripten-C differential probes; native-platform diagnostics will follow the requested first pass.

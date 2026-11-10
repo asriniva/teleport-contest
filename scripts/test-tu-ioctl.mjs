@@ -86,6 +86,12 @@ for (const getStatus of [0, -1, 1]) for (const setStatus of [0, -1, 1]) {
     assert.deepEqual(state(), windowsBefore, 'The configured getwindowsz body is empty');
 }
 const denied = 'Norep:Suspend command not available.;';
+// Exercise the native sizing branch with the same controlled ioctl dependency.
+for(const status of [-1,0,1])for(const rows of [0,24])for(const columns of [0,80]){
+    call('window_options',status,rows,columns);call('windows');
+    assert.equal(call('dimensions',0),status===-1||!rows?12:rows);
+    assert.equal(call('dimensions',1),status===-1||!columns?34:columns);
+}
 for (const value of [null, '', 'allowed-users', Buffer.from([0xff, 0x80, 0x41])]) {
     for (const auth of [0, 1]) {
         shellers(value); call('options', 0, 0, 0, auth, signal.default);

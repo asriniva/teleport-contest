@@ -11,17 +11,36 @@
 
 extern struct termios termio;
 __typeof__(windowprocs) windowprocs;
+__typeof__(gt) gt;
 static struct termios fixture_input, fixture_output;
 static int get_status, set_status, kill_status;
 static boolean authorized;
 static uintptr_t current_handler;
 static char trace[8192];
+static int window_status=-1,window_rows,window_columns;
 void panic(const char *format, ...) { abort(); }
 static void append(const char *format, ...)
 {
     va_list args;
     va_start(args, format); vsnprintf(trace + strlen(trace), sizeof(trace) - strlen(trace), format, args); va_end(args);
 }
+#if defined(__EMSCRIPTEN__) && !defined(TELEPORT_NATIVE_PLATFORM_ABI)
+typedef int fixture_ioctl_request;
+#else
+typedef unsigned long fixture_ioctl_request;
+#endif
+int teleport_probe_ioctl(int fd,fixture_ioctl_request request,...)
+{
+    if(window_status==-1)return -1;
+    va_list args;va_start(args,request);struct winsize *out=va_arg(args,struct winsize*);va_end(args);
+    memset(out,0,sizeof *out);out->ws_row=window_rows;out->ws_col=window_columns;
+    append("window:%d:%lu;",fd,(unsigned long)request);return window_status;
+}
+void probe_window_options(int status,int rows,int columns)
+{
+    window_status=status;window_rows=rows;window_columns=columns;LI=12;CO=34;trace[0]=0;
+}
+int probe_dimensions(int column){return column?CO:LI;}
 /* Only isolated probe builds redirect these C platform calls. They observe
  * requests without touching the host terminal, signals or process group. */
 int teleport_probe_tcgetattr(int fd, struct termios *value)

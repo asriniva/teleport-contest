@@ -1,6 +1,7 @@
 // Native host adapter for the EXISTING differential tests. Memory accesses use
 // real C pointers through Node-API; no C behavior is supplied by this adapter.
 import assert from 'node:assert/strict';
+import caseAssert from './native-test-assert.mjs';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import { copyFileSync, readFileSync, mkdirSync, unlinkSync, writeFileSync, openSync, closeSync } from 'node:fs';
@@ -8,7 +9,8 @@ import { fileURLToPath } from 'node:url';
 import { createNativeHacklibFS } from './native-hacklib-fs.mjs';
 const require = createRequire(import.meta.url);
 const root = new URL('../', import.meta.url);
-const nativeMode = process.env.TELEPORT_NATIVE_TESTS === '1';
+// Native C is authoritative. Wasm C is available only as an explicit diagnostic.
+const nativeMode = process.env.TELEPORT_NATIVE_TESTS !== '0';
 export const referenceLabel = nativeMode ? 'native-C' : 'Emscripten-C';
 let sequence = 0;
 const builtins = Object.fromEntries(['DataView', 'Int8Array', 'Uint8Array', 'Int16Array', 'Uint16Array', 'Int32Array', 'Uint32Array', 'Float32Array', 'Float64Array', 'BigInt64Array', 'BigUint64Array'].map(name => [name, globalThis[name]]));
@@ -70,7 +72,7 @@ export function memoryCheckpoint(module) {
     return module.nativeC ? { nativeAllocated: module._allocated() } : module.HEAPU8.buffer;
 }
 export function assertMemoryGrowth(module, before, message) {
-    if (module.nativeC) assert.ok(module._allocated() > before.nativeAllocated, message || 'The same allocation case must allocate native memory');
+    if (module.nativeC) caseAssert.ok(module._allocated() > before.nativeAllocated, message || 'The same allocation case must allocate native memory');
     else assert.notEqual(module.HEAPU8.buffer, before, message);
 }
 export function allocationMetric(module) {

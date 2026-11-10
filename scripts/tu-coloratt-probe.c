@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <regex.h>
 #include <emscripten/stack.h>
 #include <emscripten/heap.h>
 #undef free
@@ -75,3 +76,16 @@ int probe_picks_free_count(void){return picks_free_count;}
 uintptr_t probe_stack(void){return emscripten_stack_get_current();}
 static char *list_snapshot(char *p,struct menucoloring *m){for(;m;m=m->next)p+=sprintf(p,"[%s:%d:%d:%d]",m->origstr,m->color,m->attr,m->match!=NULL);return p;}
 const char *probe_snapshot(void){char *p=statebuf;int i;p+=sprintf(p,"state:%d:%d:%u:%u:%d:%d:%d:%d:%d;menu:",ca.color,ca.attr,closest,closest_index,iflags.use_menu_color,gs.save_menucolors,free_count,picks_free_count,gs.save_colorings?gs.save_colorings==gm.menu_colorings?1:gs.save_colorings==gc.color_colorings?2:3:0);p=list_snapshot(p,gm.menu_colorings);p+=sprintf(p,";alternate:");p=list_snapshot(p,gc.color_colorings);p+=sprintf(p,";glyph:");for(i=0;i<sizeof glyph;i++)p+=sprintf(p,"%02x",((unsigned char*)&glyph)[i]);return statebuf;}
+
+/* Observe actual libc independently of coloratt/nhregex and fixture counters. */
+static char dependency_regex_error[BUFSZ];
+int probe_regex_dependency_compile(const char *pattern)
+{
+    regex_t expression;
+    int status = regcomp(&expression, pattern, REG_EXTENDED | REG_NOSUB);
+    dependency_regex_error[0] = '\0';
+    regerror(status, &expression, dependency_regex_error, sizeof dependency_regex_error);
+    regfree(&expression);
+    return status;
+}
+const char *probe_regex_dependency_error(void) { return dependency_regex_error; }

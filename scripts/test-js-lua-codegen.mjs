@@ -1,0 +1,29 @@
+/** Strict native5.4.8 compiler parity gate. --report writes differences without
+ * succeeding the parity gate; default fails until ALL compared fields match. */
+import assert from'node:assert/strict';import{readFileSync,writeFileSync,mkdirSync,readdirSync,existsSync}from'node:fs';import{execFileSync}from'node:child_process';import{resolve}from'node:path';import{fileURLToPath}from'node:url';import{isDeepStrictEqual}from'node:util';
+import{luaFunctionLine}from'../js/services/lua-debug.js';import{isLuaString,luaStringBytes}from'../js/services/lua/lobject.js';import{compileLuaSource}from'../js/services/lua-source-compiler.js';import{loadLuaChunk,decodeLuaInstruction,LUA_OPCODES}from'../js/services/lua-codegen.js';
+const root=fileURLToPath(new URL('../',import.meta.url)),scratch=resolve(root,'.cache/js-lua-debug'),src=resolve(root,'.cache/js-dependency-lua/lua-5.4.8/src');mkdirSync(scratch,{recursive:true});
+const input=resolve(scratch,'codegen-input.lua'),binary=resolve(scratch,'codegen-input.luac'),luac=resolve(scratch,'luac');
+if(!existsSync(luac))execFileSync(resolve(root,'.cache/wasm64-build/host-cc'),['-O2','-I'+src,...readdirSync(src).filter(n=>n.endsWith('.c')&&n!=='lua.c').map(n=>resolve(src,n)),'-lm','-o',luac]);
+const tiny=[['empty',''],['return-int','return 1'],['local-return','local x=1;return x'],['add-immediate','local function f(a) return a+1 end return f(2)'],['arithmetic','local a,b=...;return a+b,a-1,a*2,a//3,a&4,a<<2'],['condition','local a,b=...;if a<b then return a else return b end'],['loop','local s=0;for i=1,8 do s=s+i end return s']];
+const baselineSource=readFileSync(resolve(root,'scripts/test-js-lua.mjs'),'utf8'),begin=baselineSource.indexOf('const core = [')+13,end=baselineSource.indexOf('\n];',begin)+2,core=Function('return '+baselineSource.slice(begin,end))();
+const directed=[['goto-close','local x=0;::again:: x=x+1;if x<4 then goto again end;return x'],['tail-depth','local function f(n,x)if n==0 then return x end return f(n-1,x+1)end return f(4000,0)'],['close','local s="";do local x <close> = setmetatable({},{__close=function()s=s.."x"end});do local y <close> =setmetatable({},{__close=function()s=s.."y"end})end end;return s']];
+let seed=0x54c0de;const random=n=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed%n;};const generated=[];
+for(let n=0;n<24;n++){const k=1+random(100),m=1+random(7),op=['+','-','*','//','%','&','|','~','<<','>>'][random(10)];generated.push([`seeded-expression-${n}`,`local a,b,c=...;return a ${op} ${k},(a+b)*${m},c-${k},${k}+a`]);generated.push([`seeded-control-${n}`,`local s=0;for i=1,${k} do if i%${m}==0 then s=s+i else s=s-${m} end end;return s`]);}
+const dat=resolve(root,'nethack-c/upstream/dat'),cases=[...tiny,...core,...directed,...generated,...readdirSync(dat).filter(n=>n.endsWith('.lua')).map(n=>[n,readFileSync(resolve(dat,n),'utf8')])],differences=[],histogram={},totals={cases:cases.length,prototypes:0,identicalPrototypes:0,nativeInstructions:0,jsInstructions:0};
+const describe=word=>{if(word===undefined)return null;const x=decodeLuaInstruction(word);return{word,opcode:LUA_OPCODES[x.op],A:x.A,B:x.B,C:x.C,k:x.k,Bx:x.Bx,sBx:x.sBx,sJ:x.sJ};};
+const encode=v=>isLuaString(v)?luaStringBytes(v):typeof v==='bigint'?{integer:String(v)}:typeof v==='number'?{floatBits:(()=>{const a=new DataView(new ArrayBuffer(8));a.setFloat64(0,v);return a.getBigUint64(0).toString(16);})()}:v;
+function compare(name,n,j,path='main'){
+ totals.prototypes++;totals.nativeInstructions+=n.code.length;totals.jsInstructions+=j?.code.length??0;const fields=[];
+ for(const key of['linedefined','lastlinedefined','numparams','is_vararg','maxstacksize','lineinfo','abslineinfo','upvalues','locvars'])if(!isDeepStrictEqual(n[key],j?.[key]))fields.push(key);
+ if(n.protos.length!==j?.protos.length)fields.push('protos.length');
+ if(!isDeepStrictEqual(n.constants.map(encode),j?.constants.map(encode)))fields.push('constants');
+ let first=-1;for(let k=0;k<Math.max(n.code.length,j?.code.length??0);k++)if(n.code[k]!==j?.code[k]){first=k;break;}if(first>=0)fields.push('code');
+ if(fields.length){for(const field of fields)histogram[field]=(histogram[field]??0)+1;differences.push({case:name,path,fields,nativeRegisters:n.maxstacksize,jsRegisters:j?.maxstacksize,nativeCodeLength:n.code.length,jsCodeLength:j?.code.length??0,firstInstructionDifference:first<0?null:{pc:first,native:describe(n.code[first]),js:describe(j?.code[first])},lineDifferences:fields.includes('lineinfo')?n.code.map((word,pc)=>({pc,opcode:LUA_OPCODES[word&127],native:luaFunctionLine(n,pc),js:j?luaFunctionLine(j,pc):null})).filter(x=>x.native!==x.js).slice(0,24):null,localDifferences:fields.includes('locvars')?{native:n.locvars,js:j?.locvars}:null,constantDifferences:fields.includes('constants')?{native:n.constants.slice(0,12).map(encode),js:j?.constants.slice(0,12).map(encode)}:null});}
+ else totals.identicalPrototypes++;
+ for(let i=0;i<n.protos.length;i++)compare(name,n.protos[i],j?.protos[i],`${path}.${i}`);
+}
+for(const[name,source]of cases){writeFileSync(input,source);execFileSync(luac,['-o',binary,input]);const native=loadLuaChunk(new Uint8Array(readFileSync(binary))).prototype,js=compileLuaSource(source,'@'+input);compare(name,native,js);}
+writeFileSync(resolve(scratch,'codegen-diff.json'),JSON.stringify({nativeInstructionParity:differences.length===0,totals,histogram,differences},null,2)+'\n');
+console.log(JSON.stringify({nativeInstructionParity:differences.length===0,totals,histogram,firstDifferences:differences.slice(0,3).map(({lineDifferences,localDifferences,constantDifferences,...value})=>value)},null,2));
+if(!process.argv.includes('--report'))assert.equal(differences.length,0,'Lua compiler parity gate: see .cache/js-lua-debug/codegen-diff.json');

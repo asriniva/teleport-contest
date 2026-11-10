@@ -2,10 +2,9 @@
 // supplies their addresses and the compiler-selected POSIX constants.
 export function createIoctlEnvironment(services, layout) {
     if (layout.pointerSize !== 8 || layout.intSize !== 4
-        || !layout.POSIX_TYPES || !layout.SUSPEND || !layout.SYSCF
-        || layout.USE_WIN_IOCTL)
+        || !layout.POSIX_TYPES || !layout.SUSPEND || !layout.SYSCF)
         throw new Error('Review changed ioctl ABI or terminal configuration');
-    return {
+    const env = {
         ...services,
         ...layout,
         SIG_DFL: BigInt(layout.SIG_DFL),
@@ -16,4 +15,13 @@ export function createIoctlEnvironment(services, layout) {
         get stdin() { return Number(services.stdin()); },
         sysopt: { get shellers() { return Number(services.shellers()); } },
     };
+    const view=()=>new DataView(services.heap().buffer);
+    for(const[key,column]of[['LI',0],['CO',1]])Object.defineProperty(env,key,{
+        get(){return view().getInt32(services.dimension(column),true);},
+        set(value){view().setInt32(services.dimension(column),Number(value),true);},
+    });
+    env.winsizeLocal=()=>services.stackAlloc(layout.winsizeSize);
+    env.windowRow=at=>view().getUint16(at+layout.winsizeRow,true);
+    env.windowColumn=at=>view().getUint16(at+layout.winsizeColumn,true);
+    return env;
 }

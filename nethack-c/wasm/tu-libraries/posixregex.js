@@ -1,18 +1,15 @@
 // POSIX libc ABI only; NetHack wrapper logic and identifier are JS.
 addToLibrary({
-  $teleportPosixregexServices__deps: ['teleport_posixregex_identifier', 'alloc', 'free', 'strcpy', 'regcomp', 'regexec', 'regerror', 'regfree', '$stringToUTF8OnStack'],
+  $teleportPosixregexServices__deps: ['teleport_posixregex_identifier', 'teleport_posixregex_free', 'alloc', 'strcpy', '$stringToUTF8OnStack'],
   $teleportPosixregexServices: function() {
     return {
+      moduleKey: Module,
       heap: () => HEAPU8,
       signedHeap: () => HEAP8,
       identifier: () => Number(_teleport_posixregex_identifier()),
       alloc: size => Number(_alloc(size >>> 0)),
-      free: pointer => _free(BigInt(pointer)),
+      free: pointer => _teleport_posixregex_free(BigInt(pointer)),
       Strcpy: (dest, source) => Number(_strcpy(BigInt(dest), BigInt(typeof source === 'string' ? stringToUTF8OnStack(source) : source))),
-      regcomp: (re, source, flags) => _regcomp(BigInt(re), BigInt(source), flags),
-      regexec: (re, source, count, matches, flags) => _regexec(BigInt(re), BigInt(source), BigInt(count), BigInt(matches), flags),
-      regerror: (error, re, dest, size) => _regerror(error, BigInt(re), BigInt(dest), BigInt(size)),
-      regfree: re => _regfree(BigInt(re)),
     };
   },
   $teleportPosixregexInit__deps: ['$teleportPosixregexServices', '$addOnInit'],

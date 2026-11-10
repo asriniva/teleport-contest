@@ -7,7 +7,9 @@ addToLibrary({
       signedHeap: () => HEAP8,
       stackAlloc: size => stackAlloc(size),
       nh_getenv: name => Number(_nh_getenv(BigInt(stringToUTF8OnStack(name)))),
-      time: () => _teleport_calendar_time(),
+      // Replay supplies its process clock; ordinary callers retain native time.
+      time: () => typeof Module['nethackCalendarTime'] === 'function'
+        ? Module['nethackCalendarTime']() : _teleport_calendar_time(),
       localtimePointer: date => Number(_teleport_calendar_localtime(date)),
       mktimePointer: pointer => _mktime(BigInt(pointer)),
       strlen: pointer => Number(_strlen(BigInt(pointer))),

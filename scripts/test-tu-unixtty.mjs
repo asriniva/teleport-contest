@@ -59,7 +59,8 @@ function fill(which, seed) {
 function field(which, name, value) {
     modules.forEach(module => {
         const pointer = Number(module['_probe_' + which + '_pointer']()) + layout[name];
-        new DataView(module.HEAPU8.buffer)['setUint' + layout.tcflagSize * 8](pointer, value, true);
+        const kind=layout.tcflagSize===8?'BigUint64':'Uint32';
+        new DataView(module.HEAPU8.buffer)['set'+kind](pointer,layout.tcflagSize===8?BigInt(value):value,true);
     }); state();
 }
 function cc(which, index, value) {

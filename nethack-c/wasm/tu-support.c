@@ -3,6 +3,7 @@
 #include "hack.h"
 #include "tu-source-locations.h"
 #include "tu-support.h"
+#include <sys/ioctl.h>
 
 /* Clang implements the variadic ABI, rather than JS constructing a va_list.
  * This is the single panic invocation from the original strutil.c. */
@@ -187,6 +188,7 @@ const char regex_id[11] = {0};
 extern const char regex_id[];
 #endif
 const void *teleport_posixregex_identifier(void) { return regex_id; }
+void teleport_posixregex_free(void *pointer) { free(pointer); }
 
 /* RNG/global and variadic stdio ABI only; RNG/logger decisions are JS. */
 void *teleport_rnd_core_function(void) { return (void *) rn2; }
@@ -249,6 +251,8 @@ void *teleport_ioctl_termio(void) { return &termio; }
 FILE *teleport_ioctl_stdin(void) { return stdin; }
 char *teleport_ioctl_shellers(void) { return sysopt.shellers; }
 int teleport_ioctl_fileno(FILE *stream) { return fileno(stream); }
+int teleport_ioctl_query(int fd, unsigned long request, void *value) { return ioctl(fd,request,value); }
+void *teleport_ioctl_dimension(int column) { return column ? (void *)&CO : (void *)&LI; }
 int teleport_ioctl_getattr(int fd, void *state) { return tcgetattr(fd, state); }
 int teleport_ioctl_setattr(int fd, int action, const void *state) { return tcsetattr(fd, action, state); }
 uintptr_t teleport_ioctl_signal(int sig, uintptr_t handler)
@@ -2997,7 +3001,11 @@ uintptr_t teleport_hacklib_callback_pointer(void)
 int teleport_hacklib_call_comparator(uintptr_t token, const void *a, const void *b)
 { return ((int (QSORTCALLBACK *)(const void *, const void *)) token)(a, b); }
 void teleport_hacklib_qsort(void *base, size_t count, size_t size)
-{ (qsort)(base, count, size, teleport_hacklib_comparator); }
+{
+    extern void teleport_native_c_qsort(void *, size_t, size_t,
+                                       int (*)(const void *, const void *));
+    teleport_native_c_qsort(base, count, size, teleport_hacklib_comparator);
+}
 void *teleport_hacklib_malloc(size_t size) { return malloc(size); }
 void teleport_hacklib_free(void *value) { free(value); }
 void *teleport_hacklib_memcpy(void *dst, const void *src, size_t size)
@@ -3016,4 +3024,146 @@ ssize_t teleport_hacklib_write(int fd, const void *buf, size_t count)
 static char teleport_hacklib_literals[TELEPORT_HACKLIB_LITERAL_CAPACITY];
 void *teleport_hacklib_literal_storage(void) { return teleport_hacklib_literals; }
 size_t teleport_hacklib_literal_capacity(void) { return sizeof teleport_hacklib_literals; }
+#endif
+
+/* WORN: native storage/packed-field/variadic ABI only; all wearing logic is JS. */
+const void *teleport_worn_global(int index)
+{
+    switch(index) {
+    case 0:return &u; case 1:return objects; case 2:return mons;
+    case 3:return &gy; case 4:return &gi; case 5:return &gu;
+    case 6:return &flags; case 7:return &iflags; case 8:return &disp;
+    case 9:return &svc; case 10:return &svl; case 11:return &gm;
+    case 12:return &gb; case 13:return &go; case 14:return genders;
+    case 15:return &gv; default:return 0;
+    }
+}
+struct obj **teleport_worn_equipment_cell(int index)
+{
+    switch(index) {
+    case 0:return &uarm; case 1:return &uarmc; case 2:return &uarmh;
+    case 3:return &uarms; case 4:return &uarmg; case 5:return &uarmf;
+    case 6:return &uarmu; case 7:return &uleft; case 8:return &uright;
+    case 9:return &uwep; case 10:return &uswapwep; case 11:return &uquiver;
+    case 12:return &uamul; case 13:return &ublindf; case 14:return &uball;
+    case 15:return &uchain; case 16:return &uskin; default:return 0;
+    }
+}
+int teleport_worn_object_bit(const struct obj *obj,int index)
+{
+    switch(index) {case 0:return obj->cursed;case 1:return obj->bypass;
+    case 2:return obj->lamplit;case 3:return obj->oeroded;case 4:return obj->oeroded2;default:return 0;}
+}
+void teleport_worn_set_object_bit(struct obj *obj,int index,unsigned value)
+{
+    switch(index) {case 0:obj->cursed=value;break;case 1:obj->bypass=value;break;
+    case 2:obj->lamplit=value;break;case 3:obj->oeroded=value;break;case 4:obj->oeroded2=value;break;}
+}
+int teleport_worn_class_bit(const struct objclass *obj,int index)
+{
+    switch(index) {case 0:return obj->oc_merge;case 1:return obj->oc_material;
+    case 2:return obj->oc_bimanual;default:return 0;}
+}
+int teleport_worn_monster_bit(const struct monst *mon,int index)
+{
+    switch(index) {case 0:return mon->perminvis;case 1:return mon->invis_blkd;
+    case 2:return mon->minvis;case 3:return mon->wormno;case 4:return mon->permspeed;
+    case 5:return mon->mspeed;case 6:return mon->msleeping;case 7:return mon->mcanmove;
+    case 8:return mon->ispriest;case 9:return mon->isminion;case 10:return mon->mfrozen;default:return 0;}
+}
+void teleport_worn_set_monster_bit(struct monst *mon,int index,unsigned value)
+{
+    switch(index) {case 0:mon->perminvis=value;break;case 1:mon->invis_blkd=value;break;
+    case 2:mon->minvis=value;break;case 3:mon->wormno=value;break;case 4:mon->permspeed=value;break;
+    case 5:mon->mspeed=value;break;case 6:mon->msleeping=value;break;case 7:mon->mcanmove=value;break;
+    case 8:mon->ispriest=value;break;case 9:mon->isminion=value;break;case 10:mon->mfrozen=value;break;}
+}
+int teleport_worn_rnl(int bound)
+{
+    if(rng_log_enabled())rng_log_set_caller("worn.c",TELEPORT_WORN_RNL_LINE,TELEPORT_WORN_RNL_FUNCTION);
+    return (rnl)(bound);
+}
+char *teleport_worn_distant_name(struct obj *obj) { return distant_name(obj,doname); }
+const char *teleport_worn_common_string(int index) { return index==0?NH_BLACK:Something; }
+void teleport_worn_snprintf(char *out,size_t size,const char *format,const char *value)
+{ nh_snprintf(TELEPORT_WORN_SNPRINTF_FUNCTION,TELEPORT_WORN_SNPRINTF_LINE,out,size,format,value); }
+void teleport_worn_format_p(char *out,const char *format,const char *a) { Sprintf(out,format,a); }
+void teleport_worn_format_pp(char *out,const char *format,const char *a,const char *b) { Sprintf(out,format,a,b); }
+void teleport_worn_format_ppp(char *out,const char *format,const char *a,const char *b,const char *c) { Sprintf(out,format,a,b,c); }
+void teleport_worn_format_pj(char *out,const char *format,const char *a,long b) { Sprintf(out,format,a,b); }
+void teleport_worn_format_pjpj(char *out,const char *format,const char *a,long b,const char *c,long d) { Sprintf(out,format,a,b,c,d); }
+void teleport_worn_impossible0(const char *format) { impossible(format); }
+void teleport_worn_impossible_p(const char *format,const char *a) { impossible(format,a); }
+void teleport_worn_impossible_j(const char *format,long a) { impossible(format,a); }
+void teleport_worn_pline(const char *format,const char *a,const char *b,const char *c,const char *d) { pline(format,a,b,c,d); }
+void teleport_worn_pline_mon(struct monst *mon,const char *format,const char *a,const char *b,const char *c) { pline_mon(mon,format,a,b,c); }
+void teleport_worn_You(const char *format,const char *a) { You(format,a); }
+void teleport_worn_You_hear(const char *format) { You_hear(format); }
+#ifdef TELEPORT_WORN_LITERAL_CAPACITY
+static char teleport_worn_literals[TELEPORT_WORN_LITERAL_CAPACITY];
+void *teleport_worn_literal_storage(void) { return teleport_worn_literals; }
+size_t teleport_worn_literal_capacity(void) { return sizeof teleport_worn_literals; }
+#endif
+
+/* WIELD: typed native ABI only; selectors and weapon logic remain JS. */
+const void *teleport_wield_global(int index)
+{
+    switch(index) {case 0:return &u;case 1:return objects;case 2:return mons;
+    case 3:return &gy;case 4:return &gu;case 5:return &flags;case 6:return &disp;
+    case 7:return &gi;case 8:return &gm;case 9:return &svc;case 10:return condtests;default:return 0;}
+}
+struct obj **teleport_wield_equipment_cell(int index)
+{
+    switch(index) {case 0:return &uwep;case 1:return &uswapwep;case 2:return &uquiver;
+    case 3:return &uarmg;case 4:return &uarms;default:return 0;}
+}
+struct obj *teleport_wield_hands(void) { return &hands_obj; }
+int teleport_wield_hero_bit(int index) { (void)index;return u.uhandedness; }
+int teleport_wield_object_bit(const struct obj *obj,int index)
+{
+    switch(index) {case 0:return obj->cursed;case 1:return obj->bknown;case 2:return obj->lamplit;
+    case 3:return obj->unpaid;case 4:return obj->oerodeproof;case 5:return obj->known;default:return 0;}
+}
+void teleport_wield_set_object_bit(struct obj *obj,int index,unsigned value)
+{
+    switch(index) {case 0:obj->cursed=value;break;case 1:obj->bknown=value;break;case 2:obj->lamplit=value;break;
+    case 3:obj->unpaid=value;break;case 4:obj->oerodeproof=value;break;case 5:obj->known=value;break;}
+}
+int teleport_wield_class_bit(const struct objclass *obj,int index) { (void)index;return obj->oc_bimanual; }
+extern int teleport_wield_ready_callback(struct obj *);
+extern int teleport_wield_wield_callback(struct obj *);
+int teleport_wield_ready_selector(struct obj *obj) { return teleport_wield_ready_callback(obj); }
+int teleport_wield_wield_selector(struct obj *obj) { return teleport_wield_wield_callback(obj); }
+uintptr_t teleport_wield_callback_pointer(int index)
+{ return (uintptr_t)(index==0?teleport_wield_ready_selector:teleport_wield_wield_selector); }
+struct obj *teleport_wield_getobj(const char *prompt,uintptr_t callback,unsigned flags)
+{ return getobj(prompt,(int (*)(struct obj *))callback,flags); }
+char teleport_wield_ynq(const char *prompt) { return ynq(prompt); }
+int teleport_wield_rnd(int bound)
+{
+    if(rng_log_enabled())rng_log_set_caller("wield.c",TELEPORT_WIELD_RND_LINE,TELEPORT_WIELD_RND_FUNCTION);
+    return (rnd)(bound);
+}
+int teleport_wield_rn2(int bound,int site)
+{
+    if(rng_log_enabled())rng_log_set_caller("wield.c",site==0?TELEPORT_WIELD_RN2_ENCHANT_LINE:TELEPORT_WIELD_RN2_ELVEN_LINE,
+        site==0?TELEPORT_WIELD_RN2_ENCHANT_FUNCTION:TELEPORT_WIELD_RN2_ELVEN_FUNCTION);
+    return (rn2)(bound);
+}
+const char *teleport_wield_common_string(int index)
+{ return index==0?NH_BLACK:index==1?NH_BLUE:NH_AMBER; }
+void teleport_wield_format_p(char *out,const char *format,const char *a) { Sprintf(out,format,a); }
+void teleport_wield_format_pp(char *out,const char *format,const char *a,const char *b) { Sprintf(out,format,a,b); }
+void teleport_wield_format_ppp(char *out,const char *format,const char *a,const char *b,const char *c) { Sprintf(out,format,a,b,c); }
+void teleport_wield_format_jp(char *out,const char *format,long a,const char *b) { Sprintf(out,format,a,b); }
+void teleport_wield_format_jpj(char *out,const char *format,long a,const char *b,long c) { Sprintf(out,format,a,b,c); }
+void teleport_wield_format_pjpj(char *out,const char *format,const char *a,long b,const char *c,long d) { Sprintf(out,format,a,b,c,d); }
+void teleport_wield_pline(const char *format,const char *a,const char *b,const char *c,const char *d,const char *e) { pline(format,a,b,c,d,e); }
+void teleport_wield_You(const char *format,const char *a,const char *b,const char *c) { You(format,a,b,c); }
+void teleport_wield_Your(const char *format,const char *a,const char *b,const char *c) { Your(format,a,b,c); }
+void teleport_wield_You_cant(const char *format,const char *a,const char *b,const char *c) { You_cant(format,a,b,c); }
+#ifdef TELEPORT_WIELD_LITERAL_CAPACITY
+static char teleport_wield_literals[TELEPORT_WIELD_LITERAL_CAPACITY + sizeof "s"];
+void *teleport_wield_literal_storage(void) { return teleport_wield_literals; }
+size_t teleport_wield_literal_capacity(void) { return sizeof teleport_wield_literals; }
 #endif

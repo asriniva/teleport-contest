@@ -126,3 +126,8 @@ int probe_action(int action,int value){switch(action){case 0:return monster_cens
 void probe_summon(int align,int talk){summon_minion(align,talk);}
 long probe_bribe(void){return bribe(&pool[0],"Fixture bribe?");}
 size_t probe_stack(void){return emscripten_stack_get_current();}
+
+/* Test-only observation of the actual libc dependency, without bribe policy. */
+static long parsed_offer;
+int probe_parse_offer(const char *text){parsed_offer=0;return sscanf(text,"%ld",&parsed_offer);}
+long probe_parsed_offer(void){return parsed_offer;}

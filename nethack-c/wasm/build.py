@@ -20,6 +20,8 @@ OUT = ROOT / 'js/wasm'
 PIN = '16ff59115315917b93185d026aeefea06db9b0f4'
 MAKE = shutil.which('gmake') or shutil.which('make')
 JOBS = str(min(os.cpu_count() or 2, 8))
+C_DEPENDENCIES = '--c-dependencies' in sys.argv
+DEPENDENCY_BACKEND = 'c' if C_DEPENDENCIES else 'javascript'
 
 
 def run(args, cwd=TREE, **kw):
@@ -121,6 +123,13 @@ shutil.copytree(ROOT / 'nethack-c/wasm/terminfo/x', assets / 'terminfo/x', dirs_
 defines = json.loads((ROOT / 'nethack-c/wasm/compile-defines.json').read_text())
 flags = '-O2 -g -I../include ' + ' '.join('-D' + name for name in defines) + ' -sMEMORY64=1'
 flags += ' -I' + shlex.quote(str(terminfo_include))
+flags += ' -include ' + shlex.quote(str(ROOT/'nethack-c/wasm/native-terminal.h'))
+native_abi_hash=hashlib.sha256((ROOT/'nethack-c/wasm/native-terminal.h').read_bytes()).hexdigest()
+native_abi_stamp=BUILD/'native-abi.sha256'
+if not native_abi_stamp.exists() or native_abi_stamp.read_text().strip()!=native_abi_hash:
+    # All game objects depend on this common header. A changed forced ABI
+    # include must invalidate objects built with the previous SDK types.
+    os.utime(TREE/'include/global.h',None)
 emcc = SDK / 'upstream/emscripten/emcc'
 emar = SDK / 'upstream/emscripten/emar'
 lua = TREE / 'lib/lua-5.4.8/src'
@@ -131,18 +140,37 @@ shutil.copy2(lua / 'liblua.a', wasm_lua)
 (TREE / 'src/wasm').mkdir(exist_ok=True)
 bridge = TREE / 'src/wasm/bridge.o'
 run([emcc, '-O2', '-sMEMORY64=1', '-c', ROOT / 'nethack-c/wasm/bridge.c', '-o', bridge])
-codec = TREE / 'src/wasm/compress-service.o'
-run([emcc, '-O2', '-std=gnu17', '-sMEMORY64=1', '-c', ROOT / 'nethack-c/wasm/compress-service.c', '-o', codec])
+dependency_objects = []
+os.environ['TELEPORT_JS_REGEX'] = '0' if C_DEPENDENCIES else '1'
+if C_DEPENDENCIES:
+    codec = TREE / 'src/wasm/compress-service.o'
+    run([emcc, '-O2', '-std=gnu17', '-sMEMORY64=1', '-c', ROOT / 'nethack-c/wasm/compress-service.c', '-o', codec])
+    dependency_objects.append(codec)
+else:
+    # Keep ncurses' real headers/configuration. Only the linked implementation
+    # changes: byte/string algorithms are JS, with narrowly scoped C ABI shims.
+    dependency_bridge = TREE / 'src/wasm/dependency-bridge.o'
+    run([emcc, '-O2', '-g', '-std=gnu17', '-sMEMORY64=1', '-DTELEPORT_JS_REGEX=1',
+         '-c', ROOT / 'nethack-c/wasm/dependency-bridge.c', '-o', dependency_bridge])
+    dependency_objects.append(dependency_bridge)
 OUT.mkdir(exist_ok=True)
 tu_support = TREE / 'src/wasm/tu-support.o'
 run([sys.executable, '-B', ROOT / 'scripts/write-tu-source-metadata.py'], cwd=ROOT)
 run([emcc, *shlex.split(flags), '-I' + str(TREE / 'include'), '-I' + str(ROOT / '.cache/tu-probes'), '-c', ROOT / 'nethack-c/wasm/tu-support.c', '-o', tu_support])
-link_flags = shlex.join([str(bridge), str(codec), str(tu_support), '-O2', '-g', '-sMEMORY64=1', '-sMODULARIZE=1', '-sEXPORT_ES6=1', '-sENVIRONMENT=node,web', '-sINVOKE_RUN=0', '-sEXIT_RUNTIME=1', '-sALLOW_MEMORY_GROWTH=1', '-sSTACK_SIZE=4194304', '-sEXPORTED_RUNTIME_METHODS=FS,ENV,callMain', '--post-js', str(ROOT / 'nethack-c/wasm/runtime.js'), '--embed-file', str(assets) + '@/nethack'])
+dependency_mode = BUILD / 'dependency-mode.js'
+link_flags = shlex.join([str(bridge), *map(str, dependency_objects), str(tu_support), '-O2', '-g', '-sMEMORY64=1', '-sMODULARIZE=1', '-sEXPORT_ES6=1', '-sENVIRONMENT=node,web', '-sINVOKE_RUN=0', '-sEXIT_RUNTIME=1', '-sALLOW_MEMORY_GROWTH=1', '-sSTACK_SIZE=4194304', '-sEXPORTED_RUNTIME_METHODS=FS,ENV,callMain', '--emit-symbol-map', '--post-js', str(ROOT / 'nethack-c/wasm/runtime.js'), '--post-js', str(dependency_mode), '--embed-file', str(assets) + '@/nethack'])
+if not C_DEPENDENCIES:
+    link_flags += ' --js-library ' + shlex.quote(str(ROOT / 'nethack-c/wasm/dependency-library.js'))
+link_flags += ' --js-library ' + shlex.quote(str(ROOT / 'nethack-c/wasm/native-libc-library.js'))
 if 'wasm/hacklib.a: wasm/hacklib.o' not in (TREE / 'src/Makefile').read_text():
     with (TREE / 'src/Makefile').open('a') as f:
         f.write('\nwasm/hacklib.a: wasm/hacklib.o\n\t' + str(emar) + ' rcs $@ $<\n')
 # Sequentially gated whole-TU ports. The excluded object has no C fallback.
 ports = json.loads((ROOT / 'nethack-c/wasm/tu-ports.json').read_text())
+regex_transport = ('ported-posixregex-direct-js' if any(port['name'] == 'posixregex' for port in ports)
+                   else 'compiled-libc' if C_DEPENDENCIES else 'wasm-libc-js-bridge')
+dependency_mode.write_text("Module['nethackDependencyBackend'] = " + json.dumps(DEPENDENCY_BACKEND)
+                           + ";\nModule['nethackRegexTransport'] = " + json.dumps(regex_transport) + ';\n')
 makefile = TREE / 'src/Makefile'
 text = makefile.read_text()
 start, end = '# BEGIN JAVASCRIPT TUS', '# END JAVASCRIPT TUS'
@@ -168,7 +196,69 @@ for port in ports:
         assert 'wasm/hacklib.a' not in link_objects.splitlines()
 (OUT / 'link-objects.txt').write_text(link_objects)
 (TREE / 'src/Sysunix').unlink(missing_ok=True)
-run([MAKE, '-j' + JOBS, 'nethack', 'TARGETPFX=wasm/', f'TARGET_CC={emcc}', f'TARGET_CFLAGS={flags}', f'TARGET_LINK={emcc}', f'TARGET_LFLAGS={link_flags}', f'GAMEBIN={OUT}/nethack.mjs', f'LUALIBS={wasm_lua} -lm', f'WINLIB={terminfo_library}', 'TARGET_LIBS=', 'AUTOLIBS='], cwd=TREE / 'src')
-manifest = {'upstream': PIN, 'emscripten': '4.0.10', 'clang': compiler.strip(), 'memory64': 1, 'terminalCapabilities': 'ncurses-6.5-terminfo', 'ncursesSha256': NCURSES_SHA256, 'terminfoEntrySha256': ENTRY_SHA256, 'gamePlatform': 'MacOS', 'replayDst': 'inherit-fixed-recording-clock', 'defaultRecordingEpoch': '1777723200', 'compression': 'ncompress-5.0-in-process-LZW-Z', 'compressionSourceSha256': codec_source_hash, 'recordingProfile': 'public-recordings-with-environment-overrides', 'javascriptTranslationUnits': [{**port, **({'javascriptDataSha256': {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in port['data']}} if port.get('data') else {}), 'sha256': hashlib.sha256((ROOT / port['javascript']).read_bytes()).hexdigest(), 'preparedCSourceSha256': hashlib.sha256((TREE / port['source']).read_bytes()).hexdigest()} for port in ports], 'sourceDateEpoch': os.environ['SOURCE_DATE_EPOCH'], 'wasmSha256': hashlib.sha256((OUT / 'nethack.wasm').read_bytes()).hexdigest()}
+run([MAKE, '-j' + JOBS, 'nethack', 'TARGETPFX=wasm/', f'TARGET_CC={emcc}', f'TARGET_CFLAGS={flags}', f'TARGET_LINK={emcc}', f'TARGET_LFLAGS={link_flags}', f'GAMEBIN={OUT}/nethack.mjs', f'LUALIBS={wasm_lua} -lm', f'WINLIB={terminfo_library if C_DEPENDENCIES else ""}', 'TARGET_LIBS=', 'AUTOLIBS='], cwd=TREE / 'src')
+dependency_sources = [
+    'js/services/unix-compress.js', 'js/services/terminfo.js', 'js/services/terminfo-data.js',
+    'js/services/posix-regex.js', 'js/services/wasm-dependency-runtime.js',
+    'js/services/native-c-compat.js', 'js/services/native-regex-libc.js',
+    'js/services/native-qsort.js', 'js/services/c-time.js',
+    'js/ported/wasm-runtime.js', 'js/ported/posixregex.js',
+    'js/ported/posixregex-runtime.js', 'js/wasm-adapter.js',
+    'nethack-c/wasm/tu-libraries/calendar.js',
+    'nethack-c/wasm/tu-libraries/posixregex.js',
+    'nethack-c/wasm/native-libc-library.js',
+    'js/services/native-terminal.js','js/services/native-terminal-abi.json',
+    'nethack-c/wasm/native-terminal.h',
+    'nethack-c/wasm/dependency-library.js', 'nethack-c/wasm/dependency-bridge.c',
+]
+regex_backend = ('compiled-musl-TRE-ERE-C-locale' if regex_transport == 'compiled-libc'
+                 else 'javascript-native-macos-compatible-ERE-C-locale')
+regex_reference = ('Emscripten musl TRE; REG_EXTENDED|REG_NOSUB; C locale'
+                   if regex_transport == 'compiled-libc'
+                   else 'Native macOS ERE behavior; REG_EXTENDED|REG_NOSUB; C locale')
+# C-dependency debug builds can still select the separately translated regex TU.
+# Record its active JS implementation without claiming JS terminfo/compression.
+regex_sources = [
+    'js/services/posix-regex.js', 'js/services/native-regex-libc.js',
+    'js/ported/wasm-runtime.js', 'js/ported/posixregex.js',
+    'js/ported/posixregex-runtime.js', 'js/wasm-adapter.js',
+    'nethack-c/wasm/tu-libraries/posixregex.js',
+    'nethack-c/wasm/native-libc-library.js',
+]
+c_debug_regex_dependencies = ({
+    'sourceSha256': {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in regex_sources},
+    'regexReference': regex_reference,
+    'bridge': 'direct NetHack JS regex wrappers; opaque per-Module regex handles',
+} if regex_transport == 'ported-posixregex-direct-js' else {})
+manifest = {
+    'nativeAbiSha256': native_abi_hash,
+    'upstream': PIN, 'emscripten': '4.0.10', 'clang': compiler.strip(), 'memory64': 1,
+    'dependencyBackend': DEPENDENCY_BACKEND,
+    'terminalCapabilities': 'ncurses-6.5-terminfo' if C_DEPENDENCIES else 'javascript-terminfo-pinned-entry',
+    'ncursesSha256': NCURSES_SHA256,
+    'ncursesRole': 'runtime-library' if C_DEPENDENCIES else 'headers-and-reference-only',
+    'terminfoEntrySha256': ENTRY_SHA256,
+    'compression': 'ncompress-5.0-in-process-LZW-Z' if C_DEPENDENCIES else 'javascript-ncompress-5.0-LZW-Z',
+    'compressionSourceSha256': codec_source_hash,
+    'compressionSourceRole': 'compiled-runtime' if C_DEPENDENCIES else 'reference-only',
+    'regex': regex_backend,
+    'regexTransport': regex_transport,
+    'javascriptDependencies': c_debug_regex_dependencies if C_DEPENDENCIES else {
+        'sourceSha256': {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in dependency_sources},
+        'compressionReference': 'public-domain ncompress 5.0, block-mode 16-bit .Z',
+        'terminfoReference': 'ncurses 6.5 termcap API; unchanged pinned xterm-256color entry',
+        'regexReference': regex_reference,
+        'abiCompileFlags': ['-std=gnu17', '-sMEMORY64=1', '-DTELEPORT_JS_REGEX=1'],
+        'linkEnvironment': {'TELEPORT_JS_REGEX': '1'},
+        'bridge': 'numeric tparm intptr_t ABI; batched C tputs callbacks; opaque regex_t handles; MEMFS codec adapter',
+    },
+    'removedCompiledDependencies': [] if C_DEPENDENCIES else ['ncompress codec', 'ncurses libtinfo', 'musl TRE regex algorithms'],
+    'gamePlatform': 'MacOS', 'replayDst': 'inherit-native-parser-clock',
+    'defaultRecordingEpoch': '1777723200', 'recordingProfile': 'public-recordings-with-environment-overrides',
+    'javascriptTranslationUnits': [{**port, **({'javascriptDataSha256': {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in port['data']}} if port.get('data') else {}), 'sha256': hashlib.sha256((ROOT / port['javascript']).read_bytes()).hexdigest(), 'abiLibrarySha256': hashlib.sha256((ROOT / port['library']).read_bytes()).hexdigest(), 'preparedCSourceSha256': hashlib.sha256((TREE / port['source']).read_bytes()).hexdigest()} for port in ports],
+    'sourceDateEpoch': os.environ['SOURCE_DATE_EPOCH'],
+    'wasmSha256': hashlib.sha256((OUT / 'nethack.wasm').read_bytes()).hexdigest(),
+}
 (OUT / 'build.json').write_text(json.dumps(manifest, indent=2) + '\n')
+native_abi_stamp.write_text(native_abi_hash+'\n')
 print('Built', OUT / 'nethack.mjs')

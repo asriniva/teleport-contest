@@ -4,33 +4,11 @@ import { setStorageForTesting, vfsReadFile, vfsWriteFile } from './storage.js';
 import { encodeRecorderScreen, recordingClockEpoch, shouldPersistGameFile } from './wasm-replay-support.js';
 import { recordingProfile, profileSysconf } from './recording-profile.js';
 import { createPortedRuntime } from './ported/wasm-runtime.js';
+import { createWasmDependencyRuntime } from './services/wasm-dependency-runtime.js';
+import { filesUnder, restoreGameFiles, captureGameFiles } from './services/game-files.js';
 import tuLayouts from './wasm/tu-layouts.json' with { type: 'json' };
 
 const STATE_PATH = '/teleport-wasm64-state.json';
-
-function filesUnder(FS, directory, result = {}) {
-    for (const name of FS.readdir(directory)) {
-        if (name === '.' || name === '..') continue;
-        const path = `${directory}/${name}`;
-        const stat = FS.stat(path);
-        if (FS.isDir(stat.mode)) filesUnder(FS, path, result);
-        else if (FS.isFile(stat.mode)) result[path] = FS.readFile(path);
-    }
-    return result;
-}
-
-function encode(bytes) {
-    // Chunk conversion to avoid argument-count limits for large save files.
-    let binary = '';
-    for (let i = 0; i < bytes.length; i += 8192) {
-        binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
-    }
-    return btoa(binary);
-}
-
-function decode(text) {
-    return Uint8Array.from(atob(text), ch => ch.charCodeAt(0));
-}
 
 export async function runWasmSegment(input) {
     return runWithTerminal(input);
@@ -54,8 +32,13 @@ async function runWithTerminal(input) {
     let baseline;
     setStorageForTesting(input.storage || null);
     const previousState = vfsReadFile(STATE_PATH);
+    const dependencyRuntime = createWasmDependencyRuntime({ regex: true });
+    const portedRuntime = createPortedRuntime(tuLayouts);
+    const recordingEpoch = recordingClockEpoch();
     const module = await createNethack({
-        nethackPorted: createPortedRuntime(tuLayouts),
+        nethackPorted: portedRuntime,
+        nethackDependencies: dependencyRuntime,
+        nethackCalendarTime: () => BigInt(recordingEpoch),
         noInitialRun: true,
         print: line => { diagnostics.push(line); if (diagnostics.length > 40) diagnostics.shift(); },
         printErr: line => diagnostics.push(line),
@@ -86,7 +69,7 @@ async function runWithTerminal(input) {
                 NETHACK_NO_DELAY: '1', NOMUX_MARKERS: '1',
                 NETHACK_RAW_KEYS: '1', NETHACK_SEED: String(input.seed ?? 0),
                 NETHACK_FIXED_DATETIME: input.datetime || '20000110090000',
-                NETHACK_RECORDING_EPOCH: recordingClockEpoch(),
+                NETHACK_RECORDING_EPOCH: recordingEpoch,
                 NETHACK_RNGLOG: '/rng.log',
             });
             FS.mkdirTree(profile.home);
@@ -100,16 +83,7 @@ async function runWithTerminal(input) {
         const sysconf = '/nethack/sysconf';
         FS.writeFile(sysconf, profileSysconf(FS.readFile(sysconf, { encoding: 'utf8' }), profile));
         baseline = filesUnder(FS, '/nethack');
-        if (previousState) {
-            const state = JSON.parse(previousState);
-            for (const path of state.deleted) {
-                try { FS.unlink(path); } catch { /* already absent */ }
-            }
-            for (const [path, data] of Object.entries(state.files)) {
-                FS.mkdirTree(path.slice(0, path.lastIndexOf('/')));
-                FS.writeFile(path, decode(data));
-            }
-        }
+        if (previousState) restoreGameFiles(FS, previousState);
     }
     function readRng() {
         try { return module.FS.readFile('/rng.log', { encoding: 'utf8' }).split('\n').filter(Boolean).map(line => line.replace(/^\d+\s+/, '').replace(/\s*=\s*/g, '=')); }
@@ -127,21 +101,31 @@ async function runWithTerminal(input) {
     }
     const rng = readRng();
     if (!screens.length) throw new Error(`Wasm produced no input boundaries. ${diagnostics.join('\n')}`);
-    const after = filesUnder(module.FS, '/nethack');
-    const state = { files: {}, deleted: Object.keys(baseline).filter(path => !(path in after)) };
-    for (const [path, data] of Object.entries(after)) {
-        // Level/lock files belong to the terminated game process. They must
-        // not make the next segment think a previous player is still active.
-        if (!shouldPersistGameFile(path)) continue;
-        const original = baseline[path];
-        if (!original || original.length !== data.length || data.some((byte, i) => byte !== original[i])) {
-            state.files[path] = encode(data);
-        }
-    }
+    const state = captureGameFiles(module.FS, baseline, shouldPersistGameFile);
     vfsWriteFile(STATE_PATH, JSON.stringify(state));
     const terminalDiagnostics = { backend: 'shadow' };
+    const regexTransport = module.nethackRegexTransport;
+    const regexDiagnostics = regexTransport === 'ported-posixregex-direct-js'
+        ? portedRuntime.nativeRegexDiagnostics(module)
+        : {
+            transport: regexTransport,
+            backend: regexTransport === 'wasm-libc-js-bridge'
+                ? 'javascript-native-macos-compatible-ERE-C-locale' : 'compiled-libc',
+            calls: regexTransport === 'wasm-libc-js-bridge'
+                ? Object.fromEntries(['regcomp', 'regexec', 'regerror', 'regfree']
+                    .map(name => [name, dependencyRuntime.calls[name]])) : null,
+        };
+    const dependencyDiagnostics = {
+        backend: module.nethackDependencyBackend || 'c',
+        calls: module.nethackDependencyBackend === 'javascript'
+            ? { ...dependencyRuntime.calls, ...(regexDiagnostics.calls || {}) } : null,
+        wasmBridgeCalls: module.nethackDependencyBackend === 'javascript'
+            ? { ...dependencyRuntime.calls } : null,
+        regex: regexDiagnostics,
+    };
     return {
         getTerminalDiagnostics: () => terminalDiagnostics,
+        getDependencyDiagnostics: () => dependencyDiagnostics,
         getScreens: () => screens, getCursors: () => cursors,
         getRngLog: () => rng,
         getAnimationFramesByStep: () => animations,

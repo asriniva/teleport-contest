@@ -1,9 +1,12 @@
 // Terminal and signal ABI only; configured policy/control flow lives in JS.
 addToLibrary({
-  $teleportIoctlServices__deps: ['teleport_ioctl_termio', 'teleport_ioctl_stdin', 'teleport_ioctl_shellers', 'teleport_ioctl_fileno', 'teleport_ioctl_getattr', 'teleport_ioctl_setattr', 'teleport_ioctl_signal', 'teleport_ioctl_kill', 'teleport_ioctl_suspend', 'teleport_ioctl_resume', 'teleport_ioctl_norep', 'teleport_ioctl_pline', 'check_user_string', '$stringToUTF8OnStack'],
+  $teleportIoctlServices__deps: ['teleport_ioctl_query','teleport_ioctl_dimension','teleport_ioctl_termio', 'teleport_ioctl_stdin', 'teleport_ioctl_shellers', 'teleport_ioctl_fileno', 'teleport_ioctl_getattr', 'teleport_ioctl_setattr', 'teleport_ioctl_signal', 'teleport_ioctl_kill', 'teleport_ioctl_suspend', 'teleport_ioctl_resume', 'teleport_ioctl_norep', 'teleport_ioctl_pline', 'check_user_string', '$stringToUTF8OnStack','$stackAlloc'],
   $teleportIoctlServices: function() {
     return {
       heap: () => HEAPU8,
+      stackAlloc:n=>Number(stackAlloc(n)),
+      dimension:column=>Number(_teleport_ioctl_dimension(column)),
+      ioctl:(fd,request,out)=>_teleport_ioctl_query(fd,BigInt(request),BigInt(out)),
       signedHeap: () => HEAP8,
       termio: () => Number(_teleport_ioctl_termio()),
       stdin: () => Number(_teleport_ioctl_stdin()),

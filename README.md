@@ -9,6 +9,19 @@ calls**, **1,483/1,483 animation frames**, no runtime errors. The remaining
 Wasm engine is **not an eligible contest submission**. See the
 [current status and limitations](UPSTREAM_DIVERGENCES.md#active-frozen-infrastructure-restoration-fr01fr04).
 
+**Dependency migration:** the regular build now uses JavaScript compression,
+terminfo and POSIX regex, with all 44 recordings still exact. Lua and the
+remaining C/Wasm runtime are still required. An independent JavaScript memory,
+calendar and regular-file runtime is tested separately; the JavaScript Lua
+implementation is partial and is not selected by the game. See
+[dependency/runtime scope](nethack-c/wasm/README.md#javascript-dependencies-and-runtime-migration).
+
+**Native parity tests:** all 53 existing suites pass directly against host-native
+C: 1,496,451 assertions, zero failures. JS implementation fixes replace the
+rejected platform-specific expectations. Explicit three-way libc tests retain
+known Emscripten differences while requiring JS to match native C. See
+[native test scope and results](nethack-c/wasm/README.md#native-c-parity-coverage).
+
 This fork includes a reproducible wasm64 build. See [build and test instructions](nethack-c/wasm/README.md). All inherited and added changes are listed in the [upstream divergence register](UPSTREAM_DIVERGENCES.md).
 
 *A guide to porting the Mazes of Menace from C to JavaScript, for

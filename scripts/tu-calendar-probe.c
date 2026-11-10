@@ -33,3 +33,32 @@ int probe_set_env(const char *name, const char *value)
 {
     return value ? setenv(name, value, 1) : unsetenv(name);
 }
+
+/* Test-only typed dependency ABI for the unchanged JavaScript calendar TU.
+ * No date parsing, calendar arithmetic, timezone policy or DST rules here. */
+time_t probe_dep_time(void)
+{
+    time_t value=0;
+    (void)time(&value);
+    return value;
+}
+struct tm *probe_dep_localtime(time_t value) { return localtime(&value); }
+time_t probe_dep_mktime(struct tm *value) { return mktime(value); }
+size_t probe_dep_strlen(const char *value) { return strlen(value); }
+int probe_dep_atoi(const char *value) { return atoi(value); }
+long long probe_dep_strtoll(const char *value) { return strtoll(value,NULL,10); }
+char *probe_dep_getenv(const char *name) { return nh_getenv(name); }
+void probe_dep_format(char *out,size_t size,const char *format,long year,
+                      int month,int day,int hour,int minute,int second)
+{
+    nh_snprintf("yyyymmddhhmmss",120,out,size,format,year,month,day,hour,minute,second);
+}
+char *probe_dep_datestr(void) { static char datestr[15]; return datestr; }
+int probe_dep_emscripten(void)
+{
+#ifdef __EMSCRIPTEN__
+    return 1;
+#else
+    return 0;
+#endif
+}

@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const fields = {
+    wield: [],
+    worn: [],
     hacklib: [],
     mondata: [],
     dbridge: [],
@@ -55,9 +57,18 @@ const fields = {
     stairs: ['sx', 'sy', 'tolev', 'up', 'isladder', 'u_traversed', 'next', 'dnum', 'dlevel', 'uz'],
 };
 const layouts = {};
-for (const { name } of JSON.parse(fs.readFileSync(root + 'nethack-c/wasm/tu-ports.json'))) {
-    const createProbe = (await import(pathToFileURL(root + `.cache/tu-probes/${name}-reference.mjs`))).default;
-    const probe = await createProbe();
+// Bootstrap data imports from actual C probes before importing the JS runtime.
+// Native terminal/regex ABI layouts then come from their configured hybrids.
+const ports = JSON.parse(fs.readFileSync(root + 'nethack-c/wasm/tu-ports.json'));
+for (const pass of ['reference', 'hybrid']) {
+const createPortedRuntime = pass === 'hybrid'
+    ? (await import('../js/ported/wasm-runtime.js')).createPortedRuntime : null;
+for (const { name } of ports) {
+    if (pass === 'hybrid' && !['ioctl','unixtty','posixregex'].includes(name)) continue;
+    const variant = pass;
+    const createProbe = (await import(pathToFileURL(root + `.cache/tu-probes/${name}-${variant}.mjs`))).default;
+    const probe = await createProbe(variant==='hybrid'?{nethackPorted:createPortedRuntime(
+        JSON.parse(fs.readFileSync(root+'js/wasm/tu-layouts.json')))}:{});
     const layout = { size: Number(probe._probe_context_size()) };
     for (const field of fields[name]) layout[field] = Number(probe['_probe_offset_' + field]());
     if (name === 'strutil') {
@@ -151,14 +162,14 @@ for (const { name } of JSON.parse(fs.readFileSync(root + 'nethack-c/wasm/tu-port
         if (probe._probe_int_size() !== 4 || probe._probe_lua_integer_size() !== 8 || probe._probe_ull_size() !== 8)
             throw new Error('Review changed allocation integer widths');
     }
-    if (['utf8map', 'drawing', 'posixregex', 'rnd', 'ioctl', 'unixtty', 'were', 'extralev', 'mplayer', 'exper', 'mkmap', 'getline', 'write', 'mdlib', 'quest', 'minion', 'iactions', 'selvar', 'steal', 'sit', 'fountain', 'objects', 'monst', 'shknam', 'rumors', 'music', 'version', 'coloratt', 'priest', 'light', 'lock', 'steed', 'wizard', 'worm', 'o_init', 'ball', 'mcastu', 'dbridge', 'mondata', 'hacklib'].includes(name)) {
+    if (['utf8map', 'drawing', 'posixregex', 'rnd', 'ioctl', 'unixtty', 'were', 'extralev', 'mplayer', 'exper', 'mkmap', 'getline', 'write', 'mdlib', 'quest', 'minion', 'iactions', 'selvar', 'steal', 'sit', 'fountain', 'objects', 'monst', 'shknam', 'rumors', 'music', 'version', 'coloratt', 'priest', 'light', 'lock', 'steed', 'wizard', 'worm', 'o_init', 'ball', 'mcastu', 'dbridge', 'mondata', 'hacklib', 'worn', 'wield'].includes(name)) {
         for (let i = 0; i < probe._probe_layout_count(); i++) {
             let pointer = Number(probe._probe_layout_name(i)), end = pointer;
             while (probe.HEAPU8[end]) end++;
             const key = new TextDecoder().decode(probe.HEAPU8.subarray(pointer, end));
-            layout[key] = (name === 'minion' && ['NON_PM', 'A_CHAOTIC', 'A_NONE'].includes(key)) || (name === 'iactions' && key === 'GETOBJ_EXCLUDE') || (name === 'selvar' && key === 'W_RANDOM') || (name === 'fountain' && key === 'A_CHAOTIC') || (name === 'monst' && ['NON_PM', 'A_NONE'].includes(key)) || (name === 'shknam' && ['NON_PM', 'HEALTHY_TIN', 'ALL_TRAPS'].includes(key)) || (name === 'rumors' && key === 'WIN_ERR') || (name === 'music' && key === 'A_NONE') || (name === 'version' && key === 'WIN_ERR') || (name === 'priest' && ['A_CHAOTIC', 'A_NONE', 'ALL_TRAPS', 'SPBOOK_no_NOVEL'].includes(key)) || (name === 'light' && key === 'WIN_ERR') || (name === 'steed' && ['DIR_ERR', 'P_ISRESTRICTED'].includes(key)) || (name === 'worm' && key === 'NON_PM') || (name === 'o_init' && ['WIN_ERR', 'NON_PM'].includes(key)) || (name === 'ball' && key === 'override_restriction') || (name === 'mondata' && ['AD_ANY', 'AT_ANY', 'NON_PM', 'ALL_TRAPS'].includes(key))
+            layout[key] = (name === 'minion' && ['NON_PM', 'A_CHAOTIC', 'A_NONE'].includes(key)) || (name === 'iactions' && key === 'GETOBJ_EXCLUDE') || (name === 'selvar' && key === 'W_RANDOM') || (name === 'fountain' && key === 'A_CHAOTIC') || (name === 'monst' && ['NON_PM', 'A_NONE'].includes(key)) || (name === 'shknam' && ['NON_PM', 'HEALTHY_TIN', 'ALL_TRAPS'].includes(key)) || (name === 'rumors' && key === 'WIN_ERR') || (name === 'music' && key === 'A_NONE') || (name === 'version' && key === 'WIN_ERR') || (name === 'priest' && ['A_CHAOTIC', 'A_NONE', 'ALL_TRAPS', 'SPBOOK_no_NOVEL'].includes(key)) || (name === 'light' && key === 'WIN_ERR') || (name === 'steed' && ['DIR_ERR', 'P_ISRESTRICTED'].includes(key)) || (name === 'worm' && key === 'NON_PM') || (name === 'o_init' && ['WIN_ERR', 'NON_PM'].includes(key)) || (name === 'ball' && key === 'override_restriction') || (name === 'mondata' && ['AD_ANY', 'AT_ANY', 'NON_PM', 'ALL_TRAPS'].includes(key)) || (name === 'worn' && key === 'NON_PM') || (name === 'wield' && (key === 'NON_PM' || /^GETOBJ_/.test(key)))
                 ? Number(BigInt.asIntN(64, probe._probe_layout_value(i)))
-                : (name === 'exper' && key === 'LONG_MAX') || (name === 'monst' && /^(M1_|M2_)/.test(key)) || (name === 'music' && (/^(M1_|M2_)/.test(key) || key === 'STRAT_WAITMASK')) || (name === 'priest' && /^(M1_|M2_)/.test(key)) || (name === 'lock' && /^M1_/.test(key)) || (name === 'steed' && /^(M1_|M2_)/.test(key)) || (name === 'wizard' && /^(M1_|M2_|M3_|STRAT_)/.test(key)) || (name === 'ball' && (/^W_/.test(key) || ['LEFT_SIDE', 'RIGHT_SIDE'].includes(key))) || (name === 'mcastu' && /^(M1_|M2_)/.test(key)) || (name === 'dbridge' && /^M1_/.test(key)) || (name === 'mondata' && (/^(M1_|M2_|W_)/.test(key) || key === 'INTRINSIC'))
+                : (name === 'exper' && key === 'LONG_MAX') || (name === 'monst' && /^(M1_|M2_)/.test(key)) || (name === 'music' && (/^(M1_|M2_)/.test(key) || key === 'STRAT_WAITMASK')) || (name === 'priest' && /^(M1_|M2_)/.test(key)) || (name === 'lock' && /^M1_/.test(key)) || (name === 'steed' && /^(M1_|M2_)/.test(key)) || (name === 'wizard' && /^(M1_|M2_|M3_|STRAT_)/.test(key)) || (name === 'ball' && (/^W_/.test(key) || ['LEFT_SIDE', 'RIGHT_SIDE'].includes(key))) || (name === 'mcastu' && /^(M1_|M2_)/.test(key)) || (name === 'dbridge' && /^M1_/.test(key)) || (name === 'mondata' && (/^(M1_|M2_|W_)/.test(key) || key === 'INTRINSIC')) || (name === 'worn' && (/^(M1_|W_)/.test(key) || key === 'I_SPECIAL')) || (name === 'wield' && (/^(M1_|M2_|W_)/.test(key) || ['INTRINSIC', 'I_SPECIAL'].includes(key)))
                 ? String(BigInt.asUintN(64, probe._probe_layout_value(i))) : Number(probe._probe_layout_value(i));
         }
     }
@@ -190,4 +201,5 @@ for (const { name } of JSON.parse(fs.readFileSync(root + 'nethack-c/wasm/tu-port
     layouts[name] = layout;
 }
 fs.writeFileSync(root + 'js/wasm/tu-layouts.json', JSON.stringify(layouts, null, 2) + '\n');
+}
 console.log('Clang-derived TU layouts:', JSON.stringify(layouts));

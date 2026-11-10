@@ -122,6 +122,62 @@ if (!process.argv.includes('--worker')) {
         const kept = cstring(modules[1], datePointers[1]);
         independent._probe_format(946684800n);
         assert.equal(cstring(modules[1], datePointers[1]), kept);
+        // A replay clock is an explicit Module service input. The native oracle
+        // receives the same time_t via its existing Date.now() clock transport,
+        // while the hybrid's host clock deliberately uses a different season.
+        function clearFixedDatetime(module) {
+            const key = allocate(module, 'NETHACK_FIXED_DATETIME');
+            assert.equal(module._probe_set_env(BigInt(key), 0n), 0);
+            module._free(key);
+        }
+        function clockObservation(module) {
+            const parsed = [];
+            for (const text of ['20260115120000', '20260715120000',
+                '20260308023000', '20261101013000']) {
+                const pointer = allocate(module, text);
+                try { parsed.push(module._probe_parse(BigInt(pointer))); }
+                finally { module._free(pointer); }
+            }
+            return {
+                now: module._probe_now(), year: module._probe_year(),
+                date: module._probe_date(0n), time: module._probe_time(0n),
+                moon: module._probe_moon(), friday: module._probe_friday(),
+                night: module._probe_night(), midnight: module._probe_midnight(),
+                formatted: cstring(module, module._probe_format(0n)), parsed,
+            };
+        }
+        const replayClocks = [];
+        clearFixedDatetime(modules[0]);
+        for (const epoch of [1777723200n, 0n, -1n]) {
+            const replay = await hybridFactory({
+                nethackPorted: createPortedRuntime(layouts),
+                nethackCalendarTime: () => epoch,
+            });
+            clearFixedDatetime(replay);
+            const stack = replay._probe_stack();
+            clock = Number(epoch) * 1000;
+            const expected = clockObservation(modules[0]);
+            assert.equal(expected.now, epoch, 'Native C receives the explicit comparison clock');
+            for (const host of ['2026-01-15T12:00:00Z', '2026-07-15T12:00:00Z']) {
+                clock = NativeDate.parse(host);
+                const actual = clockObservation(replay);
+                assert.equal(actual.now, epoch, 'Zero and negative supplied clocks do not fall back to host time');
+                assert.deepEqual(actual, expected, `Explicit clock ${epoch}, host ${host}`);
+                comparisons++;
+                assertStackRestored(replay, stack);
+                scope();
+            }
+            replayClocks.push({ replay, expected, stack });
+        }
+        // Interleaving independent Modules must not replace either clock.
+        clock = NativeDate.parse('2026-07-15T12:00:00Z');
+        for (const index of [0, 2, 0]) {
+            const { replay, expected, stack } = replayClocks[index];
+            assert.deepEqual(clockObservation(replay), expected, 'Per-Module clock remains isolated');
+            comparisons++;
+            assertStackRestored(replay, stack);
+            scope();
+        }
         console.log(`CALENDAR ${process.env.TZ}: ${comparisons} effective-C/hybrid clock, parsing and calendar comparisons checked.`);
     } finally { globalThis.Date = NativeDate; }
 }

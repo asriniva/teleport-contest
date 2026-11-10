@@ -14,3 +14,7 @@ else
     python3 -B scripts/build-tu-probes.py --native-only
 fi
 node scripts/test-native-existing.mjs "$@"
+if (( $# == 0 )); then
+    node scripts/test-native-terminal-transport.mjs
+    node scripts/test-native-library-differences.mjs
+fi

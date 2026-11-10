@@ -16,9 +16,9 @@ import { C } from './c-runtime.js';
 
 /* JavaScript translation of ioctl.c for the effective POSIX game build.
  * All four active function boundaries remain unchanged. The original
- * getwindowsz body is inactive because USE_WIN_IOCTL is absent in this
- * configuration; no sizing behavior is disabled by this port. C retains the
- * single shared termios struct, libc calls, messages and window callbacks.
+ * native getwindowsz body queries the terminal and retains each old dimension
+ * when the returned dimension is zero. C retains shared terminal storage;
+ * the JS transport converts the native ABI to the SDK ABI at actual I/O calls.
  * Signal-handler sentinels remain generated uint64 BigInt values, preserving
  * SIG_IGN's actual bits. Other OS branches and catch_stp remain explicitly
  * inactive/unported C comments below, not replacement terminal support.
@@ -141,20 +141,18 @@ export function getwindowsz()
      * winsize is found on Suns, BSD, and Ultrix
      */
 
-//     struct winsize ttsz;
+    const ttsz=C.winsizeLocal();
 
-//     if (ioctl(fileno(stdin), (int) TIOCGWINSZ, (char *) &ttsz) != -1) {
+    if (C.ioctl(C.fileno(C.stdin),C.TIOCGWINSZ,ttsz) != -1) {
         
 /*
          * Use the kernel's values for lines and columns if it has
          * any idea.
          */
 
-//         if (ttsz.ws_row)
-//             LI = ttsz.ws_row;
-//         if (ttsz.ws_col)
-//             CO = ttsz.ws_col;
-//     }
+        if(C.windowRow(ttsz))C.LI=C.windowRow(ttsz);
+        if(C.windowColumn(ttsz))C.CO=C.windowColumn(ttsz);
+    }
 // #endif
 }
 
