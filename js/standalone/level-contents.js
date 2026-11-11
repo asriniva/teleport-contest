@@ -8,7 +8,7 @@ import abi from './trap-abi.json' with {type:'json'};
 import * as trap from '../ported/trap.js';
 import {invocation_pos,in_rooms} from '../ported/hack.js';
 import {callTrap} from '../ported/trap-runtime.js';
-import {has_dnstairs,has_upstairs,inside_room,somex,somey,somexy,somexyspace} from '../ported/mkroom.js';
+import {has_dnstairs,has_upstairs,inside_room,somex,somey,somexy,somexyspace,save_rooms} from '../ported/mkroom.js';
 import {enableSchemaPort} from './schema-port.js';
 export function enableLevelContents(environment,layouts,creation){
  if(!environment.hasFunction('m_dowear'))environment.enableMonsterInventory(layouts);
@@ -33,7 +33,9 @@ export function enableLevelContents(environment,layouts,creation){
  const room=creation.context(layouts.mkroom),{views}=creation;
  for(const [name,type]of [['gs','struct instance_globals_s'],['svr','struct instance_globals_saved_r']])Object.defineProperty(room,name,{value:views.record(type,environment.requireGlobal(name))});
  Object.assign(room,{bool:v=>Number(Boolean(v)),IS_WALL:t=>Boolean(t&&t<=layouts.mkroom.DBWALL),roomDifference:(a,b)=>BigInt(environment.address(a)-environment.address(b))/BigInt(environment.ctypes.size('struct mkroom'))});
+ room.nroomRef=()=>({address:environment.ctypes.locate('struct instance_globals_saved_n',environment.requireGlobal('svn'),'nroom').at});
+ for(const type of ['int','mkroom'])room['Sfo_'+type]=(fp,p,tag)=>environment.resolve('sfo_'+type)(environment.address(fp),environment.address(p),typeof tag==='string'?environment.services.literal(tag):environment.address(tag));
  for(const kind of ['rn1','rn2','rnd'])room[kind]=(...args)=>{const count=kind==='rn1'?2:1,[line,caller]=args.slice(count);if(environment.services.rng_log_enabled())environment.services.rng_log_set_caller(environment.services.literal('mkroom.c'),line,environment.services.literal(caller));return kind==='rn1'?environment.transport.int(environment.services.rn2(environment.transport.int(args[0]))+environment.transport.int(args[1])):environment.services[kind](...args.slice(0,count));};
- environment.register('room-queries',{has_dnstairs,has_upstairs,inside_room,somex,somey,somexy,somexyspace},room,{prepareArgs:(name,args)=>{args[0]=views.record('struct mkroom',args[0]);if(['somexy','somexyspace'].includes(name))args[1]=views.record('coord',args[1]);return args;}});
+ environment.register('room-queries',{has_dnstairs,has_upstairs,inside_room,somex,somey,somexy,somexyspace,save_rooms},room,{prepareArgs:(name,args)=>{if(name==='save_rooms'){args[0]=environment.address(args[0]);return args;}args[0]=views.record('struct mkroom',args[0]);if(['somexy','somexyspace'].includes(name))args[1]=views.record('coord',args[1]);return args;}});
  return {traps,room,vision,randomText,limitation:'Trap and room dependency integration in progress; complete level generation and full-game recording are not accepted.'};
 }

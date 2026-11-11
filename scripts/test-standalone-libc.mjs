@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {VFSError} from '../js/services/c-vfs.js';
 const root=process.env.STANDALONE_REFERENCE_ROOT;if(!root)throw new Error('Missing STANDALONE_REFERENCE_ROOT');
 const scratch=path.resolve('.cache/standalone-libc');fs.mkdirSync(scratch,{recursive:true});
 // musl's atomic header supplies this mathematical trailing-zero operation.
@@ -51,4 +52,8 @@ const copyOracle=spawnSync(path.join(scratch,'probe'),['bytes'],{encoding:'utf8'
 const copyOut=memory.malloc(16),copySource=s.literal('ab'),copyActual=[];
 for(const n of [0,1,2,3,7,16]){memory.memset(copyOut,0xa5,16);const result=s.strncpy(copyOut,copySource,BigInt(n));copyActual.push([n,Number(result===copyOut),Buffer.from(memory.readBytes(copyOut,16)).toString('hex')].join(':'));}
 assert.deepEqual(copyActual,copyOracle.stdout.trim().split('\n'),'C size_t64 bounded copying and zero padding');
-console.log(`PASS: ${cases.length} exact original-musl qsort output/comparator traces, stable NetHack sorting, hacklib utilities bounded scanner contracts and6 C size_t64 strncpy cases.`);
+const creatOracle=spawnSync(path.join(scratch,'probe'),['creat',path.join(scratch,'creat-native.bin')],{encoding:'utf8'});assert.equal(creatOracle.status,0,creatOracle.stderr);
+const files=createStandaloneEnvironment(),io=files.enableStdio(),payload=files.memory.cstring('abc');let fd=io.creat('/creat',0o640);assert.ok(fd>=3);assert.equal(io.write(fd,payload,3),3);assert.equal(io.close(fd),0);
+fd=io.creat('/creat',0o600);const stat=files.filesystem.fstat(fd),badRead=io.read(fd,payload,1),creatActual=[[Number(fd>=0),stat.size,(stat.mode&0o777).toString(8),Number(badRead===-1&&files.libc.errno===new VFSError('EBADF').errno)].join(',')];assert.equal(io.close(fd),0);
+const absent=io.creat('/creat.missing/file',0o600);creatActual.push([absent,Number(files.libc.errno===new VFSError('ENOENT').errno)].join(','));assert.deepEqual(creatActual,creatOracle.stdout.trim().split('\n'),'C creat truncation, permissions, write-only descriptor and missing-parent failure');
+console.log(`PASS: ${cases.length} exact original-musl qsort output/comparator traces, stable NetHack sorting, hacklib utilities bounded scanner contracts and6 C size_t64 strncpy cases plus C creat file contracts.`);

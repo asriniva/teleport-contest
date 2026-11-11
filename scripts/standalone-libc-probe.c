@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <errno.h>
 void __qsort_r(void *,size_t,size_t,int (*)(const void *,const void *,void *),void *);
 static int *base;
 static int cmp(const void *a,const void *b,void *arg) {
@@ -34,6 +38,16 @@ static int bounded_copies(void) {
     return 0;
 }
 int main(int argc,char **argv) {
+    if(argc>2&&argv[1][0]=='c'){
+        mode_t prior=umask(0);int fd=creat(argv[2],0640);if(fd<0)return 77;
+        if(write(fd,"abc",3)!=3||close(fd))return 78;
+        fd=creat(argv[2],0600);struct stat info;if(fd<0||fstat(fd,&info))return 79;
+        char byte;int unreadable=read(fd,&byte,1)<0&&errno==EBADF;
+        printf("%d,%lld,%o,%d\n",fd>=0,(long long)info.st_size,info.st_mode&0777,unreadable);close(fd);
+        char absent[4096];snprintf(absent,sizeof absent,"%s.missing/file",argv[2]);errno=0;
+        int bad=creat(absent,0600);printf("%d,%d\n",bad,errno==ENOENT);
+        unlink(argv[2]);umask(prior);return 0;
+    }
     if(argc>1&&argv[1][0]=='b')return bounded_copies();
     if(argc>1)return scans();
     int n;

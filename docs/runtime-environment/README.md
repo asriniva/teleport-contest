@@ -13,33 +13,32 @@ subsets, transport-only adapters, active integration and unconnected modules.
 Provider libraries such as Lua/libc/CVFS are outside that denominator. No row's
 component status implies full-game recording equivalence.
 
-The pet integration now reaches original inventory/attribute startup after actual
-pet creation. `scripts/test-standalone-pet-startup.mjs` passes 385 original-C
-comparisons, including terminal input controls, Charisma clamps, close-up/photo
-history, apparent hero location, companion reinitialization and actual named,
-default/random dog/cat and saddled/pauper pony creation on defined empty-room
-inputs. It compares placement and monster fields, complete EDOG records,
-allocated names, saddle nonpointer bytes, owner/worn mask, discovery table and
-exact RNG logs. No-pet preference is also checked. Pointer addresses in saddle
-records are normalized; their owner ID is compared in its original scalar slot.
-This does not establish full DOG/MON/MONMOVE behavior or recording equivalence.
-The next real startup boundary is the U_INIT header-macro transport needed by
-`u_init_inventory_attrs`. The expanded34-check regression gate passes. A separate actual-startup fixture
-reaches inventory setup after pet creation with Wasm/network capabilities
-forbidden. All138 translated policies and three frozen files are unchanged.
+The latest accepted checkpoint is `9e849bd` on main. Real source `initoptions`
+now precedes level/pet/inventory/attribute creation and the initial map/status
+render. The 38-check gate passes. The first-display comparison passes 10,881
+original-C checks over all13 roles and three seeds, including exact terminal
+bytes with initialized symbols/visible hero, complete observed terrain/vision
+state and whole-prefix RNG logs. The JS prefix runs with Wasm/network access
+forbidden. GLYPHS additionally passes479,795 header/cache/memchr comparisons.
+This accepts that prefix, which stops before `u_init_skills_discoveries`.
 
-Starting inventory/attribute integration now completes original
-`u_init_inventory_attrs` and reaches DISPLAY `vision_recalc` in actual newgame.
-The new classification reference checks16 original obj.h macros for every item
-and ordinary/Snickersnee inputs (15,642 comparisons including terminal controls).
-The inventory/attributes reference passes36,288 comparisons over324 explicit
-role/race/seed/roleplay inputs. It compares shared hero/global state, actual
-inventory order/contents and nonpointer record bytes, available name strings and
-exact RNG logs after original hero initialization and explicit source ident=2.
-Item pointer addresses/union owner pointers are normalized; arbitrary owner
-identity graphs, equipment activation, skills/discoveries and later gameplay
-remain unaccepted. The Wasm/network-disabled actual startup fixture reaches
-unconnected display recalculation. The expanded36-check regression gate passes. These references use original configured C; production remains pure JS.
+The separate worktree is continuing through skills, starting equipment, legacy
+pager, input/history/messages and DO/SAVE lifecycle transport. Preliminary
+skills/equipment prefixes passed39 ordinary cases plus8 targeted blind/nudist/
+deaf/pauper cases. Focused armor removal/reapplication and real callback
+cancellation cases pass; a wizard-cloak case observes actual resistance-memory
+clears and retained64-bit monster state. Broader review fixes and new providers
+still await the expanded regression gate; these are not accepted complete
+modules or a playable backend.
+
+Remaining major stages are complete startup (including original metadata/date
+population, checkpointing and welcome), ALLMAIN turn-loop/preamble (which also
+applies starting-gear side effects via `set_wear`), gameplay dependency closure,
+level/save/restore/end-game lifecycle, a production entry and full C-versus-JS
+game recording acceptance. The module ledger separates committed evidence from
+working-tree progress; no count of imported/registered modules is a count of
+completed subsystems. Historical component details below retain their specific
+fixture limits and do not describe the latest startup boundary.
 
 ## Implemented scope
 

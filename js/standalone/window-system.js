@@ -32,6 +32,7 @@ export function enableWindowSystem(environment,layouts){
   alloc:n=>environment.alloc('alloc',n),free:p=>services.free(address(p)),memset:(p,v,n)=>services.memset(address(p),v,n),memcpy:(a,b,n)=>services.memcpy(address(a),address(b),n),
  });
  for(const name of ['strlen','strcpy','strcat','strcmp','strncmp','strncpy','strchr','strrchr','strstr','puts','fputs'])if(typeof services[name]==='function')t[name]=(...args)=>{const count=['strncmp','strncpy','strcpy','strcat','strcmp','strstr'].includes(name)?2:1;return services[name](...args.map((v,i)=>i<count?text(v):v));};
+ t.strlen=p=>BigInt(services.strlen(text(p)));
  initializeWintty(t,L);
  const ttyNames=Object.keys(abi.callbacks.wintty).filter(name=>Object.hasOwn(publicFunctions.functions,name)&&typeof tty[name]==='function'&&!environment.hasFunction(name));
  environment.register('wintty',Object.fromEntries(ttyNames.map(name=>[name,(...args)=>callWintty(t,L,name,...args)])));

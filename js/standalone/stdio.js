@@ -1,6 +1,6 @@
 // Synchronous stdio on CVFS. FILE addresses are opaque; buffers, including
 // caller-supplied buffers, live in CMemory and survive memory growth.
-import {VFSError} from '../services/c-vfs.js';
+import {VFSError,O_WRONLY,O_CREAT,O_TRUNC} from '../services/c-vfs.js';
 import {address} from './memory-services.js';
 export function createStdio(memory,filesystem,libc,{stdin=new Uint8Array(),stdout,stderr}={}) {
     const files=new Map(),output=[[],[]];let inputOffset=0;
@@ -103,6 +103,7 @@ export function createStdio(memory,filesystem,libc,{stdin=new Uint8Array(),stdou
         captured(fd){if(fd!==1&&fd!==2)throw new RangeError('Unknown output fd');const parts=output[fd-1],bytes=new Uint8Array(parts.reduce((n,p)=>n+p.length,0));let at=0;for(const p of parts){bytes.set(p,at);at+=p.length;}return bytes;},
     };
     api.getc=api.fgetc;api.putc=api.fputc;api.getchar=()=>api.fgetc(api.stdin);api.putchar=c=>api.fputc(c,api.stdout);
+    api.creat=(path,mode)=>api.open(path,O_WRONLY|O_CREAT|O_TRUNC,mode);
     api.rewind=p=>{api.fseek(p,0,0);api.clearerr(p);};
     api.fgets=(p,n,file)=>{p=address(p);n=Number(n);if(n<=0)return 0;memory.bounds(p,n);let i=0;while(i<n-1){const c=api.fgetc(file);if(c===-1)break;memory.HEAPU8[p+i++]=c;if(c===10)break;}if(!i&&n>1)return 0;memory.HEAPU8[p+i]=0;return p;};
     api.fputs=(str,p)=>{if(typeof str==='string'){const at=memory.cstring(str);try{return api.fputs(at,p);}finally{memory.free(at);}}const n=memory.strlen(address(str));return api.fwrite(str,1,n,p)===n?0:-1;};

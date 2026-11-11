@@ -61,6 +61,15 @@ import {enableLevelContents} from './level-contents.js';
 import {enableLevelStartup} from './level-startup.js';
 import {enableDisplayStartup} from './display-startup.js';
 import {enableHeroStartup} from './hero-startup.js';
+import {enableHeroEquipment} from './hero-equipment.js';
+import {enableQuestPager} from './quest-pager.js';
+import {enableDoLifecycle} from './do-lifecycle.js';
+import {enableTerminalInput} from './terminal-input.js';
+import {enableSaveLifecycle} from './save-lifecycle.js';
+import {enableTerminalMessages} from './terminal-messages.js';
+import {enableMessages} from './messages.js';
+import {enableRuntimeInfo} from './runtime-info.js';
+import {enableTurnLoop} from './turn-loop.js';
 import {enableGameStartup} from './game-startup.js';
 
 export function createStandaloneEnvironment(options={}) {
@@ -83,7 +92,7 @@ export function createStandaloneEnvironment(options={}) {
     });
     const modules=new Map(),owners=new Map(),globals=new Map(),states=new Map();
     const deferredFunctions=new Map(),symbolPointers=new Map();
-    const addressAdapters=new Map();let itemInventory,monsterSelection,monsterCreation;
+    const addressAdapters=new Map();let itemInventory,monsterSelection,monsterCreation,heroStartup;
     function functionPointer(name,signature,invoke) {
         const previous=symbolPointers.get(name);
         if(previous){if(previous.signature!==signature)throw new Error('Conflicting C function prototype '+name);return previous.id;}
@@ -296,7 +305,16 @@ export function createStandaloneEnvironment(options={}) {
         enableLevelContents:layouts=>{if(!monsterCreation)throw new Error('Level contents requires monster services');return enableLevelContents(environment,layouts,monsterCreation);},
         enableLevelStartup:layouts=>{if(!monsterCreation)throw new Error('Level startup requires monster services');return enableLevelStartup(environment,layouts,monsterCreation);},
         enableDisplayStartup:layouts=>{if(!monsterCreation)throw new Error('Display startup requires monster services');return enableDisplayStartup(environment,layouts,monsterCreation);},
-        enableHeroStartup:layouts=>{if(!monsterCreation||!itemInventory)throw new Error('Hero startup requires monster/inventory services');return enableHeroStartup(environment,layouts,monsterCreation,itemInventory);},
+        enableHeroStartup:layouts=>{if(!monsterCreation||!itemInventory)throw new Error('Hero startup requires monster/inventory services');return heroStartup=enableHeroStartup(environment,layouts,monsterCreation,itemInventory);},
+        enableHeroEquipment:layouts=>{if(!heroStartup)throw new Error('Equipment requires hero startup');return enableHeroEquipment(environment,layouts,heroStartup);},
+        enableQuestPager:layouts=>enableQuestPager(environment,layouts),
+        enableDoLifecycle:layouts=>enableDoLifecycle(environment,layouts),
+        enableTerminalInput:(layouts,options)=>enableTerminalInput(environment,layouts,options),
+        enableSaveLifecycle:layouts=>enableSaveLifecycle(environment,layouts),
+        enableTerminalMessages:layouts=>enableTerminalMessages(environment,layouts),
+        enableMessages:layouts=>enableMessages(environment,layouts),
+        enableRuntimeInfo:layouts=>enableRuntimeInfo(environment,layouts),
+        enableTurnLoop:layouts=>{const context=states.get('game-startup-context');if(!context)throw new Error('Turn loop requires game startup');return enableTurnLoop(environment,layouts,{environment:context});},
         enableGameStartup:layouts=>{if(!monsterCreation)throw new Error('Game startup requires monster services');const startup=enableGameStartup(environment,layouts,monsterCreation);states.set('game-startup-context',startup.environment);return startup;},
         enableSerialization:layouts=>enableSerialization(environment,layouts),
         enableTerminal:(layout,options)=>enableTerminal(environment,layout,options),

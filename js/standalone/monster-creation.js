@@ -10,7 +10,7 @@ import {newepri,free_epri,mon_aligntyp} from '../ported/priest.js';
 import {newegd,free_egd} from '../ported/vault.js';
 import {neweshk,free_eshk} from '../ported/shknam.js';
 import {quest_info} from '../ported/questpgr.js';
-import {new_light_source,del_light_source,do_light_sources} from '../ported/light.js';
+import {new_light_source,del_light_source,do_light_sources,save_light_sources,restore_light_sources,relink_light_sources,find_mid} from '../ported/light.js';
 import {monst_to_any} from '../ported/hack.js';
 import {withCEnvironment} from '../ported/c-runtime.js';
 export function enableMonsterCreation(environment,layouts,selection){
@@ -130,6 +130,14 @@ export function enableMonsterCreation(environment,layouts,selection){
  environment.register('monster-quest-info',{quest_info},context(layouts.questpgr));
  const light=context(layouts.light);Object.assign(light,{
   lightSource:p=>record('struct ls_t',p),lightSourceSize:ctypes.size('struct ls_t'),
+  intLocal:(value=0)=>{const at=transport.stackAlloc(ctypes.size('int'));ctypes.store('int',at,value);return Object.defineProperty({address:at},'value',{get:()=>ctypes.load('int',at),set:next=>ctypes.store('int',at,next)});},
+  uintLocal:(value=0)=>{const at=transport.stackAlloc(ctypes.size('unsigned int'));ctypes.store('unsigned int',at,value);return Object.defineProperty({address:at},'value',{get:()=>ctypes.load('unsigned int',at),set:next=>ctypes.store('unsigned int',at,next)});},
+  update_file:nhfp=>nhfp.mode&(layouts.light.COUNTING|layouts.light.WRITING),release_data:nhfp=>nhfp.mode&layouts.light.FREEING,
+  obj_is_local:obj=>environment.resolve('obj_is_local')(environment.address(obj)),
+  // LIGHT owns this source-local macro; TIMEOUT's private traversal is distinct.
+  mon_is_local:mon=>Number(mon.mx>0),
+  find_oid:id=>record('struct obj',environment.resolve('find_oid')(transport.uint(id))),
+  lookup_id_mapping:(id,ref)=>environment.resolve('lookup_id_mapping')(transport.uint(id),environment.address(ref)),
   anyLocal:()=>record('union any',transport.stackAlloc(ctypes.size('union any'))),
   copyAny:(to,from)=>env.copyRecord(to,from,ctypes.size('union any')),
   assert:condition=>{if(!condition)throw new Error('Light owner assertion failed');},
@@ -139,7 +147,12 @@ export function enableMonsterCreation(environment,layouts,selection){
   get_mon_location:(m,x,y,f)=>environment.resolve('get_mon_location')(environment.address(m),x.address,y.address,f),
 
  });
- environment.register('monster-lights',{new_light_source,del_light_source,do_light_sources},light,{prepareArgs:(fn,args)=>{if(fn==='do_light_sources'){const p=environment.address(args[0]);args[0]=new Proxy({address:p},{get:(o,k)=>/^\d+$/.test(String(k))?views.array('unsigned char',ctypes.load('void *',p+Number(k)*8),layouts.vision.COLNO):Reflect.get(o,k)});}else args[fn==='new_light_source'?4:1]=record('union any',args[fn==='new_light_source'?4:1]);return args;}});
+ Object.defineProperty(light,'gy',{value:record('struct instance_globals_y',environment.requireGlobal('gy'))});
+ const lightLink=at=>Object.defineProperty({address:at},'value',{get:()=>record('struct ls_t',ctypes.load('struct ls_t *',at)),set:value=>ctypes.store('struct ls_t *',at,value)});
+ light.lightHeadRef=()=>lightLink(ctypes.locate('struct instance_globals_l',environment.requireGlobal('gl'),'light_base').at);
+ light.lightNextRef=ls=>lightLink(environment.address(ls)+ctypes.record('struct ls_t').fields.next.offset);
+ for(const direction of ['sfo','sfi'])for(const type of ['int','ls_t'])light[(direction==='sfo'?'Sfo_':'Sfi_')+type]=(file,data,tag)=>environment.resolve(direction+'_'+type)(environment.address(file),environment.address(data),typeof tag==='string'?services.literal(tag):environment.address(tag));
+ environment.register('monster-lights',{new_light_source,del_light_source,do_light_sources,save_light_sources,restore_light_sources,relink_light_sources,find_mid},light,{prepareArgs:(fn,args)=>{if(fn==='do_light_sources'){const p=environment.address(args[0]);args[0]=new Proxy({address:p},{get:(o,k)=>/^\d+$/.test(String(k))?views.array('unsigned char',ctypes.load('void *',p+Number(k)*8),layouts.vision.COLNO):Reflect.get(o,k)});}else if(['save_light_sources','restore_light_sources'].includes(fn))args[0]=record('struct nh_file',args[0]);else if(['new_light_source','del_light_source'].includes(fn))args[fn==='new_light_source'?4:1]=record('union any',args[fn==='new_light_source'?4:1]);return args;}});
  environment.register('monster-anything',{monst_to_any},Object.assign(Object.create(env),{sizes:{any:ctypes.size('union any')}}),{prepareArgs:(_fn,args)=>[record('struct monst',args[0])]});
  environment.exposeAddressPort('dungeon',['In_V_tower','In_mines']);
  if(!Object.hasOwn(environment.status(),'cmd-geometry'))environment.enableCommandGeometry();

@@ -6,9 +6,9 @@ import {callPolyself} from '../ported/polyself-runtime.js';
 import * as attrib from '../ported/attrib.js';
 import {createAttribEnvironment} from '../ported/attrib-runtime.js';
 import {valid_vampshiftform} from '../ported/mon.js';
-import {resists_drli,dmgtype,dmgtype_fromattack} from '../ported/mondata.js';
+import {resists_drli,dmgtype,dmgtype_fromattack,cvt_prop_to_mseenres,monstunseesu} from '../ported/mondata.js';
 import {newpw} from '../ported/exper.js';
-import {spell_skilltype,initialspell,num_spells} from '../ported/spell.js';
+import {spell_skilltype,initialspell,num_spells,skill_based_spellbook_id} from '../ported/spell.js';
 import {hidden_gold} from '../ported/vault.js';
 import {init_uhunger} from '../ported/eat.js';
 import {max_rank_sz} from '../ported/botl.js';
@@ -83,6 +83,12 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
  });
  for(const key of ['uarm'])Object.defineProperty(biology,key,{get:()=>record('struct obj',ctypes.load('struct obj *',environment.requireGlobal(key)))});
  environment.register('hero-monster-resistance',{resists_drli,dmgtype,dmgtype_fromattack},biology,{prepareArgs:(fn,args)=>{args[0]=record(fn==='resists_drli'?'struct monst':'struct permonst',args[0]);return args;}});
+ Object.assign(biology,{uchar:transport.uchar,ulong:transport.ulong,
+  m_canseeu:m=>{const u=record('struct you',environment.requireGlobal('u')),p=u.uprops[layouts.mondata.INVIS],invisible=(p.intrinsic||p.extrinsic)&&!p.blocked;if((invisible&&!(m.data.mflags1&BigInt(layouts.mondata.M1_SEE_INVIS)))||u.uinwater)return 0;const root=ctypes.locate('struct instance_globals_v',environment.requireGlobal('gv'),'viz_array').at,rows=Number(memory.view.getBigUint64(root,true)),row=Number(memory.view.getBigUint64(rows+m.my*8,true));return Number(Boolean(memory.HEAPU8[row+m.mx]&layouts.mondata.COULD_SEE));},
+  m_clearseenres:(m,mask)=>{m.seen_resistance=BigInt.asUintN(64,m.seen_resistance&~BigInt(mask));},
+ });
+ for(const [key,value]of Object.entries(layouts.mondata))if(key.startsWith('M_SEEN_'))biology[key]=BigInt(value);
+ environment.register('hero-monster-resistance-memory',{cvt_prop_to_mseenres,monstunseesu},biology);
  environment.register('hero-form',{set_uasmon:(...args)=>callPolyself(poly,layouts.polyself,'set_uasmon',...args)});
  const a=shadow(foreign(),['u','gu','gy','gi','svm','gm','svc','svk','flags','program_state','disp','mons','aligns','objects']);
  const ag=['u','gu.urole','gu.urace','gy.youmonst','gi.invent','svm.moves','gm.multi','svc.context.next_attrib_check','svk.killer.format','svk.killer.name','flags.initalign','flags.verbose','program_state.in_moveloop',null,'mons','aligns'];
@@ -103,10 +109,10 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
  const attr=createAttribEnvironment(a,layouts.attrib,attrib);environment.register('hero-attributes',{newhp:attrib.newhp,adjabil:attrib.adjabil,acurr:attrib.acurr,acurrstr:attrib.acurrstr,exercise:attrib.exercise,init_attr:attrib.init_attr,vary_init_attr:attrib.vary_init_attr,adjattrib:attrib.adjattrib},attr);
  const power=context(layouts.exper);Object.assign(power,{xint16:transport.short,rnd:(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('exper.c'),line,services.literal(caller));return services.rnd(n);}});environment.register('hero-energy',{newpw},power);
  const vault=context(layouts.vault);vault.Has_contents=o=>Number(Boolean(o.cobj));vault.contained_gold=(o,known)=>environment.resolve('contained_gold')(address(o),known);environment.exposeAddressPort('shk',['contained_gold']);environment.register('inventory-hidden-gold',{hidden_gold},vault);
- const spells=context(layouts.spell);Object.defineProperty(spells,'svs',{value:record('struct instance_globals_saved_s',environment.requireGlobal('svs'))});spells.OBJ_NAME=o=>descriptors[o.oc_name_idx].oc_name;environment.register('initial-spells',{spell_skilltype,initialspell,num_spells},spells,{prepareArgs:(fn,args)=>{if(fn==='initialspell')args[0]=record('struct obj',args[0]);return args;}});
+ const spells=context(layouts.spell);for(const key of ['svs','svb'])Object.defineProperty(spells,key,{value:record('struct instance_globals_saved_'+key.slice(-1),environment.requireGlobal(key))});spells.OBJ_NAME=o=>descriptors[o.oc_name_idx].oc_name;spells.Role_if=n=>record('struct instance_globals_u',environment.requireGlobal('gu')).urole.mnum===n;spells.uchar=transport.uchar;spells.P_SKILL=n=>record('struct you',environment.requireGlobal('u')).weapon_skills[n].skill;environment.register('initial-spells',{spell_skilltype,initialspell,num_spells,skill_based_spellbook_id},spells,{prepareArgs:(fn,args)=>{if(fn==='initialspell')args[0]=record('struct obj',args[0]);return args;}});
  const hunger=context(layouts.eat);Object.defineProperty(hunger,'disp',{value:record('struct display_hints',environment.requireGlobal('disp'))});environment.register('hero-hunger',{init_uhunger},hunger);
  const rank=context(layouts.botl);rank.strlen=p=>Number(services.strlen(p));environment.register('hero-rank-size',{max_rank_sz},rank);
  environment.exposeAddressPort('display',['reset_glyphmap']);
  environment.register('hero-clock',{getnow:()=>environment.calendar('getnow')});
- return {ui,tables,poly,limitation:'Hero initialization dependency integration in progress; source callbacks/UI and inventory/skills require their actual owners.'};
+ return {ui,tables,poly,enableSkills:()=>environment.extend('hero-init',{u_init_skills_discoveries:(...args)=>bridge(ui,'u_init_skills_discoveries',...args)}),limitation:'Hero initialization dependency integration in progress; source callbacks/UI and inventory/skills require their actual owners.'};
 }
