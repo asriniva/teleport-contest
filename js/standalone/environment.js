@@ -86,6 +86,14 @@ import {enableRead} from './read.js';
 import {enableSpell} from './spell.js';
 import {enableExplode} from './explode.js';
 import {enableDig} from './dig.js';
+import {enableWizard} from './wizard.js';
+import {enableMplayer} from './mplayer.js';
+import {enableMinion} from './minion.js';
+import {enableGetpos} from './getpos.js';
+import {enableMondata} from './mondata.js';
+import {enableSteal} from './steal.js';
+import {enableDokick} from './dokick.js';
+import {enableLight} from './light.js';
 import {enableRip} from './rip.js';
 import {enableShknam} from './shknam.js';
 import {enableInsight} from './insight.js';
@@ -373,6 +381,14 @@ export function createStandaloneEnvironment(options={}) {
         enableSpell:layouts=>enableSpell(environment,layouts),
         enableExplode:layouts=>enableExplode(environment,layouts),
         enableDig:layouts=>enableDig(environment,layouts),
+        enableWizard:layouts=>enableWizard(environment,layouts),
+        enableMplayer:layouts=>enableMplayer(environment,layouts),
+        enableMinion:layouts=>enableMinion(environment,layouts),
+        enableGetpos:layouts=>enableGetpos(environment,layouts),
+        enableMondata:layouts=>enableMondata(environment,layouts),
+        enableSteal:layouts=>enableSteal(environment,layouts),
+        enableDokick:layouts=>enableDokick(environment,layouts),
+        enableLight:layouts=>enableLight(environment,layouts),
         enableRip:layouts=>enableRip(environment,layouts),
         enableShknam:layouts=>enableShknam(environment,layouts),
         enableInsight:layouts=>enableInsight(environment,layouts),

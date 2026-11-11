@@ -6,7 +6,7 @@ import {may_passwall} from '../ported/hack.js';
 import {sticks} from '../ported/mondata.js';
 import {m_in_air} from '../ported/mon.js';
 import {engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at,read_engr_at,u_wipe_engr,freehand} from '../ported/engrave.js';
-import {obj_delivery,ship_object,down_gate} from '../ported/dokick.js';
+import {enableDokick} from './dokick.js';
 import {hliquid,hliquids} from '../ported/do_name.js';
 import {makemon_rnd_goodpos,m_initgrp} from '../ported/makemon.js';
 import {debugcore,nh_basename,fqname} from '../ported/files.js';
@@ -88,11 +88,9 @@ export function enableWorldPosition(environment,layouts,creation){
  for(const name of ['pline','You','You_see','impossible'])engr[name]=(...args)=>environment.resolve(name)(...args.map(p=>typeof p==='string'?services.literal(p):p?.address??p));
  Object.defineProperty(engr,'head_engr',{get:()=>record('struct engr',ctypes.load('struct engr *',environment.requireGlobal('head_engr'))),set:v=>ctypes.store('struct engr *',environment.requireGlobal('head_engr'),v)});
  environment.register('world-engravings',{engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at,read_engr_at,u_wipe_engr,freehand},engr,{prepareArgs:(fn,a)=>{if(fn==='read_engr_at'){a[0]=transport.short(a[0]);a[1]=transport.short(a[1]);}if(fn==='sengr_at'&&typeof a[0]==='string')a[0]=services.literal(a[0]);if(fn==='make_engr_at')for(const i of [2,3])if(typeof a[i]==='string')a[i]=services.literal(a[i]);return a;}});
- const delivery=context(layouts.dokick);delivery.levelLocal=()=>record('d_level',transport.stackAlloc(ctypes.size('d_level')));
- Object.defineProperty(delivery,'gg',{value:record('struct instance_globals_g',environment.requireGlobal('gg'))});
- Object.defineProperty(delivery,'qstart_level',{get:()=>world.svd.dungeon_topology.d_qstart_level});
- delivery.stairway_at=(x,y)=>record('struct stairway',services.stairway_at(x,y));delivery.t_at=(x,y)=>record('struct trap',services.t_at(x,y));delivery.on_level=(a,b)=>services.on_level(environment.address(a),environment.address(b));delivery.is_hole=t=>Number(t===layouts.dokick.HOLE||t===layouts.dokick.TRAPDOOR);
- environment.register('object-delivery',{obj_delivery,ship_object,down_gate},delivery,{prepareArgs:(fn,args)=>fn==='down_gate'?[transport.short(args[0]),transport.short(args[1])]:fn==='ship_object'?[record('struct obj',args[0]),transport.short(args[1]),transport.short(args[2]),transport.char(args[3])]:[transport.char(args[0])]});
+ const delivery=enableDokick(environment,layouts);
+ // Retain these original public owners, forwarding to the one DOKICK context.
+ environment.register('object-delivery',Object.fromEntries(delivery.deliveryNames.map(name=>[name,(...args)=>delivery.call(name,...args)])),delivery.services);
  const liquid=context(layouts.do_name);
  Object.assign(liquid,{hliquids:hliquids.map(services.literal),charPointer:text,program_state:record('struct sinfo',environment.requireGlobal('program_state'))});
  Object.defineProperty(liquid,'Hallucination',{get:()=>{const p=world.u.uprops[layouts.do_name.HALLUC],r=world.u.uprops[layouts.do_name.HALLUC_RES];return Number(Boolean(p.intrinsic&&!r.intrinsic&&!r.extrinsic));}});

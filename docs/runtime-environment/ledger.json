@@ -4,12 +4,12 @@
   "acceptedCheckpoint": "d3f8cce27971690b66ef42555070b5d0eef252d2",
   "counts": {
     "canonical-dependency": 1,
-    "in-progress": 37,
-    "not-connected": 14,
+    "in-progress": 47,
+    "not-connected": 9,
     "provider-only": 1,
-    "transport-only": 5,
+    "transport-only": 4,
     "verified-component": 10,
-    "verified-subset": 70
+    "verified-subset": 66
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -148,8 +148,9 @@
     {
       "module": "mplayer",
       "source": "src/mplayer.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "170 comparisons: original ordinary NPC creation, gear and speech; Astral special gear/names and actual endgame scheduling unverified.",
+      "evidence": "scripts/test-standalone-mplayer.mjs"
     },
     {
       "module": "exper",
@@ -195,9 +196,9 @@
     {
       "module": "minion",
       "source": "src/minion.c",
-      "status": "verified-subset",
-      "scope": "newemin/free_emin ownership only; summons/guardian/world behavior unfinished.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
+      "status": "in-progress",
+      "scope": "233 comparisons: actual lawful/neutral summons and guardian gain/loss; demon bargaining, transient light branches and ordinary endgame arrival remain unverified.",
+      "evidence": "scripts/test-standalone-minion.mjs"
     },
     {
       "module": "iactions",
@@ -215,9 +216,9 @@
     {
       "module": "steal",
       "source": "src/steal.c",
-      "status": "verified-subset",
-      "scope": "mpickobj/findgold through normal monster initial inventory; theft/unpaid/visible world paths unfinished.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
+      "status": "in-progress",
+      "scope": "217 comparisons: one original source context, actual immediate nymph item/armor theft and ownership, original ordinary throwing prefix. Delayed armor-removal callbacks and punishment/artifact/saddle/shop combinations remain unverified.",
+      "evidence": "scripts/test-standalone-steal.mjs"
     },
     {
       "module": "sit",
@@ -289,11 +290,11 @@
     {
       "module": "light",
       "source": "src/light.c",
-      "status": "verified-subset",
-      "scope": "new_light_source/del_light_source plus prior object-light predicate, tested monster attachments; illumination/LOS/save-restore/world closure unfinished.",
+      "status": "in-progress",
+      "scope": "One original context over shared light chain; actual source camera flash nonempty allocation and cleanup pass25 comparisons. Broader splitting/artifact/save-restore variants remain unverified.",
       "priorStatus": "not-connected",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
+      "evidence": "scripts/test-standalone-light.mjs"
     },
     {
       "module": "lock",
@@ -313,8 +314,9 @@
     {
       "module": "wizard",
       "source": "src/wizard.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "311 comparisons: source resurrection/cloning, Wizard death state, intervention/tactics/cuss and real Amulet creation; ordinary mandatory progression remains unverified.",
+      "evidence": "scripts/test-standalone-wizard.mjs"
     },
     {
       "module": "worm",
@@ -353,10 +355,9 @@
     {
       "module": "mondata",
       "source": "src/mondata.c",
-      "status": "verified-subset",
-      "scope": "Source growth mappings plus set_mon_data/attacktype/trap-learning/armor-shape helpers; full module remains partial.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md",
-      "workingTreeScope": "Original property-to-seen-resistance mapping and monster forgetting connected for actual hero gear removal; focused wizard live-memory comparisons pass, wider regression pending."
+      "status": "in-progress",
+      "scope": "525 comparisons on one original context: monster properties, attacks, resistances, trap learning and real pit observation/terrain-light access. Deeper complete-game and rare combinations remain unverified.",
+      "evidence": "scripts/test-standalone-mondata.mjs"
     },
     {
       "module": "hacklib",
@@ -526,8 +527,9 @@
     {
       "module": "getpos",
       "source": "src/getpos.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "20 comparisons: actual main travel target selection/cancellation with exact recording, RNG and world; wider targeting variants unverified.",
+      "evidence": "scripts/test-standalone-getpos.mjs"
     },
     {
       "module": "allmain",
@@ -636,8 +638,9 @@
     {
       "module": "dokick",
       "source": "src/dokick.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "7 grouped comparisons: actual main locked-door kick on ordinary Samurai seed3 route through turn54, exact recordings/RNG/world. Wider kick targets remain unverified.",
+      "evidence": "scripts/test-standalone-dokick.mjs"
     },
     {
       "module": "dig",
@@ -735,15 +738,16 @@
     {
       "module": "dothrow",
       "source": "src/dothrow.c",
-      "status": "transport-only",
-      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
-      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+      "status": "in-progress",
+      "scope": "Actual original main ordinary whip throw and wielded-bow firing pass19 comparisons; real item placement, unequipping and ammunition consumption, exact recordings/full RNG/world. Other missile variants remain unverified.",
+      "evidence": "scripts/test-standalone-ranged-program.mjs"
     },
     {
       "module": "pager",
       "source": "src/pager.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "54 comparisons: actual main local look, far-look selection/cancellation, symbol lookup and full help display; other inspection variants unverified.",
+      "evidence": "scripts/test-standalone-pager.mjs"
     },
     {
       "module": "muse",

@@ -5311,7 +5311,7 @@
     "nethack-c/wasm/tu-support.c": "4acc049213a8c67b069b71315406f58409100db195df2dadbc5d4bcd7184f875",
     "js/ported/wasm-runtime.js": "73030532670eaaf8740f50d4556a89a62faf70cde679c19af22285d52286d6d4",
     "js/standalone/special-interactions.js": "2a16e9ed446870e1d0205a3ae555e4873abfe3c54a60fa729be9579127088450",
-    "js/standalone/vision.js": "e1d65b3cfb3205e6662576c7f4541b3018e71097274bfaa721d186d9687a3dbb",
+    "js/standalone/vision.js": "d3e54afd4edb8d08313eaa987eef128259bb370b14826f0c189836a1c29554b4",
     "js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34",
     "nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",
     "js/standalone/public-functions.json": "75774661072653bbd6c90bce1e837fac87a998b5e9139f6f5012878057779e12",
@@ -5350,7 +5350,7 @@
     "scripts/tu-pager-layout.h": "50400b4752384d779b1e8db5a3d945116f8d49aacc41e72f17777ad8e2a8c41d",
     "js/ported/pager-runtime.js": "6bf8a2bfc708578490798a30be117d9c7eb7e2798036c1a3cc198cd459922155",
     "js/ported/pager.js": "6c13cf9d9e88fd0db37ad0c77c64d3f4bd2389eedbdfc44b1f1dca16cbebd934",
-    "js/standalone/pager-lookup.js": "0b5424d6f8d4fdef099f4dc05196b6149cd2619ce926d1d383e528c6ec95d0e6",
+    "js/standalone/pager-lookup.js": "243c7cd86277d521e96d220a820c6dfc4636f33e8950d0d40b626ea69d21a471",
     "scripts/test-standalone-obscure-interactions.mjs": "e638b3ba5e447480920a9f322ac680f90ad157d87dcc3edc9d2e6119e83ab96e",
     "js/standalone/special-interaction-services.js": "70c5da58f4acb53f9c4dc01f5a175743931b6ea486399ed81b70a3f8cc22bd00"
   },
@@ -5479,6 +5479,14 @@
     ".cache/wasm64-build/tree/src/do_name.c": "64c6cb5e7f4034e9edbd8fac983b313a7df0e029b4812bd3a9327852d12ad9d1",
     ".cache/wasm64-build/tree/src/iactions.c": "a8b65fd2326977b85a2e93f6c939017fd7ab2ab6848b19f375d8852aa98f29f6",
     ".cache/wasm64-build/tree/src/rumors.c": "0bc8665c1bcff5b2d9d9063ff02dfd081ddcb01ba0ba5c817f0dbf857d73c255",
-    "nethack-c/wasm/native-terminal.h": "16eceb17caf6e70d0e8e6b36f23daebdb30f7ace18676d482c8376fccf6dceeb"
+    "nethack-c/wasm/native-terminal.h": "16eceb17caf6e70d0e8e6b36f23daebdb30f7ace18676d482c8376fccf6dceeb",
+    "scripts/tu-extralev-layout.h": "a59b90addd035e118ce16554d579c4f3f8b2a9cc1e8cd94d193d804074a00b34",
+    "scripts/tu-fountain-layout.h": "45a156ed2e78cad616473aa2992121ece2f6ecf7934d38a025427723780fb1e0",
+    "scripts/tu-iactions-layout.h": "1f0be05d42a615ea8d1b8d092d990683c0c5f399d2728592931ffc08032ecc91",
+    "scripts/tu-music-layout.h": "f17311722c5aeb58ef99353946ab63d672b65540fc148a47c299a86c40418ef5",
+    "scripts/tu-rumors-layout.h": "1414dd9619b11ab9e3d2eb141eb755909510e6475a408d392127ae1f7b3f5294",
+    "scripts/tu-sit-layout.h": "29d6d999488078df76372e77e76dad22145293e849302f5d00b8bd8e46ce0539",
+    "scripts/tu-steed-layout.h": "a3b04d4656f412986098faa9bee56cfa53ac1b81d66df84984e252db4a48fb88",
+    "scripts/tu-write-layout.h": "9d6a5d9c792f38a83c67f5412b0cf3de0ce33a27de4be0444b8c79dae6721dde"
   }
 }

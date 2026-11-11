@@ -1,0 +1,1687 @@
+{
+  "fullGameAccepted": false,
+  "meaning": "Bounded original-C connected comparisons. Each result retains its own exact inputs/provenance/limits; this is not one frozen complete-game assembly proof.",
+  "results": {
+    "wizard": {
+      "checks": 311,
+      "guards": 48,
+      "calls": [
+        {
+          "name": "mon_has_amulet",
+          "oracleEntry": "mon_has_amulet",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "mon_has_special",
+          "oracleEntry": "mon_has_special",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "has_aggravatables",
+          "oracleEntry": "has_aggravatables",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "tactics",
+          "oracleEntry": "tactics",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "choose_stairs",
+          "oracleEntry": "choose_stairs",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "choose_stairs",
+          "oracleEntry": "choose_stairs",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "pick_nasty",
+          "oracleEntry": "pick_nasty",
+          "result": 177,
+          "frames": 0
+        },
+        {
+          "name": "pick_nasty",
+          "oracleEntry": "pick_nasty",
+          "result": 121,
+          "frames": 0
+        },
+        {
+          "name": "pick_nasty",
+          "oracleEntry": "pick_nasty",
+          "result": 281,
+          "frames": 0
+        },
+        {
+          "name": "amulet",
+          "oracleEntry": "amulet",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "aggravate",
+          "oracleEntry": "aggravate",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "resurrect",
+          "oracleEntry": "resurrect",
+          "result": 0,
+          "frames": 1
+        },
+        {
+          "name": "tactics",
+          "oracleEntry": "tactics",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "cuss",
+          "oracleEntry": "cuss",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "clonewiz",
+          "oracleEntry": "clonewiz",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "mondead",
+          "oracleEntry": "mondead",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "intervene",
+          "oracleEntry": "intervene",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "mksobj",
+          "oracleEntry": "mksobj",
+          "result": {
+            "id": 72,
+            "type": 213
+          },
+          "frames": 0
+        },
+        {
+          "name": "addinv",
+          "oracleEntry": "addinv",
+          "result": {
+            "id": 72,
+            "type": 213
+          },
+          "frames": 0
+        },
+        {
+          "name": "amulet",
+          "oracleEntry": "amulet",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "tactics",
+          "oracleEntry": "tactics",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "cuss",
+          "oracleEntry": "cuss",
+          "result": 0,
+          "frames": 0
+        }
+      ],
+      "mainKeys": "  nled   ",
+      "mainInputBoundaries": 10,
+      "mainFrames": 10,
+      "worldCoverage": {
+        "counts": {
+          "monst": 5,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 37,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 158514,
+        "serializedPaddingByteOccurrences": 1631,
+        "uniqueScalarBytes": 30493,
+        "pointerEdges": 129
+      },
+      "provenance": {
+        "receipt": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+        "provider": "6562fbcfdc86ec482bc325d4a76da1c9a2a3e66f496310761c8dae2c325c923e",
+        "abi": "2c63515226a994871059b3835bcc198ede3dcc9dcf8a4ccb306f4a6e57ff8568",
+        "test": "6eaaeba674b01c55710dda0c989b8f6bdaf66c06b34cfa042d693409585c4002"
+      },
+      "limits": "Matched source component calls after genuine main input exhaustion; no source-frame cleanup, fabricated Wizard/state flags or RNG override. Mandatory full-game quest/endgame scheduling and optional lifecycle combinations remain unverified."
+    },
+    "mplayer": {
+      "checks": 170,
+      "guards": 11,
+      "calls": [
+        {
+          "name": "mk_mplayer",
+          "oracleEntry": "mk_mplayer",
+          "result": {
+            "id": 67,
+            "species": 331
+          },
+          "frames": 1
+        },
+        {
+          "name": "mplayer_talk",
+          "oracleEntry": "mplayer_talk",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "create_mplayers",
+          "oracleEntry": "create_mplayers",
+          "result": 0,
+          "frames": 0
+        }
+      ],
+      "mainKeys": "  nled   ",
+      "mainInputBoundaries": 10,
+      "mainFrames": 10,
+      "worldCoverage": {
+        "counts": {
+          "monst": 6,
+          "permonst": 5,
+          "branch": 7,
+          "obj": 55,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 160862,
+        "serializedPaddingByteOccurrences": 1829,
+        "uniqueScalarBytes": 31959,
+        "pointerEdges": 170
+      },
+      "provenance": {
+        "receipt": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+        "provider": "e0495fef02f77fbc791ee2d0abfdc152f3fe7bb7974b1e1f5b0e4133a9597d89",
+        "abi": "7f87e3dedc4c042bb0095eddbf72bdfb2c72d50da768e8ae2e017b211fb489ae",
+        "test": "8c03acedcbf114b17ccd1185b112f819194a2b38748a3126e31cd7f22521cb3c"
+      },
+      "limits": "Matched original source component calls after genuine main input exhaustion; no source-frame cleanup, fabricated NPC bytes/flags or RNG override. Initial-world normal NPC creation/gear/speech only; special endgame developer naming and special equipment/generation remain unaccepted until a source-created endgame fixture exists. Full ordinary endgame progression is not established by this component proof."
+    },
+    "minion": {
+      "checks": 233,
+      "guards": 26,
+      "calls": [
+        {
+          "name": "monster_census",
+          "oracleEntry": "monster_census",
+          "result": 2,
+          "frames": 0
+        },
+        {
+          "name": "monster_census",
+          "oracleEntry": "monster_census",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "dprince",
+          "oracleEntry": "dprince",
+          "result": 308,
+          "frames": 0
+        },
+        {
+          "name": "dlord",
+          "oracleEntry": "dlord",
+          "result": 304,
+          "frames": 0
+        },
+        {
+          "name": "ndemon",
+          "oracleEntry": "ndemon",
+          "result": 290,
+          "frames": 0
+        },
+        {
+          "name": "llord",
+          "oracleEntry": "llord",
+          "result": 125,
+          "frames": 0
+        },
+        {
+          "name": "lminion",
+          "oracleEntry": "lminion",
+          "result": 121,
+          "frames": 0
+        },
+        {
+          "name": "summon_minion",
+          "oracleEntry": "summon_minion",
+          "result": 0,
+          "frames": 1
+        },
+        {
+          "name": "summon_minion",
+          "oracleEntry": "summon_minion",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "msummon",
+          "oracleEntry": "msummon",
+          "result": 2,
+          "frames": 0
+        },
+        {
+          "name": "gain_guardian_angel",
+          "oracleEntry": "gain_guardian_angel",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "lose_guardian_angel",
+          "oracleEntry": "lose_guardian_angel",
+          "result": 0,
+          "frames": 0
+        }
+      ],
+      "mainKeys": "  nled   ",
+      "mainInputBoundaries": 10,
+      "mainFrames": 10,
+      "worldCoverage": {
+        "counts": {
+          "monst": 12,
+          "permonst": 7,
+          "branch": 7,
+          "obj": 43,
+          "mextra": 10,
+          "edog": 1,
+          "emin": 9,
+          "mapseen": 1,
+          "s_level": 36,
+          "ls_t": 1,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 161710,
+        "serializedPaddingByteOccurrences": 1853,
+        "uniqueScalarBytes": 32191,
+        "pointerEdges": 183
+      },
+      "provenance": {
+        "receipt": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+        "provider": "ad3b2a669a7b2391bc41f70ff857cbc1d49dd1ade7d0682b29a67ee6eb028577",
+        "abi": "4d859cd7266edde102a9c250b990dc9729ff06133744144049cf28b1dfad3810",
+        "test": "46d578167d56185e5289414bdfc96c9eca5847f0491b57db0e225c451b058562"
+      },
+      "limits": "Matched source component calls on a genuine main-created world after input exhaustion; no source-frame cleanup, fabricated monsters/state flags or RNG override. Guardian construction/removal are controlled source API inputs, not accepted integrated Astral arrival scheduling. Demon bargaining/input interactions and optional rare alignment/occupation combinations remain unaccepted."
+    },
+    "mondata": {
+      "checks": 525,
+      "guards": 111,
+      "calls": [
+        {
+          "name": "defended",
+          "oracleEntry": "defended",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "Resists_Elem",
+          "oracleEntry": "Resists_Elem",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "resists_drli",
+          "oracleEntry": "resists_drli",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "resists_magm",
+          "oracleEntry": "resists_magm",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "resists_blnd",
+          "oracleEntry": "resists_blnd",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "resists_blnd_by_arti",
+          "oracleEntry": "resists_blnd_by_arti",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "mon_hates_silver",
+          "oracleEntry": "mon_hates_silver",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "mon_hates_blessings",
+          "oracleEntry": "mon_hates_blessings",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "mon_hates_light",
+          "oracleEntry": "mon_hates_light",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "can_blow",
+          "oracleEntry": "can_blow",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "can_chant",
+          "oracleEntry": "can_chant",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "can_be_strangled",
+          "oracleEntry": "can_be_strangled",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "gender",
+          "oracleEntry": "gender",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "levl_follower",
+          "oracleEntry": "levl_follower",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "resists_magm",
+          "oracleEntry": "resists_magm",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "max_passive_dmg",
+          "oracleEntry": "max_passive_dmg",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "can_blnd",
+          "oracleEntry": "can_blnd",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "noattacks",
+          "oracleEntry": "noattacks",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "poly_when_stoned",
+          "oracleEntry": "poly_when_stoned",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "ranged_attk",
+          "oracleEntry": "ranged_attk",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "mstrength",
+          "oracleEntry": "mstrength",
+          "result": 3,
+          "frames": 0
+        },
+        {
+          "name": "hates_silver",
+          "oracleEntry": "hates_silver",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "hates_blessings",
+          "oracleEntry": "hates_blessings",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "passes_bars",
+          "oracleEntry": "passes_bars",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "can_track",
+          "oracleEntry": "can_track",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "sliparm",
+          "oracleEntry": "sliparm",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "breakarm",
+          "oracleEntry": "breakarm",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "sticks",
+          "oracleEntry": "sticks",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "cantvomit",
+          "oracleEntry": "cantvomit",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "num_horns",
+          "oracleEntry": "num_horns",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "olfaction",
+          "oracleEntry": "olfaction",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "attacktype",
+          "oracleEntry": "attacktype",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "attacktype_fordmg",
+          "oracleEntry": "attacktype_fordmg",
+          "result": 463012,
+          "frames": 0
+        },
+        {
+          "name": "dmgtype_fromattack",
+          "oracleEntry": "dmgtype_fromattack",
+          "result": 463012,
+          "frames": 0
+        },
+        {
+          "name": "pronoun_gender",
+          "oracleEntry": "pronoun_gender",
+          "result": 2,
+          "frames": 0
+        },
+        {
+          "name": "resist_conflict",
+          "oracleEntry": "resist_conflict",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "get_atkdam_type",
+          "oracleEntry": "get_atkdam_type",
+          "result": 8,
+          "frames": 0
+        },
+        {
+          "name": "monstseesu",
+          "oracleEntry": "monstseesu",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "monstunseesu",
+          "oracleEntry": "monstunseesu",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "mon_learns_traps",
+          "oracleEntry": "mon_learns_traps",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "mon_knows_traps",
+          "oracleEntry": "mon_knows_traps",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "cvt_adtyp_to_mseenres",
+          "oracleEntry": "cvt_adtyp_to_mseenres",
+          "result": "2",
+          "frames": 0
+        },
+        {
+          "name": "cvt_adtyp_to_mseenres",
+          "oracleEntry": "cvt_adtyp_to_mseenres",
+          "result": "2",
+          "frames": 0
+        },
+        {
+          "name": "cvt_prop_to_mseenres",
+          "oracleEntry": "cvt_prop_to_mseenres",
+          "result": "2",
+          "frames": 0
+        },
+        {
+          "name": "msummon_environ",
+          "oracleEntry": "msummon_environ",
+          "result": 1297472,
+          "frames": 0
+        },
+        {
+          "name": "locomotion",
+          "oracleEntry": "locomotion",
+          "result": 1297584,
+          "frames": 0
+        },
+        {
+          "name": "stagger",
+          "oracleEntry": "stagger",
+          "result": 1297584,
+          "frames": 0
+        },
+        {
+          "name": "gain_guardian_angel",
+          "oracleEntry": "gain_guardian_angel",
+          "result": 0,
+          "frames": 1
+        },
+        {
+          "name": "resists_magm",
+          "oracleEntry": "resists_magm",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "Resists_Elem",
+          "oracleEntry": "Resists_Elem",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "resists_blnd",
+          "oracleEntry": "resists_blnd",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "maketrap",
+          "oracleEntry": "maketrap",
+          "result": 1298768,
+          "frames": 0
+        },
+        {
+          "name": "mons_see_trap",
+          "oracleEntry": "mons_see_trap",
+          "result": 0,
+          "frames": 0
+        }
+      ],
+      "mainKeys": "  nled   ",
+      "mainInputBoundaries": 10,
+      "mainFrames": 10,
+      "owners": {
+        "new": [
+          "poly_when_stoned",
+          "defended",
+          "resists_magm",
+          "resists_blnd",
+          "resists_blnd_by_arti",
+          "ranged_attk",
+          "mstrength",
+          "mon_hates_light",
+          "can_be_strangled",
+          "cantvomit",
+          "same_race",
+          "name_to_mon",
+          "name_to_monplus",
+          "name_to_monclass",
+          "big_little_match",
+          "raceptr",
+          "stagger",
+          "on_fire",
+          "olfaction",
+          "monstseesu",
+          "give_u_to_m_resistances",
+          "resist_conflict",
+          "mon_knows_traps",
+          "mons_see_trap",
+          "get_atkdam_type"
+        ],
+        "forwarded": [
+          {
+            "name": "resists_drli",
+            "group": "hero-monster-resistance"
+          },
+          {
+            "name": "dmgtype_fromattack",
+            "group": "hero-monster-resistance"
+          },
+          {
+            "name": "dmgtype",
+            "group": "hero-monster-resistance"
+          },
+          {
+            "name": "noattacks",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "Resists_Elem",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "can_blnd",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "mon_hates_silver",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "hates_silver",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "mon_hates_blessings",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "hates_blessings",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "passes_bars",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "can_blow",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "can_chant",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "can_track",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "max_passive_dmg",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "gender",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "pronoun_gender",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "levl_follower",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "locomotion",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "msummon_environ",
+            "group": "monster-gender-material"
+          },
+          {
+            "name": "cvt_adtyp_to_mseenres",
+            "group": "hero-monster-resistance-memory"
+          },
+          {
+            "name": "cvt_prop_to_mseenres",
+            "group": "hero-monster-resistance-memory"
+          },
+          {
+            "name": "monstunseesu",
+            "group": "hero-monster-resistance-memory"
+          },
+          {
+            "name": "little_to_big",
+            "group": "monster-growth-types"
+          },
+          {
+            "name": "big_to_little",
+            "group": "monster-growth-types"
+          },
+          {
+            "name": "set_mon_data",
+            "group": "monster-data"
+          },
+          {
+            "name": "attacktype_fordmg",
+            "group": "monster-data"
+          },
+          {
+            "name": "attacktype",
+            "group": "monster-data"
+          },
+          {
+            "name": "mon_learns_traps",
+            "group": "monster-data"
+          },
+          {
+            "name": "sliparm",
+            "group": "monster-armor-shape"
+          },
+          {
+            "name": "breakarm",
+            "group": "monster-armor-shape"
+          },
+          {
+            "name": "num_horns",
+            "group": "monster-armor-shape"
+          },
+          {
+            "name": "sticks",
+            "group": "floor-monster-stickiness"
+          }
+        ]
+      },
+      "worldCoverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 37,
+          "mextra": 2,
+          "edog": 1,
+          "emin": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "trap": 1,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 158414,
+        "serializedPaddingByteOccurrences": 1632,
+        "uniqueScalarBytes": 30380,
+        "pointerEdges": 131
+      },
+      "provenance": {
+        "receipt": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+        "provider": "a6d984239ea93b882f9335f9d69b6acb79de10f5a1587db2a401e46059c56396",
+        "abi": "e98a7e9190f1ae2d3b6f2535513b22d39a2e324faa6e95ab2ae87d8de22a850a",
+        "test": "1ab1588e71eaa5d01d7987837af2df83364098c4eee8b268d635025d22f695e6"
+      },
+      "limits": "Matched original source component calls on genuine main-created hero/pet/species, with positive seen-resistance/trap-memory mutations through source entry points, including a real guardian observing a source-created pit with its existing trap knowledge and reading actual terrain light. No source-frame cleanup, fabricated monster flags/state, RNG override or source policy copies. Optional parsing/rare resistance/creature combinations remain unaccepted."
+    },
+    "dokick": {
+      "checks": 7,
+      "hashes": 135,
+      "profile": "Male lawful human Samurai seed3 ordinary full-main locked-door kick and input boundary",
+      "moves": "54",
+      "consumed": 81,
+      "frames": 82,
+      "worldCoverage": {
+        "counts": {
+          "monst": 6,
+          "permonst": 6,
+          "branch": 7,
+          "obj": 68,
+          "mextra": 1,
+          "eshk": 1,
+          "mapseen": 3,
+          "s_level": 36,
+          "trap": 1,
+          "stairway": 3,
+          "engr": 1
+        },
+        "serializedRecordBytes": 173802,
+        "serializedPaddingByteOccurrences": 3102,
+        "uniqueScalarBytes": 37542,
+        "pointerEdges": 206
+      },
+      "completeDokickAccepted": false,
+      "providerSha256": "de3549a7034d067704f2bb63d6da525b3966f7c6c6c63a0e2dd9920e72bcf37b",
+      "testSha256": "9f1c7687cd3c02b3a97cc935c0a53e796ead4b998b226e6c3d54dd0a24eaf146",
+      "limitation": "Only this genuine ordinary door-kick path and exact connected recording/world are accepted. Object/monster kicks, watchman effects, traps, special terrain and other source branches remain unaccepted."
+    },
+    "getpos": {
+      "hashes": 1053,
+      "scenarios": [
+        {
+          "name": "cancel",
+          "keys": "  n_  \u001b",
+          "moves": "1",
+          "frames": 8,
+          "cursorState": {
+            "x": 0,
+            "y": 0,
+            "frameColor": 8
+          },
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          }
+        },
+        {
+          "name": "select",
+          "keys": "  n_  l.",
+          "moves": "2",
+          "frames": 9,
+          "cursorState": {
+            "x": 0,
+            "y": 0,
+            "frameColor": 8
+          },
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          }
+        }
+      ],
+      "fullGameAccepted": false,
+      "limitations": "Literal ordinary-main travel targeting selection/cancel with real keyboard, cursor, help, menu and travel policies. No state writes or direct policy calls; other target filters, mouse/UI variants and callbacks remain separately unaccepted.",
+      "scriptSha256": "32a79bb1a5eab7c1341c527328560ef53464e63f1e196da43c4de237c6831147",
+      "checks": 20
+    },
+    "pager": {
+      "hashes": 1053,
+      "scenarios": [
+        {
+          "name": "local-look",
+          "keys": "  n:",
+          "moves": "1",
+          "frames": 5,
+          "cursorState": {
+            "x": 0,
+            "y": 0,
+            "frameColor": 8
+          },
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          }
+        },
+        {
+          "name": "farlook-select",
+          "keys": "  n;  l. ",
+          "moves": "1",
+          "frames": 10,
+          "cursorState": {
+            "x": 0,
+            "y": 0,
+            "frameColor": 8
+          },
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          }
+        },
+        {
+          "name": "farlook-cancel",
+          "keys": "  n;  \u001b",
+          "moves": "1",
+          "frames": 8,
+          "cursorState": {
+            "x": 0,
+            "y": 0,
+            "frameColor": 8
+          },
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          }
+        },
+        {
+          "name": "symbol",
+          "keys": "  n/?.\n",
+          "moves": "1",
+          "frames": 8,
+          "cursorState": {
+            "x": 0,
+            "y": 0,
+            "frameColor": 8
+          },
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          }
+        },
+        {
+          "name": "help-game",
+          "keys": "  n?b          ",
+          "moves": "1",
+          "frames": 16,
+          "cursorState": {
+            "x": 0,
+            "y": 0,
+            "frameColor": 8
+          },
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          }
+        }
+      ],
+      "fullGameAccepted": false,
+      "limitations": "Only literal ordinary-main local look, far-look selection/cancel, symbol lookup and original full help-file flow. Native assets/keys/callbacks/windows are real; no state writes or direct policy actions. Other inspection/help variants remain separately unaccepted.",
+      "scriptSha256": "33be24a301b1696ed8f1bd6b34c9039331febfcadc9f75e0fa27aea6f76d8840",
+      "checks": 54
+    },
+    "light": {
+      "checks": 25,
+      "hashes": 920,
+      "seed": 1,
+      "position": [
+        1,
+        0
+      ],
+      "sourceMain": true,
+      "fullGameAccepted": false,
+      "limitations": "Actual source camera flash allocates a nonempty light chain and cleanup removes it, with native world, RNG, TTY and frames compared. Special artifact/candle split/merge/light save matrices remain unverified.",
+      "scriptSha256": "ae31c8733fcecff9d3bc97356d0aa9d8fc90af703416c2ca874c756e34eba103"
+    },
+    "ranged": {
+      "complete": true,
+      "fullGameAccepted": false,
+      "cases": [
+        {
+          "name": "throw",
+          "profile": {
+            "seed": 1,
+            "timezone": "UTC",
+            "options": "OPTIONS=!news\n",
+            "argv": [
+              "-u",
+              "Ada-male-lawful",
+              "-p",
+              "Archeologist",
+              "-r",
+              "human"
+            ]
+          },
+          "keys": "  ntah",
+          "moves": "2",
+          "inputBoundaries": 7,
+          "frames": 7,
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          }
+        },
+        {
+          "name": "fire",
+          "profile": {
+            "seed": 1,
+            "timezone": "UTC",
+            "options": "OPTIONS=!news\n",
+            "argv": [
+              "-u",
+              "Ada-male-lawful",
+              "-p",
+              "Samurai",
+              "-r",
+              "human"
+            ]
+          },
+          "keys": "  nwcfh",
+          "moves": "3",
+          "inputBoundaries": 8,
+          "frames": 20,
+          "worldCoverage": {
+            "counts": {
+              "monst": 8,
+              "permonst": 7,
+              "branch": 7,
+              "obj": 38,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "trap": 1,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 159662,
+            "serializedPaddingByteOccurrences": 1702,
+            "uniqueScalarBytes": 31198,
+            "pointerEdges": 143
+          }
+        }
+      ],
+      "limitation": "Only the selected ordinary seed1 roles/throw/fire command paths are accepted; other missile/returning/launcher/target variants and full game remain separate requirements.",
+      "checks": 19,
+      "sourceSha256": {
+        "scripts/test-standalone-ranged-program.mjs": "68bb6d1bbab242269539a7079cfb3bee2ddfd791bbd1bb1ebcc10fb1f500dbd8",
+        "scripts/run-standalone-program.mjs": "582228e4e44a87637fd805837b7e35663c657166a8aa20a6f3ba94df5f8d66f5",
+        "scripts/full-original-c-run.mjs": "47e79a0712238cd6aa2137460e6e360111a35c20d5dbc178fcbf02b5207fb9f4",
+        "scripts/restoration-world-graph.mjs": "de75484b8ae2e172ae7ae140ad873f9a4a1c49e21b7c0f6168bd22bf6268445b",
+        "js/standalone/program.js": "5ab65b400862560ed97e1c166954ff654bec552628582cc9c83e042528c95e95",
+        "js/standalone/address-ports.js": "751adcee57a25babf8ea7f46d3e557408b1a12d50cd262207ac743c183bf56ff",
+        "js/standalone/callback-address-abi.json": "ec0f800c99f68efa855d291fbd6beb9800879263c4a5834856437f629f279d4f"
+      },
+      "referenceReceiptSha256": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58"
+    },
+    "ordinaryCommands": {
+      "complete": true,
+      "nativeOnly": false,
+      "inventory": [
+        {
+          "identity": "obj:51",
+          "type": 82,
+          "letter": "a",
+          "quantity": 1,
+          "worn": 256
+        },
+        {
+          "identity": "obj:52",
+          "type": 135,
+          "letter": "b",
+          "quantity": 1,
+          "worn": 1
+        },
+        {
+          "identity": "obj:54",
+          "type": 92,
+          "letter": "c",
+          "quantity": 1,
+          "worn": 4
+        },
+        {
+          "identity": "obj:56",
+          "type": 293,
+          "letter": "d",
+          "quantity": 4,
+          "worn": 0
+        },
+        {
+          "identity": "obj:60",
+          "type": 259,
+          "letter": "e",
+          "quantity": 1,
+          "worn": 1024
+        },
+        {
+          "identity": "obj:61",
+          "type": 238,
+          "letter": "f",
+          "quantity": 1,
+          "worn": 0
+        },
+        {
+          "identity": "obj:62",
+          "type": 472,
+          "letter": "g",
+          "quantity": 1,
+          "worn": 0
+        },
+        {
+          "identity": "obj:64",
+          "type": 217,
+          "letter": "h",
+          "quantity": 1,
+          "worn": 0
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "inventory",
+          "keys": "  ni ",
+          "status": {
+            "kind": "input-exhausted"
+          },
+          "moves": "1",
+          "inputBoundaries": 6,
+          "frames": 6,
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          },
+          "aux": {
+            "occupationNull": true,
+            "readDepth": 1,
+            "victualEating": 0,
+            "victualPieceNull": true
+          }
+        },
+        {
+          "name": "eating",
+          "keys": "  nled   ",
+          "status": {
+            "kind": "input-exhausted"
+          },
+          "moves": "8",
+          "inputBoundaries": 10,
+          "frames": 10,
+          "worldCoverage": {
+            "counts": {
+              "monst": 3,
+              "permonst": 3,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157634,
+            "serializedPaddingByteOccurrences": 1571,
+            "uniqueScalarBytes": 29937,
+            "pointerEdges": 119
+          },
+          "aux": {
+            "occupationNull": true,
+            "readDepth": 1,
+            "victualEating": 0,
+            "victualPieceNull": true
+          }
+        },
+        {
+          "name": "wield",
+          "keys": "  nwe ",
+          "status": {
+            "kind": "input-exhausted"
+          },
+          "moves": "2",
+          "inputBoundaries": 7,
+          "frames": 7,
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          },
+          "aux": {
+            "occupationNull": true,
+            "readDepth": 1,
+            "victualEating": 0,
+            "victualPieceNull": true
+          }
+        },
+        {
+          "name": "takeoff-wear",
+          "keys": "  nTcWc",
+          "status": {
+            "kind": "input-exhausted"
+          },
+          "moves": "3",
+          "inputBoundaries": 8,
+          "frames": 8,
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          },
+          "aux": {
+            "occupationNull": true,
+            "readDepth": 1,
+            "victualEating": 0,
+            "victualPieceNull": true
+          }
+        },
+        {
+          "name": "drop-pickup",
+          "keys": "  ndh,",
+          "status": {
+            "kind": "input-exhausted"
+          },
+          "moves": "3",
+          "inputBoundaries": 7,
+          "frames": 7,
+          "worldCoverage": {
+            "counts": {
+              "monst": 4,
+              "permonst": 4,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157966,
+            "serializedPaddingByteOccurrences": 1589,
+            "uniqueScalarBytes": 30143,
+            "pointerEdges": 122
+          },
+          "aux": {
+            "occupationNull": true,
+            "readDepth": 1,
+            "victualEating": 0,
+            "victualPieceNull": true
+          }
+        },
+        {
+          "name": "combined",
+          "keys": "  nled   i we TcWcdh,",
+          "moves": "13",
+          "inputBoundaries": 22,
+          "frames": 22,
+          "worldCoverage": {
+            "counts": {
+              "monst": 3,
+              "permonst": 3,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157634,
+            "serializedPaddingByteOccurrences": 1571,
+            "uniqueScalarBytes": 29937,
+            "pointerEdges": 119
+          }
+        },
+        {
+          "name": "combined-save",
+          "keys": "  nled   i we TcWcdh,Sy",
+          "moves": "13",
+          "frames": 24,
+          "sourceStreams": {
+            "c": "733114ee427d57b84e650ca9f921ba76b9c1f975527ce57a456a13b52b24f190",
+            "js": "011f7c41b17448fe525acecd958d6d1faa05dd9088cfb8eec272b90e1b5c2b23"
+          }
+        },
+        {
+          "name": "resume-c-in-c",
+          "keys": "i m.",
+          "moves": "14",
+          "inputBoundaries": 5,
+          "frames": 5,
+          "worldCoverage": {
+            "counts": {
+              "monst": 3,
+              "permonst": 3,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157634,
+            "serializedPaddingByteOccurrences": 1571,
+            "uniqueScalarBytes": 29937,
+            "pointerEdges": 119
+          }
+        },
+        {
+          "name": "resume-c-in-js",
+          "keys": "i m.",
+          "moves": "14",
+          "inputBoundaries": 5,
+          "frames": 5,
+          "worldCoverage": {
+            "counts": {
+              "monst": 3,
+              "permonst": 3,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157634,
+            "serializedPaddingByteOccurrences": 1571,
+            "uniqueScalarBytes": 29937,
+            "pointerEdges": 119
+          }
+        },
+        {
+          "name": "resume-js-in-c",
+          "keys": "i m.",
+          "moves": "14",
+          "inputBoundaries": 5,
+          "frames": 5,
+          "worldCoverage": {
+            "counts": {
+              "monst": 3,
+              "permonst": 3,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157634,
+            "serializedPaddingByteOccurrences": 1571,
+            "uniqueScalarBytes": 29937,
+            "pointerEdges": 119
+          }
+        },
+        {
+          "name": "resume-js-in-js",
+          "keys": "i m.",
+          "moves": "14",
+          "inputBoundaries": 5,
+          "frames": 5,
+          "worldCoverage": {
+            "counts": {
+              "monst": 3,
+              "permonst": 3,
+              "branch": 7,
+              "obj": 34,
+              "mextra": 1,
+              "edog": 1,
+              "mapseen": 1,
+              "s_level": 36,
+              "stairway": 2
+            },
+            "serializedRecordBytes": 157634,
+            "serializedPaddingByteOccurrences": 1571,
+            "uniqueScalarBytes": 29937,
+            "pointerEdges": 119
+          }
+        }
+      ],
+      "fullGameAccepted": false,
+      "limitations": "Only the named literal ordinary-command paths; no component state writes, input-depth resets, debug/wish commands or direct game-policy calls.",
+      "provenance": {
+        "receipt": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+        "script": "3ababc2e70296e679e95754c90e0b37248d2fba27d3026def535c1e3d564784c",
+        "worldHelper": "de75484b8ae2e172ae7ae140ad873f9a4a1c49e21b7c0f6168bd22bf6268445b"
+      },
+      "checks": 253
+    },
+    "steal": {
+      "checks": 217,
+      "guards": 28,
+      "calls": [
+        {
+          "name": "unresponsive",
+          "oracleEntry": "unresponsive",
+          "result": 0,
+          "frames": 0
+        },
+        {
+          "name": "somegold",
+          "oracleEntry": "somegold",
+          "result": "0",
+          "frames": 0
+        },
+        {
+          "name": "somegold",
+          "oracleEntry": "somegold",
+          "result": "65",
+          "frames": 0
+        },
+        {
+          "name": "somegold",
+          "oracleEntry": "somegold",
+          "result": "7057",
+          "frames": 0
+        },
+        {
+          "name": "enexto",
+          "oracleEntry": "enexto",
+          "result": 1,
+          "frames": 0
+        },
+        {
+          "name": "makemon",
+          "oracleEntry": "makemon",
+          "result": {
+            "id": 67,
+            "species": 67
+          },
+          "frames": 0
+        },
+        {
+          "name": "steal",
+          "oracleEntry": "steal",
+          "result": 1,
+          "frames": 2
+        },
+        {
+          "name": "steal",
+          "oracleEntry": "steal",
+          "result": 1,
+          "frames": 2
+        }
+      ],
+      "mainScenario": "food-occupation",
+      "mainKeys": "  nled   ",
+      "mainInputBoundaries": 10,
+      "mainFrames": 10,
+      "worldCoverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 36,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 158190,
+        "serializedPaddingByteOccurrences": 1609,
+        "uniqueScalarBytes": 30283,
+        "pointerEdges": 126
+      },
+      "provenance": {
+        "receipt": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+        "provider": "939918429a64c9262d45fafd9b10f4bc6f9316923d3a9e9346b335f2274df1ed",
+        "abi": "b2329f56fbac420b5fb15a337b1ca64286345ea9ba326b8f282ab5a8dc832e64",
+        "test": "51c8bcf87c7d2115511cb815fd5e2d7e63948e852c5b49fe094a0ae7cea8a436"
+      },
+      "limits": "Actual ordinary main prefix (food occupation by default; STEAL_MAIN_THROW=1 preserves the separately blocked literal throw case), then matched original-source component queries/NPC creation/theft on that genuine world. Default component pass does not accept the literal throw path. No source-frame cleanup, fabricated monster state/RNG or fake unequip. Actual immediate source theft is verified; initial jacket/fedora have zero source removal delay, so delayed stealarm/unstolenarm execution remains unaccepted (bindings are source-defined). Optional punishment/artifact/saddle/shop theft combinations remain unaccepted."
+    }
+  },
+  "snapshotSha256": {
+    "js/standalone/wizard.js": "6562fbcfdc86ec482bc325d4a76da1c9a2a3e66f496310761c8dae2c325c923e",
+    "js/standalone/wizard-abi.json": "2c63515226a994871059b3835bcc198ede3dcc9dcf8a4ccb306f4a6e57ff8568",
+    "js/standalone/mplayer.js": "e0495fef02f77fbc791ee2d0abfdc152f3fe7bb7974b1e1f5b0e4133a9597d89",
+    "js/standalone/mplayer-abi.json": "7f87e3dedc4c042bb0095eddbf72bdfb2c72d50da768e8ae2e017b211fb489ae",
+    "js/standalone/minion.js": "ad3b2a669a7b2391bc41f70ff857cbc1d49dd1ade7d0682b29a67ee6eb028577",
+    "js/standalone/minion-abi.json": "4d859cd7266edde102a9c250b990dc9729ff06133744144049cf28b1dfad3810",
+    "js/standalone/mondata.js": "a6d984239ea93b882f9335f9d69b6acb79de10f5a1587db2a401e46059c56396",
+    "js/standalone/mondata-abi.json": "e98a7e9190f1ae2d3b6f2535513b22d39a2e324faa6e95ab2ae87d8de22a850a",
+    "js/standalone/dokick.js": "de3549a7034d067704f2bb63d6da525b3966f7c6c6c63a0e2dd9920e72bcf37b",
+    "js/standalone/dokick-abi.json": "684cf653352db51f59de3185994206a13cbea5204cc9759f6b1e63048fd57995",
+    "js/standalone/getpos.js": "150c61f7c24532daa13a33d3ea9fc54144288d0eabc8f6bc9a8a56d47c68627e",
+    "js/standalone/getpos-abi.json": "4216a3ce21f301956c04587643c6ec81b62f5017d9552e49604fad7898f77465",
+    "js/standalone/steal.js": "939918429a64c9262d45fafd9b10f4bc6f9316923d3a9e9346b335f2274df1ed",
+    "js/standalone/steal-abi.json": "b2329f56fbac420b5fb15a337b1ca64286345ea9ba326b8f282ab5a8dc832e64",
+    "js/standalone/light.js": "71ed87cdfe0666971492649b1b06ccd087653bb4699ccafd5a93a2e3166f5fc2",
+    "js/standalone/light-abi.json": "0a38fdb75d24dadc7fe59c8e069ad5bf41d6646233d45b5267c8daf97d6cd6fe",
+    "js/standalone/program.js": "5ab65b400862560ed97e1c166954ff654bec552628582cc9c83e042528c95e95",
+    "js/standalone/environment.js": "8e604a126f4fc34c6a47076cadb2345bd30aac4951533a391ade6a13a6fd2125",
+    "js/standalone/monster-selection.js": "d69cd3d7414a1e8921f2dd5d1532d993aa59f59a8cdb0f2f1538bd1be8e07598",
+    "js/standalone/monster-creation.js": "b7e361f072224f39b284cc8fe50017380d04401d775b777e00b314b3058ac2a4",
+    "js/standalone/monster-inventory.js": "80fa8a431d5468bc48d2d783e13b221d25472cde3b258677e84149be453e5dde",
+    "js/standalone/hero-startup.js": "c0ac24d1468edaab764e53e2eb801430279ddba674909b86e77b4f729e3944cc",
+    "js/standalone/pager-lookup.js": "243c7cd86277d521e96d220a820c6dfc4636f33e8950d0d40b626ea69d21a471",
+    "js/standalone/pager-target-abi.json": "e815a56e8ceae7b6cf1b3424defe374ebf09fa832cbfb3f0b2caf3d0414b784d",
+    "js/standalone/pager-target-header-functions.js": "f9cfb0b5983a9ad05ab79aa8ef70bb35fc1ff1762233425b7d01e8d814112ae5",
+    "js/standalone/getpos-header-functions.js": "50686e175161f35d0bee66a466e1410c72d673b776f4d208805ce44a73665007",
+    "js/standalone/world-position.js": "c9d69468adcbdfa2db6fd21f5a6b1c9c226199e9885e648edf2a5f0597a380d3",
+    "js/standalone/vision.js": "d3e54afd4edb8d08313eaa987eef128259bb370b14826f0c189836a1c29554b4"
+  }
+}

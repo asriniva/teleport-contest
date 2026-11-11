@@ -3,7 +3,7 @@ import {mpickobj,findgold,mdrop_special_objs,relobj} from '../ported/steal.js';
 import * as worn from '../ported/worn.js';
 import {breakarm,sliparm,num_horns} from '../ported/mondata.js';
 import {can_saddle,put_saddle_on_mon,steeds,stucksteed} from '../ported/steed.js';
-import {mon_nam,Monnam,minimal_monnam,Mgender,pmname,new_oname,a_monnam,Amonnam,y_monnam,YMonnam,noit_Monnam,noit_mon_nam,obj_pmname,mon_nam_too,Adjmonnam,some_mon_nam,noname_monnam,x_monnam,hcolor,hcolors} from '../ported/do_name.js';
+import {mon_nam,Monnam,minimal_monnam,Mgender,pmname,new_oname,a_monnam,Amonnam,y_monnam,YMonnam,noit_Monnam,noit_mon_nam,obj_pmname,mon_nam_too,Adjmonnam,some_mon_nam,noname_monnam,x_monnam,hcolor,hcolors,mon_pmname,Some_Monnam} from '../ported/do_name.js';
 import {noteleport_level} from '../ported/teleport.js';
 import {mon_has_amulet} from '../ported/wizard.js';
 import {monhealthdescr} from '../ported/pager.js';
@@ -57,8 +57,8 @@ export function enableMonsterInventory(environment,layouts,creation){
  const name=context(layouts.do_name),N=layouts.do_name;
  for(const[k,v]of Object.entries(N))if(/^W_/.test(k))name[k]=BigInt(v);
  Object.assign(name,{
-  charPointer:p=>typeof p==='string'?services.literal(p):environment.address(p),Strcpy:copyString,Strcat:(d,s)=>services.strcat(d,typeof s==='string'?services.literal(s):s),
-  strlen:p=>BigInt(services.strlen(p)),ptrBefore:(a,b)=>environment.address(a)<environment.address(b),
+  charPointer:p=>typeof p==='string'?services.literal(p):environment.address(p),strcpy:copyString,Strcpy:copyString,Strcat:(d,s)=>services.strcat(d,typeof s==='string'?services.literal(s):s),
+  strlen:p=>BigInt(services.strlen(name.charPointer(p))),ptrBefore:(a,b)=>environment.address(a)<environment.address(b),
   is_animal:equip.is_animal,type_is_pname:p=>Boolean(p.mflags2&BigInt(N.M2_PNAME)),
   engulfing_u:pickup.engulfing_u,
   ismnum:n=>Number(n>=N.LOW_PM&&n<N.NUMMONS),
@@ -70,7 +70,7 @@ export function enableMonsterInventory(environment,layouts,creation){
  name.bufs=Array.from({length:5},(_,i)=>pool+i*N.BUFSZ);Object.defineProperty(name,'bufidx',{get:()=>transport.read('Int32',index),set:v=>transport.write('Int32',index,v)});
  Object.defineProperty(name,'Hallucination',{get:()=>Boolean(env.u.uprops[N.HALLUC].intrinsic&&!env.u.uprops[N.HALLUC_RES].intrinsic&&!env.u.uprops[N.HALLUC_RES].extrinsic)});
  name.hcolors=hcolors.map(services.literal);
- environment.register('monster-names',{mon_nam,Monnam,minimal_monnam,Mgender,pmname,new_oname,a_monnam,Amonnam,y_monnam,YMonnam,noit_Monnam,noit_mon_nam,obj_pmname,mon_nam_too,Adjmonnam,some_mon_nam,noname_monnam,x_monnam,hcolor},name,{prepareArgs:(fn,args)=>{
+ environment.register('monster-names',{mon_nam,Monnam,minimal_monnam,Mgender,pmname,new_oname,a_monnam,Amonnam,y_monnam,YMonnam,noit_Monnam,noit_mon_nam,obj_pmname,mon_nam_too,Adjmonnam,some_mon_nam,noname_monnam,x_monnam,hcolor,mon_pmname,Some_Monnam},name,{prepareArgs:(fn,args)=>{
   if(fn==='hcolor')return [name.charPointer(args[0])];
   args[0]=fn==='pmname'?record('struct permonst',args[0]):['new_oname','obj_pmname'].includes(fn)?object(args[0]):monster(args[0]);
   if(['pmname','new_oname','noname_monnam'].includes(fn))args[1]=transport.int(args[1]);
