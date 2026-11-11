@@ -1,12 +1,12 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "20a9403f89c0c538ec0d3f948da301b36168f939",
+  "acceptedCheckpoint": "f11154ee16ed5fd15cedc36a8dd1e6f243b95bd9",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
-    "verified-subset": 62,
-    "not-connected": 53,
+    "verified-subset": 65,
+    "not-connected": 50,
     "provider-only": 1,
     "in-progress": 8,
     "transport-only": 3
@@ -118,14 +118,16 @@
     {
       "module": "ioctl",
       "source": "sys/share/ioctl.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original getioctls/setioctls/getwindowsz use shared native termio and terminal dimensions over configured virtual SDK tty. Raw calls cover tty0/1/2, bad fd, poisoned buffers, attribute actions, SDK speed and pathconf. Suspend and general ioctls remain unverified.",
+      "evidence": "scripts/test-standalone-window-startup.mjs:606 original-C comparisons using accepted native-terminal compatibility header/unchanged conversion and explicit zeroed scratch inputs; scripts/test-standalone-stdio-buffers.mjs:768 original-C buffer comparisons. Full-game acceptance remains false."
     },
     {
       "module": "unixtty",
       "source": "sys/share/unixtty.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original gettty/setftty/introff/intron/tty_utf8graphics_fixup use shared72-byte native terminal structures/scalars and unchanged native-terminal conversion over independently tested virtual SDK device calls. Complete source-written state and iflags match. Error/settty/suspend lifecycle and arbitrary device configurations remain unverified.",
+      "evidence": "scripts/test-standalone-window-startup.mjs:606 original-C comparisons using accepted native-terminal compatibility header/unchanged conversion and explicit zeroed scratch inputs; scripts/test-standalone-stdio-buffers.mjs:768 original-C buffer comparisons. Full-game acceptance remains false."
     },
     {
       "module": "were",
@@ -555,8 +557,8 @@
       "module": "windows",
       "source": "src/windows.c",
       "status": "verified-subset",
-      "scope": "Original has_color over shared window capability/mask/name and use_color alias, including complete source glyph-map reset. Window selection/lifecycle/menus/status/input remain unfinished.",
-      "evidence": "scripts/test-standalone-display-startup.mjs:3981 C comparisons across color capabilities, signal registration and12 full9624-glyph/shared-state/RNG prefixes; mklev remains explicit unresolved edge."
+      "scope": "Original has_color plus compiler-measured source procedure initialization, hangup table, tty selection and shared callback identities. Lifecycle/menus/status/input remain incomplete; external callback bodies are not accepted by table-presence checks.",
+      "evidence": "scripts/test-standalone-window-startup.mjs:606 original-C comparisons using accepted native-terminal compatibility header/unchanged conversion and explicit zeroed scratch inputs; scripts/test-standalone-stdio-buffers.mjs:768 original-C buffer comparisons. Full-game acceptance remains false."
     },
     {
       "module": "cfgfiles",
@@ -921,8 +923,9 @@
     {
       "module": "wintty",
       "source": "win/tty/wintty.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original source initializers and tty_init_nhwindows prefix create the base window/DisplayDesc, configure terminal and cursor, and reach actual VERSION copyright_banner_line boundary. Defined descriptor fields, complete base-window image and all20 window slots compared. Banner, remaining lifecycle, menu/status/input and full-game output remain unfinished.",
+      "evidence": "scripts/test-standalone-window-startup.mjs:606 original-C comparisons using accepted native-terminal compatibility header/unchanged conversion and explicit zeroed scratch inputs; scripts/test-standalone-stdio-buffers.mjs:768 original-C buffer comparisons. Full-game acceptance remains false."
     },
     {
       "module": "unixunix",

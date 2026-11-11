@@ -380,3 +380,34 @@ The profile binds generated epitaph/engrave/rumors/bogusmon/oracles assets as
 well as all Lua files; callers inject those inputs into both virtual filesystems.
 This accepts the tested first-level cohort through the same null window callback,
 not a playable engine or a complete vision/region/trap surface.
+
+
+Window and Unix terminal startup now use `enableWindowSystem(layouts)` after
+existing game/display startup. The original procedure initializers, tty selection,
+base-window construction, terminal setup and cursor startup match the connected
+C group through the next missing VERSION banner owner. This is a startup prefix;
+window lifecycle, text/status/menu/input and full-game recording acceptance remain
+unfinished. The independent raw SDK device checks and native-layout policy checks
+are distinct. The latter reuse unchanged `services/native-terminal.js` and set
+transport scratch to zero in both test fixtures: SDK TCGETS leaves speed fields
+untouched. Production scratch behavior is not claimed by that controlled-input
+comparison. Three not-yet-initialized DisplayDesc fields and its padding are
+excluded; all source-initialized fields, the entire zero-initialized base-window
+record and all20 window slots are compared. Foreign callback presence checks do
+not verify those foreign bodies. Source-owned/private callbacks use exact names.
+
+```sh
+python3 scripts/build-standalone-window-startup.py --reference-root /path/to/reference --out .cache/standalone-window-startup-v8
+node scripts/test-standalone-stdio-buffers.mjs
+node scripts/test-standalone-window-startup.mjs
+```
+
+The reference retains distinct original WINDOWS/WINTTY translation units, adds
+actual UNIXTTY/IOCTL/PLINE/getline/topl and configured libtinfo/recorder bridge,
+and uses the accepted forced native-terminal header/library. Generated fixture
+copies remove exactly the previous owned-storage declarations and four prior
+abort/diagnostic message definitions in favor of their original owners. The
+receipt binds originals, generated inputs, SDK device/stdio sources and artifacts;
+unconnected functions abort with their name. No translated policy is changed.
+Stdio passes768 C buffer comparisons; window/terminal startup passes606 focused
+comparisons. The expanded30-check regression gate passed; a separate startup fixture also reaches the VERSION boundary with Wasm/network capabilities forbidden. Full-game recording acceptance remains outstanding.

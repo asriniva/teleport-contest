@@ -10,7 +10,7 @@ export function createStdio(memory,filesystem,libc,{stdin=new Uint8Array(),stdou
     function stream(p){const f=files.get(address(p));if(!f)throw new VFSError('EBADF');return f;}
     function allocate(fd,mode=0) {
         const p=memory.calloc(1,32);if(!p)throw new VFSError('ENOMEM');
-        files.set(p,{fd,eof:false,error:false,unget:[],mode,capacity:1024,buffer:0,ownsBuffer:true,readPos:0,readEnd:0,writeEnd:0});return p;
+        files.set(p,{fd,eof:false,error:false,unget:[],mode,capacity:mode===2?0:1024,buffer:0,ownsBuffer:true,readPos:0,readEnd:0,writeEnd:0});return p;
     }
     function buffer(f){if(!f.buffer){f.buffer=memory.malloc(f.capacity);if(!f.buffer)throw new VFSError('ENOMEM');}return f.buffer;}
     function read(fd,p,n) {
@@ -39,23 +39,24 @@ export function createStdio(memory,filesystem,libc,{stdin=new Uint8Array(),stdou
             if(f.unget.length){memory.HEAPU8[p+done++]=f.unget.pop();continue;}
             if(f.readPos<f.readEnd){const count=Math.min(n-done,f.readEnd-f.readPos);memory.memmove(p+done,f.buffer+f.readPos,count);f.readPos+=count;done+=count;continue;}
             if(f.eof)break;
-            if(f.mode===2){const count=read(f.fd,p+done,n-done);done+=count;if(!count){f.eof=true;break;}}
+            if(!f.capacity){const count=read(f.fd,p+done,n-done);done+=count;if(!count){f.eof=true;break;}}
             else {const at=buffer(f),count=read(f.fd,at,f.capacity);f.readPos=0;f.readEnd=count;if(!count){f.eof=true;break;}}
         }
         return done;
     }
     function fileWrite(f,p,n) {
         p=address(p);n=Number(n);memory.bounds(p,n);discardInput(f);
-        if(f.mode===2)return write(f.fd,p,n);
-        const at=buffer(f);let done=0;
-        while(done<n){
-            let count=Math.min(n-done,f.capacity-f.writeEnd);
-            if(f.mode===1){const newline=memory.HEAPU8.indexOf(10,p+done);if(newline>=p+done&&newline<p+done+count)count=newline-p-done+1;}
-            memory.memmove(at+f.writeEnd,p+done,count);f.writeEnd+=count;done+=count;
-            if(f.writeEnd===f.capacity||(f.mode===1&&memory.HEAPU8[at+f.writeEnd-1]===10))flush(f);
+        // Configured musl __fwritex writes pending bytes and the entire input
+        // directly when it exceeds available space; an exact fit stays pending.
+        if(n>f.capacity-f.writeEnd){flush(f);return write(f.fd,p,n);}
+        let done=0;
+        if(f.mode===1){
+            for(let i=n;i>0;i--)if(memory.HEAPU8[p+i-1]===10){flush(f);done=write(f.fd,p,i);if(done<i)return done;break;}
         }
-        return done;
+        if(done<n){memory.memmove(buffer(f)+f.writeEnd,p+done,n-done);f.writeEnd+=n-done;}
+        return n;
     }
+
     function operation(p,fn,failure){let f;try{f=stream(p);return fn(f);}catch(error){if(f&&error instanceof VFSError)f.error=true;return fail(error,failure);}}
     const api={
         stdin:allocate(0),stdout:allocate(1,1),stderr:allocate(2,2),
@@ -74,11 +75,23 @@ export function createStdio(memory,filesystem,libc,{stdin=new Uint8Array(),stdou
         fflush:p=>p?operation(p,f=>{flush(f);discardInput(f);return 0;},-1):capture(()=>{let status=0;for(const [p,f]of files)if(f.writeEnd&&operation(p,()=>{flush(f);return 0;},-1)!==0)status=-1;return status;},-1),
         setvbuf:(p,userBuffer,mode,size)=>operation(p,f=>{
             mode=Number(mode);size=Number(size);userBuffer=address(userBuffer);
-            if(![0,1,2].includes(mode)||!Number.isSafeInteger(size)||size<0)throw new VFSError('EINVAL');
-            if(userBuffer&&mode!==2){if(!size)throw new VFSError('EINVAL');memory.bounds(userBuffer,size);}
-            flush(f);discardInput(f);if(f.ownsBuffer&&f.buffer)memory.free(f.buffer);
-            f.buffer=mode===2?0:userBuffer;f.ownsBuffer=!userBuffer;f.capacity=size||1024;f.mode=mode;return 0;
+            // setvbuf is defined before stream I/O. musl retains its original
+            // buffer for null/small supplied storage, and reserves UNGET=8.
+            f.mode=0;
+            if(![0,1,2].includes(mode))return -1;
+            if(!Number.isSafeInteger(size)||size<0)throw new RangeError('Invalid stdio buffer size');
+            if(mode===2)f.capacity=0;
+            else if(userBuffer&&size>=8){
+                memory.bounds(userBuffer,size);
+                if(f.ownsBuffer&&f.buffer)memory.free(f.buffer);
+                f.buffer=userBuffer+8;f.ownsBuffer=false;f.capacity=size-8;
+            }
+            if(mode===1&&f.capacity)f.mode=1;
+            return 0;
         },-1),
+        setbuf:(p,userBuffer)=>{api.setvbuf(p,userBuffer,userBuffer?0:2,1024);},
+        __fbufsize:p=>operation(p,f=>f.capacity,0),
+        __fpending:p=>operation(p,f=>f.writeEnd,0),
         fread:(p,size,count,file)=>operation(file,f=>{size=Number(size);count=Number(count);if(!size||!count)return 0;return Math.floor(fileRead(f,p,size*count)/size);},0),
         fwrite:(p,size,count,file)=>operation(file,f=>{size=Number(size);count=Number(count);if(!size||!count)return 0;return Math.floor(fileWrite(f,p,size*count)/size);},0),
         fgetc:p=>operation(p,f=>{const at=memory.malloc(1);if(!at)throw new VFSError('ENOMEM');try{return fileRead(f,at,1)?memory.HEAPU8[at]:-1;}finally{memory.free(at);}},-1),
