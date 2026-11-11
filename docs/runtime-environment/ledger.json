@@ -1,14 +1,14 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "db577b2574fb7f50a53e0565ebce7e63a92fe542",
+  "acceptedCheckpoint": "b5a723f1d399fa0e896a87b78e6f0c6def2f54a9",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
-    "provider-only": 2,
-    "not-connected": 68,
-    "verified-subset": 43,
-    "in-progress": 8,
+    "verified-subset": 49,
+    "not-connected": 64,
+    "provider-only": 1,
+    "in-progress": 7,
     "transport-only": 6
   },
   "fullGameAccepted": false,
@@ -52,8 +52,9 @@
     {
       "module": "calendar",
       "source": "src/calendar.c",
-      "status": "provider-only",
-      "scope": "Base provider exists, but no new standalone whole-module/profile acceptance is claimed in this checkpoint."
+      "status": "verified-subset",
+      "scope": "Existing calendar provider runs actual getnow with explicit fixed-datetime input; initial birthday compares exactly with C. No new timezone portability or full calendar acceptance claim.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
     },
     {
       "module": "stairs",
@@ -146,8 +147,9 @@
     {
       "module": "exper",
       "source": "src/exper.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Source newpw initial energy/increment setup matches C over role/race/seed inputs. Experience gain/drain and later-level energy are not accepted.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
     },
     {
       "module": "mkmap",
@@ -423,10 +425,11 @@
     {
       "module": "attrib",
       "source": "src/attrib.c",
-      "status": "in-progress",
-      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet.",
+      "status": "verified-subset",
+      "scope": "Source newhp and adjabil/role_abil/postadjabil connected through original ATTRIB adapter, in addition to prior inventory luck subset. Initial-role/race intrinsics/HP verified; later attribute/level/UI behavior remains unaccepted.",
       "priorStatus": "not-connected",
-      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
     },
     {
       "module": "sfbase",
@@ -464,8 +467,9 @@
     {
       "module": "u_init",
       "source": "src/u_init.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Source u_init_misc via unchanged U_INIT adapter initializes complete hero state while preserving full24-byte roleplay record. Forty source tables receive measured standalone storage; skills/initial inventory algorithms remain unconnected.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
     },
     {
       "module": "sounds",
@@ -495,8 +499,11 @@
       "module": "allmain",
       "source": "src/allmain.c",
       "status": "in-progress",
-      "scope": "Actual newgame prefix through object initialization and role selection matches original C shared state/RNG; both stop at nhl_init. Full startup and game loop are unfinished.",
-      "evidence": "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup."
+      "scope": "Actual newgame runs through object/role/dungeon/artifact/hero setup and persistent nhcore.lua startup, then matches the C has_color boundary inside reset_glyphmap. Map/display/inventory/game loop/full-game recordings remain unfinished.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.",
+      "priorEvidence": [
+        "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup."
+      ]
     },
     {
       "module": "mthrowu",
@@ -604,8 +611,9 @@
     {
       "module": "polyself",
       "source": "src/polyself.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original POLYSELF adapter executes set_uasmon, form resistance/property/header macros, float_vs_flight/steed_vs_stealth/polysense during hero startup. Actual polymorph/reversion and UI branches remain unfinished.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
     },
     {
       "module": "wizcmds",
@@ -722,10 +730,13 @@
       "module": "artifact",
       "source": "src/artifact.c",
       "status": "verified-subset",
-      "scope": "Shared original artifact data/properties plus A_NONE construction-time generation/existence/origin bookkeeping; divine gifts/role-race setup/wielded/world effects remain unfinished.",
+      "scope": "Prior creation/existence/origin properties plus actual init_artifacts/hack_artifacts: complete mutable artilist, artiexist and artidisco bytes/payloads match C across roles/races/alignments. Divine gifts/wielded/world effects remain unfinished.",
       "priorStatus": "not-connected",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
-      "evidence": "scripts/test-standalone-item-naming.mjs:11046 comparisons including full existence/origin bytes and RNG logs; explicit profile in README.md"
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.",
+      "priorEvidence": [
+        "scripts/test-standalone-item-naming.mjs:11046 comparisons including full existence/origin bytes and RNG logs; explicit profile in README.md"
+      ]
     },
     {
       "module": "decl",
@@ -764,8 +775,11 @@
       "module": "eat",
       "source": "src/eat.c",
       "status": "verified-subset",
-      "scope": "obj_nutrition/eaten_stat plus set_tin_variety/tin_variety construction paths; full active eating and healthy-tin operations unaccepted.",
-      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
+      "scope": "Prior item nutrition/tin-construction subset plus actual init_uhunger during source hero startup. Active eating effects and wider hunger transitions remain unaccepted.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.",
+      "priorEvidence": [
+        "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
+      ]
     },
     {
       "module": "objnam",
@@ -787,8 +801,11 @@
       "module": "nhlua",
       "source": "src/nhlua.c",
       "status": "verified-subset",
-      "scope": "Sandbox creation, source library registrations, actual nhlib.lua/dungeon.lua loading/callbacks, pcall and teardown exercised during matching dungeon initialization. Sandbox limit/error branches and general callback closure remain unfinished.",
-      "evidence": "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden."
+      "scope": "Prior dungeon startup plus actual l_nhcore_init loading real nhcore.lua and retaining Lua state. Both original Lua5.4.8 and pure-JS VM expose expected core/nh/selection/object/des tables. Sandbox limits/errors and general callback closure remain unverified.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.",
+      "priorEvidence": [
+        "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden."
+      ]
     },
     {
       "module": "files",
@@ -915,8 +932,9 @@
     {
       "module": "botl",
       "source": "src/botl.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Actual max_rank_sz computes rank-name width during hero startup. Status rendering and UI remain unfinished.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
     },
     {
       "module": "zap",
@@ -934,8 +952,8 @@
   ],
   "rebaseNote": "Rebased to main3296b9a; refreshed 138 policy and adapter/record/terminal metadata receipts; prior13-check regression PASS.",
   "latestWorkingTreeEvidence": {
-    "gate": "23 standalone development checks PASS",
-    "dungeonComparisons": 2631,
-    "scope": "Dungeon initialization and explicit environment-input subset; full-game acceptance remains false."
+    "gate": "24 standalone development checks PASS",
+    "heroStartupComparisons": 58212,
+    "scope": "Artifact/hero/persistent-core initialization and actual newgame prefix only. Full-game acceptance remains false."
   }
 }

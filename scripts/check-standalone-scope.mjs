@@ -14,6 +14,7 @@ const check=(file,expected)=>assert.equal(sha(path.resolve(root,file)),expected,
 const baseline=json('docs/runtime-environment/scope-baseline.json');
 for(const [file,hash]of Object.entries(baseline.sha256))check(file,hash);
 for(const name of ['isaac64','terminal','storage'])assert.deepEqual(read('js/'+name+'.js'),read('frozen/'+name+'.js'),'Frozen '+name);
+for(const [file,hash]of Object.entries(json('js/standalone/hero-abi.json').sourceSha256))check(file,hash);
 const records=json('js/standalone/records.json');
 check('nethack-c/wasm/compile-defines.json',records.definesSha256);
 check('nethack-c/wasm/tu-fragments/decl-schema.json',records.declSchemaSha256);

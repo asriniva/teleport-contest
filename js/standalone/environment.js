@@ -43,6 +43,7 @@ import {enableMonsterInventory} from './monster-inventory.js';
 import {enableWorldPosition} from './world-position.js';
 import {createEnvironmentInputs} from './environment-inputs.js';
 import {enableLuaSandbox} from './lua-sandbox.js';
+import {enableHeroStartup} from './hero-startup.js';
 import {enableGameStartup} from './game-startup.js';
 
 export function createStandaloneEnvironment(options={}) {
@@ -258,6 +259,7 @@ export function createStandaloneEnvironment(options={}) {
         enableMonsterCreation:layouts=>{if(!monsterSelection)throw new Error('Monster creation requires species selection');return monsterCreation=enableMonsterCreation(environment,layouts,monsterSelection);},
         enableMonsterInventory:layouts=>{if(!monsterCreation)throw new Error('Monster inventory requires monster creation');return enableMonsterInventory(environment,layouts,monsterCreation);},
         enableWorldPosition:layouts=>{if(!monsterCreation)throw new Error('World positioning requires monster creation');return enableWorldPosition(environment,layouts,monsterCreation);},
+        enableHeroStartup:layouts=>{if(!monsterCreation||!itemInventory)throw new Error('Hero startup requires monster/inventory services');return enableHeroStartup(environment,layouts,monsterCreation,itemInventory);},
         enableGameStartup:layouts=>{if(!monsterCreation)throw new Error('Game startup requires monster services');return enableGameStartup(environment,layouts,monsterCreation);},
         enableSerialization:layouts=>enableSerialization(environment,layouts),
         enableTerminal:(layout,options)=>enableTerminal(environment,layout,options),
