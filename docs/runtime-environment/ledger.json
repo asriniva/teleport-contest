@@ -1,7 +1,7 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "9e849bdc3541f13a2278b9e610e8e3ab043c74f5",
+  "acceptedCheckpoint": "e0c80071574e7fd27a3cab8a74f439e2c6aff2d4",
   "counts": {
     "canonical-dependency": 1,
     "in-progress": 15,

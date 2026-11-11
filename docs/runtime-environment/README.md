@@ -13,23 +13,24 @@ subsets, transport-only adapters, active integration and unconnected modules.
 Provider libraries such as Lua/libc/CVFS are outside that denominator. No row's
 component status implies full-game recording equivalence.
 
-The latest accepted checkpoint is `9e849bd` on main. Real source `initoptions`
-now precedes level/pet/inventory/attribute creation and the initial map/status
-render. The 38-check gate passes. The first-display comparison passes 10,881
-original-C checks over all13 roles and three seeds, including exact terminal
-bytes with initialized symbols/visible hero, complete observed terrain/vision
-state and whole-prefix RNG logs. The JS prefix runs with Wasm/network access
-forbidden. GLYPHS additionally passes479,795 header/cache/memchr comparisons.
-This accepts that prefix, which stops before `u_init_skills_discoveries`.
+The latest verified implementation checkpoint is `e0c8007`. The expanded
+42-check regression gate passes with all current test-script hashes verified.
+Real source options, level/pet/inventory/attributes, skills and initial equipment
+now lead through the legacy pager, input/history/messages and the initial
+map/status display. Equipment startup passes14,241 original-C comparisons over
+47 ordinary/roleplay cases; equipment actions pass9,760 comparisons over4 cases.
+The pager prefix passes14,805 comparisons over47 cases, including96,891 exact
+terminal bytes and47 real Space acknowledgments/recorder frames. The JS prefix
+runs with Wasm/network access forbidden. MDLIB/DATE separately passes24,705 C
+comparisons and13,590 JS ownership/isolation checks over15 cases in5 timezones.
+These are connected-prefix and component results, not complete modules or a
+playable backend.
 
-The separate worktree is continuing through skills, starting equipment, legacy
-pager, input/history/messages and DO/SAVE lifecycle transport. Preliminary
-skills/equipment prefixes passed39 ordinary cases plus8 targeted blind/nudist/
-deaf/pauper cases. Focused armor removal/reapplication and real callback
-cancellation cases pass; a wizard-cloak case observes actual resistance-memory
-clears and retained64-bit monster state. Broader review fixes and new providers
-still await the expanded regression gate; these are not accepted complete
-modules or a playable backend.
+DO/SAVE, timer/light/room persistence, timestamp and turn-loop transport are
+connected but remain incomplete. With checkpointing enabled, the diagnostic
+startup reaches unresolved `save_worm`; turn-loop preamble reaches real starting
+gear effects and unresolved `change_luck`. Complete startup, nonempty checkpoint/
+restore, completed turns and full-game recordings remain unaccepted.
 
 Remaining major stages are complete startup (including original metadata/date
 population, checkpointing and welcome), ALLMAIN turn-loop/preamble (which also
