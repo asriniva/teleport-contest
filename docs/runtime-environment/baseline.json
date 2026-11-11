@@ -1,0 +1,28 @@
+{
+  "baseCommit": "ddc6f24e62924f846ed9f847dfb87b1791c3113d",
+  "worktree": "/Users/arj/Desktop/nethack_comp/runtime-environment",
+  "liveCheckout": "/Users/arj/Desktop/nethack_comp/teleport-contest",
+  "scope": "Differences only among inventory inputs; live uncommitted changes were not copied. No active artifacts or caches are shared for writing.",
+  "differences": [
+    {
+      "path": "js/ported/calendar.js",
+      "worktreeSha256": "3dc51bb6b44f12255074944817ce5fee783e8ed9cc03c0f078efc027ce5cd743",
+      "liveSha256": "1e475c7d82dce8bbf7bb188e4c77143b211aa53fcb264650a64cd542cc337ee9"
+    },
+    {
+      "path": "js/ported/light-runtime.js",
+      "worktreeSha256": "72cfd3f4a867a1e1e816ea73a129454ef8f17c39848164b9a36948342acc347d",
+      "liveSha256": "c6eb816a8cd414a8b896561c039e44266df3ccc662b62ef423c16ccd0dda967f"
+    },
+    {
+      "path": "js/ported/mon.js",
+      "worktreeSha256": "20b2521a2828b27678d0ecaf049ede0fa96a3da0a3753daf6943387b6641ebe2",
+      "liveSha256": "05f3f39643975e5f2861c8b9cbdc617eaf9b4e5ae8a644efa616a7a49a9aaa4e"
+    },
+    {
+      "path": "js/ported/wasm-runtime.js",
+      "worktreeSha256": "e24d727a75c50f16297c29c8b3dd72cc1793e63013ca131f4c82e29af3690f55",
+      "liveSha256": "a51564274c1a40435e0c7f2b2f20307e1bfee7d77c252adae03c3565283763a6"
+    }
+  ]
+}

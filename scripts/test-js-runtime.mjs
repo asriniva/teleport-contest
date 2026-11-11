@@ -10,13 +10,15 @@ import { C_ERRNO } from '../js/services/c-stdlib.js';
 import { C, R, T, withCEnvironment } from '../js/ported/c-runtime.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+// A separate worktree may borrow prepared reference sources read-only.
+const reference = process.env.STANDALONE_REFERENCE_ROOT || root;
 const scratch = path.join(root, '.cache/js-dependency-runtime');
 fs.mkdirSync(scratch, { recursive: true });
 const oracle = path.join(scratch, 'original-c-runtime');
-const compiler = process.env.CC || path.join(root, '.cache/wasm64-build/host-cc');
-const sources = ['strutil', 'alloc', 'isaac64', 'nhmd4'].map(name => path.join(root, 'nethack-c/upstream/src', name + '.c'));
+const compiler = process.env.CC || path.join(reference, '.cache/wasm64-build/host-cc');
+const sources = ['strutil', 'alloc', 'isaac64', 'nhmd4'].map(name => path.join(reference, 'nethack-c/upstream/src', name + '.c'));
 const built = spawnSync(compiler, ['-O2', '-DNOPANICTRACE', '-Dmalloc=js_probe_malloc', '-Drealloc=js_probe_realloc',
-    '-I' + path.join(root, '.cache/wasm64-build/tree/include'),
+    '-I' + path.join(reference, '.cache/wasm64-build/tree/include'),
     path.join(root, 'scripts/js-runtime-probe.c'), ...sources, '-o', oracle], { encoding: 'utf8' });
 assert.equal(built.status, 0, built.error?.message || built.stderr);
 const runtime = createJsRuntime({ initialBytes: 1024, maximumBytes: 2 * 1024 * 1024 });
