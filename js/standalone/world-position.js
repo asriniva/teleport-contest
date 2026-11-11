@@ -1,6 +1,6 @@
 // Original terrain, candidate collection and position-selection policies.
 import {enableTeleport} from './teleport.js';
-import {is_pool,is_lava,is_waterwall,db_under_typ,is_drawbridge_wall,is_db_wall,find_drawbridge} from '../ported/dbridge.js';
+import {is_pool,is_lava,is_waterwall,db_under_typ,is_drawbridge_wall,is_db_wall,find_drawbridge,is_moat} from '../ported/dbridge.js';
 import {closed_door,accessible} from '../ported/monmove.js';
 import {may_passwall} from '../ported/hack.js';
 import {sticks} from '../ported/mondata.js';
@@ -56,7 +56,7 @@ export function enableWorldPosition(environment,layouts,creation){
  const bridge=context(layouts.dbridge),D=layouts.dbridge;
  Object.assign(bridge,{bool:v=>Number(Boolean(v)),IS_DRAWBRIDGE:t=>t===D.DRAWBRIDGE_UP||t===D.DRAWBRIDGE_DOWN,IS_WATERWALL:t=>t===D.WATER,Is_juiblex_level:lev=>services.on_level(lev,world.svd.dungeon_topology.d_juiblex_level)});
  const shortReference=p=>({address:environment.address(p),get value(){return memory.view.getInt16(environment.address(p),true);},set value(v){memory.view.setInt16(environment.address(p),transport.short(v),true);}});
- environment.register('world-water-terrain',{is_pool,is_lava,is_waterwall,db_under_typ,is_drawbridge_wall,is_db_wall,find_drawbridge},bridge,{prepareArgs:(fn,args)=>fn==='find_drawbridge'?[shortReference(args[0]),shortReference(args[1])]:args});
+ environment.register('world-water-terrain',{is_pool,is_lava,is_waterwall,db_under_typ,is_drawbridge_wall,is_db_wall,find_drawbridge,is_moat},bridge,{prepareArgs:(fn,args)=>fn==='find_drawbridge'?[shortReference(args[0]),shortReference(args[1])]:args});
  const move=context(layouts.monmove);Object.assign(move,{
   bool:v=>Number(Boolean(v)),IS_DOOR:t=>t===layouts.monmove.DOOR,ACCESSIBLE:t=>t>=layouts.monmove.DOOR,
   SURFACE_AT:(x,y)=>world.levl[x][y].typ===D.DRAWBRIDGE_UP?services.db_under_typ(world.levl[x][y].drawbridgemask):world.levl[x][y].typ,

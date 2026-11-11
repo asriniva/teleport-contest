@@ -147,5 +147,8 @@
     "Focused configured-C subsets, not all rare branches",
     "No full-game or public44 acceptance claim",
     "Full standalone provenance gate remains separate from the targeted guards"
-  ]
+  ],
+  "mergedMainCommit": "50adae9",
+  "postMergeComparisonsRun": false,
+  "mergeQualification": "Text conflict only in divergence register. Main locomotion/DIG owners retained; missing defense leaf registered independently. All recorded comparison evidence predates this merge; no rerun per user instruction."
 }

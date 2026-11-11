@@ -3,14 +3,36 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import {runFullOriginalC} from './full-original-c-run.mjs';
-import {runStandaloneProgram} from './run-standalone-program.mjs';
-import {worldGraph} from './restoration-world-graph.mjs';
-import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
+import {builtinModules} from 'node:module';
 const directory=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1');
 const fixture=path.join(directory,'scenarios/death.json'),input=JSON.parse(fs.readFileSync(fixture));
 const out=path.resolve('.cache/standalone-death-program');fs.mkdirSync(out,{recursive:true});
 const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+// Snapshot before dynamically importing production modules: imports themselves
+// must not race ahead of the source revision which the evidence identifies.
+const root=process.cwd(),builtins=new Set(builtinModules),externalImports=new Set();
+const entries=['scripts/test-standalone-death-program.mjs','scripts/run-standalone-program.mjs','scripts/full-original-c-run.mjs','scripts/restoration-world-graph.mjs','js/wasm-replay-support.js'];
+function productionFiles(){
+ const files=new Set();
+ const visit=file=>{file=path.resolve(file);if(files.has(file))return;if(!fs.statSync(file).isFile())throw new Error('Expected source file '+file);files.add(file);
+  if(!/\.m?js$/.test(file))return;
+  const text=fs.readFileSync(file,'utf8'),specifiers=new Set();
+  for(const pattern of [/(?:^|[;\n])\s*(?:import|export)\s+[\w${},*\s]+?\s+from\s*['"]([^'"]+)['"]/g,/(?:^|[;\n])\s*import\s*['"]([^'"]+)['"]/g,/\bimport\s*\(\s*['"]([^'"]+)['"]/g])for(const match of text.matchAll(pattern))specifiers.add(match[1]);
+  for(const specifier of specifiers){if(specifier.startsWith('.'))visit(path.resolve(path.dirname(file),specifier));else{if(!specifier.startsWith('node:')&&!builtins.has(specifier))throw new Error('Unbound external module '+specifier+' in '+file);externalImports.add(specifier);}}
+  // Include literal local data resources in addition to imported JSON modules.
+  for(const match of text.matchAll(/new\s+URL\s*\(\s*['"](\.[^'"]+)['"]\s*,\s*import\.meta\.url/g)){const resource=path.resolve(path.dirname(file),match[1]);if(fs.existsSync(resource)&&fs.statSync(resource).isFile())visit(resource);}
+ };
+ for(const entry of entries)visit(path.join(root,entry));
+ return [...files].sort();
+}
+function assetFiles(dir,files=[]){for(const name of fs.readdirSync(dir)){const file=path.join(dir,name),stat=fs.statSync(file);if(stat.isDirectory())assetFiles(file,files);else if(stat.isFile())files.push(file);}return files.sort();}
+const snapshot=()=>({sourceSha256:Object.fromEntries(productionFiles().map(file=>[path.relative(root,file),sha(file)])),assetSha256:Object.fromEntries(assetFiles(directory+'/assets').map(file=>[path.relative(directory+'/assets',file),sha(file)])),referenceReceiptSha256:sha(directory+'/receipt.json'),fixtureSha256:sha(fixture)});
+const startProvenance=snapshot(),sealedReceipt=JSON.parse(fs.readFileSync(directory+'/receipt.json'));
+const sealedAssets=Object.fromEntries(Object.entries(sealedReceipt.sourceSha256).filter(([file])=>file.includes('/assets/')).map(([file,hash])=>[file.slice(file.lastIndexOf('/assets/')+8),hash]));
+assert.deepEqual(startProvenance.assetSha256,sealedAssets,'provided JS asset tree matches sealed C embed inputs');
+if(process.env.STANDALONE_DEATH_PROVENANCE_ONLY==='1'){console.log(JSON.stringify({profile:'provenance only; no game comparison',sourceFiles:Object.keys(startProvenance.sourceSha256).length,assetFiles:Object.keys(startProvenance.assetSha256).length,externalImports:[...externalImports].sort()}));process.exit(0);}
+const [{runFullOriginalC},{runStandaloneProgram},{worldGraph},{encodeRecorderScreen}]=await Promise.all([import('./full-original-c-run.mjs'),import('./run-standalone-program.mjs'),import('./restoration-world-graph.mjs'),import('../js/wasm-replay-support.js')]);
+
 let cr,jr,checks=0;
 const equal=(a,b,label)=>{assert.deepEqual(a,b,label);checks++;};
 const reference=await runFullOriginalC(directory,{...input,observeRuntime:r=>{cr=r;}});
@@ -38,6 +60,6 @@ equal(worlds.js,worlds.c,'actual post-main named world records and canonical poi
 const binaryPersistence=[];
 for(const name of Object.keys(reference.files))if(/\/(?:bones\.|save\/)/.test(name))binaryPersistence.push({path:name,cBytes:Buffer.from(reference.files[name].bytes,'base64').length,jsBytes:Buffer.from(actual.files[name].bytes,'base64').length,byteIdentical:reference.files[name].bytes===actual.files[name].bytes,semanticEquivalenceAccepted:false});
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json')));
-const files=['scripts/test-standalone-death-program.mjs','scripts/run-standalone-program.mjs','scripts/full-original-c-run.mjs','scripts/restoration-world-graph.mjs','js/standalone/program.js','js/standalone/end-lifecycle.js','js/standalone/topten.js','js/standalone/level-startup.js','js/standalone/level-contents.js','js/standalone/mthrowu.js','js/standalone/monster-movement.js','js/standalone/monster-lifecycle.js','js/standalone/dogmove.js'];
-const evidence={complete:true,deathRecordingAccepted:true,deathKind:'starvation while fainted',postMainWorldAccepted:true,fullGameAccepted:false,checks,inputBoundaries:actual.snapshots.length,frames:actual.frames.length,rawTerminalBytes:Buffer.from(actual.stdout,'base64').length,moves:actual.state.moves,consumed:actual.consumed,worldCoverage:worlds.js.coverage,binaryPersistence,reference:{receiptSha256:sha(path.join(directory,'receipt.json')),fixtureSha256:sha(fixture),upstream:receipt.upstream,profile:receipt.profile,buildEnvironment:receipt.buildEnvironment,gameTranslationUnits:receipt.gameTranslationUnits,luaTranslationUnits:receipt.luaTranslationUnits,verifiedSourceHashes:Object.keys(receipt.sourceSha256).length,verifiedArtifactHashes:Object.keys(receipt.artifactSha256).length},scriptSha256:Object.fromEntries(files.map(file=>[file,sha(file)])),limitation:'Only this genuine depth1 starvation-while-fainted death, exact main recording, score/log text and selected canonical world graph are accepted. This zero-point fixture has an empty ranking file and creates no bones/save file. Combat-caused deaths, nonempty score ranking, victory/progression, other interactions, arbitrary private/heap state and binary bones/save semantics remain separate requirements.'};
+const endProvenance=snapshot();equal(endProvenance,startProvenance,'production source closure, assets, reference receipt and fixture stable at start/end');
+const evidence={complete:true,deathRecordingAccepted:true,deathKind:'starvation while fainted',postMainWorldAccepted:true,fullGameAccepted:false,checks,inputBoundaries:actual.snapshots.length,frames:actual.frames.length,rawTerminalBytes:Buffer.from(actual.stdout,'base64').length,moves:actual.state.moves,consumed:actual.consumed,worldCoverage:worlds.js.coverage,binaryPersistence,reference:{receiptSha256:sha(path.join(directory,'receipt.json')),fixtureSha256:sha(fixture),upstream:receipt.upstream,profile:receipt.profile,buildEnvironment:receipt.buildEnvironment,gameTranslationUnits:receipt.gameTranslationUnits,luaTranslationUnits:receipt.luaTranslationUnits,verifiedSourceHashes:Object.keys(receipt.sourceSha256).length,verifiedArtifactHashes:Object.keys(receipt.artifactSha256).length},assemblyProvenanceStable:true,productionProvenance:startProvenance,nodeVersion:process.version,externalImports:[...externalImports].sort(),limitation:'Only this genuine depth1 starvation-while-fainted death, exact main recording, score/log text and selected canonical world graph are accepted. This zero-point fixture has an empty ranking file and creates no bones/save file. Combat-caused deaths, nonempty score ranking, victory/progression, other interactions, arbitrary private/heap state and binary bones/save semantics remain separate requirements.'};
 fs.writeFileSync(path.join(out,'evidence.json'),JSON.stringify(evidence,null,2)+'\n');console.log('PASS '+JSON.stringify(evidence));

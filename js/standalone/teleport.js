@@ -59,6 +59,6 @@ export function enableTeleport(environment,layouts,creation){
  for(const n of ['pline','You','You_cant','You_feel','Your','verbalize','impossible'])base[n]=(fmt,...args)=>resolve(n)(text(fmt),...args.map(text));
  bridge=createTeleportBridge(layouts.teleport);function call(n,...args){return transport.scoped(()=>bridge(local,n,...args.map(v=>typeof v==='string'?services.literal(v):v?.address??v)));}
  const inherited=[];if(environment.hasFunction('noteleport_level')){const entry=environment.start('monster-teleport-eligibility');if(entry.namespace.noteleport_level!==source.noteleport_level)throw new Error('Unexpected earlier TELEPORT eligibility owner');entry.namespace.noteleport_level=(...args)=>call('noteleport_level',...args);inherited.push('noteleport_level');}
- const names=Object.keys(abi.public).filter(n=>!environment.hasFunction(n));environment.register('world-position',Object.fromEntries(names.map(n=>[n,(...args)=>call(n,...args)])),local);
+ const names=[...Object.keys(abi.public),'goodpos_onscary','enexto_core'].filter(n=>!environment.hasFunction(n));environment.register('world-position',Object.fromEntries(names.map(n=>[n,(...args)=>call(n,...args)])),local);
  return{call,services:local,exports:names,inherited,limitation:'One original TELEPORT bridge/state and source-bound header/global transport. Core monster relocation/position/level transitions require C acceptance; optional teleport menus/traps/hero combinations remain separate.'};
 }

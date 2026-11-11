@@ -4,12 +4,12 @@
   "acceptedCheckpoint": "d3f8cce27971690b66ef42555070b5d0eef252d2",
   "counts": {
     "canonical-dependency": 1,
-    "in-progress": 34,
-    "not-connected": 16,
+    "in-progress": 37,
+    "not-connected": 14,
     "provider-only": 1,
     "transport-only": 5,
     "verified-component": 10,
-    "verified-subset": 71
+    "verified-subset": 70
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -73,8 +73,9 @@
     {
       "module": "rip",
       "source": "src/rip.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Original tombstone context connected; focused11 C comparisons and complete frozen starvation-main recording/postexit selected-world proof pass. Alternate render profiles remain unverified.",
+      "evidence": "scripts/test-standalone-rip.mjs"
     },
     {
       "module": "date",
@@ -417,8 +418,9 @@
     {
       "module": "explode",
       "source": "src/explode.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Original cached explosion/scatter owner connected;185 focused C checks cover actual pet damage/item destruction and nonempty blocked/successful scatter. Other elements/billing/command-triggered scheduling remain unverified.",
+      "evidence": "scripts/test-standalone-explode.mjs"
     },
     {
       "module": "questpgr",
@@ -640,9 +642,9 @@
     {
       "module": "dig",
       "source": "src/dig.c",
-      "status": "verified-subset",
-      "scope": "Original unearth_objs executes for generated pits via shared buried-object/timer/engraving/display providers; source map-output suppression retained. Player digging, buried-ball punishment, terrain transitions and broader digging remain unaccepted.",
-      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
+      "status": "in-progress",
+      "scope": "One original digging context with canonical private occupation;23 C checks cover active digging and completed pit. Broader excavation remains unverified.",
+      "evidence": "scripts/test-standalone-dig.mjs"
     },
     {
       "module": "end",
@@ -675,8 +677,8 @@
       "module": "teleport",
       "source": "src/teleport.c",
       "status": "in-progress",
-      "scope": "Six prior position queries now share one unchanged full native TELEPORT bridge with relocation entries and private state. Core pet placement on stairs and prior query-regression validation are in progress; broader hero/level travel and full recording acceptance remain unverified.",
-      "evidence": "scripts/test-standalone-teleport.mjs (in progress)"
+      "scope": "One native bridge;218 focused C checks plus genuine four-cross saved-game stairs/down-up-down recordings and selected worlds pass. Other teleport/progression paths remain unverified.",
+      "evidence": "scripts/test-standalone-teleport.mjs"
     },
     {
       "module": "mklev",
@@ -696,9 +698,10 @@
       "module": "spell",
       "source": "src/spell.c",
       "status": "in-progress",
-      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet. Original spell_skilltype is connected for starting spellbook filtering. initialspell/num_spells transport is available on shared records; skill/discovery lifecycle remains unverified.",
+      "scope": "One original spell context and canonical book hooks;19 actual-main C checks cover forcebolt and completed study. Required Book-of-Dead ritual/endgame remains unverified.",
       "priorStatus": "not-connected",
-      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
+      "evidence": "scripts/test-standalone-spell.mjs"
     },
     {
       "module": "do",
@@ -810,8 +813,8 @@
       "module": "read",
       "source": "src/read.c",
       "status": "in-progress",
-      "scope": "One cached full original READ source owner is connected, retaining stateless candy-wrapper ownership. Genuine-main charging scroll selection/consumption is under C comparison; Book-of-Dead invocation still requires SPELL. Expanded regression pending.",
-      "evidence": "scripts/test-standalone-read.mjs (in progress)"
+      "scope": "One source reading context;28 actual-main C checks cover identification and charging scroll consumption. Other effects and Book-of-Dead progression remain unverified.",
+      "evidence": "scripts/test-standalone-read.mjs"
     },
     {
       "module": "apply",
@@ -1011,11 +1014,10 @@
   ],
   "rebaseNote": "Rebased to main3296b9a; refreshed 138 policy and adapter/record/terminal metadata receipts; prior13-check regression PASS.",
   "latestWorkingTreeEvidence": {
-    "baseCheckpoint": "df33dd4",
-    "gate": "Expanded working tree awaits a fresh full regression. The accepted d3f8cce implementation/39ef50e documentation checkpoint has a historical51-check gate; that gate does not attest df33dd4 or subsequent changes.",
-    "ordinaryMain": "Ordinary inventory/eating/wield/takeoff-wear/drop-pickup, combined changed-state save and all four fresh C/JS cross-restores PASS253 checks/11 scenarios/104frames/103boundaries. Finite movement through turn238 matches recordings/RNG/selected world graphs. Full starvation death and stairs remain in progress.",
-    "scope": "New providers and bounded source comparisons are in progress; expanded full gate remains pending. No status implies complete-game acceptance. All138 translated policies and3 frozen files remain unchanged, with Wasm/network forbidden in JS execution fixtures.",
-    "priority": "Complete ordinary turns/combat/inventory, level travel and mandatory progression, save/resume and death/victory/scoring first. Defer optional special interactions unless they block this path.",
-    "ordinaryWands": "Actual-main create-monster/striking/lightning wand cohorts pass169/168/168 checks; native turn2, six/seven/ten frames, charge use, selected world and RNG exact. Temporary binary checkpoint recovery semantics remain separate."
+    "baseCheckpoint": "5149f13075d67f892ba40313b51fdcd8a912d216",
+    "gate": "Ten current ordinary cohorts pass; scope verifies138 unchanged policies/3 frozen files/512 production files. Full historical51-check regression remains separate.",
+    "ordinaryMain": "Frozen complete starvation main PASS20:2028turns,3576input boundaries,3731frames,204539TTYbytes; exact RNG/recordings/selected postexit world;516 source/data+157assets unchanged.",
+    "travelAndRanking": "Four C/JS save crosses each for down/up/down-up-down pass;50-point quit/nonempty ranking and four histories match.",
+    "scope": "See ordinary-game-evidence.json. Full-game/registry/victory/bones acceptance remains false; newer unimported WIZARD/MPLAYER/MINION work is separate."
   }
 }
