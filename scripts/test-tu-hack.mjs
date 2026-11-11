@@ -34,7 +34,7 @@ for(const name of ['notice_mons_cmp','cmp_weights'])assert.ok(imports.has('telep
 const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathToFileURL(resolve(dir,'hack-'+mode+'.mjs')).href)).default));
 const text=(m,p)=>{let i=Number(p),end=i;assert.ok(i>=0&&i<m.HEAPU8.length,'C string address');while(end<m.HEAPU8.length&&m.HEAPU8[end])end++;assert.ok(end<m.HEAPU8.length,'terminated C string');return Buffer.from(m.HEAPU8.slice(i,end)).toString('latin1');};
 function layout(m){const out={};for(let i=0;i<m._probe_layout_count();i++)out[text(m,m._probe_layout_name(i))]=m._probe_layout_value(i);return out;}
-const reference=await factories[0](),L=layout(reference),environments=new WeakMap(),servicesByModule=new WeakMap(),callbackCalls=new Map();
+const reference=await factories[0](),L=Object.freeze(layout(reference)),environments=new WeakMap(),servicesByModule=new WeakMap(),callbackCalls=new Map();
 const runtime={hack(services,name,...args){callbackCalls.set(name,(callbackCalls.get(name)??0)+1);servicesByModule.set(services.moduleKey,services);if(!environments.has(services.moduleKey))environments.set(services.moduleKey,createHackEnvironment(services,L,core));return callHack(services,L,name,...args);}};
 const hybrid=await factories[1]({nethackPorted:runtime}),modules=[reference,hybrid];assert.deepEqual(layout(hybrid),L);
 const fixtureConstants=['PM_HUMAN','DO_MOVE','TEST_MOVE','TEST_TRAV','TEST_TRAP','ALTAR','NO_KILLER_PREFIX','ROOM','ROWNO','COLNO','OBJ_FLOOR','ARROW_TRAP'];
@@ -92,6 +92,15 @@ if(!filter||process.env.HACK_DIRECTED) {
   reset('travel '+mode+'/'+target.join(','));gfield('u','tx',target[0]);gfield('u','ty',target[1]);nfield('svc',['context'],'run',8);action('findtravelpath',mode);
  }
  reset('travel DEBUG body');gfield('u','tx',24);gfield('iflags','trav_debug',1);gfield('flags','runmode',N('RUN_CRAWL'));action('findtravelpath',2);
+ // Seeded obstacle fields exercise the unchanged BFS ordering and guess pass
+ // with fresh C-owned scratch arrays on repeatedly reused JS bindings.
+ for(let seed=1;seed<=12;seed++)for(const mode of [0,1,2]) {
+  reset('seeded travel '+seed+'/'+mode);
+  let random=seed;const next=()=>random=(Math.imul(random,1664525)+1013904223)>>>0;
+  for(let x=16;x<=28;x++)for(let y=6;y<=15;y++)if(x!==20||y!==10){const value=next()%8;terrain(x,y,N(value<2?'STONE':value===2?'DOOR':'ROOM'),value===2?N('D_CLOSED'):0);}
+  gfield('u','tx',seed%2?28:16);gfield('u','ty',seed%3?15:6);
+  nfield('svc',['context'],'run',8);action('findtravelpath',mode);
+ }
  // All trapped-state switch arms, including shared wriggle-free label behavior.
  for(const trap of ['TT_BEARTRAP','TT_PIT','TT_WEB','TT_LAVA','TT_INFLOOR','TT_BURIEDBALL'])for(const turns of [1,3])for(const diagonal of [0,1]) {
   reset('trapped '+trap+'/'+turns+'/'+diagonal);gfield('u','utrap',turns);gfield('u','utraptype',N(trap));gfield('u','dy',diagonal);gfield('flags','verbose',1);action('trapmove',21,10+diagonal,0n);

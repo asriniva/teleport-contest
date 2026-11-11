@@ -1,3 +1,2 @@
 wasm/dlb.o
-wasm/nhlsel.o
 wasm/unixres.o

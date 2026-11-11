@@ -1,13 +1,9 @@
 // POSIX libc ABI only; NetHack wrapper logic and identifier are JS.
 addToLibrary({
-  $teleportPosixregexServices__deps: ['regcomp', 'regexec', 'regerror', 'regfree', 'teleport_posixregex_identifier', 'teleport_posixregex_free', 'alloc', 'strcpy', '$stringToUTF8OnStack'],
+  $teleportPosixregexServices__deps: ['teleport_posixregex_identifier', 'teleport_posixregex_free', 'alloc', 'strcpy', '$stringToUTF8OnStack'],
   $teleportPosixregexServices: function() {
     return {
       moduleKey: Module,
-      regcomp: (re, text, flags) => _regcomp(BigInt(re), BigInt(text), flags),
-      regexec: (re, text, count, matches, flags) => _regexec(BigInt(re), BigInt(text), BigInt(count), BigInt(matches), flags),
-      regerror: (error, re, out, size) => Number(_regerror(error, BigInt(re), BigInt(out), BigInt(size))),
-      regfree: re => _regfree(BigInt(re)),
       heap: () => HEAPU8,
       signedHeap: () => HEAP8,
       identifier: () => Number(_teleport_posixregex_identifier()),

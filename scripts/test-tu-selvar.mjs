@@ -7,7 +7,9 @@ import hybridFactory from '../.cache/tu-probes/selvar-hybrid.mjs';
 import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
 import {C,R,T} from '../js/ported/c-runtime.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),layout=layouts.selvar;
-const runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
+const runtime=createPortedRuntime(layouts),factoryServices=new Map(),originalSelvar=runtime.selvar;
+runtime.selvar=(services,...args)=>{let seen=factoryServices.get(services.moduleKey);if(!seen)factoryServices.set(services.moduleKey,seen=new Set());seen.add(services);return originalSelvar(services,...args);};
+const modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function bytes(m,p,n){p=Number(p);if(!p)return null;return Buffer.from(m.HEAPU8.slice(p,p+n));}
 function text(m,p){let a=Number(p),e=a;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(a,e));}
 function snapshot(m){return {slots:Array.from({length:8},(_,i)=>({exists:m._probe_pointer(i)!==0n,fields:Array.from({length:7},(_,f)=>m._probe_field(i,f)),map:bytes(m,m._probe_map(i),layout.COLNO*layout.ROWNO+1)})),rect:bytes(m,m._probe_rect(),Number(m._probe_rect_size())),coords:[m._probe_coord(0),m._probe_coord(1)],description:bytes(m,m._probe_description_pointer(),Number(m._probe_description_size())),random:m._probe_rng_state()>>>0,count:m._probe_rng_count(),trace:text(m,m._probe_trace()).toString('hex')};}
@@ -61,3 +63,5 @@ fresh();call('new',1);terrain(2,2,6,6);call('flood_callback',1);call('option',1,
 fresh();call('option',3,0);rect(2,2,4,4);call('filter',0,1,50);
 fresh();const saved=snapshot(modules[0]);modules[1]._probe_set(0,3,3,1);assert.deepEqual(snapshot(modules[0]),saved);reset();
 console.log(`SELVAR: ${comparisons} ${referenceLabel}/hybrid selection-map, bounds, geometry, float32, callback and RNG-site comparisons checked.`);
+
+for(const seen of factoryServices.values())assert.equal(seen.size,1,'SELVAR factory reuses module-owned services');

@@ -98,6 +98,18 @@ for(const [row,col]of [[-1,0],[24,0],[0,-4],[23,79],[5,80]]){reset('clear eol '+
 reset('all cells defined and bounded serializer');action('nomux_clear_screen');
 for(const m of modules){const start=global(m,'nomux_buf');for(let row=0;row<24;row++)for(let col=0;col<80;col++){const at=start+BigInt((row*80+col)*Number(L.nomux_cellSize));for(const[name,value]of [['ch',65+(row+col)%26],['fg',row%16],['attr',row%8],['decgfx',row%2]])write(m,'nomux_cell',at,name,value);}}
 action('nomux_capture_screen');action('nomux_capture_write_screen');action('nomux_capture_write_input_boundary');
+// Full C-owned screens vary signed character bytes, defaults, colors,
+// attributes, DEC transitions and trailing blanks across reused live views.
+for(let seed=1;seed<=8;seed++){
+ reset('seeded full-screen capture '+seed);
+ let random=seed;const next=()=>random=(Math.imul(random,1664525)+1013904223)>>>0;
+ // C's inherited output buffer is only 24*256 bytes. Share styling within
+ // 20-cell runs: even maximal transitions then fit without C overflow.
+ let style;
+ const cells=Array.from({length:24*80},(_,i)=>{if(i%20===0)style=next();const value=next();return [['ch',[0,32,65,127,128,255][value%6]],['fg',(style>>>8)%16],['attr',(style>>>16)%8],['decgfx',(style>>>24)%2]];});
+ for(const m of modules){const start=global(m,'nomux_buf');for(let i=0;i<cells.length;i++)for(const[name,value]of cells[i])write(m,'nomux_cell',start+BigInt(i*Number(L.nomux_cellSize)),name,value);}
+ action('nomux_capture_screen');action('nomux_capture_write_input_boundary');
+}
 reset('raw transitions newline clipping and non-ASCII bytes');action('nomux_enter_raw_mode');input('A\x1b\t\n'+String.fromCharCode(128,255)+'z');action('nomux_raw_emit',m=>pointer(m,0),1);for(const ch of [10,13,31,32,255])action('nomux_raw_putch',ch);action('nomux_raw_emit_eol');action('nomux_get_cursor',m=>pointer(m,1),m=>pointer(m,1,1));action('nomux_capture_screen');
 for(const visibility of [0,0,1,1,2,-1]){reset('cached cursor visibility '+visibility);action('term_curs_set',visibility);}
 for(const n of [-1n,0n,0xffffffn,0x123456789abcdefn,-0x8000000000000000n]){reset('RGB signed long '+n);action('emit24bit',n);}

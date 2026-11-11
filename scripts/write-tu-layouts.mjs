@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const fields = {
+    nhlsel: [],
     hack: [],
     uhitm: [],
     mon: [],
@@ -158,6 +159,16 @@ for (const port of ports) {
         JSON.parse(fs.readFileSync(root+'js/wasm/tu-layouts.json')))}:{});
     const layout = port.probeContext === false ? {} : { size: Number(probe._probe_context_size()) };
     for (const field of fields[name]) layout[field] = Number(probe['_probe_offset_' + field]());
+    if (name === 'nhlsel') {
+        for (let i = 0; i < probe._probe_layout_count(); i++) {
+            let pointer = Number(probe._probe_layout_name(i)), end = pointer;
+            while (probe.HEAPU8[end]) end++;
+            const key = new TextDecoder().decode(probe.HEAPU8.subarray(pointer, end));
+            const value = BigInt.asIntN(64, probe._probe_layout_value(i));
+            assert(value >= BigInt(Number.MIN_SAFE_INTEGER) && value <= BigInt(Number.MAX_SAFE_INTEGER));
+            layout[key] = Number(value);
+        }
+    }
     if (name === 'strutil') {
         layout.bufSize = Number(probe._probe_buffer_size());
         layout.largestInt = probe._probe_largest_int();

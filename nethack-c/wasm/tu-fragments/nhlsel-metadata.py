@@ -25,7 +25,10 @@ for name,length in [('l_selection_methods',25),('l_selection_meta',9)]:
  configured_callbacks|={f for k,f in actual if f}
 assert len(configured_callbacks)==28
 assert not re.search(r'\b(?:rn2|rnd|rn1|d)\(',c),'Review newly introduced source RNG calls'
-defines=json.loads((root/'nethack-c/wasm/compile-defines.json').read_text());base=[str(root/'.cache/emsdk/upstream/emscripten/emcc'),'-sMEMORY64=1',*[f'-D{x}' for x in defines],'-I'+str(root/'.cache/wasm64-build/tree/include')]
+import sys
+sys.path.insert(0,str(root/'scripts'))
+from golden_emscripten_profile import c_flags
+base=[str(root/'.cache/emsdk/upstream/emscripten/emcc'),*c_flags(root)]
 macros=subprocess.check_output([*base,'-E','-dM',str(prepared)],text=True)
 for text in ['#define LUA_VERSION_NUM 504','#define LUA_VERSION_RELEASE "8"','#define LUA_INTEGER long long','#define LUA_NUMBER double','#define SP_COORD_PACK(x,y) (((x) & 0xff) + (((y) & 0xff) << 16))','#define SP_COORD_PACK_RANDOM(f) (SP_COORD_IS_RANDOM | (f))','#define SP_COORD_IS_RANDOM 0x01000000L','#define lua_newuserdata(L,s) lua_newuserdatauv(L,s,1)','#define lua_pop(L,n) lua_settop(L, -(n)-1)','#define lua_remove(L,idx) (lua_rotate(L, (idx), -1), lua_pop(L, 1))','#define luaL_checkstring(L,n) (luaL_checklstring(L, (n), NULL))','#define luaL_getmetatable(L,n) (lua_getfield(L, LUA_REGISTRYINDEX, (n)))','#define luaL_newlib(L,l) (luaL_checkversion(L), luaL_newlibtable(L,l), luaL_setfuncs(L,l,0))','#define luaL_newlibtable(L,l) lua_createtable(L, 0, sizeof(l)/sizeof((l)[0]) - 1)']:assert text in macros,('Changed header/Lua macro',text)
 a=json.loads(subprocess.check_output([*base,'-fsyntax-only','-Xclang','-ast-dump=json',str(prepared)],text=True));functions=[];types={};records={}

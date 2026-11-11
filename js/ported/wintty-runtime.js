@@ -7,16 +7,18 @@ const nativeReturns = {"addtopl":"void","alloc":"long *","backsp":"void","bot":"
 const states = new WeakMap();
 export function createWinttyEnvironment(services,L,state){
     const C=Object.assign(Object.create(services),L);
-    const clean=t=>t.replace(/\b(?:const|volatile)\b/g,'').replace(/\s+/g,' ').trim();
-    const canonical=t=>{t=clean(t);const seen=new Set();while(schema.aliases[t]&&!seen.has(t)){seen.add(t);const enumKey='enum_signed_'+t.replace(/\W+/g,'_').replace(/^_|_$/g,'');t=t.startsWith('enum ')&&L[enumKey]!==undefined?(Number(L[enumKey])?'int':'unsigned int'):clean(schema.aliases[t]);}return t;};
-    const key=t=>canonical(t).replace(/\W+/g,'_').replace(/^_|_$/g,'');
-    const dv=()=>new DataView(services.heap().buffer);
+    const memo=fn=>{const values=new Map();return key=>{if(!values.has(key))values.set(key,fn(key));return values.get(key);};};
+    const clean=memo(t=>t.replace(/\b(?:const|volatile)\b/g,'').replace(/\s+/g,' ').trim());
+    const canonical=memo(t=>{t=clean(t);const seen=new Set();while(schema.aliases[t]&&!seen.has(t)){seen.add(t);const enumKey='enum_signed_'+t.replace(/\W+/g,'_').replace(/^_|_$/g,'');t=t.startsWith('enum ')&&L[enumKey]!==undefined?(Number(L[enumKey])?'int':'unsigned int'):clean(schema.aliases[t]);}return t;});
+    const key=memo(t=>canonical(t).replace(/\W+/g,'_').replace(/^_|_$/g,''));
+    let dataView;
+    const dv=()=>{const buffer=services.heap().buffer;if(dataView?.buffer!==buffer)dataView=new DataView(buffer);return dataView;};
     const raw=v=>BigInt.asUintN(64,BigInt(v?.address??v??0));
-    const address=v=>Number(raw(typeof v==='string'?services.literal(v):v));
+    const address=v=>typeof v==='number'&&Number.isSafeInteger(v)&&v>=0?(v===0?0:v):Number(raw(typeof v==='string'?services.literal(v):v));
     const isTable=v=>!!v&&typeof v==='object'&&!!v.table;
     const primitive={char:[1,true],'signed char':[1,true],'unsigned char':[1,false],short:[2,true],'unsigned short':[2,false],int:[4,true],'unsigned int':[4,false],long:[8,true],'unsigned long':[8,false],'long long':[8,true],'unsigned long long':[8,false]};
-    const arrayType=t=>t.includes('(*)')?null:clean(t).match(/^(.*?)\[([^\]]*)\](.*)$/);
-    function size(t){
+    const arrayType=memo(t=>t.includes('(*)')?null:clean(t).match(/^(.*?)\[([^\]]*)\](.*)$/));
+    const size=memo(t=>{
         t=canonical(t);if(t.includes('*')&&t.includes('('))return 8;const a=arrayType(t);
         if(a)return size(a[1]+a[3])*Number(a[2]);
         if(t.includes('*'))return 8;
@@ -24,7 +26,7 @@ export function createWinttyEnvironment(services,L,state){
         const n=L[schema.sizeof[t]??key(t)+'_size'];
         if(n===undefined)throw Error('WINTTY unreviewed native sizeof '+t);
         return Number(n);
-    }
+    });
     function scalar(p,t,value,writing){
         t=canonical(t);const [n,s]=primitive[t]??[];
         if(!n)throw Error('WINTTY unreviewed scalar '+t);

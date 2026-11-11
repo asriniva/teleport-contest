@@ -3218,6 +3218,7 @@ size_t teleport_wield_literal_capacity(void) { return sizeof teleport_wield_lite
 
 #ifndef TELEPORT_ISOLATED_PROBE
 #include "tu-fragments/nhlua-support.c"
+#include "tu-fragments/nhlsel-support.inc"
 #include "tu-fragments/makemon-support.inc"
 #include "tu-fragments/mhitu-support.c"
 #include "tu-fragments/artifact-support.c"

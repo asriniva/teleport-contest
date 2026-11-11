@@ -4,7 +4,7 @@ const fields={"find": ["findtype", "val", "loadsyms_offset", "loadsyms_count", "
 const pointers={"find.extraval": "pointer", "find.unicode_val": "pointer", "find.callback": "callback", "find.reserved": "pointer", "cache.id": "pointer", "detail.next": "detail", "detail.content.urep.u.utf8str": "pointer", "detail.content.sym.symparse": "pointer", "map.u": "unicode", "unicode.utf8str": "pointer", "custom.customization_name": "pointer", "custom.details": "detail", "custom.details_end": "detail", "symset.name": "pointer", "symparse.name": "pointer", "enum.nm": "pointer", "descr.oc_name": "pointer", "descr.oc_descr": "pointer"};
 const globals=["gs.symset_which_set", "iflags.customsymbols", "iflags.customcolors", "iflags.pending_customizations", "gc.currentgraphics"];
 const headers=["glyph_is_body", "glyph_is_body_piletop", "glyph_is_cmap", "glyph_is_cmap_a", "glyph_is_cmap_altar", "glyph_is_cmap_b", "glyph_is_cmap_c", "glyph_is_cmap_gehennom", "glyph_is_cmap_knox", "glyph_is_cmap_main", "glyph_is_cmap_mines", "glyph_is_cmap_sokoban", "glyph_is_cmap_zap", "glyph_is_detected_female_monster", "glyph_is_detected_male_monster", "glyph_is_explosion", "glyph_is_fem_statue", "glyph_is_fem_statue_piletop", "glyph_is_female_pet", "glyph_is_invisible", "glyph_is_male_pet", "glyph_is_male_statue", "glyph_is_male_statue_piletop", "glyph_is_monster", "glyph_is_normal_female_monster", "glyph_is_normal_male_monster", "glyph_is_normal_piletop_obj", "glyph_is_nothing", "glyph_is_object", "glyph_is_ridden_female_monster", "glyph_is_ridden_male_monster", "glyph_is_statue", "glyph_is_swallow", "glyph_is_unexplored", "glyph_is_warning", "glyph_to_body_corpsenm", "glyph_to_explosion", "glyph_to_mon", "glyph_to_obj", "glyph_to_statue_corpsenm", "glyph_to_swallow"];
-const raw=v=>BigInt(v?.address??v??0),address=v=>Number(raw(v));
+const raw=v=>BigInt(v?.address??v??0),address=v=>{const at=v?.address??v??0;return typeof at==='number'&&Number.isSafeInteger(at)?at:Number(raw(v));};
 const indexed=(get,set,at=0)=>new Proxy({address:at},{get:(target,key)=>/^\d+$/.test(String(key))?get(Number(key)):Reflect.get(target,key),set:(_,key,v)=>{if(!set)throw new Error('Read-only GLYPHS array');set(Number(key),v);return true;}});
 const recordContexts=new WeakMap();
 const kindNames=Object.keys(fields);
@@ -20,13 +20,16 @@ const recordSchemas=Object.fromEntries(kindNames.map((kind,kindIndex)=>{
    set(value){const context=recordContexts.get(this);if(kind==='find'&&path==='callback'&&typeof value==='function'){if(value!==glyphs.to_custom_symset_entry_callback)throw new Error('Review unknown GLYPHS callback');value=context.callbackAt;}context.services.set(kindIndex,fieldIndex,context.at,raw(value));}};
  });return[kind,root];
 }));
+// Shared accessors contain schema only; every record keeps its original context.
+const recordPrototypes=new WeakMap(),recordChildren=new WeakMap();
 function defineRecord(node,schema,context){
- recordContexts.set(node,context);
- let descriptors=schema.descriptors;
- const children=Object.keys(schema.children);
- if(children.length){descriptors=Object.assign(Object.create(null),descriptors);for(const key of children){const child=defineRecord(Object.create(null),schema.children[key],context);descriptors[key]={value:child,writable:true,enumerable:true,configurable:true};}}
- Object.defineProperties(node,descriptors);
- return node;
+ let prototype=recordPrototypes.get(schema);
+ if(!prototype){
+  prototype=Object.create(Object.getPrototypeOf(node));const descriptors={...schema.descriptors};
+  for(const [key,childSchema]of Object.entries(schema.children))descriptors[key]={get(){let children=recordChildren.get(this);if(!children)recordChildren.set(this,children=new Map());if(!children.has(key))children.set(key,defineRecord(Object.create(null),childSchema,recordContexts.get(this)));return children.get(key);},set(value){let children=recordChildren.get(this);if(!children)recordChildren.set(this,children=new Map());children.set(key,value);},enumerable:true,configurable:true};
+  Object.defineProperties(prototype,descriptors);recordPrototypes.set(schema,prototype);
+ }
+ recordContexts.set(node,context);Object.setPrototypeOf(node,prototype);return node;
 }
 export function createGlyphsBridge(layout){
  const states=new WeakMap();

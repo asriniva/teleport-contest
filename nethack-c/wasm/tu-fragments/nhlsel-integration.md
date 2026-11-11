@@ -1,4 +1,53 @@
-# NHLSEL staged source translation and incomplete parity
+# NHLSEL integration status — original upstream limitation preserved
+
+The user authorized integrating the staged **33-function** translation while
+preserving the original C behavior and its unary alias use-after-free. NHLSEL
+is registered as port **138**. DLB and UNIXRES remain disabled and untouched.
+The original C source has not been patched to repair unary operators.
+
+Compilation must match the accepted **golden 110 Emscripten build (44/44)**.
+`golden-emscripten-profile.json` records that build's actual Emscripten version,
+LLVM identity, flags, definitions and forced-header hash; the shared profile
+checker compares them with the current game driver. This is the existing
+recorder-compatible build, not a new raw-SDK target. Test-only wrappers control
+world/callback dependencies or observe actual frees; they do not change ABI or
+replace NHLSEL algorithms. The reference Lua archive is built by the existing
+game preparation with its original C Lua flags, separately from game C flags.
+
+Reproducible repository-local commands:
+
+```sh
+python3 -B scripts/build-nhlsel-probes.py
+node scripts/write-tu-layouts.mjs
+TELEPORT_NATIVE_TESTS=0 node scripts/test-tu-nhlsel.mjs
+TELEPORT_NATIVE_TESTS=0 node scripts/test-tu-nhlsel.mjs --central
+node scripts/test-tu-nhlsel-generated.mjs
+# Intentionally nonzero: retain the original unary alias UAF failure.
+TELEPORT_NATIVE_TESTS=0 TELEPORT_NHLSEL_UAF_WITNESS=1 node scripts/test-tu-nhlsel.mjs --central
+# Negative control: intentionally incorrect JS coordinates must be rejected.
+TELEPORT_NATIVE_TESTS=0 node --experimental-loader ./scripts/test-tu-nhlsel-negative-loader.mjs scripts/test-tu-nhlsel.mjs --central
+```
+
+Use the pinned SDK Node executable (or source its environment) for memory64.
+The defined corpus has 734 comparisons, checks all 33 entry points and runs
+both directly and through `createPortedRuntime`. The additional generated suite
+has 640 C-derived scenarios across 32 seeds and compares complete selection
+maps, Lua returns, callback/RNG traces, stack restoration and reentry. It does
+not include undefined unary alias behavior in its passing count. That witness
+is retained separately and no whole-TU/native equivalence claim is made.
+
+Current results and source/artifact bindings are recorded in
+`.cache/nhlsel-current-run/summary.json`. The full 138-port build passed and its
+1,053 provenance hashes verified. All 44 public tests ran with the unchanged
+45-second deadline: **39 passed; five timed out** (seeds 0002, 0014, 0030, 0360,
+4500). Every completed session matched RNG/screens/cursors/animations. Separate
+profiled runs of 0002/0360/0030 finished with exact results in 47/96/121 seconds;
+these diagnostic results do not convert the official timeouts into passes.
+Repeated HACK environment construction dominates healer/ten-deaths profiles;
+world-tour has substantial travel/pathfinding and runtime-view overhead.
+The original unary alias UAF is still a known non-passing limitation.
+
+## Historical staged handoff and evidence
 
 All **33 configured original bodies** are present. **734 configured
 Emscripten-C/JS defined-corpus comparisons pass**, exercising all33 entries;

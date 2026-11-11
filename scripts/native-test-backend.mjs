@@ -79,7 +79,16 @@ export function allocationMetric(module) {
     return module.nativeC ? Number(module._allocated()) : module.HEAPU8.byteLength;
 }
 export function referenceBackend(name, emscriptenFactory) {
-    if (!nativeMode) return emscriptenFactory;
+    if (!nativeMode) {
+        if (!emscriptenFactory) return undefined;
+        return async (options = {}) => {
+            // The golden build supplies these same JS dependency services to
+            // remaining C callers. The original tested TU still executes in C.
+            const {createPortedRuntime} = await import('../js/ported/wasm-runtime.js');
+            const layouts = JSON.parse(readFileSync(new URL('js/wasm/tu-layouts.json', root)));
+            return emscriptenFactory({nethackPorted:createPortedRuntime(layouts), ...options});
+        };
+    }
     return async () => {
         // Loading a private library copy gives each factory call independent
         // NetHack globals, just as separate Wasm instances have independent state.

@@ -7,7 +7,8 @@ const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(pro
 const {callInvent,createInventEnvironment}=await import(pathToFileURL(resolve(process.env.INVENT_RUNTIME_PATH??join(root,'js/ported/invent-runtime.js'))).href);
 const schema=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/invent-schema.json'),'utf8'));const inventory={names:schema.names,functions:Object.fromEntries(Object.entries(schema.functionParameters).map(([name,args])=>[name,{args}]))};
 const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathToFileURL(join(dir,`invent-${mode}.mjs`)).href)).default));
-const checkedInvent=(services,name,...args)=>{const frame=services.stackSave();try{return callInvent(services,name,...args);}finally{assert.equal(services.stackSave(),frame,'INVENT bridge restores own source frames before external cleanup');}};
+const factoryServices=new Map();
+const checkedInvent=(services,name,...args)=>{let seen=factoryServices.get(services.moduleKey);if(!seen)factoryServices.set(services.moduleKey,seen=new Set());seen.add(services);const frame=services.stackSave();try{return callInvent(services,name,...args);}finally{assert.equal(services.stackSave(),frame,'INVENT bridge restores own source frames before external cleanup');}};
 const mods=[await factories[0](),await factories[1]({nethackPorted:{invent:checkedInvent}})];
 const decode=(m,p)=>{const b=BigInt(p);assert.ok(b>0n&&b<BigInt(m.HEAPU8.length),'declared string fits memory');let a=Number(b),e=a;while(e<m.HEAPU8.length&&m.HEAPU8[e])e++;assert.ok(e<m.HEAPU8.length);return new TextDecoder().decode(m.HEAPU8.subarray(a,e));};
 const constant=n=>{const i=schema.layoutKeys.indexOf(n);assert.ok(i>=0,n);return Number(mods[0]._probe_layout(i));};
@@ -120,3 +121,5 @@ const organizeMerge=run('positive addressed organize formal updated survivor','d
 },m=>[ptr(m,0)]);
 for(const m of mods)assert.equal(get(m,ptr(m,0,1),'obj','quan'),5n,'organize target observes merge and caller formal replacement');
 console.log('INVENT_ADDRESSED_FORMAL_POSITIVES '+JSON.stringify({added:4,checks,functions:119,source:'unchanged optimized Emscripten C vs cache-only corrected JS',native:false}));
+
+for(const seen of factoryServices.values())assert.equal(seen.size,1,'INVENT factory reuses module-owned services');

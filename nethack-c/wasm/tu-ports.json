@@ -184,7 +184,10 @@
     "name": "selvar",
     "source": "src/selvar.c",
     "javascript": "js/ported/selvar.js",
-    "library": "nethack-c/wasm/tu-libraries/selvar.js"
+    "library": "nethack-c/wasm/tu-libraries/selvar.js",
+    "adapterSources": [
+      "js/ported/selvar-runtime.js"
+    ]
   },
   {
     "name": "steal",
@@ -301,7 +304,10 @@
     "source": "src/worm.c",
     "javascript": "js/ported/worm.js",
     "library": "nethack-c/wasm/tu-libraries/worm.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/worm-runtime.js"
+    ]
   },
   {
     "name": "o_init",
@@ -2736,6 +2742,27 @@
       {
         "source": "nethack-c/wasm/tu-zap-storage.c"
       }
+    ]
+  },
+  {
+    "name": "nhlsel",
+    "source": "src/nhlsel.c",
+    "javascript": "js/ported/nhlsel.js",
+    "library": "nethack-c/wasm/tu-libraries/nhlsel.js",
+    "configuredFunctions": true,
+    "reference": "pristine",
+    "probeContext": false,
+    "adapterSources": [
+      "js/ported/nhlsel-runtime.js",
+      "nethack-c/wasm/tu-fragments/nhlsel-support.inc",
+      "nethack-c/wasm/tu-fragments/nhlsel-metadata.py",
+      "scripts/tu-nhlsel-layout.h",
+      "scripts/build-nhlsel-probes.py",
+      "scripts/golden_emscripten_profile.py",
+      "nethack-c/wasm/golden-emscripten-profile.json"
+    ],
+    "parityLimitations": [
+      "Original unary selection alias use-after-free is preserved; defined-corpus parity only, no whole-TU/native/full-game equivalence claim."
     ]
   }
 ]

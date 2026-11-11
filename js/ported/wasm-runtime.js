@@ -114,6 +114,8 @@ import * as strutil from './strutil.js';
 import * as rect from './rect.js';
 import * as track from './track.js';
 import * as calendar from './calendar.js';
+import * as nhlsel from './nhlsel.js';
+import { createNhlselEnvironment } from './nhlsel-runtime.js';
 import { cAddress, writeNativePointer } from '../services/native-c-compat.js';
 import { createNativeRegexLibc } from '../services/native-regex-libc.js';
 import { nativeQsort } from '../services/native-qsort.js';
@@ -175,7 +177,7 @@ import { createBallState, createBallEnvironment } from './ball-runtime.js';
 import * as o_init from './o_init.js';
 import { createOInitEnvironment } from './o_init-runtime.js';
 import * as worm from './worm.js';
-import { createWormState, createWormEnvironment } from './worm-runtime.js';
+import { createWormState, withWormEnvironment } from './worm-runtime.js';
 import * as wizard from './wizard.js';
 import { createWizardEnvironment } from './wizard-runtime.js';
 import * as steed from './steed.js';
@@ -190,7 +192,7 @@ import { createObjectsState, createObjectsEnvironment } from './objects-runtime.
 import { createFountainEnvironment } from './fountain-runtime.js';
 import { createSitEnvironment } from './sit-runtime.js';
 import { createStealEnvironment } from './steal-runtime.js';
-import { createSelvarState, createSelvarEnvironment } from './selvar-runtime.js';
+import { createSelvarState, withSelvarEnvironment } from './selvar-runtime.js';
 import { createIactionsEnvironment } from './iactions-runtime.js';
 import { createMinionEnvironment } from './minion-runtime.js';
 import { withQuestEnvironment } from './quest-runtime.js';
@@ -343,6 +345,9 @@ function configuredFields(services, pointer, fields, intSize) {
 }
 
 export function createPortedRuntime(layouts) {
+    const hackLayout=layouts.hack&&Object.freeze({...layouts.hack});
+    const selvarLayout=layouts.selvar&&Object.freeze({...layouts.selvar});
+    const wormLayout=layouts.worm&&Object.freeze({...layouts.worm});
     const prayEnvironments = new WeakMap();
     const museEnvironments = new WeakMap();
     const pagerBridge = layouts.pager ? createPagerBridge(layouts.pager) : undefined;
@@ -376,6 +381,7 @@ export function createPortedRuntime(layouts) {
     const explodeEnvironments = new WeakMap();
     const callPline = layouts.pline ? createPlineBridge(layouts.pline) : undefined;
     const reportBridge = layouts.report ? createReportBridge(layouts.report) : undefined;
+    const nhlselEnvironments = new WeakMap();
     const nativeTerminal = createNativeTerminal();
     const nativeRegexServices = createNativeRegexLibc();
     const objectsStates = new WeakMap();
@@ -403,7 +409,7 @@ export function createPortedRuntime(layouts) {
     const wormStates = new WeakMap();
     const wormState = services => {
         if (!wormStates.has(services.moduleKey))
-            wormStates.set(services.moduleKey, createWormState(services, layouts.worm));
+            wormStates.set(services.moduleKey, createWormState(services, wormLayout));
         return wormStates.get(services.moduleKey);
     };
     const getlineState = createGetlineState();
@@ -448,6 +454,21 @@ export function createPortedRuntime(layouts) {
         return context;
     };
     return {
+        nhlsel(services,name,...args) {
+            let environment=nhlselEnvironments.get(services.moduleKey);
+            if(!environment){environment=createNhlselEnvironment(services,layouts.nhlsel,nhlsel);nhlselEnvironments.set(services.moduleKey,environment);}
+            if(name==='l_selection_push_copy')args[1]=environment.selection(args[1]);
+            if(name==='params_sel_2coords'){
+                const view=()=>new DataView(services.heap().buffer);
+                args=args.map((p,i)=>{
+                    if(!i)return p;
+                    const at=Number(p);
+                    return {get value(){return i===1?environment.selection(Number(view().getBigUint64(at,true))):view().getInt16(at,true);},set value(v){if(i===1)view().setBigUint64(at,BigInt(v?.address??v??0),true);else view().setInt16(at,Number(v),true);}};
+                });
+            }
+            const result=withCEnvironment(environment,nhlsel[name],...args);
+            return name==='l_selection_check'||name==='l_selection_push_new'?result?.address??0:result;
+        },
         nativeQsort(services,base,count,size) { return nativeQsort(services.heap,base,count,size,services.compare); },
         nativeTerminal(services,name,...args) {return nativeTerminal(services,name,...args);},
         nativeRegex(services,name,...args) {return nativeRegexServices(services)[name](...args);},
@@ -723,7 +744,7 @@ export function createPortedRuntime(layouts) {
 
 
 
-        hack(services,name,...args) {return callHack(services,layouts.hack,name,...args);},
+        hack(services,name,...args) {return callHack(services,hackLayout,name,...args);},
         uhitm(services,name,...args) {return callUhitm(services,layouts.uhitm,name,...args);},
         mon(services,name,...args) {return callMon(services,layouts.mon,name,...args);},
         monState(services) {return monState(services,layouts.mon);},
@@ -949,7 +970,7 @@ zapState(services) {return zapState(services);},
         },
         wormState,
         worm(services, name, ...args) {
-            const environment = createWormEnvironment(services, layouts.worm, wormState(services));
+            return withWormEnvironment(services,wormLayout,wormState(services),environment=>{
 
             if (['initworm', 'worm_move', 'worm_nomove', 'wormgone', 'wormhitu',
                 'cutworm', 'see_wsegs', 'detect_wsegs', 'place_wsegs', 'sanity_check_worm',
@@ -961,6 +982,7 @@ zapState(services) {return zapState(services);},
             if (['save_worm', 'rest_worm'].includes(name)) args[0] = environment.nhfile(args[0]);
             const result = withCEnvironment(environment, worm[name], ...args);
             return typeof result === 'string' ? services.literal(result) : result?.address ?? result ?? 0;
+            });
         },
         wizard(services, name, ...args) {
             const environment = createWizardEnvironment(services, layouts.wizard, wizard);
@@ -1221,7 +1243,7 @@ zapState(services) {return zapState(services);},
         },
         get selvarState() { return selvarState; },
         selvar(services, name, ...args) {
-            const environment = createSelvarEnvironment(services, layouts.selvar, selvarState);
+            return withSelvarEnvironment(services,selvarLayout,selvarState,environment=>{
             if (name.startsWith('selection_') && !['selection_new', 'selection_getpoint', 'selection_setpoint', 'selection_do_line', 'selection_do_randline', 'selection_from_mkroom'].includes(name)) args[0] = environment.selection(args[0]);
             if (['selection_getpoint', 'selection_setpoint'].includes(name)) {
                 args[0] = environment.coordxy(args[0]); args[1] = environment.coordxy(args[1]);
@@ -1245,6 +1267,7 @@ zapState(services) {return zapState(services);},
             }
             const result = withCEnvironment(environment, selvar[name], ...args);
             return result?.address ?? result ?? 0;
+            });
         },
         iactions(services, name, ...args) {
             const environment = createIactionsEnvironment(services, layouts.iactions);
@@ -1357,7 +1380,7 @@ zapState(services) {return zapState(services);},
             posixregexInitialized.add(key);
         },
         posixregex(services, name, ...args) {
-            const environment = createPosixregexEnvironment(services, layouts.posixregex);
+            const environment = createPosixregexEnvironment({...services,...nativeRegexServices(services)}, layouts.posixregex);
             if (name === 'regex_compile' || name === 'regex_match') args[1] = environment.regex(args[1]);
             else if (name !== 'regex_init') args[0] = environment.regex(args[0]);
             return withCEnvironment(environment, posixregex[name], ...args);

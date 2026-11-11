@@ -12,33 +12,24 @@ export function createDisplayEnvironment(services){
  const ptr=v=>{if(typeof v==='number'&&Number.isSafeInteger(v))return v;const n=Number(v);if(!Number.isSafeInteger(n)||BigInt(n)!==BigInt(v))throw Error('DISPLAY pointer exceeds exact address range');return n;};
  const types={char:'i8','signed char':'i8','unsigned char':'u8',short:'i16','unsigned short':'u16',int:'i32','unsigned int':'u32',unsigned:'u32',long:'i64','unsigned long':'u64','long long':'i64','unsigned long long':'u64'};
  const env=Object.assign(Object.create(services),layout,{ptr,sizes:Object.fromEntries(Object.entries(layout).filter(([k])=>k.startsWith('size:')).map(([k,v])=>[k.slice(5),v]))});
- for(const signed of ['i','u'])for(const bits of [8,16,32,64])env[signed+bits]=v=>{const n=BigInt[signed==='i'?'asIntN':'asUintN'](bits,BigInt(typeof v==='number'?Math.trunc(v):v));return bits===64?n:Number(n);};
- const memory=()=>new DataView(services.heap().buffer),type=t=>t.includes('*')?'p':t.startsWith('enum ')?'i32':types[t];
+ for(const signed of ['i','u'])for(const bits of [8,16,32,64])env[signed+bits]=v=>{if(bits!==64&&typeof v==='number'&&Number.isFinite(v)){if(bits===32)return signed==='i'?v|0:v>>>0;return signed==='i'?v<<(32-bits)>>(32-bits):(v>>>0)&(2**bits-1);}const n=BigInt[signed==='i'?'asIntN':'asUintN'](bits,BigInt(typeof v==='number'?Math.trunc(v):v));return bits===64?n:Number(n);};
+ let dataView;
+ const memory=()=>{const buffer=services.heap().buffer;if(dataView?.buffer!==buffer)dataView=new DataView(buffer);return dataView;},type=t=>t.includes('*')?'p':t.startsWith('enum ')?'i32':types[t];
  const decode=(t,v)=>{const d=type(t);if(d==='p')return ptr(v);if(!d)throw Error('Review DISPLAY scalar '+t);return env[d](v);};
- env.cell=(address,t)=>{address=ptr(address);const d=type(t);if(!d)throw Error('Review DISPLAY cell '+t);const bits=d==='p'?64:+d.slice(1);return {address,get value(){const dv=memory();return decode(t,bits===64?dv.getBigUint64(address,true):dv['getUint'+bits](address,true));},set value(v){const dv=memory();if(bits===64)dv.setBigUint64(address,BigInt.asUintN(64,BigInt(v)),true);else dv['setUint'+bits](address,Number(v),true);}};};
- // Four immutable caller-base accessors per compiler field descriptor.
- // FIFO eviction drops ownership; a held accessor is never retargeted.
- const fieldAccessors=new Map();
+ env.cell=(address,t)=>{address=ptr(address);const d=type(t);if(!d)throw Error('Review DISPLAY cell '+t);const bits=d==='p'?64:+d.slice(1);return {address,get value(){const dv=memory();return bits===64?decode(t,dv.getBigUint64(address,true)):dv[(d[0]==='i'?'getInt':'getUint')+bits](address,true);},set value(v){const dv=memory();if(bits===64)dv.setBigUint64(address,BigInt.asUintN(64,BigInt(v)),true);else dv['setUint'+bits](address,Number(v),true);}};};
+ // Bounded ownership; eviction never retargets an accessor held by a caller.
+ const fieldAccessors=new Map(),fieldBases=new WeakMap();
  env.field=(at,name,field)=>{
-  const metadata=fieldMetadata.get(name)?.get(field);
-  if(!metadata)throw Error('Review DISPLAY field '+name+'.'+field);
-  at=ptr(at);
+  const metadata=fieldMetadata.get(name)?.get(field);if(!metadata)throw Error('Review DISPLAY field '+name+'.'+field);at=ptr(at);
   let bucket=fieldAccessors.get(metadata);
-  if(bucket){
-   const prior=bucket.entries[bucket.last];
-   if(prior.at===at)return prior.accessor;
-   // Preserve the original last-hit behavior of null and signed zero.
-   if(at!==0)for(let i=0;i<bucket.entries.length;i++){
-    const entry=bucket.entries[i];
-    if(entry.at===at){bucket.last=i;return entry.accessor;}
-   }
+  if(bucket){if(bucket.last.at===at)return bucket.last.accessor;if(at!==0&&bucket.entries.has(at)){const entry=bucket.entries.get(at);bucket.last=entry;return entry.accessor;}}
+  else{
+   const {kind,index,canonical}=metadata;
+   const prototype={get address(){return ptr(services.address(kind,fieldBases.get(this),index));},get value(){return decode(canonical,services.read(kind,fieldBases.get(this),index));},set value(v){services.write(kind,fieldBases.get(this),index,BigInt.asUintN(64,BigInt(v)));}};
+   bucket={entries:new Map(),prototype,last:null};fieldAccessors.set(metadata,bucket);
   }
-  const {kind,index,canonical}=metadata;
-  const accessor={get address(){return ptr(services.address(kind,at,index));},get value(){return decode(canonical,services.read(kind,at,index));},set value(v){services.write(kind,at,index,BigInt.asUintN(64,BigInt(v)));}};
-  if(!bucket){bucket={entries:[],last:0,next:0};fieldAccessors.set(metadata,bucket);}
-  const entry={at,accessor};
-  if(bucket.entries.length<4){bucket.last=bucket.entries.length;bucket.entries.push(entry);}
-  else{bucket.entries[bucket.next]=entry;bucket.last=bucket.next;bucket.next=(bucket.next+1)%4;}
+  const accessor=Object.create(bucket.prototype);fieldBases.set(accessor,at);const entry={at,accessor};bucket.last=entry;bucket.entries.set(at,entry);
+  if(bucket.entries.size>128)bucket.entries.delete(bucket.entries.keys().next().value);
   return accessor;
  };
  schema.globals.forEach((g,i)=>Object.defineProperty(env,g.name,{get:()=>ptr(services.global(i))}));

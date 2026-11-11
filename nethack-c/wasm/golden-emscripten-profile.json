@@ -1,0 +1,27 @@
+{
+  "baseline": "tu110-warn-fixed-gate-snapshot: accepted 44/44 original public sessions",
+  "upstream": "16ff59115315917b93185d026aeefea06db9b0f4",
+  "emscripten": "4.0.10",
+  "memory64": 1,
+  "flags": [
+    "-O2",
+    "-g"
+  ],
+  "defines": [
+    "NOTPARMDECL",
+    "NO_TIMED_DELAY",
+    "MACOS",
+    "NOPANICTRACE",
+    "NO_FILE_LINKS"
+  ],
+  "compileDefinesSha256": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",
+  "forcedInclude": "nethack-c/wasm/native-terminal.h",
+  "forcedIncludeSha256": "16eceb17caf6e70d0e8e6b36f23daebdb30f7ace18676d482c8376fccf6dceeb",
+  "terminfoInclude": ".cache/ncurses-wasm64-build/include",
+  "sourceManifestSha256": "5e402d6f8a7620da484a121e7c7d348ed458899a0fa7abb84cfc98816be9e001",
+  "sourceBuildScriptSha256": "7f7d2856ecc84c0ee4a4c402b8145e178c9fa05f73baae2761167bf2ebfb3a0d",
+  "dependencyBackend": "javascript",
+  "luaBackend": "javascript",
+  "regexTransport": "ported-posixregex-direct-js",
+  "clangFirstLine": "clang version 21.0.0git (https:/github.com/llvm/llvm-project 8f7e57485ee73205e108d74abb5565d5c63beaca)"
+}

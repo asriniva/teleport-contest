@@ -2,6 +2,7 @@
 addToLibrary({
   $teleportSelvarServices__deps: ['alloc', 'dupstr', 'memset', 'memcpy', 'isok', 'match_maptyps', 'random_wdir', 'newsym_force', 'dist2', 'teleport_selvar_global', 'teleport_selvar_terrain_bit', 'teleport_selvar_flood_check', 'teleport_selvar_iterate', 'teleport_selvar_free', 'teleport_selvar_rn2', 'teleport_selvar_panic', 'teleport_selvar_impossible', 'teleport_selvar_format', 'teleport_selvar_literal_storage', 'teleport_selvar_literal_capacity', '$lengthBytesUTF8', '$stringToUTF8', '$stackAlloc'],
   $teleportSelvarServices: function() {
+    if(Module["teleportSelvarServicesObject"])return Module["teleportSelvarServicesObject"];
     var state = Module['teleportSelvarLiterals'] ||= { next: 0, strings: new Map() };
     var literal = value => {
       if (state.strings.has(value)) return state.strings.get(value);
@@ -17,7 +18,8 @@ addToLibrary({
     var text = value => typeof value === 'string' ? BigInt(literal(value)) : pointer(value);
     var int = value => typeof value === 'bigint' ? Number(BigInt.asIntN(32, value)) : Number(value) | 0;
     var coord = value => typeof value === 'bigint' ? Number(BigInt.asIntN(16, value)) : Number(value) << 16 >> 16;
-    return {
+    return Module["teleportSelvarServicesObject"]={
+      moduleKey: Module,
       heap: () => HEAPU8,
       stackAlloc: size => stackAlloc(size),
       global: index => Number(_teleport_selvar_global(index)),

@@ -17,6 +17,7 @@ root = Path(__file__).resolve().parents[1]
 sdk = Path(os.environ.get('EMSDK', root / '.cache/emsdk'))
 work = root / '.cache/tu-probes'
 work.mkdir(parents=True, exist_ok=True)
+subprocess.run([sys.executable, '-B', str(root / 'scripts/check-golden-emscripten-profile.py')], check=True)
 # Check provenance inputs before compiling; metadata generation must not discover
 # a misspelled adapter/header path after a completed game link.
 for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
@@ -162,7 +163,8 @@ for owned_name,owned_guard in [('files','nethack-c/wasm/tu-fragments/files-sourc
             subprocess.run([*owned_node,str(root/'nethack-c/wasm/tu-fragments/cmd-check-members.mjs')],check=True)
 
 defines = ['-D' + name for name in json.loads((root / 'nethack-c/wasm/compile-defines.json').read_text())]
-base = [sdk / 'upstream/emscripten/emcc', '-O2', '-sMEMORY64=1', '-sMODULARIZE=1', *defines,
+from golden_emscripten_profile import c_flags as golden_c_flags
+base = [sdk / 'upstream/emscripten/emcc', *golden_c_flags(root), '-sMODULARIZE=1', '--js-library', str(root / 'nethack-c/wasm/native-libc-library.js'),
         '-DTELEPORT_ISOLATED_PROBE',
         '-sENVIRONMENT=node,web', '-sALLOW_MEMORY_GROWTH=1', '--no-entry',
         '-sEXPORTED_RUNTIME_METHODS=HEAPU8', '-I' + str(include), '-I' + str(work)]
@@ -421,7 +423,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--native-only', action='store_true', help='Build full native APIs for the existing tests')
 parser.add_argument('--emscripten-only', action='store_true', help='First-pass C/JS probes; defer native oracle builds')
 parser.add_argument('--supplementary-only', action='store_true', help='Historical smaller native scenarios; not the full existing test cases')
-parser.add_argument('--only', action='append', choices=probes, help='Rebuild only this TU (repeatable); default rebuilds every registered TU')
+parser.add_argument('--only', action='append', choices=[*probes, 'nhlsel'], help='Rebuild only this TU (repeatable); default rebuilds every registered TU')
 options = parser.parse_args()
 if options.emscripten_only and (options.native_only or options.supplementary_only):
     parser.error('--emscripten-only cannot be combined with native build modes')
@@ -434,6 +436,12 @@ for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
         raise SystemExit('NHLUA native-host oracle is pending; use --emscripten-only for its configured first pass')
 
 
+
+    if name == 'nhlsel':
+        if not options.emscripten_only:
+            raise SystemExit('NHLSEL native-host oracle is pending; use --emscripten-only')
+        subprocess.run([sys.executable, '-B', str(root / 'scripts/build-nhlsel-probes.py'), '--out', str(work)], check=True, cwd=root)
+        continue
 
     if name in ['hack','uhitm','mon','pickup','shk']:
         if not options.emscripten_only:
@@ -545,14 +553,6 @@ for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
                 cmd_fixture_library.write_text(cmd_lib)
         if name in ['glyphs', 'allmain', 'report', 'pline', 'u_init']:
             args += ['-include', root / 'nethack-c/wasm/native-terminal.h']
-        # SDK parity pairs must share the reference terminal/regex ABI.
-        sdk_platform_pair = options.emscripten_only and name in ['posixregex', 'ioctl', 'unixtty', 'coloratt']
-        if options.emscripten_only and name == 'ioctl':
-            # The fixture exercises USE_WIN_IOCTL: expose its SDK header to
-            # the original TU as well as the fixture/metadata translation units.
-            args += ['-include', 'sys/ioctl.h']
-        if mode=='hybrid' and not sdk_platform_pair and name not in ['nhlua', 'do_wear', 'do', 'spell', 'detect', 'teleport', 'mklev', 'polyself', 'wizcmds', 'end', 'dig', 'dokick', 'mkmaze', 'vision', 'restore', 'nhlobj', 'do_name', 'windows', 'cfgfiles', 'topten', 'dogmove', 'glyphs', 'engrave', 'role', 'mthrowu', 'mhitm', 'getpos', 'save', 'allmain', 'report', 'pline', 'u_init', 'monmove', 'timeout', 'potion', 'pray', 'dothrow', 'pager', 'muse', 'dungeon', 'makemon', 'mhitu', 'artifact', 'decl', 'insight', 'read', 'apply', 'eat', 'objnam', 'mkobj', 'files', 'display', 'invent', 'cmd']:
-            args+=['-include',root/'nethack-c/wasm/native-terminal.h','--js-library',root/'nethack-c/wasm/native-libc-library.js']
         if name in ['weapon', 'questpgr', 'symbols']:
             args += ['-I' + str(root / '.cache/ncurses-wasm64-build/include')]
         if name in ['windows','cfgfiles']:

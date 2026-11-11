@@ -168,8 +168,8 @@ reset();action('clear_glyph_buffer');option(14,1);action('show_glyph',[39,10,C.G
 reset();setter(m=>set(m,global(m,'u'),'you','ustuck',ptr(m,1)));for(const n of ['swallowed','under_water','under_ground']){action(n,[1]);if(n!=='swallowed')action(n,[2]);setter(m=>{set(m,global(m,'u'),'you','ux',42);set(m,global(m,'u'),'you','uy',12);});action(n,[0]);}
 // Independent factory instances: all7 ctor bytes again, native heap growth,
 // native C -> imported JS reentry and outer/inner stack cleanup.
-const fresh=await refFactory();let third,grown=false,reentered=false,initializations=0;
-third=await hybridFactory({nethackPorted:{initializeDisplay(services){initializations++;return initializeDisplay(services);},display(services,name,...args){const native=services.rn2_on_display_rng;services.rn2_on_display_rng=n=>{if(!grown){grown=true;const old=third.HEAPU8.buffer;third._probe_growth();assert.notEqual(third.HEAPU8.buffer,old);const sp=third.stackSave();third._probe_action(names.indexOf('fn_cmap_to_glyph'),BigInt(C.S_room),0n,0n,0n,0n,0n,0n,0n,0n,0n);assert.equal(third.stackSave(),sp);reentered=true;}return native(n);};return callDisplay(services,name,...args);}}});
+const fresh=await refFactory();let retainedEnv,third,grown=false,reentered=false,initializations=0;
+third=await hybridFactory({nethackPorted:{initializeDisplay(services){initializations++;return retainedEnv=initializeDisplay(services);},display(services,name,...args){const native=services.rn2_on_display_rng;services.rn2_on_display_rng=n=>{if(!grown){grown=true;const old=third.HEAPU8.buffer;third._probe_growth();assert.notEqual(third.HEAPU8.buffer,old);const sp=third.stackSave();third._probe_action(names.indexOf('fn_cmap_to_glyph'),BigInt(C.S_room),0n,0n,0n,0n,0n,0n,0n,0n,0n);assert.equal(third.stackSave(),sp);reentered=true;}return native(n);};return callDisplay(services,name,...args);}}});
 assert.equal(initializations,1);assert.deepEqual(startup(third),startup(fresh));for(const m of[fresh,third]){returnedTypes.set(m,[]);m._probe_reset();property(m,'HALLUC',1);}
 scratchTypes=[];
 for(const m of[fresh,third]){const sp=m.stackSave();m._probe_action(names.indexOf('map_object'),BigInt(ptr(m,2)),1n,0n,0n,0n,0n,0n,0n,0n,0n);assert.equal(m.stackSave(),sp);}
@@ -178,5 +178,9 @@ assert.ok(grown&&reentered);assert.deepEqual(snapshot(third),snapshot(fresh),'fr
 // that condition permits output; no artificial asynchronous branch witness.
 for(const m of[fresh,third]){set(m,global(m,'program_state'),'sinfo','done_hup',1);m._probe_action(names.indexOf('flush_screen'),0n,0n,0n,0n,0n,0n,0n,0n,0n,0n);set(m,global(m,'program_state'),'sinfo','done_hup',0);m._probe_action(names.indexOf('show_glyph'),38n,10n,BigInt(C.GLYPH_CMAP_A_OFF),0n,0n,0n,0n,0n,0n,0n);m._probe_action(names.indexOf('flush_screen'),1n,0n,0n,0n,0n,0n,0n,0n,0n,0n);assert.ok(m._probe_glyph_events()>0);}
 assert.deepEqual(snapshot(third),snapshot(fresh),'actual stable hangup suppression then normal output');checks++;
+// Accessors held across working-set eviction keep their original caller base.
+const held=retainedEnv.field(Number(ptr(third,2)),'obj','otyp'),heldAddress=held.address;
+for(let i=1;i<=256;i++)retainedEnv.field(Number(ptr(third,2))+i*8,'obj','otyp');
+assert.equal(held.address,heldAddress);assert.notEqual(retainedEnv.field(Number(ptr(third,2)),'obj','otyp'),held);checks++;
 assert.equal(covered.size,71);
 console.log('PASS DISPLAY FINAL',checks,'top-level state/result comparisons; all71 configured functions,22528 additional wall result checks, native constructor all7/full308125bytes before first body in independent Modules, typed coord-by-value, display RNG/native source callback, full9624 maps/80x21buffer/48byte window records, temporary ownership,64bit/raw witnesses,growth/reentry/stack cleanup. Controlled world/window dependency models only; native/full-game/public pending.');
