@@ -83,6 +83,10 @@ import {enableUhitm} from './uhitm.js';
 import {enableMthrowu} from './mthrowu.js';
 import {enableMcastu} from './mcastu.js';
 import {enableRead} from './read.js';
+import {enableSpell} from './spell.js';
+import {enableExplode} from './explode.js';
+import {enableDig} from './dig.js';
+import {enableRip} from './rip.js';
 import {enableShknam} from './shknam.js';
 import {enableInsight} from './insight.js';
 import {enableTopten} from './topten.js';
@@ -366,6 +370,10 @@ export function createStandaloneEnvironment(options={}) {
         enableMthrowu:layouts=>enableMthrowu(environment,layouts),
         enableMcastu:layouts=>enableMcastu(environment,layouts),
         enableRead:layouts=>enableRead(environment,layouts),
+        enableSpell:layouts=>enableSpell(environment,layouts),
+        enableExplode:layouts=>enableExplode(environment,layouts),
+        enableDig:layouts=>enableDig(environment,layouts),
+        enableRip:layouts=>enableRip(environment,layouts),
         enableShknam:layouts=>enableShknam(environment,layouts),
         enableInsight:layouts=>enableInsight(environment,layouts),
         enableTopten:layouts=>enableTopten(environment,layouts),

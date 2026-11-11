@@ -1,6 +1,6 @@
 // Next level-generation owners on shared storage; source policies unchanged.
 import {callRegion} from '../ported/region-runtime.js';
-import {unearth_objs,rot_corpse} from '../ported/dig.js';
+import {enableDig} from './dig.js';
 import {make_grave,random_engraving,rubouts} from '../ported/engrave.js';
 import {enableRandomText} from './random-text.js';
 import {enableVision} from './vision.js';
@@ -22,7 +22,7 @@ export function enableLevelContents(environment,layouts,creation){
  environment.extend('world-engravings',{make_grave,random_engraving});
  const vision=enableVision(environment,layouts);
  const regions=environment.start('region-reset').environment;environment.extend('region-reset',Object.fromEntries(['visible_region_at','any_visible_region'].filter(name=>!environment.hasFunction(name)).map(name=>[name,(...args)=>callRegion(regions,layouts.region,name,...args)])));
- const digging=creation.context(layouts.dig);digging.Has_contents=o=>Number(Boolean(o.cobj));digging.m_at=(x,y)=>creation.environment.svl.level.monsters[x][y];digging.hides_under=p=>Number(Boolean(p.mflags1&BigInt(layouts.dig.M1_CONCEAL)));digging.MON_WEP=m=>m.mw;environment.register('level-unearthing',{unearth_objs,rot_corpse},digging,{prepareArgs:(name,args)=>name==='rot_corpse'?[creation.views.record('union any',args[0]),environment.transport.long(args[1])]:args});
+ enableDig(environment,layouts);
  const position=creation.context(layouts.hack);Object.defineProperty(position,'svi',{value:creation.views.record('struct instance_globals_saved_i',environment.requireGlobal('svi'))});position.Invocation_lev=lev=>environment.resolve('Invocation_lev')(environment.address(lev));Object.defineProperty(position,'svr',{value:creation.views.record('struct instance_globals_saved_r',environment.requireGlobal('svr'))});
  position.in_rooms_buf=environment.allocateGlobal('hack.in_rooms.buf',5);position.charPointer=p=>typeof p==='string'?environment.services.literal(p):environment.address(p);
  Object.defineProperty(position,'HEAP8',{get:()=>environment.services.signedHeap()});

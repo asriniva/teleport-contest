@@ -9,9 +9,10 @@ import {callPolyself} from '../ported/polyself-runtime.js';
 import * as attrib from '../ported/attrib.js';
 import {createAttribEnvironment} from '../ported/attrib-runtime.js';
 import {valid_vampshiftform} from '../ported/mon.js';
-import {resists_drli,dmgtype,dmgtype_fromattack,cvt_prop_to_mseenres,cvt_adtyp_to_mseenres,monstunseesu,mon_hates_silver,hates_silver,mon_hates_blessings,hates_blessings,pronoun_gender,gender,passes_bars,Resists_Elem,max_passive_dmg,can_track,noattacks,can_blow,levl_follower,can_blnd,can_chant} from '../ported/mondata.js';
+import {resists_drli,dmgtype,dmgtype_fromattack,cvt_prop_to_mseenres,cvt_adtyp_to_mseenres,monstunseesu,mon_hates_silver,hates_silver,mon_hates_blessings,hates_blessings,pronoun_gender,gender,passes_bars,Resists_Elem,max_passive_dmg,can_track,noattacks,can_blow,levl_follower,can_blnd,can_chant,locomotion} from '../ported/mondata.js';
+import {levitate,flys,flyl,slither,ooze,immobile,crawl} from '../ported/mondata.js';
 import {enableExperience} from './exper.js';
-import {spell_skilltype,initialspell,num_spells,skill_based_spellbook_id,age_spells} from '../ported/spell.js';
+import {enableSpell} from './spell.js';
 import {hidden_gold} from '../ported/vault.js';
 import {hu_stat} from '../ported/eat.js';
 import {enableEating} from './eat.js';
@@ -83,7 +84,7 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
   address:(k,p,i)=>{const e=polyField(k,p,i);return ctypes.locate(e.type,e.p,e.f.name).at;},
  });
  const mon=context(layouts.mon);mon.is_vampire=p=>Number(p.mlet===mon.S_VAMPIRE);environment.register('hero-vampire-form',{valid_vampshiftform},mon);
- const biology=context(layouts.mondata);Object.defineProperty(biology,'gy',{value:record('struct instance_globals_y',environment.requireGlobal('gy'))});
+ const biology=context(layouts.mondata);Object.assign(biology,{charPointer:p=>typeof p==='string'?services.literal(p):address(p),loadChar:p=>memory.view.getInt8(address(p)),nolimbs:p=>Number((p.mflags1&BigInt(layouts.mondata.M1_NOLIMBS))===BigInt(layouts.mondata.M1_NOLIMBS))});for(const[k,v]of Object.entries({levitate,flys,flyl,slither,ooze,immobile,crawl}))biology[k]=v.map(services.literal);Object.defineProperty(biology,'gy',{value:record('struct instance_globals_y',environment.requireGlobal('gy'))});
  Object.assign(biology,{is_undead:p=>Number(Boolean(p.mflags2&BigInt(layouts.mondata.M2_UNDEAD))),is_were:p=>Number(Boolean(p.mflags2&BigInt(layouts.mondata.M2_WERE))),is_vampshifter:m=>Number([mon.PM_VAMPIRE,mon.PM_VAMPIRE_LEADER,mon.PM_VLAD_THE_IMPALER].includes(m.cham)),
   objectLocal:()=>record('struct obj',transport.stackAlloc(ctypes.size('struct obj'))),copyObject:(a,b)=>memory.memmove(address(a),address(b),ctypes.size('struct obj')),
   attackBefore:(a,b)=>address(a)<address(b),attackNext:a=>views.advance(a,1),
@@ -110,7 +111,7 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
  biology.is_weptool=o=>o.oclass===biology.TOOL_CLASS&&biology.objects[o.otyp].oc_skill!==biology.P_NONE;
  for(const[k,v]of Object.entries(layouts.mondata))if(k.startsWith('W_'))biology[k]=BigInt(v);
  for(const[name,ids]of Object.entries({completelyburns:['PM_PAPER_GOLEM','PM_STRAW_GOLEM'],completelyrots:['PM_WOOD_GOLEM','PM_LEATHER_GOLEM'],completelyrusts:['PM_IRON_GOLEM']}))biology[name]=p=>ids.some(id=>address(p)===address(biology.mons[biology[id]]));
- environment.register('monster-gender-material',{mon_hates_silver,hates_silver,mon_hates_blessings,hates_blessings,pronoun_gender,gender,passes_bars,Resists_Elem,max_passive_dmg,can_track,noattacks,can_blow,levl_follower,can_blnd,can_chant},biology,{prepareArgs:(fn,args)=>{if(fn==='can_blnd')return [record('struct monst',args[0]),record('struct monst',args[1]),transport.uchar(args[2]),record('struct obj',args[3])];args[0]=record(['hates_silver','hates_blessings','passes_bars','can_track','noattacks'].includes(fn)?'struct permonst':'struct monst',args[0]);if(fn==='max_passive_dmg')args[1]=record('struct monst',args[1]);return args;}});
+ environment.register('monster-gender-material',{mon_hates_silver,hates_silver,mon_hates_blessings,hates_blessings,pronoun_gender,gender,passes_bars,Resists_Elem,max_passive_dmg,can_track,noattacks,can_blow,levl_follower,can_blnd,can_chant,locomotion},biology,{prepareArgs:(fn,args)=>{if(fn==='can_blnd')return [record('struct monst',args[0]),record('struct monst',args[1]),transport.uchar(args[2]),record('struct obj',args[3])];args[0]=record(['hates_silver','hates_blessings','passes_bars','can_track','noattacks','locomotion'].includes(fn)?'struct permonst':'struct monst',args[0]);if(fn==='locomotion')args[1]=biology.charPointer(args[1]);if(fn==='max_passive_dmg')args[1]=record('struct monst',args[1]);return args;}});
  environment.register('hero-monster-resistance-memory',{cvt_prop_to_mseenres,cvt_adtyp_to_mseenres,monstunseesu},biology);
  environment.register('hero-form',{float_vs_flight:()=>callPolyself(poly,layouts.polyself,'float_vs_flight'),poly_gender:()=>callPolyself(poly,layouts.polyself,'poly_gender'),body_part:part=>callPolyself(poly,layouts.polyself,'body_part',transport.int(part)),mbodypart:(mon,part)=>callPolyself(poly,layouts.polyself,'mbodypart',address(mon),transport.int(part)),set_uasmon:(...args)=>callPolyself(poly,layouts.polyself,'set_uasmon',...args)});
  const a=shadow(foreign(),['u','gu','gy','gi','svm','gm','svc','svk','flags','program_state','disp','mons','aligns','objects']);
@@ -155,7 +156,7 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
  })});
  const power=enableExperience(environment,layouts);
  const vault=context(layouts.vault);vault.Has_contents=o=>Number(Boolean(o.cobj));vault.contained_gold=(o,known)=>environment.resolve('contained_gold')(address(o),known);environment.exposeAddressPort('shk',['contained_gold']);environment.register('inventory-hidden-gold',{hidden_gold},vault);
- const spells=context(layouts.spell);for(const key of ['svs','svb'])Object.defineProperty(spells,key,{value:record('struct instance_globals_saved_'+key.slice(-1),environment.requireGlobal(key))});spells.OBJ_NAME=o=>descriptors[o.oc_name_idx].oc_name;spells.Role_if=n=>record('struct instance_globals_u',environment.requireGlobal('gu')).urole.mnum===n;spells.uchar=transport.uchar;spells.P_SKILL=n=>record('struct you',environment.requireGlobal('u')).weapon_skills[n].skill;environment.register('initial-spells',{spell_skilltype,initialspell,num_spells,skill_based_spellbook_id,age_spells},spells,{prepareArgs:(fn,args)=>{if(fn==='initialspell')args[0]=record('struct obj',args[0]);return args;}});
+ enableSpell(environment,layouts);
  if(layouts.eat.pointerSize!==hungerDataAbi.pointerSize||hu_stat.length!==hungerDataAbi.count)throw new Error('Review EAT hunger table ABI');
  const hungerTable=environment.allocateGlobal('hu_stat',hu_stat.length*hungerDataAbi.pointerSize);
  hu_stat.forEach((text,i)=>memory.view.setBigUint64(hungerTable+i*hungerDataAbi.pointerSize,BigInt(services.literal(text)),true));
