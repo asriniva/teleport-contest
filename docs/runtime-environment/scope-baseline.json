@@ -1,6 +1,6 @@
 {
-  "mainCommit": "bc368be81594d240ee035028d8a5ebe1a167929e",
-  "policyCount": 137,
+  "mainCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
+  "policyCount": 138,
   "sha256": {
     "js/isaac64.js": "0e6f41b795f49e58f0d410785c8d14c8dd9d68ac9143ae68319bd555ea247d1e",
     "js/ported/allmain.js": "9ea50e3e567e113de8ad4e552551f68bb682cb3b6c429e0a4cd6adcc2a1f3289",
@@ -63,7 +63,7 @@
     "js/ported/mkmaze.js": "905eb004386a82f0a689cd6d947d9eb96dc35af8b417bd7a897c81d490e01be3",
     "js/ported/mkobj.js": "ed597252e338e38a8ce6fd470169ece5bbcc4b871e01034cebfd8ad26e4075b6",
     "js/ported/mkroom.js": "d839ce4348574637d3d12d55d6efd3b312d623e461d1b25e1dd1732915076eab",
-    "js/ported/mon.js": "20b2521a2828b27678d0ecaf049ede0fa96a3da0a3753daf6943387b6641ebe2",
+    "js/ported/mon.js": "05f3f39643975e5f2861c8b9cbdc617eaf9b4e5ae8a644efa616a7a49a9aaa4e",
     "js/ported/mondata.js": "8c4392e371881e3d57d8db03e42e4e4831b665bab808604eef8a7e0a0cc5ac20",
     "js/ported/monmove.js": "5de0a2637789797e687065ef7ebeccc336d80e3e2aa0292a55a626b83ed32f01",
     "js/ported/monst.js": "d657850295f3b3fa08e9374d42ba8333b68d5d4a9a90dcd070f9a93eec8c25cc",
@@ -72,6 +72,7 @@
     "js/ported/muse.js": "c90c23f37955a06968f56a7c4af2e3005f9554e46e3f569fc4ea0331010d8963",
     "js/ported/music.js": "7a0fd6690db6169b7ed818cf152186ce6d2968ec6b2de61f2f7832c422cc3145",
     "js/ported/nhlobj.js": "93f709ea5199b0b5f7806eb70563bd5bec3d108b2be85bf26b0d1f2ff63b6fe3",
+    "js/ported/nhlsel.js": "3068cf168404c1e259e7e9626ad1aff6089690b9ff883779969e2c88bb7786e7",
     "js/ported/nhlua.js": "eb13e4dfbce6cedf13399121f81ce3195b71c5b42cc9fc18d77fc253451ef146",
     "js/ported/nhmd4.js": "3e11542f81e16bcc786403dd10755df6eedd44888c56750e27d8bee418f8ef5a",
     "js/ported/o_init.js": "7861819195bbf8f1d4655702c53955beab8c3ef7f23ee986b2b304badb5cf404",

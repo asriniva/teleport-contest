@@ -6,6 +6,13 @@ There is no transfer adapter between its memory and this environment's memory.
 Future integration must connect a complete dependency group within one JS-owned
 memory; registering a function alone does not close its game dependencies.
 
+
+The [module ledger](ledger.json) contains one row for each of the **138** game
+modules currently selected on main. It separates component acceptance, tested
+subsets, transport-only adapters, active integration and unconnected modules.
+Provider libraries such as Lua/libc/CVFS are outside that denominator. No row's
+component status implies full-game recording equivalence.
+
 ## Implemented scope
 
 `js/standalone/environment.js` creates an isolated CMemory/CVFS instance and
@@ -27,6 +34,7 @@ injected. C compilers and C/Wasm oracles are development-only.
 | TRACK | 3,496 original-C movement/equipment/query and historical save/restore comparisons, using shared hero/equipment and serializers. |
 | Object startup and name state | `enableObjectState`: 11 unchanged O_INIT functions connected to shared DECL/OBJECTS/DRAWING, canonical RND, two actual DUNGEON ledger functions and SFBASE/SFSTRUCT/CVFS. Combined original-C subsystem passes 6,288 comparisons across four seeds, including full class bytes/ranges/totals, shuffling, description lookup, level gem probabilities, failure diagnostic, exact RNG logs/continued stream and name save/free/restore. Serialized `oc_uname` address slots are compared as null/non-null because allocator addresses differ; every other saved byte and all restored name payloads compare exactly. Discovery/inventory/menu functions remain absent. |
 | Object records, ownership and weights | `enableObjectRecords`: 21 MKOBJ functions, two EAT nutrition functions and MON's `dealloc_mextra`, plus the existing ALLOC `dupstr`, connected to shared catalogues/globals/RNG. Combined original-C suite passes 6,184 comparisons: every object type, recursive bags/containers, corpse/statue/partly eaten/glob weights, coin rounding, class/material predicates, nobj/nexthere aliases, buried-list updates, extra/mail/embedded-monster ownership, full cleanup and ID wraparound. Raw object bytes preserve pointer alias identities via address tokens; separately owned extra pointers compare null/non-null, with name/command payloads checked exactly. Source-defined target integer narrowing is retained. Full mksobj generation, merging, inventory/UI, timers/light and invalid-quantity naming remain unlinked. |
+| Ordinary item generation and inventory | `enableItemInventory`: initialized/uninitialized `mksobj` plus real inventory add/no-merge/remove/reorder/stack merging/deletion-queue behavior. Three seeds, 2,988 constructors and 669 update callbacks pass 11,970 C comparisons, including full object bytes, pointer identities, roots/IDs/letters, exact RNG logs, nested callback reentry and heap growth. Explicit profile covers 442 ordinary types; 21 artifact/container/monster/timer/novel/candy types remain pending. Exposing an entry does not imply every inventory/UI/shop branch is linked. |
 | Stdio / persistence | Binary IO, buffering, EOF/error/pushback, seek, close and output contracts; capture/restore/deletion through existing persistence policy. No host device/OS-wide POSIX claim. |
 | Lua | Existing JS VM and 83 typed C API dispatch recipes on measured memory; bytecode, callbacks/error unwinding, date/files, userdata growth probes. Full nhlua/nhlobj integration and all standard libraries are unfinished. |
 | Terminal | 445 original-C recorder-cell/capture/terminfo comparisons; existing recorder encoding preserved. Window procedures, tty input and game loop are unfinished. The inherited 6,144-byte C recorder buffer bounds captures; larger captures are not accepted by this proof. |
@@ -43,8 +51,11 @@ Record metadata targets the configured Emscripten memory64 headers. Exporters
 bind actual headers, support sources and existing adapter schemas; production
 consumes the checked-in JSON. The historical inventory and plan are retained
 unchanged except for their status notice. `scope-baseline.json` instead binds
-the 137 translated game policy bodies and frozen files at committed main
-`bc368be81594d240ee035028d8a5ebe1a167929e`. They are unchanged by this work.
+the 138 translated game policy bodies and frozen files at committed main
+`3296b9a3702002e05ce119cd2c865666e2f625fc`, after the requested rebase. This includes
+main's NHLSEL addition, adapter optimizations and MON string fix; none of those
+ports were edited by this standalone change. The initial 137-module inventory
+remains historical.
 The base `js/ported/js-runtime.js` changes only its ISAAC provider, replacing the
 redundant translation with the canonical generator on JS-owned state views.
 
@@ -67,7 +78,7 @@ and the host compiler wrapper. From the candidate checkout run:
 STANDALONE_REFERENCE_ROOT=/path/to/reference /path/to/sdk/node scripts/test-standalone.mjs
 ```
 
-The gate runs source/closure checks, the original base-runtime suite, and eleven
+The gate runs source/closure checks, the original base-runtime suite, and twelve
 standalone suites; logs and script hashes go to `.cache/standalone-validation/`.
 It requires the existing original native allocation oracle under the candidate's
 `.cache/tu-probes/native-oracles/` (alloc-native.node, alloc-full-native-build.json,
@@ -134,6 +145,43 @@ fields and bitfields; they contain no nutrition/weight/cleanup algorithms.
 The generic address adapter now transports whole-record copies on CMemory.
 The isolation gate exercises weights, embedded extras, command bytes and object
 cleanup with Wasm/network capabilities forbidden before importing production.
+
+## Item-generation/inventory reference profile
+
+Build its combined original-C reference into a fresh directory:
+
+```sh
+python3 scripts/build-standalone-object-state.py --item-inventory --reference-root /path/to/reference --out .cache/standalone-item-inventory
+```
+
+`STANDALONE_ITEM_INVENTORY_ORACLE` overrides its test location. This links
+original O_INIT/MKOBJ/INVENT and their implemented RNG/catalogue/serialization,
+artifact-property, object-name, nutrition, attribute, spell-context, light,
+lock, shop, display, pickup and data owners. The component fixture supplies
+explicit zero input globals plus identical startup inputs (context ID 2 and
+fruit 19); it does not claim complete game startup/configuration. `zerowri`
+uses the original all-zero Windows initializer. Actual role, shop, object,
+monster and drawing tables come from their original C owners.
+
+The C build records 303 abort-only unconnected function boundaries and 55
+zero input globals, with compiler-derived prototypes. These are development
+fixture boundaries; none is a production dependency or a successful result
+stub. Crossing any function boundary aborts the comparison. Negative controls
+actually cross the unfinished `obj_to_any` edge and require a C abort and an
+explicit missing-JS-owner error with C scope restored. Source/header/artifact
+hashes are bound in the build receipt. This is a component profile with listed
+exclusions, not a full original-game executable.
+
+Production uses existing source functions and measured property-style record
+projections, source artifact table initialization, the existing adapters and
+shared state. Address adapters can add exports without reallocating statics;
+callback sites retain declared signatures and pointer-returned JS string
+literals get stable C storage. Window procedure storage contains real callback
+IDs supplied by the caller; no dummy window implementation is installed.
+The original inventory update routine decides when to call the supplied update
+callback and how to restore price-suppression state. Full menus/input/window
+rendering, unpaid shop paths, special-item constructors and all active eating/
+reading/timer/artifact side effects are additional groups, not accepted here.
 
 ## Next integration milestone
 

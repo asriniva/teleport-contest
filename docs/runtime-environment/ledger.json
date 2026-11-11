@@ -1,0 +1,913 @@
+{
+  "registryCount": 138,
+  "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
+  "acceptedCheckpoint": "c85e7134787bed70eeeda198fae168820de640f6",
+  "counts": {
+    "canonical-dependency": 1,
+    "verified-component": 10,
+    "provider-only": 2,
+    "not-connected": 96,
+    "verified-subset": 11,
+    "in-progress": 11,
+    "transport-only": 7
+  },
+  "fullGameAccepted": false,
+  "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 137 game-TU denominator.",
+  "modules": [
+    {
+      "module": "isaac64",
+      "source": "src/isaac64.c",
+      "status": "canonical-dependency",
+      "scope": "Frozen js/isaac64.js is used, not the redundant translated policy; state/draw comparisons verified.",
+      "evidence": "scripts/test-js-runtime.mjs"
+    },
+    {
+      "module": "nhmd4",
+      "source": "src/nhmd4.c",
+      "status": "verified-component",
+      "scope": "Digest/chunk/full-state/cleared-state component.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+    },
+    {
+      "module": "strutil",
+      "source": "src/strutil.c",
+      "status": "verified-component",
+      "scope": "Wildcard and string-buffer component.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+    },
+    {
+      "module": "rect",
+      "source": "src/rect.c",
+      "status": "verified-component",
+      "scope": "Rectangle component on JS-owned memory and shared RNG.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+    },
+    {
+      "module": "track",
+      "source": "src/track.c",
+      "status": "verified-component",
+      "scope": "All 6 movement/query/save/restore functions through real serializers.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+    },
+    {
+      "module": "calendar",
+      "source": "src/calendar.c",
+      "status": "provider-only",
+      "scope": "Base provider exists, but no new standalone whole-module/profile acceptance is claimed in this checkpoint."
+    },
+    {
+      "module": "stairs",
+      "source": "src/stairs.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "sys",
+      "source": "src/sys.c",
+      "status": "verified-subset",
+      "scope": "Early initialization fields only.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+    },
+    {
+      "module": "rip",
+      "source": "src/rip.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "date",
+      "source": "src/date.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "alloc",
+      "source": "src/alloc.c",
+      "status": "verified-component",
+      "scope": "Allocation/failure/casts/pointer formatting under the base native comparison profile.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+    },
+    {
+      "module": "utf8map",
+      "source": "src/utf8map.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "drawing",
+      "source": "src/drawing.c",
+      "status": "verified-component",
+      "scope": "Source symbol tables and drawing lookups.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+    },
+    {
+      "module": "posixregex",
+      "source": "sys/share/posixregex.c",
+      "status": "provider-only",
+      "scope": "Base provider exists, but no new standalone whole-module/profile acceptance is claimed in this checkpoint."
+    },
+    {
+      "module": "rnd",
+      "source": "src/rnd.c",
+      "status": "verified-component",
+      "scope": "20 original RNG/logging functions; external seed input must be injected.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+    },
+    {
+      "module": "ioctl",
+      "source": "sys/share/ioctl.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "unixtty",
+      "source": "sys/share/unixtty.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "were",
+      "source": "src/were.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "extralev",
+      "source": "src/extralev.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mplayer",
+      "source": "src/mplayer.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "exper",
+      "source": "src/exper.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mkmap",
+      "source": "src/mkmap.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "getline",
+      "source": "win/tty/getline.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "write",
+      "source": "src/write.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mdlib",
+      "source": "src/mdlib.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "quest",
+      "source": "src/quest.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "minion",
+      "source": "src/minion.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "iactions",
+      "source": "src/iactions.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "selvar",
+      "source": "src/selvar.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "steal",
+      "source": "src/steal.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "sit",
+      "source": "src/sit.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "fountain",
+      "source": "src/fountain.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "objects",
+      "source": "src/objects.c",
+      "status": "verified-component",
+      "scope": "Source object catalogue allocation/initializers/bitfields.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+    },
+    {
+      "module": "monst",
+      "source": "src/monst.c",
+      "status": "verified-component",
+      "scope": "Source monster catalogue allocation/initializers.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+    },
+    {
+      "module": "shknam",
+      "source": "src/shknam.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "rumors",
+      "source": "src/rumors.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "music",
+      "source": "src/music.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "version",
+      "source": "src/version.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "coloratt",
+      "source": "src/coloratt.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "priest",
+      "source": "src/priest.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "light",
+      "source": "src/light.c",
+      "status": "in-progress",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet.",
+      "priorStatus": "not-connected",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "lock",
+      "source": "src/lock.c",
+      "status": "in-progress",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet.",
+      "priorStatus": "not-connected",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "steed",
+      "source": "src/steed.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "wizard",
+      "source": "src/wizard.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "worm",
+      "source": "src/worm.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "o_init",
+      "source": "src/o_init.c",
+      "status": "verified-subset",
+      "scope": "11 object startup/shuffle/probability/range/description/name save/restore functions; menus excluded.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+    },
+    {
+      "module": "ball",
+      "source": "src/ball.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mcastu",
+      "source": "src/mcastu.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "dbridge",
+      "source": "src/dbridge.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mondata",
+      "source": "src/mondata.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "hacklib",
+      "source": "src/hacklib.c",
+      "status": "verified-subset",
+      "scope": "Sorting and bounded utility component tests; not every exported function accepted standalone.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+    },
+    {
+      "module": "worn",
+      "source": "src/worn.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "wield",
+      "source": "src/wield.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mkroom",
+      "source": "src/mkroom.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "sfstruct",
+      "source": "src/sfstruct.c",
+      "status": "verified-subset",
+      "scope": "All 68 historical types both directions; full error/UI and save-game closure incomplete.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+    },
+    {
+      "module": "earlyarg",
+      "source": "src/earlyarg.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "report",
+      "source": "src/report.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "bones",
+      "source": "src/bones.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "explode",
+      "source": "src/explode.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "questpgr",
+      "source": "src/questpgr.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "symbols",
+      "source": "src/symbols.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mail",
+      "source": "src/mail.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "pline",
+      "source": "src/pline.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "attrib",
+      "source": "src/attrib.c",
+      "status": "in-progress",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet.",
+      "priorStatus": "not-connected",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "sfbase",
+      "source": "src/sfbase.c",
+      "status": "verified-subset",
+      "scope": "Historical serializer family/procedure tables; full game save closure incomplete.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+    },
+    {
+      "module": "dog",
+      "source": "src/dog.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "region",
+      "source": "src/region.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "weapon",
+      "source": "src/weapon.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "vault",
+      "source": "src/vault.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "u_init",
+      "source": "src/u_init.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "sounds",
+      "source": "src/sounds.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "save",
+      "source": "src/save.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mhitm",
+      "source": "src/mhitm.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "getpos",
+      "source": "src/getpos.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "allmain",
+      "source": "src/allmain.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mthrowu",
+      "source": "src/mthrowu.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "role",
+      "source": "src/role.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "engrave",
+      "source": "src/engrave.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "glyphs",
+      "source": "src/glyphs.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "topten",
+      "source": "src/topten.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "dogmove",
+      "source": "src/dogmove.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "windows",
+      "source": "src/windows.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "cfgfiles",
+      "source": "src/cfgfiles.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "restore",
+      "source": "src/restore.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "nhlobj",
+      "source": "src/nhlobj.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "do_name",
+      "source": "src/do_name.c",
+      "status": "in-progress",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet.",
+      "priorStatus": "not-connected",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "vision",
+      "source": "src/vision.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mkmaze",
+      "source": "src/mkmaze.c",
+      "status": "transport-only",
+      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
+      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+    },
+    {
+      "module": "dokick",
+      "source": "src/dokick.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "dig",
+      "source": "src/dig.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "end",
+      "source": "src/end.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "polyself",
+      "source": "src/polyself.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "wizcmds",
+      "source": "src/wizcmds.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "detect",
+      "source": "src/detect.c",
+      "status": "transport-only",
+      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
+      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+    },
+    {
+      "module": "teleport",
+      "source": "src/teleport.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mklev",
+      "source": "src/mklev.c",
+      "status": "transport-only",
+      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
+      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+    },
+    {
+      "module": "monmove",
+      "source": "src/monmove.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "spell",
+      "source": "src/spell.c",
+      "status": "in-progress",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet.",
+      "priorStatus": "not-connected",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "do",
+      "source": "src/do.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "timeout",
+      "source": "src/timeout.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "potion",
+      "source": "src/potion.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "pray",
+      "source": "src/pray.c",
+      "status": "transport-only",
+      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
+      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+    },
+    {
+      "module": "dothrow",
+      "source": "src/dothrow.c",
+      "status": "transport-only",
+      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
+      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+    },
+    {
+      "module": "pager",
+      "source": "src/pager.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "muse",
+      "source": "src/muse.c",
+      "status": "transport-only",
+      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
+      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+    },
+    {
+      "module": "dungeon",
+      "source": "src/dungeon.c",
+      "status": "verified-subset",
+      "scope": "ledger_no and maxledgerno only; additional geometry helpers in progress.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "makemon",
+      "source": "src/makemon.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mhitu",
+      "source": "src/mhitu.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "artifact",
+      "source": "src/artifact.c",
+      "status": "in-progress",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet.",
+      "priorStatus": "not-connected",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "decl",
+      "source": "src/decl.c",
+      "status": "verified-component",
+      "scope": "All 152 source global images, pointer relocation and shared aliases.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+    },
+    {
+      "module": "do_wear",
+      "source": "src/do_wear.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "insight",
+      "source": "src/insight.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "read",
+      "source": "src/read.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "apply",
+      "source": "src/apply.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "eat",
+      "source": "src/eat.c",
+      "status": "verified-subset",
+      "scope": "obj_nutrition and eaten_stat only.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+    },
+    {
+      "module": "objnam",
+      "source": "src/objnam.c",
+      "status": "in-progress",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet.",
+      "priorStatus": "not-connected",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "mkobj",
+      "source": "src/mkobj.c",
+      "status": "verified-subset",
+      "scope": "21 object-record/weight/ownership/list/ID functions; generation integration currently in progress.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "nhlua",
+      "source": "src/nhlua.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "files",
+      "source": "src/files.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "display",
+      "source": "src/display.c",
+      "status": "in-progress",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
+      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)",
+      "priorStatus": "transport-only",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "invent",
+      "source": "src/invent.c",
+      "status": "in-progress",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
+      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)",
+      "priorStatus": "transport-only",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "cmd",
+      "source": "src/cmd.c",
+      "status": "verified-subset",
+      "scope": "isok only.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+    },
+    {
+      "module": "hack",
+      "source": "src/hack.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "uhitm",
+      "source": "src/uhitm.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "mon",
+      "source": "src/mon.c",
+      "status": "verified-subset",
+      "scope": "dealloc_mextra only.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+    },
+    {
+      "module": "pickup",
+      "source": "src/pickup.c",
+      "status": "in-progress",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
+      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)",
+      "priorStatus": "transport-only",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "shk",
+      "source": "src/shk.c",
+      "status": "in-progress",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
+      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)",
+      "priorStatus": "transport-only",
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+    },
+    {
+      "module": "sp_lev",
+      "source": "src/sp_lev.c",
+      "status": "transport-only",
+      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
+      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+    },
+    {
+      "module": "trap",
+      "source": "src/trap.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "termcap",
+      "source": "win/tty/termcap.c",
+      "status": "verified-subset",
+      "scope": "Recorder/capture/terminfo component only; full window/input integration incomplete.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+    },
+    {
+      "module": "topl",
+      "source": "win/tty/topl.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "wintty",
+      "source": "win/tty/wintty.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "unixunix",
+      "source": "sys/unix/unixunix.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "unixmain",
+      "source": "sys/unix/unixmain.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "options",
+      "source": "src/options.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "botl",
+      "source": "src/botl.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "zap",
+      "source": "src/zap.c",
+      "status": "not-connected",
+      "scope": "No standalone connection accepted yet."
+    },
+    {
+      "module": "nhlsel",
+      "source": "src/nhlsel.c",
+      "status": "not-connected",
+      "scope": "Added to main by NHLSEL integration; no standalone connection accepted yet."
+    }
+  ],
+  "rebaseNote": "Rebased to main3296b9a; refreshed 138 policy and adapter/record/terminal metadata receipts; prior13-check regression PASS.",
+  "latestWorkingTreeEvidence": {
+    "gate": "14 standalone development checks, including item-inventory",
+    "itemInventoryComparisons": 11970,
+    "constructors": 2988,
+    "callbacks": 669,
+    "ordinaryTypes": 442,
+    "pendingTypes": 21,
+    "scope": "Component profile only; all-subsystem integration remains active."
+  }
+}
