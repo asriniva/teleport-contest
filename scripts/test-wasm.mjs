@@ -35,9 +35,9 @@ if (!process.argv.includes('--timezone-worker')) {
             assert.ok(dependencies.calls[name] > 0, `Game actually invoked JS ${name}`);
         const wasm = new WebAssembly.Module(fs.readFileSync(new URL('../js/wasm/nethack.wasm', import.meta.url)));
         const imports = new Set(WebAssembly.Module.imports(wasm).map(item => item.name));
-        for (const name of ['tgetent', 'tgetstr', 'tgetnum', 'tgetflag', 'tgoto',
-            'teleport_js_tparm', 'teleport_js_tputs', 'teleport_compress_file'])
-            assert.ok(imports.has(name), `Regular game imports JS dependency ${name}`);
+        // Calls can stay entirely in JavaScript as callers are translated.
+        // Actual dependency use and output are checked here and below, rather
+        // than requiring a particular Wasm import boundary.
         const symbols = fs.readFileSync(new URL('../js/wasm/nethack.mjs.symbols', import.meta.url), 'utf8')
             .split('\n').map(line => line.slice(line.indexOf(':') + 1));
         const regexBridgeImports = ['teleport_js_regcomp', 'teleport_js_regexec',
@@ -46,8 +46,6 @@ if (!process.argv.includes('--timezone-worker')) {
             assert.equal(build.regex, 'javascript-native-macos-compatible-ERE-C-locale');
             assert.ok(build.javascriptTranslationUnits.some(port => port.name === 'posixregex'),
                 'Direct regex transport registers the original NetHack JS wrapper TU');
-            for (const name of ['regex_init', 'regex_compile', 'regex_match', 'regex_error_desc', 'regex_free'])
-                assert.ok(imports.has(name), `Game enters the JS NetHack wrapper ${name}`);
             for (const name of regexBridgeImports)
                 assert.ok(!imports.has(name), `Direct regex transport prunes obsolete bridge ${name}`);
             for (const name of ['regcomp', 'regexec', 'regerror', 'regfree'])
@@ -75,6 +73,8 @@ if (!process.argv.includes('--timezone-worker')) {
         assert.equal(regex.transport, build.regexTransport);
         assert.equal(regex.backend, build.regex);
         assert.ok(regex.calls.regcomp > 0, 'Actual game invokes the direct JS regex compiler');
+        assert.ok(regex.calls.regcomp > plainInventory.getDependencyDiagnostics().regex.calls.regcomp,
+            'The added menu rule actually compiles through the selected JS regex implementation');
         assert.ok(regex.calls.regexec > 0, 'Actual inventory invokes direct JS regex matching');
         if (coloredInventory.getDependencyDiagnostics().backend === 'javascript')
             assert.deepEqual(Object.fromEntries(Object.keys(regex.calls).map(name =>
@@ -101,11 +101,36 @@ if (!process.argv.includes('--timezone-worker')) {
         'Menu regex matching does not change gameplay RNG');
     console.log('Actual inventory ERE alternation selects red/bold gold text without gameplay changes.');
 
+    if (build.regexTransport === 'ported-posixregex-direct-js') {
+        const plainInput = inputFor('seed8000-tourist-starter', 0);
+        const invalidInput = inputFor('seed8000-tourist-starter', 0);
+        invalidInput.nethackrc += '\nMENUCOLOR="["=red&bold\n';
+        const plainStart = await runSegment(plainInput);
+        const invalidStart = await runSegment(invalidInput);
+        const plainRegex = plainStart.getDependencyDiagnostics().regex;
+        const invalidRegex = invalidStart.getDependencyDiagnostics().regex;
+        assert.ok(invalidRegex.calls.regcomp > plainRegex.calls.regcomp,
+            'The invalid menu rule reaches the actual JS regex compiler');
+        assert.ok(invalidRegex.calls.regerror > plainRegex.calls.regerror,
+            'The rejected menu pattern produces an actual JS regex diagnostic');
+        assert.ok(invalidRegex.calls.regfree > plainRegex.calls.regfree,
+            'The rejected menu pattern releases its temporary regex object');
+        assert.equal(invalidRegex.liveHandles, plainRegex.liveHandles,
+            'A rejected pattern leaves no additional live compiled regex');
+        console.log('Actual JS regex rejects an invalid menu pattern, reports its error and releases it.');
+    }
+
+    const timezoneFailures = [];
     for (const zone of Object.keys(expectedShops)) {
         const child = spawnSync(process.execPath, [fileURLToPath(import.meta.url), '--timezone-worker'], {
             cwd: root, env: { ...process.env, TZ: zone }, encoding: 'utf8', timeout: 30000,
         });
-        assert.equal(child.status, 0, `${zone}: ${child.error || child.stderr || child.stdout}`);
+        try {
+            assert.equal(child.status, 0, `${zone}: ${child.error || child.stderr || child.stdout}`);
+        } catch (error) {
+            timezoneFailures.push(error);
+            console.error(error.message);
+        }
         process.stdout.write(child.stdout);
     }
     {
@@ -162,6 +187,8 @@ if (!process.argv.includes('--timezone-worker')) {
     assert.match(version.getScreens()[175], /^MacOS NetHack/);
     assert.match(version.getScreens()[175], /mail\n\s*daemon/);
     console.log('macOS apple message, option layout, corpse prompt, version and mail features passed.');
+    if (timezoneFailures.length)
+        throw new AggregateError(timezoneFailures, 'Timezone checks failed; remaining integration checks were still executed');
 } else {
     const NativeDate = globalThis.Date;
     let before;

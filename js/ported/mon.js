@@ -3178,7 +3178,7 @@ export function monkilled(mdef,fltxt,how)
 
     if (((fltxt && (mdef.wormno ? C.worm_known(mdef) : C.cansee(mdef.mx, mdef.my))) ? 1 : 0))
         C.pline_mon(mdef, "%s is %s%s%s!", C.Monnam(mdef),
-              (C.nonliving(mptr) ? "destroyed" : "killed"), (fltxt ? " by the " : ""), fltxt);
+              (C.nonliving(mptr) ? "destroyed" : "killed"), (C.loadChar(fltxt) ? " by the " : ""), fltxt);
     else
         /* sad feeling is deferred until after potential life-saving */
         (C.iflags.sad_feeling = C.char((mdef.mtame ? 1 : 0)));

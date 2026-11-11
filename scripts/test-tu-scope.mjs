@@ -17,7 +17,7 @@ const { parse, version } = await import(pathToFileURL(join(sdk,
 // Deliberately do not allow browser, Node, Wasm or game globals. Those must be
 // imported or accessed through the TU's explicit C environment.
 const builtins = new Set([
-    'undefined', 'NaN', 'Infinity', 'Math', 'BigInt', 'Number', 'Boolean',
+    'undefined', 'NaN', 'Infinity', 'Math', 'BigInt', 'Number', 'Boolean', 'Error',
     'Int8Array', 'Int16Array', 'Int32Array', 'Uint8Array', 'BigUint64Array',
 ]);
 
@@ -177,6 +177,8 @@ function checkSource(source, filename) {
 
 // Tiny in-memory tooling fixtures, independent of game algorithms.
 const fixtures = [
+    ['standard error without host globals', 'throw Error("invalid input"); process; window; globalThis; WebAssembly;',
+        ['process', 'window', 'globalThis', 'WebAssembly']],
     ['bare C globals', 'import { C } from "x"; C.distant_name(C.obj, doname); if (uarm) C.f(uarmf);', ['doname', 'uarm', 'uarmf']],
     ['standard signed16 array and unknown size', 'const values=new Int16Array(10); values[0]=1; sizeof;', ['sizeof']],
     ['typeof policy', 'typeof missing;', ['missing']],
