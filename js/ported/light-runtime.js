@@ -131,37 +131,3 @@ export function createLightEnvironment(services, layout) {
     env.find_oid = nid => object(services.find_oid(nid));
     return env;
 }
-
-// Cache only completed environments; heap fields and world addresses stay live.
-const lightEnvironments = new WeakMap();
-export function withLightEnvironment(services, layout, namespace, invoke) {
-    const key = services.moduleKey;
-    // Older embedding facades have no stable Module identity: retain their original path.
-    if ((typeof key !== 'object' || key === null) && typeof key !== 'function')
-        return invoke(createLightEnvironment(services, layout), services);
-    let layouts = lightEnvironments.get(key);
-    if (!layouts) { layouts = new WeakMap(); lightEnvironments.set(key, layouts); }
-    let namespaces = layouts.get(layout);
-    if (!namespaces) { namespaces = new WeakMap(); layouts.set(layout, namespaces); }
-    let entry = namespaces.get(namespace);
-    if (!entry) {
-        entry = { active: services };
-        const forwarding = new Proxy(Object.create(null), {
-            get: (_target, key) => Reflect.get(entry.active, key, entry.active),
-            has: (_target, key) => Reflect.has(entry.active, key),
-            ownKeys: () => Reflect.ownKeys(entry.active),
-            getOwnPropertyDescriptor: (_target, key) => Reflect.has(entry.active, key)
-                ? { configurable: true, enumerable: Object.prototype.propertyIsEnumerable.call(entry.active, key) } : undefined,
-        });
-        entry.forwarding = forwarding;
-        entry.environment = createLightEnvironment(forwarding, layout);
-        // Constructor/ABI validation and service bindings must finish before publication.
-        const completed = namespaces.get(namespace);
-        if (completed) entry = completed;
-        else namespaces.set(namespace, entry);
-    }
-    const previous = entry.active;
-    entry.active = services;
-    try { return invoke(entry.environment, entry.forwarding); }
-    finally { entry.active = previous; }
-}

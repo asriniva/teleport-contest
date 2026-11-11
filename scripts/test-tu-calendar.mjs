@@ -147,6 +147,9 @@ if (!process.argv.includes('--worker')) {
             };
         }
         const replayClocks = [];
+        // Both reference and fresh replay Modules start these cases without
+        // the recording-epoch input exercised by the preceding loop.
+        setEnv('NETHACK_RECORDING_EPOCH', null);
         clearFixedDatetime(modules[0]);
         for (const epoch of [1777723200n, 0n, -1n]) {
             const replay = await hybridFactory({

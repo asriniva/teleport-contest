@@ -15,7 +15,6 @@ addToLibrary({
     };
     var text = value => typeof value === 'string' ? BigInt(literal(value)) : pointer(value);
     return {
-      moduleKey: Module,
       heap: () => HEAPU8, literal,
       stackAlloc: size => Number(stackAlloc(size)), stackSave: () => stackSave(), stackRestore: saved => stackRestore(saved),
       global: index => Number(_teleport_light_global(index)), uskin: () => Number(_teleport_light_uskin()),

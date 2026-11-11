@@ -3002,9 +3002,9 @@ int teleport_hacklib_call_comparator(uintptr_t token, const void *a, const void 
 { return ((int (QSORTCALLBACK *)(const void *, const void *)) token)(a, b); }
 void teleport_hacklib_qsort(void *base, size_t count, size_t size)
 {
-    extern void teleport_native_c_qsort(void *, size_t, size_t,
-                                       int (*)(const void *, const void *));
-    teleport_native_c_qsort(base, count, size, teleport_hacklib_comparator);
+    /* Bypass hack.h's function-like macro: this is the libc dependency
+     * called from nh_deterministic_qsort, not another wrapper invocation. */
+    (qsort)(base, count, size, teleport_hacklib_comparator);
 }
 void *teleport_hacklib_malloc(size_t size) { return malloc(size); }
 void teleport_hacklib_free(void *value) { free(value); }

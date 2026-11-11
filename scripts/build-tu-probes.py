@@ -545,7 +545,13 @@ for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
                 cmd_fixture_library.write_text(cmd_lib)
         if name in ['glyphs', 'allmain', 'report', 'pline', 'u_init']:
             args += ['-include', root / 'nethack-c/wasm/native-terminal.h']
-        if mode=='hybrid' and name not in ['nhlua', 'do_wear', 'do', 'spell', 'detect', 'teleport', 'mklev', 'polyself', 'wizcmds', 'end', 'dig', 'dokick', 'mkmaze', 'vision', 'restore', 'nhlobj', 'do_name', 'windows', 'cfgfiles', 'topten', 'dogmove', 'glyphs', 'engrave', 'role', 'mthrowu', 'mhitm', 'getpos', 'save', 'allmain', 'report', 'pline', 'u_init', 'monmove', 'timeout', 'potion', 'pray', 'dothrow', 'pager', 'muse', 'dungeon', 'makemon', 'mhitu', 'artifact', 'decl', 'insight', 'read', 'apply', 'eat', 'objnam', 'mkobj', 'files', 'display', 'invent', 'cmd']:
+        # SDK parity pairs must share the reference terminal/regex ABI.
+        sdk_platform_pair = options.emscripten_only and name in ['posixregex', 'ioctl', 'unixtty', 'coloratt']
+        if options.emscripten_only and name == 'ioctl':
+            # The fixture exercises USE_WIN_IOCTL: expose its SDK header to
+            # the original TU as well as the fixture/metadata translation units.
+            args += ['-include', 'sys/ioctl.h']
+        if mode=='hybrid' and not sdk_platform_pair and name not in ['nhlua', 'do_wear', 'do', 'spell', 'detect', 'teleport', 'mklev', 'polyself', 'wizcmds', 'end', 'dig', 'dokick', 'mkmaze', 'vision', 'restore', 'nhlobj', 'do_name', 'windows', 'cfgfiles', 'topten', 'dogmove', 'glyphs', 'engrave', 'role', 'mthrowu', 'mhitm', 'getpos', 'save', 'allmain', 'report', 'pline', 'u_init', 'monmove', 'timeout', 'potion', 'pray', 'dothrow', 'pager', 'muse', 'dungeon', 'makemon', 'mhitu', 'artifact', 'decl', 'insight', 'read', 'apply', 'eat', 'objnam', 'mkobj', 'files', 'display', 'invent', 'cmd']:
             args+=['-include',root/'nethack-c/wasm/native-terminal.h','--js-library',root/'nethack-c/wasm/native-libc-library.js']
         if name in ['weapon', 'questpgr', 'symbols']:
             args += ['-I' + str(root / '.cache/ncurses-wasm64-build/include')]
@@ -1037,10 +1043,6 @@ for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
                 args += [source_tree / port['source']]
         else:
             args += ['--js-library', cmd_fixture_library if name=='cmd' else (fixture_library if name=='mkobj' else root / port['library'])]
-            if name == 'o_init':
-                native_sort = work / 'native-sort-hacklib.c'
-                native_sort.write_text('#define qsort teleport_native_c_qsort\n#include ' + json.dumps(str(root / '.cache/wasm64-build/tree/src/hacklib.c')) + '\n')
-                args = [native_sort if arg == root / '.cache/wasm64-build/tree/src/hacklib.c' else arg for arg in args]
             if port.get('startup'):
                 startups=[port['startup']]
                 if name == 'coloratt':startups.append('$teleportPosixregexInit')

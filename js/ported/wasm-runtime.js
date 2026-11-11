@@ -114,8 +114,7 @@ import * as strutil from './strutil.js';
 import * as rect from './rect.js';
 import * as track from './track.js';
 import * as calendar from './calendar.js';
-import { cAddress, writeNativePointer, scanNativeLong, nativeSystemOptions } from '../services/native-c-compat.js';
-import { createCTime } from '../services/c-time.js';
+import { cAddress, writeNativePointer } from '../services/native-c-compat.js';
 import { createNativeRegexLibc } from '../services/native-regex-libc.js';
 import { nativeQsort } from '../services/native-qsort.js';
 import { createNativeTerminal } from '../services/native-terminal.js';
@@ -156,7 +155,7 @@ import * as coloratt from './coloratt.js';
 import * as priest from './priest.js';
 import { createPriestEnvironment } from './priest-runtime.js';
 import * as light from './light.js';
-import { withLightEnvironment } from './light-runtime.js';
+import { createLightEnvironment } from './light-runtime.js';
 import * as lock from './lock.js';
 import { withLockEnvironment } from './lock-runtime.js';
 import * as wield from './wield.js';
@@ -951,11 +950,7 @@ zapState(services) {return zapState(services);},
         wormState,
         worm(services, name, ...args) {
             const environment = createWormEnvironment(services, layouts.worm, wormState(services));
-            environment.fmt_ptr = value => {
-                const out = services.fmt_ptr(value);
-                writeNativePointer(services.heap(), out, value);
-                return out;
-            };
+
             if (['initworm', 'worm_move', 'worm_nomove', 'wormgone', 'wormhitu',
                 'cutworm', 'see_wsegs', 'detect_wsegs', 'place_wsegs', 'sanity_check_worm',
                 'remove_worm', 'place_worm_tail_randomly', 'size_wseg', 'count_wsegs',
@@ -1002,10 +997,10 @@ zapState(services) {return zapState(services);},
             });
         },
         light(services, name, ...args) {
-            return withLightEnvironment(services, layouts.light, light, (environment, activeServices) => {
+            const environment = createLightEnvironment(services, layouts.light);
             environment.fmt_ptr = value => {
-                const out = activeServices.fmt_ptr(value);
-                writeNativePointer(activeServices.heap(), out, value);
+                const out = services.fmt_ptr(value);
+                writeNativePointer(services.heap(), out, value);
                 return out;
             };
             if (['new_light_source', 'new_light_core'].includes(name)) args[4] = environment.anything(args[4]);
@@ -1027,7 +1022,6 @@ zapState(services) {return zapState(services);},
             }
             const result = withCEnvironment(environment, light[name], ...args);
             return typeof result === 'string' ? services.literal(result) : result?.address ?? result ?? 0;
-            });
         },
         priest(services, name, ...args) {
             const environment = createPriestEnvironment(services, layouts.priest);
@@ -1080,18 +1074,7 @@ zapState(services) {return zapState(services);},
             if (!versionStates.has(services.moduleKey))
                 versionStates.set(services.moduleKey, createVersionState(services, layouts.version, version));
             const environment = createVersionEnvironment(services, layouts.version, versionStates.get(services.moduleKey));
-            environment.Snprintf = (out, size, format, ...values) => {
-                // Native formatting preserves the source before writing an
-                // aliased destination; the Emscripten formatter clears it first.
-                if (format === '%s' && cAddress(values[0]) === cAddress(out)) {
-                    const heap = services.heap(), start = cAddress(out);
-                    let end = start; while (heap[end]) end++;
-                    const copy = services.stackAlloc(end - start + 1);
-                    services.heap().set(heap.slice(start, end + 1), copy);
-                    values[0] = copy;
-                }
-                return services.Snprintf(out, size, format, ...values);
-            };
+
             if (['version_string', 'getversionstring', 'status_version'].includes(name)) args[1] = environment.size_t(args[1]);
             if (name === 'status_version') args[2] = environment.boolean(args[2]);
             if (name === 'early_version_info') args[0] = environment.boolean(args[0]);
@@ -1271,10 +1254,7 @@ zapState(services) {return zapState(services);},
         },
         minion(services, name, ...args) {
             const environment = createMinionEnvironment(services, layouts.minion, minion);
-            environment.sscanf = (input, format, out) => {
-                if (format !== '%ld') throw new Error('Review native minion scan format');
-                return scanNativeLong(services.heap(), input, out);
-            };
+
             if (['newemin', 'free_emin', 'msummon', 'demon_talk', 'bribe', 'lose_guardian_angel'].includes(name)) args[0] = environment.monster(args[0]);
             if (['monster_census', 'dprince', 'dlord', 'ndemon'].includes(name)) args[0] = args[0] << 24 >> 24;
             if (name === 'summon_minion') args = args.map(value => value << 24 >> 24);
@@ -1377,7 +1357,7 @@ zapState(services) {return zapState(services);},
             posixregexInitialized.add(key);
         },
         posixregex(services, name, ...args) {
-            const environment = createPosixregexEnvironment({...services,...nativeRegexServices(services)}, layouts.posixregex);
+            const environment = createPosixregexEnvironment(services, layouts.posixregex);
             if (name === 'regex_compile' || name === 'regex_match') args[1] = environment.regex(args[1]);
             else if (name !== 'regex_init') args[0] = environment.regex(args[0]);
             return withCEnvironment(environment, posixregex[name], ...args);
@@ -1398,8 +1378,6 @@ zapState(services) {return zapState(services);},
         alloc(services, name, ...args) {
             const layout = layouts.alloc;
             const environment = Object.assign(Object.create(services), layout, { allocState });
-            environment.Sprintf = (out, format, value) => format === '%p'
-                ? writeNativePointer(services.heap(), out, value) : services.Sprintf(out, format, value);
             environment.ptrbuf = Array.from({ length: layout.PTRBUFCNT }, (_, i) => services.buffers() + i * layout.PTRBUFSIZ);
             return withCEnvironment(environment, alloc[name], ...args);
         },
@@ -1443,7 +1421,7 @@ zapState(services) {return zapState(services);},
             // This original function has no active body or global accesses.
             if (name === 'sysopt_seduce_set') return sys[name](...args);
             const layout = layouts.sys;
-            const environment = Object.assign(Object.create(services), layout.constants, layout.strings, nativeSystemOptions);
+            const environment = Object.assign(Object.create(services), layout.constants, layout.strings);
             environment.LL_NONE = BigInt(layout.constants.LL_NONE);
             environment.sysopt = configuredFields(services, services.sysPointer(), layout.fields, layout.intSize);
             environment.gc = configuredFields(services, services.gcPointer(), layout.gcFields, layout.intSize);
@@ -1513,15 +1491,16 @@ zapState(services) {return zapState(services);},
         calendar(services, name, ...args) {
             const layout = layouts.calendar;
             const environment = Object.create(services);
-            const nativeTime = createCTime({native:true});
             const tm = pointer => pointer ? signedFields(services, pointer, layout.fields, layout.intSize) : 0;
             Object.defineProperties(environment, {
                 HEAPU8: { get: () => services.heap() },
                 HEAP8: { get: () => services.signedHeap() },
-                localtime: { value: date => nativeTime.localtime(date) },
-                mktime: { value: value => nativeTime.mktime(value) },
+                localtime: { value: date => tm(services.localtimePointer(date)) },
+                mktime: { value: value => services.mktimePointer(value.address) },
                 tmCopy: { value: value => {
-                    return {...value};
+                    const pointer = services.stackAlloc(layout.size);
+                    services.heap().copyWithin(pointer, value.address, value.address + layout.size);
+                    return tm(pointer);
                 } },
             });
             return withCEnvironment(environment, calendar[name], ...args);
