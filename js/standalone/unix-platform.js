@@ -13,6 +13,7 @@ import * as earlyarg from '../ported/earlyarg.js';
 import {callEarlyarg} from '../ported/earlyarg-runtime.js';
 import {getmailstatus,free_maildata,ckmailstatus} from '../ported/mail.js';
 import {createMailEnvironment} from '../ported/mail-runtime.js';
+import {extendMail} from './mail.js';
 export function enableUnixPlatform(environment,layouts){
  const ctypes=createCTypes(environment.memory,{...records,aliases:{...records.aliases,...abi.aliases},records:{...records.records,...abi.records}},environment.bitfields);
  const syscalls=connectUnixPlatformSyscalls(environment,ctypes),groups={};
@@ -54,5 +55,6 @@ export function enableUnixPlatform(environment,layouts){
  });
  const mailContext=createMailEnvironment(mailServices,layouts.mail);
  environment.register('unix-platform-mail',{getmailstatus,free_maildata,ckmailstatus},mailContext);
+ const mail=extendMail(environment,layouts,{context:mailContext,services:mailServices});
  return {...groups,ctypes,syscalls,limitation:'Original platform owners linked; main executes real dependencies and fails explicitly where the startup closure is incomplete.'};
 }

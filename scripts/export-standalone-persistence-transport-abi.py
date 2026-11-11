@@ -3,12 +3,12 @@
 import hashlib,json,os,re,shlex,subprocess
 from pathlib import Path
 root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree'
-paths=[Path(__file__).resolve(),root/'nethack-c/wasm/compile-defines.json',root/'nethack-c/wasm/tu-support.c',root/'js/standalone/records.json',root/'js/wasm/tu-layouts.json',root/'js/standalone/level-persistence.js',root/'js/standalone/version-info.js',root/'js/standalone/libc.js']
-for name in ['timeout','light','mkroom','restore','sfbase','sfstruct','engrave','region','dungeon','track','version']:
+paths=[Path(__file__).resolve(),root/'nethack-c/wasm/compile-defines.json',root/'nethack-c/wasm/tu-support.c',root/'js/standalone/records.json',root/'js/wasm/tu-layouts.json',root/'js/standalone/level-persistence.js',root/'js/standalone/version-info.js',root/'js/standalone/libc.js',root/'js/standalone/random-text.js']
+for name in ['timeout','light','mkroom','restore','sfbase','sfstruct','engrave','region','dungeon','track','version','rumors']:
  paths.append(root/('js/ported/'+name+'.js'))
  runtime=root/('js/ported/'+name+'-runtime.js')
  if runtime.exists():paths.append(runtime)
-for name in ['timeout','light','mkroom','engrave','region','dungeon','track','version']:
+for name in ['timeout','light','mkroom','engrave','region','dungeon','track','version','rumors']:
  library=root/('nethack-c/wasm/tu-libraries/'+name+'.js')
  if library.exists():paths.append(library)
  layout=root/('scripts/tu-'+name+'-layout.h')
@@ -17,7 +17,7 @@ flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/u
 difftime=ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/musl/src/time/difftime.c'
 if not re.search(r'return\s+t1\s*-\s*t0\s*;',difftime.read_text()):raise ValueError('Review changed pinned musl difftime body')
 headers={difftime}
-for name in ['timeout','light','mkroom','restore','sfbase','sfstruct','engrave','region','dungeon','track','version']:
+for name in ['timeout','light','mkroom','restore','sfbase','sfstruct','engrave','region','dungeon','track','version','rumors']:
  source=tree/('src/'+name+'.c');deps=subprocess.check_output([str(ref/'.cache/emsdk/upstream/bin/clang'),*flags,'-M',str(source)],text=True)
  headers.update(Path(p).resolve()for p in shlex.split(deps.split(':',1)[1].replace('\\\n','')))
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()

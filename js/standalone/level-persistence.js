@@ -17,7 +17,7 @@ export function enableLevelPersistence(environment,layouts){
  const regions=environment.start('region-reset').environment;
  regions.strlen=value=>memory.strlen(address(value));
  for(const direction of ['sfo','sfi'])for(const type of ['long','int','short','unsigned','boolean','nhrect','any','char'])regions[(direction==='sfo'?'Sfo_':'Sfi_')+type]=serializer(direction+'_'+type);
- environment.extend('region-reset',Object.fromEntries(['save_regions','rest_regions','create_region','add_region','add_rect_to_reg'].map(name=>[name,(...args)=>{const result=callRegion(regions,layouts.region,name,...args);return result?.address??result;}])));
+ environment.extend('region-reset',Object.fromEntries(['save_regions','rest_regions','create_region','add_region','add_rect_to_reg','run_regions','m_in_out_region','in_out_region'].map(name=>[name,(...args)=>{const result=callRegion(regions,layouts.region,name,...args);return result?.address??result;}])));
  environment.exposeAddressPort('dungeon',['save_exclusions','load_exclusions']);
  if(!environment.hasFunction('save_track'))environment.enableTrack(layouts);
  return{engraving,regions,limitation:'Original level persistence entries connected; nonempty save/restore and complete checkpoint lifecycle require C verification.'};

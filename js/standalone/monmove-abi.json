@@ -1,4 +1,10 @@
 {
+  "assertion": {
+    "condition": "IndexOk(chi, mfp.info)",
+    "file": "monmove.c",
+    "line": 2005,
+    "function": "m_move"
+  },
   "schema": {
     "obj": [
       "struct obj",
@@ -427,7 +433,7 @@
     "dirs_ord"
   ],
   "sourceSha256": {
-    "scripts/export-standalone-monmove-abi.py": "f459c969a4423d5931cc3627a781f84517d857e057d5d728b226bcabc9502913",
+    "scripts/export-standalone-monmove-abi.py": "53cac722f85de66d12e42d53f62e0876188983b024f3bd68afcfba231159f5a6",
     "js/ported/monmove-runtime.js": "4248f7e934e189861ebf44fe565c1fff627470bfcfee9d73f3170ea0e7843001",
     "nethack-c/wasm/tu-monmove-support.inc": "7f2865bd51620be0b1c74a37589bfaa830eb94aea195f40ce722fafcc4c22a1b",
     "js/ported/monmove.js": "5de0a2637789797e687065ef7ebeccc336d80e3e2aa0292a55a626b83ed32f01",

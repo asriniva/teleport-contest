@@ -58,6 +58,7 @@ export function enableWindowSystem(environment,layouts){
  initializeWindows(w,layouts.windows);
  const names=W.names.filter(name=>Object.hasOwn(publicFunctions.functions,name)&&typeof windows[name]==='function'&&!environment.hasFunction(name));
  environment.register('windows',Object.fromEntries(names.map(name=>[name,(...args)=>callWindows(w,layouts.windows,name,...args)])));
+ environment.register('window-macros',{nh_delay_output:()=>{const at=ctypes.locate('struct window_procs',environment.requireGlobal('windowprocs'),'win_delay_output').at;return functions.indirect(memory.view.getBigUint64(at,true),'v');}});
  const platform=enableUnixTerminal(environment,layouts);
  // Original UNI XTTY error() receives a JS vararg packet on this boundary.
  // Keep native va_list packets on their existing transport path.

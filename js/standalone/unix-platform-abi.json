@@ -3036,6 +3036,11 @@
     "F_SETLKW": 7,
     "flock_type": 0
   },
+  "errno": {
+    "ENOTTY": 59,
+    "EINVAL": 28,
+    "EBADF": 8
+  },
   "earlyargSnprintfLine": 788,
   "usageHelp": "usagehlp",
   "sourceSha256": {
@@ -3048,12 +3053,13 @@
     "/Users/arj/Desktop/nethack_comp/runtime-environment/js/ported/unixunix-runtime.js": "257495f26b963a29c0afb58e02bb619d4b282cd594616e9e86ef6f93d4407c4c",
     "/Users/arj/Desktop/nethack_comp/runtime-environment/js/ported/unixunix.js": "b5593bb9c6f29079b793466137a38a410c459f76339fc1bc1dec0b12473a1822",
     "/Users/arj/Desktop/nethack_comp/runtime-environment/js/services/c-vfs.js": "d0dc38142c684306bb4752b3518020f3313f98c737e7b47e7f7faa7176143fe4",
-    "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/address-ports.js": "b10f26546fb064247a2e418a19c9db1e1ec10a875670b1e6d7c99f4cb0f3f712",
+    "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/address-ports.js": "751adcee57a25babf8ea7f46d3e557408b1a12d50cd262207ac743c183bf56ff",
     "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/c-types.js": "743dd9d8a93b8fa1e7d3299c4d48ba5c4c8927d85ebe419d222142009d51aa5f",
     "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/records.json": "d29a68b050cdcbc3b5c1ad9f274a1f993352cfe1a0c334bf110c0d08a614ed52",
-    "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/stdio.js": "41cfb85babda015c94a6227cfce5b23b56648785b27d9632c8503c5f188af7d5",
-    "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/unix-platform-syscalls.js": "8b66f8b75ed6cc2ca3e3a0b966206257c44ecd3b13e314cbe4d7f788b5e8f1e8",
-    "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/unix-platform.js": "9fad634883bb9d650ac25cfb2d48bbecf2f95c41662c1009680be02217099dd6",
+    "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/stdio.js": "65866af8493d02e025d99c7844d7b87cfdabe212bcdc806b89b992e1a15e6ac0",
+    "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/unix-platform-syscalls.js": "26d497a6aa7167f6b31760af8808e9c367f75009c3224cb0f126c78f2d234ec7",
+    "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/unix-platform.js": "822e43a714d53a0e4a40215961ff1c04a2418a2b5af01760037210fa27fdd58f",
+    "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/unix-terminal.js": "908b07e2d57459816fd96b3d9983c0efeaedddda9e503da88b3672960d626bcc",
     "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/window-system.js": "cb9780eb08cde9f11237c481eb5a79886b9c85d299299f499e5af03cf3e8e5ec",
     "/Users/arj/Desktop/nethack_comp/runtime-environment/js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34",
     "/Users/arj/Desktop/nethack_comp/runtime-environment/nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",
@@ -3067,7 +3073,7 @@
     "/Users/arj/Desktop/nethack_comp/runtime-environment/nethack-c/wasm/tu-libraries/unixmain.js": "a40b8a9c57070da2b0268d4e51e7100ad056738e03f24dd056fd8856619ce2aa",
     "/Users/arj/Desktop/nethack_comp/runtime-environment/nethack-c/wasm/tu-libraries/unixunix.js": "a5c0636ee4476c0604ac862f0798dc9e13e97ae590c5463599272fc6f0816082",
     "/Users/arj/Desktop/nethack_comp/runtime-environment/nethack-c/wasm/tu-mail-support.inc": "9ebdfdde292703fdc919da7c0f1f126e95bbb32160daf1817c7e76268694b20b",
-    "/Users/arj/Desktop/nethack_comp/runtime-environment/scripts/export-standalone-unix-platform-abi.py": "ccb621dd3f70c240712f80f73f1fa784e23075c0a78981d0bb0f15efefddc5f9",
+    "/Users/arj/Desktop/nethack_comp/runtime-environment/scripts/export-standalone-unix-platform-abi.py": "f9997f5309cb38b043c0ca62ba4444719b33254eee429bf4f7c935f0bbaaf7aa",
     "/Users/arj/Desktop/nethack_comp/runtime-environment/scripts/write-tu-source-metadata.py": "d05e33ba5b44e6564e59f30dc2f9baaf7483d416e80917b41ce7c6c5b70f97d1",
     "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/upstream/emscripten/cache/sysroot/include/alloca.h": "8768404d7cf4af5fb135b1a2ca91765bd2be311ac072e0ec8b68f5cb3e6e0f3e",
     "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/upstream/emscripten/cache/sysroot/include/assert.h": "477f9fcf67e8eccb59dea935f0dc7abd40829f8d61a3e73e4151ff6a18ef25f9",

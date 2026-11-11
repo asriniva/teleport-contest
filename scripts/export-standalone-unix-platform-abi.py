@@ -31,6 +31,7 @@ errors=sdk/'system/lib/libc/musl/src/errno/__strerror.h';rows=re.findall(r'E\((\
 extra=root/'.cache/unix-platform-sdk-abi.c';extra.write_text('#include <errno.h>\n#include <fcntl.h>\n#include <sys/stat.h>\n#include <stddef.h>\n'+''.join('const unsigned long probe_errno_'+name+'='+name+';\n'for name,_ in rows)+'const unsigned long probe_flock_type=offsetof(struct flock,l_type);\n'+''.join('const unsigned long probe_'+name+'='+name+';\n'for name in ['F_GETFD','F_SETFD','F_GETLK','F_SETLK','F_SETLKW']))
 ir=subprocess.check_output([str(clang),*flags,'-S','-emit-llvm','-O0','-o','-',str(extra)],text=True);value=lambda key:int(re.search(r'@probe_'+key+r' = .*?constant i64 (\d+)',ir)[1])
 data['errors']={str(value('errno_'+name)):json.loads(message)for name,message in rows};data['fcntl']={key:value(key)for key in ['F_GETFD','F_SETFD','F_GETLK','F_SETLK','F_SETLKW','flock_type']}
+data['errno']={name:value('errno_'+name)for name in ['ENOTTY','EINVAL','EBADF']}
 inputs += [sdk/'src/lib/libsyscall.js',sdk/'system/lib/libc/emscripten_syscall_stubs.c',errors,sdk/'system/lib/libc/musl/src/stdio/perror.c',sdk/'system/lib/libc/musl/src/errno/strerror.c']
 inputs.append(sdk/'system/lib/libc/musl/src/unistd/getlogin.c')
 inputs.append(sdk/'system/lib/libc/musl/src/unistd/isatty.c')
@@ -39,5 +40,6 @@ data['usageHelp']=re.search(r'#define USAGEHELP\s+"([^"]+)"',(tree/'include/glob
 inputs += [early,root/'js/ported/earlyarg.js',root/'js/ported/earlyarg-runtime.js',root/'nethack-c/wasm/tu-libraries/earlyarg.js',root/'nethack-c/wasm/tu-earlyarg-support.inc',root/'scripts/write-tu-source-metadata.py']
 inputs += [root/'js/ported/mail.js',root/'js/ported/mail-runtime.js',root/'nethack-c/wasm/tu-libraries/mail.js',root/'nethack-c/wasm/tu-mail-support.inc',tree/'src/mail.c',root/'js/wasm/tu-layouts.json',root/'js/standalone/window-system.js']
 inputs += [root/'js/standalone/records.json',root/'js/standalone/c-types.js',root/'js/standalone/address-ports.js',root/'js/standalone/stdio.js',root/'js/services/c-vfs.js']
+inputs.append(root/'js/standalone/unix-terminal.js')
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();data['sourceSha256']={str(p):sha(p)for p in sorted(set(inputs)|headers)}
 (root/'js/standalone/unix-platform-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound UNIXUNIX/UNIXMAIN and SDK stat/locking boundaries')

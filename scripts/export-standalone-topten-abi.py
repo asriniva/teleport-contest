@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+"""Measure original TOPTEN private score record and native global/file ABI."""
+import hashlib,json,os,re,shlex,subprocess,tempfile
+from pathlib import Path
+root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';header=root/'scripts/tu-topten-layout.h';support=root/'nethack-c/wasm/tu-fragments/topten-support.inc';source=tree/'src/topten.c';clang=ref/'.cache/emsdk/upstream/bin/clang';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['topten']
+flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(ref/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),'-I'+str(root/'nethack-c/wasm/tu-fragments'),*['-D'+v for v in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]]
+with tempfile.TemporaryDirectory(prefix='standalone-topten-')as scratch:
+ p=Path(scratch)/'probe.c';p.write_text('#include '+json.dumps(str(support))+'\n');native=subprocess.check_output([str(clang),*flags,'-E','-P',str(p)],text=True);gb=native.split('teleport_topten_global(int i){switch(i){',1)[1].split('default:',1)[0];globals=[]
+ for i,expression in re.findall(r'case (\d+):return (.*?);',gb):
+  expression=re.sub(r'^&','',expression).strip()
+  while expression.startswith('(')and expression.endswith(')'):expression=expression[1:-1].strip()
+  assert re.fullmatch(r'\w+(?:\.\w+|\[0\])*',expression),expression
+  parts=expression.split('.',1);globals.append({'index':int(i),'name':parts[0],'path':parts[1]if len(parts)>1 else''})
+ assert [g['index']for g in globals]==list(range(25))
+ body='#include '+json.dumps(str(source))+'\n#include '+json.dumps(str(header))+'\n';p.write_text(body);expanded=subprocess.check_output([str(clang),*flags,'-E','-P',str(p)],text=True);rows=re.findall(r'\{\s*"([^"]+)"\s*,\s*\(long long\)\((.*?)\)\s*\}',expanded,re.S);assert rows
+ fields=['tt_next','points','deathdnum','deathlev','maxlvl','hp','maxhp','deaths','ver_major','ver_minor','patchlevel','deathdate','birthdate','uid','plrole','plrace','plgend','plalign','name','death']
+ body+='_Static_assert(sizeof(struct toptenentry)==sizeof(struct teleport_toptenentry),"Original TOPTEN private record size");\n'+'\n'.join('_Static_assert(__builtin_offsetof(struct toptenentry,'+f+')==__builtin_offsetof(struct teleport_toptenentry,'+f+'),"Original TOPTEN '+f+'");'for f in fields)+'\n'
+ body+='\n'.join('const unsigned long topten_value_'+str(i)+'=('+e+');'for i,(_,e)in enumerate(rows))+'\n'+'\n'.join('const unsigned long topten_global_'+str(g['index'])+'='+('__builtin_offsetof(__typeof__('+g['name']+'),'+g['path']+')'if g['path']else'0')+';'for g in globals)+'\nconst char *topten_paths[]={RECORD,LOGFILE,XLOGFILE};\n';p.write_text(body);ir=subprocess.check_output([str(clang),*flags,'-S','-emit-llvm','-O0','-o','-',str(p)],text=True);read=lambda key:int(re.search(r'@'+key+r' = .*?constant i64 (-?\d+)',ir)[1])&((1<<64)-1)
+ measured={name:read('topten_value_'+str(i))for i,(name,_)in enumerate(rows)}
+ assert set(measured)==set(layout) and all(v==(int(layout[k])&((1<<64)-1))for k,v in measured.items()),repr({'extraFrozen':set(layout)-set(measured),'extraMeasured':set(measured)-set(layout),'different':[(k,v,layout.get(k))for k,v in measured.items()if v!=(int(layout.get(k,0))&((1<<64)-1))]})
+ for g in globals:g['offset']=read('topten_global_'+str(g['index']))
+ strings={name:bytes(re.sub(r'\\([0-9A-Fa-f]{2})',lambda m:chr(int(m[1],16)),value),'latin1').rstrip(b'\0').decode('latin1')for name,value in re.findall(r'(@[.\w]+) = .*?constant \[\d+ x i8\] c"(.*?)"',ir)};pathrow=re.search(r'@topten_paths = .*?global \[3 x ptr\] \[(.*?)\]',ir)[1];paths=[strings[name]for name in re.findall(r'ptr (@[.\w]+)',pathrow)]
+ deps=subprocess.check_output([str(clang),*flags,'-M',str(p)],text=True);headers=[Path(v).resolve()for v in shlex.split(deps.split(':',1)[1].replace('\\\n',''))if Path(v).resolve().is_relative_to(ref)]
+public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions'];names=re.findall(r'^export function (\w+)',(root/'js/ported/topten.js').read_text(),re.M);sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();inputs=[Path(__file__).resolve(),root/'js/standalone/topten.js',header,support,root/'nethack-c/wasm/tu-fragments/topten-types.h',root/'nethack-c/wasm/tu-fragments/topten-runtime-method.inc',root/'js/ported/topten.js',root/'js/ported/topten-runtime.js',root/'nethack-c/wasm/tu-libraries/topten.js',root/'js/wasm/tu-layouts.json',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'nethack-c/wasm/compile-defines.json']
+records=json.loads((root/'js/standalone/records.json').read_text())['records'];windows={name:row['ctype']for name,row in records['window_procs']['fields'].items()if name.startswith('win_')}
+result={'windows':windows,'layout':layout,'globals':globals,'paths':paths,'storageSizes':[layout['entrySize']]*2,'scoreFields':fields,'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[source]))}}
+(root/'js/standalone/topten-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original TOPTEN '+str(len(names))+' functions/'+str(len(result['public']))+' public entries,25globals,real source record size/offsets and source file paths.')

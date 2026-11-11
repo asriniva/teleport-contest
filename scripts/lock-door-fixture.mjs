@@ -1,0 +1,8 @@
+// Actual original-C walking and SAVE produce a reusable ordinary-door input.
+import fs from'node:fs';import path from'node:path';import crypto from'node:crypto';import assert from'node:assert/strict';
+import{runFullOriginalC}from'./full-original-c-run.mjs';
+const directory=path.resolve(process.env.STANDALONE_LOCK_ORACLE??'.cache/full-original-c-v1'),source=path.resolve(process.env.STANDALONE_LOCK_INITIAL_SAVE??'.cache/standalone-program/initial-state-save-c.json'),bytes=fs.readFileSync(source),saved=JSON.parse(bytes),input={...saved.input,options:'OPTIONS=!news\n',timezone:'UTC',files:saved.files,keys:'lk khhSy'};
+const result=await runFullOriginalC(directory,input);assert.deepEqual(result.status,{kind:'exited',code:0});assert.deepEqual([result.state.x,result.state.y],[65,15]);assert.ok(result.files['/nethack/save/0Ada.Z']);
+const out=path.resolve('.cache/lock-door-saved-c.json');fs.writeFileSync(out,JSON.stringify(result,null,2)+'\n');
+const sha=v=>crypto.createHash('sha256').update(v).digest('hex');fs.writeFileSync('.cache/lock-door-fixture-evidence.json',JSON.stringify({input:{argv:input.argv,programName:input.programName,keys:input.keys,timezone:input.timezone,options:input.options},sourceSaveSha256:sha(bytes),referenceReceiptSha256:sha(fs.readFileSync(directory+'/receipt.json')),sourceSha256:Object.fromEntries(['scripts/lock-door-fixture.mjs','scripts/full-original-c-run.mjs'].map(p=>[p,sha(fs.readFileSync(p))])),resultSha256:sha(fs.readFileSync(out)),state:result.state,consumed:result.consumed},null,2)+'\n');
+console.log('PASS: actual original-C walking and SAVE at northdoor, '+result.consumed+' literal keys.');

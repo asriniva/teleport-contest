@@ -1,5 +1,10 @@
 # Standalone JavaScript C environment checkpoint
 
+Current work priority (2026-11-11, user-directed): finish the ordinary game path first—turns, combat/inventory, level transitions and required quest progression, save/resume, and death/victory/scoring—with original-C recordings. Defer optional debug wishes, rare transformations and unusual interactions until that path works, unless a dependency blocks it. This changes implementation order, not the full integration objective or acceptance criteria. New working-tree startup/turn/save/restore/combat proofs remain separate from the committed checkpoint below; full-game acceptance is still false.
+
+Working-tree evidence now includes genuine Unix main through ordinary startup and turns, real pet/hero combat and XP, normal compressed-save exit, and four C/JS save producer/consumer combinations with resumed gameplay. The restoration graph test checks named scalar bytes and canonical pointer identities across hero, equipment, saved globals, terrain/rooms and reachable object/monster/branch/map/stair graphs; exact terminal frames/bytes and both full RNG states also match. This remains focused evidence, not a complete-game claim. Current core work is longer gameplay and ordinary stairs, complete quit/death/scoring and mandatory progression. Optional special interactions stay behind these.
+
+
 This is a development harness and a future integration target. It is **not a
 selectable game backend**. The mixed game does not import this entry point.
 There is no transfer adapter between its memory and this environment's memory.

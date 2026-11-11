@@ -16,7 +16,7 @@ for(const [file,hash]of Object.entries(baseline.sha256))check(file,hash);
 for(const name of ['isaac64','terminal','storage'])assert.deepEqual(read('js/'+name+'.js'),read('frozen/'+name+'.js'),'Frozen '+name);
 for(const [file,hash]of Object.entries(json('js/standalone/hero-abi.json').sourceSha256))check(file,hash);
 for(const [file,hash]of Object.entries(json('js/standalone/display-abi.json').sourceSha256))check(file,hash);
-for(const name of ['role-transport-abi','unix-platform-abi','hunger-data-abi','descriptions-abi','attribute-abi','worm-abi','report-abi','level-abi','public-functions','trap-abi','vision-abi','window-abi','options-abi','status-abi','hack-abi','persistence-transport-abi','turn-loop-abi','runtime-info-abi','messages-abi','terminal-messages-abi','save-lifecycle-abi','terminal-input-abi','do-lifecycle-abi','equipment-format-abi','quest-pager-abi','equipment-abi','armor-abi','pet-abi','monmove-abi','mon-abi','glyph-abi','command-abi','files-abi','configuration-abi','object-language-abi']){
+for(const name of ['apply-abi','lock-abi','scanf-abi','quest-abi','priest-abi','topten-abi','exper-abi','insight-abi','mthrowu-abi','uhitm-abi','vault-abi','color-attributes-abi','mhitm-abi','end-lifecycle-abi','mhitu-abi','dogmove-abi','were-abi','zap-abi','mail-abi','killer-state-abi','artifact-abi','callback-address-abi','restore-lifecycle-abi','potion-abi','eat-abi','timeout-abi','role-transport-abi','unix-platform-abi','hunger-data-abi','descriptions-abi','attribute-abi','worm-abi','report-abi','level-abi','public-functions','trap-abi','vision-abi','window-abi','options-abi','status-abi','hack-abi','persistence-transport-abi','turn-loop-abi','runtime-info-abi','messages-abi','terminal-messages-abi','save-lifecycle-abi','terminal-input-abi','do-lifecycle-abi','equipment-format-abi','quest-pager-abi','equipment-abi','armor-abi','pet-abi','monmove-abi','mon-abi','glyph-abi','command-abi','files-abi','configuration-abi','object-language-abi']){
  const data=json('js/standalone/'+name+'.json');
  for(const [file,hash]of Object.entries(data.sourceSha256))check(file,hash);
  for(const [file,hash]of Object.entries(data.referenceHeaderSha256??{}))assert.equal(sha(path.resolve(reference,file)),hash,'Public declaration header changed: '+file);
@@ -54,7 +54,7 @@ function collect(file) {
     }
     visit(ast);
 }
-collect('js/standalone/environment.js');assert.deepEqual(forbidden,[],'Forbidden production dependency');
+collect('js/standalone/environment.js');collect('js/standalone/program.js');assert.deepEqual(forbidden,[],'Forbidden production dependency');
 const result={baselineCommit:baseline.mainCommit,portPoliciesUnchanged:baseline.policyCount,frozenFilesUnchanged:3,productionFiles:seen.size,forbiddenDependencies:forbidden,
     limitation:'Static literal import closure and source/provenance checks; component execution and complete game acceptance are separate gates.'};
 fs.mkdirSync('.cache/standalone-validation',{recursive:true});fs.writeFileSync('.cache/standalone-validation/scope.json',JSON.stringify(result,null,2)+'\n');

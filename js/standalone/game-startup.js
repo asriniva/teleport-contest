@@ -1,7 +1,7 @@
 // Source game-startup policies and role tables on the standalone shared heap.
 import * as role from '../ported/role.js';
 import {createRoleEnvironment} from '../ported/role-runtime.js';
-import {newgame} from '../ported/allmain.js';
+import {newgame,welcome} from '../ported/allmain.js';
 import {align_str} from '../ported/insight.js';
 import descriptions from './descriptions-abi.json' with {type:'json'};
 import roleTransport from './role-transport-abi.json' with {type:'json'};
@@ -52,6 +52,6 @@ export function enableGameStartup(environment,layouts,creation){
  const alignment=Object.assign(Object.create(services),descriptions.constants,{schar:transport.char,int:transport.int});
  environment.register('alignment-description',{align_str:value=>services.literal(align_str(transport.char(value)))},alignment);
  Object.defineProperty(env,'genders',{value:roleEnv.genders});
- environment.register('game-startup',{newgame},env);
+ environment.register('game-startup',{newgame,welcome},env);
  return {environment:env,role:roleEnv,tables,limitation:'Startup dependency integration in progress. newgame remains an explicit unresolved edge until its complete owner graph is connected.'};
 }

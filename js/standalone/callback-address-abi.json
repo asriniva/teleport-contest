@@ -1,0 +1,70 @@
+{
+  "ports": {
+    "shk": {
+      "functionAddresses": [
+        "Doname2",
+        "ansimpleoname",
+        "doname",
+        "simpleonames",
+        "sortbill_cmp",
+        "thesimpleoname",
+        "xname"
+      ],
+      "functionTypes": {
+        "sortbill_cmp": "int (const void *, const void *)"
+      }
+    },
+    "invent": {
+      "functionAddresses": [
+        "adjust_gold_ok",
+        "adjust_ok",
+        "allow_all",
+        "ansimpleoname",
+        "cinv_ansimpleoname",
+        "cinv_doname",
+        "ckunpaid",
+        "ckvalidcat",
+        "doname",
+        "identify",
+        "is_inuse",
+        "is_worn",
+        "not_fully_identified",
+        "only_here",
+        "rn2_on_display_rng",
+        "safeq_shortxprname",
+        "safeq_xprname",
+        "sortloot_cmp",
+        "this_type_only",
+        "worn_wield_only"
+      ],
+      "functionTypes": {
+        "adjust_gold_ok": "int (struct obj *)",
+        "adjust_ok": "int (struct obj *)",
+        "cinv_ansimpleoname": "char *(struct obj *)",
+        "cinv_doname": "char *(struct obj *)",
+        "ckunpaid": "int (struct obj *)",
+        "ckvalidcat": "int (struct obj *)",
+        "identify": "int (struct obj *)",
+        "is_inuse": "boolean (struct obj *)",
+        "is_worn": "boolean (struct obj *)",
+        "only_here": "boolean (struct obj *)",
+        "safeq_shortxprname": "char *(struct obj *)",
+        "safeq_xprname": "char *(struct obj *)",
+        "sortloot_cmp": "int (const void *, const void *)",
+        "this_type_only": "boolean (struct obj *)",
+        "worn_wield_only": "boolean (struct obj *)"
+      }
+    }
+  },
+  "sourceSha256": {
+    "scripts/export-standalone-callback-address-abi.py": "db6edce504641ee253683cfd54f79003e9ebc05ca7782ce95cb9513333f2d7c6",
+    "js/standalone/address-ports.json": "19e8e97122ba43699b635fe5f1aa0dc3a5c874e9e593b5e310a1d2930b1b6942",
+    "js/standalone/public-functions.json": "75774661072653bbd6c90bce1e837fac87a998b5e9139f6f5012878057779e12",
+    "nethack-c/wasm/tu-fragments/shk-schema.json": "2547b3ab43c18347d823b0ae520ae80ae4dde90720e0809399e21d2e8af0405d",
+    "js/ported/shk-runtime.js": "e14bbfdfdf0da4603afdfee94dbeedb4f990181269d16331a316e37774459623",
+    "nethack-c/wasm/tu-libraries/shk.js": "3f38b40c884645a742ce57660f7ccb26a54e3c19feb3ef4e896d4c40bf2d794e",
+    "nethack-c/wasm/tu-fragments/invent-schema.json": "02c2f8b8674c6fff599d16598265dad19fd5492827b9dc9385e9b4b2fb66a344",
+    "js/ported/invent-runtime.js": "6219ddc555f15b88a68c972ca23e94a023026c85aeeea5da2e5559a9c4e43b3c",
+    "nethack-c/wasm/tu-libraries/invent.js": "3f8ef62b28e08ac13a15b16df6b9e0332e6ff9f4bb1b3f513fd1b58f42d846fe"
+  }
+}
