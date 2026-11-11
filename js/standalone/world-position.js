@@ -1,12 +1,12 @@
 // Original terrain, candidate collection and position-selection policies.
-import * as teleport from '../ported/teleport.js';
-import {is_pool,is_lava,is_waterwall,db_under_typ,is_drawbridge_wall,is_db_wall} from '../ported/dbridge.js';
+import {enableTeleport} from './teleport.js';
+import {is_pool,is_lava,is_waterwall,db_under_typ,is_drawbridge_wall,is_db_wall,find_drawbridge} from '../ported/dbridge.js';
 import {closed_door,accessible} from '../ported/monmove.js';
 import {may_passwall} from '../ported/hack.js';
 import {sticks} from '../ported/mondata.js';
 import {m_in_air} from '../ported/mon.js';
 import {engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at,read_engr_at,u_wipe_engr,freehand} from '../ported/engrave.js';
-import {obj_delivery} from '../ported/dokick.js';
+import {obj_delivery,ship_object,down_gate} from '../ported/dokick.js';
 import {hliquid,hliquids} from '../ported/do_name.js';
 import {makemon_rnd_goodpos,m_initgrp} from '../ported/makemon.js';
 import {debugcore,nh_basename,fqname} from '../ported/files.js';
@@ -52,14 +52,11 @@ export function enableWorldPosition(environment,layouts,creation){
  const debugMessage=values=>{if(services.debugcore('teleport.c',1)){const saved=world.iflags.last_msg;try{const[fmt,...args]=values();environment.resolve('pline')(fmt,...args);}finally{world.iflags.last_msg=saved;}}};
  env.debugpline0=s=>debugMessage(()=>[s]);env.debugpline4=debugMessage;
  const coord=p=>record('coord',p),monster=p=>record('struct monst',p),pm=p=>record('struct permonst',p);
- const names=['goodpos','goodpos_onscary','enexto','enexto_core','enexto_gpflags','collect_coords'];
- environment.register('world-position',Object.fromEntries(names.map(n=>[n,teleport[n]])),env,{prepareArgs:(fn,a)=>{
-  if(fn==='goodpos')a[2]=monster(a[2]);else if(fn==='goodpos_onscary')a[2]=pm(a[2]);else if(fn==='collect_coords')a[0]=environment.address(a[0]);
-  else{a[0]=coord(a[0]);a[3]=pm(a[3]);}return a;
- }});
+ const teleportOwner=enableTeleport(environment,layouts,creation);
  const bridge=context(layouts.dbridge),D=layouts.dbridge;
- Object.assign(bridge,{IS_WATERWALL:t=>t===D.WATER,Is_juiblex_level:lev=>services.on_level(lev,world.svd.dungeon_topology.d_juiblex_level)});
- environment.register('world-water-terrain',{is_pool,is_lava,is_waterwall,db_under_typ,is_drawbridge_wall,is_db_wall},bridge);
+ Object.assign(bridge,{bool:v=>Number(Boolean(v)),IS_DRAWBRIDGE:t=>t===D.DRAWBRIDGE_UP||t===D.DRAWBRIDGE_DOWN,IS_WATERWALL:t=>t===D.WATER,Is_juiblex_level:lev=>services.on_level(lev,world.svd.dungeon_topology.d_juiblex_level)});
+ const shortReference=p=>({address:environment.address(p),get value(){return memory.view.getInt16(environment.address(p),true);},set value(v){memory.view.setInt16(environment.address(p),transport.short(v),true);}});
+ environment.register('world-water-terrain',{is_pool,is_lava,is_waterwall,db_under_typ,is_drawbridge_wall,is_db_wall,find_drawbridge},bridge,{prepareArgs:(fn,args)=>fn==='find_drawbridge'?[shortReference(args[0]),shortReference(args[1])]:args});
  const move=context(layouts.monmove);Object.assign(move,{
   bool:v=>Number(Boolean(v)),IS_DOOR:t=>t===layouts.monmove.DOOR,ACCESSIBLE:t=>t>=layouts.monmove.DOOR,
   SURFACE_AT:(x,y)=>world.levl[x][y].typ===D.DRAWBRIDGE_UP?services.db_under_typ(world.levl[x][y].drawbridgemask):world.levl[x][y].typ,
@@ -92,7 +89,10 @@ export function enableWorldPosition(environment,layouts,creation){
  Object.defineProperty(engr,'head_engr',{get:()=>record('struct engr',ctypes.load('struct engr *',environment.requireGlobal('head_engr'))),set:v=>ctypes.store('struct engr *',environment.requireGlobal('head_engr'),v)});
  environment.register('world-engravings',{engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at,read_engr_at,u_wipe_engr,freehand},engr,{prepareArgs:(fn,a)=>{if(fn==='read_engr_at'){a[0]=transport.short(a[0]);a[1]=transport.short(a[1]);}if(fn==='sengr_at'&&typeof a[0]==='string')a[0]=services.literal(a[0]);if(fn==='make_engr_at')for(const i of [2,3])if(typeof a[i]==='string')a[i]=services.literal(a[i]);return a;}});
  const delivery=context(layouts.dokick);delivery.levelLocal=()=>record('d_level',transport.stackAlloc(ctypes.size('d_level')));
- environment.register('object-delivery',{obj_delivery},delivery,{prepareArgs:(_fn,args)=>[transport.char(args[0])]});
+ Object.defineProperty(delivery,'gg',{value:record('struct instance_globals_g',environment.requireGlobal('gg'))});
+ Object.defineProperty(delivery,'qstart_level',{get:()=>world.svd.dungeon_topology.d_qstart_level});
+ delivery.stairway_at=(x,y)=>record('struct stairway',services.stairway_at(x,y));delivery.t_at=(x,y)=>record('struct trap',services.t_at(x,y));delivery.on_level=(a,b)=>services.on_level(environment.address(a),environment.address(b));delivery.is_hole=t=>Number(t===layouts.dokick.HOLE||t===layouts.dokick.TRAPDOOR);
+ environment.register('object-delivery',{obj_delivery,ship_object,down_gate},delivery,{prepareArgs:(fn,args)=>fn==='down_gate'?[transport.short(args[0]),transport.short(args[1])]:fn==='ship_object'?[record('struct obj',args[0]),transport.short(args[1]),transport.short(args[2]),transport.char(args[3])]:[transport.char(args[0])]});
  const liquid=context(layouts.do_name);
  Object.assign(liquid,{hliquids:hliquids.map(services.literal),charPointer:text,program_state:record('struct sinfo',environment.requireGlobal('program_state'))});
  Object.defineProperty(liquid,'Hallucination',{get:()=>{const p=world.u.uprops[layouts.do_name.HALLUC],r=world.u.uprops[layouts.do_name.HALLUC_RES];return Number(Boolean(p.intrinsic&&!r.intrinsic&&!r.extrinsic));}});

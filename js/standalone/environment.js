@@ -81,6 +81,9 @@ import {enableColorAttributes} from './color-attributes.js';
 import {enableVault} from './vault.js';
 import {enableUhitm} from './uhitm.js';
 import {enableMthrowu} from './mthrowu.js';
+import {enableMcastu} from './mcastu.js';
+import {enableRead} from './read.js';
+import {enableShknam} from './shknam.js';
 import {enableInsight} from './insight.js';
 import {enableTopten} from './topten.js';
 import {enablePriest} from './priest.js';
@@ -361,6 +364,9 @@ export function createStandaloneEnvironment(options={}) {
         enableVault:layouts=>vault??=enableVault(environment,layouts),
         enableUhitm:layouts=>enableUhitm(environment,layouts),
         enableMthrowu:layouts=>enableMthrowu(environment,layouts),
+        enableMcastu:layouts=>enableMcastu(environment,layouts),
+        enableRead:layouts=>enableRead(environment,layouts),
+        enableShknam:layouts=>enableShknam(environment,layouts),
         enableInsight:layouts=>enableInsight(environment,layouts),
         enableTopten:layouts=>enableTopten(environment,layouts),
         enablePriest:layouts=>enablePriest(environment,layouts),

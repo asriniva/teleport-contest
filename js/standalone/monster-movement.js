@@ -6,6 +6,9 @@ import {callMonmove} from '../ported/monmove-runtime.js';
 export function enableMonsterMovement(environment,layouts){
  const {services,memory,ctypes}=environment,L=layouts.monmove;
  const local=new Proxy(Object.create(services),{get:(o,k,r)=>{const value=Reflect.get(o,k,r);if(Object.hasOwn(o,k)||typeof k!=='string')return value;if(typeof value!=='function'&&Reflect.has(o,k))return value;return(...args)=>(typeof value==='function'?value:environment.resolve(k))(...args.map(v=>v?.address??v));}});
+ // Shadow DECL setters so the unchanged factory installs its native record views.
+ for(const name of abi.globals)Object.defineProperty(local,name,{value:services[name],writable:true,configurable:true});
+
  const storage=environment.allocateGlobal('monmove.class_lists',monmove.practical.length+monmove.magical.length);
  function field(kind,p,i,value){const key=abi.bits[kind]?.[i],type=abi.schema[kind]?.[0];if(!key||!type)throw new Error('Unknown MONMOVE packed field');const f=ctypes.record(type).fields[key];const scalar=f.ctype.replace(new RegExp(' '+key+'$'),'');return value===undefined?ctypes.getField(type,environment.address(p),key,scalar):ctypes.setField(type,environment.address(p),key,scalar,value);}
  Object.assign(local,{moduleKey:environment,heap:()=>memory.HEAPU8,signedHeap:()=>memory.HEAP8,global:i=>environment.requireGlobal(abi.globals[i]),storage:()=>storage,bit:(kind,p,i)=>field(kind,p,i),setBit:(kind,p,i,v)=>field(kind,p,i,v),equipment:i=>ctypes.load('void *',environment.requireGlobal(['uwep','uarm','uball','uchain'][i]))});

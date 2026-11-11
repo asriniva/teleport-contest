@@ -2646,7 +2646,7 @@
   ],
   "sourceSha256": {
     "scripts/export-standalone-dogmove-abi.py": "86768e223d963e2fc78d514dbce1feec6cb2ece8f4500dad76cf509b3a99212f",
-    "js/standalone/dogmove.js": "354253587c17f26cbe03619b1ea30a9aed3c797bb4fcc5d8d5aad7f31a57935a",
+    "js/standalone/dogmove.js": "1ece1ed90ea834537a6c6c3053a4cd4a8afe69dcc2ebf2ad2e6f95c642be2882",
     "js/ported/dogmove.js": "c73eb4d6a4b0ea4ecb1eca0f26627fac568c0e8452a273b6c0615be0190e72fb",
     "js/ported/dogmove-runtime.js": "68f39554a118125b30f1d49c37d1821aa1bbb3c21af34fc0d7f12808055703d9",
     "js/ported/wasm-runtime.js": "73030532670eaaf8740f50d4556a89a62faf70cde679c19af22285d52286d6d4",

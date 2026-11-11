@@ -1,5 +1,16 @@
 # Extend the JavaScript C environment
 
+Current execution order (2026-11-11, user-directed):
+
+1. Finish the ordinary main loop and inventory cohort: exact C recordings and actual world graphs for movement/combat, completed eating, wield/wear/remove, drop/pickup, then a changed-state save and four C/JS producer/consumer restore combinations. The two discovered movement transport mismatches are fixed through turn238; remaining checks must pass on the final snapshot.
+2. Finish ordinary stairs and generated shops, then a literal down/up/down route proving unloaded-level persistence and genuine pet transfer. Native route `lk khhokkkkklklkkkkhhhhhhhhhhjhhhhhhhhhhjjjjjjjjjhhhjjhhhhkk> < > ` reaches level2 at turn62; the spaces acknowledge real source messages. Compare recordings, RNG and normalized world identity, not merely the final level number.
+3. Connect the remaining ordinary action/attack providers and incomplete owners: DOTHROW, READ, SPELL, full required ZAP paths, MCASTU, EXPLODE, TELEPORT, DIG, STEAL, MINION, plus reached MONDATA/REGION/LIGHT/MKROOM dependencies. Reuse canonical owner state and unchanged policies; registration alone is not verification.
+4. Prove required progression: connected quest/dungeon travel, WIZARD lifecycle, endgame MPLAYER generation, invocation READ/MUSIC dependencies and victory/scoring. Keep production execution pure JavaScript and retain exact original-C comparisons.
+5. Complete genuine starvation/combat/death checks, nonempty score history and binary persistence semantics. Initial depth1 starvation creates no bones, so bones requires a genuine deeper-level producer and actual subsequent uptake. Save/restore proofs must include changed and unloaded-level state. Run the expanded regression against a frozen implementation snapshot before promoting and pushing verified checkpoints.
+6. Finish deferred special interactions and remaining registry entries after the ordinary complete-game path works: rare forms/mounted behavior, unusual item/monster combinations, writing/thrones/fountains and debug facilities. Defer only their order, not the original full integration objective. Re-run affected source comparisons and full recordings for subsequent changes.
+
+The accepted historical checkpoint remains distinct from the current progress commit/worktree. Complete-game acceptance is false until the full objective is proven.
+
 Historical implementation plan, 2026-11-10. The original inventory below is
 retained at its starting revision. See [README.md](README.md) for the implemented
 checkpoint, current evidence and remaining integration work. This plan's full

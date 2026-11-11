@@ -1,9 +1,43 @@
-// Ordinary original-main death recording; no forced source entries or skips.
-import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';
-import {runFullOriginalC} from './full-original-c-run.mjs';import {runStandaloneProgram} from './run-standalone-program.mjs';import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
-const directory=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1'),input=JSON.parse(fs.readFileSync(path.join(directory,'scenarios/death.json'))),out=path.resolve('.cache/standalone-death-program');fs.mkdirSync(out,{recursive:true});
-const reference=await runFullOriginalC(directory,input),actual=runStandaloneProgram(directory+'/assets',input);for(const[label,result]of [['c',reference],['js',actual]])fs.writeFileSync(path.join(out,'ordinary-death-'+label+'.json'),JSON.stringify(result,null,2)+'\n');
-assert.deepEqual(reference.status,{kind:'exited',code:0},'original C ordinary death completes');assert.ok(reference.state.hp<=0,'fixture reaches ordinary fatal damage');assert.deepEqual(actual.status,reference.status,'JS ordinary death completes genuine normal main');assert.equal(actual.consumed,reference.consumed,'all ordinary death input consumption');assert.deepEqual(actual.snapshots,reference.snapshots,'all ordinary death input-boundary scalars and both complete ISAAC states');assert.deepEqual(actual.state,reference.state,'ordinary death final state');assert.equal(actual.rngLog,reference.rngLog,'complete ordinary death core RNG log');assert.equal(actual.displayRngLog,reference.displayRngLog,'complete ordinary death display RNG log');assert.deepEqual(actual.frames,reference.frames.map(({screen,cursor,animation})=>({screen:encodeRecorderScreen(screen),cursor:[...cursor,1],animation})),'all ordinary death frozen frames/cursors/animation');assert.equal(actual.stdout,reference.stdout,'ordinary death exact raw terminal output');assert.equal(actual.stderr,reference.stderr,'ordinary death exact raw terminal errors');assert.deepEqual(Object.keys(actual.files).sort(),Object.keys(reference.files).sort(),'ordinary death file paths and lock removal');
-for(const name of ['/nethack/record','/nethack/logfile','/nethack/xlogfile']){assert.ok(reference.files[name]);assert.equal(actual.files[name].bytes,reference.files[name].bytes,'ordinary death exact score/log file '+name);}
-const binaryPersistence=[];for(const name of Object.keys(reference.files))if(/\/(?:bones\.|save\/)/.test(name)){binaryPersistence.push({path:name,cBytes:Buffer.from(reference.files[name].bytes,'base64').length,jsBytes:Buffer.from(actual.files[name].bytes,'base64').length,byteIdentical:reference.files[name].bytes===actual.files[name].bytes,semanticEquivalenceAccepted:false});}
-const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),evidence={complete:true,deathRecordingAccepted:true,fullGameAccepted:false,inputBoundaries:actual.snapshots.length,frames:actual.frames.length,rawTerminalBytes:Buffer.from(actual.stdout,'base64').length,moves:actual.state.moves,consumed:actual.consumed,binaryPersistence,scriptSha256:Object.fromEntries(['scripts/test-standalone-death-program.mjs','scripts/run-standalone-program.mjs','scripts/full-original-c-run.mjs','js/standalone/program.js','js/standalone/end-lifecycle.js','js/standalone/topten.js'].map(file=>[file,sha(file)])),limitation:'This genuine ordinary death main/recording and score/log text are accepted only. Victory/progression, other interactions and any binary bones/save graph semantics remain separate requirements.'};fs.writeFileSync(path.join(out,'evidence.json'),JSON.stringify(evidence,null,2)+'\n');console.log('PASS '+JSON.stringify(evidence));
+// Genuine ordinary-main starvation death: no forced source entries or skips.
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {runFullOriginalC} from './full-original-c-run.mjs';
+import {runStandaloneProgram} from './run-standalone-program.mjs';
+import {worldGraph} from './restoration-world-graph.mjs';
+import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
+const directory=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1');
+const fixture=path.join(directory,'scenarios/death.json'),input=JSON.parse(fs.readFileSync(fixture));
+const out=path.resolve('.cache/standalone-death-program');fs.mkdirSync(out,{recursive:true});
+const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+let cr,jr,checks=0;
+const equal=(a,b,label)=>{assert.deepEqual(a,b,label);checks++;};
+const reference=await runFullOriginalC(directory,{...input,observeRuntime:r=>{cr=r;}});
+const actual=runStandaloneProgram(directory+'/assets',{...input,observeRuntime:r=>{jr=r;}});
+for(const[label,result]of [['c',reference],['js',actual]])fs.writeFileSync(path.join(out,'ordinary-death-'+label+'.json'),JSON.stringify(result,null,2)+'\n');
+equal(reference.status,{kind:'exited',code:0},'original C ordinary death completes');
+assert.ok(reference.state.hp<=0,'fixture reaches ordinary fatal damage');checks++;
+equal(actual.status,reference.status,'JS ordinary death completes genuine normal main');
+equal(actual.consumed,reference.consumed,'all ordinary death input consumption');
+equal(actual.snapshots,reference.snapshots,'all input-boundary scalars and both complete ISAAC states');
+equal(actual.state,reference.state,'ordinary death final state');
+equal(actual.rngLog,reference.rngLog,'complete ordinary death core RNG log');
+equal(actual.displayRngLog,reference.displayRngLog,'complete ordinary death display RNG log');
+equal(actual.frames,reference.frames.map(({screen,cursor,animation})=>({screen:encodeRecorderScreen(screen),cursor:[...cursor,1],animation})),'all frozen frames/cursors/animation');
+equal(actual.stdout,reference.stdout,'exact raw terminal output');
+equal(actual.stderr,reference.stderr,'exact raw terminal errors');
+equal(Object.keys(actual.files).sort(),Object.keys(reference.files).sort(),'file paths and source lock removal');
+for(const name of ['/nethack/record','/nethack/logfile','/nethack/xlogfile']){
+ assert.ok(reference.files[name],name+' original file exists');checks++;
+ equal(actual.files[name].bytes,reference.files[name].bytes,'exact score/log file '+name);
+}
+const worlds={c:worldGraph(cr),js:worldGraph(jr)};
+for(const[name,graph]of Object.entries(worlds))fs.writeFileSync(path.join(out,'ordinary-death-'+name+'-world.json'),JSON.stringify(graph,null,2)+'\n');
+equal(worlds.js,worlds.c,'actual post-main named world records and canonical pointer graph');
+const binaryPersistence=[];
+for(const name of Object.keys(reference.files))if(/\/(?:bones\.|save\/)/.test(name))binaryPersistence.push({path:name,cBytes:Buffer.from(reference.files[name].bytes,'base64').length,jsBytes:Buffer.from(actual.files[name].bytes,'base64').length,byteIdentical:reference.files[name].bytes===actual.files[name].bytes,semanticEquivalenceAccepted:false});
+const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json')));
+const files=['scripts/test-standalone-death-program.mjs','scripts/run-standalone-program.mjs','scripts/full-original-c-run.mjs','scripts/restoration-world-graph.mjs','js/standalone/program.js','js/standalone/end-lifecycle.js','js/standalone/topten.js','js/standalone/level-startup.js','js/standalone/level-contents.js','js/standalone/mthrowu.js','js/standalone/monster-movement.js','js/standalone/monster-lifecycle.js','js/standalone/dogmove.js'];
+const evidence={complete:true,deathRecordingAccepted:true,deathKind:'starvation while fainted',postMainWorldAccepted:true,fullGameAccepted:false,checks,inputBoundaries:actual.snapshots.length,frames:actual.frames.length,rawTerminalBytes:Buffer.from(actual.stdout,'base64').length,moves:actual.state.moves,consumed:actual.consumed,worldCoverage:worlds.js.coverage,binaryPersistence,reference:{receiptSha256:sha(path.join(directory,'receipt.json')),fixtureSha256:sha(fixture),upstream:receipt.upstream,profile:receipt.profile,buildEnvironment:receipt.buildEnvironment,gameTranslationUnits:receipt.gameTranslationUnits,luaTranslationUnits:receipt.luaTranslationUnits,verifiedSourceHashes:Object.keys(receipt.sourceSha256).length,verifiedArtifactHashes:Object.keys(receipt.artifactSha256).length},scriptSha256:Object.fromEntries(files.map(file=>[file,sha(file)])),limitation:'Only this genuine depth1 starvation-while-fainted death, exact main recording, score/log text and selected canonical world graph are accepted. This zero-point fixture has an empty ranking file and creates no bones/save file. Combat-caused deaths, nonempty score ranking, victory/progression, other interactions, arbitrary private/heap state and binary bones/save semantics remain separate requirements.'};
+fs.writeFileSync(path.join(out,'evidence.json'),JSON.stringify(evidence,null,2)+'\n');console.log('PASS '+JSON.stringify(evidence));

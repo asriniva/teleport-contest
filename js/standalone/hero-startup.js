@@ -9,7 +9,7 @@ import {callPolyself} from '../ported/polyself-runtime.js';
 import * as attrib from '../ported/attrib.js';
 import {createAttribEnvironment} from '../ported/attrib-runtime.js';
 import {valid_vampshiftform} from '../ported/mon.js';
-import {resists_drli,dmgtype,dmgtype_fromattack,cvt_prop_to_mseenres,monstunseesu,mon_hates_silver,hates_silver,pronoun_gender,gender,passes_bars,Resists_Elem,max_passive_dmg,can_track,noattacks,can_blow} from '../ported/mondata.js';
+import {resists_drli,dmgtype,dmgtype_fromattack,cvt_prop_to_mseenres,cvt_adtyp_to_mseenres,monstunseesu,mon_hates_silver,hates_silver,mon_hates_blessings,hates_blessings,pronoun_gender,gender,passes_bars,Resists_Elem,max_passive_dmg,can_track,noattacks,can_blow,levl_follower,can_blnd,can_chant} from '../ported/mondata.js';
 import {enableExperience} from './exper.js';
 import {spell_skilltype,initialspell,num_spells,skill_based_spellbook_id,age_spells} from '../ported/spell.js';
 import {hidden_gold} from '../ported/vault.js';
@@ -88,7 +88,7 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
   objectLocal:()=>record('struct obj',transport.stackAlloc(ctypes.size('struct obj'))),copyObject:(a,b)=>memory.memmove(address(a),address(b),ctypes.size('struct obj')),
   attackBefore:(a,b)=>address(a)<address(b),attackNext:a=>views.advance(a,1),
  });
- for(const key of ['uarm'])Object.defineProperty(biology,key,{get:()=>record('struct obj',ctypes.load('struct obj *',environment.requireGlobal(key)))});
+ for(const key of ['uarm','ublindf'])Object.defineProperty(biology,key,{get:()=>record('struct obj',ctypes.load('struct obj *',environment.requireGlobal(key)))});
  environment.register('hero-monster-resistance',{resists_drli,dmgtype,dmgtype_fromattack},biology,{prepareArgs:(fn,args)=>{args[0]=record(fn==='resists_drli'?'struct monst':'struct permonst',args[0]);return args;}});
  Object.assign(biology,{uchar:transport.uchar,ulong:transport.ulong,
   m_canseeu:m=>{const u=record('struct you',environment.requireGlobal('u')),p=u.uprops[layouts.mondata.INVIS],invisible=(p.intrinsic||p.extrinsic)&&!p.blocked;if((invisible&&!(m.data.mflags1&BigInt(layouts.mondata.M1_SEE_INVIS)))||u.uinwater)return 0;const root=ctypes.locate('struct instance_globals_v',environment.requireGlobal('gv'),'viz_array').at,rows=Number(memory.view.getBigUint64(root,true)),row=Number(memory.view.getBigUint64(rows+m.my*8,true));return Number(Boolean(memory.HEAPU8[row+m.mx]&layouts.mondata.COULD_SEE));},
@@ -100,6 +100,9 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
  for(const[name,mask]of Object.entries({passes_walls:'M1_WALLWALK',amorphous:'M1_AMORPHOUS',unsolid:'M1_UNSOLID',metallivorous:'M1_METALLIVORE',slithy:'M1_SLITHY'}))biology[name]=p=>Number(Boolean(p.mflags1&BigInt(layouts.mondata[mask])));
  biology.verysmall=p=>p.msize<biology.MZ_SMALL;biology.bigmonst=p=>p.msize>=biology.MZ_LARGE;
  biology.has_head=p=>Number(!(p.mflags1&BigInt(layouts.mondata.M1_NOHEAD)));
+ biology.mon_perma_blind=m=>Number(!m.mcansee&&!m.mblinded);
+ for(const[key,read]of Object.entries({Blind:props=>(props[biology.BLINDED].intrinsic||props[biology.BLINDED].extrinsic)&&!props[biology.BLINDED].blocked,Blindfolded:props=>props[biology.BLINDED].extrinsic,Blnd_resist:props=>props[biology.BLND_RES].intrinsic||props[biology.BLND_RES].extrinsic}))Object.defineProperty(biology,key,{get:()=>read(record('struct you',environment.requireGlobal('u')).uprops)});
+ Object.defineProperty(biology,'Unaware',{get:()=>record('struct instance_globals_m',environment.requireGlobal('gm')).multi<0&&(services.unconscious()||services.is_fainted())});
  Object.defineProperty(biology,'Strangled',{get:()=>record('struct you',environment.requireGlobal('u')).uprops[biology.STRANGLED].intrinsic});
  biology.is_silent=p=>p.msound===biology.MS_SILENT;biology.breathless=p=>Number(Boolean(p.mflags1&BigInt(layouts.mondata.M1_BREATHLESS)));
  biology.haseyes=p=>Number(!(p.mflags1&BigInt(layouts.mondata.M1_NOEYES)));
@@ -107,9 +110,9 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
  biology.is_weptool=o=>o.oclass===biology.TOOL_CLASS&&biology.objects[o.otyp].oc_skill!==biology.P_NONE;
  for(const[k,v]of Object.entries(layouts.mondata))if(k.startsWith('W_'))biology[k]=BigInt(v);
  for(const[name,ids]of Object.entries({completelyburns:['PM_PAPER_GOLEM','PM_STRAW_GOLEM'],completelyrots:['PM_WOOD_GOLEM','PM_LEATHER_GOLEM'],completelyrusts:['PM_IRON_GOLEM']}))biology[name]=p=>ids.some(id=>address(p)===address(biology.mons[biology[id]]));
- environment.register('monster-gender-material',{mon_hates_silver,hates_silver,pronoun_gender,gender,passes_bars,Resists_Elem,max_passive_dmg,can_track,noattacks,can_blow},biology,{prepareArgs:(fn,args)=>{args[0]=record(['hates_silver','passes_bars','can_track','noattacks'].includes(fn)?'struct permonst':'struct monst',args[0]);if(fn==='max_passive_dmg')args[1]=record('struct monst',args[1]);return args;}});
- environment.register('hero-monster-resistance-memory',{cvt_prop_to_mseenres,monstunseesu},biology);
- environment.register('hero-form',{poly_gender:()=>callPolyself(poly,layouts.polyself,'poly_gender'),body_part:part=>callPolyself(poly,layouts.polyself,'body_part',transport.int(part)),mbodypart:(mon,part)=>callPolyself(poly,layouts.polyself,'mbodypart',address(mon),transport.int(part)),set_uasmon:(...args)=>callPolyself(poly,layouts.polyself,'set_uasmon',...args)});
+ environment.register('monster-gender-material',{mon_hates_silver,hates_silver,mon_hates_blessings,hates_blessings,pronoun_gender,gender,passes_bars,Resists_Elem,max_passive_dmg,can_track,noattacks,can_blow,levl_follower,can_blnd,can_chant},biology,{prepareArgs:(fn,args)=>{if(fn==='can_blnd')return [record('struct monst',args[0]),record('struct monst',args[1]),transport.uchar(args[2]),record('struct obj',args[3])];args[0]=record(['hates_silver','hates_blessings','passes_bars','can_track','noattacks'].includes(fn)?'struct permonst':'struct monst',args[0]);if(fn==='max_passive_dmg')args[1]=record('struct monst',args[1]);return args;}});
+ environment.register('hero-monster-resistance-memory',{cvt_prop_to_mseenres,cvt_adtyp_to_mseenres,monstunseesu},biology);
+ environment.register('hero-form',{float_vs_flight:()=>callPolyself(poly,layouts.polyself,'float_vs_flight'),poly_gender:()=>callPolyself(poly,layouts.polyself,'poly_gender'),body_part:part=>callPolyself(poly,layouts.polyself,'body_part',transport.int(part)),mbodypart:(mon,part)=>callPolyself(poly,layouts.polyself,'mbodypart',address(mon),transport.int(part)),set_uasmon:(...args)=>callPolyself(poly,layouts.polyself,'set_uasmon',...args)});
  const a=shadow(foreign(),['u','gu','gy','gi','svm','gm','svc','svk','flags','program_state','disp','mons','aligns','objects']);
  const ag=['u','gu.urole','gu.urace','gy.youmonst','gi.invent','svm.moves','gm.multi','svc.context.next_attrib_check','svk.killer.format','svk.killer.name','flags.initalign','flags.verbose','program_state.in_moveloop',null,'mons','aligns'];
  const count=Object.keys(attrib).filter(k=>Array.isArray(attrib[k])&&/_abil$/.test(k)).reduce((n,k)=>n+attrib[k].length,0),at=environment.allocateGlobal('attrib.innates',count*layouts.attrib.innateSize),names=environment.allocateGlobal('attrname',attrib.attrname.length*8),from=environment.allocateGlobal('attrib.fromWhat',256);

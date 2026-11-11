@@ -25,7 +25,7 @@ export function enableLevelStartup(environment,layouts,creation){
   callbackPointer:()=>environment.functionPointer('bones::remove_mon_from_bones','vp',p=>environment.call('bones','remove_mon_from_bones',p)),
  });
  // BONES exposes typed records; address-based dungeon owners consume pointers.
- for(const name of ['open_bonesfile','ledger_no','Is_special','Is_botlevel','Is_branchlev','In_hell','dunlevs_in_dungeon','on_level'])local[name]=(...args)=>environment.resolve(name)(...args.map(value=>value?.address??value));
+ for(const name of ['open_bonesfile','ledger_no','Is_special','Is_botlevel','Is_branchlev','In_hell','dunlevs_in_dungeon','on_level','depth'])local[name]=(...args)=>environment.resolve(name)(...args.map(value=>value?.address??value));
  let automatic=null;
  const seed=Object.create(services);Object.assign(seed,{ptr:environment.address,i8:environment.transport.char,u64:environment.transport.ulong,
   enterAutomatic:slots=>{const previous=automatic;automatic=new Map(slots.map(([name,n])=>[name,environment.transport.stackAlloc(n)]));return previous;},leaveAutomatic:previous=>{automatic=previous;},
@@ -36,7 +36,9 @@ export function enableLevelStartup(environment,layouts,creation){
  environment.register('platform-seed',{sys_random_seed},seed);
  if(!Object.hasOwn(environment.status(),'rect'))environment.enableRect(layouts.rect);
  const env=createBonesEnvironment(local,layouts.bones,bones);
- environment.register('bones',{getbones:bones.getbones},env);
+ local.Strcpy=(out,input)=>services.strcpy(environment.address(out),typeof input==='string'?services.literal(input):environment.address(input));local.Strcat=(out,input)=>services.strcat(environment.address(out),typeof input==='string'?services.literal(input):environment.address(input));
+ local.strlen=p=>BigInt(memory.strlen(environment.address(p)));
+ environment.register('bones',{getbones:bones.getbones,bones_include_name:bones.bones_include_name,can_make_bones:bones.can_make_bones},env);
  const map=creation.context(layouts.mkmap);for(const kind of ['rnd','rn2'])map[kind]=(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('mkmap.c'),line,services.literal(caller));return services[kind](n);};for(const [name,type]of [['gm','struct instance_globals_m'],['gn','struct instance_globals_n']])Object.defineProperty(map,name,{value:creation.views.record(type,environment.requireGlobal(name))});
  map.IS_ROOM=t=>t>=layouts.mkmap.ROOM;map.IS_WALL=t=>t!==0&&t<=layouts.mkmap.DBWALL;map.IS_DOOR=t=>t===layouts.mkmap.DOOR;
  environment.register('map-lighting',{litstate_rnd,flood_fill_rm},map);

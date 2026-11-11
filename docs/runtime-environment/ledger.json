@@ -4,12 +4,12 @@
   "acceptedCheckpoint": "d3f8cce27971690b66ef42555070b5d0eef252d2",
   "counts": {
     "canonical-dependency": 1,
-    "in-progress": 15,
-    "not-connected": 32,
+    "in-progress": 34,
+    "not-connected": 16,
     "provider-only": 1,
     "transport-only": 5,
     "verified-component": 10,
-    "verified-subset": 74
+    "verified-subset": 71
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -134,8 +134,9 @@
     {
       "module": "were",
       "source": "src/were.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Native daytime/nighttime component transforms and summoning; complete involuntary-form gameplay remains unverified. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-were.mjs"
     },
     {
       "module": "extralev",
@@ -186,8 +187,9 @@
     {
       "module": "quest",
       "source": "src/quest.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Focused original eligibility/conversation/artifact-return cases; genuine quest-dungeon progression remains unverified. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-quest.mjs"
     },
     {
       "module": "minion",
@@ -245,9 +247,9 @@
     {
       "module": "shknam",
       "source": "src/shknam.c",
-      "status": "verified-subset",
-      "scope": "neweshk/free_eshk ownership only; shop generation and billing world behavior unfinished.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
+      "status": "in-progress",
+      "scope": "Canonical full source provider shares original catalogue with MON and passes13 grouped full-C comparisons/919 hashes, including nonempty source shop stocking/selected world/RNG and name queries. Actual stairs and billing remain under verification; expanded regression pending.",
+      "evidence": "scripts/test-standalone-shknam.mjs"
     },
     {
       "module": "rumors",
@@ -272,8 +274,9 @@
     {
       "module": "coloratt",
       "source": "src/coloratt.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Original menu-rule/POSIX-regex components and cleanup; broad UI behavior remains unverified. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-color-attributes.mjs"
     },
     {
       "module": "priest",
@@ -335,8 +338,9 @@
     {
       "module": "mcastu",
       "source": "src/mcastu.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Canonical original casting context passes58 grouped full-C comparisons using source-created/grown shaman: successful PSI hero13\u21928, cooldown/guards, selected world and full RNG/recordings. Component rawstdin EOF profile is explicit; integrated encounters/higher/fatal/summoning branches remain unverified. Expanded regression pending.",
+      "evidence": "scripts/test-standalone-mcastu.mjs"
     },
     {
       "module": "dbridge",
@@ -407,8 +411,8 @@
       "module": "bones",
       "source": "src/bones.c",
       "status": "in-progress",
-      "scope": "Source getbones entry connected for the actual disabled/absent-bones startup branch. Bones file restore, compression/serialization closure and actual restored-game behavior remain unaccepted.",
-      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
+      "scope": "One unchanged BONES environment connects getbones/bones_include_name/can_make_bones. Default depth1 starvation end is under recording comparison; it cannot emit bones. Deeper-level nonempty creation, uptake and persistence semantics remain unverified.",
+      "evidence": "scripts/test-standalone-death-program.mjs (in progress)"
     },
     {
       "module": "explode",
@@ -513,8 +517,9 @@
     {
       "module": "mhitm",
       "source": "src/mhitm.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Focused genuine-world monster combat, corpse/inventory and RNG comparisons; broader attack branches remain unverified. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-mhitm.mjs"
     },
     {
       "module": "getpos",
@@ -536,8 +541,9 @@
     {
       "module": "mthrowu",
       "source": "src/mthrowu.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Native line queries and reached ordinary projectile transport; full death/main projectile verification is in progress. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-mthrowu.mjs"
     },
     {
       "module": "role",
@@ -563,14 +569,16 @@
     {
       "module": "topten",
       "source": "src/topten.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Original scoring plus genuine quit and score-file history; victory and nonempty death rankings remain unverified. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-end-program.mjs"
     },
     {
       "module": "dogmove",
       "source": "src/dogmove.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Original-main finite recording/RNG/world graphs through turn238 and ordinary eating; later path coverage remains incomplete. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-monster-movement-program.mjs"
     },
     {
       "module": "windows",
@@ -589,8 +597,9 @@
     {
       "module": "restore",
       "source": "src/restore.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Cross-fed genuine compressed saves at restore and resumed turns with complete selected world graph; stairs/multiple unloaded levels remain in progress. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-restored-world.mjs"
     },
     {
       "module": "nhlobj",
@@ -638,8 +647,9 @@
     {
       "module": "end",
       "source": "src/end.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Genuine-main quit/disclosure/scoring and cross-fed score history match; starvation recording is in progress, victory/bones remain unverified. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-end-program.mjs"
     },
     {
       "module": "polyself",
@@ -664,9 +674,9 @@
     {
       "module": "teleport",
       "source": "src/teleport.c",
-      "status": "verified-subset",
-      "scope": "goodpos/nearby/coordinate collection plus prior eligibility helper; terrain/engravings/boulders/exclusions and ordered RNG comparisons. Hero/world teleport, active monster fear and broad random-species closure unfinished.",
-      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
+      "status": "in-progress",
+      "scope": "Six prior position queries now share one unchanged full native TELEPORT bridge with relocation entries and private state. Core pet placement on stairs and prior query-regression validation are in progress; broader hero/level travel and full recording acceptance remain unverified.",
+      "evidence": "scripts/test-standalone-teleport.mjs (in progress)"
     },
     {
       "module": "mklev",
@@ -708,8 +718,9 @@
     {
       "module": "potion",
       "source": "src/potion.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Focused ordinary expiry/healing dependencies and shared source state; full potion command/variant coverage remains unverified. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-timeout-turn.mjs"
     },
     {
       "module": "pray",
@@ -757,8 +768,9 @@
     {
       "module": "mhitu",
       "source": "src/mhitu.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Native basic queries and ordinary-main dependencies; full hostile attack coverage remains unverified. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-mhitu.mjs"
     },
     {
       "module": "artifact",
@@ -790,21 +802,23 @@
     {
       "module": "insight",
       "source": "src/insight.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Focused original disclosure and genuine-main quit path; complete endings remain unverified. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-insight.mjs"
     },
     {
       "module": "read",
       "source": "src/read.c",
-      "status": "verified-subset",
-      "scope": "assign_candy_wrapper only; reading/UI/effects remain unconnected.",
-      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
+      "status": "in-progress",
+      "scope": "One cached full original READ source owner is connected, retaining stateless candy-wrapper ownership. Genuine-main charging scroll selection/consumption is under C comparison; Book-of-Dead invocation still requires SPELL. Expanded regression pending.",
+      "evidence": "scripts/test-standalone-read.mjs (in progress)"
     },
     {
       "module": "apply",
       "source": "src/apply.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Focused real tool selection, reset, candle/light/timer and Bell cases; integrated tools and mandatory invocation remain unverified. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-apply.mjs"
     },
     {
       "module": "eat",
@@ -888,8 +902,9 @@
     {
       "module": "uhitm",
       "source": "src/uhitm.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Focused hero attacks, hostile kill/XP and pet interactions; complete combat coverage remains unverified. Expanded regression gate pending; no full-game acceptance.",
+      "evidence": "scripts/test-standalone-uhitm.mjs"
     },
     {
       "module": "mon",
@@ -982,8 +997,9 @@
     {
       "module": "zap",
       "source": "src/zap.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Canonical ZAP now exposes location/resistance/history/exclamation queries plus dozap/buzz/flash_str. Actual-main normal Wizard create-monster, striking and lightning wand cohorts pass169/168/168 checks with exact recordings/RNG/selected world. Monster beams and other wand/variant/dependency branches remain unverified; expanded regression pending.",
+      "evidence": "scripts/test-standalone-wand-program.mjs"
     },
     {
       "module": "nhlsel",
@@ -995,10 +1011,11 @@
   ],
   "rebaseNote": "Rebased to main3296b9a; refreshed 138 policy and adapter/record/terminal metadata receipts; prior13-check regression PASS.",
   "latestWorkingTreeEvidence": {
-    "baseCheckpoint": "9e849bdc3541f13a2278b9e610e8e3ab043c74f5",
-    "gate": "Current expanded working tree awaits full regression; last accepted main gate is38 checks PASS.",
-    "preliminaryEquipmentStartup": "39 ordinary role/seed +8 targeted roleplay cases passed against C before subsequent broader review fixes; no full module/game claim.",
-    "focusedEquipmentActions": "Role0 removal/reapply/callback cancellation PASS1906; role12 live resistance-memory actions PASS2408 (8 clears/16 retained memories); additional cases in progress.",
-    "scope": "Parallel providers for equipment, pager/input/messages, DO/SAVE and metadata bootstrap are in progress. A registered/imported module is not a completed subsystem. Full game/recording acceptance remains false."
+    "baseCheckpoint": "df33dd4",
+    "gate": "Expanded working tree awaits a fresh full regression. The accepted d3f8cce implementation/39ef50e documentation checkpoint has a historical51-check gate; that gate does not attest df33dd4 or subsequent changes.",
+    "ordinaryMain": "Ordinary inventory/eating/wield/takeoff-wear/drop-pickup, combined changed-state save and all four fresh C/JS cross-restores PASS253 checks/11 scenarios/104frames/103boundaries. Finite movement through turn238 matches recordings/RNG/selected world graphs. Full starvation death and stairs remain in progress.",
+    "scope": "New providers and bounded source comparisons are in progress; expanded full gate remains pending. No status implies complete-game acceptance. All138 translated policies and3 frozen files remain unchanged, with Wasm/network forbidden in JS execution fixtures.",
+    "priority": "Complete ordinary turns/combat/inventory, level travel and mandatory progression, save/resume and death/victory/scoring first. Defer optional special interactions unless they block this path.",
+    "ordinaryWands": "Actual-main create-monster/striking/lightning wand cohorts pass169/168/168 checks; native turn2, six/seven/ten frames, charge use, selected world and RNG exact. Temporary binary checkpoint recovery semantics remain separate."
   }
 }

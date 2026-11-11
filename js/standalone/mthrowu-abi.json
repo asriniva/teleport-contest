@@ -1019,7 +1019,7 @@
   ],
   "sourceSha256": {
     "scripts/export-standalone-mthrowu-abi.py": "bb06dfef2c0509b250b95659222a26808922616bb6a5c38da12c764903699c64",
-    "js/standalone/mthrowu.js": "4802a266cd1124a555fa703578595a4eb58df92f41adb68de9726140c5eb9ca4",
+    "js/standalone/mthrowu.js": "b16346756bf526950269a32d4180ec0d607712fb7e9961dab11b8786c2fb844a",
     "js/ported/mthrowu.js": "7f5e00d5dda0d27257e61be2418df8ab5be22f5be3c1a62b11b22b7bb3a80430",
     "js/ported/mthrowu-runtime.js": "6f8d6ef08fe7c537e996243c9b29fd4b568cf504c3c58d2fa67dc0449bc64fda",
     "nethack-c/wasm/tu-libraries/mthrowu.js": "dcafcd6cd889b762c06dc63847bad0a3c1f1f9807e782e1a5b2752d95f32bd43",

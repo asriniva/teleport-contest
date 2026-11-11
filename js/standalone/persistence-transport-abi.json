@@ -5,7 +5,7 @@
     "nethack-c/wasm/tu-support.c": "4acc049213a8c67b069b71315406f58409100db195df2dadbc5d4bcd7184f875",
     "js/standalone/records.json": "d29a68b050cdcbc3b5c1ad9f274a1f993352cfe1a0c334bf110c0d08a614ed52",
     "js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34",
-    "js/standalone/level-persistence.js": "df78c615faf5498b36fc22ebaf3c8f825d71c2f02b8d9bd2cd00126c42af9104",
+    "js/standalone/level-persistence.js": "5364738e04deaf7a65cd5bb73ebc314d8465678831212722bb88c92346fe25a5",
     "js/standalone/version-info.js": "7734043ef0788feb7a0ec140a9066e061d46932c39036f9d11b0b28638101116",
     "js/standalone/libc.js": "a9499db3b7960af4e546095c49993d2559109885ab063f8e2912dd38de8094da",
     "js/standalone/random-text.js": "4de3076cac8de7aace03a029c11818a7372b2a5fb290d3b68d9ff29393d0d0f1",

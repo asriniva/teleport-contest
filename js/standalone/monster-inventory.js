@@ -2,15 +2,19 @@
 import {mpickobj,findgold,mdrop_special_objs,relobj} from '../ported/steal.js';
 import * as worn from '../ported/worn.js';
 import {breakarm,sliparm,num_horns} from '../ported/mondata.js';
-import {can_saddle,put_saddle_on_mon,steeds} from '../ported/steed.js';
+import {can_saddle,put_saddle_on_mon,steeds,stucksteed} from '../ported/steed.js';
 import {mon_nam,Monnam,minimal_monnam,Mgender,pmname,new_oname,a_monnam,Amonnam,y_monnam,YMonnam,noit_Monnam,noit_mon_nam,obj_pmname,mon_nam_too,Adjmonnam,some_mon_nam,noname_monnam,x_monnam} from '../ported/do_name.js';
 import {noteleport_level} from '../ported/teleport.js';
+import {mon_has_amulet} from '../ported/wizard.js';
+import {monhealthdescr} from '../ported/pager.js';
 import {hard_helmet} from '../ported/do_wear.js';
 export function enableMonsterInventory(environment,layouts,creation){
  const {services,ctypes,memory,transport}=environment,{environment:env,views,context}=creation;
  const record=(type,p)=>views.record(type,p),object=p=>record('struct obj',p),monster=p=>record('struct monst',p);
  const m1=(p,k)=>Boolean(p.mflags1&BigInt(layouts.worn[k]));
  const copyString=(out,src)=>services.strcpy(environment.address(out),typeof src==='string'?services.literal(src):environment.address(src));
+ const health=context(layouts.pager);health.nhUse=v=>void v;health.storeCharAt=(p,v)=>memory.view.setInt8(environment.address(p),environment.transport.char(v));environment.register('monster-health-description',{monhealthdescr},health,{prepareArgs:(_fn,args)=>[monster(args[0]),environment.transport.char(args[1]),environment.address(args[2])]});
+ const wizard=context(layouts.wizard);environment.register('monster-amulet-check',{mon_has_amulet},wizard,{prepareArgs:(_fn,args)=>[monster(args[0])]});
  const equip=context(layouts.worn);
  Object.assign(equip,{
   bool:v=>Number(Boolean(v)),charPointer:p=>typeof p==='string'?services.literal(p):environment.address(p),
@@ -43,8 +47,8 @@ export function enableMonsterInventory(environment,layouts,creation){
  const tele=context(layouts.teleport);Object.assign(tele,{
   is_dlord:p=>env.is_demon(p)&&env.is_lord(p),is_covetous:p=>Boolean(p.mflags3&Number(layouts.teleport.M3_COVETOUS)),
  });
- environment.register('monster-teleport-eligibility',{noteleport_level},tele,{prepareArgs:(_fn,args)=>[monster(args[0])]});
- const saddle=context(layouts.steed);saddle.steeds=services.literal(String.fromCharCode(...steeds.map(n=>typeof n==='string'?layouts.steed[n]:n)));saddle.unsolid=p=>Number(Boolean(p.mflags1&BigInt(layouts.steed.M1_UNSOLID)));environment.exposeAddressPort('invent',['fully_identify_obj']);saddle.W_SADDLE=BigInt(layouts.steed.W_SADDLE);saddle.which_armor=(...args)=>object(environment.resolve('which_armor')(...args));saddle.mksobj=(...args)=>object(environment.resolve('mksobj')(...args));environment.register('monster-saddle-check',{can_saddle,put_saddle_on_mon},saddle,{prepareArgs:(fn,args)=>fn==='can_saddle'?[monster(args[0])]:[object(args[0]),monster(args[1])]});
+ if(!environment.hasFunction('noteleport_level'))environment.register('monster-teleport-eligibility',{noteleport_level},tele,{prepareArgs:(_fn,args)=>[monster(args[0])]});
+ const saddle=context(layouts.steed);saddle.steeds=services.literal(String.fromCharCode(...steeds.map(n=>typeof n==='string'?layouts.steed[n]:n)));saddle.unsolid=p=>Number(Boolean(p.mflags1&BigInt(layouts.steed.M1_UNSOLID)));environment.exposeAddressPort('invent',['fully_identify_obj']);saddle.W_SADDLE=BigInt(layouts.steed.W_SADDLE);saddle.which_armor=(...args)=>object(environment.resolve('which_armor')(...args));saddle.mksobj=(...args)=>object(environment.resolve('mksobj')(...args));environment.register('monster-saddle-check',{can_saddle,put_saddle_on_mon,stucksteed},saddle,{prepareArgs:(fn,args)=>fn==='stucksteed'?[environment.transport.char(args[0])]:fn==='can_saddle'?[monster(args[0])]:[object(args[0]),monster(args[1])]});
  const helmet=context(layouts.do_wear);Object.assign(helmet,{is_helmet:equip.is_helmet,
   is_metallic:o=>env.objects[o.otyp].oc_material>=layouts.do_wear.IRON&&env.objects[o.otyp].oc_material<=layouts.do_wear.MITHRIL,
   is_crackable:o=>env.objects[o.otyp].oc_material===layouts.do_wear.GLASS&&o.oclass===layouts.do_wear.ARMOR_CLASS,

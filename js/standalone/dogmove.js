@@ -15,7 +15,7 @@ export function enableDogmove(environment,layouts){
   local[name]=(...args)=>{const v=resolve(target)(...args.map((v,i)=>scalar(types[i],v)));return ctypes.canonical(m[1])==='void'?undefined:scalar(m[1],v);};
  }
  let context;
- const prepare=(name,args)=>args.map((v,i)=>{const t=abi.types[name]?.parameters[i]?.canonical;if(!t)throw new Error('Unknown DOGMOVE argument '+name+':'+i);const m=t.match(/^struct (\w+) \*$/);if(m)return context.view(m[1],address(v));if(name==='wantdoor'&&i===2)return context.intPointer(address(v));return scalar(t,v);});
+ const prepare=(name,args)=>args.map((v,i)=>{const t=abi.types[name]?.parameters[i]?.canonical;if(!t)throw new Error('Unknown DOGMOVE argument '+name+':'+i);const m=t.match(/^struct (\w+) \*$/);if(m)return context.view(m[1],address(v));if(name==='wantdoor'&&i===2)return address(v);return scalar(t,v);});
  const invoke=(name,args)=>transport.scoped(()=>withCEnvironment(context,()=>{const v=source[name](...prepare(name,args));return v?.address??v;}));
  Object.assign(local,{moduleKey:environment,heap:()=>memory.HEAPU8,literal:services.literal,stackAlloc:transport.stackAlloc,stackSave:transport.stackSave,stackRestore:transport.stackRestore,
   global:i=>{if(i<abi.globals.length)return environment.requireGlobal(abi.globals[i].name);if(storage[i-abi.globals.length]===undefined)throw new Error('Unknown DOGMOVE storage '+i);return storage[i-abi.globals.length];},

@@ -14,7 +14,7 @@ export function enablePets(environment,layouts){
   classBit:(n,i)=>{if(i!==0)throw new Error('Unknown DOG class field');return access('struct objclass',environment.requireGlobal('objects')+n*ctypes.size('struct objclass'),'oc_material');},
   free:p=>services.free(environment.address(p)),alloc:n=>environment.alloc('alloc',n),memset:(p,v,n)=>services.memset(environment.address(p),v,n),
   assert:ok=>{if(!ok)environment.resolve('__assert_fail')(services.literal('ismnum(mndx)'),services.literal('dog.c'),111,services.literal('pick_familiar_pm'));},
-  iter_mons:()=>environment.resolve('iter_mons')(environment.functionPointer('set_mon_lastmove','vp')),
+  iter_mons:()=>environment.resolve('iter_mons')(environment.functionPointer('set_mon_lastmove','vp',p=>callDog(local,L,'set_mon_lastmove',p))),
  });
  for(const [kind,names]of Object.entries(fields)){
   local[kind+'Bit']=(p,i)=>{if(!names[i])throw new Error('Unknown DOG '+kind+' field');return access(types[kind],p,names[i]);};
