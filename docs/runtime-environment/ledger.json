@@ -1,12 +1,12 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "b5a723f1d399fa0e896a87b78e6f0c6def2f54a9",
+  "acceptedCheckpoint": "29495848af8ad8e9e15b77381dce3f6370dd450a",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
-    "verified-subset": 49,
-    "not-connected": 64,
+    "verified-subset": 50,
+    "not-connected": 63,
     "provider-only": 1,
     "in-progress": 7,
     "transport-only": 6
@@ -499,10 +499,11 @@
       "module": "allmain",
       "source": "src/allmain.c",
       "status": "in-progress",
-      "scope": "Actual newgame runs through object/role/dungeon/artifact/hero setup and persistent nhcore.lua startup, then matches the C has_color boundary inside reset_glyphmap. Map/display/inventory/game loop/full-game recordings remain unfinished.",
-      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.",
+      "scope": "Actual newgame runs through hero/persistent Lua/glyph-map startup and original SIGINT callback registration; C and JS stop at mklev. Level generation, inventory/skills and full game/recordings remain unfinished.",
+      "evidence": "scripts/test-standalone-display-startup.mjs:3981 C comparisons across color capabilities, signal registration and12 full9624-glyph/shared-state/RNG prefixes; mklev remains explicit unresolved edge.",
       "priorEvidence": [
-        "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup."
+        "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup.",
+        "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
       ]
     },
     {
@@ -546,8 +547,9 @@
     {
       "module": "windows",
       "source": "src/windows.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original has_color over shared window capability/mask/name and use_color alias, including complete source glyph-map reset. Window selection/lifecycle/menus/status/input remain unfinished.",
+      "evidence": "scripts/test-standalone-display-startup.mjs:3981 C comparisons across color capabilities, signal registration and12 full9624-glyph/shared-state/RNG prefixes; mklev remains explicit unresolved edge."
     },
     {
       "module": "cfgfiles",
@@ -818,10 +820,13 @@
       "module": "display",
       "source": "src/display.c",
       "status": "verified-subset",
-      "scope": "Prior suppression plus real canseemon/sensemon helpers on injected zero-visibility storage; rendering and visible world closure unfinished.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md",
+      "scope": "Prior visibility/suppression subset plus actual reset_glyphmap complete9624-entry output during12 role/seed newgame prefixes. Color capability combinations match original C. Drawing/map transitions and full window integration remain unfinished.",
+      "evidence": "scripts/test-standalone-display-startup.mjs:3981 C comparisons across color capabilities, signal registration and12 full9624-glyph/shared-state/RNG prefixes; mklev remains explicit unresolved edge.",
       "priorStatus": "transport-only",
-      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
+      "priorEvidence": [
+        "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
+      ]
     },
     {
       "module": "invent",
@@ -952,8 +957,8 @@
   ],
   "rebaseNote": "Rebased to main3296b9a; refreshed 138 policy and adapter/record/terminal metadata receipts; prior13-check regression PASS.",
   "latestWorkingTreeEvidence": {
-    "gate": "24 standalone development checks PASS",
-    "heroStartupComparisons": 58212,
-    "scope": "Artifact/hero/persistent-core initialization and actual newgame prefix only. Full-game acceptance remains false."
+    "gate": "25 standalone development checks PASS",
+    "displaySignalComparisons": 3981,
+    "scope": "Color/glyph initialization and configured signal registration/callback subset. No full-game acceptance."
   }
 }

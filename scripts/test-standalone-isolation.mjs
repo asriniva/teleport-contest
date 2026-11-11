@@ -65,7 +65,7 @@ env.enableLuaSandbox(layouts);
 for(const name of ['nhlib.lua','dungeon.lua','nhcore.lua'])env.filesystem.writeFile(name,fs.readFileSync(process.env.STANDALONE_REFERENCE_ROOT+'/.cache/wasm64-build/tree/dat/'+name));
 env.services.init_dungeons();assert.ok(env.ctypes.getField('struct instance_globals_saved_n',env.requireGlobal('svn'),'n_dgns','int')>0);
 env.setEnvironment('NETHACK_FIXED_DATETIME','20260102030405');env.enableHeroStartup(layouts);
-assert.throws(()=>env.services.newgame(),/Unresolved standalone function has_color/);
+env.enableDisplayStartup(layouts);assert.throws(()=>env.services.newgame(),/Unresolved standalone function mklev/);
 assert.equal(env.services.u.ulevel,1);assert.ok(env.services.u.uhp>0&&env.services.u.uen>0);
 assert.ok(env.ctypes.getField('struct instance_globals_l',env.requireGlobal('gl'),'luacore','void *'));
 const terminal=env.enableTerminal(layouts.termcap);

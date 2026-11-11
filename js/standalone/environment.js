@@ -43,6 +43,7 @@ import {enableMonsterInventory} from './monster-inventory.js';
 import {enableWorldPosition} from './world-position.js';
 import {createEnvironmentInputs} from './environment-inputs.js';
 import {enableLuaSandbox} from './lua-sandbox.js';
+import {enableDisplayStartup} from './display-startup.js';
 import {enableHeroStartup} from './hero-startup.js';
 import {enableGameStartup} from './game-startup.js';
 
@@ -259,8 +260,9 @@ export function createStandaloneEnvironment(options={}) {
         enableMonsterCreation:layouts=>{if(!monsterSelection)throw new Error('Monster creation requires species selection');return monsterCreation=enableMonsterCreation(environment,layouts,monsterSelection);},
         enableMonsterInventory:layouts=>{if(!monsterCreation)throw new Error('Monster inventory requires monster creation');return enableMonsterInventory(environment,layouts,monsterCreation);},
         enableWorldPosition:layouts=>{if(!monsterCreation)throw new Error('World positioning requires monster creation');return enableWorldPosition(environment,layouts,monsterCreation);},
+        enableDisplayStartup:layouts=>{if(!monsterCreation)throw new Error('Display startup requires monster services');return enableDisplayStartup(environment,layouts,monsterCreation);},
         enableHeroStartup:layouts=>{if(!monsterCreation||!itemInventory)throw new Error('Hero startup requires monster/inventory services');return enableHeroStartup(environment,layouts,monsterCreation,itemInventory);},
-        enableGameStartup:layouts=>{if(!monsterCreation)throw new Error('Game startup requires monster services');return enableGameStartup(environment,layouts,monsterCreation);},
+        enableGameStartup:layouts=>{if(!monsterCreation)throw new Error('Game startup requires monster services');const startup=enableGameStartup(environment,layouts,monsterCreation);states.set('game-startup-context',startup.environment);return startup;},
         enableSerialization:layouts=>enableSerialization(environment,layouts),
         enableTerminal:(layout,options)=>enableTerminal(environment,layout,options),
         enableLua:options=>createStandaloneLua(environment,options),
