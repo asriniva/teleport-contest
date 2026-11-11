@@ -9,8 +9,9 @@ const scratch=path.resolve('.cache/standalone-libc');fs.mkdirSync(scratch,{recur
 // musl's atomic header supplies this mathematical trailing-zero operation.
 // Override only that header for a host-native build of the unchanged sort body.
 fs.writeFileSync(path.join(scratch,'atomic.h'),'#include <limits.h>\nstatic inline int a_ctz_l(unsigned long x){return x?__builtin_ctzl(x):CHAR_BIT*sizeof(x);}\n');
-const built=spawnSync(process.env.CC||root+'/.cache/wasm64-build/host-cc',['-O2','-I'+scratch,'-Dweak_alias(x,y)=',
+const built=spawnSync(process.env.CC||root+'/.cache/wasm64-build/host-cc',['-O2','-I'+scratch,'-Dweak_alias(x,y)=','-Ddifftime=standalone_probe_difftime',
     root+'/.cache/emsdk/upstream/emscripten/system/lib/libc/musl/src/stdlib/qsort.c',
+    root+'/.cache/emsdk/upstream/emscripten/system/lib/libc/musl/src/time/difftime.c',
     'scripts/standalone-libc-probe.c','-o',path.join(scratch,'probe')],{encoding:'utf8'});
 assert.equal(built.status,0,built.stderr);
 const runtime=createStandaloneEnvironment(),{memory,services:s}=runtime;
@@ -56,4 +57,11 @@ const creatOracle=spawnSync(path.join(scratch,'probe'),['creat',path.join(scratc
 const files=createStandaloneEnvironment(),io=files.enableStdio(),payload=files.memory.cstring('abc');let fd=io.creat('/creat',0o640);assert.ok(fd>=3);assert.equal(io.write(fd,payload,3),3);assert.equal(io.close(fd),0);
 fd=io.creat('/creat',0o600);const stat=files.filesystem.fstat(fd),badRead=io.read(fd,payload,1),creatActual=[[Number(fd>=0),stat.size,(stat.mode&0o777).toString(8),Number(badRead===-1&&files.libc.errno===new VFSError('EBADF').errno)].join(',')];assert.equal(io.close(fd),0);
 const absent=io.creat('/creat.missing/file',0o600);creatActual.push([absent,Number(files.libc.errno===new VFSError('ENOENT').errno)].join(','));assert.deepEqual(creatActual,creatOracle.stdout.trim().split('\n'),'C creat truncation, permissions, write-only descriptor and missing-parent failure');
-console.log(`PASS: ${cases.length} exact original-musl qsort output/comparator traces, stable NetHack sorting, hacklib utilities bounded scanner contracts and6 C size_t64 strncpy cases plus C creat file contracts.`);
+const timeEdges=[-(1n<<63n),-(1n<<63n)+1n,-(1n<<53n)-1n,-(1n<<53n),-1000000n,-1n,0n,1n,1000000n,(1n<<53n)-1n,1n<<53n,(1n<<53n)+1n,(1n<<63n)-2n,(1n<<63n)-1n];
+// Only defined signed time_t differences are claimed; overflowing subtraction
+// is undefined in the pinned C body and is outside this acceptance.
+const timePairs=timeEdges.flatMap(end=>timeEdges.filter(start=>end-start>=-(1n<<63n)&&end-start<(1n<<63n)).map(start=>[end,start]));
+const timeOracle=spawnSync(path.join(scratch,'probe'),['difftime'],{input:timePairs.map(pair=>pair.join(' ')).join('\n')+'\n',encoding:'utf8'});assert.equal(timeOracle.status,0,timeOracle.stderr);
+const differences=timeOracle.stdout.trim().split('\n').map(Number);assert.equal(differences.length,timePairs.length);
+for(const[i,[end,start]]of timePairs.entries())assert.equal(s.difftime(end,start),differences[i],'Pinned musl difftime subtraction before conversion '+end+':'+start);
+console.log(`PASS: ${cases.length} exact original-musl qsort output/comparator traces, stable NetHack sorting, hacklib utilities bounded scanner contracts and6 C size_t64 strncpy cases plus C creat file contracts and${timePairs.length} pinned-musl difftime cases.`);

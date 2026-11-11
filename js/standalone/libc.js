@@ -53,6 +53,8 @@ export function createStandaloneLibc(memory,libc,transport,functions) {
     return {
         // Match the configured SDK single-process syscall profile.
         getpid:()=>42,
+        // Pinned musl difftime subtracts signed time_t before converting to double.
+        difftime:(end,start)=>Number(BigInt.asIntN(64,transport.long(end)-transport.long(start))),
         __errno_location:()=>errnoAt,
         sscanf,
         qsort:(base,n,size,cmp)=>muslQsort(memory,address(base),n,size,(a,b)=>typeof cmp==='function'?cmp(a,b):functions.indirect(cmp,'ipp',a,b)),

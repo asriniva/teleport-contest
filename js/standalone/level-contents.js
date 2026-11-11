@@ -21,7 +21,7 @@ export function enableLevelContents(environment,layouts,creation){
  engraving.rn2=(n,line,caller)=>{if(environment.services.rng_log_enabled())environment.services.rng_log_set_caller(environment.services.literal('engrave.c'),line,environment.services.literal(caller));return environment.services.rn2(n);};
  environment.extend('world-engravings',{make_grave,random_engraving});
  const vision=enableVision(environment,layouts);
- const regions=environment.start('region-reset').environment;environment.extend('region-reset',{visible_region_at:(...args)=>callRegion(regions,layouts.region,'visible_region_at',...args)});
+ const regions=environment.start('region-reset').environment;environment.extend('region-reset',Object.fromEntries(['visible_region_at','any_visible_region'].filter(name=>!environment.hasFunction(name)).map(name=>[name,(...args)=>callRegion(regions,layouts.region,name,...args)])));
  const digging=creation.context(layouts.dig);environment.register('level-unearthing',{unearth_objs},digging);
  const position=creation.context(layouts.hack);Object.defineProperty(position,'svi',{value:creation.views.record('struct instance_globals_saved_i',environment.requireGlobal('svi'))});position.Invocation_lev=lev=>environment.resolve('Invocation_lev')(environment.address(lev));Object.defineProperty(position,'svr',{value:creation.views.record('struct instance_globals_saved_r',environment.requireGlobal('svr'))});
  position.in_rooms_buf=environment.allocateGlobal('hack.in_rooms.buf',5);position.charPointer=p=>typeof p==='string'?environment.services.literal(p):environment.address(p);

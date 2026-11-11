@@ -7,6 +7,8 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <time.h>
+_Static_assert(sizeof(time_t)==8 && (time_t)-1<0,"time_t profile");
 void __qsort_r(void *,size_t,size_t,int (*)(const void *,const void *,void *),void *);
 static int *base;
 static int cmp(const void *a,const void *b,void *arg) {
@@ -48,6 +50,7 @@ int main(int argc,char **argv) {
         int bad=creat(absent,0600);printf("%d,%d\n",bad,errno==ENOENT);
         unlink(argv[2]);umask(prior);return 0;
     }
+    if(argc>1&&argv[1][0]=='d'){long long end,start;while(scanf("%lld %lld",&end,&start)==2)printf("%.17g\n",difftime((time_t)end,(time_t)start));return 0;}
     if(argc>1&&argv[1][0]=='b')return bounded_copies();
     if(argc>1)return scans();
     int n;

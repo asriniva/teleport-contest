@@ -66,6 +66,10 @@ import {enableQuestPager} from './quest-pager.js';
 import {enableDoLifecycle} from './do-lifecycle.js';
 import {enableTerminalInput} from './terminal-input.js';
 import {enableSaveLifecycle} from './save-lifecycle.js';
+import {enableLevelPersistence} from './level-persistence.js';
+import {enableWorms} from './worm.js';
+import {enableReport} from './report.js';
+import {enableUnixPlatform} from './unix-platform.js';
 import {enableTerminalMessages} from './terminal-messages.js';
 import {enableMessages} from './messages.js';
 import {enableRuntimeInfo} from './runtime-info.js';
@@ -311,6 +315,10 @@ export function createStandaloneEnvironment(options={}) {
         enableDoLifecycle:layouts=>enableDoLifecycle(environment,layouts),
         enableTerminalInput:(layouts,options)=>enableTerminalInput(environment,layouts,options),
         enableSaveLifecycle:layouts=>enableSaveLifecycle(environment,layouts),
+        enableLevelPersistence:layouts=>enableLevelPersistence(environment,layouts),
+        enableWorms:layouts=>enableWorms(environment,layouts),
+        enableReport:layouts=>enableReport(environment,layouts),
+        enableUnixPlatform:layouts=>enableUnixPlatform(environment,layouts),
         enableTerminalMessages:layouts=>enableTerminalMessages(environment,layouts),
         enableMessages:layouts=>enableMessages(environment,layouts),
         enableRuntimeInfo:layouts=>enableRuntimeInfo(environment,layouts),

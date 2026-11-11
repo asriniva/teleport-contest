@@ -5,7 +5,8 @@ import {closed_door,accessible} from '../ported/monmove.js';
 import {may_passwall} from '../ported/hack.js';
 import {sticks} from '../ported/mondata.js';
 import {m_in_air} from '../ported/mon.js';
-import {engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at} from '../ported/engrave.js';
+import {engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at,read_engr_at} from '../ported/engrave.js';
+import {hliquid,hliquids} from '../ported/do_name.js';
 import {makemon_rnd_goodpos,m_initgrp} from '../ported/makemon.js';
 import {debugcore,nh_basename,fqname} from '../ported/files.js';
 export function enableWorldPosition(environment,layouts,creation){
@@ -72,19 +73,30 @@ export function enableWorldPosition(environment,layouts,creation){
  Object.defineProperty(engr,'Flying',{get:()=>{const p=world.u.uprops[EL.FLYING];return Number(Boolean((p.intrinsic||p.extrinsic||(world.u.usteed&&flag(world.u.usteed.data,'M1_FLY')))&&!p.blocked));}});
  engr.P_SKILL=n=>world.u.weapon_skills[n].skill;engr.ceiling_hider=p=>Number(flag(p,'M1_HIDE')&&((flag(p,'M1_CLING')&&p.mlet!==EL.S_MIMIC)||flag(p,'M1_FLY')));
  const mondata=context(layouts.mondata);environment.register('floor-monster-stickiness',{sticks},mondata,{prepareArgs:(_fn,a)=>[record('struct permonst',a[0])]});
- Object.assign(engr,{EngrSize:ctypes.size('struct engr'),Strlen:p=>memory.strlen(environment.address(p)),
+ const text=p=>typeof p==='string'?services.literal(p):environment.address(p);
+ Object.assign(engr,{EngrSize:ctypes.size('struct engr'),Strlen:p=>memory.strlen(text(p)),
   newengr:n=>record('struct engr',memory.malloc(ctypes.size('struct engr')+Number(n))),dealloc_engr:p=>memory.free(environment.address(p)),
   engr_text_space:p=>environment.address(p)+ctypes.size('struct engr'),Strcpy:(d,s)=>services.strcpy(d,s),
   strcmp:(a,b)=>services.strcmp(typeof a==='string'?services.literal(a):a,typeof b==='string'?services.literal(b):b),
   strcmpi:(a,b)=>services.strncmpi(a,b,-1),
   rnd:(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('engrave.c'),line,services.literal(caller));return services.rnd(n);},
   rn2:(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('engrave.c'),line,services.literal(caller));return services.rn2(n);},
+  strlen:p=>BigInt(memory.strlen(text(p))),strchr:(p,ch)=>services.strchr(text(p),ch),
+  strncpy:(out,input,n)=>services.strncpy(environment.address(out),text(input),Number(n)),
+  loadChar:p=>memory.view.getInt8(environment.address(p)),storeChar:(p,value)=>memory.view.setInt8(environment.address(p),transport.char(value)),
+  ptrDiff:(a,b)=>BigInt.asIntN(64,BigInt(environment.address(a))-BigInt(environment.address(b))),
  });
+ Object.defineProperty(engr,'Something',{get:()=>world.c_common_strings.c_Something});
+ for(const name of ['pline','You','You_see','impossible'])engr[name]=(...args)=>environment.resolve(name)(...args.map(p=>typeof p==='string'?services.literal(p):p?.address??p));
  Object.defineProperty(engr,'head_engr',{get:()=>record('struct engr',ctypes.load('struct engr *',environment.requireGlobal('head_engr'))),set:v=>ctypes.store('struct engr *',environment.requireGlobal('head_engr'),v)});
- environment.register('world-engravings',{engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at},engr,{prepareArgs:(fn,a)=>{if(fn==='sengr_at'&&typeof a[0]==='string')a[0]=services.literal(a[0]);if(fn==='make_engr_at')for(const i of [2,3])if(typeof a[i]==='string')a[i]=services.literal(a[i]);return a;}});
+ environment.register('world-engravings',{engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at,read_engr_at},engr,{prepareArgs:(fn,a)=>{if(fn==='read_engr_at'){a[0]=transport.short(a[0]);a[1]=transport.short(a[1]);}if(fn==='sengr_at'&&typeof a[0]==='string')a[0]=services.literal(a[0]);if(fn==='make_engr_at')for(const i of [2,3])if(typeof a[i]==='string')a[i]=services.literal(a[i]);return a;}});
+ const liquid=context(layouts.do_name);
+ Object.assign(liquid,{hliquids:hliquids.map(services.literal),charPointer:text,program_state:record('struct sinfo',environment.requireGlobal('program_state'))});
+ Object.defineProperty(liquid,'Hallucination',{get:()=>{const p=world.u.uprops[layouts.do_name.HALLUC],r=world.u.uprops[layouts.do_name.HALLUC_RES];return Number(Boolean(p.intrinsic&&!r.intrinsic&&!r.extrinsic));}});
+ if(!environment.hasFunction('hliquid'))environment.register('surface-liquid-naming',{hliquid},liquid);
  environment.exposeAddressPort('invent',['sobj_at']);
  environment.enableAddressPort('mkmaze',{only:['is_exclusion_zone']});
- environment.exposeAddressPort('dungeon',['has_ceiling']);
+ environment.exposeAddressPort('dungeon',['has_ceiling','surface'].filter(name=>!environment.hasFunction(name)));
  environment.extend('monster-creation',{makemon_rnd_goodpos,m_initgrp});
  return {environment:env,views,limitation:'Position-selection integration in progress; full world transitions, hero movement and recording remain separate.'};
 }

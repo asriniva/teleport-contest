@@ -46,7 +46,7 @@ export function enableItemInventory(environment,layouts) {
     environment.register('artifact-properties',Object.fromEntries(['is_art','get_artifact','spec_ability','confers_luck','permapoisoned','nartifact_exist'].map(k=>[k,artifact[k]])),legacy,{prepareArgs:(fn,args)=>{if(!['nartifact_exist','exist_artifact'].includes(fn))args[0]=object(args[0]);return args;}});
     environment.register('object-selection',{erosion_matters,rnd_class},legacy);
     environment.register('object-safe-name',{safe_oname},legacy,{prepareArgs:(_fn,args)=>[object(args[0])]});
-    environment.register('inventory-luck',{stone_luck,set_moreluck},legacy);
+    environment.register('inventory-luck',{stone_luck,set_moreluck},legacy,{prepareArgs:(name,args)=>name==='stone_luck'?[transport.char(args[0])]:args});
     environment.register('inventory-context',{book_cursed,book_disappears,food_disappears,obj_sheds_light,maybe_reset_pick},legacy,{prepareArgs:(_fn,args)=>[object(args[0])]});
     environment.exposeAddressPort('dungeon',['on_level','In_hell','In_quest']);
     environment.exposeAddressPort('mkobj',['mksobj','mkobj','mksobj_init','unknow_object','clear_dknown','bless','unbless','curse','uncurse','blessorcurse','mkobj_erosions','may_generate_eroded','obj_extract_self','dealloc_obj','dobjsfree','add_to_container']);

@@ -59,5 +59,10 @@ export function enableWindowSystem(environment,layouts){
  const names=W.names.filter(name=>Object.hasOwn(publicFunctions.functions,name)&&typeof windows[name]==='function'&&!environment.hasFunction(name));
  environment.register('windows',Object.fromEntries(names.map(name=>[name,(...args)=>callWindows(w,layouts.windows,name,...args)])));
  const platform=enableUnixTerminal(environment,layouts);
+ // Original UNI XTTY error() receives a JS vararg packet on this boundary.
+ // Keep native va_list packets on their existing transport path.
+ const nativeVaStart=platform.context.va_start,nativeVprintf=platform.context.Vprintf;
+ platform.context.va_start=args=>{if(args.some(v=>v&&typeof v==='object'&&Object.hasOwn(v,'nativeVaList')))return nativeVaStart(args);Object.defineProperty(args,'standaloneVarargs',{value:true});};
+ platform.context.Vprintf=(format,args)=>args.standaloneVarargs?services.printf(format,...args.map(v=>v?.address??v)):nativeVprintf(format,args);
  return {terminal,platform,tty:t,windows:w,storage,privateCells,limitation:'Window/tty integration in progress; initialization, input/output and recordings require original-C verification.'};
 }

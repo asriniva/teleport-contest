@@ -1,5 +1,8 @@
 // Shared storage/typed transport for unchanged artifact and hero-startup policy.
 import abi from './hero-abi.json' with {type:'json'};
+import attributeAbi from './attribute-abi.json' with {type:'json'};
+import hungerDataAbi from './hunger-data-abi.json' with {type:'json'};
+import publicFunctions from './public-functions.json' with {type:'json'};
 import * as uInit from '../ported/u_init.js';
 import {createUInitBridge} from '../ported/u_init-runtime.js';
 import {callPolyself} from '../ported/polyself-runtime.js';
@@ -10,7 +13,7 @@ import {resists_drli,dmgtype,dmgtype_fromattack,cvt_prop_to_mseenres,monstunsees
 import {newpw} from '../ported/exper.js';
 import {spell_skilltype,initialspell,num_spells,skill_based_spellbook_id} from '../ported/spell.js';
 import {hidden_gold} from '../ported/vault.js';
-import {init_uhunger} from '../ported/eat.js';
+import {init_uhunger,hu_stat} from '../ported/eat.js';
 import {max_rank_sz} from '../ported/botl.js';
 import {init_artifacts,hack_artifacts} from '../ported/artifact.js';
 export function enableHeroStartup(environment,layouts,creation,inventory){
@@ -96,9 +99,14 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
  Object.assign(a,{global:i=>{const path=ag[i];if(!path)throw new Error('Unknown ATTRIB global '+i);const [name,...fields]=path.split('.');return fields.length?named(name,fields.join('.')).at:environment.requireGlobal(name);},tableStorage:()=>at,tableCount:()=>count,attrnameStorage:()=>names,fromWhatBuffer:()=>from,heroData:()=>record('struct instance_globals_y',environment.requireGlobal('gy')).youmonst.data.address,
   botl:()=>record('struct display_hints',environment.requireGlobal('disp')).botl,setBotl:v=>{record('struct display_hints',environment.requireGlobal('disp')).botl=v;},
   roleplayBit:i=>record('struct you',environment.requireGlobal('u')).uroleplay[i?'deaf':'blind'],
+  objectBit:(o,i)=>{const key=attributeAbi.objectBits[i];if(!key)throw new Error('Unknown ATTRIB object field '+i);return ctypes.getField('struct obj',address(o),key,'unsigned int');},
  });
  for(const kind of ['rn2','rnd','rn1','d'])a[kind]=(...args)=>{const caller=args.pop(),line=args.pop();if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('attrib.c'),line,services.literal(caller));return kind==='rn1'?services.rn2(args[0])+args[1]:services[kind](...args);};
  a.u_wield_art=id=>services.is_art(ctypes.load('struct obj *',environment.requireGlobal('uwep')),id);
+ a.haseyes=pm=>Number(!(record('struct permonst',address(pm)).mflags1&BigInt(layouts.attrib.M1_NOEYES)));
+ a.type_is_pname=pm=>Number(Boolean(record('struct permonst',address(pm)).mflags2&BigInt(layouts.attrib.M2_PNAME)));
+ a.Is_astralevel=level=>{const astral=record('struct instance_globals_saved_d',environment.requireGlobal('svd')).dungeon_topology.d_astral_level;return Number(Boolean((astral.dnum||astral.dlevel)&&services.on_level(address(level),address(astral))));};
+ Object.defineProperty(a,'something',{get:()=>record('struct c_common_strings',environment.requireGlobal('c_common_strings')).c_something});
  a.equipment=i=>ctypes.load('struct obj *',environment.requireGlobal(['uarmh','uarmg','uarmf','uarmc','ublindf'][i]));
  a.objectNameKnown=i=>objects[i].oc_name_known;
  a.flag=i=>{const u=record('struct you',environment.requireGlobal('u')),L=layouts.attrib,prop=name=>u.uprops[L[name]],h=name=>prop(name).intrinsic,e=name=>prop(name).extrinsic,b=name=>prop(name).blocked,active=name=>h(name)||e(name);
@@ -106,11 +114,34 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
    case 13:return h('CLAIRVOYANT');case 14:return b('CLAIRVOYANT');case 15:return h('REGENERATION');case 16:return h('STUNNED');case 17:return h('BLND_RES');case 18:return h('FAST');case 19:return e('FAST');case 20:return h('BLINDED');case 21:return e('BLINDED');case 22:return b('BLINDED');case 23:return h('BLINDED')&BigInt(L.TIMEOUT);default:throw new Error('Unknown ATTRIB property '+i);}
  };
  a.assert=ok=>{if(!ok)environment.resolve('__assert_fail')(services.literal('chridx >= 0 && chridx < A_MAX'),services.literal('attrib.c'),1204,services.literal('acurr'));};
- const attr=createAttribEnvironment(a,layouts.attrib,attrib);environment.register('hero-attributes',{newhp:attrib.newhp,adjabil:attrib.adjabil,acurr:attrib.acurr,acurrstr:attrib.acurrstr,exercise:attrib.exercise,init_attr:attrib.init_attr,vary_init_attr:attrib.vary_init_attr,adjattrib:attrib.adjattrib},attr);
+ const attributeDebug=(format,values)=>{
+  if(!services.debugcore(attributeAbi.debugSource,1))return;
+  const flags=record('struct instance_flags',environment.requireGlobal('iflags')),previous=flags.last_msg;
+  try{return environment.resolve('pline')(typeof format==='string'?services.literal(format):address(format),...values());}finally{flags.last_msg=previous;}
+ };
+ const attributeText=value=>typeof value==='string'?services.literal(value):address(value);
+ a.debugpline0=format=>attributeDebug(format,()=>[0]);
+ a.debugpline1=(format,value)=>attributeDebug(format,()=>[(typeof format==='string'?format:memory.readString(address(format))).includes('%ld')?transport.long(value):transport.int(value)]);
+ a.debugpline2=(format,one,two)=>attributeDebug(format,()=>[attributeText(one),transport.int(two)]);
+ a.debugpline3=(format,one,two,three)=>attributeDebug(format,()=>[attributeText(one),attributeText(two),transport.int(three)]);
+ const attr=createAttribEnvironment(a,layouts.attrib,attrib);
+ const attributeEntries=Object.fromEntries(Object.entries(attrib).filter(([name,fn])=>typeof fn==='function'&&Object.hasOwn(publicFunctions.functions,name)&&!environment.hasFunction(name)));
+ const attributeParameters=Object.fromEntries(Object.keys(attributeEntries).map(name=>[name,publicFunctions.functions[name].match(/^[^(]+\((.*)\)$/)[1].split(',').map(type=>type.trim()).filter(type=>type&&type!=='void')]));
+ environment.register('hero-attributes',attributeEntries,attr,{prepareArgs:(name,args)=>args.map((value,i)=>{
+  const type=ctypes.canonical(attributeParameters[name][i]);
+  if(type==='struct obj *')return attr.object(value);
+  if(type.includes('*'))return typeof value==='string'?services.literal(value):address(value);
+  return type==='signed char'||type==='char'?transport.char(value):type==='short'?transport.short(value):transport.int(value);
+ })});
  const power=context(layouts.exper);Object.assign(power,{xint16:transport.short,rnd:(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('exper.c'),line,services.literal(caller));return services.rnd(n);}});environment.register('hero-energy',{newpw},power);
  const vault=context(layouts.vault);vault.Has_contents=o=>Number(Boolean(o.cobj));vault.contained_gold=(o,known)=>environment.resolve('contained_gold')(address(o),known);environment.exposeAddressPort('shk',['contained_gold']);environment.register('inventory-hidden-gold',{hidden_gold},vault);
  const spells=context(layouts.spell);for(const key of ['svs','svb'])Object.defineProperty(spells,key,{value:record('struct instance_globals_saved_'+key.slice(-1),environment.requireGlobal(key))});spells.OBJ_NAME=o=>descriptors[o.oc_name_idx].oc_name;spells.Role_if=n=>record('struct instance_globals_u',environment.requireGlobal('gu')).urole.mnum===n;spells.uchar=transport.uchar;spells.P_SKILL=n=>record('struct you',environment.requireGlobal('u')).weapon_skills[n].skill;environment.register('initial-spells',{spell_skilltype,initialspell,num_spells,skill_based_spellbook_id},spells,{prepareArgs:(fn,args)=>{if(fn==='initialspell')args[0]=record('struct obj',args[0]);return args;}});
- const hunger=context(layouts.eat);Object.defineProperty(hunger,'disp',{value:record('struct display_hints',environment.requireGlobal('disp'))});environment.register('hero-hunger',{init_uhunger},hunger);
+ if(layouts.eat.pointerSize!==hungerDataAbi.pointerSize||hu_stat.length!==hungerDataAbi.count)throw new Error('Review EAT hunger table ABI');
+ const hungerTable=environment.allocateGlobal('hu_stat',hu_stat.length*hungerDataAbi.pointerSize);
+ hu_stat.forEach((text,i)=>memory.view.setBigUint64(hungerTable+i*hungerDataAbi.pointerSize,BigInt(services.literal(text)),true));
+ const hunger=context(layouts.eat);Object.defineProperty(hunger,'disp',{value:record('struct display_hints',environment.requireGlobal('disp'))});
+ hunger.storage=i=>{if(i===0)return hungerTable;throw new Error('Unconnected EAT storage '+i);};
+ environment.register('hero-hunger',{init_uhunger},hunger);
  const rank=context(layouts.botl);rank.strlen=p=>Number(services.strlen(p));environment.register('hero-rank-size',{max_rank_sz},rank);
  environment.exposeAddressPort('display',['reset_glyphmap']);
  environment.register('hero-clock',{getnow:()=>environment.calendar('getnow')});
