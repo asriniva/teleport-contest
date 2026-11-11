@@ -46,7 +46,7 @@ export function enableLevelStartup(environment,layouts,creation){
  const reg=Object.create(services),regionGlobals=['gr','gm','svn','svm','gg','u','gy','gi','svc','iflags','cg','svl','mons','gv'];
  for(const name of regionGlobals)Object.defineProperty(reg,name,{value:undefined,writable:true,configurable:true});
  Object.assign(reg,{global:i=>environment.requireGlobal(regionGlobals[i]),free:p=>services.free(environment.address(p)),alloc:n=>environment.alloc('alloc',n),memcpy:(a,b,n)=>memory.memmove(environment.address(a),environment.address(b),Number(n))});
- environment.register('region-reset',Object.fromEntries(['clear_regions','free_region'].map(name=>[name,(...args)=>callRegion(reg,layouts.region,name,...args)])));
+ environment.register('region-reset',Object.fromEntries(['clear_regions','free_region'].map(name=>[name,(...args)=>callRegion(reg,layouts.region,name,...args)])),reg);
  environment.exposeAddressPort('sp_lev',['reset_xystart_size','create_des_coder']);
  environment.exposeAddressPort('dungeon',['init_mapseen','free_exclusions','Is_special','Is_branchlev'].filter(name=>!environment.hasFunction(name)));
  environment.enableAddressPort('mklev',{only:['mklev']});

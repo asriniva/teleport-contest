@@ -25,6 +25,7 @@ injected. C compilers and C/Wasm oracles are development-only.
 
 | Surface | Checkpoint evidence and limits |
 | --- | --- |
+| First-level contents and vision startup | `enableLevelContents` connects original TRAP construction, MKROOM coordinate/stair queries, HACK invocation/room lookup, DIG unearthing, ENGRAVE grave/random text, REGION visibility lookup and RUMORS text selection to shared state, including the existing monster-equipment provider. Original `vision_init` runs before `newgame`, matching Unix startup. PASS4,416 original-C comparisons across12 role/seed first-level builds:46 shared roots; complete terrain/door/object/monster/trap/stair/overview/coder records with pointer-graph identities; engraving strings and allocated payloads; timer records; rumor caches;21 accessible VISION workspaces and exact RNG logs. Both actual newgame owners finish `mklev` and stop at the unset `win_cliparound` callback in `u_on_newpos`. Source-defined fields are compared; unspecified coder/timer padding and VM addresses are normalized, function-local VISION colbump is not exported (unused at this phase). Production isolation reaches the same stage and selects actual epitaph text with Wasm/network forbidden. Other levels, active regions, later vision recalculation, window/UI/game loop, hero inventory/skills and full-game recordings remain unfinished. Combined28-check regression gate PASS. |
 | Level-generation wiring (in progress) | `enableLevelStartup` connects original level clearing, fixed-seed reseeding, absent-bones branch, rectangles/regions/stairs, map lighting/flood-fill and Lua selection/themed-room calls to one shared heap. Focused original-C RNG/selection witness: PASS56,217 comparisons, including complete core/display ISAAC state and selection fields/maps after geometry/random operations over three seeds. General bones restore, remaining room/trap owners and full level/game closure are unfinished. PASS3,672 connected comparisons over12 role/seed prefixes:42 shared roots (including terrain/rooms), overview/coder records, persistent Lua theme table/function types and exact RNG logs. Both implementations stop at matching `maketrap`/`has_dnstairs` boundaries. Combined27-check regression gate PASS; production isolation reaches trap creation with Wasm/network forbidden. |
 | Window color, glyph-map and signal registration | `enableDisplayStartup` connects unchanged WINDOWS has_color and existing DISPLAY reset_glyphmap, plus JS-owned signal/sigaction tables matching configured Emscripten libc. PASS3,981 C comparisons: color masks/capabilities; complete9,624-entry glyph-map bytes and41 state roots over12 actual-newgame role/seed cases; canonical shared-global pointer aliases; handler return identities, errno, all65 action records, arbitrary action masks/flags and scoped explicit callback delivery. The target SIG_IGN is uint64(-2), measured from C; callback identity infrastructure stays unchanged. Both newgame owners reach the explicit mklev boundary. Source static initialization is installed through the existing read-only DISPLAY predicate. Window/terminal lifecycle, general masked/default signal delivery and END handler bodies are not accepted by these tests. |
 | Artifact, hero and persistent Lua startup | `enableHeroStartup` connects source artifact role/alignment initialization, U_INIT misc setup via the unchanged adapter, POLYSELF form/intrinsics, ATTRIB HP/abilities, EXPER energy, EAT hunger, BOTL rank size and CALENDAR getnow. Private table layouts are measured from actual C; adapter descriptors are source-bound. PASS58,212 C comparisons over 396 role/race/seed/roleplay configurations, each as a positive owner sequence and actual ALLMAIN newgame prefix: all35 shared roots/catalogues, artifact tables, complete hero/monster-form data, copied24-byte roleplay (including64-bit counters), fixed-input birthday, persistent nhcore.lua registry tables and exact RNG logs. The prefix explicitly requires both JS and C to stop at WINDOWS has_color within DISPLAY reset_glyphmap; this is not display acceptance. Production isolation reaches that same edge with Wasm/network forbidden. Hero inventory/skills, remaining display/map/game-loop owners and full-game recordings remain unfinished. |
@@ -337,8 +338,10 @@ with Wasm/network capabilities forbidden before import.
 
 ## Next integration milestone
 
-The next level-generation owners are TRAP creation and MKROOM room/stair queries,
-followed by the remaining map-generation dependency closure. Keep comparing the
+The first tested level-generation cohort now reaches the window interface after
+TRAP/MKROOM and original vision startup. Next connect real window/terminal
+initialization and continue the actual newgame path, alongside the remaining
+map-generation dependency closure for other levels. Keep comparing the
 actual newgame path and complete shared state/RNG against original C as those
 edges move. Hero inventory/skills, world transitions, UI/input/game-loop and full
 save/restore still require integration. Full-game recording equivalence remains
@@ -361,3 +364,19 @@ views and compiler-exported public function declarations. The latter metadata
 binds every transitive declaration header and supplies public function identities
 and lazy linkage only for adapters that are explicitly enabled. Private callbacks
 remain scoped to their source owner. Missing owners still throw.
+
+Build the next connected level-content reference:
+
+```sh
+python3 scripts/build-standalone-level-contents.py --reference-root /path/to/reference --out .cache/standalone-level-contents-v7
+```
+
+This profile includes actual original TRAP/MKROOM/ZAP/HACK/DIG/RUMORS and the
+original item/inventory/timer/monster/world owners already connected in JS. Its
+owned observation fixture includes original vision.c unchanged so accessible
+private workspaces can be inspected. Native function-local `vision_recalc`
+colbump is deliberately unobserved; only its unused JS initial state is checked.
+The profile binds generated epitaph/engrave/rumors/bogusmon/oracles assets as
+well as all Lua files; callers inject those inputs into both virtual filesystems.
+This accepts the tested first-level cohort through the same null window callback,
+not a playable engine or a complete vision/region/trap surface.

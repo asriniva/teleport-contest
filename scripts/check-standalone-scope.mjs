@@ -16,7 +16,7 @@ for(const [file,hash]of Object.entries(baseline.sha256))check(file,hash);
 for(const name of ['isaac64','terminal','storage'])assert.deepEqual(read('js/'+name+'.js'),read('frozen/'+name+'.js'),'Frozen '+name);
 for(const [file,hash]of Object.entries(json('js/standalone/hero-abi.json').sourceSha256))check(file,hash);
 for(const [file,hash]of Object.entries(json('js/standalone/display-abi.json').sourceSha256))check(file,hash);
-for(const name of ['level-abi','public-functions']){
+for(const name of ['level-abi','public-functions','trap-abi','vision-abi']){
  const data=json('js/standalone/'+name+'.json');
  for(const [file,hash]of Object.entries(data.sourceSha256))check(file,hash);
  for(const [file,hash]of Object.entries(data.referenceHeaderSha256??{}))assert.equal(sha(path.resolve(reference,file)),hash,'Public declaration header changed: '+file);

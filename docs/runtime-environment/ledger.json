@@ -1,14 +1,14 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "901a30adbd521b98613ffd69480391c3f04f7863",
+  "acceptedCheckpoint": "20a9403f89c0c538ec0d3f948da301b36168f939",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
-    "verified-subset": 53,
-    "in-progress": 12,
-    "not-connected": 58,
+    "verified-subset": 62,
+    "not-connected": 53,
     "provider-only": 1,
+    "in-progress": 8,
     "transport-only": 3
   },
   "fullGameAccepted": false,
@@ -59,9 +59,9 @@
     {
       "module": "stairs",
       "source": "src/stairs.c",
-      "status": "in-progress",
-      "scope": "Original stair policies have measured shared record/level conversions. Actual startup empty-list reset executes; nonempty stair creation/travel/description remain unaccepted.",
-      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
+      "status": "verified-subset",
+      "scope": "Original stair creation/free/find/upstairs placement in actual first-level generation. Complete lists/d_level records and hero placement match until real cliparound callback. Other level/branch travel and descriptions remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
     },
     {
       "module": "sys",
@@ -246,8 +246,9 @@
     {
       "module": "rumors",
       "source": "src/rumors.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original get_rnd_text/get_rnd_line/getrumor/unpadline select/decrypt original generated text through shared stdio and canonical RNG, with true/false caches and engraving payloads compared. Oracle/UI/cache/name/error paths beyond this cohort remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
     },
     {
       "module": "music",
@@ -366,8 +367,9 @@
     {
       "module": "mkroom",
       "source": "src/mkroom.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original has_dnstairs/has_upstairs/inside_room/somex/somey/somexy/somexyspace on actual generated rooms/stairs, with measured pointer/coord outputs and exact source RNG transport. Remaining special-room policies remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
     },
     {
       "module": "sfstruct",
@@ -452,9 +454,9 @@
     {
       "module": "region",
       "source": "src/region.c",
-      "status": "in-progress",
-      "scope": "Source clear_regions/free_region connected; actual startup empty-region reset path executes. Nonempty region cleanup/callbacks and active-region behavior remain unaccepted.",
-      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
+      "status": "verified-subset",
+      "scope": "Original startup clear/free empty-region reset plus visible_region_at queries for tested level generation. Nonempty region lifecycle, callbacks and active clouds remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
     },
     {
       "module": "weapon",
@@ -504,8 +506,8 @@
       "module": "allmain",
       "source": "src/allmain.c",
       "status": "in-progress",
-      "scope": "Actual newgame now runs into level clearing and themed rooms before matching unresolved maketrap/has_dnstairs calls. Hero inventory/skills, full map, UI/game loop and recordings remain unfinished.",
-      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished.",
+      "scope": "Actual newgame finishes mklev and reaches u_on_upstairs/u_on_newpos, stopping at original unset cliparound callback. Real window initialization, hero inventory/skills, remaining startup, loop and recordings remain unfinished.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted.",
       "priorEvidence": [
         "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup.",
         "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
@@ -528,8 +530,8 @@
       "module": "engrave",
       "source": "src/engrave.c",
       "status": "verified-subset",
-      "scope": "Actual engraving creation/replacement/deletion, three text buffers and strict scary-text queries; active player engraving/attribute exercise/UI/persistence unfinished.",
-      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
+      "scope": "Prior engraving CRUD plus original grave/random engraving creation, three text states and full allocated text payloads. Original random-text callback contract and rubout literals use typed standalone memory. Player engraving UI and non-generation effects unaccepted.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
     },
     {
       "module": "glyphs",
@@ -587,8 +589,9 @@
     {
       "module": "vision",
       "source": "src/vision.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original vision_init precedes newgame as Unix main requires; source block/unblock/recalc-block operations run during generation. Shared GV aliases and21 accessible private buffers compare with C; colbump is unobserved in C and unused at this phase. Later vision_reset/recalc/visibility/game UI remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
     },
     {
       "module": "mkmaze",
@@ -606,8 +609,9 @@
     {
       "module": "dig",
       "source": "src/dig.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original unearth_objs executes for generated pits via shared buried-object/timer/engraving/display providers; source map-output suppression retained. Player digging, buried-ball punishment, terrain transitions and broader digging remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
     },
     {
       "module": "end",
@@ -645,9 +649,9 @@
     {
       "module": "mklev",
       "source": "src/mklev.c",
-      "status": "in-progress",
-      "scope": "Original level clearing, rectangle initialization, room/theme generation prefix connected through shared state. Current original-C prefixes stop at unresolved maketrap or has_dnstairs. Complete level generation remains unfinished.",
-      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
+      "status": "verified-subset",
+      "scope": "Actual source mklev completes for12 tested first-level role/seed configurations; generated rooms/terrain/entities/doors/stairs and RNG compare. Other dungeon/special-level inputs and broader generation closure remain unfinished.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
     },
     {
       "module": "monmove",
@@ -853,8 +857,8 @@
       "module": "hack",
       "source": "src/hack.c",
       "status": "verified-subset",
-      "scope": "obj_to_any plus may_passwall on measured wall flags; movement/world closure unfinished.",
-      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
+      "scope": "obj_to_any plus may_passwall on measured wall flags; movement/world closure unfinished. Original invocation_pos/in_rooms now support generated terrain using measured indexed rm views and the source five-byte static buffer.",
+      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md; scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
     },
     {
       "module": "uhitm",
@@ -890,15 +894,16 @@
     {
       "module": "sp_lev",
       "source": "src/sp_lev.c",
-      "status": "in-progress",
-      "scope": "Original des callbacks for tested themed-room prefixes resolve through original public function owners and module-scoped private callback identities. Full special-level dependency closure unaccepted.",
-      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
+      "status": "verified-subset",
+      "scope": "Original des/Lua themed-room callbacks exercised by12 first-level builds through canonical public and scoped private callbacks. Remaining special-level surfaces are not accepted.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
     },
     {
       "module": "trap",
       "source": "src/trap.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original trap construction/t_at runs during the tested first-level cohort with matching trap fields/list ownership, terrain, side effects and RNG. Trap activation, disarming, damage and other levels remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
     },
     {
       "module": "termcap",
@@ -962,9 +967,8 @@
   ],
   "rebaseNote": "Rebased to main3296b9a; refreshed 138 policy and adapter/record/terminal metadata receipts; prior13-check regression PASS.",
   "latestWorkingTreeEvidence": {
-    "gate": "27 standalone development checks PASS",
-    "levelRngSelectionComparisons": 56217,
-    "levelPrefixComparisons": 3672,
-    "scope": "Partial level/theme integration with matching explicit trap/room-stair boundaries. No full-game acceptance."
+    "gate": "28 standalone development checks PASS",
+    "levelContentsComparisons": 4416,
+    "scope": "Twelve first-level builds complete through the same unset cliparound callback;46 shared roots/dynamic graphs, text/timers, rumor caches,21 native vision buffers and RNG compare. No full-game acceptance."
   }
 }

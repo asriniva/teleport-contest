@@ -88,6 +88,9 @@ assert.equal(env.call('cmd-geometry','isok',1,0),1);assert.equal(env.call('cmd-g
 env.enableHeroStartup(layouts);env.enableWorldPosition(layouts);env.enableLuaSandbox(layouts);env.enableDisplayStartup(layouts);
 for(const name of fs.readdirSync(process.env.STANDALONE_REFERENCE_ROOT+'/.cache/wasm64-build/tree/dat').filter(n=>n.endsWith('.lua')))env.filesystem.writeFile(name,fs.readFileSync(process.env.STANDALONE_REFERENCE_ROOT+'/.cache/wasm64-build/tree/dat/'+name));
 Object.assign(env.services.flags,{initrole:0,initrace:0,initgend:0,initalign:0,female:0,pantheon:-1});env.services.strcpy(startup.role.svp.plname,env.services.literal('Ada'));
-env.enableLevelStartup(layouts);assert.throws(()=>env.services.newgame(),/Unresolved standalone function maketrap/);
+env.enableLevelStartup(layouts);env.enableLevelContents(layouts);env.services.vision_init();
+for(const name of ['epitaph','engrave','rumors','bogusmon','oracles'])env.filesystem.writeFile(name,fs.readFileSync(process.env.STANDALONE_REFERENCE_ROOT+'/.cache/wasm64-build/tree/dat/'+name));
+assert.throws(()=>env.services.newgame(),error=>/Unknown or incompatible C callback/.test(error.message)&&/u_on_newpos/.test(error.stack));assert.equal(env.services.gi.in_mklev,0);
+const text=env.memory.calloc(1,layouts.engrave.BUFSZ);env.services.get_rnd_text('epitaph',text,env.functionPointer('rn2','ii'),layouts.engrave.MD_PAD_RUMORS);assert.ok(env.memory.strlen(text)>0);env.memory.free(text);
 }
 console.log('PASS: standalone source modules, Lua, recorder capture, compression and persistence run with Wasm and network capabilities forbidden.');
