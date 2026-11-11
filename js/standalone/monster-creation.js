@@ -10,7 +10,7 @@ import {newepri,free_epri,mon_aligntyp} from '../ported/priest.js';
 import {newegd,free_egd} from '../ported/vault.js';
 import {neweshk,free_eshk} from '../ported/shknam.js';
 import {quest_info} from '../ported/questpgr.js';
-import {new_light_source,del_light_source} from '../ported/light.js';
+import {new_light_source,del_light_source,do_light_sources} from '../ported/light.js';
 import {monst_to_any} from '../ported/hack.js';
 import {withCEnvironment} from '../ported/c-runtime.js';
 export function enableMonsterCreation(environment,layouts,selection){
@@ -133,8 +133,13 @@ export function enableMonsterCreation(environment,layouts,selection){
   anyLocal:()=>record('union any',transport.stackAlloc(ctypes.size('union any'))),
   copyAny:(to,from)=>env.copyRecord(to,from,ctypes.size('union any')),
   assert:condition=>{if(!condition)throw new Error('Light owner assertion failed');},
+  coordRef:(o,k)=>{const p=environment.address(o)+ctypes.record('struct ls_t').fields[k].offset;return Object.defineProperty({address:p},'value',{get:()=>ctypes.load('short',p),set:v=>ctypes.store('short',p,v)});},
+  circle_ptr:r=>{const start=ctypes.load('short',environment.requireGlobal('vision.circle_start')+r*2);return views.array('short',environment.requireGlobal('vision.circle_data')+start*2,r+1);},
+  get_obj_location:(o,x,y,f)=>environment.resolve('get_obj_location')(environment.address(o),x.address,y.address,f),
+  get_mon_location:(m,x,y,f)=>environment.resolve('get_mon_location')(environment.address(m),x.address,y.address,f),
+
  });
- environment.register('monster-lights',{new_light_source,del_light_source},light,{prepareArgs:(fn,args)=>{args[fn==='new_light_source'?4:1]=record('union any',args[fn==='new_light_source'?4:1]);return args;}});
+ environment.register('monster-lights',{new_light_source,del_light_source,do_light_sources},light,{prepareArgs:(fn,args)=>{if(fn==='do_light_sources'){const p=environment.address(args[0]);args[0]=new Proxy({address:p},{get:(o,k)=>/^\d+$/.test(String(k))?views.array('unsigned char',ctypes.load('void *',p+Number(k)*8),layouts.vision.COLNO):Reflect.get(o,k)});}else args[fn==='new_light_source'?4:1]=record('union any',args[fn==='new_light_source'?4:1]);return args;}});
  environment.register('monster-anything',{monst_to_any},Object.assign(Object.create(env),{sizes:{any:ctypes.size('union any')}}),{prepareArgs:(_fn,args)=>[record('struct monst',args[0])]});
  environment.exposeAddressPort('dungeon',['In_V_tower','In_mines']);
  if(!Object.hasOwn(environment.status(),'cmd-geometry'))environment.enableCommandGeometry();

@@ -9,6 +9,8 @@ export function enableDisplayStartup(environment,layouts,creation){
  environment.register('window-color',{has_color},env);
  // The original read-only predicate also installs DISPLAY source statics.
  environment.call('display','suppress_map_output');
+ environment.linkGlobal('glyphmap',environment.requireGlobal('display.glyphmap'));
+ environment.linkGlobal('seenv_matrix',environment.requireGlobal('display.seenv_matrix'));
  const signals=createSignals(environment);environment.register('signals',{signal:signals.signal,sigaction:signals.sigaction});
  // Keep a source function's dynamic C environment when it is installed directly.
  services.signal=signals.signal;services.sigaction=signals.sigaction;

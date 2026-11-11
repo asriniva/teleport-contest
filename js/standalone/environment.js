@@ -45,6 +45,11 @@ import {createEnvironmentInputs} from './environment-inputs.js';
 import {enableLuaSandbox} from './lua-sandbox.js';
 import {enableMonsterLifecycle} from './monster-lifecycle.js';
 import {enableMonsterMovement} from './monster-movement.js';
+import {enableConfiguration} from './configuration.js';
+import {enableFiles} from './files.js';
+import {enableCommands} from './commands.js';
+import {enableGlyphs} from './glyphs.js';
+import {enableSymbols} from './symbols.js';
 import {enablePets} from './pets.js';
 import {enableMovement} from './movement.js';
 import {enableGameWindows} from './game-windows.js';
@@ -287,7 +292,7 @@ export function createStandaloneEnvironment(options={}) {
         enableMonsterCreation:layouts=>{if(!monsterSelection)throw new Error('Monster creation requires species selection');return monsterCreation=enableMonsterCreation(environment,layouts,monsterSelection);},
         enableMonsterInventory:layouts=>{if(!monsterCreation)throw new Error('Monster inventory requires monster creation');return enableMonsterInventory(environment,layouts,monsterCreation);},
         enableWorldPosition:layouts=>{if(!monsterCreation)throw new Error('World positioning requires monster creation');return enableWorldPosition(environment,layouts,monsterCreation);},
-        enableWindowSystem:layouts=>enableWindowSystem(environment,layouts),enableVersionInfo:layouts=>enableVersionInfo(environment,layouts),enableOptions:layouts=>enableOptions(environment,layouts),enableStatus:layouts=>enableStatus(environment,layouts),enableGameWindows:layouts=>enableGameWindows(environment,layouts),enableMovement:layouts=>enableMovement(environment,layouts),enablePets:layouts=>enablePets(environment,layouts),enableMonsterMovement:layouts=>enableMonsterMovement(environment,layouts),enableMonsterLifecycle:layouts=>enableMonsterLifecycle(environment,layouts),
+        enableWindowSystem:layouts=>enableWindowSystem(environment,layouts),enableVersionInfo:layouts=>enableVersionInfo(environment,layouts),enableOptions:layouts=>enableOptions(environment,layouts),enableStatus:layouts=>enableStatus(environment,layouts),enableGameWindows:layouts=>enableGameWindows(environment,layouts),enableMovement:layouts=>enableMovement(environment,layouts),enableConfiguration:layouts=>enableConfiguration(environment,layouts),enableFiles:layouts=>enableFiles(environment,layouts),enableCommands:layouts=>enableCommands(environment,layouts),enableGlyphs:layouts=>enableGlyphs(environment,layouts),enableSymbols:layouts=>enableSymbols(environment,layouts),enablePets:layouts=>enablePets(environment,layouts),enableMonsterMovement:layouts=>enableMonsterMovement(environment,layouts),enableMonsterLifecycle:layouts=>enableMonsterLifecycle(environment,layouts),
         enableLevelContents:layouts=>{if(!monsterCreation)throw new Error('Level contents requires monster services');return enableLevelContents(environment,layouts,monsterCreation);},
         enableLevelStartup:layouts=>{if(!monsterCreation)throw new Error('Level startup requires monster services');return enableLevelStartup(environment,layouts,monsterCreation);},
         enableDisplayStartup:layouts=>{if(!monsterCreation)throw new Error('Display startup requires monster services');return enableDisplayStartup(environment,layouts,monsterCreation);},

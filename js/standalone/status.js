@@ -21,7 +21,9 @@ export function enableStatus(environment,layouts){
   address:(kind,p,index)=>{const e=field(kind,index);return ctypes.locate(e.type,environment.address(p),e.f.name).at;},
   callbackPointer:i=>{const name=['cond_cmp','menualpha_cmp'][i];if(!name)throw new Error('Unknown status callback');return environment.functionPointer('botl::'+name,'ipp',(...args)=>callBotl(local,L,name,...args));},
   alloc:n=>environment.alloc('alloc',Number(n)),free:p=>services.free(environment.address(p)),memset:(p,v,n)=>services.memset(environment.address(p),v,n),
+  Sprintf:(out,format,...args)=>services.sprintf(cptr(out),cptr(format),...args.filter(v=>v?.varargSite===undefined).map(v=>v?.address??v)),
  });
+ for(const name of ['on_level','In_quest','depth'])local[name]=(...args)=>environment.resolve(name)(...args.map(v=>v?.address??v));
  for(const name of ['strlen','strcpy','strcat','strcmp','strchr','strrchr','strstr'])local[name]=(...args)=>services[name](cptr(args[0]),...args.slice(1).map(v=>typeof v==='string'?cptr(v):v?.address??v));
  const code=type=>{type=ctypes.canonical(type);return type.includes('*')?'p':type==='void'?'v':ctypes.size(type)===8?'j':'i';};
  for(const name of ['status_init','status_finish','status_enablefield','status_update']){const key='win_'+name,type=windowAbi.windows.callbacks[key],match=type.match(/^(.+?)\s*\(\*\)\s*\((.*)\)$/);if(!match)throw new Error('Unknown status window ABI '+key);const signature=[match[1],...match[2].split(',').map(v=>v.trim()).filter(v=>v&&v!=='void')].map(code).join('');local[name]=(...args)=>{const f=ctypes.record('struct window_procs').fields[key],fn=memory.view.getBigUint64(environment.requireGlobal('windowprocs')+f.offset,true);return functions.indirect(fn,signature,...args.map(v=>typeof v==='string'?cptr(v):v?.address??v));};}

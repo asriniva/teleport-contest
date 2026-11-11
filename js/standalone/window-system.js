@@ -50,6 +50,9 @@ export function enableWindowSystem(environment,layouts){
   setGlobal:(i,v)=>{const row=globals[i];if(!row)throw new Error('Unknown WINDOWS global '+i);if(!row.path)return ctypes.store(row.type,environment.requireGlobal(row.root),v);const e=locate(row.type,environment.requireGlobal(row.root),row.path);return ctypes.setField(e.definition.type,e.at-e.field.offset,row.path.split('.').at(-1),e.type,v);},
   callInit:(fn,dir)=>functions.indirect(fn,'vi',dir),strcmpi:(a,b)=>environment.resolve('strncmpi')(text(a),text(b),-1),
  });
+ for(const name of ['formatEncode','formatChar','formatStrings'])w[name]=(out,format,...args)=>services.sprintf(address(out),text(format),...args.map(v=>v?.address??v));
+ for(const name of ['fprintfChar','fprintfString'])w[name]=(fp,format,...args)=>services.fprintf(address(fp),text(format),...args.map(v=>v?.address??v));
+ w.map_glyphinfo=(x,y,glyph,flags,out)=>environment.resolve('map_glyphinfo')(x,y,glyph,flags,address(out));
  for(const [name,type]of Object.entries(W.callbacks)){const row=prototype(type);w['call_'+name]=(...args)=>{const field=ctypes.record('struct window_procs').fields[name],fn=ctypes.load(field.ctype.replace(new RegExp('\\s+'+name+'$'),''),environment.requireGlobal('windowprocs')+field.offset);return functions.indirect(fn,signature(row),...args.map((v,i)=>normalize(row.parameters[i],v)));};}
  initializeWindows(w,layouts.windows);
  const names=W.names.filter(name=>Object.hasOwn(publicFunctions.functions,name)&&typeof windows[name]==='function'&&!environment.hasFunction(name));

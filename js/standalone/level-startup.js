@@ -24,13 +24,15 @@ export function enableLevelStartup(environment,layouts,creation){
   rngCaller:site=>{const row=abi.bones.rngSites[site];if(!row)throw new Error('Unknown BONES RNG call site');if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('bones.c'),row[0],services.literal(row[1]));},rn2Value:n=>services.rn2(n),
   callbackPointer:()=>environment.functionPointer('bones::remove_mon_from_bones','vp',p=>environment.call('bones','remove_mon_from_bones',p)),
  });
+ // BONES exposes typed records; address-based dungeon owners consume pointers.
+ for(const name of ['open_bonesfile','ledger_no','Is_special','Is_botlevel','Is_branchlev','In_hell','dunlevs_in_dungeon','on_level'])local[name]=(...args)=>environment.resolve(name)(...args.map(value=>value?.address??value));
  let automatic=null;
  const seed=Object.create(services);Object.assign(seed,{ptr:environment.address,i8:environment.transport.char,u64:environment.transport.ulong,
   enterAutomatic:slots=>{const previous=automatic;automatic=new Map(slots.map(([name,n])=>[name,environment.transport.stackAlloc(n)]));return previous;},leaveAutomatic:previous=>{automatic=previous;},
   local:(name,type,value)=>{const at=automatic?.get(name);if(!at)throw new Error('Unknown UNIXMAIN automatic '+name);ctypes.store(type,at,value);return{address:at,get value(){return ctypes.load(type,at);},set value(v){ctypes.store(type,at,v);}};},
   global:name=>{const at=environment.requireGlobal(name);return{get value(){return ctypes.load('signed char',at);},set value(v){ctypes.store('signed char',at,v);}};},
  });
- for(const name of ['getpid','getnow','paniclog'])seed[name]=(...args)=>environment.resolve(name)(...args);
+ for(const name of ['getpid','getnow','paniclog'])seed[name]=(...args)=>(typeof services[name]==='function'?services[name]:environment.resolve(name))(...args);
  environment.register('platform-seed',{sys_random_seed},seed);
  if(!Object.hasOwn(environment.status(),'rect'))environment.enableRect(layouts.rect);
  const env=createBonesEnvironment(local,layouts.bones,bones);

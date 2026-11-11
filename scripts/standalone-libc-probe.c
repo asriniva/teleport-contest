@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 void __qsort_r(void *,size_t,size_t,int (*)(const void *,const void *,void *),void *);
 static int *base;
 static int cmp(const void *a,const void *b,void *arg) {
@@ -21,7 +22,19 @@ static int scans(void) {
     result=sscanf("x","%d",&a);printf("%d,%d\n",result,a);
     return 0;
 }
+static int bounded_copies(void) {
+    const size_t lengths[]={0,1,2,3,7,16};
+    for(size_t i=0;i<sizeof(lengths)/sizeof(lengths[0]);i++){
+        unsigned char out[16];memset(out,0xa5,sizeof out);
+        char *p=strncpy((char*)out,"ab",lengths[i]);
+        printf("%zu:%d:",lengths[i],p==(char*)out);
+        for(size_t j=0;j<sizeof out;j++)printf("%02x",out[j]);
+        putchar('\n');
+    }
+    return 0;
+}
 int main(int argc,char **argv) {
+    if(argc>1&&argv[1][0]=='b')return bounded_copies();
     if(argc>1)return scans();
     int n;
     while(scanf("%d",&n)==1) {

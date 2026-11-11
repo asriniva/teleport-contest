@@ -3,10 +3,11 @@ import * as teleport from '../ported/teleport.js';
 import {is_pool,is_lava,is_waterwall,db_under_typ} from '../ported/dbridge.js';
 import {closed_door,accessible} from '../ported/monmove.js';
 import {may_passwall} from '../ported/hack.js';
+import {sticks} from '../ported/mondata.js';
 import {m_in_air} from '../ported/mon.js';
-import {engr_at,sengr_at,make_engr_at,del_engr_at} from '../ported/engrave.js';
+import {engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at} from '../ported/engrave.js';
 import {makemon_rnd_goodpos,m_initgrp} from '../ported/makemon.js';
-import {debugcore,nh_basename} from '../ported/files.js';
+import {debugcore,nh_basename,fqname} from '../ported/files.js';
 export function enableWorldPosition(environment,layouts,creation){
  const {services,ctypes,memory,transport,functions}=environment,{views,context,environment:world}=creation;
  const record=(t,p)=>views.record(t,p),L={...layouts.makemon,...layouts.teleport};
@@ -45,7 +46,7 @@ export function enableWorldPosition(environment,layouts,creation){
   });},
   staticAddress:key=>{if(key!=='nh_basename.basebuf')throw new Error('Unresolved FILES static '+key);return basebuf;},
  });
- environment.register('source-debug-guard',{debugcore,nh_basename},debug,{prepareArgs:(_fn,a)=>{if(typeof a[0]==='string')a[0]=services.literal(a[0]);return a;}});
+ environment.register('source-debug-guard',{debugcore,nh_basename,fqname},debug,{prepareArgs:(_fn,a)=>{if(typeof a[0]==='string')a[0]=services.literal(a[0]);return a;}});
  const debugMessage=values=>{if(services.debugcore('teleport.c',1)){const saved=world.iflags.last_msg;try{const[fmt,...args]=values();environment.resolve('pline')(fmt,...args);}finally{world.iflags.last_msg=saved;}}};
  env.debugpline0=s=>debugMessage(()=>[s]);env.debugpline4=debugMessage;
  const coord=p=>record('coord',p),monster=p=>record('struct monst',p),pm=p=>record('struct permonst',p);
@@ -66,16 +67,21 @@ export function enableWorldPosition(environment,layouts,creation){
  environment.register('world-wall-permission',{may_passwall},hack);
  const mon=context(layouts.mon);Object.assign(mon,{is_clinger:p=>Boolean(p.mflags1&BigInt(layouts.mon.M1_CLING))});
  environment.register('world-air-position',{m_in_air},mon,{prepareArgs:(_fn,a)=>[monster(a[0])]});
- const engr=context(layouts.engrave);
+ const engr=context(layouts.engrave),EL={...layouts.mondata,...layouts.engrave},flag=(p,k)=>Boolean(p.mflags1&BigInt(EL[k]));
+ Object.defineProperty(engr,'Levitation',{get:()=>{const p=world.u.uprops[EL.LEVITATION];return Number(Boolean((p.intrinsic||p.extrinsic)&&!p.blocked));}});
+ Object.defineProperty(engr,'Flying',{get:()=>{const p=world.u.uprops[EL.FLYING];return Number(Boolean((p.intrinsic||p.extrinsic||(world.u.usteed&&flag(world.u.usteed.data,'M1_FLY')))&&!p.blocked));}});
+ engr.P_SKILL=n=>world.u.weapon_skills[n].skill;engr.ceiling_hider=p=>Number(flag(p,'M1_HIDE')&&((flag(p,'M1_CLING')&&p.mlet!==EL.S_MIMIC)||flag(p,'M1_FLY')));
+ const mondata=context(layouts.mondata);environment.register('floor-monster-stickiness',{sticks},mondata,{prepareArgs:(_fn,a)=>[record('struct permonst',a[0])]});
  Object.assign(engr,{EngrSize:ctypes.size('struct engr'),Strlen:p=>memory.strlen(environment.address(p)),
   newengr:n=>record('struct engr',memory.malloc(ctypes.size('struct engr')+Number(n))),dealloc_engr:p=>memory.free(environment.address(p)),
   engr_text_space:p=>environment.address(p)+ctypes.size('struct engr'),Strcpy:(d,s)=>services.strcpy(d,s),
   strcmp:(a,b)=>services.strcmp(typeof a==='string'?services.literal(a):a,typeof b==='string'?services.literal(b):b),
   strcmpi:(a,b)=>services.strncmpi(a,b,-1),
   rnd:(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('engrave.c'),line,services.literal(caller));return services.rnd(n);},
+  rn2:(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('engrave.c'),line,services.literal(caller));return services.rn2(n);},
  });
  Object.defineProperty(engr,'head_engr',{get:()=>record('struct engr',ctypes.load('struct engr *',environment.requireGlobal('head_engr'))),set:v=>ctypes.store('struct engr *',environment.requireGlobal('head_engr'),v)});
- environment.register('world-engravings',{engr_at,sengr_at,make_engr_at,del_engr_at},engr,{prepareArgs:(fn,a)=>{if(fn==='sengr_at'&&typeof a[0]==='string')a[0]=services.literal(a[0]);if(fn==='make_engr_at')for(const i of [2,3])if(typeof a[i]==='string')a[i]=services.literal(a[i]);return a;}});
+ environment.register('world-engravings',{engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at},engr,{prepareArgs:(fn,a)=>{if(fn==='sengr_at'&&typeof a[0]==='string')a[0]=services.literal(a[0]);if(fn==='make_engr_at')for(const i of [2,3])if(typeof a[i]==='string')a[i]=services.literal(a[i]);return a;}});
  environment.exposeAddressPort('invent',['sobj_at']);
  environment.enableAddressPort('mkmaze',{only:['is_exclusion_zone']});
  environment.exposeAddressPort('dungeon',['has_ceiling']);

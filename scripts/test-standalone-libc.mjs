@@ -47,4 +47,8 @@ result=s.sscanf('-9223372036854775808 18446744073709551615','%ld %lu',out,other)
 memory.view.setInt32(out,19,true);actual.push([s.sscanf('','%d',out),memory.view.getInt32(out,true)].join(','));actual.push([s.sscanf('x','%d',out),memory.view.getInt32(out,true)].join(','));
 assert.deepEqual(actual,scan.stdout.trim().split('\n'));
 assert.equal(s.strcasecmp('\xc0','\xe0'),-32);assert.equal(s.strcasecmp('AbC','aBc'),0);
-console.log(`PASS: ${cases.length} exact original-musl qsort output/comparator traces, stable NetHack sorting, hacklib utilities and bounded scanner contracts.`);
+const copyOracle=spawnSync(path.join(scratch,'probe'),['bytes'],{encoding:'utf8'});assert.equal(copyOracle.status,0,copyOracle.stderr);
+const copyOut=memory.malloc(16),copySource=s.literal('ab'),copyActual=[];
+for(const n of [0,1,2,3,7,16]){memory.memset(copyOut,0xa5,16);const result=s.strncpy(copyOut,copySource,BigInt(n));copyActual.push([n,Number(result===copyOut),Buffer.from(memory.readBytes(copyOut,16)).toString('hex')].join(':'));}
+assert.deepEqual(copyActual,copyOracle.stdout.trim().split('\n'),'C size_t64 bounded copying and zero padding');
+console.log(`PASS: ${cases.length} exact original-musl qsort output/comparator traces, stable NetHack sorting, hacklib utilities bounded scanner contracts and6 C size_t64 strncpy cases.`);
