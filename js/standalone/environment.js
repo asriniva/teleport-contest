@@ -43,6 +43,7 @@ import {enableMonsterInventory} from './monster-inventory.js';
 import {enableWorldPosition} from './world-position.js';
 import {createEnvironmentInputs} from './environment-inputs.js';
 import {enableLuaSandbox} from './lua-sandbox.js';
+import {enableLevelStartup} from './level-startup.js';
 import {enableDisplayStartup} from './display-startup.js';
 import {enableHeroStartup} from './hero-startup.js';
 import {enableGameStartup} from './game-startup.js';
@@ -66,7 +67,23 @@ export function createStandaloneEnvironment(options={}) {
         callComparator:(fn,a,b)=>typeof fn==='function'?fn(a,b):functions.indirect(fn,'ipp',a,b),
     });
     const modules=new Map(),owners=new Map(),globals=new Map(),states=new Map();
+    const deferredFunctions=new Map(),symbolPointers=new Map();
     const addressAdapters=new Map();let itemInventory,monsterSelection,monsterCreation;
+    function functionPointer(name,signature,invoke) {
+        const previous=symbolPointers.get(name);
+        if(previous){if(previous.signature!==signature)throw new Error('Conflicting C function prototype '+name);return previous.id;}
+        const id=functions.functionPointer(invoke??((...args)=>environment.resolve(name)(...args)),signature);
+        symbolPointers.set(name,{id,signature});return id;
+    }
+    function deferFunctions(module,namespace){for(const [name,callback]of Object.entries(namespace)){const candidates=deferredFunctions.get(name)??new Map();candidates.set(module,callback);deferredFunctions.set(name,candidates);}}
+    function resolve(name){
+        if(!owners.has(name)){
+            const candidates=deferredFunctions.get(name);
+            if(candidates?.size>1)throw new Error('Ambiguous standalone public symbol '+name);
+            if(candidates?.size===1){const [module,callback]=candidates.entries().next().value;extend(module,{[name]:callback});}
+        }
+        const owner=owners.get(name);if(!owner)throw new Error('Unresolved standalone function '+name);return (...args)=>call(owner,name,...args);
+    }
     function extend(name,namespace) {
         const entry=modules.get(name);if(!entry)throw new Error('Unknown standalone module '+name);
         const exports=Object.entries(namespace);
@@ -184,14 +201,14 @@ export function createStandaloneEnvironment(options={}) {
         if(stdio)throw new Error('Standalone stdio already enabled');
         stdio=createStdio(memory,base.filesystem,base.libc,options);Object.assign(services,stdio);return stdio;
     }
-    function enableRnd(layout,{seed=0n,displaySeed=seed,luck=()=>services.u?.uluck??0,level=()=>services.u?.ulevel??1,strongSeed=()=>1,randomSeed}={}) {
+    function enableRnd(layout,{seed=0n,displaySeed=seed,luck=()=>services.u?.uluck??0,level=()=>services.u?.ulevel??1,strongSeed=()=>services.has_strong_rngseed??decl.has_strong_rngseed,randomSeed}={}) {
         if(!stdio)throw new Error('Enable standalone stdio before rnd');
-        const core=functions.functionPointer(n=>call('rnd','rn2',n),'ii'),display=functions.functionPointer(n=>call('rnd','rn2_on_display_rng',n),'ii');
+        const core=functionPointer('rn2','ii'),display=functionPointer('rn2_on_display_rng','ii');
         const local=Object.create(services);
         Object.assign(local,{coreFunction:()=>Number(core),displayFunction:()=>Number(display),luck,level,strongSeed,
             fopen:services.fopen,setvbuf:services.setvbuf,fputc:services.fputc,
             fprintf:(file,format,...args)=>services.fprintf(file,format,...args.map(v=>v instanceof Uint8Array?String.fromCharCode(...v.subarray(0,v.indexOf(0)<0?v.length:v.indexOf(0))):v)),
-            sys_random_seed:randomSeed??(()=>{throw new Error('An explicit randomSeed source is required for init_random/reseed_random');}),
+            sys_random_seed:randomSeed??(()=>environment.resolve('sys_random_seed')()),
             sgn:n=>Math.sign(n),getenv:name=>base.services.nh_getenv(name),panicBadRng:()=>{throw new CPanic('Bad RNG function');},
             impossible:(format,...args)=>{throw new Error(base.libc.format(format,...args));},
             snprintf:(buffer,n,format,...args)=>{const value=base.libc.format(format,...args),bytes=Uint8Array.from(value.slice(0,Number(n)-1),c=>c.charCodeAt(0));buffer.set(bytes);buffer[bytes.length]=0;return value.length;},
@@ -244,7 +261,7 @@ export function createStandaloneEnvironment(options={}) {
         services.tgetent=(_buffer,name)=>runtime.tgetent(services,name);
         return runtime;
     }
-    const environment={...base,services,transport,functions,bitfields,ctypes,diagnostics,register,extend,start,call,allocateGlobal,requireGlobal,linkGlobal,enableRect,enableHacklib,enableDecl,enableDrawing,enableObjects,enableMonst,enableStdio,enableRnd,enableSys,enableTrack,enableCommandGeometry,enableDependencies,
+    const environment={...base,services,transport,functions,bitfields,ctypes,diagnostics,register,extend,deferFunctions,start,call,functionPointer,allocateGlobal,requireGlobal,linkGlobal,enableRect,enableHacklib,enableDecl,enableDrawing,enableObjects,enableMonst,enableStdio,enableRnd,enableSys,enableTrack,enableCommandGeometry,enableDependencies,
         setEnvironment:(name,value)=>{inputs.setEnvironment(name,value);if(value===null||value===undefined)delete ENV[name];else ENV[name]=String(value);},
         captureFiles:baseline=>captureGameFiles(base.filesystem,baseline,shouldPersistGameFile),
         restoreFiles:state=>restoreGameFiles(base.filesystem,state),
@@ -260,6 +277,7 @@ export function createStandaloneEnvironment(options={}) {
         enableMonsterCreation:layouts=>{if(!monsterSelection)throw new Error('Monster creation requires species selection');return monsterCreation=enableMonsterCreation(environment,layouts,monsterSelection);},
         enableMonsterInventory:layouts=>{if(!monsterCreation)throw new Error('Monster inventory requires monster creation');return enableMonsterInventory(environment,layouts,monsterCreation);},
         enableWorldPosition:layouts=>{if(!monsterCreation)throw new Error('World positioning requires monster creation');return enableWorldPosition(environment,layouts,monsterCreation);},
+        enableLevelStartup:layouts=>{if(!monsterCreation)throw new Error('Level startup requires monster services');return enableLevelStartup(environment,layouts,monsterCreation);},
         enableDisplayStartup:layouts=>{if(!monsterCreation)throw new Error('Display startup requires monster services');return enableDisplayStartup(environment,layouts,monsterCreation);},
         enableHeroStartup:layouts=>{if(!monsterCreation||!itemInventory)throw new Error('Hero startup requires monster/inventory services');return enableHeroStartup(environment,layouts,monsterCreation,itemInventory);},
         enableGameStartup:layouts=>{if(!monsterCreation)throw new Error('Game startup requires monster services');const startup=enableGameStartup(environment,layouts,monsterCreation);states.set('game-startup-context',startup.environment);return startup;},
@@ -267,8 +285,8 @@ export function createStandaloneEnvironment(options={}) {
         enableTerminal:(layout,options)=>enableTerminal(environment,layout,options),
         enableLua:options=>createStandaloneLua(environment,options),
         enableLuaSandbox:layouts=>enableLuaSandbox(environment,layouts),
-        state:name=>states.get(name),
-        resolve:name=>{const owner=owners.get(name);if(!owner)throw new Error('Unresolved standalone function '+name);return (...args)=>call(owner,name,...args);},
+        state:name=>states.get(name),hasFunction:name=>owners.has(name),
+        resolve,
         status:()=>Object.fromEntries([...modules].map(([k,v])=>[k,v.status])),
         record:transport.record,array:transport.array,address};
     return environment;

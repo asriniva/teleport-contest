@@ -16,6 +16,11 @@ for(const [file,hash]of Object.entries(baseline.sha256))check(file,hash);
 for(const name of ['isaac64','terminal','storage'])assert.deepEqual(read('js/'+name+'.js'),read('frozen/'+name+'.js'),'Frozen '+name);
 for(const [file,hash]of Object.entries(json('js/standalone/hero-abi.json').sourceSha256))check(file,hash);
 for(const [file,hash]of Object.entries(json('js/standalone/display-abi.json').sourceSha256))check(file,hash);
+for(const name of ['level-abi','public-functions']){
+ const data=json('js/standalone/'+name+'.json');
+ for(const [file,hash]of Object.entries(data.sourceSha256))check(file,hash);
+ for(const [file,hash]of Object.entries(data.referenceHeaderSha256??{}))assert.equal(sha(path.resolve(reference,file)),hash,'Public declaration header changed: '+file);
+}
 const records=json('js/standalone/records.json');
 check('nethack-c/wasm/compile-defines.json',records.definesSha256);
 check('nethack-c/wasm/tu-fragments/decl-schema.json',records.declSchemaSha256);

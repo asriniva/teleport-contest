@@ -17,7 +17,7 @@ const env=createStandaloneEnvironment({initialBytes:1024,maximumBytes:64*1024*10
 env.enableStdio();env.enableDecl(layouts.decl);env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.call('objects','objects_globals_init');
 env.enableMonst(layouts.monst);env.call('monst','monst_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed:0x12345678n});env.call('rnd','rng_log_init');
 env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.call('object-state','init_objects');
-const component=env.enableObjectRecords(layouts);assert.equal(component.exports.length,21);assert.throws(()=>env.resolve('mksobj'),/Unresolved/);
+const component=env.enableObjectRecords(layouts);assert.equal(component.exports.length,21);assert.equal(env.hasFunction('mksobj'),false);assert.equal(typeof env.resolve('mksobj'),'function');assert.throws(()=>env.resolve('nhl_init'),/Unresolved/);
 const ref=await factory();ref._probe_init(0x12345678n);ref._probe_record_prepare();ref._probe_action(0,0,0,0);
 env.services.svc.context.current_fruit=19;
 const {memory,ctypes}=env,js=[],native=[],heads=Array.from({length:4},()=>memory.calloc(1,8));let comparisons=0;

@@ -25,6 +25,7 @@ injected. C compilers and C/Wasm oracles are development-only.
 
 | Surface | Checkpoint evidence and limits |
 | --- | --- |
+| Level-generation wiring (in progress) | `enableLevelStartup` connects original level clearing, fixed-seed reseeding, absent-bones branch, rectangles/regions/stairs, map lighting/flood-fill and Lua selection/themed-room calls to one shared heap. Focused original-C RNG/selection witness: PASS56,217 comparisons, including complete core/display ISAAC state and selection fields/maps after geometry/random operations over three seeds. General bones restore, remaining room/trap owners and full level/game closure are unfinished. PASS3,672 connected comparisons over12 role/seed prefixes:42 shared roots (including terrain/rooms), overview/coder records, persistent Lua theme table/function types and exact RNG logs. Both implementations stop at matching `maketrap`/`has_dnstairs` boundaries. Combined27-check regression gate PASS; production isolation reaches trap creation with Wasm/network forbidden. |
 | Window color, glyph-map and signal registration | `enableDisplayStartup` connects unchanged WINDOWS has_color and existing DISPLAY reset_glyphmap, plus JS-owned signal/sigaction tables matching configured Emscripten libc. PASS3,981 C comparisons: color masks/capabilities; complete9,624-entry glyph-map bytes and41 state roots over12 actual-newgame role/seed cases; canonical shared-global pointer aliases; handler return identities, errno, all65 action records, arbitrary action masks/flags and scoped explicit callback delivery. The target SIG_IGN is uint64(-2), measured from C; callback identity infrastructure stays unchanged. Both newgame owners reach the explicit mklev boundary. Source static initialization is installed through the existing read-only DISPLAY predicate. Window/terminal lifecycle, general masked/default signal delivery and END handler bodies are not accepted by these tests. |
 | Artifact, hero and persistent Lua startup | `enableHeroStartup` connects source artifact role/alignment initialization, U_INIT misc setup via the unchanged adapter, POLYSELF form/intrinsics, ATTRIB HP/abilities, EXPER energy, EAT hunger, BOTL rank size and CALENDAR getnow. Private table layouts are measured from actual C; adapter descriptors are source-bound. PASS58,212 C comparisons over 396 role/race/seed/roleplay configurations, each as a positive owner sequence and actual ALLMAIN newgame prefix: all35 shared roots/catalogues, artifact tables, complete hero/monster-form data, copied24-byte roleplay (including64-bit counters), fixed-input birthday, persistent nhcore.lua registry tables and exact RNG logs. The prefix explicitly requires both JS and C to stop at WINDOWS has_color within DISPLAY reset_glyphmap; this is not display acceptance. Production isolation reaches that same edge with Wasm/network forbidden. Hero inventory/skills, remaining display/map/game-loop owners and full-game recordings remain unfinished. |
 | Dungeon and Lua startup | `enableLuaSandbox` reuses unchanged NHLUA/NHLSEL/NHLOBJ table packing and policies, the original SP_LEV des registration, and the existing pure-JS Lua VM. The original configured C dungeon owners plus original Lua5.4.8 pass 2,631 comparisons: 51 role/seed cases, complete 25 shared roots and recursive special-level/branch lists, string payloads, exact RNG logs, and 30 getenv/nh_getenv empty/128/129-character/replacement/removal/recording-epoch checks. Real nhlib.lua/dungeon.lua inputs are hashed in the reference receipt. Standalone isolation executes dungeon generation while Wasm/network are forbidden. Callback registration does not verify every selection/object/des operation; sandbox limit/error branches, hero initialization and full game remain unfinished. |
@@ -336,10 +337,27 @@ with Wasm/network capabilities forbidden before import.
 
 ## Next integration milestone
 
-Object startup/name persistence and object records/weights/ownership are now
-connected groups after the checkpoint. Next connect a larger group, including all its reachable game
-owners, and compare complete inputs, state, outputs and recording bytes with
-original C. Terminal/input/game-loop and full
-save/restore are later groups. Until the full game closure exists, keep the
+The next level-generation owners are TRAP creation and MKROOM room/stair queries,
+followed by the remaining map-generation dependency closure. Keep comparing the
+actual newgame path and complete shared state/RNG against original C as those
+edges move. Hero inventory/skills, world transitions, UI/input/game-loop and full
+save/restore still require integration. Full-game recording equivalence remains
+a required completion gate. Until the full game closure exists, keep the
 mixed game as the control and run this harness independently. No cross-heap
 transfer or selectable mixed-game route is part of this checkpoint.
+
+Build the level-generation development reference (includes actual configured
+CMD/SYMBOLS/SOUNDS/MKMAZE owners required by its source dependencies):
+
+```sh
+python3 scripts/build-standalone-level-startup.py --reference-root /path/to/reference --out .cache/standalone-level-startup-v9
+```
+
+The reference adds original compression service and original C owners; generated
+copies of existing startup fixtures retain the documented DECL/WINDOWS ownership
+adjustments. Source headers, compiler inputs, Lua scripts and artifacts are bound
+in its receipt. Production instead uses unchanged JS policies, original adapter
+views and compiler-exported public function declarations. The latter metadata
+binds every transitive declaration header and supplies public function identities
+and lazy linkage only for adapters that are explicitly enabled. Private callbacks
+remain scoped to their source owner. Missing owners still throw.

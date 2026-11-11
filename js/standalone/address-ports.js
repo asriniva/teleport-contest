@@ -1,5 +1,6 @@
 // Existing address-based adapters on standalone storage, with real JS symbol
 // resolution. Missing game functions remain explicit link errors, never stubs.
+import publicFunctions from './public-functions.json' with {type:'json'};
 import metadata from './address-ports.json' with {type:'json'};
 import * as mklev from '../ported/mklev.js';
 import {callMklev} from '../ported/mklev-runtime.js';
@@ -69,11 +70,11 @@ export function enableAddressPort(environment,name,{only}={}) {
     const pointerIds=new Map();
     const pointer=fn=>{
         if(pointerIds.has(fn))return pointerIds.get(fn);
-        const prototype=schema.functionPointers?.[fn],info=schema.dependencies?.[fn],sig=prototype?prototypeSignature(prototype):info?signature(info.ret,info.params.map(p=>p.canonical??p.type)):({mkroom_cmp:'ipp'})[fn];
+        const prototype=schema.functionPointers?.[fn]??publicFunctions.functions[fn],info=schema.dependencies?.[fn],sig=prototype?prototypeSignature(prototype):info?signature(info.ret,info.params.map(p=>p.canonical??p.type)):({mkroom_cmp:'ipp',rn2_on_display_rng:'ii'})[fn];
         // Owned comparator signatures are checked by the indirect-call adapter;
         // non-comparator owned callback types need an explicit schema entry.
         if(!sig)throw new Error('Missing callback signature '+name+'.'+fn);
-        const id=environment.functions.functionPointer((...args)=>resolve(fn)(...args),sig);pointerIds.set(fn,id);return id;
+        const owned=schema.ownedFunctionPointers?.includes(fn)||typeof namespace[fn]==='function',id=environment.functionPointer(owned&&!Object.hasOwn(publicFunctions.functions,fn)?name+'::'+fn:fn,sig,owned?((...args)=>bind(fn)(...args)):undefined);pointerIds.set(fn,id);return id;
     };
     local.ownedFunctionPointer=i=>pointer(schema.ownedFunctionPointers[i]);
     local.nativeFunctionPointer=i=>pointer(schema.nativeFunctionPointers[i]);
@@ -96,6 +97,7 @@ export function enableAddressPort(environment,name,{only}={}) {
     };
     const wrappers=Object.fromEntries(Object.entries(namespace).filter(([key,fn])=>typeof fn==='function'&&(!only||only.includes(key))&&!/StaticInitializers$/.test(key)&&(!schema.functionTypes||Object.hasOwn(schema.functionTypes,key))).map(([key])=>[key,bind(key)]));
     environment.register(name,wrappers,local);
+    environment.deferFunctions(name,Object.fromEntries(Object.keys(publicFunctions.functions).filter(fn=>typeof namespace[fn]==='function'&&!Object.hasOwn(wrappers,fn)).map(fn=>[fn,bind(fn)])));
     return{
         services:local,layout:keys,
         expose:names=>{for(const key of names)if(typeof namespace[key]!=='function')throw new Error('Unknown '+name+' export '+key);environment.extend(name,Object.fromEntries(names.map(key=>[key,bind(key)])));},

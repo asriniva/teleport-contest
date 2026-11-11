@@ -1,15 +1,15 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "29495848af8ad8e9e15b77381dce3f6370dd450a",
+  "acceptedCheckpoint": "901a30adbd521b98613ffd69480391c3f04f7863",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
-    "verified-subset": 50,
-    "not-connected": 63,
+    "verified-subset": 53,
+    "in-progress": 12,
+    "not-connected": 58,
     "provider-only": 1,
-    "in-progress": 7,
-    "transport-only": 6
+    "transport-only": 3
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -59,8 +59,9 @@
     {
       "module": "stairs",
       "source": "src/stairs.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Original stair policies have measured shared record/level conversions. Actual startup empty-list reset executes; nonempty stair creation/travel/description remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
     },
     {
       "module": "sys",
@@ -111,8 +112,8 @@
       "module": "rnd",
       "source": "src/rnd.c",
       "status": "verified-component",
-      "scope": "20 original RNG/logging functions; external seed input must be injected.",
-      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+      "scope": "20 original RNG/logging functions; external seed input must be injected. Shared default seed-strength now reads live DECL; weak/strong reseed and fixed seed branch verified with canonical cross-adapter pointer identities.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md; scripts/test-standalone-level-startup.mjs:56217 focused RNG/selection comparisons."
     },
     {
       "module": "ioctl",
@@ -154,8 +155,9 @@
     {
       "module": "mkmap",
       "source": "src/mkmap.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Source litstate_rnd and flood_fill_rm on shared terrain/bounds/counters during actual themed-room prefixes; complete cavern-map generation and other functions unaccepted.",
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
     },
     {
       "module": "getline",
@@ -197,8 +199,9 @@
     {
       "module": "selvar",
       "source": "src/selvar.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Shared native entry conversions for unchanged selection policies. Geometric/random selection fields and maps compare with C; themed-room selection callbacks run in actual newgame. Broad flood-check callback paths, remaining selection algorithms and full game remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished. scripts/test-standalone-level-startup.mjs:56217 original-C core/display state and selection comparisons over three seeds."
     },
     {
       "module": "steal",
@@ -388,8 +391,9 @@
     {
       "module": "bones",
       "source": "src/bones.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Source getbones entry connected for the actual disabled/absent-bones startup branch. Bones file restore, compression/serialization closure and actual restored-game behavior remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
     },
     {
       "module": "explode",
@@ -448,8 +452,9 @@
     {
       "module": "region",
       "source": "src/region.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Source clear_regions/free_region connected; actual startup empty-region reset path executes. Nonempty region cleanup/callbacks and active-region behavior remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
     },
     {
       "module": "weapon",
@@ -499,8 +504,8 @@
       "module": "allmain",
       "source": "src/allmain.c",
       "status": "in-progress",
-      "scope": "Actual newgame runs through hero/persistent Lua/glyph-map startup and original SIGINT callback registration; C and JS stop at mklev. Level generation, inventory/skills and full game/recordings remain unfinished.",
-      "evidence": "scripts/test-standalone-display-startup.mjs:3981 C comparisons across color capabilities, signal registration and12 full9624-glyph/shared-state/RNG prefixes; mklev remains explicit unresolved edge.",
+      "scope": "Actual newgame now runs into level clearing and themed rooms before matching unresolved maketrap/has_dnstairs calls. Hero inventory/skills, full map, UI/game loop and recordings remain unfinished.",
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished.",
       "priorEvidence": [
         "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup.",
         "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
@@ -640,9 +645,9 @@
     {
       "module": "mklev",
       "source": "src/mklev.c",
-      "status": "transport-only",
-      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
-      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+      "status": "in-progress",
+      "scope": "Original level clearing, rectangle initialization, room/theme generation prefix connected through shared state. Current original-C prefixes stop at unresolved maketrap or has_dnstairs. Complete level generation remains unfinished.",
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
     },
     {
       "module": "monmove",
@@ -885,9 +890,9 @@
     {
       "module": "sp_lev",
       "source": "src/sp_lev.c",
-      "status": "transport-only",
-      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
-      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+      "status": "in-progress",
+      "scope": "Original des callbacks for tested themed-room prefixes resolve through original public function owners and module-scoped private callback identities. Full special-level dependency closure unaccepted.",
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
     },
     {
       "module": "trap",
@@ -924,8 +929,8 @@
       "module": "unixmain",
       "source": "sys/unix/unixmain.c",
       "status": "verified-subset",
-      "scope": "Original configured get_nhuuid body called by actual newgame prefix. Platform main/entropy/terminal lifecycle remain unconnected.",
-      "evidence": "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup."
+      "scope": "Original get_nhuuid and fixed NETHACK_SEED sys_random_seed branch run on shared DECL state; reseed uses live seed-strength flag and canonical public RNG pointer identities. Host entropy/platform main/terminal lifecycle remain unconnected.",
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished. scripts/test-standalone-level-startup.mjs:56217 original-C core/display state and selection comparisons over three seeds."
     },
     {
       "module": "options",
@@ -950,15 +955,16 @@
     {
       "module": "nhlsel",
       "source": "src/nhlsel.c",
-      "status": "transport-only",
-      "scope": "Actual selection library method/metatable registration connected on JS-owned storage with stable callback IDs. Selection algorithms and their dependency closure are not accepted by dungeon-only evidence.",
-      "evidence": "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden."
+      "status": "verified-subset",
+      "scope": "Original Lua selection registrations and themed-room selection callback paths execute in real newgame on shared storage. Entire Lua selection surface and error/limit branches remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
     }
   ],
   "rebaseNote": "Rebased to main3296b9a; refreshed 138 policy and adapter/record/terminal metadata receipts; prior13-check regression PASS.",
   "latestWorkingTreeEvidence": {
-    "gate": "25 standalone development checks PASS",
-    "displaySignalComparisons": 3981,
-    "scope": "Color/glyph initialization and configured signal registration/callback subset. No full-game acceptance."
+    "gate": "27 standalone development checks PASS",
+    "levelRngSelectionComparisons": 56217,
+    "levelPrefixComparisons": 3672,
+    "scope": "Partial level/theme integration with matching explicit trap/room-stair boundaries. No full-game acceptance."
   }
 }

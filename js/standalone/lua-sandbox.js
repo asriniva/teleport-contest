@@ -46,11 +46,22 @@ export function enableLuaSandbox(environment,layouts){
 function enableLuaRegistrations(environment,layouts,lua){
  const {services,ctypes,functions}=environment;
  const loc=(g,type,f)=>ctypes.locate(type,environment.requireGlobal(g),f).at;
- const shadow=(names)=>{const local=Object.create(services);for(const n of names)Object.defineProperty(local,n,{value:undefined,writable:true,configurable:true});return local;};
+ const shadow=(names)=>{const local=new Proxy(Object.create(services),{get:(o,k,r)=>Reflect.has(o,k)?Reflect.get(o,k,r):typeof k==='string'?(...args)=>environment.resolve(k)(...args):undefined});for(const n of names)Object.defineProperty(local,n,{value:undefined,writable:true,configurable:true});return local;};
  const select=shadow(['cg','gc','gx','gy','svn','svr','levl']);Object.assign(select,lua.api);
  const globals=[loc('cg','struct const_globals','zeroNhRect'),loc('gc','struct instance_globals_c','coder'),loc('gx','struct instance_globals_x','xstart'),loc('gy','struct instance_globals_y','ystart'),loc('svn','struct instance_globals_saved_n','nroom'),loc('svr','struct instance_globals_saved_r','rooms'),ctypes.locate('dlevel_t',loc('svl','struct instance_globals_saved_l','level'),'locations').at];
  const L=layouts.nhlsel,storage=[nhlsel.l_selection_methods.length*L.luaRegSize,nhlsel.l_selection_meta.length*L.luaRegSize,7*8,3*8].map((n,i)=>environment.allocateGlobal('nhlsel.table'+i,n));
  Object.assign(select,{global:i=>globals[i],tableStorage:i=>storage[i],callbackToken:i=>functions.functionPointer((...args)=>environment.resolve(nhlsel.callbackNames[i])(...args),'ip'),lua_newuserdata:(state,n)=>lua.api.lua_newuserdatauv(state,BigInt(n),1)});
+ const text=p=>typeof p==='string'?services.literal(p):environment.address(p);
+ Object.assign(select,{dupstr:p=>environment.libc.strdup(text(p)),rectBounds:(...args)=>environment.call('rect','rect_bounds',...args),
+  nhl_pcall_handle:(L,n,r,name,flags)=>environment.resolve('nhl_pcall_handle')(L,n,r,text(name),flags),
+  nhl_error:(L,message)=>environment.resolve('nhl_error')(L,text(message)),
+  check_mapchr:p=>environment.resolve('check_mapchr')(text(p)),
+  mapfrag_fromstr:p=>environment.resolve('mapfrag_fromstr')(text(p)),
+  get_table_int:(L,key)=>environment.resolve('get_table_int')(L,text(key)),
+  get_table_int_opt:(L,key,def)=>environment.resolve('get_table_int_opt')(L,text(key),def),
+  get_table_option:(L,key,def,array)=>environment.resolve('get_table_option')(L,text(key),text(def),array),
+  nhl_add_table_entry_int:(L,key,value)=>environment.resolve('nhl_add_table_entry_int')(L,text(key),BigInt(value)),
+ });
  const selection=createNhlselEnvironment(select,L,nhlsel);
  environment.register('nhlsel',Object.fromEntries(Object.entries(nhlsel).filter(([,v])=>typeof v==='function').map(([name,fn])=>[name,(...args)=>{if(name==='l_selection_push_copy')args[1]=selection.selection(args[1]);const result=withCEnvironment(selection,fn,...args);return result?.address??result??0;}])));
  const object=shadow(['objects','mons','materialnm','def_oc_syms','hands_obj','fobj','svl']);Object.assign(object,lua.api);

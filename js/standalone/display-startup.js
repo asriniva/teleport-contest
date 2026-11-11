@@ -12,7 +12,7 @@ export function enableDisplayStartup(environment,layouts,creation){
  const signals=createSignals(environment);environment.register('signals',{signal:signals.signal,sigaction:signals.sigaction});
  // Keep a source function's dynamic C environment when it is installed directly.
  services.signal=signals.signal;services.sigaction=signals.sigaction;
- const done1=functions.functionPointer(sig=>environment.resolve('done1')(sig),'vi');
+ const done1=environment.functionPointer('done1','vi');
  // ALLMAIN owns this header callback identity; the real END body resolves when
  // delivered. Registering the callback never supplies a replacement END policy.
  Object.defineProperty(startup,'done1Pointer',{value:done1});
