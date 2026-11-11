@@ -4,7 +4,8 @@
       "fieldAliases": {
         "doormask": "flags",
         "looted": "flags",
-        "blessedftn": "horizontal"
+        "blessedftn": "horizontal",
+        "oc_bimanual": "oc_big"
       },
       "globals": [
         "u",
@@ -171,7 +172,8 @@
       "fieldAliases": {
         "doormask": "flags",
         "looted": "flags",
-        "blessedftn": "horizontal"
+        "blessedftn": "horizontal",
+        "oc_bimanual": "oc_big"
       },
       "globals": [
         "u",
@@ -510,7 +512,8 @@
       "fieldAliases": {
         "doormask": "flags",
         "looted": "flags",
-        "blessedftn": "horizontal"
+        "blessedftn": "horizontal",
+        "oc_bimanual": "oc_big"
       },
       "globals": [
         "u",
@@ -877,7 +880,8 @@
       "fieldAliases": {
         "doormask": "flags",
         "looted": "flags",
-        "blessedftn": "horizontal"
+        "blessedftn": "horizontal",
+        "oc_bimanual": "oc_big"
       },
       "globals": [
         "u",
@@ -1210,7 +1214,8 @@
       "fieldAliases": {
         "doormask": "flags",
         "looted": "flags",
-        "blessedftn": "horizontal"
+        "blessedftn": "horizontal",
+        "oc_bimanual": "oc_big"
       },
       "globals": [
         "objects",
@@ -1360,7 +1365,3910 @@
         "wipeout_text": "void (char *, int, unsigned int)",
         "ysimple_name": "char *(struct obj *)"
       }
+    },
+    "steed": {
+      "fieldAliases": {
+        "doormask": "flags",
+        "looted": "flags",
+        "blessedftn": "horizontal",
+        "oc_bimanual": "oc_big"
+      },
+      "globals": [
+        "u",
+        "gy",
+        "svl",
+        "gu",
+        "gi",
+        "gv",
+        "disp",
+        "flags",
+        "mons",
+        "objects",
+        "genders",
+        "iflags",
+        "0"
+      ],
+      "public": {
+        "rider_cant_reach": "void (void)",
+        "can_saddle": "boolean (struct monst *)",
+        "use_saddle": "int (struct obj *)",
+        "put_saddle_on_mon": "void (struct obj *, struct monst *)",
+        "can_ride": "boolean (struct monst *)",
+        "doride": "int (void)",
+        "mount_steed": "boolean (struct monst *, boolean)",
+        "exercise_steed": "void (void)",
+        "kick_steed": "void (void)",
+        "dismount_steed": "void (int)",
+        "poly_steed": "void (struct monst *, struct permonst *)",
+        "stucksteed": "boolean (boolean)",
+        "place_monster": "void (struct monst *, coordxy, coordxy)"
+      },
+      "layout": {
+        "size": 4,
+        "pointerSize": 8,
+        "longSize": 8,
+        "intSize": 4,
+        "booleanSize": 1,
+        "coordxySize": 2,
+        "charSize": 1,
+        "objectSize": 112,
+        "monsterSize": 192,
+        "permonstSize": 96,
+        "objectClassSize": 72,
+        "coordSize": 4,
+        "propSize": 24,
+        "skillSize": 6,
+        "levelSize": 4,
+        "genderSize": 48,
+        "charSigned": 1,
+        "booleanSigned": 1,
+        "coordxySigned": 1,
+        "obj_oclass": 49,
+        "obj_oclass_size": 1,
+        "obj_otyp": 32,
+        "obj_otyp_size": 2,
+        "obj_owornmask": 88,
+        "obj_owornmask_size": 8,
+        "obj_leashmon": 64,
+        "obj_leashmon_size": 4,
+        "mon_data": 8,
+        "mon_data_size": 8,
+        "mon_mx": 28,
+        "mon_mx_size": 2,
+        "mon_my": 30,
+        "mon_my_size": 2,
+        "mon_m_id": 16,
+        "mon_m_id_size": 4,
+        "mon_mstate": 128,
+        "mon_mstate_size": 8,
+        "mon_misc_worn_check": 168,
+        "mon_misc_worn_check_size": 8,
+        "mon_mhp": 52,
+        "mon_mhp_size": 4,
+        "mon_m_lev": 26,
+        "mon_m_lev_size": 1,
+        "mon_mtame": 65,
+        "mon_mtame_size": 1,
+        "mon_meating": 180,
+        "mon_meating_size": 4,
+        "mon_m_ap_type": 64,
+        "mon_m_ap_type_size": 1,
+        "pm_mlet": 28,
+        "pm_mlet_size": 1,
+        "pm_msize": 67,
+        "pm_msize_size": 1,
+        "pm_mflags1": 72,
+        "pm_mflags1_size": 8,
+        "pm_mflags2": 80,
+        "pm_mflags2_size": 8,
+        "cls_oc_skill": 19,
+        "cls_oc_skill_size": 1,
+        "u_ux": 0,
+        "u_ux_size": 2,
+        "u_uy": 2,
+        "u_uy_size": 2,
+        "u_dx": 4,
+        "u_dx_size": 4,
+        "u_dy": 8,
+        "u_dy_size": 4,
+        "u_dz": 12,
+        "u_dz_size": 4,
+        "u_utrap": 60,
+        "u_utrap_size": 4,
+        "u_utraptype": 64,
+        "u_utraptype_size": 4,
+        "u_usteed": 2320,
+        "u_usteed_size": 8,
+        "u_ustuck": 2312,
+        "u_ustuck_size": 8,
+        "u_ulevel": 48,
+        "u_ulevel_size": 4,
+        "u_umonster": 1804,
+        "u_umonster_size": 4,
+        "u_umonnum": 1808,
+        "u_umonnum_size": 4,
+        "u_ugallop": 2336,
+        "u_ugallop_size": 8,
+        "u_urideturns": 2344,
+        "u_urideturns_size": 4,
+        "u_weapon_skills": 2484,
+        "u_weapon_skills_size": 228,
+        "u_uprops": 112,
+        "u_uprops_size": 1656,
+        "u_uz": 24,
+        "u_uz_size": 4,
+        "coord_x": 0,
+        "coord_x_size": 2,
+        "coord_y": 2,
+        "coord_y_size": 2,
+        "prop_intrinsic": 16,
+        "prop_intrinsic_size": 8,
+        "prop_extrinsic": 0,
+        "prop_extrinsic_size": 8,
+        "prop_blocked": 8,
+        "prop_blocked_size": 8,
+        "skill_skill": 0,
+        "skill_skill_size": 2,
+        "level_dnum": 0,
+        "level_dnum_size": 2,
+        "level_dlevel": 2,
+        "level_dlevel_size": 2,
+        "gender_he": 8,
+        "gender_he_size": 8,
+        "youmonst": 8,
+        "youmonst_size": 192,
+        "floorMonsters": 28560,
+        "floorMonsters_size": 13440,
+        "unweapon": 1,
+        "unweapon_size": 1,
+        "roleMnum": 216,
+        "roleMnum_size": 2,
+        "inDismounting": 5,
+        "inDismounting_size": 1,
+        "visionRecalc": 144,
+        "visionRecalc_size": 1,
+        "botl": 0,
+        "botl_size": 1,
+        "wizard": 10,
+        "wizard_size": 1,
+        "lastMsg": 40,
+        "lastMsg_size": 4,
+        "AD_PHYS": 0,
+        "ARTICLE_A": 2,
+        "ARTICLE_YOUR": 3,
+        "A_CHA": 5,
+        "A_DEX": 3,
+        "A_WIS": 2,
+        "BOTH_SIDES": 393216,
+        "BOULDER": 475,
+        "BUFSZ": 256,
+        "COLNO": 80,
+        "CONFUSION": 14,
+        "COULD_SEE": 1,
+        "DIR_ERR": -1,
+        "DISMOUNT_BONES": 6,
+        "DISMOUNT_BYCHOICE": 7,
+        "DISMOUNT_ENGULFED": 5,
+        "DISMOUNT_FELL": 1,
+        "DISMOUNT_GENERIC": 0,
+        "DISMOUNT_KNOCKED": 3,
+        "DISMOUNT_POLY": 4,
+        "DISMOUNT_THROWN": 2,
+        "ECMD_CANCEL": 2,
+        "ECMD_OK": 0,
+        "ECMD_TIME": 1,
+        "FLYING": 49,
+        "FUMBLING": 25,
+        "GLIB": 21,
+        "HALF_PHDAM": 56,
+        "HALLUC": 23,
+        "HALLUC_RES": 24,
+        "IN_SIGHT": 2,
+        "IRON": 11,
+        "I_SPECIAL": 536870912,
+        "KILLED_BY_AN": 0,
+        "LANCE": 72,
+        "LEATHER_GLOVES": 159,
+        "LEG": 9,
+        "LEVITATION": 48,
+        "M1_AMORPHOUS": "4",
+        "M1_AMPHIBIOUS": "512",
+        "M1_BREATHLESS": "1024",
+        "M1_CLING": "16",
+        "M1_FLY": "1",
+        "M1_HUMANOID": "131072",
+        "M1_SLITHY": "524288",
+        "M1_SWIM": "2",
+        "M1_UNSOLID": "1048576",
+        "M2_ROCKTHROW": "134217728",
+        "MAXULEV": 30,
+        "MITHRIL": 17,
+        "MON_FLOOR": 0,
+        "MZ_LARGE": 3,
+        "MZ_MEDIUM": 2,
+        "MZ_SMALL": 1,
+        "M_AP_FURNITURE": 1,
+        "M_AP_OBJECT": 2,
+        "M_AP_TYPMASK": 7,
+        "NEARDATA": 0,
+        "NO_KILLER_PREFIX": 2,
+        "NO_TRAP_FLAGS": 0,
+        "NUMMONS": 383,
+        "NUM_OBJECTS": 481,
+        "N_DIRS": 8,
+        "PLATE_MAIL": 121,
+        "PM_AIR_ELEMENTAL": 154,
+        "PM_AMOROUS_DEMON": 290,
+        "PM_BAT": 126,
+        "PM_CHICKATRICE": 9,
+        "PM_COCKATRICE": 10,
+        "PM_FIRE_ELEMENTAL": 155,
+        "PM_GHOST": 287,
+        "PM_GIANT": 169,
+        "PM_GIANT_EEL": 319,
+        "PM_GRID_BUG": 116,
+        "PM_HUMAN": 260,
+        "PM_KNIGHT": 335,
+        "PM_LONG_WORM": 114,
+        "PM_PONY": 100,
+        "PM_SALAMANDER": 329,
+        "PM_STONE_GOLEM": 257,
+        "PM_WARHORSE": 105,
+        "P_BASIC": 2,
+        "P_EXPERT": 4,
+        "P_ISRESTRICTED": 0,
+        "P_POLEARMS": 16,
+        "P_RIDING": 37,
+        "P_SKILLED": 3,
+        "P_UNSKILLED": 1,
+        "QBUFSZ": 128,
+        "RLOC_ERR": 1,
+        "RLOC_NOMSG": 4,
+        "ROWNO": 21,
+        "SADDLE": 235,
+        "SLT_ENCUMBER": 1,
+        "STEALTH": 42,
+        "STONE_RES": 8,
+        "STUNNED": 13,
+        "SUPPRESS_HALLUCINATION": 4,
+        "SUPPRESS_INVISIBLE": 2,
+        "SUPPRESS_IT": 1,
+        "SUPPRESS_SADDLE": 8,
+        "S_ANGEL": 27,
+        "S_CENTAUR": 29,
+        "S_DRAGON": 30,
+        "S_EYE": 5,
+        "S_GHOST": 54,
+        "S_JABBERWOCK": 36,
+        "S_LIGHT": 25,
+        "S_QUADRUPED": 17,
+        "S_UNICORN": 21,
+        "S_VORTEX": 22,
+        "TELEDS_ALLOW_DRAG": 1,
+        "TELEPAT": 30,
+        "TEST_MOVE": 1,
+        "TIMEOUT": 16777215,
+        "TT_BEARTRAP": 1,
+        "TT_PIT": 2,
+        "TT_WEB": 3,
+        "VIBRATING_SQUARE": 23,
+        "WOUNDED_LEGS": 26,
+        "W_ARTI": 8192,
+        "W_SADDLE": 1048576,
+        "P_LANCE": 19,
+        "WEAPON_CLASS": 2,
+        "TOOL_CLASS": 6,
+        "ART_SNICKERSNEE": 19,
+        "BLINDED": 15,
+        "PRONOUN_HALLU": 2,
+        "FROMOUTSIDE": 67108864,
+        "HIGH_BOOTS": 165,
+        "MON_MIGRATING": 4,
+        "PIT": 11,
+        "PM_ROGUE": 339,
+        "ROOM": 25,
+        "STONE": 0,
+        "W_ARMG": 16,
+        "PM_RED_DRAGON": 146,
+        "config_EXTRA_SANITY_CHECKS": 0,
+        "config_NDEBUG": 0,
+        "config_DEBUG": 1
+      },
+      "callers": [
+        "use_saddle",
+        "mount_steed",
+        "kick_steed",
+        "landing_spot",
+        "dismount_steed",
+        "maybewakesteed"
+      ],
+      "foreign": {
+        "Mgender": "int (struct monst *)",
+        "Monnam": "char *(struct monst *)",
+        "YMonnam": "char *(struct monst *)",
+        "a_monnam": "char *(struct monst *)",
+        "accessible": "boolean (coordxy, coordxy)",
+        "acurr": "schar (int)",
+        "adjalign": "void (int)",
+        "an": "char *(const char *)",
+        "body_part": "const char *(int)",
+        "canseemon": "int (struct monst *)",
+        "debugcore": "boolean (const char *, boolean)",
+        "describe_level": "int (char *, int)",
+        "directionname": "const char *(int)",
+        "dirtocoord": "void (coord *, int)",
+        "dist2": "int (coordxy, coordxy, coordxy, coordxy)",
+        "encumber_msg": "void (void)",
+        "enexto": "boolean (coord *, coordxy, coordxy, struct permonst *)",
+        "exercise": "void (int, boolean)",
+        "finish_meating": "void (struct monst *)",
+        "float_down": "int (long, long)",
+        "freeinv": "void (struct obj *)",
+        "fully_identify_obj": "void (struct obj *)",
+        "getdir": "int (const char *)",
+        "has_ceiling": "boolean (d_level *)",
+        "heal_legs": "void (int)",
+        "highc": "char (char)",
+        "hliquid": "const char *(const char *)",
+        "instapetrify": "void (const char *)",
+        "is_art": "boolean (struct obj *, int)",
+        "is_lava": "boolean (coordxy, coordxy)",
+        "is_pool": "boolean (coordxy, coordxy)",
+        "isok": "int (coordxy, coordxy)",
+        "killed": "void (struct monst *)",
+        "legs_in_no_shape": "void (const char *, boolean)",
+        "losehp": "void (int, const char *, schar)",
+        "m_unleash": "void (struct monst *, boolean)",
+        "memset": "void *(void *, int, unsigned long)",
+        "minimal_monnam": "char *(struct monst *, boolean)",
+        "mintrap": "int (struct monst *, unsigned int)",
+        "mksobj": "struct obj *(int, boolean, boolean)",
+        "mon_nam": "char *(struct monst *)",
+        "monkilled": "void (struct monst *, const char *, int)",
+        "monverbself": "char *(struct monst *, char *, const char *, const char *)",
+        "mpickobj": "int (struct monst *, struct obj *)",
+        "near_capacity": "int (void)",
+        "newsym": "void (coordxy, coordxy)",
+        "objdescr_is": "boolean (struct obj *, const char *)",
+        "pmname": "const char *(struct permonst *, int)",
+        "poly_when_stoned": "boolean (struct permonst *)",
+        "polymon": "int (int)",
+        "pronoun_gender": "int (struct monst *, unsigned int)",
+        "remove_worn_item": "void (struct obj *, boolean)",
+        "rloc": "boolean (struct monst *, unsigned int)",
+        "rloc_to": "void (struct monst *, coordxy, coordxy)",
+        "sensemon": "int (struct monst *)",
+        "set_wounded_legs": "void (long, int)",
+        "sobj_at": "struct obj *(int, coordxy, coordxy)",
+        "sokoban_guilt": "void (void)",
+        "steed_vs_stealth": "void (void)",
+        "strchr": "char *(const char *, int)",
+        "strcpy": "char *(char *, const char *)",
+        "strsubst": "char *(char *, const char *, const char *)",
+        "surface": "const char *(coordxy, coordxy)",
+        "t_at": "struct trap *(coordxy, coordxy)",
+        "teleds": "void (coordxy, coordxy, int)",
+        "test_move": "boolean (coordxy, coordxy, coordxy, coordxy, int)",
+        "trapname": "const char *(int, boolean)",
+        "u_handsy": "boolean (void)",
+        "u_locomotion": "const char *(const char *)",
+        "update_mon_extrinsics": "void (struct monst *, struct obj *, boolean, boolean)",
+        "use_skill": "void (int, int)",
+        "which_armor": "struct obj *(struct monst *, long)",
+        "x_monnam": "char *(struct monst *, int, const char *, int, boolean)",
+        "xytodir": "int (int, int)",
+        "y_monnam": "char *(struct monst *)"
+      }
+    },
+    "iactions": {
+      "fieldAliases": {
+        "doormask": "flags",
+        "looted": "flags",
+        "blessedftn": "horizontal",
+        "oc_bimanual": "oc_big"
+      },
+      "globals": [
+        "objects",
+        "u",
+        "gy",
+        "svl",
+        "cg"
+      ],
+      "public": {
+        "itemactions": "int (struct obj *)"
+      },
+      "layout": {
+        "size": 8,
+        "ARROW": 18,
+        "BOW": 83,
+        "DAGGER": 34,
+        "LONG_SWORD": 54,
+        "MAXOCLASSES": 18,
+        "SCR_IDENTIFY": 336,
+        "GETOBJ_DOWNPLAY": 1,
+        "GETOBJ_EXCLUDE": -3,
+        "pointerSize": 8,
+        "longSize": 8,
+        "intSize": 4,
+        "charSize": 1,
+        "charSigned": 1,
+        "booleanSize": 1,
+        "booleanSigned": 1,
+        "coordxySize": 2,
+        "coordxySigned": 1,
+        "CHAR_BIT": 8,
+        "objectSize": 112,
+        "objectClassSize": 72,
+        "permonstSize": 96,
+        "attackSize": 4,
+        "terrainSize": 8,
+        "anythingSize": 8,
+        "menuItemSize": 24,
+        "obj_otyp": 32,
+        "obj_otyp_size": 2,
+        "obj_oclass": 49,
+        "obj_oclass_size": 1,
+        "obj_invlet": 50,
+        "obj_invlet_size": 1,
+        "obj_oartifact": 51,
+        "obj_oartifact_size": 1,
+        "obj_quan": 40,
+        "obj_quan_size": 8,
+        "obj_spe": 48,
+        "obj_spe_size": 1,
+        "obj_owornmask": 88,
+        "obj_owornmask_size": 8,
+        "obj_cobj": 16,
+        "obj_cobj_size": 8,
+        "obj_oextra": 104,
+        "obj_oextra_size": 8,
+        "extra_oname": 0,
+        "extra_oname_size": 8,
+        "class_oc_uname": 8,
+        "class_oc_uname_size": 8,
+        "class_oc_subtyp": 19,
+        "class_oc_subtyp_size": 1,
+        "pm_mflags1": 72,
+        "pm_mflags1_size": 8,
+        "pm_msize": 67,
+        "pm_msize_size": 1,
+        "pm_mattk": 36,
+        "pm_mattk_size": 24,
+        "attack_aatyp": 0,
+        "attack_aatyp_size": 1,
+        "terrain_typ": 4,
+        "terrain_typ_size": 1,
+        "any_a_int": 0,
+        "any_a_int_size": 4,
+        "menu_item": 0,
+        "menu_item_size": 8,
+        "heroUx": 0,
+        "heroUxSize": 2,
+        "heroUy": 2,
+        "heroUySize": 2,
+        "youmonst": 8,
+        "youmonstSize": 192,
+        "levelTerrain": 1680,
+        "levelTerrainSize": 13440,
+        "zeroany": 304,
+        "zeroanySize": 8,
+        "monsterData": 8,
+        "attackCount": 6,
+        "ALCHEMY_SMOCK": 144,
+        "ALTAR": 32,
+        "AMULET_CLASS": 5,
+        "AMULET_OF_YENDOR": 213,
+        "ARMOR_CLASS": 3,
+        "ART_EYES_OF_THE_OVERWORLD": 26,
+        "ATR_NONE": 0,
+        "AT_WEAP": 254,
+        "BAG_OF_TRICKS": 220,
+        "BEARTRAP": 244,
+        "BELL": 255,
+        "BELL_OF_OPENING": 263,
+        "BLINDFOLD": 233,
+        "BRASS_LANTERN": 226,
+        "BUFSZ": 256,
+        "BULLWHIP": 82,
+        "CANDELABRUM_OF_INVOCATION": 262,
+        "CAN_OF_GREASE": 240,
+        "COIN_CLASS": 12,
+        "COLNO": 80,
+        "CORPSE": 265,
+        "CQ_CANNED": 0,
+        "CREAM_PIE": 287,
+        "CREDIT_CARD": 223,
+        "CRYSTAL_BALL": 231,
+        "DRUM_OF_EARTHQUAKE": 258,
+        "DWARVISH_MATTOCK": 71,
+        "ECMD_OK": 0,
+        "EUCALYPTUS_LEAF": 276,
+        "EXPENSIVE_CAMERA": 229,
+        "FAKE_AMULET_OF_YENDOR": 212,
+        "FIGURINE": 241,
+        "FINGER": 3,
+        "FLINT": 473,
+        "FORTUNE_COOKIE": 289,
+        "GEM_CLASS": 13,
+        "GETOBJ_SUGGEST": 2,
+        "GOLD_PIECE": 438,
+        "GRAPPLING_HOOK": 260,
+        "HAND": 6,
+        "HANDS_SYM": 45,
+        "HAWAIIAN_SHIRT": 136,
+        "HEAVY_IRON_BALL": 477,
+        "HORN_OF_PLENTY": 252,
+        "IA_ADJUST_OBJ": 10,
+        "IA_ADJUST_STACK": 11,
+        "IA_APPLY_OBJ": 2,
+        "IA_BUY_OBJ": 13,
+        "IA_DIP_OBJ": 3,
+        "IA_DROP_OBJ": 6,
+        "IA_EAT_OBJ": 7,
+        "IA_ENGRAVE_OBJ": 8,
+        "IA_FIRE_OBJ": 9,
+        "IA_INVOKE_OBJ": 21,
+        "IA_NAME_OBJ": 4,
+        "IA_NAME_OTYP": 5,
+        "IA_NONE": 0,
+        "IA_QUAFF_OBJ": 14,
+        "IA_QUIVER_OBJ": 15,
+        "IA_READ_OBJ": 16,
+        "IA_RUB_OBJ": 17,
+        "IA_SACRIFICE": 12,
+        "IA_SWAPWEAPON": 24,
+        "IA_TAKEOFF_OBJ": 19,
+        "IA_THROW_OBJ": 18,
+        "IA_TIP_CONTAINER": 20,
+        "IA_TWOWEAPON": 25,
+        "IA_UNWIELD": 1,
+        "IA_WEAR_OBJ": 23,
+        "IA_WHATIS_OBJ": 27,
+        "IA_WIELD_OBJ": 22,
+        "IA_ZAP_OBJ": 26,
+        "LAND_MINE": 243,
+        "LARGE_BOX": 214,
+        "LEASH": 236,
+        "LENSES": 232,
+        "LOADSTONE": 471,
+        "LOCK_PICK": 222,
+        "LUCKSTONE": 470,
+        "M1_NOHANDS": 8192,
+        "MAGIC_LAMP": 228,
+        "MAGIC_MARKER": 242,
+        "MAGIC_WHISTLE": 246,
+        "MEAT_RING": 270,
+        "MENU_BEHAVE_STANDARD": 0,
+        "MENU_ITEMFLAGS_NONE": 0,
+        "MIRROR": 230,
+        "MZ_SMALL": 1,
+        "NHW_MENU": 4,
+        "NO_COLOR": 8,
+        "NUM_OBJECTS": 481,
+        "OIL_LAMP": 227,
+        "PICK_AXE": 259,
+        "PICK_ONE": 1,
+        "POTION_CLASS": 8,
+        "POT_OIL": 321,
+        "P_BOOMERANG": 25,
+        "P_BOW": 20,
+        "P_CROSSBOW": 22,
+        "P_DAGGER": 1,
+        "P_DART": 23,
+        "P_NONE": 0,
+        "P_SABER": 9,
+        "RING_CLASS": 4,
+        "ROWNO": 21,
+        "SADDLE": 235,
+        "SCROLL_CLASS": 9,
+        "SCR_BLANK_PAPER": 365,
+        "SCR_MAIL": 364,
+        "SHOPBASE": 14,
+        "SKELETON_KEY": 221,
+        "SPBOOK_CLASS": 10,
+        "SPE_BLANK_PAPER": 407,
+        "SPE_BOOK_OF_THE_DEAD": 409,
+        "SPE_NOVEL": 408,
+        "STETHOSCOPE": 237,
+        "TALLOW_CANDLE": 224,
+        "TIN": 296,
+        "TINNING_KIT": 238,
+        "TIN_OPENER": 239,
+        "TIN_WHISTLE": 245,
+        "TOOL_CLASS": 6,
+        "TOUCHSTONE": 472,
+        "TOWEL": 234,
+        "T_SHIRT": 137,
+        "UNICORN_HORN": 261,
+        "WAND_CLASS": 11,
+        "WAX_CANDLE": 225,
+        "WEAPON_CLASS": 2,
+        "WOODEN_FLUTE": 247,
+        "W_ACCESSORY": 983040,
+        "W_AMUL": 65536,
+        "W_ARMOR": 127,
+        "W_RING": 393216,
+        "W_TOOL": 524288,
+        "MAIL_STRUCTURES": 1,
+        "ASSERT_ENABLED": 1
+      },
+      "callers": [
+        "dowrite"
+      ],
+      "foreign": {
+        "add_menu": "void (winid, const glyph_info *, const union any *, char, char, int, int, const char *, unsigned int)",
+        "an": "char *(const char *)",
+        "armcat_to_wornmask": "long (int)",
+        "armor_simple_name": "const char *(struct obj *)",
+        "body_part": "const char *(int)",
+        "call_ok": "int (struct obj *)",
+        "carrying": "struct obj *(int)",
+        "check_invent_gold": "boolean (const char *)",
+        "cmdq_add_key": "void (int, char)",
+        "cxname": "char *(struct obj *)",
+        "eos": "char *(char *)",
+        "ia_checkfile": "boolean (struct obj *)",
+        "in_rooms": "char *(coordxy, coordxy, int)",
+        "inhishop": "int (struct monst *)",
+        "is_edible": "boolean (struct obj *)",
+        "makeplural": "char *(const char *)",
+        "name_ok": "int (struct obj *)",
+        "select_menu": "int (winid, int, menu_item **)",
+        "shop_keeper": "struct monst *(char)",
+        "simpleonames": "char *(struct obj *)",
+        "strcpy": "char *(char *, const char *)",
+        "surface": "const char *(coordxy, coordxy)",
+        "the": "char *(const char *)",
+        "the_unique_obj": "boolean (struct obj *)",
+        "undiscovered_artifact": "boolean (xint16)",
+        "wearmask_to_obj": "struct obj *(long)"
+      }
+    },
+    "extralev": {
+      "fieldAliases": {
+        "doormask": "flags",
+        "looted": "flags",
+        "blessedftn": "horizontal",
+        "oc_bimanual": "oc_big"
+      },
+      "globals": [
+        "gr",
+        "svn",
+        "gs",
+        "svr",
+        "svl",
+        "mons"
+      ],
+      "public": {
+        "makeroguerooms": "void (void)",
+        "corr": "void (coordxy, coordxy)",
+        "makerogueghost": "void (void)"
+      },
+      "layout": {
+        "size": 16,
+        "pointerSize": 8,
+        "intSize": 4,
+        "longSize": 8,
+        "CHAR_BIT": 8,
+        "booleanSize": 1,
+        "booleanSigned": 1,
+        "coordxySize": 2,
+        "coordxySigned": 1,
+        "rogueSize": 16,
+        "r_rlx": 0,
+        "r_rlx_size": 2,
+        "r_rly": 2,
+        "r_rly_size": 2,
+        "r_dx": 4,
+        "r_dx_size": 2,
+        "r_dy": 6,
+        "r_dy_size": 2,
+        "r_real": 8,
+        "r_real_size": 1,
+        "r_doortable": 9,
+        "r_doortable_size": 1,
+        "r_nroom": 12,
+        "r_nroom_size": 4,
+        "rOffset": 196,
+        "rColumns": 3,
+        "rRows": 3,
+        "nroomOffset": 44,
+        "nroomSize": 4,
+        "smeqOffset": 16,
+        "smeqSize": 4,
+        "smeqCount": 41,
+        "roomsOffset": 0,
+        "roomSize": 224,
+        "roomCount": 82,
+        "levlOffset": 1680,
+        "terrainSize": 8,
+        "terrainType": 4,
+        "terrainTypeSize": 1,
+        "permonstSize": 96,
+        "monsterSize": 192,
+        "objectSize": 112,
+        "objectQuan": 40,
+        "objectQuanSize": 8,
+        "objectWeight": 36,
+        "objectWeightSize": 4,
+        "objectSpe": 48,
+        "objectSpeSize": 1,
+        "COLNO": 80,
+        "ROWNO": 21,
+        "NUMMONS": 383,
+        "DBWALL": 12,
+        "D_NODOOR": 0,
+        "OROOM": 0,
+        "CORR": 24,
+        "SCORR": 15,
+        "PM_GHOST": 287,
+        "NO_MM_FLAGS": 0,
+        "FOOD_RATION": 293,
+        "MACE": 73,
+        "TWO_HANDED_SWORD": 55,
+        "BOW": 83,
+        "ARROW": 18,
+        "RING_MAIL": 132,
+        "PLATE_MAIL": 121,
+        "FAKE_AMULET_OF_YENDOR": 212
+      },
+      "callers": [
+        "roguejoin",
+        "roguecorr",
+        "miniwalk",
+        "makeroguerooms",
+        "corr",
+        "makerogueghost"
+      ],
+      "foreign": {
+        "add_room": "void (coordxy, coordxy, coordxy, coordxy, boolean, schar, boolean)",
+        "christen_monst": "struct monst *(struct monst *, const char *)",
+        "curse": "void (struct obj *)",
+        "dodoor": "void (coordxy, coordxy, struct mkroom *)",
+        "makemon": "struct monst *(struct permonst *, coordxy, coordxy, mmflags_nht)",
+        "mksobj_at": "struct obj *(int, coordxy, coordxy, boolean, boolean)",
+        "roguename": "const char *(void)",
+        "somex": "int (struct mkroom *)",
+        "somey": "int (struct mkroom *)",
+        "weight": "int (struct obj *)"
+      }
     }
+  },
+  "pagerLookup": {
+    "layout": {
+      "AM_MASK": 7,
+      "AM_SANCTUM": 16,
+      "ARTICLE_NONE": 0,
+      "ATR_NONE": 0,
+      "BEAR_TRAP": 5,
+      "BLINDED": 15,
+      "BOLT_LIM": 8,
+      "BOULDER": 475,
+      "BUFSZ": 256,
+      "CHEST": 215,
+      "CMDQ_KEY": 0,
+      "COIN_CLASS": 12,
+      "COLNO": 80,
+      "CORPSE": 265,
+      "CQ_CANNED": 0,
+      "DEF_INVISIBLE": 73,
+      "DETECT_MONSTERS": 37,
+      "DOOR": 23,
+      "DRAWBRIDGE_UP": 19,
+      "D_BROKEN": 1,
+      "D_CLOSED": 4,
+      "D_TRAPPED": 16,
+      "ECMD_CANCEL": 2,
+      "ECMD_OK": 0,
+      "FALSE": 0,
+      "GLYPH_BODY_OFF": 2299,
+      "GLYPH_INVIS_OFF": 1532,
+      "GLYPH_MON_FEM_OFF": 383,
+      "GLYPH_MON_MALE_OFF": 0,
+      "GLYPH_NOTHING_OFF": 9623,
+      "GLYPH_OBJ_OFF": 3448,
+      "GLYPH_STATUE_MALE_OFF": 7226,
+      "GLYPH_SWALLOW_OFF": 4093,
+      "GLYPH_UNEXPLORED_OFF": 9622,
+      "GLYPH_WARNING_OFF": 7220,
+      "GPCOORDS_COMPASS": 99,
+      "GPCOORDS_MAP": 109,
+      "GPCOORDS_NONE": 110,
+      "GPCOORDS_SCREEN": 115,
+      "GRAVE": 31,
+      "HALLUC": 23,
+      "HALLUC_RES": 24,
+      "HOLE": 13,
+      "ICE": 33,
+      "INVIS": 40,
+      "I_SPECIAL": 536870912,
+      "LARGE_BOX": 214,
+      "LAVAPOOL": 20,
+      "LAVAWALL": 21,
+      "LEASH": 236,
+      "LEVITATION": 48,
+      "LOOK_ONCE": 2,
+      "LOOK_QUICK": 1,
+      "LOOK_VERBOSE": 3,
+      "M1_CONCEAL": 128,
+      "M1_HIDE": 256,
+      "M2_DEMON": 256,
+      "M2_ELF": 16,
+      "M2_HUMAN": 8,
+      "M2_ORC": 128,
+      "MAXMCLASSES": 61,
+      "MAXOCLASSES": 18,
+      "MAXPCHARS": 105,
+      "MELT_ICE_AWAY": 8,
+      "MENU_BEHAVE_STANDARD": 0,
+      "MENU_ITEMFLAGS_NONE": 0,
+      "MG_FLAG_NOOVERRIDE": 1,
+      "MHID_ALTMON": 4,
+      "MHID_ARTICLE": 2,
+      "MHID_PREFIX": 1,
+      "MHID_REGION": 8,
+      "MOAT": 17,
+      "MONSEEN_DETECT": 32,
+      "MONSEEN_INFRAVIS": 4,
+      "MONSEEN_NORMAL": 1,
+      "MONSEEN_SEEINVIS": 2,
+      "MONSEEN_TELEPAT": 8,
+      "MONSEEN_WARNMON": 64,
+      "MONSEEN_XRAYVIS": 16,
+      "M_AP_FURNITURE": 1,
+      "M_AP_F_DKNOWN": 8,
+      "M_AP_MONSTER": 3,
+      "M_AP_NOTHING": 0,
+      "M_AP_OBJECT": 2,
+      "NEUTRAL": 2,
+      "NHW_MENU": 4,
+      "NHW_TEXT": 5,
+      "NO_COLOR": 8,
+      "NO_GLYPH": 9624,
+      "NO_TRAP": 0,
+      "NULL": 0,
+      "NUMMONS": 383,
+      "OBJ_BURIED": 6,
+      "OBJ_FLOOR": 1,
+      "OBJ_FREE": 0,
+      "PICK_ONE": 1,
+      "PIT": 11,
+      "PM_COYOTE": 14,
+      "PM_ELF": 264,
+      "PM_GNOME": 165,
+      "PM_HUMAN": 260,
+      "PM_SAMURAI": 340,
+      "PM_WIZARD": 343,
+      "POOL": 16,
+      "QBUFSZ": 128,
+      "ROCKTRAP": 3,
+      "ROCK_CLASS": 14,
+      "ROOM": 25,
+      "ROWNO": 21,
+      "SCORR": 15,
+      "SDOOR": 14,
+      "SEEK_SET": 0,
+      "SEE_INVIS": 29,
+      "SLIME_MOLD": 285,
+      "STATUE": 476,
+      "STONE": 0,
+      "STRANGE_OBJECT": 0,
+      "STRAT_WAITMASK": 805306368,
+      "SYM_BOULDER": 2,
+      "SYM_HERO_OVERRIDE": 5,
+      "SYM_INVISIBLE": 3,
+      "SYM_MAX": 196,
+      "SYM_NOTHING": 0,
+      "SYM_OFF_M": 123,
+      "SYM_OFF_O": 105,
+      "SYM_OFF_X": 190,
+      "SYM_PET_OVERRIDE": 4,
+      "SYM_UNEXPLORED": 1,
+      "S_EEL": 57,
+      "S_HUMAN": 53,
+      "S_altar": 33,
+      "S_cloud": 47,
+      "S_corr": 22,
+      "S_darkroom": 20,
+      "S_engrcorr": 24,
+      "S_engroom": 21,
+      "S_grave": 34,
+      "S_hwall": 2,
+      "S_ice": 39,
+      "S_invisible": 35,
+      "S_lava": 40,
+      "S_lavawall": 41,
+      "S_ndoor": 12,
+      "S_poisoncloud": 86,
+      "S_pool": 38,
+      "S_room": 19,
+      "S_stone": 0,
+      "S_sw_br": 95,
+      "S_sw_tl": 88,
+      "S_vibrating_square": 71,
+      "S_vwall": 1,
+      "S_water": 48,
+      "TELEPAT": 30,
+      "TER_DETECT": 32,
+      "TER_MAP": 1,
+      "TER_MON": 8,
+      "TER_OBJ": 4,
+      "TOOL_CLASS": 6,
+      "TRAPPED_CHEST": 25,
+      "TRAPPED_DOOR": 24,
+      "TREE": 13,
+      "TRUE": 1,
+      "VENOM_CLASS": 17,
+      "VIBRATING_SQUARE": 23,
+      "WARNCOUNT": 6,
+      "WATER": 18,
+      "WEB": 18,
+      "WIN_ERR": -1,
+      "remembered_text": 1,
+      "pointerSize": 8,
+      "longSize": 8,
+      "coordSize": 4,
+      "coordxySize": 2,
+      "booleanSize": 1,
+      "nhsymSize": 1,
+      "charSigned": 1,
+      "anySize": 8,
+      "menuSize": 24,
+      "glyphinfoSize": 48,
+      "commandSize": 32,
+      "pooltypeSize": 40,
+      "lookBufSize": 256
+    },
+    "meta": {
+      "records": {
+        "monster": [
+          "struct monst",
+          [
+            "data",
+            "mappearance",
+            "mundetected",
+            "mx",
+            "my",
+            "isshk",
+            "m_ap_type",
+            "mfrozen",
+            "mleashed",
+            "mpeaceful",
+            "msleeping",
+            "mstrategy",
+            "mtame",
+            "mtrapped",
+            "female"
+          ]
+        ],
+        "permonst": [
+          "struct permonst",
+          [
+            "mlet",
+            "mflags1",
+            "mflags2",
+            "pmnames"
+          ]
+        ],
+        "object": [
+          "struct obj",
+          [
+            "corpsenm",
+            "dknown",
+            "leashmon",
+            "no_charge",
+            "nobj",
+            "oclass",
+            "otyp",
+            "ox",
+            "oy",
+            "quan",
+            "spe",
+            "timed",
+            "where",
+            "invlet"
+          ]
+        ],
+        "trap": [
+          "struct trap",
+          [
+            "ntrap",
+            "tx",
+            "ty",
+            "tseen",
+            "ttyp",
+            "madeby_u"
+          ]
+        ],
+        "coord": [
+          "coord",
+          [
+            "x",
+            "y"
+          ]
+        ],
+        "level": [
+          "d_level",
+          [
+            "dnum",
+            "dlevel"
+          ]
+        ],
+        "menu": [
+          "menu_item",
+          [
+            "item",
+            "count"
+          ]
+        ],
+        "any": [
+          "anything",
+          [
+            "a_int",
+            "a_char"
+          ]
+        ],
+        "region": [
+          "NhRegion",
+          [
+            "glyph"
+          ]
+        ],
+        "engr": [
+          "struct engr",
+          [
+            "eread",
+            "engr_x",
+            "engr_y",
+            "engr_txt"
+          ]
+        ],
+        "glyphinfo": [
+          "glyph_info",
+          [
+            "glyph",
+            "ttychar"
+          ]
+        ],
+        "command": [
+          "struct _cmd_queue",
+          [
+            "typ",
+            "key"
+          ]
+        ],
+        "objclass": [
+          "struct objclass",
+          [
+            "oc_name_idx",
+            "oc_class"
+          ]
+        ],
+        "objdescr": [
+          "struct objdescr",
+          [
+            "oc_name",
+            "oc_descr"
+          ]
+        ],
+        "rm": [
+          "struct rm",
+          [
+            "typ",
+            "seenv",
+            "glyph",
+            "doormask"
+          ]
+        ],
+        "symdef": [
+          "struct symdef",
+          [
+            "sym",
+            "explanation"
+          ]
+        ],
+        "classsym": [
+          "struct class_sym",
+          [
+            "sym",
+            "explain"
+          ]
+        ]
+      },
+      "ptrfields": {
+        "monster.data": "permonst",
+        "object.nobj": "object",
+        "trap.ntrap": "trap",
+        "permonst.pmnames": "chararray",
+        "engr.engr_txt": "chararray"
+      },
+      "addressfields": {
+        "menu.item": "any"
+      },
+      "longfields": {
+        "monster.mstrategy": "u",
+        "permonst.mflags1": "u",
+        "permonst.mflags2": "u",
+        "object.quan": "l",
+        "menu.count": "l"
+      },
+      "globalfields": [
+        "EDetect_monsters",
+        "EHalluc_resistance",
+        "WIN_MESSAGE",
+        "flags.help",
+        "flags.lootabc",
+        "flags.showrace",
+        "flags.verbose",
+        "gd.decor_levitate_override",
+        "gf.ftrap",
+        "gi.invent",
+        "gu.urace.adj",
+        "iflags.altmeta",
+        "iflags.getpos_coords",
+        "iflags.ice_rating",
+        "iflags.save_uswallow",
+        "iflags.terrainmode",
+        "program_state.gameover",
+        "something",
+        "svc.context.current_fruit",
+        "svc.context.warntype.obj",
+        "svc.context.warntype.polyd",
+        "svl.level.buriedobjlist",
+        "svl.level.flags.hero_memory",
+        "svp.plname",
+        "sysopt.fmtd_wizard_list",
+        "sysopt.hideusage",
+        "sysopt.support",
+        "u.dx",
+        "u.dy",
+        "u.dz",
+        "u.umonnum",
+        "u.uswallow",
+        "u.utrap",
+        "u.uundetected",
+        "u.ux",
+        "u.uy",
+        "u.xray_range"
+      ],
+      "globalpointers": {
+        "gf.ftrap": "trap",
+        "gi.invent": "object",
+        "svl.level.buriedobjlist": "object",
+        "gu.urace.adj": "pointer",
+        "svp.plname": "pointer",
+        "sysopt.support": "pointer",
+        "sysopt.fmtd_wizard_list": "pointer",
+        "something": "pointer"
+      },
+      "globallongs": [
+        "EDetect_monsters",
+        "EHalluc_resistance",
+        "svc.context.warntype.obj",
+        "svc.context.warntype.polyd"
+      ],
+      "addresses": {
+        "gy.youmonst": "monster",
+        "cg.zeroany": "any",
+        "u.ustuck": "monster*",
+        "u.usteed": "monster*",
+        "u.uz": "level",
+        "qstart_level": "level",
+        "nul_glyphinfo": "glyphinfo",
+        "uball": "object*"
+      },
+      "hero": [
+        "Blind",
+        "Detect_monsters",
+        "Hallucination",
+        "Infravision",
+        "Inhell",
+        "Invis",
+        "Invisible",
+        "Levitation",
+        "Punished",
+        "U_AP_TYPE",
+        "Ugender",
+        "Unblind_telepat",
+        "Underwater",
+        "Upolyd",
+        "wizard"
+      ],
+      "stringconstants": [
+        "DATAFILE",
+        "DEBUGHELP",
+        "DEVTEAM_EMAIL",
+        "DEVTEAM_URL",
+        "HELP",
+        "HISTORY",
+        "KEYHELP",
+        "LICENSE",
+        "OPTIONFILE",
+        "OPTMENUHELP",
+        "PORT_ID",
+        "SHELP",
+        "USAGEHELP"
+      ],
+      "dependencies": {
+        "Amask2align": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "IS_GRAVE": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "IS_TREE": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "IS_WALL": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "IS_WATERWALL": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "Is_airlevel": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "d_level*"
+            }
+          ]
+        },
+        "Is_astralevel": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "d_level*"
+            }
+          ]
+        },
+        "Is_juiblex_level": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "d_level*"
+            }
+          ]
+        },
+        "Is_medusa_level": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "d_level*"
+            }
+          ]
+        },
+        "Is_qstart": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "d_level*"
+            }
+          ]
+        },
+        "Is_rogue_level": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "d_level*"
+            }
+          ]
+        },
+        "Is_waterlevel": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "d_level*"
+            }
+          ]
+        },
+        "MCORPSENM": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct monst*"
+            }
+          ]
+        },
+        "M_AP_FLAG": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct monst*"
+            }
+          ]
+        },
+        "M_AP_TYPE": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct monst*"
+            }
+          ]
+        },
+        "Mgender": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct monst *"
+            }
+          ]
+        },
+        "OBJ_NAME": {
+          "ret": "const char*",
+          "args": [
+            {
+              "qualType": "struct objclass"
+            }
+          ]
+        },
+        "Race_if": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "Role_if": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "SURFACE_AT": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "coordxy"
+            },
+            {
+              "qualType": "coordxy"
+            }
+          ]
+        },
+        "Strcat": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *restrict"
+            },
+            {
+              "qualType": "const char *restrict"
+            }
+          ]
+        },
+        "Strcpy": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *restrict"
+            },
+            {
+              "qualType": "const char *restrict"
+            }
+          ]
+        },
+        "abs": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "add_menu": {
+          "ret": "void",
+          "args": [
+            {
+              "desugaredQualType": "int",
+              "qualType": "winid",
+              "typeAliasDeclId": "0xbeac1bbd0"
+            },
+            {
+              "qualType": "const glyph_info *"
+            },
+            {
+              "qualType": "const union any *"
+            },
+            {
+              "qualType": "char"
+            },
+            {
+              "qualType": "char"
+            },
+            {
+              "qualType": "int"
+            },
+            {
+              "qualType": "int"
+            },
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "unsigned int"
+            }
+          ]
+        },
+        "add_menu_str": {
+          "ret": "void",
+          "args": [
+            {
+              "desugaredQualType": "int",
+              "qualType": "winid",
+              "typeAliasDeclId": "0xbeac1bbd0"
+            },
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "align_str": {
+          "ret": "const char *",
+          "args": [
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "aligntyp",
+              "typeAliasDeclId": "0xbeae49b10"
+            }
+          ]
+        },
+        "altarmask_at": {
+          "ret": "int",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "an": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "ansimpleoname": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "struct obj *"
+            }
+          ]
+        },
+        "cansee": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "coordxy"
+            },
+            {
+              "qualType": "coordxy"
+            }
+          ]
+        },
+        "canspotself": {
+          "ret": "int",
+          "args": []
+        },
+        "ceiling_hider": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct permonst*"
+            }
+          ]
+        },
+        "closed_door": {
+          "ret": "boolean",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "cmap_to_glyph": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "cmd_from_func": {
+          "ret": "char",
+          "args": [
+            {
+              "qualType": "int (*)(void)"
+            }
+          ]
+        },
+        "cmdname_from_func": {
+          "ret": "const char *",
+          "args": [
+            {
+              "qualType": "int (*)(void)"
+            },
+            {
+              "qualType": "char *"
+            },
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "boolean",
+              "typeAliasDeclId": "0xbeae17290"
+            }
+          ]
+        },
+        "cmdq_clear": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "cmdq_pop": {
+          "ret": "struct _cmd_queue *",
+          "args": []
+        },
+        "coord_desc": {
+          "ret": "char *",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "qualType": "char *"
+            },
+            {
+              "qualType": "char"
+            }
+          ]
+        },
+        "copynchars": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "char *"
+            },
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "costly_spot": {
+          "ret": "boolean",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "couldsee": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "coordxy"
+            },
+            {
+              "qualType": "coordxy"
+            }
+          ]
+        },
+        "coyotename": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "struct monst *"
+            },
+            {
+              "qualType": "char *"
+            }
+          ]
+        },
+        "create_nhwindow": {
+          "ret": "winid",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "dealloc_obj": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "struct obj *"
+            }
+          ]
+        },
+        "decode_mixed": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *"
+            },
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "destroy_nhwindow": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "winid"
+            }
+          ]
+        },
+        "digests": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct permonst*"
+            }
+          ]
+        },
+        "digit": {
+          "ret": "boolean",
+          "args": [
+            {
+              "qualType": "char"
+            }
+          ]
+        },
+        "display_file": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "const char*"
+            },
+            {
+              "qualType": "boolean"
+            }
+          ]
+        },
+        "display_inventory": {
+          "ret": "char",
+          "args": [
+            {
+              "qualType": "const char *"
+            },
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "boolean",
+              "typeAliasDeclId": "0xbeae17290"
+            }
+          ]
+        },
+        "display_nhwindow": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "winid"
+            },
+            {
+              "qualType": "boolean"
+            }
+          ]
+        },
+        "distant_monnam": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "struct monst *"
+            },
+            {
+              "qualType": "int"
+            },
+            {
+              "qualType": "char *"
+            }
+          ]
+        },
+        "distant_name": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "struct obj *"
+            },
+            {
+              "qualType": "char *(*)(struct obj *)"
+            }
+          ]
+        },
+        "distu": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "coordxy"
+            },
+            {
+              "qualType": "coordxy"
+            }
+          ]
+        },
+        "dlb_fclose": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "FILE *"
+            }
+          ]
+        },
+        "dlb_fgets": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *restrict"
+            },
+            {
+              "qualType": "int"
+            },
+            {
+              "qualType": "FILE *restrict"
+            }
+          ]
+        },
+        "dlb_fopen": {
+          "ret": "FILE *",
+          "args": [
+            {
+              "qualType": "const char *restrict"
+            },
+            {
+              "qualType": "const char *restrict"
+            }
+          ]
+        },
+        "dlb_fseek": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "FILE *"
+            },
+            {
+              "qualType": "long"
+            },
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "doextlist": {
+          "ret": "int",
+          "args": []
+        },
+        "doextversion": {
+          "ret": "int",
+          "args": []
+        },
+        "dumplogmsg": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "encglyph": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "end_menu": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "winid"
+            },
+            {
+              "qualType": "const char*"
+            }
+          ]
+        },
+        "engr_at": {
+          "ret": "struct engr *",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "engraving_to_glyph": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct engr*"
+            }
+          ]
+        },
+        "eos": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *"
+            }
+          ]
+        },
+        "free": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "void *"
+            }
+          ]
+        },
+        "fruit_from_name": {
+          "ret": "struct fruit *",
+          "args": [
+            {
+              "qualType": "const char *"
+            },
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "boolean",
+              "typeAliasDeclId": "0xbeae17290"
+            },
+            {
+              "qualType": "int *"
+            }
+          ]
+        },
+        "getdir": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "getlin": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "char *"
+            }
+          ]
+        },
+        "getpos": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "coord *"
+            },
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "boolean",
+              "typeAliasDeclId": "0xbeae17290"
+            },
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "glyph_at": {
+          "ret": "int",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "glyph_is_body": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_is_cmap": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_is_invisible": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_is_monster": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_is_nothing": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_is_object": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_is_statue": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_is_trap": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_is_unexplored": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_is_warning": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_to_body_corpsenm": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_to_cmap": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_to_obj": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_to_statue_corpsenm": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_to_trap": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "glyph_to_warning": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "has_mcorpsenm": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct monst*"
+            }
+          ]
+        },
+        "hides_under": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct permonst*"
+            }
+          ]
+        },
+        "hliquid": {
+          "ret": "const char *",
+          "args": [
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "howmonseen": {
+          "ret": "unsigned int",
+          "args": [
+            {
+              "qualType": "struct monst *"
+            }
+          ]
+        },
+        "introff": {
+          "ret": "void",
+          "args": []
+        },
+        "intron": {
+          "ret": "void",
+          "args": []
+        },
+        "is_cmap_drawbridge": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "is_cmap_engraving": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "is_cmap_trap": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "is_drawbridge_wall": {
+          "ret": "int",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "is_hider": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct permonst*"
+            }
+          ]
+        },
+        "is_hole": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "is_lava": {
+          "ret": "boolean",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "is_obj_mappear": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct monst*"
+            },
+            {
+              "qualType": "unsigned"
+            }
+          ]
+        },
+        "is_orc": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct permonst*"
+            }
+          ]
+        },
+        "is_pit": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "is_pool": {
+          "ret": "boolean",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "is_treefruit": {
+          "ret": "boolean",
+          "args": [
+            {
+              "qualType": "struct obj *"
+            }
+          ]
+        },
+        "isok": {
+          "ret": "int",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "key2extcmddesc": {
+          "ret": "const char *",
+          "args": [
+            {
+              "desugaredQualType": "unsigned char",
+              "qualType": "uchar",
+              "typeAliasDeclId": "0xbead97cb8"
+            }
+          ]
+        },
+        "key2txt": {
+          "ret": "char *",
+          "args": [
+            {
+              "desugaredQualType": "unsigned char",
+              "qualType": "uchar",
+              "typeAliasDeclId": "0xbead97cb8"
+            },
+            {
+              "qualType": "char *"
+            }
+          ]
+        },
+        "lcase": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *"
+            }
+          ]
+        },
+        "makeplural": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "makesingular": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "map_glyphinfo": {
+          "ret": "void",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "qualType": "int"
+            },
+            {
+              "qualType": "unsigned int"
+            },
+            {
+              "qualType": "glyph_info *"
+            }
+          ]
+        },
+        "memcpy": {
+          "ret": "void *",
+          "args": [
+            {
+              "qualType": "void *restrict"
+            },
+            {
+              "qualType": "const void *restrict"
+            },
+            {
+              "desugaredQualType": "unsigned long",
+              "qualType": "size_t",
+              "typeAliasDeclId": "0xbeacfc918"
+            }
+          ]
+        },
+        "mkobj": {
+          "ret": "struct obj *",
+          "args": [
+            {
+              "qualType": "int"
+            },
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "boolean",
+              "typeAliasDeclId": "0xbeae17290"
+            }
+          ]
+        },
+        "mksobj": {
+          "ret": "struct obj *",
+          "args": [
+            {
+              "qualType": "int"
+            },
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "boolean",
+              "typeAliasDeclId": "0xbeae17290"
+            },
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "boolean",
+              "typeAliasDeclId": "0xbeae17290"
+            }
+          ]
+        },
+        "mon_nam": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "struct monst *"
+            }
+          ]
+        },
+        "mon_to_glyph": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct monst*"
+            },
+            {
+              "qualType": "int(*)(int)"
+            }
+          ]
+        },
+        "mungspaces": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *"
+            }
+          ]
+        },
+        "next2u": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "coordxy"
+            },
+            {
+              "qualType": "coordxy"
+            }
+          ]
+        },
+        "obj_stop_timers": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "struct obj *"
+            }
+          ]
+        },
+        "observe_object": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "struct obj *"
+            }
+          ]
+        },
+        "ok_to_quest": {
+          "ret": "boolean",
+          "args": []
+        },
+        "on_level": {
+          "ret": "boolean",
+          "args": [
+            {
+              "qualType": "d_level *"
+            },
+            {
+              "qualType": "d_level *"
+            }
+          ]
+        },
+        "pmatch": {
+          "ret": "boolean",
+          "args": [
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "pmname": {
+          "ret": "const char *",
+          "args": [
+            {
+              "qualType": "struct permonst *"
+            },
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "putmixed": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "winid"
+            },
+            {
+              "qualType": "int"
+            },
+            {
+              "qualType": "const char*"
+            }
+          ]
+        },
+        "putstr": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "winid"
+            },
+            {
+              "qualType": "int"
+            },
+            {
+              "qualType": "const char*"
+            }
+          ]
+        },
+        "rndmonnam": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *"
+            }
+          ]
+        },
+        "select_menu": {
+          "ret": "int",
+          "args": [
+            {
+              "desugaredQualType": "int",
+              "qualType": "winid",
+              "typeAliasDeclId": "0xbeac1bbd0"
+            },
+            {
+              "qualType": "int"
+            },
+            {
+              "qualType": "menu_item **"
+            }
+          ]
+        },
+        "senseself": {
+          "ret": "int",
+          "args": []
+        },
+        "show_menu_controls": {
+          "ret": "void",
+          "args": [
+            {
+              "desugaredQualType": "int",
+              "qualType": "winid",
+              "typeAliasDeclId": "0xbeac1bbd0"
+            },
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "boolean",
+              "typeAliasDeclId": "0xbeae17290"
+            }
+          ]
+        },
+        "simpleonames": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "struct obj *"
+            }
+          ]
+        },
+        "singular": {
+          "ret": "const char *",
+          "args": [
+            {
+              "qualType": "struct obj *"
+            },
+            {
+              "qualType": "char *(*)(struct obj *)"
+            }
+          ]
+        },
+        "sobj_at": {
+          "ret": "struct obj *",
+          "args": [
+            {
+              "qualType": "int"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "spot_time_left": {
+          "ret": "long",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "qualType": "short"
+            }
+          ]
+        },
+        "start_menu": {
+          "ret": "void",
+          "args": [
+            {
+              "qualType": "winid"
+            },
+            {
+              "qualType": "unsigned long"
+            }
+          ]
+        },
+        "sticks": {
+          "ret": "boolean",
+          "args": [
+            {
+              "qualType": "struct permonst *"
+            }
+          ]
+        },
+        "strchr": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "strcmp": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "strcmpi": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "const char*"
+            },
+            {
+              "qualType": "const char*"
+            }
+          ]
+        },
+        "strcpy": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *restrict"
+            },
+            {
+              "qualType": "const char *restrict"
+            }
+          ]
+        },
+        "strip_newline": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *"
+            }
+          ]
+        },
+        "strkitten": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *"
+            },
+            {
+              "qualType": "char"
+            }
+          ]
+        },
+        "strlen": {
+          "ret": "unsigned long",
+          "args": [
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "strncat": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *restrict"
+            },
+            {
+              "qualType": "const char *restrict"
+            },
+            {
+              "desugaredQualType": "unsigned long",
+              "qualType": "size_t",
+              "typeAliasDeclId": "0xbeacfc918"
+            }
+          ]
+        },
+        "strncmp": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "const char *"
+            },
+            {
+              "desugaredQualType": "unsigned long",
+              "qualType": "size_t",
+              "typeAliasDeclId": "0xbeacfc918"
+            }
+          ]
+        },
+        "strncmpi": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "int"
+            }
+          ]
+        },
+        "strstri": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "strsubst": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *"
+            },
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "surface": {
+          "ret": "const char *",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "t_at": {
+          "ret": "struct trap *",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "tabexpand": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *"
+            }
+          ]
+        },
+        "the": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "const char *"
+            }
+          ]
+        },
+        "trap_predicament": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *"
+            },
+            {
+              "qualType": "int"
+            },
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "boolean",
+              "typeAliasDeclId": "0xbeae17290"
+            }
+          ]
+        },
+        "trap_to_glyph": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "struct trap*"
+            }
+          ]
+        },
+        "trapname": {
+          "ret": "const char *",
+          "args": [
+            {
+              "qualType": "int"
+            },
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "boolean",
+              "typeAliasDeclId": "0xbeae17290"
+            }
+          ]
+        },
+        "trapped_chest_at": {
+          "ret": "boolean",
+          "args": [
+            {
+              "qualType": "int"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "trapped_door_at": {
+          "ret": "boolean",
+          "args": [
+            {
+              "qualType": "int"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "u_at": {
+          "ret": "int",
+          "args": [
+            {
+              "qualType": "coordxy"
+            },
+            {
+              "qualType": "coordxy"
+            }
+          ]
+        },
+        "upstart": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char *"
+            }
+          ]
+        },
+        "visctrl": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "char"
+            }
+          ]
+        },
+        "visible_region_at": {
+          "ret": "NhRegion *",
+          "args": [
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            },
+            {
+              "desugaredQualType": "short",
+              "qualType": "coordxy",
+              "typeAliasDeclId": "0xbeae17158"
+            }
+          ]
+        },
+        "y_monnam": {
+          "ret": "char *",
+          "args": [
+            {
+              "qualType": "struct monst *"
+            }
+          ]
+        },
+        "y_n": {
+          "ret": "char",
+          "args": [
+            {
+              "qualType": "const char*"
+            }
+          ]
+        },
+        "yn_function": {
+          "ret": "char",
+          "args": [
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "const char *"
+            },
+            {
+              "qualType": "char"
+            },
+            {
+              "desugaredQualType": "signed char",
+              "qualType": "boolean",
+              "typeAliasDeclId": "0xbeae17290"
+            }
+          ]
+        }
+      },
+      "functions": {
+        "is_swallow_sym": {
+          "type": {
+            "qualType": "boolean (int)"
+          },
+          "args": [
+            [
+              "c",
+              {
+                "qualType": "int"
+              }
+            ]
+          ]
+        },
+        "append_str": {
+          "type": {
+            "qualType": "int (char *, const char *)"
+          },
+          "args": [
+            [
+              "buf",
+              {
+                "qualType": "char *"
+              }
+            ],
+            [
+              "new_str",
+              {
+                "qualType": "const char *"
+              }
+            ]
+          ]
+        },
+        "self_lookat": {
+          "type": {
+            "qualType": "char *(char *)"
+          },
+          "args": [
+            [
+              "outbuf",
+              {
+                "qualType": "char *"
+              }
+            ]
+          ]
+        },
+        "monhealthdescr": {
+          "type": {
+            "qualType": "char *(struct monst *, boolean, char *)"
+          },
+          "args": [
+            [
+              "mon",
+              {
+                "qualType": "struct monst *"
+              }
+            ],
+            [
+              "addspace",
+              {
+                "desugaredQualType": "signed char",
+                "qualType": "boolean",
+                "typeAliasDeclId": "0xbeae17290"
+              }
+            ],
+            [
+              "outbuf",
+              {
+                "qualType": "char *"
+              }
+            ]
+          ]
+        },
+        "trap_description": {
+          "type": {
+            "qualType": "void (char *, int, coordxy, coordxy)"
+          },
+          "args": [
+            [
+              "outbuf",
+              {
+                "qualType": "char *"
+              }
+            ],
+            [
+              "tnum",
+              {
+                "qualType": "int"
+              }
+            ],
+            [
+              "x",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "y",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ]
+          ]
+        },
+        "mhidden_description": {
+          "type": {
+            "qualType": "void (struct monst *, unsigned int, char *)"
+          },
+          "args": [
+            [
+              "mon",
+              {
+                "qualType": "struct monst *"
+              }
+            ],
+            [
+              "mhid_flags",
+              {
+                "qualType": "unsigned int"
+              }
+            ],
+            [
+              "outbuf",
+              {
+                "qualType": "char *"
+              }
+            ]
+          ]
+        },
+        "object_from_map": {
+          "type": {
+            "qualType": "boolean (int, coordxy, coordxy, struct obj **)"
+          },
+          "args": [
+            [
+              "glyph",
+              {
+                "qualType": "int"
+              }
+            ],
+            [
+              "x",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "y",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "obj_p",
+              {
+                "qualType": "struct obj **"
+              }
+            ]
+          ]
+        },
+        "look_at_object": {
+          "type": {
+            "qualType": "void (char *, coordxy, coordxy, int)"
+          },
+          "args": [
+            [
+              "buf",
+              {
+                "qualType": "char *"
+              }
+            ],
+            [
+              "x",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "y",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "glyph",
+              {
+                "qualType": "int"
+              }
+            ]
+          ]
+        },
+        "look_at_monster": {
+          "type": {
+            "qualType": "void (char *, char *, struct monst *, coordxy, coordxy)"
+          },
+          "args": [
+            [
+              "buf",
+              {
+                "qualType": "char *"
+              }
+            ],
+            [
+              "monbuf",
+              {
+                "qualType": "char *"
+              }
+            ],
+            [
+              "mtmp",
+              {
+                "qualType": "struct monst *"
+              }
+            ],
+            [
+              "x",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "y",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ]
+          ]
+        },
+        "waterbody_name": {
+          "type": {
+            "qualType": "const char *(coordxy, coordxy)"
+          },
+          "args": [
+            [
+              "x",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "y",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ]
+          ]
+        },
+        "ice_descr": {
+          "type": {
+            "qualType": "char *(coordxy, coordxy, char *)"
+          },
+          "args": [
+            [
+              "x",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "y",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "outbuf",
+              {
+                "qualType": "char *"
+              }
+            ]
+          ]
+        },
+        "lookat": {
+          "type": {
+            "qualType": "struct permonst *(coordxy, coordxy, char *, char *)"
+          },
+          "args": [
+            [
+              "x",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "y",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "buf",
+              {
+                "qualType": "char *"
+              }
+            ],
+            [
+              "monbuf",
+              {
+                "qualType": "char *"
+              }
+            ]
+          ]
+        },
+        "ia_checkfile": {
+          "type": {
+            "qualType": "boolean (struct obj *)"
+          },
+          "args": [
+            [
+              "otmp",
+              {
+                "qualType": "struct obj *"
+              }
+            ]
+          ]
+        },
+        "checkfile": {
+          "type": {
+            "qualType": "boolean (char *, struct permonst *, unsigned int, char *)"
+          },
+          "args": [
+            [
+              "inp",
+              {
+                "qualType": "char *"
+              }
+            ],
+            [
+              "pm",
+              {
+                "qualType": "struct permonst *"
+              }
+            ],
+            [
+              "chkflags",
+              {
+                "qualType": "unsigned int"
+              }
+            ],
+            [
+              "supplemental_name",
+              {
+                "qualType": "char *"
+              }
+            ]
+          ]
+        },
+        "add_cmap_descr": {
+          "type": {
+            "qualType": "int (int, int, int, int, coord, const char *, const char *, boolean *, const char **, char *)"
+          },
+          "args": [
+            [
+              "found",
+              {
+                "qualType": "int"
+              }
+            ],
+            [
+              "idx",
+              {
+                "qualType": "int"
+              }
+            ],
+            [
+              "glyph",
+              {
+                "qualType": "int"
+              }
+            ],
+            [
+              "article",
+              {
+                "qualType": "int"
+              }
+            ],
+            [
+              "cc",
+              {
+                "desugaredQualType": "struct nhcoord",
+                "qualType": "coord",
+                "typeAliasDeclId": "0xbeae176b8"
+              }
+            ],
+            [
+              "x_str",
+              {
+                "qualType": "const char *"
+              }
+            ],
+            [
+              "prefix",
+              {
+                "qualType": "const char *"
+              }
+            ],
+            [
+              "hit_trap",
+              {
+                "qualType": "boolean *"
+              }
+            ],
+            [
+              "firstmatch",
+              {
+                "qualType": "const char **"
+              }
+            ],
+            [
+              "out_str",
+              {
+                "qualType": "char *"
+              }
+            ]
+          ]
+        },
+        "do_screen_description": {
+          "type": {
+            "qualType": "int (coord, boolean, int, char *, const char **, struct permonst **)"
+          },
+          "args": [
+            [
+              "cc",
+              {
+                "desugaredQualType": "struct nhcoord",
+                "qualType": "coord",
+                "typeAliasDeclId": "0xbeae176b8"
+              }
+            ],
+            [
+              "looked",
+              {
+                "desugaredQualType": "signed char",
+                "qualType": "boolean",
+                "typeAliasDeclId": "0xbeae17290"
+              }
+            ],
+            [
+              "sym",
+              {
+                "qualType": "int"
+              }
+            ],
+            [
+              "out_str",
+              {
+                "qualType": "char *"
+              }
+            ],
+            [
+              "firstmatch",
+              {
+                "qualType": "const char **"
+              }
+            ],
+            [
+              "for_supplement",
+              {
+                "qualType": "struct permonst **"
+              }
+            ]
+          ]
+        },
+        "add_quoted_engraving": {
+          "type": {
+            "qualType": "boolean (coordxy, coordxy, char *, boolean)"
+          },
+          "args": [
+            [
+              "x",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "y",
+              {
+                "desugaredQualType": "short",
+                "qualType": "coordxy",
+                "typeAliasDeclId": "0xbeae17158"
+              }
+            ],
+            [
+              "buf",
+              {
+                "qualType": "char *"
+              }
+            ],
+            [
+              "force",
+              {
+                "desugaredQualType": "signed char",
+                "qualType": "boolean",
+                "typeAliasDeclId": "0xbeae17290"
+              }
+            ]
+          ]
+        },
+        "do_look": {
+          "type": {
+            "qualType": "int (int, coord *)"
+          },
+          "args": [
+            [
+              "mode",
+              {
+                "qualType": "int"
+              }
+            ],
+            [
+              "click_cc",
+              {
+                "qualType": "coord *"
+              }
+            ]
+          ]
+        },
+        "look_region_nearby": {
+          "type": {
+            "qualType": "void (coordxy *, coordxy *, coordxy *, coordxy *, boolean)"
+          },
+          "args": [
+            [
+              "lo_x",
+              {
+                "qualType": "coordxy *"
+              }
+            ],
+            [
+              "lo_y",
+              {
+                "qualType": "coordxy *"
+              }
+            ],
+            [
+              "hi_x",
+              {
+                "qualType": "coordxy *"
+              }
+            ],
+            [
+              "hi_y",
+              {
+                "qualType": "coordxy *"
+              }
+            ],
+            [
+              "nearby",
+              {
+                "desugaredQualType": "signed char",
+                "qualType": "boolean",
+                "typeAliasDeclId": "0xbeae17290"
+              }
+            ]
+          ]
+        },
+        "look_all": {
+          "type": {
+            "qualType": "void (boolean, boolean)"
+          },
+          "args": [
+            [
+              "nearby",
+              {
+                "desugaredQualType": "signed char",
+                "qualType": "boolean",
+                "typeAliasDeclId": "0xbeae17290"
+              }
+            ],
+            [
+              "do_mons",
+              {
+                "desugaredQualType": "signed char",
+                "qualType": "boolean",
+                "typeAliasDeclId": "0xbeae17290"
+              }
+            ]
+          ]
+        },
+        "look_traps": {
+          "type": {
+            "qualType": "void (boolean)"
+          },
+          "args": [
+            [
+              "nearby",
+              {
+                "desugaredQualType": "signed char",
+                "qualType": "boolean",
+                "typeAliasDeclId": "0xbeae17290"
+              }
+            ]
+          ]
+        },
+        "look_engrs": {
+          "type": {
+            "qualType": "void (boolean)"
+          },
+          "args": [
+            [
+              "nearby",
+              {
+                "desugaredQualType": "signed char",
+                "qualType": "boolean",
+                "typeAliasDeclId": "0xbeae17290"
+              }
+            ]
+          ]
+        },
+        "do_supplemental_info": {
+          "type": {
+            "qualType": "void (char *, struct permonst *, boolean)"
+          },
+          "args": [
+            [
+              "name",
+              {
+                "qualType": "char *"
+              }
+            ],
+            [
+              "pm",
+              {
+                "qualType": "struct permonst *"
+              }
+            ],
+            [
+              "without_asking",
+              {
+                "desugaredQualType": "signed char",
+                "qualType": "boolean",
+                "typeAliasDeclId": "0xbeae17290"
+              }
+            ]
+          ]
+        },
+        "dowhatis": {
+          "type": {
+            "qualType": "int (void)"
+          },
+          "args": []
+        },
+        "doquickwhatis": {
+          "type": {
+            "qualType": "int (void)"
+          },
+          "args": []
+        },
+        "doidtrap": {
+          "type": {
+            "qualType": "int (void)"
+          },
+          "args": []
+        },
+        "whatdoes_help": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "dowhatdoes_core": {
+          "type": {
+            "qualType": "char *(char, char *)"
+          },
+          "args": [
+            [
+              "q",
+              {
+                "qualType": "char"
+              }
+            ],
+            [
+              "cbuf",
+              {
+                "qualType": "char *"
+              }
+            ]
+          ]
+        },
+        "dowhatdoes": {
+          "type": {
+            "qualType": "int (void)"
+          },
+          "args": []
+        },
+        "docontact": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "dispfile_help": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "dispfile_shelp": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "dispfile_optionfile": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "dispfile_optmenu": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "dispfile_license": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "dispfile_debughelp": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "dispfile_usagehelp": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "hmenu_doextversion": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "hmenu_dohistory": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "hmenu_dowhatis": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "hmenu_dowhatdoes": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "hmenu_doextlist": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "domenucontrols": {
+          "type": {
+            "qualType": "void (void)"
+          },
+          "args": []
+        },
+        "dohelp": {
+          "type": {
+            "qualType": "int (void)"
+          },
+          "args": []
+        },
+        "setopt_cmd": {
+          "type": {
+            "qualType": "char *(char *)"
+          },
+          "args": [
+            [
+              "outbuf",
+              {
+                "qualType": "char *"
+              }
+            ]
+          ]
+        },
+        "dohistory": {
+          "type": {
+            "qualType": "int (void)"
+          },
+          "args": []
+        }
+      },
+      "arrays": {
+        "mons": "&mons[i]",
+        "objects": "&objects[i]",
+        "obj_descr": "&obj_descr[i]",
+        "levl": "&levl[i][j]",
+        "defsyms": "&defsyms[i]",
+        "def_warnsyms": "&def_warnsyms[i]",
+        "def_monsyms": "&def_monsyms[i]",
+        "def_oc_syms": "&def_oc_syms[i]",
+        "gs.showsyms": "&gs.showsyms[i]",
+        "go.ov_primary_syms": "&go.ov_primary_syms[i]",
+        "go.ov_rogue_syms": "&go.ov_rogue_syms[i]",
+        "gw.warnsyms": "&gw.warnsyms[i]",
+        "svl.lastseentyp": "&svl.lastseentyp[i][j]"
+      },
+      "arraytypes": [
+        "permonst",
+        "objclass",
+        "objdescr",
+        "rm",
+        "symdef",
+        "symdef",
+        "classsym",
+        "classsym",
+        "nhsym",
+        "nhsym",
+        "nhsym",
+        "nhsym",
+        "char"
+      ],
+      "callbacks": [
+        "xname",
+        "doname_with_price",
+        "doname_vague_quan",
+        "rn2_on_display_rng",
+        "doset",
+        "do_reqmenu",
+        "doset_simple",
+        "option_help",
+        "dokeylist",
+        "docontact",
+        "dispfile_help",
+        "dispfile_shelp",
+        "dispfile_optionfile",
+        "dispfile_optmenu",
+        "dispfile_license",
+        "dispfile_debughelp",
+        "dispfile_usagehelp",
+        "hmenu_doextversion",
+        "hmenu_dohistory",
+        "hmenu_dowhatis",
+        "hmenu_dowhatdoes",
+        "hmenu_doextlist",
+        "domenucontrols"
+      ],
+      "statics": {
+        "invisexplain": 29,
+        "altinvisexplain": 16,
+        "append_str.sep": 5,
+        "waterbody_name.pooltype": 40,
+        "do_screen_description.mon_interior": 26,
+        "do_screen_description.unreconnoitered": 16,
+        "do_screen_description.look_buf": 256
+      }
+    },
+    "strings": {
+      "DATAFILE": "data",
+      "DEBUGHELP": "wizhelp",
+      "DEVTEAM_EMAIL": "devteam@nethack.org",
+      "DEVTEAM_URL": "https://www.nethack.org/",
+      "HELP": "help",
+      "HISTORY": "history",
+      "KEYHELP": "keyhelp",
+      "LICENSE": "license",
+      "OPTIONFILE": "opthelp",
+      "OPTMENUHELP": "optmenu",
+      "PORT_ID": "MacOS",
+      "SHELP": "hh",
+      "USAGEHELP": "usagehlp"
+    }
+  },
+  "iactionsCommands": [
+    "dowield",
+    "remarm_swapwep",
+    "dowieldquiver",
+    "donull",
+    "doapply",
+    "dip_into",
+    "docallcmd",
+    "dodrop",
+    "do_reqmenu",
+    "doeat",
+    "doengrave",
+    "dofire",
+    "doorganize",
+    "adjust_split",
+    "dosacrifice",
+    "dopay",
+    "dodrink",
+    "doread",
+    "dorub",
+    "dothrow",
+    "ia_dotakeoff",
+    "dotip",
+    "doinvoke",
+    "dowear",
+    "doswapweapon",
+    "dotwoweapon",
+    "dozap",
+    "dowhatis"
+  ],
+  "iactionsAssertion": {
+    "expression": "uwep != NULL",
+    "line": 456
   },
   "commonStrings": {
     "Never_mind": {
@@ -1396,13 +5304,13 @@
   },
   "bogonCodes": "-_+|=",
   "sourceSha256": {
-    "scripts/export-standalone-special-interactions.py": "87ef689d227bf0ba4ac8ef7248519439f20becff3777e2fea3b3ee482adc25b3",
+    "scripts/export-standalone-special-interactions.py": "78e698f1521fd3a698358cd62d48347e267d5470654a4917a3235bcb56c4abc3",
     "js/standalone/utf8map-abi.json": "69414cec8d59ebe8b25613b8700fa66410105c90d63f266c8c0352a041bb0cdf",
-    "scripts/test-standalone-special-interactions.mjs": "8f55229aa2fd92a580d08941c925629f38bd836ad7f325b0e90f3428251f3f8f",
+    "scripts/test-standalone-special-interactions.mjs": "8416e824569cb069f19863bc18518a71b49163ba60361b83984cca3369a759fb",
     "scripts/check-standalone-special-interactions.mjs": "9ae2057b189d6e351faedcae62dc9fc1e60759536b7faf0c7666ff998cf5151c",
     "nethack-c/wasm/tu-support.c": "4acc049213a8c67b069b71315406f58409100db195df2dadbc5d4bcd7184f875",
     "js/ported/wasm-runtime.js": "73030532670eaaf8740f50d4556a89a62faf70cde679c19af22285d52286d6d4",
-    "js/standalone/special-interactions.js": "e018e595776513f483e09dc0a71b2a777c92359329d44da47d1c689a5f76b3a5",
+    "js/standalone/special-interactions.js": "8bffced92c049d3f329f24957e2cf7c5fc274eb4d28bac5dc91e60c7d451125c",
     "js/standalone/vision.js": "e1d65b3cfb3205e6662576c7f4541b3018e71097274bfaa721d186d9687a3dbb",
     "js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34",
     "nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",
@@ -1427,7 +5335,24 @@
     "js/ported/write.js": "ebe44234195bcc28e0f22fd7534a406d5c5ed175e36966cdf1888a9474aa60dd",
     "js/ported/write-runtime.js": "4974786f15da2b5e0079bd78ce77b4c66f1404d0095ca136d7db37f2283bf5af",
     "nethack-c/wasm/tu-libraries/write.js": "4e0cb572a6e8eae561d88daa55f6ab61499e56b9a08dcfe5b17d107534ba4663",
-    "js/standalone/special-interaction-services.js": "57672697d44cf2fba8c506ecc3df27fed077a9ce3f50c7ff3c4b842a3500f351"
+    "scripts/tu-steed-layout.h": "a3b04d4656f412986098faa9bee56cfa53ac1b81d66df84984e252db4a48fb88",
+    "js/ported/steed.js": "3bf7d01b71fdd8636c3b967a50ac53961be8dad66664e3d63ea9ffe5b3324bc2",
+    "js/ported/steed-runtime.js": "c48e7672ab8aef97bea131f8750d8838395ccac5bcb7155dc6d4edc517b5977b",
+    "nethack-c/wasm/tu-libraries/steed.js": "00dae28dba7e4ef5e1fca7056349563bf0969880fe17f446aa83218d7688dea9",
+    "scripts/tu-iactions-layout.h": "1f0be05d42a615ea8d1b8d092d990683c0c5f399d2728592931ffc08032ecc91",
+    "js/ported/iactions.js": "c20ad579ddb48271bd212ec668f09108f649604fb587efaa52857e951697ace5",
+    "js/ported/iactions-runtime.js": "9e19fd574fd20ed28cc111a92cd513b2a28f9e33d7400e9bb7ae04bc30cb2bf8",
+    "nethack-c/wasm/tu-libraries/iactions.js": "fa4f889e09c4d1ef82cce41f70f7053db294a5529a06cc4ce8d07b985a3fa2b9",
+    "scripts/tu-extralev-layout.h": "a59b90addd035e118ce16554d579c4f3f8b2a9cc1e8cd94d193d804074a00b34",
+    "js/ported/extralev.js": "6c2a08a8f72d76d5b63ac3b29dd1867a9e53f67a0c6909c777df3c4b13f863c1",
+    "js/ported/extralev-runtime.js": "40904e28e5aeccbd12eb84daa67490232832d956756b74d04fdb2601be1e3729",
+    "nethack-c/wasm/tu-libraries/extralev.js": "48b67f57aed324f25a7afebd334b60f8c65809f841cd13861100bf057f7f08a1",
+    "scripts/tu-pager-layout.h": "50400b4752384d779b1e8db5a3d945116f8d49aacc41e72f17777ad8e2a8c41d",
+    "js/ported/pager-runtime.js": "6bf8a2bfc708578490798a30be117d9c7eb7e2798036c1a3cc198cd459922155",
+    "js/ported/pager.js": "6c13cf9d9e88fd0db37ad0c77c64d3f4bd2389eedbdfc44b1f1dca16cbebd934",
+    "js/standalone/pager-lookup.js": "0b5424d6f8d4fdef099f4dc05196b6149cd2619ce926d1d383e528c6ec95d0e6",
+    "scripts/test-standalone-obscure-interactions.mjs": "e638b3ba5e447480920a9f322ac680f90ad157d87dcc3edc9d2e6119e83ab96e",
+    "js/standalone/special-interaction-services.js": "70c5da58f4acb53f9c4dc01f5a175743931b6ea486399ed81b70a3f8cc22bd00"
   },
   "referenceHeaderSha256": {
     ".cache/emsdk/upstream/emscripten/cache/sysroot/include/alloca.h": "8768404d7cf4af5fb135b1a2ca91765bd2be311ac072e0ec8b68f5cb3e6e0f3e",
@@ -1552,6 +5477,7 @@
     ".cache/wasm64-build/tree/lib/lua-5.4.8/src/luaconf.h": "af243c94bee6d2601383e8b65ed66a0d1b4ab3b7418ff903fcd0679912160e3a",
     ".cache/wasm64-build/tree/lib/lua-5.4.8/src/lualib.h": "4ea0f67d3e467f5d6a327616e22a3c2da8e03d47a3c3660916275f2842f521ea",
     ".cache/wasm64-build/tree/src/do_name.c": "64c6cb5e7f4034e9edbd8fac983b313a7df0e029b4812bd3a9327852d12ad9d1",
+    ".cache/wasm64-build/tree/src/iactions.c": "a8b65fd2326977b85a2e93f6c939017fd7ab2ab6848b19f375d8852aa98f29f6",
     ".cache/wasm64-build/tree/src/rumors.c": "0bc8665c1bcff5b2d9d9063ff02dfd081ddcb01ba0ba5c817f0dbf857d73c255",
     "nethack-c/wasm/native-terminal.h": "16eceb17caf6e70d0e8e6b36f23daebdb30f7ace18676d482c8376fccf6dceeb"
   }

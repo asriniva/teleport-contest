@@ -41,7 +41,7 @@
   "implementationBase": "5149f13",
   "testSha256": "bdfbad08c9e10b5d5d8e315f743bd995ad4f6358226c2c1d7e8966e7a21a89bc",
   "abiSha256": "69414cec8d59ebe8b25613b8700fa66410105c90d63f266c8c0352a041bb0cdf",
-  "regressionChecks": 341,
+  "regressionChecks": 413,
   "allConfiguredPoliciesUnchanged": 138,
   "frozenFilesUnchanged": 3,
   "productionClosureFiles": 468,
@@ -49,5 +49,6 @@
     "Configured ENHANCED_SYMBOLS subset, not full-game acceptance",
     "Nonnull C pointer preconditions preserved; null set_map_u fixture excluded",
     "No promise for all terminal encodings or every customization interaction"
-  ]
+  ],
+  "regressionFixtureCounterCorrected": true
 }

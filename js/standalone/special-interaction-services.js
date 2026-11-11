@@ -65,7 +65,7 @@ export function createRumorsServices(environment,native){
       Sfi_unsigned: (fp, value, tag) => native.teleport_rumors_sfi_unsigned(pointer(fp), pointer(value), text(tag)),
       Sfi_ulong: (fp, value, tag) => native.teleport_rumors_sfi_ulong(pointer(fp), pointer(value), text(tag)),
     };
-  
+
 }
 export function createFountainServices(environment,native){
     var literal=value=>environment.services.literal(value);
@@ -189,7 +189,7 @@ export function createFountainServices(environment,native){
       verbalize: (format, a, b, c, d) => message(6, format, a, b, c, d),
       You_see: (format, a, b, c, d) => message(7, format, a, b, c, d),
     };
-  
+
 }
 export function createSitServices(environment,native){
     var literal=value=>environment.services.literal(value);
@@ -306,7 +306,7 @@ export function createSitServices(environment,native){
       There: (format, a, b) => message(7, format, a, b),
       impossible: (format, a, b) => message(8, format, a, b),
     };
-  
+
 }
 export function createMusicServices(environment,native){
     var pointer = value => BigInt(value ? value.address ?? value : 0);
@@ -412,7 +412,7 @@ export function createMusicServices(environment,native){
       strcmp: (a, b) => native.strcmp(text(a), text(b)),
       Strcpy: (out, value) => Number(native.strcpy(pointer(out), text(value))),
     };
-  
+
 }
 export function createWriteServices(environment,native){
     var literal=value=>environment.services.literal(value);
@@ -468,5 +468,221 @@ export function createWriteServices(environment,native){
       pline_The: (format, a, b) => message(5, format, a, b),
       impossible: (format, a, b) => message(6, format, a, b),
     };
-  
+
+}
+export function createSteedServices(environment,native){
+    var pointer = value => BigInt(value ? value.address ?? value : 0);
+    var long = value => BigInt.asIntN(64,BigInt(value));
+    var ulong = value => BigInt.asUintN(64,BigInt(value));
+    var byte = value => Number(BigInt.asIntN(8,BigInt(value)));
+    var coord = value => Number(BigInt.asIntN(16,BigInt(value)));
+    var literal=value=>environment.services.literal(value);
+    var text = value => typeof value === 'string' ? BigInt(literal(value)) : pointer(value);
+    var callers = ['use_saddle','mount_steed','kick_steed','landing_spot','dismount_steed','maybewakesteed'];
+    var callerIndex = value => {
+      var index = typeof value === 'string' ? callers.indexOf(value) : value;
+      if (!Number.isInteger(index) || index < 0 || index >= callers.length) throw new Error('Unexpected original steed RNG caller');
+      return index;
+    };
+    var services = {
+      moduleKey: environment, heap: () => environment.memory.HEAPU8, literal,
+      stackAlloc: size => Number(environment.transport.stackAlloc(size)), stackSave: () => environment.transport.stackSave(), stackRestore: saved => environment.transport.stackRestore(saved),
+      global: index => Number(native.teleport_steed_global(index)), equipment: index => Number(native.teleport_steed_equipment(index)),
+      storage: () => Number(native.teleport_steed_storage()),
+      heroBit: index => native.teleport_steed_hero_bit(index), roleplayDeaf: () => native.teleport_steed_roleplay_deaf(),
+      monsterBit: (mon,index) => native.teleport_steed_monster_bit(pointer(mon),index),
+      setMonsterBit: (mon,index,value) => native.teleport_steed_set_monster_bit(pointer(mon),index,Number(value)>>>0),
+      objectBit: (obj,index) => native.teleport_steed_object_bit(pointer(obj),index),
+      setObjectBit: (obj,index,value) => native.teleport_steed_set_object_bit(pointer(obj),index,Number(value)>>>0),
+      objectClassBit: (obj,index) => native.teleport_steed_class_bit(pointer(obj),index),
+      trapBit: (trap,index) => native.teleport_steed_trap_bit(pointer(trap),index),
+      hasMgivenname: mon => native.teleport_steed_has_mgivenname(pointer(mon)),
+      commonString: index => Number(native.teleport_steed_common_string(index)), y_n: query => native.teleport_steed_y_n(text(query)),
+      rn2: (bound,line,caller) => native.teleport_steed_rn2(bound,line,callerIndex(caller)),
+      rnd: (bound,line,caller) => native.teleport_steed_rnd(bound,line,callerIndex(caller)),
+      panic: format => native.teleport_steed_panic(text(format)),
+      Sprintf: (out,format,value) => native.teleport_steed_format(pointer(out),text(format),text(value)),
+      impossible: (format,...args) => {
+        if (!args.length) return native.teleport_steed_impossible0(text(format));
+        if (args.length === 3) return native.teleport_steed_impossible_state(text(format),text(args[0]),ulong(args[1]),text(args[2]));
+        if (args.length === 5) return native.teleport_steed_impossible_position(text(format),text(args[0]),args[1],args[2],ulong(args[3]),text(args[4]));
+        return native.teleport_steed_impossible_overlap(text(format),text(args[0]),text(args[1]),args[2],args[3],ulong(args[4]),ulong(args[5]),text(args[6]));
+      },
+      y_monnam: (mon) => Number(native.y_monnam(pointer(mon))),
+      mon_nam: (mon) => Number(native.mon_nam(pointer(mon))),
+      Monnam: (mon) => Number(native.Monnam(pointer(mon))),
+      YMonnam: (mon) => Number(native.YMonnam(pointer(mon))),
+      a_monnam: (mon) => Number(native.a_monnam(pointer(mon))),
+      strchr: (string,ch) => Number(native.strchr(text(string), ch)),
+      u_handsy: () => native.u_handsy(),
+      getdir: (prompt) => native.getdir(text(prompt)),
+      isok: (x,y) => native.isok(coord(x),coord(y)),
+      canseemon: (mon) => native.canseemon(pointer(mon)),
+      sensemon: (mon) => native.sensemon(pointer(mon)),
+      which_armor: (mon,mask) => Number(native.which_armor(pointer(mon),long(mask))),
+      polymon: (index) => native.polymon(index),
+      pmname: (pm,gender) => Number(native.pmname(pointer(pm),gender)),
+      Mgender: (mon) => native.Mgender(pointer(mon)),
+      pronoun_gender: (mon,flags) => native.pronoun_gender(pointer(mon),flags>>>0),
+      an: (name) => Number(native.an(text(name))),
+      instapetrify: (reason) => native.instapetrify(text(reason)),
+      exercise: (attr,flag) => native.exercise(attr,byte(flag)),
+      objdescr_is: (obj,name) => native.objdescr_is(pointer(obj),text(name)),
+      remove_worn_item: (obj,unchain) => native.remove_worn_item(pointer(obj),byte(unchain)),
+      freeinv: (obj) => native.freeinv(pointer(obj)),
+      mksobj: (type,init,artifact) => Number(native.mksobj(type,byte(init),byte(artifact))),
+      fully_identify_obj: (obj) => native.fully_identify_obj(pointer(obj)),
+      mpickobj: (mon,obj) => native.mpickobj(pointer(mon),pointer(obj)),
+      update_mon_extrinsics: (mon,obj,on,silently) => native.update_mon_extrinsics(pointer(mon),pointer(obj),byte(on),byte(silently)),
+      legs_in_no_shape: (activity,ancient) => native.legs_in_no_shape(text(activity),byte(ancient)),
+      heal_legs: (how) => native.heal_legs(how),
+      near_capacity: () => native.near_capacity(),
+      poly_when_stoned: (pm) => native.poly_when_stoned(pointer(pm)),
+      test_move: (x,y,dx,dy,mode) => native.test_move(coord(x),coord(y),coord(dx),coord(dy),mode),
+      body_part: (part) => Number(native.body_part(part)),
+      t_at: (x,y) => Number(native.t_at(coord(x),coord(y))),
+      trapname: (type,article) => Number(native.trapname(type,byte(article))),
+      m_unleash: (mon,feedback) => native.m_unleash(pointer(mon),byte(feedback)),
+      hliquid: (name) => Number(native.hliquid(text(name))),
+      x_monnam: (mon,article,adjective,suppress,called) => Number(native.x_monnam(pointer(mon),article,text(adjective),suppress,byte(called))),
+      losehp: (amount,reason,format) => native.losehp(amount,text(reason),byte(format)),
+      steed_vs_stealth: () => native.steed_vs_stealth(),
+      teleds: (x,y,flags) => native.teleds(coord(x),coord(y),flags),
+      use_skill: (skill,count) => native.use_skill(skill,count),
+      strcpy: (out,src) => Number(native.strcpy(pointer(out),text(src))),
+      highc: (ch) => native.highc(byte(ch)),
+      monverbself: (mon,out,verb,other) => Number(native.monverbself(pointer(mon),pointer(out),text(verb),text(other))),
+      memset: (out,value,size) => Number(native.memset(pointer(out),value,BigInt(size))),
+      xytodir: (x,y) => native.xytodir(x,y),
+      dirtocoord: (out,dir) => native.dirtocoord(pointer(out),dir),
+      directionname: (dir) => Number(native.directionname(dir)),
+      debugcore: (file,flag) => native.debugcore(text(file),byte(flag)),
+      accessible: (x,y) => native.accessible(coord(x),coord(y)),
+      dist2: (x,y,xx,yy) => native.dist2(coord(x),coord(y),coord(xx),coord(yy)),
+      sobj_at: (type,x,y) => Number(native.sobj_at(type,coord(x),coord(y))),
+      enexto: (out,x,y,pm) => native.enexto(pointer(out),coord(x),coord(y),pointer(pm)),
+      u_locomotion: (verb) => Number(native.u_locomotion(text(verb))),
+      set_wounded_legs: (side,turns) => native.set_wounded_legs(long(side),Number(BigInt.asIntN(32,BigInt(turns)))),
+      rloc_to: (mon,x,y) => native.rloc_to(pointer(mon),coord(x),coord(y)),
+      rloc: (mon,flags) => native.rloc(pointer(mon),flags>>>0),
+      has_ceiling: (level) => native.has_ceiling(pointer(level)),
+      is_pool: (x,y) => native.is_pool(coord(x),coord(y)),
+      surface: (x,y) => Number(native.surface(coord(x),coord(y))),
+      killed: (mon) => native.killed(pointer(mon)),
+      adjalign: (delta) => native.adjalign(delta),
+      is_lava: (x,y) => native.is_lava(coord(x),coord(y)),
+      sokoban_guilt: () => native.sokoban_guilt(),
+      mintrap: (mon,flags) => native.mintrap(pointer(mon),flags>>>0),
+      monkilled: (mon,reason,type) => native.monkilled(pointer(mon),text(reason),type),
+      float_down: (intrinsic,extrinsic) => native.float_down(long(intrinsic),long(extrinsic)),
+      encumber_msg: () => native.encumber_msg(),
+      finish_meating: (mon) => native.finish_meating(pointer(mon)),
+      strsubst: (out,old,replacement) => native.strsubst(pointer(out),text(old),text(replacement)),
+      describe_level: (out,flags) => native.describe_level(pointer(out),flags),
+      minimal_monnam: (mon,accurate) => Number(native.minimal_monnam(pointer(mon),byte(accurate))),
+      is_art: (obj,artifact) => native.is_art(pointer(obj),artifact),
+      acurr: (attr) => native.acurr(attr),
+      newsym: (x,y) => native.newsym(coord(x),coord(y)),
+      pline: (format,...args) => native.teleport_steed_pline(text(format),text(args[0]),text(args[1]),text(args[2])),
+      You: (format,...args) => native.teleport_steed_You(text(format),text(args[0]),text(args[1]),text(args[2])),
+      You_cant: (format,...args) => native.teleport_steed_You_cant(text(format),text(args[0]),text(args[1]),text(args[2])),
+      Your: (format,...args) => native.teleport_steed_Your(text(format),text(args[0]),text(args[1]),text(args[2])),
+    };
+    services.Strcpy = services.strcpy;
+    return services;
+
+}
+export function createIactionsServices(environment,native){
+    var literal=value=>environment.services.literal(value);
+    var pointer = value => BigInt(value ? value.address ?? value : 0);
+    var text = value => typeof value === 'string' ? BigInt(literal(value)) : pointer(value);
+    var byte = value => Number(value) << 24 >> 24;
+    var coord = value => Number(value) << 16 >> 16;
+    return {
+      heap: () => environment.memory.HEAPU8,
+      stackAlloc: size => environment.transport.stackAlloc(size),
+      global: index => Number(native.teleport_iactions_global(index)),
+      equipment: index => Number(native.teleport_iactions_equipment(index)),
+      objectBit: (obj, index) => native.teleport_iactions_object_bit(pointer(obj), index),
+      objectClassBit: (obj, index) => native.teleport_iactions_class_bit(pointer(obj), index),
+      heroBit: index => native.teleport_iactions_hero_bit(index),
+      nulGlyphInfo: () => Number(native.teleport_iactions_nul_glyphinfo()),
+      command: index => native.teleport_iactions_command(index),
+      cmdq_add_ec: (queue, command) => native.teleport_iactions_cmdq_add_ec(queue, pointer(command)),
+      cmdq_add_key: (queue, key) => native.cmdq_add_key(queue, byte(key)),
+      free: ptr => native.teleport_iactions_free(pointer(ptr)),
+      create_nhwindow: type => native.teleport_iactions_create_window(type),
+      start_menu: (win, behavior) => native.teleport_iactions_start_menu(win, BigInt(behavior)),
+      end_menu: (win, prompt) => native.teleport_iactions_end_menu(win, text(prompt)),
+      destroy_nhwindow: win => native.teleport_iactions_destroy_window(win),
+      add_menu: (win, glyph, any, letter, group, attr, color, label, flags) => native.add_menu(win, pointer(glyph), pointer(any), byte(letter), byte(group), attr, color, text(label), flags >>> 0),
+      select_menu: (win, how, out) => native.select_menu(win, how, pointer(out)),
+      name_ok: obj => native.name_ok(pointer(obj)),
+      call_ok: obj => native.call_ok(pointer(obj)),
+      the_unique_obj: obj => native.the_unique_obj(pointer(obj)),
+      simpleonames: obj => Number(native.simpleonames(pointer(obj))),
+      the: value => Number(native.the(text(value))),
+      makeplural: value => Number(native.makeplural(text(value))),
+      Strcpy: (out, value) => Number(native.strcpy(pointer(out), text(value))),
+      eos: ptr => Number(native.eos(pointer(ptr))),
+      is_edible: obj => native.is_edible(pointer(obj)),
+      carrying: type => Number(native.carrying(type)),
+      surface: (x, y) => Number(native.surface(coord(x), coord(y))),
+      check_invent_gold: message => native.check_invent_gold(text(message)),
+      in_rooms: (x, y, type) => Number(native.in_rooms(coord(x), coord(y), type)),
+      shop_keeper: room => Number(native.shop_keeper(byte(room))),
+      inhishop: mon => native.inhishop(pointer(mon)),
+      body_part: part => Number(native.body_part(part)),
+      armor_simple_name: obj => Number(native.armor_simple_name(pointer(obj))),
+      an: value => Number(native.an(text(value))),
+      armcat_to_wornmask: category => native.armcat_to_wornmask(category),
+      wearmask_to_obj: mask => Number(native.wearmask_to_obj(BigInt(mask))),
+      ia_checkfile: obj => native.ia_checkfile(pointer(obj)),
+      cxname: obj => Number(native.cxname(pointer(obj))),
+      undiscovered_artifact: artifact => native.undiscovered_artifact(artifact),
+      Sprintf: (out, format, ...args) => {
+        if (format === "%s '%c' to %s %s %s")
+          native.teleport_iactions_format_unwield(pointer(out), text(format), text(args[0]), args[1], text(args[2]), text(args[3]), text(args[4]));
+        else {
+          if (args.length > 3) throw new Error('Review changed iactions formatting ABI');
+          native.teleport_iactions_format_strings(pointer(out), text(format), text(args[0]), text(args[1]), text(args[2]));
+        }
+      },
+      impossible: (format, act) => native.teleport_iactions_impossible(text(format), act),
+      assert: condition => { if (!condition) native.teleport_iactions_assert_fail(); },
+    };
+
+}
+export function createExtralevServices(environment,native){
+    var text = value => typeof value === 'string' ? BigInt(environment.services.literal(value)) : BigInt(value || 0);
+    var pointer = value => BigInt(value ? value.address ?? value : 0);
+    var callers = { roguejoin: 0, roguecorr: 1, miniwalk: 2, makeroguerooms: 3, corr: 4, makerogueghost: 5 };
+    return {
+      heap: () => environment.memory.HEAPU8,
+      global: index => Number(native.teleport_extralev_global(index)),
+      monsterBit: (mon, index) => native.teleport_were_monster_bit(BigInt(mon), index),
+      setMonsterBit: (mon, index, value) => native.teleport_were_set_monster_bit(BigInt(mon), index, value),
+      objectBit: (object, index) => native.teleport_extralev_object_bit(BigInt(object), index),
+      setObjectBit: (object, index, value) => native.teleport_extralev_set_object_bit(BigInt(object), index, value),
+      doorMask: location => native.teleport_extralev_door_mask(BigInt(location)),
+      setDoorMask: (location, value) => native.teleport_extralev_set_door_mask(BigInt(location), value),
+      rn2: (value, line, caller) => native.teleport_extralev_rn2(value, line, callers[caller]),
+      rnd: (value, line, caller) => native.teleport_extralev_rnd(value, line, callers[caller]),
+      rn1: (x, y, line, caller) => native.teleport_extralev_rn2(x, line, callers[caller]) + y,
+      impossible: (format, ...args) => {
+        if (args.length === 1) native.teleport_extralev_impossible_one(text(format), args[0]);
+        else native.teleport_extralev_impossible_two(text(format), args[0], args[1]);
+      },
+      dodoor: (x, y, room) => native.dodoor(x, y, pointer(room)),
+      add_room: (lx, ly, hx, hy, lit, type, special) => native.add_room(lx, ly, hx, hy, Number(lit), type, Number(special)),
+      somex: room => native.somex(pointer(room)),
+      somey: room => native.somey(pointer(room)),
+      roguename: () => Number(native.roguename()),
+      christen_monst: (mon, name) => Number(native.christen_monst(pointer(mon), text(name))),
+      mksobj_at: (type, x, y, initialize, artifact) => Number(native.mksobj_at(type, x, y, Number(initialize), Number(artifact))),
+      weight: object => native.weight(pointer(object)),
+      curse: object => native.curse(pointer(object)),
+      makemon: (pm, x, y, flags) => Number(native.makemon(pointer(pm), x, y, Number(flags) >>> 0)),
+    };
+
 }

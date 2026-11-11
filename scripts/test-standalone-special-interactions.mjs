@@ -48,7 +48,11 @@ try{
   cases.push(label);fs.writeFileSync(output,JSON.stringify({checks,hashes,cases,complete:false},null,2)+'\n');
  };
  compare('genuine first command boundary');
+ // Finite input interrupts tty_nhgetch before its normal decrement.
+ // Restore that caller bookkeeping on both fixtures before direct UI calls.
+ const getting=records.sinfo.fields.getting_char.offset;equal(env.memory.view.getInt32(env.requireGlobal('program_state')+getting,true),1,'paused input counter');equal(cv().getInt32(globals.program_state+getting,true),1,'native paused input counter');env.memory.view.setInt32(env.requireGlobal('program_state')+getting,0,true);cv().setInt32(globals.program_state+getting,0,true);
  function action(name,jargs=[],cargs=jargs){console.log('ACTION',name);const a=js(()=>env.resolve(name)(...jargs)),b=ref['_'+name](...cargs);equal(a??0,b??0,name+' return');equal(ji,ci,name+' consumed input');compare(name);}
+ const clearMessage=()=>action('tty_clear_nhwindow',[Number(env.ctypes.load('int',env.requireGlobal('WIN_MESSAGE')))]);
  const cstr=value=>{const b=Buffer.from(value+'\0'),p=ref._malloc(BigInt(b.length));ref.HEAPU8.set(b,Number(p));return p;};
  const bufferJ=env.memory.calloc(1,1024),bufferC=BigInt(ref._malloc(1024n));
  // RUMORS file parsing, cookie filtering and deterministic repeated selection.
@@ -66,14 +70,14 @@ try{
  const jhero=env.requireGlobal('u'),chero=globals.u;
  function heroBit(field,value){env.ctypes.setField('struct you',jhero,field,'unsigned int',value);const f=records.you.fields[field],n=Math.ceil((f.shift+f.bits)/8);let bits=0n;for(let i=0;i<n;i++)bits|=BigInt(ref.HEAPU8[chero+f.offset+i])<<BigInt(i*8);const mask=((1n<<BigInt(f.bits))-1n)<<BigInt(f.shift);bits=(bits&~mask)|((BigInt(value)<<BigInt(f.shift))&mask);for(let i=0;i<n;i++)ref.HEAPU8[chero+f.offset+i]=Number(bits>>BigInt(i*8)&255n);}
  heroBit('uinwater',1);action('do_play_instrument',[instrumentJ],[instrumentC]);heroBit('uinwater',0);
- keys+='q';action('do_play_instrument',[instrumentJ],[instrumentC]);
+ clearMessage();keys=keys.slice(0,ji)+'q';action('do_play_instrument',[instrumentJ],[instrumentC]);
 
  // SIT ordinary floor path; rare throne/pit/elemental effects are not accepted.
  action('dosit');
- keys+=' ';action('outoracle',[0,0]);
- keys+=' ';action('outrumor',[1,abi.ports.rumors.layout.BY_COOKIE]);
+ clearMessage();keys=keys.slice(0,ji)+' '.repeat(20);action('outoracle',[0,0]);
+ clearMessage();keys=keys.slice(0,ji)+' '.repeat(20);action('outrumor',[1,abi.ports.rumors.layout.BY_COOKIE]);
  const [penJ,penC]=item(layouts.apply.MAGIC_MARKER);
- keys+='\x1b';action('dowrite',[penJ],[penC]);
+ clearMessage();keys=keys.slice(0,ji)+'\x1b'+' '.repeat(10);action('dowrite',[penJ],[penC]);
  const x=jf('you',jhero,'ux','short'),y=jf('you',jhero,'uy','short');
  action('set_levltyp',[x,y,abi.ports.fountain.layout.SINK]);
  // Explicit fixture RNG draw selects a non-polymorph sink case. The toxic
@@ -88,11 +92,11 @@ try{
  env.ctypes.setField('struct obj',penJ,'spe','signed char',100);cv().setInt8(Number(penC)+records.obj.fields.spe.offset,100);
  action('discover_object',[abi.ports.write.layout.SCR_IDENTIFY,1,0,0]);
  const letter=jf('obj',paperJ,'invlet','char');equal(letter,ref.HEAPU8[Number(paperC)+records.obj.fields.invlet.offset],'paper selection letter');
- keys+=String.fromCharCode(letter)+'identify\n';action('dowrite',[penJ],[penC]);
- keys+='y';action('do_play_instrument',[instrumentJ],[instrumentC]);
+ clearMessage();keys=keys.slice(0,ji)+String.fromCharCode(letter)+'identify\n'+ ' '.repeat(10);action('dowrite',[penJ],[penC]);assert.ok(jf('obj',penJ,'spe','signed char')<100,'successful writing consumed actual marker ink');
+ clearMessage();keys=keys.slice(0,ji)+'y'+' '.repeat(10);action('do_play_instrument',[instrumentJ],[instrumentC]);
  equal(Buffer.from(env.memory.HEAPU8.slice(instrumentJ,instrumentJ+records.obj.size)),Buffer.from(ref.HEAPU8.slice(Number(instrumentC),Number(instrumentC)+records.obj.size)),'detached wooden flute state after playing');
  action('free_CapMons');action('CapitalMon',[S.literal('Archon')],[BigInt(cstr('Archon'))]);
- keys+=' ';action('outoracle',[1,1]);
+ clearMessage();keys=keys.slice(0,ji)+' '.repeat(20);action('outoracle',[1,1]);
  console.log('PASS '+JSON.stringify({checks,hashes,cases,complete:true,scope:'Explicit optional interaction subset; polymorph and other rare effects remain unaccepted'}));
  fs.writeFileSync(output,JSON.stringify({checks,hashes,cases,complete:true},null,2)+'\n');
 }finally{Date.now=savedNow;if(savedTZ===undefined)delete process.env.TZ;else process.env.TZ=savedTZ;}

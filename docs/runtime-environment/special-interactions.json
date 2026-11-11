@@ -1,6 +1,6 @@
 {
-  "checks": 341,
-  "hashes": 941,
+  "checks": 413,
+  "hashes": 960,
   "cases": [
     "genuine first command boundary",
     "rumor 1",
@@ -12,11 +12,15 @@
     "mksobj 247",
     "obj_to_instr",
     "do_play_instrument",
+    "tty_clear_nhwindow",
     "do_play_instrument",
     "dosit",
+    "tty_clear_nhwindow",
     "outoracle",
+    "tty_clear_nhwindow",
     "outrumor",
     "mksobj 242",
+    "tty_clear_nhwindow",
     "dowrite",
     "set_levltyp",
     "rn2",
@@ -32,23 +36,28 @@
     "addinv",
     "addinv",
     "discover_object",
+    "tty_clear_nhwindow",
     "dowrite",
+    "tty_clear_nhwindow",
     "do_play_instrument",
     "free_CapMons",
     "CapitalMon",
+    "tty_clear_nhwindow",
     "outoracle"
   ],
   "complete": true,
   "sourceCheckpoint": "df33dd4",
   "fullGameAccepted": false,
   "scope": "Explicit RUMORS/FOUNTAIN/SIT/MUSIC/WRITE interaction subset",
-  "testSha256": "8f55229aa2fd92a580d08941c925629f38bd836ad7f325b0e90f3428251f3f8f",
-  "productionAbiSha256": "89fafcd0bddd9ded3ae99f3cd6f3f73f5954dcdb17b267a09db6ab3dd0dd66ac",
+  "testSha256": "8416e824569cb069f19863bc18518a71b49163ba60361b83984cca3369a759fb",
+  "productionAbiSha256": "4ca86cc2eee7beb06e68d82163d8d61a439e6251a93262f1458face1a0c140f1",
   "reference": "Existing full-original-c-v1 complete original C, source/artifact receipt checked; configured golden Emscripten headers/defines, no rebuilt or invented fixture profile",
   "fullProvenanceGate": "FAIL: inherited unix-platform-abi.json stdio.js source pin mismatch; unchanged",
   "limitations": [
     "Not full-game acceptance",
     "polyself toxic-waste branch remains unresolved",
     "Rare effects outside enumerated cases remain unaccepted"
-  ]
+  ],
+  "historicalChecksBeforeFixtureCorrection": 341,
+  "fixtureCorrection": "Earlier direct-call UI prompts could default with interrupted getting_char=1. Current413 checks restore both fixtures to normal-return0, use original window clearing, and assert actual marker ink consumption. Earlier positive UI labels are superseded."
 }
