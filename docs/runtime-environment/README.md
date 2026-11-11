@@ -13,24 +13,40 @@ subsets, transport-only adapters, active integration and unconnected modules.
 Provider libraries such as Lua/libc/CVFS are outside that denominator. No row's
 component status implies full-game recording equivalence.
 
-The latest verified implementation checkpoint is `e0c8007`. The expanded
-42-check regression gate passes with all current test-script hashes verified.
-Real source options, level/pet/inventory/attributes, skills and initial equipment
-now lead through the legacy pager, input/history/messages and the initial
-map/status display. Equipment startup passes14,241 original-C comparisons over
-47 ordinary/roleplay cases; equipment actions pass9,760 comparisons over4 cases.
-The pager prefix passes14,805 comparisons over47 cases, including96,891 exact
-terminal bytes and47 real Space acknowledgments/recorder frames. The JS prefix
-runs with Wasm/network access forbidden. MDLIB/DATE separately passes24,705 C
-comparisons and13,590 JS ownership/isolation checks over15 cases in5 timezones.
-These are connected-prefix and component results, not complete modules or a
-playable backend.
+The latest verified implementation checkpoint is `d3f8cce`. The expanded
+51-check regression gate passes with current test-script hashes and the frozen
+implementation snapshot verified. All138 translated policy bodies and all3
+frozen infrastructure files remain unchanged; production import scope contains
+no forbidden dependencies. Connected execution fixtures forbid Wasm/network
+access on the JavaScript path. These results accept the documented components
+and prefixes; full-game acceptance remains false.
 
-DO/SAVE, timer/light/room persistence, timestamp and turn-loop transport are
-connected but remain incomplete. With checkpointing enabled, the diagnostic
-startup reaches unresolved `save_worm`; turn-loop preamble reaches real starting
-gear effects and unresolved `change_luck`. Complete startup, nonempty checkpoint/
-restore, completed turns and full-game recordings remain unaccepted.
+This checkpoint expands source connections. Focused original-C
+checks now pass for nonempty WORM save/restore/movement (839 comparisons),
+ATTRIB and initial gear effects (16,640 across13 roles), real early bootstrap/
+REPORT (7,470 C comparisons and16,455 JS contracts), engraving display and
+prefix/preamble output (1,111 grouped comparisons), and historical VERSION files
+(508 C comparisons over100 cases). Joint level persistence passes852 checks
+including nonempty engravings/regions/exclusions/tracking, complete hero state,
+exact RNG logs and real files. Original Unix platform checks pass130 component
+and19 actual-main-prefix comparisons through source-created PID locking; ROLE
+prompt/string transport passes230 checks. Production paths disable Wasm/network
+in these fixtures. These additions pass the expanded51-check regression gate.
+
+The real Unix main now executes source initialization and PID locking without
+manual state or lock-file injection. Current checkpoint-enabled diagnostic
+reaches unconnected `yyyymmddhhmmss` during global game-state saving. Explicit
+platform test inputs include HACKDIR, installed record/perm resources, mailbox
+path and matching process/filesystem clocks. The underlying filesystem retains
+its deterministic-zero timestamp default unless a clock is supplied. Complete
+startup, save/restore, command/monster turns and full-game recordings remain
+unaccepted. Fatal assertion ownership, truncated-read UI, broad mail/process
+paths and untested platform branches also remain unfinished. Regular-file
+`isatty` currently has a known errno mismatch (0 instead of SDK NOTTY59), also
+present in the earlier Unix terminal provider; the accepted Unix prefix
+exercises standard tty0 and does not cover that branch. The table below records
+each fixture's observation boundary; the current furthest startup boundary is
+reported above.
 
 Remaining major stages are complete startup (including original metadata/date
 population, checkpointing and welcome), ALLMAIN turn-loop/preamble (which also

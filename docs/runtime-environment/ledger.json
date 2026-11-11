@@ -1,15 +1,15 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "e0c80071574e7fd27a3cab8a74f439e2c6aff2d4",
+  "acceptedCheckpoint": "d3f8cce27971690b66ef42555070b5d0eef252d2",
   "counts": {
     "canonical-dependency": 1,
     "in-progress": 15,
-    "not-connected": 36,
-    "provider-only": 2,
-    "transport-only": 3,
+    "not-connected": 32,
+    "provider-only": 1,
+    "transport-only": 5,
     "verified-component": 10,
-    "verified-subset": 71
+    "verified-subset": 74
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -25,8 +25,8 @@
       "module": "nhmd4",
       "source": "src/nhmd4.c",
       "status": "verified-component",
-      "scope": "Digest/chunk/full-state/cleared-state component.",
-      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md"
+      "scope": "Digest/chunk/full-state/cleared-state component. Original REPORT now invokes the same source NHMD4 through standalone pointer transport.",
+      "evidence": "scripts/test-standalone.mjs at c85e713 (13 checks passed); component profiles/limits in README.md REPORT tests additionally compare9 message lengths up to9000 bytes and state/digests under pure-JS isolation."
     },
     {
       "module": "strutil",
@@ -266,8 +266,8 @@
       "module": "version",
       "source": "src/version.c",
       "status": "verified-subset",
-      "scope": "Unchanged VERSION adapter executes banner, version strings, critical-size/runtime-option tables, feature parsing and number-only status_version on shared DATE/DECL. Remaining serialization/compatibility/UI, basename and runtime-info paths remain unfinished.",
-      "evidence": " scripts/test-standalone-window-banner.mjs:40598 focused original-C comparisons; complete game acceptance remains false."
+      "scope": "Unchanged VERSION adapter executes banner, version strings, critical-size/runtime-option tables, feature parsing and number-only status_version on shared DATE/DECL. Remaining serialization/compatibility/UI, basename and runtime-info paths remain unfinished. Actual VERSION save/critical-header aliases now use shared historical SF owners on real files. Initial/populated DATE and complete corrupted headers are covered; truncated fatal UI and full SAVE remain unaccepted.",
+      "evidence": " scripts/test-standalone-window-banner.mjs:40598 focused original-C comparisons; complete game acceptance remains false. test-standalone-version-files.mjs:508 C comparisons/100 cases plus2114 JS scope checks, exact headers/critical bytes/counters/mismatch copyback/compatibility/conversion flags."
     },
     {
       "module": "coloratt",
@@ -315,8 +315,9 @@
     {
       "module": "worm",
       "source": "src/worm.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "24 original public functions share the original WORM state/runtime. Nonempty construction, chain/head/grid/terrain identity, signed64 save/rest/free, movement/removal/slot reuse are verified. Combat/cutting, hallucinated glyphs, full level transitions and integrated serializer reentry remain unverified.",
+      "evidence": "test-standalone-worm.mjs:839 original-C comparisons/one role-seed case; unchanged translated policy and pure-JS guard."
     },
     {
       "module": "o_init",
@@ -391,15 +392,16 @@
     {
       "module": "earlyarg",
       "source": "src/earlyarg.c",
-      "status": "provider-only",
-      "scope": "Original monsdump static initializer data is projected for GLYPHS on shared measured records. Early argument parsing/policy lifecycle is not connected or accepted.",
-      "evidence": "js/standalone/glyphs.js and glyph-abi.json source-bound initializer projection; no early-argument lifecycle acceptance."
+      "status": "transport-only",
+      "scope": "Original monsdump storage plus unchanged early argument entry transport participate in actual UNIXMAIN prefix. Special argument modes, consumption alternatives and full command-line lifecycle are unaccepted.",
+      "evidence": "Source-bound unix-platform ABI; test-standalone-unix-platform-main.mjs observes original source prefix through getlock, not general early-argument branch coverage."
     },
     {
       "module": "report",
       "source": "src/report.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original REPORT initialization/private buffers and NHMD4 execute through actual early_init on shared state. CVFS executable lookup failure preserves original unknown-BID fallback. Executable symlink hashing, process launch and full crash handling remain unaccepted.",
+      "evidence": "test-standalone-report.mjs:7470 C comparisons plus16455 JS contracts/15 build-date cases/five runtime zones, including152 DECL globals, SYS/catalogues/DATE/options/banner/private buffers and repeated early_init."
     },
     {
       "module": "bones",
@@ -432,8 +434,9 @@
     {
       "module": "mail",
       "source": "src/mail.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "transport-only",
+      "scope": "Original getmailstatus/free_maildata/ckmailstatus share one cached MAIL state, platform stat and measured globals. Explicit absent mailbox input participates in main-prefix initialization. Changed-mail delivery, default passwd lookup and notification/process paths remain unaccepted.",
+      "evidence": "Source-bound unix-platform MAIL transport and actual-main-prefix fixed-input evidence; no broad mail-delivery acceptance."
     },
     {
       "module": "pline",
@@ -446,10 +449,10 @@
       "module": "attrib",
       "source": "src/attrib.c",
       "status": "verified-subset",
-      "scope": "Prior HP/intrinsic/luck/pet subset plus original init_attr/vary_init_attr/adjattrib/acurrstr on shared ATTRIB state verified during starting inventory/attributes. Live property/equipment callbacks connected; broader polymorph/poison/exercise/level/UI lifecycle remains unfinished.",
+      "scope": "Prior HP/intrinsic/luck/pet subset plus original init_attr/vary_init_attr/adjattrib/acurrstr on shared ATTRIB state verified during starting inventory/attributes. Live property/equipment callbacks connected; broader polymorph/poison/exercise/level/UI lifecycle remains unfinished. Original remaining public entries now use the same context with source widths, packed objects and real debug guard; tested initial gear/luck, hpmax/poly loss, exercise and alignment states expand this subset. Active debug printing, negative-alignment MINION effects and later lifecycle remain unverified.",
       "priorStatus": "not-connected",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
-      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden.; scripts/test-standalone-inventory-startup.mjs:15642 C comparisons; scripts/test-standalone-inventory-attributes.mjs:36288 C comparisons/324 inputs; 36-check full regression gate PASS; actual level/room/pet/inventory/attribute startup reaches vision_recalc with Wasm/network forbidden."
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden.; scripts/test-standalone-inventory-startup.mjs:15642 C comparisons; scripts/test-standalone-inventory-attributes.mjs:36288 C comparisons/324 inputs; 36-check full regression gate PASS; actual level/room/pet/inventory/attribute startup reaches vision_recalc with Wasm/network forbidden. test-standalone-attribute-state.mjs:16640 exact C comparisons over13 roles, complete u/disp and RNG, including stone_luck boolean256/257 narrowing."
     },
     {
       "module": "sfbase",
@@ -469,8 +472,8 @@
       "module": "region",
       "source": "src/region.c",
       "status": "verified-subset",
-      "scope": "Original startup clear/free empty-region reset plus visible_region_at queries for tested level generation. Nonempty region lifecycle, callbacks and active clouds remain unaccepted.",
-      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
+      "scope": "Original startup clear/free empty-region reset plus visible_region_at queries for tested level generation. Nonempty region lifecycle, callbacks and active clouds remain unaccepted. Nonempty region rectangle/negative-ttl save/rest and any_visible_region use the same cached original owner. Active cloud effects, callbacks, ghost remapping and full turn lifecycle remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted. test-standalone-level-persistence.mjs:852 combined checks over original nonempty level graphs and source historical files; focused subset only."
     },
     {
       "module": "weapon",
@@ -523,8 +526,8 @@
       "module": "allmain",
       "source": "src/allmain.c",
       "status": "in-progress",
-      "scope": "Actual newgame finishes mklev and reaches u_on_upstairs/u_on_newpos, stopping at original unset cliparound callback. Real window initialization, hero inventory/skills, remaining startup, loop and recordings remain unfinished. Original init_sound_disp_gamewindows runs before newgame, matching Unix main order and creating actual message/status/map/inventory windows. Newgame with live windows reaches unconnected HACK check_special_room after first-level generation; full main loop remains unfinished. With room-entry handling connected, the actual JS newgame prefix next reaches unconnected DOG makedog; completed game startup is not yet accepted.",
-      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted. scripts/test-standalone-status-startup.mjs:42005 C comparisons including40598 earlier banner/options checks; controlled terminal scratch and source-defined-field limits are documented in README.",
+      "scope": "Actual newgame finishes mklev and reaches u_on_upstairs/u_on_newpos, stopping at original unset cliparound callback. Real window initialization, hero inventory/skills, remaining startup, loop and recordings remain unfinished. Original init_sound_disp_gamewindows runs before newgame, matching Unix main order and creating actual message/status/map/inventory windows. Newgame with live windows reaches unconnected HACK check_special_room after first-level generation; full main loop remains unfinished. With room-entry handling connected, the actual JS newgame prefix next reaches unconnected DOG makedog; completed game startup is not yet accepted. Real early_init and an explicitly interrupted newgame-prefix followed by moveloop_preamble are C-verified. Actual checkpoint-enabled JS main reaches missing yyyymmddhhmmss in global state saving. No completed startup/turn/full-game claim.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted. scripts/test-standalone-status-startup.mjs:42005 C comparisons including40598 earlier banner/options checks; controlled terminal scratch and source-defined-field limits are documented in README. REPORT tests compare source early_init; engraving-read compares9 grouped prefix/preamble observations including615 exact terminal bytes and both RNGs; unix-platform-main observes original platform prefix through getlock.",
       "priorEvidence": [
         "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup.",
         "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
@@ -540,15 +543,15 @@
       "module": "role",
       "source": "src/role.c",
       "status": "verified-subset",
-      "scope": "Source role_init and table initialization on shared globals; all13 roles/random/invalid/name suffix inputs across3 seeds, including quest gender bits and complete tables/catalogues. Interactive selection menus and full game remain unverified.",
-      "evidence": "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup."
+      "scope": "Source role_init and table initialization on shared globals; all13 roles/random/invalid/name suffix inputs across3 seeds, including quest gender bits and complete tables/catalogues. Interactive selection menus and full game remain unverified. Shared original tables now provide assertion/checked-string/native-menu transport. ROLE prompt/string paths are verified; full interactive menus/recordings and fatal assertion ownership remain unaccepted.",
+      "evidence": "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup. test-standalone-role-transport.mjs:230 C prompt/string comparisons; existing game-startup4386 checks pass. Actual JS unsuffixed main consumes explicit[97,32]; this is not complete C interactive equivalence."
     },
     {
       "module": "engrave",
       "source": "src/engrave.c",
       "status": "verified-subset",
-      "scope": "Prior engraving CRUD plus original grave/random engraving creation, three text states and full allocated text payloads. Original random-text callback contract and rubout literals use typed standalone memory. Player engraving UI and non-generation effects unaccepted.",
-      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
+      "scope": "Prior engraving CRUD plus original grave/random engraving creation, three text states and full allocated text payloads. Original random-text callback contract and rubout literals use typed standalone memory. Player engraving UI and non-generation effects unaccepted. Original read_engr_at, surface/liquid descriptions and nonempty save/rest share existing head/state; reading, text memory, RNG, terminal messages and recorder frames are verified in explicit cases. Player engraving commands/full lifecycle remain unaccepted.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted. test-standalone-engraving-read.mjs:581 grouped C engraving comparisons/83 cases plus521 alignment-description and9 interrupted-prefix/preamble comparisons; test-standalone-level-persistence.mjs:852 joint checks including exact RNG/hero/real files and nonempty engraving restore."
     },
     {
       "module": "glyphs",
@@ -739,8 +742,8 @@
       "module": "dungeon",
       "source": "src/dungeon.c",
       "status": "verified-subset",
-      "scope": "Actual init_dungeons, including real nhlib.lua/dungeon.lua through original NHLUA policy and pure-JS Lua VM, produces matching full topology, branch/special-level lists and RNG across51 role/seed cases. Level generation, travel and full game remain incomplete.",
-      "evidence": "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden.",
+      "scope": "Actual init_dungeons, including real nhlib.lua/dungeon.lua through original NHLUA policy and pure-JS Lua VM, produces matching full topology, branch/special-level lists and RNG across51 role/seed cases. Level generation, travel and full game remain incomplete. Original surface descriptions and exclusion save/load additionally execute on the existing address owner. Full dungeon transitions remain unfinished.",
+      "evidence": "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden. test-standalone-engraving-read.mjs includes surface cases; test-standalone-level-persistence.mjs includes nonempty exclusion chains and real historical files.",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
     },
     {
@@ -807,8 +810,8 @@
       "module": "eat",
       "source": "src/eat.c",
       "status": "verified-subset",
-      "scope": "Prior item nutrition/tin-construction subset plus actual init_uhunger during source hero startup. Active eating effects and wider hunger transitions remain unaccepted.",
-      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.",
+      "scope": "Prior item nutrition/tin-construction subset plus actual init_uhunger during source hero startup. Active eating effects and wider hunger transitions remain unaccepted. Original hu_stat strings now occupy a single source-bound shared pointer table owned by hero-hunger storage0. Full EAT context, hunger/eating/occupation transitions remain unfinished.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden. hunger-data-abi binds unchanged source/native data; connected engraving/status fixtures exercise shared hunger text storage.",
       "priorEvidence": [
         "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
       ]
@@ -951,15 +954,16 @@
     {
       "module": "unixunix",
       "source": "sys/unix/unixunix.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original initial/slot/stale lock policies and refusal behavior use source-bound SDK stat/fcntl/descriptor transport. Real main creates its own PID lock. tty fstat, additional fcntl commands, panic restoration and broad platform paths remain unaccepted. Regular-file isatty has a documented errno defect outside this accepted prefix.",
+      "evidence": "test-standalone-unix-platform.mjs:130 C comparisons including fatal output/status, stat padding and descriptor errors; test-standalone-unix-platform-main.mjs:19 actual-main-prefix comparisons with source-created PID bytes and no manual source initialization."
     },
     {
       "module": "unixmain",
       "source": "sys/unix/unixmain.c",
       "status": "verified-subset",
-      "scope": "Original get_nhuuid and fixed NETHACK_SEED sys_random_seed branch run on shared DECL state; reseed uses live seed-strength flag and canonical public RNG pointer identities. Host entropy/platform main/terminal lifecycle remain unconnected.",
-      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished. scripts/test-standalone-level-startup.mjs:56217 original-C core/display state and selection comparisons over three seeds."
+      "scope": "Original get_nhuuid and fixed NETHACK_SEED sys_random_seed branch run on shared DECL state; reseed uses live seed-strength flag and canonical public RNG pointer identities. Host entropy/platform main/terminal lifecycle remain unconnected. Original main now performs source initialization once, assigns PID, processes the fixed prefix and creates its own initial lock without injected state. Complete game/terminal/platform lifecycle remains unfinished.",
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished. scripts/test-standalone-level-startup.mjs:56217 original-C core/display state and selection comparisons over three seeds. test-standalone-unix-platform-main.mjs:19 C comparisons through actual getlock with full projected globals and actual PID bytes; explicit deployment resources/time inputs."
     },
     {
       "module": "options",
@@ -972,8 +976,8 @@
       "module": "botl",
       "source": "src/botl.c",
       "status": "verified-subset",
-      "scope": "Prior status setup/teardown subset plus actual initial bot/status rendering through real initoptions/newgame. Later conditions/hilites/menus and gameplay remain unaccepted.",
-      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden. scripts/test-standalone-status-startup.mjs:42005 C comparisons including40598 earlier banner/options checks; controlled terminal scratch and source-defined-field limits are documented in README.; scripts/test-standalone-vision-display.mjs:10881 comparisons/39 role-seed cases, Wasm/network forbidden JS prefix; 38-check regression gate PASS at9e849bd."
+      "scope": "Prior status setup/teardown subset plus actual initial bot/status rendering through real initoptions/newgame. Later conditions/hilites/menus and gameplay remain unaccepted. Measured records now cross both inherited and dynamically resolved service boundaries as real addresses; source status decisions unchanged.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden. scripts/test-standalone-status-startup.mjs:42005 C comparisons including40598 earlier banner/options checks; controlled terminal scratch and source-defined-field limits are documented in README.; scripts/test-standalone-vision-display.mjs:10881 comparisons/39 role-seed cases, Wasm/network forbidden JS prefix; 38-check regression gate PASS at9e849bd. Connected nonempty PLINE/engraving tests cover automatic status flush and expose/fix prior dunlev record forwarding."
     },
     {
       "module": "zap",
