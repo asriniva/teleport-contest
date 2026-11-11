@@ -104,6 +104,7 @@ export function enableMonsterCreation(environment,layouts,selection){
   if(fn==='makemon'||fn==='adj_lev'||fn==='peace_minded')args[0]=record('struct permonst',args[0]);
   else if(fn==='init_mextra')args[0]=record('struct mextra',args[0]);
   else if(!['mbirth_limit','propagate','newmextra','golemhp'].includes(fn))args[0]=record('struct monst',args[0]);
+  if(fn==='makemon_rnd_goodpos')args[2]=record('coord',args[2]);
   return args;
  }});
  // Each owner gets its own header/constants context, sharing only C memory.

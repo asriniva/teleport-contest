@@ -51,6 +51,13 @@ for(let y=0;y<Lm.ROWNO;y++)env.memory.view.setBigUint64(rows+y*8,BigInt(vision+y
 const pm=layouts.earlyarg.PM_ORC,mon=env.services.makemon(env.requireGlobal('mons')+pm*env.ctypes.size('struct permonst'),10,10,Lm.MM_NOGRP|Lm.MM_NONAME|Lm.MM_NOMSG);
 assert.ok(mon);assert.equal(env.address(w.svl.level.monsters[10][10]),env.address(mon));
 env.services.discard_minvent(mon,0);env.services.dobjsfree();w.svl.level.monsters[10][10]=0;w.fmon=0;env.services.dealloc_monst(mon);assert.ok(!env.memory.live.has(env.address(mon)));
+env.enableWorldPosition(layouts);
+env.services.make_engr_at(10,10,'Elbereth',0,0n,layouts.engrave.DUST);assert.ok(env.services.engr_at(10,10));env.services.del_engr_at(10,10);
+for(let x=0;x<Lm.COLNO;x++)for(let y=0;y<Lm.ROWNO;y++)w.levl[x][y].typ=Lm.ROOM;
+const ant=Object.values(layouts).find(p=>p&&p.PM_GIANT_ANT!==undefined).PM_GIANT_ANT,flags=Lm.NO_MINVENT|Lm.MM_NOGRP|Lm.MM_NONAME|Lm.MM_NOMSG;
+const random=env.services.makemon(env.requireGlobal('mons')+ant*env.ctypes.size('struct permonst'),0,0,flags);assert.ok(random);
+const am=creatures.views.record('struct monst',random);env.services.m_initgrp(random,am.mx,am.my,4,flags);assert.ok(w.fmon.nmon);
+while(w.fmon){const m=w.fmon;w.fmon=m.nmon;m.nmon=0;w.svl.level.monsters[m.mx][m.my]=0;env.services.dealloc_monst(m);}
 const terminal=env.enableTerminal(layouts.termcap);
 env.call('termcap','nomux_clear_screen');env.call('termcap','nomux_capture_write_input_boundary');assert.equal(terminal.frames.length,1);
 const lua=env.enableLua(),L=lua.api.luaL_newstate();assert.equal(lua.api.luaL_loadstring(L,'return 21*2'),0);assert.equal(lua.api.lua_pcallk(L,0,1,0,0n,0n),0);assert.equal(lua.api.lua_tointegerx(L,-1,0),42n);lua.api.lua_close(L);

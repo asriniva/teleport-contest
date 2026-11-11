@@ -38,6 +38,7 @@ injected. C compilers and C/Wasm oracles are development-only.
 | Timer queues and species-backed items | `enableTimers` and `enableMonsterSelection`: 1,350 timer/union/object comparisons plus 9,156 species/biology/growth/difficulty/elemental/hell and special-item comparisons across three seeds. Real queue insertion/duplicates/move/split/stop/attach, sterile egg expiry, opaque uint64 bits, ID wrap and heap growth; four glob constructors; corpse/figurine/egg/statue/tin/candy constructors, nested statue contents, deletion queues and exact RNG logs. Actual source event owners are required; nonsterile hatching, other elapsed events, full monster placement and quest-specific selection remain unfinished. |
 | Containers, names and random artifacts | Six container types pass 3,894 comparisons over 1,296 constructors/3,564 contained records across initial inventory, ordinary turns and map generation. `enableItemNaming` adds existing DO_NAME/ARTIFACT functions on the same tables/heap: 11,046 comparisons over 2,760 novel/unique/weapon constructors, including 28 artifacts; complete object/extra/name bytes, existence/origin flags, timer/deletion graphs and exact RNG logs. Naming UI, divine gifts, wielded effects and world interactions remain unaccepted. |
 | Monster creation, placement and inventory | `enableMonsterCreation` and `enableMonsterInventory` connect real MAKEMON/STEED/MON/MONDATA/DOG/MINION/PRIEST/VAULT/SHKNAM plus STEAL/WORN/MUSE/DISPLAY/TELEPORT/DO_WEAR dependencies. Two suites each pass 1,299 C comparisons over 432 constructions, 18 species, eight caller flag combinations and three seeds. Full monster/extra/item/name bytes, health/alignment/birth state, map ownership, light records, normal inventory/equipment and exact RNG logs compare. All DECL images are unchanged by enabling construction. These are explicit map-generation/fixed-position component inputs; random placement/groups, visible/world UI, shape changes and complete monster behavior remain unfinished. |
+| Terrain and position selection | `enableWorldPosition`: 4,998 original-C comparisons across three seeds cover 12 species, 12 terrain/door/drawbridge inputs, flags, coordinate ring order/shuffling, nearby selection, source debug patterns, mutable engraving bytes/text, boulders and exclusions. Giant-ant random coordinates and groups compare complete monster lists, birth state, map identities and RNG logs. Random species/group selection across the full catalogue, inventory-bearing groups, hero/world transitions and recording remain unfinished. |
 | Stdio / persistence | Binary IO, buffering, EOF/error/pushback, seek, close and output contracts; capture/restore/deletion through existing persistence policy. No host device/OS-wide POSIX claim. |
 | Lua | Existing JS VM and 83 typed C API dispatch recipes on measured memory; bytecode, callbacks/error unwinding, date/files, userdata growth probes. Full nhlua/nhlobj integration and all standard libraries are unfinished. |
 | Terminal | 445 original-C recorder-cell/capture/terminfo comparisons; existing recorder encoding preserved. Window procedures, tty input and game loop are unfinished. The inherited 6,144-byte C recorder buffer bounds captures; larger captures are not accepted by this proof. |
@@ -81,7 +82,7 @@ and the host compiler wrapper. From the candidate checkout run:
 STANDALONE_REFERENCE_ROOT=/path/to/reference /path/to/sdk/node scripts/test-standalone.mjs
 ```
 
-The gate runs source/closure checks, the original base-runtime suite, and eighteen
+The gate runs source/closure checks, the original base-runtime suite, and nineteen
 standalone suites; logs and script hashes go to `.cache/standalone-validation/`.
 It requires the existing original native allocation oracle under the candidate's
 `.cache/tu-probes/native-oracles/` (alloc-native.node, alloc-full-native-build.json,
@@ -279,6 +280,55 @@ random placement/groups, shape changes, burning items, saddle attachment,
 visible or hallucinated naming/UI, divine equipment effects and full-game
 recording remain unfinished. Production isolation constructs an equipped orc
 with WebAssembly/network capabilities forbidden before import.
+
+## Terrain and world-position profile
+
+Build the larger position reference:
+
+```sh
+python3 scripts/build-standalone-object-state.py --world-position --reference-root /path/to/reference --out .cache/standalone-world-position
+```
+
+`STANDALONE_WORLD_POSITION_ORACLE` overrides that directory. This adds original
+DBRIDGE/MONMOVE/ENGRAVE/MKMAZE/FILES, including MAKEMON source in the probe to
+observe its static group helper without rewriting the function. The reference
+has 527 compiler-prototyped abort function boundaries and 77 explicit zero
+component-input globals. `STANDALONE_REAL_FILES` removes the older fixture's
+nhclose forwarding helper/delete_savefile abort boundary so actual FILES owns
+those names in this profile. All seven older object/item/monster references
+were rebuilt after adding the conditional; their original policies/flags are
+unchanged. Existing source/header/artifact checks reject the stale references.
+
+Enable `enableWorldPosition(layouts)` after monster creation. It connects actual
+terrain, accessibility, wall/air, engraving, object-at and exclusion owners to
+TELEPORT's goodpos, nearby selection and coordinate collection. The same map
+records are used by MAKEMON's random-coordinate and group helpers. Coordinate
+arrays/copies and lazy RNG arguments retain measured widths and exact caller
+logs. Original rm doormask/wall_info/drawbridgemask aliases share the same bits.
+
+A direct C witness disproved the initial DEBUG-off assumption; that candidate
+was rejected. This configured C build has DEBUG enabled. Production now runs
+original FILES debugcore/nh_basename with measured address syntax, original
+STRUTIL wildcard matching and HACKLIB comparison helpers. Debug message macros
+preserve iflags.last_msg and resolve the real pline owner when the source guard
+allows output; actual debug printing/UI remains unconnected. No empty success
+or disabled-debug implementation is retained. Source engraving creation,
+replacement/deletion and all three text buffers are tested with Elbereth,
+case variants, future completion times and headstones; active player engraving
+and wisdom exercise remain unfinished.
+
+The 4,998-comparison profile includes full ordered/shuffled coordinate bytes,
+12-species/12-terrain goodpos matrices, nearby results, explicit object/exclusion
+input records, debug file patterns, complete engraving bytes/text and exact RNG
+logs across three seeds. Twelve random-coordinate giant-ant creations and
+subsequent groups per seed compare every monster byte, catalogue/list/map
+identity and birth/vital bytes. These group callers explicitly request
+NO_MINVENT/NONAME/NOMSG/NOGRP (the group helper creates each member via its
+original body). Full catalogue random spawning, shapechanges, inventory-bearing
+groups, active fear/onscary for existing monsters, filter callbacks, hero water/
+lava handling, death/migration and full-game recording remain unaccepted.
+Production isolation also constructs a random-position group and an engraving
+with Wasm/network capabilities forbidden before import.
 
 ## Next integration milestone
 

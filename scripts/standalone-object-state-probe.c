@@ -31,8 +31,10 @@ void pline(const char *fmt,...){abort();}
 void raw_printf(const char *fmt,...){abort();}
 void error(const char *fmt,...){abort();}
 void nh_terminate(int status){abort();}
+#ifndef STANDALONE_REAL_FILES
 int delete_savefile(void){abort();}
 int nhclose(int fd){return close(fd);}
+#endif
 unsigned long sys_random_seed(void){abort();}
 #include STANDALONE_O_INIT_SOURCE
 #include "tu-o_init-layout.h"

@@ -1,15 +1,15 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "a8bf125fda315e16c975916a72c615c194427df8",
+  "acceptedCheckpoint": "b012514605ac1abdb6864abfb3881bf63d112d6d",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
     "provider-only": 2,
-    "not-connected": 79,
-    "verified-subset": 33,
+    "not-connected": 75,
+    "verified-subset": 38,
     "in-progress": 7,
-    "transport-only": 6
+    "transport-only": 5
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -327,8 +327,9 @@
     {
       "module": "dbridge",
       "source": "src/dbridge.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "is_pool/is_lava/is_waterwall/db_under_typ on explicit terrain/bridge inputs; bridge manipulation/destruction/world effects unfinished.",
+      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
     },
     {
       "module": "mondata",
@@ -511,8 +512,9 @@
     {
       "module": "engrave",
       "source": "src/engrave.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Actual engraving creation/replacement/deletion, three text buffers and strict scary-text queries; active player engraving/attribute exercise/UI/persistence unfinished.",
+      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
     },
     {
       "module": "glyphs",
@@ -574,9 +576,9 @@
     {
       "module": "mkmaze",
       "source": "src/mkmaze.c",
-      "status": "transport-only",
-      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
-      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+      "status": "verified-subset",
+      "scope": "is_exclusion_zone used by real position selection on explicit input zones; other map generation functions remain transport-only/unconnected.",
+      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
     },
     {
       "module": "dokick",
@@ -619,8 +621,8 @@
       "module": "teleport",
       "source": "src/teleport.c",
       "status": "verified-subset",
-      "scope": "noteleport_level through normal non-hell initial item selection; movement/hell demon-court/world closure unfinished.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
+      "scope": "goodpos/nearby/coordinate collection plus prior eligibility helper; terrain/engravings/boulders/exclusions and ordered RNG comparisons. Hero/world teleport, active monster fear and broad random-species closure unfinished.",
+      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
     },
     {
       "module": "mklev",
@@ -632,8 +634,9 @@
     {
       "module": "monmove",
       "source": "src/monmove.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "closed_door/accessibility against actual underlying terrain; full AI/movement/world behavior unfinished.",
+      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
     },
     {
       "module": "spell",
@@ -702,8 +705,9 @@
       "module": "makemon",
       "source": "src/makemon.c",
       "status": "verified-subset",
-      "scope": "18-species construction/propagation/health/alignment/sex/extra flags, normal inventory and equipment; random placement/groups, shape changes and full world closure unfinished.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
+      "scope": "18-species construction/propagation/health/alignment/sex/extra flags, normal inventory and equipment; random placement/groups, shape changes and full world closure unfinished. Giant-ant random coordinates/groups now have full list/map/vital/RNG component evidence with no-inventory caller flags.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md",
+      "newWorldEvidence": "scripts/test-standalone-world-position.mjs; full random catalogue and inventory-bearing group closure unfinished."
     },
     {
       "module": "mhitu",
@@ -785,8 +789,9 @@
     {
       "module": "files",
       "source": "src/files.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original debugcore/nh_basename guard integrated and compared for file/wildcard patterns; file lifecycle, game saves/recovery and OS closure unfinished.",
+      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
     },
     {
       "module": "display",
@@ -817,8 +822,8 @@
       "module": "hack",
       "source": "src/hack.c",
       "status": "verified-subset",
-      "scope": "obj_to_any shared-union lifetime only; full movement and world interactions remain unconnected.",
-      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
+      "scope": "obj_to_any plus may_passwall on measured wall flags; movement/world closure unfinished.",
+      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
     },
     {
       "module": "uhitm",
@@ -830,7 +835,7 @@
       "module": "mon",
       "source": "src/mon.c",
       "status": "verified-subset",
-      "scope": "Shape-kind, deallocation/extra ownership and next-turn gear flag helpers; full movement/death/world closure unfinished.",
+      "scope": "Shape-kind, deallocation/extra ownership and next-turn gear flag helpers; full movement/death/world closure unfinished. m_in_air connected through water-position checks.",
       "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
