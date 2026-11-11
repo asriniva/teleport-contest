@@ -3,6 +3,7 @@ import * as makemon from '../ported/makemon.js';
 import {set_mon_data,mon_learns_traps,attacktype} from '../ported/mondata.js';
 import {pm_to_cham,dealloc_monst,check_gear_next_turn} from '../ported/mon.js';
 import {place_monster} from '../ported/steed.js';
+import {christen_monst,new_mgivenname,free_mgivenname} from '../ported/do_name.js';
 import {newedog,free_edog} from '../ported/dog.js';
 import {newemin,free_emin} from '../ported/minion.js';
 import {newepri,free_epri,mon_aligntyp} from '../ported/priest.js';
@@ -118,6 +119,8 @@ export function enableMonsterCreation(environment,layouts,selection){
   ismnum:n=>Number(n>=L.LOW_PM&&n<L.NUMMONS),is_shapeshifter:env.is_shapeshifter,
   ptrOffset:(p,n)=>environment.address(p)+Number(n),copyStruct:env.copyRecord,monSize:ctypes.size('struct monst'),
  });
+ const naming=context(layouts.do_name);Object.assign(naming,{charPointer:p=>typeof p==='string'?services.literal(p):environment.address(p),strlen:p=>BigInt(services.strlen(p)),has_mgivenname:env.has_mgivenname});
+ environment.register('monster-naming',{christen_monst,new_mgivenname,free_mgivenname},naming,{prepareArgs:(_fn,args)=>{args[0]=record('struct monst',args[0]);return args;}});
  environment.register('monster-lifetime',{pm_to_cham,dealloc_monst,check_gear_next_turn},mon,{prepareArgs:(fn,args)=>{if(fn!=='pm_to_cham')args[0]=record('struct monst',args[0]);return args;}});
  const place=Object.create(env);Object.assign(place,{QBUFSZ:layouts.steed.QBUFSZ,MON_FLOOR:BigInt(layouts.steed.MON_FLOOR),DEADMONSTER:m=>Number(m.mhp<1),coordxy:transport.short});
  environment.register('monster-placement',{place_monster},place,{prepareArgs:(_fn,args)=>{args[0]=record('struct monst',args[0]);return args;}});

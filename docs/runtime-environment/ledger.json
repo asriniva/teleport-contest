@@ -1,7 +1,7 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "14674301966fde0c9885a2318367de0bf5e72baa",
+  "acceptedCheckpoint": "dd68b24a345422882cb8412924c693b0dd718307",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
@@ -300,8 +300,8 @@
       "module": "steed",
       "source": "src/steed.c",
       "status": "verified-subset",
-      "scope": "Real place_monster and can_saddle eligibility in tested construction context; riding/saddle attachment/world cleanup unfinished.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
+      "scope": "Real place_monster/can_saddle plus put_saddle_on_mon verified in actual pony creation, including complete saddle nonpointer bytes, owner ID, worn mask, discovery and RNG. Riding/world cleanup remain unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
     },
     {
       "module": "wizard",
@@ -319,8 +319,8 @@
       "module": "o_init",
       "source": "src/o_init.c",
       "status": "verified-subset",
-      "scope": "11 object startup/shuffle/probability/range/description/name save/restore functions; menus excluded.",
-      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+      "scope": "Existing startup/shuffle/name-state subset plus discover_object/observe_object reached by actual pony saddle identification; discovery table verified. Menus/gameplay lifecycle remain unfinished.",
+      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
     },
     {
       "module": "ball",
@@ -436,10 +436,10 @@
       "module": "attrib",
       "source": "src/attrib.c",
       "status": "verified-subset",
-      "scope": "Source newhp and adjabil/role_abil/postadjabil connected through original ATTRIB adapter, in addition to prior inventory luck subset. Initial-role/race intrinsics/HP verified; later attribute/level/UI behavior remains unaccepted.",
+      "scope": "Existing HP/intrinsics/luck plus acurr Charisma clamps and exercise during saddle discovery connected on shared original ATTRIB context. Other attributes/level/UI behavior remains unaccepted.",
       "priorStatus": "not-connected",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
-      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
     },
     {
       "module": "sfbase",
@@ -452,8 +452,8 @@
       "module": "dog",
       "source": "src/dog.c",
       "status": "verified-subset",
-      "scope": "newedog/free_edog ownership only; pet behavior, taming and movement unfinished.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
+      "scope": "Actual makedog/initedog on defined empty-room inputs: default/named/random dog/cat, saddled and pauper pony, no-pet preference, companion state and RNG. Taming, migration and full pet behavior remain unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
     },
     {
       "module": "region",
@@ -479,8 +479,8 @@
       "module": "u_init",
       "source": "src/u_init.c",
       "status": "verified-subset",
-      "scope": "Source u_init_misc via unchanged U_INIT adapter initializes complete hero state while preserving full24-byte roleplay record. Forty source tables receive measured standalone storage; skills/initial inventory algorithms remain unconnected.",
-      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
+      "scope": "Existing u_init_misc and source table transport retained; u_init_inventory_attrs is now exposed and executes to an unconnected header-macro service. Complete starting inventory/attributes/skills remain unfinished.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
     },
     {
       "module": "sounds",
@@ -586,10 +586,10 @@
       "module": "do_name",
       "source": "src/do_name.c",
       "status": "verified-subset",
-      "scope": "safe_oname plus construction-time oname/noveltitle, full name/extra ownership; naming UI, wielded/unpaid effects remain unfinished.",
+      "scope": "Existing object naming plus original monster christening/name ownership used by default/named starting pets, verified against allocated C names. Interactive naming remains unfinished.",
       "priorStatus": "not-connected",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
-      "evidence": "scripts/test-standalone-item-naming.mjs:11046 C comparisons/2760 constructors/28 artifacts; explicit profile in README.md"
+      "evidence": "scripts/test-standalone-item-naming.mjs:11046 C comparisons/2760 constructors/28 artifacts; explicit profile in README.md; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
     },
     {
       "module": "vision",
@@ -662,8 +662,8 @@
       "module": "monmove",
       "source": "src/monmove.c",
       "status": "verified-subset",
-      "scope": "closed_door/accessibility against actual underlying terrain; full AI/movement/world behavior unfinished.",
-      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
+      "scope": "Shared original MONMOVE adapter now supplies set_apparxy during actual pet creation; direct pet apparent-location comparison verified. Full AI/movement/travel behavior remains unfinished.",
+      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
     },
     {
       "module": "spell",
@@ -875,8 +875,8 @@
       "module": "mon",
       "source": "src/mon.c",
       "status": "verified-subset",
-      "scope": "Shape-kind, deallocation/extra ownership and next-turn gear flag helpers; full movement/death/world closure unfinished. m_in_air connected through water-position checks.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
+      "scope": "Original MON adapter shares measured globals and packed fields; close-up/photo history counters verified during pet creation. Existing lifetime owners remain; complete monster lifecycle remains unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
     },
     {
       "module": "pickup",

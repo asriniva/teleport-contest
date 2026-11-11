@@ -2,7 +2,7 @@
 import {mpickobj,findgold} from '../ported/steal.js';
 import * as worn from '../ported/worn.js';
 import {breakarm,sliparm,num_horns} from '../ported/mondata.js';
-import {can_saddle} from '../ported/steed.js';
+import {can_saddle,put_saddle_on_mon,steeds} from '../ported/steed.js';
 import {mon_nam,Monnam,minimal_monnam} from '../ported/do_name.js';
 import {noteleport_level} from '../ported/teleport.js';
 import {hard_helmet} from '../ported/do_wear.js';
@@ -44,7 +44,7 @@ export function enableMonsterInventory(environment,layouts,creation){
   is_dlord:p=>env.is_demon(p)&&env.is_lord(p),is_covetous:p=>Boolean(p.mflags3&Number(layouts.teleport.M3_COVETOUS)),
  });
  environment.register('monster-teleport-eligibility',{noteleport_level},tele,{prepareArgs:(_fn,args)=>[monster(args[0])]});
- const saddle=context(layouts.steed);environment.register('monster-saddle-check',{can_saddle},saddle,{prepareArgs:(_fn,args)=>[monster(args[0])]});
+ const saddle=context(layouts.steed);saddle.steeds=services.literal(String.fromCharCode(...steeds.map(n=>typeof n==='string'?layouts.steed[n]:n)));saddle.unsolid=p=>Number(Boolean(p.mflags1&BigInt(layouts.steed.M1_UNSOLID)));environment.exposeAddressPort('invent',['fully_identify_obj']);saddle.W_SADDLE=BigInt(layouts.steed.W_SADDLE);saddle.which_armor=(...args)=>object(environment.resolve('which_armor')(...args));saddle.mksobj=(...args)=>object(environment.resolve('mksobj')(...args));environment.register('monster-saddle-check',{can_saddle,put_saddle_on_mon},saddle,{prepareArgs:(fn,args)=>fn==='can_saddle'?[monster(args[0])]:[object(args[0]),monster(args[1])]});
  const helmet=context(layouts.do_wear);Object.assign(helmet,{is_helmet:equip.is_helmet,
   is_metallic:o=>env.objects[o.otyp].oc_material>=layouts.do_wear.IRON&&env.objects[o.otyp].oc_material<=layouts.do_wear.MITHRIL,
   is_crackable:o=>env.objects[o.otyp].oc_material===layouts.do_wear.GLASS&&o.oclass===layouts.do_wear.ARMOR_CLASS,

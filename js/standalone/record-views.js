@@ -30,7 +30,7 @@ export function createRecordViews(environment) {
                 set:v=>{if(typeof v==='string'&&scalar.includes('*'))v=environment.services.literal(v);if(field.record)memory.memmove(p+field.offset,environment.address(v),ctypes.record(field.record).size);else ctypes.setField(type,p,name,scalar,v);},
             });
         }
-        const aliases=definition.type==='obj'?{opoisoned:'otrapped',odiluted:'oeroded',orotten:'oeroded'}:
+        const aliases=definition.type==='obj'?{leashmon:'corpsenm',opoisoned:'otrapped',odiluted:'oeroded',orotten:'oeroded'}:
             definition.type==='objclass'?{oc_skill:'oc_subtyp',oc_armcat:'oc_subtyp',a_ac:'oc_oc1'}:
             definition.type==='rm'?{doormask:'flags',wall_info:'flags',drawbridgemask:'flags'}:{};
         for(const [alias,name]of Object.entries(aliases))if(name in view&&!(alias in view))Object.defineProperty(view,alias,{get:()=>view[name],set:v=>{view[name]=v;}});

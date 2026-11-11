@@ -42,7 +42,7 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
   setIntrinsic:(i,v)=>{views.record('struct you',environment.requireGlobal('u')).uprops[layouts.polyself[i?'BLINDED':'JUMPING']].intrinsic=v;},
   rn2:(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('u_init.c'),line,services.literal(caller));return services.rn2(n);},
  });
- const bridge=createUInitBridge(layouts.u_init);environment.register('hero-init',Object.fromEntries(['u_init_misc','skills_for_role'].map(name=>[name,(...args)=>bridge(ui,name,...args)])));
+ const bridge=createUInitBridge(layouts.u_init);environment.register('hero-init',Object.fromEntries(['u_init_misc','skills_for_role','u_init_inventory_attrs'].map(name=>[name,(...args)=>bridge(ui,name,...args)])));
  const poly=foreign(),polyNames=Object.keys(abi.polyself.schema);
  function polyField(kind,p,index){const type=polyNames[kind],f=abi.polyself.schema[type]?.fields[index];if(!f)throw new Error('Unknown POLYSELF field');return{type,f,p:address(p)};}
  Object.assign(poly,{
@@ -68,7 +68,8 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
   roleplayBit:i=>record('struct you',environment.requireGlobal('u')).uroleplay[i?'deaf':'blind'],
  });
  for(const kind of ['rn2','rnd','rn1','d'])a[kind]=(...args)=>{const caller=args.pop(),line=args.pop();if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('attrib.c'),line,services.literal(caller));return services[kind](...args);};
- const attr=createAttribEnvironment(a,layouts.attrib,attrib);environment.register('hero-attributes',{newhp:attrib.newhp,adjabil:attrib.adjabil},attr);
+ a.assert=ok=>{if(!ok)environment.resolve('__assert_fail')(services.literal('chridx >= 0 && chridx < A_MAX'),services.literal('attrib.c'),1204,services.literal('acurr'));};
+ const attr=createAttribEnvironment(a,layouts.attrib,attrib);environment.register('hero-attributes',{newhp:attrib.newhp,adjabil:attrib.adjabil,acurr:attrib.acurr,exercise:attrib.exercise},attr);
  const power=context(layouts.exper);Object.assign(power,{xint16:transport.short,rnd:(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('exper.c'),line,services.literal(caller));return services.rnd(n);}});environment.register('hero-energy',{newpw},power);
  const hunger=context(layouts.eat);Object.defineProperty(hunger,'disp',{value:record('struct display_hints',environment.requireGlobal('disp'))});environment.register('hero-hunger',{init_uhunger},hunger);
  const rank=context(layouts.botl);rank.strlen=p=>Number(services.strlen(p));environment.register('hero-rank-size',{max_rank_sz},rank);

@@ -19,7 +19,7 @@ function create(seed){
  env.enableStdio();env.enableDecl(layouts.decl);env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.enableHacklib(layouts.hacklib);
  env.call('objects','objects_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed});env.call('rnd','rng_log_init');
  env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});
- const component=env.enableObjectState(layouts);assert.equal(component.exports.length,11);
+ const component=env.enableObjectState(layouts);assert.equal(component.exports.length,13);
  assert.throws(()=>env.resolve('dodiscovered'),/Unresolved/);assert.equal(typeof env.resolve('init_dungeons'),'function');assert.throws(()=>env.resolve('nhl_init'),/Unresolved/);
  const {ctypes}=env;
  const set=(type,p,field,v)=>ctypes.setField(type,p,field,field==='num_dunlevs'?'short':'int',v);

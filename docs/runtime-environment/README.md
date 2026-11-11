@@ -13,6 +13,21 @@ subsets, transport-only adapters, active integration and unconnected modules.
 Provider libraries such as Lua/libc/CVFS are outside that denominator. No row's
 component status implies full-game recording equivalence.
 
+The pet integration now reaches original inventory/attribute startup after actual
+pet creation. `scripts/test-standalone-pet-startup.mjs` passes 385 original-C
+comparisons, including terminal input controls, Charisma clamps, close-up/photo
+history, apparent hero location, companion reinitialization and actual named,
+default/random dog/cat and saddled/pauper pony creation on defined empty-room
+inputs. It compares placement and monster fields, complete EDOG records,
+allocated names, saddle nonpointer bytes, owner/worn mask, discovery table and
+exact RNG logs. No-pet preference is also checked. Pointer addresses in saddle
+records are normalized; their owner ID is compared in its original scalar slot.
+This does not establish full DOG/MON/MONMOVE behavior or recording equivalence.
+The next real startup boundary is the U_INIT header-macro transport needed by
+`u_init_inventory_attrs`. The expanded34-check regression gate passes. A separate actual-startup fixture
+reaches inventory setup after pet creation with Wasm/network capabilities
+forbidden. All138 translated policies and three frozen files are unchanged.
+
 ## Implemented scope
 
 `js/standalone/environment.js` creates an isolated CMemory/CVFS instance and
