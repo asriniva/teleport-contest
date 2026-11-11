@@ -438,3 +438,32 @@ not accept the additional handler lifecycle in allopt_array_init. Number-only
 status version cases exclude the unconnected Unix basename owner. Native-layout
 terminal tests retain the documented controlled scratch precondition. Full-game
 acceptance remains false. The expanded31-check regression gate passed; a separate fixture completes tty/banner/options with Wasm/network globals forbidden and reaches the next BOTL status owner.
+
+
+`enableStatus(layouts)` connects unchanged BOTL state/data and typed window
+callbacks; `enableGameWindows(layouts)` connects original ALLMAIN's pre-game
+window routine and the configured original SOUNDS activation. Call the source
+`init_sound_disp_gamewindows()` after tty initialization and before `newgame`, as
+Unix main does. Otherwise POLYSELF correctly reports status reassessment before
+initialization. The real pre-game routine creates message/status/map/inventory
+windows, initializes status and clears display buffers. Newgame now reaches the
+next unconnected HACK room-entry owner after generating the first level.
+
+```sh
+python3 scripts/build-standalone-status-startup.py --reference-root /path/to/reference --out .cache/standalone-status-startup-v2
+node scripts/test-standalone-status-startup.mjs
+```
+
+This separate C profile includes original BOTL/SOUNDS owners in observation-only
+translation units, with existing private-ABI assertions. Three private BOTL adapter
+mirror records are compiler measured and source bound. PASS42,005 comparisons
+include the earlier40,598 banner/options cohort plus status/game-window state,
+constructor preservation of152 DECL roots, reassessment across form/visibility/
+hitpoint-bar settings, ownership/identity and cleanup of allocated status values,
+complete tty field state, initialized window records/all20 slots, buffered row
+lengths/allocation presence, and source no-sound activation. The configured sound
+set contains only that original provider; this does not add an audio backend.
+The test excludes uninitialized window padding/blanked/menu_ch and text-buffer
+tails, and retains the documented controlled terminal scratch inputs. Actual
+status rendering, parsing, messages, broader sound and full recordings remain
+unfinished. The expanded32-check regression gate passed. A separate fixture runs actual window/status and first-level startup to the room-entry boundary with Wasm/network capabilities forbidden.

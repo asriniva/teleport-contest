@@ -43,6 +43,8 @@ import {enableMonsterInventory} from './monster-inventory.js';
 import {enableWorldPosition} from './world-position.js';
 import {createEnvironmentInputs} from './environment-inputs.js';
 import {enableLuaSandbox} from './lua-sandbox.js';
+import {enableGameWindows} from './game-windows.js';
+import {enableStatus} from './status.js';
 import {enableOptions} from './options.js';
 import {enableVersionInfo} from './version-info.js';
 import {enableWindowSystem} from './window-system.js';
@@ -281,7 +283,7 @@ export function createStandaloneEnvironment(options={}) {
         enableMonsterCreation:layouts=>{if(!monsterSelection)throw new Error('Monster creation requires species selection');return monsterCreation=enableMonsterCreation(environment,layouts,monsterSelection);},
         enableMonsterInventory:layouts=>{if(!monsterCreation)throw new Error('Monster inventory requires monster creation');return enableMonsterInventory(environment,layouts,monsterCreation);},
         enableWorldPosition:layouts=>{if(!monsterCreation)throw new Error('World positioning requires monster creation');return enableWorldPosition(environment,layouts,monsterCreation);},
-        enableWindowSystem:layouts=>enableWindowSystem(environment,layouts),enableVersionInfo:layouts=>enableVersionInfo(environment,layouts),enableOptions:layouts=>enableOptions(environment,layouts),
+        enableWindowSystem:layouts=>enableWindowSystem(environment,layouts),enableVersionInfo:layouts=>enableVersionInfo(environment,layouts),enableOptions:layouts=>enableOptions(environment,layouts),enableStatus:layouts=>enableStatus(environment,layouts),enableGameWindows:layouts=>enableGameWindows(environment,layouts),
         enableLevelContents:layouts=>{if(!monsterCreation)throw new Error('Level contents requires monster services');return enableLevelContents(environment,layouts,monsterCreation);},
         enableLevelStartup:layouts=>{if(!monsterCreation)throw new Error('Level startup requires monster services');return enableLevelStartup(environment,layouts,monsterCreation);},
         enableDisplayStartup:layouts=>{if(!monsterCreation)throw new Error('Display startup requires monster services');return enableDisplayStartup(environment,layouts,monsterCreation);},

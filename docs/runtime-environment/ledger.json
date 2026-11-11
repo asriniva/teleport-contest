@@ -1,12 +1,12 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "20a33346cfa9a76b3c50f9d49a87e9efee1bf05a",
+  "acceptedCheckpoint": "17a88e25a5dee24fda855f48098162e721a471c7",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
-    "verified-subset": 67,
-    "not-connected": 48,
+    "verified-subset": 68,
+    "not-connected": 47,
     "provider-only": 1,
     "in-progress": 8,
     "transport-only": 3
@@ -485,8 +485,9 @@
     {
       "module": "sounds",
       "source": "src/sounds.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original configured nosound initializer, soundlib_choices and activate_chosen_soundlib operate on shared native soundprocs/DECL through unchanged adapter. Sound header guard and callback dispatch are connected; other sound policies and audio backends remain unverified.",
+      "evidence": " scripts/test-standalone-status-startup.mjs:42005 C comparisons including40598 earlier banner/options checks; controlled terminal scratch and source-defined-field limits are documented in README."
     },
     {
       "module": "save",
@@ -510,8 +511,8 @@
       "module": "allmain",
       "source": "src/allmain.c",
       "status": "in-progress",
-      "scope": "Actual newgame finishes mklev and reaches u_on_upstairs/u_on_newpos, stopping at original unset cliparound callback. Real window initialization, hero inventory/skills, remaining startup, loop and recordings remain unfinished.",
-      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted.",
+      "scope": "Actual newgame finishes mklev and reaches u_on_upstairs/u_on_newpos, stopping at original unset cliparound callback. Real window initialization, hero inventory/skills, remaining startup, loop and recordings remain unfinished. Original init_sound_disp_gamewindows runs before newgame, matching Unix main order and creating actual message/status/map/inventory windows. Newgame with live windows reaches unconnected HACK check_special_room after first-level generation; full main loop remains unfinished.",
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted. scripts/test-standalone-status-startup.mjs:42005 C comparisons including40598 earlier banner/options checks; controlled terminal scratch and source-defined-field limits are documented in README.",
       "priorEvidence": [
         "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup.",
         "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
@@ -926,8 +927,8 @@
       "module": "wintty",
       "source": "win/tty/wintty.c",
       "status": "verified-subset",
-      "scope": "Original source initializers and tty_init_nhwindows prefix create the base window/DisplayDesc, configure terminal and cursor, and reach actual VERSION copyright_banner_line boundary. Defined descriptor fields, complete base-window image and all20 window slots compared. Banner, remaining lifecycle, menu/status/input and full-game output remain unfinished. With original DATE/VERSION and OPTIONS connected, tty_init_nhwindows completes and its source-defined window state matches original C; subsequent newgame reaches BOTL status_initialize.",
-      "evidence": "scripts/test-standalone-window-startup.mjs:606 original-C comparisons using accepted native-terminal compatibility header/unchanged conversion and explicit zeroed scratch inputs; scripts/test-standalone-stdio-buffers.mjs:768 original-C buffer comparisons. Full-game acceptance remains false. scripts/test-standalone-window-banner.mjs:40598 focused original-C comparisons; complete game acceptance remains false."
+      "scope": "Original source initializers and tty_init_nhwindows prefix create the base window/DisplayDesc, configure terminal and cursor, and reach actual VERSION copyright_banner_line boundary. Defined descriptor fields, complete base-window image and all20 window slots compared. Banner, remaining lifecycle, menu/status/input and full-game output remain unfinished. With original DATE/VERSION and OPTIONS connected, tty_init_nhwindows completes and its source-defined window state matches original C; subsequent newgame reaches BOTL status_initialize. Original pre-game window creation, status-init/enable callbacks and general status cleanup compare with original C, including20 slots, defined descriptor fields and buffered-row allocation/length state.",
+      "evidence": "scripts/test-standalone-window-startup.mjs:606 original-C comparisons using accepted native-terminal compatibility header/unchanged conversion and explicit zeroed scratch inputs; scripts/test-standalone-stdio-buffers.mjs:768 original-C buffer comparisons. Full-game acceptance remains false. scripts/test-standalone-window-banner.mjs:40598 focused original-C comparisons; complete game acceptance remains false. scripts/test-standalone-status-startup.mjs:42005 C comparisons including40598 earlier banner/options checks; controlled terminal scratch and source-defined-field limits are documented in README."
     },
     {
       "module": "unixunix",
@@ -953,8 +954,8 @@
       "module": "botl",
       "source": "src/botl.c",
       "status": "verified-subset",
-      "scope": "Actual max_rank_sz computes rank-name width during hero startup. Status rendering and UI remain unfinished.",
-      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
+      "scope": "Actual max_rank_sz computes rank-name width during hero startup. Status rendering and UI remain unfinished. Original source data, status_initialize/init_blstats, field reassessment and status_finish now use actual shared conditions/field history/windows. Typed callback transport preserves ownership/identities and teardown of observed allocations. Rendering, condition/hilite parsing and menu lifecycle remain unverified.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden. scripts/test-standalone-status-startup.mjs:42005 C comparisons including40598 earlier banner/options checks; controlled terminal scratch and source-defined-field limits are documented in README."
     },
     {
       "module": "zap",
