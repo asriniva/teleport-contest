@@ -33,6 +33,7 @@ import {filesUnder,captureGameFiles,restoreGameFiles} from '../services/game-fil
 import {shouldPersistGameFile} from '../wasm-replay-support.js';
 import {enableTerminal} from './terminal.js';
 import {enableObjectState} from './object-state.js';
+import {enableObjectRecords} from './object-records.js';
 
 export function createStandaloneEnvironment(options={}) {
     const base=createJsRuntime(options),{memory}=base;
@@ -229,6 +230,7 @@ export function createStandaloneEnvironment(options={}) {
         fileBaseline:()=>filesUnder(base.filesystem,'/nethack'),
         enableAddressPort:(name,options)=>enableAddressPort(environment,name,options),
         enableObjectState:layouts=>enableObjectState(environment,layouts),
+        enableObjectRecords:layouts=>enableObjectRecords(environment,layouts),
         enableSerialization:layouts=>enableSerialization(environment,layouts),
         enableTerminal:(layout,options)=>enableTerminal(environment,layout,options),
         enableLua:options=>createStandaloneLua(environment,options),

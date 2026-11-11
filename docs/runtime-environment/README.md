@@ -26,6 +26,7 @@ injected. C compilers and C/Wasm oracles are development-only.
 | SFBASE / SFSTRUCT | 136 original-C comparisons: all 68 historical serializers both directions through real procedure tables, callbacks and files. Full game save/bones/restore closure is unfinished. |
 | TRACK | 3,496 original-C movement/equipment/query and historical save/restore comparisons, using shared hero/equipment and serializers. |
 | Object startup and name state | `enableObjectState`: 11 unchanged O_INIT functions connected to shared DECL/OBJECTS/DRAWING, canonical RND, two actual DUNGEON ledger functions and SFBASE/SFSTRUCT/CVFS. Combined original-C subsystem passes 6,288 comparisons across four seeds, including full class bytes/ranges/totals, shuffling, description lookup, level gem probabilities, failure diagnostic, exact RNG logs/continued stream and name save/free/restore. Serialized `oc_uname` address slots are compared as null/non-null because allocator addresses differ; every other saved byte and all restored name payloads compare exactly. Discovery/inventory/menu functions remain absent. |
+| Object records, ownership and weights | `enableObjectRecords`: 21 MKOBJ functions, two EAT nutrition functions and MON's `dealloc_mextra`, plus the existing ALLOC `dupstr`, connected to shared catalogues/globals/RNG. Combined original-C suite passes 6,184 comparisons: every object type, recursive bags/containers, corpse/statue/partly eaten/glob weights, coin rounding, class/material predicates, nobj/nexthere aliases, buried-list updates, extra/mail/embedded-monster ownership, full cleanup and ID wraparound. Raw object bytes preserve pointer alias identities via address tokens; separately owned extra pointers compare null/non-null, with name/command payloads checked exactly. Source-defined target integer narrowing is retained. Full mksobj generation, merging, inventory/UI, timers/light and invalid-quantity naming remain unlinked. |
 | Stdio / persistence | Binary IO, buffering, EOF/error/pushback, seek, close and output contracts; capture/restore/deletion through existing persistence policy. No host device/OS-wide POSIX claim. |
 | Lua | Existing JS VM and 83 typed C API dispatch recipes on measured memory; bytecode, callbacks/error unwinding, date/files, userdata growth probes. Full nhlua/nhlobj integration and all standard libraries are unfinished. |
 | Terminal | 445 original-C recorder-cell/capture/terminfo comparisons; existing recorder encoding preserved. Window procedures, tty input and game loop are unfinished. The inherited 6,144-byte C recorder buffer bounds captures; larger captures are not accepted by this proof. |
@@ -66,7 +67,7 @@ and the host compiler wrapper. From the candidate checkout run:
 STANDALONE_REFERENCE_ROOT=/path/to/reference /path/to/sdk/node scripts/test-standalone.mjs
 ```
 
-The gate runs source/closure checks, the original base-runtime suite, and ten
+The gate runs source/closure checks, the original base-runtime suite, and eleven
 standalone suites; logs and script hashes go to `.cache/standalone-validation/`.
 It requires the existing original native allocation oracle under the candidate's
 `.cache/tu-probes/native-oracles/` (alloc-native.node, alloc-full-native-build.json,
@@ -110,10 +111,34 @@ game or invent a dungeon map. `oinit` reads the actual injected shared dungeon
 map. The other O_INIT functions remain unregistered. The read/write source
 wrappers use the same JS heap and function registry throughout.
 
+For the object-record group, build a second original-C reference:
+
+```sh
+python3 scripts/build-standalone-object-state.py --object-records --reference-root /path/to/reference --out .cache/standalone-object-records
+```
+
+`STANDALONE_OBJECT_RECORDS_ORACLE` overrides its test directory. This adds
+original MKOBJ, EAT, MON and MONST to the shared startup/RNG/serializer build.
+The two C source inclusions expose private functions only to test wrappers;
+their original bodies are unchanged. Naming an invalid-quantity object reaches
+an aborting test-only UI boundary. Production leaves that owner unresolved.
+Input graphs must be valid, acyclic and have live owned pointers; the test does
+not claim undefined-input behavior or portable integer-overflow equivalence.
+The unsigned C nutrition return is decoded as uint32 at the Wasm test boundary.
+
+After enabling/initializing OBJECTS and MONST and enabling seeded RND, call
+`enableObjectRecords(layouts)`. It registers the selected MKOBJ exports under
+`mkobj`, EAT's `obj_nutrition`/`eaten_stat` under `object-nutrition`, and MON's
+`dealloc_mextra` under `monster-extra`. Memory projections use compiler-measured
+fields and bitfields; they contain no nutrition/weight/cleanup algorithms.
+The generic address adapter now transports whole-record copies on CMemory.
+The isolation gate exercises weights, embedded extras, command bytes and object
+cleanup with Wasm/network capabilities forbidden before importing production.
+
 ## Next integration milestone
 
-Object startup/name persistence is the first additional connected group after
-the checkpoint. Next connect a larger group, including all its reachable game
+Object startup/name persistence and object records/weights/ownership are now
+connected groups after the checkpoint. Next connect a larger group, including all its reachable game
 owners, and compare complete inputs, state, outputs and recording bytes with
 original C. Terminal/input/game-loop and full
 save/restore are later groups. Until the full game closure exists, keep the

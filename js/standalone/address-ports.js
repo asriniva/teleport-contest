@@ -55,6 +55,7 @@ export function enableAddressPort(environment,name,{only}={}) {
         address:(kind,at,i)=>{const f=field(kind,at,i);if(f.f.bit)throw new Error('C bitfields have no address');return ctypes.locate(f.type,at,f.f.name).at;},
         read:(kind,at,i)=>{const f=field(kind,at,i);return ctypes.getField(f.type,at,f.f.name,f.f.canonical);},
         write:(kind,at,i,value)=>{const f=field(kind,at,i);return ctypes.setField(f.type,at,f.f.name,f.f.canonical,value);},
+        copyRecord:(to,from,bytes)=>environment.memory.memmove(environment.address(to),environment.address(from),Number(bytes)),
         staticString:(at,text,bytes)=>{const data=Uint8Array.from(text,c=>c.charCodeAt(0));if(data.length>=bytes)throw new Error('Static string extent mismatch');environment.memory.memset(at,0,bytes);environment.memory.HEAPU8.set(data,at);},
     });
     const signature=(result,args)=>[result,...args].map(t=>t.includes('*')?'p':t==='void'?'v':/\b(double|float)\b/.test(t)?'d':/\blong\b/.test(t)?'j':'i').join('');

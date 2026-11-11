@@ -19,6 +19,11 @@ const file=(fd,mode)=>{env.memory.memset(fp,0,S.nhfileSize);env.memory.view.setI
 let fd=env.services.open('/object-names',578,0o600);file(fd,B.WRITING|B.FREEING);env.call('object-state','savenames',fp);env.call('sfstruct','bclose',fd);
 fd=env.services.open('/object-names',0);file(fd,0);env.call('object-state','restnames',fp);env.call('sfstruct','bclose',fd);env.memory.free(fp);
 assert.equal(env.memory.readString(Number(env.ctypes.getField('struct objclass',cls,'oc_uname','char *'))),'isolated name');
+env.call('monst','monst_globals_init');env.enableObjectRecords(layouts);
+const item=env.memory.malloc(env.ctypes.size('struct obj'));
+env.call('mkobj','init_dummyobj',item,layouts.mkobj.APPLE,7n);assert.ok(env.call('mkobj','weight',item)>0);
+env.call('mkobj','newomonst',item);env.call('mkobj','new_omailcmd',item,env.services.literal('isolated command'));
+env.call('mkobj','dealloc_obj_real',item);assert.ok(!env.memory.live.has(item));
 const terminal=env.enableTerminal(layouts.termcap);
 env.call('termcap','nomux_clear_screen');env.call('termcap','nomux_capture_write_input_boundary');assert.equal(terminal.frames.length,1);
 const lua=env.enableLua(),L=lua.api.luaL_newstate();assert.equal(lua.api.luaL_loadstring(L,'return 21*2'),0);assert.equal(lua.api.lua_pcallk(L,0,1,0,0n,0n),0);assert.equal(lua.api.lua_tointegerx(L,-1,0),42n);lua.api.lua_close(L);
