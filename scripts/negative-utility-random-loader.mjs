@@ -1,0 +1,1 @@
+export async function load(url,context,nextLoad){if(url.endsWith('/js/ported-utilities/random.mjs')){const r=await nextLoad(url,context);return{...r,source:String(r.source).replace('0x7fffffffn','0x3fffffffn')};}return nextLoad(url,context);}

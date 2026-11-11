@@ -1,0 +1,14 @@
+{
+  "functions": [
+    {
+      "name": "regularize",
+      "parameters": [
+        "s"
+      ]
+    }
+  ],
+  "reusedCompilerAst": ".cache/utility-platform-inventory/pcunix-with-curses.ast.json",
+  "reusedCompilerAstSha256": "8524fbac880908a24d821dc96513c98f7d521c9e9bc70fb363c19376c5960575",
+  "profile": "NOTPARMDECL/NO_TIMED_DELAY MEMORY64 actualconfiguredinclude + realncursesheaders",
+  "noOSFlagsOrStubs": true
+}

@@ -1,0 +1,7 @@
+// Reproduction adapter only; the executed historical generator is separately bound.
+import{readFileSync,writeFileSync,mkdirSync}from'node:fs';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
+const output=resolve(process.argv[2]),reference=resolve(process.argv[3]);if(!process.argv[3])throw Error('fresh metadata output and original-C SFTAGS module required');
+const factory=(await import(pathToFileURL(reference))).default,m=await factory({print(){},printErr(){}});
+m.FS.mkdirTree('/sandbox/util');m.FS.mkdirTree('/sandbox/include');m.FS.chdir('/sandbox/util');m.FS.writeFile('/input.tags',readFileSync(output+'/sf.tags'));if(m._probe_prepare()!==0)throw Error('original-C SFTAGS stdio setup failed');let status=null,result;try{result=m._probe_main(2);}catch(e){if(e?.name==='ExitStatus')status=e.status;else throw e;}
+mkdirSync(output+'/generated');const files={};for(const dir of['/sandbox/util','/sandbox/include'])for(const f of m.FS.readdir(dir))if(!['.','..'].includes(f)){const bytes=m.FS.readFile(dir+'/'+f);writeFileSync(output+'/generated/'+f,bytes);files[dir+'/'+f]=bytes.length;}
+for(const f of['stdout','stderr'])writeFileSync(output+'/generated/'+f+'.txt',m.FS.readFile('/'+f));writeFileSync(output+'/generated/result.json',JSON.stringify({status,result,files,originalC:true,unmodifiedUnpaddedTags:true,qualification:'Actual original-C generator output; inherited short-line automatic-buffer issue is not repaired or claimed defined.'},null,2)+'\n');process.exitCode=status??0;
