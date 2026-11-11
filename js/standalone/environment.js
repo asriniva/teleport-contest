@@ -1,4 +1,5 @@
 // Independent environment for existing translated modules. Ports are unmodified.
+import {enableSpecialInteractions} from './special-interactions.js';
 import {createJsRuntime,CPanic} from '../ported/js-runtime.js';
 import {withCEnvironment} from '../ported/c-runtime.js';
 import * as rect from '../ported/rect.js';
@@ -327,6 +328,7 @@ export function createStandaloneEnvironment(options={}) {
         fileBaseline:()=>filesUnder(base.filesystem,'/nethack'),
         enableAddressPort:(name,options)=>{const adapter=enableAddressPort(environment,name,options);addressAdapters.set(name,adapter);return adapter;},
         exposeAddressPort:(name,names)=>{const adapter=addressAdapters.get(name);if(!adapter)throw new Error('Address adapter not enabled: '+name);return adapter.expose(names);},
+        enableSpecialInteractions:(layouts,options)=>enableSpecialInteractions(environment,layouts,options),
         enableObjectState:layouts=>enableObjectState(environment,layouts),
         enableObjectRecords:layouts=>enableObjectRecords(environment,layouts),
         enableItemInventory:layouts=>itemInventory=enableItemInventory(environment,layouts),
