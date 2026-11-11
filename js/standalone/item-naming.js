@@ -1,4 +1,5 @@
 // Source naming and artifact bookkeeping on the existing inventory heap.
+import {callObjnam} from '../ported/objnam-runtime.js';
 import * as artifact from '../ported/artifact.js';
 import {oname,noveltitle,sir_Terry_novels} from '../ported/do_name.js';
 export function enableItemNaming(environment,layouts,{legacy,views}) {
@@ -29,5 +30,8 @@ export function enableItemNaming(environment,layouts,{legacy,views}) {
         else if(args[0]){const p=environment.address(args[0]);args[0]=Object.defineProperty({address:p},'value',{get:()=>transport.read('Int32',p),set:v=>transport.write('Int32',p,v)});}
         return args;
     }});
+    const naming=Object.create(services),buffers=environment.allocateGlobal('objnam.obufs',layouts.objnam.NUMOBUF*layouts.objnam.BUFSZ);
+    Object.assign(naming,{moduleKey:environment,heap:()=>memory.HEAPU8,storage:i=>{if(i!==0)throw new Error('Unknown OBJNAM storage '+i);return buffers;}});
+    environment.register('japanese-item-names',{Japanese_item_name:(...args)=>{const result=callObjnam(naming,layouts.objnam,'Japanese_item_name',...args);return result?.address??result;}});
     return {limitation:'Construction-time naming and random artifact bookkeeping; role/race-specific gifts, wielded artifact effects and naming UI require their actual owners.'};
 }

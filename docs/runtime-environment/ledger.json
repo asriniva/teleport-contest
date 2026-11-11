@@ -1,7 +1,7 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "dd68b24a345422882cb8412924c693b0dd718307",
+  "acceptedCheckpoint": "1dc387dffb7bb91a812eb85743cd1154a55d58ca",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
@@ -436,10 +436,10 @@
       "module": "attrib",
       "source": "src/attrib.c",
       "status": "verified-subset",
-      "scope": "Existing HP/intrinsics/luck plus acurr Charisma clamps and exercise during saddle discovery connected on shared original ATTRIB context. Other attributes/level/UI behavior remains unaccepted.",
+      "scope": "Prior HP/intrinsic/luck/pet subset plus original init_attr/vary_init_attr/adjattrib/acurrstr on shared ATTRIB state verified during starting inventory/attributes. Live property/equipment callbacks connected; broader polymorph/poison/exercise/level/UI lifecycle remains unfinished.",
       "priorStatus": "not-connected",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
-      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden.; scripts/test-standalone-inventory-startup.mjs:15642 C comparisons; scripts/test-standalone-inventory-attributes.mjs:36288 C comparisons/324 inputs; 36-check full regression gate PASS; actual level/room/pet/inventory/attribute startup reaches vision_recalc with Wasm/network forbidden."
     },
     {
       "module": "sfbase",
@@ -472,15 +472,15 @@
       "module": "vault",
       "source": "src/vault.c",
       "status": "verified-subset",
-      "scope": "newegd/free_egd ownership only; vault guard/world behavior unfinished.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
+      "scope": "Prior extra ownership plus original hidden_gold connected to actual inventory/contained_gold during starting inventory; complete vault gameplay remains unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md; scripts/test-standalone-inventory-startup.mjs:15642 C comparisons; scripts/test-standalone-inventory-attributes.mjs:36288 C comparisons/324 inputs; 36-check full regression gate PASS; actual level/room/pet/inventory/attribute startup reaches vision_recalc with Wasm/network forbidden."
     },
     {
       "module": "u_init",
       "source": "src/u_init.c",
       "status": "verified-subset",
-      "scope": "Existing u_init_misc and source table transport retained; u_init_inventory_attrs is now exposed and executes to an unconnected header-macro service. Complete starting inventory/attributes/skills remain unfinished.",
-      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
+      "scope": "Source u_init_misc plus u_init_inventory_attrs now completes on defined324 role/race/seed/roleplay inputs; actual shared inventory/attributes/RNG verified. Skills/discoveries, equipment activation, rerolls and full game remain unfinished.",
+      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden.; scripts/test-standalone-inventory-startup.mjs:15642 C comparisons; scripts/test-standalone-inventory-attributes.mjs:36288 C comparisons/324 inputs; 36-check full regression gate PASS; actual level/room/pet/inventory/attribute startup reaches vision_recalc with Wasm/network forbidden."
     },
     {
       "module": "sounds",
@@ -669,7 +669,7 @@
       "module": "spell",
       "source": "src/spell.c",
       "status": "in-progress",
-      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet.",
+      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet. Original spell_skilltype is connected for starting spellbook filtering. initialspell/num_spells transport is available on shared records; skill/discovery lifecycle remains unverified.",
       "priorStatus": "not-connected",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
     },
@@ -801,9 +801,10 @@
       "module": "objnam",
       "source": "src/objnam.c",
       "status": "in-progress",
-      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet.",
+      "scope": "Existing naming/item construction subset plus original Japanese_item_name adapter/tables reached by Samurai discovery checks. Full naming, grammar, wishes and buffer lifecycle remain unaccepted.",
       "priorStatus": "not-connected",
-      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
+      "evidence": "scripts/test-standalone-inventory-startup.mjs:15642 C comparisons; scripts/test-standalone-inventory-attributes.mjs:36288 C comparisons/324 inputs; 36-check full regression gate PASS; actual level/room/pet/inventory/attribute startup reaches vision_recalc with Wasm/network forbidden."
     },
     {
       "module": "mkobj",
@@ -862,8 +863,8 @@
       "module": "hack",
       "source": "src/hack.c",
       "status": "verified-subset",
-      "scope": "obj_to_any plus may_passwall on measured wall flags; movement/world closure unfinished. Original invocation_pos/in_rooms now support generated terrain using measured indexed rm views and the source five-byte static buffer. The full unchanged HACK adapter now has shared typed storage and scoped/canonical callbacks. Reached source room membership/move_update/check_special_room paths are verified over ordinary/shop/shared-edge bookkeeping and new-level clearing; union conversion and rounded division match C. Special-room side effects, movement/travel/combat and full rendering remain unfinished.",
-      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md; scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted. scripts/test-standalone-movement-startup.mjs:42170 C comparisons including42005 earlier status/window checks."
+      "scope": "Prior room-entry subset plus typed dependency pointers and weight-capacity calculations exercised by source initial carrying-attribute boosts. Full movement/travel/combat and game rendering remain unfinished.",
+      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md; scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted. scripts/test-standalone-movement-startup.mjs:42170 C comparisons including42005 earlier status/window checks.; scripts/test-standalone-inventory-startup.mjs:15642 C comparisons; scripts/test-standalone-inventory-attributes.mjs:36288 C comparisons/324 inputs; 36-check full regression gate PASS; actual level/room/pet/inventory/attribute startup reaches vision_recalc with Wasm/network forbidden."
     },
     {
       "module": "uhitm",

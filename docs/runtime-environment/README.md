@@ -28,6 +28,19 @@ The next real startup boundary is the U_INIT header-macro transport needed by
 reaches inventory setup after pet creation with Wasm/network capabilities
 forbidden. All138 translated policies and three frozen files are unchanged.
 
+Starting inventory/attribute integration now completes original
+`u_init_inventory_attrs` and reaches DISPLAY `vision_recalc` in actual newgame.
+The new classification reference checks16 original obj.h macros for every item
+and ordinary/Snickersnee inputs (15,642 comparisons including terminal controls).
+The inventory/attributes reference passes36,288 comparisons over324 explicit
+role/race/seed/roleplay inputs. It compares shared hero/global state, actual
+inventory order/contents and nonpointer record bytes, available name strings and
+exact RNG logs after original hero initialization and explicit source ident=2.
+Item pointer addresses/union owner pointers are normalized; arbitrary owner
+identity graphs, equipment activation, skills/discoveries and later gameplay
+remain unaccepted. The Wasm/network-disabled actual startup fixture reaches
+unconnected display recalculation. The expanded36-check regression gate passes. These references use original configured C; production remains pure JS.
+
 ## Implemented scope
 
 `js/standalone/environment.js` creates an isolated CMemory/CVFS instance and

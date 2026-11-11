@@ -8,6 +8,8 @@ import {createAttribEnvironment} from '../ported/attrib-runtime.js';
 import {valid_vampshiftform} from '../ported/mon.js';
 import {resists_drli,dmgtype,dmgtype_fromattack} from '../ported/mondata.js';
 import {newpw} from '../ported/exper.js';
+import {spell_skilltype,initialspell,num_spells} from '../ported/spell.js';
+import {hidden_gold} from '../ported/vault.js';
 import {init_uhunger} from '../ported/eat.js';
 import {max_rank_sz} from '../ported/botl.js';
 import {init_artifacts,hack_artifacts} from '../ported/artifact.js';
@@ -38,10 +40,32 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
   element:(k,i)=>k===0?environment.requireGlobal('objects')+i*ctypes.size('struct objclass'):named('u','weapon_skills').at+i*ctypes.size('struct skills'),
   invent:()=>ctypes.load('struct obj *',named('gi','invent').at),table:i=>tables[i],
   equipment:i=>ctypes.load('struct obj *',environment.requireGlobal(['uarms','uwep','uarmh','uarmg','uarmu','uarmc','uarmf','uarm','uquiver','uswapwep'][i])),
-  intrinsic:i=>views.record('struct you',environment.requireGlobal('u')).uprops[layouts.polyself[i?'BLINDED':'JUMPING']].intrinsic,
-  setIntrinsic:(i,v)=>{views.record('struct you',environment.requireGlobal('u')).uprops[layouts.polyself[i?'BLINDED':'JUMPING']].intrinsic=v;},
+  intrinsic:i=>views.record('struct you',environment.requireGlobal('u')).uprops[layouts.attrib[i?'BLINDED':'JUMPING']].intrinsic,
+  setIntrinsic:(i,v)=>{views.record('struct you',environment.requireGlobal('u')).uprops[layouts.attrib[i?'BLINDED':'JUMPING']].intrinsic=v;},
   rn2:(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('u_init.c'),line,services.literal(caller));return services.rn2(n);},
  });
+ // Property-style U_INIT records cross dependency boundaries as C addresses.
+ for(const name of ['discover_object','Japanese_item_name','adjattrib','inv_weight','set_uasmon','newhp','newpw','adjabil','init_uhunger','getnow','max_rank_sz','spell_skilltype','mkobj','mksobj','dealloc_obj','weight','set_twoweap','setworn','setuqwep','setuwep','setuswapwep','initialspell','addinv','useupall','hidden_gold','init_attr','vary_init_attr','skill_init','num_spells','find_ac'])ui[name]=(...args)=>environment.resolve(name)(...args.map(v=>v?.address??v));
+ ui.debugpline3=(format,...args)=>{if(services.debugcore('u_init.c',1)){const flags=record('struct instance_flags',environment.requireGlobal('iflags')),saved=flags.last_msg;try{return environment.resolve('pline')(...[format,...args].map(v=>typeof v==='string'?services.literal(v):v?.address??v));}finally{flags.last_msg=saved;}}};
+ // Exact obj.h classification expansions used by the original U_INIT ABI.
+ const UL={...layouts.objects,...layouts.steed,...layouts.mplayer,...layouts.iactions,...layouts.u_init},objects=views.array('struct objclass',environment.requireGlobal('objects'),layouts.o_init.NUM_OBJECTS),descriptors=views.array('struct objdescr',environment.requireGlobal('obj_descr'),layouts.o_init.NUM_OBJECTS);
+ ui.macro=(p,i)=>{const o=record('struct obj',p),c=objects[o.otyp],weapon=o.oclass===UL.WEAPON_CLASS,tool=o.oclass===UL.TOOL_CLASS,skill=c.oc_subtyp;
+  switch(i){
+   case 0:return Number((weapon||tool)&&(skill===UL.P_POLEARMS||skill===UL.P_LANCE||services.is_art(o,UL.ART_SNICKERSNEE)));
+   case 1:return Number(weapon&&skill>=UL.P_BOW&&skill<=UL.P_CROSSBOW);
+   case 2:return Number((weapon||o.oclass===UL.GEM_CLASS)&&skill>=-UL.P_CROSSBOW&&skill<=-UL.P_BOW);
+   case 3:return Number(weapon&&skill===UL.P_SPEAR);
+   case 4:return Number(o.otyp>=UL.LARGE_BOX&&o.otyp<=UL.BAG_OF_TRICKS);
+   case 5:return Number([UL.LUCKSTONE,UL.LOADSTONE,UL.FLINT,UL.TOUCHSTONE].includes(o.otyp));
+   case 6:case 7:case 8:case 9:case 10:case 11:case 12:return Number(o.oclass===UL.ARMOR_CLASS&&c.oc_subtyp===[UL.ARM_SHIELD,UL.ARM_HELM,UL.ARM_GLOVES,UL.ARM_SHIRT,UL.ARM_CLOAK,UL.ARM_BOOTS,UL.ARM_SUIT][i-6]);
+   case 13:return Number(tool&&skill!==UL.P_NONE);
+   case 14:return Number((weapon||tool)&&skill>=-UL.P_BOOMERANG&&skill<=-UL.P_DART);
+   case 15:return Number((weapon||tool)&&c.oc_bimanual);
+   default:throw new Error('Unknown U_INIT header macro '+i);
+  }
+ };
+ ui.objname=i=>descriptors[objects[i].oc_name_idx].oc_name;ui.objdescr=i=>descriptors[objects[i].oc_descr_idx].oc_descr;ui.spellPw=n=>transport.int(n*5);
+ for(const kind of ['rnd','rn1','rne'])ui[kind]=(...args)=>{const caller=args.pop(),line=args.pop();if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('u_init.c'),line,services.literal(caller));return kind==='rn1'?services.rn2(args[0])+args[1]:services[kind](...args);};
  const bridge=createUInitBridge(layouts.u_init);environment.register('hero-init',Object.fromEntries(['u_init_misc','skills_for_role','u_init_inventory_attrs'].map(name=>[name,(...args)=>bridge(ui,name,...args)])));
  const poly=foreign(),polyNames=Object.keys(abi.polyself.schema);
  function polyField(kind,p,index){const type=polyNames[kind],f=abi.polyself.schema[type]?.fields[index];if(!f)throw new Error('Unknown POLYSELF field');return{type,f,p:address(p)};}
@@ -67,10 +91,19 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
   botl:()=>record('struct display_hints',environment.requireGlobal('disp')).botl,setBotl:v=>{record('struct display_hints',environment.requireGlobal('disp')).botl=v;},
   roleplayBit:i=>record('struct you',environment.requireGlobal('u')).uroleplay[i?'deaf':'blind'],
  });
- for(const kind of ['rn2','rnd','rn1','d'])a[kind]=(...args)=>{const caller=args.pop(),line=args.pop();if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('attrib.c'),line,services.literal(caller));return services[kind](...args);};
+ for(const kind of ['rn2','rnd','rn1','d'])a[kind]=(...args)=>{const caller=args.pop(),line=args.pop();if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('attrib.c'),line,services.literal(caller));return kind==='rn1'?services.rn2(args[0])+args[1]:services[kind](...args);};
+ a.u_wield_art=id=>services.is_art(ctypes.load('struct obj *',environment.requireGlobal('uwep')),id);
+ a.equipment=i=>ctypes.load('struct obj *',environment.requireGlobal(['uarmh','uarmg','uarmf','uarmc','ublindf'][i]));
+ a.objectNameKnown=i=>objects[i].oc_name_known;
+ a.flag=i=>{const u=record('struct you',environment.requireGlobal('u')),L=layouts.attrib,prop=name=>u.uprops[L[name]],h=name=>prop(name).intrinsic,e=name=>prop(name).extrinsic,b=name=>prop(name).blocked,active=name=>h(name)||e(name);
+  switch(i){case 0:return e('FIXED_ABIL');case 1:return active('POISON_RES');case 2:{const o=record('struct obj',ctypes.load('struct obj *',environment.requireGlobal('ublindf')));return Number(Boolean(o&&o.otyp===L.TOWEL&&o.spe>0));}case 3:return active('WOUNDED_LEGS');case 4:return Number(u.umonnum!==u.umonster);case 5:return Number(Boolean(h('HALLUC')&&!active('HALLUC_RES')));case 6:return h('CONFUSION');case 7:return h('SICK');case 8:return h('VOMITING');case 9:return active('FUMBLING');case 10:return Number(Boolean(e('BLINDED')&&!(h('BLINDED')&&!b('BLINDED'))));case 11:return (h('FAST')&~BigInt(L.INTRINSIC))||e('FAST');case 12:return record('struct flag',environment.requireGlobal('flags')).debug;
+   case 13:return h('CLAIRVOYANT');case 14:return b('CLAIRVOYANT');case 15:return h('REGENERATION');case 16:return h('STUNNED');case 17:return h('BLND_RES');case 18:return h('FAST');case 19:return e('FAST');case 20:return h('BLINDED');case 21:return e('BLINDED');case 22:return b('BLINDED');case 23:return h('BLINDED')&BigInt(L.TIMEOUT);default:throw new Error('Unknown ATTRIB property '+i);}
+ };
  a.assert=ok=>{if(!ok)environment.resolve('__assert_fail')(services.literal('chridx >= 0 && chridx < A_MAX'),services.literal('attrib.c'),1204,services.literal('acurr'));};
- const attr=createAttribEnvironment(a,layouts.attrib,attrib);environment.register('hero-attributes',{newhp:attrib.newhp,adjabil:attrib.adjabil,acurr:attrib.acurr,exercise:attrib.exercise},attr);
+ const attr=createAttribEnvironment(a,layouts.attrib,attrib);environment.register('hero-attributes',{newhp:attrib.newhp,adjabil:attrib.adjabil,acurr:attrib.acurr,acurrstr:attrib.acurrstr,exercise:attrib.exercise,init_attr:attrib.init_attr,vary_init_attr:attrib.vary_init_attr,adjattrib:attrib.adjattrib},attr);
  const power=context(layouts.exper);Object.assign(power,{xint16:transport.short,rnd:(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('exper.c'),line,services.literal(caller));return services.rnd(n);}});environment.register('hero-energy',{newpw},power);
+ const vault=context(layouts.vault);vault.Has_contents=o=>Number(Boolean(o.cobj));vault.contained_gold=(o,known)=>environment.resolve('contained_gold')(address(o),known);environment.exposeAddressPort('shk',['contained_gold']);environment.register('inventory-hidden-gold',{hidden_gold},vault);
+ const spells=context(layouts.spell);Object.defineProperty(spells,'svs',{value:record('struct instance_globals_saved_s',environment.requireGlobal('svs'))});spells.OBJ_NAME=o=>descriptors[o.oc_name_idx].oc_name;environment.register('initial-spells',{spell_skilltype,initialspell,num_spells},spells,{prepareArgs:(fn,args)=>{if(fn==='initialspell')args[0]=record('struct obj',args[0]);return args;}});
  const hunger=context(layouts.eat);Object.defineProperty(hunger,'disp',{value:record('struct display_hints',environment.requireGlobal('disp'))});environment.register('hero-hunger',{init_uhunger},hunger);
  const rank=context(layouts.botl);rank.strlen=p=>Number(services.strlen(p));environment.register('hero-rank-size',{max_rank_sz},rank);
  environment.exposeAddressPort('display',['reset_glyphmap']);

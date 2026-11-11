@@ -31,7 +31,7 @@ export function createRecordViews(environment) {
             });
         }
         const aliases=definition.type==='obj'?{leashmon:'corpsenm',opoisoned:'otrapped',odiluted:'oeroded',orotten:'oeroded'}:
-            definition.type==='objclass'?{oc_skill:'oc_subtyp',oc_armcat:'oc_subtyp',a_ac:'oc_oc1'}:
+            definition.type==='objclass'?{oc_level:'oc_oc2',oc_bimanual:'oc_big',oc_skill:'oc_subtyp',oc_armcat:'oc_subtyp',a_ac:'oc_oc1'}:
             definition.type==='rm'?{doormask:'flags',wall_info:'flags',drawbridgemask:'flags'}:{};
         for(const [alias,name]of Object.entries(aliases))if(name in view&&!(alias in view))Object.defineProperty(view,alias,{get:()=>view[name],set:v=>{view[name]=v;}});
         return view;

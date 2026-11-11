@@ -11,9 +11,9 @@ export function enableMovement(environment,layouts){
  const text=v=>typeof v==='string'?services.literal(v):environment.address(v),families=['Norep','There','You','You_cant','You_feel','You_hear','Your','impossible','livelog_printf','nh_snprintf','panic','pline','pline_The','pline_dir','pline_xy','raw_printf','sprintf','urgent_pline','verbalize'];
  const resolve=name=>typeof services[name]==='function'?services[name]:environment.resolve(name);
  const local=new Proxy(Object.create(services),{get:(o,k,r)=>{
-  if(Reflect.has(o,k))return Reflect.get(o,k,r);if(typeof k!=='string')return undefined;
+  if(Reflect.has(o,k)){const value=Reflect.get(o,k,r);return typeof value==='function'&&!Object.hasOwn(o,k)?(...args)=>value(...args.map(v=>v?.address??v)):value;}if(typeof k!=='string')return undefined;
   const family=families.find(name=>k.startsWith(name+'_')&&/^[pijd]+$/.test(k.slice(name.length+1)));
-  return family?((...args)=>{const shape=k.slice(family.length+1);return resolve(family)(...args.map((v,i)=>shape[i]==='p'?text(v):shape[i]==='j'?BigInt(v):shape[i]==='i'?Number(BigInt.asIntN(32,BigInt(v))):v));}):((...args)=>environment.resolve(k)(...args));
+  return family?((...args)=>{const shape=k.slice(family.length+1);return resolve(family)(...args.map((v,i)=>shape[i]==='p'?text(v):shape[i]==='j'?BigInt(v):shape[i]==='i'?Number(BigInt.asIntN(32,BigInt(v))):v));}):((...args)=>environment.resolve(k)(...args.map(v=>v?.address??v)));
  }});
  const kinds=Object.keys(abi.schemas),scalar=d=>d.t?{i8:'signed char',u8:'unsigned char',i16:'short',u16:'unsigned short',i32:'int',u32:'unsigned int',i64:'long',u64:'unsigned long'}[d.t]:'void *';
  const field=(kind,index)=>{const row=abi.schemas[kinds[kind]],f=row?.fields[index];if(!f)throw new Error('Unknown HACK field');return {type:row.ctype,f};};
