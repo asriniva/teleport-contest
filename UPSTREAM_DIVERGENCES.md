@@ -162,6 +162,47 @@ Optional standalone interaction owners (2026-11-11, verified subset): special-in
 Verification: scripts/test-standalone-special-interactions.mjs passes 341 checks at 35 comparison checkpoints against the existing complete original-C Emscripten reference: actual startup, five rumor reads, ordinary/special oracle windows, cookie rumor, CapitalMon cache reuse/free/rebuild, soldier awakening, underwater/cancel/play flute, ordinary sitting, marker cancellation and successful known identify-scroll writing, sink drinking, and fountain gush through real vision callbacks. Each checkpoint compares terminal/error bytes, exact recording frames, both complete ISAAC states/logs and the normalized persistent world/identity graph; detached flute state is also compared. Production assembly/execution runs with Wasm/network capabilities forbidden. The targeted guard passes 138 unchanged translated policies, three frozen files, 450 production closure files, all 31 new source pins and 124 configured reference header/source pins. See docs/runtime-environment/special-interactions.json. These are explicit subsets, not complete support for the user’s entire remaining-port list or full-game acceptance. Rare throne, dipping, special instruments, spellbooks, consultations, fatal assertions and polymorph remain unaccepted. The initial sink toxic-waste case exposed unresolved polyself; no stub was installed. The accepted sink fixture explicitly consumes one real matching RNG draw to select a separate ordinary branch; that limitation is retained in the test. Complete standalone provenance guard still fails on the inherited unix-platform-abi.json stdio.js pin (expected 65866af8..., actual 051933cd...); the new targeted guard does not replace or suppress that failure. No 44-public-game claim is made.
 
 Standalone APPLY core-action assembly (2026-11-11, in progress): environment/program enable unchanged cached callApply/createApplyEnvironment via the new canonical source provider, sharing actual DECL trap/polearm/tool state and native callbacks. Temporary apply-reset is removed; source reset_trapset/check_leash now share the full factory context. Owner-local stable NH_RED relocation reads actual c_color_names.c_red rather than a stale compiled heap address in the legacy layout; numeric field/width ABI remains measured and source-bound. The existing LIGHT owner supplies original candle_light_range with native object projection/candle header and the existing MKROOM owner supplies original search_special with measured room-pointer advancement for ordinary room sounds. Existing STEED saddle context supplies original stucksteed scalar check required by normal stairs; mounted special branches remain unaccepted. Existing VISION owner exposes unchanged do_clear_area with its actual typed callback dispatch for mandatory BellOfOpening detection. Core reset/normal tool behavior is under C comparison; optional item variants are deferred. No translated/frozen changes, copied action decisions or skipped leash/trap rules.
+Common C-runtime cleanup continuation (2026-11-11, isolated
+`cleanup/c-runtime-rect` worktree): consolidate standalone memory/view/callback/
+type/library/linking mechanics under `js/c-runtime`. Both existing record-view
+frontends now use one live-record/indexed-view engine; their historical array
+key/bounds/one-past and descriptor contracts remain explicit. The generic
+runtime factory assembles per-instance services from injected declarations;
+its linker owns module initialization, lazy symbols, globals and call scopes.
+Measured address bindings for the13 existing adapters use one generic transport
+factory with game-owned declarations/signature fallbacks. NetHack typedef/header
+aliases, special storage/module wiring and base translated-policy provider live
+in `js/nethack`. Existing import paths forward to the canonical implementations,
+preserving CExit class identity; platform getpid remains an explicit provider
+value, including original libc property descriptors. This supersedes the first
+slice's pending record-consolidation note below. These are workspace adapter
+changes, not inherited recorder patches or new game facilities.
+
+No source-shaped game algorithm, original C, frozen file, compiler setting,
+terminal capability, input/output transport, shadow recorder or serialization
+policy changes. Library/type/callback factory bodies and the relocated base
+provider retain their original bodies; the exact typedef/getpid extraction is
+separately checked. Scanner and WERE source manifests are regenerated with the
+moved implementations included; measured declarations, compiler identity and
+scanner reference receipt remain unchanged. Historical oracle pins and failed
+runs are retained. Generic runtime closure has no game, host, network or Wasm
+imports. The new49-source cleanup manifest supplements rather than replaces
+the existing aggregate provenance guard.
+
+Validation and actual reference-input blockers are recorded in
+`docs/runtime-environment/C_RUNTIME_CLEANUP.md`. Runtime contracts and9-factory
+relocation/141baseline-input/3frozen-file checks pass; the13-adapter original-C
+transport passes23,700 checks. Original aggregate scope still fails its existing
+absolute stdio source pin, reproduced with unmodified HEAD checker; it is not
+waived. Independent cloned/versioned oracle copies are used for component
+reruns and never written back to another worktree. No full aggregate green-gate,
+full-game/native-game recording equivalence or speed improvement is claimed.
+The mixed backend and translation-specific dual-provider adapters remain active
+until full pure-JS game acceptance; no C fallback was deleted or replaced with
+a stub. Source-layout/interface contracts and remaining integration-dependent
+removals are documented in `js/c-runtime/README.md`.
+
+
 C-runtime cleanup first slice (2026-11-11, isolated `cleanup/c-runtime-rect`
 worktree from `df33dd4`): move the existing generic standalone memory transport
 into `js/c-runtime/memory.js`, retaining `js/standalone/memory-services.js` as a

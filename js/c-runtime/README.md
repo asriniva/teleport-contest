@@ -1,66 +1,78 @@
 # Shared JavaScript C runtime
 
-This directory owns reusable C mechanics. The first extraction is memory
-transport, used by the standalone provider through its compatibility entry.
-It is not yet the complete runtime and does not replace the mixed backend.
+`index.js` is the public surface for the configured LP64 C runtime. These are
+JavaScript implementations: no C helper, Wasm loader, NetHack import or host
+filesystem is part of this layer. It remains a bounded runtime for this port,
+not a complete implementation of every C/Unix facility.
 
-## Boundaries
+## Responsibilities
 
-- `memory.js`: numeric addresses, scalar widths, allocation, stack scopes,
-  literals, measured record/array views and byte copies. It accepts declarations;
-  it must not import NetHack modules or know game field names.
-- `../nethack/rect-bindings.js`: the measured NhRect declaration, module state,
-  source diagnostics and legacy names required by the unchanged RECT port.
-- `../standalone/memory-services.js`: compatibility entry adding NetHack typedef
-  aliases (`boolean`, `coordxy`). Existing callers retain their interface.
-- `../standalone/environment.js`: composition, registration, RNG injection and
-  dependency ownership. It delegates RECT declaration/binding to NetHack's layer.
-- `../ported/rect.js`: unchanged source-shaped algorithms. Explicit operations
-  that represent C semantics remain visible in translated bodies.
+| Files | Responsibility |
+| --- | --- |
+| `runtime.js` | Per-instance assembly; caller-injected declarations, inherited services and conversion aliases |
+| `memory.js` | Addresses, scalar loads/stores/conversions, allocation, stack scopes and literals |
+| `records.js` | Shared record identity, field properties and indexed-view machinery |
+| `types.js`, `bitfields.js`, `record-views.js` | Measured types, unions, arrays, pointers, bitfields and live property views |
+| `functions.js` | Callback identities, signature checks, targeted jump scopes and exit |
+| `linker.js` | Public symbols, deferred exports, globals, initialization, dependency and invocation scopes |
+| `address-bindings.js` | Measured-schema binding of field/global/callback/dependency transport |
+| `libc.js`, `scanf.js`, `qsort.js`, `stdio.js` | Configured library operations and synchronous streams on injected CVFS |
+| `environment-inputs.js` | Caller-injected environment strings in addressable memory |
+| `../services/c-*` | Existing byte allocator, base libc/formatting, calendar and virtual filesystem implementations |
 
-The pre-existing byte allocator remains in `../services/c-memory.js`. The
-pre-existing synchronous dependency scope remains in `../ported/c-runtime.js`;
-this extraction does not change scope, callbacks or reentry rules.
+The shared runtime does not own game rules, header macros, game globals or
+platform defaults. Typedefs/header field aliases are in
+`../nethack/declarations.js`; NetHack module selection and special static
+storage are in `../nethack/address-ports.js`. `runtime-bindings.js` supplies
+NetHack's declarations to the common instance factory. `../nethack/runtime.js`
+provides allocation/string/calendar/regex/RNG policies from translated sources.
+The standalone environment composes these owners and game subsystems.
 
-## First reusable declaration binding
+Old standalone utility paths and `../ported/js-runtime.js` are compatibility
+entries, not second implementations. They preserve existing imports and class
+identities. NetHack's platform `getpid` default remains in its provider wrapper.
+The synchronous `C/R/T` scope facade and translation-specific adapters remain at
+their established paths so existing pure-JS and mixed callers keep working.
 
-After `defineRecord(name, measuredDefinition)`, `recordType(name)` resolves the
-schema once and exposes `size`, `view(address)`, `array(address, length)` and
-`local(fieldValues)`. Views remain live across memory growth; array record
-assignment copies bytes. A local reserves scoped stack storage, with no implicit
-initialization. Optional field values are assigned in declaration order through
-typed setters, preserving RECT's previous behavior. This is field initialization,
-not a general implementation of arbitrary overlapping struct assignment.
+## Contracts preserved by consolidation
 
-No view escapes its underlying allocation lifetime safely merely because it
-is a JavaScript object. Addresses, pointer aliases and explicit ownership remain
-part of the port's contract. Invalid accesses do not acquire defined C semantics.
+- Views read current memory after growth; their addresses never retarget.
+- Record assignment copies storage; pointer assignment preserves aliasing.
+- Automatic local reservation does not introduce implicit zero initialization.
+- Stack cleanup occurs during exceptions and nested/reentrant calls.
+- Per-instance globals, callback registries and initialization state stay isolated.
+- The old declaration-backed array surface bounds-checks every element and
+  recognizes canonical numeric keys. The typed-C view surface also recognizes
+  leading-zero keys and supplies address-only one-past sentinels for record
+  arrays. These intentional legacy distinctions are explicit options on one
+  indexed-view implementation; both use the declaration's original extent.
+- Header aliases are nonenumerable; record fields retain their existing
+  enumerability, setters, copying and string-pointer behavior.
+- Existing unresolved functions and unsupported operations still fail explicitly.
 
-## Incremental follow-up
+`recordType(name)` binds a registered declaration to `size`, `view`, `array`
+and `local`. A local optionally initializes declared fields in order. This is
+field initialization, not arbitrary overlapping struct assignment.
 
-1. Use unchanged component comparisons to migrate additional declaration
-   bindings, retaining existing import paths until consumers have moved.
-2. Inventory and consolidate the other record projections against an explicit
-   common contract: nulls, array bounds/one-past pointers, object identity,
-   embedded records, copying, bitfields, readonly fields and lifetime. Their
-   current contracts differ; they have not been silently unified here.
-3. Generate repetitive NetHack bindings from existing measured metadata; keep
-   translated header macros/game decisions with NetHack, outside this runtime.
-4. Consolidate libc/callback/linker mechanics in separately testable steps.
-   Inject terminal, filesystem and time at the platform boundary.
-5. Retire production Wasm bridges after complete pure-JS game acceptance.
+## Verification
 
-## Validation for this extraction
+With the configured SDK Node and `STANDALONE_REFERENCE_ROOT` set:
 
-Use the configured Node runtime. `test-c-runtime-memory.mjs` needs no C oracle.
-The existing `test-standalone-environment.mjs` reads RECT's original C oracle
-from `STANDALONE_REFERENCE_ROOT`; it passes all 1,190 state comparisons.
-Existing TRACK (3,496 comparisons), terminal (445 comparisons), and isolation
-checks also pass. Isolation forbids Wasm/network production capabilities.
+```sh
+node scripts/check-c-runtime-boundaries.mjs
+node scripts/check-c-runtime-relocation.mjs
+node scripts/test-c-runtime-memory.mjs
+node scripts/test-c-runtime-contracts.mjs
+node scripts/write-c-runtime-manifest.mjs --check
+```
 
-The full scope/provenance guard is blocked by an existing absolute-path pin for
-`runtime-environment/js/standalone/stdio.js`: actual `051933cd…`, expected
-`65866af8…`. The unchanged HEAD guard reproduces this before traversing the
-production imports. No pin was refreshed or disabled. Therefore no complete
-regression-gate, full-game recording, performance or native-host acceptance is
-claimed for this cleanup.
+The checks enforce generic dependency boundaries, mechanical relocation of
+existing factories, unchanged game policy/frozen inputs, memory and linker
+contracts, and the cleanup's source hashes. Original-C component and connected
+startup comparisons remain separate; see
+`../../docs/runtime-environment/C_RUNTIME_CLEANUP.md` for actual results and
+inherited reference/provenance blockers.
+
+This cleanup does not add a playable backend, establish new whole-game scores,
+change game algorithms or claim a performance improvement. Deleting the mixed
+backend and its remaining C bridges remains gated on complete pure-JS acceptance.

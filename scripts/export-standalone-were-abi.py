@@ -12,7 +12,7 @@ calls={}
 for name,params,target,args in re.findall(r'^      (\w+): (\w+|\([^)]*\)) => (?:Number\()?_(\w+)\((.*?)\)\)?[,]?$',lib,re.M):
  if target.startswith('teleport_were_'):continue
  calls[name]=target
-paths=['scripts/export-standalone-were-abi.py','js/standalone/were.js','js/ported/were.js','js/ported/were-runtime.js','js/ported/js-runtime.js','js/ported/calendar.js','nethack-c/wasm/tu-libraries/were.js','nethack-c/wasm/tu-support.c','scripts/tu-were-layout.h','js/wasm/tu-layouts.json','js/standalone/records.json','js/standalone/public-functions.json']
+paths=['scripts/export-standalone-were-abi.py','js/standalone/were.js','js/ported/were.js','js/ported/were-runtime.js','js/ported/js-runtime.js','js/nethack/runtime.js','js/ported/calendar.js','nethack-c/wasm/tu-libraries/were.js','nethack-c/wasm/tu-support.c','scripts/tu-were-layout.h','js/wasm/tu-layouts.json','js/standalone/records.json','js/standalone/public-functions.json']
 data={'layout':json.loads((root/'js/wasm/tu-layouts.json').read_text())['were'],'globals':globals,'bits':bits,'calls':calls,'public':{name:public[name]for name in re.findall(r'^export function (\w+)',(root/'js/ported/were.js').read_text(),re.M)},'sourceSha256':{p:hashlib.sha256((root/p).read_bytes()).hexdigest()for p in paths}}
 assert globals==['mons','u','flags','gw','svc','gy','gm']
 assert bits==['msleeping','mfrozen','mcanmove','mpeaceful']

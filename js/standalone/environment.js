@@ -1,11 +1,12 @@
+import {address} from '../c-runtime/memory.js';
+import {createNetHackRuntime} from '../nethack/runtime-bindings.js';
 // Independent environment for existing translated modules. Ports are unmodified.
 import {enableSpecialInteractions} from './special-interactions.js';
-import {createJsRuntime,CPanic} from '../ported/js-runtime.js';
+import {createJsRuntime,CPanic} from '../nethack/runtime.js';
 import {withCEnvironment} from '../ported/c-runtime.js';
 import * as rect from '../ported/rect.js';
 import {createRectBindings} from '../nethack/rect-bindings.js';
-import {createMemoryServices,address} from './memory-services.js';
-import {createFunctions} from './functions.js';
+import {createLinker} from '../c-runtime/linker.js';
 import publicFunctions from './public-functions.json' with {type:'json'};
 import {createStandaloneLibc} from './libc.js';
 import * as hacklib from '../ported/hacklib.js';
@@ -20,13 +21,11 @@ import {createObjectsState,createObjectsEnvironment} from '../ported/objects-run
 import * as monst from '../ported/monst.js';
 import {createMonstState,createMonstEnvironment} from '../ported/monst-runtime.js';
 import records from './records.json' with {type:'json'};
-import {createBitfields} from './bitfields.js';
-import {createStdio} from './stdio.js';
+import {createStdio} from '../c-runtime/stdio.js';
 import {createStandaloneLua} from './lua.js';
 import * as rnd from '../ported/rnd.js';
 import {createRndState,createRndEnvironment} from '../ported/rnd-runtime.js';
 import * as sys from '../ported/sys.js';
-import {createCTypes} from './c-types.js';
 import {enableAddressPort} from './address-ports.js';
 import {enableSerialization} from './serialization.js';
 import * as track from '../ported/track.js';
@@ -44,7 +43,7 @@ import {enableItemNaming} from './item-naming.js';
 import {enableMonsterCreation} from './monster-creation.js';
 import {enableMonsterInventory} from './monster-inventory.js';
 import {enableWorldPosition} from './world-position.js';
-import {createEnvironmentInputs} from './environment-inputs.js';
+import {createEnvironmentInputs} from '../c-runtime/environment-inputs.js';
 import {enableLuaSandbox} from './lua-sandbox.js';
 import {enableMonsterLifecycle} from './monster-lifecycle.js';
 import {enableMonsterMovement} from './monster-movement.js';
@@ -119,14 +118,8 @@ import {enableGameStartup} from './game-startup.js';
 
 export function createStandaloneEnvironment(options={}) {
     const base=createJsRuntime(options),{memory}=base;
-    const transport=createMemoryServices(memory),functions=createFunctions();
-    const bitfields=createBitfields(memory,records);
-    const ctypes=createCTypes(memory,records,bitfields);
     const inputs=createEnvironmentInputs(base,options.environment);
-    const services=Object.create(base.services);
-    services.getenv=inputs.getenv;
-    Object.defineProperties(services,Object.getOwnPropertyDescriptors(transport));
-    Object.assign(services,functions);
+    const {transport,functions,bitfields,ctypes,services}=createNetHackRuntime(base,records,inputs.getenv);
     const ENV={...options.environment},diagnostics=[];
     Object.assign(services,{ENV,FS:base.FS,printErr:message=>diagnostics.push(String(message))});
     Object.assign(services,createStandaloneLibc(memory,base.libc,transport,functions),{
@@ -135,72 +128,13 @@ export function createStandaloneEnvironment(options={}) {
         memset:(d,v,n)=>memory.memset(address(d),v,Number(n)),
         callComparator:(fn,a,b)=>typeof fn==='function'?fn(a,b):functions.indirect(fn,'ipp',a,b),
     });
-    const modules=new Map(),owners=new Map(),globals=new Map(),states=new Map();
-    const deferredFunctions=new Map(),symbolPointers=new Map();
+    const states=new Map();
     const addressAdapters=new Map();let itemInventory,monsterSelection,monsterCreation,heroStartup,were,dogmove,mhitm,vault,quest;
-    function functionPointer(name,signature,invoke) {
-        const previous=symbolPointers.get(name);
-        if(previous){if(previous.signature!==signature)throw new Error('Conflicting C function prototype '+name);return previous.id;}
-        const id=functions.functionPointer(invoke??((...args)=>environment.resolve(name)(...args)),signature);
-        symbolPointers.set(name,{id,signature});return id;
-    }
-    function publishFunction(module,name){
-        if(name in services)return;
-        const invoke=(...args)=>call(module,name,...args),prototype=publicFunctions.functions[name];
-        if(prototype)Object.defineProperty(invoke,'address',{get(){
-            const match=prototype.match(/^(.+?)\s*\((.*)\)$/);if(!match)throw new Error('Unknown C function address prototype '+name);
-            const args=[];let depth=0,start=0;for(let i=0;i<match[2].length;i++){const ch=match[2][i];if(ch==='('||ch==='[')depth++;else if(ch===')'||ch===']')depth--;else if(ch===','&&!depth){args.push(match[2].slice(start,i).trim());start=i+1;}}args.push(match[2].slice(start).trim());
-            const code=t=>{t=ctypes.canonical(t);if(t.includes('*')||t.includes('['))return'p';if(t==='void')return'v';if(t==='...')throw new Error('Variadic C callback address requires an explicit ABI '+name);if(t==='double')return'd';if(t==='float')return'f';if(t.startsWith('struct ')||t.startsWith('union '))throw new Error('C aggregate callback address requires an explicit ABI '+name);return ctypes.size(t)===8?'j':'i';};
-            return functionPointer(name,[match[1],...args.filter(t=>t&&t!=='void')].map(code).join(''));
-        }});
-        services[name]=invoke;
-    }
-    function deferFunctions(module,namespace){for(const [name,callback]of Object.entries(namespace)){const candidates=deferredFunctions.get(name)??new Map();candidates.set(module,callback);deferredFunctions.set(name,candidates);}}
-    function resolve(name){
-        if(!owners.has(name)){
-            const candidates=deferredFunctions.get(name);
-            if(candidates?.size>1)throw new Error('Ambiguous standalone public symbol '+name);
-            if(candidates?.size===1){const [module,callback]=candidates.entries().next().value;extend(module,{[name]:callback});}
-        }
-        const owner=owners.get(name);if(!owner)throw new Error('Unresolved standalone function '+name);return (...args)=>call(owner,name,...args);
-    }
-    function extend(name,namespace) {
-        const entry=modules.get(name);if(!entry)throw new Error('Unknown standalone module '+name);
-        const exports=Object.entries(namespace);
-        for(const [fn,value]of exports)if(typeof value!=='function'||owners.has(fn))throw new Error('Duplicate or invalid standalone export '+fn);
-        for(const [fn,value]of exports){entry.namespace[fn]=value;owners.set(fn,name);publishFunction(name,fn);}
-    }
-    function register(name,namespace,environment=services,{initialize,dependencies=[],prepareArgs}={}) {
-        if(modules.has(name))throw new Error('Duplicate standalone module '+name);
-        const exports=Object.entries(namespace).filter(([,v])=>typeof v==='function');
-        for(const [fn] of exports)if(owners.has(fn))throw new Error('Ambiguous standalone symbol '+fn);
-        const entry={namespace,environment,initialize,dependencies,prepareArgs,status:'registered'};modules.set(name,entry);
-        for(const [fn] of exports){owners.set(fn,name);publishFunction(name,fn);}
-        return entry;
-    }
-    function start(name) {
-        const entry=modules.get(name);if(!entry)throw new Error('Unresolved standalone module '+name);
-        if(entry.status==='ready'||entry.status==='initializing')return entry;
-        entry.status='initializing';
-        try{for(const dep of entry.dependencies)start(dep);if(entry.initialize)transport.scoped(()=>withCEnvironment(entry.environment,entry.initialize));entry.status='ready';return entry;}
-        catch(error){entry.status='failed';throw error;}
-    }
-    function call(name,fn,...args) {
-        const entry=start(name),callback=entry.namespace[fn];
-        if(typeof callback!=='function')throw new Error('Unknown standalone function '+name+'.'+fn);
-        return transport.scoped(()=>withCEnvironment(entry.environment,callback,...(entry.prepareArgs?entry.prepareArgs(fn,args):args)));
-    }
-    function allocateGlobal(name,size,initial) {
-        if(globals.has(name))throw new Error('Duplicate standalone global '+name);
-        const at=memory.calloc(1,size);if(!at)throw new RangeError('Global allocation failed');
-        if(initial) {if(initial.length>size){memory.free(at);throw new RangeError('Global initializer too large');}memory.HEAPU8.set(initial,at);}
-        globals.set(name,at);return at;
-    }
-    const requireGlobal=name=>{if(!globals.has(name))throw new Error('Unresolved standalone global '+name);return globals.get(name);};
-    function linkGlobal(name,pointer) {
-        if(globals.has(name))throw new Error('Duplicate standalone global alias '+name);
-        globals.set(name,address(pointer));
-    }
+    const linker=createLinker({memory,transport,functions,services,ctypes,
+        prototypes:publicFunctions.functions,withEnvironment:withCEnvironment,
+        resolveFunction:name=>environment.resolve(name)});
+    const {functionPointer,deferFunctions,resolve,extend,register,start,call,
+        allocateGlobal,requireGlobal,linkGlobal}=linker;
     Object.assign(services,{global:requireGlobal,storage:requireGlobal});
     function enableRect(layout,{rn2,impossible=message=>diagnostics.push(message)}={}) {
         let generator;
@@ -413,9 +347,9 @@ export function createStandaloneEnvironment(options={}) {
         enableTerminal:(layout,options)=>enableTerminal(environment,layout,options),
         enableLua:options=>createStandaloneLua(environment,options),
         enableLuaSandbox:layouts=>enableLuaSandbox(environment,layouts),
-        state:name=>states.get(name),hasFunction:name=>owners.has(name),
+        state:name=>states.get(name),hasFunction:linker.hasFunction,
         resolve,
-        status:()=>Object.fromEntries([...modules].map(([k,v])=>[k,v.status])),
+        status:linker.status,
         record:transport.record,array:transport.array,address};
     register('runtime-string-helpers',{__isspace:c=>services.isspace(c),Strlen_:(value,caller,line)=>base.strutil('Strlen_',typeof value==='string'?services.literal(value):address(value),typeof caller==='string'?services.literal(caller):address(caller),transport.int(line))});
     return environment;

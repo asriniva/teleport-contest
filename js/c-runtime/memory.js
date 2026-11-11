@@ -1,3 +1,4 @@
+import {createRecordStore,createArrayView} from './records.js';
 // Shared C memory transport. No game declarations or WebAssembly dependency.
 const types = Object.freeze({Int8:1, Uint8:1, Int16:2, Uint16:2, Int32:4, Uint32:4,
     BigInt64:8, BigUint64:8, Float32:4, Float64:8, ptr:8});
@@ -7,7 +8,7 @@ export const address = value => {
     return result;
 };
 export function createMemoryServices(memory) {
-    const stack = [], marks = new Set(), literals = new Map(), schemas = new Map(), views = new Map();
+    const stack = [], marks = new Set(), literals = new Map(), schemas = new Map();
     let markSequence=0;
     const read = (kind, at) => {
         if (!(kind in types)) throw new TypeError('Unknown C scalar '+kind);
@@ -41,15 +42,12 @@ export function createMemoryServices(memory) {
         }
         schemas.set(name,{size:definition.size,fields});
     }
-    function record(name, value) {
-        const at=address(value);if(!at)return 0;
-        const definition=schema(name);memory.bounds(at,definition.size);
-        const key=name+':'+at;
-        if(views.has(key))return views.get(key);
-        const out={address:at,byteLength:definition.size};views.set(key,out);
-        for(const [key,field] of Object.entries(definition.fields)) {
+    const records=createRecordStore({memory,address,
+        describe:name=>({type:name,...schema(name)}),
+        createView:(definition,at)=>({address:at,byteLength:definition.size}),
+        fieldDescriptor(name,at,key,field) {
             const pos=at+field.offset;
-            Object.defineProperty(out,key,{enumerable:true,
+            return {enumerable:true,
                 get() {
                     if(field.record)return record(field.record,pos);
                     if(field.array)return array(field.array,pos,field.length);
@@ -69,19 +67,20 @@ export function createMemoryServices(memory) {
                         write(field.type,pos,field.type.startsWith('Big')?raw:Number(raw));return;
                     }
                     write(field.type,pos,v);
-                }});
-        }
-        return out;
-    }
+                } };
+        },
+    });
+    const {record}=records;
     function array(kind,value,length) {
         const at=address(value),stride=types[kind]??schema(kind).size;
         if(!Number.isSafeInteger(length)||length<0)throw new RangeError('Invalid C array length');
         memory.bounds(at,length*stride);
-        const index=key=>typeof key==='string'&&/^(0|[1-9]\d*)$/.test(key)?Number(key):null;
-        return new Proxy({address:at,length,byteLength:length*stride},{
-            get(o,k) {const i=index(k);if(i===null)return Reflect.get(o,k);if(i>=length)throw new RangeError('C array bounds');return kind in types?read(kind,at+i*stride):record(kind,at+i*stride);},
-            set(o,k,v) {const i=index(k);if(i===null)return Reflect.set(o,k,v);if(i>=length)throw new RangeError('C array bounds');if(kind in types)write(kind,at+i*stride,v);else memory.memmove(at+i*stride,address(v),stride);return true;}});
+        return createArrayView({address:at,length,byteLength:length*stride},{
+            read:i=>kind in types?read(kind,at+i*stride):record(kind,at+i*stride),
+            write:(i,value)=>{if(kind in types)write(kind,at+i*stride,value);else memory.memmove(at+i*stride,address(value),stride);},
+        });
     }
+
     const api={
         moduleKey:Object.freeze({}),heap:()=>memory.HEAPU8,signedHeap:()=>memory.HEAP8,
         malloc:n=>memory.malloc(Number(n)),calloc:(n,s)=>memory.calloc(Number(n),Number(s)),

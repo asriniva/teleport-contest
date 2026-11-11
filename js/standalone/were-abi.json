@@ -142,11 +142,12 @@
     "set_ulycn": "void (int)"
   },
   "sourceSha256": {
-    "scripts/export-standalone-were-abi.py": "c68aa2007471e667d6dbce1df24c15b6afca047e9ee9dd0456e048ac1d23fa42",
+    "scripts/export-standalone-were-abi.py": "d6f3e3556b6121edc84f605e86ff915199494695a6262d93334cb363e6b34c8b",
     "js/standalone/were.js": "b53aebb79d2d00c2ce2b37011363e7c8bf5905fded5f0bc3d3df9fe32b6cc4e8",
     "js/ported/were.js": "485ff7d02750020f4c5245bb617d4962c48e83be5c17be2f6a157d83b3f8a52e",
     "js/ported/were-runtime.js": "b5ea2fb160bdc5403722b041640b9387e8e937517192945e76e7467a4f5233ea",
-    "js/ported/js-runtime.js": "81b81c5125e9d95172deab237e0449c47eb1a5a66a90584fba85a9d1669f7a79",
+    "js/ported/js-runtime.js": "b720a507bb2c7354c19c54dd66abbee590dd64f42b3e8cfd9700a58c4db39979",
+    "js/nethack/runtime.js": "fc34e7cdf72d537f5dff2d180521afd02b79e791a83db21875b9f0540698d3ec",
     "js/ported/calendar.js": "1e475c7d82dce8bbf7bb188e4c77143b211aa53fcb264650a64cd542cc337ee9",
     "nethack-c/wasm/tu-libraries/were.js": "371095be52dea5cb369cb6fbd1888833d46e7cad329482fa21e36ad51aa9cb82",
     "nethack-c/wasm/tu-support.c": "4acc049213a8c67b069b71315406f58409100db195df2dadbc5d4bcd7184f875",
