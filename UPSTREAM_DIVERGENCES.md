@@ -162,6 +162,37 @@ Optional standalone interaction owners (2026-11-11, verified subset): special-in
 Verification: scripts/test-standalone-special-interactions.mjs passes 341 checks at 35 comparison checkpoints against the existing complete original-C Emscripten reference: actual startup, five rumor reads, ordinary/special oracle windows, cookie rumor, CapitalMon cache reuse/free/rebuild, soldier awakening, underwater/cancel/play flute, ordinary sitting, marker cancellation and successful known identify-scroll writing, sink drinking, and fountain gush through real vision callbacks. Each checkpoint compares terminal/error bytes, exact recording frames, both complete ISAAC states/logs and the normalized persistent world/identity graph; detached flute state is also compared. Production assembly/execution runs with Wasm/network capabilities forbidden. The targeted guard passes 138 unchanged translated policies, three frozen files, 450 production closure files, all 31 new source pins and 124 configured reference header/source pins. See docs/runtime-environment/special-interactions.json. These are explicit subsets, not complete support for the user’s entire remaining-port list or full-game acceptance. Rare throne, dipping, special instruments, spellbooks, consultations, fatal assertions and polymorph remain unaccepted. The initial sink toxic-waste case exposed unresolved polyself; no stub was installed. The accepted sink fixture explicitly consumes one real matching RNG draw to select a separate ordinary branch; that limitation is retained in the test. Complete standalone provenance guard still fails on the inherited unix-platform-abi.json stdio.js pin (expected 65866af8..., actual 051933cd...); the new targeted guard does not replace or suppress that failure. No 44-public-game claim is made.
 
 Standalone APPLY core-action assembly (2026-11-11, in progress): environment/program enable unchanged cached callApply/createApplyEnvironment via the new canonical source provider, sharing actual DECL trap/polearm/tool state and native callbacks. Temporary apply-reset is removed; source reset_trapset/check_leash now share the full factory context. Owner-local stable NH_RED relocation reads actual c_color_names.c_red rather than a stale compiled heap address in the legacy layout; numeric field/width ABI remains measured and source-bound. The existing LIGHT owner supplies original candle_light_range with native object projection/candle header and the existing MKROOM owner supplies original search_special with measured room-pointer advancement for ordinary room sounds. Existing STEED saddle context supplies original stucksteed scalar check required by normal stairs; mounted special branches remain unaccepted. Existing VISION owner exposes unchanged do_clear_area with its actual typed callback dispatch for mandatory BellOfOpening detection. Core reset/normal tool behavior is under C comparison; optional item variants are deferred. No translated/frozen changes, copied action decisions or skipped leash/trap rules.
+C-runtime cleanup first slice (2026-11-11, isolated `cleanup/c-runtime-rect`
+worktree from `df33dd4`): move the existing generic standalone memory transport
+into `js/c-runtime/memory.js`, retaining `js/standalone/memory-services.js` as a
+compatibility entry. NetHack `boolean`/`coordxy` aliases remain in that entry;
+`size_t` remains generic. Add a declaration-bound `recordType` facade over the
+same memory/view/array/stack implementations. Extract NhRect layout/state/source
+error messages/legacy adapter names into `js/nethack/rect-bindings.js`; the
+standalone composition root supplies allocation, RNG and diagnostics. Purpose:
+separate generic C mechanics from game declarations without rewriting source
+algorithms. Preserved behavior: scalar narrowing, pointer aliasing, record byte
+copies, uninitialized scoped locals, growth-aware reads, RECT state/by-value
+arguments and diagnostics. No original C, translated policy, mixed backend,
+frozen files, recorder or terminal behavior is changed. This is a local adapter
+reorganization, not an inherited contest patch or new game capability.
+
+Verification: unchanged RECT original-C comparison passes 1,190 states;
+unchanged TRACK passes 3,496 comparisons and terminal passes 445. Production
+isolation passes with Wasm/network forbidden. New shared-memory contract checks
+pass for copies/aliases/narrowing/growth/nested cleanup/uninitialized reservation/
+instance isolation and compatibility typedefs, and are included in the standalone
+runner. Full scope guard FAILS on the pre-existing absolute stdio.js pin
+(actual051933cd vs expected65866af8); unmodified HEAD guard reproduces the same
+failure. No metadata waiver. One initial isolation invocation omitted the
+required reference-root environment variable and failed to load Lua fixtures;
+corrected invocation passes. Full-game/public recordings, full aggregate gate,
+native-host parity and speed remain unverified for this refactor. Other record
+projection implementations and Wasm adapters remain for explicit later migration;
+see `js/c-runtime/README.md` for contract boundaries and follow-up.
+
+
+Standalone APPLY core-action assembly (2026-11-11, in progress): environment/program enable unchanged cached callApply/createApplyEnvironment via the new canonical source provider, sharing actual DECL trap/polearm/tool state and native callbacks. Temporary apply-reset is removed; source reset_trapset/check_leash now share the full factory context. Owner-local stable NH_RED relocation reads actual c_color_names.c_red rather than a stale compiled heap address in the legacy layout; numeric field/width ABI remains measured and source-bound. Core reset/normal tool behavior is under C comparison; optional item variants are deferred. No translated/frozen changes, copied action decisions or skipped leash/trap rules.
 
 Standalone LOCK ordinary-door assembly (2026-11-11, in progress): environment/program enable the original createLockEnvironment/withLockEnvironment owner on shared GX.xlock/occupation state with actual typed native callbacks and ABI. Existing item-inventory maybe_reset_pick source hook is verified then delegated into this same cached context, preserving its public owner and avoiding duplicated state. Ordinary reset/open/close/interruption and stairs-route behavior are under C comparison; magic/chest/special lock branches are deferred. No translated/frozen changes.
 

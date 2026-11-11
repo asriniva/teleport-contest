@@ -3,6 +3,7 @@ import {enableSpecialInteractions} from './special-interactions.js';
 import {createJsRuntime,CPanic} from '../ported/js-runtime.js';
 import {withCEnvironment} from '../ported/c-runtime.js';
 import * as rect from '../ported/rect.js';
+import {createRectBindings} from '../nethack/rect-bindings.js';
 import {createMemoryServices,address} from './memory-services.js';
 import {createFunctions} from './functions.js';
 import publicFunctions from './public-functions.json' with {type:'json'};
@@ -202,9 +203,6 @@ export function createStandaloneEnvironment(options={}) {
     }
     Object.assign(services,{global:requireGlobal,storage:requireGlobal});
     function enableRect(layout,{rn2,impossible=message=>diagnostics.push(message)}={}) {
-        if(!layout||layout.coordSize!==2||layout.size!==8)throw new Error('Expected measured memory64 NhRect layout');
-        transport.defineRecord('NhRect',{size:layout.size,fields:Object.fromEntries(['lx','ly','hx','hy'].map(k=>[k,{offset:layout[k],type:'Int16'}]))});
-        const state={rect:0,n_rects:0,rect_cnt:0},env=Object.create(services);
         let generator;
         const draw=n=>{
             if(!Number.isInteger(n)||n<=0)throw new RangeError('Invalid rn2 bound');
@@ -214,17 +212,14 @@ export function createStandaloneEnvironment(options={}) {
             }
             generator??=base.createIsaac(options.seed??new Uint8Array());return Number(generator.next()%BigInt(n));
         };
-        const local=value=>{const result=transport.record('NhRect',transport.stackAlloc(layout.size));if(value)for(const k of ['lx','ly','hx','hy'])result[k]=value[k];return result;};
-        Object.assign(env,{rectState:state,COLNO:layout.COLNO,ROWNO:layout.ROWNO,NhRectSize:layout.size,
-            alloc:n=>base.alloc('alloc',n),rectPanic:()=>{throw new CPanic('Could not alloc rect');},
-            rectImpossible:()=>impossible('n_rects may be too small.'),
-            rn2:rn2??draw,
-            rectArray:p=>p?transport.array('NhRect',p,state.n_rects):0,rectLocal:()=>local(),rectCopy:local});
-        register('rect',rect,env,{prepareArgs:(fn,args)=>args.map((v,i)=>{
-            const result=typeof v==='object'?v:transport.record('NhRect',v);
-            return fn==='rect_bounds'&&i<2?{...result}:result;
-        })});states.set('rect',state);return state;
+        const binding=createRectBindings(transport,services,layout,{
+            alloc:n=>base.alloc('alloc',n),panic:message=>{throw new CPanic(message);},
+            impossible,rn2:rn2??draw,
+        });
+        register('rect',rect,binding.environment,{prepareArgs:binding.prepareArgs});
+        states.set('rect',binding.state);return binding.state;
     }
+
     function enableHacklib(layout) {
         const local=Object.create(services),storage=[layout.BUFSZ,layout.BUFSZ,25,13]
             .map((size,i)=>allocateGlobal('hacklib.'+i,size));
