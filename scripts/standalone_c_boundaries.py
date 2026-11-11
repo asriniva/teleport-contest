@@ -6,9 +6,9 @@ is named in the build receipt, and any reached boundary fails the comparison.
 import json,re,subprocess
 from pathlib import Path
 
-def build(cmd,flags,sources,root,reference,out):
+def build(cmd,flags,sources,root,reference,out,headers=()):
     tree=reference/'.cache/wasm64-build/tree'
-    probe=out/'boundary-types.c';probe.write_text('#include "hack.h"\n#include <stdio.h>\n#include <stdlib.h>\n')
+    probe=out/'boundary-types.c';probe.write_text('#include "hack.h"\n#include <stdio.h>\n#include <stdlib.h>\n'+''.join('#include "'+name+'"\n' for name in headers))
     compiler=reference/'.cache/emsdk/upstream/bin/clang'
     cpp=[flag for flag in flags if flag.startswith(('-I','-D'))]
     ast=json.loads(subprocess.check_output([str(compiler),'--target=wasm64-unknown-emscripten','--sysroot='+str(reference/'.cache/emsdk/upstream/emscripten/cache/sysroot'),*cpp,'-fsyntax-only','-Xclang','-ast-dump=json',str(probe)]))

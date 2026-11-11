@@ -41,6 +41,8 @@ import {enableItemNaming} from './item-naming.js';
 import {enableMonsterCreation} from './monster-creation.js';
 import {enableMonsterInventory} from './monster-inventory.js';
 import {enableWorldPosition} from './world-position.js';
+import {createEnvironmentInputs} from './environment-inputs.js';
+import {enableLuaSandbox} from './lua-sandbox.js';
 import {enableGameStartup} from './game-startup.js';
 
 export function createStandaloneEnvironment(options={}) {
@@ -48,7 +50,9 @@ export function createStandaloneEnvironment(options={}) {
     const transport=createMemoryServices(memory),functions=createFunctions();
     const bitfields=createBitfields(memory,records);
     const ctypes=createCTypes(memory,records,bitfields);
+    const inputs=createEnvironmentInputs(base,options.environment);
     const services=Object.create(base.services);
+    services.getenv=inputs.getenv;
     Object.defineProperties(services,Object.getOwnPropertyDescriptors(transport));
     Object.assign(services,functions);
     const ENV={...options.environment},diagnostics=[];
@@ -239,7 +243,7 @@ export function createStandaloneEnvironment(options={}) {
         return runtime;
     }
     const environment={...base,services,transport,functions,bitfields,ctypes,diagnostics,register,extend,start,call,allocateGlobal,requireGlobal,linkGlobal,enableRect,enableHacklib,enableDecl,enableDrawing,enableObjects,enableMonst,enableStdio,enableRnd,enableSys,enableTrack,enableCommandGeometry,enableDependencies,
-        setEnvironment:(name,value)=>{base.setEnvironment(name,value);if(value===null||value===undefined)delete ENV[name];else ENV[name]=String(value);},
+        setEnvironment:(name,value)=>{inputs.setEnvironment(name,value);if(value===null||value===undefined)delete ENV[name];else ENV[name]=String(value);},
         captureFiles:baseline=>captureGameFiles(base.filesystem,baseline,shouldPersistGameFile),
         restoreFiles:state=>restoreGameFiles(base.filesystem,state),
         fileBaseline:()=>filesUnder(base.filesystem,'/nethack'),
@@ -258,6 +262,7 @@ export function createStandaloneEnvironment(options={}) {
         enableSerialization:layouts=>enableSerialization(environment,layouts),
         enableTerminal:(layout,options)=>enableTerminal(environment,layout,options),
         enableLua:options=>createStandaloneLua(environment,options),
+        enableLuaSandbox:layouts=>enableLuaSandbox(environment,layouts),
         state:name=>states.get(name),
         resolve:name=>{const owner=owners.get(name);if(!owner)throw new Error('Unresolved standalone function '+name);return (...args)=>call(owner,name,...args);},
         status:()=>Object.fromEntries([...modules].map(([k,v])=>[k,v.status])),

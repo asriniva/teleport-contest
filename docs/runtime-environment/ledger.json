@@ -1,15 +1,15 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "0d24a9a6bd3a66d2530a7fa4cb5b34ec91651513",
+  "acceptedCheckpoint": "db577b2574fb7f50a53e0565ebce7e63a92fe542",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
     "provider-only": 2,
-    "not-connected": 72,
-    "verified-subset": 41,
+    "not-connected": 68,
+    "verified-subset": 43,
     "in-progress": 8,
-    "transport-only": 4
+    "transport-only": 6
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -557,8 +557,9 @@
     {
       "module": "nhlobj",
       "source": "src/nhlobj.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "transport-only",
+      "scope": "Original object library table packing and registration connected to pure-JS Lua. Object callback gameplay and full dependency closure remain unverified.",
+      "evidence": "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden."
     },
     {
       "module": "do_name",
@@ -699,8 +700,8 @@
       "module": "dungeon",
       "source": "src/dungeon.c",
       "status": "verified-subset",
-      "scope": "ledger_no and maxledgerno only; additional geometry helpers in progress.",
-      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md",
+      "scope": "Actual init_dungeons, including real nhlib.lua/dungeon.lua through original NHLUA policy and pure-JS Lua VM, produces matching full topology, branch/special-level lists and RNG across51 role/seed cases. Level generation, travel and full game remain incomplete.",
+      "evidence": "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden.",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
     },
     {
@@ -785,8 +786,9 @@
     {
       "module": "nhlua",
       "source": "src/nhlua.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Sandbox creation, source library registrations, actual nhlib.lua/dungeon.lua loading/callbacks, pcall and teardown exercised during matching dungeon initialization. Sandbox limit/error branches and general callback closure remain unfinished.",
+      "evidence": "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden."
     },
     {
       "module": "files",
@@ -906,8 +908,9 @@
     {
       "module": "options",
       "source": "src/options.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original nh_getenv body applies128-character bound over caller-injected raw environment storage; empty,128/129 lengths,replacement/removal and recording epoch match C. Other option parsing/UI remains unconnected.",
+      "evidence": "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden."
     },
     {
       "module": "botl",
@@ -924,14 +927,15 @@
     {
       "module": "nhlsel",
       "source": "src/nhlsel.c",
-      "status": "not-connected",
-      "scope": "Added to main by NHLSEL integration; no standalone connection accepted yet."
+      "status": "transport-only",
+      "scope": "Actual selection library method/metatable registration connected on JS-owned storage with stable callback IDs. Selection algorithms and their dependency closure are not accepted by dungeon-only evidence.",
+      "evidence": "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden."
     }
   ],
   "rebaseNote": "Rebased to main3296b9a; refreshed 138 policy and adapter/record/terminal metadata receipts; prior13-check regression PASS.",
   "latestWorkingTreeEvidence": {
-    "gate": "22 standalone development checks PASS, including game-startup",
-    "startupComparisons": 4386,
-    "scope": "Startup prefix and role subset only; full game remains unfinished."
+    "gate": "23 standalone development checks PASS",
+    "dungeonComparisons": 2631,
+    "scope": "Dungeon initialization and explicit environment-input subset; full-game acceptance remains false."
   }
 }

@@ -58,6 +58,12 @@ const ant=Object.values(layouts).find(p=>p&&p.PM_GIANT_ANT!==undefined).PM_GIANT
 const random=env.services.makemon(env.requireGlobal('mons')+ant*env.ctypes.size('struct permonst'),0,0,flags);assert.ok(random);
 const am=creatures.views.record('struct monst',random);env.services.m_initgrp(random,am.mx,am.my,4,flags);assert.ok(w.fmon.nmon);
 while(w.fmon){const m=w.fmon;w.fmon=m.nmon;m.nmon=0;w.svl.level.monsters[m.mx][m.my]=0;env.services.dealloc_monst(m);}
+const startup=env.enableGameStartup(layouts);
+Object.assign(env.services.flags,{initrole:0,initrace:0,initgend:0,initalign:0,female:0,pantheon:-1});
+env.services.strcpy(startup.role.svp.plname,env.services.literal('Ada'));env.services.role_init();
+env.enableLuaSandbox(layouts);
+for(const name of ['nhlib.lua','dungeon.lua'])env.filesystem.writeFile(name,fs.readFileSync(process.env.STANDALONE_REFERENCE_ROOT+'/.cache/wasm64-build/tree/dat/'+name));
+env.services.init_dungeons();assert.ok(env.ctypes.getField('struct instance_globals_saved_n',env.requireGlobal('svn'),'n_dgns','int')>0);
 const terminal=env.enableTerminal(layouts.termcap);
 env.call('termcap','nomux_clear_screen');env.call('termcap','nomux_capture_write_input_boundary');assert.equal(terminal.frames.length,1);
 const lua=env.enableLua(),L=lua.api.luaL_newstate();assert.equal(lua.api.luaL_loadstring(L,'return 21*2'),0);assert.equal(lua.api.lua_pcallk(L,0,1,0,0n,0n),0);assert.equal(lua.api.lua_tointegerx(L,-1,0),42n);lua.api.lua_close(L);
