@@ -36,6 +36,13 @@ world.u.ulevel=10;world.u.uz.dnum=0;world.u.uz.dlevel=5;
 for(const type of [layouts.mkobj.GLOB_OF_GRAY_OOZE,layouts.mkobj.CORPSE,layouts.mkobj.EGG,layouts.mkobj.FIGURINE,layouts.mkobj.STATUE,layouts.mkobj.TIN,layouts.mkobj.CANDY_BAR]){
  const p=env.services.mksobj(type,1,0);assert.ok(p);env.services.obj_stop_timers(p);env.services.obfree(p,0);env.services.dobjsfree();assert.ok(!env.memory.live.has(p));
 }
+env.enableItemNaming(layouts);
+for(const type of [layouts.mkobj.CHEST,layouts.mkobj.ICE_BOX,layouts.mkobj.BAG_OF_HOLDING,layouts.mkobj.SPE_NOVEL]){
+ const p=env.services.mksobj(type,1,0);assert.ok(p);env.services.obfree(p,0);env.services.dobjsfree();assert.ok(!env.memory.live.has(p));
+}
+const sword=env.services.mksobj(layouts.earlyarg.LONG_SWORD,1,0);
+assert.equal(env.address(env.services.mk_artifact(sword,layouts.artifact.A_NONE,99,1)),sword);
+assert.ok(env.ctypes.getField('struct obj',sword,'oartifact','char')>0);env.services.obfree(sword,0);env.services.dobjsfree();
 const terminal=env.enableTerminal(layouts.termcap);
 env.call('termcap','nomux_clear_screen');env.call('termcap','nomux_capture_write_input_boundary');assert.equal(terminal.frames.length,1);
 const lua=env.enableLua(),L=lua.api.luaL_newstate();assert.equal(lua.api.luaL_loadstring(L,'return 21*2'),0);assert.equal(lua.api.lua_pcallk(L,0,1,0,0n,0n),0);assert.equal(lua.api.lua_tointegerx(L,-1,0),42n);lua.api.lua_close(L);

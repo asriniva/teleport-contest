@@ -37,6 +37,7 @@ import {enableObjectRecords} from './object-records.js';
 import {enableItemInventory} from './item-inventory.js';
 import {enableTimers} from './timers.js';
 import {enableMonsterSelection} from './monster-selection.js';
+import {enableItemNaming} from './item-naming.js';
 
 export function createStandaloneEnvironment(options={}) {
     const base=createJsRuntime(options),{memory}=base;
@@ -55,7 +56,7 @@ export function createStandaloneEnvironment(options={}) {
         callComparator:(fn,a,b)=>typeof fn==='function'?fn(a,b):functions.indirect(fn,'ipp',a,b),
     });
     const modules=new Map(),owners=new Map(),globals=new Map(),states=new Map();
-    const addressAdapters=new Map();
+    const addressAdapters=new Map();let itemInventory;
     function extend(name,namespace) {
         const entry=modules.get(name);if(!entry)throw new Error('Unknown standalone module '+name);
         const exports=Object.entries(namespace);
@@ -242,7 +243,8 @@ export function createStandaloneEnvironment(options={}) {
         exposeAddressPort:(name,names)=>{const adapter=addressAdapters.get(name);if(!adapter)throw new Error('Address adapter not enabled: '+name);return adapter.expose(names);},
         enableObjectState:layouts=>enableObjectState(environment,layouts),
         enableObjectRecords:layouts=>enableObjectRecords(environment,layouts),
-        enableItemInventory:layouts=>enableItemInventory(environment,layouts),
+        enableItemInventory:layouts=>itemInventory=enableItemInventory(environment,layouts),
+        enableItemNaming:layouts=>{if(!itemInventory)throw new Error('Item naming requires item inventory');return enableItemNaming(environment,layouts,itemInventory);},
         enableTimers:layouts=>enableTimers(environment,layouts),
         enableMonsterSelection:layouts=>enableMonsterSelection(environment,layouts),
         enableSerialization:layouts=>enableSerialization(environment,layouts),

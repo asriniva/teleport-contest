@@ -1,7 +1,7 @@
 // Lazy measured record/array projections for existing property-style adapters.
 // Only C memory transport lives here; no game initialization or policy.
 export function createRecordViews(environment) {
-    const {ctypes,memory}=environment,cache=new Map();
+    const {ctypes,memory}=environment,cache=new Map(),definitions=new WeakMap();
     function value(type,p) {
         type=ctypes.canonical(type);p=environment.address(p);
         const array=type.match(/^(.*?)\[(\d+)\](.*)$/);
@@ -21,7 +21,7 @@ export function createRecordViews(environment) {
         p=environment.address(p);if(!p)return 0;
         const definition=ctypes.record(type),key=definition.type+':'+p;
         if(cache.has(key))return cache.get(key);
-        memory.bounds(p,definition.size);const view={address:p};cache.set(key,view);
+        memory.bounds(p,definition.size);const view={address:p};cache.set(key,view);definitions.set(view,definition);
         Object.defineProperty(view,Symbol.toPrimitive,{value:()=>p});
         for(const [name,field]of Object.entries(definition.fields)){
             const scalar=field.ctype.replace(new RegExp('\\s+'+name+'$'),'');
@@ -35,5 +35,8 @@ export function createRecordViews(environment) {
         for(const [alias,name]of Object.entries(aliases))if(name in view&&!(alias in view))Object.defineProperty(view,alias,{get:()=>view[name],set:v=>{view[name]=v;}});
         return view;
     }
-    return {record,value,array:(type,p,length)=>value(type+'['+length+']',p)};
+    return {record,value,array:(type,p,length)=>value(type+'['+length+']',p),advance:(view,n)=>{
+        const definition=definitions.get(view);if(!definition)throw new TypeError('Unrecognized measured record view');
+        return record(definition.type,view.address+Number(n)*definition.size);
+    }};
 }

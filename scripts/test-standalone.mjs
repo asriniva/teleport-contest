@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-const tests=['check-standalone-scope','test-js-runtime',...['environment','libc','data','io-lua','address-ports','serialization','track','object-state','object-records','item-inventory','timers','monster-selection','terminal','isolation'].map(name=>'test-standalone-'+name)];
+const tests=['check-standalone-scope','test-js-runtime',...['environment','libc','data','io-lua','address-ports','serialization','track','object-state','object-records','item-inventory','timers','monster-selection','containers','item-naming','terminal','isolation'].map(name=>'test-standalone-'+name)];
 if(!process.env.STANDALONE_REFERENCE_ROOT)throw new Error('Set STANDALONE_REFERENCE_ROOT to the prepared reference checkout');
 fs.mkdirSync('.cache/standalone-validation',{recursive:true});
 const results=[];

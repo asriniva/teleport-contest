@@ -34,8 +34,9 @@ injected. C compilers and C/Wasm oracles are development-only.
 | TRACK | 3,496 original-C movement/equipment/query and historical save/restore comparisons, using shared hero/equipment and serializers. |
 | Object startup and name state | `enableObjectState`: 11 unchanged O_INIT functions connected to shared DECL/OBJECTS/DRAWING, canonical RND, two actual DUNGEON ledger functions and SFBASE/SFSTRUCT/CVFS. Combined original-C subsystem passes 6,288 comparisons across four seeds, including full class bytes/ranges/totals, shuffling, description lookup, level gem probabilities, failure diagnostic, exact RNG logs/continued stream and name save/free/restore. Serialized `oc_uname` address slots are compared as null/non-null because allocator addresses differ; every other saved byte and all restored name payloads compare exactly. Discovery/inventory/menu functions remain absent. |
 | Object records, ownership and weights | `enableObjectRecords`: 21 MKOBJ functions, two EAT nutrition functions and MON's `dealloc_mextra`, plus the existing ALLOC `dupstr`, connected to shared catalogues/globals/RNG. Combined original-C suite passes 6,184 comparisons: every object type, recursive bags/containers, corpse/statue/partly eaten/glob weights, coin rounding, class/material predicates, nobj/nexthere aliases, buried-list updates, extra/mail/embedded-monster ownership, full cleanup and ID wraparound. Raw object bytes preserve pointer alias identities via address tokens; separately owned extra pointers compare null/non-null, with name/command payloads checked exactly. Source-defined target integer narrowing is retained. Full mksobj generation, merging, inventory/UI, timers/light and invalid-quantity naming remain unlinked. |
-| Ordinary item generation and inventory | `enableItemInventory`: initialized/uninitialized `mksobj` plus real inventory add/no-merge/remove/reorder/stack merging/deletion-queue behavior. Three seeds, 2,988 constructors and 669 update callbacks pass 11,970 C comparisons, including full object bytes, pointer identities, roots/IDs/letters, exact RNG logs, nested callback reentry and heap growth. Explicit profile covers 442 ordinary types; 21 artifact/container/monster/timer/novel/candy types remain pending. Exposing an entry does not imply every inventory/UI/shop branch is linked. |
+| Ordinary item generation and inventory | `enableItemInventory`: initialized/uninitialized `mksobj` plus real inventory add/no-merge/remove/reorder/stack merging/deletion-queue behavior. Three seeds, 2,988 constructors and 669 update callbacks pass 11,970 C comparisons, including full object bytes, pointer identities, roots/IDs/letters, exact RNG logs, nested callback reentry and heap growth. Explicit profile covers 442 ordinary types; 21 special types are excluded from this ordinary-only fixture and checked in the additional groups below. Exposing an entry does not imply every inventory/UI/shop branch is linked. |
 | Timer queues and species-backed items | `enableTimers` and `enableMonsterSelection`: 1,350 timer/union/object comparisons plus 9,156 species/biology/growth/difficulty/elemental/hell and special-item comparisons across three seeds. Real queue insertion/duplicates/move/split/stop/attach, sterile egg expiry, opaque uint64 bits, ID wrap and heap growth; four glob constructors; corpse/figurine/egg/statue/tin/candy constructors, nested statue contents, deletion queues and exact RNG logs. Actual source event owners are required; nonsterile hatching, other elapsed events, full monster placement and quest-specific selection remain unfinished. |
+| Containers, names and random artifacts | Six container types pass 3,894 comparisons over 1,296 constructors/3,564 contained records across initial inventory, ordinary turns and map generation. `enableItemNaming` adds existing DO_NAME/ARTIFACT functions on the same tables/heap: 11,046 comparisons over 2,760 novel/unique/weapon constructors, including 28 artifacts; complete object/extra/name bytes, existence/origin flags, timer/deletion graphs and exact RNG logs. Naming UI, divine gifts, wielded effects and world interactions remain unaccepted. |
 | Stdio / persistence | Binary IO, buffering, EOF/error/pushback, seek, close and output contracts; capture/restore/deletion through existing persistence policy. No host device/OS-wide POSIX claim. |
 | Lua | Existing JS VM and 83 typed C API dispatch recipes on measured memory; bytecode, callbacks/error unwinding, date/files, userdata growth probes. Full nhlua/nhlobj integration and all standard libraries are unfinished. |
 | Terminal | 445 original-C recorder-cell/capture/terminfo comparisons; existing recorder encoding preserved. Window procedures, tty input and game loop are unfinished. The inherited 6,144-byte C recorder buffer bounds captures; larger captures are not accepted by this proof. |
@@ -79,7 +80,7 @@ and the host compiler wrapper. From the candidate checkout run:
 STANDALONE_REFERENCE_ROOT=/path/to/reference /path/to/sdk/node scripts/test-standalone.mjs
 ```
 
-The gate runs source/closure checks, the original base-runtime suite, and fourteen
+The gate runs source/closure checks, the original base-runtime suite, and sixteen
 standalone suites; logs and script hashes go to `.cache/standalone-validation/`.
 It requires the existing original native allocation oracle under the candidate's
 `.cache/tu-probes/native-oracles/` (alloc-native.node, alloc-full-native-build.json,
@@ -209,11 +210,33 @@ not synthesize a dungeon map or substitute a species-selection algorithm.
 Timer argument unions preserve all 64 bits, including values outside the JS
 safe integer range. Record views retain pointer identity and named header
 aliases after memory growth. Four glob constructors and six species-backed/
-food constructors are tested; novel/unique/artifact and container generation
-as complete surfaces remain pending. Elapsed world events, full eating/reading,
+food constructors are tested; the additional container and naming profiles below
+extend the explicit constructor coverage. Elapsed world events, full eating/reading,
 quest selection, monster placement/equipment and full-game recording remain
 unaccepted. The isolation gate executes the new groups with Wasm and network
 globals forbidden before importing the production entry point.
+
+## Container and naming profiles
+
+The container suite reuses the species reference. Build the naming reference:
+
+```sh
+python3 scripts/build-standalone-object-state.py --item-naming --reference-root /path/to/reference --out .cache/standalone-item-naming
+```
+
+`STANDALONE_ITEM_NAMING_ORACLE` overrides that path. This includes original
+ARTIFACT source in the probe translation unit to expose private existence/origin
+bytes without editing its policy. Its 409 abort function boundaries and 67 zero
+input globals remain explicit. `enableItemNaming(layouts)` requires the existing
+item/inventory environment; it extends that environment rather than duplicating
+artifact tables. Source title literals, measured record stepping, signed short
+arrays, size_t/string transport and shared equipment pointers support oname,
+noveltitle, mk_artifact, exist_artifact, artifact_exists and artifact_origin.
+The tested random-artifact path uses eight weapon types and A_NONE; divine gifts,
+role/race initialization, wielded effects, unpaid naming and the full naming UI
+are not accepted. Source-level constructor coverage now includes the 21 special
+types excluded from the ordinary fixture, under these explicitly listed inputs;
+this does not establish every branch or complete inventory/game integration.
 
 ## Next integration milestone
 
