@@ -1,7 +1,8 @@
 # Common-runtime cleanup
 
 Isolated worktree: `/Users/arj/Desktop/nethack_comp/c-runtime-cleanup`.
-Branch: `cleanup/c-runtime-rect`. Baseline: `df33dd4`.
+Branch: `cleanup/c-runtime-rect`. Original baseline: `df33dd4`.
+Rebased onto `origin/main` at `059e17579a72ec6325e7b4d7e7fd7eead577d79b`.
 The first slice was committed as `7640708`; this document covers its continuation.
 No other worktree's source or shared cached oracle is written by this work.
 
@@ -57,9 +58,29 @@ contains the original failed attempts and actual rerun results.
 
 ## Validation status
 
-Final results are recorded alongside this document once the component runs finish.
-The runtime's boundary/relocation/contract tests, original-C RECT comparisons,
-13-module address transport, native libc and scanner/stdio checks are required.
+After rebasing, all14 focused runtime/component checks pass: boundary and
+relocation audits; memory and linker contracts; base runtime; RECT;13-module
+address transport (23,700 checks); native libc; scanner (1,189 comparisons);
+stdio buffering; Lua/I/O; serialization; terminal and production isolation.
+Main's targeted special-interaction scope guard also passes138 policy/3 frozen
+checks and528 production closure files. Genuine-main startup, first wait turn,
+initial save exit and all four C/JS save-producer/restore-consumer combinations
+through the first restored prompt pass. That last test explicitly does not
+accept complete saved-state semantic equivalence or resumed gameplay.
+
+Pre-rebase connected tests also passed hero/display/level startup and generation,
+first-level contents, windows, status, movement/pets/inventory, inventory
+attributes, glyph cache and first display (10,881 comparisons). Ten initially
+missing/stale-reference checks passed on independently copied source-matching
+oracles. Equipment startup's first bounded attempt hit the development driver's
+300-second cap; the unchanged unbounded component rerun passes14,241 comparisons
+across47 cases in308.32s. Equipment actions, runtime info, WORM, report and
+attribute-state checks passed. The pager matrix likewise reached that driver
+cap, with no comparison mismatch reported; it remains incomplete. A level-
+persistence test stopped on an existing source pin for level-persistence.js,
+which this cleanup does not modify. The broad run was stopped at user request
+before rebasing, including its active child; it is not an aggregate acceptance.
+Historical bounded/failed logs remain under `.cache/c-runtime-cleanup/`.
 Full pure-JS game recording and mixed-backend retirement are outside this
 refactor's acceptance; it changes architecture without claiming new gameplay.
 

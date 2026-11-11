@@ -1,5 +1,6 @@
 {
   "baselineCommit": "df33dd4",
+  "integrationBaseCommit": "059e17579a72ec6325e7b4d7e7fd7eead577d79b",
   "scope": "Common-runtime cleanup source closure; not game or native equivalence acceptance",
   "sha256": {
     "js/c-runtime/address-bindings.js": "356e68eb124886364a45828d5098c919454775c30f42849398f7d0d9e0815cb9",
@@ -33,7 +34,7 @@
     "js/standalone/bitfields.js": "2f1e357e831ad480e8a25f6ef4d3363d4aac87038aa0639fac930b902d5051e1",
     "js/standalone/c-types.js": "8ccd9261d2f193008137bdb73aad4777b08a13d396610edc2a87561c114f88e1",
     "js/standalone/environment-inputs.js": "f06762953cf3095b7164277325a0d9d14972d5c1945aa36adec911b5df32f154",
-    "js/standalone/environment.js": "c4060a38d03b22a3ce690adf7416a4922302f2fc6264e8f6dc79d9d9075b48c2",
+    "js/standalone/environment.js": "9110f70fc55428a2720a50c379a576d242f997e441640f84a2edb9e3b9746d06",
     "js/standalone/functions.js": "11c76491540d46117335a75a3ec0c1fbc115d8982a3df95f7b3a9240b629a8bb",
     "js/standalone/libc.js": "098638b3aeddafdb54b7b54cb470f8de1bb5ab176625bd2fab2fa98622379e76",
     "js/standalone/memory-services.js": "964984b050a33b2f28c8ca0fe5e8d56408db4d9190de5c99ca032c543df35970",
@@ -50,6 +51,6 @@
     "scripts/test-c-runtime-contracts.mjs": "23534fbf4566b61fa53ddb29335690820f9e50983c51cbb48e630bd372b2a037",
     "scripts/test-c-runtime-memory.mjs": "f705bba4eb0df5ec1d1d6cc0d10b0f60dd6e8c10fea3235bcb0e591a5b87f2b9",
     "scripts/test-standalone.mjs": "6d76bcb1c85b2074deb2d56591696cf7a5facfe624e9e9311ee6514d8de67884",
-    "scripts/write-c-runtime-manifest.mjs": "7f9467438d0ffa50cf3eaa71dd1cd67e2cdc8be92ef9d587113944e1396b71b7"
+    "scripts/write-c-runtime-manifest.mjs": "5111602d50963dd6a52626af72152341587939f9b196d44a6387e9685999398e"
   }
 }
