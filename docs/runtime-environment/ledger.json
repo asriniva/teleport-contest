@@ -1,12 +1,12 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "f11154ee16ed5fd15cedc36a8dd1e6f243b95bd9",
+  "acceptedCheckpoint": "20a33346cfa9a76b3c50f9d49a87e9efee1bf05a",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
-    "verified-subset": 65,
-    "not-connected": 50,
+    "verified-subset": 67,
+    "not-connected": 48,
     "provider-only": 1,
     "in-progress": 8,
     "transport-only": 3
@@ -79,8 +79,9 @@
     {
       "module": "date",
       "source": "src/date.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Unchanged DATE static initializer is materialized on shared96-byte nomakedefs; every string/null/numeric field matches original C. DATE populate/free bodies and MDLIB metadata startup remain unconnected.",
+      "evidence": " scripts/test-standalone-window-banner.mjs:40598 focused original-C comparisons; complete game acceptance remains false."
     },
     {
       "module": "alloc",
@@ -261,8 +262,9 @@
     {
       "module": "version",
       "source": "src/version.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Unchanged VERSION adapter executes banner, version strings, critical-size/runtime-option tables, feature parsing and number-only status_version on shared DATE/DECL. Remaining serialization/compatibility/UI, basename and runtime-info paths remain unfinished.",
+      "evidence": " scripts/test-standalone-window-banner.mjs:40598 focused original-C comparisons; complete game acceptance remains false."
     },
     {
       "module": "coloratt",
@@ -924,8 +926,8 @@
       "module": "wintty",
       "source": "win/tty/wintty.c",
       "status": "verified-subset",
-      "scope": "Original source initializers and tty_init_nhwindows prefix create the base window/DisplayDesc, configure terminal and cursor, and reach actual VERSION copyright_banner_line boundary. Defined descriptor fields, complete base-window image and all20 window slots compared. Banner, remaining lifecycle, menu/status/input and full-game output remain unfinished.",
-      "evidence": "scripts/test-standalone-window-startup.mjs:606 original-C comparisons using accepted native-terminal compatibility header/unchanged conversion and explicit zeroed scratch inputs; scripts/test-standalone-stdio-buffers.mjs:768 original-C buffer comparisons. Full-game acceptance remains false."
+      "scope": "Original source initializers and tty_init_nhwindows prefix create the base window/DisplayDesc, configure terminal and cursor, and reach actual VERSION copyright_banner_line boundary. Defined descriptor fields, complete base-window image and all20 window slots compared. Banner, remaining lifecycle, menu/status/input and full-game output remain unfinished. With original DATE/VERSION and OPTIONS connected, tty_init_nhwindows completes and its source-defined window state matches original C; subsequent newgame reaches BOTL status_initialize.",
+      "evidence": "scripts/test-standalone-window-startup.mjs:606 original-C comparisons using accepted native-terminal compatibility header/unchanged conversion and explicit zeroed scratch inputs; scripts/test-standalone-stdio-buffers.mjs:768 original-C buffer comparisons. Full-game acceptance remains false. scripts/test-standalone-window-banner.mjs:40598 focused original-C comparisons; complete game acceptance remains false."
     },
     {
       "module": "unixunix",
@@ -944,8 +946,8 @@
       "module": "options",
       "source": "src/options.c",
       "status": "verified-subset",
-      "scope": "Original nh_getenv body applies128-character bound over caller-injected raw environment storage; empty,128/129 lengths,replacement/removal and recording epoch match C. Other option parsing/UI remains unconnected.",
-      "evidence": "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden."
+      "scope": "Original nh_getenv body applies128-character bound over caller-injected raw environment storage; empty,128/129 lengths,replacement/removal and recording epoch match C. Other option parsing/UI remains unconnected. Original source table initializers now run with measured private types and exact scoped/public callback identities. All218 option records, WC/WC2 tables and setting restrictions compare using controlled copied source-table inputs. This does not accept allopt_array_init or complete parsing/config/handler/menu lifecycle.",
+      "evidence": "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden. scripts/test-standalone-window-banner.mjs:40598 focused original-C comparisons; complete game acceptance remains false."
     },
     {
       "module": "botl",

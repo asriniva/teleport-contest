@@ -411,3 +411,30 @@ receipt binds originals, generated inputs, SDK device/stdio sources and artifact
 unconnected functions abort with their name. No translated policy is changed.
 Stdio passes768 C buffer comparisons; window/terminal startup passes606 focused
 comparisons. The expanded30-check regression gate passed; a separate startup fixture also reaches the VERSION boundary with Wasm/network capabilities forbidden. Full-game recording acceptance remains outstanding.
+
+
+`enableVersionInfo(layouts)` connects the unchanged DATE static initializer and
+VERSION adapter. `enableOptions(layouts)` supplies original OPTIONS source tables,
+shared globals, typed field calls and scoped callback identities. Together they
+let the real tty initialization finish, including its banner. New-game startup
+then requires BOTL status initialization. DATE population/MDLIB startup, complete
+options handlers/configuration, status, input and game recordings remain unfinished.
+
+```sh
+python3 scripts/build-standalone-window-banner.py --reference-root /path/to/reference --out .cache/standalone-window-banner-v3
+node scripts/test-standalone-window-banner.mjs
+```
+
+The separate development reference adds original DATE/VERSION/MDLIB/POSIXREGEX
+and INSIGHT owners and includes original OPTIONS/VERSION in their own observation
+translation units. Earlier references stay unchanged. The existing seven private
+OPTIONS adapter mirror types are measured with the configured compiler and bound
+in options-abi.json together with their original-source enum widths and descriptors.
+PASS40,598 comparisons cover completed tty initialization, static DATE values,
+VERSION strings/banner/critical sizes/runtime options/feature parsing, and all
+option-table fields/pointer identities plus WC/WC2 restrictions. Tests explicitly
+copy the original option input table before exercising restrictions; this does
+not accept the additional handler lifecycle in allopt_array_init. Number-only
+status version cases exclude the unconnected Unix basename owner. Native-layout
+terminal tests retain the documented controlled scratch precondition. Full-game
+acceptance remains false. The expanded31-check regression gate passed; a separate fixture completes tty/banner/options with Wasm/network globals forbidden and reaches the next BOTL status owner.
