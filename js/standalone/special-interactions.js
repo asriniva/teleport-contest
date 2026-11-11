@@ -1,5 +1,6 @@
 // Optional interaction owners on the shared standalone game state.
 // Game decisions remain in the unchanged translated modules.
+import {enableUtf8map} from './utf8map.js';
 import abi from './special-interactions-abi.json' with {type:'json'};
 import {bogon_is_pname} from '../ported/do_name.js';
 import {nexttodoor} from '../ported/mkroom.js';
@@ -23,7 +24,8 @@ const objectBits={write:['dknown','bknown','blessed','cursed'],sit:['greased','b
 const monsterBits={rumors:['mpeaceful'],fountain:['msleeping','mpeaceful'],music:['msleeping','mcanmove','mfrozen','mpeaceful','mavenge','mundetected','mtrapped','isshk']};
 const heroBits={rumors:['uevent.major_oracle','uevent.minor_oracle'],sit:['uhave.amulet','uundetected','uswallow','uevent.uhand_of_elbereth','uinwater','uroleplay.deaf'],fountain:['uroleplay.deaf'],music:['uswallow','uinwater','uroleplay.deaf','uevent.uheard_tune']};
 const messageNames={rumors:['pline','You','There','verbalize','impossible'],fountain:['pline','pline_The','You','Your','You_feel','You_hear','verbalize','You_see'],sit:['pline','pline_The','You','Your','You_feel','verbalize','You_cant','There','impossible'],music:['pline','You','Your','You_hear','You_feel','You_cant','pline_The','Norep'],write:['pline','You','Your','You_cant','There','pline_The','impossible']};
-export function enableSpecialInteractions(environment,layouts,{only=['rumors','fountain','sit','music','write']}={}){
+export function enableSpecialInteractions(environment,layouts,{only=['rumors','fountain','sit','music','write','utf8map']}={}){
+ if(only.includes('utf8map')){enableUtf8map(environment,layouts);only=only.filter(name=>name!=='utf8map');}
  if(only.includes('fountain')&&!environment.hasFunction('nexttodoor'))environment.register('special-room-queries',{nexttodoor},environment.start('room-queries').environment);
  if(only.includes('fountain'))environment.exposeAddressPort('detect',['detecting'].filter(name=>!environment.hasFunction(name)));
  if(only.includes('music'))environment.enableZap(layouts,{only:['resist']});

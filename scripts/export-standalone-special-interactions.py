@@ -20,7 +20,7 @@ def braces(text,start):
  raise ValueError('Unclosed block')
 def function(name):
  m=re.search(r'\b'+name+r'\s*\([^;{}]*\)\s*\{',native);assert m,name;start=native.index('{',m.start());return native[start+1:braces(native,start)]
-result={};generated=[];inputs=[Path(__file__).resolve(),root/'scripts/test-standalone-special-interactions.mjs',root/'scripts/check-standalone-special-interactions.mjs',support,root/'js/ported/wasm-runtime.js',root/'js/standalone/special-interactions.js',root/'js/standalone/vision.js',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json',root/'js/standalone/public-functions.json'];headers=set()
+result={};generated=[];inputs=[Path(__file__).resolve(),root/'js/standalone/utf8map-abi.json',root/'scripts/test-standalone-special-interactions.mjs',root/'scripts/check-standalone-special-interactions.mjs',support,root/'js/ported/wasm-runtime.js',root/'js/standalone/special-interactions.js',root/'js/standalone/vision.js',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json',root/'js/standalone/public-functions.json'];headers=set()
 with tempfile.TemporaryDirectory(prefix='special-interaction-layout-')as tmp:
  for port in ports:
   header=root/('scripts/tu-'+port+'-layout.h');probe=Path(tmp)/(port+'.c');body='#include '+json.dumps(str(header))+'\n';probe.write_text(body)
