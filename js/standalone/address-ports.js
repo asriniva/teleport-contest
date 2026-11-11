@@ -30,7 +30,7 @@ import {callSpLev} from '../ported/sp_lev-runtime.js';
 import {withCEnvironment} from '../ported/c-runtime.js';
 const ports={mklev:[mklev,callMklev],mkmaze:[mkmaze,callMkmaze],pickup:[pickup,callPickup],shk:[shk,callShk],invent:[invent,callInvent],dothrow:[dothrow,callDothrow],display:[display,callDisplay],dungeon:[dungeon,callDungeon],
     mkobj:[mkobj,createMkobjEnvironment,'factory'],muse:[muse,createMuseEnvironment,'factory'],pray:[pray,createPrayEnvironment,'factory'],detect:[detect,createDetectEnvironment,'factory'],sp_lev:[spLev,(s,l,n,...a)=>callSpLev(s,l,spLev,n,...a),'layout']};
-export function enableAddressPort(environment,name) {
+export function enableAddressPort(environment,name,{only}={}) {
     const definition=metadata.ports[name],pair=ports[name];if(!definition||!pair)throw new Error('Unsupported address adapter '+name);
     const {schema,layout}=definition,{services,ctypes,transport}=environment;
     const namespace=pair[0],bridge=pair[1],local=Object.create(services),records=Object.keys(schema.schema);
@@ -86,7 +86,8 @@ export function enableAddressPort(environment,name) {
         const value=resolve(fn)(...args);return info.ret.includes('*')?environment.address(value):value;
     };
     let factoryEnvironment;
-    const wrappers=Object.fromEntries(Object.entries(namespace).filter(([key,fn])=>typeof fn==='function'&&!/StaticInitializers$/.test(key)&&(!schema.functionTypes||Object.hasOwn(schema.functionTypes,key))).map(([key])=>[key,(...args)=>{
+    if(only)for(const key of only)if(typeof namespace[key]!=='function')throw new Error('Unknown address adapter export '+name+'.'+key);
+    const wrappers=Object.fromEntries(Object.entries(namespace).filter(([key,fn])=>typeof fn==='function'&&(!only||only.includes(key))&&!/StaticInitializers$/.test(key)&&(!schema.functionTypes||Object.hasOwn(schema.functionTypes,key))).map(([key])=>[key,(...args)=>{
         if(pair[2]==='layout')return bridge(local,layout,key,...args);
         if(pair[2]==='factory'){factoryEnvironment??=bridge(local,layout,namespace);return withCEnvironment(factoryEnvironment,namespace[key],...args);}
         return bridge(local,key,...args);

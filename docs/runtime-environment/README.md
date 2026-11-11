@@ -25,6 +25,7 @@ injected. C compilers and C/Wasm oracles are development-only.
 | RND | 1,500 original-C comparisons, state and log transport; caller must inject entropy for random seeding. |
 | SFBASE / SFSTRUCT | 136 original-C comparisons: all 68 historical serializers both directions through real procedure tables, callbacks and files. Full game save/bones/restore closure is unfinished. |
 | TRACK | 3,496 original-C movement/equipment/query and historical save/restore comparisons, using shared hero/equipment and serializers. |
+| Object startup and name state | `enableObjectState`: 11 unchanged O_INIT functions connected to shared DECL/OBJECTS/DRAWING, canonical RND, two actual DUNGEON ledger functions and SFBASE/SFSTRUCT/CVFS. Combined original-C subsystem passes 6,288 comparisons across four seeds, including full class bytes/ranges/totals, shuffling, description lookup, level gem probabilities, failure diagnostic, exact RNG logs/continued stream and name save/free/restore. Serialized `oc_uname` address slots are compared as null/non-null because allocator addresses differ; every other saved byte and all restored name payloads compare exactly. Discovery/inventory/menu functions remain absent. |
 | Stdio / persistence | Binary IO, buffering, EOF/error/pushback, seek, close and output contracts; capture/restore/deletion through existing persistence policy. No host device/OS-wide POSIX claim. |
 | Lua | Existing JS VM and 83 typed C API dispatch recipes on measured memory; bytecode, callbacks/error unwinding, date/files, userdata growth probes. Full nhlua/nhlobj integration and all standard libraries are unfinished. |
 | Terminal | 445 original-C recorder-cell/capture/terminfo comparisons; existing recorder encoding preserved. Window procedures, tty input and game loop are unfinished. The inherited 6,144-byte C recorder buffer bounds captures; larger captures are not accepted by this proof. |
@@ -65,7 +66,7 @@ and the host compiler wrapper. From the candidate checkout run:
 STANDALONE_REFERENCE_ROOT=/path/to/reference /path/to/sdk/node scripts/test-standalone.mjs
 ```
 
-The gate runs source/closure checks, the original base-runtime suite, and nine
+The gate runs source/closure checks, the original base-runtime suite, and ten
 standalone suites; logs and script hashes go to `.cache/standalone-validation/`.
 It requires the existing original native allocation oracle under the candidate's
 `.cache/tu-probes/native-oracles/` (alloc-native.node, alloc-full-native-build.json,
@@ -84,11 +85,37 @@ forbidding WebAssembly and network capabilities. Static closure inspection
 independently rejects Wasm/Node/host network imports on that entry point.
 The gate is a Node test; browser execution remains unverified.
 
+Build the combined object-state reference into a fresh directory before running
+the gate:
+
+```sh
+python3 scripts/build-standalone-object-state.py --reference-root /path/to/reference --out .cache/standalone-object-state
+```
+
+`STANDALONE_OBJECT_STATE_ORACLE` overrides that output directory in the test.
+This oracle compiles original O_INIT, OBJECTS, RND/ISAAC64, ALLOC/STRUTIL/HACKLIB,
+SFBASE/SFSTRUCT and the DUNGEON ledger functions together. Its wrappers supply
+input globals and expose results; error/UI boundaries abort. It uses actual C
+RNG and serializers, with no scripted RNG stream or raw-copy serializer
+replacement. The receipt binds compiled sources, included headers and artifacts;
+the test refuses changed inputs. No build output is imported by production.
+
+The caller explicitly enables the existing stdio, declarations, drawing,
+catalogue, hacklib, serialization and seeded RNG providers, invokes
+`objects_globals_init`, then enables
+`enableAddressPort('dungeon', {only: ['ledger_no', 'maxledgerno']})` and
+`enableObjectState(layouts)`. `call('object-state', 'init_objects')` performs the
+original startup policy. Enabling the adapter alone does not initialize the
+game or invent a dungeon map. `oinit` reads the actual injected shared dungeon
+map. The other O_INIT functions remain unregistered. The read/write source
+wrappers use the same JS heap and function registry throughout.
+
 ## Next integration milestone
 
-Choose one dependency group, wire every reachable game function to its actual
-translated owner in this environment, then compare its complete inputs, state,
-outputs and recording bytes with original C. Terminal/input/game-loop and full
+Object startup/name persistence is the first additional connected group after
+the checkpoint. Next connect a larger group, including all its reachable game
+owners, and compare complete inputs, state, outputs and recording bytes with
+original C. Terminal/input/game-loop and full
 save/restore are later groups. Until the full game closure exists, keep the
 mixed game as the control and run this harness independently. No cross-heap
 transfer or selectable mixed-game route is part of this checkpoint.

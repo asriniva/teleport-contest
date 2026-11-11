@@ -8,6 +8,17 @@ const {createStandaloneEnvironment}=await import('../js/standalone/environment.j
 const env=createStandaloneEnvironment({environment:{NOMUX_MARKERS:'1'}});
 env.enableStdio();env.enableDecl(layouts.decl);env.enableHacklib(layouts.hacklib);env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.enableMonst(layouts.monst);
 env.enableSerialization(layouts);env.enableTrack(layouts);env.enableRnd(layouts.rnd,{seed:123n});env.enableCommandGeometry();env.enableDependencies();
+env.call('objects','objects_globals_init');
+env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.call('object-state','init_objects');
+// Entire object state -> real serializer callbacks -> CVFS -> restored state,
+// under the same forbidden-capability guard as the production import.
+const type=layouts.o_init.POT_HEALING,cls=env.requireGlobal('objects')+type*layouts.o_init.objectClassSize;
+env.ctypes.setField('struct objclass',cls,'oc_uname','char *',env.memory.cstring('isolated name'));
+const fp=env.memory.calloc(1,layouts.sfstruct.nhfileSize),B=layouts.sfbase,S=layouts.sfstruct;
+const file=(fd,mode)=>{env.memory.memset(fp,0,S.nhfileSize);env.memory.view.setInt32(fp+S.nhf_fd,fd,true);env.memory.view.setInt32(fp+B.nhf_fnidx,B.historical,true);env.memory.view.setInt8(fp+B.nhf_structlevel,1);env.memory.view.setInt32(fp+B.nhf_mode,mode,true);};
+let fd=env.services.open('/object-names',578,0o600);file(fd,B.WRITING|B.FREEING);env.call('object-state','savenames',fp);env.call('sfstruct','bclose',fd);
+fd=env.services.open('/object-names',0);file(fd,0);env.call('object-state','restnames',fp);env.call('sfstruct','bclose',fd);env.memory.free(fp);
+assert.equal(env.memory.readString(Number(env.ctypes.getField('struct objclass',cls,'oc_uname','char *'))),'isolated name');
 const terminal=env.enableTerminal(layouts.termcap);
 env.call('termcap','nomux_clear_screen');env.call('termcap','nomux_capture_write_input_boundary');assert.equal(terminal.frames.length,1);
 const lua=env.enableLua(),L=lua.api.luaL_newstate();assert.equal(lua.api.luaL_loadstring(L,'return 21*2'),0);assert.equal(lua.api.lua_pcallk(L,0,1,0,0n,0n),0);assert.equal(lua.api.lua_tointegerx(L,-1,0),42n);lua.api.lua_close(L);
