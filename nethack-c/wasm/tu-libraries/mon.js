@@ -583,4 +583,5 @@ shieldeff_mon__deps:["$teleportMonCall"],shieldeff_mon__sig:"vp",
 shieldeff_mon:function(a0){teleportMonCall("shieldeff_mon",a0);},
 flash_mon__deps:["$teleportMonCall"],flash_mon__sig:"vp",
 flash_mon:function(a0){teleportMonCall("flash_mon",a0);},
+teleport_mon_test_state__deps:["$teleportMonServices"],teleport_mon_test_state__sig:"ji",teleport_mon_test_state:function(i){var state=Module.nethackPorted.monState(teleportMonServices());return BigInt(i?state.itermonsiz:state.itermonarr);},
 });

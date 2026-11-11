@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve,dirname,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw Error('SHK has no native reference fixture; Emscripten results cannot be labeled native.');
+if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('SHK has no native reference fixture; Emscripten results cannot be labeled native.');
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(process.env.SHK_PROBE_DIR??join(root,'.cache/shk-first-pass'));
 const {callShk,createShkEnvironment}=await import(pathToFileURL(resolve(process.env.SHK_RUNTIME_PATH??join(root,'js/ported/shk-runtime.js'))).href);
 const schema=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/shk-schema.json'),'utf8'));const shkory={names:schema.names,functions:Object.fromEntries(Object.entries(schema.functionParameters).map(([name,args])=>[name,{args}]))};

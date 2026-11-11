@@ -16,6 +16,8 @@ export function checkTermcapSource(root=process.cwd(),{preprocess=true,ast=true}
  if(functions.length!==56||functions.some((f,i)=>f[1]!==expected.functions[i].name||f[2].replace(/\s+/g,'')!==expected.functions[i].parameters.join(',')))throw Error('Review changed TERMCAP function names/formals/order');
  const comments=commentsOf(source),counts=new Map();for(const c of commentsOf(core))counts.set(c,(counts.get(c)??0)+1);
  for(const c of comments){const n=counts.get(c)??0;if(!n)throw Error('Missing original TERMCAP comment '+c.slice(0,80));counts.set(c,n-1);}
+ const startup=core.slice(core.indexOf('export function term_startup('),core.indexOf('export function term_shutdown('));
+ if((startup.match(/const _termcapTbufptrCell = C\.localPointer\("char \*",\(\)=>tbufptr,_value=>tbufptr=_value\);/g)??[]).length!==1||/C\.tgetstr\([^\n]*C\.localPointer/.test(startup)||!startup.includes('_termcapTbufptrCell.value = C.charPointer(C.tbuf)'))throw Error('Review changed TERMCAP automatic tbufptr cell identity/synchronization');
  const formatNames=['tcfmtstr','tcfmtstr256'];
  for(const name of formatNames){const original=source.match(new RegExp('^#define '+name+'\\s+("(?:\\\\.|[^"\\\\])*")','m'))?.[1],actual=core.match(new RegExp('^const '+name+'\\s*=\\s*("(?:\\\\.|[^"\\\\])*")','m'))?.[1];if(!original||!actual||decodeCString(original)!==JSON.parse(actual))throw Error('Review changed TERMCAP source format '+name);}
  for(const [key,name]of [['markers_cached','cached'],['delay_no_delay','no_delay'],['cursor_vis','vis']])if(!new RegExp('C\\.state\\.'+key+'\\s*=\\s*-1\\s*;').test(core)||!new RegExp('static int '+name+'\\s*=\\s*-1\\s*;').test(source))throw Error('Review changed TERMCAP cached initializer '+key);

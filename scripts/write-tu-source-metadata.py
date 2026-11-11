@@ -3,6 +3,7 @@ from pathlib import Path
 import re
 import ast
 import json
+import hashlib
 import os
 import subprocess
 
@@ -654,7 +655,7 @@ if engrave_js.exists():
         stream.write('#define TELEPORT_ENGRAVE_STRLEN_FUNCTIONS {"make_engr_at","make_engr_at","doengrave"}\n')
 
 # Source-owned string storage for the next two original naming/Lua object TUs.
-for own_name in ['nhlobj', 'do_name', 'dokick', 'dig', 'monmove', 'spell', 'timeout', 'potion', 'insight', 'eat', 'objnam']:
+for own_name in ['wintty','nhlobj', 'do_name', 'dokick', 'dig', 'monmove', 'spell', 'timeout', 'potion', 'insight', 'eat', 'objnam']:
     own_js = root / ('js/ported/' + own_name + '.js')
     if own_js.exists():
         tokens = re.finditer(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', own_js.read_text(), re.S)
@@ -713,5 +714,28 @@ with out.open('a')as stream:
     stream.write('#define TELEPORT_INSIGHT_SNPRINTF_FUNCTIONS {'+','.join(json.dumps(fn)for line,fn in insight_sites)+'}\n')
     stream.write('#define TELEPORT_INSIGHT_ASSERT_LINE 1108\n#define TELEPORT_INSIGHT_ASSERT_CONDITION "u.ustuck != NULL"\n#define TELEPORT_INSIGHT_ASSERT_FUNCTION "status_enlightenment"\n')
 
+# NHLUA preserves inherited prepared RNG-context policy and literal/caller metadata.
+# Full fresh-CPP/function/comment/table guards run in check-nhlua-data.mjs.
+nhlua_schema = root/'nethack-c/wasm/tu-fragments/nhlua-schema.json'
+if nhlua_schema.exists() and any(port['name']=='nhlua' for port in json.loads((root/'nethack-c/wasm/tu-ports.json').read_text())):
+    nhlua = json.loads(nhlua_schema.read_text())
+    assert hashlib.sha256((source.parent/'nhlua.c').read_bytes()).hexdigest()==nhlua['source'], 'Prepared NHLUA source changed'
+    assert len(nhlua['functions'])==94 and len(nhlua['data'])==27, 'Review changed NHLUA configured scope'
+    with out.open('a') as stream:
+        stream.write('#define TELEPORT_NHLUA_METADATA_SOURCE_FUNCTIONS 94\n')
+        stream.write('#define TELEPORT_NHLUA_METADATA_SOURCE_DATA_OBJECTS 27\n')
+        stream.write('#define TELEPORT_NHLUA_METADATA_PREPARED_SHA256 '+json.dumps(nhlua['source'])+'\n')
+
 # Concurrent TU/game builds must never observe an incrementally written header.
+
+# Same token rules as frozen ZAP build.py; no initializer table or C policy.
+zap_js = root / 'js/ported/zap.js'
+if zap_js.exists():
+    tokens = re.finditer(r'/\*[\s\S]*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', zap_js.read_text())
+    literals = {ast.literal_eval(m[0]) for m in tokens if m[0].startswith(('"', "'"))}
+    capacity = sum(len(value.encode('utf8')) + 1 for value in literals)
+    with out.open('a') as stream:
+        stream.write(f'#define TELEPORT_ZAP_LITERAL_CAPACITY {capacity}\n')
+# No new OPTIONS/BOTL capacities or initialization timing are introduced.
+
 out.replace(destination)

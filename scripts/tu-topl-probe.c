@@ -43,7 +43,7 @@ void tty_clear_nhwindow(winid w){logmsg("clear:%d;",w);wins[w]->curx=wins[w]->cu
 void docorner(int x,int y,int between){logmsg("corner:%d:%d:%d;",x,y,between);ttyDisplay->curx=ttyDisplay->cury=0;callback();}
 void tty_nhbell(void){logmsg("bell;");callback();}
 void dumplogmsg(const char*s){logmsg("dump:%s;",s);callback();}
-char readchar(void){if(inputpos>=inputlen){logmsg("INPUT_EXHAUSTED;");longjmp(fixture_jump,1);}char c=(char)inputbuf[inputpos++];logmsg("read:%d;",(int)c);callback();return c;}
+char readchar(void){if(inputpos>=inputlen){logmsg("INPUT_EXHAUSTED;");longjmp(fixture_jump,1);}char c=(char)inputbuf[inputpos++];logmsg("read:%d;",(int)c);if(opts[96]&&!callback_depth){opts[96]=0;callback_depth++;int nested=tty_yn_function("Nested","yn",'n');logmsg("nested-input:%d;",nested);if(opts[92]&&!growth){growth=malloc(40000000);logmsg("nested-growth:%d;",growth!=0);}callback_depth--;}callback();return c;}
 void xwaitforspace(const char*s){logmsg("wait:%d,%d;",(int)s[0],(int)s[1]);morc=readchar();}
 boolean digit(char c){return c>='0'&&c<='9';}char lowc(char c){return(c>='A'&&c<='Z')?c+32:c;}
 char*eos(char*s){return s+strlen(s);}char*key2txt(uchar c,char*out){sprintf(out,"key%u",c);logmsg("key:%u;",c);return out;}

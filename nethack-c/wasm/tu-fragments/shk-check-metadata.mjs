@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-const root=process.cwd(),{parse}=await import(pathToFileURL(resolve(root,'.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs')).href);
+const root=process.cwd(),{parse}=await import(pathToFileURL(resolve(process.env.EMSDK??resolve(root,'.cache/emsdk'),'upstream/emscripten/node_modules/acorn/dist/acorn.mjs')).href);
 const schema=JSON.parse(await readFile(resolve(root,'nethack-c/wasm/tu-fragments/shk-schema.json'),'utf8'));
 const inventory=JSON.parse(await readFile(resolve(root,'.cache/shk-first-pass/schema.json'),'utf8'));
 const core=await readFile(resolve(root,'js/ported/shk.js'),'utf8'),tree=parse(core,{ecmaVersion:'latest',sourceType:'module'});

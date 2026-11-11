@@ -1,6 +1,12 @@
 /* FILES typed field/header/dependency/storage transport only. Source algorithms remain JS. */
 #include "../../../scripts/tu-files-layout.h"
 #include <stdlib.h>
+/* Typed FILES foreign-service forwarding; compression policy remains in JS. */
+extern int teleport_compress_file(const char *, const char *, int);
+int teleport_files_compress_file(const char *filename, const char *compressed, int unpack)
+{
+    return teleport_compress_file(filename, compressed, unpack);
+}
 #ifndef TELEPORT_FILES_ORIGINAL_INCLUDED
 struct sfstatus_to_msg { int sfstatus; const char *msg; };
 #endif

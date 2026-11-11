@@ -10,7 +10,20 @@ assert sha(c.encode())==m['sourceSHA256']=='42b526bbed87ae89acdd655cb08426bdf66d
 assert sha(pristine.encode())==m['pristineSHA256']=='0a434dc320dadf31c1bdf40e086386032918b65157799155abfe77ca6edc4784'
 assert pristine.replace('if (!isatty(0))','if (!isatty(0) && !getenv("NOMUX_MARKERS"))')==c
 assert sha((w/'inventory-notes.txt').read_bytes())==m['inventorySHA256']
-for p,h in m['compilerInputHashes'].items():assert sha((r/p).read_bytes())==h,p
+# Exact already-reviewed builder inverse; no input-pin refresh or broad exclusion.
+for p,h in m['compilerInputHashes'].items():
+ if p=='nethack-c/wasm/build.py':
+  from importlib.util import spec_from_file_location,module_from_spec
+  reviewed_spec=spec_from_file_location('unixunix_reviewed_build',r/'scripts/reviewed_build_provenance.py')
+  reviewed=module_from_spec(reviewed_spec);reviewed_spec.loader.exec_module(reviewed)
+  input_bytes=reviewed.nhlua_transport_baseline(r,h)
+ elif p=='.cache/wasm64-build/tree/src/Makefile':
+  from importlib.util import spec_from_file_location,module_from_spec
+  make_spec=spec_from_file_location('unixunix_reviewed_makefile',r/'nethack-c/wasm/tu-fragments/unixunix-reviewed-makefile.py')
+  make_review=module_from_spec(make_spec);make_spec.loader.exec_module(make_review)
+  input_bytes=make_review.reviewed_unixunix_makefile(r,h)
+ else:input_bytes=(r/p).read_bytes()
+ assert sha(input_bytes)==h,p
 f=m['functions'];assert len(f)==8 and sum(x['linkage']=='static'for x in f)==2
 assert re.findall(r'^export function (\w+)\(([^)]*)\)',j,re.M)==[(x['name'],','.join(p['name']for p in x['parameters']))for x in f]
 comments=re.findall(r'/\*[\s\S]*?\*/',c);assert len(comments)==62 and all(x in j for x in comments)

@@ -1,7 +1,7 @@
 """SHK exact configured source/data/profile guard; no shared writes."""
 from pathlib import Path
-import hashlib,json,re,subprocess
-R=Path(__file__).resolve().parents[3];W=R/'.cache/shk-first-pass';tree=R/'.cache/wasm64-build/tree';src=(tree/'src/shk.c').read_text();core=(R/'js/ported/shk.js').read_text();I=json.loads((R/'nethack-c/wasm/tu-fragments/shk-source-inventory.json').read_text());S=json.loads((R/'nethack-c/wasm/tu-fragments/shk-schema.json').read_text());A=json.loads((R/'nethack-c/wasm/tu-fragments/shk-source-ast.json').read_text());support=(R/'nethack-c/wasm/tu-fragments/shk-support.c').read_text();runtime=(R/'js/ported/shk-runtime.js').read_text()
+import hashlib,json,re,subprocess,os
+R=Path(__file__).resolve().parents[3];SDK=Path(os.environ.get('EMSDK',str(R/'.cache/emsdk')));W=R/'.cache/shk-first-pass';tree=R/'.cache/wasm64-build/tree';src=(tree/'src/shk.c').read_text();core=(R/'js/ported/shk.js').read_text();I=json.loads((R/'nethack-c/wasm/tu-fragments/shk-source-inventory.json').read_text());S=json.loads((R/'nethack-c/wasm/tu-fragments/shk-schema.json').read_text());A=json.loads((R/'nethack-c/wasm/tu-fragments/shk-source-ast.json').read_text());support=(R/'nethack-c/wasm/tu-fragments/shk-support.c').read_text();runtime=(R/'js/ported/shk-runtime.js').read_text()
 assert src==(R/'nethack-c/upstream/src/shk.c').read_text()
 assert hashlib.sha256(src.encode()).hexdigest()==I['sourceSha256']=='b2b5b82934b15c1a4a3c9474a650ff5800a83f0b9634696fdf080d0458f16e1b'
 assert len(I['functions'])==len(A['functions'])==137 and sum(f['linkage']=='static'for f in I['functions'])==64
@@ -17,7 +17,7 @@ assert 'shkp.address'in core and 'return bits<=9007199254740991n?Number(bits):bi
 assert 'SHK unsafe pointer dereference'in runtime and 'SHK inexact Number pointer'in runtime
 assert '#ifdef TELEPORT_SHK_VALIDATE_ORIGINAL'in support and '#ifdef TELEPORT_REFERENCE_TU'not in support
 assert 'shk.c'not in support and not re.search(r'\bstatic\b[^;\n]*=',support)
-base=[str(R/'.cache/emsdk/upstream/emscripten/emcc'),'-O2','-g','-sMEMORY64=1','-I'+str(tree/'include'),'-I'+str(R/'.cache/ncurses-wasm64-build/include'),'-include',str(R/'nethack-c/wasm/native-terminal.h'),*['-D'+x for x in I['defines']]]
+base=[str(SDK/'upstream/emscripten/emcc'),'-O2','-g','-sMEMORY64=1','-I'+str(tree/'include'),'-I'+str(R/'.cache/ncurses-wasm64-build/include'),'-include',str(R/'nethack-c/wasm/native-terminal.h'),*['-D'+x for x in I['defines']]]
 assert I['defines']==json.loads((R/'nethack-c/wasm/compile-defines.json').read_text())
 cpp=subprocess.check_output([*base,'-E','shk.c'],cwd=tree/'src',text=True);active=False;selected=[]
 for line in cpp.splitlines():

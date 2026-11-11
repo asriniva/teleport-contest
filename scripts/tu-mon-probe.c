@@ -11,7 +11,24 @@ __typeof__(flags)flags;__typeof__(iflags)iflags;__typeof__(u)u;__typeof__(disp)d
 const __typeof__(cg)cg={0};
 const struct c_common_strings c_common_strings={.c_nothing_happens="Nothing happens.",.c_nothing_seems_to_happen="Nothing seems to happen.",.c_Something="Something",.c_something="something",.c_vision_clears="vision clears",.c_thats_enough_tries="That's enough tries!",.c_the_your={"the","your"}};
 const struct c_color_names c_color_names={.c_black="black",.c_green="green",.c_red="red"};
-const char*c_obj_colors[CLR_MAX]={"object color"};
+const char *c_obj_colors[] = {
+    "black",          /* CLR_BLACK */
+    "red",            /* CLR_RED */
+    "green",          /* CLR_GREEN */
+    "brown",          /* CLR_BROWN */
+    "blue",           /* CLR_BLUE */
+    "magenta",        /* CLR_MAGENTA */
+    "cyan",           /* CLR_CYAN */
+    "gray",           /* CLR_GRAY */
+    "transparent",    /* no_color */
+    "orange",         /* CLR_ORANGE */
+    "bright green",   /* CLR_BRIGHT_GREEN */
+    "yellow",         /* CLR_YELLOW */
+    "bright blue",    /* CLR_BRIGHT_BLUE */
+    "bright magenta", /* CLR_BRIGHT_MAGENTA */
+    "bright cyan",    /* CLR_BRIGHT_CYAN */
+    "white",          /* CLR_WHITE */
+};
 const struct shclass shtypes[1]={{.name="shop"}};
 struct obj*uwep,*uarm,*uarmg,*uarmh,*uarmf,*uarmc,*uarmu,*ublindf,*uamul,*uswapwep,*uball,*uchain,*uleft,*uright,*uquiver;struct obj hands_obj;
 const struct Gender genders[4]={{.his="his",.he="he",.him="him"},{.his="her",.he="she",.him="her"},{.his="its",.he="it",.him="it"},{.his="their",.he="they",.him="them"}};
@@ -71,7 +88,7 @@ boolean any_light_source(void){logmsg("any_light_source:;");callback(20+16);retu
 void artifact_exists(struct obj * a0,const char * a1,boolean a2,unsigned int a3){logmsg("artifact_exists:%d:%s:%d:%d:;",oid(a0),(a1?a1:"NULL"),(int)a2,(int)a3);callback(20+17);}
 boolean bad_rock(struct permonst * a0,coordxy a1,coordxy a2){logmsg("bad_rock:%d:%d:%d:;",a0?a0->pmidx:-1,(int)a1,(int)a2);callback(20+18);return (boolean)ret[18];}
 const char * body_part(int a0){logmsg("body_part:%d:;",(int)a0);callback(20+19);return "body_part";}
-struct obj * bury_an_obj(struct obj * a0,boolean * a1){logmsg("bury_an_obj:%d:%d:;",oid(a0),a1!=NULL);callback(20+20);return ret[20]>=0&&ret[20]<nobj?nodes[ret[20]]:NULL;}
+struct obj * bury_an_obj(struct obj * a0,boolean * a1){logmsg("bury_an_obj:%d:%d:;",oid(a0),a1!=NULL);callback(20+20);if(a1)*a1=(boolean)opts[154];return ret[20]>=0&&ret[20]<nobj?nodes[ret[20]]:NULL;}
 void bypass_obj(struct obj * a0){logmsg("bypass_obj:%d:;",oid(a0));callback(20+21);}
 boolean can_fog(struct monst * a0){logmsg("can_fog:%d:;",mid(a0));callback(20+22);return (boolean)ret[22];}
 boolean can_hide_under_obj(struct obj * a0){logmsg("can_hide_under_obj:%d:;",oid(a0));callback(20+23);return (boolean)ret[23];}
@@ -209,7 +226,7 @@ char * noname_monnam(struct monst * a0,int a1){logmsg("noname_monnam:%d:%d:;",mi
 boolean noteleport_level(struct monst * a0){logmsg("noteleport_level:%d:;",mid(a0));callback(20+155);return (boolean)ret[155];}
 struct obj * nxtobj(struct obj * a0,int a1,boolean a2){logmsg("nxtobj:%d:%d:%d:;",oid(a0),(int)a1,(int)a2);callback(20+156);return ret[156]>=0&&ret[156]<nobj?nodes[ret[156]]:NULL;}
 void obj_extract_self(struct obj * a0){logmsg("obj_extract_self:%d:;",oid(a0));callback(20+157);}
-struct obj * obj_meld(struct obj ** a0,struct obj ** a1){logmsg("obj_meld:%d:%d:;",oid(*a0),oid(*a1));callback(20+158);return ret[158]>=0&&ret[158]<nobj?nodes[ret[158]]:NULL;}
+struct obj * obj_meld(struct obj ** a0,struct obj ** a1){logmsg("obj_meld:%d:%d:;",oid(*a0),oid(*a1));callback(20+158);if(opts[155]){*a0=nodes[1];*a1=nodes[0];ret[159]=-1;}return opts[155]?*a0:(ret[158]>=0&&ret[158]<nobj?nodes[ret[158]]:NULL);}
 struct obj * obj_nexto(struct obj * a0){logmsg("obj_nexto:%d:;",oid(a0));callback(20+159);return ret[159]>=0&&ret[159]<nobj?nodes[ret[159]]:NULL;}
 boolean obj_resists(struct obj * a0,int a1,int a2){logmsg("obj_resists:%d:%d:%d:;",oid(a0),(int)a1,(int)a2);callback(20+160);return (boolean)ret[160];}
 boolean objdescr_is(struct obj * a0,const char * a1){logmsg("objdescr_is:%d:%s:;",oid(a0),(a1?a1:"NULL"));callback(20+161);return (boolean)ret[161];}
@@ -261,7 +278,7 @@ void stop_occupation(void){logmsg("stop_occupation:;");callback(20+206);}
 char * strstr(const char * a0,const char * a1){logmsg("strstr:%s:%s:;",(a0?a0:"NULL"),(a1?a1:"NULL"));callback(20+207);return "strstr";}
 const char * surface(coordxy a0,coordxy a1){logmsg("surface:%d:%d:;",(int)a0,(int)a1);callback(20+208);return "surface";}
 void swallowed(int a0){logmsg("swallowed:%d:;",(int)a0);callback(20+209);}
-struct trap * t_at(coordxy a0,coordxy a1){logmsg("t_at:%d:%d:;",(int)a0,(int)a1);callback(20+210);return NULL;}
+struct trap * t_at(coordxy a0,coordxy a1){logmsg("t_at:%d:%d:;",(int)a0,(int)a1);callback(20+210);return ret[210]>=0?&fixture_trap:NULL;}
 boolean tele_restrict(struct monst * a0){logmsg("tele_restrict:%d:;",mid(a0));callback(20+211);return (boolean)ret[211];}
 void thiefdead(void){logmsg("thiefdead:;");callback(20+212);}
 int touch_artifact(struct obj * a0,struct monst * a1){logmsg("touch_artifact:%d:%d:;",oid(a0),mid(a1));callback(20+213);return (int)ret[213];}
@@ -382,7 +399,8 @@ extern void teleport_mon_test_pacify_guard(struct monst *mtmp);
 #include "tu-mon-layout.h"
 static int frees,zero_frees;void teleport_mon_fixture_free(void*p){int i;if(!p)return;for(i=0;i<nmon;i++)if(monsters[i]==p){unsigned char*b=p;int j,zero=1;for(j=0;j<sizeof(struct monst);j++)if(b[j])zero=0;logmsg("free_mon:%d:%d;",i,zero);zero_frees+=zero;monsters[i]=NULL;break;}for(i=0;i<nobj;i++)if(nodes[i]==p){logmsg("free_obj:%d;",i);nodes[i]=NULL;break;}frees++;free(p);}
 static coord probe_xy;static int probe_int;static char textbuf[BUFSZ];static int callback_count;
-static boolean cb_bool(struct monst*m){logmsg("callback-bool:%d;",mid(m));callback_count++;if(opts[130])m->mhp+=opts[130];return (boolean)opts[131];}
+static boolean cb_nested(struct monst*m){logmsg("nested-iterator:%d;",mid(m));return FALSE;}
+static boolean cb_bool(struct monst*m){if(opts[133]&&!opts[134]&&nmon==2){opts[134]=1;monsters[0]->nmon=monsters[1];monsters[1]->nmon=NULL;fmon=monsters[0];iter_mons_safe(cb_nested);}logmsg("callback-bool:%d;",mid(m));callback_count++;if(opts[130])m->mhp+=opts[130];return (boolean)opts[131];}
 static void cb_void(struct monst*m){logmsg("callback-void:%d;",mid(m));callback_count++;if(opts[130])m->mhp+=opts[130];}
 static boolean cb_xy(struct monst*m,coordxy x,coordxy y){logmsg("callback-xy:%d:%d:%d;",mid(m),x,y);callback_count++;return (boolean)opts[131];}
 void probe_reset(unsigned s){int i;/* Tests consume each allocated list before a full reset. */
@@ -404,6 +422,53 @@ void probe_put_object(int index,int where,int monindex){struct obj*o=nodes[index
 int probe_grid_mon(coordxy x,coordxy y){return mid(svl.level.monsters[x][y]);}
 int probe_grid_obj(coordxy x,coordxy y){return oid(svl.level.objects[x][y]);}
 int probe_gas_glyph(void){return cmap_to_glyph(S_poisoncloud);}
+
+#ifndef TELEPORT_REFERENCE_TU
+extern uint64_t teleport_mon_test_state(int);
+#endif
+uint64_t probe_iterator(int which){
+#ifdef TELEPORT_REFERENCE_TU
+return which?itermonsiz:(uintptr_t)itermonarr;
+#else
+return teleport_mon_test_state(which);
+#endif
+}
+int probe_pointer_equal(uintptr_t a,uintptr_t b){return (void*)a==(void*)b;}
+const char*probe_format_pointer(uintptr_t p){return fmt_ptr((void*)p);}
+uint64_t probe_unsigned64(uintptr_t p){uint64_t value;memcpy(&value,(void*)p,sizeof value);return value;}
+
+uintptr_t probe_extra(int index,int kind,int salt){struct monst*m=monsters[index];void*p=NULL;size_t n=0;switch(kind){case 0:newegd(m);p=EGD(m);n=sizeof *EGD(m);break;case 1:newepri(m);p=EPRI(m);n=sizeof *EPRI(m);break;case 2:neweshk(m);p=ESHK(m);n=sizeof *ESHK(m);break;case 3:newemin(m);p=EMIN(m);n=sizeof *EMIN(m);break;case 4:newedog(m);p=EDOG(m);n=sizeof *EDOG(m);break;case 5:newebones(m);p=EBONES(m);n=sizeof *EBONES(m);break;case 6:new_mgivenname(m,32);p=MGIVENNAME(m);n=32;break;}if(salt&&p){memset(p,salt,n);if(kind==6)strcpy(p,"MON copied name");}return(uintptr_t)p;}
+uintptr_t probe_extra_pointer(int index,int kind){struct monst*m=monsters[index];if(!m->mextra)return 0;switch(kind){case 0:return(uintptr_t)EGD(m);case 1:return(uintptr_t)EPRI(m);case 2:return(uintptr_t)ESHK(m);case 3:return(uintptr_t)EMIN(m);case 4:return(uintptr_t)EDOG(m);case 5:return(uintptr_t)EBONES(m);case 6:return(uintptr_t)MGIVENNAME(m);}return 0;}
+
+uintptr_t probe_native_return(int which){boolean flag=FALSE;struct obj*one=nodes[0],*two=nodes[1];switch(which){
+case 0:return(uintptr_t)add_to_container(nodes[0],nodes[1]);
+case 1:return(uintptr_t)attacktype_fordmg(&mons[PM_HUMAN],AT_ANY,AD_ANY);
+case 2:return(uintptr_t)bury_an_obj(nodes[0],&flag);
+case 3:return(uintptr_t)create_gas_cloud(10,10,2,5);
+case 4:return(uintptr_t)dmgtype_fromattack(&mons[PM_HUMAN],AD_ANY,AT_ANY);
+case 5:return(uintptr_t)g_at(10,10);
+case 6:return(uintptr_t)get_mleash(monsters[0]);
+case 7:return(uintptr_t)grow_up(monsters[0],monsters[1]);
+case 8:return(uintptr_t)m_carrying(monsters[0],CORPSE);
+case 9:return(uintptr_t)makemon(&mons[PM_HUMAN],10,10,0);
+case 10:return(uintptr_t)mkcorpstat(CORPSE,monsters[0],&mons[PM_HUMAN],10,10,0);
+case 11:return(uintptr_t)mkgold(31L,10,10);
+case 12:return(uintptr_t)mkobj(RANDOM_CLASS,FALSE);
+case 13:return(uintptr_t)mksobj_at(CORPSE,10,10,FALSE,FALSE);
+case 14:return(uintptr_t)newmextra();
+case 15:return(uintptr_t)nxtobj(nodes[0],CORPSE,FALSE);
+case 16:return(uintptr_t)obj_meld(&one,&two);
+case 17:return(uintptr_t)obj_nexto(nodes[0]);
+case 18:return(uintptr_t)oname(nodes[0],"native name",0);
+case 19:return(uintptr_t)sengr_at("native engraving",10,10,FALSE);
+case 20:return(uintptr_t)sobj_at(CORPSE,10,10);
+case 21:return(uintptr_t)split_mon(monsters[0],monsters[1]);
+case 22:return(uintptr_t)splitobj(nodes[0],1L);
+case 23:return(uintptr_t)stairway_find_type_dir(FALSE,FALSE);
+case 24:return(uintptr_t)t_at(10,10);
+case 25:return(uintptr_t)visible_region_at(10,10);
+case 26:return(uintptr_t)which_armor(monsters[0],W_ARM);
+}return 0;}
 
 long probe_run(int op,int a,int b,long c,long d,long e){switch(op){
 case 0:pet_sanity_check(monsters[a],textbuf);return 0;
@@ -550,3 +615,6 @@ case 8:{struct trap*o=(void*)at;switch(field){case 0:o->ttyp=v;break;default:abo
 case 9:{struct q_score*o=(void*)at;switch(field){case 0:o->killed_leader=v;break;case 1:o->leader_is_dead=v;break;default:abort();}break;}
 case 10:{struct u_event*o=(void*)at;switch(field){case 0:o->qcompleted=v;break;default:abort();}break;}
 default:abort();}}
+
+/* Bounded native pointer-slot store only: no dereference of opaque successor/replacement. */
+uint64_t probe_store_fmon(uint64_t bits){struct monst*replacement=(struct monst*)(uintptr_t)bits;fmon=replacement;return(uintptr_t)fmon;}

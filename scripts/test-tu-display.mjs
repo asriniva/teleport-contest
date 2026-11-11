@@ -1,8 +1,12 @@
 // Actual configured memory64 C vs imported JS; controlled world/window only.
 import assert from 'node:assert/strict';
 import{readFileSync,writeFileSync}from'node:fs';
-import refFactory from'../.cache/display-first-pass/display-reference.mjs';
-import hybridFactory from'../.cache/display-first-pass/display-hybrid.mjs';
+import {resolve as resolveProbe,dirname as dirnameProbe} from 'node:path';
+import {fileURLToPath as fileURLProbe,pathToFileURL as pathURLProbe} from 'node:url';
+if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('DISPLAY has no native reference fixture; Emscripten results cannot be labeled native.');
+const displayProbeRoot=resolveProbe(dirnameProbe(fileURLProbe(import.meta.url)),'..');
+const displayProbeDir=resolveProbe(process.env.DISPLAY_PROBE_DIR??resolveProbe(displayProbeRoot,'.cache/display-first-pass'));
+const [refFactory,hybridFactory]=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathURLProbe(resolveProbe(displayProbeDir,'display-'+mode+'.mjs')).href)).default));
 const{callDisplay,initializeDisplay}=await import(process.env.DISPLAY_RUNTIME??'../js/ported/display-runtime.js');
 const schema=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/display-schema.json',import.meta.url))),functions=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/display-source-metadata.json',import.meta.url))).functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
 

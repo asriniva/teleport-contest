@@ -1,3 +1,35 @@
+import {callFiles} from './files-runtime.js';
+
+
+
+import {callHack} from './hack-runtime.js';
+import {callUhitm} from './uhitm-runtime.js';
+import {callMon,monState} from './mon-runtime.js';
+import {callPickup} from './pickup-runtime.js';
+import {callShk} from './shk-runtime.js';
+
+
+
+import * as spLevNamespace from './sp_lev.js';
+import {callSpLev,initializeSpLev} from './sp_lev-runtime.js';
+import {callTrap} from './trap-runtime.js';
+import {callTermcap} from './termcap-runtime.js';
+import {callTopl} from './topl-runtime.js';
+import {callWintty,initializeWintty} from './wintty-runtime.js';
+
+
+
+import {callUnixunix} from './unixunix-runtime.js';
+import {callUnixmain} from './unixmain-runtime.js';
+import {callOptions} from './options-runtime.js';
+import {callBotl} from './botl-runtime.js';
+import {callZap,initializeZap,zapState} from './zap-runtime.js';
+
+import {callDisplay,initializeDisplay} from './display-runtime.js';
+import {callInvent} from './invent-runtime.js';
+import * as cmd from './cmd.js';
+import {callCmd,initializeCmd} from './cmd-runtime.js';
+import {callNhlua} from './nhlua-runtime.js';
 import {callMkobj} from './mkobj-dispatch.js';
 import {callEat,initializeEat} from './eat-runtime.js';
 import {callObjnam,objnamState} from './objnam-runtime.js';
@@ -60,7 +92,7 @@ import {callWeapon} from './weapon-runtime.js';
 import {callRegion} from './region-runtime.js';
 import {callDog} from './dog-runtime.js';
 import * as sfbase from './sfbase.js';
-import {createSfbaseEnvironment} from './sfbase-runtime.js';
+import {createOptimizedSfbaseEnvironment} from './sfbase-runtime.js';
 import * as attrib from './attrib.js';
 import {createAttribEnvironment} from './attrib-runtime.js';
 import {createPlineBridge} from './pline-runtime.js';
@@ -124,9 +156,9 @@ import * as coloratt from './coloratt.js';
 import * as priest from './priest.js';
 import { createPriestEnvironment } from './priest-runtime.js';
 import * as light from './light.js';
-import { createLightEnvironment } from './light-runtime.js';
+import { withLightEnvironment } from './light-runtime.js';
 import * as lock from './lock.js';
-import { createLockEnvironment } from './lock-runtime.js';
+import { withLockEnvironment } from './lock-runtime.js';
 import * as wield from './wield.js';
 import { createWieldEnvironment } from './wield-runtime.js';
 import * as worn from './worn.js';
@@ -148,7 +180,7 @@ import { createWormState, createWormEnvironment } from './worm-runtime.js';
 import * as wizard from './wizard.js';
 import { createWizardEnvironment } from './wizard-runtime.js';
 import * as steed from './steed.js';
-import { createSteedEnvironment } from './steed-runtime.js';
+import { callSteed } from './steed-runtime.js';
 import { createColorattState, createColorattEnvironment } from './coloratt-runtime.js';
 import { createVersionState, createVersionEnvironment } from './version-runtime.js';
 import { createMusicState, createMusicEnvironment } from './music-runtime.js';
@@ -162,7 +194,7 @@ import { createStealEnvironment } from './steal-runtime.js';
 import { createSelvarState, createSelvarEnvironment } from './selvar-runtime.js';
 import { createIactionsEnvironment } from './iactions-runtime.js';
 import { createMinionEnvironment } from './minion-runtime.js';
-import { createQuestEnvironment } from './quest-runtime.js';
+import { withQuestEnvironment } from './quest-runtime.js';
 import { createMdlibState, createMdlibEnvironment } from './mdlib-runtime.js';
 import { createWriteEnvironment } from './write-runtime.js';
 import { createGetlineState, createGetlineEnvironment } from './getline-runtime.js';
@@ -549,6 +581,8 @@ export function createPortedRuntime(layouts) {
         makemon(services,name,...args) {return callMakemon(services,layouts.makemon,name,...args);},
         mhitu(services,name,...args) { return callMhitu(services, layouts.mhitu, name, ...args); } ,
         artifact(services,name,...args) {return callArtifact(services,layouts.artifact,name,...args);},
+        // NHLUA initializes its private source data lazily after validating native ABI metadata.
+        nhlua(services,name,...args) {return callNhlua(services,name,...args);},
         initializeDecl(services) { return initializeDecl(services, layouts.decl); },
         decl(services,name,...args) { return callDecl(services, layouts.decl, name, ...args); },
         read(services,name,...args) {return callRead(services,layouts.read,name,...args);},
@@ -686,6 +720,44 @@ export function createPortedRuntime(layouts) {
             if (!pagerBridge) throw new Error('Missing PAGER layout');
             return pagerBridge(services,name,...args);
         },
+        files(services,name,...args) {return callFiles(services,name,...args);},
+
+
+
+        hack(services,name,...args) {return callHack(services,layouts.hack,name,...args);},
+        uhitm(services,name,...args) {return callUhitm(services,layouts.uhitm,name,...args);},
+        mon(services,name,...args) {return callMon(services,layouts.mon,name,...args);},
+        monState(services) {return monState(services,layouts.mon);},
+        pickup(services,name,...args) {return callPickup(services,name,...args);},
+        shk(services,name,...args) {return callShk(services,name,...args);},
+
+
+
+        sp_lev(services,name,...args) {return callSpLev(services,layouts.sp_lev,spLevNamespace,name,...args);},
+        initializeSpLev(services) {return initializeSpLev(services,layouts.sp_lev,spLevNamespace);},
+        trap(services,name,...args) {return callTrap(services,name,...args);},
+        termcap(services,name,...args) {return callTermcap(services,layouts.termcap,name,...args);},
+        topl(services,name,...args) {return callTopl(services,layouts.topl,name,...args);},
+        wintty(services,name,...args) {return callWintty(services,layouts.wintty,name,...args);},
+        initializeWintty(services) {return initializeWintty(services,layouts.wintty);},
+
+
+// Inside the existing runtime object. Owned dispatchers cast original formals.
+unixunix(services,name,...args) {return callUnixunix(services,name,...args);},
+unixmain(services,name,...args) {return callUnixmain(services,name,...args);},
+callOptions(services,name,...args) {return callOptions(services,layouts.options,name,...args);},
+callBotl(services,name,...args) {return callBotl(services,layouts.botl,name,...args);},
+zap(services,name,...args) {return callZap(services,layouts.zap,name,...args);},
+initializeZap(services) {return initializeZap(services,layouts.zap);},
+zapState(services) {return zapState(services);},
+// No UNIX initialization hooks. No eager OPTIONS allopt_array_init/do_init.
+// BOTL library startup calls callBotl(services,"initialize"); no extra method.
+
+        display(services,name,...args) {return callDisplay(services,name,...args);},
+        initializeDisplay(services) {return initializeDisplay(services);},
+        invent(services,name,...args) {return callInvent(services,name,...args);},
+        cmd(services,name,...args) {return callCmd(services,layouts.cmd,cmd,name,...args);},
+        initializeCmd(services) {return initializeCmd(services,layouts.cmd,cmd);},
         mklev(services,name,...args) {return callMklev(services,name,...args);},
         dogmove(services,name,...args) {
             let environment = dogmoveEnvironments.get(services.moduleKey);
@@ -708,7 +780,7 @@ export function createPortedRuntime(layouts) {
         sfbase(services,name,...args) {
             let environment = sfbaseEnvironments.get(services.moduleKey);
             if (!environment) {
-                environment = createSfbaseEnvironment(services,layouts.sfbase);
+                environment = createOptimizedSfbaseEnvironment(services,layouts.sfbase);
                 sfbaseEnvironments.set(services.moduleKey,environment);
             }
             const saved = services.stackSave();
@@ -912,20 +984,10 @@ export function createPortedRuntime(layouts) {
             return typeof result === 'string' ? services.literal(result) : result?.address ?? result ?? 0;
         },
         steed(services, name, ...args) {
-            const environment = createSteedEnvironment(services, layouts.steed, steed);
-            if (name === 'use_saddle') args[0] = environment.object(args[0]);
-            if (name === 'put_saddle_on_mon') {
-                args[0] = environment.object(args[0]); args[1] = environment.monster(args[1]);
-            }
-            if (['can_saddle', 'can_ride', 'mount_steed', 'maybewakesteed', 'poly_steed', 'place_monster'].includes(name))
-                args[0] = environment.monster(args[0]);
-            if (name === 'poly_steed') args[1] = environment.permonst(args[1]);
-            if (name === 'landing_spot') args[0] = environment.coord(args[0]);
-            const result = withCEnvironment(environment, steed[name], ...args);
-            return typeof result === 'string' ? services.literal(result) : result?.address ?? result ?? 0;
+            return callSteed(services, layouts.steed, steed, name, ...args);
         },
         lock(services, name, ...args) {
-            const environment = createLockEnvironment(services, layouts.lock, lock);
+            return withLockEnvironment(services, layouts.lock, lock, (environment, activeServices) => {
             if (name === 'picking_lock') {
                 args[0] = environment.coordPointer(args[0]); args[1] = environment.coordPointer(args[1]);
             }
@@ -937,12 +999,13 @@ export function createPortedRuntime(layouts) {
             }
             const result = withCEnvironment(environment, lock[name], ...args);
             return typeof result === 'string' ? services.literal(result) : result?.address ?? result ?? 0;
+            });
         },
         light(services, name, ...args) {
-            const environment = createLightEnvironment(services, layouts.light);
+            return withLightEnvironment(services, layouts.light, light, (environment, activeServices) => {
             environment.fmt_ptr = value => {
-                const out = services.fmt_ptr(value);
-                writeNativePointer(services.heap(), out, value);
+                const out = activeServices.fmt_ptr(value);
+                writeNativePointer(activeServices.heap(), out, value);
                 return out;
             };
             if (['new_light_source', 'new_light_core'].includes(name)) args[4] = environment.anything(args[4]);
@@ -964,6 +1027,7 @@ export function createPortedRuntime(layouts) {
             }
             const result = withCEnvironment(environment, light[name], ...args);
             return typeof result === 'string' ? services.literal(result) : result?.address ?? result ?? 0;
+            });
         },
         priest(services, name, ...args) {
             const environment = createPriestEnvironment(services, layouts.priest);
@@ -1217,12 +1281,13 @@ export function createPortedRuntime(layouts) {
             return withCEnvironment(environment, minion[name], ...args);
         },
         quest(services, name, ...args) {
-            const environment = createQuestEnvironment(services, layouts.quest);
+            return withQuestEnvironment(services, layouts.quest, quest, (environment, activeServices) => {
             if (['artitouch', 'finish_quest'].includes(name)) args[0] = environment.object(args[0]);
             if (['leader_speaks', 'quest_chat', 'quest_talk', 'quest_stat_check', 'chat_with_leader', 'prisoner_speaks'].includes(name)) args[0] = environment.monster(args[0]);
             if (name === 'nemesis_stinks') args = args.map(value => value << 16 >> 16);
             if (['is_pure', 'expulsion'].includes(name)) args[0] = args[0] << 24 >> 24;
             return withCEnvironment(environment, quest[name], ...args);
+            });
         },
         get mdlibState() { return mdlibState; },
         mdlib(services, name, ...args) {

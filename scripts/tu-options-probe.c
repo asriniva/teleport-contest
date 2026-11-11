@@ -10,6 +10,7 @@
 #ifdef TELEPORT_REFERENCE_TU
 #include "../.cache/wasm64-build/tree/src/options.c"
 #define TELEPORT_OPTIONS_ORIGINAL_INCLUDED
+#define TELEPORT_OPTIONS_VALIDATE_ORIGINAL
 #endif
 #include "tu-options-layout.h"
 #include "../nethack-c/wasm/tu-fragments/options-support.c"
@@ -136,10 +137,10 @@ static void backend_file(const char*s,boolean b){logmsg("file:%s:%d;",s,b);callb
 static void backend_pad(int n){logmsg("pad:%d;",n);callback();}
 static void backend_preference(const char*s){logmsg("preference:%s;",s);callback();}
 static void syncwin(void){logmsg("sync;");callback();}
-void add_menu(winid w,const glyph_info*g,const anything*a,char c,char k,int attr,int color,const char*s,unsigned f){logmsg("menu:%d:%d:%d:%d:%d:%u:%016llx:%s;",w,c,k,attr,color,f,(unsigned long long)(a?a->a_ulong:0),s);callback();}
+void add_menu(winid w,const glyph_info*g,const anything*a,char c,char k,int attr,int color,const char*s,unsigned f){struct autopickup_exception*p=ga.apelist;int i=0;for(;p;p=p->next,i++)if(a&&a->a_void==p)break;if(p)logmsg("menu:%d:%d:%d:%d:%d:%u:ape%d:%s;",w,c,k,attr,color,f,i,s);else logmsg("menu:%d:%d:%d:%d:%d:%u:%016llx:%s;",w,c,k,attr,color,f,(unsigned long long)(a?a->a_ulong:0),s);callback();}
 void add_menu_str(winid w,const char*s){logmsg("menustr:%d:%s;",w,s);callback();}
 void add_menu_heading(winid w,const char*s){logmsg("heading:%d:%s;",w,s);callback();}
-int select_menu(winid w,int how,menu_item**out){int value=select_i<select_n?select_values[select_i++]:0;logmsg("select:%d:%d:%d;",w,how,value);*out=0;if(value>0){*out=(menu_item*)alloc(sizeof(menu_item));memset(*out,0,sizeof(menu_item));(*out)->item.a_int=value;(*out)->count=1;}callback();return value>0?1:value;}
+int select_menu(winid w,int how,menu_item**out){int value=select_i<select_n?select_values[select_i++]:0;boolean chosen=value>0||(opts[254]&&value<0);if(opts[254]&&value<0)opts[254]=0;logmsg("select:%d:%d:%d;",w,how,value);*out=0;if(chosen){*out=(menu_item*)alloc(sizeof(menu_item));memset(*out,0,sizeof(menu_item));(*out)->item.a_int=value;if(opts[253]&&how==PICK_ANY){struct autopickup_exception*p=ga.apelist;int i=value-1;while(p&&i--)p=p->next;(*out)->item.a_void=p;}(*out)->count=1;}callback();return chosen?1:value;}
 void getlin(const char*q,char*out){const char*s=input_i<input_n?input_values[input_i++]:"\033";logmsg("getlin:%s:%s;",q,s);strcpy(out,s);callback();}
 static int draw(int n){if(n<=0){logmsg("impossible:rn2:%d;",n);return 0;}rngstate=rngstate*1664525U+1013904223U;int v=rngstate%(unsigned)n;logmsg("rng:%s:%s:%d:%d:%d;",rngfile?rngfile:"",rngfn?rngfn:"",rngline,n,v);return v;}
 int rn2(int n){return draw(n);}int rn2_on_display_rng(int n){return draw(n);}int rnd(int n){return draw(n)+1;}
@@ -179,9 +180,8 @@ return (__typeof__((read_sym_file)(a0)))returns[29];
 }
 __attribute__((weak)) void clear_symsetentry(int a0,boolean a1){logmsg("dep:clear_symsetentry;");callback();
 }
-__attribute__((weak)) struct fruit * fruit_from_name(const char * a0,boolean a1,int * a2){logmsg("dep:fruit_from_name;");callback();
-return 0;
-}
+__attribute__((weak)) struct fruit *fruit_from_name(const char*a0,boolean a1,int*a2){logmsg("dep:fruit_from_name;");callback();if(a2&&opts[247])*a2=(int)opts[248];return(struct fruit*)(uintptr_t)returns[34];}
+
 __attribute__((weak)) int glyphrep_to_custom_map_entries(const char * a0,int * a1){logmsg("dep:glyphrep_to_custom_map_entries;");callback();
 return (__typeof__((glyphrep_to_custom_map_entries)(a0,a1)))returns[36];
 }
@@ -213,6 +213,7 @@ __attribute__((weak)) int choose_classes_menu(const char * a0,int a1,boolean a2,
 return (__typeof__((choose_classes_menu)(a0,a1,a2,a3,a4)))returns[54];
 }
 __attribute__((weak)) void get_soundlib_name(char * a0,int a1){logmsg("dep:get_soundlib_name;");callback();
+if(a1>0)snprintf(a0,a1,"%s",replies[59][0]?replies[59]:"nosound");
 }
 __attribute__((weak)) enum soundlib_ids soundlib_id_from_opt(char * a0){logmsg("dep:soundlib_id_from_opt;");callback();
 return (__typeof__((soundlib_id_from_opt)(a0)))returns[60];
@@ -220,6 +221,7 @@ return (__typeof__((soundlib_id_from_opt)(a0)))returns[60];
 __attribute__((weak)) void assign_soundlib(int a0){logmsg("dep:assign_soundlib;");callback();
 }
 __attribute__((weak)) void get_sortdisco(char * a0,boolean a1){logmsg("dep:get_sortdisco;");callback();
+strcpy(a0,replies[62][0]?replies[62]:"o");
 }
 __attribute__((weak)) int choose_disco_sort(int a0){logmsg("dep:choose_disco_sort;");callback();
 return (__typeof__((choose_disco_sort)(a0)))returns[63];
@@ -387,9 +389,8 @@ __attribute__((weak)) void bot(void){logmsg("dep:bot;");callback();
 __attribute__((weak)) char * makeplural(const char * a0){logmsg("dep:makeplural;");callback();
 return replies[150][0]?replies[150]:"fixture";
 }
-__attribute__((weak)) boolean opt_next_cond(int a0,char * a1){logmsg("dep:opt_next_cond;");callback();
-return (__typeof__((opt_next_cond)(a0,a1)))returns[153];
-}
+__attribute__((weak)) boolean opt_next_cond(int a0,char *a1){logmsg("dep:opt_next_cond;");callback();if(a0<0||a0>=opts[249])return FALSE;strcpy(a1,input_values[a0]);return TRUE;}
+
 __attribute__((weak)) char * yyyymmddhhmmss(time_t a0){logmsg("dep:yyyymmddhhmmss;");callback();
 return "20261110000000";
 }
@@ -2448,3 +2449,40 @@ return bytes;}
 const char*probe_catalogue(void){static char out[256];snprintf(out,sizeof out,"%d:%d:%s:%s:%s",objects[SLIME_MOLD].oc_class==FOOD_CLASS,mons[PM_HUMAN].pmidx==PM_HUMAN,OBJ_NAME(objects[SLIME_MOLD]),mons[PM_HUMAN].pmnames[NEUTRAL],roles[0].name.m);return out;}
 uintptr_t probe_stringbuf(void){return(uintptr_t)&stringbuf;}const char*probe_stringbuf_text(void){return stringbuf.str?stringbuf.str:"";}
 
+
+#ifdef TELEPORT_REFERENCE_TU
+_Static_assert(sizeof(struct paranoia_opts)==sizeof(struct teleport_options_paranoia_opts),"OPTIONS original paranoia_opts size");
+_Static_assert(offsetof(struct paranoia_opts,flagmask)==offsetof(struct teleport_options_paranoia_opts,flagmask),"OPTIONS original paranoia_opts.flagmask offset");
+_Static_assert(sizeof(((struct paranoia_opts*)0)->flagmask)==sizeof(((struct teleport_options_paranoia_opts*)0)->flagmask),"OPTIONS original paranoia_opts.flagmask width");
+_Static_assert(offsetof(struct paranoia_opts,argname)==offsetof(struct teleport_options_paranoia_opts,argname),"OPTIONS original paranoia_opts.argname offset");
+_Static_assert(sizeof(((struct paranoia_opts*)0)->argname)==sizeof(((struct teleport_options_paranoia_opts*)0)->argname),"OPTIONS original paranoia_opts.argname width");
+_Static_assert(offsetof(struct paranoia_opts,argMinLen)==offsetof(struct teleport_options_paranoia_opts,argMinLen),"OPTIONS original paranoia_opts.argMinLen offset");
+_Static_assert(sizeof(((struct paranoia_opts*)0)->argMinLen)==sizeof(((struct teleport_options_paranoia_opts*)0)->argMinLen),"OPTIONS original paranoia_opts.argMinLen width");
+_Static_assert(offsetof(struct paranoia_opts,synonym)==offsetof(struct teleport_options_paranoia_opts,synonym),"OPTIONS original paranoia_opts.synonym offset");
+_Static_assert(sizeof(((struct paranoia_opts*)0)->synonym)==sizeof(((struct teleport_options_paranoia_opts*)0)->synonym),"OPTIONS original paranoia_opts.synonym width");
+_Static_assert(offsetof(struct paranoia_opts,synMinLen)==offsetof(struct teleport_options_paranoia_opts,synMinLen),"OPTIONS original paranoia_opts.synMinLen offset");
+_Static_assert(sizeof(((struct paranoia_opts*)0)->synMinLen)==sizeof(((struct teleport_options_paranoia_opts*)0)->synMinLen),"OPTIONS original paranoia_opts.synMinLen width");
+_Static_assert(offsetof(struct paranoia_opts,explain)==offsetof(struct teleport_options_paranoia_opts,explain),"OPTIONS original paranoia_opts.explain offset");
+_Static_assert(sizeof(((struct paranoia_opts*)0)->explain)==sizeof(((struct teleport_options_paranoia_opts*)0)->explain),"OPTIONS original paranoia_opts.explain width");
+_Static_assert(sizeof(struct objsymopt)==sizeof(struct teleport_options_objsymopt),"OPTIONS original objsymopt size");
+_Static_assert(offsetof(struct objsymopt,num)==offsetof(struct teleport_options_objsymopt,num),"OPTIONS original objsymopt.num offset");
+_Static_assert(sizeof(((struct objsymopt*)0)->num)==sizeof(((struct teleport_options_objsymopt*)0)->num),"OPTIONS original objsymopt.num width");
+_Static_assert(offsetof(struct objsymopt,nam)==offsetof(struct teleport_options_objsymopt,nam),"OPTIONS original objsymopt.nam offset");
+_Static_assert(sizeof(((struct objsymopt*)0)->nam)==sizeof(((struct teleport_options_objsymopt*)0)->nam),"OPTIONS original objsymopt.nam width");
+_Static_assert(offsetof(struct objsymopt,descr)==offsetof(struct teleport_options_objsymopt,descr),"OPTIONS original objsymopt.descr offset");
+_Static_assert(sizeof(((struct objsymopt*)0)->descr)==sizeof(((struct teleport_options_objsymopt*)0)->descr),"OPTIONS original objsymopt.descr width");
+_Static_assert(sizeof(menu_cmd_t)==sizeof(struct teleport_options_menu_cmd_t),"OPTIONS original menu_cmd_t size");
+_Static_assert(offsetof(menu_cmd_t,name)==offsetof(struct teleport_options_menu_cmd_t,name),"OPTIONS original menu_cmd_t.name offset");
+_Static_assert(sizeof(((menu_cmd_t*)0)->name)==sizeof(((struct teleport_options_menu_cmd_t*)0)->name),"OPTIONS original menu_cmd_t.name width");
+_Static_assert(offsetof(menu_cmd_t,cmd)==offsetof(struct teleport_options_menu_cmd_t,cmd),"OPTIONS original menu_cmd_t.cmd offset");
+_Static_assert(sizeof(((menu_cmd_t*)0)->cmd)==sizeof(((struct teleport_options_menu_cmd_t*)0)->cmd),"OPTIONS original menu_cmd_t.cmd width");
+_Static_assert(offsetof(menu_cmd_t,desc)==offsetof(struct teleport_options_menu_cmd_t,desc),"OPTIONS original menu_cmd_t.desc offset");
+_Static_assert(sizeof(((menu_cmd_t*)0)->desc)==sizeof(((struct teleport_options_menu_cmd_t*)0)->desc),"OPTIONS original menu_cmd_t.desc width");
+_Static_assert(sizeof(__typeof__(msgtype_names[0]))==sizeof(struct teleport_options_options_msgtype_name),"OPTIONS original options_msgtype_name size");
+_Static_assert(offsetof(__typeof__(msgtype_names[0]),name)==offsetof(struct teleport_options_options_msgtype_name,name),"OPTIONS original options_msgtype_name.name offset");
+_Static_assert(sizeof(((__typeof__(msgtype_names[0])*)0)->name)==sizeof(((struct teleport_options_options_msgtype_name*)0)->name),"OPTIONS original options_msgtype_name.name width");
+_Static_assert(offsetof(__typeof__(msgtype_names[0]),msgtyp)==offsetof(struct teleport_options_options_msgtype_name,msgtyp),"OPTIONS original options_msgtype_name.msgtyp offset");
+_Static_assert(sizeof(((__typeof__(msgtype_names[0])*)0)->msgtyp)==sizeof(((struct teleport_options_options_msgtype_name*)0)->msgtyp),"OPTIONS original options_msgtype_name.msgtyp width");
+_Static_assert(offsetof(__typeof__(msgtype_names[0]),descr)==offsetof(struct teleport_options_options_msgtype_name,descr),"OPTIONS original options_msgtype_name.descr offset");
+_Static_assert(sizeof(((__typeof__(msgtype_names[0])*)0)->descr)==sizeof(((struct teleport_options_options_msgtype_name*)0)->descr),"OPTIONS original options_msgtype_name.descr width");
+#endif

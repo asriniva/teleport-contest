@@ -1,0 +1,52 @@
+{
+  "sourceSha256": "764e7318f29a1f3b279ecd55659fc69a9e1080437cd3ed3d6a0b9ebc98a5b057",
+  "functionCount": 6,
+  "functions": [
+    {
+      "name": "xpmgetline",
+      "signature": "static char *\nxpmgetline(void)",
+      "startLine": 53,
+      "endLine": 76,
+      "sourceSliceSha256": "db94e26ed01c286bba2760529c528cb6820b429b10c6361456d7f0a44d50cb9e"
+    },
+    {
+      "name": "fopen_xpm_file",
+      "signature": "static int\nfopen_xpm_file(const char *fn)",
+      "startLine": 81,
+      "endLine": 126,
+      "sourceSliceSha256": "85a4dcebcc889bd77326a304b91915dc832bffb633450483924c8abece20f3b6"
+    },
+    {
+      "name": "conv_image",
+      "signature": "static void\nconv_image(int nplanes)",
+      "startLine": 141,
+      "endLine": 165,
+      "sourceSliceSha256": "fc7955aed0631fc983a10d2a1117ba711a25ca19429dd3c495135c8faff619da"
+    },
+    {
+      "name": "wr32",
+      "signature": "static void\nwr32(uint32_t v)",
+      "startLine": 173,
+      "endLine": 180,
+      "sourceSliceSha256": "b5997c1dfeb4a6d883519a45a3d275aaa37b2e86a29053e2e6ef82881233aa7c"
+    },
+    {
+      "name": "write_chunk",
+      "signature": "static void\nwrite_chunk(const char *id, const void *data, uint32_t size)",
+      "startLine": 182,
+      "endLine": 190,
+      "sourceSliceSha256": "42f95f208f81f313cc39b8841189dc630bd3d6b261da900620b5d313b9c7d943"
+    },
+    {
+      "name": "main",
+      "signature": "int\nmain(int argc, char **argv)",
+      "startLine": 196,
+      "endLine": 346,
+      "sourceSliceSha256": "f726ff2402937096128d65d81b5d1da96c10a9248ec2a3a4123e77e119ee8aaf"
+    }
+  ],
+  "comments": 38,
+  "sourceLiteralCount": 19,
+  "mixedNativeOriginalFunctionBodies": 0,
+  "profile": "private portable POSIX libc utility; EmCC4.0.10 Clang21 wasm64, O2-g MEMORY64, no game defines"
+}

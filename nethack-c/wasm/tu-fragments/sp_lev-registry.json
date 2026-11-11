@@ -1,0 +1,30 @@
+{
+  "name": "sp_lev",
+  "source": "src/sp_lev.c",
+  "javascript": "js/ported/sp_lev.js",
+  "library": "nethack-c/wasm/tu-libraries/sp_lev.js",
+  "startup": "$teleportSpLevInit",
+  "configuredFunctions": true,
+  "reference": "pristine",
+  "probeContext": false,
+  "probeExtraExports": [
+    "_teleport_sp_lev_global",
+    "_teleport_sp_lev_read",
+    "_teleport_sp_lev_write",
+    "_teleport_sp_lev_address",
+    "_teleport_sp_lev_copy",
+    "_teleport_sp_lev_literal_storage",
+    "_teleport_sp_lev_literal_capacity"
+  ],
+  "adapterSources": [
+    "js/ported/sp_lev-runtime.js",
+    "scripts/tu-sp_lev-layout.h",
+    "nethack-c/wasm/tu-fragments/sp_lev-check.py",
+    "nethack-c/wasm/tu-fragments/sp_lev-dispatch.js",
+    "nethack-c/wasm/tu-fragments/sp_lev-provenance.json",
+    "nethack-c/wasm/tu-fragments/sp_lev-schema.json",
+    "nethack-c/wasm/tu-fragments/sp_lev-source-data.h",
+    "nethack-c/wasm/tu-fragments/sp_lev-support.c",
+    "nethack-c/wasm/tu-fragments/sp_lev-types.h"
+  ]
+}

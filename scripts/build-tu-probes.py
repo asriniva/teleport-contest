@@ -32,7 +32,7 @@ if (root / 'js/ported/mondata.js').exists():
         [str(sdk / 'upstream/emscripten/em-config'), 'NODE_JS'], text=True))
     assert isinstance(node_command, list) and all(isinstance(part, str) for part in node_command)
     subprocess.run([*node_command, str(root / 'scripts/check-mondata-data.mjs')], check=True)
-    for firstpass_name in ['spell', 'polyself', 'wizcmds', 'restore', 'nhlobj', 'do_name', 'vision', 'dokick', 'dig', 'monmove', 'do', 'timeout', 'potion', 'mhitu', 'artifact', 'decl', 'do_wear', 'insight', 'eat', 'objnam']:
+    for firstpass_name in ['hack','mon','trap','termcap','wintty','options','botl','zap', 'nhlua', 'spell', 'polyself', 'wizcmds', 'restore', 'nhlobj', 'do_name', 'vision', 'dokick', 'dig', 'monmove', 'do', 'timeout', 'potion', 'mhitu', 'artifact', 'decl', 'do_wear', 'insight', 'eat', 'objnam']:
         if any(port['name'] == firstpass_name for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text())):
             subprocess.run([*node_command, str(root / ('scripts/check-' + firstpass_name + '-data.mjs'))], check=True)
     if any(port['name']=='makemon' for port in json.loads((root/'nethack-c/wasm/tu-ports.json').read_text())):
@@ -134,12 +134,44 @@ if any(port['name']=='mkobj' for port in json.loads((root/'nethack-c/wasm/tu-por
     subprocess.run([*node_command,str(root/'nethack-c/wasm/tu-fragments/mkobj-check-members.mjs')],check=True)
     subprocess.run([*node_command,str(root/'scripts/check-mkobj-dispatch.mjs')],check=True)
 
+
+# New fifteen owned source checks: no generic source/data check is skipped.
+tu137_names={p['name']for p in json.loads((root/'nethack-c/wasm/tu-ports.json').read_text())}
+for owned_name,owned_guard in [
+ ('uhitm','nethack-c/wasm/tu-fragments/uhitm-metadata.py'),
+ ('pickup','scripts/check-pickup-source.py'),
+ ('shk','nethack-c/wasm/tu-fragments/shk-source-check.py'),
+ ('sp_lev','nethack-c/wasm/tu-fragments/sp_lev-check.py'),
+ ('topl','nethack-c/wasm/tu-fragments/topl-metadata.py'),
+ ('unixunix','scripts/check-unixunix-source.py'),
+ ('unixmain','nethack-c/wasm/tu-fragments/unixmain-source-check.py')]:
+    if owned_name in tu137_names:
+        subprocess.run([sys.executable,'-B',str(root/owned_guard)],check=True,cwd=root)
+if 'shk'in tu137_names:
+    subprocess.run([*node_command,str(root/'nethack-c/wasm/tu-fragments/shk-check-metadata.mjs')],check=True,cwd=root)
+if 'unixmain'in tu137_names:
+    subprocess.run([*node_command,str(root/'nethack-c/wasm/tu-fragments/unixmain-check-metadata.mjs')],check=True,cwd=root,
+                   env={**os.environ,'UNIXMAIN_WRITE_GUARD':'0'})
+
+# FILES/DISPLAY/INVENT: owned source checks on the normal build route.
+for owned_name,owned_guard in [('files','nethack-c/wasm/tu-fragments/files-source-check.py'),('invent','nethack-c/wasm/tu-fragments/invent-source-check.py'),('display','scripts/check-display-source.py'),('cmd','nethack-c/wasm/tu-fragments/cmd-check-source.py')]:
+    if any(port['name']==owned_name for port in json.loads((root/'nethack-c/wasm/tu-ports.json').read_text())):
+        subprocess.run([sys.executable,'-B',str(root/owned_guard),*(['--current-profile']if owned_name=='display'else[])],check=True)
+        if owned_name=='cmd':
+            owned_node=ast.literal_eval(subprocess.check_output([str(sdk/'upstream/emscripten/em-config'),'NODE_JS'],text=True))
+            subprocess.run([*owned_node,str(root/'nethack-c/wasm/tu-fragments/cmd-check-members.mjs')],check=True)
+
 defines = ['-D' + name for name in json.loads((root / 'nethack-c/wasm/compile-defines.json').read_text())]
 base = [sdk / 'upstream/emscripten/emcc', '-O2', '-sMEMORY64=1', '-sMODULARIZE=1', *defines,
         '-DTELEPORT_ISOLATED_PROBE',
         '-sENVIRONMENT=node,web', '-sALLOW_MEMORY_GROWTH=1', '--no-entry',
         '-sEXPORTED_RUNTIME_METHODS=HEAPU8', '-I' + str(include), '-I' + str(work)]
 probes = {
+    'files': ([], ['call', 'reset', 'clear', 'option', 'buffer', 'env', 'pointer', 'open', 'record', 'trace', 'stack', 'uid', 'snapshot', 'nhfile', 'global', 'layout', 'address', 'write', 'read', 'close_stream', 'attach', 'observe', 'offset', 'position']),
+    'invent': ([], ['call', 'reset', 'clear', 'option', 'buffer', 'record', 'trace', 'stack', 'snapshot', 'global', 'layout', 'address', 'write', 'read', 'chain', 'queue', 'property', 'foreign', 'input', 'callback', 'function', 'class', 'observe', 'offset', 'held', 'invoke']),
+    'display': ([], ['action', 'trace', 'clear', 'draws', 'error', 'errno', 'seed', 'option', 'pointer', 'grid', 'map', 'count', 'alloc_pointer', 'alloc_size', 'alloc_live', 'growth', 'startup', 'startup_size', 'startup_calls', 'coord', 'coord_call', 'wallcolor', 'reset', 'global_size', 'region_size', 'alloc', 'public_size', 'private', 'private_size', 'glyph_events']),
+    'cmd': ([], ['watch', 'byvalue', 'callback', 'function', 'ctor', 'ctor_text', 'pool', 'block_count', 'block', 'block_size', 'block_live', 'layout_count', 'layout_name', 'layout_value', 'stack', 'trace', 'input', 'option', 'action', 'reset', 'string', 'string_count', 'string_capacity', 'data']),
+    'nhlua': ([], ['consumer_callback', 'consumer_allocator', 'consumer_hook', 'consumer_warning', 'consumer_table_int', 'trace', 'clear_trace', 'option', 'stack', 'alloc', 'free', 'lua', 'lua_load', 'lua_run', 'lua_text', 'lua_integer', 'lua_type', 'lua_top', 'lua_settop', 'lua_string', 'lua_integer_push', 'lua_boolean', 'lua_table', 'lua_field', 'lua_global', 'lua_close', 'setup', 'grow', 'core', 'core_state', 'world', 'data', 'function_name', 'chains', 'snapshot', 'mutate', 'callback_pointer', 'loglua', 'userdata', 'nudfield', 'lua_boolean_value', 'lua_number', 'lua_isinteger']),
     'mkobj': ([], ['pool', 'block_count', 'block_bytes', 'block', 'block_size', 'block_live', 'block_kind', 'heap_obj', 'layout_count', 'layout_name', 'layout_value', 'stack', 'trace', 'option', 'action', 'reset', 'pointer_offset', 'string', 'string_count', 'string_capacity', 'constant', 'data']),
     'eat': ([], ['action', 'callback_identity', 'callback_set', 'cells', 'class_known', 'context', 'count', 'eaten', 'equipment', 'free_count', 'hero', 'hunger', 'layout_count', 'layout_name', 'layout_value', 'mimic', 'mimic_text', 'mon', 'mon_bit', 'moncell', 'more_pointer', 'moves', 'new_mon', 'new_obj', 'nomove_text', 'obj', 'obj_bit', 'option', 'pointer', 'property', 'reset', 'result_string', 'return', 'rng_count', 'rng_length', 'rng_pointer', 'rng_state', 'scalar', 'stack', 'table', 'text', 'tile', 'tin', 'tin_row', 'trace', 'trap', 'victual', 'wall', 'weight']),
     'objnam': ([], ['poison', 'pm', 'mon', 'pool', 'catalogue', 'layout_count', 'layout_name', 'layout_value', 'stack', 'buffer', 'obj', 'ints', 'data', 'alt', 'trace', 'result', 'return', 'option', 'seed', 'clear', 'property', 'item', 'bits', 'name', 'class', 'form', 'scalar', 'fruit', 'callback', 'reset', 'snapshot', 'invoke']),
@@ -259,6 +291,132 @@ probes = {
     'calendar': (['tm_year', 'tm_mon', 'tm_mday', 'tm_hour', 'tm_min', 'tm_sec', 'tm_wday', 'tm_yday'], ['dep_time', 'dep_localtime', 'dep_mktime', 'dep_strlen', 'dep_atoi', 'dep_strtoll', 'dep_getenv', 'dep_format', 'dep_datestr', 'dep_emscripten', 'now', 'year', 'date', 'time', 'format', 'parse', 'moon', 'friday', 'night', 'midnight', 'set_env', 'int_size', 'long_size', 'time_size', 'stack']),
     'stairs': (['sx', 'sy', 'tolev', 'up', 'isladder', 'u_traversed', 'next', 'dnum', 'dlevel', 'uz'], ['coordxy_size', 'bool_size', 'bool_signed', 'level_size', 'level_field_size', 'init', 'hero', 'add', 'head', 'free', 'at', 'find', 'find_from', 'find_dir', 'find_type_dir', 'find_special_dir', 'special', 'up', 'down', 'on', 'ladder', 'on_up', 'on_down', 'known', 'describe', 'description_buffer', 'trace']),
 }
+
+
+# Uses existing globals root/sdk/work/defines and imports json/subprocess/Path.
+# Profile mirrors each frozen component recipe. ZAP's absent forced header/-g
+# remain a recorded narrow diagnostic profile; production game flags unchanged.
+C_SHADOW_EXPORTS = {'unixmain': ['_main', '_malloc', '_free', '_probe_getenv', '_probe_env', '_probe_passwd_uid', '_probe_passwd_gid', '_probe_passwd_string', '_probe_passwd_set', '_probe_sigaction_size', '_probe_sigaction_flags', '_probe_call', '_probe_reset', '_probe_clear', '_probe_option', '_probe_buffer', '_probe_argv', '_probe_arg', '_probe_global', '_probe_layout', '_probe_read', '_probe_write', '_probe_address', '_probe_trace', '_probe_stack', '_probe_action', '_probe_actions', '_probe_handler', '_probe_function', '_probe_errno', '_probe_snapshot', '_probe_finished'], 'options': ['_malloc', '_free', '_probe_context_size', '_probe_layout_count', '_probe_layout_name', '_probe_layout_value', '_probe_function_token', '_probe_table_bytes', '_probe_catalogue', '_probe_stringbuf', '_probe_stringbuf_text', '_probe_function_count', '_probe_function_name', '_probe_call', '_probe_data', '_probe_buffer', '_probe_global', '_probe_layout', '_probe_read', '_probe_write', '_probe_address', '_probe_stack', '_probe_trace', '_probe_clear', '_probe_result', '_probe_option', '_probe_return', '_probe_reply', '_probe_menu', '_probe_input', '_probe_reset', '_probe_sizes', '_probe_snapshot'], 'botl': ['_malloc', '_free', '_probe_object', '_probe_equipment', '_probe_stack_span', '_probe_reply', '_probe_context_size', '_probe_layout_count', '_probe_layout_name', '_probe_layout_value', '_probe_stack', '_probe_trace', '_probe_snapshot', '_probe_dep_count', '_probe_dep_name', '_probe_function_name', '_probe_clear', '_probe_reset', '_probe_option', '_probe_callback', '_probe_menu', '_probe_input', '_probe_text', '_probe_property', '_probe_hero', '_probe_stat', '_probe_any', '_probe_pointer', '_probe_lastptr', '_probe_action', '_probe_startup', '_probe_public_tables', '_probe_result_text', '_probe_private_count', '_probe_private_text', '_probe_private_number', '_probe_global', '_probe_read', '_probe_write'], 'zap': ['_malloc', '_free', '_probe_level', '_probe_type_class', '_probe_option_id', '_probe_consumer', '_probe_history', '_probe_callback', '_probe_destroy', '_probe_pm', '_probe_mon', '_probe_buffer', '_probe_obj', '_probe_ints', '_probe_any', '_probe_trap', '_probe_layout_count', '_probe_layout_name', '_probe_layout_value', '_probe_stack', '_probe_trace', '_probe_result', '_probe_return', '_probe_option', '_probe_seed', '_probe_clear', '_probe_property', '_probe_item', '_probe_map', '_probe_link', '_probe_grid', '_probe_scalar', '_probe_reset', '_probe_snapshot', '_probe_invoke'], 'unixunix': ['_probe_action', '_probe_trace', '_probe_clear', '_probe_outcome', '_probe_errno', '_probe_option', '_probe_option_get', '_probe_now', '_probe_answer', '_probe_char', '_probe_file', '_probe_open', '_probe_file_count', '_probe_fd_count', '_probe_fd_open', '_probe_event_count', '_probe_handler', '_probe_done_id', '_probe_handler_raw', '_probe_signal_run', '_probe_growth', '_probe_reset', '_probe_pointer', '_probe_region_size', '_probe_global_size', '_probe_sourcebuf', '_teleport_unixunix_global', '_teleport_unixunix_read', '_teleport_unixunix_write', '_teleport_unixunix_address', '_teleport_unixunix_layout', '_teleport_unixunix_storage']}
+C_SHADOW_NAMES = set(C_SHADOW_EXPORTS)
+
+def c_shadow_flags(name):
+    flags = ['-O2', '-sMEMORY64=1', *defines,
+             '-I'+str(root/'.cache/wasm64-build/tree/include'),
+             '-I'+str(root/'.cache/ncurses-wasm64-build/include'),
+             '-I'+str(root/'nethack-c/wasm'), '-I'+str(root/'scripts'),
+             '-I'+str(work)]
+    if name in ['unixunix','unixmain']:
+        flags += ['-g']
+    if name != 'zap':
+        flags += ['-include', str(root/'nethack-c/wasm/native-terminal.h')]
+    if name in ['options','botl']:
+        flags += ['-Dfree=teleport_probe_free',
+                  '-ffile-prefix-map='+str(root/'.cache/wasm64-build/tree/src')+'/=',
+                  '-ffile-prefix-map='+str(root/'scripts/../.cache/wasm64-build/tree/src')+'/=']
+    elif name == 'unixunix':
+        # Parent binds the fixture's one absolute original-source include to root.
+        flags += ['-fmacro-prefix-map='+str(root/'.cache/wasm64-build/tree/sys/unix')+'/=../sys/unix/']
+    elif name == 'unixmain':
+        flags += ['-fmacro-prefix-map='+str(root/'scripts/../.cache/wasm64-build/tree/sys/unix/unixmain.c')+'=../sys/unix/unixmain.c']
+    elif name == 'zap':
+        flags += ['-ffile-prefix-map='+str(root/'scripts/../nethack-c/upstream/src')+'/=']
+    return flags
+
+def c_shadow_compile(source, output, flags):
+    # Separate objects/no LTO; all paths are shadow-rooted inputs or fresh work.
+    assert not any(str(x).startswith('-flto') for x in flags)
+    subprocess.run(list(map(str,[sdk/'upstream/emscripten/emcc', *flags,
+                                '-c',source,'-o',output])),check=True)
+    return output
+
+def build_c_shadow_probes(name):
+    flags=c_shadow_flags(name)
+    fixture=root/('scripts/tu-'+name+'-probe.c')
+    if name=='unixunix':
+        # A missing/unbound include must fail before compiling any live source.
+        include='#include "'+str(root/'.cache/wasm64-build/tree/sys/unix/unixunix.c')+'"'
+        assert include in fixture.read_text(), 'Bind UNIXUNIX fixture to exact absolute shadowRoot first'
+        assert '@SHADOW_ROOT@' not in fixture.read_text()
+    dependencies={
+        'unixunix':[], 'unixmain':['hacklib','strutil'],
+        'options':['alloc','hacklib','strutil','objects','monst','role','drawing','posixregex'],
+        'botl':['alloc','hacklib','strutil','monst','objects','role'],
+        'zap':['alloc','hacklib','strutil','objects','monst','drawing'],
+    }[name]
+    objects=[]
+    for dependency in dependencies:
+        relative='sys/share/posixregex.c' if dependency=='posixregex' else 'src/'+dependency+'.c'
+        objects.append(c_shadow_compile(root/'.cache/wasm64-build/tree'/relative,
+            work/(name+'-dependency-'+dependency+'.o'),flags))
+    if name=='unixmain':
+        objects.append(c_shadow_compile(root/'nethack-c/wasm/tu-fragments/unixmain-consumer.c',
+                                       work/'unixmain-probe-consumer.o',flags))
+    if name=='zap':
+        objects.append(c_shadow_compile(root/'scripts/tu-zap-consumer.c',
+                                       work/'zap-probe-consumer.o',flags))
+    if name in ['botl','zap']:
+        support=work/(name+'-owned-support.c')
+        prefix='#include "tu-source-locations.h"\n' if name=='zap' else ''
+        support.write_text(prefix+'#include '+json.dumps(str(root/('nethack-c/wasm/tu-'+name+'-support.inc')))+'\n')
+        objects.append(c_shadow_compile(support,work/(name+'-owned-support.o'),flags))
+    # OPTIONS and UNIXMAIN fixtures include their own support exactly once.
+    # UNIXUNIX support is separate once; none use generic tu-support.c.
+    if name=='unixunix':
+        objects.append(c_shadow_compile(root/'nethack-c/wasm/tu-fragments/unixunix-support.c',
+                                       work/'unixunix-owned-support.o',flags))
+    for mode in ['reference','hybrid']:
+        args=[sdk/'upstream/emscripten/emcc',*flags,fixture,*objects,
+              '-sMODULARIZE=1','-sEXPORT_ES6=1','-sENVIRONMENT=node',
+              '-sALLOW_MEMORY_GROWTH=1',
+              '-sEXPORTED_FUNCTIONS='+json.dumps(C_SHADOW_EXPORTS[name])]
+        runtime=['HEAPU8']
+        if name=='unixunix':
+            args += ['-sTABLE_BASE=2','-sSTACK_SIZE=4194304','--no-entry']
+            runtime += ['stringToUTF8','lengthBytesUTF8','stackSave','stackRestore','stackAlloc','UTF8ToString']
+            args += ['-DREFERENCE_UNIXUNIX=1' if mode=='reference' else '-DHYBRID_UNIXUNIX=1']
+        elif name=='unixmain':
+            args += ['-sTABLE_BASE=2','-sINVOKE_RUN=0','-sEXIT_RUNTIME=1',
+                     '-sINITIAL_MEMORY=4194304','-sSTACK_SIZE=1048576',
+                     '--post-js',root/'nethack-c/wasm/runtime.js']
+            runtime += ['FS','ENV','callMain','stackSave','stackRestore']
+            if mode=='reference':args += ['-DTELEPORT_REFERENCE_TU']
+            else:args += [root/'nethack-c/wasm/tu-fragments/unixmain-entry.c']
+        else:
+            args += ['--no-entry']
+            if mode=='reference':
+                args += ['-DTELEPORT_REFERENCE_TU']
+                if name=='options':args += ['-DTELEPORT_REFERENCE_OPTIONS']
+                if name=='zap':args += ['-DTELEPORT_REFERENCE_ZAP']
+            if name=='options':
+                args += ['--js-library',root/'nethack-c/wasm/native-libc-library.js',
+                         '-sSTACK_SIZE=1048576','-Wl,--error-limit=0']
+                runtime += ['FS','stackSave','stackRestore']
+            if name=='botl' and mode=='hybrid':
+                storage=c_shadow_compile(root/'nethack-c/wasm/tu-botl-storage.c',
+                                          work/'botl-probe-storage.o',flags)
+                args += [storage]
+            if name=='zap':
+                storage_flags=flags+(['-DTELEPORT_REFERENCE_ZAP']if mode=='reference'else[])
+                args += [c_shadow_compile(root/'nethack-c/wasm/tu-zap-storage.c',
+                                          work/('zap-probe-storage-'+mode+'.o'),storage_flags)]
+        if mode=='hybrid':
+            args += ['--js-library',root/('nethack-c/wasm/tu-libraries/'+name+'.js')]
+            startup={'botl':'$teleportBotlInit','zap':'$teleportZapInit'}.get(name)
+            if startup:args += ['-sDEFAULT_LIBRARY_FUNCS_TO_INCLUDE='+json.dumps([startup])]
+        args += ['-sEXPORTED_RUNTIME_METHODS='+json.dumps(runtime),
+                 '-o',work/(name+'-'+mode+'.mjs')]
+        subprocess.run(list(map(str,args)),check=True)
+
+probes.update({'hack': ([], ['option_name', 'reset', 'option', 'pointer', 'canonical', 'trace', 'stack', 'error', 'layout_count', 'layout_name', 'layout_value', 'pointer_equal', 'test_constant', 'callback_pointer', 'invoke_comparator', 'foreign_callback', 'set_afternmv', 'place_object', 'room']), 'uhitm': ([], ['layout_count', 'layout_name', 'layout_value', 'stack', 'trace', 'buffer', 'clear', 'option', 'seed', 'reset', 'object', 'global', 'input', 'action', 'snapshot', 'pointer', 'property', 'scene', 'callback_identity', 'callback_action', 'retained', 'record_prepare', 'record', 'record_pointer', 'record_write']), 'mon': ([], ['aux', 'bit', 'callback', 'clear_trace', 'count', 'extra', 'extra_pointer', 'format_pointer', 'frees', 'gas_glyph', 'grid_mon', 'grid_obj', 'iterator', 'layout_count', 'layout_name', 'layout_value', 'native_return', 'new_mon', 'object', 'option', 'pointer', 'pointer_equal', 'put_object', 'reset', 'return', 'roll', 'run', 'stack', 'tile', 'trace', 'unsigned64']), 'pickup': ([], ['action', 'trace', 'clear', 'draws', 'error', 'errno', 'seed', 'option', 'input', 'answer', 'choice', 'pointer', 'grid', 'region_size', 'count', 'alloc_pointer', 'alloc_size', 'alloc_kind', 'alloc_live', 'growth', 'event_count', 'event_kind', 'newobj', 'floor', 'inventory', 'reset', 'global_size', 'constant', 'identity', 'queue_count', 'queue_identity', 'queue_run', 'literal', 'prefix', 'extra_offset', 'borrow_count', 'borrow_pointer', 'borrow_kind', 'choice2', 'choicewide']), 'shk': ([], ['call', 'reset', 'clear', 'option', 'buffer', 'record', 'trace', 'stack', 'snapshot', 'global', 'layout', 'address', 'write', 'read', 'chain', 'bill', 'shops', 'property', 'function', 'valid', 'invoke']), 'sp_lev': ([], ['lua_prepare', 'sret_sequence', 'invoke_lua', 'selection', 'lua_text', 'lua_int', 'lua_top', 'lua_type', 'lua', 'pool', 'block_count', 'block', 'block_size', 'block_live', 'block_kind', 'selection_map_offset', 'layout_count', 'layout_name', 'layout_value', 'stack', 'trace', 'option', 'action', 'reset', 'string', 'string_count', 'string_capacity', 'data', 'function']), 'trap': ([], ['trace', 'clear', 'option', 'stack', 'buffer', 'object', 'mon_pointer', 'trap', 'trap_live', 'hero', 'level', 'coord', 'global', 'seed', 'catalogue', 'copy_monster', 'setup', 'catalogue_witness', 'layout_count', 'layout_name', 'layout_value', 'data', 'callback', 'trap_consumer', 'trap_obj_consumer', 'enum', 'unsigned_product', 'compound_narrow', 'typed_field', 'typed_get', 'stride', 'native_constant']), 'termcap': ([], ['canonical', 'reset', 'clear_trace', 'option', 'override', 'pointer', 'trace', 'error', 'stack', 'last_output_pointer', 'layout_count', 'layout_name', 'layout_value', 'callback_pointer', 'invoke_callback', 'expected_callback', 'constant']), 'topl': ([], ['layout_count', 'layout_name', 'layout_value', 'stack', 'trace', 'result', 'reset', 'clear', 'input', 'option', 'scene', 'topline', 'history', 'pointer', 'window_identity', 'snapshot', 'action', 'view_write', 'mutate_retained', 'callback_identity', 'callback_action']), 'wintty': ([], ['name', 'menu_item', 'window_set', 'data', 'status_value', 'glyph', 'graphics', 'release', 'startup_catalogue', 'live_catalogue', 'mutate_catalogue', 'more', 'callback_kind', 'layout_count', 'layout_name', 'layout_value', 'stack', 'trace', 'error', 'return', 'buffer', 'ints', 'window', 'display', 'storage', 'shadow', 'input', 'option', 'clear', 'signal', 'pointer_kind', 'snapshot', 'set', 'reset', 'invoke', 'alloc_count', 'alloc_base', 'alloc_size', 'alloc_live'])})
+
+
+probes.update({name:([],[symbol[len('_probe_'):] for symbol in symbols
+                       if symbol.startswith('_probe_') and symbol!='_probe_context_size'])
+               for name,symbols in C_SHADOW_EXPORTS.items()})
+
+b_spec=importlib_util.spec_from_file_location('tu137_group_b',root/'nethack-c/wasm/tu-fragments/tu137-group-b/b_probe_support.py')
+b_support=importlib_util.module_from_spec(b_spec);b_spec.loader.exec_module(b_support)
+
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--native-only', action='store_true', help='Build full native APIs for the existing tests')
 parser.add_argument('--emscripten-only', action='store_true', help='First-pass C/JS probes; defer native oracle builds')
@@ -272,19 +430,122 @@ for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
     name = port['name']
     if requested and name not in requested:
         continue
+    if name == 'nhlua' and not options.emscripten_only:
+        raise SystemExit('NHLUA native-host oracle is pending; use --emscripten-only for its configured first pass')
+
+
+
+    if name in ['hack','uhitm','mon','pickup','shk']:
+        if not options.emscripten_only:
+            raise SystemExit(name.upper()+' native-host fixture is pending; use --emscripten-only only for configured-C diagnostics')
+        group_a_spec=importlib_util.spec_from_file_location('tu137_group_a_builder',root/'scripts/build-tu137-group-a.py')
+        group_a=importlib_util.module_from_spec(group_a_spec)
+        group_a_spec.loader.exec_module(group_a)
+        assert group_a.build_group_a(root,sdk,work,name)
+        continue
+
+
+
+
+
+
+
+    if name in ['sp_lev','trap','termcap','topl','wintty']:
+        if not options.emscripten_only:
+            raise SystemExit(name+' native-host oracle is absent; use --emscripten-only for diagnostic first pass')
+        b_support.materialize_fixture_inputs(root,name)
+        records=b_support.commands_for(root,name,sdk=sdk)
+        for record in records.get('dependencyCommands',[]):
+            subprocess.run(record['command'],cwd=record['cwd'],check=True)
+        for mode in ['reference','hybrid']:
+            record=records[mode];command=record['command']
+            expected=b_support.export_arg(name,mode)
+            assert [arg for arg in command if arg.startswith('-sEXPORTED_FUNCTIONS=')]==[expected]
+            if name=='wintty':b_support.validate_wintty_choice(root,command)
+            before=b_support.capture_topl_inputs_before(root,command,mode) if name=='topl' else None
+            subprocess.run(command,cwd=record['cwd'],check=True)
+            if before is not None:b_support.finish_topl_inputs(root,before)
+        if name in ['trap','topl','wintty']:b_support.write_runner_aliases(root,[name])
+        continue
+
+    # These full command overrides already contain EXACT mode-specific fixture/support/
+    # storage/library/startup/export requirements. Do not append common tu-support.c,
+    # original algorithm source, generic native-libc, guessed context/malloc/free or
+    # another JS library after this branch. Parent captures fresh command/binary/input/
+    # import/storage/startup provenance around the coordinated build.
+    # Default TERMCAP only here; explicit variants are commands_for(...,variant=...)
+    # with matching export_arg(...,variant=...). Their variant flags/runner switches
+    # MUST match. Optional TOPL production record is retained but not built by this loop.
+
+
+
+    if name in C_SHADOW_NAMES:
+        if not options.emscripten_only or options.native_only or options.supplementary_only:
+            raise SystemExit(name+': authoritative native reference fixture is absent; use explicit --emscripten-only diagnostic')
+        build_c_shadow_probes(name)
+        if name=='unixunix':
+            subprocess.run([*node_command,str(root/'scripts/check-unixunix-imports.mjs')],check=True,cwd=root,
+                           env={**os.environ,'UNIXUNIX_PROBE_DIR':str(work)})
+        continue
+    # This explicit route owns both complete modes: generic support/auto source
+    # append/automatic malloc/context exports must not also run for these five.
+
     fields, functions = probes[name]
     # CFGFILES observes actual frees through --wrap=free and its own probe API;
     # its tested fixture does not expose direct malloc/free entrypoints.
-    exports = (['_malloc'] if name == 'mkmaze' else [] if name in ['mkobj', 'cfgfiles', 'detect', 'mklev', 'pray', 'dothrow', 'muse', 'dungeon'] else ['_malloc', '_free']) + ([] if port.get('probeContext') is False else ['_probe_context_size'])
+    exports = (['_malloc'] if name == 'mkmaze' else [] if name in ['mkobj', 'cfgfiles', 'detect', 'mklev', 'pray', 'dothrow', 'muse', 'dungeon', 'display', 'cmd'] else ['_malloc', '_free']) + ([] if port.get('probeContext') is False else ['_probe_context_size'])
     exports += port.get('probeExtraExports', [])
     exports += ['_probe_' + function for function in functions]
     exports += ['_probe_offset_' + field for field in fields]
     for mode in ['reference', 'hybrid']:
-        mode_exports = [entry for entry in exports if not (name == 'mhitu' and mode == 'hybrid' and entry == '_probe_static')]
+        mode_exports = [entry for entry in exports if not (name == 'mhitu' and mode == 'hybrid' and entry == '_probe_static') and not (name == 'nhlua' and mode == 'reference' and entry.startswith('_teleport_nhlua_'))]
         args = base + ['-sEXPORTED_FUNCTIONS=' + ','.join(mode_exports), root / ('scripts/tu-' + name + '-probe.c')]
+        if name in ['files','invent','display']:
+            owned_flags=['-O2','-g','-sMEMORY64=1',*defines,'-I'+str(include),
+                         '-I'+str(root/'.cache/ncurses-wasm64-build/include'),'-include',root/'nethack-c/wasm/native-terminal.h']
+            args += ['-g','-include',root/'nethack-c/wasm/native-terminal.h','-I'+str(root/'.cache/ncurses-wasm64-build/include')]
+            if name in ['files','invent']:
+                dependencies=['hacklib','strutil']+(['objects','monst','drawing']if name=='invent'else[])
+                for dependency in dependencies:
+                    obj=work/(name+'-dependency-'+dependency+'.o')
+                    subprocess.run(list(map(str,[sdk/'upstream/emscripten/emcc',*owned_flags,'-c',root/('.cache/wasm64-build/tree/src/'+dependency+'.c'),'-o',obj])),check=True)
+                    args += [obj]
+                args += ['-sSTACK_SIZE=1048576','-sEXPORTED_RUNTIME_METHODS=HEAPU8,FS,stackSave,stackRestore',
+                         '-fmacro-prefix-map='+str(root/('scripts/../.cache/wasm64-build/tree/src/'+name+'.c'))+'='+name+'.c']
+                if name=='files':args += ['-Wl,--wrap=fcntl','-Wl,--wrap=sscanf']
+                else:
+                    obj=work/'invent-probe-consumer.o'
+                    subprocess.run(list(map(str,[sdk/'upstream/emscripten/emcc',*owned_flags,'-c',root/'nethack-c/wasm/tu-fragments/invent-probe-consumer.c','-o',obj])),check=True)
+                    args += [obj]
+            else:
+                # Separate non-LTO storage and optimized extern-only consumer.
+                args += ['-Wl,--wrap=malloc','-Wl,--wrap=free','-sSTACK_SIZE=4194304',
+                         '-fmacro-prefix-map='+str(root/'.cache/wasm64-build/tree/src')+'/=',
+                         '-sEXPORTED_RUNTIME_METHODS=HEAPU8,stringToUTF8,lengthBytesUTF8,stackSave,stackRestore,stackAlloc,UTF8ToString']
+                for part,source in [('support','nethack-c/wasm/tu-fragments/display-support.c'),('consumer','scripts/tu-display-early-reader.c')]+([('storage','nethack-c/wasm/tu-fragments/display-storage.c')]if mode=='hybrid'else[]):
+                    obj=work/('display-'+mode+'-'+part+'.o')
+                    subprocess.run(list(map(str,[sdk/'upstream/emscripten/emcc',*owned_flags,'-c',root/source,'-o',obj])),check=True)
+                    args += [obj]
+                args += ['-DHYBRID_DISPLAY=1']if mode=='hybrid'else['-DREFERENCE_DISPLAY=1']
+        if name=='cmd':
+            cmd_flags=['-O2','-g','-sMEMORY64=1',*defines,'-I'+str(include),'-I'+str(root/'scripts'),'-I'+str(root/'.cache/ncurses-wasm64-build/include'),'-include',root/'nethack-c/wasm/native-terminal.h']
+            args += ['-g','-I'+str(root/'scripts'),'-I'+str(root/'.cache/ncurses-wasm64-build/include'),'-include',root/'nethack-c/wasm/native-terminal.h',
+                     '-fmacro-prefix-map='+str(root/'scripts')+'/../.cache/wasm64-build/tree/src/=','-Wl,--wrap=free',
+                     '-sEXPORTED_RUNTIME_METHODS=HEAPU8,stringToUTF8,lengthBytesUTF8,stackAlloc,stackSave,stackRestore']
+            for part,source in [('foreign','nethack-c/wasm/tu-fragments/cmd-fixture-foreign.c')]+([('storage','nethack-c/wasm/tu-fragments/cmd-public-storage.c')]if mode=='hybrid'else[]):
+                obj=work/('cmd-'+mode+'-'+part+'.o')
+                subprocess.run(list(map(str,[sdk/'upstream/emscripten/emcc',*cmd_flags,'-c',root/source,'-o',obj])),check=True)
+                args += [obj]
+            if mode=='hybrid':
+                args += ['-DHYBRID_CMD=1']
+                cmd_fixture_library=work/'cmd-fixture-library.js'
+                cmd_lib=(root/port['library']).read_text()
+                assert cmd_lib.count('free:(a0)=>_free(pointer(a0))')==1
+                cmd_lib=cmd_lib.replace('free:(a0)=>_free(pointer(a0))','free:(a0)=>___wrap_free(pointer(a0))').replace('"alloc", "free"','"alloc", "free", "__wrap_free"')
+                cmd_fixture_library.write_text(cmd_lib)
         if name in ['glyphs', 'allmain', 'report', 'pline', 'u_init']:
             args += ['-include', root / 'nethack-c/wasm/native-terminal.h']
-        if mode=='hybrid' and name not in ['do_wear', 'do', 'spell', 'detect', 'teleport', 'mklev', 'polyself', 'wizcmds', 'end', 'dig', 'dokick', 'mkmaze', 'vision', 'restore', 'nhlobj', 'do_name', 'windows', 'cfgfiles', 'topten', 'dogmove', 'glyphs', 'engrave', 'role', 'mthrowu', 'mhitm', 'getpos', 'save', 'allmain', 'report', 'pline', 'u_init', 'monmove', 'timeout', 'potion', 'pray', 'dothrow', 'pager', 'muse', 'dungeon', 'makemon', 'mhitu', 'artifact', 'decl', 'insight', 'read', 'apply', 'eat', 'objnam', 'mkobj']:
+        if mode=='hybrid' and name not in ['nhlua', 'do_wear', 'do', 'spell', 'detect', 'teleport', 'mklev', 'polyself', 'wizcmds', 'end', 'dig', 'dokick', 'mkmaze', 'vision', 'restore', 'nhlobj', 'do_name', 'windows', 'cfgfiles', 'topten', 'dogmove', 'glyphs', 'engrave', 'role', 'mthrowu', 'mhitm', 'getpos', 'save', 'allmain', 'report', 'pline', 'u_init', 'monmove', 'timeout', 'potion', 'pray', 'dothrow', 'pager', 'muse', 'dungeon', 'makemon', 'mhitu', 'artifact', 'decl', 'insight', 'read', 'apply', 'eat', 'objnam', 'mkobj', 'files', 'display', 'invent', 'cmd']:
             args+=['-include',root/'nethack-c/wasm/native-terminal.h','--js-library',root/'nethack-c/wasm/native-libc-library.js']
         if name in ['weapon', 'questpgr', 'symbols']:
             args += ['-I' + str(root / '.cache/ncurses-wasm64-build/include')]
@@ -338,6 +599,20 @@ for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
                      '-ffile-prefix-map='+str(root/'.cache/wasm64-build/tree/src')+'/=',
                      root/'.cache/wasm64-build/tree/src/objects.c',
                      root/'.cache/wasm64-build/tree/src/monst.c', sort_dependency]
+        elif name == 'nhlua':
+            # Frozen original-C / JS-source fixture and separate no-LTO callback consumer.
+            args += ['-g', '-fno-lto', '-sSUPPORT_LONGJMP=emscripten',
+                     '-sEXPORTED_RUNTIME_METHODS=HEAPU8,FS',
+                     '-include', root/'nethack-c/wasm/native-terminal.h',
+                     '-I'+str(root/'scripts'),
+                     '-I'+str(root/'nethack-c/wasm/tu-fragments'),
+                     '-I'+str(root/'.cache/ncurses-wasm64-build/include'),
+                     '-I'+str(root/'.cache/wasm64-build/tree/lib/lua-5.4.8/src'),
+                     '-fmacro-prefix-map='+str(root/'scripts')+'/../.cache/wasm64-build/tree/src/=',
+                     root/'scripts/tu-nhlua-probe-consumer.c',
+                     root/'.cache/wasm64-build/liblua-wasm64.a',
+                     '--js-library', root/'nethack-c/wasm/tu-fragments/nhlua-probe-library.js']
+            if mode == 'hybrid': args += ['-DHYBRID_NHLUA=1']
         elif name == 'mhitu':
             args += ['-I'+str(root/'scripts'), '-I'+str(root/'.cache/ncurses-wasm64-build/include'),
                      '-fmacro-prefix-map='+str(root/'scripts')+'/../.cache/wasm64-build/tree/src/=',
@@ -350,8 +625,8 @@ for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
             if mode == 'hybrid': args += ['-DHYBRID_ARTIFACT=1']
         elif name == 'decl':
             # Separate no-LTO consumer/storage objects are part of the contract.
-            defines = json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())
-            compile_flags = ['-O2','-fno-lto','-sMEMORY64=1', *['-D'+x for x in defines],
+            decl_defines = json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())
+            compile_flags = ['-O2','-fno-lto','-sMEMORY64=1', *['-D'+x for x in decl_defines],
                 '-I'+str(root/'.cache/wasm64-build/tree/include'),
                 '-I'+str(root/'.cache/ncurses-wasm64-build/include'), '-I'+str(root/'scripts'),
                 '-include',str(root/'nethack-c/wasm/native-terminal.h'),
@@ -755,13 +1030,13 @@ for port in json.loads((root / 'nethack-c/wasm/tu-ports.json').read_text()):
                 args += ['-DTELEPORT_REFERENCE_DRAWING']
             if name == 'posixregex':
                 args += ['-DTELEPORT_REFERENCE_POSIXREGEX']
-            if name in ['do_wear', 'do', 'spell', 'detect', 'teleport', 'mklev', 'polyself', 'wizcmds', 'end', 'dig', 'dokick', 'mkmaze', 'vision', 'restore', 'nhlobj', 'do_name', 'windows', 'cfgfiles', 'topten', 'dogmove', 'glyphs', 'engrave', 'role', 'mthrowu', 'mhitm', 'getpos', 'allmain', 'save', 'sounds', 'vault', 'u_init', 'weapon', 'region', 'dog', 'attrib', 'pline', 'mail', 'questpgr', 'symbols', 'bones', 'explode', 'report', 'earlyarg', 'mkroom', 'sfstruct', 'rect', 'track', 'posixregex', 'rnd', 'unixtty', 'extralev', 'mplayer', 'exper', 'mkmap', 'getline', 'write', 'mdlib', 'quest', 'minion', 'iactions', 'selvar', 'steal', 'sit', 'fountain', 'shknam', 'rumors', 'music', 'version', 'coloratt', 'priest', 'light', 'lock', 'steed', 'wizard', 'worm', 'o_init', 'ball', 'mcastu', 'dbridge', 'mondata', 'hacklib', 'worn', 'wield', 'monmove', 'timeout', 'potion', 'pray', 'dothrow', 'pager', 'muse', 'dungeon', 'makemon', 'mhitu', 'artifact', 'decl', 'insight', 'read', 'apply', 'eat', 'objnam', 'mkobj']:
+            if name in ['nhlua', 'do_wear', 'do', 'spell', 'detect', 'teleport', 'mklev', 'polyself', 'wizcmds', 'end', 'dig', 'dokick', 'mkmaze', 'vision', 'restore', 'nhlobj', 'do_name', 'windows', 'cfgfiles', 'topten', 'dogmove', 'glyphs', 'engrave', 'role', 'mthrowu', 'mhitm', 'getpos', 'allmain', 'save', 'sounds', 'vault', 'u_init', 'weapon', 'region', 'dog', 'attrib', 'pline', 'mail', 'questpgr', 'symbols', 'bones', 'explode', 'report', 'earlyarg', 'mkroom', 'sfstruct', 'rect', 'track', 'posixregex', 'rnd', 'unixtty', 'extralev', 'mplayer', 'exper', 'mkmap', 'getline', 'write', 'mdlib', 'quest', 'minion', 'iactions', 'selvar', 'steal', 'sit', 'fountain', 'shknam', 'rumors', 'music', 'version', 'coloratt', 'priest', 'light', 'lock', 'steed', 'wizard', 'worm', 'o_init', 'ball', 'mcastu', 'dbridge', 'mondata', 'hacklib', 'worn', 'wield', 'monmove', 'timeout', 'potion', 'pray', 'dothrow', 'pager', 'muse', 'dungeon', 'makemon', 'mhitu', 'artifact', 'decl', 'insight', 'read', 'apply', 'eat', 'objnam', 'mkobj', 'files', 'display', 'invent', 'cmd']:
                 args += ['-DTELEPORT_REFERENCE_TU']
             else:
                 source_tree = root / ('.cache/wasm64-build/tree' if port.get('reference') == 'prepared' else 'nethack-c/upstream')
                 args += [source_tree / port['source']]
         else:
-            args += ['--js-library', fixture_library if name=='mkobj' else root / port['library']]
+            args += ['--js-library', cmd_fixture_library if name=='cmd' else (fixture_library if name=='mkobj' else root / port['library'])]
             if name == 'o_init':
                 native_sort = work / 'native-sort-hacklib.c'
                 native_sort.write_text('#define qsort teleport_native_c_qsort\n#include ' + json.dumps(str(root / '.cache/wasm64-build/tree/src/hacklib.c')) + '\n')

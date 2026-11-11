@@ -15,6 +15,18 @@
 #include <setjmp.h>
 #include <emscripten/stack.h>
 #include <emscripten/heap.h>
+
+#ifdef TERMCAP_UNWRAPPED
+#define __real_getenv getenv
+#define __real_putchar putchar
+#define __real_fflush fflush
+#define __real_free free
+#define __real_tgetent tgetent
+#define __real_tgetnum tgetnum
+#define __real_tgetflag tgetflag
+#define __real_tgetstr tgetstr
+#define __real_tputs tputs
+#endif
 extern boolean HE_resets_AS;
 extern void (*decgraphics_mode_callback)(void);
 extern void (*utf8graphics_mode_callback)(void);
@@ -32,7 +44,7 @@ __typeof__(iflags) iflags;
 static struct DisplayDesc display;
 static int ints[8],options[16],error_code,tracepos,allocated,reentered;
 static char inputs[4][8192],tracebuf[1048576];
-static uintptr_t last_output_pointer;
+static uintptr_t last_output_pointer,last_area_pointer;
 static jmp_buf escapes[16];static int escape_depth;static void*growth;
 static struct {uintptr_t pointer;size_t bytes;int live;} allocations[4096];
 static struct {int kind,key,value;char text[512];} overrides[128];static int override_count;
@@ -56,7 +68,7 @@ int __wrap_tgetnum(const char*id){int i=override(1,id),v=i>=0?overrides[i].value
 int __real_tgetflag(const char*);
 int __wrap_tgetflag(const char*id){int i=override(2,id),v=i>=0?overrides[i].value:__real_tgetflag(id);append("tgetflag:%s:%d;",id,v);return v;}
 char*__real_tgetstr(const char*,char**);
-char*__wrap_tgetstr(const char*id,char**area){int i=override(0,id);char*v;if(i<0)v=__real_tgetstr(id,area);else if(!overrides[i].value)v=0;else if(area&&*area){v=*area;strcpy(v,overrides[i].text);*area+=strlen(v)+1;}else v=overrides[i].text;append("tgetstr:%s:%d:",id,area!=0);hex(v);append(";");return v;}
+char*__wrap_tgetstr(const char*id,char**area){int same=!area||!last_area_pointer||(uintptr_t)area==last_area_pointer;if(area)last_area_pointer=(uintptr_t)area;int i=override(0,id);char*v;if(i<0)v=__real_tgetstr(id,area);else if(!overrides[i].value)v=0;else if(area&&*area){v=*area;strcpy(v,overrides[i].text);*area+=strlen(v)+1;}else v=overrides[i].text;append("tgetstr:%s:%d:%d:",id,area!=0,same);hex(v);append(";");return v;}
 int __real_tputs(const char*,int,int(*)(int));
 int __wrap_tputs(const char*value,int affected,int(*callback)(int)){last_output_pointer=(uintptr_t)value;append("tputs:%d:%d:",affected,callback==xputc);hex(value);append(";");return __real_tputs(value,affected,callback);}
 long*alloc(unsigned int bytes){void*p=malloc(bytes?bytes:1);if(!p||allocated>=4096)abort();allocations[allocated].pointer=(uintptr_t)p;allocations[allocated].bytes=bytes;allocations[allocated].live=1;allocated++;append("alloc:%u:%d;",bytes,allocated);return p;}
@@ -169,8 +181,8 @@ extern void term_end_extracolor(void);
 #endif
 static const size_t global_sizes[]={sizeof(signed char[512]),sizeof(struct flag),sizeof(signed char),sizeof(void *),sizeof(void *),sizeof(struct instance_globals_t),sizeof(struct tc_lcl_data),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(int),sizeof(signed char[1]),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(signed char),sizeof(void *),sizeof(signed char[16]),sizeof(signed char[16]),sizeof(struct instance_globals_s),sizeof(struct instance_globals_c),sizeof(signed char),sizeof(void *),sizeof(void *),sizeof(void *),sizeof(int),sizeof(void *),sizeof(int),sizeof(int),sizeof(nomux_cell[24][80]),sizeof(unsigned char),sizeof(unsigned char),sizeof(unsigned char),sizeof(struct instance_flags),sizeof(signed char[6144]),sizeof(int),sizeof(int),sizeof(int),sizeof(short),sizeof(short[15]),sizeof(void *[16]),sizeof(signed char[1]),sizeof(TELEPORT_TERMCAP_TI_MAP_TYPE[6]),sizeof(signed char[1])};
 
-uint64_t probe_canonical(uint64_t p){if(!p)return 0;for(int i=0;i<sizeof global_sizes/sizeof global_sizes[0];i++){uintptr_t start=(uintptr_t)teleport_termcap_global(i);if(p>=start&&p<start+global_sizes[i])return(uint64_t)(i+1)*100000+(p-start);}if(p==(uintptr_t)stdout)return 90000000;for(int i=0;i<4;i++)if(p>=(uintptr_t)inputs[i]&&p<(uintptr_t)(inputs[i]+sizeof inputs[i]))return 80000000+i*10000+(p-(uintptr_t)inputs[i]);if(p>=(uintptr_t)&display&&p<(uintptr_t)(&display+1))return 81000000+p-(uintptr_t)&display;for(int i=allocated-1;i>=0;i--)if(allocations[i].live&&p>=allocations[i].pointer&&p<allocations[i].pointer+allocations[i].bytes)return 100000000+(uint64_t)(i+1)*100000+p-allocations[i].pointer;return UINT64_MAX;}
-void probe_reset(void){tracepos=0;tracebuf[0]=0;error_code=0;reentered=0;memset(options,0,sizeof options);memset(ints,0x56,sizeof ints);override_count=0;flags.null=flags.silent=0;gt.tc_gbl_data.tc_CO=80;gt.tc_gbl_data.tc_LI=24;gc.currentgraphics=0;gc.Cmd.num_pad=0;gs.symset[0].handling=H_UNK;gs.symset[1].handling=H_UNK;iflags.wc2_darkgray=0;iflags.debug_fuzzer=0;HE_resets_AS=0;ttyDisplay=&display;display.curx=0;display.cury=0;BASE_WINDOW=1;}
+uint64_t probe_canonical(uint64_t p){if(!p)return 0;for(int i=0;i<sizeof global_sizes/sizeof global_sizes[0];i++){uintptr_t start=(uintptr_t)teleport_termcap_global(i);if(p>=start&&p<start+global_sizes[i])return(uint64_t)(i+1)*100000+(p-start);}if(p==(uintptr_t)stdout)return 90000000;for(int i=0;i<4;i++)if(p>=(uintptr_t)inputs[i]&&p<(uintptr_t)(inputs[i]+sizeof inputs[i]))return 80000000+i*10000+(p-(uintptr_t)inputs[i]);if(p>=(uintptr_t)&display&&p<(uintptr_t)(&display+1))return 81000000+p-(uintptr_t)&display;for(int i=allocated-1;i>=0;i--)if(allocations[i].live&&p>=allocations[i].pointer&&p<allocations[i].pointer+allocations[i].bytes)return 100000000+(uint64_t)(i+1)*100000+p-allocations[i].pointer;for(int i=allocated-1;i>=0;i--)if(!allocations[i].live&&p>=allocations[i].pointer&&p<allocations[i].pointer+allocations[i].bytes)return(UINT64_C(1)<<63)+100000000+(uint64_t)(i+1)*100000+p-allocations[i].pointer;return UINT64_MAX;}
+void probe_reset(void){tracepos=0;tracebuf[0]=0;error_code=0;reentered=0;last_area_pointer=0;memset(options,0,sizeof options);memset(ints,0x56,sizeof ints);override_count=0;flags.null=flags.silent=0;gt.tc_gbl_data.tc_CO=80;gt.tc_gbl_data.tc_LI=24;gc.currentgraphics=0;gc.Cmd.num_pad=0;gs.symset[0].handling=H_UNK;gs.symset[1].handling=H_UNK;iflags.wc2_darkgray=0;iflags.debug_fuzzer=0;HE_resets_AS=0;ttyDisplay=&display;display.curx=0;display.cury=0;BASE_WINDOW=1;}
 void probe_clear_trace(void){tracepos=0;tracebuf[0]=0;error_code=0;reentered=0;}
 void probe_option(int index,int value){if(index<0||index>=16)abort();options[index]=value;}
 void probe_override(int kind,int id,int value){if(override_count>=128)abort();int i=override_count++;overrides[i].kind=kind;overrides[i].key=id;overrides[i].value=value;if(strlen(inputs[1])>=sizeof overrides[i].text)abort();strcpy(overrides[i].text,inputs[1]);}
@@ -183,7 +195,8 @@ int probe_layout_count(void){return sizeof termcap_layout/sizeof termcap_layout[
 const char*probe_layout_name(int i){return termcap_layout[i].name;}
 uint64_t probe_layout_value(int i){return termcap_layout[i].value;}
 uintptr_t probe_callback_pointer(int i){return i==0?(uintptr_t)xputc:i==1?(uintptr_t)decgraphics_mode_callback:(uintptr_t)utf8graphics_mode_callback;}
-int probe_invoke_callback(int i,int c){if(i==0)return xputc(c);void(*fn)(void)=i==1?decgraphics_mode_callback:utf8graphics_mode_callback;if(!fn)abort();fn();return 0;}
+int probe_invoke_callback(int i,int c){if(i==0){int(*volatile fn)(int)=xputc;return fn(c);}void(*fn)(void)=i==1?decgraphics_mode_callback:utf8graphics_mode_callback;if(!fn)abort();fn();return 0;}
+uintptr_t probe_expected_callback(int i){return i==2?teleport_termcap_foreign_function_pointer(0):teleport_termcap_function_pointer(i==0?8:3);}
 int probe_constant(int i){static const int values[]={H_UNK,H_DEC,H_UTF8,CLR_MAX,NO_COLOR,HL_BOLD,HL_ULINE,HL_BLINK,HL_DIM};return values[i];}
 uint64_t probe_call_term_startup(uint64_t a0,uint64_t a1){uint64_t result=0;if(escape_depth>=16)abort();if(setjmp(escapes[escape_depth++])==0){term_startup((int *)(uintptr_t)a0,(int *)(uintptr_t)a1);}escape_depth--;return result;}
 uint64_t probe_call_term_shutdown(void){uint64_t result=0;if(escape_depth>=16)abort();if(setjmp(escapes[escape_depth++])==0){term_shutdown();}escape_depth--;return result;}

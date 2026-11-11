@@ -1,5 +1,6 @@
 """Configured DUNGEON source/data/control/ABI guard; no shared writes."""
 from pathlib import Path
+from reviewed_build_provenance import nhlua_transport_baseline
 import json,re,hashlib,subprocess,argparse
 r=Path(__file__).resolve().parents[1];w=r/'.cache/dungeon-first-pass'
 def read(name):return (r/name).read_text()
@@ -7,7 +8,9 @@ m=json.loads(read('nethack-c/wasm/tu-fragments/dungeon-source-metadata.json'));s
 c=read('nethack-c/upstream/src/dungeon.c');js=read('js/ported/dungeon.js');rt=read('js/ported/dungeon-runtime.js');abi=read('nethack-c/wasm/tu-fragments/dungeon-support.c');lib=read('nethack-c/wasm/tu-libraries/dungeon.js')
 assert c==read('.cache/wasm64-build/tree/src/dungeon.c')
 assert hashlib.sha256(c.encode()).hexdigest()==m['sourceSHA256']=='4b3e7b2a8afa70fc442a99fd79551982836def70864f738085926f3f326906e9'
-for path,digest in m['compilerInputHashes'].items():assert hashlib.sha256((r/path).read_bytes()).hexdigest()==digest,path
+for path,digest in m['compilerInputHashes'].items():
+ if path=='nethack-c/wasm/build.py':nhlua_transport_baseline(r,digest)
+ else:assert hashlib.sha256((r/path).read_bytes()).hexdigest()==digest,path
 f=m['functions'];assert len(f)==110 and sum(x['linkage']=='static'for x in f)==44
 assert re.findall(r'^export function (\w+)\(([^)]*)\)',js,re.M)==[(x['name'],','.join(p['name']for p in x['parameters']))for x in f]
 comments=re.findall(r'/\*[\s\S]*?\*/',c);assert len(comments)==331

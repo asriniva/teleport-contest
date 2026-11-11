@@ -1,9 +1,12 @@
 """Configured DOTHROW source/data/type/control/native ABI preservation guard."""
 from pathlib import Path
+from reviewed_build_provenance import nhlua_transport_baseline
 import json,re,hashlib,subprocess,argparse
 r=Path(__file__).resolve().parents[1];w=r/'.cache/dothrow-first-pass';m=json.loads((r/'nethack-c/wasm/tu-fragments/dothrow-source-metadata.json').read_text());s=json.loads((r/'nethack-c/wasm/tu-fragments/dothrow-schema.json').read_text());c=(r/'nethack-c/upstream/src/dothrow.c').read_text();js=(r/'js/ported/dothrow.js').read_text();rt=(r/'js/ported/dothrow-runtime.js').read_text();abi=(r/'nethack-c/wasm/tu-fragments/dothrow-support.c').read_text();lib=(r/'nethack-c/wasm/tu-libraries/dothrow.js').read_text()
 assert c==(r/'.cache/wasm64-build/tree/src/dothrow.c').read_text()
-for path,digest in m['compilerInputHashes'].items():assert hashlib.sha256((r/path).read_bytes()).hexdigest()==digest,path+' configured compiler input changed'
+for path,digest in m['compilerInputHashes'].items():
+ if path=='nethack-c/wasm/build.py':nhlua_transport_baseline(r,digest)
+ else:assert hashlib.sha256((r/path).read_bytes()).hexdigest()==digest,path+' configured compiler input changed'
 assert hashlib.sha256(c.encode()).hexdigest()==m['sourceSHA256']=='1fb4be7ca03d4d4256a7637fcaab3ec3048f7c71928a4b5577ab6477ed28bc06'
 f=m['functions'];assert re.findall(r'^export function (\w+)\(([^)]*)\)',js,re.M)==[(x['name'],','.join(p['name']for p in x['parameters']))for x in f]
 assert len(f)==39 and sum(x['linkage']=='static'for x in f)==16

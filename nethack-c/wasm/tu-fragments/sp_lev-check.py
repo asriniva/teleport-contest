@@ -1,13 +1,15 @@
 """SP_LEV exact source/CPP/AST/data/typed-field guards, not a semantic proof."""
 from pathlib import Path
-import ast,collections,hashlib,json,re,subprocess
+import ast,collections,hashlib,json,re,subprocess,os
 r=Path(__file__).resolve().parents[3];w=r/'.cache/sp-lev-first-pass'
+scratch=Path(os.environ.get('SP_LEV_GUARD_OUTPUT',str(r/'.cache/tu-probes/sp_lev-guard')));scratch.mkdir(parents=True,exist_ok=True)
+sdk=Path(os.environ.get('EMSDK',str(r/'.cache/emsdk')))
 load=lambda p:json.loads(p.read_text())
 inv=load(w/'inventory.json');old=load(w/'sp_lev-ast.json');F=load(w/'functions.json');extra=load(w/'inventory-extra.json');schema=load(r/'nethack-c/wasm/tu-fragments/sp_lev-schema.json');meta=load(w/'core-meta.json')
 source=(r/'.cache/wasm64-build/tree/src/sp_lev.c').read_bytes();assert hashlib.sha256(source).hexdigest()==inv['sourceSHA256'];assert source==(r/'nethack-c/upstream/src/sp_lev.c').read_bytes()
 cmd=inv['productionProfile']['command'];assert cmd[-1]=='sp_lev.c'and cmd[1:4]==['-O2','-g','-sMEMORY64=1'];assert cmd[cmd.index('-include')+1]==str(r/'nethack-c/wasm/native-terminal.h')
-with (w/'guard-ast.json').open('w')as out:subprocess.run(cmd[:1]+['-Xclang','-ast-dump=json','-fsyntax-only']+cmd[1:],cwd=inv['productionProfile']['cwd'],stdout=out,check=True)
-fresh=load(w/'guard-ast.json')
+with (scratch/'guard-ast.json').open('w')as out:subprocess.run(cmd[:1]+['-Xclang','-ast-dump=json','-fsyntax-only']+cmd[1:],cwd=inv['productionProfile']['cwd'],stdout=out,check=True)
+fresh=load(scratch/'guard-ast.json')
 def normalized(tree):
  def visit(n):
   if isinstance(n,list):return [visit(x)for x in n]
@@ -88,12 +90,12 @@ for index,fn in enumerate(F):
   same=[v for v in addressed.values()if v['name']==d['name']];expected=sum(v['kind']=='ParmVarDecl'or bool(v.get('init'))for v in same)
   assert len(writes)==expected,(fn['name'],name,writes,expected)
   auto_audit.append({'owner':fn['name'],'kind':d['kind'],'name':d['name'],'offset':d['range']['begin']['offset'],'type':d['type']['qualType'],'explicitInitializer':initialized,'formalArgumentWrite':formal,'emission':'reserve+initialize'if initialized or formal else'reserve-only'})
-(w/'uninitialized-auto-audit.json').write_text(json.dumps(auto_audit,indent=2)+'\n')
+(scratch/'uninitialized-auto-audit.json').write_text(json.dumps(auto_audit,indent=2)+'\n')
 lib=(r/'nethack-c/wasm/tu-libraries/sp_lev.js').read_text();assert 'teleport_sp_lev_get_unpacked_coord__sig:"vpji"'in lib
 assert 'TELEPORT_REFERENCE_TU'not in (r/'nethack-c/wasm/tu-fragments/sp_lev-support.c').read_text()
 for n in schema['dependencies']:assert re.search(r'^'+re.escape(n)+r':',lib,re.M),n
 for row in schema['backings']:
  line=next(line for line in (r/'nethack-c/wasm/tu-fragments/sp_lev-support.c').read_text().splitlines()if line.startswith('static ')and row['symbol']in line);assert '='not in line,line
 subprocess.run(['python3','-B',str(w/'check-boundaries.py')],cwd=r,check=True)
-subprocess.run([str(r/'.cache/emsdk/node/24.19.0_64bit/bin/node'),str(w/'check-scope.mjs'),'sp_lev'],cwd=r,check=True)
+subprocess.run([str(sdk/'node/24.19.0_64bit/bin/node'),str(w/'check-scope.mjs'),'sp_lev'],cwd=r,check=True)
 print('SP_LEV actual production AST/CPP,142 boundaries/comments/formals,82 ordered schemas/386 fields,61 zero backings,40 identities,73 RNG/literal/source/width/scope guards PASS')

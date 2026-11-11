@@ -1,0 +1,73 @@
+--- a/src/jsifier.mjs
++++ b/src/jsifier.mjs
+@@ -902,13 +902,63 @@
+   }
+ 
+   if (symbolsOnly) {
+-    writeOutput(
+-      JSON.stringify({
+-        deps: symbolDeps,
+-        asyncFuncs,
+-        extraLibraryFuncs,
+-      }),
+-    );
++    // The aggregate dependency JSON can exceed V8's single-string limit.
++    // Each producer entry is a plain string array; preserve the same JSON bytes.
++    async function writeSymbolChunk(chunk) {
++      if (!outputFile) {
++        // A write callback, unlike the boolean return, signals completion and
++        // bounds queued stdout data even when the stream applies backpressure.
++        await new Promise((resolve, reject) => {
++          const onError = (error) => reject(error);
++          outputHandle.once('error', onError);
++          outputHandle.write(chunk, (error) => {
++            if (error) {
++              // Writable emits error after its write callback; keep the once
++              // listener installed to consume that event as well.
++              reject(error);
++            } else {
++              outputHandle.removeListener('error', onError);
++              resolve();
++            }
++          });
++        });
++      } else {
++        const bytes = Buffer.from(chunk, 'utf8');
++        let offset = 0;
++        while (offset < bytes.length) {
++          const {bytesWritten} = await outputHandle.write(bytes, offset, bytes.length - offset);
++          assert(bytesWritten > 0, 'symbols-only output made no progress');
++          offset += bytesWritten;
++        }
++      }
++    }
++    function symbolStrings(values) {
++      assert(Array.isArray(values), 'symbols-only expects string arrays');
++      assert(Object.getPrototypeOf(values) === Array.prototype,
++             'symbols-only expects ordinary arrays');
++      assert(!Object.getOwnPropertyDescriptor(values, 'toJSON')
++             && !Object.getOwnPropertyDescriptor(values, Symbol.iterator),
++             'symbols-only does not accept array hooks');
++      for (let i = 0; i < values.length; i++) {
++        const item = Object.getOwnPropertyDescriptor(values, i);
++        assert(item && 'value' in item && typeof item.value === 'string',
++               'symbols-only expects dense string data arrays');
++      }
++      return JSON.stringify(values);
++    }
++    assert(Object.getPrototypeOf(symbolDeps) === Object.prototype,
++           'symbols-only expects a plain dependency record');
++    const keys = Object.keys(symbolDeps);
++    await writeSymbolChunk('{"deps":{');
++    for (let i = 0; i < keys.length; i++) {
++      const key = keys[i];
++      const descriptor = Object.getOwnPropertyDescriptor(symbolDeps, key);
++      assert(descriptor && 'value' in descriptor,
++             'symbols-only does not accept dependency accessors');
++      await writeSymbolChunk((i ? ',' : '') + JSON.stringify(key) + ':' + symbolStrings(descriptor.value));
++    }
++    await writeSymbolChunk('},"asyncFuncs":' + symbolStrings(asyncFuncs)
++                           + ',"extraLibraryFuncs":' + symbolStrings(extraLibraryFuncs) + '}\n');
+   } else {
+     finalCombiner();
+   }

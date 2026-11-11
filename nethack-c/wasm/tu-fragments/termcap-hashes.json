@@ -1,0 +1,39 @@
+{
+  "status": "UNAPPLIED private configured original-C first pass passed; not native/game acceptance",
+  "reservation": {
+    "translationUnit": 136,
+    "javascriptUnit": 142,
+    "note": "historical reservations, never infer current registry count"
+  },
+  "files": {
+    "js/ported/termcap.js": "3b8074b4aa5c0004246428139b973013c09dc50e593630fff07fdaa9a4bfc5dd",
+    "js/ported/termcap-runtime.js": "8544e99ffb69c2acdb88eea53e6f29da9f0bacc2598b107e66f25518a94704c2",
+    "nethack-c/wasm/tu-libraries/termcap.js": "72d44a82e3692a44ef63e141d2b4b2c8d5f45fa41f36321bd8b1cf8bd58d744a",
+    "nethack-c/wasm/tu-fragments/termcap-support.c": "805ce3d69bbefb5d14ef3aaa3e6084ea9b74687692ce3337032594759d61c6a7",
+    "nethack-c/wasm/tu-fragments/termcap-schema.json": "0d963f245e82151dd4187371c37e83bcc8b3c966136662fd601ddfd19c5df01c",
+    "nethack-c/wasm/tu-fragments/termcap-source-data.h": "a87bd6c0796e86769c81671b6d6a9e6e882b087fe1e7ebd731771553f92b3342",
+    "nethack-c/wasm/tu-fragments/termcap-metadata.py": "d36e7d756630c7c423c5d89888d7b86d8fd60b1665269715d6db2a9edc252425",
+    "nethack-c/wasm/tu-fragments/termcap-source-check.mjs": "95bb6eb2b68fc6b2cad6aa773477e67d08557cfc1ff203f033387ebb1fee07b9",
+    "nethack-c/wasm/tu-fragments/termcap-integration.json": "10b6468a2340d41f25624ac658e8e84ac3298733a2f28e7a6aaba2048f248da1",
+    "scripts/tu-termcap-layout.h": "46e644f2b269e6f9b5d3b0e0e8acad202086e69902a5cc9aefbb1ddb43a766fd",
+    "scripts/tu-termcap-probe.c": "cdd86f3c405955af3d63ab841face83d107af8b62e818de60f03f256850bc870",
+    "scripts/test-tu-termcap.mjs": "8528191d5a5fffca19c502ca26f16cbbfce25263a0414a674d782e0bf366d6dd",
+    "scripts/check-termcap-data.mjs": "f57bdcf9e90ae9ecd6284d28ba0564910e8076c03ffdae0d7c3d03128ddc3c63"
+  },
+  "selfHashPolicy": "self excluded; all14 files bound by immutable handoff",
+  "evidence": {
+    "canonical": ".cache/termcap-author/summary.json",
+    "unwrapped": ".cache/termcap-author/unwrapped-summary.json",
+    "jsDependencies": ".cache/termcap-author/js-dependencies-summary.json",
+    "productionCallbacks": ".cache/termcap-author/callback-summary.json",
+    "sourceGuard": ".cache/termcap-author/source-guard-final.log",
+    "regeneration": ".cache/termcap-author/regeneration.json",
+    "resetAudit": ".cache/termcap-author/reset-audit.json"
+  },
+  "pending": [
+    "native macOS oracle, root integration, whole game and public recordings pending",
+    "bounded defined-input serializer cases only; original6144-byte buffer is preserved and no claim for contrived overflowing screen layouts",
+    "invalid pointers, genuinely indeterminate automatic bytes and undefined source behavior excluded; no blanket arbitrary terminal/terminfo database equivalence claim",
+    "NO_TIMED_DELAY configured; no general timed padding or physical terminal emulation claim"
+  ]
+}

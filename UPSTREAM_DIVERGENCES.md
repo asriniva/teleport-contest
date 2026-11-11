@@ -1,5 +1,156 @@
 # Upstream divergence register
 
+SFTAGS source-translation defect FOUND, correction proposed privately (not installed): original407 *tmptag = zerotag is a whole native struct assignment, but old lowering emits only C.store(Int32,tmptag,C.zerotag). Actual configured struct size1032 bytes; remaining pointer/search/next fields were not copied. This is a defined-source translation defect independent of original short-line-tail UB; it may explain four genuine field-type mismatches but causality is not yet proven. Author will prepare exact one-site compiler-layout-sized C.copy plus record-before-scalar lowering precedence guard, native original record-init witness/oldwrong rejection and unchanged genuine-tag replay. Frozen wrong source/defined-input proof/genuine failure and diagnostic chronology remain. No C fix, expected rewrite, padding or full SFTAGS acceptance. Root announced before candidate correction; no production SFTAGS files yet.
+
+SFEXPASC actual final repository-path pair, strict byte-regeneration/sourceguard and both unchanged suites PASS:197 comparisons/all139 functions and278 catalogue/foreign checks. Sixteen standalone profiles representing15 distinct utility/source TUs now pass final-path checks. Genuine JS SFTAGS four-type mismatch remains OPEN and separate. `.cache/utility-root-staging/live-replay-sfexpasc-results.json`.
+
+SFEXPASC installed as12 new source/ABI/build/check/test texts after root134file rehash and10 full byte inverses. All139 configured functions (86 macro-expanded empty+53 handwritten),40comments and2 procedure tables retained; actual staged18commands0, unchanged197 comparisons+278catalogue/foreign checks, exact regeneration/3guardnegatives and wrong-long+1 rejection pass. Requires explicit genuine original-C-generated sfdata/sfproto directory; no padded/fabricated headers. Separate JS SFTAGS genuine run FAIL (four field types differ) remains OPEN, not a serializer waiver. Final repository-path replay next. `.cache/utility-root-staging/source-promotion-sfexpasc.json`, per-source README. No original C/game/harness/terminal/nativeMac changes.
+
+TILEMAP actual final repository-path original/mixed pairs, both fresh AST/data/source guards and unchanged suites all pass: TILETEXT2697 checks and generator5060 checks. Fifteen installed standalone profiles now pass, representing14 distinct utility/source TUs (two TILEMAP profiles count once). Original generator overlapping snprintf remains qualified. `.cache/utility-root-staging/live-replay-tilemap-results.json`.
+
+TILEMAP is installed in23 new source/recipe texts, two explicit profiles of ONE original win/share/tilemap.c: TILETEXT six functions and generator same six plus init_tilemap/main. Root rehashed142 candidate-package files, original206+159 frozen files and17 exact path-only source/runtime/native/test inverses; staged2697 and5060 checks/source-data guards pass. Original native catalogues/reader/stdio remain typed dependencies. Same-address overlapping nh_snprintf input/destination is preserved; generator output parity is empirical EmC, not portable defined-C or native-Mac evidence. Individual scripts/docs/ports/tilemap.md are reproducible; final repository-path replay pending. Game registry/terminal/harness unchanged. `.cache/utility-root-staging/source-promotion-tilemap.json`.
+
+GIFREAD and TILE2BMP actual final repository-path builds, fixtures/source guards and unchanged comparisons all exit0: GIF26 defined+7 empirical/33scenarios/59dispatches; TILE2BMP28 complete outputs+40 helpers. Thirteen standalone utility profiles now pass final-path checks. `.cache/utility-root-staging/live-replay-gifread-tile2bmp-results.json`. No assertion or original C changes; GIF inherited UB/nativeMac/game limitations remain.
+
+Current game status:137 selected source ports; full normal attempt2 PASSED (481.882s), all1344 source pins unchanged, provenance1044 hashes/137TUs. Build wrapper delegates unchanged build.py/Clang21/memory64. Actual closure356 modules/0nonliteral imports passes. Production static audit currently fails ISAAC64 no Wasm imports; source-routing investigation pending, no waiver or game runtime acceptance. Actual results `.cache/tu137-root-staging/normal2-result.json` and `normal2-completed-build.json`; failed audit retained. Latest public remains122 at43/44 (0360 timeout), accepted checkpoint110. Sixteen standalone profiles pass final-path checks (15 distinct utility/source TUs), including SFEXPASC. Native macOS differences remain deferred.
+
+GIFREAD12 functions and TILE2BMP8 now installed in normal source paths (21 new text files), including readable JS/runtime, native ABI transport and individual build/check/test/fixture tooling. Root reviewed154 package hashes and19 exact plumbing inverses before byte-exact promotion; original policy/assertions unchanged. Staged GIF33 scenarios/59 dispatches split26 defined+7 empirical; original GetCode negative-index firstdecode read remains, so whole-decode agreement is empirical EmC only. TILE2BMP28 complete outputs+40 helpers pass staged;8 sourcefunctions/13 comments retained. No original C, game registry, terminal, harness or native-Mac acceptance changes. Final repository-path replay next. `.cache/utility-root-staging/source-promotion-gifread-tile2bmp.json`; per-profile README files contain exact commands/limits.
+
+
+Historical generated compiler data now uses transparent macOS filesystem compression:894 JSON/JSONS files (~10.1GB logical) verified exact readable SHA/size/mode/mtime before and after atomic replacement; all894 pass. Files remain readable at original paths; no proof data removed. Active utility/SDK/current game and accepted110 top-level dirs were excluded. Free disk is now~7.6GB. Filesystem flags/allocation/inodes change; summed blocks are not unique physical-savings claims due APFS clones. Initial sandbox compression could not set the compressed flag, yielded an invalid temporary copy that was detected/discarded without touching original; approved unrestricted local copy verified successfully. Journal/summary `.cache/tu137-root-staging/filesystem-compression-{events.jsonl,summary.json}`.
+
+The interim `EM_FROZEN_CACHE=1` wrapper line is now RETIRED: ample headroom permits normal SDK caching with no extra cache-mode environment override. Earlier read-only-cache diagnostics and peer addendum remain history. The only local SDK source patch remains exact streaming serializer24b. Fresh support/pruner were successfully compiled before the third diagnostic hit ENOSPC again; selected6 source hashes unchanged, receipt retained. Root now retries only the exact final link against those already-refreshed objects/pruner, using normal cache behavior; no redundant support rebuild is needed. Full normal137 acceptance still pending.
+
+
+Universal Ctags6.2.1 auxiliary local build now succeeds using explicit existing CLT compiler/SDK/ar/ranlib and GNU make; executable `.cache/ctags-6.2.1-local/ctags-6.2.1/ctags`. Official source tar SHA f56829e9… and executable/commands/logs are bound in `build-receipt.json`. Earlier SDKROOT and default ar-launcher failures retained. No system installation, license acceptance or system settings change. This tool only generates SF metadata; NetHack remains pinned Emscripten4.0.10/Clang21/memory64. Actual tags/serialization CLI are still pending, with original SFTAGS short-line undefined-tail qualification retained. Official release https://github.com/universal-ctags/ctags/releases/tag/v6.2.1 and upstream build instructions https://docs.ctags.io/en/latest/autotools.html.
+
+
+TERMCAP capture integration repair is applied in exactly two transport files: a typed void teleport_termcap_capture(const char*,int,int,int) wrapper calls unchanged EM_JS teleport_capture; the JS service dependency/native call selects that exported wrapper. Source JS policy, runtime, terminal capabilities and recorder bridge/harness are unchanged. Root exact two-file inverses and all66 evidence hashes pass; independent parent two-file review passes. Original215cases/2360checks/all56 routines and three actual unchanged-bridge EM_JS dispatches pass. Tiny retention fixture explicitly roots UTF8ToString; fullgame closure remains to be checked, with initial pointer/helper fixture failures retained. Root will recompile actual central support, refresh actual native-demand pruner and run exact link, not reuse stale objects. `.cache/tu137-root-staging/termcap-capture-promotion.json`.
+
+Auxiliary Universal Ctags6.2.1 source is locally cached for genuine SFCTOOL metadata generation, official release and tar SHA f56829e9a576025e98955597ee967099a871987b3476fbd8dbbc2b9dc921f824. No system installation or game frontend change. Initial direct-CLT configure lacked explicit SDKROOT and failed to find libSystem; configured retry succeeds with explicit CommandLineTools SDK, build-environment correction pending. Generated tags/metadata and whole SFCTOOL CLI are not yet claimed. `.cache/ctags-6.2.1-local/source-receipt.json`.
+
+
+TILETEXT, PPMWRITE and THINTILE actual final repository-path builds, source guards and unchanged suites now all pass:54comparisons/39scenarios,515checks/16scenarios,21complete-output comparisons. No policy/assertion changes or new source C edits. SDK24b binding is fresh for these replayed pairs. Evidence `.cache/utility-root-staging/live-replay-tiles/results.json`. Eleven installed standalone utility profiles are now individually reproducible; they remain separate from137 selected game ports and accepted110 checkpoint.
+
+
+TILETEXT12 functions, PPMWRITE6 and THINTILE4 now have normal source-path JS/runtime/native transport and individual reproducible build/check/test scripts (28 new text files). Root verified all136 frozen entries,149 external inputs and all10 exact source/runtime/full-test import/path inverses before byte-exact promotion. PPMWRITE allocation-observer bodies are relocated exactly to test-alloc.c; no policy changes. Fresh staged pairs/source guards/unchanged suites pass54comparisons/39scenarios,515checks/16scenarios,21complete-output comparisons respectively, using exact patched SDK24b before/after. Actual native tilemap/naming/catalogue dependencies remain, initialized fixture setup and source undefined-input limits explicit. Final repository-path replay is next; no game/terminal/graphics defaults or native-Mac acceptance change. `.cache/utility-root-staging/source-promotion-tiles.json`.
+
+
+The exact next normal-build Makefile profile is installed in the strict UNIXUNIX inverse helper (SHA b18e119b…). All prior6 profiles and helper function bytes remain identical. Only registry1a54 paired with next exact Makefile260e5d91 is added; it differs from current0f9 only by the unchanged builder next2LF insertion at byte58082 and reconstructs historical1c21 whole bytes. Root has not rewritten the prepared Makefile. Unknown bytes/newline changes still reject. Author16fileproof and independent/root source checks pass; actual next normal retry remains pending. `.cache/tu137-root-staging/next-makefile-profile-promotion.json`.
+
+Second exact final-link diagnostic with supported EM_FROZEN_CACHE=1 passes original Node-size and disk-stub stages, exits2/31.8965s at real missing native symbol teleport_capture. Bridge EM_JS callback is unchanged; migrated TERMCAP incorrectly tries to export/call it directly as a normal C function. A minimal typed C forwarding adapter will retain that existing import, matching WINTTY existing getch transport. No recorder/harness/terminal capability behavior is being rewritten. Serializer/main/registry/build.py before-after hashes remain stable. `.cache/tu137-root-staging/sdk-stream-frozen-cache-final-link-diagnostic-result.json`.
+
+XPM actual final-path rebuild and all5 source/test/import/ABI/negative checks now exit0, unchanged54cases/56assertions. No broad defined-C parser/native-Mac claim; inherited empirical scanf qualification remains. `.cache/utility-root-staging/live-replay-xpm-results.json`.
+
+
+Actual patched final-link diagnostic passed the former Node cap and complete Python symbol-cache write (950558149bytes), then failed ENOSPC at native linker stub creation: exit2/39.4748s, four selected source hashes unchanged. Initial old failed-capsule tar archive also hit ENOSPC; incomplete archive discarded and original capsule untouched. Root instead losslessly archives only the actual new950MB symbol cache, checking full decompressed hash before removing its regenerable expanded entry. Accepted110/latest122 snapshots remain untouched. The streaming wrapper now explicitly sets existing SDK `EM_FROZEN_CACHE=1`: get_js_sym_info calls its normal generator in memory without symbol-cache persistence; cache schema, symbol graph and compiler flags stay unchanged. Prepared native SDK libraries must already exist; missing cache assets fail closed. This extra cache policy is documented and will be tested in a separate exact-link diagnostic, not hidden as pristine normal behavior. Earlier durable-wrapper peer review predates this new env line; its prior result is not claimed to cover that line. `.cache/tu137-root-staging/sdk-stream-final-link-diagnostic-result.json`, `actual-symbol-cache-archive.json`.
+
+
+The pinned SDK now carries the exact reviewed streaming serializer candidate24b5838f… (upstream original2c468df0…), applied atomically with the durable tool. Root three authors and runtime-parent three authors+parent acknowledged zero active/queued SDK jobs. The other parent did not acknowledge before application; this is not claimed an all-nine idle window. Atomic replacement exposes only complete old/new source; any in-flight compiler-input receipt must explicitly rebase rather than claim unchanged SDK bytes. All compiler holds are released. Actual exact final-link diagnostic follows; no full137 game success yet. Application `.cache/tu137-root-staging/sdk-application.json`; no frontend/graph/flag/harness edits.
+
+
+XPM2IFF_HOST is installed as18 reviewed source/recipe texts after root rehash of89 candidate entries and independent no-blocker review. All6 core functions/38 comments are byte-identical; only declared path/import/include/output scaffolding changes. Staged54cases/56assertions distinguish21 defined helper/early cases,32 empirical scanf-ABI cases and1 two-Module contract. Original scanf signed-pointer mismatch and IFF padding quirks remain; no native-Mac/general undefined-input claim. Final repository-path replay follows. Binding `.cache/utility-root-staging/source-promotion-xpm.json`.
+
+Root deleted exactly one hash-verified regenerable prior SDK symbol-cache file a58b68fa8ff4d6384800abafab53f8e86db35035.json (555108109bytes; SHA751b9595…) to provide disk headroom for the actual large dependency-cache write. No cache format/settings change or other source/sysroot/proof deletion. Evidence `.cache/tu137-root-staging/sdk-old-symbol-cache-cleanup.json`; APFS physical reclamation and actual final graph size remain measured separately.
+
+
+SDK serialization fix is now reproducible in `scripts/patches/emscripten-4.0.10-symbol-json.{json,patch}` with `scripts/patch-emscripten-symbol-json.py` (default read-only, explicit --apply/--restore, complete original/candidate hash checks, atomic single-file mode-preserving replacement). `scripts/build-wasm-symbol-streaming.sh` checks patched hash then delegates unchanged normal build. Independent candidate review passes with no findings;227 focused checks, native >536870888-byte cap control versus537960554-byte successful streaming witness and bounded Python round-trip pass. Root durable tool check/apply/idempotence/restore/unknown rejection passes privately. Actual SDK application/link is next; no game success inferred. Streaming changes only symbols-only output, preserving native key/array ordering/escaping and one final newline for actual plain-record/string-array producer. Normal glue, graph/roots, frontend version/ABI/flags, Python readers and cache schema stay unchanged. Per-fragment limits remain; Python still materializes full JSON/object/cache and disk/RAM are unproven. Evidence `.cache/tu137-sdk-symbol-streaming-{candidate,peer-c}/`, `.cache/tu137-root-staging/sdk-durable-tool/`.
+
+
+All seven installed utility profiles now pass actual final repository-path rebuild and unchanged comparisons: RECOVER113/47, DLB_MAIN78/42, PANIC196/12, BMP67 complete+6 helper, DLB_LIBRARY2067, STRIPBS612/102, UUDECODE189/64. The last two builders already execute their source guards successfully; root duplicate guard attempts correctly refuse overwriting those results, then unchanged test drivers pass. Initial/refused commands and subsequent terminal results remain under `.cache/utility-root-staging/live-replay-{a,bc}/`. No source policy/expected values changed.
+
+New private author assignments are TILE2BMP, GIFREAD, BMPTILES, GIFTILES, TILESET and MAKEDEFS, in addition to TILETEXT finishing. PPMWRITE6functions and THINTILE4 have frozen actual pairs and comparisons (515 checks/16 scenarios and21 complete-output comparisons respectively), pending source promotion. GIFREAD original GetCode reset leaves last_byte at zero before first buf[-2/-1] reads; ordinary full-decode behavior must be explicitly empirical EmC with faithful backing, not claimed defined-C equivalence. No original C initialization repair is made.
+
+
+Four more reviewed utility profiles are installed in normal source paths (38 new text files): BMP2IFF_HOST8 functions, DLB_LIBRARY22, STRIPBS1 and UUDECODE4. Root rehashed all102 B/94 C frozen entries and their independent reviews before byte-exact promotion. Policy/test expectations remain unchanged; individual builders/checkers/tests provide fresh-output routing and original-C selection. Staged suites BMP67+6, DLB2067, STRIPBS612/102 and UUDECODE189/64 pass; final-path replay is next. UUDECODE retains necessary in→in_ rename, EXIT_RUNTIME=1 and NULL/ENOENT getpwnam limitation. STRIPBS inherited errno behavior and inconclusive stale-errno negative remain explicit. DLB isolated prefix-ignore fixture and BMP undefined-input exclusions remain. No game registry/original C/harness/terminal/native-Mac acceptance changes. Evidence `.cache/utility-root-staging/source-promotion-bc.json`; BMP/DLB recipes `docs/ports/`.
+
+RECOVER, DLB_MAIN and PANIC actual final-path builds, source guards and unchanged suites now pass113/47,78/42,196/12. Initial root guard commands omitted mandatory --source-root and failed before checking; corrected commands pass without source changes. Both retained under `.cache/utility-root-staging/live-replay-a/`.
+
+
+Three reviewed utilities are now in normal source paths: RECOVER5functions, DLB_MAIN8 and PANIC1 under `js/ported-utilities/`, with distinct scope/runtime, native ABI text under `nethack-c/wasm/utilities/`, and individual build/check/test scripts under `scripts/` (24new files). Root rehashed all113 staged files and the independent no-blocker review before byte-for-byte promotion. Policy bodies/assertions are unchanged; only previously verified paths/source-root/include plumbing differs from original frozen packages. Builders require a fresh --out and explicitly resolve reference C. `UTILITY_PORTS.md` records reproduction/profile/dependency/abort/undefined-input limits. Staged suites113/47,78/42,196/12 pass; final repo-path replay is next. This does not alter the game registry/configuration or native-Mac acceptance. Evidence `.cache/utility-root-staging/source-promotion-a.json`.
+
+
+Next three disjoint portable source assignments are `win/share/ppmwrite.c`, `win/share/tiletext.c`, and `win/share/thintile.c`. These are stdio/image-data tools despite their window-system directory, with no GUI backend claimed. Each needs actual build-profile/CPP/AST inventory, readable JS preserving original boundaries/names/formals/comments/control flow, and original/mixed Emscripten-memory64 comparisons of defined files/pixels/palettes/status. Native I/O/layout/dependency transport remains explicit; fixture outputs cannot overwrite the repository's tile data or shared headers. No game graphics/configuration changes are made.
+
+
+Combined DLB utility proof is frozen: actual original C main+library versus both JS ports passes unchanged78 comparisons/42 scenarios; mixed removes both original policy TUs, retaining native alloc/panic/hacklib only. Thirty policy bodies are imported unchanged, with actual main→library→native→JS-main file callbacks exercised; unexercised library APIs remain covered only by the separate2,067-assertion proof. PANIC frozen196 comparisons/12 paired configurations pass actual native variadic/stdio/abort comparisons; full runtime-generated differing stacks are retained, source bytes compared separately, explicit FORCE_FILESYSTEM and SDK device/reentry/growth limits apply. Eight utility source-promotion candidates are being prepared with fresh output directories and preserved frozen proofs; none is yet a game configuration or accepted-game count change.
+
+SFTAGS defined-input qualification: original doline copies strlen bytes into an automatic buffer without a terminator until byte254. Its current ten successful main fixtures deliberately use254-byte padded lines, avoiding indeterminate tail reads. This does not establish ordinary short-ctags production equivalence. Original source is unchanged; no stack seeding/NUL repair or claim all22 configured functions executed is made.
+
+
+Actual normal137 attempt1 failed only at final game link (exit1,458.802870416s, sourceChanges[]). All137 actual component pairs, full measured layouts and dispatcher checks completed; existing game-library pruning ran (1,249 private bases/4,996 keys removed). Emscripten's pinned JS symbol scanner then failed at jsifier.mjs JSON.stringify with RangeError: Invalid string length. No137 game artifact/acceptance is claimed. Exact log/result: `.cache/tu137-normal-attempt1.log`, `.cache/tu137-root-staging/normal1-result.json`. Separate authors are investigating lossless SDK symbol-JSON transport and a game-library dependency-graph reduction, privately, preserving frontend/version/memory64 and every actual native/callback demand. No workaround has yet been applied.
+
+
+DLB library private first pass is frozen: actual original-C/mixed builds succeed and2,067 assertions cover all22 configured functions, native ownership/EOF/read/seek/fallback/reinit/growth behavior; wrong-SEEK_END cursor mutant fails. The earlier sizeof(dlb)/offsetof(size) metadata-name collision was fixed by disjoint keys and independent unique-key/sizeof guards, without source/oracle changes. A separate combined utility test now links both frozen JS DLB_MAIN and JS DLB library, retaining original native alloc/panic/hacklib dependencies; existing archive expectations are reused. This does not enable DLB in the game or claim native-host/undefined-input parity. SFTAGS actual configured count is22 (not29 raw); its source strncmpi macro compiles to strncasecmp and must preserve that owned source policy rather than silently using generic libc semantics.
+
+
+Next private utility assignment: `util/sftags.c`, with actual configured CPP/AST inventory required before claiming a count (29 textual candidates are not configured functions). The source-shaped JS and original/mixed memory64 comparison follow the same boundary/comment/control-flow contract. Its generated sfdata/sfproto outputs must remain isolated fixture files; no live/shared game headers are regenerated. Full137 normal game build continues independently.
+
+
+Additional private utility first-pass results: UUDDECODE frozen64 cases/189 checks/all4 active functions pass both memory64 builds; real wrong-output shift mutant rejected. Actual getpwnam is an Emscripten NULL/ENOENT stub, so successful home-account lookup is unclaimed. DLB_MAIN frozen78 comparisons/42 scenarios/all8 functions pass, retaining the original C DLB/alloc/panic/hacklib dependencies; native four-allocate/four-free cleanup is independently checked and missing-free mutant rejected. Its separate JS DLB library remains in progress. Utility `panic.c` is now assigned under the actual POSIX utility profile: preserve the one source panic body, boolean recursion state, variadic stdio and actual native abort behavior through transport only. ALLOCA_HACK/platform-only bodies require actual inventory and are not automatically credited. No game/runtime/registry or native macOS parity changes.
+
+
+Actual live137 prebuild check found and fixed a finite-profile data-shape error: only the two newly added UNIXUNIX profile projections used lists where the unchanged strict comparator requires tuples. Root changed those literal delimiters only; old four profiles/helper functions remain unchanged. The actual selected registry1a541347 plus current prepared Makefile9cf now passes the exact historical1c21 whole-byte inverse. New helper SHA d3403fc042f8745fd29a79f1564e7db2fe5e2d8acd6f4e5222e66b779b4c5353; failed initial check and exact repair are recorded in `.cache/tu137-root-staging/finite-projection-container-fix.{json,patch}`. No source comparison or expected hash was relaxed.
+
+
+### Selected137 source integration — full build and game checks pending
+
+The reviewed15 ports HACK/UHITM/MON/PICKUP/SHK/SP_LEV/TRAP/TERMCAP/TOPL/WINTTY/UNIXUNIX/UNIXMAIN/OPTIONS/BOTL/ZAP are now selected alongside the prior122. Actual30 reference/hybrid links and all15 unchanged EmC comparison suites passed before selection. The shared integration applies53 source/layout targets: central dispatcher routes;137 measured/preserved layouts; exact owned probe recipes/selectors; native support/storage/startup wiring through registry declarations; strict source/metadata checks; and13 durable regeneration tools. Original122 registry rows/layout values remain unchanged. MON additionally restores its two source-position DEFERRED comments and retains its previously tested native-pointer correction.
+
+The registry is1a541347d535205c4fba50484d76703d74e1104710f5c1f233ba7490e9bdef64. The UNIXUNIX Makefile adapter preserves its four earlier finite profiles and adds only this registry paired with actual prebuild9cf2138c or the exact once-rewritten0f9c04a5 output; whole-byte historical inverse remains required. No prepared Makefile was rewritten during promotion. UHITM metadata copy is reproducible; frozen author data stays unchanged. Stale draft/fragment-merge comments in five shared integration files were removed as comment-only, line-count-preserving cleanup; exact patches/actual hashes are recorded separately.
+
+Evidence: `.cache/tu137-root-staging/source-promotion.json`, `.cache/tu137-shadow-integration/control/promotion-review/common/`, actual pair/unit/guard receipts under the same control tree. The ordinary full137 layout writer is selected; private scoped CLI/path-view/pair-driver machinery is excluded. Original NetHack C, frozen contest harness, recordings and terminal capability/transport configuration are unchanged. Root is now checking the actual unrelocated source guards and running a full normal build. This selection is not a137 full-game/public/native acceptance: latest original public result remains122's43/44 with0360 timeout; original integration times out; fully accepted checkpoint remains110.
+
+
+UUDDECODE private first-pass builds now pass for the actual four-function Emscripten profile; initial63 defined-input cases/187 checks pass, with final package pending. The original main-local/decode-formal name `in` becomes `in_` because `in` is a JavaScript reserved word; function names/boundaries/argument counts remain intact. Its standalone pair uses explicit EXIT_RUNTIME=1 so original libc exit flushes streams; initial lifecycle failure is retained. This is utility-only, not a game runtime/flag change or native-macOS equivalence claim.
+
+
+137 production staging follow-up (private only): reviewed UHITM/TOPL regeneration tool code is moving out of historical `.cache/*-author` captures into `nethack-c/wasm/tu-fragments/tu137-group-{a,b}/*-source-tools/` (seven UHITM and six TOPL tools). Caller roots/SDK resolution and output scratch paths change; captured raw JSON stays immutable, and exact regenerated source comparisons remain required. SP_LEV fresh guard outputs also go to scratch. The group-B compile helper admits the exact live workspace as well as its bounded private staging root; its historical origin paths remain explicitly workspace-bound. These code relocations and directly affected guards are being checked before any live integration. They add no source policy or native-parity claim; prior component proofs keep their original tool/source identities.
+
+
+RECOVER review follow-up: root read the full frozen utility policy/runtime/ABI/build source and requested a separate formatting-only candidate before production promotion. Its condensed multi-statement error blocks must expand to match active original C layout/readability; function boundaries/names/formals/comments and normalized JS AST must remain unchanged, with the existing113/47 suite reused. The frozen original proof is not edited, and DLB_MAIN scope may proceed independently. UUDDECODE actual default memory64 compiler inventory/build succeeds with four active functions (main/decode/outdec/index); two genuine legacy K&R/prototype warnings are retained, with no OS-macro spoof or source workaround.
+
+
+Private utility progress/next ownership (2026-11-10): BMP host converter actual original-C/mixed pair builds succeed; current67 complete status/stdout/stderr/output-file comparisons plus6 helper assertions pass, all8 boundaries/63 comments/control-node counts/palette data guarded, wrong-nearest output mutant rejected, native growth/reentry checks pass. Final package/source review pending. After current bounded freezes, separate authors are assigned `src/dlb.c` and `util/dlb_main.c` under an explicitly enabled DLB+DLBLIB utility profile. Each requires actual configured function inventory and original-C/mixed-JS memory64 comparisons, with isolated archive fixtures and original dependencies. The game keeps its disabled-DLB configuration; no newly enabled game feature/count or aggregate compatibility is claimed. Archive-main tests initially retain the original C library dependency; library policy is translated by its separate owner, avoiding duplicate work.
+
+
+Utility progress (2026-11-10, private component evidence only): STRIPBS actual original-C/mixed-JS memory64 builds pass; 612 strict comparisons across102 fresh module pairs pass, including binary/backspace/NUL/high-byte/error/errno behavior and original EOF-status quirks. RECOVER actual profile original/mixed builds pass;102 comparisons across44 cases/all5 active entries pass, including reconstructed binary files/cleanup and isolatedMEMFS errors. Final bounded packages/source reviews remain pending; neither increments game acceptance. After freezing STRIPBS, its owner is assigned `sys/share/uudecode.c` with actual default Emscripten guards (expected four active bodies including original K&R index, versus native macOS three). No fake operating-system defines or source repair is authorized; actual CPP/AST/build must establish the profile before translation.
+
+
+All fifteen new EmC comparison suites have now completed successfully with their original expectations (2026-11-10). UHITM's unchanged rerun exits0 after exact 4,457-byte `record-projections.json` staging; source/runner/pair bytes remain unchanged. Its reproducible recipe adds one metadata copy row only. Original failed staging run remains retained. Evidence: `.cache/tu137-shadow-integration/control/actual-pairs/uhitm-metadata-rerun/terminal.json` and three original group results. The full137 shared game build and original integration/public gates remain pending; this is component comparison success, not game acceptance or native macOS parity.
+
+
+Private137 staging update (2026-11-10): actual layout generation completed successfully on attempt2: 137 measured/preserved entries, all old122 values semantically identical, all137 dispatcher checks passed. Attempt1's missing drawing-constants dependency and its failed log/output remain retained; an exact captured-input-bound copy fixed staging only. Fourteen of the fifteen unchanged new-port comparison suites now pass. UHITM stopped because its selected build directory lacks `record-projections.json`; no completed UHITM comparison is claimed. Its exact recipe metadata staging is being corrected before rerunning only that suite. All three comparison groups retained unchanged source/binary hashes. No new full-game/accepted137 claim.
+
+
+Additional separate utility ownership (2026-11-10): `util/recover.c` starts under the actual POSIX build profile (five active source functions; alternative-platform bodies excluded explicitly). All filesystem effects in its original-C/mixed-JS comparisons must use fresh isolated fixture storage. Existing save files and user data are outside the task. Source/error/cleanup behavior and original function boundaries must be preserved; this is private work, with no game configuration/acceptance change.
+
+
+2026-11-10 actual paired diagnostic completed: `.cache/tu122-literal-expanded-paired-diagnostic/` baseline and candidate both exit0 with the unchanged original New York timezone-worker assertions and exactly two hash-verified module substitutions. Elapsed baseline34.599511791s / candidate32.349345708s. Other bounded137 work could overlap; identical loader machinery is diagnostic, not a controlled speed comparison, original30-second launcher acceptance, public-suite result or full normal build. No test/deadline/expectation changes. Candidate includes precisely reviewed DUNGEON6cf compiled helper/producer and GLYPHS1819. Latest original public43/44 and accepted110 remain unchanged.
+
+
+The separate portable utility profile also now assigns `sys/amiga/bmp2iff_host.c` to an independent owner (eight original functions). The same private-only, source-similar JS, unchanged boundaries and actual Emscripten-C reference/mixed-link requirements apply. This adds a third disjoint utility author and does not alter game selection or acceptance.
+
+
+2026-11-10 private utility-profile work announced: the 166 original C paths outside the 140 active game TUs include standalone host tools. Separate owners are starting `util/stripbs.c` (one original main boundary) and `sys/amiga/xpm2iff_host.c` (six original functions, portable host converter rather than AmigaOS backend). Their readable JS must preserve source names/formals/comments/control flow, with actual original-C/mixed-JS Emscripten 4.0.10, Clang21, memory64 comparisons. No game registry or accepted-game count is changed; build/runtime/fixture limitations will remain explicit. In particular stripbs's unusual original errno/EOF failure-status behavior must be preserved, not silently repaired. Work is private until reviewed; bmp2iff_host.c is inventoried but not yet assigned.
+
+
+Private 137-TU integration update (2026-11-10): all 15 new original-C/reference and mixed-JS pairs compiled successfully (30 real links, three disjoint groups, unchanged source hashes); fresh TOPL dependency closure and UNIXUNIX import checks passed. Behavior comparisons are pending. Root reviewed and authorized the private layout writer's optional repeated `--only` plus required `--existing-sha256` mode: it measures selected actual probes, preserves the verified 122-layout input, asserts every unselected value unchanged, and retains all-137 dispatcher checks. Default invocation still measures all registered ports. This avoids recompiling the old122 solely for this staging prerequisite; it does not waive their production build/checks. Evidence: `.cache/tu137-shadow-integration/control/scoped-layout-review/`; exact generator before6ee4f591 / after0ca2b3a9 and baseline layout681064b9. No live generator/registry or accepted-TU count changed.
+
+
+### 2026-11-10: reviewed DUNGEON copy and GLYPHS record reuse selected
+
+The next 15 TU reference/hybrid pairs have actually compiled successfully in three parallel groups (30 real links); their shared behavior comparisons and production integration are still pending. These are private staging results, not 137 accepted game TUs.
+
+Selected `nethack-c/wasm/tu-libraries/dungeon.js` now copies its canonical 265-property service packet through an explicit object-literal helper, with exactly one ordered read per property, a fresh ordinary writable facade, the SDK helper dependency and two copy-call replacements. The canonical factory body, publication, callbacks and native conversions are unchanged. This replaces the selected `Object.assign` copies because measured factory construction was costly. Private canonical packet mutation/deletion/accessor injection remains unsupported; cached callback identity/expandos retain the previously documented limitation. Original C comparisons: all 110 functions/267 comparisons pass for original, previous and new versions; producer contracts 27/32/32 pass. Recorded compiled-factory median 29.187 ms to 3.850 ms per 4,000 calls is a cost diagnostic, not a whole-game speed claim.
+
+Selected `js/ported/glyphs-runtime.js` adds one last-address slot each for map/detail/unicode records, alongside cache/symparse: five slot references per invocation. Retained records never retarget; native scalar fields and pointers are read afresh; slots clear and disable even when stack restoration throws. This changes in-call JavaScript wrapper/nested-node/property-bag freshness. The unchanged old observer test fails `map remains fresh` and is explicitly retired, not counted as passing or used to waive a C mismatch. Original 41,354 C comparisons/all 27 functions and prior 37/38 witnesses pass; the full variant adds 271 focused checks including 70 actual-C comparison events, with six wrong-helper negatives. Five slots do not bound all memory or source-held records.
+
+Root rehashed all 30/84 package files, reviewed the complete deltas and exact property projection, and checked independent peer receipts before promotion. Evidence: `.cache/tu122-literal-expanded-root-promotion/receipt.json`, `.cache/dungeon-producer-literal-copy-peer-b/review.json`, `.cache/tu122-glyphs-expanded-peer-a/review.json`. No original C, contest harness, recordings, terminal configuration, compiler flags or source function boundaries changed. Neither promotion has a new full-game/public/default-deadline result. Latest actual selected-122 result remains 43/44 public (0360 times out at the original 45 seconds), and original New York integration times out at 30 seconds; last fully accepted checkpoint remains 110 TUs.
+
+
+**Current source work: 122 selected TUs, not yet accepted.** Reviewed GLYPHS, SFBASE, VISION, DISPLAY, MONDATA and DUNGEON runtime optimizations plus the two-local OBJNAM pointer fix are selected; normal attempt8 builds successfully and passes43/44 public sessions; remaining public and integration failures are original-deadline timeouts. Latest122-TU public run is43/44; all4RNGmismatches are fixed, while0360timesout at45seconds and integrationNewYork at30seconds. The earlier five-module diagnostic improved35.66s to32.63s, still above the limit; later changes have no deadline result yet. The OBJNAM-only diagnostic fixes all16,915 RNG calls in0383. Accepted checkpoint remains110 below. Fifteen further ports are being integrated in a private shadow checkout.
+
 **Accepted checkpoint: 110 translation units plus JavaScript Lua.** The normal
 mixed memory64 build passes unchanged original integration, including all original
 30-second workers, and all44 public sessions within the original45-second limit.
@@ -31,22 +182,47 @@ seed0360's42.43-second profiled replay is diagnostic, separate from the passing
 original public gate. Configured SDK/external tooling remains required: this is
 not a complete toolchain capture.
 
-**Current workspace is staging the next batch:** registry114 currently adds
-DO_WEAR, INSIGHT, READ and APPLY; their four fresh shared suites pass27,175
-comparisons. Live source/runtime/layout inputs are ahead of the old game manifest
-and require a fresh closed-batch build. The accepted110 claims above apply to
-the immutable captured snapshot, not these partially integrated live files.
+**Current workspace is staging the closed122 batch:** DO_WEAR, INSIGHT,
+READ, APPLY, EAT, OBJNAM, MKOBJ, NHLUA, FILES, DISPLAY, INVENT and CMD have
+been integrated beyond accepted110. The first seven shared suites pass45,411
+comparisons; NHLUA's actual compiled-Lua and JS-Lua pairs each pass402 cases/
+2,073 checks/all94 bodies. The full122 source-structure scan passes. The last
+four shared suites now pass4,462 comparisons/all406 functions, plus22,528
+additional display wall checks. Their earlier Bash3.2 runner failure is retained;
+the corrected runner completed successfully. Fresh evidence is content-addressed
+under `.cache/tu122-root-staging/final-four-evidence`.
+All122 component pairs compile. The prior normal link hit Emscripten's
+symbols-only JSON string-size limit. A reviewed normal-link-only test-entry
+projection now passes the actual unchanged-SDK preflight; the fresh normal
+attempt3 stopped at APPLY’s exact regeneration check after the reviewed21-local
+initialization correction. The reviewed generator now reproduces that source
+exactly; normal attempt4 succeeded with the strict equality check unchanged.
+Provenance853hashes, production import audit and324-module literal closure pass;
+original integration failed a compression-import assertion; public5/44, with
+25 INSIGHT record-binding and14 EAT predicate-dispatch runtime errors. The
+failed2,929-input snapshot is preserved. Reviewed EAT/INSIGHT binding fixes
+and the exercised FILES compression ABI route are now promoted; normal
+attempt5 succeeded with provenance853 and production audits; a fresh
+bindings-fixed capture preserved3,244 unchanged inputs; original integration then exceeded its unchanged New York30-second worker limit. Ten reviewed adapter performance repairs are selected; fresh normal attempt6 succeeds, but original integration still times out at30seconds and public results are39/44. Four sessions each differ at exactly one RNG entry with every screen/cell/cursor/animation frame matching; seed0360 times out at45seconds. All4,642 captured inputs remain unchanged. Exact RNG causes and further runtime profiling are in progress. No new full-game/public acceptance exists. Live inputs still require
+a successful closed-batch normal build and original gates.
+Accepted110 remains the last full-game/public checkpoint and applies only to its
+immutable snapshot. New evidence and all failed attempts remain in
+`.cache/tu122-root-staging` and the linked parent proposal/replay directories.
 
-**Parallel work:** nine authors across three existing chats own disjoint files:
-MON, ZAP, BOTL, SHK, SP_LEV, PICKUP, UHITM, TRAP and HACK. Completed private
-handoffs remain pending shared integration; corrected INVENT catalogue/formal
-proof and separate service/record-view candidates retain their original histories.
-ROOT owns serialized selection/build/gates. OPTIONS133/J139 is reserved for the
-BOTL author after freeze and read-only scope review. Global next134/J140.
+**Parallel work:** nine author slots across three existing chats coordinate disjoint work. All15 additional ports have private implementations; three authors prepare their integration snippets while other slots diagnose RNG differences and the next bounded adapter performance changes. The original nine port assignments below are historical.
+Completed private handoffs remain pending shared integration; corrected INVENT
+catalogue/formal proof and separate service/record-view candidates retain their
+original histories. ROOT owns serialized selection/build/gates. Global next140/J146.
+UNIXRES has zero configured functions and is retired as inactive, without a JS
+port or migration-count credit. WINTTY implementation follows its reviewed
+configured scope and preserves the current terminfo/input/output/shadow path.
 
 NHLSEL84 remains
 unselected with its documented original-source unary use-after-free mismatch.
 Inactive DLB has zero configured function bodies and is not counted.
+A read-only DOTHROW review identified extra automatic-cell zero stores;
+an expanded exact-site audit and separate source-fidelity correction are pending,
+with no observed public failure.
 The harness, recordings and pristine upstream source stay unchanged.
 
 Maintained inventory as of 2026-11-10. This register describes the implementation
@@ -5663,3 +5839,684 @@ The configured `win/tty/wintty.c` migration is authorized for its 72 original fu
 Planned adapters provide JS-authoritative initialization of the original window catalogue into 416-byte native backing with 46 genuine callable function slots, live shared global aliases, persistent native stdout/compression buffers, and a typed private SIGWINCH callback. The single original interior-switch goto requires structured dispatch; the reserved formal `let` requires a documented JS spelling exception while preserving its position and function boundary. Native record copies, menu ownership, signed and unsigned 64-bit values, current-service restoration, memory growth and separate Module state require directed checks. No implementation parity or public acceptance is claimed yet.
 
 Terminal capability selection, existing terminfo dependencies, original stdio scheduling, inherited input/output capture and shadow serialization remain separate and unchanged in policy. This author must not introduce an ANSI capability shortcut, emulator, new terminal defaults or harness changes. Verification must cover actual C comparisons, optimized startup consumers, native callback/reentry, input ordering, menu/status copies and adapter lifetime. Emscripten C is the first-pass oracle; native macOS differences remain explicitly pending.
+
+PAR08 UNIXUNIX135/J141 REVISION2 diagnostic handoff parent review complete: full recipe/integrationproposal/initialcontrolledlimits/revision2correction read, independently62current hashes(12durable50proof)0mismatch plus60historicalsnapshot hashesverified, oldmanifest d2054d.../c95c78... unchanged. Currentrecipe165eca9348214a643c73af15e0760a3ca7a78991174e4bfde694b2510422826c; durablefab8b09d8fc6e6f197a35a1b47e484b7f54eb3b204ee0fb5f25e21d9a7a63872; proof74e47d3488a1c7a32a482e3fc958a4d39d2330a267c52723fc79137299b3c4d6. Exact8JSbodies/62comments/private202bytes/no publicstartup/RNG,100actualunchangedC comparisons pass correctedno-writeautos; separate explicitlyseededABIallocationcontract rejectsoldzerohelper, notCindeterminate-byte claim. Three semanticwrongJS variants genuinelyrejectunchangedC/bothbinaries/test; actualstat104/time64/fulltypedtrace/callback/reentry/growth/servicefinally/Module/rawpointer/scalar controls/CPP/import/regen8/strictundefined1missingfactoryrejection pass. Supportseparateonce/nativeStorageSources, owninlinefields[], actualsys/unixpreparedsource/centralcallUnixunix andprivate TABLE_BASE2 only, no productionflagchange. Explicitfinitefilesystem/process/window/signal models andstackpreconditions remain, inheritedNOMUX patch distinct; no nativehost/shared/fullgame/public acceptance. Parent .cache/unixunix-parent-review-revision2.json. Author idle/no newTU unlessROOTassigns.
+
+PAR08 UNIXMAIN138/J144 conditional entry shell now concretely required: direct typedJS __main_argc_argv alias linked but hybrid factory ReferenceError callMain is not defined; actual SDK tools/emscripten.py HAS_MAIN discovery requires Wasm export. Failure retained, not markedpass. Proceed authorized unique tiny C main(argc,argv) forwarding exactly once to typedimport teleport_unixmain_main; originalsource JS main andallstartup/argument/policy/control stayJS. No nativeC algorithmfallback or alternate JS bootpath; actual factory callMain/exit/argv/source-privatecell/nativecallback/unchangedC negative proof required. No shared production/runtime/profile edits byauthor.
+
+
+### NHLUA shared integration into staging118 — transport-only additions
+
+The reviewed 94-function NHLUA JS port is now being wired into the shared registry, dispatcher, typed support, compiler-derived layout/source metadata and isolated probes. Original names/boundaries and prepared source remain authoritative. The explicit `SUPPORT_LONGJMP=emscripten` compile/link setting and a real live native setjmp frame preserve the original error-return behavior across JS. Its original quota continuation has one documented necessary C/JS control-flow lowering. Private source data initialize lazily on first validated call. No Lua interpreter/provider/shim selection or frozen test harness changes accompany this integration.
+
+Proposal and current-before hashes: `.cache/nhlua-parent-integration/root117-final-proposal/proposal.json`; parent independent syntax/support review alongside. The original private evidence covers 402 cases/2,073 checks/all94 functions with controlled synthetic catalogues. Fresh central component builds, both dependency backends and the full closed-batch game/public gates remain pending; native macOS is not established. Root is the sole shared-file writer.
+
+
+PAR09 NHLUA fresh post-MKOBJ shared-baseline review (UNAPPLIED): after root's
+actual central MKOBJ exit0, regenerated .cache/nhlua-parent-integration/
+root117-final-proposal with current seven shared before images. All seven hashes
+and all eight rendered after hashes match. Fresh JS3 syntax, Python3 AST and
+full staged support emcc syntax pass. Receipt parent-final-review.json SHA
+dac6bb2934f8dced5cfb4d1ea3b88e098c23f3eea0df564b23ea869dc8db0458;
+proposal.patch SHA5cd9cd722c1153c98c2eb3ce401d803e4df8e130cc5cc781f6bf6b1651ac4850.
+The patch happens to equal the earlier draft bytes; only this new review binds
+the post-terminal baseline. No selected/shared files were written by PAR09.
+Root is sole promoter; fresh central artifact comparisons and whole-game gates
+remain pending. Closure refresh after source-site boolean corrections records
+163 source identifiers plus two macro roots with no missing typed services;
+that structural presence check is not semantic/native equivalence.
+
+
+NHLUA central-build attempt1 stopped before compilation: the existing MKLEV source-provenance guard deliberately pins the whole original build script, and rejected NHLUA's announced typed-support/long-jump build additions. Actual process exit1 and log are retained at `.cache/tu122-root-staging/nhlua-shared-build.log`; this is not a component behavior comparison or game score. A separately reviewed narrow provenance supplement is pending. Historical MKLEV metadata and original compiler-input hashes must remain intact; no blanket hash refresh or guard bypass is authorized.
+
+
+The next closed122 evidence recipe `.cache/capture-tu122-game.py` extends the preserved accepted110 recipe, without editing it. It refuses a different/stale selected count and a pre-existing output directory; it captures new central component artifacts/content-addressed receipts, root/parent reviewed proposals and before-images, OBJNAM/INVENT corrections and the exact structure/first-pass tooling in addition to declared production sources, import closure, game artifacts and frozen harness/recordings. The recipe has only passed Python syntax validation; no122 game snapshot or acceptance exists yet. External configured toolchains remain required.
+
+The closed122 production import-audit recipe `.cache/audit-tu122-game.mjs` separately classifies MKOBJ's 21 compiler-inventoried private fixture aliases (their spelling lacks `_test_`) and will reject them if imported by the game. NHLUA's actual production callback/jump imports are not mistaken for test aliases. This extends the original-object/C-Lua absence and real-JS-import checks; syntax is verified, but actual122 link/import proof awaits the new game binary.
+
+
+The explicit NHLUA build-provenance supplement now recognizes only the original build script or its exact reviewed four-edit transport revision. `scripts/reviewed_build_provenance.py` reverses those edits and requires the original complete SHA256, rejecting changes to unrelated flags or source preparation. MKLEV, DOTHROW and DUNGEON source guards use that validation for their historical build-script pin; their original metadata and all other compiler-input checks remain unchanged. Parent checks passed all three fresh source/CPP guards, baseline/current positives and four unrelated-edit negatives; fresh MKLEV preprocessed bytes equal its original captured configuration. Root independently checked reconstructed build bytes against accepted110. This repairs source provenance only; it establishes no new gameplay/native/public parity. Proposal, before-images, negative controls and results remain in `.cache/nhlua-parent-integration/provenance-supplement`.
+
+
+PAR09 reviewed NHLUA provenance supplements (private UNAPPLIED proposals; root
+sole promoter): initial central build stopped before compilation because MKLEV,
+DOTHROW and DUNGEON froze whole build.py7f7d2856. New strict helper proposal
+.cache/nhlua-parent-integration/provenance-supplement reverses exactly four
+reviewed NHLUA transport edits from11455212, reconstructing original7f7 bytes
+and SHA. Every other revision fails; no historical metadata hash is refreshed.
+Three original configured source guards pass fresh, all three compiler-flags
+assignment ASTs are identical, full fresh MKLEV CPP bytes equal original capture;
+unreviewed flags/source-preparation/support changes reject. Private staged-runner
+argv mistake is retained separately. Parent10check receipt SHA
+5f23fec8c5db7bf148c9f0cd05ac1e04e5a0af1cc1316af013b65ee2cfe9f1c6.
+DISPLAY's older7dc84-to7f7 supplement composes with this exact returned baseline;
+future guards require their own explicit adoption. No game/native/public proof.
+
+Generic structure check additionally requires pristine plus prepared comments.
+Inherited001-deterministic-runtime.patch replaced one NHLUA xoshiro comment with
+seeded-random policy. Historical-comment-supplement proposal appends only that
+exact removed comment outside all94 bodies, retaining the entire frozen core
+prefix byte-identically. Dedicated source guard validates exact historical
+suffix separately, pins original prefix478ce9... and still requires all286
+prepared comments in original order/multiplicity. Generic checker unchanged.
+Original14/323 frozen manifest remains historical and unchanged; these two new
+selected core/checker hashes must be captured as a separate additive revision.
+Parent8check receipt SHAa62beb17ed9e0d9d4c99968994b87d242c24c86f68a970fb8937640f958e882d
+includes actual configured source/profile, exact generic comment membership and
+genuine missing/changed history/policy/prepared-comment rejections. Root waits
+current build terminal before promoting this nonpolicy revision.
+
+
+NHLUA's fresh central compiled-Lua pair passes the unchanged 402 cases/2,073 checks/all94 bodies; receipt `.cache/nhlua-parent-integration/central-replay/parent-central-review-c.json` binds actual binaries and340 stable inputs. The central builder currently emits compiled-Lua probes only. A separately reviewed reproducible sibling recipe now changes only its actual link dependency from the existing C Lua archive to the existing Lua bridge/library and adds `-js` output suffixes. All source, flags, exports, consumer and test expectations stay identical. Root independently compared both complete command arrays and every declared input hash. JS-backed compilation/replay remains pending; passing compiled Lua is not labeled as JS Lua proof. Production default is unchanged.
+
+
+PAR09 TERMCAP automatic-address lifetime correction: the initial source lowering
+allocated a fresh native char** cell at each Tgetstr query. A real C observer
+proved original term_startup passes one identical &tbufptr address for every
+query; wrong lowering fails this address trace. Core now allocates that single
+automatic typed cell at the original declaration and synchronizes ordinary
+reads/writes through its value. Existing ABI localPointer transport unchanged.
+Corrected initial57case/342check differential and actual whole-CPP/AST/source
+comments/data guard pass. Native-address failure log and dated JSON retained in
+.cache/termcap-author; broader capability/grid/callback/lifetime tests pending.
+
+PAR09 fresh central NHLUA compiled-Lua replay exit0: no-build relocated unchanged
+comparison body ran against actual new .cache/tu-probes reference/hybrid modules,
+402cases/2073checks/all94bodies. Four actual compiled module files plus340captured
+inputs unchanged before/after, including all323 frozen inputs. Receipt central-
+replay/parent-central-review-c.json SHA80f69ced9b60d18646bca74b70bc1076c7d8fa4bead958a8c4ac56aded63d8e2.
+Passing a JS provider option to those C-archive-linked artifacts would not prove
+the JS backend. Separate central JS siblings are therefore proposed using the
+actual builder's unchanged AST command construction and only archive-to-existing
+Lua bridge/JS-library substitution plus -js output suffix. Root-reviewed runner
+binds329inputs and refuses overwriting existing sibling evidence. At this entry
+the JS sibling build/replay remains pending; no whole-game/native/public claim.
+
+PAR08-SP_LEV131/J137 implemented142 configured original source functions64public/
+78static preserving names/order/formals/allcomments/algorithms/loops/joins/data;
+only2 exact local char class_ renames, NO formal exception. Source/pristine SHA
+91c684ab995f82d4775dcc83576abf36c25be5b2c205cddfaa46445328f4ce25 unchanged.
+80member records376fields→82initializer schemas386fields;11TU+50local zero-backed
+JS factories4698literalbytes;33extern globals206fixed+4vararg deps/34typed sites,
+40native designators/4types/1actualindirect predicate,73loggedRNG. Three long
+inputs/LuaInteger64,16byte sret/copied caller values,3formal4address sites,
+91uninitialized scalar autos reserve-only,2derefcounter/4scaledptr increments,
+5u32-long compute stores guarded. Actual original-C/importhybrid O2-g memory64
+proof2625/all142 direct entries +positive status0 realLua callbacks, expectedLua
+errors/recovery,nestedcallbacks/growth/newservices/throw/Modules/raw64/scalar/full
+livepayload/ownership guards PASS within controlledworld limits. Wrong JSrm8→1
+fails unchanged light_region state;9source/test/reference/hybrid hashes unchanged.
+Fresh production AST/CPP/source/comment/formal/scope/type/data/member/import guards
+PASS, narrow column1 source definition option required. Native fixture ABSENT:
+default/1 reject beforefactory, explicit0 diagnostics only. RealC Lua archive is
+same hash-bound dependency both sides, not freshly rebuilt or productionJS-Lua proof.
+Lua allocator prematureapply/oldbinariesunavailable history retained; parentreviewed
+same realloc/free via lua_setallocf after genuine luaL_newstate preservinghooks;
+game free tracker unchanged. Initial diagnostics/current-reviewed snapshots kept.
+Fullnative/game/public/production/allbranches/LuaVMheap/UAF remains UNPROVEN.
+No shared/selected/frozen source/profile/build/oracle/harness changes by author.
+
+
+PAR08 SP_LEV parent review: full final recipe read, independently171currentSHA entries(31inputs70headers70artifacts)0mismatch, manifest25a0c276d26c78a5e81639714e9798e7647db2f337d866f5533585cbcadef4a8; parent .cache/sp-lev-parent-review.json. Allcomponent/native/public limitations preserved; ROOT sole futurepromotion, authoridle/no selfclaimnextTU.
+
+
+NHLUA's fresh actual central compiled-Lua and JS-Lua backends each pass 402 cases/2,073 checks/all94 bodies using the unchanged comparison expectations. Both receipts and the explicit JS sibling recipe are retained under `.cache/nhlua-parent-integration/central-replay`; JS replay binds eight actual central artifacts and352 stable inputs. Root now promotes only an additive historical-comment appendix plus its exact source guard: the entire prior executable/data prefix remains byte-identical, all286 prepared comments still match in order/multiplicity, and one removed pristine comment is retained separately. Original14-owned/323-input manifests stay immutable historical records. The new two-file revision is bound independently in `.cache/nhlua-parent-integration/historical-comment-supplement/root-promotion.json`. No compiled policy or harness change; full-game/native/public acceptance is still pending.
+
+
+### Root promotion of reviewed FILES/DISPLAY/INVENT/CMD staging — 122 selected
+
+The following retained UNAPPLIED proposal entries describe the exact reviewed changes now promoted by root. Its47 checks validate the18 code after-images; root independently matched all18 current before-hashes and staged hashes, then applied the code-only patch and appended the exact documentation suffix to the latest register. Existing concurrent history is preserved. This integration adds four original TUs, fixes call-scoped dependency restoration for FILES/DISPLAY/INVENT, and fixes native pointer-cell addresses in three INVENT functions. Tests explicitly initialize the actual object/monster catalogues and exercise four genuine positive merges; the prior zero-catalogue claim stays retracted. Source-policy and fixture revisions remain distinct from their preserved original frozen proofs. New component link/replay and full-game/public validation remain pending.
+
+PAR08 UNAPPLIED FILES115/DISPLAY119/INVENT124 integration proposal. Exact68/71/119 configured algorithms remain JS; actual original C bodies excluded. FILES/INVENT separate typed ABI nativeStorageSources once, DISPLAY common typed adapter once and separate non-LTO public zero storage; JS initializes seven public DISPLAY objects before native constructors. Compiler-owned inline metadata requires fields entries but no generic layout decoder. Explicit per-port fixtures/dependencies/exports/source guards/shared paths/central dispatch staged against current baseline, no shared apply ability. Three runtime forwarding corrections restore call-scoped services in finally under real native reentry and exceptions. INVENT follow-up fixes all8 addressed obj formal expressions in3functions plus &uquiver variable-address, real objects_globals_init/monst_globals_init fixture startup and4 valid positive merges including quiver precedence. Old237 and full509 original hash evidence preserved; old zero-catalogue initialization claim RETRACTED, not proof. Separate receipt5e97396a1e0d4ef9f38d448cfbdb93ff196d7c8fa44b586ff6e5ede6edc308bd binds unchanged14 final-control inputs, actual1341 comparisons/all119 and source guards; original JS and isolated wrongglobal reject genuine assertions with original C source unchanged. Combined3-port service proof2900comparisons/all258functions,27357invocations/269native reentries/2447807lookups/0stale/10throws; isolated oldINVENT51155stale. FILES/DISPLAY component exact1420/139 plus22528innerwall checks remain separately classified. DISPLAY suite gains explicit shared fixture directory and explicit native-before-factory rejection; no native fixture/host/fullgame/public proof claimed. Actual shared rebuild and ROOT-owned original fullgame/native/public gates pending.
+
+PAR08 UNAPPLIED CMD125 added to same four-TU proposal: frozen168 entries verified, exact148 JS source bodies and required central callCmd/initializeCmd(layout,namespace), ordinary signed/lossless compiler metadata. Common typed ABI once; three public zero tables separate nonLTO with eager initialization before true foreign constructors. Both standalone modes use independent optimized foreign reader; hybrid-only public storage and fixture-only free wrapper library preserve actual ownership tracing. Explicit shared CMD directory; unchanged controlled1562 Emscripten comparisons are component evidence, no native/fullgame/public acceptance. FILES/INVENT/DISPLAY direct test defaults now reject absent native fixtures before factories; only explicit TELEPORT_NATIVE_TESTS=0 selects Emscripten. Historical originals remain frozen; no expectation/platform waiver added.
+
+PAR08 proposed DISPLAY-only shared source-parser seam: column-one C definition pattern gives exact71 compiler-inventoried names and formals, excluding two switch case false matches. Exact top-level export-function list must equal original metadata71; four nested lexical helpers show_mem/do_twall/horiz/do_crwall implement original goto joins and are separately exact-checked, not counted as extra C bodies. Original dedicated DISPLAY guard already checks these four names; no other TU parser behavior or source algorithm changes.
+
+PAR08 proposed DISPLAY build-provenance supplement for ROOT-approved NHLUA support/link addition: preserve original7dc84c8 inventory metadata and exact historical five-line cleanup to7f7d285; reuse canonical scripts/reviewed_build_provenance.py inverse-delta validator (SHA2908981dc364abe9b460dd35fcc5b89f0d6b4b1d1cecafa5026462ae069543d7) for exact current 11455212641a79b8ad9f895d9ec9d679e39114a198c3d32af7a1a6948be77662. Every unrelated change rejects. This adds no compiler/profile change itself; ROOT already owns/promoted those reviewed changes. Ordinary guard route now passes --current-profile so exact historical/current chain plus fresh original DISPLAY CPP/macros remain mandatory. Original guard/frozen manifest retained historical; proposed guard revision separate, no blanket hash waiver.
+
+
+PAR09 NHLUA central JS-provider replay complete: actual root-built JS siblings
+passed unchanged402cases/2073checks/all94body comparison; all8 compiled C+JS
+reference/hybrid module files and352capturedinputs unchanged before/after.
+Receipt central-replay/parent-central-review-js.json SHAc585cb8d1091f9c3406c3ba05c175634b2c902657d9ebbe35003ade46aaefe3b.
+This establishes both actual central fixture backends separately, with controlled
+catalogue/world limits still applying. Root subsequently promoted the additive
+historical-comment revision under its own receipt; original323-input freeze
+remains historical, not falsely declared identical to the two revised files.
+Whole-game/native/public acceptance of the new selected batch remains pending.
+
+PAR09 TRAP132/J138 independent parent review complete: original private source
+guard and no-build differential replay pass640cases/2482checks/all124bodies;
+all14owned/231live+frozen capturedinputs unchanged before/after. Manifest
+4fa7b5245db284d30e6ce229083cce6b917e3b952330c3f885f8530fbf9d32d1;
+parentreceipt .cache/trap-parent-review/review.json SHA
+d2c919eb6b96e0b9ed3afdaf3859389b18775a0fc346035268f048851720a2a7.
+Additional private unconditional wrong floor_trigger return0 is rejected by
+unchanged original compiled C and original comparison body; all231frozeninputs
+unchanged. Negative receipt SHA0477be7857613f98e2b04ee512f4ae4eabb4fc1601e2d76e0d00a4d93d3c38e0.
+The initial relocation omitted one foreign-option fixture file and failed before
+testing; retained separately, corrected by exact bytecopy, not expectation edit.
+Actual catalogue copy initializers execute with explicit pre-shuffle name indices;
+344foreign/world/text operations remain controlled. Actual calloc/free and trap
+liveness are observed; controlled object/monster factories and foreign delobj/
+obfree/useupall logging do not prove game deallocation or allocator refusal.
+All-body coverage is not universal branch coverage. Undirected named cases:
+all12notesoccupied fallback; mounted polymorph/dismount/death; recursive landmine;
+last Sokoban pit; broader artifact/container/paper destruction; actual launch
+monster collision/ricochet chains. Shared/native/fullgame/public remain pending.
+TRAP author now holds frozen inputs and only read-only triages prior NHLSEL84
+UB blocker; no new selected count or implementation authorization inferred.
+
+
+The first final-four central job compiled all eight FILES/DISPLAY/INVENT/CMD modules and regenerated122 layouts, but terminated before suites: macOS Bash3.2 with nounset rejects expansion of the runner's empty `node_options` array. `scripts/test-tu-first-pass.sh` now uses an always-nonempty Node command array, adding the existing MKOBJ test-only loader only for MKOBJ. No test expectation, production loader, game flag or frozen harness changes. Before-image and first failed log are retained; shell syntax and fresh component runs must verify the correction. The complete122 source-structure scan separately passed before this script-only change.
+
+
+### Read-only source-fidelity follow-up: original uninitialized automatic cells
+
+A separate compiler-AST audit identified extra JS zero stores in selected DOTHROW: original `dothrow`/`dofire` declare `int shotlimit;` and `hurtle_step` declares `int bc_control;`/`boolean cause_delay;` without C initializers, while current JS allocates those addressable cells with `C.local(type,0)` (current JS lines276,365,736,738). Root independently checked these four source/JS sites. The original output-taking calls initialize the values on tested ordinary paths; no public mismatch is established by this read-only finding, and no equivalence claim for reading indeterminate C bytes is made. Source-fidelity correction requires separate reviewed preservation of native allocation without an invented initializer, actual defined-path comparisons and explicit ABI allocation-contract tests. No DOTHROW source/runtime/test edits are part of the closed122 integration. PICKUP and the seven newly integrated files are being reviewed separately; inventory candidates are not accepted defects until emitted-code review.
+
+The closed122 verdict recipe `.cache/finish-tu122-game.py` is prepared (Python syntax checked, not run). It requires the actual original public process exit code, all44 distinct sessions passing every RNG/screen/cell/cursor/animation metric, original30/45-second command contracts, successful integration with unchanged captured inputs, a verified actual122 production import audit, complete manifest provenance and zero nonliteral local imports. It refuses overwriting results. A failure retains accepted110 as the checkpoint; native-host equivalence is not inferred from EmC/game tests. No122 acceptance is claimed before actual gates.
+
+PAR08 UNIXMAIN138/J144 frozen source-component parent review: fullrecipe read; independently289/289 frozenhashes0mismatch, manifestad743bb9a59f07e85deb3c58e0ddc948ffe6d156d7124b48d60be8396b74c29b. Exact15functions12public3static/originalprepared104+pristine101comments/control/data/formals, sourcec029938... vspristine9c8a9a... inheritedR01/R03/W08 explicitlyretained. Allstartup/option/account/seed policyJS, uniqueone-call Cmain ABI shell necessaryforactualSDKcallMain/ExitStatus, noCsourcefallback. Final734checks/182differentialcases/all15 +13actualcallMain contexts/independentexit0/argvliveoriginalalias plusnativeargcNULLguards; actualsetenv/unsetenv/getenv verifiedbefore ENVcases; full64seed/partialread/fallback/strongflag/sourceorder, independentO2mutablepasswd48consumer/alias/Module/sigaction152/nativecallbacks/growth/throwscope/raw64/scalar proof pass. Fourunchanged-C wrongJS variants fail intended comparisons; sourceCPP/type/metadata69=65+4/scope/import0vs15/genericreference/ABInegative/defaultnative-beforemissingfactoryreject pass. PrivateBOTHmode TABLE_BASE2 reserves0NULL/1SIG_IGN forvalidtypedfunctionIDs, notproductionflag/hostsignalpolicy. ThreeprivateJSstaticsexactpasswd48+pointer8+loginbuf256=312bytes withoutgaps, noownedpublicstartup; support+entry separateonce via nativeStorageSources, inlinefields[]/callUnixmain. EarlierENV202/invalidargc615 contexts supersededandpreserved, olddirectaliasfactorylogkeptbutoverwrittenoldpairhashesunavailable/noidentityclaim. Final160actualcompilerinputsincludingpreparedsourcecorrect prior88omission withoutrewritingoldreceipt. Hostaccount/unreachableW08branches/nativeentropy/signals/terminal/fullmoveloop/actualnativehost/fullgame/public remainUNPROVEN; noexpected/platform waiver. .cache/unixmain-parent-review.json andfullrecipewithactualhashes authoritative; rootsolefuturepromotion, authoridle/no selfclaim.
+
+
+PAR09 TOPL137/J143 independent parent review complete. Original freeze
+3ac84b96f1ba347030934e9602de268eaf37292b8fee26cbd957fc9fed8974a2
+is unchanged. Parent initial precheck correctly stopped on one historical
+prepared Makefile input drift caused by root normal122 build, not a TOPL change.
+Exactly330 of331 original files still matched; historical62923B Makefile SHA
+1c21ce0cd5e079d71f033c922317936774c09f36c787528ab6d460b5c215c684
+was independently reconstructed and SHA-verified from the current Makefile.
+Separate .cache/topl-parent-review/makefile-transition.json SHA
+6d24eadbbb8e359f02f15b89f83ff2cd6aa9e29b5d98aea70b72bbf4f295edb6
+proves only the actual110-to122 generated object-exclusion block and two blank
+lines from existing remove/reappend logic differ. All other Makefile bytes and
+actual ../win/tty/topl.c compile rule match; no historical pin is rewritten.
+Parent review then binds330original inputs plus that separately reviewed current
+Makefile, all331 stable before/after. Both unchanged no-build replays pass1826
+all15 and1792 all10public,4actualnativecallbacks,0_test imports with5positive
+hybrid detector imports. Actual fresh AST/body/type/profile/91ABI/source/string
+guards, const storage/scope checks and all4 genuine negatives pass. Negative
+output/fixture directory alone is privately relocated to preserve original
+frozen logs containing process IDs; original source/oracle/expectations remain
+unchanged. Receipt .cache/topl-parent-review/review.json SHA
+f0d5557c9d919bafe9312e6aa5fe27b92ac5e489708af7452a8f0a1f14750858.
+Native-host/realterminal/fullgame/public/foreignrefusal/fullbranch remainpending.
+TOPL author's read-only TERMCAP source/type/lifetime review found no actionable
+configured mismatch; bounded static evidence e3d6a2aa8561b36283ca4ed29564abf8dbb2246dedfe10daed0b1a9932a16e08,
+not an additional runtime/native/fullgame proof.
+
+
+PAR09 TERMCAP held ABI deterministic regeneration after actual author compilers
+drained: generate.py→measure-contract.py→generate-runtime.py plus twoJSsyntax,
+163+2structuralclosure and56+1dispatch checks all7pass. All six production ABI
+files remain byte/hash identical, all four generator/template inputs unchanged;
+actual12native-record LLVM size guards regenerated. Receipt
+.cache/termcap-abi-author/idempotence-review.json SHA
+727553c44d686b7985e42159b964820231477f96fe4a5c92a2ec554b7aa60183.
+This is reproducibility/shape proof alongside actual semantic author tests, not
+a new equivalence claim. Parent6outputs now held for author immutable capture.
+
+
+### NHLSEL84 follow-up: private observation diagnostic only
+
+Root reviewed `.cache/nhlsel-readonly-triage/triage.json`:33 original functions/98 comments,734 prior defined-corpus comparisons and a retained unary-alias mismatch. Actual Lua unary metamethod calling supplies the same userdata twice; original NHLSEL clone frees its map before dupstr reads it, so the original source has use-after-free. Existing raw evidence differs in one map cell; the exact first-divergence cause is not isolated. A131-file shipped-asset syntax census does not waive arbitrary/custom unary calls or count this TU as complete.
+
+Only a new symmetric private nonallocating observation diagnostic is authorized now: preserve all old source/binaries/logs, compare ordinary allocator pointer/map bytes before/after actual free and actual dupstr allocation behavior, with preallocated JS event storage and no added C reads of freed data or allocations/GC within the observed interval. Keep an uninstrumented reproduction separate and report if observation changes behavior. No source/allocator change, delayed free, dropped operand, output normalization, C policy fallback or acceptance waiver is authorized. Same-state heap rollback is not yet authorized; first report the initial diagnostic evidence. Work must stop heavy jobs for the pending original deadline-gate quiet window. Native-host/general UB equivalence and NHLSEL selection remain pending.
+
+
+PAR08 MON127/J133 private first-pass freeze (UNSELECTED): actual unchanged configured
+mon.c SHA0ab56f908ac2147a5e57970250b99f90d47f2ec32fbdfb1a6fab04c33167bd01,
+129functions97public32private/717comments/77logger origins preserved. Original
+three-function labelled lowering, typed automatic native cells/full byte copies,
+per-actual-Module iterator pointer/capacity and local long64 clock follow the
+before-GO scope above. Stable per-Module/layout live views forward the current
+service packet and restore it in finally; publish caches only after validation.
+Draft ownership audit added actual obj.ocarry union alias (compiler-derived
+offset/pointer guard), not a surrogate global. All27 structured native return
+prototypes checked against current configured C and wrapped as exact live views.
+Controlled external bury_an_obj now always initializes its bool output (actual
+dependency contract); no source algorithm or expected C result changed. Reference
+and hybrid observe source fullzero-before-free through the same actual-free
+forwarder; game keeps normal free. Actual native objects/monst/alloc/hacklib/
+drawing/mondata remain dependencies, other world effects explicitly controlled.
+Fresh O2 memory64 pair PASS14,712comparisons/all129 entries, including whole
+corpse catalogue,six full extra-record copies/ownership,actual A/B/A Modules,
+shared nonreentrant nested iterator,native growth/reentry/output mutation/stack/
+exceptions/address reuse/long clocks/raw64. Six intended wrong-code variants
+reject actual comparisons (region/carrier/service/bool-output/Module-static/
+copy-tail); source/config/data and lexical guards PASS. This is NOT all-path,
+host-native,shared,mixed-game,integration or public acceptance. Receipt
+.cache/mon-author/freeze.json binds110 frozen inputs via manifest SHA
+fbca14d22771088bf1682668062d684335b2891384226dfad9de2a6c99b94624;
+recipe .cache/mon-integration-plan.md. EAT49 hashes independently unchanged.
+ROOT alone may stage/promote shared files; all prior historical proofs retained.
+
+
+PAR09 TERMCAP136/J142 independently reviewed frozen private handoff complete.
+Manifest .cache/termcap-author/handoff.json SHA
+4b0b7c410fbe23a7f59539edf07aabd1d9285a2d5c507443f8223d5d510569e2
+and identical frozen/handoff.json bind14owned,149profile inputs,171artifacts/raw
+history,45ABI/generator/template/peerproof inputs (379unique) plus4toolchain.
+Parent verifies379current+379frozen+4toolchain before/after actual fresh source
+CPP/AST/comment/data guard and four no-build variants: canonical215/2360/all56,
+unchanged production provider57/406/all56, both-callers productionJSterminfo
+57/406/all56, productionnativecallbackclosure4/34/zero private-test imports.
+Receipt .cache/termcap-parent-review/review.json SHA
+0cfef50fb3a1568ea1dd0828cc351fd30a6a9d3bba7c8e12c80b109cb24d8014.
+Native macOS/sharedintegration/fullgame/public remain pending; original bounded
+6144byte serializer, configuredNO_TIMED_DELAY and pinnedterminfo-entry limits
+remain explicit. Four boundaries stay capability policy, native byte transport,
+inheritedshadow/capture schedule, inheritedserializer+existingouterencoder.
+All inputs now held; no selected/shared or harness/emulator edits from PAR09.
+
+
+Normal122 build attempt1 terminated exit1 before final game link. After compiling the earlier118 component pairs, FILES dependency compilation received bare NOTPARMDECL/NO_TIMED_DELAY/MACOS/NOPANICTRACE/NO_FILE_LINKS as filenames. The existing DECL branch had reassigned the module-wide prefixed `defines` list to raw JSON names; targeted final-four tests never visited DECL and therefore passed. `scripts/build-tu-probes.py` now names that branch's raw list `decl_defines`, retaining identical DECL flags and preserving the original prefixed shared list for FILES/INVENT/DISPLAY/CMD. This is a two-line variable-scope correction, not a compiler-profile or source-policy change. Exact before-image, failed normal log and revision receipt are preserved; Python syntax passes, normal rebuild is pending.
+
+
+### MON127/J133 independent-review correction pending (outside closed122)
+
+A read-only peer review found two pointer-assignment lowerings in the frozen draft: `mon.js`2369/2394 use `C.int` when assigning live `fmon`, corresponding to original `mon.c`2546/2573 pointer assignments. That adapter's int conversion narrows to32 bits before the64-bit pointer setter; existing low-address14,712 comparisons do not test this truncation. The original110-entry proof also omits parts of the transitive C/header/toolchain closure, so it is component evidence under its recorded limits, not a complete rebuild capsule.
+
+The original owner is authorized to prepare a separate unapplied revision with pointer-typed lowering, compiler-AST pointer-assignment checks and a directed actual-native pointer-slot witness, preserving all old source/artifacts/receipts and explicitly distinguishing bounded ABI tests from high-pointer full-function behavior. Fresh compile inputs/toolchain/actual dependency headers must be bound prospectively. No frozen source rewrite, current122 selection or production game edit is authorized by this revision plan; root will review before promotion.
+
+
+Normal122 build attempt2 compiled all122 original/hybrid component pairs and regenerated all layouts/factory contracts, then terminated exit1 at the final game link. The pinned Emscripten JS compiler's symbols-only phase failed serializing symbol dependencies with `RangeError: Invalid string length` (`jsifier.mjs`906). This is an actual unresolved link failure, not a test score or missing source compilation. Log `.cache/tu122-root-staging/normal-build-attempt2.log` is retained. The first requested heavy-work quiet window was cleared without running any game timer gates; no acceptance is inferred. Read-only dependency-graph diagnosis is pending, with no SDK/compiler/frontend/source/harness modifications or limit override authorized.
+
+
+PAR09 NHLSEL first-stage observation stopped without acceptance/expansion.
+Unique .cache/nhlsel-readonly-triage/diagnostic observer fixtures retain seven
+frozen source/runtime/test/library/support copies exactly; original uninstrumented
+failed evidence remains unchanged. Actual symmetric ordinary free/malloc/dupstr/
+strlen each execute once; JS byte observations use preallocated storage, with no
+observer Wasm allocation or Lua operation. Both modules record112events with
+no overflow. Before free each map has first NUL1680; after free allocator-link
+prefix differs by address layout. Real dupstr strlen3 and malloc request8 are
+observed in both. Subsequent80x21 map walk comes from unchanged source; this
+observer does not independently trace every secondary native read/write. The
+unchanged original test exits1 with its protective happened-to-match rejection.
+No output normalization, allocator alteration, source repair, same-state rollback
+or count promotion is authorized. Parent only read/hashes saved records and
+verifies twelve historical frozen witnesses; no new experiment/rebuild. Receipt
+parent-observation-review.json SHAd50a45963a94c02c55d3216c8de475652a3210b033f2fab077c0fc50cc79ad08.
+
+PAR09 MON read-only peer review found two concrete pointer assignments lowered
+through signed32 C.int at mon.js2369/2394 versus nativepointer mon.c2546/2573.
+Carrier-union mapping itself matches actual native field overlap. Low-address
+body tests and separate opaque full64 view tests do not prove these assignment
+conversions. All110declared old hashes match, but transitive original C/header/
+defines/c-runtime/SDK closure is not bound by that old receipt. Review notes
+.cache/mon-peer-review/notes.md document exact scope; original MON owner receives
+separate private revision, no PAR09 source edits or current122 changes.
+
+
+### Confirmed21 automatic-cell initializer corrections — separate candidate authorized
+
+Root read the full `.cache/root-seven-abi-audit/report.md`: actual cached C AST/Acorn review covers526 functions,83 addressed declarations/137 sites/six formals and ten fixed wide64 arguments. It confirms18 APPLY, two OBJNAM and one INSIGHT declaration-time zero writes absent from the original C. This is a source-contract gap, with no demonstrated defined-path output mismatch. Explicit initializers, addressed formals, static zero initialization and current-value argument transport are separately classified and must stay intact.
+
+A unique unapplied revision may remove ONLY those21 writes and distinguish INSIGHT's explicit-zero enlightenment caller from its no-init set_vanq_order caller. Runtime helpers must reserve typed storage without writing when the C declaration has no initializer; actual explicit initializers still write. Preserve all current source/proof before-images, function boundaries/names/comments/control flow, old receipts and unchanged original-C expectations. New DeclID/initializer guards, unchanged unit replay and separately labeled seeded native allocation-contract witnesses are required; do not treat indeterminate C bits as an oracle or add an expected-value waiver. No live selected/core/runtime/fixture/guard modifications are authorized before root review. This candidate can proceed while the separate final-link metadata issue is diagnosed; it is not yet part of a122 accepted game build.
+
+
+### TU139 / J145 WINTTY — private first-pass proof and bounded handoff
+
+WINTTY now preserves all 72 configured original functions (42 public, 30 private), original order/formals except the explicitly reviewed `tty_message_menu` reserved formal `let`→`let_`, and all 589 prepared block comments exactly in order. Actual diagnostic source is `../win/tty/wintty.c`; pristine/prepared differences remain exactly inherited NOMUX additions. Original terminal/menu/status/input algorithms stay in readable JS. Separate zero-only native storage retains real externally visible window globals and the JS-initialized 416-byte `tty_procs` catalogue before optimized native constructors. The private production SIGWINCH trampoline invokes the original JS handler; 30 separate probe aliases are not production imports.
+
+Private actual EmC original-C ↔ imported-JS proof passes 165 comparisons/all 72 functions using actual prepared TOPL/TERMCAP, pinned xterm terminfo and libtinfo. Complete native constructor records/callback identities/padding, all 114 status-order cells, 18 encumbrance strings and 12 command bytes are compared. Coverage includes multiple menu pages, the unique digit-group goto, full native selection records and free ownership, raw64 identifiers/counts, status fitting, DEC/UTF8 bytes, real file/stdin reads, erase-key name editing, actual memory growth during native allocation, native signal callback, nested current-services restoration, exception cleanup, failed-constructor retry and two real Modules. Three deliberate loader negatives reject missing startup, same-length catalogue alteration and omitted raw capture at intended native-comparison assertions.
+
+The stronger all-cell witness caught and fixed a partial-array projection defect before freeze: Clang's array_filler sentinel is not a leading source element. The unused third twolineorder row is 16 BL_FLUSH values followed by three implicit zeros. Native expectations were retained. The stdio observer compares actual emitted bytes with live cursor/shadow timing while preserving native flush/input/allocation/foreign traces, since optimized C puts-empty can become putchar whereas a typed dependency bridge retains puts. A retained isolated compiled witness demonstrates identical newline bytes and distinct API spellings; no terminal call scheduling/default/renderer/harness change was made.
+
+Forty-four foreign game/UI helpers remain explicit controlled fixture dependencies; physical host termios/signal delivery, complete player/TOPL policy, all error/status/menu combinations, inactive configurations, host-native parity, shared integration and public acceptance are not claimed. Root owns unapplied shared registration/build/runtime integration. Exact APIs, guards, dependency flags, commands, observations and limits are in `.cache/wintty-integration-plan.md`; frozen source and actual artifact receipts are under `.cache/wintty-author/`. No selected/shared source was changed.
+
+
+For final-link diagnosis only, root is executing the exact failed emcc link command with a private output basename and a diagnostic Node preload that captures the real compiler settings JSON and deliberately aborts before dependency-graph evaluation. The preload is never used for normal builds or acceptance tests. It changes no on-disk SDK/source/harness or compiler profile; output/settings/command hashes remain in `.cache/tu122-normal-link-pruning-proposal`. This is an observation run with expected nonzero exit, not a successful game link.
+
+
+### J139 / PAR08 OPTIONS private component proof (unselected; EmC first pass)
+
+The original configured `src/options.c` now has224 JS function bodies (45 public,
+179 private) in original order/formals with all693 original block comments.
+Twelve original goto edges remain intra-function labelled break/retry structures;
+only original local char `let` uses `let_`. JS owns all66 configured static
+initializers. Native private zero-only byte backing is retained for the original
+allopt memcpy, live boolean/char** cells, pointer identity and native callback
+boundaries; no initializer/policy C mirror was introduced. Allopt explicit once
+initialization and each original do_init call retain source timing.105 typed
+production callback trampolines are distinct from fixture-only entry aliases.
+
+The private full-profile MEMORY64/O2 reference/hybrid pair passed3,266 exact
+comparisons/all224 functions; actual C original backing/type/field assertions,
+all36 native file-static datasets and both218-row allopt tables (all fields,
+separate pointer identities and scalar/padding bytes) are checked. Real original
+object/monster/role data and OPTIONS' own fruit-name-index initialization phase
+are independently asserted. Source/data and isolated lexical guards pass; six
+loader-only negative controls each fail a meaningful semantic assertion. Native
+menu choices, retries/shared cleanup, pointer-valued removal, actual hooked frees,
+char** outputs, wide flags, native16-byte stride, stable/interior pointers,
+source RNG enabled/disabled paths, heap growth/reentry, override restoration,
+failed first construction retry and actual shared-dispatcher Module isolation are
+covered. The final11 file hashes, artifacts, exact commands, logs and listed1,674
+unchanged proof inputs are in `.cache/options-author/receipt.json` and the
+unapplied integration recipe `.cache/options-integration-plan.md`.
+
+The existing native-libc-library/createNativeRegexLibc ERE dependency is used in
+BOTH modes (regcomp/regexec/regerror/regfree); this is not independent native
+libc/regex parity. Typed fixture UI/config/capability/naming/status and fruit
+lookup return/output effects are controlled, while original OPTIONS algorithms,
+actual libc formatting/strings/allocator/catalogues/role dependencies remain
+real. No lookup/parser/selection algorithm was added to C. No fatal/OOM/invalid
+pointer/undefined-overlap or all-external-world guarantee is claimed. Native-host
+backend diagnostics, root mixed linkage and original full/public gates remain
+pending under the authorized EmC-first staging; no selected game/shared registry
+or frozen component was changed by this private handoff.
+
+
+### Reviewed automatic-local initialization correction (122-TU staging)
+
+Root is promoting the independently reviewed six-file candidate in `.cache/auto-initializer-revision/`: 18 APPLY, two OBJNAM, and one INSIGHT automatic locals now reserve native stack storage without adding zero writes absent from C. Explicit initializers, argument values, and `enlightenment.selected = 0` remain. Function boundaries and original C sources are unchanged. The unchanged EmC component suites pass 21,973 comparisons; 28 separately labeled seeded allocation-contract checks pass and three old-helper controls fail. These checks do not claim deterministic output for indeterminate C values. Receipt SHA-256 `e85301c1aa265f3dfdd0f906e95ff8287a2a3a984a697a7b1f57125889c0f696`; independent review `.cache/auto-initializer-peer-review/final-review.json`. Original frozen evidence is retained. Full-game/public and native-host gates remain pending; accepted checkpoint stays 110 TUs and 44/44.
+
+
+122-TU gate-capture recipe now includes the reviewed automatic-initializer candidate/promotion and independent review, normal-link pruning proposal and independent review, durable pruner generator, and MKOBJ function inventory used by the production-import audit. The 439,843,174-byte SDK diagnostic graph is an output rather than a game input: its exact hash/size remain in the captured preflight receipt; the capture does not duplicate that graph. Gate commands, game inputs, frozen harness, and accepted checkpoint are unchanged. Recipe has been syntax checked; execution waits for a successful normal build.
+
+Capture recipe additionally retains the pruner author’s frozen generator, guarded CLI/negative tests, source inputs, and receipts under `.cache/tu122-dependency-graph-author`; no acceptance claim is inferred from those component diagnostics.
+
+
+PAR09 normal122 link dependency serialization diagnosis and UNAPPLIED correction:
+SDK compiler symbols-only mode deliberately loads every library entry and copies
+each full transitive native-leaf closure into JSON. Set-based traversal terminates
+cycles; the failure is repeated dense closure data, not Lua execution or an
+infinite graph walk. Actual125 repository libraries have4512symbols/18909edges;
+a1597symbol SCC spans90libraries. Repo-only estimate560480731bytes exceeds
+V8's536870888 string limit. NHLUA's own service closure is outside that SCC;
+no sole-Lua-cause claim. SDK/library/harness/source policy remain unchanged.
+
+Candidate normal-final-link-only last library removes845 proven private test
+entry descriptors plus their exact sig/deps/SDK-user decorators (3380keys).
+Original complete unit libraries stay intact for component tests. Integrated
+guards verify original descriptor values, every retained descriptor/key order,
+all loaded SDK+repo dependency/alias demands, body/postset literal/identifier
+demands and explicit startup/export demands; arbitrary computed-name proof is
+not claimed. Current native inputs are freshly compiled under identical flags
+and scanned with pinned llvm-nm before pruning. A real private object requiring
+a removed entry rejects. Prototype17VMcases/17867checks and5CLIcases pass;
+222current+frozen inputs are independently verified unchanged. A parent escaping
+concern was discarded after actual byte inspection:27LF bytes and expected
+escaped function strings are correct; no erroneous code defect is retained.
+
+Root captured actual failing settings with a diagnostic stop before graph work,
+without SDK disk edits. Actual settings contain126libraries:125repo plus one
+SDK pthread stub. Unmodified SDK compiler preflight preserves all126 and every
+other setting, appending only the guarded pruner. It exits0 in12.589seconds with
+5220rows/16444157nativeedges/439843174JSONbytes and261inputs unchanged.
+Receipt actual-sdk-symbols-preflight.json SHAadf64a7bf95478cd40431848b3f7e3ab3a84ff1df44a7d4a37f1d8dfe3096b1d.
+No limit increase, source-function omission, dependency suppression or SDK patch.
+
+Complete UNAPPLIED three-file proposal is .cache/tu122-normal-link-pruning-
+proposal/promotion.json SHAd4065467c35c1d5d4553eecffc5ff24358b2c48cb24fb7ff25432c490440c080,
+patch SHAc59ebbf6a894fb599457af01b08541b6b08c30f00001f48d984e9d1a25befbee.
+New generator is byte-identical to frozen prototype059762...; build.py54e28...
+adds current-object verification and last-library generation only, declaring all
+new inputs in normal metadata. Exact reviewed helper chain reverses that build
+delta to prior114552 then historical7f7 without refreshing old source pins.
+Older022/a433 private previews and receipts are preserved in history. Root is
+sole promoter; actual native link, normal game build and original deadline/
+integration/public acceptance are still pending.
+
+
+### Normal-link test-descriptor projection promoted for 122-TU staging
+
+`nethack-c/wasm/build.py` now compiles its current remaining native inputs with the existing flags, gathers the complete ordered native object/archive list, and invokes new `scripts/write-game-library-pruner.mjs`. The generator parses the actual ordered JS libraries and verifies current native undefined symbols before emitting a final, last-loaded library that removes only proven `teleport_*_test_*` entries and their metadata. All original component libraries, production function bodies, callbacks, remaining property identities/order, SDK, source profile and frozen harness remain unchanged. This addresses the actual Emscripten symbols-only JSON string-limit failure; the full SDK preflight succeeded with 439,843,174 bytes of metadata, versus a modeled unpruned size above the engine limit. The current projection removes 845 test entries/3,380 properties; changes in demanded symbols, retained dependencies/bodies/postsets, signatures, startup/exports or metadata fail closed. Arbitrary computed-name JS construction is not exhaustively proved. Strict undefined-symbol linking remains enabled.
+
+The normal build manifest now hashes the generator, native inputs, library/input lists, generated projection and its manifest, build script and provenance helper. `scripts/reviewed_build_provenance.py` accepts this exact revision only through byte-exact inverse reconstruction of the preceding NHLUA build and original pinned build; historical metadata pins are unchanged. Independent review checked all 35 actual native inputs and exact three-file patch. Proposal `.cache/tu122-normal-link-pruning-proposal/promotion.json`; independent final review `.cache/tu122-dependency-parent-review/final-54e/review.json`; actual SDK preflight receipt `.cache/tu122-normal-link-pruning-proposal/actual-sdk-symbols-preflight.json`. Original failures and earlier proposals remain historical evidence. Actual final linking, original integration/public gates and native-host equivalence are still pending. Accepted score stays 110 TUs, 44/44.
+
+The separate final pruner-generator review arrived after root promotion and found no blocker: `.cache/tu122-dependency-independent-review/final-generator-review.json` (SHA-256 `836a5b1d577e91ba030608e7edce7bb5c4195ee6446298d635c2f193fe2d2d57`). It binds 177 inputs and independently reviews the 845 exact test descriptors, current native demand and retained graph. The earlier parent build review preceded promotion; this later generator review must not be misdated. It is included in the pending gate capture.
+
+
+Normal122 attempt3 terminated with exit1 before reaching the new projection: APPLY’s existing exact source-regeneration guard reproduced the old injected-zero translation and rejected the reviewed corrected live source. Original log `.cache/tu122-root-staging/normal-build-attempt3.log` is preserved. A separate bounded generator revision is being prepared, keeping exact regeneration checks intact; the prior six-file component evidence does not establish generator reproducibility. No new game/public result.
+
+DOTHROW source-contract audit now confirms eight injected-zero automatic locals (two `shotlimit`, `bc_control`, `ballx`, `bally`, `chainx`, `chainy`, `cause_delay`) rather than the four initially observed. A private, unapplied revision is authorized for exactly those eight calls and the local-storage helper, preserving five initialized/formal-value copies and existing strict source/regeneration guards. Seeded native allocation-contract tests will be labeled separately from defined C behavior. Audit `.cache/dothrow-auto-initializer-revision/audit.json`; no actual public failure is attributed to these stores.
+
+
+Read-only selected122 automatic-local discovery found 56 additional declaration-time zero writes in 13 ports: MKLEV8, DUNGEON7, MKMAZE4, NHLOBJ4, GETPOS3, SPELL6, MONMOVE8, TIMEOUT10, DOKICK1, MTHROWU2, DO_NAME1, REGION1 and TOPTEN1. Report `.cache/remaining-auto-local-audit/report.md` and source-linked findings JSON; this is bounded discovery, not exhaustive or a demonstrated defined-C/public failure. Explicit initializers and current/formal-value copies are excluded (initial exploratory WINDOWS/REGION attributions are corrected in the report). Private disjoint followup candidates may remove only those injected initializer writes and adjust helpers/generators to preserve exact strict reproduction; all original functions/formals/control flow/comments remain. Each candidate requires unchanged component replays and separately labeled native allocation-contract witnesses/negative controls before any shared promotion. These followups do not silently enter the current122 build.
+
+
+Root promoted the independently reviewed one-file APPLY generator correction in `.cache/apply-author/core-fixes.py`: exactly eight no-initializer lowering templates omit their old injected `, 0`, producing the previously reviewed live JS byte for byte. Explicit/formal/current-value lowering templates and `apply-metadata.py`’s strict whole-source equality check are unchanged. Candidate `.cache/auto-initializer-generator-revision/promotion-preview.json`; independent readback `.cache/auto-initializer-generator-peer-review/review.json`; before `fa9152de244ced9011e4ad77e5d6cff4692f47d631e91fa4cb44127c376f8462`, after `88248f23ee063102b2de8a555c537706e0baf5fa66c1b99d27e3933c37d82d35`. This cached generator is an existing required build input; its reproducibility limits are retained in the register. Private reproduction passes; full normal build is rerun next. The earlier attempt3 failure is preserved. Historical OBJNAM/INSIGHT author templates are a separate pending reproducibility followup, not silently changed here.
+
+Pending gate capture includes the active APPLY generator revision, independent review, root promotion and historical-tool qualification; normal122 attempt4 is running after exact source reproduction passed. No new game/public acceptance.
+
+
+Before future WINTTY/PICKUP/SHK integration, private validation-only revisions are authorized: reject missing/native-requested backends before factory execution where no native oracle exists; WINTTY menu-result comparison must additionally preserve the native allocation-region/offset identity and count rather than discard pointer evidence; WINTTY profile documentation must distinguish actual private -O2/no-g builds from production -O2/-g and captured inventory flags. Existing frozen handoffs/reviews remain unchanged. Original C/JS core, terminal capabilities, byte/shadow transport, game harness and expected output behavior do not change. New revisions require bounded positive and genuine negative witnesses and exact before/after receipts before promotion. Current122 selected build is unaffected. Peer findings `.cache/wintty-peer-review/REPORT.md` and parent readback retain their profile/provenance qualifications.
+
+
+Historical generation-tool qualification: `.cache/auto-initializer-generator-peer-review/historical-plan.md` identifies that OBJNAM’s old author chain predates both the reviewed record-field pointer projection and automatic-local correction. INSIGHT’s old author chain additionally predates current call-local lifetime and `N_times` integer-width handling. These historical tools are not used by the active normal build and are not claimed to regenerate the current ports. They remain preserved historical evidence; no broad regeneration rewrite is silently included in the current122 batch. APPLY’s actively enforced exact regeneration is separately fixed and retained.
+
+
+Normal122 attempt4 completed successfully (actual session13517, exit0), after the exact APPLY generator repair. Unmodified provenance checker verifies853 artifact/source hashes. Production audit confirms all122 selected original C objects and HACKLIB archive absent, actual JS imports present, no selected private test aliases, and checked C Lua interpreter symbols absent. Literal module closure324files/0nonliteral imports. Wasm SHA-256 `fdab82fe2274fcf33fa97416dea1beb1a9eb85ca5a52a5e0c42849bc09ab88fc`; result `.cache/tu122-root-staging/normal-build-attempt4-result.json`. Timed quiet is requested from all nine author slots before original integration30s/public45s gates; no new public score yet. Accepted checkpoint remains immutable110/44.
+
+
+### First122 original gates: failure preserved, accepted110 retained
+
+Normal122 candidate wasm `fdab82fe2274fcf33fa97416dea1beb1a9eb85ca5a52a5e0c42849bc09ab88fc` passed build/provenance853 and production import audit but FAILED original integration: required actual Wasm import `teleport_compress_file` disappeared after FILES moved its external compression call directly into JS. Original public suite completed all44 with5/44 passing:25 failures are `Review INSIGHT native scalar dungeon` record projection errors;14 are `services.is_fainted is not a function` from EAT’s Unaware predicate; the5 completed sessions match exactly. No timeout/normalization/harness workaround was used. Snapshot `.cache/tu122-gate-snapshot/failure.json` preserves actual original commands/deadlines, all9quiet acknowledgments and all2,929inputs unchanged. Originalpublicprocess exit0 is not treated as a passing score. Full accepted checkpoint remains immutable110/44. Quiet is CLEAR after actual terminal completion.
+
+Private bounded corrections are now authorized: INSIGHT’s compiler-described dungeon record/typedef projection; EAT’s mistaken external-service predicate call must invoke the existing original JS `is_fainted` function under the correct current environment, without duplicating its algorithm or changing core source; FILES needs a reviewed meaningful foreign-service ABI route to preserve the original integration import contract, with exact scope to be reviewed before promotion. Each uses actual immutable compiled pairs/unchanged unit expectations and positive regression plus old-code negative evidence. No shared promotion or new accepted score is claimed here.
+
+
+FILES compression compatibility candidate scope is now concrete: add one typed foreign-service forwarder `teleport_files_compress_file(const char *, const char *, int)` in existing `files-support.c` that returns `teleport_compress_file` unchanged, and route the existing FILES library facade through that C boundary/dependency. The actual compression algorithm stays in the existing JS dependency. This is an exercised foreign-service ABI route, not an unused forced import; JS FILES policy/core/runtime and original integration assertions remain unchanged. Private paired builds and unchanged1420suite, actual import/argument/return/codec witnesses and old-route negative precede any promotion. The historical FILES generator will receive a separate exact supplement/qualification rather than silently changing frozen original evidence.
+
+DOTHROW’s resumed private candidate unit has not completed its baseline. A separate action/ref-vs-hybrid progress diagnostic is authorized after draining the long-running handle, preserving original assertions and native heap/source behavior. It is diagnostic only, not a new passing proof or a change to the frozen game harness.
+
+
+Root reviewed and promoted the single EAT runtime expression correction: `Unaware` now invokes existing original JS `eat.is_fainted` through `withCEnvironment(env, ...)` instead of nonexistent external `services.is_fainted`. Original short-circuit order, core functions, native layouts, library, C fixture and guards remain unchanged. Exact original7332 comparisons pass on immutable actual paired artifacts;50 separately targeted native-C/JS return/state comparisons cover missing-service production shape, short circuits, A/B/A Modules and actual heap growth. Old runtime reproduces the original TypeError. Root checked all42 frozen file bindings and exact one-expression inverse before promotion. Receipt `.cache/eat-predicate-revision/receipt.json`, root promotion receipt in its `root-promotion/` directory. This repairs a cause of14 failed public sessions; it is not a passing public result. Normal rebuild and unchanged original gates remain required.
+
+
+Root promoted the independently reviewed one-line INSIGHT record lookup correction: compiler typedef `dungeon` resolves to existing schema record `struct dungeon`. No guessed struct name, numeric offset/stride, core policy, C source, layout header or strict guard changes. Original3522 comparisons/all46 functions pass; a fresh paired native-C record witness passes48 checks across3 ordinary non-Endgame/non-Knox branches, using compiler/native sizeof92 stride and24-byte inline name storage. The old runtime reproduces the exact public error at background_enlightenment. Root verified111 current input bindings,30 artifact bindings and8 live before hashes; independent review `.cache/insight-dungeon-peer-review/final-review.json`, candidate receipt `.cache/insight-dungeon-revision/receipt.json`. This addresses the cause of25 failed sessions; no new game/public acceptance is claimed before rebuilding.
+
+The next fresh122 gate capture will include both critical runtime revision proofs, FILES compression-boundary proof and independent reviews, plus the first failed gate’s full output/results/command/quiet/input-hash records. The existing failed2,929-file capsule stays immutable in place; it is not overwritten or relabeled accepted. The capture recipe remains syntax checked and requires a fresh output directory and a current matching normal build.
+
+
+WINTTY private observer amendment is now explicitly authorized after reviewing `.cache/wintty-validation-revision/GETTER-AMENDMENT-PLAN.txt`: a copied test-only C fixture may add exactly four read-only getters for existing allocation count/base/size/live records, with matching new private exports in both modes. No writes/allocation/reset/source/dependency/model/ownership/terminal-policy changes. New unique `.cache/wintty-allocation-observer-revision` artifacts preserve old fixtures/builders/pairs/receipts. Existing actual -O2/no-g/MEMORY64/five-define profile is retained and separately qualified against production -O2/-g. The verifier must compare trusted unique LIVE allocation-ID + exact BigInt offset + count/extent before dereference, retaining raw unknown bits and existing row bytes/padding/traces. Genuine wrong-allocation/offset controls must remain in bounds and restore the tested pointer in finally. Stop/re-scope if a genuine controlled region is unavailable. This is private unit-observer code, not the frozen recorder/harness or production game. No promotion/native-host support claim follows from authorization.
+
+
+Root promoted the reviewed exact two-file FILES typed foreign-service boundary after independent peer acceptance: existing `files-support.c` adds only one direct typed call returning existing `teleport_compress_file`; the FILES library’s same facade/dependency now uses that exercised native forwarder. Original JS FILES core/runtime, source algorithms, codec, ABI conversions, flags, test fixtures, harness assertions and expectations remain unchanged. Fresh paired EmC1420/all68 comparisons pass; real existing JS codec round-trip/4argument-and-status checks/import witness pass. The old route succeeds at the codec checks then fails the intended import assertion. Root verifies all208 private package entries, both current before hashes and exact after hashes; peer `.cache/files-compression-boundary-peer-review/final-review.json`; proposal `.cache/files-compression-boundary-revision/promotion-preview.json`.158 compiler-emitted dependency inputs are correctly labeled captured after compilation, not a full prospective SDK capsule. Initial diagnostic raw-pointer Number/BigInt caller error is preserved and corrected only in the private v2 witness. Historical FILES producer remains preserved/nonactive and does not reproduce this new route without its exact supplement. Full normal rebuild/original gates are next; first5/44 candidate stays immutable and accepted110/44 unchanged.
+
+
+Normal122 attempt5 completed successfully (actual68546exit0), containing the reviewed EAT/INSIGHT runtime fixes and exercised FILES compression boundary. New wasm SHA-256 `5c1887d5df5ee87ab2815669989003369bc8292635cb41f7ab590241968c93d1`; unmodified provenance853hashes, selected-object/JS-import audit and324-file/0nonliteral closure pass. All nine author slots and both coordinators freshly acknowledge quiet/no queued execution before fresh original30s integration and45s public gates. First5/44 failed snapshot and accepted110/44 stay immutable and distinct; no new public score is claimed.
+
+
+The first bindings-fixed capture failed with ENOSPC before identity/input manifest publication. Only its newly generated incomplete duplicate directory was removed (2,649copiedfiles/906,670,359logicalbytes), preserving all live originals and previous immutable snapshots; cleanup receipt `.cache/tu122-root-staging/enospc-capture-cleanup.json`, original error log retained. Capture tooling now uses native macOS `clonefile` copy-on-write copies with independent inodes (not hard links), resolves source symlinks to file content, and verifies every destination hash. Other platforms retain ordinary independent copies. Actual private qualification verifies identical initial bytes and independent writes in both directions: `.cache/tu122-root-staging/clonefile-qualification/receipt.json`. This changes evidence-copy storage only, not game/runtime/flags/harness. A new fresh COW capture directory is used next; gates remain unstarted and all nine author slots hold quiet.
+
+
+### Corrected122 timing failure and bounded adapter performance work
+
+The corrected normal5 integration (actual88765exit1) passes the compression import and inventory/regex assertions, then its original New York worker times out at30seconds. All3,244 COW-captured inputs remain unchanged; `.cache/tu122-bindings-fixed-cow-gate-snapshot/integration-failure.json` preserves it. Corrected public44 has not been rerun. Explicit diagnostic original-worker CPU profile (actual64875exit0) passes its original shopkeeper/seasonal assertions in46.933833profiledseconds; it is not a passing30s gate. Profile `.cache/tu122-performance-diagnostic/aggregated-profile-summary.json`: CMD service factory2.426s self; DISPLAY field access2.18s; repeated APPLY/STEED/QUESTPGR/SOUNDS/SPELL/LIGHT/LOCK/QUEST environments; GC5.333s.
+
+Private performance proposals are authorized for these exact hot adapters: CMD producer packet caching per actual Module (library only); DISPLAY compiler metadata/field-accessor reuse without caching native field values or computed addresses, with current services called on every read/write/address; APPLY, STEED, QUESTPGR, SOUNDS, SPELL, LIGHT, LOCK and QUEST environment reuse keyed by verified Module/layout while preserving current service forwarding/reentry/finally restoration and standalone constructor behavior. No game-core function/formal/comment/control flow, C policy, layouts, expected values, harness or original deadlines change. Failed construction must not publish a partial cache; real memory growth/two Modules/alternate current facades/nested exceptions must remain correct. Each disjoint candidate needs original component expectations, bounded semantic controls, input/patch provenance and independent review before shared promotion. Scope expansion requires separate announcement. All existing56+8local-contract proposals remain unapplied; this timing repair is separate.
+
+
+Root losslessly archived the generated 439,843,174-byte linker diagnostic candidate-symbols.json to candidate-symbols.json.gz, freeing compilation space. Complete streamed decompression reproduces SHA-256 0d5e3e9af29193d4293c239c32b33a8320219622921a614ec7ba6b48ea43398f and the exact original byte count before removal of the redundant uncompressed diagnostic. Receipt .cache/tu122-root-staging/linker-diagnostic-archive.json binds both representations. Existing diagnostic receipts retain their original uncompressed hash; the bytes are exactly recoverable. This output was explicitly excluded from prior frozen game captures; no captured evidence, runtime, source, harness or acceptance result changes.
+
+
+Root reviewed and promoted DISPLAY runtime-only compiler-schema descriptor lookup and bounded per-environment last-accessor reuse. No core/C/layout/source-policy change: every field read/write/address still invokes its current service; no native value or computed field address is memoized. The table preserves compiler kind/index/canonical order, with unique field names verified. Exactly two adapter regions reverse to the previous byte-identical file. Root verifies13 current input hashes and17 private artifact hashes; original139/all71 and22,528wall checks pass, with actual memory growth/two Modules/current-facade/reentry/exception/retry witnesses. The old runtime passes semantic witnesses and fails only the separate allocation-identity negative, which is not a C behavior mismatch. Receipt .cache/display-accessor-revision/receipt.json; root review/promotion root-review/receipt.json. Wrapper identity reuse is explicit; no measured game speedup, public improvement or acceptance is claimed.
+
+
+Parallel LIGHT validation identifies an inherited exact EmC formatter mismatch: original C fmt_ptr emits bare 0 for NULL; existing shared writeNativePointer emits Darwin-compatible 0x0. The unchanged EmC unit normalizes only hexadecimal tokens, so the old and cache-candidate runtimes both fail its original NULL trace comparison (null versus0); no assertion, normalizer or formatter is changed in the cache proposal. Actual normal122 attempt5 only compiled this pair: build-tu-probes.py compile-success status is not a LIGHT unit comparison pass, and its log contains no LIGHT unit invocation. Cache-specific keyed-path witnesses are separate evidence, not a passing full LIGHT suite or seven-suite aggregate. Existing native compatibility is deliberately qualified; EmC-first and native-host/public results remain distinct. Parent exact log/driver review is recorded in .cache/tu122-cache-parent-review and the private LIGHT package.
+
+
+Root promoted reviewed APPLY runtime-only environment reuse after verifying45 frozen package entries, exact current95c208c2 before hash, candidate18fa800f and independent peer529ded2c. Actual Module identity and immutable compiler-layout identity key separate weak maps; missing keys retain the old uncached fallback. Metadata validates before publication; current callbacks forward through a restored slot across nested calls/exceptions. Standalone constructor and be6f62cf core/no-init helper are byte-identical. Original9,183 comparisons/all76 entries and24 focused checks pass; old80-versus40 repeated-construction failure is an allocation-only negative. Existing typed-record wrappers now persist with the environment and may grow with distinct type/address pairs; no bounded-memory or arbitrary remapped-global/this-sensitive-method promise. Production assumptions are immutable native symbol addresses/layout contents and existing arrow callback methods. No pointee values, heap DataViews or foreign-call results newly memoized. Peer .cache/apply-envcache-peer-review/review.json; source package .cache/apply-envcache-revision/receipt.json. No game/public/timing acceptance claimed; root independently reviewed bytes/bindings, not a second test replay.
+
+
+Root promoted the exact one-file CMD producer packet cache (library c8fc02a5→822d5692, patch37cd96a1). Per actual Module/literal-cache owner it reuses only fully constructed callback packets; complete original typed wrappers, 172 function-pointer getters, heap getters, dynamic native-export reads, conversions and dependencies remain byte-identical. First-completed publication/retry/owner checks are explicit. Root verifies389 package entries, six production consumer source pins and parent nonmutation audit6b65779d; independent source peer .cache/cmd-producer-cache-peer-review/candidate-source-review.json confirms exact three-edit inverse and no current consumer mutation. Fresh paired original1,562 comparisons/all148 pass; actual compiled producer witnesses cover repeat25, current C values, real heap growth/native callback reentry/throw recovery/two Modules; original compiled code fails the intended identity-allocation negative. Separate getter/VM constructor/export protocol checks are explicitly adversarial source-level witnesses, not compiled native export-rebinding claims. Cache reuse changes packet/map identity and direct arbitrary host-mutation lifetime; no generic fresh-mutable-facade equivalence or freeze is claimed. Historical generator is unchanged/nonactive and would regenerate old code without this supplement. Initial witness setup failures remain preserved. This is not a game speedup or original gate/public acceptance; fresh normal compilation is required. Frozen package .cache/cmd-producer-packet-cache-revision/verified-inputs.json; root-promotion/receipt.json.
+
+
+Parallel next-batch preparation (UNAPPLIED) now assigns three freed author slots to integration snippets for the existing15 completed ports, not new translations or duplicate tests. Groups: HACK/UHITM/MON/PICKUP/SHK; SP_LEV/TRAP/TERMCAP/TOPL/WINTTY; UNIXUNIX/UNIXMAIN/OPTIONS/BOTL/ZAP. Existing matrix .cache/tu137-integration-matrix.json and read-only concrete edit plan .cache/tu137-integration-edit-plan.md/author recipes are authoritative. Private proposals identify registry, runtime, common/separate support, probe/compiler metadata, layout, source guards and initialization/entry wiring. No shared code/build/test changes authorized for these authors; root alone composes/promotes after closed122 gates. Known MON pointer/WINTTY validation/private native-guard issues stay separately qualified. NHLSEL undefined behavior and inactive zero-function units excluded.
+
+
+Root promoted the reviewed five-port cache composition: STEED/QUESTPGR runtime wrappers, LIGHT/LOCK/QUEST runtime wrappers and one literal moduleKey:Module property in each of their three service libraries. Shared wasm-runtime d289761b→094b44a4 independently reconstructs exactly12 nonoverlapping A/C edits: existing STEED lowering delegates to its wrapper; LIGHT/LOCK/QUEST retain existing conversion/call/return bodies inside scoped wrappers. All original core/functions/formals/standalone constructors/C/layouts/expectations unchanged. Caches key actual Module/layout/namespace, register only empty map containers early, publish only completed environments, retain first completed inner entries, and restore current callbacks in finally. LIGHT fmt_ptr retains current forwarding facade across reentry; LOCK/STEED capturedACURR forwards; QUEST31 compiler/source-owned spread keys remain protected while foreign callbacks forward. Root verifies365 A/private and394 C/private bindings plus independent final peers5a18bf4d/928bc09b; exact shared reconstruction independently agrees. A original7,474+4,727 and66 focused witnesses pass. LOCK5,687/QUEST10,992 pass old/new legacy/keyed paths; LIGHT old/new original suite still fails inherited0-vs0x0 NULL trace and has no full-suite PASS. Keyed C witnesses wrap actual native Modules with per-instance identity surrogates: literal actual-Module library changes are source-reviewed only until the next normal rebuild. Fixed native symbol/layout/namespace/callback addresses and stable production service shape are explicit assumptions; no arbitrary mutable/deleted/nonenumerable facade equivalence or game speed/memory/native/public acceptance claimed. Source packages .cache/tu122-cache-candidate-{a,c}; root composition/promotion receipt .cache/tu122-cache-parent-review/root-ac-promotion.json. Failed first-constructor cache drafts remain preserved; final bytes pass retention witnesses. SOUNDS/SPELL revised state-publication proposal remains unapplied until final validation; its rejected frozen first draft is not selected.
+
+
+The next closed122 capture recipe now explicitly includes DISPLAY/APPLY/CMD performance proposals, both reviewed seven-port cache generations (including rejected B draft and corrected cold-state supplement), independent peers/parent composition and full CPU-profile diagnostics. It also binds the seven original failure/command/quiet/identity/input records from the bindings-fixed30s timeout, without duplicating that entire3,244-file capsule. COW independent-copy/hash checks and original122selection guards remain intact; script syntax verified without writing bytecode. Existing snapshots/acceptance and frozen harness unchanged. No capture of a stale normal build is taken: a fresh normal build/provenance/import closure remains required before invocation.
+
+
+Root promoted only the corrected two-file SOUNDS/SPELL cache replacement, manifest cdc1b64f/124files, after independently verifying all124 bindings and all69 preserved prior-draft bindings. Runtime hashes SOUNDSb96a39d7/SPELL92f3e61e; original core/standalone constructors/createSpellState/prefixes byte-identical. Actual Module/layout environment caches use current-function thunks for captured ACURR and restore services/stack; only completed environments publish. Existing source-state objects retain original early publication, including constructor failure/retry behavior. The first rejected69-file proposal incorrectly delayed source-state publication, genuinely losing native SPELL saved teleport-book state or overwriting SOUNDS source text on cold reentry; four original-draft negatives preserve those defects. Eight original versus eight revised cold native-state cases now agree, including same/different layouts and throw/retry. Revised unchanged original suites pass15,200+3,158; both warm facade/growth/twoModule/reentry/cleanup witnesses rerun on final bytes. Exact two original dispatcher tails/cache helpers reverse to original; the minimal correction from rejected draft restores only original state-publication order. Production services/layout/global-address assumptions and wrapper lifetime remain qualified; no arbitrary getter invocation-count, fullgame/native-host/public/timing acceptance claim. Frozen originals and separate B13 no-initializer proposal unchanged. Root source/input review plus parent review use existing evidence without duplicate unit reruns; source .cache/tu122-cache-candidate-b-cold/receipt.json, root-promotion/receipt.json. All ten targeted performance adapters are now selected, pending fresh normal attempt6 and unchanged original gates.
+
+
+Fresh normal122 attempt6 is running (actual session17078), log .cache/tu122-normal-attempt6-cache-fixed.log, with original --resume --emscripten-only-probes and unchanged flags/deadlines. Ten targeted performance adapters are selected: eight environment wrappers plus DISPLAY field access and CMD packet construction. Root B promotion preceded the final parent minimal-diff receipt: root independently verified124+69 hashes/constructor prefixes and read the two state reorderings. A parent notification prematurely described its pending receipt as passing after a strict expected-text assertion; it was promptly corrected, and no unproduced parent receipt is counted. Final bounded parent review, when completed, is supplementary and will retain this chronology. No candidate source/test changes are implied.
+
+
+The supplementary SOUNDS/SPELL parent review completed after root promotion/normal6start: .cache/tu122-cache-parent-review/b-cold-replacement-review.json SHA-256 f9657c93412a773ca294061d0cb60b76902dc95cd703c29a590176f1f6dbdc0c verifies124 bindings, exact two publication-order changes, two unchanged constructor prefixes and eight equal actual cold-state outcomes. This post-promotion receipt was not used as earlier promotion evidence. Its history preserves the immediately retracted premature parent notification and corrected read-only metadata/version-label assumptions; no candidate, assertion, result or frozen proof changed.
+
+
+Fresh normal122 attempt6 completed successfully (actual17078exit0). Provenance853 declared artifact/source hashes and all122 selected algorithm-object exclusions/production imports/privatealias/C-Lua checks pass; current324-module literal closure has0nonliteral imports. Native wasm remains5c1887d5 (C code/flags unchanged since normal5), while freshly generated nethack.mjs is7436a1e76362bf38da9d2ad478be5acf22865acd9db3f8b9cb2c11e3d7d73575 and actual teleportCmdServices includes the reviewed completed-owner cache. Manifest90f5634fb365556b8d66cdc1b7719ec0651e8ff32a275adbb0266a1626dc7f55; main runtime094b44a4. Original harness/recordings/upstream gitdiff remains empty. New timed gates await fresh allnine quiet acknowledgments and independent COW capture; no runtime deadline/public improvement claimed yet.
+
+
+Before fresh cache-fixed timed gates, all nine author slots and both coordinators explicitly acknowledge this new HOLD with no active/queued execution or tool work. Next137 proposal writers paused at safe boundaries; no stale earlier quiet acknowledgment reused. Receipt .cache/tu122-root-staging/cache-fixed-quiet.json. Original commands/deadlines/no-loader/no-NODE_OPTIONS/no-SESSION_REPLAY_TIMEOUT_MS remain unchanged; a new independent COW capture is next.
+
+
+Cache-fixed original integration fails its unchanged New York30-second worker (actual71329exit1). All4,642 captured inputs verify unchanged; snapshot .cache/tu122-cache-fixed-cow-gate-snapshot/integration-failure.json preserves exact error/quiet/command/identity. Original public45-second-per-session run is now active (actual57948) in that immutable snapshot with TZ=America/New_York and actualEMSDK, no loaders/deadline override. First12 completed sessions pass exact RNG/screens; this is partial progress, not an accepted44-session score or successful integration. Accepted110 remains unchanged.
+
+
+Fresh cache-fixed original public run completed (actual57948exit0 wrapper, parsed39/44 sessions passing). Complete failure/result receipt .cache/tu122-cache-fixed-cow-gate-snapshot/failure.json verifies all4,642 captured inputs unchanged,853provenance hashes,324literalmodules/0nonliteral and actual original command/quiet contract; accepted checkpoint remains110. seed0360 exceeds original45s; seed0361,0367,0383,0399 each differ at exactly one RNG entry while every screen/cell/cursor/animation frame matches. Exact first RNG causes remain untriaged, not called harmless. Original integration71329exit1 still exceeds30s. A separately labeled CPU-profile diagnostic now runs only the original NY worker without its parent30s timeout; this is diagnostic, not a gate waiver or acceptance. Allnine author slots remain onHOLD through the diagnostic.
+
+
+Cache-fixed diagnostic original New York worker completed successfully (actual46394exit0) with original shopkeeper/seasonal assertions,35.220708profiledseconds versus earlier46.933833. This is not the failed30s gate. New self profile: GC3.716s, SFBASEtable1.206, DISPLAYfield0.965/ptr0.495, GLYPHSanonymous0.878/loadChar0.641, VISIONarray0.432. Aggregated recursive inclusive sums may exceed walltime and are not additive savings. Profile .cache/tu122-cache-fixed-performance-diagnostic/aggregated-profile-summary.json. Allnine HOLD released only after public+diagnostic terminal; three authors resume137proposal preparation, disjoint bounded adapter plans and RNG trace diagnosis run in parallel. Root seeks exact failure causes, no harness/deadline/policy change or acceptance implied.
+
+
+Exact post-game RNG diagnostic seed0383 completed (actual63882exit0,5.902s) against the immutable cache-fixed snapshot, passing only seed/date/rc/moves/storage to implementation. Exactly index9,654 of16,915 differs: recorded rn2(67)=51 versus JSrn2(1)=0, both annotated rnd_otyp_by_namedesc(objnam.c:3522), step108 gray-dragon-scale-mail wish. Neighbors and allother RNG entries agree;219screens match. Evidence .cache/tu122-rng-diagnostic/result.json SHA8489e5fce6913e016f3b7fd3497cd521514af07a865a853ea91322cbed591016. This localizes a symptom; no hardcoded candidate count or wish-specific fix is authorized. Parent author owns general OBJNAM cause/proposal, rootagent checks otherthree precise entries.
+
+Private GLYPHS performance variants are authorized after read-only .cache/tu122-glyphs-performance-plan.md: refresh-on-current-buffer DataView per invocation (call current heap getter every access, preserve signedness/bounds/stores) and compiler-schema field descriptor precomputation with still-fresh record/nested nodes and own descriptors. WeakMap keys fresh JSnodes, never nativeaddresses/worldvalues; same original current native get/set/callback/narrowing remain. Standalone/source/core/C/layout/library/expectations unchanged. Separate view-only/combined variants need fresh actualcentral baseline, unchanged41,354 suite and memory-growth/reentry/twoModule/error/descriptor witnesses. Shared descriptors may alter unsupported detached getter/foreign receiver JS reflection; actual C/core receiver use must be reviewed and this internal API distinction qualified. No measured savings or original gate acceptance assumed. SFBASE/VISION/DISPLAY remain source/profile plans only. A separate read-only runtime-only provenance-refresh feasibility proposal considers avoiding recompilation of unchanged native artifacts; no tool implementation or manifest relaxation authorized.
+
+
+All15 next-batch integration proposals are complete/frozen under .cache/tu137-integration-parent (FINAL-HASHES236128ac); originalimplementations are reused. Parent/team now authorized to implement exactwiring in an isolated independent COW shadowcheckout only, with separate private prerequisite fragments for selectors and guardoutput scratch relocation; rootlive122selection and originalfrozenproofs unchanged. Send concrete conditionalUNIXMAIN/provenance plan before extendingcode; exactbuild-source guardchain stays strict, no fallback. Source/syntax checks permitted after privatecomposition; heavy137build awaits rootcoordination. MONpointer/WINTTYobserver/nativeguardchoices remain explicit. This is parallel first-pass integration work, not newacceptance or waived39/44/30s failures.
+
+Four RNG-only failures now all triangulate to identical OBJNAMbound error:0361index3019 expectedrn2(67)=19,0367index2046 expected67→43,0383index9654 expected67→51,0399index9964 expected67→14; allactualrn2(1)=0 at rnd_otyp_by_namedesc(objnam.c:3522). Each diagnosticactualhandle exits0, remainingthree .cache/tu122-rng-diagnostic/remaining-three-summary.json; allother entries/counts match. No per-recording implementationinputs/hardcoding proposed.
+
+SFBASE/VISION private optimization scope is concrete: preserve existingproductionfirst-facade Moduleenvbehavior; optimizedoutsideSFBASEconstructor wraps only writable table surfaces with atmost2last-base wrappers and exactoriginalfreshnative token/property-access/invocation/copy timing, sharedprovider minimalimport/construction delegation. Originalstandaloneconstructorunchanged; namednonconfiggetters stayoriginal, no unrelated serviceforwarding rewrite. VISION permits only exactdescriptorJSON-text memoization for provenimmutable internalmetadata, keepingstructuralkey+freshnativebase and existingarray/recordcache/proxybehavior; itsconstructorbody necessarilychanges onehelperexpression but standaloneAPI/freshness preserved. Arbitrarymutableexternaldescriptors needfallbackor explicitconfiguredcontractqualification. No nativeworldvalue/addresscache or core/C/library/layout/test edits. Existingfirst-facade limitations are explicitlyretained, not claimedfixed. Plans .cache/tu122-sfbase-vision-performance-plan.md; originalunit andfocusednativecontracts requiredbeforepromotion.
+
+
+OBJNAM source-first scope now proves exactlytwo address-taken pointerlocals missing their nativecell carriers: readobjnam_postparse1 rest (constchar*, explicitNULLinitializer) and doname_base bp_eos(char*, NOinitializer). Private correction authorized for onlythese2: existing8byte scalarLocal carrier, ordinaryreads/writes .value, address-taking carrier; preserveCinitialization/no-initialization, names/formals/controlflow. Lostrest output fromrealname_to_monplus explains the observed full-wish armor probability1 instead ofprefix-stripped SCALE_MAIL probability66+1; the fix changes transport, notRNG bounds/policy orrecordings. Old9268helper alwaysreturnedNON_PM, so targetedpositiveactualCout-pointer witnesses required forboth helpers. HistoricalOBJNAMproducer failscurrentrecordRef/noinitregeneration alreadydocumented; retainit and addexactcurrentcore supplement/inverse, nofalsefullregenerationclaim or blanketcensuswaiver.
+
+A private runtime-only eligibility/derived-manifest prototype is now authorized (no productiontool/manifestpublication). It pins immutable normal6 origin90f5634f/5c1887d5/4642/853 and considers exactexisting importedJS overlaypaths only; outside declaredsource/artifact/registry/layout/probe/metadata/topology differences reject. Originalcompilation/artifacts/strictpins retained; scratchnativecontract regeneration mustbyte-match; negativecontrols mustrejecttampering. No fullimplicitSDK/sysrootclosure orfreshCcompile claim may be retroactivelyinvented; missingrequiredproof disqualifies andfallsbacktonormalbuild. Rootreview requiredbeforeusing any proposedderivedmanifest ororiginalgates. Bothoriginfailedgates andsource/API limitations remainvisible.
+
+
+Second performance comparison is private and diagnostic only: .cache/tu122-second-performance-overlay pins the immutable normal6 COW snapshot and substitutes exactly five reviewed candidate modules (GLYPHS 26ff2f71, SFBASE de304439, VISION b2c9c70b, shared wasm-runtime a1bcc72f, DISPLAY 9069082c). Both sequential variants use the same URL-preserving loader and original timezone-worker script, with exact source hashes checked on load; the original parent 30-second deadline is not applied, so these results cannot establish acceptance. All nine authors and both coordinators freshly acknowledged no active or queued work before timing; quiet-receipt.json records this. Initial private setup used an incorrect candidate-directory shape and failed before configuration/test creation; corrected paths are recorded, with no live change. No candidate is promoted by this comparison.
+
+The private runtime-refresh prototype failed closed: 488 required paired origin outputs lacked normal6 identities. Its six tampering controls rejected changes, but it produced no usable derived manifest and remains ineligible (.cache/tu122-runtime-refresh-prototype-c; final receipt 0bc70ed3; parent review 6b073725). A fresh normal build remains required for subsequent acceptance. Current selected 122 still has 39/44 public sessions and the original 30-second integration timeout; accepted checkpoint remains 110.
+
+
+Controlled second performance diagnostic completed: baseline 35.656633s, combined 32.628523s (8.49% faster), both actual child exit0 and original New York shopkeeper/winter-summer assertions passed. Loader receipts record exactly the five expected original URLs and exact candidate hashes. Combined still exceeds 30 seconds: no integration acceptance, public rerun, or selected-source promotion follows from this measurement. All nine authors and both coordinators were explicitly CLEARed after both terminal results; private OBJNAM completion and 137-port shadow integration resumed in parallel. Full receipts/logs: .cache/tu122-second-performance-overlay.
+
+
+Private 137-port shadow prerequisite plan reviewed: permit only enumerated original-root to shadow-root command/cwd/include fields and AST location filename fields, with raw pinned originals retained, unchanged source tokens/values/assertions, exact per-field inverse receipts, restored semantic equality and raw-file hashes, same read-only SDK, and fail-closed handling of unknown root-bearing fields. No broad AST normalization or source guard bypass. UNIXUNIX may use the existing exact reviewed build.py inverse helper only; its independently mismatching historical Makefile pin remains a blocker, not refreshed. This is isolated shadow composition, not live promotion or a passing 137-port build.
+
+
+Next private diagnostic collects a CPU profile of the exact five-module overlay under .cache/tu122-second-performance-profile. Separate loader/config/log outputs preserve the completed timing receipts. Other bounded author work may run: elapsed time is not a controlled speed comparison or acceptance result. Purpose is to rank remaining costs before authorizing further runtime changes. No original source/test/recording files change.
+
+
+Promoted exact five reviewed runtime candidates after independent package/source/inverse review and five-module overlay review: GLYPHS26ff2f71 (fresh record nodes with shared descriptors and per-invocation buffer-refreshed DataView); SFBASEde304439 (original constructor preserved, optimized production helper retains only last wrapper per two modes); VISIONb2c9c70b (memoizes exact JSON text for122 compiler-owned immutable descriptor identities, unknown descriptors use original fallback); mainprovidera1bcc72f (exact import/construction delegation); DISPLAY9069082c (safe-number conversion fast path and at most4 immutable base accessors per175 fields, up to700 retained). No game core/C/layout/library/harness/recording edits. Current native values, pointer/token access timing, growth handling and original source function boundaries remain.
+
+Qualifications: GLYPHS shared getter identity/detached getter.call(other) differ outside actual C-member consumers; SFBASE original first-facade/Module-layout assumptions remain, table wrapper identity changes; VISION assumes original compiler metadata immutable and does not promise arbitrary reflective mutation/custom global JSON hooks; DISPLAY accessor identity/reuse changes with bounded FIFO, held accessors never retargeted and no native field values cached. Original unit results: GLYPHS41354/all27, SFBASE10818/all239, VISION27128/all19, DISPLAY139/all71 plus22528 wall checks; scopes are not additive aggregate acceptance. Focused native contracts and separately labeled allocation-only negatives passed as recorded. Root rehashed51+58+67 package members, exact before/after hashes, read all narrow diffs and independent reviews. Independent overlay reviewer verified all4642 snapshot inputs unchanged and exact5 URL/hash loads. Promotion receipt/patch: .cache/tu122-second-performance-overlay/root-promotion.json and root-promoted.patch; overlay peer review .cache/tu122-second-performance-overlay-peer-review/review.json (933b8068). No fresh normal build/default-deadline/public/native-host acceptance yet. Historical normal6 manifests remain unchanged.
+
+
+Authorized next PRIVATE DUNGEON producer-only optimization: retain Module-bound typed closure packet internally but return a fresh Object.assign({}, packet) own-property facade on every entry. Preserve own keys/order/descriptors/prototype and isolated writable per-call overrides; no shared writable packet, native world values or computed native pointers cached. Function closure identity reuse is an explicit adapter-level difference. Existing original unit mutates rn2 and therefore must continue unchanged, with actual producer/native growth/reentry/throw/two-Module evidence and separate shared-packet negative control. No source core/runtime/C/live edits; bounded private helper compilation and unit work only, exact inverse and all inputs required before root review/promotion. Plan .cache/dungeon-producer-cache-plan.md.
+
+
+Combined CPU diagnostic finished with actual exit0 and original worker assertions passed (.cache/tu122-second-performance-profile/result.json). It is not a controlled timing comparison; updated sampled self attribution is in aggregated-self-profile-summary.json. Remaining costs include GLYPHS record wrapper construction, DISPLAY accessors, MONDATA descriptor work and environment switching. Authors are assigned distinct source-first plans; no further implementation is authorized merely by a profile sample. The exact historical UNIXUNIX Makefile was reconstructed from the existing generator template and selected110 registry prefix, matching its pre-existing full SHA1c21ce0c; current122 differs by12 separator blank lines and2 selector lines adding12objects, with compile rules/flags unchanged. Reconstructed bytes are labeled recovered rather than historical capture; link selection differs and actual-current command/CPP verification remains required. Receipt .cache/unixunix-historical-makefile-review/receipt.json dcd366f2. No guard pins were refreshed.
+
+
+Authorized PRIVATE VISION follow-up only: register exact JSON keys for newly derived multidimensional child descriptors when their parent identity is already proven compiler-owned. Unknown/mutable external parents keep the current JSON fallback; no native base/value/view cache change. The immutability assumption now includes these derived descriptor objects, which may be exposed through wrapper.descriptor and therefore is explicitly outside arbitrary reflective metadata mutation equivalence. Keep original27128-comparison suite and focused alias/retarget/growth/two-Module/mutable-fallback checks unchanged; exact one-helper/expression scope and inverse required. No shared main/SFBASE/core/layout/production edits. Updated profile array cost0.279291s gives no guaranteed speed claim. Plan .cache/tu122-sfbase-vision-next-proposal.md; root review required before promotion.
+
+
+Authorized PRIVATE MONDATA metadata-only candidate: hoist the9 closed literal field-definition lists/45 pairs into private immutable key/kind/width metadata and remove repeated width-regex parsing from fields helper. Retain every per-call layout-size validation, order and error, original scalar conversion/getter/setter descriptors, fresh records, current native base/heap reads and service lifetime. No native values/views/addresses/buffers/services cached; core/C/layout/provider unchanged. Exact9/45 source projection/inverse, original native pair and all-field/error/coercion/receiver/growth/reentry/two-Module contracts required. No live writes; bounded private unit checks only; profile cost is sampled evidence, not a speed or acceptance claim.
+
+
+Next122 capture recipe now also includes exact second-performance author/peer/parent/promotion/overlay/profile proof packages, actual RNG diagnostics, the rejected refresh prototype and its review, plus historical Makefile reconstruction evidence. This edits only .cache/capture-tu122-game.py input selection; no capture executed, frozen capsules untouched, no eligibility or source hash rules relaxed. New in-progress candidates will be added only after final review. Existing native independent-inode clonefile/source/destination hash checks remain.
+
+
+Authorized PRIVATE GLYPHS second candidate: only cache and symparse record kinds may reuse one last fixed-address wrapper each per active external invocation, maximum2 retained slots; other10 kinds preserve fresh wrappers/nested nodes. Complete14cache/12symbol-row consumer audit found immediate scalar-field reads only, no whole-wrapper escape/identity/own-property mutation. This intentionally changes same-call JavaScript wrapper identity for those2 kinds; it does not change original C pointer/value behavior and is not generic fresh-embedding equivalence. Native getters/setters and current heap remain per-access; no native values cached. Miss/eviction creates a new fixed-address record, never retargets held records. Cleanup must clear and disable both slots in nested finally even if original stackRestore throws, preventing retained old typed closures from retaining/repopulating caches after return. Original41354 and previous37/38 contracts remain unchanged; focused mutation/growth/reentry/two-Module/NULL/eviction/failure/lifetime controls and exact inverse required before review. No core/C/layout/provider/live writes, bounded private units only. Plan .cache/tu122-glyphs-bounded-reuse-plan.md.
+
+
+Next capture also retains10 explicitly named normal6 failure/public/integration/command/quiet/identity/input-manifest records from the immutable4642-input snapshot, preserving39/44 and30-second failure history without recursively copying that whole capsule. No capture or frozen-file change performed.
+
+
+Promoted OBJNAM core fa39a94b→deca0132 after root78-file/hash/inverse review and independent parent0fba8df8 +peer1fe376b1 reviews. Exactly2 pointerlocals use existing8-byte native scalarLocal carriers: doname_base bp_eos reserve-only(no initializer), ordinary reads/writes .value and both &arguments pass carrier; readobjnam_postparse1 rest explicitlyNULL-initialized, native name_to_monplus receives out-cell and later source reads its written suffix. Exactly98 mechanical declaration/reference edits; all87 names/formals/comments and85 other function bodies unchanged, exactfull inverse. No runtime/ABI/C/core algorithms/RNG bounds/recording/harness changes. This fixes original C pointer transport rather than hardcoding a wish/probability.
+
+Original9268/all87 comparisons plus27 bounded native positive cases passed; old-rest and old-bp_eos independently fail named source-state/output assertions. Positive helper uses exact original mondata source; rank-title fallback remains controlled NON_PM. Quote formatter is a controlled foreign formatter that advances actual char** and exercises source follow-on reads, not real shop pricing. Invalid earlier metadata diagnostics remain retained and excluded. Historical generator still does not regenerate current baseline; exact supplemental Clang/JS-AST lowering is preserved without false full-producer claim. Promotion .cache/objnam-pointer-locals-root-promotion/receipt.json; tests/closures .cache/objnam-pointer-locals-revision. Actual game/public/default-deadline/native-host acceptance remains pending; last normal122 result39/44, accepted110 unchanged.
+
+
+Private post-promotion OBJNAM single-session RNG diagnostic now authorized/prepared at .cache/objnam-pointer-game-diagnostic: preserve original failing normal6 snapshot, substitute only exactdeca0132 OBJNAM core at its original module URL, replay0383 from seed/date/rc/moves/storage, compare recorded RNG only after game returns using verbatim frozen normalization helpers. Reuses existing diagnostic with output/scope path changes only. No recorded answers enter implementation, no original deadline/public/screen/native-host acceptance claimed, no harness/recording edits. Loader/source hashes bound; all outputs separate from prior failure evidence.
+
+
+OBJNAM-only real-game diagnostic0383 now exits0 with all16915 recorded RNG calls matching (previously one rn2(67) versusrn2(1) mismatch). Exactone-core overlay on unchanged normal6 COW snapshot, separate .cache/objnam-pointer-game-diagnostic/result.json/actual-command-result.json; no recorded answers used as game inputs. This is RNG-only, not fresh full44-public/default-deadline/screen/native-host acceptance. Original39/44 failure capsule remains unchanged.
+
+
+After OBJNAM promotion, actual selected122 source-structure check exited0 (session32512): original function inventories/order/formals/block comments preserved. Log/result under .cache/objnam-pointer-locals-root-promotion. This check is not a semantic/public/deadline/native-host equivalence proof.
+
+
+Promoted reviewed VISION child metadata candidate b2c9c70b→a74156a6 after root16-package-file verification/full narrow source/test read and independent review8792cb54. One outside owned-child helper plus one child-construction expression; only children of compiler-owned descriptor identities enter existing exact-JSON WeakMap. Unknown structurally equal mutable external parent still serializes freshly and mutation changes shape; no freezing. Existing native array bases, structural string keys, proxies, aliasing, read/write behavior and fresh constructors unchanged. Exposed original/derived descriptor immutability remains an explicit contract limit; generic mutation of owned metadata/custom global JSON hooks are not equivalence claims. Original27128 comparisons/focused native growth/retarget/two-Module/alias/mutable-fallback passed; old20vs0 serialization negative is cost-only. No speed/default-gate/native-host claim. .cache/tu122-vision-child-root-promotion/receipt.json; original package and independent review retained. Fresh normal build pending.
+
+
+Promoted exact MONDATA metadata-only runtime92ae588b→b89de1f4.9 literal field lists/45 closed key/kind/width triples are module-private frozen metadata; per-call layout size validation and error order remain, and all native field addresses, deferred offsets, scalar conversions/descriptors/fresh records/getter/setter bodies are unchanged. No core/C/layout/native world value/view/buffer/service caches. Root read full patch and verified301 package members; independent peer519a5f46 and parent7f68a8dd reviews preceded promotion, including complete original-list reconstruction and forward/inverse checks. Actual unchanged originalEmC suite200754 comparisons EACH baseline/candidate; focused609/all45fields/54validation cases, native growth/reentry/twoModules/receivers/held views and source/data mutation controls passed. Cost-only780→0 width-regex count is not a speed result. Unit closure is historically captured with OBJNAMfa39 and VISIONb2c9; later selecteddeca/a741 drift is explicitly retained, not relabeled current-game evidence or refreshed. .cache/tu122-mondata-metadata-root-promotion/receipt.json; author/peer/parent evidence preserved. No fresh game/public/deadline/native-host acceptance yet.
+
+
+Promoted GLYPHS26ff2f71→76f5f631 exact3 plumbing blocks, independently reviewed be267ee5 after root54-package-file verification/full diff read. Only cache/symparse reuse1last fixed-address wrapper each per active external invocation (max2 slots), other10kinds fresh. Complete14+12 source-consumer census shows immediate scalar accesses; same-call wrapper identity intentionally differs, not generic fresh-embedding parity. Eviction never retargets; nativeget/set and currentheap remainlive; nestedfinally clears+disables reuse evenifstackRestorethrows, so retainedtypedclosures cannot repopulate after return. Original41354/all27+unchanged37/38+48focused native/observer checks passed;4 negatives distinguish stale values, retargeting, lifetime retention and old allocation-only observer cost. No process-memory bound/nativehost/game timing claim.
+
+Promoted DUNGEON library d3a27242→24bb0d4a exact3 producer plumbing edits, independently reviewed34cc5ea6 after root367-package-file verification/full diff read. Module-literal-state caches only completed typed closure packet; every entry returns fresh ordinary Object.assign own-property facade. Ownkeys/order/propertyflags/prototype and isolated writable overrides preserved; function closure identity stable by design. All original argument conversions/native calls/signatures/dependencies/C/core/runtime remain byte-identical; current nativeexports/HEAP accessed at calltime. Actual SDK-built original-control/candidate each267comparisons/all110functions; actualproducer27/32checks cover growth/currentexport/reentry/throw/twoModules/completepublicationretry. Wrong shared-writablepacket fails actualnative rn2 override5vs0. No arbitrary host tampering with internal Module.teleportDungeonLiteralCache.services equivalence, no OOM/Cunwinding claim from setter-injection witness, no public/nativehost/timing acceptance. Additional parent review was pending at this promotion and is not claimed as prior evidence. Combined promotionreceipt/patches .cache/tu122-final-performance-root-promotion.
+
+Next step is the original full normal122 build with --resume --emscripten-only-probes, not a runtime-derived manifest. All original game gates/deadlines/recordings stay unchanged; private137 wiring continues concurrently without large disk output.
+
+
+Fresh full normal122 build attempt7 started19:17:27UTC, actual session37205, command bash nethack-c/build-wasm.sh --resume --emscripten-only-probes; log .cache/tu122-normal-attempt7-second-performance.log. Start receipt .cache/tu122-root-staging/normal7-start.json binds actual selected registry/core/runtime/library/build sources. Actual terminal exit is pending; no result inferred from progress output. All selected source writers frozen; private137 team continues lightweight isolated composition, with large compiler outputs deferred for disk headroom. No runtime-derived manifest or source/provenance waiver.
+
+
+Root reviewed the prospective private137 UNIXUNIX finite Makefile adapter: read complete helper/guard branch and statically decoded both literal profiles. Whole122/current and prospective137-once Makefile hashes match, and each exact byte-span inverse reproduces recovered expected1c21 bytes. No helper/compiler execution performed. Approved isolated shadow composition only; final raw registry hash/version must be reviewed again after provenance-source additions, before guard execution. All original metadata pins remain; actual current command/macros/whole CPP mandatory. No generic selector/blank-line normalization, automatic pin refresh, or changed-link-selection equivalence claim. Draft .cache/tu137-shadow-integration/control/groups/c-makefile-supplement.
+
+
+Additional independent DUNGEON peerB review completed AFTER promotion, not prior evidence: .cache/dungeon-producer-cache-peer-b/review.json bac99b84.367 bound hashes/exact3-edit inverse/currentselected24bb verified;265own data properties consist of Module,263arrow functions and literal arrow shorthand. No eager native/heap/world reads or getters in packet construction. Native override-leak negative and actual267/all110+27/32 witness logs inspected, not rerun. Cold publication reentry is static-only (ordinary construction calls no foreign code); setter-injection retry is not OOM/C unwinding. Shared function identity/expandos and arbitrary host tampering with internal cache/Object.assign/prototypes remain explicit adapter-contract limits. Prior source/body and harness untouched; all runtime-team jobs drained after this review.
+
+
+Next122 capture recipe additionally requires all488 actual normal-build reference/hybrid mjs+matchingwasm outputs (122×2×2), rather than relying only on historical private pair copies. All488 current paths exist; the capture will run only after actual normal7 terminal success, using existing independent-inode clone/hash checks. This improves replay evidence coverage; it does not retroactively repair normal6, qualify the rejected refresh prototype, claim all implicit SDK inputs captured, or claim fresh488unit executions. No capture/frozen capsule changed yet.
+
+
+Normal122 attempt7 actually exited1 (session37205) after all122 probe-build rows, during final game link: SDK symbol_lists generated-cache write raised ENOSPC. No game gates ran and every bound selected source hash remained unchanged; exact log/result retained under normal-attempt7-second-performance.log and root-staging/normal7-result.json. This is not a successful build or regression diagnosis.
+
+Before retry, remove exactly5 disposable compiler-generated symbol-cache JSON files listed/hash-bound in .cache/tu122-root-staging/normal7-symbol-cache-cleanup.json: four older oversized caches total2058210302bytes plus current failed ZERO-BYTE a58b68fa... entry. The393MB older file is not the current failure (mtime12:52); its completeness is unclaimed. The SDK's existing implementation limits this cache by500entries, not totalbytes, and failed before pruning the501st entry. No SDK/compiler/sysroot source/binary, small unit caches, source/proof/recording, frozen capsule or archival evidence is deleted. These generated caches are reproducible from unchanged compiler inputs; no compiler flags or SDK code changes. Preserve metadata/hash cleanup receipt; retry the original full normal build afterward.
+
+
+Exact5-file generated-symbol-cache cleanup completed: free460369920→2520256512bytes,496small caches retained; SDK/compiler/sysroot and frozen evidence untouched. Normal122 attempt8 now running, actual26832, original full command unchanged; source hashes exactly match attempt7. New log .cache/tu122-normal-attempt8-second-performance.log and root-staging/normal8-start.json; actual terminal result pending. Private137 bounded compiler/source checks may resume concurrently, with fresh all-team quiet required later before timed game gates. No acceptance from122probe compilation alone.
+
+
+Private137 finite version1 independently verified: actual shadowregistry47e8f8b1/helper07bd5975, original2 finite profiles preserved plus exactly1 new profile,137ordered source projection matches actual registry, prospective Makefile57b920e2 fullhash and exact inverse to1c21. Approved staging those exact reviewed57b bytes in independent shadow to align actual137 selection before strict current command/macros/whole-CPP guard; no game build claim. Existing raw1d5/old1c21 copies remain. Subsequent unchanged builder invocation adds another separator: it requires a separate exact prospective version2 proof before future full137build, never automatic pin refresh. Two same-registry profiles must match the exact registry+Makefile SHA pair uniquely, not arbitrary first matching registry. This source/config-only work continues independently of running normal1228.
+
+
+Fresh full normal122 attempt8 actually exited0 (session26832). All bound source hashes unchanged; provenance853hashes/122TUs verified, Wasm5c1887d5 (unchanged C), main2a3b617e and manifest15a63321. Original C objects/HACKLIB/5C-Lua keys absent and actual production JS imports/no-private-alias audit passed. Literal closure freshly resolved324files/0nonliteral imports. Initial post-build audit invocations used unavailable unqualified node and exited127 before running; corrected to configured SDK Node24.19.0, both audits actually exited0. No harness/library/source adaptation was made for that path error; failed log retained separately. Runtime gate result remains pending. Full receipts .cache/tu122-root-staging/normal8-result.json and normal8-production-import-audit-sdk.log.
+
+
+Fresh normal8 capture completed at .cache/tu122-second-performance-fixed-cow-gate-snapshot:6301 independently cloned/hash-bound files, including488 fresh C/reference+hybrid artifacts. All9author slots and2coordinators now freshly ACK no active/queued work; quiet.json and original-command-contract.json record original30-second integration workers and45-second public sessions, no loaders/NODE_OPTIONS/timeout overrides. Pre-gateverification all6301unchanged; actual original integration starts next. Full game acceptance remains pending.
+
+
+Normal8 original game gates COMPLETE: actual integration18282exit1 NewYork30-second ETIMEDOUT; actualpublic77371wrapperexit0 but43/44 sessions. All4previousRNGmismatchcases0361/0367/0383/0399 now pass full5metric equivalence (53865/50125/16915/11409 RNG calls respectively). Sole public failure0360wizardworldtour hits ORIGINAL45-second deadline, not output divergence evidence. All43completed sessions exact across RNG/screens/cells/cursors/animation metrics. Finalizer67966exit0 properlyrecords FAILURE, verifiesall6301capturedinputsunchanged/853provenancehashes/324literalmodules0nonliteral/noCobjects/HACKLIB/5CLuakeys/privatealiases. Acceptedcheckpoint remains110,122unaccepted. Evidence .cache/tu122-second-performance-fixed-cow-gate-snapshot/failure.json/public-results.json/integration-result.json/actual-gate-terminal-receipt.json. All9authors+2coordinators CLEARed afteractualterminals, so137sourcechecksresumeindependently; remainingperformanceworkisnotagreen-gateclaim. Original39/44 andearlierfailedcapsulesretainedunchanged.
+
+
+Authorized next diagnostic .cache/tu122-normal8-performance-diagnostic runs original timezone-worker directly on the actual normal8 snapshot, with CPU profiling and NO loader. Parent30-second launcher is absent, so this cannot establish deadline acceptance. Private137 bounded compiler checks may run concurrently: elapsed time is not a controlled speed comparison. Purpose is updated hotspot attribution after all applied changes; broader GLYPHS wrapper-identity audit and independent137source-boundary review proceed separately, with no new implementation authorized merely by profile. Original43/44+NY30failure remains current.
+
+
+Authorized PRIVATE GLYPHS expanded bounded candidates against76f5: map-only3slots andmap/detail/unicode5slots per active invocation, existingcache/symparseincluded; other7kindsfresh. Fullsourceaudit found no C identity/property-bag replacement/ownaddress writes for these views. Source-held map/detail/unicode views must remain fixed-address/live through native calls, union aliases, pointer retargeting, eviction, arrays, memcpy/dupstr/free and nested reentry. Never cache pointee/pointer field values or retarget old views. Allslots clear+disable in nestedfinally evenrestorethrows, retainedtypedclosureinactiveafterreturn.
+
+Explicit compatibility difference: same-call wrapper/nested-node identity and JS property-bag mutation retention may change for reused kinds; arbitrary decorators/container replacement/ownaddress mutation/reflection are unsupported for this internal native-view adapter. Original C memory/value/ownership behavior remains required. Original41354and frozen37/38 checks run unchanged; any old in-call freshness-only assertion must be recorded as retired observer contract, never silently rewritten or called C mismatch. Actual native map/detail/unicode mutations/held arrays/duplicate ownership/union/free order/growth/reentry/twoModules/errors/lifetime and exactinverse required before promotion. No C/core/layout/main/livewrites; privateboundedunits only. Intro1.227/3.03 profile figures in initialplan refer to older5-overlay profile, NOTcurrentnormal8; corrected attribution pending. .cache/tu122-glyphs-expanded-reuse-plan.md.
+
+
+Private137 review corrections: actual current sourcechecker20a629 parses and all6 lexical controls plus exact newline/length masking pass; initial peer escaping/syntax finding was wrong and withdrawn in a NEW addendum, original draft retained. No lexer rewrite. Valid exported-only inventory gap corrected by owned exact all-named-function census, with scoped PICKUPmenu_pickup only; no blanket hidden-helper allowance.
+
+Root approved comment-only MON repair bd6b32d2→20b2521a for PRIVATEshadow: restore2 original /* DEFERRED */ occurrences at corresponding switch positions and remove1 displacedtail occurrence. Stripping ONLYthat token before/after leaves every other byte including whitespace identical; no executable/formal/function/RNG/pointer logic change. Earlier presence-only comment proof did not prove multiplicity; actual sharedchecker failure retained, strict multiplicity requirement stays. No native/game behavior claim from comment repair.
+
+Root approved private finite-v2 helper e6f4de33 after verifying old3profiles unchanged, exactnew47e8registry/607b2ab6prospectiveMakefile pair+137orderedprojection+byteinverse toold1c21. Helper now uniquely matches BOTH actual complete registry and Makefile hashes before unchanged exactinverse checks; nofirstmatch/automaticrebind. Stagehelperonly; currentMakefile57b remains until actual unchanged builder emits607b onnext invocation. Prospectivebytes are not an observed fullbuild. Wholefreshcommand/macros/CPP assertions unchanged; SDK/buildhelper unchanged.
+
+Authorized PRIVATE DUNGEON explicit own-property literal-copy experiment against selected24bb Object.assign producer. Newnormal8 profile attributes1.388s sampledself toselectedproducer, so previous closure-cache speed benefit is unproven and its generic copy may cost more; not a controlled before/after measurement. Keep265keys/order/flags/plainprototype/fresh writable per-call isolation/currentnativecalls/canonicalpublication. ActualSDK original/current/new producer unit/contracts plus real-factory cost comparison required before promotion; costobserver is distinct from C equivalence. No C/core/runtime/nativeflag/live edits or whole-game run authorized.
+
+
+Private137 PICKUP sourceguard adapter approved after full narrowdiff review: only historical build.py compiler-input entry uses existing exact reviewed helper3bfff hash-checked beforeimport, reversing actual54e→114→7f7 and preserving final historical expected-hash equality; all94other compiler inputs unchanged/raw, no metadata pin refresh or captured-mode fallback. Actual sourceguard remains required. New all-named JS function checker falsely recognized functionAddress as functionkeyword+Address because keyword regex lacked endingword boundary; owned scoped regex fix and declaration/generator/nonfunctionidentifier controls preserve exact extras check, failedrun retained, no original source change from that falsepositive.
+
+
+Private137 source gate now actually passes all137 original function inventories/order/formals/comments (a711e5e3 fullcheck16.95s), all15 owned sourceguards plusSHK/UNIXMAINmetadata pass, and60 explicit unsupported native requests reject beforefactoryloading (not native parity). Real central command-materialization preflight recorded67commands/30 reference-hybrid links and all137declaredsourcepaths, no fakebinaries/compilerexecution claimed by preflight. Root authorized ACTUAL new15centralpair compilation, boundedparallel onlywhereoutput/header dependenciesdisjoint, withfreshTOPLcompiler-dependencyclosure; originalprofiles/guards unchanged. Full137normalgame/provenance/public/native acceptance remains pending.
+
+Authorized low-priority PRIVATE O_INIT metadata-only experiment: hoist ordered53fixedvalidation entries, retain EVERYconstructor layout-propertyread/validation/order/receiver/firsterror/getterthrow/reentry evenmutable/same-identity/Proxy/frozenaccessorlayouts. No validation-resultmemoization or nativeworld/layout/service/buffer cache; namespace/literal/nativeheap/freshenv/record behavior unchanged. Exactoriginalrecipeprojection/inverse, originalEmCpair and focusedsemantic checks plus separatelylabeled realconstructor cost diagnostic requiredbeforepromotion. No C/core/nativeflags/live edits or gamejob; this does notblock137integration.

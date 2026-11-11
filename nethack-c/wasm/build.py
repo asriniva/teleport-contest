@@ -166,9 +166,11 @@ else:
          '-c', ROOT / 'nethack-c/wasm/dependency-bridge.c', '-o', dependency_bridge])
     dependency_objects.append(dependency_bridge)
 OUT.mkdir(exist_ok=True)
+ports = json.loads((ROOT / 'nethack-c/wasm/tu-ports.json').read_text())
+nhlua_transport_flags = (['-I'+str(ROOT/'scripts'), '-I'+str(ROOT/'nethack-c/wasm/tu-fragments'), '-sSUPPORT_LONGJMP=emscripten'] if any(port['name']=='nhlua' for port in ports) else [])
 tu_support = TREE / 'src/wasm/tu-support.o'
 run([sys.executable, '-B', ROOT / 'scripts/write-tu-source-metadata.py'], cwd=ROOT)
-run([emcc, *shlex.split(flags), '-I' + str(TREE / 'include'), '-I' + str(ROOT / '.cache/tu-probes'), '-c', ROOT / 'nethack-c/wasm/tu-support.c', '-o', tu_support])
+run([emcc, *shlex.split(flags), *nhlua_transport_flags, '-I' + str(TREE / 'include'), '-I' + str(ROOT / '.cache/tu-probes'), '-c', ROOT / 'nethack-c/wasm/tu-support.c', '-o', tu_support])
 dependency_mode = BUILD / 'dependency-mode.js'
 link_flags = shlex.join([str(bridge), *map(str, dependency_objects), str(tu_support), '-O2', '-g', '-sMEMORY64=1', '-sMODULARIZE=1', '-sEXPORT_ES6=1', '-sENVIRONMENT=node,web', '-sINVOKE_RUN=0', '-sEXIT_RUNTIME=1', '-sALLOW_MEMORY_GROWTH=1', '-sSTACK_SIZE=4194304', '-sEXPORTED_RUNTIME_METHODS=FS,ENV,callMain', '--emit-symbol-map', '--post-js', str(ROOT / 'nethack-c/wasm/runtime.js'), '--post-js', str(dependency_mode), '--embed-file', str(assets) + '@/nethack'])
 if not C_DEPENDENCIES:
@@ -176,11 +178,13 @@ if not C_DEPENDENCIES:
 if JS_LUA:
     link_flags += ' --js-library ' + shlex.quote(str(ROOT / 'nethack-c/wasm/lua-library.js'))
 link_flags += ' --js-library ' + shlex.quote(str(ROOT / 'nethack-c/wasm/native-libc-library.js'))
+if nhlua_transport_flags:
+    link_flags += ' -sSUPPORT_LONGJMP=emscripten'
 if 'wasm/hacklib.a: wasm/hacklib.o' not in (TREE / 'src/Makefile').read_text():
     with (TREE / 'src/Makefile').open('a') as f:
         f.write('\nwasm/hacklib.a: wasm/hacklib.o\n\t' + str(emar) + ' rcs $@ $<\n')
 # Sequentially gated whole-TU ports. The excluded object has no C fallback.
-ports = json.loads((ROOT / 'nethack-c/wasm/tu-ports.json').read_text())
+# The registry was read before compiling source-owned typed transport.
 # Keep JS-initialized const storage separate from every C reader. Otherwise
 # frontend optimization can fold zero fields before JavaScript initialization.
 for port in ports:
@@ -220,6 +224,36 @@ for port in ports:
     if port['name'] == 'hacklib':
         assert 'wasm/hacklib.a' not in link_objects.splitlines()
 (OUT / 'link-objects.txt').write_text(link_objects)
+# Component probes retain every original library entry. Before the normal link,
+# compile its current C inputs so pruning checks their actual undefined symbols.
+link_targets = link_objects.splitlines()
+assert link_targets and all(target.startswith('wasm/') and target.endswith(('.o', '.a')) for target in link_targets)
+run([MAKE, '-j' + JOBS, *link_targets, 'TARGETPFX=wasm/',
+     f'TARGET_CC={emcc}', f'TARGET_CFLAGS={flags}'], cwd=TREE / 'src')
+library_pruning = BUILD / 'production-library-pruning'
+library_pruning.mkdir(exist_ok=True)
+library_tokens = shlex.split(link_flags)
+library_inputs = [library_tokens[i + 1] for i, token in enumerate(library_tokens) if token == '--js-library']
+library_input_file = library_pruning / 'inputs.json'
+library_input_file.write_text(json.dumps(library_inputs, indent=2) + '\n')
+native_inputs = [str(TREE / 'src' / target) for target in link_targets]
+native_inputs += [token for token in library_tokens if not token.startswith('-') and token.endswith(('.o', '.a'))]
+if not JS_LUA:
+    native_inputs.append(str(wasm_lua))
+if C_DEPENDENCIES:
+    native_inputs.append(str(terminfo_library))
+native_inputs = list(dict.fromkeys(native_inputs))
+assert all(Path(path).is_absolute() and Path(path).is_file() for path in native_inputs), 'Missing current normal-link native input'
+native_input_file = library_pruning / 'native-inputs.json'
+native_input_file.write_text(json.dumps(native_inputs, indent=2) + '\n')
+run(['node', ROOT / 'scripts/write-game-library-pruner.mjs',
+     '--libraries-json', library_input_file, '--native-inputs-json', native_input_file,
+     '--output-dir', library_pruning], cwd=ROOT)
+link_flags += ' --js-library ' + shlex.quote(str(library_pruning / 'normal-link-pruner.js'))
+library_pruning_manifest = json.loads((library_pruning / 'normal-link-pruner-manifest.json').read_text())
+assert library_pruning_manifest['nativeDemand']['verified'] is True
+assert library_pruning_manifest['nativeDemand']['inputs'] == native_inputs
+assert library_pruning_manifest['nativeDemand']['requiredRemoved'] == []
 (TREE / 'src/Sysunix').unlink(missing_ok=True)
 run([MAKE, '-j' + JOBS, 'nethack', 'TARGETPFX=wasm/', f'TARGET_CC={emcc}', f'TARGET_CFLAGS={flags}', f'TARGET_LINK={emcc}', f'TARGET_LFLAGS={link_flags}', f'GAMEBIN={OUT}/nethack.mjs', f'LUALIBS={"" if JS_LUA else wasm_lua} -lm', f'WINLIB={terminfo_library if C_DEPENDENCIES else ""}', 'TARGET_LIBS=', 'AUTOLIBS='], cwd=TREE / 'src')
 lua_sources = sorted({str(path.relative_to(ROOT)) for path in (ROOT / 'js/services').rglob('*.js')
@@ -260,6 +294,18 @@ c_debug_regex_dependencies = ({
     'bridge': 'direct NetHack JS regex wrappers; opaque per-Module regex handles',
 } if regex_transport == 'ported-posixregex-direct-js' else {})
 manifest = {
+    'normalGameLibraryPruning': {
+        'scope': 'Normal final link only; original component libraries and source policy unchanged',
+        'manifest': str((library_pruning / 'normal-link-pruner-manifest.json').relative_to(ROOT)),
+        'removedEntries': library_pruning_manifest['removedEntries'],
+        'sourceSha256': {
+            **library_pruning_manifest['sourceSha256'],
+            **{str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest() for path in [
+                ROOT / 'scripts/write-game-library-pruner.mjs', ROOT / 'scripts/reviewed_build_provenance.py',
+                ROOT / 'nethack-c/wasm/build.py', library_input_file, native_input_file,
+                library_pruning / 'normal-link-pruner.js', library_pruning / 'normal-link-pruner-manifest.json']},
+        },
+    },
     'probeBuildBackends': ['emscripten-reference', 'emscripten-hybrid']
         + ([] if EMSCRIPTEN_ONLY_PROBES else ['native-c']),
     'nativeAbiSha256': native_abi_hash,

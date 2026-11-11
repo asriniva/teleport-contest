@@ -1,0 +1,21 @@
+[
+  "r",
+  "%d %d %d %d",
+  "xpm2iff_host: only 1 char/pixel XPM files supported\n",
+  "%c c #%2x%2x%2x",
+  "xpm2iff_host: bad color entry: %s\n",
+  "xpm2iff_host: bad image data at row %d col %d\n",
+  "Usage: %s source.xpm destination.iff\n",
+  "%s: failed to open or parse XPM file\n",
+  "malloc",
+  "calloc",
+  "wb",
+  "FORM",
+  "BMAP",
+  "BMHD",
+  "CAMG",
+  "CMAP",
+  "PDAT",
+  "PLNE",
+  "tomb.iff: %dx%d, %d colors (%d planes), %u bytes/plane\n"
+]

@@ -21,6 +21,7 @@ addToLibrary({
       return index;
     };
     var services = {
+      moduleKey: Module,
       heap: () => HEAPU8, literal,
       stackAlloc: size => Number(stackAlloc(size)), stackSave: () => stackSave(), stackRestore: saved => stackRestore(saved),
       global: index => Number(_teleport_lock_global(index)), equipment: () => Number(_teleport_lock_equipment()),

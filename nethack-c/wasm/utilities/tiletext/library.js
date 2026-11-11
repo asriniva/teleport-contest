@@ -1,0 +1,15 @@
+addToLibrary({
+tiletext_js_state__sig:'ii',tiletext_js_state:function(i){return Module.tiletextState(i);},
+tiletext_js_set_grayscale__sig:'vi',tiletext_js_set_grayscale:function(a){Module.tiletextPort('set_grayscale',a);},
+tiletext_js_get_next_line__sig:'ipi',tiletext_js_get_next_line:function(a,b){return Module.tiletextPort('get_next_line',a,b);},
+tiletext_js_read_text_colormap__sig:'vp',tiletext_js_read_text_colormap:function(a){Module.tiletextPort('read_text_colormap',a);},
+tiletext_js_write_text_colormap__sig:'ip',tiletext_js_write_text_colormap:function(a){return Module.tiletextPort('write_text_colormap',a);},
+tiletext_js_read_txttile__sig:'ipp',tiletext_js_read_txttile:function(a,b){return Module.tiletextPort('read_txttile',a,b);},
+tiletext_js_write_txttile__sig:'vpp',tiletext_js_write_txttile:function(a,b){Module.tiletextPort('write_txttile',a,b);},
+tiletext_js_init_colormap__sig:'v',tiletext_js_init_colormap:function(){Module.tiletextPort('init_colormap');},
+tiletext_js_merge_colormap__sig:'v',tiletext_js_merge_colormap:function(){Module.tiletextPort('merge_colormap');},
+tiletext_js_fopen_text_file__sig:'ipp',tiletext_js_fopen_text_file:function(a,b){return Module.tiletextPort('fopen_text_file',a,b);},
+tiletext_js_read_text_tile__sig:'ip',tiletext_js_read_text_tile:function(a){return Module.tiletextPort('read_text_tile',a);},
+tiletext_js_write_text_tile__sig:'ip',tiletext_js_write_text_tile:function(a){return Module.tiletextPort('write_text_tile',a);},
+tiletext_js_fclose_text_file__sig:'i',tiletext_js_fclose_text_file:function(){return Module.tiletextPort('fclose_text_file');},
+});

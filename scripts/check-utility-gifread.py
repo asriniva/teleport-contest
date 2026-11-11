@@ -1,0 +1,12 @@
+from pathlib import Path
+import re,json,hashlib,subprocess
+import argparse,sys
+parser=argparse.ArgumentParser();parser.add_argument('--out',required=True,type=Path);parser.add_argument('--source-root',type=Path);args=parser.parse_args();code_root=Path(__file__).resolve().parents[1];w=args.out.resolve();r=(args.source_root or code_root).resolve();c=(r/'nethack-c/upstream/win/share/gifread.c').read_text();j=(code_root/'js/ported-utilities/gifread/gifread.js').read_text();info=json.loads((w/'configured-functions.json').read_text());names=re.findall(r'export function (\w+)\(([^)]*)\)',j);assert[n for n,p in names]==[x['name']for x in info]
+for(n,p),x in zip(names,info):assert[x.strip()for x in p.split(',')if x.strip()]==[p['name']for p in x['parameters']],n
+comments=[m[0]for m in re.finditer(r'/\*[\s\S]*?\*/|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'',c)if m[0].startswith('/*')];assert all(x in j for x in comments)
+block=re.search(r'std_args\[\]\s*=\s*\{([\s\S]*?)\};',c)[1];expected=re.findall(r'"([^"\n]*)"',block);actual=json.loads(re.search(r'export const std_args = (\[[^;]+\]);',j)[1]);assert expected==actual
+assert 'last_byte.value - 2'in j and 'last_byte.value - 1'in j and 'C.staticCell("GetCode.last_byte", "Int32")'in j
+reset=j[j.index('export function GetCode'):j.index('export function LWZReadByte')];reset=reset[reset.index('if (flag)'):reset.index('if (Number(',reset.index('if (flag)')+1)];assert 'last_byte.value ='not in reset
+assert 'fini: while'in j and 'break fini;'in j
+h=lambda b:hashlib.sha256(b).hexdigest();before=h(j.encode());subprocess.run([sys.executable,str(code_root/'scripts/lower-utility-gifread.py'),'--out',str(w),'--source-root',str(r)],check=True,stdout=subprocess.DEVNULL);assert h((w/'candidate/gifread.js').read_bytes())==before
+(w/'source-guard.json').write_text(json.dumps({'status':'PASS','configuredOriginalFunctions':12,'originalNamesAndFormalsExact':True,'originalLexicalBlockComments':len(comments),'sourceStdArgsExact':expected,'noInitializationBugFix':True,'gotoAdaptation':'single fini label on existing while plus breakfini, common finalreadtail preserved','fullPixelCopiesAndTypedRowStride':True,'exactCoreRegeneration':before,'sourceSha256':h(c.encode()),'limits':'Core inventory12 does not establish allpaths/fullstandardCbehavior; original GetCode negative-index UB retained and separately qualified.'},indent=2)+'\n');print('PASS12originalfunctions/formals/comments/std_args/exactregeneration/UBpreservation')

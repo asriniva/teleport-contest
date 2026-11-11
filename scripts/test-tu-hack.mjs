@@ -10,6 +10,7 @@ import {C,withCEnvironment} from '../js/ported/c-runtime.js';
 import {createHackEnvironment,callHack} from '../js/ported/hack-runtime.js';
 import * as core from '../js/ported/hack.js';
 
+if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('HACK has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for the explicit Emscripten diagnostic.');
 const dir=resolve(process.env.HACK_PROBE_DIR??'.cache/hack-author');
 const schema=JSON.parse(await readFile('nethack-c/wasm/tu-fragments/hack-schema.json','utf8'));
 if(process.argv.includes('--build')) {

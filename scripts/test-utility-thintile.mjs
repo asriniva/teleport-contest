@@ -1,0 +1,19 @@
+import{resolve,isAbsolute}from'node:path';import{pathToFileURL}from'node:url';
+const output=process.env.UTILITY_THINTILE_OUT;if(!output||!isAbsolute(output))throw Error('Explicit absolute UTILITY_THINTILE_OUT required');
+import assert from 'node:assert/strict';
+import {writeFileSync} from 'node:fs';
+const rf=(await import(pathToFileURL(output+'/reference.mjs'))).default,hf=(await import(pathToFileURL(output+'/hybrid.mjs'))).default;
+import {createUtility} from '../js/ported-utilities/thintile/runtime.mjs';
+import {C,R,T} from '../js/ported-utilities/thintile/scope.js';
+const results=[];let growth=false;
+const files=['monsters','objects','other'],outputs=['monthin','objthin','oththin'];
+const palette='A = (0, 1, 2)\nb = (255, -1, 17)\n. = (9, 8, 7)\n0 = (4, 5, 6)\n';
+function tile(id,name,flavor=0){const rows=Array.from({length:16},(_,y)=>Array.from({length:16},(_,x)=>'Ab.0'[(x+y+flavor)%4]).join(''));return '# tile '+id+' ('+name+')\n{\n'+rows.map(s=>'  '+s).join('\n')+'\n}\n';}
+async function run(factory,inputs,grow=false){const stdout=[],stderr=[],m=await factory({print:s=>stdout.push(s),printErr:s=>stderr.push(s),quit:(status,e)=>{throw e;}});m.FS.mkdirTree('/win/share');m.FS.mkdir('/work');m.FS.chdir('/work');for(let i=0;i<3;i++)m.FS.writeFile('/win/share/'+files[i]+'.txt',inputs[i]);if(factory===hf){const u=createUtility(m);m.utilityInvoke=(...a)=>u.invoke(...a);if(grow){const old=m._thin_scan1;let done=false;m._thin_scan1=(...args)=>{if(!done){done=true;const before=m.HEAPU8.buffer,p=m._malloc(BigInt(m.HEAPU8.byteLength*2));assert.notEqual(m.HEAPU8.buffer,before);m._free(p);growth=true;}return old(...args);};}}let code;try{code=m._probe_run(0,0n);}catch(e){if(e.name!=='ExitStatus')throw e;code=e.status;}assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);return{code,stdout,stderr,outputs:outputs.map(s=>Buffer.from(m.FS.readFile('/win/share/'+s+'.txt')).toString('hex'))};}
+async function check(name,inputs,options=false){const a=await run(rf,inputs),b=await run(hf,inputs,options);assert.deepEqual(b,a,name);assert.equal(a.code,0);results.push({name,bytes:a.outputs.map(s=>s.length/2),stderr:a.stderr});return a;}
+await check('empty-three-files',['','','']);
+await check('palette-only',[palette,palette,palette]);
+for(let flavor=0;flavor<4;flavor++)for(const counts of[[1,1,1],[2,0,3],[0,4,1]]){const a=await check('tiles-'+flavor+'-'+counts.join('-'),counts.map((n,i)=>palette+Array.from({length:n},(_,j)=>tile(j*19,'entry '+i+' '+j,flavor+j)).join('')));for(let i=0;i<3;i++){const s=Buffer.from(a.outputs[i],'hex').toString();assert.equal((s.match(/^# tile /gm)||[]).length,counts[i]);if(counts[i]){const rows=s.split('\n').filter(x=>x.startsWith('  '));assert.equal(rows.length,counts[i]*16);assert.equal(rows[0].trim(),Array.from({length:8},(_,x)=>'Ab.0'[(x*2+flavor)%4]).join(''));}}}
+for(const [name,body]of[['open-brace','# tile 5 (wrong)\n!'],['EOF-before-brace','# tile 5 (truncated)\n'],['EOF-in-body','# tile 6 (body)\n{\nAb'],['EOF-before-close',tile(7,'end').slice(0,-2)],['close-brace',tile(8,'wrongclose').replace(/}\n$/,'!\n')],['nonheader','garbage']])await check(name,[palette+body,palette+tile(2,'unaffected'),palette]);
+await check('growth-during-native-read',[palette+tile(99,'growth'),tile(4,'second'),tile(5,'third')],true);assert.ok(growth);
+writeFileSync(resolve(output,'results.json'),JSON.stringify({status:'PASS',comparisons:results.length,functions:4,actualOriginalC:true,actualMixedJS:true,growth,results,limits:'Defined bounded palette/header strings, required files/directories present; safe body truncation/braces; no partially assigned headers or unchecked fopen failures; EmC utility only.'},null,2)+'\n');console.log('PASS THINTILE '+results.length+' full status/stdout/stderr/three output-file comparisons; actual growth');

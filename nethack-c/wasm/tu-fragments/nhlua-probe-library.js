@@ -1,0 +1,1 @@
+addToLibrary({probe_js_reentry__sig:'v',probe_js_reentry:function(){Module.nhluaProbeReentry();},probe_js_fatal__deps:['$UTF8ToString'],probe_js_fatal__sig:'vp',probe_js_fatal:function(message){throw new Error('fixture-fatal:'+UTF8ToString(Number(message)));}});

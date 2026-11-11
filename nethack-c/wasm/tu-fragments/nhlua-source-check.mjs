@@ -18,7 +18,17 @@ export function checkNhluaSource({preprocess=true}={}) {
     const core=readFileSync('js/ported/nhlua.js','utf8');
     const functions=[...core.matchAll(/export function (\w+)\(([^)]*)\)/g)];
     assert.deepEqual(functions.map(m=>({name:m[1],parameters:m[2].split(',').map(v=>v.trim()).filter(Boolean)})),schema.functions.map(f=>({name:f.name,parameters:f.parameters.map(p=>p.name)})),'Original function names/order/formals');
-    assert.equal(functions.length,94);assert.deepEqual(comments(core),comments(source),'Original block-comment order/multiplicity');
+    assert.equal(functions.length,94);
+    // The inherited seed patch replaced one pristine comment. Preserve it as
+    // history without mixing it into the exact configured286-comment sequence.
+    const historical=comments(upstream).filter(comment=>!comments(source).includes(comment));
+    assert.equal(historical.length,1,'Exact pristine-only inherited comment inventory');
+    assert(historical[0].includes('XXX Note that math.random'));
+    const appendix="\n// Historical pristine comment replaced by inherited 001-deterministic-runtime.patch.\n// Retained outside the configured source bodies; seeded prepared policy above is authoritative.\n"+historical[0]+'\n';
+    assert(core.endsWith(appendix),'Exact historical pristine-comment appendix');
+    const configuredCore=core.slice(0,-appendix.length);
+    assert.equal(digest(configuredCore),'478ce9cbbddfd0a9bcdab88d6d38eeccd90597ac16b5a3199ffc48933cbcdbee','Frozen policy/data before additive historical comment');
+    assert.deepEqual(comments(configuredCore),comments(source),'Original configured block-comment order/multiplicity');
     const own=new Set(schema.functions.map(f=>f.name));
     assert(!schema.callSites.some(s=>own.has(s.name)),'No native NHLUA policy fallback through foreign-call sites');
     assert.equal(Object.keys(schema.data).length,27);

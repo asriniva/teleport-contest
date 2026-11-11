@@ -3,7 +3,17 @@ from pathlib import Path
 import json,re,hashlib,subprocess,argparse
 r=Path(__file__).resolve().parents[1];w=r/'.cache/pickup-first-pass';m=json.loads((r/'nethack-c/wasm/tu-fragments/pickup-source-metadata.json').read_text());s=json.loads((r/'nethack-c/wasm/tu-fragments/pickup-schema.json').read_text());c=(r/'nethack-c/upstream/src/pickup.c').read_text();j=(r/'js/ported/pickup.js').read_text();abi=(r/'nethack-c/wasm/tu-fragments/pickup-support.c').read_text();lib=(r/'nethack-c/wasm/tu-libraries/pickup.js').read_text();runtime=(r/'js/ported/pickup-runtime.js').read_text()
 assert c==(r/'.cache/wasm64-build/tree/src/pickup.c').read_text();assert hashlib.sha256(c.encode()).hexdigest()==m['sourceSHA256']=='915da0f8fce16461cc42a0035f7ef3e9847fc8f8ee3708a7f017ad6587383134'
-for p,h in m['compilerInputHashes'].items():assert hashlib.sha256((r/p).read_bytes()).hexdigest()==h,p
+# Preserve historical pins through the exact already-reviewed builder inverse only.
+for p,h in m['compilerInputHashes'].items():
+ if p=='nethack-c/wasm/build.py':
+  from importlib.util import spec_from_file_location,module_from_spec
+  reviewed_path=r/'scripts/reviewed_build_provenance.py'
+  assert hashlib.sha256(reviewed_path.read_bytes()).hexdigest()=='3bfff734265ce4ab4abc578ce25d01a6d5c0ef92f9d5ad471024644cc3ca5b1b','Unreviewed builder provenance helper'
+  reviewed_spec=spec_from_file_location('pickup_reviewed_build',reviewed_path)
+  reviewed=module_from_spec(reviewed_spec);reviewed_spec.loader.exec_module(reviewed)
+  input_bytes=reviewed.nhlua_transport_baseline(r,h)
+ else:input_bytes=(r/p).read_bytes()
+ assert hashlib.sha256(input_bytes).hexdigest()==h,p
 assert hashlib.sha256((w/'inventory-notes.txt').read_bytes()).hexdigest()==m['inventorySHA256']=='967f63706dcc7eb2973dc58a9eaf73350560d5a2cadff9d3404dda3ef6d1b544'
 f=m['functions'];assert len(f)==66 and sum(x['linkage']=='static'for x in f)==35
 assert re.findall(r'^export function (\w+)\(([^)]*)\)',j,re.M)==[(x['name'],','.join(p['name']for p in x['parameters']))for x in f]

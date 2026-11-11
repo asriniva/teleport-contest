@@ -43,8 +43,18 @@ export function createInventEnvironment(services){
  return env;
 }
 export function callInvent(services,name,...args){
- let env=states.get(services.moduleKey);if(!env){env=createInventEnvironment(services);states.set(services.moduleKey,env);}
- Object.setPrototypeOf(env,services);
- const fn=invent[name];if(typeof fn!=='function')throw Error('Unknown original INVENT function '+name);
- const stackFrame=services.stackSave();try{return withCEnvironment(env,fn,...args)??0;}finally{services.stackRestore(stackFrame);}
+ let state=states.get(services.moduleKey);
+ if(!state){
+  state={services};
+  const forwarding=new Proxy(Object.create(null),{get:(_,key)=>Reflect.get(state.services,key,state.services)});
+  state.env=createInventEnvironment(forwarding);
+  states.set(services.moduleKey,state);
+ }
+ const previous=state.services;
+ state.services=services;
+ try{
+  const fn=invent[name];if(typeof fn!=='function')throw Error('Unknown original INVENT function '+name);
+  const stackFrame=services.stackSave();
+  try{return withCEnvironment(state.env,fn,...args)??0;}finally{services.stackRestore(stackFrame);}
+ }finally{state.services=previous;}
 }

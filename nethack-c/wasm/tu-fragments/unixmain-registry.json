@@ -1,0 +1,28 @@
+{
+  "name": "unixmain",
+  "source": "sys/unix/unixmain.c",
+  "javascript": "js/ported/unixmain.js",
+  "library": "nethack-c/wasm/tu-libraries/unixmain.js",
+  "configuredFunctions": true,
+  "reference": "prepared",
+  "probeContext": false,
+  "adapterSources": [
+    "js/ported/unixmain-runtime.js",
+    "scripts/tu-unixmain-layout.h",
+    "nethack-c/wasm/tu-fragments/unixmain-types.h",
+    "nethack-c/wasm/tu-fragments/unixmain-support.c",
+    "nethack-c/wasm/tu-fragments/unixmain-entry.c",
+    "nethack-c/wasm/tu-fragments/unixmain-schema.json",
+    "nethack-c/wasm/tu-fragments/unixmain-source-inventory.json",
+    "nethack-c/wasm/tu-fragments/unixmain-source-check.py",
+    "nethack-c/wasm/tu-fragments/unixmain-check-metadata.mjs"
+  ],
+  "nativeStorageSources": [
+    {
+      "source": "nethack-c/wasm/tu-fragments/unixmain-support.c"
+    },
+    {
+      "source": "nethack-c/wasm/tu-fragments/unixmain-entry.c"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 """UHITM original source/configured full-body/type/literal/data/ABI guards."""
 from pathlib import Path
 import hashlib,json,os,re,subprocess
-r=Path(__file__).resolve().parents[3];w=r/'.cache/uhitm-author';prepared=r/'.cache/wasm64-build/tree/src/uhitm.c';pristine=r/'nethack-c/upstream/src/uhitm.c'
+r=Path(__file__).resolve().parents[3];SDK=Path(os.environ.get('EMSDK',str(r/'.cache/emsdk')));w=r/'.cache/uhitm-author';tools=r/'nethack-c/wasm/tu-fragments/tu137-group-a/uhitm-source-tools';outdir=Path(os.environ.get('UHITM_GUARD_WORK',str(r/'.cache/tu137-shadow-work/uhitm-guard'))).resolve();outdir.mkdir(parents=True,exist_ok=True);guard_env={**os.environ,'UHITM_GUARD_WORK':str(outdir)};prepared=r/'.cache/wasm64-build/tree/src/uhitm.c';pristine=r/'nethack-c/upstream/src/uhitm.c'
 for path in [prepared,pristine]:assert hashlib.sha256(path.read_bytes()).hexdigest()=='4cc2f8a0ffe0121801a777978a9a555a063db720e0fe972308fb6ab0e96feb12',('UHITM source changed',path)
 source=prepared.read_text();core=Path(os.environ.get('UHITM_GUARD_CORE',str(r/'js/ported/uhitm.js'))).read_text();runtime=(r/'js/ported/uhitm-runtime.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/uhitm-support.inc').read_text()
 comments=re.findall(r'/\*.*?\*/',source,re.S);assert len(comments)==783
@@ -13,7 +13,7 @@ for f in F:
  params=[p['name']for p in f.get('inner',[])if p.get('kind')=='ParmVarDecl']
  assert re.search(r'export function '+f['name']+r'\(([^)]*)\)',core)[1]==', '.join(params)
 defs=json.loads((r/'nethack-c/wasm/compile-defines.json').read_text())
-base=[str(r/'.cache/emsdk/upstream/emscripten/emcc'),'-sMEMORY64=1',*['-D'+d for d in defs],'-I'+str(r/'.cache/wasm64-build/tree/include')]
+base=[str(SDK/'upstream/emscripten/emcc'),'-sMEMORY64=1',*['-D'+d for d in defs],'-I'+str(r/'.cache/wasm64-build/tree/include')]
 macro=subprocess.check_output(base+['-E','-dM','uhitm.c'],cwd=prepared.parent,text=True)
 for flag in ['UNIX','DEBUG','MAIL','MAIL_STRUCTURES','STATUS_HILITES']:assert re.search(r'^#define '+flag+r'\b',macro,re.M),('UHITM profile changed',flag)
 for empty in ['SetVoice','Soundeffect']:assert re.search(r'^#define '+empty+r'\([^)]*\)\s*$',macro,re.M)
@@ -63,8 +63,8 @@ aliases=json.loads(re.search(r'const fieldAliases=(\{[^\n]*\});',runtime)[1])
 for name,value in aliases.items():assert re.search(r'^#define '+name+' '+re.escape(value)+r'$',macro,re.M),('UHITM field alias drift',name,value)
 declaration=next(n for n in fresh['inner']if n.get('kind')=='FunctionDecl'and n.get('name')=='mksobj')
 assert any(c.get('kind')=='ReturnsNonNullAttr'for c in declaration.get('inner',[]))
-subprocess.check_call(['python3',str(w/'source-data.py')],cwd=r)
-subprocess.check_call([str(r/'.cache/emsdk/node/24.19.0_64bit/bin/node'),str(w/'source-data.mjs')],cwd=r)
-regenerated=w/'regenerated-core.js';subprocess.check_call(['python3',str(w/'port-core.py')],cwd=r,env={**os.environ,'UHITM_OUTPUT':str(regenerated)})
+subprocess.check_call(['python3',str(tools/'source-data.py')],cwd=r,env=guard_env)
+subprocess.check_call([str(SDK/'node/24.19.0_64bit/bin/node'),str(tools/'source-data.mjs')],cwd=r,env=guard_env)
+regenerated=outdir/'regenerated-core.js';subprocess.check_call(['python3',str(tools/'port-core.py')],cwd=r,env={**guard_env,'UHITM_OUTPUT':str(regenerated)})
 assert regenerated.read_text()==core,'Readable UHITM source regeneration drift'
 print('UHITM metadata PASS:102 full bodies/65 public37 private/783 ordered comments/6 source static objects/'+str(len(expected))+' RNG line+function origins/typed aliases/native automatic refs')

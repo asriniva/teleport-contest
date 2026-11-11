@@ -6,6 +6,7 @@ import {pathToFileURL} from 'node:url';
 import * as core from '../js/ported/zap.js';
 import {callZap,initializeZap,zapState,createZapEnvironment} from '../js/ported/zap-runtime.js';
 import {C,R,T,withCEnvironment} from '../js/ported/c-runtime.js';
+if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('ZAP has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for explicit Emscripten diagnostics.');
 const custom=process.env.TELEPORT_ZAP_PROBE_DIR,dir=resolve(custom??'.cache/tu-probes');
 const file=k=>pathToFileURL(resolve(dir,(custom?'':'zap-')+k+'.mjs'));
 const {default:referenceFactory}=await import(file('reference'));

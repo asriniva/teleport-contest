@@ -10,6 +10,7 @@ const astExpected={"uint_to_any":"796bb93dc4c2478cc2c385b1df40d87bd350907cd567a2
 const ownerExpected="56ed3c6286359ef0d8c70065472d3a55b7a1fab76f82f234424a4f376c224183";
 const stable=value=>Array.isArray(value)?value.map(stable):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).filter(k=>!['id','loc','range','previousDecl','typeAliasDeclId'].includes(k)).sort().map(k=>[k,stable(value[k])])):typeof value==='string'&&/^0x[0-9a-f]+$/i.test(value)?'<compiler-id>':value;
 export function checkHackSource(root=process.cwd(),{preprocess=true,ast=true}={}) {
+ const sdk=resolve(process.env.EMSDK??resolve(root,'.cache/emsdk'));
  const read=p=>readFileSync(resolve(root,p),'utf8');
  const original=read('nethack-c/upstream/src/hack.c');
  for(const [name,value]of [['pristine',original],['prepared',read('.cache/wasm64-build/tree/src/hack.c')]])if(sha(value)!==sourceSha)throw Error('Review changed HACK '+name+' source');
@@ -32,7 +33,7 @@ export function checkHackSource(root=process.cwd(),{preprocess=true,ast=true}={}
  if(preprocess||ast) {
   const defines=JSON.parse(read('nethack-c/wasm/compile-defines.json'));
   const base=['-O2','-g','-sMEMORY64=1',...defines.map(x=>'-D'+x),'-include',resolve(root,'nethack-c/wasm/native-terminal.h'),'-I'+resolve(root,'.cache/wasm64-build/tree/include'),'-I'+resolve(root,'.cache/ncurses-wasm64-build/include')];
-  const run=args=>{const r=spawnSync(resolve(root,'.cache/emsdk/upstream/emscripten/emcc'),[...base,...args,'hack.c'],{cwd:resolve(root,'.cache/wasm64-build/tree/src'),encoding:'utf8',maxBuffer:128*1024*1024});if(r.status!==0)throw Error('HACK configured compiler failed: '+r.stderr);return r.stdout;};
+  const run=args=>{const r=spawnSync(resolve(sdk,'upstream/emscripten/emcc'),[...base,...args,'hack.c'],{cwd:resolve(root,'.cache/wasm64-build/tree/src'),encoding:'utf8',maxBuffer:128*1024*1024});if(r.status!==0)throw Error('HACK configured compiler failed: '+r.stderr);return r.stdout;};
   if(preprocess) {
    const macros=new Map([...run(['-E','-dM']).matchAll(/^#define (\w+)(\([^\n ]*\))? ?(.*)$/gm)].map(m=>[m[1],{params:m[2]??null,body:m[3]}]));
    if(!macros.has('DEBUG'))throw Error('Review changed HACK configured DEBUG branch');

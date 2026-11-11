@@ -13,6 +13,8 @@ extern boolean HE_resets_AS;
 extern void (*decgraphics_mode_callback)(void);
 extern void (*utf8graphics_mode_callback)(void);
 extern void teleport_capture(const char * a0,int a1,int a2,int a3);
+void teleport_termcap_capture(const char *screen,int x,int y,int animation){teleport_capture(screen,x,y,animation);}
+_Static_assert(__builtin_types_compatible_p(__typeof__(&teleport_termcap_capture),void (*)(const char *,int,int,int)),"TERMCAP capture transport");
 #ifndef TELEPORT_REFERENCE_TU
 struct tc_lcl_data tc_lcl_data;
 static char * teleport_termcap_nh_VI;

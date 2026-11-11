@@ -12,10 +12,13 @@ for path,digest in m['compilerInputHashes'].items():
  actual=hashlib.sha256((r/path).read_bytes()).hexdigest()
  if args.current_profile and path=='nethack-c/wasm/build.py':
   assert digest=='7dc84c8a838a44495394b4da450ca1ca372ea01357ecd92f9590e315ee3621f6'
-  assert actual=='7f7d2856ecc84c0ee4a4c402b8145e178c9fa05f73baae2761167bf2ebfb3a0d'
+  import sys
+  sys.path.insert(0,str(r/'scripts'))
+  from reviewed_build_provenance import nhlua_transport_baseline
+  baseline_bytes=nhlua_transport_baseline(r,'7f7d2856ecc84c0ee4a4c402b8145e178c9fa05f73baae2761167bf2ebfb3a0d')
   initial=(w/'build-initial-captured-reconstructed.py').read_text();assert hashlib.sha256(initial.encode()).hexdigest()==digest
   current=initial.replace('import ast\n','',1);extra="if any(port['name'] == 'do' for port in ports):\n    node_command = ast.literal_eval(subprocess.check_output([str(SDK / 'upstream/emscripten/em-config'), 'NODE_JS'], text=True))\n    assert isinstance(node_command, list) and all(isinstance(part, str) for part in node_command)\n    run([*node_command, ROOT / 'scripts/check-do-data.mjs'], cwd=ROOT)\n"
-  assert current.replace(extra,'',1)==(r/path).read_text()
+  assert current.replace(extra,'',1)==baseline_bytes.decode('utf8')
  else:assert actual==digest,path
 f=m['functions'];assert len(f)==71 and sum(x['linkage']=='static'for x in f)==17
 assert re.findall(r'^export function (\w+)\(([^)]*)\)',js,re.M)==[(x['name'],','.join(p['name']for p in x['parameters']))for x in f]

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {resolve,dirname,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw Error('INVENT has no native reference fixture; Emscripten results cannot be labeled native.');
+if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('INVENT has no native reference fixture; Emscripten results cannot be labeled native.');
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(process.env.INVENT_PROBE_DIR??join(root,'.cache/invent-first-pass'));
 const {callInvent,createInventEnvironment}=await import(pathToFileURL(resolve(process.env.INVENT_RUNTIME_PATH??join(root,'js/ported/invent-runtime.js'))).href);
 const schema=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/invent-schema.json'),'utf8'));const inventory={names:schema.names,functions:Object.fromEntries(Object.entries(schema.functionParameters).map(([name,args])=>[name,{args}]))};
@@ -84,3 +84,39 @@ assert.match(forcedCopy.trace,/ctrl:17\//);const copied=forcedCopy.trace.match(/
 for(const[i,name]of schema.functionAddresses.entries()){const outputs=mods.map(m=>{m._probe_reset();setupBase(m,name);const pointer=m._probe_function(i);assert.ok(pointer>0n,'native callable identity '+name);checks++;const value=m._probe_invoke(i),type=schema.functionTypes[name]??schema.dependencies[name].type;return{result:/^(const )?char \*/.test(type)?decode(m,value):String(value),trace:trace(m),state:snapshot(m)};});equal(outputs[0],outputs[1],'actual typed native function-pointer call '+name);}
 
 console.log(JSON.stringify({backend:'Emscripten O2 memory64 original invent.c vs JS',checks,configuredFunctions:invoked.size,native:false,limits:'Controlled foreign game/naming/menu dependencies; real hacklib/strutil/catalogues/libc. Native/full-game/public pending.'},null,2));
+
+// Added valid incoming/floor/inventory graphs exercise true merged() calls.
+for(const m of mods){
+ m._probe_reset();const typ=Number(get(m,ptr(m,0),'obj','otyp'));
+ assert.equal(m._probe_class(typ),constant('WEAPON_CLASS'),'actual upstream object globals initializer supplies weapon class');
+ const monster=get(m,ptr(m,1),'monst','data');
+ assert.notEqual(get(m,monster,'permonst','mlet'),0n,'actual upstream monster globals initializer supplies human class');
+}
+
+const mergePair=(m,incoming=false)=>{
+ objset(m,0,{where:incoming?0:3,quan:2,ox:12,oy:10,invlet:97});
+ objset(m,1,{where:3,quan:3,ox:12,oy:10,invlet:98});
+ assert.equal(call(m,'mergable',[ptr(m,0),ptr(m,0,1)]),1n,'actual original mergable must accept this native pair');
+};
+const addMerge=run('positive addressed incoming parameter inventory merge','addinv_core0',m=>{
+ mergePair(m,true);m._probe_chain(-1,1,0);
+},m=>[ptr(m,0),0,0]);
+assert.equal(addMerge.result,'obj1');
+for(const m of mods)assert.equal(get(m,ptr(m,0,1),'obj','quan'),5n,'merged quantity proves positive inventory branch');
+const quiverMerge=run('positive global and formal pointer cells quiver merge','addinv_core0',m=>{
+ mergePair(m,true);objset(m,2,{where:3,quan:7,invlet:99});m._probe_chain(-1,2,0);m._probe_chain(2,1,0);write64(m,global(m,'uquiver'),ptr(m,0,1));
+},m=>[ptr(m,0),0,0]);
+assert.equal(quiverMerge.result,'obj1');
+for(const m of mods){assert.equal(get(m,ptr(m,0,1),'obj','quan'),5n);assert.equal(get(m,ptr(m,0,2),'obj','quan'),7n,'quiver preference must skip earlier eligible inventory stack');assert.equal(new DataView(m.HEAPU8.buffer).getBigUint64(Number(global(m,'uquiver')),true),ptr(m,0,1));}
+const stackMerge=run('positive addressed floor-stack formal merge','stackobj',m=>{
+ mergePair(m);objset(m,0,{where:1});objset(m,1,{where:1});
+ const level=address(m,global(m,'svl'),'instance_globals_saved_l','level'),floor=address(m,level,'dlevel_t','objects');
+ write64(m,floor+BigInt((12*21+10)*8),ptr(m,0));
+ record(m,address(m,ptr(m,0),'obj','v'),'vptrs','v_nexthere',ptr(m,0,1));
+},m=>[ptr(m,0)]);
+for(const m of mods)assert.equal(get(m,ptr(m,0),'obj','quan'),5n,'floor survivor observes actual positive merge');
+const organizeMerge=run('positive addressed organize formal updated survivor','doorganize_core',m=>{
+ mergePair(m);m._probe_chain(-1,0,0);m._probe_chain(0,1,0);option(m,9,98);
+},m=>[ptr(m,0)]);
+for(const m of mods)assert.equal(get(m,ptr(m,0,1),'obj','quan'),5n,'organize target observes merge and caller formal replacement');
+console.log('INVENT_ADDRESSED_FORMAL_POSITIVES '+JSON.stringify({added:4,checks,functions:119,source:'unchanged optimized Emscripten C vs cache-only corrected JS',native:false}));

@@ -17,6 +17,7 @@ addToLibrary({
     var text = value => typeof value === 'string' ? BigInt(literal(value)) : pointer(value);
     var message = (kind, format, a = 0, b = 0) => _teleport_quest_message(kind, text(format), text(a), text(b));
     return {
+      moduleKey: Module,
       heap: () => HEAPU8,
       global: index => Number(_teleport_quest_global(index)),
       questBit: index => _teleport_quest_bit(index),

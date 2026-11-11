@@ -3217,6 +3217,7 @@ size_t teleport_wield_literal_capacity(void) { return sizeof teleport_wield_lite
 #include "tu-fragments/dogmove-support.c"
 
 #ifndef TELEPORT_ISOLATED_PROBE
+#include "tu-fragments/nhlua-support.c"
 #include "tu-fragments/makemon-support.inc"
 #include "tu-fragments/mhitu-support.c"
 #include "tu-fragments/artifact-support.c"
@@ -3249,6 +3250,35 @@ size_t teleport_wield_literal_capacity(void) { return sizeof teleport_wield_lite
 #include "tu-fragments/pray-support.c"
 #include "tu-fragments/pager-support.c"
 #include "tu-fragments/muse-support.c"
+#include "tu-fragments/display-support.c"
+#include "tu-fragments/cmd-support.c"
+
+
+
+#include "tu-fragments/hack-support.c"
+#include "tu-fragments/uhitm-support.inc"
+#include "tu-mon-support.inc"
+#include "tu-fragments/pickup-support.c"
+/* SHK deliberately absent: nativeStorageSources separate object ONCE. */
+
+
+
+#include "tu-fragments/sp_lev-support.c"
+#include "tu-fragments/trap-support.c"
+#include "tu-fragments/termcap-support.c"
+#include "tu-fragments/topl-support.inc"
+#include "tu-wintty-support.inc"
+/* NEVER include tu-wintty-storage.c here: separate non-LTO storage object once. */
+
+
+
+#include "tu-fragments/options-support.c"
+#include "tu-botl-support.inc" /* already includes tu-botl-varargs.inc */
+#include "tu-zap-support.inc" /* requires TELEPORT_ZAP_LITERAL_CAPACITY */
+/* NEVER common-include unixunix-support.c or unixmain-support.c/entry.c.
+ * Keep botl-storage.c and zap-storage.c separate, no LTO.
+ * Do not inject these globals into unrelated self-contained old probes. */
+
 #endif /* TELEPORT_ISOLATED_PROBE: each new isolated fixture links its own adapter */
 
 #ifndef TELEPORT_REFERENCE_TU

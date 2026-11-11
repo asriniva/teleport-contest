@@ -1,6 +1,8 @@
 /* MON ABI only: actual storage addresses, packed access, typed original dependency calls. */
 #include <stdint.h>
 #include <assert.h>
+#include "region.h"
+#include "mfndpos.h"
 extern const struct shclass shtypes[];
 void*teleport_mon_global(int i){switch(i){case 0:return (void*)&flags;case 1:return (void*)&iflags;case 2:return (void*)&c_common_strings;case 3:return (void*)&u;case 4:return (void*)&disp;case 5:return (void*)&ga;case 6:return (void*)&gb;case 7:return (void*)&gd;case 8:return (void*)&gi;case 9:return (void*)&gl;case 10:return (void*)&gm;case 11:return (void*)&gn;case 12:return (void*)&gp;case 13:return (void*)&gs;case 14:return (void*)&gt;case 15:return (void*)&gu;case 16:return (void*)&gv;case 17:return (void*)&gy;case 18:return (void*)&gz;case 19:return (void*)&svc;case 20:return (void*)&svd;case 21:return (void*)&svk;case 22:return (void*)&svl;case 23:return (void*)&svm;case 24:return (void*)&svq;case 25:return (void*)&program_state;case 26:return (void*)&cg;case 27:return (void*)&hands_obj;case 28:return (void*)mons;case 29:return (void*)objects;case 30:return (void*)genders;case 31:return (void*)obj_descr;case 32:return (void*)def_monsyms;case 33:return (void*)shtypes;case 34:return (void*)c_obj_colors;default:return NULL;}}
 struct obj*teleport_mon_equipment(int i){return i==0?uwep:i==1?uball:i==2?uchain:NULL;}

@@ -1,7 +1,9 @@
 import {readFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 const functions=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/pickup-source-metadata.json',import.meta.url))).functions,expected=functions.map(f=>f.linkage==='static'?'teleport_pickup_'+f.name:f.name);
-const load=async mode=>WebAssembly.Module.imports(await WebAssembly.compile(readFileSync(new URL('../.cache/pickup-first-pass/pickup-'+mode+'.wasm',import.meta.url))));
+const probeDir=process.env.PICKUP_PROBE_DIR;
+const probeURL=name=>probeDir?new URL(name,new URL((probeDir.endsWith('/')?probeDir:probeDir+'/'),new URL('../',import.meta.url))):new URL('../.cache/pickup-first-pass/'+name,import.meta.url);
+const load=async mode=>WebAssembly.Module.imports(await WebAssembly.compile(readFileSync(probeURL('pickup-'+mode+'.wasm'))));
 const hybrid=await load('hybrid'),reference=await load('reference');
 for(const name of expected){assert.equal(hybrid.filter(x=>x.kind==='function'&&x.name===name).length,1,name+' actual hybrid import');assert.ok(!reference.some(x=>x.name===name),name+' original C stays compiled in reference');}
 assert.equal(expected.length,66);

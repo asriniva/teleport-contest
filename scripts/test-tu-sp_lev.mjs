@@ -131,6 +131,10 @@ reset();const unknownChar=0x20000000000001n;each(m=>new DataView(m.HEAPU8.buffer
 for(const script of ['des.non_diggable({2,2,10,10})','des.object({id="unknown-fixture-item",x=11,y=10})','des.gold({amount="broken",x=11,y=10})']){reset();assert.notEqual(lua(script),0,script+' expected real protected Lua error');assert.equal(lua('des.message("recovered after error")'),0);comparisons+=2;}
 reset();assert.equal(lua('des.map({x=10,y=8,map="...\\n...\\n...",contents=function() des.message("nested map contents") end})'),0);comparisons++;
 
+// Addressed formal cells carry actual pointer/int arguments through true callbacks.
+for(const source of ['..\n..','...\nxxx\n...']){reset();const v=action('mapfrag_fromstr',m=>[input(m,source)]);each(m=>cell(m,pool(m,8),'struct mapfragment *',v[modules.indexOf(m)]));action('mapfrag_error',m=>[v[modules.indexOf(m)]]);for(const m of modules)assert.equal(BigInt(cell(m,pool(m,8),'struct mapfragment *')),v[modules.indexOf(m)]);comparisons+=2;}
+for(const viaSelection of [0,1]){reset();each((m,e)=>{const map=e.field(e.field(e.svl,'instance_globals_saved_l','level').address,'dlevel_t','locations').address;field(m,map+(10*21+10)*8,'rm','typ',L.HWALL);});if(viaSelection){lua('return selection.area(2,2,12,12)');action('set_wallprop_in_selection',m=>[m._probe_lua(),2]);}else action('set_wall_property',[10,10,10,10,1]);}
+
 // Native pointer-cell and scalar observation controls never dereference unsafe64.
 reset();const unknown=0x20000000000001n;
 for(const m of modules){const at=envs.get(m).field(pool(m,3),'obj','nobj').address;new DataView(m.HEAPU8.buffer).setBigUint64(at,unknown,true);const got=rawRecord(m,pool(m,3),'obj');assert.deepEqual(got.pointers['obj.nobj'],['raw',unknown.toString()]);}

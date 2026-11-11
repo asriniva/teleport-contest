@@ -1,12 +1,15 @@
 // Actual configured original C versus imported source JS in a controlled world.
 import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync} from 'node:fs';
-import refFactory from '../.cache/pickup-first-pass/pickup-reference.mjs';
-import hybridFactory from '../.cache/pickup-first-pass/pickup-hybrid.mjs';
+if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('PICKUP has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for the explicit Emscripten diagnostic.');
+const probeDir=process.env.PICKUP_PROBE_DIR;
+const probeURL=name=>probeDir?new URL(name,new URL((probeDir.endsWith('/')?probeDir:probeDir+'/'),new URL('../',import.meta.url))):new URL('../.cache/pickup-first-pass/'+name.replace(/^pickup-fixture-/,'fixture-'),import.meta.url);
+const {default:refFactory}=await import(probeURL('pickup-reference.mjs'));
+const {default:hybridFactory}=await import(probeURL('pickup-hybrid.mjs'));
 const {callPickup}=await import(process.env.PICKUP_RUNTIME??'../js/ported/pickup-runtime.js');
 const read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url)));
 const schema=read('../nethack-c/wasm/tu-fragments/pickup-schema.json'),functions=read('../nethack-c/wasm/tu-fragments/pickup-source-metadata.json').functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
-const regionNames=read('../.cache/pickup-first-pass/fixture-regions.json'),constants=read('../.cache/pickup-first-pass/fixture-constants.json');
+const regionNames=JSON.parse(readFileSync(probeURL('pickup-fixture-regions.json'))),constants=JSON.parse(readFileSync(probeURL('pickup-fixture-constants.json')));
 const output=[[],[]],ref=await refFactory({print:s=>output[0].push(['out',s]),printErr:s=>output[0].push(['err',s])}),hybrid=await hybridFactory({nethackPorted:{pickup:callPickup},print:s=>output[1].push(['out',s]),printErr:s=>output[1].push(['err',s])}),mods=[ref,hybrid];
 const L=Object.fromEntries(schema.layoutKeys.map((k,i)=>[k,Number(ref._teleport_pickup_layout(i))]));for(let i=0;i<schema.layoutKeys.length;i++)assert.equal(hybrid._teleport_pickup_layout(i),ref._teleport_pickup_layout(i));
 const K=Object.fromEntries(constants.map((n,i)=>[n,Number(ref._probe_constant(i))]));

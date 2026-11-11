@@ -2701,3 +2701,4 @@ _Static_assert(sizeof fgp==sizeof options_backing_64,"OPTIONS private backing si
 _Static_assert(sizeof bgp==sizeof options_backing_65,"OPTIONS private backing size");
 #endif
 int teleport_options_isspace(int c){return isspace(c); }
+void teleport_options_free(void*p){free(p); }

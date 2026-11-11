@@ -144,6 +144,8 @@ MON_META(obj_o_id,offsetof(struct obj,o_id)),
 MON_META(obj_o_id_size,sizeof(((struct obj*)0)->o_id)),
 MON_META(obj_oartifact,offsetof(struct obj,oartifact)),
 MON_META(obj_oartifact_size,sizeof(((struct obj*)0)->oartifact)),
+MON_META(obj_ocarry,offsetof(struct obj,ocarry)),
+MON_META(obj_ocarry_size,sizeof(((struct obj*)0)->ocarry)),
 MON_META(obj_oclass,offsetof(struct obj,oclass)),
 MON_META(obj_oclass_size,sizeof(((struct obj*)0)->oclass)),
 MON_META(obj_otyp,offsetof(struct obj,otyp)),
@@ -1179,6 +1181,7 @@ _Static_assert(sizeof(((struct obj*)0)->o_id)==4,"obj_o_id width");
 _Static_assert(((__typeof__(((struct obj*)0)->o_id))-1 > 0),"obj_o_id signedness");
 _Static_assert(sizeof(((struct obj*)0)->oartifact)==1,"obj_oartifact width");
 _Static_assert(((__typeof__(((struct obj*)0)->oartifact))-1 < 0),"obj_oartifact signedness");
+_Static_assert(sizeof(((struct obj*)0)->ocarry)==8,"obj_ocarry pointer width");
 _Static_assert(sizeof(((struct obj*)0)->oclass)==1,"obj_oclass width");
 _Static_assert(((__typeof__(((struct obj*)0)->oclass))-1 < 0),"obj_oclass signedness");
 _Static_assert(sizeof(((struct obj*)0)->otyp)==2,"obj_otyp width");
@@ -1409,7 +1412,7 @@ _Static_assert(sizeof((((__typeof__(svl.level)*)0)->objects))/sizeof((((__typeof
 _Static_assert(sizeof((((__typeof__(svl.level)*)0)->objects)[0])/sizeof((((__typeof__(svl.level)*)0)->objects)[0][0])==21,"dlevel_objects extent1");
 _Static_assert(sizeof(((__typeof__(svl.level)*)0)->objlist)==8,"dlevel_objlist pointer width");
 _Static_assert(__BYTE_ORDER__==__ORDER_LITTLE_ENDIAN__,"MON little endian ABI");
-#if !defined(DEBUG)||!defined(SAFERHANGUP)||!defined(MAIL_STRUCTURES)||defined(EDIT_GETLIN)||defined(SND_LIB_INTEGRATED)||NH_DEVEL_STATUS!=NH_STATUS_RELEASED
+#if !defined(DEBUG)||!defined(MACOS)||!defined(UNIX)||!defined(LIVELOG)||!defined(SAFERHANGUP)||!defined(MAIL_STRUCTURES)||defined(EDIT_GETLIN)||defined(SND_LIB_INTEGRATED)||NH_DEVEL_STATUS!=NH_STATUS_RELEASED
 #error Review configured MON profile
 #endif
 size_t probe_context_size(void){return sizeof(struct monst);}

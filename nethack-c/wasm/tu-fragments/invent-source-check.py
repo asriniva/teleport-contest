@@ -95,3 +95,16 @@ assert len(expected)==23
 # Support must remain independent of original private declarations in unrelated probes.
 subprocess.run([str(R/'.cache/emsdk/upstream/emscripten/emcc'),*flags,'-DTELEPORT_REFERENCE_TU','-fsyntax-only',str(R/'nethack-c/wasm/tu-fragments/invent-support.c')],check=True)
 print(f'INVENT source guard passed: {len(F)} functions / 87 public / 32 private; {len(fields)} canonical MemberExprs; {len(ops)} compound/inc/dec; 1 char-pointer compound / 2 Loot* increments; 2 exact logged RNG origins / 3 source display-glyph sites; 2 Snprintf closing lines; all23 JS-owned persistent initializers; generic reference support isolation. Native/full-game/public pending.')
+
+addressed_parms=[]
+for f in F:
+ for n in nodes(f):
+  if n.get('kind')!='UnaryOperator'or n.get('opcode')!='&':continue
+  d=unwrap(n['inner'][0]);ref=d.get('referencedDecl',{})
+  if d.get('kind')=='DeclRefExpr'and ref.get('kind')=='ParmVarDecl':addressed_parms.append((f['name'],ref['name']))
+from collections import Counter
+assert Counter(addressed_parms)==Counter({('addinv_core0','obj'):2,('stackobj','obj'):1,('doorganize_core','obj'):5})
+for owner in ['addinv_core0','stackobj','doorganize_core']:
+ assert 'obj=C.local("'+owner+'.obj","struct obj *",obj);'in core
+assert 'merged(C.global("uquiver").address,obj.address)'in core
+print('PASS corrected source cell guard: all8 addressed-formal expressions/3 real cells, actual &uquiver variable address')

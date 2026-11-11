@@ -1,0 +1,7505 @@
+{
+  "status": "unselected configured Emscripten first pass; no native reference fixture",
+  "source": {
+    "sourceSHA256": "91c684ab995f82d4775dcc83576abf36c25be5b2c205cddfaa46445328f4ce25",
+    "sourceBytes": 198220,
+    "sourceLines": 6504,
+    "pristineEqual": true
+  },
+  "productionProfile": {
+    "cwd": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/wasm64-build/tree/src",
+    "command": [
+      "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/upstream/emscripten/emcc",
+      "-O2",
+      "-g",
+      "-sMEMORY64=1",
+      "-DNOTPARMDECL",
+      "-DNO_TIMED_DELAY",
+      "-DMACOS",
+      "-DNOPANICTRACE",
+      "-DNO_FILE_LINKS",
+      "-I../include",
+      "-I/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/ncurses-wasm64-build/include",
+      "-include",
+      "/Users/arj/Desktop/nethack_comp/teleport-contest/nethack-c/wasm/native-terminal.h",
+      "sp_lev.c"
+    ],
+    "inputSpelling": "sp_lev.c",
+    "forcedHeader": "nethack-c/wasm/native-terminal.h"
+  },
+  "privateProfile": {
+    "commandSource": ".cache/sp-lev-first-pass/build.py",
+    "prefixMap": "-fmacro-prefix-map=/Users/arj/Desktop/nethack_comp/teleport-contest/scripts/../.cache/wasm64-build/tree/src/=",
+    "profile": "actual -O2 -g MEMORY64/current compile-defines/forced native-terminal/prepared and ncurses headers",
+    "trueDependencies": [
+      "src/selvar.c",
+      "src/nhlsel.c",
+      ".cache/wasm64-build/liblua-wasm64.a"
+    ],
+    "archiveCompilation": "existing archive hash-bound; not freshly rebuilt here. Current build.py145 documents -O2 -sMEMORY64=1 -DLUA_USE_POSIX; no claim of a retained original archive compile receipt. Both private pairs link exact same archive bytes."
+  },
+  "functions": [
+    {
+      "name": "reset_xystart_size",
+      "type": "void (void)",
+      "linkage": "external",
+      "line": 206,
+      "params": []
+    },
+    {
+      "name": "match_maptyps",
+      "type": "boolean (xint16, xint16)",
+      "linkage": "external",
+      "line": 217,
+      "params": [
+        {
+          "name": "typ",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x926e921c0"
+          }
+        },
+        {
+          "name": "levltyp",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x926e921c0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_fromstr",
+      "type": "struct mapfragment *(char *)",
+      "linkage": "external",
+      "line": 227,
+      "params": [
+        {
+          "name": "str",
+          "type": {
+            "qualType": "char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_free",
+      "type": "void (struct mapfragment **)",
+      "linkage": "external",
+      "line": 256,
+      "params": [
+        {
+          "name": "mf",
+          "type": {
+            "qualType": "struct mapfragment **"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_get",
+      "type": "schar (struct mapfragment *, int, int)",
+      "linkage": "external",
+      "line": 266,
+      "params": [
+        {
+          "name": "mf",
+          "type": {
+            "qualType": "struct mapfragment *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_canmatch",
+      "type": "boolean (struct mapfragment *)",
+      "linkage": "external",
+      "line": 275,
+      "params": [
+        {
+          "name": "mf",
+          "type": {
+            "qualType": "struct mapfragment *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_error",
+      "type": "const char *(struct mapfragment *)",
+      "linkage": "external",
+      "line": 281,
+      "params": [
+        {
+          "name": "mf",
+          "type": {
+            "qualType": "struct mapfragment *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_match",
+      "type": "boolean (struct mapfragment *, int, int)",
+      "linkage": "external",
+      "line": 298,
+      "params": [
+        {
+          "name": "mf",
+          "type": {
+            "qualType": "struct mapfragment *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "solidify_map",
+      "type": "void (void)",
+      "linkage": "static",
+      "line": 315,
+      "params": []
+    },
+    {
+      "name": "map_cleanup",
+      "type": "void (void)",
+      "linkage": "static",
+      "line": 328,
+      "params": []
+    },
+    {
+      "name": "lvlfill_maze_grid",
+      "type": "void (int, int, int, int, schar)",
+      "linkage": "static",
+      "line": 359,
+      "params": [
+        {
+          "name": "x1",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "y1",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "x2",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "y2",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "filling",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x926df2c48"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lvlfill_solid",
+      "type": "void (schar, schar)",
+      "linkage": "static",
+      "line": 374,
+      "params": [
+        {
+          "name": "filling",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x926df2c48"
+          }
+        },
+        {
+          "name": "lit",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x926df2c48"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lvlfill_swamp",
+      "type": "void (schar, schar, schar)",
+      "linkage": "static",
+      "line": 391,
+      "params": [
+        {
+          "name": "fg",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x926df2c48"
+          }
+        },
+        {
+          "name": "bg",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x926df2c48"
+          }
+        },
+        {
+          "name": "lit",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x926df2c48"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flip_dbridge_horizontal",
+      "type": "void (struct rm *)",
+      "linkage": "static",
+      "line": 428,
+      "params": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "struct rm *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flip_dbridge_vertical",
+      "type": "void (struct rm *)",
+      "linkage": "static",
+      "line": 442,
+      "params": [
+        {
+          "name": "lev",
+          "type": {
+            "qualType": "struct rm *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flip_visuals",
+      "type": "void (int, int, int, int, int)",
+      "linkage": "static",
+      "line": 458,
+      "params": [
+        {
+          "name": "flp",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "minx",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "miny",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "maxx",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "maxy",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flip_encoded_dir_bits",
+      "type": "int (int, int)",
+      "linkage": "static",
+      "line": 499,
+      "params": [
+        {
+          "name": "flp",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "val",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flip_level",
+      "type": "void (int, boolean)",
+      "linkage": "external",
+      "line": 533,
+      "params": [
+        {
+          "name": "flp",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "extras",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x926e92290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flip_vault_guard",
+      "type": "void (int, struct monst *, coordxy, coordxy, coordxy, coordxy)",
+      "linkage": "static",
+      "line": 926,
+      "params": [
+        {
+          "name": "flp",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "grd",
+          "type": {
+            "qualType": "struct monst *"
+          }
+        },
+        {
+          "name": "minx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "miny",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "maxx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "maxy",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flip_level_rnd",
+      "type": "void (int, boolean)",
+      "linkage": "external",
+      "line": 967,
+      "params": [
+        {
+          "name": "flp",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "extras",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x926e92290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sel_set_wall_property",
+      "type": "void (coordxy, coordxy, genericptr_t)",
+      "linkage": "static",
+      "line": 986,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "arg",
+          "type": {
+            "desugaredQualType": "void *",
+            "qualType": "genericptr_t",
+            "typeAliasDeclId": "0x926df2230"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_wall_property",
+      "type": "void (coordxy, coordxy, coordxy, coordxy, int)",
+      "linkage": "static",
+      "line": 1001,
+      "params": [
+        {
+          "name": "x1",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y1",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "x2",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y2",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "prop",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "remove_boundary_syms",
+      "type": "void (void)",
+      "linkage": "static",
+      "line": 1016,
+      "params": []
+    },
+    {
+      "name": "set_door_orientation",
+      "type": "void (int, int)",
+      "linkage": "static",
+      "line": 1042,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shared_with_room",
+      "type": "boolean (int, int, struct mkroom *)",
+      "linkage": "static",
+      "line": 1089,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "droom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "maybe_add_door",
+      "type": "void (int, int, struct mkroom *)",
+      "linkage": "static",
+      "line": 1110,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "droom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "link_doors_rooms",
+      "type": "void (void)",
+      "linkage": "static",
+      "line": 1122,
+      "params": []
+    },
+    {
+      "name": "rnddoor",
+      "type": "int (void)",
+      "linkage": "static",
+      "line": 1148,
+      "params": []
+    },
+    {
+      "name": "rndtrap",
+      "type": "int (void)",
+      "linkage": "static",
+      "line": 1159,
+      "params": []
+    },
+    {
+      "name": "get_location",
+      "type": "void (coordxy *, coordxy *, getloc_flags_t, struct mkroom *)",
+      "linkage": "static",
+      "line": 1202,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "humidity",
+          "type": {
+            "desugaredQualType": "unsigned int",
+            "qualType": "getloc_flags_t",
+            "typeAliasDeclId": "0x9275d7810"
+          }
+        },
+        {
+          "name": "croom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_ok_location_func",
+      "type": "void (boolean (*)(coordxy, coordxy))",
+      "linkage": "static",
+      "line": 1274,
+      "params": [
+        {
+          "name": "func",
+          "type": {
+            "qualType": "boolean (*)(coordxy, coordxy)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "is_ok_location",
+      "type": "boolean (coordxy, coordxy, getloc_flags_t)",
+      "linkage": "static",
+      "line": 1280,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "humidity",
+          "type": {
+            "desugaredQualType": "unsigned int",
+            "qualType": "getloc_flags_t",
+            "typeAliasDeclId": "0x9275d7810"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pm_good_location",
+      "type": "boolean (coordxy, coordxy, struct permonst *)",
+      "linkage": "external",
+      "line": 1311,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "pm",
+          "type": {
+            "qualType": "struct permonst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_unpacked_coord",
+      "type": "unpacked_coord (long, int)",
+      "linkage": "static",
+      "line": 1317,
+      "params": [
+        {
+          "name": "loc",
+          "type": {
+            "qualType": "long"
+          }
+        },
+        {
+          "name": "defhumidity",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_location_coord",
+      "type": "void (coordxy *, coordxy *, int, struct mkroom *, long)",
+      "linkage": "external",
+      "line": 1337,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "humidity",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "croom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        },
+        {
+          "name": "crd",
+          "type": {
+            "qualType": "long"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_room_loc",
+      "type": "void (coordxy *, coordxy *, struct mkroom *)",
+      "linkage": "static",
+      "line": 1360,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "croom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_free_room_loc",
+      "type": "void (coordxy *, coordxy *, struct mkroom *, long)",
+      "linkage": "static",
+      "line": 1385,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "croom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        },
+        {
+          "name": "pos",
+          "type": {
+            "qualType": "long"
+          }
+        }
+      ]
+    },
+    {
+      "name": "check_room",
+      "type": "boolean (coordxy *, coordxy *, coordxy *, coordxy *, boolean)",
+      "linkage": "external",
+      "line": 1407,
+      "params": [
+        {
+          "name": "lowx",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "ddx",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "lowy",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "ddy",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "vault",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x926e92290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_room",
+      "type": "boolean (coordxy, coordxy, coordxy, coordxy, coordxy, coordxy, xint16, xint16)",
+      "linkage": "external",
+      "line": 1486,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "w",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "h",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "xal",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "yal",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "rtype",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x926e921c0"
+          }
+        },
+        {
+          "name": "rlit",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x926e921c0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_subroom",
+      "type": "boolean (struct mkroom *, coordxy, coordxy, coordxy, coordxy, xint16, xint16)",
+      "linkage": "static",
+      "line": 1668,
+      "params": [
+        {
+          "name": "proom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "w",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "h",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "rtype",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x926e921c0"
+          }
+        },
+        {
+          "name": "rlit",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x926e921c0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_door",
+      "type": "void (room_door *, struct mkroom *)",
+      "linkage": "static",
+      "line": 1714,
+      "params": [
+        {
+          "name": "dd",
+          "type": {
+            "qualType": "room_door *"
+          }
+        },
+        {
+          "name": "broom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_trap",
+      "type": "void (spltrap *, struct mkroom *)",
+      "linkage": "static",
+      "line": 1812,
+      "params": [
+        {
+          "name": "t",
+          "type": {
+            "qualType": "spltrap *"
+          }
+        },
+        {
+          "name": "croom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "noncoalignment",
+      "type": "int (aligntyp)",
+      "linkage": "static",
+      "line": 1852,
+      "params": [
+        {
+          "name": "alignment",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "aligntyp",
+            "typeAliasDeclId": "0x926ec8b10"
+          }
+        }
+      ]
+    },
+    {
+      "name": "m_bad_boulder_spot",
+      "type": "boolean (coordxy, coordxy)",
+      "linkage": "static",
+      "line": 1864,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pm_to_humidity",
+      "type": "int (struct permonst *)",
+      "linkage": "static",
+      "line": 1884,
+      "params": [
+        {
+          "name": "pm",
+          "type": {
+            "qualType": "struct permonst *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sp_amask_to_amask",
+      "type": "unsigned int (unsigned int)",
+      "linkage": "static",
+      "line": 1908,
+      "params": [
+        {
+          "name": "sp_amask",
+          "type": {
+            "qualType": "unsigned int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_monster",
+      "type": "void (monster *, struct mkroom *)",
+      "linkage": "static",
+      "line": 1925,
+      "params": [
+        {
+          "name": "m",
+          "type": {
+            "qualType": "monster *"
+          }
+        },
+        {
+          "name": "croom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_object",
+      "type": "struct obj *(object *, struct mkroom *)",
+      "linkage": "static",
+      "line": 2193,
+      "params": [
+        {
+          "name": "o",
+          "type": {
+            "qualType": "object *"
+          }
+        },
+        {
+          "name": "croom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_altar",
+      "type": "void (altar *, struct mkroom *)",
+      "linkage": "static",
+      "line": 2446,
+      "params": [
+        {
+          "name": "a",
+          "type": {
+            "qualType": "altar *"
+          }
+        },
+        {
+          "name": "croom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "search_door",
+      "type": "boolean (struct mkroom *, coordxy *, coordxy *, xint16, int)",
+      "linkage": "static",
+      "line": 2492,
+      "params": [
+        {
+          "name": "croom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "wall",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "xint16",
+            "typeAliasDeclId": "0x926e921c0"
+          }
+        },
+        {
+          "name": "cnt",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dig_corridor",
+      "type": "boolean (coord *, coord *, int *, boolean, schar, schar)",
+      "linkage": "external",
+      "line": 2549,
+      "params": [
+        {
+          "name": "org",
+          "type": {
+            "qualType": "coord *"
+          }
+        },
+        {
+          "name": "dest",
+          "type": {
+            "qualType": "coord *"
+          }
+        },
+        {
+          "name": "npoints",
+          "type": {
+            "qualType": "int *"
+          }
+        },
+        {
+          "name": "nxcor",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x926e92290"
+          }
+        },
+        {
+          "name": "ftyp",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x926df2c48"
+          }
+        },
+        {
+          "name": "btyp",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "schar",
+            "typeAliasDeclId": "0x926df2c48"
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_corridor",
+      "type": "void (corridor *)",
+      "linkage": "static",
+      "line": 2671,
+      "params": [
+        {
+          "name": "c",
+          "type": {
+            "qualType": "corridor *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fill_special_room",
+      "type": "void (struct mkroom *)",
+      "linkage": "external",
+      "line": 2731,
+      "params": [
+        {
+          "name": "croom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "build_room",
+      "type": "struct mkroom *(room *, struct mkroom *)",
+      "linkage": "static",
+      "line": 2807,
+      "params": [
+        {
+          "name": "r",
+          "type": {
+            "qualType": "room *"
+          }
+        },
+        {
+          "name": "mkr",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "light_region",
+      "type": "void (region *)",
+      "linkage": "static",
+      "line": 2839,
+      "params": [
+        {
+          "name": "tmpregion",
+          "type": {
+            "qualType": "region *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wallify_map",
+      "type": "void (coordxy, coordxy, coordxy, coordxy)",
+      "linkage": "external",
+      "line": 2865,
+      "params": [
+        {
+          "name": "x1",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y1",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "x2",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y2",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "maze1xy",
+      "type": "void (coord *, int)",
+      "linkage": "static",
+      "line": 2900,
+      "params": [
+        {
+          "name": "m",
+          "type": {
+            "qualType": "coord *"
+          }
+        },
+        {
+          "name": "humidity",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fill_empty_maze",
+      "type": "void (void)",
+      "linkage": "static",
+      "line": 2926,
+      "params": []
+    },
+    {
+      "name": "splev_initlev",
+      "type": "void (lev_init *)",
+      "linkage": "static",
+      "line": 2982,
+      "params": [
+        {
+          "name": "linit",
+          "type": {
+            "qualType": "lev_init *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "spo_end_moninvent",
+      "type": "void (void)",
+      "linkage": "static",
+      "line": 3031,
+      "params": []
+    },
+    {
+      "name": "spo_pop_container",
+      "type": "void (void)",
+      "linkage": "static",
+      "line": 3040,
+      "params": []
+    },
+    {
+      "name": "l_push_wid_hei_table",
+      "type": "void (lua_State *, int, int)",
+      "linkage": "static",
+      "line": 3050,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "wid",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "hei",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "l_push_mkroom_table",
+      "type": "void (lua_State *, struct mkroom *)",
+      "linkage": "static",
+      "line": 3059,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "tmpr",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_message",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 3076,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_align",
+      "type": "int (lua_State *)",
+      "linkage": "static",
+      "line": 3114,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_monclass",
+      "type": "int (lua_State *)",
+      "linkage": "static",
+      "line": 3131,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "find_montype",
+      "type": "int (lua_State *, const char *, int *)",
+      "linkage": "static",
+      "line": 3143,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "mgender",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_montype",
+      "type": "int (lua_State *, int *)",
+      "linkage": "static",
+      "line": 3167,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "mgender",
+          "type": {
+            "qualType": "int *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_xy_or_coord",
+      "type": "void (lua_State *, lua_Integer *, lua_Integer *)",
+      "linkage": "static",
+      "line": 3188,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "qualType": "lua_Integer *"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "lua_Integer *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_monster",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 3214,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_int_or_random",
+      "type": "lua_Integer (lua_State *, const char *, int)",
+      "linkage": "static",
+      "line": 3407,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "rndval",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_buc",
+      "type": "int (lua_State *)",
+      "linkage": "static",
+      "line": 3442,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_objclass",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 3455,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "find_objtype",
+      "type": "int (lua_State *, const char *, char)",
+      "linkage": "static",
+      "line": 3468,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "s",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "oclass",
+          "type": {
+            "qualType": "char"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_objtype",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 3539,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_object",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 3557,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_level_flags",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 3759,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_level_init",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 3837,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_engraving",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 3881,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_mineralize",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 3939,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_mkroom_name",
+      "type": "const char *(int)",
+      "linkage": "static",
+      "line": 3991,
+      "params": [
+        {
+          "name": "rtype",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_roomtype_opt",
+      "type": "int (lua_State *, const char *, int)",
+      "linkage": "static",
+      "line": 4004,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "defval",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_room",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4028,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "spo_endroom",
+      "type": "void (struct sp_coder *)",
+      "linkage": "static",
+      "line": 4119,
+      "params": [
+        {
+          "name": "coder",
+          "type": {
+            "qualType": "struct sp_coder *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "good_stair_loc",
+      "type": "boolean (coordxy, coordxy)",
+      "linkage": "static",
+      "line": 4139,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "l_create_stairway",
+      "type": "int (lua_State *, boolean)",
+      "linkage": "static",
+      "line": 4147,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "using_ladder",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x926e92290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_stair",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4223,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_ladder",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4232,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_grave",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4243,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_altar",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4283,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_traptype_opt",
+      "type": "int (lua_State *, const char *, int)",
+      "linkage": "static",
+      "line": 4350,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "defval",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_trapname_bytype",
+      "type": "const char *(int)",
+      "linkage": "external",
+      "line": 4367,
+      "params": [
+        {
+          "name": "ttyp",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_traptype_byname",
+      "type": "int (const char *)",
+      "linkage": "static",
+      "line": 4379,
+      "params": [
+        {
+          "name": "trapname",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_trap",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4397,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_gold",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4480,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_corridor",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4529,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_random_corridors",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4558,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "random_wdir",
+      "type": "coordxy (void)",
+      "linkage": "external",
+      "line": 4578,
+      "params": []
+    },
+    {
+      "name": "floodfillchk_match_under",
+      "type": "int (coordxy, coordxy)",
+      "linkage": "static",
+      "line": 4587,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_floodfillchk_match_under",
+      "type": "void (coordxy)",
+      "linkage": "external",
+      "line": 4593,
+      "params": [
+        {
+          "name": "typ",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "floodfillchk_match_accessible",
+      "type": "int (coordxy, coordxy)",
+      "linkage": "static",
+      "line": 4600,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sel_set_ter",
+      "type": "void (coordxy, coordxy, genericptr_t)",
+      "linkage": "static",
+      "line": 4609,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "arg",
+          "type": {
+            "desugaredQualType": "void *",
+            "qualType": "genericptr_t",
+            "typeAliasDeclId": "0x926df2230"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sel_set_feature",
+      "type": "void (coordxy, coordxy, genericptr_t)",
+      "linkage": "static",
+      "line": 4633,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "arg",
+          "type": {
+            "desugaredQualType": "void *",
+            "qualType": "genericptr_t",
+            "typeAliasDeclId": "0x926df2230"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sel_set_door",
+      "type": "void (coordxy, coordxy, genericptr_t)",
+      "linkage": "static",
+      "line": 4647,
+      "params": [
+        {
+          "name": "dx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "dy",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "arg",
+          "type": {
+            "desugaredQualType": "void *",
+            "qualType": "genericptr_t",
+            "typeAliasDeclId": "0x926df2230"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_door",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4671,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "l_table_getset_feature_flag",
+      "type": "void (lua_State *, int, int, const char *, int)",
+      "linkage": "static",
+      "line": 4739,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "flag",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cvt_to_abscoord",
+      "type": "void (coordxy *, coordxy *)",
+      "linkage": "external",
+      "line": 4772,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cvt_to_relcoord",
+      "type": "void (coordxy *, coordxy *)",
+      "linkage": "external",
+      "line": 4793,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "nhl_abs_coord",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4811,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_feature",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4844,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_gas_cloud",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4929,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_terrain",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 4978,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_replace_terrain",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5051,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "generate_way_out_method",
+      "type": "boolean (coordxy, coordxy, struct selectionvar *)",
+      "linkage": "static",
+      "line": 5146,
+      "params": [
+        {
+          "name": "nx",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "ny",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "ov",
+          "type": {
+            "qualType": "struct selectionvar *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ensure_way_out",
+      "type": "void (void)",
+      "linkage": "static",
+      "line": 5217,
+      "params": []
+    },
+    {
+      "name": "get_table_intarray_entry",
+      "type": "lua_Integer (lua_State *, int, int)",
+      "linkage": "static",
+      "line": 5260,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "tableidx",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "entrynum",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_region",
+      "type": "int (lua_State *, const char *, lua_Integer *, lua_Integer *, lua_Integer *, lua_Integer *, boolean)",
+      "linkage": "static",
+      "line": 5282,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "qualType": "const char *"
+          }
+        },
+        {
+          "name": "x1",
+          "type": {
+            "qualType": "lua_Integer *"
+          }
+        },
+        {
+          "name": "y1",
+          "type": {
+            "qualType": "lua_Integer *"
+          }
+        },
+        {
+          "name": "x2",
+          "type": {
+            "qualType": "lua_Integer *"
+          }
+        },
+        {
+          "name": "y2",
+          "type": {
+            "qualType": "lua_Integer *"
+          }
+        },
+        {
+          "name": "optional",
+          "type": {
+            "desugaredQualType": "signed char",
+            "qualType": "boolean",
+            "typeAliasDeclId": "0x926e92290"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_coord",
+      "type": "boolean (lua_State *, int, lua_Integer *, lua_Integer *)",
+      "linkage": "external",
+      "line": 5319,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "i",
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "name": "x",
+          "type": {
+            "qualType": "lua_Integer *"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "qualType": "lua_Integer *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "levregion_add",
+      "type": "void (lev_region *)",
+      "linkage": "static",
+      "line": 5371,
+      "params": [
+        {
+          "name": "lregion",
+          "type": {
+            "qualType": "lev_region *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "l_get_lregion",
+      "type": "void (lua_State *, lev_region *)",
+      "linkage": "static",
+      "line": 5410,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "tmplregion",
+          "type": {
+            "qualType": "lev_region *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_teleport_region",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5443,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_levregion",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5472,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_exclusion",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5498,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sel_set_lit",
+      "type": "void (coordxy, coordxy, genericptr_t)",
+      "linkage": "static",
+      "line": 5535,
+      "params": [
+        {
+          "name": "x",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "y",
+          "type": {
+            "desugaredQualType": "short",
+            "qualType": "coordxy",
+            "typeAliasDeclId": "0x926e92158"
+          }
+        },
+        {
+          "name": "arg",
+          "type": {
+            "desugaredQualType": "void *",
+            "qualType": "genericptr_t",
+            "typeAliasDeclId": "0x926df2230"
+          }
+        }
+      ]
+    },
+    {
+      "name": "add_doors_to_room",
+      "type": "void (struct mkroom *)",
+      "linkage": "static",
+      "line": 5544,
+      "params": [
+        {
+          "name": "croom",
+          "type": {
+            "qualType": "struct mkroom *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "get_table_coords_or_region",
+      "type": "void (lua_State *, coordxy *, coordxy *, coordxy *, coordxy *)",
+      "linkage": "static",
+      "line": 5561,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "dx1",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "dy1",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "dx2",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        },
+        {
+          "name": "dy2",
+          "type": {
+            "qualType": "coordxy *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_region",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5584,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_drawbridge",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5720,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_mazewalk",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5769,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_wall_property",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5876,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_wallprop_in_selection",
+      "type": "void (lua_State *, int)",
+      "linkage": "static",
+      "line": 5911,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        },
+        {
+          "name": "prop",
+          "type": {
+            "qualType": "int"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_non_diggable",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5937,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_non_passwall",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5946,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_wallify",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5965,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_reset_level",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 5993,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_finalize_level",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 6014,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lspo_map",
+      "type": "int (lua_State *)",
+      "linkage": "external",
+      "line": 6075,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_croom",
+      "type": "void (void)",
+      "linkage": "external",
+      "line": 6324,
+      "params": []
+    },
+    {
+      "name": "sp_level_coder_init",
+      "type": "struct sp_coder *(void)",
+      "linkage": "static",
+      "line": 6336,
+      "params": []
+    },
+    {
+      "name": "l_register_des",
+      "type": "void (lua_State *)",
+      "linkage": "external",
+      "line": 6435,
+      "params": [
+        {
+          "name": "L",
+          "type": {
+            "qualType": "lua_State *"
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_des_coder",
+      "type": "void (void)",
+      "linkage": "external",
+      "line": 6444,
+      "params": []
+    },
+    {
+      "name": "load_special",
+      "type": "boolean (const char *)",
+      "linkage": "external",
+      "line": 6454,
+      "params": [
+        {
+          "name": "name",
+          "type": {
+            "qualType": "const char *"
+          }
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "functions": 142,
+    "public": 64,
+    "static": 78,
+    "actualMemberRecords": 80,
+    "actualMemberFields": 376,
+    "initializerRecords": 82,
+    "schemaFields": 386,
+    "trueGlobals": 33,
+    "fixedDependencies": 206,
+    "variadicNames": 4,
+    "varargSites": 34,
+    "nativeDesignators": 40,
+    "actualIndirectCallsites": 1,
+    "designatorPrototypes": 4,
+    "nativeIndirectHelperTypes": 1,
+    "sourceLoggedRNG": 73,
+    "sourceDisplayRNG": 0,
+    "TUStatics": 11,
+    "localStatics": 50,
+    "literalStrings": 395,
+    "literalBytes": 4698
+  },
+  "fixed64SourceParameters": [
+    {
+      "owner": "get_unpacked_coord",
+      "parameter": "loc",
+      "type": "long"
+    },
+    {
+      "owner": "get_location_coord",
+      "parameter": "crd",
+      "type": "long"
+    },
+    {
+      "owner": "get_free_room_loc",
+      "parameter": "pos",
+      "type": "long"
+    }
+  ],
+  "addressedSourceParameters": [
+    {
+      "owner": "mapfrag_error",
+      "parameter": "mf",
+      "type": "struct mapfragment *",
+      "declID": "0x92760ef70",
+      "range": {
+        "begin": {
+          "offset": 10279,
+          "col": 22,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 10280,
+          "col": 23,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "mapfrag_error",
+      "parameter": "mf",
+      "type": "struct mapfragment *",
+      "declID": "0x92760ef70",
+      "range": {
+        "begin": {
+          "offset": 10448,
+          "col": 22,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 10449,
+          "col": 23,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "set_wall_property",
+      "parameter": "prop",
+      "type": "int",
+      "declID": "0x92764cbc0",
+      "range": {
+        "begin": {
+          "offset": 34131,
+          "col": 56,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 34132,
+          "col": 57,
+          "tokLen": 4
+        }
+      }
+    },
+    {
+      "owner": "set_wallprop_in_selection",
+      "parameter": "prop",
+      "type": "int",
+      "declID": "0x926452c98",
+      "range": {
+        "begin": {
+          "offset": 181857,
+          "col": 70,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 181858,
+          "col": 71,
+          "tokLen": 4
+        }
+      }
+    }
+  ],
+  "compoundAssignments": [
+    {
+      "owner": "solidify_map",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "spellingLoc": {
+            "offset": 18077,
+            "file": "../include/rm.h",
+            "line": 488,
+            "col": 14,
+            "tokLen": 3,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 11236,
+            "file": "sp_lev.c",
+            "line": 322,
+            "col": 17,
+            "tokLen": 4
+          }
+        },
+        "end": {
+          "offset": 11290,
+          "col": 71,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "lvlfill_swamp",
+      "operator": "+=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 13326,
+          "col": 51,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 13331,
+          "col": 56,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "lvlfill_swamp",
+      "operator": "+=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 13388,
+          "col": 55,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 13393,
+          "col": 60,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "flip_dbridge_horizontal",
+      "operator": "&=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 14328,
+          "line": 432,
+          "col": 13,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 11014,
+            "file": "../include/rm.h",
+            "line": 285,
+            "col": 17,
+            "tokLen": 1,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 14352,
+            "file": "sp_lev.c",
+            "line": 432,
+            "col": 37,
+            "tokLen": 7
+          }
+        }
+      }
+    },
+    {
+      "owner": "flip_dbridge_horizontal",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 14373,
+          "line": 433,
+          "col": 13,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 10996,
+            "file": "../include/rm.h",
+            "line": 284,
+            "col": 17,
+            "tokLen": 1,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 14397,
+            "file": "sp_lev.c",
+            "line": 433,
+            "col": 37,
+            "tokLen": 7
+          }
+        }
+      }
+    },
+    {
+      "owner": "flip_dbridge_horizontal",
+      "operator": "&=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 14482,
+          "line": 435,
+          "col": 13,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 10996,
+            "file": "../include/rm.h",
+            "line": 284,
+            "col": 17,
+            "tokLen": 1,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 14506,
+            "file": "sp_lev.c",
+            "line": 435,
+            "col": 37,
+            "tokLen": 7
+          }
+        }
+      }
+    },
+    {
+      "owner": "flip_dbridge_horizontal",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 14527,
+          "line": 436,
+          "col": 13,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 11014,
+            "file": "../include/rm.h",
+            "line": 285,
+            "col": 17,
+            "tokLen": 1,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 14551,
+            "file": "sp_lev.c",
+            "line": 436,
+            "col": 37,
+            "tokLen": 7
+          }
+        }
+      }
+    },
+    {
+      "owner": "flip_dbridge_vertical",
+      "operator": "&=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 14738,
+          "line": 446,
+          "col": 13,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 10959,
+            "file": "../include/rm.h",
+            "line": 282,
+            "col": 18,
+            "tokLen": 1,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 14762,
+            "file": "sp_lev.c",
+            "line": 446,
+            "col": 37,
+            "tokLen": 8
+          }
+        }
+      }
+    },
+    {
+      "owner": "flip_dbridge_vertical",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 14784,
+          "line": 447,
+          "col": 13,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 10978,
+            "file": "../include/rm.h",
+            "line": 283,
+            "col": 18,
+            "tokLen": 1,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 14808,
+            "file": "sp_lev.c",
+            "line": 447,
+            "col": 37,
+            "tokLen": 8
+          }
+        }
+      }
+    },
+    {
+      "owner": "flip_dbridge_vertical",
+      "operator": "&=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 14895,
+          "line": 449,
+          "col": 13,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 10978,
+            "file": "../include/rm.h",
+            "line": 283,
+            "col": 18,
+            "tokLen": 1,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 14919,
+            "file": "sp_lev.c",
+            "line": 449,
+            "col": 37,
+            "tokLen": 8
+          }
+        }
+      }
+    },
+    {
+      "owner": "flip_dbridge_vertical",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 14941,
+          "line": 450,
+          "col": 13,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 10959,
+            "file": "../include/rm.h",
+            "line": 282,
+            "col": 18,
+            "tokLen": 1,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 14965,
+            "file": "sp_lev.c",
+            "line": 450,
+            "col": 37,
+            "tokLen": 8
+          }
+        }
+      }
+    },
+    {
+      "owner": "flip_level_rnd",
+      "operator": "|=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 33230,
+          "line": 976,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 33235,
+          "col": 14,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "flip_level_rnd",
+      "operator": "|=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 33275,
+          "line": 978,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 33280,
+          "col": 14,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "sel_set_wall_property",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "spellingLoc": {
+            "offset": 18077,
+            "file": "../include/rm.h",
+            "line": 488,
+            "col": 14,
+            "tokLen": 3,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 33683,
+            "file": "sp_lev.c",
+            "line": 994,
+            "col": 9,
+            "tokLen": 4
+          }
+        },
+        "end": {
+          "offset": 33707,
+          "col": 33,
+          "tokLen": 4
+        }
+      }
+    },
+    {
+      "owner": "get_location",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 41193,
+          "line": 1223,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 41199,
+          "col": 15,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "get_location",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 41211,
+          "line": 1224,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 41217,
+          "col": 15,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "get_room_loc",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 45022,
+          "line": 1375,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 45035,
+          "col": 22,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "get_room_loc",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 45047,
+          "line": 1376,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 45060,
+          "col": 22,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "create_room",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 51486,
+          "line": 1606,
+          "col": 17,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 51508,
+          "col": 39,
+          "tokLen": 4
+        }
+      }
+    },
+    {
+      "owner": "create_room",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 51584,
+          "line": 1609,
+          "col": 17,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 51615,
+          "col": 48,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "create_room",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 51771,
+          "line": 1616,
+          "col": 17,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 51793,
+          "col": 39,
+          "tokLen": 4
+        }
+      }
+    },
+    {
+      "owner": "create_room",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 51869,
+          "line": 1619,
+          "col": 17,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 51900,
+          "col": 48,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "create_door",
+      "operator": "|=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 54902,
+          "line": 1736,
+          "col": 21,
+          "tokLen": 2
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 9819,
+            "file": "../include/rm.h",
+            "line": 239,
+            "col": 19,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 54914,
+            "file": "sp_lev.c",
+            "line": 1736,
+            "col": 33,
+            "tokLen": 9
+          }
+        }
+      }
+    },
+    {
+      "owner": "create_door",
+      "operator": "|=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 55157,
+          "line": 1746,
+          "col": 17,
+          "tokLen": 2
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 9819,
+            "file": "../include/rm.h",
+            "line": 239,
+            "col": 19,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 55169,
+            "file": "sp_lev.c",
+            "line": 1746,
+            "col": 29,
+            "tokLen": 9
+          }
+        }
+      }
+    },
+    {
+      "owner": "create_trap",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "unsigned int",
+      "computeLHS": {
+        "qualType": "unsigned int"
+      },
+      "computeResult": {
+        "qualType": "unsigned int"
+      },
+      "range": {
+        "begin": {
+          "offset": 57856,
+          "line": 1836,
+          "col": 9,
+          "tokLen": 12
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 51263,
+            "file": "../include/hack.h",
+            "line": 1432,
+            "col": 30,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 57872,
+            "file": "sp_lev.c",
+            "line": 1836,
+            "col": 25,
+            "tokLen": 20
+          }
+        }
+      }
+    },
+    {
+      "owner": "create_trap",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "unsigned int",
+      "computeLHS": {
+        "qualType": "unsigned int"
+      },
+      "computeResult": {
+        "qualType": "unsigned int"
+      },
+      "range": {
+        "begin": {
+          "offset": 57919,
+          "line": 1838,
+          "col": 9,
+          "tokLen": 12
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 51133,
+            "file": "../include/hack.h",
+            "line": 1430,
+            "col": 30,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 57935,
+            "file": "sp_lev.c",
+            "line": 1838,
+            "col": 25,
+            "tokLen": 11
+          }
+        }
+      }
+    },
+    {
+      "owner": "create_trap",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "unsigned int",
+      "computeLHS": {
+        "qualType": "unsigned int"
+      },
+      "computeResult": {
+        "qualType": "unsigned int"
+      },
+      "range": {
+        "begin": {
+          "offset": 57977,
+          "line": 1840,
+          "col": 9,
+          "tokLen": 12
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 51334,
+            "file": "../include/hack.h",
+            "line": 1433,
+            "col": 30,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 57993,
+            "file": "sp_lev.c",
+            "line": 1840,
+            "col": 25,
+            "tokLen": 15
+          }
+        }
+      }
+    },
+    {
+      "owner": "pm_to_humidity",
+      "operator": "|=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 59160,
+          "line": 1893,
+          "col": 9,
+          "tokLen": 3
+        },
+        "end": {
+          "offset": 59177,
+          "col": 26,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "pm_to_humidity",
+      "operator": "|=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 59234,
+          "line": 1895,
+          "col": 9,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 2057,
+            "file": "../include/sp_lev.h",
+            "line": 72,
+            "col": 21,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 59241,
+            "file": "sp_lev.c",
+            "line": 1895,
+            "col": 16,
+            "tokLen": 5
+          }
+        }
+      }
+    },
+    {
+      "owner": "pm_to_humidity",
+      "operator": "|=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 59280,
+          "line": 1897,
+          "col": 9,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 2032,
+            "file": "../include/sp_lev.h",
+            "line": 71,
+            "col": 21,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 59287,
+            "file": "sp_lev.c",
+            "line": 1897,
+            "col": 16,
+            "tokLen": 3
+          }
+        }
+      }
+    },
+    {
+      "owner": "create_monster",
+      "operator": "|=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 61411,
+          "line": 1969,
+          "col": 13,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 1982,
+            "file": "../include/sp_lev.h",
+            "line": 69,
+            "col": 21,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 61418,
+            "file": "sp_lev.c",
+            "line": 1969,
+            "col": 20,
+            "tokLen": 3
+          }
+        }
+      }
+    },
+    {
+      "owner": "create_monster",
+      "operator": "|=",
+      "lhs": "unsigned long",
+      "rhs": "unsigned long",
+      "computeLHS": {
+        "qualType": "unsigned long"
+      },
+      "computeResult": {
+        "qualType": "unsigned long"
+      },
+      "range": {
+        "begin": {
+          "offset": 69266,
+          "line": 2161,
+          "col": 13,
+          "tokLen": 4
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 7587,
+            "file": "../include/monst.h",
+            "line": 177,
+            "col": 25,
+            "tokLen": 11,
+            "includedFrom": {
+              "file": "../include/you.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 69285,
+            "file": "sp_lev.c",
+            "line": 2161,
+            "col": 32,
+            "tokLen": 14
+          }
+        }
+      }
+    },
+    {
+      "owner": "create_monster",
+      "operator": "+=",
+      "lhs": "unsigned char",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 69890,
+          "line": 2174,
+          "col": 17,
+          "tokLen": 4
+        },
+        "end": {
+          "offset": 69908,
+          "col": 35,
+          "tokLen": 9
+        }
+      }
+    },
+    {
+      "owner": "create_altar",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "spellingLoc": {
+            "offset": 18077,
+            "file": "../include/rm.h",
+            "line": 488,
+            "col": 14,
+            "tokLen": 3,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 79959,
+            "file": "sp_lev.c",
+            "line": 2481,
+            "col": 9,
+            "tokLen": 4
+          }
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 1063,
+            "file": "../include/align.h",
+            "line": 37,
+            "col": 25,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 79983,
+            "file": "sp_lev.c",
+            "line": 2481,
+            "col": 33,
+            "tokLen": 9
+          }
+        }
+      }
+    },
+    {
+      "owner": "create_altar",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "spellingLoc": {
+            "offset": 18077,
+            "file": "../include/rm.h",
+            "line": 488,
+            "col": 14,
+            "tokLen": 3,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 80062,
+            "file": "sp_lev.c",
+            "line": 2483,
+            "col": 13,
+            "tokLen": 4
+          }
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 1145,
+            "file": "../include/align.h",
+            "line": 39,
+            "col": 25,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 80086,
+            "file": "sp_lev.c",
+            "line": 2483,
+            "col": 37,
+            "tokLen": 10
+          }
+        }
+      }
+    },
+    {
+      "owner": "search_door",
+      "operator": "+=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 81167,
+          "line": 2536,
+          "col": 9,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 81173,
+          "col": 15,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "search_door",
+      "operator": "+=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 81185,
+          "line": 2537,
+          "col": 9,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 81191,
+          "col": 15,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "dig_corridor",
+      "operator": "-=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 82173,
+          "line": 2580,
+          "col": 5,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 82179,
+          "col": 11,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "dig_corridor",
+      "operator": "-=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 82187,
+          "line": 2581,
+          "col": 5,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 82193,
+          "col": 11,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "dig_corridor",
+      "operator": "+=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 82393,
+          "line": 2588,
+          "col": 9,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 82399,
+          "col": 15,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "dig_corridor",
+      "operator": "+=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 82411,
+          "line": 2589,
+          "col": 9,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 82417,
+          "col": 15,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "lspo_monster",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "long",
+      "computeLHS": {
+        "qualType": "long"
+      },
+      "computeResult": {
+        "qualType": "long"
+      },
+      "range": {
+        "begin": {
+          "offset": 103258,
+          "line": 3316,
+          "col": 13,
+          "tokLen": 7
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 38810,
+            "file": "../include/hack.h",
+            "line": 1161,
+            "col": 25,
+            "tokLen": 11,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 103278,
+            "file": "sp_lev.c",
+            "line": 3316,
+            "col": 33,
+            "tokLen": 9
+          }
+        }
+      }
+    },
+    {
+      "owner": "lspo_monster",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "long",
+      "computeLHS": {
+        "qualType": "long"
+      },
+      "computeResult": {
+        "qualType": "long"
+      },
+      "range": {
+        "begin": {
+          "offset": 103355,
+          "line": 3318,
+          "col": 13,
+          "tokLen": 7
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 38732,
+            "file": "../include/hack.h",
+            "line": 1160,
+            "col": 25,
+            "tokLen": 11,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 103375,
+            "file": "sp_lev.c",
+            "line": 3318,
+            "col": 33,
+            "tokLen": 8
+          }
+        }
+      }
+    },
+    {
+      "owner": "lspo_monster",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "long",
+      "computeLHS": {
+        "qualType": "long"
+      },
+      "computeResult": {
+        "qualType": "long"
+      },
+      "range": {
+        "begin": {
+          "offset": 103456,
+          "line": 3320,
+          "col": 13,
+          "tokLen": 7
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 38142,
+            "file": "../include/hack.h",
+            "line": 1151,
+            "col": 25,
+            "tokLen": 11,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 103476,
+            "file": "sp_lev.c",
+            "line": 3320,
+            "col": 33,
+            "tokLen": 13
+          }
+        }
+      }
+    },
+    {
+      "owner": "lspo_monster",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "long",
+      "computeLHS": {
+        "qualType": "long"
+      },
+      "computeResult": {
+        "qualType": "long"
+      },
+      "range": {
+        "begin": {
+          "offset": 103563,
+          "line": 3322,
+          "col": 13,
+          "tokLen": 7
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 38070,
+            "file": "../include/hack.h",
+            "line": 1150,
+            "col": 25,
+            "tokLen": 11,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 103583,
+            "file": "sp_lev.c",
+            "line": 3322,
+            "col": 33,
+            "tokLen": 14
+          }
+        }
+      }
+    },
+    {
+      "owner": "lspo_monster",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "long",
+      "computeLHS": {
+        "qualType": "long"
+      },
+      "computeResult": {
+        "qualType": "long"
+      },
+      "range": {
+        "begin": {
+          "offset": 103670,
+          "line": 3324,
+          "col": 13,
+          "tokLen": 7
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 37992,
+            "file": "../include/hack.h",
+            "line": 1149,
+            "col": 25,
+            "tokLen": 11,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 103690,
+            "file": "sp_lev.c",
+            "line": 3324,
+            "col": 33,
+            "tokLen": 15
+          }
+        }
+      }
+    },
+    {
+      "owner": "lspo_monster",
+      "operator": "|=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 105565,
+          "line": 3367,
+          "col": 17,
+          "tokLen": 7
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 2441,
+            "file": "../include/sp_lev.h",
+            "line": 80,
+            "col": 24,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 105587,
+            "file": "sp_lev.c",
+            "line": 3367,
+            "col": 39,
+            "tokLen": 14
+          }
+        }
+      }
+    },
+    {
+      "owner": "lspo_object",
+      "operator": "|=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 116660,
+          "line": 3710,
+          "col": 17,
+          "tokLen": 6
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 40477,
+            "file": "../include/hack.h",
+            "line": 1191,
+            "col": 27,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 116670,
+            "file": "sp_lev.c",
+            "line": 3710,
+            "col": 27,
+            "tokLen": 17
+          }
+        }
+      }
+    },
+    {
+      "owner": "lspo_object",
+      "operator": "|=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 116758,
+          "line": 3712,
+          "col": 17,
+          "tokLen": 6
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 40910,
+            "file": "../include/hack.h",
+            "line": 1199,
+            "col": 25,
+            "tokLen": 1,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 116768,
+            "file": "sp_lev.c",
+            "line": 3712,
+            "col": 27,
+            "tokLen": 13
+          }
+        }
+      }
+    },
+    {
+      "owner": "lspo_object",
+      "operator": "|=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 116854,
+          "line": 3714,
+          "col": 17,
+          "tokLen": 6
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 40884,
+            "file": "../include/hack.h",
+            "line": 1198,
+            "col": 25,
+            "tokLen": 1,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 116864,
+            "file": "sp_lev.c",
+            "line": 3714,
+            "col": 27,
+            "tokLen": 15
+          }
+        }
+      }
+    },
+    {
+      "owner": "lspo_object",
+      "operator": "|=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 117246,
+          "line": 3726,
+          "col": 9,
+          "tokLen": 6
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 1601,
+            "file": "../include/sp_lev.h",
+            "line": 54,
+            "col": 24,
+            "tokLen": 3,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 117268,
+            "file": "sp_lev.c",
+            "line": 3726,
+            "col": 31,
+            "tokLen": 14
+          }
+        }
+      }
+    },
+    {
+      "owner": "lspo_object",
+      "operator": "|=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 117394,
+          "line": 3731,
+          "col": 13,
+          "tokLen": 6
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 1630,
+            "file": "../include/sp_lev.h",
+            "line": 55,
+            "col": 26,
+            "tokLen": 3,
+            "includedFrom": {
+              "file": "sp_lev.c"
+            }
+          },
+          "expansionLoc": {
+            "offset": 117416,
+            "file": "sp_lev.c",
+            "line": 3731,
+            "col": 35,
+            "tokLen": 16
+          }
+        }
+      }
+    },
+    {
+      "owner": "lspo_level_flags",
+      "operator": "&=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 119560,
+          "line": 3801,
+          "col": 13,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 119586,
+          "col": 39,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "lspo_level_flags",
+      "operator": "&=",
+      "lhs": "int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 119642,
+          "line": 3803,
+          "col": 13,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 119668,
+          "col": 39,
+          "tokLen": 1
+        }
+      }
+    },
+    {
+      "owner": "sel_set_door",
+      "operator": "&=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 144206,
+          "line": 4655,
+          "col": 9,
+          "tokLen": 3
+        },
+        "end": {
+          "spellingLoc": {
+            "offset": 9842,
+            "file": "../include/rm.h",
+            "line": 240,
+            "col": 19,
+            "tokLen": 4,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 144214,
+            "file": "sp_lev.c",
+            "line": 4655,
+            "col": 17,
+            "tokLen": 8
+          }
+        }
+      }
+    },
+    {
+      "owner": "l_table_getset_feature_flag",
+      "operator": "|=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "spellingLoc": {
+            "offset": 18077,
+            "file": "../include/rm.h",
+            "line": 488,
+            "col": 14,
+            "tokLen": 3,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 146885,
+            "file": "sp_lev.c",
+            "line": 4751,
+            "col": 13,
+            "tokLen": 4
+          }
+        },
+        "end": {
+          "offset": 146905,
+          "col": 33,
+          "tokLen": 4
+        }
+      }
+    },
+    {
+      "owner": "l_table_getset_feature_flag",
+      "operator": "&=",
+      "lhs": "unsigned int",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "spellingLoc": {
+            "offset": 18077,
+            "file": "../include/rm.h",
+            "line": 488,
+            "col": 14,
+            "tokLen": 3,
+            "includedFrom": {
+              "file": "../include/hack.h"
+            }
+          },
+          "expansionLoc": {
+            "offset": 146936,
+            "file": "sp_lev.c",
+            "line": 4753,
+            "col": 13,
+            "tokLen": 4
+          }
+        },
+        "end": {
+          "offset": 146957,
+          "col": 34,
+          "tokLen": 4
+        }
+      }
+    },
+    {
+      "owner": "cvt_to_abscoord",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 148226,
+          "line": 4782,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 148249,
+          "col": 32,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "cvt_to_abscoord",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 148261,
+          "line": 4783,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 148284,
+          "col": 32,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "cvt_to_abscoord",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 148309,
+          "line": 4785,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 148318,
+          "col": 18,
+          "tokLen": 6
+        }
+      }
+    },
+    {
+      "owner": "cvt_to_abscoord",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 148334,
+          "line": 4786,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 148343,
+          "col": 18,
+          "tokLen": 6
+        }
+      }
+    },
+    {
+      "owner": "cvt_to_relcoord",
+      "operator": "-=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 148585,
+          "line": 4796,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 148608,
+          "col": 32,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "cvt_to_relcoord",
+      "operator": "-=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 148620,
+          "line": 4797,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 148643,
+          "col": 32,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "cvt_to_relcoord",
+      "operator": "-=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 148668,
+          "line": 4799,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 148677,
+          "col": 18,
+          "tokLen": 6
+        }
+      }
+    },
+    {
+      "owner": "cvt_to_relcoord",
+      "operator": "-=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 148693,
+          "line": 4800,
+          "col": 9,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 148702,
+          "col": 18,
+          "tokLen": 6
+        }
+      }
+    },
+    {
+      "owner": "lspo_map",
+      "operator": "+=",
+      "lhs": "short",
+      "rhs": "int",
+      "computeLHS": {
+        "qualType": "int"
+      },
+      "computeResult": {
+        "qualType": "int"
+      },
+      "range": {
+        "begin": {
+          "offset": 190170,
+          "line": 6233,
+          "col": 9,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 190206,
+          "col": 45,
+          "tokLen": 1
+        }
+      }
+    }
+  ],
+  "pointerIncrements": [
+    {
+      "owner": "mapfrag_fromstr",
+      "operator": "++",
+      "type": "char *",
+      "range": {
+        "begin": {
+          "offset": 9500,
+          "line": 248,
+          "col": 13,
+          "tokLen": 2
+        },
+        "end": {
+          "offset": 9502,
+          "col": 15,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "flip_level",
+      "operator": "++",
+      "type": "struct mkroom *",
+      "range": {
+        "begin": {
+          "offset": 26714,
+          "col": 35,
+          "tokLen": 5
+        },
+        "end": {
+          "offset": 26719,
+          "col": 40,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "check_room",
+      "operator": "++",
+      "type": "struct rm *",
+      "range": {
+        "begin": {
+          "offset": 46892,
+          "col": 17,
+          "tokLen": 3
+        },
+        "end": {
+          "offset": 46895,
+          "col": 20,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "light_region",
+      "operator": "++",
+      "type": "struct rm *",
+      "range": {
+        "begin": {
+          "offset": 89787,
+          "line": 2859,
+          "col": 13,
+          "tokLen": 3
+        },
+        "end": {
+          "offset": 89790,
+          "col": 16,
+          "tokLen": 2
+        }
+      }
+    }
+  ],
+  "dereferencedIncrements": [
+    {
+      "owner": "dig_corridor",
+      "operator": "++",
+      "type": "int",
+      "range": {
+        "begin": {
+          "offset": 82698,
+          "line": 2598,
+          "col": 21,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 82708,
+          "col": 31,
+          "tokLen": 2
+        }
+      }
+    },
+    {
+      "owner": "dig_corridor",
+      "operator": "++",
+      "type": "int",
+      "range": {
+        "begin": {
+          "offset": 82816,
+          "line": 2602,
+          "col": 21,
+          "tokLen": 1
+        },
+        "end": {
+          "offset": 82826,
+          "col": 31,
+          "tokLen": 2
+        }
+      }
+    }
+  ],
+  "sourceReturns64OrAggregate": [
+    {
+      "name": "get_unpacked_coord",
+      "type": "struct unpacked_coord"
+    },
+    {
+      "name": "get_table_int_or_random",
+      "type": "long long"
+    },
+    {
+      "name": "get_table_intarray_entry",
+      "type": "long long"
+    }
+  ],
+  "gotoFacts": [
+    {
+      "name": "reset_xystart_size",
+      "formals": []
+    },
+    {
+      "name": "match_maptyps",
+      "formals": [
+        {
+          "name": "typ",
+          "type": "short",
+          "declID": "0x92760bd48"
+        },
+        {
+          "name": "levltyp",
+          "type": "short",
+          "declID": "0x92760bdc0"
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_fromstr",
+      "formals": [
+        {
+          "name": "str",
+          "type": "char *",
+          "declID": "0x92760c490"
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_free",
+      "formals": [
+        {
+          "name": "mf",
+          "type": "struct mapfragment **",
+          "declID": "0x92760d8b0"
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_get",
+      "formals": [
+        {
+          "name": "mf",
+          "type": "struct mapfragment *",
+          "declID": "0x92760dea8"
+        },
+        {
+          "name": "x",
+          "type": "int",
+          "declID": "0x92760df28"
+        },
+        {
+          "name": "y",
+          "type": "int",
+          "declID": "0x92760dfa8"
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_canmatch",
+      "formals": [
+        {
+          "name": "mf",
+          "type": "struct mapfragment *",
+          "declID": "0x92760eb58"
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_error",
+      "formals": [
+        {
+          "name": "mf",
+          "type": "struct mapfragment *",
+          "declID": "0x92760ef70"
+        }
+      ]
+    },
+    {
+      "name": "mapfrag_match",
+      "formals": [
+        {
+          "name": "mf",
+          "type": "struct mapfragment *",
+          "declID": "0x92760fec8"
+        },
+        {
+          "name": "x",
+          "type": "int",
+          "declID": "0x92760ff48"
+        },
+        {
+          "name": "y",
+          "type": "int",
+          "declID": "0x927610000"
+        }
+      ]
+    },
+    {
+      "name": "solidify_map",
+      "formals": []
+    },
+    {
+      "name": "map_cleanup",
+      "formals": []
+    },
+    {
+      "name": "lvlfill_maze_grid",
+      "formals": [
+        {
+          "name": "x1",
+          "type": "int",
+          "declID": "0x927614018"
+        },
+        {
+          "name": "y1",
+          "type": "int",
+          "declID": "0x927614098"
+        },
+        {
+          "name": "x2",
+          "type": "int",
+          "declID": "0x927614118"
+        },
+        {
+          "name": "y2",
+          "type": "int",
+          "declID": "0x927614198"
+        },
+        {
+          "name": "filling",
+          "type": "signed char",
+          "declID": "0x927614210"
+        }
+      ]
+    },
+    {
+      "name": "lvlfill_solid",
+      "formals": [
+        {
+          "name": "filling",
+          "type": "signed char",
+          "declID": "0x927614f68"
+        },
+        {
+          "name": "lit",
+          "type": "signed char",
+          "declID": "0x927614fe0"
+        }
+      ]
+    },
+    {
+      "name": "lvlfill_swamp",
+      "formals": [
+        {
+          "name": "fg",
+          "type": "signed char",
+          "declID": "0x927615fb8"
+        },
+        {
+          "name": "bg",
+          "type": "signed char",
+          "declID": "0x927616030"
+        },
+        {
+          "name": "lit",
+          "type": "signed char",
+          "declID": "0x9276160a8"
+        }
+      ]
+    },
+    {
+      "name": "flip_dbridge_horizontal",
+      "formals": [
+        {
+          "name": "lev",
+          "type": "struct rm *",
+          "declID": "0x927618510"
+        }
+      ]
+    },
+    {
+      "name": "flip_dbridge_vertical",
+      "formals": [
+        {
+          "name": "lev",
+          "type": "struct rm *",
+          "declID": "0x927618f08"
+        }
+      ]
+    },
+    {
+      "name": "flip_visuals",
+      "formals": [
+        {
+          "name": "flp",
+          "type": "int",
+          "declID": "0x9276198f0"
+        },
+        {
+          "name": "minx",
+          "type": "int",
+          "declID": "0x927619970"
+        },
+        {
+          "name": "miny",
+          "type": "int",
+          "declID": "0x9276199f0"
+        },
+        {
+          "name": "maxx",
+          "type": "int",
+          "declID": "0x927619a70"
+        },
+        {
+          "name": "maxy",
+          "type": "int",
+          "declID": "0x927619af0"
+        }
+      ]
+    },
+    {
+      "name": "flip_encoded_dir_bits",
+      "formals": [
+        {
+          "name": "flp",
+          "type": "int",
+          "declID": "0x92761b8b8"
+        },
+        {
+          "name": "val",
+          "type": "int",
+          "declID": "0x92761b938"
+        }
+      ]
+    },
+    {
+      "name": "flip_level",
+      "formals": [
+        {
+          "name": "flp",
+          "type": "int",
+          "declID": "0x92761c3c0"
+        },
+        {
+          "name": "extras",
+          "type": "signed char",
+          "declID": "0x92761c438"
+        }
+      ]
+    },
+    {
+      "name": "flip_vault_guard",
+      "formals": [
+        {
+          "name": "flp",
+          "type": "int",
+          "declID": "0x927647d38"
+        },
+        {
+          "name": "grd",
+          "type": "struct monst *",
+          "declID": "0x927647dc8"
+        },
+        {
+          "name": "minx",
+          "type": "short",
+          "declID": "0x927647e40"
+        },
+        {
+          "name": "miny",
+          "type": "short",
+          "declID": "0x927647eb8"
+        },
+        {
+          "name": "maxx",
+          "type": "short",
+          "declID": "0x927647f30"
+        },
+        {
+          "name": "maxy",
+          "type": "short",
+          "declID": "0x927648000"
+        }
+      ]
+    },
+    {
+      "name": "flip_level_rnd",
+      "formals": [
+        {
+          "name": "flp",
+          "type": "int",
+          "declID": "0x92764ac40"
+        },
+        {
+          "name": "extras",
+          "type": "signed char",
+          "declID": "0x92764acb8"
+        }
+      ]
+    },
+    {
+      "name": "sel_set_wall_property",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x92764b9e0"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x92764ba58"
+        },
+        {
+          "name": "arg",
+          "type": "void *",
+          "declID": "0x92764bad0"
+        }
+      ]
+    },
+    {
+      "name": "set_wall_property",
+      "formals": [
+        {
+          "name": "x1",
+          "type": "short",
+          "declID": "0x92764c9d8"
+        },
+        {
+          "name": "y1",
+          "type": "short",
+          "declID": "0x92764ca50"
+        },
+        {
+          "name": "x2",
+          "type": "short",
+          "declID": "0x92764cac8"
+        },
+        {
+          "name": "y2",
+          "type": "short",
+          "declID": "0x92764cb40"
+        },
+        {
+          "name": "prop",
+          "type": "int",
+          "declID": "0x92764cbc0"
+        }
+      ]
+    },
+    {
+      "name": "remove_boundary_syms",
+      "formals": []
+    },
+    {
+      "name": "set_door_orientation",
+      "formals": [
+        {
+          "name": "x",
+          "type": "int",
+          "declID": "0x92764f0b8"
+        },
+        {
+          "name": "y",
+          "type": "int",
+          "declID": "0x92764f138"
+        }
+      ]
+    },
+    {
+      "name": "shared_with_room",
+      "formals": [
+        {
+          "name": "x",
+          "type": "int",
+          "declID": "0x927654708"
+        },
+        {
+          "name": "y",
+          "type": "int",
+          "declID": "0x927654788"
+        },
+        {
+          "name": "droom",
+          "type": "struct mkroom *",
+          "declID": "0x927654818"
+        }
+      ]
+    },
+    {
+      "name": "maybe_add_door",
+      "formals": [
+        {
+          "name": "x",
+          "type": "int",
+          "declID": "0x927656ae0"
+        },
+        {
+          "name": "y",
+          "type": "int",
+          "declID": "0x927656b60"
+        },
+        {
+          "name": "droom",
+          "type": "struct mkroom *",
+          "declID": "0x927656bf0"
+        }
+      ]
+    },
+    {
+      "name": "link_doors_rooms",
+      "formals": []
+    },
+    {
+      "name": "rnddoor",
+      "formals": []
+    },
+    {
+      "name": "rndtrap",
+      "formals": []
+    },
+    {
+      "name": "get_location",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short *",
+          "declID": "0x92765a908"
+        },
+        {
+          "name": "y",
+          "type": "short *",
+          "declID": "0x92765a988"
+        },
+        {
+          "name": "humidity",
+          "type": "unsigned int",
+          "declID": "0x92765aa00"
+        },
+        {
+          "name": "croom",
+          "type": "struct mkroom *",
+          "declID": "0x92765aa90"
+        }
+      ]
+    },
+    {
+      "name": "set_ok_location_func",
+      "formals": [
+        {
+          "name": "func",
+          "type": "signed char (*)(coordxy, coordxy)",
+          "declID": "0x92765e240"
+        }
+      ]
+    },
+    {
+      "name": "is_ok_location",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x92765e420"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x92765e498"
+        },
+        {
+          "name": "humidity",
+          "type": "unsigned int",
+          "declID": "0x92765e510"
+        }
+      ]
+    },
+    {
+      "name": "pm_good_location",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x927660000"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x927660078"
+        },
+        {
+          "name": "pm",
+          "type": "struct permonst *",
+          "declID": "0x927660108"
+        }
+      ]
+    },
+    {
+      "name": "get_unpacked_coord",
+      "formals": [
+        {
+          "name": "loc",
+          "type": "long",
+          "declID": "0x927660520"
+        },
+        {
+          "name": "defhumidity",
+          "type": "int",
+          "declID": "0x9276605a0"
+        }
+      ]
+    },
+    {
+      "name": "get_location_coord",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short *",
+          "declID": "0x927661250"
+        },
+        {
+          "name": "y",
+          "type": "short *",
+          "declID": "0x9276612d0"
+        },
+        {
+          "name": "humidity",
+          "type": "int",
+          "declID": "0x927661350"
+        },
+        {
+          "name": "croom",
+          "type": "struct mkroom *",
+          "declID": "0x9276613e0"
+        },
+        {
+          "name": "crd",
+          "type": "long",
+          "declID": "0x927661460"
+        }
+      ]
+    },
+    {
+      "name": "get_room_loc",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short *",
+          "declID": "0x9276621d8"
+        },
+        {
+          "name": "y",
+          "type": "short *",
+          "declID": "0x927662258"
+        },
+        {
+          "name": "croom",
+          "type": "struct mkroom *",
+          "declID": "0x9276622e8"
+        }
+      ]
+    },
+    {
+      "name": "get_free_room_loc",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short *",
+          "declID": "0x927663c50"
+        },
+        {
+          "name": "y",
+          "type": "short *",
+          "declID": "0x927663cd0"
+        },
+        {
+          "name": "croom",
+          "type": "struct mkroom *",
+          "declID": "0x927663d60"
+        },
+        {
+          "name": "pos",
+          "type": "long",
+          "declID": "0x927663de0"
+        }
+      ]
+    },
+    {
+      "name": "check_room",
+      "formals": [
+        {
+          "name": "lowx",
+          "type": "short *",
+          "declID": "0x927664e78"
+        },
+        {
+          "name": "ddx",
+          "type": "short *",
+          "declID": "0x927664ef8"
+        },
+        {
+          "name": "lowy",
+          "type": "short *",
+          "declID": "0x927664f78"
+        },
+        {
+          "name": "ddy",
+          "type": "short *",
+          "declID": "0x927664ff8"
+        },
+        {
+          "name": "vault",
+          "type": "signed char",
+          "declID": "0x927665070"
+        }
+      ]
+    },
+    {
+      "name": "create_room",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x9276699e0"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x927669a58"
+        },
+        {
+          "name": "w",
+          "type": "short",
+          "declID": "0x927669ad0"
+        },
+        {
+          "name": "h",
+          "type": "short",
+          "declID": "0x927669b48"
+        },
+        {
+          "name": "xal",
+          "type": "short",
+          "declID": "0x927669bc0"
+        },
+        {
+          "name": "yal",
+          "type": "short",
+          "declID": "0x927669c38"
+        },
+        {
+          "name": "rtype",
+          "type": "short",
+          "declID": "0x927669cb0"
+        },
+        {
+          "name": "rlit",
+          "type": "short",
+          "declID": "0x927669d28"
+        }
+      ]
+    },
+    {
+      "name": "create_subroom",
+      "formals": [
+        {
+          "name": "proom",
+          "type": "struct mkroom *",
+          "declID": "0x927675758"
+        },
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x9276757d0"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x927675848"
+        },
+        {
+          "name": "w",
+          "type": "short",
+          "declID": "0x9276758c0"
+        },
+        {
+          "name": "h",
+          "type": "short",
+          "declID": "0x927675938"
+        },
+        {
+          "name": "rtype",
+          "type": "short",
+          "declID": "0x9276759b0"
+        },
+        {
+          "name": "rlit",
+          "type": "short",
+          "declID": "0x927675a28"
+        }
+      ]
+    },
+    {
+      "name": "create_door",
+      "formals": [
+        {
+          "name": "dd",
+          "type": "struct room_door *",
+          "declID": "0x927678ac8"
+        },
+        {
+          "name": "broom",
+          "type": "struct mkroom *",
+          "declID": "0x927678b58"
+        }
+      ]
+    },
+    {
+      "name": "create_trap",
+      "formals": [
+        {
+          "name": "t",
+          "type": "struct spltrap *",
+          "declID": "0x9276801e8"
+        },
+        {
+          "name": "croom",
+          "type": "struct mkroom *",
+          "declID": "0x927680278"
+        }
+      ]
+    },
+    {
+      "name": "noncoalignment",
+      "formals": [
+        {
+          "name": "alignment",
+          "type": "signed char",
+          "declID": "0x927681cf8"
+        }
+      ]
+    },
+    {
+      "name": "m_bad_boulder_spot",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x927682530"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x9276825a8"
+        }
+      ]
+    },
+    {
+      "name": "pm_to_humidity",
+      "formals": [
+        {
+          "name": "pm",
+          "type": "struct permonst *",
+          "declID": "0x9276830f8"
+        }
+      ]
+    },
+    {
+      "name": "sp_amask_to_amask",
+      "formals": [
+        {
+          "name": "sp_amask",
+          "type": "unsigned int",
+          "declID": "0x927684648"
+        }
+      ]
+    },
+    {
+      "name": "create_monster",
+      "formals": [
+        {
+          "name": "m",
+          "type": "struct monster *",
+          "declID": "0x927685990"
+        },
+        {
+          "name": "croom",
+          "type": "struct mkroom *",
+          "declID": "0x927685a20"
+        }
+      ]
+    },
+    {
+      "name": "create_object",
+      "formals": [
+        {
+          "name": "o",
+          "type": "struct object *",
+          "declID": "0x926d57458"
+        },
+        {
+          "name": "croom",
+          "type": "struct mkroom *",
+          "declID": "0x926d574e8"
+        }
+      ]
+    },
+    {
+      "name": "create_altar",
+      "formals": [
+        {
+          "name": "a",
+          "type": "struct altar *",
+          "declID": "0x926d61ff8"
+        },
+        {
+          "name": "croom",
+          "type": "struct mkroom *",
+          "declID": "0x926d62088"
+        }
+      ]
+    },
+    {
+      "name": "search_door",
+      "formals": [
+        {
+          "name": "croom",
+          "type": "struct mkroom *",
+          "declID": "0x926d645d0"
+        },
+        {
+          "name": "x",
+          "type": "short *",
+          "declID": "0x926d64650"
+        },
+        {
+          "name": "y",
+          "type": "short *",
+          "declID": "0x926d646d0"
+        },
+        {
+          "name": "wall",
+          "type": "short",
+          "declID": "0x926d64748"
+        },
+        {
+          "name": "cnt",
+          "type": "int",
+          "declID": "0x926d647c8"
+        }
+      ]
+    },
+    {
+      "name": "dig_corridor",
+      "formals": [
+        {
+          "name": "org",
+          "type": "struct nhcoord *",
+          "declID": "0x926d66718"
+        },
+        {
+          "name": "dest",
+          "type": "struct nhcoord *",
+          "declID": "0x926d66798"
+        },
+        {
+          "name": "npoints",
+          "type": "int *",
+          "declID": "0x926d66818"
+        },
+        {
+          "name": "nxcor",
+          "type": "signed char",
+          "declID": "0x926d66890"
+        },
+        {
+          "name": "ftyp",
+          "type": "signed char",
+          "declID": "0x926d66908"
+        },
+        {
+          "name": "btyp",
+          "type": "signed char",
+          "declID": "0x926d66980"
+        }
+      ]
+    },
+    {
+      "name": "create_corridor",
+      "formals": [
+        {
+          "name": "c",
+          "type": "struct corridor *",
+          "declID": "0x926f91968"
+        }
+      ]
+    },
+    {
+      "name": "fill_special_room",
+      "formals": [
+        {
+          "name": "croom",
+          "type": "struct mkroom *",
+          "declID": "0x926f93c90"
+        }
+      ]
+    },
+    {
+      "name": "build_room",
+      "formals": [
+        {
+          "name": "r",
+          "type": "struct _room *",
+          "declID": "0x926f96e60"
+        },
+        {
+          "name": "mkr",
+          "type": "struct mkroom *",
+          "declID": "0x926f96ef0"
+        }
+      ]
+    },
+    {
+      "name": "light_region",
+      "formals": [
+        {
+          "name": "tmpregion",
+          "type": "struct region *",
+          "declID": "0x926f988e0"
+        }
+      ]
+    },
+    {
+      "name": "wallify_map",
+      "formals": [
+        {
+          "name": "x1",
+          "type": "short",
+          "declID": "0x926f9a660"
+        },
+        {
+          "name": "y1",
+          "type": "short",
+          "declID": "0x926f9a6d8"
+        },
+        {
+          "name": "x2",
+          "type": "short",
+          "declID": "0x926f9a750"
+        },
+        {
+          "name": "y2",
+          "type": "short",
+          "declID": "0x926f9a7c8"
+        }
+      ]
+    },
+    {
+      "name": "maze1xy",
+      "formals": [
+        {
+          "name": "m",
+          "type": "struct nhcoord *",
+          "declID": "0x926f9d110"
+        },
+        {
+          "name": "humidity",
+          "type": "int",
+          "declID": "0x926f9d190"
+        }
+      ]
+    },
+    {
+      "name": "fill_empty_maze",
+      "formals": []
+    },
+    {
+      "name": "splev_initlev",
+      "formals": [
+        {
+          "name": "linit",
+          "type": "struct lev_init *",
+          "declID": "0x926fa4100"
+        }
+      ]
+    },
+    {
+      "name": "spo_end_moninvent",
+      "formals": []
+    },
+    {
+      "name": "spo_pop_container",
+      "formals": []
+    },
+    {
+      "name": "l_push_wid_hei_table",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fa6ca0"
+        },
+        {
+          "name": "wid",
+          "type": "int",
+          "declID": "0x926fa6d20"
+        },
+        {
+          "name": "hei",
+          "type": "int",
+          "declID": "0x926fa6da0"
+        }
+      ]
+    },
+    {
+      "name": "l_push_mkroom_table",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fa7390"
+        },
+        {
+          "name": "tmpr",
+          "type": "struct mkroom *",
+          "declID": "0x926fa7420"
+        }
+      ]
+    },
+    {
+      "name": "lspo_message",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fa8798"
+        }
+      ]
+    },
+    {
+      "name": "get_table_align",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926faa428"
+        }
+      ]
+    },
+    {
+      "name": "get_table_monclass",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fab178"
+        }
+      ]
+    },
+    {
+      "name": "find_montype",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fabb40"
+        },
+        {
+          "name": "s",
+          "type": "char *",
+          "declID": "0x926fabc18"
+        },
+        {
+          "name": "mgender",
+          "type": "int *",
+          "declID": "0x926fabc98"
+        }
+      ]
+    },
+    {
+      "name": "get_table_montype",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fad1b0"
+        },
+        {
+          "name": "mgender",
+          "type": "int *",
+          "declID": "0x926fad230"
+        }
+      ]
+    },
+    {
+      "name": "get_table_xy_or_coord",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fadd30"
+        },
+        {
+          "name": "x",
+          "type": "long long *",
+          "declID": "0x926faddb0"
+        },
+        {
+          "name": "y",
+          "type": "long long *",
+          "declID": "0x926fade30"
+        }
+      ]
+    },
+    {
+      "name": "lspo_monster",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926faecd0"
+        }
+      ]
+    },
+    {
+      "name": "get_table_int_or_random",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fbe730"
+        },
+        {
+          "name": "name",
+          "type": "char *",
+          "declID": "0x926fbe7b0"
+        },
+        {
+          "name": "rndval",
+          "type": "int",
+          "declID": "0x926fbe830"
+        }
+      ]
+    },
+    {
+      "name": "get_table_buc",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fc02d0"
+        }
+      ]
+    },
+    {
+      "name": "get_table_objclass",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fc0f00"
+        }
+      ]
+    },
+    {
+      "name": "find_objtype",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fc18a0"
+        },
+        {
+          "name": "s",
+          "type": "char *",
+          "declID": "0x926fc1920"
+        },
+        {
+          "name": "oclass",
+          "type": "char",
+          "declID": "0x926fc1998"
+        }
+      ]
+    },
+    {
+      "name": "get_table_objtype",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fc4530"
+        }
+      ]
+    },
+    {
+      "name": "lspo_object",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fc4ef0"
+        }
+      ]
+    },
+    {
+      "name": "lspo_level_flags",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fd0620"
+        }
+      ]
+    },
+    {
+      "name": "lspo_level_init",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fdda50"
+        }
+      ]
+    },
+    {
+      "name": "lspo_engraving",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fe0168"
+        }
+      ]
+    },
+    {
+      "name": "lspo_mineralize",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fe3a28"
+        }
+      ]
+    },
+    {
+      "name": "get_mkroom_name",
+      "formals": [
+        {
+          "name": "rtype",
+          "type": "int",
+          "declID": "0x926fe6ef0"
+        }
+      ]
+    },
+    {
+      "name": "get_table_roomtype_opt",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fe7728"
+        },
+        {
+          "name": "name",
+          "type": "char *",
+          "declID": "0x926fe77a8"
+        },
+        {
+          "name": "defval",
+          "type": "int",
+          "declID": "0x926fe7828"
+        }
+      ]
+    },
+    {
+      "name": "lspo_room",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fe87a8"
+        }
+      ]
+    },
+    {
+      "name": "spo_endroom",
+      "formals": [
+        {
+          "name": "coder",
+          "type": "struct sp_coder *",
+          "declID": "0x926fee340"
+        }
+      ]
+    },
+    {
+      "name": "good_stair_loc",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x926feede8"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x926feee60"
+        }
+      ]
+    },
+    {
+      "name": "l_create_stairway",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926fef458"
+        },
+        {
+          "name": "using_ladder",
+          "type": "signed char",
+          "declID": "0x926fef4d0"
+        }
+      ]
+    },
+    {
+      "name": "lspo_stair",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926ff38c0"
+        }
+      ]
+    },
+    {
+      "name": "lspo_ladder",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926ff3bc8"
+        }
+      ]
+    },
+    {
+      "name": "lspo_grave",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926ff3e70"
+        }
+      ]
+    },
+    {
+      "name": "lspo_altar",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926ff5fa8"
+        }
+      ]
+    },
+    {
+      "name": "get_table_traptype_opt",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926ff9f00"
+        },
+        {
+          "name": "name",
+          "type": "char *",
+          "declID": "0x926ff9f80"
+        },
+        {
+          "name": "defval",
+          "type": "int",
+          "declID": "0x926ffa000"
+        }
+      ]
+    },
+    {
+      "name": "get_trapname_bytype",
+      "formals": [
+        {
+          "name": "ttyp",
+          "type": "int",
+          "declID": "0x926ffadc0"
+        }
+      ]
+    },
+    {
+      "name": "get_traptype_byname",
+      "formals": [
+        {
+          "name": "trapname",
+          "type": "char *",
+          "declID": "0x926ffb468"
+        }
+      ]
+    },
+    {
+      "name": "lspo_trap",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926ffbb80"
+        }
+      ]
+    },
+    {
+      "name": "lspo_gold",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x9264042c0"
+        }
+      ]
+    },
+    {
+      "name": "lspo_corridor",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926406a18"
+        }
+      ]
+    },
+    {
+      "name": "lspo_random_corridors",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x9264083d8"
+        }
+      ]
+    },
+    {
+      "name": "random_wdir",
+      "formals": []
+    },
+    {
+      "name": "floodfillchk_match_under",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x926409658"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x9264096d0"
+        }
+      ]
+    },
+    {
+      "name": "set_floodfillchk_match_under",
+      "formals": [
+        {
+          "name": "typ",
+          "type": "short",
+          "declID": "0x926409ab0"
+        }
+      ]
+    },
+    {
+      "name": "floodfillchk_match_accessible",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x926409db0"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x926409e28"
+        }
+      ]
+    },
+    {
+      "name": "sel_set_ter",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x92640a658"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x92640a6d0"
+        },
+        {
+          "name": "arg",
+          "type": "void *",
+          "declID": "0x92640a748"
+        }
+      ]
+    },
+    {
+      "name": "sel_set_feature",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x92640cf48"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x92640cfc0"
+        },
+        {
+          "name": "arg",
+          "type": "void *",
+          "declID": "0x92640d038"
+        }
+      ]
+    },
+    {
+      "name": "sel_set_door",
+      "formals": [
+        {
+          "name": "dx",
+          "type": "short",
+          "declID": "0x92640da50"
+        },
+        {
+          "name": "dy",
+          "type": "short",
+          "declID": "0x92640dac8"
+        },
+        {
+          "name": "arg",
+          "type": "void *",
+          "declID": "0x92640db40"
+        }
+      ]
+    },
+    {
+      "name": "lspo_door",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x92640ee60"
+        }
+      ]
+    },
+    {
+      "name": "l_table_getset_feature_flag",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926412678"
+        },
+        {
+          "name": "x",
+          "type": "int",
+          "declID": "0x9264126f8"
+        },
+        {
+          "name": "y",
+          "type": "int",
+          "declID": "0x926412778"
+        },
+        {
+          "name": "name",
+          "type": "char *",
+          "declID": "0x9264127f8"
+        },
+        {
+          "name": "flag",
+          "type": "int",
+          "declID": "0x926412878"
+        }
+      ]
+    },
+    {
+      "name": "cvt_to_abscoord",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short *",
+          "declID": "0x926413580"
+        },
+        {
+          "name": "y",
+          "type": "short *",
+          "declID": "0x926413600"
+        }
+      ]
+    },
+    {
+      "name": "cvt_to_relcoord",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short *",
+          "declID": "0x926413ea8"
+        },
+        {
+          "name": "y",
+          "type": "short *",
+          "declID": "0x926413f28"
+        }
+      ]
+    },
+    {
+      "name": "nhl_abs_coord",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x9264147d8"
+        }
+      ]
+    },
+    {
+      "name": "lspo_feature",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x9264160f8"
+        }
+      ]
+    },
+    {
+      "name": "lspo_gas_cloud",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x92641aae8"
+        }
+      ]
+    },
+    {
+      "name": "lspo_terrain",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x92641c9a0"
+        }
+      ]
+    },
+    {
+      "name": "lspo_replace_terrain",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926420310"
+        }
+      ]
+    },
+    {
+      "name": "generate_way_out_method",
+      "formals": [
+        {
+          "name": "nx",
+          "type": "short",
+          "declID": "0x926427030"
+        },
+        {
+          "name": "ny",
+          "type": "short",
+          "declID": "0x9264270a8"
+        },
+        {
+          "name": "ov",
+          "type": "struct selectionvar *",
+          "declID": "0x926427138"
+        }
+      ]
+    },
+    {
+      "name": "ensure_way_out",
+      "formals": []
+    },
+    {
+      "name": "get_table_intarray_entry",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926430000"
+        },
+        {
+          "name": "tableidx",
+          "type": "int",
+          "declID": "0x926430080"
+        },
+        {
+          "name": "entrynum",
+          "type": "int",
+          "declID": "0x926430100"
+        }
+      ]
+    },
+    {
+      "name": "get_table_region",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926431080"
+        },
+        {
+          "name": "name",
+          "type": "char *",
+          "declID": "0x926431100"
+        },
+        {
+          "name": "x1",
+          "type": "long long *",
+          "declID": "0x926431180"
+        },
+        {
+          "name": "y1",
+          "type": "long long *",
+          "declID": "0x926431200"
+        },
+        {
+          "name": "x2",
+          "type": "long long *",
+          "declID": "0x926431280"
+        },
+        {
+          "name": "y2",
+          "type": "long long *",
+          "declID": "0x926431300"
+        },
+        {
+          "name": "optional",
+          "type": "signed char",
+          "declID": "0x926431378"
+        }
+      ]
+    },
+    {
+      "name": "get_coord",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926432a90"
+        },
+        {
+          "name": "i",
+          "type": "int",
+          "declID": "0x926432b10"
+        },
+        {
+          "name": "x",
+          "type": "long long *",
+          "declID": "0x926432b90"
+        },
+        {
+          "name": "y",
+          "type": "long long *",
+          "declID": "0x926432c10"
+        }
+      ]
+    },
+    {
+      "name": "levregion_add",
+      "formals": [
+        {
+          "name": "lregion",
+          "type": "struct lev_region *",
+          "declID": "0x926434e08"
+        }
+      ]
+    },
+    {
+      "name": "l_get_lregion",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926436ae8"
+        },
+        {
+          "name": "tmplregion",
+          "type": "struct lev_region *",
+          "declID": "0x926436b68"
+        }
+      ]
+    },
+    {
+      "name": "lspo_teleport_region",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926438348"
+        }
+      ]
+    },
+    {
+      "name": "lspo_levregion",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x9264392c8"
+        }
+      ]
+    },
+    {
+      "name": "lspo_exclusion",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x92643a600"
+        }
+      ]
+    },
+    {
+      "name": "sel_set_lit",
+      "formals": [
+        {
+          "name": "x",
+          "type": "short",
+          "declID": "0x92643cc70"
+        },
+        {
+          "name": "y",
+          "type": "short",
+          "declID": "0x92643cce8"
+        },
+        {
+          "name": "arg",
+          "type": "void *",
+          "declID": "0x92643cd60"
+        }
+      ]
+    },
+    {
+      "name": "add_doors_to_room",
+      "formals": [
+        {
+          "name": "croom",
+          "type": "struct mkroom *",
+          "declID": "0x92643d778"
+        }
+      ]
+    },
+    {
+      "name": "get_table_coords_or_region",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x92643e9a0"
+        },
+        {
+          "name": "dx1",
+          "type": "short *",
+          "declID": "0x92643ea20"
+        },
+        {
+          "name": "dy1",
+          "type": "short *",
+          "declID": "0x92643eaa0"
+        },
+        {
+          "name": "dx2",
+          "type": "short *",
+          "declID": "0x92643eb20"
+        },
+        {
+          "name": "dy2",
+          "type": "short *",
+          "declID": "0x92643eba0"
+        }
+      ]
+    },
+    {
+      "name": "lspo_region",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926444050"
+        }
+      ]
+    },
+    {
+      "name": "lspo_drawbridge",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x92644a308"
+        }
+      ]
+    },
+    {
+      "name": "lspo_mazewalk",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x92644cf70"
+        }
+      ]
+    },
+    {
+      "name": "lspo_wall_property",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926450d88"
+        }
+      ]
+    },
+    {
+      "name": "set_wallprop_in_selection",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926452c18"
+        },
+        {
+          "name": "prop",
+          "type": "int",
+          "declID": "0x926452c98"
+        }
+      ]
+    },
+    {
+      "name": "lspo_non_diggable",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926453a00"
+        }
+      ]
+    },
+    {
+      "name": "lspo_non_passwall",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926453cb0"
+        }
+      ]
+    },
+    {
+      "name": "lspo_wallify",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926453f28"
+        }
+      ]
+    },
+    {
+      "name": "lspo_reset_level",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926455440"
+        }
+      ]
+    },
+    {
+      "name": "lspo_finalize_level",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x926456158"
+        }
+      ]
+    },
+    {
+      "name": "lspo_map",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x9264577e0"
+        }
+      ]
+    },
+    {
+      "name": "update_croom",
+      "formals": []
+    },
+    {
+      "name": "sp_level_coder_init",
+      "formals": []
+    },
+    {
+      "name": "l_register_des",
+      "formals": [
+        {
+          "name": "L",
+          "type": "struct lua_State *",
+          "declID": "0x92646f7f8"
+        }
+      ]
+    },
+    {
+      "name": "create_des_coder",
+      "formals": []
+    },
+    {
+      "name": "load_special",
+      "formals": [
+        {
+          "name": "name",
+          "type": "char *",
+          "declID": "0x926470110"
+        }
+      ]
+    }
+  ],
+  "reservedLocalMappings": [
+    {
+      "owner": "create_monster",
+      "declID": "0x927685d48",
+      "rangeBegin": 60085,
+      "nameOffset": 60090,
+      "C": "class",
+      "JS": "class_",
+      "type": "char"
+    },
+    {
+      "owner": "find_objtype",
+      "declID": "0x926fc1d18",
+      "rangeBegin": 108327,
+      "nameOffset": 108332,
+      "C": "class",
+      "JS": "class_",
+      "type": "char"
+    }
+  ],
+  "localRecordAlias": {
+    "name": "sp_lev_objclasspfx",
+    "original": "struct objclasspfx",
+    "owner": "find_objtype",
+    "declID": "0x926fc1e50",
+    "range": [
+      108679,
+      108764
+    ],
+    "fields": [
+      [
+        "prefix",
+        "const char *"
+      ],
+      [
+        "class",
+        "char"
+      ]
+    ],
+    "sizeof": 16,
+    "alignof": 8
+  },
+  "headerHashes": {
+    ".cache/wasm64-build/tree/include/align.h": "963176a750f3e58ca29d4b5b13f2eaf51fefdbf66b7a1a681401092dd72f7cb2",
+    ".cache/wasm64-build/tree/include/artifact.h": "9cc7056e7808ff2e28732c74d58ae47fe2513e4ccc5b5073b544f58a2495ccff",
+    ".cache/wasm64-build/tree/include/artilist.h": "5375cf830dac26aefd5dbefe1ab5bd79a1f1988b770e7a4dee61b6453c1dd3d3",
+    ".cache/wasm64-build/tree/include/attrib.h": "f20418d80bc2983e3d9af6cc9a02d30f57aa6b54116691a8e4ebebd425de757d",
+    ".cache/wasm64-build/tree/include/botl.h": "c26c637bcb8b2615e82fbc0804175cd8c87f63a3caf35c742e0a6fa410a31009",
+    ".cache/wasm64-build/tree/include/color.h": "f7ab4cdf5113898bf58ba85217f5d693b8564c232ff706ee894fdf070a3a105b",
+    ".cache/wasm64-build/tree/include/config.h": "5585d9c88d7ea21a9a78b45616cc31ae4ea680cb7b34026f70f92b91288a499f",
+    ".cache/wasm64-build/tree/include/config1.h": "b9e97cefc8fcfe4f36a1145ebfb655099f2afd2591227fa5f93b3f4dc0071042",
+    ".cache/wasm64-build/tree/include/context.h": "e1303b7309e556c65e41ec120b704079da6a0c9ef73a08745663f7b923ad7eef",
+    ".cache/wasm64-build/tree/include/coord.h": "f8788b777ea0fc8e4f5df40ce7b9add1a255c5846bdd1393518f7ea14ef6e3d2",
+    ".cache/wasm64-build/tree/include/cstd.h": "ef5e61d5eb7d1a5194c4a4544745a45893ccbea4c1cf083792235f562e173fc2",
+    ".cache/wasm64-build/tree/include/decl.h": "4782c5f522f6de63503cda131c0e2485aef31506d83dcfb32defeebf984fb470",
+    ".cache/wasm64-build/tree/include/defsym.h": "009ae2e8921fa4c376fe0ae3b4a42407421274fc15d1a8834c6ae519dad82f87",
+    ".cache/wasm64-build/tree/include/display.h": "36e9f838d3298d047e0605abcf2deb627eb79c18aa72f770d5289c34f3692b4c",
+    ".cache/wasm64-build/tree/include/dungeon.h": "e48eaafdb22fc82121de702086c40c3245d6aeb9fe5556712ee1e2f18744a308",
+    ".cache/wasm64-build/tree/include/engrave.h": "1c5617162ea649a0305df8d997b7a1075b35c9b3b97311cdfeebbd60bb9c482e",
+    ".cache/wasm64-build/tree/include/extern.h": "385f7478000f79ff137f2b6be533eef7b518b47a00b0d8c7e35ea52c877dec2e",
+    ".cache/wasm64-build/tree/include/flag.h": "bb28a3f835f3b38119f95311d76b535ef5053f3fffa42372d9f7b1c4c917806f",
+    ".cache/wasm64-build/tree/include/fnamesiz.h": "bd41c47c66e4213835bc1f052d831f8643bc7e7cb9aae0effb27f41edf1b5c35",
+    ".cache/wasm64-build/tree/include/global.h": "8ff55a3c6ee5cc18d00f1982146080d81e9e3dc9e369ab1ffc79890c07b8a8d0",
+    ".cache/wasm64-build/tree/include/hack.h": "5743a1707ce05e7a9a90e61657fde0ac066d48591f5d4fe80b1bdf959d94bce9",
+    ".cache/wasm64-build/tree/include/hacklib.h": "d9bf2b0ae2003c0611d2b9a351fdbbb30d58def2ecccc1235d4ed1e7b52e3c53",
+    ".cache/wasm64-build/tree/include/integer.h": "e88805c10f195e6de63b8c5cb46049f466ef040de9987a6ab61c36ef977f515a",
+    ".cache/wasm64-build/tree/include/lint.h": "bb08d5658f43c87c2b5129a33cb4e3264693e68d3cd654c67a5ecd757c98adcc",
+    ".cache/wasm64-build/tree/include/mextra.h": "e78bdfa21d4fd7718f1a25ed8f1ef466c96c2bd49f2069af7d1ab346148a1229",
+    ".cache/wasm64-build/tree/include/mfndpos.h": "4711c0e5c67ae88a6a28c776bc542d0d06452d742456964b77913e896b5f56f5",
+    ".cache/wasm64-build/tree/include/mkroom.h": "7baf848feb30c94c196e6bee2ee7f0a83822ad92042dd855b74d212fde514f5a",
+    ".cache/wasm64-build/tree/include/monattk.h": "00c2283c2687f2dd5fa8a3088623cd621822289018c0072db9cad5a2a94883ba",
+    ".cache/wasm64-build/tree/include/mondata.h": "6f1ca3db69a5cfbe425859fe1c7decfa1da1fdac45af9d8a84be5f0f8c9c21f2",
+    ".cache/wasm64-build/tree/include/monflag.h": "89e4ef1dc1cd46fa8d81ff833351934c666420abdf902286bdacdca0bb171d88",
+    ".cache/wasm64-build/tree/include/monst.h": "08e9e2251ac5c3beedb8700dd56287f9f397b506851ceb44a37e41b6d80067a6",
+    ".cache/wasm64-build/tree/include/monsters.h": "c63db922770c96a9956d221f364ba4368a9f81f81c8d64ed28251a0506d4a906",
+    ".cache/wasm64-build/tree/include/nhlua.h": "48553ca9ab16ac2928479cabdf51d7f090fc38e1641dd5d97d819f612c6d87d9",
+    ".cache/wasm64-build/tree/include/nhregex.h": "a2936fd291537090773d861c083c3574c7a0a798c688e87dedb4405f73de653f",
+    ".cache/wasm64-build/tree/include/obj.h": "a4d1b994c5acd6fe04d411485d84491553d6df02dfbd7480181a15a7a05456e2",
+    ".cache/wasm64-build/tree/include/objclass.h": "101f92e0024e4404033845fb15171f8ed4b79374907a6a172b4eb7b026e1eb52",
+    ".cache/wasm64-build/tree/include/objects.h": "eb573ca76f7afe35d6420b958333fbb3c44911415df4e0034e6367456e2913cb",
+    ".cache/wasm64-build/tree/include/optlist.h": "23dafb109132dd63bbfe704b39fac8cccaaeee31a0dbd895c7ba928bd92af9b8",
+    ".cache/wasm64-build/tree/include/patchlevel.h": "4389b12b496c9611fb392ee509d0ebaad2f10449ff3ef697f1ad416a207b0a97",
+    ".cache/wasm64-build/tree/include/permonst.h": "bcdb24d041e3df909cf483efb576fa7fc5e18debf03d11e8e43c1aa87c655bf4",
+    ".cache/wasm64-build/tree/include/prop.h": "682e85c7ab20c1dc7b30115b2a3e850d564cc2ed341edfa782fec9d0dfea0761",
+    ".cache/wasm64-build/tree/include/quest.h": "87b6649d82b6fd4a24d004fcd48c1d9650345e719cf8dc196ae6c99b483e2a5a",
+    ".cache/wasm64-build/tree/include/rect.h": "dee168e068baa3aa15748725752d07659f8cb4e471116f7fab4acf080dc69f90",
+    ".cache/wasm64-build/tree/include/region.h": "adc4682b6a15213f71f3bb534b8705c4385153ca9db7512c118474b0fb4f1191",
+    ".cache/wasm64-build/tree/include/rm.h": "da2ae88d704a358474c6986a3f4763e62053b96a6e60a475879029e658996af7",
+    ".cache/wasm64-build/tree/include/savefile.h": "6847e12dca1eb25b38baa69f6227554669f8a64f5966a1879a5cf2b23732749e",
+    ".cache/wasm64-build/tree/include/seffects.h": "f64099054ab366a1eaccd58901a98cef49a84c1f047c5923de20b4432654de02",
+    ".cache/wasm64-build/tree/include/selvar.h": "49b8be43b8bfd7b4f18cb59d1179e8ad28a708a06c0fbc985c65b365ab9a3acf",
+    ".cache/wasm64-build/tree/include/skills.h": "d67ac10770b8aff667c163e93020b8974e53f12eede903f10bf026d351b2c238",
+    ".cache/wasm64-build/tree/include/sndprocs.h": "4d105334e499c3fb4af00fcd1acf48802a8db5ccf799bd31bfafc2afaa286654",
+    ".cache/wasm64-build/tree/include/sp_lev.h": "a48d5bd2d9a5b20b474b790d52f4f19179678c87ec0b51019e39dc6684d7a6bf",
+    ".cache/wasm64-build/tree/include/spell.h": "dc1e454c0214ea1cc20f4ea1e19cd4447a5ca9533610769fafe8cdd60206b37f",
+    ".cache/wasm64-build/tree/include/stairs.h": "fe016a6ef8194099d504bbf48f58e1e3c6a923413a07c28377409cacc1e2b42b",
+    ".cache/wasm64-build/tree/include/sym.h": "cea14c200c9f1e90ebe890804b46af7005c889d90917cb0608ad6058614e3db4",
+    ".cache/wasm64-build/tree/include/sys.h": "e193f46309925a4b14394a503b3e9a7bc19e5745bb539137ca10ec0898e3951b",
+    ".cache/wasm64-build/tree/include/timeout.h": "5f76ff41cc5435cc8a3e30b28f51c6adbfe42e2bf4a0354ba0a9f850a5ce515a",
+    ".cache/wasm64-build/tree/include/tradstdc.h": "a1246d1acdf317c36990946e1d8bde33f63e3ba779ed5696a4ee03c7ac4f4401",
+    ".cache/wasm64-build/tree/include/trap.h": "469afec3e29d7aec1aa8efd407ad23d24ef069010820082b5596537b9290eb6b",
+    ".cache/wasm64-build/tree/include/unixconf.h": "0cbf3370472b030e8583e922e05e8e055738896954cbbdc1e1e18d0938559723",
+    ".cache/wasm64-build/tree/include/vision.h": "415b7e5751194cb7de57c192103d396a2971400e603fd62bf56330304014ac13",
+    ".cache/wasm64-build/tree/include/warnings.h": "ccf0c3e66bb442b0d8c05844103065fccf3fa7a894bba007425258e1d089f981",
+    ".cache/wasm64-build/tree/include/weight.h": "ac168750ddcde6c592ccbeaaf44c59921cc1f73ed36d269f20364b0e08b91cd1",
+    ".cache/wasm64-build/tree/include/winprocs.h": "eebf4dbb4149d3a153a1dc815795baabe33a59d13362e00089d21ee9ce89983c",
+    ".cache/wasm64-build/tree/include/wintype.h": "e5bfd60534831210bdace1ba6eaef62f65d16dab8d8ac0fcddadebd000d53698",
+    ".cache/wasm64-build/tree/include/you.h": "d19cfa0233582f1ad550b9dfc788f26166f3ff21225e3d8a0cd43b6de2094289",
+    ".cache/wasm64-build/tree/include/youprop.h": "9c4e25bc385c405226085ae3526dc165bd9397ce922b8a18a46f67de21683a2f",
+    ".cache/wasm64-build/tree/lib/lua-5.4.8/src/lauxlib.h": "2d9e18e577a6062646268e7f7228264c28bd9b972c186e1af81b8357179c0ab4",
+    ".cache/wasm64-build/tree/lib/lua-5.4.8/src/lua.h": "3b77329f9deed929a5cbe7a7d5fc81ebbb63fd869a49e0a9302fe9240caf1930",
+    ".cache/wasm64-build/tree/lib/lua-5.4.8/src/luaconf.h": "af243c94bee6d2601383e8b65ed66a0d1b4ab3b7418ff903fcd0679912160e3a",
+    ".cache/wasm64-build/tree/lib/lua-5.4.8/src/lualib.h": "4ea0f67d3e467f5d6a327616e22a3c2da8e03d47a3c3660916275f2842f521ea",
+    "nethack-c/wasm/native-terminal.h": "16eceb17caf6e70d0e8e6b36f23daebdb30f7ace18676d482c8376fccf6dceeb"
+  },
+  "dependencyHashes": {
+    ".cache/wasm64-build/liblua-wasm64.a": "3e1b040ed0563aba339e541a8cdd940ee542d448b0ffd67dbadcca4f90270aa7",
+    ".cache/sp-lev-first-pass/selvar.o": "4d01b4a8d0424961df85c8a089249ffb0898ec130f98cbb2c04fa1e99d72061a",
+    ".cache/sp-lev-first-pass/nhlsel.o": "862763ae55cf6d445809ad2f96d11de25fb51923b552eca936e80d547c46441e",
+    ".cache/wasm64-build/tree/src/selvar.c": "af33824e7004e7799ca1e88d0b00813bb5b9a1087015b9fb5a250473b2318b58",
+    ".cache/wasm64-build/tree/src/nhlsel.c": "ce93cdb316eb18ae4ad32238076ab61cec319973a5cff049ce95289a54239ec5"
+  },
+  "limits": [
+    "Native C fixture absent; strict native default rejects unless TELEPORT_NATIVE_TESTS=0",
+    "No game/public/production selection or JS-Lua equivalence result",
+    "All142 direct entries is not every branch or every RNG callsite coverage",
+    "Controlled external world/catalogues and load_lua result; no actual special-file IO/full level generation equivalence",
+    "Existing C Lua archive hash-bound and linked both sides, not freshly rebuilt or independently proven here",
+    "Lua VM internals and userdata headers are not globally byte-compared; native selection data buffers and typed observed dependencies are compared",
+    "Dead allocation payload and post-free allocator/UAF behavior not observed",
+    "Arbitrary raw exported C caller resumption after JS throw is not claimed; finally checks use owned JS boundary",
+    "Initial allocator fixture change applied before parent review; initial old binaries unavailable; raw diagnosis and reviewed-current snapshots retained"
+  ]
+}

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {resolve,dirname,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw Error('FILES has no native reference fixture; Emscripten results cannot be labeled native.');
+if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('FILES has no native reference fixture; Emscripten results cannot be labeled native.');
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(process.env.FILES_PROBE_DIR??join(root,'.cache/files-first-pass'));
 const {callFiles,createFilesEnvironment}=await import(pathToFileURL(resolve(process.env.FILES_RUNTIME_PATH??join(root,'js/ported/files-runtime.js'))).href);
 const schema=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/files-schema.json'),'utf8')),inventory=schema;

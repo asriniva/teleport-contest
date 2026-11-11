@@ -1,6 +1,6 @@
 // TERMCAP typed memory64 transport; command algorithms and source labels live in JS.
 addToLibrary({
- $teleportTermcapServices__deps:["$lengthBytesUTF8", "$stackAlloc", "$stackRestore", "$stackSave", "$stringToUTF8", "alloc", "digit", "dupstr", "erase_tty_screen", "fflush", "free", "fwrite", "getenv", "putchar", "setclipped", "strcat", "strcmp", "strcpy", "strlen", "strncmp", "strncpy", "strstr", "teleport_capture", "teleport_termcap_address", "teleport_termcap_error_p", "teleport_termcap_error_pp", "teleport_termcap_foreign_function_pointer", "teleport_termcap_fprintf_pppiiiij", "teleport_termcap_function_pointer", "teleport_termcap_global", "teleport_termcap_literal_capacity", "teleport_termcap_literal_storage", "teleport_termcap_nh_snprintf_pipjpi", "teleport_termcap_nh_snprintf_pipjpjjj", "teleport_termcap_read", "teleport_termcap_sprintf_pp", "teleport_termcap_sprintf_ppi", "teleport_termcap_static_buffer", "teleport_termcap_tparm_pi", "teleport_termcap_write", "tgetent", "tgetflag", "tgetnum", "tgetstr", "tgoto", "tputs", "tty_curs", "tty_raw_print", "tty_utf8graphics_fixup", "tty_wait_synch"],
+ $teleportTermcapServices__deps:["$lengthBytesUTF8", "$stackAlloc", "$stackRestore", "$stackSave", "$stringToUTF8", "alloc", "digit", "dupstr", "erase_tty_screen", "fflush", "free", "fwrite", "getenv", "putchar", "setclipped", "strcat", "strcmp", "strcpy", "strlen", "strncmp", "strncpy", "strstr", "teleport_termcap_capture", "teleport_termcap_address", "teleport_termcap_error_p", "teleport_termcap_error_pp", "teleport_termcap_foreign_function_pointer", "teleport_termcap_fprintf_pppiiiij", "teleport_termcap_function_pointer", "teleport_termcap_global", "teleport_termcap_literal_capacity", "teleport_termcap_literal_storage", "teleport_termcap_nh_snprintf_pipjpi", "teleport_termcap_nh_snprintf_pipjpjjj", "teleport_termcap_read", "teleport_termcap_sprintf_pp", "teleport_termcap_sprintf_ppi", "teleport_termcap_static_buffer", "teleport_termcap_tparm_pi", "teleport_termcap_write", "tgetent", "tgetflag", "tgetnum", "tgetstr", "tgoto", "tputs", "tty_curs", "tty_raw_print", "tty_utf8graphics_fixup", "tty_wait_synch"],
  $teleportTermcapServices:function(){
   var state=Module['teleportTermcapLiterals']||={next:0,strings:new Map()};
   var pointer=v=>BigInt.asUintN(64,BigInt(v?.address??v??0)),long=v=>BigInt.asIntN(64,BigInt(v)),ulong=v=>BigInt.asUintN(64,BigInt(v));
@@ -27,7 +27,7 @@ addToLibrary({
    strncmp:(a0,a1,a2)=>_strncmp(text(a0),text(a1),ulong(a2)),
    strncpy:(a0,a1,a2)=>pointerResult(_strncpy(text(a0),text(a1),ulong(a2))),
    strstr:(a0,a1)=>pointerResult(_strstr(text(a0),text(a1))),
-   teleport_capture:(a0,a1,a2,a3)=>_teleport_capture(text(a0),(Number(a1)|0),(Number(a2)|0),(Number(a3)|0)),
+   teleport_capture:(a0,a1,a2,a3)=>_teleport_termcap_capture(text(a0),(Number(a1)|0),(Number(a2)|0),(Number(a3)|0)),
    tgetent:(a0,a1)=>_tgetent(text(a0),text(a1)),
    tgetflag:(a0)=>_tgetflag(text(a0)),
    tgetnum:(a0)=>_tgetnum(text(a0)),
