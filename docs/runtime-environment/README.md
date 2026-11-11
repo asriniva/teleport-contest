@@ -37,6 +37,7 @@ injected. C compilers and C/Wasm oracles are development-only.
 | Ordinary item generation and inventory | `enableItemInventory`: initialized/uninitialized `mksobj` plus real inventory add/no-merge/remove/reorder/stack merging/deletion-queue behavior. Three seeds, 2,988 constructors and 669 update callbacks pass 11,970 C comparisons, including full object bytes, pointer identities, roots/IDs/letters, exact RNG logs, nested callback reentry and heap growth. Explicit profile covers 442 ordinary types; 21 special types are excluded from this ordinary-only fixture and checked in the additional groups below. Exposing an entry does not imply every inventory/UI/shop branch is linked. |
 | Timer queues and species-backed items | `enableTimers` and `enableMonsterSelection`: 1,350 timer/union/object comparisons plus 9,156 species/biology/growth/difficulty/elemental/hell and special-item comparisons across three seeds. Real queue insertion/duplicates/move/split/stop/attach, sterile egg expiry, opaque uint64 bits, ID wrap and heap growth; four glob constructors; corpse/figurine/egg/statue/tin/candy constructors, nested statue contents, deletion queues and exact RNG logs. Actual source event owners are required; nonsterile hatching, other elapsed events, full monster placement and quest-specific selection remain unfinished. |
 | Containers, names and random artifacts | Six container types pass 3,894 comparisons over 1,296 constructors/3,564 contained records across initial inventory, ordinary turns and map generation. `enableItemNaming` adds existing DO_NAME/ARTIFACT functions on the same tables/heap: 11,046 comparisons over 2,760 novel/unique/weapon constructors, including 28 artifacts; complete object/extra/name bytes, existence/origin flags, timer/deletion graphs and exact RNG logs. Naming UI, divine gifts, wielded effects and world interactions remain unaccepted. |
+| Monster creation, placement and inventory | `enableMonsterCreation` and `enableMonsterInventory` connect real MAKEMON/STEED/MON/MONDATA/DOG/MINION/PRIEST/VAULT/SHKNAM plus STEAL/WORN/MUSE/DISPLAY/TELEPORT/DO_WEAR dependencies. Two suites each pass 1,299 C comparisons over 432 constructions, 18 species, eight caller flag combinations and three seeds. Full monster/extra/item/name bytes, health/alignment/birth state, map ownership, light records, normal inventory/equipment and exact RNG logs compare. All DECL images are unchanged by enabling construction. These are explicit map-generation/fixed-position component inputs; random placement/groups, visible/world UI, shape changes and complete monster behavior remain unfinished. |
 | Stdio / persistence | Binary IO, buffering, EOF/error/pushback, seek, close and output contracts; capture/restore/deletion through existing persistence policy. No host device/OS-wide POSIX claim. |
 | Lua | Existing JS VM and 83 typed C API dispatch recipes on measured memory; bytecode, callbacks/error unwinding, date/files, userdata growth probes. Full nhlua/nhlobj integration and all standard libraries are unfinished. |
 | Terminal | 445 original-C recorder-cell/capture/terminfo comparisons; existing recorder encoding preserved. Window procedures, tty input and game loop are unfinished. The inherited 6,144-byte C recorder buffer bounds captures; larger captures are not accepted by this proof. |
@@ -80,7 +81,7 @@ and the host compiler wrapper. From the candidate checkout run:
 STANDALONE_REFERENCE_ROOT=/path/to/reference /path/to/sdk/node scripts/test-standalone.mjs
 ```
 
-The gate runs source/closure checks, the original base-runtime suite, and sixteen
+The gate runs source/closure checks, the original base-runtime suite, and eighteen
 standalone suites; logs and script hashes go to `.cache/standalone-validation/`.
 It requires the existing original native allocation oracle under the candidate's
 `.cache/tu-probes/native-oracles/` (alloc-native.node, alloc-full-native-build.json,
@@ -237,6 +238,47 @@ role/race initialization, wielded effects, unpaid naming and the full naming UI
 are not accepted. Source-level constructor coverage now includes the 21 special
 types excluded from the ordinary fixture, under these explicitly listed inputs;
 this does not establish every branch or complete inventory/game integration.
+
+## Monster creation and equipment profiles
+
+Build one larger original-C group into a fresh directory:
+
+```sh
+python3 scripts/build-standalone-object-state.py --monster-creation --reference-root /path/to/reference --out .cache/standalone-monster-creation
+```
+
+`STANDALONE_MONSTER_CREATION_ORACLE` overrides the directory for both new suites.
+The C group adds actual STEED/DOG/MINION/CMD/SOUNDS/PRIEST/VAULT/QUESTPGR/STEAL/
+WORN/MUSE/TELEPORT/DO_WEAR/BOTL owners. CMD's command tables require actual
+SOUNDS data; DO_WEAR's tables require actual BOTL data. Their presence does not
+claim those complete modules are connected in JavaScript. The receipt records
+523 compiler-prototyped abort-only external function boundaries and 73 zero
+component-input globals; all reached C functions must be real owners.
+
+After the prior item/naming/species groups, enable `enableMonsterCreation(layouts)`
+and `enableMonsterInventory(layouts)`. Source header expansions and measured
+views support placement, health/alignment, births, all five monster-extra kinds,
+light attachment/removal, pickup, item selection, worn masks, extrinsics and
+unseen-name buffers. The context loader preserves shared-state accessors; native
+layout values such as fmon must never be assigned through the live list setter.
+Record views now provide address-only one-past endpoints for record arrays, as
+required by original attack-table pointer comparisons, and the oc_armcat header
+alias. No attack, equipment or naming algorithm is replaced.
+
+The fixtures explicitly initialize floor cells, valid visibility row storage
+with no visible cells, hero alignment/race inputs and dungeon inputs. They use
+18 named species, eight sex/anger/asleep/extra/no-count flag combinations, fixed
+coordinates and map-generation mode. One suite requests NO_MINVENT; the other
+keeps normal inventory generation, pickup and equipment enabled. MM_NOGRP,
+MM_NONAME and MM_NOMSG are explicit caller flags on both sides, not forced
+production defaults. Raw states include pointer identities, independently owned
+extra/name bytes, item graphs and light attachments; whole RNG/caller logs match.
+Fixture teardown unlinks the sole map/list owner before real deallocation and
+uses real discard_minvent/dobjsfree for items. Full death/migration cleanup,
+random placement/groups, shape changes, burning items, saddle attachment,
+visible or hallucinated naming/UI, divine equipment effects and full-game
+recording remain unfinished. Production isolation constructs an equipped orc
+with WebAssembly/network capabilities forbidden before import.
 
 ## Next integration milestone
 

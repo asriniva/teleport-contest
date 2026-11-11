@@ -14,7 +14,7 @@ export function enableItemNaming(environment,layouts,{legacy,views}) {
     });
     Object.assign(legacy.sizes,{short:ctypes.size('short'),arti_info:ctypes.size('struct arti_info')});
     legacy.zero_artiexist=views.record('struct arti_info',environment.allocateGlobal('zero_artiexist',ctypes.size('struct arti_info')));
-    environment.extend('artifact-properties',Object.fromEntries(['mk_artifact','exist_artifact','artifact_exists','artifact_origin'].map(name=>[name,artifact[name]])));
+    environment.extend('artifact-properties',Object.fromEntries(['mk_artifact','exist_artifact','artifact_exists','artifact_origin','artifact_light'].map(name=>[name,artifact[name]])));
     const name=Object.create(legacy);
     Object.assign(name,layouts.do_name,{
         charPointer:p=>typeof p==='string'?services.literal(p):environment.address(p),

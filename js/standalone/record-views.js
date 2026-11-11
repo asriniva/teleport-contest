@@ -6,7 +6,7 @@ export function createRecordViews(environment) {
         type=ctypes.canonical(type);p=environment.address(p);
         const array=type.match(/^(.*?)\[(\d+)\](.*)$/);
         if(array){const child=array[1]+array[3],length=Number(array[2]),stride=ctypes.size(child);return new Proxy({address:p,length},{
-            get(o,k){if(typeof k!=='string'||!/^\d+$/.test(k))return Reflect.get(o,k);const i=Number(k);if(i>=length)throw new RangeError('C array bounds');return value(child,p+i*stride);},
+            get(o,k){if(typeof k!=='string'||!/^\d+$/.test(k))return Reflect.get(o,k);const i=Number(k);if(i===length){try{ctypes.record(child);}catch{throw new RangeError('C array bounds');}return Object.freeze({address:p+i*stride});}if(i>length)throw new RangeError('C array bounds');return value(child,p+i*stride);},
             set(o,k,v){if(typeof k!=='string'||!/^\d+$/.test(k))return Reflect.set(o,k,v);const i=Number(k);if(i>=length)throw new RangeError('C array bounds');ctypes.store(child,p+i*stride,v);return true;},
         });}
         if(type.endsWith('*')){
@@ -31,7 +31,7 @@ export function createRecordViews(environment) {
             });
         }
         const aliases=definition.type==='obj'?{opoisoned:'otrapped',odiluted:'oeroded',orotten:'oeroded'}:
-            definition.type==='objclass'?{oc_skill:'oc_subtyp',a_ac:'oc_oc1'}:{};
+            definition.type==='objclass'?{oc_skill:'oc_subtyp',oc_armcat:'oc_subtyp',a_ac:'oc_oc1'}:{};
         for(const [alias,name]of Object.entries(aliases))if(name in view&&!(alias in view))Object.defineProperty(view,alias,{get:()=>view[name],set:v=>{view[name]=v;}});
         return view;
     }

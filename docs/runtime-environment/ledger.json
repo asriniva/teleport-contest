@@ -1,15 +1,15 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "cf5bc547744bd005b012efddf3a4a2a1cf4bbf7a",
+  "acceptedCheckpoint": "a8bf125fda315e16c975916a72c615c194427df8",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
     "provider-only": 2,
-    "not-connected": 90,
-    "verified-subset": 19,
-    "in-progress": 9,
-    "transport-only": 7
+    "not-connected": 79,
+    "verified-subset": 33,
+    "in-progress": 7,
+    "transport-only": 6
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -182,8 +182,9 @@
     {
       "module": "minion",
       "source": "src/minion.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "newemin/free_emin ownership only; summons/guardian/world behavior unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "iactions",
@@ -200,8 +201,9 @@
     {
       "module": "steal",
       "source": "src/steal.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "mpickobj/findgold through normal monster initial inventory; theft/unpaid/visible world paths unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "sit",
@@ -232,8 +234,9 @@
     {
       "module": "shknam",
       "source": "src/shknam.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "neweshk/free_eshk ownership only; shop generation and billing world behavior unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "rumors",
@@ -262,16 +265,18 @@
     {
       "module": "priest",
       "source": "src/priest.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "newepri/free_epri and mon_aligntyp in construction context only.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "light",
       "source": "src/light.c",
-      "status": "in-progress",
-      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. No standalone connection accepted yet.",
+      "status": "verified-subset",
+      "scope": "new_light_source/del_light_source plus prior object-light predicate, tested monster attachments; illumination/LOS/save-restore/world closure unfinished.",
       "priorStatus": "not-connected",
-      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "lock",
@@ -284,8 +289,9 @@
     {
       "module": "steed",
       "source": "src/steed.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Real place_monster and can_saddle eligibility in tested construction context; riding/saddle attachment/world cleanup unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "wizard",
@@ -328,8 +334,8 @@
       "module": "mondata",
       "source": "src/mondata.c",
       "status": "verified-subset",
-      "scope": "little_to_big and big_to_little source growth table mappings only.",
-      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
+      "scope": "Source growth mappings plus set_mon_data/attacktype/trap-learning/armor-shape helpers; full module remains partial.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "hacklib",
@@ -341,8 +347,9 @@
     {
       "module": "worn",
       "source": "src/worn.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Creation-time monster equipment, extrinsics, speed and removal paths in the explicit cohort; hero equipment and visible/world effects unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "wield",
@@ -390,8 +397,9 @@
     {
       "module": "questpgr",
       "source": "src/questpgr.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "quest_info data lookup only; pager and quest-specific species selection unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "symbols",
@@ -429,8 +437,9 @@
     {
       "module": "dog",
       "source": "src/dog.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "newedog/free_edog ownership only; pet behavior, taming and movement unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "region",
@@ -447,8 +456,9 @@
     {
       "module": "vault",
       "source": "src/vault.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "newegd/free_egd ownership only; vault guard/world behavior unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "u_init",
@@ -608,8 +618,9 @@
     {
       "module": "teleport",
       "source": "src/teleport.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "noteleport_level through normal non-hell initial item selection; movement/hell demon-court/world closure unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "mklev",
@@ -675,9 +686,9 @@
     {
       "module": "muse",
       "source": "src/muse.c",
-      "status": "transport-only",
-      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
-      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+      "status": "verified-subset",
+      "scope": "Three random initial-item selectors on real shared memory; active monster item use and world effects unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "dungeon",
@@ -691,8 +702,8 @@
       "module": "makemon",
       "source": "src/makemon.c",
       "status": "verified-subset",
-      "scope": "rndmonst/rndmonst_adj selection, alignment/temperature/elemental predicates using real dungeon difficulty; quest-specific selection and monster placement/equipment remain unconnected.",
-      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
+      "scope": "18-species construction/propagation/health/alignment/sex/extra flags, normal inventory and equipment; random placement/groups, shape changes and full world closure unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "mhitu",
@@ -719,8 +730,9 @@
     {
       "module": "do_wear",
       "source": "src/do_wear.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "hard_helmet material/category predicate only; full hero clothing and side effects unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "insight",
@@ -779,9 +791,9 @@
     {
       "module": "display",
       "source": "src/display.c",
-      "status": "in-progress",
-      "scope": "Item-generation/inventory group connection is being exercised; combined original-C acceptance pending. Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
-      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)",
+      "status": "verified-subset",
+      "scope": "Prior suppression plus real canseemon/sensemon helpers on injected zero-visibility storage; rendering and visible world closure unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md",
       "priorStatus": "transport-only",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
     },
@@ -818,8 +830,8 @@
       "module": "mon",
       "source": "src/mon.c",
       "status": "verified-subset",
-      "scope": "dealloc_mextra only.",
-      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+      "scope": "Shape-kind, deallocation/extra ownership and next-turn gear flag helpers; full movement/death/world closure unfinished.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md"
     },
     {
       "module": "pickup",

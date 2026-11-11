@@ -10,7 +10,9 @@ parser.add_argument('--item-inventory',action='store_true',help='Build the real 
 parser.add_argument('--timers',action='store_true',help='Add actual timer policies to the item/inventory reference')
 parser.add_argument('--monster-selection',action='store_true',help='Add real random species selection and biological helper policies')
 parser.add_argument('--item-naming',action='store_true',help='Expose actual artifact static state for naming/generation comparisons')
+parser.add_argument('--monster-creation',action='store_true',help='Add original monster creation/placement and companion-extra owners')
 args=parser.parse_args()
+if args.monster_creation:args.item_naming=True
 if args.item_naming:args.monster_selection=True
 if args.monster_selection:args.timers=True
 if args.timers:args.item_inventory=True
@@ -25,11 +27,13 @@ if args.item_inventory:names+=['artifact','objnam','attrib','spell','light','loc
 if args.timers:names+=['timeout','hack']
 if args.monster_selection:names+=['makemon','mondata','do','read']
 if args.item_naming:names.remove('artifact')
+if args.monster_creation:names+=['steed','dog','minion','cmd','sounds','priest','vault','questpgr','steal','worn','muse','teleport','do_wear','botl']
 probe='standalone-object-records-probe.c' if args.object_records else 'standalone-object-state-probe.c'
 if args.item_inventory:probe='standalone-item-inventory-probe.c'
 if args.timers:probe='standalone-timers-probe.c'
 if args.monster_selection:probe='standalone-special-items-probe.c'
 if args.item_naming:probe='standalone-item-naming-probe.c'
+if args.monster_creation:probe='standalone-monster-creation-probe.c'
 sources=[root/'scripts'/probe,*[tree/f'src/{name}.c' for name in names]]
 flags=['-O2','-g','-sMEMORY64=1','-sMODULARIZE=1','-sEXPORT_ES6=1','-sENVIRONMENT=node','-sALLOW_MEMORY_GROWTH=1','-sEXPORTED_RUNTIME_METHODS=HEAPU8,FS','--no-entry',
        *['-D'+d for d in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())],
@@ -45,6 +49,7 @@ if args.item_inventory:exports+=['probe_item_prepare','probe_item_create','probe
 if args.timers:exports+=['probe_timer_arg','probe_timer_global','probe_timer_op','probe_timer_layout','probe_timer_fixup']
 if args.monster_selection:exports+=['probe_species_config','probe_species_select','probe_species_biology','probe_special_dispose']
 if args.item_naming:exports+=['probe_artifact_data','nartifact_exist']
+if args.monster_creation:exports+=['probe_monster_prepare','probe_monster_create','probe_monster_dispose','probe_monster_global','probe_monster_op']
 cmd=[str(reference/'.cache/emsdk/upstream/emscripten/emcc'),*flags,'-sEXPORTED_FUNCTIONS='+json.dumps(['_'+name for name in exports]),*[str(s) for s in sources],'-o',str(out/'reference.mjs')]
 boundaries=[]
 if args.item_inventory:
@@ -66,5 +71,6 @@ if args.item_inventory:profile+=' + item generation/inventory; explicit zero com
 if args.timers:profile+=' + real TIMEOUT/HACK queue and anything transport'
 if args.monster_selection:profile+=' + real MAKEMON/MONDATA random species and biological policies'
 if args.item_naming:profile+=' + original ARTIFACT static-state observation for naming/generation'
+if args.monster_creation:profile+=' + actual MAKEMON/STEED/DOG/MINION creation and placement'
 (out/'receipt.json').write_text(json.dumps({'sourceSha256':{str(p):sha(p) for p in sorted(set(inputs))},'artifactSha256':{p.name:sha(p) for p in [out/'reference.mjs',out/'reference.wasm']},'compilerSha256':sha(reference/'.cache/emsdk/upstream/bin/clang'),'externalBoundaries':boundaries,'profile':profile+'; error/UI boundaries abort.'},indent=2)+'\n')
-print('Built original-C '+('item-naming' if args.item_naming else 'special-items' if args.monster_selection else 'timers' if args.timers else 'item-inventory' if args.item_inventory else 'object-records' if args.object_records else 'object-state')+' subsystem oracle: '+str(out))
+print('Built original-C '+('monster-creation' if args.monster_creation else 'item-naming' if args.item_naming else 'special-items' if args.monster_selection else 'timers' if args.timers else 'item-inventory' if args.item_inventory else 'object-records' if args.object_records else 'object-state')+' subsystem oracle: '+str(out))

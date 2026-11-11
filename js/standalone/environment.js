@@ -38,6 +38,8 @@ import {enableItemInventory} from './item-inventory.js';
 import {enableTimers} from './timers.js';
 import {enableMonsterSelection} from './monster-selection.js';
 import {enableItemNaming} from './item-naming.js';
+import {enableMonsterCreation} from './monster-creation.js';
+import {enableMonsterInventory} from './monster-inventory.js';
 
 export function createStandaloneEnvironment(options={}) {
     const base=createJsRuntime(options),{memory}=base;
@@ -56,7 +58,7 @@ export function createStandaloneEnvironment(options={}) {
         callComparator:(fn,a,b)=>typeof fn==='function'?fn(a,b):functions.indirect(fn,'ipp',a,b),
     });
     const modules=new Map(),owners=new Map(),globals=new Map(),states=new Map();
-    const addressAdapters=new Map();let itemInventory;
+    const addressAdapters=new Map();let itemInventory,monsterSelection,monsterCreation;
     function extend(name,namespace) {
         const entry=modules.get(name);if(!entry)throw new Error('Unknown standalone module '+name);
         const exports=Object.entries(namespace);
@@ -246,7 +248,9 @@ export function createStandaloneEnvironment(options={}) {
         enableItemInventory:layouts=>itemInventory=enableItemInventory(environment,layouts),
         enableItemNaming:layouts=>{if(!itemInventory)throw new Error('Item naming requires item inventory');return enableItemNaming(environment,layouts,itemInventory);},
         enableTimers:layouts=>enableTimers(environment,layouts),
-        enableMonsterSelection:layouts=>enableMonsterSelection(environment,layouts),
+        enableMonsterSelection:layouts=>monsterSelection=enableMonsterSelection(environment,layouts),
+        enableMonsterCreation:layouts=>{if(!monsterSelection)throw new Error('Monster creation requires species selection');return monsterCreation=enableMonsterCreation(environment,layouts,monsterSelection);},
+        enableMonsterInventory:layouts=>{if(!monsterCreation)throw new Error('Monster inventory requires monster creation');return enableMonsterInventory(environment,layouts,monsterCreation);},
         enableSerialization:layouts=>enableSerialization(environment,layouts),
         enableTerminal:(layout,options)=>enableTerminal(environment,layout,options),
         enableLua:options=>createStandaloneLua(environment,options),

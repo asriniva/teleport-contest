@@ -43,6 +43,14 @@ for(const type of [layouts.mkobj.CHEST,layouts.mkobj.ICE_BOX,layouts.mkobj.BAG_O
 const sword=env.services.mksobj(layouts.earlyarg.LONG_SWORD,1,0);
 assert.equal(env.address(env.services.mk_artifact(sword,layouts.artifact.A_NONE,99,1)),sword);
 assert.ok(env.ctypes.getField('struct obj',sword,'oartifact','char')>0);env.services.obfree(sword,0);env.services.dobjsfree();
+const creatures=env.enableMonsterCreation(layouts);env.enableMonsterInventory(layouts);
+const w=creatures.environment,Lm=layouts.makemon;
+w.gi.in_mklev=1;w.svl.level.flags.rndmongen=1;w.u.ux=40;w.u.uy=10;
+const vision=env.memory.calloc(Lm.ROWNO,Lm.COLNO),rows=env.memory.calloc(Lm.ROWNO,8);
+for(let y=0;y<Lm.ROWNO;y++)env.memory.view.setBigUint64(rows+y*8,BigInt(vision+y*Lm.COLNO),true);w.gv.viz_array=rows;
+const pm=layouts.earlyarg.PM_ORC,mon=env.services.makemon(env.requireGlobal('mons')+pm*env.ctypes.size('struct permonst'),10,10,Lm.MM_NOGRP|Lm.MM_NONAME|Lm.MM_NOMSG);
+assert.ok(mon);assert.equal(env.address(w.svl.level.monsters[10][10]),env.address(mon));
+env.services.discard_minvent(mon,0);env.services.dobjsfree();w.svl.level.monsters[10][10]=0;w.fmon=0;env.services.dealloc_monst(mon);assert.ok(!env.memory.live.has(env.address(mon)));
 const terminal=env.enableTerminal(layouts.termcap);
 env.call('termcap','nomux_clear_screen');env.call('termcap','nomux_capture_write_input_boundary');assert.equal(terminal.frames.length,1);
 const lua=env.enableLua(),L=lua.api.luaL_newstate();assert.equal(lua.api.luaL_loadstring(L,'return 21*2'),0);assert.equal(lua.api.lua_pcallk(L,0,1,0,0n,0n),0);assert.equal(lua.api.lua_tointegerx(L,-1,0),42n);lua.api.lua_close(L);
