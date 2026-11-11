@@ -1,15 +1,15 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "b012514605ac1abdb6864abfb3881bf63d112d6d",
+  "acceptedCheckpoint": "0d24a9a6bd3a66d2530a7fa4cb5b34ec91651513",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
     "provider-only": 2,
-    "not-connected": 75,
-    "verified-subset": 38,
-    "in-progress": 7,
-    "transport-only": 5
+    "not-connected": 72,
+    "verified-subset": 41,
+    "in-progress": 8,
+    "transport-only": 4
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -494,8 +494,9 @@
     {
       "module": "allmain",
       "source": "src/allmain.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Actual newgame prefix through object initialization and role selection matches original C shared state/RNG; both stop at nhl_init. Full startup and game loop are unfinished.",
+      "evidence": "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup."
     },
     {
       "module": "mthrowu",
@@ -506,8 +507,9 @@
     {
       "module": "role",
       "source": "src/role.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Source role_init and table initialization on shared globals; all13 roles/random/invalid/name suffix inputs across3 seeds, including quest gender bits and complete tables/catalogues. Interactive selection menus and full game remain unverified.",
+      "evidence": "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup."
     },
     {
       "module": "engrave",
@@ -669,9 +671,9 @@
     {
       "module": "pray",
       "source": "src/pray.c",
-      "status": "transport-only",
-      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
-      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+      "status": "verified-subset",
+      "scope": "Original align_gtitle reached by role_init with complete resulting role data compared to C. Other prayer gameplay remains unaccepted.",
+      "evidence": "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup."
     },
     {
       "module": "dothrow",
@@ -897,8 +899,9 @@
     {
       "module": "unixmain",
       "source": "sys/unix/unixmain.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Original configured get_nhuuid body called by actual newgame prefix. Platform main/entropy/terminal lifecycle remain unconnected.",
+      "evidence": "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup."
     },
     {
       "module": "options",
@@ -927,12 +930,8 @@
   ],
   "rebaseNote": "Rebased to main3296b9a; refreshed 138 policy and adapter/record/terminal metadata receipts; prior13-check regression PASS.",
   "latestWorkingTreeEvidence": {
-    "gate": "14 standalone development checks, including item-inventory",
-    "itemInventoryComparisons": 11970,
-    "constructors": 2988,
-    "callbacks": 669,
-    "ordinaryTypes": 442,
-    "pendingTypes": 21,
-    "scope": "Component profile only; all-subsystem integration remains active."
+    "gate": "22 standalone development checks PASS, including game-startup",
+    "startupComparisons": 4386,
+    "scope": "Startup prefix and role subset only; full game remains unfinished."
   }
 }

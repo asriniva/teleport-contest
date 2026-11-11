@@ -25,6 +25,7 @@ injected. C compilers and C/Wasm oracles are development-only.
 
 | Surface | Checkpoint evidence and limits |
 | --- | --- |
+| Game startup prefix and roles | `enableGameStartup` connects unchanged ROLE table packing/policy, PRAY align_gtitle, UNIXMAIN get_nhuuid and ALLMAIN newgame to the shared heap. Dedicated actual-DECL C reference passes 4,386 comparisons across three seeds, all 13 roles, random/invalid selection and name suffix parsing: complete bytes/string payloads of 21 shared globals/catalogues/tables before/after role initialization or the actual newgame prefix, and exact RNG logs. Both actual newgame owners reach the explicitly unconnected nhl_init boundary; that negative boundary check is not successful startup. Lua sandbox/dungeon generation, hero setup/inventory, UI/game loop and full-game recordings remain unfinished. |
 | Canonical ISAAC64, allocation, strutil, MD4 | Existing native-C suite: 1,294 comparisons including 6,000 draws and full states. Frozen generator unchanged; bounded rejection wrapper corrects its unusable BigInt/Number helper without replacing the generator. |
 | Rectangle | 1,190 original-C states plus memory/scopes/callback/instance/growth probes. Uses the registered RNG when present. |
 | DECL, DRAWING, OBJECTS, MONST, SYS | 152 global images and pointer aliases, full catalogue byte comparisons, source initializers, 2,304 drawing lookups and sys initialization. Allocated catalogues retain original zero-before-init behavior. |

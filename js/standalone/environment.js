@@ -41,6 +41,7 @@ import {enableItemNaming} from './item-naming.js';
 import {enableMonsterCreation} from './monster-creation.js';
 import {enableMonsterInventory} from './monster-inventory.js';
 import {enableWorldPosition} from './world-position.js';
+import {enableGameStartup} from './game-startup.js';
 
 export function createStandaloneEnvironment(options={}) {
     const base=createJsRuntime(options),{memory}=base;
@@ -253,6 +254,7 @@ export function createStandaloneEnvironment(options={}) {
         enableMonsterCreation:layouts=>{if(!monsterSelection)throw new Error('Monster creation requires species selection');return monsterCreation=enableMonsterCreation(environment,layouts,monsterSelection);},
         enableMonsterInventory:layouts=>{if(!monsterCreation)throw new Error('Monster inventory requires monster creation');return enableMonsterInventory(environment,layouts,monsterCreation);},
         enableWorldPosition:layouts=>{if(!monsterCreation)throw new Error('World positioning requires monster creation');return enableWorldPosition(environment,layouts,monsterCreation);},
+        enableGameStartup:layouts=>{if(!monsterCreation)throw new Error('Game startup requires monster services');return enableGameStartup(environment,layouts,monsterCreation);},
         enableSerialization:layouts=>enableSerialization(environment,layouts),
         enableTerminal:(layout,options)=>enableTerminal(environment,layout,options),
         enableLua:options=>createStandaloneLua(environment,options),
