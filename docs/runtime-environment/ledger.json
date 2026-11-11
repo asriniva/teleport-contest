@@ -1,18 +1,18 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "c85e7134787bed70eeeda198fae168820de640f6",
+  "acceptedCheckpoint": "337d892b1ac6a64ebdfc5088f8abf4705314de81",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
     "provider-only": 2,
-    "not-connected": 96,
-    "verified-subset": 11,
+    "not-connected": 90,
+    "verified-subset": 17,
     "in-progress": 11,
     "transport-only": 7
   },
   "fullGameAccepted": false,
-  "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 137 game-TU denominator.",
+  "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
   "modules": [
     {
       "module": "isaac64",
@@ -327,8 +327,9 @@
     {
       "module": "mondata",
       "source": "src/mondata.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "little_to_big and big_to_little source growth table mappings only.",
+      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
     },
     {
       "module": "hacklib",
@@ -633,14 +634,16 @@
     {
       "module": "do",
       "source": "src/do.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "obj_no_longer_held used for generated statue contents; crysknife billing/world owners and remaining DO functions are unaccepted.",
+      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
     },
     {
       "module": "timeout",
       "source": "src/timeout.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "Queue/attach/stop/move/split/peek, timer IDs/opaque arguments and actual sterile hatch expiry; full elapsed world callbacks remain unconnected.",
+      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
     },
     {
       "module": "potion",
@@ -686,8 +689,9 @@
     {
       "module": "makemon",
       "source": "src/makemon.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "rndmonst/rndmonst_adj selection, alignment/temperature/elemental predicates using real dungeon difficulty; quest-specific selection and monster placement/equipment remain unconnected.",
+      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
     },
     {
       "module": "mhitu",
@@ -725,8 +729,9 @@
     {
       "module": "read",
       "source": "src/read.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "assign_candy_wrapper only; reading/UI/effects remain unconnected.",
+      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
     },
     {
       "module": "apply",
@@ -738,8 +743,8 @@
       "module": "eat",
       "source": "src/eat.c",
       "status": "verified-subset",
-      "scope": "obj_nutrition and eaten_stat only.",
-      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md"
+      "scope": "obj_nutrition/eaten_stat plus set_tin_variety/tin_variety construction paths; full active eating and healthy-tin operations unaccepted.",
+      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
     },
     {
       "module": "objnam",
@@ -753,9 +758,9 @@
       "module": "mkobj",
       "source": "src/mkobj.c",
       "status": "verified-subset",
-      "scope": "21 object-record/weight/ownership/list/ID functions; generation integration currently in progress.",
+      "scope": "Object ownership/weights, ordinary constructors/core inventory dependencies, four glob and six species/food constructors; remaining special constructors/artifact and world effects unfinished.",
       "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md",
-      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial."
+      "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial. Timer 1350 and species/special-item 9156 comparisons; full module remains partial."
     },
     {
       "module": "nhlua",
@@ -797,8 +802,9 @@
     {
       "module": "hack",
       "source": "src/hack.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "obj_to_any shared-union lifetime only; full movement and world interactions remain unconnected.",
+      "evidence": "scripts/test-standalone-timers.mjs (1350) and scripts/test-standalone-monster-selection.mjs (9156); exact component limits in README.md"
     },
     {
       "module": "uhitm",

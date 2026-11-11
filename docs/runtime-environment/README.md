@@ -35,6 +35,7 @@ injected. C compilers and C/Wasm oracles are development-only.
 | Object startup and name state | `enableObjectState`: 11 unchanged O_INIT functions connected to shared DECL/OBJECTS/DRAWING, canonical RND, two actual DUNGEON ledger functions and SFBASE/SFSTRUCT/CVFS. Combined original-C subsystem passes 6,288 comparisons across four seeds, including full class bytes/ranges/totals, shuffling, description lookup, level gem probabilities, failure diagnostic, exact RNG logs/continued stream and name save/free/restore. Serialized `oc_uname` address slots are compared as null/non-null because allocator addresses differ; every other saved byte and all restored name payloads compare exactly. Discovery/inventory/menu functions remain absent. |
 | Object records, ownership and weights | `enableObjectRecords`: 21 MKOBJ functions, two EAT nutrition functions and MON's `dealloc_mextra`, plus the existing ALLOC `dupstr`, connected to shared catalogues/globals/RNG. Combined original-C suite passes 6,184 comparisons: every object type, recursive bags/containers, corpse/statue/partly eaten/glob weights, coin rounding, class/material predicates, nobj/nexthere aliases, buried-list updates, extra/mail/embedded-monster ownership, full cleanup and ID wraparound. Raw object bytes preserve pointer alias identities via address tokens; separately owned extra pointers compare null/non-null, with name/command payloads checked exactly. Source-defined target integer narrowing is retained. Full mksobj generation, merging, inventory/UI, timers/light and invalid-quantity naming remain unlinked. |
 | Ordinary item generation and inventory | `enableItemInventory`: initialized/uninitialized `mksobj` plus real inventory add/no-merge/remove/reorder/stack merging/deletion-queue behavior. Three seeds, 2,988 constructors and 669 update callbacks pass 11,970 C comparisons, including full object bytes, pointer identities, roots/IDs/letters, exact RNG logs, nested callback reentry and heap growth. Explicit profile covers 442 ordinary types; 21 artifact/container/monster/timer/novel/candy types remain pending. Exposing an entry does not imply every inventory/UI/shop branch is linked. |
+| Timer queues and species-backed items | `enableTimers` and `enableMonsterSelection`: 1,350 timer/union/object comparisons plus 9,156 species/biology/growth/difficulty/elemental/hell and special-item comparisons across three seeds. Real queue insertion/duplicates/move/split/stop/attach, sterile egg expiry, opaque uint64 bits, ID wrap and heap growth; four glob constructors; corpse/figurine/egg/statue/tin/candy constructors, nested statue contents, deletion queues and exact RNG logs. Actual source event owners are required; nonsterile hatching, other elapsed events, full monster placement and quest-specific selection remain unfinished. |
 | Stdio / persistence | Binary IO, buffering, EOF/error/pushback, seek, close and output contracts; capture/restore/deletion through existing persistence policy. No host device/OS-wide POSIX claim. |
 | Lua | Existing JS VM and 83 typed C API dispatch recipes on measured memory; bytecode, callbacks/error unwinding, date/files, userdata growth probes. Full nhlua/nhlobj integration and all standard libraries are unfinished. |
 | Terminal | 445 original-C recorder-cell/capture/terminfo comparisons; existing recorder encoding preserved. Window procedures, tty input and game loop are unfinished. The inherited 6,144-byte C recorder buffer bounds captures; larger captures are not accepted by this proof. |
@@ -78,7 +79,7 @@ and the host compiler wrapper. From the candidate checkout run:
 STANDALONE_REFERENCE_ROOT=/path/to/reference /path/to/sdk/node scripts/test-standalone.mjs
 ```
 
-The gate runs source/closure checks, the original base-runtime suite, and twelve
+The gate runs source/closure checks, the original base-runtime suite, and fourteen
 standalone suites; logs and script hashes go to `.cache/standalone-validation/`.
 It requires the existing original native allocation oracle under the candidate's
 `.cache/tu-probes/native-oracles/` (alloc-native.node, alloc-full-native-build.json,
@@ -182,6 +183,37 @@ The original inventory update routine decides when to call the supplied update
 callback and how to restore price-suppression state. Full menus/input/window
 rendering, unpaid shop paths, special-item constructors and all active eating/
 reading/timer/artifact side effects are additional groups, not accepted here.
+
+## Timer and species-backed item profiles
+
+Build two additional original-C references into fresh directories:
+
+```sh
+python3 scripts/build-standalone-object-state.py --timers --reference-root /path/to/reference --out .cache/standalone-timers
+python3 scripts/build-standalone-object-state.py --monster-selection --reference-root /path/to/reference --out .cache/standalone-special-items
+```
+
+`STANDALONE_TIMERS_ORACLE` and `STANDALONE_SPECIAL_ITEMS_ORACLE` override
+those directories. The first adds original TIMEOUT/HACK to the prior group;
+the second also adds MAKEMON/MONDATA/DO/READ. Their receipts list 332/409
+abort-only external function boundaries and 62/67 zero component-input globals,
+respectively. These are explicitly incomplete C component executables.
+
+Enable `enableTimers(layouts)` after the item/inventory group. The source
+callback table receives signature-checked function IDs which resolve actual
+translated event owners on invocation. No successful event substitutes are
+installed. `enableMonsterSelection(layouts)` then adds real random species,
+biology/growth, tin preparation, candy-wrapper and object-held-state functions.
+Tests inject the same valid dungeon inputs on each side; the environment does
+not synthesize a dungeon map or substitute a species-selection algorithm.
+Timer argument unions preserve all 64 bits, including values outside the JS
+safe integer range. Record views retain pointer identity and named header
+aliases after memory growth. Four glob constructors and six species-backed/
+food constructors are tested; novel/unique/artifact and container generation
+as complete surfaces remain pending. Elapsed world events, full eating/reading,
+quest selection, monster placement/equipment and full-game recording remain
+unaccepted. The isolation gate executes the new groups with Wasm and network
+globals forbidden before importing the production entry point.
 
 ## Next integration milestone
 

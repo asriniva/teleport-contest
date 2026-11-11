@@ -18,6 +18,7 @@ scratch=root/'.cache/standalone-records'
 scratch.mkdir(parents=True,exist_ok=True)
 source=scratch/'probe.c'
 source.write_text('''#include "hack.h"
+#include "timeout.h"
 #include "region.h"
 #include "lobject.h"
 #include "lstate.h"

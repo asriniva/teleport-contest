@@ -27,6 +27,15 @@ env.call('mkobj','dealloc_obj_real',item);assert.ok(!env.memory.live.has(item));
 env.services.svc.context.ident=2;env.enableItemInventory(layouts);
 const generated=env.call('mkobj','mksobj',layouts.o_init.POT_HEALING,1,0);
 assert.equal(env.call('invent','addinv',generated),generated);env.call('invent','freeinv',generated);env.call('mkobj','dealloc_obj_real',generated);
+env.enableTimers(layouts);const selection=env.enableMonsterSelection(layouts),world=selection.environment;
+// Explicit valid component input; full dungeon startup is a later group.
+env.ctypes.setField('struct instance_globals_saved_n',env.requireGlobal('svn'),'n_dgns','int',3);
+world.svd.dungeon_topology.d_quest_dnum=1;world.svd.dungeon_topology.d_astral_level.dnum=2;
+for(let i=0;i<3;i++){world.svd.dungeons[i].num_dunlevs=30;world.svd.dungeons[i].entry_lev=1;world.svd.dungeons[i].depth_start=1;}
+world.u.ulevel=10;world.u.uz.dnum=0;world.u.uz.dlevel=5;
+for(const type of [layouts.mkobj.GLOB_OF_GRAY_OOZE,layouts.mkobj.CORPSE,layouts.mkobj.EGG,layouts.mkobj.FIGURINE,layouts.mkobj.STATUE,layouts.mkobj.TIN,layouts.mkobj.CANDY_BAR]){
+ const p=env.services.mksobj(type,1,0);assert.ok(p);env.services.obj_stop_timers(p);env.services.obfree(p,0);env.services.dobjsfree();assert.ok(!env.memory.live.has(p));
+}
 const terminal=env.enableTerminal(layouts.termcap);
 env.call('termcap','nomux_clear_screen');env.call('termcap','nomux_capture_write_input_boundary');assert.equal(terminal.frames.length,1);
 const lua=env.enableLua(),L=lua.api.luaL_newstate();assert.equal(lua.api.luaL_loadstring(L,'return 21*2'),0);assert.equal(lua.api.lua_pcallk(L,0,1,0,0n,0n),0);assert.equal(lua.api.lua_tointegerx(L,-1,0),42n);lua.api.lua_close(L);

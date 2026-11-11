@@ -35,6 +35,8 @@ import {enableTerminal} from './terminal.js';
 import {enableObjectState} from './object-state.js';
 import {enableObjectRecords} from './object-records.js';
 import {enableItemInventory} from './item-inventory.js';
+import {enableTimers} from './timers.js';
+import {enableMonsterSelection} from './monster-selection.js';
 
 export function createStandaloneEnvironment(options={}) {
     const base=createJsRuntime(options),{memory}=base;
@@ -241,6 +243,8 @@ export function createStandaloneEnvironment(options={}) {
         enableObjectState:layouts=>enableObjectState(environment,layouts),
         enableObjectRecords:layouts=>enableObjectRecords(environment,layouts),
         enableItemInventory:layouts=>enableItemInventory(environment,layouts),
+        enableTimers:layouts=>enableTimers(environment,layouts),
+        enableMonsterSelection:layouts=>enableMonsterSelection(environment,layouts),
         enableSerialization:layouts=>enableSerialization(environment,layouts),
         enableTerminal:(layout,options)=>enableTerminal(environment,layout,options),
         enableLua:options=>createStandaloneLua(environment,options),

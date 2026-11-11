@@ -11,7 +11,7 @@ export function createRecordViews(environment) {
         });}
         if(type.endsWith('*')){
             const target=type.slice(0,-1).trim(),ptr=ctypes.load(type,p);
-            try{ctypes.record(target);}catch{return Number(ptr);}
+            try{ctypes.record(target);}catch{return ptr<=BigInt(Number.MAX_SAFE_INTEGER)?Number(ptr):ptr;}
             return record(target,ptr);
         }
         try{ctypes.record(type);}catch{return ctypes.load(type,p);}
@@ -22,6 +22,7 @@ export function createRecordViews(environment) {
         const definition=ctypes.record(type),key=definition.type+':'+p;
         if(cache.has(key))return cache.get(key);
         memory.bounds(p,definition.size);const view={address:p};cache.set(key,view);
+        Object.defineProperty(view,Symbol.toPrimitive,{value:()=>p});
         for(const [name,field]of Object.entries(definition.fields)){
             const scalar=field.ctype.replace(new RegExp('\\s+'+name+'$'),'');
             Object.defineProperty(view,name,{enumerable:true,
@@ -29,6 +30,9 @@ export function createRecordViews(environment) {
                 set:v=>{if(typeof v==='string'&&scalar.includes('*'))v=environment.services.literal(v);if(field.record)memory.memmove(p+field.offset,environment.address(v),ctypes.record(field.record).size);else ctypes.setField(type,p,name,scalar,v);},
             });
         }
+        const aliases=definition.type==='obj'?{opoisoned:'otrapped',odiluted:'oeroded',orotten:'oeroded'}:
+            definition.type==='objclass'?{oc_skill:'oc_subtyp',a_ac:'oc_oc1'}:{};
+        for(const [alias,name]of Object.entries(aliases))if(name in view&&!(alias in view))Object.defineProperty(view,alias,{get:()=>view[name],set:v=>{view[name]=v;}});
         return view;
     }
     return {record,value,array:(type,p,length)=>value(type+'['+length+']',p)};
