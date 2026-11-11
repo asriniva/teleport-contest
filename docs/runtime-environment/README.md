@@ -467,3 +467,28 @@ The test excludes uninitialized window padding/blanked/menu_ch and text-buffer
 tails, and retains the documented controlled terminal scratch inputs. Actual
 status rendering, parsing, messages, broader sound and full recordings remain
 unfinished. The expanded32-check regression gate passed. A separate fixture runs actual window/status and first-level startup to the room-entry boundary with Wasm/network capabilities forbidden.
+
+
+`enableMovement(layouts)` connects the unchanged HACK adapter to shared typed
+memory, compiler-derived callback identities and its actual source-private weight
+record. It reuses the level provider's five-byte in_rooms buffer (or owns that
+same named buffer when enabled first), preserving its current image while
+installing the remaining once-per-module source data. Public symbols already
+owned elsewhere keep their owners; private callbacks remain source scoped.
+
+```sh
+python3 scripts/build-standalone-movement-startup.py --reference-root /path/to/reference --out .cache/standalone-movement-startup-v2
+node scripts/test-standalone-movement-startup.mjs
+```
+
+The separate reference includes original hack.c alone for observations, exports
+public functions and an input/observation helper for private move_update, and
+retains every original policy body. PASS42,170 comparisons include the prior
+42,005 status/window cohort plus room membership/filtering across ordinary/shop
+and SHARED/SHARED_PLUS edge cells, all seven room/shop bookkeeping buffers,
+new-level clearing and ordinary room entry, temporary union conversion and
+rounded division. This accepts those reached paths, not all functions exposed
+by the HACK adapter. Special-room greetings/shops, travel/movement/combat and
+rendering still need integrated verification. Actual newgame with live windows
+now reaches DOG makedog. Full-game and recording acceptance remain outstanding;
+the documented native terminal scratch/undefined-field limits still apply. Expanded33-check regression gate PASS; a separate forbidden-capability fixture reaches the makedog boundary through real level/room startup.

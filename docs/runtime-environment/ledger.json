@@ -1,7 +1,7 @@
 {
   "registryCount": 138,
   "registryBaselineCommit": "3296b9a3702002e05ce119cd2c865666e2f625fc",
-  "acceptedCheckpoint": "17a88e25a5dee24fda855f48098162e721a471c7",
+  "acceptedCheckpoint": "14674301966fde0c9885a2318367de0bf5e72baa",
   "counts": {
     "canonical-dependency": 1,
     "verified-component": 10,
@@ -511,7 +511,7 @@
       "module": "allmain",
       "source": "src/allmain.c",
       "status": "in-progress",
-      "scope": "Actual newgame finishes mklev and reaches u_on_upstairs/u_on_newpos, stopping at original unset cliparound callback. Real window initialization, hero inventory/skills, remaining startup, loop and recordings remain unfinished. Original init_sound_disp_gamewindows runs before newgame, matching Unix main order and creating actual message/status/map/inventory windows. Newgame with live windows reaches unconnected HACK check_special_room after first-level generation; full main loop remains unfinished.",
+      "scope": "Actual newgame finishes mklev and reaches u_on_upstairs/u_on_newpos, stopping at original unset cliparound callback. Real window initialization, hero inventory/skills, remaining startup, loop and recordings remain unfinished. Original init_sound_disp_gamewindows runs before newgame, matching Unix main order and creating actual message/status/map/inventory windows. Newgame with live windows reaches unconnected HACK check_special_room after first-level generation; full main loop remains unfinished. With room-entry handling connected, the actual JS newgame prefix next reaches unconnected DOG makedog; completed game startup is not yet accepted.",
       "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted. scripts/test-standalone-status-startup.mjs:42005 C comparisons including40598 earlier banner/options checks; controlled terminal scratch and source-defined-field limits are documented in README.",
       "priorEvidence": [
         "scripts/test-standalone-game-startup.mjs:4386 original-C state/string/RNG comparisons; actual startup boundary is nhl_init, not full startup.",
@@ -862,8 +862,8 @@
       "module": "hack",
       "source": "src/hack.c",
       "status": "verified-subset",
-      "scope": "obj_to_any plus may_passwall on measured wall flags; movement/world closure unfinished. Original invocation_pos/in_rooms now support generated terrain using measured indexed rm views and the source five-byte static buffer.",
-      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md; scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
+      "scope": "obj_to_any plus may_passwall on measured wall flags; movement/world closure unfinished. Original invocation_pos/in_rooms now support generated terrain using measured indexed rm views and the source five-byte static buffer. The full unchanged HACK adapter now has shared typed storage and scoped/canonical callbacks. Reached source room membership/move_update/check_special_room paths are verified over ordinary/shop/shared-edge bookkeeping and new-level clearing; union conversion and rounded division match C. Special-room side effects, movement/travel/combat and full rendering remain unfinished.",
+      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md; scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted. scripts/test-standalone-movement-startup.mjs:42170 C comparisons including42005 earlier status/window checks."
     },
     {
       "module": "uhitm",
