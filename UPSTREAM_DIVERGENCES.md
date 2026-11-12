@@ -1,5 +1,23 @@
 # Upstream divergence register
 
+Natural shop transaction verification (2026-11-12): a normal seed7 Tourist
+travels from D1 to Ballingeary's D2 bookstore. Five literal pickup/payment/resale
+paths, real unpaid save and eight fresh C/JS consumers pass147 checks/14 cases.
+Item99 gains a one-item bill for178gold; payment changes hero gold690→512 and
+clears unpaid ownership/billing. Declining resale retains player ownership on
+the floor; accepting transfers the item to the shop for50gold (hero562). Both
+fresh unpaid restores and restored payment reproduce actual item/bill identities,
+prices, quantities, ownership, zero credit/debt, complete world graphs, recordings,
+input snapshots and full core/display RNG states/logs. No wishes, setup calls or
+game/RNG/input-depth writes. The read-only original-C author reproduces the exact
+104-key purchase route. See shop-main-validation.json.
+
+Production sources remain d9554ab, with all743 scored inputs identical to its
+strict44/44 checkpoint; no new public replay invocation is claimed. The optional
+shop-transactions job extends the plan to29 jobs. The new full29-job regression
+and natural complete-game victory remain unverified. Raw archives use gzip to
+preserve full data while avoiding disk exhaustion. No policy or frozen changes.
+
 Natural Mines progression verification (2026-11-12): the normal seed3 Samurai
 reaches D2/D3, enters The Gnomish Mines and descends through its first three levels
 using frozen literal MAIN keys. Five ordinary progression/return/revisit cases,

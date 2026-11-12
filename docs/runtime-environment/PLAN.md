@@ -1,5 +1,7 @@
 # Extend the JavaScript C environment
 
+Natural shop transactions (2026-11-12): [fourteen ordinary transaction/save cases](shop-main-validation.json) pass147 original-C checks, including identity-bound unpaid bills, cash payment, both resale outcomes and eight fresh cross-fed restores. All743 scored inputs still equal d9554ab and its strict44/44 proof. The optional `shop-transactions` job extends the plan to29 jobs; a combined29-job run and natural ordinary complete-game victory remain unverified.
+
 Natural Mines progression (2026-11-12): [ten ordinary progression/save cases](mines-main-validation.json) pass61 original-C checks, including the first three Mines levels, branch return/revisit and four fresh restored consumers with level travel. All743 scored inputs remain equal to d9554ab and its strict44/44 proof. The optional `mines-progression` job extends the plan to28 jobs; a combined28-job run and natural ordinary complete-game victory remain unverified.
 
 Shared window-header follow-up (2026-11-12): [four ordinary status-editor paths](window-headers-native-evidence.json) pass37 original-C checks and [44/44 strict public recordings](window-headers-public-recorder-validation.json) pass on the same final source snapshot. [Qualification results](window-headers-qualification-validation.json) preserve prior cohorts. Eight aliases reuse the existing window owner; no translated policy or frozen dependency changes. The optional `status-editor` job extends the plan to27 jobs; a combined27-job run and natural ordinary complete-game victory remain unverified.

@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "profile": {
+    "seed": 7,
+    "timezone": "UTC",
+    "options": "OPTIONS=!news,autopickup\n",
+    "argv": [
+      "-u",
+      "Ada-male-neutral",
+      "-p",
+      "Tourist",
+      "-r",
+      "human"
+    ]
+  },
+  "item": {
+    "otyp": 329,
+    "inventoryLetter": "n",
+    "price": 178,
+    "id": "obj:99",
+    "salePrice": 50
+  },
+  "cases": [
+    {
+      "name": "before-pickup",
+      "keys": "  nllkkkkhkhhkkkhhkkklllllkklllkk> hhhhkhhhhhkkhhhhhhhhkhhhhjjjjhjh\u0004h\u0004hhhhhhhkkkkkkkhkkhhhkkhhkkkk",
+      "expected": {
+        "gold": 690,
+        "location": "floor",
+        "unpaid": 0,
+        "noCharge": 0,
+        "bill": []
+      }
+    },
+    {
+      "name": "unpaid-item",
+      "keys": "  nllkkkkhkhhkkkhhkkklllllkklllkk> hhhhkhhhhhkkhhhhhhhhkhhhhjjjjhjh\u0004h\u0004hhhhhhhkkkkkkkhkkhhhkkhhkkkk, ",
+      "expected": {
+        "gold": 690,
+        "location": "inventory",
+        "unpaid": 1,
+        "noCharge": 0,
+        "bill": [
+          {
+            "id": 99,
+            "price": 178,
+            "quantity": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "paid-item",
+      "keys": "  nllkkkkhkhhkkkhhkkklllllkklllkk> hhhhkhhhhhkkhhhhhhhhkhhhhjjjjhjh\u0004h\u0004hhhhhhhkkkkkkkhkkhhhkkhhkkkk, pa\n ",
+      "expected": {
+        "gold": 512,
+        "location": "inventory",
+        "unpaid": 0,
+        "noCharge": 0,
+        "bill": []
+      },
+      "message": "You bought a scroll labeled ANDOVA BEGARIN for 178 gold pieces."
+    },
+    {
+      "name": "decline-sale",
+      "keys": "  nllkkkkhkhhkkkhhkkklllllkklllkk> hhhhkhhhhhkkhhhhhhhhkhhhhjjjjhjh\u0004h\u0004hhhhhhhkkkkkkkhkkhhhkkhhkkkk, pa\n dn  ",
+      "expected": {
+        "gold": 512,
+        "location": "floor",
+        "unpaid": 0,
+        "noCharge": 1,
+        "bill": []
+      }
+    },
+    {
+      "name": "accept-sale",
+      "keys": "  nllkkkkhkhhkkkhhkkklllllkklllkk> hhhhkhhhhhkkhhhhhhhhkhhhhjjjjhjh\u0004h\u0004hhhhhhhkkkkkkkhkkhhhkkhhkkkk, pa\n dn y",
+      "expected": {
+        "gold": 562,
+        "location": "floor",
+        "unpaid": 0,
+        "noCharge": 0,
+        "bill": []
+      },
+      "message": "You sold a scroll labeled ANDOVA BEGARIN for 50 gold pieces."
+    }
+  ],
+  "saveKeys": "  nllkkkkhkhhkkkhhkkklllllkklllkk> hhhhkhhhhhkkhhhhhhhhkhhhhjjjjhjh\u0004h\u0004hhhhhhhkkkkkkkhkkhhhkkhhkkkk, Sy",
+  "restoreKeys": " pa\n ",
+  "shop": {
+    "merchantId": "mon:88",
+    "room": 3,
+    "position": [
+      10,
+      2
+    ],
+    "dnum": 0,
+    "dlevel": 2
+  },
+  "restoreGroups": [
+    {
+      "name": "unpaid",
+      "keys": " ",
+      "expected": {
+        "gold": 690,
+        "location": "inventory",
+        "unpaid": 1,
+        "noCharge": 0,
+        "bill": [
+          {
+            "id": 99,
+            "price": 178,
+            "quantity": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "pay",
+      "keys": " pa\n ",
+      "expected": {
+        "gold": 512,
+        "location": "inventory",
+        "unpaid": 0,
+        "noCharge": 0,
+        "bill": []
+      },
+      "message": "You bought a scroll labeled ANDOVA BEGARIN for 178 gold pieces."
+    }
+  ]
+}
