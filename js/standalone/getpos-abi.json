@@ -1,4 +1,10 @@
 {
+  "qsortDispatch": {
+    "target": "nh_deterministic_qsort",
+    "wrapperSha256": "9d87abbf4b24a930ab21829838385495c9fbbee5df2fbb190c3e747e5bbba283",
+    "nativeComparator": "teleport_getpos_cmp_coord_distu",
+    "llvmCall": "call void @nh_deterministic_qsort"
+  },
   "layout": {
     "GLYPH_CMAP_MAIN_OFF": 3930,
     "GLYPH_MON_MALE_OFF": 0,
@@ -393,8 +399,8 @@
     "getpos": "int (coord *, boolean, const char *)"
   },
   "sourceSha256": {
-    "scripts/export-standalone-getpos-abi.py": "76a60b5d078a9d51e7de1c01bd8035dd3c08df1e7f6f495ee0167696587721e3",
-    "js/standalone/getpos.js": "150c61f7c24532daa13a33d3ea9fc54144288d0eabc8f6bc9a8a56d47c68627e",
+    "scripts/export-standalone-getpos-abi.py": "6b757f939aed997c5e75b6cb924a71a7a2555e1538174495689f46d8ef513750",
+    "js/standalone/getpos.js": "d97fa803e64ab409097ed83ef1bfab015b8557110057137022737533ed69192e",
     "js/standalone/getpos-header-functions.js": "50686e175161f35d0bee66a466e1410c72d673b776f4d208805ce44a73665007",
     "scripts/tu-getpos-layout.h": "8c37016cd6dd0a002dbf988debd395a86d31102fb7adb1c69e8ba047ed1357bb",
     "nethack-c/wasm/tu-fragments/getpos-support.inc": "8f4999644f77b7fdd24ed790c0dbf3bd6e59dcdb86a34fac5a35fe40311827a1",

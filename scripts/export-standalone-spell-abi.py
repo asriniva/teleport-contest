@@ -12,6 +12,13 @@ with tempfile.TemporaryDirectory(prefix='standalone-spell-')as scratch:
  if 'size'in layout and 'size'not in measured:measured['size']=measured['spellSize']
  assert set(measured)==set(layout) and all(v==(int(layout[k])&((1<<64)-1))for k,v in measured.items()),repr({'missing':set(layout)-set(measured),'extra':set(measured)-set(layout),'different':[(k,v,layout.get(k))for k,v in measured.items()if v!=(int(layout.get(k,0))&((1<<64)-1))]})
  deps=subprocess.check_output([str(clang),*flags,'-M',str(p)],text=True);headers=[Path(v).resolve()for v in shlex.split(deps.split(':',1)[1].replace('\\\n',''))if Path(v).resolve().is_relative_to(ref)]
+ wrapper=re.search(r'void teleport_spell_qsort\([^\n]+',support.read_text())[0]
+ p.write_text('#include "hack.h"\n#include <stdlib.h>\nextern int teleport_spell_compare(const void*,const void*);\n'+wrapper+'\n')
+ sortIR=subprocess.check_output([str(clang),*flags,'-S','-emit-llvm','-O0','-o','-',str(p)],text=True)
+ functionIR=re.search(r'define[^\n]*@teleport_spell_qsort\([^{]+{(.*?)^}',sortIR,re.S|re.M)[1]
+ targets=re.findall(r'call void @(\w+)\(',functionIR)
+ assert targets==['nh_deterministic_qsort'],('Review configured SPELL sorter',targets)
+ qsortDispatch={'target':targets[0],'wrapperSha256':hashlib.sha256(wrapper.encode()).hexdigest(),'nativeComparator':'teleport_spell_compare','llvmCall':'call void @nh_deterministic_qsort'}
 native=support.read_text();lib=library.read_text();public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions']
 globals=re.findall(r'case \d+:return &?(\w+);',native.split('teleport_spell_global',1)[1].split('void *teleport_spell_equipment',1)[0]);assert len(globals)==26
 equipment=re.findall(r'case \d+:return (\w+);',native.split('teleport_spell_equipment',1)[1].split('unsigned teleport_spell_monster_bit',1)[0]);assert len(equipment)==8
@@ -38,5 +45,5 @@ names=re.findall(r'^export function (\w+)',(root/'js/ported/spell.js').read_text
 ported=(root/'js/ported/spell.js').read_text();sites=re.findall(r'C\.Snprintf\([^\n]+,\s*(\d+),\s*"(\w+)"\);',ported);assert len(sites)==1
 line,caller=sites[0];assert 'Snprintf(' in source.read_text().splitlines()[int(line)-1] and re.search(r'\b'+caller+r'\(',source.read_text())
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();inputs=[Path(__file__).resolve(),root/'js/standalone/spell.js',header,support,library,root/'js/ported/spell.js',root/'js/ported/spell-runtime.js',root/'js/wasm/tu-layouts.json',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'nethack-c/wasm/compile-defines.json']
-result={'snprintfSite':{'line':int(line),'function':caller},'layout':layout,'globals':globals,'equipment':equipment,'bits':bits,'heroBits':hero,'callbacks':callbacks,'calls':calls,'formats':formats,'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[source]))}}
+result={'qsortDispatch':qsortDispatch,'snprintfSite':{'line':int(line),'function':caller},'layout':layout,'globals':globals,'equipment':equipment,'bits':bits,'heroBits':hero,'callbacks':callbacks,'calls':calls,'formats':formats,'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[source]))}}
 (root/'js/standalone/spell-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original SPELL header, globals, callbacks, fields and native format/call prototypes.')

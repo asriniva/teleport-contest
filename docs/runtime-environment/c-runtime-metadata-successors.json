@@ -1,6 +1,6 @@
 {
   "baselineCommit": "c0740becc16e413e0eab9bc55747381841faf80b",
-  "scope": "Exact later declaration successors after the historical cleanup. Original baseline recipes/package bytes/output receipt are still reproduced. Every historical measured value and original native-header pin remains equal; only precisely enumerated additive APPLY callback ownership and WEAPON window descriptions are qualified. Current source/header checks and behavioral evidence remain separate gates. User-dirty LIGHT metadata has no qualification here. No policy or frozen baseline is refreshed.",
+  "scope": "Exact later declaration successors after the historical cleanup. Original baseline recipes/package bytes/output receipt are still reproduced. Every historical measured value and original native-header pin remains equal; only precisely enumerated additive APPLY callback ownership and WEAPON window/y_n macro descriptions are qualified. Current source/header checks and behavioral evidence remain separate gates. User-dirty LIGHT metadata has no qualification here. No policy or frozen baseline is refreshed.",
   "files": {
     "js/standalone/apply-abi.json": {
       "file": "js/standalone/apply-abi.json",
@@ -42,16 +42,17 @@
     "js/standalone/equipment-abi.json": {
       "file": "js/standalone/equipment-abi.json",
       "beforeSha256": "b7f78feb6a02328d6c1d91e86e87bd68e950e74ddd4164b738276e6fb88b6bde",
-      "afterSha256": "abef18241d80c28ba81ba2c40d4320075ebddb631f6604da78a4f48fddfd12f6",
+      "afterSha256": "5b2d49094adaba5cc51307745d52205084ae10fd4aba5cae07d4c7afcf936057",
       "historicalMeasuredDeclarationsPreserved": true,
       "addedTopLevelKeys": [],
-      "reason": "Add only four measured WEAPON window-proc macro descriptions and bind existing WIELD/WEAPON native transport; all historical globals/equipment maps remain exact.",
-      "verification": ".cache/weapon-menu/paired-evidence.json: actual MAIN Samurai #enhance16checks/786pins,17keys18frames,strict liveworld/dualISAAC/rawTTY; scripts/test-standalone-public-menu-prefixes.mjs OPTIONS-enhance case also accepted.",
       "exactNestedAdditions": {
         "weapon": [
-          "windows (four measured native window-proc field/signature pairs)"
+          "windows (four measured native field/signature pairs)",
+          "y_n (exact configured hack.h macro: yn_function(query,ynchars,110,TRUE))"
         ]
-      }
+      },
+      "reason": "Add only four measured WEAPON window-proc descriptions and exact native y_n macro descriptor; historical globals/equipment maps remain exact, with current native carrier/text source bindings.",
+      "verification": ".cache/weapon-menu/paired-evidence.json:16/786 actual MAIN #enhance comparisons; scripts/test-standalone-weapon-enhance-prefix.mjs and .cache/weapon-enhance-prefix/evidence.json:108 checks,631 literal keys/641frames with real confirmation y, strict liveworld/dualISAAC/rawTTY; configured native hack.h macro exact target/ynchars/default110/logging1."
     },
     "js/standalone/insight-abi.json": {
       "file": "js/standalone/insight-abi.json",
@@ -156,6 +157,28 @@
       "addedTopLevelKeys": [],
       "reason": "Refresh only the FILES owner source pin after actual SDK opendir/readdir/closedir registration before its unchanged original factory; all historical FILES descriptors/private records/callback maps/header pins stay exact.",
       "verification": "scripts/export-standalone-files-abi.py original Clang remeasurement; scripts/test-standalone-sdk-directory.mjs591 originalSDK comparisons; affected actual public startup reaches nameprompt with zero forbidden attempts. Raw DEC charset-init stdout remains separately unaccepted."
+    },
+    "js/standalone/getpos-abi.json": {
+      "file": "js/standalone/getpos-abi.json",
+      "beforeSha256": "f3c4b05e412dec3dce0dd6a116868f9f87e7ba4e031859363639f2af927bee0d",
+      "afterSha256": "c5517fdb62778072d90fe51d58c83da72e8446ef8e1136f364316b2b44d5d04a",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [
+        "qsortDispatch"
+      ],
+      "reason": "Add only configured native qsortDispatch descriptor and current provider/source bindings; preserve every original GETPOS layout/global/callback/caller/header measurement. Original GETPOS distance comparator and stable HACKLIB policies remain unchanged.",
+      "verification": "scripts/export-standalone-getpos-abi.py configured CPP/LLVM proves native helper target nh_deterministic_qsort; .cache/getpos-qsort-leaf-v1/evidence.json:216 native signed-coordinate/tie-order comparisons; .cache/getpos-sorting-main/evidence.json:10 literal source MAIN travel/target comparisons; existing regression20 comparisons. Other target/UI variants remain unaccepted."
+    },
+    "js/standalone/spell-abi.json": {
+      "file": "js/standalone/spell-abi.json",
+      "beforeSha256": "87c6b54d96d866c3d05f1b3b7165fe2e9eeaed3cedf7f07479b7dbb99ad5014d",
+      "afterSha256": "c33e523de38d821ae8f57a697a7d898067ffb8edf72813bc095cdf7a6f30feb9",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [
+        "qsortDispatch"
+      ],
+      "reason": "Add only configured native qsortDispatch descriptor and current provider/source bindings; preserve every original SPELL layout/global/packed field/callback/format/header measurement. The original stable HACKLIB wrapper and SPELL comparator remain source owners.",
+      "verification": "scripts/export-standalone-spell-abi.py configured CPP/LLVM proves native teleport_spell_qsort calls nh_deterministic_qsort; .cache/spell-sorting/evidence.json:9 actual-C literal MAIN alphabetical-menu comparisons; existing SPELL regression19 comparisons. No unsupported spell branch is accepted by this metadata qualification."
     }
   }
 }

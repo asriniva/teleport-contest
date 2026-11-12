@@ -11,6 +11,13 @@ with tempfile.TemporaryDirectory(prefix='standalone-getpos-')as scratch:
  if 'size'in layout and 'size'not in measured:measured['size']=measured['coordStructSize']
  assert set(measured)==set(layout) and all(v==(int(layout[k])&((1<<64)-1))for k,v in measured.items()),repr({'missing':set(layout)-set(measured),'extra':set(measured)-set(layout),'different':[(k,v,layout.get(k))for k,v in measured.items()if v!=(int(layout.get(k,0))&((1<<64)-1))]})
  deps=subprocess.check_output([str(clang),*flags,'-M',str(p)],text=True);headers=[Path(v).resolve()for v in shlex.split(deps.split(':',1)[1].replace('\\\n',''))if Path(v).resolve().is_relative_to(ref)]
+ wrapper=re.search(r'void teleport_getpos_qsort\([^\n]+',support.read_text())[0]
+ p.write_text('#include "hack.h"\n#include <stdlib.h>\nextern int teleport_getpos_cmp_coord_distu(const void*,const void*);\n'+wrapper+'\n')
+ sortIR=subprocess.check_output([str(clang),*flags,'-S','-emit-llvm','-O0','-o','-',str(p)],text=True)
+ functionIR=re.search(r'define[^\n]*@teleport_getpos_qsort\([^{]+{(.*?)^}',sortIR,re.S|re.M)[1]
+ targets=re.findall(r'call void @(\w+)\(',functionIR)
+ assert targets==['nh_deterministic_qsort'],('Review configured GETPOS sorter',targets)
+ qsortDispatch={'target':targets[0],'wrapperSha256':hashlib.sha256(wrapper.encode()).hexdigest(),'nativeComparator':'teleport_getpos_cmp_coord_distu','llvmCall':'call void @nh_deterministic_qsort'}
 headerNames=['glyph_is_cmap','glyph_is_monster','glyph_is_object','glyph_is_nothing','glyph_is_unexplored','is_cmap_room','is_cmap_furniture','is_cmap_wall','is_cmap_corr','is_cmap_water','is_cmap_lava','is_cmap_door','is_cmap_drawbridge','is_cmap_trap','is_cmap_engraving']
 with tempfile.TemporaryDirectory(prefix='getpos-header-')as scratch:
  p=Path(scratch)/'probe.c';p.write_text('#include "hack.h"\n'+'\n'.join('int header_'+str(i)+'(int glyph){return '+n+'(glyph);}'for i,n in enumerate(headerNames))+'\nint header_mon(int n,int gender){return monnum_to_glyph(n,gender); }\nint header_obj(int n){return objnum_to_glyph(n); }\n')
@@ -68,5 +75,5 @@ for name,target in re.findall(r'^      (\w+):[^\n]*?=>\s*(?:Number\()?_(\w+)\(',
 callbacks={'cmp_coord_distu':'int (const void *, const void *)','gloc_filter_floodfill_matcharea':'int (coordxy, coordxy)'}
 names=re.findall(r'^export function (\w+)',(root/'js/ported/getpos.js').read_text(),re.M)
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();inputs=[Path(__file__).resolve(),root/'js/standalone/getpos.js',root/'js/standalone/getpos-header-functions.js',header,support,library,root/'js/ported/getpos.js',root/'js/ported/getpos-runtime.js',root/'js/wasm/tu-layouts.json',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'nethack-c/wasm/compile-defines.json']
-result={'layout':layout,'globals':globals,'commands':commands,'callbacks':callbacks,'calls':calls,'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[source]))}}
+result={'qsortDispatch':qsortDispatch,'layout':layout,'globals':globals,'commands':commands,'callbacks':callbacks,'calls':calls,'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[source]))}}
 (root/'js/standalone/getpos-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original GETPOS header/native typed targeting ABI.')

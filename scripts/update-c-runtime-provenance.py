@@ -171,7 +171,8 @@ for p,expected in outputs.items():
      fields=json.loads((root/'js/standalone/records.json').read_text())['records']['window_procs']['fields']
      windows={'create_nhwindow':('win_create_nhwindow','ii'),'start_menu':('win_start_menu','vij'),'end_menu':('win_end_menu','vip'),'destroy_nhwindow':('win_destroy_nhwindow','vi')}
      assert 'windows'not in value
-     expected_value={**value,'windows':{name:{'field':field,'signature':sig,'nativeType':fields[field]['ctype']}for name,(field,sig)in windows.items()}}
+     assert "#define y_n(query) yn_function(query, ynchars, 'n', TRUE)"in(root/'.cache/wasm64-build/tree/include/hack.h').read_text()
+     expected_value={**value,'windows':{name:{'field':field,'signature':sig,'nativeType':fields[field]['ctype']}for name,(field,sig)in windows.items()},'y_n':{'target':'yn_function','choices':'ynchars','default':110,'logging':1}}
     assert newer.get(key)==expected_value,'Changed historical measured declaration '+p+':'+key
   for key,value in older.get('referenceHeaderSha256',{}).items():
    assert newer.get('referenceHeaderSha256',{}).get(key)==value,'Changed original native header '+p+':'+key

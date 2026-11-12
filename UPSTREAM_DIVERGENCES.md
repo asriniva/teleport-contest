@@ -1,5 +1,64 @@
 # Upstream divergence register
 
+Further native-boundary checkpoint (2026-11-11; default switch gated):
+The fifth pure-JS public run completed40/44 with no deadlines, zero timeout
+errors and zero forbidden capabilities. Its count/animation-screen scope passes
+40; animation cursor telemetry was not yet collected and is unverified, not
+mismatched. RNG545,579/792,838; screens8,306/11,405; cursors8,555/11,405;
+animations439/1,483. Four failures remain in that immutable snapshot: Lua text
+transport, selection rectangle conversion, and WEAPON's y_n confirmation
+(two errors/two comparison failures). `.cache/standalone-public-recorder-round5`
+retains the results. Round6 includes the following verified repairs, shipped
+assets and animation-cursor telemetry; its full result remains pending.
+
+NHLUA in `lua-sandbox.js` now normalizes original fixed pointer parameters from
+its unchanged schema before entering the same cached source context. Native
+char-pointer literals become shared C strings and record carriers become actual
+addresses. NHLOBJ now binds its original27object/12class packed-field helpers,
+exact configured header aliases and one-string Sprintf to measured shared
+storage. Native C/Lua comparison passes690. NHLSEL's rectBounds now passes three
+canonical addresses to original RECT, matching the native bridge; nonenumerable
+record carriers had lost fields in its original by-value snapshot. Native six-
+operator selection/percentage comparisons pass25. No Lua VM, game policy,
+coordinate algorithm or frozen code is changed. Fresh frozen R2 public drivers
+pass only seed/date/configuration/moves into the engine and exactly match all
+Samurai50/51/3230, Dequa713/714/59178, and WorldTour832/833/120639
+inputs/screens/RNG records, including cursors and source caller annotations.
+Each verifies stable sources/assets and zero forbidden capabilities.
+
+SPELL and GETPOS now dispatch their original sorting helpers to configured
+HACKLIB nh_deterministic_qsort with unchanged comparator callbacks/contexts;
+configured CPP and LLVM prove this target in regenerated ABIs. Equal-coordinate
+native ordering passes216, actual spell menu/target cycling pass9/10, and
+existing SPELL/GETPOS checks pass19/20. HACKLIB's internal raw sort is unchanged.
+WORN reads NH_BLACK/Something from actual shared initialized strings in both
+existing contexts. Actual C autocursing-cap and unseen-light armor actions pass
+104 checks, including exactly two declared rawstdin More spaces, connected
+terminal, full worlds/RNG/TTY/frames; existing WORN checks pass158. WEAPON's
+native y_n macro now calls real yn_function with shared ynchars/'n'/TRUE.
+The real631-key enhancement confirmation prefix passes108 strict C checks.
+Unvisited armor, error and suspend variants are not accepted by registration.
+
+`game-assets.js`/`.json`/`-manifest.json`/`.LICENSE` ship exact157 configured
+original-C data files:1,533,749bytes and original modes/licenses, including five
+empty600 baseline log files. No saved games, session answers, Wasm executables
+or policies enter this bundle. A reproducible exporter verifies sealed source
+and data hashes; the pure loader returns fresh mutable buffers without cache,
+filesystem, Wasm or network access. Checkout-only MAIN smoke passes7keys,
+8frames/move2 with terminal connected and zero forbidden capabilities. The
+standalone recorder now uses this bundle by default; explicit developer asset
+folders remain supported. The repository contest entry is STILL unchanged.
+
+Optional recorder statistics now include actual per-step/frame animation cursor
+triples. The postprocessor compares position, visibility, order and shape and
+marks missing old telemetry unverified. Its former count-and-animation-screen
+predicate is separately retained; strict all-metric acceptance now requires
+cursor evidence as well. Positive/negative postprocessing checks pass21 without
+replaying or modifying historical outputs. No expected recording fields enter
+the engine. The user's gate is explicit: only after all44 pure-JS sessions pass
+will the repository default contest entry be switched, verified through the
+unmodified harness, committed and pushed.
+
 Latest completed public-recorder run, round4 (2026-11-11): all44 sessions
 completed with deadlines disabled;29/44 official and strict passes,15 failures,
 zero timeout errors and zero forbidden Wasm/network attempts. RNG303,243/792,838;

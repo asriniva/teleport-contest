@@ -21,6 +21,9 @@ windows={'create_nhwindow':('win_create_nhwindow','ii'),'start_menu':('win_start
 data['weapon']['windows']={name:{'field':field,'signature':sig,'nativeType':fields[field]['ctype']}for name,(field,sig)in windows.items()}
 header=root/'.cache/wasm64-build/tree/include/hack.h'
 assert "#define ynq(query) yn_function(query, ynqchars, 'q', TRUE)" in header.read_text()
+assert "#define y_n(query) yn_function(query, ynchars, 'n', TRUE)" in header.read_text()
+assert 'char teleport_weapon_y_n(const char *prompt) { return y_n(prompt); }'in weapon.read_text()
+data['weapon']['y_n']={'target':'yn_function','choices':'ynchars','default':110,'logging':1}
 inputs.append(header)
 colors=root/'.cache/wasm64-build/tree/include/decl.h'
 for macro,field in [('BLACK','black'),('BLUE','blue'),('AMBER','amber')]:assert '#define NH_'+macro+' c_color_names.c_'+field in colors.read_text()

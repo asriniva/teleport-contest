@@ -18,7 +18,7 @@
   "patch": "docs/runtime-environment/c-runtime-sdk-extension.patch",
   "patchSha256": "ce6e036fd5a2a87bc3587f37cfd5f891bfb3a919542f435073c63cdfc4795419",
   "evidence": "docs/runtime-environment/sdk-boundary-evidence.json",
-  "evidenceSha256": "7e68fff989859f006bc6d9cb5efa560fa9ce351d4fabc3d5c2575b981640861b",
+  "evidenceSha256": "769dfc89abaa79c7cd6690d2946b689cf7374c2b4b7ceadea285efd50e9451c6",
   "features": [
     "Actual musl stdio modes, shared descriptor flags/position and freopen including standard streams",
     "Explicit callback stdin with nonseekable semantics; finite-array compatibility preserved",

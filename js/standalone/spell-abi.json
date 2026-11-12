@@ -1,4 +1,10 @@
 {
+  "qsortDispatch": {
+    "target": "nh_deterministic_qsort",
+    "wrapperSha256": "b9a0bd809ac08c58371cf3e97bf9d090a468a3d1f798f045049b6327abdc33bf",
+    "nativeComparator": "teleport_spell_compare",
+    "llvmCall": "call void @nh_deterministic_qsort"
+  },
   "snprintfSite": {
     "line": 755,
     "function": "getspell"
@@ -1069,8 +1075,8 @@
     "num_spells": "int (void)"
   },
   "sourceSha256": {
-    "scripts/export-standalone-spell-abi.py": "5affdfb4f0dffd650192ca0a06dd3f4fec1113ca0ab251b04f917dd4d322d8e2",
-    "js/standalone/spell.js": "dd893ef8bbed713c2ba132a17490098a88d44c40d7bf74f2cb19387c4da62475",
+    "scripts/export-standalone-spell-abi.py": "9f3a7f7b3b4ec23d5c5f06600dd437b48b4ec96ff4ab664b77e994c43e862a14",
+    "js/standalone/spell.js": "fb60f00a14d6839980599607fc0cff3efa7d00e107dd531c49edc71138a6e0f4",
     "scripts/tu-spell-layout.h": "7a59410e77d3e038da4f04f7f01f50e603441cbb17cb8760960d51abc2a8d1a8",
     "nethack-c/wasm/tu-spell-support.inc": "6aff725be6fce3573b2ce240447ea3a4d58f568009bedfc0a418d84b2d423fd6",
     "nethack-c/wasm/tu-libraries/spell.js": "eb77c4d09d4f68975c2bf694c080cbd5b3d5ec039ede6ed5fbf0c10d138ed7c1",

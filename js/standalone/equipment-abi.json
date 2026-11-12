@@ -38,6 +38,12 @@
         "signature": "vi",
         "nativeType": "void (*)(winid) win_destroy_nhwindow"
       }
+    },
+    "y_n": {
+      "target": "yn_function",
+      "choices": "ynchars",
+      "default": 110,
+      "logging": 1
     }
   },
   "worn": {
@@ -102,8 +108,8 @@
     ]
   },
   "sourceSha256": {
-    "scripts/export-standalone-equipment-abi.py": "31e012a7ce00b72f99d122740ad5e55aa14feaf137521994e28b279e0b71fc0d",
-    "js/standalone/hero-equipment.js": "dcba41f2f5caa2cb1ca1924de2743e1f8851b20da9772bc2578268b73482fc3f",
+    "scripts/export-standalone-equipment-abi.py": "5bf03d1c0ac40e7d6ed091d7bca5d6f8adb8176d3b02ea50193785bb0648988f",
+    "js/standalone/hero-equipment.js": "5cee21e887cf7ab293f24af27882976c1982348e1093daa9e956649f9b7f0700",
     "js/standalone/records.json": "b0e9d94ad00af9838c21971dc7f682ea87634c8d19000e6c1940208ee1ed01b2",
     "nethack-c/wasm/tu-libraries/weapon.js": "0303766572429519079a031676ff80f2b41f399614320d88aaaaf4edbae723a1",
     "nethack-c/wasm/tu-libraries/wield.js": "0aff7987e96c7279c83c87acd24cf09dba2a747c006584f9d1973a35a5d4febf",
