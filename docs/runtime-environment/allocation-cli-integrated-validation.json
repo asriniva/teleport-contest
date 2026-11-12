@@ -1,0 +1,456 @@
+{
+  "version": 1,
+  "complete": true,
+  "fullGameAccepted": false,
+  "baseCommit": "c722b9986090928fbd74e7c044cd261681760b02",
+  "sourceAndAssetProvenanceStable": true,
+  "unchangedCommittedSourceInputs": 2312,
+  "ownedChangedOrNewSourceInputs": 12,
+  "jobsPassed": 30,
+  "singleCleanInvocation": false,
+  "recovery": {
+    "originalRunExit": 1,
+    "originalPassed": 29,
+    "originalFailure": "ENOSPC writing final wizard-victory evidence",
+    "recoveredIndependentJob": "wizard-victory",
+    "recoveryExit": 0,
+    "sameSourceAndAssetHashes": true
+  },
+  "jobsTotal": 30,
+  "kinds": {
+    "ordinary-main": 12,
+    "cli-and-native-abi": 1,
+    "source-created-fixture": 16,
+    "debug-main-journey": 1
+  },
+  "jobs": [
+    {
+      "id": "main",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": null,
+      "elapsedSeconds": 27.596,
+      "evidenceSha256": "b028ecc55770de388bbf0db32c3fd63d159118cf1b33849770d603825ef59dd9"
+    },
+    {
+      "id": "ordinary-commands",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": 253,
+      "elapsedSeconds": 51.174,
+      "evidenceSha256": "c6299f16dfe9686758ca54a0097860f3c76d4981d866914df684bf8f7b57df5a"
+    },
+    {
+      "id": "riding",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": 51,
+      "elapsedSeconds": 36.827,
+      "evidenceSha256": "be30634ce6e61f9ecc6abc51df2f60af4c80f3a4e009e2309b5bd65371d2e516"
+    },
+    {
+      "id": "allocation-cli",
+      "kind": "cli-and-native-abi",
+      "passed": true,
+      "checks": 101,
+      "elapsedSeconds": 12.396,
+      "evidenceSha256": "b4c280ac2ebfea9c23a7563d9c534f82507f096afc5b07ede83b2fdeb482bd68"
+    },
+    {
+      "id": "shop-transactions",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": 147,
+      "elapsedSeconds": 103.363,
+      "evidenceSha256": "ae5fc0b9e377a4439b8d76980a21a1e81d09613a1437d29f2b24ae9b3ba7df31"
+    },
+    {
+      "id": "mines-progression",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": 61,
+      "elapsedSeconds": 150.392,
+      "evidenceSha256": "b65d09da4523eb45002abcc6b0626168288dc62627efc231bf7ce43d31f6858c"
+    },
+    {
+      "id": "status-editor",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": 37,
+      "elapsedSeconds": 30.941,
+      "evidenceSha256": "5ec806ff3e4a0918049a4544fbc51b0e535bfa86668ecdcbd8b84d6de33be4da"
+    },
+    {
+      "id": "monmove-private",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": null,
+      "elapsedSeconds": 7.81,
+      "evidenceSha256": "1214decd18d2412dd786de227de46a7069b00aa34be01fa87ea5f84350456afe"
+    },
+    {
+      "id": "sink-polymorph",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": 60,
+      "elapsedSeconds": 38.076,
+      "evidenceSha256": "a648b4b555bf7fa49a5871f24eef8b39936d02a38597e3c68a83f627cff1f0bc"
+    },
+    {
+      "id": "restored-world",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": null,
+      "elapsedSeconds": 24.603,
+      "evidenceSha256": "aa4d24fc24c65e73f537bbe22985099369c27e185c3cd1aa4e8993ad6fb72eff"
+    },
+    {
+      "id": "stairs",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": null,
+      "elapsedSeconds": 34.097,
+      "evidenceSha256": "d7d584f0747395fc1204f0771ad84a34bd04c1f9bb6e21daff059449a4de47ef"
+    },
+    {
+      "id": "positive-quit",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": 14,
+      "elapsedSeconds": 39.934,
+      "evidenceSha256": "35d9b3300804d823dc7efe98b6ce71c5ca4bf42a246266eeff659c3ab7e7d045"
+    },
+    {
+      "id": "d5-death",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": 20,
+      "elapsedSeconds": 154.614,
+      "evidenceSha256": "b1f1caf840f9790f386f341ea051d5606ff4cb8c3f212be92fa36e32b3a0cf73"
+    },
+    {
+      "id": "bones-four-way",
+      "kind": "ordinary-main",
+      "passed": true,
+      "checks": 31,
+      "elapsedSeconds": 43.322,
+      "evidenceSha256": "479b7fa9cc0d5e357245712ebe114a786de3e09844c67746b78f294fae93c8e0"
+    },
+    {
+      "id": "quest-portals",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 25,
+      "elapsedSeconds": 16.955,
+      "evidenceSha256": "72dd2cd808f37012b5871ff828314578a9b5b5c849d4e2a43813a80a7acc9566"
+    },
+    {
+      "id": "quest-leader",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 29,
+      "elapsedSeconds": 18.255,
+      "evidenceSha256": "941c834fc8e88ebe0e933a3aa83043f01a8d0db1a84d67cba3c9d87e3131a8fc"
+    },
+    {
+      "id": "quest-assignment",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 29,
+      "elapsedSeconds": 17.146,
+      "evidenceSha256": "02adffe8c2e72165adc37c3e9a24a5bfcc41b0a8f5ad69bb12db4c7fa6f23ce9"
+    },
+    {
+      "id": "quest-return",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 34,
+      "elapsedSeconds": 36.805,
+      "evidenceSha256": "d8932e33f8f45f3a872826080c2ddbd5b1ade05c47ca664b5ed50ca4f3ed716c"
+    },
+    {
+      "id": "invocation",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 25,
+      "elapsedSeconds": 12.441,
+      "evidenceSha256": "f5ca8c470ba969ef972b7613ed7fd45669803cec38978b7a0039c5ed259c6684"
+    },
+    {
+      "id": "water-turns",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 33,
+      "elapsedSeconds": 17.668,
+      "evidenceSha256": "1a21c9cebd5bd38e11c37291e589ae9e9cce6e51ae0801cefc1395b3a1a9add6"
+    },
+    {
+      "id": "water-save",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 34,
+      "elapsedSeconds": 18.395,
+      "evidenceSha256": "96c5eaf84fd497b5e8fa46e1c7618b1f854a15476e661607db69ce86f674c10e"
+    },
+    {
+      "id": "water-restore",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 34,
+      "elapsedSeconds": 16.459,
+      "evidenceSha256": "92476b07738c3b4a90d0e78cd20ff7d4dbee0e36c59a9b830d7d5a3e907d92c6"
+    },
+    {
+      "id": "water-portal",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 36,
+      "elapsedSeconds": 23.037,
+      "evidenceSha256": "ae3cb027582fc45c9f32563b00dbca60dc6ff834bf29f535164b39a35e2d3b42"
+    },
+    {
+      "id": "air-turns",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 33,
+      "elapsedSeconds": 18.936,
+      "evidenceSha256": "fbad2178cd1f5fc68e96da97e1919146e052c75c092706a621413653844b17d5"
+    },
+    {
+      "id": "air-save",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 34,
+      "elapsedSeconds": 19.671,
+      "evidenceSha256": "19cb1b9a2e7ad195eeb6540203b745159c7e989666d66b09429063a48b3ca3bf"
+    },
+    {
+      "id": "air-restore",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 34,
+      "elapsedSeconds": 17.404,
+      "evidenceSha256": "c55aad93063c6a6f4b67ecb8eceb7cbe8c977586371e30eb09ecf6773c395e57"
+    },
+    {
+      "id": "air-portal",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 35,
+      "elapsedSeconds": 22.295,
+      "evidenceSha256": "de672513f7e7a8a37bf1e99607f5b9671c54a4366bce9365a34c9eb9fb4c8f4e"
+    },
+    {
+      "id": "astral-zero",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 34,
+      "elapsedSeconds": 16.878,
+      "evidenceSha256": "5480be2484173ac69e13f5dd44915d933b9f0d7c90d0c49d81dd06e6594b4581"
+    },
+    {
+      "id": "astral-positive",
+      "kind": "source-created-fixture",
+      "passed": true,
+      "checks": 100,
+      "elapsedSeconds": 47.762,
+      "evidenceSha256": "89af577507f7f454ffbadabe39e9766f503bc7d845333b1a66ccc037342fe486"
+    },
+    {
+      "id": "wizard-victory",
+      "kind": "debug-main-journey",
+      "passed": true,
+      "checks": 185,
+      "elapsedSeconds": 15.024,
+      "evidenceSha256": "73bbb72317604d7d2954c80a641574ee759f6c9681cb197db658034f6430dbaa"
+    }
+  ],
+  "rawProofs": {
+    "docs/runtime-environment/allocation-cli-integrated-evidence/original-incomplete-run.json.gz": {
+      "gzipSha256": "066a4d09475db8eaa2389c014541f9b99f133d629378fa5132d8623b7a5e4523",
+      "uncompressedSha256": "7cc08c69e509216110738a28168350a1a0a2abe6953dc643c1c8651ec2eae22f",
+      "uncompressedBytes": 314235
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/recovery-run.json.gz": {
+      "gzipSha256": "499ff420d731c2a158e4b35f0716110037eeff3d879fc237be809bc521d62b31",
+      "uncompressedSha256": "fb3b5f28871276ffa59f15e9a9ccd7c6bede4848b343fee5c3199aae0f6f7144",
+      "uncompressedBytes": 275642
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/original-enospc.log.gz": {
+      "gzipSha256": "c7162f5633f927fe35f53e80a0842d17caef90d55a266b9358fcf62631a14e4c",
+      "uncompressedSha256": "0ffb61dabc93752fab800382aa81b900cf443dfd8366ddc62424a45b8a5e5f7a",
+      "uncompressedBytes": 385
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/all-output-compression.json.gz": {
+      "gzipSha256": "49b7266bbe5f07bdc4315cbe3db7675bc8529bbe5872b07bb9c87a30bd4e4fef",
+      "uncompressedSha256": "f16a7e377ed583c187b13dcfad2edfebfee96e78b582b9c414cd8b4fdee88991",
+      "uncompressedBytes": 34005
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/plan.json.gz": {
+      "gzipSha256": "daf653493d581e9cd751b3baa55e05b568bd27ce56107915fae464dcb1a87649",
+      "uncompressedSha256": "20df4beea079cf594500df93e6e408f1b7d49d5579b9b072c7d6f549898ecd46",
+      "uncompressedBytes": 17958
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/compressed-completed-outputs.json.gz": {
+      "gzipSha256": "a1b2082eedbdc5051e67c252e1255447b851f2e2ee7b567db27eaae21af9b20a",
+      "uncompressedSha256": "ca58e06754216a0a162947d1d3f1eb4194541b9b70160363a13f83c7c9799f75",
+      "uncompressedBytes": 52357
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/main-evidence.json.gz": {
+      "gzipSha256": "bbbfb6435ab6f9a4f48bfa19374e7774872811624061e34f063ed0c41bb3e4bb",
+      "uncompressedSha256": "b028ecc55770de388bbf0db32c3fd63d159118cf1b33849770d603825ef59dd9",
+      "uncompressedBytes": 2043
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/ordinary-commands-evidence.json.gz": {
+      "gzipSha256": "99e7d68c9a2605bde6b9d9cef22dd5cbd3659d9d493f10ceac9f146c1a1a08c7",
+      "uncompressedSha256": "c6299f16dfe9686758ca54a0097860f3c76d4981d866914df684bf8f7b57df5a",
+      "uncompressedBytes": 8464
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/riding-evidence.json.gz": {
+      "gzipSha256": "739bfdbe05173f6c566b16afabac46682dd48aa678c0ae57d798f43bd561c5fc",
+      "uncompressedSha256": "be30634ce6e61f9ecc6abc51df2f60af4c80f3a4e009e2309b5bd65371d2e516",
+      "uncompressedBytes": 75408
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/allocation-cli-evidence.json.gz": {
+      "gzipSha256": "40110742e33ca0dec88d4c1c03368702cfacebf045a2d3d506a737a55266ed50",
+      "uncompressedSha256": "b4c280ac2ebfea9c23a7563d9c534f82507f096afc5b07ede83b2fdeb482bd68",
+      "uncompressedBytes": 82222
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/shop-transactions-evidence.json.gz": {
+      "gzipSha256": "1580fabb781f149fd28f7f353a464eecdbcde9ed688f10e0a84d7af7958277f7",
+      "uncompressedSha256": "ae5fc0b9e377a4439b8d76980a21a1e81d09613a1437d29f2b24ae9b3ba7df31",
+      "uncompressedBytes": 84403
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/mines-progression-evidence.json.gz": {
+      "gzipSha256": "4d4f242d9e7e0f31af072f4407435a36b55235fc69a735fa074f85a17ad55cb3",
+      "uncompressedSha256": "b65d09da4523eb45002abcc6b0626168288dc62627efc231bf7ce43d31f6858c",
+      "uncompressedBytes": 78003
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/status-editor-evidence.json.gz": {
+      "gzipSha256": "e6bb789d0a9aff42ed2a961ae1d2acb91f9a51d1174b960f5272decf035b23e0",
+      "uncompressedSha256": "5ec806ff3e4a0918049a4544fbc51b0e535bfa86668ecdcbd8b84d6de33be4da",
+      "uncompressedBytes": 74005
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/monmove-private-evidence.json.gz": {
+      "gzipSha256": "c0a022e7814c4cd7c59bf14a6ceafa6c93260799b1d1396cfb6cd3aeea06f488",
+      "uncompressedSha256": "1214decd18d2412dd786de227de46a7069b00aa34be01fa87ea5f84350456afe",
+      "uncompressedBytes": 70647
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/sink-polymorph-evidence.json.gz": {
+      "gzipSha256": "a8b3ee1fbd8f3d2a7ad9640ba331028ba2c71bac809258beb1c3e3615df24f22",
+      "uncompressedSha256": "a648b4b555bf7fa49a5871f24eef8b39936d02a38597e3c68a83f627cff1f0bc",
+      "uncompressedBytes": 76319
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/restored-world-evidence.json.gz": {
+      "gzipSha256": "6e5e3d75f92176942680fbe131af636ef13d7e02ca8d40f5dc2c41b5f121af41",
+      "uncompressedSha256": "aa4d24fc24c65e73f537bbe22985099369c27e185c3cd1aa4e8993ad6fb72eff",
+      "uncompressedBytes": 5881
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/stairs-evidence.json.gz": {
+      "gzipSha256": "2204b2b3546ddd8dbf6142e5180a5f224ca8728a41219c5050ad57e32774169e",
+      "uncompressedSha256": "d7d584f0747395fc1204f0771ad84a34bd04c1f9bb6e21daff059449a4de47ef",
+      "uncompressedBytes": 4637
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/positive-quit-evidence.json.gz": {
+      "gzipSha256": "fb287bbccdb3c2d7dd846d7655b8f1a3dcab47a5b0d22157f35c0029abb8100d",
+      "uncompressedSha256": "35d9b3300804d823dc7efe98b6ce71c5ca4bf42a246266eeff659c3ab7e7d045",
+      "uncompressedBytes": 2333
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/d5-death-evidence.json.gz": {
+      "gzipSha256": "6739bdced168b2f4a5f91ddda6fb69d154cdb937a42c1b46b97464fa1c707e9e",
+      "uncompressedSha256": "b1f1caf840f9790f386f341ea051d5606ff4cb8c3f212be92fa36e32b3a0cf73",
+      "uncompressedBytes": 76742
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/bones-four-way-evidence.json.gz": {
+      "gzipSha256": "9e064faa74821f69090205ecf6e6d32eed6dc81771c259fdf0f267d6cb7460c6",
+      "uncompressedSha256": "479b7fa9cc0d5e357245712ebe114a786de3e09844c67746b78f294fae93c8e0",
+      "uncompressedBytes": 76539
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/quest-portals-evidence.json.gz": {
+      "gzipSha256": "82757a20ea94a1099c3b8b3a0e4a573f19e75e6c02159007207a8398b316c2fa",
+      "uncompressedSha256": "72dd2cd808f37012b5871ff828314578a9b5b5c849d4e2a43813a80a7acc9566",
+      "uncompressedBytes": 3936
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/quest-leader-evidence.json.gz": {
+      "gzipSha256": "3c719a64ea0fe5ad43ae4cf1fe54eca991ba1d9b843b31f61229c6421ad91396",
+      "uncompressedSha256": "941c834fc8e88ebe0e933a3aa83043f01a8d0db1a84d67cba3c9d87e3131a8fc",
+      "uncompressedBytes": 3929
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/quest-assignment-evidence.json.gz": {
+      "gzipSha256": "28210ae0c21550869f7a9b1c7ff77cb335f680270e95f2758cc8892fb2dd6df5",
+      "uncompressedSha256": "02adffe8c2e72165adc37c3e9a24a5bfcc41b0a8f5ad69bb12db4c7fa6f23ce9",
+      "uncompressedBytes": 78350
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/quest-return-evidence.json.gz": {
+      "gzipSha256": "94813bbbeace78fd0126f00a4c733550fe484797bcf3381ff00dff3383e4dd82",
+      "uncompressedSha256": "d8932e33f8f45f3a872826080c2ddbd5b1ade05c47ca664b5ed50ca4f3ed716c",
+      "uncompressedBytes": 78930
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/invocation-evidence.json.gz": {
+      "gzipSha256": "cd891ab358ffef6c18813bf11b125f2e7046c52df6eefa524b89388a479fd624",
+      "uncompressedSha256": "f5ca8c470ba969ef972b7613ed7fd45669803cec38978b7a0039c5ed259c6684",
+      "uncompressedBytes": 3617
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/water-turns-evidence.json.gz": {
+      "gzipSha256": "84a74fc200271119e16818198111a392926d86fe31f52846b3e22d4419987551",
+      "uncompressedSha256": "1a21c9cebd5bd38e11c37291e589ae9e9cce6e51ae0801cefc1395b3a1a9add6",
+      "uncompressedBytes": 94004
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/water-save-evidence.json.gz": {
+      "gzipSha256": "05455365140fbecc74f547a9c380ca50c4e09631e360f327a8c35d00a4270c92",
+      "uncompressedSha256": "96c5eaf84fd497b5e8fa46e1c7618b1f854a15476e661607db69ce86f674c10e",
+      "uncompressedBytes": 94281
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/water-restore-evidence.json.gz": {
+      "gzipSha256": "1b57451e21a98033ad11070f24baf6055f22879c3fc8aa3fca8ff8ebdf1608dd",
+      "uncompressedSha256": "92476b07738c3b4a90d0e78cd20ff7d4dbee0e36c59a9b830d7d5a3e907d92c6",
+      "uncompressedBytes": 89094
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/water-portal-evidence.json.gz": {
+      "gzipSha256": "e30ad73cadc26455a8416c6c98699070f8d42cbf8406d2153b713b18fcf2c05b",
+      "uncompressedSha256": "ae3cb027582fc45c9f32563b00dbca60dc6ff834bf29f535164b39a35e2d3b42",
+      "uncompressedBytes": 96844
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/air-turns-evidence.json.gz": {
+      "gzipSha256": "d166e079f094764520a4c890d6f32c3b1e604765b41215db245ad38cbe8bf821",
+      "uncompressedSha256": "fbad2178cd1f5fc68e96da97e1919146e052c75c092706a621413653844b17d5",
+      "uncompressedBytes": 189731
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/air-save-evidence.json.gz": {
+      "gzipSha256": "c7656a75827bde7e8777e37ef75757a449fe92e887e0bb08912010ef17d65372",
+      "uncompressedSha256": "19cb1b9a2e7ad195eeb6540203b745159c7e989666d66b09429063a48b3ca3bf",
+      "uncompressedBytes": 190009
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/air-restore-evidence.json.gz": {
+      "gzipSha256": "56d8ac93539b9a74ab98b0dc29e55f399af3151f6026f94b217c85a9f0e273a3",
+      "uncompressedSha256": "c55aad93063c6a6f4b67ecb8eceb7cbe8c977586371e30eb09ecf6773c395e57",
+      "uncompressedBytes": 188530
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/air-portal-evidence.json.gz": {
+      "gzipSha256": "a454e79825590937b680440d9078fec77f29f75ed7a16daf2038666aceec7c2c",
+      "uncompressedSha256": "de672513f7e7a8a37bf1e99607f5b9671c54a4366bce9365a34c9eb9fb4c8f4e",
+      "uncompressedBytes": 179005
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/astral-zero-evidence.json.gz": {
+      "gzipSha256": "a35ce2c249e8c9973296648e4a3978aac0dbdf3413e751ad4a1d0c1412879715",
+      "uncompressedSha256": "5480be2484173ac69e13f5dd44915d933b9f0d7c90d0c49d81dd06e6594b4581",
+      "uncompressedBytes": 2882
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/astral-positive-evidence.json.gz": {
+      "gzipSha256": "f15c83d79e9deb5bd372fb41ac8d8403e7885fde78eaf2f3c3d13e6fc0fa97e7",
+      "uncompressedSha256": "89af577507f7f454ffbadabe39e9766f503bc7d845333b1a66ccc037342fe486",
+      "uncompressedBytes": 4953
+    },
+    "docs/runtime-environment/allocation-cli-integrated-evidence/wizard-victory-evidence.json.gz": {
+      "gzipSha256": "c63ce1bee6e7b464abc9bb6cc1de4720a97f759d0532b0efedf83d6d5f8d6694",
+      "uncompressedSha256": "73bbb72317604d7d2954c80a641574ee759f6c9681cb197db658034f6430dbaa",
+      "uncompressedBytes": 79388
+    }
+  },
+  "originalCReferenceReceiptSha256": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+  "limits": [
+    "Ordinary MAIN checks, explicitly source-created Quest/endgame fixtures and a debug MAIN journey retain their separate scopes; no natural ordinary full-game victory or exhaustive interaction acceptance.",
+    "The first invocation passed29 jobs then failed while writing final evidence; the independent wizard-victory job passed in a fresh recovery on identical sources/assets. Both raw runs and the storage error are preserved.",
+    "Independent completed outputs were losslessly compressed only after all consumers finished, preserving full bytes and hashes."
+  ]
+}

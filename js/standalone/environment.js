@@ -277,6 +277,8 @@ export function createStandaloneEnvironment(options={}) {
         return runtime;
     }
     const environment={...base,services,transport,functions,bitfields,ctypes,diagnostics,register,extend,deferFunctions,start,call,functionPointer,allocateGlobal,requireGlobal,linkGlobal,enableRect,enableHacklib,enableDecl,enableDrawing,enableObjects,enableMonst,enableStdio,enableRnd,enableSys,enableTrack,enableCommandGeometry,enableDependencies,
+        // Reuse the public native-width boundary for standalone allocation callers.
+        alloc:(name,...args)=>(name==='alloc'||name==='re_alloc')?resolve(name)(...args):base.alloc(name,...args),
         setEnvironment:(name,value)=>{inputs.setEnvironment(name,value);if(value===null||value===undefined)delete ENV[name];else ENV[name]=String(value);},
         captureFiles:baseline=>captureGameFiles(base.filesystem,baseline,shouldPersistGameFile),
         restoreFiles:state=>restoreGameFiles(base.filesystem,state),

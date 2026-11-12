@@ -1,5 +1,37 @@
 # Upstream divergence register
 
+Shared allocation/header integration (2026-11-12): environment.alloc routes
+alloc/re_alloc through their existing public native-width boundary; other helpers
+retain their prior dispatch. This restores C unsigned-int size/pointer conversion
+for sizeof-derived BigInt and Number callers. window-system adds raw_print to the
+existing measured window callback dispatcher; window-abi and dependent turn-loop
+pins propagate without layout changes. No translated policy or frozen changes.
+
+Four real original-C CLI exits and16 allocation/reallocation ABI witnesses pass101
+checks. --dumpweights now exits0 with all56,675 stdout bytes matching C, including
+the formerly missing final raw_print calls. Native alignment, size wrapping and
+reallocation prefix preservation match on independent test buffers; no game/RNG
+or input-depth writes. Current four-file qualification,25 new adversarial checks,
+77 real layered API checks and all older native/audit cohorts pass. Source scope
+retains137 policies, only approved VISION,3 frozen files,580 production files and no forbidden
+dependencies;354 runtime source hashes and extraction/historical guards pass.
+
+The final public round13 passes44/44 strict with timeout0:792,838 RNG calls,
+11,405 screens/cursors and1,483 animation screens/cursor triples,56 segments and
+11,349 keys,56 storage gets/sets. All743 pre-run scored inputs remain unchanged.
+All30 integration jobs are verified on the same sources/assets: the first
+invocation passed29 before ENOSPC stopped final wizard-victory evidence writing;
+that independent job passed in a fresh recovery. This is a recovered cohort,
+not a single clean30-job invocation. Earlier public round12 also suffered storage
+failures and was explicitly stopped(exit130); it is not accepted. The first failed
+seed0900 passes separately and the full public gate is freshly rerun. All failure
+receipts remain, and completed raw outputs are retained losslessly compressed.
+
+See allocation-cli-native-evidence.json, allocation-cli-public-recorder-validation.json,
+allocation-cli-integrated-validation.json and allocation-cli-qualification-validation.json.
+Natural ordinary victory, all deferred interactions, original contest time limits
+and held-out sessions remain unverified; full-game acceptance remains false.
+
 Expanded integration regression (2026-11-12): all29 named jobs pass in one
 fresh sequential run on the cd82ffb test snapshot and unchanged d9554ab production
 sources. Per-job source/assets checks and final provenance remain stable. This

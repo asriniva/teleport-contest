@@ -61,6 +61,9 @@ def validate_cohort(root):
   assert(old is None)==(path in NEW_FILES),'Unexpected historically absent source: '+path
   assert row.get('beforeSha256')==(None if old is None else sha(old)),'Post-default baseline source differs: '+path
   actual=(root/path).read_bytes()
+  if (root/"docs/runtime-environment/allocation-cli-source-successors.json").is_file():
+   from allocation_cli_source_successors import ALLOWED as ALLOCATION_CLI,qualified_before as allocation_cli_before
+   if path in ALLOCATION_CLI:actual=allocation_cli_before(root,path)
   assert sha(actual)==row['afterSha256'],'Unqualified current post-default source: '+path
   patch_path=row['patch']
   assert patch_path.startswith('docs/runtime-environment/post-default-source-successors/')and patch_path.endswith('.patch'),'Unexpected post-default patch path'

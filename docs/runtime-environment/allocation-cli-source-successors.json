@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "baseCommit": "c722b9986090928fbd74e7c044cd261681760b02",
+  "nativeProof": "docs/runtime-environment/allocation-cli-native-evidence.json",
+  "nativeProofSha256": "faafcd52e04444dcad62ba01a3439e53348f2efe424cf185a934f3652e007184",
+  "files": {
+    "js/standalone/environment.js": {
+      "beforeSha256": "bab63c6c14700d884e3c862e101319e817796b2db0ae01fbc64623df6061334b",
+      "afterSha256": "e940494876d8b9508f13bccce160e18ae110ab53643db63d023b19613b9c44ed",
+      "patch": "docs/runtime-environment/allocation-cli-source-successors/environment.js.patch",
+      "patchSha256": "6c6d5403adc6363ccefe280562ae0d0974059017645cfea0ea915fc7dad9cc82"
+    },
+    "js/standalone/turn-loop-abi.json": {
+      "beforeSha256": "e8ffe32d03df246a867455004b92f0bf724aa276710b155d51719feb5650027c",
+      "afterSha256": "e8b9bae1a71b69ac340cc53f30bbd269e37c4fcb4a104d10704cd9c3dc78527d",
+      "patch": "docs/runtime-environment/allocation-cli-source-successors/turn-loop-abi.json.patch",
+      "patchSha256": "d4a62d076d7fe75ef43f1551232a43009988c5309ded65061641f77ae183be8d"
+    },
+    "js/standalone/window-abi.json": {
+      "beforeSha256": "91fbe605d0977a2ecd72c06fcb3a913058050d3137b2df07eaf0f3116d1e8d7d",
+      "afterSha256": "73a01911a9f4ec1ce9d3fedece264e4cc3b2c8714391a0f2c63a55e890aa82cb",
+      "patch": "docs/runtime-environment/allocation-cli-source-successors/window-abi.json.patch",
+      "patchSha256": "fa7ceb6b29dcf11660fa541fc53e34f239466e4c2d5b78578866d08951934f06"
+    },
+    "js/standalone/window-system.js": {
+      "beforeSha256": "c25c0de88b8ab32125d9a8c65d91b4d7ff9c546cc76f75b95a05c9ca4582e2f4",
+      "afterSha256": "808cb2b2835d7377f5d0c17bf5086513bf8156eab6946fca6d6a44d678c7f822",
+      "patch": "docs/runtime-environment/allocation-cli-source-successors/window-system.js.patch",
+      "patchSha256": "eac478a4235bffa3588e32921dc2907ae9a213913ae49c6d9d658e803cfbdf68"
+    }
+  }
+}

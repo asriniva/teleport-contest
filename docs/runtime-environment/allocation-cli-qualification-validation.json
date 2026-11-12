@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "complete": true,
+  "fullGameAccepted": false,
+  "baseCommit": "c722b9986090928fbd74e7c044cd261681760b02",
+  "qualifiedSourceSha256": {
+    "js/standalone/environment.js": "e940494876d8b9508f13bccce160e18ae110ab53643db63d023b19613b9c44ed",
+    "js/standalone/window-system.js": "808cb2b2835d7377f5d0c17bf5086513bf8156eab6946fca6d6a44d678c7f822",
+    "js/standalone/window-abi.json": "73a01911a9f4ec1ce9d3fedece264e4cc3b2c8714391a0f2c63a55e890aa82cb",
+    "js/standalone/turn-loop-abi.json": "e8b9bae1a71b69ac340cc53f30bbd269e37c4fcb4a104d10704cd9c3dc78527d"
+  },
+  "nativeProofSha256": "faafcd52e04444dcad62ba01a3439e53348f2efe424cf185a934f3652e007184",
+  "publicProofSha256": "3bb3395107b9d0277bed694b7fd1b439bdffd3da7358f90b1dee6b34598056fb",
+  "integrationProofSha256": "8805f75c396c0da4082228def5e3e5c580c1baf52e57bcf44e9855cc293a78fe",
+  "checks": [
+    {
+      "name": "original C CLI and native allocation ABI comparisons",
+      "passed": true,
+      "checks": 101,
+      "cliCases": 4,
+      "allocationWitnesses": 16
+    },
+    {
+      "name": "normal pure-JS public recordings,timeout0",
+      "passed": true,
+      "official": 44,
+      "strict": 44,
+      "unchangedInputs": 743,
+      "animationCursorTriples": 1483
+    },
+    {
+      "name": "complete integration cohort with documented storage recovery",
+      "passed": true,
+      "jobs": 30,
+      "singleCleanInvocation": false
+    },
+    {
+      "name": "four-file exact native/source qualification",
+      "passed": true,
+      "paths": 4
+    },
+    {
+      "name": "new synthetic qualification",
+      "passed": true,
+      "checks": 25
+    },
+    {
+      "name": "actual layered JS/Python audit APIs and older native-proof enforcement",
+      "passed": true,
+      "checks": 77
+    },
+    {
+      "name": "preserved prior source/native cohorts and adversarial suites",
+      "passed": true,
+      "cohorts": [
+        {
+          "paths": 3,
+          "synthetic": 32
+        },
+        {
+          "paths": 2,
+          "synthetic": 30
+        },
+        {
+          "paths": 19,
+          "synthetic": 55
+        },
+        {
+          "paths": 6,
+          "synthetic": 28
+        }
+      ]
+    },
+    {
+      "name": "current owned source manifest",
+      "passed": true,
+      "files": 354
+    },
+    {
+      "name": "production scope and policies",
+      "passed": true,
+      "productionFiles": 580,
+      "unchangedPolicies": 137,
+      "onlyApprovedVisionCorrection": true,
+      "frozen": 3,
+      "forbidden": 0
+    },
+    {
+      "name": "relocation bodies and baseline inputs",
+      "passed": true,
+      "bodies": 9,
+      "inputs": 141
+    },
+    {
+      "name": "SDK extension/runtime boundaries/current negative controls",
+      "passed": true,
+      "boundaryFiles": 30,
+      "negativeChecks": 9
+    },
+    {
+      "name": "binding extraction/shim/provenance/Makefile inverses",
+      "passed": true,
+      "adapters": 58,
+      "helpers": 132,
+      "shims": 6,
+      "consumers": 8,
+      "provenanceFiles": 72,
+      "profiles": 2,
+      "MakefileNegativeControls": 2
+    },
+    {
+      "name": "historical390 reproduction only",
+      "passed": true,
+      "moves": 189,
+      "sourcesAndMetadata": 1017
+    }
+  ],
+  "retainedAttempts": [
+    {
+      "kind": "native ABI test fixture pointer mismatch",
+      "accepted": false,
+      "reason": "Initial test supplied Number to original Wasm64 re_alloc pointer parameter; fixture corrected to BigInt, assertions retained; final101-check run accepted."
+    },
+    {
+      "kind": "initial scope check reference mount",
+      "accepted": false,
+      "reason": "Plain test archive lacked original-C upstream mount. Exact reference mounted, then full scope passed; no scored file changed."
+    },
+    {
+      "kind": "integration storage failure",
+      "accepted": false,
+      "reason": "First invocation passed29 jobs then final independent wizard-victory evidence write failed ENOSPC. Fresh independent recovery passed on identical sources/assets; both runs retained."
+    },
+    {
+      "kind": "public round12",
+      "accepted": false,
+      "terminalExit": 130,
+      "reason": "ENOSPC interrupted run after34PASS/5FAIL before official results. Inputs unchanged; first failed seed0900 passes diagnostic retry. Entire44 rerun accepted only from round13."
+    }
+  ],
+  "limits": [
+    "Natural ordinary full-game victory and all deferred interactions remain unverified.",
+    "Public replay timeouts disabled as requested; original contest time limits and held-out sessions not verified.",
+    "Source ports and frozen files remain unchanged except the previously approved VISION correction."
+  ]
+}

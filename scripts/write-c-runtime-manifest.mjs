@@ -44,6 +44,12 @@ const windowHeaderPatches='docs/runtime-environment/window-headers-source-succes
 if(fs.existsSync(windowHeaderPatches))for(const file of fs.readdirSync(windowHeaderPatches).filter(name=>name.endsWith('.patch')))paths.push(windowHeaderPatches+'/'+file);
 const windowHeaderProof='docs/runtime-environment/window-headers-native-evidence.json';
 if(fs.existsSync(windowHeaderProof))paths.push(...Object.keys(JSON.parse(fs.readFileSync(windowHeaderProof)).rawProofs??{}));
+// Exact allocator/header qualification with independent native comparison evidence.
+for(const file of ['scripts/allocation_cli_source_successors.py','scripts/test-allocation-cli-source-successors.py','scripts/test-allocation-cli-layered-audits.py','scripts/test-standalone-allocation-cli.mjs','docs/runtime-environment/allocation-cli-source-successors.json','docs/runtime-environment/allocation-cli-native-evidence.json'])if(fs.existsSync(file))paths.push(file);
+const allocationCliPatches='docs/runtime-environment/allocation-cli-source-successors';
+if(fs.existsSync(allocationCliPatches))for(const file of fs.readdirSync(allocationCliPatches).filter(name=>name.endsWith('.patch')))paths.push(allocationCliPatches+'/'+file);
+const allocationCliProof='docs/runtime-environment/allocation-cli-native-evidence.json';
+if(fs.existsSync(allocationCliProof))paths.push(...Object.keys(JSON.parse(fs.readFileSync(allocationCliProof)).rawProofs??{}));
 const sha256=Object.fromEntries([...new Set(paths)].sort().map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')]));
 const data={baselineCommit:'df33dd4',integrationBaseCommit:'8cf4880d8cf7fb9104635f068564a5de87523fe7',scope:'Common-runtime cleanup source closure; not game or native equivalence acceptance',sha256};
 const file='docs/runtime-environment/c-runtime-manifest.json',text=JSON.stringify(data,null,2)+'\n';

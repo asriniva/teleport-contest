@@ -1,0 +1,35 @@
+"""Real older audit APIs before/after the exact allocator/header successor layer."""
+import base64,json,os,pathlib,shutil,subprocess,tempfile
+import allocation_cli_source_successors as q
+from post_default_successors import ALLOWED as POST
+from window_headers_source_successors import ALLOWED as WINDOW
+from monmove_source_successors import ALLOWED as MONMOVE
+from services_layout_successors import ALLOWED as SIX
+source=pathlib.Path(__file__).resolve().parents[1];gitdir=subprocess.check_output(['git','rev-parse','--absolute-git-dir'],cwd=source,text=True).strip();node=source/'.cache/emsdk/node/24.19.0_64bit/bin/node';checks=0
+with tempfile.TemporaryDirectory(prefix='allocation-layer-',dir=source/'.cache')as temporary:
+ root=pathlib.Path(temporary);shutil.copytree(source/'docs/runtime-environment',root/'docs/runtime-environment');(root/'scripts').mkdir()
+ for name in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py','post_default_successors.py','monmove_source_successors.py','window_headers_source_successors.py','allocation_cli_source_successors.py']:shutil.copyfile(source/'scripts'/name,root/'scripts'/name)
+ for p in POST|WINDOW|MONMOVE|SIX|q.ALLOWED:
+  dst=root/p;dst.parent.mkdir(parents=True,exist_ok=True);dst.write_bytes(subprocess.check_output(['git','show',q.BASE_COMMIT+':'+p],cwd=source))
+ declaration=(root/q.DECLARATION).read_bytes();(root/q.DECLARATION).unlink();env={**os.environ,'GIT_DIR':gitdir,'GIT_WORK_TREE':str(root),'NODE_PATH':''};paths=sorted(q.ALLOWED)
+ js='''import fs from 'node:fs';import assert from 'node:assert/strict';import{readBeforeLayout as read,writeBeforeLayout as write,existsBeforeLayout as exists}from'./scripts/services-layout-audit.mjs';const out={};for(const p of JSON.parse(process.argv[1])){const old=fs.readFileSync(p);out[p]=read(p).toString('base64');assert.equal(exists(p),true);write(p,read(p));assert.deepEqual(fs.readFileSync(p),old);assert.throws(()=>write(p,Buffer.from('unqualified inverse')));assert.deepEqual(fs.readFileSync(p),old);}console.log(JSON.stringify(out));'''
+ py='''import sys,json,base64\nfrom pathlib import Path\nsys.path.insert(0,'scripts')\nfrom services_layout_audit import read_before,write_before\nout={}\nfor p in json.loads(sys.argv[1]):\n old=Path(p).read_bytes();b=read_before(Path(p));out[p]=base64.b64encode(b).decode()\n try:write_before(Path(p),b)\n except AssertionError:pass\n assert Path(p).read_bytes()==old\n try:write_before(Path(p),b'unqualified inverse')\n except AssertionError:pass\n else:raise AssertionError('unqualified write accepted')\n assert Path(p).read_bytes()==old\nprint(json.dumps(out))'''
+ def api(language,success=True):
+  command=[str(node),'--input-type=module','-e',js,json.dumps(paths)]if language=='js'else[os.sys.executable,'-c',py,json.dumps(paths)]
+  result=subprocess.run(command,cwd=root,env=env,text=True,capture_output=True)
+  if success:assert result.returncode==0,result.stdout+result.stderr;return json.loads(result.stdout)
+  assert result.returncode!=0,'accepted unqualified current/proof bytes: '+language
+ baseline=api('js');assert api('py')==baseline;checks+=1+len(paths)*8
+ for p in q.ALLOWED:(root/p).write_bytes((source/p).read_bytes())
+ (root/q.DECLARATION).write_bytes(declaration);q.validate_cohort(root);checks+=1
+ assert api('js')==baseline;assert api('py')==baseline;checks+=2+len(paths)*8
+ target=next(iter(q.ALLOWED));old=(root/target).read_bytes();(root/target).write_bytes(old+b'\nchanged')
+ for lang in ['js','py']:api(lang,False);checks+=1
+ (root/target).write_bytes(old)
+ # The new native proof and both older native cohorts remain independently enforced.
+ for proof in [q.PROOF,'docs/runtime-environment/post-default-native-evidence.json','docs/runtime-environment/window-headers-native-evidence.json']:
+  raw=next(iter(json.loads((root/proof).read_text())['rawProofs']));p=root/raw;old=p.read_bytes();p.write_bytes(old+b'changed')
+  for lang in ['js','py']:api(lang,False);checks+=1
+  p.write_bytes(old)
+ assert api('js')==api('py')==baseline;checks+=1
+print('PASS',checks,'real layered JS/Python read/write/existence/native-proof checks; historical pins retained')

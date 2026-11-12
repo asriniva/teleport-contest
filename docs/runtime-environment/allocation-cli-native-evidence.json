@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "complete": true,
+  "originalNativeCompared": true,
+  "baseCommit": "c722b9986090928fbd74e7c044cd261681760b02",
+  "qualifiedSourceSha256": {
+    "js/standalone/environment.js": "e940494876d8b9508f13bccce160e18ae110ab53643db63d023b19613b9c44ed",
+    "js/standalone/window-system.js": "808cb2b2835d7377f5d0c17bf5086513bf8156eab6946fca6d6a44d678c7f822",
+    "js/standalone/window-abi.json": "73a01911a9f4ec1ce9d3fedece264e4cc3b2c8714391a0f2c63a55e890aa82cb",
+    "js/standalone/turn-loop-abi.json": "e8b9bae1a71b69ac340cc53f30bbd269e37c4fcb4a104d10704cd9c3dc78527d"
+  },
+  "rawProofs": {
+    "docs/runtime-environment/allocation-cli-native-evidence/comparison.json": "b4c280ac2ebfea9c23a7563d9c534f82507f096afc5b07ede83b2fdeb482bd68",
+    "docs/runtime-environment/allocation-cli-native-evidence/test-standalone-allocation-cli.mjs": "2ec89b4d1208eaf0c1f2e6814abd08b597fc9d9b10bfd64c08f382a39f287918",
+    "docs/runtime-environment/allocation-cli-native-evidence/baseline-allocation-failure.log": "2ce503036ec1249c31d8c96916adb10fcd70831b42a1a4a06587ccc31530af0f",
+    "docs/runtime-environment/allocation-cli-native-evidence/allocation-fixed-raw-print-failure.log": "a99d4fc474629b16750a0a14451ae816cd455a66ca80a5ab56777c6c46ea4f70"
+  },
+  "scope": "Shared allocation API reuses existing native unsigned-int/pointer conversion; shared raw_print dispatches measured window callback. Four literal original-C CLI exits plus16 allocation/reallocation ABI witnesses pass101 checks. Full TTY/frames/RNG/worlds compare. Test buffers are independently allocated; no game state/setup writes. Metadata source pins only; no port/frozen change.",
+  "fullGameAccepted": false
+}
