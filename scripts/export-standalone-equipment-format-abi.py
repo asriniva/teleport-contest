@@ -78,5 +78,5 @@ data = {
     'sourceSha256': {str(path.relative_to(root)): sha(path) for path in inputs},
     'referenceHeaderSha256': {str(path.relative_to(reference)): sha(path) for path in reference_inputs},
 }
-(root / 'js/standalone/equipment-format-abi.json').write_text(json.dumps(data, indent=2) + '\n')
+(root / 'js/nethack/equipment-format-abi.json').write_text(json.dumps(data, indent=2) + '\n')
 print(f'Bound equipment formatting sites: {len(weapon_formats)} WEAPON, 1 WORN, {len(armor_sites)} DO_WEAR.')

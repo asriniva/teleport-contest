@@ -36,7 +36,7 @@ async function runControlledOriginalC(directory,input={},controller){
 // Controller observes actual native fields only; every action returns one normal
 // keyboard character for the original main parser. It never invokes policy APIs
 // or writes game memory, globals, timers, terrain or random state.
-const records=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
+const records=JSON.parse(fs.readFileSync('js/nethack/records.json')).records;
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),L=layouts.monmove;
 const directory=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1');
 const output=path.resolve(process.env.NATIVE_BONES_OUTPUT??'.cache/native-bones-consumer-seed16');fs.mkdirSync(output,{recursive:true});

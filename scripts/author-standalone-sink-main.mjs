@@ -5,7 +5,7 @@ import path from 'node:path';
 import {runFullOriginalC} from './full-original-c-run.mjs';
 const reference=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1');
 const out='.cache/sink-discovery';fs.mkdirSync(out,{recursive:true});
-const records=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
+const records=JSON.parse(fs.readFileSync('js/nethack/records.json')).records;
 const commandInput=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')).cmd.commandInp;
 const base={timezone:'UTC',options:'OPTIONS=!news\n',argv:['-u','Ada-male-lawful','-p','Archeologist','-r','human']};
 function globals(m){const result={};for(let i=0;i<m._full_global_count();i++){let p=Number(m._full_global_name(i)),e=p;while(m.HEAPU8[e])e++;result[Buffer.from(m.HEAPU8.slice(p,e)).toString()]=Number(m._full_global_address(i));}return result;}

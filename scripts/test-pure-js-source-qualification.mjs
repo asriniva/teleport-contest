@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 // Reject source/patch/declaration drift without modifying the live workspace.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

@@ -1,3 +1,8 @@
+import sys as _layout_sys
+from pathlib import Path as _LayoutPath
+_layout_sys.path.insert(0,str(_LayoutPath(__file__).resolve().parent))
+from nethack_layout import historical_cli as _prior_layout_cli
+if __name__=='__main__':_prior_layout_cli(__file__)
 """Exact type-access feature qualification for historical development audits.
 
 This layer restores the pinned pre-feature bytes before the original layout

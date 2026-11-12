@@ -27,7 +27,7 @@ const size_t standalone_lua_memory[] = {sizeof(Table),sizeof(Node),sizeof(TValue
 const size_t standalone_lua_debug[] = {sizeof(lua_Debug),offsetof(lua_Debug,event),offsetof(lua_Debug,name),offsetof(lua_Debug,namewhat),offsetof(lua_Debug,what),offsetof(lua_Debug,source),offsetof(lua_Debug,srclen),offsetof(lua_Debug,currentline),offsetof(lua_Debug,linedefined),offsetof(lua_Debug,lastlinedefined),offsetof(lua_Debug,nups),offsetof(lua_Debug,nparams),offsetof(lua_Debug,isvararg),offsetof(lua_Debug,istailcall),offsetof(lua_Debug,ftransfer),offsetof(lua_Debug,ntransfer),offsetof(lua_Debug,short_src),offsetof(lua_Debug,i_ci),LUA_IDSIZE};
 const size_t standalone_lua_userdata[] = {udatamemoffset(0),udatamemoffset(1)-sizeof(UValue),sizeof(UValue)};
 ''')
-address_metadata=root/'js/standalone/address-ports.json'
+address_metadata=root/'js/nethack/address-ports.json'
 address_ports=json.loads(address_metadata.read_text())['ports']
 enum_names=sorted({f['canonical'] for p in address_ports.values() for r in p['schema']['schema'].values() for f in r['fields'] if f['canonical'].startswith('enum ')})
 source.write_text(source.read_text()+'\nconst size_t standalone_enum_sizes[] = {'+','.join('sizeof('+t+')' for t in enum_names)+'};\nconst size_t standalone_enum_signed[] = {'+','.join('(('+t+')-1)<0' for t in enum_names)+'};\n')

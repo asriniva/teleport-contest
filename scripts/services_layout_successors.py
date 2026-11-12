@@ -7,7 +7,7 @@ import argparse,difflib,hashlib,json,subprocess
 from pathlib import Path
 CLEANUP_COMMIT='390281578eb48723c2e6f564b2e2bddd3f15e884'
 DECLARATION='docs/runtime-environment/services-layout-successors.json'
-ALLOWED=frozenset(['js/standalone/level-startup.js','scripts/export-standalone-pager-target-abi.py','js/standalone/pager-target-header-functions.js','js/standalone/pager-target-abi.json','js/standalone/dbridge-abi.json','js/standalone/region-services-abi.json'])
+ALLOWED=frozenset(['js/nethack/level-startup.js','scripts/export-standalone-pager-target-abi.py','js/nethack/pager-target-header-functions.js','js/nethack/pager-target-abi.json','js/nethack/dbridge-abi.json','js/nethack/region-services-abi.json'])
 AUDIT_TOOLS=frozenset(['scripts/relocate-runtime-layout.py','scripts/services-layout-audit.mjs','scripts/services_layout_audit.py'])
 def sha(data):return hashlib.sha256(data).hexdigest()
 def _git_bytes(root,path):return subprocess.check_output(['git','show',CLEANUP_COMMIT+':'+path],cwd=root)

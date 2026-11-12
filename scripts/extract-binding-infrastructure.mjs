@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 import{qualifiedHistorical,migrationFiles}from'./pure-js-fixtures/qualification.mjs';
 // Reproducible infrastructure extraction from the pre-layout integration base.
 import fs from'node:fs';import crypto from'node:crypto';import{execFileSync}from'node:child_process';import{pathToFileURL}from'node:url';import assert from'node:assert/strict';

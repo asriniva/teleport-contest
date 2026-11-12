@@ -1,7 +1,7 @@
 import {gzipSync} from 'node:zlib';
 // Development-only original-C route author; read-only world observations and keyboard input.
 import fs from 'node:fs';import {runFullOriginalC} from './full-original-c-run.mjs';
-const R=JSON.parse(fs.readFileSync('js/standalone/records.json')).records,L=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));const out='.cache/mines-author';fs.mkdirSync(out,{recursive:true});
+const R=JSON.parse(fs.readFileSync('js/nethack/records.json')).records,L=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));const out='.cache/mines-author';fs.mkdirSync(out,{recursive:true});
 const base={timezone:'UTC',options:'OPTIONS=!news,autopickup\n',argv:['-u','Ada-male-lawful','-p','Samurai','-r','human']};
 for(let seed=Number(process.env.FIRST_SEED??3);seed<=Number(process.env.LAST_SEED??3);seed++){
  let g,pending,branch=false,lastLevel,stalls=0,lastPos='';const events=[];

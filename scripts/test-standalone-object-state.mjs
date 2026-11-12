@@ -1,15 +1,16 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // A combined original-C dependency group, not synthetic per-call RNG/IO stubs.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const directory=path.resolve(process.env.STANDALONE_OBJECT_STATE_ORACLE||'.cache/standalone-object-state');
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json')));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-for(const [p,digest]of Object.entries(receipt.sourceSha256))assert.equal(sha(p),digest,'C reference source changed: '+p);
+for(const [p,digest]of Object.entries(receipt.sourceSha256))assert.equal(layoutSourceSha(p,digest),digest,'C reference source changed: '+p);
 for(const [p,digest]of Object.entries(receipt.artifactSha256))assert.equal(sha(path.join(directory,p)),digest,'C oracle artifact changed: '+p);
 const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),L=layouts.o_init,B=layouts.sfbase,S=layouts.sfstruct;

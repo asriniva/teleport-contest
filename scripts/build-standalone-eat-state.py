@@ -26,19 +26,19 @@ for name in ['standalone-startup-probe.c','standalone-dungeon-startup-probe.c','
    if body.count(line)!=1:raise SystemExit('Review changed message fixture')
    body=body.replace(line,'/* Actual PLINE owns this entry in this profile. */\n')
  if name=='standalone-display-startup-probe.c':
-  decl=json.loads((root/'js/standalone/decl-storage.json').read_text())['globals']
+  decl=json.loads((root/'js/nethack/decl-storage.json').read_text())['globals']
   body+='\nconst volatile void *probe_decl_global(int i){switch(i){'+''.join('case '+str(i)+':return &'+row['name']+';' for i,row in enumerate(decl))+'}return NULL;}\n'
  target=out/name;target.write_text(body);fixtures.append(source)
 sources=[out/'standalone-eat-state-probe.c',out/'standalone-pager-startup-probe.c',out/'standalone-inventory-startup-probe.c',out/'standalone-window-startup-probe.c',out/'standalone-level-rng-probe.c',out/'standalone-windows-native.c',out/'standalone-wintty-native.c',out/'standalone-banner-version-native.c',out/'standalone-banner-options-native.c',out/'standalone-status-native.c',out/'standalone-status-sounds-native.c',out/'standalone-movement-native.c',tree/'sys/share/posixregex.c',*[tree/f'src/{n}.c' for n in names],tree/'sys/unix/unixmain.c',tree/'win/tty/termcap.c',tree/'win/tty/getline.c',tree/'win/tty/topl.c',tree/'sys/share/unixtty.c',tree/'sys/share/ioctl.c',ref/'nethack-c/wasm/compress-service.c',ref/'nethack-c/wasm/bridge.c']
 sources.extend(p for p in sorted((tree/'lib/lua-5.4.8/src').glob('*.c')) if p.stem not in ['lua','luac','onelua'])
-window=json.loads((root/'js/standalone/window-abi.json').read_text())
+window=json.loads((root/'js/nethack/window-abi.json').read_text())
 for module in ['windows','wintty']:
  names_cb=sorted(window['callbacks'][module]);(out/(module+'-callbacks.inc')).write_text(''.join('case '+str(i)+':return (uintptr_t)('+name+');\n'for i,name in enumerate(names_cb)))
  (out/(module+'-callbacks.json')).write_text(json.dumps(names_cb,indent=2)+'\n')
 globals=list(window['wintty']['schema']['globals']);owned=set(window['wintty']['dataTypes'])|set(window['wintty']['zeroStorage'])
 (out/'wintty-globals.inc').write_text(''.join('case '+str(i)+':return &'+name+';\n'for i,name in enumerate(globals)))
 (out/'wintty-sizes.inc').write_text(''.join('case '+str(i)+':return sizeof('+name+');\n'for i,name in enumerate(globals)if name in owned))
-movement=json.loads((root/'js/standalone/hack-abi.json').read_text())
+movement=json.loads((root/'js/nethack/hack-abi.json').read_text())
 (out/'movement-callbacks.inc').write_text(''.join('case '+str(i)+':return (uintptr_t)('+name+');\n'for i,name in enumerate(movement['functions'])))
 options=json.loads((root/'nethack-c/wasm/tu-fragments/options-schema.json').read_text())
 (out/'options-functions.inc').write_text(''.join('case '+str(i)+':return (uintptr_t)('+name+');\n'for i,name in enumerate(options['functionAddresses'])))
@@ -50,7 +50,7 @@ exports.extend(['probe_contents_layout_count','probe_contents_layout_name','prob
 exports.extend(['probe_contents_trap','probe_contents_traps','probe_contents_room_query'])
 exports.extend(['selection_new','selection_free','selection_clear','selection_clone','selection_getbounds','selection_getpoint','selection_setpoint','selection_not','selection_filter_percent','selection_rndcoord','selection_do_grow','selection_do_line','selection_do_randline','selection_do_ellipse','selection_do_gradient','selection_from_mkroom'])
 
-public_functions=json.loads((root/'js/standalone/public-functions.json').read_text())['functions']
+public_functions=json.loads((root/'js/nethack/public-functions.json').read_text())['functions']
 eat_functions=[name for name in __import__('re').findall(r'export function (\w+)\(', (root/'js/ported/eat.js').read_text())if name in public_functions]
 exports=list(dict.fromkeys(exports+eat_functions+['probe_eat_action','probe_eat_occupation','probe_eat_callback','probe_eat_private','mksobj','addinv','useupall','set_occupation','stop_occupation','start_timer','run_timers','peek_timer']))
 cmd=[str(ref/'.cache/emsdk/upstream/emscripten/emcc'),*flags,'--js-library',str(ref/'nethack-c/wasm/native-libc-library.js'),'-sEXPORTED_FUNCTIONS='+json.dumps(['_'+n for n in exports]),*[str(s) for s in sources],str(ref/'.cache/ncurses-wasm64-build/lib/libtinfo.a'),'-o',str(out/'reference.mjs')]
@@ -60,7 +60,7 @@ result,cmd,boundaries=build(cmd,flags,sources,root,ref,out,headers=("sp_lev.h","
 (out/'build.log').write_text(result.stdout+result.stderr);(out/'command.json').write_text(json.dumps(cmd,indent=2)+'\n')
 if result.returncode:raise SystemExit(result.stderr[-6000:])
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-inputs=[root/'js/standalone/public-functions.json',root/'js/ported/eat.js',root/'js/standalone/hack-abi.json',root/'nethack-c/wasm/tu-fragments/options-schema.json',ref/'nethack-c/wasm/native-terminal.h',ref/'nethack-c/wasm/native-libc-library.js',root/'js/platform/darwin/terminal.js',root/'js/platform/darwin/terminal-abi.json',*[ref/'.cache/emsdk/upstream/emscripten'/p for p in ['src/lib/libtty.js','src/lib/libsyscall.js','system/lib/libc/musl/src/stdio/setvbuf.c','system/lib/libc/musl/src/stdio/setbuf.c','system/lib/libc/musl/src/stdio/fwrite.c','system/lib/libc/musl/src/stdio/__stdio_write.c','system/lib/libc/musl/src/termios/cfgetospeed.c','system/lib/libc/musl/src/termios/tcgetattr.c','system/lib/libc/musl/src/termios/tcsetattr.c','system/lib/libc/musl/src/conf/fpathconf.c']],ref/'.cache/ncurses-wasm64-build/lib/libtinfo.a',Path(__file__).resolve(),root/'scripts/standalone_c_boundaries.py',root/'js/standalone/decl-storage.json',root/'js/standalone/window-abi.json',*fixtures,*sources,ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/sigaction.c',ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/raise.c',ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/musl/src/signal/signal.c',root/'nethack-c/wasm/compile-defines.json',ref/'.cache/wasm64-build/assets/sysconf',tree/'dat/nhlib.lua',tree/'dat/dungeon.lua',tree/'dat/nhcore.lua',*sorted((tree/'dat').glob('*.lua')),*[tree/'dat'/name for name in ['epitaph','engrave','rumors','bogusmon','oracles']]]
+inputs=[root/'js/nethack/public-functions.json',root/'js/ported/eat.js',root/'js/nethack/hack-abi.json',root/'nethack-c/wasm/tu-fragments/options-schema.json',ref/'nethack-c/wasm/native-terminal.h',ref/'nethack-c/wasm/native-libc-library.js',root/'js/platform/darwin/terminal.js',root/'js/platform/darwin/terminal-abi.json',*[ref/'.cache/emsdk/upstream/emscripten'/p for p in ['src/lib/libtty.js','src/lib/libsyscall.js','system/lib/libc/musl/src/stdio/setvbuf.c','system/lib/libc/musl/src/stdio/setbuf.c','system/lib/libc/musl/src/stdio/fwrite.c','system/lib/libc/musl/src/stdio/__stdio_write.c','system/lib/libc/musl/src/termios/cfgetospeed.c','system/lib/libc/musl/src/termios/tcgetattr.c','system/lib/libc/musl/src/termios/tcsetattr.c','system/lib/libc/musl/src/conf/fpathconf.c']],ref/'.cache/ncurses-wasm64-build/lib/libtinfo.a',Path(__file__).resolve(),root/'scripts/standalone_c_boundaries.py',root/'js/nethack/decl-storage.json',root/'js/nethack/window-abi.json',*fixtures,*sources,ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/sigaction.c',ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/raise.c',ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/musl/src/signal/signal.c',root/'nethack-c/wasm/compile-defines.json',ref/'.cache/wasm64-build/assets/sysconf',tree/'dat/nhlib.lua',tree/'dat/dungeon.lua',tree/'dat/nhcore.lua',*sorted((tree/'dat').glob('*.lua')),*[tree/'dat'/name for name in ['epitaph','engrave','rumors','bogusmon','oracles']]]
 for source in sources:
  deps=subprocess.run([cmd[0],*flags,'-M',str(source)],capture_output=True,text=True,check=True)
  inputs.extend(Path(p).resolve() for p in shlex.split(deps.stdout.split(':',1)[1].replace('\\\n','')))

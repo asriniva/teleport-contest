@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+import sys as _layout_sys
+from pathlib import Path as _LayoutPath
+_layout_sys.path.insert(0,str(_LayoutPath(__file__).resolve().parent))
+from nethack_layout import historical_cli as _prior_layout_cli
+if __name__=='__main__':_prior_layout_cli(__file__)
 """Synthetic fail-closed source qualification/API tests, not native acceptance."""
 import copy,importlib.util,json,os,shutil,subprocess,tempfile
 from pathlib import Path

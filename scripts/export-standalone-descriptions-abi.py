@@ -9,5 +9,5 @@ clang=ref/'.cache/emsdk/upstream/bin/clang';ir=subprocess.check_output([str(clan
 constants={name:int(re.search(r'@probe_'+name+r' = .*?constant i64 (-?\d+)',ir)[1])for name in names}
 paths=[Path(__file__).resolve(),root/'js/ported/insight.js',root/'js/nethack/bindings/insight.js',root/'nethack-c/wasm/tu-libraries/insight.js',root/'nethack-c/wasm/compile-defines.json',root/'js/wasm/tu-layouts.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 deps=subprocess.check_output([str(clang),*flags,'-M',str(scratch)],text=True);headers=sorted(set(Path(p).resolve()for p in shlex.split(deps.split(':',1)[1].replace('\\\n',''))))
-(root/'js/standalone/descriptions-abi.json').write_text(json.dumps({'constants':constants,'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in headers if p.is_relative_to(ref)}},indent=2)+'\n')
+(root/'js/nethack/descriptions-abi.json').write_text(json.dumps({'constants':constants,'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in headers if p.is_relative_to(ref)}},indent=2)+'\n')
 print('Bound original alignment-description scalar helper.')

@@ -1,7 +1,7 @@
 // Shared full-game scenario shape; production source executes without Wasm.
 import fs from 'node:fs';import path from 'node:path';
-import {createStandaloneProgram} from '../js/standalone/program.js';
-import {CExit} from '../js/standalone/functions.js';
+import {createStandaloneProgram} from '../js/nethack/program.js';
+import {CExit} from '../js/nethack/functions.js';
 const layouts=JSON.parse(fs.readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url)));
 export function runStandaloneProgram(assetDirectory,input={}){
  const profile={NETHACKDIR:'/nethack',HACKDIR:'/nethack',HOME:'/home/player',USER:'root',LOGNAME:'root',MAIL:'/nethack/mailbox',TERM:'xterm-256color',TERMINFO:'/nethack/terminfo',LINES:'24',COLUMNS:'80',TZ:input.timezone??process.env.TZ??Intl.DateTimeFormat().resolvedOptions().timeZone,NETHACK_NO_DELAY:'1',NOMUX_MARKERS:'1',NETHACK_RAW_KEYS:'1',NETHACK_SEED:String(input.seed??1),NETHACK_FIXED_DATETIME:input.datetime??'20260102030405',NETHACK_RECORDING_EPOCH:String(input.clockEpoch??1777723200),NETHACK_RNGLOG:'/rng.log',NETHACK_RNGLOG_DISP:'/rng-display.log',...input.environment};

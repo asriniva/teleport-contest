@@ -12,7 +12,8 @@
     "test:native": "bash scripts/test-native-tu.sh",
     "test:dependencies": "bash scripts/test-js-dependencies.sh",
     "test": "bash scripts/test-pure-js-tu.sh",
-    "test:pure-js": "bash scripts/test-pure-js-tu.sh"
+    "test:pure-js": "bash scripts/test-pure-js-tu.sh",
+    "test:layout": "node scripts/test-nethack-layout.mjs"
   },
   "engines": {
     "node": ">=22.0.0"

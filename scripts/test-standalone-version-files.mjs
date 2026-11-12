@@ -1,21 +1,22 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // Original VERSION -> SFBASE -> historical SFSTRUCT -> real file acceptance.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';import {fileURLToPath,pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 
 if(!process.argv.includes('--worker')){
  const result=spawnSync(process.execPath,[fileURLToPath(import.meta.url),'--worker'],{env:{...process.env,TZ:'UTC'},encoding:'utf8',timeout:60000,maxBuffer:8*1024*1024});process.stdout.write(result.stdout||'');assert.equal(result.status,0,result.error||result.stderr||result.stdout);
 }else{
  const directory=path.resolve(process.env.STANDALONE_VERSION_FILES_ORACLE||'.cache/standalone-unix-platform-v6'),referenceRoot=path.resolve(process.env.STANDALONE_REFERENCE_ROOT||'../teleport-contest');
- const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),persistence=JSON.parse(fs.readFileSync('js/standalone/persistence-transport-abi.json')),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+ const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),persistence=JSON.parse(fs.readFileSync('js/nethack/persistence-transport-abi.json')),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
  let hashes=0,comparisons=0,contracts=0,cases=0;
- for(const [file,hash]of Object.entries(receipt.sourceSha256)){assert.equal(sha(file),hash,'Changed C reference source '+file);hashes++;}
+ for(const [file,hash]of Object.entries(receipt.sourceSha256)){assert.equal(layoutSourceSha(file,hash),hash,'Changed C reference source '+file);hashes++;}
  for(const [file,hash]of Object.entries(receipt.artifactSha256)){assert.equal(sha(path.join(directory,file)),hash,'Changed C reference artifact '+file);hashes++;}
- for(const [file,hash]of Object.entries(persistence.sourceSha256)){assert.equal(sha(file),hash,'Changed persistence transport '+file);hashes++;}
+ for(const [file,hash]of Object.entries(persistence.sourceSha256)){assert.equal(layoutSourceSha(file,hash),hash,'Changed persistence transport '+file);hashes++;}
  for(const [file,hash]of Object.entries(persistence.referenceHeaderSha256)){assert.equal(sha(path.join(referenceRoot,file)),hash,'Changed configured transport input '+file);hashes++;}
- const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),V=layouts.version,S=layouts.sfbase,metadata=JSON.parse(fs.readFileSync('js/standalone/records.json')).records,date=JSON.parse(fs.readFileSync('js/standalone/runtime-info-abi.json')).date;
+ const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),V=layouts.version,S=layouts.sfbase,metadata=JSON.parse(fs.readFileSync('js/nethack/records.json')).records,date=JSON.parse(fs.readFileSync('js/nethack/runtime-info-abi.json')).date;
  const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
  const equal=(a,b,label)=>{assert.deepEqual(a,b,label);comparisons++;};
  function pure(fn){const keys=['WebAssembly','fetch','WebSocket','XMLHttpRequest','Worker'],saved=keys.map(k=>Object.getOwnPropertyDescriptor(globalThis,k));let accesses=0;const deny=()=>{accesses++;throw new Error('Forbidden Wasm/network during VERSION file execution');};keys.forEach(k=>Object.defineProperty(globalThis,k,{configurable:true,value:k==='WebAssembly'?new Proxy(Object.create(null),{get:deny}):deny}));try{return fn();}finally{keys.forEach((k,i)=>saved[i]?Object.defineProperty(globalThis,k,saved[i]):delete globalThis[k]);assert.equal(accesses,0);assert.deepEqual([C,R,T],[undefined,undefined,undefined]);contracts+=2;}}
@@ -48,7 +49,7 @@ if(!process.argv.includes('--worker')){
   for(const [label,bytes]of inputs)for(const skip of [0,V.UTD_SKIP_SANITY1]){
    const flags=BigInt(V.UTD_QUIETLY|skip),name='/version-input';sides.forEach(side=>side.write(name,bytes));const files=sides.map(side=>frame(side,name,0));
    const values=sides.map((side,i)=>side.call('uptodate',files[i].p,0,flags));equal(values[0],values[1],'Original uptodate result '+populated+':'+label+':'+skip);snapshot();
-   equal(pure(()=>ctypes.getField('struct instance_globals_c',env.requireGlobal('gc'),'converted_savefile_loaded','signed char')),ref.HEAPU8[Number(ref._probe_decl_global(JSON.parse(fs.readFileSync('js/standalone/decl-storage.json')).globals.findIndex(r=>r.name==='gc')))+metadata.instance_globals_c.fields.converted_savefile_loaded.offset],'Original converted-save marker');
+   equal(pure(()=>ctypes.getField('struct instance_globals_c',env.requireGlobal('gc'),'converted_savefile_loaded','signed char')),ref.HEAPU8[Number(ref._probe_decl_global(JSON.parse(fs.readFileSync('js/nethack/decl-storage.json')).globals.findIndex(r=>r.name==='gc')))+metadata.instance_globals_c.fields.converted_savefile_loaded.offset],'Original converted-save marker');
    sides.forEach((side,i)=>finish(side,files[i]));cases++;
    sides.forEach(side=>side.write(name,bytes.subarray(1)));const criticalFiles=sides.map(side=>frame(side,name,0)),indices=sides.map(side=>{const p=side.alloc(4);new DataView(side.heap().buffer).setInt32(p,-99,true);return p;});
    const results=sides.map((side,i)=>side.call('compare_critical_bytes',criticalFiles[i].p,indices[i],flags));equal(results[0],results[1],'Original critical compatibility status '+label+':'+skip);equal(new DataView(memory.buffer).getInt32(indices[0],true),new DataView(ref.HEAPU8.buffer).getInt32(indices[1],true),'Actual int* first-mismatch copyback '+label+':'+skip);snapshot();

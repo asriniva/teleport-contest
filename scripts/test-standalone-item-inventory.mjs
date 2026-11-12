@@ -1,19 +1,20 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // Combined original-C initialized constructors and inventory, with real owners.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const directory=path.resolve(process.env.STANDALONE_ITEM_INVENTORY_ORACLE||'.cache/standalone-item-inventory');
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json')));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(sha(p),h,'Changed C input '+p);
+for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(layoutSourceSha(p,h),h,'Changed C input '+p);
 for(const [p,h]of Object.entries(receipt.artifactSha256))assert.equal(sha(path.join(directory,p)),h,'Changed C artifact '+p);
 const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),L=layouts.mkobj,O=layouts.o_init;
-const records=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
+const records=JSON.parse(fs.readFileSync('js/nethack/records.json')).records;
 // Explicit unfinished families. No catch-and-skip: any failure for a listed
 // supported type fails the suite. These families are additional integration work.
 const pendingNames=['AMULET_OF_YENDOR','CANDELABRUM_OF_INVOCATION','BELL_OF_OPENING','SPE_BOOK_OF_THE_DEAD','LARGE_BOX','CHEST','ICE_BOX','SACK','OILSKIN_SACK','BAG_OF_HOLDING','FIGURINE','CORPSE','EGG','TIN','STATUE','GLOB_OF_GRAY_OOZE','GLOB_OF_BROWN_PUDDING','GLOB_OF_GREEN_SLIME','GLOB_OF_BLACK_PUDDING','CANDY_BAR','SPE_NOVEL'];

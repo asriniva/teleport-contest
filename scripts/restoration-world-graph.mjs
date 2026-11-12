@@ -5,7 +5,7 @@
 // Unknown nonempty pointer/union/callback cases fail explicitly; this is not a heap scanner.
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
-const schema=JSON.parse(fs.readFileSync(new URL('../js/standalone/records.json',import.meta.url)));
+const schema=JSON.parse(fs.readFileSync(new URL('../js/nethack/records.json',import.meta.url)));
 const records=schema.records;
 function resolve(type){type=type.replace(/\b(const|volatile)\b/g,'').trim().replace(/\s+/g,' ');for(let i=0;schema.aliases[type]&&i<20;i++)type=schema.aliases[type];return type;}
 const primitive=type=>/\*/.test(type)?8:/\b(char|_Bool)\b/.test(type)?1:/\bshort\b/.test(type)?2:/\b(long|double)\b/.test(type)?8:4;

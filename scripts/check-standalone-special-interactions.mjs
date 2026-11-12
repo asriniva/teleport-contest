@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 // Targeted guard; the complete standalone provenance gate remains separate.
 import assert from 'node:assert/strict';
 import {readBeforeLayout} from './services-layout-audit.mjs';
@@ -12,7 +14,7 @@ for(const row of corrections){assert.equal(baseline.sha256[row.file],row.baselin
 const corrected=new Map(corrections.map(row=>[row.file,row.correctedSha256]));
 for(const[p,h]of Object.entries(baseline.sha256))assert.equal(crypto.createHash('sha256').update(readBeforeLayout(p)).digest('hex'),corrected.get(p)??h,p);
 for(const name of ['isaac64','terminal','storage'])assert.deepEqual(fs.readFileSync('js/'+name+'.js'),fs.readFileSync('frozen/'+name+'.js'));
-const abi=read('js/standalone/special-interactions-abi.json');for(const[p,h]of Object.entries(abi.sourceSha256))assert.equal(sha(p),h,p);for(const[p,h]of Object.entries(abi.referenceHeaderSha256))assert.equal(sha(path.resolve(reference,p)),h,p);
+const abi=read('js/nethack/special-interactions-abi.json');for(const[p,h]of Object.entries(abi.sourceSha256))assert.equal(sha(p),h,p);for(const[p,h]of Object.entries(abi.referenceHeaderSha256))assert.equal(sha(path.resolve(reference,p)),h,p);
 const seen=new Set();function collect(file){file=path.resolve(file);assert.ok(file.startsWith(process.cwd()+path.sep));if(seen.has(file))return;seen.add(file);if(file.endsWith('.json'))return;
  const ast=parse(fs.readFileSync(file,'utf8'),{ecmaVersion:'latest',sourceType:'module'});
  function visit(node){if(!node||typeof node!=='object')return;
@@ -22,5 +24,5 @@ const seen=new Set();function collect(file){file=path.resolve(file);assert.ok(fi
   for(const[k,v]of Object.entries(node))if(!['start','end','loc'].includes(k)){if(Array.isArray(v))v.forEach(visit);else if(v&&typeof v==='object')visit(v);}
  }visit(ast);
 }
-collect('js/standalone/program.js');collect('js/standalone/environment.js');
+collect('js/nethack/program.js');collect('js/nethack/environment.js');
 console.log('PASS '+JSON.stringify({policyFiles:baseline.policyCount,unchangedPolicyFiles:baseline.policyCount-corrections.length,approvedCorrections:corrections.map(row=>row.file),frozenFiles:3,productionFiles:seen.size,optionalSourceHashes:Object.keys(abi.sourceSha256).length,measuredHeaders:Object.keys(abi.referenceHeaderSha256).length,limitation:'Targeted new-owner provenance and complete static import closure; does not replace the complete standalone provenance gate or full-game acceptance.'}));

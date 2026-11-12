@@ -14,9 +14,9 @@ for name in ['weapon','worn','wield']:
  text=(weapon if name=='weapon' else support).read_text()
  data[name]={'globals':mapping(text,'teleport_'+name+'_global')}
  if name!='weapon':data[name]['equipment']=mapping(text,'teleport_'+name+'_equipment_cell')
-inputs=[Path(__file__).resolve(),root/'js/standalone/hero-equipment.js',root/'js/standalone/records.json',root/'nethack-c/wasm/tu-libraries/weapon.js',root/'nethack-c/wasm/tu-libraries/wield.js',support,weapon,root/'nethack-c/wasm/compile-defines.json',*[root/('js/ported/'+n+'.js')for n in ['weapon','worn','wield']],*[root/('js/nethack/bindings/'+n+'.js')for n in ['weapon','worn','wield']]]
+inputs=[Path(__file__).resolve(),root/'js/nethack/hero-equipment.js',root/'js/nethack/records.json',root/'nethack-c/wasm/tu-libraries/weapon.js',root/'nethack-c/wasm/tu-libraries/wield.js',support,weapon,root/'nethack-c/wasm/compile-defines.json',*[root/('js/ported/'+n+'.js')for n in ['weapon','worn','wield']],*[root/('js/nethack/bindings/'+n+'.js')for n in ['weapon','worn','wield']]]
 # Native source/library and measured window record bind this macro dispatch.
-fields=json.loads((root/'js/standalone/records.json').read_text())['records']['window_procs']['fields']
+fields=json.loads((root/'js/nethack/records.json').read_text())['records']['window_procs']['fields']
 windows={'create_nhwindow':('win_create_nhwindow','ii'),'start_menu':('win_start_menu','vij'),'end_menu':('win_end_menu','vip'),'destroy_nhwindow':('win_destroy_nhwindow','vi')}
 data['weapon']['windows']={name:{'field':field,'signature':sig,'nativeType':fields[field]['ctype']}for name,(field,sig)in windows.items()}
 header=root/'.cache/wasm64-build/tree/include/hack.h'
@@ -30,5 +30,5 @@ for macro,field in [('BLACK','black'),('BLUE','blue'),('AMBER','amber')]:assert 
 inputs.append(colors)
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 data['sourceSha256']={str(p.relative_to(root)):sha(p)for p in inputs}
-(root/'js/standalone/equipment-abi.json').write_text(json.dumps(data,indent=2)+'\n')
+(root/'js/nethack/equipment-abi.json').write_text(json.dumps(data,indent=2)+'\n')
 print('Bound equipment global/cell maps to unchanged original transport.')

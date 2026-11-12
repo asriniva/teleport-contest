@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {CMemory} from '../js/c-runtime/heap.js';
-import {createMemoryServices} from '../js/standalone/memory-services.js';
-import {createFunctions,CExit} from '../js/standalone/functions.js';
+import {createMemoryServices} from '../js/nethack/memory-services.js';
+import {createFunctions,CExit} from '../js/nethack/functions.js';
 import * as canonical from '../js/isaac64.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 

@@ -100,7 +100,7 @@ generated += [' C=>'+body('probe_turn_hero_'+str(i))+(','if i+1<len(heroes)else'
 generated += ['];','const addressHeaders=[']
 generated += [' C=>'+body('probe_turn_address_'+str(i))+(','if i+1<len(addresses)else'')for i in range(len(addresses))]
 generated += ['];','const headerWindow=C=>'+body('probe_turn_window')+';','const headerIsmnum=(C,n)=>'+body('probe_turn_ismnum')+';','const headerNoticeOn=C=>'+body('probe_turn_notice_on')+';','const headerNoticeOff=C=>'+body('probe_turn_notice_off')+';','const headerNews=C=>'+body('probe_turn_news')+';','// END GENERATED ALLMAIN HEADERS']
-js=root/'js/standalone/turn-loop.js';current=js.read_text();pattern=r'// BEGIN GENERATED ALLMAIN HEADERS.*?// END GENERATED ALLMAIN HEADERS'
+js=root/'js/nethack/turn-loop.js';current=js.read_text();pattern=r'// BEGIN GENERATED ALLMAIN HEADERS.*?// END GENERATED ALLMAIN HEADERS'
 assert len(re.findall(pattern,current,re.S))==1
 js.write_text(re.sub(pattern,lambda _: '\n'.join(generated),current,flags=re.S))
 def parameters(raw):
@@ -112,7 +112,7 @@ for ret,name,params in re.findall(r'^([\w\s*]+?)\s+teleport_allmain_dep_(\w+)\((
     dependencies[name]={'result':ret,'parameters':parameters(params)}
 assert len(dependencies)>100
 macros=subprocess.check_output([clang,*flags,'-dM','-E',str(scratch)],text=True)
-window_callbacks=json.loads((root/'js/standalone/window-abi.json').read_text())['windows']['callbacks']
+window_callbacks=json.loads((root/'js/nethack/window-abi.json').read_text())['windows']['callbacks']
 window_macros={}
 for name,field in re.findall(r'^#define (\w+) \(\*windowprocs\.(\w+)\)$',macros,re.M):
     if name in dependencies:window_macros[name]={'field':field,'type':window_callbacks[field]}
@@ -130,7 +130,7 @@ sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
 deps=subprocess.check_output([clang,*flags,'-M',str(scratch)],text=True)
 headers=sorted(set(Path(path).resolve()for path in shlex.split(deps.split(':',1)[1].replace('\\\n',''))if Path(path).resolve().is_relative_to(reference)))
 headers.extend(tree/('src/'+name+'.c')for name in ['allmain','role','decl'])
-inputs=[Path(__file__).resolve(),js,runtime,support,root/'js/ported/allmain.js',root/'nethack-c/wasm/tu-libraries/allmain.js',root/'nethack-c/wasm/compile-defines.json',root/'js/standalone/window-abi.json']
+inputs=[Path(__file__).resolve(),js,runtime,support,root/'js/ported/allmain.js',root/'nethack-c/wasm/tu-libraries/allmain.js',root/'nethack-c/wasm/compile-defines.json',root/'js/nethack/window-abi.json']
 data={'fields':fields,'addresses':addresses,'heroes':heroes,'roots':root_types,'rootBytes':root_bytes,'windowMacros':window_macros,'dependencies':dependencies,'assertion':{'text':assertion[1],'file':assertion[2],'line':int(assertion[3])},'sourceSha256':{str(path.relative_to(root)):sha(path)for path in inputs},'referenceHeaderSha256':{str(path.relative_to(reference)):sha(path)for path in headers}}
-(root/'js/standalone/turn-loop-abi.json').write_text(json.dumps(data,indent=2)+'\n')
+(root/'js/nethack/turn-loop-abi.json').write_text(json.dumps(data,indent=2)+'\n')
 print('Bound ALLMAIN turn transport:',len(heroes),'hero headers,',len(root_types),'shared roots,',len(dependencies),'typed dependencies.')

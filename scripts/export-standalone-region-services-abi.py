@@ -10,7 +10,7 @@ with tempfile.TemporaryDirectory(prefix='standalone-region-abi-')as scratch:
  layout['size']=int(re.search(r'@probe_rg_context = .*?constant i64 (-?\d+)',ir)[1])
  expected=json.loads((root/'js/wasm/tu-layouts.json').read_text())['region'];assert layout==expected,('Changed native REGION layout',{k:(v,expected.get(k))for k,v in layout.items()if expected.get(k)!=v},sorted(set(expected)-set(layout)))
  p.write_text('#include '+json.dumps(str(support))+'\n');native=subprocess.check_output([str(clang),*flags,'-E','-P',str(p)],text=True);deps=subprocess.check_output([str(clang),*flags,'-M',str(p)],text=True);headers=[Path(v).resolve()for v in shlex.split(deps.split(':',1)[1].replace('\\\n',''))if Path(v).resolve().is_relative_to(root)]
-public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions'];calls={}
+public=json.loads((root/'js/nethack/public-functions.json').read_text())['functions'];calls={}
 def split(s):
  out=[];depth=0;start=0
  for i,c in enumerate(s):
@@ -36,7 +36,7 @@ assert all(target in public for target in sf.values());assert len(sf)==16,(len(s
 native_support=support.read_text();globals=[name for _,name in re.findall(r'case (\d+):return (?:\(void\*\))?&?(\w+);',native_support.split('teleport_region_global',1)[1].split('return 0;',1)[0])];assert len(globals)==14
 assert 'caller==0?"inside_gas_cloud":caller==1?"create_gas_cloud":"region_safety"'in native_support
 messages={int(i):name for i,name in re.findall(r'case (\d+):(\w+)\(fmt,a,b\);',native_support)};assert len(messages)==6
-paths=[Path(__file__).resolve(),header,support,library,root/'js/standalone/region-services.js',root/'js/standalone/level-startup.js',root/'js/ported/region.js',root/'js/nethack/bindings/region.js',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'js/wasm/tu-layouts.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+paths=[Path(__file__).resolve(),header,support,library,root/'js/nethack/region-services.js',root/'js/nethack/level-startup.js',root/'js/ported/region.js',root/'js/nethack/bindings/region.js',root/'js/nethack/records.json',root/'js/nethack/public-functions.json',root/'js/wasm/tu-layouts.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 policyNames=re.findall(r'^export function (\w+)\(', (root/'js/ported/region.js').read_text(),re.M)
 data={'layout':layout,'globals':globals,'calls':calls,'sf':sf,'messages':messages,'rngCallers':['inside_gas_cloud','create_gas_cloud','region_safety'],'monsterBits':['mcansee','mblinded'],'heroBits':['uswallow','uinwater'],'public':{n:public[n]for n in policyNames if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(root)):sha(p)for p in sorted(set(headers+[tree/'src/region.c']))}}
-(root/'js/standalone/region-services-abi.json').write_text(json.dumps(data,indent=2)+'\n');print(f'Bound REGION: {len(layout)} native values/{len(calls)} foreign calls/{len(sf)} SF aliases')
+(root/'js/nethack/region-services-abi.json').write_text(json.dumps(data,indent=2)+'\n');print(f'Bound REGION: {len(layout)} native values/{len(calls)} foreign calls/{len(sf)} SF aliases')

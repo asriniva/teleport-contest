@@ -65,8 +65,8 @@ with tempfile.TemporaryDirectory(prefix='getpos-header-')as scratch:
  expressions=[]
  for i in [*map(str,range(len(headerNames))),'mon','obj']:
   f=functions['header_'+i];stmt=next(n for n in f['inner']if n['kind']=='CompoundStmt');expressions.append(lower(stmt['inner'][0]['inner'][0]))
- output=root/'js/standalone/getpos-header-functions.js';output.write_text('// Generated configured C display.h expressions; no targeting policies.\nexport const getposGlyphHeaders=[\n'+',\n'.join('glyph=>(Number('+e+')|0)'for e in expressions[:-2])+'\n];\nexport const getposMonGlyph=(n,gender)=>(Number('+expressions[-2]+')|0);\nexport const getposObjGlyph=n=>(Number('+expressions[-1]+')|0);\n')
-native=support.read_text();lib=library.read_text();public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions']
+ output=root/'js/nethack/getpos-header-functions.js';output.write_text('// Generated configured C display.h expressions; no targeting policies.\nexport const getposGlyphHeaders=[\n'+',\n'.join('glyph=>(Number('+e+')|0)'for e in expressions[:-2])+'\n];\nexport const getposMonGlyph=(n,gender)=>(Number('+expressions[-2]+')|0);\nexport const getposObjGlyph=n=>(Number('+expressions[-1]+')|0);\n')
+native=support.read_text();lib=library.read_text();public=json.loads((root/'js/nethack/public-functions.json').read_text())['functions']
 globals={int(i):v for i,v in re.findall(r'case (\d+):return (.*?);',native.split('teleport_getpos_global',1)[1].split('int teleport_getpos_flag',1)[0])};assert len(globals)==13
 commands=re.findall(r'case \d+:return (\w+);',native.split('teleport_getpos_command_token',1)[1].split('char teleport_getpos_cmd_from_func',1)[0]);assert len(commands)==10
 calls={}
@@ -74,6 +74,6 @@ for name,target in re.findall(r'^      (\w+):[^\n]*?=>\s*(?:Number\()?_(\w+)\(',
  if not target.startswith('teleport_getpos_'):calls[name]={'target':target,'prototype':public[target]}
 callbacks={'cmp_coord_distu':'int (const void *, const void *)','gloc_filter_floodfill_matcharea':'int (coordxy, coordxy)'}
 names=re.findall(r'^export function (\w+)',(root/'js/ported/getpos.js').read_text(),re.M)
-sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();inputs=[Path(__file__).resolve(),root/'js/standalone/getpos.js',root/'js/standalone/getpos-header-functions.js',header,support,library,root/'js/ported/getpos.js',root/'js/nethack/bindings/getpos.js',root/'js/wasm/tu-layouts.json',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'nethack-c/wasm/compile-defines.json']
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();inputs=[Path(__file__).resolve(),root/'js/nethack/getpos.js',root/'js/nethack/getpos-header-functions.js',header,support,library,root/'js/ported/getpos.js',root/'js/nethack/bindings/getpos.js',root/'js/wasm/tu-layouts.json',root/'js/nethack/records.json',root/'js/nethack/public-functions.json',root/'nethack-c/wasm/compile-defines.json']
 result={'qsortDispatch':qsortDispatch,'layout':layout,'globals':globals,'commands':commands,'callbacks':callbacks,'calls':calls,'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[source]))}}
-(root/'js/standalone/getpos-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original GETPOS header/native typed targeting ABI.')
+(root/'js/nethack/getpos-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original GETPOS header/native typed targeting ABI.')

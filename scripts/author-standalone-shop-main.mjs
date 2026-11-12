@@ -1,6 +1,6 @@
 // Original-C author only: read-only map/room/object observations, keyboard actions.
 import fs from 'node:fs';import {gzipSync} from 'node:zlib';import {runFullOriginalC} from './full-original-c-run.mjs';
-const R=JSON.parse(fs.readFileSync('js/standalone/records.json')).records,L=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),out='.cache/shop-author';fs.mkdirSync(out,{recursive:true});const f=(t,n)=>R[t].fields[n].offset;
+const R=JSON.parse(fs.readFileSync('js/nethack/records.json')).records,L=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),out='.cache/shop-author';fs.mkdirSync(out,{recursive:true});const f=(t,n)=>R[t].fields[n].offset;
 const profile={timezone:'UTC',options:'OPTIONS=!news,autopickup\n',argv:['-u','Ada-male-neutral','-p','Tourist','-r','human']};
 for(let seed=Number(process.env.FIRST_SEED??7);seed<=Number(process.env.LAST_SEED??7);seed++){
  let menuSelected=false;let g,pending,phase='travel',target,previous='',stalls=0,lastLevel,selected;const events=[];

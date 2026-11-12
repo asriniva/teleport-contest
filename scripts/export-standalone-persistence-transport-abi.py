@@ -3,7 +3,7 @@
 import hashlib,json,os,re,shlex,subprocess
 from pathlib import Path
 root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree'
-paths=[Path(__file__).resolve(),root/'nethack-c/wasm/compile-defines.json',root/'nethack-c/wasm/tu-support.c',root/'js/standalone/records.json',root/'js/wasm/tu-layouts.json',root/'js/standalone/level-persistence.js',root/'js/standalone/version-info.js',root/'js/standalone/libc.js',root/'js/standalone/random-text.js']
+paths=[Path(__file__).resolve(),root/'nethack-c/wasm/compile-defines.json',root/'nethack-c/wasm/tu-support.c',root/'js/nethack/records.json',root/'js/wasm/tu-layouts.json',root/'js/nethack/level-persistence.js',root/'js/nethack/version-info.js',root/'js/nethack/libc.js',root/'js/nethack/random-text.js']
 for name in ['timeout','light','mkroom','restore','sfbase','sfstruct','engrave','region','dungeon','track','version','rumors']:
  paths.append(root/('js/ported/'+name+'.js'))
  runtime=root/('js/nethack/bindings/'+name+'.js')
@@ -21,7 +21,7 @@ for name in ['timeout','light','mkroom','restore','sfbase','sfstruct','engrave',
  source=tree/('src/'+name+'.c');deps=subprocess.check_output([str(ref/'.cache/emsdk/upstream/bin/clang'),*flags,'-M',str(source)],text=True)
  headers.update(Path(p).resolve()for p in shlex.split(deps.split(':',1)[1].replace('\\\n','')))
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-fields=json.loads((root/'js/standalone/records.json').read_text())['records']['window_procs']['fields']
+fields=json.loads((root/'js/nethack/records.json').read_text())['records']['window_procs']['fields']
 windows={'create_nhwindow':('win_create_nhwindow','ii'),'putstr':('win_putstr','viip'),'display_nhwindow':('win_display_nhwindow','vii'),'destroy_nhwindow':('win_destroy_nhwindow','vi'),'wait_synch':('win_wait_synch','v')}
-(root/'js/standalone/persistence-transport-abi.json').write_text(json.dumps({'versionWindows':{name:{'field':field,'signature':sig,'nativeType':fields[field]['ctype']}for name,(field,sig)in windows.items()},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(headers)if p.is_relative_to(ref)},'scope':'Source-bound transport provenance; connected nonempty level serializer subset is tested separately. Full checkpoint graph, ghost mapping/relinking and full-game recordings remain unaccepted.'},indent=2)+'\n')
+(root/'js/nethack/persistence-transport-abi.json').write_text(json.dumps({'versionWindows':{name:{'field':field,'signature':sig,'nativeType':fields[field]['ctype']}for name,(field,sig)in windows.items()},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(headers)if p.is_relative_to(ref)},'scope':'Source-bound transport provenance; connected nonempty level serializer subset is tested separately. Full checkpoint graph, ghost mapping/relinking and full-game recordings remain unaccepted.'},indent=2)+'\n')
 print('Bound original timestamp/room/timer/light serialization transport inputs.')

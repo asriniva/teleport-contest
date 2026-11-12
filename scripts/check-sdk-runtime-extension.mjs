@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 // Development-only proof of the exact native-tested SDK additions after cleanup.
 // The immutable relocation baseline and translated-policy guards remain separate.
 import assert from 'node:assert/strict';
@@ -13,7 +15,7 @@ export function sdkRuntimeExtensionBaseline(){
  if(!fs.existsSync(declaration))return null;
  const row=JSON.parse(readBeforeLayout(declaration));
  assert.equal(row.baselineCommit,'460d483','SDK extension starts after the published game-public checkpoint');
- assert.deepEqual(Object.keys(row.files).sort(),['js/c-runtime/stdio.js','js/services/c-vfs.js','js/standalone/unix-platform-syscalls.js'],'Only the reviewed stdio/CVFS feature delta');
+ assert.deepEqual(Object.keys(row.files).sort(),['js/c-runtime/stdio.js','js/services/c-vfs.js','js/nethack/unix-platform-syscalls.js'],'Only the reviewed stdio/CVFS feature delta');
  for(const[file,hashes]of Object.entries(row.files)){
   const before=execFileSync('git',['show',row.baselineCommit+':'+file]);
   assert.equal(sha(before),hashes.beforeSha256,'Preserved SDK extension baseline '+file);

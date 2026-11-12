@@ -1,12 +1,13 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {createNativeTerminal} from '../js/platform/darwin/terminal.js';
-import {createTerminalDevices} from '../js/standalone/unix-terminal.js';
+import {createTerminalDevices} from '../js/nethack/unix-terminal.js';
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),seed=1n;
 const directory=path.resolve(process.env.STANDALONE_WINDOW_STARTUP_ORACLE||'.cache/standalone-window-startup-v8');
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(sha(p),h,'Changed reference input '+p);
+for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(layoutSourceSha(p,h),h,'Changed reference input '+p);
 for(const [p,h]of Object.entries(receipt.artifactSha256))assert.equal(sha(path.join(directory,p)),h,'Changed reference artifact '+p);
 const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
 const errors=[],entry=fs.readFileSync('nethack-c/wasm/terminfo/x/xterm-256color');
@@ -34,13 +35,13 @@ for(let name=0;name<23;name++){
  assert.equal(devices.fpathconf(0,name),BigInt(ref._probe_tty_pathconf(0,name)),'SDK pathconf '+name);assert.equal(deviceEnv.libc.errno,ref._probe_tty_errno(73));checks+=2;
 }
  const env=createStandaloneEnvironment({initialBytes:1024,maximumBytes:64*1024*1024,environment:{TERM:'xterm-256color',NOMUX_MARKERS:'1',NETHACK_RNGLOG:'/rng.log',NETHACK_FIXED_DATETIME:'20260102030405'}});
- env.enableStdio();env.enableDecl(layouts.decl);env.call('decl','program_state_init');env.call('decl','decl_globals_init');env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.call('objects','objects_globals_init');env.enableMonst(layouts.monst);env.call('monst','monst_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed});env.call('rnd','rng_log_init');env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.enableObjectRecords(layouts);env.enableItemInventory(layouts);env.enableTimers(layouts);env.enableItemNaming(layouts);const group=env.enableMonsterSelection(layouts);const decl=JSON.parse(fs.readFileSync('js/standalone/decl-storage.json')).globals,before=decl.map(r=>env.memory.readBytes(env.requireGlobal(r.name),r.bytes));const creation=env.enableMonsterCreation(layouts);decl.forEach((r,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(r.name),r.bytes),before[i],'enabling creation preserves '+r.name));
+ env.enableStdio();env.enableDecl(layouts.decl);env.call('decl','program_state_init');env.call('decl','decl_globals_init');env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.call('objects','objects_globals_init');env.enableMonst(layouts.monst);env.call('monst','monst_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed});env.call('rnd','rng_log_init');env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.enableObjectRecords(layouts);env.enableItemInventory(layouts);env.enableTimers(layouts);env.enableItemNaming(layouts);const group=env.enableMonsterSelection(layouts);const decl=JSON.parse(fs.readFileSync('js/nethack/decl-storage.json')).globals,before=decl.map(r=>env.memory.readBytes(env.requireGlobal(r.name),r.bytes));const creation=env.enableMonsterCreation(layouts);decl.forEach((r,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(r.name),r.bytes),before[i],'enabling creation preserves '+r.name));
 
  env.enableGameStartup(layouts);env.call('sys','sys_early_init');
 env.enableHeroStartup(layouts);env.enableWorldPosition(layouts);env.enableLuaSandbox(layouts);env.enableDisplayStartup(layouts);
 
-ref._probe_level_init(seed);const window=env.enableWindowSystem(layouts),metadata=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
-const windowAbi=JSON.parse(fs.readFileSync('js/standalone/window-abi.json')),publicFunctions=JSON.parse(fs.readFileSync('js/standalone/public-functions.json')).functions;
+ref._probe_level_init(seed);const window=env.enableWindowSystem(layouts),metadata=JSON.parse(fs.readFileSync('js/nethack/records.json')).records;
+const windowAbi=JSON.parse(fs.readFileSync('js/nethack/window-abi.json')),publicFunctions=JSON.parse(fs.readFileSync('js/nethack/public-functions.json')).functions;
 const callbacks=new Map();for(const module of ['windows','wintty'])for(const [i,name]of JSON.parse(fs.readFileSync(path.join(directory,module+'-callbacks.json'))).entries())callbacks.set(BigInt(ref['_probe_'+module+'_callback'](i)),{module,name});
 function text(heap,p){p=Number(p);let end=p;while(heap[end])end++;return Buffer.from(heap.slice(p,end)).toString('latin1');}
 function table(c,j,label){
@@ -58,7 +59,7 @@ function table(c,j,label){
 table(ref._probe_windows_storage(0),env.requireGlobal('windowprocs'),'default window');
 table(ref._probe_windows_storage(2),window.storage[2],'original hangup procedures');
 table(ref._probe_windows_storage(3),window.storage[3],'initial dump backup');
-const names=JSON.parse(fs.readFileSync('js/standalone/window-abi.json')).wintty.schema.globals;
+const names=JSON.parse(fs.readFileSync('js/nethack/window-abi.json')).wintty.schema.globals;
 const ttyIndex=Object.keys(names).indexOf('tty_procs');table(ref._probe_wintty_global(ttyIndex),env.requireGlobal('tty_procs'),'tty initializer');
 const name=ref._malloc(4n);ref.HEAPU8.set(Buffer.from('tty\0'),Number(name));ref._probe_window_select(BigInt(name));env.services.choose_windows('tty');table(ref._probe_window_table(),env.requireGlobal('windowprocs'),'selected tty');
 const p=window.platform,allocate=p.wire.stackAlloc;p.wire.stackAlloc=n=>{const at=allocate(n);env.memory.memset(at,0,n);return at;};

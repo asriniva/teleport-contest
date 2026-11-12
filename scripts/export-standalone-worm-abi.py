@@ -15,9 +15,9 @@ for name in dependencies:assert re.search(r'\b'+name+r':',library),name
 assert '#define Sfo_coordxy(a,b,c) sfo_int16(a, b, c)' in (tree/'include/savefile.h').read_text()
 assert '#define Sfi_coordxy(a,b,c) sfi_int16(a, b, c)' in (tree/'include/savefile.h').read_text()
 layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['worm']
-local=['js/standalone/worm.js','scripts/export-standalone-worm-abi.py','js/ported/worm.js','js/nethack/bindings/worm.js','js/backends/emscripten/runtime.js','nethack-c/wasm/tu-libraries/worm.js','nethack-c/wasm/tu-support.c','scripts/tu-worm-layout.h','js/wasm/tu-layouts.json','nethack-c/wasm/compile-defines.json']
+local=['js/nethack/worm.js','scripts/export-standalone-worm-abi.py','js/ported/worm.js','js/nethack/bindings/worm.js','js/backends/emscripten/runtime.js','nethack-c/wasm/tu-libraries/worm.js','nethack-c/wasm/tu-support.c','scripts/tu-worm-layout.h','js/wasm/tu-layouts.json','nethack-c/wasm/compile-defines.json']
 refs=[tree/'src/worm.c',*sorted((tree/'include').glob('*.h'))]
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 data={'publicFunctions':public,'monsterArguments':monster,'dependencies':dependencies,'rngCallers':['worm_move','worm_nomove','cutworm'],'layout':layout,'sourceSha256':{str(p):sha(p)for p in [*[root/n for n in local],*refs]}}
-(root/'js/standalone/worm-abi.json').write_text(json.dumps(data,indent=2)+'\n')
+(root/'js/nethack/worm-abi.json').write_text(json.dumps(data,indent=2)+'\n')
 print('Bound',len(public),'public WORM functions and',len(dependencies),'native dependency boundaries')

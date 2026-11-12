@@ -1,14 +1,15 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {pathToFileURL} from 'node:url';
 import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
 import {C,R,T} from '../js/c-runtime/context.js';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {createNativeTerminal} from '../js/platform/darwin/terminal.js';
-import {createTerminalDevices} from '../js/standalone/unix-terminal.js';
+import {createTerminalDevices} from '../js/nethack/unix-terminal.js';
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));
 const directory=path.resolve(process.env.STANDALONE_EAT_STARTUP_ORACLE||'.cache/standalone-eat-state-v2');
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(sha(p),h,'Changed reference input '+p);
+for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(layoutSourceSha(p,h),h,'Changed reference input '+p);
 for(const [p,h]of Object.entries(receipt.artifactSha256))assert.equal(sha(path.join(directory,p)),h,'Changed reference artifact '+p);
 const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
 let totalChecks=0;
@@ -50,7 +51,7 @@ for(let name=0;name<23;name++){
  Object.defineProperty(globalThis,'WebAssembly',{configurable:true,value:new Proxy({}, {get:forbidden})});
  for(const name of ['fetch','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,value:forbidden});
  const env=createStandaloneEnvironment({initialBytes:1024,maximumBytes:64*1024*1024,environment:{TERM:'xterm-256color',NOMUX_MARKERS:'1',NETHACK_RNGLOG:'/rng.log',NETHACK_FIXED_DATETIME:'20260102030405',NETHACK_SEED:seed.toString()}});
- const stdio=env.enableStdio();env.enableDecl(layouts.decl);env.call('decl','program_state_init');env.call('decl','decl_globals_init');env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.call('objects','objects_globals_init');env.enableMonst(layouts.monst);env.call('monst','monst_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed});env.call('rnd','rng_log_init');env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.enableObjectRecords(layouts);env.enableItemInventory(layouts);env.enableTimers(layouts);env.enableItemNaming(layouts);const group=env.enableMonsterSelection(layouts);const decl=JSON.parse(fs.readFileSync('js/standalone/decl-storage.json')).globals,before=decl.map(r=>env.memory.readBytes(env.requireGlobal(r.name),r.bytes));const creation=env.enableMonsterCreation(layouts);decl.forEach((r,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(r.name),r.bytes),before[i],'enabling creation preserves '+r.name));
+ const stdio=env.enableStdio();env.enableDecl(layouts.decl);env.call('decl','program_state_init');env.call('decl','decl_globals_init');env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.call('objects','objects_globals_init');env.enableMonst(layouts.monst);env.call('monst','monst_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed});env.call('rnd','rng_log_init');env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.enableObjectRecords(layouts);env.enableItemInventory(layouts);env.enableTimers(layouts);env.enableItemNaming(layouts);const group=env.enableMonsterSelection(layouts);const decl=JSON.parse(fs.readFileSync('js/nethack/decl-storage.json')).globals,before=decl.map(r=>env.memory.readBytes(env.requireGlobal(r.name),r.bytes));const creation=env.enableMonsterCreation(layouts);decl.forEach((r,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(r.name),r.bytes),before[i],'enabling creation preserves '+r.name));
 
  const startup=env.enableGameStartup(layouts);env.call('sys','sys_early_init');
 env.enableHeroStartup(layouts);env.enableWorldPosition(layouts);env.enableLuaSandbox(layouts);env.enableDisplayStartup(layouts);
@@ -66,7 +67,7 @@ ref._probe_level_init(seed);const assets=process.env.STANDALONE_REFERENCE_ROOT+'
 for(const [key,value]of Object.entries({NETHACK_FIXED_DATETIME:'20260102030405',NETHACK_RNGLOG:'/rng.log',NETHACK_SEED:seed.toString()})){const p=ref._malloc(BigInt(key.length+value.length+2));ref.HEAPU8.set(Buffer.from(key+'\0'+value+'\0'),Number(p));ref._setenv(BigInt(p),BigInt(Number(p)+key.length+1),1);ref._free(BigInt(p));}
 ref.FS.writeFile('sysconf',fs.readFileSync(process.env.STANDALONE_REFERENCE_ROOT+'/.cache/wasm64-build/assets/sysconf'));
 const player=ref._malloc(4n);ref.HEAPU8.set(Buffer.from('Ada\0'),Number(player));ref._probe_startup_role_config(role,0,0,0,BigInt(player));ref._free(player);ref._vision_init();const type=ref._malloc(4n);ref.HEAPU8.set(Buffer.from('tty\0'),Number(type));ref._probe_window_select(BigInt(type));ref._free(type);ref._initoptions();const chosen=ref._malloc(4n);ref.HEAPU8.set(Buffer.from('Ada\0'),Number(chosen));ref._probe_startup_role_config(role,0,0,0,BigInt(chosen));ref._free(chosen);ref._probe_window_init();ref._init_sound_disp_gamewindows();
-const metadata=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
+const metadata=JSON.parse(fs.readFileSync('js/nethack/records.json')).records;
 function snapshot(heap,at,type,count=1){
  at=Number(at);const record=metadata[type]??(['short','long'].includes(type)?{size:type==='short'?2:8,fields:{}}:null);assert.ok(record,'Measured snapshot '+type);const bytes=Buffer.from(heap.slice(at,at+record.size*count)),strings={};
  function walk(type,offset,label){for(const [name,f]of Object.entries(metadata[type]?.fields??{})){
@@ -90,7 +91,7 @@ assert.ok(jkeys.length>0,'Real legacy pager consumes explicit More input');asser
 const cglobal=name=>{if(name==='objects')return Number(ref._probe_startup_global(7));const i=decl.findIndex(row=>row.name===name);assert.ok(i>=0,'Known DECL global '+name);return Number(ref._probe_decl_global(i));};
 for(const [name,type,count]of [['u','you',1],['flags','flag',1],['disp','display_hints',1],['svs','instance_globals_saved_s',1],['svb','instance_globals_saved_b',1],['objects','objclass',layouts.o_init.NUM_OBJECTS]]){assert.deepEqual(snapshot(env.memory.HEAPU8,env.requireGlobal(name),type,count),snapshot(ref.HEAPU8,cglobal(name),type,count),'source activated equipment/skills/discovery state '+name);checks++;}
 const pointer=(heap,p)=>Number(new DataView(heap.buffer).getBigUint64(p,true));
-const winttyGlobals=Object.keys(JSON.parse(fs.readFileSync('js/standalone/window-abi.json')).wintty.schema.globals),ttyGlobal=name=>{const i=winttyGlobals.indexOf(name);assert.ok(i>=0,'Known original WINTTY global '+name);return Number(ref._probe_wintty_global(i));};
+const winttyGlobals=Object.keys(JSON.parse(fs.readFileSync('js/nethack/window-abi.json')).wintty.schema.globals),ttyGlobal=name=>{const i=winttyGlobals.indexOf(name);assert.ok(i>=0,'Known original WINTTY global '+name);return Number(ref._probe_wintty_global(i));};
 function displayState(heap,at){const view=new DataView(heap.buffer);return Object.fromEntries(Object.entries(metadata.DisplayDesc.fields).map(([name,field])=>[name,field.ctype.startsWith('short ')?view.getInt16(at+field.offset,true):field.ctype.startsWith('char ')?view.getInt8(at+field.offset):field.ctype.startsWith('uint32 ')?view.getUint32(at+field.offset,true):view.getInt32(at+field.offset,true)]));}
 assert.deepEqual(displayState(env.memory.HEAPU8,pointer(env.memory.HEAPU8,env.requireGlobal('ttyDisplay'))),displayState(ref.HEAPU8,pointer(ref.HEAPU8,ttyGlobal('ttyDisplay'))),'Source display callback/input fields after actual pager');checks++;
 assert.equal(env.memory.view.getInt8(env.requireGlobal('morc')),new DataView(ref.HEAPU8.buffer).getInt8(ttyGlobal('morc')),'Source More dismissal character');checks++;
@@ -116,7 +117,7 @@ function inventoryGraph(heap,first,ids=new Map()){
 }
 const inventoryOffset=metadata.instance_globals_i.fields.invent.offset,ji=inventoryGraph(env.memory.HEAPU8,pointer(env.memory.HEAPU8,env.requireGlobal('gi')+inventoryOffset)),ci=inventoryGraph(ref.HEAPU8,pointer(ref.HEAPU8,cglobal('gi')+inventoryOffset));
 assert.deepEqual(ji.rows,ci.rows,'source equipped inventory records/order/contents/names/worn masks');checks++;
-for(const name of JSON.parse(fs.readFileSync('js/standalone/equipment-abi.json')).worn.equipment){const j=pointer(env.memory.HEAPU8,env.requireGlobal(name)),c=pointer(ref.HEAPU8,cglobal(name));assert.equal(j?ji.ids.get(j):null,c?ci.ids.get(c):null,'source equipment slot identity '+name);if(j)assert.ok(ji.ids.has(j),'Equipped object belongs to inventory');if(c)assert.ok(ci.ids.has(c),'C equipped object belongs to inventory');checks++;}
+for(const name of JSON.parse(fs.readFileSync('js/nethack/equipment-abi.json')).worn.equipment){const j=pointer(env.memory.HEAPU8,env.requireGlobal(name)),c=pointer(ref.HEAPU8,cglobal(name));assert.equal(j?ji.ids.get(j):null,c?ci.ids.get(c):null,'source equipment slot identity '+name);if(j)assert.ok(ji.ids.has(j),'Equipped object belongs to inventory');if(c)assert.ok(ci.ids.has(c),'C equipped object belongs to inventory');checks++;}
 const actual=Buffer.from(stdio.captured(1)),expected=Buffer.from(coutput);fs.writeFileSync('.cache/eat-state-'+seed+'-'+role+'-'+roleplay+'-js.stdout',actual);fs.writeFileSync('.cache/eat-state-'+seed+'-'+role+'-'+roleplay+'-c.stdout',expected);
 assert.deepEqual(actual,expected,'actual original-C legacy pager and first-display terminal bytes');checks++;
 assert.ok(!actual.includes(0),'First-display acceptance requires initialized symbols; matching NUL map output is incomplete bootstrap');assert.ok(actual.includes(64),'Default first display must contain the visible hero glyph');

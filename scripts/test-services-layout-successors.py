@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+import sys as _layout_sys
+from pathlib import Path as _LayoutPath
+_layout_sys.path.insert(0,str(_LayoutPath(__file__).resolve().parent))
+from nethack_layout import historical_cli as _prior_layout_cli
+if __name__=='__main__':_prior_layout_cli(__file__)
 """Isolated guard fixtures only: not native gameplay acceptance evidence."""
 import copy,importlib.util,json,tempfile,os,shutil,subprocess
 from pathlib import Path
@@ -53,16 +58,16 @@ with tempfile.TemporaryDirectory(prefix='services-layout-qualification-')as dire
   source_root=Path(__file__).resolve().parents[1]
   for file in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py','post_default_successors.py','monmove_source_successors.py','window_headers_source_successors.py']:
    shutil.copyfile(source_root/'scripts'/file,scripts/file)
-  row_path='js/standalone/level-startup.js';prior=b'pre-cleanup '+history[row_path];fixture_recipe={'baselineCommit':'fixture-before-cleanup','moves':{},'files':[{'file':row_path,'destination':row_path,'beforeSha256':q.sha(prior),'afterSha256':q.sha(history[row_path])}]};(root/'docs/runtime-environment/services-layout.json').write_text(json.dumps(fixture_recipe))
+  row_path='js/nethack/level-startup.js';prior=b'pre-cleanup '+history[row_path];fixture_recipe={'baselineCommit':'fixture-before-cleanup','moves':{},'files':[{'file':row_path,'destination':row_path,'beforeSha256':q.sha(prior),'afterSha256':q.sha(history[row_path])}]};(root/'docs/runtime-environment/services-layout.json').write_text(json.dumps(fixture_recipe))
   (root/'history.json').write_text(json.dumps({p:b.decode()for p,b in history.items()}))
   bindir=root/'bin';bindir.mkdir();git=bindir/'git'
   git.write_text('#!/usr/bin/env python3\nimport json,sys,pathlib\nassert sys.argv[1]=="show"\ncommit,path=sys.argv[2].split(":",1)\nassert commit in ['+repr(q.CLEANUP_COMMIT)+',"fixture-before-cleanup"]\nsys.stdout.write(("pre-cleanup "if commit=="fixture-before-cleanup"else"")+json.loads((pathlib.Path(__file__).parent.parent/"history.json").read_text())[path])\n');git.chmod(0o755)
   node=source_root/'.cache/emsdk/node/24.19.0_64bit/bin/node'
-  code='import fs from "node:fs";import assert from "node:assert/strict";import{pathToFileURL}from "node:url";const api=await import(pathToFileURL(process.cwd()+"/scripts/services-layout-audit.mjs")),file="js/standalone/pager-target-header-functions.js",actual=fs.readFileSync(file),historical=api.readBeforeLayout(file);assert.notDeepEqual(actual,historical);assert.throws(()=>api.writeBeforeLayout(file,historical),/Refusing to overwrite qualified post-cleanup feature/);assert.deepEqual(fs.readFileSync(file),actual);assert.equal(api.readBeforeLayout("js/standalone/level-startup.js","utf8"),"pre-cleanup historical js/standalone/level-startup.js\\n");console.log("PASS JS row inverse/nonrecipe historical-write refusal; no mutation");'
+  code='import fs from "node:fs";import assert from "node:assert/strict";import{pathToFileURL}from "node:url";const api=await import(pathToFileURL(process.cwd()+"/scripts/services-layout-audit.mjs")),file="js/nethack/pager-target-header-functions.js",actual=fs.readFileSync(file),historical=api.readBeforeLayout(file);assert.notDeepEqual(actual,historical);assert.throws(()=>api.writeBeforeLayout(file,historical),/Refusing to overwrite qualified post-cleanup feature/);assert.deepEqual(fs.readFileSync(file),actual);assert.equal(api.readBeforeLayout("js/nethack/level-startup.js","utf8"),"pre-cleanup historical js/nethack/level-startup.js\\n");console.log("PASS JS row inverse/nonrecipe historical-write refusal; no mutation");'
   run=subprocess.run([str(node),'--input-type=module','-e',code],cwd=root,env={**os.environ,'PATH':str(bindir)+os.pathsep+os.environ.get('PATH','')},capture_output=True,text=True)
   assert run.returncode==0,run.stdout+run.stderr
   checks+=4
-  python_code='import sys;from pathlib import Path;sys.path.insert(0,"scripts");from services_layout_audit import read_before,write_before;p=Path("js/standalone/pager-target-header-functions.js");actual=p.read_bytes();old=read_before(p);assert old!=actual;write_before(p,old);assert p.read_bytes()==actual;assert read_before(Path("js/standalone/level-startup.js"))==b"pre-cleanup historical js/standalone/level-startup.js\\n"'
+  python_code='import sys;from pathlib import Path;sys.path.insert(0,"scripts");from services_layout_audit import read_before,write_before;p=Path("js/nethack/pager-target-header-functions.js");actual=p.read_bytes();old=read_before(p);assert old!=actual;write_before(p,old);assert p.read_bytes()==actual;assert read_before(Path("js/nethack/level-startup.js"))==b"pre-cleanup historical js/nethack/level-startup.js\\n"'
   run=subprocess.run([os.sys.executable,'-c',python_code],cwd=root,env={**os.environ,'PATH':str(bindir)+os.pathsep+os.environ.get('PATH','')},capture_output=True,text=True)
   assert run.returncode==0,run.stdout+run.stderr
   checks+=3

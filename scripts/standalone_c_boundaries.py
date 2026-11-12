@@ -14,7 +14,7 @@ def build(cmd,flags,sources,root,reference,out,headers=()):
     ast=json.loads(subprocess.check_output([str(compiler),'--target=wasm64-unknown-emscripten','--sysroot='+str(reference/'.cache/emsdk/upstream/emscripten/cache/sysroot'),*cpp,'-fsyntax-only','-Xclang','-ast-dump=json',str(probe)]))
     functions={n['name']:n for n in ast['inner'] if n.get('kind')=='FunctionDecl'}
     variables={n['name']:n for n in ast['inner'] if n.get('kind')=='VarDecl'}
-    known={row['name'] for row in json.loads((root/'js/standalone/decl-storage.json').read_text())['globals']}
+    known={row['name'] for row in json.loads((root/'js/nethack/decl-storage.json').read_text())['globals']}
     boundary=out/'boundaries.c';declarations={}
     def parameter(t,i):
         if '(*)' in t:return t.replace('(*)','(*p'+str(i)+')',1)

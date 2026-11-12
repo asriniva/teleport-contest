@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
 const root=process.env.STANDALONE_REFERENCE_ROOT;if(!root)throw new Error('Missing STANDALONE_REFERENCE_ROOT');
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),L=layouts.termcap;
@@ -14,7 +14,7 @@ const ref=await factory({noInitialRun:true,print:()=>{},printErr:()=>{},preRun:[
     Object.assign(m.ENV,{NOMUX_MARKERS:'1',TERM:'xterm-256color',TERMINFO:'/nethack/terminfo',LINES:'24',COLUMNS:'80'});
     m.FS.mkdirTree('/nethack/terminfo/x');m.FS.writeFile('/nethack/terminfo/x/xterm-256color',entry);
 }]});
-const source=JSON.parse(fs.readFileSync('js/standalone/terminal-metadata.json'));
+const source=JSON.parse(fs.readFileSync('js/nethack/terminal-metadata.json'));
 const global=name=>BigInt(ref._teleport_termcap_global(source.globals.findIndex(g=>g.name===name)));
 const ctext=p=>{p=Number(p);let end=p;while(ref.HEAPU8[end])end++;return Buffer.from(ref.HEAPU8.slice(p,end)).toString('latin1');};
 const display=env.allocateGlobal('fixture.display',L.DisplayDescSize);

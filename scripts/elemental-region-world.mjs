@@ -1,7 +1,7 @@
 // Read-only active REGION observation for the source-created elemental profiles.
 // This supplements, and does not change, the shared strict world scanner.
 import fs from 'node:fs';import assert from 'node:assert/strict';
-const schema=JSON.parse(fs.readFileSync(new URL('../js/standalone/records.json',import.meta.url))),records=schema.records,L=JSON.parse(fs.readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).region;
+const schema=JSON.parse(fs.readFileSync(new URL('../js/nethack/records.json',import.meta.url))),records=schema.records,L=JSON.parse(fs.readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).region;
 export function elementalRegions({module,environment}){
  const heap=module?.HEAPU8??environment.memory.HEAPU8,view=new DataView(heap.buffer),globals=new Map(),pointer=p=>Number(view.getBigUint64(p,true)),raw=(p,n)=>Buffer.from(heap.slice(p,p+n)).toString('hex');
  const string=p=>{let end=p;while(end<heap.length&&heap[end])end++;assert.ok(end<heap.length,'terminated region message');return Buffer.from(heap.slice(p,end)).toString('base64');};

@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+import sys as _layout_sys
+from pathlib import Path as _LayoutPath
+_layout_sys.path.insert(0,str(_LayoutPath(__file__).resolve().parent))
+from nethack_layout import historical_cli as _prior_layout_cli
+if __name__=='__main__':_prior_layout_cli(__file__)
 """Synthetic positive/adversarial qualification tests, not native acceptance."""
 import copy,importlib.util,json,os,shutil,subprocess,tempfile
 from pathlib import Path
@@ -22,7 +27,7 @@ with tempfile.TemporaryDirectory(prefix='post-default-qualification-')as directo
   for p,b in after.items():store(p,b);store(d['files'][p]['patch'],q.canonical_patch(p,before[p],b))
   write_declaration(d)
  restore()
- path='js/standalone/sdk-boundary.js'
+ path='js/nethack/sdk-boundary.js'
  with patch.object(q,'baseline_bytes',side_effect=lambda r,p:before[p]):
   assert q.validate_cohort(root)==before;checks+=1
   for p,b in before.items():assert q.qualified_before(root,p)==b;checks+=1
@@ -32,7 +37,7 @@ with tempfile.TemporaryDirectory(prefix='post-default-qualification-')as directo
    except(AssertionError,KeyError,ValueError,FileNotFoundError):checks+=1
    else:raise AssertionError('Accepted '+label)
   store(path,after[path]+b'unknown edit');rejected('unreviewed source');restore()
-  sibling='js/standalone/version-info.js';store(sibling,after[sibling]+b'other changed member');rejected('stale sibling on another path read');restore()
+  sibling='js/nethack/version-info.js';store(sibling,after[sibling]+b'other changed member');rejected('stale sibling on another path read');restore()
   bad=copy.deepcopy(d);bad['baseCommit']='0'*40;write_declaration(bad);rejected('changed baseline');restore()
   bad=copy.deepcopy(d);bad['files'][path]['beforeSha256']='0'*64;write_declaration(bad);rejected('changed original bytes');restore()
   bad=copy.deepcopy(d);bad['files']['js/unreviewed.js']=bad['files'][path];write_declaration(bad);rejected('extra path');restore()
@@ -56,7 +61,7 @@ with tempfile.TemporaryDirectory(prefix='post-default-qualification-')as directo
   scripts=root/'scripts';scripts.mkdir();source=Path(__file__).resolve().parents[1]
   for name in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py','post_default_successors.py','monmove_source_successors.py','window_headers_source_successors.py']:shutil.copyfile(source/'scripts'/name,scripts/name)
   (scripts/'pure-js-fixtures').mkdir();shutil.copyfile(source/'scripts/pure-js-fixtures/qualification.mjs',scripts/'pure-js-fixtures/qualification.mjs')
-  rowpath='js/standalone/environment.js';prior=b'pre-layout '+before[rowpath]
+  rowpath='js/nethack/environment.js';prior=b'pre-layout '+before[rowpath]
   store('docs/runtime-environment/services-layout.json',json.dumps({'baselineCommit':'fixture-layout','moves':{},'files':[{'file':rowpath,'destination':rowpath,'beforeSha256':q.sha(prior),'afterSha256':q.sha(before[rowpath])}]}).encode())
   store('history.json',json.dumps({p:None if b is None else b.decode()for p,b in before.items()}).encode())
   binpath=root/'bin';binpath.mkdir();git=binpath/'git'

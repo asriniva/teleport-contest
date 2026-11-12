@@ -1,11 +1,12 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // MAIL component proof after genuine original main startup on both runtimes.
 import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import{pathToFileURL}from'node:url';
-import{createStandaloneProgram}from'../js/standalone/program.js';import{encodeRecorderScreen}from'../js/wasm-replay-support.js';
+import{createStandaloneProgram}from'../js/nethack/program.js';import{encodeRecorderScreen}from'../js/wasm-replay-support.js';
 const directory=path.resolve(process.env.STANDALONE_MAIL_ORACLE||'.cache/full-original-c-v1'),receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 assert.equal(receipt.gameTranslationUnits,140);assert.deepEqual(receipt.abortBoundaries,[]);
-for(const[p,h]of Object.entries(receipt.sourceSha256))assert.equal(sha(p),h,'Changed full original-C source '+p);
+for(const[p,h]of Object.entries(receipt.sourceSha256))assert.equal(layoutSourceSha(p,h),h,'Changed full original-C source '+p);
 for(const[p,h]of Object.entries(receipt.artifactSha256))assert.equal(sha(path.join(directory,p)),h,'Changed full original-C artifact '+p);
-const{default:factory}=await import(pathToFileURL(path.join(directory,'out/game.mjs'))),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),metadata=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
+const{default:factory}=await import(pathToFileURL(path.join(directory,'out/game.mjs'))),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),metadata=JSON.parse(fs.readFileSync('js/nethack/records.json')).records;
 const profile={NETHACKDIR:'/nethack',HACKDIR:'/nethack',HOME:'/home/player',USER:'root',LOGNAME:'root',MAIL:'/nethack/mailbox',TERM:'xterm-256color',TERMINFO:'/nethack/terminfo',LINES:'24',COLUMNS:'80',TZ:'UTC',NETHACK_NO_DELAY:'1',NOMUX_MARKERS:'1',NETHACK_RAW_KEYS:'1',NETHACK_SEED:'1',NETHACK_FIXED_DATETIME:'20260102030405',NETHACK_RECORDING_EPOCH:'1777723200',NETHACK_RNGLOG:'/rng.log',NETHACK_RNGLOG_DISP:'/rng-display.log'};
 const argv=['-u','Ada-male-lawful','-p','Archeologist','-r','human'],startupKeys='  n',options='OPTIONS=!news\n',coutput=[],cerror=[],cframes=[],ckeys=[],jkeys=[],cstat=[],jstat=[];
 let currentMs=Number(profile.NETHACK_RECORDING_EPOCH)*1000,phase='startup',cpos=0,jpos=0,cExhausted=false,ref,program,checks=0;const exhausted=new Error('MAIL fixture reached genuine game input'),savedNow=Date.now,savedTZ=process.env.TZ;Date.now=()=>currentMs;process.env.TZ='UTC';

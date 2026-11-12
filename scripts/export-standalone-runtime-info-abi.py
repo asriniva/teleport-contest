@@ -28,7 +28,7 @@ flags = ['--target=wasm64-unknown-emscripten',
 clang = ref / '.cache/emsdk/upstream/bin/clang'
 layouts = json.loads((root / 'js/wasm/tu-layouts.json').read_text())
 date_layout = layouts['date']
-records = json.loads((root / 'js/standalone/records.json').read_text())['records']
+records = json.loads((root / 'js/nethack/records.json').read_text())['records']
 tm = records['tm']
 probe_text = '\n'.join('#include ' + json.dumps(str(p)) for p in [header, md_source, date_source]) + '''
 const char probe_BUILD_DATE_TIME[]=__DATE__ " " __TIME__;
@@ -111,7 +111,7 @@ def closing_line(source, needle):
     return next(i + 1 for i in range(starts[0], len(lines)) if ');' in lines[i])
 
 inputs = [Path(__file__).resolve(), header, build, root / 'nethack-c/wasm/compile-defines.json',
-          root / 'js/wasm/tu-layouts.json', root / 'js/standalone/records.json',
+          root / 'js/wasm/tu-layouts.json', root / 'js/nethack/records.json',
           root / 'js/ported/mdlib.js', root / 'js/nethack/bindings/mdlib.js',
           root / 'js/ported/date.js', root / 'js/nethack/bindings/date.js', root / 'js/ported/allmain.js',
           root / 'nethack-c/wasm/tu-support.c', root / 'nethack-c/wasm/tu-libraries/mdlib.js',
@@ -125,5 +125,5 @@ data = {'mdlib': mdlib_layout, 'date': date_layout, 'tm': tm,
                         'banner': closing_line(md_source, 'Snprintf(outbuf, bufsz, "         Version')},
         'sourceSha256': {str(p.relative_to(root)): sha(p) for p in inputs},
         'referenceHeaderSha256': {str(p.relative_to(ref)): sha(p) for p in headers if p.is_relative_to(ref)}}
-(root / 'js/standalone/runtime-info-abi.json').write_text(json.dumps(data, indent=2) + '\n')
+(root / 'js/nethack/runtime-info-abi.json').write_text(json.dumps(data, indent=2) + '\n')
 print('Bound MDLIB/DATE configured layouts, source function visibility, build macros/epoch and shared tm transport.')

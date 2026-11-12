@@ -20,5 +20,5 @@ for name in ['create_nhwindow','start_menu','end_menu','destroy_nhwindow','putst
  if not re.search(r'#define\s+'+name+r'\s+\(\*windowprocs.win_'+name+r'\)',winprocs):raise ValueError('Review ROLE window macro '+name)
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 data={'assertSites':[row for _,row in asserts],'strlenSites':[row for _,row in lengths],'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in headers}}
-(root/'js/standalone/role-transport-abi.json').write_text(json.dumps(data,indent=2)+'\n')
+(root/'js/nethack/role-transport-abi.json').write_text(json.dumps(data,indent=2)+'\n')
 print('Bound original ROLE assertion and checked string-length sites.')

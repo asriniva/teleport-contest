@@ -1,8 +1,9 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // Literal replay must reproduce the complete original native consumer result.
 import assert from'node:assert/strict';import fs from'node:fs';import crypto from'node:crypto';
 import{runFullOriginalC}from'./full-original-c-run.mjs';import{worldGraph}from'./restoration-world-graph.mjs';
 const output=process.env.NATIVE_BONES_OUTPUT??'.cache/native-bones-consumer-seed16',sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),evidence=JSON.parse(fs.readFileSync(output+'/evidence.json')),input=JSON.parse(fs.readFileSync(output+'/input.json')),expected=JSON.parse(fs.readFileSync(output+'/result.json'));
-assert.ok(evidence.complete&&evidence.bonesUptake);assert.equal(sha(output+'/input.json'),evidence.literalInputSha256);assert.equal(sha(output+'/controller.mjs'),evidence.controllerSha256);assert.equal(sha(evidence.bonesProducerPath),evidence.bonesProducerSha256);
+assert.ok(evidence.complete&&evidence.bonesUptake);assert.equal(layoutSourceSha(output+'/input.json',evidence.literalInputSha256),evidence.literalInputSha256);assert.equal(layoutSourceSha(output+'/controller.mjs',evidence.controllerSha256),evidence.controllerSha256);assert.equal(layoutSourceSha(evidence.bonesProducerPath,evidence.bonesProducerSha256),evidence.bonesProducerSha256);
 let runtime;const actual=await runFullOriginalC(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1',{...input,observeRuntime:r=>runtime=r});
 fs.writeFileSync(output+'/replay-result.json',JSON.stringify(actual,null,2)+'\n');assert.deepEqual(actual,expected,'readonly controller must have no effect on entire literal native replay');
 const world=worldGraph(runtime);assert.deepEqual(world,JSON.parse(fs.readFileSync(output+'/world.json')),'literal replay entire selected world');assert.equal(world.roots.u.uroleplay.numbones,'0100000000000000');assert.equal(world.coverage.counts.cemetery,1);assert.equal(world.coverage.counts.ebones,1);assert.ok(!actual.files['/nethack/bonD0.5.Z']);

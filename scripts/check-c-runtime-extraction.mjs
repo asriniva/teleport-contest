@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 // Reproduce the shared-helper migration and enforce the complete owned manifest.
 import {execFileSync} from 'node:child_process';
 for(const script of ['extract-c-runtime-helpers','prune-c-runtime-shims'])

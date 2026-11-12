@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+import sys as _layout_sys
+from pathlib import Path as _LayoutPath
+_layout_sys.path.insert(0,str(_LayoutPath(__file__).resolve().parent))
+from nethack_layout import historical_cli as _prior_layout_cli
+if __name__=='__main__':_prior_layout_cli(__file__)
 """The feature qualification rejects unrelated bytes, even with forged new hashes."""
 import copy,difflib,hashlib,importlib.util,json,shutil,subprocess,tempfile
 from pathlib import Path

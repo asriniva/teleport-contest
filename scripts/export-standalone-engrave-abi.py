@@ -2,7 +2,7 @@
 """Measure original ENGRAVE header carriers and bind its unchanged native bridge."""
 import hashlib,json,os,re,shlex,subprocess,tempfile
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];ref=Path(os.environ.get('STANDALONE_REFERENCE_ROOT',root)).resolve();tree=ref/'.cache/wasm64-build/tree';clang=ref/'.cache/emsdk/upstream/bin/clang';header=root/'scripts/tu-engrave-layout.h';nativefile=root/'nethack-c/wasm/tu-engrave-support.inc';native=nativefile.read_text();lib=root/'nethack-c/wasm/tu-libraries/engrave.js';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['engrave'];public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions']
+root=Path(__file__).resolve().parents[1];ref=Path(os.environ.get('STANDALONE_REFERENCE_ROOT',root)).resolve();tree=ref/'.cache/wasm64-build/tree';clang=ref/'.cache/emsdk/upstream/bin/clang';header=root/'scripts/tu-engrave-layout.h';nativefile=root/'nethack-c/wasm/tu-engrave-support.inc';native=nativefile.read_text();lib=root/'nethack-c/wasm/tu-libraries/engrave.js';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['engrave'];public=json.loads((root/'js/nethack/public-functions.json').read_text())['functions']
 flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(root/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+v for v in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]]
 bits={'object':['cursed','known'],'class':['oc_name_known','oc_tough','oc_bimanual'],'engr':['guardobjects','nowipeout','eread','erevealed'],'terrain':['disturbed','drawbridgemask']}
 with tempfile.TemporaryDirectory(prefix='engrave-abi-')as d:
@@ -28,6 +28,6 @@ for m in re.finditer(r'C\.(rn2|rn1|rnd)\(',text):
  label=re.search(r", (\d+), '(\w+)'\)$",text[m.start():end]);assert label
  rng.append({'kind':m[1],'line':int(label[1]),'caller':label[2]})
 
-inputs=[Path(__file__).resolve(),root/'js/standalone/engrave.js',header,nativefile,root/'nethack-c/wasm/tu-engrave-support.h',root/'scripts/write-tu-source-metadata.py',lib,root/'js/ported/engrave.js',root/'js/nethack/bindings/engrave.js',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+inputs=[Path(__file__).resolve(),root/'js/nethack/engrave.js',header,nativefile,root/'nethack-c/wasm/tu-engrave-support.h',root/'scripts/write-tu-source-metadata.py',lib,root/'js/ported/engrave.js',root/'js/nethack/bindings/engrave.js',root/'js/nethack/records.json',root/'js/nethack/public-functions.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 result={'layout':layout,'globals':globals,'bits':bits,'strlenSites':[{'line':line,'function':fn}for line,fn in zip(lines,functions)],'rngSites':rng,'dependencies':{n:public[n]for n in dependencies},'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[tree/'src/engrave.c']))}}
-(root/'js/standalone/engrave-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original ENGRAVE native transport.')
+(root/'js/nethack/engrave-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original ENGRAVE native transport.')

@@ -1,13 +1,14 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 const directory=path.resolve(process.env.STANDALONE_WINDOW_STARTUP_ORACLE||'.cache/standalone-window-startup-v8');
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json')));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(sha(p),h,'Changed reference input '+p);
+for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(layoutSourceSha(p,h),h,'Changed reference input '+p);
 for(const [p,h]of Object.entries(receipt.artifactSha256))assert.equal(sha(path.join(directory,p)),h,'Changed reference artifact '+p);
 const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
 const ref=await factory();let checks=0;

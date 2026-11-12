@@ -15,7 +15,7 @@ for name in ['standalone-startup-probe.c','standalone-dungeon-startup-probe.c','
   if body.count(declarations)!=1:raise SystemExit('Review changed callback fixture declaration')
   body=body.replace(declarations,'/* Actual WINDOWS owns windowprocs and zerowri in this profile. */\n#include "decl.c"\n')
  if name=='standalone-display-startup-probe.c':
-  decl=json.loads((root/'js/standalone/decl-storage.json').read_text())['globals']
+  decl=json.loads((root/'js/nethack/decl-storage.json').read_text())['globals']
   body+='\nconst volatile void *probe_decl_global(int i){switch(i){'+''.join('case '+str(i)+':return &'+row['name']+';' for i,row in enumerate(decl))+'}return NULL;}\n'
  target=out/name;target.write_text(body);fixtures.append(source)
 sources=[out/'standalone-display-startup-probe.c',*[tree/f'src/{n}.c' for n in names],tree/'sys/unix/unixmain.c',tree/'win/tty/wintty.c',tree/'win/tty/termcap.c']
@@ -30,7 +30,7 @@ result,cmd,boundaries=build(cmd,flags,sources,root,ref,out,headers=("sp_lev.h",)
 (out/'build.log').write_text(result.stdout+result.stderr);(out/'command.json').write_text(json.dumps(cmd,indent=2)+'\n')
 if result.returncode:raise SystemExit(result.stderr[-6000:])
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-inputs=[Path(__file__).resolve(),root/'scripts/standalone_c_boundaries.py',root/'js/standalone/decl-storage.json',*fixtures,*sources,ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/sigaction.c',ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/raise.c',ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/musl/src/signal/signal.c',root/'nethack-c/wasm/compile-defines.json',tree/'dat/nhlib.lua',tree/'dat/dungeon.lua',tree/'dat/nhcore.lua']
+inputs=[Path(__file__).resolve(),root/'scripts/standalone_c_boundaries.py',root/'js/nethack/decl-storage.json',*fixtures,*sources,ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/sigaction.c',ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/raise.c',ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/musl/src/signal/signal.c',root/'nethack-c/wasm/compile-defines.json',tree/'dat/nhlib.lua',tree/'dat/dungeon.lua',tree/'dat/nhcore.lua']
 for source in sources:
  deps=subprocess.run([cmd[0],*flags,'-M',str(source)],capture_output=True,text=True,check=True)
  inputs.extend(Path(p).resolve() for p in shlex.split(deps.stdout.split(':',1)[1].replace('\\\n','')))

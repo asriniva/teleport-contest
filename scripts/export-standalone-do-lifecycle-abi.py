@@ -22,7 +22,7 @@ text = runtime.read_text()
 decoder = json.JSONDecoder()
 declaration = lambda name: decoder.raw_decode(text.split('const ' + name + '=', 1)[1])[0]
 schemas, globals_ = declaration('schemas'), declaration('globals')
-known = json.loads((root / 'js/standalone/records.json').read_text())['records']
+known = json.loads((root / 'js/nethack/records.json').read_text())['records']
 for name, row in schemas.items():
     key = row['ctype'].removeprefix('struct ').removeprefix('union ')
     if key not in known:
@@ -38,7 +38,7 @@ callback_rows = [(int(i), name) for i, name in re.findall(r'case (\d+):return\(u
 if [i for i, _ in callback_rows] != list(range(9)):
     raise ValueError('Review changed DO callback map')
 aliases = {'teleport_do_drop_callback': 'drop', 'teleport_do_wipe_callback': 'wipeoff'}
-public = json.loads((root / 'js/standalone/public-functions.json').read_text())['functions']
+public = json.loads((root / 'js/nethack/public-functions.json').read_text())['functions']
 private = {'drop': 'int (struct obj *)', 'wipeoff': 'int (void)'}
 callbacks = [{'name': aliases.get(name, name), 'native': name,
               'prototype': private.get(aliases.get(name, name), public.get(name))}
@@ -70,12 +70,12 @@ with tempfile.TemporaryDirectory(prefix='standalone-do-abi-') as scratch:
 
 inputs = [Path(__file__).resolve(), runtime, root / 'js/ported/do.js', support, varargs,
           library, header, root / 'nethack-c/wasm/compile-defines.json',
-          root / 'js/standalone/records.json', root / 'js/standalone/public-functions.json']
+          root / 'js/nethack/records.json', root / 'js/nethack/public-functions.json']
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 data = {'schemas': schemas, 'globals': globals_, 'callbackMap': callbacks,
         'bufferBytes': buffer_size, 'variadicSites': sites,
         'sourceSha256': {str(p.relative_to(root)): sha(p) for p in inputs},
         'referenceHeaderSha256': {str(p.relative_to(ref)): sha(p) for p in headers if p.is_relative_to(ref)}}
-(root / 'js/standalone/do-lifecycle-abi.json').write_text(json.dumps(data, indent=2) + '\n')
+(root / 'js/nethack/do-lifecycle-abi.json').write_text(json.dumps(data, indent=2) + '\n')
 print('Bound DO lifecycle: %d record schemas, %d shared globals, %d callbacks, %d variadic sites and %d-byte buffer.'
       % (len(schemas), len(globals_), len(callbacks), len(sites), buffer_size))

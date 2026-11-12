@@ -30,5 +30,5 @@ for line in source.read_text().splitlines():
     if len(recipe)!=int(dispatch[1])+1:
         raise ValueError('Wrong Lua recipe arity '+name)
     rows[name]={'return':ret.strip(),'arguments':recipe}
-Path('js/standalone/lua-api.json').write_text(json.dumps({'source':str(source),'sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'functions':rows},indent=2)+'\n')
+Path('js/nethack/lua-api.json').write_text(json.dumps({'source':str(source),'sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'functions':rows},indent=2)+'\n')
 print(f'Exported {len(rows)} typed Lua dispatch recipes')

@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 // Guard production closure, frozen inputs, unchanged ports and generated inputs.
 import {migrationFiles,qualifiedHistorical} from './pure-js-fixtures/qualification.mjs';
 import assert from 'node:assert/strict';
@@ -24,23 +26,23 @@ for(const row of corrections){assert.equal(baseline.sha256[row.file],row.baselin
 const corrected=new Map(corrections.map(row=>[row.file,row.correctedSha256]));
 for(const [file,hash]of Object.entries(baseline.sha256))assert.equal(crypto.createHash('sha256').update(readBeforeLayout(file)).digest('hex'),corrected.get(file)??hash,'Policy changed beyond reviewed import relocation: '+file);
 for(const name of ['isaac64','terminal','storage'])assert.deepEqual(read('js/'+name+'.js'),read('frozen/'+name+'.js'),'Frozen '+name);
-for(const [file,hash]of Object.entries(json('js/standalone/hero-abi.json').sourceSha256))check(file,hash);
-for(const [file,hash]of Object.entries(json('js/standalone/display-abi.json').sourceSha256))check(file,hash);
+for(const [file,hash]of Object.entries(json('js/nethack/hero-abi.json').sourceSha256))check(file,hash);
+for(const [file,hash]of Object.entries(json('js/nethack/display-abi.json').sourceSha256))check(file,hash);
 for(const name of ['sdk-boundary-abi','sdk-directory-abi','lua-callbacks-abi','discoveries-abi','engrave-abi','do-name-abi','makemon-public-abi','mkmap-abi','worn-text-abi','dbridge-abi','polyself-abi','ball-abi','wizcmds-abi','region-services-abi','detect-abi','bones-services-abi','light-abi','steal-abi','pager-target-abi','dokick-abi','mondata-abi','getpos-abi','makemon-private-abi','wizard-abi','mplayer-abi','minion-abi','dig-abi','explode-abi','spell-abi','rip-abi','special-interactions-abi','teleport-abi','read-abi','mcastu-abi','shknam-abi','apply-abi','lock-abi','scanf-abi','quest-abi','priest-abi','topten-abi','exper-abi','insight-abi','mthrowu-abi','uhitm-abi','vault-abi','color-attributes-abi','mhitm-abi','end-lifecycle-abi','mhitu-abi','dogmove-abi','were-abi','zap-abi','mail-abi','killer-state-abi','artifact-abi','callback-address-abi','restore-lifecycle-abi','potion-abi','eat-abi','timeout-abi','role-transport-abi','unix-platform-abi','hunger-data-abi','descriptions-abi','attribute-abi','worm-abi','report-abi','level-abi','public-functions','trap-abi','vision-abi','window-abi','options-abi','status-abi','hack-abi','persistence-transport-abi','turn-loop-abi','runtime-info-abi','messages-abi','terminal-messages-abi','save-lifecycle-abi','terminal-input-abi','do-lifecycle-abi','equipment-format-abi','quest-pager-abi','equipment-abi','armor-abi','pet-abi','monmove-abi','mon-abi','glyph-abi','command-abi','files-abi','configuration-abi','object-language-abi']){
- const data=json('js/standalone/'+name+'.json');
+ const data=json('js/nethack/'+name+'.json');
  for(const [file,hash]of Object.entries(data.sourceSha256))check(file,hash);
  for(const [file,hash]of Object.entries(data.referenceHeaderSha256??{}))assert.equal(sha(path.resolve(reference,file)),hash,'Public declaration header changed: '+file);
 }
-const records=json('js/standalone/records.json');
+const records=json('js/nethack/records.json');
 check('nethack-c/wasm/compile-defines.json',records.definesSha256);
 check('nethack-c/wasm/tu-fragments/decl-schema.json',records.declSchemaSha256);
-check('js/standalone/address-ports.json',records.addressMetadataSha256);
+check('js/nethack/address-ports.json',records.addressMetadataSha256);
 for(const [file,hash]of Object.entries(records.supportSourceSha256))check(file,hash);
 for(const [file,hash]of Object.entries(records.localHeaderSha256))check(file,hash);
 for(const [file,hash]of Object.entries(records.headerSha256))assert.equal(sha(path.resolve(reference,file)),hash,'Measured header changed: '+file);
-for(const file of ['decl-storage.json','lua-api.json']){const data=json('js/standalone/'+file);check(data.source,data.sha256);}
-for(const [file,hash]of Object.entries(json('js/standalone/terminal-metadata.json').sourceSha256))check(file,hash);
-for(const [name,item]of Object.entries(json('js/standalone/address-ports.json').ports)){
+for(const file of ['decl-storage.json','lua-api.json']){const data=json('js/nethack/'+file);check(data.source,data.sha256);}
+for(const [file,hash]of Object.entries(json('js/nethack/terminal-metadata.json').sourceSha256))check(file,hash);
+for(const [name,item]of Object.entries(json('js/nethack/address-ports.json').ports)){
     check(`js/nethack/bindings/${name}.js`,item.sourceSha256);check(`nethack-c/wasm/tu-fragments/${name}-schema.json`,item.fragmentSha256);
 }
 const seen=new Set(),forbidden=[];
@@ -64,7 +66,7 @@ function collect(file) {
     }
     visit(ast);
 }
-collect('js/standalone/environment.js');collect('js/standalone/program.js');assert.deepEqual(forbidden,[],'Forbidden production dependency');
+collect('js/nethack/environment.js');collect('js/nethack/program.js');assert.deepEqual(forbidden,[],'Forbidden production dependency');
 const result={baselineCommit:baseline.mainCommit,portPoliciesUnchanged:baseline.policyCount-corrections.length-1,migrationPolicyCorrections:['js/ported/rumors.js'],authorizedPortCorrections:corrections.map(({file,reason})=>({file,reason})),frozenFilesUnchanged:3,productionFiles:seen.size,forbiddenDependencies:forbidden,
     limitation:'Static literal import closure and source/provenance checks; component execution and complete game acceptance are separate gates.'};
 fs.mkdirSync('.cache/standalone-validation',{recursive:true});fs.writeFileSync('.cache/standalone-validation/scope.json',JSON.stringify(result,null,2)+'\n');

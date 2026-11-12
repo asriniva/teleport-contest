@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 // Audit mechanical moves against the committed pre-cleanup source. This is a
 // development check; no git/host dependency enters the production runtime.
 import assert from 'node:assert/strict';
@@ -20,12 +22,12 @@ const body=(source,name)=>{
 assert.equal(body(read('js/nethack/runtime.js'),'createJsRuntime'),body(old('js/ported/js-runtime.js'),'createJsRuntime'),'Changed NetHack runtime provider');
 const moves=[['functions','createFunctions'],['bitfields','createBitfields'],['stdio','createStdio'],['qsort','muslQsort'],['scanf','scanFormatted'],['environment-inputs','createEnvironmentInputs']];
 const sdkBaseline=sdkRuntimeExtensionBaseline();
-for(const [file,name]of moves)assert.equal(body(file==='stdio'&&sdkBaseline!==null?sdkBaseline:read('js/c-runtime/'+file+'.js'),name),body(old('js/standalone/'+file+'.js'),name),'Changed moved factory '+name);
-assert.equal(body(read('js/c-runtime/libc.js'),'createStandaloneLibc'),body(old('js/standalone/libc.js'),'createStandaloneLibc').replace('        // Match the configured SDK single-process syscall profile.\n        getpid:()=>42,\n',''));
-const oldTypes=body(old('js/standalone/c-types.js'),'createCTypes').replace(/    const aliases=.*;\n/,'');
+for(const [file,name]of moves)assert.equal(body(file==='stdio'&&sdkBaseline!==null?sdkBaseline:read('js/c-runtime/'+file+'.js'),name),body(old('js/nethack/'+file+'.js'),name),'Changed moved factory '+name);
+assert.equal(body(read('js/c-runtime/libc.js'),'createStandaloneLibc'),body(old('js/nethack/libc.js'),'createStandaloneLibc').replace('        // Match the configured SDK single-process syscall profile.\n        getpid:()=>42,\n',''));
+const oldTypes=body(old('js/nethack/c-types.js'),'createCTypes').replace(/    const aliases=.*;\n/,'');
 assert.equal(body(read('js/c-runtime/types.js'),'createCTypes'),oldTypes,'Changed type engine beyond injected aliases');
 for(const name of ['scanf-abi','were-abi']) {
-    const before=JSON.parse(old('js/standalone/'+name+'.json')),after=JSON.parse(read('js/standalone/'+name+'.json'));
+    const before=JSON.parse(old('js/nethack/'+name+'.json')),after=JSON.parse(read('js/nethack/'+name+'.json'));
     delete before.sourceSha256;delete after.sourceSha256;
     assert.deepEqual(after,before,'Changed measured declarations beyond source relocation '+name);
 }

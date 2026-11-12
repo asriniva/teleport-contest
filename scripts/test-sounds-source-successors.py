@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+import sys as _layout_sys
+from pathlib import Path as _LayoutPath
+_layout_sys.path.insert(0,str(_LayoutPath(__file__).resolve().parent))
+from nethack_layout import historical_cli as _prior_layout_cli
+if __name__=='__main__':_prior_layout_cli(__file__)
 """Synthetic fail-closed source qualification/API tests, not native acceptance."""
 import copy,importlib.util,json,os,shutil,subprocess,tempfile
 from pathlib import Path
@@ -7,7 +12,7 @@ source=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('sounds_qualification',source/'scripts/sounds_source_successors.py');q=importlib.util.module_from_spec(spec);spec.loader.exec_module(q)
 checks=0
 with tempfile.TemporaryDirectory(prefix='sounds-source-qualification-')as directory:
- root=Path(directory);before={p:('base '+p+'\n').encode()for p in q.ALLOWED};after={p:b+b'exact reviewed transport\n'for p,b in before.items()};target='js/standalone/game-windows.js';sibling=target;rawpath='docs/runtime-environment/synthetic-native.json';raw=b'{"syntheticOnly":true}\n'
+ root=Path(directory);before={p:('base '+p+'\n').encode()for p in q.ALLOWED};after={p:b+b'exact reviewed transport\n'for p,b in before.items()};target='js/nethack/game-windows.js';sibling=target;rawpath='docs/runtime-environment/synthetic-native.json';raw=b'{"syntheticOnly":true}\n'
  proof={'complete':True,'originalNativeCompared':True,'baseCommit':q.BASE_COMMIT,'qualifiedSourceSha256':{p:q.sha(b)for p,b in after.items()},'rawProofs':{rawpath:q.sha(raw)}}
  declaration={'version':1,'baseCommit':q.BASE_COMMIT,'nativeProof':q.PROOF,'files':{p:{'beforeSha256':q.sha(before[p]),'afterSha256':q.sha(after[p]),'patch':'docs/runtime-environment/sounds-source-successors/'+Path(p).name+'.patch','patchSha256':q.sha(q.canonical_patch(p,before[p],after[p]))}for p in q.ALLOWED}}
  def put(p,b):

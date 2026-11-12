@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def read_before(path):
  path=Path(path);relative=str(path.resolve().relative_to(ROOT));d=json.loads((ROOT/'docs/runtime-environment/services-layout.json').read_text());row=next((r for r in d['files']if relative in [r['file'],r['destination']]),None)
  if row:
-  if row['destination']=='js/standalone/game-windows.js':
+  if row['destination']=='js/nethack/game-windows.js':
    from sounds_source_successors import qualified_before as sounds_before
    actual=sounds_before(ROOT,row['destination'])
   else:actual=window_headers_before(ROOT,row['destination'])if row['destination']in WINDOW_HEADERS else monmove_before(ROOT,row['destination'])if row['destination']in MONMOVE else qualified_before(ROOT,row['destination'])if row['destination']in POST_DEFAULT else(ROOT/row['destination']).read_bytes()

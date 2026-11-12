@@ -15,7 +15,7 @@ with tempfile.TemporaryDirectory(prefix='standalone-dokick-abi-')as scratch:
  assert set(measured)==set(layout) and all((measured[k]&((1<<64)-1))==(int(v)&((1<<64)-1))for k,v in layout.items()),'Changed native DOKICK layout'
  probe.write_text('#include '+json.dumps(str(support))+'\n');expanded_support=subprocess.check_output([str(clang),*flags,'-E','-P',str(probe)],text=True)
  deps=subprocess.check_output([str(clang),*flags,'-M',str(probe)],text=True);headers=[Path(v).resolve()for v in shlex.split(deps.split(':',1)[1].replace('\\\n',''))if Path(v).resolve().is_relative_to(ref)]
-native=support.read_text();lib=library.read_text();public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions']
+native=support.read_text();lib=library.read_text();public=json.loads((root/'js/nethack/public-functions.json').read_text())['functions']
 globals=[n for _,n in re.findall(r'case (\d+):return\s*&?(\w+);',native.split('teleport_dokick_global',1)[1].split('default:',1)[0])];assert len(globals)==21
 bits={}
 for kind,typ in [('monster','struct monst'),('object','struct obj'),('terrain','struct rm'),('trap','struct trap')]:
@@ -40,6 +40,6 @@ for name,shape,params,target in re.findall(r'^(?:void|int) teleport_dokick_(\w+)
  formats.setdefault(name,{})[''if shape=='none'else shape]={'target':target,'types':types,'prefix':prefix}
 assert len(formats)==11,len(formats)
 names=re.findall(r'^export function (\w+)\(',source.read_text(),re.M)
-paths=[Path(__file__).resolve(),root/'js/standalone/dokick.js',header,support,library,runtime,source,root/'js/backends/emscripten/runtime.js',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+paths=[Path(__file__).resolve(),root/'js/nethack/dokick.js',header,support,library,runtime,source,root/'js/backends/emscripten/runtime.js',root/'js/nethack/records.json',root/'js/nethack/public-functions.json',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 data={'layout':layout,'globals':globals,'bits':bits,'calls':calls,'formats':formats,'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[tree/'src/dokick.c']))}}
-(root/'js/standalone/dokick-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound original DOKICK: '+str(len(data['public']))+' public entries/'+str(len(calls))+' foreign calls/'+str(len(layout))+' native values.')
+(root/'js/nethack/dokick-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound original DOKICK: '+str(len(data['public']))+' public entries/'+str(len(calls))+' foreign calls/'+str(len(layout))+' native values.')

@@ -1,12 +1,13 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {createNativeTerminal} from '../js/platform/darwin/terminal.js';
-import {createTerminalDevices} from '../js/standalone/unix-terminal.js';
+import {createTerminalDevices} from '../js/nethack/unix-terminal.js';
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),seed=1n;
 const directory=path.resolve(process.env.STANDALONE_GLYPH_CACHE_ORACLE||'.cache/standalone-glyph-cache-v1');
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(sha(p),h,'Changed reference input '+p);
+for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(layoutSourceSha(p,h),h,'Changed reference input '+p);
 for(const [p,h]of Object.entries(receipt.artifactSha256))assert.equal(sha(path.join(directory,p)),h,'Changed reference artifact '+p);
 const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
 const errors=[],entry=fs.readFileSync('nethack-c/wasm/terminfo/x/xterm-256color');
@@ -34,13 +35,13 @@ for(let name=0;name<23;name++){
  assert.equal(devices.fpathconf(0,name),BigInt(ref._probe_tty_pathconf(0,name)),'SDK pathconf '+name);assert.equal(deviceEnv.libc.errno,ref._probe_tty_errno(73));checks+=2;
 }
  const env=createStandaloneEnvironment({initialBytes:1024,maximumBytes:64*1024*1024,environment:{TERM:'xterm-256color',NOMUX_MARKERS:'1',NETHACK_RNGLOG:'/rng.log',NETHACK_FIXED_DATETIME:'20260102030405'}});
- env.enableStdio();env.enableDecl(layouts.decl);env.call('decl','program_state_init');env.call('decl','decl_globals_init');env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.call('objects','objects_globals_init');env.enableMonst(layouts.monst);env.call('monst','monst_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed});env.call('rnd','rng_log_init');env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.enableObjectRecords(layouts);env.enableItemInventory(layouts);env.enableTimers(layouts);env.enableItemNaming(layouts);const group=env.enableMonsterSelection(layouts);const decl=JSON.parse(fs.readFileSync('js/standalone/decl-storage.json')).globals,before=decl.map(r=>env.memory.readBytes(env.requireGlobal(r.name),r.bytes));const creation=env.enableMonsterCreation(layouts);decl.forEach((r,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(r.name),r.bytes),before[i],'enabling creation preserves '+r.name));
+ env.enableStdio();env.enableDecl(layouts.decl);env.call('decl','program_state_init');env.call('decl','decl_globals_init');env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.call('objects','objects_globals_init');env.enableMonst(layouts.monst);env.call('monst','monst_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed});env.call('rnd','rng_log_init');env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.enableObjectRecords(layouts);env.enableItemInventory(layouts);env.enableTimers(layouts);env.enableItemNaming(layouts);const group=env.enableMonsterSelection(layouts);const decl=JSON.parse(fs.readFileSync('js/nethack/decl-storage.json')).globals,before=decl.map(r=>env.memory.readBytes(env.requireGlobal(r.name),r.bytes));const creation=env.enableMonsterCreation(layouts);decl.forEach((r,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(r.name),r.bytes),before[i],'enabling creation preserves '+r.name));
 
  env.enableGameStartup(layouts);env.call('sys','sys_early_init');
 const hero=env.enableHeroStartup(layouts);env.enableWorldPosition(layouts);env.enableLuaSandbox(layouts);env.enableDisplayStartup(layouts);
 
 ref._probe_level_init(seed);
-env.enableWindowSystem(layouts);env.enableVersionInfo(layouts);env.enableOptions(layouts);env.enableSymbols(layouts);const glyphs=env.enableGlyphs(layouts),abi=JSON.parse(fs.readFileSync('js/standalone/glyph-abi.json'));
+env.enableWindowSystem(layouts);env.enableVersionInfo(layouts);env.enableOptions(layouts);env.enableSymbols(layouts);const glyphs=env.enableGlyphs(layouts),abi=JSON.parse(fs.readFileSync('js/nethack/glyph-abi.json'));
 for(const g of [-2147483648,-1,...Array.from({length:layouts.glyphs.MAX_GLYPH+2},(_,i)=>i),2147483647])for(let i=0;i<abi.headers.length;i++){assert.equal(glyphs.services.header(i,g),ref._teleport_glyphs_header(i,g),'original glyph header '+abi.headers[i]+':'+g);checks++;}
 const jbuf=env.memory.malloc(256),cbuf=Number(ref._malloc(256n));for(let i=0;i<256;i++){env.memory.HEAPU8[jbuf+i]=i;ref.HEAPU8[cbuf+i]=i;}
 for(const n of [0,1,7,63,255,256])for(const byte of [-257,-1,0,1,7,63,254,255,256,511]){const j=env.services.memchr(jbuf,byte,n),c=Number(ref._memchr(BigInt(cbuf),byte,BigInt(n)));assert.equal(j?j-jbuf:-1,c?c-cbuf:-1,'original libc bounded byte search '+byte+':'+n);checks++;}

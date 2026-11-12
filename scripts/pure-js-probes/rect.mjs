@@ -1,6 +1,6 @@
 // JS equivalent of tu-rect-probe.c's fixture, using the production RECT binding.
 import {environment,probeModule,withoutWasm} from './common.mjs';
-import records from '../../js/standalone/records.json' with {type:'json'};
+import records from '../../js/nethack/records.json' with {type:'json'};
 export default async function createRectProbe(layouts){
  const env=await environment(),L=layouts.rect;let seed=0,calls=0,bound=0,diagnostics=0;
  const caller=env.memory.calloc(1,128),message=env.memory.calloc(1,128);

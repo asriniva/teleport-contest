@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 // Remove proven-unused forwarding modules and migrate the remaining old provider
 // imports. This tool never rewrites historical oracle receipts or game decisions.
 import assert from 'node:assert/strict';
@@ -9,15 +11,15 @@ import {execFileSync} from 'node:child_process';
 const extraction=JSON.parse(readBeforeLayout('docs/runtime-environment/c-runtime-helper-extraction.json'));
 const baseline=extraction.baselineCommit,sha=text=>crypto.createHash('sha256').update(text).digest('hex');
 const old=file=>execFileSync('git',['show',baseline+':'+file],{encoding:'utf8'});
-const removals=['js/standalone/bitfields.js','js/standalone/environment-inputs.js','js/standalone/qsort.js','js/standalone/scanf.js','js/standalone/stdio.js','js/ported/js-runtime.js'];
+const removals=['js/nethack/bitfields.js','js/nethack/environment-inputs.js','js/nethack/qsort.js','js/nethack/scanf.js','js/nethack/stdio.js','js/ported/js-runtime.js'];
 const rules=[
- ['js/standalone/object-state.js',"../ported/js-runtime.js","../nethack/runtime.js"],
+ ['js/nethack/object-state.js',"../ported/js-runtime.js","../nethack/runtime.js"],
  ...['test-js-game-files','test-js-runtime-regex','test-js-time','test-js-runtime'].map(name=>['scripts/'+name+'.mjs','../js/ported/js-runtime.js','../js/nethack/runtime.js']),
  ['scripts/export-standalone-were-abi.py',"'js/ported/js-runtime.js',",''],
- ['scripts/export-standalone-scanf-abi.py',"'js/standalone/scanf.js',",''],
- ['scripts/export-standalone-scanf-abi.py',"'js/standalone/stdio.js',",''],
- ['scripts/test-standalone-scanf.mjs','js/standalone/scanf.js','js/c-runtime/scanf.js'],
- ['scripts/test-standalone-scanf.mjs','js/standalone/stdio.js','js/c-runtime/stdio.js'],
+ ['scripts/export-standalone-scanf-abi.py',"'js/nethack/scanf.js',",''],
+ ['scripts/export-standalone-scanf-abi.py',"'js/nethack/stdio.js',",''],
+ ['scripts/test-standalone-scanf.mjs','js/nethack/scanf.js','js/c-runtime/scanf.js'],
+ ['scripts/test-standalone-scanf.mjs','js/nethack/stdio.js','js/c-runtime/stdio.js'],
 ];
 const outputs=new Map(),edits=[];
 for(const[file,before,after]of rules){const source=outputs.get(file)??old(file);assert.equal(source.split(before).length-1,1,'Changed consumer boundary '+file);outputs.set(file,source.replace(before,after));edits.push({file,before,after});}

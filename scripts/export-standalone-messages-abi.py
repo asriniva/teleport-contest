@@ -27,11 +27,11 @@ paths = [Path(__file__).resolve(), runtime, support, root / 'js/ported/pline.js'
          root / 'nethack-c/wasm/tu-libraries/pline.js', root / 'scripts/tu-pline-layout.h',
          root / 'nethack-c/wasm/tu-fragments/pline-source-data.h',
          root / 'nethack-c/wasm/compile-defines.json', root / 'js/wasm/tu-layouts.json',
-         root / 'js/standalone/records.json']
+         root / 'js/nethack/records.json']
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 data = {'fields': fields, 'initialState': {'in_pline': int(state[1]), 'use_pline_handler': int(state[2])},
         'devteamEmail': json.loads(email[1]),
         'sourceSha256': {str(p.relative_to(root)): sha(p) for p in paths},
         'referenceHeaderSha256': {str(p.relative_to(ref)): sha(p) for p in headers}}
-(root / 'js/standalone/messages-abi.json').write_text(json.dumps(data, indent=2) + '\n')
+(root / 'js/nethack/messages-abi.json').write_text(json.dumps(data, indent=2) + '\n')
 print('Bound original PLINE field/state/header transport.')

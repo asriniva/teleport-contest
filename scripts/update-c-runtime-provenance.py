@@ -53,7 +53,7 @@ outputs={registry_path:registry_after,profile_path:profile_after}
 # Re-evaluate from the originals to propagate changed metadata hashes exactly.
 # Reproduce the original cleanup against its original owned JSON inventory.
 # Later declarations have their own current compiler/source checks.
-paths=[p for p in subprocess.check_output(['git','ls-tree','--full-tree','-r','--name-only',baseline,'--','js/standalone'],cwd=root,text=True).splitlines()if p.endswith('.json')]
+paths=[p for p in subprocess.check_output(['git','ls-tree','--full-tree','-r','--name-only',baseline,'--','js/nethack'],cwd=root,text=True).splitlines()if p.endswith('.json')]
 originals={p:original(p)for p in paths};bases={p:json.loads(b)for p,b in originals.items()}
 base_hashes={**{p:sha(b)for p,b in originals.items()},registry_path:sha(registry_before),profile_path:sha(profile_before),**{p:r['beforeSha256']for p,r in changes.items()}}
 helper_updates={p:r['afterSha256']for p,r in changes.items()}
@@ -61,7 +61,7 @@ helper_updates={p:r['afterSha256']for p,r in changes.items()}
 # names its original libc implementation. Prove the complete moved factory,
 # including the sole documented getpid extraction, before migrating that pin.
 foundation_baseline='df33dd4d8cbb9ea2268b51385c37c4ad5cdd3a31'
-libc_path='js/standalone/libc.js'
+libc_path='js/nethack/libc.js'
 libc_before=subprocess.check_output(['git','show',foundation_baseline+':'+libc_path],cwd=root)
 libc_after=original(libc_path)
 assert read_before(root/libc_path)==libc_after
@@ -73,7 +73,7 @@ base_hashes[libc_path]=sha(libc_before);helper_updates[libc_path]=sha(libc_after
 # New main's DETECT receipt also binds the pre-foundation address adapter.
 # Bind the exact already-reviewed foundation package, not an arbitrary current
 # file hash. Its original-C transport comparisons remain a separate gate.
-address_path='js/standalone/address-ports.js'
+address_path='js/nethack/address-ports.js'
 address_before=subprocess.check_output(['git','show',foundation_baseline+':'+address_path],cwd=root)
 address_package=[address_path,'js/nethack/address-ports.js','js/c-runtime/address-bindings.js']
 address_hashes={}
@@ -158,18 +158,18 @@ for p,expected in outputs.items():
  if args.write:
   assert actual in [before,intermediate.get(p,before),expected]or sha(actual)==prior_hashes.get(p),'Refusing unrelated edits '+p
  elif actual!=expected:
-  assert p.startswith('js/standalone/')and p.endswith('.json'),'Only declaration metadata may have a qualified successor '+p
+  assert p.startswith('js/nethack/')and p.endswith('.json'),'Only declaration metadata may have a qualified successor '+p
   older=json.loads(expected);newer=json.loads(actual)
   for key,value in older.items():
    if key not in ['sourceSha256','referenceHeaderSha256','scope']:
     expected_value=value
     # Only these exact additive native transport descriptions are qualified;
     # every historical callback index/prototype and weapon field stays equal.
-    if p=='js/standalone/apply-abi.json' and key=='callbacks':
+    if p=='js/nethack/apply-abi.json' and key=='callbacks':
      source=(root/'js/ported/apply.js').read_text()
      expected_value={name:{**row,'sourceOwner':'apply'if re.search(r'^export function '+re.escape(name)+r'\b',source,re.M)else'foreign'}for name,row in value.items()}
-    elif p=='js/standalone/equipment-abi.json' and key=='weapon':
-     fields=json.loads((root/'js/standalone/records.json').read_text())['records']['window_procs']['fields']
+    elif p=='js/nethack/equipment-abi.json' and key=='weapon':
+     fields=json.loads((root/'js/nethack/records.json').read_text())['records']['window_procs']['fields']
      windows={'create_nhwindow':('win_create_nhwindow','ii'),'start_menu':('win_start_menu','vij'),'end_menu':('win_end_menu','vip'),'destroy_nhwindow':('win_destroy_nhwindow','vi')}
      assert 'windows'not in value
      assert "#define y_n(query) yn_function(query, ynchars, 'n', TRUE)"in(root/'.cache/wasm64-build/tree/include/hack.h').read_text()

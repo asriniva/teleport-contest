@@ -1,5 +1,5 @@
 import * as core from '../../js/ported/stairs.js';
-import {createRecordViews} from '../../js/standalone/record-views.js';
+import {createRecordViews} from '../../js/nethack/record-views.js';
 import {environment,probeModule,withoutWasm} from './common.mjs';
 export default async function createStairsProbe(layouts){
  const env=await environment(),L=layouts.stairs,m=env.memory;

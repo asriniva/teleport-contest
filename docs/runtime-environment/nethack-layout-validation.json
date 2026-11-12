@@ -1,0 +1,99 @@
+{
+  "baseCommit": "e61e34c926bed5a098cf3142ba50fa6cf56d2b46",
+  "branch": "codex/consolidate-nethack-runtime",
+  "completedAt": "2026-11-12T18:01:31.698659+00:00",
+  "formerStandaloneFiles": 230,
+  "movedFiles": 229,
+  "removedForwarders": 1,
+  "pathTransitions": 593,
+  "receipt": "docs/runtime-environment/nethack-layout.json",
+  "receiptSha256": "f21283e09620d2fb310d7b78b9d31f6a71b080e0a25a1aaa6a0c5fab129513af",
+  "runtimePolicyBodiesChanged": false,
+  "originalJsonMetadataChanged": false,
+  "compilerInputsChanged": false,
+  "recorderRun": false,
+  "subsystemRerun": {
+    "passed": 19,
+    "assertions": 612585,
+    "assertionFailures": 0,
+    "reference": "original C",
+    "implementation": "current consolidated JS modules; Wasm denied",
+    "reports": [
+      {
+        "file": ".cache/native-existing-runs/78749-1794506088488/results.json",
+        "sha256": "b18b726530f45f99b3d132ce8083014aa72f4d570a4c15d3dd66614f14183f43",
+        "runId": "78749-1794506088488",
+        "passed": 19,
+        "assertions": 612585
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "current-layout-and-imports",
+      "scope": "current",
+      "status": "passed",
+      "log": ".cache/nethack-rebased-layout.log",
+      "sha256": "998995b2ab967afcb79ed6c3004188d1db410f2acc4f2268f7e114215df51498"
+    },
+    {
+      "name": "native-runtime",
+      "scope": "current",
+      "status": "passed",
+      "log": ".cache/nethack-rebased-runtime.log",
+      "sha256": "e543ecb72d2d6b8685fef88ee30558fdb0d7c2a40a43a63237ddcaf6081d2410"
+    },
+    {
+      "name": "capability-isolation",
+      "scope": "current",
+      "status": "passed",
+      "log": ".cache/nethack-rebased-isolation.log",
+      "sha256": "4d7bbf57f5bd86d18868749d5027456dfc2157cb52605da246e5ce4285597df1"
+    },
+    {
+      "name": "native-cli-and-allocation",
+      "scope": "current",
+      "status": "passed",
+      "log": ".cache/nethack-rebased-cli.log",
+      "sha256": "2c30d18664e2e9ff85f992caff94b4089d9ed0b1284a5f04626e6c96a1e6413c"
+    },
+    {
+      "name": "source-main-light",
+      "scope": "current",
+      "status": "passed",
+      "log": ".cache/nethack-rebased-light.log",
+      "sha256": "50b31db9ec3d13c10cd82b63a70dac42a66cd53e45ad6ac11fe767a92dd5feba"
+    },
+    {
+      "name": "historical-scope",
+      "scope": "prior-layout source audit",
+      "status": "passed",
+      "log": ".cache/nethack-rebased-historical-scope.log",
+      "sha256": "739bda75e8fd4c2330a07328fca0aa86a067ab20fd345659c9ea8542c82e3cf8"
+    },
+    {
+      "name": "historical-runtime-manifest",
+      "scope": "prior-layout source audit",
+      "status": "passed",
+      "log": ".cache/nethack-rebased-historical-manifest.log",
+      "sha256": "5aa057256676ee078b2af3331d350049b6bbd49c711af2db986008273539e6ca"
+    }
+  ],
+  "toolSha256": {
+    "scripts/consolidate-nethack-layout.py": "b91a6316f305a09137daea3f515b9990b8090f2be772629fca3885e1aef9735f",
+    "scripts/nethack-layout.mjs": "f7c4f74074831a8ff7a594bb08df716dfad84272255141f6584b13678b0d4a97",
+    "scripts/nethack_layout.py": "98625b7b0c5a4fbac0b2bcc927d826b6793498afdc13f79e94e4954e014de782",
+    "scripts/test-nethack-layout.mjs": "bcd00196a3787ac09748bf666f70614732dda99a9cfc0c7851f4302e97b10918"
+  },
+  "limitations": [
+    "This layout change reruns19 subsystem suites; it does not claim a new138-suite run.",
+    "Equipment-startup was attempted but its cached original-C reference .cache/standalone-equipment-startup-v1/receipt.json is absent.",
+    "No recorder sessions were run.",
+    "Historical audit results reproduce the prior layout after independent current-source verification; they are not current-engine execution results."
+  ],
+  "previousValidation": {
+    "file": "docs/runtime-environment/nethack-layout-validation-before-rebase.json",
+    "sha256": "64d2fed6f4d2fc8974dcddde32b0cbfaf6330aa120a3d1560632b25bf46a1f9f",
+    "scope": "Superseded pre-rebase run on main5031c28; paths and source hashes describe that earlier snapshot."
+  }
+}

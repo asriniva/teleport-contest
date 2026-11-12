@@ -1,3 +1,4 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // Connected original early_init, REPORT fallback and NHMD4 storage acceptance.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -5,8 +6,8 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {pathToFileURL,fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
-import {enableReport} from '../js/standalone/report.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
+import {enableReport} from '../js/nethack/report.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 
 if(!process.argv.includes('--worker')){
@@ -17,11 +18,11 @@ if(!process.argv.includes('--worker')){
 const directory=path.resolve(process.env.STANDALONE_REPORT_ORACLE||'.cache/standalone-report-v1');
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 let hashes=0,comparisons=0,contracts=0;
-for(const [p,hash]of Object.entries(receipt.sourceSha256)){assert.equal(sha(p),hash,'Changed C reference input '+p);hashes++;}
+for(const [p,hash]of Object.entries(receipt.sourceSha256)){assert.equal(layoutSourceSha(p,hash),hash,'Changed C reference input '+p);hashes++;}
 for(const [p,hash]of Object.entries(receipt.artifactSha256)){assert.equal(sha(path.join(directory,p)),hash,'Changed C reference artifact '+p);hashes++;}
 assert.deepEqual(receipt.buildEnvironment,{SOURCE_DATE_EPOCH:'1777723200',TZ:'UTC'});
-const records=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
-const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),abi=JSON.parse(fs.readFileSync('js/standalone/runtime-info-abi.json'));
+const records=JSON.parse(fs.readFileSync('js/nethack/records.json')).records;
+const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),abi=JSON.parse(fs.readFileSync('js/nethack/runtime-info-abi.json'));
 const declText=fs.readFileSync('js/nethack/bindings/decl.js','utf8'),globals=JSON.parse(declText.match(/^const globals=(.*);$/m)[1]),schemas=JSON.parse(declText.match(/^const schemas=(.*);$/m)[1]);
 const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
 const equal=(a,b,label)=>{assert.deepEqual(a,b,label);comparisons++;};

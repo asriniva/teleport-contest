@@ -1,3 +1,4 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // Replay literal ordinary inputs through the unchanged sealed original-C runner.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -9,9 +10,9 @@ const fixture=path.resolve(process.env.NATIVE_BONES_FIXTURE??'.cache/native-deep
 const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const input=JSON.parse(fs.readFileSync(fixture+'/input.json')),generated=JSON.parse(fs.readFileSync(fixture+'/result.json')),generation=JSON.parse(fs.readFileSync(fixture+'/evidence.json'));
 assert.ok(generation.complete&&generation.nativeOnly&&generation.deepest>=4&&generation.bones.length,'native generator reached a real deeper bones-producing death');
-assert.equal(sha(fixture+'/input.json'),generation.literalInputSha256,'immutable literal inputs');
-assert.equal(sha(fixture+'/controller.mjs'),generation.controllerSha256,'retained controller source');
-assert.equal(sha(directory+'/receipt.json'),generation.referenceReceiptSha256,'identical sealed reference');
+assert.equal(layoutSourceSha(fixture+'/input.json',generation.literalInputSha256),generation.literalInputSha256,'immutable literal inputs');
+assert.equal(layoutSourceSha(fixture+'/controller.mjs',generation.controllerSha256),generation.controllerSha256,'retained controller source');
+assert.equal(layoutSourceSha(directory+'/receipt.json',generation.referenceReceiptSha256),generation.referenceReceiptSha256,'identical sealed reference');
 const replay=await runFullOriginalC(directory,input);
 fs.writeFileSync(fixture+'/replay-result.json',JSON.stringify(replay,null,2)+'\n');
 assert.deepEqual(replay,generated,'whole original-C result: observations, full RNG states/logs, TTY/frames, file paths/metadata/bytes including compressed bones');

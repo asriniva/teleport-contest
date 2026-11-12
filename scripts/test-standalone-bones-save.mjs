@@ -1,10 +1,11 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // Focused direct original savebones after genuine startup; eligibility is not tested here.
 import assert from 'node:assert/strict';import fs from 'node:fs';import crypto from 'node:crypto';
 import{runFullOriginalC}from'./full-original-c-run.mjs';import{runStandaloneProgram}from'./run-standalone-program.mjs';
 import{C,R,T}from'../js/c-runtime/context.js';
 import{worldGraph}from'./restoration-world-graph.mjs';
-const directory='.cache/full-original-c-v1',layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),abi=JSON.parse(fs.readFileSync('js/standalone/bones-services-abi.json')),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-for(const[p,h]of Object.entries(abi.sourceSha256))assert.equal(sha(p),h,p);
+const directory='.cache/full-original-c-v1',layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),abi=JSON.parse(fs.readFileSync('js/nethack/bones-services-abi.json')),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+for(const[p,h]of Object.entries(abi.sourceSha256))assert.equal(layoutSourceSha(p,h),h,p);
 let cr,jr;const input={keys:'  n',options:'OPTIONS=!news\n',timezone:'UTC'},c=await runFullOriginalC(directory,{...input,observeRuntime:r=>cr=r}),j=runStandaloneProgram(directory+'/assets',{...input,observeRuntime:r=>jr=r});
 assert.equal(j.status.kind,'input-exhausted',JSON.stringify(j.status));assert.equal(c.status.kind,'input-exhausted');assert.deepEqual(j.state,c.state,'genuine startup source state');
 function js(fn){const names=['WebAssembly','fetch','XMLHttpRequest','WebSocket','Worker'],saved=names.map(k=>Object.getOwnPropertyDescriptor(globalThis,k)),bad=()=>{throw new Error('Forbidden BONES production capability');};for(const k of names)Object.defineProperty(globalThis,k,{configurable:true,value:k==='WebAssembly'?new Proxy({},{get:bad}):bad});try{return fn();}finally{names.forEach((k,i)=>saved[i]?Object.defineProperty(globalThis,k,saved[i]):delete globalThis[k]);assert.deepEqual([C,R,T],[undefined,undefined,undefined]);}}

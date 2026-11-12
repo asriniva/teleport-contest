@@ -50,6 +50,6 @@ for(const source of ['c','js'])for(const consumer of ['c','js']){
 }
 evidence.limitation='Actual startup, first wait turn, initial save exit, and four independent C/JS saved-stream producer/consumer combinations through the first restored input prompt. Full restored graph equality, resumed gameplay, later turns, quit/death and bones remain separate acceptance requirements.';
 const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
-evidence.scriptSha256=Object.fromEntries(['scripts/test-r5-diagnostic-program.mjs','scripts/run-standalone-program.mjs','scripts/full-original-c-run.mjs','js/standalone/program.js'].map(file=>[file,sha(file)]));
+evidence.scriptSha256=Object.fromEntries(['scripts/test-r5-diagnostic-program.mjs','scripts/run-standalone-program.mjs','scripts/full-original-c-run.mjs','js/nethack/program.js'].map(file=>[file,sha(file)]));
 fs.writeFileSync('.cache/r5-diagnostic-program/evidence.json',JSON.stringify(evidence,null,2)+'\n');
 console.log('PASS '+JSON.stringify(evidence));

@@ -32,7 +32,7 @@ function writeBytes(fd,bytes){let at=0;while(at<bytes.length){try{const n=fs.wri
 const forbidden=()=>{throw Error('The standalone player cannot use Wasm or network capabilities');},names=['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'],saved=names.map(name=>Object.getOwnPropertyDescriptor(globalThis,name)),raw=Boolean(process.stdin.isTTY&&process.stdin.isRaw);let program,baseline,completed=false,code=1;
 try{
  for(const name of names)Object.defineProperty(globalThis,name,{configurable:true,value:name==='WebAssembly'?new Proxy({},{get:forbidden}):forbidden});
- const[{createStandaloneProgram},{CExit}]=await Promise.all([import('../js/standalone/program.js'),import('../js/standalone/functions.js')]);
+ const[{createStandaloneProgram},{CExit}]=await Promise.all([import('../js/nethack/program.js'),import('../js/nethack/functions.js')]);
  const layouts=JSON.parse(fs.readFileSync(path.join(root,'js/wasm/tu-layouts.json')));
  program=createStandaloneProgram({layouts,assets,directories:[home,'/nethack/save'],runtime:{environment:profile,now,initialBytes:1024,maximumBytes:128*1024*1024},stdio:{readStdin:readBytes,stdout:bytes=>writeBytes(1,bytes),stderr:bytes=>writeBytes(2,bytes)},readKey(){const bytes=readBytes(1);if(!bytes.length)throw Error('Keyboard input closed before the game exited');return bytes[0];}});
  program.environment.filesystem.chdir('/nethack');baseline=program.environment.fileBaseline();if(previous)program.environment.restoreFiles(previous.state);

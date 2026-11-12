@@ -22,7 +22,7 @@ decoder = json.JSONDecoder()
 text = runtime.read_text()
 declaration = lambda name: decoder.raw_decode(text.split('const ' + name + '=', 1)[1])[0]
 schemas, globals_ = declaration('schemas'), declaration('globals')
-known = json.loads((root / 'js/standalone/records.json').read_text())['records']
+known = json.loads((root / 'js/nethack/records.json').read_text())['records']
 for name, row in schemas.items():
     key = row['ctype'].removeprefix('struct ').removeprefix('union ')
     if key not in known:
@@ -64,7 +64,7 @@ with tempfile.TemporaryDirectory(prefix='standalone-save-abi-') as scratch:
 
 inputs = [Path(__file__).resolve(), runtime, root / 'js/ported/save.js', support,
           source_data, library, header, root / 'nethack-c/wasm/compile-defines.json',
-          root / 'js/standalone/records.json', root / 'js/standalone/public-functions.json']
+          root / 'js/nethack/records.json', root / 'js/nethack/public-functions.json']
 data = {'schemas': schemas, 'globals': globals_, 'zeroStorage': sizes,
         'serializers': serializers, 'SIG_IGN': sig_ign, 'sourceFile': source_file,
         'snprintfLine': integer('SAVE_SNPRINTF_LINE'), 'assertLine': integer('SAVE_ASSERT_LINE'),
@@ -72,6 +72,6 @@ data = {'schemas': schemas, 'globals': globals_, 'zeroStorage': sizes,
                         for i, name in enumerate(['save_gamelog', 'save_msghistory'])],
         'sourceSha256': {str(p.relative_to(root)): sha(p) for p in inputs},
         'referenceHeaderSha256': {str(p.relative_to(ref)): sha(p) for p in headers if p.is_relative_to(ref)}}
-(root / 'js/standalone/save-lifecycle-abi.json').write_text(json.dumps(data, indent=2) + '\n')
+(root / 'js/nethack/save-lifecycle-abi.json').write_text(json.dumps(data, indent=2) + '\n')
 print('Bound SAVE lifecycle: %d schemas, %d shared roots, two measured zero records and %d serializer aliases.'
       % (len(schemas), len(globals_), len(serializers)))

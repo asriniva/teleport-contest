@@ -4,7 +4,7 @@ import hashlib,json,shutil
 root=Path(__file__).resolve().parents[2]
 out=root/'.cache/pure-js-fixtures/reference-headers'
 pins={}
-for source in (root/'js/standalone').glob('*.json'):
+for source in (root/'js/nethack').glob('*.json'):
  data=json.loads(source.read_text())
  if not isinstance(data,dict):continue
  for key in (['headerSha256']if source.name=='records.json'else[])+['referenceHeaderSha256']:

@@ -11,4 +11,4 @@ sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 deps=subprocess.check_output([str(clang),*flags,'-M',str(p)],text=True)
 headers=[Path(n).resolve()for n in shlex.split(deps.split(':',1)[1].replace('\\\n',''))if Path(n).resolve()!=p.resolve()]
 result={'functions':functions,'sourceSha256':{str(Path(__file__).resolve().relative_to(root)):sha(Path(__file__).resolve()),'nethack-c/wasm/compile-defines.json':sha(root/'nethack-c/wasm/compile-defines.json')},'referenceHeaderSha256':{str(header.relative_to(ref)):sha(header)for header in sorted(set(headers))}}
-(root/'js/standalone/public-functions.json').write_text(json.dumps(result,indent=2)+'\n');print('Exported '+str(len(functions))+' configured public C prototypes.')
+(root/'js/nethack/public-functions.json').write_text(json.dumps(result,indent=2)+'\n');print('Exported '+str(len(functions))+' configured public C prototypes.')

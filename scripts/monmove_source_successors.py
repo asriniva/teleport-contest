@@ -1,3 +1,8 @@
+import sys as _layout_sys
+from pathlib import Path as _LayoutPath
+_layout_sys.path.insert(0,str(_LayoutPath(__file__).resolve().parent))
+from nethack_layout import historical_cli as _prior_layout_cli
+if __name__=='__main__':_prior_layout_cli(__file__)
 """Exact MONMOVE feature qualification for historical development audits.
 
 This layer restores the pinned pre-feature bytes before the original layout
@@ -9,7 +14,7 @@ from pathlib import Path
 BASE_COMMIT='b0c15ec738de2776f607d2b6909dc7801d3733d5'
 DECLARATION='docs/runtime-environment/monmove-source-successors.json'
 PROOF='docs/runtime-environment/monmove-native-evidence.json'
-ALLOWED=frozenset(['js/standalone/monster-movement.js', 'js/standalone/monmove-abi.json'])
+ALLOWED=frozenset(['js/nethack/monster-movement.js', 'js/nethack/monmove-abi.json'])
 NEW_FILES=frozenset()
 
 def sha(data):return hashlib.sha256(data).hexdigest()

@@ -21,7 +21,7 @@ with tempfile.TemporaryDirectory(prefix='standalone-apply-abi-')as scratch:
 native=support.read_text();lib=library.read_text();rt=runtime.read_text();decoder=json.JSONDecoder();extract=lambda marker:decoder.raw_decode(rt.split(marker,1)[1])[0]
 globals=extract('const globals=');body=native.split('teleport_apply_global',1)[1].split('int teleport_apply_bit',1)[0];seen=[(int(i),name)for i,name in re.findall(r'case (\d+):return\(const void\*\)&(\w+);',body)];assert seen==list(enumerate(globals))
 bitbody=native.split('int teleport_apply_bit',1)[1].split('void teleport_apply_set_bit',1)[0];bits=[{'index':int(i),'type':'struct '+t,'field':f}for i,t,f in re.findall(r'case (\d+):return\(\(const struct (\w+)\*\)p\)->(\w+);',bitbody)];assert [b['index']for b in bits]==list(range(34))
-public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions'];calls={}
+public=json.loads((root/'js/nethack/public-functions.json').read_text())['functions'];calls={}
 for name,target in re.findall(r'^(\w+):[^\n]*?=>\s*(?:Number\()?_(\w+)\(',lib,re.M):
  if not target.startswith('teleport_apply_'):calls[name]={'target':target,'prototype':public[target]}
 callbackIds=decoder.raw_decode(lib.split('var callbackIds=',1)[1])[0];callbacks={}
@@ -38,6 +38,6 @@ for name,mapping in re.findall(r'^(\w+):[^\n]*?var fn=(\{[^\n]*?\})\[shape\]',li
   m=re.search(r'^([^\n;{}]+?) '+target+r'\((.*?)\)\{(?:return )?(\w+)\(',native,re.M);assert m,(name,target)
   params=re.sub(r'\brestrict\b','',m[2]);params=re.sub(r'\s+a\d+\b','',params);rows[shape]={'target':m[3],'prototype':m[1]+' ('+params+')'}
  formats[name]=rows
-names=re.findall(r'^export function (\w+)',(root/'js/ported/apply.js').read_text(),re.M);inputs=[Path(__file__).resolve(),header,support,library,runtime,root/'js/ported/apply.js',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+names=re.findall(r'^export function (\w+)',(root/'js/ported/apply.js').read_text(),re.M);inputs=[Path(__file__).resolve(),header,support,library,runtime,root/'js/ported/apply.js',root/'js/nethack/records.json',root/'js/nethack/public-functions.json',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 data={'relocations':{'NH_RED':{'global':'c_color_names','record':'struct c_color_names','field':'c_red','expression':'c_color_names.c_red'}},'layout':layout,'globals':list(globals),'bits':bits,'callbacks':callbacks,'calls':calls,'formats':formats,'callers':extract('const CALLER_NAMES='),'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[tree/'src/apply.c']))}}
-(root/'js/standalone/apply-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound APPLY: '+str(len(data['public']))+' public source entries/'+str(len(calls))+' typed foreign calls/'+str(len(callbacks))+' callbacks.')
+(root/'js/nethack/apply-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound APPLY: '+str(len(data['public']))+' public source entries/'+str(len(calls))+' typed foreign calls/'+str(len(callbacks))+' callbacks.')

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {CMemory} from '../js/c-runtime/heap.js';
 import {address,createMemoryServices} from '../js/c-runtime/memory.js';
-import {createMemoryServices as createStandaloneMemoryServices} from '../js/standalone/memory-services.js';
+import {createMemoryServices as createStandaloneMemoryServices} from '../js/nethack/memory-services.js';
 
 const memory=new CMemory({initialBytes:128,maximumBytes:1024*1024});
 const C=createMemoryServices(memory);

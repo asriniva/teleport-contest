@@ -1,5 +1,11 @@
 # Standalone JavaScript C environment checkpoint
 
+Current directory layout: NetHack-specific assembly and bindings live together in
+[`js/nethack`](../../js/nethack/README.md); generic C facilities remain in
+`js/c-runtime`. The former `js/standalone` directory has been removed. Historical
+results and paths below retain their original meaning and hashes. See the
+[consolidation record](NETHACK_CONSOLIDATION.md).
+
 Runtime ownership separation and factory consolidation are documented in [SERVICES_CLEANUP_PLAN.md](SERVICES_CLEANUP_PLAN.md); earlier source paths in recorded evidence remain historical.
 
 Current qualified follow-up: terminal window dispatch, original SDK virtual

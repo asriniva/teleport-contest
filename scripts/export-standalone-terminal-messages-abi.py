@@ -31,5 +31,5 @@ paths = [Path(__file__).resolve(), runtime, support,
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 data = {'globals': globals_, 'persistent': [{'name': name, 'type': typ, 'index': i} for name, typ, i in persistent],
         'sourceSha256': {str(p.relative_to(root)): sha(p) for p in paths}}
-(root / 'js/standalone/terminal-messages-abi.json').write_text(json.dumps(data, indent=2) + '\n')
+(root / 'js/nethack/terminal-messages-abi.json').write_text(json.dumps(data, indent=2) + '\n')
 print('Bound original TOPL shared globals and persistent source cells.')

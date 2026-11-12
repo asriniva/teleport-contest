@@ -1,18 +1,19 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const directory=path.resolve(process.env.STANDALONE_HERO_STARTUP_ORACLE||'.cache/standalone-hero-startup-v4');
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json')));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(sha(p),h,'Changed C source '+p);
+for(const [p,h]of Object.entries(receipt.sourceSha256))assert.equal(layoutSourceSha(p,h),h,'Changed C source '+p);
 for(const [p,h]of Object.entries(receipt.artifactSha256))assert.equal(sha(path.join(directory,p)),h,'Changed C artifact '+p);
 const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),L=layouts.makemon,M=layouts.mkobj;
-const metadata=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
+const metadata=JSON.parse(fs.readFileSync('js/nethack/records.json')).records;
 
 const dataRoot=path.join(process.env.STANDALONE_REFERENCE_ROOT,'.cache/wasm64-build/tree/dat');
 const files=['nhlib.lua','dungeon.lua','nhcore.lua'].map(name=>[name,fs.readFileSync(path.join(dataRoot,name))]);
@@ -34,11 +35,11 @@ for(const seed of [1n,0x12345678n,0xffffffffffffffffn])for(const input of [
  ...Array.from({length:13},(_,i)=>[i,0,0,0,'Ada']),[-1,-1,-1,-1,'Ada'],[-2,-2,-2,-2,'Ada'],[99,99,99,99,'Ada'],[-1,-1,-1,-1,'Ada-Wiz-Elf-Fem-Cha'],[0,2,0,0,'Ada'],[0,3,1,1,'Ada'],[6,1,1,2,'Ada'],[12,4,0,2,'Ada'],[11,2,1,0,'Ada']
 ])for(const roleplay of [0,1,2,4,8,255])for(const phase of ['hero','startup-prefix']){
  const env=createStandaloneEnvironment({initialBytes:1024,maximumBytes:64*1024*1024,environment:{NETHACK_RNGLOG:'/rng.log',NETHACK_FIXED_DATETIME:'20260102030405'}});
- env.enableStdio();env.enableDecl(layouts.decl);env.call('decl','program_state_init');env.call('decl','decl_globals_init');env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.call('objects','objects_globals_init');env.enableMonst(layouts.monst);env.call('monst','monst_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed});env.call('rnd','rng_log_init');env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.enableObjectRecords(layouts);env.enableItemInventory(layouts);env.enableTimers(layouts);env.enableItemNaming(layouts);const group=env.enableMonsterSelection(layouts);const decl=JSON.parse(fs.readFileSync('js/standalone/decl-storage.json')).globals,before=decl.map(r=>env.memory.readBytes(env.requireGlobal(r.name),r.bytes));const creation=env.enableMonsterCreation(layouts);decl.forEach((r,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(r.name),r.bytes),before[i],'enabling creation preserves '+r.name));
+ env.enableStdio();env.enableDecl(layouts.decl);env.call('decl','program_state_init');env.call('decl','decl_globals_init');env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.call('objects','objects_globals_init');env.enableMonst(layouts.monst);env.call('monst','monst_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed});env.call('rnd','rng_log_init');env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.enableObjectRecords(layouts);env.enableItemInventory(layouts);env.enableTimers(layouts);env.enableItemNaming(layouts);const group=env.enableMonsterSelection(layouts);const decl=JSON.parse(fs.readFileSync('js/nethack/decl-storage.json')).globals,before=decl.map(r=>env.memory.readBytes(env.requireGlobal(r.name),r.bytes));const creation=env.enableMonsterCreation(layouts);decl.forEach((r,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(r.name),r.bytes),before[i],'enabling creation preserves '+r.name));
 
  const startup=env.enableGameStartup(layouts);env.call('sys','sys_early_init');
  const errors=[];const ref=await factory({printErr:s=>errors.push(s)});ref._probe_startup_init(seed);const timeKey=ref._malloc(23n),timeValue=ref._malloc(15n);ref.HEAPU8.set(Buffer.from('NETHACK_FIXED_DATETIME\0'),Number(timeKey));ref.HEAPU8.set(Buffer.from('20260102030405\0'),Number(timeValue));ref._setenv(BigInt(timeKey),BigInt(timeValue),1);ref._free(BigInt(timeKey));ref._free(BigInt(timeValue));
- function enableSandbox(){const rows=JSON.parse(fs.readFileSync('js/standalone/decl-storage.json')).globals,images=rows.map(row=>env.memory.readBytes(env.requireGlobal(row.name),row.bytes));env.enableLuaSandbox(layouts);rows.forEach((row,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(row.name),row.bytes),images[i],'sandbox construction preserves '+row.name));}
+ function enableSandbox(){const rows=JSON.parse(fs.readFileSync('js/nethack/decl-storage.json')).globals,images=rows.map(row=>env.memory.readBytes(env.requireGlobal(row.name),row.bytes));env.enableLuaSandbox(layouts);rows.forEach((row,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(row.name),row.bytes),images[i],'sandbox construction preserves '+row.name));}
  const [r,race,g,a,name]=input,flags=env.services.flags;
  Object.assign(flags,{initrole:r,initrace:race,initgend:g,initalign:a,female:0,pantheon:-1});
  for(const field of ['plname','pl_character'])env.memory.HEAPU8.fill(0,startup.role.svp[field],startup.role.svp[field]+(field==='plname'?layouts.role.PL_NSIZ:layouts.role.PL_CSIZ));
@@ -51,7 +52,7 @@ for(const seed of [1n,0x12345678n,0xffffffffffffffffn])for(const input of [
  function compare(phase){for(const [i,[name,type,n]]of entries.entries()){
   assert.ok(Number.isInteger(n),name+' count');const actual=snapshot(env.memory.HEAPU8,env.requireGlobal(name),type,n),expected=snapshot(ref.HEAPU8,pointers[i],type,n);assert.deepEqual(actual.strings,expected.strings,phase+' strings '+name+' '+input);const diffs=[];actual.bytes.forEach((v,i)=>{if(v!==expected.bytes[i])diffs.push([i,v,expected.bytes[i]]);});assert.deepEqual(diffs.slice(0,20),[],phase+' bytes '+name+' '+input+' total '+diffs.length);comparisons++;
  }}
- const rows=JSON.parse(fs.readFileSync('js/standalone/decl-storage.json')).globals,images=rows.map(row=>env.memory.readBytes(env.requireGlobal(row.name),row.bytes));env.enableHeroStartup(layouts);rows.forEach((row,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(row.name),row.bytes),images[i],'hero providers preserve '+row.name));const rp=env.services.u.uroleplay;['blind','nudist','deaf','pauper','reroll','reserved1','reserved2','reserved3'].forEach((k,i)=>rp[k]=(roleplay>>i)&1);rp.numbones=roleplay?4294967299n:0n;rp.numrerolls=roleplay?-3n:0n;ref._probe_hero_roleplay(roleplay,rp.numbones,rp.numrerolls);compare('before');env.enableWorldPosition(layouts);if(!env.status()['nhlua'])enableSandbox();for(const [name,bytes]of files){env.filesystem.writeFile(name,bytes);ref.FS.writeFile(name,bytes);}
+ const rows=JSON.parse(fs.readFileSync('js/nethack/decl-storage.json')).globals,images=rows.map(row=>env.memory.readBytes(env.requireGlobal(row.name),row.bytes));env.enableHeroStartup(layouts);rows.forEach((row,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(row.name),row.bytes),images[i],'hero providers preserve '+row.name));const rp=env.services.u.uroleplay;['blind','nudist','deaf','pauper','reroll','reserved1','reserved2','reserved3'].forEach((k,i)=>rp[k]=(roleplay>>i)&1);rp.numbones=roleplay?4294967299n:0n;rp.numrerolls=roleplay?-3n:0n;ref._probe_hero_roleplay(roleplay,rp.numbones,rp.numrerolls);compare('before');env.enableWorldPosition(layouts);if(!env.status()['nhlua'])enableSandbox();for(const [name,bytes]of files){env.filesystem.writeFile(name,bytes);ref.FS.writeFile(name,bytes);}
  if(phase==='hero'){
   env.services.init_objects();env.services.role_init();env.services.init_dungeons();env.services.init_artifacts();env.services.u_init_misc();env.services.l_nhcore_init();ref._probe_hero_init();compare(phase);assert.deepEqual(errors,[],'Unexpected C output');
   const jsCore=Number(env.ctypes.getField('struct instance_globals_l',env.requireGlobal('gl'),'luacore','void *')),cCore=Number(new DataView(ref.HEAPU8.buffer).getBigUint64(Number(ref._probe_dungeon_global(1))+metadata.instance_globals_l.fields.luacore.offset,true));

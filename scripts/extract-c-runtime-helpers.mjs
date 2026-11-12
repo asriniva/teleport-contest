@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 // Reproducible, reversible extraction of identical C adapter mechanics.
 // Default is verification. --write accepts only exact baseline or generated files.
 import fs from 'node:fs';

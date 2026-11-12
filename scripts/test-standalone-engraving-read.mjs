@@ -1,15 +1,16 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // Real engraving reading: original ENGRAVE/DUNGEON/PLINE/TTY and shared state.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {createNativeTerminal} from '../js/platform/darwin/terminal.js';
 import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 Error.stackTraceLimit=50;
 const referenceRoot=path.resolve(process.env.STANDALONE_REFERENCE_ROOT||'../teleport-contest'),directory=path.resolve(process.env.STANDALONE_ENGRAVING_READ_ORACLE||'.cache/standalone-engraving-read-v4');
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');let hashes=0,comparisons=0,contracts=0;
-for(const [p,h]of Object.entries(receipt.sourceSha256)){assert.equal(sha(p),h,'Changed C input '+p);hashes++;}for(const [p,h]of Object.entries(receipt.artifactSha256)){assert.equal(sha(path.join(directory,p)),h,'Changed C artifact '+p);hashes++;}
-const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),metadata=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
+for(const [p,h]of Object.entries(receipt.sourceSha256)){assert.equal(layoutSourceSha(p,h),h,'Changed C input '+p);hashes++;}for(const [p,h]of Object.entries(receipt.artifactSha256)){assert.equal(sha(path.join(directory,p)),h,'Changed C artifact '+p);hashes++;}
+const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),metadata=JSON.parse(fs.readFileSync('js/nethack/records.json')).records;
 const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
 function js(fn){const keys=['WebAssembly','fetch','XMLHttpRequest','WebSocket','Worker'],saved=keys.map(k=>Object.getOwnPropertyDescriptor(globalThis,k));let accesses=0;const forbidden=()=>{accesses++;throw new Error('Forbidden Wasm/network during engraving execution');};keys.forEach(k=>Object.defineProperty(globalThis,k,{configurable:true,value:k==='WebAssembly'?new Proxy(Object.create(null),{get:forbidden}):forbidden}));try{return fn();}finally{keys.forEach((k,i)=>saved[i]?Object.defineProperty(globalThis,k,saved[i]):delete globalThis[k]);assert.equal(accesses,0);assert.deepEqual([C,R,T],[undefined,undefined,undefined]);contracts+=2;}}
 const equal=(a,b,label)=>{assert.deepEqual(a,b,label);comparisons++;};
@@ -21,7 +22,7 @@ async function pair(seed){const role=0,roleplay=0,entry=fs.readFileSync('nethack
  const inputTTY=ref.FS.getStream(0).tty;inputTTY.ops={...inputTTY.ops,get_char:()=>32};
  const built=js(()=>{
  const env=createStandaloneEnvironment({initialBytes:1024,maximumBytes:64*1024*1024,environment:{TERM:'xterm-256color',NOMUX_MARKERS:'1',NETHACK_RNGLOG:'/rng.log',NETHACK_FIXED_DATETIME:'20260102030405',NETHACK_SEED:seed.toString()}});
- const stdio=env.enableStdio();env.enableDecl(layouts.decl);env.call('decl','program_state_init');env.call('decl','decl_globals_init');env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.call('objects','objects_globals_init');env.enableMonst(layouts.monst);env.call('monst','monst_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed});env.call('rnd','rng_log_init');env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.enableObjectRecords(layouts);env.enableItemInventory(layouts);env.enableTimers(layouts);env.enableItemNaming(layouts);const group=env.enableMonsterSelection(layouts);const decl=JSON.parse(fs.readFileSync('js/standalone/decl-storage.json')).globals,before=decl.map(r=>env.memory.readBytes(env.requireGlobal(r.name),r.bytes));const creation=env.enableMonsterCreation(layouts);decl.forEach((r,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(r.name),r.bytes),before[i],'enabling creation preserves '+r.name));
+ const stdio=env.enableStdio();env.enableDecl(layouts.decl);env.call('decl','program_state_init');env.call('decl','decl_globals_init');env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.call('objects','objects_globals_init');env.enableMonst(layouts.monst);env.call('monst','monst_globals_init');env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed});env.call('rnd','rng_log_init');env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.enableObjectRecords(layouts);env.enableItemInventory(layouts);env.enableTimers(layouts);env.enableItemNaming(layouts);const group=env.enableMonsterSelection(layouts);const decl=JSON.parse(fs.readFileSync('js/nethack/decl-storage.json')).globals,before=decl.map(r=>env.memory.readBytes(env.requireGlobal(r.name),r.bytes));const creation=env.enableMonsterCreation(layouts);decl.forEach((r,i)=>assert.deepEqual(env.memory.readBytes(env.requireGlobal(r.name),r.bytes),before[i],'enabling creation preserves '+r.name));
 
  const startup=env.enableGameStartup(layouts);env.call('sys','sys_early_init');
 env.enableHeroStartup(layouts);env.enableWorldPosition(layouts);env.enableLuaSandbox(layouts);env.enableDisplayStartup(layouts);
@@ -87,7 +88,7 @@ console.log(`PASS: ${comparisons-alignmentComparisons} original-C engraving/TTY/
  ref._probe_engraving_read_enable_preamble(1);assert.throws(()=>ref._probe_startup_newgame(),/Aborted/);assert.ok(errors.some(s=>s.includes('Observed C boundary: com_pager after optional original moveloop_preamble')),'Original C preamble completes before explicit prefix observation abort');
  equal(js(()=>Buffer.from(stdio.captured(1))),Buffer.from(coutput),'Actual original prefix + connected preamble TTY bytes');console.log('Connected interrupted-prefix/preamble terminal bytes: '+coutput.length);rng(env,ref);
  equal(js(()=>engraving(env.memory.HEAPU8,env.start('world-engravings').environment.head_engr.address||0)),engraving(ref.HEAPU8,ref._probe_engraving_read_head()),'Prefix/preamble engraving state');
- const decl=JSON.parse(fs.readFileSync('js/standalone/decl-storage.json')).globals,cglobal=name=>Number(ref._probe_decl_global(decl.findIndex(row=>row.name===name)));
+ const decl=JSON.parse(fs.readFileSync('js/nethack/decl-storage.json')).globals,cglobal=name=>Number(ref._probe_decl_global(decl.findIndex(row=>row.name===name)));
  for(const [root,type,field,scalar]of [['program_state','sinfo','something_worth_saving','int'],['program_state','sinfo','in_moveloop','int'],['svm','instance_globals_saved_m','moves','long'],['gm','instance_globals_m','multi','long'],['u','you','ux','coordxy'],['u','you','uy','coordxy']]){
   const f=metadata[type].fields[field];if(!f)continue;const jp=env.requireGlobal(root)+f.offset,cp=cglobal(root)+f.offset;equal(js(()=>env.ctypes.load(scalar,jp)),scalar==='long'?new DataView(ref.HEAPU8.buffer).getBigInt64(cp,true):scalar==='coordxy'?new DataView(ref.HEAPU8.buffer).getInt16(cp,true):new DataView(ref.HEAPU8.buffer).getInt32(cp,true),'Prefix/preamble '+root+'.'+field);
  }

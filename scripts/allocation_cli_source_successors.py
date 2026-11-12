@@ -1,3 +1,8 @@
+import sys as _layout_sys
+from pathlib import Path as _LayoutPath
+_layout_sys.path.insert(0,str(_LayoutPath(__file__).resolve().parent))
+from nethack_layout import historical_cli as _prior_layout_cli
+if __name__=='__main__':_prior_layout_cli(__file__)
 """Exact allocation-CLI feature qualification for historical development audits.
 
 This layer restores the pinned pre-feature bytes before the original layout
@@ -9,7 +14,7 @@ from pathlib import Path
 BASE_COMMIT='c722b9986090928fbd74e7c044cd261681760b02'
 DECLARATION='docs/runtime-environment/allocation-cli-source-successors.json'
 PROOF='docs/runtime-environment/allocation-cli-native-evidence.json'
-ALLOWED=frozenset(['js/standalone/environment.js', 'js/standalone/window-system.js', 'js/standalone/window-abi.json', 'js/standalone/turn-loop-abi.json'])
+ALLOWED=frozenset(['js/nethack/environment.js', 'js/nethack/window-system.js', 'js/nethack/window-abi.json', 'js/nethack/turn-loop-abi.json'])
 NEW_FILES=frozenset()
 
 def sha(data):return hashlib.sha256(data).hexdigest()

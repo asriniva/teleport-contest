@@ -42,7 +42,7 @@ for name,params,expression in re.findall(r'^(\w+):\(([^)]*)\)=>([^\n]+)',lib,re.
  calls[name]=converters
 lines=json.loads(re.search(r'teleport_eat_format_lines\[\]=(\[[^;]+\])',s.replace('{','[').replace('}',']'))[1])
 functions=json.loads(re.search(r'teleport_eat_format_functions\[\]=(\[[^;]+\])',s.replace('{','[').replace('}',']'))[1])
-paths=[Path(__file__).resolve(),support,library,runtime,root/'js/ported/eat.js',root/'js/standalone/public-functions.json',root/'js/wasm/tu-layouts.json']
+paths=[Path(__file__).resolve(),support,library,runtime,root/'js/ported/eat.js',root/'js/nethack/public-functions.json',root/'js/wasm/tu-layouts.json']
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 data={'globals':globals,'equipment':equipment,'bits':{k:{'type':t,'fields':bits[t]}for k,t in zip(bitkeys,bittypes)},'commonFields':[commonfield(n)for n in common],'colorFields':[re.search(r'#define\s+'+n+r'\s+c_color_names\.(\w+)',h)[1]for n in colors],'calls':calls,'formatSites':[{'function':f,'line':l}for f,l in zip(functions,lines)],'callbacks':['eatmdone','eatfood','opentin','unfaint','Hear_again','Finish_digestion'],'getobjCallbacks':['tinopen_ok','eat_ok','offer_ok','tin_ok'],'shapes':json.loads(re.search(r'var shapes=(\[[^;]+?\]),callers=',lib)[1]),'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in [header,ref/'.cache/wasm64-build/tree/include/hack.h']}}
-(root/'js/standalone/eat-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound full EAT native storage, fields and typed calls.')
+(root/'js/nethack/eat-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound full EAT native storage, fields and typed calls.')

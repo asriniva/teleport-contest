@@ -5,7 +5,7 @@ from pathlib import Path
 root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree'
 runtime=root/'js/nethack/bindings/restore.js';source=tree/'src/restore.c';support=root/'nethack-c/wasm/tu-restore-support.inc';types=root/'nethack-c/wasm/tu-restore-types.h';library=root/'nethack-c/wasm/tu-libraries/restore.js';header=root/'scripts/tu-restore-layout.h'
 text=runtime.read_text();decode=json.JSONDecoder();decl=lambda name:decode.raw_decode(text.split('const '+name+'=',1)[1])[0];schemas,globals_=decl('schemas'),decl('globals')
-known=json.loads((root/'js/standalone/records.json').read_text())['records'];private={name:row for name,row in schemas.items()if row['ctype'].removeprefix('struct ').removeprefix('union ')not in known}
+known=json.loads((root/'js/nethack/records.json').read_text())['records'];private={name:row for name,row in schemas.items()if row['ctype'].removeprefix('struct ').removeprefix('union ')not in known}
 if set(private)!={'bucket','restore_id_pair'}:raise ValueError('Review changed RESTORE private records')
 body=support.read_text().split('void *teleport_restore_global(int index){switch(index){',1)[1].split('default:',1)[0];rows=[(int(i),name)for i,name in re.findall(r'case (\d+):return \(void\*\)&(\w+);',body)]
 if rows!=list(enumerate(row['name']for row in globals_)):raise ValueError('RESTORE source/native global map mismatch')
@@ -26,6 +26,6 @@ with tempfile.TemporaryDirectory(prefix='standalone-restore-abi-')as tmp:
  for i,(name,row)in enumerate(private.items()):
   key='teleport_restore_bucket'if name=='bucket'else name;records[key]={'size':value(str(i)+'_size'),'alignment':value(str(i)+'_align'),'fields':{f['name']:{'offset':value(str(i)+'_'+str(j)),'ctype':f['ctype']+' '+f['name']}for j,f in enumerate(row['fields'])}}
  deps=subprocess.check_output([str(clang),*flags,'-M',str(p)],text=True);headers=sorted(set(Path(q).resolve()for q in shlex.split(deps.split(':',1)[1].replace('\\\n',''))))
-sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();inputs=[Path(__file__).resolve(),runtime,root/'js/ported/restore.js',support,types,library,header,root/'nethack-c/wasm/compile-defines.json',root/'js/wasm/tu-layouts.json',root/'js/standalone/records.json',root/'js/standalone/public-functions.json']
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();inputs=[Path(__file__).resolve(),runtime,root/'js/ported/restore.js',support,types,library,header,root/'nethack-c/wasm/compile-defines.json',root/'js/wasm/tu-layouts.json',root/'js/nethack/records.json',root/'js/nethack/public-functions.json']
 data={'schemas':schemas,'globals':globals_,'records':records,'recordTypes':{name:('restore_id_pair'if name=='restore_id_pair'else row['ctype'])for name,row in schemas.items()},'serializers':serializers,'assertions':assertions,'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in headers if p.is_relative_to(ref)}}
-(root/'js/standalone/restore-lifecycle-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound RESTORE schemas, shared globals, private bucket ABI and serializer/assertion transport.')
+(root/'js/nethack/restore-lifecycle-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound RESTORE schemas, shared globals, private bucket ABI and serializer/assertion transport.')

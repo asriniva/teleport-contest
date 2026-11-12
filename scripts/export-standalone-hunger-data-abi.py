@@ -15,5 +15,5 @@ layouts=json.loads((root/'js/wasm/tu-layouts.json').read_text())
 if len(values)!=count or layouts['eat']['pointerSize']!=8:raise ValueError('Review EAT hunger table profile')
 paths=[Path(__file__).resolve(),support,source,root/'js/nethack/bindings/eat.js',root/'js/wasm/tu-layouts.json']
 data={'pointerSize':8,'count':count,'storageIndex':0,'sourceSha256':{str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest()for p in paths}}
-(root/'js/standalone/hunger-data-abi.json').write_text(json.dumps(data,indent=2)+'\n')
+(root/'js/nethack/hunger-data-abi.json').write_text(json.dumps(data,indent=2)+'\n')
 print('Bound original EAT hunger text pointer table.')

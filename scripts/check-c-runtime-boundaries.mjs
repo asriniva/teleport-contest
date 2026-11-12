@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 // Validate the runtime's real module graph and reject application/host coupling.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -27,7 +29,7 @@ function visitFile(file) {
 visitFile(path.resolve('js/c-runtime/index.js'));
 // Every core implementation must be covered, not merely currently used exports.
 for(const file of fs.readdirSync('js/c-runtime').filter(file=>file.endsWith('.js')))visitFile(path.resolve('js/c-runtime',file));
-const measured=JSON.parse(fs.readFileSync('js/standalone/scanf-abi.json'));
+const measured=JSON.parse(fs.readFileSync('js/nethack/scanf-abi.json'));
 const profile=JSON.parse(fs.readFileSync('js/c-runtime/libc-profile.json'));
 for(const key of ['EINVAL','ERANGE','longBytes','pointerBytes','EOF'])assert.equal(profile[key],measured[key]);
 console.log('PASS: '+visited.size+' runtime/dependency files; no game modules, host imports, Wasm or network capabilities; configured libc profile matches measured declarations.');

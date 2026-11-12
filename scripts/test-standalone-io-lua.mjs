@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 const env=createStandaloneEnvironment({initialBytes:1024,maximumBytes:64*1024*1024});
 const {memory,filesystem,services}=env,io=env.enableStdio({stdin:Uint8Array.of(65,0,66)});
 const p=memory.calloc(1,128),f=io.fopen('/binary','w+');assert.ok(f);

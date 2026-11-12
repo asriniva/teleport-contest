@@ -16,7 +16,7 @@ flags=['-O2','-sMEMORY64=1','-sMODULARIZE=1','-sEXPORT_ES6=1','-sENVIRONMENT=nod
        *['-D'+d for d in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())],
        '-I'+str(reference/'.cache/wasm64-build/tree/include'),'-I'+str(reference/'.cache/wasm64-build/tree/lib/lua-5.4.8/src'),
        '-I'+str(reference/'.cache/ncurses-wasm64-build/include'),'-I'+str(reference/'.cache/tu-probes')]
-for name in json.loads((root/'js/standalone/address-ports.json').read_text())['ports']:
+for name in json.loads((root/'js/nethack/address-ports.json').read_text())['ports']:
     exports=['_malloc','_free',*['_teleport_'+name+'_'+suffix for suffix in ['read','write','address']]]
     cmd=[str(sdk/'upstream/emscripten/emcc'),*flags,'-sEXPORTED_FUNCTIONS='+json.dumps(exports),
          str(root/f'nethack-c/wasm/tu-fragments/{name}-support.c'),'-o',str(out/f'{name}-reference.mjs')]

@@ -24,7 +24,7 @@ export function assertCompiledInput(file,expected,label='compiled input'){
   execFileSync(process.execPath,['scripts/check-services-layout.mjs'],{stdio:'pipe'});
   execFileSync(process.execPath,['scripts/extract-c-runtime-helpers.mjs'],{env:{...process.env,STANDALONE_REFERENCE_ROOT:process.env.STANDALONE_REFERENCE_ROOT??process.cwd()},stdio:'pipe'});
   const layout=JSON.parse(fs.readFileSync('docs/runtime-environment/services-layout.json'));
-  for(const p of ['docs/runtime-environment/services-layout.json','docs/runtime-environment/binding-infrastructure.json','docs/runtime-environment/c-runtime-helper-extraction.json',...Object.keys(layout.supportSourceSha256),...Object.keys(JSON.parse(fs.readFileSync('docs/runtime-environment/c-runtime-manifest.json')).sha256)])dependencies.set(p,digest(fs.readFileSync(p)));
+  for(const p of ['docs/runtime-environment/services-layout.json','docs/runtime-environment/binding-infrastructure.json','docs/runtime-environment/c-runtime-helper-extraction.json',...Object.keys(layout.supportSourceSha256),...Object.keys(JSON.parse(fs.readFileSync('docs/runtime-environment/c-runtime-manifest.json')).sha256)])dependencies.set(currentSourcePath(p),digest(fs.readFileSync(currentSourcePath(p))));
   checked=true;
  }
  console.log('Reviewed source-layout input inverse: '+file+'; original compiled pin retained');return actual;

@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 // Bind this cleanup's source closure without rewriting historical oracle pins.
 import {migrationFiles,qualifiedHistorical} from './pure-js-fixtures/qualification.mjs';
 import fs from 'node:fs';
@@ -6,9 +8,9 @@ import crypto from 'node:crypto';
 const roots=['js/c-runtime','js/nethack'];
 const wrappers=['address-ports','c-types','functions','libc','memory-services','record-views'];
 const paths=[...roots.flatMap(root=>fs.readdirSync(root).filter(file=>/\.(js|json)$/.test(file)).map(file=>root+'/'+file)),
-    ...wrappers.map(name=>'js/standalone/'+name+'.js'),
-    'js/standalone/environment.js','js/standalone/object-state.js',
-    ...fs.readdirSync('js/standalone').filter(file=>file.endsWith('.json')).map(file=>'js/standalone/'+file),
+    ...wrappers.map(name=>'js/nethack/'+name+'.js'),
+    'js/nethack/environment.js','js/nethack/object-state.js',
+    ...fs.readdirSync('js/nethack').filter(file=>file.endsWith('.json')).map(file=>'js/nethack/'+file),
     'nethack-c/wasm/tu-ports.json','nethack-c/wasm/tu-fragments/unixunix-reviewed-makefile.py',
     ...JSON.parse(fs.readFileSync('docs/runtime-environment/c-runtime-helper-extraction.json')).files.map(row=>currentSourcePath(row.file)),
     'docs/runtime-environment/c-runtime-helper-extraction.json','docs/runtime-environment/c-runtime-shim-pruning.json','docs/runtime-environment/c-runtime-provenance-update.json',
@@ -52,7 +54,7 @@ if(fs.existsSync(allocationCliPatches))for(const file of fs.readdirSync(allocati
 const allocationCliProof='docs/runtime-environment/allocation-cli-native-evidence.json';
 if(fs.existsSync(allocationCliProof))paths.push(...Object.keys(JSON.parse(fs.readFileSync(allocationCliProof)).rawProofs??{}));
 // Exact natural SOUNDS callback integration proof.
-paths.push('js/standalone/game-windows.js','scripts/sounds_source_successors.py','scripts/test-sounds-source-successors.py','scripts/test-standalone-sounds-main.mjs','scripts/author-standalone-ordinary-progression.mjs','scripts/fixtures/standalone-sounds-main.json','docs/runtime-environment/sounds-native-evidence.json','docs/runtime-environment/sounds-source-successors.json','docs/runtime-environment/sounds-source-successors/game-windows.patch',...Object.keys(JSON.parse(fs.readFileSync('docs/runtime-environment/sounds-native-evidence.json')).rawProofs));
+paths.push('js/nethack/game-windows.js','scripts/sounds_source_successors.py','scripts/test-sounds-source-successors.py','scripts/test-standalone-sounds-main.mjs','scripts/author-standalone-ordinary-progression.mjs','scripts/fixtures/standalone-sounds-main.json','docs/runtime-environment/sounds-native-evidence.json','docs/runtime-environment/sounds-source-successors.json','docs/runtime-environment/sounds-source-successors/game-windows.patch',...Object.keys(JSON.parse(fs.readFileSync('docs/runtime-environment/sounds-native-evidence.json')).rawProofs));
 // Exact type-access performance qualification, preserving measured ABI pins.
 paths.push('scripts/type_access_source_successors.py','scripts/test-type-access-source-successors.py','docs/runtime-environment/type-access-native-evidence.json','docs/runtime-environment/type-access-source-successors.json','docs/runtime-environment/type-access-source-successors/types.js.patch','docs/runtime-environment/type-access-source-successors/record-views.js.patch',...Object.keys(JSON.parse(fs.readFileSync('docs/runtime-environment/type-access-native-evidence.json')).rawProofs));
 // Exact buffered stdio byte-I/O performance qualification.

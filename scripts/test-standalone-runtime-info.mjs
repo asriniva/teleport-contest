@@ -1,3 +1,4 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // Actual configured MDLIB/DATE against original C; not full-game acceptance.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -5,7 +6,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 
 const defaultZones=['UTC','America/New_York','America/Los_Angeles','Asia/Kolkata','Europe/Berlin'];
@@ -24,10 +25,10 @@ if(!process.argv.includes('--worker')){
  const directory=path.resolve(process.env.STANDALONE_RUNTIME_INFO_ORACLE||'.cache/standalone-runtime-info-v1');
  const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
  let sourceChecks=0;
- for(const [file,hash]of Object.entries(receipt.sourceSha256)){assert.equal(sha(file),hash,'Changed reference input '+file);sourceChecks++;}
+ for(const [file,hash]of Object.entries(receipt.sourceSha256)){assert.equal(layoutSourceSha(file,hash),hash,'Changed reference input '+file);sourceChecks++;}
  for(const [file,hash]of Object.entries(receipt.artifactSha256)){assert.equal(sha(path.join(directory,file)),hash,'Changed reference artifact '+file);sourceChecks++;}
  assert.deepEqual(receipt.buildEnvironment,{SOURCE_DATE_EPOCH:'1777723200',TZ:'UTC'},'Build macro inputs are separate from this worker runtime timezone');
- const abi=JSON.parse(fs.readFileSync('js/standalone/runtime-info-abi.json')),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));
+ const abi=JSON.parse(fs.readFileSync('js/nethack/runtime-info-abi.json')),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));
  const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
  let comparisons=0,contracts=0;
  const pair=(actual,expected,label)=>{assert.deepEqual(actual,expected,label);comparisons++;};

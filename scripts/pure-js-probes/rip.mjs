@@ -1,4 +1,4 @@
-import abi from '../../js/standalone/rip-abi.json' with {type:'json'};
+import abi from '../../js/nethack/rip-abi.json' with {type:'json'};
 import {environment,probeModule,withoutWasm} from './common.mjs';
 export default async function createRipProbe(layouts){
  const env=await environment(),L=layouts.rip,m=env.memory;

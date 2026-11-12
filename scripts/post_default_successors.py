@@ -11,17 +11,17 @@ DECLARATION='docs/runtime-environment/post-default-source-successors.json'
 PROOF='docs/runtime-environment/post-default-native-evidence.json'
 ALLOWED=frozenset([
  'js/c-runtime/stdio.js','js/platform/darwin/terminal.js',
- 'js/standalone/display-startup.js','js/standalone/environment.js',
- 'js/standalone/monster-creation.js','js/standalone/monster-selection.js',
- 'js/standalone/program.js','js/standalone/sdk-boundary.js',
- 'js/standalone/signals.js','js/standalone/unix-platform.js',
- 'js/standalone/unix-terminal.js','js/standalone/version-info.js',
- 'js/standalone/makemon-private-abi.json','js/standalone/makemon-public-abi.json',
- 'js/standalone/persistence-transport-abi.json','js/standalone/scanf-abi.json',
- 'js/standalone/sdk-boundary-abi.json','js/standalone/unix-platform-abi.json',
- 'js/standalone/signal-delivery-abi.json',
+ 'js/nethack/display-startup.js','js/nethack/environment.js',
+ 'js/nethack/monster-creation.js','js/nethack/monster-selection.js',
+ 'js/nethack/program.js','js/nethack/sdk-boundary.js',
+ 'js/nethack/signals.js','js/nethack/unix-platform.js',
+ 'js/nethack/unix-terminal.js','js/nethack/version-info.js',
+ 'js/nethack/makemon-private-abi.json','js/nethack/makemon-public-abi.json',
+ 'js/nethack/persistence-transport-abi.json','js/nethack/scanf-abi.json',
+ 'js/nethack/sdk-boundary-abi.json','js/nethack/unix-platform-abi.json',
+ 'js/nethack/signal-delivery-abi.json',
 ])
-NEW_FILES=frozenset(['js/standalone/signal-delivery-abi.json'])
+NEW_FILES=frozenset(['js/nethack/signal-delivery-abi.json'])
 
 def sha(data):return hashlib.sha256(data).hexdigest()
 def baseline_bytes(root,path):

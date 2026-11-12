@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {setStorageForTesting,vfsReadFile,vfsWriteFile} from './storage.js';
 import {recordingClockEpoch} from './wasm-replay-support.js';
 import {recordingProfile,profileSysconf} from './recording-profile.js';
-import {loadGameAssets} from './standalone/game-assets.js';
+import {loadGameAssets} from './nethack/game-assets.js';
 const STATE_PATH='/teleport-standalone-state.json';let loadedData,segmentIndex=0;
 function data(){
  if(loadedData)return loadedData;
@@ -24,7 +24,7 @@ export async function runSegment(input){
  const deny=()=>{forbiddenAttempts++;throw Error('Forbidden Wasm/network capability in pure-JS recorder');};
  try{
   for(const name of names)Object.defineProperty(globalThis,name,{configurable:true,value:name==='WebAssembly'?new Proxy({},{get:deny}):deny});
-  const[{createStandaloneProgram},{CExit}]=await Promise.all([import('./standalone/program.js'),import('./standalone/functions.js')]);
+  const[{createStandaloneProgram},{CExit}]=await Promise.all([import('./nethack/program.js'),import('./nethack/functions.js')]);
   program=createStandaloneProgram({layouts,assets:installed,directories:[profile.home,'/nethack/save'],runtime:{now:()=>epoch*1000,initialBytes:1024,maximumBytes:128*1024*1024,environment:env},readKey(){if(keyIndex>=moves.length)throw exhausted;const key=moves.charCodeAt(keyIndex++);return key===13?10:key;}});
   program.environment.filesystem.chdir('/nethack');const baseline=program.environment.fileBaseline();if(previous)program.environment.restoreFiles(previous);
   const name=/(?:^|[=\s,])name\s*:\s*([^,\n]+)/im.exec(input.nethackrc??'')?.[1]?.trim()||'';

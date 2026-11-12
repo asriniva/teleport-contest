@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+import sys as _layout_sys
+from pathlib import Path as _LayoutPath
+_layout_sys.path.insert(0,str(_LayoutPath(__file__).resolve().parent))
+from nethack_layout import historical_cli as _prior_layout_cli
+if __name__=='__main__':_prior_layout_cli(__file__)
 """Small synthetic guard fixtures only; no source/native gameplay acceptance."""
 import argparse,hashlib,json,os,shutil,subprocess,tempfile
 from pathlib import Path
@@ -18,8 +23,8 @@ def run(root,script):
  return subprocess.run([str(node),'scripts/'+script],cwd=root,env={**os.environ,'PATH':str(root/'bin')+os.pathsep+os.environ.get('PATH',''),'STANDALONE_REFERENCE_ROOT':str(source)},text=True,capture_output=True)
 with tempfile.TemporaryDirectory(prefix='current-pruning-guard-')as directory:
  root=Path(directory);baseline=json.loads((source/'docs/runtime-environment/c-runtime-helper-extraction.json').read_text())['baselineCommit']
- removals=['js/standalone/bitfields.js','js/standalone/environment-inputs.js','js/standalone/qsort.js','js/standalone/scanf.js','js/standalone/stdio.js','js/ported/js-runtime.js']
- rules=[['js/standalone/object-state.js','../ported/js-runtime.js','../nethack/runtime.js'],*[[f'scripts/{name}.mjs','../js/ported/js-runtime.js','../js/nethack/runtime.js']for name in ['test-js-game-files','test-js-runtime-regex','test-js-time','test-js-runtime']],['scripts/export-standalone-were-abi.py',"'js/ported/js-runtime.js',",''],['scripts/export-standalone-scanf-abi.py',"'js/standalone/scanf.js',",''],['scripts/export-standalone-scanf-abi.py',"'js/standalone/stdio.js',",''],['scripts/test-standalone-scanf.mjs','js/standalone/scanf.js','js/c-runtime/scanf.js'],['scripts/test-standalone-scanf.mjs','js/standalone/stdio.js','js/c-runtime/stdio.js']]
+ removals=['js/nethack/bitfields.js','js/nethack/environment-inputs.js','js/nethack/qsort.js','js/nethack/scanf.js','js/nethack/stdio.js','js/ported/js-runtime.js']
+ rules=[['js/nethack/object-state.js','../ported/js-runtime.js','../nethack/runtime.js'],*[[f'scripts/{name}.mjs','../js/ported/js-runtime.js','../js/nethack/runtime.js']for name in ['test-js-game-files','test-js-runtime-regex','test-js-time','test-js-runtime']],['scripts/export-standalone-were-abi.py',"'js/ported/js-runtime.js',",''],['scripts/export-standalone-scanf-abi.py',"'js/nethack/scanf.js',",''],['scripts/export-standalone-scanf-abi.py',"'js/nethack/stdio.js',",''],['scripts/test-standalone-scanf.mjs','js/nethack/scanf.js','js/c-runtime/scanf.js'],['scripts/test-standalone-scanf.mjs','js/nethack/stdio.js','js/c-runtime/stdio.js']]
  files=set(removals+[r[0]for r in rules]);old={p:subprocess.check_output(['git','show',baseline+':'+p],cwd=source,text=True)for p in files};outputs={};edits=[]
  for p,b,a in rules:
   text=outputs.get(p,old[p]);assert text.count(b)==1;outputs[p]=text.replace(b,a);edits.append({'file':p,'before':b,'after':a})
@@ -32,7 +37,7 @@ with tempfile.TemporaryDirectory(prefix='current-pruning-guard-')as directory:
  result=run(root,'prune-c-runtime-shims.mjs');assert result.returncode==0,result.stdout+result.stderr;checks+=1
  # Existing consumer's historical inverse still passes, but its actual current
  # source has a newly added import. The old outputs.get scan hides this import.
- p='scripts/test-js-time.mjs';before=(root/p).read_bytes();put(root,p,outputs[p]+"\nimport {muslQsort} "+"from '../js/standalone/qsort.js';\n")
+ p='scripts/test-js-time.mjs';before=(root/p).read_bytes();put(root,p,outputs[p]+"\nimport {muslQsort} "+"from '../js/nethack/qsort.js';\n")
  original=run(root,'original-prune.mjs');assert original.returncode==0,original.stdout+original.stderr;checks+=1
  result=run(root,'prune-c-runtime-shims.mjs');assert result.returncode!=0 and'Active consumer of deleted shim'in result.stderr,result.stdout+result.stderr;checks+=1
  assert(root/p).read_text().endswith("qsort.js';\n");checks+=1
@@ -41,17 +46,17 @@ with tempfile.TemporaryDirectory(prefix='current-pruning-guard-')as directory:
  # and an import expression targeting a retired shim must also be rejected.
  p='scripts/new-current-tool.mjs';put(root,p,'export const safe = true;\n');put(root,'tracked.json',json.dumps(list(outputs)+[p]))
  result=run(root,'prune-c-runtime-shims.mjs');assert result.returncode==0,result.stdout+result.stderr;checks+=1
- put(root,p,"export const load=()=>import('../js/standalone/qsort.js');\n")
+ put(root,p,"export const load=()=>import('../js/nethack/qsort.js');\n")
  result=run(root,'prune-c-runtime-shims.mjs');assert result.returncode!=0 and'Active consumer of deleted shim'in result.stderr,result.stdout+result.stderr;checks+=1
 with tempfile.TemporaryDirectory(prefix='current-integration-base-guard-')as directory:
  root=Path(directory);integration='8cf4880d8cf7fb9104635f068564a5de87523fe7';history={};old={}
  moves=[('functions','createFunctions'),('bitfields','createBitfields'),('stdio','createStdio'),('qsort','muslQsort'),('scanf','scanFormatted'),('environment-inputs','createEnvironmentInputs')]
  for p,n in moves:
-  s=f'export function {n}(){{return 1;}}\n';history['js/c-runtime/'+p+'.js']=s;old['df33dd4:js/standalone/'+p+'.js']=s
- for new,prior,name in [('js/nethack/runtime.js','js/ported/js-runtime.js','createJsRuntime'),('js/c-runtime/libc.js','js/standalone/libc.js','createStandaloneLibc'),('js/c-runtime/types.js','js/standalone/c-types.js','createCTypes')]:
+  s=f'export function {n}(){{return 1;}}\n';history['js/c-runtime/'+p+'.js']=s;old['df33dd4:js/nethack/'+p+'.js']=s
+ for new,prior,name in [('js/nethack/runtime.js','js/ported/js-runtime.js','createJsRuntime'),('js/c-runtime/libc.js','js/nethack/libc.js','createStandaloneLibc'),('js/c-runtime/types.js','js/nethack/c-types.js','createCTypes')]:
   s=f'export function {name}(){{return 1;}}\n';history[new]=s;old['df33dd4:'+prior]=s
  for n in ['scanf-abi','were-abi']:
-  p='js/standalone/'+n+'.json';history[p]=json.dumps({'sourceSha256':{}});old['df33dd4:'+p]=history[p]
+  p='js/nethack/'+n+'.json';history[p]=json.dumps({'sourceSha256':{}});old['df33dd4:'+p]=history[p]
  vision='js/ported/vision.js';base='synthetic baseline';corrected='synthetic approved correction';correction='docs/runtime-environment/authorized-port-corrections.json'
  history[vision]=corrected;history['docs/runtime-environment/scope-baseline.json']=json.dumps({'sha256':{vision:sha(base)}});history[correction]=json.dumps({'corrections':[{'file':vision,'baselineSha256':sha(base),'correctedSha256':sha(corrected)}]});old[integration+':'+correction]=history[correction]
  for n in ['isaac64','terminal','storage']:history['js/'+n+'.js']=history['frozen/'+n+'.js']='synthetic frozen '+n

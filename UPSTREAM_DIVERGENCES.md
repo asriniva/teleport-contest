@@ -1,5 +1,33 @@
 # Upstream divergence register
 
+NetHack directory consolidation (rebased onto maine61e34c, 2026-11-12):
+all230 former js/standalone files are consolidated into js/nethack. The sole
+collision, standalone/address-ports.js, was a forwarding wrapper; its existing
+nethack implementation remains the only implementation. Current JS imports,
+script paths and test consumers use js/nethack; public function names and runtime
+behavior stay unchanged. General C machinery remains in js/c-runtime. No C
+source, compiler flag, ABI layout, reference hash or game-policy body changes.
+The deterministic scripts/consolidate-nethack-layout.py recipe checks every
+moved/rewritten file, unchanged runtime source and all original JS JSON metadata.
+Historical source audits use a separately labeled, read-only projection of the
+pinned preceding layout after the current consolidation has been verified.
+This projection is not current runtime execution acceptance. Existing source-hash
+assertions accept only exact current bytes or their independently verified
+path-only predecessor; their original expected values remain immutable. Current
+integration and subsystem tests execute the consolidated modules with Wasm denied.
+Pre-rebase validation: 583 exact transitions,1129 modules/3751 imports,19 subsystem suites
+with612548 assertions and zero failures,1294 native-runtime comparisons,101
+CLI/allocator checks and25 source-main LIGHT checks pass. Current source-drift
+negative controls and separate historical layout/scope/manifest checks pass.
+The optional equipment-startup check is unavailable because its cached original-C
+reference receipt is absent. See nethack-layout-validation.json for exact scope. No44-session recorder run
+is part of this consolidation. The clean rebased commit is validated before preserving/restoring unrelated main work.
+Rebase validation on main e61e34c passes593 exact transitions,1133 module parses,
+3760 relative imports and19 subsystem suites with612585 assertions, zero failures.
+Native CLI/allocator101 checks, LIGHT25 checks, runtime1294 comparisons and
+Wasm isolation pass again. Historical scope and391-hash reproduction also pass.
+The previous validation is retained separately; no recorder was run.
+
 Allocation profiling follow-up (2026-11-12): optional Node --import tooling uses local V8 sampling at64KiB and includes objects collected by minor/major GC. A forced-GC synthetic smoke confirms collected allocation capture; it is not used during gameplay. One additional public world-tour replay passes all official metrics,12 animation cursor triples and unchanged751 inputs while collecting allocations. Estimated temporary/live allocations total72.7GB; leading self sites include SFBASE indexed-view access9.27%, uncached numeric field-cell construction5.94%, movement service wrappers3.75% and descriptor-array helpers3.74%. These are sampled allocation estimates, not retained memory or deadline timing. Raw11MB compressed profile remains in .cache/recorder-allocations-stdio-byte/; hash-bound summary and validation are in stdio-byte-allocation-profile.json/stdio-byte-allocation-validation.json. No game/frozen instrumentation is added. This identifies the next cache/reuse work; no such reuse changes are applied at this checkpoint.
 
 Buffered stdio performance follow-up (2026-11-12): c-runtime/stdio.js reads available buffered/pushback bytes and returns established EOF without allocating a temporary C byte when no output flush is pending. Non-newline writes that fit the existing buffer directly update FILE state after the existing input-discard transition; the buffer is allocated before reacquiring the current memory view, preserving growth. Refill, newline-flush, unbuffered and error paths retain the existing implementation. No policies/frozen changes. Original SDK15-case comparisons pass4,083 checks, full-game C comparisons54, source qualification20 rejection checks, existing layered/current guards77/9 and all391 source hashes. Official Node22.23.5 passes44/44 strict with all751 pre-run inputs unchanged:792,838 RNG calls,11,405 screens/cursors,1,483 animation screens/cursor triples,56 segments/11,349 keys, storage get/set56 and zero forbidden attempts/errors/pending animations. Profile wall time679s versus769s before on the same Node22 runtime (11.7% lower); frozen fit4,392ms +41.98ms per recorded input. Four profiled sessions remain above45s; deadlines are not accepted. See stdio-byte-public-recorder-validation.json, stdio-byte-performance-profile.json and stdio-byte-qualification-validation.json.

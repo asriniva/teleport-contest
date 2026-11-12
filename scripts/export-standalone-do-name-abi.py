@@ -2,7 +2,7 @@
 """Measure original DO_NAME header carriers and bind its unchanged native bridge."""
 import hashlib,json,os,re,shlex,subprocess,tempfile
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];ref=Path(os.environ.get('STANDALONE_REFERENCE_ROOT',root)).resolve();tree=ref/'.cache/wasm64-build/tree';clang=ref/'.cache/emsdk/upstream/bin/clang';header=root/'scripts/tu-do_name-layout.h';nativefile=root/'nethack-c/wasm/tu-do_name-support.inc';native=nativefile.read_text();lib=root/'nethack-c/wasm/tu-libraries/do_name.js';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['do_name'];public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions']
+root=Path(__file__).resolve().parents[1];ref=Path(os.environ.get('STANDALONE_REFERENCE_ROOT',root)).resolve();tree=ref/'.cache/wasm64-build/tree';clang=ref/'.cache/emsdk/upstream/bin/clang';header=root/'scripts/tu-do_name-layout.h';nativefile=root/'nethack-c/wasm/tu-do_name-support.inc';native=nativefile.read_text();lib=root/'nethack-c/wasm/tu-libraries/do_name.js';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['do_name'];public=json.loads((root/'js/nethack/public-functions.json').read_text())['functions']
 flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(root/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+v for v in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]]
 bits={}
 for kind,begin,end in [('object','unsigned teleport_do_name_object_bit','void teleport_do_name_set_object_bit'),('monster','unsigned teleport_do_name_monster_bit','void teleport_do_name_set_monster_bit')]:bits[kind]=re.findall(r'case \d+:return p->(\w+);',native.split(begin,1)[1].split(end,1)[0])
@@ -27,6 +27,6 @@ for m in re.finditer(r'C\.(rn2|rn1)\(',text):
  label=re.search(r", (\d+), '(\w+)'\)$",text[m.start():end]);assert label
  rng.append({'kind':m[1],'line':int(label[1]),'caller':label[2]})
 
-inputs=[Path(__file__).resolve(),root/'js/standalone/do-name.js',header,nativefile,lib,root/'js/ported/do_name.js',root/'js/nethack/bindings/do_name.js',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+inputs=[Path(__file__).resolve(),root/'js/nethack/do-name.js',header,nativefile,lib,root/'js/ported/do_name.js',root/'js/nethack/bindings/do_name.js',root/'js/nethack/records.json',root/'js/nethack/public-functions.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 result={'layout':layout,'globals':globals,'bits':bits,'assertion':{'condition':'aname != 0','file':'do_name.c','line':line,'function':'do_oname'},'rngSites':rng,'dependencies':{n:public[n]for n in dependencies},'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[tree/'src/do_name.c']))}}
-(root/'js/standalone/do-name-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original DO_NAME native transport.')
+(root/'js/nethack/do-name-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original DO_NAME native transport.')

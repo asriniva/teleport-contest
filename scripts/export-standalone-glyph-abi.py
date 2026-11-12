@@ -63,8 +63,8 @@ functions={n['name']:n for n in ast['inner']if n.get('kind')=='FunctionDecl'and 
 expressions=[]
 for i in range(len(headers)):
  f=functions['header_'+str(i)];body=next(n for n in f['inner']if n['kind']=='CompoundStmt');ret=body['inner'][0];assert ret['kind']=='ReturnStmt';expressions.append(lower(ret['inner'][0]))
-output=root/'js/standalone/glyph-header-functions.js';output.write_text('// Generated from configured C display.h macros; no GLYPHS policy.\nexport const glyphHeaders=[\n'+',\n'.join(' glyph=>(Number('+e+')|0)'for e in expressions)+'\n];\n')
+output=root/'js/nethack/glyph-header-functions.js';output.write_text('// Generated from configured C display.h macros; no GLYPHS policy.\nexport const glyphHeaders=[\n'+',\n'.join(' glyph=>(Number('+e+')|0)'for e in expressions)+'\n];\n')
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();deps=subprocess.check_output([clang,*flags,'-M',str(scratch)],text=True);deps=[Path(p).resolve()for p in shlex.split(deps.split(':',1)[1].replace('\\\n',''))];deps.append(ref/'.cache/emsdk/upstream/emscripten/system/lib/libc/emscripten_syscall_stubs.c')
 inputs=[Path(__file__).resolve(),runtime,root/'js/ported/glyphs.js',root/'nethack-c/wasm/tu-fragments/glyphs-support.c',header,root/'nethack-c/wasm/compile-defines.json',output]
 data={'fields':rows,'globals':globals,'headers':headers,'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in deps if p.is_relative_to(ref)}}
-(root/'js/standalone/glyph-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound GLYPHS fields and'+str(len(headers))+' pure header functions.')
+(root/'js/nethack/glyph-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound GLYPHS fields and'+str(len(headers))+' pure header functions.')

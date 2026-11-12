@@ -1,0 +1,115 @@
+{
+  "baseCommit": "5031c28c9fc7e2b158ecb8e270a3060d8ca488ef",
+  "branch": "codex/consolidate-nethack-runtime",
+  "completedAt": "2026-11-12T15:55:50.759386+00:00",
+  "formerStandaloneFiles": 230,
+  "movedFiles": 229,
+  "removedForwarders": 1,
+  "pathTransitions": 583,
+  "receipt": "docs/runtime-environment/nethack-layout.json",
+  "receiptSha256": "5140e7deebd76fb2b4f53ff492c57bef68ed7e6250a510c3a67d20216823531b",
+  "runtimePolicyBodiesChanged": false,
+  "originalJsonMetadataChanged": false,
+  "compilerInputsChanged": false,
+  "recorderRun": false,
+  "subsystemRerun": {
+    "passed": 19,
+    "assertions": 612548,
+    "assertionFailures": 0,
+    "reference": "original C",
+    "implementation": "current consolidated JS modules; Wasm denied",
+    "reports": [
+      {
+        "file": ".cache/native-existing-runs/39057-1794498127460/results.json",
+        "sha256": "5c9612b0eb5fad5ca830336f482ee0252d710e88fe949f3ae071e5bdb2db8265",
+        "runId": "39057-1794498127460",
+        "passed": 18,
+        "assertions": 598796
+      },
+      {
+        "file": ".cache/native-existing-runs/22382-1794498019390/results.json",
+        "sha256": "f134ef65420454cc915e725be3aff73d3b94b4915c46758e2b92bcb4a7fb3388",
+        "runId": "22382-1794498019390",
+        "passed": 1,
+        "assertions": 13752
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "current-layout-and-imports",
+      "scope": "current",
+      "status": "passed",
+      "log": ".cache/nethack-layout-current.log",
+      "sha256": "e03e415e9a17ba9739d286832890b9fefb40e84090f8df333364ff7cb8c62ebf"
+    },
+    {
+      "name": "native-runtime",
+      "scope": "current",
+      "status": "passed",
+      "log": ".cache/nethack-layout-runtime.log",
+      "sha256": "e543ecb72d2d6b8685fef88ee30558fdb0d7c2a40a43a63237ddcaf6081d2410"
+    },
+    {
+      "name": "capability-isolation",
+      "scope": "current",
+      "status": "passed",
+      "log": ".cache/nethack-layout-isolation.log",
+      "sha256": "4d7bbf57f5bd86d18868749d5027456dfc2157cb52605da246e5ce4285597df1"
+    },
+    {
+      "name": "native-cli-and-allocation",
+      "scope": "current",
+      "status": "passed",
+      "log": ".cache/nethack-layout-allocation-cli.log",
+      "sha256": "2c30d18664e2e9ff85f992caff94b4089d9ed0b1284a5f04626e6c96a1e6413c"
+    },
+    {
+      "name": "source-main-light",
+      "scope": "current",
+      "status": "passed",
+      "log": ".cache/nethack-layout-light-world.log",
+      "sha256": "50b31db9ec3d13c10cd82b63a70dac42a66cd53e45ad6ac11fe767a92dd5feba"
+    },
+    {
+      "name": "historical-source-layout",
+      "scope": "prior-layout source audit",
+      "status": "passed",
+      "log": ".cache/nethack-layout-historical.log",
+      "sha256": "9f99d086b7c3d5b837009d7be72f2a8b8e8d3ef4bc192385b8894bd8cfb04233"
+    },
+    {
+      "name": "historical-scope",
+      "scope": "prior-layout source audit",
+      "status": "passed",
+      "log": ".cache/nethack-layout-historical-scope.log",
+      "sha256": "739bda75e8fd4c2330a07328fca0aa86a067ab20fd345659c9ea8542c82e3cf8"
+    },
+    {
+      "name": "historical-runtime-manifest",
+      "scope": "prior-layout source audit",
+      "status": "passed",
+      "log": ".cache/nethack-layout-historical-manifest.log",
+      "sha256": "9ca07facb0f12708794b96eeb93416cad237562737c250231bf51d5a3473dd2b"
+    },
+    {
+      "name": "historical-source-negative-controls",
+      "scope": "prior-layout source audit",
+      "status": "passed",
+      "log": ".cache/nethack-layout-source-controls.log",
+      "sha256": "67a171929cd1580248c5af6ebb49f9be1253e96a49cc6bc7ca7ab6af3455d0b5"
+    }
+  ],
+  "toolSha256": {
+    "scripts/consolidate-nethack-layout.py": "33f709b045aa982170f22b1405ca0a6757adc822a052d4318eabf0ac667bb4fe",
+    "scripts/nethack-layout.mjs": "257e75ff8a829d2b85b6add73216bdfa92b0d507086bc4f6188cd00bbe4790cc",
+    "scripts/nethack_layout.py": "98625b7b0c5a4fbac0b2bcc927d826b6793498afdc13f79e94e4954e014de782",
+    "scripts/test-nethack-layout.mjs": "bcd00196a3787ac09748bf666f70614732dda99a9cfc0c7851f4302e97b10918"
+  },
+  "limitations": [
+    "This layout change reruns19 subsystem suites; it does not claim a new138-suite run.",
+    "Equipment-startup was attempted but its cached original-C reference .cache/standalone-equipment-startup-v1/receipt.json is absent.",
+    "No recorder sessions were run.",
+    "Historical audit results reproduce the prior layout after independent current-source verification; they are not current-engine execution results."
+  ]
+}

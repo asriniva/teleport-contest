@@ -76,7 +76,7 @@ if not a.abi_only:
  (private/'prepared-pristine-differences.json').write_text(json.dumps(differences,indent=2)+'\n')
  inputs.update([pristine/'sys/unix/Makefile.src',source_tree/'src/Makefile',root/'nethack-c/wasm/build.py',root/'nethack-c/wasm/compile-defines.json',*sorted((root/'nethack-c/patches').glob('*.patch'))])
  # All generated backing refers to REAL original definitions, never fixtures.
- rows=json.loads((root/'js/standalone/decl-storage.json').read_text())['globals'];inputs.add(root/'js/standalone/decl-storage.json')
+ rows=json.loads((root/'js/nethack/decl-storage.json').read_text())['globals'];inputs.add(root/'js/nethack/decl-storage.json')
  for suffix,expression in [('names',lambda r:json.dumps(r['name'])),('addresses',lambda r:'&'+r['name']),('sizes',lambda r:'sizeof('+r['name']+')')]:
   q=deps/('full-global-'+suffix+'.inc');q.write_text(''.join('case '+str(i)+':return '+expression(r)+';\n'for i,r in enumerate(rows)));inputs.add(q)
  observer=root/'scripts/full-original-c-observers.c';inputs.add(observer)

@@ -1,8 +1,9 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // Read-only queries through the canonical VISION context after genuine MAIN.
 import fs from 'node:fs';import assert from 'node:assert/strict';import crypto from 'node:crypto';
 import {runFullOriginalC} from './full-original-c-run.mjs';import {runStandaloneProgram} from './run-standalone-program.mjs';import {worldGraph} from './restoration-world-graph.mjs';import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
-const directory='.cache/full-original-c-v1',out='.cache/standalone-vision-public',R=JSON.parse(fs.readFileSync('js/standalone/records.json')).records,sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');fs.mkdirSync(out,{recursive:true});let checks=0;
-const eq=(a,b,n)=>{assert.deepEqual(a,b,n);checks++;},inputs=['scripts/test-standalone-vision-public.mjs','js/standalone/vision.js','js/standalone/vision-abi.json','js/ported/vision.js','js/nethack/bindings/vision.js','js/standalone/program.js','js/standalone/environment.js'];
+const directory='.cache/full-original-c-v1',out='.cache/standalone-vision-public',R=JSON.parse(fs.readFileSync('js/nethack/records.json')).records,sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');fs.mkdirSync(out,{recursive:true});let checks=0;
+const eq=(a,b,n)=>{assert.deepEqual(a,b,n);checks++;},inputs=['scripts/test-standalone-vision-public.mjs','js/nethack/vision.js','js/nethack/vision-abi.json','js/ported/vision.js','js/nethack/bindings/vision.js','js/nethack/program.js','js/nethack/environment.js'];
 const before=Object.fromEntries(inputs.map(p=>[p,sha(p)]));let module,environment;
 const input={seed:1,timezone:'UTC',options:'OPTIONS=!news\n',keys:'  nm.'};
 const c=await runFullOriginalC(directory,{...input,observeRuntime:r=>module=r.module});const j=runStandaloneProgram(directory+'/assets',{...input,observeRuntime:r=>environment=r.environment});
@@ -16,5 +17,5 @@ const cm=list(v,globals.get('svl')),jm=list(environment.memory.view,environment.
 for(const[id,p]of cm)eq(environment.resolve('howmonseen')(jm.get(id)),module._howmonseen(BigInt(p)),'native visibility mask for monster '+id);
 eq(worldGraph({environment}),jg,'JS queries preserve live world');eq(worldGraph({module}),cg,'C queries preserve live world');
 fs.writeFileSync(out+'/evidence.json',JSON.stringify({checks,cells,frames:j.frames.length,sourceSha256:before,limits:'Read-only get_viz_clear on every configured map cell and howmonseen for each actual live monster following real MAIN; special vision modes remain untested.'},null,2));
-for(const[p,h]of Object.entries(before))eq(sha(p),h,'source stable '+p);
+for(const[p,h]of Object.entries(before))eq(layoutSourceSha(p,h),h,'source stable '+p);
 console.log('PASS '+JSON.stringify({checks,cells,frames:j.frames.length}));

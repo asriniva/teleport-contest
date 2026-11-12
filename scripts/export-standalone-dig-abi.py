@@ -13,7 +13,7 @@ with tempfile.TemporaryDirectory(prefix='standalone-dig-')as scratch:
  assert set(measured)==set(layout) and all(v==(int(layout[k])&((1<<64)-1))for k,v in measured.items()),repr({'missing':set(layout)-set(measured),'extra':set(measured)-set(layout),'different':[(k,v,layout.get(k))for k,v in measured.items()if v!=(int(layout.get(k,0))&((1<<64)-1))]})
  deaf=read('dig_deaf');deps=subprocess.check_output([str(clang),*flags,'-M',str(p)],text=True);headers=[Path(v).resolve()for v in shlex.split(deps.split(':',1)[1].replace('\\\n',''))if Path(v).resolve().is_relative_to(ref)]
 deaf=read('dig_deaf')
-native=support.read_text();lib=library.read_text();public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions']
+native=support.read_text();lib=library.read_text();public=json.loads((root/'js/nethack/public-functions.json').read_text())['functions']
 globals=[v.strip().replace('(void*)','').replace('&','')for v in re.findall(r'case \d+:return (.*?);',native.split('teleport_dig_global',1)[1].split('struct obj*teleport_dig_equipment',1)[0])];assert len(globals)==21
 bits={}
 for kind in ['mon','obj','cls','trap']:
@@ -26,6 +26,6 @@ for name,target in re.findall(r'^(\w+):[^\n]*?=>\s*(?:Number\()?_(\w+)\(',lib,re
 for n in ['set_occupation','get_iter_mons','cmdq_add_ec']:calls[n]={'target':n,'prototype':public[n]}
 shapes=json.loads(re.search(r'var shapes=(\[[^;]+?\]),callers=',lib)[1]);callers=json.loads(re.search(r'callers=(\[[^;]+?\]);',lib)[1]);assert len(shapes)==12 and len(callers)==10
 callbacks={'dig':'int (void)','watchman_canseeu':'boolean (struct monst *)'}
-names=re.findall(r'^export function (\w+)',(root/'js/ported/dig.js').read_text(),re.M);sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();inputs=[Path(__file__).resolve(),root/'js/standalone/dig.js',header,support,library,root/'js/ported/dig.js',root/'js/nethack/bindings/dig.js',root/'js/wasm/tu-layouts.json',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'nethack-c/wasm/compile-defines.json']
+names=re.findall(r'^export function (\w+)',(root/'js/ported/dig.js').read_text(),re.M);sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();inputs=[Path(__file__).resolve(),root/'js/nethack/dig.js',header,support,library,root/'js/ported/dig.js',root/'js/nethack/bindings/dig.js',root/'js/wasm/tu-layouts.json',root/'js/nethack/records.json',root/'js/nethack/public-functions.json',root/'nethack-c/wasm/compile-defines.json']
 result={'layout':layout,'globals':globals,'bits':bits,'heroBits':hero,'levelBits':level,'terrainBits':terrain,'roleplayDeafOffset':deaf,'callers':callers,'shapes':shapes,'callbacks':callbacks,'calls':calls,'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[source]))}}
-(root/'js/standalone/dig-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original DIG header/global/bit/callback/typed-call/format ABI.')
+(root/'js/nethack/dig-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original DIG header/global/bit/callback/typed-call/format ABI.')

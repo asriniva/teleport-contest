@@ -1,3 +1,8 @@
+import sys as _layout_sys
+from pathlib import Path as _LayoutPath
+_layout_sys.path.insert(0,str(_LayoutPath(__file__).resolve().parent))
+from nethack_layout import historical_cli as _prior_layout_cli
+if __name__=='__main__':_prior_layout_cli(__file__)
 """Real older audit APIs before/after the exact allocator/header successor layer."""
 import base64,json,os,pathlib,shutil,subprocess,tempfile
 import allocation_cli_source_successors as q

@@ -4,7 +4,7 @@ import json,hashlib,os,re,shlex,subprocess
 from pathlib import Path
 root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';source=root/'js/nethack/bindings/do_wear.js';text=source.read_text()
 def declaration(name):return json.JSONDecoder().raw_decode(text.split('const '+name+'=',1)[1])[0]
-schemas=declaration('schemas');globals=declaration('globals');callbacks=declaration('callbackNames');known=json.loads((root/'js/standalone/records.json').read_text())['records'];private={k:v for k,v in schemas.items()if v['ctype'].removeprefix('struct ').removeprefix('union ')not in known}
+schemas=declaration('schemas');globals=declaration('globals');callbacks=declaration('callbackNames');known=json.loads((root/'js/nethack/records.json').read_text())['records'];private={k:v for k,v in schemas.items()if v['ctype'].removeprefix('struct ').removeprefix('union ')not in known}
 header=root/'scripts/tu-do_wear-layout.h';flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(ref/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+d for d in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]];clang=ref/'.cache/emsdk/upstream/bin/clang'
 probes=[]
 for i,(name,row)in enumerate(private.items()):
@@ -24,4 +24,4 @@ walk(ast);assert set(callbackTypes)==set(callbacks),'Missing original DO_WEAR ca
 bufferBytes=int(re.search(r'static char offdelaybuf\[(\d+)\]',(tree/'src/do_wear.c').read_text())[1]);support=root/'nethack-c/wasm/tu-do_wear-support.inc';assert int(re.search(r'teleport_do_wear_offdelaybuf\[(\d+)\]',support.read_text())[1])==bufferBytes
 inputs.append(support)
 data={'bufferBytes':bufferBytes,'callbacks':callbacks,'callbackTypes':callbackTypes,'schemas':schemas,'globals':globals,'records':records,'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in headers if p.is_relative_to(ref)}}
-(root/'js/standalone/armor-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound DO_WEAR descriptors and measured private records.')
+(root/'js/nethack/armor-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound DO_WEAR descriptors and measured private records.')

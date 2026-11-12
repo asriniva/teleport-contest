@@ -27,10 +27,10 @@ paths = [Path(__file__).resolve(), support,
          root / 'scripts/tu-questpgr-layout.h',
          root / 'js/ported/questpgr.js', root / 'js/nethack/bindings/questpgr.js',
          root / 'nethack-c/wasm/compile-defines.json',
-         root / 'js/wasm/tu-layouts.json', root / 'js/standalone/records.json']
+         root / 'js/wasm/tu-layouts.json', root / 'js/nethack/records.json']
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 data = {'globals': [name for _, name in rows] + [fallback[1]],
         'questBits': [name for _, name in bit_rows] + [last_bit[1]],
         'sourceSha256': {str(p.relative_to(root)): sha(p) for p in paths}}
-(root / 'js/standalone/quest-pager-abi.json').write_text(json.dumps(data, indent=2) + '\n')
+(root / 'js/nethack/quest-pager-abi.json').write_text(json.dumps(data, indent=2) + '\n')
 print('Bound original QUESTPGR global/packed-field transport.')

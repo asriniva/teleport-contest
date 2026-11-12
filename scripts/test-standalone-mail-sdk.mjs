@@ -1,9 +1,10 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import{pathToFileURL}from'node:url';
-import{createStandaloneEnvironment}from'../js/standalone/environment.js';
-import{connectMailSdk}from'../js/standalone/mail.js';
+import{createStandaloneEnvironment}from'../js/nethack/environment.js';
+import{connectMailSdk}from'../js/nethack/mail.js';
 const directory=path.resolve(process.env.STANDALONE_MAIL_SDK_ORACLE||'.cache/standalone-mail-sdk-v1'),receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-for(const[p,h]of Object.entries(receipt.sourceSha256))assert.equal(sha(p),h,'Changed SDK source '+p);
+for(const[p,h]of Object.entries(receipt.sourceSha256))assert.equal(layoutSourceSha(p,h),h,'Changed SDK source '+p);
 for(const[p,h]of Object.entries(receipt.artifactSha256))assert.equal(sha(path.join(directory,p)),h,'Changed SDK oracle '+p);
 const{default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs'))),ref=await factory({print:()=>{},printErr:()=>{}}),env=createStandaloneEnvironment(),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));
 connectMailSdk(env);let checks=0;

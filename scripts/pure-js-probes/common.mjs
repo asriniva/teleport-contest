@@ -10,7 +10,7 @@ export function withoutWasm(fn){
  if(result?.then)return result.finally(restore);restore();return result;
 }
 export async function environment(options={}){
- return withoutWasm(async()=>{const {createStandaloneEnvironment}=await import('../../js/standalone/environment.js');return createStandaloneEnvironment({initialBytes:1024,maximumBytes:128*1024*1024,...options});});
+ return withoutWasm(async()=>{const {createStandaloneEnvironment}=await import('../../js/nethack/environment.js');return createStandaloneEnvironment({initialBytes:1024,maximumBytes:128*1024*1024,...options});});
 }
 export function probeModule(env,methods){
  const result={pureJS:true,environment:env,get HEAPU8(){return env.memory.HEAPU8;}};

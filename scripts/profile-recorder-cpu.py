@@ -16,7 +16,7 @@ def group(f):
  if u.startswith('js/c-runtime/'):return 'C environment'
  if u.startswith('js/nethack/'):return 'C binding adapters'
  if u.startswith('js/ported/'):return 'translated game modules'
- if u.startswith('js/standalone/'):return 'standalone services'
+ if u.startswith('js/nethack/'):return 'standalone services'
  if u.startswith('js/lua') or '/lua/' in u:return 'Lua'
  if u.startswith('frozen/') or 'wasm-replay-support' in u:return 'recorder harness'
  if u.startswith('node:'):return 'Node internals'

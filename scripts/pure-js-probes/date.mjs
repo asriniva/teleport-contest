@@ -1,5 +1,5 @@
 // Build metadata and external version-string fixtures; DATE policy stays JS.
-import runtimeAbi from '../../js/standalone/runtime-info-abi.json' with {type:'json'};
+import runtimeAbi from '../../js/nethack/runtime-info-abi.json' with {type:'json'};
 import {createPortedRuntime} from '../../js/backends/emscripten/runtime.js';
 import {environment,probeModule,withoutWasm} from './common.mjs';
 export default async function createDateProbe(layouts){

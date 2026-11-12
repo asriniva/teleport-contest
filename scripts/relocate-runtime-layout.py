@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+import sys as _layout_sys
+from pathlib import Path as _LayoutPath
+_layout_sys.path.insert(0,str(_LayoutPath(__file__).resolve().parent))
+from nethack_layout import historical_cli as _prior_layout_cli
+if __name__=='__main__':_prior_layout_cli(__file__)
 """Reproduce exact source relocations; preserve immutable historical receipts."""
 import argparse,hashlib,json,posixpath,re,subprocess
 from functools import lru_cache
@@ -25,7 +30,7 @@ infra_data=json.loads(INFRA.read_text())if INFRA.exists()else{}
 infrastructure=infra_data.get('patches',{})
 HISTORICAL={'js/wasm/build.json','dependency-inventory.json'}
 # These are immutable proof recipes or historical evidence, not live source pins.
-def metadata(p):return p.startswith('js/standalone/')and p.endswith('.json')or p in {'docs/runtime-environment/c-runtime-manifest.json','nethack-c/wasm/tu-ports.json'}
+def metadata(p):return p.startswith('js/nethack/')and p.endswith('.json')or p in {'docs/runtime-environment/c-runtime-manifest.json','nethack-c/wasm/tu-ports.json'}
 def active(p):return p not in HISTORICAL and (p.startswith(('js/','scripts/','nethack-c/'))and Path(p).suffix in {'.js','.mjs','.py','.sh','.html'}or p in {'index.html','dependency-inventory.json'})
 LEGACY={'scripts/extract-c-runtime-helpers.mjs','scripts/prune-c-runtime-shims.mjs','scripts/update-c-runtime-provenance.py','scripts/check-c-runtime-relocation.mjs','scripts/check-sdk-runtime-extension.mjs'}
 def render_source(p,b):

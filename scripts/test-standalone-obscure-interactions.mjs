@@ -1,13 +1,14 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // Genuine original C main/world, then optional interactions on both live heaps.
 import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import{pathToFileURL}from'node:url';
 import {worldGraph} from './restoration-world-graph.mjs';
 import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
 import{C,R,T}from'../js/c-runtime/context.js';
-import{createStandaloneProgram}from'../js/standalone/program.js';import{enableWere}from'../js/standalone/were.js';import{enableDogmove}from'../js/standalone/dogmove.js';
-const directory=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1'),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),L=layouts.were,records=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
+import{createStandaloneProgram}from'../js/nethack/program.js';import{enableWere}from'../js/nethack/were.js';import{enableDogmove}from'../js/nethack/dogmove.js';
+const directory=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1'),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),L=layouts.were,records=JSON.parse(fs.readFileSync('js/nethack/records.json')).records;
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),receipt=JSON.parse(fs.readFileSync(directory+'/receipt.json'));let hashes=0,checks=0;
-for(const[p,h]of Object.entries(receipt.sourceSha256)){assert.equal(sha(p),h,p);hashes++;}for(const[p,h]of Object.entries(receipt.artifactSha256)){assert.equal(sha(directory+'/'+p),h,p);hashes++;}
-const abi=JSON.parse(fs.readFileSync('js/standalone/special-interactions-abi.json'));for(const[p,h]of Object.entries(abi.sourceSha256)){assert.equal(sha(p),h,p);hashes++;}
+for(const[p,h]of Object.entries(receipt.sourceSha256)){assert.equal(layoutSourceSha(p,h),h,p);hashes++;}for(const[p,h]of Object.entries(receipt.artifactSha256)){assert.equal(layoutSourceSha(directory+'/'+p,h),h,p);hashes++;}
+const abi=JSON.parse(fs.readFileSync('js/nethack/special-interactions-abi.json'));for(const[p,h]of Object.entries(abi.sourceSha256)){assert.equal(layoutSourceSha(p,h),h,p);hashes++;}
 const reference=process.env.STANDALONE_REFERENCE_ROOT;if(!reference)throw new Error('Missing STANDALONE_REFERENCE_ROOT');for(const[p,h]of Object.entries(abi.referenceHeaderSha256)){assert.equal(sha(path.resolve(reference,p)),h,p);hashes++;}
 function js(fn){const keys=['WebAssembly','fetch','XMLHttpRequest','WebSocket','Worker'],saved=keys.map(k=>Object.getOwnPropertyDescriptor(globalThis,k));const forbidden=()=>{throw new Error('Forbidden production Wasm/network during special interactions');};for(const k of keys)Object.defineProperty(globalThis,k,{configurable:true,value:k==='WebAssembly'?new Proxy({},{get:forbidden}):forbidden});try{return fn();}finally{keys.forEach((k,i)=>saved[i]?Object.defineProperty(globalThis,k,saved[i]):delete globalThis[k]);assert.deepEqual([C,R,T],[undefined,undefined,undefined]);}}
 const equal=(a,b,label)=>{assert.deepEqual(a,b,label);checks++;},epoch=1777723200000,profile={NETHACKDIR:'/nethack',HACKDIR:'/nethack',HOME:'/home/player',USER:'root',LOGNAME:'root',MAIL:'/nethack/mailbox',TERM:'xterm-256color',TERMINFO:'/nethack/terminfo',LINES:'24',COLUMNS:'80',TZ:'America/Los_Angeles',NETHACK_NO_DELAY:'1',NOMUX_MARKERS:'1',NETHACK_RAW_KEYS:'1',NETHACK_SEED:'1',NETHACK_FIXED_DATETIME:'20260102030405',NETHACK_RECORDING_EPOCH:'1777723200',NETHACK_RNGLOG:'/rng.log',NETHACK_RNGLOG_DISP:'/rng-display.log'};
@@ -75,7 +76,7 @@ try{
   const [sJ,sC]=inventory(L.SADDLE);action('tty_clear_nhwindow',[Number(env.ctypes.load('int',env.requireGlobal('WIN_MESSAGE')))]);input('\x1b');action('use_saddle',[sJ],[sC]);action('tty_clear_nhwindow',[Number(env.ctypes.load('int',env.requireGlobal('WIN_MESSAGE')))]);input('\x1b');action('doride');
  }
  if(mode==='menus'){
-  const L=layouts.iactions,command=JSON.parse(fs.readFileSync('js/standalone/command-abi.json'));
+  const L=layouts.iactions,command=JSON.parse(fs.readFileSync('js/nethack/command-abi.json'));
   const queue=heap=>{const j=heap.buffer===env.memory.buffer,v=new DataView(heap.buffer),ptr=p=>Number(v.getBigUint64(p,true)),base=(j?env.requireGlobal('gc'):globals.gc)+records.instance_globals_c.fields.command_queue.offset,rows=[];for(let q=0;q<2;q++){let p=ptr(base+q*8),list=[];while(p){const f=records._cmd_queue.fields,type=v.getInt32(p+f.typ.offset,true),entry=ptr(p+f.ec_entry.offset);let ec=null;if(type===layouts.cmd.CMDQ_EXTCMD&&entry){const offset=command.records.ext_func_tab.fields.ef_txt.offset,at=ptr(entry+offset);ec=j?env.memory.readString(at):cstring(at);}list.push({type,key:type===layouts.cmd.CMDQ_KEY?v.getInt8(p+f.key.offset):null,ec});p=ptr(p+f.next.offset);}rows.push(list);}return rows;};
   const wieldJ=Number(env.ctypes.load('struct obj *',env.requireGlobal('uwep'))),wieldC=cv().getBigUint64(globals.uwep,true);assert.ok(wieldJ&&wieldC);input('-\n');action('itemactions',[wieldJ],[wieldC]);equal(queue(env.memory.HEAPU8),queue(ref.HEAPU8),'unwield menu command identity');assert.ok(queue(env.memory.HEAPU8)[layouts.cmd.CQ_CANNED].length>0,'actual unwield selection queued');action('cmdq_clear',[layouts.cmd.CQ_CANNED]);
   for(const name of ['SADDLE','OIL_LAMP','SCR_BLANK_PAPER','DAGGER','FOOD_RATION']){

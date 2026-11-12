@@ -1,11 +1,12 @@
+import {layoutSourceSha} from './nethack-layout.mjs';
 // Original MON assertion source sites against the pinned SDK abort implementation.
 import fs from 'node:fs';import assert from 'node:assert/strict';import crypto from 'node:crypto';import{pathToFileURL}from'node:url';
-const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),abi=JSON.parse(fs.readFileSync('js/standalone/mon-abi.json')),directory='.cache/standalone-sdk-boundary-v5',receipt=JSON.parse(fs.readFileSync(directory+'/receipt.json'));let checks=0;
-for(const[p,h]of Object.entries(abi.sourceSha256))assert.equal(sha(p),h,p);
-for(const[p,h]of Object.entries(receipt.sourceSha256))assert.equal(sha(p),h,p);
-for(const[p,h]of Object.entries(receipt.artifactSha256))assert.equal(sha(directory+'/'+p),h,p);
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),abi=JSON.parse(fs.readFileSync('js/nethack/mon-abi.json')),directory='.cache/standalone-sdk-boundary-v5',receipt=JSON.parse(fs.readFileSync(directory+'/receipt.json'));let checks=0;
+for(const[p,h]of Object.entries(abi.sourceSha256))assert.equal(layoutSourceSha(p,h),h,p);
+for(const[p,h]of Object.entries(receipt.sourceSha256))assert.equal(layoutSourceSha(p,h),h,p);
+for(const[p,h]of Object.entries(receipt.artifactSha256))assert.equal(layoutSourceSha(directory+'/'+p,h),h,p);
 const start=Object.fromEntries(Object.keys(abi.sourceSha256).map(p=>[p,sha(p)]));
-const{createStandaloneProgram}=await import('../js/standalone/program.js'),{default:factory}=await import(pathToFileURL(process.cwd()+'/'+directory+'/reference.mjs')),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));
+const{createStandaloneProgram}=await import('../js/nethack/program.js'),{default:factory}=await import(pathToFileURL(process.cwd()+'/'+directory+'/reference.mjs')),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));
 const pure=fn=>{const old=Object.getOwnPropertyDescriptor(globalThis,'WebAssembly');Object.defineProperty(globalThis,'WebAssembly',{configurable:true,value:new Proxy({},{get(){throw Error('Production Wasm forbidden');}})});try{return fn();}finally{Object.defineProperty(globalThis,'WebAssembly',old);}};
 for(let i=0;i<abi.assertions.length;i++){
  const row=abi.assertions[i],errors=[],aborts=[],c=await factory({printErr:s=>errors.push(s),onAbort:s=>aborts.push(s)}),p=pure(()=>createStandaloneProgram({layouts,readKey(){throw Error('No gameplay input in assertion leaf test');}})),e=p.environment,owner=e.enableMonsterLifecycle(layouts);

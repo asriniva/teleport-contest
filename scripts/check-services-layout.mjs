@@ -1,3 +1,5 @@
+import {runHistoricalCli as runPriorLayoutAudit} from './nethack-layout.mjs';
+if(runPriorLayoutAudit(import.meta.url))process.exit(0);
 import{qualifiedHistorical,migrationFiles}from'./pure-js-fixtures/qualification.mjs';
 // Verify current sources independently of the historical audit inverse.
 import assert from 'node:assert/strict';

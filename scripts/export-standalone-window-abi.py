@@ -38,7 +38,7 @@ for line in block.splitlines()[1:]:
   name=re.search(r'\b(\w+)$',match[2]);fields[name[1]]={'offset':int(match[1]),'ctype':match[2]}
 data['records']={'win_choices':{'size':int(end[1]),'alignment':int(end[2]),'fields':fields}}
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-paths=[w,t,root/'js/standalone/window-system.js',root/'nethack-c/wasm/tu-libraries/windows.js',Path(__file__).resolve(),root/'nethack-c/wasm/compile-defines.json',root/'nethack-c/wasm/tu-fragments/windows-support.c',root/'nethack-c/wasm/tu-wintty-support.inc']
+paths=[w,t,root/'js/nethack/window-system.js',root/'nethack-c/wasm/tu-libraries/windows.js',Path(__file__).resolve(),root/'nethack-c/wasm/compile-defines.json',root/'nethack-c/wasm/tu-fragments/windows-support.c',root/'nethack-c/wasm/tu-wintty-support.inc']
 data['sourceSha256']={str(p.relative_to(root)):sha(p)for p in paths};data['referenceHeaderSha256']={str(p.relative_to(ref)):sha(p)for p in sorted(headers)}
-(root/'js/standalone/window-abi.json').write_text(json.dumps(data,indent=2)+'\n')
+(root/'js/nethack/window-abi.json').write_text(json.dumps(data,indent=2)+'\n')
 print('Exported original WINDOWS/WINTTY descriptors and callback prototypes.')
