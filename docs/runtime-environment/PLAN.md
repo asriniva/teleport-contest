@@ -1,5 +1,7 @@
 # Extend the JavaScript C environment
 
+Natural sink/polymorph follow-up (2026-11-12): [seven ordinary MAIN/save cases](sink-main-validation.json) pass60 original-C checks, including natural toxic-waste newman and baby-gray-dragon forms plus four fresh restored consumers. Production sources remain unchanged. The optional `sink-polymorph` job extends the plan to25 jobs; this does not relabel the historical23-job core run as a new combined25-job pass. Natural ordinary full-game victory remains unverified.
+
 Natural riding follow-up (2026-11-12): [eight ordinary MAIN riding/save cases](riding-main-validation.json) pass51 checks on published a17b98d production sources. The new `riding` integration job extends the plan to24 jobs; the existing23-job result remains a separate historical run. No natural full-game victory claim is made.
 
 Runtime ownership separation and factory consolidation are documented in [SERVICES_CLEANUP_PLAN.md](SERVICES_CLEANUP_PLAN.md); earlier source paths in recorded evidence remain historical.

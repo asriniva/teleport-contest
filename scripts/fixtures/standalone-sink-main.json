@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "scope": "Original-C-authored literal ordinary MAIN routes to naturally generated sinks; toxic-waste newman and monster-form outcomes. Map and input-state observations were read-only; no game API setup or memory writes.",
+  "referenceReceiptSha256": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+  "authorSourceSha256": {
+    "scripts/author-standalone-sink-main.mjs": "51abd7e86a64ba41e3043edb71ef5166d89e106fe0f58d6411e4092a75dc26ed",
+    "scripts/full-original-c-run.mjs": "3da8b7a3dd0b2c1f60eb6a986bcb70c0bb79d120e50a007c1558569301978a9a",
+    "js/standalone/records.json": "7b7ddc59f45ea73a8077a3ad96f5bc89cdc70920d136b1e64c706f94efaa3c9d",
+    "js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34"
+  },
+  "cases": [
+    {
+      "name": "newman",
+      "input": {
+        "timezone": "UTC",
+        "options": "OPTIONS=!news\n",
+        "argv": [
+          "-u",
+          "Ada-male-lawful",
+          "-p",
+          "Archeologist",
+          "-r",
+          "human"
+        ],
+        "seed": 26,
+        "keys": "  nllllllljolllkkkklklkkkkllkkkklllllllllllllkllllllllkqyqyqy "
+      },
+      "form": 331,
+      "sink": [
+        43,
+        3
+      ],
+      "originalRecordingSha256": "8372eeb0d63e58072a67a24b200a0fbcf7f043ae416ba44116e79e9147c9d380",
+      "rawNativeWitnessSha256": "a83f0c90fe8459225c6ecc77ef378ecffc68ec8a028d5bc4aeaeeea87ab71a5a"
+    },
+    {
+      "name": "monster",
+      "input": {
+        "timezone": "UTC",
+        "options": "OPTIONS=!news\n",
+        "argv": [
+          "-u",
+          "Ada-male-lawful",
+          "-p",
+          "Archeologist",
+          "-r",
+          "human"
+        ],
+        "seed": 85,
+        "keys": "  nhhhjjohohhhhhkkkkhkkhhkkkhhhhkkqyqyqy   "
+      },
+      "form": 133,
+      "sink": [
+        27,
+        7
+      ],
+      "originalRecordingSha256": "82a9e0934c461569810fcc20a75cdf76baf2ccc0a0413a5e7240b2b395973765",
+      "rawNativeWitnessSha256": "05ec691b44add76a31b7142bc7c2b1782a8f216dc98e344703d835cd9a0dd392"
+    }
+  ],
+  "monsterSaveSuffix": "Sy",
+  "monsterRestoreKeys": "."
+}

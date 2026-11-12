@@ -1,5 +1,25 @@
 # Upstream divergence register
 
+Natural sink/POLYSELF verification (2026-11-12): all7 cases pass60 original-C
+comparisons on unchanged published production sources. Literal ordinary MAIN
+routes to naturally generated sinks at seeds26 and85 reach toxic-waste newman
+and baby-gray-dragon outcomes. Real monster-form save and all4 fresh C/JS
+producer/consumer restores preserve the complete world and recordings. This
+supersedes the historical special-interactions.json unresolved toxic-waste note
+for these tested outcomes only; other forms/effects and natural full-game victory
+remain unproved. See docs/runtime-environment/sink-main-validation.json.
+
+Only development tests, fixtures and documentation change. The original-C test
+runner accepts an optional authorKey callback, records its exact UTF-16 keys and
+retains its existing literal replay path. The new author reads original C map
+and input state for planning; it makes no setup calls or game-state/RNG writes.
+The JS comparison receives frozen keys only. Literal native replay must exactly
+reproduce each original author recording before JS is compared. Initial blind
+routes were interrupted by combat/prompts and were not accepted as proof. No
+production provider, translated policy, frozen infrastructure or defaults change.
+The optional sink-polymorph job extends the integration plan to25 jobs; no new
+combined25-job execution is claimed for the historical23-job core result.
+
 Natural Knight riding verification (2026-11-12): all8 new ordinary MAIN cases
 pass51 checks against the complete configured original-C reference: natural pony
 mounting, movement, dismount, mounted save and all4 fresh C/JS save consumers.
