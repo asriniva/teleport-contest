@@ -2,7 +2,34 @@
 
 Runtime ownership separation and factory consolidation are documented in [SERVICES_CLEANUP_PLAN.md](SERVICES_CLEANUP_PLAN.md); earlier source paths in recorded evidence remain historical.
 
-Current published checkpoint: `ea796eb` (implementation) and `13bd001`
+Current published game checkpoint: `cc8ef80` on main. The default contest
+`runSegment`, `npm score` and repository scoring workflow use the standalone
+pure-JavaScript engine with checked-in assets/layouts. The unchanged frozen
+harness passes44/44 public sessions,792838 RNG entries,11405 screens/cursors and
+1483 animation frames/cursors, with timeouts disabled and zero forbidden
+capability attempts. See [the public recorder proof](pure-js-public-recorder-validation.json).
+
+The follow-up native regression now passes all23 named core jobs on exactly
+those game sources: ordinary inventory/actions, changed and unloaded-level
+saves/restores, genuine D5 death and four-way bones uptake, nonempty score
+history, Quest/invocation, plane persistence/portals and victory. Its two recorded
+runs differ only in test provenance code and selected fixture inputs; all1213
+production/reference-source hashes, assets and the sealed C reference match.
+The first plane check initially rejected the cleanup's VISION import relocation;
+the corrected test guard validates that exact relocation plus the same approved
+boolean correction, with three adversarial edits rejected. No game or frozen
+file changed. [Core validation and receipts](integrated-core-validation.json).
+
+Full-game acceptance remains false. Remaining work includes terminal/exit/signal
+and diagnostic/CLI bindings and deferred special interactions. Controlled Quest,
+invocation and endgame fixtures and the continuous wizard victory do not prove
+natural acquisition or an ordinary winning journey. The production closure,
+137 unchanged translated policies plus the single approved VISION correction,
+and three frozen files remain independently checked.
+
+## Historical ea796eb/13bd001 checkpoint
+
+Historical published checkpoint: `ea796eb` (implementation) and `13bd001`
 (recording evidence) on main. The production entry remains
 `js/standalone/program.js`, with JS-owned memory and no Wasm, host imports or
 network dependencies in its checked closure. The scope gate preserves137

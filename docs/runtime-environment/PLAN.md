@@ -2,6 +2,14 @@
 
 Runtime ownership separation and factory consolidation are documented in [SERVICES_CLEANUP_PLAN.md](SERVICES_CLEANUP_PLAN.md); earlier source paths in recorded evidence remain historical.
 
+Verification update (2026-11-12): the44 public recordings pass strict checks and
+all23 named core integration jobs pass on the same published `cc8ef80` game
+sources. See [core results](integrated-core-validation.json) and the
+[execution plan](integrated-regression-plan.md). These are bounded proofs;
+terminal/exit/signal and CLI bindings, deferred interactions and natural complete
+progression remain outside their accepted scope. The original order below is
+retained; the full objective is not complete.
+
 Current execution order (2026-11-11, user-directed):
 
 1. Finish the ordinary main loop and inventory cohort: exact C recordings and actual world graphs for movement/combat, completed eating, wield/wear/remove, drop/pickup, then a changed-state save and four C/JS producer/consumer restore combinations. The two discovered movement transport mismatches are fixed through turn238; remaining checks must pass on the final snapshot.

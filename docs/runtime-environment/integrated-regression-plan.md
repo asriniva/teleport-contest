@@ -1,6 +1,8 @@
-# Proposed fixed-assembly integration regression
+# Fixed-assembly integration regression
 
-Status: 23-job runner authored and preflighted; the aggregate has **not run**. Start it only after the shared SDK helper batch is complete and source files are frozen. A successful run still records `fullGameAccepted: false`.
+Status (2026-11-12): **23/23 named jobs passed** on the unchanged `cc8ef80` game implementation. [Pinned results and individual receipts](integrated-core-validation.json) retain both execution manifests. The first run passed12 jobs, then a stale VISION import hash stopped the first plane check before gameplay. A test-only guard correction verifies the exact reviewed import relocation and still rejects every additional policy change. The remaining12 executions passed, including the repeated `main` producer dependency. All production/reference-source, asset and native-reference hashes agree across both runs.
+
+This is bounded integration acceptance; `fullGameAccepted: false` remains. Additional terminal/exit/signal and diagnostic bindings and deferred interactions remain separate work. Natural Quest/item acquisition and an ordinary winning journey are not established by these controlled fixtures. Start future batches only after their implementation and inputs are frozen.
 
 From the repository root, using the pinned development Node:
 

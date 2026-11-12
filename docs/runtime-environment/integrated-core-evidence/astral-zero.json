@@ -1,0 +1,120 @@
+{
+  "checks": 34,
+  "hashes": 786,
+  "complete": true,
+  "naturalJourneyAccepted": false,
+  "postCleanupHeapAccepted": false,
+  "scope": "Source mksobj/addinv actual Amulet; goto_level enforces Earth then generates Astral/final_level; teleds selects actual lawful high altar; real MAIN #offer. Finite declared raw stdin services nested source prompts while preserving the real terminal; term_gone stays zero and host callbacks retain read depth one. No raw gameflags/terrain/RNG/privatecallbacks/input-frame cleanup writes. Primitive globals/RNG/log/score after cleanup only; world graphs before offering only. First-turn fixture has source zero points/empty ranking; nonzero ascension ranking and natural journey remain unaccepted.",
+  "positive": {
+    "moves": "1",
+    "position": [
+      40,
+      15
+    ],
+    "level": {
+      "dnum": 7,
+      "dlevel": 1
+    },
+    "hp": 13,
+    "ascended": 1,
+    "amulet": 0,
+    "urexp": "0",
+    "achievements": [
+      6,
+      7,
+      8,
+      18,
+      9,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "gameover": 1,
+    "panicking": 0
+  },
+  "input": {
+    "profile": {
+      "NETHACKDIR": "/nethack",
+      "HACKDIR": "/nethack",
+      "HOME": "/home/player",
+      "USER": "root",
+      "LOGNAME": "root",
+      "MAIL": "/nethack/mailbox",
+      "TERM": "xterm-256color",
+      "TERMINFO": "/nethack/terminfo",
+      "LINES": "24",
+      "COLUMNS": "80",
+      "TZ": "UTC",
+      "NETHACK_NO_DELAY": "1",
+      "NOMUX_MARKERS": "1",
+      "NETHACK_RAW_KEYS": "1",
+      "NETHACK_SEED": "1",
+      "NETHACK_FIXED_DATETIME": "20260102030405",
+      "NETHACK_RECORDING_EPOCH": "1777723200",
+      "NETHACK_RNGLOG": "/rng.log",
+      "NETHACK_RNGLOG_DISP": "/rng-display.log"
+    },
+    "argv": [
+      "-u",
+      "Ada-male-lawful",
+      "-p",
+      "Archeologist",
+      "-r",
+      "human"
+    ],
+    "startupKeys": "  n",
+    "commands": 18,
+    "declaredRawStdinBytes": 4096,
+    "consumedRawStdin": "         ",
+    "terminal": {
+      "termGone": 0,
+      "readDepth": 0
+    },
+    "setupMoreKeys": 0,
+    "offering": {
+      "label": "actual offering inputs",
+      "amuletId": 66,
+      "letter": "i",
+      "altar": [
+        40,
+        15,
+        28
+      ],
+      "destination": [
+        7,
+        1
+      ],
+      "keys": "#offer\ni                                                                                                                                "
+    }
+  },
+  "frames": 31,
+  "inputBoundaries": 21,
+  "provenance": {
+    "test": "edcddcf7a982cc74bccdcd4001c4f4e225fc83896128830a5f718c301428edd0",
+    "referenceReceipt": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "checks": 25,
+  "hashes": 786,
+  "complete": true,
+  "fullGameAccepted": false,
+  "scope": "Source-created invocation component setup uses source destination predicate/goto_level/teleds/mksobj/unbless/uncurse/addinv only, from MAIN input callback; actual MAIN applies candles/candelabrum/Bell and reads Book. No source field/RNG/terrain/input-frame writes. Natural journey remains unaccepted.",
+  "input": {
+    "profile": {
+      "NETHACKDIR": "/nethack",
+      "HACKDIR": "/nethack",
+      "HOME": "/home/player",
+      "USER": "root",
+      "LOGNAME": "root",
+      "MAIL": "/nethack/mailbox",
+      "TERM": "xterm-256color",
+      "TERMINFO": "/nethack/terminfo",
+      "LINES": "24",
+      "COLUMNS": "80",
+      "TZ": "UTC",
+      "NETHACK_NO_DELAY": "1",
+      "NOMUX_MARKERS": "1",
+      "NETHACK_RAW_KEYS": "1",
+      "NETHACK_SEED": "1",
+      "NETHACK_FIXED_DATETIME": "20260102030405",
+      "NETHACK_RECORDING_EPOCH": "1777723200",
+      "NETHACK_RNGLOG": "/rng.log",
+      "NETHACK_RNGLOG_DISP": "/rng-display.log"
+    },
+    "argv": [
+      "-u",
+      "Ada-male-lawful",
+      "-p",
+      "Archeologist",
+      "-r",
+      "human"
+    ],
+    "startupKeys": "  n",
+    "ritualKeys": "alyai aj rk     ",
+    "setupMoreKeys": 0,
+    "consumedRitualKeys": 16
+  },
+  "positive": {
+    "invoked": 1,
+    "candles": 7,
+    "lamplit": 1,
+    "bellAge": "3",
+    "bookKnown": 1,
+    "stairs": {
+      "up": 0,
+      "tolev": {
+        "dnum": 1,
+        "dlevel": 21
+      }
+    },
+    "destination": [
+      1,
+      20
+    ]
+  },
+  "frames": 26,
+  "inputBoundaries": 19,
+  "worldCoverage": {
+    "counts": {
+      "monst": 14,
+      "permonst": 13,
+      "branch": 7,
+      "obj": 56,
+      "mextra": 1,
+      "edog": 1,
+      "mapseen": 2,
+      "s_level": 36,
+      "ls_t": 1,
+      "fe": 2,
+      "trap": 14,
+      "stairway": 2
+    },
+    "serializedRecordBytes": 164962,
+    "serializedPaddingByteOccurrences": 2365,
+    "uniqueScalarBytes": 33983,
+    "pointerEdges": 215
+  },
+  "sourceSha256": {
+    "scripts/test-standalone-invocation.mjs": "465c7afb8161c243c40a3cfdf682361caffcb40499085e32f8e5c007d4e955b3",
+    "js/standalone/lua-sandbox.js": "c7533d6cc30094378107fdce7117b0c8c4ee76234574712a6c8a9fdf5f532948",
+    "js/standalone/program.js": "4c2fb1135a073f7609688253694ff9b9cdffecf843b4ada983626b1dd8e90d6d",
+    "js/standalone/address-ports.js": "c0119a9b835996af35fb659e9d045c544d1ee77ae20bf1a9d4e134f252ddebf7",
+    "js/standalone/spell.js": "a4600e59480780e89e7d9bf65f96c4e49ad14b8b9a086bab74cf7525a85a52e8",
+    "js/standalone/apply.js": "5eb9f4ca210ac2a2b2f0ebe7b6c5d08d52af62582a331dae235f5819e4ece1ee",
+    "js/standalone/level-startup.js": "108f712ab804c15f88bc8632b00a0399bc6c1e7b1f7c89ec4405acbab304ba32",
+    "js/ported/nhlua.js": "dd8bae40173dc1cca9de1fc6fb9bb07435f10a6c5029c545c7b118710c730872",
+    "js/nethack/bindings/nhlua.js": "e16244e4fd606abdf09c605f185c89e0008a7bf70234b766f6558761cc5034a3",
+    "js/ported/nhlsel.js": "0120d76574ca8f3cb01dff5e2446ff802de606c47534ddf88307c30cb5fbf26d",
+    "js/nethack/bindings/nhlsel.js": "9a729464989daaa7cfe4eb2acc85e96b51b9c5836c4b0f4a72733822212fc722",
+    "js/ported/spell.js": "a28146336d296071a430dfb785544e009a5b851e1a6fc26d94cbbce2e589050b",
+    "js/ported/apply.js": "44adf9760271187f1203395f474f7f95ba06715184b1d215f24ec344e7dc391d",
+    "js/ported/sp_lev.js": "5363f7e912ce755e7388115439c0248d1cd2353f11abedc8e413527e90a1b715",
+    "js/ported/mklev.js": "7337712aafd1f8b4254eb2426f296e9604b2f56e8c16b47e9db9421fafd9ae87"
+  },
+  "referenceReceiptSha256": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58"
+}

@@ -1,0 +1,232 @@
+{
+  "cases": [
+    {
+      "name": "c-in-c-prompt",
+      "keys": "",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "consumed": 0,
+      "moves": "1",
+      "coverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      }
+    },
+    {
+      "name": "c-in-js-prompt",
+      "keys": "",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "consumed": 0,
+      "moves": "1",
+      "coverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      }
+    },
+    {
+      "name": "js-in-c-prompt",
+      "keys": "",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "consumed": 0,
+      "moves": "1",
+      "coverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      }
+    },
+    {
+      "name": "js-in-js-prompt",
+      "keys": "",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "consumed": 0,
+      "moves": "1",
+      "coverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      }
+    },
+    {
+      "name": "c-in-c-6d2e",
+      "keys": "m.",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "consumed": 2,
+      "moves": "2",
+      "coverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      }
+    },
+    {
+      "name": "c-in-js-6d2e",
+      "keys": "m.",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "consumed": 2,
+      "moves": "2",
+      "coverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      }
+    },
+    {
+      "name": "js-in-c-6d2e",
+      "keys": "m.",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "consumed": 2,
+      "moves": "2",
+      "coverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      }
+    },
+    {
+      "name": "js-in-js-6d2e",
+      "keys": "m.",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "consumed": 2,
+      "moves": "2",
+      "coverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      }
+    }
+  ],
+  "complete": true,
+  "fullGameAccepted": false,
+  "provenance": {
+    "referenceReceipt": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+    "schema": "7b7ddc59f45ea73a8077a3ad96f5bc89cdc70920d136b1e64c706f94efaa3c9d",
+    "scripts": {
+      "scripts/test-standalone-restored-world.mjs": "78ec7b1c57a3b241e011186b708af18e0fcef33dffd216c6cc5f6b38193b9db0",
+      "scripts/restoration-world-graph.mjs": "de75484b8ae2e172ae7ae140ad873f9a4a1c49e21b7c0f6168bd22bf6268445b",
+      "scripts/run-standalone-program.mjs": "582228e4e44a87637fd805837b7e35663c657166a8aa20a6f3ba94df5f8d66f5",
+      "scripts/full-original-c-run.mjs": "47e79a0712238cd6aa2137460e6e360111a35c20d5dbc178fcbf02b5207fb9f4"
+    },
+    "savedStreams": {
+      "c": "68079bae4a7c68acc963f70b0499f878b575329a8acb1a557d5a3a8aac99eab3",
+      "js": "e78f9f604311dbeaae317d5802045d78cdabd47be08e58d9e1fbda60e825f5a8"
+    }
+  },
+  "limitations": [
+    "Initial-state save fixture only; nonempty light/timer coverage is reported, never inferred.",
+    "Only explicitly enumerated world roots are accepted; serialized maps of other levels and Lua state require separate comparison."
+  ]
+}

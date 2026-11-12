@@ -1,5 +1,29 @@
 # Upstream divergence register
 
+Core native regression follow-up (2026-11-12; game sources unchanged): all23
+named integration jobs pass on published cc8ef80. The initial run passed12 jobs
+before a stale VISION import hash stopped the first plane check before gameplay;
+a suffix run completed12 jobs including the required repeated MAIN producer.
+Both source manifests agree on all1213 production/reference-source files, all
+assets and the sealed configured original-C reference. Individual archived
+receipts and both run manifests are bound by integrated-core-validation.json.
+Coverage includes ordinary inventory/actions, changed and unloaded-level
+save/restore, real D5 death with fresh four-way bones consumers, nonempty score
+history, Quest/invocation, planes/portals and actual victory. Source-created
+progression fixtures and a continuous wizard journey remain explicitly distinct
+from natural acquisition/combat or an ordinary winning journey; fullGameAccepted
+remains false. No post-cleanup heap or raw compressed-pointer-byte claim is added.
+
+The only code repair in this follow-up is test-only:
+`scripts/elemental-approved-correction.mjs` now uses the exact reviewed cleanup
+inverse before checking VISION's original approved hash and one-line reversal.
+The current relocated file hash is still checked; no additional policy edit is
+accepted. The unchanged sealed original-C VISION hash remains required.
+`test-elemental-approved-correction.mjs` verifies the legitimate import relocation
+and rejects an additional body, a reversed approved correction and an unreviewed
+import using isolated fixtures. Production/frozen bytes stay unchanged; this
+checkpoint does not promote the separately prepared terminal/signal/CLI fixes.
+
 Pure-JS contest default promoted after the complete public gate (2026-11-12):
 `js/jsmain.js` now lazily delegates runSegment to the standalone recorder. The
 existing NethackGame/browser API remains separate. `package.json` selects the

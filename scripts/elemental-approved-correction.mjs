@@ -3,10 +3,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import {readBeforeLayout} from './services-layout-audit.mjs';
 export function elementalApprovedCorrection(directory){
  const manifest='docs/runtime-environment/authorized-port-corrections.json',baseline='docs/runtime-environment/scope-baseline.json',hash=b=>crypto.createHash('sha256').update(b).digest('hex'),read=p=>fs.readFileSync(p),data=JSON.parse(read(manifest)),rows=data.corrections;
  assert.deepEqual(rows.map(r=>r.file),['js/ported/vision.js'],'Only the user-approved VISION correction');
- const row=rows[0],original=JSON.parse(read(baseline)).sha256[row.file],corrected=read(row.file).toString();
+ const row=rows[0],original=JSON.parse(read(baseline)).sha256[row.file],corrected=readBeforeLayout(row.file,'utf8');
  assert.equal(row.baselineSha256,original,'Original VISION baseline retained');
  assert.equal(hash(Buffer.from(corrected)),row.correctedSha256,'Approved corrected VISION hash');
  assert.equal(corrected.split(row.change.after).length,2,'Exactly one approved correction');
