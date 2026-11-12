@@ -1,0 +1,11 @@
+{
+  "complete": false,
+  "accepted": false,
+  "node": "24.19.0 SDK",
+  "officialPassedBeforeStop": 9,
+  "sessionTimeoutMs": 0,
+  "termination": "Explicit SIGTERM after native stack capture; no replay deadline was applied. Parent63853 and worker64760 stopped.",
+  "blockedSession": "seed0015-valk-level2-pit-dog-wait.session.json",
+  "observation": "Native stack blocked under Object.getOwnPropertyDescriptor -> Node lazy global getter -> crypto GetCiphers -> OpenSSL method-store pthread_rwlock. Game input had not begun and no segment telemetry was emitted. Root cause beyond the observed stack is unproven.",
+  "nextGate": "Fresh complete recording/profile run using official Node22.23.5, matching contest CI major. SDK24 partial timings do not establish44-session performance acceptance."
+}

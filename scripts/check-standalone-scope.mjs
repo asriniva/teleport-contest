@@ -1,6 +1,7 @@
 // Guard production closure, frozen inputs, unchanged ports and generated inputs.
 import {migrationFiles,qualifiedHistorical} from './pure-js-fixtures/qualification.mjs';
 import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
 import fs from 'node:fs';
 import {readBeforeLayout} from './services-layout-audit.mjs';
 import path from 'node:path';
@@ -12,7 +13,7 @@ const {parse}=await import(pathToFileURL(reference+'/.cache/emsdk/upstream/emscr
 const read=file=>fs.readFileSync(path.resolve(root,file));
 const json=file=>JSON.parse(read(file));
 const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
-const check=(file,expected)=>{const actual=sha(path.resolve(root,file));if(actual!==expected&&migrationFiles.has(file))qualifiedHistorical(file,expected);else assert.equal(actual,expected,'Bound source changed: '+file);};
+const check=(file,expected)=>{const actual=sha(path.resolve(root,file));if(actual!==expected&&['js/c-runtime/types.js','js/c-runtime/record-views.js'].includes(file)){const before=execFileSync('python3',['scripts/type_access_source_successors.py','--file',file]);assert.equal(crypto.createHash('sha256').update(before).digest('hex'),expected,'Qualified type-access baseline differs: '+file);}else if(actual!==expected&&migrationFiles.has(file))qualifiedHistorical(file,expected);else assert.equal(actual,expected,'Bound source changed: '+file);};
 // Add the cleanup's complete owned runtime/declaration closure; retain every
 // historical source/header check below, including known failing pins.
 for(const [file,hash]of Object.entries(json('docs/runtime-environment/c-runtime-manifest.json').sha256))check(file,hash);

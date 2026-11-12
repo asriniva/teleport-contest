@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "complete": true,
+  "fullGameAccepted": false,
+  "nativeChecks": 54,
+  "runtimeContractAndMemoryChecksPassed": true,
+  "sourceQualificationRejectionChecks": 21,
+  "sourceManifestHashes": 379,
+  "strictPublicSessionsPassed": 44,
+  "nodeVersion": "22.23.5",
+  "profileWallSeconds": 769.0892472267151,
+  "sessionTimeoutMs": 0,
+  "unchangedInputFiles": 751,
+  "original45SecondDeadlineAccepted": false,
+  "profiledSessionsOver45Seconds": [
+    "seed0014-dequa-fountain-explore.session.json",
+    "seed0030-ten-diverse-deaths.session.json",
+    "seed0360-wizard-world-tour.session.json",
+    "seed4500-knight-coverage.session.json"
+  ],
+  "incompleteSdk24Attempt": "type-access-incomplete-sdk24-profile/failure.json",
+  "comparisonLimits": [
+    "Full baseline uses SDK Node24 while current complete run uses official Node22; before/after timings include a runtime-version difference.",
+    "The same-SDK partial first2 sessions were about2x faster; the SDK24 attempt stopped at9 official passes after a captured native startup wait and is not44-session acceptance.",
+    "All measured runs use CPU sampling and no replay deadlines; final deadline acceptance requires unprofiled target-runtime scoring."
+  ],
+  "sourceManifestSha256": "af57acdc106055e3f83b7c2fc19b3245e21621939cbae5e2d8002a0b563e3b7b"
+}

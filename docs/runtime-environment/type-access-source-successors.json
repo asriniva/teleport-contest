@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "baseCommit": "63521758b5184dfad3327bb23cdc523e7d5009f1",
+  "nativeProof": "docs/runtime-environment/type-access-native-evidence.json",
+  "nativeProofSha256": "94c2578902602dae7fea9d6a290e4655e628158928d5a3a0ab03b616859cb411",
+  "files": {
+    "js/c-runtime/types.js": {
+      "beforeSha256": "67c82c0585dac56e87d59fd0b0d43273d5a4edf31841a4de32688c52998ae8f7",
+      "afterSha256": "255b8886f553dfd06e6f56f0cfe417d03e9a8fda48f455fe6a8b94b341d10cc2",
+      "patch": "docs/runtime-environment/type-access-source-successors/types.js.patch",
+      "patchSha256": "272e8db6d2c4120321aaca252f4e79e91be02ceee418868d5461baacac3b0bf8"
+    },
+    "js/c-runtime/record-views.js": {
+      "beforeSha256": "c4d56acd7b15eed199014840fcf134375a1ef075035199d33f72b33a009b9ba8",
+      "afterSha256": "e85e5e2ee3ceb54dc19ac5b690c32a49121c0fb700eccfe392b0bf892e416562",
+      "patch": "docs/runtime-environment/type-access-source-successors/record-views.js.patch",
+      "patchSha256": "bacebbe8f29b570c3a747d71b5efb1fdb0bf9add9969c715a84d0554a0f9c25a"
+    }
+  }
+}

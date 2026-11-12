@@ -1,0 +1,5383 @@
+{
+  "version": 1,
+  "complete": true,
+  "workerProfiles": 44,
+  "sampledMs": 759111.837,
+  "method": {
+    "nodeVersion": "v22.23.5",
+    "intervalUs": 1000,
+    "timeoutsMs": 0,
+    "instrumentation": "NODE_OPTIONS V8 --cpu-prof; no engine or frozen-harness instrumentation",
+    "phaseAttribution": "Stack sampling; GC has no caller. Inclusive percentages overlap; self percentages partition worker samples. Whole worker profiles include module loading and scorer comparison outside official timed replay. CPU sampling is an estimate and includes profiler overhead."
+  },
+  "selfGroups": [
+    {
+      "group": "C environment",
+      "sampledMs": 382685.106,
+      "percent": 50.412
+    },
+    {
+      "group": "C binding adapters",
+      "sampledMs": 141864.1,
+      "percent": 18.688
+    },
+    {
+      "group": "translated game modules",
+      "sampledMs": 87282.036,
+      "percent": 11.498
+    },
+    {
+      "group": "garbage collection",
+      "sampledMs": 71637.826,
+      "percent": 9.437
+    },
+    {
+      "group": "standalone services",
+      "sampledMs": 39544.367,
+      "percent": 5.209
+    },
+    {
+      "group": "Node internals",
+      "sampledMs": 12115.088,
+      "percent": 1.596
+    },
+    {
+      "group": "Lua",
+      "sampledMs": 10580.683,
+      "percent": 1.394
+    },
+    {
+      "group": "V8/native/anonymous",
+      "sampledMs": 10170.84,
+      "percent": 1.34
+    },
+    {
+      "group": "recorder harness",
+      "sampledMs": 1795.081,
+      "percent": 0.236
+    },
+    {
+      "group": "other JavaScript",
+      "sampledMs": 1436.71,
+      "percent": 0.189
+    }
+  ],
+  "phases": [
+    {
+      "phase": "turn loop",
+      "sampledMs": 448930.115,
+      "percent": 59.139
+    },
+    {
+      "phase": "other replay/startup",
+      "sampledMs": 147739.565,
+      "percent": 19.462
+    },
+    {
+      "phase": "GC (caller unavailable)",
+      "sampledMs": 71637.826,
+      "percent": 9.437
+    },
+    {
+      "phase": "new game",
+      "sampledMs": 58853.236,
+      "percent": 7.753
+    },
+    {
+      "phase": "outside replay/unattributed",
+      "sampledMs": 16949.88,
+      "percent": 2.233
+    },
+    {
+      "phase": "program construction",
+      "sampledMs": 14217.843,
+      "percent": 1.873
+    },
+    {
+      "phase": "restore",
+      "sampledMs": 783.372,
+      "percent": 0.103
+    }
+  ],
+  "topSelf": [
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "malloc",
+      "line": 46,
+      "column": 11,
+      "sampledMs": 84911.264,
+      "percent": 11.186
+    },
+    {
+      "file": "",
+      "function": "(garbage collector)",
+      "line": 0,
+      "column": 0,
+      "sampledMs": 71637.826,
+      "percent": 9.437
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "record",
+      "line": 19,
+      "column": 20,
+      "sampledMs": 33451.898,
+      "percent": 4.407
+    },
+    {
+      "file": "js/nethack/bindings/sfbase.js",
+      "function": "table",
+      "line": 19,
+      "column": 19,
+      "sampledMs": 23978.874,
+      "percent": 3.159
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "free",
+      "line": 72,
+      "column": 9,
+      "sampledMs": 19376.355,
+      "percent": 2.553
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "env.field",
+      "line": 115,
+      "column": 13,
+      "sampledMs": 14224.991,
+      "percent": 1.874
+    },
+    {
+      "file": "js/ported/termcap.js",
+      "function": "nomux_capture_screen",
+      "line": 784,
+      "column": 37,
+      "sampledMs": 14126.194,
+      "percent": 1.861
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "env.field",
+      "line": 100,
+      "column": 13,
+      "sampledMs": 13267.366,
+      "percent": 1.748
+    },
+    {
+      "file": "js/c-runtime/context.js",
+      "function": "withCEnvironment",
+      "line": 8,
+      "column": 33,
+      "sampledMs": 10914.449,
+      "percent": 1.438
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "load",
+      "line": 30,
+      "column": 18,
+      "sampledMs": 9864.639,
+      "percent": 1.299
+    },
+    {
+      "file": "js/c-runtime/records.js",
+      "function": "record",
+      "line": 6,
+      "column": 20,
+      "sampledMs": 9771.45,
+      "percent": 1.287
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "canonical",
+      "line": 8,
+      "column": 23,
+      "sampledMs": 9089.973,
+      "percent": 1.197
+    },
+    {
+      "file": "node:internal/modules/esm/utils",
+      "function": "compileSourceTextModule",
+      "line": 344,
+      "column": 33,
+      "sampledMs": 8024.547,
+      "percent": 1.057
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "get HEAPU8",
+      "line": 22,
+      "column": 15,
+      "sampledMs": 7834.351,
+      "percent": 1.032
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "get view",
+      "line": 24,
+      "column": 13,
+      "sampledMs": 7521.055,
+      "percent": 0.991
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "array",
+      "line": 63,
+      "column": 16,
+      "sampledMs": 7276.25,
+      "percent": 0.959
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "currentDataView",
+      "line": 12,
+      "column": 32,
+      "sampledMs": 7151.636,
+      "percent": 0.942
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "get",
+      "line": 37,
+      "column": 144,
+      "sampledMs": 7003.03,
+      "percent": 0.923
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "read",
+      "line": 61,
+      "column": 13,
+      "sampledMs": 6681.445,
+      "percent": 0.88
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "env.cell",
+      "line": 96,
+      "column": 11,
+      "sampledMs": 5951.472,
+      "percent": 0.784
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "get value",
+      "line": 106,
+      "column": 109,
+      "sampledMs": 5176.445,
+      "percent": 0.682
+    },
+    {
+      "file": "js/ported/display.js",
+      "function": "show_glyph",
+      "line": 1605,
+      "column": 27,
+      "sampledMs": 4768.789,
+      "percent": 0.628
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "get",
+      "line": 20,
+      "column": 141,
+      "sampledMs": 4728.16,
+      "percent": 0.623
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "call",
+      "line": 54,
+      "column": 18,
+      "sampledMs": 4558.643,
+      "percent": 0.601
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "get address",
+      "line": 106,
+      "column": 33,
+      "sampledMs": 4297.295,
+      "percent": 0.566
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "getField",
+      "line": 53,
+      "column": 22,
+      "sampledMs": 4258.699,
+      "percent": 0.561
+    },
+    {
+      "file": "js/ported/display.js",
+      "function": "reset_glyphmap",
+      "line": 2268,
+      "column": 31,
+      "sampledMs": 4231.112,
+      "percent": 0.557
+    },
+    {
+      "file": "js/nethack/bindings/glyphs.js",
+      "function": "view",
+      "line": 44,
+      "column": 15,
+      "sampledMs": 4141.63,
+      "percent": 0.546
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "decode",
+      "line": 60,
+      "column": 15,
+      "sampledMs": 4028.671,
+      "percent": 0.531
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "exactAddress",
+      "line": 8,
+      "column": 29,
+      "sampledMs": 4024.061,
+      "percent": 0.53
+    }
+  ],
+  "topInclusive": [
+    {
+      "file": "",
+      "function": "(root)",
+      "line": 0,
+      "column": 0,
+      "sampledMs": 759111.837,
+      "percent": 100.0
+    },
+    {
+      "file": "js/standalone-recorder-adapter.js",
+      "function": "runSegment",
+      "line": 17,
+      "column": 33,
+      "sampledMs": 670516.881,
+      "percent": 88.329
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "call",
+      "line": 54,
+      "column": 18,
+      "sampledMs": 654198.41,
+      "percent": 86.179
+    },
+    {
+      "file": "js/c-runtime/memory.js",
+      "function": "scoped",
+      "line": 105,
+      "column": 15,
+      "sampledMs": 654195.452,
+      "percent": 86.179
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "",
+      "line": 57,
+      "column": 33,
+      "sampledMs": 654195.452,
+      "percent": 86.179
+    },
+    {
+      "file": "js/c-runtime/context.js",
+      "function": "withCEnvironment",
+      "line": 8,
+      "column": 33,
+      "sampledMs": 654194.035,
+      "percent": 86.179
+    },
+    {
+      "file": "js/nethack/address-ports.js",
+      "function": "",
+      "line": 52,
+      "column": 21,
+      "sampledMs": 654166.828,
+      "percent": 86.175
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "invoke",
+      "line": 15,
+      "column": 22,
+      "sampledMs": 654073.205,
+      "percent": 86.163
+    },
+    {
+      "file": "js/standalone/program.js",
+      "function": "run",
+      "line": 34,
+      "column": 6,
+      "sampledMs": 654053.205,
+      "percent": 86.16
+    },
+    {
+      "file": "js/ported/unixmain.js",
+      "function": "main",
+      "line": 10,
+      "column": 21,
+      "sampledMs": 654021.749,
+      "percent": 86.156
+    },
+    {
+      "file": "js/c-runtime/address-bindings.js",
+      "function": "local.<computed>",
+      "line": 54,
+      "column": 77,
+      "sampledMs": 651543.908,
+      "percent": 85.83
+    },
+    {
+      "file": "js/standalone/turn-loop.js",
+      "function": "C.<computed>",
+      "line": 95,
+      "column": 92,
+      "sampledMs": 507949.468,
+      "percent": 66.914
+    },
+    {
+      "file": "js/standalone/turn-loop.js",
+      "function": "",
+      "line": 124,
+      "column": 112,
+      "sampledMs": 451588.323,
+      "percent": 59.489
+    },
+    {
+      "file": "js/ported/allmain.js",
+      "function": "moveloop",
+      "line": 562,
+      "column": 25,
+      "sampledMs": 451584.114,
+      "percent": 59.488
+    },
+    {
+      "file": "js/ported/allmain.js",
+      "function": "moveloop_core",
+      "line": 154,
+      "column": 30,
+      "sampledMs": 448930.115,
+      "percent": 59.139
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "callWithStack",
+      "line": 4,
+      "column": 30,
+      "sampledMs": 379945.462,
+      "percent": 50.051
+    },
+    {
+      "file": "js/c-runtime/functions.js",
+      "function": "indirect",
+      "line": 16,
+      "column": 17,
+      "sampledMs": 289151.324,
+      "percent": 38.091
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "",
+      "line": 31,
+      "column": 111,
+      "sampledMs": 270517.465,
+      "percent": 35.636
+    },
+    {
+      "file": "js/standalone/commands.js",
+      "function": "enableAddressPort.adapter",
+      "line": 12,
+      "column": 119,
+      "sampledMs": 218726.556,
+      "percent": 28.813
+    },
+    {
+      "file": "js/nethack/bindings/cmd.js",
+      "function": "callCmd",
+      "line": 36,
+      "column": 24,
+      "sampledMs": 218705.637,
+      "percent": 28.811
+    },
+    {
+      "file": "js/ported/cmd.js",
+      "function": "rhack",
+      "line": 2613,
+      "column": 22,
+      "sampledMs": 215594.626,
+      "percent": 28.401
+    },
+    {
+      "file": "js/c-runtime/memory.js",
+      "function": "stackSave",
+      "line": 98,
+      "column": 18,
+      "sampledMs": 202844.656,
+      "percent": 26.721
+    },
+    {
+      "file": "js/nethack/bindings/cmd.js",
+      "function": "env.callProc",
+      "line": 21,
+      "column": 18,
+      "sampledMs": 185110.661,
+      "percent": 24.385
+    },
+    {
+      "file": "js/c-runtime/address-bindings.js",
+      "function": "local.<computed>",
+      "line": 49,
+      "column": 84,
+      "sampledMs": 185092.702,
+      "percent": 24.383
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "",
+      "line": 80,
+      "column": 83,
+      "sampledMs": 173180.299,
+      "percent": 22.814
+    },
+    {
+      "file": "js/nethack/bindings/do.js",
+      "function": "callDo",
+      "line": 378,
+      "column": 23,
+      "sampledMs": 167935.271,
+      "percent": 22.123
+    },
+    {
+      "file": "js/standalone/do-lifecycle.js",
+      "function": "",
+      "line": 54,
+      "column": 79,
+      "sampledMs": 167932.271,
+      "percent": 22.122
+    },
+    {
+      "file": "js/standalone/do-lifecycle.js",
+      "function": "",
+      "line": 19,
+      "column": 42,
+      "sampledMs": 167145.646,
+      "percent": 22.019
+    },
+    {
+      "file": "js/nethack/bindings/display.js",
+      "function": "callDisplay",
+      "line": 44,
+      "column": 28,
+      "sampledMs": 161977.302,
+      "percent": 21.338
+    },
+    {
+      "file": "js/ported/do.js",
+      "function": "goto_level",
+      "line": 1478,
+      "column": 27,
+      "sampledMs": 159517.065,
+      "percent": 21.014
+    }
+  ],
+  "phaseHotspots": {
+    "outside replay/unattributed": [
+      {
+        "file": "node:internal/modules/esm/utils",
+        "function": "compileSourceTextModule",
+        "line": 344,
+        "column": 33,
+        "sampledMs": 8024.547,
+        "percent": 1.057
+      },
+      {
+        "file": "node:internal/modules/esm/translators",
+        "function": "jsonStrategy",
+        "line": 469,
+        "column": 46,
+        "sampledMs": 1521.842,
+        "percent": 0.2
+      },
+      {
+        "file": "frozen/ps_test_runner.mjs",
+        "function": "screensVisuallyEqual",
+        "line": 202,
+        "column": 30,
+        "sampledMs": 547.502,
+        "percent": 0.072
+      },
+      {
+        "file": "",
+        "function": "open",
+        "line": 0,
+        "column": 0,
+        "sampledMs": 532.91,
+        "percent": 0.07
+      },
+      {
+        "file": "",
+        "function": "(program)",
+        "line": 0,
+        "column": 0,
+        "sampledMs": 515.92,
+        "percent": 0.068
+      },
+      {
+        "file": "",
+        "function": "read",
+        "line": 0,
+        "column": 0,
+        "sampledMs": 380.619,
+        "percent": 0.05
+      },
+      {
+        "file": "frozen/ps_test_runner.mjs",
+        "function": "runSession",
+        "line": 276,
+        "column": 26,
+        "sampledMs": 295.999,
+        "percent": 0.039
+      },
+      {
+        "file": "",
+        "function": "getPackageScopeConfig",
+        "line": 0,
+        "column": 0,
+        "sampledMs": 269.045,
+        "percent": 0.035
+      },
+      {
+        "file": "frozen/screen-decode.mjs",
+        "function": "decodeScreen",
+        "line": 21,
+        "column": 29,
+        "sampledMs": 241.874,
+        "percent": 0.032
+      },
+      {
+        "file": "",
+        "function": "internalModuleStat",
+        "line": 0,
+        "column": 0,
+        "sampledMs": 223.756,
+        "percent": 0.029
+      },
+      {
+        "file": "node:internal/encoding",
+        "function": "decode",
+        "line": 442,
+        "column": 11,
+        "sampledMs": 191.752,
+        "percent": 0.025
+      },
+      {
+        "file": "",
+        "function": "parse",
+        "line": 0,
+        "column": 0,
+        "sampledMs": 159.216,
+        "percent": 0.021
+      }
+    ],
+    "GC (caller unavailable)": [
+      {
+        "file": "",
+        "function": "(garbage collector)",
+        "line": 0,
+        "column": 0,
+        "sampledMs": 71637.826,
+        "percent": 9.437
+      }
+    ],
+    "other replay/startup": [
+      {
+        "file": "js/c-runtime/heap.js",
+        "function": "malloc",
+        "line": 46,
+        "column": 11,
+        "sampledMs": 56566.216,
+        "percent": 7.452
+      },
+      {
+        "file": "js/c-runtime/heap.js",
+        "function": "free",
+        "line": 72,
+        "column": 9,
+        "sampledMs": 8319.718,
+        "percent": 1.096
+      },
+      {
+        "file": "js/nethack/bindings/glyphs.js",
+        "function": "view",
+        "line": 44,
+        "column": 15,
+        "sampledMs": 4141.63,
+        "percent": 0.546
+      },
+      {
+        "file": "js/ported/glyphs.js",
+        "function": "free_glyphid_cache",
+        "line": 300,
+        "column": 35,
+        "sampledMs": 3364.145,
+        "percent": 0.443
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.cell",
+        "line": 96,
+        "column": 11,
+        "sampledMs": 3006.922,
+        "percent": 0.396
+      },
+      {
+        "file": "js/standalone/glyphs.js",
+        "function": "get",
+        "line": 10,
+        "column": 53,
+        "sampledMs": 2871.089,
+        "percent": 0.378
+      },
+      {
+        "file": "js/c-runtime/context.js",
+        "function": "withCEnvironment",
+        "line": 8,
+        "column": 33,
+        "sampledMs": 2752.762,
+        "percent": 0.363
+      },
+      {
+        "file": "js/c-runtime/types.js",
+        "function": "record",
+        "line": 19,
+        "column": 20,
+        "sampledMs": 2658.868,
+        "percent": 0.35
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.field",
+        "line": 115,
+        "column": 13,
+        "sampledMs": 2530.477,
+        "percent": 0.333
+      },
+      {
+        "file": "js/c-runtime/heap.js",
+        "function": "get HEAPU8",
+        "line": 22,
+        "column": 15,
+        "sampledMs": 2434.19,
+        "percent": 0.321
+      },
+      {
+        "file": "js/standalone/options.js",
+        "function": "get",
+        "line": 14,
+        "column": 53,
+        "sampledMs": 2240.326,
+        "percent": 0.295
+      },
+      {
+        "file": "js/nethack/bindings/options.js",
+        "function": "",
+        "line": 46,
+        "column": 174,
+        "sampledMs": 2165.311,
+        "percent": 0.285
+      }
+    ],
+    "program construction": [
+      {
+        "file": "js/standalone/monster-creation.js",
+        "function": "context",
+        "line": 26,
+        "column": 16,
+        "sampledMs": 1491.458,
+        "percent": 0.196
+      },
+      {
+        "file": "js/c-runtime/record-views.js",
+        "function": "fieldDescriptor",
+        "line": 31,
+        "column": 24,
+        "sampledMs": 488.089,
+        "percent": 0.064
+      },
+      {
+        "file": "js/nethack/address-ports.js",
+        "function": "enableAddressPort",
+        "line": 36,
+        "column": 34,
+        "sampledMs": 410.041,
+        "percent": 0.054
+      },
+      {
+        "file": "js/c-runtime/linker.js",
+        "function": "publishFunction",
+        "line": 13,
+        "column": 29,
+        "sampledMs": 315.214,
+        "percent": 0.042
+      },
+      {
+        "file": "js/standalone/artifact.js",
+        "function": "upgradeArtifact",
+        "line": 8,
+        "column": 32,
+        "sampledMs": 298.578,
+        "percent": 0.039
+      },
+      {
+        "file": "js/standalone/serialization.js",
+        "function": "callback",
+        "line": 49,
+        "column": 18,
+        "sampledMs": 282.875,
+        "percent": 0.037
+      },
+      {
+        "file": "js/nethack/address-ports.js",
+        "function": "",
+        "line": 61,
+        "column": 102,
+        "sampledMs": 244.957,
+        "percent": 0.032
+      },
+      {
+        "file": "js/standalone/hero-startup.js",
+        "function": "enableHeroStartup",
+        "line": 22,
+        "column": 34,
+        "sampledMs": 219.248,
+        "percent": 0.029
+      },
+      {
+        "file": "js/c-runtime/address-bindings.js",
+        "function": "createAddressBindings",
+        "line": 3,
+        "column": 38,
+        "sampledMs": 199.589,
+        "percent": 0.026
+      },
+      {
+        "file": "js/standalone/world-position.js",
+        "function": "enableWorldPosition",
+        "line": 13,
+        "column": 36,
+        "sampledMs": 195.208,
+        "percent": 0.026
+      },
+      {
+        "file": "js/standalone/monster-selection.js",
+        "function": "base",
+        "line": 16,
+        "column": 18,
+        "sampledMs": 152.836,
+        "percent": 0.02
+      },
+      {
+        "file": "js/nethack/bindings/options.js",
+        "function": "createOptionsEnvironment",
+        "line": 9,
+        "column": 41,
+        "sampledMs": 151.168,
+        "percent": 0.02
+      }
+    ],
+    "restore": [
+      {
+        "file": "js/nethack/bindings/sfbase.js",
+        "function": "table",
+        "line": 19,
+        "column": 19,
+        "sampledMs": 173.869,
+        "percent": 0.023
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.field",
+        "line": 100,
+        "column": 13,
+        "sampledMs": 35.998,
+        "percent": 0.005
+      },
+      {
+        "file": "js/c-runtime/types.js",
+        "function": "record",
+        "line": 19,
+        "column": 20,
+        "sampledMs": 33.335,
+        "percent": 0.004
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "array",
+        "line": 63,
+        "column": 16,
+        "sampledMs": 27.33,
+        "percent": 0.004
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "reset_glyphmap",
+        "line": 2268,
+        "column": 31,
+        "sampledMs": 23.624,
+        "percent": 0.003
+      },
+      {
+        "file": "js/c-runtime/records.js",
+        "function": "record",
+        "line": 6,
+        "column": 20,
+        "sampledMs": 17.833,
+        "percent": 0.002
+      },
+      {
+        "file": "js/nethack/bindings/display.js",
+        "function": "get",
+        "line": 37,
+        "column": 55,
+        "sampledMs": 15.668,
+        "percent": 0.002
+      },
+      {
+        "file": "js/nethack/bindings/sfbase.js",
+        "function": "get",
+        "line": 20,
+        "column": 84,
+        "sampledMs": 14.835,
+        "percent": 0.002
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "get",
+        "line": 28,
+        "column": 143,
+        "sampledMs": 12.917,
+        "percent": 0.002
+      },
+      {
+        "file": "js/c-runtime/context.js",
+        "function": "withCEnvironment",
+        "line": 8,
+        "column": 33,
+        "sampledMs": 12.542,
+        "percent": 0.002
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "show_glyph",
+        "line": 1605,
+        "column": 27,
+        "sampledMs": 12.125,
+        "percent": 0.002
+      },
+      {
+        "file": "js/c-runtime/memory.js",
+        "function": "stackSave",
+        "line": 98,
+        "column": 18,
+        "sampledMs": 10.709,
+        "percent": 0.001
+      }
+    ],
+    "new game": [
+      {
+        "file": "js/nethack/bindings/sfbase.js",
+        "function": "table",
+        "line": 19,
+        "column": 19,
+        "sampledMs": 3494.295,
+        "percent": 0.46
+      },
+      {
+        "file": "js/c-runtime/types.js",
+        "function": "record",
+        "line": 19,
+        "column": 20,
+        "sampledMs": 2680.167,
+        "percent": 0.353
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.field",
+        "line": 100,
+        "column": 13,
+        "sampledMs": 2006.571,
+        "percent": 0.264
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.field",
+        "line": 115,
+        "column": 13,
+        "sampledMs": 1651.094,
+        "percent": 0.218
+      },
+      {
+        "file": "js/c-runtime/context.js",
+        "function": "withCEnvironment",
+        "line": 8,
+        "column": 33,
+        "sampledMs": 1595.793,
+        "percent": 0.21
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "currentDataView",
+        "line": 12,
+        "column": 32,
+        "sampledMs": 1161.239,
+        "percent": 0.153
+      },
+      {
+        "file": "js/c-runtime/types.js",
+        "function": "load",
+        "line": 30,
+        "column": 18,
+        "sampledMs": 1026.453,
+        "percent": 0.135
+      },
+      {
+        "file": "js/ported/nhlua.js",
+        "function": "nhl_loadlua",
+        "line": 2155,
+        "column": 28,
+        "sampledMs": 936.886,
+        "percent": 0.123
+      },
+      {
+        "file": "js/c-runtime/heap.js",
+        "function": "free",
+        "line": 72,
+        "column": 9,
+        "sampledMs": 905.341,
+        "percent": 0.119
+      },
+      {
+        "file": "js/c-runtime/types.js",
+        "function": "canonical",
+        "line": 8,
+        "column": 23,
+        "sampledMs": 876.329,
+        "percent": 0.115
+      },
+      {
+        "file": "js/c-runtime/records.js",
+        "function": "record",
+        "line": 6,
+        "column": 20,
+        "sampledMs": 746.547,
+        "percent": 0.098
+      },
+      {
+        "file": "js/c-runtime/heap.js",
+        "function": "malloc",
+        "line": 46,
+        "column": 11,
+        "sampledMs": 725.885,
+        "percent": 0.096
+      }
+    ],
+    "turn loop": [
+      {
+        "file": "js/c-runtime/types.js",
+        "function": "record",
+        "line": 19,
+        "column": 20,
+        "sampledMs": 27973.448,
+        "percent": 3.685
+      },
+      {
+        "file": "js/c-runtime/heap.js",
+        "function": "malloc",
+        "line": 46,
+        "column": 11,
+        "sampledMs": 27563.664,
+        "percent": 3.631
+      },
+      {
+        "file": "js/nethack/bindings/sfbase.js",
+        "function": "table",
+        "line": 19,
+        "column": 19,
+        "sampledMs": 20184.669,
+        "percent": 2.659
+      },
+      {
+        "file": "js/ported/termcap.js",
+        "function": "nomux_capture_screen",
+        "line": 784,
+        "column": 37,
+        "sampledMs": 13783.98,
+        "percent": 1.816
+      },
+      {
+        "file": "js/c-runtime/heap.js",
+        "function": "free",
+        "line": 72,
+        "column": 9,
+        "sampledMs": 10142.546,
+        "percent": 1.336
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.field",
+        "line": 115,
+        "column": 13,
+        "sampledMs": 9945.88,
+        "percent": 1.31
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.field",
+        "line": 100,
+        "column": 13,
+        "sampledMs": 9836.68,
+        "percent": 1.296
+      },
+      {
+        "file": "js/c-runtime/records.js",
+        "function": "record",
+        "line": 6,
+        "column": 20,
+        "sampledMs": 8836.449,
+        "percent": 1.164
+      },
+      {
+        "file": "js/c-runtime/types.js",
+        "function": "load",
+        "line": 30,
+        "column": 18,
+        "sampledMs": 7915.521,
+        "percent": 1.043
+      },
+      {
+        "file": "js/c-runtime/types.js",
+        "function": "canonical",
+        "line": 8,
+        "column": 23,
+        "sampledMs": 7317.563,
+        "percent": 0.964
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "get",
+        "line": 37,
+        "column": 144,
+        "sampledMs": 6921.485,
+        "percent": 0.912
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "array",
+        "line": 63,
+        "column": 16,
+        "sampledMs": 6782.088,
+        "percent": 0.893
+      }
+    ]
+  },
+  "hotspotCallers": {
+    "js/c-runtime/heap.js:malloc": [
+      {
+        "file": "js/c-runtime/stdio.js",
+        "function": "",
+        "line": 131,
+        "column": 30,
+        "sampledMs": 58564.999,
+        "percent": 7.715
+      },
+      {
+        "file": "js/c-runtime/stdio.js",
+        "function": "",
+        "line": 133,
+        "column": 34,
+        "sampledMs": 17441.847,
+        "percent": 2.298
+      },
+      {
+        "file": "js/c-runtime/memory.js",
+        "function": "stackAlloc",
+        "line": 99,
+        "column": 19,
+        "sampledMs": 6262.462,
+        "percent": 0.825
+      },
+      {
+        "file": "js/c-runtime/stdio.js",
+        "function": "api.fputs",
+        "line": 164,
+        "column": 15,
+        "sampledMs": 1570.165,
+        "percent": 0.207
+      },
+      {
+        "file": "js/c-runtime/memory.js",
+        "function": "malloc",
+        "line": 86,
+        "column": 16,
+        "sampledMs": 744.837,
+        "percent": 0.098
+      },
+      {
+        "file": "js/c-runtime/stdlib.js",
+        "function": "malloc",
+        "line": 15,
+        "column": 17,
+        "sampledMs": 138.912,
+        "percent": 0.018
+      },
+      {
+        "file": "js/c-runtime/stdlib.js",
+        "function": "realloc",
+        "line": 16,
+        "column": 18,
+        "sampledMs": 94.209,
+        "percent": 0.012
+      },
+      {
+        "file": "js/c-runtime/memory.js",
+        "function": "literal",
+        "line": 88,
+        "column": 16,
+        "sampledMs": 78.958,
+        "percent": 0.01
+      },
+      {
+        "file": "js/c-runtime/linker.js",
+        "function": "allocateGlobal",
+        "line": 59,
+        "column": 28,
+        "sampledMs": 15.084,
+        "percent": 0.002
+      },
+      {
+        "file": "js/nethack/bindings/termcap.js",
+        "function": "invoke",
+        "line": 52,
+        "column": 18,
+        "sampledMs": 6.042,
+        "percent": 0.001
+      }
+    ],
+    "js/c-runtime/types.js:canonical": [
+      {
+        "file": "js/c-runtime/address-bindings.js",
+        "function": "read",
+        "line": 22,
+        "column": 14,
+        "sampledMs": 3341.664,
+        "percent": 0.44
+      },
+      {
+        "file": "js/c-runtime/record-views.js",
+        "function": "value",
+        "line": 7,
+        "column": 19,
+        "sampledMs": 1814.744,
+        "percent": 0.239
+      },
+      {
+        "file": "js/c-runtime/address-bindings.js",
+        "function": "address",
+        "line": 21,
+        "column": 17,
+        "sampledMs": 919.33,
+        "percent": 0.121
+      },
+      {
+        "file": "js/c-runtime/address-bindings.js",
+        "function": "write",
+        "line": 23,
+        "column": 15,
+        "sampledMs": 568.538,
+        "percent": 0.075
+      },
+      {
+        "file": "js/standalone/movement.js",
+        "function": "read",
+        "line": 26,
+        "column": 8,
+        "sampledMs": 321.792,
+        "percent": 0.042
+      },
+      {
+        "file": "js/c-runtime/record-views.js",
+        "function": "hasRecord",
+        "line": 6,
+        "column": 21,
+        "sampledMs": 302.5,
+        "percent": 0.04
+      },
+      {
+        "file": "js/c-runtime/address-bindings.js",
+        "function": "local.<computed>",
+        "line": 54,
+        "column": 77,
+        "sampledMs": 155.836,
+        "percent": 0.021
+      },
+      {
+        "file": "js/standalone/options.js",
+        "function": "read",
+        "line": 24,
+        "column": 8,
+        "sampledMs": 151.085,
+        "percent": 0.02
+      },
+      {
+        "file": "js/standalone/vision.js",
+        "function": "read",
+        "line": 13,
+        "column": 8,
+        "sampledMs": 115.169,
+        "percent": 0.015
+      },
+      {
+        "file": "js/standalone/dogmove.js",
+        "function": "read",
+        "line": 22,
+        "column": 8,
+        "sampledMs": 95.707,
+        "percent": 0.013
+      }
+    ],
+    "js/c-runtime/types.js:record": [
+      {
+        "file": "js/c-runtime/address-bindings.js",
+        "function": "read",
+        "line": 22,
+        "column": 14,
+        "sampledMs": 12361.8,
+        "percent": 1.628
+      },
+      {
+        "file": "js/c-runtime/address-bindings.js",
+        "function": "address",
+        "line": 21,
+        "column": 17,
+        "sampledMs": 11296.792,
+        "percent": 1.488
+      },
+      {
+        "file": "js/standalone/movement.js",
+        "function": "read",
+        "line": 26,
+        "column": 8,
+        "sampledMs": 4250.404,
+        "percent": 0.56
+      },
+      {
+        "file": "js/c-runtime/address-bindings.js",
+        "function": "write",
+        "line": 23,
+        "column": 15,
+        "sampledMs": 2498.71,
+        "percent": 0.329
+      },
+      {
+        "file": "js/c-runtime/record-views.js",
+        "function": "describe",
+        "line": 25,
+        "column": 18,
+        "sampledMs": 1038.373,
+        "percent": 0.137
+      },
+      {
+        "file": "js/standalone/pager-lookup.js",
+        "function": "nativeArg",
+        "line": 22,
+        "column": 18,
+        "sampledMs": 972.928,
+        "percent": 0.128
+      },
+      {
+        "file": "js/standalone/vision.js",
+        "function": "field",
+        "line": 11,
+        "column": 16,
+        "sampledMs": 972.839,
+        "percent": 0.128
+      },
+      {
+        "file": "js/standalone/options.js",
+        "function": "read",
+        "line": 24,
+        "column": 8,
+        "sampledMs": 858.783,
+        "percent": 0.113
+      },
+      {
+        "file": "js/standalone/dogmove.js",
+        "function": "field",
+        "line": 11,
+        "column": 14,
+        "sampledMs": 595.068,
+        "percent": 0.078
+      },
+      {
+        "file": "js/standalone/vision.js",
+        "function": "read",
+        "line": 13,
+        "column": 8,
+        "sampledMs": 552.251,
+        "percent": 0.073
+      }
+    ]
+  },
+  "hotspotGameOwners": {
+    "js/c-runtime/heap.js:malloc": [
+      {
+        "file": "js/ported/cfgfiles.js",
+        "function": "parse_conf_file",
+        "line": 1225,
+        "column": 32,
+        "sampledMs": 55098.097,
+        "percent": 7.258
+      },
+      {
+        "file": "js/ported/termcap.js",
+        "function": "xputc",
+        "line": 604,
+        "column": 22,
+        "sampledMs": 13514.842,
+        "percent": 1.78
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "show_glyph",
+        "line": 1605,
+        "column": 27,
+        "sampledMs": 4611.509,
+        "percent": 0.607
+      },
+      {
+        "file": "js/ported/pager.js",
+        "function": "checkfile",
+        "line": 770,
+        "column": 26,
+        "sampledMs": 2932.28,
+        "percent": 0.386
+      },
+      {
+        "file": "js/ported/wintty.js",
+        "function": "g_putch",
+        "line": 2721,
+        "column": 24,
+        "sampledMs": 2208.308,
+        "percent": 0.291
+      },
+      {
+        "file": "js/ported/rnd.js",
+        "function": "rng_log_write",
+        "line": 91,
+        "column": 23,
+        "sampledMs": 1574.665,
+        "percent": 0.207
+      },
+      {
+        "file": "js/ported/alloc.js",
+        "function": "alloc",
+        "line": 83,
+        "column": 22,
+        "sampledMs": 867.458,
+        "percent": 0.114
+      },
+      {
+        "file": "js/ported/wintty.js",
+        "function": "process_menu_window",
+        "line": 1116,
+        "column": 36,
+        "sampledMs": 720.289,
+        "percent": 0.095
+      },
+      {
+        "file": "js/ported/wintty.js",
+        "function": "process_text_window",
+        "line": 1544,
+        "column": 36,
+        "sampledMs": 689.87,
+        "percent": 0.091
+      },
+      {
+        "file": "js/ported/symbols.js",
+        "function": "parse_sym_line",
+        "line": 326,
+        "column": 31,
+        "sampledMs": 518.866,
+        "percent": 0.068
+      },
+      {
+        "file": "js/ported/wintty.js",
+        "function": "tty_display_file",
+        "line": 2071,
+        "column": 33,
+        "sampledMs": 365.71,
+        "percent": 0.048
+      },
+      {
+        "file": "js/ported/monmove.js",
+        "function": "m_move",
+        "line": 1679,
+        "column": 23,
+        "sampledMs": 181.455,
+        "percent": 0.024
+      }
+    ],
+    "js/c-runtime/types.js:record": [
+      {
+        "file": "js/ported/display.js",
+        "function": "show_glyph",
+        "line": 1605,
+        "column": 27,
+        "sampledMs": 5736.556,
+        "percent": 0.756
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "reset_glyphmap",
+        "line": 2268,
+        "column": 31,
+        "sampledMs": 4611.918,
+        "percent": 0.608
+      },
+      {
+        "file": "js/ported/hack.js",
+        "function": "test_move",
+        "line": 953,
+        "column": 26,
+        "sampledMs": 2461.737,
+        "percent": 0.324
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "map_glyphinfo",
+        "line": 2173,
+        "column": 30,
+        "sampledMs": 1822.984,
+        "percent": 0.24
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "newsym",
+        "line": 780,
+        "column": 23,
+        "sampledMs": 1496.052,
+        "percent": 0.197
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "flush_screen",
+        "line": 1839,
+        "column": 29,
+        "sampledMs": 889.663,
+        "percent": 0.117
+      },
+      {
+        "file": "js/ported/cmd.js",
+        "function": "cmdbind_get",
+        "line": 1414,
+        "column": 28,
+        "sampledMs": 870.425,
+        "percent": 0.115
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "get_bkglyph_and_framecolor",
+        "line": 2113,
+        "column": 43,
+        "sampledMs": 866.624,
+        "percent": 0.114
+      },
+      {
+        "file": "js/ported/vision.js",
+        "function": "does_block",
+        "line": 150,
+        "column": 27,
+        "sampledMs": 741.753,
+        "percent": 0.098
+      },
+      {
+        "file": "js/ported/options.js",
+        "function": "determine_ambiguities",
+        "line": 5327,
+        "column": 38,
+        "sampledMs": 709.698,
+        "percent": 0.093
+      },
+      {
+        "file": "js/ported/hack.js",
+        "function": "findtravelpath",
+        "line": 1223,
+        "column": 31,
+        "sampledMs": 686.335,
+        "percent": 0.09
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "reglyph_darkroom",
+        "line": 1565,
+        "column": 33,
+        "sampledMs": 655.371,
+        "percent": 0.086
+      }
+    ],
+    "js/c-runtime/types.js:canonical": [
+      {
+        "file": "js/ported/display.js",
+        "function": "reset_glyphmap",
+        "line": 2268,
+        "column": 31,
+        "sampledMs": 1087.959,
+        "percent": 0.143
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "show_glyph",
+        "line": 1605,
+        "column": 27,
+        "sampledMs": 893.159,
+        "percent": 0.118
+      },
+      {
+        "file": "js/ported/windows.js",
+        "function": "has_color",
+        "line": 1151,
+        "column": 26,
+        "sampledMs": 721.786,
+        "percent": 0.095
+      },
+      {
+        "file": "js/ported/makemon.js",
+        "function": "rndmonst_adj",
+        "line": 1620,
+        "column": 29,
+        "sampledMs": 355.706,
+        "percent": 0.047
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "map_glyphinfo",
+        "line": 2173,
+        "column": 30,
+        "sampledMs": 336.745,
+        "percent": 0.044
+      },
+      {
+        "file": "js/ported/makemon.js",
+        "function": "uncommon",
+        "line": 1554,
+        "column": 25,
+        "sampledMs": 335.838,
+        "percent": 0.044
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "newsym",
+        "line": 780,
+        "column": 23,
+        "sampledMs": 328.629,
+        "percent": 0.043
+      },
+      {
+        "file": "js/ported/cmd.js",
+        "function": "cmdbind_get",
+        "line": 1414,
+        "column": 28,
+        "sampledMs": 325.626,
+        "percent": 0.043
+      },
+      {
+        "file": "js/ported/allmain.js",
+        "function": "moveloop_core",
+        "line": 154,
+        "column": 30,
+        "sampledMs": 174.166,
+        "percent": 0.023
+      },
+      {
+        "file": "js/ported/hack.js",
+        "function": "test_move",
+        "line": 953,
+        "column": 26,
+        "sampledMs": 161.877,
+        "percent": 0.021
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "get_bkglyph_and_framecolor",
+        "line": 2113,
+        "column": 43,
+        "sampledMs": 157.04,
+        "percent": 0.021
+      },
+      {
+        "file": "js/ported/display.js",
+        "function": "flush_screen",
+        "line": 1839,
+        "column": 29,
+        "sampledMs": 144.503,
+        "percent": 0.019
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "session": "seed0360-wizard-world-tour.session.json",
+      "pid": 65245,
+      "segments": 1,
+      "keys": 832,
+      "sampledMs": 94297.375,
+      "profileDurationMs": 94298.5,
+      "phaseMs": {
+        "outside replay/unattributed": 522.251,
+        "GC (caller unavailable)": 11547.343,
+        "other replay/startup": 2782.498,
+        "program construction": 277.335,
+        "new game": 1123.586,
+        "turn loop": 78044.362
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          11547.343
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          6065.122
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          5939.543
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          4188.59
+        ],
+        [
+          "js/c-runtime/records.js",
+          "record",
+          6,
+          20,
+          2821.68
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          1873.06
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          1806.636
+        ],
+        [
+          "js/nethack/bindings/glyphs.js",
+          "",
+          37,
+          9,
+          1743.3
+        ]
+      ],
+      "profile": "CPU.20261112.112526.65245.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0030-ten-diverse-deaths.session.json",
+      "pid": 65175,
+      "segments": 10,
+      "keys": 1943,
+      "sampledMs": 89178.875,
+      "profileDurationMs": 89180.166,
+      "phaseMs": {
+        "outside replay/unattributed": 534.869,
+        "GC (caller unavailable)": 10625.045,
+        "other replay/startup": 26376.969,
+        "program construction": 1722.007,
+        "new game": 7782.787,
+        "turn loop": 42137.198
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          12035.638
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          10625.045
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          2981.59
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          2433.709
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          2367.984
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          2285.864
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          1618.343
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          1365.504
+        ]
+      ],
+      "profile": "CPU.20261112.112239.65175.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed4500-knight-coverage.session.json",
+      "pid": 65386,
+      "segments": 1,
+      "keys": 1813,
+      "sampledMs": 76530.833,
+      "profileDurationMs": 76532.125,
+      "phaseMs": {
+        "outside replay/unattributed": 599.046,
+        "GC (caller unavailable)": 9165.425,
+        "other replay/startup": 2772.543,
+        "program construction": 274.252,
+        "new game": 954.419,
+        "turn loop": 62765.148
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          9165.425
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          5727.663
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          4403.079
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          3756.041
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          1944.267
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          1794.172
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          1612.702
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          1591.726
+        ]
+      ],
+      "profile": "CPU.20261112.113023.65386.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0014-dequa-fountain-explore.session.json",
+      "pid": 65159,
+      "segments": 1,
+      "keys": 713,
+      "sampledMs": 50401.5,
+      "profileDurationMs": 50402.333,
+      "phaseMs": {
+        "outside replay/unattributed": 550.043,
+        "GC (caller unavailable)": 4177.103,
+        "other replay/startup": 2870.584,
+        "program construction": 283.041,
+        "restore": 0.291,
+        "new game": 1136.792,
+        "turn loop": 41383.646
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          4177.103
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          2552.637
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          2481.631
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          1688.129
+        ],
+        [
+          "js/c-runtime/records.js",
+          "record",
+          6,
+          20,
+          1084.711
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          37,
+          144,
+          1053.375
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "read",
+          61,
+          13,
+          955.876
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          905.006
+        ]
+      ],
+      "profile": "CPU.20261112.112130.65159.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0367-priest-quest-tour.session.json",
+      "pid": 65280,
+      "segments": 1,
+      "keys": 323,
+      "sampledMs": 39584.458,
+      "profileDurationMs": 39584.875,
+      "phaseMs": {
+        "outside replay/unattributed": 393.33,
+        "GC (caller unavailable)": 4728.84,
+        "other replay/startup": 2763.0,
+        "program construction": 282.416,
+        "new game": 1112.331,
+        "turn loop": 30304.541
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          4728.84
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          3478.742
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          2622.799
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          2175.618
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          1101.0
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          1065.38
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          901.588
+        ],
+        [
+          "js/c-runtime/types.js",
+          "canonical",
+          8,
+          23,
+          631.254
+        ]
+      ],
+      "profile": "CPU.20261112.112735.65280.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0361-archeologist-tour.session.json",
+      "pid": 65275,
+      "segments": 1,
+      "keys": 365,
+      "sampledMs": 34371.667,
+      "profileDurationMs": 34372.042,
+      "phaseMs": {
+        "outside replay/unattributed": 404.458,
+        "GC (caller unavailable)": 4189.192,
+        "other replay/startup": 2750.543,
+        "program construction": 274.502,
+        "new game": 1126.998,
+        "turn loop": 25625.974
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          4189.192
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          2429.05
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          2051.68
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          1716.21
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          1029.533
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          861.503
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          825.202
+        ],
+        [
+          "js/c-runtime/types.js",
+          "load",
+          30,
+          18,
+          513.54
+        ]
+      ],
+      "profile": "CPU.20261112.112700.65275.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0373-barbarian-quest-tour.session.json",
+      "pid": 65310,
+      "segments": 1,
+      "keys": 123,
+      "sampledMs": 28609.209,
+      "profileDurationMs": 28610.209,
+      "phaseMs": {
+        "outside replay/unattributed": 379.333,
+        "other replay/startup": 2761.797,
+        "GC (caller unavailable)": 3433.261,
+        "program construction": 278.0,
+        "new game": 1144.963,
+        "turn loop": 20611.855
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          3433.261
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          2255.54
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          1653.164
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          1455.584
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          868.64
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          798.668
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          776.5
+        ],
+        [
+          "js/c-runtime/types.js",
+          "canonical",
+          8,
+          23,
+          434.114
+        ]
+      ],
+      "profile": "CPU.20261112.112815.65310.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed2200-wizard-quaff-zap-read.session.json",
+      "pid": 65362,
+      "segments": 1,
+      "keys": 229,
+      "sampledMs": 26161.75,
+      "profileDurationMs": 26161.791,
+      "phaseMs": {
+        "outside replay/unattributed": 360.918,
+        "other replay/startup": 2720.871,
+        "GC (caller unavailable)": 1694.8,
+        "program construction": 279.292,
+        "new game": 1120.253,
+        "turn loop": 19985.616
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          6775.338
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          1746.263
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          1694.8
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          964.111
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          698.047
+        ],
+        [
+          "js/nethack/bindings/wintty.js",
+          "",
+          11,
+          51,
+          560.298
+        ],
+        [
+          "js/c-runtime/types.js",
+          "load",
+          30,
+          18,
+          361.162
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get value",
+          115,
+          324,
+          359.912
+        ]
+      ],
+      "profile": "CPU.20261112.112947.65362.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0002-healer-reflection-drummer.session.json",
+      "pid": 65115,
+      "segments": 1,
+      "keys": 594,
+      "sampledMs": 24112.334,
+      "profileDurationMs": 24112.959,
+      "phaseMs": {
+        "outside replay/unattributed": 457.835,
+        "GC (caller unavailable)": 1738.052,
+        "other replay/startup": 2765.201,
+        "program construction": 275.209,
+        "restore": 1.5,
+        "new game": 1101.537,
+        "turn loop": 17773.0
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          2051.903
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          1738.052
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          1095.668
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          726.789
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          543.704
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "read",
+          61,
+          13,
+          410.962
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          370.54
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "array",
+          63,
+          16,
+          340.419
+        ]
+      ],
+      "profile": "CPU.20261112.111930.65115.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "pid": 65122,
+      "segments": 1,
+      "keys": 301,
+      "sampledMs": 21883.0,
+      "profileDurationMs": 21883.584,
+      "phaseMs": {
+        "outside replay/unattributed": 385.875,
+        "GC (caller unavailable)": 1541.66,
+        "other replay/startup": 2921.834,
+        "program construction": 275.834,
+        "restore": 1.5,
+        "new game": 1119.46,
+        "turn loop": 15636.837
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1603.002
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          1541.66
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          1112.497
+        ],
+        [
+          "js/c-runtime/records.js",
+          "record",
+          6,
+          20,
+          519.367
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          466.908
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          389.363
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          383.828
+        ],
+        [
+          "js/c-runtime/types.js",
+          "load",
+          30,
+          18,
+          371.505
+        ]
+      ],
+      "profile": "CPU.20261112.112025.65122.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0004-feeding-pony.session.json",
+      "pid": 65118,
+      "segments": 1,
+      "keys": 408,
+      "sampledMs": 18521.0,
+      "profileDurationMs": 18521.375,
+      "phaseMs": {
+        "outside replay/unattributed": 395.044,
+        "GC (caller unavailable)": 1191.668,
+        "other replay/startup": 2778.161,
+        "program construction": 272.957,
+        "restore": 0.333,
+        "new game": 1216.669,
+        "turn loop": 12666.168
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1605.373
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          1191.668
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          868.827
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          470.134
+        ],
+        [
+          "js/c-runtime/records.js",
+          "record",
+          6,
+          20,
+          424.287
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          37,
+          144,
+          324.875
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          320.285
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          312.338
+        ]
+      ],
+      "profile": "CPU.20261112.111954.65118.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0012-monk-vault-escort.session.json",
+      "pid": 65143,
+      "segments": 1,
+      "keys": 307,
+      "sampledMs": 16200.542,
+      "profileDurationMs": 16201.292,
+      "phaseMs": {
+        "outside replay/unattributed": 376.207,
+        "GC (caller unavailable)": 1168.287,
+        "other replay/startup": 2990.333,
+        "program construction": 277.418,
+        "restore": 0.5,
+        "new game": 1128.96,
+        "turn loop": 10258.837
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1629.163
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          1168.287
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          686.252
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          489.792
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          378.714
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          377.921
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          313.627
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          266.961
+        ]
+      ],
+      "profile": "CPU.20261112.112055.65143.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed5002-wizard-coverage-pair.session.json",
+      "pid": 65414,
+      "segments": 2,
+      "keys": 408,
+      "sampledMs": 14263.084,
+      "profileDurationMs": 14264.5,
+      "phaseMs": {
+        "outside replay/unattributed": 391.793,
+        "GC (caller unavailable)": 1035.964,
+        "other replay/startup": 5412.746,
+        "program construction": 464.456,
+        "new game": 1856.955,
+        "turn loop": 5101.17
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          2439.955
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          1035.964
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          519.955
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          427.833
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          399.547
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          354.087
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          222.587
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          221.008
+        ]
+      ],
+      "profile": "CPU.20261112.113140.65414.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed5006-tourist-stress-disaster.session.json",
+      "pid": 65415,
+      "segments": 2,
+      "keys": 247,
+      "sampledMs": 13801.708,
+      "profileDurationMs": 13802.25,
+      "phaseMs": {
+        "outside replay/unattributed": 367.834,
+        "other replay/startup": 5394.125,
+        "GC (caller unavailable)": 1108.003,
+        "program construction": 461.708,
+        "new game": 2055.414,
+        "turn loop": 4414.624
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          2295.164
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          1108.003
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          538.458
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          443.405
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          396.796
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          316.295
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          249.955
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          217.786
+        ]
+      ],
+      "profile": "CPU.20261112.113154.65415.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0116-wizard-wear-shop.session.json",
+      "pid": 65243,
+      "segments": 1,
+      "keys": 126,
+      "sampledMs": 12450.833,
+      "profileDurationMs": 12451.375,
+      "phaseMs": {
+        "outside replay/unattributed": 358.667,
+        "GC (caller unavailable)": 1008.38,
+        "other replay/startup": 2799.542,
+        "program construction": 274.75,
+        "new game": 1171.875,
+        "turn loop": 6837.619
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1580.927
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          1008.38
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          557.132
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          388.588
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          328.242
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          228.537
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          217.495
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          195.752
+        ]
+      ],
+      "profile": "CPU.20261112.112508.65243.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0383-wizard-hallucinate.session.json",
+      "pid": 65335,
+      "segments": 1,
+      "keys": 218,
+      "sampledMs": 12212.75,
+      "profileDurationMs": 12213.959,
+      "phaseMs": {
+        "outside replay/unattributed": 376.291,
+        "GC (caller unavailable)": 887.477,
+        "other replay/startup": 2763.46,
+        "program construction": 273.876,
+        "new game": 1159.83,
+        "turn loop": 6751.816
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1391.917
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          887.477
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          504.666
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          356.965
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          276.667
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          272.004
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          244.168
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          239.911
+        ]
+      ],
+      "profile": "CPU.20261112.112843.65335.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0399-wizard-hallu-actions.session.json",
+      "pid": 65351,
+      "segments": 1,
+      "keys": 531,
+      "sampledMs": 11856.833,
+      "profileDurationMs": 11857.042,
+      "phaseMs": {
+        "outside replay/unattributed": 414.46,
+        "other replay/startup": 2758.631,
+        "GC (caller unavailable)": 931.791,
+        "program construction": 277.292,
+        "new game": 1224.082,
+        "turn loop": 6250.577
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1225.34
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          931.791
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          504.092
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          310.918
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          306.003
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "read",
+          61,
+          13,
+          273.454
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          37,
+          144,
+          239.128
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          236.627
+        ]
+      ],
+      "profile": "CPU.20261112.112901.65351.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0006-wizard-water-demon.session.json",
+      "pid": 65119,
+      "segments": 1,
+      "keys": 122,
+      "sampledMs": 11817.292,
+      "profileDurationMs": 11818.333,
+      "phaseMs": {
+        "outside replay/unattributed": 375.792,
+        "GC (caller unavailable)": 781.279,
+        "other replay/startup": 3099.914,
+        "program construction": 271.875,
+        "restore": 1.5,
+        "new game": 1096.132,
+        "turn loop": 6190.8
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1647.537
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          781.279
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          566.465
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          311.587
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          307.623
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          266.123
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          203.083
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          178.585
+        ]
+      ],
+      "profile": "CPU.20261112.112013.65119.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0013-friday13-save-then-fullmoon-restore.session.json",
+      "pid": 65148,
+      "segments": 2,
+      "keys": 97,
+      "sampledMs": 11614.042,
+      "profileDurationMs": 11614.667,
+      "phaseMs": {
+        "outside replay/unattributed": 354.499,
+        "other replay/startup": 5409.747,
+        "GC (caller unavailable)": 828.083,
+        "program construction": 458.541,
+        "new game": 1436.503,
+        "turn loop": 2353.379,
+        "restore": 773.29
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          2276.008
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          828.083
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          371.376
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          337.659
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          320.624
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          191.134
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          183.792
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          181.708
+        ]
+      ],
+      "profile": "CPU.20261112.112111.65148.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0108-wizard-extcmd-wishlist.session.json",
+      "pid": 65242,
+      "segments": 1,
+      "keys": 302,
+      "sampledMs": 10275.958,
+      "profileDurationMs": 10277.25,
+      "phaseMs": {
+        "outside replay/unattributed": 364.54,
+        "GC (caller unavailable)": 802.166,
+        "other replay/startup": 1572.835,
+        "program construction": 284.248,
+        "new game": 1156.003,
+        "turn loop": 6096.166
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          802.166
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          553.748
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          401.835
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          360.04
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          274.038
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          260.836
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          240.705
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          189.542
+        ]
+      ],
+      "profile": "CPU.20261112.112458.65242.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed2600-wizard-custom-binds.session.json",
+      "pid": 65374,
+      "segments": 1,
+      "keys": 37,
+      "sampledMs": 9430.333,
+      "profileDurationMs": 9431.25,
+      "phaseMs": {
+        "outside replay/unattributed": 362.959,
+        "GC (caller unavailable)": 691.836,
+        "other replay/startup": 2836.834,
+        "program construction": 277.127,
+        "new game": 1150.5,
+        "turn loop": 4111.077
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1476.627
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          691.836
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          421.579
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          303.455
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          271.124
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          224.706
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          215.289
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          190.75
+        ]
+      ],
+      "profile": "CPU.20261112.113014.65374.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0009-swimmer-mforce.session.json",
+      "pid": 65142,
+      "segments": 1,
+      "keys": 72,
+      "sampledMs": 7734.5,
+      "profileDurationMs": 7735.417,
+      "phaseMs": {
+        "outside replay/unattributed": 350.669,
+        "GC (caller unavailable)": 631.415,
+        "other replay/startup": 4027.168,
+        "program construction": 276.292,
+        "restore": 1.5,
+        "new game": 1176.292,
+        "turn loop": 1271.164
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1143.705
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          631.415
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          257.249
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          238.665
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          184.252
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          171.793
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          165.588
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          136.038
+        ]
+      ],
+      "profile": "CPU.20261112.112047.65142.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0106-priest-extcmd-sweep.session.json",
+      "pid": 65240,
+      "segments": 1,
+      "keys": 266,
+      "sampledMs": 7070.292,
+      "profileDurationMs": 7070.834,
+      "phaseMs": {
+        "outside replay/unattributed": 364.0,
+        "other replay/startup": 1558.081,
+        "GC (caller unavailable)": 433.628,
+        "program construction": 278.832,
+        "new game": 1097.918,
+        "turn loop": 3337.833
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          433.628
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          309.586
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          275.086
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          224.96
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          215.374
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          184.833
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          37,
+          144,
+          138.962
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "read",
+          61,
+          13,
+          136.368
+        ]
+      ],
+      "profile": "CPU.20261112.112446.65240.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0013-rogue-friday13-combat.session.json",
+      "pid": 65156,
+      "segments": 1,
+      "keys": 58,
+      "sampledMs": 6739.0,
+      "profileDurationMs": 6740.334,
+      "phaseMs": {
+        "outside replay/unattributed": 371.082,
+        "other replay/startup": 2722.459,
+        "GC (caller unavailable)": 397.335,
+        "program construction": 282.334,
+        "new game": 1453.371,
+        "turn loop": 1512.419
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1144.251
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          397.335
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          213.13
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          191.045
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          183.166
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          147.494
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          110.541
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          102.294
+        ]
+      ],
+      "profile": "CPU.20261112.112123.65156.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0015-valk-level2-pit-dog-wait.session.json",
+      "pid": 65170,
+      "segments": 1,
+      "keys": 43,
+      "sampledMs": 6736.959,
+      "profileDurationMs": 6738.417,
+      "phaseMs": {
+        "outside replay/unattributed": 353.5,
+        "GC (caller unavailable)": 474.701,
+        "other replay/startup": 2730.753,
+        "program construction": 273.375,
+        "new game": 1189.502,
+        "turn loop": 1715.128
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1161.169
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          474.701
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          218.25
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          201.252
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          175.751
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          170.122
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          110.495
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          110.124
+        ]
+      ],
+      "profile": "CPU.20261112.112220.65170.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0060-orc-rogue-kick-search.session.json",
+      "pid": 65220,
+      "segments": 1,
+      "keys": 40,
+      "sampledMs": 6268.166,
+      "profileDurationMs": 6269.083,
+      "phaseMs": {
+        "outside replay/unattributed": 493.666,
+        "other replay/startup": 2700.795,
+        "GC (caller unavailable)": 363.459,
+        "program construction": 282.041,
+        "new game": 1119.122,
+        "turn loop": 1309.083
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1122.791
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          363.459
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          189.915
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          186.083
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          182.207
+        ],
+        [
+          "",
+          "read",
+          0,
+          0,
+          159.997
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          114.544
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          94.292
+        ]
+      ],
+      "profile": "CPU.20261112.112409.65220.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0017-samurai-altar-pray.session.json",
+      "pid": 65172,
+      "segments": 1,
+      "keys": 66,
+      "sampledMs": 6196.209,
+      "profileDurationMs": 6197.5,
+      "phaseMs": {
+        "outside replay/unattributed": 349.458,
+        "GC (caller unavailable)": 351.206,
+        "other replay/startup": 2728.379,
+        "program construction": 279.457,
+        "restore": 1.458,
+        "new game": 1145.083,
+        "turn loop": 1341.168
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1110.209
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          351.206
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          181.626
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          171.251
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          156.292
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          130.295
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          110.625
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          95.083
+        ]
+      ],
+      "profile": "CPU.20261112.112233.65172.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed1150-caveman-explore-move.session.json",
+      "pid": 65359,
+      "segments": 1,
+      "keys": 50,
+      "sampledMs": 6009.542,
+      "profileDurationMs": 6010.125,
+      "phaseMs": {
+        "outside replay/unattributed": 346.92,
+        "other replay/startup": 2770.123,
+        "GC (caller unavailable)": 352.33,
+        "program construction": 278.626,
+        "new game": 1142.414,
+        "turn loop": 1119.129
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1159.246
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          352.33
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          175.206
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          144.214
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          139.413
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          97.544
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          90.96
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          90.377
+        ]
+      ],
+      "profile": "CPU.20261112.112930.65359.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0900-tourist-explore-actions.session.json",
+      "pid": 65356,
+      "segments": 1,
+      "keys": 83,
+      "sampledMs": 5987.958,
+      "profileDurationMs": 5989.375,
+      "phaseMs": {
+        "outside replay/unattributed": 348.374,
+        "GC (caller unavailable)": 354.211,
+        "other replay/startup": 2718.71,
+        "program construction": 277.375,
+        "new game": 1129.873,
+        "turn loop": 1159.415
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1137.622
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          354.211
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          182.499
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          181.956
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          177.463
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          103.083
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          97.792
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          91.082
+        ]
+      ],
+      "profile": "CPU.20261112.112924.65356.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0700-samurai-explore-descend.session.json",
+      "pid": 65355,
+      "segments": 1,
+      "keys": 50,
+      "sampledMs": 5896.0,
+      "profileDurationMs": 5897.042,
+      "phaseMs": {
+        "outside replay/unattributed": 345.415,
+        "GC (caller unavailable)": 367.501,
+        "other replay/startup": 2809.748,
+        "program construction": 279.001,
+        "new game": 1145.293,
+        "turn loop": 949.042
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1106.707
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          367.501
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          195.207
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          170.707
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          154.419
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          107.625
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          90.417
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          89.331
+        ]
+      ],
+      "profile": "CPU.20261112.112918.65355.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0016-healer-newmoon-eat-zap.session.json",
+      "pid": 65171,
+      "segments": 1,
+      "keys": 35,
+      "sampledMs": 5809.417,
+      "profileDurationMs": 5809.625,
+      "phaseMs": {
+        "outside replay/unattributed": 355.751,
+        "GC (caller unavailable)": 347.92,
+        "other replay/startup": 2724.709,
+        "program construction": 275.581,
+        "new game": 1131.376,
+        "turn loop": 974.08
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1144.673
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          347.92
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          205.543
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          179.917
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          136.878
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          96.798
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          89.916
+        ],
+        [
+          "js/nethack/bindings/glyphs.js",
+          "view",
+          44,
+          15,
+          86.92
+        ]
+      ],
+      "profile": "CPU.20261112.112227.65171.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0102-ranger-name-cancel.session.json",
+      "pid": 65225,
+      "segments": 1,
+      "keys": 24,
+      "sampledMs": 5733.0,
+      "profileDurationMs": 5733.25,
+      "phaseMs": {
+        "outside replay/unattributed": 351.791,
+        "other replay/startup": 2743.671,
+        "GC (caller unavailable)": 350.865,
+        "program construction": 278.334,
+        "new game": 1362.545,
+        "turn loop": 645.794
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1137.754
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          350.865
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          193.54
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          180.168
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          170.085
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          90.247
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          87.915
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          87.167
+        ]
+      ],
+      "profile": "CPU.20261112.112426.65225.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed1500-rogue-explore-move.session.json",
+      "pid": 65360,
+      "segments": 1,
+      "keys": 39,
+      "sampledMs": 5683.875,
+      "profileDurationMs": 5684.541,
+      "phaseMs": {
+        "outside replay/unattributed": 351.082,
+        "GC (caller unavailable)": 342.628,
+        "other replay/startup": 2728.211,
+        "program construction": 280.459,
+        "new game": 1153.122,
+        "turn loop": 828.373
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1160.998
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          342.628
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          180.999
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          174.037
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          149.166
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          103.287
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          100.458
+        ],
+        [
+          "js/nethack/bindings/glyphs.js",
+          "view",
+          44,
+          15,
+          73.836
+        ]
+      ],
+      "profile": "CPU.20261112.112937.65360.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0077-rogue-chargen.session.json",
+      "pid": 65221,
+      "segments": 1,
+      "keys": 32,
+      "sampledMs": 5528.584,
+      "profileDurationMs": 5529.709,
+      "phaseMs": {
+        "outside replay/unattributed": 344.043,
+        "GC (caller unavailable)": 329.921,
+        "other replay/startup": 2882.951,
+        "program construction": 281.667,
+        "restore": 1.5,
+        "new game": 1136.586,
+        "turn loop": 551.916
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1146.956
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          329.921
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          174.249
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          160.334
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          131.875
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          87.167
+        ],
+        [
+          "js/nethack/bindings/glyphs.js",
+          "view",
+          44,
+          15,
+          72.332
+        ],
+        [
+          "js/ported/glyphs.js",
+          "free_glyphid_cache",
+          300,
+          35,
+          69.541
+        ]
+      ],
+      "profile": "CPU.20261112.112415.65221.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0398-wizard-wandpoly-pile.session.json",
+      "pid": 65348,
+      "segments": 1,
+      "keys": 86,
+      "sampledMs": 5441.542,
+      "profileDurationMs": 5441.625,
+      "phaseMs": {
+        "outside replay/unattributed": 347.124,
+        "GC (caller unavailable)": 344.951,
+        "other replay/startup": 2701.257,
+        "program construction": 280.211,
+        "new game": 974.289,
+        "turn loop": 793.71
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1091.459
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          344.951
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          181.293
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          174.629
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          123.669
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          116.666
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          101.377
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "get HEAPU8",
+          22,
+          15,
+          78.542
+        ]
+      ],
+      "profile": "CPU.20261112.112856.65348.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed8000-tourist-starter.session.json",
+      "pid": 65416,
+      "segments": 1,
+      "keys": 22,
+      "sampledMs": 5394.584,
+      "profileDurationMs": 5395.709,
+      "phaseMs": {
+        "outside replay/unattributed": 346.711,
+        "GC (caller unavailable)": 331.801,
+        "other replay/startup": 2719.578,
+        "program construction": 285.207,
+        "new game": 1008.996,
+        "turn loop": 702.291
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1134.793
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          331.801
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          189.707
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          171.882
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          123.292
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          97.208
+        ],
+        [
+          "js/nethack/bindings/glyphs.js",
+          "view",
+          44,
+          15,
+          90.418
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          84.418
+        ]
+      ],
+      "profile": "CPU.20261112.113208.65416.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0101-ranger-quiver-throw-travel-engrave.session.json",
+      "pid": 65224,
+      "segments": 1,
+      "keys": 26,
+      "sampledMs": 5369.25,
+      "profileDurationMs": 5369.459,
+      "phaseMs": {
+        "outside replay/unattributed": 348.959,
+        "GC (caller unavailable)": 338.951,
+        "other replay/startup": 2729.253,
+        "program construction": 276.292,
+        "new game": 1125.92,
+        "turn loop": 549.875
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1150.836
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          338.951
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          193.543
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          168.627
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          131.876
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          89.129
+        ],
+        [
+          "js/nethack/bindings/glyphs.js",
+          "view",
+          44,
+          15,
+          75.917
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          74.375
+        ]
+      ],
+      "profile": "CPU.20261112.112421.65224.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0501-priest-cast-read-turn.session.json",
+      "pid": 65354,
+      "segments": 1,
+      "keys": 27,
+      "sampledMs": 5360.5,
+      "profileDurationMs": 5361.0,
+      "phaseMs": {
+        "outside replay/unattributed": 366.167,
+        "other replay/startup": 2721.457,
+        "GC (caller unavailable)": 349.668,
+        "program construction": 273.541,
+        "new game": 1124.957,
+        "turn loop": 524.71
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1162.291
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          349.668
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          189.291
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          175.875
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          118.875
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          98.416
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          84.083
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          79.791
+        ]
+      ],
+      "profile": "CPU.20261112.112913.65354.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed1800-tourist-eat-throw.session.json",
+      "pid": 65361,
+      "segments": 1,
+      "keys": 25,
+      "sampledMs": 5082.584,
+      "profileDurationMs": 5084.042,
+      "phaseMs": {
+        "outside replay/unattributed": 345.585,
+        "GC (caller unavailable)": 326.456,
+        "other replay/startup": 2733.003,
+        "program construction": 276.165,
+        "new game": 1111.667,
+        "turn loop": 289.708
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1138.708
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          326.456
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          189.418
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          172.958
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          108.288
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          100.71
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          82.044
+        ],
+        [
+          "js/nethack/bindings/glyphs.js",
+          "view",
+          44,
+          15,
+          78.418
+        ]
+      ],
+      "profile": "CPU.20261112.112942.65361.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0105-valk-chat-lamp-ration.session.json",
+      "pid": 65239,
+      "segments": 1,
+      "keys": 29,
+      "sampledMs": 5067.75,
+      "profileDurationMs": 5068.292,
+      "phaseMs": {
+        "outside replay/unattributed": 346.75,
+        "GC (caller unavailable)": 308.168,
+        "other replay/startup": 2732.167,
+        "program construction": 275.001,
+        "new game": 1136.707,
+        "turn loop": 268.957
+      },
+      "topSelf": [
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          1108.617
+        ],
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          308.168
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          169.167
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          167.167
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          98.67
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          96.162
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          90.464
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "get HEAPU8",
+          22,
+          15,
+          71.329
+        ]
+      ],
+      "profile": "CPU.20261112.112441.65239.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0107-samurai-twoweapon-enhance.session.json",
+      "pid": 65241,
+      "segments": 1,
+      "keys": 97,
+      "sampledMs": 4856.209,
+      "profileDurationMs": 4856.25,
+      "phaseMs": {
+        "outside replay/unattributed": 348.043,
+        "GC (caller unavailable)": 332.998,
+        "other replay/startup": 1549.795,
+        "program construction": 280.208,
+        "new game": 1121.583,
+        "turn loop": 1223.582
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          332.998
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          260.622
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          180.252
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          168.877
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          133.916
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          103.003
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          101.415
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784,
+          37,
+          98.916
+        ]
+      ],
+      "profile": "CPU.20261112.112453.65241.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0200-monk-north-search.session.json",
+      "pid": 65244,
+      "segments": 1,
+      "keys": 39,
+      "sampledMs": 4721.583,
+      "profileDurationMs": 4722.417,
+      "phaseMs": {
+        "outside replay/unattributed": 353.708,
+        "other replay/startup": 1568.169,
+        "GC (caller unavailable)": 323.584,
+        "program construction": 274.459,
+        "new game": 1181.164,
+        "turn loop": 1020.499
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          323.584
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          268.46
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          201.954
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          188.001
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          158.751
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          98.959
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          83.414
+        ],
+        [
+          "js/nethack/bindings/glyphs.js",
+          "view",
+          44,
+          15,
+          76.417
+        ]
+      ],
+      "profile": "CPU.20261112.112521.65244.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0104-knight-ride-combat.session.json",
+      "pid": 65238,
+      "segments": 1,
+      "keys": 42,
+      "sampledMs": 4670.041,
+      "profileDurationMs": 4671.041,
+      "phaseMs": {
+        "outside replay/unattributed": 347.249,
+        "GC (caller unavailable)": 321.009,
+        "other replay/startup": 1559.502,
+        "program construction": 278.958,
+        "new game": 1162.203,
+        "turn loop": 1001.12
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          321.009
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          270.376
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          172.0
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          167.415
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          133.291
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          100,
+          13,
+          101.337
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          100.915
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.field",
+          115,
+          13,
+          78.333
+        ]
+      ],
+      "profile": "CPU.20261112.112436.65238.0.001.cpuprofile.gz"
+    },
+    {
+      "session": "seed0103-knight-ride-pony.session.json",
+      "pid": 65228,
+      "segments": 1,
+      "keys": 59,
+      "sampledMs": 4178.916,
+      "profileDurationMs": 4179.708,
+      "phaseMs": {
+        "outside replay/unattributed": 347.789,
+        "GC (caller unavailable)": 287.465,
+        "other replay/startup": 1577.458,
+        "program construction": 278.291,
+        "new game": 1147.204,
+        "turn loop": 540.709
+      },
+      "topSelf": [
+        [
+          "",
+          "(garbage collector)",
+          0,
+          0,
+          287.465
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "malloc",
+          46,
+          11,
+          243.041
+        ],
+        [
+          "node:internal/modules/esm/utils",
+          "compileSourceTextModule",
+          344,
+          33,
+          171.913
+        ],
+        [
+          "js/c-runtime/heap.js",
+          "free",
+          72,
+          9,
+          125.789
+        ],
+        [
+          "js/c-runtime/types.js",
+          "record",
+          19,
+          20,
+          95.204
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8,
+          33,
+          82.879
+        ],
+        [
+          "js/ported/glyphs.js",
+          "free_glyphid_cache",
+          300,
+          35,
+          78.917
+        ],
+        [
+          "js/nethack/bindings/sfbase.js",
+          "table",
+          19,
+          19,
+          69.708
+        ]
+      ],
+      "profile": "CPU.20261112.112432.65228.0.001.cpuprofile.gz"
+    }
+  ],
+  "profileSha256": {
+    "CPU.20261112.111930.65115.0.001.cpuprofile.gz": "aec5c8c793fcdb43ef463f8ee9248b802c49807f3e3f74089376ee38f8f6fac2",
+    "CPU.20261112.111954.65118.0.001.cpuprofile.gz": "8c8d2d90de09877caf62227dd418112bb603ee55c7cc4a795ab0588acb20f869",
+    "CPU.20261112.112013.65119.0.001.cpuprofile.gz": "71662c6e04155205dab2d780b1a4effafe8a728d673e5f09e31b7bbd553ad718",
+    "CPU.20261112.112025.65122.0.001.cpuprofile.gz": "b20e751b71fe4c4c68485908c477d70a9642f3876dae54e263c77215a303d670",
+    "CPU.20261112.112047.65142.0.001.cpuprofile.gz": "5cea5ba4e09ee2ac05fb7417e026bda733687d6b323e3bc190eda6e8669351a8",
+    "CPU.20261112.112055.65143.0.001.cpuprofile.gz": "ece10a1a4b1fece9a3c68e35fe9a921526dc9d9d1dd817416cd73db10b7e0508",
+    "CPU.20261112.112111.65148.0.001.cpuprofile.gz": "8406b76a0dab98c2ef2673dc29b426ae730bfb8a0b1deecee2f50eef6e369cfa",
+    "CPU.20261112.112123.65156.0.001.cpuprofile.gz": "733eea5b3a79c5c596ea24424ea55ed22e294fcf5a2d7ccc4167d28b90611ffc",
+    "CPU.20261112.112130.65159.0.001.cpuprofile.gz": "30636ee1da8155bdd6cbbf1247e0f9e545c6c79699fa5e715abefec4afe0c20d",
+    "CPU.20261112.112220.65170.0.001.cpuprofile.gz": "66f6296c947bfa38aeaeccb673a0c349271df3b3310c31a4137cfd5bf63d281b",
+    "CPU.20261112.112227.65171.0.001.cpuprofile.gz": "c5034bdd3d83a247bdaff97a3ead11b69ed0bb3fe1d927be421c57a25b1c1366",
+    "CPU.20261112.112233.65172.0.001.cpuprofile.gz": "f835d3de933eaeb782644028cda03cdbfd99df2b0649121e505f46b098fe993f",
+    "CPU.20261112.112239.65175.0.001.cpuprofile.gz": "9f2d9ae8f1626031f08294af383f64c5ec5450876695b2c46ae0c96af290b2e0",
+    "CPU.20261112.112409.65220.0.001.cpuprofile.gz": "d05a5fdc887c62bd179a2ee0ba1efbbe37a559bd6a59aa96cd83d38c5f633853",
+    "CPU.20261112.112415.65221.0.001.cpuprofile.gz": "f98dc84a0859a555f914d0b76eddc7552281693554ef201cd4a0bc29f6130d08",
+    "CPU.20261112.112421.65224.0.001.cpuprofile.gz": "36811aa9653f0219bbf5db21da6ab95424ac265b05c59f38128b5cd4ada6a78e",
+    "CPU.20261112.112426.65225.0.001.cpuprofile.gz": "6a587055eaf6a1e5d2e2b02751ee1da6b6852f93f01d3d87f0683208700eb011",
+    "CPU.20261112.112432.65228.0.001.cpuprofile.gz": "525657895f9e5f0030824076e1b06a671ce0a9b7286881a7582a2c8bd3854abd",
+    "CPU.20261112.112436.65238.0.001.cpuprofile.gz": "9d123dd105797f351ab59c9b5e4cfde44f8844b48f68ff0fd4bbc5e07e86df29",
+    "CPU.20261112.112441.65239.0.001.cpuprofile.gz": "9b1887b5301b8671fb045aa7b32063f31760a989da1fcdb76415ef25772d4c9e",
+    "CPU.20261112.112446.65240.0.001.cpuprofile.gz": "ef9c90a80f0a7178fa2efe7b0133b6198174a36d602efa5d7b7f5af68a354502",
+    "CPU.20261112.112453.65241.0.001.cpuprofile.gz": "d6aeb893f41ba34e9775f5799fbbc890477f7ff84fac28b5bc09d2f88b0aa5ba",
+    "CPU.20261112.112458.65242.0.001.cpuprofile.gz": "cf9ababbcd11cc21a07bbf1d66720762dc35675142ebecd7ec46a43ad377378a",
+    "CPU.20261112.112508.65243.0.001.cpuprofile.gz": "fb4e97b58240e2c11c80c9834b60d69b65280f0fb0503a2376f3711a82e5bc92",
+    "CPU.20261112.112521.65244.0.001.cpuprofile.gz": "7c49813e6f6e92eb6766f32c9e988f1b8a70992612030a1880c83b3def9d5c54",
+    "CPU.20261112.112526.65245.0.001.cpuprofile.gz": "369b51224701bd086f1532250d7fa7beade7d95bc2ae6aa633d6252f65c54177",
+    "CPU.20261112.112700.65275.0.001.cpuprofile.gz": "ba072a49324688e5b78a179cfbb8bc9a131a0fcb5d73ef5267f70c46d913604a",
+    "CPU.20261112.112735.65280.0.001.cpuprofile.gz": "4d0c48fb70256e25e790322724065438433a38479473cbf3a9de48ca3e98b48c",
+    "CPU.20261112.112815.65310.0.001.cpuprofile.gz": "bc07a1f4f4c81351f86d139b3b8baeb147206216d8dde5ea204072b5f430c4c8",
+    "CPU.20261112.112843.65335.0.001.cpuprofile.gz": "50970ad616ee4464f2be5424cb2bf9c8ecfd36cc61ec03adcbcc6ed9630ba842",
+    "CPU.20261112.112856.65348.0.001.cpuprofile.gz": "1fae2a88222164577bde30c102079f8e7f8539775964efebb327cf8dc13e70d2",
+    "CPU.20261112.112901.65351.0.001.cpuprofile.gz": "33456604056a038c6733e1e76fc587d59ee854cc0ae89e5e5283604e4c69256f",
+    "CPU.20261112.112913.65354.0.001.cpuprofile.gz": "8968817e89fb12d63fcc3e50c528de07ed3a789710f8c1ddffa2d7b2acaf48d6",
+    "CPU.20261112.112918.65355.0.001.cpuprofile.gz": "25750377ba1c90f91c595c046acb7d89beb3ec133a320226104f5bdf51002196",
+    "CPU.20261112.112924.65356.0.001.cpuprofile.gz": "09aa50edf64e35cac9b0576eb7649e4a0d68e5c785e16ef387e6d02c83e42d0a",
+    "CPU.20261112.112930.65359.0.001.cpuprofile.gz": "808f3c5cc742dbd91920ae1060595621e92e9a7e4bdba86d5065e0bb32c0ef84",
+    "CPU.20261112.112937.65360.0.001.cpuprofile.gz": "7c8734f2bce08339e384d27bb0429d6e03779ad592b415c19c810728a82a9923",
+    "CPU.20261112.112942.65361.0.001.cpuprofile.gz": "8961654b5b67a5a3fea74176ba63cf9f6dc0a63457e2328eec70a60722e77027",
+    "CPU.20261112.112947.65362.0.001.cpuprofile.gz": "694a61392588acb2cc0939d3792a09c2c13d25a337d5464c0e5c3faaa9a99dd1",
+    "CPU.20261112.113014.65374.0.001.cpuprofile.gz": "e7b20806841d2f944f425d843157314b538d0e357f5d0d43735cdc432b6554e2",
+    "CPU.20261112.113023.65386.0.001.cpuprofile.gz": "71748cecf9f3638958ac1e00ba9f79e36e49fa1f8461263c28dc796184d8666c",
+    "CPU.20261112.113140.65414.0.001.cpuprofile.gz": "593d807eea805504c92e4079083443a0a36d0c06abc06d2192b13c175d23ef70",
+    "CPU.20261112.113154.65415.0.001.cpuprofile.gz": "681c48735e176aa74d5c4eaff1a749cb9cddadcdb5b68a462e722b58aa8cd8ec",
+    "CPU.20261112.113208.65416.0.001.cpuprofile.gz": "67338944cbb54efe477b41672481a4c80c505d5afe485d7f7d54bf13883f48cd"
+  },
+  "officialSpeedFit": {
+    "startup_ms": 5245.9,
+    "per_move_ms": 46.2304,
+    "r2": 0.765,
+    "label": "5246+46.23/turn",
+    "sessions": 44
+  },
+  "profiledSessionsAboveDefault45Seconds": [
+    "seed0014-dequa-fountain-explore.session.json",
+    "seed0030-ten-diverse-deaths.session.json",
+    "seed0360-wizard-world-tour.session.json",
+    "seed4500-knight-coverage.session.json"
+  ],
+  "officialPassed": 44,
+  "officialTimings": [
+    {
+      "session": "seed0002-healer-reflection-drummer.session.json",
+      "passed": true,
+      "ms": 23972.71,
+      "moves": 594
+    },
+    {
+      "session": "seed0004-feeding-pony.session.json",
+      "passed": true,
+      "ms": 18420.77,
+      "moves": 408
+    },
+    {
+      "session": "seed0006-wizard-water-demon.session.json",
+      "passed": true,
+      "ms": 11746.17,
+      "moves": 122
+    },
+    {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "passed": true,
+      "ms": 21795.35,
+      "moves": 301
+    },
+    {
+      "session": "seed0009-swimmer-mforce.session.json",
+      "passed": true,
+      "ms": 7689.21,
+      "moves": 72
+    },
+    {
+      "session": "seed0012-monk-vault-escort.session.json",
+      "passed": true,
+      "ms": 16116.17,
+      "moves": 307
+    },
+    {
+      "session": "seed0013-friday13-save-then-fullmoon-restore.session.json",
+      "passed": true,
+      "ms": 11567.03,
+      "moves": 97
+    },
+    {
+      "session": "seed0013-rogue-friday13-combat.session.json",
+      "passed": true,
+      "ms": 6685.87,
+      "moves": 58
+    },
+    {
+      "session": "seed0014-dequa-fountain-explore.session.json",
+      "passed": true,
+      "ms": 50103.54,
+      "moves": 713
+    },
+    {
+      "session": "seed0015-valk-level2-pit-dog-wait.session.json",
+      "passed": true,
+      "ms": 6692.97,
+      "moves": 43
+    },
+    {
+      "session": "seed0016-healer-newmoon-eat-zap.session.json",
+      "passed": true,
+      "ms": 5754.22,
+      "moves": 35
+    },
+    {
+      "session": "seed0017-samurai-altar-pray.session.json",
+      "passed": true,
+      "ms": 6152.24,
+      "moves": 66
+    },
+    {
+      "session": "seed0030-ten-diverse-deaths.session.json",
+      "passed": true,
+      "ms": 88844.83,
+      "moves": 1943
+    },
+    {
+      "session": "seed0060-orc-rogue-kick-search.session.json",
+      "passed": true,
+      "ms": 6225.31,
+      "moves": 40
+    },
+    {
+      "session": "seed0077-rogue-chargen.session.json",
+      "passed": true,
+      "ms": 5484.84,
+      "moves": 32
+    },
+    {
+      "session": "seed0101-ranger-quiver-throw-travel-engrave.session.json",
+      "passed": true,
+      "ms": 5331.19,
+      "moves": 26
+    },
+    {
+      "session": "seed0102-ranger-name-cancel.session.json",
+      "passed": true,
+      "ms": 5690.66,
+      "moves": 24
+    },
+    {
+      "session": "seed0103-knight-ride-pony.session.json",
+      "passed": true,
+      "ms": 4139.91,
+      "moves": 59
+    },
+    {
+      "session": "seed0104-knight-ride-combat.session.json",
+      "passed": true,
+      "ms": 4630.46,
+      "moves": 42
+    },
+    {
+      "session": "seed0105-valk-chat-lamp-ration.session.json",
+      "passed": true,
+      "ms": 5027.46,
+      "moves": 29
+    },
+    {
+      "session": "seed0106-priest-extcmd-sweep.session.json",
+      "passed": true,
+      "ms": 7014.68,
+      "moves": 266
+    },
+    {
+      "session": "seed0107-samurai-twoweapon-enhance.session.json",
+      "passed": true,
+      "ms": 4815.81,
+      "moves": 97
+    },
+    {
+      "session": "seed0108-wizard-extcmd-wishlist.session.json",
+      "passed": true,
+      "ms": 10212.69,
+      "moves": 302
+    },
+    {
+      "session": "seed0116-wizard-wear-shop.session.json",
+      "passed": true,
+      "ms": 12398.29,
+      "moves": 126
+    },
+    {
+      "session": "seed0200-monk-north-search.session.json",
+      "passed": true,
+      "ms": 4683.89,
+      "moves": 39
+    },
+    {
+      "session": "seed0360-wizard-world-tour.session.json",
+      "passed": true,
+      "ms": 94062.78,
+      "moves": 832
+    },
+    {
+      "session": "seed0361-archeologist-tour.session.json",
+      "passed": true,
+      "ms": 34260.05,
+      "moves": 365
+    },
+    {
+      "session": "seed0367-priest-quest-tour.session.json",
+      "passed": true,
+      "ms": 39483.43,
+      "moves": 323
+    },
+    {
+      "session": "seed0373-barbarian-quest-tour.session.json",
+      "passed": true,
+      "ms": 28540.34,
+      "moves": 123
+    },
+    {
+      "session": "seed0383-wizard-hallucinate.session.json",
+      "passed": true,
+      "ms": 12144.53,
+      "moves": 218
+    },
+    {
+      "session": "seed0398-wizard-wandpoly-pile.session.json",
+      "passed": true,
+      "ms": 5399.84,
+      "moves": 86
+    },
+    {
+      "session": "seed0399-wizard-hallu-actions.session.json",
+      "passed": true,
+      "ms": 11737.98,
+      "moves": 531
+    },
+    {
+      "session": "seed0501-priest-cast-read-turn.session.json",
+      "passed": true,
+      "ms": 5305.37,
+      "moves": 27
+    },
+    {
+      "session": "seed0700-samurai-explore-descend.session.json",
+      "passed": true,
+      "ms": 5856.91,
+      "moves": 50
+    },
+    {
+      "session": "seed0900-tourist-explore-actions.session.json",
+      "passed": true,
+      "ms": 5946.92,
+      "moves": 83
+    },
+    {
+      "session": "seed1150-caveman-explore-move.session.json",
+      "passed": true,
+      "ms": 5969.5,
+      "moves": 50
+    },
+    {
+      "session": "seed1500-rogue-explore-move.session.json",
+      "passed": true,
+      "ms": 5641.67,
+      "moves": 39
+    },
+    {
+      "session": "seed1800-tourist-eat-throw.session.json",
+      "passed": true,
+      "ms": 5044.13,
+      "moves": 25
+    },
+    {
+      "session": "seed2200-wizard-quaff-zap-read.session.json",
+      "passed": true,
+      "ms": 26100.37,
+      "moves": 229
+    },
+    {
+      "session": "seed2600-wizard-custom-binds.session.json",
+      "passed": true,
+      "ms": 9370.58,
+      "moves": 37
+    },
+    {
+      "session": "seed4500-knight-coverage.session.json",
+      "passed": true,
+      "ms": 76160.68,
+      "moves": 1813
+    },
+    {
+      "session": "seed5002-wizard-coverage-pair.session.json",
+      "passed": true,
+      "ms": 14170.79,
+      "moves": 408
+    },
+    {
+      "session": "seed5006-tourist-stress-disaster.session.json",
+      "passed": true,
+      "ms": 13740.36,
+      "moves": 247
+    },
+    {
+      "session": "seed8000-tourist-starter.session.json",
+      "passed": true,
+      "ms": 5355.45,
+      "moves": 22
+    }
+  ],
+  "segmentAwareTimingFit": {
+    "model": "ms = worker intercept + segment coefficient * segments + move coefficient * moves",
+    "workerInterceptMs": 6247.426,
+    "segmentCoefficientMs": -1376.574,
+    "perMoveCoefficientMs": 49.14,
+    "r2": 0.77,
+    "sessions": 44,
+    "limitation": "Descriptive cross-session fit, not direct phase timing or causal startup measurement; different games/commands have different costs and profiling adds overhead."
+  },
+  "inputIntegrity": {
+    "filesChecked": 751,
+    "changed": [],
+    "exitCode": 0,
+    "wallSeconds": 769.0890440940857
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "complete": true,
+  "originalNativeCompared": true,
+  "baseCommit": "63521758b5184dfad3327bb23cdc523e7d5009f1",
+  "qualifiedSourceSha256": {
+    "js/c-runtime/types.js": "255b8886f553dfd06e6f56f0cfe417d03e9a8fda48f455fe6a8b94b341d10cc2",
+    "js/c-runtime/record-views.js": "e85e5e2ee3ceb54dc19ac5b690c32a49121c0fb700eccfe392b0bf892e416562"
+  },
+  "rawProofs": {
+    "docs/runtime-environment/type-access-native-evidence/comparison.json": "cf60bcee120fa0e246358d2a30973ff12d5f5642cb938ec07502e14f321bd1b5",
+    "docs/runtime-environment/type-access-native-evidence/test-standalone-sounds-main.mjs": "dd75475d82a282eb3ac451da7a507810e3e5dadc2c571e9aec287ad486e9b3e9"
+  },
+  "fullGameAccepted": false,
+  "checks": 54,
+  "scope": "Two-file C type-access optimization. Three fresh ordinary C/JS comparisons: exact complete recordings, live world identity graphs, positive temple predicate and final score files. Independent runtime contracts also pass; public recording and timing gate is separate."
+}
