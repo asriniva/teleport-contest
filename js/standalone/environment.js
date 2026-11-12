@@ -94,6 +94,7 @@ import {enableMondata} from './mondata.js';
 import {enableSteal} from './steal.js';
 import {enableDokick} from './dokick.js';
 import {enableLight} from './light.js';
+import {enableDetect} from './detect.js';
 import {enableRip} from './rip.js';
 import {enableShknam} from './shknam.js';
 import {enableInsight} from './insight.js';
@@ -389,6 +390,7 @@ export function createStandaloneEnvironment(options={}) {
         enableSteal:layouts=>enableSteal(environment,layouts),
         enableDokick:layouts=>enableDokick(environment,layouts),
         enableLight:layouts=>enableLight(environment,layouts),
+        enableDetect:layouts=>enableDetect(environment,layouts),
         enableRip:layouts=>enableRip(environment,layouts),
         enableShknam:layouts=>enableShknam(environment,layouts),
         enableInsight:layouts=>enableInsight(environment,layouts),

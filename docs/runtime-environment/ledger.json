@@ -4,10 +4,10 @@
   "acceptedCheckpoint": "d3f8cce27971690b66ef42555070b5d0eef252d2",
   "counts": {
     "canonical-dependency": 1,
-    "in-progress": 47,
+    "in-progress": 48,
     "not-connected": 9,
     "provider-only": 1,
-    "transport-only": 4,
+    "transport-only": 3,
     "verified-component": 10,
     "verified-subset": 66
   },
@@ -413,8 +413,8 @@
       "module": "bones",
       "source": "src/bones.c",
       "status": "in-progress",
-      "scope": "One unchanged BONES environment connects getbones/bones_include_name/can_make_bones. Default depth1 starvation end is under recording comparison; it cannot emit bones. Deeper-level nonempty creation, uptake and persistence semantics remain unverified.",
-      "evidence": "scripts/test-standalone-death-program.mjs (in progress)"
+      "scope": "Original single BONES context supports nonempty real death writing and fresh cross-loading. Four C/JS producer-consumer combinations pass31 grouped recording/RNG/world checks for captured Samurai D5 artifacts. Complete current producer recording rerun pending caller-label correction; other bones variants remain unverified.",
+      "evidence": "scripts/test-standalone-bones-consumer.mjs and docs/runtime-environment/progression-evidence.json"
     },
     {
       "module": "explode",
@@ -672,9 +672,9 @@
     {
       "module": "detect",
       "source": "src/detect.c",
-      "status": "transport-only",
-      "scope": "Field/scalar/bitfield/address adapter witnesses only; game dependency closure not accepted.",
-      "evidence": "scripts/test-standalone-address-ports.mjs: 23700 C witnesses across 13 adapters (including mkobj/dungeon)"
+      "status": "in-progress",
+      "scope": "24 public entries share original cached native context/private backing. Genuine Tourist initial mapping-scroll read passes157 comparisons, consumes one scroll at turn2, with exact recording/full RNG/world. Other detection variants remain separately scoped.",
+      "evidence": "scripts/test-standalone-detect.mjs"
     },
     {
       "module": "teleport",
@@ -688,7 +688,8 @@
       "source": "src/mklev.c",
       "status": "verified-subset",
       "scope": "Actual source mklev completes for12 tested first-level role/seed configurations; generated rooms/terrain/entities/doors/stairs and RNG compare. Other dungeon/special-level inputs and broader generation closure remain unfinished.",
-      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
+      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted.",
+      "invocationEvidence": "scripts/test-standalone-invocation.mjs:24 connected comparisons; source-created destination/items at actual MAIN input boundary, then original candle/Bell/Book commands create invocation flag/downstairs. Exact recording, full RNG and selected world; natural mandatory journey remains unverified."
     },
     {
       "module": "monmove",
@@ -704,7 +705,8 @@
       "scope": "One original spell context and canonical book hooks;19 actual-main C checks cover forcebolt and completed study. Required Book-of-Dead ritual/endgame remains unverified.",
       "priorStatus": "not-connected",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
-      "evidence": "scripts/test-standalone-spell.mjs"
+      "evidence": "scripts/test-standalone-spell.mjs",
+      "invocationEvidence": "scripts/test-standalone-invocation.mjs:24 connected comparisons; source-created destination/items at actual MAIN input boundary, then original candle/Bell/Book commands create invocation flag/downstairs. Exact recording, full RNG and selected world; natural mandatory journey remains unverified."
     },
     {
       "module": "do",
@@ -825,7 +827,8 @@
       "source": "src/apply.c",
       "status": "in-progress",
       "scope": "Focused real tool selection, reset, candle/light/timer and Bell cases; integrated tools and mandatory invocation remain unverified. Expanded regression gate pending; no full-game acceptance.",
-      "evidence": "scripts/test-standalone-apply.mjs"
+      "evidence": "scripts/test-standalone-apply.mjs",
+      "invocationEvidence": "scripts/test-standalone-invocation.mjs:24 connected comparisons; source-created destination/items at actual MAIN input boundary, then original candle/Bell/Book commands create invocation flag/downstairs. Exact recording, full RNG and selected world; natural mandatory journey remains unverified."
     },
     {
       "module": "eat",
@@ -862,7 +865,8 @@
       "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden.",
       "priorEvidence": [
         "scripts/test-standalone-dungeon-startup.mjs:2631 original-C comparisons; scripts/test-standalone-isolation.mjs executes real dungeon startup with Wasm/network forbidden."
-      ]
+      ],
+      "invocationEvidence": "scripts/test-standalone-invocation.mjs:24 connected comparisons; source-created destination/items at actual MAIN input boundary, then original candle/Bell/Book commands create invocation flag/downstairs. Exact recording, full RNG and selected world; natural mandatory journey remains unverified."
     },
     {
       "module": "files",
@@ -1013,7 +1017,8 @@
       "source": "src/nhlsel.c",
       "status": "verified-subset",
       "scope": "Original Lua selection registrations and themed-room selection callback paths execute in real newgame on shared storage. Entire Lua selection surface and error/limit branches remain unaccepted.",
-      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
+      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished.",
+      "invocationEvidence": "scripts/test-standalone-invocation.mjs:24 connected comparisons; source-created destination/items at actual MAIN input boundary, then original candle/Bell/Book commands create invocation flag/downstairs. Exact recording, full RNG and selected world; natural mandatory journey remains unverified."
     }
   ],
   "rebaseNote": "Rebased to main3296b9a; refreshed 138 policy and adapter/record/terminal metadata receipts; prior13-check regression PASS.",

@@ -5,7 +5,7 @@ import {closed_door,accessible} from '../ported/monmove.js';
 import {may_passwall} from '../ported/hack.js';
 import {sticks} from '../ported/mondata.js';
 import {m_in_air} from '../ported/mon.js';
-import {engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at,read_engr_at,u_wipe_engr,freehand} from '../ported/engrave.js';
+import {engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at,read_engr_at,u_wipe_engr,freehand,forget_engravings,sanitize_engravings} from '../ported/engrave.js';
 import {enableDokick} from './dokick.js';
 import {hliquid,hliquids} from '../ported/do_name.js';
 import {makemon_rnd_goodpos,m_initgrp} from '../ported/makemon.js';
@@ -87,7 +87,7 @@ export function enableWorldPosition(environment,layouts,creation){
  Object.defineProperty(engr,'Something',{get:()=>world.c_common_strings.c_Something});
  for(const name of ['pline','You','You_see','impossible'])engr[name]=(...args)=>environment.resolve(name)(...args.map(p=>typeof p==='string'?services.literal(p):p?.address??p));
  Object.defineProperty(engr,'head_engr',{get:()=>record('struct engr',ctypes.load('struct engr *',environment.requireGlobal('head_engr'))),set:v=>ctypes.store('struct engr *',environment.requireGlobal('head_engr'),v)});
- environment.register('world-engravings',{engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at,read_engr_at,u_wipe_engr,freehand},engr,{prepareArgs:(fn,a)=>{if(fn==='read_engr_at'){a[0]=transport.short(a[0]);a[1]=transport.short(a[1]);}if(fn==='sengr_at'&&typeof a[0]==='string')a[0]=services.literal(a[0]);if(fn==='make_engr_at')for(const i of [2,3])if(typeof a[i]==='string')a[i]=services.literal(a[i]);return a;}});
+ environment.register('world-engravings',{engr_at,sengr_at,make_engr_at,del_engr_at,can_reach_floor,wipe_engr_at,read_engr_at,u_wipe_engr,freehand,forget_engravings,sanitize_engravings},engr,{prepareArgs:(fn,a)=>{if(fn==='read_engr_at'){a[0]=transport.short(a[0]);a[1]=transport.short(a[1]);}if(fn==='sengr_at'&&typeof a[0]==='string')a[0]=services.literal(a[0]);if(fn==='make_engr_at')for(const i of [2,3])if(typeof a[i]==='string')a[i]=services.literal(a[i]);return a;}});
  const delivery=enableDokick(environment,layouts);
  // Retain these original public owners, forwarding to the one DOKICK context.
  environment.register('object-delivery',Object.fromEntries(delivery.deliveryNames.map(name=>[name,(...args)=>delivery.call(name,...args)])),delivery.services);
