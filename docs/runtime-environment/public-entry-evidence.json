@@ -1167,5 +1167,43 @@
     "main": "Actual startup, wait, source save exit and all four fresh C/JS saved-stream producer/consumer combinations pass scripts/test-standalone-program.mjs after late naming assembly.",
     "runtime": "scripts/test-js-runtime.mjs passes1294 original-C comparisons,6000 ISAAC values/full states and allocation/memory isolation.",
     "scope": "137 unchanged port policies, one explicit previously authorized VISION correction, three frozen dependencies unchanged, no production Wasm/host/network imports. Source-scope receipt is separate from execution acceptance."
+  },
+  "checkpoint": "ea796eba0572cd9d9ed64ce2fc345d563ba8ef25",
+  "ordinaryDepthFiveDeath": {
+    "receipt": ".cache/standalone-deep-death-public-entry/evidence.json",
+    "receiptSha256": "8ff1a79164934c1831d4557179dce9a1e25f071bb57459fb0a6bae5992b62362",
+    "complete": true,
+    "deathRecordingAccepted": true,
+    "postMainWorldAccepted": false,
+    "postMainWorldLimitation": "Post-cleanup pointers are outside this recording proof; no post-exit object/heap graph acceptance. Fresh bones consumers independently compare live restored graphs.",
+    "fullGameAccepted": false,
+    "checks": 20,
+    "inputBoundaries": 2752,
+    "frames": 2945,
+    "rawTerminalBytes": 96190,
+    "moves": "2376",
+    "consumed": 2752,
+    "binaryPersistence": [
+      {
+        "path": "/nethack/bonD0.5.Z",
+        "cBytes": 5078,
+        "jsBytes": 5027,
+        "byteIdentical": false,
+        "semanticEquivalenceAccepted": false
+      }
+    ],
+    "assemblyProvenanceStable": true,
+    "limitation": "Only this literal ordinary-main death recording, score/log text and final scalar/two-RNG state are accepted. Post-exit object graph equivalence is outside this custom-fixture proof. Actual compressed bones/save files are inventoried, with semantic equivalence explicitly unaccepted until cross-fed fresh consumers are proved. Full progression, victory and other death variants remain separate requirements.",
+    "sourceFiles": 569,
+    "assets": 157
+  },
+  "currentLightComparison": {
+    "script": "scripts/test-standalone-light.mjs",
+    "checks": 25,
+    "hashes": 920,
+    "seed": 1,
+    "receipt": ".cache/light-ordinary/evidence.json",
+    "receiptSha256": "737520d63f6b9c51302b34645c2fd2596419a4bdefc298d9967c3d97aa7f1461",
+    "scope": "Source camera flash nonempty light allocation, cleanup and sanity traversal with exact selected world/full dual RNG/logs/terminal/frames. Fresh positive result on ea796eb; historical cleanup failure receipt retained. No cause inferred from this pass."
   }
 }

@@ -1,5 +1,19 @@
 # Upstream divergence register
 
+Published checkpoint ea796eb follow-up (2026-11-11): the fixed production
+closure passes the ordinary depth-five death comparison:20 checks,2,376 moves,
+2,752 input boundaries,2,945 frozen frames,96,190 raw terminal bytes, exact logs,
+final scalars and full dual RNG. All569 source files and157 assets remain stable
+before production imports and after execution. Post-cleanup heap graph equality
+is explicitly unaccepted. Current compressed JS bones are5,027 bytes (C5,078);
+this newly generated artifact still requires fresh cross-fed consumers, even
+though the prior checkpoint's5,032-byte JS artifact passed four-way semantics.
+A fresh LIGHT component run now passes25 checks/920 source pins for nonempty
+camera-flash creation, cleanup and sanity traversal, including exact world/RNG/
+TTY/frames. Historical cleanup LIGHT failure evidence is retained; this new pass
+does not by itself identify the reason for that older failure. Full-game
+acceptance remains false. Evidence: public-entry-evidence.json.
+
 Remaining naming and monster-creation public surface (2026-11-11):
 `do-name.js` uses one original native-shaped naming context while aliasing the
 existing five-buffer pool and its actual rotating index; prior registered
