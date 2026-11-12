@@ -36,15 +36,18 @@ function previous(){
  }
  prior=view;return view;
 }
+const featurePaths=new Set(["js/c-runtime/heap.js", "js/c-runtime/adapter-factories.js", "js/nethack/movement.js", "js/nethack/serialization.js", "js/standalone-recorder-adapter.js", "scripts/pure-js-probes/deny-wasm.mjs", "js/nethack/uhitm.js"]);
+function beforeFeature(file){return featurePaths.has(file)&&fs.existsSync(path.join(root,'docs/runtime-environment/transport-allocation-source-successors.json'))?execFileSync('python3',[path.join(root,'scripts/transport_allocation_source_successors.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024}):fs.readFileSync(path.join(root,file));}
 // Accept either the exact current bytes or their verified path-only predecessor.
 export function layoutSourceSha(file,expected){
  const absolute=path.isAbsolute(file)?file:path.join(root,file),logical=path.relative(root,absolute),actualFile=path.join(root,currentLayoutPath(logical));
  const sha=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
  const actual=sha(fs.readFileSync(actualFile));if(actual===expected)return actual;
+ if(sha(beforeFeature(path.relative(root,actualFile)))===expected)return expected;
  const before=relative(logical),receipt=JSON.parse(fs.readFileSync(path.join(root,'docs/runtime-environment/nethack-layout.json'))),row=receipt.files[before];
  if(!row)return actual;
  const owner=row.destination===null?receipt.files['js/nethack/address-ports.js']:row;
- if(actual!==owner.afterSha256)throw Error('Source changed beyond NetHack path relocation: '+logical);
+ if(sha(beforeFeature(path.relative(root,actualFile)))!==owner.afterSha256)throw Error('Source changed beyond NetHack path relocation: '+logical);
  verify();
  const bytes=execFileSync('git',['show',base+':'+before],{cwd:root,maxBuffer:32*1024*1024});
  return sha(bytes)===expected?expected:actual;

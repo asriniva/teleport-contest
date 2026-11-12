@@ -1,0 +1,279 @@
+Pure-JS subsystem run 71327-1794504541714: 138 existing suites.
+RUN isaac64
+RUN nhmd4
+RUN strutil
+FAIL nhmd4: Native assertions: 1615 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN rect
+FAIL isaac64: Native assertions: 39833 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN track
+FAIL strutil: Native assertions: 8592 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN calendar
+FAIL rect: Native assertions: 28591 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN stairs
+FAIL track: Native assertions: 45590 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN sys
+FAIL sys: Native assertions: 1010 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN rip
+FAIL rip: Native assertions: 20768 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN date
+FAIL stairs: Native assertions: 246788 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name
+RUN alloc
+FAIL calendar: C REFERENCE DIFFERENCE 1: America/New_York: Native assertions: 8138 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable 
+RUN utf8map
+FAIL alloc: Native assertions: 1703 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN drawing
+FAIL drawing: Native assertions: 14540 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN posixregex
+FAIL utf8map: Native assertions: 9976 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN rnd
+FAIL posixregex: Native assertions: 5265 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN ioctl
+FAIL ioctl: Native assertions: 1417 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN unixtty
+FAIL date: C REFERENCE DIFFERENCE 1: UTC: Native assertions: 3319 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in
+RUN were
+FAIL rnd: Native assertions: 2640 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN extralev
+FAIL unixtty: Native assertions: 4519 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN mplayer
+FAIL extralev: Native assertions: 3789 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN exper
+FAIL were: Native assertions: 31397 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN mkmap
+FAIL exper: Native assertions: 24142 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN getline
+FAIL mplayer: Native assertions: 31505 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN write
+FAIL mkmap: Native assertions: 2315 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN mdlib
+FAIL write: Native assertions: 9617 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN quest
+FAIL mdlib: Native assertions: 4300 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN minion
+FAIL getline: Native assertions: 3176 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN iactions
+FAIL quest: Native assertions: 27955 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN selvar
+FAIL selvar: Native assertions: 14749 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN steal
+FAIL iactions: Native assertions: 32304 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN sit
+FAIL sit: Native assertions: 11992 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN fountain
+FAIL steal: Native assertions: 17967 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN objects
+FAIL minion: Native assertions: 21795 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN monst
+FAIL objects: Native assertions: 53047 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN shknam
+FAIL fountain: Native assertions: 18592 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN rumors
+FAIL monst: Native assertions: 45043 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN music
+FAIL rumors: Native assertions: 6998 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN version
+FAIL version: Native assertions: 20296 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN coloratt
+FAIL coloratt: Native assertions: 20093 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN priest
+FAIL priest: Native assertions: 24886 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN light
+FAIL light: Native assertions: 7126 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN lock
+FAIL shknam: Native assertions: 65218 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN steed
+FAIL lock: Native assertions: 15070 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN wizard
+FAIL wizard: Native assertions: 13446 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN worm
+FAIL steed: Native assertions: 19810 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN o_init
+FAIL worm: Native assertions: 8245 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);
+RUN ball
+FAIL music: Native assertions: 15152 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN mcastu
+FAIL mcastu: Native assertions: 15017 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN dbridge
+FAIL ball: Native assertions: 11630 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN mondata
+FAIL mondata: Native assertions: 265845 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name
+RUN hacklib
+FAIL hacklib: Native assertions: 19343 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN worn
+FAIL o_init: Native assertions: 14703 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN wield
+FAIL wield: Native assertions: 34137 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN mkroom
+PASS mkroom: MKROOM: 1527 native-C/pure-JS room generation, geometry, selection, serialization and RNG comparisons checked.
+RUN sfstruct
+FAIL sfstruct: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN earlyarg
+PASS earlyarg: EARLYARG: 6860 native-C/pure-JS parsing, catalogue, argv mutation, termination, callbacks and growth comparisons checked.
+RUN report
+FAIL report: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN bones
+FAIL bones: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN explode
+FAIL explode: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN questpgr
+FAIL worn: Native assertions: 43610 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN symbols
+FAIL questpgr: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN mail
+FAIL symbols: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN pline
+FAIL mail: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN attrib
+FAIL pline: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN sfbase
+FAIL attrib: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN dog
+FAIL sfbase: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN region
+FAIL dog: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN weapon
+FAIL region: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN vault
+FAIL weapon: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN u_init
+FAIL vault: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN sounds
+FAIL u_init: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN save
+FAIL sounds: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN mhitm
+FAIL save: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN getpos
+FAIL getpos: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN allmain
+FAIL mhitm: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN mthrowu
+FAIL mthrowu: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN role
+FAIL allmain: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN engrave
+FAIL role: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN glyphs
+FAIL engrave: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN topten
+FAIL glyphs: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN dogmove
+FAIL topten: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN windows
+FAIL windows: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN cfgfiles
+FAIL dogmove: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN restore
+FAIL restore: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN nhlobj
+FAIL cfgfiles: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN do_name
+FAIL do_name: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN vision
+FAIL nhlobj: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN mkmaze
+FAIL mkmaze: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN dokick
+FAIL vision: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN dig
+FAIL dig: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN end
+FAIL dokick: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN polyself
+FAIL end: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN wizcmds
+FAIL polyself: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN detect
+FAIL detect: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN teleport
+FAIL wizcmds: Native assertions: 48 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Obje
+RUN mklev
+FAIL mklev: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN monmove
+FAIL teleport: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN spell
+FAIL monmove: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN do
+FAIL spell: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN timeout
+FAIL do: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN potion
+FAIL timeout: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN pray
+FAIL dbridge: Native assertions: 32252 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4 for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name)
+RUN dothrow
+FAIL potion: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN pager
+FAIL pray: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN muse
+FAIL dothrow: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN dungeon
+FAIL pager: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN makemon
+FAIL muse: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN mhitu
+FAIL dungeon: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN artifact
+FAIL makemon: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN decl
+FAIL artifact: Native assertions: 76 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Obje
+RUN do_wear
+FAIL mhitu: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN insight
+FAIL do_wear: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN read
+FAIL decl: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN apply
+FAIL insight: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN eat
+FAIL read: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN objnam
+FAIL apply: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN mkobj
+FAIL eat: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN nhlua
+FAIL objnam: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN files
+FAIL mkobj: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN display
+FAIL nhlua: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN invent
+FAIL files: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN cmd
+FAIL display: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN hack
+FAIL invent: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN uhitm
+FAIL cmd: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN mon
+FAIL hack: Native assertions: 97 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Obje
+RUN pickup
+FAIL uhitm: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN shk
+FAIL mon: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN sp_lev
+FAIL pickup: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN trap
+FAIL shk: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN termcap
+FAIL sp_lev: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN topl
+FAIL trap: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN wintty
+FAIL termcap: Native assertions: 57 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Obje
+RUN unixunix
+FAIL wintty: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN unixmain
+FAIL unixunix: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN options
+FAIL options: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN botl
+FAIL unixmain: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+RUN zap
+FAIL botl: Warning: disabling flag --expose_wasm due to conflicting flags Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error
+RUN nhlsel
+FAIL zap: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+FAIL nhlsel: Native assertions: 0 checked, 0 failed. file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34  let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Objec
+FAIL topl: Native assertions: 0 checked, 0 failed. node:internal/errors:983   const err = new Error(message);               ^  Error: Command failed: /Users/arj/Desktop/nethack_comp/teleport-contest/.cache/node-v22.23.5-darwin-arm64/bin/node scripts/check-services-layout.mjs file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/qual
+Pure-JS subsystem suites: 2/138 completed; 2 passed, 136 failed. 1537231 assertions, 10 assertion failures.
+Report: /Users/arj/Desktop/nethack_comp/teleport-contest/.cache/native-existing-runs/71327-1794504541714/results.json

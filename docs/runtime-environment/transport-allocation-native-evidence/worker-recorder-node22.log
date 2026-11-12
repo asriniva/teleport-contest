@@ -1,0 +1,2 @@
+__RESULT_ONE__
+{"session":"seed0015-valk-level2-pit-dog-wait.session.json","passed":true,"metrics":{"rngCalls":{"matched":8563,"total":8563},"screens":{"matched":44,"total":44},"cellsOnly":{"matched":44,"total":44},"cursors":{"matched":44,"total":44},"animFrames":{"matched":0,"total":0}},"error":null,"time":{"ms":4819.17,"moves":43}}

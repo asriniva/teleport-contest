@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+"""Current-source receipt, separate from immutable historical cleanup manifests."""
+from pathlib import Path
+import subprocess,json,hashlib,sys
+root=Path(__file__).resolve().parents[1];source=set(subprocess.check_output(['git','ls-tree','-r','--name-only','HEAD','--','js','frozen','scripts'],cwd=root,text=True).splitlines());source={p for p in source if Path(p).suffix in {'.js','.mjs','.json','.py','.sh','.c','.h','.inc'}}
+source.update(['scripts/test-uhitm-delay-callback.mjs','scripts/transport_allocation_source_successors.py','scripts/test-transport-allocation-source-successors.py','scripts/test-c-runtime-live-views.mjs','scripts/test-recorder-bootstrap.mjs','scripts/write-transport-allocation-manifest.py','scripts/check-current-transport-allocation.mjs','docs/runtime-environment/nethack-layout.json','docs/runtime-environment/transport-allocation-source-successors.json','docs/runtime-environment/transport-allocation-native-evidence.json'])
+proof=json.loads((root/'docs/runtime-environment/transport-allocation-native-evidence.json').read_text());source.update(proof['rawProofs']);decl=json.loads((root/'docs/runtime-environment/transport-allocation-source-successors.json').read_text());source.update(r['patch']for r in decl['files'].values());sha=lambda p:hashlib.sha256((root/p).read_bytes()).hexdigest();data={'version':1,'baseCommit':'1dab2c64a80d86e2398875c0e3d45017f174abf1','scope':'Current implementation/tool/evidence source closure; historical391-hash receipt remains unchanged. Not runtime/game acceptance.','sha256':{p:sha(p)for p in sorted(source)}};target=root/'docs/runtime-environment/transport-allocation-current-source.json'
+if '--check'in sys.argv:assert json.loads(target.read_text())==data,'Current transport source manifest changed';print('PASS',len(source),'current source/evidence hashes')
+else:target.write_text(json.dumps(data,indent=2)+'\n');print('Bound',len(source),'current source/evidence hashes')

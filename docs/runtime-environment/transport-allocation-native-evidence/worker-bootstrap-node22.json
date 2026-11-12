@@ -1,0 +1,8 @@
+{
+  "complete": true,
+  "nodeVersion": "v22.23.5",
+  "wasmAccesses": 0,
+  "cipherEnumeration": 0,
+  "worker": "--worker-session=sessions/seed0015-valk-level2-pit-dog-wait.session.json",
+  "toolSha256": "79883c36ad01cb22f9213ed6c04c7a144cdeac0669ee48e3f3b4404f95bc77ba"
+}

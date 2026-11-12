@@ -1,0 +1,17 @@
+--- a/js/nethack/movement.js
++++ b/js/nethack/movement.js
+@@ -10,10 +10,12 @@
+  const ctypes=createCTypes(memory,{...records,records:{...records.records,...abi.records}},environment.bitfields);
+  const text=v=>typeof v==='string'?services.literal(v):environment.address(v),families=['Norep','There','You','You_cant','You_feel','You_hear','Your','impossible','livelog_printf','nh_snprintf','panic','pline','pline_The','pline_dir','pline_xy','raw_printf','sprintf','urgent_pline','verbalize'];
+  const resolve=name=>typeof services[name]==='function'?services[name]:environment.resolve(name);
++ const inheritedWrappers=new Map(),resolvedWrappers=new Map();
+  const local=new Proxy(Object.create(services),{get:(o,k,r)=>{
+-  if(Reflect.has(o,k)){const value=Reflect.get(o,k,r);return typeof value==='function'&&!Object.hasOwn(o,k)?(...args)=>value(...args.map(v=>v?.address??v)):value;}if(typeof k!=='string')return undefined;
++  if(Reflect.has(o,k)){const value=Reflect.get(o,k,r);if(typeof value!=='function'||Object.hasOwn(o,k))return value;const previous=inheritedWrappers.get(k);if(previous?.source===value)return previous.wrapper;const wrapper=(...args)=>value(...args.map(v=>v?.address??v));inheritedWrappers.set(k,{source:value,wrapper});return wrapper;}if(typeof k!=='string')return undefined;
++  if(resolvedWrappers.has(k))return resolvedWrappers.get(k);
+   const family=families.find(name=>k.startsWith(name+'_')&&/^[pijd]+$/.test(k.slice(name.length+1)));
+-  return family?((...args)=>{const shape=k.slice(family.length+1);return resolve(family)(...args.map((v,i)=>shape[i]==='p'?text(v):shape[i]==='j'?BigInt(v):shape[i]==='i'?Number(BigInt.asIntN(32,BigInt(v))):v));}):((...args)=>environment.resolve(k)(...args.map(v=>v?.address??v)));
++  const wrapper=family?((...args)=>{const shape=k.slice(family.length+1);return resolve(family)(...args.map((v,i)=>shape[i]==='p'?text(v):shape[i]==='j'?BigInt(v):shape[i]==='i'?Number(BigInt.asIntN(32,BigInt(v))):v));}):((...args)=>environment.resolve(k)(...args.map(v=>v?.address??v)));resolvedWrappers.set(k,wrapper);return wrapper;
+  }});
+  local.rngCaller=(line,caller)=>{const n=environment.transport.int(line),name=typeof caller==='string'?caller:memory.readString(environment.address(caller));if(!abi.rngCallers.some(row=>row[0]===n&&row[1]===name))throw new Error('Unexpected HACK RNG caller');if(services.rng_log_enabled())services.rng_log_set_caller(text('hack.c'),n,text(caller));};
+  const kinds=Object.keys(abi.schemas),scalar=d=>d.t?{i8:'signed char',u8:'unsigned char',i16:'short',u16:'unsigned short',i32:'int',u32:'unsigned int',i64:'long',u64:'unsigned long'}[d.t]:'void *';

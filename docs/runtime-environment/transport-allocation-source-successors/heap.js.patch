@@ -1,0 +1,24 @@
+--- a/js/c-runtime/heap.js
++++ b/js/c-runtime/heap.js
+@@ -19,9 +19,10 @@
+         this.available = [];
+         this.generation = 0;
+     }
+-    get HEAPU8() { return new Uint8Array(this.buffer); }
+-    get HEAP8() { return new Int8Array(this.buffer); }
+-    get view() { return new DataView(this.buffer); }
++    // Match persistent heap views; a replacement buffer retires every cached view.
++    get HEAPU8() { if(!this._heapU8||this._heapU8.buffer!==this.buffer)this._heapU8=new Uint8Array(this.buffer);return this._heapU8; }
++    get HEAP8() { if(!this._heap8||this._heap8.buffer!==this.buffer)this._heap8=new Int8Array(this.buffer);return this._heap8; }
++    get view() { if(!this._dataView||this._dataView.buffer!==this.buffer)this._dataView=new DataView(this.buffer);return this._dataView; }
+     bounds(address, length = 1) {
+         if (!Number.isSafeInteger(address) || !Number.isSafeInteger(length)
+             || address < ALIGN || length < 0 || address + length > this.buffer.byteLength)
+@@ -36,6 +37,7 @@
+             const replacement = new ArrayBuffer(size);
+             new Uint8Array(replacement).set(this.HEAPU8);
+             this.buffer = replacement;
++            this._heapU8=this._heap8=this._dataView=undefined;
+             this.generation++;
+             return true;
+         } catch (error) {

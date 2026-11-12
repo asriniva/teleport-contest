@@ -1,0 +1,19 @@
+--- a/js/nethack/serialization.js
++++ b/js/nethack/serialization.js
+@@ -1,6 +1,6 @@
+ // Standalone transport for the unchanged SFBASE/SFSTRUCT implementations.
+ import * as sfbase from '../ported/sfbase.js';
+-import {createSfbaseEnvironment} from './bindings/sfbase.js';
++import {createOptimizedSfbaseEnvironment} from './bindings/sfbase.js';
+ import * as sfstruct from '../ported/sfstruct.js';
+ import {initializeSfstruct} from './bindings/sfstruct.js';
+ import {address} from './memory-services.js';
+@@ -30,7 +30,7 @@
+         call:(fn,nhfp,data,tag,count)=>functions.callback(fn)(nhfp,data,tag,...(count===undefined?[]:[count])),
+         Snprintf:(out,n,format,...args)=>{args.pop();return environment.libc.snprintf(address(out),Number(n),format,...args);},
+     });
+-    const baseEnv=createSfbaseEnvironment(local,L);
++    const baseEnv=createOptimizedSfbaseEnvironment(local,L);
+     environment.register('sfbase',sfbase,baseEnv,{prepareArgs:(fn,args)=>{
+         if(/^(sfo_|sfi_|sf_log$)/.test(fn))args[0]=baseEnv.nhfile(args[0]);
+         if(/^(sfo_|sfi_)version_info$/.test(fn))args[1]=baseEnv.version(args[1]);

@@ -24,7 +24,7 @@ export function enableUhitm(environment,layouts){
   bit:(i,p)=>bit(i,p),setBit:(i,p,v)=>bit(i,p,v),callback,
   rngSource:(line,name)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('uhitm.c'),transport.int(line),text(name));},
   rn2:n=>resolve('rn2')(transport.int(n)),rn1:(n,b)=>resolve('rn2')(transport.int(n))+transport.int(b),rnd:n=>resolve('rnd')(transport.int(n)),rnl:n=>resolve('rnl')(transport.int(n)),d:(n,s)=>resolve('d')(transport.int(n),transport.int(s)),
-  display_nhwindow:(w,b)=>window('win_display_nhwindow','vii',transport.int(w),transport.char(b)),nh_delay_output:()=>window('win_nh_delay_output','v'),
+  display_nhwindow:(w,b)=>window('win_display_nhwindow','vii',transport.int(w),transport.char(b)),nh_delay_output:()=>window('win_delay_output','v'),
  });
  for(const n of names)Object.defineProperty(local,n,{value:undefined,writable:true,configurable:true});
  // One factory instance makes equal C pointers produce equal JS record objects.

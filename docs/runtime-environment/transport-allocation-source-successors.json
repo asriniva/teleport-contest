@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "baseCommit": "1dab2c64a80d86e2398875c0e3d45017f174abf1",
+  "nativeProof": "docs/runtime-environment/transport-allocation-native-evidence.json",
+  "nativeProofSha256": "7b23b2bc18d95aec00b37d6403b2837b564246f195cdfc955810e0a7c9e06afb",
+  "files": {
+    "js/c-runtime/heap.js": {
+      "beforeSha256": "d3b538e95e3e9ac302ece528b60948c55d939b7e647ba981aa578e5341eb252a",
+      "afterSha256": "0322705c885350962c95f3a587316725114bd4c334dc85e42466843c30827686",
+      "patch": "docs/runtime-environment/transport-allocation-source-successors/heap.js.patch",
+      "patchSha256": "6924a483d5f89bb9bab6d510fc071b75211a90ee5d9a74431b91fb2bbbc67008"
+    },
+    "js/c-runtime/adapter-factories.js": {
+      "beforeSha256": "2629ab75a6e74c435caca692d9bd9a993dd002266b0bedbfd72465ff724b03db",
+      "afterSha256": "3e930880e7597e2fba2e121472767fd0a03b121fb1f186d0eebbdf70a8cca0e3",
+      "patch": "docs/runtime-environment/transport-allocation-source-successors/adapter-factories.js.patch",
+      "patchSha256": "e57d2bb2512d5d7ef83ff078a8e61b37f2eaccc9ce9f6f3bad9046ac0238d828"
+    },
+    "js/nethack/movement.js": {
+      "beforeSha256": "8742bf1f674300fdb6c75ce88209c47faab252d15625315f71d2c5521d6aa75d",
+      "afterSha256": "45bd3afea69d812b650dd947c945c6e1f2331257fa495b1c1d51b40a594bd41d",
+      "patch": "docs/runtime-environment/transport-allocation-source-successors/movement.js.patch",
+      "patchSha256": "5135f21392527f9d7228ad8df4cee659015e79c94697765de5adc5d8a775e718"
+    },
+    "js/nethack/serialization.js": {
+      "beforeSha256": "a02e21ca36bf4677156bbbf96450f834b079b526ef9338a6b0557018f831a61f",
+      "afterSha256": "53ce84b666a49bc08976f01c4701ec7ce7b2a6a872c4899905de111214db2303",
+      "patch": "docs/runtime-environment/transport-allocation-source-successors/serialization.js.patch",
+      "patchSha256": "cc86decfd5952db10903b090d087c5df0a4dfe28a5c24c12349e6fadb832ccaf"
+    },
+    "js/standalone-recorder-adapter.js": {
+      "beforeSha256": "b2e69f367c50fb1eacb92316a84edf0b3f8c26707c69aa0da66011397d13a40b",
+      "afterSha256": "0287e1aad8e578849063a7e5a884384cec08260fcbbf3f58ce1f7c8fc90ee6ce",
+      "patch": "docs/runtime-environment/transport-allocation-source-successors/standalone-recorder-adapter.js.patch",
+      "patchSha256": "26a536a7202b67bdcba243a83e2b0cb3e019254339f144d8d18ce944c9f2a256"
+    },
+    "scripts/pure-js-probes/deny-wasm.mjs": {
+      "beforeSha256": "a9d4fc5aee9b7a771a4375caf26ca644f6bc704afba0d98d22c2bb285d8eb415",
+      "afterSha256": "dca9c4fab2555fa7c65f277d6e7a4b740c17b23a42b4b29b80eaa768b7c5e8aa",
+      "patch": "docs/runtime-environment/transport-allocation-source-successors/deny-wasm.mjs.patch",
+      "patchSha256": "ddd99644820109450cd75b419a36661247ee96f0d3605c5223033bd5d0583daf"
+    },
+    "js/nethack/uhitm.js": {
+      "beforeSha256": "de606593772474a506827b0f8fbda7f9699d9ff4674b76b520dba15bf23f3ce6",
+      "afterSha256": "479e0c8b1f4d7e6638e5f9071177afec12c8adaec8e76db7b6230a81aa8daf4d",
+      "patch": "docs/runtime-environment/transport-allocation-source-successors/uhitm.js.patch",
+      "patchSha256": "a37e62a98778175587e9accf3137ede719f52501c8781b793b5128c4fd808905"
+    }
+  }
+}

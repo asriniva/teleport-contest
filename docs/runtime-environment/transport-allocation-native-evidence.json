@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "complete": true,
+  "originalNativeCompared": true,
+  "baseCommit": "1dab2c64a80d86e2398875c0e3d45017f174abf1",
+  "qualifiedSourceSha256": {
+    "js/c-runtime/heap.js": "0322705c885350962c95f3a587316725114bd4c334dc85e42466843c30827686",
+    "js/c-runtime/adapter-factories.js": "3e930880e7597e2fba2e121472767fd0a03b121fb1f186d0eebbdf70a8cca0e3",
+    "js/nethack/movement.js": "45bd3afea69d812b650dd947c945c6e1f2331257fa495b1c1d51b40a594bd41d",
+    "js/nethack/serialization.js": "53ce84b666a49bc08976f01c4701ec7ce7b2a6a872c4899905de111214db2303",
+    "js/standalone-recorder-adapter.js": "0287e1aad8e578849063a7e5a884384cec08260fcbbf3f58ce1f7c8fc90ee6ce",
+    "scripts/pure-js-probes/deny-wasm.mjs": "dca9c4fab2555fa7c65f277d6e7a4b740c17b23a42b4b29b80eaa768b7c5e8aa",
+    "js/nethack/uhitm.js": "479e0c8b1f4d7e6638e5f9071177afec12c8adaec8e76db7b6230a81aa8daf4d"
+  },
+  "rawProofs": {
+    "docs/runtime-environment/transport-allocation-native-evidence/game-comparison-before-consolidation.json": "fdc18a450d3cd9b60c18ae0955bb6411f32d335cb98eb866528b205904187c62",
+    "docs/runtime-environment/transport-allocation-native-evidence/game-comparison-merged.json": "13521dc766c38aeff62afd5cfe6a4f63ff615b1a1540dab6c2b70cf8d4c3171f",
+    "docs/runtime-environment/transport-allocation-native-evidence/sdk-comparison.json": "2247cb9fa846c9f5a5f16e6f61ec3876598406413938117d11bac37757b1be56",
+    "docs/runtime-environment/transport-allocation-native-evidence/synthetic-live-views.log": "bb51ea283f304b3c2cb549badb4cf5b2a1f1f8f1223d3e16da8ba580f1b1faa6",
+    "docs/runtime-environment/transport-allocation-native-evidence/test-c-runtime-live-views.mjs": "fe3759972601f93c4167544b35b35174b85a9713dac32d0161f12c0f28ad5c32",
+    "docs/runtime-environment/transport-allocation-native-evidence/test-recorder-bootstrap.mjs": "79883c36ad01cb22f9213ed6c04c7a144cdeac0669ee48e3f3b4404f95bc77ba",
+    "docs/runtime-environment/transport-allocation-native-evidence/test-standalone-sounds-main-merged.mjs": "dd75475d82a282eb3ac451da7a507810e3e5dadc2c571e9aec287ad486e9b3e9",
+    "docs/runtime-environment/transport-allocation-native-evidence/test-standalone-sounds-main.mjs": "dd75475d82a282eb3ac451da7a507810e3e5dadc2c571e9aec287ad486e9b3e9",
+    "docs/runtime-environment/transport-allocation-native-evidence/test-standalone-stdio-byte-io.mjs": "889f09847b19bf272275d23aafc2b0f353010b9df442bcdeb7364985c80cc433",
+    "docs/runtime-environment/transport-allocation-native-evidence/worker-bootstrap-node22.json": "ea0873368b1955d78883435e0a890386149e966b2431f509f6f6cd911fb8ae03",
+    "docs/runtime-environment/transport-allocation-native-evidence/worker-recorder-node22.log": "2b88b09b82e2185dbe03a76b5d8dc93413c828fbcfc3f66c033d88f06245dc91",
+    "docs/runtime-environment/transport-allocation-native-evidence/test-uhitm-delay-callback.mjs": "3d4e318f16bab8dc672dabb03547c743e2d7c16df08d7f1377d341b1e363b960",
+    "docs/runtime-environment/transport-allocation-native-evidence/uhitm-delay-before.log": "7757e4553e4bd3adbfdff834ecf8b931d7e600616ff95093e3b291915c17c909",
+    "docs/runtime-environment/transport-allocation-native-evidence/uhitm-delay-after.log": "92ac5a0aed96f54bd3d43f0c2d7e5224fe2ab1d48a5d4d20ce931b452c3b6ef4",
+    "docs/runtime-environment/transport-allocation-native-evidence/game-comparison-with-uhitm-fix.json": "3f83298d92e0e2a5e68fc4724c9da2333321d6081efd845a14cf5cd5f4681880"
+  },
+  "fullGameAccepted": false,
+  "currentSdkChecks": 4083,
+  "currentOriginalCRecorder": {
+    "session": "seed0015-valk-level2-pit-dog-wait.session.json",
+    "rngCalls": 8563,
+    "screens": 44,
+    "passed": true,
+    "bootstrapWasmAccesses": 0,
+    "bootstrapCipherEnumeration": 0
+  },
+  "priorNamespaceGameChecks": 54,
+  "syntheticLiveViewChecks": 71,
+  "scope": "Exact six-file transport and isolated-worker successor to consolidation1dab2c6. Fresh merged-layout original-C54 game comparisons, actual configured SDK4083 byte-I/O/growth comparisons,71 synthetic live-view checks and one strict-bootstrap original-C recorder comparison. Historical inverse only; all44 recording/deadline acceptance remains separate.",
+  "currentGameChecks": 54,
+  "engulfCallbackCorrection": {
+    "scope": "Synthetic dispatch regression plus compiler-measured window_procs declaration; not native full-game engulf equivalence",
+    "literalCallbacksChecked": 81,
+    "originalPolicyEdited": false,
+    "beforeFailure": "win_nh_delay_output is not a measured window_procs field",
+    "after": "Both original start_engulf delay boundaries dispatch through active win_delay_output, including callback replacement."
+  },
+  "publicReplayFollowup": {
+    "complete": false,
+    "accepted": false,
+    "termination": "Explicitly interrupted for user-requested urgent fix and push",
+    "preFixSourceFilesUnchanged": true,
+    "run": ".cache/recorder-cpu-profile-transport-allocation-node22",
+    "integrity": {
+      "filesChecked": 751,
+      "changed": [],
+      "exitCode": -15,
+      "wallSeconds": 508.25294184684753
+    },
+    "officialPassesBeforeInterruption": 32
+  },
+  "postCallbackFixNativeComparison": {
+    "checks": 54,
+    "scope": "Ordinary original-C full-game sound/world/recording cases; does not establish native engulf equivalence",
+    "proof": "docs/runtime-environment/transport-allocation-native-evidence/game-comparison-with-uhitm-fix.json"
+  }
+}

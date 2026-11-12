@@ -1,0 +1,5 @@
+// Current source acceptance plus a finite inverse; historical receipts stay exact.
+import {execFileSync} from 'node:child_process';import assert from 'node:assert/strict';import fs from 'node:fs';import crypto from 'node:crypto';
+execFileSync('python3',['scripts/transport_allocation_source_successors.py','--check'],{stdio:'inherit'});execFileSync('python3',['scripts/consolidate-nethack-layout.py'],{stdio:'inherit'});execFileSync('python3',['scripts/write-transport-allocation-manifest.py','--check'],{stdio:'inherit'});
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');for(const name of ['isaac64','terminal','storage'])assert.equal(sha(fs.readFileSync('js/'+name+'.js')),sha(fs.readFileSync('frozen/'+name+'.js')),'Frozen dependency '+name);
+const original=execFileSync('git',['show','HEAD:docs/runtime-environment/c-runtime-manifest.json']);assert.deepEqual(fs.readFileSync('docs/runtime-environment/c-runtime-manifest.json'),original,'Historical391-hash receipt unchanged');console.log('PASS current transport source closure, exact qualified namespace inverse and3 frozen dependencies');

@@ -1,0 +1,4 @@
+// Test-only --import probe: the default JS worker must not initialize Wasm/networking.
+import fs from 'node:fs';import crypto from 'node:crypto';
+const output=process.env.RECORDER_BOOTSTRAP_PROOF;if(!output)throw Error('RECORDER_BOOTSTRAP_PROOF required');let wasmAccesses=0,cipherEnumeration=0;Object.defineProperty(globalThis,'WebAssembly',{configurable:true,get(){wasmAccesses++;throw Error('Wasm accessed before recorder isolation');}});crypto.getCiphers=()=>{cipherEnumeration++;throw Error('Unused networking crypto initialized');};
+process.once('beforeExit',()=>{const complete=wasmAccesses===0&&cipherEnumeration===0;fs.writeFileSync(output,JSON.stringify({complete,nodeVersion:process.version,wasmAccesses,cipherEnumeration,worker:process.argv.find(v=>v.startsWith('--worker-session=')),toolSha256:crypto.createHash('sha256').update(fs.readFileSync(new URL(import.meta.url))).digest('hex')},null,2)+'\n');if(!complete)process.exitCode=1;});

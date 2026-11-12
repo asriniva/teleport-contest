@@ -1,0 +1,18 @@
+{
+  "accepted": false,
+  "completeSourceStableCohort": false,
+  "reason": "Node22 native lazy-global replacement caused Undici to access denied WebAssembly. Guard was repaired while this failed attempt was completing; this is not a clean accepted cohort. All completed assertion reports are retained separately from exit status. Attempted termination after completion found no live processes; no process was actually killed.",
+  "next": "Fresh full138 run on the package-pinned SDK24 runtime with delete-first capability isolation.",
+  "reportedTotals": {
+    "suites": 138,
+    "passedSuites": 2,
+    "failedSuites": 136,
+    "assertions": 1537231,
+    "assertionFailures": 10
+  },
+  "additionalLimitations": [
+    "Ten failed assertions concern calendar/date child-process exit status; they are not ten demonstrated C state mismatches.",
+    "Some C-reference Wasm64 fixtures cannot instantiate on the default Node22 V8 configuration (invalid table elements limits flags). The implementation under test remains JavaScript.",
+    "The subsequent SDK24 run passed137 suites with19495400 assertions and zero assertion failures; TOPL failed source qualification during the concurrent namespace consolidation. A separate post-consolidation TOPL recovery passed13789 assertions. This is a recovered138-suite cohort, not one immutable full-suite run."
+  ]
+}

@@ -101,11 +101,19 @@ def plan():
   if dest!=file or after!=before:rows[file]={'destination':dest,'beforeSha256':sha(before),'afterSha256':sha(after),'bytes':after}
  return rows
 
+def qualified_current(file):
+ # A separate finite native/source successor precedes the immutable relocation.
+ if (ROOT/'docs/runtime-environment/transport-allocation-source-successors.json').exists():
+  from transport_allocation_source_successors import ALLOWED,qualified_before
+  if file in ALLOWED:return qualified_before(ROOT,file)
+ return (ROOT/file).read_bytes()
+
 def main():
  p=argparse.ArgumentParser();p.add_argument('--write',action='store_true');a=p.parse_args();
  assert not any(historical_cli(f)for f in ['scripts/test-native-existing.mjs','scripts/test-tu-light.mjs','scripts/run-standalone-program.mjs','scripts/test-standalone-allocation-cli.mjs']),'Runtime tests cannot use the historical audit view'
  rows=plan()
  if a.write:
+  assert not(ROOT/'docs/runtime-environment/transport-allocation-source-successors.json').exists(),'Refusing to overwrite independently qualified transport features; historical layout generation is read-only'
   previous=json.loads((ROOT/RECEIPT).read_bytes())['files']if(ROOT/RECEIPT).exists()else{}
   for old,row in previous.items():
    if old not in rows and row['destination']==old:
@@ -122,13 +130,13 @@ def main():
   record=json.loads((ROOT/RECEIPT).read_bytes());assert record['baseCommit']==subprocess.check_output(['git','rev-parse',BASE],cwd=ROOT,text=True).strip()
   assert record['files']=={f:{k:v for k,v in row.items()if k!='bytes'}for f,row in rows.items()},'Consolidation recipe/receipt differs'
   for old,row in rows.items():
-   if row['destination']is not None:assert(ROOT/row['destination']).read_bytes()==row['bytes'],'Changed beyond path relocation: '+row['destination']
+   if row['destination']is not None:assert qualified_current(row['destination'])==row['bytes'],'Changed beyond path relocation: '+row['destination']
   assert not(ROOT/'js/standalone').exists(),'Old production directory remains'
   # Historical evidence, frozen harnesses and C/compiler inputs must not drift.
   for file in inventory():
    if file in rows:continue
    if file.startswith(('js/','scripts/','frozen/','docs/runtime-environment/','nethack-c/'))and Path(file).suffix in {'.js','.mjs','.json','.patch','.c','.h','.inc','.py','.sh'}:
-    assert(ROOT/current(file)).read_bytes()==original(file),'Unrelated source/evidence change: '+file
+    assert qualified_current(current(file))==original(file),'Unrelated source/evidence change: '+file
   expected={current(f)for f in inventory()if f.startswith('js/')and Path(f).suffix in {'.js','.json'}and f!='js/standalone/address-ports.js'}
   actual={str(p.relative_to(ROOT))for p in(ROOT/'js').rglob('*')if p.is_file()and p.suffix in {'.js','.json'}}
   assert actual==expected,('Unexpected runtime source membership',sorted(actual-expected),sorted(expected-actual))

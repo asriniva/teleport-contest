@@ -1,0 +1,19 @@
+MUSIC: 5687 native-C/pure-JS monster, pit, quake, instrument, tune, state and RNG-site comparisons checked.
+Native assertions: 15152 checked, 0 failed.
+file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4
+for(const name of ['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'])Object.defineProperty(globalThis,name,{configurable:true,get(){throw Error('Unavailable capability in pure-JS test process: '+name);}});
+                                                                                                                                                     ^
+
+Error: Unavailable capability in pure-JS test process: WebAssembly
+    at get (file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-probes/deny-wasm.mjs:4:150)
+    at lazyllhttp (node:internal/deps/undici/undici:6052:9)
+    at lib/dispatcher/client-h1.js (node:internal/deps/undici/undici:6098:25)
+    at __require (node:internal/deps/undici/undici:6:50)
+    at lib/dispatcher/client.js (node:internal/deps/undici/undici:7974:21)
+    at __require (node:internal/deps/undici/undici:6:50)
+    at lib/dispatcher/pool.js (node:internal/deps/undici/undici:8437:18)
+    at __require (node:internal/deps/undici/undici:6:50)
+    at lib/dispatcher/agent.js (node:internal/deps/undici/undici:8528:16)
+    at __require (node:internal/deps/undici/undici:6:50)
+
+Node.js v22.23.5
