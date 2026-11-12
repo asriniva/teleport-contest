@@ -1,5 +1,61 @@
 # Upstream divergence register
 
+Final game-public assembly gate (2026-11-11): the linker audit finds all
+3,125 configured-native public game functions callable (2,643 owned and482
+resolved deferred entries), with zero missing game public entries. Normal
+construction executes source initializers; the audit does not run MAIN/input or
+explicitly invoke audited exports. Eight native public SDK helpers remain
+unowned; they are not hidden by the game-policy count. The scope gate passes568
+production imports with137 unchanged policies, one approved VISION correction,
+three unchanged frozen dependencies and no forbidden production dependencies.
+Fresh actual MAIN startup/wait/save/four-way restore, LIGHT25, Castle26 and
+room-world26 comparisons pass on this assembly. These are bounded proofs;
+full-game acceptance remains false, pending SDK boundaries and the broader
+fixed-assembly suite. Exact profiles are in public-entry-evidence.json.
+
+Full game public-entry registration (2026-11-11, bounded execution gates pass):
+`discoveries.js` enriches the existing object-state adapter's services and extends
+that same owner with seven original O_INIT discovery functions. It retains the
+original discovery tables/private context and binds actual discovered_cmp/qsort
+and window callbacks; error dispatch goes to the real PANIC/PLINE owners.
+Late program/environment wiring and source-scope ABI checks are added. The
+original-C alphabetic discovery-screen comparison passes22 checks/6 frames,
+and a separate source discovery/interesting/known-entry-retention/sort component
+passes22/4 frames. Both retain571 source files and157 assets before/after.
+Renaming, other menu/sort variants and error paths remain unverified.
+COLORATT retains its original context/state/six storage blocks and two existing
+public function objects, exposing22 additional functions. Fresh Clang checks119
+COLORATT values, the POSIX layout,24 original prototypes, four table extents and
+124 header hashes. Focused C proof passes87 comparisons: actual MAIN configured
+red/bold inventory, parser/format/RGB/nearest-color outputs and glyph fields,
+nonempty regex rules, temporary defaults/save/restore/cleanup. Opaque compiled
+regex bytes are not compared; rule ownership and listed matches are checked.
+Query dialogs, fatal invalid config and the broad regex dialect remain untested.
+
+Remaining room/map and engraving integration (2026-11-11):
+Existing room-queries exposes original MKROOM antholemon/courtmon/mkundead on its
+same context; ubirthday reads shared time_t storage and mkundead receives native
+coord/schar/int arguments. Existing map-lighting exposes original MKMAP
+remove_rooms with a native struct mkroom copy helper. The controlled Castle
+world proof passes26 checks:8 ant/64 court selections, four actual undead,
+room removal3→2, six full worlds and23 frames/full RNG/logs/TTY. Natural caller
+progression, corpse revival, genocided variants and all room types are untested.
+`engrave.js` forwards prior public wrappers and exposes eleven missing functions
+through one original native context using the existing head_engr/SVC state and
+original stylus/occupation callbacks. Late program wiring is added; the first
+real MAIN dust/fingertip command writes Atlas and completes the source occupation,
+passing22 comparisons/13 frames. A40-character input correctly stops on
+the actually pending space, matching22 comparisons/48 frames and preserving the
+written prefix with occupation cleared by source. It does not prove completed
+long engraving. Both also compare source stats and sanity traversal. No additional port policy or frozen infrastructure edits.
+
+Fresh bones evidence isolation (2026-11-11): the development-only
+`test-standalone-bones-consumer.mjs` accepts an optional output directory so a
+new producer's four-way consumer receipts can coexist with the prior accepted
+artifact. All consumer inputs, source recording/state/world assertions and
+provenance checks remain unchanged; this option does not change game policy.
+The new ea796eb5,027-byte JS bones artifact is pending that separate matrix.
+
 Published checkpoint ea796eb follow-up (2026-11-11): the fixed production
 closure passes the ordinary depth-five death comparison:20 checks,2,376 moves,
 2,752 input boundaries,2,945 frozen frames,96,190 raw terminal bytes, exact logs,

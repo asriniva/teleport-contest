@@ -1,6 +1,6 @@
 // Genuine fresh ordinary D5 consumers cross-fed real C/JS ordinary-death bones.
 import assert from'node:assert/strict';import fs from'node:fs';import path from'node:path';import crypto from'node:crypto';import{builtinModules}from'node:module';
-const directory=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1'),fixture=path.resolve('.cache/native-bones-consumer-seed16/input.json'),out=path.resolve('.cache/standalone-bones-consumer');fs.mkdirSync(out,{recursive:true});const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const directory=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1'),fixture=path.resolve('.cache/native-bones-consumer-seed16/input.json'),out=path.resolve(process.env.STANDALONE_BONES_CONSUMER_OUTPUT??'.cache/standalone-bones-consumer');fs.mkdirSync(out,{recursive:true});const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 // Snapshot before dynamically importing production modules: imports themselves
 // must not race ahead of the source revision which the evidence identifies.
 const root=process.cwd(),builtins=new Set(builtinModules),externalImports=new Set();

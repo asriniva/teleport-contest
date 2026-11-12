@@ -100,6 +100,8 @@ import {enableRegion} from './region-services.js';
 import {enableBall} from './ball.js';
 import {enableDbridge} from './dbridge.js';
 import {enableDoName} from './do-name.js';
+import {enableEngrave} from './engrave.js';
+import {enableDiscoveries} from './discoveries.js';
 import {enableWizcmds} from './wizcmds.js';
 import {enableRip} from './rip.js';
 import {enableShknam} from './shknam.js';
@@ -332,6 +334,8 @@ export function createStandaloneEnvironment(options={}) {
         enableBall:layouts=>enableBall(environment,layouts),
         enableDbridge:layouts=>enableDbridge(environment,layouts),
         enableDoName:layouts=>enableDoName(environment,layouts),
+        enableEngrave:layouts=>enableEngrave(environment,layouts),
+        enableDiscoveries:layouts=>enableDiscoveries(environment,layouts),
         enableWizcmds:layouts=>enableWizcmds(environment,layouts),
         enableRip:layouts=>enableRip(environment,layouts),
         enableShknam:layouts=>enableShknam(environment,layouts),

@@ -26,6 +26,8 @@ export function createStandaloneProgram({layouts,runtime={},stdio:stdioOptions={
  env.enableZapPublic(layouts);
  env.enableDbridge(layouts);
  env.enableDoName(layouts);
+ env.enableEngrave(layouts);
+ env.enableDiscoveries(layouts);
  let started=false;
  return{environment,stdio,terminal:window.terminal,
   run(argv=[],{programName='./this.program'}={}){

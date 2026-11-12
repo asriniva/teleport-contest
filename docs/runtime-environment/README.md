@@ -1,5 +1,32 @@
 # Standalone JavaScript C environment checkpoint
 
+Current published checkpoint: `ea796eb` (implementation) and `13bd001`
+(recording evidence) on main. The production entry remains
+`js/standalone/program.js`, with JS-owned memory and no Wasm, host imports or
+network dependencies in its checked closure. The scope gate preserves137
+unchanged port policies, the single explicitly authorized VISION boolean
+correction, and all three frozen infrastructure files.
+
+The checkpoint adds complete public exposure through shared contexts for ZAP,
+POLYSELF, DO_NAME, DBRIDGE, allocation/string buffers/calendar and vision queries.
+Focused original-C comparisons cover positive wishes, polymorph/damage/return,
+real item naming, Castle drawbridge actions and source monster cloning. Actual
+startup/save/four fresh C/JS restore combinations pass. The fixed checkpoint also
+passes ordinary depth-five death through2,376 turns,2,752 inputs and2,945 frames,
+with569 source files and157 assets stable before imports and after execution.
+See `public-entry-evidence.json` for individual receipts and their limits.
+
+Full-game acceptance remains false. The new5,027-byte JS bones artifact needs
+fresh four-way consumer checks; earlier four-way acceptance applies to the older
+5,032-byte artifact. The next batch connects the remaining engraving, discovery,
+room/map and color/menu functions and then repeats the integrated checks. A
+registered function is not proof of every branch, and controlled source-created
+progression fixtures are not natural full-game journeys.
+
+The dated notes below preserve earlier checkpoint history. Their references to
+current work, missing connections and unchanged policy counts describe those
+older revisions; the current scope and evidence above take precedence.
+
 Current required-progression checkpoint: real depth5 bones from both C and JavaScript are interoperable in fresh C/JS consumers (all four combinations,31 grouped checks, exact recordings/RNG/restored world; 543 source/data files and157 assets stable). A source-created successful invocation fixture passes24 checks, including real candle/Bell/Book commands and new downstairs. Ordinary Tourist starting-scroll mapping passes157 checks, and inventory/save/four-way restore regression remains253. See progression-evidence.json for exact profiles, artifact hashes, setup and limits. The depth5 ordinary death recording now passes20 comparisons through normal exit at move2376, all2752 input boundaries/2945 frames/full RNG logs/TTY and score text, with543 source/data files and157 assets stable. Its exact JS bones artifact matches the four-way consumer fixture. Post-cleanup heap/object graph equivalence is outside this producer claim; live restored bones graphs are accepted separately. Natural quest progression, planes, victory and other variants remain unaccepted; fullGameAccepted is false.
 
 Current integration progress (2026-11-11): original shared-source providers now pass focused C comparisons for WIZARD (311), MPLAYER (170), MINION (233), MONDATA (525), and ordinary locked-door kicking (7 grouped checks). Genuine main targeting passes20 comparisons; five ordinary look/help flows pass54, including complete help display. Exact recordings, both RNG states/logs and selected canonical world graphs are compared. These are bounded subsystem proofs, separate from the frozen ordinary-game checkpoint below. Full game acceptance remains false. Actual ordinary whip throwing and bow firing now pass19 comparisons, including real floor placement/unequipping/ammunition use; nonempty source camera-light creation/cleanup passes25, and original immediate theft/ownership passes217. Delayed armor-theft callbacks remain unverified. The deeper Samurai replay and bones production remain in progress.

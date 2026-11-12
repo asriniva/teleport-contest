@@ -437,8 +437,12 @@
     },
     "leaves": [
       "fill_zoo",
-      "cmap_to_type"
+      "cmap_to_type",
+      "antholemon",
+      "courtmon",
+      "mkundead"
     ],
+    "mapLeaf": "remove_rooms on existing map-lighting; native copyRoom uses measured struct mkroom extent",
     "sourceTable": "mkroom.squadprob mapped to measured PM constants"
   },
   "globals": [
@@ -1082,14 +1086,19 @@
     "destroy_drawbridge": "void (coordxy, coordxy)"
   },
   "sourceSha256": {
-    "scripts/export-standalone-dbridge-abi.py": "5bafd347e5796eec0c97dabc9c9372dda6f52920b15f8b1d43f734c732347a6c",
+    "scripts/export-standalone-dbridge-abi.py": "b6630fb1578cbb6632ad33cfd6a5a595a7a7c2291b08dd0cf00502b00a6fcd20",
     "scripts/tu-dbridge-layout.h": "4220017de38602fb8698ed6ea02f34b0c52393975b4b9ade76c8164d305807fb",
     "nethack-c/wasm/tu-support.c": "4acc049213a8c67b069b71315406f58409100db195df2dadbc5d4bcd7184f875",
     "nethack-c/wasm/tu-libraries/dbridge.js": "cee119ab85fef59be571c17e7646613615f66b990a8442928ec730d4a0be023c",
     "js/ported/dbridge.js": "91844831154f6d128e50d762d0763ecf2b3b845111e91ae5d0e537d10d25bd27",
     "js/ported/dbridge-runtime.js": "0e128edc773131bf880cbbdbe04677db14cd9edebe692a29730ae0341ac9685b",
     "js/standalone/dbridge.js": "8112ad6f5615f54b33509fabf510fb1edd8bee66a498c9f9f7db0b20012bdbd8",
-    "js/standalone/level-contents.js": "06ab1e4d26a7655a1ea2c51c19366a4d33ba46233225b8ea3fa8e5bd0fd5d6b3",
+    "js/standalone/level-contents.js": "a8914f90f114835a2fda718e75ef45f162c204832d8b76a562f006d82e961dc4",
+    "js/standalone/level-startup.js": "818f75a8a8ca0558aba1825d0314b3b5f7e47424f16be53d14f601e13f60c009",
+    "js/ported/mkmap.js": "6bc6989d007324dd052b67dc5465d38570259ec9b79b5f507e395c8ffb18fff8",
+    "js/ported/mkmap-runtime.js": "b4ee74bce9c1e08d3a905ea3a355c613fb529843b1a5f6c002e840cad0b3e673",
+    "nethack-c/wasm/tu-mkroom-support.inc": "c431a8ca0c20768dfc48474f2120e78ec7790cdd3e21ef8f750eccc3339fb0c9",
+    "nethack-c/wasm/tu-libraries/mkroom.js": "fbfe0d39c58176f65e09d867918fb84fd58772b9c99e5bd0ec2d6ea86e94e79b",
     "js/ported/mkroom.js": "d839ce4348574637d3d12d55d6efd3b312d623e461d1b25e1dd1732915076eab",
     "js/ported/mkroom-runtime.js": "cd26ed553fa3bfab902c5530045046e417b8266615ed9a68441d31d1199b5936",
     "scripts/tu-mkroom-layout.h": "b0373018e7d784e8aa6ad06353cd567c1ca896e456e957131e211f70d34b6e40",
@@ -1219,6 +1228,7 @@
     ".cache/wasm64-build/tree/lib/lua-5.4.8/src/luaconf.h": "af243c94bee6d2601383e8b65ed66a0d1b4ab3b7418ff903fcd0679912160e3a",
     ".cache/wasm64-build/tree/lib/lua-5.4.8/src/lualib.h": "4ea0f67d3e467f5d6a327616e22a3c2da8e03d47a3c3660916275f2842f521ea",
     ".cache/wasm64-build/tree/src/dbridge.c": "b1dbdca4e2fc9e5a2a17ed5d0c80d79f900ea5997dd0b2c4a3171977bee0260f",
+    ".cache/wasm64-build/tree/src/mkmap.c": "25046834749be29ad3ec4b03f024189de5026b805da0129537dd5c75ca7e2f50",
     ".cache/wasm64-build/tree/src/mkroom.c": "bef143b8557acd2636512fb3a824314bd36bd599e11ba536c1d45d867a04499c",
     "nethack-c/wasm/native-terminal.h": "16eceb17caf6e70d0e8e6b36f23daebdb30f7ace18676d482c8376fccf6dceeb",
     "scripts/tu-dbridge-layout.h": "4220017de38602fb8698ed6ea02f34b0c52393975b4b9ade76c8164d305807fb",

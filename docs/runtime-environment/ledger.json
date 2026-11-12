@@ -4,11 +4,11 @@
   "acceptedCheckpoint": "d3f8cce27971690b66ef42555070b5d0eef252d2",
   "counts": {
     "canonical-dependency": 1,
-    "in-progress": 55,
+    "in-progress": 54,
     "provider-only": 1,
     "transport-only": 3,
     "verified-component": 10,
-    "verified-subset": 68
+    "verified-subset": 69
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -166,8 +166,8 @@
       "module": "mkmap",
       "source": "src/mkmap.c",
       "status": "verified-subset",
-      "scope": "Source litstate_rnd and flood_fill_rm on shared terrain/bounds/counters during actual themed-room prefixes; complete cavern-map generation and other functions unaccepted.",
-      "evidence": "scripts/test-standalone-level-generation.mjs:3672 original-C comparisons over12 role/seed real-newgame prefixes; matching explicit maketrap/has_dnstairs boundaries,42 shared roots including terrain/rooms, source-created overview/coder records, persistent theme table/function types and exact RNG logs. Full level/game/recordings remain unfinished."
+      "scope": "Original shared map context now exposes remove_rooms with exact native struct copy helper. Source room-list removal3 to2 with copied last room and terrain room-number remapping matches full C world/RNG/recording in26-check room-world test. Natural cave-generation callers and other cases remain unverified.",
+      "evidence": "scripts/test-standalone-room-world.mjs"
     },
     {
       "module": "getline",
@@ -289,9 +289,9 @@
     {
       "module": "coloratt",
       "source": "src/coloratt.c",
-      "status": "in-progress",
-      "scope": "Original menu-rule/POSIX-regex components and cleanup; broad UI behavior remains unverified. Expanded regression gate pending; no full-game acceptance.",
-      "evidence": "scripts/test-standalone-color-attributes.mjs"
+      "status": "verified-subset",
+      "scope": "All24 public entries use original context/state/storage; two prior function identities retained. Guarded C proof87 compares actual red/bold MAIN inventory, parser/RGB/nearest-color/output-box/glyph fields and nonempty regex rule mutation/temporary-defaults/restoration/cleanup. Opaque POSIX internals, dialogs and invalid config remain outside acceptance.",
+      "evidence": "scripts/test-standalone-coloratt-public.mjs"
     },
     {
       "module": "priest",
@@ -343,8 +343,8 @@
       "module": "o_init",
       "source": "src/o_init.c",
       "status": "verified-subset",
-      "scope": "Existing startup/shuffle/name-state subset plus discover_object/observe_object reached by actual pony saddle identification; discovery table verified. Menus/gameplay lifecycle remain unfinished.",
-      "evidence": "Accepted standalone checkpoint through c85e713; exact checks and limits in README.md; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
+      "scope": "Existing initialized object-state context exposes seven remaining publics with native window/qsort callbacks and actual error owners. Actual alphabetic discovery menu passes22 checks/6 frames; source discovery/interesting/known-entry-retention/sort queries pass22/4 frames. Renaming, other sort/menu/error variants remain unverified.",
+      "evidence": "scripts/test-standalone-discoveries.mjs (default and component mode)"
     },
     {
       "module": "ball",
@@ -400,8 +400,8 @@
       "module": "mkroom",
       "source": "src/mkroom.c",
       "status": "verified-subset",
-      "scope": "Original has_dnstairs/has_upstairs/inside_room/somex/somey/somexy/somexyspace on actual generated rooms/stairs, with measured pointer/coord outputs and exact source RNG transport. Remaining special-room policies remain unaccepted.",
-      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted."
+      "scope": "Original shared room context now exposes all remaining public helpers. Controlled actual Castle proof compares8 ant/64 court choices and four actual undead/graveyard state; complete room-world test26 checks/6 worlds/23 frames/full RNG/TTY. Other room types/revival/genocide variants remain unverified.",
+      "evidence": "scripts/test-standalone-room-world.mjs; scripts/test-standalone-dbridge.mjs"
     },
     {
       "module": "sfstruct",
@@ -575,8 +575,8 @@
       "module": "engrave",
       "source": "src/engrave.c",
       "status": "verified-subset",
-      "scope": "Prior engraving CRUD plus original grave/random engraving creation, three text states and full allocated text payloads. Original random-text callback contract and rubout literals use typed standalone memory. Player engraving UI and non-generation effects unaccepted. Original read_engr_at, surface/liquid descriptions and nonempty save/rest share existing head/state; reading, text memory, RNG, terminal messages and recorder frames are verified in explicit cases. Player engraving commands/full lifecycle remain unaccepted.",
-      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted. test-standalone-engraving-read.mjs:581 grouped C engraving comparisons/83 cases plus521 alignment-description and9 interrupted-prefix/preamble comparisons; test-standalone-level-persistence.mjs:852 joint checks including exact RNG/hero/real files and nonempty engraving restore."
+      "scope": "All configured public entries use one original native context and existing head_engr/SVC state; prior callbacks forward without reset. Real MAIN Atlas dust writing completes; a40-character input with pending space correctly interrupts. Each passes22 checks,13/48 frames, full world/RNG/TTY. Other implements, terrain, blindness and persistence variants remain unverified.",
+      "evidence": "scripts/test-standalone-engrave.mjs (default and long mode)"
     },
     {
       "module": "glyphs",
@@ -1045,5 +1045,5 @@
     "travelAndRanking": "Four C/JS save crosses each for down/up/down-up-down pass;50-point quit/nonempty ranking and four histories match.",
     "scope": "See ordinary-game-evidence.json. Full-game/registry/victory/bones acceptance remains false; newer unimported WIZARD/MPLAYER/MINION work is separate."
   },
-  "publicEntryAudit": "scripts/audit-standalone-public-closure.mjs distinguishes registered functions from behavioral acceptance; owner counts do not prove full support."
+  "publicEntryAudit": "3125 configured-native public game functions resolve (2643 owned,482 deferred). No missing game public entries after normal program construction; this is a registration inventory, not branch/full-game acceptance. Eight SDK libc helpers remain unowned and are being integrated."
 }

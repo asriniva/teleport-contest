@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Bind original COLORATT/POSIXREGEX contexts and existing measured layouts."""
-import hashlib,json,os,re,subprocess
+import hashlib,json,os,re,shlex,subprocess
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 paths=['scripts/export-standalone-color-attributes-abi.py','js/standalone/color-attributes.js','js/ported/coloratt.js','js/ported/coloratt-runtime.js','js/ported/posixregex.js','js/ported/posixregex-runtime.js','js/services/wasm-dependency-runtime.js','js/services/posix-regex.js','nethack-c/wasm/tu-support.c','nethack-c/wasm/native-terminal.h','nethack-c/wasm/full-original-c-native.c','nethack-c/wasm/tu-libraries/coloratt.js','nethack-c/wasm/tu-libraries/posixregex.js','scripts/tu-coloratt-layout.h','scripts/tu-posixregex-layout.h','js/wasm/tu-layouts.json','js/standalone/records.json']
@@ -12,6 +12,19 @@ probe=root/'.cache/color-posixregex-abi.c';probe.write_text('#include '+json.dum
 ir=subprocess.check_output([str(ref/'.cache/emsdk/upstream/bin/clang'),*flags,'-S','-emit-llvm','-O0','-o','-',str(probe)],text=True)
 native={k:int(re.search(r'@probe_'+k+r' = .*?constant i64 (\d+)',ir)[1])for k in expressions}
 layouts=json.loads((root/'js/wasm/tu-layouts.json').read_text())
-data={'layout':{'coloratt':layouts['coloratt'],'posixregex':native},'sourceSha256':{p:hashlib.sha256((root/p).read_bytes()).hexdigest()for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):hashlib.sha256(p.read_bytes()).hexdigest()for p in [source,header]},'scope':'Original native storage/view transport; cleanup/regex source policy unchanged; original-C connected acceptance is separate.'}
+colorSource=tree/'src/coloratt.c';assert colorSource.read_bytes()==(root/'nethack-c/upstream/src/coloratt.c').read_bytes(),'Review configured COLORATT source'
+colorHeader=root/'scripts/tu-coloratt-layout.h';probe.write_text('#include '+json.dumps(str(colorSource))+'\n#include '+json.dumps(str(colorHeader))+'\n');cpp=subprocess.check_output([str(ref/'.cache/emsdk/upstream/bin/clang'),*flags,'-E','-P',str(probe)],text=True)
+rows=re.findall(r'\{\s*"([^"]+)"\s*,\s*(.*?)\s*\}',re.search(r'coloratt_layout\[\]\s*=\s*\{(.*?)\n\};',cpp,re.S)[1],re.S)
+body=probe.read_text()+'\n'+'\n'.join('const unsigned long proof_color_'+str(i)+'=('+v+');'for i,(_,v)in enumerate(rows));probe.write_text(body);ir=subprocess.check_output([str(ref/'.cache/emsdk/upstream/bin/clang'),*flags,'-S','-emit-llvm','-O0','-o','-',str(probe)],text=True)
+measured={k:int(re.search(r'@proof_color_'+str(i)+r' = .*?constant i64 (-?\d+)',ir)[1])&((1<<64)-1)for i,(k,_)in enumerate(rows)};measured['size']=measured['colorAttrSize'];assert set(measured)==set(layouts['coloratt'])and all(v==(int(layouts['coloratt'][k])&((1<<64)-1))for k,v in measured.items()),repr({'extra':set(measured)-set(layouts['coloratt']),'missing':set(layouts['coloratt'])-set(measured),'changed':[(k,v,layouts['coloratt'].get(k))for k,v in measured.items()if v!=(int(layouts['coloratt'].get(k,0))&((1<<64)-1))]})
+publicFunctions=json.loads((root/'js/standalone/public-functions.json').read_text())['functions'];names=re.findall(r'^export function (\w+)',(root/'js/ported/coloratt.js').read_text(),re.M);public={n:publicFunctions[n]for n in names if n in publicFunctions};original=colorSource.read_text();snprintfSites=[{'function':'wc_color_name','line':original[:original.index('Snprintf(hexcolor')].count('\n')+1},{'function':'rgbstr_to_int32','line':original[:original.index('Snprintf(buf')].count('\n')+1}];assertion={'condition':'basicindx < 16','file':'coloratt.c','line':original[:original.index('assert(basicindx < 16)')].count('\n')+1,'function':'wc_color_name'}
+proof=probe.read_text()
+for n,t in public.items():
+ m=re.match(r'^(.*?)\s*\((.*)\)$',t);proof+='\n_Static_assert(__builtin_types_compatible_p(__typeof__(&'+n+'),'+m[1]+' (*)('+m[2]+')),"native '+n+' signature");'
+for key,table in {'colorCount':'colortable','colorNameCount':'colornames','attrNameCount':'attrnames','color256Count':'color_256_definitions'}.items():proof+='\n_Static_assert(SIZE('+table+')=='+str(layouts['coloratt'][key])+',"native '+key+' extent");'
+probe.write_text(proof);subprocess.check_output([str(ref/'.cache/emsdk/upstream/bin/clang'),*flags,'-fsyntax-only',str(probe)],text=True)
+rawdeps=subprocess.check_output([str(ref/'.cache/emsdk/upstream/bin/clang'),*flags,'-M',str(probe)],text=True);headers={Path(v).resolve()for v in shlex.split(rawdeps.split(':',1)[1].replace('\\\n',''))if Path(v).resolve().is_relative_to(ref)and Path(v).resolve()!=probe.resolve()};headers.update([source,header])
+paths+=['js/standalone/public-functions.json','nethack-c/upstream/src/coloratt.c','nethack-c/wasm/compile-defines.json']
+data={'measuredColorLayoutValues':len(measured),'public':public,'snprintfSites':snprintfSites,'assertion':assertion,'layout':{'coloratt':layouts['coloratt'],'posixregex':native},'sourceSha256':{p:hashlib.sha256((root/p).read_bytes()).hexdigest()for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):hashlib.sha256(p.read_bytes()).hexdigest()for p in sorted(headers)},'scope':'One existing cached COLORATT/POSIXREGEX context and storage; full native public transport, parser/regex/menu proof separate from registration.'}
 (root/'js/standalone/color-attributes-abi.json').write_text(json.dumps(data,indent=2)+'\n')
 print('Bound original COLORATT/POSIXREGEX storage and measured ABI.')
