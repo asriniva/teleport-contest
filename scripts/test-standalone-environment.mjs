@@ -2,11 +2,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {pathToFileURL} from 'node:url';
 import {createStandaloneEnvironment} from '../js/standalone/environment.js';
-import {CMemory} from '../js/services/c-memory.js';
+import {CMemory} from '../js/c-runtime/heap.js';
 import {createMemoryServices} from '../js/standalone/memory-services.js';
 import {createFunctions,CExit} from '../js/standalone/functions.js';
 import * as canonical from '../js/isaac64.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 
 const memory=new CMemory({initialBytes:256,maximumBytes:1024*1024}),s=createMemoryServices(memory);
 s.defineRecord('pair',{size:16,fields:{x:{offset:0,type:'Int16'},flags:{offset:2,type:'Uint16',bits:3,shift:5},ptr:{offset:8,type:'ptr'}}});

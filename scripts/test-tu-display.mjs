@@ -7,7 +7,7 @@ if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('DISPLAY has no native re
 const displayProbeRoot=resolveProbe(dirnameProbe(fileURLProbe(import.meta.url)),'..');
 const displayProbeDir=resolveProbe(process.env.DISPLAY_PROBE_DIR??resolveProbe(displayProbeRoot,'.cache/display-first-pass'));
 const [refFactory,hybridFactory]=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathURLProbe(resolveProbe(displayProbeDir,'display-'+mode+'.mjs')).href)).default));
-const{callDisplay,initializeDisplay}=await import(process.env.DISPLAY_RUNTIME??'../js/ported/display-runtime.js');
+const{callDisplay,initializeDisplay}=await import(process.env.DISPLAY_RUNTIME??'../js/nethack/bindings/display.js');
 const schema=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/display-schema.json',import.meta.url))),functions=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/display-source-metadata.json',import.meta.url))).functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
 
 const output=[[],[]],ref=await refFactory({print:s=>output[0].push(['out',s]),printErr:s=>output[0].push(['err',s])}),hybrid=await hybridFactory({nethackPorted:{display:callDisplay,initializeDisplay:process.env.DISPLAY_STARTUP_NEGATIVE?()=>{}:initializeDisplay},print:s=>output[1].push(['out',s]),printErr:s=>output[1].push(['err',s])});const mods=[ref,hybrid];

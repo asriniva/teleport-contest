@@ -6,7 +6,7 @@ import {fileURLToPath,pathToFileURL} from 'node:url';
 import {execFileSync} from 'node:child_process';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'../../..');
 const read=p=>readFile(resolve(root,p),'utf8');
-const [source,prepared,core,runtime,support,library,layout]=await Promise.all(['nethack-c/upstream/src/windows.c','.cache/wasm64-build/tree/src/windows.c','js/ported/windows.js','js/ported/windows-runtime.js','nethack-c/wasm/tu-fragments/windows-support.c','nethack-c/wasm/tu-libraries/windows.js','scripts/tu-windows-layout.h'].map(read));
+const [source,prepared,core,runtime,support,library,layout]=await Promise.all(['nethack-c/upstream/src/windows.c','.cache/wasm64-build/tree/src/windows.c','js/ported/windows.js','js/nethack/bindings/windows.js','nethack-c/wasm/tu-fragments/windows-support.c','nethack-c/wasm/tu-libraries/windows.js','scripts/tu-windows-layout.h'].map(read));
 assert.equal(source,prepared,'WINDOWS pristine/prepared provenance changed');
 const defs=JSON.parse(await read('nethack-c/wasm/compile-defines.json')),file=resolve(root,'.cache/wasm64-build/tree/src/windows.c');
 const args=['-sMEMORY64=1','-I'+resolve(root,'.cache/wasm64-build/tree/include'),'-I'+resolve(root,'.cache/ncurses-wasm64-build/include'),'-include',resolve(root,'nethack-c/wasm/native-terminal.h'),...defs.map(x=>'-D'+x),'windows.c'];

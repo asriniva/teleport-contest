@@ -5,9 +5,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { createJsRuntime, JS_RUNTIME_LAYOUTS, CPanic } from '../js/nethack/runtime.js';
-import { CMemory } from '../js/services/c-memory.js';
-import { C_ERRNO } from '../js/services/c-stdlib.js';
-import { C, R, T, withCEnvironment } from '../js/ported/c-runtime.js';
+import { CMemory } from '../js/c-runtime/heap.js';
+import { C_ERRNO } from '../js/c-runtime/stdlib.js';
+import { C, R, T, withCEnvironment } from '../js/c-runtime/context.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 // A separate worktree may borrow prepared reference sources read-only.
@@ -153,7 +153,7 @@ assert.ok(memory.generation > 0, 'growth must occur while live buffer views exis
 assert.equal(libc.format('%f', 1.5), '1.500000');
 assert.throws(() => libc.format('%Lf', 1.5), /Long-double formatting is not supported/);
 const bounded = new CMemory({ initialBytes: 64, maximumBytes: 64 });
-const boundedRuntime = (await import('../js/services/c-stdlib.js')).createCStdlib(bounded);
+const boundedRuntime = (await import('../js/c-runtime/stdlib.js')).createCStdlib(bounded);
 const unterminated = bounded.malloc(48);
 bounded.HEAPU8.fill(65, unterminated, 64);
 assert.equal(boundedRuntime.format('%.3s', unterminated), 'AAA');

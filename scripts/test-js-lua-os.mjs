@@ -5,8 +5,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {createWasmLuaRuntime} from '../js/services/wasm-lua-runtime.js';
-import {createLuaBytecodeVM} from '../js/services/lua-bytecode-vm.js';
+import {createLuaAbi} from '../js/lua/abi.js';
+import {createLuaBytecodeVM} from '../js/lua/bytecode-vm.js';
 const root=fileURLToPath(new URL('../',import.meta.url)),scratch=path.join(root,'.cache/js-lua-os');fs.mkdirSync(scratch,{recursive:true});
 const sdk=process.env.EMSDK??path.join(root,'.cache/emsdk');
 const env={...process.env,TZ:process.env.TZ??'America/New_York',PATH:path.join(sdk,'node/24.19.0_64bit/bin')+path.delimiter+process.env.PATH};
@@ -50,7 +50,7 @@ for(const mode of ['native','javascript'])command(path.join(sdk,'upstream/emscri
 const modules={},output={};
 for(const mode of ['native','javascript']){
  output[mode]=[];const factory=(await import(pathToFileURL(path.join(scratch,mode+'.mjs')))).default;
- modules[mode]=await factory({nethackLua:createWasmLuaRuntime({vmFactory:createLuaBytecodeVM}),print:line=>output[mode].push(line),printErr:line=>{throw Error(line)},preRun:[m=>{m.ENV.TZ=env.TZ;}]});
+ modules[mode]=await factory({nethackLua:createLuaAbi({vmFactory:createLuaBytecodeVM}),print:line=>output[mode].push(line),printErr:line=>{throw Error(line)},preRun:[m=>{m.ENV.TZ=env.TZ;}]});
 }
 const tableValues=`local function values(t)return t.year,t.month,t.day,t.hour,t.min,t.sec,t.wday,t.yday,t.isdst end;`;
 const cases=[];const add=(name,source)=>cases.push([name,source]);

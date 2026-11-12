@@ -8,7 +8,7 @@ flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/u
 with tempfile.TemporaryDirectory(prefix='nhlua-callback-')as tmp:
  p=Path(tmp)/'probe.c';p.write_text('#include "hack.h"\nboolean (*probe_callback)(char *)=&parse_config_line;\nconst unsigned long probe_bool=sizeof(boolean),probe_ptr=sizeof(char *);\n');ir=subprocess.check_output([str(clang),*flags,'-S','-emit-llvm','-O0','-o','-',str(p)],text=True);sizes={n:int(re.search('@probe_'+n+r' = .*?constant i64 (\d+)',ir)[1])for n in ['bool','ptr']};assert sizes=={'bool':1,'ptr':8}
 # Same-owner NHLOBJ packed fields are native helper maps, never Lua policy.
-object_support=root/'nethack-c/wasm/tu-nhlobj-support.inc';object_runtime=root/'js/ported/nhlobj-runtime.js';object_native=object_support.read_text();object_js=object_runtime.read_text()
+object_support=root/'nethack-c/wasm/tu-nhlobj-support.inc';object_runtime=root/'js/nethack/bindings/nhlobj.js';object_native=object_support.read_text();object_js=object_runtime.read_text()
 def native_bits(function):
  body=object_native.split(function+'(',1)[1].split('default:',1)[0]
  pairs=[(int(i),name)for i,name in re.findall(r'case (\d+):return o->(\w+);',body)]

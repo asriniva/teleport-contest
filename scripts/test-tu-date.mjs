@@ -6,8 +6,8 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import emscriptenReferenceFactory from '../.cache/tu-probes/date-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/date-hybrid.mjs';
-import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
-import { C, R, T } from '../js/ported/c-runtime.js';
+import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import { C, R, T } from '../js/c-runtime/context.js';
 
 if (!process.argv.includes('--worker')) {
     for (const zone of ['UTC', 'America/New_York', 'America/Los_Angeles', 'Asia/Kolkata', 'Europe/Berlin']) {

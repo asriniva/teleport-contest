@@ -14,7 +14,7 @@ for name in ['weapon','worn','wield']:
  text=(weapon if name=='weapon' else support).read_text()
  data[name]={'globals':mapping(text,'teleport_'+name+'_global')}
  if name!='weapon':data[name]['equipment']=mapping(text,'teleport_'+name+'_equipment_cell')
-inputs=[Path(__file__).resolve(),root/'js/standalone/hero-equipment.js',root/'js/standalone/records.json',root/'nethack-c/wasm/tu-libraries/weapon.js',root/'nethack-c/wasm/tu-libraries/wield.js',support,weapon,root/'nethack-c/wasm/compile-defines.json',*[root/('js/ported/'+n+suffix)for n in ['weapon','worn','wield']for suffix in ['.js','-runtime.js']]]
+inputs=[Path(__file__).resolve(),root/'js/standalone/hero-equipment.js',root/'js/standalone/records.json',root/'nethack-c/wasm/tu-libraries/weapon.js',root/'nethack-c/wasm/tu-libraries/wield.js',support,weapon,root/'nethack-c/wasm/compile-defines.json',*[root/('js/ported/'+n+'.js')for n in ['weapon','worn','wield']],*[root/('js/nethack/bindings/'+n+'.js')for n in ['weapon','worn','wield']]]
 # Native source/library and measured window record bind this macro dispatch.
 fields=json.loads((root/'js/standalone/records.json').read_text())['records']['window_procs']['fields']
 windows={'create_nhwindow':('win_create_nhwindow','ii'),'start_menu':('win_start_menu','vij'),'end_menu':('win_end_menu','vip'),'destroy_nhwindow':('win_destroy_nhwindow','vi')}

@@ -1,16 +1,17 @@
+import{rebaseTestModule}from'./test-module-imports.mjs';
 // Negatives remain explicit Emscripten diagnostics, never native reference evidence.
 import assert from'node:assert/strict';import{readFileSync,writeFileSync,mkdirSync}from'node:fs';import{createHash}from'node:crypto';import{spawnSync}from'node:child_process';import{resolve}from'node:path';import{fileURLToPath,pathToFileURL}from'node:url';
 if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('UNIXUNIX has no native reference fixture; Emscripten results cannot be labeled native.');
 const root=new URL('../',import.meta.url),w=new URL('.cache/unixunix-first-pass/negative-revision2/',root);mkdirSync(w,{recursive:true});
 const artifactDir=resolve(process.env.UNIXUNIX_PROBE_DIR??fileURLToPath(new URL('.cache/tu-probes',root)));
 const hash=p=>createHash('sha256').update(readFileSync(new URL(p,root))).digest('hex'),pinned=[resolve(artifactDir,'unixunix-reference.wasm'),resolve(artifactDir,'unixunix-hybrid.wasm'),'.cache/wasm64-build/tree/sys/unix/unixunix.c','scripts/test-tu-unixunix.mjs'],before=Object.fromEntries(pinned.map(p=>[p,hash(p)]));
-const runtime=readFileSync(new URL('js/ported/unixunix-runtime.js',root),'utf8'),core=readFileSync(new URL('js/ported/unixunix.js',root),'utf8'),cRuntime=new URL('js/ported/c-runtime.js',root).href;
+const runtime=readFileSync(new URL('js/nethack/bindings/unixunix.js',root),'utf8'),core=readFileSync(new URL('js/ported/unixunix.js',root),'utf8'),cRuntime=new URL('js/c-runtime/context.js',root).href;
 let results={};for(const kind of ['wrong-result','old-namespace','wrong-signal-identity','old-zero-local']){
- let c=core.replace("'./c-runtime.js'",JSON.stringify(cRuntime)),rt=runtime.replace("'./c-runtime.js'",JSON.stringify(cRuntime)).replace("'./unixunix.js'",JSON.stringify(new URL(kind+'-core.mjs',w).href));
+ let c=rebaseTestModule(core,new URL('js/ported/unixunix.js',root)),rt=rebaseTestModule(runtime,new URL('js/nethack/bindings/unixunix.js',root),new Map([[fileURLToPath(new URL('js/ported/unixunix.js',root)),new URL(kind+'-core.mjs',w).href]]));
  if(kind==='wrong-result'){assert.ok(c.includes('return 1;'));c=c.replace('return 1;','return 0; /* deliberate unchanged-oracle wrong-result control */');}
  else if(kind==='wrong-signal-identity'){assert.ok(c.includes('C.nativeFunctionPointer("done1")'));c=c.replace('C.nativeFunctionPointer("done1")','C.ptr(1) /* deliberate native callback identity corruption */');}
  else if(kind==='old-zero-local'){assert.ok(rt.includes('if(initial.length)cell.value=initial[0];'));rt=rt.replace('if(initial.length)cell.value=initial[0];','cell.value=initial.length?initial[0]:0; /* deliberate added zero write */');}
- else{assert.ok(rt.includes('services.abiRead('));rt=rt.replaceAll('services.abiRead(','services.read(').replaceAll('services.abiWrite(','services.write(');}
+ else{assert.ok(rt.includes('CAdapter.createScalarAdapter(services,layout'));rt=rt.replace('CAdapter.createScalarAdapter(services,layout',"CAdapter.createScalarAdapter(new Proxy(services,{get:(o,k)=>Reflect.get(o,k==='abiRead'?'read':k==='abiWrite'?'write':k)}),layout");}
  writeFileSync(new URL(kind+'-core.mjs',w),c);const path=new URL(kind+'-runtime.mjs',w);writeFileSync(path,rt);
  const p=spawnSync(process.execPath,[fileURLToPath(new URL('scripts/test-tu-unixunix.mjs',root))],{env:{...process.env,TELEPORT_NATIVE_TESTS:'0',UNIXUNIX_PROBE_DIR:artifactDir,UNIXUNIX_RUNTIME:path.href},encoding:'utf8'});writeFileSync(new URL(kind+'.log',w),p.stdout+p.stderr);assert.notEqual(p.status,0,kind+' must fail');assert.match(p.stdout+p.stderr,/AssertionError/,kind+' actual assertion');results[kind]={exit:p.status,actualAssertionError:true,classification:kind==='old-zero-local'?'SEEDED_JS_ALLOCATION_CONTRACT_NOT_C_INDETERMINATE_PARITY':'UNCHANGED_C_DIAGNOSTIC_DIFFERENTIAL'};
 }

@@ -2,7 +2,7 @@
 """Measure READ transport; source decisions remain unchanged."""
 import hashlib,json,os,re,shlex,subprocess,tempfile
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';header=root/'scripts/tu-read-layout.h';support=root/'nethack-c/wasm/tu-fragments/read-support.inc';library=root/'nethack-c/wasm/tu-libraries/read.js';runtime=root/'js/ported/read-runtime.js';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['read'];clang=ref/'.cache/emsdk/upstream/bin/clang'
+root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';header=root/'scripts/tu-read-layout.h';support=root/'nethack-c/wasm/tu-fragments/read-support.inc';library=root/'nethack-c/wasm/tu-libraries/read.js';runtime=root/'js/nethack/bindings/read.js';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['read'];clang=ref/'.cache/emsdk/upstream/bin/clang'
 flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(ref/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+v for v in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]]
 with tempfile.TemporaryDirectory(prefix='standalone-read-abi-')as scratch:
  probe=Path(scratch)/'probe.c';body='#include '+json.dumps(str(header))+'\n';probe.write_text(body)

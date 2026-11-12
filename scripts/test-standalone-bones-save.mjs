@@ -1,7 +1,7 @@
 // Focused direct original savebones after genuine startup; eligibility is not tested here.
 import assert from 'node:assert/strict';import fs from 'node:fs';import crypto from 'node:crypto';
 import{runFullOriginalC}from'./full-original-c-run.mjs';import{runStandaloneProgram}from'./run-standalone-program.mjs';
-import{C,R,T}from'../js/ported/c-runtime.js';
+import{C,R,T}from'../js/c-runtime/context.js';
 import{worldGraph}from'./restoration-world-graph.mjs';
 const directory='.cache/full-original-c-v1',layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),abi=JSON.parse(fs.readFileSync('js/standalone/bones-services-abi.json')),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 for(const[p,h]of Object.entries(abi.sourceSha256))assert.equal(sha(p),h,p);

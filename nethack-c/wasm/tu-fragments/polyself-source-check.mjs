@@ -8,12 +8,14 @@ export function checkPolyselfSource(root=process.cwd(),{preprocess=true}={}){
  const read=p=>readFileSync(resolve(root,p),'utf8'),original=read('nethack-c/upstream/src/polyself.c'),prepared=read('.cache/wasm64-build/tree/src/polyself.c');
  const expected='2f2f3dc74c2cbdd122f7a1401bd3e4e77efbc37ff6c499371cb8e57c9e39a5c8';
  for(const[label,source]of [['upstream',original],['prepared',prepared]])if(sha(source)!==expected)throw Error('Review changed POLYSELF '+label+' source');
- const core=read('js/ported/polyself.js'),runtime=read('js/ported/polyself-runtime.js'),schema=JSON.parse(read('nethack-c/wasm/tu-fragments/polyself-schema.json'));
+ const core=read('js/ported/polyself.js'),runtime=read('js/nethack/bindings/polyself.js'),schema=JSON.parse(read('nethack-c/wasm/tu-fragments/polyself-schema.json'));
  const names=[...original.matchAll(/^(\w+)\([^;]*?\)\s*\{/gm)].map(m=>m[1]);const jsNames=[...core.matchAll(/^export function (\w+)\(([^)]*)\)/gm)];
  if(names.length!==34||jsNames.map(m=>m[1]).join(',')!==names.join(','))throw Error('Review changed POLYSELF function set/order');
  for(const m of jsNames){const signature=new RegExp('^'+m[1]+'\\(([^)]*)\\)','m').exec(original)[1].replace(/\/\*[\s\S]*?\*\//g,'');const params=signature.trim()==='void'?[]:signature.split(',').map(s=>/\b(\w+)\s*$/.exec(s.trim())[1]);if(m[2].replaceAll(' ','')!==params.join(','))throw Error('Review changed POLYSELF formal bindings '+m[1]);}
  const comments=original.match(/\/\*[\s\S]*?\*\//g)??[];for(const comment of comments)if(!core.includes(comment))throw Error('Missing original POLYSELF comment '+comment.slice(0,80));
- if(!runtime.includes("key=name+':'+at")||!runtime.includes('cache.set(key,result)'))throw Error('Review POLYSELF canonical native record identity');
+ // Check the actual shared implementation and the module's exact cache wiring.
+ const factories=read('js/c-runtime/adapter-factories.js'),records=read('js/c-runtime/records.js');
+ if(!runtime.includes("const view=CAdapter.createDescriptorViewFactory({services,schemas,address:addr,raw,cache,names,decode,")||!factories.includes("cacheKey:(name,at)=>name+':'+at")||!factories.includes('checked:false,trackDefinitions:false')||!records.includes("publish='early'")||!records.includes('if(cache?.has(key))return cache.get(key);')||!records.includes("if(cache&&publish==='early')cache.set(key,view);"))throw Error('Review POLYSELF shared canonical native record identity');
  if(preprocess){
   const defines=JSON.parse(read('nethack-c/wasm/compile-defines.json')),compiler=resolve(root,'.cache/emsdk/upstream/emscripten/emcc');
   const base=['-sMEMORY64=1',...defines.map(x=>'-D'+x),'-I'+resolve(root,'.cache/wasm64-build/tree/include'),'-I'+resolve(root,'.cache/ncurses-wasm64-build/include')];

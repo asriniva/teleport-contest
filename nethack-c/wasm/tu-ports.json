@@ -124,8 +124,10 @@
     "javascript": "js/ported/extralev.js",
     "library": "nethack-c/wasm/tu-libraries/extralev.js",
     "adapterSources": [
-      "js/ported/extralev-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/extralev.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -140,8 +142,10 @@
     "javascript": "js/ported/exper.js",
     "library": "nethack-c/wasm/tu-libraries/exper.js",
     "adapterSources": [
-      "js/ported/exper-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/exper.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -176,8 +180,10 @@
     "javascript": "js/ported/quest.js",
     "library": "nethack-c/wasm/tu-libraries/quest.js",
     "adapterSources": [
-      "js/ported/quest-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/quest.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -198,7 +204,10 @@
     "javascript": "js/ported/selvar.js",
     "library": "nethack-c/wasm/tu-libraries/selvar.js",
     "adapterSources": [
-      "js/ported/selvar-runtime.js"
+      "js/nethack/bindings/selvar.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -260,8 +269,10 @@
     "library": "nethack-c/wasm/tu-libraries/music.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/music-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/music.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -272,8 +283,10 @@
     "configuredFunctions": true,
     "startup": "$teleportVersionInit",
     "adapterSources": [
-      "js/ported/version-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/version.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -284,8 +297,10 @@
     "configuredFunctions": true,
     "startup": "$teleportColorattInit",
     "adapterSources": [
-      "js/ported/coloratt-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/coloratt.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -295,8 +310,10 @@
     "library": "nethack-c/wasm/tu-libraries/priest.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/priest-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/priest.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -306,8 +323,10 @@
     "library": "nethack-c/wasm/tu-libraries/light.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/light-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/light.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -331,8 +350,10 @@
     "library": "nethack-c/wasm/tu-libraries/wizard.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/wizard-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/wizard.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -342,8 +363,10 @@
     "library": "nethack-c/wasm/tu-libraries/worm.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/worm-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/worm.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -353,8 +376,10 @@
     "library": "nethack-c/wasm/tu-libraries/o_init.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/o_init-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/o_init.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -364,8 +389,10 @@
     "library": "nethack-c/wasm/tu-libraries/ball.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/ball-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/ball.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -375,8 +402,10 @@
     "library": "nethack-c/wasm/tu-libraries/mcastu.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/mcastu-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/mcastu.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -386,8 +415,10 @@
     "library": "nethack-c/wasm/tu-libraries/dbridge.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/dbridge-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/dbridge.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -397,8 +428,10 @@
     "library": "nethack-c/wasm/tu-libraries/mondata.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/mondata-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/mondata.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -416,8 +449,10 @@
     "library": "nethack-c/wasm/tu-libraries/worn.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/worn-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/worn.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -427,8 +462,10 @@
     "library": "nethack-c/wasm/tu-libraries/wield.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/wield-runtime.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/nethack/bindings/wield.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -438,8 +475,12 @@
     "library": "nethack-c/wasm/tu-libraries/mkroom.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/mkroom-runtime.js",
-      "nethack-c/wasm/tu-mkroom-support.inc"
+      "js/nethack/bindings/mkroom.js",
+      "nethack-c/wasm/tu-mkroom-support.inc",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -453,9 +494,13 @@
       "include/sfmacros.h"
     ],
     "adapterSources": [
-      "js/ported/sfstruct-runtime.js",
+      "js/nethack/bindings/sfstruct.js",
       "nethack-c/wasm/tu-sfstruct-support.inc",
-      "nethack-c/wasm/tu-sfstruct-support.h"
+      "nethack-c/wasm/tu-sfstruct-support.h",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -466,9 +511,13 @@
     "configuredFunctions": true,
     "startup": "$teleportEarlyargInit",
     "adapterSources": [
-      "js/ported/earlyarg-runtime.js",
+      "js/nethack/bindings/earlyarg.js",
       "nethack-c/wasm/tu-earlyarg-support.inc",
-      "nethack-c/wasm/tu-earlyarg-support.h"
+      "nethack-c/wasm/tu-earlyarg-support.h",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -479,9 +528,13 @@
     "configuredFunctions": true,
     "reference": "prepared",
     "adapterSources": [
-      "js/ported/report-runtime.js",
+      "js/nethack/bindings/report.js",
       "nethack-c/wasm/tu-fragments/report.support.c",
-      "nethack-c/wasm/tu-fragments/report.storage.h"
+      "nethack-c/wasm/tu-fragments/report.storage.h",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -497,9 +550,12 @@
       "_teleport_bones_global"
     ],
     "adapterSources": [
-      "js/ported/bones-runtime.js",
+      "js/nethack/bindings/bones.js",
       "nethack-c/wasm/tu-fragments/bones-support.c",
-      "nethack-c/wasm/tu-fragments/bones-source-data.h"
+      "nethack-c/wasm/tu-fragments/bones-source-data.h",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -510,9 +566,11 @@
     "configuredFunctions": true,
     "probeContext": false,
     "adapterSources": [
-      "js/ported/explode-runtime.js",
+      "js/nethack/bindings/explode.js",
       "nethack-c/wasm/tu-fragments/explode-support.inc",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -522,8 +580,12 @@
     "library": "nethack-c/wasm/tu-libraries/questpgr.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/questpgr-runtime.js",
-      "nethack-c/wasm/tu-questpgr-support.inc"
+      "js/nethack/bindings/questpgr.js",
+      "nethack-c/wasm/tu-questpgr-support.inc",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -534,9 +596,13 @@
     "configuredFunctions": true,
     "startup": "$teleportSymbolsInit",
     "adapterSources": [
-      "js/ported/symbols-runtime.js",
+      "js/nethack/bindings/symbols.js",
       "nethack-c/wasm/tu-symbols-support.inc",
-      "nethack-c/wasm/tu-symbols-support.h"
+      "nethack-c/wasm/tu-symbols-support.h",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -546,9 +612,13 @@
     "library": "nethack-c/wasm/tu-libraries/mail.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/mail-runtime.js",
+      "js/nethack/bindings/mail.js",
       "nethack-c/wasm/tu-mail-support.inc",
-      "nethack-c/wasm/tu-mail-support.h"
+      "nethack-c/wasm/tu-mail-support.h",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "probeContext": false
   },
@@ -560,10 +630,14 @@
     "reference": "prepared",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/pline-runtime.js",
+      "js/nethack/bindings/pline.js",
       "nethack-c/wasm/tu-fragments/pline-support.c",
       "nethack-c/wasm/tu-fragments/pline-source-data.h",
-      "nethack-c/wasm/tu-fragments/pline-source-check.mjs"
+      "nethack-c/wasm/tu-fragments/pline-source-check.mjs",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -575,10 +649,13 @@
     "startup": "$teleportAttribInit",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/attrib-runtime.js",
+      "js/nethack/bindings/attrib.js",
       "nethack-c/wasm/tu-fragments/attrib-support.inc",
       "scripts/tu-attrib-layout.h",
-      "nethack-c/wasm/tu-fragments/attrib-metadata.py"
+      "nethack-c/wasm/tu-fragments/attrib-metadata.py",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -597,10 +674,13 @@
       "_teleport_sfbase_buffer"
     ],
     "adapterSources": [
-      "js/ported/sfbase-runtime.js",
+      "js/nethack/bindings/sfbase.js",
       "nethack-c/wasm/tu-fragments/sfbase-support.c",
       "nethack-c/wasm/tu-fragments/sfbase-source-data.h",
-      "nethack-c/wasm/tu-fragments/sfbase-source-check.mjs"
+      "nethack-c/wasm/tu-fragments/sfbase-source-check.mjs",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -610,8 +690,12 @@
     "library": "nethack-c/wasm/tu-libraries/dog.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/dog-runtime.js",
-      "nethack-c/wasm/tu-dog-support.inc"
+      "js/nethack/bindings/dog.js",
+      "nethack-c/wasm/tu-dog-support.inc",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -621,9 +705,13 @@
     "library": "nethack-c/wasm/tu-libraries/region.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/region-runtime.js",
+      "js/nethack/bindings/region.js",
       "nethack-c/wasm/tu-region-support.inc",
-      "scripts/tu-region-layout.h"
+      "scripts/tu-region-layout.h",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -634,9 +722,13 @@
     "configuredFunctions": true,
     "probeContext": false,
     "adapterSources": [
-      "js/ported/weapon-runtime.js",
+      "js/nethack/bindings/weapon.js",
       "nethack-c/wasm/tu-weapon-support.inc",
-      "scripts/tu-weapon-layout.h"
+      "scripts/tu-weapon-layout.h",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -647,10 +739,13 @@
     "configuredFunctions": true,
     "probeContext": false,
     "adapterSources": [
-      "js/ported/vault-runtime.js",
+      "js/nethack/bindings/vault.js",
       "nethack-c/wasm/tu-fragments/vault-support.inc",
       "scripts/tu-vault-layout.h",
-      "nethack-c/wasm/tu-fragments/vault-metadata.py"
+      "nethack-c/wasm/tu-fragments/vault-metadata.py",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -662,10 +757,11 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/u_init-runtime.js",
+      "js/nethack/bindings/u_init.js",
       "nethack-c/wasm/tu-fragments/u_init-support.c",
       "scripts/tu-u_init-layout.h",
-      "nethack-c/wasm/tu-fragments/u_init-source-check.mjs"
+      "nethack-c/wasm/tu-fragments/u_init-source-check.mjs",
+      "js/c-runtime/context.js"
     ]
   },
   {
@@ -675,9 +771,13 @@
     "library": "nethack-c/wasm/tu-libraries/sounds.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/sounds-runtime.js",
+      "js/nethack/bindings/sounds.js",
       "nethack-c/wasm/tu-sounds-support.inc",
-      "scripts/tu-sounds-layout.h"
+      "scripts/tu-sounds-layout.h",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -694,13 +794,16 @@
       "_teleport_save_address"
     ],
     "adapterSources": [
-      "js/ported/save-runtime.js",
+      "js/nethack/bindings/save.js",
       "nethack-c/wasm/tu-fragments/save-support.c",
       "nethack-c/wasm/tu-fragments/save-source-data.h",
       "nethack-c/wasm/tu-fragments/save-schema.json",
       "nethack-c/wasm/tu-fragments/save-source-check.mjs",
       "scripts/tu-save-layout.h",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -711,10 +814,14 @@
     "configuredFunctions": true,
     "probeContext": false,
     "adapterSources": [
-      "js/ported/mhitm-runtime.js",
+      "js/nethack/bindings/mhitm.js",
       "scripts/tu-mhitm-layout.h",
       "nethack-c/wasm/tu-mhitm-support.inc",
-      "scripts/check-mhitm-data.mjs"
+      "scripts/check-mhitm-data.mjs",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -725,11 +832,14 @@
     "configuredFunctions": true,
     "probeContext": false,
     "adapterSources": [
-      "js/ported/getpos-runtime.js",
+      "js/nethack/bindings/getpos.js",
       "scripts/tu-getpos-layout.h",
       "nethack-c/wasm/tu-fragments/getpos-support.inc",
       "nethack-c/wasm/tu-fragments/getpos-metadata.py",
-      "nethack-c/wasm/tu-fragments/getpos-probe-dependencies.c"
+      "nethack-c/wasm/tu-fragments/getpos-probe-dependencies.c",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -740,10 +850,14 @@
     "configuredFunctions": true,
     "probeContext": false,
     "adapterSources": [
-      "js/ported/allmain-runtime.js",
+      "js/nethack/bindings/allmain.js",
       "scripts/tu-allmain-layout.h",
       "nethack-c/wasm/tu-fragments/allmain-support.c",
-      "nethack-c/wasm/tu-fragments/allmain-source-check.mjs"
+      "nethack-c/wasm/tu-fragments/allmain-source-check.mjs",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "reference": "prepared"
   },
@@ -754,10 +868,14 @@
     "library": "nethack-c/wasm/tu-libraries/mthrowu.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/mthrowu-runtime.js",
+      "js/nethack/bindings/mthrowu.js",
       "nethack-c/wasm/tu-mthrowu-support.inc",
       "scripts/tu-mthrowu-layout.h",
-      "scripts/check-mthrowu-data.mjs"
+      "scripts/check-mthrowu-data.mjs",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -776,11 +894,15 @@
       }
     ],
     "adapterSources": [
-      "js/ported/role-runtime.js",
+      "js/nethack/bindings/role.js",
       "nethack-c/wasm/tu-role-support.inc",
       "nethack-c/wasm/tu-role-storage.c",
       "scripts/tu-role-layout.h",
-      "scripts/check-role-data.mjs"
+      "scripts/check-role-data.mjs",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -791,11 +913,15 @@
     "configuredFunctions": true,
     "probeContext": false,
     "adapterSources": [
-      "js/ported/engrave-runtime.js",
+      "js/nethack/bindings/engrave.js",
       "nethack-c/wasm/tu-engrave-support.inc",
       "nethack-c/wasm/tu-engrave-support.h",
       "scripts/tu-engrave-layout.h",
-      "scripts/check-engrave-data.mjs"
+      "scripts/check-engrave-data.mjs",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -807,11 +933,15 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/glyphs-runtime.js",
+      "js/nethack/bindings/glyphs.js",
       "nethack-c/wasm/tu-fragments/glyphs-support.c",
       "scripts/tu-glyphs-layout.h",
       "nethack-c/wasm/tu-fragments/glyphs-source-check.mjs",
-      "nethack-c/wasm/tu-fragments/glyphs-fixture-data.h"
+      "nethack-c/wasm/tu-fragments/glyphs-fixture-data.h",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -822,11 +952,14 @@
     "configuredFunctions": true,
     "probeContext": false,
     "adapterSources": [
-      "js/ported/topten-runtime.js",
+      "js/nethack/bindings/topten.js",
       "nethack-c/wasm/tu-fragments/topten-support.inc",
       "nethack-c/wasm/tu-fragments/topten-types.h",
       "scripts/tu-topten-layout.h",
-      "nethack-c/wasm/tu-fragments/topten-metadata.py"
+      "nethack-c/wasm/tu-fragments/topten-metadata.py",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -846,13 +979,16 @@
       "_teleport_dogmove_address"
     ],
     "adapterSources": [
-      "js/ported/dogmove-runtime.js",
+      "js/nethack/bindings/dogmove.js",
       "nethack-c/wasm/tu-fragments/dogmove-support.c",
       "nethack-c/wasm/tu-fragments/dogmove-source-data.h",
       "nethack-c/wasm/tu-fragments/dogmove-schema.json",
       "nethack-c/wasm/tu-fragments/dogmove-source-check.mjs",
       "scripts/tu-dogmove-layout.h",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -864,12 +1000,16 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/windows-runtime.js",
+      "js/nethack/bindings/windows.js",
       "scripts/tu-windows-layout.h",
       "nethack-c/wasm/tu-fragments/windows-support.c",
       "nethack-c/wasm/tu-fragments/windows-source-data.h",
       "nethack-c/wasm/tu-fragments/windows-source-check.mjs",
-      "nethack-c/wasm/tu-fragments/windows-probe-consumer.c"
+      "nethack-c/wasm/tu-fragments/windows-probe-consumer.c",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "startup": "$teleportWindowsInit"
   },
@@ -882,14 +1022,16 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/cfgfiles-runtime.js",
+      "js/nethack/bindings/cfgfiles.js",
       "scripts/tu-cfgfiles-layout.h",
       "nethack-c/wasm/tu-fragments/cfgfiles-support.c",
       "nethack-c/wasm/tu-fragments/cfgfiles-types.h",
       "nethack-c/wasm/tu-fragments/cfgfiles-source-data.h",
       "nethack-c/wasm/tu-fragments/cfgfiles-schema.json",
       "nethack-c/wasm/tu-fragments/cfgfiles-source-check.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ],
     "probeExtraExports": [
       "_teleport_cfgfiles_global",
@@ -907,12 +1049,16 @@
     "reference": "prepared",
     "probeContext": true,
     "adapterSources": [
-      "js/ported/restore-runtime.js",
+      "js/nethack/bindings/restore.js",
       "nethack-c/wasm/tu-restore-support.inc",
       "scripts/tu-restore-layout.h",
       "scripts/check-restore-data.mjs",
       "nethack-c/wasm/tu-restore-types.h",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -924,10 +1070,14 @@
     "reference": "prepared",
     "probeContext": true,
     "adapterSources": [
-      "js/ported/nhlobj-runtime.js",
+      "js/nethack/bindings/nhlobj.js",
       "nethack-c/wasm/tu-nhlobj-support.inc",
       "scripts/tu-nhlobj-layout.h",
-      "scripts/check-nhlobj-data.mjs"
+      "scripts/check-nhlobj-data.mjs",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -939,10 +1089,14 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/do_name-runtime.js",
+      "js/nethack/bindings/do_name.js",
       "nethack-c/wasm/tu-do_name-support.inc",
       "scripts/tu-do_name-layout.h",
-      "scripts/check-do_name-data.mjs"
+      "scripts/check-do_name-data.mjs",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "startup": "$teleportDoNameInit"
   },
@@ -955,12 +1109,16 @@
     "reference": "prepared",
     "probeContext": true,
     "adapterSources": [
-      "js/ported/vision-runtime.js",
+      "js/nethack/bindings/vision.js",
       "nethack-c/wasm/tu-vision-support.inc",
       "scripts/tu-vision-layout.h",
       "scripts/check-vision-data.mjs",
       "nethack-c/wasm/tu-vision-storage.c",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ],
     "startup": "$teleportVisionInit",
     "nativeStorageSources": [
@@ -981,10 +1139,13 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/mkmaze-runtime.js",
+      "js/nethack/bindings/mkmaze.js",
       "nethack-c/wasm/tu-fragments/mkmaze-schema.json",
       "nethack-c/wasm/tu-fragments/mkmaze-source-metadata.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "nativeStorageSources": [
       {
@@ -1009,9 +1170,13 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/dokick-runtime.js",
+      "js/nethack/bindings/dokick.js",
       "scripts/tu-dokick-layout.h",
-      "nethack-c/wasm/tu-dokick-support.inc"
+      "nethack-c/wasm/tu-dokick-support.inc",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1022,12 +1187,16 @@
     "configuredFunctions": true,
     "reference": "prepared",
     "adapterSources": [
-      "js/ported/dig-runtime.js",
+      "js/nethack/bindings/dig.js",
       "scripts/tu-dig-layout.h",
       "scripts/tu-dig-command.c",
       "scripts/tu-dig-hack.c",
       "scripts/check-dig-data.mjs",
-      "nethack-c/wasm/tu-dig-support.inc"
+      "nethack-c/wasm/tu-dig-support.inc",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1039,11 +1208,15 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/end-runtime.js",
+      "js/nethack/bindings/end.js",
       "nethack-c/wasm/tu-fragments/end-support.inc",
       "scripts/tu-end-layout.h",
       "nethack-c/wasm/tu-fragments/end-metadata.py",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -1100,14 +1273,18 @@
       "_probe_call_udeadinside"
     ],
     "adapterSources": [
-      "js/ported/polyself-runtime.js",
+      "js/nethack/bindings/polyself.js",
       "nethack-c/wasm/tu-fragments/polyself-support.c",
       "nethack-c/wasm/tu-fragments/polyself-source-data.h",
       "nethack-c/wasm/tu-fragments/polyself-schema.json",
       "nethack-c/wasm/tu-fragments/polyself-source-check.mjs",
       "scripts/tu-polyself-layout.h",
       "scripts/check-polyself-data.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -1173,7 +1350,7 @@
       "_teleport_wizcmds_address"
     ],
     "adapterSources": [
-      "js/ported/wizcmds-runtime.js",
+      "js/nethack/bindings/wizcmds.js",
       "nethack-c/wasm/tu-fragments/wizcmds-support.c",
       "nethack-c/wasm/tu-fragments/wizcmds-schema.json",
       "nethack-c/wasm/tu-fragments/wizcmds-source-data.h",
@@ -1181,7 +1358,11 @@
       "nethack-c/wasm/tu-fragments/wizcmds-metadata.py",
       "scripts/tu-wizcmds-layout.h",
       "scripts/check-wizcmds-data.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -1208,7 +1389,7 @@
       "_teleport_detect_function3"
     ],
     "adapterSources": [
-      "js/ported/detect-runtime.js",
+      "js/nethack/bindings/detect.js",
       "scripts/tu-detect-layout.h",
       "nethack-c/wasm/tu-fragments/detect-support.c",
       "nethack-c/wasm/tu-fragments/detect-types.h",
@@ -1217,7 +1398,9 @@
       "nethack-c/wasm/tu-fragments/detect-provenance.json",
       "nethack-c/wasm/tu-fragments/detect-check-source.py",
       "nethack-c/wasm/tu-fragments/detect-check-members.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1229,14 +1412,15 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/teleport-runtime.js",
+      "js/nethack/bindings/teleport.js",
       "scripts/tu-teleport-layout.h",
       "nethack-c/wasm/tu-fragments/teleport-support.c",
       "nethack-c/wasm/tu-fragments/teleport-source-data.h",
       "nethack-c/wasm/tu-fragments/teleport-source-data.json",
       "nethack-c/wasm/tu-fragments/teleport-source-check.py",
       "nethack-c/wasm/tu-fragments/teleport-abi.json",
-      "nethack-c/wasm/tu-fragments/teleport-probe-options.json"
+      "nethack-c/wasm/tu-fragments/teleport-probe-options.json",
+      "js/c-runtime/context.js"
     ]
   },
   {
@@ -1244,10 +1428,13 @@
     "javascript": "js/ported/mklev.js",
     "library": "nethack-c/wasm/tu-libraries/mklev.js",
     "adapterSources": [
-      "js/ported/mklev-runtime.js",
+      "js/nethack/bindings/mklev.js",
       "nethack-c/wasm/tu-fragments/mklev-schema.json",
       "nethack-c/wasm/tu-fragments/mklev-source-metadata.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "nativeStorageSources": [
       {
@@ -1275,11 +1462,15 @@
     "configuredFunctions": true,
     "reference": "prepared",
     "adapterSources": [
-      "js/ported/monmove-runtime.js",
+      "js/nethack/bindings/monmove.js",
       "scripts/tu-monmove-layout.h",
       "scripts/tu-monmove-command.c",
       "scripts/check-monmove-data.mjs",
-      "nethack-c/wasm/tu-monmove-support.inc"
+      "nethack-c/wasm/tu-monmove-support.inc",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1291,10 +1482,14 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/spell-runtime.js",
+      "js/nethack/bindings/spell.js",
       "scripts/tu-spell-layout.h",
       "scripts/check-spell-data.mjs",
-      "nethack-c/wasm/tu-spell-support.inc"
+      "nethack-c/wasm/tu-spell-support.inc",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1306,12 +1501,16 @@
     "reference": "prepared",
     "probeContext": true,
     "adapterSources": [
-      "js/ported/do-runtime.js",
+      "js/nethack/bindings/do.js",
       "nethack-c/wasm/tu-do-support.inc",
       "nethack-c/wasm/tu-do-varargs.inc",
       "scripts/tu-do-layout.h",
       "scripts/check-do-data.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -1323,10 +1522,14 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/timeout-runtime.js",
+      "js/nethack/bindings/timeout.js",
       "scripts/tu-timeout-layout.h",
       "scripts/check-timeout-data.mjs",
-      "nethack-c/wasm/tu-timeout-support.inc"
+      "nethack-c/wasm/tu-timeout-support.inc",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1337,11 +1540,15 @@
     "configuredFunctions": true,
     "reference": "prepared",
     "adapterSources": [
-      "js/ported/potion-runtime.js",
+      "js/nethack/bindings/potion.js",
       "scripts/tu-potion-layout.h",
       "scripts/tu-potion-command.c",
       "scripts/check-potion-data.mjs",
-      "nethack-c/wasm/tu-potion-support.inc"
+      "nethack-c/wasm/tu-potion-support.inc",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1366,7 +1573,7 @@
       "_teleport_pray_function1"
     ],
     "adapterSources": [
-      "js/ported/pray-runtime.js",
+      "js/nethack/bindings/pray.js",
       "scripts/tu-pray-layout.h",
       "nethack-c/wasm/tu-fragments/pray-support.c",
       "nethack-c/wasm/tu-fragments/pray-types.h",
@@ -1375,7 +1582,9 @@
       "nethack-c/wasm/tu-fragments/pray-provenance.json",
       "nethack-c/wasm/tu-fragments/pray-check-source.py",
       "nethack-c/wasm/tu-fragments/pray-check-members.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1383,12 +1592,15 @@
     "javascript": "js/ported/dothrow.js",
     "library": "nethack-c/wasm/tu-libraries/dothrow.js",
     "adapterSources": [
-      "js/ported/dothrow-runtime.js",
+      "js/nethack/bindings/dothrow.js",
       "nethack-c/wasm/tu-fragments/dothrow-schema.json",
       "nethack-c/wasm/tu-fragments/dothrow-source-metadata.json",
       "scripts/check-dothrow-source.py",
       "scripts/check-dothrow-imports.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "nativeStorageSources": [
       {
@@ -1426,7 +1638,7 @@
       }
     ],
     "adapterSources": [
-      "js/ported/pager-runtime.js",
+      "js/nethack/bindings/pager.js",
       "scripts/tu-pager-layout.h",
       "nethack-c/wasm/tu-fragments/pager-support.c",
       "nethack-c/wasm/tu-fragments/pager-storage.c",
@@ -1434,7 +1646,8 @@
       "nethack-c/wasm/tu-fragments/pager-source-data.json",
       "nethack-c/wasm/tu-fragments/pager-source-check.py",
       "nethack-c/wasm/tu-fragments/pager-abi.json",
-      "nethack-c/wasm/tu-fragments/pager-probe-options.json"
+      "nethack-c/wasm/tu-fragments/pager-probe-options.json",
+      "js/c-runtime/context.js"
     ]
   },
   {
@@ -1470,7 +1683,7 @@
       "_teleport_muse_function8"
     ],
     "adapterSources": [
-      "js/ported/muse-runtime.js",
+      "js/nethack/bindings/muse.js",
       "scripts/tu-muse-layout.h",
       "nethack-c/wasm/tu-fragments/muse-support.c",
       "nethack-c/wasm/tu-fragments/muse-types.h",
@@ -1480,7 +1693,9 @@
       "nethack-c/wasm/tu-fragments/muse-check-source.py",
       "nethack-c/wasm/tu-fragments/muse-check-members.mjs",
       "nethack-c/wasm/tu-fragments/muse-fixture-constants.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1505,12 +1720,15 @@
       "_teleport_dungeon_storage"
     ],
     "adapterSources": [
-      "js/ported/dungeon-runtime.js",
+      "js/nethack/bindings/dungeon.js",
       "nethack-c/wasm/tu-fragments/dungeon-schema.json",
       "nethack-c/wasm/tu-fragments/dungeon-source-metadata.json",
       "scripts/check-dungeon-source.py",
       "scripts/check-dungeon-imports.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1522,13 +1740,17 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/makemon-runtime.js",
+      "js/nethack/bindings/makemon.js",
       "nethack-c/wasm/tu-fragments/makemon-support.inc",
       "nethack-c/wasm/tu-fragments/makemon-runtime-method.inc",
       "nethack-c/wasm/tu-fragments/makemon-integration.md",
       "nethack-c/wasm/tu-fragments/makemon-metadata.py",
       "scripts/tu-makemon-layout.h",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -1582,14 +1804,18 @@
       "_probe_call_cloneu"
     ],
     "adapterSources": [
-      "js/ported/mhitu-runtime.js",
+      "js/nethack/bindings/mhitu.js",
       "nethack-c/wasm/tu-fragments/mhitu-support.c",
       "nethack-c/wasm/tu-fragments/mhitu-source-data.h",
       "nethack-c/wasm/tu-fragments/mhitu-schema.json",
       "nethack-c/wasm/tu-fragments/mhitu-source-check.mjs",
       "scripts/tu-mhitu-layout.h",
       "scripts/check-mhitu-data.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -1683,7 +1909,7 @@
       "_teleport_artifact_address"
     ],
     "adapterSources": [
-      "js/ported/artifact-runtime.js",
+      "js/nethack/bindings/artifact.js",
       "nethack-c/wasm/tu-fragments/artifact-support.c",
       "nethack-c/wasm/tu-fragments/artifact-schema.json",
       "nethack-c/wasm/tu-fragments/artifact-source-data.h",
@@ -1691,7 +1917,11 @@
       "nethack-c/wasm/tu-fragments/artifact-metadata.py",
       "scripts/tu-artifact-layout.h",
       "scripts/check-artifact-data.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -1709,7 +1939,7 @@
       }
     ],
     "adapterSources": [
-      "js/ported/decl-runtime.js",
+      "js/nethack/bindings/decl.js",
       "scripts/tu-decl-layout.h",
       "scripts/tu-decl-probe.c",
       "scripts/tu-decl-probe-consumer.c",
@@ -1718,7 +1948,11 @@
       "nethack-c/wasm/tu-fragments/decl-support.c",
       "nethack-c/wasm/tu-fragments/decl-schema.json",
       "nethack-c/wasm/tu-fragments/decl-source-check.mjs",
-      "nethack-c/wasm/tu-fragments/decl-source-data.h"
+      "nethack-c/wasm/tu-fragments/decl-source-data.h",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "probeExtraExports": [
       "_teleport_decl_storage",
@@ -1737,12 +1971,16 @@
     "reference": "prepared",
     "probeContext": true,
     "adapterSources": [
-      "js/ported/do_wear-runtime.js",
+      "js/nethack/bindings/do_wear.js",
       "nethack-c/wasm/tu-do_wear-support.inc",
       "nethack-c/wasm/tu-do_wear-varargs.inc",
       "scripts/tu-do_wear-layout.h",
       "scripts/check-do_wear-data.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -1755,10 +1993,14 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/insight-runtime.js",
+      "js/nethack/bindings/insight.js",
       "scripts/tu-insight-layout.h",
       "scripts/check-insight-data.mjs",
-      "nethack-c/wasm/tu-insight-support.inc"
+      "nethack-c/wasm/tu-insight-support.inc",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1770,11 +2012,15 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/read-runtime.js",
+      "js/nethack/bindings/read.js",
       "nethack-c/wasm/tu-fragments/read-support.inc",
       "nethack-c/wasm/tu-fragments/read-metadata.py",
       "scripts/tu-read-layout.h",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -1786,11 +2032,15 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/apply-runtime.js",
+      "js/nethack/bindings/apply.js",
       "nethack-c/wasm/tu-fragments/apply-support.inc",
       "nethack-c/wasm/tu-fragments/apply-metadata.py",
       "scripts/tu-apply-layout.h",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -1809,11 +2059,15 @@
       }
     ],
     "adapterSources": [
-      "js/ported/eat-runtime.js",
+      "js/nethack/bindings/eat.js",
       "nethack-c/wasm/tu-eat-support.inc",
       "nethack-c/wasm/tu-eat-storage.c",
       "scripts/tu-eat-layout.h",
-      "scripts/check-eat-data.mjs"
+      "scripts/check-eat-data.mjs",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "reference": "prepared"
   },
@@ -1826,10 +2080,14 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/objnam-runtime.js",
+      "js/nethack/bindings/objnam.js",
       "nethack-c/wasm/tu-objnam-support.inc",
       "scripts/tu-objnam-layout.h",
-      "scripts/check-objnam-data.mjs"
+      "scripts/check-objnam-data.mjs",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1850,7 +2108,7 @@
       "_teleport_mkobj_literal_capacity"
     ],
     "adapterSources": [
-      "js/ported/mkobj-runtime.js",
+      "js/nethack/bindings/mkobj.js",
       "scripts/tu-mkobj-layout.h",
       "nethack-c/wasm/tu-fragments/mkobj-abi-asserts.h",
       "nethack-c/wasm/tu-fragments/mkobj-check-members.mjs",
@@ -1866,7 +2124,10 @@
       "scripts/test-tu-mkobj-dispatch-loader.mjs",
       "scripts/test-tu-mkobj-dispatch-witness.mjs",
       "scripts/check-mkobj-dispatch.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -1878,7 +2139,7 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/nhlua-runtime.js",
+      "js/nethack/bindings/nhlua.js",
       "nethack-c/wasm/tu-fragments/nhlua-support.c",
       "nethack-c/wasm/tu-fragments/nhlua-support.h",
       "nethack-c/wasm/tu-fragments/nhlua-schema.json",
@@ -1890,7 +2151,10 @@
       "scripts/test-tu-nhlua.mjs",
       "scripts/check-nhlua-data.mjs",
       "nethack-c/wasm/tu-fragments/nhlua-probe-library.js",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "probeExtraExports": [
       "_probe_call_l_nhcore_init",
@@ -2002,13 +2266,16 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/files-runtime.js",
+      "js/nethack/bindings/files.js",
       "scripts/tu-files-layout.h",
       "nethack-c/wasm/tu-fragments/files-support.c",
       "nethack-c/wasm/tu-fragments/files-schema.json",
       "nethack-c/wasm/tu-fragments/files-source-inventory.json",
       "nethack-c/wasm/tu-fragments/files-source-check.py",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "nativeStorageSources": [
       {
@@ -2040,7 +2307,7 @@
       "_teleport_display_dep_do_screen_description"
     ],
     "adapterSources": [
-      "js/ported/display-runtime.js",
+      "js/nethack/bindings/display.js",
       "nethack-c/wasm/tu-fragments/display-support.c",
       "nethack-c/wasm/tu-fragments/display-storage.c",
       "nethack-c/wasm/tu-fragments/display-schema.json",
@@ -2049,7 +2316,10 @@
       "scripts/check-display-imports.mjs",
       "scripts/reviewed_build_provenance.py",
       "scripts/tu-display-early-reader.c",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -2061,13 +2331,16 @@
     "reference": "pristine",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/invent-runtime.js",
+      "js/nethack/bindings/invent.js",
       "scripts/tu-invent-layout.h",
       "nethack-c/wasm/tu-fragments/invent-support.c",
       "nethack-c/wasm/tu-fragments/invent-schema.json",
       "nethack-c/wasm/tu-fragments/invent-source-inventory.json",
       "nethack-c/wasm/tu-fragments/invent-source-check.py",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "nativeStorageSources": [
       {
@@ -2098,7 +2371,7 @@
       }
     ],
     "adapterSources": [
-      "js/ported/cmd-runtime.js",
+      "js/nethack/bindings/cmd.js",
       "scripts/tu-cmd-layout.h",
       "nethack-c/wasm/tu-fragments/cmd-check-members.mjs",
       "nethack-c/wasm/tu-fragments/cmd-check-source.py",
@@ -2108,7 +2381,10 @@
       "nethack-c/wasm/tu-fragments/cmd-source-data.h",
       "nethack-c/wasm/tu-fragments/cmd-support.c",
       "nethack-c/wasm/tu-fragments/cmd-types.h",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "startup": "$teleportCmdInit"
   },
@@ -2222,7 +2498,7 @@
       "_teleport_hack_address"
     ],
     "adapterSources": [
-      "js/ported/hack-runtime.js",
+      "js/nethack/bindings/hack.js",
       "nethack-c/wasm/tu-fragments/hack-support.c",
       "nethack-c/wasm/tu-fragments/hack-schema.json",
       "nethack-c/wasm/tu-fragments/hack-source-data.h",
@@ -2235,7 +2511,11 @@
       "scripts/build-tu-probes.py",
       "scripts/test-tu-structure.py",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -2247,7 +2527,7 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/uhitm-runtime.js",
+      "js/nethack/bindings/uhitm.js",
       "scripts/tu-uhitm-layout.h",
       "nethack-c/wasm/tu-fragments/uhitm-support.inc",
       "nethack-c/wasm/tu-fragments/uhitm-metadata.py",
@@ -2271,7 +2551,11 @@
       ".cache/uhitm-author/automatic-storage.json",
       ".cache/uhitm-author/schema.json",
       ".cache/uhitm-author/record-projections.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -2281,7 +2565,7 @@
     "library": "nethack-c/wasm/tu-libraries/mon.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/mon-runtime.js",
+      "js/nethack/bindings/mon.js",
       "nethack-c/wasm/tu-mon-support.inc",
       "scripts/tu-mon-layout.h",
       "scripts/check-mon-data.mjs",
@@ -2291,7 +2575,11 @@
       "scripts/test-tu-structure.py",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
       ".cache/mon-author/functions.json",
-      ".cache/mon-author/support.c"
+      ".cache/mon-author/support.c",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -2311,7 +2599,7 @@
       "_teleport_pickup_storage"
     ],
     "adapterSources": [
-      "js/ported/pickup-runtime.js",
+      "js/nethack/bindings/pickup.js",
       "nethack-c/wasm/tu-fragments/pickup-support.c",
       "nethack-c/wasm/tu-fragments/pickup-schema.json",
       "nethack-c/wasm/tu-fragments/pickup-source-metadata.json",
@@ -2333,7 +2621,10 @@
       ".cache/pickup-first-pass/configured.c",
       ".cache/pickup-first-pass/fixture-regions.json",
       ".cache/pickup-first-pass/fixture-constants.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -2345,7 +2636,7 @@
     "reference": "pristine",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/shk-runtime.js",
+      "js/nethack/bindings/shk.js",
       "scripts/tu-shk-layout.h",
       "nethack-c/wasm/tu-fragments/shk-types.h",
       "nethack-c/wasm/tu-fragments/shk-support.c",
@@ -2360,7 +2651,10 @@
       "scripts/test-tu-structure.py",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
       ".cache/shk-first-pass/schema.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "nativeStorageSources": [
       {
@@ -2387,7 +2681,7 @@
       "_teleport_sp_lev_literal_capacity"
     ],
     "adapterSources": [
-      "js/ported/sp_lev-runtime.js",
+      "js/nethack/bindings/sp_lev.js",
       "scripts/tu-sp_lev-layout.h",
       "nethack-c/wasm/tu-fragments/sp_lev-check.py",
       "nethack-c/wasm/tu-fragments/sp_lev-dispatch.js",
@@ -2401,7 +2695,10 @@
       "nethack-c/wasm/tu-fragments/tu137-group-b/b_probe_support.py",
       "nethack-c/wasm/tu-fragments/tu137-group-b/b-probe-commands.json",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -2413,7 +2710,7 @@
     "reference": "pristine",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/trap-runtime.js",
+      "js/nethack/bindings/trap.js",
       "nethack-c/wasm/tu-fragments/trap-support.c",
       "nethack-c/wasm/tu-fragments/trap-support.h",
       "nethack-c/wasm/tu-fragments/trap-schema.json",
@@ -2430,7 +2727,10 @@
       "nethack-c/wasm/tu-fragments/tu137-group-b/b_probe_support.py",
       "nethack-c/wasm/tu-fragments/tu137-group-b/b-probe-commands.json",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "probeExtraExports": [
       "_probe_call_burnarmor",
@@ -2630,7 +2930,7 @@
       "_teleport_termcap_address"
     ],
     "adapterSources": [
-      "js/ported/termcap-runtime.js",
+      "js/nethack/bindings/termcap.js",
       "nethack-c/wasm/tu-fragments/termcap-support.c",
       "nethack-c/wasm/tu-fragments/termcap-schema.json",
       "nethack-c/wasm/tu-fragments/termcap-source-data.h",
@@ -2643,7 +2943,11 @@
       "nethack-c/wasm/tu-fragments/tu137-group-b/b_probe_support.py",
       "nethack-c/wasm/tu-fragments/tu137-group-b/b-probe-commands.json",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -2655,7 +2959,7 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/topl-runtime.js",
+      "js/nethack/bindings/topl.js",
       "nethack-c/wasm/tu-fragments/topl-integration.md",
       "nethack-c/wasm/tu-fragments/topl-metadata.py",
       "nethack-c/wasm/tu-fragments/topl-runtime-method.inc",
@@ -2674,7 +2978,11 @@
       "nethack-c/wasm/tu-fragments/tu137-group-b/topl-source-tools/integer-divisions.mjs",
       "nethack-c/wasm/tu-fragments/tu137-group-b/topl-source-tools/scalar-coercions.mjs",
       "nethack-c/wasm/tu-fragments/tu137-group-b/topl-source-tools/integer-promotions.mjs",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ]
   },
   {
@@ -2686,7 +2994,7 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/wintty-runtime.js",
+      "js/nethack/bindings/wintty.js",
       "nethack-c/wasm/tu-wintty-storage.c",
       "nethack-c/wasm/tu-wintty-support.inc",
       "scripts/check-wintty-data.mjs",
@@ -2698,7 +3006,11 @@
       "scripts/test-tu-structure.py",
       "nethack-c/wasm/tu-fragments/tu137-group-b/b_probe_support.py",
       "nethack-c/wasm/tu-fragments/tu137-group-b/b-probe-commands.json",
-      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json"
+      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "startup": "$teleportWinttyInit",
     "nativeStorageSources": [
@@ -2729,7 +3041,7 @@
       }
     ],
     "adapterSources": [
-      "js/ported/unixunix-runtime.js",
+      "js/nethack/bindings/unixunix.js",
       "nethack-c/wasm/tu-fragments/unixunix-schema.json",
       "nethack-c/wasm/tu-fragments/unixunix-source-metadata.json",
       "scripts/check-unixunix-source.py",
@@ -2739,7 +3051,10 @@
       "scripts/reviewed_build_provenance.py",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
       "nethack-c/wasm/tu-fragments/unixunix-reviewed-makefile.py",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ]
   },
   {
@@ -2751,7 +3066,7 @@
     "reference": "prepared",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/unixmain-runtime.js",
+      "js/nethack/bindings/unixmain.js",
       "scripts/tu-unixmain-layout.h",
       "nethack-c/wasm/tu-fragments/unixmain-types.h",
       "nethack-c/wasm/tu-fragments/unixmain-support.c",
@@ -2763,7 +3078,10 @@
       "scripts/build-tu-probes.py",
       "scripts/test-tu-structure.py",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "nativeStorageSources": [
       {
@@ -2782,7 +3100,7 @@
     "configuredFunctions": true,
     "reference": "prepared",
     "adapterSources": [
-      "js/ported/options-runtime.js",
+      "js/nethack/bindings/options.js",
       "nethack-c/wasm/tu-options-abi.h",
       "nethack-c/wasm/tu-fragments/options-support.c",
       "nethack-c/wasm/tu-fragments/options-schema.json",
@@ -2791,7 +3109,10 @@
       "scripts/build-tu-probes.py",
       "scripts/test-tu-structure.py",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "data": [
       "js/ported/options-data.js"
@@ -2805,7 +3126,7 @@
     "configuredFunctions": true,
     "reference": "prepared",
     "adapterSources": [
-      "js/ported/botl-runtime.js",
+      "js/nethack/bindings/botl.js",
       "nethack-c/wasm/tu-botl-abi.h",
       "nethack-c/wasm/tu-botl-support.inc",
       "nethack-c/wasm/tu-botl-varargs.inc",
@@ -2814,7 +3135,11 @@
       "scripts/build-tu-probes.py",
       "scripts/test-tu-structure.py",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
-      "js/c-runtime/adapter-memory.js"
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js",
+      "js/nethack/header-aliases.js"
     ],
     "data": [
       "js/ported/botl-data.js"
@@ -2834,13 +3159,17 @@
     "configuredFunctions": true,
     "reference": "pristine",
     "adapterSources": [
-      "js/ported/zap-runtime.js",
+      "js/nethack/bindings/zap.js",
       "nethack-c/wasm/tu-zap-support.inc",
       "scripts/tu-zap-layout.h",
       "scripts/check-zap-data.mjs",
       "scripts/build-tu-probes.py",
       "scripts/test-tu-structure.py",
-      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json"
+      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/context.js",
+      "js/c-runtime/records.js"
     ],
     "probeContext": false,
     "startup": "$teleportZapInit",
@@ -2859,13 +3188,16 @@
     "reference": "pristine",
     "probeContext": false,
     "adapterSources": [
-      "js/ported/nhlsel-runtime.js",
+      "js/nethack/bindings/nhlsel.js",
       "nethack-c/wasm/tu-fragments/nhlsel-support.inc",
       "nethack-c/wasm/tu-fragments/nhlsel-metadata.py",
       "scripts/tu-nhlsel-layout.h",
       "scripts/build-nhlsel-probes.py",
       "scripts/golden_emscripten_profile.py",
-      "nethack-c/wasm/golden-emscripten-profile.json"
+      "nethack-c/wasm/golden-emscripten-profile.json",
+      "js/c-runtime/adapter-factories.js",
+      "js/c-runtime/adapter-memory.js",
+      "js/c-runtime/records.js"
     ],
     "parityLimitations": [
       "Original unary selection alias use-after-free is preserved; defined-corpus parity only, no whole-TU/native/full-game equivalence claim."

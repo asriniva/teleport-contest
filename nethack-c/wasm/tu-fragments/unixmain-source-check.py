@@ -1,7 +1,7 @@
 """UNIXMAIN exact configured source/data/profile guard; no shared mutations."""
 from pathlib import Path
 import hashlib,json,re,subprocess
-R=Path(__file__).resolve().parents[3];W=R/'.cache/unixmain-first-pass';tree=R/'.cache/wasm64-build/tree';src=(tree/'sys/unix/unixmain.c').read_text();pristine=(R/'nethack-c/upstream/sys/unix/unixmain.c').read_text();core=(R/'js/ported/unixmain.js').read_text();I=json.loads((R/'nethack-c/wasm/tu-fragments/unixmain-source-inventory.json').read_text());S=json.loads((R/'nethack-c/wasm/tu-fragments/unixmain-schema.json').read_text());support=(R/'nethack-c/wasm/tu-fragments/unixmain-support.c').read_text();runtime=(R/'js/ported/unixmain-runtime.js').read_text()
+R=Path(__file__).resolve().parents[3];W=R/'.cache/unixmain-first-pass';tree=R/'.cache/wasm64-build/tree';src=(tree/'sys/unix/unixmain.c').read_text();pristine=(R/'nethack-c/upstream/sys/unix/unixmain.c').read_text();core=(R/'js/ported/unixmain.js').read_text();I=json.loads((R/'nethack-c/wasm/tu-fragments/unixmain-source-inventory.json').read_text());S=json.loads((R/'nethack-c/wasm/tu-fragments/unixmain-schema.json').read_text());support=(R/'nethack-c/wasm/tu-fragments/unixmain-support.c').read_text();runtime=(R/'js/nethack/bindings/unixmain.js').read_text()
 sha=lambda s:hashlib.sha256(s.encode()).hexdigest()
 assert sha(src)==I['sourceSha256']=='c029938f38987424493931fb7719abdb43a6deb82289a393c2bd94fa74c41bfa'
 assert sha(pristine)==I['pristineSha256']=='9c8a9a498acaffee6ce62d44a5e07977d2ec4852f29a77a1fbabdea0fd9f2165' and src!=pristine

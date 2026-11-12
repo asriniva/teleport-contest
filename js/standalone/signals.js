@@ -1,6 +1,6 @@
 // Configured Emscripten libc signal()/sigaction() table semantics. No host
 // process handlers are installed; delivery is an explicit runtime input.
-import {C,withCEnvironment} from '../ported/c-runtime.js';
+import {C,withCEnvironment} from '../c-runtime/context.js';
 import abi from './display-abi.json' with {type:'json'};
 export function createSignals(environment){
  const {memory,functions,transport,libc}=environment,actions=environment.allocateGlobal('libc.sigactions',abi.actionSize*abi.signalCount),callbacks=new WeakMap();

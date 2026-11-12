@@ -26,7 +26,7 @@ if assignments != list(enumerate(scalars[:-1])) or not last or last[1] != scalar
     raise ValueError('Review changed GETLINE scalar write map')
 paths = [Path(__file__).resolve(), support,
          root / 'nethack-c/wasm/tu-libraries/getline.js', root / 'scripts/tu-getline-layout.h',
-         root / 'js/ported/getline.js', root / 'js/ported/getline-runtime.js',
+         root / 'js/ported/getline.js', root / 'js/nethack/bindings/getline.js',
          root / 'nethack-c/wasm/compile-defines.json', root / 'js/wasm/tu-layouts.json']
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 data = {'globals': globals_, 'scalars': scalars,

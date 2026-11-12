@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { compressUnixZ, decompressUnixZ } from '../js/services/unix-compress.js';
+import { compressUnixZ, decompressUnixZ } from '../js/libraries/compress/unix-z.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const work = path.join(root, '.cache/js-dependency-compression');

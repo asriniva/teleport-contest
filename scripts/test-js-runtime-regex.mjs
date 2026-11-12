@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import { createJsRuntime, JS_RUNTIME_LAYOUTS } from '../js/nethack/runtime.js';
-import { C, R, T } from '../js/ported/c-runtime.js';
+import { C, R, T } from '../js/c-runtime/context.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const {referenceBackend}=await import('./native-test-backend.mjs');

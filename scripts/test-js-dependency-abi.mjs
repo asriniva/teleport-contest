@@ -121,10 +121,10 @@ command(path.join(sdk, 'upstream/emscripten/emcc'), ['-O2', '-std=gnu17', '-sMEM
     '-sEXPORTED_RUNTIME_METHODS=FS,ENV,UTF8ToString',
     '--js-library', path.join(snapshot, 'nethack-c/wasm/dependency-library.js'),
     path.join(snapshot, 'nethack-c/wasm/dependency-bridge.c'), probeC, '-o', probeJS]);
-const { createWasmDependencyRuntime } = await import(pathToFileURL(path.join(snapshot, 'js/services/wasm-dependency-runtime.js')));
-const { compressUnixZ } = await import(pathToFileURL(path.join(snapshot, 'js/services/unix-compress.js')));
+const { createLibraryBindings } = await import(pathToFileURL(path.join(snapshot, 'js/c-runtime/library-bindings.js')));
+const { compressUnixZ } = await import(pathToFileURL(path.join(snapshot, 'js/libraries/compress/unix-z.js')));
 const createProbe = (await import(pathToFileURL(probeJS))).default;
-const dependencies = createWasmDependencyRuntime({ regex: regexEnabled });
+const dependencies = createLibraryBindings({ regex: regexEnabled });
 const errors = [];
 const module = await createProbe({ noInitialRun: true, nethackDependencies: dependencies,
     printErr: text => errors.push(text), preRun: [instance => Object.assign(instance.ENV, { LINES: '50', COLUMNS: '132' })] });

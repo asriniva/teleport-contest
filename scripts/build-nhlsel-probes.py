@@ -26,7 +26,7 @@ lua = sorted(path for path in (tree / 'lib/lua-5.4.8/src').glob('*.c') if path.n
 assert lua, 'Prepared Lua sources are required'
 archive = ROOT / '.cache/wasm64-build/liblua-wasm64.a'
 assert archive.is_file(), 'Build the existing C Lua reference archive first'
-inputs = [archive, ROOT / 'nethack-c/wasm/golden-emscripten-profile.json', ROOT / 'scripts/golden_emscripten_profile.py', ROOT / 'scripts/check-golden-emscripten-profile.py', ROOT / 'nethack-c/wasm/native-terminal.h', ROOT / 'nethack-c/wasm/compile-defines.json', probe, support, library, tree / 'src/nhlsel.c', ROOT / 'nethack-c/upstream/src/nhlsel.c', ROOT / 'scripts/tu-nhlsel-layout.h', ROOT / 'js/ported/nhlsel.js', ROOT / 'js/ported/nhlsel-runtime.js', Path(__file__), *dependencies, *lua, *sorted((tree / 'include').glob('*.h'))]
+inputs = [archive, ROOT / 'nethack-c/wasm/golden-emscripten-profile.json', ROOT / 'scripts/golden_emscripten_profile.py', ROOT / 'scripts/check-golden-emscripten-profile.py', ROOT / 'nethack-c/wasm/native-terminal.h', ROOT / 'nethack-c/wasm/compile-defines.json', probe, support, library, tree / 'src/nhlsel.c', ROOT / 'nethack-c/upstream/src/nhlsel.c', ROOT / 'scripts/tu-nhlsel-layout.h', ROOT / 'js/ported/nhlsel.js', ROOT / 'js/nethack/bindings/nhlsel.js', Path(__file__), *dependencies, *lua, *sorted((tree / 'include').glob('*.h'))]
 sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
 before = {str(path.relative_to(ROOT)): sha(path) for path in inputs}
 exports = ['_probe_' + name for name in ['reset', 'input', 'clear_trace', 'trace', 'snapshot', 'run', 'option', 'origin', 'room', 'cell', 'alias', 'helper', 'state', 'stack', 'layout_count', 'layout_name', 'layout_value']]

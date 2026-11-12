@@ -256,21 +256,19 @@ assert library_pruning_manifest['nativeDemand']['inputs'] == native_inputs
 assert library_pruning_manifest['nativeDemand']['requiredRemoved'] == []
 (TREE / 'src/Sysunix').unlink(missing_ok=True)
 run([MAKE, '-j' + JOBS, 'nethack', 'TARGETPFX=wasm/', f'TARGET_CC={emcc}', f'TARGET_CFLAGS={flags}', f'TARGET_LINK={emcc}', f'TARGET_LFLAGS={link_flags}', f'GAMEBIN={OUT}/nethack.mjs', f'LUALIBS={"" if JS_LUA else wasm_lua} -lm', f'WINLIB={terminfo_library if C_DEPENDENCIES else ""}', 'TARGET_LIBS=', 'AUTOLIBS='], cwd=TREE / 'src')
-lua_sources = sorted({str(path.relative_to(ROOT)) for path in (ROOT / 'js/services').rglob('*.js')
-                      if path.parent.name == 'lua' or path.name.startswith(('lua-', 'wasm-lua-'))
-                      or path.name in {'c-float-format.js', 'timezone-info.js', 'native-timezone-data.js'}}
-                     | {'nethack-c/wasm/lua-bridge.c', 'nethack-c/wasm/lua-library.js'})
+lua_sources = sorted({str(path.relative_to(ROOT)) for path in (ROOT / 'js/lua').rglob('*.js')}
+                     | {'js/c-runtime/float-format.js', 'nethack-c/wasm/lua-library.js', 'js/platform/darwin/strftime.js', 'js/platform/timezone/tzdb.js', 'nethack-c/wasm/lua-bridge.c', 'js/platform/darwin/calendar.js', 'js/platform/timezone/info.js'})
 dependency_sources = [
-    'js/services/unix-compress.js', 'js/services/terminfo.js', 'js/services/terminfo-data.js',
-    'js/services/posix-regex.js', 'js/services/wasm-dependency-runtime.js',
-    'js/services/native-c-compat.js', 'js/services/native-regex-libc.js',
-    'js/services/native-qsort.js', 'js/services/c-time.js',
-    'js/ported/wasm-runtime.js', 'js/ported/posixregex.js',
-    'js/ported/posixregex-runtime.js', 'js/wasm-adapter.js',
+    'js/libraries/compress/unix-z.js', 'js/libraries/terminfo/index.js', 'js/libraries/terminfo/data.js',
+    'js/libraries/regex/posix.js', 'js/c-runtime/library-bindings.js',
+    'js/platform/darwin/compat.js', 'js/c-runtime/regex-abi.js',
+    'js/platform/darwin/qsort.js', 'js/c-runtime/time.js',
+    'js/backends/emscripten/runtime.js', 'js/ported/posixregex.js',
+    'js/nethack/bindings/posixregex.js', 'js/wasm-adapter.js',
     'nethack-c/wasm/tu-libraries/calendar.js',
     'nethack-c/wasm/tu-libraries/posixregex.js',
     'nethack-c/wasm/native-libc-library.js',
-    'js/services/native-terminal.js','js/services/native-terminal-abi.json',
+    'js/platform/darwin/terminal.js','js/platform/darwin/terminal-abi.json',
     'nethack-c/wasm/native-terminal.h',
     'nethack-c/wasm/dependency-library.js', 'nethack-c/wasm/dependency-bridge.c',
 ]
@@ -282,9 +280,9 @@ regex_reference = ('Emscripten musl TRE; REG_EXTENDED|REG_NOSUB; C locale'
 # C-dependency debug builds can still select the separately translated regex TU.
 # Record its active JS implementation without claiming JS terminfo/compression.
 regex_sources = [
-    'js/services/posix-regex.js', 'js/services/native-regex-libc.js',
-    'js/ported/wasm-runtime.js', 'js/ported/posixregex.js',
-    'js/ported/posixregex-runtime.js', 'js/wasm-adapter.js',
+    'js/libraries/regex/posix.js', 'js/c-runtime/regex-abi.js',
+    'js/backends/emscripten/runtime.js', 'js/ported/posixregex.js',
+    'js/nethack/bindings/posixregex.js', 'js/wasm-adapter.js',
     'nethack-c/wasm/tu-libraries/posixregex.js',
     'nethack-c/wasm/native-libc-library.js',
 ]

@@ -1,4 +1,4 @@
-// ABI imports only. Dependency algorithms live in js/services/*.js.
+// ABI imports only. Dependency algorithms live in js/libraries; bindings live in js/c-runtime.
 addToLibrary({
   $teleportDependencyServices__deps: ['malloc', 'free', '$FS', '$ENV', '$getWasmTableEntry'],
   $teleportDependencyServices: function() {

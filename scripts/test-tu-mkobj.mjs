@@ -3,9 +3,9 @@ import {referenceBackend,referenceLabel,DataView} from './native-test-backend.mj
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {withCEnvironment,C} from '../js/ported/c-runtime.js';
+import {withCEnvironment,C} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/mkobj.js';
-import {createMkobjEnvironment} from '../js/ported/mkobj-runtime.js';
+import {createMkobjEnvironment} from '../js/nethack/bindings/mkobj.js';
 const dir=resolve(process.env.MKOBJ_PROBE_DIR??'.cache/tu-probes'),schema=JSON.parse(await readFile(new URL('../nethack-c/wasm/tu-fragments/mkobj-schema.json',import.meta.url),'utf8'));
 const factory=async mode=>(await import(pathToFileURL(resolve(dir,'mkobj-'+mode+'.mjs')).href)).default;
 const rf=await factory('reference'),hf=await factory('hybrid'),reference=await referenceBackend('mkobj',rf)();

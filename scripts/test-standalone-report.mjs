@@ -7,7 +7,7 @@ import {pathToFileURL,fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {createStandaloneEnvironment} from '../js/standalone/environment.js';
 import {enableReport} from '../js/standalone/report.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 
 if(!process.argv.includes('--worker')){
  const zones=process.env.STANDALONE_REPORT_ZONES?.split(',').filter(Boolean)||['UTC','America/New_York','America/Los_Angeles','Asia/Kolkata','Europe/Berlin'];assert.ok(zones.length);const results=[];
@@ -22,7 +22,7 @@ for(const [p,hash]of Object.entries(receipt.artifactSha256)){assert.equal(sha(pa
 assert.deepEqual(receipt.buildEnvironment,{SOURCE_DATE_EPOCH:'1777723200',TZ:'UTC'});
 const records=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),abi=JSON.parse(fs.readFileSync('js/standalone/runtime-info-abi.json'));
-const declText=fs.readFileSync('js/ported/decl-runtime.js','utf8'),globals=JSON.parse(declText.match(/^const globals=(.*);$/m)[1]),schemas=JSON.parse(declText.match(/^const schemas=(.*);$/m)[1]);
+const declText=fs.readFileSync('js/nethack/bindings/decl.js','utf8'),globals=JSON.parse(declText.match(/^const globals=(.*);$/m)[1]),schemas=JSON.parse(declText.match(/^const schemas=(.*);$/m)[1]);
 const {default:factory}=await import(pathToFileURL(path.join(directory,'reference.mjs')));
 const equal=(a,b,label)=>{assert.deepEqual(a,b,label);comparisons++;};
 function js(fn){

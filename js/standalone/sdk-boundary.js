@@ -1,7 +1,7 @@
 // Pinned Emscripten/musl boundary behavior; no host filesystem or Wasm.
 import abi from './sdk-boundary-abi.json' with {type:'json'};
 import {readSdkUtf8} from '../c-runtime/stdio.js';
-import {VFSError} from '../services/c-vfs.js';
+import {VFSError} from '../c-runtime/vfs.js';
 const owners=new WeakMap();
 export class SdkAbortError extends Error{constructor(message){super(message);this.name='RuntimeError';}}
 export function enableSdkBoundary(environment,{monotonicNow=()=>performance.now(),onAbort}={}){

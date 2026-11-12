@@ -6,7 +6,7 @@ root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFEREN
 paths=[Path(__file__).resolve(),root/'nethack-c/wasm/compile-defines.json',root/'nethack-c/wasm/tu-support.c',root/'js/standalone/records.json',root/'js/wasm/tu-layouts.json',root/'js/standalone/level-persistence.js',root/'js/standalone/version-info.js',root/'js/standalone/libc.js',root/'js/standalone/random-text.js']
 for name in ['timeout','light','mkroom','restore','sfbase','sfstruct','engrave','region','dungeon','track','version','rumors']:
  paths.append(root/('js/ported/'+name+'.js'))
- runtime=root/('js/ported/'+name+'-runtime.js')
+ runtime=root/('js/nethack/bindings/'+name+'.js')
  if runtime.exists():paths.append(runtime)
 for name in ['timeout','light','mkroom','engrave','region','dungeon','track','version','rumors']:
  library=root/('nethack-c/wasm/tu-libraries/'+name+'.js')

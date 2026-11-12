@@ -4,7 +4,7 @@ import { mkdirSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
-import { LuaDebugState, LuaAllocationTracker, LuaMemoryError, LuaDiagnostics, NethackLuaBudget, LuaTimeLimitError, luaChunkId, luaFunctionLine, createNethackWarningHandler } from '../js/services/lua-debug.js';
+import { LuaDebugState, LuaAllocationTracker, LuaMemoryError, LuaDiagnostics, NethackLuaBudget, LuaTimeLimitError, luaChunkId, luaFunctionLine, createNethackWarningHandler } from '../js/lua/debug.js';
 const root = fileURLToPath(new URL('../', import.meta.url)), scratch = resolve(root, '.cache/js-lua-debug'); mkdirSync(scratch, { recursive: true });
 const src = resolve(root, '.cache/js-dependency-lua/lua-5.4.8/src');
 const c = String.raw`

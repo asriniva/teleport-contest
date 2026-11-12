@@ -3,7 +3,7 @@
 import hashlib,json,os,re
 from pathlib import Path
 root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve()
-support=root/'nethack-c/wasm/tu-eat-support.inc';library=root/'nethack-c/wasm/tu-libraries/eat.js';runtime=root/'js/ported/eat-runtime.js'
+support=root/'nethack-c/wasm/tu-eat-support.inc';library=root/'nethack-c/wasm/tu-libraries/eat.js';runtime=root/'js/nethack/bindings/eat.js'
 s=support.read_text();lib=library.read_text();rt=runtime.read_text();dec=json.JSONDecoder()
 schema=dec.raw_decode(rt.split('const schema=',1)[1])[0]
 def indexed(pattern,text):

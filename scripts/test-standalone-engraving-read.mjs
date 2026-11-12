@@ -2,9 +2,9 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {pathToFileURL} from 'node:url';
 import {createStandaloneEnvironment} from '../js/standalone/environment.js';
-import {createNativeTerminal} from '../js/services/native-terminal.js';
+import {createNativeTerminal} from '../js/platform/darwin/terminal.js';
 import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 Error.stackTraceLimit=50;
 const referenceRoot=path.resolve(process.env.STANDALONE_REFERENCE_ROOT||'../teleport-contest'),directory=path.resolve(process.env.STANDALONE_ENGRAVING_READ_ORACLE||'.cache/standalone-engraving-read-v4');
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');let hashes=0,comparisons=0,contracts=0;

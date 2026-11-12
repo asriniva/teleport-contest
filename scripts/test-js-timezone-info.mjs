@@ -1,11 +1,11 @@
 /* Independent actual macOS C localtime/strftime timezone-data/rule oracle.
  * No native or host lookup is used by the production service. */
 import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import{spawnSync}from'node:child_process';import{fileURLToPath}from'node:url';
-import{lookupTimezone,parsePosixTimezone,timezoneDataVersion,TimezoneError,formatTimezoneOffset,getTimezoneOffsets}from'../js/services/timezone-info.js';
-import{NATIVE_TIMEZONE_ENTRIES,NATIVE_TIMEZONE_NAMES,NATIVE_TIMEZONE_META}from'../js/services/native-timezone-data.js';
+import{lookupTimezone,parsePosixTimezone,timezoneDataVersion,TimezoneError,formatTimezoneOffset,getTimezoneOffsets}from'../js/platform/timezone/info.js';
+import{NATIVE_TIMEZONE_ENTRIES,NATIVE_TIMEZONE_NAMES,NATIVE_TIMEZONE_META}from'../js/platform/timezone/tzdb.js';
 const root=fileURLToPath(new URL('../',import.meta.url)),work=path.join(root,'.cache/js-native-timezone');fs.mkdirSync(work,{recursive:true});
 function command(program,args,options={}){const result=spawnSync(program,args,{encoding:'utf8',timeout:120000,maxBuffer:40000000,...options});assert.equal(result.status,0,result.error||result.stderr||result.stdout);return result.stdout;}
-const regenerated=path.join(work,'regenerated-data.js');command('python3',[path.join(root,'scripts/generate-native-timezones.py'),'--output',regenerated]);assert.deepEqual(fs.readFileSync(regenerated),fs.readFileSync(path.join(root,'js/services/native-timezone-data.js')),'generated data and source SHA manifest reproduce exactly');
+const regenerated=path.join(work,'regenerated-data.js');command('python3',[path.join(root,'scripts/generate-native-timezones.py'),'--output',regenerated]);assert.deepEqual(fs.readFileSync(regenerated),fs.readFileSync(path.join(root,'js/platform/timezone/tzdb.js')),'generated data and source SHA manifest reproduce exactly');
 assert.equal(timezoneDataVersion,'2026c');assert.equal(fs.readFileSync('/usr/share/zoneinfo/+VERSION','utf8').trim(),timezoneDataVersion,'native oracle TZDB must match pinned data');
 const source=path.join(work,'oracle.c'),oracle=path.join(work,'oracle');
 fs.writeFileSync(source,`#include <stdio.h>

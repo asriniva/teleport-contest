@@ -3,11 +3,11 @@ import {nh_getenv} from '../ported/options.js';
 import callbackABI from './lua-callbacks-abi.json' with {type:'json'};
 import * as nhlua from '../ported/nhlua.js';
 import * as nhlsel from '../ported/nhlsel.js';
-import {createNhlselEnvironment} from '../ported/nhlsel-runtime.js';
+import {createNhlselEnvironment} from '../nethack/bindings/nhlsel.js';
 import * as nhlobj from '../ported/nhlobj.js';
-import {createNhlobjEnvironment} from '../ported/nhlobj-runtime.js';
-import {withCEnvironment} from '../ported/c-runtime.js';
-import {createNhluaEnvironment} from '../ported/nhlua-runtime.js';
+import {createNhlobjEnvironment} from '../nethack/bindings/nhlobj.js';
+import {withCEnvironment} from '../c-runtime/context.js';
+import {createNhluaEnvironment} from '../nethack/bindings/nhlua.js';
 export function enableLuaSandbox(environment,layouts){
  const {services,functions}=environment,schema=nhlua.nhluaSchema,lua=environment.enableLua();
  const layout=layouts.nhlua;

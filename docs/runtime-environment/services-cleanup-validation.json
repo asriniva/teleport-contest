@@ -1,0 +1,1145 @@
+{
+  "baselineCommit": "e9207d80fa7c3de3547c7d538db1a27db9e6aa7c",
+  "status": "CLEANUP_VERIFIED_WITH_RETAINED_BASELINE_FAILURES",
+  "fullGameAccepted": false,
+  "sourceOnlyNoPerformanceClaim": {
+    "baselineCommit": "e9207d8",
+    "scope": "Production js/**/*.js excluding generated js/wasm; source bytes, not bundle or performance measurement",
+    "before": {
+      "files": 518,
+      "bytes": 19649740,
+      "lines": 301416
+    },
+    "after": {
+      "files": 520,
+      "bytes": 19589810,
+      "lines": 304604
+    },
+    "removed": {
+      "files": -2,
+      "bytes": 59930,
+      "lines": -3188
+    }
+  },
+  "factoryContracts": 672,
+  "sourceGuards": [
+    {
+      "name": "allmain-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "artifact-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "bones-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "cfgfiles-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "decl-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "dogmove-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "glyphs-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "hack-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "mhitu-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "nhlua-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "pline-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "polyself-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "save-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "sfbase-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "termcap-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "trap-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "u_init-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "windows-source-check.mjs",
+      "exitCode": 0
+    },
+    {
+      "name": "wizcmds-source-check.mjs",
+      "exitCode": 0
+    }
+  ],
+  "bindingComparisons": {
+    "mode": "configured Emscripten-C vs JS; no native-host component equivalence claim",
+    "passed": 127,
+    "total": 128,
+    "results": {
+      "allmain": {
+        "name": "tu-allmain",
+        "exitCode": 0,
+        "seconds": 2.256
+      },
+      "apply": {
+        "name": "tu-apply",
+        "exitCode": 0,
+        "seconds": 4.374
+      },
+      "artifact": {
+        "name": "tu-artifact",
+        "exitCode": 0,
+        "seconds": 9.634
+      },
+      "attrib": {
+        "name": "tu-attrib",
+        "exitCode": 0,
+        "seconds": 1.498
+      },
+      "ball": {
+        "name": "tu-ball",
+        "exitCode": 0,
+        "seconds": 8.469
+      },
+      "bones": {
+        "name": "tu-bones",
+        "exitCode": 0,
+        "seconds": 0.68
+      },
+      "botl": {
+        "name": "tu-botl",
+        "exitCode": 0,
+        "seconds": 5.521
+      },
+      "cfgfiles": {
+        "name": "tu-cfgfiles",
+        "exitCode": 0,
+        "seconds": 0.748
+      },
+      "cmd": {
+        "name": "tu-cmd",
+        "exitCode": 0,
+        "seconds": 29.329
+      },
+      "coloratt": {
+        "name": "tu-coloratt",
+        "exitCode": 0,
+        "seconds": 1.599
+      },
+      "dbridge": {
+        "name": "tu-dbridge",
+        "exitCode": 0,
+        "seconds": 45.103
+      },
+      "decl": {
+        "name": "tu-decl",
+        "exitCode": 0,
+        "seconds": 1.906
+      },
+      "detect": {
+        "name": "tu-detect",
+        "exitCode": 0,
+        "seconds": 1.013
+      },
+      "dig": {
+        "name": "tu-dig",
+        "exitCode": 0,
+        "seconds": 1.077
+      },
+      "display": {
+        "name": "tu-display",
+        "exitCode": 0,
+        "seconds": 10.924
+      },
+      "do": {
+        "name": "tu-do",
+        "exitCode": 0,
+        "seconds": 1.057
+      },
+      "do_name": {
+        "name": "tu-do_name",
+        "exitCode": 0,
+        "seconds": 0.592
+      },
+      "do_wear": {
+        "name": "tu-do_wear",
+        "exitCode": 0,
+        "seconds": 1.82
+      },
+      "dog": {
+        "name": "tu-dog",
+        "exitCode": 0,
+        "seconds": 2.02
+      },
+      "dogmove": {
+        "name": "tu-dogmove",
+        "exitCode": 0,
+        "seconds": 1.544
+      },
+      "dokick": {
+        "name": "tu-dokick",
+        "exitCode": 0,
+        "seconds": 0.808
+      },
+      "dothrow": {
+        "name": "tu-dothrow",
+        "exitCode": 0,
+        "seconds": 92.632
+      },
+      "drawing": {
+        "name": "tu-drawing",
+        "exitCode": 0,
+        "seconds": 0.496
+      },
+      "dungeon": {
+        "name": "tu-dungeon",
+        "exitCode": 0,
+        "seconds": 31.002
+      },
+      "earlyarg": {
+        "name": "tu-earlyarg",
+        "exitCode": 0,
+        "seconds": 1.219
+      },
+      "eat": {
+        "name": "tu-eat",
+        "exitCode": 0,
+        "seconds": 1.225
+      },
+      "end": {
+        "name": "tu-end",
+        "exitCode": 0,
+        "seconds": 0.389
+      },
+      "engrave": {
+        "name": "tu-engrave",
+        "exitCode": 0,
+        "seconds": 0.22
+      },
+      "exper": {
+        "name": "tu-exper",
+        "exitCode": 0,
+        "seconds": 0.564
+      },
+      "explode": {
+        "name": "tu-explode",
+        "exitCode": 0,
+        "seconds": 0.15
+      },
+      "extralev": {
+        "name": "tu-extralev",
+        "exitCode": 0,
+        "seconds": 0.522
+      },
+      "files": {
+        "name": "tu-files",
+        "exitCode": 0,
+        "seconds": 0.732
+      },
+      "fountain": {
+        "name": "tu-fountain",
+        "exitCode": 0,
+        "seconds": 1.127
+      },
+      "getline": {
+        "name": "tu-getline",
+        "exitCode": 0,
+        "seconds": 4.356
+      },
+      "getpos": {
+        "name": "tu-getpos",
+        "exitCode": 0,
+        "seconds": 10.722
+      },
+      "glyphs": {
+        "name": "tu-glyphs",
+        "exitCode": 0,
+        "seconds": 10.917
+      },
+      "hack": {
+        "name": "tu-hack",
+        "exitCode": 0,
+        "seconds": 33.741
+      },
+      "hacklib": {
+        "name": "tu-hacklib",
+        "exitCode": 0,
+        "seconds": 8.63
+      },
+      "iactions": {
+        "name": "tu-iactions",
+        "exitCode": 0,
+        "seconds": 0.814
+      },
+      "insight": {
+        "name": "tu-insight",
+        "exitCode": 0,
+        "seconds": 4.752
+      },
+      "invent": {
+        "name": "tu-invent",
+        "exitCode": 0,
+        "seconds": 0.286
+      },
+      "ioctl": {
+        "name": "tu-ioctl",
+        "exitCode": 0,
+        "seconds": 0.394
+      },
+      "light": {
+        "name": "tu-light",
+        "exitCode": 1,
+        "seconds": 0.385
+      },
+      "lock": {
+        "name": "tu-lock",
+        "exitCode": 0,
+        "seconds": 2.785
+      },
+      "mail": {
+        "name": "tu-mail",
+        "exitCode": 0,
+        "seconds": 0.747
+      },
+      "makemon": {
+        "name": "tu-makemon",
+        "exitCode": 0,
+        "seconds": 4.984
+      },
+      "mcastu": {
+        "name": "tu-mcastu",
+        "exitCode": 0,
+        "seconds": 1.649
+      },
+      "mdlib": {
+        "name": "tu-mdlib",
+        "exitCode": 0,
+        "seconds": 0.493
+      },
+      "mhitm": {
+        "name": "tu-mhitm",
+        "exitCode": 0,
+        "seconds": 0.388
+      },
+      "mhitu": {
+        "name": "tu-mhitu",
+        "exitCode": 0,
+        "seconds": 1.923
+      },
+      "minion": {
+        "name": "tu-minion",
+        "exitCode": 0,
+        "seconds": 1.044
+      },
+      "mklev": {
+        "name": "tu-mklev",
+        "exitCode": 0,
+        "seconds": 87.982
+      },
+      "mkmap": {
+        "name": "tu-mkmap",
+        "exitCode": 0,
+        "seconds": 4.289
+      },
+      "mkmaze": {
+        "name": "tu-mkmaze",
+        "exitCode": 0,
+        "seconds": 4.534
+      },
+      "mkobj": {
+        "name": "tu-mkobj",
+        "exitCode": 0,
+        "seconds": 26.13
+      },
+      "mkroom": {
+        "name": "tu-mkroom",
+        "exitCode": 0,
+        "seconds": 2.263
+      },
+      "mon": {
+        "name": "tu-mon",
+        "exitCode": 0,
+        "seconds": 1.562
+      },
+      "mondata": {
+        "name": "tu-mondata",
+        "exitCode": 0,
+        "seconds": 35.582
+      },
+      "monmove": {
+        "name": "tu-monmove",
+        "exitCode": 0,
+        "seconds": 0.917
+      },
+      "monst": {
+        "name": "tu-monst",
+        "exitCode": 0,
+        "seconds": 0.726
+      },
+      "mplayer": {
+        "name": "tu-mplayer",
+        "exitCode": 0,
+        "seconds": 0.725
+      },
+      "mthrowu": {
+        "name": "tu-mthrowu",
+        "exitCode": 0,
+        "seconds": 2.207
+      },
+      "muse": {
+        "name": "tu-muse",
+        "exitCode": 0,
+        "seconds": 0.996
+      },
+      "music": {
+        "name": "tu-music",
+        "exitCode": 0,
+        "seconds": 12.71
+      },
+      "nhlobj": {
+        "name": "tu-nhlobj",
+        "exitCode": 0,
+        "seconds": 0.995
+      },
+      "nhlsel": {
+        "name": "tu-nhlsel",
+        "exitCode": 0,
+        "seconds": 1.724
+      },
+      "nhlua": {
+        "name": "tu-nhlua",
+        "exitCode": 0,
+        "seconds": 0.875
+      },
+      "o_init": {
+        "name": "tu-o_init",
+        "exitCode": 0,
+        "seconds": 38.791
+      },
+      "objects": {
+        "name": "tu-objects",
+        "exitCode": 0,
+        "seconds": 0.7
+      },
+      "objnam": {
+        "name": "tu-objnam",
+        "exitCode": 0,
+        "seconds": 10.043
+      },
+      "options": {
+        "name": "tu-options",
+        "exitCode": 0,
+        "seconds": 7.292
+      },
+      "pickup": {
+        "name": "tu-pickup",
+        "exitCode": 0,
+        "seconds": 32.556
+      },
+      "pline": {
+        "name": "tu-pline",
+        "exitCode": 0,
+        "seconds": 0.379
+      },
+      "polyself": {
+        "name": "tu-polyself",
+        "exitCode": 0,
+        "seconds": 5.905
+      },
+      "potion": {
+        "name": "tu-potion",
+        "exitCode": 0,
+        "seconds": 0.757
+      },
+      "pray": {
+        "name": "tu-pray",
+        "exitCode": 0,
+        "seconds": 0.878
+      },
+      "priest": {
+        "name": "tu-priest",
+        "exitCode": 0,
+        "seconds": 2.804
+      },
+      "quest": {
+        "name": "tu-quest",
+        "exitCode": 0,
+        "seconds": 0.719
+      },
+      "questpgr": {
+        "name": "tu-questpgr",
+        "exitCode": 0,
+        "seconds": 0.637
+      },
+      "read": {
+        "name": "tu-read",
+        "exitCode": 0,
+        "seconds": 4.477
+      },
+      "region": {
+        "name": "tu-region",
+        "exitCode": 0,
+        "seconds": 1.293
+      },
+      "report": {
+        "name": "tu-report",
+        "exitCode": 0,
+        "seconds": 0.211
+      },
+      "restore": {
+        "name": "tu-restore",
+        "exitCode": 0,
+        "seconds": 8.554
+      },
+      "role": {
+        "name": "tu-role",
+        "exitCode": 0,
+        "seconds": 16.784
+      },
+      "rumors": {
+        "name": "tu-rumors",
+        "exitCode": 0,
+        "seconds": 0.622
+      },
+      "save": {
+        "name": "tu-save",
+        "exitCode": 0,
+        "seconds": 1.878
+      },
+      "selvar": {
+        "name": "tu-selvar",
+        "exitCode": 0,
+        "seconds": 0.798
+      },
+      "sfbase": {
+        "name": "tu-sfbase",
+        "exitCode": 0,
+        "seconds": 4.719
+      },
+      "sfstruct": {
+        "name": "tu-sfstruct",
+        "exitCode": 0,
+        "seconds": 0.763
+      },
+      "shk": {
+        "name": "tu-shk",
+        "exitCode": 0,
+        "seconds": 0.264
+      },
+      "shknam": {
+        "name": "tu-shknam",
+        "exitCode": 0,
+        "seconds": 7.785
+      },
+      "sit": {
+        "name": "tu-sit",
+        "exitCode": 0,
+        "seconds": 0.947
+      },
+      "sounds": {
+        "name": "tu-sounds",
+        "exitCode": 0,
+        "seconds": 1.074
+      },
+      "sp_lev": {
+        "name": "tu-sp_lev",
+        "exitCode": 0,
+        "seconds": 13.013
+      },
+      "spell": {
+        "name": "tu-spell",
+        "exitCode": 0,
+        "seconds": 0.499
+      },
+      "steal": {
+        "name": "tu-steal",
+        "exitCode": 0,
+        "seconds": 0.952
+      },
+      "steed": {
+        "name": "tu-steed",
+        "exitCode": 0,
+        "seconds": 2.528
+      },
+      "symbols": {
+        "name": "tu-symbols",
+        "exitCode": 0,
+        "seconds": 1.616
+      },
+      "termcap": {
+        "name": "tu-termcap",
+        "exitCode": 0,
+        "seconds": 4.463
+      },
+      "timeout": {
+        "name": "tu-timeout",
+        "exitCode": 0,
+        "seconds": 0.398
+      },
+      "topl": {
+        "name": "tu-topl",
+        "exitCode": 0,
+        "seconds": 31.689
+      },
+      "topten": {
+        "name": "tu-topten",
+        "exitCode": 0,
+        "seconds": 1.234
+      },
+      "trap": {
+        "name": "tu-trap",
+        "exitCode": 0,
+        "seconds": 0.288
+      },
+      "uhitm": {
+        "name": "tu-uhitm",
+        "exitCode": 0,
+        "seconds": 3.862
+      },
+      "unixmain": {
+        "name": "tu-unixmain",
+        "exitCode": 0,
+        "seconds": 0.143
+      },
+      "unixtty": {
+        "name": "tu-unixtty",
+        "exitCode": 0,
+        "seconds": 0.392
+      },
+      "unixunix": {
+        "name": "tu-unixunix",
+        "exitCode": 0,
+        "seconds": 0.166
+      },
+      "vault": {
+        "name": "tu-vault",
+        "exitCode": 0,
+        "seconds": 4.325
+      },
+      "version": {
+        "name": "tu-version",
+        "exitCode": 0,
+        "seconds": 1.398
+      },
+      "vision": {
+        "name": "tu-vision",
+        "exitCode": 0,
+        "seconds": 14.661
+      },
+      "weapon": {
+        "name": "tu-weapon",
+        "exitCode": 0,
+        "seconds": 2.974
+      },
+      "were": {
+        "name": "tu-were",
+        "exitCode": 0,
+        "seconds": 0.816
+      },
+      "wield": {
+        "name": "tu-wield",
+        "exitCode": 0,
+        "seconds": 12.6
+      },
+      "windows": {
+        "name": "tu-windows",
+        "exitCode": 0,
+        "seconds": 0.08,
+        "resolvedFixtureDirectory": ".cache/tu-probes",
+        "logSha256": "18c3df627dfe8c69655f1bdc3155814cdadc7eeccd131e1ae9d1ddfa41bc372f"
+      },
+      "wintty": {
+        "name": "tu-wintty",
+        "exitCode": 0,
+        "seconds": 0.37
+      },
+      "wizard": {
+        "name": "tu-wizard",
+        "exitCode": 0,
+        "seconds": 1.261
+      },
+      "wizcmds": {
+        "name": "tu-wizcmds",
+        "exitCode": 0,
+        "seconds": 1.916
+      },
+      "worm": {
+        "name": "tu-worm",
+        "exitCode": 0,
+        "seconds": 1.36
+      },
+      "worn": {
+        "name": "tu-worn",
+        "exitCode": 0,
+        "seconds": 10.031
+      },
+      "write": {
+        "name": "tu-write",
+        "exitCode": 0,
+        "seconds": 0.837
+      },
+      "zap": {
+        "name": "tu-zap",
+        "exitCode": 0,
+        "seconds": 7.312
+      },
+      "u_init": {
+        "name": "u_init",
+        "exitCode": 0
+      },
+      "date": {
+        "name": "date",
+        "exitCode": 0
+      },
+      "posixregex": {
+        "name": "posixregex",
+        "exitCode": 0
+      },
+      "pager": {
+        "name": "pager",
+        "exitCode": 0,
+        "resolvedFixtureDirectory": ".cache/tu-probes",
+        "logSha256": "04f611864ab74a6f948a4d720eea876a5f095fec75d4af6c2aa81e44f5de79f6"
+      },
+      "rnd": {
+        "name": "rnd",
+        "exitCode": 0
+      },
+      "teleport": {
+        "name": "teleport",
+        "exitCode": 0,
+        "resolvedFixtureDirectory": ".cache/tu-probes",
+        "logSha256": "3c333255926029eb6e5c03c651ad68a52f9041a6216372c5dc949de15ca0b15b"
+      },
+      "utf8map": {
+        "name": "utf8map",
+        "exitCode": 0,
+        "logSha256": "4e3249dbdc711aae43a7736d0e71fcf958b4c6ba67f3bb7d529b6c7a045c739e"
+      }
+    }
+  },
+  "dependencyComparisons": {
+    "passed": 41,
+    "total": 41,
+    "results": [
+      {
+        "name": "test-js-compress",
+        "exitCode": 0,
+        "seconds": 3.969
+      },
+      {
+        "name": "test-js-terminfo",
+        "exitCode": 0,
+        "seconds": 0.434
+      },
+      {
+        "name": "test-js-posix-regex",
+        "exitCode": 0,
+        "seconds": 1.262
+      },
+      {
+        "name": "test-js-runtime",
+        "exitCode": 0,
+        "seconds": 0.766
+      },
+      {
+        "name": "test-js-c-float",
+        "exitCode": 0,
+        "seconds": 1.515
+      },
+      {
+        "name": "test-js-time",
+        "exitCode": 0,
+        "seconds": 1.992
+      },
+      {
+        "name": "test-js-runtime-regex",
+        "exitCode": 0,
+        "seconds": 0.268
+      },
+      {
+        "name": "test-js-vfs",
+        "exitCode": 0,
+        "seconds": 21.764
+      },
+      {
+        "name": "test-js-game-files",
+        "exitCode": 0,
+        "seconds": 1.005
+      },
+      {
+        "name": "test-js-lua",
+        "exitCode": 0,
+        "seconds": 8.138
+      },
+      {
+        "name": "test-js-lua-api",
+        "exitCode": 0,
+        "seconds": 4.336
+      },
+      {
+        "name": "test-js-lua-memory",
+        "exitCode": 0,
+        "seconds": 8.524
+      },
+      {
+        "name": "test-js-lua-source-memory",
+        "exitCode": 0,
+        "seconds": 19.129
+      },
+      {
+        "name": "test-js-lua-incremental-codegen",
+        "exitCode": 0,
+        "seconds": 6.171
+      },
+      {
+        "name": "test-js-lua-incremental",
+        "exitCode": 0,
+        "seconds": 6.379
+      },
+      {
+        "name": "test-js-lua-reader",
+        "exitCode": 0,
+        "seconds": 18.102
+      },
+      {
+        "name": "test-js-lua-reader-runtime",
+        "exitCode": 0,
+        "seconds": 7.384
+      },
+      {
+        "name": "test-js-lua-randomseed",
+        "exitCode": 0,
+        "seconds": 4.533
+      },
+      {
+        "name": "test-js-lua-aux-memory",
+        "exitCode": 0,
+        "seconds": 7.23
+      },
+      {
+        "name": "test-js-lua-format-utf8-errors",
+        "exitCode": 0,
+        "seconds": 9.231
+      },
+      {
+        "name": "test-js-lua-buffer",
+        "exitCode": 0,
+        "seconds": 5.262
+      },
+      {
+        "name": "test-js-lua-consumer-memory",
+        "exitCode": 0,
+        "seconds": 21.189
+      },
+      {
+        "name": "test-js-lua-format-memory",
+        "exitCode": 0,
+        "seconds": 5.095
+      },
+      {
+        "name": "test-js-lua-utf8-memory",
+        "exitCode": 0,
+        "seconds": 5.344
+      },
+      {
+        "name": "test-js-lua-pack-os-memory",
+        "exitCode": 0,
+        "seconds": 7.654
+      },
+      {
+        "name": "test-js-lua-dump",
+        "exitCode": 0,
+        "seconds": 5.73
+      },
+      {
+        "name": "test-js-lua-gc",
+        "exitCode": 0,
+        "seconds": 5.224
+      },
+      {
+        "name": "test-js-lua-gc-scheduler",
+        "exitCode": 0,
+        "seconds": 9.36
+      },
+      {
+        "name": "test-js-lua-strings",
+        "exitCode": 0,
+        "seconds": 18.274
+      },
+      {
+        "name": "test-js-lua-sort",
+        "exitCode": 0,
+        "seconds": 38.225
+      },
+      {
+        "name": "test-js-lua-sort-memory",
+        "exitCode": 0,
+        "seconds": 6.064
+      },
+      {
+        "name": "test-js-lua-debug",
+        "exitCode": 0,
+        "seconds": 4.579
+      },
+      {
+        "name": "test-js-lua-debug-library",
+        "exitCode": 0,
+        "seconds": 4.907
+      },
+      {
+        "name": "test-js-lua-bytecode",
+        "exitCode": 0,
+        "seconds": 18.8
+      },
+      {
+        "name": "test-js-lua-codegen",
+        "exitCode": 0,
+        "seconds": 6.494
+      },
+      {
+        "name": "test-js-lua-abi",
+        "exitCode": 0,
+        "seconds": 6.3
+      },
+      {
+        "name": "test-js-lua-os",
+        "exitCode": 0,
+        "seconds": 14.151
+      },
+      {
+        "name": "test-js-timezone-info",
+        "exitCode": 0,
+        "seconds": 7.426
+      },
+      {
+        "name": "test-js-lua-calendar",
+        "exitCode": 0,
+        "seconds": 9.424
+      },
+      {
+        "name": "test-js-lua-strftime",
+        "exitCode": 0,
+        "seconds": 8.26
+      },
+      {
+        "name": "test-js-dependency-isolation",
+        "exitCode": 0,
+        "logSha256": "f52ed35156068de5d48ec1c19a871654ad7eaffc5ae9df54e4eb35bf12c20ab7"
+      }
+    ],
+    "regexOracle": {
+      "command": [
+        "/Users/arj/Desktop/nethack_comp/services-cleanup/.cache/emsdk/upstream/emscripten/emcc",
+        "-O2",
+        "-sMEMORY64=1",
+        "-sMODULARIZE=1",
+        "-sENVIRONMENT=node",
+        "-sALLOW_MEMORY_GROWTH=1",
+        "--no-entry",
+        "-DTELEPORT_REFERENCE_TU",
+        "-DNOTPARMDECL",
+        "-DNO_TIMED_DELAY",
+        "-DMACOS",
+        "-DNOPANICTRACE",
+        "-DNO_FILE_LINKS",
+        "-I/Users/arj/Desktop/nethack_comp/services-cleanup/.cache/wasm64-build/tree/include",
+        "-sEXPORTED_RUNTIME_METHODS=HEAPU8",
+        "-sEXPORTED_FUNCTIONS=[\"_malloc\", \"_free\", \"_probe_identifier\", \"_probe_init\", \"_probe_compile\", \"_probe_match\", \"_probe_error\", \"_probe_err\", \"_probe_set_err\", \"_probe_free\", \"_probe_stack\", \"_probe_dependency_compile\", \"_probe_dependency_match\", \"_probe_dependency_error\"]",
+        "scripts/tu-posixregex-probe.c",
+        "nethack-c/upstream/src/alloc.c",
+        "-o",
+        "/Users/arj/Desktop/nethack_comp/services-cleanup/.cache/services-cleanup/regex-c-oracle/reference.mjs"
+      ],
+      "sourceSha256": {
+        "scripts/tu-posixregex-probe.c": "26b89c086e3acae62eb147c29fecdfbded467e5335258ae6ada854ba303cc34e",
+        "nethack-c/upstream/sys/share/posixregex.c": "81e556cb5cfd0f1307b97df5bf4132c6a58fa6938d3f5b5b98aef766fe95a4a5",
+        "nethack-c/upstream/src/alloc.c": "b5bae0ab6e2e506517bee0825582914644e968da6b09f7fa3d5d0b277ef16a31",
+        "nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2"
+      }
+    },
+    "luaArchiveSha256": "4f18ddae154e793e46eeab727c59ef1c0c0c2b744e7b94219710d76f530629ae"
+  },
+  "connectedGameComparisons": [
+    {
+      "name": "test-standalone-environment",
+      "exitCode": 0,
+      "seconds": 0.567
+    },
+    {
+      "name": "test-standalone-address-ports",
+      "exitCode": 0,
+      "seconds": 0.701
+    },
+    {
+      "name": "test-standalone-libc",
+      "exitCode": 0,
+      "seconds": 0.839
+    },
+    {
+      "name": "test-standalone-scanf",
+      "exitCode": 0,
+      "seconds": 0.409
+    },
+    {
+      "name": "test-standalone-stdio-buffers",
+      "exitCode": 0,
+      "seconds": 0.482
+    },
+    {
+      "name": "test-standalone-io-lua",
+      "exitCode": 0,
+      "seconds": 0.429
+    },
+    {
+      "name": "test-standalone-serialization",
+      "exitCode": 0,
+      "seconds": 0.513
+    },
+    {
+      "name": "test-standalone-terminal",
+      "exitCode": 0,
+      "seconds": 0.521
+    },
+    {
+      "name": "test-standalone-isolation",
+      "exitCode": 0,
+      "seconds": 2.414
+    },
+    {
+      "name": "check-standalone-special-interactions",
+      "exitCode": 0,
+      "seconds": 3.001
+    },
+    {
+      "name": "test-standalone-program",
+      "exitCode": 0,
+      "seconds": 32.292
+    },
+    {
+      "name": "test-standalone-death-program",
+      "exitCode": 0,
+      "seconds": 243.1
+    },
+    {
+      "name": "test-standalone-pager",
+      "exitCode": 0,
+      "seconds": 45.061
+    },
+    {
+      "name": "test-standalone-light",
+      "exitCode": 0,
+      "seconds": 10.48
+    },
+    {
+      "name": "test-standalone-quest-completion",
+      "exitCode": 1,
+      "seconds": 231.577
+    },
+    {
+      "name": "deep-death",
+      "exitCode": 0,
+      "seconds": 435.297
+    },
+    {
+      "name": "bones-consumer",
+      "exitCode": 0,
+      "seconds": 52.449
+    }
+  ],
+  "expandedPager": {
+    "comparisons": 14805,
+    "cases": 47,
+    "logSha256": "d7968d36e0617764c583f35873181c6c15909144b7bfc55f5e0d5dcc0342e721"
+  },
+  "retainedFailures": {
+    "light": {
+      "baselineCommit": "e9207d8",
+      "sameTraceWitnesses": [
+        "impossible:del_light_source:type=none;impossible:del_light_source: not found type=0, id=null;",
+        "impossible:del_light_source:type=none;impossible:del_light_source: not found type=0, id=0;",
+        "impossible:del_light_source:type=none;impossible:del_light_source: not found type=0, id=null;",
+        "impossible:del_light_source:type=none;impossible:del_light_source: not found type=0, id=0;"
+      ],
+      "status": "RETAINED_FAILURE_NOT_WAIVED"
+    },
+    "quest": {
+      "originalBaselineCommit": "8cf4880d8cf7fb9104635f068564a5de87523fe7",
+      "sameRetainedAssertion": "native source eligible Quest scenario finishes: exited vs input-exhausted",
+      "waived": false,
+      "results": {
+        "c": {
+          "bytes": 57628854,
+          "sha256": "cfc4a7a432b723fc1eadbcc55d175872865400cba0b5177746c303c8371bd8b0",
+          "byteIdenticalToRecordedUntouchedMain": true
+        },
+        "js": {
+          "bytes": 57628854,
+          "sha256": "cfc4a7a432b723fc1eadbcc55d175872865400cba0b5177746c303c8371bd8b0",
+          "byteIdenticalToRecordedUntouchedMain": true
+        }
+      }
+    }
+  },
+  "negativeControls": {
+    "dungeon": "PASS unchanged-C actual AssertionError; committed ordered function metadata",
+    "dothrow": "PASS",
+    "mklev": "PASS",
+    "mkmaze": "PASS",
+    "display": "PASS",
+    "unixunix": "PASS four actual assertion failures",
+    "pickup": "PASS three actual assertion failures",
+    "makefile": "PASS actual inverse and unknown-byte negatives"
+  },
+  "sourceStability": {
+    "components": {
+      "verified": true,
+      "files": 1659,
+      "scope": "Completed component batch before correcting independent dependency harness configuration"
+    },
+    "dependenciesGame": {
+      "verified": true,
+      "files": 1659
+    },
+    "lua": {
+      "verified": true,
+      "files": 81
+    },
+    "finalWhitespaceNormalization": "all 520 production AST hashes identical to the semantically validated revision"
+  },
+  "limitations": [
+    "Original LIGHT diagnostic mismatch and default Quest eligibility failure remain unwaived.",
+    "No fresh mixed build, public-score run, or full-game completion claim.",
+    "Dependency fixtures independently restored from pinned archive; regex cross-check uses a newly built original-C oracle.",
+    "Component/dependency harness errors and failed initial extraction attempts were corrected before final relevant reruns."
+  ]
+}

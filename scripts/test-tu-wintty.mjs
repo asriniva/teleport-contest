@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {resolve}from'node:path';
 import {pathToFileURL}from'node:url';
 import * as core from '../js/ported/wintty.js';
-import {callWintty,initializeWintty,winttyState,createWinttyEnvironment}from'../js/ported/wintty-runtime.js';
+import {callWintty,initializeWintty,winttyState,createWinttyEnvironment}from'../js/nethack/bindings/wintty.js';
 if(process.env.TELEPORT_NATIVE_TESTS!=='0') throw new Error('WINTTY has no native reference fixture; Emscripten results cannot be labeled native. Set TELEPORT_NATIVE_TESTS=0 for diagnostic-only comparisons.');
 const privateDir=process.env.TELEPORT_WINTTY_PROBE_DIR,dir=resolve(privateDir??'.cache/tu-probes');
 const file=mode=>pathToFileURL(resolve(dir,(privateDir?'':'wintty-')+mode+'.mjs'));

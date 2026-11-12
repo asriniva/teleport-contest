@@ -4,8 +4,8 @@
 import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
-import { createReportBridge } from '../js/ported/report-runtime.js';
-import { C } from '../js/ported/c-runtime.js';
+import { createReportBridge } from '../js/nethack/bindings/report.js';
+import { C } from '../js/c-runtime/context.js';
 const probeDir = resolve(process.env.TELEPORT_REPORT_PROBE_DIR ?? '.cache/tu-probes');
 const { default: referenceFactory } = await import(pathToFileURL(resolve(probeDir, 'report-reference.mjs')));
 const { default: hybridFactory } = await import(pathToFileURL(resolve(probeDir, 'report-hybrid.mjs')));

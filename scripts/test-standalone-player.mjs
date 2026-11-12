@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 const out=path.resolve('.cache/standalone-player-checks'),reference=path.resolve('.cache/full-original-c-v1'),save='/nethack/save/0Ada.Z',sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-fs.mkdirSync(out,{recursive:true});const files=['scripts/test-standalone-player.mjs','scripts/play-standalone.mjs','js/standalone/program.js','js/standalone/environment.js','js/c-runtime/stdio.js','js/services/c-vfs.js'],before=Object.fromEntries(files.map(p=>[p,sha(p)]));
+fs.mkdirSync(out,{recursive:true});const files=['scripts/test-standalone-player.mjs','scripts/play-standalone.mjs','js/standalone/program.js','js/standalone/environment.js','js/c-runtime/stdio.js','js/c-runtime/vfs.js'],before=Object.fromEntries(files.map(p=>[p,sha(p)]));
 const[{runFullOriginalC},{worldGraph}]=await Promise.all([import('./full-original-c-run.mjs'),import('./restoration-world-graph.mjs')]);
 let checks=0;const eq=(a,b,n)=>{assert.deepEqual(a,b,n);checks++;},profile={seed:1,timezone:'UTC',datetime:'20260102030405',clockEpoch:1767323045,options:'OPTIONS=!news\n'},args=['-u','Ada-male-lawful','-p','Archeologist','-r','human'];
 const rc=path.join(out,'nethackrc');fs.writeFileSync(rc,profile.options);

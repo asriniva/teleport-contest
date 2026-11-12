@@ -18,7 +18,7 @@ def run(command,log):
  return result.stdout
 def check_sources(paths):
  return {str(path):sha(path)for path in sorted(set(paths))}
-abi=json.loads((root/'js/services/native-terminal-abi.json').read_text());n,w=abi['native'],abi['wire'];nc,wc=abi['nativeConstants'],abi['wireConstants'];tables=[]
+abi=json.loads((root/'js/platform/darwin/terminal-abi.json').read_text());n,w=abi['native'],abi['wire'];nc,wc=abi['nativeConstants'],abi['wireConstants'];tables=[]
 tables+=['#define ABI_NATIVE_SIZE '+str(n['termioSize']),'#define ABI_WIRE_SIZE '+str(w['termioSize']),'#define ABI_NATIVE_VDISABLE '+str(n['_PC_VDISABLE']),'#define ABI_WIRE_VDISABLE '+str(w['_PC_VDISABLE'])]
 tables+=['static const int abi_size[]={'+str(n['termioSize'])+','+str(w['termioSize'])+'};','static const int abi_width[]={8,4};','static const int abi_speed_width[]={8,4};','static const int abi_cc[]={'+str(n['c_cc'])+','+str(w['c_cc'])+'};','static const int abi_offsets[2][4]={'+','.join('{'+','.join(str(row[k])for k in ['c_iflag','c_oflag','c_cflag','c_lflag'])+'}'for row in [n,w])+'};']
 groups=['IGNBRK BRKINT IGNPAR PARMRK INPCK ISTRIP INLCR IGNCR ICRNL IXON IXOFF IXANY IMAXBEL IUTF8','OPOST ONLCR OCRNL ONOCR ONLRET OFILL OFDEL','CLOCAL CREAD CSTOPB HUPCL PARENB PARODD CRTSCTS','ECHO ECHOE ECHOK ECHONL ICANON ISIG IEXTEN TOSTOP NOFLSH ECHOKE ECHOCTL PENDIN FLUSHO EXTPROC']
@@ -31,7 +31,7 @@ for field,mask,keys in [(2,'CSIZE',['CS5','CS6','CS7','CS8']),(1,'TABDLY',['TAB0
 tables+=['static const struct {int field,count;uint64_t mask[2],value[5][2];} abi_multi[]={'+','.join(multi)+'};']
 controls='VEOF VEOL VEOL2 VERASE VWERASE VKILL VREPRINT VINTR VQUIT VSUSP VDSUSP VSTART VSTOP VLNEXT VDISCARD VMIN VTIME VSTATUS'.split()
 tables+=['static const int abi_control[][2]={'+','.join('{'+str(nc[k])+','+str(wc[k])+'}'for k in controls if k in nc and k in wc)+'};','static const uint64_t abi_baud[][2]={'+','.join('{'+str(n[k])+','+str(w[k])+'}'for k in n if re.fullmatch(r'B\d+',k)and k in w)+'};']
-table=deps/'full-original-c-native-tables.h';table.write_text('\n'.join(tables)+'\n');inputs.update([table,root/'js/services/native-terminal-abi.json',root/'js/services/native-terminal.js',root/'nethack-c/wasm/native-terminal.h',root/'nethack-c/wasm/full-original-c-native.c',root/'scripts/full-original-c-abi-probe.c',Path(__file__).resolve()])
+table=deps/'full-original-c-native-tables.h';table.write_text('\n'.join(tables)+'\n');inputs.update([table,root/'js/platform/darwin/terminal-abi.json',root/'js/platform/darwin/terminal.js',root/'nethack-c/wasm/native-terminal.h',root/'nethack-c/wasm/full-original-c-native.c',root/'scripts/full-original-c-abi-probe.c',Path(__file__).resolve()])
 common=['-O2','-g','-sMEMORY64=1','-I'+str(deps)];native_header=root/'nethack-c/wasm/native-terminal.h';native_obj=obj/'native.o';probe_obj=obj/'abi-probe.o'
 run([emcc,*common,'-c',root/'nethack-c/wasm/full-original-c-native.c','-o',native_obj],private/'native-compile.log')
 run([emcc,*common,'-include',native_header,'-c',root/'scripts/full-original-c-abi-probe.c','-o',probe_obj],private/'abi-probe-compile.log')

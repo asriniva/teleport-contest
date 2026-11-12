@@ -32,7 +32,7 @@ bindings=re.findall(r'case (\d+): return (.*?);',support.read_text().split('defa
 expected=['&gc.crash_urlmax','&gc.crash_name','&gc.crash_email','&sysopt.crashreporturl','&gs.saved_pline_index','gs.saved_plines','teleport_report_storage.bid','teleport_report_storage.url']
 assert bindings==[(str(i),v)for i,v in enumerate(expected)],'REPORT native global map changed'
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-inputs=[Path(__file__).resolve(),root/'js/ported/report.js',root/'js/ported/report-runtime.js',root/'js/ported/nhmd4.js',root/'nethack-c/wasm/tu-libraries/report.js',support,header,root/'nethack-c/wasm/tu-fragments/report.storage.h',root/'nethack-c/wasm/compile-defines.json',root/'js/wasm/tu-layouts.json']
+inputs=[Path(__file__).resolve(),root/'js/ported/report.js',root/'js/nethack/bindings/report.js',root/'js/ported/nhmd4.js',root/'nethack-c/wasm/tu-libraries/report.js',support,header,root/'nethack-c/wasm/tu-fragments/report.storage.h',root/'nethack-c/wasm/compile-defines.json',root/'js/wasm/tu-layouts.json']
 data={'report':layouts['report'],'nhmd4':layouts['nhmd4'],'globalMap':expected,'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers))}}
 (root/'js/standalone/report-abi.json').write_text(json.dumps(data,indent=2)+'\n')
 print('Bound original REPORT configuration, eight native globals and NHMD4 context.')

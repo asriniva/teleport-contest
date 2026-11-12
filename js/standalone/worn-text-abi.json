@@ -28,9 +28,9 @@
   "sourceSha256": {
     "scripts/export-standalone-worn-text-abi.py": "b3680b6c2f4de7dcec15e2c6d305156b0518496e899eb819b6dd7740bb7aff46",
     "js/standalone/monster-inventory.js": "924f6307668213ffe2c650f3c4b3cea4c25881e83d99bdaa82a6f80a536df162",
-    "js/standalone/hero-equipment.js": "5cee21e887cf7ab293f24af27882976c1982348e1093daa9e956649f9b7f0700",
-    "js/ported/worn.js": "43624f0cf7f2fa808f0bba08d0bc123d693bf951570f8872298d7670a7a00008",
-    "js/ported/hacklib.js": "308c32f2c959a8aadcb816d333ea5faf2aad90c9325523ae6a5551bd9d4963e3",
+    "js/standalone/hero-equipment.js": "7ae85ae1b2218698080f273168b2f86fe6eb0aba3019d03cc8c56d4593ba96ab",
+    "js/ported/worn.js": "8d86a4cc4cc382b319ab1ea40157e1f3e9c9ed998044f0d8c1c0f6efcf94c584",
+    "js/ported/hacklib.js": "dcc20877428e4903dc354128e9c17e5b38101d41a3bbba3b8c904ec29a8b4272",
     "nethack-c/wasm/tu-libraries/worn.js": "9887555ed959b09741bf9e2e9a471d7f63e7eee44d57b8071ab460ce8109097d",
     "js/standalone/public-functions.json": "75774661072653bbd6c90bce1e837fac87a998b5e9139f6f5012878057779e12",
     "nethack-c/upstream/src/worn.c": "0414baea25644ea52cc7b628dff4ab1a533eada1523405eaabe7d7555bc3d4cf"

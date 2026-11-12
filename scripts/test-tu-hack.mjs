@@ -6,8 +6,8 @@ import {resolve} from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
 import {checkHackSource} from '../nethack-c/wasm/tu-fragments/hack-source-check.mjs';
-import {C,withCEnvironment} from '../js/ported/c-runtime.js';
-import {createHackEnvironment,callHack} from '../js/ported/hack-runtime.js';
+import {C,withCEnvironment} from '../js/c-runtime/context.js';
+import {createHackEnvironment,callHack} from '../js/nethack/bindings/hack.js';
 import * as core from '../js/ported/hack.js';
 
 if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('HACK has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for the explicit Emscripten diagnostic.');

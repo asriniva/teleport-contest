@@ -6,7 +6,7 @@ import {resolve} from 'node:path';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const {parse}=await import(pathToFileURL(resolve(process.env.EMSDK??root+'/.cache/emsdk','upstream/emscripten/node_modules/acorn/dist/acorn.mjs')));
 const c=readFileSync(new URL('../.cache/wasm64-build/tree/src/sounds.c',import.meta.url),'utf8'),js=readFileSync(new URL('../js/ported/sounds.js',import.meta.url),'utf8');
-const support=readFileSync(new URL('../nethack-c/wasm/tu-sounds-support.inc',import.meta.url),'utf8'),header=readFileSync(new URL('../scripts/tu-sounds-layout.h',import.meta.url),'utf8');
+const support=readFileSync(new URL('../nethack-c/wasm/tu-sounds-support.inc',import.meta.url),'utf8'),header=readFileSync(new URL('./tu-sounds-layout.h',import.meta.url),'utf8');
 const cleanC=c.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g,m=>' '.repeat(m.length));
 function declarations(source){const result=new Map();function walk(n){if(!n||typeof n!=='object')return;if(n.type==='VariableDeclarator'&&n.id.type==='Identifier')result.set(n.id.name,n.init);for(const v of Object.values(n))if(Array.isArray(v))v.forEach(walk);else if(v&&typeof v==='object')walk(v);}walk(parse(source,{ecmaVersion:'latest',sourceType:'module'}));return result;}
 function sourceArray(name){const body=cleanC.match(new RegExp('\\b'+name+'\\s*\\[[^\\]]*\\]\\s*=\\s*\\{([^}]+)\\}'))?.[1];assert.ok(body,name);const result=[];let current='';for(const m of body.matchAll(/"(?:\\.|[^"\\])*"|,/g)){if(m[0]===','){result.push(current);current='';}else current+=JSON.parse(m[0]);}if(current)result.push(current);return result;}

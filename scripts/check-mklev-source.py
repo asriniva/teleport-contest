@@ -2,7 +2,7 @@
 from pathlib import Path
 from reviewed_build_provenance import nhlua_transport_baseline
 import json,re,hashlib,subprocess,argparse
-r=Path(__file__).resolve().parents[1];w=r/'.cache/mklev-first-pass';m=json.loads((r/'nethack-c/wasm/tu-fragments/mklev-source-metadata.json').read_text());s=json.loads((r/'nethack-c/wasm/tu-fragments/mklev-schema.json').read_text());c=(r/'nethack-c/upstream/src/mklev.c').read_text();js=(r/'js/ported/mklev.js').read_text();rt=(r/'js/ported/mklev-runtime.js').read_text();abi=(r/'nethack-c/wasm/tu-fragments/mklev-support.c').read_text();lib=(r/'nethack-c/wasm/tu-libraries/mklev.js').read_text()
+r=Path(__file__).resolve().parents[1];w=r/'.cache/mklev-first-pass';m=json.loads((r/'nethack-c/wasm/tu-fragments/mklev-source-metadata.json').read_text());s=json.loads((r/'nethack-c/wasm/tu-fragments/mklev-schema.json').read_text());c=(r/'nethack-c/upstream/src/mklev.c').read_text();js=(r/'js/ported/mklev.js').read_text();rt=(r/'js/nethack/bindings/mklev.js').read_text();abi=(r/'nethack-c/wasm/tu-fragments/mklev-support.c').read_text();lib=(r/'nethack-c/wasm/tu-libraries/mklev.js').read_text()
 assert c==(r/'.cache/wasm64-build/tree/src/mklev.c').read_text()
 for path,digest in m['compilerInputHashes'].items():
  if path=='nethack-c/wasm/build.py':nhlua_transport_baseline(r,digest)

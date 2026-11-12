@@ -6,10 +6,10 @@ import {enableMkmap} from './mkmap.js';
 import {is_pool_or_lava,is_ice} from '../ported/dbridge.js';
 import * as stairs from '../ported/stairs.js';
 import * as region from '../ported/region.js';
-import {callRegion} from '../ported/region-runtime.js';
+import {callRegion} from '../nethack/bindings/region.js';
 import {sys_random_seed} from '../ported/unixmain.js';
 import * as bones from '../ported/bones.js';
-import {createBonesEnvironment} from '../ported/bones-runtime.js';
+import {createBonesEnvironment} from '../nethack/bindings/bones.js';
 import {bindBonesServices} from './bones-services.js';
 import {bindRegionServices} from './region-services.js';
 export function enableLevelStartup(environment,layouts,creation){

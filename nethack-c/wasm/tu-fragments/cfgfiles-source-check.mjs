@@ -6,7 +6,7 @@ import {execFileSync} from 'node:child_process';
 import {join,resolve} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 const root=fileURLToPath(new URL('../../../',import.meta.url)),sdk=resolve(process.env.EMSDK??join(root,'.cache/emsdk')),read=p=>readFileSync(join(root,p),'utf8');
-const source=read('.cache/wasm64-build/tree/src/cfgfiles.c'),core=read('js/ported/cfgfiles.js'),runtime=read('js/ported/cfgfiles-runtime.js'),library=read('nethack-c/wasm/tu-libraries/cfgfiles.js'),support=read('nethack-c/wasm/tu-fragments/cfgfiles-support.c'),header=read('nethack-c/wasm/tu-fragments/cfgfiles-source-data.h'),schema=JSON.parse(read('nethack-c/wasm/tu-fragments/cfgfiles-schema.json'));
+const source=read('.cache/wasm64-build/tree/src/cfgfiles.c'),core=read('js/ported/cfgfiles.js'),runtime=read('js/nethack/bindings/cfgfiles.js'),library=read('nethack-c/wasm/tu-libraries/cfgfiles.js'),support=read('nethack-c/wasm/tu-fragments/cfgfiles-support.c'),header=read('nethack-c/wasm/tu-fragments/cfgfiles-source-data.h'),schema=JSON.parse(read('nethack-c/wasm/tu-fragments/cfgfiles-schema.json'));
 assert.equal(source,read('nethack-c/upstream/src/cfgfiles.c'));assert.equal(createHash('sha256').update(source).digest('hex'),header.match(/CFGFILES_SOURCE_SHA256 "([a-f0-9]+)"/)[1]);
 // The real builder invokes Make in TREE/src; Make's $< is cfgfiles.c. Neither
 // the initial private absolute include nor the initial relative AST spelling

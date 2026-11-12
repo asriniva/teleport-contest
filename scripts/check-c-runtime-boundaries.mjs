@@ -9,7 +9,7 @@ const visited=new Set();
 function visitFile(file) {
     file=path.resolve(file);if(visited.has(file))return;visited.add(file);
     const relative=path.relative(root,file);
-    assert.ok(relative.startsWith('js/c-runtime/')||relative.startsWith('js/services/'),'Application dependency in C runtime: '+relative);
+    assert.ok(relative.startsWith('js/c-runtime/')||relative.startsWith('js/libraries/'),'Application dependency in C runtime: '+relative);
     if(file.endsWith('.json'))return;
     const ast=parse(fs.readFileSync(file,'utf8'),{ecmaVersion:'latest',sourceType:'module'});
     function visit(node) {

@@ -2,7 +2,7 @@
 """Measure DOKICK native field/macro/callback boundaries; policies unchanged."""
 import hashlib,json,os,re,shlex,subprocess,tempfile
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];ref=Path(os.environ.get('STANDALONE_REFERENCE_ROOT',root)).resolve();tree=ref/'.cache/wasm64-build/tree';clang=ref/'.cache/emsdk/upstream/bin/clang';header=root/'scripts/tu-dokick-layout.h';support=root/'nethack-c/wasm/tu-dokick-support.inc';library=root/'nethack-c/wasm/tu-libraries/dokick.js';runtime=root/'js/ported/dokick-runtime.js';source=root/'js/ported/dokick.js';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['dokick']
+root=Path(__file__).resolve().parents[1];ref=Path(os.environ.get('STANDALONE_REFERENCE_ROOT',root)).resolve();tree=ref/'.cache/wasm64-build/tree';clang=ref/'.cache/emsdk/upstream/bin/clang';header=root/'scripts/tu-dokick-layout.h';support=root/'nethack-c/wasm/tu-dokick-support.inc';library=root/'nethack-c/wasm/tu-libraries/dokick.js';runtime=root/'js/nethack/bindings/dokick.js';source=root/'js/ported/dokick.js';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['dokick']
 flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(ref/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+v for v in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]]
 with tempfile.TemporaryDirectory(prefix='standalone-dokick-abi-')as scratch:
  probe=Path(scratch)/'probe.c';probe.write_text('#include '+json.dumps(str(header))+'\n')
@@ -40,6 +40,6 @@ for name,shape,params,target in re.findall(r'^(?:void|int) teleport_dokick_(\w+)
  formats.setdefault(name,{})[''if shape=='none'else shape]={'target':target,'types':types,'prefix':prefix}
 assert len(formats)==11,len(formats)
 names=re.findall(r'^export function (\w+)\(',source.read_text(),re.M)
-paths=[Path(__file__).resolve(),root/'js/standalone/dokick.js',header,support,library,runtime,source,root/'js/ported/wasm-runtime.js',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+paths=[Path(__file__).resolve(),root/'js/standalone/dokick.js',header,support,library,runtime,source,root/'js/backends/emscripten/runtime.js',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 data={'layout':layout,'globals':globals,'bits':bits,'calls':calls,'formats':formats,'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[tree/'src/dokick.c']))}}
 (root/'js/standalone/dokick-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound original DOKICK: '+str(len(data['public']))+' public entries/'+str(len(calls))+' foreign calls/'+str(len(layout))+' native values.')

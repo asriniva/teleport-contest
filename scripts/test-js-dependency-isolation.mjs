@@ -16,8 +16,7 @@ if (typeof vm.SourceTextModule !== 'function') {
 }
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const services = path.join(root, 'js/services');
-const translated = path.join(root, 'js/ported');
+const owners = ['c-runtime','ported','nethack','lua','platform','libraries'].map(name => path.join(root,'js',name)+path.sep);
 const forbidden = ['WebAssembly', 'process', 'require', 'Buffer', 'fetch',
     'XMLHttpRequest', 'Worker', 'SharedWorker'];
 const context = vm.createContext({ TextEncoder, TextDecoder, atob, btoa }, {
@@ -40,8 +39,9 @@ async function load(url) {
 async function createModule(url) {
     const identifier = url.href;
     const filename = fileURLToPath(url);
-    assert.ok(filename.startsWith(services + path.sep) || filename.startsWith(translated + path.sep),
-        `Production import escapes service/translation directories: ${identifier}`);
+    if(filename===path.join(root,'js/isaac64.js'))assert.deepEqual(await fs.readFile(filename),await fs.readFile(path.join(root,'frozen/isaac64.js')),'Canonical frozen ISAAC bytes');
+    assert.ok(owners.some(owner=>filename.startsWith(owner))||filename===path.join(root,'js/isaac64.js'),
+        `Production import escapes explicit dependency owners: ${identifier}`);
     const module = new vm.SourceTextModule(await fs.readFile(filename, 'utf8'), {
         context, identifier,
         importModuleDynamically: () => { throw new Error('Runtime imports forbidden'); },
@@ -61,17 +61,17 @@ async function evaluate(module) {
     await module.evaluate({ timeout: 5000 });
 }
 
-const compress = await load(pathToFileURL(path.join(services, 'unix-compress.js')));
-const terminfo = await load(pathToFileURL(path.join(services, 'terminfo.js')));
-const regex = await load(pathToFileURL(path.join(services, 'posix-regex.js')));
-const runtime = await load(pathToFileURL(path.join(translated, 'js-runtime.js')));
-const lua = await load(pathToFileURL(path.join(services, 'lua/lua.js')));
-const bytecode = await load(pathToFileURL(path.join(services, 'lua-bytecode-vm.js')));
-const timezone = await load(pathToFileURL(path.join(services, 'timezone-info.js')));
-const luaOS = await load(pathToFileURL(path.join(services, 'lua-os-library.js')));
-const luaOSServices = await load(pathToFileURL(path.join(services, 'wasm-lua-os-services.js')));
-const luaABI = await load(pathToFileURL(path.join(services, 'wasm-lua-runtime.js')));
-const gameFiles = await load(pathToFileURL(path.join(services, 'game-files.js')));
+const compress = await load(pathToFileURL(path.join(root, 'js/libraries/compress/unix-z.js')));
+const terminfo = await load(pathToFileURL(path.join(root, 'js/libraries/terminfo/index.js')));
+const regex = await load(pathToFileURL(path.join(root, 'js/libraries/regex/posix.js')));
+const runtime = await load(pathToFileURL(path.join(root, 'js/nethack/runtime.js')));
+const lua = await load(pathToFileURL(path.join(root, 'js/lua/lua.js')));
+const bytecode = await load(pathToFileURL(path.join(root, 'js/lua/bytecode-vm.js')));
+const timezone = await load(pathToFileURL(path.join(root, 'js/platform/timezone/info.js')));
+const luaOS = await load(pathToFileURL(path.join(root, 'js/lua/os-library.js')));
+const luaOSServices = await load(pathToFileURL(path.join(root, 'js/lua/os-abi.js')));
+const luaABI = await load(pathToFileURL(path.join(root, 'js/lua/abi.js')));
+const gameFiles = await load(pathToFileURL(path.join(root, 'js/nethack/game-files.js')));
 await evaluate(compress);
 await evaluate(terminfo);
 await evaluate(regex);
@@ -177,7 +177,7 @@ vm.runInContext(`
     const dates = compiled.execute('return os.date("!%Y|%C|%G|%g",-62198755200),os.date("!%Y",67768036160140800),os.time({year=2000,month=2,day=29,hour=12})');
     if (dates[0] !== '-001|-0|-002|02' || dates[1] !== '2147485547' || dates[2] !== 951843600n)
         throw Error('Standalone native Lua calendar/strftime failed');
-    if (typeof luaABI.createWasmLuaRuntime() !== 'object') throw Error('Lua ABI provider requires a host before binding');
+    if (typeof luaABI.createLuaAbi() !== 'object') throw Error('Lua ABI provider requires a host before binding');
 `, context, { timeout: 5000 });
 
 console.log(`PASS: ${modules.size} production dependency modules load and execute with host imports, dynamic loading, Wasm, network, and Node globals unavailable.`);

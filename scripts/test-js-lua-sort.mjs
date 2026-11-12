@@ -5,8 +5,8 @@ import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
-import { createLua, isLuaString, luaStringBytes } from '../js/services/lua/lua.js';
-import { luaSortEntropy } from '../js/services/lua-table-sort.js';
+import { createLua, isLuaString, luaStringBytes } from '../js/lua/lua.js';
+import { luaSortEntropy } from '../js/lua/table-sort.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const src = resolve(root, '.cache/js-dependency-lua/lua-5.4.8/src');

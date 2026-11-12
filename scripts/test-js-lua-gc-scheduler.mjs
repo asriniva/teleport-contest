@@ -6,8 +6,8 @@
  * its own tests; these private C kernels are never production dependencies. */
 import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';import {spawnSync} from 'node:child_process';
-import {LuaGCScheduler,LuaGCGenerational,GC,GC_MODE,GC_OP,GC_AGE} from '../js/services/lua-gc-scheduler.js';
-import {createLua,LuaTable,LuaUserdata} from '../js/services/lua/lua.js';
+import {LuaGCScheduler,LuaGCGenerational,GC,GC_MODE,GC_OP,GC_AGE} from '../js/lua/gc-scheduler.js';
+import {createLua,LuaTable,LuaUserdata} from '../js/lua/lua.js';
 const root=fileURLToPath(new URL('../',import.meta.url)),work=path.join(root,'.cache/js-lua-gc-scheduler');fs.mkdirSync(work,{recursive:true});
 const sdk=process.env.EMSDK||path.join(root,'.cache/emsdk'),env={...process.env,PATH:path.join(sdk,'node/24.19.0_64bit/bin')+path.delimiter+process.env.PATH};
 function run(program,args,options={}){const r=spawnSync(program,args,{encoding:'utf8',env,timeout:120000,maxBuffer:8000000,...options});assert.equal(r.status,0,`${program}: ${r.error||r.stderr||r.stdout}`);return r.stdout;}

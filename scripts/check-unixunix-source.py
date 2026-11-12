@@ -4,7 +4,7 @@ import json,re,hashlib,subprocess,argparse
 r=Path(__file__).resolve().parents[1];w=r/'.cache/unixunix-first-pass'
 load=lambda p:json.loads((r/p).read_text())
 m=load('nethack-c/wasm/tu-fragments/unixunix-source-metadata.json');s=load('nethack-c/wasm/tu-fragments/unixunix-schema.json');meta=json.loads((w/'core-meta.json').read_text())
-c=(r/'.cache/wasm64-build/tree/sys/unix/unixunix.c').read_text();pristine=(r/'nethack-c/upstream/sys/unix/unixunix.c').read_text();j=(r/'js/ported/unixunix.js').read_text();abi=(r/'nethack-c/wasm/tu-fragments/unixunix-support.c').read_text();lib=(r/'nethack-c/wasm/tu-libraries/unixunix.js').read_text();runtime=(r/'js/ported/unixunix-runtime.js').read_text()
+c=(r/'.cache/wasm64-build/tree/sys/unix/unixunix.c').read_text();pristine=(r/'nethack-c/upstream/sys/unix/unixunix.c').read_text();j=(r/'js/ported/unixunix.js').read_text();abi=(r/'nethack-c/wasm/tu-fragments/unixunix-support.c').read_text();lib=(r/'nethack-c/wasm/tu-libraries/unixunix.js').read_text();runtime=(r/'js/nethack/bindings/unixunix.js').read_text()
 sha=lambda b:hashlib.sha256(b).hexdigest()
 assert sha(c.encode())==m['sourceSHA256']=='42b526bbed87ae89acdd655cb08426bdf66d1b7d138d16be4e63b8592bab8ecd'
 assert sha(pristine.encode())==m['pristineSHA256']=='0a434dc320dadf31c1bdf40e086386032918b65157799155abfe77ca6edc4784'

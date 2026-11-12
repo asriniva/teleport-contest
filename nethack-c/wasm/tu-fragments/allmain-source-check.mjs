@@ -7,7 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'../../..');
 const read=p=>readFile(resolve(root,p),'utf8');
-const [source,prepared,core,runtime,support,library]=await Promise.all(['nethack-c/upstream/src/allmain.c','.cache/wasm64-build/tree/src/allmain.c','js/ported/allmain.js','js/ported/allmain-runtime.js','nethack-c/wasm/tu-fragments/allmain-support.c','nethack-c/wasm/tu-libraries/allmain.js'].map(read));
+const [source,prepared,core,runtime,support,library]=await Promise.all(['nethack-c/upstream/src/allmain.c','.cache/wasm64-build/tree/src/allmain.c','js/ported/allmain.js','js/nethack/bindings/allmain.js','nethack-c/wasm/tu-fragments/allmain-support.c','nethack-c/wasm/tu-libraries/allmain.js'].map(read));
 assert.equal(prepared,source,'ALLMAIN pristine/prepared provenance changed');
 assert.ok((await read('scripts/tu-allmain-probe.c')).includes(';flags:%d/%d/%ld/%d;poly:'),'Snapshot u.usleep must retain original signed long64');
 const strip=s=>s.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g,'');
@@ -38,7 +38,7 @@ assert.ok(runtime.includes("path==='svc.context.tribute.tributesz'?BigInt.asUint
 assert.ok(support.includes('long teleport_allmain_from_double(double n){return(long)n;}'));
 assert.ok(support.includes('double teleport_allmain_dep_difftime(time_t a0,time_t a1){return difftime(a0,a1);}'));
 assert.ok(library.includes('difftime:(a0=0,a1=0)=>_teleport_allmain_dep_difftime(BigInt(a0),BigInt(a1))'));
-assert.ok(cleanJS.includes('C.callLocal(welcome, C.TRUE);'));assert.ok(runtime.includes('callLocal(fn,...values){const frame=services.stackSave();try{return fn(...values);}finally{services.stackRestore(frame);}}'));
+assert.ok(cleanJS.includes('C.callLocal(welcome, C.TRUE);'));assert.ok(runtime.includes('callLocal(fn,...values){return CAdapter.callWithStack(services,fn,...values);}'));assert.ok((await read('js/c-runtime/adapter-factories.js')).includes('const saved=services.stackSave();try{return fn(...args);}finally{services.stackRestore(saved);}'));
 assert.ok(cleanJS.includes('return C.longFromDouble(C.difftime(etim, stim));'));
 assert.ok(cleanJS.includes('Math.trunc((C.ACURR(C.A_WIS) + C.ACURR(C.A_INT)) / 15) + 1'));
 for(const expression of['moveamt / 4','moveamt / 2','(moveamt * 3) / 4','(moveamt * 7) / 8'])assert.ok(cleanJS.includes(`Math.trunc(${expression})`));

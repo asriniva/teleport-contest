@@ -8,12 +8,14 @@ export function checkMhituSource(root=process.cwd(),{preprocess=true}={}){
  const read=p=>readFileSync(resolve(root,p),'utf8'),original=read('nethack-c/upstream/src/mhitu.c'),prepared=read('.cache/wasm64-build/tree/src/mhitu.c');
  const expected='5e0fb2e24f51f8e8803e58e4016f126bbe3fdbff9dd2ddbdc73b9d1d20c024b3';
  for(const[label,source]of [['upstream',original],['prepared',prepared]])if(sha(source)!==expected)throw Error('Review changed MHITU '+label+' source');
- const core=read('js/ported/mhitu.js'),runtime=read('js/ported/mhitu-runtime.js'),schema=JSON.parse(read('nethack-c/wasm/tu-fragments/mhitu-schema.json'));
+ const core=read('js/ported/mhitu.js'),runtime=read('js/nethack/bindings/mhitu.js'),schema=JSON.parse(read('nethack-c/wasm/tu-fragments/mhitu-schema.json'));
  const names=["hitmsg", "missmu", "mswings_verb", "mswings", "mpoisons_subj", "u_slow_down", "wildmiss", "expels", "getmattk", "calc_mattacku_vars", "mtrapped_in_pit", "mattacku", "summonmu", "diseasemu", "u_slip_free", "magic_negation", "hitmu", "gulp_blnd_check", "gulpmu", "explmu", "gazemu", "mdamageu", "could_seduce", "doseduce", "mayberem", "assess_dmg", "mon_avoiding_this_attack", "ranged_attk_available", "passiveum", "cloneu"];const jsNames=[...core.matchAll(/^export function (\w+)\(([^)]*)\)/gm)];
  if(names.length!==30||jsNames.map(m=>m[1]).join(',')!==names.join(','))throw Error('Review changed MHITU function set/order');
  for(const m of jsNames){const signature=new RegExp('^'+m[1]+'\\(([^)]*)\\)','m').exec(original)[1].replace(/\/\*[\s\S]*?\*\//g,'');const params=signature.trim()==='void'?[]:signature.split(',').map(s=>/\b(\w+)\s*$/.exec(s.trim().replace(/\[\]/g,''))[1]);if(m[2].replaceAll(' ','')!==params.join(','))throw Error('Review changed MHITU formal bindings '+m[1]);}
  const comments=original.match(/\/\*[\s\S]*?\*\//g)??[];for(const comment of comments)if(!core.includes(comment))throw Error('Missing original MHITU comment '+comment.slice(0,80));
- if(!runtime.includes("key=name+':'+at")||!runtime.includes('cache.set(key,result)'))throw Error('Review MHITU canonical native record identity');
+ // Check the actual shared implementation and the module's exact cache wiring.
+ const factories=read('js/c-runtime/adapter-factories.js'),records=read('js/c-runtime/records.js');
+ if(!runtime.includes("const view=CAdapter.createDescriptorViewFactory({services,schemas,address:addr,raw,cache,names,decode,")||!factories.includes("cacheKey:(name,at)=>name+':'+at")||!factories.includes('checked:false,trackDefinitions:false')||!records.includes("publish='early'")||!records.includes('if(cache?.has(key))return cache.get(key);')||!records.includes("if(cache&&publish==='early')cache.set(key,view);"))throw Error('Review MHITU shared canonical native record identity');
  if(preprocess){
   const defines=JSON.parse(read('nethack-c/wasm/compile-defines.json')),compiler=resolve(root,'.cache/emsdk/upstream/emscripten/emcc');
   const base=['-sMEMORY64=1',...defines.map(x=>'-D'+x),'-I'+resolve(root,'.cache/wasm64-build/tree/include'),'-I'+resolve(root,'.cache/ncurses-wasm64-build/include')];

@@ -1,7 +1,7 @@
 // Original UHITM on a genuine original-main world, with source recording/state comparison.
 import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import{pathToFileURL}from'node:url';
 import{encodeRecorderScreen}from'../js/wasm-replay-support.js';
-import{C,R,T}from'../js/ported/c-runtime.js';
+import{C,R,T}from'../js/c-runtime/context.js';
 import{createStandaloneProgram}from'../js/standalone/program.js';import{enableWere}from'../js/standalone/were.js';import{enableDogmove}from'../js/standalone/dogmove.js';import{enableMhitm}from'../js/standalone/mhitm.js';import{enableUhitm}from'../js/standalone/uhitm.js';import{enableLock}from'../js/standalone/lock.js';
 Error.stackTraceLimit=60;
 const directory=path.resolve(process.env.STANDALONE_LOCK_ORACLE??'.cache/full-original-c-v1'),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),L=layouts.were,records=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;

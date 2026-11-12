@@ -2,8 +2,8 @@
 import * as version from '../ported/version.js';
 import abi from './persistence-transport-abi.json' with {type:'json'};
 import * as date from '../ported/date.js';
-import {initializeDate} from '../ported/date-runtime.js';
-import {createVersionState,createVersionEnvironment} from '../ported/version-runtime.js';
+import {initializeDate} from '../nethack/bindings/date.js';
+import {createVersionState,createVersionEnvironment} from '../nethack/bindings/version.js';
 import {regex_id} from '../ported/posixregex.js';
 export function enableVersionInfo(environment,layouts){
  const {services,memory,ctypes,transport}=environment,L=layouts.version;

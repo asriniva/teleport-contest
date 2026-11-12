@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import {readFileSync, mkdirSync, writeFileSync} from 'node:fs';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import path from 'node:path';
-import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
-import {C} from '../js/ported/c-runtime.js';
+import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
+import {C} from '../js/c-runtime/context.js';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const directory=path.resolve(process.env.TELEPORT_NHLSEL_PROBE_DIR||path.join(root,'.cache/tu-probes'));

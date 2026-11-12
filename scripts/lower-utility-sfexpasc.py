@@ -192,7 +192,7 @@ def declaration(n,ind):
  if n.get('storageClass')=='static' and n['id']in cells:return pad+'const '+v+' = C.staticCell('+json.dumps(current+'.'+v)+', '+json.dumps(fmt(t))+(', '+e(init)if init else'')+');\n'
  if n['id']in cells:return pad+'const '+v+' = C.cell('+json.dumps(fmt(t))+(', '+e(init)if init else'')+');\n'
  return pad+'let '+v+(' = '+narrow(t,e(init))if init else'')+';\n'
-out="import {C} from '../../ported/c-runtime.js';\n\n"
+out="import {C} from '../../c-runtime/context.js';\n\n"
 
 for f in nodes:
  current=names[f['name']];body=next(x for x in f['inner']if x.get('kind')=='CompoundStmt');fstart=loc(f);fend=loc(f,True);params=[x['name']for x in f['inner']if x.get('kind')=='ParmVarDecl'];out+='export function '+current+'('+', '.join(params)+')\n'+statement(body)+'\n'

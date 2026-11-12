@@ -2,7 +2,7 @@
 """Measure GLYPHS transport and lower only pure configured header expressions."""
 import json,hashlib,os,re,shlex,subprocess
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';runtime=root/'js/ported/glyphs-runtime.js';text=runtime.read_text()
+root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';runtime=root/'js/nethack/bindings/glyphs.js';text=runtime.read_text()
 def declaration(n):return json.JSONDecoder().raw_decode(text.split('const '+n+'=',1)[1])[0]
 fields=declaration('fields');pointers=declaration('pointers');headers=declaration('headers');globals=declaration('globals')
 types=['struct teleport_glyphs_find','struct teleport_glyphs_cache','struct customization_detail','glyph_map','struct unicode_representation','struct symset_customization','struct symsetentry','struct objclass','struct symparse','struct enum_dump','struct objdescr','struct permonst']

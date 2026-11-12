@@ -5,11 +5,11 @@ import assert from 'node:assert/strict';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {writeFile,readFile} from 'node:fs/promises';
-import {createWasmLuaRuntime} from '../js/services/wasm-lua-runtime.js';
-import {createLuaBytecodeVM} from '../js/services/lua-bytecode-vm.js';
-import {callNhlua} from '../js/ported/nhlua-runtime.js';
+import {createLuaAbi} from '../js/lua/abi.js';
+import {createLuaBytecodeVM} from '../js/lua/bytecode-vm.js';
+import {callNhlua} from '../js/nethack/bindings/nhlua.js';
 import {nhluaSchema as schema} from '../js/ported/nhlua.js';
-import {C} from '../js/ported/c-runtime.js';
+import {C} from '../js/c-runtime/context.js';
 const session=new Session();session.connect();const post=(method,params={})=>new Promise((ok,no)=>session.post(method,params,(e,r)=>e?no(e):ok(r)));await post('Profiler.enable');await post('Profiler.startPreciseCoverage',{callCount:true,detailed:true});
 const invoked=new Set();
 const directory=resolve('.cache/nhlua-author');
@@ -32,7 +32,7 @@ if(process.argv.includes('--build')){
  }
 }
 const rf=(await import(pathToFileURL(resolve(directory,'probe-reference'+suffix+'.mjs')))).default,hf=(await import(pathToFileURL(resolve(directory,'probe-hybrid'+suffix+'.mjs')))).default;
-const options=()=>({nethackLua:backend==='js'?createWasmLuaRuntime({vmFactory:createLuaBytecodeVM}):undefined});
+const options=()=>({nethackLua:backend==='js'?createLuaAbi({vmFactory:createLuaBytecodeVM}):undefined});
 const runtime={nhlua:(services,name,...args)=>{invoked.add(name);return callNhlua(services,name,...args);}};
 const reference=await rf(options());
 const hybrid=await hf({...options(),nethackPorted:runtime});

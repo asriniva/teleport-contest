@@ -11,7 +11,7 @@ from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 reference=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve()
 tree=reference/'.cache/wasm64-build/tree'
-runtime=root/'js/ported/allmain-runtime.js'
+runtime=root/'js/nethack/bindings/allmain.js'
 support=root/'nethack-c/wasm/tu-fragments/allmain-support.c'
 text=runtime.read_text()
 def declaration(name):

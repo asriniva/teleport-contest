@@ -4,8 +4,8 @@ import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/monst-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/monst-hybrid.mjs';
-import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.monst,runtime=createPortedRuntime(layouts);
 const modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function string(m,p){if(p===0n||p===0)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}

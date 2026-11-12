@@ -3,9 +3,9 @@
 import assert from './native-test-assert.mjs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { callWeapon } from '../js/ported/weapon-runtime.js';
+import { callWeapon } from '../js/nethack/bindings/weapon.js';
 import * as core from '../js/ported/weapon.js';
-import { C,R,T } from '../js/ported/c-runtime.js';
+import { C,R,T } from '../js/c-runtime/context.js';
 const dir=resolve(process.env.TELEPORT_WEAPON_PROBE_DIR??'.cache/tu-probes');
 const {default:rf}=await import(pathToFileURL(resolve(dir,process.env.TELEPORT_WEAPON_PROBE_DIR?'reference.mjs':'weapon-reference.mjs')));
 const {default:hf}=await import(pathToFileURL(resolve(dir,process.env.TELEPORT_WEAPON_PROBE_DIR?'hybrid.mjs':'weapon-hybrid.mjs')));

@@ -1,9 +1,9 @@
 import assert from './native-test-assert.mjs';
 import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
-import {callMthrowu} from '../js/ported/mthrowu-runtime.js';
+import {callMthrowu} from '../js/nethack/bindings/mthrowu.js';
 import * as core from '../js/ported/mthrowu.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_MTHROWU_AUTHOR==='1';
 const ref=(await import(own?'../.cache/mthrowu-author/reference.mjs':'../.cache/tu-probes/mthrowu-reference.mjs')).default,hyb=(await import(own?'../.cache/mthrowu-author/hybrid.mjs':'../.cache/tu-probes/mthrowu-hybrid.mjs')).default;
 let reference=await referenceBackend('mthrowu',ref)();

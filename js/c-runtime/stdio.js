@@ -3,7 +3,7 @@
 // readStdin(n) synchronously returns <=n real bytes; zero is EOF. Callback input
 // is nonseekable and discards unread prefetch like SDK TTY; the historical finite
 // array keeps its existing discard/rewind behavior outside freopen.
-import {VFSError,O_WRONLY,O_RDWR,O_CREAT,O_TRUNC,O_EXCL,O_APPEND,O_CLOEXEC,O_LARGEFILE} from '../services/c-vfs.js';
+import {VFSError,O_WRONLY,O_RDWR,O_CREAT,O_TRUNC,O_EXCL,O_APPEND,O_CLOEXEC,O_LARGEFILE} from './vfs.js';
 import {address} from './memory.js';
 import {scanFormatted} from './scanf.js';
 const sdkUtf8Decoder=new TextDecoder();

@@ -1,6 +1,7 @@
 // Guard production closure, frozen inputs, unchanged ports and generated inputs.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {readBeforeLayout} from './services-layout-audit.mjs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {pathToFileURL} from 'node:url';
@@ -19,7 +20,7 @@ const corrections=json('docs/runtime-environment/authorized-port-corrections.jso
 assert.deepEqual(corrections.map(row=>row.file),['js/ported/vision.js'],'Only the explicitly approved correction is allowed');
 for(const row of corrections){assert.equal(baseline.sha256[row.file],row.baselineSha256,'Original correction baseline retained');assert.ok(row.correctedSha256!==row.baselineSha256,'Correction is a real source change');}
 const corrected=new Map(corrections.map(row=>[row.file,row.correctedSha256]));
-for(const [file,hash]of Object.entries(baseline.sha256))check(file,corrected.get(file)??hash);
+for(const [file,hash]of Object.entries(baseline.sha256))assert.equal(crypto.createHash('sha256').update(readBeforeLayout(file)).digest('hex'),corrected.get(file)??hash,'Policy changed beyond reviewed import relocation: '+file);
 for(const name of ['isaac64','terminal','storage'])assert.deepEqual(read('js/'+name+'.js'),read('frozen/'+name+'.js'),'Frozen '+name);
 for(const [file,hash]of Object.entries(json('js/standalone/hero-abi.json').sourceSha256))check(file,hash);
 for(const [file,hash]of Object.entries(json('js/standalone/display-abi.json').sourceSha256))check(file,hash);
@@ -38,7 +39,7 @@ for(const [file,hash]of Object.entries(records.headerSha256))assert.equal(sha(pa
 for(const file of ['decl-storage.json','lua-api.json']){const data=json('js/standalone/'+file);check(data.source,data.sha256);}
 for(const [file,hash]of Object.entries(json('js/standalone/terminal-metadata.json').sourceSha256))check(file,hash);
 for(const [name,item]of Object.entries(json('js/standalone/address-ports.json').ports)){
-    check(`js/ported/${name}-runtime.js`,item.sourceSha256);check(`nethack-c/wasm/tu-fragments/${name}-schema.json`,item.fragmentSha256);
+    check(`js/nethack/bindings/${name}.js`,item.sourceSha256);check(`nethack-c/wasm/tu-fragments/${name}-schema.json`,item.fragmentSha256);
 }
 const seen=new Set(),forbidden=[];
 function collect(file) {

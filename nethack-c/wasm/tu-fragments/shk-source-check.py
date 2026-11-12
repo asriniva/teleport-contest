@@ -1,7 +1,7 @@
 """SHK exact configured source/data/profile guard; no shared writes."""
 from pathlib import Path
 import hashlib,json,re,subprocess,os
-R=Path(__file__).resolve().parents[3];SDK=Path(os.environ.get('EMSDK',str(R/'.cache/emsdk')));W=R/'.cache/shk-first-pass';tree=R/'.cache/wasm64-build/tree';src=(tree/'src/shk.c').read_text();core=(R/'js/ported/shk.js').read_text();I=json.loads((R/'nethack-c/wasm/tu-fragments/shk-source-inventory.json').read_text());S=json.loads((R/'nethack-c/wasm/tu-fragments/shk-schema.json').read_text());A=json.loads((R/'nethack-c/wasm/tu-fragments/shk-source-ast.json').read_text());support=(R/'nethack-c/wasm/tu-fragments/shk-support.c').read_text();runtime=(R/'js/ported/shk-runtime.js').read_text()
+R=Path(__file__).resolve().parents[3];SDK=Path(os.environ.get('EMSDK',str(R/'.cache/emsdk')));W=R/'.cache/shk-first-pass';tree=R/'.cache/wasm64-build/tree';src=(tree/'src/shk.c').read_text();core=(R/'js/ported/shk.js').read_text();I=json.loads((R/'nethack-c/wasm/tu-fragments/shk-source-inventory.json').read_text());S=json.loads((R/'nethack-c/wasm/tu-fragments/shk-schema.json').read_text());A=json.loads((R/'nethack-c/wasm/tu-fragments/shk-source-ast.json').read_text());support=(R/'nethack-c/wasm/tu-fragments/shk-support.c').read_text();runtime=(R/'js/nethack/bindings/shk.js').read_text()
 assert src==(R/'nethack-c/upstream/src/shk.c').read_text()
 assert hashlib.sha256(src.encode()).hexdigest()==I['sourceSha256']=='b2b5b82934b15c1a4a3c9474a650ff5800a83f0b9634696fdf080d0458f16e1b'
 assert len(I['functions'])==len(A['functions'])==137 and sum(f['linkage']=='static'for f in I['functions'])==64

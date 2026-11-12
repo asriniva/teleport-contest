@@ -5,16 +5,16 @@ import{mkdirSync,writeFileSync,readFileSync,readdirSync}from'node:fs';
 import{execFileSync}from'node:child_process';
 import{fileURLToPath}from'node:url';
 import{resolve}from'node:path';
-import{createLuaCState}from'../js/services/lua/lapi.js';
-import{openLuaOS}from'../js/services/lua-os-library.js';
-import{openDebugLibrary}from'../js/services/lua-debug-library.js';
-import{createBaseIOFunctions}from'../js/services/lua-base-io.js';
-import{openBase,openTable}from'../js/services/lua/lbaselib.js';
-import{openString}from'../js/services/lua/lstrlib.js';
-import{openMath}from'../js/services/lua/lmathlib.js';
-import{openUtf8}from'../js/services/lua/lutf8lib.js';
-import{openCoroutine}from'../js/services/lua/lcorolib.js';
-import{createLuaBytecodeVM}from'../js/services/lua-bytecode-vm.js';
+import{createLuaCState}from'../js/lua/lapi.js';
+import{openLuaOS}from'../js/lua/os-library.js';
+import{openDebugLibrary}from'../js/lua/debug-library.js';
+import{createBaseIOFunctions}from'../js/lua/base-io.js';
+import{openBase,openTable}from'../js/lua/lbaselib.js';
+import{openString}from'../js/lua/lstrlib.js';
+import{openMath}from'../js/lua/lmathlib.js';
+import{openUtf8}from'../js/lua/lutf8lib.js';
+import{openCoroutine}from'../js/lua/lcorolib.js';
+import{createLuaBytecodeVM}from'../js/lua/bytecode-vm.js';
 const root=fileURLToPath(new URL('../',import.meta.url)),scratch=resolve(root,'.cache/js-dependency-lua');mkdirSync(scratch,{recursive:true});
 const c=String.raw`
 #include <stdio.h>

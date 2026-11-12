@@ -25,7 +25,7 @@ if not last_bit:
 paths = [Path(__file__).resolve(), support,
          root / 'nethack-c/wasm/tu-libraries/questpgr.js',
          root / 'scripts/tu-questpgr-layout.h',
-         root / 'js/ported/questpgr.js', root / 'js/ported/questpgr-runtime.js',
+         root / 'js/ported/questpgr.js', root / 'js/nethack/bindings/questpgr.js',
          root / 'nethack-c/wasm/compile-defines.json',
          root / 'js/wasm/tu-layouts.json', root / 'js/standalone/records.json']
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()

@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import {readFileSync,writeFileSync} from 'node:fs';
-import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
+import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {pathToFileURL} from 'node:url';
 import * as source from '../js/ported/nhlsel.js';
-import {createNhlselEnvironment} from '../js/ported/nhlsel-runtime.js';
-import {C,withCEnvironment} from '../js/ported/c-runtime.js';
+import {createNhlselEnvironment} from '../js/nethack/bindings/nhlsel.js';
+import {C,withCEnvironment} from '../js/c-runtime/context.js';
 if(process.env.TELEPORT_NATIVE_TESTS==='1')throw new Error('NHLSEL staged suite compares configured Emscripten-C; native execution is pending.');
 const dir=path.resolve(process.env.TELEPORT_NHLSEL_PROBE_DIR||'.cache/tu-probes'),[rf,hf]=await Promise.all(['reference','hybrid'].map(async m=>(await import(pathToFileURL(path.join(dir,'nhlsel-'+m+'.mjs')).href)).default));
 const text=(m,p)=>{const h=m.HEAPU8;let n=Number(p),end=n;while(h[end])end++;return new TextDecoder().decode(h.subarray(n,end));};

@@ -2,11 +2,11 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {pathToFileURL} from 'node:url';
 import {createStandaloneEnvironment} from '../js/standalone/environment.js';
-import {createNativeTerminal} from '../js/services/native-terminal.js';
+import {createNativeTerminal} from '../js/platform/darwin/terminal.js';
 import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
 import {enableZap} from '../js/standalone/zap.js';
 import {enablePotion} from '../js/standalone/potion.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 Error.stackTraceLimit=50;
 const referenceRoot=path.resolve(process.env.STANDALONE_REFERENCE_ROOT||'../teleport-contest'),directory=path.resolve(process.env.STANDALONE_TIMEOUT_TURN_ORACLE||'.cache/standalone-timeout-turn-v3');
 const receipt=JSON.parse(fs.readFileSync(path.join(directory,'receipt.json'))),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');let hashes=0,comparisons=0,contracts=0;
@@ -62,7 +62,7 @@ for(let i=-1;i<=L.PROP_COUNT+2;i++){
  const jp=js(()=>env.memory.calloc(1,4)),cp=BigInt(ref._malloc(4n));const first=js(()=>env.services.property_by_index(i,jp)),cFirst=ref._property_by_index(i,cp);equal(js(()=>text(env.memory.HEAPU8,first)),text(ref.HEAPU8,cFirst),'Original property table/name '+i);equal(js(()=>env.memory.view.getInt32(jp,true)),new DataView(ref.HEAPU8.buffer).getInt32(Number(cp),true),'Original property number int* '+i);js(()=>env.memory.free(jp));ref._free(cp);
 }
 js(()=>{env.enableTrack(layouts);assert.throws(()=>env.services.newgame(),/Unresolved standalone function com_pager/);env.enableTurnLoop(layouts);env.services.moveloop_preamble(0);env.services.fflush(stdio.stdout);});ref._probe_engraving_read_enable_preamble(1);assert.throws(()=>ref._probe_startup_newgame(),/Aborted/);assert.ok(errors.some(s=>s.includes('Observed C boundary: com_pager after optional original moveloop_preamble')));
-const runtimeText=fs.readFileSync('js/ported/decl-runtime.js','utf8'),schemas=JSON.parse(runtimeText.match(/^const schemas=(.*);$/m)[1]);
+const runtimeText=fs.readFileSync('js/nethack/bindings/decl.js','utf8'),schemas=JSON.parse(runtimeText.match(/^const schemas=(.*);$/m)[1]);
 const width=d=>d.p!==undefined?8:d.t?Number(d.t.slice(1))/8:d.s?schemas[d.s].size:d.a.reduce((a,b)=>a*b,1)*width(d.e);
 function normalized(heap,p,type){p=Number(p);const bytes=Buffer.from(heap.slice(p,p+schemas[type].size)),strings={};function walk(d,offset,key){if(d.p!==undefined){const v=bytes.readBigUInt64LE(offset);strings[key]=d.p==='char'?text(heap,v):Boolean(v);bytes.writeBigUInt64LE(v?1n:0n,offset);}else if(d.s)for(const f of schemas[d.s].fields)walk(f.d,offset+f.offset,key+'.'+f.name);else if(d.a){const child=d.a.length===1?d.e:{a:d.a.slice(1),e:d.e};for(let i=0;i<d.a[0];i++)walk(child,offset+i*width(child),key+'['+i+']');}}walk({s:type},0,type);return{bytes,strings};}
 function queue(heap,root){const dv=new DataView(heap.buffer),rows=[],seen=new Set();let at=Number(dv.getBigUint64(root,true));while(at){assert.ok(!seen.has(at));seen.add(at);const p=metadata.fe.fields,b=Buffer.from(heap.slice(at,at+metadata.fe.size)),next=Number(b.readBigUInt64LE(p.next.offset)),kind=b.readInt16LE(p.kind.offset),fixup=b[p.needs_fixup.offset]&1,arg=b.readBigUInt64LE(p.arg.offset);let token=arg;if(kind===L.TIMER_OBJECT&&!fixup&&arg)token=BigInt(dv.getUint32(Number(arg)+metadata.obj.fields.o_id.offset,true));if(kind===L.TIMER_MONSTER&&!fixup&&arg)token=BigInt(dv.getUint32(Number(arg)+metadata.monst.fields.m_id.offset,true));b.writeBigUInt64LE(next?1n:0n,p.next.offset);b.writeBigUInt64LE(token,p.arg.offset);rows.push(b);at=next;}return rows;}

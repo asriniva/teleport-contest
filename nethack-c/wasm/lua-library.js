@@ -1,5 +1,5 @@
 /* Emscripten ABI transport only. The Lua implementation is supplied per
- * module by js/services/wasm-lua-runtime.js; no interpreter is linked here. */
+ * module by js/lua/abi.js; no interpreter is linked here. */
 addToLibrary({
   $teleportLuaServices__deps: ['malloc', 'realloc', 'free', '$FS', '$ENV', '$getWasmTableEntry', 'teleport_lua_callback', 'teleport_lua_debug_layout', 'teleport_lua_hook', 'teleport_lua_string_header', 'teleport_lua_userdata_header', 'teleport_lua_memory_layout', 'teleport_lua_sort_clock', 'teleport_lua_sort_time', 'teleport_lua_os_clock_rate', 'teleport_lua_os_difftime', 'teleport_lua_os_calendar', 'teleport_lua_os_mktime', 'teleport_lua_os_strftime', 'teleport_lua_os_remove', 'teleport_lua_os_rename', 'teleport_lua_os_errno', 'teleport_lua_os_error_message', 'teleport_lua_os_tm_layout'],
   $teleportLuaServices: function() {

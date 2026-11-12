@@ -12,7 +12,7 @@ import {neweshk,free_eshk} from '../ported/shknam.js';
 import {quest_info} from '../ported/questpgr.js';
 import {enableLight} from './light.js';
 import {monst_to_any} from '../ported/hack.js';
-import {withCEnvironment} from '../ported/c-runtime.js';
+import {withCEnvironment} from '../c-runtime/context.js';
 export function enableMonsterCreation(environment,layouts,selection){
  const {ctypes,memory,transport}=environment,{views}=selection;
  const services=new Proxy(environment.services,{get:(o,key,r)=>Reflect.has(o,key)?Reflect.get(o,key,r):typeof key==='string'?(...args)=>environment.resolve(key)(...args):undefined});

@@ -2,8 +2,8 @@
 import assert from 'node:assert/strict';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-const {createGlyphsBridge}=await import(process.env.GLYPHS_RUNTIME?pathToFileURL(resolve(process.env.GLYPHS_RUNTIME)):new URL('../js/ported/glyphs-runtime.js',import.meta.url));
-import {C} from '../js/ported/c-runtime.js';
+const {createGlyphsBridge}=await import(process.env.GLYPHS_RUNTIME?pathToFileURL(resolve(process.env.GLYPHS_RUNTIME)):new URL('../js/nethack/bindings/glyphs.js',import.meta.url));
+import {C} from '../js/c-runtime/context.js';
 const directory=resolve(process.env.GLYPHS_PROBE_DIR??'.cache/glyphs-first-pass');
 const factory=async name=>(await import(pathToFileURL(resolve(directory,'glyphs-'+name+'.mjs')))).default;
 const ref=await factory('reference'),hybrid=await factory('hybrid');

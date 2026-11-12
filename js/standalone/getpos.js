@@ -2,8 +2,8 @@
 import abi from './getpos-abi.json' with{type:'json'};
 import {getposGlyphHeaders,getposMonGlyph,getposObjGlyph} from './getpos-header-functions.js';
 import * as source from '../ported/getpos.js';
-import {createGetposEnvironment} from '../ported/getpos-runtime.js';
-import {withCEnvironment} from '../ported/c-runtime.js';
+import {createGetposEnvironment} from '../nethack/bindings/getpos.js';
+import {withCEnvironment} from '../c-runtime/context.js';
 const owners=new WeakMap();
 export function enableGetpos(environment,layouts){
  if(owners.has(environment))return owners.get(environment);

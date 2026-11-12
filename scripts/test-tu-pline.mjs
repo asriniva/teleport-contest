@@ -3,8 +3,8 @@
 import assert from 'node:assert/strict';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {createPlineBridge} from '../js/ported/pline-runtime.js';
-import {C} from '../js/ported/c-runtime.js';
+import {createPlineBridge} from '../js/nethack/bindings/pline.js';
+import {C} from '../js/c-runtime/context.js';
 const directory=resolve(process.env.PLINE_PROBE_DIR??'.cache/tu-probes');
 const referenceFactory=(await import(pathToFileURL(resolve(directory,'pline-reference.mjs')))).default;
 const hybridFactory=(await import(pathToFileURL(resolve(directory,'pline-hybrid.mjs')))).default;

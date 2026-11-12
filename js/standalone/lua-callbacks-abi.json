@@ -66,15 +66,15 @@
     }
   },
   "sourceSha256": {
-    "scripts/export-standalone-lua-callbacks-abi.py": "66c98d9becd77bb6fbb9cf5f5570f0db1c2f3c53f473e89c897b34950e67c5c4",
-    "js/standalone/lua-sandbox.js": "0a776139c4517df05a47eac02deb14afd04ddeaaf56f885baf87adcb24f9c9ae",
+    "scripts/export-standalone-lua-callbacks-abi.py": "629e5923f82d10c37058847fcf3c02448c3102521600a1bb31a6243814679393",
+    "js/standalone/lua-sandbox.js": "c7533d6cc30094378107fdce7117b0c8c4ee76234574712a6c8a9fdf5f532948",
     "nethack-c/wasm/tu-fragments/nhlua-support.c": "5a8ec6b52e7eef56a85ee27b14c1c2eab1b641e734ae7779059544bdbc1250d1",
     "nethack-c/wasm/tu-libraries/nhlua.js": "b0a18e446a058bc68c21674e180c0c5f8d3833d8fca13d81c437d5b3538a2019",
     "js/standalone/public-functions.json": "75774661072653bbd6c90bce1e837fac87a998b5e9139f6f5012878057779e12",
     "nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",
     "nethack-c/wasm/tu-nhlobj-support.inc": "403e2e0250de9edf8fd67220fdd9b6874eb814d31e5d8b982dcdb29ed1afca67",
-    "js/ported/nhlobj-runtime.js": "253a03f6df69801002f07421a98ae739adf3c2d8f17494a5d2698ff354c942e0",
-    "js/standalone/records.json": "b0e9d94ad00af9838c21971dc7f682ea87634c8d19000e6c1940208ee1ed01b2"
+    "js/nethack/bindings/nhlobj.js": "ac85a000e22f47c929d414cdf192672b7f470611dd8244d30d893f339eb10d4d",
+    "js/standalone/records.json": "7b7ddc59f45ea73a8077a3ad96f5bc89cdc70920d136b1e64c706f94efaa3c9d"
   },
   "referenceHeaderSha256": {
     ".cache/emsdk/upstream/emscripten/cache/sysroot/include/alloca.h": "8768404d7cf4af5fb135b1a2ca91765bd2be311ac072e0ec8b68f5cb3e6e0f3e",

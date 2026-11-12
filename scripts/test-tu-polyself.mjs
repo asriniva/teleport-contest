@@ -3,8 +3,8 @@ import {resolve} from 'node:path';
 import {pathToFileURL}from 'node:url';
 import {readFile,writeFile,mkdir}from 'node:fs/promises';
 import {spawnSync}from 'node:child_process';
-import {C,withCEnvironment}from '../js/ported/c-runtime.js';
-import {createPolyselfEnvironment,callPolyself}from '../js/ported/polyself-runtime.js';
+import {C,withCEnvironment}from '../js/c-runtime/context.js';
+import {createPolyselfEnvironment,callPolyself}from '../js/nethack/bindings/polyself.js';
 import * as core from '../js/ported/polyself.js';
 const dir=resolve(process.env.POLYSELF_PROBE_DIR??'.cache/polyself-author');
 // Rebuild only this private probe pair; no selected runtime/build files are changed.

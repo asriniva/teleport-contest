@@ -1,5 +1,5 @@
 import assert from'node:assert/strict';import{resolve}from'node:path';import{pathToFileURL}from'node:url';import{writeFileSync,existsSync}from'node:fs';
-import{C}from'../js/ported/c-runtime.js';
+import{C}from'../js/c-runtime/context.js';
 assert.equal(process.argv.length,4,'Pass --out <actual fresh build directory>');assert.equal(process.argv[2],'--out');const w=resolve(process.argv[3]);assert.equal(existsSync(w+'/test-results.json'),false,'Refuse existing test result');
 const {callStripbs}=await import(pathToFileURL(resolve(process.env.STRIPBS_RUNTIME??new URL('../js/ported-utilities/stripbs-runtime.js',import.meta.url).pathname)));
 const reference=(await import(pathToFileURL(w+'/reference.mjs'))).default,hybrid=(await import(pathToFileURL(w+'/hybrid.mjs'))).default;

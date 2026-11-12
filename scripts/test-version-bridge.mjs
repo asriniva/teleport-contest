@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import createNethack from '../js/wasm/nethack.mjs';
-import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
+import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 async function run(option) {

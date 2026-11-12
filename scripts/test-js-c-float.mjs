@@ -4,8 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { CMemory } from '../js/services/c-memory.js';
-import { createCStdlib } from '../js/services/c-stdlib.js';
+import { CMemory } from '../js/c-runtime/heap.js';
+import { createCStdlib } from '../js/c-runtime/stdlib.js';
 const root = fileURLToPath(new URL('../', import.meta.url));
 if(Number(process.versions.node.split('.')[0])<24){const result=spawnSync(path.join(root,'.cache/emsdk/node/24.19.0_64bit/bin/node'),[fileURLToPath(import.meta.url)],{stdio:'inherit'});process.exit(result.status??1);}
 const work = path.join(root, '.cache/js-c-float'); fs.mkdirSync(work, { recursive: true });

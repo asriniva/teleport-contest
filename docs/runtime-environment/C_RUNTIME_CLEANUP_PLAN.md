@@ -1,5 +1,7 @@
 # Completed pre-completion C-runtime cleanup plan
 
+This plan belongs to the preceding cleanup checkpoint. The later [services/binding cleanup](SERVICES_CLEANUP_PLAN.md) records the completed ownership and factory follow-up.
+
 Scope: complete the cleanup that can precede full pure-JS game acceptance.
 Work only in `cleanup/c-runtime-rect`; preserve original game function bodies,
 C behavior, upstream/frozen inputs and other agents' worktrees.

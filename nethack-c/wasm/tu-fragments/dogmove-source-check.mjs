@@ -7,7 +7,7 @@ import {resolve,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 const root=fileURLToPath(new URL('../../../',import.meta.url)),sdk=resolve(process.env.EMSDK??join(root,'.cache/emsdk'));
 const read=p=>readFileSync(join(root,p),'utf8');
-const sourcePath='.cache/wasm64-build/tree/src/dogmove.c',source=read(sourcePath),core=read('js/ported/dogmove.js'),runtime=read('js/ported/dogmove-runtime.js'),binding=read('nethack-c/wasm/tu-libraries/dogmove.js'),support=read('nethack-c/wasm/tu-fragments/dogmove-support.c'),header=read('nethack-c/wasm/tu-fragments/dogmove-source-data.h'),schema=JSON.parse(read('nethack-c/wasm/tu-fragments/dogmove-schema.json'));
+const sourcePath='.cache/wasm64-build/tree/src/dogmove.c',source=read(sourcePath),core=read('js/ported/dogmove.js'),runtime=read('js/nethack/bindings/dogmove.js'),binding=read('nethack-c/wasm/tu-libraries/dogmove.js'),support=read('nethack-c/wasm/tu-fragments/dogmove-support.c'),header=read('nethack-c/wasm/tu-fragments/dogmove-source-data.h'),schema=JSON.parse(read('nethack-c/wasm/tu-fragments/dogmove-schema.json'));
 assert.equal(source,read('nethack-c/upstream/src/dogmove.c'),'Original/prepared DOGMOVE bytes');
 assert.equal(createHash('sha256').update(source).digest('hex'),header.match(/DOGMOVE_SOURCE_SHA256 "([a-f0-9]+)"/)[1],'Original DOGMOVE fingerprint');
 const {parse}=await import(pathToFileURL(join(sdk,'upstream/emscripten/node_modules/acorn/dist/acorn.mjs')).href);
@@ -19,7 +19,7 @@ function inventory(text){const ast=parse(text,{ecmaVersion:'latest',sourceType:'
 const jsast=inventory(core);assert.equal(defs.length,20);assert.throws(()=>inventory(core.replace('function dog_move(', 'function missing_dog_move(')),/Original DOGMOVE functions/);
 for(const comment of source.match(/\/\*[\s\S]*?\*\//g)??[])assert.ok(core.includes(comment),'Original DOGMOVE comment');
 const strings=new Set();function visit(n,fn){fn(n);for(const v of Object.values(n??{}))if(Array.isArray(v)){for(const x of v)if(x?.type)visit(x,fn);}else if(v?.type)visit(v,fn);}
-visit(jsast,n=>{if(n.type==='Literal'&&typeof n.value==='string'&&n.value!=='./c-runtime.js')strings.add(n.value);});
+visit(jsast,n=>{if(n.type==='Literal'&&typeof n.value==='string'&&n.value!=='../c-runtime/context.js')strings.add(n.value);});
 assert.deepEqual([...strings].sort(),schema.literals);const literalBytes=[...strings].reduce((n,s)=>n+Buffer.byteLength(s)+1,0);assert.equal(+header.match(/DOGMOVE_LITERAL_CAPACITY (\d+)/)[1],literalBytes);
 const macros=new Map([...cpp.matchAll(/^#define (\w+)(.*)$/gm)].map(m=>[m[1],m[2]]));for(const[n,v]of Object.entries(schema.configuredMacroDefinitions))assert.equal(macros.get(n),v,'Original DOGMOVE macro '+n);
 const ns=await import(pathToFileURL(join(root,'js/ported/dogmove.js')).href),symbols=new Proxy({},{get:(_,k)=>k}),token=v=>/^\d+$/.test(v.trim())?+v.trim():v.trim(),uncomment=s=>s.replace(/\/\*[\s\S]*?\*\//g,'');

@@ -2,7 +2,7 @@
 """Bind source-native INSIGHT globals, storage, fields and formatter metadata."""
 import hashlib,json,os,re,shlex,subprocess,tempfile
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';header=root/'scripts/tu-insight-layout.h';support=root/'nethack-c/wasm/tu-insight-support.inc';runtime=root/'js/ported/insight-runtime.js';clang=ref/'.cache/emsdk/upstream/bin/clang';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['insight'];decoder=json.JSONDecoder()
+root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';header=root/'scripts/tu-insight-layout.h';support=root/'nethack-c/wasm/tu-insight-support.inc';runtime=root/'js/nethack/bindings/insight.js';clang=ref/'.cache/emsdk/upstream/bin/clang';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['insight'];decoder=json.JSONDecoder()
 flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(ref/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+v for v in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]]
 with tempfile.TemporaryDirectory(prefix='standalone-insight-')as scratch:
  p=Path(scratch)/'probe.c';body='#include '+json.dumps(str(header))+'\n';p.write_text(body);expanded=subprocess.check_output([str(clang),*flags,'-E','-P',str(p)],text=True)

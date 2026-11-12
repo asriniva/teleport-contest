@@ -1,7 +1,7 @@
 """MKMAZE configured source/data/ABI preservation guard; no shared outputs."""
 from pathlib import Path
 import json,re,hashlib,subprocess
-r=Path(__file__).resolve().parents[1];w=r/'.cache/mkmaze-first-pass';source=(r/'nethack-c/upstream/src/mkmaze.c').read_text();prepared=(r/'.cache/wasm64-build/tree/src/mkmaze.c').read_text();js=(r/'js/ported/mkmaze.js').read_text();schema=json.loads((r/'nethack-c/wasm/tu-fragments/mkmaze-schema.json').read_text());metadata=json.loads((r/'nethack-c/wasm/tu-fragments/mkmaze-source-metadata.json').read_text());functions=metadata['functions'];support=(r/'nethack-c/wasm/tu-fragments/mkmaze-support.c').read_text();runtime=(r/'js/ported/mkmaze-runtime.js').read_text();library=(r/'nethack-c/wasm/tu-libraries/mkmaze.js').read_text()
+r=Path(__file__).resolve().parents[1];w=r/'.cache/mkmaze-first-pass';source=(r/'nethack-c/upstream/src/mkmaze.c').read_text();prepared=(r/'.cache/wasm64-build/tree/src/mkmaze.c').read_text();js=(r/'js/ported/mkmaze.js').read_text();schema=json.loads((r/'nethack-c/wasm/tu-fragments/mkmaze-schema.json').read_text());metadata=json.loads((r/'nethack-c/wasm/tu-fragments/mkmaze-source-metadata.json').read_text());functions=metadata['functions'];support=(r/'nethack-c/wasm/tu-fragments/mkmaze-support.c').read_text();runtime=(r/'js/nethack/bindings/mkmaze.js').read_text();library=(r/'nethack-c/wasm/tu-libraries/mkmaze.js').read_text()
 assert source==prepared
 assert hashlib.sha256(source.encode()).hexdigest()=='a2d6341107238f6e45b9305854f5dd4a34427f381558d9ecbc91578acdfbcab0'
 actual=re.findall(r'^export function (\w+)\(([^)]*)\)',js,re.M)

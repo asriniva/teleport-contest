@@ -30,7 +30,7 @@ const fixture = new Map([['createFixtureEnvironment', 3]]);
 assert.equal(check('createFixtureEnvironment(services, layout, core);', fixture), 1);
 assert.throws(() => check('createFixtureEnvironment(services, layout);', fixture), /requires 3 arguments/);
 assert.equal(check('createFixtureEnvironment(...args);', fixture), 0);
-const sourcePath = resolve(root, 'js/ported/wasm-runtime.js');
+const sourcePath = resolve(root, 'js/backends/emscripten/runtime.js');
 const source = fs.readFileSync(sourcePath, 'utf8');
 const ast = parse(source, {ecmaVersion:'latest', sourceType:'module'});
 const factories = new Map();

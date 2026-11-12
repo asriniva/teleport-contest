@@ -5,9 +5,9 @@ import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
-import { LuaNativeCodegen, Exp, ExpKind as K, BinOpr as B, UnOpr as U, initExp } from '../js/services/lua-incremental-codegen.js';
-import { LUA_OP as O } from '../js/services/lua-codegen.js';
-import { isLuaString,luaStringBytes } from '../js/services/lua/lobject.js';
+import { LuaCodeGenerator, Exp, ExpKind as K, BinOpr as B, UnOpr as U, initExp } from '../js/lua/incremental-codegen.js';
+import { LUA_OP as O } from '../js/lua/codegen.js';
+import { isLuaString,luaStringBytes } from '../js/lua/lobject.js';
 const root=fileURLToPath(new URL('../',import.meta.url)),work=resolve(root,'.cache/js-lua-debug/incremental-codegen');mkdirSync(work,{recursive:true});
 const archive=resolve(root,'.cache/lua-5.4.8.tar.gz');assert.equal(createHash('sha256').update(readFileSync(archive)).digest('hex'),'4f18ddae154e793e46eeab727c59ef1c0c0c2b744e7b94219710d76f530629ae');
 execFileSync('python3',['-c','import tarfile,sys\nwith tarfile.open(sys.argv[1]) as t:t.extractall(sys.argv[2],filter="data")',archive,work]);
@@ -90,7 +90,7 @@ execFileSync(resolve(root,'.cache/wasm64-build/host-cc'),['-O2','-I'+source,reso
 const bits=n=>{const d=new DataView(new ArrayBuffer(8));d.setFloat64(0,n);return d.getBigUint64(0).toString(16).padStart(16,'0');};
 const value=v=>typeof v==='bigint'?['int',String(v)]:typeof v==='number'?['float',bits(v)]:isLuaString(v)?['str',Buffer.from(luaStringBytes(v),'latin1').toString('hex')]:v===null?['nil']:['bool',v];
 const E=(id,k,v=0,b=0)=>['E',id,k,k===K.VKFLT?bits(v):k===K.VKSTR?Buffer.from(v,'latin1').toString('hex')||'-':v,b];
-function runJS(commands){const p={linedefined:0,maxstacksize:2},ls={lastline:1,linenumber:1},fs={p,ls,nactvar:0,variableStack:()=>fs.nactvar},cg=new LuaNativeCodegen(fs),expressions=[];
+function runJS(commands){const p={linedefined:0,maxstacksize:2},ls={lastline:1,linenumber:1},fs={p,ls,nactvar:0,variableStack:()=>fs.nactvar},cg=new LuaCodeGenerator(fs),expressions=[];
  for(const[op,...a]of commands){
   if(op==='E'){const[id,k,v,b]=a,e=new Exp(k);if(k===K.VKINT)e.u.ival=BigInt(v);else if(k===K.VKFLT){const d=new DataView(new ArrayBuffer(8));d.setBigUint64(0,BigInt('0x'+v));e.u.nval=d.getFloat64(0);}else if(k===K.VKSTR)e.u.strval=v==='-'?'':Buffer.from(v,'hex').toString('latin1');else if(k===K.VLOCAL)e.u.var={ridx:Number(v),vidx:b};else if(k>=K.VINDEXED&&k<=K.VINDEXSTR)e.u.ind={t:Number(v),idx:b};else e.u.info=Number(v);expressions[id]=e;}
   else if(op==='locals')fs.freereg=fs.nactvar=a[0];else if(op==='line')ls.lastline=ls.linenumber=a[0];

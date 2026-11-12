@@ -6,7 +6,7 @@ import {resolve,dirname} from 'node:path';
 import {createHash} from 'node:crypto';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'../../..');
 const read=p=>readFile(resolve(root,p),'utf8');
-const [prepared,pristine,js,runtime,support,library]=await Promise.all(['.cache/wasm64-build/tree/src/u_init.c','nethack-c/upstream/src/u_init.c','js/ported/u_init.js','js/ported/u_init-runtime.js','nethack-c/wasm/tu-fragments/u_init-support.c','nethack-c/wasm/tu-libraries/u_init.js'].map(read));
+const [prepared,pristine,js,runtime,support,library]=await Promise.all(['.cache/wasm64-build/tree/src/u_init.c','nethack-c/upstream/src/u_init.c','js/ported/u_init.js','js/nethack/bindings/u_init.js','nethack-c/wasm/tu-fragments/u_init-support.c','nethack-c/wasm/tu-libraries/u_init.js'].map(read));
 const originalClock='#if defined(BSD) && !defined(POSIX_TYPES)\n    (void) time((long *) &ubirthday);\n#else\n    (void) time(&ubirthday);\n#endif';
 const patchedClock='    /* Route through getnow() so fixed datetime also controls ubirthday. */\n    ubirthday = getnow();';
 assert.ok(pristine.includes(originalClock));assert.equal(prepared,pristine.replace(originalClock,patchedClock),'Unexpected prepared/pristine adaptation');

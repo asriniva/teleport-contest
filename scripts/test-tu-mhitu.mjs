@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';import{resolve}from'node:path';import{pathToFileURL}from'node:url';import{readFile,writeFile,mkdir}from'node:fs/promises';import{spawnSync}from'node:child_process';
-import{C,withCEnvironment}from'../js/ported/c-runtime.js';import{createMhituEnvironment,callMhitu,getMhituState}from'../js/ported/mhitu-runtime.js';import*as core from'../js/ported/mhitu.js';import{checkMhituSource}from'../nethack-c/wasm/tu-fragments/mhitu-source-check.mjs';
+import{C,withCEnvironment}from'../js/c-runtime/context.js';import{createMhituEnvironment,callMhitu,getMhituState}from'../js/nethack/bindings/mhitu.js';import*as core from'../js/ported/mhitu.js';import{checkMhituSource}from'../nethack-c/wasm/tu-fragments/mhitu-source-check.mjs';
 const dir=resolve(process.env.MHITU_PROBE_DIR??'.cache/mhitu-author');const guard=checkMhituSource();
 const schema=JSON.parse(await readFile('nethack-c/wasm/tu-fragments/mhitu-schema.json','utf8')),kinds=Object.keys(schema.schema),globals=schema.globals,functions=Object.keys(core).filter(k=>typeof core[k]==='function');
 if(process.argv.includes('--build')){await mkdir(dir,{recursive:true});const root=process.cwd();

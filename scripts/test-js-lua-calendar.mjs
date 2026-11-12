@@ -1,6 +1,6 @@
 /* Actual native macOS gmtime/localtime/mktime differential oracle. */
 import assert from'node:assert/strict';import fs from'node:fs';import path from'node:path';import{spawnSync}from'node:child_process';import{fileURLToPath}from'node:url';
-import{epochToCalendar,makeCalendarTime}from'../js/services/lua-native-calendar.js';import{lookupTimezone}from'../js/services/timezone-info.js';
+import{epochToCalendar,makeCalendarTime}from'../js/platform/darwin/calendar.js';import{lookupTimezone}from'../js/platform/timezone/info.js';
 const root=fileURLToPath(new URL('../',import.meta.url)),work=path.join(root,'.cache/js-lua-calendar');fs.mkdirSync(work,{recursive:true});
 function command(program,args,options={}){const r=spawnSync(program,args,{encoding:'utf8',timeout:120000,maxBuffer:20000000,...options});assert.equal(r.status,0,r.error||r.stderr||r.stdout);return r.stdout;}
 const src=path.join(work,'oracle.c'),oracle=path.join(work,'oracle');fs.writeFileSync(src,`#include <stdio.h>

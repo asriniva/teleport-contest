@@ -25,7 +25,7 @@ for i,(source,flags)in enumerate(units):
  dep=out/('unit-'+str(i)+'.d');run([emcc,'-O2','-sMEMORY64=1',*incs,*flags,'-M','-MT','utility_input','-MF',str(dep),str(source)],'dependency-'+str(i)+'.log')
  for s in dep.read_text().replace('\\\n',' ').split(':',1)[1].split():inputs.add(Path(s).resolve())
 assert r/'nethack-c/upstream/win/share/tilemap.c'in inputs,'actual tiletxt transitive policy closure required'
-inputs.update(code_root/f for f in ['js/ported-utilities/gifread/runtime.js', 'js/ported-utilities/gifread/gifread.js', 'nethack-c/wasm/utilities/gifread/transport.c', 'nethack-c/wasm/utilities/gifread/library.js', 'nethack-c/wasm/utilities/gifread/probe.c', 'scripts/build-utility-gifread.py', 'scripts/test-utility-gifread.mjs', 'scripts/check-utility-gifread.py', 'scripts/lower-utility-gifread.py', 'scripts/fixtures-utility-gifread.py', 'js/ported/c-runtime.js'])
+inputs.update(code_root/f for f in ['js/ported-utilities/gifread/runtime.js', 'js/ported-utilities/gifread/gifread.js', 'nethack-c/wasm/utilities/gifread/transport.c', 'nethack-c/wasm/utilities/gifread/library.js', 'nethack-c/wasm/utilities/gifread/probe.c', 'scripts/build-utility-gifread.py', 'scripts/test-utility-gifread.mjs', 'scripts/check-utility-gifread.py', 'scripts/lower-utility-gifread.py', 'scripts/fixtures-utility-gifread.py', 'js/c-runtime/context.js'])
 sdk=r/'.cache/emsdk/upstream';ems=sdk/'emscripten'
 # No SDK copying; hash implementation source + actual compiler/link tools.
 inputs.update(x for x in ems.glob('*.py')if x.is_file())

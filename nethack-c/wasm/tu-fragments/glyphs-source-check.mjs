@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'../../..');
 const read=p=>readFile(resolve(root,p),'utf8');
-const [source,prepared,core,runtime,support,library]=await Promise.all(['nethack-c/upstream/src/glyphs.c','.cache/wasm64-build/tree/src/glyphs.c','js/ported/glyphs.js','js/ported/glyphs-runtime.js','nethack-c/wasm/tu-fragments/glyphs-support.c','nethack-c/wasm/tu-libraries/glyphs.js'].map(read));
+const [source,prepared,core,runtime,support,library]=await Promise.all(['nethack-c/upstream/src/glyphs.c','.cache/wasm64-build/tree/src/glyphs.c','js/ported/glyphs.js','js/nethack/bindings/glyphs.js','nethack-c/wasm/tu-fragments/glyphs-support.c','nethack-c/wasm/tu-libraries/glyphs.js'].map(read));
 assert.equal(prepared,source,'GLYPHS prepared/pristine provenance');
 const defs=JSON.parse(await read('nethack-c/wasm/compile-defines.json'));
 const args=['-E','-sMEMORY64=1','-I'+resolve(root,'.cache/wasm64-build/tree/include'),'-include',resolve(root,'nethack-c/wasm/native-terminal.h'),...defs.map(d=>'-D'+d),resolve(root,'.cache/wasm64-build/tree/src/glyphs.c')];

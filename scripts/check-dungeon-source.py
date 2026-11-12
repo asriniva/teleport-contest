@@ -5,7 +5,7 @@ import json,re,hashlib,subprocess,argparse
 r=Path(__file__).resolve().parents[1];w=r/'.cache/dungeon-first-pass'
 def read(name):return (r/name).read_text()
 m=json.loads(read('nethack-c/wasm/tu-fragments/dungeon-source-metadata.json'));s=json.loads(read('nethack-c/wasm/tu-fragments/dungeon-schema.json'))
-c=read('nethack-c/upstream/src/dungeon.c');js=read('js/ported/dungeon.js');rt=read('js/ported/dungeon-runtime.js');abi=read('nethack-c/wasm/tu-fragments/dungeon-support.c');lib=read('nethack-c/wasm/tu-libraries/dungeon.js')
+c=read('nethack-c/upstream/src/dungeon.c');js=read('js/ported/dungeon.js');rt=read('js/nethack/bindings/dungeon.js');abi=read('nethack-c/wasm/tu-fragments/dungeon-support.c');lib=read('nethack-c/wasm/tu-libraries/dungeon.js')
 assert c==read('.cache/wasm64-build/tree/src/dungeon.c')
 assert hashlib.sha256(c.encode()).hexdigest()==m['sourceSHA256']=='4b3e7b2a8afa70fc442a99fd79551982836def70864f738085926f3f326906e9'
 for path,digest in m['compilerInputHashes'].items():

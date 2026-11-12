@@ -3,9 +3,9 @@ import {referenceBackend,referenceLabel,DataView} from './native-test-backend.mj
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {withCEnvironment,C} from '../js/ported/c-runtime.js';
+import {withCEnvironment,C} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/muse.js';
-import {createMuseEnvironment} from '../js/ported/muse-runtime.js';
+import {createMuseEnvironment} from '../js/nethack/bindings/muse.js';
 const dir=resolve(process.env.MUSE_PROBE_DIR??'.cache/tu-probes'),schema=JSON.parse(await readFile(new URL('../nethack-c/wasm/tu-fragments/muse-schema.json',import.meta.url),'utf8'));
 const factory=async mode=>(await import(pathToFileURL(resolve(dir,'muse-'+mode+'.mjs')).href)).default;
 const rf=await factory('reference'),hf=await factory('hybrid'),reference=await referenceBackend('muse',rf)();

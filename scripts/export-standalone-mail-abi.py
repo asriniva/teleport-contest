@@ -47,7 +47,7 @@ for name,key in [('viz_rmin','rmin'),('viz_rmax','rmax')]:
  field=vision[name]
  if field['ctype']!='coordxy * '+name or field['offset']!=layout[key] or layout['coord_x_size']!=2:raise ValueError('Review MAIL vision row pointer '+name)
  rowPointers.append({'name':name,'offset':field['offset'],'elementSize':layout['coord_x_size']})
-paths=[Path(__file__).resolve(),support,library,root/'js/ported/mail.js',root/'js/ported/mail-runtime.js',root/'js/wasm/tu-layouts.json',root/'js/standalone/public-functions.json',records]
+paths=[Path(__file__).resolve(),support,library,root/'js/ported/mail.js',root/'js/nethack/bindings/mail.js',root/'js/wasm/tu-layouts.json',root/'js/standalone/public-functions.json',records]
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 sdkSources=[sdk/'system/lib/libc/musl/src/string'/name for name in ['strlen.c','strcat.c','strcpy.c','stpcpy.c']]
 data={'rngSites':[{'line':line,'function':fn}for line,fn in zip(lines,callers)],'rowPointers':rowPointers,'calls':calls,'sdkFailures':failures,'nullCStringProfile':'MAIL only: observed memory64 compiled-C null dereference/linear-memory reads without SAFE_HEAP; scan actual heap at address zero, never synthesize passwd identity.','sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in [stubs,wasi,errnoHeader,*sdkSources]}}

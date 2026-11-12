@@ -1,9 +1,9 @@
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {callApply,createApplyEnvironment} from '../js/ported/apply-runtime.js';
+import {callApply,createApplyEnvironment} from '../js/nethack/bindings/apply.js';
 import * as core from '../js/ported/apply.js';
 if(process.env.TELEPORT_NATIVE_TESTS==='1')throw Error('APPLY native-host gate pending; isolated configured EmC first pass only.');
 const W=resolve(process.env.TELEPORT_APPLY_PROBE_DIR??'.cache/apply-author'), url=name=>pathToFileURL(resolve(W,name)).href;

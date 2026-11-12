@@ -2,8 +2,8 @@
 import assert from 'node:assert/strict';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {createAllmainBridge} from '../js/ported/allmain-runtime.js';
-import {C} from '../js/ported/c-runtime.js';
+import {createAllmainBridge} from '../js/nethack/bindings/allmain.js';
+import {C} from '../js/c-runtime/context.js';
 const directory=resolve(process.env.ALLMAIN_PROBE_DIR??'.cache/tu-probes');
 const refFactory=(await import(pathToFileURL(resolve(directory,'allmain-reference.mjs')))).default;
 const jsFactory=(await import(pathToFileURL(resolve(directory,'allmain-hybrid.mjs')))).default;

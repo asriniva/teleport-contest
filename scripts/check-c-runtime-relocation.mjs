@@ -2,6 +2,7 @@
 // development check; no git/host dependency enters the production runtime.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {readBeforeLayout} from './services-layout-audit.mjs';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
@@ -10,7 +11,7 @@ const baseline='df33dd4',reference=process.env.STANDALONE_REFERENCE_ROOT;
 if(!reference)throw new Error('Missing STANDALONE_REFERENCE_ROOT');
 const {parse}=await import(pathToFileURL(reference+'/.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs'));
 const old=file=>execFileSync('git',['show',baseline+':'+file],{encoding:'utf8'});
-const read=file=>fs.readFileSync(file,'utf8');
+const read=file=>readBeforeLayout(file,'utf8');
 const body=(source,name)=>{
     const ast=parse(source,{ecmaVersion:'latest',sourceType:'module'});
     for(const node of ast.body){const declaration=node.declaration??node;if(declaration.type==='FunctionDeclaration'&&declaration.id.name===name)return source.slice(declaration.body.start,declaration.body.end);}
@@ -29,7 +30,7 @@ for(const name of ['scanf-abi','were-abi']) {
     assert.deepEqual(after,before,'Changed measured declarations beyond source relocation '+name);
 }
 // All translated policies and frozen inputs retain the established baseline.
-const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const sha=file=>crypto.createHash('sha256').update(readBeforeLayout(file)).digest('hex');
 const policies=JSON.parse(read('docs/runtime-environment/scope-baseline.json'));
 // Preserve main's explicitly approved VISION exception without refreshing the
 // immutable policy baseline or accepting additional correction declarations.

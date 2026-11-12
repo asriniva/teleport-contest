@@ -1,7 +1,7 @@
 import {DataView,referenceBackend,referenceLabel,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';import {readFileSync} from 'node:fs';import {resolve} from 'node:path';import {pathToFileURL} from 'node:url';
 if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('MON has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for the explicit Emscripten diagnostic.');
-const {callMon,monState,createMonEnvironment}=await import(process.env.TELEPORT_MON_RUNTIME||'../js/ported/mon-runtime.js');import * as core from '../js/ported/mon.js';import {C,R,T} from '../js/ported/c-runtime.js';
+const {callMon,monState,createMonEnvironment}=await import(process.env.TELEPORT_MON_RUNTIME||'../js/nethack/bindings/mon.js');import * as core from '../js/ported/mon.js';import {C,R,T} from '../js/c-runtime/context.js';
 const author=process.env.TELEPORT_MON_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url),rf=(await import(new URL('mon-reference.mjs',dir))).default,hf=(await import(new URL('mon-hybrid.mjs',dir))).default,ref=await referenceBackend('mon',rf)();
 function text(m,p){if(!p)return null;let a=Number(p),e=a;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(a,e)).toString();}
 const L={size:Number(ref._probe_context_size())};for(let i=0;i<ref._probe_layout_count();i++){const k=text(ref,ref._probe_layout_name(i)),v=ref._probe_layout_value(i);L[k]=/^(M1_|M2_|W_)/.test(k)?BigInt.asUintN(64,v).toString():Number(BigInt.asIntN(64,v));}

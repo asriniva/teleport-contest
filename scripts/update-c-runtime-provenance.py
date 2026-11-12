@@ -2,16 +2,17 @@
 """Bind exact helper extraction and dependency metadata; never refresh unrelated pins."""
 import argparse,copy,hashlib,importlib.util,json,re,subprocess
 from pathlib import Path
+from services_layout_audit import read_before,text_before,write_before
 root=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser();parser.add_argument('--write',action='store_true');parser.add_argument('--audit-successors',action='store_true');args=parser.parse_args()
-receipt=json.loads((root/'docs/runtime-environment/c-runtime-helper-extraction.json').read_text());baseline=receipt['baselineCommit']
+receipt=json.loads(text_before(root/'docs/runtime-environment/c-runtime-helper-extraction.json'));baseline=receipt['baselineCommit']
 sha=lambda b:hashlib.sha256(b).hexdigest()
 original=lambda p:subprocess.check_output(['git','show',baseline+':'+p],cwd=root)
 changes={row['file']:row for row in receipt['files']}
 for path,row in changes.items():
  assert sha(original(path))==row['beforeSha256'],path
- assert sha((root/path).read_bytes())==row['afterSha256'],path
-helper=receipt['helperFile'];assert sha((root/helper).read_bytes())==receipt['helperSha256']
+ assert sha(read_before(root/path))==row['afterSha256'],path
+helper=receipt['helperFile'];assert sha(read_before(root/helper))==receipt['helperSha256']
 registry_path='nethack-c/wasm/tu-ports.json';registry_before=original(registry_path)
 rows=json.loads(registry_before);new_rows=copy.deepcopy(rows)
 for row in new_rows:
@@ -63,11 +64,11 @@ foundation_baseline='df33dd4d8cbb9ea2268b51385c37c4ad5cdd3a31'
 libc_path='js/standalone/libc.js'
 libc_before=subprocess.check_output(['git','show',foundation_baseline+':'+libc_path],cwd=root)
 libc_after=original(libc_path)
-assert (root/libc_path).read_bytes()==libc_after
+assert read_before(root/libc_path)==libc_after
 signature=b'export function createStandaloneLibc(memory,libc,transport,functions) {'
 getpid=b'        // Match the configured SDK single-process syscall profile.\n        getpid:()=>42,\n'
 assert libc_before.count(signature)==1 and libc_before.count(getpid)==1
-assert (root/'js/c-runtime/libc.js').read_bytes().split(signature,1)[1]==libc_before.split(signature,1)[1].replace(getpid,b'',1)
+assert read_before(root/'js/c-runtime/libc.js').split(signature,1)[1]==libc_before.split(signature,1)[1].replace(getpid,b'',1)
 base_hashes[libc_path]=sha(libc_before);helper_updates[libc_path]=sha(libc_after)
 # New main's DETECT receipt also binds the pre-foundation address adapter.
 # Bind the exact already-reviewed foundation package, not an arbitrary current
@@ -77,7 +78,7 @@ address_before=subprocess.check_output(['git','show',foundation_baseline+':'+add
 address_package=[address_path,'js/nethack/address-ports.js','js/c-runtime/address-bindings.js']
 address_hashes={}
 for path in address_package:
- if (root/path).read_bytes()!=original(path):
+ if read_before(root/path)!=original(path):
   assert path=='js/nethack/address-ports.js','Changed foundation address binding '+path
   spec=importlib.util.spec_from_file_location('qualified_mkobj_address',root/'scripts/check-c-runtime-mkobj-address.py')
   qualifier=importlib.util.module_from_spec(spec);spec.loader.exec_module(qualifier)
@@ -102,14 +103,14 @@ guard_after=guard_before.decode()
 for before,after in guard_edits:
  assert guard_after.count(before)==1
  guard_after=guard_after.replace(before,after,1)
-assert (root/guard_path).read_text()==guard_after,'Unreviewed targeted guard edit'
+assert text_before(root/guard_path)==guard_after,'Unreviewed targeted guard edit'
 base_hashes[guard_path]=sha(guard_before);helper_updates[guard_path]=sha(guard_after.encode())
-pruning=json.loads((root/'docs/runtime-environment/c-runtime-shim-pruning.json').read_text())
+pruning=json.loads(text_before(root/'docs/runtime-environment/c-runtime-shim-pruning.json'))
 assert pruning['baselineCommit']==baseline
 consumer_updates={}
 for row in pruning['consumers']:
  assert sha(original(row['file']))==row['beforeSha256']
- assert sha((root/row['file']).read_bytes())==row['afterSha256']
+ assert sha(read_before(root/row['file']))==row['afterSha256']
  base_hashes[row['file']]=row['beforeSha256'];consumer_updates[row['file']]=row['afterSha256']
 removed={row['file']:row['beforeSha256']for row in pruning['removed']}
 for path,h in removed.items():assert sha(original(path))==h and not(root/path).exists()
@@ -144,7 +145,7 @@ def compute(initial_updates,removed_sources):
 intermediate=compute(helper_updates,{})
 outputs=compute({**helper_updates,**consumer_updates},removed)
 prior_path=root/'docs/runtime-environment/c-runtime-provenance-update.json'
-prior=json.loads(prior_path.read_text())if prior_path.exists()else{}
+prior=json.loads(text_before(prior_path))if prior_path.exists()else{}
 assert prior.get('baselineCommit',baseline)==baseline
 prior_hashes={row['file']:row['afterSha256']for row in prior.get('files',[])if row['beforeSha256']==sha(original(row['file']))}
 successor_path=root/'docs/runtime-environment/c-runtime-metadata-successors.json'
@@ -153,7 +154,7 @@ assert not successors.get('baselineCommit')or successors['baselineCommit']==base
 records=[];audited=[]
 for p,expected in outputs.items():
  before=originals.get(p,registry_before if p==registry_path else profile_before)
- actual=(root/p).read_bytes()
+ actual=read_before(root/p)
  if args.write:
   assert actual in [before,intermediate.get(p,before),expected]or sha(actual)==prior_hashes.get(p),'Refusing unrelated edits '+p
  elif actual!=expected:
@@ -190,10 +191,10 @@ if prior.get('files'):
  assert set(order)=={row['file']for row in records},'Changed historical provenance output inventory'
  records.sort(key=lambda row:order[row['file']])
 if args.write:
- assert not any((root/p).read_bytes()!=expected and p in successors['files']for p,expected in outputs.items()),'Use the current feature exporters; do not overwrite qualified successor declarations'
- for p,expected in outputs.items():(root/p).write_bytes(expected)
-result={'baselineCommit':baseline,'helperSha256':receipt['helperSha256'],'shimRecipeSha256':sha((root/'docs/runtime-environment/c-runtime-shim-pruning.json').read_bytes()),'foundationLibcMove':{'baselineCommit':foundation_baseline,'file':libc_path,'beforeSha256':sha(libc_before),'afterSha256':sha(libc_after),'factoryBodyUnchangedExceptGetpid':True},'foundationAddressMove':{'originalBaselineCommit':foundation_baseline,'reviewedFoundationCommit':baseline,'file':address_path,'beforeSha256':sha(address_before),'packageSha256':address_hashes},'targetedScopeGuard':{'file':guard_path,'beforeSha256':sha(guard_before),'afterSha256':sha(guard_after.encode()),'onlyExactApprovedCorrectionAndReportingEdits':True},'registrySourceSelectionUnchanged':True,'existingMakefileProfilesUnchanged':True,'newFiniteProfiles':list(aliases),'files':records,'limitations':'Only proven extraction/pruning/relocation dependencies and their transitive metadata hashes change. Historical aggregate scope/persistence pin failures are not waived.'}
+ assert not any(read_before(root/p)!=expected and p in successors['files']for p,expected in outputs.items()),'Use the current feature exporters; do not overwrite qualified successor declarations'
+ for p,expected in outputs.items():write_before(root/p,expected)
+result={'baselineCommit':baseline,'helperSha256':receipt['helperSha256'],'shimRecipeSha256':sha(read_before(root/'docs/runtime-environment/c-runtime-shim-pruning.json')),'foundationLibcMove':{'baselineCommit':foundation_baseline,'file':libc_path,'beforeSha256':sha(libc_before),'afterSha256':sha(libc_after),'factoryBodyUnchangedExceptGetpid':True},'foundationAddressMove':{'originalBaselineCommit':foundation_baseline,'reviewedFoundationCommit':baseline,'file':address_path,'beforeSha256':sha(address_before),'packageSha256':address_hashes},'targetedScopeGuard':{'file':guard_path,'beforeSha256':sha(guard_before),'afterSha256':sha(guard_after.encode()),'onlyExactApprovedCorrectionAndReportingEdits':True},'registrySourceSelectionUnchanged':True,'existingMakefileProfilesUnchanged':True,'newFiniteProfiles':list(aliases),'files':records,'limitations':'Only proven extraction/pruning/relocation dependencies and their transitive metadata hashes change. Historical aggregate scope/persistence pin failures are not waived.'}
 target=root/'docs/runtime-environment/c-runtime-provenance-update.json';expected=json.dumps(result,indent=2)+'\n'
-if args.write:target.write_text(expected)
-else:assert target.read_text()==expected
+if args.write:write_before(target,expected)
+else:assert text_before(target)==expected
 print('PASS:',len(records),'owned dependency/provenance files;',len(aliases),'strict finite-profile aliases; C selection unchanged')

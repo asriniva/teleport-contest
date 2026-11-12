@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {pathToFileURL} from 'node:url';
 import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 import {createStandaloneEnvironment} from '../js/standalone/environment.js';
-import {createNativeTerminal} from '../js/services/native-terminal.js';
+import {createNativeTerminal} from '../js/platform/darwin/terminal.js';
 import {createTerminalDevices} from '../js/standalone/unix-terminal.js';
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));
 const directory=path.resolve(process.env.STANDALONE_EAT_STARTUP_ORACLE||'.cache/standalone-eat-state-v2');

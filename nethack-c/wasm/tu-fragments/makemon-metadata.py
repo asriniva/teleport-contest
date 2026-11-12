@@ -1,7 +1,7 @@
 """Read-only MAKEMON configured inventory/provenance/source/header/ABI guards."""
 from pathlib import Path
 import hashlib,json,re,subprocess,os
-r=Path(__file__).resolve().parents[3];w=r/'.cache/makemon-author';prepared=r/'.cache/wasm64-build/tree/src/makemon.c';pristine=r/'nethack-c/upstream/src/makemon.c';source=prepared.read_text();core=(r/'js/ported/makemon.js').read_text();runtime=(r/'js/ported/makemon-runtime.js').read_text();library=(r/'nethack-c/wasm/tu-libraries/makemon.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/makemon-support.inc').read_text()
+r=Path(__file__).resolve().parents[3];w=r/'.cache/makemon-author';prepared=r/'.cache/wasm64-build/tree/src/makemon.c';pristine=r/'nethack-c/upstream/src/makemon.c';source=prepared.read_text();core=(r/'js/ported/makemon.js').read_text();runtime=(r/'js/nethack/bindings/makemon.js').read_text();library=(r/'nethack-c/wasm/tu-libraries/makemon.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/makemon-support.inc').read_text()
 for path in [prepared,pristine]:assert hashlib.sha256(path.read_bytes()).hexdigest()=='04bb46b793cb7a724544ed5860f57116e4661ce5d052a1321d90dc0167d3ffc3',('Review MAKEMON source change',path)
 comments=re.findall(r'/\*.*?\*/',source,re.S);assert len(comments)==279
 for c in set(comments):assert source.count(c)==core.count(c),('Original MAKEMON comment multiplicity',c)

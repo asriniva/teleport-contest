@@ -26,7 +26,9 @@ export function checkNhluaSource({preprocess=true}={}) {
     assert(historical[0].includes('XXX Note that math.random'));
     const appendix="\n// Historical pristine comment replaced by inherited 001-deterministic-runtime.patch.\n// Retained outside the configured source bodies; seeded prepared policy above is authoritative.\n"+historical[0]+'\n';
     assert(core.endsWith(appendix),'Exact historical pristine-comment appendix');
-    const configuredCore=core.slice(0,-appendix.length);
+    const contextImport='import { C } from "../c-runtime/context.js";';
+    assert.equal(core.split(contextImport).length,2,'Exactly one reviewed context import');
+    const configuredCore=core.slice(0,-appendix.length).replace(contextImport,'import { C } from "./c-runtime.js";');
     assert.equal(digest(configuredCore),'478ce9cbbddfd0a9bcdab88d6d38eeccd90597ac16b5a3199ffc48933cbcdbee','Frozen policy/data before additive historical comment');
     assert.deepEqual(comments(configuredCore),comments(source),'Original configured block-comment order/multiplicity');
     const own=new Set(schema.functions.map(f=>f.name));

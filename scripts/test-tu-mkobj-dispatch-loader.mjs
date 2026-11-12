@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 
 const target=new URL('./test-tu-mkobj.mjs',import.meta.url).href;
 const dispatcher=new URL('../js/ported/mkobj-dispatch.js',import.meta.url).href;
-const environment=new URL('../js/ported/c-runtime.js',import.meta.url).href;
+const environment=new URL('../js/c-runtime/context.js',import.meta.url).href;
 const witness=new URL('./test-tu-mkobj-dispatch-witness.mjs',import.meta.url).href;
 
 export async function load(url,context,nextLoad) {

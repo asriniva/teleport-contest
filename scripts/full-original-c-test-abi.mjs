@@ -3,7 +3,7 @@
 import fs from 'node:fs';import assert from 'node:assert/strict';import {pathToFileURL} from 'node:url';
 import {createStandaloneEnvironment} from '../js/standalone/environment.js';
 import {createTerminalDevices} from '../js/standalone/unix-terminal.js';
-import {createNativeTerminal} from '../js/services/native-terminal.js';
+import {createNativeTerminal} from '../js/platform/darwin/terminal.js';
 const file=process.argv[process.argv.indexOf('--reference')+1];const {default:factory}=await import(pathToFileURL(file)),c=await factory(),raw=await factory();
 const layouts=JSON.parse(fs.readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),env=createStandaloneEnvironment();env.enableStdio();
 const d=createTerminalDevices(env,layouts),native=createNativeTerminal(),t=env.transport;

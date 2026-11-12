@@ -112,8 +112,8 @@ def closing_line(source, needle):
 
 inputs = [Path(__file__).resolve(), header, build, root / 'nethack-c/wasm/compile-defines.json',
           root / 'js/wasm/tu-layouts.json', root / 'js/standalone/records.json',
-          root / 'js/ported/mdlib.js', root / 'js/ported/mdlib-runtime.js',
-          root / 'js/ported/date.js', root / 'js/ported/date-runtime.js', root / 'js/ported/allmain.js',
+          root / 'js/ported/mdlib.js', root / 'js/nethack/bindings/mdlib.js',
+          root / 'js/ported/date.js', root / 'js/nethack/bindings/date.js', root / 'js/ported/allmain.js',
           root / 'nethack-c/wasm/tu-support.c', root / 'nethack-c/wasm/tu-libraries/mdlib.js',
           root / 'nethack-c/wasm/tu-libraries/date.js']
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()

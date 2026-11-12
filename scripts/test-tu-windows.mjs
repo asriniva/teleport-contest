@@ -2,9 +2,9 @@
 import assert from 'node:assert/strict';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {C} from '../js/ported/c-runtime.js';
+import {C} from '../js/c-runtime/context.js';
 if(process.env.TELEPORT_NATIVE_TESTS==='1')throw new Error('WINDOWS has no native fixture backend; this runner supports Emscripten-only comparisons.');
-const {callWindows,initializeWindows}=await import(process.env.WINDOWS_RUNTIME?pathToFileURL(resolve(process.env.WINDOWS_RUNTIME)):new URL('../js/ported/windows-runtime.js',import.meta.url));
+const {callWindows,initializeWindows}=await import(process.env.WINDOWS_RUNTIME?pathToFileURL(resolve(process.env.WINDOWS_RUNTIME)):new URL('../js/nethack/bindings/windows.js',import.meta.url));
 const dir=resolve(process.env.WINDOWS_PROBE_DIR??'.cache/windows-first-pass');
 const ref=(await import(pathToFileURL(resolve(dir,'windows-reference.mjs')))).default;
 const hybrid=(await import(pathToFileURL(resolve(dir,'windows-hybrid.mjs')))).default;

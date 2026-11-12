@@ -11,7 +11,7 @@ assert.equal(readFileSync(join(root,'.cache/wasm64-build/tree/src/pline.c'),'utf
 const core=readFileSync(join(root,'js/ported/pline.js'),'utf8');
 const binding=readFileSync(join(root,'nethack-c/wasm/tu-libraries/pline.js'),'utf8');
 const header=readFileSync(join(root,'nethack-c/wasm/tu-fragments/pline-source-data.h'),'utf8');
-const runtime=readFileSync(join(root,'js/ported/pline-runtime.js'),'utf8');
+const runtime=readFileSync(join(root,'js/nethack/bindings/pline.js'),'utf8');
 assert.match(original,/#define BIGBUFSZ \(5 \* BUFSZ\)/);
 assert.match(original,/static int in_pline = 0;/);assert.match(original,/static boolean use_pline_handler = TRUE;/);
 assert.match(runtime,/state=\{in_pline:0,use_pline_handler:1\}/);

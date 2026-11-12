@@ -4,7 +4,7 @@ import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/nhmd4-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/nhmd4-hybrid.mjs';
-import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
+import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 const layout = layouts.nhmd4;

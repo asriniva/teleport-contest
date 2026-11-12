@@ -2,7 +2,7 @@
 """Bind unchanged OBJNAM transport descriptors; no naming policy translation."""
 import json,hashlib,re
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];runtime=root/'js/ported/objnam-runtime.js';text=runtime.read_text()
+root=Path(__file__).resolve().parents[1];runtime=root/'js/nethack/bindings/objnam.js';text=runtime.read_text()
 def declaration(n):return json.JSONDecoder().raw_decode(text[re.search(r'const\s+'+n+r'\s*=\s*',text).end():])[0]
 schema=declaration('schema');bits=declaration('bitIndices');ordered=[None]*len(bits)
 for key,i in bits.items():ordered[i]=key.rsplit('.',1)

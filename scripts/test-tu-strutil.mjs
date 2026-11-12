@@ -4,8 +4,8 @@ import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/strutil-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/strutil-hybrid.mjs';
-import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
-import { C } from '../js/ported/c-runtime.js';
+import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import { C } from '../js/c-runtime/context.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 const layout = layouts.strutil;

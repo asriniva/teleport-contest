@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {callHack,createHackEnvironment} from '../js/ported/hack-runtime.js';
-import {C,withCEnvironment} from '../js/ported/c-runtime.js';
+import {callHack,createHackEnvironment} from '../js/nethack/bindings/hack.js';
+import {C,withCEnvironment} from '../js/c-runtime/context.js';
 
 const layouts=JSON.parse(await readFile(new URL('../js/wasm/tu-layouts.json',import.meta.url)));
 const layout=Object.freeze({...layouts.hack}),moduleKey={};

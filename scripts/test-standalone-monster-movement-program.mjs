@@ -30,6 +30,6 @@ for(const count of checkpoints){
  cases.push({keys:count,moves:j.state.moves,frames:j.frames.length,worldRecords:jg.coverage.counts});
  console.log('PASS movement boundary '+JSON.stringify(cases.at(-1)));
 }
-const files=['scripts/test-standalone-monster-movement-program.mjs','scripts/restoration-world-graph.mjs','scripts/run-standalone-program.mjs','scripts/full-original-c-run.mjs','js/standalone/monster-movement.js','js/standalone/monster-lifecycle.js','js/ported/monmove-runtime.js','js/ported/monmove.js','js/ported/mon-runtime.js','js/ported/mon.js'];
+const files=['scripts/test-standalone-monster-movement-program.mjs','scripts/restoration-world-graph.mjs','scripts/run-standalone-program.mjs','scripts/full-original-c-run.mjs','js/standalone/monster-movement.js','js/standalone/monster-lifecycle.js','js/nethack/bindings/monmove.js','js/ported/monmove.js','js/nethack/bindings/mon.js','js/ported/mon.js'];
 const evidence={profile:'Strict original full-C main against pure JS finite ordinary movement; source death fixture input prefix',checks,cases,completeGameAccepted:false,sourceSha256:Object.fromEntries(files.map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')])),limitation:'Only these finite recordings and normalized world graphs are accepted; later death, victory, other seeds and unreached movement branches remain separate requirements.'};
 fs.writeFileSync(path.join(output,'evidence.json'),JSON.stringify(evidence,null,2)+'\n');console.log('PASS '+JSON.stringify(evidence));

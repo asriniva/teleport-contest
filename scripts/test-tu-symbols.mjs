@@ -1,9 +1,9 @@
 import assert from './native-test-assert.mjs';
 import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
 import {readFileSync} from 'node:fs';
-import {callSymbols} from '../js/ported/symbols-runtime.js';
+import {callSymbols} from '../js/nethack/bindings/symbols.js';
 import * as symbols from '../js/ported/symbols.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_SYMBOLS_AUTHOR==='1';
 const referenceFactory=(await import(own?'../.cache/symbols-author/reference.mjs':'../.cache/tu-probes/symbols-reference.mjs')).default,hybridFactory=(await import(own?'../.cache/symbols-author/hybrid.mjs':'../.cache/tu-probes/symbols-hybrid.mjs')).default;
 const L=own?JSON.parse(readFileSync(new URL('../.cache/symbols-author/layout.json',import.meta.url))):JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).symbols;

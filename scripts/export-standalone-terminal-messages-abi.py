@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
-runtime = root / 'js/ported/topl-runtime.js'
+runtime = root / 'js/nethack/bindings/topl.js'
 support = root / 'nethack-c/wasm/tu-fragments/topl-support.inc'
 text = runtime.read_text()
 declaration = lambda name: json.JSONDecoder().raw_decode(text.split('const ' + name + '=', 1)[1])[0]

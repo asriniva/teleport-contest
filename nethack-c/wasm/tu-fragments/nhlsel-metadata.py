@@ -2,7 +2,7 @@
 from pathlib import Path
 import ast,json,re,subprocess
 root=Path(__file__).resolve().parents[3];pristine=root/'nethack-c/upstream/src/nhlsel.c';prepared=root/'.cache/wasm64-build/tree/src/nhlsel.c';source=pristine.read_text();assert pristine.read_bytes()==prepared.read_bytes(),'Review changed prepared NHLSEL source'
-core=(root/'js/ported/nhlsel.js').read_text();runtime=(root/'js/ported/nhlsel-runtime.js').read_text();library=(root/'nethack-c/wasm/tu-libraries/nhlsel.js').read_text();support=(root/'nethack-c/wasm/tu-fragments/nhlsel-support.inc').read_text();probe=(root/'scripts/tu-nhlsel-probe.c').read_text()
+core=(root/'js/ported/nhlsel.js').read_text();runtime=(root/'js/nethack/bindings/nhlsel.js').read_text();library=(root/'nethack-c/wasm/tu-libraries/nhlsel.js').read_text();support=(root/'nethack-c/wasm/tu-fragments/nhlsel-support.inc').read_text();probe=(root/'scripts/tu-nhlsel-probe.c').read_text()
 for c in set(re.findall(r'/\*.*?\*/',source,re.S)):assert source.count(c)==core.count(c),('Original comment multiplicity changed',c)
 clean=lambda s:re.sub(r'/\*.*?\*/|//[^\n]*','',s,flags=re.S)
 c=clean(source);j=clean(core);literals=sorted(set(ast.literal_eval(x) for x in re.findall(r'"(?:\\.|[^"\\])*"',c)));capacity=sum(len(x.encode())+1 for x in literals)

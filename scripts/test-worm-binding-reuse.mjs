@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {createWormState,withWormEnvironment} from '../js/ported/worm-runtime.js';
+import {createWormState,withWormEnvironment} from '../js/nethack/bindings/worm.js';
 const layouts=JSON.parse(await readFile(new URL('../js/wasm/tu-layouts.json',import.meta.url)));
 let builds=0,heap=new Uint8Array(65536),stack=256;
 const layout=new Proxy(Object.freeze({...layouts.worm}),{get(o,key){if(key==='pointerSize')builds++;return o[key];}});

@@ -4,7 +4,7 @@ import {resolve,dirname,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 if(process.env.TELEPORT_NATIVE_TESTS==='1')throw new Error('PAGER has no native reference fixture; Emscripten results cannot be labeled native.');
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(process.env.PAGER_PROBE_DIR??join(root,'.cache/pager-first-pass'));
-const {createPagerBridge}=await import(pathToFileURL(resolve(process.env.PAGER_RUNTIME_PATH??join(root,'js/ported/pager-runtime.js'))).href);
+const {createPagerBridge}=await import(pathToFileURL(resolve(process.env.PAGER_RUNTIME_PATH??join(root,'js/nethack/bindings/pager.js'))).href);
 const meta=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/pager-abi.json'),'utf8'));
 const options=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/pager-probe-options.json'),'utf8'));
 const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathToFileURL(join(dir,`pager-${mode}.mjs`)).href)).default));

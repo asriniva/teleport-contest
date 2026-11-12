@@ -7,7 +7,7 @@ sdk=Path(os.environ.get('EMSDK',str(r/'.cache/emsdk')))
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 assert digest(source)=='d355faebfb41d9e61e784f1ef29050a55c5ca45cd066f2f47688c6b7b7cee566';assert digest(pristine)=='7abe4855c351b90048261752bab6bcc329f6fa236da1cca0cc48e362b6ff5d6d'
 assert digest(w/'pre-edit-handoff.json')=='df20554751eb3ac119ead9a789c276c5d63b64b6aac98c5e2b8c0f61131de45f'
-core=Path(os.environ.get('TOPL_GUARD_CORE',str(r/'js/ported/topl.js'))).read_text();runtime=Path(os.environ.get('TOPL_GUARD_RUNTIME',str(r/'js/ported/topl-runtime.js'))).read_text();s=source.read_text();comments=re.findall(r'/\*.*?\*/',s,re.S)
+core=Path(os.environ.get('TOPL_GUARD_CORE',str(r/'js/ported/topl.js'))).read_text();runtime=Path(os.environ.get('TOPL_GUARD_RUNTIME',str(r/'js/nethack/bindings/topl.js'))).read_text();s=source.read_text();comments=re.findall(r'/\*.*?\*/',s,re.S)
 assert len(comments)==80 and comments==re.findall(r'/\*.*?\*/',core,re.S),'Original80 TOPL comment order/multiplicity'
 F=json.loads((w/'functions.json').read_text());names=[f['name']for f in F];assert len(F)==15 and sum(f.get('storageClass')!='static'for f in F)==10
 assert re.findall(r'export function (\w+)\(',core)==names
@@ -50,7 +50,7 @@ def strings(n):
  for child in n.get('inner',[]):strings(child)
 for f in actual:strings(f)
 (scratch/'string-values.json').write_text(json.dumps(sorted(source_strings))+'\n')
-subprocess.check_call([str(sdk/'node/24.19.0_64bit/bin/node'),str(tools/'string-values.mjs')],cwd=r,env={**os.environ,'TOPL_GUARD_STRINGS':str(scratch/'string-values.json'),'TOPL_GUARD_OUTPUT':str(scratch),'TOPL_GUARD_CORE':os.environ.get('TOPL_GUARD_CORE',str(r/'js/ported/topl.js')),'TOPL_GUARD_RUNTIME':os.environ.get('TOPL_GUARD_RUNTIME',str(r/'js/ported/topl-runtime.js'))})
+subprocess.check_call([str(sdk/'node/24.19.0_64bit/bin/node'),str(tools/'string-values.mjs')],cwd=r,env={**os.environ,'TOPL_GUARD_STRINGS':str(scratch/'string-values.json'),'TOPL_GUARD_OUTPUT':str(scratch),'TOPL_GUARD_CORE':os.environ.get('TOPL_GUARD_CORE',str(r/'js/ported/topl.js')),'TOPL_GUARD_RUNTIME':os.environ.get('TOPL_GUARD_RUNTIME',str(r/'js/nethack/bindings/topl.js'))})
 support=(r/'nethack-c/wasm/tu-fragments/topl-support.inc').read_text();assert '_test_'not in support
 for name in ['create_nhwindow','putstr','display_nhwindow','destroy_nhwindow']:assert re.search(r'teleport_topl_window_'+name+r'\([^)]*\)\{(?:return )?'+name+r'\(',support)
 assert not any(re.search(r'\b'+name+r'\([^;]*\)\{',support)for name in names),'C source policy fallback forbidden'

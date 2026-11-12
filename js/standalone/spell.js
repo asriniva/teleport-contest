@@ -1,7 +1,7 @@
 // One unchanged cached SPELL context, including source startup spellbook initialization.
 import abi from './spell-abi.json' with{type:'json'};
 import * as source from '../ported/spell.js';
-import {callSpell} from '../ported/spell-runtime.js';
+import {callSpell} from '../nethack/bindings/spell.js';
 const owners=new WeakMap();
 export function enableSpell(environment,layouts){
  if(owners.has(environment))return owners.get(environment);

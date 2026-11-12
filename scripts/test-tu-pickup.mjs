@@ -6,7 +6,7 @@ const probeDir=process.env.PICKUP_PROBE_DIR;
 const probeURL=name=>probeDir?new URL(name,new URL((probeDir.endsWith('/')?probeDir:probeDir+'/'),new URL('../',import.meta.url))):new URL('../.cache/pickup-first-pass/'+name.replace(/^pickup-fixture-/,'fixture-'),import.meta.url);
 const {default:refFactory}=await import(probeURL('pickup-reference.mjs'));
 const {default:hybridFactory}=await import(probeURL('pickup-hybrid.mjs'));
-const {callPickup}=await import(process.env.PICKUP_RUNTIME??'../js/ported/pickup-runtime.js');
+const {callPickup}=await import(process.env.PICKUP_RUNTIME??'../js/nethack/bindings/pickup.js');
 const read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url)));
 const schema=read('../nethack-c/wasm/tu-fragments/pickup-schema.json'),functions=read('../nethack-c/wasm/tu-fragments/pickup-source-metadata.json').functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
 const regionNames=JSON.parse(readFileSync(probeURL('pickup-fixture-regions.json'))),constants=JSON.parse(readFileSync(probeURL('pickup-fixture-constants.json')));

@@ -1,7 +1,7 @@
 """Actual configured PICKUP source/data/type/CPP/alias/RNG/control guard."""
 from pathlib import Path
 import json,re,hashlib,subprocess,argparse
-r=Path(__file__).resolve().parents[1];w=r/'.cache/pickup-first-pass';m=json.loads((r/'nethack-c/wasm/tu-fragments/pickup-source-metadata.json').read_text());s=json.loads((r/'nethack-c/wasm/tu-fragments/pickup-schema.json').read_text());c=(r/'nethack-c/upstream/src/pickup.c').read_text();j=(r/'js/ported/pickup.js').read_text();abi=(r/'nethack-c/wasm/tu-fragments/pickup-support.c').read_text();lib=(r/'nethack-c/wasm/tu-libraries/pickup.js').read_text();runtime=(r/'js/ported/pickup-runtime.js').read_text()
+r=Path(__file__).resolve().parents[1];w=r/'.cache/pickup-first-pass';m=json.loads((r/'nethack-c/wasm/tu-fragments/pickup-source-metadata.json').read_text());s=json.loads((r/'nethack-c/wasm/tu-fragments/pickup-schema.json').read_text());c=(r/'nethack-c/upstream/src/pickup.c').read_text();j=(r/'js/ported/pickup.js').read_text();abi=(r/'nethack-c/wasm/tu-fragments/pickup-support.c').read_text();lib=(r/'nethack-c/wasm/tu-libraries/pickup.js').read_text();runtime=(r/'js/nethack/bindings/pickup.js').read_text()
 assert c==(r/'.cache/wasm64-build/tree/src/pickup.c').read_text();assert hashlib.sha256(c.encode()).hexdigest()==m['sourceSHA256']=='915da0f8fce16461cc42a0035f7ef3e9847fc8f8ee3708a7f017ad6587383134'
 # Preserve historical pins through the exact already-reviewed builder inverse only.
 for p,h in m['compilerInputHashes'].items():

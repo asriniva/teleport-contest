@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
-import { createPortedRuntime } from '../js/ported/wasm-runtime.js';
+import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 process.env.TZ = 'UTC';
 const root = new URL('../', import.meta.url);
 const ports = JSON.parse(readFileSync(new URL('nethack-c/wasm/tu-ports.json', root)));

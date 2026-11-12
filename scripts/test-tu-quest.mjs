@@ -4,8 +4,8 @@ import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/quest-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/quest-hybrid.mjs';
-import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),layout=layouts.quest;
 const modules=[await referenceFactory(),await hybridFactory({nethackPorted:createPortedRuntime(layouts)})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function bytes(m,p,n){p=Number(p);if(n===undefined){let e=p;while(m.HEAPU8[e])e++;n=e-p;}return Buffer.from(m.HEAPU8.slice(p,p+n));}

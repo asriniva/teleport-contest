@@ -1,0 +1,55 @@
+{
+  "baselineCommit": "b81b413609d6e5243615003907752316b42a5b5d",
+  "originalCleanupCommit": "153b1fa",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "check-services-layout",
+      "exitCode": 0
+    },
+    {
+      "name": "test-binding-infrastructure",
+      "exitCode": 0
+    },
+    {
+      "name": "check-c-runtime-boundaries",
+      "exitCode": 0
+    },
+    {
+      "name": "check-c-runtime-extraction",
+      "exitCode": 0
+    },
+    {
+      "name": "check-standalone-scope",
+      "exitCode": 0
+    },
+    {
+      "name": "write-c-runtime-manifest",
+      "exitCode": 0
+    },
+    {
+      "name": "test-js-dependency-isolation",
+      "exitCode": 0
+    },
+    {
+      "name": "check-sdk-runtime-extension",
+      "exitCode": 0
+    },
+    {
+      "name": "test-standalone-vfs-capacity",
+      "exitCode": 0
+    },
+    {
+      "name": "test-standalone-mkroom-mkobj-carriers",
+      "exitCode": 0
+    }
+  ],
+  "sdkVfsChecks": 66588,
+  "mkobjAdversarialChecks": 4,
+  "portedSourcesIdenticalToSemanticBaseline": true,
+  "scope": "Committed main replay; 178 intervening changed files retained. Original complete cleanup semantic batch remains separately bound to e9207d8. No public score or default-entry change.",
+  "originalValidation": "docs/runtime-environment/services-cleanup-validation.json",
+  "newHistoricalQualifications": "SDK no-index proof computes its exact patch from the verified pre-layout bytes, retaining b81b413 repair; MKOBJ keeps verified inverse and adversarial negatives.",
+  "priorReplayBaseline": "963bdff925eeeeaab04b6f7f2491681709d27701",
+  "sourceHashes": 244
+}

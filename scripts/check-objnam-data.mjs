@@ -25,7 +25,7 @@ assert.equal(data.Japanese_items.length,14);assert.equal(data.one_off.length,23)
 assert.equal((c.match(/\bgoto\s+\w+;/g)??[]).length,49);assert.ok(!/\bgoto\s+\w+;/.test(clean),'No untranslated C goto');
 assert.equal((clean.match(/C\.Strlen_\(/g)??[]).length,14);
 assert.equal((clean.match(/C\.__assert_fail\(/g)??[]).length,2);
-assert.ok(!/\b(?:xname|doname|readobjnam)\s*:\s*[^\n]*services\./.test(fs.readFileSync('js/ported/objnam-runtime.js','utf8')),'No original policy delegated to native services');
+assert.ok(!/\b(?:xname|doname|readobjnam)\s*:\s*[^\n]*services\./.test(fs.readFileSync('js/nethack/bindings/objnam.js','utf8')),'No original policy delegated to native services');
 const support=fs.readFileSync('nethack-c/wasm/tu-objnam-support.inc','utf8');assert.ok(!/\b(?:for|while)\s*\(/.test(mask(support)),'Typed native ABI has no policy loop');
 for(const name of functions.map(f=>f.name))assert.ok(!new RegExp('\\b'+name+'\\s*\\([^;{}]*\\)\\s*\\{').test(mask(support)),name+' algorithm absent native support');
 assert.match(support,/static char objnam_buffers\[12\]\[BUFSZ\];/);

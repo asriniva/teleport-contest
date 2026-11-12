@@ -16,7 +16,7 @@ fields={}
 for name,typ,glob,field in [('head','struct instance_globals_r','gr','rip'),('name','struct instance_globals_saved_p','svp','plname'),('money','struct instance_globals_d','gd','done_money')]:
  record=records[typ.removeprefix('struct ')];row=record['fields'][field]
  fields[name]={'type':typ,'global':glob,'field':field,'offset':row['offset'],'ctype':row['ctype']}
-paths=['scripts/export-standalone-rip-abi.py','js/standalone/rip.js','js/ported/rip.js','js/ported/wasm-runtime.js','nethack-c/wasm/tu-libraries/rip.js','nethack-c/wasm/tu-support.c','nethack-c/wasm/compile-defines.json','js/wasm/tu-layouts.json','js/standalone/records.json']
+paths=['scripts/export-standalone-rip-abi.py','js/standalone/rip.js','js/ported/rip.js','js/backends/emscripten/runtime.js','nethack-c/wasm/tu-libraries/rip.js','nethack-c/wasm/tu-support.c','nethack-c/wasm/compile-defines.json','js/wasm/tu-layouts.json','js/standalone/records.json']
 data={'layout':layout,'fields':fields,'formats':formats,'sourceSha256':{p:hashlib.sha256((root/p).read_bytes()).hexdigest()for p in paths}}
 (root/'js/standalone/rip-abi.json').write_text(json.dumps(data,indent=2)+'\n')
 print('Bound original RIP bridge, global fields and format transport.')

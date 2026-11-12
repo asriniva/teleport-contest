@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import{readFileSync,writeFileSync}from'node:fs';
 import refFactory from'../.cache/dungeon-first-pass/dungeon-reference.mjs';
 import hybridFactory from'../.cache/dungeon-first-pass/dungeon-hybrid.mjs';
-import{callDungeon}from'../js/ported/dungeon-runtime.js';
+import{callDungeon}from'../js/nethack/bindings/dungeon.js';
 const schema=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/dungeon-schema.json',import.meta.url))),functions=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/dungeon-source-metadata.json',import.meta.url))).functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
 const serializerTypes=JSON.parse(readFileSync(new URL('../.cache/dungeon-first-pass/serializer-types.json',import.meta.url)));
 const output=[[],[]],ref=await refFactory({print:s=>output[0].push(['out',s]),printErr:s=>output[0].push(['err',s])}),hybrid=await hybridFactory({print:s=>output[1].push(['out',s]),printErr:s=>output[1].push(['err',s])});hybrid.nethackPorted={dungeon:callDungeon};const mods=[ref,hybrid];

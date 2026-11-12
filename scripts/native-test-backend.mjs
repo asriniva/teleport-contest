@@ -84,7 +84,7 @@ export function referenceBackend(name, emscriptenFactory) {
         return async (options = {}) => {
             // The golden build supplies these same JS dependency services to
             // remaining C callers. The original tested TU still executes in C.
-            const {createPortedRuntime} = await import('../js/ported/wasm-runtime.js');
+            const {createPortedRuntime} = await import('../js/backends/emscripten/runtime.js');
             const layouts = JSON.parse(readFileSync(new URL('js/wasm/tu-layouts.json', root)));
             return emscriptenFactory({nethackPorted:createPortedRuntime(layouts), ...options});
         };

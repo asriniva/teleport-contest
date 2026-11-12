@@ -3,9 +3,9 @@ import {referenceBackend,referenceLabel,DataView} from './native-test-backend.mj
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {withCEnvironment,C} from '../js/ported/c-runtime.js';
+import {withCEnvironment,C} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/pray.js';
-import {createPrayEnvironment} from '../js/ported/pray-runtime.js';
+import {createPrayEnvironment} from '../js/nethack/bindings/pray.js';
 const dir=resolve(process.env.PRAY_PROBE_DIR??'.cache/tu-probes'),schema=JSON.parse(await readFile(new URL('../nethack-c/wasm/tu-fragments/pray-schema.json',import.meta.url),'utf8'));
 const factory=async mode=>(await import(pathToFileURL(resolve(dir,'pray-'+mode+'.mjs')).href)).default;
 const rf=await factory('reference'),hf=await factory('hybrid'),reference=await referenceBackend('pray',rf)();

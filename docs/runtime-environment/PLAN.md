@@ -1,5 +1,7 @@
 # Extend the JavaScript C environment
 
+Runtime ownership separation and factory consolidation are documented in [SERVICES_CLEANUP_PLAN.md](SERVICES_CLEANUP_PLAN.md); earlier source paths in recorded evidence remain historical.
+
 Current execution order (2026-11-11, user-directed):
 
 1. Finish the ordinary main loop and inventory cohort: exact C recordings and actual world graphs for movement/combat, completed eating, wield/wear/remove, drop/pickup, then a changed-state save and four C/JS producer/consumer restore combinations. The two discovered movement transport mismatches are fixed through turn238; remaining checks must pass on the final snapshot.

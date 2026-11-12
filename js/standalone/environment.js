@@ -3,35 +3,35 @@ import {createNetHackRuntime} from '../nethack/runtime-bindings.js';
 // Independent environment for existing translated modules. Ports are unmodified.
 import {enableSpecialInteractions} from './special-interactions.js';
 import {createJsRuntime,CPanic} from '../nethack/runtime.js';
-import {withCEnvironment} from '../ported/c-runtime.js';
+import {withCEnvironment} from '../c-runtime/context.js';
 import * as rect from '../ported/rect.js';
 import {createRectBindings} from '../nethack/rect-bindings.js';
 import {createLinker} from '../c-runtime/linker.js';
 import publicFunctions from './public-functions.json' with {type:'json'};
 import {createStandaloneLibc} from './libc.js';
 import * as hacklib from '../ported/hacklib.js';
-import {createHacklibState,createHacklibEnvironment} from '../ported/hacklib-runtime.js';
+import {createHacklibState,createHacklibEnvironment} from '../nethack/bindings/hacklib.js';
 import * as decl from '../ported/decl.js';
-import {initializeDecl} from '../ported/decl-runtime.js';
+import {initializeDecl} from '../nethack/bindings/decl.js';
 import declStorage from './decl-storage.json' with {type:'json'};
 import * as drawing from '../ported/drawing.js';
-import {initializeDrawing} from '../ported/drawing-runtime.js';
+import {initializeDrawing} from '../nethack/bindings/drawing.js';
 import * as objects from '../ported/objects.js';
-import {createObjectsState,createObjectsEnvironment} from '../ported/objects-runtime.js';
+import {createObjectsState,createObjectsEnvironment} from '../nethack/bindings/objects.js';
 import * as monst from '../ported/monst.js';
-import {createMonstState,createMonstEnvironment} from '../ported/monst-runtime.js';
+import {createMonstState,createMonstEnvironment} from '../nethack/bindings/monst.js';
 import records from './records.json' with {type:'json'};
 import {createStdio} from '../c-runtime/stdio.js';
 import {createStandaloneLua} from './lua.js';
 import * as rnd from '../ported/rnd.js';
-import {createRndState,createRndEnvironment} from '../ported/rnd-runtime.js';
+import {createRndState,createRndEnvironment} from '../nethack/bindings/rnd.js';
 import * as sys from '../ported/sys.js';
 import {enableAddressPort} from './address-ports.js';
 import {enableSerialization} from './serialization.js';
 import * as track from '../ported/track.js';
 import {isok} from '../ported/cmd.js';
-import {createWasmDependencyRuntime} from '../services/wasm-dependency-runtime.js';
-import {filesUnder,captureGameFiles,restoreGameFiles} from '../services/game-files.js';
+import {createLibraryBindings} from '../c-runtime/library-bindings.js';
+import {filesUnder,captureGameFiles,restoreGameFiles} from '../nethack/game-files.js';
 import {shouldPersistGameFile} from '../wasm-replay-support.js';
 import {enableTerminal} from './terminal.js';
 import {enableObjectState} from './object-state.js';
@@ -270,7 +270,7 @@ export function createStandaloneEnvironment(options={}) {
     }
     function enableCommandGeometry(){register('cmd-geometry',{isok},Object.assign(Object.create(services),{i16:transport.short,i32:transport.int}));}
     function enableDependencies() {
-        const runtime=createWasmDependencyRuntime({regex:true,regexDialect:'sdk'});
+        const runtime=createLibraryBindings({regex:true,regexDialect:'sdk'});
         for(const name of ['tgetent','tgetflag','tgetnum','tgetstr','tparm','tgoto','tputs','regcomp','regexec','regerror','regfree','compressFile'])services[name]=(...args)=>runtime[name](services,...args);
         services.tgetent=(_buffer,name)=>runtime.tgetent(services,name);
         return runtime;

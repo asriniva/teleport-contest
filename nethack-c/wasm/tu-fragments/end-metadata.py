@@ -1,7 +1,7 @@
 """Read-only configured END inventory, provenance, data and ABI-source guards."""
 from pathlib import Path
 import ast,hashlib,json,re,subprocess
-r=Path(__file__).resolve().parents[3];prepared=r/'.cache/wasm64-build/tree/src/end.c';pristine=r/'nethack-c/upstream/src/end.c';source=prepared.read_text();core=(r/'js/ported/end.js').read_text();runtime=(r/'js/ported/end-runtime.js').read_text();library=(r/'nethack-c/wasm/tu-libraries/end.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/end-support.inc').read_text();layout=(r/'scripts/tu-end-layout.h').read_text()
+r=Path(__file__).resolve().parents[3];prepared=r/'.cache/wasm64-build/tree/src/end.c';pristine=r/'nethack-c/upstream/src/end.c';source=prepared.read_text();core=(r/'js/ported/end.js').read_text();runtime=(r/'js/nethack/bindings/end.js').read_text();library=(r/'nethack-c/wasm/tu-libraries/end.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/end-support.inc').read_text();layout=(r/'scripts/tu-end-layout.h').read_text()
 assert hashlib.sha256(prepared.read_bytes()).hexdigest()=='9190178742d65ea579645cfa365573a1c3f59cff7a5504856631c42a0c169296','Review changed prepared END source'
 assert hashlib.sha256(pristine.read_bytes()).hexdigest()=='86076b732d630a31f1c596548631f1af8d033f2aa8bb5987daa53eb0bc02a424','Review changed pristine END source'
 comments=re.findall(r'/\*.*?\*/',source,re.S);assert len(comments)==231

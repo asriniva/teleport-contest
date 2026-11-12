@@ -1,5 +1,7 @@
 # Common-runtime cleanup
 
+This document records the preceding cleanup checkpoint. The later [services/binding cleanup](SERVICES_CLEANUP_PLAN.md) completes ownership separation and additional factory consolidation; consult its validation record for the current isolated revision. Historical results and paths below remain unchanged.
+
 Isolated worktree: `/Users/arj/Desktop/nethack_comp/c-runtime-cleanup`.
 Branch: `cleanup/c-runtime-rect`. Original baseline: `df33dd4`.
 Rebased again onto `origin/main` at `8cf4880d8cf7fb9104635f068564a5de87523fe7`.

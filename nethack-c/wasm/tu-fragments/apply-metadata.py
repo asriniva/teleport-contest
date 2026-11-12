@@ -3,7 +3,7 @@ from pathlib import Path
 import hashlib,json,os,re,subprocess
 r=Path(__file__).resolve().parents[3];w=r/'.cache/apply-author';prepared=r/'.cache/wasm64-build/tree/src/apply.c';pristine=r/'nethack-c/upstream/src/apply.c'
 for path in [prepared,pristine]:assert hashlib.sha256(path.read_bytes()).hexdigest()=='3599e3ce2ea7ce4dac10730dc1a5496114a363dc951d5c1f0289a8575b40e24b',('APPLY source changed',path)
-source=prepared.read_text();core=(r/'js/ported/apply.js').read_text();runtime=(r/'js/ported/apply-runtime.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/apply-support.inc').read_text()
+source=prepared.read_text();core=(r/'js/ported/apply.js').read_text();runtime=(r/'js/nethack/bindings/apply.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/apply-support.inc').read_text()
 comments=re.findall(r'/\*.*?\*/',source,re.S);assert len(comments)==371
 for comment in set(comments):assert source.count(comment)==core.count(comment),('Original APPLY comment multiplicity',comment)
 F=json.loads((w/'functions.json').read_text());names=[f['name']for f in F]

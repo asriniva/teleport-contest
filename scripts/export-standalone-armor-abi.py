@@ -2,7 +2,7 @@
 """Measure existing DO_WEAR private ABI mirrors; bind source descriptors."""
 import json,hashlib,os,re,shlex,subprocess
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';source=root/'js/ported/do_wear-runtime.js';text=source.read_text()
+root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';source=root/'js/nethack/bindings/do_wear.js';text=source.read_text()
 def declaration(name):return json.JSONDecoder().raw_decode(text.split('const '+name+'=',1)[1])[0]
 schemas=declaration('schemas');globals=declaration('globals');callbacks=declaration('callbackNames');known=json.loads((root/'js/standalone/records.json').read_text())['records'];private={k:v for k,v in schemas.items()if v['ctype'].removeprefix('struct ').removeprefix('union ')not in known}
 header=root/'scripts/tu-do_wear-layout.h';flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(ref/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+d for d in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]];clang=ref/'.cache/emsdk/upstream/bin/clang'

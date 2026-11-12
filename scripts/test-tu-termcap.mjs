@@ -6,10 +6,10 @@ import {writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
-import {C,withCEnvironment} from '../js/ported/c-runtime.js';
+import {C,withCEnvironment} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/termcap.js';
-import {callTermcap,createTermcapEnvironment} from '../js/ported/termcap-runtime.js';
-import {createWasmDependencyRuntime} from '../js/services/wasm-dependency-runtime.js';
+import {callTermcap,createTermcapEnvironment} from '../js/nethack/bindings/termcap.js';
+import {createLibraryBindings} from '../js/c-runtime/library-bindings.js';
 import {checkTermcapSource} from '../nethack-c/wasm/tu-fragments/termcap-source-check.mjs';
 const callbackOnly=process.argv.includes('--callback-only');
 const jsDependencies=process.argv.includes('--js-dependencies'),unwrapped=process.argv.includes('--unwrapped')||jsDependencies,prefix=callbackOnly?'termcap-callback-':jsDependencies?'termcap-js-dependencies-':unwrapped?'termcap-unwrapped-':'termcap-';
@@ -33,7 +33,7 @@ const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await 
 const entry=await readFile('nethack-c/wasm/terminfo/x/xterm-256color');
 const text=(m,p)=>{let at=Number(p),end=at;assert.ok(at>=0&&at<m.HEAPU8.length);while(end<m.HEAPU8.length&&m.HEAPU8[end])end++;assert.ok(end<m.HEAPU8.length,'C NUL terminator');return Buffer.from(m.HEAPU8.subarray(at,end)).toString('latin1');};
 const layout=m=>{const out={};for(let i=0;i<m._probe_layout_count();i++)out[text(m,m._probe_layout_name(i))]=m._probe_layout_value(i);return out;};
-const moduleOptions=(environment={})=>{const output=[];return {probeOutput:output,...(jsDependencies?{nethackDependencies:createWasmDependencyRuntime()}:{}),noInitialRun:true,print:v=>output.push(['out',v]),printErr:v=>output.push(['err',v]),preRun:[m=>{Object.assign(m.ENV,{TERM:'xterm-256color',TERMINFO:'/nethack/terminfo',NETHACK_NO_DELAY:'1',NOMUX_MARKERS:'1',LINES:'24',COLUMNS:'80',HOME:'/home/player',LANG:'C',LC_ALL:'C',...environment});m.FS.mkdirTree('/nethack/terminfo/x');m.FS.writeFile('/nethack/terminfo/x/xterm-256color',entry);}]};};
+const moduleOptions=(environment={})=>{const output=[];return {probeOutput:output,...(jsDependencies?{nethackDependencies:createLibraryBindings()}:{}),noInitialRun:true,print:v=>output.push(['out',v]),printErr:v=>output.push(['err',v]),preRun:[m=>{Object.assign(m.ENV,{TERM:'xterm-256color',TERMINFO:'/nethack/terminfo',NETHACK_NO_DELAY:'1',NOMUX_MARKERS:'1',LINES:'24',COLUMNS:'80',HOME:'/home/player',LANG:'C',LC_ALL:'C',...environment});m.FS.mkdirTree('/nethack/terminfo/x');m.FS.writeFile('/nethack/terminfo/x/xterm-256color',entry);}]};};
 const reference=await factories[0](moduleOptions()),L=layout(reference),servicesByModule=new WeakMap(),calls=new Map();
 // wasm-ld --wrap instruments C relocations, while JS-library closures retain
 // the raw exports. This private provider sends both callers through the SAME

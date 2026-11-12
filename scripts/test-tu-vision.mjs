@@ -1,9 +1,9 @@
 import assert from './native-test-assert.mjs';
 import {assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
-import {callVision,initializeVision,createVisionEnvironment} from '../js/ported/vision-runtime.js';
+import {callVision,initializeVision,createVisionEnvironment} from '../js/nethack/bindings/vision.js';
 import * as core from '../js/ported/vision.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_VISION_AUTHOR==='1';
 const ref=(await import(own?'../.cache/vision-author/reference.mjs':'../.cache/tu-probes/vision-reference.mjs')).default;
 const hyb=(await import(own?'../.cache/vision-author/hybrid.mjs':'../.cache/tu-probes/vision-hybrid.mjs')).default;
@@ -11,7 +11,7 @@ const text=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(
 let reference=await referenceBackend('vision',ref)();const measured={};for(let i=0;i<reference._probe_layout_count();i++)measured[text(reference,reference._probe_layout_name(i))]=Number(BigInt.asIntN(64,reference._probe_layout_value(i)));
 const L=own?measured:JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).vision;
 if(own)writeFileSync(new URL('../.cache/vision-author/layout.json',import.meta.url),JSON.stringify(L,null,2));
-for(const source of [readFileSync(new URL('./test-tu-vision.mjs',import.meta.url),'utf8'),readFileSync(new URL('../js/ported/vision-runtime.js',import.meta.url),'utf8')])for(const m of source.matchAll(/\b(?:L|layout)\.([A-Z][A-Z_0-9]*|[a-z]\w*Size)\b/g))assert.ok(Object.hasOwn(L,m[1]),'compiled layout '+m[1]);
+for(const source of [readFileSync(new URL('./test-tu-vision.mjs',import.meta.url),'utf8'),readFileSync(new URL('../js/nethack/bindings/vision.js',import.meta.url),'utf8')])for(const m of source.matchAll(/\b(?:L|layout)\.([A-Z][A-Z_0-9]*|[a-z]\w*Size)\b/g))assert.ok(Object.hasOwn(L,m[1]),'compiled layout '+m[1]);
 const externals=new Set([...readFileSync(new URL('../js/ported/vision.js',import.meta.url),'utf8').replace(/\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"/g,'').matchAll(/\bC\.(\w+)/g)].map(m=>m[1]));
 const checked=new WeakSet();function validate(s){if(checked.has(s.moduleKey))return;const e=createVisionEnvironment(s,L);for(const k of externals)assert.notEqual(e[k],undefined,'native/header binding '+k);checked.add(s.moduleKey);}
 const ported={initializeVision(s){validate(s);return initializeVision(s,L);},callVision(s,n,...a){validate(s);return callVision(s,L,n,...a);}};

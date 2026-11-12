@@ -1,5 +1,130 @@
 # Upstream divergence register
 
+Final main handoff of ownership cleanup (2026-11-11): replayed on
+b81b413 after the recorder agent's checkpoint, retaining the default contest
+entry and all committed Lua/geometry/data/telemetry repairs. The SDK qualifier
+keeps that checkpoint's no-index comparison against its verified source copy;
+its import/path inverse is exact and does not consult the dirty parent checkout.
+All144 source-shaped policies and128 adapter sources still match the original
+semantic base before cleanup. The final replay passes672 contracts,244 runtime
+source pins, import/scope and historical audits, SDK qualification,66,588 VFS
+comparisons and the MKOBJ carrier scenario. Detailed full cleanup comparisons
+and retained LIGHT/Quest failures remain in their separately pinned validation
+record. Pending edits from the test-migration chat are preserved outside this
+commit, with a Git safety backup and a hash-checked path/source-pin projection.
+No pending test-migration implementation or acceptance claim is committed here.
+
+Main replay of runtime ownership cleanup (2026-11-11, original cleanup
+153b1fa): the layout/extraction recipe now starts from committed main963bdff,
+retaining its178 intervening changed files. All144 ported policies and all128
+adapter sources are identical to the original semantic baseline before cleanup.
+The replay passes672 contracts,529-module import audit,578-file production
+closure, current provenance and source selection. Main's SDK/VFS and MKOBJ
+extensions remain exact independent qualifications: SDK checks use the original
+feature range ending at the pre-layout main commit plus the verified layout
+inverse; MKOBJ's qualification keeps all four positive/adversarial cases. Current
+VFS passes66,588 original-SDK comparisons; the17-check MKOBJ carrier scenario
+passes. Older full semantic/recording evidence remains separately bound to
+its e9207d8 baseline. No default contest entry or public-score claim changes.
+See services-cleanup-main-validation.json for these replay checks.
+
+Runtime ownership and binding consolidation (2026-11-11, isolated
+`cleanup/services-layout`, baseline e9207d8): implementation and validation complete. `js/services` is removed. Its59 files have
+explicit c-runtime, Lua, independent-library, Darwin/timezone or NetHack owners.
+The128 translation bindings move from `ported/*-runtime.js` to
+`nethack/bindings/*.js`; synchronous C/R/T context moves into c-runtime and the
+mixed provider into backends/emscripten. API names now identify library bindings,
+Lua ABI, regex ABI, Lua code generation and Darwin formatting directly.
+
+The969 reviewed AST occurrences across122 bindings consolidate71 stack scopes,
+19 scalar environments across five explicit profiles,13 descriptor-memory
+implementations,13 descriptor/prototype view constructors,6 typed-record
+constructors,13 descriptor-global installers,492 native dependency forwarders
+and their3 argument mappers, plus common pointer/integer/address/heap-view
+operations. The existing record and indexed-view kernels now supply the shared
+implementation; scalar-field property construction also has one engine. NetHack
+header aliases use shared declarations without expanding BOTL's header map into
+thousands of repeated property descriptors. Module schemas, dependency names,
+static initialization and game behavior remain local.
+
+`relocate-runtime-layout.py`, `extract-binding-infrastructure.mjs`, their exact
+recipes and `check-services-layout.mjs` reproduce source changes, reject
+unrelated edits and check all144 source-shaped policies byte-for-byte after
+import-literal normalization. New build/probe inputs include transitive shared
+helpers; the Lua source list projects exactly to the original selection. C
+selection, compiler flags, frozen inputs, measured declarations, historical
+compiled pins and the explicit approved VISION correction stay intact. Two exact
+finite registry profiles preserve the existing Makefile inverse; unknown input
+bytes still fail. Historical audit inverses are development-only and verify
+actual relocated hashes. Current production imports and generic boundaries are
+checked independently. The dependency inventory distinguishes current owner
+paths from captured historical keys and keeps old artifact evidence sealed.
+
+The672 contracts compare actual old/new implementations, including original
+array helpers, field descriptors, Number/BigInt/null conversions, cache identity
+and publication, memory growth, late callbacks, receiver/error behavior and
+copyback unwinding. All19 source/header guards pass. NHLUA retains its original
+frozen hash after normalizing exactly one context import; record/stack guards
+check the new factory wiring and shared implementation rather than old inline
+spellings. Two issues found during verification—an unnecessary unbound scalar
+option and an expanded alias table—are corrected before final validation.
+Negative candidates rebase all imports and redirect their intended wrong core;
+they must still fail actual comparison assertions, not module loading.
+
+Production `.js` source excluding generated wasm output is59,930 bytes smaller
+(19,649,740 to19,589,810); two shared implementation files are added. Physical
+line count rises because header declarations are readable data. This measures
+source bytes, not bundles or speed. The real version copy/show bridge passes
+using a private copy of the bundle matching the sealed manifest. Complete
+component, dependency, recording and persistence outcomes are recorded in
+`docs/runtime-environment/services-cleanup-validation.json`. No fresh mixed
+rebuild, public-score or native-host component-equivalence claim is made.
+Final results:127/128 binding suites pass; LIGHT retains the exact prior
+id=null/id=0 diagnostic mismatch. All41 dependency checks pass, including30 Lua
+checks after restoring the checksum-verified archive, a newly compiled original-C
+regex oracle and strict isolated execution of60 modules. The47-case pager suite
+passes14,805 comparisons. Source MAIN/save/restore, ordinary death, fresh depth5
+death and all four fresh C/JS bones-consumer combinations pass. Default Quest
+eligibility retains the previous original-C failure; both complete57,628,854-byte
+C/JS results match the recorded untouched-main result hash. Negative controls
+fail actual comparisons, with original C/fixtures preserved. A final whitespace
+pass removes empty-declaration indentation; all520 production AST hashes remain
+identical to the validated revision. No known failure is waived.
+
+Separation implementation history (initial progress report, superseded by the
+current entry and final validation record):
+
+Runtime/dependency/binding separation (2026-11-11, isolated services-cleanup,
+in progress): user requested complete services ownership separation and actual
+remaining adapter-infrastructure consolidation. The initial reviewed layout moves
+59 services into c-runtime/lua/libraries/platform/nethack,128 translation bindings
+into nethack/bindings, the C/R/T scope into c-runtime/context.js and the active
+mixed bridge into backends/emscripten/runtime.js. Two misleading createWasm
+factories become createLibraryBindings/createLuaAbi; SDK regex ABI factory,
+Lua code generator and Darwin strftime names become explicit. No runtime path
+aliases or fallback copies are left in services or ported.
+
+Initial infrastructure factoring covers71 simple stack-call bodies,48 unsigned
+pointer and41 signed-int conversions, current heap-view helpers,19 complete
+scalar constructors across five explicit transport profiles,13 descriptor-global
+and16 address-global installations, and six cached descriptor constructors.
+Source-specific error text, Number/BigInt representation, null handling, array
+keys, field visibility, cached accessors/publication and copy behavior must remain
+observable contracts. NetHack alias installation is declared separately with
+per-module installation order. The scalar-field helpers share one property
+engine while retaining prefix/substring BigInt-conversion profiles.
+
+The source-layout generator records every exact old/new source hash and AST-owned
+body edit, preflights syntax and source ownership before writing, and propagates
+only proven dependency pins. Original compiled artifacts, historical receipts,
+original policy baseline, approved VISION correction and C flags remain intact.
+Previous cleanup audits inspect a hash-verified historical inverse of these
+specific source changes; this is development-only, not a production fallback.
+The new actual dependency boundary passes30 files. Earlier extraction/finite
+Makefile inverse and both unknown-byte negatives pass. Full semantic, generator,
+record/alias-profile and game-recording verification is still in progress.
+
+
 Further native-boundary checkpoint (2026-11-11; default switch gated):
 The fifth pure-JS public run completed40/44 with no deadlines, zero timeout
 errors and zero forbidden capabilities. Its count/animation-screen scope passes

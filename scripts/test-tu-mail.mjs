@@ -3,8 +3,8 @@
 import assert from './native-test-assert.mjs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { callMail } from '../js/ported/mail-runtime.js';
-import { C, R, T } from '../js/ported/c-runtime.js';
+import { callMail } from '../js/nethack/bindings/mail.js';
+import { C, R, T } from '../js/c-runtime/context.js';
 const directory = resolve(process.env.TELEPORT_MAIL_PROBE_DIR ?? '.cache/tu-probes');
 const { default: referenceFactory } = await import(pathToFileURL(resolve(directory, process.env.TELEPORT_MAIL_PROBE_DIR ? 'reference.mjs' : 'mail-reference.mjs')));
 const { default: hybridFactory } = await import(pathToFileURL(resolve(directory, process.env.TELEPORT_MAIL_PROBE_DIR ? 'hybrid.mjs' : 'mail-hybrid.mjs')));

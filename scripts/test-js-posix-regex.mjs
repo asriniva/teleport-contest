@@ -8,7 +8,7 @@ import { pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import vm from 'node:vm';
-import * as regex from '../js/services/posix-regex.js';
+import * as regex from '../js/libraries/regex/posix.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const work = path.join(root, '.cache/js-dependency-regex');
@@ -188,7 +188,7 @@ if (process.argv.includes('--wasm-cross-check')) {
   // Optional extra check against the actual existing Emscripten libc, without
   // C-locale shims. The current memory64 reference requires the SDK Node24;
   // default/native/production tests run on Node22. Its wrapper exposes eflags=0.
-  const factory = (await import(pathToFileURL(path.join(root, '.cache/tu-probes/posixregex-reference.mjs')))).default;
+  const factory = (await import(pathToFileURL(process.env.POSIX_REGEX_WASM_ORACLE ?? path.join(root, '.cache/tu-probes/posixregex-reference.mjs')))).default;
   const reference = await factory();
   const allocate = value => {
     const data = bytes(value), pointer = reference._malloc(BigInt(data.length + 1));
@@ -247,7 +247,7 @@ for (const result of cache.values()) if (result.handle) regex.freePosixRegex(res
 
 // Evaluate production source with no importable host capabilities. Unlike
 // merely checking import strings, this fails if startup attempts host access.
-const production = fs.readFileSync(path.join(root, 'js/services/posix-regex.js'), 'utf8');
+const production = fs.readFileSync(path.join(root, 'js/libraries/regex/posix.js'), 'utf8');
 assert.equal(/\bimport(?:\s|\()/.test(production.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '')), false);
 const context = vm.createContext({ Uint8Array, RegExp: undefined, WebAssembly: undefined,
   process: undefined, fetch: undefined, require: undefined, Buffer: undefined });

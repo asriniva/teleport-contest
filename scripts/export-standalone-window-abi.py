@@ -8,7 +8,7 @@ def declaration(file,name):
   match=re.match(r'\s*const '+re.escape(name)+r'\s*=\s*(.*);\s*$',line)
   if match:return json.loads(match[1])
  raise RuntimeError('Changed descriptor '+str(file)+':'+name)
-w=root/'js/ported/windows-runtime.js';t=root/'js/ported/wintty-runtime.js'
+w=root/'js/nethack/bindings/windows.js';t=root/'js/nethack/bindings/wintty.js'
 data={'windows':{name:declaration(w,name)for name in ['fields','ptrs','longs','ulongs','globalfields','names','callbacks']},'wintty':{name:declaration(t,name)for name in ['schema','nativeReturns','dataTypes']},'callbacks':{},'enums':{}}
 flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+d for d in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]]
 clang=ref/'.cache/emsdk/upstream/bin/clang';headers=set()

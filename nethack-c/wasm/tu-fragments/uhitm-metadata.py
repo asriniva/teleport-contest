@@ -3,7 +3,7 @@ from pathlib import Path
 import hashlib,json,os,re,subprocess
 r=Path(__file__).resolve().parents[3];SDK=Path(os.environ.get('EMSDK',str(r/'.cache/emsdk')));w=r/'.cache/uhitm-author';tools=r/'nethack-c/wasm/tu-fragments/tu137-group-a/uhitm-source-tools';outdir=Path(os.environ.get('UHITM_GUARD_WORK',str(r/'.cache/tu137-shadow-work/uhitm-guard'))).resolve();outdir.mkdir(parents=True,exist_ok=True);guard_env={**os.environ,'UHITM_GUARD_WORK':str(outdir)};prepared=r/'.cache/wasm64-build/tree/src/uhitm.c';pristine=r/'nethack-c/upstream/src/uhitm.c'
 for path in [prepared,pristine]:assert hashlib.sha256(path.read_bytes()).hexdigest()=='4cc2f8a0ffe0121801a777978a9a555a063db720e0fe972308fb6ab0e96feb12',('UHITM source changed',path)
-source=prepared.read_text();core=Path(os.environ.get('UHITM_GUARD_CORE',str(r/'js/ported/uhitm.js'))).read_text();runtime=(r/'js/ported/uhitm-runtime.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/uhitm-support.inc').read_text()
+source=prepared.read_text();core=Path(os.environ.get('UHITM_GUARD_CORE',str(r/'js/ported/uhitm.js'))).read_text();runtime=(r/'js/nethack/bindings/uhitm.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/uhitm-support.inc').read_text()
 comments=re.findall(r'/\*.*?\*/',source,re.S);assert len(comments)==783
 for comment in set(comments):assert source.count(comment)==core.count(comment),('Original UHITM comment multiplicity',comment)
 F=json.loads((w/'functions.json').read_text());names=[f['name']for f in F]

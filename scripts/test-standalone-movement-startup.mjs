@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {pathToFileURL} from 'node:url';
 import {createStandaloneEnvironment} from '../js/standalone/environment.js';
-import {createNativeTerminal} from '../js/services/native-terminal.js';
+import {createNativeTerminal} from '../js/platform/darwin/terminal.js';
 import {createTerminalDevices} from '../js/standalone/unix-terminal.js';
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),seed=1n;
 const directory=path.resolve(process.env.STANDALONE_MOVEMENT_STARTUP_ORACLE||'.cache/standalone-movement-startup-v2');

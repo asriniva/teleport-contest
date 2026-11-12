@@ -48,7 +48,7 @@ def main():
     root = pathlib.Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--zoneinfo', type=pathlib.Path, default=pathlib.Path('/usr/share/zoneinfo'))
-    parser.add_argument('--output', type=pathlib.Path, default=root/'js/services/native-timezone-data.js')
+    parser.add_argument('--output', type=pathlib.Path, default=root/'js/platform/timezone/tzdb.js')
     parser.add_argument('--expect-version', default='2026c')
     args = parser.parse_args()
     version = (args.zoneinfo/'+VERSION').read_text().strip()

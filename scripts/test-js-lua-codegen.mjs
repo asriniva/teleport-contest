@@ -1,7 +1,7 @@
 /** Strict native5.4.8 compiler parity gate. --report writes differences without
  * succeeding the parity gate; default fails until ALL compared fields match. */
 import assert from'node:assert/strict';import{readFileSync,writeFileSync,mkdirSync,readdirSync,existsSync}from'node:fs';import{execFileSync}from'node:child_process';import{resolve}from'node:path';import{fileURLToPath}from'node:url';import{isDeepStrictEqual}from'node:util';
-import{luaFunctionLine}from'../js/services/lua-debug.js';import{isLuaString,luaStringBytes}from'../js/services/lua/lobject.js';import{compileLuaSource}from'../js/services/lua-source-compiler.js';import{loadLuaChunk,decodeLuaInstruction,LUA_OPCODES}from'../js/services/lua-codegen.js';
+import{luaFunctionLine}from'../js/lua/debug.js';import{isLuaString,luaStringBytes}from'../js/lua/lobject.js';import{compileLuaSource}from'../js/lua/source-compiler.js';import{loadLuaChunk,decodeLuaInstruction,LUA_OPCODES}from'../js/lua/codegen.js';
 const root=fileURLToPath(new URL('../',import.meta.url)),scratch=resolve(root,'.cache/js-lua-debug'),src=resolve(root,'.cache/js-dependency-lua/lua-5.4.8/src');mkdirSync(scratch,{recursive:true});
 const input=resolve(scratch,'codegen-input.lua'),binary=resolve(scratch,'codegen-input.luac'),luac=resolve(scratch,'luac');
 if(!existsSync(luac))execFileSync(resolve(root,'.cache/wasm64-build/host-cc'),['-O2','-I'+src,...readdirSync(src).filter(n=>n.endsWith('.c')&&n!=='lua.c').map(n=>resolve(src,n)),'-lm','-o',luac]);

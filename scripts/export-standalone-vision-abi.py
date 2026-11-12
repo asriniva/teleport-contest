@@ -2,7 +2,7 @@
 """Export existing VISION adapter descriptors; measured fields stay in records."""
 import hashlib,json
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];runtime=root/'js/ported/vision-runtime.js'
+root=Path(__file__).resolve().parents[1];runtime=root/'js/nethack/bindings/vision.js'
 def declaration(name):
  line=next(s for s in runtime.read_text().splitlines()if s.startswith('const '+name+'='))
  return json.loads(line[len('const '+name+'='):-1])

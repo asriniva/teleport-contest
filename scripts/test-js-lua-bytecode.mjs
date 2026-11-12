@@ -1,7 +1,7 @@
 /** Native5.4.8 binary prototype roundtrip, execution and actual opcode traces. */
 import assert from 'node:assert/strict';import{readFileSync,writeFileSync,mkdirSync,readdirSync}from'node:fs';import{execFileSync,spawnSync}from'node:child_process';import{fileURLToPath}from'node:url';import{resolve}from'node:path';
-import{NethackLuaBudget,LuaTimeLimitError}from'../js/services/lua-debug.js';
-import{createLuaBytecodeVM}from'../js/services/lua-bytecode-vm.js';import{compileLuaSource}from'../js/services/lua-source-compiler.js';import{loadLuaChunk,dumpLuaChunk}from'../js/services/lua-codegen.js';import{LuaTable,LuaUserdata,LuaError,isLuaString,luaStringBytes}from'../js/services/lua/lobject.js';
+import{NethackLuaBudget,LuaTimeLimitError}from'../js/lua/debug.js';
+import{createLuaBytecodeVM}from'../js/lua/bytecode-vm.js';import{compileLuaSource}from'../js/lua/source-compiler.js';import{loadLuaChunk,dumpLuaChunk}from'../js/lua/codegen.js';import{LuaTable,LuaUserdata,LuaError,isLuaString,luaStringBytes}from'../js/lua/lobject.js';
 const root=fileURLToPath(new URL('../',import.meta.url)),scratch=resolve(root,'.cache/js-lua-debug'),src=resolve(root,'.cache/js-dependency-lua/lua-5.4.8/src');mkdirSync(scratch,{recursive:true});
 let c=readFileSync(resolve(root,'scripts/test-js-lua.mjs'),'utf8').match(/writeFileSync\(resolve\(scratch, 'oracle.c'\), String.raw`([\s\S]*?)`\);/)[1];
 c=c.replace('#include "lualib.h"','#include "lualib.h"\n#include "lstate.h"\n#include "ldebug.h"');

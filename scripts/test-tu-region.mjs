@@ -1,9 +1,9 @@
 import assert from './native-test-assert.mjs';
 import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
-import {callRegion} from '../js/ported/region-runtime.js';
+import {callRegion} from '../js/nethack/bindings/region.js';
 import * as core from '../js/ported/region.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_REGION_AUTHOR==='1';
 const ref=(await import(own?'../.cache/region-author/reference.mjs':'../.cache/tu-probes/region-reference.mjs')).default,hyb=(await import(own?'../.cache/region-author/hybrid.mjs':'../.cache/tu-probes/region-hybrid.mjs')).default;
 let reference=await referenceBackend('region',ref)();

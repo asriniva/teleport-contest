@@ -4,7 +4,7 @@ import ast,json,re,subprocess
 root=Path(__file__).resolve().parents[3]
 source=(root/'nethack-c/upstream/src/getpos.c').read_text()
 assert source==(root/'.cache/wasm64-build/tree/src/getpos.c').read_text(),'Review changed prepared GETPOS source'
-core=(root/'js/ported/getpos.js').read_text();library=(root/'nethack-c/wasm/tu-libraries/getpos.js').read_text();support=(root/'nethack-c/wasm/tu-fragments/getpos-support.inc').read_text();runtime=(root/'js/ported/getpos-runtime.js').read_text()
+core=(root/'js/ported/getpos.js').read_text();library=(root/'nethack-c/wasm/tu-libraries/getpos.js').read_text();support=(root/'nethack-c/wasm/tu-fragments/getpos-support.inc').read_text();runtime=(root/'js/nethack/bindings/getpos.js').read_text()
 clean=re.sub(r'/\*.*?\*/|//[^\n]*',lambda m:'\n'*m[0].count('\n'),source,flags=re.S)
 literals=sorted(set(ast.literal_eval(x) for x in re.findall(r'"(?:\\.|[^"\\])*"',clean)));capacity=sum(len(x.encode())+1 for x in literals)
 assert json.loads(re.search(r'var sourceLiterals=new Set\((\[[^\n]*\])\);',library)[1])==literals

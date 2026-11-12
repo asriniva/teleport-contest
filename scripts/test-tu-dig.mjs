@@ -1,7 +1,7 @@
 import {DataView,Int32Array,referenceBackend,referenceLabel,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
-import{callDig}from'../js/ported/dig-runtime.js';import * as core from '../js/ported/dig.js';import{C,R,T}from'../js/ported/c-runtime.js';
+import{callDig}from'../js/nethack/bindings/dig.js';import * as core from '../js/ported/dig.js';import{C,R,T}from'../js/c-runtime/context.js';
 const author=process.env.TELEPORT_DIG_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url),referenceFactory=(await import(new URL('dig-reference.mjs',dir))).default,hybridFactory=(await import(new URL('dig-hybrid.mjs',dir))).default,ref=await referenceBackend('dig',referenceFactory)();
 function text(m,p){if(!p)return null;let e=Number(p);while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(Number(p),e)).toString();}
 const L={size:Number(ref._probe_context_size())};for(let i=0;i<ref._probe_layout_count();i++){const k=text(ref,ref._probe_layout_name(i)),v=ref._probe_layout_value(i);L[k]=/^(M1_|M2_|W_)/.test(k)||['LEFT_SIDE','RIGHT_SIDE'].includes(k)?BigInt.asUintN(64,v).toString():Number(BigInt.asIntN(64,v));}

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {resolve,dirname,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {createTeleportBridge} from '../js/ported/teleport-runtime.js';
+import {createTeleportBridge} from '../js/nethack/bindings/teleport.js';
 if(process.env.TELEPORT_NATIVE_TESTS==='1')throw new Error('TELEPORT has no native reference fixture; Emscripten results cannot be labeled native.');
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(process.env.TELEPORT_PROBE_DIR??join(root,'.cache/teleport-first-pass'));
 const meta=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/teleport-abi.json'),'utf8'));

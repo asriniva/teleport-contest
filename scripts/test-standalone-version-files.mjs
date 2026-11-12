@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';import {fileURLToPath,pathToFileURL} from 'node:url';
 import {createStandaloneEnvironment} from '../js/standalone/environment.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 
 if(!process.argv.includes('--worker')){
  const result=spawnSync(process.execPath,[fileURLToPath(import.meta.url),'--worker'],{env:{...process.env,TZ:'UTC'},encoding:'utf8',timeout:60000,maxBuffer:8*1024*1024});process.stdout.write(result.stdout||'');assert.equal(result.status,0,result.error||result.stderr||result.stdout);

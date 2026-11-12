@@ -1,6 +1,6 @@
 // Original EmC INSIGHT versus actual imported JS; foreign game/UI dependencies controlled.
 import assert from 'node:assert/strict';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
-import * as data from '../js/ported/insight.js';import{callInsight,initializeInsight}from'../js/ported/insight-runtime.js';import{C,R,T}from'../js/ported/c-runtime.js';
+import * as data from '../js/ported/insight.js';import{callInsight,initializeInsight}from'../js/nethack/bindings/insight.js';import{C,R,T}from'../js/c-runtime/context.js';
 const custom=process.env.TELEPORT_INSIGHT_PROBE_DIR,dir=resolve(custom??'.cache/tu-probes'),path=k=>pathToFileURL(resolve(dir,(custom?'':'insight-')+k+'.mjs'));
 const{default:rf}=await import(path('reference')),{default:hf}=await import(path('hybrid'));const reference=await rf();
 function text(m,p){p=Number(p);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}

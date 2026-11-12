@@ -1,6 +1,7 @@
 // Reproducible, reversible extraction of identical C adapter mechanics.
 // Default is verification. --write accepts only exact baseline or generated files.
 import fs from 'node:fs';
+import {readBeforeLayout,writeBeforeLayout,existsBeforeLayout} from './services-layout-audit.mjs';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
@@ -316,10 +317,10 @@ function render(specs,{legacyArrowBlocks=false,namespaceImports=true}={}){
 }
 const result=render(specifications);
 let previous;
-if(fs.existsSync(receiptFile)){
- const receipt=JSON.parse(fs.readFileSync(receiptFile));
+if(existsBeforeLayout(receiptFile)){
+ const receipt=JSON.parse(readBeforeLayout(receiptFile));
  assert.deepEqual(receipt.specifications,specifications.slice(0,receipt.specifications.length));
- const actual=fs.readFileSync(receiptFile,'utf8');
+ const actual=readBeforeLayout(receiptFile,'utf8');
  for(const namespaceImports of [true,false])for(const legacyArrowBlocks of [false,true]){
   const candidate=render(receipt.specifications,{namespaceImports,legacyArrowBlocks});
   if(actual===candidate.outputs.get(receiptFile))previous=candidate;
@@ -333,9 +334,9 @@ for(const[file,source]of result.outputs)if(file.endsWith('.js')){
  if(file===helperFile){const visit=node=>{if(!node||typeof node!=='object')return;assert.notEqual(node.type,'ThisExpression','Helper observes call receiver');if(node.type==='Identifier')assert.notEqual(node.name,'arguments','Helper observes implicit arguments');for(const[k,v]of Object.entries(node)){if(['start','end'].includes(k))continue;if(Array.isArray(v))v.forEach(visit);else if(v&&typeof v==='object')visit(v);}};visit(ast);}
 }
 for(const[file,expected]of result.outputs){
- const actual=fs.existsSync(file)?fs.readFileSync(file,'utf8'):null;
+ const actual=existsBeforeLayout(file)?readBeforeLayout(file,'utf8'):null;
  if(process.argv.includes('--write'))assert.ok(actual===null||actual===expected||actual===originals.get(file)||actual===previous?.outputs.get(file),'Refusing unknown source '+file);
  else assert.equal(actual,expected,'Extraction differs '+file);
 }
-if(process.argv.includes('--write'))for(const[file,expected]of result.outputs)fs.writeFileSync(file,expected);
+if(process.argv.includes('--write'))for(const[file,expected]of result.outputs)writeBeforeLayout(file,expected);
 console.log('PASS: '+result.receipts.length+' adapters / '+[...result.counts.values()].reduce((a,b)=>a+b,0)+' exact helper extractions, complete byte inverses.');

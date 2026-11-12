@@ -4,7 +4,7 @@ import ast,json,re,subprocess
 root=Path(__file__).resolve().parents[3]
 source=(root/'nethack-c/upstream/src/topten.c').read_text();prepared=root/'.cache/wasm64-build/tree/src/topten.c'
 assert source==prepared.read_text(),'Review changed prepared TOPTEN source'
-core=(root/'js/ported/topten.js').read_text();library=(root/'nethack-c/wasm/tu-libraries/topten.js').read_text();support=(root/'nethack-c/wasm/tu-fragments/topten-support.inc').read_text();runtime=(root/'js/ported/topten-runtime.js').read_text();layout=(root/'scripts/tu-topten-layout.h').read_text();probe=(root/'scripts/tu-topten-probe.c').read_text()
+core=(root/'js/ported/topten.js').read_text();library=(root/'nethack-c/wasm/tu-libraries/topten.js').read_text();support=(root/'nethack-c/wasm/tu-fragments/topten-support.inc').read_text();runtime=(root/'js/nethack/bindings/topten.js').read_text();layout=(root/'scripts/tu-topten-layout.h').read_text();probe=(root/'scripts/tu-topten-probe.c').read_text()
 clean=re.sub(r'/\*.*?\*/|//[^\n]*',lambda m:'\n'*m[0].count('\n'),source,flags=re.S)
 for comment in set(re.findall(r'/\*.*?\*/',source,re.S)):
  assert source.count(comment)==core.count(comment),('Original comment multiplicity changed',comment)

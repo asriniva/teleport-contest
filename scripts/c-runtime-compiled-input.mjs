@@ -1,30 +1,31 @@
-// Development-only input guard for the exact reviewed JS-helper extraction.
-// Original compiled records remain immutable; unrelated inputs use raw hashes.
+// Immutable compiled pins plus exact, independently reproducible source-layout inverses.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-let extractionChecked=false;
-const reviewedDependencies=new Map();
-export const compiledInputDependencies=()=>[...reviewedDependencies];
-const digest=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
-export function assertCompiledInput(file,expected,label='compiled input') {
-    const actual=digest(fs.readFileSync(file));
-    if(actual===expected)return actual;
-    const receipt=JSON.parse(fs.readFileSync('docs/runtime-environment/c-runtime-helper-extraction.json'));
-    const relative=path.relative(process.cwd(),path.resolve(file));
-    const entry=receipt.files.find(row=>row.file===relative);
-    assert.ok(entry&&entry.beforeSha256===expected&&entry.afterSha256===actual,'stale '+label+':'+file);
-    if(!extractionChecked){
-        execFileSync(process.execPath,['scripts/extract-c-runtime-helpers.mjs'],{env:{...process.env,STANDALONE_REFERENCE_ROOT:process.env.STANDALONE_REFERENCE_ROOT??process.cwd()},stdio:'pipe'});
-        assert.equal(digest(fs.readFileSync(receipt.helperFile)),receipt.helperSha256);
-        reviewedDependencies.set(receipt.helperFile,receipt.helperSha256);
-        reviewedDependencies.set('docs/runtime-environment/c-runtime-helper-extraction.json',digest(fs.readFileSync('docs/runtime-environment/c-runtime-helper-extraction.json')));
-        extractionChecked=true;
-    }
-    const original=execFileSync('git',['show',receipt.baselineCommit+':'+relative]);
-    assert.equal(digest(original),expected,'Historical input inverse differs '+file);
-    console.log('Reviewed exact JS-helper input inverse: '+relative+'; original compiled pin retained');
-    return actual;
+import {currentSourcePath,readBeforeLayout} from './services-layout-audit.mjs';
+let checked=false;const dependencies=new Map();
+const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
+export const compiledInputDependencies=()=>[...dependencies];
+export function assertCompiledInput(file,expected,label='compiled input'){
+ const current=currentSourcePath(file),actual=digest(fs.readFileSync(current));
+ if(actual===expected)return actual;
+ const before=readBeforeLayout(file),historical=digest(before);
+ if(historical!==expected){
+  const receipt=JSON.parse(fs.readFileSync('docs/runtime-environment/c-runtime-helper-extraction.json'));
+  const relative=path.relative(process.cwd(),path.resolve(file));
+  const entry=receipt.files.find(r=>r.file===relative);
+  assert.ok(entry&&entry.beforeSha256===expected&&entry.afterSha256===historical,'stale '+label+':'+file);
+  assert.equal(digest(execFileSync('git',['show',receipt.baselineCommit+':'+relative],{maxBuffer:32*1024*1024})),expected);
+  assert.equal(digest(readBeforeLayout(receipt.helperFile)),receipt.helperSha256);
+ }
+ if(!checked){
+  execFileSync(process.execPath,['scripts/check-services-layout.mjs'],{stdio:'pipe'});
+  execFileSync(process.execPath,['scripts/extract-c-runtime-helpers.mjs'],{env:{...process.env,STANDALONE_REFERENCE_ROOT:process.env.STANDALONE_REFERENCE_ROOT??process.cwd()},stdio:'pipe'});
+  const layout=JSON.parse(fs.readFileSync('docs/runtime-environment/services-layout.json'));
+  for(const p of ['docs/runtime-environment/services-layout.json','docs/runtime-environment/binding-infrastructure.json','docs/runtime-environment/c-runtime-helper-extraction.json',...Object.keys(layout.supportSourceSha256),...Object.keys(JSON.parse(fs.readFileSync('docs/runtime-environment/c-runtime-manifest.json')).sha256)])dependencies.set(p,digest(fs.readFileSync(p)));
+  checked=true;
+ }
+ console.log('Reviewed source-layout input inverse: '+file+'; original compiled pin retained');return actual;
 }

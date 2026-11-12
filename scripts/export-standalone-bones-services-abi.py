@@ -16,7 +16,7 @@ for name,number,target,args in re.findall(r'^\s*(\w+):\([^)]*\)=>(Number\()?_(\w
     calls[name]={'target':target,'number':bool(number),'coercions':[kind for kind,_ in coercions],'prototype':public[target]}
 source=root/'js/ported/bones.js'
 names=re.findall(r'^export function (\w+)\(',source.read_text(),re.M)
-paths=[Path(__file__).resolve(),library,source,root/'js/ported/bones-runtime.js',root/'nethack-c/wasm/tu-fragments/bones-support.c',root/'js/standalone/bones-services.js',root/'js/standalone/public-functions.json']
+paths=[Path(__file__).resolve(),library,source,root/'js/nethack/bindings/bones.js',root/'nethack-c/wasm/tu-fragments/bones-support.c',root/'js/standalone/bones-services.js',root/'js/standalone/public-functions.json']
 data={'calls':calls,'public':{name:public[name]for name in names if name in public},'sourceSha256':{str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest()for p in paths}}
 (root/'js/standalone/bones-services-abi.json').write_text(json.dumps(data,indent=2)+'\n')
 print(f'Bound BONES: {len(calls)} native calls/{len(data["public"])} public entries')

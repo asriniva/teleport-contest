@@ -1,10 +1,10 @@
 import assert from './native-test-assert.mjs';
 import {referenceBackend,assertStackRestored} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
-import {callBotl,botlSchema,botlGlobals} from '../js/ported/botl-runtime.js';
+import {callBotl,botlSchema,botlGlobals} from '../js/nethack/bindings/botl.js';
 import * as data from '../js/ported/botl-data.js';
 import {memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
-import {C,R,T,withCEnvironment} from '../js/ported/c-runtime.js';
+import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
 if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('BOTL has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for explicit Emscripten diagnostics.');
 const own=process.env.TELEPORT_BOTL_AUTHOR==='1';
 const referenceFactory=(await import(own?'../.cache/botl-author/reference.mjs':'../.cache/tu-probes/botl-reference.mjs')).default;

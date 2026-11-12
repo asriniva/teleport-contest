@@ -6,7 +6,7 @@ import {resolve} from 'node:path';
 const probeDir=resolve(process.env.MKLEV_PROBE_DIR??'.cache/mklev-first-pass');
 const {default:refFactory}=await import(pathToFileURL(resolve(probeDir,'mklev-reference.mjs')));
 const {default:hybridFactory}=await import(pathToFileURL(resolve(probeDir,'mklev-hybrid.mjs')));
-const {callMklev}=await import(process.env.MKLEV_RUNTIME??'../js/ported/mklev-runtime.js');
+const {callMklev}=await import(process.env.MKLEV_RUNTIME??'../js/nethack/bindings/mklev.js');
 const schema=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/mklev-schema.json',import.meta.url))),metadata=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/mklev-source-metadata.json',import.meta.url))),functions=metadata.functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
 const ref=await refFactory(),hybrid=await hybridFactory();hybrid.nethackPorted={mklev:callMklev};const mods=[ref,hybrid];
 const testConstants=["ALTAR", "DOOR", "FILL_NORMAL", "HWALL", "MOAT", "OROOM", "POOL", "ROOM", "SDOOR", "STONE", "TELEP_TRAP", "WATER", "all_themes", "most_themes", "tut_themes"];

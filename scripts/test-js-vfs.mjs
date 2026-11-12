@@ -5,7 +5,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import vm from 'node:vm';
 import { CVFS, VFSError, VFS_ERRNO, O_RDONLY, O_WRONLY, O_RDWR, O_CREAT, O_EXCL,
-  O_TRUNC, O_APPEND, O_DIRECTORY } from '../js/services/c-vfs.js';
+  O_TRUNC, O_APPEND, O_DIRECTORY } from '../js/c-runtime/vfs.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const work = path.join(root, '.cache/js-dependency-vfs');
@@ -242,7 +242,7 @@ assert.equal(large.fstat(unlinked).size, savePayload.length);
 assert.equal(large.exportSnapshot().entries.some(entry => entry.path === '/save.Z'), false);
 large.close(unlinked);
 
-const production = fs.readFileSync(path.join(root, 'js/services/c-vfs.js'), 'utf8');
+const production = fs.readFileSync(path.join(root, 'js/c-runtime/vfs.js'), 'utf8');
 const context = vm.createContext({ Uint8Array, TextEncoder, TextDecoder,
   WebAssembly: undefined, process: undefined, fetch: undefined, require: undefined, Buffer: undefined });
 vm.runInContext(production.replace(/\bexport\s+/g, '') + `

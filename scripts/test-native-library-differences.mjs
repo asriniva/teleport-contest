@@ -2,7 +2,7 @@
 // Emscripten C is a diagnostic witness, never an alternative expected JS value.
 import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync} from 'node:fs';
-import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
+import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 process.env.TELEPORT_NATIVE_TESTS='1';
 process.env.TZ='UTC';
 const {referenceBackend}=await import('./native-test-backend.mjs');

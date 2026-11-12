@@ -4,8 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { createLua } from '../js/services/lua/lua.js';
-import { isLuaString, luaStringBytes } from '../js/services/lua/lobject.js';
+import { createLua } from '../js/lua/lua.js';
+import { isLuaString, luaStringBytes } from '../js/lua/lobject.js';
 const root = fileURLToPath(new URL('../', import.meta.url));
 if (Number(process.versions.node.split('.')[0]) < 24) {
   const result = spawnSync(path.join(root, '.cache/emsdk/node/24.19.0_64bit/bin/node'), [fileURLToPath(import.meta.url)], { stdio: 'inherit' });

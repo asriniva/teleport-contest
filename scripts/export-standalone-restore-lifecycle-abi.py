@@ -3,7 +3,7 @@
 import hashlib,json,os,re,shlex,subprocess,tempfile
 from pathlib import Path
 root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree'
-runtime=root/'js/ported/restore-runtime.js';source=tree/'src/restore.c';support=root/'nethack-c/wasm/tu-restore-support.inc';types=root/'nethack-c/wasm/tu-restore-types.h';library=root/'nethack-c/wasm/tu-libraries/restore.js';header=root/'scripts/tu-restore-layout.h'
+runtime=root/'js/nethack/bindings/restore.js';source=tree/'src/restore.c';support=root/'nethack-c/wasm/tu-restore-support.inc';types=root/'nethack-c/wasm/tu-restore-types.h';library=root/'nethack-c/wasm/tu-libraries/restore.js';header=root/'scripts/tu-restore-layout.h'
 text=runtime.read_text();decode=json.JSONDecoder();decl=lambda name:decode.raw_decode(text.split('const '+name+'=',1)[1])[0];schemas,globals_=decl('schemas'),decl('globals')
 known=json.loads((root/'js/standalone/records.json').read_text())['records'];private={name:row for name,row in schemas.items()if row['ctype'].removeprefix('struct ').removeprefix('union ')not in known}
 if set(private)!={'bucket','restore_id_pair'}:raise ValueError('Review changed RESTORE private records')

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';import {writeFileSync} from 'node:fs';import{isAbsolute}from'node:path';import{pathToFileURL}from'node:url';
 const out=process.env.UTILITY_TILE2BMP_OUT;if(!out||!isAbsolute(out))throw Error('Explicit absolute UTILITY_TILE2BMP_OUT required');
-const rf=(await import(pathToFileURL(out+'/reference.mjs'))).default,hf=(await import(pathToFileURL(out+'/hybrid.mjs'))).default;import{createUtility}from'../js/ported-utilities/tile2bmp/runtime.mjs';import{C,R,T}from'../js/ported/c-runtime.js';
+const rf=(await import(pathToFileURL(out+'/reference.mjs'))).default,hf=(await import(pathToFileURL(out+'/hybrid.mjs'))).default;import{createUtility}from'../js/ported-utilities/tile2bmp/runtime.mjs';import{C,R,T}from'../js/c-runtime/context.js';
 const results=[];let growth=false;
 const keys='.ABCDEFGHIJKLMNOPQRSTUVWXYZ0abcdefghijklmnopqrstuvwxyz123456789';
 function palette(n=28,flavor=0){return Array.from({length:n},(_,i)=>`${keys[i]} = (${(i*7+flavor)%256}, ${(i*11+flavor)%256}, ${(i*13+flavor)%256})\n`).join('');}

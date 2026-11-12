@@ -2,7 +2,7 @@
 """Native type proof for additional public entries on the existing MAKEMON owner."""
 import hashlib,json,os,re,subprocess,tempfile
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];ref=Path(os.environ.get('STANDALONE_REFERENCE_ROOT',root));tree=ref/'.cache/wasm64-build/tree';runtime=root/'js/ported/makemon-runtime.js';public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions'];params=json.loads(re.search(r'const params=(\{[^\n]+\});',runtime.read_text())[1]);names=['mkclass_poly','clone_mon','unmakemon','set_mimic_sym','bagotricks','summon_furies','dump_mongen'];types={n:public[n]for n in names}
+root=Path(__file__).resolve().parents[1];ref=Path(os.environ.get('STANDALONE_REFERENCE_ROOT',root));tree=ref/'.cache/wasm64-build/tree';runtime=root/'js/nethack/bindings/makemon.js';public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions'];params=json.loads(re.search(r'const params=(\{[^\n]+\});',runtime.read_text())[1]);names=['mkclass_poly','clone_mon','unmakemon','set_mimic_sym','bagotricks','summon_furies','dump_mongen'];types={n:public[n]for n in names}
 flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(ref/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+v for v in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]]
 with tempfile.TemporaryDirectory(prefix='makemon-public-')as d:
  p=Path(d)/'proof.c';body='#include "hack.h"\n';

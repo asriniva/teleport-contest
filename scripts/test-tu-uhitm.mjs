@@ -1,9 +1,9 @@
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {callUhitm,createUhitmEnvironment} from '../js/ported/uhitm-runtime.js';
+import {callUhitm,createUhitmEnvironment} from '../js/nethack/bindings/uhitm.js';
 import * as core from '../js/ported/uhitm.js';
 if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('UHITM has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for the explicit Emscripten diagnostic.');
 const W=resolve(process.env.TELEPORT_UHITM_PROBE_DIR??'.cache/uhitm-author'), url=name=>pathToFileURL(resolve(W,name)).href;

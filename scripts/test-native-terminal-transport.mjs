@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import {createNativeTerminal} from '../js/services/native-terminal.js';
-import abi from '../js/services/native-terminal-abi.json' with {type:'json'};
+import {createNativeTerminal} from '../js/platform/darwin/terminal.js';
+import abi from '../js/platform/darwin/terminal-abi.json' with {type:'json'};
 import createWire from '../.cache/tu-probes/unixtty-reference.mjs';
 import {referenceBackend} from './native-test-backend.mjs';
 const {native:n,wire:w,nativeConstants:nc,wireConstants:wc}=abi;

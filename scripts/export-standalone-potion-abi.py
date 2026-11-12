@@ -22,7 +22,7 @@ native=support.read_text();all_globals=['u','svc','svm','svl','gy','gv','gm','gn
 global_body=native.split('void*teleport_potion_global(int i){switch(i){',1)[1].split('default:',1)[0]
 seen=[(int(i),re.sub(r'\(void\*\)|&','',expr))for i,expr in re.findall(r'case (\d+):return (.*?);',global_body)]
 assert seen==list(enumerate(all_globals)),'Review POTION native root map'
-runtime=(root/'js/ported/potion-runtime.js').read_text();decoder=json.JSONDecoder();schema=decoder.raw_decode(runtime.split('const schema=',1)[1])[0];bits=decoder.raw_decode(runtime.split('bits=',1)[1])[0];types=decoder.raw_decode(runtime.split('const types=',1)[1])[0]
+runtime=(root/'js/nethack/bindings/potion.js').read_text();decoder=json.JSONDecoder();schema=decoder.raw_decode(runtime.split('const schema=',1)[1])[0];bits=decoder.raw_decode(runtime.split('bits=',1)[1])[0];types=decoder.raw_decode(runtime.split('const types=',1)[1])[0]
 native_bittypes=decoder.raw_decode((root/'nethack-c/wasm/tu-libraries/potion.js').read_text().split('bittypes=',1)[1])[0]
 bit_body=native.split('unsigned teleport_potion_bit',1)[1].split('void teleport_potion_set_bit',1)[0]
 for index,type in enumerate(native_bittypes):
@@ -34,6 +34,6 @@ assert len(format_lines)==len(format_functions)
 assert '"mon->mhpmax >= mon->mhp","potion.c",2904,"split_mon"'in native
 public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions'];names=re.findall(r'^export function (\w+)',(root/'js/ported/potion.js').read_text(),re.M)
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-inputs=[Path(__file__).resolve(),header,support,root/'js/ported/potion.js',root/'js/ported/potion-runtime.js',root/'nethack-c/wasm/tu-libraries/potion.js',root/'js/standalone/public-functions.json',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json']
+inputs=[Path(__file__).resolve(),header,support,root/'js/ported/potion.js',root/'js/nethack/bindings/potion.js',root/'nethack-c/wasm/tu-libraries/potion.js',root/'js/standalone/public-functions.json',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json']
 data={'layout':layout,'globals':all_globals,'equipment':['uwep','uarm','uarmg','uarmh','uarmf','uarmc','uarmu','ublindf','uamul','uswapwep','uball','uchain'],'schema':schema,'bits':bits,'types':types,'common':common[:6],'colors':common[6:],'formats':[{'function':fn,'line':line}for fn,line in zip(format_functions,format_lines)],'assertion':{'condition':'mon->mhpmax >= mon->mhp','line':2904,'function':'split_mon'},'public':{name:public[name]for name in names if name in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[source]))}}
 (root/'js/standalone/potion-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound POTION: '+str(len(names))+' source functions/'+str(len(data['public']))+' public entries; shared native globals and measured header profile.')

@@ -3,7 +3,7 @@ from pathlib import Path
 import hashlib,json,os,re,subprocess
 r=Path(__file__).resolve().parents[3];w=r/'.cache/read-author';prepared=r/'.cache/wasm64-build/tree/src/read.c';pristine=r/'nethack-c/upstream/src/read.c'
 for path in [prepared,pristine]:assert hashlib.sha256(path.read_bytes()).hexdigest()=='ec15ad773e50f5d466ddc20515b441c9ddb4e99449abd1f34fa43a14e6a8b2c4',('READ source changed',path)
-source=prepared.read_text();core=(r/'js/ported/read.js').read_text();runtime=(r/'js/ported/read-runtime.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/read-support.inc').read_text()
+source=prepared.read_text();core=(r/'js/ported/read.js').read_text();runtime=(r/'js/nethack/bindings/read.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/read-support.inc').read_text()
 comments=re.findall(r'/\*.*?\*/',source,re.S);assert len(comments)==367
 for comment in set(comments):assert source.count(comment)==core.count(comment),('Original READ comment multiplicity',comment)
 F=json.loads((w/'functions.json').read_text());names=[f['name']for f in F]

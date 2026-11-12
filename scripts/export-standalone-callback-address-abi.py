@@ -11,5 +11,5 @@ for name,row in metadata['ports'].items():
  prototypes={key:fragment['functionTypes'][key]for key in addresses if key in fragment.get('functionTypes',{})}
  public=json.loads((root/'js/standalone/public-functions.json').read_text())['functions']
  if any(key not in prototypes and key not in public and key!='rn2_on_display_rng'for key in addresses):raise ValueError('Missing native callback type '+name)
- ports[name]={**tables,'functionTypes':prototypes};paths.extend([source,root/('js/ported/'+name+'-runtime.js'),root/('nethack-c/wasm/tu-libraries/'+name+'.js'),root/('nethack-c/wasm/tu-fragments/'+name+'-support.c')])
+ ports[name]={**tables,'functionTypes':prototypes};paths.extend([source,root/('js/nethack/bindings/'+name+'.js'),root/('nethack-c/wasm/tu-libraries/'+name+'.js'),root/('nethack-c/wasm/tu-fragments/'+name+'-support.c')])
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();(root/'js/standalone/callback-address-abi.json').write_text(json.dumps({'ports':ports,'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths}},indent=2)+'\n');print('Bound native callback-address prototypes for',len(ports),'existing address adapters.')

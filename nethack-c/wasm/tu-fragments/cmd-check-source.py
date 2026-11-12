@@ -4,7 +4,7 @@ r=Path(__file__).resolve().parents[3];w=r/'.cache/cmd-first-pass';src=(r/'.cache
 assert (r/'nethack-c/upstream/src/cmd.c').read_bytes()==src
 j=json.load(open(r/'nethack-c/wasm/tu-fragments/cmd-schema.json'));provenance=json.load(open(r/'nethack-c/wasm/tu-fragments/cmd-provenance.json'));F=provenance['functions'];
 for path,expected in provenance['headerHashes'].items():assert hashlib.sha256((r/path).read_bytes()).hexdigest()==expected,('changed profile header',path)
-core=(r/'js/ported/cmd.js').read_text();runtime=(r/'js/ported/cmd-runtime.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/cmd-support.c').read_text();lib=(r/'nethack-c/wasm/tu-libraries/cmd.js').read_text()
+core=(r/'js/ported/cmd.js').read_text();runtime=(r/'js/nethack/bindings/cmd.js').read_text();support=(r/'nethack-c/wasm/tu-fragments/cmd-support.c').read_text();lib=(r/'nethack-c/wasm/tu-libraries/cmd.js').read_text()
 assert re.findall(r'^export function (\w+)\(',core,re.M)==[f['name']for f in F];assert len(F)==148
 for f in F:
  ps=[p['name']for p in f['parameters']];m=re.search(r'^export function '+f['name']+r'\(([^)]*)\)',core,re.M);assert m.group(1).split(',')==ps if ps else m.group(1)==''

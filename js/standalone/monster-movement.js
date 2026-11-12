@@ -2,7 +2,7 @@
 import abi from './monmove-abi.json' with {type:'json'};
 import publicFunctions from './public-functions.json' with {type:'json'};
 import * as monmove from '../ported/monmove.js';
-import {callMonmove} from '../ported/monmove-runtime.js';
+import {callMonmove} from '../nethack/bindings/monmove.js';
 export function enableMonsterMovement(environment,layouts){
  const {services,memory,ctypes}=environment,L=layouts.monmove;
  const local=new Proxy(Object.create(services),{get:(o,k,r)=>{const value=Reflect.get(o,k,r);if(Object.hasOwn(o,k)||typeof k!=='string')return value;if(typeof value!=='function'&&Reflect.has(o,k))return value;return(...args)=>(typeof value==='function'?value:environment.resolve(k))(...args.map(v=>v?.address??v));}});

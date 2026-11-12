@@ -2,7 +2,7 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import crypto from 'node:crypto';import {spawnSync} from 'node:child_process';import {pathToFileURL} from 'node:url';import vm from 'node:vm';
 import {projectMonAlignmentLimit} from '../js/standalone/monster-lifecycle.js';
 const root=process.cwd(),reference=path.resolve(process.env.STANDALONE_REFERENCE_ROOT??root),sdk=reference+'/.cache/emsdk',tree=reference+'/.cache/wasm64-build/tree',clang=sdk+'/upstream/bin/clang',directory=path.resolve('.cache/mon-alignment-leaf-v1');fs.mkdirSync(directory,{recursive:true});
-const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),runtimeFile='js/ported/mon-runtime.js',sourceFile='js/ported/mon.js',source=fs.readFileSync(sourceFile,'utf8'),runtime=fs.readFileSync(runtimeFile,'utf8'),align=tree+'/include/align.h';
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),runtimeFile='js/nethack/bindings/mon.js',sourceFile='js/ported/mon.js',source=fs.readFileSync(sourceFile,'utf8'),runtime=fs.readFileSync(runtimeFile,'utf8'),align=tree+'/include/align.h';
 assert.match(fs.readFileSync(align,'utf8'),/^#define ALIGNLIM \(10L \+ \(svm.moves \/ 200L\)\)$/m,'unchanged native macro');
 const sourceSites=[...source.matchAll(/^.*\bC\.ALIGNLIM\b.*$/gm)].map(m=>({line:source.slice(0,m.index).split('\n').length,text:m[0]}));assert.equal(sourceSites.length,4,'all original MON macro sites accounted for');
 assert.ok(sourceSites[0].text.includes('C.int(C.ALIGNLIM)')&&sourceSites[0].text.includes('/ (2)'));

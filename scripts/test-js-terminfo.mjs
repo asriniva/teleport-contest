@@ -5,8 +5,8 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { Terminfo, createTerminfo, parseTerminfo } from '../js/services/terminfo.js';
-import { pinnedXterm256color, PINNED_ENTRY_SHA256, BOOLEAN_CODES, NUMBER_CODES, STRING_CODES } from '../js/services/terminfo-data.js';
+import { Terminfo, createTerminfo, parseTerminfo } from '../js/libraries/terminfo/index.js';
+import { pinnedXterm256color, PINNED_ENTRY_SHA256, BOOLEAN_CODES, NUMBER_CODES, STRING_CODES } from '../js/libraries/terminfo/data.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const scratch = resolve(root, '.cache/js-dependency-terminfo');

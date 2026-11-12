@@ -1,9 +1,9 @@
 if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('SP_LEV has no native reference fixture; Emscripten results cannot be labeled native.');
 import assert from 'node:assert/strict';
 import{readFile}from'node:fs/promises';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
-import{C}from'../js/ported/c-runtime.js';
+import{C}from'../js/c-runtime/context.js';
 const core=await import(pathToFileURL(resolve(process.env.SP_LEV_CORE??'js/ported/sp_lev.js')).href);
-import{createSpLevEnvironment,initializeSpLev,callSpLev}from'../js/ported/sp_lev-runtime.js';
+import{createSpLevEnvironment,initializeSpLev,callSpLev}from'../js/nethack/bindings/sp_lev.js';
 const dir=resolve(process.env.SP_LEV_PROBE_DIR??'.cache/sp-lev-first-pass'),schema=JSON.parse(await readFile(new URL('../nethack-c/wasm/tu-fragments/sp_lev-schema.json',import.meta.url),'utf8'));
 const factory=async mode=>(await import(pathToFileURL(resolve(dir,'sp_lev-'+mode+'.mjs')).href)).default;
 const reference=await(await factory('reference'))();

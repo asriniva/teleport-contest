@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
-const original=read('nethack-c/upstream/src/do_wear.c'),js=read('js/ported/do_wear.js'),runtime=read('js/ported/do_wear-runtime.js');
+const original=read('nethack-c/upstream/src/do_wear.c'),js=read('js/ported/do_wear.js'),runtime=read('js/nethack/bindings/do_wear.js');
 const comments=text=>{const out=new Map();for(const c of text.match(/\/\*[\s\S]*?\*\//g)||[])out.set(c,(out.get(c)||0)+1);return [...out].sort(([a],[b])=>a.localeCompare(b));};
 assert.deepEqual(comments(js),comments(original),'all original block comments and multiplicities');
 const clean=s=>s.replace(/\/\*[\s\S]*?\*\//g,'');

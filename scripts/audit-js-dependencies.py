@@ -16,6 +16,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 READS = {}
 MISSING = set()
+SOURCE_MOVES = json.loads((ROOT / 'docs/runtime-environment/services-layout-map.json').read_text())['moves']
 
 
 def relative(path):
@@ -70,9 +71,10 @@ def artifact(path):
 def source_integrity(hashes):
     result = []
     for path, expected in sorted(hashes.items()):
-        artifact(ROOT / path)
-        observed = READS.get(path, {}).get('sha256')
-        result.append({'path': path, 'manifest_sha256': expected,
+        current = SOURCE_MOVES.get(path, path)
+        artifact(ROOT / current)
+        observed = READS.get(current, {}).get('sha256')
+        result.append({'path': path, 'current_source_path': current, 'manifest_sha256': expected,
                        'observed_sha256': observed, 'matches': observed == expected})
     return result
 
@@ -628,8 +630,9 @@ def collect_runtime():
     paths = [ROOT / 'js/wasm-adapter.js',
              ROOT / 'js/wasm-replay-support.js', ROOT / 'js/recording-profile.js',
              ROOT / 'nethack-c/wasm/runtime.js']
-    paths += sorted((ROOT / 'js/ported').glob('*runtime.js'))
-    paths += sorted((ROOT / 'js/services').rglob('*.js'))
+    paths += sorted((ROOT / 'js/nethack/bindings').glob('*.js'))
+    paths += sorted((ROOT / 'js/backends').rglob('*.js'))
+    paths += [p for directory in ['js/c-runtime', 'js/lua', 'js/libraries', 'js/platform', 'js/nethack'] for p in sorted((ROOT / directory).rglob('*.js'))]
     results = []
     patterns = {
         'esm_import': r'''\bimport\s+(?:[\s\S]*?\s+from\s+)?['"]([^'"]+)['"]|\bimport\(\s*['"]([^'"]+)['"]''',
@@ -956,10 +959,10 @@ def service_inventory(active):
         return seen
 
     adapter_graph = reachable('js/wasm-adapter.js')
-    standalone_graph = reachable('js/ported/js-runtime.js')
+    standalone_graph = reachable('js/nethack/runtime.js')
     selected_sources = {ROOT / path for path in active_source_paths(active)}
     services = []
-    for path in sorted((ROOT / 'js/services').rglob('*.js')):
+    for path in [p for directory in ['js/c-runtime', 'js/lua', 'js/libraries', 'js/platform', 'js/nethack'] for p in sorted((ROOT / directory).rglob('*.js'))]:
         text = texts[path] if path in texts else read(path)
         selected_algorithm = path in selected_sources
         if selected_algorithm:
@@ -978,11 +981,11 @@ def service_inventory(active):
                          'selected_build_manifest_source': path in selected_sources,
                          'exports_observed': sorted(set(re.findall(r'\bexport\s+(?:async\s+)?(?:function|class|const|let)\s+(\w+)', strip_comments(text)))),
                          'static_js_import_sites': importers[path]})
-    lapi_path = ROOT / 'js/services/lua/lapi.js'
+    lapi_path = ROOT / 'js/lua/lapi.js'
     lapi = texts.get(lapi_path, '')
     methods = sorted(set(re.findall(r'^\s{2}((?:lua|luaL)_\w+)\s*\(', strip_comments(lapi), re.M)))
     unsupported = sorted(set(re.findall(r'^\s{2}((?:lua|luaL)_\w+)\([^\n]*?\)\s*\{\s*return this\.unsupported\(', strip_comments(lapi), re.M)))
-    provider = texts.get(ROOT / 'js/services/wasm-lua-runtime.js', '')
+    provider = texts.get(ROOT / 'js/lua/abi.js', '')
     provider_cases = sorted(set(re.findall(r"\bcase\s+'((?:lua|luaL)_\w+)'|\boperation\s*===\s*'((?:lua|luaL)_\w+)'", strip_comments(provider))))
     provider_names = {name for pair in provider_cases for name in pair if name}
     lua_limits = []
@@ -1023,33 +1026,33 @@ def service_inventory(active):
         'method': 'Literal static imports plus selected manifest source hashes and inspected provider wiring. Imports may be conditional and do not establish executed call closure.',
         'modules': services,
         'standalone_provider': {
-            'path': 'js/ported/js-runtime.js', 'selected_by_active_adapter': ROOT / 'js/ported/js-runtime.js' in adapter_graph,
-            'translated_subsystems': [name + '.c' for name in sorted(set(re.findall(r'''\bimport\s+\*\s+as\s+\w+\s+from\s+['"]\./([^'"]+)\.js['"]''', strip_comments(texts[ROOT / 'js/ported/js-runtime.js']))))],
+            'path': 'js/nethack/runtime.js', 'selected_by_active_adapter': ROOT / 'js/nethack/runtime.js' in adapter_graph,
+            'translated_subsystems': [name + '.c' for name in sorted(set(re.findall(r'''\bimport\s+\*\s+as\s+\w+\s+from\s+['"]\./([^'"]+)\.js['"]''', strip_comments(texts[ROOT / 'js/nethack/runtime.js']))))],
             'services': ['JavaScript-owned ArrayBuffer memory', 'bounded LP64 strings/integer formatting/parsing',
                          'Date-based calendar/time compatibility', 'regular-file/directory VFS and stream facade',
                          'per-instance environment and scoped C bindings', 'opaque-handle configured ERE through unchanged posixregex translation'],
             'limitations': ['Not the complete game state/global layout/runtime', 'No C stdio layer or full libc',
                             'No full IANA/POSIX per-instance timezone database or strftime',
                             'VFS excludes device/socket/symlink/mount/lock/ownership/ACL/chmod services'],
-            'evidence': [evidence('js/ported/js-runtime.js', 'new CMemory'), evidence('js/ported/js-runtime.js', 'new CVFS'),
-                         evidence('js/ported/js-runtime.js', 'calendar:'), evidence('js/ported/js-runtime.js', 'posixregex:')]},
+            'evidence': [evidence('js/nethack/runtime.js', 'new CMemory'), evidence('js/nethack/runtime.js', 'new CVFS'),
+                         evidence('js/nethack/runtime.js', 'calendar:'), evidence('js/nethack/runtime.js', 'posixregex:')]},
         'lua': {
             'selected_game_interpreter_replaced': active['built_lua_backend'] == 'javascript',
             'selected_backend': active['built_lua_backend'],
-            'entrypoint': 'js/services/lua-bytecode-vm.js', 'api_entrypoint': 'js/services/lua/lapi.js',
-            'source_compiler': 'js/services/lua-incremental-parser.js',
-            'source_compiler_components': ['js/services/lua-incremental-lexer.js',
-                                           'js/services/lua-incremental-parser.js',
-                                           'js/services/lua-incremental-codegen.js',
-                                           'js/services/lua-parser-errors.js',
-                                           'js/services/lua-compiler-allocations.js'],
-            'source_compiler_compatibility_entrypoint': 'js/services/lua-source-compiler.js',
-            'binary_chunk_codec': 'js/services/lua-codegen.js',
-            'abi_provider': 'js/services/wasm-lua-runtime.js',
+            'entrypoint': 'js/lua/bytecode-vm.js', 'api_entrypoint': 'js/lua/lapi.js',
+            'source_compiler': 'js/lua/incremental-parser.js',
+            'source_compiler_components': ['js/lua/incremental-lexer.js',
+                                           'js/lua/incremental-parser.js',
+                                           'js/lua/incremental-codegen.js',
+                                           'js/lua/parser-errors.js',
+                                           'js/lua/compiler-allocations.js'],
+            'source_compiler_compatibility_entrypoint': 'js/lua/source-compiler.js',
+            'binary_chunk_codec': 'js/lua/codegen.js',
+            'abi_provider': 'js/lua/abi.js',
             'abi_bridge': ['nethack-c/wasm/lua-bridge.c', 'nethack-c/wasm/lua-library.js'],
             'implementation_form': 'Lua 5.4.8 register VM implementing all 83 opcodes, direct demand-reader lexer/parser/expression-descriptor code generation with native allocation operations interleaved during parsing, binary chunk codec, C API facade and real memory64 C ABI/callback provider. The AST interpreter remains a separate execution path, not the game candidate VM.',
             'compiler_limit': 'Native compiler parity is differentially tested for the compared corpus; this is a JavaScript compiler, not a runtime native compiler subprocess. Arbitrary source equivalence is not proven by inventory.',
-            'opcode_names': re.search(r"LUA_OPCODES = Object.freeze\('([^']+)'", texts.get(ROOT / 'js/services/lua-codegen.js', ''))[1].split(),
+            'opcode_names': re.search(r"LUA_OPCODES = Object.freeze\('([^']+)'", texts.get(ROOT / 'js/lua/codegen.js', ''))[1].split(),
             'private_automatic_candidate': private_lua_evidence(),
             'private_final_candidate': final_candidate,
             'recorded_aggregate_freeze': aggregate_freeze,
@@ -1079,7 +1082,7 @@ def service_inventory(active):
             'method_names_observed_in_lapi_class': methods,
             'direct_explicit_unsupported_methods': unsupported,
             'facade_unsupported_methods_with_explicit_abi_provider_dispatch': sorted(set(unsupported) & provider_names),
-            'unsupported_interpretation': 'Facade methods can deliberately require host ABI facilities supplied by wasm-lua-runtime.js. Their standalone exception is not evidence that the game ABI lacks them; dispatch-name presence is also not semantic certification.',
+            'unsupported_interpretation': 'Facade methods can deliberately require host ABI facilities supplied by lua/abi.js. Their standalone exception is not evidence that the game ABI lacks them; dispatch-name presence is also not semantic certification.',
             'direct_explicit_unsupported_method_count': len(unsupported),
             'additional_complete_library_opener_unsupported': 'luaL_openlibs' if "luaL_openlibs() { throw" in lapi else None,
             'explicit_unsupported_count_including_complete_library_opener': len(unsupported) + int("luaL_openlibs() { throw" in lapi),
@@ -1111,21 +1114,21 @@ def service_inventory(active):
                              evidence('scripts/test-js-lua-format-utf8-errors.mjs'),
                              evidence('scripts/test-js-lua-sort.mjs'),
                              evidence('scripts/test-js-lua-sort-memory.mjs'),
-                             evidence('js/services/lua-aux-error.js'),
-                             evidence('js/services/lua-buffer.js'),
-                             evidence('js/services/lua-compiler-allocations.js')],
+                             evidence('js/lua/aux-error.js'),
+                             evidence('js/lua/buffer.js'),
+                             evidence('js/lua/compiler-allocations.js')],
                 'scope_limit': 'Gates reported by the implementing owner and encoded in differential assertions; this inventory does not execute them. Their existence is not a blanket equivalence claim.'},
             'remaining_gates': ['Retain explicit limits beyond the completed source/reader/library/GC differential corpora; these comparisons do not prove arbitrary native heap parity',
                                 'C library work does not fetch Lua opcodes; optional host-work guards are not native instruction hooks',
                                 'The accepted production snapshot and final private candidate have separate evidence; any later link or runtime/source change needs its own final source-hash, recording and integration checks',
                                 'Treat actual selected luaBackend/javascriptLua metadata and matching source hashes as selection evidence; a changed builder default or a private acceptance alone is insufficient',
                                 'Remaining C game, memory64 ABI, allocator, host services and MEMFS still prevent whole-game JavaScript independence'],
-            'provider_evidence': [evidence('js/services/wasm-lua-runtime.js', 'createWasmLuaRuntime'),
-                                  evidence('js/services/lua-bytecode-vm.js', 'compileLuaIncremental'),
+            'provider_evidence': [evidence('js/lua/abi.js', 'createLuaAbi'),
+                                  evidence('js/lua/bytecode-vm.js', 'compileLuaIncremental'),
                                   evidence('nethack-c/wasm/lua-bridge.c'),
-                                  evidence('js/services/lua/lmem.js', 'cadence/heap parity')],
+                                  evidence('js/lua/lmem.js', 'cadence/heap parity')],
         },
-        'game_file_transport': {'selected_in_adapter': ROOT / 'js/services/game-files.js' in adapter_graph,
+        'game_file_transport': {'selected_in_adapter': ROOT / 'js/nethack/game-files.js' in adapter_graph,
                                 'filesystem_currently_supplied': 'Emscripten module.FS/MEMFS',
                                 'standalone_vfs_replaces_active_memfs': False,
                                 'payload': 'Existing {files,deleted} transport; binary base64; persistence filter injected by adapter',
@@ -1136,7 +1139,7 @@ def service_inventory(active):
 
 
 def active_source_paths(active):
-    return [entry['path'] for entry in active['manifest_dependency_source_integrity'] + active['manifest_lua_source_integrity']]
+    return [entry.get('current_source_path', entry['path']) for entry in active['manifest_dependency_source_integrity'] + active['manifest_lua_source_integrity']]
 
 
 def lua_inventory(tree):
@@ -1284,12 +1287,12 @@ def build_report():
         'lua': lua_inventory(tree),
         'runtime_layers': [
             {'name': 'remaining_game_code', 'disposition': 'port incrementally; coordinate with active TU work', 'evidence': ['js/wasm/link-objects.txt', 'nethack-c/wasm/tu-ports.json']},
-            {'name': 'c_abi_and_linear_memory', 'disposition': 'preserve addresses/layout/integer semantics initially; replace C helpers and Wasm memory ownership', 'evidence': ['nethack-c/wasm/tu-support.c', 'js/ported/wasm-runtime.js']},
-            {'name': 'libc_regex_time_files', 'disposition': 'JS regex selected through C ABI forwarders; compiled libc/time/MEMFS remain selected. Standalone bounded JS services do not replace the active game runtime.', 'evidence': ['nethack-c/wasm/tu-libraries/posixregex.js', 'nethack-c/wasm/tu-libraries/calendar.js', 'js/ported/js-runtime.js']},
-            {'name': 'lua_algorithms_and_abi', 'disposition': 'Selected Lua backend: ' + active['built_lua_backend'] + '. Complete 83-opcode JavaScript VM/compiler and ABI provider exist; final frozen private candidate acceptance is recorded separately from both historical automatic results and selected production artifact validation. C memory/callback transport remains even when Lua algorithms are JavaScript.', 'evidence': ['js/services/lua-bytecode-vm.js', 'js/services/lua-incremental-parser.js', 'js/services/wasm-lua-runtime.js', 'nethack-c/wasm/lua-bridge.c']},
+            {'name': 'c_abi_and_linear_memory', 'disposition': 'preserve addresses/layout/integer semantics initially; replace C helpers and Wasm memory ownership', 'evidence': ['nethack-c/wasm/tu-support.c', 'js/backends/emscripten/runtime.js']},
+            {'name': 'libc_regex_time_files', 'disposition': 'JS regex selected through C ABI forwarders; compiled libc/time/MEMFS remain selected. Standalone bounded JS services do not replace the active game runtime.', 'evidence': ['nethack-c/wasm/tu-libraries/posixregex.js', 'nethack-c/wasm/tu-libraries/calendar.js', 'js/nethack/runtime.js']},
+            {'name': 'lua_algorithms_and_abi', 'disposition': 'Selected Lua backend: ' + active['built_lua_backend'] + '. Complete 83-opcode JavaScript VM/compiler and ABI provider exist; final frozen private candidate acceptance is recorded separately from both historical automatic results and selected production artifact validation. C memory/callback transport remains even when Lua algorithms are JavaScript.', 'evidence': ['js/lua/bytecode-vm.js', 'js/lua/incremental-parser.js', 'js/lua/abi.js', 'nethack-c/wasm/lua-bridge.c']},
             {'name': 'assets', 'disposition': 'embed generated game data and pinned terminal entry as JS-accessible assets; native generators remain development-only', 'evidence': ['nethack-c/wasm/build.py']},
-            {'name': 'replay_adapter_environment_startup', 'disposition': 'Game-file transport extracted and selected; active adapter still supplies Emscripten FS/ENV/startup/callMain/unwind. Standalone VFS/time/memory provider is separate.', 'evidence': ['js/wasm-adapter.js', 'js/services/game-files.js', 'js/ported/js-runtime.js']},
-            {'name': 'terminfo_capabilities', 'disposition': 'Pinned-entry JS terminfo selected; ncurses headers/data/reference build retained, C libtinfo excluded from selected runtime. C vararg/callback ABI support remains.', 'evidence': ['nethack-c/wasm/build.py', 'nethack-c/wasm/dependency-bridge.c', 'js/services/terminfo.js']},
+            {'name': 'replay_adapter_environment_startup', 'disposition': 'Game-file transport extracted and selected; active adapter still supplies Emscripten FS/ENV/startup/callMain/unwind. Standalone VFS/time/memory provider is separate.', 'evidence': ['js/wasm-adapter.js', 'js/nethack/game-files.js', 'js/nethack/runtime.js']},
+            {'name': 'terminfo_capabilities', 'disposition': 'Pinned-entry JS terminfo selected; ncurses headers/data/reference build retained, C libtinfo excluded from selected runtime. C vararg/callback ABI support remains.', 'evidence': ['nethack-c/wasm/build.py', 'nethack-c/wasm/dependency-bridge.c', 'js/libraries/terminfo/index.js']},
             {'name': 'input_output_transport', 'disposition': 'preserve keyboard byte mapping and input-exhaustion boundary', 'evidence': ['nethack-c/wasm/bridge.c', 'js/wasm-adapter.js']},
             {'name': 'shadow_screen_capture', 'disposition': 'preserve inherited default capture and frame timing separately from transport/terminfo', 'evidence': ['nethack-c/wasm/build.py', 'js/wasm-adapter.js']},
             {'name': 'historical_ghostty_emulation', 'disposition': 'Removed from active adapter selection/import path. Historical standalone diagnostic file remains outside selected game runtime.', 'evidence': ['js/wasm-adapter.js']},
@@ -1360,13 +1363,13 @@ def build_report():
         'nethack-c/wasm/build_terminfo.py': "'--with-termlib'",
         'nethack-c/wasm/tu-support.c': 'teleport_',
         'nethack-c/wasm/bridge.c': 'teleport_getch',
-        'js/ported/wasm-runtime.js': 'createPortedRuntime',
+        'js/backends/emscripten/runtime.js': 'createPortedRuntime',
         'js/wasm-adapter.js': 'runWasmSegment',
         'js/wasm-replay-support.js': 'encodeRecorderScreen',
         'js/recording-profile.js': 'recordingProfile',
-        'js/ported/js-runtime.js': 'createJsRuntime',
-        'js/services/game-files.js': 'captureGameFiles',
-        'js/services/terminfo.js': 'createTerminfo',
+        'js/nethack/runtime.js': 'createJsRuntime',
+        'js/nethack/game-files.js': 'captureGameFiles',
+        'js/libraries/terminfo/index.js': 'createTerminfo',
         'nethack-c/wasm/dependency-bridge.c': 'int tputs(',
         'nethack-c/wasm/tu-libraries/posixregex.js': "'regcomp'",
         'nethack-c/wasm/tu-libraries/calendar.js': "'mktime'",
@@ -1383,7 +1386,7 @@ def build_report():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output', type=Path, default=ROOT / 'dependency-inventory.json')
+    parser.add_argument('--output', type=Path, default=ROOT / 'docs/runtime-environment/dependency-inventory-current.json')
     parser.add_argument('--check', action='store_true', help='Compare generated content to output without writing.')
     args = parser.parse_args()
     report = build_report()

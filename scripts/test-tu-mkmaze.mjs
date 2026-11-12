@@ -6,7 +6,7 @@ import {resolve} from 'node:path';
 const probeDir=resolve(process.env.MKMAZE_PROBE_DIR??'.cache/mkmaze-first-pass');
 const {default:refFactory}=await import(pathToFileURL(resolve(probeDir,'mkmaze-reference.mjs')));
 const {default:hybridFactory}=await import(pathToFileURL(resolve(probeDir,'mkmaze-hybrid.mjs')));
-const {callMkmaze}=await import(process.env.MKMAZE_RUNTIME??'../js/ported/mkmaze-runtime.js');
+const {callMkmaze}=await import(process.env.MKMAZE_RUNTIME??'../js/nethack/bindings/mkmaze.js');
 const schema=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/mkmaze-schema.json',import.meta.url))),functions=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/mkmaze-source-metadata.json',import.meta.url))).functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
 const ref=await refFactory(),hybrid=await hybridFactory();hybrid.nethackPorted={mkmaze:callMkmaze};const mods=[ref,hybrid];
 const layout=Object.fromEntries(schema.layoutKeys.map((n,i)=>[n,Number(ref._teleport_mkmaze_layout(i))]));

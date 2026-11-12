@@ -1,7 +1,7 @@
 // Original TELEPORT calls on a genuine live pet/world, compared with the strict full C game.
 // These explicit-position component calls consume no further input; actual stairs is a separate gate.
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import crypto from 'node:crypto';
-import {runFullOriginalC} from './full-original-c-run.mjs';import {runStandaloneProgram} from './run-standalone-program.mjs';import {worldGraph} from './restoration-world-graph.mjs';import {encodeRecorderScreen} from '../js/wasm-replay-support.js';import {C,R,T} from '../js/ported/c-runtime.js';
+import {runFullOriginalC} from './full-original-c-run.mjs';import {runStandaloneProgram} from './run-standalone-program.mjs';import {worldGraph} from './restoration-world-graph.mjs';import {encodeRecorderScreen} from '../js/wasm-replay-support.js';import {C,R,T} from '../js/c-runtime/context.js';
 const directory=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1'),output='.cache/standalone-teleport',layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),records=JSON.parse(fs.readFileSync('js/standalone/records.json')).records,abi=JSON.parse(fs.readFileSync('js/standalone/teleport-abi.json')),L=layouts.teleport;
 fs.mkdirSync(output,{recursive:true});let checks=0,guards=0,module,program,env;const eq=(a,b,s)=>{assert.deepEqual(a,b,s);checks++;},sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 for(const[p,h]of Object.entries(abi.sourceSha256))eq(sha(p),h,p);for(const[p,h]of Object.entries(abi.referenceHeaderSha256))eq(sha(path.resolve(process.env.STANDALONE_REFERENCE_ROOT??'.',p)),h,p);

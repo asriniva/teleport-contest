@@ -6,7 +6,7 @@ import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {createStandaloneEnvironment} from '../js/standalone/environment.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 
 const defaultZones=['UTC','America/New_York','America/Los_Angeles','Asia/Kolkata','Europe/Berlin'];
 if(!process.argv.includes('--worker')){

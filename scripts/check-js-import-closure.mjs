@@ -12,7 +12,7 @@ function option(name, fallback) {
 const root = path.resolve(option('--root', project));
 const sdk = path.resolve(process.env.EMSDK ?? path.join(project, '.cache/emsdk'));
 const {parse} = await import(pathToFileURL(path.join(sdk, 'upstream/emscripten/node_modules/acorn/dist/acorn.mjs')));
-const seeds = ['js/jsmain.js', 'js/wasm-adapter.js', 'js/ported/wasm-runtime.js',
+const seeds = ['js/jsmain.js', 'js/wasm-adapter.js', 'js/backends/emscripten/runtime.js',
     'js/wasm/nethack.mjs', 'scripts/test-wasm.mjs'];
 const seen = new Set(), nonliteral = [];
 function collect(relative) {

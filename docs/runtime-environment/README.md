@@ -1,5 +1,7 @@
 # Standalone JavaScript C environment checkpoint
 
+Runtime ownership separation and factory consolidation are documented in [SERVICES_CLEANUP_PLAN.md](SERVICES_CLEANUP_PLAN.md); earlier source paths in recorded evidence remain historical.
+
 Current published checkpoint: `ea796eb` (implementation) and `13bd001`
 (recording evidence) on main. The production entry remains
 `js/standalone/program.js`, with JS-owned memory and no Wasm, host imports or

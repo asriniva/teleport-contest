@@ -2,7 +2,7 @@
 """Extract transport descriptors; original TERMCAP policy stays unchanged."""
 import ast,hashlib,json,re
 from pathlib import Path
-source=Path('js/ported/termcap-runtime.js')
+source=Path('js/nethack/bindings/termcap.js')
 text=source.read_text()
 values={}
 for name in ['schemas','globals','functions','foreignCallbacks','bufferKeys']:

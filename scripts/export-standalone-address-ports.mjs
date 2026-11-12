@@ -7,7 +7,7 @@ if(!root)throw new Error('STANDALONE_REFERENCE_ROOT is required');
 const ports={};
 const savedLayouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));
 for(const name of ['mklev','mkmaze','pickup','shk','invent','dothrow','display','dungeon','mkobj','muse','pray','detect','sp_lev']) {
-    const path=`js/ported/${name}-runtime.js`,source=fs.readFileSync(path,'utf8');
+    const path=`js/nethack/bindings/${name}.js`,source=fs.readFileSync(path,'utf8');
     const line=source.split('\n').find(line=>line.startsWith('const schema='));
     if(!line||!line.endsWith(';'))throw new Error('Unexpected source schema boundary '+name);
     const schema=JSON.parse(line.slice('const schema='.length,-1));

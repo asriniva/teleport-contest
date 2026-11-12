@@ -1,7 +1,7 @@
 import assert from './native-test-assert.mjs';
 import {DataView,referenceBackend,referenceLabel} from './native-test-backend.mjs';
 import {readFile} from 'node:fs/promises';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
-import{withCEnvironment,C}from'../js/ported/c-runtime.js';const core=await import(pathToFileURL(resolve(process.env.CMD_CORE??'js/ported/cmd.js')).href);import{createCmdEnvironment,initializeCmd,callCmd}from'../js/ported/cmd-runtime.js';
+import{withCEnvironment,C}from'../js/c-runtime/context.js';const core=await import(pathToFileURL(resolve(process.env.CMD_CORE??'js/ported/cmd.js')).href);import{createCmdEnvironment,initializeCmd,callCmd}from'../js/nethack/bindings/cmd.js';
 const dir=resolve(process.env.CMD_PROBE_DIR??'.cache/tu-probes'),schema=JSON.parse(await readFile(new URL('../nethack-c/wasm/tu-fragments/cmd-schema.json',import.meta.url),'utf8'));
 const factory=async mode=>(await import(pathToFileURL(resolve(dir,'cmd-'+mode+'.mjs')).href)).default;
 const reference=await referenceBackend('cmd',await factory('reference'))();

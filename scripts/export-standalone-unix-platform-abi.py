@@ -7,7 +7,7 @@ known=json.loads((root/'js/standalone/records.json').read_text())['records']
 flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(sdk/'cache/sysroot'),'-include',str(ref/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+d for d in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]];clang=ref/'.cache/emsdk/upstream/bin/clang'
 data={'ports':{},'records':{},'aliases':{}};inputs=[Path(__file__).resolve(),root/'js/standalone/unix-platform.js',root/'js/standalone/unix-platform-syscalls.js',root/'nethack-c/wasm/compile-defines.json'];headers=set()
 for name in ['unixunix','unixmain']:
- runtime=root/f'js/ported/{name}-runtime.js';text=runtime.read_text();schema=json.JSONDecoder().raw_decode(text.split('const schema=',1)[1])[0]
+ runtime=root/f'js/nethack/bindings/{name}.js';text=runtime.read_text();schema=json.JSONDecoder().raw_decode(text.split('const schema=',1)[1])[0]
  support=root/f'nethack-c/wasm/tu-fragments/{name}-support.c';body=support.read_text().split('uint64_t teleport_'+name+'_layout(int index){switch(index){',1)[1].split('default:abort();}}',1)[0]
  expressions=re.findall(r'case (\d+):return\(uint64_t\)\((.*?)\);',body);assert [int(i)for i,_ in expressions]==list(range(len(schema['layoutKeys'])))
  private={k:v for k,v in schema['schema'].items()if v['ctype'].removeprefix('struct ').removeprefix('union ')not in known}
@@ -37,9 +37,9 @@ inputs.append(sdk/'system/lib/libc/musl/src/unistd/getlogin.c')
 inputs.append(sdk/'system/lib/libc/musl/src/unistd/isatty.c')
 early=tree/'src/earlyarg.c';earlytext=early.read_text();site=earlytext.index('Snprintf(');end=earlytext.index(');',site)+2;data['earlyargSnprintfLine']=earlytext.count('\n',0,end)+1
 data['usageHelp']=re.search(r'#define USAGEHELP\s+"([^"]+)"',(tree/'include/global.h').read_text())[1]
-inputs += [early,root/'js/ported/earlyarg.js',root/'js/ported/earlyarg-runtime.js',root/'nethack-c/wasm/tu-libraries/earlyarg.js',root/'nethack-c/wasm/tu-earlyarg-support.inc',root/'scripts/write-tu-source-metadata.py']
-inputs += [root/'js/ported/mail.js',root/'js/ported/mail-runtime.js',root/'nethack-c/wasm/tu-libraries/mail.js',root/'nethack-c/wasm/tu-mail-support.inc',tree/'src/mail.c',root/'js/wasm/tu-layouts.json',root/'js/standalone/window-system.js']
-inputs += [root/'js/standalone/records.json',root/'js/standalone/c-types.js',root/'js/standalone/address-ports.js',root/'js/standalone/stdio.js',root/'js/services/c-vfs.js']
+inputs += [early,root/'js/ported/earlyarg.js',root/'js/nethack/bindings/earlyarg.js',root/'nethack-c/wasm/tu-libraries/earlyarg.js',root/'nethack-c/wasm/tu-earlyarg-support.inc',root/'scripts/write-tu-source-metadata.py']
+inputs += [root/'js/ported/mail.js',root/'js/nethack/bindings/mail.js',root/'nethack-c/wasm/tu-libraries/mail.js',root/'nethack-c/wasm/tu-mail-support.inc',tree/'src/mail.c',root/'js/wasm/tu-layouts.json',root/'js/standalone/window-system.js']
+inputs += [root/'js/standalone/records.json',root/'js/standalone/c-types.js',root/'js/standalone/address-ports.js',root/'js/standalone/stdio.js',root/'js/c-runtime/vfs.js']
 inputs.append(root/'js/standalone/unix-terminal.js')
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();data['sourceSha256']={str(p):sha(p)for p in sorted(set(inputs)|headers)}
 (root/'js/standalone/unix-platform-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound UNIXUNIX/UNIXMAIN and SDK stat/locking boundaries')

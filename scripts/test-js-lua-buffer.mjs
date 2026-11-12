@@ -4,10 +4,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {createLuaCState} from '../js/services/lua/lapi.js';
-import {createLuaBytecodeVM} from '../js/services/lua-bytecode-vm.js';
-import {LuaBuffer} from '../js/services/lua-buffer.js';
-import {LuaError} from '../js/services/lua/lobject.js';
+import {createLuaCState} from '../js/lua/lapi.js';
+import {createLuaBytecodeVM} from '../js/lua/bytecode-vm.js';
+import {LuaBuffer} from '../js/lua/buffer.js';
+import {LuaError} from '../js/lua/lobject.js';
 const root=fileURLToPath(new URL('../',import.meta.url)),scratch=path.join(root,'.cache/js-lua-buffer');fs.mkdirSync(scratch,{recursive:true});
 const source=path.join(root,'.cache/wasm64-build/tree/lib/lua-5.4.8/src');
 const code=String.raw`

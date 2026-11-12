@@ -6,7 +6,7 @@ import {resolve} from 'node:path';
 const probeDir=resolve(process.env.DOTHROW_PROBE_DIR??'.cache/dothrow-first-pass');
 const {default:refFactory}=await import(pathToFileURL(resolve(probeDir,'dothrow-reference.mjs')));
 const {default:hybridFactory}=await import(pathToFileURL(resolve(probeDir,'dothrow-hybrid.mjs')));
-const {callDothrow}=await import(process.env.DOTHROW_RUNTIME??'../js/ported/dothrow-runtime.js');
+const {callDothrow}=await import(process.env.DOTHROW_RUNTIME??'../js/nethack/bindings/dothrow.js');
 const schema=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/dothrow-schema.json',import.meta.url))),metadata=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/dothrow-source-metadata.json',import.meta.url))),functions=metadata.functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
 const ref=await refFactory(),hybrid=await hybridFactory();hybrid.nethackPorted={dothrow:callDothrow};const mods=[ref,hybrid];
 const testConstants=metadata.fixtureConstants;

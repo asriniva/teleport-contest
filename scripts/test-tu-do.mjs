@@ -1,8 +1,8 @@
 import assert from './native-test-assert.mjs';
 import {referenceBackend,referenceLabel,assertStackRestored,memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
-import {callDo,createDoEnvironment} from '../js/ported/do-runtime.js';
-import {C,R,T,withCEnvironment} from '../js/ported/c-runtime.js';
+import {callDo,createDoEnvironment} from '../js/nethack/bindings/do.js';
+import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_DO_AUTHOR==='1';
 const ref=(await import(own?'../.cache/do-author/reference.mjs':'../.cache/tu-probes/do-reference.mjs')).default;
 const hyb=(await import(own?'../.cache/do-author/hybrid.mjs':'../.cache/tu-probes/do-hybrid.mjs')).default;

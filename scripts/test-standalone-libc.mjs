@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {createStandaloneEnvironment} from '../js/standalone/environment.js';
-import {VFSError} from '../js/services/c-vfs.js';
+import {VFSError} from '../js/c-runtime/vfs.js';
 const root=process.env.STANDALONE_REFERENCE_ROOT;if(!root)throw new Error('Missing STANDALONE_REFERENCE_ROOT');
 const scratch=path.resolve('.cache/standalone-libc');fs.mkdirSync(scratch,{recursive:true});
 // musl's atomic header supplies this mathematical trailing-zero operation.

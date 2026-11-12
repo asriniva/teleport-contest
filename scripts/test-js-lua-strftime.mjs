@@ -1,6 +1,6 @@
 /* Independent actual macOS C-locale strftime oracle; no C formatter in JS. */
 import assert from'node:assert/strict';import fs from'node:fs';import path from'node:path';import{spawnSync}from'node:child_process';import{fileURLToPath}from'node:url';
-import{formatNativeTime}from'../js/services/lua-native-strftime.js';import{epochToCalendar}from'../js/services/lua-native-calendar.js';import{lookupTimezone}from'../js/services/timezone-info.js';import{NATIVE_TIMEZONE_NAMES}from'../js/services/native-timezone-data.js';
+import{formatDarwinTime}from'../js/platform/darwin/strftime.js';import{epochToCalendar}from'../js/platform/darwin/calendar.js';import{lookupTimezone}from'../js/platform/timezone/info.js';import{NATIVE_TIMEZONE_NAMES}from'../js/platform/timezone/tzdb.js';
 const root=fileURLToPath(new URL('../',import.meta.url)),work=path.join(root,'.cache/js-lua-strftime');fs.mkdirSync(work,{recursive:true});
 function command(program,args,options={}){const r=spawnSync(program,args,{encoding:'utf8',timeout:120000,maxBuffer:40000000,...options});assert.equal(r.status,0,r.error||r.stderr||r.stdout);return r.stdout;}
 const source=path.join(work,'oracle.c'),oracle=path.join(work,'oracle');
@@ -34,6 +34,6 @@ for(const byte of [0,1,31,127,128,255])add('a'+String.fromCharCode(byte)+'b%Y');
 const hex=value=>Buffer.from(value,'latin1').toString('hex')||'0';
 const input=cases.map(c=>[hex(c.format),hex(c.options.zone),c.options.abbreviation===undefined||c.options.abbreviation===null?'N':hex(c.options.abbreviation),c.options.capacity,...keys.map(k=>c.fields[k])].join(' ')).join('\n')+'\n';
 const lines=command(oracle,[],{input}).trimEnd().split('\n');assert.equal(lines.length,cases.length);const differences=[];
-for(let i=0;i<cases.length;i++){const c=cases[i],want=Buffer.from(lines[i].split(':')[1]??'','hex').toString('latin1');let result;try{result=formatNativeTime(c.format,c.fields,c.options);}catch(error){result='THROW:'+error.stack;}if(result!==want){differences.push({case:c,native:want,result});if(differences.length<6)console.error(JSON.stringify(differences.at(-1)));}}
+for(let i=0;i<cases.length;i++){const c=cases[i],want=Buffer.from(lines[i].split(':')[1]??'','hex').toString('latin1');let result;try{result=formatDarwinTime(c.format,c.fields,c.options);}catch(error){result='THROW:'+error.stack;}if(result!==want){differences.push({case:c,native:want,result});if(differences.length<6)console.error(JSON.stringify(differences.at(-1)));}}
 fs.writeFileSync(path.join(work,'differences.json'),JSON.stringify(differences,null,2)+'\n');assert.deepEqual(differences.slice(0,12),[]);fs.writeFileSync(path.join(work,'validated.json'),JSON.stringify({cases:cases.length,yearCases:years,cLocale:true,capacity:250},null,2)+'\n');
 console.log(`PASS: ${cases.length} actual macOS C-locale strftime comparisons; every Lua C99 specifier/E/O, padding/unknown sequences, BC..INT_MAX years, ISO boundaries, raw int32 fields, leap seconds, timezone pointers/process offsets, NUL and capacity limits.`);

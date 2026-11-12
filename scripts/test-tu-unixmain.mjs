@@ -5,7 +5,7 @@ import {fileURLToPath,pathToFileURL} from 'node:url';
 // No native fixture exists. Reject the default/native request before importing factories.
 if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('UNIXMAIN requires a native reference fixture by default. Set TELEPORT_NATIVE_TESTS=0 only for the explicit Emscripten diagnostic.');
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(process.env.UNIXMAIN_PROBE_DIR??join(root,'.cache/unixmain-first-pass'));
-const {callUnixmain,createUnixmainEnvironment}=await import(pathToFileURL(resolve(process.env.UNIXMAIN_RUNTIME_PATH??join(root,'js/ported/unixmain-runtime.js'))).href);
+const {callUnixmain,createUnixmainEnvironment}=await import(pathToFileURL(resolve(process.env.UNIXMAIN_RUNTIME_PATH??join(root,'js/nethack/bindings/unixmain.js'))).href);
 const schema=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/unixmain-schema.json'),'utf8'));
 const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathToFileURL(join(dir,`unixmain-${mode}.mjs`)).href)).default));
 let latestServices;const checked=(services,n,...args)=>{latestServices=services;const sp=services.stackSave();try{return callUnixmain(services,n,...args);}finally{assert.equal(services.stackSave(),sp,'source stack frames restored: '+n);}};

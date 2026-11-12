@@ -1,6 +1,6 @@
 // EmC original-C/imported-JS first-pass checks. Foreign world operations are controlled native fixtures.
 import assert from 'node:assert/strict';import {resolve} from 'node:path';import {pathToFileURL} from 'node:url';
-import * as core from '../js/ported/timeout.js';import {callTimeout} from '../js/ported/timeout-runtime.js';import {C,R,T}from'../js/ported/c-runtime.js';
+import * as core from '../js/ported/timeout.js';import {callTimeout} from '../js/nethack/bindings/timeout.js';import {C,R,T}from'../js/c-runtime/context.js';
 const dir=resolve(process.env.TELEPORT_TIMEOUT_PROBE_DIR??'.cache/tu-probes'),path=k=>pathToFileURL(resolve(dir,(process.env.TELEPORT_TIMEOUT_PROBE_DIR?'':'timeout-')+k+'.mjs'));
 const rf=(await import(path('reference'))).default,hf=(await import(path('hybrid'))).default;const text=(m,p)=>{let a=Number(p),b=a;if(!a)return'[NULL]';while(m.HEAPU8[b])b++;return new TextDecoder().decode(m.HEAPU8.subarray(a,b));};
 let reference=await rf();const L={};for(let i=0;i<reference._probe_layout_count();i++){const k=text(reference,reference._probe_layout_name(i)),v=reference._probe_layout_value(i);L[k]=/^(M1_|M2_|W_|TIMEOUT$|I_SPECIAL$|FROMOUTSIDE$|INTRINSIC$)/.test(k)?String(BigInt.asUintN(64,v)):Number(BigInt.asIntN(64,v));}

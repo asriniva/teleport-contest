@@ -7,7 +7,7 @@ import {resolve,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 const root=fileURLToPath(new URL('../../../',import.meta.url)),sdk=resolve(process.env.EMSDK??join(root,'.cache/emsdk'));
 const read=p=>readFileSync(join(root,p),'utf8');
-const source=read('.cache/wasm64-build/tree/src/save.c'),pristine=read('nethack-c/upstream/src/save.c'),core=read('js/ported/save.js'),runtime=read('js/ported/save-runtime.js'),binding=read('nethack-c/wasm/tu-libraries/save.js'),support=read('nethack-c/wasm/tu-fragments/save-support.c'),header=read('nethack-c/wasm/tu-fragments/save-source-data.h'),schema=JSON.parse(read('nethack-c/wasm/tu-fragments/save-schema.json'));
+const source=read('.cache/wasm64-build/tree/src/save.c'),pristine=read('nethack-c/upstream/src/save.c'),core=read('js/ported/save.js'),runtime=read('js/nethack/bindings/save.js'),binding=read('nethack-c/wasm/tu-libraries/save.js'),support=read('nethack-c/wasm/tu-fragments/save-support.c'),header=read('nethack-c/wasm/tu-fragments/save-source-data.h'),schema=JSON.parse(read('nethack-c/wasm/tu-fragments/save-schema.json'));
 assert.equal(source,pristine,'Review original/prepared SAVE changes');
 assert.equal(createHash('sha256').update(source).digest('hex'),header.match(/SAVE_SOURCE_SHA256 "([a-f0-9]+)"/)?.[1],'Review SAVE source fingerprint');
 const {parse}=await import(pathToFileURL(join(sdk,'upstream/emscripten/node_modules/acorn/dist/acorn.mjs')).href);

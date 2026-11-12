@@ -2,7 +2,7 @@
 import fs from 'node:fs';import assert from 'node:assert/strict';import crypto from 'node:crypto';
 import {runFullOriginalC} from './full-original-c-run.mjs';import {runStandaloneProgram} from './run-standalone-program.mjs';import {worldGraph} from './restoration-world-graph.mjs';import {encodeRecorderScreen} from '../js/wasm-replay-support.js';
 const directory='.cache/full-original-c-v1',out='.cache/standalone-vision-public',R=JSON.parse(fs.readFileSync('js/standalone/records.json')).records,sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');fs.mkdirSync(out,{recursive:true});let checks=0;
-const eq=(a,b,n)=>{assert.deepEqual(a,b,n);checks++;},inputs=['scripts/test-standalone-vision-public.mjs','js/standalone/vision.js','js/standalone/vision-abi.json','js/ported/vision.js','js/ported/vision-runtime.js','js/standalone/program.js','js/standalone/environment.js'];
+const eq=(a,b,n)=>{assert.deepEqual(a,b,n);checks++;},inputs=['scripts/test-standalone-vision-public.mjs','js/standalone/vision.js','js/standalone/vision-abi.json','js/ported/vision.js','js/nethack/bindings/vision.js','js/standalone/program.js','js/standalone/environment.js'];
 const before=Object.fromEntries(inputs.map(p=>[p,sha(p)]));let module,environment;
 const input={seed:1,timezone:'UTC',options:'OPTIONS=!news\n',keys:'  nm.'};
 const c=await runFullOriginalC(directory,{...input,observeRuntime:r=>module=r.module});const j=runStandaloneProgram(directory+'/assets',{...input,observeRuntime:r=>environment=r.environment});

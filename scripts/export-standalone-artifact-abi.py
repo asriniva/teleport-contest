@@ -2,7 +2,7 @@
 """Bind the full ARTIFACT factory transport without replacing source policies."""
 import hashlib,json,re
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];runtime=root/'js/ported/artifact-runtime.js';library=root/'nethack-c/wasm/tu-libraries/artifact.js';support=root/'nethack-c/wasm/tu-fragments/artifact-support.c';r=runtime.read_text();lib=library.read_text();dec=json.JSONDecoder()
+root=Path(__file__).resolve().parents[1];runtime=root/'js/nethack/bindings/artifact.js';library=root/'nethack-c/wasm/tu-libraries/artifact.js';support=root/'nethack-c/wasm/tu-fragments/artifact-support.c';r=runtime.read_text();lib=library.read_text();dec=json.JSONDecoder()
 schemas=dec.raw_decode(r.split('const schemas=',1)[1])[0];globals=dec.raw_decode(r.split('const globals=',1)[1])[0];functions=dec.raw_decode(r.split('const functions=',1)[1])[0]
 conversions={}
 for name,body in re.findall(r'if\(name===\"(\w+)\"\)\{([^\n]+)\}',r):

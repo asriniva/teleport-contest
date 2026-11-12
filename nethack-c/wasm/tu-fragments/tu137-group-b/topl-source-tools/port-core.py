@@ -96,7 +96,7 @@ parts=re.split(r'(/\*.*?\*/|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\')',s,flags=re.
 for i in range(1,len(parts),2):
  if parts[i].startswith('"'):parts[i]=re.sub(r'\\([0-7]{1,3})',lambda m:'\\x'+format(int(m[1],8),'02x'),parts[i])
  if parts[i].startswith("'"):v=ast.literal_eval(parts[i]);assert len(v)==1;parts[i]=str(ord(v))
-s=''.join(parts);p=Path(os.environ.get('TOPL_OUTPUT',str(scratch/'regenerated-core.js')));p.write_text("import {C} from './c-runtime.js';\n"+s)
+s=''.join(parts);p=Path(os.environ.get('TOPL_OUTPUT',str(scratch/'regenerated-core.js')));p.write_text("import {C} from '../c-runtime/context.js';\n"+s)
 print('TOPL translated bodies',len(F),'comments',len(comments))
 subprocess.check_call([str(Path(os.environ.get('EMSDK',str(r/'.cache/emsdk')))/'node/24.19.0_64bit/bin/node'),str(tools/'canonical-logicals.mjs'),str(p)])
 

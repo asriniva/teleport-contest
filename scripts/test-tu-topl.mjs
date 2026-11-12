@@ -1,9 +1,10 @@
 import{assertCompiledInput,compiledInputDependencies}from'./c-runtime-compiled-input.mjs';
-import{C,R,T}from'../js/ported/c-runtime.js';import{callTopl,createToplEnvironment}from'../js/ported/topl-runtime.js';
+import{currentSourcePath}from'./services-layout-audit.mjs';
+import{C,R,T}from'../js/c-runtime/context.js';import{callTopl,createToplEnvironment}from'../js/nethack/bindings/topl.js';
 import assert from'node:assert/strict';import{createHash}from'node:crypto';import{readFileSync,writeFileSync}from'node:fs';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
 if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('TOPL has no native reference fixture; Emscripten results cannot be labeled native.');
 const W=resolve(process.env.TELEPORT_TOPL_PROBE_DIR??'.cache/topl-author'),F=JSON.parse(readFileSync(resolve(W,'functions.json'))),modes=['reference',process.env.TOPL_PRODUCTION==='1'?'production':'hybrid'],factories=await Promise.all(modes.map(async m=>(await import(pathToFileURL(resolve(W,m+'.mjs')))).default));
-const boundInputs=new Map();for(const mode of modes)for(const[n,h]of Object.entries(JSON.parse(readFileSync(resolve(W,mode+'-input-hashes.json')))))boundInputs.set(n,h);const digest=p=>createHash('sha256').update(readFileSync(p)).digest('hex');const replayInputs=new Map();for(const[n,h]of boundInputs)replayInputs.set(n,assertCompiledInput(n,h,'compiled TOPL input'));for(const[n,h]of compiledInputDependencies())replayInputs.set(n,h);
+const boundInputs=new Map();for(const mode of modes)for(const[n,h]of Object.entries(JSON.parse(readFileSync(resolve(W,mode+'-input-hashes.json')))))boundInputs.set(n,h);const digest=p=>createHash('sha256').update(readFileSync(p)).digest('hex');const replayInputs=new Map();for(const[n,h]of boundInputs)replayInputs.set(currentSourcePath(n),assertCompiledInput(n,h,'compiled TOPL input'));for(const[n,h]of compiledInputDependencies())replayInputs.set(n,h);
 const layout={},mods=[],services=[];let comparisons=0,context='',entries=new Set();
 for(let i=0;i<2;i++)mods.push(await factories[i]({print:()=>{},printErr:()=>{},nethackPorted:{topl:(s,n,...args)=>{services[i]=s;entries.add(n);return callTopl(s,layout,n,...args);}}}));
 const text=(m,p)=>{let s='';for(let n=Number(p);m.HEAPU8[n];n++)s+=String.fromCharCode(m.HEAPU8[n]);return s;};

@@ -25,7 +25,7 @@ for i,(source,flags)in enumerate(units):
  dep=out/('unit-'+str(i)+'.d');run([emcc,'-O2','-sMEMORY64=1',*incs,*flags,'-M','-MT','utility_input','-MF',str(dep),str(source)],'dependency-'+str(i)+'.log')
  for s in dep.read_text().replace('\\\n',' ').split(':',1)[1].split():inputs.add(Path(s).resolve())
 assert r/'nethack-c/upstream/win/share/tilemap.c'in inputs,'actual tiletxt transitive policy closure required'
-inputs.update(code_root/f for f in ['js/ported-utilities/tile2bmp/tile2bmp.mjs', 'js/ported-utilities/tile2bmp/runtime.mjs', 'nethack-c/wasm/utilities/tile2bmp/support.c', 'nethack-c/wasm/utilities/tile2bmp/library.js', 'nethack-c/wasm/utilities/tile2bmp/abi.h', 'nethack-c/wasm/utilities/tile2bmp/probe.c', 'scripts/build-utility-tile2bmp.py', 'scripts/test-utility-tile2bmp.mjs', 'scripts/check-utility-tile2bmp.mjs', 'js/ported/c-runtime.js'])
+inputs.update(code_root/f for f in ['js/ported-utilities/tile2bmp/tile2bmp.mjs', 'js/ported-utilities/tile2bmp/runtime.mjs', 'nethack-c/wasm/utilities/tile2bmp/support.c', 'nethack-c/wasm/utilities/tile2bmp/library.js', 'nethack-c/wasm/utilities/tile2bmp/abi.h', 'nethack-c/wasm/utilities/tile2bmp/probe.c', 'scripts/build-utility-tile2bmp.py', 'scripts/test-utility-tile2bmp.mjs', 'scripts/check-utility-tile2bmp.mjs', 'js/c-runtime/context.js'])
 sdk=r/'.cache/emsdk/upstream';ems=sdk/'emscripten'
 # No SDK copying; hash implementation source + actual compiler/link tools.
 inputs.update(x for x in ems.glob('*.py')if x.is_file())

@@ -8,7 +8,7 @@ from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
 ref = Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve()
-runtime = root / 'js/ported/pline-runtime.js'
+runtime = root / 'js/nethack/bindings/pline.js'
 support = root / 'nethack-c/wasm/tu-fragments/pline-support.c'
 text = runtime.read_text()
 fields = json.JSONDecoder().raw_decode(text.split('const fields=', 1)[1])[0]

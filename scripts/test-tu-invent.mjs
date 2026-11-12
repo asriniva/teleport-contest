@@ -4,7 +4,7 @@ import {resolve,dirname,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('INVENT has no native reference fixture; Emscripten results cannot be labeled native.');
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(process.env.INVENT_PROBE_DIR??join(root,'.cache/invent-first-pass'));
-const {callInvent,createInventEnvironment}=await import(pathToFileURL(resolve(process.env.INVENT_RUNTIME_PATH??join(root,'js/ported/invent-runtime.js'))).href);
+const {callInvent,createInventEnvironment}=await import(pathToFileURL(resolve(process.env.INVENT_RUNTIME_PATH??join(root,'js/nethack/bindings/invent.js'))).href);
 const schema=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/invent-schema.json'),'utf8'));const inventory={names:schema.names,functions:Object.fromEntries(Object.entries(schema.functionParameters).map(([name,args])=>[name,{args}]))};
 const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathToFileURL(join(dir,`invent-${mode}.mjs`)).href)).default));
 const factoryServices=new Map();

@@ -27,6 +27,6 @@ for m in re.finditer(r'C\.(rn2|rn1)\(',text):
  label=re.search(r", (\d+), '(\w+)'\)$",text[m.start():end]);assert label
  rng.append({'kind':m[1],'line':int(label[1]),'caller':label[2]})
 
-inputs=[Path(__file__).resolve(),root/'js/standalone/do-name.js',header,nativefile,lib,root/'js/ported/do_name.js',root/'js/ported/do_name-runtime.js',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+inputs=[Path(__file__).resolve(),root/'js/standalone/do-name.js',header,nativefile,lib,root/'js/ported/do_name.js',root/'js/nethack/bindings/do_name.js',root/'js/standalone/records.json',root/'js/standalone/public-functions.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 result={'layout':layout,'globals':globals,'bits':bits,'assertion':{'condition':'aname != 0','file':'do_name.c','line':line,'function':'do_oname'},'rngSites':rng,'dependencies':{n:public[n]for n in dependencies},'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[tree/'src/do_name.c']))}}
 (root/'js/standalone/do-name-abi.json').write_text(json.dumps(result,indent=2)+'\n');print('Bound original DO_NAME native transport.')

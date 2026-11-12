@@ -4,8 +4,8 @@ import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/rumors-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/rumors-hybrid.mjs';
-import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.rumors,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){if(p===0n||p===0)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function caps(m){const counts=[0,1,2].map(f=>m._probe_cap_count(f)),p=m._probe_cap_pointer();return {counts,exists:p!==0n,names:p===0n?[]:Array.from({length:counts[2]},(_,i)=>text(m,m._probe_cap_name(i)))};}

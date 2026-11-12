@@ -120,7 +120,7 @@ for i in range(1,len(parts),2):
   v=ast.literal_eval(parts[i]);assert len(v)==1;parts[i]=str(ord(v))
 s=''.join(parts)
 output=Path(os.environ.get('UHITM_OUTPUT','js/ported/uhitm.js'))
-output.write_text("import {C} from './c-runtime.js';\n"+s)
+output.write_text("import {C} from '../c-runtime/context.js';\n"+s)
 print('UHITM bodies',len(re.findall(r'export function ',s)),'comments',len(comments))
 subprocess.check_call([str(Path(os.environ.get('EMSDK','.cache/emsdk'))/'node/24.19.0_64bit/bin/node'),str(TOOLS/'canonical-logicals.mjs'),str(output)])
 subprocess.check_call([str(Path(os.environ.get('EMSDK','.cache/emsdk'))/'node/24.19.0_64bit/bin/node'),str(TOOLS/'integer-divisions.mjs'),str(output)])

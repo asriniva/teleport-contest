@@ -12,7 +12,7 @@ from pathlib import Path
 root = Path(__file__).resolve().parents[1]
 ref = Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve()
 tree = ref / '.cache/wasm64-build/tree'
-runtime = root / 'js/ported/save-runtime.js'
+runtime = root / 'js/nethack/bindings/save.js'
 source = tree / 'src/save.c'
 support = root / 'nethack-c/wasm/tu-fragments/save-support.c'
 source_data = root / 'nethack-c/wasm/tu-fragments/save-source-data.h'

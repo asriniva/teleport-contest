@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
-import { createLua, parse, LuaTable, LuaUserdata, LuaError, isLuaString, luaStringBytes } from '../js/services/lua/lua.js';
+import { createLua, parse, LuaTable, LuaUserdata, LuaError, isLuaString, luaStringBytes } from '../js/lua/lua.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const scratch = resolve(root, '.cache/js-dependency-lua'); mkdirSync(scratch, { recursive: true });

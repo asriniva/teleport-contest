@@ -5,7 +5,7 @@ r=Path(__file__).resolve().parents[1];w=r/'.cache/display-first-pass'
 def read(p):return (r/p).read_text()
 m=json.loads(read('nethack-c/wasm/tu-fragments/display-source-metadata.json'));s=json.loads(read('nethack-c/wasm/tu-fragments/display-schema.json'))
 a=argparse.ArgumentParser();a.add_argument('--captured',action='store_true');a.add_argument('--current-profile',action='store_true');args=a.parse_args()
-c=read('nethack-c/upstream/src/display.c');js=read('js/ported/display.js');rt=read('js/ported/display-runtime.js');abi=read('nethack-c/wasm/tu-fragments/display-support.c');lib=read('nethack-c/wasm/tu-libraries/display.js');storage=read('nethack-c/wasm/tu-fragments/display-storage.c')
+c=read('nethack-c/upstream/src/display.c');js=read('js/ported/display.js');rt=read('js/nethack/bindings/display.js');abi=read('nethack-c/wasm/tu-fragments/display-support.c');lib=read('nethack-c/wasm/tu-libraries/display.js');storage=read('nethack-c/wasm/tu-fragments/display-storage.c')
 assert c==read('.cache/wasm64-build/tree/src/display.c')
 assert hashlib.sha256(c.encode()).hexdigest()==m['sourceSHA256']=='c40bea2174713159eb7aa7b3b443f176a48282866c31d658449a1b2092145423'
 for path,digest in m['compilerInputHashes'].items():

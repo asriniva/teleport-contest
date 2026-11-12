@@ -5,9 +5,9 @@ import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {Session} from 'node:inspector';
-import {callTrap,createTrapEnvironment} from '../js/ported/trap-runtime.js';
+import {callTrap,createTrapEnvironment} from '../js/nethack/bindings/trap.js';
 import {trapSchema as schema} from '../js/ported/trap.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 const directory=resolve(process.env.TRAP_PROBE_DIR??'.cache/trap-author');await mkdir(directory,{recursive:true});
 const helpers='trace clear option stack buffer object mon_pointer trap trap_live hero level coord global seed catalogue copy_monster setup catalogue_witness layout_count layout_name layout_value data callback trap_consumer trap_obj_consumer enum unsigned_product compound_narrow typed_field typed_get stride native_constant'.split(' ');
 if(process.argv.includes('--build')){

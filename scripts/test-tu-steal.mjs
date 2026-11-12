@@ -4,8 +4,8 @@ import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/steal-reference.mjs';
 import hybridFactory from '../.cache/tu-probes/steal-hybrid.mjs';
-import {createPortedRuntime} from '../js/ported/wasm-runtime.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.steal,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function snapshot(m){return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),output:Buffer.from(m.HEAPU8.slice(Number(m._probe_output()),Number(m._probe_output())+L.BUFSZ+32)),rng:m._probe_rng_state()>>>0,count:m._probe_rng_count()};}

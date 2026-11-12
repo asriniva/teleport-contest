@@ -20,7 +20,7 @@ def braces(text,start):
  raise ValueError('Unclosed block')
 def function(name):
  m=re.search(r'\b'+name+r'\s*\([^;{}]*\)\s*\{',native);assert m,name;start=native.index('{',m.start());return native[start+1:braces(native,start)]
-result={};generated=[];inputs=[Path(__file__).resolve(),root/'js/standalone/utf8map-abi.json',root/'scripts/test-standalone-special-interactions.mjs',root/'scripts/check-standalone-special-interactions.mjs',support,root/'js/ported/wasm-runtime.js',root/'js/standalone/special-interactions.js',root/'js/standalone/vision.js',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json',root/'js/standalone/public-functions.json'];headers=set()
+result={};generated=[];inputs=[Path(__file__).resolve(),root/'js/standalone/utf8map-abi.json',root/'scripts/test-standalone-special-interactions.mjs',root/'scripts/check-standalone-special-interactions.mjs',support,root/'js/backends/emscripten/runtime.js',root/'js/standalone/special-interactions.js',root/'js/standalone/vision.js',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json',root/'js/standalone/public-functions.json'];headers=set()
 with tempfile.TemporaryDirectory(prefix='special-interaction-layout-')as tmp:
  for port in ports:
   header=root/('scripts/tu-'+port+'-layout.h');probe=Path(tmp)/(port+'.c');body='#include '+json.dumps(str(header))+'\n';probe.write_text(body)
@@ -41,7 +41,7 @@ with tempfile.TemporaryDirectory(prefix='special-interaction-layout-')as tmp:
   roots.append(re.sub(r'\([^)]*\)|[&\s]','',re.search(r'default:\s*return ([^;]+);',globals_body)[1]));assert all(re.fullmatch(r'\w+',s)for s in roots)
   macros=subprocess.check_output([str(clang),*flags,'-E','-dM',str(probe)],text=True)
   aliases={key:re.search(r'^#define '+key+r' (\w+)$',macros,re.M)[1]for key in ['doormask','looted','blessedftn','oc_bimanual']if re.search(r'^#define '+key+r' (\w+)$',macros,re.M)}
-  source=root/('js/ported/'+port+'.js');runtime=root/('js/ported/'+port+'-runtime.js');library=root/('nethack-c/wasm/tu-libraries/'+port+'.js');inputs += [header,source,runtime,library]
+  source=root/('js/ported/'+port+'.js');runtime=root/('js/nethack/bindings/'+port+'.js');library=root/('nethack-c/wasm/tu-libraries/'+port+'.js');inputs += [header,source,runtime,library]
   names=re.findall(r'^export function (\w+)',source.read_text(),re.M)
   callers=re.search(r'teleport_'+port+r'_callers\[\]\s*=\s*\{([^}]+)\}',native,re.S)
   result[port]={'fieldAliases':aliases,'globals':roots,'public':{name:public[name]for name in names if name in public},'layout':frozen[port],'callers':re.findall(r'"([^"]+)"',callers[1])if callers else ['dowrite']}
@@ -71,7 +71,7 @@ with tempfile.TemporaryDirectory(prefix='special-interaction-layout-')as tmp:
  pager_layout={key:int(re.search(r'@lookup_'+str(i)+r' = .*?constant i64 (-?\d+)',ir)[1])&((1<<64)-1)for i,(key,_)in enumerate(rows)}
  assert set(frozen['pager'])-set(pager_layout)<={'size'}
  for key,value in pager_layout.items():assert value==(int(frozen['pager'][key])&((1<<64)-1)),key
- pager_runtime=root/'js/ported/pager-runtime.js';pager_meta=json.loads(next(line for line in pager_runtime.read_text().splitlines()if line.startswith('const meta='))[11:-1])
+ pager_runtime=root/'js/nethack/bindings/pager.js';pager_meta=json.loads(next(line for line in pager_runtime.read_text().splitlines()if line.startswith('const meta='))[11:-1])
  probe.write_text(body+'\n'.join('const char* lookup_string_'+n+'=('+n+');'for n in pager_meta['stringconstants']))
  expanded=subprocess.check_output([str(clang),*flags,'-E','-P',str(probe)],text=True)
  pager_strings={n:''.join(json.loads(q)for q in re.findall(r'"(?:[^"\\]|\\.)*"',re.search(r'lookup_string_'+n+r'\s*=\s*(.*?);',expanded,re.S)[1]))for n in pager_meta['stringconstants']}

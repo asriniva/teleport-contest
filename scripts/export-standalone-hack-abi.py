@@ -2,7 +2,7 @@
 """Bind unchanged HACK descriptors and measure original private data/callbacks."""
 import json,hashlib,os,re,shlex,subprocess
 from pathlib import Path
-root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';runtime=root/'js/ported/hack-runtime.js';text=runtime.read_text();source=tree/'src/hack.c'
+root=Path(__file__).resolve().parents[1];ref=Path(os.environ['STANDALONE_REFERENCE_ROOT']).resolve();tree=ref/'.cache/wasm64-build/tree';runtime=root/'js/nethack/bindings/hack.js';text=runtime.read_text();source=tree/'src/hack.c'
 def declaration(name):return json.JSONDecoder().raw_decode(text.split('const '+name+'=',1)[1])[0]
 schemas=declaration('schemas');globals=declaration('globals');functions=declaration('functions');known=json.loads((root/'js/standalone/records.json').read_text())['records'];private={k:v for k,v in schemas.items()if v['ctype'].removeprefix('struct ').removeprefix('union ')not in known}
 flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(ref/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+d for d in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]];clang=ref/'.cache/emsdk/upstream/bin/clang'

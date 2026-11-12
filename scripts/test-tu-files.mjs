@@ -4,7 +4,7 @@ import {resolve,dirname,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('FILES has no native reference fixture; Emscripten results cannot be labeled native.');
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(process.env.FILES_PROBE_DIR??join(root,'.cache/files-first-pass'));
-const {callFiles,createFilesEnvironment}=await import(pathToFileURL(resolve(process.env.FILES_RUNTIME_PATH??join(root,'js/ported/files-runtime.js'))).href);
+const {callFiles,createFilesEnvironment}=await import(pathToFileURL(resolve(process.env.FILES_RUNTIME_PATH??join(root,'js/nethack/bindings/files.js'))).href);
 const schema=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/files-schema.json'),'utf8')),inventory=schema;
 const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathToFileURL(join(dir,`files-${mode}.mjs`)).href)).default));
 const checkedFiles=(services,name,...args)=>{const frame=services.stackSave();try{return callFiles(services,name,...args);}finally{assert.equal(services.stackSave(),frame,'FILES bridge restores its own frame before external test cleanup, including callback throws');}};

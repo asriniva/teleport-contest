@@ -7,9 +7,9 @@ import { readFileSync, writeFileSync, readdirSync, mkdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
-import { createLuaCState } from '../js/services/lua/lapi.js';
-import { createLuaBytecodeVM } from '../js/services/lua-bytecode-vm.js';
-import { compileLuaIncremental } from '../js/services/lua-incremental-parser.js';
+import { createLuaCState } from '../js/lua/lapi.js';
+import { createLuaBytecodeVM } from '../js/lua/bytecode-vm.js';
+import { compileLuaIncremental } from '../js/lua/incremental-parser.js';
 const vmFactory=options=>{const vm=createLuaBytecodeVM(options);if(process.argv.includes('--incremental'))vm.compile=(source,name)=>{const {closure}=compileLuaIncremental(source,name,{observer:vm.heap.allocationObserver()});closure.upvalues[0].value=vm.globals;return closure;};return vm;};
 
 const root = fileURLToPath(new URL('../', import.meta.url));

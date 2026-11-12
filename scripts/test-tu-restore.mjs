@@ -1,8 +1,8 @@
 import assert from './native-test-assert.mjs';
 import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
-import {callRestore,createRestoreEnvironment} from '../js/ported/restore-runtime.js';
-import {C,R,T} from '../js/ported/c-runtime.js';
+import {callRestore,createRestoreEnvironment} from '../js/nethack/bindings/restore.js';
+import {C,R,T} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_RESTORE_AUTHOR==='1';
 const ref=(await import(own?'../.cache/restore-author/reference.mjs':'../.cache/tu-probes/restore-reference.mjs')).default;
 const hyb=(await import(own?'../.cache/restore-author/hybrid.mjs':'../.cache/tu-probes/restore-hybrid.mjs')).default;
@@ -11,7 +11,7 @@ const text=(m,p)=>{p=Number(p);if(!p)return null;let end=p;while(m.HEAPU8[end])e
 const measured={};for(let i=0;i<reference._probe_layout_count();i++)measured[text(reference,reference._probe_layout_name(i))]=Number(BigInt.asIntN(64,reference._probe_layout_value(i)));
 const L=own?measured:JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).restore;
 if(own)writeFileSync(new URL('../.cache/restore-author/layout.json',import.meta.url),JSON.stringify(L,null,2));
-for(const source of [readFileSync(new URL('./test-tu-restore.mjs',import.meta.url),'utf8'),readFileSync(new URL('../js/ported/restore-runtime.js',import.meta.url),'utf8')])for(const m of source.matchAll(/\b(?:L|layout)\.([A-Z][A-Z_0-9]*|[a-z]\w*Size)\b/g))assert.ok(Object.hasOwn(L,m[1]),'compiled layout '+m[1]);
+for(const source of [readFileSync(new URL('./test-tu-restore.mjs',import.meta.url),'utf8'),readFileSync(new URL('../js/nethack/bindings/restore.js',import.meta.url),'utf8')])for(const m of source.matchAll(/\b(?:L|layout)\.([A-Z][A-Z_0-9]*|[a-z]\w*Size)\b/g))assert.ok(Object.hasOwn(L,m[1]),'compiled layout '+m[1]);
 const kinds={},fields={};for(let k=0;k<reference._probe_kind_count();k++){const n=text(reference,reference._probe_kind_name(k));kinds[n]=k;fields[n]={};for(let f=0;f<reference._probe_field_count(k);f++)fields[n][text(reference,reference._probe_field_name(k,f))]=f;}
 const externalNames=new Set([...readFileSync(new URL('../js/ported/restore.js',import.meta.url),'utf8').replace(/\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"/g,'').matchAll(/\bC\.(\w+)/g)].map(m=>m[1])),validated=new WeakSet();
 const ported={callRestore:(services,name,...args)=>{if(!validated.has(services.moduleKey)){const env=createRestoreEnvironment(services,L);for(const symbol of externalNames)assert.notEqual(env[symbol],undefined,'native/header binding '+symbol);validated.add(services.moduleKey);}return callRestore(services,L,name,...args);}};let modules=[reference,await hyb({nethackPorted:ported})],stacks=modules.map(m=>m._probe_stack()),comparisons=0;

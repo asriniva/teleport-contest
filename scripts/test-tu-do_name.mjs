@@ -1,7 +1,7 @@
 // Exact original EmC versus imported JS; foreign naming/UI dependencies controlled.
 import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';import{pathToFileURL}from'node:url';
-import * as data from '../js/ported/do_name.js';import{callDoName,initializeDoName}from'../js/ported/do_name-runtime.js';import{C,R,T}from'../js/ported/c-runtime.js';
+import * as data from '../js/ported/do_name.js';import{callDoName,initializeDoName}from'../js/nethack/bindings/do_name.js';import{C,R,T}from'../js/c-runtime/context.js';
 const dir=resolve(process.env.TELEPORT_DO_NAME_PROBE_DIR??'.cache/tu-probes');const path=k=>pathToFileURL(resolve(dir,(process.env.TELEPORT_DO_NAME_PROBE_DIR?'':'do_name-')+k+'.mjs'));
 const{default:rf}=await import(path('reference')),{default:hf}=await import(path('hybrid'));const reference=await rf();
 function text(m,p){p=Number(p);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}

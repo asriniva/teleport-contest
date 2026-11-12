@@ -148,7 +148,7 @@ const layouts = {};
 const ports = JSON.parse(fs.readFileSync(root + 'nethack-c/wasm/tu-ports.json'));
 for (const pass of ['reference', 'hybrid']) {
 const createPortedRuntime = pass === 'hybrid'
-    ? (await import('../js/ported/wasm-runtime.js')).createPortedRuntime : null;
+    ? (await import('../js/backends/emscripten/runtime.js')).createPortedRuntime : null;
 for (const port of ports) {
     const {name} = port;
     if (pass === 'hybrid' && !['ioctl','unixtty','posixregex'].includes(name)) continue;
@@ -539,7 +539,7 @@ function assertBindingMethods(source, runtime, name) {
 }
 assert.doesNotThrow(() => assertBindingMethods("Module['nethackPorted'].callRegion()", {callRegion() {}}, 'fixture'));
 assert.throws(() => assertBindingMethods("Module['nethackPorted'].callRegion()", {region() {}}, 'fixture'), /missing nethackPorted.callRegion/);
-const centralRuntime = (await import('../js/ported/wasm-runtime.js')).createPortedRuntime(layouts);
+const centralRuntime = (await import('../js/backends/emscripten/runtime.js')).createPortedRuntime(layouts);
 for (const port of ports) assertBindingMethods(fs.readFileSync(root + port.library, 'utf8'), centralRuntime, port.name);
 console.log(`ABI dispatcher methods verified: ${ports.length} registered bindings.`);
 

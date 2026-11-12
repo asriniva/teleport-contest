@@ -58,7 +58,7 @@ assert 'const char what_is_a_location[30];'in(F/'pager-storage.c').read_text(),'
 assert not re.search(r'^const char what_is_a_location\[', (F/'pager-support.c').read_text(),re.M),'same-TU public const backing could fold native reads'
 for n,v in D['staticStrings'].items():
  if '.'in n:assert 'C.staticString('+json.dumps(n)+', '+json.dumps(v)+')'in js,(n,'declared private static data changed')
- else:assert (json.dumps(v)in(R/'js/ported/pager-runtime.js').read_text() or repr(v)in(R/'js/ported/pager-runtime.js').read_text()),n+' initializer missing'
+ else:assert (json.dumps(v)in(R/'js/nethack/bindings/pager.js').read_text() or repr(v)in(R/'js/nethack/bindings/pager.js').read_text()),n+' initializer missing'
 assert 'mon_to_glyph(u.ustuck,a1)'in(F/'pager-support.c').read_text(),'header must retain live original global expression'
 assert 'coord cc' in cpp and 'coord cc' in cpp[cpp.index('add_cmap_descr('):],'coord byvalue source profile changed'
 print('PAGER configured source guard passed: 46 names/order/params/linkage, all comments, %d MemberExpr/alias/width records, zero logged RNG sites, original tables/static/public data and CPP profile.'%len(D['memberExprs']))

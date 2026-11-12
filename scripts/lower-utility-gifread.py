@@ -189,7 +189,7 @@ def declaration(n,ind):
  if n.get('storageClass')=='static' and n['id']in cells:return pad+'const '+v+' = C.staticCell('+json.dumps(current+'.'+v)+', '+json.dumps(fmt(t))+(', '+e(init)if init else'')+');\n'
  if n['id']in cells:return pad+'const '+v+' = C.cell('+json.dumps(fmt(t))+(', '+e(init)if init else'')+');\n'
  return pad+'let '+v+(' = '+narrow(t,e(init))if init else'')+';\n'
-out="import {C} from '../../ported/c-runtime.js';\n\nexport const std_args = [\"tilemap\", \"monsters.gif\", \"monsters.txt\", \"objects.gif\", \"objects.txt\", \"other.gif\", \"other.txt\"];\n\n"
+out="import {C} from '../../c-runtime/context.js';\n\nexport const std_args = [\"tilemap\", \"monsters.gif\", \"monsters.txt\", \"objects.gif\", \"objects.txt\", \"other.gif\", \"other.txt\"];\n\n"
 for f in nodes:
  current=names[f['name']];body=next(x for x in f['inner']if x.get('kind')=='CompoundStmt');fstart=loc(f);fend=loc(f,True);params=[x['name']for x in f['inner']if x.get('kind')=='ParmVarDecl'];out+='export function '+current+'('+', '.join(params)+')\n'+statement(body)+'\n'
 # Retain source-inactive historical comments verbatim; active statement comments stay in original boundaries.

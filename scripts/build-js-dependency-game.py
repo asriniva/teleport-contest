@@ -96,11 +96,11 @@ def main():
             copy(source_root / relative, SNAPSHOT / relative)
             extra_libraries.append(relative)
     if args.lua:
-        for source in sorted((lua_root / 'js/services').rglob('*')):
-            if source.is_file() and (source.relative_to(lua_root / 'js/services').parts[0] == 'lua'
-                    or source.name.startswith(('lua-', 'wasm-lua-'))
-                    or source.name in ['c-float-format.js','timezone-info.js','native-timezone-data.js']):
-                copy(source, SNAPSHOT / 'js/services' / source.relative_to(lua_root / 'js/services'))
+        for directory in ['js/lua']:
+            for source in sorted((lua_root / directory).rglob('*.js')):
+                copy(source, SNAPSHOT / source.relative_to(lua_root))
+        for relative in ['js/c-runtime/float-format.js','js/platform/timezone/info.js','js/platform/timezone/tzdb.js','js/platform/darwin/calendar.js','js/platform/darwin/strftime.js']:
+            copy(lua_root / relative, SNAPSHOT / relative)
         for file in ['nethack-c/wasm/lua-bridge.c', 'nethack-c/wasm/lua-library.js']:
             copy(lua_root / file, SNAPSHOT / file)
     # Retain the exact original executable for same-baseline performance tests.
@@ -163,12 +163,12 @@ def main():
         raise SystemExit(f'Candidate link failed (exit {result.returncode}); exact command: {WORK / "link-command.json"}')
     wrapper = """// Experimental dependency build; active build and adapter are unchanged.
 import createBase from './nethack.mjs';
-import { createPortedRuntime } from './snapshot/js/ported/wasm-runtime.js';
-import { createWasmDependencyRuntime } from './snapshot/js/services/wasm-dependency-runtime.js';
+import { createPortedRuntime } from './snapshot/js/backends/emscripten/runtime.js';
+import { createLibraryBindings } from './snapshot/js/c-runtime/library-bindings.js';
 LUA_IMPORT
 import layouts from './snapshot/js/wasm/tu-layouts.json' with { type: 'json' };
 export default async function createNethack(options = {}) {
-  const dependencies = createWasmDependencyRuntime({ regex: REGEX_ENABLED });
+  const dependencies = createLibraryBindings({ regex: REGEX_ENABLED });
   const module = await createBase({ ...options,
     nethackPorted: createPortedRuntime(layouts), nethackDependencies: dependencies LUA_OPTIONS });
   module.nethackDependencyCalls = dependencies.calls;
@@ -176,13 +176,13 @@ export default async function createNethack(options = {}) {
 }
 """
     (WORK / 'game.mjs').write_text(wrapper.replace('REGEX_ENABLED', 'true' if args.regex else 'false')
-        .replace('LUA_IMPORT', "import { createWasmLuaRuntime } from './snapshot/js/services/wasm-lua-runtime.js';\nimport { createLuaBytecodeVM } from './snapshot/js/services/lua-bytecode-vm.js';" if args.lua else '')
-        .replace('LUA_OPTIONS', ', nethackLua: createWasmLuaRuntime({vmFactory:createLuaBytecodeVM})' if args.lua else ''))
+        .replace('LUA_IMPORT', "import { createLuaAbi } from './snapshot/js/lua/abi.js';\nimport { createLuaBytecodeVM } from './snapshot/js/lua/bytecode-vm.js';" if args.lua else '')
+        .replace('LUA_OPTIONS', ', nethackLua: createLuaAbi({vmFactory:createLuaBytecodeVM})' if args.lua else ''))
     (WORK / 'base-game.mjs').write_text("""import createBase from './snapshot/base-wasm/nethack.mjs';
-import { createPortedRuntime } from './snapshot/js/ported/wasm-runtime.js';
-import { createWasmDependencyRuntime } from './snapshot/js/services/wasm-dependency-runtime.js';
+import { createPortedRuntime } from './snapshot/js/backends/emscripten/runtime.js';
+import { createLibraryBindings } from './snapshot/js/c-runtime/library-bindings.js';
 import layouts from './snapshot/js/wasm/tu-layouts.json' with { type: 'json' };
-export default options => createBase({ ...options, nethackPorted: createPortedRuntime(layouts), nethackDependencies: createWasmDependencyRuntime({regex:true}) });
+export default options => createBase({ ...options, nethackPorted: createPortedRuntime(layouts), nethackDependencies: createLibraryBindings({regex:true}) });
 """)
     evidence = {
         'status': 'experimental-not-active', 'baseRoot': str(source_root.relative_to(ROOT)),

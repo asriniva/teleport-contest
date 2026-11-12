@@ -1,6 +1,6 @@
 // Focused source-private recovery/list/file acceptance against strict full C.
 import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {pathToFileURL} from 'node:url';
-import {createStandaloneEnvironment} from '../js/standalone/environment.js';import {callRestore} from '../js/ported/restore-runtime.js';import * as saveSource from '../js/ported/save.js';import {C,R,T,withCEnvironment} from '../js/ported/c-runtime.js';
+import {createStandaloneEnvironment} from '../js/standalone/environment.js';import {callRestore} from '../js/nethack/bindings/restore.js';import * as saveSource from '../js/ported/save.js';import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
 const dir=path.resolve(process.env.STANDALONE_RECOVERY_ORACLE||'.cache/recovery-state-full-v1'),receipt=JSON.parse(fs.readFileSync(path.join(dir,'receipt.json'))),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),decl=JSON.parse(fs.readFileSync('js/standalone/decl-storage.json')).globals,restoreAbi=JSON.parse(fs.readFileSync('js/standalone/restore-lifecycle-abi.json'));
 let hashes=0,checks=0,guards=0;const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),eq=(a,b,label)=>{assert.deepEqual(a,b,label);checks++;};
 assert.equal(receipt.gameTranslationUnits,140);assert.equal(receipt.luaTranslationUnits,32);assert.deepEqual(receipt.abortBoundaries,[]);assert.equal(sha(receipt.baseReceipt),receipt.baseReceiptSha256);

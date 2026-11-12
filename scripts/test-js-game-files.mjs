@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { createJsRuntime } from '../js/nethack/runtime.js';
 import { filesUnder, encodeFileBytes, decodeFileBytes, captureGameFiles,
-    restoreGameFiles } from '../js/services/game-files.js';
+    restoreGameFiles } from '../js/nethack/game-files.js';
 
 const oraclePath = fileURLToPath(new URL('../.cache/js-dependency-vfs/memfs-oracle.mjs', import.meta.url));
 const factory = (await import(pathToFileURL(oraclePath))).default;

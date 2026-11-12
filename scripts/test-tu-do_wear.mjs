@@ -1,9 +1,9 @@
 import assert from './native-test-assert.mjs';
 import {referenceBackend,referenceLabel,assertStackRestored,memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
-import {callDoWear,createDoWearEnvironment} from '../js/ported/do_wear-runtime.js';
+import {callDoWear,createDoWearEnvironment} from '../js/nethack/bindings/do_wear.js';
 import * as core from '../js/ported/do_wear.js';
-import {C,R,T,withCEnvironment} from '../js/ported/c-runtime.js';
+import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_DO_WEAR_AUTHOR==='1';
 const ref=(await import(own?'../.cache/do_wear-author/reference.mjs':'../.cache/tu-probes/do_wear-reference.mjs')).default;
 const hyb=(await import(own?'../.cache/do_wear-author/hybrid.mjs':'../.cache/tu-probes/do_wear-hybrid.mjs')).default;

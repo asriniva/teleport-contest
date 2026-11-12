@@ -1,7 +1,7 @@
 import {DataView,Int32Array,referenceBackend,referenceLabel,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import{readFileSync}from'node:fs';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
-import{callMonmove,createMonmoveEnvironment}from'../js/ported/monmove-runtime.js';import * as core from'../js/ported/monmove.js';import{C,R,T}from'../js/ported/c-runtime.js';
+import{callMonmove,createMonmoveEnvironment}from'../js/nethack/bindings/monmove.js';import * as core from'../js/ported/monmove.js';import{C,R,T}from'../js/c-runtime/context.js';
 const author=process.env.TELEPORT_MONMOVE_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url),referenceFactory=(await import(new URL('monmove-reference.mjs',dir))).default,hybridFactory=(await import(new URL('monmove-hybrid.mjs',dir))).default,ref=await referenceBackend('monmove',referenceFactory)();
 function text(m,p){if(!p)return null;let q=Number(p),end=q;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(q,end)).toString();}
 const L={size:Number(ref._probe_context_size())};for(let i=0;i<ref._probe_layout_count();i++){const k=text(ref,ref._probe_layout_name(i)),v=ref._probe_layout_value(i);L[k]=/^(M1_|M2_|STRAT_|ALLOW_)/.test(k)||k==='NOTONL'?BigInt.asUintN(64,v).toString():Number(BigInt.asIntN(64,v));}

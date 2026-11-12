@@ -1,12 +1,12 @@
 // Original Unix terminal policies on shared storage and the configured SDK's
 // virtual TTY. Device layout is the SDK syscall ABI, not the game's termios ABI.
-import terminalAbi from '../services/native-terminal-abi.json' with {type:'json'};
-import {createNativeTerminal} from '../services/native-terminal.js';
+import terminalAbi from '../platform/darwin/terminal-abi.json' with {type:'json'};
+import {createNativeTerminal} from '../platform/darwin/terminal.js';
 import * as unixtty from '../ported/unixtty.js';
 import * as ioctl from '../ported/ioctl.js';
-import {createUnixttyState,createUnixttyEnvironment} from '../ported/unixtty-runtime.js';
-import {createIoctlEnvironment} from '../ported/ioctl-runtime.js';
-import {VFSError} from '../services/c-vfs.js';
+import {createUnixttyState,createUnixttyEnvironment} from '../nethack/bindings/unixtty.js';
+import {createIoctlEnvironment} from '../nethack/bindings/ioctl.js';
+import {VFSError} from '../c-runtime/vfs.js';
 import platformAbi from './unix-platform-abi.json' with {type:'json'};
 export function createTerminalDevices(environment,layouts){
  const {memory,filesystem,libc}=environment,at=environment.address;

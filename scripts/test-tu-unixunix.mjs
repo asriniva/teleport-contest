@@ -7,7 +7,7 @@ if(process.env.TELEPORT_NATIVE_TESTS!=='0') throw Error('UNIXUNIX has no native 
 const artifactDir=resolve(process.env.UNIXUNIX_PROBE_DIR??fileURLToPath(new URL('../.cache/tu-probes',import.meta.url)));
 const {default:refFactory}=await import(pathToFileURL(resolve(artifactDir,'unixunix-reference.mjs')));
 const {default:hybridFactory}=await import(pathToFileURL(resolve(artifactDir,'unixunix-hybrid.mjs')));
-const {callUnixunix,createUnixunixEnvironment}=await import(process.env.UNIXUNIX_RUNTIME??'../js/ported/unixunix-runtime.js');
+const {callUnixunix,createUnixunixEnvironment}=await import(process.env.UNIXUNIX_RUNTIME??'../js/nethack/bindings/unixunix.js');
 const read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url))),schema=read('../nethack-c/wasm/tu-fragments/unixunix-schema.json'),functions=read('../nethack-c/wasm/tu-fragments/unixunix-source-metadata.json').functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),regionNames=['scratch','env_shell','env_home','markers','fullpath','authorized','name','fixture_tty_name','files','fds','statevents'],covered=new Set();
 let dispatchHook=null,lastServices;
 const dispatch=(services,name,...args)=>{lastServices=services;return dispatchHook?dispatchHook(services,name,...args):callUnixunix(services,name,...args);};

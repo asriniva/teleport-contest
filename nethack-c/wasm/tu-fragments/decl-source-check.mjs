@@ -8,7 +8,7 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 export function checkDeclSource(root=process.cwd(),{preprocess=true}={}){
  const read=p=>readFileSync(resolve(root,p),'utf8'),source=read('.cache/wasm64-build/tree/src/decl.c'),schema=JSON.parse(read('nethack-c/wasm/tu-fragments/decl-schema.json'));
  for(const [label,text]of [['prepared',source],['upstream',read('nethack-c/upstream/src/decl.c')]])if(hash(text)!==schema.source.sha256)throw Error('Review changed DECL '+label+' source');
- const core=read('js/ported/decl.js'),runtime=read('js/ported/decl-runtime.js'),storage=read('nethack-c/wasm/tu-fragments/decl-storage.c');
+ const core=read('js/ported/decl.js'),runtime=read('js/nethack/bindings/decl.js'),storage=read('nethack-c/wasm/tu-fragments/decl-storage.c');
  const functions=[...core.matchAll(/^export function (\w+)\(([^)]*)\)/gm)];
  if(functions.map(m=>m[1]).join(',')!=='program_state_init,decl_globals_init,sa_victual'||functions.map(m=>m[2]).join('|')!=='||context_victual')throw Error('Review changed DECL original function/formal bindings');
  const comments=source.match(/\/\*[\s\S]*?\*\//g)??[];for(const c of comments)if(!core.includes(c))throw Error('Missing original DECL comment '+c.slice(0,80));

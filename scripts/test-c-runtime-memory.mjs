@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {CMemory} from '../js/services/c-memory.js';
+import {CMemory} from '../js/c-runtime/heap.js';
 import {address,createMemoryServices} from '../js/c-runtime/memory.js';
 import {createMemoryServices as createStandaloneMemoryServices} from '../js/standalone/memory-services.js';
 

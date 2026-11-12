@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';import{readFileSync}from'node:fs';import
 const {parse}=await import(pathToFileURL(resolve(process.env.EMSDK??'.cache/emsdk','upstream/emscripten/node_modules/acorn/dist/acorn.mjs')));
 const outputDir=process.env.UHITM_GUARD_WORK??'.cache/uhitm-author';
 const outputFile=name=>new URL(name,new URL(outputDir.endsWith('/')?outputDir:outputDir+'/',new URL('../../../../../',import.meta.url)));
-const expected=JSON.parse(readFileSync(outputFile('source-data.json'),'utf8')),source=readFileSync('js/ported/uhitm.js','utf8'),runtime=readFileSync(process.env.UHITM_DATA_RUNTIME??'js/ported/uhitm-runtime.js','utf8'),tree=parse(source,{ecmaVersion:'latest',sourceType:'module'}),actual={};
+const expected=JSON.parse(readFileSync(outputFile('source-data.json'),'utf8')),source=readFileSync('js/ported/uhitm.js','utf8'),runtime=readFileSync(process.env.UHITM_DATA_RUNTIME??'js/nethack/bindings/uhitm.js','utf8'),tree=parse(source,{ecmaVersion:'latest',sourceType:'module'}),actual={};
 const readonly=['brief_feeling','from_your_blow','harmlessly_thru'];
 function walk(n){if(n.type==='VariableDeclarator'&&readonly.includes(n.id?.name))actual[n.id.name]=n.init.value;for(const v of Object.values(n))if(Array.isArray(v)){for(const c of v)if(c?.type)walk(c);}else if(v?.type)walk(v);}
 walk(tree);for(const name of readonly)assert.equal(actual[name],expected[name].initializer,name);

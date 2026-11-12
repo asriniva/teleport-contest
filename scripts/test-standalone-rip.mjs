@@ -1,6 +1,6 @@
 // Genuine original main then original RIP tombstone on real TTY windows.
 import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import{pathToFileURL}from'node:url';
-import{C,R,T}from'../js/ported/c-runtime.js';
+import{C,R,T}from'../js/c-runtime/context.js';
 import{createStandaloneProgram}from'../js/standalone/program.js';import{enableRip}from'../js/standalone/rip.js';import{encodeRecorderScreen}from'../js/wasm-replay-support.js';
 const directory=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1'),layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),L=layouts.were,records=JSON.parse(fs.readFileSync('js/standalone/records.json')).records;
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),receipt=JSON.parse(fs.readFileSync(directory+'/receipt.json'));let hashes=0,checks=0;
