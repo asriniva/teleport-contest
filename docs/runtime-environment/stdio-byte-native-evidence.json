@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "complete": true,
+  "originalNativeCompared": true,
+  "baseCommit": "56ac9cb3266e429321e53289d1dea44df82de1a6",
+  "qualifiedSourceSha256": {
+    "js/c-runtime/stdio.js": "e2a46858d1889c006b9ac9a9f05dd251d6e62feedb11c6b5585f7c85c8b7e29e"
+  },
+  "rawProofs": {
+    "docs/runtime-environment/stdio-byte-native-evidence/game-comparison.json": "1522ad5d1853cac43371662830c18d410aeb1f72005f841b4d72d296c8826c52",
+    "docs/runtime-environment/stdio-byte-native-evidence/sdk-comparison.json": "fa6d4e3a3d402f195c31c85658f6c1a82f2b61af7200ab844296559dc67b6fb7",
+    "docs/runtime-environment/stdio-byte-native-evidence/sdk-reference-receipt.json": "b28be66976da3403d812bbc6af4a782240f01a49b2a4da96faa4a4eea8e0f703",
+    "docs/runtime-environment/stdio-byte-native-evidence/test-standalone-sounds-main.mjs": "dd75475d82a282eb3ac451da7a507810e3e5dadc2c571e9aec287ad486e9b3e9",
+    "docs/runtime-environment/stdio-byte-native-evidence/test-standalone-stdio-byte-io.mjs": "889f09847b19bf272275d23aafc2b0f353010b9df442bcdeb7364985c80cc433"
+  },
+  "fullGameAccepted": false,
+  "checks": 4137,
+  "sdkChecks": 4083,
+  "gameChecks": 54,
+  "scope": "Exact buffered stdio character fast paths. Actual configured SDK15 buffer/mode cases, EOF/pushback/flags/offsets/output/growth; three ordinary full-game C/JS comparisons with complete recordings/live worlds/final score files. Public recording and timing gate separate."
+}

@@ -24,7 +24,7 @@ export function qualifiedHistorical(file,expected){
  const declaration=JSON.parse(fs.readFileSync('docs/runtime-environment/pure-js-source-changes.json'));
  if(declaration.baselineCommit!=='cc8ef80b7ac93c01feac7e40677aec0d3d63c03a'||Object.keys(declaration.files).some(p=>!migrationFiles.has(p)))throw Error('Unreviewed migration qualification cohort');
  const row=declaration.files[file];if(!row)throw Error('Missing migration qualification: '+file);
- const actual=fs.readFileSync(file);if(sha(actual)!==row.afterSha256)throw Error('Migration source changed after validation: '+file);
+ const actual=file==='js/c-runtime/stdio.js'&&fs.existsSync('docs/runtime-environment/stdio-byte-source-successors.json')?execFileSync('python3',['scripts/stdio_byte_source_successors.py','--file',file]):fs.readFileSync(file);if(sha(actual)!==row.afterSha256)throw Error('Migration source changed after validation: '+file);
  const before=row.beforeSha256===null?Buffer.alloc(0):execFileSync('git',['show',declaration.baselineCommit+':'+file]);
  if(row.beforeSha256!==null&&sha(before)!==row.beforeSha256)throw Error('Historical migration source differs: '+file);
  const patch=fs.readFileSync(row.patch);if(sha(patch)!==row.patchSha256)throw Error('Migration patch changed: '+file);

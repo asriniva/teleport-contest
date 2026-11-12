@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "complete": true,
+  "fullGameAccepted": false,
+  "nativeSdkChecks": 4083,
+  "fullGameNativeChecks": 54,
+  "sourceQualificationRejectionChecks": 20,
+  "existingAllocationLayeredApiChecks": 77,
+  "currentSourceHistoricalGuardChecks": 9,
+  "runtimeContractsAndMemoryPassed": true,
+  "sourceManifestHashes": 391,
+  "strictPublicSessionsPassed": 44,
+  "nodeVersion": "22.23.5",
+  "profileWallSeconds": 678.8865962028503,
+  "sessionTimeoutMs": 0,
+  "unchangedInputFiles": 751,
+  "default45SecondDeadlineAccepted": false,
+  "profiledSessionsOver45Seconds": [
+    "seed0014-dequa-fountain-explore.session.json",
+    "seed0030-ten-diverse-deaths.session.json",
+    "seed0360-wizard-world-tour.session.json",
+    "seed4500-knight-coverage.session.json"
+  ],
+  "limits": [
+    "CPU-profile timings include sampling overhead. Four sessions exceed45s; do not claim deadline acceptance.",
+    "Original C/SDK comparisons and44 recordings do not establish a natural full-game victory or every special interaction."
+  ],
+  "sourceManifestSha256": "daf52f3f94a2cf1e484b5ede5f90df49bcf514e5dc6e016a3e84a000e1843fd8"
+}

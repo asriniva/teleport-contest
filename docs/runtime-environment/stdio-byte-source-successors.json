@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "baseCommit": "56ac9cb3266e429321e53289d1dea44df82de1a6",
+  "nativeProof": "docs/runtime-environment/stdio-byte-native-evidence.json",
+  "nativeProofSha256": "325de945fe39f42e12f2cc3945a001b8db0679557dab62f88fd17acd9bc7514c",
+  "files": {
+    "js/c-runtime/stdio.js": {
+      "beforeSha256": "f67d89b67d475969f6b80b75cf66327145eb02a04856f3a1955a2a46af4a3dcd",
+      "afterSha256": "e2a46858d1889c006b9ac9a9f05dd251d6e62feedb11c6b5585f7c85c8b7e29e",
+      "patch": "docs/runtime-environment/stdio-byte-source-successors/stdio.js.patch",
+      "patchSha256": "554e2f4f8bab60a0313ec6feb5e80fdd255eba11c5c2a7517bdb3dc49975583c"
+    }
+  }
+}

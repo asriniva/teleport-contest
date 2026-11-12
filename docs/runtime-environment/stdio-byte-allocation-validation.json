@@ -1,0 +1,54 @@
+{
+  "complete": true,
+  "fullGameAccepted": false,
+  "sourceInputsEqualCompleted44SessionRun": true,
+  "unchangedFiles": 751,
+  "session": "seed0360-wizard-world-tour.session.json",
+  "official": {
+    "session": "seed0360-wizard-world-tour.session.json",
+    "passed": true,
+    "metrics": {
+      "rngCalls": {
+        "matched": 120639,
+        "total": 120639
+      },
+      "screens": {
+        "matched": 833,
+        "total": 833
+      },
+      "cellsOnly": {
+        "matched": 833,
+        "total": 833
+      },
+      "cursors": {
+        "matched": 833,
+        "total": 833
+      },
+      "animFrames": {
+        "matched": 12,
+        "total": 12
+      }
+    },
+    "error": null,
+    "time": {
+      "ms": 101525.11,
+      "moves": 832
+    }
+  },
+  "animationCursorCoverage": {
+    "status": "matched",
+    "telemetryPresent": true,
+    "recorded": 12,
+    "matched": 12,
+    "mismatched": 0,
+    "unverified": 0,
+    "actual": 12,
+    "missingTelemetrySegments": 0,
+    "shapeIssues": [],
+    "firstMismatch": null,
+    "firstUnverified": null
+  },
+  "pendingAnimations": 0,
+  "forbiddenAttempts": 0,
+  "scope": "One allocation-profile recording;44-session CPU/correctness gate is separate. Includes explicit V8 heap sampling of collected objects; not clean deadline timing."
+}

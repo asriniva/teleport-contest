@@ -1,0 +1,663 @@
+{
+  "version": 1,
+  "nodeVersion": "v22.23.5",
+  "wallMs": 103551.637167,
+  "parameters": {
+    "samplingInterval": 65536,
+    "stackDepth": 128,
+    "includeObjectsCollectedByMajorGC": true,
+    "includeObjectsCollectedByMinorGC": true
+  },
+  "toolSha256": "dbaccd900a05120086941630f07d1339c04bde464266fe2150b13a302eb09520",
+  "rawSha256": "f829318ab6dca6f8362fae495ff19178409e36c41439867a094cd87ac726e2fd",
+  "estimatedAllocatedBytes": 72709716184,
+  "topSelf": [
+    {
+      "file": "js/nethack/bindings/sfbase.js",
+      "function": "get",
+      "line": 17,
+      "column": 48,
+      "estimatedBytes": 6737101328,
+      "percent": 9.266
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "env.field",
+      "line": 115,
+      "column": 13,
+      "estimatedBytes": 4315847864,
+      "percent": 5.936
+    },
+    {
+      "file": "js/standalone/movement.js",
+      "function": "get",
+      "line": 13,
+      "column": 53,
+      "estimatedBytes": 2728431944,
+      "percent": 3.752
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "array",
+      "line": 63,
+      "column": 16,
+      "estimatedBytes": 2718695488,
+      "percent": 3.739
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "call",
+      "line": 54,
+      "column": 18,
+      "estimatedBytes": 1907276376,
+      "percent": 2.623
+    },
+    {
+      "file": "js/nethack/bindings/mondata.js",
+      "function": "fields",
+      "line": 31,
+      "column": 18,
+      "estimatedBytes": 1820222112,
+      "percent": 2.503
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "load",
+      "line": 30,
+      "column": 18,
+      "estimatedBytes": 1760303336,
+      "percent": 2.421
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "locate",
+      "line": 49,
+      "column": 20,
+      "estimatedBytes": 1570744072,
+      "percent": 2.16
+    },
+    {
+      "file": "",
+      "function": "replace",
+      "line": 0,
+      "column": 0,
+      "estimatedBytes": 1422033664,
+      "percent": 1.956
+    },
+    {
+      "file": "",
+      "function": "sort",
+      "line": 0,
+      "column": 0,
+      "estimatedBytes": 1188206872,
+      "percent": 1.634
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "get",
+      "line": 37,
+      "column": 144,
+      "estimatedBytes": 1181342904,
+      "percent": 1.625
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "function": "pointerValue",
+      "line": 33,
+      "column": 24,
+      "estimatedBytes": 1140016360,
+      "percent": 1.568
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "get address",
+      "line": 106,
+      "column": 33,
+      "estimatedBytes": 1129000440,
+      "percent": 1.553
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "getField",
+      "line": 53,
+      "column": 22,
+      "estimatedBytes": 1024635016,
+      "percent": 1.409
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "get value",
+      "line": 106,
+      "column": 109,
+      "estimatedBytes": 988441392,
+      "percent": 1.359
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "env.cell",
+      "line": 96,
+      "column": 11,
+      "estimatedBytes": 905006328,
+      "percent": 1.245
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "free",
+      "line": 72,
+      "column": 9,
+      "estimatedBytes": 889958720,
+      "percent": 1.224
+    },
+    {
+      "file": "js/c-runtime/address-bindings.js",
+      "function": "read",
+      "line": 22,
+      "column": 14,
+      "estimatedBytes": 878109752,
+      "percent": 1.208
+    },
+    {
+      "file": "js/standalone/movement.js",
+      "function": "",
+      "line": 14,
+      "column": 109,
+      "estimatedBytes": 861286240,
+      "percent": 1.185
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "function": "get",
+      "line": 31,
+      "column": 64,
+      "estimatedBytes": 850728456,
+      "percent": 1.17
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "cacheKey",
+      "line": 36,
+      "column": 50,
+      "estimatedBytes": 847057336,
+      "percent": 1.165
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "function": "get",
+      "line": 46,
+      "column": 105,
+      "estimatedBytes": 812376544,
+      "percent": 1.117
+    },
+    {
+      "file": "",
+      "function": "next",
+      "line": 0,
+      "column": 0,
+      "estimatedBytes": 764518496,
+      "percent": 1.051
+    },
+    {
+      "file": "js/c-runtime/memory.js",
+      "function": "heap",
+      "line": 85,
+      "column": 42,
+      "estimatedBytes": 723576952,
+      "percent": 0.995
+    },
+    {
+      "file": "",
+      "function": "keys",
+      "line": 0,
+      "column": 0,
+      "estimatedBytes": 661850280,
+      "percent": 0.91
+    },
+    {
+      "file": "",
+      "function": "assign",
+      "line": 0,
+      "column": 0,
+      "estimatedBytes": 655982688,
+      "percent": 0.902
+    },
+    {
+      "file": "js/c-runtime/address-bindings.js",
+      "function": "address",
+      "line": 21,
+      "column": 17,
+      "estimatedBytes": 638158528,
+      "percent": 0.878
+    },
+    {
+      "file": "js/c-runtime/records.js",
+      "function": "record",
+      "line": 6,
+      "column": 20,
+      "estimatedBytes": 585902664,
+      "percent": 0.806
+    },
+    {
+      "file": "",
+      "function": "add",
+      "line": 0,
+      "column": 0,
+      "estimatedBytes": 554821448,
+      "percent": 0.763
+    },
+    {
+      "file": "",
+      "function": "match",
+      "line": 0,
+      "column": 0,
+      "estimatedBytes": 542640504,
+      "percent": 0.746
+    },
+    {
+      "file": "js/c-runtime/memory.js",
+      "function": "int",
+      "line": 94,
+      "column": 13,
+      "estimatedBytes": 521015888,
+      "percent": 0.717
+    },
+    {
+      "file": "js/c-runtime/stdlib.js",
+      "function": "api.format",
+      "line": 163,
+      "column": 18,
+      "estimatedBytes": 504533288,
+      "percent": 0.694
+    },
+    {
+      "file": "js/c-runtime/stdio.js",
+      "function": "api.fputs",
+      "line": 166,
+      "column": 15,
+      "estimatedBytes": 494255256,
+      "percent": 0.68
+    },
+    {
+      "file": "js/c-runtime/record-views.js",
+      "function": "get",
+      "line": 34,
+      "column": 21,
+      "estimatedBytes": 475184560,
+      "percent": 0.654
+    },
+    {
+      "file": "js/nethack/bindings/glyphs.js",
+      "function": "",
+      "line": 37,
+      "column": 9,
+      "estimatedBytes": 465906776,
+      "percent": 0.641
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "store",
+      "line": 38,
+      "column": 19,
+      "estimatedBytes": 436882904,
+      "percent": 0.601
+    },
+    {
+      "file": "js/c-runtime/records.js",
+      "function": "createArrayView",
+      "line": 31,
+      "column": 32,
+      "estimatedBytes": 433802600,
+      "percent": 0.597
+    },
+    {
+      "file": "js/ported/nhlua.js",
+      "function": "nhl_loadlua",
+      "line": 2155,
+      "column": 28,
+      "estimatedBytes": 409875400,
+      "percent": 0.564
+    },
+    {
+      "file": "js/nethack/bindings/selvar.js",
+      "function": "get bounds",
+      "line": 56,
+      "column": 23,
+      "estimatedBytes": 389393376,
+      "percent": 0.536
+    },
+    {
+      "file": "js/ported/hack.js",
+      "function": "test_move",
+      "line": 953,
+      "column": 26,
+      "estimatedBytes": 385231552,
+      "percent": 0.53
+    }
+  ],
+  "topInclusive": [
+    {
+      "file": "",
+      "function": "(root)",
+      "line": 0,
+      "column": 0,
+      "estimatedBytes": 72709716184,
+      "percent": 100.0
+    },
+    {
+      "file": "js/c-runtime/context.js",
+      "function": "withCEnvironment",
+      "line": 8,
+      "column": 33,
+      "estimatedBytes": 71808737808,
+      "percent": 98.761
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "call",
+      "line": 54,
+      "column": 18,
+      "estimatedBytes": 71807751880,
+      "percent": 98.759
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "invoke",
+      "line": 15,
+      "column": 22,
+      "estimatedBytes": 71807026504,
+      "percent": 98.759
+    },
+    {
+      "file": "js/nethack/address-ports.js",
+      "function": "",
+      "line": 52,
+      "column": 21,
+      "estimatedBytes": 71805584416,
+      "percent": 98.757
+    },
+    {
+      "file": "js/c-runtime/address-bindings.js",
+      "function": "local.<computed>",
+      "line": 54,
+      "column": 77,
+      "estimatedBytes": 71797006968,
+      "percent": 98.745
+    },
+    {
+      "file": "js/c-runtime/memory.js",
+      "function": "scoped",
+      "line": 105,
+      "column": 15,
+      "estimatedBytes": 70674562744,
+      "percent": 97.201
+    },
+    {
+      "file": "",
+      "function": "",
+      "line": 0,
+      "column": 0,
+      "estimatedBytes": 70528866112,
+      "percent": 97.001
+    },
+    {
+      "file": "js/standalone-recorder-adapter.js",
+      "function": "runSegment",
+      "line": 17,
+      "column": 33,
+      "estimatedBytes": 69924897304,
+      "percent": 96.17
+    },
+    {
+      "file": "js/ported/unixmain.js",
+      "function": "main",
+      "line": 10,
+      "column": 21,
+      "estimatedBytes": 69913841880,
+      "percent": 96.155
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "",
+      "line": 57,
+      "column": 33,
+      "estimatedBytes": 69854659064,
+      "percent": 96.073
+    },
+    {
+      "file": "js/standalone/program.js",
+      "function": "run",
+      "line": 34,
+      "column": 6,
+      "estimatedBytes": 69747859592,
+      "percent": 95.926
+    },
+    {
+      "file": "js/standalone/turn-loop.js",
+      "function": "C.<computed>",
+      "line": 95,
+      "column": 92,
+      "estimatedBytes": 68038074912,
+      "percent": 93.575
+    },
+    {
+      "file": "js/ported/allmain.js",
+      "function": "moveloop",
+      "line": 562,
+      "column": 25,
+      "estimatedBytes": 66975589584,
+      "percent": 92.114
+    },
+    {
+      "file": "js/ported/allmain.js",
+      "function": "moveloop_core",
+      "line": 154,
+      "column": 30,
+      "estimatedBytes": 66971569048,
+      "percent": 92.108
+    },
+    {
+      "file": "js/standalone/turn-loop.js",
+      "function": "",
+      "line": 124,
+      "column": 112,
+      "estimatedBytes": 66950196640,
+      "percent": 92.079
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "callWithStack",
+      "line": 4,
+      "column": 30,
+      "estimatedBytes": 61950077800,
+      "percent": 85.202
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "",
+      "line": 80,
+      "column": 83,
+      "estimatedBytes": 34070558456,
+      "percent": 46.858
+    },
+    {
+      "file": "js/standalone/do-lifecycle.js",
+      "function": "",
+      "line": 19,
+      "column": 42,
+      "estimatedBytes": 34021334168,
+      "percent": 46.791
+    },
+    {
+      "file": "js/ported/do.js",
+      "function": "goto_level",
+      "line": 1478,
+      "column": 27,
+      "estimatedBytes": 33759643384,
+      "percent": 46.431
+    },
+    {
+      "file": "js/nethack/bindings/do.js",
+      "function": "env.callLocal",
+      "line": 44,
+      "column": 19,
+      "estimatedBytes": 33536592544,
+      "percent": 46.124
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "",
+      "line": 31,
+      "column": 111,
+      "estimatedBytes": 33435595504,
+      "percent": 45.985
+    },
+    {
+      "file": "js/ported/do.js",
+      "function": "deferred_goto",
+      "line": 2062,
+      "column": 30,
+      "estimatedBytes": 33363074352,
+      "percent": 45.885
+    },
+    {
+      "file": "js/nethack/bindings/do.js",
+      "function": "callDo",
+      "line": 378,
+      "column": 23,
+      "estimatedBytes": 33078544352,
+      "percent": 45.494
+    },
+    {
+      "file": "js/standalone/do-lifecycle.js",
+      "function": "",
+      "line": 54,
+      "column": 79,
+      "estimatedBytes": 33020959464,
+      "percent": 45.415
+    },
+    {
+      "file": "js/c-runtime/functions.js",
+      "function": "indirect",
+      "line": 16,
+      "column": 17,
+      "estimatedBytes": 30237169936,
+      "percent": 41.586
+    },
+    {
+      "file": "js/c-runtime/address-bindings.js",
+      "function": "",
+      "line": 42,
+      "column": 304,
+      "estimatedBytes": 29559104240,
+      "percent": 40.654
+    },
+    {
+      "file": "js/standalone/commands.js",
+      "function": "enableAddressPort.adapter",
+      "line": 12,
+      "column": 119,
+      "estimatedBytes": 29069330912,
+      "percent": 39.98
+    },
+    {
+      "file": "js/nethack/bindings/cmd.js",
+      "function": "callCmd",
+      "line": 36,
+      "column": 24,
+      "estimatedBytes": 29069265336,
+      "percent": 39.98
+    },
+    {
+      "file": "js/ported/cmd.js",
+      "function": "rhack",
+      "line": 2613,
+      "column": 22,
+      "estimatedBytes": 29023827448,
+      "percent": 39.917
+    },
+    {
+      "file": "js/nethack/bindings/cmd.js",
+      "function": "env.callProc",
+      "line": 21,
+      "column": 18,
+      "estimatedBytes": 28317221960,
+      "percent": 38.946
+    },
+    {
+      "file": "js/c-runtime/address-bindings.js",
+      "function": "local.<computed>",
+      "line": 49,
+      "column": 84,
+      "estimatedBytes": 28317156416,
+      "percent": 38.945
+    },
+    {
+      "file": "js/ported/cmd.js",
+      "function": "dotravel",
+      "line": 4015,
+      "column": 25,
+      "estimatedBytes": 20144666000,
+      "percent": 27.706
+    },
+    {
+      "file": "js/standalone/movement.js",
+      "function": "",
+      "line": 37,
+      "column": 75,
+      "estimatedBytes": 20019904880,
+      "percent": 27.534
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "function": "callHack",
+      "line": 597,
+      "column": 25,
+      "estimatedBytes": 20019839320,
+      "percent": 27.534
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "function": "env.callLocal",
+      "line": 79,
+      "column": 19,
+      "estimatedBytes": 19819334072,
+      "percent": 27.258
+    },
+    {
+      "file": "js/standalone/getpos.js",
+      "function": "",
+      "line": 39,
+      "column": 142,
+      "estimatedBytes": 19737385760,
+      "percent": 27.145
+    },
+    {
+      "file": "js/standalone/getpos.js",
+      "function": "call",
+      "line": 38,
+      "column": 15,
+      "estimatedBytes": 19737385760,
+      "percent": 27.145
+    },
+    {
+      "file": "js/standalone/getpos.js",
+      "function": "",
+      "line": 38,
+      "column": 137,
+      "estimatedBytes": 19736524184,
+      "percent": 27.144
+    },
+    {
+      "file": "js/ported/getpos.js",
+      "function": "getpos",
+      "line": 729,
+      "column": 23,
+      "estimatedBytes": 19736457152,
+      "percent": 27.144
+    }
+  ],
+  "limits": [
+    "Poisson-sampled estimated allocation bytes, not retained heap size or exact allocation counts.",
+    "Both collected and live objects included; allocation sampling adds overhead.",
+    "One recorded workload is evidence for allocation sites, not44-session performance or deadline acceptance."
+  ]
+}
