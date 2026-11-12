@@ -1,0 +1,23 @@
+{
+  "scope": "Explicit user-approved translation corrections; original scope-baseline.json remains unchanged. No other port or frozen-file changes are authorized by this manifest.",
+  "corrections": [
+    {
+      "file": "js/ported/vision.js",
+      "baselineSha256": "f335fad833fb54a057519d77eaf3bacf1978dd83d0dc133a876d04af8e08bcdc",
+      "correctedSha256": "f85fa30aa01940929c9737165597e7007dd74865e0e045a28ae4cb40f98a320b",
+      "authorization": "User explicitly approved: Apply the one-line correction.",
+      "reason": "Restore C logical OR 0/1 in vision_reset; opaque-region does_block remains2 for other original callers.",
+      "sourceLine": 220,
+      "reference": {
+        "file": ".cache/full-original-c-v1/tree/src/vision.c",
+        "sha256": "88578aa26076563be5f41a0cda0710149eb13b22ee08b53a116f51c0068ead31",
+        "line": 233
+      },
+      "change": {
+        "before": "block != (C.IS_OBSTRUCTED(lev.typ) || does_block(x, y, lev))",
+        "after": "block != Number(Boolean(C.IS_OBSTRUCTED(lev.typ) || does_block(x, y, lev)))"
+      },
+      "frozenDependenciesChanged": false
+    }
+  ]
+}

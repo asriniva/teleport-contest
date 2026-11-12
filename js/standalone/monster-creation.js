@@ -18,6 +18,7 @@ export function enableMonsterCreation(environment,layouts,selection){
  const services=new Proxy(environment.services,{get:(o,key,r)=>Reflect.has(o,key)?Reflect.get(o,key,r):typeof key==='string'?(...args)=>environment.resolve(key)(...args):undefined});
  const record=(type,p)=>views.record(type,p),raw=v=>BigInt(environment.address(v)),L=layouts.makemon;
  const env=Object.create(selection.environment);
+ env.nhUse=value=>{void value;};
  const context=layout=>{
   const local=Object.create(env);
   for(const[key,value]of Object.entries(layout)){

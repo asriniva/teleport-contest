@@ -95,6 +95,9 @@ import {enableSteal} from './steal.js';
 import {enableDokick} from './dokick.js';
 import {enableLight} from './light.js';
 import {enableDetect} from './detect.js';
+import {enableRegion} from './region-services.js';
+import {enableBall} from './ball.js';
+import {enableWizcmds} from './wizcmds.js';
 import {enableRip} from './rip.js';
 import {enableShknam} from './shknam.js';
 import {enableInsight} from './insight.js';
@@ -391,6 +394,9 @@ export function createStandaloneEnvironment(options={}) {
         enableDokick:layouts=>enableDokick(environment,layouts),
         enableLight:layouts=>enableLight(environment,layouts),
         enableDetect:layouts=>enableDetect(environment,layouts),
+        enableRegion:layouts=>enableRegion(environment,layouts),
+        enableBall:layouts=>enableBall(environment,layouts),
+        enableWizcmds:layouts=>enableWizcmds(environment,layouts),
         enableRip:layouts=>enableRip(environment,layouts),
         enableShknam:layouts=>enableShknam(environment,layouts),
         enableInsight:layouts=>enableInsight(environment,layouts),
