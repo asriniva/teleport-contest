@@ -1,0 +1,4 @@
+{
+  "checks": 544,
+  "scope": "Production candidate vs immutable819d16f; scalar load-plan output/error and live-view/method/bounds ordering comparisons; no native acceptance."
+}

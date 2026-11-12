@@ -1,0 +1,1 @@
+PASS 478 differential metadata/field contracts: widths, aliases, fresh descriptions, live offsets/declarations, packed bits, records, growth, errors and conversion boundaries; synthetic only.

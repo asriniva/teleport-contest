@@ -14,6 +14,9 @@ def validate_cohort(root):
  root=Path(root);before_images={}
  for file,row in FILES.items():
   before=baseline_bytes(root,file);after=(root/file).read_bytes();patch=(root/row['patch']).read_bytes()
+  if file=='js/c-runtime/types.js'and(root/'scripts/scalar_load_source_successor.py').exists():
+   from scalar_load_source_successor import qualified_before as scalar_before
+   after=scalar_before(root,file)
   assert sha(before)==row['beforeSha256'],'Wrong immutable C metadata predecessor'
   assert sha(after)==row['afterSha256'],'Unknown C metadata source change'
   assert sha(patch)==row['patchSha256']and patch==canonical_patch(file,before,after),'Wrong C metadata source patch'

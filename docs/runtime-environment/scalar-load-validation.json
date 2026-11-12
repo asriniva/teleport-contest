@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "complete": true,
+  "baseCommit": "819d16fb5bcb59c96065a3519aa643a117cfc601",
+  "candidateRuntimeSourceSha256": {
+    "js/c-runtime/types.js": "543ffd41017343044456f297959f8f8b576c25911c40d9c7db7943367f2b1391"
+  },
+  "nativeGameChecks": 69,
+  "sharedOriginalCRuntimeChecks": 1294,
+  "syntheticLoadTraceChecks": 544,
+  "syntheticLoadBenchmarkChecks": 112,
+  "syntheticMetadataChecks": 478,
+  "syntheticLiveViewChecks": 71,
+  "sourceQualificationNegativeChecks": 5,
+  "metadataQualificationNegativeChecks": 10,
+  "transportQualificationNegativeChecks": 26,
+  "strictPublicPassed": 44,
+  "localUnprofiledWallSeconds": 545.6249711513519,
+  "pairedPerformanceAcceptancePending": true,
+  "wholeGameSpeedupAccepted": false,
+  "upstreamDeadlineAcceptancePending": true,
+  "rawProofs": {
+    "docs/runtime-environment/scalar-load-native-evidence/engulf.json": "23d34b34199fc1c357dd6f74b78d015a82b2b19c129f630b5a1dfa1480615cda",
+    "docs/runtime-environment/scalar-load-native-evidence/live-views.log": "bb51ea283f304b3c2cb549badb4cf5b2a1f1f8f1223d3e16da8ba580f1b1faa6",
+    "docs/runtime-environment/scalar-load-native-evidence/load-contracts.json": "d9299bd4187f2f10ea23326631486314c6a3b5010ef4eb181fce481439d1caa2",
+    "docs/runtime-environment/scalar-load-native-evidence/load-microbenchmark.json": "db8c003be4cfce54900a38107c74815f4ed76ad41a90cd377e04bf3f5fb7097f",
+    "docs/runtime-environment/scalar-load-native-evidence/metadata-contracts.log": "d69cb62ecaf71f547e373c3a62def582592d2bfadfb18eb9dad82bdb42638823",
+    "docs/runtime-environment/scalar-load-native-evidence/metadata-negative.log": "84178bf55a420e880348e925a2b86de3148c79b1c404368463512490f32ae733",
+    "docs/runtime-environment/scalar-load-native-evidence/native-runtime.log": "e543ecb72d2d6b8685fef88ee30558fdb0d7c2a40a43a63237ddcaf6081d2410",
+    "docs/runtime-environment/scalar-load-native-evidence/ordinary-game.json": "5bf805b07646d05d8355a9ba97c802de1c4e8abb55914fe827dc48aa1b0d95ee",
+    "docs/runtime-environment/scalar-load-native-evidence/public-integrity.json": "d787f97e9c3b1f80509c69a9828c6861f4339628d409f82c547e7008b2420168",
+    "docs/runtime-environment/scalar-load-native-evidence/public-official-results.json": "f5f337f06cf93ec40170f522b5fcb86cc44f9e0052527a6605e0dea146823c83",
+    "docs/runtime-environment/scalar-load-native-evidence/public-pre-run.json": "8d228be95ec6233a832e7206db0f2065bab11c2b1288d2d8b1d9d27300075772",
+    "docs/runtime-environment/scalar-load-native-evidence/public-summary.json": "711317f84329fdd72405311804f304a316f185e8239990f449b7a4eb5743d8a7",
+    "docs/runtime-environment/scalar-load-native-evidence/public-verification-status.json": "62af517aa2b3764b5aabcde29cf9ef2d146f36399eccd0dae6b73dbb33d5abf5",
+    "docs/runtime-environment/scalar-load-native-evidence/source-negative.log": "b7132322048757b2b9ff5450bcd6a85432a18d61f017487a8a2f8f1728cc3539",
+    "docs/runtime-environment/scalar-load-native-evidence/transport-negative.log": "3a82b5ea6e4817bfde872d978fda0a3d4be4c11a87676d6e0e373db15ca99c23"
+  },
+  "scope": "Precomputed builtin scalar DataView load method names; array/pointer/enum and unusual-type fallbacks retain prior behavior and order. Bounds, live view/method access, return values/errors and public record descriptions remain unchanged. No translated/frozen changes. Local timing545.62s vs preceding549.69s is descriptive, not a proven whole-game improvement. Separate call-dispatch experiment is parked; context.js remains unchanged."
+}

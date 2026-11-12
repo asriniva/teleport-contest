@@ -1,0 +1,19 @@
+--- a/js/c-runtime/types.js
++++ b/js/c-runtime/types.js
+@@ -29,13 +29,14 @@
+         if(scalars[type])return Number(scalars[type].match(/\d+/)[0])/8;
+         return record(type).size;
+     }
++    const scalarLoads=new Map(Object.entries(scalars).map(([name,scalar])=>[name,'get'+scalar]));
+     function load(type,at) {
+         type=canonical(type);at=address(at);memory.bounds(at,size(type));
+         if(type.includes('['))return BigInt(at);
+         if(type.includes('*'))return memory.view.getBigUint64(at,true);
+         if(type.startsWith('enum ')){const item=metadata.enums[type];return memory.view['get'+(item.signed?'Int':'Uint')+item.size*8](at,true);}
+-        if(!scalars[type])return BigInt(at);
+-        return memory.view['get'+scalars[type]](at,true);
++        const scalarLoad=scalarLoads.get(type);if(!scalarLoad){if(!scalars[type])return BigInt(at);return memory.view['get'+scalars[type]](at,true);}
++        return memory.view[scalarLoad](at,true);
+     }
+     function store(type,at,value) {
+         type=canonical(type);at=address(at);memory.bounds(at,size(type));
