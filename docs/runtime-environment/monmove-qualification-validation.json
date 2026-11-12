@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "complete": true,
+  "fullGameAccepted": false,
+  "baseCommit": "b0c15ec738de2776f607d2b6909dc7801d3733d5",
+  "qualifiedSourceSha256": {
+    "js/standalone/monster-movement.js": "2601783d13104192197ffdff14747ca611151a25e82c9706a9ba3fa8e039a0df",
+    "js/standalone/monmove-abi.json": "9242d2b32239734679b15e1b3e1d0959257433b51500b68f23c7f99918989769"
+  },
+  "nativeProofSha256": "fdc8e253e26297c4da5a440dca471f5e2f92d1f7a7c45708b60e86a3af583be2",
+  "publicProofSha256": "bdfd9da13d01f6817b949a0ff90ce91c08ba72bb46461a6bc840c3d3e67ab7c0",
+  "checks": [
+    {
+      "name": "private MONMOVE complete original-C comparison",
+      "passed": true,
+      "paths": 2,
+      "frames": 5,
+      "inputBoundaries": 3,
+      "bothRngStates": true
+    },
+    {
+      "name": "public recorder normal entry, timeout0",
+      "passed": true,
+      "official": 44,
+      "strict": 44,
+      "animationCursorTriples": 1483,
+      "unchangedInputs": 743
+    },
+    {
+      "name": "two-file exact native/source qualification",
+      "passed": true,
+      "paths": 2
+    },
+    {
+      "name": "new synthetic qualification and layered real JS/Python inverse APIs",
+      "passed": true,
+      "checks": 30
+    },
+    {
+      "name": "prior nineteen-file exact source/native qualification",
+      "passed": true,
+      "paths": 19
+    },
+    {
+      "name": "prior nineteen synthetic/adversarial/API suite",
+      "passed": true,
+      "checks": 55
+    },
+    {
+      "name": "original six-file real native qualification",
+      "passed": true,
+      "paths": 6
+    },
+    {
+      "name": "original six-file synthetic suite",
+      "passed": true,
+      "checks": 28
+    },
+    {
+      "name": "current source manifest",
+      "passed": true,
+      "files": 326
+    },
+    {
+      "name": "current production scope",
+      "passed": true,
+      "imports": 580,
+      "unchangedPolicies": 137,
+      "approvedVisionCorrections": 1,
+      "frozenFiles": 3
+    },
+    {
+      "name": "runtime boundaries",
+      "passed": true,
+      "files": 30
+    },
+    {
+      "name": "MONMOVE source/configuration/RNG origins",
+      "passed": true,
+      "functions": 52,
+      "rngOrigins": 50
+    },
+    {
+      "name": "old SDK exact native/source extension",
+      "passed": true
+    },
+    {
+      "name": "current guard negative regression",
+      "passed": true,
+      "checks": 9
+    },
+    {
+      "name": "historical mechanical guard",
+      "passed": true,
+      "bodies": 9,
+      "baselineInputs": 141,
+      "frozen": 3
+    },
+    {
+      "name": "historical390 relocation only",
+      "passed": true,
+      "moves": 189,
+      "outputs": 1017,
+      "currentAcceptance": false
+    },
+    {
+      "name": "binding infrastructure",
+      "passed": true,
+      "adapters": 58,
+      "helperInverses": 132
+    },
+    {
+      "name": "default extraction/provenance/Makefile inverse guards",
+      "passed": true,
+      "removedShims": 6,
+      "consumers": 8,
+      "provenanceFiles": 72,
+      "finiteProfiles": 2
+    }
+  ],
+  "testedGuardSourceSha256": {
+    "scripts/monmove_source_successors.py": "e5ef8bf826adef81fc157153369f6627777d6c3cdd66bb90a090ade377ebe133",
+    "scripts/test-monmove-source-successors.py": "c89fe794cdc06cd4e62d0a34547aa8541953008ad68db2dbb8b86d947467a113",
+    "scripts/services-layout-audit.mjs": "9ee6c643aa180b1208db663582bc7bdaa53bda21baa60cca40df5a632e64b6bc",
+    "scripts/services_layout_audit.py": "57ad2c4e8a0f16ca168b018894eb23e6eb4329759bbaf60d13fc369a789e475e",
+    "scripts/write-c-runtime-manifest.mjs": "1c18d689f4c2b8263575ecbf16e43c8a50792293d6ec69c75eae5a7ac4462ded",
+    "scripts/test-post-default-successors.py": "36831557356db3c4045186890e555fb93ca55423f91cfddf0ea8630a24080c50",
+    "scripts/test-services-layout-successors.py": "b3a462b826e039ad1933f1b7574dec3f6df235e202ea66b96a6f750ecf9dfe03"
+  },
+  "limits": [
+    "Each guard has the listed scope; historical relocation and synthetic fixtures are not gameplay acceptance.",
+    "Verification uses the clean candidate source. Unrelated MAIN test-migration edits are preserved, not included in these results.",
+    "No new combined26-job core execution or natural ordinary full-game victory claim."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "complete": true,
+  "originalNativeCompared": true,
+  "baseCommit": "b0c15ec738de2776f607d2b6909dc7801d3733d5",
+  "qualifiedSourceSha256": {
+    "js/standalone/monster-movement.js": "2601783d13104192197ffdff14747ca611151a25e82c9706a9ba3fa8e039a0df",
+    "js/standalone/monmove-abi.json": "9242d2b32239734679b15e1b3e1d0959257433b51500b68f23c7f99918989769"
+  },
+  "rawProofs": {
+    "docs/runtime-environment/monmove-native-evidence/baseline-failure.log": "0c9b98d284ca9e36eba80f3348d6a9d77094f88be15e2c2b3d4d02ca033e1157",
+    "docs/runtime-environment/monmove-native-evidence/build-standalone-monmove-private.py": "764f292ab513465d7823b88b532ef3146dfdc57394fd816f184606171bd3e7dd",
+    "docs/runtime-environment/monmove-native-evidence/comparison.json": "be2a4bed961b8150ecd1d33fd1677401a9c240225cba043d6a349359b74d320d",
+    "docs/runtime-environment/monmove-native-evidence/reference-commands.json": "ada8599db98e1e78cc10e228ff0df166e0a369a5a292d250b05d6cb17029d6dc",
+    "docs/runtime-environment/monmove-native-evidence/reference-receipt.json": "52a4c1f67fcd851a374b89ee521531c42d31dc2bc9fa7c01c3a1187c78d42395",
+    "docs/runtime-environment/monmove-native-evidence/shared-string-failure.log": "59ac2a3357edb7b742abb3fc556c57999f9d8827cee009e49a0281ef09436190",
+    "docs/runtime-environment/monmove-native-evidence/standalone-monmove-private-probe.c": "46669b96d98132fce8f93334086f13e77c7ed464c9d74b2aca9b18e558ca15d6",
+    "docs/runtime-environment/monmove-native-evidence/test-standalone-monmove-private.mjs": "31e672f167a99bcd4a3b88fc07c606431c0881cc84ad38087744e7058b4028f7",
+    "docs/runtime-environment/monmove-native-evidence/window-dispatch-failure.log": "7d97148f5fc7d5d25b9c3696aef3d5c0e77299f04dd60ab922111825ff2b0ed9"
+  },
+  "scope": "Exact two-file MONMOVE transport follow-up only. Native forwarding oracle reuses complete C game and original policies; live source-created component cases, not natural monster AI or full-game acceptance. Three staged resolution failures and full corrected comparison; raw command/capture receipts retained. Public regression and broader qualification are separate gates.",
+  "positive": {
+    "label": "positive branches",
+    "shifted": 1,
+    "vampireForm": 106,
+    "spiderInvisible": 1,
+    "webType": 18,
+    "webSeen": 1,
+    "attempts": 68,
+    "messageWindow": 1,
+    "something": "something",
+    "messageBuffer": "The vampire turns into a fog cloud!  Something spins a web."
+  },
+  "fullGameAccepted": false
+}

@@ -1,5 +1,37 @@
 # Upstream divergence register
 
+MONMOVE header-helper integration (2026-11-12): the new candidate passes44/44
+strict public recordings through the normal pure-JS entry with the launcher's
+zero session-timeout default. All743 pre-run inputs are byte-identical afterward;
+792,838 RNG calls,11,405 screens/cursors and1,483 animation screens/cursor triples
+match. Shared storage spans all56 segments. See monmove-public-recorder-validation.json.
+
+monster-movement.js now supplies three missing original header helpers from the
+existing owners: WIN_MESSAGE, c_common_strings.c_something (normalized pointer
+address), and windowprocs.win_display_nhwindow. monmove-abi.json changes only the
+provider source pin. No translated policy or frozen code changes. A complete C
+oracle reuses the sealed game objects and recompiles the original MONMOVE TU
+with test-only forwarding exports for private calls/macros; no policy edits,
+synthetic globals or stubs. At genuine MAIN command input, source-created vampire
+and invisible-spider fixtures reach vampire-to-fog and visible-web branches.
+Complete live worlds, both RNG states/logs, raw TTY/frames and the complete source
+message buffer match. The message buffer contains both messages; immediate raw
+TTY output is not incorrectly claimed to contain the pending web message.
+
+The original runtime fails on winMessage; staged helpers then expose absent
+window dispatch and commonString. The exact two-file source qualification and
+native proof are separate from the unchanged nineteen- and six-file cohorts.
+See monmove-native-evidence.json and monmove-qualification-validation.json.
+Source scope retains137 unchanged policies plus only the previously authorized
+VISION correction, three frozen files and zero forbidden production imports.
+Unrelated test-migration edits are preserved and excluded from the tested commit.
+The optional monmove-private fixture extends the integration plan to26 jobs;
+this is not a new combined26-job result or natural ordinary full-game victory.
+Hosted run43201124372 separately confirms44/44 on preceding a17b98d production
+sources; hosted-extended-public-recorder-validation.json does not relabel it as
+this new MONMOVE code. Deferred special interactions and natural complete-game
+progression remain unverified.
+
 Natural sink/POLYSELF verification (2026-11-12): all7 cases pass60 original-C
 comparisons on unchanged published production sources. Literal ordinary MAIN
 routes to naturally generated sinks at seeds26 and85 reach toxic-waste newman

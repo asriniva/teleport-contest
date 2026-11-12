@@ -54,7 +54,7 @@ with tempfile.TemporaryDirectory(prefix='post-default-qualification-')as directo
   newpath=next(iter(q.NEW_FILES));rejected('write to historically absent file',lambda:q.refuse_write(root,newpath,b''));restore()
   # Actual JS and Python inverse APIs, using an isolated read-only Git shim.
   scripts=root/'scripts';scripts.mkdir();source=Path(__file__).resolve().parents[1]
-  for name in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py','post_default_successors.py']:shutil.copyfile(source/'scripts'/name,scripts/name)
+  for name in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py','post_default_successors.py','monmove_source_successors.py']:shutil.copyfile(source/'scripts'/name,scripts/name)
   rowpath='js/standalone/environment.js';prior=b'pre-layout '+before[rowpath]
   store('docs/runtime-environment/services-layout.json',json.dumps({'baselineCommit':'fixture-layout','moves':{},'files':[{'file':rowpath,'destination':rowpath,'beforeSha256':q.sha(prior),'afterSha256':q.sha(before[rowpath])}]}).encode())
   store('history.json',json.dumps({p:None if b is None else b.decode()for p,b in before.items()}).encode())

@@ -32,6 +32,12 @@ const postDefaultPatches='docs/runtime-environment/post-default-source-successor
 if(fs.existsSync(postDefaultPatches))for(const file of fs.readdirSync(postDefaultPatches).filter(name=>name.endsWith('.patch')))paths.push(postDefaultPatches+'/'+file);
 const postDefaultProof='docs/runtime-environment/post-default-native-evidence.json';
 if(fs.existsSync(postDefaultProof))paths.push(...Object.keys(JSON.parse(fs.readFileSync(postDefaultProof)).rawProofs??{}));
+// The MONMOVE correction has its own exact two-file proof, preserving earlier cohorts.
+for(const file of ['scripts/monmove_source_successors.py','scripts/test-monmove-source-successors.py','scripts/test-standalone-monmove-private.mjs','scripts/standalone-monmove-private-probe.c','scripts/build-standalone-monmove-private.py','docs/runtime-environment/monmove-source-successors.json','docs/runtime-environment/monmove-native-evidence.json'])if(fs.existsSync(file))paths.push(file);
+const monmovePatches='docs/runtime-environment/monmove-source-successors';
+if(fs.existsSync(monmovePatches))for(const file of fs.readdirSync(monmovePatches).filter(name=>name.endsWith('.patch')))paths.push(monmovePatches+'/'+file);
+const monmoveProof='docs/runtime-environment/monmove-native-evidence.json';
+if(fs.existsSync(monmoveProof))paths.push(...Object.keys(JSON.parse(fs.readFileSync(monmoveProof)).rawProofs??{}));
 const sha256=Object.fromEntries([...new Set(paths)].sort().map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')]));
 const data={baselineCommit:'df33dd4',integrationBaseCommit:'8cf4880d8cf7fb9104635f068564a5de87523fe7',scope:'Common-runtime cleanup source closure; not game or native equivalence acceptance',sha256};
 const file='docs/runtime-environment/c-runtime-manifest.json',text=JSON.stringify(data,null,2)+'\n';

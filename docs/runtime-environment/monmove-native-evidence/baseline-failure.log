@@ -1,0 +1,50 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: JS private MONMOVE sequence: failed: Error: Unresolved standalone function winMessage
+    at Object.resolve (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/linker.js:31:54)
+    at Proxy.<anonymous> (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/standalone/monster-movement.js:8:272)
+    at Object.get (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/nethack/bindings/monmove.js:64:254)
+    at vamp_shift (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/ported/monmove.js:2348:30)
+    at withCEnvironment (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/context.js:16:16)
+    at callMonmove (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/nethack/bindings/monmove.js:91:335)
+    at privateCall (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-monmove-private.mjs:16:184)
+    at setup (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-monmove-private.mjs:23:24)
+    at readKey (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-monmove-private.mjs:28:406)
+    at teleport_getch (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/standalone/terminal-input.js:12:132)
++ actual - expected
+
++ 'failed: Error: Unresolved standalone function winMessage\n' +
++   '    at Object.resolve (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/linker.js:31:54)\n' +
++   '    at Proxy.<anonymous> (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/standalone/monster-movement.js:8:272)\n' +
++   '    at Object.get (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/nethack/bindings/monmove.js:64:254)\n' +
++   '    at vamp_shift (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/ported/monmove.js:2348:30)\n' +
++   '    at withCEnvironment (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/context.js:16:16)\n' +
++   '    at callMonmove (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/nethack/bindings/monmove.js:91:335)\n' +
++   '    at privateCall (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-monmove-private.mjs:16:184)\n' +
++   '    at setup (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-monmove-private.mjs:23:24)\n' +
++   '    at readKey (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-monmove-private.mjs:28:406)\n' +
++   '    at teleport_getch (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/standalone/terminal-input.js:12:132)'
+- 'input-exhausted'
+
+    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-monmove-private.mjs:38:330 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'failed: Error: Unresolved standalone function winMessage\n' +
+    '    at Object.resolve (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/linker.js:31:54)\n' +
+    '    at Proxy.<anonymous> (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/standalone/monster-movement.js:8:272)\n' +
+    '    at Object.get (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/nethack/bindings/monmove.js:64:254)\n' +
+    '    at vamp_shift (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/ported/monmove.js:2348:30)\n' +
+    '    at withCEnvironment (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/context.js:16:16)\n' +
+    '    at callMonmove (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/nethack/bindings/monmove.js:91:335)\n' +
+    '    at privateCall (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-monmove-private.mjs:16:184)\n' +
+    '    at setup (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-monmove-private.mjs:23:24)\n' +
+    '    at readKey (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-monmove-private.mjs:28:406)\n' +
+    '    at teleport_getch (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/standalone/terminal-input.js:12:132)',
+  expected: 'input-exhausted',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

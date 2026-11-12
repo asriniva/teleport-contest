@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "baseCommit": "b0c15ec738de2776f607d2b6909dc7801d3733d5",
+  "nativeProof": "docs/runtime-environment/monmove-native-evidence.json",
+  "nativeProofSha256": "fdc8e253e26297c4da5a440dca471f5e2f92d1f7a7c45708b60e86a3af583be2",
+  "files": {
+    "js/standalone/monster-movement.js": {
+      "beforeSha256": "cbbc847e9d5189e5ad5ffd9cdb359d3cf53ee2962751cd6498d862502f7f8b5e",
+      "afterSha256": "2601783d13104192197ffdff14747ca611151a25e82c9706a9ba3fa8e039a0df",
+      "patch": "docs/runtime-environment/monmove-source-successors/monster-movement.js.patch",
+      "patchSha256": "fb43890b0b7bfd2e378eae0032ca9ed37be5ac94dbb103f1fac9167b742a13a4"
+    },
+    "js/standalone/monmove-abi.json": {
+      "beforeSha256": "05b4583421c99f4e13208aba8a6a43a937f496d0991ed6a5556a7a0f0f4989e2",
+      "afterSha256": "9242d2b32239734679b15e1b3e1d0959257433b51500b68f23c7f99918989769",
+      "patch": "docs/runtime-environment/monmove-source-successors/monmove-abi.json.patch",
+      "patchSha256": "ba6108f233e5f703f96ddcb39dec6ba1b1e91a4df1705d2e7a27f35ff4e0cb52"
+    }
+  }
+}

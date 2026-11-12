@@ -1,5 +1,7 @@
 # Extend the JavaScript C environment
 
+MONMOVE follow-up (2026-11-12): the three missing header helpers now pass complete original-C private-branch comparisons and [44/44 strict public recordings](monmove-public-recorder-validation.json), including all animation cursor triples. [Qualification results](monmove-qualification-validation.json) preserve the older native cohorts and policy/frozen baselines. The optional controlled `monmove-private` fixture extends this plan to26 jobs; a combined26-job run and natural ordinary complete-game victory remain unverified.
+
 Natural sink/polymorph follow-up (2026-11-12): [seven ordinary MAIN/save cases](sink-main-validation.json) pass60 original-C checks, including natural toxic-waste newman and baby-gray-dragon forms plus four fresh restored consumers. Production sources remain unchanged. The optional `sink-polymorph` job extends the plan to25 jobs; this does not relabel the historical23-job core run as a new combined25-job pass. Natural ordinary full-game victory remains unverified.
 
 Natural riding follow-up (2026-11-12): [eight ordinary MAIN riding/save cases](riding-main-validation.json) pass51 checks on published a17b98d production sources. The new `riding` integration job extends the plan to24 jobs; the existing23-job result remains a separate historical run. No natural full-game victory claim is made.

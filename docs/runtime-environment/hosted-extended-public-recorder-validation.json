@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "complete": true,
+  "fullGameAccepted": false,
+  "commit": "a17b98d00e73dced733cdf7c562431be9f572c62",
+  "runId": 43201124372,
+  "runUrl": "https://github.com/asriniva/teleport-contest/actions/runs/43201124372",
+  "officialPassed": 44,
+  "total": 44,
+  "allReportedMetricsExact": true,
+  "metrics": {
+    "rngCalls": {
+      "matched": 792838,
+      "total": 792838
+    },
+    "screens": {
+      "matched": 11405,
+      "total": 11405
+    },
+    "cellsOnly": {
+      "matched": 11405,
+      "total": 11405
+    },
+    "cursors": {
+      "matched": 11405,
+      "total": 11405
+    },
+    "animFrames": {
+      "matched": 1483,
+      "total": 1483
+    }
+  },
+  "artifactsSha256": {
+    "score-summary.json": "e11ed202628d963377a549bf6bad8382c524b1f06344d6468fbffc0886a83bd4",
+    "score-stdout.txt": "1cc9cad579fc830bd66fc42f4d9c4ccd43866d36b405881a7f8036f9b85d280c",
+    "run.json": "182922adb54dafcb387d44ed169185b71cf1f037fbd14ef8b00b596a9f9e255b"
+  },
+  "limits": [
+    "This hosted run covers a17b98d production sources, shared unchanged by subsequent riding/sink test-only commits through b0c15ec. It does not cover the uncommitted MONMOVE transport fix.",
+    "Actual score artifacts inspected; job success alone was not treated as recording equivalence.",
+    "Hosted animation cursor triples have no supplemental diagnostic telemetry; separate local strict recorder reports provide that check.",
+    "No natural ordinary full-game victory claim."
+  ]
+}
