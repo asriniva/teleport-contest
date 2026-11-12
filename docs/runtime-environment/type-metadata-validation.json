@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "complete": true,
+  "nativeCompared": true,
+  "recordingsPending": false,
+  "fullGameAccepted": false,
+  "baseCommit": "a2adb495bee21ccbc2ceb9ead95a8083be342df0",
+  "candidateSourceSha256": {
+    "js/c-runtime/types.js": "da05a56c3bc624b880f88303bd7a089b74832bd2e91d3748ac53c4da6a46b8b4",
+    "js/c-runtime/address-bindings.js": "098cc9841e9d10262f5ab36f8c2d005cf2a2f742fd1e7d0cb95edb2427c83c2f"
+  },
+  "connectedNativeGameChecks": 69,
+  "sharedOriginalCRuntimeChecks": 1294,
+  "syntheticFieldContracts": 478,
+  "sourceQualificationNegativeChecks": 10,
+  "rawProofs": {
+    "docs/runtime-environment/type-metadata-native-evidence/ordinary-game.json": "3b529b4c1a5c0cc389f83fc931ff508549b95e5ab365fd1fb74f063b38c1d0c0",
+    "docs/runtime-environment/type-metadata-native-evidence/engulf.json": "36c7b17ff8d604830a7bcb139ca88b81d1a27575ef86b91f6cdbed40fe12dbc5",
+    "docs/runtime-environment/type-metadata-native-evidence/field-contracts.log": "d69cb62ecaf71f547e373c3a62def582592d2bfadfb18eb9dad82bdb42638823",
+    "docs/runtime-environment/type-metadata-native-evidence/native-runtime.log": "e543ecb72d2d6b8685fef88ee30558fdb0d7c2a40a43a63237ddcaf6081d2410",
+    "docs/runtime-environment/type-metadata-native-evidence/public-summary.json": "f872e0374e526ee0ff3d48d979d6e6688e461672708b58c0c84b5bb6de9a98e8",
+    "docs/runtime-environment/type-metadata-native-evidence/public-official-results.json": "251ee38df6359b32b73918ced3c15daf81ce3bb2dbf7df204889252d3e29abf1",
+    "docs/runtime-environment/type-metadata-native-evidence/public-pre-run.json": "747ae54833f67730c4948bbddaa7abd10b7f428b03a3fea7746245d5796c5d7e",
+    "docs/runtime-environment/type-metadata-native-evidence/public-integrity.json": "8e1c471cfd84ed4887718f305d0f9cb5dd53c775b78bff23e5ff5545e15a37f7",
+    "docs/runtime-environment/type-metadata-native-evidence/public-cpu-profile.json": "fd6339bfd0c30dd050231094741813f145976c6e875068e406f92b12b4f68767",
+    "docs/runtime-environment/type-metadata-native-evidence/microbenchmark.json": "04f1120d68220d98142eb90b82d4c1f5a43c4be89d1e7c508f1cefdfb71d9929"
+  },
+  "scope": "Two-file metadata optimization.69 connected original-C checks,1294 shared runtime comparisons,478 synthetic API contracts and44 strict public sessions pass. Whole-game speed comparison remains pending because local timing was CPU-contended; paired same-runner CI is prepared. Upstream45-second per-session target is not achieved or claimed.",
+  "strictPublicPassed": 44,
+  "allProfiledWorkers": 44,
+  "profileWallSeconds": 1239.7770371437073,
+  "performanceAcceptancePending": true,
+  "wholeGameSpeedupAccepted": false,
+  "microbenchmarkCpuRatios": {
+    "description": 0.43759117698547,
+    "fieldRead": 0.4949859699158195,
+    "bindingRead": 0.5723942152123637,
+    "bindingAddress": 0.3592432941833476,
+    "fieldWrite": 0.6546055913252347
+  },
+  "topSelf": [
+    {
+      "file": "",
+      "function": "(garbage collector)",
+      "line": 0,
+      "column": 0,
+      "sampledMs": 99383.639,
+      "percent": 8.093
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "env.field",
+      "line": 100,
+      "column": 13,
+      "sampledMs": 31442.551,
+      "percent": 2.56
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "free",
+      "line": 74,
+      "column": 9,
+      "sampledMs": 28426.399,
+      "percent": 2.315
+    },
+    {
+      "file": "js/ported/termcap.js",
+      "function": "nomux_capture_screen",
+      "line": 784,
+      "column": 37,
+      "sampledMs": 28359.687,
+      "percent": 2.309
+    },
+    {
+      "file": "js/c-runtime/context.js",
+      "function": "withCEnvironment",
+      "line": 8,
+      "column": 33,
+      "sampledMs": 23702.251,
+      "percent": 1.93
+    },
+    {
+      "file": "js/c-runtime/records.js",
+      "function": "record",
+      "line": 6,
+      "column": 20,
+      "sampledMs": 20174.095,
+      "percent": 1.643
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "load",
+      "line": 32,
+      "column": 18,
+      "sampledMs": 19792.899,
+      "percent": 1.612
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "malloc",
+      "line": 48,
+      "column": 11,
+      "sampledMs": 15914.027,
+      "percent": 1.296
+    },
+    {
+      "file": "node:internal/modules/esm/utils",
+      "function": "compileSourceTextModule",
+      "line": 344,
+      "column": 33,
+      "sampledMs": 15652.941,
+      "percent": 1.275
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "currentDataView",
+      "line": 12,
+      "column": 32,
+      "sampledMs": 15375.701,
+      "percent": 1.252
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "array",
+      "line": 64,
+      "column": 16,
+      "sampledMs": 14631.313,
+      "percent": 1.191
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "env.field",
+      "line": 117,
+      "column": 13,
+      "sampledMs": 14130.957,
+      "percent": 1.151
+    }
+  ]
+}

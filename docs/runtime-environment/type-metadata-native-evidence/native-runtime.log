@@ -1,0 +1,2 @@
+PASS: 1294 original-C runtime comparisons; 6000 ISAAC values and full states, MD4 chunk/digest/cleared states, strbuf/wildcards, integer parsing and formatting.
+PASS: JS-owned allocation/reallocation/growth/aliases/failure, scoped cleanup, nested instance isolation and restored C bindings; no Module or Wasm used by the service provider.

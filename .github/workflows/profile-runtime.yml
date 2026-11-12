@@ -1,0 +1,65 @@
+name: Profile runtime comparison
+on:
+  workflow_dispatch:
+    inputs:
+      baseline_commit:
+        description: Baseline commit to compare on the same runner
+        required: true
+        default: a2adb495bee21ccbc2ceb9ead95a8083be342df0
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Export baseline without a Git worktree
+        env:
+          BASELINE_COMMIT: ${{ inputs.baseline_commit }}
+        run: |
+          [[ "$BASELINE_COMMIT" =~ ^[0-9a-fA-F]{40}$ ]]
+          git fetch --depth=1 origin "$BASELINE_COMMIT"
+          mkdir "$RUNNER_TEMP/runtime-baseline"
+          git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/runtime-baseline"
+          git rev-parse FETCH_HEAD > "$RUNNER_TEMP/baseline-commit.txt"
+          git rev-parse HEAD > "$RUNNER_TEMP/candidate-commit.txt"
+      - name: Profile and strictly verify all 44 baseline sessions
+        run: |
+          python3 scripts/profile-public-recorder.py "$RUNNER_TEMP/runtime-baseline" \
+            --node "$(command -v node)" --output "$RUNNER_TEMP/profile-baseline"
+          ln -s "$RUNNER_TEMP/runtime-baseline" "$RUNNER_TEMP/profile-baseline/score-repo"
+          node "$RUNNER_TEMP/runtime-baseline/scripts/score-standalone.mjs" \
+            --summarize "$RUNNER_TEMP/profile-baseline"
+          python3 scripts/profile-recorder-cpu.py "$RUNNER_TEMP/profile-baseline"
+      - name: Profile and strictly verify all 44 candidate sessions
+        run: |
+          python3 scripts/profile-public-recorder.py . --node "$(command -v node)" \
+            --output "$RUNNER_TEMP/profile-candidate"
+          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/profile-candidate/score-repo"
+          node scripts/score-standalone.mjs --summarize "$RUNNER_TEMP/profile-candidate"
+          python3 scripts/profile-recorder-cpu.py "$RUNNER_TEMP/profile-candidate"
+      - name: Compare verified runtime profiles
+        run: |
+          python3 scripts/compare-recorder-profiles.py \
+            "$RUNNER_TEMP/profile-baseline" "$RUNNER_TEMP/profile-candidate" \
+            --out "$RUNNER_TEMP/runtime-comparison.json"
+      - name: Upload comparison and raw diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-profile-comparison
+          path: |
+            ${{ runner.temp }}/baseline-commit.txt
+            ${{ runner.temp }}/candidate-commit.txt
+            ${{ runner.temp }}/runtime-comparison.json
+            ${{ runner.temp }}/profile-baseline/*.json
+            ${{ runner.temp }}/profile-baseline/*.log
+            ${{ runner.temp }}/profile-baseline/stats/
+            ${{ runner.temp }}/profile-baseline/profiles/
+            ${{ runner.temp }}/profile-candidate/*.json
+            ${{ runner.temp }}/profile-candidate/*.log
+            ${{ runner.temp }}/profile-candidate/stats/
+            ${{ runner.temp }}/profile-candidate/profiles/

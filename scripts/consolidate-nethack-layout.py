@@ -102,6 +102,9 @@ def plan():
  return rows
 
 def qualified_current(file):
+ if file in {'js/c-runtime/types.js','js/c-runtime/address-bindings.js'}and(ROOT/'scripts/type_metadata_source_successor.py').exists():
+  from type_metadata_source_successor import qualified_before
+  return qualified_before(ROOT,file)
  # A separate finite native/source successor precedes the immutable relocation.
  if (ROOT/'docs/runtime-environment/transport-allocation-source-successors.json').exists():
   from transport_allocation_source_successors import ALLOWED,qualified_before
