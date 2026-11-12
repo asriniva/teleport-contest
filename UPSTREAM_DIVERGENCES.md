@@ -1,5 +1,25 @@
 # Upstream divergence register
 
+Expanded integration regression (2026-11-12): all29 named jobs pass in one
+fresh sequential run on the cd82ffb test snapshot and unchanged d9554ab production
+sources. Per-job source/assets checks and final provenance remain stable. This
+includes ordinary startup/actions/riding/shop/Mines/status/polymorph, restored
+worlds/stairs, score/quit, actual D5 death and fresh four-way bones, plus explicitly
+controlled Quest/invocation/elemental/ascension fixtures and a debug MAIN victory
+journey. Their different scopes remain labelled in expanded29-core-validation.json;
+this is not natural ordinary victory or exhaustive special-interaction acceptance.
+All743 normal scorer inputs still match the accepted strict44/44 proof; no fresh
+public replay invocation is claimed. Full raw job/parent receipts are retained in
+expanded29-core-evidence with gzip and uncompressed hashes. Four large death/bones
+outputs were compressed only after their tests and all consumers passed, with
+full decompression equality verified; no comparison inputs or assertions changed.
+
+A separate literal --dumpweights probe exposes a remaining transport defect:
+original C exits0 with56,675 stdout bytes, while JS fails before output because
+HACK passes a BigInt sizeof-derived allocation size to its unnormalized unsigned-int
+allocator boundary. The current29 jobs do not cover that path. Fixing it and
+verifying subsequent CLI branches are pending; source ports/frozen files unchanged.
+
 Natural shop transaction verification (2026-11-12): a normal seed7 Tourist
 travels from D1 to Ballingeary's D2 bookstore. Five literal pickup/payment/resale
 paths, real unpaid save and eight fresh C/JS consumers pass147 checks/14 cases.

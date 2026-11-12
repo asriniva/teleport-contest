@@ -1,5 +1,7 @@
 # Extend the JavaScript C environment
 
+Expanded regression (2026-11-12): [all29 integration jobs](expanded29-core-validation.json) pass in a single fixed-source run, retaining the distinct ordinary, controlled-source and debug MAIN scopes. All743 scorer inputs remain equal to the strict44/44 production snapshot. A separate `--dumpweights` probe reveals an uncovered allocation conversion failure; that fix, deferred interactions and natural ordinary complete-game victory remain unfinished.
+
 Natural shop transactions (2026-11-12): [fourteen ordinary transaction/save cases](shop-main-validation.json) pass147 original-C checks, including identity-bound unpaid bills, cash payment, both resale outcomes and eight fresh cross-fed restores. All743 scored inputs still equal d9554ab and its strict44/44 proof. The optional `shop-transactions` job extends the plan to29 jobs; a combined29-job run and natural ordinary complete-game victory remain unverified.
 
 Natural Mines progression (2026-11-12): [ten ordinary progression/save cases](mines-main-validation.json) pass61 original-C checks, including the first three Mines levels, branch return/revisit and four fresh restored consumers with level travel. All743 scored inputs remain equal to d9554ab and its strict44/44 proof. The optional `mines-progression` job extends the plan to28 jobs; a combined28-job run and natural ordinary complete-game victory remain unverified.
