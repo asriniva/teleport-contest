@@ -11,11 +11,6 @@ jobs:
   compare:
     runs-on: ubuntu-latest
     timeout-minutes: 90
-    env:
-      STANDALONE_RECORDER_ASSETS: ''
-      STANDALONE_RECORDER_LAYOUTS: ''
-      STANDALONE_RECORD_LAYOUTS: ''
-      NODE_OPTIONS: ''
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -33,6 +28,7 @@ jobs:
           git rev-parse HEAD > "$RUNNER_TEMP/candidate-commit.txt"
       - name: Profile and strictly verify all 44 baseline sessions
         run: |
+          unset STANDALONE_RECORDER_ASSETS STANDALONE_RECORDER_LAYOUTS STANDALONE_RECORD_LAYOUTS NODE_OPTIONS
           python3 scripts/profile-public-recorder.py "$RUNNER_TEMP/runtime-baseline" \
             --node "$(command -v node)" --output "$RUNNER_TEMP/profile-baseline"
           ln -s "$RUNNER_TEMP/runtime-baseline" "$RUNNER_TEMP/profile-baseline/score-repo"
@@ -41,6 +37,7 @@ jobs:
           python3 scripts/profile-recorder-cpu.py "$RUNNER_TEMP/profile-baseline"
       - name: Profile and strictly verify all 44 candidate sessions
         run: |
+          unset STANDALONE_RECORDER_ASSETS STANDALONE_RECORDER_LAYOUTS STANDALONE_RECORD_LAYOUTS NODE_OPTIONS
           python3 scripts/profile-public-recorder.py . --node "$(command -v node)" \
             --output "$RUNNER_TEMP/profile-candidate"
           ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/profile-candidate/score-repo"

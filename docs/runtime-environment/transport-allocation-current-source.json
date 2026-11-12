@@ -3,7 +3,7 @@
   "baseCommit": "1dab2c64a80d86e2398875c0e3d45017f174abf1",
   "scope": "Current implementation/tool/evidence source closure; historical391-hash receipt remains unchanged. Not runtime/game acceptance.",
   "sha256": {
-    ".github/workflows/profile-runtime.yml": "fcff8d387f606336c958467d9b3ca288d9ca6ac37b0708ed8fff39f4a328196f",
+    ".github/workflows/profile-runtime.yml": "3ea2abf64481d0c845c7b170ff7288078304e5db61388c662eae7860d1b227a0",
     ".github/workflows/score.yml": "b3ab65a76ac20cb00ccf1bcb7b9b7037b98335d8627246d040769c032b3560e4",
     "docs/runtime-environment/engulf-main-evidence/c-result.json.gz": "b8ae6f0439ada345d6847d788f9ed1934ba77352369d2df3886efca15cbd2c87",
     "docs/runtime-environment/engulf-main-evidence/evidence.json": "2eded81337c657588be1ee26a9c2ff60ca55a4378bf407649f8f7dfd3b6d522d",
