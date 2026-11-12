@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "complete": true,
+  "fullGameAccepted": false,
+  "baseCommit": "6cef511b20b89e1ed98f2b9ef5bf721875783fbb",
+  "qualifiedSourceSha256": {
+    "js/standalone/window-system.js": "c25c0de88b8ab32125d9a8c65d91b4d7ff9c546cc76f75b95a05c9ca4582e2f4",
+    "js/standalone/window-abi.json": "91fbe605d0977a2ecd72c06fcb3a913058050d3137b2df07eaf0f3116d1e8d7d",
+    "js/standalone/turn-loop-abi.json": "e8ffe32d03df246a867455004b92f0bf724aa276710b155d51719feb5650027c"
+  },
+  "nativeProofSha256": "e62e63abd900a05f22957b95a8e09326e5506d1f521d8eef0456bd77dd7a8c62",
+  "publicProofSha256": "d0e18a3514462b721b1da00383c655a7eee1132bb1cdd7b3872be7b2894d5e87",
+  "checks": [
+    {
+      "name": "ordinary MAIN status editor vs complete original C",
+      "passed": true,
+      "cases": 4,
+      "checks": 37
+    },
+    {
+      "name": "strict public recordings, timeout0",
+      "passed": true,
+      "official": 44,
+      "strict": 44,
+      "animationCursorTriples": 1483,
+      "unchangedInputs": 743
+    },
+    {
+      "name": "three-file exact native/source qualification",
+      "passed": true,
+      "paths": 3
+    },
+    {
+      "name": "window qualification positive/adversarial/layered API suite",
+      "passed": true,
+      "checks": 32
+    },
+    {
+      "name": "preserved MONMOVE exact cohort and synthetic suite",
+      "passed": true,
+      "paths": 2,
+      "checks": 30
+    },
+    {
+      "name": "preserved post-default exact cohort and synthetic suite",
+      "passed": true,
+      "paths": 19,
+      "checks": 55
+    },
+    {
+      "name": "preserved original six exact cohort and synthetic suite",
+      "passed": true,
+      "paths": 6,
+      "checks": 28
+    },
+    {
+      "name": "current source manifest",
+      "passed": true,
+      "files": 340
+    },
+    {
+      "name": "scope/policy/frozen boundaries",
+      "passed": true,
+      "productionFiles": 580,
+      "unchangedPolicies": 137,
+      "approvedVisionCorrection": true,
+      "frozen": 3,
+      "forbidden": 0
+    },
+    {
+      "name": "mechanical relocation and original inputs",
+      "passed": true,
+      "bodies": 9,
+      "inputs": 141
+    },
+    {
+      "name": "current audit negative controls",
+      "passed": true,
+      "checks": 9
+    },
+    {
+      "name": "SDK extension and runtime boundaries",
+      "passed": true,
+      "boundaryFiles": 30
+    },
+    {
+      "name": "historical relocation reproduction only",
+      "passed": true,
+      "sourceMoves": 189,
+      "exactSourcesAndMetadata": 1017
+    },
+    {
+      "name": "binding extraction",
+      "passed": true,
+      "adapters": 58,
+      "helpers": 132
+    },
+    {
+      "name": "shim removal and consumer inverses",
+      "passed": true,
+      "shims": 6,
+      "consumers": 8
+    },
+    {
+      "name": "provenance and finite profiles",
+      "passed": true,
+      "files": 72,
+      "profiles": 2
+    },
+    {
+      "name": "Makefile inverse with unknown-byte negative controls",
+      "passed": true,
+      "negativeControls": 2
+    },
+    {
+      "name": "optional status-editor orchestrator preflight",
+      "passed": true,
+      "combined27JobRun": false
+    }
+  ],
+  "limits": [
+    "Four bounded ordinary status-menu paths and 44 public sessions; no natural complete-game victory or complete special-interaction coverage.",
+    "The earlier round10 was explicitly stopped with exit130 due to a stale dependent fingerprint; only final round11 is accepted.",
+    "The optional integration plan now has27 jobs; no combined27-job run is claimed.",
+    "Source policies and all three frozen dependencies retain their existing baseline, including only the previously approved VISION correction."
+  ]
+}

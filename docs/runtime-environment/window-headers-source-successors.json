@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "baseCommit": "6cef511b20b89e1ed98f2b9ef5bf721875783fbb",
+  "nativeProof": "docs/runtime-environment/window-headers-native-evidence.json",
+  "nativeProofSha256": "e62e63abd900a05f22957b95a8e09326e5506d1f521d8eef0456bd77dd7a8c62",
+  "files": {
+    "js/standalone/window-system.js": {
+      "beforeSha256": "6a4db514fc086bed95e75821f76cfc44b646aa402aa7949374eddded82b34a3e",
+      "afterSha256": "c25c0de88b8ab32125d9a8c65d91b4d7ff9c546cc76f75b95a05c9ca4582e2f4",
+      "patch": "docs/runtime-environment/window-headers-source-successors/window-system.js.patch",
+      "patchSha256": "532d328ae1dae12fcb15b6eb960d07c6575ce0c8b411823506869ac0ea1ef9f0"
+    },
+    "js/standalone/window-abi.json": {
+      "beforeSha256": "917300f2fb5242d594f764f20e8686466a83678942c0c79ef265985eab7180aa",
+      "afterSha256": "91fbe605d0977a2ecd72c06fcb3a913058050d3137b2df07eaf0f3116d1e8d7d",
+      "patch": "docs/runtime-environment/window-headers-source-successors/window-abi.json.patch",
+      "patchSha256": "891c0d0c0ac0476fd016352fd8e471d571a7521fb2a60c09719558b8d7e001e7"
+    },
+    "js/standalone/turn-loop-abi.json": {
+      "beforeSha256": "9cc3d2a1a12f38c15a83558cfd52d3ed28d0c3eb4abd66298df941840e778c46",
+      "afterSha256": "e8ffe32d03df246a867455004b92f0bf724aa276710b155d51719feb5650027c",
+      "patch": "docs/runtime-environment/window-headers-source-successors/turn-loop-abi.json.patch",
+      "patchSha256": "c95f2d4721a1dffea97c2b8f61ad4b8fe82dbd06f946eba04354b63e388d3bd9"
+    }
+  }
+}

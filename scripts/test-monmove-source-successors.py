@@ -39,7 +39,7 @@ with tempfile.TemporaryDirectory(prefix='monmove-source-qualification-')as direc
   reject('unknown source',lambda:q.qualified_before(root,'js/unreviewed.js'))
   reject('overwriting current feature',lambda:q.refuse_write(root,target,before[target]));assert(root/target).read_bytes()==after[target];checks+=1
  # Exercise real layered JavaScript/Python readers with an isolated read-only Git shim.
- for name in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py','post_default_successors.py','monmove_source_successors.py']:
+ for name in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py','post_default_successors.py','monmove_source_successors.py','window_headers_source_successors.py']:
   (root/'scripts').mkdir(exist_ok=True);shutil.copyfile(source/'scripts'/name,root/'scripts'/name)
  put('history.json',json.dumps({p:b.decode()for p,b in before.items()}).encode())
  put('docs/runtime-environment/services-layout.json',json.dumps({'baselineCommit':'fixture-layout','moves':{},'files':[{'file':sibling,'destination':sibling,'beforeSha256':q.sha(b'pre-layout '+before[sibling]),'afterSha256':q.sha(before[sibling])}]}).encode())

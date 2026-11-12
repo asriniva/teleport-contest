@@ -38,6 +38,12 @@ const monmovePatches='docs/runtime-environment/monmove-source-successors';
 if(fs.existsSync(monmovePatches))for(const file of fs.readdirSync(monmovePatches).filter(name=>name.endsWith('.patch')))paths.push(monmovePatches+'/'+file);
 const monmoveProof='docs/runtime-environment/monmove-native-evidence.json';
 if(fs.existsSync(monmoveProof))paths.push(...Object.keys(JSON.parse(fs.readFileSync(monmoveProof)).rawProofs??{}));
+// Shared window-header aliases have an independent exact native/source cohort.
+for(const file of ['scripts/window_headers_source_successors.py','scripts/test-window-headers-source-successors.py','scripts/test-standalone-status-editor.mjs','scripts/fixtures/standalone-status-editor.json','docs/runtime-environment/window-headers-source-successors.json','docs/runtime-environment/window-headers-native-evidence.json'])if(fs.existsSync(file))paths.push(file);
+const windowHeaderPatches='docs/runtime-environment/window-headers-source-successors';
+if(fs.existsSync(windowHeaderPatches))for(const file of fs.readdirSync(windowHeaderPatches).filter(name=>name.endsWith('.patch')))paths.push(windowHeaderPatches+'/'+file);
+const windowHeaderProof='docs/runtime-environment/window-headers-native-evidence.json';
+if(fs.existsSync(windowHeaderProof))paths.push(...Object.keys(JSON.parse(fs.readFileSync(windowHeaderProof)).rawProofs??{}));
 const sha256=Object.fromEntries([...new Set(paths)].sort().map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')]));
 const data={baselineCommit:'df33dd4',integrationBaseCommit:'8cf4880d8cf7fb9104635f068564a5de87523fe7',scope:'Common-runtime cleanup source closure; not game or native equivalence acceptance',sha256};
 const file='docs/runtime-environment/c-runtime-manifest.json',text=JSON.stringify(data,null,2)+'\n';

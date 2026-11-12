@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "complete": true,
+  "originalNativeCompared": true,
+  "baseCommit": "6cef511b20b89e1ed98f2b9ef5bf721875783fbb",
+  "qualifiedSourceSha256": {
+    "js/standalone/window-system.js": "c25c0de88b8ab32125d9a8c65d91b4d7ff9c546cc76f75b95a05c9ca4582e2f4",
+    "js/standalone/window-abi.json": "91fbe605d0977a2ecd72c06fcb3a913058050d3137b2df07eaf0f3116d1e8d7d",
+    "js/standalone/turn-loop-abi.json": "e8ffe32d03df246a867455004b92f0bf724aa276710b155d51719feb5650027c"
+  },
+  "rawProofs": {
+    "docs/runtime-environment/window-headers-native-evidence/baseline-failure.json": "25bade6df9ae21eef60bf1acafbecc2b2f959dd60133a0095242bb661402a647",
+    "docs/runtime-environment/window-headers-native-evidence/baseline-native-editor.json": "723c78e7181136c936fec9583e0504f61299466449e5ca0ce18191d25f2331b6",
+    "docs/runtime-environment/window-headers-native-evidence/comparison.json": "e9d91a4ee36291878f46b121ab32301461c0fa61439374ca734a42fa6c912282",
+    "docs/runtime-environment/window-headers-native-evidence/standalone-status-editor.json": "9f35d5a505ff7fcf7010d91439d5ad1847498bdc5d60b84802920d3321aee2be",
+    "docs/runtime-environment/window-headers-native-evidence/test-standalone-status-editor.mjs": "f087eff3a0b9e4f55d2edd514a074774c6fb9fe4d261c8ff8b4f3fba618e1059"
+  },
+  "scope": "Eight standard header aliases delegate to the existing measured window callback owner. Four ordinary MAIN options-menu paths compare complete original-C recordings, full RNG states and worlds, positive rule counts and config text. Provider source pin and the dependent turn-loop fingerprint propagate without layout changes. No setup or game-state/input-depth writes. This is bounded window/status integration, not complete-game acceptance.",
+  "fullGameAccepted": false
+}

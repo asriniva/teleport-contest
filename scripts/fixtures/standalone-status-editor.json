@@ -1,0 +1,9 @@
+{
+  "profile": {"seed":1,"timezone":"UTC","options":"OPTIONS=!news\n"},
+  "cases": [
+    {"name":"open-editor","keys":"  nO>n","rules":0,"expectedText":"Status hilites:"},
+    {"name":"add-critical-hp-rule","keys":"  nO>nrCba \u001b\u001b\u001b","rules":1,"expectedText":"hitpoints/criticalhp/red"},
+    {"name":"view-config-format","keys":"  nO>nrCba \u001ba","rules":1,"expectedText":"OPTIONS=hilite_status: hitpoints/criticalhp/red"},
+    {"name":"remove-rule","keys":"  nO>nrCba aX\n\u001b\u001b","rules":0,"expectedText":"hitpoints/criticalhp/red"}
+  ]
+}

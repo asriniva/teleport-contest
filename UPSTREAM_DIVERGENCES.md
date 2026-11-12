@@ -1,5 +1,26 @@
 # Upstream divergence register
 
+Shared window-header integration (2026-11-12): eight missing windows.h aliases
+(create/destroy window, cursor, display, plain/mixed text and start/end menu)
+now delegate through the existing window owner and measured callback dispatchers.
+The provider source pin and dependent turn-loop fingerprint propagate unchanged
+layouts. Four literal ordinary MAIN status-editor paths pass37 original-C
+checks: open editor, add a critical-HP red rule, view config text and remove it.
+Complete recordings, both RNG states/logs, raw TTY and world graphs match;
+read-only original rule counts prove0→1→0 effects. No source setup, raw game or
+input-depth writes, translated-policy or frozen changes.
+
+The final snapshot passes44/44 strict public recordings through normal jsmain
+with timeout0:792,838 RNG calls,11,405 screens/cursors and1,483 animation screens
+and cursor triples. All743 scored inputs remain unchanged;56 segments consume
+11,349 keys with56 storage gets and sets. Exact three-file qualification,
+32 new adversarial/API checks and the preserved older cohorts pass alongside
+source/extraction guards and340 manifest hashes. See window-headers-public-recorder-validation.json
+and window-headers-qualification-validation.json. Earlier round10 was stopped
+with exit130 after a stale metadata pin was found; only repaired round11 counts.
+The optional status-editor job extends the plan to27 jobs; a combined27-job run
+and natural ordinary full-game victory remain unverified.
+
 MONMOVE header-helper integration (2026-11-12): the new candidate passes44/44
 strict public recordings through the normal pure-JS entry with the launcher's
 zero session-timeout default. All743 pre-run inputs are byte-identical afterward;

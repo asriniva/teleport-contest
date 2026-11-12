@@ -1,0 +1,55 @@
+{
+  "rawCaptureSha256": "cfe2ba716aede7278319641d6add2f4298e1943734d8aca8a380d6368188b819",
+  "scope": "Compact excerpt of the cached raw discovery capture, not a separate native acceptance gate. Corrected four-case comparison is comparison.json.",
+  "input": {
+    "seed": 1,
+    "datetime": "20260102030405",
+    "clockEpoch": "1777723200",
+    "programName": "nethack",
+    "argv": [
+      "-u",
+      "Ada-male-lawful",
+      "-p",
+      "Archeologist",
+      "-r",
+      "human"
+    ],
+    "keys": "  nO>n",
+    "options": "OPTIONS=!news\n",
+    "environment": {
+      "NETHACKDIR": "/nethack",
+      "HACKDIR": "/nethack",
+      "HOME": "/home/player",
+      "USER": "root",
+      "LOGNAME": "root",
+      "MAIL": "/nethack/mailbox",
+      "TERM": "xterm-256color",
+      "TERMINFO": "/nethack/terminfo",
+      "LINES": "24",
+      "COLUMNS": "80",
+      "TZ": "UTC",
+      "NETHACK_NO_DELAY": "1",
+      "NOMUX_MARKERS": "1",
+      "NETHACK_RAW_KEYS": "1",
+      "NETHACK_SEED": "1",
+      "NETHACK_FIXED_DATETIME": "20260102030405",
+      "NETHACK_RECORDING_EPOCH": "1777723200",
+      "NETHACK_RNGLOG": "/rng.log",
+      "NETHACK_RNGLOG_DISP": "/rng-display.log"
+    }
+  },
+  "status": {
+    "kind": "failed",
+    "message": "Error: Unresolved standalone function create_nhwindow\n    at Object.resolve (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/monmove-runtime-20261112-r6/js/c-runtime/linker.js:31:54)\n    at Proxy.<anonymous> (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/monmove-runtime-20261112-r6/js/standalone/status.js:15:53)\n    at Proxy.<anonymous> (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/monmove-runtime-20261112-r6/js/nethack/bindings/botl.js:234:296)\n    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/monmove-runtime-20261112-r6/js/nethack/bindings/botl.js:164:96\n    at Object.create_nhwindow (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/monmove-runtime-20261112-r6/js/c-runtime/adapter-factories.js:80:138)\n    at status_hilite_menu (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/monmove-runtime-20261112-r6/js/ported/botl.js:4111:16)\n    at withCEnvironment (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/monmove-runtime-20261112-r6/js/c-runtime/context.js:16:16)\n    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/monmove-runtime-20261112-r6/js/nethack/bindings/botl.js:241:72\n    at withServices (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/monmove-runtime-20261112-r6/js/nethack/bindings/botl.js:236:145)\n    at callBotl (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/monmove-runtime-20261112-r6/js/nethack/bindings/botl.js:238:63)"
+  },
+  "consumed": 6,
+  "lastFrame": {
+    "screen": "\n \u001b[7m Map\u001b[28C\u001b[0m\n a - bgcolors\u001b[16C[X]\n b - color\u001b[19C[X]\n c - customcolors\u001b[12C[X]\n d - customsymbols\u001b[11C[X]\n e - hilite_pet\u001b[14C[ ]\n f - hilite_pile\u001b[13C[ ]\n g - showrace\u001b[16C[ ]\n h - sparkle\u001b[17C[X]\n i - symset\u001b[18C[default]\n\n \u001b[7m Status\u001b[25C\u001b[0m\n j - hitpointbar\u001b[13C[ ]\n k - menu colors\u001b[13C[(0 currently set)]\n l - showexp\u001b[17C[ ]\n m - status condition fields [(16 currently set)]\n n - status highlight rules  [(0 currently set)]\n o - statuslines\u001b[13C[2]\n p - time\u001b[20C[ ]\n (2 of 2)",
+    "cursor": [
+      9,
+      20,
+      1
+    ],
+    "animation": false
+  }
+}

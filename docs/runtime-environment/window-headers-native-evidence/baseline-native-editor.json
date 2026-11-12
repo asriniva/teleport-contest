@@ -1,0 +1,54 @@
+{
+  "rawCaptureSha256": "fbf57a89a6e04faf5d53b7711f64b904b01b0e2f057b5e6552fd81ceaa40dc2f",
+  "scope": "Compact excerpt of the cached raw discovery capture, not a separate native acceptance gate. Corrected four-case comparison is comparison.json.",
+  "input": {
+    "programName": "nethack",
+    "seed": 1,
+    "datetime": "20260102030405",
+    "clockEpoch": "1777723200",
+    "argv": [
+      "-u",
+      "Ada-male-lawful",
+      "-p",
+      "Archeologist",
+      "-r",
+      "human"
+    ],
+    "keys": "  nO>n",
+    "options": "OPTIONS=!news\n",
+    "environment": {
+      "NETHACKDIR": "/nethack",
+      "HACKDIR": "/nethack",
+      "HOME": "/home/player",
+      "USER": "root",
+      "LOGNAME": "root",
+      "MAIL": "/nethack/mailbox",
+      "TERM": "xterm-256color",
+      "TERMINFO": "/nethack/terminfo",
+      "LINES": "24",
+      "COLUMNS": "80",
+      "TZ": "UTC",
+      "NETHACK_NO_DELAY": "1",
+      "NOMUX_MARKERS": "1",
+      "NETHACK_RAW_KEYS": "1",
+      "NETHACK_SEED": "1",
+      "NETHACK_FIXED_DATETIME": "20260102030405",
+      "NETHACK_RECORDING_EPOCH": "1777723200",
+      "NETHACK_RNGLOG": "/rng.log",
+      "NETHACK_RNGLOG_DISP": "/rng-display.log"
+    }
+  },
+  "status": {
+    "kind": "input-exhausted"
+  },
+  "consumed": 6,
+  "lastFrame": {
+    "keyIndex": 6,
+    "screen": " \u001b[7mStatus hilites:\u001b[0m\n\n a - title\n b - strength\n c - dexterity\n d - constitution\n e - intelligence\n f - wisdom\n g - charisma\n h - alignment\n i - carrying-capacity\n j - gold\n k - power\n l - power-max\n m - experience-level\n n - armor-class\n o - HD\n p - time\n q - hunger\n r - hitpoints\n s - hitpoints-max\n t - dungeon-level\n u - experience\n (1 of 2)",
+    "cursor": [
+      9,
+      23
+    ],
+    "animation": false
+  }
+}
