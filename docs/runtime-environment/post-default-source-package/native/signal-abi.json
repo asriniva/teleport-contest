@@ -1,0 +1,105 @@
+{
+  "infoSize": "128",
+  "maskSize": "128",
+  "actionSize": "152",
+  "mask": "8",
+  "flags": "136",
+  "restorer": "144",
+  "signalCount": "65",
+  "SA_SIGINFO": "4",
+  "SA_RESTART": "268435456",
+  "SIG_BLOCK": "0",
+  "SIG_UNBLOCK": "1",
+  "SIG_SETMASK": "2",
+  "SIG_IGN": "-2",
+  "SIG_ERR": "-1",
+  "SIGKILL": "9",
+  "SIGSTOP": "19",
+  "longSize": "8",
+  "defaultActions": {
+    "1": {
+      "name": "SIGHUP",
+      "action": "terminate"
+    },
+    "2": {
+      "name": "SIGINT",
+      "action": "terminate"
+    },
+    "3": {
+      "name": "SIGQUIT",
+      "action": "abort"
+    },
+    "4": {
+      "name": "SIGILL",
+      "action": "abort"
+    },
+    "5": {
+      "name": "SIGTRAP",
+      "action": "abort"
+    },
+    "6": {
+      "name": "SIGABRT",
+      "action": "abort"
+    },
+    "7": {
+      "name": "SIGBUS",
+      "action": "abort"
+    },
+    "8": {
+      "name": "SIGFPE",
+      "action": "abort"
+    },
+    "9": {
+      "name": "SIGKILL",
+      "action": "terminate"
+    },
+    "10": {
+      "name": "SIGUSR1",
+      "action": "terminate"
+    },
+    "11": {
+      "name": "SIGSEGV",
+      "action": "abort"
+    },
+    "12": {
+      "name": "SIGUSR2",
+      "action": "terminate"
+    },
+    "13": {
+      "name": "SIGPIPE",
+      "action": "terminate"
+    },
+    "14": {
+      "name": "SIGALRM",
+      "action": "terminate"
+    },
+    "15": {
+      "name": "SIGTERM",
+      "action": "terminate"
+    },
+    "24": {
+      "name": "SIGXCPU",
+      "action": "abort"
+    },
+    "25": {
+      "name": "SIGXFSZ",
+      "action": "abort"
+    },
+    "26": {
+      "name": "SIGVTALRM",
+      "action": "terminate"
+    },
+    "27": {
+      "name": "SIGPROF",
+      "action": "terminate"
+    },
+    "29": {
+      "name": "SIGPOLL",
+      "action": "terminate"
+    },
+    "31": {
+      "name": "SIGSYS",
+      "action": "abort"
+    }
+  }
+}

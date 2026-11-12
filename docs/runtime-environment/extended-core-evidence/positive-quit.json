@@ -1,0 +1,58 @@
+{
+  "profile": "Ordinary source-restored level2 positive-score quit and four fresh nonempty ranking-file producer/consumer combinations",
+  "travel": true,
+  "rankingBytes": 68,
+  "initialSaveSha256": "68079bae4a7c68acc963f70b0499f878b575329a8acb1a557d5a3a8aac99eab3",
+  "complete": true,
+  "quitAccepted": true,
+  "fullGameAccepted": false,
+  "checks": 14,
+  "cases": [
+    {
+      "name": "ordinary-quit",
+      "inputBoundaries": 75,
+      "frames": 76,
+      "rawTerminalBytes": 10310,
+      "moves": "60"
+    },
+    {
+      "name": "quit-c-with-c-score-files",
+      "inputBoundaries": 75,
+      "frames": 76,
+      "rawTerminalBytes": 10458,
+      "moves": "60"
+    },
+    {
+      "name": "quit-js-with-c-score-files",
+      "inputBoundaries": 75,
+      "frames": 76,
+      "rawTerminalBytes": 10458,
+      "moves": "60"
+    },
+    {
+      "name": "quit-c-with-js-score-files",
+      "inputBoundaries": 75,
+      "frames": 76,
+      "rawTerminalBytes": 10458,
+      "moves": "60"
+    },
+    {
+      "name": "quit-js-with-js-score-files",
+      "inputBoundaries": 75,
+      "frames": 76,
+      "rawTerminalBytes": 10458,
+      "moves": "60"
+    }
+  ],
+  "scriptSha256": {
+    "scripts/test-standalone-end-program.mjs": "7b35fc173a3bc53e605d55fb39dc4ce90dc9a836bed03ef7df3cde09467dcccd",
+    "scripts/run-standalone-program.mjs": "582228e4e44a87637fd805837b7e35663c657166a8aa20a6f3ba94df5f8d66f5",
+    "scripts/full-original-c-run.mjs": "47e79a0712238cd6aa2137460e6e360111a35c20d5dbc178fcbf02b5207fb9f4",
+    "js/standalone/program.js": "d013337d6606140b4b32e6ea446a8c037ea75a4884938b21b6f34f120bbe0ab8",
+    "js/standalone/end-lifecycle.js": "4a9713f1ee6a75ea90df438d7f409f0999895c25dcbec903dbf6c9806df38f4f",
+    "js/standalone/vault.js": "195b082865b2fd4dd7a9b48209abe24bd00d4e5bfa4954ac22e1259aa34912d1",
+    "js/standalone/insight.js": "73dc7b37f52402c456b0f682a43dc465337c7400a7987413fbaede09a67506cd",
+    "js/standalone/topten.js": "61fbd5eb9f3bd6516d9d1d444e4f9af2af98bff40a2594e3df164361cd9acf2c"
+  },
+  "limitation": "Only the explicitly selected ordinary quit route and genuine score/log history are accepted. The default route has an empty ranking file; the travel cohort must prove its nonempty50-point record. Death, victory, other progression/gameplay, bones and diagnostic exits remain separate requirements."
+}

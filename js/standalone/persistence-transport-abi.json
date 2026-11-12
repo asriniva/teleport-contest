@@ -33,7 +33,7 @@
     "js/standalone/records.json": "7b7ddc59f45ea73a8077a3ad96f5bc89cdc70920d136b1e64c706f94efaa3c9d",
     "js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34",
     "js/standalone/level-persistence.js": "b017adaad2e8d45e1a8260ddd26902ee89a9dd5d8410561237a1092a3df2132c",
-    "js/standalone/version-info.js": "6c7fc36782e3f4ae6d5f6e0b8873ac0c297a837e1bb1f33337f1ebbb405de9ea",
+    "js/standalone/version-info.js": "904c9573cef82462cc7be539647316055e63e11df6bc82a1739f70b61820e1f8",
     "js/standalone/libc.js": "098638b3aeddafdb54b7b54cb470f8de1bb5ab176625bd2fab2fa98622379e76",
     "js/standalone/random-text.js": "8eacca994e9b4b9efd1a89bf31c319488b364e24c6ee19e54a286318d60236b6",
     "js/ported/timeout.js": "e475bc842e2362fbe27c220d9f59e1f8d8d0d33c75ad8459a5f88a5d249e3413",

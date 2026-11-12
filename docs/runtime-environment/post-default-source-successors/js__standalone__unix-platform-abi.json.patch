@@ -1,0 +1,13 @@
+--- a/js/standalone/unix-platform-abi.json
++++ b/js/standalone/unix-platform-abi.json
+@@ -3058,8 +3058,8 @@
+     "js/standalone/records.json": "7b7ddc59f45ea73a8077a3ad96f5bc89cdc70920d136b1e64c706f94efaa3c9d",
+     "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/stdio.js": "051933cd18aa7b40800ed1132724732a1ae1681c213b0a23d9cdb98f54e5b602",
+     "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/unix-platform-syscalls.js": "26d497a6aa7167f6b31760af8808e9c367f75009c3224cb0f126c78f2d234ec7",
+-    "js/standalone/unix-platform.js": "4d759e8856783e6bdba31e9b2ac309051354f618f8c7b453285ba2aed237b37e",
+-    "js/standalone/unix-terminal.js": "a251b7474315af1cb834a02b02dba5d4bc2e63c3505c2a592b5daebce2d0b48b",
++    "js/standalone/unix-platform.js": "fdf8d87f92e35a9f9750ce02937893ad16ef89f3f610cbadaa2a0e128fbad91e",
++    "js/standalone/unix-terminal.js": "ba39971fa995c14941a27abebb9f025d0729e17ee496a83cb3c9df11e252e234",
+     "/Users/arj/Desktop/nethack_comp/runtime-environment/js/standalone/window-system.js": "b08609c44170d508bfdc72b86ea33755f1fa54eae59f41e93c5c15b31c7aecf6",
+     "/Users/arj/Desktop/nethack_comp/runtime-environment/js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34",
+     "/Users/arj/Desktop/nethack_comp/runtime-environment/nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",

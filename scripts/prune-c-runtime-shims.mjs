@@ -23,10 +23,12 @@ const outputs=new Map(),edits=[];
 for(const[file,before,after]of rules){const source=outputs.get(file)??old(file);assert.equal(source.split(before).length-1,1,'Changed consumer boundary '+file);outputs.set(file,source.replace(before,after));edits.push({file,before,after});}
 const receipt={baselineCommit:baseline,removed:removals.map(file=>({file,beforeSha256:sha(old(file))})),consumers:[...outputs].map(([file,source])=>({file,beforeSha256:sha(old(file)),afterSha256:sha(source),edits:edits.filter(row=>row.file===file)}))};
 for(const[file,expected]of outputs){const actual=readBeforeLayout(file,'utf8');if(process.argv.includes('--write')){assert.ok(actual===old(file)||actual===expected,'Refusing unknown consumer edit '+file);}else assert.equal(actual,expected,'Consumer migration differs '+file);}
-// Scan every tracked code file's literal imports, including import expressions.
+// After validating the exact historical consumer migration above, scan actual
+// current tracked source. Later tools/features must not hide imports behind a
+// historical inverse or a precomputed migration output.
 for(const file of execFileSync('git',['ls-files','js','scripts'],{encoding:'utf8'}).trim().split('\n')){
- if(!/\.m?js$/.test(file)||!existsBeforeLayout(file)||removals.includes(file))continue;
- const source=outputs.get(file)??readBeforeLayout(file,'utf8');
+ if(!/\.m?js$/.test(file)||!fs.existsSync(file)||removals.includes(file))continue;
+ const source=fs.readFileSync(file,'utf8');
  for(const match of source.matchAll(/(?:from\s*|import\s*\(\s*)['"]([^'"]+)['"]/g)){
   if(!match[1].startsWith('.'))continue;const target=path.relative(process.cwd(),path.resolve(path.dirname(file),match[1]));assert.ok(!removals.includes(target),'Active consumer of deleted shim '+file+' -> '+target);
  }

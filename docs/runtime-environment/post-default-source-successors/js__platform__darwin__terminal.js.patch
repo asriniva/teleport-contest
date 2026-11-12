@@ -1,0 +1,14 @@
+--- a/js/platform/darwin/terminal.js
++++ b/js/platform/darwin/terminal.js
+@@ -66,9 +66,10 @@
+             return previous===BigInt.asUintN(64,BigInt(abi.wireIgnore))?1n:BigInt.asIntN(64,previous);
+         }
+         if(name==='kill'){
++            if(!Number.isInteger(args[1])||args[1]<0||args[1]>=signals.length)return services.invalidSignal();
+             if(signals[args[1]]===null){
+                 const handler=handlers.get(args[1])??0n;
+-                if(fd!==0||handler===0n||handler===-1n)throw new Error('Unhandled native-only signal '+args[1]);
++                if(fd!==0||handler===0n||handler===-1n)return services.abort();
+                 if(handler!==1n)services.invokeSignal(handler,args[1]);
+                 return 0;
+             }

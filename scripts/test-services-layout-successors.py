@@ -51,7 +51,7 @@ with tempfile.TemporaryDirectory(prefix='services-layout-qualification-')as dire
   restore()
   scripts=root/'scripts';scripts.mkdir(exist_ok=True)
   source_root=Path(__file__).resolve().parents[1]
-  for file in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py']:
+  for file in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py','post_default_successors.py']:
    shutil.copyfile(source_root/'scripts'/file,scripts/file)
   row_path='js/standalone/level-startup.js';prior=b'pre-cleanup '+history[row_path];fixture_recipe={'baselineCommit':'fixture-before-cleanup','moves':{},'files':[{'file':row_path,'destination':row_path,'beforeSha256':q.sha(prior),'afterSha256':q.sha(history[row_path])}]};(root/'docs/runtime-environment/services-layout.json').write_text(json.dumps(fixture_recipe))
   (root/'history.json').write_text(json.dumps({p:b.decode()for p,b in history.items()}))

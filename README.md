@@ -10,6 +10,12 @@ Verified through the normal entry and unchanged harness: **44/44 public sessions
 **792,838 RNG entries**, **11,405 screens/cursors**, and **1,483 animation
 frames/cursors**, with exact output counts and zero forbidden capabilities. See
 [the pinned validation record](docs/runtime-environment/pure-js-public-recorder-validation.json).
+The terminal/virtual-signal, exit and CLI follow-up also passes44/44 strict
+recordings and all23 core integration jobs. It restores source-owned RNG startup
+for early-exit commands. See [extended recording proof](docs/runtime-environment/extended-public-recorder-validation.json)
+and [core regression](docs/runtime-environment/extended-core-validation.json).
+The earlier published game additionally passes44/44 on hosted Node22.23.4:
+[CI evidence](docs/runtime-environment/hosted-public-recorder-validation.json).
 
 `npm score` runs the original frozen harness with the recording timezone and
 session timeouts disabled by default. An explicit `SESSION_REPLAY_TIMEOUT_MS`

@@ -1,0 +1,69 @@
+{
+  "complete": true,
+  "fullGameAccepted": false,
+  "cases": [
+    {
+      "name": "ready",
+      "inputBoundaries": 4,
+      "frames": 4,
+      "rawTerminalBytes": 2551,
+      "moves": "1"
+    },
+    {
+      "name": "first-wait-turn",
+      "inputBoundaries": 6,
+      "frames": 6,
+      "rawTerminalBytes": 2587,
+      "moves": "2"
+    },
+    {
+      "savedStream": {
+        "path": "/nethack/save/0Ada.Z",
+        "cBytes": 13590,
+        "jsBytes": 13555,
+        "byteIdentical": false,
+        "semanticEquivalenceAccepted": false
+      },
+      "name": "initial-state-save",
+      "inputBoundaries": 5,
+      "frames": 6,
+      "rawTerminalBytes": 2688,
+      "moves": "1"
+    },
+    {
+      "name": "restore-c-save-in-c",
+      "inputBoundaries": 1,
+      "frames": 1,
+      "rawTerminalBytes": 860,
+      "moves": "1"
+    },
+    {
+      "name": "restore-c-save-in-js",
+      "inputBoundaries": 1,
+      "frames": 1,
+      "rawTerminalBytes": 860,
+      "moves": "1"
+    },
+    {
+      "name": "restore-js-save-in-c",
+      "inputBoundaries": 1,
+      "frames": 1,
+      "rawTerminalBytes": 860,
+      "moves": "1"
+    },
+    {
+      "name": "restore-js-save-in-js",
+      "inputBoundaries": 1,
+      "frames": 1,
+      "rawTerminalBytes": 860,
+      "moves": "1"
+    }
+  ],
+  "limitation": "Actual startup, first wait turn, initial save exit, and four independent C/JS saved-stream producer/consumer combinations through the first restored input prompt. Full restored graph equality, resumed gameplay, later turns, quit/death and bones remain separate acceptance requirements.",
+  "scriptSha256": {
+    "scripts/test-standalone-program.mjs": "b4e21c8c01d1ef12e03504a06585d93ecffe6a4659b1e7816e4c0dcf35f337e7",
+    "scripts/run-standalone-program.mjs": "582228e4e44a87637fd805837b7e35663c657166a8aa20a6f3ba94df5f8d66f5",
+    "scripts/full-original-c-run.mjs": "47e79a0712238cd6aa2137460e6e360111a35c20d5dbc178fcbf02b5207fb9f4",
+    "js/standalone/program.js": "d013337d6606140b4b32e6ea446a8c037ea75a4884938b21b6f34f120bbe0ab8"
+  }
+}

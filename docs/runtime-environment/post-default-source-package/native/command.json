@@ -1,0 +1,17 @@
+[
+  "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/upstream/emscripten/emcc",
+  "-O2",
+  "-g",
+  "-sMEMORY64=1",
+  "-sMODULARIZE=1",
+  "-sEXPORT_ES6=1",
+  "-sENVIRONMENT=node",
+  "-sEXIT_RUNTIME=1",
+  "-sALLOW_MEMORY_GROWTH=1",
+  "-sEXPORTED_FUNCTIONS=[\"_probe_observe\", \"_probe_reset\", \"_probe_handler\", \"_probe_install\", \"_probe_errno\", \"_probe_layout\", \"_kill\", \"_raise\", \"_getpid\", \"_signal\", \"_sigaction\", \"_sigprocmask\", \"_pthread_sigmask\", \"_sigpending\", \"_sigemptyset\", \"_sigfillset\", \"_sigaddset\", \"_sigdelset\", \"_sigismember\", \"_sigandset\", \"_sigorset\", \"_malloc\", \"_free\", \"__Exit\", \"_abort\", \"_probe_signum\"]",
+  "-sEXPORTED_RUNTIME_METHODS=HEAPU8,FS",
+  "--no-entry",
+  "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/signal-probe.c",
+  "-o",
+  "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/reference.mjs"
+]

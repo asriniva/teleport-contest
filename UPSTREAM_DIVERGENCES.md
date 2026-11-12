@@ -1,5 +1,67 @@
 # Upstream divergence register
 
+Terminal, signal, CLI and RNG lifecycle integration follow-up (2026-11-12):
+the clean combined implementation passes44/44 strict public recordings and all23
+core integration jobs. All743 recorded inputs remain unchanged. One native run
+stopped on a host ENOSPC snapshot-write error after13 successful jobs; old raw
+captures were compressed and hash-verified, then the remaining11 executions
+passed, including the repeated MAIN producer. No game assertions were relaxed.
+See extended-public-recorder-validation.json and extended-core-validation.json.
+The prior published cc8ef80 also passes44/44 on hosted Node22.23.4; its separate
+hosted-public-recorder-validation.json does not relabel that run as this new code.
+
+The production changes are confined to19 provider/ABI paths. unix-terminal.js
+adds original exit/suspend/resume windowprocs dispatch. signals.js reuses its
+existing shared action table for SDK synchronous raise, full mask/pending/set
+operations, custom handlers, SA_SIGINFO and default termination/abort. display-
+startup.js publishes that same owner; sdk-boundary.js connects kill/abort and
+original stdio exit flushing. platform/darwin/terminal.js preserves native signal
+argument/range conversion. c-runtime/stdio.js adds musl-style __stdio_exit: flush
+writes and seek unread input without closing streams, preserving original list
+and standard-stream order. The unrelated working tmpfile implementation is
+excluded. Original configured game atexit registrations preprocess away; real OS
+signals/threads/subprocesses and external armed timers are not added.
+
+monster-selection.js supplies showdebug on its actual parent context. monster-
+creation.js supplies native clone-assert transport, raw_print, original Snprintf
+carriers and the existing glyphs-owned compiler-derived monster-name catalogue.
+version-info.js and unix-platform.js provide their original CLI raw_print macros.
+No CLI output is replayed or copied into game policy. environment.enableRnd keeps
+component initialize=true by default, while program.js requests initialize=false:
+original C main now owns both RNG initializations, so early CLI exits retain
+zero ISAAC state. All normal startup/save/restore comparisons remain exact.
+Six existing ABI files refresh only source hashes; measured declarations and
+native/header pins are unchanged. New signal-delivery-abi.json is SDK-measured.
+
+Fresh clean-baseline native comparisons pass1931 existing SDK checks,590 signal
+checks,49 actual initialized-game signal checks,48 terminal/exit checks,798
+catalogue/assertion checks,37 strict CLI checks,36 debug-context checks and16
+component initialization checks, plus startup/save and fresh four-way full-world
+restores. All685 JS/code/data files stay stable. Earlier signal-cache proofs had
+unrelated dirty baseline files; those were audited and superseded by fresh clean
+R5 proofs rather than promoted wholesale. Exact executed sources, probe/build
+commands and native reference provenance are retained in post-default-source-package;
+no native binary or untested convenience wrapper is shipped.
+
+A separate finite post-default-source-successors qualification binds exactly19
+paths against8e0fc6a, exact patches and current native evidence. Historical reads
+recover that prefeature snapshot before the unchanged cleanup inverse; the new
+ABI is absent historically and reads/writes fail closed. The prior six-file
+qualification, old recipes, SDK data and native measurements remain unchanged.
+Current source checks still inspect the live implementation. New55 adversarial
+checks and old28 pass. The mechanical guard reads only its fixed current manifest
+integration-base declaration; the prune guard now scans actual current imports,
+including already-migrated consumers, instead of hiding them behind old output.
+Nine new negative checks pass. Current308 hashes,580-file pure closure,137
+unchanged policies plus the existing approved VISION correction,3 frozen inputs,
+SDK qualification,72-file provenance, extraction and original cleanup reproduction
+all pass. Pinned reference headers and the actual original Makefile are checked
+through their recorded reference projections, with no header/data waivers.
+
+This is bounded core/runtime acceptance. Deferred special interactions and natural
+ordinary complete progression remain outside the proved scope; fullGameAccepted
+is not changed to true. Original45-second/held-out acceptance is unverified.
+
 Core native regression follow-up (2026-11-12; game sources unchanged): all23
 named integration jobs pass on published cc8ef80. The initial run passed12 jobs
 before a stale VISION import hash stopped the first plane check before gameplay;

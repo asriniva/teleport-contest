@@ -1,0 +1,407 @@
+{
+  "complete": true,
+  "cacheOnly": true,
+  "checks": 590,
+  "defaults": [
+    {
+      "sig": 0,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 1,
+      "action": "terminate",
+      "returned": false,
+      "status": 129
+    },
+    {
+      "sig": 2,
+      "action": "terminate",
+      "returned": false,
+      "status": 130
+    },
+    {
+      "sig": 3,
+      "action": "abort",
+      "returned": false,
+      "status": null
+    },
+    {
+      "sig": 4,
+      "action": "abort",
+      "returned": false,
+      "status": null
+    },
+    {
+      "sig": 5,
+      "action": "abort",
+      "returned": false,
+      "status": null
+    },
+    {
+      "sig": 6,
+      "action": "abort",
+      "returned": false,
+      "status": null
+    },
+    {
+      "sig": 7,
+      "action": "abort",
+      "returned": false,
+      "status": null
+    },
+    {
+      "sig": 8,
+      "action": "abort",
+      "returned": false,
+      "status": null
+    },
+    {
+      "sig": 9,
+      "action": "terminate",
+      "returned": false,
+      "status": 137
+    },
+    {
+      "sig": 10,
+      "action": "terminate",
+      "returned": false,
+      "status": 138
+    },
+    {
+      "sig": 11,
+      "action": "abort",
+      "returned": false,
+      "status": null
+    },
+    {
+      "sig": 12,
+      "action": "terminate",
+      "returned": false,
+      "status": 140
+    },
+    {
+      "sig": 13,
+      "action": "terminate",
+      "returned": false,
+      "status": 141
+    },
+    {
+      "sig": 14,
+      "action": "terminate",
+      "returned": false,
+      "status": 142
+    },
+    {
+      "sig": 15,
+      "action": "terminate",
+      "returned": false,
+      "status": 143
+    },
+    {
+      "sig": 16,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 17,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 18,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 19,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 20,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 21,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 22,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 23,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 24,
+      "action": "abort",
+      "returned": false,
+      "status": null
+    },
+    {
+      "sig": 25,
+      "action": "abort",
+      "returned": false,
+      "status": null
+    },
+    {
+      "sig": 26,
+      "action": "terminate",
+      "returned": false,
+      "status": 154
+    },
+    {
+      "sig": 27,
+      "action": "terminate",
+      "returned": false,
+      "status": 155
+    },
+    {
+      "sig": 28,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 29,
+      "action": "terminate",
+      "returned": false,
+      "status": 157
+    },
+    {
+      "sig": 30,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 31,
+      "action": "abort",
+      "returned": false,
+      "status": null
+    },
+    {
+      "sig": 32,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 33,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 34,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 35,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 36,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 37,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 38,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 39,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 40,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 41,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 42,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 43,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 44,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 45,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 46,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 47,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 48,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 49,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 50,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 51,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 52,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 53,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 54,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 55,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 56,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 57,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 58,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 59,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 60,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 61,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 62,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 63,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    },
+    {
+      "sig": 64,
+      "action": "ignore",
+      "returned": true,
+      "status": null
+    }
+  ],
+  "hostSignals": 0,
+  "subprocesses": 0,
+  "forbidden": 0,
+  "scope": "Independent actual pinned SDK LP64 -O2 no-pthread EXIT_RUNTIME1 oracle; same existing signal actions storage, signal0/custom/SA_SIGINFO/default categories and exact masks/pending/errno, no real host signals. Raw out-of-range raise indexes undefined C storage and is deliberately not claimed; native game carrier validates before calling SDK.",
+  "sources": {
+    "signals.js": "a82266e007c34b72b3e9d8604cf6fc0cb7fd0afa6a578df2e7a963fe255dfa18",
+    "sdk-boundary.js": "614adec9c82d99d3e72b6a017341bf185fdf557b3ac13c4a3d9d23ce2072e25a",
+    "display-startup.js": "c1e66d9f6f92903bb73256bddf1c07c75783e1355d419ff8af7a9e998743c84c",
+    "signal-delivery-abi.json": "1ea8dfa4a887d143b6b4dc790620dc914e7b3939897acd0f27df76dfe799648d"
+  }
+}

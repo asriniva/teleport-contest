@@ -10,6 +10,14 @@ terminal/exit/signal and CLI bindings, deferred interactions and natural complet
 progression remain outside their accepted scope. The original order below is
 retained; the full objective is not complete.
 
+Further verification (2026-11-12): the combined terminal/signal/exit and diagnostic
+follow-up passes another44/44 strict recorder gate and all23 core jobs, with
+source-owned RNG startup and no policy/frozen changes. See
+[extended core](extended-core-validation.json), [extended recordings](extended-public-recorder-validation.json)
+and [native qualification](post-default-native-evidence.json). Deferred special
+interactions and natural ordinary complete progression remain unproved. Earlier
+remaining-work statements above describe the preceding checkpoint.
+
 Current execution order (2026-11-11, user-directed):
 
 1. Finish the ordinary main loop and inventory cohort: exact C recordings and actual world graphs for movement/combat, completed eating, wield/wear/remove, drop/pickup, then a changed-state save and four C/JS producer/consumer restore combinations. The two discovered movement transport mismatches are fixed through turn238; remaining checks must pass on the final snapshot.

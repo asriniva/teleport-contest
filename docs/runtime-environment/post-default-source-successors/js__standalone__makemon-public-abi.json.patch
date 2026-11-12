@@ -1,0 +1,13 @@
+--- a/js/standalone/makemon-public-abi.json
++++ b/js/standalone/makemon-public-abi.json
+@@ -43,8 +43,8 @@
+   },
+   "sourceSha256": {
+     "scripts/export-standalone-makemon-public-abi.py": "09f58ef81199f0e8360c3750a70376cccb086859e9461124ffc35fe6f24947e0",
+-    "js/standalone/monster-creation.js": "956ca70510bc2a27aaec508dea40551dcf61306dd98148189af1912112241971",
+-    "js/standalone/monster-selection.js": "d69cd3d7414a1e8921f2dd5d1532d993aa59f59a8cdb0f2f1538bd1be8e07598",
++    "js/standalone/monster-creation.js": "12a41b3c3dd3ddb4a972bfddddc86661fdb7160ae474a60f314192c11d0411ee",
++    "js/standalone/monster-selection.js": "59852afce6cedb762b2bb5f45b0ea6bb87d7c534badca1b978705081d2447275",
+     "js/nethack/bindings/makemon.js": "bf30619fe62376524023ca82bc69e892e6892ff29eb850403ab6024dd8aea129",
+     "js/ported/makemon.js": "49ca6dbcb437b36b93fd32e1c45ef0c7a23bc905859b3adeaf983237ed7673e5",
+     "nethack-c/upstream/src/makemon.c": "04bb46b793cb7a724544ed5860f57116e4661ce5d052a1321d90dc0167d3ffc3",

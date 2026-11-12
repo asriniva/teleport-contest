@@ -2,7 +2,34 @@
 
 Runtime ownership separation and factory consolidation are documented in [SERVICES_CLEANUP_PLAN.md](SERVICES_CLEANUP_PLAN.md); earlier source paths in recorded evidence remain historical.
 
-Current published game checkpoint: `cc8ef80` on main. The default contest
+Current qualified follow-up: terminal window dispatch, original SDK virtual
+signals/exit flushing, MAKEMON/VERSION/EARLYARG diagnostic bindings and source-owned
+RNG startup are integrated on the clean production baseline. Full programs keep
+C's zero RNG state until source initialization; standalone component defaults
+remain compatible. Native proof covers the existing1931 SDK checks,590 signal
+checks,49 actual game-signal checks,48 window/exit checks, and exact CLI/catalogue/
+assertion/debug/startup/save/restore comparisons. No translated or frozen file
+changed. [Exact source qualification](post-default-native-evidence.json).
+
+The combined implementation passes44/44 strict public recordings and all23 core
+integration jobs. Its resumed plane/save suffix follows a recorded host ENOSPC
+snapshot-write failure; no game assertions were relaxed. All743 recorder inputs
+and both native runs' production sources remain identical. See
+[extended public results](extended-public-recorder-validation.json),
+[extended core results](extended-core-validation.json) and the separate
+[hosted Node22 result](hosted-public-recorder-validation.json) for the preceding
+published game. Timeouts remain disabled; held-out and original-time-limit
+acceptance remain unverified.
+
+Full-game acceptance remains false: deferred special interactions and a natural
+ordinary winning journey are still outside the bounded evidence. Virtual SDK
+signals match the configured single-thread target, not real OS signal delivery.
+Configured game atexit registrations are inactive; general external timers and
+unsupported host facilities are not added.
+
+## Earlier cc8ef80 core checkpoint
+
+Earlier published game checkpoint: `cc8ef80` on main. The default contest
 `runSegment`, `npm score` and repository scoring workflow use the standalone
 pure-JavaScript engine with checked-in assets/layouts. The unchanged frozen
 harness passes44/44 public sessions,792838 RNG entries,11405 screens/cursors and

@@ -1,0 +1,111 @@
+{
+  "checks": 25,
+  "hashes": 786,
+  "complete": true,
+  "fullGameAccepted": false,
+  "leaderCase": false,
+  "scope": "Source-created Quest branch setup calls original dungeon_branch/goto_level/teleds; actual MAIN then walks into source-generated portals; optional leader scenario uses source teleds approach then actual MAIN waits for natural leader speech/expulsion. The exact literal host stream is fixed and source InputState is observed only for setup timing/key-boundary validation. No game-field/RNG/terrain/input-frame writes; natural journey/full level14 eligibility/nemesis/completion remain unaccepted.",
+  "input": {
+    "profile": {
+      "NETHACKDIR": "/nethack",
+      "HACKDIR": "/nethack",
+      "HOME": "/home/player",
+      "USER": "root",
+      "LOGNAME": "root",
+      "MAIL": "/nethack/mailbox",
+      "TERM": "xterm-256color",
+      "TERMINFO": "/nethack/terminfo",
+      "LINES": "24",
+      "COLUMNS": "80",
+      "TZ": "UTC",
+      "NETHACK_NO_DELAY": "1",
+      "NOMUX_MARKERS": "1",
+      "NETHACK_RAW_KEYS": "1",
+      "NETHACK_SEED": "1",
+      "NETHACK_FIXED_DATETIME": "20260102030405",
+      "NETHACK_RECORDING_EPOCH": "1777723200",
+      "NETHACK_RNGLOG": "/rng.log",
+      "NETHACK_RNGLOG_DISP": "/rng-display.log"
+    },
+    "argv": [
+      "-u",
+      "Ada-male-lawful",
+      "-p",
+      "Archeologist",
+      "-r",
+      "human"
+    ],
+    "startupKeys": "  n",
+    "commands": ".h....h",
+    "literalHostKeys": "  n.h  ....hy ",
+    "rawStdin": "   ",
+    "terminal": {
+      "termGone": 0,
+      "readDepth": 1
+    },
+    "setupMoreKeys": 0
+  },
+  "positive": {
+    "stage": 3,
+    "quest": {
+      "first_start": 1,
+      "met_leader": 0,
+      "not_ready": 0,
+      "got_quest": 0,
+      "leader_m_id": 116
+    },
+    "level": {
+      "dnum": 0,
+      "dlevel": 14
+    },
+    "branch": {
+      "label": "actual source Quest branch",
+      "parent": {
+        "dnum": 0,
+        "dlevel": 14
+      },
+      "home": {
+        "dnum": 3,
+        "dlevel": 1
+      }
+    }
+  },
+  "frames": 18,
+  "inputBoundaries": 14,
+  "worldCoverage": {
+    "counts": {
+      "monst": 4,
+      "permonst": 4,
+      "branch": 7,
+      "obj": 34,
+      "mextra": 1,
+      "edog": 1,
+      "mapseen": 3,
+      "mkroom": 1,
+      "s_level": 36,
+      "trap": 5,
+      "stairway": 2,
+      "engr": 3
+    },
+    "serializedRecordBytes": 160110,
+    "serializedPaddingByteOccurrences": 2169,
+    "uniqueScalarBytes": 30566,
+    "pointerEdges": 141
+  },
+  "sourceSha256": {
+    "scripts/test-standalone-quest-travel.mjs": "35f4fa7cd45b58b23e91c7046e3a99f787bd3d08e43d78c2e243fd841fa2d578",
+    "js/standalone/lua-sandbox.js": "c7533d6cc30094378107fdce7117b0c8c4ee76234574712a6c8a9fdf5f532948",
+    "js/standalone/program.js": "d013337d6606140b4b32e6ea446a8c037ea75a4884938b21b6f34f120bbe0ab8",
+    "js/standalone/address-ports.js": "c0119a9b835996af35fb659e9d045c544d1ee77ae20bf1a9d4e134f252ddebf7",
+    "js/standalone/quest.js": "6dc08ce36576bda551037de9b5808d6ca7d5ab19f6e7f0323ed447ffaa8b5b54",
+    "js/standalone/monster-creation.js": "12a41b3c3dd3ddb4a972bfddddc86661fdb7160ae474a60f314192c11d0411ee",
+    "js/standalone/monster-selection.js": "59852afce6cedb762b2bb5f45b0ea6bb87d7c534badca1b978705081d2447275",
+    "js/standalone/makemon-private-abi.json": "459f03a4f86a99ad3436149f5d528a5217b50bf0c630ec231d8432be349242d3",
+    "js/standalone/teleport.js": "6c3255f7f7a7916b2f4de6b9bd0e7713be9caf24d7042e6fd456f3d4398b76fb",
+    "js/standalone/do-lifecycle.js": "639fd09acf95dfeb28ca86ca205251831f80f553bc218c744d13ce117de23909",
+    "js/ported/quest.js": "4a974eef5f10f2cd2bbeb4e598e7cb59d2930563f614933c0a1191bf41d0b7e1",
+    "js/ported/do.js": "8093c5153b4c235f78f785238dca0e99e8d9e8894d92b162d96d51c9c7c21273",
+    "js/ported/teleport.js": "e47de23fd9b94fe8b6c4db3df86cea1522b20c14a96555ae4a221aef29e8de6e"
+  },
+  "referenceReceiptSha256": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58"
+}

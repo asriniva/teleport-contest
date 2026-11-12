@@ -1,0 +1,41 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: JS source plane scenario same boundary
++ actual - expected
+
++ "failed: Error: ENOSPC: no space left on device, open '.cache/elemental-water-save/js-last-step.json'\n" +
++   '    at Object.writeFileSync (node:fs:2483:20)\n' +
++   '    at snapshot (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-elemental-planes.mjs:18:465)\n' +
++   '    at setup (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-elemental-planes.mjs:25:156)\n' +
++   '    at readKey (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-elemental-planes.mjs:31:48)\n' +
++   '    at teleport_getch (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/standalone/terminal-input.js:12:132)\n' +
++   '    at withCEnvironment (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/context.js:16:16)\n' +
++   '    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/linker.js:57:37\n' +
++   '    at Object.scoped (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/memory.js:105:72)\n' +
++   '    at call (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/linker.js:57:26)\n' +
++   '    at Object.invoke (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/linker.js:15:33)'
+- 'exited:0'
+
+    at eq (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-elemental-planes.mjs:8:27)
+    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-elemental-planes.mjs:64:106 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: "failed: Error: ENOSPC: no space left on device, open '.cache/elemental-water-save/js-last-step.json'\n" +
+    '    at Object.writeFileSync (node:fs:2483:20)\n' +
+    '    at snapshot (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-elemental-planes.mjs:18:465)\n' +
+    '    at setup (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-elemental-planes.mjs:25:156)\n' +
+    '    at readKey (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/scripts/test-standalone-elemental-planes.mjs:31:48)\n' +
+    '    at teleport_getch (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/standalone/terminal-input.js:12:132)\n' +
+    '    at withCEnvironment (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/context.js:16:16)\n' +
+    '    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/linker.js:57:37\n' +
+    '    at Object.scoped (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/memory.js:105:72)\n' +
+    '    at call (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/linker.js:57:26)\n' +
+    '    at Object.invoke (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/js/c-runtime/linker.js:15:33)',
+  expected: 'exited:0',
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

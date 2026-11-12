@@ -29,6 +29,7 @@ export function enableVersionInfo(environment,layouts){
   display_nhwindow:(win,blocking)=>windowCall('display_nhwindow',transport.int(win),transport.char(blocking)),
   destroy_nhwindow:win=>windowCall('destroy_nhwindow',transport.int(win)),
   wait_synch:()=>windowCall('wait_synch'),
+  raw_print:value=>environment.functions.indirect(ctypes.getField('struct window_procs',environment.requireGlobal('windowprocs'),'win_raw_print','void *'),'vp',text(value)),
  });
  const state=createVersionState(local,L,version),context=createVersionEnvironment(local,L,state);
  environment.register('version',version,context,{prepareArgs:(name,args)=>{

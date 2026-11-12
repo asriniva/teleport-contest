@@ -1,0 +1,57 @@
+{
+  "complete": true,
+  "candidate": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5",
+  "head": "8e0fc6ade5256f180d443835a1a8d7f4e761ddf2",
+  "checks": {
+    "SDK": 590,
+    "game": 49,
+    "window": 48
+  },
+  "stableJSFiles": 685,
+  "noProductionEdits": true,
+  "commands": {
+    "sdk590": {
+      "cwd": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5",
+      "argv": [
+        "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/node/24.19.0_64bit/bin/node",
+        "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/test-signals.mjs"
+      ],
+      "stdout": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/signals.log"
+    },
+    "game49": {
+      "cwd": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5",
+      "argv": [
+        "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/node/24.19.0_64bit/bin/node",
+        "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/test-game-signal.mjs"
+      ],
+      "stdout": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/game-signal.log"
+    },
+    "window48": {
+      "cwd": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5",
+      "argv": [
+        "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/node/24.19.0_64bit/bin/node",
+        "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/test-window.mjs"
+      ],
+      "stdout": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/window.log"
+    }
+  },
+  "requiredReadonlyInputs": [
+    "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/reference.mjs",
+    "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/reference.wasm",
+    "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/signal-abi.json",
+    "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/errno-location.json",
+    "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/full-original-c-v1"
+  ],
+  "artifacts": {
+    "signal-evidence.json": "5b7f0d5d4b0fd708ad30fbb340890576762d7c43fc47652b701448843f650030",
+    "game-evidence.json": "67c8063ed198f4f48497c8970f5a8d4e44c4b5c6f7c560671a19ab044ec358eb",
+    "window-results/evidence.json": "4053be54239394475ab618aa208e29bee59a22ac179bedefd5bc33fecc9e6f64",
+    "r5-before.json": "f05d57e868743829491a495a52c96e8b1ef8af06acb84c64337e647142a0269b",
+    "whole-js-vs-head.json": "d70fab22d5e4d4cc11ad36d3d36dc1641b42f57a872f5405362ab3b427fe67c9",
+    "test-signals.mjs": "ba37bd35c0c79f80f2f206d8427e6b3dba874943aded4ce86cccc32cf97177d4",
+    "test-game-signal.mjs": "b460386297b601c67f776d09ec595cc4f033c501876051e96807669aea85580d",
+    "test-window.mjs": "031749d184789f3a8d4079351158aef58d718af3b9c674e82431de5c3bd8a0bb",
+    "cache-input-runner.mjs": "91fc740b7f8c8c17a3ad03971d9340d8b8b0b56a7d1d0a82410524a36cbde6f8"
+  },
+  "scope": "Fresh exact earlier assertion matrices, imports explicitly target clean R5; original native microoracle and sealed full C reference reused read-only. Window helper runner is test-only copy with rawstdin injection into R5 program, all outputs isolated here. No original proof edits or R5 production/ABI modifications. Earlier dirty source proofs are superseded for this clean basis by these fresh passes."
+}

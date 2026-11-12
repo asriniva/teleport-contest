@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+"""Synthetic positive/adversarial qualification tests, not native acceptance."""
+import copy,importlib.util,json,os,shutil,subprocess,tempfile
+from pathlib import Path
+from unittest.mock import patch
+spec=importlib.util.spec_from_file_location('post_default',Path(__file__).with_name('post_default_successors.py'));q=importlib.util.module_from_spec(spec);spec.loader.exec_module(q)
+checks=0
+with tempfile.TemporaryDirectory(prefix='post-default-qualification-')as directory:
+ root=Path(directory);before={p:None if p in q.NEW_FILES else('base '+p+'\n').encode()for p in q.ALLOWED};after={p:(b or b'')+b'reviewed native transport\n'for p,b in before.items()}
+ rawpath='docs/runtime-environment/post-default-raw.json';raw=b'{"complete":true,"scope":"synthetic test only"}\n'
+ proof={'complete':True,'originalNativeCompared':True,'baseCommit':q.BASE_COMMIT,'qualifiedSourceSha256':{p:q.sha(b)for p,b in after.items()},'rawProofs':{rawpath:q.sha(raw)}}
+ d={'version':1,'baseCommit':q.BASE_COMMIT,'nativeProof':q.PROOF,'files':{}}
+ for p,b in before.items():
+  pb=q.canonical_patch(p,b,after[p]);pp='docs/runtime-environment/post-default-source-successors/'+p.replace('/','__')+'.patch'
+  d['files'][p]={'beforeSha256':None if b is None else q.sha(b),'afterSha256':q.sha(after[p]),'patch':pp,'patchSha256':q.sha(pb)}
+ def store(p,b):
+  at=root/p;at.parent.mkdir(parents=True,exist_ok=True);at.write_bytes(b)
+ def write_declaration(value,pr=proof):
+  value=copy.deepcopy(value);pb=(json.dumps(pr)+'\n').encode();store(q.PROOF,pb);value['nativeProofSha256']=q.sha(pb);store(q.DECLARATION,json.dumps(value).encode())
+ def restore():
+  store(rawpath,raw)
+  for p,b in after.items():store(p,b);store(d['files'][p]['patch'],q.canonical_patch(p,before[p],b))
+  write_declaration(d)
+ restore()
+ path='js/standalone/sdk-boundary.js'
+ with patch.object(q,'baseline_bytes',side_effect=lambda r,p:before[p]):
+  assert q.validate_cohort(root)==before;checks+=1
+  for p,b in before.items():assert q.qualified_before(root,p)==b;checks+=1
+  def rejected(label,action=lambda:q.qualified_before(root,path)):
+   global checks
+   try:action()
+   except(AssertionError,KeyError,ValueError,FileNotFoundError):checks+=1
+   else:raise AssertionError('Accepted '+label)
+  store(path,after[path]+b'unknown edit');rejected('unreviewed source');restore()
+  sibling='js/standalone/version-info.js';store(sibling,after[sibling]+b'other changed member');rejected('stale sibling on another path read');restore()
+  bad=copy.deepcopy(d);bad['baseCommit']='0'*40;write_declaration(bad);rejected('changed baseline');restore()
+  bad=copy.deepcopy(d);bad['files'][path]['beforeSha256']='0'*64;write_declaration(bad);rejected('changed original bytes');restore()
+  bad=copy.deepcopy(d);bad['files']['js/unreviewed.js']=bad['files'][path];write_declaration(bad);rejected('extra path');restore()
+  bad=copy.deepcopy(d);del bad['files'][path];write_declaration(bad);rejected('missing member');restore()
+  bad=copy.deepcopy(d);bad['files'][next(iter(q.NEW_FILES))]['beforeSha256']=q.sha(b'');write_declaration(bad);rejected('empty bytes substituted for historical absence');restore()
+  rejected('unknown path',lambda:q.qualified_before(root,'js/unreviewed.js'))
+  store(d['files'][path]['patch'],b'forged patch');rejected('nonexact patch');restore()
+  bad=copy.deepcopy(d);forged=b'forged patch';store(bad['files'][path]['patch'],forged);bad['files'][path]['patchSha256']=q.sha(forged);write_declaration(bad);rejected('matching hash for noncanonical patch');restore()
+  pr={**proof,'complete':False};write_declaration(d,pr);rejected('incomplete native proof');restore()
+  pr={**proof,'originalNativeCompared':False};write_declaration(d,pr);rejected('nonnative proof');restore()
+  pr={**proof,'baseCommit':'0'*40};write_declaration(d,pr);rejected('native different baseline');restore()
+  pr={**proof,'qualifiedSourceSha256':{**proof['qualifiedSourceSha256'],path:'0'*64}};write_declaration(d,pr);rejected('native wrong source cohort');restore()
+  pr={**proof,'rawProofs':{}};write_declaration(d,pr);rejected('native without raw receipts');restore()
+  store(rawpath,raw+b'changed');rejected('changed raw receipt');restore()
+  bad=copy.deepcopy(d);new=after[path]+b'forged later implementation';store(path,new);pb=q.canonical_patch(path,before[path],new);store(bad['files'][path]['patch'],pb);bad['files'][path].update(afterSha256=q.sha(new),patchSha256=q.sha(pb));write_declaration(bad);rejected('new source/hash/patch reusing old native proof');restore()
+  bad=copy.deepcopy(d);bad['files'][path]['patch']='docs/runtime-environment/../../escape.patch';write_declaration(bad);rejected('path traversal');restore()
+  bad=copy.deepcopy(d);bad['nativeProof']='docs/runtime-environment/other-proof.json';write_declaration(bad);rejected('different native proof path');restore()
+  rejected('historical overwrite',lambda:q.refuse_write(root,path,before[path]));checks+=int((root/path).read_bytes()==after[path])
+  newpath=next(iter(q.NEW_FILES));rejected('write to historically absent file',lambda:q.refuse_write(root,newpath,b''));restore()
+  # Actual JS and Python inverse APIs, using an isolated read-only Git shim.
+  scripts=root/'scripts';scripts.mkdir();source=Path(__file__).resolve().parents[1]
+  for name in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py','post_default_successors.py']:shutil.copyfile(source/'scripts'/name,scripts/name)
+  rowpath='js/standalone/environment.js';prior=b'pre-layout '+before[rowpath]
+  store('docs/runtime-environment/services-layout.json',json.dumps({'baselineCommit':'fixture-layout','moves':{},'files':[{'file':rowpath,'destination':rowpath,'beforeSha256':q.sha(prior),'afterSha256':q.sha(before[rowpath])}]}).encode())
+  store('history.json',json.dumps({p:None if b is None else b.decode()for p,b in before.items()}).encode())
+  binpath=root/'bin';binpath.mkdir();git=binpath/'git'
+  git.write_text('#!/usr/bin/env python3\nimport json,sys,pathlib\nh=json.loads((pathlib.Path(__file__).parent.parent/"history.json").read_text())\nif sys.argv[1]=="ls-tree":\n p=sys.argv[-1];assert sys.argv[4]=="'+q.BASE_COMMIT+'";print(p if h[p] is not None else "",end="\\n" if h[p] is not None else "")\nelse:\n assert sys.argv[1]=="show";c,p=sys.argv[2].split(":",1);assert c in ["'+q.BASE_COMMIT+'","fixture-layout"];assert h[p] is not None;sys.stdout.write(("pre-layout " if c=="fixture-layout" else "")+h[p])\n');git.chmod(0o755)
+  env={**os.environ,'PATH':str(binpath)+os.pathsep+os.environ.get('PATH','')}
+  node=source/'.cache/emsdk/node/24.19.0_64bit/bin/node'
+  js='import fs from "node:fs";import assert from "node:assert/strict";import{readBeforeLayout as read,writeBeforeLayout as write,existsBeforeLayout as exists}from "./scripts/services-layout-audit.mjs";const p="'+path+'",n="'+newpath+'",a=fs.readFileSync(p);assert.equal(read(p,"utf8"),"base '+path+'\\n");assert.equal(read("'+rowpath+'","utf8"),"pre-layout base '+rowpath+'\\n");assert.equal(exists(n),false);assert.throws(()=>read(n));assert.throws(()=>write(p,read(p)),/Refusing to overwrite qualified post-default/);assert.throws(()=>write(n,Buffer.from("")));assert.deepEqual(fs.readFileSync(p),a);assert.ok(fs.existsSync(n));console.log("PASS real JS layered inverse/absence/write refusal");'
+  run=subprocess.run([str(node),'--input-type=module','-e',js],cwd=root,env=env,text=True,capture_output=True);assert run.returncode==0,run.stdout+run.stderr;checks+=8
+  py='from pathlib import Path;from services_layout_audit import read_before,write_before;p=Path("'+path+'");a=p.read_bytes();assert read_before(p)==b"base '+path+'\\n";assert read_before(Path("'+rowpath+'"))==b"pre-layout base '+rowpath+'\\n"\nfor p,b in [(p,read_before(p)),(Path("'+newpath+'"),b"")]:\n try:write_before(p,b)\n except(AssertionError,FileNotFoundError):pass\n else:raise AssertionError("accepted historical overwrite")\nassert Path("'+path+'").read_bytes()==a'
+  run=subprocess.run([os.sys.executable,'-c','import sys;sys.path.insert(0,"scripts");'+py],cwd=root,env=env,text=True,capture_output=True);assert run.returncode==0,run.stdout+run.stderr;checks+=5
+print('PASS post-default qualification',checks,'synthetic adversarial/API checks; no native/game acceptance claimed')

@@ -40,6 +40,7 @@ export function enableUnixPlatform(environment,layouts){
  const storage=[environment.requireGlobal('monsdump'),environment.allocateGlobal('objdump',layouts.earlyarg.objdump_count*layouts.earlyarg.EnumDumpSize),environment.allocateGlobal('earlyarg.ArgVal_novalue',10)];
  const globals=['gc','gd','gh','program_state','iflags','ARGV0'];
  const early=new Proxy(Object.create(services),{get:(o,k,r)=>{if(Object.hasOwn(o,k))return Reflect.get(o,k,r);const v=Reflect.get(o,k,r);if(v!==undefined&&typeof v!=='function')return v;return typeof k==='string'?(...args)=>resolve(k)(...args.map(v=>typeof v==='string'?text(v):v?.address??v)):undefined;}});
+ early.raw_print=value=>environment.functions.indirect(environment.ctypes.getField('struct window_procs',environment.requireGlobal('windowprocs'),'win_raw_print','void *'),'vp',text(value));
  Object.assign(early,{moduleKey:environment,literal:services.literal,heap:()=>memory.HEAPU8,storage:i=>storage[i],global:i=>environment.requireGlobal(globals[i]),stdout:()=>services.stdout,usageHelp:()=>services.literal(abi.usageHelp),dupstr:p=>environment.alloc('dupstr',text(p)),free:p=>services.free(ptr(p)),
   Snprintf:(out,size,format,value)=>resolve('nh_snprintf')(text('dump_enums'),abi.earlyargSnprintfLine,ptr(out),BigInt(size),text(format),environment.transport.int(value)),
  });

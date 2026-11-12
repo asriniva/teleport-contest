@@ -25,6 +25,13 @@ if(fs.existsSync(successorPatches))for(const file of fs.readdirSync(successorPat
 for(const file of ['build-stairs-pager-native-queries.py','test-standalone-pager-arrow-native.mjs','test-standalone-pager-arrow-component.mjs','test-standalone-public-knight-stairs.mjs','test-standalone-knight-stairs-native-prefix.mjs'])paths.push('scripts/'+file);
 const boundaryEvidence='docs/runtime-environment/recorder-boundary-evidence';
 if(fs.existsSync(boundaryEvidence))for(const file of fs.readdirSync(boundaryEvidence).filter(name=>name.endsWith('.json')))paths.push(boundaryEvidence+'/'+file);
+// A separate finite current feature proof precedes, and never replaces, the
+// original cleanup and six-source native correction qualifications.
+for(const file of ['scripts/post_default_successors.py','scripts/test-post-default-successors.py','scripts/test-current-audit-guards.py','docs/runtime-environment/post-default-source-successors.json','docs/runtime-environment/post-default-native-evidence.json'])if(fs.existsSync(file))paths.push(file);
+const postDefaultPatches='docs/runtime-environment/post-default-source-successors';
+if(fs.existsSync(postDefaultPatches))for(const file of fs.readdirSync(postDefaultPatches).filter(name=>name.endsWith('.patch')))paths.push(postDefaultPatches+'/'+file);
+const postDefaultProof='docs/runtime-environment/post-default-native-evidence.json';
+if(fs.existsSync(postDefaultProof))paths.push(...Object.keys(JSON.parse(fs.readFileSync(postDefaultProof)).rawProofs??{}));
 const sha256=Object.fromEntries([...new Set(paths)].sort().map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')]));
 const data={baselineCommit:'df33dd4',integrationBaseCommit:'8cf4880d8cf7fb9104635f068564a5de87523fe7',scope:'Common-runtime cleanup source closure; not game or native equivalence acceptance',sha256};
 const file='docs/runtime-environment/c-runtime-manifest.json',text=JSON.stringify(data,null,2)+'\n';

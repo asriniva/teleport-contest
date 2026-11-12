@@ -164,5 +164,10 @@ export function createStdio(memory,filesystem,libc,{stdin=new Uint8Array(),readS
     api.fprintf=(p,format,...args)=>{const value=libc.format(format,...args);return api.fputs(value,p)===-1?-1:value.length;};
     api.printf=(format,...args)=>api.fprintf(api.stdout,format,...args);api.puts=str=>api.fputs(str,api.stdout)===-1?-1:api.fputc(10,api.stdout);
     api.remove=p=>capture(()=>{const path=pathText(p);if(filesystem.isDir(filesystem.stat(path).mode))filesystem.rmdir(path);else filesystem.unlink(path);return 0;},-1);
+    // Original musl __stdio_exit: flush writes and seek unread input without closing.
+    api.__stdio_exit=()=>{
+        const finish=f=>{if(!f)return;try{if(f.writeEnd)flush(f);}catch(error){fail(error,0);}const unread=f.readEnd-f.readPos+f.unget.length;if(unread)try{seekDescriptor(f.fd,-unread,1);}catch(error){fail(error,0);}};
+        const standard=[api.stdin,api.stdout,api.stderr],ordinary=[...files.entries()].filter(([p])=>!standard.includes(p));for(const[,f]of ordinary.reverse())finish(f);for(const p of standard)finish(files.get(p));
+    };
     return api;
 }

@@ -4,6 +4,13 @@ Status (2026-11-12): **23/23 named jobs passed** on the unchanged `cc8ef80` game
 
 This is bounded integration acceptance; `fullGameAccepted: false` remains. Additional terminal/exit/signal and diagnostic bindings and deferred interactions remain separate work. Natural Quest/item acquisition and an ordinary winning journey are not established by these controlled fixtures. Start future batches only after their implementation and inputs are frozen.
 
+Current follow-up: the terminal/signal/exit and CLI/RNG startup candidate also
+passes all23 jobs. [Extended receipts](extended-core-validation.json) retain the
+13-job first run, the host snapshot-write ENOSPC interruption, and the11-job
+resumption (including repeated MAIN). Its runtime sources are identical across
+both runs; only two audit-tool guards changed between them. All44 strict public
+recordings also pass on the same combined production code.
+
 From the repository root, using the pinned development Node:
 
 ```sh

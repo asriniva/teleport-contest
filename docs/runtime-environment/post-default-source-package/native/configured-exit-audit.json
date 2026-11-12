@@ -1,0 +1,36 @@
+{
+  "complete": true,
+  "configuredMacros": {
+    "__EMSCRIPTEN__": true,
+    "__wasm64__": true,
+    "__linux__": false,
+    "_M_UNIX": false,
+    "VMS": false,
+    "WIN32": false,
+    "TTY_GRAPHICS": true,
+    "MACOS": true,
+    "UNIX": true,
+    "SHELL": true
+  },
+  "activeGameAtexitCalls": 0,
+  "linkedRegistrationOrDestructorSymbols": [],
+  "originalExitRuntimeCallsFuncsOnExit": true,
+  "funcsOnExitIsNotDummy": true,
+  "scope": "Read-only pinned configured preprocessor and sealed symbol/body audit, not general atexit/destructor API behavior. EXIT_RUNTIME=1 invokes real __funcs_on_exit but no atexit/cxa registration or fini/wasm destructor implementation is linked. Full game sources atexit sites exist only in inactive SCO/Linux/VMS/Win32 platform branches. Configured default game exit still requires source shared stdio teardown accepted in old48. Signal delivery is real Emscripten virtual table behavior; no pthread_kill implementation linked.",
+  "sourceSha256": {
+    "nethack-c/wasm/native-terminal.h": "16eceb17caf6e70d0e8e6b36f23daebdb30f7ace18676d482c8376fccf6dceeb",
+    ".cache/full-original-c-v1/tree/sys/share/unixtty.c": "d2210fd899ffb522031ab19dcde37cc11727433066a786494e6ddaa3434c850e",
+    ".cache/emsdk/upstream/emscripten/system/lib/libc/kill.c": "1b700ecd4b4f8b7baf07fc7fa728cb3fc73f9d1c55b40d95f6845ecd0bf1580a",
+    ".cache/emsdk/upstream/emscripten/system/lib/libc/raise.c": "38b625a9a367cca608502b43b95c9fefd9e9c289553bad4dd279321c4afe3559",
+    ".cache/emsdk/upstream/emscripten/system/lib/libc/pthread_sigmask.c": "70f75a83a597b1fb689ee7aa0dd80ad5129c22c7d8779d824741cc3aa77ceb20",
+    ".cache/emsdk/upstream/emscripten/system/lib/libc/sigaction.c": "5033f83e68fe8514fef2a35287bca69c87459f998ee7deb10273eda5203b8bee",
+    ".cache/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c": "49cf58aae139b0daa8900360b5cf99701f39a7e53c2f3e6197d0f9e7fed81cb8",
+    ".cache/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/atexit.c": "0514086a60cb41df4d36e493aa4f4ec4ce034d4620625090b65e31d9a43dd7cc",
+    ".cache/full-original-c-v1/out/game.mjs": "a22d0fc517f5ca70650e3e7f32acd7bd2512cf6470f3747b016261dea0a3a7e1",
+    ".cache/full-original-c-v1/out/game.mjs.symbols": "3cda82d16c8179e1c51be3122d896bd5177e014fb027d3856283ee0c13fb19a3"
+  },
+  "outputs": {
+    "preprocessedUnixtty": "57c93b419e18928e80ae354f47f7240785bea7644c76932b033528159166e4d1",
+    "macros": "1b280ab494d3d63675b54420052364f2eda7901ce895159b8bd1f211de1e8090"
+  }
+}

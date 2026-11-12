@@ -1,0 +1,33 @@
+{
+  "complete": true,
+  "checks": 798,
+  "catalogueRows": 388,
+  "ndebug": 0,
+  "compiled": {
+    "assertHelperTarget": "__assert_fail",
+    "helperFailureStops": true,
+    "showdebugTarget": "debugcore(file,TRUE)",
+    "cloneNativeAssertionTargetPresent": true,
+    "cloneNativeAssertionRtnPresent": false
+  },
+  "assertionResults": [
+    {
+      "condition": "has_emin(m2) && has_emin(mon)",
+      "file": "makemon.c",
+      "line": 922,
+      "fn": "clone_mon",
+      "errorName": "RuntimeError",
+      "message": "Aborted(Assertion failed: has_emin(m2) && has_emin(mon), at: makemon.c,922,clone_mon). Build with -sASSERTIONS for more info."
+    },
+    {
+      "condition": "has_edog(m2) && has_edog(mon)",
+      "file": "makemon.c",
+      "line": 934,
+      "fn": "clone_mon",
+      "errorName": "RuntimeError",
+      "message": "Aborted(Assertion failed: has_edog(m2) && has_edog(mon), at: makemon.c,934,clone_mon). Build with -sASSERTIONS for more info."
+    }
+  ],
+  "nativeReceiptSha256": "06d063e58beadeb5f469554be25fd9260f15f71787590e2352d88c7d5fe052ed",
+  "scope": "Actual optimized configured source clone_mon LLVM keeps asserts; original transport helper calls SDK __assert_fail unconditionally. Explicit failure-only ABI calls do not fabricate corrupt monsters or prove natural invariant failure. All388 compiler-produced original earlyarg/monsters catalogue values+names matchexistingglyphs-owned heap catalogue; no CLI golden text used forcatalogue."
+}

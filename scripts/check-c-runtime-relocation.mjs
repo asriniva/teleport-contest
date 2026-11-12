@@ -34,7 +34,10 @@ const sha=file=>crypto.createHash('sha256').update(readBeforeLayout(file)).diges
 const policies=JSON.parse(read('docs/runtime-environment/scope-baseline.json'));
 // Preserve main's explicitly approved VISION exception without refreshing the
 // immutable policy baseline or accepting additional correction declarations.
-const integrationBase=JSON.parse(read('docs/runtime-environment/c-runtime-manifest.json')).integrationBaseCommit;
+// Only this fixed current-manifest declaration is needed here. The current
+// manifest's complete hashes are independently checked by its writer/source gate.
+const integrationBase=JSON.parse(fs.readFileSync('docs/runtime-environment/c-runtime-manifest.json','utf8')).integrationBaseCommit;
+assert.equal(integrationBase,'8cf4880d8cf7fb9104635f068564a5de87523fe7','Changed runtime integration base');
 const correctionFile='docs/runtime-environment/authorized-port-corrections.json';
 assert.equal(read(correctionFile),execFileSync('git',['show',integrationBase+':'+correctionFile],{encoding:'utf8'}),'Changed main-approved correction declaration');
 const {corrections}=JSON.parse(read(correctionFile));
@@ -43,4 +46,4 @@ for(const row of corrections)assert.equal(policies.sha256[row.file],row.baseline
 const corrected=new Map(corrections.map(row=>[row.file,row.correctedSha256]));
 for(const [file,expected]of Object.entries(policies.sha256))assert.equal(sha(file),corrected.get(file)??expected,'Changed policy '+file);
 for(const name of ['isaac64','terminal','storage'])assert.equal(read('js/'+name+'.js'),read('frozen/'+name+'.js'));
-console.log('PASS: 9 original relocated factory bodies mechanically preserved; current stdio SDK feature delta separately bound when declared (platform getpid and typedef declarations explicitly separated); '+Object.keys(policies.sha256).length+' baseline inputs checked, including main\'s exact approved VISION correction; 3 frozen files unchanged.');
+console.log('PASS: 9 original relocated factory bodies preserved through qualified historical projection; current stdio SDK feature delta separately bound when declared (platform getpid and typedef declarations explicitly separated); '+Object.keys(policies.sha256).length+' baseline inputs checked, including main\'s exact approved VISION correction; 3 frozen files unchanged.');

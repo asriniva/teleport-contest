@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "baseCommit": "8e0fc6ade5256f180d443835a1a8d7f4e761ddf2",
+  "scope": "Exact post-default current-source/native qualification before immutable historical layout inverse. Not complete-game acceptance. New signal ABI is absent historically.",
+  "nativeProof": "docs/runtime-environment/post-default-native-evidence.json",
+  "nativeProofSha256": "faad359896ae34ba37046336cbf7dcd908a39e5181f54bd0fc795020a220f60c",
+  "files": {
+    "js/c-runtime/stdio.js": {
+      "beforeSha256": "d9277bcd0e258677697eb641c38a1fce0d7c9c99e9065d4df2e7be3a066ae693",
+      "afterSha256": "6f305e60541c75710095718c6bb37a5cb8be1d5608eef8aa03c523256df16227",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__c-runtime__stdio.js.patch",
+      "patchSha256": "4abb9365ea82eb777916cb44329ae5cb8ee2de9946ab353e304ab5386164caf2"
+    },
+    "js/platform/darwin/terminal.js": {
+      "beforeSha256": "435c74e0db384f2e477db7835330c06d227f7a5aff1b049fb5099871c162a7a1",
+      "afterSha256": "74d23614fbff35a19feb95648a87e21d2c94a7aa690fd3b6843bd34845a7b28f",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__platform__darwin__terminal.js.patch",
+      "patchSha256": "1233f28e556a1edfceb68e416c94f7ae0af5dc547b5e9be6ce9a4eaed9ebad27"
+    },
+    "js/standalone/display-startup.js": {
+      "beforeSha256": "a1012da5e11a4288ff3ca57c765a3595830ae6d299a81bea2e174c3b1cff2b0b",
+      "afterSha256": "c1e66d9f6f92903bb73256bddf1c07c75783e1355d419ff8af7a9e998743c84c",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__display-startup.js.patch",
+      "patchSha256": "53ab4ecfe7156dd15a74e6bd88b4bc3b5969a3a5f5146cc678cd136dd8055800"
+    },
+    "js/standalone/environment.js": {
+      "beforeSha256": "6abe84ae1b5821d10d15f4dbd54cbdeb91b6d608b7bf61a421d58e12c8950055",
+      "afterSha256": "bab63c6c14700d884e3c862e101319e817796b2db0ae01fbc64623df6061334b",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__environment.js.patch",
+      "patchSha256": "b014261a1c51e49c1501ffaa0c8e2fb64d49566d20a57ff79f00a763df784622"
+    },
+    "js/standalone/makemon-private-abi.json": {
+      "beforeSha256": "cb1d74adebcd460c202bc8a42fb38741e1d9044dcb7d1e3a1967015e86e7beb7",
+      "afterSha256": "459f03a4f86a99ad3436149f5d528a5217b50bf0c630ec231d8432be349242d3",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__makemon-private-abi.json.patch",
+      "patchSha256": "e94d5e52c288d302dad6fb99b7c19178db4b730fa20009da94565bce29225c8d"
+    },
+    "js/standalone/makemon-public-abi.json": {
+      "beforeSha256": "7a718d95d62b6e0ecb7aa13bde79536d0f315c2a09d0ff90fbd06303eab60d75",
+      "afterSha256": "df521d24db77a511ad3eb33fb32a79f59093d91250b54b7ccd2ff9410123971a",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__makemon-public-abi.json.patch",
+      "patchSha256": "cbfdd2c02850c037b79be90240247eb46f3f82a8e9ee84c78da2d5723c9fc64b"
+    },
+    "js/standalone/monster-creation.js": {
+      "beforeSha256": "956ca70510bc2a27aaec508dea40551dcf61306dd98148189af1912112241971",
+      "afterSha256": "12a41b3c3dd3ddb4a972bfddddc86661fdb7160ae474a60f314192c11d0411ee",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__monster-creation.js.patch",
+      "patchSha256": "505056ce1bedaff64bd4e9892df19472219f98813715eca763d9d38a654034c7"
+    },
+    "js/standalone/monster-selection.js": {
+      "beforeSha256": "d69cd3d7414a1e8921f2dd5d1532d993aa59f59a8cdb0f2f1538bd1be8e07598",
+      "afterSha256": "59852afce6cedb762b2bb5f45b0ea6bb87d7c534badca1b978705081d2447275",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__monster-selection.js.patch",
+      "patchSha256": "8ff8f6778d4bfb73cd6356bd6ba4cc8191b8932a61e303121020dc1e31c0d7e7"
+    },
+    "js/standalone/persistence-transport-abi.json": {
+      "beforeSha256": "fe5777c01e4cdaf777b7d31d062da755e270ada5314c979710340c29b20332ac",
+      "afterSha256": "9f3feb12c2149288e38783c72a6db9b955c3a0bf5a3921f2d781852b5eed7891",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__persistence-transport-abi.json.patch",
+      "patchSha256": "524ea585d6e6e6333452d0d9f65f749f16b735b318f2dd2346e1c7bbdd714cff"
+    },
+    "js/standalone/program.js": {
+      "beforeSha256": "4c2fb1135a073f7609688253694ff9b9cdffecf843b4ada983626b1dd8e90d6d",
+      "afterSha256": "d013337d6606140b4b32e6ea446a8c037ea75a4884938b21b6f34f120bbe0ab8",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__program.js.patch",
+      "patchSha256": "b01f2b99080c6411c2b54551001971b9f4d18e83c064bd918fadb01584028b20"
+    },
+    "js/standalone/scanf-abi.json": {
+      "beforeSha256": "c2341f1da33d13ebe01627f605a968355744439222245a1bd5d6eae778623ae1",
+      "afterSha256": "3142d5d9adefa379843d8426d8f75dc7efe1be1416f8326527bbc9092704e5fe",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__scanf-abi.json.patch",
+      "patchSha256": "2cc40e7a0f6157b237e3cd4194ffecce8ed5449fa0047163944ffbf9cb9a6f57"
+    },
+    "js/standalone/sdk-boundary-abi.json": {
+      "beforeSha256": "73582235b5512ec517f3a89634f95055602fc58e51241cd45f2e4d7373784ac9",
+      "afterSha256": "d6e6319d957e5096708cc8454c34312919314d178f14f058641b16f183b802ae",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__sdk-boundary-abi.json.patch",
+      "patchSha256": "af8efc6ed5c293243e26448cd04dd7c8749274783de59e931a18a1a413b8dea7"
+    },
+    "js/standalone/sdk-boundary.js": {
+      "beforeSha256": "df264a2b036c9c7aeb04c75299e7d3c4852dee27f8dbb9eabcb239801ca0c31b",
+      "afterSha256": "614adec9c82d99d3e72b6a017341bf185fdf557b3ac13c4a3d9d23ce2072e25a",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__sdk-boundary.js.patch",
+      "patchSha256": "ca53be6bda949e901fd4349da30d25051571a2e9a55a2dbb69b613fb3260a6a8"
+    },
+    "js/standalone/signal-delivery-abi.json": {
+      "beforeSha256": null,
+      "afterSha256": "1ea8dfa4a887d143b6b4dc790620dc914e7b3939897acd0f27df76dfe799648d",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__signal-delivery-abi.json.patch",
+      "patchSha256": "beed4c5a3ab677383494666668db0dee933558bced9ffc1b06c8ec5f22bee5cb"
+    },
+    "js/standalone/signals.js": {
+      "beforeSha256": "67ab7164e231cd2f6844ba319eefaf269d57935bdbf5b7d9bd4c30ee68f9c587",
+      "afterSha256": "a82266e007c34b72b3e9d8604cf6fc0cb7fd0afa6a578df2e7a963fe255dfa18",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__signals.js.patch",
+      "patchSha256": "ab68b61d08722bcd2ea9b65a6d43177d94d5022f78c1767f6a3b1345f2c1b4ec"
+    },
+    "js/standalone/unix-platform-abi.json": {
+      "beforeSha256": "d93ad502c0d0aa08ee8245370deef6a24336073207c09bdfb7865733a6099326",
+      "afterSha256": "51c0339bc2ae1e6f6a2bdb3e1ecb38d0a2786f46ff25fd615a4dda88c5703d19",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__unix-platform-abi.json.patch",
+      "patchSha256": "2f71b9a18b5ee81e4b11885c7d78e8d7e79c6c725dec8fd829ba468c7ee655a4"
+    },
+    "js/standalone/unix-platform.js": {
+      "beforeSha256": "4d759e8856783e6bdba31e9b2ac309051354f618f8c7b453285ba2aed237b37e",
+      "afterSha256": "fdf8d87f92e35a9f9750ce02937893ad16ef89f3f610cbadaa2a0e128fbad91e",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__unix-platform.js.patch",
+      "patchSha256": "947a1382b8622285083780114e4a871f4e7768ea628af7a4bc7e421aaea70bea"
+    },
+    "js/standalone/unix-terminal.js": {
+      "beforeSha256": "a251b7474315af1cb834a02b02dba5d4bc2e63c3505c2a592b5daebce2d0b48b",
+      "afterSha256": "ba39971fa995c14941a27abebb9f025d0729e17ee496a83cb3c9df11e252e234",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__unix-terminal.js.patch",
+      "patchSha256": "457590a90c3d2b9516c7fa3b5ba3647201062da4af3816ca32859a7e8b7e6adc"
+    },
+    "js/standalone/version-info.js": {
+      "beforeSha256": "6c7fc36782e3f4ae6d5f6e0b8873ac0c297a837e1bb1f33337f1ebbb405de9ea",
+      "afterSha256": "904c9573cef82462cc7be539647316055e63e11df6bc82a1739f70b61820e1f8",
+      "patch": "docs/runtime-environment/post-default-source-successors/js__standalone__version-info.js.patch",
+      "patchSha256": "ceff03edc31d345b52b6b9b8cb6adf949286529d22e3f20357e4242f180d31f4"
+    }
+  }
+}

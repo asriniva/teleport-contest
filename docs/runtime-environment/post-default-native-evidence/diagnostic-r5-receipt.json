@@ -1,0 +1,152 @@
+{
+  "complete": true,
+  "candidate": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5",
+  "basis": "8e0fc6a cleanHEAD plus frozen19 combinedruntime/sourceABI files",
+  "runtimeMutations": false,
+  "testScriptsUnchangedAcrossRuns": true,
+  "allProductionFilesStable": 685,
+  "productionManifestSha256": "f05d57e868743829491a495a52c96e8b1ef8af06acb84c64337e647142a0269b",
+  "productionEndManifestSha256": "f05d57e868743829491a495a52c96e8b1ef8af06acb84c64337e647142a0269b",
+  "targetHashes": {
+    "base": "8e0fc6a",
+    "changedProductionFiles": 19,
+    "files": {
+      "js/c-runtime/stdio.js": {
+        "baseSha256": "d9277bcd0e258677697eb641c38a1fce0d7c9c99e9065d4df2e7be3a066ae693",
+        "r5Sha256": "6f305e60541c75710095718c6bb37a5cb8be1d5608eef8aa03c523256df16227"
+      },
+      "js/platform/darwin/terminal.js": {
+        "baseSha256": "435c74e0db384f2e477db7835330c06d227f7a5aff1b049fb5099871c162a7a1",
+        "r5Sha256": "74d23614fbff35a19feb95648a87e21d2c94a7aa690fd3b6843bd34845a7b28f"
+      },
+      "js/standalone/display-startup.js": {
+        "baseSha256": "a1012da5e11a4288ff3ca57c765a3595830ae6d299a81bea2e174c3b1cff2b0b",
+        "r5Sha256": "c1e66d9f6f92903bb73256bddf1c07c75783e1355d419ff8af7a9e998743c84c"
+      },
+      "js/standalone/environment.js": {
+        "baseSha256": "6abe84ae1b5821d10d15f4dbd54cbdeb91b6d608b7bf61a421d58e12c8950055",
+        "r5Sha256": "bab63c6c14700d884e3c862e101319e817796b2db0ae01fbc64623df6061334b"
+      },
+      "js/standalone/makemon-private-abi.json": {
+        "baseSha256": "cb1d74adebcd460c202bc8a42fb38741e1d9044dcb7d1e3a1967015e86e7beb7",
+        "r5Sha256": "459f03a4f86a99ad3436149f5d528a5217b50bf0c630ec231d8432be349242d3"
+      },
+      "js/standalone/makemon-public-abi.json": {
+        "baseSha256": "7a718d95d62b6e0ecb7aa13bde79536d0f315c2a09d0ff90fbd06303eab60d75",
+        "r5Sha256": "df521d24db77a511ad3eb33fb32a79f59093d91250b54b7ccd2ff9410123971a"
+      },
+      "js/standalone/monster-creation.js": {
+        "baseSha256": "956ca70510bc2a27aaec508dea40551dcf61306dd98148189af1912112241971",
+        "r5Sha256": "12a41b3c3dd3ddb4a972bfddddc86661fdb7160ae474a60f314192c11d0411ee"
+      },
+      "js/standalone/monster-selection.js": {
+        "baseSha256": "d69cd3d7414a1e8921f2dd5d1532d993aa59f59a8cdb0f2f1538bd1be8e07598",
+        "r5Sha256": "59852afce6cedb762b2bb5f45b0ea6bb87d7c534badca1b978705081d2447275"
+      },
+      "js/standalone/persistence-transport-abi.json": {
+        "baseSha256": "fe5777c01e4cdaf777b7d31d062da755e270ada5314c979710340c29b20332ac",
+        "r5Sha256": "9f3feb12c2149288e38783c72a6db9b955c3a0bf5a3921f2d781852b5eed7891"
+      },
+      "js/standalone/program.js": {
+        "baseSha256": "4c2fb1135a073f7609688253694ff9b9cdffecf843b4ada983626b1dd8e90d6d",
+        "r5Sha256": "d013337d6606140b4b32e6ea446a8c037ea75a4884938b21b6f34f120bbe0ab8"
+      },
+      "js/standalone/scanf-abi.json": {
+        "baseSha256": "c2341f1da33d13ebe01627f605a968355744439222245a1bd5d6eae778623ae1",
+        "r5Sha256": "3142d5d9adefa379843d8426d8f75dc7efe1be1416f8326527bbc9092704e5fe"
+      },
+      "js/standalone/sdk-boundary-abi.json": {
+        "baseSha256": "73582235b5512ec517f3a89634f95055602fc58e51241cd45f2e4d7373784ac9",
+        "r5Sha256": "d6e6319d957e5096708cc8454c34312919314d178f14f058641b16f183b802ae"
+      },
+      "js/standalone/sdk-boundary.js": {
+        "baseSha256": "df264a2b036c9c7aeb04c75299e7d3c4852dee27f8dbb9eabcb239801ca0c31b",
+        "r5Sha256": "614adec9c82d99d3e72b6a017341bf185fdf557b3ac13c4a3d9d23ce2072e25a"
+      },
+      "js/standalone/signals.js": {
+        "baseSha256": "67ab7164e231cd2f6844ba319eefaf269d57935bdbf5b7d9bd4c30ee68f9c587",
+        "r5Sha256": "a82266e007c34b72b3e9d8604cf6fc0cb7fd0afa6a578df2e7a963fe255dfa18"
+      },
+      "js/standalone/unix-platform-abi.json": {
+        "baseSha256": "d93ad502c0d0aa08ee8245370deef6a24336073207c09bdfb7865733a6099326",
+        "r5Sha256": "51c0339bc2ae1e6f6a2bdb3e1ecb38d0a2786f46ff25fd615a4dda88c5703d19"
+      },
+      "js/standalone/unix-platform.js": {
+        "baseSha256": "4d759e8856783e6bdba31e9b2ac309051354f618f8c7b453285ba2aed237b37e",
+        "r5Sha256": "fdf8d87f92e35a9f9750ce02937893ad16ef89f3f610cbadaa2a0e128fbad91e"
+      },
+      "js/standalone/unix-terminal.js": {
+        "baseSha256": "a251b7474315af1cb834a02b02dba5d4bc2e63c3505c2a592b5daebce2d0b48b",
+        "r5Sha256": "ba39971fa995c14941a27abebb9f025d0729e17ee496a83cb3c9df11e252e234"
+      },
+      "js/standalone/version-info.js": {
+        "baseSha256": "6c7fc36782e3f4ae6d5f6e0b8873ac0c297a837e1bb1f33337f1ebbb405de9ea",
+        "r5Sha256": "904c9573cef82462cc7be539647316055e63e11df6bc82a1739f70b61820e1f8"
+      },
+      "js/standalone/signal-delivery-abi.json": {
+        "baseSha256": null,
+        "r5Sha256": "1ea8dfa4a887d143b6b4dc790620dc914e7b3939897acd0f27df76dfe799648d"
+      }
+    }
+  },
+  "testInputs": {
+    "copiedOnlyDevTests": [
+      "scripts/build-diagnostic-bindings-native.py",
+      "scripts/test-diagnostic-bindings-native.mjs",
+      "scripts/test-diagnostic-bindings-cli.mjs",
+      "scripts/test-diagnostic-showdebug.mjs",
+      "scripts/test-diagnostic-rng-lifecycle.mjs",
+      "scripts/test-r5-diagnostic-program.mjs",
+      "scripts/test-r5-diagnostic-restored-world.mjs"
+    ],
+    "source": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/diagnostic-bindings",
+    "oracleReadOnly": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/.cache/diagnostic-native",
+    "sourceSha256": {
+      "scripts/build-diagnostic-bindings-native.py": "80b150f3c2d961045deeb35b062076113c8a3fa95499ff90fcc0e7c67fce3148",
+      "scripts/test-diagnostic-bindings-native.mjs": "57bdbd3a318e6e0db09a0b24162c344b6dea9c32e533303a3558a0f6972e96ec",
+      "scripts/test-diagnostic-bindings-cli.mjs": "050a243cde4a338a347ee4f413f9d89dfab3a119744cbd955bd0c9a224c152e2",
+      "scripts/test-diagnostic-showdebug.mjs": "99098cf0b45605484cb8b0fc6b88543f420164e4adba446434585007a2edc34e",
+      "scripts/test-diagnostic-rng-lifecycle.mjs": "0286915621d8aba891a154496f14b8fcdc0dae171175fdb05b505ad1f2f5c1b6",
+      "scripts/test-r5-diagnostic-program.mjs": "f9fd9151c09c83396ac94b8883f37ebb22378f368b5a6faa3fdbb002aede0dd0",
+      "scripts/test-r5-diagnostic-restored-world.mjs": "8ede7e16760ede5977b2924f76bc8749afc8c335e981d5e7087e99c1555d54bd"
+    },
+    "productionFiles": 685
+  },
+  "commands": [
+    "TZ=UTC .cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-diagnostic-bindings-cli.mjs",
+    ".cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-diagnostic-bindings-native.mjs",
+    "TZ=UTC .cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-diagnostic-showdebug.mjs",
+    ".cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-diagnostic-rng-lifecycle.mjs",
+    "TZ=UTC .cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-r5-diagnostic-program.mjs",
+    "TZ=UTC RESTORED_KEYS='' RESTORED_OUTPUT=.cache/r5-diagnostic-restore-world .cache/emsdk/node/24.19.0_64bit/bin/node scripts/test-r5-diagnostic-restored-world.mjs"
+  ],
+  "results": {
+    "CLI": 37,
+    "nativeCatalogueAssertion": 798,
+    "showdebug": 36,
+    "componentRng": 16,
+    "normalProgramCases": 7,
+    "fullWorldFreshRestores": 4
+  },
+  "receiptSha256": {
+    ".cache/r5-diagnostic-cli-proof/evidence.json": "631457edf3c226c5f8ce4206b3a026c5f09b5d4c771613676b1bf338e3c8625f",
+    ".cache/r5-diagnostic-native-proof/evidence.json": "65a3f96e85928ec5d20c91a98fdb14c9a68aad4173c954f126d15cb198f3a657",
+    ".cache/r5-diagnostic-showdebug/evidence.json": "8d7fcfce8b5da0d0f4c6e6a3c4ae5f02410132918da8b7d814de80df9305250d",
+    ".cache/r5-diagnostic-rng-lifecycle/evidence.json": "9245e1c993c738612fbc526f0bed2e3eca2895422560c885f7bcd8f342039aba",
+    ".cache/r5-diagnostic-program/evidence.json": "7b50c9bc86b81ba33fd7d188c7e2c69f0e373ce7064fcbb09576b993b9a81574",
+    ".cache/r5-diagnostic-restore-world/evidence.json": "c7e5e2571fb68ed9fa920d4dde64c6f9006c5aaf8e8443d67db58d1d5cce0b85"
+  },
+  "nativeOracle": {
+    "readonlySymlink": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/combined-runtime-20261112-r5/.cache/diagnostic-native",
+    "target": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/diagnostic-bindings/.cache/diagnostic-native",
+    "receiptSha256": "06d063e58beadeb5f469554be25fd9260f15f71787590e2352d88c7d5fe052ed",
+    "freshBuildRequired": false,
+    "producerBuildConstraint": "EM_FROZEN_CACHE=1 as stored in originalproducerbuildscript; no builds orwrites to SDK/oracle in R5 testcohort"
+  },
+  "limits": [
+    "CLI fullstate including bothISAACstates/sharedworld/TTY/exitstatus allstrict; no exclusions.",
+    "Assertionhelper is direct failure-only ABI coverage at originalsourcecontexts; no corruptedmonster fixture or natural invariant-failure claim.",
+    "NormalMAIN ready/wait/save and fourfreshC/JSproducerconsumerrestore observations pass; additional4wayrestoredselectedworld pass. Encoded save byteidentity isnotclaimed.",
+    "Full44 R8 and full23core aggregate are separate parent-owned gates, not inferred from thiscohort."
+  ]
+}

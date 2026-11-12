@@ -1,0 +1,51 @@
+{
+  "complete": true,
+  "checks": 36,
+  "results": [
+    {
+      "wizard": false,
+      "queries": [
+        {
+          "name": "makemon.c",
+          "value": 0
+        },
+        {
+          "name": "dir/makemon.c",
+          "value": 0
+        },
+        {
+          "name": "version.c",
+          "value": 0
+        },
+        {
+          "name": "",
+          "value": 0
+        }
+      ],
+      "frames": 2
+    },
+    {
+      "wizard": true,
+      "queries": [
+        {
+          "name": "makemon.c",
+          "value": 1
+        },
+        {
+          "name": "dir/makemon.c",
+          "value": 1
+        },
+        {
+          "name": "version.c",
+          "value": 0
+        },
+        {
+          "name": "",
+          "value": 0
+        }
+      ],
+      "frames": 2
+    }
+  ],
+  "scope": "Actual MAIN initializedsource flags/DEBUGFILES via declared CLI/env/sysconf; no rawflags/setup APIs. Existing selection OWN basehelper maps original showdebug(file) todebugcore(file,TRUE); realC/JS TTY/stdin/state/heapworld/fullRNG equal. Matching basename andnonmatching/emptyfile paths tested, broaderdebugmessages separate."
+}

@@ -1,0 +1,113 @@
+{
+  "scope": "Exact executed R5 sources/evidence and native oracle sources/build/measure plus generated reference JavaScript. No Wasm binary included; original expected Wasm hash remains in native/reference-receipt.json. Original files untouched.",
+  "files": {
+    "native/signal-probe.c": {
+      "sha256": "ab609653405a0fbf2b33484a142da341cc501794dfe95632a3ac8176178a1740",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/signal-probe.c"
+    },
+    "native/command.json": {
+      "sha256": "2b8a75dfea9535668c815e18805487627249770a1c75f01f381c949436f9a92f",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/command.json"
+    },
+    "native/measure.mjs": {
+      "sha256": "fe0f9b6d62a02a7a51dc8171ea43d80d7c15f889eea720024126e976c91eee15",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/measure.mjs"
+    },
+    "native/default-action-names.json": {
+      "sha256": "d7e77aaaade5f554588588cdf22e18fdc264267b95466a9e52eb20dd04e9e9e9",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/default-action-names.json"
+    },
+    "native/signal-abi.json": {
+      "sha256": "50fa896fe17409275c250f69ff07fcd7fe19634af4adff2232ce6989c6eeed76",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/signal-abi.json"
+    },
+    "native/reference.mjs": {
+      "sha256": "8673f150599c5301559fec7b8290f40dba86c3952cc17461d3ea6fb2481e8ca9",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/reference.mjs"
+    },
+    "native/reference-receipt.json": {
+      "sha256": "1326368695f22f37d542aea5f79b703e727c30813890cd5f205903613aac90aa",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/reference-receipt.json"
+    },
+    "native/seal.py": {
+      "sha256": "d5e968250cde3e221010267a8e2c66d1ed3ed97d8d8507731f775ff819a2374e",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/seal.py"
+    },
+    "native/build.log": {
+      "sha256": "cbb56576ce82b23e203932d20a162e6ef87d45908d46a5cb5d8c207c62cbff72",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/build.log"
+    },
+    "executed/test-signals.mjs": {
+      "sha256": "ba37bd35c0c79f80f2f206d8427e6b3dba874943aded4ce86cccc32cf97177d4",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/test-signals.mjs"
+    },
+    "executed/test-game-signal.mjs": {
+      "sha256": "b460386297b601c67f776d09ec595cc4f033c501876051e96807669aea85580d",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/test-game-signal.mjs"
+    },
+    "executed/test-window.mjs": {
+      "sha256": "031749d184789f3a8d4079351158aef58d718af3b9c674e82431de5c3bd8a0bb",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/test-window.mjs"
+    },
+    "executed/cache-input-runner.mjs": {
+      "sha256": "91fc740b7f8c8c17a3ad03971d9340d8b8b0b56a7d1d0a82410524a36cbde6f8",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/cache-input-runner.mjs"
+    },
+    "evidence/receipt.json": {
+      "sha256": "a8bdc98507a4208e4e2394d373f859400601b9665f25979ed6ed6112934f0692",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/receipt.json"
+    },
+    "evidence/signal-evidence.json": {
+      "sha256": "5b7f0d5d4b0fd708ad30fbb340890576762d7c43fc47652b701448843f650030",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/signal-evidence.json"
+    },
+    "evidence/game-evidence.json": {
+      "sha256": "67c8063ed198f4f48497c8970f5a8d4e44c4b5c6f7c560671a19ab044ec358eb",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/game-evidence.json"
+    },
+    "evidence/window-evidence.json": {
+      "sha256": "4053be54239394475ab618aa208e29bee59a22ac179bedefd5bc33fecc9e6f64",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/window-results/evidence.json"
+    },
+    "evidence/r5-before.json": {
+      "sha256": "f05d57e868743829491a495a52c96e8b1ef8af06acb84c64337e647142a0269b",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/r5-before.json"
+    },
+    "evidence/whole-js-vs-head.json": {
+      "sha256": "d70fab22d5e4d4cc11ad36d3d36dc1641b42f57a872f5405362ab3b427fe67c9",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/whole-js-vs-head.json"
+    },
+    "evidence/signals.log": {
+      "sha256": "108df249bb174be6ac7a8fb5c925204d11761f8820819d4d1a71f56c12650f92",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/signals.log"
+    },
+    "evidence/game-signal.log": {
+      "sha256": "c5208c9a2c2937192dda9e912707344f0d5e26b46328de762579c2a82de7988c",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/game-signal.log"
+    },
+    "evidence/window.log": {
+      "sha256": "8cd6ad810f56616dbba871d349df6b197551f77bcb92d447b85be4dacc726c53",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-r5-proof/window.log"
+    },
+    "native/errno-location.json": {
+      "sha256": "0b0ef541af8afaf153b323e3fe5f754346e7f4e8c68c80792e3045c651c9ce05",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-signal-bridge/errno-location.json"
+    },
+    "native/original-errno-observer.py": {
+      "sha256": "6fa9dc2906ad20b8fd7d3fbce3184e0bcbc5acca01f583ee2844d5c6efa2e749",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-macro-proof/errno-location.py"
+    },
+    "native/original-function-bodies.json": {
+      "sha256": "f083e4aadce076fe76d34de9aa1451391c831706366378ac4f49eef629db9d18",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-kill-contract/original-function-bodies.json"
+    },
+    "native/configured-exit-audit.py": {
+      "sha256": "bd36dd550b1c02bca40a4974d1a469be434d15c3dd489c32b6463ec975a76481",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-kill-contract/configured-exit-audit.py"
+    },
+    "native/configured-exit-audit.json": {
+      "sha256": "217f454163e8cb51e64840996560d44a02618c82db762649ae858851b7809f6b",
+      "originalPath": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/window-kill-contract/configured-exit-audit.json"
+    }
+  }
+}

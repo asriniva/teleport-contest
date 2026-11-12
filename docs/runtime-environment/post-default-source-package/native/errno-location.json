@@ -1,0 +1,8 @@
+{
+  "scope": "Read-only address from existing original-C __errno_location function body; binary not modified.",
+  "functionIndex": 5340,
+  "bodyHex": "004290f2e2010b",
+  "errnoAddress": 3717392,
+  "wasmSha256": "f9b9c80f63ea972b1f43913e8de240dcff246293f381a45e16fa7c18be503b30",
+  "symbolSha256": "3cda82d16c8179e1c51be3122d896bd5177e014fb027d3856283ee0c13fb19a3"
+}

@@ -1,0 +1,5 @@
+{
+  "complete": true,
+  "checks": 16,
+  "scope": "Public standalone enableRnd default and explicittrue retain original eagerseeding; explicitfalse leaves originalcreateRndState zero arrays untouched until sourceinitialization. No raw statewrites."
+}

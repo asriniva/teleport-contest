@@ -1,0 +1,213 @@
+{
+  "head": "8e0fc6a",
+  "changed": [
+    {
+      "path": "js/backends/emscripten/runtime.js",
+      "headBlob": "958d4fa326bc2b49336e70f6a16a860440b47118",
+      "cacheBlob": "ed732c94ece2773ab0a3a2f97c8fc95eb10772cc",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/c-runtime/adapter-factories.js",
+      "headBlob": "234b469858c8cfe75dfdf301188f0b08141defee",
+      "cacheBlob": "afefcfcbe0778fc12a0d471daf9a975b0d2b05bc",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/c-runtime/environment.js",
+      "headBlob": null,
+      "cacheBlob": "53da8d6ba3bb1710774d84ad1548cbb3466654d4",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/c-runtime/errno-messages.json",
+      "headBlob": null,
+      "cacheBlob": "3f613b71a72c8c2d01206d87acdbe10fdd0c72ea",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/c-runtime/errno.js",
+      "headBlob": null,
+      "cacheBlob": "21a7144dad0877f2ce61f77eb0638e7a520ec764",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/c-runtime/libc.js",
+      "headBlob": "8ca4df2ca5fee3a9adf19ef6e2d33d2d9e68b2eb",
+      "cacheBlob": "080a41eee959bbdce5df84c36527ad3334a53400",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/c-runtime/scanf.js",
+      "headBlob": "f3f64647516ffabf88cbfc7049b145c37a324032",
+      "cacheBlob": "3cd4246d815fc5c84b923da449344890847d0b82",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/c-runtime/stdio.js",
+      "headBlob": "b1fda60ac7728dc1cc53c13734c94c8c88119eab",
+      "cacheBlob": "5766bbe1e20ff8f5fd4ebd506be02997f2e28795",
+      "ownedCandidate": true
+    },
+    {
+      "path": "js/c-runtime/stdlib.js",
+      "headBlob": "a4c562af76450888dc01733db84c5a598a3ff00d",
+      "cacheBlob": "12b1ea06210b5a31b5b7b23d5e99e4aed22995ff",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/c-runtime/vfs.js",
+      "headBlob": "4ea59c0e88c44103e2aec7c6b9b2ac0cea683fe9",
+      "cacheBlob": "9186b670fa41f039d9176b04afdb10f9ed9829fd",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/lua/abi.js",
+      "headBlob": "002009f0f0a2c8b8546d2f0977781fe636386bff",
+      "cacheBlob": "5240b9b8f149dbe93a786429894650101cdd67c7",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/lua/bytecode-vm.js",
+      "headBlob": "959f9da5e44d94aa9db41e778b36dc4cea5d7fa4",
+      "cacheBlob": "9d837e2ab093aec9ed668da129a55eba67f5c3ea",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/lua/io-library.js",
+      "headBlob": null,
+      "cacheBlob": "7f170ae17aa9606573f93685ded0f44e7c072557",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/lua/lapi.js",
+      "headBlob": "abee5379f31b4d9d947c1bf9cf2fc3fbf3e89a99",
+      "cacheBlob": "546f7c7b7738133ebfa7a597f2f1d3d8522ede3b",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/nethack/runtime.js",
+      "headBlob": "22751037694062b65657323ab56b848bb02f3de3",
+      "cacheBlob": "e5933156784e7c321095f33fbc12031d14c714d2",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/platform/darwin/terminal.js",
+      "headBlob": "08a907ffea2ab4073ba8b14878e4fc9884124459",
+      "cacheBlob": "5eedd35562cfc324a51914c56210dd04dca0cf40",
+      "ownedCandidate": true
+    },
+    {
+      "path": "js/ported/rumors.js",
+      "headBlob": "65dafa0170a4a92dda8fec2cd6259c185e3a1c2a",
+      "cacheBlob": "c93fefed21f12adb08627e61a842c963007eb662",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/standalone/display-startup.js",
+      "headBlob": "5269447b5b8fb1030e0fb53f48c777ce6189f592",
+      "cacheBlob": "88899bba3bfd9540ea3bcacac21025ef2525dc6c",
+      "ownedCandidate": true
+    },
+    {
+      "path": "js/standalone/environment.js",
+      "headBlob": "fc58aff2d709ca16f6f74f7fc7e8f61b8683bd97",
+      "cacheBlob": "bf58a58b02cba4be80f062ecab34c23829064902",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/standalone/light-abi.json",
+      "headBlob": "bb00b8f60a4af85a73c5f326b8579aaa37c89c6b",
+      "cacheBlob": "2cf96dea8200b4c04b0f55f85416029908f0ec28",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/standalone/light.js",
+      "headBlob": "57f78d29c084dead655ab873b13bc502b9046007",
+      "cacheBlob": "00415c40785b1dc9248e94c932737692012e969c",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/standalone/lua.js",
+      "headBlob": "6a789410ef4ee7ad4dfafdfa96f092096029cc90",
+      "cacheBlob": "1277ce2c825c5ef10b98d0d01496607e0cb475de",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/standalone/sdk-boundary.js",
+      "headBlob": "9069e2f73985865b2e4e1f30f68c193109d0e185",
+      "cacheBlob": "693e591e4344b0d74632b0aa7c253f54cd0784c4",
+      "ownedCandidate": true
+    },
+    {
+      "path": "js/standalone/signal-delivery-abi.json",
+      "headBlob": null,
+      "cacheBlob": "a150c864f73f7f84590a075c1fb3b262a5da0546",
+      "ownedCandidate": true
+    },
+    {
+      "path": "js/standalone/signals.js",
+      "headBlob": "381e977399510d17b675764a30d039c2c8a5d793",
+      "cacheBlob": "5390a3b5d4e25a75d3fd67b7184fa5a561284b0b",
+      "ownedCandidate": true
+    },
+    {
+      "path": "js/standalone/unix-terminal.js",
+      "headBlob": "b4db15ae27e3e0a7fd4e97097a6485dcaf985dfa",
+      "cacheBlob": "cbf3d7c5c0f50eda71838d8fffdd3e817d5a6c9a",
+      "ownedCandidate": true
+    },
+    {
+      "path": "js/vendor/libghostty/ghostty-vt-1.0.0.wasm",
+      "headBlob": null,
+      "cacheBlob": "26937c5fa954b80b79fdf22f6a841393d427f03d",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/wasm/nethack.mjs",
+      "headBlob": null,
+      "cacheBlob": "d27ebdec37fbef58b6dd26edecfbb95f8c396005",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/wasm/nethack.mjs.symbols",
+      "headBlob": null,
+      "cacheBlob": "c7c31b05bbbe11701209fa47d0978872ba0f8633",
+      "ownedCandidate": false
+    },
+    {
+      "path": "js/wasm/nethack.wasm",
+      "headBlob": null,
+      "cacheBlob": "4c1931dd9eee3f2c7649e138e6faf7f9251b3e91",
+      "ownedCandidate": false
+    }
+  ],
+  "missingHeadPaths": [],
+  "ownedBaselineAudit": [
+    {
+      "path": "js/c-runtime/stdio.js",
+      "matchesHead": false,
+      "diff": "js_c-runtime_stdio.js.baseline.diff"
+    },
+    {
+      "path": "js/platform/darwin/terminal.js",
+      "matchesHead": true
+    },
+    {
+      "path": "js/standalone/display-startup.js",
+      "matchesHead": true
+    },
+    {
+      "path": "js/standalone/sdk-boundary.js",
+      "matchesHead": true
+    },
+    {
+      "path": "js/standalone/signals.js",
+      "matchesHead": true
+    },
+    {
+      "path": "js/standalone/unix-terminal.js",
+      "matchesHead": true
+    }
+  ]
+}

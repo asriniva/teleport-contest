@@ -1,0 +1,14 @@
+--- a/js/standalone/sdk-boundary-abi.json
++++ b/js/standalone/sdk-boundary-abi.json
+@@ -24,9 +24,9 @@
+   },
+   "sourceSha256": {
+     "scripts/export-standalone-sdk-boundary-abi.py": "b4cd3399cb8a3cb3068adf52a46abc67112940de6d900b764d59533a96ca398f",
+-    "js/standalone/sdk-boundary.js": "df264a2b036c9c7aeb04c75299e7d3c4852dee27f8dbb9eabcb239801ca0c31b",
++    "js/standalone/sdk-boundary.js": "614adec9c82d99d3e72b6a017341bf185fdf557b3ac13c4a3d9d23ce2072e25a",
+     "js/standalone/unix-platform-syscalls.js": "53da4bb401f236758b5b31d334cb83545474e61fdb947d96678051a665973b4b",
+-    "js/c-runtime/stdio.js": "d9277bcd0e258677697eb641c38a1fce0d7c9c99e9065d4df2e7be3a066ae693",
++    "js/c-runtime/stdio.js": "6f305e60541c75710095718c6bb37a5cb8be1d5608eef8aa03c523256df16227",
+     "js/c-runtime/vfs.js": "69e9c4a7dc3b3aa686859059190c10341935cc30bbb19b005da40a537ad8389d",
+     ".cache/emsdk/upstream/emscripten/src/lib/libcore.js": "bf610d3ced386c2c89f76b54890a064f9e57367975a59afeeedef02ad16a8330",
+     ".cache/emsdk/upstream/emscripten/src/lib/libstrings.js": "c8cd6dbca9ef15dab5964ca57198f097b89b4ff3b5874337a1ede399dbecc9fd",
