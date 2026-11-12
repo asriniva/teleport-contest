@@ -13,7 +13,12 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Check window callback declarations and engulf dispatch
+        run: node scripts/test-uhitm-delay-callback.mjs
+
       - name: Score public sessions
+        env:
+          SESSION_REPLAY_TIMEOUT_MS: '45000'
         run: |
           npm run score -- sessions/ \
             2>score-stderr.txt | tee score-stdout.txt
@@ -37,12 +42,15 @@ jobs:
               : '0.0';
             console.log(JSON.stringify({ passed, total, rngPct, timestamp: data.timestamp }));
             fs.writeFileSync('score-summary.json', JSON.stringify({ passed, total, rngPct, timestamp: data.timestamp, results: results.map(r => ({ session: r.session, passed: r.passed, rng: r.metrics?.rngCalls, screen: r.metrics?.screens, cursor: r.metrics?.cursor })) }, null, 2));
+            if (total !== 44 || passed !== total) process.exitCode = 1;
           "
 
       - name: Upload results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: score-results
           path: |
             score-summary.json
             score-stdout.txt
+            score-stderr.txt

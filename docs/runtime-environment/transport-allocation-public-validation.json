@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "complete": true,
+  "productionCommit": "e807e4b023be924bbb117447d67d75ca3c71a821",
+  "strictPublicPassed": 44,
+  "ciPublicPassed": 44,
+  "ciRun": 43281180365,
+  "deadlinesEnforced": false,
+  "localFrozenDefaultSessionMs": 45000,
+  "documentedJudgeSessionMs": 900000,
+  "localSessionsAbove45Seconds": [
+    "seed0360-wizard-world-tour.session.json",
+    "seed0030-ten-diverse-deaths.session.json",
+    "seed4500-knight-coverage.session.json",
+    "seed0014-dequa-fountain-explore.session.json"
+  ],
+  "localSessionsAbove900Seconds": [],
+  "slowestSession": {
+    "session": "seed0360-wizard-world-tour.session.json",
+    "passed": true,
+    "ms": 82404.44,
+    "moves": 832
+  },
+  "wallSeconds": 653.8736050128937,
+  "previousComparableWallSeconds": 678.886,
+  "timingFit": {
+    "startup_ms": 4524.9,
+    "per_move_ms": 39.0054,
+    "r2": 0.753,
+    "label": "4525+39.01/turn",
+    "sessions": 44
+  },
+  "profileScope": {
+    "uninterrupted44Replay": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/recorder-cpu-profile-e807e4b-node22",
+    "singleWorkerRetry": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/recorder-e807e4b-knight-profile-recovery-10ms",
+    "failedProfilesRetained": [
+      {
+        "file": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/recorder-cpu-profile-e807e4b-node22/profiles/CPU.20261112.134403.93208.0.001.cpuprofile",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "session": "seed4500-knight-coverage.session.json"
+      }
+    ],
+    "replacementSha256": "16c5d187432f650c3590f01f2bff85b2761465d8716583c959a9a65ca8c103d0",
+    "originalIntervalUs": 1000,
+    "replacementIntervalUs": 10000,
+    "scope": "43 original profiles plus one independently replayed worker. Weighted by measured timeDeltas; official timings/acceptance remain the uninterrupted44-session run. Not one complete uninterrupted profile collection."
+  },
+  "topSelf": [
+    {
+      "file": "",
+      "function": "(garbage collector)",
+      "line": 0,
+      "column": 0,
+      "sampledMs": 53609.391,
+      "percent": 8.315
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "record",
+      "line": 19,
+      "column": 20,
+      "sampledMs": 34422.032,
+      "percent": 5.339
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "env.field",
+      "line": 100,
+      "column": 13,
+      "sampledMs": 15802.616,
+      "percent": 2.451
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "free",
+      "line": 74,
+      "column": 9,
+      "sampledMs": 14878.993,
+      "percent": 2.308
+    },
+    {
+      "file": "js/ported/termcap.js",
+      "function": "nomux_capture_screen",
+      "line": 784,
+      "column": 37,
+      "sampledMs": 14517.124,
+      "percent": 2.252
+    },
+    {
+      "file": "js/c-runtime/context.js",
+      "function": "withCEnvironment",
+      "line": 8,
+      "column": 33,
+      "sampledMs": 11737.92,
+      "percent": 1.82
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "load",
+      "line": 30,
+      "column": 18,
+      "sampledMs": 10204.304,
+      "percent": 1.583
+    },
+    {
+      "file": "js/c-runtime/records.js",
+      "function": "record",
+      "line": 6,
+      "column": 20,
+      "sampledMs": 10052.432,
+      "percent": 1.559
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "function": "canonical",
+      "line": 8,
+      "column": 23,
+      "sampledMs": 10041.221,
+      "percent": 1.557
+    },
+    {
+      "file": "node:internal/modules/esm/utils",
+      "function": "compileSourceTextModule",
+      "line": 344,
+      "column": 33,
+      "sampledMs": 8343.93,
+      "percent": 1.294
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "malloc",
+      "line": 48,
+      "column": 11,
+      "sampledMs": 8053.353,
+      "percent": 1.249
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "currentDataView",
+      "line": 12,
+      "column": 32,
+      "sampledMs": 7959.228,
+      "percent": 1.234
+    }
+  ],
+  "rawProofs": {
+    "docs/runtime-environment/transport-allocation-public-evidence/summary.json": "aa5f97eb07b2599579e6ef5e13ff679ec36e29ccd413c54725b67203ade7d0d0",
+    "docs/runtime-environment/transport-allocation-public-evidence/official-results.json": "9344f69920939a397de3a806e8f39bafd4a4dea96fc766b8427f77e907de5fb1",
+    "docs/runtime-environment/transport-allocation-public-evidence/pre-run-manifest.json": "3cc888b0a53855e2a0d03d1a2e92cae473165e3619bf329b8058a64b0c2611d2",
+    "docs/runtime-environment/transport-allocation-public-evidence/post-run-integrity.json": "8a3338a4d4cde1faf5d821ac33fc4c45009517b019ef5edb248781ace849a7c3",
+    "docs/runtime-environment/transport-allocation-public-evidence/profile-summary-recovered.json": "f686a6b3959afa6f20d79cc993c43e9c6f305f462bf862b744c0bb2471a63173",
+    "docs/runtime-environment/transport-allocation-public-evidence/ci-score-stdout.txt": "c98176474ba426a918b085aae4008db97dfbd363aaadcecf8b775c5a796bb691",
+    "docs/runtime-environment/transport-allocation-public-evidence/knight-first-retry-stderr.log": "ea08ecc3019de70860bf4701378ea0e20aa77d26863feec8de92f57ad2004d61",
+    "docs/runtime-environment/transport-allocation-public-evidence/knight-profile-recovery-integrity.json": "b3137ebfab31927f10502c147dd9c2558da38d4df6857663910f8daf86bc802b"
+  },
+  "limits": [
+    "Public44 only; held-out56 unverified.",
+    "The uninterrupted replay passed all strict metrics with deadline0; four local sessions exceed upstream45-second default.",
+    "CPU profile aggregation recovers one empty worker profile with a source-identical retry at10ms sampling. This is not one uninterrupted44-profile collection.",
+    "Original empty profile is retained; a first1ms retry explicitly reported ENOSPC.",
+    "CI success was verified by parsing all44 results, not workflow color alone."
+  ]
+}

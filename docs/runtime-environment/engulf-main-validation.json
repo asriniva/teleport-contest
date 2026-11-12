@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "complete": true,
+  "productionCommit": "e807e4b023be924bbb117447d67d75ca3c71a821",
+  "originalNativeCompared": true,
+  "checks": 15,
+  "literalKeys": 58,
+  "engulfAnimationBoundaries": 2,
+  "fullGameAccepted": false,
+  "scope": "Real original MAIN via legitimate wizard polymorph and target-creation commands, followed by an actual hero engulf. Exact complete recordings, RNG, snapshots, state and live world match. No direct game-policy calls or game-memory writes by the fixture.",
+  "rawProofs": {
+    "docs/runtime-environment/engulf-main-evidence/evidence.json": "2eded81337c657588be1ee26a9c2ff60ca55a4378bf407649f8f7dfd3b6d522d",
+    "docs/runtime-environment/engulf-main-evidence/c-result.json.gz": "b8ae6f0439ada345d6847d788f9ed1934ba77352369d2df3886efca15cbd2c87",
+    "docs/runtime-environment/engulf-main-evidence/js-result.json.gz": "bfef75a0c74acb7a5c1ea8f5409db8f299b4f746a3bcfec51d31c80ce58f7ce4"
+  }
+}

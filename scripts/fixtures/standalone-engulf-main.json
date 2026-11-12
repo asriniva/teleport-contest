@@ -1,0 +1,15 @@
+{
+  "seed": 1,
+  "timezone": "UTC",
+  "options": "OPTIONS=!news\n",
+  "argv": [
+    "-D",
+    "-u",
+    "Ada-male-lawful",
+    "-p",
+    "Archeologist",
+    "-r",
+    "human"
+  ],
+  "keys": "yy  n#polyself\npurple worm\n  #wizgenesis\nhostile troll\nh  "
+}
