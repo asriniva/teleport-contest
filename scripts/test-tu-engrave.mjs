@@ -1,3 +1,5 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Original EmC TU versus imported JS, with explicitly controlled foreign world/UI.
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
@@ -8,7 +10,7 @@ import * as data from '../js/ported/engrave.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const dir=resolve(process.env.TELEPORT_ENGRAVE_PROBE_DIR??'.cache/tu-probes');
 const path=kind=>pathToFileURL(resolve(dir,(process.env.TELEPORT_ENGRAVE_PROBE_DIR?'':'engrave-')+kind+'.mjs'));
-const {default:rf}=await import(path('reference')),{default:hf}=await import(path('hybrid'));
+const {default:rf}=await loadFixture("engrave",path('reference')),{default:hf}=await loadFixture("engrave",path('hybrid'));
 const reference=await rf();
 function text(m,ptr){let p=Number(ptr);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 const L={};for(let i=0;i<reference._probe_layout_count();i++)L[text(reference,reference._probe_layout_name(i))]=Number(reference._probe_layout_value(i));

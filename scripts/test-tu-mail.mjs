@@ -1,3 +1,6 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 // First pass: actual EmC original C against imported JS with the same native
 // dependency fixture. Native/macOS library differences remain a follow-up.
 import assert from './native-test-assert.mjs';
@@ -6,8 +9,8 @@ import { pathToFileURL } from 'node:url';
 import { callMail } from '../js/nethack/bindings/mail.js';
 import { C, R, T } from '../js/c-runtime/context.js';
 const directory = resolve(process.env.TELEPORT_MAIL_PROBE_DIR ?? '.cache/tu-probes');
-const { default: referenceFactory } = await import(pathToFileURL(resolve(directory, process.env.TELEPORT_MAIL_PROBE_DIR ? 'reference.mjs' : 'mail-reference.mjs')));
-const { default: hybridFactory } = await import(pathToFileURL(resolve(directory, process.env.TELEPORT_MAIL_PROBE_DIR ? 'hybrid.mjs' : 'mail-hybrid.mjs')));
+const { default: referenceFactory } = await loadFixture("mail",pathToFileURL(resolve(directory, process.env.TELEPORT_MAIL_PROBE_DIR ? 'reference.mjs' : 'mail-reference.mjs')));
+const { default: hybridFactory } = await loadFixture("mail",pathToFileURL(resolve(directory, process.env.TELEPORT_MAIL_PROBE_DIR ? 'hybrid.mjs' : 'mail-hybrid.mjs')));
 const reference = await referenceFactory();
 function text(m,p) { p=Number(p);if(!p)return null;let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1'); }
 const L={strings:{}};
@@ -46,7 +49,7 @@ for(const time of [0n,1n,9007199254740993n,-10n])for(const size of [0n,1n,900719
  reset();call('option',0,1);call('stat',time,size);action(1);assert.match(state(),new RegExp('old:'+time+':'+size+';'));
  call('stat',time+1n,size);call('moves',100n);action(6);
 }
-reset();action(1);modules.forEach(m=>new DataView(m.HEAPU8.buffer).setBigInt64(Number(m._probe_pointer(3))+L.stat_st_mtime,9999n,true));call('stat',10000n,0n);action(6);assert.match(state(),/old:10000:0;/);
+reset();action(1);modules.forEach(m=>new FixtureDataView(m.HEAPU8.buffer).setBigInt64(Number(m._probe_pointer(3))+L.stat_st_mtime,9999n,true));call('stat',10000n,0n);action(6);assert.match(state(),/old:10000:0;/);
 // Poll interval, swallowed/biff guards, stale and missing/empty mail cases.
 for(const moves of [0n,49n,50n,51n,99n,100n,9007199254740993n])for(const biff of [0,1])for(const swallowed of [0,1]){
  reset();action(1);call('moves',moves);call('flags',biff,0);call('hero',10,10,swallowed,0);call('clear');action(6);
@@ -111,4 +114,4 @@ reset();start();call('option',12,6);const release2=info(L.MSG_MAIL);action(5);re
 // One runtime, two actual Modules: mail/stat/free counters and pointer storage
 // remain independent; operations on the second cannot mutate the first.
 reset();call('option',0,1);action(1);const saved=snapshot(modules[1]);const independent=await hybridFactory({nethackPorted:runtime});independent._probe_reset();independent._probe_action(1,0,0);assert.deepEqual(snapshot(modules[1]),saved);
-console.log(`MAIL: ${comparisons} Emscripten-C/hybrid state, stat bytes, movement, delivery, controlled reader, callbacks and growth comparisons checked.`);
+console.log(`MAIL: ${comparisons} Emscripten-C/pure-JS state, stat bytes, movement, delivery, controlled reader, callbacks and growth comparisons checked.`);

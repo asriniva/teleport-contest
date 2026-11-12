@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('priest', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/priest-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/priest-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('priest',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 
@@ -296,4 +298,4 @@ assert.equal(other._probe_pointer(2,0),0n);other._probe_add_monster(0,L.PM_HUMAN
 other._probe_action(0,0,0,0,0,0,0,0);assert.notEqual(other._probe_pointer(2,0),0n);
 assert.deepEqual(snapshot(modules[1]),before);other._probe_action(1,0,0,0,0,0,0,0);
 assert.deepEqual(snapshot(modules[1]),before);check();reset();
-console.log(`PRIEST: ${comparisons} ${referenceLabel}/hybrid extension, movement, temple, donation, ownership and RNG-site comparisons checked.`);
+console.log(`PRIEST: ${comparisons} ${referenceLabel}/pure-JS extension, movement, temple, donation, ownership and RNG-site comparisons checked.`);

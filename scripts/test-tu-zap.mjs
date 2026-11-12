@@ -1,16 +1,19 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 // Actual configured C ZAP versus imported JavaScript; controlled foreign deps.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import fs from 'node:fs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import * as core from '../js/ported/zap.js';
 import {callZap,initializeZap,zapState,createZapEnvironment} from '../js/nethack/bindings/zap.js';
 import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
-if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('ZAP has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for explicit Emscripten diagnostics.');
+// Original C reference is available through the isolated reference process.
 const custom=process.env.TELEPORT_ZAP_PROBE_DIR,dir=resolve(custom??'.cache/tu-probes');
 const file=k=>pathToFileURL(resolve(dir,(custom?'':'zap-')+k+'.mjs'));
-const {default:referenceFactory}=await import(file('reference'));
-const {default:hybridFactory}=await import(file('hybrid'));
+const {default:referenceFactory}=await loadFixture("zap",file('reference'));
+const {default:hybridFactory}=await loadFixture("zap",file('hybrid'));
 const reference=await referenceFactory();
 function text(m,p){p=Number(p);if(!p)return null;let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');}
 const raw={};for(let i=0;i<reference._probe_layout_count();i++)raw[text(reference,reference._probe_layout_name(i))]=reference._probe_layout_value(i);
@@ -28,7 +31,7 @@ const modules=[reference,hybrid],stack=modules.map(m=>m._probe_stack());let comp
 const names=["zaptype", "learnwand", "bhitm", "release_hold", "probe_objchain", "probe_monster", "get_obj_location", "get_mon_location", "montraits", "get_container_location", "zombie_can_dig", "revive", "revive_egg", "unturn_dead", "unturn_you", "cancel_item", "blank_novel", "drain_item", "obj_resists", "obj_shudders", "polyuse", "create_polymon", "do_osshock", "obj_unpolyable", "poly_obj", "stone_to_flesh_obj", "bhito", "bhitpile", "zappable", "do_enlightenment_effect", "zapnodir", "backfire", "zap_ok", "dozap", "boxlock_invent", "zapyourself", "ubreatheu", "lightdamage", "flashburn", "zap_steed", "cancel_monst", "zap_updown", "zapsetup", "zapwrapup", "weffects", "spell_damage_bonus", "spell_hit_bonus", "exclam", "hit", "miss", "skiprange", "maybe_explode_trap", "zap_map", "bhit", "boomhit", "zhitm", "zhitu", "burn_floor_objects", "bounce_dir", "zap_hit", "disintegrate_mon", "ubuzz", "buzz", "dobuzz", "melt_ice", "start_melt_ice_timeout", "melt_ice_away", "zap_over_floor", "mon_spell_hits_spot", "fracture_rock", "break_statue", "destroyable", "adtyp_to_prop", "u_adtyp_resistance_obj", "inventory_resistance_check", "item_what", "maybe_destroy_item", "destroy_items", "resist", "wishcmdassist", "wish_history_add", "wish_history_flush", "wish_history_menu", "makewish", "flash_str"];
 function write(m,i,s){const p=Number(m._probe_buffer(i));m.HEAPU8.fill(0,p,p+4096);m.HEAPU8.set(Buffer.from(s+'\0','latin1'),p);return BigInt(p);}
 function both(fn){modules.forEach(fn);}function reset(){both(m=>m._probe_reset());}function run(name,args=()=>[],label=''){
- seen.add(name);const values=modules.map((m,i)=>{const a=args(m,i).map(x=>BigInt(x??0));while(a.length<9)a.push(0n);try{m._probe_invoke(names.indexOf(name),...a);}catch(e){console.error('ZAP entry',name,label,'module',i);throw e;}return [text(m,m._probe_result()),text(m,m._probe_trace()),text(m,m._probe_snapshot()),(()=>{const v=new DataView(m.HEAPU8.buffer),p=Number(m._probe_ints()),out=Array.from({length:8},(_,j)=>v.getInt32(p+j*4,true));if(name==='bhit'||name==='zhitm'){const token=v.getBigUint64(p,true);const logical=token===0n?-1:Array.from({length:8},(_,j)=>m._probe_obj(j)).indexOf(token);assert.ok(logical>=0||token===0n,'Native output is NULL or one actual fixture object');out.splice(0,2,'object:'+logical);}return out;})(),Array.from({length:3},(_,j)=>text(m,m._probe_buffer(j)))];});
+ seen.add(name);const values=modules.map((m,i)=>{const a=args(m,i).map(x=>BigInt(x??0));while(a.length<9)a.push(0n);try{m._probe_invoke(names.indexOf(name),...a);}catch(e){console.error('ZAP entry',name,label,'module',i);throw e;}return [text(m,m._probe_result()),text(m,m._probe_trace()),text(m,m._probe_snapshot()),(()=>{const v=new FixtureDataView(m.HEAPU8.buffer),p=Number(m._probe_ints()),out=Array.from({length:8},(_,j)=>v.getInt32(p+j*4,true));if(name==='bhit'||name==='zhitm'){const token=v.getBigUint64(p,true);const logical=token===0n?-1:Array.from({length:8},(_,j)=>m._probe_obj(j)).indexOf(token);assert.ok(logical>=0||token===0n,'Native output is NULL or one actual fixture object');out.splice(0,2,'object:'+logical);}return out;})(),Array.from({length:3},(_,j)=>text(m,m._probe_buffer(j)))];});
  assert.deepEqual(values[1],values[0],name+' '+label);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stack[i],name+' stack'));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);comparisons++;return values[0][0];}
 // Native C consumer sees the authoritative table during startup, before a source call.
 for(let i=0;i<7;i++)for(let j=0;j<3;j++){assert.equal(text(hybrid,hybrid._probe_destroy(i,j)),text(reference,reference._probe_destroy(i,j)));assert.equal(text(hybrid,hybrid._probe_destroy(i,j)),core.destroy_strings[i][j]);}
@@ -76,7 +79,7 @@ for(const fn of ['wishcmdassist','wish_history_add','wish_history_menu','wish_hi
 }
 console.log('ZAP effects',comparisons,'exact; remaining',names.filter(n=>!seen.has(n)).join(','));
 for(const type of [0,1,2,3,4,5,6,7,10,11,12,20,21,22,-30,-31,-32]){
- reset();both(m=>{m._probe_option(0,1);new DataView(m.HEAPU8.buffer).setBigUint64(Number(m._probe_ints()),0n,true);});run('zhitm',m=>[m._probe_mon(0),type,1,m._probe_ints()],String(type));
+ reset();both(m=>{m._probe_option(0,1);new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(m._probe_ints()),0n,true);});run('zhitm',m=>[m._probe_mon(0),type,1,m._probe_ints()],String(type));
  if(![4,14,-34].includes(type)){reset();both(m=>{m._probe_option(0,1);for(const prop of [L.ANTIMAGIC,L.FIRE_RES,L.COLD_RES,L.SHOCK_RES,L.SLEEP_RES,L.DISINT_RES,L.POISON_RES,L.ACID_RES].filter(x=>x!==undefined))m._probe_property(prop,1n,0n,0n);});run('zhitu',m=>[type,1,write(m,0,'beam'),10,10],String(type));}
  reset();both(m=>m._probe_option(0,1));run('dobuzz',()=>[type,1,10,10,1,0,1,1,0],String(type));
 }
@@ -86,8 +89,8 @@ for(const terrain of [L.ROOM,L.STONE,L.IRONBARS,L.DOOR,L.ICE,L.POOL,L.LAVAPOOL].
 }
 for(const fn of ['zap_map','maybe_explode_trap'])for(const type of [L.WAN_FIRE,L.WAN_COLD,L.WAN_CANCELLATION,L.WAN_STRIKING]){reset();both(m=>m._probe_item(0,type,1n,0));run(fn,m=>fn==='zap_map'?[12,10,m._probe_obj(0)]:[0,m._probe_obj(0),m._probe_ints()]);}
 for(const dir of [[1,0],[0,1],[-1,0],[1,1]])for(const range of [0,1,5,20]){
- reset();both(m=>{new DataView(m.HEAPU8.buffer).setBigUint64(Number(m._probe_ints()),m._probe_obj(0),true);m._probe_item(0,L.WAN_STRIKING,1n,0);});run('bhit',m=>[...dir,range,L.ZAPPED_WAND,m._probe_callback(0),m._probe_callback(1),m._probe_ints()],dir+':'+range);
- reset();both(m=>m._probe_map(12,10,L.STONE,0));run('bounce_dir',m=>{const p=m._probe_ints();const v=new DataView(m.HEAPU8.buffer);v.setInt32(Number(p),dir[0],true);v.setInt32(Number(p)+4,dir[1],true);return[12,10,p,p+4n,range];});
+ reset();both(m=>{new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(m._probe_ints()),m._probe_obj(0),true);m._probe_item(0,L.WAN_STRIKING,1n,0);});run('bhit',m=>[...dir,range,L.ZAPPED_WAND,m._probe_callback(0),m._probe_callback(1),m._probe_ints()],dir+':'+range);
+ reset();both(m=>m._probe_map(12,10,L.STONE,0));run('bounce_dir',m=>{const p=m._probe_ints();const v=new FixtureDataView(m.HEAPU8.buffer);v.setInt32(Number(p),dir[0],true);v.setInt32(Number(p)+4,dir[1],true);return[12,10,p,p+4n,range];});
 }
 for(const haveObject of [0,1]){reset();both(m=>{m._probe_grid(10,10,haveObject?0:-1,-1);m._probe_link(0,-1,L.OBJ_FLOOR,10,10);});run('bhitpile',m=>[m._probe_obj(1),m._probe_callback(1),10,10,0]);}
 reset();run('boomhit',m=>[m._probe_obj(0),1,0]);
@@ -99,7 +102,7 @@ reset();run('burn_floor_objects',()=>[10,10,1,1]);
 reset();run('disintegrate_mon',m=>[m._probe_mon(0),0,write(m,0,'beam')]);
 for(const type of [L.AD_FIRE,L.AD_COLD,L.AD_ELEC]){reset();run('mon_spell_hits_spot',m=>[m._probe_mon(0),type,12,10]);}
 for(const n of [0,1,20,50]){reset();run('resist',m=>[m._probe_mon(0),L.WAND_CLASS,n,0]);}
-for(const fn of ['melt_ice','melt_ice_away','start_melt_ice_timeout']){reset();both(m=>{m._probe_map(12,10,L.ICE,0);new DataView(m.HEAPU8.buffer).setBigInt64(Number(m._probe_any()),(12n<<16n)|10n,true);});run(fn,m=>fn==='melt_ice'?[12,10,write(m,0,'ice melts')]:fn==='start_melt_ice_timeout'?[12,10,50]:[m._probe_any(),0]);}
+for(const fn of ['melt_ice','melt_ice_away','start_melt_ice_timeout']){reset();both(m=>{m._probe_map(12,10,L.ICE,0);new FixtureDataView(m.HEAPU8.buffer).setBigInt64(Number(m._probe_any()),(12n<<16n)|10n,true);});run(fn,m=>fn==='melt_ice'?[12,10,write(m,0,'ice melts')]:fn==='start_melt_ice_timeout'?[12,10,50]:[m._probe_any(),0]);}
 console.log('ZAP entries',comparisons,'exact; remaining',names.filter(n=>!seen.has(n)).join(','));
 // All configured native wand rows, varied charge state, real wide quantities,
 // protected self effects and live target/world pointers.
@@ -144,7 +147,7 @@ function option(m,name,value){const id=m._probe_option_id(write(m,7,name));asser
 for(const assigned of [0,1])for(const match of [0,1]){reset();both(m=>{m._probe_level(0,assigned,match);m._probe_map(11,10,L.STONE,0);});run('dobuzz',()=>[0,2,10,10,1,0,1,1,0],'assigned Air level '+assigned+':'+match);if(assigned&&match)assert.ok(text(reference,reference._probe_trace()).includes('vanishes into the aether'),'Actual native assigned-level bounce branch');}
 // Each of the six original bhit_done transfers gets a positive native witness.
 for(const kind of ['shop','flash','invisible','thrown','monster_callback','ship']){
- reset();both(m=>{m._probe_item(0,kind==='shop'?L.PICK_AXE:L.WAN_STRIKING,1n,0);m._probe_link(0,-1,L.OBJ_FREE,10,10);m._probe_grid(11,10,-1,kind==='ship'?-1:0);m._probe_option(11,1);new DataView(m.HEAPU8.buffer).setBigUint64(Number(m._probe_ints()),m._probe_obj(0),true);if(kind==='shop'){option(m,'inside_shop',1);m._probe_option(14,1);}if(kind==='ship')option(m,'ship_object',1);});
+ reset();both(m=>{m._probe_item(0,kind==='shop'?L.PICK_AXE:L.WAN_STRIKING,1n,0);m._probe_link(0,-1,L.OBJ_FREE,10,10);m._probe_grid(11,10,-1,kind==='ship'?-1:0);m._probe_option(11,1);new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(m._probe_ints()),m._probe_obj(0),true);if(kind==='shop'){option(m,'inside_shop',1);m._probe_option(14,1);}if(kind==='ship')option(m,'ship_object',1);});
  const weapon=kind==='flash'?L.FLASHED_LIGHT:kind==='invisible'?L.INVIS_BEAM:kind==='ship'?L.KICKED_WEAPON:kind==='thrown'||kind==='shop'?L.THROWN_WEAPON:L.ZAPPED_WAND;
  run('bhit',m=>[1,0,4,weapon,m._probe_callback(0),kind==='ship'?0:m._probe_callback(1),m._probe_ints()],kind+' forward exit');
  const trace=text(reference,reference._probe_trace());if(kind==='shop')assert.ok(trace.includes('shkcatch;'));if(kind==='monster_callback')assert.ok(trace.includes('cbmon:0:0;'));if(kind==='ship')assert.ok(trace.includes('ship_object;'));

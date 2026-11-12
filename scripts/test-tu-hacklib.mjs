@@ -1,12 +1,12 @@
+import './pure-js-probes/deny-wasm.mjs';
 import {assertStackRestored,allocationMetric,referenceBackend,referenceLabel,memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/hacklib-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/hacklib-hybrid.mjs';
-import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/hacklib.mjs';
 import {C,R,T} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/hacklib.js';
-const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.hacklib,runtime=createPortedRuntime(layouts),referenceFactory=referenceBackend('hacklib',emscriptenReferenceFactory),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
+const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.hacklib,runtime=layouts,referenceFactory=referenceBackend('hacklib',emscriptenReferenceFactory),modules=[await referenceFactory(),await createPureJsProbe(layouts)],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){if(!p)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function checkedTrace(m){return text(m,m._probe_trace());}
 function check(){assert.equal(text(modules[1],modules[1]._probe_snapshot()),text(modules[0],modules[0]._probe_snapshot()));assert.equal(checkedTrace(modules[1]),checkedTrace(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m,stacks[i]));comparisons++;}
@@ -64,5 +64,5 @@ for(const mode of ['short-read','partial-write','read-error','write-error']){
 // Distinct suffix buffers and stable per-function addresses survive later calls.
 reset();input(0,'horse');act(22);const suffixPointers=modules.map(m=>m._probe_pointer(1,0));input(0,'turn off');act(23);modules.forEach((m,i)=>assert.notEqual(m._probe_pointer(1,0),suffixPointers[i]));input(0,'cat');act(22);modules.forEach((m,i)=>assert.equal(m._probe_pointer(1,0),suffixPointers[i]));assert.equal(output(),"cat's");
 // One runtime serves two actual Wasm modules; execute JS in the second and preserve the first.
-reset();input(0,'primary');act(22);const first=modules.map(m=>text(m,m._probe_snapshot()));const other=await hybridFactory({nethackPorted:runtime});other._probe_reset();const p=Number(other._malloc(16n));other.HEAPU8.set(Buffer.from('secondary\0'),p);other._probe_input(0,BigInt(p));other._probe_action(22,0,0,0,0,0n);assert.equal(text(other,other._probe_pointer(2,0)),"secondary's");other._free(BigInt(p));modules.forEach((m,i)=>assert.equal(text(m,m._probe_snapshot()),first[i]));check();
+reset();input(0,'primary');act(22);const first=modules.map(m=>text(m,m._probe_snapshot()));const other=await createPureJsProbe(layouts);other._probe_reset();const p=Number(other._malloc(16n));other.HEAPU8.set(Buffer.from('secondary\0'),p);other._probe_input(0,BigInt(p));other._probe_action(22,0,0,0,0,0n);assert.equal(text(other,other._probe_pointer(2,0)),"secondary's");other._free(BigInt(p));modules.forEach((m,i)=>assert.equal(text(m,m._probe_snapshot()),first[i]));check();
 console.log(`hacklib: ${comparisons} ${referenceLabel}/JS comparisons checked`);

@@ -1,12 +1,17 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("sfbase");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
-import {referenceBackend,referenceLabel,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,DataView} from './native-test-backend.mjs';
+import {referenceBackend,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,DataView} from './native-test-backend.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {withCEnvironment,C} from '../js/c-runtime/context.js';
 import {createSfbaseEnvironment} from '../js/nethack/bindings/sfbase.js';
 import * as core from '../js/ported/sfbase.js';
 const directory=resolve(process.env.SFBASE_PROBE_DIR??'.cache/tu-probes');
-const load=async mode=>(await import(pathToFileURL(resolve(directory,'sfbase-'+mode+'.mjs')).href)).default;
+const load=async mode=>(await loadFixture("sfbase",pathToFileURL(resolve(directory,'sfbase-'+mode+'.mjs')).href)).default;
 const referenceFactory=await load('reference'),hybridFactory=await load('hybrid');
 const reference=await referenceBackend('sfbase',referenceFactory)();
 function text(m,at){at=Number(at);let end=at;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(at,end)).toString('latin1');}
@@ -59,8 +64,8 @@ for(const name of ['sfo_int64','sfi_int64','sfi_version_info','sfo_char']){reset
 for(const op of [0,1,2,3]){reset();fill(1);both('table',op,op===3?L.exportascii:L.historical);if(op===3)field(0,1,0);action(serializers.indexOf('sfo_int64'));action(serializers.indexOf('sfi_int64'));}
 // Original zero templates are mutable extern data. An external native writer
 // changes a callback before sf_init copies it into the invalid table slot.
-for(const input of [0,1]){reset();fill(2);for(const m of modules){const memory=new DataView(m.HEAPU8.buffer);const zero=Number(m._teleport_sfbase_global(input?5:4)),historical=Number(m._teleport_sfbase_global(input?9:8));const offset=L.structlevel_fn+L.proc_int64;memory.setBigUint64(zero+offset,memory.getBigUint64(historical+offset,true),true);}both('table',0,0);field(0,7,L.invalid);if(input)both('input',0,20000);action(serializers.indexOf(input?'sfi_int64':'sfo_int64'));}
+for(const input of [0,1]){reset();fill(2);for(const m of modules){const memory=new FixtureDataView(m.HEAPU8.buffer);const zero=Number(m._teleport_sfbase_global(input?5:4)),historical=Number(m._teleport_sfbase_global(input?9:8));const offset=L.structlevel_fn+L.proc_int64;memory.setBigUint64(zero+offset,memory.getBigUint64(historical+offset,true),true);}both('table',0,0);field(0,7,L.invalid);if(input)both('input',0,20000);action(serializers.indexOf(input?'sfi_int64':'sfo_int64'));}
 // Separate Module instances share the dispatcher but retain independent tables,
 // static value buffers, callback identities and NHFILE storage.
 reset();fill(11);action(serializers.indexOf('sfo_int64'));const retained=modules.map(m=>text(m,m._probe_snapshot()));const privateBuffer=hybrid._probe_value(values.indexOf('sfvalue_genericptr'),0,0);const retainedBuffer=text(hybrid,privateBuffer);const other=await hybridFactory({nethackPorted:runtime});other._probe_reset();other._probe_value(values.indexOf('sfvalue_genericptr'),-1,0);assert.notEqual(environments.get(other),environments.get(hybrid));assert.equal(text(hybrid,hybrid._probe_snapshot()),retained[1]);assert.equal(text(hybrid,privateBuffer),retainedBuffer);comparisons+=3;
-console.log(`sfbase: ${comparisons} ${referenceLabel}/JS raw byte, callback, log, field, value, identity, stack and Module comparisons; all239 original functions invoked`);
+console.log(`sfbase: ${comparisons} ${fixtureReferenceLabel}/JS raw byte, callback, log, field, value, identity, stack and Module comparisons; all239 original functions invoked`);

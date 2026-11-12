@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('music', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/music-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/music-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('music',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.music,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
@@ -76,4 +78,4 @@ reset();call('option',31,1);instr(L.FIRE_HORN);hero(9,1);action(10);assert.match
 reset();call('option',0,0);monster(0,L.PM_HUMAN);action(2,3);assert.match(trace(),/@;/);
 // Actual native song context and private startup state remain isolated per Module.
 reset();rng([0,6]);action(11);const before=snapshot(modules[1]),other=await hybridFactory({nethackPorted:runtime});other._probe_reset(1);assert.deepEqual(snapshot(modules[1]),before);other._probe_action(11,0,0,0);assert.deepEqual(snapshot(modules[1]),before);check();
-console.log(`MUSIC: ${comparisons} ${referenceLabel}/hybrid monster, pit, quake, instrument, tune, state and RNG-site comparisons checked.`);
+console.log(`MUSIC: ${comparisons} ${referenceLabel}/pure-JS monster, pit, quake, instrument, tune, state and RNG-site comparisons checked.`);

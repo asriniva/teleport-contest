@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('mondata', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/mondata-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/mondata-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('mondata',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/mondata.js';
@@ -75,4 +77,4 @@ for(let damage=0;damage<256;damage++){reset();act(49,L.PM_HUMAN,damage);act(50,L
 for(let stage=1;stage<=10;stage++){reset();opt(30,stage);opt(31,stage);const before=modules.map(m=>allocationMetric(m));if(stage===1){rng([0]);act(54);}else if(stage===2){obj(0,2,1);equip(3,0);act(5,L.PM_HUMAN,0,L.AD_FIRE);}else if(stage===3){obj(0,2,1);obj(0,4,0);act(10);}else if(stage===4)act(5,L.PM_HUMAN,0,L.AD_FIRE);else if(stage===5){obj(0,0,L.BLINDING_VENOM);obj(1,0,L.HELMET);obj(1,1,BigInt(L.W_ARMH));obj(0,3,1);obj(0,4,0);opt(19,L.AT_SPIT);opt(20,0);act(11,L.PM_HUMAN,-1,0);}else if(stage===6)act(38,L.PM_HUMAN,0,0);else if(stage===7)act(54);else if(stage===8){hero(11,10);hero(12,10);hero(13,L.PIT);act(57);}else if(stage===9){input('not a species');act(35);}else{input('dogs');act(36);}assert.ok(trace().includes(`grow:${stage};`),`growth${stage}`);assert.ok(trace().includes('nested:'));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));}
 reset();opt(0,0);rng([0]);act(54);assert.ok(trace().includes('@;'));
 reset();mon(0,14,0x80);const held=snap(modules[1]),other=await hybridFactory({nethackPorted:runtime});other._probe_reset(9);other._probe_action(56,L.PM_HUMAN,0,L.ALL_TRAPS,0n);assert.equal(other._probe_action(55,L.PM_HUMAN,0,L.ALL_TRAPS,0n),-1n);other._probe_action(0,L.PM_BAT,0,0,0n);assert.deepEqual(snap(modules[1]),held);comparisons+=2;check();
-console.log(`MONDATA ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);
+console.log(`MONDATA ${referenceLabel}/pure-JS differential: ${comparisons} comparisons checked`);

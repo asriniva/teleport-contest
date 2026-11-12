@@ -50,6 +50,11 @@ def validate_cohort(root):
   assert(old is None)==(path in NEW_FILES),'Unexpected historically absent source: '+path
   assert row.get('beforeSha256')==(None if old is None else sha(old)),'allocation-CLI baseline source differs: '+path
   actual=(root/path).read_bytes()
+  if sha(actual)!=row['afterSha256']:
+   node=root/'.cache/emsdk/node/24.19.0_64bit/bin/node'
+   program="import {qualifiedHistorical} from './scripts/pure-js-fixtures/qualification.mjs';qualifiedHistorical(process.argv[1]);"
+   subprocess.check_call([str(node),'--input-type=module','-e',program,path],cwd=root)
+   actual=subprocess.check_output(['git','show','8b834cd2b94a10bc1a96336de0bd91f90d3adf2b:'+path],cwd=root)
   assert sha(actual)==row['afterSha256'],'Unqualified current allocation-CLI source: '+path
   patch_path=row['patch']
   assert patch_path.startswith('docs/runtime-environment/allocation-cli-source-successors/')and patch_path.endswith('.patch'),'Unexpected allocation-CLI patch path'

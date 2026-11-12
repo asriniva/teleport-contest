@@ -1,16 +1,17 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { BigUint64Array, DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('rnd', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/rnd-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/rnd-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/rnd.mjs';
 import { C, R, T } from '../js/c-runtime/context.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 const layout = layouts.rnd;
-const runtime = createPortedRuntime(layouts);
-const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: runtime })];
+const implementation = await createPureJsProbe(layouts);
+const runtime = implementation;
+const modules = [await referenceFactory(), implementation];
 // This read-only entry establishes lazy function-identity storage without
 // drawing, seeding or changing any logger field.
 assert.equal(modules[1]._probe_enabled(), modules[0]._probe_enabled());
@@ -170,8 +171,7 @@ const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
 modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 state(); loggedDraws(); shuffle(1024); logs();
-const independentRuntime = createPortedRuntime(layouts);
-const independent = await hybridFactory({ nethackPorted: independentRuntime });
+const independent = await createPureJsProbe(layouts);
 const beforeIndependent = state();
 independent._probe_init(42n, 0); independent._probe_init(99n, 1); independent._probe_rn2(12); independent._probe_display(12);
 assert.deepEqual(state(), beforeIndependent); comparisons++;
@@ -182,4 +182,4 @@ modules.forEach((module, i) => {
     callerStorage[i].forEach(pointer => { if (pointer) module._free(pointer); });
 });
 scope();
-console.log(`RND: ${comparisons} ${referenceLabel}/hybrid full-ISAAC-state, random-operation, seeding, shuffle and byte-exact log comparisons checked.`);
+console.log(`RND: ${comparisons} ${referenceLabel}/pure-JS full-ISAAC-state, random-operation, seeding, shuffle and byte-exact log comparisons checked.`);

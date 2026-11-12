@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('ioctl', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/ioctl-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/ioctl-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('ioctl',options);
 import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 import { C, R, T } from '../js/c-runtime/context.js';
 
@@ -129,4 +131,4 @@ const before = state();
 independent._probe_options(0, 0, 0, 0, signal.default); independent._probe_get(); independent._probe_set(); independent._probe_suspend();
 assert.deepEqual(state(), before); scope(); comparisons++;
 modules.forEach((module, i) => { module._probe_shellers(0n); if (shellerStorage[i]) module._free(shellerStorage[i]); });
-console.log(`IOCTL: ${comparisons} ${referenceLabel}/hybrid termios-byte, native-call-order, authorization and signal-handler comparisons checked.`);
+console.log(`IOCTL: ${comparisons} ${referenceLabel}/pure-JS termios-byte, native-call-order, authorization and signal-handler comparisons checked.`);

@@ -1,4 +1,9 @@
-import {Int32Array,referenceBackend,referenceLabel,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("sounds");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
+import {Int32Array,referenceBackend,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -7,7 +12,7 @@ import * as sounds from '../js/ported/sounds.js';
 import {callSounds} from '../js/nethack/bindings/sounds.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const author=process.env.TELEPORT_SOUNDS_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url);
-const referenceFactory=(await import(new URL('sounds-reference.mjs',dir))).default,hybridFactory=(await import(new URL('sounds-hybrid.mjs',dir))).default;
+const referenceFactory=(await loadFixture("sounds",new URL('sounds-reference.mjs',dir))).default,hybridFactory=(await loadFixture("sounds",new URL('sounds-hybrid.mjs',dir))).default;
 const ref=await referenceBackend('sounds',referenceFactory)();
 function text(m,p){if(!p)return null;let end=Number(p);while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(Number(p),end)).toString();}
 const L={size:Number(ref._probe_context_size())};for(let i=0;i<ref._probe_layout_count();i++){const k=text(ref,ref._probe_layout_name(i)),v=ref._probe_layout_value(i);L[k]=/^(M1_|M2_|STRAT_|W_)/.test(k)?BigInt.asUintN(64,v).toString():Number(v);}
@@ -24,7 +29,7 @@ function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));ass
 function call(n,...args){const results=modules.map(m=>m['_probe_'+n](...args));assert.deepEqual(results[1],results[0],n+'('+args+')');state();comparisons++;return results[0];}
 function string(n,s){modules.forEach(m=>{const b=Buffer.from(s),p=m._malloc(BigInt(b.length+1));m.HEAPU8.set(b,Number(p));m.HEAPU8[Number(p)+b.length]=0;m['_probe_'+n](BigInt(p));m._free(BigInt(p));});state();}
 const reset=(seed=42)=>call('reset',seed),act=(op,a=0,b=0,size=0n)=>call('action',op,a,b,BigInt(size)),mon=(i,k,v)=>call('mon',i,k,BigInt(v)),hero=(k,v)=>call('hero',k,BigInt(v));
-function rolls(vals){modules.forEach(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),vals.length).set(vals);m._probe_rng_length(vals.length);});state();}
+function rolls(vals){modules.forEach(m=>{new FixtureInt32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),vals.length).set(vals);m._probe_rng_length(vals.length);});state();}
 reset();for(let i=0;i<sounds.h_sounds.length;i++){assert.equal(text(ref,ref._probe_table_string(i)),sounds.h_sounds[i]);comparisons++;}assert.equal(sounds.soundlib_choices.length,1);assert.equal(sounds.soundlib_choices[0].sndprocs,sounds.nosound_procs);
 // All28 source entries, all actual monster catalogue sound codes and exact text/RNG.
 for(let pm=0;pm<L.NUMMONS;pm++){reset();mon(0,0,pm);for(const op of [8,9,10,11,12,13,14,15,16])act(op);}
@@ -57,4 +62,4 @@ reset();string('input','ding');act(25,L.sff_base_only,1,100n);act(26);act(27);
 reset();call('equipment',3,0);call('option',30,1);const before=modules.map(m=>m.HEAPU8.buffer);act(20);modules.forEach((m,i)=>assertMemoryGrowth(m,before[i]));
 // Separate actual Modules share JS functions but not private sound source addresses/data.
 const other=await hybridFactory({nethackPorted:runtime});other._probe_reset(42);other._probe_sound(1,3);other._probe_action(23,100,0,0n);assert.equal(text(other,other._probe_pointer(1,0)),'nosound');assert.equal(soundBytes(other,1).name,'nosound,aliases');reset();act(23,100);assert.equal(text(modules[1],modules[1]._probe_pointer(1,0)),'nosound');assert.equal(soundBytes(modules[1],1).name,'nosound');assert.equal(soundBytes(other,1).name,'nosound,aliases');comparisons+=5;
-console.log('SOUNDS '+comparisons+' comparisons passed ('+referenceLabel+' vs JavaScript).');
+console.log('SOUNDS '+comparisons+' comparisons passed ('+fixtureReferenceLabel+' vs JavaScript).');

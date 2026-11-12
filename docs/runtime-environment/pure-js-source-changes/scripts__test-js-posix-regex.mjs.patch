@@ -1,0 +1,13 @@
+--- a/scripts/test-js-posix-regex.mjs
++++ b/scripts/test-js-posix-regex.mjs
+@@ -189,7 +189,9 @@
+   // C-locale shims. The current memory64 reference requires the SDK Node24;
+   // default/native/production tests run on Node22. Its wrapper exposes eflags=0.
+   const factory = (await import(pathToFileURL(process.env.POSIX_REGEX_WASM_ORACLE ?? path.join(root, '.cache/tu-probes/posixregex-reference.mjs')))).default;
+-  const reference = await factory();
++  const {createPortedRuntime}=await import('../js/backends/emscripten/runtime.js');
++  const layouts=JSON.parse(fs.readFileSync(path.join(root,'js/wasm/tu-layouts.json')));
++  const reference = await factory({nethackPorted:createPortedRuntime(layouts)});
+   const allocate = value => {
+     const data = bytes(value), pointer = reference._malloc(BigInt(data.length + 1));
+     reference.HEAPU8.set(data, Number(pointer)); reference.HEAPU8[Number(pointer) + data.length] = 0;

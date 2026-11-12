@@ -1,12 +1,16 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("vision");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import assert from './native-test-assert.mjs';
-import {assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
+import {assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {callVision,initializeVision,createVisionEnvironment} from '../js/nethack/bindings/vision.js';
 import * as core from '../js/ported/vision.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_VISION_AUTHOR==='1';
-const ref=(await import(own?'../.cache/vision-author/reference.mjs':'../.cache/tu-probes/vision-reference.mjs')).default;
-const hyb=(await import(own?'../.cache/vision-author/hybrid.mjs':'../.cache/tu-probes/vision-hybrid.mjs')).default;
+const ref=(await loadFixture("vision",own?'../.cache/vision-author/reference.mjs':'../.cache/tu-probes/vision-reference.mjs')).default;
+const hyb=(await loadFixture("vision",own?'../.cache/vision-author/hybrid.mjs':'../.cache/tu-probes/vision-hybrid.mjs')).default;
 const text=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');};
 let reference=await referenceBackend('vision',ref)();const measured={};for(let i=0;i<reference._probe_layout_count();i++)measured[text(reference,reference._probe_layout_name(i))]=Number(BigInt.asIntN(64,reference._probe_layout_value(i)));
 const L=own?measured:JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).vision;
@@ -64,4 +68,4 @@ init();monster(0,5,1);option(8,1);option(5,1);assert.equal(Number(act(18,0))&L.M
 // Actual 48MiB growth and native C->JS reentry occur inside the original loops.
 for(const callback of [0,1,5]){reference=await referenceBackend('vision',ref)();modules=[reference,await hyb({nethackPorted:ported})];stacks=modules.map(m=>m._probe_stack());init();const before=modules.map(memoryCheckpoint);option(10,callback||1);option(11,callback||1);if(callback)act(14,10,40,6,1,123);else act(4,0);assert.ok(trace().includes('growth;reentry:'));modules.forEach((m,i)=>assertMemoryGrowth(m,before[i]));}
 init();act(4,0);const primary=snapshot(modules[1]);const other=await hyb({nethackPorted:ported});other._probe_reset();other._probe_action(0,0,0,0,0,0);other._probe_action(1,0,0,0,0,0);other._probe_tile(20,10,0,L.STONE);other._probe_action(5,20,10,0,0,0);assert.equal(other._probe_value(1,20,10),0);assert.equal(modules[1]._probe_value(1,20,10),1);assert.deepEqual(snapshot(modules[1]),primary);check();
-console.log('VISION: '+comparisons+' '+referenceLabel+'/hybrid full maps, paths, bounds, lighting, callbacks, native aliases, growth and isolation comparisons passed.');
+console.log('VISION: '+comparisons+' '+fixtureReferenceLabel+'/pure-JS full maps, paths, bounds, lighting, callbacks, native aliases, growth and isolation comparisons passed.');

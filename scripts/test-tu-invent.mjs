@@ -1,12 +1,15 @@
-import assert from 'node:assert/strict';
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView,Uint8Array as FixtureUint8Array} from './native-test-backend.mjs';
+import assert from './native-test-assert.mjs';
 import {readFile} from 'node:fs/promises';
 import {resolve,dirname,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('INVENT has no native reference fixture; Emscripten results cannot be labeled native.');
-const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(process.env.INVENT_PROBE_DIR??join(root,'.cache/invent-first-pass'));
-const {callInvent,createInventEnvironment}=await import(pathToFileURL(resolve(process.env.INVENT_RUNTIME_PATH??join(root,'js/nethack/bindings/invent.js'))).href);
+// Original C reference is available through the isolated reference process.
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(process.env.INVENT_PROBE_DIR??join(root,'.cache/tu-probes'));
+const {callInvent,createInventEnvironment}=await loadFixture("invent",pathToFileURL(resolve(process.env.INVENT_RUNTIME_PATH??join(root,'js/nethack/bindings/invent.js'))).href);
 const schema=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/invent-schema.json'),'utf8'));const inventory={names:schema.names,functions:Object.fromEntries(Object.entries(schema.functionParameters).map(([name,args])=>[name,{args}]))};
-const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathToFileURL(join(dir,`invent-${mode}.mjs`)).href)).default));
+const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await loadFixture("invent",pathToFileURL(join(dir,`invent-${mode}.mjs`)).href)).default));
 const factoryServices=new Map();
 const checkedInvent=(services,name,...args)=>{let seen=factoryServices.get(services.moduleKey);if(!seen)factoryServices.set(services.moduleKey,seen=new Set());seen.add(services);const frame=services.stackSave();try{return callInvent(services,name,...args);}finally{assert.equal(services.stackSave(),frame,'INVENT bridge restores own source frames before external cleanup');}};
 const mods=[await factories[0](),await factories[1]({nethackPorted:{invent:checkedInvent}})];
@@ -22,7 +25,7 @@ const pathinfo=(m,path)=>{const[g,...tail]=path.split('.');let at=global(m,g),ty
 const field=(m,path,v)=>{const{at,n,f}=pathinfo(m,path);record(m,at,n,f,v);};
 const fieldAddress=(m,path)=>{if(!path.includes('.'))return global(m,path);const{at,n,f}=pathinfo(m,path);return address(m,at,n,f);};
 const put=(m,p,s)=>m.HEAPU8.set(new TextEncoder().encode(s+'\0'),Number(p)),buffer=(m,s,i=0)=>put(m,m._probe_buffer(i),s),option=(m,k,v=1)=>m._probe_option(k,BigInt(v));
-const write64=(m,p,v)=>new DataView(m.HEAPU8.buffer).setBigUint64(Number(p),BigInt.asUintN(64,BigInt(v)),true);
+const write64=(m,p,v)=>new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(p),BigInt.asUintN(64,BigInt(v)),true);
 const call=(m,n,args=[])=>{const i=inventory.names.indexOf(n);assert.ok(i>=0,n);const p=m._malloc(96n);try{for(let j=0;j<12;j++)write64(m,BigInt(p)+BigInt(j*8),args[j]??0);return m._probe_call(i,BigInt(p));}finally{m._free(p);}};
 const callback=(m,k=0)=>m._probe_callback(k),func=(m,n)=>m._probe_function(schema.functionAddresses.indexOf(n));
 const trace=m=>decode(m,m._probe_trace()),snapshot=m=>decode(m,m._probe_snapshot());
@@ -62,8 +65,8 @@ for(const n of ['loot_xname','sortloot','askchain','display_pickinv','xprname','
 
 
 // The exact source-typed pointer slots are observed as BigUint64 before Number.
-const raw64=v=>{const b=new Uint8Array(8);new DataView(b.buffer).setBigUint64(0,BigInt.asUintN(64,v),true);return Array.from(b);};
-for(const m of mods){const known=ptr(m,0);const observe=p=>{const at=m._probe_observe(p,known),dv=new DataView(m.HEAPU8.buffer),po=m._probe_offset(0),so=m._probe_offset(1),bo=m._probe_offset(2),bits=dv.getBigUint64(Number(at)+po,true);return{pointer:bits===0n?{kind:'null'}:bits===known?{kind:'known',id:'object'}:{kind:'unknown',decimal:String(bits),bytes:Array.from(m.HEAPU8.subarray(Number(at)+po,Number(at)+po+8))},scalar:dv.getBigInt64(Number(at)+so,true),scalarBytes:Array.from(m.HEAPU8.subarray(Number(at)+so,Number(at)+so+8)),padding:Array.from(m.HEAPU8.subarray(Number(at)+bo,Number(at)+bo+8))};};const a=0x20000000000000n,b=a+1n,one=observe(a),two=observe(b);equal(Number(a),Number(b),'unknown pointer witness collides under Number');equal(one.pointer,{kind:'unknown',decimal:String(a),bytes:raw64(a)},'first exact unknown pointer');equal(two.pointer,{kind:'unknown',decimal:String(b),bytes:raw64(b)},'second exact unknown pointer');assert.notDeepEqual(one.pointer,two.pointer);checks++;equal(two.scalar,known,'address-shaped scalar stays full signed64');equal(two.scalarBytes,raw64(known),'address-shaped scalar bytes stay raw');equal(two.padding,Array(8).fill(0xa5),'padding stays raw');}
+const raw64=v=>{const b=new FixtureUint8Array(8);new FixtureDataView(b.buffer).setBigUint64(0,BigInt.asUintN(64,v),true);return Array.from(b);};
+for(const m of mods){const known=ptr(m,0);const observe=p=>{const at=m._probe_observe(p,known),dv=new FixtureDataView(m.HEAPU8.buffer),po=m._probe_offset(0),so=m._probe_offset(1),bo=m._probe_offset(2),bits=dv.getBigUint64(Number(at)+po,true);return{pointer:bits===0n?{kind:'null'}:bits===known?{kind:'known',id:'object'}:{kind:'unknown',decimal:String(bits),bytes:Array.from(m.HEAPU8.subarray(Number(at)+po,Number(at)+po+8))},scalar:dv.getBigInt64(Number(at)+so,true),scalarBytes:Array.from(m.HEAPU8.subarray(Number(at)+so,Number(at)+so+8)),padding:Array.from(m.HEAPU8.subarray(Number(at)+bo,Number(at)+bo+8))};};const a=0x20000000000000n,b=a+1n,one=observe(a),two=observe(b);equal(Number(a),Number(b),'unknown pointer witness collides under Number');equal(one.pointer,{kind:'unknown',decimal:String(a),bytes:raw64(a)},'first exact unknown pointer');equal(two.pointer,{kind:'unknown',decimal:String(b),bytes:raw64(b)},'second exact unknown pointer');assert.notDeepEqual(one.pointer,two.pointer);checks++;equal(two.scalar,known,'address-shaped scalar stays full signed64');equal(two.scalarBytes,raw64(known),'address-shaped scalar bytes stay raw');equal(two.padding,Array(8).fill(0xa5),'padding stays raw');}
 for(const name of ['loot_xname','display_pickinv','askchain','xprname','update_inventory'])run('controlled callback throw',name,m=>{chain(m,3);option(m,31);option(m,42,1);field(m,'program_state.in_moveloop',1);},m=>argsFor(m,name),/INVENT controlled callback/);
 const getMenu=run('getobj redo_menu live input and full64 out-count','getobj',m=>{chain(m,3);objset(m,0,{quan:0x20000000000001n});option(m,9,63);option(m,40,constant('GETOBJ_SUGGEST'));option(m,14,1);option(m,43,1);for(const[i,c]of [42,63,97].entries()){m.HEAPU8[Number(ptr(m,5,i))]=c;write64(m,ptr(m,5,i)+8n,2n);}},m=>[m._probe_buffer(0),callback(m),1]);
 assert.equal(getMenu.result,'obj15','getobj menu count must split selected native stack');assert.equal((getMenu.trace.match(/select:/g)??[]).length,3,'redo_menu must perform all three selections');checks+=2;
@@ -108,7 +111,7 @@ const quiverMerge=run('positive global and formal pointer cells quiver merge','a
  mergePair(m,true);objset(m,2,{where:3,quan:7,invlet:99});m._probe_chain(-1,2,0);m._probe_chain(2,1,0);write64(m,global(m,'uquiver'),ptr(m,0,1));
 },m=>[ptr(m,0),0,0]);
 assert.equal(quiverMerge.result,'obj1');
-for(const m of mods){assert.equal(get(m,ptr(m,0,1),'obj','quan'),5n);assert.equal(get(m,ptr(m,0,2),'obj','quan'),7n,'quiver preference must skip earlier eligible inventory stack');assert.equal(new DataView(m.HEAPU8.buffer).getBigUint64(Number(global(m,'uquiver')),true),ptr(m,0,1));}
+for(const m of mods){assert.equal(get(m,ptr(m,0,1),'obj','quan'),5n);assert.equal(get(m,ptr(m,0,2),'obj','quan'),7n,'quiver preference must skip earlier eligible inventory stack');assert.equal(new FixtureDataView(m.HEAPU8.buffer).getBigUint64(Number(global(m,'uquiver')),true),ptr(m,0,1));}
 const stackMerge=run('positive addressed floor-stack formal merge','stackobj',m=>{
  mergePair(m);objset(m,0,{where:1});objset(m,1,{where:1});
  const level=address(m,global(m,'svl'),'instance_globals_saved_l','level'),floor=address(m,level,'dlevel_t','objects');

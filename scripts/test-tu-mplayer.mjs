@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('mplayer', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/mplayer-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/mplayer-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('mplayer',options);
 import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 import { C, R, T } from '../js/c-runtime/context.js';
 
@@ -152,4 +154,4 @@ call('reset', 99); call('option', 1, 1); call('option', 6, 1); call('make', layo
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
 const before = state(); independent._probe_reset(2); independent._probe_make(layout.PM_KNIGHT, 10, 11, 0); independent._probe_create(1, 0);
 assert.deepEqual(state(), before); scope(); comparisons++;
-console.log(`MPLAYER: ${comparisons} ${referenceLabel}/hybrid developer-name, role-equipment, temporary-copy, retry, talk-identity and RNG-site comparisons checked.`);
+console.log(`MPLAYER: ${comparisons} ${referenceLabel}/pure-JS developer-name, role-equipment, temporary-copy, retry, talk-identity and RNG-site comparisons checked.`);

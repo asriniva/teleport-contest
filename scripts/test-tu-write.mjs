@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('write', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/write-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/write-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('write',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),layout=layouts.write;
@@ -61,4 +63,4 @@ prepare(layout.SCR_IDENTIFY);call('option',2,1);call('write');
 prepare(layout.SCR_IDENTIFY,0,0);call('option',4,0);rng([0,1]);call('write');
 reset();const saved=snapshot(modules[0]);modules[1]._probe_pen(1,0,0,1);assert.deepEqual(snapshot(modules[0]),saved);reset();
 const allocated=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(allocated.every(Boolean));object(layout.SPE_FORCE_BOLT);call('paper',layout.SPE_BLANK_PAPER,1,1,0,0);textCall('input',name(layout.SPE_FORCE_BOLT));rng([0]);call('write');modules.forEach((m,i)=>m._free(allocated[i]));state();
-console.log(`WRITE: ${comparisons} ${referenceLabel}/hybrid costs, selection, naming, ink, knowledge, conduct and callback/RNG-trace comparisons checked.`);
+console.log(`WRITE: ${comparisons} ${referenceLabel}/pure-JS costs, selection, naming, ink, knowledge, conduct and callback/RNG-trace comparisons checked.`);

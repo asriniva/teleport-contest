@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import caseAssert from './native-test-assert.mjs';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
-import { copyFileSync, readFileSync, mkdirSync, unlinkSync, writeFileSync, openSync, closeSync } from 'node:fs';
+import { copyFileSync, existsSync, readFileSync, mkdirSync, unlinkSync, writeFileSync, openSync, closeSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { createNativeHacklibFS } from './native-hacklib-fs.mjs';
 const require = createRequire(import.meta.url);
@@ -12,6 +12,7 @@ const root = new URL('../', import.meta.url);
 // Native C is authoritative. Wasm C is available only as an explicit diagnostic.
 const nativeMode = process.env.TELEPORT_NATIVE_TESTS !== '0';
 export const referenceLabel = nativeMode ? 'native-C' : 'Emscripten-C';
+export const referenceLabelFor=name=>name!=='sfstruct'&&existsSync(new URL(`.cache/tu-probes/native-oracles/${name}-native.node`,root))?'native-C':'isolated-C';
 let sequence = 0;
 const builtins = Object.fromEntries(['DataView', 'Int8Array', 'Uint8Array', 'Int16Array', 'Uint16Array', 'Int32Array', 'Uint32Array', 'Float32Array', 'Float64Array', 'BigInt64Array', 'BigUint64Array'].map(name => [name, globalThis[name]]));
 const index = key => typeof key === 'string' && /^\d+$/.test(key) ? Number(key) : null;
@@ -90,6 +91,7 @@ export function referenceBackend(name, emscriptenFactory) {
         };
     }
     return async () => {
+        if(name==='sfstruct'||!existsSync(new URL(`.cache/tu-probes/native-oracles/${name}-native.node`,root))){const {default:createReference}=await import('./pure-js-fixtures/reference.mjs');return createReference(name);}
         // Loading a private library copy gives each factory call independent
         // NetHack globals, just as separate Wasm instances have independent state.
         const source = new URL(`.cache/tu-probes/native-oracles/${name}-native.node`, root);

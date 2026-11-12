@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('lock', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/lock-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/lock-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('lock',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url)));
@@ -139,4 +141,4 @@ assert.equal(otherTerrain[11*L.ROWNO+10],`${L.DOOR},${L.D_CLOSED},0`);
 assert.ok(text(other,other._probe_trace()).includes('You:succeed in unlocking the door.'));
 assert.deepEqual(snapshot(modules[1]),held);
 comparisons+=7;check();
-console.log(`LOCK ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);
+console.log(`LOCK ${referenceLabel}/pure-JS differential: ${comparisons} comparisons checked`);

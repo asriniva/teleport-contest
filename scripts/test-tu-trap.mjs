@@ -1,5 +1,8 @@
-if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('TRAP has no native reference fixture; Emscripten results cannot be labeled native.');
-import assert from 'node:assert/strict';
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
+// Original C reference is available through the isolated reference process.
+import assert from './native-test-assert.mjs';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -21,7 +24,7 @@ if(process.argv.includes('--build')){
  }
 }
 const session=new Session();session.connect();const post=(method,params={})=>new Promise((ok,no)=>session.post(method,params,(e,r)=>e?no(e):ok(r)));await post('Profiler.enable');await post('Profiler.startPreciseCoverage',{callCount:true,detailed:true});
-const factories=await Promise.all(['reference','hybrid'].map(async name=>(await import(pathToFileURL(resolve(directory,'probe-'+name+'.mjs')))).default));
+const factories=await Promise.all(['reference','hybrid'].map(async name=>(await loadFixture("trap",pathToFileURL(resolve(directory,'probe-'+name+'.mjs')))).default));
 const serviceByModule=new WeakMap();const runtime={trap:(services,name,...args)=>{serviceByModule.set(services.moduleKey,services);return callTrap(services,name,...args);}};
 const modules=await Promise.all(factories.map(f=>f({nethackPorted:runtime})));modules.forEach(m=>m._probe_setup());
 const text=(m,p)=>{p=Number(p);if(!p)return null;let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.subarray(p,end)).toString('latin1');};
@@ -29,8 +32,8 @@ const globals=Object.keys(schema.foreignGlobals),foreignOptions=JSON.parse(await
 const field=(record,name)=>schema.records[record].fields.find(f=>f.name===name);
 const global=(m,name)=>Number(m._probe_global(globals.indexOf(name)));
 const at=(m,base,record,...path)=>{let offset=Number(base),rec=record;for(const name of path){const f=field(rec,name);assert(f,rec+'.'+name);offset+=f.offset;rec=f.type.record;}return offset;};
-const set=(m,p,type,v)=>{const dv=new DataView(m.HEAPU8.buffer),names={i8:'setInt8',u8:'setUint8',i16:'setInt16',u16:'setUint16',i32:'setInt32',u32:'setUint32',i64:'setBigInt64',u64:'setBigUint64'};dv[names[type]??'setBigUint64'](Number(p),typeof type==='object'||type.endsWith('64')?BigInt(v):Number(v),true);};
-const get=(m,p,type)=>{const dv=new DataView(m.HEAPU8.buffer),names={i8:'getInt8',u8:'getUint8',i16:'getInt16',u16:'getUint16',i32:'getInt32',u32:'getUint32',i64:'getBigInt64',u64:'getBigUint64'};return dv[names[type]??'getBigUint64'](Number(p),true);};
+const set=(m,p,type,v)=>{const dv=new FixtureDataView(m.HEAPU8.buffer),names={i8:'setInt8',u8:'setUint8',i16:'setInt16',u16:'setUint16',i32:'setInt32',u32:'setUint32',i64:'setBigInt64',u64:'setBigUint64'};dv[names[type]??'setBigUint64'](Number(p),typeof type==='object'||type.endsWith('64')?BigInt(v):Number(v),true);};
+const get=(m,p,type)=>{const dv=new FixtureDataView(m.HEAPU8.buffer),names={i8:'getInt8',u8:'getUint8',i16:'getInt16',u16:'getUint16',i32:'getInt32',u32:'getUint32',i64:'getBigInt64',u64:'getBigUint64'};return dv[names[type]??'getBigUint64'](Number(p),true);};
 const put=(m,p,record,name,v)=>{const f=field(record,name);if(f.bits!==null){let old=0n;for(let i=0;i<Math.ceil((f.bitOffset+f.bits)/8);i++)old|=BigInt(m.HEAPU8[Number(p)+f.offset+i])<<BigInt(8*i);const mask=((1n<<BigInt(f.bits))-1n)<<BigInt(f.bitOffset);old=old&~mask|(BigInt(v)<<BigInt(f.bitOffset)&mask);for(let i=0;i<Math.ceil((f.bitOffset+f.bits)/8);i++)m.HEAPU8[Number(p)+f.offset+i]=Number(old>>BigInt(8*i)&255n);}else set(m,Number(p)+f.offset,f.type,v);};
 const nativeConstants=Object.fromEntries(['W_ARMF','ROLL','LAUNCH_UNSEEN','LAUNCH_KNOWN','DAGGER','D_CLOSED','D_TRAPPED','D_ISOPEN','D_LOCKED','D_BROKEN','D_NODOOR','OBJ_FLOOR','OBJ_INVENT'].map((n,i)=>[n,Number(modules[0]._probe_native_constant(i))]));
 const constant=name=>{assert(Object.hasOwn(schema.constants,name)||Object.hasOwn(nativeConstants,name),name);return schema.constants[name]??nativeConstants[name];};

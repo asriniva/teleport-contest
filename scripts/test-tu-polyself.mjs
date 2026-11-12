@@ -1,4 +1,6 @@
-import assert from 'node:assert/strict';
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL}from 'node:url';
 import {readFile,writeFile,mkdir}from 'node:fs/promises';
@@ -18,7 +20,7 @@ if(process.argv.includes('--build')){
  const args=['-O2','-sMEMORY64=1','-sMODULARIZE=1','-sENVIRONMENT=node','-sALLOW_MEMORY_GROWTH=1','--no-entry','-sEXPORTED_RUNTIME_METHODS=HEAPU8','-sEXPORTED_FUNCTIONS='+JSON.stringify(exports.map(n=>'_'+n)),...defines.map(x=>'-D'+x),'-I'+resolve('.cache/wasm64-build/tree/include'),'-I'+resolve('.cache/ncurses-wasm64-build/include'),'-I'+resolve('scripts'),'-fmacro-prefix-map='+includePrefix+'=',resolve('scripts/tu-polyself-probe.c'),resolve('nethack-c/wasm/tu-fragments/polyself-support.c')];
  for(const mode of ['reference','hybrid']){const extra=mode==='hybrid'?['-DHYBRID_POLYSELF=1','--js-library',resolve('nethack-c/wasm/tu-libraries/polyself.js')]:[];const result=spawnSync(resolve('.cache/emsdk/upstream/emscripten/emcc'),[...args,...extra,'-o',resolve(dir,'polyself-'+mode+'.mjs')],{cwd:root,encoding:'utf8',maxBuffer:16*1024*1024});await writeFile(resolve(dir,'test-build-'+mode+'.log'),result.stdout+result.stderr);assert.equal(result.status,0,'POLYSELF private '+mode+' build: '+result.stderr);}
 }
-const factory=async mode=>(await import(pathToFileURL(resolve(dir,'polyself-'+mode+'.mjs')).href)).default;
+const factory=async mode=>(await loadFixture("polyself",pathToFileURL(resolve(dir,'polyself-'+mode+'.mjs')).href)).default;
 const [rf,hf]=await Promise.all([factory('reference'),factory('hybrid')]);
 function text(m,p){p=Number(p);let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');}
 function readLayout(m){const l={};for(let i=0;i<m._probe_layout_count();i++)l[text(m,m._probe_layout_name(i))]=m._probe_layout_value(i);return l;}

@@ -1,5 +1,8 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 // Configured C/JS differential first-pass fixture; this is not native-host parity.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -23,10 +26,10 @@ if(process.argv.includes('--build')) {
   if(result.status!==0)throw Error('WIZCMDS '+mode+' build failed; see private build log');
  }
 }
-const importTable=WebAssembly.Module.imports(new WebAssembly.Module(await readFile(resolve(dir,'wizcmds-hybrid.wasm'))));
+const importTable=(await fixtureImports("wizcmds"));
 const importedNames=new Set(importTable.filter(e=>e.kind==='function').map(e=>e.name));
 for(const f of schema.functions)assert.ok(importedNames.has(f.static?'teleport_wizcmds_test_'+f.name:f.name),'hybrid imports JS policy for '+f.name);
-const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathToFileURL(resolve(dir,'wizcmds-'+mode+'.mjs')).href)).default));
+const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await loadFixture("wizcmds",pathToFileURL(resolve(dir,'wizcmds-'+mode+'.mjs')).href)).default));
 const text=(m,p)=>{let n=Number(p),end=n;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(n,end)).toString('latin1');};
 function layout(m){const out={};for(let i=0;i<m._probe_layout_count();i++)out[text(m,m._probe_layout_name(i))]=m._probe_layout_value(i);return out;}
 const reference=await factories[0](),L=layout(reference),servicesByModule=new WeakMap(),environments=new WeakMap();
@@ -51,7 +54,7 @@ function option(n,v){const i=typeof n==='number'?n:options[n];assert.notEqual(i,
 function input(s){for(const m of modules)m.HEAPU8.set(Buffer.from(s+'\0','latin1'),Number(ptr(m,5)));}
 function property(p,member,v){for(const m of modules){const at=read(m,'you',global(m,'u'),'uprops')+BigInt(N(p)*N('propSize'));write(m,'prop',at,member,v);}}
 const width=d=>d.t?Number(d.t.slice(1))/8:d.p!==undefined||d.f?8:d.s?N(d.s+'Size'):d.a.reduce((a,b)=>a*b,1)*width(d.e);
-function state(m){const out=[];const dv=new DataView(m.HEAPU8.buffer);
+function state(m){const out=[];const dv=new FixtureDataView(m.HEAPU8.buffer);
  const value=(d,at,ct='')=>{if(d.s){for(const [i,f]of schema.schema[d.s].fields.entries()){const v=m._teleport_wizcmds_read(kinds.indexOf(d.s),at,i);if(f.d.s||f.d.a)value(f.d,v,f.ctype);else scalar(f.d,v,f.ctype);}return;}
   if(d.a){const child=d.a.length===1?d.e:{a:d.a.slice(1),e:d.e};let size=d.a[0];if(d.a[0]===N('MAX_GLYPH'))size=8;for(let i=0;i<size;i++)value(child,at+BigInt(i*width(child)),ct.replace(/\[\d*\]/g,''));return;}
   scalar(d,dv.getBigUint64(Number(at),true)&((1n<<BigInt(width(d)*8))-1n),ct);};
@@ -67,7 +70,7 @@ function reset(label){active=label;cases++;both('reset');}
 function action(name,...args){if(process.env.WIZCMDS_VERBOSE)console.log(active,name);invoked.add(name);const values=modules.map(m=>m['_probe_call_'+name](...args.map(a=>typeof a==='function'?a(m):a)));assert.equal(values[1],values[0],name+' result '+active);comparisons++;compare();return values;}
 const initial=Object.keys(core).map(name=>[name]);
 const argMap={makemap_unmakemon:[m=>ptr(m,0),0],size_obj:[m=>ptr(m,1)],count_obj:[m=>ptr(m,1),m=>ptr(m,11),m=>ptr(m,11,1),1,1],obj_chain:[7,m=>ptr(m,14),m=>ptr(m,1),1,m=>ptr(m,11),m=>ptr(m,11,1)],mon_invent_chain:[7,m=>ptr(m,14),m=>ptr(m,0),m=>ptr(m,11),m=>ptr(m,11,1)],contained_stats:[7,m=>ptr(m,14),m=>ptr(m,11),m=>ptr(m,11,1)],size_monst:[m=>ptr(m,0),1],mon_chain:[7,m=>ptr(m,14),m=>ptr(m,0),1,m=>ptr(m,11),m=>ptr(m,11,1)],misc_stats:[7,m=>ptr(m,11),m=>ptr(m,11,1)],list_migrating_mons:[m=>ptr(m,10)],migrsort_cmp:[m=>ptr(m,18),m=>ptr(m,18)],wizcustom_callback:[7,0,m=>ptr(m,14)]};
-for(const [name]of initial){reset('initial '+name);if(name==='migrsort_cmp')for(const m of modules)new DataView(m.HEAPU8.buffer).setBigUint64(Number(ptr(m,18)),ptr(m,0),true);action(name,...(argMap[name]??[]));}
+for(const [name]of initial){reset('initial '+name);if(name==='migrsort_cmp')for(const m of modules)new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(ptr(m,18)),ptr(m,0),true);action(name,...(argMap[name]??[]));}
 // Wizard-only routes, configured sandbox fields and dynamic command identities.
 for(const name of ['wiz_wish','wiz_identify','wiz_makemap','wiz_map','wiz_genesis','wiz_where','wiz_detect','wiz_load_lua','wiz_load_splua','wiz_level_tele','wiz_custom','wiz_intrinsic']) {
  reset('wizard enabled '+name);gfield('flags','debug',1);input('fixture.lua');action(name);
@@ -85,7 +88,7 @@ for(const yes of [0,1])for(const answer of [110,121]){reset('fuzzer '+yes+'/'+an
 // Cursor commands follow actual target, visibility, prefix and polymorph routes.
 for(const command of ['wiz_kill','wiz_telekinesis','wiz_smell'])for(const target of ['hero','monster','none'])for(const prefix of [0,1]) {
  reset(command+' '+target+' prefix'+prefix);option(204,0);option(206,1);option('olfaction',1);option('canseemon',7);gfield('iflags','menu_requested',prefix);
- if(target!=='hero'){option(202,21);for(const m of modules){const level=nested(m,'svl',['level']);const at=read(m,'dlevel_t',level.at,'monsters');new DataView(m.HEAPU8.buffer).setBigUint64(Number(at)+((21*N('ROWNO')+10)*N('pointerSize')),target==='monster'?ptr(m,0):0n,true);}}
+ if(target!=='hero'){option(202,21);for(const m of modules){const level=nested(m,'svl',['level']);const at=read(m,'dlevel_t',level.at,'monsters');new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(at)+((21*N('ROWNO')+10)*N('pointerSize')),target==='monster'?ptr(m,0):0n,true);}}
  action(command);
 }
 reset('sanity recovery fields');gfield('u','uswallow',1);gfield('u','uhp',100);gfield('u','uen',100);gfield('u','umonnum',N('PM_GRID_BUG'));gfield('u','mh',200);action('you_sanity_check');

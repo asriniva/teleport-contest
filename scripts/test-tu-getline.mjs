@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('getline', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/getline-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/getline-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('getline',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),layout=layouts.getline;
@@ -48,4 +50,4 @@ reset();call('option',12,1);input([]);textCall('wait',null);
 reset();input(Array.from({length:6000},()=>[99,8]).flat().concat(10));textCall('hooked','#',1);assert.equal(answer().length,0);
 reset();const saved=snapshot(modules[0]);modules[1]._probe_option(10,33);assert.deepEqual(snapshot(modules[0]),saved);reset();
 const allocations=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(allocations.every(Boolean));input([99,111,10]);textCall('hooked','#',1);input([10]);textCall('wait',null);modules.forEach((m,i)=>m._free(allocations[i]));state();
-console.log(`GETLINE: ${comparisons} ${referenceLabel}/hybrid input, completion, prompt-state, history, wait and callback-trace comparisons checked.`);
+console.log(`GETLINE: ${comparisons} ${referenceLabel}/pure-JS input, completion, prompt-state, history, wait and callback-trace comparisons checked.`);

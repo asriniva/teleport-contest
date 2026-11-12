@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('selvar', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/selvar-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/selvar-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('selvar',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),layout=layouts.selvar;
@@ -62,6 +64,6 @@ for(const coder of [0,1])for(const fallback of [-1,2])for(const room of [-1,0,2]
 fresh();call('new',1);terrain(2,2,6,6);call('flood_callback',1);call('option',1,1);call('option',2,1);const before=modules.map(m=>allocationMetric(m));call('flood',0,3,3,1);modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));assert.ok(selected(modules[0])>0);
 fresh();call('option',3,0);rect(2,2,4,4);call('filter',0,1,50);
 fresh();const saved=snapshot(modules[0]);modules[1]._probe_set(0,3,3,1);assert.deepEqual(snapshot(modules[0]),saved);reset();
-console.log(`SELVAR: ${comparisons} ${referenceLabel}/hybrid selection-map, bounds, geometry, float32, callback and RNG-site comparisons checked.`);
+console.log(`SELVAR: ${comparisons} ${referenceLabel}/pure-JS selection-map, bounds, geometry, float32, callback and RNG-site comparisons checked.`);
 
 for(const seen of factoryServices.values())assert.equal(seen.size,1,'SELVAR factory reuses module-owned services');

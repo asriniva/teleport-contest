@@ -1,12 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 // Controlled configured memory64 comparison; native/game/public equivalence pending.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
 const probeDir=resolve(process.env.DOTHROW_PROBE_DIR??'.cache/dothrow-first-pass');
-const {default:refFactory}=await import(pathToFileURL(resolve(probeDir,'dothrow-reference.mjs')));
-const {default:hybridFactory}=await import(pathToFileURL(resolve(probeDir,'dothrow-hybrid.mjs')));
-const {callDothrow}=await import(process.env.DOTHROW_RUNTIME??'../js/nethack/bindings/dothrow.js');
+const {default:refFactory}=await loadFixture("dothrow",pathToFileURL(resolve(probeDir,'dothrow-reference.mjs')));
+const {default:hybridFactory}=await loadFixture("dothrow",pathToFileURL(resolve(probeDir,'dothrow-hybrid.mjs')));
+const {callDothrow}=await loadFixture("dothrow",process.env.DOTHROW_RUNTIME??'../js/nethack/bindings/dothrow.js');
 const schema=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/dothrow-schema.json',import.meta.url))),metadata=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/dothrow-source-metadata.json',import.meta.url))),functions=metadata.functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
 const ref=await refFactory(),hybrid=await hybridFactory();hybrid.nethackPorted={dothrow:callDothrow};const mods=[ref,hybrid];
 const testConstants=metadata.fixtureConstants;
@@ -32,7 +35,7 @@ const bare=t=>t.replace(/\b(?:const|volatile)\b/g,'').trim().replace(/\s+/g,' ')
 const size=t=>{t=bare(t);const a=t.match(/^(.*?)((?:\[\d+\])+)$/);if(a)return [...a[2].matchAll(/\[(\d+)\]/g)].reduce((n,x)=>n*Number(x[1]),size(a[1]));return t.includes('*')?8:L['size:'+t]??({'int':4,'unsigned int':4,'short':2,'unsigned short':2,'char':1,'signed char':1,'unsigned char':1,'long':8,'unsigned long':8}[t]);};
 // Canonicalize only selected compiler-typed pointer fields, preserving every
 // scalar, padding, unknown pointer, and unselected byte unchanged.
-function raw(m,p,n,t,extra=[]){const bytes=m.HEAPU8.slice(p,p+n),pointers=[],slots=new Set();const slot=(at,path)=>{if(slots.has(at))return;slots.add(at);const v=new DataView(m.HEAPU8.buffer).getBigUint64(at,true);const id=pointerID(m,v);pointers.push([path,id]);if(!id.startsWith('UNKNOWN:'))bytes.fill(0,at-p,at-p+8);};
+function raw(m,p,n,t,extra=[]){const bytes=m.HEAPU8.slice(p,p+n),pointers=[],slots=new Set();const slot=(at,path)=>{if(slots.has(at))return;slots.add(at);const v=new FixtureDataView(m.HEAPU8.buffer).getBigUint64(at,true);const id=pointerID(m,v);pointers.push([path,id]);if(!id.startsWith('UNKNOWN:'))bytes.fill(0,at-p,at-p+8);};
  const walk=(at,type,path)=>{type=bare(type);const ar=type.match(/^(.*?)((?:\[\d*\])+)$/);if(ar){const dims=[...ar[2].matchAll(/\[(\d*)\]/g)].map(x=>x[1]?Number(x[1]):Math.floor(n/size(ar[1]))),count=dims.reduce((a,b)=>a*b,1),step=size(ar[1]);if(ar[1].includes('*')||record(ar[1]))for(let i=0;i<count;i++)walk(at+i*step,ar[1],path+'['+i+']');return;}if(type.includes('*')){slot(at,path);return;}const k=record(type);if(k)for(const f of schema.schema[k].fields)if(!f.bit&&(f.canonical.includes('*')||f.canonical.includes('[')||record(f.canonical)))walk(addr(m,at,k,f.name),f.canonical,path+'.'+f.name);};
  walk(p,t,'');for(const [offset,label]of extra)slot(p+offset,label);return{bytes:Buffer.from(bytes).toString('hex'),pointers};}
 const extras=(m,k,n)=>Array.from({length:n},(_,i)=>[Number(m._probe_pointer_offset(k,i)),'nativePointer'+i]);
@@ -68,7 +71,7 @@ reset();action('throw_obj',m=>[obj(m),1]);
 // The 8-byte saved aggregate must survive native direction-prompt mutation.
 reset();setter(m=>{const split=addr(m,field(m,'svc','instance_globals_saved_c','context'),'context_info','objsplit');set(m,split,'obj_split','parent_oid',1);set(m,split,'obj_split','child_oid',0x80000001);});option(0,1);option(47,1);action('throw_obj',m=>[obj(m),1]);assert.match(ref.UTF8ToString(Number(ref._probe_trace())),/split_context=1,2147483649/);
 // Persistently queued native and owned callbacks execute after dofire returns.
-reset();setter(m=>{new DataView(m.HEAPU8.buffer).setBigUint64(global(m,'uquiver'),BigInt(obj(m)),true);new DataView(m.HEAPU8.buffer).setBigUint64(global(m,'uswapwep'),BigInt(obj(m,1)),true);set(m,global(m,'iflags'),'instance_flags','fireassist',1);});action('dofire');assert.deepEqual(snapshot(ref).queue,[7,3]);
+reset();setter(m=>{new FixtureDataView(m.HEAPU8.buffer).setBigUint64(global(m,'uquiver'),BigInt(obj(m)),true);new FixtureDataView(m.HEAPU8.buffer).setBigUint64(global(m,'uswapwep'),BigInt(obj(m,1)),true);set(m,global(m,'iflags'),'instance_flags','fireassist',1);});action('dofire');assert.deepEqual(snapshot(ref).queue,[7,3]);
 for(const index of[0,1]){const result=mods.map(m=>{const sp=m.stackSave();try{return m._probe_queue_run(index);}finally{assert.equal(m.stackSave(),sp,'queued callback stack');}});assert.equal(result[0],result[1]);compare('queued callback '+index);}
 // Both predecessors enter the same petrify body, including destroyed obj==0.
 for(const typ of[L.EGG,L.CORPSE]){reset();setter(m=>{set(m,obj(m),'obj','otyp',typ);set(m,obj(m),'obj','oclass',L.FOOD_CLASS);set(m,obj(m),'obj','quan',1);set(m,obj(m),'obj','corpsenm',L.PM_COCKATRICE);});option(35,typ===L.CORPSE);action('toss_up',m=>[obj(m),0]);assert.equal(ref._probe_error(),5);}
@@ -78,7 +81,7 @@ for(const mask of[0x20000000000001n|BigInt(L.W_WEP),0x40000000000003n|BigInt(L.W
 reset();setter(m=>{const prop=field(m,'u','you','uprops')+L.WWALKING*L['size:struct prop'];set(m,prop,'prop','extrinsic',0x20000000000000n);});action('hurtle_jump',m=>[ptr(m,11),41,10]);
 reset();option(9,1);setter(m=>{set(m,obj(m),'obj','unpaid',1);set(m,global(m,'gh'),'instance_globals_h','hero_seq',0x40000000000003n);set(m,ptr(m,7),'eshk','break_seq',0x20000000000001n);});action('breakobj',m=>[obj(m),45,10,1,0]);
 // Returning/tethered weapon and merge-to-replacement ownership paths.
-for(const kind of[1,2])for(const merge of[0,1]){reset();option(28,kind);option(32,merge);setter(m=>{set(m,obj(m),'obj','otyp',L.AKLYS);set(m,obj(m),'obj','quan',1);new DataView(m.HEAPU8.buffer).setBigUint64(global(m,'uwep'),BigInt(obj(m)),true);set(m,obj(m),'obj','owornmask',L.W_WEP);});action('throwit',m=>[obj(m),0x20000000000000n|BigInt(L.W_WEP),1,obj(m,1)]);}
+for(const kind of[1,2])for(const merge of[0,1]){reset();option(28,kind);option(32,merge);setter(m=>{set(m,obj(m),'obj','otyp',L.AKLYS);set(m,obj(m),'obj','quan',1);new FixtureDataView(m.HEAPU8.buffer).setBigUint64(global(m,'uwep'),BigInt(obj(m)),true);set(m,obj(m),'obj','owornmask',L.W_WEP);});action('throwit',m=>[obj(m),0x20000000000000n|BigInt(L.W_WEP),1,obj(m,1)]);}
 
 assert.equal(covered.size,39,names.filter(n=>!covered.has(n)).join(','));console.log('PASS DOTHROW baseline',checks,'comparisons all39; controlled-world native/full-game/public pending.');
 
@@ -86,7 +89,7 @@ assert.equal(covered.size,39,names.filter(n=>!covered.has(n)).join(','));console
 reset();setter(m=>set(m,obj(m),'obj','quan',BigInt(obj(m))));const witness=mods.map(m=>raw(m,obj(m),L['size:struct obj'],'struct obj',extras(m,0,4)));for(let i=0;i<2;i++){const m=mods[i],off=addr(m,obj(m),'obj','quan')-obj(m);assert.equal(witness[i].bytes.slice(off*2,(off+8)*2),Buffer.from(m.HEAPU8.slice(obj(m)+off,obj(m)+off+8)).toString('hex'));}set(hybrid,obj(hybrid),'obj','quan',BigInt(obj(hybrid))+8n);assert.throws(()=>assert.deepEqual(raw(hybrid,obj(hybrid),L['size:struct obj'],'struct obj',extras(hybrid,0,4)),witness[0]));
 
 // Unknown typed pointers retain their exact raw bytes, including unsafe integers.
-reset();const unknown=0x20000000000001n;for(const m of mods){const at=obj(m)+Number(m._probe_pointer_offset(0,0));new DataView(m.HEAPU8.buffer).setBigUint64(at,unknown,true);const r=raw(m,obj(m),L['size:struct obj'],'struct obj',extras(m,0,4)),off=at-obj(m);assert.equal(r.bytes.slice(off*2,(off+8)*2),Buffer.from(m.HEAPU8.slice(at,at+8)).toString('hex'));assert.ok(r.pointers.some(([name,id])=>id==='UNKNOWN:'+unknown));}const beforeUnknown=raw(ref,obj(ref),L['size:struct obj'],'struct obj',extras(ref,0,4));new DataView(hybrid.HEAPU8.buffer).setBigUint64(obj(hybrid)+Number(hybrid._probe_pointer_offset(0,0)),unknown+2n,true);assert.throws(()=>assert.deepEqual(raw(hybrid,obj(hybrid),L['size:struct obj'],'struct obj',extras(hybrid,0,4)),beforeUnknown));
+reset();const unknown=0x20000000000001n;for(const m of mods){const at=obj(m)+Number(m._probe_pointer_offset(0,0));new FixtureDataView(m.HEAPU8.buffer).setBigUint64(at,unknown,true);const r=raw(m,obj(m),L['size:struct obj'],'struct obj',extras(m,0,4)),off=at-obj(m);assert.equal(r.bytes.slice(off*2,(off+8)*2),Buffer.from(m.HEAPU8.slice(at,at+8)).toString('hex'));assert.ok(r.pointers.some(([name,id])=>id==='UNKNOWN:'+unknown));}const beforeUnknown=raw(ref,obj(ref),L['size:struct obj'],'struct obj',extras(ref,0,4));new FixtureDataView(hybrid.HEAPU8.buffer).setBigUint64(obj(hybrid)+Number(hybrid._probe_pointer_offset(0,0)),unknown+2n,true);assert.throws(()=>assert.deepEqual(raw(hybrid,obj(hybrid),L['size:struct obj'],'struct obj',extras(hybrid,0,4)),beforeUnknown));
 
 // Native getobj invokes private owned throw_ok with growth and Module reentry.
 const third=await hybridFactory();third._probe_reset();ref._probe_reset();let reentered=false,callbacks=0;

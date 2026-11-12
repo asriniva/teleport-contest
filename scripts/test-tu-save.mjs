@@ -1,12 +1,17 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("save");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {referenceBackend,referenceLabel,memoryCheckpoint,assertMemoryGrowth,assertStackRestored} from './native-test-backend.mjs';
+import {referenceBackend,memoryCheckpoint,assertMemoryGrowth,assertStackRestored} from './native-test-backend.mjs';
 import {withCEnvironment,C} from '../js/c-runtime/context.js';
 import {createSaveEnvironment} from '../js/nethack/bindings/save.js';
 import * as core from '../js/ported/save.js';
 const dir=resolve(process.env.SAVE_PROBE_DIR??'.cache/tu-probes');
-const factory=async mode=>(await import(pathToFileURL(resolve(dir,'save-'+mode+'.mjs')).href)).default;
+const factory=async mode=>(await loadFixture("save",pathToFileURL(resolve(dir,'save-'+mode+'.mjs')).href)).default;
 const referenceFactory=await factory('reference'),hybridFactory=await factory('hybrid');
 const reference=await referenceBackend('save',referenceFactory)();
 function text(m,p){p=Number(p);let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');}
@@ -23,13 +28,13 @@ function action(op,i=0){const v=both('action',op,i);assert.equal(v[1],v[0]);comp
 function option(i,v){both('option',i,v);}
 // Schema metadata is compiler-derived in the independent C support, never a copied
 // SAVE algorithm. Field indices match the exact source-derived runtime descriptors.
-const schema=JSON.parse(await (await import('node:fs/promises')).readFile(resolve('nethack-c/wasm/tu-fragments/save-schema.json'),'utf8'));
+const schema=JSON.parse(await (await loadFixture("save",'node:fs/promises')).readFile(resolve('nethack-c/wasm/tu-fragments/save-schema.json'),'utf8'));
 const kinds=Object.keys(schema.schema),globals=schema.globals;
 function global(m,name){return m._teleport_save_global(globals.findIndex(g=>g.name===name));}
 function pointer(m,k,i=0){return m._probe_pointer(k,i);}
 function field(m,type,at,name,value){m._teleport_save_write(kinds.indexOf(type),at,schema.schema[type].fields.findIndex(f=>f.name===name),BigInt.asUintN(64,BigInt(value)));}
 function get(m,type,at,name){return m._teleport_save_read(kinds.indexOf(type),at,schema.schema[type].fields.findIndex(f=>f.name===name));}
-function setGlobal(name,value){for(const m of modules){const g=globals.find(x=>x.name===name);if(g.d.s)throw Error('field required');new DataView(m.HEAPU8.buffer).setBigUint64(Number(global(m,name)),BigInt.asUintN(64,BigInt(typeof value==='function'?value(m):value)),true);}}
+function setGlobal(name,value){for(const m of modules){const g=globals.find(x=>x.name===name);if(g.d.s)throw Error('field required');new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(global(m,name)),BigInt.asUintN(64,BigInt(typeof value==='function'?value(m):value)),true);}}
 function gfield(g,name,value){const type=globals.find(x=>x.name===g).d.s;for(const m of modules)field(m,type,global(m,g),name,typeof value==='function'?value(m):value);}
 function pfield(type,k,i,name,value){for(const m of modules)field(m,type,pointer(m,k,i),name,typeof value==='function'?value(m):value);}
 function nested(g,...fields){return m=>{let type=globals.find(x=>x.name===g).d.s,at=global(m,g);for(const f of fields){at=get(m,type,at,f);const d=schema.schema[type].fields.find(x=>x.name===f).d;type=d.s??d.p;}return {type,at};};}
@@ -78,4 +83,4 @@ reset();pfield('obj',1,0,'nobj',0x123456n);field(hybrid,'obj',pointer(hybrid,1),
 reset();for(const m of modules){field(m,'obj',pointer(m,1),'nobj',pointer(m,1,2));field(m,'obj',pointer(m,1),'oextra',pointer(m,3));field(m,'oextra',pointer(m,3),'oname',get(m,'oextra',pointer(m,3),'oname')+1n);}action(15);
 // Independent Modules share neither typed view objects nor SAVE static sentinels.
 const hybrid2=await hybridFactory({nethackPorted:runtime});hybrid2._probe_reset();hybrid2._probe_action(20,0);const e1=environments.get(hybrid),e2=environments.get(hybrid2);assert.notEqual(e1.zerofruit,e2.zerofruit);assert.notEqual(e1.view('obj',hybrid._probe_pointer(1,0)),e2.view('obj',hybrid2._probe_pointer(1,0)));e1.zerofruit.fid=919;assert.equal(e2.zerofruit.fid,0);comparisons+=3;
-console.log(`save: ${comparisons} ${referenceLabel}/JS byte-stream, state, ownership, callback and stack comparisons; all 26 configured functions invoked, controlled dependency fixture`);
+console.log(`save: ${comparisons} ${fixtureReferenceLabel}/JS byte-stream, state, ownership, callback and stack comparisons; all 26 configured functions invoked, controlled dependency fixture`);

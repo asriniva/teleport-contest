@@ -1,0 +1,205 @@
+{
+  "baselineCommit": "cc8ef80b7ac93c01feac7e40677aec0d3d63c03a",
+  "scope": "Exact source changes for pure-JS subsystem test migration; separate completed execution receipt is required.",
+  "validation": "docs/runtime-environment/pure-js-test-validation.json",
+  "files": {
+    "js/backends/emscripten/runtime.js": {
+      "beforeSha256": "5322fc2cb40783ef7c475861cecb9eaa68ddf26eb12f8618f1bd3e480d3e4371",
+      "afterSha256": "6b83a93aa7768916cb34c2461de2f477c96eae51894e0980d38e5113bf2ae026",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__backends__emscripten__runtime.js.patch",
+      "patchSha256": "79b631b8f25240f6c75b0aa06b83264a260e24de9a145bde0ac867874b2e33b2"
+    },
+    "js/c-runtime/adapter-factories.js": {
+      "beforeSha256": "c26a199f9dff9e73cfb8c4dc953b9ca8ea9a8882882fb906f02c384b3937d90e",
+      "afterSha256": "2629ab75a6e74c435caca692d9bd9a993dd002266b0bedbfd72465ff724b03db",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__c-runtime__adapter-factories.js.patch",
+      "patchSha256": "902823b2ec354a74fa9b159ff50ca6f6ec34543bd95f702ebdcd1f9cda0ce01b"
+    },
+    "js/c-runtime/environment.js": {
+      "beforeSha256": null,
+      "afterSha256": "2447f6d074885a9234f64ab58621ebad01123574014241ea44c47cf48487759e",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__c-runtime__environment.js.patch",
+      "patchSha256": "4bb58b3cf7851a10ff8d753690f34c77079e1ff7d2bf03d2c36e5c57987e8d4c"
+    },
+    "js/c-runtime/errno-messages.json": {
+      "beforeSha256": null,
+      "afterSha256": "05c914e49c0a49672d416e757b6cc6b3dff526e60c6c1446aee3abf05027fd97",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__c-runtime__errno-messages.json.patch",
+      "patchSha256": "a91bdb75ae5e14d2263cebc8c84a3fe23b378c5d5a5fc75582519f0bb7975189"
+    },
+    "js/c-runtime/errno.js": {
+      "beforeSha256": null,
+      "afterSha256": "6ec9c84bc37c5e9e6346014a00b8a945955d41943f2c492639fb16fed48f52b9",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__c-runtime__errno.js.patch",
+      "patchSha256": "fbc78e9db541e55bda7e6c0877b5ea259e200dfbb99391dfb1c27e9ff3b2d952"
+    },
+    "js/c-runtime/libc.js": {
+      "beforeSha256": "d34ae87cb41caa8132448cc63c1a17dcff032d430344eabe932c14822c52e556",
+      "afterSha256": "3361e18ee2550fa1ab63d86e902e9d1d2af010212726cfa4b62ef1f115994a66",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__c-runtime__libc.js.patch",
+      "patchSha256": "6fe770b3d460af9d4fb0d9642964482a3642d48bd6aa6cbe18a56b6951833211"
+    },
+    "js/c-runtime/scanf.js": {
+      "beforeSha256": "a18c2548d566723374e227fb978c8927aef3334141637095d010a39d5dae417d",
+      "afterSha256": "d91cceac70c09bc4016a16b94dd32f8f0a398141452bffef9366491e9ad5bc3b",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__c-runtime__scanf.js.patch",
+      "patchSha256": "dd0e45753d564dfb1c598b8d3c8bb174426b9745c94381c748d0d26a029437b0"
+    },
+    "js/c-runtime/stdio.js": {
+      "beforeSha256": "d9277bcd0e258677697eb641c38a1fce0d7c9c99e9065d4df2e7be3a066ae693",
+      "afterSha256": "f67d89b67d475969f6b80b75cf66327145eb02a04856f3a1955a2a46af4a3dcd",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__c-runtime__stdio.js.patch",
+      "patchSha256": "d2737d3404ebb88eb4f09e3447107e9725a449435da58db883b35f4ca3a6586e"
+    },
+    "js/c-runtime/stdlib.js": {
+      "beforeSha256": "93f325f7e22df764563f3a5877afd91cb0828500dfdaf32d26a62edd7f9b4373",
+      "afterSha256": "b28b60dd468dd28f6e135d82b9bc5781f77a228b664547419355f2bcfd665997",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__c-runtime__stdlib.js.patch",
+      "patchSha256": "219aad7f4c885c633d0497711586a50a05723a76f3f6859a0d61e331e0b0f706"
+    },
+    "js/c-runtime/vfs.js": {
+      "beforeSha256": "69e9c4a7dc3b3aa686859059190c10341935cc30bbb19b005da40a537ad8389d",
+      "afterSha256": "ff8f35972fb693cb43354e5d599564fad59e6f0b689b7e2cc988f18a74ed7c1c",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__c-runtime__vfs.js.patch",
+      "patchSha256": "512507a41af528cd7f5a1515920d4d618a39cc8c5c4e74223d378a12820f5da8"
+    },
+    "js/lua/abi.js": {
+      "beforeSha256": "2da087147551a9e8e29f0f5ad96dc0fd791eee7906a9b8c424f309e9f9108eda",
+      "afterSha256": "34734e40ea037d6e54ca49407da480e84577b327374061bb8e79dc11aebfa9d5",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__lua__abi.js.patch",
+      "patchSha256": "59b202c803431cf4ab919d155f5b1074eb3b8d865006aea6d887a791124d0f00"
+    },
+    "js/lua/bytecode-vm.js": {
+      "beforeSha256": "7974a2cb60550f6503e174d51ebab9bcaa41fdf7a0702b45c1f9835a5278776c",
+      "afterSha256": "f7734013578137ffd45bc7c6a2fa4567e41fbbfdf589b523eeab3231d0b446b5",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__lua__bytecode-vm.js.patch",
+      "patchSha256": "0c99c09b204a33c45e40d5428532635d3822cbb14bafa215f5b773653b1e22a1"
+    },
+    "js/lua/io-library.js": {
+      "beforeSha256": null,
+      "afterSha256": "96ddf8b63d6445ee744ef35ed29338bfd342409b4cd0b1a6e8c6f073d38e1c13",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__lua__io-library.js.patch",
+      "patchSha256": "6db841ec5cf211d4e394bfa0d4f57450ddc174612c2f8035bf702a7f630ca322"
+    },
+    "js/lua/lapi.js": {
+      "beforeSha256": "dd71a0d096d3224d3cfff05e3c5202ec902e219f06d598296eef030536824fa9",
+      "afterSha256": "5812c78c4494195b72e9789e16c1850f394e4ae320f4843dd18c9a7df82218d9",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__lua__lapi.js.patch",
+      "patchSha256": "17c4b53f75c5fb82b721f33d8b07074e5012d189484b1cafa2e69c07e1601038"
+    },
+    "js/nethack/runtime.js": {
+      "beforeSha256": "8d36f8c8e16edbaf216d0938205ffaef0f1644c7f4836cd4a740b16bd7a0aff3",
+      "afterSha256": "305102b64ae5f0e5db379b0d245529c3ae2c765af9294d100053ff49dfceee2d",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__nethack__runtime.js.patch",
+      "patchSha256": "157f51aeb18b06a96150535fc5292276b9acd5836154b49f869a53cf8612e84e"
+    },
+    "js/ported/rumors.js": {
+      "beforeSha256": "ed65d74e21b44cc3d384224c2c17b8e8dcf963fbb523c61c24c5f04cfc9cd72a",
+      "afterSha256": "b343317f260f82f12fd835b619ffd9f0292f7d6409329c094d0db710bc141791",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__ported__rumors.js.patch",
+      "patchSha256": "c24058837ddbff51e22feae33f2c246aa75f51896e7ff0b2691eab7b0ce1dd55"
+    },
+    "js/standalone/environment.js": {
+      "beforeSha256": "6abe84ae1b5821d10d15f4dbd54cbdeb91b6d608b7bf61a421d58e12c8950055",
+      "afterSha256": "8c7d2bcf3341e6bc8306f8da6785027d37a092e8d3ec43852d50e86f9d616eaf",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__standalone__environment.js.patch",
+      "patchSha256": "1fe7c9cd083f55cf0098ed9ea92b5567dfff0707e9b85b7e9b083e3a06e76911"
+    },
+    "js/standalone/light-abi.json": {
+      "beforeSha256": "e99068e5a4632fa07a404af36161eaa56a28163f23c600366ce02b02c32da02c",
+      "afterSha256": "011cf56d996196b501f752f9b939d67b6f01058dd54c9066f8241c05d9d037eb",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__standalone__light-abi.json.patch",
+      "patchSha256": "c344decb6e46794ed7f26ee999eedf8f739a39223316f3bd9cc476c20d13ffc4"
+    },
+    "js/standalone/light.js": {
+      "beforeSha256": "982d886b7a93d1389a1fce1cca25b44b01c28b122da786fde9d93093d184f24a",
+      "afterSha256": "01ded568351b4736354eaf3aa5af27d2aebd04d18ac2061d40bd05e679e55aa1",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__standalone__light.js.patch",
+      "patchSha256": "3f05c1162c09961c82f0a046ecd0175dd7bf757747796c507aa5220641090cbb"
+    },
+    "js/standalone/lua.js": {
+      "beforeSha256": "4801e8ca2c41925ba5ab6c7578cfa2e75920ae350764d580354fa7870924fe28",
+      "afterSha256": "6571660ad3589317177380b7ff5d3f379a7606a58a1d348a00a286d96c5e077d",
+      "patch": "docs/runtime-environment/pure-js-source-changes/js__standalone__lua.js.patch",
+      "patchSha256": "05547806a8eded3fdfc94ec5bfdff49ba1a9fe1107b4ba6365617612fd7ccfc9"
+    },
+    "scripts/allocation_cli_source_successors.py": {
+      "beforeSha256": null,
+      "afterSha256": "a32bf42e85dce4f37f65c84385b0447ca60a17d7153e5cb7bb0b2748b5be077f",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__allocation_cli_source_successors.py.patch",
+      "patchSha256": "d48946f56ac870ed0d676b3bd459e47d133c90d7efc086b48d07a6978e4b233e"
+    },
+    "scripts/check-services-layout.mjs": {
+      "beforeSha256": "82cd304daa4935c97931ab6409312d06a489545af1cae883d7a9ee93a7700567",
+      "afterSha256": "e32b190517d6048308ed840b496e78866218fc8be006962844502b56ab8cef90",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__check-services-layout.mjs.patch",
+      "patchSha256": "563163b3b54a1a8402aab96a35c0dd35964b08cb3ca76f58e2c0d4d5ec715310"
+    },
+    "scripts/check-standalone-scope.mjs": {
+      "beforeSha256": "3fe0a6d7af3755319cc0b91a2e4053b02ac8311a828ee2b4e2d52025097dc54e",
+      "afterSha256": "c7530572ef039172bcee50b7f134432995384d04d993c536ce27c13418a8bd6d",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__check-standalone-scope.mjs.patch",
+      "patchSha256": "23a81ae2c9de857c49fd1b744961df6e130cde4ac0f2b53351f5806cae7932e8"
+    },
+    "scripts/extract-binding-infrastructure.mjs": {
+      "beforeSha256": "ce52db3b8ba443fbdf8e45042999e508f1ed95f3dcf55f2e8ca5252122c1ced3",
+      "afterSha256": "4a0812398ff76a366c5885ec110031f44e4cd74f018a135a6c4ac4f0f61a8d54",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__extract-binding-infrastructure.mjs.patch",
+      "patchSha256": "aa58e0dc2c040b563bd86f448dfc9e49c02b906f487eda4fcb01dbd2130d21aa"
+    },
+    "scripts/post_default_successors.py": {
+      "beforeSha256": null,
+      "afterSha256": "8580eb250172c2202dcf0e3dd978e6d9e03f60fcad617baedd4cde9c129fe6aa",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__post_default_successors.py.patch",
+      "patchSha256": "c87dc912f5b8645d73a6e9cdff21273afc9077852c8e2320a60479d446dd817b"
+    },
+    "scripts/relocate-runtime-layout.py": {
+      "beforeSha256": "5a78ca9e3b727fc6e24f16ef01b2b9037b7bcc65fb3bb397755596099e3b0554",
+      "afterSha256": "70eb01b92d02783452524442b264a0f540e549f1fa195955f363da73f2718127",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__relocate-runtime-layout.py.patch",
+      "patchSha256": "646924e338df6dc2ba4a84915f85b4d729ba58fc2382c21d53c2df53a9a5af5c"
+    },
+    "scripts/services-layout-audit.mjs": {
+      "beforeSha256": "2079bcd5bf9daf8cb415ee63723092858fc80038b10109bad22f54788e765be7",
+      "afterSha256": "2c080b0c6ba003abc3df96ba30b694f93308147702bf91e613ed1df1ac101e2d",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__services-layout-audit.mjs.patch",
+      "patchSha256": "496152475d6670068fbeee0548071fefa5a70d153fb1149c998778cdadc412b7"
+    },
+    "scripts/services_layout_audit.py": {
+      "beforeSha256": "c3cf8e411aec8eee101b5c6bd633a5f234f9e75d5c1af8efb948d4e286abdfad",
+      "afterSha256": "4bd4c700d77705016733db2fd85a58bc948af22025a94332ef975738d9202bce",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__services_layout_audit.py.patch",
+      "patchSha256": "400f582781b4773e58364aafe9f1ef3f4d5cec12e31c62880c47b711f2222573"
+    },
+    "scripts/test-allocation-cli-layered-audits.py": {
+      "beforeSha256": null,
+      "afterSha256": "4c9a1779908b416bca504494fa45df8582625971b0a630e3b43bb0b228a05b6c",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__test-allocation-cli-layered-audits.py.patch",
+      "patchSha256": "7a10577b246182a1faa302e468988e1d3743bec14664e49deb8d7065983081fb"
+    },
+    "scripts/test-js-posix-regex.mjs": {
+      "beforeSha256": "43957c9ec10a987fec6a168e6aafc726ba92bcd1b86d840e17bd4bfbd6dfb565",
+      "afterSha256": "480169fcd34d85d334ff0e33e0e0db796d0d9a6ba3c3ed150b19c1020859c1c0",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__test-js-posix-regex.mjs.patch",
+      "patchSha256": "330d280da4a42dda8bd642c34af6ad925379b75d220cb8b4a59200494c5999c7"
+    },
+    "scripts/test-post-default-successors.py": {
+      "beforeSha256": null,
+      "afterSha256": "f1768ff35fef8ba3515cfbd61c4bd043b762047aabcd109c5ccce2835fb7ebe4",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__test-post-default-successors.py.patch",
+      "patchSha256": "af74e53148388f7da9f1e779d30b52693d79b5912495db406e54eea7e139e7d8"
+    },
+    "scripts/test-tu-topl.mjs": {
+      "beforeSha256": "697b2ff7232f6c7ec111fdd56798941740f488f0273415a6d2ce20d873c25a12",
+      "afterSha256": "3f31ad109c0f692a70dd33bc258a02e6aa083aa0f13a117f363fce4ec8b12dd4",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__test-tu-topl.mjs.patch",
+      "patchSha256": "87204f92d8c5d2bc907addff49311381d24290a8107591736838210a4bca2e24"
+    },
+    "scripts/write-c-runtime-manifest.mjs": {
+      "beforeSha256": "4b5eb91b061edf9b56347d184ad5be5123a33567843a3a0b752cf529d1054431",
+      "afterSha256": "6b08b40c731a96a523019d311b505d0138e76407859357a443f885ffbc952293",
+      "patch": "docs/runtime-environment/pure-js-source-changes/scripts__write-c-runtime-manifest.mjs.patch",
+      "patchSha256": "23b4da23d0eefc6d906907fe0e643b871be54146b2d2253eb0098b0d28297e64"
+    }
+  }
+}

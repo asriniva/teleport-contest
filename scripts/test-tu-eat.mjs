@@ -1,6 +1,11 @@
-import{DataView,Int32Array,referenceBackend,referenceLabel,assertStackRestored,assertMemoryGrowth}from'./native-test-backend.mjs';
-import assert from './native-test-assert.mjs';import{readFileSync}from'node:fs';import{resolve}from'node:path';import{pathToFileURL}from'node:url';const{callEat,initializeEat}=await import(process.env.TELEPORT_EAT_RUNTIME||'../js/nethack/bindings/eat.js');import*as core from'../js/ported/eat.js';import{C,R,T}from'../js/c-runtime/context.js';
-const author=process.env.TELEPORT_EAT_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url),rf=(await import(new URL('eat-reference.mjs',dir))).default,hf=(await import(new URL('eat-hybrid.mjs',dir))).default,ref=await referenceBackend('eat',rf)();
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("eat");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView,Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
+import{DataView,Int32Array,referenceBackend,assertStackRestored,assertMemoryGrowth}from'./native-test-backend.mjs';
+import assert from './native-test-assert.mjs';import{readFileSync}from'node:fs';import{resolve}from'node:path';import{pathToFileURL}from'node:url';const{callEat,initializeEat}=await loadFixture("eat",process.env.TELEPORT_EAT_RUNTIME||'../js/nethack/bindings/eat.js');import*as core from'../js/ported/eat.js';import{C,R,T}from'../js/c-runtime/context.js';
+const author=process.env.TELEPORT_EAT_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url),rf=(await loadFixture("eat",new URL('eat-reference.mjs',dir))).default,hf=(await loadFixture("eat",new URL('eat-hybrid.mjs',dir))).default,ref=await referenceBackend('eat',rf)();
 function text(m,p){if(!p)return null;let q=Number(p),e=q;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(q,e)).toString();}
 const L={size:Number(ref._probe_context_size())};for(let i=0;i<ref._probe_layout_count();i++){const k=text(ref,ref._probe_layout_name(i)),v=ref._probe_layout_value(i);L[k]=/^(M1_|M2_|W_)/.test(k)?BigInt.asUintN(64,v).toString():Number(BigInt.asIntN(64,v));}
 if(!author)assert.deepEqual(L,JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).eat);
@@ -12,7 +17,7 @@ const setReturn=(m,n,v)=>{const i=returns.indexOf(n);assert.notEqual(i,-1,n);m._
 function reset(seed=19){setup(m=>{m._probe_reset(seed);m._probe_new_mon(value('PM_HUMAN'),11,10);m._probe_new_mon(value('PM_GHOST'),12,10);m._probe_new_obj(value('FOOD_RATION'),value('OBJ_INVENT'));m._probe_new_obj(value('CORPSE'),value('OBJ_INVENT'));m._probe_obj(1,4,BigInt(value('PM_HUMAN')));m._probe_new_obj(value('TIN'),value('OBJ_INVENT'));m._probe_obj(2,4,BigInt(value('PM_HUMAN')));m._probe_new_obj(value('RIN_ADORNMENT'),value('OBJ_INVENT'));m._probe_weight(0,20);m._probe_victual(0,0n);m._probe_victual(2,5n);m._probe_victual(3,-20n);m._probe_eaten(0,400);m._probe_tin(0,2n);m._probe_tin(2,5n);});}
 function snapshot(m){const state={};for(const[k,type]of [[0,'you'],[7,'gm'],[8,'disp'],[9,'svc'],[10,'mon'],[11,'gu'],[12,'gn']])state[type]=bytes(m,m._probe_pointer(k,0),type);state.mon=Array.from({length:m._probe_count(0)},(_,i)=>bytes(m,m._probe_pointer(1,i),'mon'));state.obj=Array.from({length:m._probe_count(1)},(_,i)=>bytes(m,m._probe_pointer(2,i),'obj'));for(const[k,type]of [[0,'ge'],[1,'ga'],[2,'go'],[3,'gc'],[4,'gf'],[5,'svk']])state[type]=bytes(m,m._probe_more_pointer(k),type);Object.assign(state,{ctx:[0,1,2].map(i=>m._probe_context(i)),cells:raw(m,m._probe_pointer(5,0),64),trace:text(m,m._probe_trace()),result:text(m,m._probe_result_string()),rng:m._probe_rng_count(),rngstate:m._probe_rng_state(),frees:m._probe_free_count(),callbacks:[m._probe_callback_identity(0),m._probe_callback_identity(1)],mimic:text(m,m._probe_mimic_text()),nomove:text(m,m._probe_nomove_text())});return state;}
 function action(name,a=0,b=0,c=0,d=0){reached.add(name);const op=names.indexOf(name),before={C,R,T},result=mods.map(m=>m._probe_action(op,BigInt(a),BigInt(b),BigInt(c),BigInt(d)));assert.deepEqual(result[1],result[0],name+' result '+[a,b,c,d]);assert.deepEqual(snapshot(mods[1]),snapshot(mods[0]),name+' state '+[a,b,c,d]);mods.forEach((m,i)=>assertStackRestored(m,stacks[i],name));assert.equal(C,before.C);assert.equal(R,before.R);assert.equal(T,before.T);count+=2;return result[0];}
-function rolls(values){setup(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});}
+function rolls(values){setup(m=>{new FixtureInt32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});}
 for(let i=0;i<7;i++){assert.equal(core.hu_stat[i],text(ref,ref._probe_table(0,i)));assert.equal(text(mods[1],mods[1]._probe_table(0,i)),core.hu_stat[i]);count+=2;}for(let i=0;i<22;i++){assert.equal(core.foodwords[i],text(ref,ref._probe_table(2,i)));count++;}for(let i=0;i<16;i++){assert.deepEqual(core.tintxts[i],{txt:text(ref,ref._probe_table(1,i)),nut:Number(ref._probe_tin_row(i,0)),fodder:Number(ref._probe_tin_row(i,1)),greasy:Number(ref._probe_tin_row(i,2))});count++;}
 reset();action("is_edible",0,0,0,0);
 reset();action("init_uhunger",0,0,0,0);
@@ -130,7 +135,7 @@ const thirds=[await referenceBackend('eat',rf)(),await hf({nethackPorted:runtime
 
 // Actual catalogue food effects and every legal explicit tin variety.
 for(let typ=0;typ<value('NUM_OBJECTS');typ++){
- reset();setup(m=>m._probe_obj(0,0,BigInt(typ)));const p=Number(mods[0]._probe_pointer(2,0));if(new DataView(mods[0].HEAPU8.buffer).getInt8(p+L.obj_oclass)!==value('FOOD_CLASS'))continue;
+ reset();setup(m=>m._probe_obj(0,0,BigInt(typ)));const p=Number(mods[0]._probe_pointer(2,0));if(new FixtureDataView(mods[0].HEAPU8.buffer).getInt8(p+L.obj_oclass)!==value('FOOD_CLASS'))continue;
  action('fprefx',0);action('fpostfx',0);action('foodword',0);
 }
 for(let variety=-3;variety<17;variety++)for(const blessed of [0,1])for(const cursed of [0,1]){reset();setup(m=>{ob(m,2,'blessed',blessed);ob(m,2,'cursed',cursed);});action('set_tin_variety',2,variety);action('tin_variety',2,0);action('tin_details',2,value('PM_HUMAN'));}
@@ -141,4 +146,4 @@ for(const weight of [0x7fffffff,0x80000000,0xfffffffe]){reset();setup(m=>{m._pro
 for(const length of [3,100])for(const hallucinated of [0,1]){reset();setup(m=>{const message='M'.repeat(length),p=m._malloc(BigInt(length+1));m.HEAPU8.set(Buffer.from(message+'\0'),Number(p));m._probe_mimic(BigInt(p),1);m._free(BigInt(p));m._probe_hero(26,BigInt(value('M_AP_OBJECT')));m._probe_hero(27,BigInt(value(hallucinated?'GOLD_PIECE':'ORANGE')));m._probe_property(value('HALLUC'),0,BigInt(hallucinated));});action('eatmupdate');action('eatmdone');}
 
 for(const row of core.tintxts.slice(0,-1))for(const suffix of [' eel',' EEL','X','']){reset();setup(m=>{const input=row.txt+suffix,p=m._malloc(BigInt(Buffer.byteLength(input)+1));m.HEAPU8.set(Buffer.from(input+'\0'),Number(p));m._probe_text(BigInt(p));m._free(BigInt(p));});action('tin_variety_txt');}
-assert.equal(reached.size,77);console.log('EAT '+count+' original-C/JS comparisons passed ('+referenceLabel+'); all77 functions and native-visible source tables exercised.');
+assert.equal(reached.size,77);console.log('EAT '+count+' original-C/JS comparisons passed ('+fixtureReferenceLabel+'); all77 functions and native-visible source tables exercised.');

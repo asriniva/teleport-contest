@@ -1,16 +1,17 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('rect', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/rect-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/rect-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/rect.mjs';
 import { C, R } from '../js/c-runtime/context.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 const layout = layouts.rect;
-const runtime = createPortedRuntime(layouts);
-const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: runtime })];
+const implementation = await createPureJsProbe(layouts);
+const runtime = { rectState: implementation.environment.state('rect') };
+const modules = [await referenceFactory(), implementation];
 const fields = ['lx', 'ly', 'hx', 'hy'];
 let comparisons = 0;
 function cstring(module, pointer) {
@@ -151,8 +152,8 @@ call('free');
 random();
 
 // A second game instance has independent statics even with interleaved calls.
-const independentRuntime = createPortedRuntime(layouts);
-const independent = await hybridFactory({ nethackPorted: independentRuntime });
+const independent = await createPureJsProbe(layouts);
+const independentRuntime = { rectState: independent.environment.state('rect') };
 modules[1]._probe_init();
 independent._probe_init();
 const before = { ...runtime.rectState.rect[0] };
@@ -163,4 +164,4 @@ assert.deepEqual({ ...runtime.rectState.rect[0] }, before);
 modules[1]._probe_free();
 assert.equal(C, undefined);
 assert.equal(R, undefined);
-console.log(`RECT: ${comparisons} ${referenceLabel}/hybrid geometry, state, pointer and RNG comparisons checked.`);
+console.log(`RECT: ${comparisons} ${referenceLabel}/pure-JS geometry, state, pointer and RNG comparisons checked.`);

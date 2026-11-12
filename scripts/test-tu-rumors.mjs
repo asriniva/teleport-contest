@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('rumors', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/rumors-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/rumors-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('rumors',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.rumors,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
@@ -72,4 +74,4 @@ reset();defaults();call('option',11,1);call('option',12,1);rng([0,0]);const size
 // Shared runtime must key private CapMons ownership by actual native module.
 reset();defaults();act(16);const referenceCaps=caps(modules[0]),other=await hybridFactory({nethackPorted:runtime});other._probe_reset(1);assert.equal(caps(other).exists,false);assert.deepEqual(caps(modules[1]),referenceCaps);other._probe_action(16,0,0,0n,0n,0,0n);assert.ok(caps(other).exists);assert.deepEqual(caps(modules[1]),referenceCaps);other._probe_action(9,0,0,0n,0n,0,0n);assert.deepEqual(caps(modules[1]),referenceCaps);check();
 reset();call('option',1,0);defaults();rng([0,0]);act(0,1,1);const savedState=snapshot(modules[0]);modules[1]._probe_hero(0,7n);assert.deepEqual(snapshot(modules[0]),savedState);reset();
-console.log(`RUMORS: ${comparisons} ${referenceLabel}/hybrid native-file, oracle, consultation, cache, ownership and RNG-site comparisons checked.`);
+console.log(`RUMORS: ${comparisons} ${referenceLabel}/pure-JS native-file, oracle, consultation, cache, ownership and RNG-site comparisons checked.`);

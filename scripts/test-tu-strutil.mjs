@@ -1,15 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('strutil', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/strutil-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/strutil-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/strutil.mjs';
 import { C } from '../js/c-runtime/context.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 const layout = layouts.strutil;
-const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: createPortedRuntime(layouts) })];
+const modules = [await referenceFactory(), await createPureJsProbe(layouts)];
 let comparisons = 0;
 const bytes = value => typeof value === 'string' ? Buffer.from(value) : value;
 function strings(value) {
@@ -156,4 +156,4 @@ append(growing, 'after-growth');
 call(growing, 'crlf');
 call(growing, 'empty');
 release(growing);
-console.log(`STRUTIL: ${comparisons} ${referenceLabel}/hybrid buffer, byte-pattern and fatal-length comparisons checked.`);
+console.log(`STRUTIL: ${comparisons} ${referenceLabel}/pure-JS buffer, byte-pattern and fatal-length comparisons checked.`);

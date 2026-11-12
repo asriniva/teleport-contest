@@ -9,6 +9,7 @@ source=pathlib.Path(__file__).resolve().parents[1];gitdir=subprocess.check_outpu
 with tempfile.TemporaryDirectory(prefix='allocation-layer-',dir=source/'.cache')as temporary:
  root=pathlib.Path(temporary);shutil.copytree(source/'docs/runtime-environment',root/'docs/runtime-environment');(root/'scripts').mkdir()
  for name in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py','post_default_successors.py','monmove_source_successors.py','window_headers_source_successors.py','allocation_cli_source_successors.py']:shutil.copyfile(source/'scripts'/name,root/'scripts'/name)
+ (root/'scripts/pure-js-fixtures').mkdir();shutil.copyfile(source/'scripts/pure-js-fixtures/qualification.mjs',root/'scripts/pure-js-fixtures/qualification.mjs')
  for p in POST|WINDOW|MONMOVE|SIX|q.ALLOWED:
   dst=root/p;dst.parent.mkdir(parents=True,exist_ok=True);dst.write_bytes(subprocess.check_output(['git','show',q.BASE_COMMIT+':'+p],cwd=source))
  declaration=(root/q.DECLARATION).read_bytes();(root/q.DECLARATION).unlink();env={**os.environ,'GIT_DIR':gitdir,'GIT_WORK_TREE':str(root),'NODE_PATH':''};paths=sorted(q.ALLOWED)
@@ -20,7 +21,8 @@ with tempfile.TemporaryDirectory(prefix='allocation-layer-',dir=source/'.cache')
   if success:assert result.returncode==0,result.stdout+result.stderr;return json.loads(result.stdout)
   assert result.returncode!=0,'accepted unqualified current/proof bytes: '+language
  baseline=api('js');assert api('py')==baseline;checks+=1+len(paths)*8
- for p in q.ALLOWED:(root/p).write_bytes((source/p).read_bytes())
+ # Exercise the exact committed feature cohort; later migration changes have their own checks.
+ for p in q.ALLOWED:(root/p).write_bytes(subprocess.check_output(['git','show','8b834cd2b94a10bc1a96336de0bd91f90d3adf2b:'+p],cwd=source))
  (root/q.DECLARATION).write_bytes(declaration);q.validate_cohort(root);checks+=1
  assert api('js')==baseline;assert api('py')==baseline;checks+=2+len(paths)*8
  target=next(iter(q.ALLOWED));old=(root/target).read_bytes();(root/target).write_bytes(old+b'\nchanged')

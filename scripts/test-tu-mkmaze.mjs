@@ -1,12 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView,Int16Array as FixtureInt16Array,Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
 // Controlled configured memory64 comparison; no native/game/public equivalence claim.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
 const probeDir=resolve(process.env.MKMAZE_PROBE_DIR??'.cache/mkmaze-first-pass');
-const {default:refFactory}=await import(pathToFileURL(resolve(probeDir,'mkmaze-reference.mjs')));
-const {default:hybridFactory}=await import(pathToFileURL(resolve(probeDir,'mkmaze-hybrid.mjs')));
-const {callMkmaze}=await import(process.env.MKMAZE_RUNTIME??'../js/nethack/bindings/mkmaze.js');
+const {default:refFactory}=await loadFixture("mkmaze",pathToFileURL(resolve(probeDir,'mkmaze-reference.mjs')));
+const {default:hybridFactory}=await loadFixture("mkmaze",pathToFileURL(resolve(probeDir,'mkmaze-hybrid.mjs')));
+const {callMkmaze}=await loadFixture("mkmaze",process.env.MKMAZE_RUNTIME??'../js/nethack/bindings/mkmaze.js');
 const schema=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/mkmaze-schema.json',import.meta.url))),functions=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/mkmaze-source-metadata.json',import.meta.url))).functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
 const ref=await refFactory(),hybrid=await hybridFactory();hybrid.nethackPorted={mkmaze:callMkmaze};const mods=[ref,hybrid];
 const layout=Object.fromEntries(schema.layoutKeys.map((n,i)=>[n,Number(ref._teleport_mkmaze_layout(i))]));
@@ -32,7 +35,7 @@ const knownRegions=m=>[
 // Only explicit compiler-typed pointer slots are canonicalized. Unknown pointers
 // and every unselected/scalar/padding byte remain raw and must match.
 const pointerID=(m,v)=>{v=Number(v);if(!v)return '0';const r=knownRegions(m).find(r=>r.p&&v>=r.p&&v<r.p+r.size);return r?r.name+'+'+(v-r.p):'UNKNOWN:'+v;};
-const rawRecord=(m,p,type)=>{const bytes=m.HEAPU8.slice(p,p+L['size:struct '+type]),pointers=[];schema.schema[type].fields.forEach(f=>{if(f.canonical.includes('*')&&!f.canonical.includes('[')){const at=addr(m,p,type,f.name),v=get(m,p,type,f.name);pointers.push([f.name,pointerID(m,v)]);bytes.fill(0,at-p,at-p+8);}});for(const [kind,which,name]of type==='obj'?[[0,0,'nobj'],[0,1,'v.nexthere']]:type==='monst'?[[1,0,'minvent']]:[]){if(pointers.some(([n])=>n===name))continue;const offset=Number(m._probe_pointer_offset(kind,which)),v=new DataView(m.HEAPU8.buffer).getBigUint64(p+offset,true);pointers.push([name,pointerID(m,v)]);bytes.fill(0,offset,offset+8);}return{bytes:Buffer.from(bytes).toString('hex'),pointers};};
+const rawRecord=(m,p,type)=>{const bytes=m.HEAPU8.slice(p,p+L['size:struct '+type]),pointers=[];schema.schema[type].fields.forEach(f=>{if(f.canonical.includes('*')&&!f.canonical.includes('[')){const at=addr(m,p,type,f.name),v=get(m,p,type,f.name);pointers.push([f.name,pointerID(m,v)]);bytes.fill(0,at-p,at-p+8);}});for(const [kind,which,name]of type==='obj'?[[0,0,'nobj'],[0,1,'v.nexthere']]:type==='monst'?[[1,0,'minvent']]:[]){if(pointers.some(([n])=>n===name))continue;const offset=Number(m._probe_pointer_offset(kind,which)),v=new FixtureDataView(m.HEAPU8.buffer).getBigUint64(p+offset,true);pointers.push([name,pointerID(m,v)]);bytes.fill(0,offset,offset+8);}return{bytes:Buffer.from(bytes).toString('hex'),pointers};};
 const selectedState=m=>{const out={};const walk=(p,k,path)=>{for(const f of schema.schema[k].fields){const t=f.canonical,child=Object.keys(schema.schema).find(n=>schema.schema[n].ctype===t)||(t.startsWith('struct ')?t.slice(7):t.startsWith('union ')?t.slice(6):null);if(t.includes('['))continue;if(t.includes('*'))out[path+'.'+f.name]=pointerID(m,get(m,p,k,f.name));else if(child&&schema.schema[child])walk(addr(m,p,k,f.name),child,path+'.'+f.name);else if(!t.startsWith('struct ')&&!t.startsWith('union '))out[path+'.'+f.name]=get(m,p,k,f.name).toString();}};for(const g of schema.globals){if(g.canonical.includes('[')||g.canonical.includes('*'))continue;const k=Object.keys(schema.schema).find(n=>schema.schema[n].ctype===g.canonical);if(k)walk(global(m,g.name),k,g.name);}return out;};
 const snapshot=m=>({selectedState:selectedState(m),grid:Buffer.from(m.HEAPU8.slice(Number(m._probe_grid()),Number(m._probe_grid())+80*21*8)).toString('hex'),coord:Buffer.from(m.HEAPU8.slice(ptr(m,0),ptr(m,0)+4)).toString('hex'),draws:m._probe_draws(),error:m._probe_error(),objects:Array.from({length:m._probe_count(0)},(_,i)=>rawRecord(m,ptr(m,4)+i*L['size:struct obj'],'obj')),monsters:Array.from({length:m._probe_count(1)},(_,i)=>rawRecord(m,ptr(m,5)+i*L['size:struct monst'],'monst')),traps:Array.from({length:m._probe_count(2)},(_,i)=>rawRecord(m,ptr(m,6)+i*L['size:struct trap'],'trap')),bubbles:Array.from({length:m._probe_count(3)},(_,i)=>{const p=Number(m._probe_alloc_pointer(i)),size=Number(m._probe_alloc_size(i));return !p?null:size===L['size:struct bubble']?rawRecord(m,p,'bubble'):null;}),serial:Buffer.from(m.HEAPU8.slice(ptr(m,7),ptr(m,7)+m._probe_serial_length())).toString('hex'),trace:m.UTF8ToString(Number(m._probe_trace()))});
 let checks=0;
@@ -42,7 +45,7 @@ reset();fill(L.STONE);action('iswall',[0,0]);action('iswall_or_stone',[0,0]);act
 for(const typ of [L.STONE,L.SDOOR,L.STAIRS,L.ICE,L.FOUNTAIN,L.SINK,L.LAVAPOOL]){map(4,5,typ);action('set_levltyp',[4,5,L.AIR]);action('set_levltyp_lit',[4,5,L.ROOM,-1]);}
 for(let n=1;n<=16;n++){reset();seed(n);setter(m=>set(m,addr(m,field(m,'svl','instance_globals_saved_l','level'),'dlevel_t','flags'),'levelflags','corrmaze',n%2));action('create_maze',[n%5+1,(n*3)%5+1,n%2]);action('mazexy',m=>[ptr(m,0)]);action('bound_digging');action('wallification',[1,0,79,20]);}
 console.log('PASS initial MKMAZE',checks,'checks',covered.size,'functions');
-reset();fill(L.STONE);setter(m=>{const p=Number(m._probe_scratch());new Int32Array(m.HEAPU8.buffer,p,9).set([1,1,1,1,0,1,1,1,1]);});
+reset();fill(L.STONE);setter(m=>{const p=Number(m._probe_scratch());new FixtureInt32Array(m.HEAPU8.buffer,p,9).set([1,1,1,1,0,1,1,1,1]);});
 action('extend_spine',m=>[Number(m._probe_scratch()),1,0,1]);
 action('okay',[4,4,2]);action('maze0xy',m=>[ptr(m,0)]);action('maze_inbounds',[3,3]);
 for(let n=0;n<8;n++){reset();for(let x=0;x<80;x++)for(let y=0;y<21;y++)map(x,y,[L.STONE,L.HWALL,L.VWALL,L.ROOM,L.SDOOR,L.WATER,L.IRONBARS][(x*17+y*11+n)%7],(x+y)%4);action('wall_cleanup',[1,0,79,20]);action('fix_wall_spines',[1,0,79,20]);}
@@ -77,8 +80,9 @@ setter(m=>{m._probe_quantity(0x20000000000001n);m.stringToUTF8('wide gang',ptr(m
 reset();action('fix_wall_spines',[-1,0,80,21]);action('okay',[3,3,9]);
 // A scalar equal to a native address is preserved verbatim, never normalized.
 reset();setter(m=>m._probe_attach(1,5,5));
-const scalarSnapshots=mods.map(m=>{const p=ptr(m,4);set(m,p,'obj','quan',BigInt(p));const snap=rawRecord(m,p,'obj'),at=addr(m,p,'obj','quan')-p;assert.equal(snap.bytes.slice(at*2,(at+8)*2),Buffer.from(m.HEAPU8.slice(p+at,p+at+8)).toString('hex'));assert.ok(!snap.pointers.some(([name])=>name==='quan'));return snap;});
-set(hybrid,ptr(hybrid,4),'obj','quan',BigInt(ptr(hybrid,4))+8n);assert.throws(()=>assert.deepEqual(rawRecord(hybrid,ptr(hybrid,4),'obj'),scalarSnapshots[0]));
+const scalarWitness=BigInt(ptr(mods[0],4));
+const scalarSnapshots=mods.map(m=>{const p=ptr(m,4);set(m,p,'obj','quan',scalarWitness);const snap=rawRecord(m,p,'obj'),at=addr(m,p,'obj','quan')-p;assert.equal(snap.bytes.slice(at*2,(at+8)*2),Buffer.from(m.HEAPU8.slice(p+at,p+at+8)).toString('hex'));assert.ok(!snap.pointers.some(([name])=>name==='quan'));return snap;});
+set(hybrid,ptr(hybrid,4),'obj','quan',scalarWitness+8n);assert.throws(()=>assert.deepEqual(rawRecord(hybrid,ptr(hybrid,4),'obj'),scalarSnapshots[0]));
 // Independent Module, real growth in a dependency, and C→JS cross-Module reentry.
 const third=await hybridFactory();third._probe_reset();ref._probe_reset();let reentered=false;
 third.nethackPorted={mkmaze(services,name,...args){const original=services.rn2;services.rn2=n=>{if(name==='create_maze'&&!reentered){reentered=true;const prior=hybrid.stackSave();hybrid._probe_action(names.indexOf('iswall'),0n,0n,0n,0n,0n,0n,0n,0n,0n,0n);assert.equal(hybrid.stackSave(),prior);const old=third.HEAPU8.buffer;third._malloc(50000000n);assert.notEqual(third.HEAPU8.buffer,old);}return original(n);};return callMkmaze(services,name,...args);}};
@@ -90,5 +94,5 @@ console.log('PASS MKMAZE final',checks,'comparisons; 44 functions, exact map/RNG
 // a distant column. Compare every native output byte, then all packed rm bytes.
 reset();fill(L.STONE);for(let x=20;x<=25;x++)for(let y=8;y<=12;y++)map(x,y,L.ROOM);for(let x=50;x<=60;x++)for(let y=3;y<=17;y++)map(x,y,L.ROOM);
 action('get_level_extends',m=>{const p=Number(m._probe_scratch());return[p,p+2,p+4,p+6];});
-for(const m of mods){const p=Number(m._probe_scratch());assert.deepEqual([...new Int16Array(m.HEAPU8.buffer,p,4)],[19,2,61,18]);assert.equal(Buffer.from(m.HEAPU8.slice(p,p+8)).toString('hex'),'130002003d001200');}
+for(const m of mods){const p=Number(m._probe_scratch());assert.deepEqual([...new FixtureInt16Array(m.HEAPU8.buffer,p,4)],[19,2,61,18]);assert.equal(Buffer.from(m.HEAPU8.slice(p,p+8)).toString('hex'),'130002003d001200');}
 action('bound_digging');console.log('PASS expanded proposed MKMAZE',checks,'comparisons including ALL8 native extent output bytes and asymmetric bound-map regression');

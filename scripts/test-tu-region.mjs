@@ -1,11 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("region");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import assert from './native-test-assert.mjs';
-import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
+import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {callRegion} from '../js/nethack/bindings/region.js';
 import * as core from '../js/ported/region.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_REGION_AUTHOR==='1';
-const ref=(await import(own?'../.cache/region-author/reference.mjs':'../.cache/tu-probes/region-reference.mjs')).default,hyb=(await import(own?'../.cache/region-author/hybrid.mjs':'../.cache/tu-probes/region-hybrid.mjs')).default;
+const ref=(await loadFixture("region",own?'../.cache/region-author/reference.mjs':'../.cache/tu-probes/region-reference.mjs')).default,hyb=(await loadFixture("region",own?'../.cache/region-author/hybrid.mjs':'../.cache/tu-probes/region-hybrid.mjs')).default;
 let reference=await referenceBackend('region',ref)();
 const text=(m,p)=>{p=Number(p);let q=p;while(m.HEAPU8[q])q++;return Buffer.from(m.HEAPU8.slice(p,q)).toString('latin1');};
 const measured={};for(let i=0;i<reference._probe_layout_count();i++)measured[text(reference,reference._probe_layout_name(i))]=Number(BigInt.asIntN(64,reference._probe_layout_value(i)));
@@ -50,4 +54,4 @@ for(const ghostly of [0,1]){reset();rect(0,1,1,2,2);act(0,0,1);field(0,0,1);act(
 for(const point of [1,2,3,4,5,6]){reset();reference=await referenceBackend('region',ref)();modules[0]=reference;modules[1]=await hyb({nethackPorted:ported});stacks.splice(0,stacks.length,...modules.map(m=>m._probe_stack()));reset();const before=modules.map(memoryCheckpoint);opt(20,point);opt(21,1);rect(0,9,9,11,11);act(0,0,1);field(0,2,1);act(8);if(point===2)act(9);if(point===4){field(0,1,4);act(26);}if(point>=5){act(21,0,L.WRITING);if(point===6)act(22,0,1);}assert.ok(trace().includes('grow:'+point));modules.forEach((m,i)=>assertMemoryGrowth(m,before[i]));act(10);}
 // Second actual Module uses the same dispatcher object and executes region JS.
 reset();rect(0,9,9,11,11);act(0,0,1);act(8);const primary=snap(modules[1]),other=await hyb({nethackPorted:ported});other._probe_reset();other._probe_rect(0,1,1,3,3);other._probe_action(0,0,1,0,0);other._probe_action(8,0,0,0,0);assert.equal(other._probe_action(2,0,2,2,0),1n);assert.deepEqual(snap(modules[1]),primary);other._probe_action(10,0,0,0,0);check();act(10);
-console.log('REGION: '+checks+' '+referenceLabel+'/hybrid geometry, callbacks, serialization, ownership, growth and isolation comparisons passed.');
+console.log('REGION: '+checks+' '+fixtureReferenceLabel+'/pure-JS geometry, callbacks, serialization, ownership, growth and isolation comparisons passed.');

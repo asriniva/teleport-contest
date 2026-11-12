@@ -1,11 +1,16 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("symbols");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
-import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
+import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend} from './native-test-backend.mjs';
 import {readFileSync} from 'node:fs';
 import {callSymbols} from '../js/nethack/bindings/symbols.js';
 import * as symbols from '../js/ported/symbols.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_SYMBOLS_AUTHOR==='1';
-const referenceFactory=(await import(own?'../.cache/symbols-author/reference.mjs':'../.cache/tu-probes/symbols-reference.mjs')).default,hybridFactory=(await import(own?'../.cache/symbols-author/hybrid.mjs':'../.cache/tu-probes/symbols-hybrid.mjs')).default;
+const referenceFactory=(await loadFixture("symbols",own?'../.cache/symbols-author/reference.mjs':'../.cache/tu-probes/symbols-reference.mjs')).default,hybridFactory=(await loadFixture("symbols",own?'../.cache/symbols-author/hybrid.mjs':'../.cache/tu-probes/symbols-hybrid.mjs')).default;
 const L=own?JSON.parse(readFileSync(new URL('../.cache/symbols-author/layout.json',import.meta.url))):JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).symbols;
 const ported={callSymbols:(services,name,...args)=>callSymbols(services,L,name,...args)},modules=[await referenceBackend('symbols',referenceFactory)(),await hybridFactory({nethackPorted:ported})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){if(!p)return null;p=Number(p);let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');}
@@ -49,7 +54,7 @@ reset();global(4,1);input('unknown');assert.equal(act(15),1);input('finish');ass
 for(const which of [0,1])for(const handling of [L.H_UNK,L.H_UTF8])for(const value of [-2147483648,-1,0,255,256,2147483647]){reset();set(which,0,'Alpha');parse('start:Alpha',which);set(which,2,null,handling);opt(2,value);parse('S_vwall:x',which);const idx=resolve(symbols.loadsyms.find(r=>r.name==='S_vwall').idx);if(handling!==L.H_UTF8)assert.equal(Number.parseInt(array(which?2:1).slice(idx*2,idx*2+2),16),value&255);}
 // Quoting, recursive right-to-left overrides, glyph paths and real saved ownership.
 for(const line of ["S_vwall:'|'","S_vwall:','","S_vwall:':'",'S_vwall:\\,','S_vwall=x','S_vwall:U+1234','S_vwall:u+abcd','G_demo:U+1','start:x','unknown:x','S_vwall:x,S_hwall:y','S_vwall:x,S_vwall:y','S_vwall:x,unknown:y','S_vwall','S_vwall:','S_vwall:x,']){reset();act(0);parse(line,0,24);act(23);const out=modules.map(m=>text(m,m._probe_buffer()));assert.equal(out[1],out[0]);}
-reset();parse('S_vwall:x,S_hwall:y',0,24);act(23);assert.equal(text(modules[0],modules[0]._probe_buffer()),'SYMBOLS=S_vwall:x\nSYMBOLS=S_hwall:y\n');input('S_vwall');act(22,0);assert.equal(act(21,0),1);assert.equal(act(21,1),0);const heads=modules.map(m=>new DataView(m.HEAPU8.buffer).getBigUint64(Number(m._probe_pointer(3,0)),true));act(20);modules.forEach((m,i)=>assert.equal(new DataView(m.HEAPU8.buffer).getBigUint64(Number(m._probe_pointer(3,0)),true),heads[i]));assert.ok(text(modules[0],modules[0]._probe_snapshot()).includes('saved:<freed>'));
+reset();parse('S_vwall:x,S_hwall:y',0,24);act(23);assert.equal(text(modules[0],modules[0]._probe_buffer()),'SYMBOLS=S_vwall:x\nSYMBOLS=S_hwall:y\n');input('S_vwall');act(22,0);assert.equal(act(21,0),1);assert.equal(act(21,1),0);const heads=modules.map(m=>new FixtureDataView(m.HEAPU8.buffer).getBigUint64(Number(m._probe_pointer(3,0)),true));act(20);modules.forEach((m,i)=>assert.equal(new FixtureDataView(m.HEAPU8.buffer).getBigUint64(Number(m._probe_pointer(3,0)),true),heads[i]));assert.ok(text(modules[0],modules[0]._probe_snapshot()).includes('saved:<freed>'));
 // Real native file reader calls the original parser back through the C ABI.
 const script='start:Alpha\ndescription:first\nhandling:DEC\nS_vwall:x\nfinish\nstart:Beta\ndescription:second\nhandling:UTF8\nS_hwall:U+1234\nfinish\n';
 for(const name of ['Alpha','Beta'])for(const fail of [0,1]){reset();file(script);opt(0,fail?0:1);input(name);assert.equal(act(18,0),fail?0:1);if(!fail){assert.equal(fields('set0')[0],name);assert.ok(trace().includes('apply:'));}else assert.equal(fields('set0')[0],'<NULL>');}
@@ -62,4 +67,4 @@ for(const stage of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]){reset();file(script);o
  if(stage===1)act(7,0);else if(stage===2){set(0,2,null,L.H_UTF8);act(13,0,1);}else if(stage===3||stage===4)act(13,0,0);else if(stage===5)parse('G_demo:x',0,24);else if(stage===6)parse('S_vwall:x',0,24);else if(stage===7)parse('S_vwall:U+1234',0,24);else if(stage===8){input('Alpha');act(18);}else if(stage===9){set(0,0,'Alpha');act(13,0,1);}else if(stage===10||stage===11){set(0,2,null,stage===10?L.H_DEC:L.H_UTF8);act(8,1);}else if(stage===12||stage===13||stage===14){opt(5,1);opt(6,2);act(26,0);}else{input('Alpha');act(18);}
  assert.ok(trace().includes(`grow:${stage};`),`stage ${stage}`);assert.ok(trace().includes('nested:'));modules.forEach((m,i)=>assertMemoryGrowth(m,before[i]));}
 reset();act(0);const old=modules.map(snapshot),other=await hybridFactory({nethackPorted:ported});other._probe_reset();other._probe_symbol(1,0,77);other._probe_action(7,0,0);assert.ok(text(other,other._probe_snapshot()).includes('a0:4d'));modules.forEach((m,i)=>assert.deepEqual(snapshot(m),old[i]));check();
-console.log(`SYMBOLS: ${comparisons} ${referenceLabel}/hybrid complete tables, parser, menus, aliases, ownership and callbacks checked.`);
+console.log(`SYMBOLS: ${comparisons} ${fixtureReferenceLabel}/pure-JS complete tables, parser, menus, aliases, ownership and callbacks checked.`);

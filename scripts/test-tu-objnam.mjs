@@ -1,6 +1,9 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 // Actual unchanged EmC OBJNAM versus the imported JS translation.
 // Foreign gameplay dependencies are controlled C functions, not C naming policy.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import fs from 'node:fs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -9,8 +12,8 @@ import {callObjnam,objnamState,createObjnamEnvironment} from '../js/nethack/bind
 import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
 const custom=process.env.TELEPORT_OBJNAM_PROBE_DIR,dir=resolve(custom??'.cache/tu-probes');
 const path=k=>pathToFileURL(resolve(dir,(custom?'':'objnam-')+k+'.mjs'));
-const {default:referenceFactory}=await import(path('reference'));
-const {default:hybridFactory}=await import(path('hybrid'));
+const {default:referenceFactory}=await loadFixture("objnam",path('reference'));
+const {default:hybridFactory}=await loadFixture("objnam",path('hybrid'));
 const reference=await referenceFactory();
 function text(m,p){p=Number(p);if(!p)return null;let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');}
 const raw={};for(let i=0;i<reference._probe_layout_count();i++)raw[text(reference,reference._probe_layout_name(i))]=reference._probe_layout_value(i);
@@ -37,7 +40,7 @@ function reset(){for(const m of modules)m._probe_reset();}
 function both(fn){for(let i=0;i<modules.length;i++)fn(modules[i],i);}
 function run(name,args=()=>[],label=''){
  context=name+' '+label;const id=names.indexOf(name);assert.notEqual(id,-1);seen.add(name);
- const values=modules.map((m,i)=>{const a=args(m,i).map(x=>BigInt(x??0));while(a.length<8)a.push(0n);try{m._probe_invoke(id,...a);}catch(error){console.error('OBJNAM failing entry',context,'module',i,'args',a.map(String));throw error;}return [text(m,m._probe_result()),text(m,m._probe_trace()),text(m,m._probe_snapshot()),Array.from({length:4},(_,j)=>new DataView(m.HEAPU8.buffer).getInt32(Number(m._probe_ints())+j*4,true)),Array.from({length:4},(_,j)=>text(m,m._probe_buffer(j)))];});
+ const values=modules.map((m,i)=>{const a=args(m,i).map(x=>BigInt(x??0));while(a.length<8)a.push(0n);try{m._probe_invoke(id,...a);}catch(error){console.error('OBJNAM failing entry',context,'module',i,'args',a.map(String));throw error;}return [text(m,m._probe_result()),text(m,m._probe_trace()),text(m,m._probe_snapshot()),Array.from({length:4},(_,j)=>new FixtureDataView(m.HEAPU8.buffer).getInt32(Number(m._probe_ints())+j*4,true)),Array.from({length:4},(_,j)=>text(m,m._probe_buffer(j)))];});
  assert.deepEqual(values[1],values[0],context);for(let i=0;i<modules.length;i++)assert.equal(modules[i]._probe_stack(),stack[i],context+' stack');assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);comparisons++;return values[0][0];
 }
 // Every source grammar transformation is exercised against the same libc bytes.

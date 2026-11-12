@@ -1,11 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("restore");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import assert from './native-test-assert.mjs';
-import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
+import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {callRestore,createRestoreEnvironment} from '../js/nethack/bindings/restore.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_RESTORE_AUTHOR==='1';
-const ref=(await import(own?'../.cache/restore-author/reference.mjs':'../.cache/tu-probes/restore-reference.mjs')).default;
-const hyb=(await import(own?'../.cache/restore-author/hybrid.mjs':'../.cache/tu-probes/restore-hybrid.mjs')).default;
+const ref=(await loadFixture("restore",own?'../.cache/restore-author/reference.mjs':'../.cache/tu-probes/restore-reference.mjs')).default;
+const hyb=(await loadFixture("restore",own?'../.cache/restore-author/hybrid.mjs':'../.cache/tu-probes/restore-hybrid.mjs')).default;
 let reference=await referenceBackend('restore',ref)();
 const text=(m,p)=>{p=Number(p);if(!p)return null;let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');};
 const measured={};for(let i=0;i<reference._probe_layout_count();i++)measured[text(reference,reference._probe_layout_name(i))]=Number(BigInt.asIntN(64,reference._probe_layout_value(i)));
@@ -77,4 +81,4 @@ for(const n of [0,1,3])for(const selection of [-2,-1,0,1]){reset();for(let i=0;i
 // Real native callbacks mutate memory and reenter original JS during deserialization.
 for(const step of [1,3,8]){reference=await referenceBackend('restore',ref)();modules=[reference,await hyb({nethackPorted:ported})];stacks=modules.map(m=>m._probe_stack());reset();const before=modules.map(memoryCheckpoint);call('callbacks',step,step);feed('levchn-lev_count',8);act(2);assert.ok(trace().includes('growth;'));assert.ok(trace().includes('reentry:'));modules.forEach((m,i)=>assertMemoryGrowth(m,before[i]));}
 reset();act(28,123,456);const primary=snapshot(modules[1]);const other=await hyb({nethackPorted:ported});other._probe_reset();other._probe_action(28,123,789,0);assert.equal(other._probe_action(29,123,0,0),1n);assert.equal(other._probe_value(0),789n);assert.deepEqual(snapshot(modules[1]),primary);check();
-console.log('RESTORE: '+comparisons+' '+referenceLabel+'/hybrid reconstruction, ID mapping, serializer outputs, ownership, callbacks and isolation comparisons passed.');
+console.log('RESTORE: '+comparisons+' '+fixtureReferenceLabel+'/pure-JS reconstruction, ID mapping, serializer outputs, ownership, callbacks and isolation comparisons passed.');

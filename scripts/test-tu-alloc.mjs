@@ -1,14 +1,14 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('alloc', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/alloc-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/alloc-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/alloc.mjs';
 import { C, R, T, withCEnvironment } from '../js/c-runtime/context.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
-const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: createPortedRuntime(layouts) })];
+const modules = [await referenceFactory(), await createPureJsProbe(layouts)];
 let comparisons = 0;
 const stacks = modules.map(module => module._probe_stack());
 function scope() {
@@ -155,12 +155,12 @@ modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 operation(module => module._probe_alloc(128, 0)); free(pointers());
 const after = modules.map(module => cbytes(module, module._probe_format(0xabcdefn)));
 assert.deepEqual(after[1], after[0]); scope(); comparisons++;
-const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
+const independent = await createPureJsProbe(layouts);
 const oldText = cbytes(modules[1], formattedPointers[1].at(-1));
 independent._probe_format(0x999n); independent._probe_format(0x888n);
 assert.deepEqual(cbytes(modules[1], formattedPointers[1].at(-1)), oldText); scope(); comparisons++;
 // An existing translated caller has an active dependency scope when it
-// reenters C and then this translated allocator. Restore that outer scope on
+// reenters this translated allocator. Restore that outer scope on
 // both ordinary return and the C panic/longjmp path.
 const outer = { rectState: { sentinel: 'rect' }, trackState: { sentinel: 'track' } };
 withCEnvironment(outer, () => {
@@ -177,4 +177,4 @@ withCEnvironment(outer, () => {
     restored();
 });
 scope();
-console.log(`ALLOC: ${comparisons} ${referenceLabel}/hybrid alignment, memory, failure, pointer-pool and integer-cast comparisons checked.`);
+console.log(`ALLOC: ${comparisons} ${referenceLabel}/pure-JS alignment, memory, failure, pointer-pool and integer-cast comparisons checked.`);

@@ -1,12 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 // Controlled configured memory64 comparison; native/game/public equivalence pending.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
 const probeDir=resolve(process.env.MKLEV_PROBE_DIR??'.cache/mklev-first-pass');
-const {default:refFactory}=await import(pathToFileURL(resolve(probeDir,'mklev-reference.mjs')));
-const {default:hybridFactory}=await import(pathToFileURL(resolve(probeDir,'mklev-hybrid.mjs')));
-const {callMklev}=await import(process.env.MKLEV_RUNTIME??'../js/nethack/bindings/mklev.js');
+const {default:refFactory}=await loadFixture("mklev",pathToFileURL(resolve(probeDir,'mklev-reference.mjs')));
+const {default:hybridFactory}=await loadFixture("mklev",pathToFileURL(resolve(probeDir,'mklev-hybrid.mjs')));
+const {callMklev}=await loadFixture("mklev",process.env.MKLEV_RUNTIME??'../js/nethack/bindings/mklev.js');
 const schema=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/mklev-schema.json',import.meta.url))),metadata=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/mklev-source-metadata.json',import.meta.url))),functions=metadata.functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
 const ref=await refFactory(),hybrid=await hybridFactory();hybrid.nethackPorted={mklev:callMklev};const mods=[ref,hybrid];
 const testConstants=["ALTAR", "DOOR", "FILL_NORMAL", "HWALL", "MOAT", "OROOM", "POOL", "ROOM", "SDOOR", "STONE", "TELEP_TRAP", "WATER", "all_themes", "most_themes", "tut_themes"];
@@ -31,7 +34,7 @@ const bare=t=>t.replace(/\b(?:const|volatile)\b/g,'').trim().replace(/\s+/g,' ')
 const size=t=>{t=bare(t);const a=t.match(/^(.*?)((?:\[\d+\])+)$/);if(a)return [...a[2].matchAll(/\[(\d+)\]/g)].reduce((n,x)=>n*Number(x[1]),size(a[1]));return t.includes('*')?8:L['size:'+t]??({'int':4,'unsigned int':4,'short':2,'unsigned short':2,'char':1,'signed char':1,'unsigned char':1,'long':8,'unsigned long':8}[t]);};
 // Canonicalize only selected compiler-typed pointer fields, preserving every
 // scalar, padding, unknown pointer, and unselected byte unchanged.
-function raw(m,p,n,t,extra=[]){const bytes=m.HEAPU8.slice(p,p+n),pointers=[],slots=new Set();const slot=(at,path)=>{if(slots.has(at))return;slots.add(at);const v=new DataView(m.HEAPU8.buffer).getBigUint64(at,true);pointers.push([path,pointerID(m,v)]);bytes.fill(0,at-p,at-p+8);};
+function raw(m,p,n,t,extra=[]){const bytes=m.HEAPU8.slice(p,p+n),pointers=[],slots=new Set();const slot=(at,path)=>{if(slots.has(at))return;slots.add(at);const v=new FixtureDataView(m.HEAPU8.buffer).getBigUint64(at,true);pointers.push([path,pointerID(m,v)]);bytes.fill(0,at-p,at-p+8);};
  const walk=(at,type,path)=>{type=bare(type);const ar=type.match(/^(.*?)((?:\[\d*\])+)$/);if(ar){const dims=[...ar[2].matchAll(/\[(\d*)\]/g)].map(x=>x[1]?Number(x[1]):Math.floor(n/size(ar[1]))),count=dims.reduce((a,b)=>a*b,1),step=size(ar[1]);if(ar[1].includes('*')||record(ar[1]))for(let i=0;i<count;i++)walk(at+i*step,ar[1],path+'['+i+']');return;}if(type.includes('*')){slot(at,path);return;}const k=record(type);if(k)for(const f of schema.schema[k].fields)if(!f.bit&&(f.canonical.includes('*')||f.canonical.includes('[')||record(f.canonical)))walk(addr(m,at,k,f.name),f.canonical,path+'.'+f.name);};
  walk(p,t,'');for(const [offset,label]of extra)slot(p+offset,label);return{bytes:Buffer.from(bytes).toString('hex'),pointers};}
 const extras=(m,k,n)=>Array.from({length:n},(_,i)=>[Number(m._probe_pointer_offset(k,i)),'nativePointer'+i]);
@@ -68,8 +71,8 @@ reset();rooms();action('add_subroom',m=>[room(m),5,4,7,6,1,L.OROOM,0]);action('t
 // Actual two-predecessor fill_vault join with original effect block once.
 let vaultChecks=0;for(const failfirst of[0,1,3])for(let n=31;n<=33;n++){reset();seed(n);option(11,10);option(14,failfirst);action('makelevel');vaultChecks+=ref.UTF8ToString(Number(ref._probe_trace())).split('check_room(').length-1;}assert.ok(vaultChecks>=4,'vault creation/check fallback cases reached');
 // Multiple Lua states, tutorial/endgame release filters, and level-enter callback.
-for(const group of[L.tut_themes,L.most_themes,L.all_themes]){reset();setter(m=>{const themes=field(m,'gl','instance_globals_l','luathemes');for(let i=0;i<4;i++)new DataView(m.HEAPU8.buffer).setBigUint64(themes+i*8,BigInt(ptr(m,9)+i*16),true);});action('free_luathemes',[group]);}
-reset();setter(m=>{set(m,global(m,'gl'),'instance_globals_l','luacore',ptr(m,9));new DataView(m.HEAPU8.buffer).setInt32(global(m,'nhcb_counts')+4,1,true);});action('makelevel');assert.match(ref.UTF8ToString(Number(ref._probe_trace())),/lua_getglobal\(luastates\+0,nh_callback_run\)/);
+for(const group of[L.tut_themes,L.most_themes,L.all_themes]){reset();setter(m=>{const themes=field(m,'gl','instance_globals_l','luathemes');for(let i=0;i<4;i++)new FixtureDataView(m.HEAPU8.buffer).setBigUint64(themes+i*8,BigInt(ptr(m,9)+i*16),true);});action('free_luathemes',[group]);}
+reset();setter(m=>{set(m,global(m,'gl'),'instance_globals_l','luacore',ptr(m,9));new FixtureDataView(m.HEAPU8.buffer).setInt32(global(m,'nhcb_counts')+4,1,true);});action('makelevel');assert.match(ref.UTF8ToString(Number(ref._probe_trace())),/lua_getglobal\(luastates\+0,nh_callback_run\)/);
 
 
 // Wide native long fields participate in original age arithmetic and raw output.

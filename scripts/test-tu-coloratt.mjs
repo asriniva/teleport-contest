@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('coloratt', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/coloratt-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/coloratt-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('coloratt',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.coloratt,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
@@ -58,4 +60,4 @@ for(const stage of [1,2,3,4]){reset();call('option',30,stage);call('option',31,s
 assert.deepEqual(table(modules[0]),initial);assert.deepEqual(table(modules[1]),initial);
 // One runtime must initialize independent native catalogues and staticbuffers.
 reset();call('option',3,L.CLR_RED);call('option',4,L.ATR_BOLD);act(1);act(11,L.CLR_RED,0,0,0,'primary');const before=snapshot(modules[1]),other=await hybridFactory({nethackPorted:runtime});assert.deepEqual(table(other),initial);other._probe_reset();assert.equal(other._probe_action(15,0,0,0,0,0n),0n);other._probe_option(3,L.CLR_BLUE);other._probe_action(1,0,0,0,0,0n);assert.equal(text(other,other._probe_output()),'blue&none');assert.deepEqual(snapshot(modules[1]),before);check();
-reset();console.log(`COLORATT: ${comparisons} ${referenceLabel}/hybrid catalogue, parsing, native-POSIX rules, menus, ownership and RGB comparisons checked.`);
+reset();console.log(`COLORATT: ${comparisons} ${referenceLabel}/pure-JS catalogue, parsing, native-POSIX rules, menus, ownership and RGB comparisons checked.`);

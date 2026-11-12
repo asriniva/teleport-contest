@@ -1,4 +1,9 @@
-import {Int32Array,referenceBackend,referenceLabel,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("dog");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
+import {Int32Array,referenceBackend,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -6,7 +11,7 @@ import {pathToFileURL} from 'node:url';
 import {callDog} from '../js/nethack/bindings/dog.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const author=process.env.TELEPORT_DOG_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url);
-const referenceFactory=(await import(new URL('dog-reference.mjs',dir))).default,hybridFactory=(await import(new URL('dog-hybrid.mjs',dir))).default;
+const referenceFactory=(await loadFixture("dog",new URL('dog-reference.mjs',dir))).default,hybridFactory=(await loadFixture("dog",new URL('dog-hybrid.mjs',dir))).default;
 const ref=await referenceBackend('dog',referenceFactory)();
 function text(m,p){let e=Number(p);while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(Number(p),e)).toString();}
 const L={size:Number(ref._probe_context_size())};for(let i=0;i<ref._probe_layout_count();i++){const k=text(ref,ref._probe_layout_name(i)),v=ref._probe_layout_value(i);L[k]=['NON_PM'].includes(k)?Number(BigInt.asIntN(64,v)):/^(M1_|M2_|MON_|STRAT_|MIGR_LEFTOVERS$)/.test(k)?BigInt.asUintN(64,v).toString():Number(v);}
@@ -18,7 +23,7 @@ function snapshot(m){const count=m._probe_count(0),indices=[0,1,2,3,...Array.fro
 function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m,stacks[i]));comparisons++;}
 function call(n,...args){const results=modules.map(m=>m['_probe_'+n](...args));assert.deepEqual(results[1],results[0],n+'('+args+')');state();comparisons++;return results[0];}
 const reset=(seed=42)=>call('reset',seed),act=(op,a=0,b=0,c=0n)=>call('action',op,a,b,BigInt(c)),mon=(i,k,v)=>call('mon',i,k,BigInt(v)),hero=(k,v)=>call('hero',k,BigInt(v)),edog=(i,k,v)=>call('edog',i,k,BigInt(v));
-function rolls(values){modules.forEach(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});state();}
+function rolls(values){modules.forEach(m=>{new FixtureInt32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});state();}
 // All21 original function entries, actual extension allocation/reuse/free and full padding.
 reset();act(0);act(0);act(2,0,1);act(2,0,0);act(1);act(1);act(7);act(13);
 for(const pm of [L.PM_DOG,L.PM_HUMAN,L.PM_ANGEL])for(const all of [0,1,128,255]){reset();mon(0,0,pm);act(0);mon(0,1,-3);edog(0,0,0);edog(0,4,-1);act(2,0,all);}
@@ -60,4 +65,4 @@ reset();call('option',29,1);call('object',0,L.FIGURINE,L.PM_DOG,1,0);const befor
 reset();const other=await hybridFactory({nethackPorted:{dog:(s,n,...args)=>callDog(s,L,n,...args)}});other._probe_reset(42);const otherStack=other._probe_stack();
 assert.equal(other._probe_count(7),-1);call('option',1,1);act(10,0,2);assert.equal(other._probe_count(7),-1);
 other._probe_option(1,1);other._probe_action(10,1,2,0n);assert.equal(other._probe_count(7),1);assert.equal(modules[1]._probe_count(7),0);reset();assert.equal(other._probe_count(7),1);assertStackRestored(other,otherStack);comparisons+=6;
-console.log('DOG '+comparisons+' comparisons passed ('+referenceLabel+' vs JavaScript).');
+console.log('DOG '+comparisons+' comparisons passed ('+fixtureReferenceLabel+' vs JavaScript).');

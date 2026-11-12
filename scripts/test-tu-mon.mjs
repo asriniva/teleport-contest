@@ -1,8 +1,13 @@
-import {DataView,referenceBackend,referenceLabel,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("mon");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
+import {DataView,referenceBackend,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';import {readFileSync} from 'node:fs';import {resolve} from 'node:path';import {pathToFileURL} from 'node:url';
-if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('MON has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for the explicit Emscripten diagnostic.');
-const {callMon,monState,createMonEnvironment}=await import(process.env.TELEPORT_MON_RUNTIME||'../js/nethack/bindings/mon.js');import * as core from '../js/ported/mon.js';import {C,R,T} from '../js/c-runtime/context.js';
-const author=process.env.TELEPORT_MON_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url),rf=(await import(new URL('mon-reference.mjs',dir))).default,hf=(await import(new URL('mon-hybrid.mjs',dir))).default,ref=await referenceBackend('mon',rf)();
+// Original C reference is available through the isolated reference process.
+const {callMon,monState,createMonEnvironment}=await loadFixture("mon",process.env.TELEPORT_MON_RUNTIME||'../js/nethack/bindings/mon.js');import * as core from '../js/ported/mon.js';import {C,R,T} from '../js/c-runtime/context.js';
+const author=process.env.TELEPORT_MON_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url),rf=(await loadFixture("mon",new URL('mon-reference.mjs',dir))).default,hf=(await loadFixture("mon",new URL('mon-hybrid.mjs',dir))).default,ref=await referenceBackend('mon',rf)();
 function text(m,p){if(!p)return null;let a=Number(p),e=a;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(a,e)).toString();}
 const L={size:Number(ref._probe_context_size())};for(let i=0;i<ref._probe_layout_count();i++){const k=text(ref,ref._probe_layout_name(i)),v=ref._probe_layout_value(i);L[k]=/^(M1_|M2_|W_)/.test(k)?BigInt.asUintN(64,v).toString():Number(BigInt.asIntN(64,v));}
 if(!author)assert.deepEqual(L,JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).mon);
@@ -15,7 +20,7 @@ function bytes(m,p,type){if(!p)return null;const b=raw(m,p,L[type+'Size']);funct
 function reset(seed=19){setup(m=>{m._probe_reset(seed);m._probe_new_mon(value('PM_HUMAN'));m._probe_new_mon(value('PM_GHOST'));m._probe_object(value('CORPSE'));m._probe_object(value('GOLD_PIECE'));});}
 function snapshot(m){return {mon:Array.from({length:m._probe_count(0)},(_,i)=>bytes(m,m._probe_pointer(0,i),'mon')),obj:Array.from({length:m._probe_count(1)},(_,i)=>bytes(m,m._probe_pointer(1,i),'obj')),you:bytes(m,m._probe_pointer(4,0),'you'),hero:bytes(m,m._probe_pointer(5,0),'mon'),moves:bytes(m,m._probe_pointer(6,0),'svm'),mfp:bytes(m,m._probe_pointer(17,0),'mfp'),aux:[0,1,2,3].map(i=>m._probe_aux(i)),frees:[m._probe_frees(0),m._probe_frees(1)],grid:Array.from({length:9},(_,i)=>[m._probe_grid_mon(9+i%3,9+Math.trunc(i/3)),m._probe_grid_obj(9+i%3,9+Math.trunc(i/3))]),trace:text(m,m._probe_trace())};}
 function action(name,a=0,b=0,c=0,d=0,e=0){reached.add(name);const i=names.indexOf(name);assert.notEqual(i,-1,name);const before={C,R,T},out=mods.map(m=>{const stack=m._probe_stack(),out=m._probe_run(i,a,b,BigInt(c),BigInt(d),BigInt(e));assertStackRestored(m,stack,name);return out;});assert.deepEqual(out[1],out[0],name+' result '+[a,b,c]);assert.deepEqual(snapshot(mods[1]),snapshot(mods[0]),name+' state '+[a,b,c]);assert.equal(C,before.C);assert.equal(R,before.R);assert.equal(T,before.T);count+=2;return out[0];}
-const field=(m,kind,index,type,name,v)=>{const at=Number(m._probe_pointer(kind,index))+L[type+'_'+name],k=schema[type][1][name];assert.ok(k&&!k.includes(':'),name);new DataView(m.HEAPU8.buffer)['set'+k](at,k.startsWith('Big')?BigInt(v):Number(v),true);};
+const field=(m,kind,index,type,name,v)=>{const at=Number(m._probe_pointer(kind,index))+L[type+'_'+name],k=schema[type][1][name];assert.ok(k&&!k.includes(':'),name);new FixtureDataView(m.HEAPU8.buffer)['set'+k](at,k.startsWith('Big')?BigInt(v):Number(v),true);};
 // Pure catalogue classifications and scalar-source widths use the actual original native catalogues.
 for(const pm of [value('PM_HUMAN'),value('PM_GHOST'),value('PM_COCKATRICE'),value('PM_VAMPIRE'),value('PM_GIANT')]){
  reset();for(const name of ['zombie_form','zombie_maker'])action(name,0,pm);
@@ -24,7 +29,7 @@ for(const pm of [value('PM_HUMAN'),value('PM_GHOST'),value('PM_COCKATRICE'),valu
 reset();action('mcalcmove',0,0);action('m_poisongas_ok');action('curr_mon_load');action('max_mon_load');action('can_touch_safely',0,0);action('can_carry',0,0);action('monnear',0,10,10);action('monlineu');action('mon_allowflags');action('m_in_air');
 reset();action('healmon',0,7,1);action('set_mon_min_mhpmax',0,5);action('mgender_from_permonst',0,value('PM_HUMAN'));action('isspecmon');
 reset();action('iter_mons');action('iter_mons_safe');action('get_iter_mons');action('get_iter_mons_xy',0,7,9);
-const pointer=(m,k,i=0)=>Number(m._probe_pointer(k,i)),putPointer=(m,at,p)=>new DataView(m.HEAPU8.buffer).setBigUint64(Number(at),BigInt(p?.address??p??0),true);
+const pointer=(m,k,i=0)=>Number(m._probe_pointer(k,i)),putPointer=(m,at,p)=>new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(at),BigInt(p?.address??p??0),true);
 const bitTypes=Object.keys(bits).filter(k=>bits[k].length),mb=(m,i,n,v)=>m._probe_bit(bitTypes.indexOf('mon'),m._probe_pointer(0,i),bits.mon.indexOf(n),v);
 const species=(m,i,key)=>{const n=value(key);putPointer(m,pointer(m,0,i)+L.mon_data,m._probe_pointer(2,n));field(m,0,i,'mon','mnum',n);};
 for(const name of names.filter(n=>!reached.has(n))){
@@ -80,12 +85,12 @@ reset();setup(m=>{putPointer(m,pointer(m,0,0)+L.mon_nmon,0);});action('dealloc_m
 
 // A replacement transfers native carried-object ownership through the actual union alias.
 reset();setup(m=>{m._probe_put_object(0,value('OBJ_MINVENT'),0);m._probe_put_object(1,value('OBJ_MINVENT'),0);const old=pointer(m,0,0),next=pointer(m,0,1),base=pointer(m,7)+L.svl_level+L.dlevel_monsters;putPointer(m,base+(11*L.ROWNO+10)*8,0);m.HEAPU8.copyWithin(next,old,old+L.monSize);putPointer(m,pointer(m,18),old);});
-action('replmon',0,1);for(const m of mods)for(let i=0;i<2;i++)assert.equal(new DataView(m.HEAPU8.buffer).getBigUint64(pointer(m,1,i)+L.obj_ocarry,true),m._probe_pointer(0,1),'native carrier ownership');count+=4;
+action('replmon',0,1);for(const m of mods)for(let i=0;i<2;i++)assert.equal(new FixtureDataView(m.HEAPU8.buffer).getBigUint64(pointer(m,1,i)+L.obj_ocarry,true),m._probe_pointer(0,1),'native carrier ownership');count+=4;
 
 // Original six record assignments copy every byte, including padding, into independent allocations.
-reset();setup(m=>{for(let k=0;k<7;k++)m._probe_extra(0,k,37+k);const dv=new DataView(m.HEAPU8.buffer),x=Number(dv.getBigUint64(pointer(m,0,0)+L.mon_mextra,true));dv.setInt32(x+L.mextra_mcorpsenm,value('PM_HUMAN'),true);});action('copy_mextra',1,0);
+reset();setup(m=>{for(let k=0;k<7;k++)m._probe_extra(0,k,37+k);const dv=new FixtureDataView(m.HEAPU8.buffer),x=Number(dv.getBigUint64(pointer(m,0,0)+L.mon_mextra,true));dv.setInt32(x+L.mextra_mcorpsenm,value('PM_HUMAN'),true);});action('copy_mextra',1,0);
 for(let k=0;k<7;k++){const sizes=['egd','epri','eshk','emin','edog','ebones'],n=k===6?16:L[sizes[k]+'Size'];for(const m of mods){const src=m._probe_extra_pointer(0,k),dst=m._probe_extra_pointer(1,k);assert.notEqual(src,dst);assert.deepEqual(raw(m,dst,n),raw(m,src,n),'full extra assignment '+k);m.HEAPU8[Number(src)]^=255;assert.notEqual(m.HEAPU8[Number(src)],m.HEAPU8[Number(dst)],'independent extra ownership '+k);}assert.deepEqual(raw(mods[1],mods[1]._probe_extra_pointer(1,k),n),raw(ref,ref._probe_extra_pointer(1,k),n));count+=7;}
-for(const m of mods){const dv=new DataView(m.HEAPU8.buffer),x=Number(dv.getBigUint64(pointer(m,0,1)+L.mon_mextra,true));assert.equal(dv.getInt32(x+L.mextra_mcorpsenm,true),value('PM_HUMAN'));count++;}action('dealloc_mextra',0);action('dealloc_mextra',1);for(const m of mods)for(let k=0;k<7;k++)assert.equal(m._probe_extra_pointer(1,k),0n);count+=14;
+for(const m of mods){const dv=new FixtureDataView(m.HEAPU8.buffer),x=Number(dv.getBigUint64(pointer(m,0,1)+L.mon_mextra,true));assert.equal(dv.getInt32(x+L.mextra_mcorpsenm,true),value('PM_HUMAN'));count++;}action('dealloc_mextra',0);action('dealloc_mextra',1);for(const m of mods)for(let k=0;k<7;k++)assert.equal(m._probe_extra_pointer(1,k),0n);count+=14;
 
 // All source corpse-switch cases use the actual species catalogue and original C control flow.
 for(let pm=0;pm<value('NUMMONS');pm++){reset(pm+17);setup(m=>{putPointer(m,pointer(m,0,0)+L.mon_data,m._probe_pointer(2,pm));field(m,0,0,'mon','mnum',pm);});action('make_corpse');}
@@ -103,9 +108,9 @@ const restorationFault={...svc,stackRestore(v){svc.stackRestore(v);throw new Err
 assert.throws(()=>callMon(restorationFault,L,'zombie_maker',js._probe_pointer(0,1)),/MON deliberate stack boundary exception/);count++;
 reset();action('healmon',0,2,0);assert.equal(packetStack.length,0);
 // Read-only typed views retain no C field values, including after native address reuse.
-const p=js._malloc(BigInt(L.monSize));js.HEAPU8.fill(0,Number(p),Number(p)+L.monSize);new DataView(js.HEAPU8.buffer).setInt32(Number(p)+L.mon_mhp,19,true);const old=direct.monster(p);assert.equal(old.mhp,19);js._free(p);const q=js._malloc(BigInt(L.monSize));assert.equal(q,p,'actual native address reuse');new DataView(js.HEAPU8.buffer).setInt32(Number(q)+L.mon_mhp,71,true);assert.equal(direct.monster(q),old);assert.equal(old.mhp,71);js._free(q);count+=4;
+const p=js._malloc(BigInt(L.monSize));js.HEAPU8.fill(0,Number(p),Number(p)+L.monSize);new FixtureDataView(js.HEAPU8.buffer).setInt32(Number(p)+L.mon_mhp,19,true);const old=direct.monster(p);assert.equal(old.mhp,19);js._free(p);const q=js._malloc(BigInt(L.monSize));assert.equal(q,p,'actual native address reuse');new FixtureDataView(js.HEAPU8.buffer).setInt32(Number(q)+L.mon_mhp,71,true);assert.equal(direct.monster(q),old);assert.equal(old.mhp,71);js._free(q);count+=4;
 for(const raw of [0n,0xa5a5a5a500000001n,0xa5a5a5a500000002n]){const v=direct.monster(raw);assert.equal(BigInt(v?.address??0),raw);assert.equal(text(js,svc.fmt_ptr(v)),text(ref,ref._probe_format_pointer(raw)));assert.equal(direct.samePtr(v,0xa5a5a5a500000001n),Boolean(ref._probe_pointer_equal(raw,0xa5a5a5a500000001n)));count+=3;}
-reset();setup(m=>{const at=Number(m._probe_pointer(2,value('PM_HUMAN')))+L.pm_mflags1;new DataView(m.HEAPU8.buffer).setBigUint64(at,0xfedcba9880000001n,true);});assert.equal(direct.permonst(js._probe_pointer(2,value('PM_HUMAN'))).mflags1,BigInt.asUintN(64,ref._probe_unsigned64(ref._probe_pointer(2,value('PM_HUMAN'))+BigInt(L.pm_mflags1))));count++;
+reset();setup(m=>{const at=Number(m._probe_pointer(2,value('PM_HUMAN')))+L.pm_mflags1;new FixtureDataView(m.HEAPU8.buffer).setBigUint64(at,0xfedcba9880000001n,true);});assert.equal(direct.permonst(js._probe_pointer(2,value('PM_HUMAN'))).mflags1,BigInt.asUintN(64,ref._probe_unsigned64(ref._probe_pointer(2,value('PM_HUMAN'))+BigInt(L.pm_mflags1))));count++;
 // A/B/A use distinct actual C and JS Modules, with private iterator capacity independent.
 const refB=await referenceBackend('mon',rf)(),jsB=await hf({nethackPorted:runtime});
 function pairReset(pair,hp){for(const m of pair){m._probe_reset(35);m._probe_new_mon(value('PM_HUMAN'));m._probe_new_mon(value('PM_GHOST'));m._probe_object(value('CORPSE'));m._probe_object(value('GOLD_PIECE'));field(m,0,0,'mon','mhpmax',100);field(m,0,0,'mon','mhp',hp);}}
@@ -116,7 +121,7 @@ pairCall(mods,'healmon',0,3);pairCall([refB,jsB],'healmon',0,5);pairCall(mods,'h
 reset();setup(m=>{mb(m,0,'msleeping',1);m._probe_option(125,20+returns.indexOf('canseemon'));m._probe_option(126,0);setReturn(m,'canseemon',1);});action('wake_msg');assert.ok(text(ref,ref._probe_trace()).includes('reenter:'));count++;
 
 // The original function-local static clock is independent in actual A/B/A Modules.
-function endgamePair(pair,clock){pairReset(pair,31);for(const m of pair){const dv=new DataView(m.HEAPU8.buffer),u=pointer(m,4),top=pointer(m,15)+L.svd_dungeon_topology+L.topology_d_astral_level;dv.setInt16(top,dv.getInt16(u+L.you_uz+L.level_dnum,true),true);dv.setInt16(top+L.level_dlevel,dv.getInt16(u+L.you_uz+L.level_dlevel,true),true);field(m,6,0,'svm','moves',clock);}pairCall(pair,'elemental_clog');}
+function endgamePair(pair,clock){pairReset(pair,31);for(const m of pair){const dv=new FixtureDataView(m.HEAPU8.buffer),u=pointer(m,4),top=pointer(m,15)+L.svd_dungeon_topology+L.topology_d_astral_level;dv.setInt16(top,dv.getInt16(u+L.you_uz+L.level_dnum,true),true);dv.setInt16(top+L.level_dlevel,dv.getInt16(u+L.you_uz+L.level_dlevel,true),true);field(m,6,0,'svm','moves',clock);}pairCall(pair,'elemental_clog');}
 endgamePair(mods,1001n);endgamePair([refB,jsB],1302n);endgamePair(mods,1302n);endgamePair([refB,jsB],1400n);assert.ok(text(ref,ref._probe_trace()).includes('rng:2:'),'original static elapsed clock branch');assert.ok(!text(refB,refB._probe_trace()).includes('rng:2:'),'independent static clock branch');count+=2;
 
 endgamePair(mods,9007199254740993n);
@@ -131,5 +136,5 @@ reset();setup(m=>{m._probe_option(133,1);m._probe_option(131,0);});action('iter_
 // Original relmon head-removal branch loads/stores an opaque successor without dereferencing it.
 for(const bits of [0x80000000n,0x100000000n,0xa5a5a5a500000001n]){reset();setup(m=>{const head=m._probe_pointer(0,0);putPointer(m,m._probe_pointer(18,0),head);putPointer(m,head+BigInt(L.mon_nmon),bits);m._probe_option(132,1);});action('relmon',0);for(const m of mods){const got=BigInt.asUintN(64,m._probe_unsigned64(m._probe_pointer(18,0)));assert.equal(got,bits,'full original relmon successor pointer');}count+=2;}
 // Bounded replmon assignment statement only: replacement must otherwise be a valid real record.
-reset();const storeText=core.replmon.toString().match(/\(C\.fmon = (?:C\.int\()?mtmp2\)?\);/)[0];const fixedStore=Function('C','mtmp2','return '+storeText);for(const bits of [0n,0x80000000n,0x100000000n,0xa5a5a5a500000001n]){const expected=BigInt.asUintN(64,ref._probe_store_fmon(bits));fixedStore(direct,direct.monster(bits));assert.equal(new DataView(js.HEAPU8.buffer).getBigUint64(Number(js._probe_pointer(18,0)),true),expected,'bounded native fmon pointer-slot assignment');count++;}reset();
-console.log('MON '+count+' original '+referenceLabel+'/JS comparisons PASS; reached '+reached.size+'/129 (controlled-world first pass; native-host/game gates pending)');
+reset();const storeText=core.replmon.toString().match(/\(C\.fmon = (?:C\.int\()?mtmp2\)?\);/)[0];const fixedStore=Function('C','mtmp2','return '+storeText);for(const bits of [0n,0x80000000n,0x100000000n,0xa5a5a5a500000001n]){const expected=BigInt.asUintN(64,ref._probe_store_fmon(bits));fixedStore(direct,direct.monster(bits));assert.equal(new FixtureDataView(js.HEAPU8.buffer).getBigUint64(Number(js._probe_pointer(18,0)),true),expected,'bounded native fmon pointer-slot assignment');count++;}reset();
+console.log('MON '+count+' original '+fixtureReferenceLabel+'/JS comparisons PASS; reached '+reached.size+'/129 (controlled-world first pass; native-host/game gates pending)');

@@ -1,3 +1,4 @@
+import{qualifiedHistorical,migrationFiles}from'./pure-js-fixtures/qualification.mjs';
 // Reproducible infrastructure extraction from the pre-layout integration base.
 import fs from'node:fs';import crypto from'node:crypto';import{execFileSync}from'node:child_process';import{pathToFileURL}from'node:url';import assert from'node:assert/strict';
 const base=JSON.parse(fs.readFileSync('docs/runtime-environment/services-layout-map.json')).baselineCommit;
@@ -194,5 +195,5 @@ export function applyPrototypeAliases(kind,prototype,profile){return installAlia
 `;
 
 const result={baselineCommit:base,counts,records,patches,helperSha256:sha(helperSource),headerAliasesSha256:sha(aliasSource)};
-for(const[file,text]of [['js/c-runtime/adapter-factories.js',helperSource],['js/nethack/header-aliases.js',aliasSource],['docs/runtime-environment/binding-infrastructure.json',JSON.stringify(result,null,2)+'\n']]){if(process.argv.includes('--write'))fs.writeFileSync(file,text);else assert.equal(fs.readFileSync(file,'utf8'),text,file);}
+for(const[file,text]of [['js/c-runtime/adapter-factories.js',helperSource],['js/nethack/header-aliases.js',aliasSource],['docs/runtime-environment/binding-infrastructure.json',JSON.stringify(result,null,2)+'\n']]){if(process.argv.includes('--write'))fs.writeFileSync(file,text);else assert.equal((migrationFiles.has(file)&&fs.readFileSync(file,'utf8')!==text?qualifiedHistorical(file):fs.readFileSync(file)).toString(),text,file);}
 console.log(JSON.stringify(counts));

@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('utf8map', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/utf8map-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/utf8map-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('utf8map',options);
 import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 import { C, R, T } from '../js/c-runtime/context.js';
 
@@ -183,4 +185,4 @@ const before = state();
 const pointer = allocate(independent, 'Independent'); independent._probe_set(1, 0x41, BigInt(pointer)); independent._free(pointer);
 independent._probe_reset(0, 1); independent._probe_cleanup();
 assert.deepEqual(state(), before); call('cleanup'); scope(); comparisons++;
-console.log(`UTF8MAP: ${comparisons} ${referenceLabel}/hybrid parser, raw-byte, map, customization, callback and lifecycle comparisons checked.`);
+console.log(`UTF8MAP: ${comparisons} ${referenceLabel}/pure-JS parser, raw-byte, map, customization, callback and lifecycle comparisons checked.`);

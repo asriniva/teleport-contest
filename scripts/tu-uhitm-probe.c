@@ -327,7 +327,7 @@ boolean noattacks(struct permonst * a0){logmsg("noattacks:%d;",id((const void*)a
 void nomul(int a0){logmsg("nomul:%d;",(int)a0);}
 void obfree(struct obj * a0,struct obj * a1){logmsg("obfree:%d,%d;",id((const void*)a0),id((const void*)a1));}
 void obj_extract_self(struct obj * a0){logmsg("obj_extract_self:%d;",id((const void*)a0));}
-boolean obj_is_pname(struct obj * a0){logmsg("obj_is_pname:%d;",id((const void*)a0));return opts[3];}
+boolean obj_is_pname(struct obj * a0){logmsg("obj_is_pname:%d;",id((const void*)a0));return opts[3] && has_oname(a0);}
 boolean obj_resists(struct obj * a0,int a1,int a2){logmsg("obj_resists:%d,%d,%d;",id((const void*)a0),(int)a1,(int)a2);return opts[3];}
 void obj_stop_timers(struct obj * a0){logmsg("obj_stop_timers:%d;",id((const void*)a0));}
 boolean object_from_map(int a0,coordxy a1,coordxy a2,struct obj ** a3){logmsg("object_from_map:%d,%d,%d,%d;",(int)a0,(int)a1,(int)a2,id((const void*)a3));return opts[3];}

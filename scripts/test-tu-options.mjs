@@ -1,13 +1,16 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {referenceBackend,assertStackRestored,memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {callOptions} from '../js/nethack/bindings/options.js';
 import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
 import {createRegexAbi} from '../js/c-runtime/regex-abi.js';
-if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('OPTIONS has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for explicit Emscripten diagnostics.');
+// Original C reference is available through the isolated reference process.
 const own=process.env.TELEPORT_OPTIONS_AUTHOR==='1',base=own?'../.cache/options-author/':'../.cache/tu-probes/';
-const referenceFactory=(await import(base+(own?'reference.mjs':'options-reference.mjs'))).default;
-const hybridFactory=(await import(base+(own?'hybrid.mjs':'options-hybrid.mjs'))).default;
+const referenceFactory=(await loadFixture("options",base+(own?'reference.mjs':'options-reference.mjs'))).default;
+const hybridFactory=(await loadFixture("options",base+(own?'hybrid.mjs':'options-hybrid.mjs'))).default;
 const S=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/options-schema.json',import.meta.url)));
 const provide=createRegexAbi(),servicesByModule=new Map();
 const ported={callOptions(s,n,...a){servicesByModule.set(s.moduleKey,s);return callOptions(s,undefined,n,...a);},nativeRegex:(s,n,...a)=>provide(s)[n](...a)};
@@ -27,7 +30,7 @@ const tokenMaps=modules.map(m=>new Map(S.functionAddresses.map((n,i)=>[bits(m._p
 function input(i,s){for(const m of modules){m.HEAPU8.fill(0,Number(buf(m,i)),Number(buf(m,i))+8192);m.HEAPU8.set(Buffer.from(s+'\0','latin1'),Number(buf(m,i)));}}
 function token(m,p){return tokenMaps[modules.indexOf(m)]?.get(bits(p))??(p?'foreign-function':null);}
 function size(t){if(t==='menu_cmd_t'||t==='struct menu_cmd_t')return L['size:menu_cmd_t'];const a=t.match(/^(.*?)\[(\d+)\](.*)$/);if(a)return +a[2]*size(a[1]+a[3]);if(t.includes('*'))return 8;if(t.startsWith('enum '))return 4;return ({char:1,'signed char':1,'unsigned char':1,short:2,'unsigned short':2,int:4,'unsigned int':4,long:8,'unsigned long':8,'long long':8,'unsigned long long':8})[t]??L['size:'+t];}
-function scalar(m,p,t){const d=new DataView(m.HEAPU8.buffer);if(t.includes('*'))return d.getBigUint64(p,true);const n=size(t);return n===8?d.getBigUint64(p,true):BigInt(d['getUint'+(8*n)](p,true));}
+function scalar(m,p,t){const d=new FixtureDataView(m.HEAPU8.buffer);if(t.includes('*'))return d.getBigUint64(p,true);const n=size(t);return n===8?d.getBigUint64(p,true):BigInt(d['getUint'+(8*n)](p,true));}
 const skipGlobals=new Set(['cg','nul_glyphinfo','aligns','genders','races','roles','vanqorders','known_handling','def_warnsyms','def_oc_syms','hexdd','disclosure_options']);
 function projection(m,staticsOnly=false){
  const seen=new Map();
@@ -127,7 +130,7 @@ for(const mapping of ['"<gold"','">junk" # comment','"plain"','bad','"["','"x" t
 assert.equal(act('count_apes'),3n);act('all_options_apes',[m=>m._probe_stringbuf()]);assert.equal(text(modules[1],modules[1]._probe_stringbuf_text()),text(reference,reference._probe_stringbuf_text()));comparisons++;
 act('remove_autopickup_exception',[m=>field(m,'instance_globals_a',global(m,'ga'),'apelist')]);assert.equal(act('count_apes'),2n);const apeFreeBefore=freed(reference);act('free_autopickup_exceptions');assert.equal(freed(reference)-apeFreeBefore,6,'both native-owned autopickup nodes completely freed');comparisons++;assert.equal(act('count_apes'),0n);
 // The char** result is real native storage and can point inside the input.
-for(const [name,value,neg]of [['role','Wizard',0],['race','elf',0],['gender','female',0],['alignment','chaotic',0],['role','!cav !mon',0],['role','sam !val',0],['role','tour',1]]){reset();input(0,name);input(1,name+':'+value);for(const m of modules)new DataView(m.HEAPU8.buffer).setBigUint64(Number(buf(m,2)),0n,true);act('parse_role_opt',[rowIndex(name),neg,m=>buf(m,0),m=>buf(m,1),m=>buf(m,2)]);const out=modules.map(m=>nullable(m,new DataView(m.HEAPU8.buffer).getBigUint64(Number(buf(m,2)),true)));assert.equal(out[1],out[0]);comparisons++;act('get_cnf_role_opt',[rowIndex(name)]);act('freeroleoptvals');}
+for(const [name,value,neg]of [['role','Wizard',0],['race','elf',0],['gender','female',0],['alignment','chaotic',0],['role','!cav !mon',0],['role','sam !val',0],['role','tour',1]]){reset();input(0,name);input(1,name+':'+value);for(const m of modules)new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(buf(m,2)),0n,true);act('parse_role_opt',[rowIndex(name),neg,m=>buf(m,0),m=>buf(m,1),m=>buf(m,2)]);const out=modules.map(m=>nullable(m,new FixtureDataView(m.HEAPU8.buffer).getBigUint64(Number(buf(m,2)),true)));assert.equal(out[1],out[0]);comparisons++;act('get_cnf_role_opt',[rowIndex(name)]);act('freeroleoptvals');}
 reset();act('can_set_perm_invent');act('option_help');
 for(const m of modules)for(const n of ['assure_syscf_file','read_config_file'])m._probe_return(Object.keys(S.dependencies).indexOf(n),1n);
 act('initoptions_init');act('initoptions_finish');assert.match(text(reference,reference._probe_catalogue()),/^1:1:fruit:human:Archeologist$/);comparisons++;
@@ -152,7 +155,7 @@ const outer=Object.create(services),inner=Object.create(services);outer.strlen=(
 input(0,'autopickup');input(1,'autopickup');assert.equal(callOptions(outer,undefined,'match_optname',Number(buf(hm,0)),Number(buf(hm,1)),3,0),1);assert.ok(outerCalls>0&&innerCalls>0);comparisons++;
 const throwing=Object.create(services);throwing.strlen=()=>12345n;throwing.strncmpi=()=>{throw Error('OPTIONS facade witness');};const sp=hm._probe_stack();assert.throws(()=>callOptions(throwing,undefined,'match_optname',Number(buf(hm,0)),Number(buf(hm,1)),3,0),/facade witness/);assert.equal(hm._probe_stack(),sp);assert.equal(env.strlen(Number(buf(hm,0))),10n,'throw restores plain facade');assert.equal(callOptions(services,undefined,'match_optname',Number(buf(hm,0)),Number(buf(hm,1)),3,0),1);comparisons++;
 // A second actual JS module shares the dispatcher but owns independent backing.
-const primarySnapshot=projection(hm),other=await hybridFactory({nethackPorted:ported});other.HEAPU8.set(Buffer.from('foo\0'),Number(other._probe_buffer(0)));other.HEAPU8.set(Buffer.from('foo\0'),Number(other._probe_buffer(1)));assert.equal(other._probe_call(S.names.indexOf('match_optname'),other._probe_buffer(0),other._probe_buffer(1),3n,0n,0n,0n),1n);other._probe_reset();other.HEAPU8.set(Buffer.from('autopickup\0'),Number(other._probe_buffer(0)));other._probe_call(S.names.indexOf('parseoptions'),other._probe_buffer(0),1n,1n,0n,0n,0n);assert.equal(new DataView(other.HEAPU8.buffer).getInt8(address(other,'flag',global(other,'flags'),'pickup')),1);assert.deepEqual(projection(hm),primarySnapshot);comparisons++;
+const primarySnapshot=projection(hm),other=await hybridFactory({nethackPorted:ported});other.HEAPU8.set(Buffer.from('foo\0'),Number(other._probe_buffer(0)));other.HEAPU8.set(Buffer.from('foo\0'),Number(other._probe_buffer(1)));assert.equal(other._probe_call(S.names.indexOf('match_optname'),other._probe_buffer(0),other._probe_buffer(1),3n,0n,0n,0n),1n);other._probe_reset();other.HEAPU8.set(Buffer.from('autopickup\0'),Number(other._probe_buffer(0)));other._probe_call(S.names.indexOf('parseoptions'),other._probe_buffer(0),1n,1n,0n,0n,0n);assert.equal(new FixtureDataView(other.HEAPU8.buffer).getInt8(address(other,'flag',global(other,'flags'),'pickup')),1);assert.deepEqual(projection(hm),primarySnapshot);comparisons++;
 assert.equal(exercised.size,224);console.log('OPTIONS private',comparisons,'exact comparisons; all224 functions, native callbacks/retries/growth and shared-dispatcher module isolation.');
 // A negative menu item ID is not a negative selection count.
 reset();queueMenus([-1,-1]);modules.forEach(m=>m._probe_option(254,1n));act('doset_simple_menu');assert.equal((text(reference,reference._probe_trace()).match(/select:/g)||[]).length,2);assert.equal(field(reference,'instance_globals_s',global(reference,'gs'),'simple_options_help'),1n);comparisons++;
@@ -187,7 +190,7 @@ console.log('OPTIONS final checked',comparisons,'exact comparisons; all224 confi
 reset();input(0,'autopickup');act('get_option_value',[m=>buf(m,0),0]);const optionBuffers=modules.map(m=>m._probe_result());input(0,'fruit');act('get_option_value',[m=>buf(m,0),0]);modules.forEach((m,i)=>assert.equal(m._probe_result(),optionBuffers[i],'same original retbuf across option handlers'));comparisons++;
 input(0,'foo:bar');act('string_for_opt',[m=>buf(m,0),0]);modules.forEach(m=>assert.equal(m._probe_result(),buf(m,0)+4n,'interior pointer is not a duplicated string'));comparisons++;
 input(0,'foo');act('string_for_opt',[m=>buf(m,0),0]);modules.forEach(m=>assert.equal(m._probe_result(),m._probe_data(st('empty_optstr')),'empty result is the original non-NULL static object'));comparisons++;
-for(const m of modules){const base=address(m,'instance_flags',global(m,'iflags'),'wcolors');for(const[name,member]of [['fgp','fg'],['bgp','bg']])for(let i=0;i<4;i++){const p=new DataView(m.HEAPU8.buffer).getBigUint64(Number(m._probe_data(st(name)))+i*8,true);assert.equal(p,BigInt(address(m,'windowcolors_struct',base+L[['wcolor_menu','wcolor_message','wcolor_status','wcolor_text'][i]]*L['size:struct windowcolors_struct'],member)),'native '+name+' pointer cell '+i);comparisons++;}}
+for(const m of modules){const base=address(m,'instance_flags',global(m,'iflags'),'wcolors');for(const[name,member]of [['fgp','fg'],['bgp','bg']])for(let i=0;i<4;i++){const p=new FixtureDataView(m.HEAPU8.buffer).getBigUint64(Number(m._probe_data(st(name)))+i*8,true);assert.equal(p,BigInt(address(m,'windowcolors_struct',base+L[['wcolor_menu','wcolor_message','wcolor_status','wcolor_text'][i]]*L['size:struct windowcolors_struct'],member)),'native '+name+' pointer cell '+i);comparisons++;}}
 console.log('OPTIONS frozen candidate',comparisons,'exact comparisons; 224 functions and original aliases.');
 // The original header's logging-disabled branch calls rnd without attribution.
 reset();modules.forEach(m=>{m._probe_option(240,1n);m._probe_option(247,1n);m._probe_option(248,127n);});input(0,'unlogged-overflow');clear();const unloggedFruit=act('fruitadd',[m=>buf(m,0),0]);assert.ok(unloggedFruit>=1n&&unloggedFruit<=127n);assert.match(text(reference,reference._probe_trace()),/rng:::0:127:/);comparisons++;

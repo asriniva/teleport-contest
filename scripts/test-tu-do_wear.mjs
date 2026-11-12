@@ -1,12 +1,17 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("do_wear");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
-import {referenceBackend,referenceLabel,assertStackRestored,memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
+import {referenceBackend,assertStackRestored,memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {callDoWear,createDoWearEnvironment} from '../js/nethack/bindings/do_wear.js';
 import * as core from '../js/ported/do_wear.js';
 import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_DO_WEAR_AUTHOR==='1';
-const ref=(await import(own?'../.cache/do_wear-author/reference.mjs':'../.cache/tu-probes/do_wear-reference.mjs')).default;
-const hyb=(await import(own?'../.cache/do_wear-author/hybrid.mjs':'../.cache/tu-probes/do_wear-hybrid.mjs')).default;
+const ref=(await loadFixture("do_wear",own?'../.cache/do_wear-author/reference.mjs':'../.cache/tu-probes/do_wear-reference.mjs')).default;
+const hyb=(await loadFixture("do_wear",own?'../.cache/do_wear-author/hybrid.mjs':'../.cache/tu-probes/do_wear-hybrid.mjs')).default;
 const text=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');};
 let reference=await referenceBackend('do_wear',ref)();const measured={};for(let i=0;i<reference._probe_layout_count();i++)measured[text(reference,reference._probe_layout_name(i))]=Number(BigInt.asIntN(64,reference._probe_layout_value(i)));
 const L=own?measured:JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).do_wear;
@@ -114,7 +119,7 @@ reset();item(0,L.HELMET);equip(2,0);hero(19,L.MENU_FULL);option('query_category'
 assert.ok(trace().includes('filter:1;'));assert.ok(state().includes('policyfree:2,2,0;'));
 // Unknown high mask bits survive a normal armor-off operation.
 reset();item(0,L.HELMET);equip(2,0);const high=1n<<63n;field(0,2,high|BigInt(constant('W_ARMH')));act('Helmet_off');
-for(const m of modules){const p=Number(m._probe_pointer(1,0));assert.equal(new DataView(m.HEAPU8.buffer).getBigUint64(p,true),high);}
+for(const m of modules){const p=Number(m._probe_pointer(1,0));assert.equal(new FixtureDataView(m.HEAPU8.buffer).getBigUint64(p,true),high);}
 // A poisoned stack must not leak bytes into the original zero-object dummy.
 reset();item(0,L.RIN_ADORNMENT);equip(7,0);item(1,L.LEATHER_GLOVES);equip(4,1);prop(L.GLIB,0,1);call('poison');act('select_off',0);assert.ok(trace().includes('dummyzero:1;'));
 // Disabled logging leaves the actual RNG call and state behavior intact.
@@ -138,4 +143,4 @@ const other=await hyb({nethackPorted:ported});other._probe_reset(1);other._probe
 assert.equal(other._probe_counter(0,0,0),1);assert.equal(modules[1]._probe_counter(0,0,0),2);assert.deepEqual(snapshot(modules[1]),primary);comparisons++;
 writeFileSync(new URL('../.cache/do_wear-author/entered.json',import.meta.url),JSON.stringify({entered:[...exercised],remaining:names.filter(n=>!exercised.has(n))},null,2));
 assert.deepEqual(names.filter(n=>!exercised.has(n)),[],'all79 original functions entered');
-console.log('DO_WEAR '+referenceLabel+': '+comparisons+' comparisons passed; all79 original functions, live callbacks, ownership, native memory growth and per-Module isolation.');
+console.log('DO_WEAR '+fixtureReferenceLabel+': '+comparisons+' comparisons passed; all79 original functions, live callbacks, ownership, native memory growth and per-Module isolation.');

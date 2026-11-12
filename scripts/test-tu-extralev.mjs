@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('extralev', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/extralev-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/extralev-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('extralev',options);
 import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 import { C, R, T } from '../js/c-runtime/context.js';
 
@@ -144,4 +146,4 @@ call('reset', 123); call('make'); call('ghost');
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
 const beforeIndependent = state(); independent._probe_reset(99); independent._probe_make(); independent._probe_ghost();
 assert.deepEqual(state(), beforeIndependent); scope(); comparisons++;
-console.log(`EXTRALEV: ${comparisons} ${referenceLabel}/hybrid full-grid, room, corridor, recursive-walk, ghost-object and RNG-site comparisons checked.`);
+console.log(`EXTRALEV: ${comparisons} ${referenceLabel}/pure-JS full-grid, room, corridor, recursive-walk, ghost-object and RNG-site comparisons checked.`);

@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('mcastu', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/mcastu-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/mcastu-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('mcastu',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/mcastu.js';
@@ -62,4 +64,4 @@ reset();opt(24,1);att(0,L.AD_FIRE);rng(Array(30).fill(99));act(0,1,1);assert.ok(
 for(let stage=1;stage<=16;stage++){reset();opt(30,stage);opt(31,stage);const before=modules.map(m=>allocationMetric(m));rng(Array(100).fill(1));if(stage===1)act(14);else if(stage===2){prop(L.ANTIMAGIC,0,1);act(17,9);}else if(stage===3)act(23,9,L.MCAST_PSI_BOLT);else if(stage===4)act(6,9);else if(stage===5)act(11,9);else if(stage===6){opt(7,1);act(9);}else if(stage===7)act(10);else if(stage===8)act(12);else if(stage===9)act(22);else if(stage===10||stage===11||stage===12)act(15,9);else if(stage===13)act(16,9);else if(stage===14||stage===15)act(19);else{att(0,L.AD_FIRE);act(3);}assert.ok(trace().includes(`grow:${stage};`));assert.ok(trace().includes('reenter:'));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));}
 reset();opt(0,0);act(14);assert.ok(trace().includes('@;'));
 reset();mon(5,1);act(8);const held=snap(modules[1]),other=await hybridFactory({nethackPorted:runtime});other._probe_reset(8);other._probe_set_monster(5,1n);other._probe_action(8,0,0,0);other._probe_action(13,8,0,0);assert.ok(text(other,other._probe_trace()).includes('clone;'));assert.deepEqual(snap(modules[1]),held);comparisons+=2;check();
-console.log(`MCASTU ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);
+console.log(`MCASTU ${referenceLabel}/pure-JS differential: ${comparisons} comparisons checked`);

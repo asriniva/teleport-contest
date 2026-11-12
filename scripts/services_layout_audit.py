@@ -12,8 +12,13 @@ def read_before(path):
   actual=window_headers_before(ROOT,row['destination'])if row['destination']in WINDOW_HEADERS else monmove_before(ROOT,row['destination'])if row['destination']in MONMOVE else qualified_before(ROOT,row['destination'])if row['destination']in POST_DEFAULT else(ROOT/row['destination']).read_bytes()
   assert actual is not None,'Historically absent relocated source '+relative
   if hashlib.sha256(actual).hexdigest()!=row['afterSha256']:
-   assert row['destination']in ALLOWED,'Relocated input changed '+relative
-   historical_after(ROOT,row['destination'],row['afterSha256'])
+   node=ROOT/'.cache/emsdk/node/24.19.0_64bit/bin/node'
+   program="import {migrationFiles,qualifiedHistorical} from './scripts/pure-js-fixtures/qualification.mjs';const [p,h]=process.argv.slice(1);if(migrationFiles.has(p))qualifiedHistorical(p,h);else process.exit(2);"
+   result=subprocess.run([str(node),'--input-type=module','-e',program,row['destination'],row['afterSha256']],cwd=ROOT,capture_output=True)
+   if result.returncode==2:
+    assert row['destination']in ALLOWED,'Relocated input changed '+relative
+    historical_after(ROOT,row['destination'],row['afterSha256'])
+   else:assert result.returncode==0,result.stderr.decode()
   b=subprocess.check_output(['git','show',d['baselineCommit']+':'+row['file']],cwd=ROOT);assert hashlib.sha256(b).hexdigest()==row['beforeSha256'];return b
  if relative in WINDOW_HEADERS:return window_headers_before(ROOT,relative)
  if relative in MONMOVE:return monmove_before(ROOT,relative)

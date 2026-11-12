@@ -1,6 +1,9 @@
-if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('TERMCAP has no native reference fixture; Emscripten results cannot be labeled native.');
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
+// Original C reference is available through the isolated reference process.
 // Configured original-C versus JS caller policy, separate from game/capture encoding.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -13,7 +16,7 @@ import {createLibraryBindings} from '../js/c-runtime/library-bindings.js';
 import {checkTermcapSource} from '../nethack-c/wasm/tu-fragments/termcap-source-check.mjs';
 const callbackOnly=process.argv.includes('--callback-only');
 const jsDependencies=process.argv.includes('--js-dependencies'),unwrapped=process.argv.includes('--unwrapped')||jsDependencies,prefix=callbackOnly?'termcap-callback-':jsDependencies?'termcap-js-dependencies-':unwrapped?'termcap-unwrapped-':'termcap-';
-const dir=resolve(process.env.TERMCAP_PROBE_DIR??'.cache/termcap-author');
+const dir=resolve(process.env.TERMCAP_PROBE_DIR??'.cache/tu-probes');
 const schema=JSON.parse(await readFile('nethack-c/wasm/tu-fragments/termcap-schema.json','utf8'));
 const helpers='canonical reset clear_trace option override pointer trace error stack last_output_pointer layout_count layout_name layout_value callback_pointer invoke_callback expected_callback constant'.split(' ');
 if(process.argv.includes('--build')){
@@ -26,10 +29,10 @@ if(process.argv.includes('--build')){
  for(const mode of ['reference','hybrid']){const args=[...base,...(mode==='hybrid'?['-DHYBRID_TERMCAP=1','--js-library',resolve('nethack-c/wasm/tu-libraries/termcap.js')]:[]),'-o',resolve(dir,prefix+mode+'.mjs')];const p=spawnSync(resolve('.cache/emsdk/upstream/emscripten/emcc'),args,{encoding:'utf8',maxBuffer:32*1024*1024});await writeFile(resolve(dir,'build-'+mode+'-'+Date.now()+'.log'),JSON.stringify({args,status:p.status})+'\n'+p.stdout+p.stderr);if(p.status!==0)throw Error('TERMCAP '+mode+' compile failed; private raw build log preserved');}
 }
 const wasm=await readFile(resolve(dir,prefix+'hybrid.wasm'));
-const imports=WebAssembly.Module.imports(new WebAssembly.Module(wasm)).filter(v=>v.kind==='function').map(v=>v.name);
+const imports=(await fixtureImports("termcap")).filter(v=>v.kind==='function').map(v=>v.name);
 if(!callbackOnly)for(const f of schema.functions)assert.ok(imports.includes(f.static?'teleport_termcap_test_'+f.name:f.name),'actual JS policy import '+f.name);
 assert.ok(imports.includes('teleport_termcap_callback_tty_decgraphics_termcap_fixup'));
-const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathToFileURL(resolve(dir,prefix+mode+'.mjs')).href)).default));
+const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await loadFixture("termcap",pathToFileURL(resolve(dir,prefix+mode+'.mjs')).href)).default));
 const entry=await readFile('nethack-c/wasm/terminfo/x/xterm-256color');
 const text=(m,p)=>{let at=Number(p),end=at;assert.ok(at>=0&&at<m.HEAPU8.length);while(end<m.HEAPU8.length&&m.HEAPU8[end])end++;assert.ok(end<m.HEAPU8.length,'C NUL terminator');return Buffer.from(m.HEAPU8.subarray(at,end)).toString('latin1');};
 const layout=m=>{const out={};for(let i=0;i<m._probe_layout_count();i++)out[text(m,m._probe_layout_name(i))]=m._probe_layout_value(i);return out;};
@@ -55,7 +58,7 @@ const width=d=>d.t?Number(d.t.slice(1))/8:d.p!==undefined||d.f?8:d.s?Number(L[d.
 // In this guarded configured schema, every opaque root pointer except stdout
 // is one of the original char* capabilities. ttyDisplay has a record target.
 const charPointers=new Set(globals.filter(g=>g.d.p===''&&g.name!=='stdout').map(g=>g.name));
-function state(m){const out=[],dv=new DataView(m.HEAPU8.buffer);
+function state(m){const out=[],dv=new FixtureDataView(m.HEAPU8.buffer);
  const scalar=(d,v,path,ctype)=>{if(d.p!==undefined){const canonical=m._probe_canonical(v);out.push([path,canonical===0xffffffffffffffffn?'foreign:'+((ctype??'').includes('char')||charPointers.has(path)?text(m,v):'opaque'):canonical.toString()]);if((ctype??'').includes('char')||charPointers.has(path))out.push([path+'.text',v?(canonical!==0xffffffffffffffffn&&(canonical>>63n)?'<freed native allocation>':text(m,v)):null]);}else if(d.f)out.push([path,v===0n?0:v===m._probe_callback_pointer(0)?'xputc':v===m._probe_callback_pointer(1)?'decgraphics':v===m._probe_callback_pointer(2)?'utf8graphics':'unknown']);else out.push([path,v.toString()]);};
  const value=(d,at,path,ctype='')=>{if(d.s){for(const f of schema.schema[d.s].fields){const v=read(m,d.s,at,f.name);if(f.d.s||f.d.a)value(f.d,v,path+'.'+f.name,f.ctype);else scalar(f.d,v,path+'.'+f.name,f.ctype);}return;}if(d.a){const child=d.a.length===1?d.e:{a:d.a.slice(1),e:d.e};for(let i=0;i<d.a[0];i++)value(child,at+BigInt(i*width(child)),path+'['+i+']',ctype);return;}const bytes=width(d);let v=0n;for(let i=0;i<bytes;i++)v|=BigInt(dv.getUint8(Number(at)+i))<<BigInt(8*i);scalar(d,v,path,ctype);};
  for(const g of globals)value(g.d,global(m,g.name),g.name,charPointers.has(g.name)||g.name==='hilites'?'char *':'');
@@ -83,7 +86,7 @@ for(const f of schema.functions){if(filter&&!filter.test(f.name)||f.name==='term
 
 // Valid boundary values and retained source branches; each mutation is applied
 // to both actual native stores, never to a copied policy model.
-function setGlobal(name,v){const g=globals.find(x=>x.name===name);assert.ok(g&&!g.d.s&&!g.d.a);for(const m of modules){const at=Number(global(m,name)),dv=new DataView(m.HEAPU8.buffer),n=typeof v==='function'?v(m):v;if(g.d.p!==undefined||g.d.f)dv.setBigUint64(at,BigInt(n),true);else dv['setUint'+(width(g.d)*8)](at,Number(n),true);}}
+function setGlobal(name,v){const g=globals.find(x=>x.name===name);assert.ok(g&&!g.d.s&&!g.d.a);for(const m of modules){const at=Number(global(m,name)),dv=new FixtureDataView(m.HEAPU8.buffer),n=typeof v==='function'?v(m):v;if(g.d.p!==undefined||g.d.f)dv.setBigUint64(at,BigInt(n),true);else dv['setUint'+(width(g.d)*8)](at,Number(n),true);}}
 function setField(root,kind,name,v){for(const m of modules)write(m,kind,root(m),name,typeof v==='function'?v(m):v);}
 const display=m=>pointer(m,2),iflags=m=>global(m,'iflags'),tc=m=>global(m,'tc_lcl_data');
 if(!unwrapped){
@@ -175,7 +178,7 @@ for(const spec of [
  const bad={...L,pointerSize:4};assert.throws(()=>callTermcap(base,bad,'nomux_end_attr'),/ABI/);bad.pointerSize=8;callTermcap(base,bad,'nomux_end_attr');comparisons++;
  let order=[];const A=Object.assign(Object.create(base),{putchar:n=>{order.push('A'+n);if(n===65){callTermcap(B,cacheLayout,'xputc',66);assert.throws(()=>callTermcap(E,cacheLayout,'xputc',67),e=>e===sentinel);order.push('restored');}return n;}}),B=Object.assign(Object.create(base),{putchar:n=>(order.push('B'+n),n)}),sentinel=Error('real service failure'),E=Object.assign(Object.create(base),{putchar:()=>{throw sentinel;}});
  assert.equal(callTermcap(A,cacheLayout,'xputc',65),65);assert.equal(callTermcap(B,cacheLayout,'xputc',68),68);assert.deepEqual(order,['A65','B66','restored','B68']);comparisons+=3;assert.equal(builds,firstBuildReads);assert.equal(C,initial);assert.equal(hybrid._probe_stack(),saved);comparisons+=3;
- const before=state(reference);callTermcap(base,L,'nomux_set_fg',2);assert.deepEqual(state(reference),before);assert.equal(new DataView(hybrid.HEAPU8.buffer).getUint8(Number(global(hybrid,'nomux_fg_cur'))),2);comparisons+=2;
+ const before=state(reference);callTermcap(base,L,'nomux_set_fg',2);assert.deepEqual(state(reference),before);assert.equal(new FixtureDataView(hybrid.HEAPU8.buffer).getUint8(Number(global(hybrid,'nomux_fg_cur'))),2);comparisons+=2;
  for(const [field,value,pattern]of [['nomux_cellSize',8,/record size/],['width_nomux_cell_ch',2,/field width/],['longSize',4,/ABI/]])assert.throws(()=>createTermcapEnvironment(base,{...L,[field]:value}),pattern);comparisons+=3;
  assert.throws(()=>callTermcap(base,L,'not_a_source_function'),/Unknown/);assert.throws(()=>a.view('nomux_cell',global(hybrid,'nomux_buf')).unknown,/Unknown/);assert.throws(()=>a.view('nomux_cell',global(hybrid,'nomux_buf')).unknown=1,/Unknown/);comparisons+=3;
 }
@@ -198,7 +201,7 @@ for(const environment of [
  for(const m of cold){const bytes=Buffer.from('NOMUX_MARKERS\0','latin1');m.HEAPU8.set(bytes,Number(pointer(m,0)));const at=m.___wrap_getenv(pointer(m,0));if(at)m.HEAPU8[Number(at)]=environment.NOMUX_MARKERS==='1'?48:49;}
  run('nomux_markers_enabled');run('nomux_capture_write_input_boundary');
  for(const m of cold){m.HEAPU8.set(Buffer.from('\0','latin1'),Number(pointer(m,0)));}
- run('nomux_raw_emit',[m=>pointer(m,0),1]);for(const m of cold)new DataView(m.HEAPU8.buffer).setBigUint64(Number(global(m,'ttyDisplay')),0n,true);run('nomux_raw_emit',[m=>pointer(m,0),1]);run('nomux_get_cursor',[m=>pointer(m,1),m=>pointer(m,1,1)]);run('term_shutdown');
+ run('nomux_raw_emit',[m=>pointer(m,0),1]);for(const m of cold)new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(global(m,'ttyDisplay')),0n,true);run('nomux_raw_emit',[m=>pointer(m,0),1]);run('nomux_get_cursor',[m=>pointer(m,1),m=>pointer(m,1,1)]);run('term_shutdown');
 }
 // Failed construction/initialization must remain retryable and unpublished.
 // Capture a genuine library service object without running a policy body.
@@ -207,7 +210,7 @@ for(const environment of [
  const m=await factories[1]({...moduleOptions(),nethackPorted:{termcap(s){real=s;return 0;}}});m._probe_call_nomux_end_attr();assert.ok(real);const top=m._probe_stack();let builds=0,failed=false;
  const retryLayout=new Proxy({...L},{get(o,k){if(k==='pointerSize')builds++;return o[k];}}),boom=Error('actual transport initialization failure'),service=Object.assign(Object.create(real),{staticBuffer(i){if(i===2&&!failed){failed=true;throw boom;}return real.staticBuffer(i);}});
  assert.throws(()=>callTermcap(service,retryLayout,'nomux_end_attr'),e=>e===boom);assert.equal(m._probe_stack(),top);assert.equal(C,undefined);const failedBuildReads=builds;assert.ok(failedBuildReads>0);comparisons+=4;
- callTermcap(service,retryLayout,'nomux_end_attr');callTermcap(service,retryLayout,'nomux_end_attr');assert.equal(builds,2*failedBuildReads);assert.equal(m._probe_stack(),top);assert.equal(new DataView(m.HEAPU8.buffer).getUint8(Number(global(m,'nomux_fg_cur'))),7);assert.equal(C,undefined);comparisons+=4;
+ callTermcap(service,retryLayout,'nomux_end_attr');callTermcap(service,retryLayout,'nomux_end_attr');assert.equal(builds,2*failedBuildReads);assert.equal(m._probe_stack(),top);assert.equal(new FixtureDataView(m.HEAPU8.buffer).getUint8(Number(global(m,'nomux_fg_cur'))),7);assert.equal(C,undefined);comparisons+=4;
  const a=createTermcapEnvironment(real,L),other=createTermcapEnvironment(servicesByModule.get(hybrid),L);assert.notEqual(a.state,other.state);a.state.cursor_vis=123;assert.notEqual(other.state.cursor_vis,123);comparisons+=2;
 }
 }

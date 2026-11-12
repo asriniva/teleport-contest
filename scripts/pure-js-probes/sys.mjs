@@ -1,0 +1,12 @@
+import {environment,probeModule,withoutWasm} from './common.mjs';
+import {nativeSystemOptions} from '../../js/platform/darwin/compat.js';
+export default async function createSysProbe(layouts){
+ const env=await environment(),L=layouts.sys,m=env.memory;
+ withoutWasm(()=>{env.enableDecl(layouts.decl);env.enableSys(L);Object.assign(env.start('sys').environment,nativeSystemOptions);});
+ const fields=Object.entries(L.fields),gcFields=Object.entries(L.gcFields),base=env.requireGlobal('sysopt'),gc=env.requireGlobal('gc');
+ const methods={_probe_context_size:()=>BigInt(L.size),_probe_int_size:()=>4,_probe_sys_pointer:()=>BigInt(base),_probe_gc_pointer:()=>BigInt(gc),_probe_ll_none:()=>BigInt(L.constants.LL_NONE),_probe_init:()=>env.call('sys','sys_early_init'),_probe_release:()=>env.call('sys','sysopt_release'),_probe_seduce:v=>env.call('sys','sysopt_seduce_set',v),_probe_env:p=>env.setEnvironment('DEBUGFILES',Number(p)?m.readString(Number(p)):null)};
+ for(const[prefix,rows]of [['',fields],['gc_',gcFields]]){const pointers=rows.map(([k])=>m.cstring(k));Object.assign(methods,{['_probe_'+prefix+'field_count']:()=>rows.length,['_probe_'+prefix+'field_name']:i=>BigInt(pointers[i]),['_probe_'+prefix+'field_offset']:i=>BigInt(rows[i][1].offset),['_probe_'+prefix+'field_size']:i=>BigInt(rows[i][1].size)});if(!prefix)methods._probe_field_kind=i=>['pointer','int','long','array'].indexOf(rows[i][1].kind);}
+ for(const[prefix,values]of [['config',L.constants],['string',L.strings]]){const rows=Object.entries(values).filter(([k])=>prefix!=='config'||k!=='LL_NONE'),names=rows.map(([k])=>m.cstring(k)),pointers=rows.map(([,v])=>prefix==='string'&&v!==null?m.cstring(v):0);Object.assign(methods,{['_probe_'+prefix+'_count']:()=>rows.length,['_probe_'+prefix+'_name']:i=>BigInt(names[i]),['_probe_'+prefix+'_value']:i=>prefix==='string'?BigInt(pointers[i]):Number(rows[i][1])});}
+ methods._probe_populate=seed=>{env.call('sys','sysopt_release');m.memset(base,0,L.size);fields.forEach(([key,f],i)=>{const at=base+f.offset;switch(f.kind){case'pointer':m.view.setBigUint64(at,BigInt(m.cstring(key)),true);break;case'int':m.view.setInt32(at,-1000-seed-i,true);break;case'long':m.view.setBigInt64(at,-123456789012345n-BigInt(seed),true);break;case'array':for(let j=0;j<f.size/4;j++)m.view.setInt32(at+4*j,-2000-seed-10*i-j,true);}});gcFields.forEach(([key,f])=>m.view.setBigUint64(gc+f.offset,BigInt(m.cstring(key)),true));};
+ return probeModule(env,methods);
+}

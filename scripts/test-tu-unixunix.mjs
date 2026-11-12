@@ -1,13 +1,16 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 // Emscripten diagnostic only: actual prepared C vs imported JS in a controlled dependency world.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-if(process.env.TELEPORT_NATIVE_TESTS!=='0') throw Error('UNIXUNIX has no native reference fixture; Emscripten results cannot be labeled native.');
+// Original C reference is available through the isolated reference process.
 const artifactDir=resolve(process.env.UNIXUNIX_PROBE_DIR??fileURLToPath(new URL('../.cache/tu-probes',import.meta.url)));
-const {default:refFactory}=await import(pathToFileURL(resolve(artifactDir,'unixunix-reference.mjs')));
-const {default:hybridFactory}=await import(pathToFileURL(resolve(artifactDir,'unixunix-hybrid.mjs')));
-const {callUnixunix,createUnixunixEnvironment}=await import(process.env.UNIXUNIX_RUNTIME??'../js/nethack/bindings/unixunix.js');
+const {default:refFactory}=await loadFixture("unixunix",pathToFileURL(resolve(artifactDir,'unixunix-reference.mjs')));
+const {default:hybridFactory}=await loadFixture("unixunix",pathToFileURL(resolve(artifactDir,'unixunix-hybrid.mjs')));
+const {callUnixunix,createUnixunixEnvironment}=await loadFixture("unixunix",process.env.UNIXUNIX_RUNTIME??'../js/nethack/bindings/unixunix.js');
 const read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url))),schema=read('../nethack-c/wasm/tu-fragments/unixunix-schema.json'),functions=read('../nethack-c/wasm/tu-fragments/unixunix-source-metadata.json').functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),regionNames=['scratch','env_shell','env_home','markers','fullpath','authorized','name','fixture_tty_name','files','fds','statevents'],covered=new Set();
 let dispatchHook=null,lastServices;
 const dispatch=(services,name,...args)=>{lastServices=services;return dispatchHook?dispatchHook(services,name,...args):callUnixunix(services,name,...args);};
@@ -25,7 +28,7 @@ const knownRegions=m=>[...schema.globals.filter(g=>!['stdout','windowprocs'].inc
 function snapshot(m){const rs=knownRegions(m),regions=rs.map(r=>({...r,bytes:m.HEAPU8.slice(r.p,r.p+r.size),pointers:[]}));
  // Only the selected compiler-typed sysopt.shellers pointer is mutable here.
  // All filesystem/stat/fd/scratch scalar and padding bytes remain raw.
- const at=addr(m,global(m,'sysopt'),'sysopt_s','shellers'),v=new DataView(m.HEAPU8.buffer).getBigUint64(at,true),target=v===0n?null:rs.find(r=>v>=BigInt(r.p)&&v<BigInt(r.p+r.size)),region=regions.find(r=>at>=r.p&&at+8<=r.p+r.size);
+ const at=addr(m,global(m,'sysopt'),'sysopt_s','shellers'),v=new FixtureDataView(m.HEAPU8.buffer).getBigUint64(at,true),target=v===0n?null:rs.find(r=>v>=BigInt(r.p)&&v<BigInt(r.p+r.size)),region=regions.find(r=>at>=r.p&&at+8<=r.p+r.size);
  if(v===0n||target){region.pointers.push([at-region.p,v===0n?'0':target.name+'+'+(v-BigInt(target.p))]);region.bytes.fill(0,at-region.p,at-region.p+8);}
  const handlers=Array.from({length:64},(_,i)=>{const kind=m._probe_handler(i);return kind===3?'UNKNOWN:'+BigInt.asUintN(64,m._probe_handler_raw(i)):kind;});
  return{regions:regions.map(r=>({name:r.name,bytes:Buffer.from(r.bytes).toString('hex'),pointers:r.pointers})),trace:m.UTF8ToString(Number(m._probe_trace())),errno:m._probe_errno(),outcome:m._probe_outcome(),files:m._probe_file_count(),fds:Array.from({length:m._probe_fd_count()},(_,i)=>m._probe_fd_open(i)),events:m._probe_event_count(),handlers};
@@ -98,8 +101,8 @@ dispatchHook=(services,name,...args)=>callUnixunix({...services,fstat:(...a)=>{h
 // the reference's fstat has no JS hook and the contents remain unchanged.
 ref._probe_growth();try{action('veryold',[3]);}finally{dispatchHook=null;}assert.ok(grew);mods.forEach((m,i)=>assert.notEqual(m.HEAPU8.buffer,oldBuffers[i]));
 // Raw scalar and padding bytes are never interpreted as selected pointers.
-reset();setter(m=>new DataView(m.HEAPU8.buffer).setBigUint64(ptr(m,0)+4080,0xfedcba9876543210n,true));compare('unknown raw64 scalar witness');
-const scalarNativeAddress=BigInt(ptr(ref,0));setter(m=>new DataView(m.HEAPU8.buffer).setBigUint64(ptr(m,0)+4072,scalarNativeAddress,true));compare('scalar numerically equal to native address remains raw');assert.equal(new DataView(hybrid.HEAPU8.buffer).getBigUint64(ptr(hybrid,0)+4072,true),scalarNativeAddress);
+reset();setter(m=>new FixtureDataView(m.HEAPU8.buffer).setBigUint64(ptr(m,0)+4080,0xfedcba9876543210n,true));compare('unknown raw64 scalar witness');
+const scalarNativeAddress=BigInt(ptr(ref,0));setter(m=>new FixtureDataView(m.HEAPU8.buffer).setBigUint64(ptr(m,0)+4072,scalarNativeAddress,true));compare('scalar numerically equal to native address remains raw');assert.equal(new FixtureDataView(hybrid.HEAPU8.buffer).getBigUint64(ptr(hybrid,0)+4072,true),scalarNativeAddress);
 const witness=ptr(hybrid,0)+4080;hybrid.HEAPU8[witness]^=1;assert.throws(()=>assert.deepEqual(snapshot(hybrid),snapshot(ref)),assert.AssertionError);hybrid.HEAPU8[witness]^=1;
 // Unsafe native addresses are rejected before dereference; no Number rounding.
 const high={...lastServices,abiGlobal:()=>0x20000000000001n};assert.throws(()=>callUnixunix(high,'getlock'),/exact address range/);
@@ -122,6 +125,6 @@ try{
  const seed=()=>contractModule.HEAPU8.fill(0xA7,at,at+16),bytes=()=>Array.from(contractModule.HEAPU8.slice(at,at+16));
  for(const t of ['long long','int']){seed();assert.equal(env.local(t).address,at);assert.deepEqual(bytes(),Array(16).fill(0xA7),'uninitialized cell allocation must not write seeded native bytes');}
  seed();env.local('int',0);assert.deepEqual(bytes(),[0,0,0,0,...Array(12).fill(0xA7)],'explicit zero initializer writes exactly int4');
- seed();env.local('long long',0x20000000000001n);assert.equal(new DataView(contractModule.HEAPU8.buffer).getBigInt64(at,true),0x20000000000001n);assert.deepEqual(bytes().slice(8),Array(8).fill(0xA7));
+ seed();env.local('long long',0x20000000000001n);assert.equal(new FixtureDataView(contractModule.HEAPU8.buffer).getBigInt64(at,true),0x20000000000001n);assert.deepEqual(bytes().slice(8),Array(8).fill(0xA7));
 }finally{contractServices.stackRestore(contractFrame);}
 console.log('PASS UNIXUNIX seeded native-memory JS local allocation contract; uninitialized preserves bytes, explicit int4/time8 initializer writes exact extent. Separate from100 C/JS comparisons.');

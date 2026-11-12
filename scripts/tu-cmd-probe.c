@@ -132,7 +132,7 @@ void (add_menu_str)(winid a0,const char * a1){append("add_menu_str:%lld:%s;",(lo
 void (add_menu)(winid a0,const glyph_info * a1,const union any * a2,char a3,char a4,int a5,int a6,const char * a7,unsigned int a8){append("add_menu:%d:%llu:%d:%d:%d:%d:%s:%u;",a0,(unsigned long long)a2->a_ulong,a3,a4,a5,a6,a7,a8);}
 char * (eos)(char * a0){return a0+strlen(a0);}
 char * (strstri)(const char * a0,const char * a1){return (char*)strstr(a0,a1);}
-char * (strsubst)(char * a0,const char * a1,const char * a2){char*p=strstr(a0,a1);if(p){size_t n=strlen(a1),m=strlen(a2);memmove(p+m,p+n,strlen(p+n)+1);memcpy(p,a2,m);}}
+char * (strsubst)(char * a0,const char * a1,const char * a2){char*p=strstr(a0,a1);if(p){size_t n=strlen(a1),m=strlen(a2);memmove(p+m,p+n,strlen(p+n)+1);memcpy(p,a2,m);}return a0;}
 boolean (pmatchi)(const char * a0,const char * a1){return !strcasecmp(a0,a1);}
 void (add_menu_heading)(winid a0,const char * a1){append("add_menu_heading:%lld:%s;",(long long)a0,(a1?a1:"NULL"));}
 int (select_menu)(winid a0,int a1,menu_item ** a2){*a2=0;if(selection_index){menu_item*p=tracked(sizeof *p);p->item.a_int=selection_index;p->count=1;*a2=p;selection_index=0;return 1;}return 0;}
@@ -191,7 +191,8 @@ void (selection_getbounds)(struct selectionvar * a0,NhRect * a1){a1->lx=10;a1->l
 coordxy (selection_getpoint)(coordxy a0,coordxy a1,struct selectionvar * a2){return query;}
 int (glyph_at)(coordxy a0,coordxy a1){return -1;}
 struct selectionvar * (selection_new)(void){return &selpool;}
-void (set_selection_floodfillchk)(int (*a0)(coordxy, coordxy)){append("set_selection_floodfillchk:%lld;",(long long)token((const void*)a0));}
+uintptr_t probe_function(int);
+void (set_selection_floodfillchk)(int (*a0)(coordxy, coordxy)){append("set_selection_floodfillchk:%lld;",(long long)((uintptr_t)a0==probe_function(3)?70000000ULL+3:token((const void*)a0)));}
 void (selection_floodfill)(struct selectionvar * a0,coordxy a1,coordxy a2,boolean a3){append("selection_floodfill:%lld:%lld:%lld:%lld;",(long long)token((const void*)a0),(long long)a1,(long long)a2,(long long)a3);}
 void (set_msg_xy)(coordxy a0,coordxy a1){append("set_msg_xy:%lld:%lld;",(long long)a0,(long long)a1);}
 char * (selection_size_description)(struct selectionvar * a0,char * a1){return "small";}

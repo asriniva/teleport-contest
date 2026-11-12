@@ -1,14 +1,14 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('light', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/light-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/light-hybrid.mjs';
-import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/light.mjs';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url)));
-const L=layouts.light,runtime=createPortedRuntime(layouts);
-const modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})];
+const L=layouts.light;
+const modules=[await referenceFactory(),await createPureJsProbe(layouts)];
 const stacks=modules.map(m=>m._probe_stack());
 const nativeSource=readFileSync(new URL('../.cache/wasm64-build/tree/src/light.c',import.meta.url),'utf8');
 const fixtureSource=readFileSync(new URL('./tu-light-probe.c',import.meta.url),'utf8');
@@ -231,8 +231,8 @@ for(const stage of [1,2,3,4,5,6]){
     assert.match(trace(),/nested-any:/);assert.match(trace(),new RegExp('grew:'+stage));
     modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));
 }
-reset();add('obj');const before=snapshot(modules[1]),other=await hybridFactory({nethackPorted:runtime});other._probe_reset();
+reset();add('obj');const before=snapshot(modules[1]),other=await createPureJsProbe(layouts);other._probe_reset();
 assert.equal(other._probe_node_count(),0);new DataView(other.HEAPU8.buffer).setBigUint64(Number(other._probe_union_pointer()),other._probe_pointer(0,1),true);
 other._probe_action(1,11,10,3,L.LS_OBJECT,0);assert.equal(other._probe_node_count(),1);
 assert.deepEqual(snapshot(modules[1]),before);check();reset();
-console.log(`LIGHT: ${comparisons} ${referenceLabel}/hybrid native-list, vision, union, serialization, ownership and callback comparisons checked.`);
+console.log(`LIGHT: ${comparisons} ${referenceLabel}/pure-JS native-list, vision, union, serialization, ownership and callback comparisons checked.`);

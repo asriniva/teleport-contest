@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('exper', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/exper-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/exper-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('exper',options);
 import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 import { C, R, T } from '../js/c-runtime/context.js';
 
@@ -137,4 +139,4 @@ reset(); hero(5, 10000n, 0n, 1); call('plus', 1); textCall('lose', 'after-growth
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
 const before = state(); independent._probe_reset(99); independent._probe_plus(0); independent._probe_more(100, 1); independent._probe_new_level();
 assert.deepEqual(state(), before); scope(); comparisons++;
-console.log(`EXPER: ${comparisons} ${referenceLabel}/hybrid threshold, energy, attack-XP, score, level-change, assertion and RNG-site comparisons checked.`);
+console.log(`EXPER: ${comparisons} ${referenceLabel}/pure-JS threshold, energy, attack-XP, score, level-change, assertion and RNG-site comparisons checked.`);

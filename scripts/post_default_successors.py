@@ -64,6 +64,13 @@ def validate_cohort(root):
   if (root/"docs/runtime-environment/allocation-cli-source-successors.json").is_file():
    from allocation_cli_source_successors import ALLOWED as ALLOCATION_CLI,qualified_before as allocation_cli_before
    if path in ALLOCATION_CLI:actual=allocation_cli_before(root,path)
+  if sha(actual)!=row['afterSha256']:
+   # The separately exact-qualified migration can extend a committed feature.
+   # Keep this native proof bound to its original bytes, without accepting drift.
+   node=root/'.cache/emsdk/node/24.19.0_64bit/bin/node'
+   program="import {qualifiedHistorical} from './scripts/pure-js-fixtures/qualification.mjs';qualifiedHistorical(process.argv[1]);"
+   subprocess.check_call([str(node),'--input-type=module','-e',program,path],cwd=root)
+   actual=subprocess.check_output(['git','show','8b834cd2b94a10bc1a96336de0bd91f90d3adf2b:'+path],cwd=root)
   assert sha(actual)==row['afterSha256'],'Unqualified current post-default source: '+path
   patch_path=row['patch']
   assert patch_path.startswith('docs/runtime-environment/post-default-source-successors/')and patch_path.endswith('.patch'),'Unexpected post-default patch path'

@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('sit', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/sit-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/sit-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('sit',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.sit,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
@@ -79,4 +81,4 @@ for(let target=0;target<properties.length;target++)for(let start=0;start<11;star
 for(const property of [L.TELEPAT,L.SEE_INVIS])for(const backup of [0,1])for(const halluc of [0,1]){reset();call('prop',property,0,L.INTRINSIC);call('prop',property,1,backup);call('prop',L.BLINDED,0,1);if(halluc)call('prop',L.HALLUC,0,1);rng([properties.indexOf(property)]);assert.equal(act(3),property);assert.equal(trace().includes('see-monsters;'),!backup);if(property===L.SEE_INVIS)assert.equal(trace().includes('mimic-block;'),!backup);}
 reset();for(const property of properties)call('prop',property,0,L.INTRINSIC);rng([0]);assert.equal(act(3),L.FIRE_RES);assert.ok(prop(L.TELEPORT)&BigInt(L.INTRINSIC));
 reset();call('option',0,0);rng([0]);act(3);const saved=snapshot(modules[0]);modules[1]._probe_hero(7,-9n);assert.deepEqual(snapshot(modules[0]),saved);reset();
-console.log(`SIT: ${comparisons} ${referenceLabel}/hybrid throne, terrain, egg, property, curse and RNG-site comparisons checked.`);
+console.log(`SIT: ${comparisons} ${referenceLabel}/pure-JS throne, terrain, egg, property, curse and RNG-site comparisons checked.`);

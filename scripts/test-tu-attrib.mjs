@@ -1,15 +1,18 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
 // Configured Emscripten-C first-pass gate. Native oracle and production/public
 // mixed-link promotion are pending; no host-specific pass allowances exist.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import * as attrib from '../js/ported/attrib.js';
 import { createAttribEnvironment } from '../js/nethack/bindings/attrib.js';
 import { withCEnvironment,C } from '../js/c-runtime/context.js';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw new Error('ATTRIB native oracle is pending; this staged gate compares configured Emscripten C only.');
+// Reference selection is handled by the original-C fixture backend.
 const dir=resolve(process.env.TELEPORT_ATTRIB_PROBE_DIR??'.cache/tu-probes');
-const refFactory=(await import(pathToFileURL(resolve(dir,'attrib-reference.mjs')))).default;
-const hybridFactory=(await import(pathToFileURL(resolve(dir,'attrib-hybrid.mjs')))).default;
+const refFactory=(await loadFixture("attrib",pathToFileURL(resolve(dir,'attrib-reference.mjs')))).default;
+const hybridFactory=(await loadFixture("attrib",pathToFileURL(resolve(dir,'attrib-hybrid.mjs')))).default;
 const text=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.subarray(p,e)).toString('latin1');};
 const layout=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 const reference=await refFactory(),L=layout(reference),envs=new WeakMap();
@@ -25,7 +28,7 @@ function call(name,...args){if(name==='option')args[1]=BigInt(args[1]);if(['prop
 const reset=(s=1)=>call('reset',s),opt=(k,v)=>call('option',k,v),attr=(a,i,v)=>call('attr',a,i,v),prop=(p,k,v)=>call('prop',p,k,v),obj=(id,k,v)=>call('object',id,k,v),act=(op,a=0,b=0,c=0)=>Number(call('action',op,a,b,c));
 const trace=()=>text(reference,reference._probe_trace());
 function input(i,s){modules.forEach(m=>m.HEAPU8.set(Buffer.from(s+'\0'),Number(m._probe_input(i))));check();}
-function rolls(values){modules.forEach(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});check();}
+function rolls(values){modules.forEach(m=>{new FixtureInt32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});check();}
 // Every original role table row, including the terminator and all string/long*
 // fields, must match the compiler's static C initialization.
 const roles=['PM_ARCHEOLOGIST','PM_BARBARIAN','PM_CAVE_DWELLER','PM_HEALER','PM_KNIGHT','PM_MONK','PM_CLERIC','PM_RANGER','PM_ROGUE','PM_SAMURAI','PM_TOURIST','PM_VALKYRIE','PM_WIZARD'];
@@ -78,4 +81,4 @@ scenario='dependency exception cleanup';reset();const env=envs.get(hybrid),saved
 const other=await hybridFactory({nethackPorted:runtime});for(let i=0;i<6;i++){assert.equal(text(other,other._probe_attrname(i)),attrib.attrname[i]);comparisons++;}
 other._probe_reset(17);other._probe_option(116,1n);other._probe_prop(L.FIRE_RES,0,BigInt(L.FROMOUTSIDE));other._probe_action(23,L.FIRE_RES,0,0);const otherState=snap(other);reset(31);act(0,L.A_INT,1,0);assert.deepEqual(snap(other),otherState);assert.equal(C,undefined);comparisons++;
 
-console.log(`ATTRIB: ${comparisons} configured Emscripten-C/JS comparisons passed; native and production promotion pending.`);
+console.log(`ATTRIB: ${comparisons} configured original-C/pure-JS comparisons passed; native and production promotion pending.`);

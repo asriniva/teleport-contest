@@ -1,11 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("do");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import assert from './native-test-assert.mjs';
-import {referenceBackend,referenceLabel,assertStackRestored,memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
+import {referenceBackend,assertStackRestored,memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {callDo,createDoEnvironment} from '../js/nethack/bindings/do.js';
 import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_DO_AUTHOR==='1';
-const ref=(await import(own?'../.cache/do-author/reference.mjs':'../.cache/tu-probes/do-reference.mjs')).default;
-const hyb=(await import(own?'../.cache/do-author/hybrid.mjs':'../.cache/tu-probes/do-hybrid.mjs')).default;
+const ref=(await loadFixture("do",own?'../.cache/do-author/reference.mjs':'../.cache/tu-probes/do-reference.mjs')).default;
+const hyb=(await loadFixture("do",own?'../.cache/do-author/hybrid.mjs':'../.cache/tu-probes/do-hybrid.mjs')).default;
 const text=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');};
 let reference=await referenceBackend('do',ref)();const measured={};for(let i=0;i<reference._probe_layout_count();i++)measured[text(reference,reference._probe_layout_name(i))]=Number(BigInt.asIntN(64,reference._probe_layout_value(i)));
 const L=own?measured:JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).do;
@@ -95,4 +99,4 @@ assert.deepEqual([...exercised].sort(),names.slice().sort(),'all 44 original fun
 // Actual native growth and C->JS reentry within world callbacks observe fresh state.
 reference=await referenceBackend('do',ref)();modules=[reference,await hyb({nethackPorted:ported})];stacks=modules.map(m=>m._probe_stack());reset();item(0,L.DAGGER);const before=modules.map(memoryCheckpoint);call('callback',deps.freeinv,deps.freeinv);act('drop',0);assert.ok(trace().includes('growth:'));assert.ok(trace().includes('reentry:'));modules.forEach((m,i)=>assertMemoryGrowth(m,before[i]));
 const primary=snapshot(modules[1]),other=await hyb({nethackPorted:ported});const sentinelR={},sentinelT={},outer={rectState:sentinelR,trackState:sentinelT};withCEnvironment(outer,()=>{other._probe_reset(12);other._probe_callback(-1,deps.freeinv);other._probe_object(0,L.DAGGER,1n,L.OBJ_INVENT);assert.equal(other._probe_action(op('drop'),0n,0n,0n,0n),BigInt(L.ECMD_TIME));assert.ok(text(other,other._probe_trace()).includes('place:0:10:10;'));assert.equal(C,outer);assert.equal(R,sentinelR);assert.equal(T,sentinelT);});assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);assert.deepEqual(snapshot(modules[1]),primary);comparisons++;
-console.log('DO '+referenceLabel+': '+comparisons.toLocaleString('en-US')+' comparisons passed; all 44 original functions.');
+console.log('DO '+fixtureReferenceLabel+': '+comparisons.toLocaleString('en-US')+' comparisons passed; all 44 original functions.');

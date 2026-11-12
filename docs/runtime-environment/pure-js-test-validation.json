@@ -1,0 +1,3564 @@
+{
+  "registrySuites": 138,
+  "selectedSuites": 138,
+  "subsystemCohortPassed": true,
+  "recorderRun": false,
+  "implementationCounts": {
+    "pureJavaScript": 138,
+    "mixedEngineDiagnostics": 0
+  },
+  "pureJsReadinessEstablished": false,
+  "runId": "94590-1794478735703",
+  "selection": null,
+  "passed": 138,
+  "failed": 0,
+  "completed": 138,
+  "assertions": 19509153,
+  "assertionFailures": 0,
+  "results": [
+    {
+      "name": "isaac64",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 39833 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/isaac64.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 39833,
+      "assertionFailures": 0,
+      "reports": [
+        94660
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "nhmd4",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 1615 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/nhmd4.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 1615,
+      "assertionFailures": 0,
+      "reports": [
+        94661
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "strutil",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 8592 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/strutil.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 8592,
+      "assertionFailures": 0,
+      "reports": [
+        94662
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "rect",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 28591 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/rect.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 28591,
+      "assertionFailures": 0,
+      "reports": [
+        94663
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "track",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 45590 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/track.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 45590,
+      "assertionFailures": 0,
+      "reports": [
+        94664
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "calendar",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 5 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/calendar.log",
+      "expectedReports": 6,
+      "completed": true,
+      "assertions": 40702,
+      "assertionFailures": 0,
+      "reports": [
+        94665,
+        94666,
+        94668,
+        94680,
+        94681,
+        94684
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "stairs",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 246788 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/stairs.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 246788,
+      "assertionFailures": 0,
+      "reports": [
+        94667
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "sys",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 1010 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/sys.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 1010,
+      "assertionFailures": 0,
+      "reports": [
+        94669
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "rip",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 20768 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/rip.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 20768,
+      "assertionFailures": 0,
+      "reports": [
+        94679
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "date",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 5 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/date.log",
+      "expectedReports": 6,
+      "completed": true,
+      "assertions": 16600,
+      "assertionFailures": 0,
+      "reports": [
+        94682,
+        94683,
+        94685,
+        94688,
+        94693,
+        94696
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "alloc",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 1703 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/77007-1794496265388/alloc.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 1703,
+      "assertionFailures": 0,
+      "reports": [
+        77083
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "utf8map",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 9976 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/utf8map.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 9976,
+      "assertionFailures": 0,
+      "reports": [
+        94687
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "drawing",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 14540 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/drawing.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 14540,
+      "assertionFailures": 0,
+      "reports": [
+        94689
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "posixregex",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 5265 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/posixregex.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 5265,
+      "assertionFailures": 0,
+      "reports": [
+        94692
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "rnd",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 2640 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/rnd.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 2640,
+      "assertionFailures": 0,
+      "reports": [
+        94694
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "ioctl",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 1417 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/ioctl.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 1417,
+      "assertionFailures": 0,
+      "reports": [
+        94695
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "unixtty",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 4519 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/unixtty.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 4519,
+      "assertionFailures": 0,
+      "reports": [
+        94697
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "were",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 31397 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/were.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 31397,
+      "assertionFailures": 0,
+      "reports": [
+        94700
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "extralev",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 3789 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/extralev.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 3789,
+      "assertionFailures": 0,
+      "reports": [
+        94701
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "mplayer",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 31505 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mplayer.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 31505,
+      "assertionFailures": 0,
+      "reports": [
+        94702
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "exper",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 24142 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/exper.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 24142,
+      "assertionFailures": 0,
+      "reports": [
+        94703
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "mkmap",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 2315 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mkmap.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 2315,
+      "assertionFailures": 0,
+      "reports": [
+        94704
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "getline",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 3176 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/getline.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 3176,
+      "assertionFailures": 0,
+      "reports": [
+        94705
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "write",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 9617 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/write.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 9617,
+      "assertionFailures": 0,
+      "reports": [
+        94706
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "mdlib",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 4300 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mdlib.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 4300,
+      "assertionFailures": 0,
+      "reports": [
+        94724
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "quest",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 27955 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/quest.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 27955,
+      "assertionFailures": 0,
+      "reports": [
+        94725
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "minion",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 21795 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/minion.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 21795,
+      "assertionFailures": 0,
+      "reports": [
+        94726
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "iactions",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 32304 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/iactions.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 32304,
+      "assertionFailures": 0,
+      "reports": [
+        94728
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "selvar",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 14749 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/selvar.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 14749,
+      "assertionFailures": 0,
+      "reports": [
+        94731
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "steal",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 17967 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/steal.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 17967,
+      "assertionFailures": 0,
+      "reports": [
+        94754
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "sit",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 11992 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/sit.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 11992,
+      "assertionFailures": 0,
+      "reports": [
+        94755
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "fountain",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 18592 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/fountain.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 18592,
+      "assertionFailures": 0,
+      "reports": [
+        94763
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "objects",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 53047 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/objects.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 53047,
+      "assertionFailures": 0,
+      "reports": [
+        94773
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "monst",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 45043 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/monst.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 45043,
+      "assertionFailures": 0,
+      "reports": [
+        94776
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "shknam",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 65218 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/shknam.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 65218,
+      "assertionFailures": 0,
+      "reports": [
+        94777
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "rumors",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 6998 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/rumors.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 6998,
+      "assertionFailures": 0,
+      "reports": [
+        94779
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "music",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 15152 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/music.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 15152,
+      "assertionFailures": 0,
+      "reports": [
+        94784
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "version",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 20296 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/version.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 20296,
+      "assertionFailures": 0,
+      "reports": [
+        94785
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "coloratt",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 20093 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/coloratt.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 20093,
+      "assertionFailures": 0,
+      "reports": [
+        94831
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "priest",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 24886 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/priest.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 24886,
+      "assertionFailures": 0,
+      "reports": [
+        94832
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "light",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 7126 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/77007-1794496265388/light.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 7126,
+      "assertionFailures": 0,
+      "reports": [
+        77084
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "lock",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 15070 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/lock.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 15070,
+      "assertionFailures": 0,
+      "reports": [
+        94869
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "steed",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 19810 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/steed.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 19810,
+      "assertionFailures": 0,
+      "reports": [
+        94882
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "wizard",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 13446 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/wizard.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 13446,
+      "assertionFailures": 0,
+      "reports": [
+        94898
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "worm",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 8245 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/worm.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 8245,
+      "assertionFailures": 0,
+      "reports": [
+        94901
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "o_init",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 14703 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/o_init.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 14703,
+      "assertionFailures": 0,
+      "reports": [
+        94913
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "ball",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 11630 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/ball.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 11630,
+      "assertionFailures": 0,
+      "reports": [
+        94914
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "mcastu",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 15017 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mcastu.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 15017,
+      "assertionFailures": 0,
+      "reports": [
+        94927
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "dbridge",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 32252 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/dbridge.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 32252,
+      "assertionFailures": 0,
+      "reports": [
+        95184
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "mondata",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 265845 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mondata.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 265845,
+      "assertionFailures": 0,
+      "reports": [
+        95241
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "hacklib",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 19343 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/hacklib.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 19343,
+      "assertionFailures": 0,
+      "reports": [
+        95557
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "worn",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 43610 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/worn.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 43610,
+      "assertionFailures": 0,
+      "reports": [
+        95768
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "wield",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 34137 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/wield.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 34137,
+      "assertionFailures": 0,
+      "reports": [
+        95780
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "mkroom",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 3556 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mkroom.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 3556,
+      "assertionFailures": 0,
+      "reports": [
+        96797
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "sfstruct",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 15571 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/sfstruct.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 15571,
+      "assertionFailures": 0,
+      "reports": [
+        96812
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "earlyarg",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 36686 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/earlyarg.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 36686,
+      "assertionFailures": 0,
+      "reports": [
+        96831
+      ],
+      "reference": "native-C"
+    },
+    {
+      "name": "report",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 1236 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/report.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 1236,
+      "assertionFailures": 0,
+      "reports": [
+        96832
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "bones",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 836 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/bones.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 836,
+      "assertionFailures": 0,
+      "reports": [
+        96840
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "explode",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 22745 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/explode.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 22745,
+      "assertionFailures": 0,
+      "reports": [
+        96865
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "questpgr",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 12069 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/questpgr.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 12069,
+      "assertionFailures": 0,
+      "reports": [
+        96955
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "symbols",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 21055 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/symbols.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 21055,
+      "assertionFailures": 0,
+      "reports": [
+        97051
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "mail",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 7965 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mail.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 7965,
+      "assertionFailures": 0,
+      "reports": [
+        97230
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "pline",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 8075 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/pline.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 8075,
+      "assertionFailures": 0,
+      "reports": [
+        97301
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "attrib",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 45556 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/attrib.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 45556,
+      "assertionFailures": 0,
+      "reports": [
+        97308
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "sfbase",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 4020 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/sfbase.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 4020,
+      "assertionFailures": 0,
+      "reports": [
+        97309
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "dog",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 49094 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/dog.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 49094,
+      "assertionFailures": 0,
+      "reports": [
+        97371
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "region",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 60472 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/region.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 60472,
+      "assertionFailures": 0,
+      "reports": [
+        97389
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "weapon",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 81126 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/weapon.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 81126,
+      "assertionFailures": 0,
+      "reports": [
+        97401
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "vault",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 9024 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/vault.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 9024,
+      "assertionFailures": 0,
+      "reports": [
+        97494
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "u_init",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 21353 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/u_init.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 21353,
+      "assertionFailures": 0,
+      "reports": [
+        97501
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "sounds",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 39764 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/sounds.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 39764,
+      "assertionFailures": 0,
+      "reports": [
+        97531
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "save",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 1130 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/save.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 1130,
+      "assertionFailures": 0,
+      "reports": [
+        97563
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "mhitm",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 24207 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mhitm.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 24207,
+      "assertionFailures": 0,
+      "reports": [
+        97572
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "getpos",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 36968 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/getpos.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 36968,
+      "assertionFailures": 0,
+      "reports": [
+        97579
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "allmain",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 27040 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/allmain.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 27040,
+      "assertionFailures": 0,
+      "reports": [
+        97590
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "mthrowu",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 40030 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mthrowu.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 40030,
+      "assertionFailures": 0,
+      "reports": [
+        97609
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "role",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 134051 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/role.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 134051,
+      "assertionFailures": 0,
+      "reports": [
+        97649
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "engrave",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 19763 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/engrave.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 19763,
+      "assertionFailures": 0,
+      "reports": [
+        97856
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "glyphs",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 112673 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/glyphs.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 112673,
+      "assertionFailures": 0,
+      "reports": [
+        97863
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "topten",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 20909 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/topten.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 20909,
+      "assertionFailures": 0,
+      "reports": [
+        97870
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "dogmove",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 875 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/dogmove.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 875,
+      "assertionFailures": 0,
+      "reports": [
+        97914
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "windows",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 23014 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/windows.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 23014,
+      "assertionFailures": 0,
+      "reports": [
+        97955
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "cfgfiles",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 2919 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/cfgfiles.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 2919,
+      "assertionFailures": 0,
+      "reports": [
+        97982
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "restore",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 4305 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/restore.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 4305,
+      "assertionFailures": 0,
+      "reports": [
+        97999
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "nhlobj",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 7812 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/nhlobj.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 7812,
+      "assertionFailures": 0,
+      "reports": [
+        98000
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "do_name",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 10869 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/do_name.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 10869,
+      "assertionFailures": 0,
+      "reports": [
+        98031
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "vision",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 33334 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/vision.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 33334,
+      "assertionFailures": 0,
+      "reports": [
+        98048
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "mkmaze",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 987 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mkmaze.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 987,
+      "assertionFailures": 0,
+      "reports": [
+        98122
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "dokick",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 15933 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/dokick.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 15933,
+      "assertionFailures": 0,
+      "reports": [
+        98159
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "dig",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 15865 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/dig.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 15865,
+      "assertionFailures": 0,
+      "reports": [
+        98189
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "end",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 8706 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/end.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 8706,
+      "assertionFailures": 0,
+      "reports": [
+        98398
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "polyself",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 11040 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/polyself.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 11040,
+      "assertionFailures": 0,
+      "reports": [
+        98862
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "wizcmds",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 2788 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/wizcmds.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 2788,
+      "assertionFailures": 0,
+      "reports": [
+        98991
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "detect",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 1535 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/detect.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 1535,
+      "assertionFailures": 0,
+      "reports": [
+        99053
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "teleport",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 5926 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/teleport.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 5926,
+      "assertionFailures": 0,
+      "reports": [
+        99077
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "mklev",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 1436 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mklev.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 1436,
+      "assertionFailures": 0,
+      "reports": [
+        99105
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "monmove",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 52322 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/monmove.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 52322,
+      "assertionFailures": 0,
+      "reports": [
+        99125
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "spell",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 22152 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/spell.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 22152,
+      "assertionFailures": 0,
+      "reports": [
+        99211
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "do",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 7168 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/do.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 7168,
+      "assertionFailures": 0,
+      "reports": [
+        99254
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "timeout",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 11796 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/timeout.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 11796,
+      "assertionFailures": 0,
+      "reports": [
+        99268
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "potion",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 28386 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/potion.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 28386,
+      "assertionFailures": 0,
+      "reports": [
+        99336
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "pray",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 2712 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/pray.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 2712,
+      "assertionFailures": 0,
+      "reports": [
+        99354
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "dothrow",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 1334 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/dothrow.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 1334,
+      "assertionFailures": 0,
+      "reports": [
+        99413
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "pager",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 11169 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/pager.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 11169,
+      "assertionFailures": 0,
+      "reports": [
+        99486
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "muse",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 2518 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/muse.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 2518,
+      "assertionFailures": 0,
+      "reports": [
+        99524
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "dungeon",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 1472 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/dungeon.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 1472,
+      "assertionFailures": 0,
+      "reports": [
+        99740
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "makemon",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 63153 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/makemon.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 63153,
+      "assertionFailures": 0,
+      "reports": [
+        183
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "mhitu",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 14257 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mhitu.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 14257,
+      "assertionFailures": 0,
+      "reports": [
+        190
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "artifact",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 5607 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/410-1794480477620/artifact.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 5607,
+      "assertionFailures": 0,
+      "reports": [
+        420
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "decl",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 17033 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/decl.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 17033,
+      "assertionFailures": 0,
+      "reports": [
+        264
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "do_wear",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 14275 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/do_wear.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 14275,
+      "assertionFailures": 0,
+      "reports": [
+        279
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "insight",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 24549 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/insight.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 24549,
+      "assertionFailures": 0,
+      "reports": [
+        288
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "read",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 61363 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/read.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 61363,
+      "assertionFailures": 0,
+      "reports": [
+        318
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "apply",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 55149 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/apply.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 55149,
+      "assertionFailures": 0,
+      "reports": [
+        325
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "eat",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 52918 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/eat.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 52918,
+      "assertionFailures": 0,
+      "reports": [
+        369
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "objnam",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 66567 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/objnam.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 66567,
+      "assertionFailures": 0,
+      "reports": [
+        382
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "mkobj",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 2230 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mkobj.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 2230,
+      "assertionFailures": 0,
+      "reports": [
+        403
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "nhlua",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 2291 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/2655-1794481515413/nhlua.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 2291,
+      "assertionFailures": 0,
+      "reports": [
+        2726
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "files",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 27174 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/files.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 27174,
+      "assertionFailures": 0,
+      "reports": [
+        576
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "display",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 69411 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/display.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 69411,
+      "assertionFailures": 0,
+      "reports": [
+        615
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "invent",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 124091 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/invent.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 124091,
+      "assertionFailures": 0,
+      "reports": [
+        624
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "cmd",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 6456 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/8933-1794481929240/cmd.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 6456,
+      "assertionFailures": 0,
+      "reports": [
+        8986
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "hack",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 2252024 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/7710-1794481590015/hack.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 2252024,
+      "assertionFailures": 0,
+      "reports": [
+        7727
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "uhitm",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 47215 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/uhitm.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 47215,
+      "assertionFailures": 0,
+      "reports": [
+        872
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "mon",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 119413 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/mon.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 119413,
+      "assertionFailures": 0,
+      "reports": [
+        897
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "pickup",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 711057 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/pickup.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 711057,
+      "assertionFailures": 0,
+      "reports": [
+        945
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "shk",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "body money2mon\nbody money2u\nbody next_shkp\nbody shkgone\nbody set_residency\nbody replshk\nbody restshk\nbody clear_unpaid_obj\nbody clear_unpaid\nbody clear_no_charge_obj\nbody clear_no_charge\nbody clear_no_charge_pets\nbody setpaid\nbody record_price_quote\nbody append_price_quote\nbody addupbill\nbody call_kops\nbody inside_shop\nbody u_left_shop\nbody credit_report\nbody remote_burglary\nbody rob_shop\nbody deserted_shop\nbody u_entered_shop\nbody pick_pick\nbody same_price\nbody shop_debt\nbody shopper_financial_report\nbody inhishop\nbody shop_keeper\nbody find_objowner\nbody tended_shop\nbody noisy_shop\nbody onbill\nbody onshopbill\nbody is_unpaid\nbody delete_contents\nbody obfree\nbody check_credit\nbody pay\nbody home_shk\nbody angry_shk_exists\nbody pacify_shk\nbody rile_shk\nbody rouse_shk\nbody make_happy_shk\nbody make_happy_shoppers\nbody hot_pursuit\nbody make_angry_shk\nbody sortbill_cmp\nbody cheapest_item\nbody make_itemized_bill\nbody menu_pick_pay_items\nbody dopay\nbody pay_billed_items\nbody update_bill\nbody dopayobj\nbody buy_container\nbody reject_purchase\nbody insufficient_funds\nbody paybill\nbody inherits\nbody set_repo_loc\nbody finish_paybill\nbody bp_to_obj\nbody find_oid\nbody get_cost_of_shop_item\nbody get_pricing_units\nbody oid_price_adjustment\nbody get_cost\nbody contained_cost\nbody contained_gold\nbody dropped_container\nbody picked_container\nbody special_stock\nbody set_cost\nbody gem_learned\nbody alter_cost\nbody unpaid_cost\nbody add_one_tobill\nbody add_to_billobjs\nbody bill_box_content\nbody shk_names_obj\nbody billable\nbody addtobill\nbody append_honorific\nbody splitbill\nbody sub_one_frombill\nbody subfrombill\nbody stolen_container\nbody stolen_value\nbody donate_gold\nbody sellobj_state\nbody sellobj\nbody doinvbill\nbody corpsenm_price_adj\nbody getprice\nbody shkcatch\nbody add_damage\nbody shk_impaired\nbody repairable_damage\nbody find_damage\nbody discard_damage_struct\nbody discard_damage_owned_by\nbody shk_fixes_damage\nbody litter_getpos\nbody litter_scatter\nbody litter_newsyms\nbody repair_damage\nbody fix_shop_damage\nbody shk_move\nbody after_shk_move\nbody is_fshk\nbody shopdig\nbody makekops\nbody getcad\nbody pay_for_damage\nbody costly_spot\nbody costly_adjacent\nbody shop_object\nbody price_quote\nbody shk_embellish\nbody shk_chat\nbody kops_gone\nbody cost_per_charge\nbody check_unpaid_usage\nbody check_unpaid\nbody costly_gold\nbody block_door\nbody block_entry\nbody shk_your\nbody Shk_Your\nbody shk_owns\nbody mon_owns\nbody cad\nbody globby_bill_fixup\nbody use_unpaid_trapobj\nNative assertions: 14582 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/shk.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 14582,
+      "assertionFailures": 0,
+      "reports": [
+        1881
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "sp_lev",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 3689 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/sp_lev.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 3689,
+      "assertionFailures": 0,
+      "reports": [
+        1893
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "trap",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 12191 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/trap.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 12191,
+      "assertionFailures": 0,
+      "reports": [
+        2018
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "termcap",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 5478768 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/termcap.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 5478768,
+      "assertionFailures": 0,
+      "reports": [
+        2044
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "topl",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 13753 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/95005-1794496607636/topl.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 13753,
+      "assertionFailures": 0,
+      "reports": [
+        95082
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "wintty",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 1497 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/wintty.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 1497,
+      "assertionFailures": 0,
+      "reports": [
+        2342
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "unixunix",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 847 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/unixunix.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 847,
+      "assertionFailures": 0,
+      "reports": [
+        2349
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "unixmain",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 8426 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/unixmain.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 8426,
+      "assertionFailures": 0,
+      "reports": [
+        2358
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "options",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 7577922 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/options.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 7577922,
+      "assertionFailures": 0,
+      "reports": [
+        2460
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "botl",
+      "implementation": "pure-javascript",
+      "nodeArguments": [
+        "--jitless"
+      ],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 8719 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/botl.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 8719,
+      "assertionFailures": 0,
+      "reports": [
+        7661
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "zap",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 9734 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/zap.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 9734,
+      "assertionFailures": 0,
+      "reports": [
+        8196
+      ],
+      "reference": "isolated-C"
+    },
+    {
+      "name": "nhlsel",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": true,
+      "exitStatus": 0,
+      "signal": null,
+      "detail": "Native assertions: 734 checked, 0 failed.\n",
+      "log": ".cache/native-existing-runs/94590-1794478735703/nhlsel.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 734,
+      "assertionFailures": 0,
+      "reports": [
+        8283
+      ],
+      "reference": "isolated-C"
+    }
+  ],
+  "validationMode": "full-cohort-with-targeted-reruns",
+  "runReceipts": [
+    {
+      "report": ".cache/native-existing-runs/94590-1794478735703/results.json",
+      "sha256": "1d631b2f9146e124361ef2f51fdd1503a53f71da298dea7c7037d5a93e83d694",
+      "runId": "94590-1794478735703",
+      "selectedSuites": 138,
+      "passed": 133,
+      "failed": 5
+    },
+    {
+      "report": ".cache/native-existing-runs/410-1794480477620/results.json",
+      "sha256": "0da370ce1561d4960503c435f4fe5db0fcd9f7573d82b93549b54e7a738666bb",
+      "runId": "410-1794480477620",
+      "selectedSuites": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "report": ".cache/native-existing-runs/2655-1794481515413/results.json",
+      "sha256": "463925260bdec355fbddc0a2219dc4d47b23e4c84e554d0313914230f217163c",
+      "runId": "2655-1794481515413",
+      "selectedSuites": 2,
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "report": ".cache/native-existing-runs/7710-1794481590015/results.json",
+      "sha256": "cb909aef1556d3b84ccd6b6865ea9c800949dbedc5d5bd9305b72b47e43d62fd",
+      "runId": "7710-1794481590015",
+      "selectedSuites": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "report": ".cache/native-existing-runs/8933-1794481929240/results.json",
+      "sha256": "dfe8c22f3edfc5bd2d67b8e8dc6a9aa9397febee3f20a515d39ab6f4cd40a933",
+      "runId": "8933-1794481929240",
+      "selectedSuites": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "report": ".cache/native-existing-runs/77007-1794496265388/results.json",
+      "sha256": "15f6dc42c5a2f09c4215ff2a0fea2311354b844b86ef6aa41b9836e714f5961a",
+      "runId": "77007-1794496265388",
+      "selectedSuites": 3,
+      "passed": 2,
+      "failed": 1
+    },
+    {
+      "report": ".cache/native-existing-runs/77969-1794496308340/results.json",
+      "sha256": "c0fed0f3499be3f1c46090544ac41fe0c3383f2edb970e38eb2c375539eb2bc3",
+      "runId": "77969-1794496308340",
+      "selectedSuites": 1,
+      "passed": 0,
+      "failed": 1
+    },
+    {
+      "report": ".cache/native-existing-runs/95005-1794496607636/results.json",
+      "sha256": "799fbbddfb43f9ccdcbb190e91a652cb6e042adc003a8cc1531cbecd122f31fc",
+      "runId": "95005-1794496607636",
+      "selectedSuites": 1,
+      "passed": 1,
+      "failed": 0
+    }
+  ],
+  "supersededAttempts": [
+    {
+      "name": "artifact",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": false,
+      "exitStatus": null,
+      "signal": "SIGTERM",
+      "detail": "Subsystem suite timed out after 1200 seconds",
+      "log": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/native-existing-runs/94590-1794478735703/artifact.log",
+      "expectedReports": 1,
+      "completed": false,
+      "assertions": 0,
+      "assertionFailures": 0,
+      "reports": [],
+      "reference": "isolated-C",
+      "attemptReport": ".cache/native-existing-runs/94590-1794478735703/results.json"
+    },
+    {
+      "name": "nhlua",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": false,
+      "exitStatus": 1,
+      "signal": null,
+      "detail": "C REFERENCE DIFFERENCE 1: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'fixture-fatal:controlled re_alloc OOM [fixture nhlua lua_newstate 11,3511072]'\n- 'fixture-fatal:controlled re_alloc OOM'\n\nC REFERENCE DIFFERENCE 2: native nonreturning allocator panic 2\n+ actual - expected\n\n  {\n+   message: 'fixture-fatal:controlled re_alloc OOM [fixture nhlua lua_newstate 11,3511072]',\n-   message: 'fixture-fatal:controlled re_alloc OOM',\n    pointer: undefined,\n    trace: 're_alloc_panic:2:1624;panic:controlled re_alloc OOM;'\n  }\n\nC REFERENCE DIFFERENCE 3: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'fixture-fatal:controlled re_alloc OOM [fixture nhlua lua_newstate 11,3511072]'\n- 'fixture-fatal:controlled re_alloc OOM'\n\nNative assertions: 2291 checked, 20 failed.\n",
+      "log": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/native-existing-runs/94590-1794478735703/nhlua.log",
+      "expectedReports": 1,
+      "completed": true,
+      "assertions": 2291,
+      "assertionFailures": 20,
+      "reports": [
+        481
+      ],
+      "reference": "isolated-C",
+      "attemptReport": ".cache/native-existing-runs/94590-1794478735703/results.json"
+    },
+    {
+      "name": "cmd",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": false,
+      "exitStatus": 1,
+      "signal": null,
+      "detail": "Native assertions: 1461 checked, 0 failed.\nfile:///Users/arj/Desktop/nethack_comp/teleport-contest/js/c-runtime/heap.js:28\n            throw new RangeError('C memory access outside addressable range');\n                  ^\n\nRangeError: C memory access outside addressable range\n    at CMemory.bounds (file:///Users/arj/Desktop/nethack_comp/teleport-contest/js/c-runtime/heap.js:28:19)\n    at CMemory.strlen (file:///Users/arj/Desktop/nethack_comp/teleport-contest/js/c-runtime/heap.js:123:14)\n    at CMemory.readString (file:///Users/arj/Desktop/nethack_comp/teleport-contest/js/c-runtime/heap.js:135:52)\n    at text (file:///Users/arj/Desktop/nethack_comp/teleport-contest/js/c-runtime/stdlib.js:98:85)\n    at api.format (file:///Users/arj/Desktop/nethack_comp/teleport-contest/js/c-runtime/stdlib.js:198:56)\n    at api.sprintf (file:///Users/arj/Desktop/nethack_comp/teleport-contest/js/c-runtime/stdlib.js:242:28)\n    at Object.sprintf (file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/runtime.mjs:70:117)\n    at resolveInvoke (file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/runtime.mjs:82:495)\n    at invoke (file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/runtime.mjs:83:43)\n    at importEnv.<computed> (file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/runtime.mjs:103:69)\n\nNode.js v24.19.0\n",
+      "log": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/native-existing-runs/94590-1794478735703/cmd.log",
+      "expectedReports": 1,
+      "completed": false,
+      "assertions": 1461,
+      "assertionFailures": 0,
+      "reports": [
+        649
+      ],
+      "reference": "isolated-C",
+      "attemptReport": ".cache/native-existing-runs/94590-1794478735703/results.json"
+    },
+    {
+      "name": "hack",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": false,
+      "exitStatus": null,
+      "signal": "SIGTERM",
+      "detail": "Subsystem suite timed out after 1200 seconds",
+      "log": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/native-existing-runs/94590-1794478735703/hack.log",
+      "expectedReports": 1,
+      "completed": false,
+      "assertions": 0,
+      "assertionFailures": 0,
+      "reports": [],
+      "reference": "isolated-C",
+      "attemptReport": ".cache/native-existing-runs/94590-1794478735703/results.json"
+    },
+    {
+      "name": "topl",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": false,
+      "exitStatus": 1,
+      "signal": null,
+      "detail": "Native assertions: 0 checked, 0 failed.\nnode:internal/errors:985\n  const err = new Error(message);\n              ^\n\nError: Command failed: /Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/node/24.19.0_64bit/bin/node scripts/check-services-layout.mjs\nTraceback (most recent call last):\n  File \"/Users/arj/Desktop/nethack_comp/teleport-contest/scripts/relocate-runtime-layout.py\", line 208, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/arj/Desktop/nethack_comp/teleport-contest/scripts/relocate-runtime-layout.py\", line 158, in main\n    validate_post_default(ROOT)\n    ~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/arj/Desktop/nethack_comp/teleport-contest/scripts/post_default_successors.py\", line 64, in validate_cohort\n    assert sha(actual)==row['afterSha256'],'Unqualified current post-default source: '+path\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unqualified current post-default source: js/c-runtime/stdio.js\nnode:internal/errors:985\n  const err = new Error(message);\n              ^\n\nError: Command failed: python3 scripts/relocate-runtime-layout.py --historical\n    at genericNodeError (node:internal/errors:985:15)\n    at wrappedFn (node:internal/errors:539:14)\n    at checkExecSyncError (node:child_process:942:11)\n    at execFileSync (node:child_process:978:15)\n    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/check-services-layout.mjs:9:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  status: 1,\n  signal: null,\n  output: [ null, null, null ],\n  pid: 2337,\n  stdout: null,\n  stderr: null\n}\n\nNode.js v24.19.0\n\n    at genericNodeError (node:internal/errors:985:15)\n    at wrappedFn (node:internal/errors:539:14)\n    at checkExecSyncError (node:child_process:942:11)\n    at execFileSync (node:child_process:978:15)\n    at assertCompiledInput (file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/c-runtime-compiled-input.mjs:24:3)\n    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/test-tu-topl.mjs:9:341 {\n  status: 1,\n  signal: null,\n  output: [\n    null,\n    Buffer(0) [Uint8Array] [],\n    Buffer(1523) [Uint8Array] [\n       84, 114,  97,  99, 101,  98,  97,  99, 107,  32,  40, 109,\n      111, 115, 116,  32, 114, 101,  99, 101, 110, 116,  32,  99,\n       97, 108, 108,  32, 108,  97, 115, 116,  41,  58,  10,  32,\n       32,  70, 105, 108, 101,  32,  34,  47,  85, 115, 101, 114,\n      115,  47,  97, 114, 106,  47,  68, 101, 115, 107, 116, 111,\n      112,  47, 110, 101, 116, 104,  97,  99, 107,  95,  99, 111,\n      109, 112,  47, 116, 101, 108, 101, 112, 111, 114, 116,  45,\n       99, 111, 110, 116, 101, 115, 116,  47, 115,  99, 114, 105,\n      112, 116, 115,  47,\n      ... 1423 more items\n    ]\n  ],\n  pid: 2336,\n  stdout: Buffer(0) [Uint8Array] [],\n  stderr: Buffer(1523) [Uint8Array] [\n     84, 114,  97,  99, 101,  98,  97,  99, 107,  32,  40, 109,\n    111, 115, 116,  32, 114, 101,  99, 101, 110, 116,  32,  99,\n     97, 108, 108,  32, 108,  97, 115, 116,  41,  58,  10,  32,\n     32,  70, 105, 108, 101,  32,  34,  47,  85, 115, 101, 114,\n    115,  47,  97, 114, 106,  47,  68, 101, 115, 107, 116, 111,\n    112,  47, 110, 101, 116, 104,  97,  99, 107,  95,  99, 111,\n    109, 112,  47, 116, 101, 108, 101, 112, 111, 114, 116,  45,\n     99, 111, 110, 116, 101, 115, 116,  47, 115,  99, 114, 105,\n    112, 116, 115,  47,\n    ... 1423 more items\n  ]\n}\n\nNode.js v24.19.0\n",
+      "log": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/native-existing-runs/94590-1794478735703/topl.log",
+      "expectedReports": 1,
+      "completed": false,
+      "assertions": 0,
+      "assertionFailures": 0,
+      "reports": [
+        2332
+      ],
+      "reference": "isolated-C",
+      "attemptReport": ".cache/native-existing-runs/94590-1794478735703/results.json"
+    },
+    {
+      "name": "topl",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": false,
+      "exitStatus": 1,
+      "signal": null,
+      "detail": "Native assertions: 0 checked, 0 failed.\nnode:internal/errors:985\n  const err = new Error(message);\n              ^\n\nError: Command failed: /Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/node/24.19.0_64bit/bin/node scripts/check-services-layout.mjs\nTraceback (most recent call last):\n  File \"/Users/arj/Desktop/nethack_comp/teleport-contest/scripts/relocate-runtime-layout.py\", line 208, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/arj/Desktop/nethack_comp/teleport-contest/scripts/relocate-runtime-layout.py\", line 158, in main\n    validate_post_default(ROOT)\n    ~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/arj/Desktop/nethack_comp/teleport-contest/scripts/post_default_successors.py\", line 66, in validate_cohort\n    if path in ALLOCATION_CLI:actual=allocation_cli_before(root,path)\n                                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"/Users/arj/Desktop/nethack_comp/teleport-contest/scripts/allocation_cli_source_successors.py\", line 62, in qualified_before\n    return validate_cohort(root)[path]\n           ~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/arj/Desktop/nethack_comp/teleport-contest/scripts/allocation_cli_source_successors.py\", line 53, in validate_cohort\n    assert sha(actual)==row['afterSha256'],'Unqualified current allocation-CLI source: '+path\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Unqualified current allocation-CLI source: js/standalone/environment.js\nnode:internal/errors:985\n  const err = new Error(message);\n              ^\n\nError: Command failed: python3 scripts/relocate-runtime-layout.py --historical\n    at genericNodeError (node:internal/errors:985:15)\n    at wrappedFn (node:internal/errors:539:14)\n    at checkExecSyncError (node:child_process:942:11)\n    at execFileSync (node:child_process:978:15)\n    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/check-services-layout.mjs:9:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  status: 1,\n  signal: null,\n  output: [ null, null, null ],\n  pid: 77090,\n  stdout: null,\n  stderr: null\n}\n\nNode.js v24.19.0\n\n    at genericNodeError (node:internal/errors:985:15)\n    at wrappedFn (node:internal/errors:539:14)\n    at checkExecSyncError (node:child_process:942:11)\n    at execFileSync (node:child_process:978:15)\n    at assertCompiledInput (file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/c-runtime-compiled-input.mjs:24:3)\n    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/test-tu-topl.mjs:9:341 {\n  status: 1,\n  signal: null,\n  output: [\n    null,\n    Buffer(0) [Uint8Array] [],\n    Buffer(2010) [Uint8Array] [\n       84, 114,  97,  99, 101,  98,  97,  99, 107,  32,  40, 109,\n      111, 115, 116,  32, 114, 101,  99, 101, 110, 116,  32,  99,\n       97, 108, 108,  32, 108,  97, 115, 116,  41,  58,  10,  32,\n       32,  70, 105, 108, 101,  32,  34,  47,  85, 115, 101, 114,\n      115,  47,  97, 114, 106,  47,  68, 101, 115, 107, 116, 111,\n      112,  47, 110, 101, 116, 104,  97,  99, 107,  95,  99, 111,\n      109, 112,  47, 116, 101, 108, 101, 112, 111, 114, 116,  45,\n       99, 111, 110, 116, 101, 115, 116,  47, 115,  99, 114, 105,\n      112, 116, 115,  47,\n      ... 1910 more items\n    ]\n  ],\n  pid: 77089,\n  stdout: Buffer(0) [Uint8Array] [],\n  stderr: Buffer(2010) [Uint8Array] [\n     84, 114,  97,  99, 101,  98,  97,  99, 107,  32,  40, 109,\n    111, 115, 116,  32, 114, 101,  99, 101, 110, 116,  32,  99,\n     97, 108, 108,  32, 108,  97, 115, 116,  41,  58,  10,  32,\n     32,  70, 105, 108, 101,  32,  34,  47,  85, 115, 101, 114,\n    115,  47,  97, 114, 106,  47,  68, 101, 115, 107, 116, 111,\n    112,  47, 110, 101, 116, 104,  97,  99, 107,  95,  99, 111,\n    109, 112,  47, 116, 101, 108, 101, 112, 111, 114, 116,  45,\n     99, 111, 110, 116, 101, 115, 116,  47, 115,  99, 114, 105,\n    112, 116, 115,  47,\n    ... 1910 more items\n  ]\n}\n\nNode.js v24.19.0\n",
+      "log": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/native-existing-runs/77007-1794496265388/topl.log",
+      "expectedReports": 1,
+      "completed": false,
+      "assertions": 0,
+      "assertionFailures": 0,
+      "reports": [
+        77085
+      ],
+      "reference": "isolated-C",
+      "attemptReport": ".cache/native-existing-runs/77007-1794496265388/results.json"
+    },
+    {
+      "name": "topl",
+      "implementation": "pure-javascript",
+      "nodeArguments": [],
+      "passed": false,
+      "exitStatus": 1,
+      "signal": null,
+      "detail": "Native assertions: 0 checked, 0 failed.\nnode:internal/errors:985\n  const err = new Error(message);\n              ^\n\nError: Command failed: /Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/node/24.19.0_64bit/bin/node scripts/check-services-layout.mjs\nfile:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/qualification.mjs:23\n if(declaration.baselineCommit!=='cc8ef80b7ac93c01feac7e40677aec0d3d63c03a'||Object.keys(declaration.files).some(p=>!migrationFiles.has(p)))throw Error('Unreviewed migration qualification cohort');\n                                                                                                                                                  ^\n\nError: Unreviewed migration qualification cohort\n    at qualifiedHistorical (file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/qualification.mjs:23:147)\n    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/extract-binding-infrastructure.mjs:198:360\n\nNode.js v24.19.0\nnode:internal/errors:985\n  const err = new Error(message);\n              ^\n\nError: Command failed: /Users/arj/Desktop/nethack_comp/teleport-contest/.cache/emsdk/node/24.19.0_64bit/bin/node scripts/extract-binding-infrastructure.mjs\n    at genericNodeError (node:internal/errors:985:15)\n    at wrappedFn (node:internal/errors:539:14)\n    at checkExecSyncError (node:child_process:942:11)\n    at execFileSync (node:child_process:978:15)\n    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/check-services-layout.mjs:10:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  status: 1,\n  signal: null,\n  output: [ null, null, null ],\n  pid: 83693,\n  stdout: null,\n  stderr: null\n}\n\nNode.js v24.19.0\n\n    at genericNodeError (node:internal/errors:985:15)\n    at wrappedFn (node:internal/errors:539:14)\n    at checkExecSyncError (node:child_process:942:11)\n    at execFileSync (node:child_process:978:15)\n    at assertCompiledInput (file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/c-runtime-compiled-input.mjs:24:3)\n    at file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/test-tu-topl.mjs:9:341 {\n  status: 1,\n  signal: null,\n  output: [\n    null,\n    Buffer(172) [Uint8Array] [\n       80,  65,  83,  83,  32, 104, 105, 115, 116, 111, 114, 105,\n       99,  97, 108,  51,  57,  48,  32, 114, 101, 112, 114, 111,\n      100, 117,  99, 116, 105, 111, 110,  32,  40,  78,  79,  84,\n       32,  99, 117, 114, 114, 101, 110, 116,  45, 115, 111, 117,\n      114,  99, 101,  32,  97,  99,  99, 101, 112, 116,  97, 110,\n       99, 101,  41,  58,  32,  49,  56,  57,  32, 115, 111, 117,\n      114,  99, 101,  32, 114, 101, 108, 111,  99,  97, 116, 105,\n      111, 110, 115,  59,  32,  49,  48,  49,  55,  32, 101, 120,\n       97,  99, 116,  32,\n      ... 72 more items\n    ],\n    Buffer(1634) [Uint8Array] [\n      102, 105, 108, 101,  58,  47,  47,  47,  85, 115, 101, 114,\n      115,  47,  97, 114, 106,  47,  68, 101, 115, 107, 116, 111,\n      112,  47, 110, 101, 116, 104,  97,  99, 107,  95,  99, 111,\n      109, 112,  47, 116, 101, 108, 101, 112, 111, 114, 116,  45,\n       99, 111, 110, 116, 101, 115, 116,  47, 115,  99, 114, 105,\n      112, 116, 115,  47, 112, 117, 114, 101,  45, 106, 115,  45,\n      102, 105, 120, 116, 117, 114, 101, 115,  47, 113, 117,  97,\n      108, 105, 102, 105,  99,  97, 116, 105, 111, 110,  46, 109,\n      106, 115,  58,  50,\n      ... 1534 more items\n    ]\n  ],\n  pid: 78050,\n  stdout: Buffer(172) [Uint8Array] [\n     80,  65,  83,  83,  32, 104, 105, 115, 116, 111, 114, 105,\n     99,  97, 108,  51,  57,  48,  32, 114, 101, 112, 114, 111,\n    100, 117,  99, 116, 105, 111, 110,  32,  40,  78,  79,  84,\n     32,  99, 117, 114, 114, 101, 110, 116,  45, 115, 111, 117,\n    114,  99, 101,  32,  97,  99,  99, 101, 112, 116,  97, 110,\n     99, 101,  41,  58,  32,  49,  56,  57,  32, 115, 111, 117,\n    114,  99, 101,  32, 114, 101, 108, 111,  99,  97, 116, 105,\n    111, 110, 115,  59,  32,  49,  48,  49,  55,  32, 101, 120,\n     97,  99, 116,  32,\n    ... 72 more items\n  ],\n  stderr: Buffer(1634) [Uint8Array] [\n    102, 105, 108, 101,  58,  47,  47,  47,  85, 115, 101, 114,\n    115,  47,  97, 114, 106,  47,  68, 101, 115, 107, 116, 111,\n    112,  47, 110, 101, 116, 104,  97,  99, 107,  95,  99, 111,\n    109, 112,  47, 116, 101, 108, 101, 112, 111, 114, 116,  45,\n     99, 111, 110, 116, 101, 115, 116,  47, 115,  99, 114, 105,\n    112, 116, 115,  47, 112, 117, 114, 101,  45, 106, 115,  45,\n    102, 105, 120, 116, 117, 114, 101, 115,  47, 113, 117,  97,\n    108, 105, 102, 105,  99,  97, 116, 105, 111, 110,  46, 109,\n    106, 115,  58,  50,\n    ... 1534 more items\n  ]\n}\n\nNode.js v24.19.0\n",
+      "log": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/native-existing-runs/77969-1794496308340/topl.log",
+      "expectedReports": 1,
+      "completed": false,
+      "assertions": 0,
+      "assertionFailures": 0,
+      "reports": [
+        78046
+      ],
+      "reference": "isolated-C",
+      "attemptReport": ".cache/native-existing-runs/77969-1794496308340/results.json"
+    }
+  ],
+  "mainIntegration": {
+    "reason": "Shared main advanced after the completed migration cohort; preserve committed integration changes and revalidate affected paths.",
+    "mainCommit": "8b834cd2b94a10bc1a96336de0bd91f90d3adf2b",
+    "changedSources": {
+      "js/standalone/environment.js": {
+        "validatedSha256": "cadb60e4ee7590947f23f23e3c03f9111ee2ca9643051b66b020931b62a4be05",
+        "currentSha256": "8c7d2bcf3341e6bc8306f8da6785027d37a092e8d3ec43852d50e86f9d616eaf"
+      },
+      "scripts/test-post-default-successors.py": {
+        "validatedSha256": "30b95ff6beb34f735cbf7a557f275153e27bfaf0b0f14a37f65b4710f1c49698",
+        "currentSha256": "f1768ff35fef8ba3515cfbd61c4bd043b762047aabcd109c5ccce2835fb7ebe4"
+      },
+      "scripts/post_default_successors.py": {
+        "validatedSha256": "d11f562f4642a76cb12042b63f3eff0f56c66ede7bd890bd2aa536d834408fe5",
+        "currentSha256": "a0ee173ee2f05b4a768863b8ad7169d0cbc85a4dcd8f7baf0aba4adb333bc835"
+      },
+      "scripts/services-layout-audit.mjs": {
+        "validatedSha256": "9638e926684ec0c7791d3225bee4fb99af3126d09df370e351a0be821ad41481",
+        "currentSha256": "2c080b0c6ba003abc3df96ba30b694f93308147702bf91e613ed1df1ac101e2d"
+      },
+      "scripts/services_layout_audit.py": {
+        "validatedSha256": "22f560fa14e987195091a14d42c0661cb08ac1bc27fd8f569ad335b966c32287",
+        "currentSha256": "4bd4c700d77705016733db2fd85a58bc948af22025a94332ef975738d9202bce"
+      },
+      "scripts/write-c-runtime-manifest.mjs": {
+        "validatedSha256": "129c1cff21944ee10115e92c425a6a7be71aea5d24753e0f6cd3d8d49742cc89",
+        "currentSha256": "6b08b40c731a96a523019d311b505d0138e76407859357a443f885ffbc952293"
+      }
+    }
+  },
+  "suites": 138,
+  "failures": 0,
+  "completeMigration": true,
+  "completedAt": "2026-11-12T15:18:12.248Z",
+  "node": "v24.19.0",
+  "report": ".cache/native-existing-runs/94590-1794478735703/results.json",
+  "reportSha256": "1d631b2f9146e124361ef2f51fdd1503a53f71da298dea7c7037d5a93e83d694",
+  "fixtureCounts": {
+    "handwrittenJavaScript": 18,
+    "loweredFixtureAndAbiOnly": 120
+  },
+  "fixtureManifests": {
+    "utf8map": {
+      "manifest": ".cache/pure-js-fixtures/utf8map/manifest.json",
+      "sha256": "ac0035fe3514caae9a8011d4450aec8ebf3fbd070de9999b2642db475971fe9e"
+    },
+    "ioctl": {
+      "manifest": ".cache/pure-js-fixtures/ioctl/manifest.json",
+      "sha256": "f91c20e20389a91465cd8e4e9c4394a611d5d8668fb7e0b03ea6bf8ea2fe9c5d"
+    },
+    "unixtty": {
+      "manifest": ".cache/pure-js-fixtures/unixtty/manifest.json",
+      "sha256": "1191eb9229e2c38e68c429400fb7fdfe4accbfe9ccb6521e25cd5db44c006849"
+    },
+    "were": {
+      "manifest": ".cache/pure-js-fixtures/were/manifest.json",
+      "sha256": "6bda2e06079d0a43014f07f93ad7b92fcf566d0921be420994e8cc9097d06122"
+    },
+    "extralev": {
+      "manifest": ".cache/pure-js-fixtures/extralev/manifest.json",
+      "sha256": "4ea75cf70c6a504d2fc8a213d46c2692f7170d018a9837b8c3ae21d53631c066"
+    },
+    "mplayer": {
+      "manifest": ".cache/pure-js-fixtures/mplayer/manifest.json",
+      "sha256": "b822aba8a19e21c5b7e322210ecd39298f3fec9577c644d31f2bcd29567d4ff0"
+    },
+    "exper": {
+      "manifest": ".cache/pure-js-fixtures/exper/manifest.json",
+      "sha256": "5c110e0e1aa2ad1f1c55f7073640ed74a4630ff7bc02ed9f0a912b0e13bdc4c8"
+    },
+    "mkmap": {
+      "manifest": ".cache/pure-js-fixtures/mkmap/manifest.json",
+      "sha256": "e336cf7bc6c4f66841b63bf28d1c5b36d7be9983702f1fbda19ac1b0a05d4e1e"
+    },
+    "getline": {
+      "manifest": ".cache/pure-js-fixtures/getline/manifest.json",
+      "sha256": "189eb2ce33727621c594c023a914e446cf860e2a7ddf34213a21c7e6135f9955"
+    },
+    "write": {
+      "manifest": ".cache/pure-js-fixtures/write/manifest.json",
+      "sha256": "70d78c759f4b459a52443b33c959a4501abf95772feb5dec7fe8b9fe7f4081a6"
+    },
+    "mdlib": {
+      "manifest": ".cache/pure-js-fixtures/mdlib/manifest.json",
+      "sha256": "3e7a37d9864ab77c3473c471eda8f4f9ad0daed2a3ae740be3f294c32066376a"
+    },
+    "quest": {
+      "manifest": ".cache/pure-js-fixtures/quest/manifest.json",
+      "sha256": "2b815709e0a148cd6cde67671804a3f7442781df8ec72efebf96dffd36d3c204"
+    },
+    "minion": {
+      "manifest": ".cache/pure-js-fixtures/minion/manifest.json",
+      "sha256": "25d737411bbff4231fb2acb56253069f476d96cde1dceed7ef56534950ed2d96"
+    },
+    "iactions": {
+      "manifest": ".cache/pure-js-fixtures/iactions/manifest.json",
+      "sha256": "13e026e6277f191e8a084b448612211ab4e52caf7ba00601fa2ac427c5989cc9"
+    },
+    "selvar": {
+      "manifest": ".cache/pure-js-fixtures/selvar/manifest.json",
+      "sha256": "faa2539c303abddaeaa6d5ea961ed657d7abb4746e20a6dfcb6f6dfbcbb0b83f"
+    },
+    "steal": {
+      "manifest": ".cache/pure-js-fixtures/steal/manifest.json",
+      "sha256": "1fed775cadd114a1dfbac73a91e3cb043fc7c8cb39db099c977c512e1292319e"
+    },
+    "sit": {
+      "manifest": ".cache/pure-js-fixtures/sit/manifest.json",
+      "sha256": "7ec4509dd7fdb9f27d0f80352f558cb471f68fdd76ed8df05795b5d38f506ca7"
+    },
+    "fountain": {
+      "manifest": ".cache/pure-js-fixtures/fountain/manifest.json",
+      "sha256": "aabd5493e7e34200cda3338816bccfb6ad5559d14826364c33ad97f0a6867621"
+    },
+    "shknam": {
+      "manifest": ".cache/pure-js-fixtures/shknam/manifest.json",
+      "sha256": "1947a90f637215a7d52db3cc9c8f09f65b2c3ffa8ed84d038b47556da24732ba"
+    },
+    "rumors": {
+      "manifest": ".cache/pure-js-fixtures/rumors/manifest.json",
+      "sha256": "1094f3f1f56a9fb2413093c069b314bc624fc9188d74dcd99e5d70fa65d1de85"
+    },
+    "music": {
+      "manifest": ".cache/pure-js-fixtures/music/manifest.json",
+      "sha256": "1bc9a3878de87f1cde935d4be343a0445f236ee1adea87ac874713fe0a72c06b"
+    },
+    "version": {
+      "manifest": ".cache/pure-js-fixtures/version/manifest.json",
+      "sha256": "01a8ca99a7946da12db09870a3cb0ef3761177e4578bfb3472f070a56cc9596d"
+    },
+    "coloratt": {
+      "manifest": ".cache/pure-js-fixtures/coloratt/manifest.json",
+      "sha256": "5de7b3c5a56cac86448ae829ff1923acaf67393761b63bf78a8338a312dc6c75"
+    },
+    "priest": {
+      "manifest": ".cache/pure-js-fixtures/priest/manifest.json",
+      "sha256": "7f8ec3694cc05e20b88c14335aebc6ab999e3204b6d36fa4f944192e76dab1f8"
+    },
+    "lock": {
+      "manifest": ".cache/pure-js-fixtures/lock/manifest.json",
+      "sha256": "83493ce2d0bef02b4227febe62399cf0b90bd45da78346af1384c8dc593e6346"
+    },
+    "steed": {
+      "manifest": ".cache/pure-js-fixtures/steed/manifest.json",
+      "sha256": "66f52d61377af25084950cee42aadd3b21b3f26ec742216072f6ddc313edae2e"
+    },
+    "wizard": {
+      "manifest": ".cache/pure-js-fixtures/wizard/manifest.json",
+      "sha256": "75cf25bf43e28522712e0fd30a37eebe839ac3178249827173b015df40f6a96e"
+    },
+    "worm": {
+      "manifest": ".cache/pure-js-fixtures/worm/manifest.json",
+      "sha256": "bd7bc97b86d61effe8bf71d56b4ddce53d1634220df5bff842f0c9bc51014484"
+    },
+    "o_init": {
+      "manifest": ".cache/pure-js-fixtures/o_init/manifest.json",
+      "sha256": "eeec40eca1d98cbe653da8d3fa38b35c9c8c77deaa77fad147a9824f547bc2b1"
+    },
+    "ball": {
+      "manifest": ".cache/pure-js-fixtures/ball/manifest.json",
+      "sha256": "4656bcbf3428c6eea530a419e19ad8005e3f53e63af6c86bc9282a9d47b6f872"
+    },
+    "mcastu": {
+      "manifest": ".cache/pure-js-fixtures/mcastu/manifest.json",
+      "sha256": "6147c90817e168b4725f4adbeb89da0f3af442a80c943146c5eb106b1c37f6fe"
+    },
+    "dbridge": {
+      "manifest": ".cache/pure-js-fixtures/dbridge/manifest.json",
+      "sha256": "09a3c774370f36aa9f74a6f91d7a552711a898a8396063b82c07d5e4d27080f5"
+    },
+    "mondata": {
+      "manifest": ".cache/pure-js-fixtures/mondata/manifest.json",
+      "sha256": "ad34830c57e6db56d5a61f2e4a795c52d7078ed7f129f40a53f2c133a74ebfaf"
+    },
+    "worn": {
+      "manifest": ".cache/pure-js-fixtures/worn/manifest.json",
+      "sha256": "b379d308c9eb072cf3104d0c0bde9c9c291113e6014ae617ffebf598f7cd95b3"
+    },
+    "wield": {
+      "manifest": ".cache/pure-js-fixtures/wield/manifest.json",
+      "sha256": "51f6229b43ebee6267e25b73e0293b59fc34c1f109753f7466d60525b0fe3825"
+    },
+    "mkroom": {
+      "manifest": ".cache/pure-js-fixtures/mkroom/manifest.json",
+      "sha256": "807a5c7f5be2cff5e32b3fb434ed2614619d3bf8f3e95fb385655279de07c39c"
+    },
+    "sfstruct": {
+      "manifest": ".cache/pure-js-fixtures/sfstruct/manifest.json",
+      "sha256": "18cf3525f0b6d9105ddd6cacb85500d1bfc4a655c563d03857b44a42f6da1e3d"
+    },
+    "earlyarg": {
+      "manifest": ".cache/pure-js-fixtures/earlyarg/manifest.json",
+      "sha256": "08aa77a051503e1beb5da8f0b18823f52b5482c3f07818abb9efc7e7e1f8a12c"
+    },
+    "report": {
+      "manifest": ".cache/pure-js-fixtures/report/manifest.json",
+      "sha256": "9d680269724aceb58565d6a2a2765461285b0031d14f15155f50ca4c9d55dbed"
+    },
+    "bones": {
+      "manifest": ".cache/pure-js-fixtures/bones/manifest.json",
+      "sha256": "998cdf9f73d4bf3a07f169d045b13ef9e2dfe790291e5e9471a08b5cf49a94ee"
+    },
+    "explode": {
+      "manifest": ".cache/pure-js-fixtures/explode/manifest.json",
+      "sha256": "0a8e1cbeb10b723d55ea512ab01cfe2ce52fc0fbf956d6954f31f3a7137b8e34"
+    },
+    "questpgr": {
+      "manifest": ".cache/pure-js-fixtures/questpgr/manifest.json",
+      "sha256": "81ae87585742f4e41fec88f20b7c38a7fabbf9bf7927ec1f9422e478b27862cd"
+    },
+    "symbols": {
+      "manifest": ".cache/pure-js-fixtures/symbols/manifest.json",
+      "sha256": "ea0b2e548b4088d06618818111a425106ac52f5e4e5aa74d6689bf2f0131ebee"
+    },
+    "mail": {
+      "manifest": ".cache/pure-js-fixtures/mail/manifest.json",
+      "sha256": "d5e6330ea78047e43d9d00c9f570c80a8d1e7d8166657a389d0bc8e1f6174479"
+    },
+    "pline": {
+      "manifest": ".cache/pure-js-fixtures/pline/manifest.json",
+      "sha256": "7a24b3af34ad5315929872bdb73e5d5c71fc46fb0b437f2715bf20de29136d78"
+    },
+    "attrib": {
+      "manifest": ".cache/pure-js-fixtures/attrib/manifest.json",
+      "sha256": "8066c1cfc58b4dac0c377e4c25b95b7f48752023e148aab33f1fa20067ee9af1"
+    },
+    "sfbase": {
+      "manifest": ".cache/pure-js-fixtures/sfbase/manifest.json",
+      "sha256": "ade700b7ec0237e6f90959c7138caf346f087ba58485a8ebc635dfaf1b6fab9b"
+    },
+    "dog": {
+      "manifest": ".cache/pure-js-fixtures/dog/manifest.json",
+      "sha256": "7f3ca4d1bc16ee36c74fcad451bf11a9f0b0a75bdb4df9dca498ae9b1bb760b7"
+    },
+    "region": {
+      "manifest": ".cache/pure-js-fixtures/region/manifest.json",
+      "sha256": "fc0226d8d9e6419fb92296fae22e427f484a107c75cfd56f62e7d53f2b580c0c"
+    },
+    "weapon": {
+      "manifest": ".cache/pure-js-fixtures/weapon/manifest.json",
+      "sha256": "0fedca1e90960b594d70a447402f4c3b36ffdb8220f9adb9d1abfc2f14cf727a"
+    },
+    "vault": {
+      "manifest": ".cache/pure-js-fixtures/vault/manifest.json",
+      "sha256": "0de21b6eb2c9d7952d155e8cd5ea25edaf505aeb114016581ef7296165fc4bda"
+    },
+    "u_init": {
+      "manifest": ".cache/pure-js-fixtures/u_init/manifest.json",
+      "sha256": "538b8b4d4149a9a8237f31361bc8dea036e23d62a76e93513cb50feb4dcec84f"
+    },
+    "sounds": {
+      "manifest": ".cache/pure-js-fixtures/sounds/manifest.json",
+      "sha256": "c5707c0acf5af2dcaa164e73c480fd22ad6bc2414d59cd5ded1c25bec7460528"
+    },
+    "save": {
+      "manifest": ".cache/pure-js-fixtures/save/manifest.json",
+      "sha256": "de730a9e9fddb180d5993028687a13bc21a506e3925bdc7e42cbfa694093c734"
+    },
+    "mhitm": {
+      "manifest": ".cache/pure-js-fixtures/mhitm/manifest.json",
+      "sha256": "90ef1d4615a2eafe0ea2ac0a5a81125c8d95fd003e9c582dc9275c3469cb2803"
+    },
+    "getpos": {
+      "manifest": ".cache/pure-js-fixtures/getpos/manifest.json",
+      "sha256": "b81be895bdd260ba9c8b2ed834aad2d9d0331336dc858b527386c288d4e4a0fb"
+    },
+    "allmain": {
+      "manifest": ".cache/pure-js-fixtures/allmain/manifest.json",
+      "sha256": "8d34478dec560135b0a93e69864c0f53d0b251d295dbdf22139d04702ef0976d"
+    },
+    "mthrowu": {
+      "manifest": ".cache/pure-js-fixtures/mthrowu/manifest.json",
+      "sha256": "b6f3add6a8d7b087dec120d005c6a105b84e8346ee67e60e5842593ce5c918b0"
+    },
+    "role": {
+      "manifest": ".cache/pure-js-fixtures/role/manifest.json",
+      "sha256": "a61e1213d288e2abc79e1ca735d2b1c4d3497b87380ff71a0c5ef38e1dc87b0f"
+    },
+    "engrave": {
+      "manifest": ".cache/pure-js-fixtures/engrave/manifest.json",
+      "sha256": "5c622f406156bab6396cd5f04c0d16dafea711e9634b19bf29cdce7241e96916"
+    },
+    "glyphs": {
+      "manifest": ".cache/pure-js-fixtures/glyphs/manifest.json",
+      "sha256": "7978389bcd94f4ff9f5f722e1f54ce7ba68c998e56b31d7b7ba1d1b38b3fe70e"
+    },
+    "topten": {
+      "manifest": ".cache/pure-js-fixtures/topten/manifest.json",
+      "sha256": "0d574994b63e1b2bfefc09bc0c12e5622041c83aad0d92f0c558745aa03e569e"
+    },
+    "dogmove": {
+      "manifest": ".cache/pure-js-fixtures/dogmove/manifest.json",
+      "sha256": "2bad19f7cd1444633bcaf85c2dd4a4f8cce77a843914d99a239d680f7db0072c"
+    },
+    "windows": {
+      "manifest": ".cache/pure-js-fixtures/windows/manifest.json",
+      "sha256": "993131a9d4a968512840517e44e1b46069ff1b0a129c555bc48a874db70c130f"
+    },
+    "cfgfiles": {
+      "manifest": ".cache/pure-js-fixtures/cfgfiles/manifest.json",
+      "sha256": "66a197dc5beb6e9c7d917b822be96eefc1c5fe85784e263f6d6f0bc659022753"
+    },
+    "restore": {
+      "manifest": ".cache/pure-js-fixtures/restore/manifest.json",
+      "sha256": "32678aebfdc903ff253fabf2a292c0236eee8abefd5d21e3928477a7fd6e620b"
+    },
+    "nhlobj": {
+      "manifest": ".cache/pure-js-fixtures/nhlobj/manifest.json",
+      "sha256": "b8f92348bfcd513d0d744b9fa354f00c18ccf6a071508d2691f7c25ef8a01df1"
+    },
+    "do_name": {
+      "manifest": ".cache/pure-js-fixtures/do_name/manifest.json",
+      "sha256": "6b93608e1117fb2712ed3325fa1d0fddf9b8c1b4d24bacc74cf5d336c318c2cb"
+    },
+    "vision": {
+      "manifest": ".cache/pure-js-fixtures/vision/manifest.json",
+      "sha256": "60584c41e8c89370e3e9b59062f88f981f5fec6cf5c69e9f85b287e3c9fd28e7"
+    },
+    "mkmaze": {
+      "manifest": ".cache/pure-js-fixtures/mkmaze/manifest.json",
+      "sha256": "4ace3ce992da1ce7c95577c0c5841528f3626e8abe749f590702197d02c50711"
+    },
+    "dokick": {
+      "manifest": ".cache/pure-js-fixtures/dokick/manifest.json",
+      "sha256": "91a41e863b75481c3bfd88de3ad3a05cccb8f8debb3a8f083c669c68111ce276"
+    },
+    "dig": {
+      "manifest": ".cache/pure-js-fixtures/dig/manifest.json",
+      "sha256": "4346b394feda3f550b204c98d40171f6555588f67ed4c9138d7500dc5d8ceac3"
+    },
+    "end": {
+      "manifest": ".cache/pure-js-fixtures/end/manifest.json",
+      "sha256": "ad226e260f39a95d403033dbce65117eb5901087a00883cfb5343149cdae298d"
+    },
+    "polyself": {
+      "manifest": ".cache/pure-js-fixtures/polyself/manifest.json",
+      "sha256": "87233136fdf51844c3093870ccb4a61106d63fbd9fb6938a3c02e2c20546e9a9"
+    },
+    "wizcmds": {
+      "manifest": ".cache/pure-js-fixtures/wizcmds/manifest.json",
+      "sha256": "6765163be2881cda52fb8a6b8bd9c03a5d10be1330f02f74c593855d848b399b"
+    },
+    "detect": {
+      "manifest": ".cache/pure-js-fixtures/detect/manifest.json",
+      "sha256": "948311e6680dcfc67bef1fd0a85d9ac005a566344fad8a9df2b4c4b9bee4c093"
+    },
+    "teleport": {
+      "manifest": ".cache/pure-js-fixtures/teleport/manifest.json",
+      "sha256": "a0abd2ca86720864fdd428475030f9f0c2269aea9c3bd164b57e482903a07f96"
+    },
+    "mklev": {
+      "manifest": ".cache/pure-js-fixtures/mklev/manifest.json",
+      "sha256": "c60e1e78c0f6a6930fa311e82f980a9bf0f0f6001b53fe02712ec6546daa103c"
+    },
+    "monmove": {
+      "manifest": ".cache/pure-js-fixtures/monmove/manifest.json",
+      "sha256": "4d60c12b568d55e0fcefdf0a4be7d7f0adedc409dfc8db90e68087db828f1ed0"
+    },
+    "spell": {
+      "manifest": ".cache/pure-js-fixtures/spell/manifest.json",
+      "sha256": "0ec67afec9bcb7e5def5a0795a5051264da2135178adc8f24a23e130a2dd57b1"
+    },
+    "do": {
+      "manifest": ".cache/pure-js-fixtures/do/manifest.json",
+      "sha256": "11c5f842d9a33691609de1878fe5622236ec37add9e2ee1329e90820ae9b1ca6"
+    },
+    "timeout": {
+      "manifest": ".cache/pure-js-fixtures/timeout/manifest.json",
+      "sha256": "f7aa2283cc7b0ba16b4a4dfb30bc0c6c73cc7520fdc66b2e94acc3c07257ae68"
+    },
+    "potion": {
+      "manifest": ".cache/pure-js-fixtures/potion/manifest.json",
+      "sha256": "1de04d6bf96c7de7b5b69da9e37aafa746ad1c8468c026f55954dde8b26c8c7c"
+    },
+    "pray": {
+      "manifest": ".cache/pure-js-fixtures/pray/manifest.json",
+      "sha256": "4ed7939a02c130c7560445024fc11002a9a4b316c774a01518c4b1621d05551d"
+    },
+    "dothrow": {
+      "manifest": ".cache/pure-js-fixtures/dothrow/manifest.json",
+      "sha256": "156ce66290742d7428d21e0d296728b8e3bd6892c22b77f772b9821caf5e81d3"
+    },
+    "pager": {
+      "manifest": ".cache/pure-js-fixtures/pager/manifest.json",
+      "sha256": "82545817397898e8471734b15dade677059c1a230728d60615ebe2e88f3adf2f"
+    },
+    "muse": {
+      "manifest": ".cache/pure-js-fixtures/muse/manifest.json",
+      "sha256": "16a0ea6a91f9bc94b0438800054c384d376f2fd5f8694d3bb10d18bff19e5c3a"
+    },
+    "dungeon": {
+      "manifest": ".cache/pure-js-fixtures/dungeon/manifest.json",
+      "sha256": "6d92fe9fbfad78698cfd1175216a7653674037b483bc8f71351f576c5e00af8d"
+    },
+    "makemon": {
+      "manifest": ".cache/pure-js-fixtures/makemon/manifest.json",
+      "sha256": "6d8c5b27e5ecd5d3ea619e7bb046698478ab22ca9816033fa2235ae3adfafe9d"
+    },
+    "mhitu": {
+      "manifest": ".cache/pure-js-fixtures/mhitu/manifest.json",
+      "sha256": "fb119ae20cd009396673da6c1b1e8f43af0dfef38a9e3a82c69328c69eec5fa6"
+    },
+    "artifact": {
+      "manifest": ".cache/pure-js-fixtures/artifact/manifest.json",
+      "sha256": "8fc735c2b956d75047f08c6fb3b01b936f3694faf80d5c5fb73b8c6ce9fdcc29"
+    },
+    "decl": {
+      "manifest": ".cache/pure-js-fixtures/decl/manifest.json",
+      "sha256": "65250d4e7d960088953b441a1a9ce16d2fc2735df658a9f0d139498debbb10d5"
+    },
+    "do_wear": {
+      "manifest": ".cache/pure-js-fixtures/do_wear/manifest.json",
+      "sha256": "db7eac130b33f199136c6e1d5fda13eb9949aa2755ac2dafb7bd36372229770c"
+    },
+    "insight": {
+      "manifest": ".cache/pure-js-fixtures/insight/manifest.json",
+      "sha256": "504643e018bbe49a753f4b3fb3a0761a7f4230d2f48b29ee544ce8c86ae0204a"
+    },
+    "read": {
+      "manifest": ".cache/pure-js-fixtures/read/manifest.json",
+      "sha256": "e7dd187059a6147fc563e419a9428c2b02d53ea8f9c8b50847700f1d29a0f679"
+    },
+    "apply": {
+      "manifest": ".cache/pure-js-fixtures/apply/manifest.json",
+      "sha256": "d2c22e13495909113f13956f0f22a162a4a640822accc4bd8f5b22a6965ce890"
+    },
+    "eat": {
+      "manifest": ".cache/pure-js-fixtures/eat/manifest.json",
+      "sha256": "e550f95b983d5c6b4aeca9345906bd40ab4252ca65b79be08fbf82935e43423b"
+    },
+    "objnam": {
+      "manifest": ".cache/pure-js-fixtures/objnam/manifest.json",
+      "sha256": "15f2021b94bb813585078db431eb612231eea5438e6df124f39b2750b17ba046"
+    },
+    "mkobj": {
+      "manifest": ".cache/pure-js-fixtures/mkobj/manifest.json",
+      "sha256": "0c3a020e896ab003a5be55f16151ec700171868bba1d58c484c43a0fe7e81852"
+    },
+    "nhlua": {
+      "manifest": ".cache/pure-js-fixtures/nhlua/manifest.json",
+      "sha256": "939395f4940c77cd3a29f560a769f9bc2a51f6294dd366c34959e8d256febca1"
+    },
+    "files": {
+      "manifest": ".cache/pure-js-fixtures/files/manifest.json",
+      "sha256": "890e2871caf563810a2456724b1382ffe86f1af6e028e9bdc37b7101204b0592"
+    },
+    "display": {
+      "manifest": ".cache/pure-js-fixtures/display/manifest.json",
+      "sha256": "0cfb6883d3c842f6381a57c9952a034aac7395ee8449a1460b40ada1aaa4fdd9"
+    },
+    "invent": {
+      "manifest": ".cache/pure-js-fixtures/invent/manifest.json",
+      "sha256": "db2b072bdb93a3c4281c4370832041725c0fb9c6534aeea00d0cbfd5e6a2970b"
+    },
+    "cmd": {
+      "manifest": ".cache/pure-js-fixtures/cmd/manifest.json",
+      "sha256": "cdd9b4834bbdf4cae08839f8f602b554d828817039efb2ef5e2777ef92560512"
+    },
+    "hack": {
+      "manifest": ".cache/pure-js-fixtures/hack/manifest.json",
+      "sha256": "37e736bef96abbe267d6213724840fbd513bc0f4bd4642f5fe768d997b42c6f4"
+    },
+    "uhitm": {
+      "manifest": ".cache/pure-js-fixtures/uhitm/manifest.json",
+      "sha256": "2dfca585cc9e5b8090594605eb05203378365db61fc03c22744f61805ad44c00"
+    },
+    "mon": {
+      "manifest": ".cache/pure-js-fixtures/mon/manifest.json",
+      "sha256": "5bbbe6c1b612ad9d57cfa70cd60937672f346a4c5c6c5dce316ecd7d87094621"
+    },
+    "pickup": {
+      "manifest": ".cache/pure-js-fixtures/pickup/manifest.json",
+      "sha256": "f3280916323051f368918f53e2f76ddc7e270edffb15fb0e4f0913846d4f5f5d"
+    },
+    "shk": {
+      "manifest": ".cache/pure-js-fixtures/shk/manifest.json",
+      "sha256": "082e8911ddd0cc8c4cc5e323220e50e23b015e6ed5faaff0141181a0dd867239"
+    },
+    "sp_lev": {
+      "manifest": ".cache/pure-js-fixtures/sp_lev/manifest.json",
+      "sha256": "b974ca38f1779a1d0dfdc80645c0dacbffb6216740df2ae40719eb3cc207d209"
+    },
+    "trap": {
+      "manifest": ".cache/pure-js-fixtures/trap/manifest.json",
+      "sha256": "217420fa73ce0845d7655a8640f26e1270ce14b0e5e2a03622e5c37cb48671e8"
+    },
+    "termcap": {
+      "manifest": ".cache/pure-js-fixtures/termcap/manifest.json",
+      "sha256": "7dca64c2451621698cab3053c8c85d88bbc95e607bfc38124308c94d145ec19e"
+    },
+    "topl": {
+      "manifest": ".cache/pure-js-fixtures/topl/manifest.json",
+      "sha256": "bb02cd37a6eeeade8cee9c26e76941fa6a9ee2783144804b9e2c2f952b0d8e10"
+    },
+    "wintty": {
+      "manifest": ".cache/pure-js-fixtures/wintty/manifest.json",
+      "sha256": "1b07fb68f79acf8b55cfb24c6dc4368b5299b930036d8d027e99095b27f243da"
+    },
+    "unixunix": {
+      "manifest": ".cache/pure-js-fixtures/unixunix/manifest.json",
+      "sha256": "c15d1bac792966808994c31cfbbdf1c622f7227d5215b0c466dbb995a0d77cfa"
+    },
+    "unixmain": {
+      "manifest": ".cache/pure-js-fixtures/unixmain/manifest.json",
+      "sha256": "5524c575c69dcaa82c57a9b572154a8faa370522fb0916f0aee3a4d925b20be0"
+    },
+    "options": {
+      "manifest": ".cache/pure-js-fixtures/options/manifest.json",
+      "sha256": "cf9a44ef3b241cdb5ea48f1884c1378aba52e28b8e512bc51dac69c4373d2978"
+    },
+    "botl": {
+      "manifest": ".cache/pure-js-fixtures/botl/manifest.json",
+      "sha256": "9642a166587cd36bdc10d90861bd905c872b6e0b8cda3697ea01e34090ae8a8d"
+    },
+    "zap": {
+      "manifest": ".cache/pure-js-fixtures/zap/manifest.json",
+      "sha256": "7148d6fc2521014dd6041e6ca415fe8be8714b2ec5765007be89a5a7435fb8b3"
+    },
+    "nhlsel": {
+      "manifest": ".cache/pure-js-fixtures/nhlsel/manifest.json",
+      "sha256": "2950b2b6cc2545e9ae7332186dcc2d5a0f36c99e65912f675267b811709de0b6"
+    }
+  },
+  "referenceBuilds": {
+    "receipt": ".cache/pure-js-fixtures/reference-builds.json",
+    "sha256": "be324e6a2b4fbc078b34219c4ec458822f23ce0f6a13de2dc61a84ce9f41efe2"
+  },
+  "sourceSha256": {
+    "js/backends/emscripten/runtime.js": "6b83a93aa7768916cb34c2461de2f477c96eae51894e0980d38e5113bf2ae026",
+    "js/c-runtime/adapter-factories.js": "2629ab75a6e74c435caca692d9bd9a993dd002266b0bedbfd72465ff724b03db",
+    "js/c-runtime/libc.js": "3361e18ee2550fa1ab63d86e902e9d1d2af010212726cfa4b62ef1f115994a66",
+    "js/c-runtime/scanf.js": "d91cceac70c09bc4016a16b94dd32f8f0a398141452bffef9366491e9ad5bc3b",
+    "js/c-runtime/stdio.js": "f67d89b67d475969f6b80b75cf66327145eb02a04856f3a1955a2a46af4a3dcd",
+    "js/c-runtime/stdlib.js": "b28b60dd468dd28f6e135d82b9bc5781f77a228b664547419355f2bcfd665997",
+    "js/c-runtime/vfs.js": "ff8f35972fb693cb43354e5d599564fad59e6f0b689b7e2cc988f18a74ed7c1c",
+    "js/c-runtime/environment.js": "2447f6d074885a9234f64ab58621ebad01123574014241ea44c47cf48487759e",
+    "js/c-runtime/errno.js": "6ec9c84bc37c5e9e6346014a00b8a945955d41943f2c492639fb16fed48f52b9",
+    "js/c-runtime/errno-messages.json": "05c914e49c0a49672d416e757b6cc6b3dff526e60c6c1446aee3abf05027fd97",
+    "js/lua/abi.js": "34734e40ea037d6e54ca49407da480e84577b327374061bb8e79dc11aebfa9d5",
+    "js/lua/lapi.js": "5812c78c4494195b72e9789e16c1850f394e4ae320f4843dd18c9a7df82218d9",
+    "js/lua/bytecode-vm.js": "f7734013578137ffd45bc7c6a2fa4567e41fbbfdf589b523eeab3231d0b446b5",
+    "js/lua/io-library.js": "96ddf8b63d6445ee744ef35ed29338bfd342409b4cd0b1a6e8c6f073d38e1c13",
+    "js/nethack/runtime.js": "305102b64ae5f0e5db379b0d245529c3ae2c765af9294d100053ff49dfceee2d",
+    "js/ported/rumors.js": "b343317f260f82f12fd835b619ffd9f0292f7d6409329c094d0db710bc141791",
+    "js/standalone/environment.js": "8c7d2bcf3341e6bc8306f8da6785027d37a092e8d3ec43852d50e86f9d616eaf",
+    "js/standalone/light-abi.json": "011cf56d996196b501f752f9b939d67b6f01058dd54c9066f8241c05d9d037eb",
+    "js/standalone/light.js": "01ded568351b4736354eaf3aa5af27d2aebd04d18ac2061d40bd05e679e55aa1",
+    "js/standalone/lua.js": "6571660ad3589317177380b7ff5d3f379a7606a58a1d348a00a286d96c5e077d",
+    "scripts/test-tu-topl.mjs": "3f31ad109c0f692a70dd33bc258a02e6aa083aa0f13a117f363fce4ec8b12dd4",
+    "scripts/test-js-posix-regex.mjs": "480169fcd34d85d334ff0e33e0e0db796d0d9a6ba3c3ed150b19c1020859c1c0",
+    "scripts/relocate-runtime-layout.py": "70eb01b92d02783452524442b264a0f540e549f1fa195955f363da73f2718127",
+    "scripts/extract-binding-infrastructure.mjs": "4a0812398ff76a366c5885ec110031f44e4cd74f018a135a6c4ac4f0f61a8d54",
+    "scripts/check-services-layout.mjs": "e32b190517d6048308ed840b496e78866218fc8be006962844502b56ab8cef90",
+    "scripts/test-allocation-cli-layered-audits.py": "4c9a1779908b416bca504494fa45df8582625971b0a630e3b43bb0b228a05b6c",
+    "scripts/allocation_cli_source_successors.py": "a32bf42e85dce4f37f65c84385b0447ca60a17d7153e5cb7bb0b2748b5be077f",
+    "scripts/test-post-default-successors.py": "f1768ff35fef8ba3515cfbd61c4bd043b762047aabcd109c5ccce2835fb7ebe4",
+    "scripts/post_default_successors.py": "8580eb250172c2202dcf0e3dd978e6d9e03f60fcad617baedd4cde9c129fe6aa",
+    "scripts/services-layout-audit.mjs": "2c080b0c6ba003abc3df96ba30b694f93308147702bf91e613ed1df1ac101e2d",
+    "scripts/services_layout_audit.py": "4bd4c700d77705016733db2fd85a58bc948af22025a94332ef975738d9202bce",
+    "scripts/check-standalone-scope.mjs": "c7530572ef039172bcee50b7f134432995384d04d993c536ce27c13418a8bd6d",
+    "scripts/write-c-runtime-manifest.mjs": "6b08b40c731a96a523019d311b505d0138e76407859357a443f885ffbc952293",
+    "scripts/test-tu-isaac64.mjs": "b62e09d7752b9cecc653664dc8969761750f39ced13ec443eacfb1cdc757e3c0",
+    "scripts/test-tu-nhmd4.mjs": "a68649bd7916c381ce54efb31672e9341cefabbbb2ad61ebd7a2ee3cfeb55886",
+    "scripts/test-tu-strutil.mjs": "e95691f412ab67f89ebf7ee7cf9c70f7520e11b1ce843481dae6d1bfb027d273",
+    "scripts/test-tu-rect.mjs": "f9a33c54cb7ed39b3e2afa8e5cbd32b0a11761c155a0694b60c76a53d931c219",
+    "scripts/test-tu-track.mjs": "fc3e367ef7047931006508cb2dc419825fafaea6ced3cd9457f008347e4f3478",
+    "scripts/test-tu-calendar.mjs": "8c967581c84f661adbeb178b51c7a78a3cd281a7807eea437709677e49162359",
+    "scripts/test-tu-stairs.mjs": "a696b39e0d6ab61d3bc94db23b6773d3aba3b3f93c32aba174bd02cff3a737a5",
+    "scripts/test-tu-sys.mjs": "9355b5e71fca039ed3ffb14450eb4461b62b8acc449ef9b6b6551393a77ee80f",
+    "scripts/test-tu-rip.mjs": "8163321318a8fe2559b7865269d62e34da0c4a0955d1fe1eae570477fff85b38",
+    "scripts/test-tu-date.mjs": "5f051a1caa2cb00d78667d07d48c8782de13cd3e5b6feeea114498b1755be1da",
+    "scripts/test-tu-alloc.mjs": "7a283f7e31e954e1c107691ff268f4826271e374ea96cff4fbd8527350b379bb",
+    "scripts/test-tu-utf8map.mjs": "2f15c3ab0536b271985937e36787e74b35a85b16b12c5c14027aea5666b7951a",
+    "scripts/test-tu-drawing.mjs": "3ead07413201ee8456ff8eaec077f4250582d7ce3569a89a0e817b07f442ecf5",
+    "scripts/test-tu-posixregex.mjs": "a8caac079f879bb7885ae5752616fd8d78a3bcc69e17f9c0399801bf0cc37560",
+    "scripts/test-tu-rnd.mjs": "00349847a7d9e950260c3ca2d50f60ce455c805d611ced3ca40e2d4932b4cd00",
+    "scripts/test-tu-ioctl.mjs": "18f3ac04ab3346952759c04f85a587de2e0c53dc1f84a41ca61cee3378c6729d",
+    "scripts/test-tu-unixtty.mjs": "bd80a244d20eee376a6392a597ef10c471392779ca98801edf77afebf4c4de62",
+    "scripts/test-tu-were.mjs": "3bc87fc7e16d24f613000734fe0c3e8018de91e2612dc9a0a34d9eeac09e9400",
+    "scripts/test-tu-extralev.mjs": "8adf7da8097f42c02487a178296e2cd1c5c4179770e3301596a73f21bd4e19b2",
+    "scripts/test-tu-mplayer.mjs": "7bf29f3ff8ef11a37c7c30d9482e38e61c88d9882144cfafed8345992ae47a28",
+    "scripts/test-tu-exper.mjs": "6f05073880d325fab3fe76fcdb6d4b127e7af75f2bf79f8e141aa989d89f243e",
+    "scripts/test-tu-mkmap.mjs": "052bd862f0f93ad4a15908736df6b3905d68fe9ab03d94f171e777ab96eebacc",
+    "scripts/test-tu-getline.mjs": "729a2e1bc33a0cfb8929d93edfde3341dac5220b49eea8f2e67087cca3b5951c",
+    "scripts/test-tu-write.mjs": "303b500233c830564a3f185aa165b452be0c26721bdac1f5e15b41a5575596cf",
+    "scripts/test-tu-mdlib.mjs": "08bd16c2de780e391d61cefb17972cf64f2bf8e5533816dd5acca74a070cecd0",
+    "scripts/test-tu-quest.mjs": "c9b82d3f6d4edeb3443ca4752f90aaef4fec1e2a71442434d6eb326fa8df1a8f",
+    "scripts/test-tu-minion.mjs": "331d7b972c7caa7325c9d5862f82bec8d6a42ade056834533caa634d17c05154",
+    "scripts/test-tu-iactions.mjs": "5259f83b6396cc4aff808f2bd5184e26ecc1b9695a812faef3e1ab3ea1e07855",
+    "scripts/test-tu-selvar.mjs": "3b3b3e5f001ff5086c7530945189a456b2beb6df7792af7e59ebc077193cb610",
+    "scripts/test-tu-steal.mjs": "3fbd74c2af27f23aaa157f622ce20d50eefec318ec43abcbce964887b53124a4",
+    "scripts/test-tu-sit.mjs": "fc9ae95edb587fb7136885191d63e10cde72c32f9b4599ae930dfd10af7277ea",
+    "scripts/test-tu-fountain.mjs": "f6b5e2fe302f755e0543c3b2d7cc5073b149072fcaabf19d5ac7ae95b3a60e4e",
+    "scripts/test-tu-objects.mjs": "9e9eb0e09c073ebad64ae3169aae53bd2d4c2933ff5d28419179f3e5eea70377",
+    "scripts/test-tu-monst.mjs": "d33102d1c1a48879268b2450bdd66a02be67707d28f32d4abd60921cb42ad958",
+    "scripts/test-tu-shknam.mjs": "eb91da913383bce6637c80b7901ed7853d495a550942867037e5fa2cd8c6d0ad",
+    "scripts/test-tu-rumors.mjs": "0793c279841563f9e892ad0ba9d5201efc8d0232089a1a0b77484c2c87f3db5b",
+    "scripts/test-tu-music.mjs": "0dc052cd9bead6bba0be5c33a60b58a0e8d85f0a9ffb4478719d6bebf205f808",
+    "scripts/test-tu-version.mjs": "67f19320042e693ccab93a083d865a0b5b5d99fa7afed7e89a6017152b283f80",
+    "scripts/test-tu-coloratt.mjs": "f2dfa4345aea79b6740ce2e30fd52cb971e72882b60f6ae106b9165d49e3c301",
+    "scripts/test-tu-priest.mjs": "71bc539ca0e3caf7dfcd0018f04a49dc1db6500eb2c8fbbb8f7db48b647a8a14",
+    "scripts/test-tu-light.mjs": "1c81f5feb3a4bd28e4fd45f5537400167d22cd87b2c9ac29022786953c17e003",
+    "scripts/test-tu-lock.mjs": "5faa1754eaf8fb74402de0d405f18a9b80e9babf555b72df05e393d0486a6a6f",
+    "scripts/test-tu-steed.mjs": "d62c846f9a22bd0c2b05e5cf29fa9975ef1d879274039af6ca857e7231663a49",
+    "scripts/test-tu-wizard.mjs": "af0305b51e4093f726ff20c26f02c890aa50ae93777f6e3f93548be5b70435f4",
+    "scripts/test-tu-worm.mjs": "55bb9d71ee2676bfbb9db81cca27aa65145abaf9ba979fac084d831c18bd5f2d",
+    "scripts/test-tu-o_init.mjs": "b1ed5cd221d8aff339e7b029a436e5bef688026e7dc8ecf980fca893cdc9d6f1",
+    "scripts/test-tu-ball.mjs": "7ef529fd43caf203e5d57cb78ad25432e19fc85d6795e680df6861ca053fadd9",
+    "scripts/test-tu-mcastu.mjs": "bc37fa5afb22f55977428f866ce665727d2e27e36272f717723dae5b6b885b5b",
+    "scripts/test-tu-dbridge.mjs": "e6a563080535698c4b3606d1360c00718169f490b52ba8a6ccf993a96a023156",
+    "scripts/test-tu-mondata.mjs": "2eec3e16d4998519dcb7f35a6b0a0b4dfab87d34d19af0f0c65e541922d1748e",
+    "scripts/test-tu-hacklib.mjs": "ff9a81e21ffb391445a21cf0b0516c8425453a04906fe293f239dd6fd2d736bc",
+    "scripts/test-tu-worn.mjs": "cc16f19edb8106614b6f00352106f51fad2250f412405c265bc4961fa6df9165",
+    "scripts/test-tu-wield.mjs": "9cb4fb879cb8a6818776b1c7e75fdcab469d158307511efa6e55c56d4ef7803e",
+    "scripts/test-tu-mkroom.mjs": "3e4a2f7f2574be481d3bf5cf8f4776e5218d60f46b1ab9afdf415c2858a4221f",
+    "scripts/test-tu-sfstruct.mjs": "8f6f09d92a5121c6760c79293cf33b4cfd5472ef0d7fe90d378612bebbdf9aeb",
+    "scripts/test-tu-earlyarg.mjs": "e656402a38a1b7401c1d4172803fc3bfb8f37b42914166a6137365c6b2533eb8",
+    "scripts/test-tu-report.mjs": "782ba169e88ba9845dca522f3d1c7e2d8a506ede9f49654912c39120090cf8dc",
+    "scripts/test-tu-bones.mjs": "51a3932bd64abee113d44173799c4b36b06c67cc15bc061c6f5ca76ef26c0269",
+    "scripts/test-tu-explode.mjs": "3a6c84087480fc4a4d123f228ad36a7fe4322b61bf405b17d14fbd739abca050",
+    "scripts/test-tu-questpgr.mjs": "c73f126cfdf9e653ee82f985fa9d17733c2550bdd247ea6f57806ef5f9073b1b",
+    "scripts/test-tu-symbols.mjs": "7089f555f0798538afa5840fb3d66ed5088291fb7ddb5b20fbc24ea4293ff0f3",
+    "scripts/test-tu-mail.mjs": "983c086424e3f625bc03e5e75eee1356e94b8cd935e9703be99ac1a575d24493",
+    "scripts/test-tu-pline.mjs": "05542e0f6573009efad7eff8ed3f9fce4bb3a1378d3d4529ae24929372c0bd4c",
+    "scripts/test-tu-attrib.mjs": "5664c691dae4b2fb7a1a35db5ea5d96127f204f5f405f4b64afd8a4ef0934ccb",
+    "scripts/test-tu-sfbase.mjs": "d74aeb0188d54436b38e974b29b2817f44d1c19388934c1f7c41aca07bad81fe",
+    "scripts/test-tu-dog.mjs": "1486d068bf891cbe7b31b500f461703645eac83254ddcda93f2fe2def6289203",
+    "scripts/test-tu-region.mjs": "5d0d5db7d86bfb28bbbeafe7476872283c01ffc416fb1c9bffb9eb95f0e2c084",
+    "scripts/test-tu-weapon.mjs": "0db81e370ae7c5c435d341a2e5e263288fea4b96dc0176c8803d8c3649819cfc",
+    "scripts/test-tu-vault.mjs": "6f316020c9bd22f45661ca15f02a33d2d1f76558c989fa9eb2eda830508c69a2",
+    "scripts/test-tu-u_init.mjs": "52594a1d4f08faa8062827ef60cb21d18abec97f7fc9c37a8ebdbc86c5d7c859",
+    "scripts/test-tu-sounds.mjs": "720a71fa3fdf3d65660f8a38c84a4b90e75878c0a7563e925291d15d3e87fc46",
+    "scripts/test-tu-save.mjs": "16b75e18cc5a76f19829d621e44cfa953420d716638cfb1afb8016b774f000bd",
+    "scripts/test-tu-mhitm.mjs": "8cfcf1cb7a9229ce40e0c269fd6abed609c25590c834cd74eacd81df891047fc",
+    "scripts/test-tu-getpos.mjs": "998f4baf3d264730e6fe015e95fa7ce24c299e0ab4dddc5e116b7a8156c665af",
+    "scripts/test-tu-allmain.mjs": "ac59a4c02c79d968f69a23eb2404125de00023c3927e3a32edadb9068781feab",
+    "scripts/test-tu-mthrowu.mjs": "ff17f397ef556ea707c108860ca4e7f4b1684dd2a070cddcd6db00b0b1cbb5bd",
+    "scripts/test-tu-role.mjs": "3c3901e183c325686a93cddf23ba9c62c1fe130c8c27a9bdc81de368e9b5a5cd",
+    "scripts/test-tu-engrave.mjs": "1c1f30399749be042f7a055f0b183d97ef5885b1025c5109ae8821b9f4084344",
+    "scripts/test-tu-glyphs.mjs": "f4446e610b386545046f71a96df4d032cf787c7c8014085bc24a560dba5095bf",
+    "scripts/test-tu-topten.mjs": "3b64e89576015eb8fc83df957b4a976aee14030c4d7140b9ce65c3dd25400557",
+    "scripts/test-tu-dogmove.mjs": "45af44030cf9eab8d5d8bbcad4d2e2cb36c1f24121bf38582fc3129bdf9905d2",
+    "scripts/test-tu-windows.mjs": "a59c49618b48b54219c46dc9178e5530fda59fbe8122f624464aa16bf4ccce2f",
+    "scripts/test-tu-cfgfiles.mjs": "32bbf7ff4c67f47577d10630dbd1a4ad9d9da2eea735c54e2597ddea99b6070a",
+    "scripts/test-tu-restore.mjs": "5210b7117c243b8a47711c604ad21cccdb8db456936c24dcf04380534bffea09",
+    "scripts/test-tu-nhlobj.mjs": "100548ec3a09d7c956ff99a4227a75125e968c42618e9db89a4e1cf6b894b5b1",
+    "scripts/test-tu-do_name.mjs": "003b8d0ac4947ed093c1e595ae215e85c864f1da9ad0ee4d575efa0dafd02fce",
+    "scripts/test-tu-vision.mjs": "c2df9c6eb8323545a482e5ab565a5b44e289c68d746e8c25ced8ecd7b4698641",
+    "scripts/test-tu-mkmaze.mjs": "bdffdb6cf49693b5936d4a879827532c67bdfbbf6ff7917fca1e1c2230bb927a",
+    "scripts/test-tu-dokick.mjs": "a6d4a2e3575f83bb5b0363f0fa4cd1808cd8cbd07e18aedadb98becb272c2810",
+    "scripts/test-tu-dig.mjs": "d17b640f00a6e59d4bcb623c37b4cc7b63c7c34aa14c13331666568fa925ef6e",
+    "scripts/test-tu-end.mjs": "529b11e9bbb76f75e2a169b42c83dc8bb53f3a64e07cf9975a9dcc7f0248c96e",
+    "scripts/test-tu-polyself.mjs": "b70881dfb1cc79c6f6eb607d1788291c561401c8eb30ef11ff6c63f792bb682d",
+    "scripts/test-tu-wizcmds.mjs": "52db7ebd339c7e2f74baf0cbb564998700f3a2739fd2fbbccb4d477a21ba0364",
+    "scripts/test-tu-detect.mjs": "5821e43badb715c3fd09c7de7661edaf6f91757a1001a4e481f4ac3431a7b636",
+    "scripts/test-tu-teleport.mjs": "7878975bb9edacbcd744d78494972a2e9ae4c75b97ca25b0a870381968b9673f",
+    "scripts/test-tu-mklev.mjs": "ca0efeb73560485a50e1f27e922e9ce188aaadf84b50f372e1315167fc79d33e",
+    "scripts/test-tu-monmove.mjs": "0484873af4d670c5379b42c857e718ccb2895b8a7e3be3078e654f4d55a7168a",
+    "scripts/test-tu-spell.mjs": "a5f8ca781a470833d073047a3a4a9c263c94eb5bf54b47d06703983a4fb6745d",
+    "scripts/test-tu-do.mjs": "05b34494e3cfc133bb4107ec8b785f9db812979936fd58625e11dc8c723bf080",
+    "scripts/test-tu-timeout.mjs": "4af310cd84a5dc4e66717676195873057f5abe452baf06fdcee1a0f05ae76d58",
+    "scripts/test-tu-potion.mjs": "c65859b1888c5e9033fc3fd477b07e600ca881ae44dc108358c760931f6bdde8",
+    "scripts/test-tu-pray.mjs": "86234cc5c4fdf7f870470cb73f5d183c8b1fe81c8b0599003e84af8b4da35234",
+    "scripts/test-tu-dothrow.mjs": "8df7fd50692c77ae73d4a12e865dd40df39186abb8cb5b33ecbbd581531b6dc0",
+    "scripts/test-tu-pager.mjs": "eaf01eec9c3f270f8ee0bf8bf855f90bcf4c7ed37ab8eacc4cfc610967c79962",
+    "scripts/test-tu-muse.mjs": "fccfebde4ff8fe967b5f663cd873d2738df634e7234f5f09d97fb88526998d1d",
+    "scripts/test-tu-dungeon.mjs": "c85b69db7a61e6d2fa39dfef519b5c8d92b48f28d1ef0a74c574100b76f0d84f",
+    "scripts/test-tu-makemon.mjs": "0b4bf7620258191d1c49c19d587e1af43165e39c00c612c8888929d88da33f88",
+    "scripts/test-tu-mhitu.mjs": "fbc64878314e8ae8403053a694cc822cf61efa7349a0456681d39d4e62ffe5ae",
+    "scripts/test-tu-artifact.mjs": "3a28918653d3764ac045630753ae636b63c2da1b7a79beba4de063970e5f91a4",
+    "scripts/test-tu-decl.mjs": "e3d514549924dfe3e42ce9ae8b61965540bc13cf4eded25215cb7f17d94a5909",
+    "scripts/test-tu-do_wear.mjs": "e916a7ef1d9aaf1734c230c9cd2cbb18464ac68b0fd3e2685ad0a7a5df49cf63",
+    "scripts/test-tu-insight.mjs": "e3553c8da2776bc834519a4d5b0d5e2c3bd3ef8eadae34eb210a164d839c6f59",
+    "scripts/test-tu-read.mjs": "63642add2560d3901410e4261dc3b8c5ba17e1c0b874cc4a5389f8ab460ac1c0",
+    "scripts/test-tu-apply.mjs": "a487ab37affc4c0f5bbc9058be350fa76015f518ce35fdbd1acecf69f918e517",
+    "scripts/test-tu-eat.mjs": "87b936dbf09a36905a67255bc314f44b0aa43c39690f0d97897719324e9425cb",
+    "scripts/test-tu-objnam.mjs": "b27c31f4644d3932c3ad8e9eb2ffc85c159faed5fefad56ba559ed74d35af2b3",
+    "scripts/test-tu-mkobj.mjs": "ed2e218fee49b34cc17263af5542c89136db5d480709236667420d8004b6511e",
+    "scripts/test-tu-nhlua.mjs": "de64646fb8b8b5b79badfa087db6b7e9c0fd8c6bed6fc4cce776a8c241fb6b67",
+    "scripts/test-tu-files.mjs": "6d4c8932accb99a7496066c213b8bee2f9b6f62f8c329c1f41626cc71c50f7f6",
+    "scripts/test-tu-display.mjs": "385d53ba292f06899fb9dfe4cdf0a95a3d5388686b51267db97301f9bd574d90",
+    "scripts/test-tu-invent.mjs": "c1a3dade5eecfc624f5c19b3aa71f8d3e323ed1b0259cac90c5ecf3dbab1d577",
+    "scripts/test-tu-cmd.mjs": "adea4d6957efe95921388f55c26c42c5d1d8d819415e709d17a0bc64edf8843c",
+    "scripts/test-tu-hack.mjs": "536b4ffea860723069a7e2935d870261d19382964d4c96a9f904868a9b81589b",
+    "scripts/test-tu-uhitm.mjs": "785cbf565c5f4c52a74495eaf4e39d14d775d995ee1f222d38f81950e4bd23b8",
+    "scripts/test-tu-mon.mjs": "725d942b9535cdb496510d5e55c7ee791bd8856a1f25954d7141348d061ae52c",
+    "scripts/test-tu-pickup.mjs": "66780a53f169d58b381a1ee28451107618d94512306f14bfb07df39da767c5f3",
+    "scripts/test-tu-shk.mjs": "8a527fd9a6d46c13f58f52700950941d7d4462988e35047ab48ad785a8080594",
+    "scripts/test-tu-sp_lev.mjs": "649575ca27901bab92c854b3c4f99be30f972e73c1d8417b7a2bd962ccae8a77",
+    "scripts/test-tu-trap.mjs": "988b7e9463f80b22cfe6b477da1d0842f780b69a4ab9ae5a58835fbe917af8d6",
+    "scripts/test-tu-termcap.mjs": "d7879b5de5ec9d6c8a5b2374d5661626e0dcc9bcb34aab4487e0a3f8b3e50d92",
+    "scripts/test-tu-wintty.mjs": "eb259732f54e63fa1f27ab7ab3443f681b16de54087288ba5e18d9a61e4d9984",
+    "scripts/test-tu-unixunix.mjs": "ee99303e4c18ba60c44d2e249d486a1fd9f097e3c785b98a95b08b1152b3a488",
+    "scripts/test-tu-unixmain.mjs": "37caf8a4c2374cf1bdb39d2d9fa883c9f3e970a8f8848d4ca739a128173a4986",
+    "scripts/test-tu-options.mjs": "cedd4a3c00bc2f6c385e6d128f10503c8a69c074f6d656d409f7fedf914b33e7",
+    "scripts/test-tu-botl.mjs": "f6e4c3d2d1fd1230db8ecf5867bce5cf615568a404dc81188da2b8689dc2d6df",
+    "scripts/test-tu-zap.mjs": "324fe4b463d077413706d26b1e87f7e22ca468a9be232bd48de79ac91375684e",
+    "scripts/test-tu-nhlsel.mjs": "837f9e6f8fdb0843ad16f2a28547c93c8c0573e529f5941555122b4909fe361e",
+    "scripts/pure-js-probes/alloc.mjs": "37c8f27d63e88d037189340e9142a12c1ca81dd77d3cc0cf44e37ed514e24016",
+    "scripts/pure-js-probes/calendar.mjs": "849e4cfa35e36dc9e1f132600c1b163bff0e44b8486afb3f795c596743f34f44",
+    "scripts/pure-js-probes/catalogues.mjs": "d2b862ed6de64f2fe13c541e12e9c6c4a9be3bf205271fe4b83a310e1bbbc44f",
+    "scripts/pure-js-probes/common.mjs": "4aff76ae7626c59c8fd7886310327c849cb40d1830b7c8659ce3134909714bff",
+    "scripts/pure-js-probes/crypto.mjs": "20f4586ed2cda05df3856b300fdbaf3a1d4c93f3fae45ba06719c63e3b5e8b3c",
+    "scripts/pure-js-probes/date.mjs": "f39fde8a25774046db2f706a6fde27e05e118619c136698815657256a29a822f",
+    "scripts/pure-js-probes/deny-wasm.mjs": "a9d4fc5aee9b7a771a4375caf26ca644f6bc704afba0d98d22c2bb285d8eb415",
+    "scripts/pure-js-probes/drawing.mjs": "1d89d6d35646b560cb7dbe65b911c5bf60bad19f8910341fe365f71e6e560b4f",
+    "scripts/pure-js-probes/hacklib.mjs": "cf0283f56d5d9785852f04ce7aa21c068a96996af7badfe523a3d1f711e3942c",
+    "scripts/pure-js-probes/light.mjs": "a65950496479b4da319bf67a87066734c31165b053d10d1f919928df003fe21a",
+    "scripts/pure-js-probes/posixregex.mjs": "0676fb3c02b437ab62b216f259f7c23a6e8617818ef73d285926aa27f2290b1d",
+    "scripts/pure-js-probes/rect.mjs": "39befa3fe87c9590f921fa0890651290aea765fd7d93317de1438a40786ef8ab",
+    "scripts/pure-js-probes/rip.mjs": "33c8ae902af5c17e4cbcd0cca7a599a38c999541e13415259ed97a7d69fa29c7",
+    "scripts/pure-js-probes/rnd.mjs": "220bbfc6ff773134ac39fa1d49b58f787e6913bd3a3fd672b10da1df045eac02",
+    "scripts/pure-js-probes/stairs.mjs": "3981b633b484a3f847cd4d3615d9598a3a1416e7cb3c83dac577a962493be2a4",
+    "scripts/pure-js-probes/strutil.mjs": "ee3dd1ae1ec09a08295dbb0d6289135198bbf9923a52c1167dae74802207373c",
+    "scripts/pure-js-probes/sys.mjs": "af33aca383597a51a107dcf6aa8251d7c7acbffafec15b9ec1ee8600b2d88b9d",
+    "scripts/pure-js-probes/track.mjs": "bbeb6411ea7b84dd7ab3c73cfda1326676bfd881db9f3deec019f0a5f2711d19",
+    "scripts/pure-js-fixtures/adapt.py": "6c03a5c8016616a00cdcd24672507dc2f3f95f607ca0296c4c8cf3160cfcd37b",
+    "scripts/pure-js-fixtures/build-references.py": "9233dffb72dff73f096afd430ac07cfcc124d4a6d4ff13bca4ffb9fcc1658199",
+    "scripts/pure-js-fixtures/build.py": "dc88d5ec27662596835a9c6b68e73abbc65617c20b8592ac1243e51a38068e9b",
+    "scripts/pure-js-fixtures/load.mjs": "d50c48dbc3ae79d59ab9615fce994358314226ecd9eefc8861a425175f9d9ee8",
+    "scripts/pure-js-fixtures/qualification.mjs": "2aa092ba935f4a1ed0d5ae2bfda2b7f3bba3be056b683b62e7989adf92d52f60",
+    "scripts/pure-js-fixtures/reference-channel.mjs": "b194f1189238e07be5ff3b53e12f74f53e3790046182a11b510949726d6cf51b",
+    "scripts/pure-js-fixtures/reference-headers.py": "a4a3d5ec415d359c3c227c108bb5ff0a3d195cc7eaf9990a156084f3f72ecc59",
+    "scripts/pure-js-fixtures/reference-worker.mjs": "d31abe1598deb2a21b3ca98cc74bcb06a1688876243b8dcef7a5013795edb691",
+    "scripts/pure-js-fixtures/reference.mjs": "0c160d3837fe6ebbd536ce5150b6659aa81fac3ad157c34067341efa65398297",
+    "scripts/pure-js-fixtures/runtime.mjs": "bc0ddb86aaac413e8d109d9965e76add7dfd11f265891e8e85e5e96d1621a4e4",
+    "scripts/pure-js-fixtures/write-qualification.mjs": "cbfd926338eab9fcf84f21be2c944795357bebb5c78cb51b8e113622a6bf041e",
+    "scripts/pure-js-fixtures/write-validation.mjs": "0b8606eec9f4e2b6aebbbf9f66d9d0277388b3903cc6c0ba545f4b5e0ac3d7f5",
+    "scripts/test-native-existing.mjs": "7a2011da4afdfa9269e2a4b1cbf6cf3823152cd08a7c8cb5e8216c04d6aaad78",
+    "scripts/native-test-backend.mjs": "4189def0d65a02f65364f4d282b03d6034b2ca6f73c933d3da1b3d4ac892cc23",
+    "scripts/native-test-assert.mjs": "8ba7c33e7b746a82587bd9a149145d016d86e6cc46da3478e07f21b9a2d3947f",
+    "scripts/test-pure-js-tu.sh": "b8918d0bc4a017f28a6a5271d7e922948356c24c256cb42d075c91d3481bc93d",
+    "scripts/build-pure-js-probes.py": "3720849d41048afc02b8d8bee3b8704dfbd4359c49c9fbc62e5d3b5345e98f4a"
+  },
+  "extraChecks": [
+    {
+      "name": "wasmIsolation",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/isolation-final.log",
+      "sha256": "4d7bbf57f5bd86d18868749d5027456dfc2157cb52605da246e5ce4285597df1"
+    },
+    {
+      "name": "bindingContracts",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/bindings-final.log",
+      "sha256": "8de792423d1b8e7d609feaac213217df96a09bd05c575e855085ea5b6b394b33"
+    },
+    {
+      "name": "sharedRuntimeContracts",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/c-runtime-final.log",
+      "sha256": "07ee503dea72061c94bf7121c2a8c00362b57e4afd8b17fd7a9b9ffb10910d42"
+    },
+    {
+      "name": "dependencySuite",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/dependencies-final.log",
+      "sha256": "9a1812be8e8e7c3132af599cde68be4fac14726f9605dbbd648b2d57d72867b1"
+    },
+    {
+      "name": "lexicalScope",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/lexical-final.log",
+      "sha256": "33a8a106b40f3eeb6f215d2ce4b68591ae43ba8e5ec89532d46b480a10e9850f"
+    },
+    {
+      "name": "sourceStructure",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/structure-final.log",
+      "sha256": "b4b2b0bf2e1f9404537b9393e2e3973c603b698095267ab7956e86a14769aaaf"
+    },
+    {
+      "name": "standaloneScope",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/standalone-scope-final3.log",
+      "sha256": "739bda75e8fd4c2330a07328fca0aa86a067ab20fd345659c9ea8542c82e3cf8"
+    },
+    {
+      "name": "runtimeManifest",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/manifest-final.log",
+      "sha256": "9ca07facb0f12708794b96eeb93416cad237562737c250231bf51d5a3473dd2b"
+    },
+    {
+      "name": "generatedSelection",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/nhlsel-generated-final.log",
+      "sha256": "bde53c150f04502494cd88e02be2c060adafbc8cfdfeeef36767c6929ba2d699"
+    },
+    {
+      "name": "selectionNegativeControl",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/nhlsel-negative-final.log",
+      "sha256": "6b0deb57d8cfbce262d2fc622bb536a26dcf6d56335e455457a16a379918566b"
+    },
+    {
+      "name": "dispatcherWitness",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/mkobj-witness-final.log",
+      "sha256": "4dba82713d25f51cfd055f5cbaf478f3b8af8f2be04f14aaf4c9b5dbe4bd8445"
+    },
+    {
+      "name": "sourceQualificationNegativeControls",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/qualification-controls-final.log",
+      "sha256": "67a171929cd1580248c5af6ebb49f9be1253e96a49cc6bc7ca7ab6af3455d0b5"
+    },
+    {
+      "name": "luaIO",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/lua-io-final.log",
+      "sha256": "7a44e37b4303ab0b52c57b609406f7059ef72ca7bb580d6bf9bb0606da67b734"
+    },
+    {
+      "name": "allocationSourceControls",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/allocation-source-controls.log",
+      "sha256": "59a0e2b9d7b353314525544ff09007f6cb94bc56ba7a876ece1a9dba1d76ba62"
+    },
+    {
+      "name": "allocationLayeredAuditControls",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/allocation-audit-controls.log",
+      "sha256": "49c472c83344f4640a48a658d82d53d598876653b7c3736d4be70d03e3e204c0"
+    },
+    {
+      "name": "postDefaultControls",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/post-default-controls-final.log",
+      "sha256": "7063b6e3f25092a7af3e339c21e87e6ba461a27e41505181077f892be57e1338"
+    },
+    {
+      "name": "currentAuditGuards",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/audit-guards-final.log",
+      "sha256": "55307b821329fbb63fa67c608b4f0b4473718569c2938fdef2544d3996034568"
+    },
+    {
+      "name": "referenceCacheControls",
+      "status": "passed",
+      "log": ".cache/pure-js-fixtures/reference-cache-controls.log",
+      "sha256": "fa3420ea258039ad9932e736ba4fb2c520b254c27a1731c25b61f72cc333c545"
+    }
+  ],
+  "limitations": [
+    "Controlled subsystem corpus; complete game readiness remains unproven.",
+    "The 44 recorder sessions were not run.",
+    "BOTL uses --jitless for its large lowered test fixture; production JIT performance is not qualified.",
+    "Existing upstream NHLSEL unary-alias use-after-free remains outside the defined-behavior corpus."
+  ]
+}

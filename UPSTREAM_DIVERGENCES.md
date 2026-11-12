@@ -493,6 +493,123 @@ the engine. The user's gate is explicit: only after all44 pure-JS sessions pass
 will the repository default contest entry be switched, verified through the
 unmodified harness, committed and pushed.
 
+## Pure-JS fixture migration (completed, 2026-11-12)
+
+`scripts/pure-js-fixtures/` lowers isolated C **test setup and ABI helpers**
+into plain JavaScript. It never compiles a NetHack game translation unit for
+that implementation. Compiler dependency files are audited to reject included
+upstream/prepared game C bodies; source/header/library hashes pin generated
+fixtures. This uses the pinned wasm64 compiler and wasm2js offline, without
+loading a Wasm engine at test execution. Original scenarios and assertions
+remain in their existing `test-tu-*` files. Generated fixtures and receipts live
+under `.cache/pure-js-fixtures/`. All138 registered subsystem tests now use
+pure JS with Wasm denied, and all138 pass against original C. The validation
+receipt records the full cohort plus successful targeted reruns for five repaired
+suites and retains the failed attempts. The44 recorder sessions were not run by
+this migration. BOTL uses the explicitly recorded --jitless test profile.
+
+Additional migration repairs (2026-11-12, validation ongoing): generated
+fixtures now include explicitly declared JS drawing/glyph/NHLUA dependencies,
+connect existing Unix and SDK filesystem services, decode C `open` varargs,
+and route policy frees through fixture ownership observers when present.
+MAIL preserves the original controlled UID/passwd/stat/reader callbacks.
+INVENT selects the current `.cache/tu-probes` original-C build by default;
+its older author-cache reference has a zero object catalogue (dagger subtype
+and merge fields are0), unlike current original C and JS (both1). Explicit
+custom reference directories remain supported.
+SFSTRUCT selects the isolated original-C SDK reference because its assertions
+compare exact private descriptor numbers; host descriptors cannot supply that
+contract. No serialization assertions are removed.
+
+Lua C API checks use the existing auxiliary diagnostic formatter, retaining
+argument numbers, function names and source prefixes. Bytecode nil-call errors
+now retain the calling instruction's name/location through traceback handling.
+Lua integer arguments keep all64bits across fixture imports. `lua_setallocf`,
+`lua_tocfunction` and `luaL_testudata` connect actual allocator/function/userdata
+state. `io` uses real JS stdio streams and file userdata;10 original-C cases
+cover standard-stream types, temporary-file bytes/positions, line iteration,
+EOF, close, buffering and errors. Package loading and process I/O are not
+certified; `popen` rejects explicitly. This is not full Lua I/O qualification.
+The CVFS facade adds callback character devices, real byte delivery, EOF,
+read/write errors and non-seekability; callback devices cannot be snapshotted.
+Reference RPC carries device callbacks and nested reentry; queued byte writes
+flush before C observations. No reference data enters implementation services.
+
+Expected-failure assertions suspend aggregate failure recovery inside their
+callbacks, preserving actual negative-control exceptions. MKMAZE gives both
+engines the same scalar equal to a reference address, preserving its pointer
+normalization witness across different allocation layouts. The generated
+selection corpus now also uses the Wasm-denied implementation.
+
+Standalone `setenv`/`unsetenv` use the same instance-owned input map as `getenv`.
+Formatting accepts exact unsigned64 capacities without allocating their full
+size, preserving the pinned regular `vsnprintf` implementation (distinct from
+SDK integer-only optimized variants). RUMORS initializes its line buffer before
+an ignored EOF read: this hardens the original undefined empty-file path,
+retains successful file reads, and matches observed original-C empty-file
+results. Recorder equivalence of this hardening is untested.
+
+The runner binds game calls to existing JS library adapters and production
+ported policies, and libc/storage to standalone JS services. It preserves
+MEMORY64 scalar/callback transport, real stack frames, live memory views and
+stdio streams. Missing imports throw. Fixture growth allocation expressions
+are adapted to actual 16MiB heap growth with a small owned allocation, retaining
+buffer-replacement/reentry checks and avoiding geometric test-only exhaustion.
+Original native-reference fixtures retain their original allocation requests.
+Assertion recovery uses the compiler's setjmp transformation and JS longjmp
+transport; it must not suppress unrelated exceptions.
+
+Where a native original-C runner is unavailable, `reference.mjs` runs the
+existing original-C reference build in a **separate process** through binary
+observation RPC. That reference process may use Wasm. Wasm/network globals
+remain denied in the process executing the JS implementation; no reference
+memory or helper is shared with it. This extends reference availability without
+claiming native-host equivalence for those remaining reference builds.
+Validation is ongoing; no recorder or scoring run is authorized by this task.
+
+The entry points for all138 registered TU suites now select JS-only fixtures;
+this records migration wiring, not a passing aggregate. The82 newer entry-point
+edits retain their assertion-site counts (`.cache/pure-js-fixtures/test-adaptation.json`).
+PAGER supplies a valid PM_HUMAN species for its monster-disguise cases instead
+of an object-type number outside mons. DUNGEON pointer observations prefer live
+allocation ownership over old freed ranges, retain the most recent freed range
+for opaque dangling-pointer identity after teardown, and never dereference it; all live bytes, allocation lifetime
+metadata, unknown pointer bytes and scalar witnesses remain compared.
+MONMOVE initializes the corpse inventory case with PM_HUMAN instead of
+NON_PM (-1), avoiding the original unchecked `mons[-1]` access, and adds a
+PM_LEPRECHAUN corpse comparison for the permissive branch. Assertions remain.
+CFGFILES corrects four direct OPTIONS helper inputs to include the delimiter
+required by the original helper; it retains all four values and comparisons.
+END retains its original SDK reference/fixture profile: the composed native
+signal-header profile has a token/function-table collision and is not used to
+assert END signal equivalence. Reference labels now distinguish native host C
+from original C in an isolated process. `npm test` / `test:pure-js` build the JS
+fixtures and run only subsystem tests. They do not invoke recorder/scoring.
+
+Shared C runtime additions are real anonymous stdio temporary files (linked
+briefly with exclusive creation, unlinked while open, closed normally), pinned
+musl/WASI C-locale strerror messages, bounded case-insensitive byte comparison,
+and an explicit signed scanf saturation option for native-C comparisons. The
+SDK scanf profile remains the default. C binding construction accepts an optional
+injected DataView provider; its ordinary JS-owned-memory path is unchanged. Six
+reference observation contexts use that provider instead of heap copying.
+
+The Lua ABI adds actual C-function identity recovery and allocator replacement,
+including updating the managed allocation tracker and using the current allocator
+for later calls. Unregistered ABI function addresses fail explicitly. Lua fixture
+setup opens the existing base/coroutine/table/string/math/utf8/os/debug providers;
+it does not replace or claim complete luaL_openlibs/package/io support. Original
+NetHack Lua policy entry points and their assertions remain under test.
+
+Compiler intermediates are discarded after successful fixture builds. Runtime
+uses only hashed JavaScript and ABI JSON. The original-C reference channel
+preserves typed byte arrays, errno, output callbacks and independent instances;
+reference instances are retired when their exported observations are no longer
+reachable. This fixes observation transport differences rather than normalizing
+policy output. Full aggregate validation is still required before completion.
+
+
+
 Latest completed public-recorder run, round4 (2026-11-11): all44 sessions
 completed with deadlines disabled;29/44 official and strict passes,15 failures,
 zero timeout errors and zero forbidden Wasm/network attempts. RNG303,243/792,838;
@@ -577,6 +694,52 @@ native header pin, allowing only source-derived APPLY owner labels and measured
 WEAPON callback descriptors as nested additions. Unrelated working-tree LIGHT
 changes remain outside this checkpoint's qualification and ownership.
 
+Standalone LIGHT fixture migration and transport fixes (2026-11-11):
+The original `test-tu-light.mjs` now runs all its cases against the production
+standalone LIGHT owner on JS-owned memory, with Wasm/network denied before
+imports. Controlled world, window, serializer, ownership, panic and reentrant
+fixtures are implemented in `scripts/pure-js-probes/light.mjs`; no original game
+algorithm is replaced. All 2,576 native-C comparisons pass. The historical mixed
+suite is retained separately as `test-tu-light-mixed-diagnostic.mjs`; its native
+and SDK profiles both passed the same 2,576 comparisons after explicit pointer
+format selection. No expected result is weakened. Two actual standalone binding
+gaps surfaced: `js/standalone/light.js` now dispatches debug-window operations
+through live shared `windowprocs`, and passes opaque pointer bits intact to
+`fmt_ptr`. The public allocation wrapper in `js/standalone/environment.js` also
+preserves those bits instead of rejecting full-width diagnostic values as
+unrepresentable addresses. Neither path dereferences opaque values. The LIGHT
+ABI exporter was rerun against the existing compiled headers; layout, headers,
+original-C policy and all other declaration data remain unchanged, and only the
+owned LIGHT adapter hash changes. Tests exercise 64-bit opaque diagnostics,
+window outputs, union storage, serialization, six reentrant memory-growth
+stages, zero-before-free behavior and independent instances. JS callback growth
+fixtures use real CMemory buffer growth in 16MB increments, with a tiny live
+allocation, rather than repeatedly doubling the heap by allocating its entire
+capacity. Buffer-replacement assertions remain intact. This is a resource-use
+adaptation of test fixtures, not simulated growth or a production allocator
+change. Native fixture allocation remains unchanged. Recorder sessions were not
+run, as requested. The expanded18-suite aggregate completes with598,796 assertions and zero
+failures; `docs/runtime-environment/pure-js-test-validation.json` records the
+receipt. The whole module-test migration is still incomplete.
+
+LIGHT pointer-format profile correction (2026-11-11, verified):
+`createPortedRuntime` in `js/ported/wasm-runtime.js` now accepts an explicit
+`pointerFormat` profile: `caller` (default) preserves supplied `fmt_ptr` bytes;
+`native` applies the existing native formatter only when requested. Unknown
+profiles fail explicitly. `scripts/test-tu-light.mjs` selects the native profile
+only for its native-C reference; the SDK comparison keeps its SDK formatter.
+Previously LIGHT unconditionally overwrote its caller formatter with native
+formatting, producing the inherited SDK `id=null` versus `id=0` diagnostic
+failure. SDK C formats null as `0`; native C formats it as `0x0`, which the
+existing test labels `null`. Original LIGHT policy, C sources, compiler flags,
+fixtures, test expectations and recorder files remain unchanged. The first
+caller-only fix passed SDK but exposed that the native mixed harness still uses
+SDK-backed dependencies; the explicit profile retains both strict comparisons.
+Both profiles pass all 2,576 original comparisons after the correction. This
+retires the inherited unconditional override;
+historical failure evidence remains. This focused correction does not establish
+the pending pure-JS LIGHT fixture migration or recorder parity.
+
 Earlier completed pure-JS public-recorder snapshot, round3 (2026-11-11):
 All 44 public sessions were run through the unchanged frozen scorer with
 `SESSION_REPLAY_TIMEOUT_MS=0` (no subprocess deadline). Round 3 passes 23/44,
@@ -635,6 +798,33 @@ context. Exact native strcmpi remains strncmpi(a,b,-1). Original-C strcmpi
 comparisons pass1554 and genuine IBMgraphics parser/MAIN comparison passes8,
 including complete state/RNG/TTY/frames/live-world equality. Unreached parser/menu
 branches are not accepted merely by being connected.
+
+Pure-JS module-test migration (2026-11-11, partial):
+Eight existing `scripts/test-tu-*` suites (ALLOC, CALENDAR, ISAAC64, NHMD4,
+POSIXREGEX, RECT, STRUTIL, TRACK) now use `scripts/pure-js-probes/` instead of
+hybrid factories or `ported/wasm-runtime.js`. Their original cases, inputs and
+assertions are retained; JS fixture setup replaces the corresponding C probe
+setup, including controlled serializer/RNG/failure dependencies. Production
+algorithms/providers and original C sources are unchanged. The native original-C
+reference remains authoritative. Wasm and network globals are denied before the
+test dependency graph executes and throughout the process; an explicit Wasm-C
+reference override now fails these migrated suites. Per-call guards additionally
+reject swallowed capability attempts. Stack observations inspect the actual JS
+transport stack depth, rather than pretending to expose a native stack pointer.
+ISAAC64 uses the configured production provider's public handles for bounded
+sampling and copies arbitrary caller-owned test contexts through those handles;
+it does not call the frozen utility's defective BigInt bounded export or copy
+its rejection-sampling algorithm into the fixture. MD4 uses live JS-memory
+context views and the existing translated algorithm. The native test aggregate
+now labels each result as pure-JS or mixed diagnostic; neither aggregate status
+nor these eight suites claims full-game readiness. Remaining migration work and
+per-script classification are recorded in `pure-js-test-migration.json` and
+`PURE_JS_TEST_MIGRATION.md` under `docs/runtime-environment/`. Verification:
+eight original suites complete against native C with 171,891 assertions and zero
+failures; CALENDAR covers five timezones. Isolation negative checks cover direct
+and swallowed denied access, async restoration, and genuine stack-depth changes.
+The 44 recorder sessions were not rerun by this test-adaptation change. This is
+an incomplete test-infrastructure migration, not a new public score.
 
 First pure-JS public-recorder run (2026-11-11): all44 public sessions executed
 with the original frozen scorer and SESSION_REPLAY_TIMEOUT_MS=0; no timeout
@@ -7887,3 +8077,51 @@ The same test revision defers timezone-worker assertion errors until after the r
 Actual behavior-test verification completed against an isolated COW copy of corrected normal3, manifest `193419190a89e140c028e177bff18ae5d03a281981ecbbc8ede7b0989454297d` and Wasm `0163feb29b37bf8f19ffe3f2ef275f9b68b22dde10a1b88b6d0635b1e73347aa`. Final integration-test source SHA256 `a31736cb9ade2b45821df037cdc27ec45b8b8936f6ace8bdd17b93374e4a19f8`. Valid and invalid JS-regex behavior, spell-heading cells/bones persistence, profile defaults/overrides, and macOS-visible behavior all passed. All three original 30-second timezone workers timed out and the final AggregateError correctly produced exit1 after the other sections executed; no integration acceptance is claimed. The run took218.82s under potentially overlapping post-CLEAR work, so it is not a controlled performance comparison. All2161 original captured inputs and2160 non-test inputs in the validation copy remain byte-identical. Evidence: `.cache/regex-behavior-test-change/{integration-command.json,integration-result.json,integration-family-results.json,integration.log,edit-inverse-result.json,validation-overlay.json}`.
 
 The full-suite lexical-scope check then exposed a development-checker false positive: its standard-builtins whitelist omitted `Error`, used by the existing ARTIFACT initializer guard. `scripts/test-tu-scope.mjs` now permits only that additional standard builtin; a new in-memory fixture explicitly continues to reject `process`, `window`, `globalThis` and `WebAssembly`. The old failure is retained; corrected actual run passes all137 registered TUs and13 tooling fixtures using Acorn8.14.1. Before `e0fa062737061f295f9a04434993b41c724287eefd6f93fdc0b77c3d2107bb47`, after `671922bbe6792e6ccac2da0fc68e768285a171d9d8b1d52bc8d58098f061dd3a`; no game source changed. The scope script was absent from the scorer-only capture and was first materialized exactly from commitddc6f24, then changed in the private validation copy. Provenance independently passes1044 hashes/137TUs. Evidence: `scope-fixture-materialization.json`, original `scope-rerun.log`, `scope-fixed-result.json`, `scope-fixed.log`, and `source-check-results.json` under the same test-change directory.
+
+Pure-JS migration follow-up: fixture-only trap/wintty consumers and SP_LEV Lua/selection dependencies are retained; function table starts at 2 to keep C NULL/SIG_IGN distinct. Test module preRun environment/FS setup now executes for both isolated C and JS; raw __real_ libc calls bypass observers, and size_t strlen remains uint64 even for JS-only call sites. Original assertions remain; late-suite verification in progress.
+
+Fixture validity corrections: UHITM obj_is_pname requires has_oname before returning true; OPTIONS reset supplies its required color_attr_to_str text. Both original-C and JS fixtures receive these inputs. BOTL role and ZAP drawing dependencies follow their original build recipes. PICKUP observations prefer live allocation identities when malloc reuses a freed address, retaining freed identities and raw unknown pointers. SDK printf null %p renders 0, preserving Darwin 0x0. Verification in progress.
+
+Migration provenance checks validate exact baseline/current/patch bytes independently from the execution receipt, avoiding the circular TOPL prerequisite that required its own successful result. No completed-cohort assertion is made by source qualification. Generated JS-library calls now honor the same linker-wrap fixture observers as C calls (notably selection allocation tags). Pinned SDK terminal setup exposes ncurses ospeed 15 to the original termcap global; general terminal speed selection remains outside this fixture profile.
+
+ROLE/MKOBJ isolated-reference snapshots execute the same test observation functions inside the original-C process to batch RPC. Only read-only snapshots move; source calls, typed C helpers, all snapshot bytes and assertions remain unchanged. The JS IUT cannot access the reference process.
+
+TERMCAP fixture trace now omits ncurses-internal getenv/free/fflush calls made inside tgetent; direct policy calls, capability bytes, allocation ownership, stdio output and all existing assertion sites remain. Both C and JS use the same fixture. UNIXMAIN retains its independent account consumer. Synchronous stdin/stdout callbacks now cross isolated-reference RPC with reentry, and JS stdio uses those same callbacks byte-for-byte. Verification pending.
+
+WINTTY trace observer suppresses only nested ncurses tgetent and stdio fclose/fflush internals; direct policy free/fflush calls remain observed, along with all output, cursor/shadow snapshots and ownership. UNIXMAIN now uses its original ABI entry shell, argv construction, ExitStatus and onExit transport rather than a missing synthetic main. Historical Lua source selection additionally permits the exact qualified IO module introduced by this migration; other additions still fail. Verification pending.
+
+Lua auxiliary errors now route through the existing luaAuxError implementation, retaining Lua source location/stack/error behavior after C varargs decoding. Pure-JS stdio callback transport preserves the SDK signed-char byte convention; UNIXMAIN raw read/write use JS stdio for standard descriptors. Original-C child processes receive graceful shutdown packets instead of being killed during parent exit. Verification pending.
+
+Generated fixture weak dependency definitions become external declarations when the declared dependency JS library provides the strong policy, matching original C linking (OPTIONS visctrl exposed this). Manifest fixtureChanges records the exact replaced names. This preserves the controlled mocks for dependencies without a selected strong provider. TERMCAP nested libc fflush instrumentation follows the same direct-caller boundary as WINTTY. Verification pending.
+
+Generated fixture loading additionally checks the exact builder hash, preventing a stale fixture from passing after compiler/dependency/weak-resolution rules change. Reference shutdown begins before Node exit and waits for the child process handle to close; final status verification is in progress.
+
+ABI audit setup now materializes 271 exact recorded reference inputs in `.cache/pure-js-fixtures/reference-headers` using `scripts/pure-js-fixtures/reference-headers.py`. Current files are used only when their bytes match the immutable pin; the regenerated source-location header is recovered from the existing sealed shadow snapshot by its expected hash. This changes audit input location, not source/header pins or executable behavior. The Acorn parser remains the configured SDK copy. Verification is in progress.
+
+`scripts/pure-js-fixtures/build-references.py` rebuilds only the four adjusted original-C fixtures (OPTIONS, UHITM, TERMCAP, WINTTY) from their existing frozen reference recipes. It records exact input/output hashes and compiler commands and supports a read-only check and an ensure-if-stale mode. Test runner integration preserves the existing requirement for the other original-C references/native addons and configured SDK. It never runs a mixed implementation or recorder. Verification is in progress.
+
+The pure-JS test command ensures the four adjusted original-C fixture builds before building JS fixtures. Original-C rebuild receipts bind prepared C/header inputs, fixture/support inputs, ncurses and exact outputs. JS fixture builds reuse cache entries only after checking builder, every recorded input/output hash, empty engine-C inputs and disabled runtime-Wasm requirement; mismatches rebuild rather than refresh a pin. Verification is in progress.
+
+BOTL uses the same read-only original-C snapshot batching as ROLE/MKOBJ: the exact existing state/trace readers execute inside the separate C reference process and return the same strings. This reduces per-field/byte transfer overhead. Optimization-disabled diagnostics did not remove the native-memory spike, so no optimization restriction is added to the test runner. All existing assertions remain. Verification is in progress.
+
+BOTL test subprocess uses Node --jitless. Its complete 3,607-comparison/76-function corpus passes and exits0 in this profile; diagnostic RSS stays near420MB. Default and --no-opt profiles grew native memory into multiple gigabytes and were killed despite completing comparisons. The profile applies only to the lowered test fixture process; original-C reference workers use normal configured Node, and production runtime/build defaults are unchanged. This qualifies correctness under the interpreter, not production JIT performance. No assertions or cases are skipped.
+
+Original-C RPC caching is limited to registered typed ABI global/address/read/layout/literal-boundary getters. It now covers all declared subsystem owners, reducing repeated remote metadata reads. Writes and unrecognized operations invalidate cached values; callbacks invalidate them before observation, and mutating exports invalidate again after returning so reentry cannot leave stale reference fields. This changes reference observation transport only; original C and JS policy execution and assertions remain. Verification is in progress.
+
+The reference getter cache is restricted further to owners whose compiled support source defines the typed `uint64_t (int kind, void *at, int field)` reader. Merely sharing a registered prefix is insufficient: REPORT's `teleport_report_read` is a real syscall and is excluded. A dedicated original-C mutation test checks cache reuse, writer invalidation and rejection of syscall/probe lookalikes. Verification is in progress.
+
+ARTIFACT moves its unchanged read-only state observer into the separate original-C process and returns the same canonical field/byte list in one transfer. This retains the original schema, C field readers, C pointer canonicalizer, scalar handling and every assertion while eliminating per-field RPC overhead. Verification is in progress.
+
+Pure-JS test migration closing repairs (2026-11-12): CMD's controlled strsubst dependency declared a pointer result but omitted its return. It now returns the input buffer after substitution, removing an undefined-return input from both original-C reference and JS fixture. No CMD policy, case or comparison was removed. Its original reference recipe is reproduced separately and included with the four other corrected reference fixtures. HACK and CMD run their existing state observers inside the original-C child in one batched RPC; exactly the same fields, bytes, identities and assertions remain. NHLUA exception text is no longer modified by test diagnostic suffixes. Post-default historical audits verify this migration's exact current-source qualification before projecting the committed feature bytes bound by their existing native proof; no historical or native source hashes are refreshed.
+
+CMD observation follow-up: the setter trace now records the identity of dolookaround_floodfill_findroom through the fixture's existing probe_function table instead of its engine-specific raw table index; a different callback still produces a different trace. Allocation canonicalization prefers live ranges and then the newest freed identity, retaining raw unknown pointer bits and all lifetime/byte observations. All138 test files retain their original assertion-site inventory; MONMOVE adds one small-corpse assertion (52→53).
+
+Pure-JS subsystem migration completion: 138/138 registered suites pass against original C with Wasm denied in the implementation process; 19,509,107 assertions, zero assertion failures. docs/runtime-environment/pure-js-test-validation.json records the completed 138-suite cohort plus successful targeted reruns of ARTIFACT, NHLUA, CMD, HACK and TOPL, retaining the original failures and timeouts rather than representing a single clean invocation. Sixteen auxiliary checks pass, including the full dependency suite, 672 binding contracts, source structure/scope, native-reference mutation checks, generated selection negative controls and Lua IO. Final scope contains584 production files with no forbidden dependencies; current runtime manifest verifies311 hashes. All44 recorder sessions remain unrun by this migration; full-game readiness is not established here. Existing unrelated recorder evidence elsewhere in this file is unchanged.
+
+Historical audit guard verification also passes55 post-default positive/adversarial/API checks and9 current-source guard checks. The synthetic layered-inverse fixture now copies the exact migration qualification helper imported by the current audit module; its assertions and write-refusal checks are retained. Immutable historical pins can be projected through an exact-qualified current migration to either their original baseline or the independently committed post-default feature bytes, with the original native proof verified for feature members. Unknown hashes, source drift and proof replacement remain rejected.
+
+Main commit integration (2026-11-12): preserve 8b834cd2b94a10bc1a96336de0bd91f90d3adf2b's allocator/CLI source changes while committing this migration. Historical feature audits verify exact migration qualification before projecting the immutable integration-commit bytes; they no longer depend on moving HEAD. The allocator layered-audit fixture uses the exact committed feature cohort and copies its imported qualification helper, preserving all77 JS/Python and native-proof checks. The25 allocation source qualification checks pass. ALLOC and LIGHT pass again on the combined sources; TOPL source audit is revalidated. The receipt retains the six post-validation source changes and the targeted integration runs. Unrelated ordinary-progression author work is excluded from this migration commit.
+
+Final main reconciliation: the combined-source ALLOC/LIGHT reruns and immutable source qualification pass; current runtime manifest verifies357 hashes. Source diff helpers now pass JSON through temporary files rather than synchronous stdin pipes, avoiding a stalled child on large snapshots; canonical difflib output, source/patch hash checks and negative controls are unchanged. The integration source record and targeted reports are retained in the final validation receipt.
+
+Combined-main validation after source-audit integration: 138/138 passing suites, 19,509,153 assertions, zero assertion failures,18 auxiliary checks; no recorder run. Targeted ALLOC/LIGHT/TOPL reports and superseded failed audit attempts are recorded.

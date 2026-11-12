@@ -1,0 +1,23 @@
+--- a/scripts/test-tu-topl.mjs
++++ b/scripts/test-tu-topl.mjs
+@@ -1,9 +1,11 @@
++import './pure-js-probes/deny-wasm.mjs';
++import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+ import{assertCompiledInput,compiledInputDependencies}from'./c-runtime-compiled-input.mjs';
+ import{currentSourcePath}from'./services-layout-audit.mjs';
+ import{C,R,T}from'../js/c-runtime/context.js';import{callTopl,createToplEnvironment}from'../js/nethack/bindings/topl.js';
+-import assert from'node:assert/strict';import{createHash}from'node:crypto';import{readFileSync,writeFileSync}from'node:fs';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
+-if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('TOPL has no native reference fixture; Emscripten results cannot be labeled native.');
+-const W=resolve(process.env.TELEPORT_TOPL_PROBE_DIR??'.cache/topl-author'),F=JSON.parse(readFileSync(resolve(W,'functions.json'))),modes=['reference',process.env.TOPL_PRODUCTION==='1'?'production':'hybrid'],factories=await Promise.all(modes.map(async m=>(await import(pathToFileURL(resolve(W,m+'.mjs')))).default));
++import assert from './native-test-assert.mjs';import{createHash}from'node:crypto';import{readFileSync,writeFileSync}from'node:fs';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
++// Original C reference is available through the isolated reference process.
++const W=resolve(process.env.TELEPORT_TOPL_PROBE_DIR??'.cache/topl-author'),F=JSON.parse(readFileSync(resolve(W,'functions.json'))),modes=['reference',process.env.TOPL_PRODUCTION==='1'?'production':'hybrid'],factories=await Promise.all(modes.map(async m=>(await loadFixture("topl",pathToFileURL(resolve(W,m+'.mjs')))).default));
+ const boundInputs=new Map();for(const mode of modes)for(const[n,h]of Object.entries(JSON.parse(readFileSync(resolve(W,mode+'-input-hashes.json')))))boundInputs.set(n,h);const digest=p=>createHash('sha256').update(readFileSync(p)).digest('hex');const replayInputs=new Map();for(const[n,h]of boundInputs)replayInputs.set(currentSourcePath(n),assertCompiledInput(n,h,'compiled TOPL input'));for(const[n,h]of compiledInputDependencies())replayInputs.set(n,h);
+ const layout={},mods=[],services=[];let comparisons=0,context='',entries=new Set();
+ for(let i=0;i<2;i++)mods.push(await factories[i]({print:()=>{},printErr:()=>{},nethackPorted:{topl:(s,n,...args)=>{services[i]=s;entries.add(n);return callTopl(s,layout,n,...args);}}}));
+@@ -58,4 +60,4 @@
+ mods.splice(0,2,...savedModules);arenas=savedArenas;context='Module-A-resume-snapshot';act('tty_getmsghistory','',null,0);assert.equal(snap(mods[0]).result,'Acurr');act('tty_getmsghistory','',null,0);assert.deepEqual(otherModules.map(snap),savedOther,'Module-B snapshot and native strings remain independent');
+ let importAudit;if(process.env.TOPL_PRODUCTION==='1'){const imports=WebAssembly.Module.imports(await WebAssembly.compile(readFileSync(resolve(W,'production.wasm')))),positive=WebAssembly.Module.imports(await WebAssembly.compile(readFileSync(resolve(W,'hybrid.wasm')))).filter(x=>x.name.includes('_test_'));assert.equal(imports.filter(x=>x.name.includes('_test_')).length,0);assert.equal(positive.length,5);importAudit={testNamedImports:0,hybridDetectorControl:positive,imports};}
+ for(const[n,h]of replayInputs)assert.equal(digest(n),h,'TOPL input changed during replay:'+n);
+-console.log('TOPL comparisons',comparisons,'entries',entries.size);writeFileSync(resolve(W,process.env.TOPL_PRODUCTION==='1'?'production-summary.json':'summary.json'),JSON.stringify({status:'PASS',comparisons,entries:[...entries],importAudit,nativePublicCallbacks:4,originalCompiledInputPins:Object.fromEntries(boundInputs),actualReplayInputs:Object.fromEntries(replayInputs),scope:'controlled originalC/hybrid first-pass; native-host/fullgame/public/fullbranches pending'},null,2)+'\n');
++console.log('TOPL comparisons',comparisons,'entries',entries.size);writeFileSync(resolve(W,process.env.TOPL_PRODUCTION==='1'?'production-summary.json':'summary.json'),JSON.stringify({status:'PASS',comparisons,entries:[...entries],importAudit,nativePublicCallbacks:4,originalCompiledInputPins:Object.fromEntries(boundInputs),actualReplayInputs:Object.fromEntries(replayInputs),scope:'controlled originalC/pure-JS first-pass; native-host/fullgame/public/fullbranches pending'},null,2)+'\n');

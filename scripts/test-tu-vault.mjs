@@ -1,15 +1,18 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
 // Staged configured EmC first-pass gate. Native and production promotion remain
 // pending; this suite cannot silently count as a native-C pass.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import * as vault from '../js/ported/vault.js';
 import { createVaultEnvironment } from '../js/nethack/bindings/vault.js';
 import { withCEnvironment,C } from '../js/c-runtime/context.js';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw new Error('VAULT native oracle pending; this staged suite compares configured Emscripten C only.');
+// Reference selection is handled by the original-C fixture backend.
 const dir=resolve(process.env.TELEPORT_VAULT_PROBE_DIR??'.cache/tu-probes');
-const refFactory=(await import(pathToFileURL(resolve(dir,'vault-reference.mjs')))).default;
-const hybridFactory=(await import(pathToFileURL(resolve(dir,'vault-hybrid.mjs')))).default;
+const refFactory=(await loadFixture("vault",pathToFileURL(resolve(dir,'vault-reference.mjs')))).default;
+const hybridFactory=(await loadFixture("vault",pathToFileURL(resolve(dir,'vault-hybrid.mjs')))).default;
 const text=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.subarray(p,e)).toString('latin1');};
 const layout=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 const reference=await refFactory(),L=layout(reference),envs=new WeakMap();
@@ -22,7 +25,7 @@ function call(name,...args){if(name==='option'||name==='prop')args[1]=BigInt(arg
 const reset=(s=1)=>call('reset',s),opt=(k,v)=>call('option',k,v),mon=(i,k,v)=>call('set_monster',i,k,v),egd=(i,k,v)=>call('egd',i,k,v),cell=(x,y,k,v)=>call('cell',x,y,k,v),obj=(i,k,v)=>call('object',i,k,v),act=(op,id=0,a=0,b=0,c=0)=>call('action',op,id,a,b,c);
 const trace=()=>text(reference,reference._probe_trace());
 function answer(value){modules.forEach(m=>m.HEAPU8.set(Buffer.from(value+'\0'),Number(m._probe_answer())));check();}
-function rolls(values){modules.forEach(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});check();}
+function rolls(values){modules.forEach(m=>{new FixtureInt32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});check();}
 function guard(id=0,placed=true){mon(id,0,1);mon(id,8,1);if(placed)mon(id,10,1);}
 function corridor(id=0,count=2){egd(id,0,0);egd(id,1,count);for(let i=0;i<count;i++){call('corridor',id,i,8+i,8,L.STONE,0xff);cell(8+i,8,0,L.CORR);}}
 // Allocation/free retains mextra ownership, parent ID and idempotence.
@@ -81,4 +84,4 @@ scenario='module isolation';const other=await hybridFactory({nethackPorted:runti
 scenario='dependency throw cleanup';reset();guard();cell(9,9,0,L.CORR);
 let throwingEnv,throwServices,bindingStack;const throwingRuntime={vault(services,name,...args){throwServices=services;bindingStack=services.stackSave();throwingEnv=getEnv(services);const saved=throwingEnv.newsym;throwingEnv.newsym=()=>{throw new Error('fixture dependency throw');};try{return runtime.vault(services,name,...args);}finally{throwingEnv.newsym=saved;}}};
 const throwing=await hybridFactory({nethackPorted:throwingRuntime});throwing._probe_reset(9);throwing._probe_cell(9,9,0,L.CORR);const throwStack=throwing._probe_stack();assert.throws(()=>throwing._probe_action(15,0,0,0,0),/fixture dependency throw/);assert.equal(C,undefined);assert.equal(throwing._probe_stack(),BigInt(bindingStack));throwServices.stackRestore(Number(throwStack));assert.equal(throwing._probe_stack(),throwStack);comparisons++;
-console.log(`VAULT: ${comparisons} configured Emscripten-C/JS comparisons passed; native and production promotion pending.`);
+console.log(`VAULT: ${comparisons} configured original-C/pure-JS comparisons passed; native and production promotion pending.`);

@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('minion', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/minion-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/minion-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('minion',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {elementals_initial} from '../js/ported/minion.js';
 import {C,R,T} from '../js/c-runtime/context.js';
@@ -62,4 +64,4 @@ for(const deaf of [0n,1n])for(const roledeaf of [0,1])for(const cure of [0,1])fo
 reset();rng(Array(128).fill(0));act(10);assert.equal(call('count'),1);assert.equal(call('mon_field',1,5),10);assert.equal(call('pets'),2n);assert.ok(call('mon_field',1,9)>30);assert.ok(trace().includes('bless:0;'));
 reset();call('option',19,0);rng(Array(64).fill(1));act(1,1);
 reset();const saved=snapshot(modules[0]);modules[1]._probe_cash(1n);assert.deepEqual(snapshot(modules[0]),saved);reset();call('emin',0,0);const pointers=modules.map(m=>m._probe_emin_pointer(0)),sizes=modules.map(m=>allocationMetric(m)),grown=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(grown.every(Boolean));modules.forEach((m,i)=>{assert.ok(allocationMetric(m)>sizes[i]);assert.equal(m._probe_emin_pointer(0),pointers[i]);});act(1,1);call('emin',0,1);input('7');call('bribe');modules.forEach((m,i)=>m._free(grown[i]));state();
-console.log(`MINION: ${comparisons} ${referenceLabel}/hybrid emin, summoning, demon-money, scanf, guardian and callback/RNG-site comparisons checked.`);
+console.log(`MINION: ${comparisons} ${referenceLabel}/pure-JS emin, summoning, demon-money, scanf, guardian and callback/RNG-site comparisons checked.`);

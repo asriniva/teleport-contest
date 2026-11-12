@@ -1,13 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import {C,R,T} from '../js/c-runtime/context.js';
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {callApply,createApplyEnvironment} from '../js/nethack/bindings/apply.js';
 import * as core from '../js/ported/apply.js';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw Error('APPLY native-host gate pending; isolated configured EmC first pass only.');
+// Reference selection is handled by the original-C fixture backend.
 const W=resolve(process.env.TELEPORT_APPLY_PROBE_DIR??'.cache/apply-author'), url=name=>pathToFileURL(resolve(W,name)).href;
-const factories=await Promise.all(['reference','hybrid'].map(async n=>(await import(url(n+'.mjs'))).default));
+const factories=await Promise.all(['reference','hybrid'].map(async n=>(await loadFixture("apply",url(n+'.mjs'))).default));
 let lastServices;let layout={};const mods=[];let entries=new Set(),context='',comparisons=0;
 for(let i=0;i<2;i++){
  const m=await factories[i]({print:()=>{},printErr:()=>{},nethackPorted:{apply:(services,name,...args)=>{lastServices=services;entries.add(name);return callApply(services,layout,name,...args);}}});mods.push(m);

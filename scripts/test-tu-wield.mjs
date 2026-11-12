@@ -1,8 +1,10 @@
+import './pure-js-probes/deny-wasm.mjs';
 import {DataView,Int32Array,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/wield-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/wield-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('wield',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/wield.js';
@@ -106,4 +108,4 @@ reset();weapon(0);slot(0,9,'W_WEP');obj(0,7,1);opt(0,0);act(24);assert.ok(!trace
 reset();dual();opt(0,0);rng([0]);act(17);assert.ok(trace().includes('rnd:20:1@;'));
 reset();weapon(0);act(0);for(let i=0;i<150;i++){act(3);act(5,1);act(10);}
 reset();weapon(0);act(0);const saved=modules.map(snapshot),other=await hybridFactory({nethackPorted:runtime});other._probe_reset(7);other._probe_object(1,0,BigInt(L.DAGGER));other._probe_action(0,1,0,0,0n);assert.equal(fields('equip',other)[0].split(',')[9],'1');modules.forEach((m,i)=>assert.deepEqual(snapshot(m),saved[i]));check();
-console.log(`WIELD: ${comparisons} ${referenceLabel}/hybrid full state, callbacks, ownership, RNG and equipment comparisons checked.`);
+console.log(`WIELD: ${comparisons} ${referenceLabel}/pure-JS full state, callbacks, ownership, RNG and equipment comparisons checked.`);

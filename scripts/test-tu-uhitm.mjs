@@ -1,13 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import {C,R,T} from '../js/c-runtime/context.js';
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {callUhitm,createUhitmEnvironment} from '../js/nethack/bindings/uhitm.js';
 import * as core from '../js/ported/uhitm.js';
-if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('UHITM has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for the explicit Emscripten diagnostic.');
+// Original C reference is available through the isolated reference process.
 const W=resolve(process.env.TELEPORT_UHITM_PROBE_DIR??'.cache/uhitm-author'), url=name=>pathToFileURL(resolve(W,name)).href;
-const factories=await Promise.all(['reference','hybrid'].map(async n=>(await import(url(n+'.mjs'))).default));
+const factories=await Promise.all(['reference','hybrid'].map(async n=>(await loadFixture("uhitm",n==='reference'?pathToFileURL(resolve('.cache/tu-probes/uhitm/reference.mjs')):url(n+'.mjs'))).default));
 let lastServices;let layout={};const mods=[];let entries=new Set(),context='',comparisons=0;
 for(let i=0;i<2;i++){
  const m=await factories[i]({print:()=>{},printErr:()=>{},nethackPorted:{uhitm:(services,name,...args)=>{lastServices=services;entries.add(name);return callUhitm(services,layout,name,...args);}}});mods.push(m);

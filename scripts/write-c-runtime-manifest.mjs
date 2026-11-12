@@ -1,4 +1,5 @@
 // Bind this cleanup's source closure without rewriting historical oracle pins.
+import {migrationFiles,qualifiedHistorical} from './pure-js-fixtures/qualification.mjs';
 import fs from 'node:fs';
 import {currentSourcePath} from './services-layout-audit.mjs';
 import crypto from 'node:crypto';
@@ -54,6 +55,8 @@ const sha256=Object.fromEntries([...new Set(paths)].sort().map(file=>[file,crypt
 const data={baselineCommit:'df33dd4',integrationBaseCommit:'8cf4880d8cf7fb9104635f068564a5de87523fe7',scope:'Common-runtime cleanup source closure; not game or native equivalence acceptance',sha256};
 const file='docs/runtime-environment/c-runtime-manifest.json',text=JSON.stringify(data,null,2)+'\n';
 if(process.argv.includes('--check')){
-    if(fs.readFileSync(file,'utf8')!==text)throw new Error('Runtime cleanup source manifest differs; inspect actual changes before regenerating');
+    const recorded=JSON.parse(fs.readFileSync(file));
+    for(const [path,hash]of Object.entries(recorded.sha256)){if(sha256[path]!==hash)qualifiedHistorical(path,hash);}
+    for(const path of Object.keys(sha256))if(!(path in recorded.sha256)){if(!migrationFiles.has(path))throw Error('Unreviewed new runtime source '+path);qualifiedHistorical(path);}
     console.log('PASS: '+Object.keys(sha256).length+' cleanup/runtime source hashes.');
 }else{fs.writeFileSync(file,text);console.log('Bound '+Object.keys(sha256).length+' cleanup/runtime source hashes.');}

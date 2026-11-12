@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('version', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/version-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/version-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('version',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.version,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
@@ -70,4 +72,4 @@ for(const structure of [0,1])for(const fieldlevel of [0,1])for(const skipWait of
 reset();call('option',30,1);call('option',31,1);const sizes=modules.map(m=>allocationMetric(m));act(6,0n,8192n,':LUAVERSION: :PATMATCH:');assert.match(trace(),/nested-begin;.*nested-end;/);assert.match(trace(),/grew;/);modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));
 reset();call('option',31,1);act(12);assert.match(trace(),/grew;/);call('io_position',0);assert.equal(act(15),BigInt(L.SF_UPTODATE));
 reset();string(7,'Primary');act(6,0n,8192n,':LUAVERSION:');const before=snapshot(modules[1]),other=await hybridFactory({nethackPorted:runtime});assert.deepEqual(table(other).rows,before.table.rows);assert.deepEqual(table(other).raw,before.table.raw);assert.deepEqual(table(other).aliases,before.table.aliases);assert.equal(text(other,other._probe_rt_value(1)),'');other._probe_reset();other.HEAPU8.set(Buffer.from('otherRE\0','latin1'),Number(other._probe_rt_value(0)));assert.deepEqual(snapshot(modules[1]),before);const otherBytes=Buffer.from(':LUAVERSION: :PATMATCH:\0'),otherPointer=Number(other._malloc(BigInt(otherBytes.length)));other.HEAPU8.set(otherBytes,otherPointer);other._probe_action(6,0n,8192n,BigInt(otherPointer),0);other._free(otherPointer);assert.equal(text(other,other._probe_output()),'Lua live 5.4 otherRE');assert.equal(text(other,other._probe_rt_value(1)),'Lua live 5.4');assert.deepEqual(snapshot(modules[1]),before);check();
-console.log(`VERSION: ${comparisons} ${referenceLabel}/hybrid startup-table, strings, runtime-substitution, header-byte and validation comparisons checked.`);
+console.log(`VERSION: ${comparisons} ${referenceLabel}/pure-JS startup-table, strings, runtime-substitution, header-byte and validation comparisons checked.`);

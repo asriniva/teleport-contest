@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('ball', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/ball-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/ball-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('ball',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.ball,runtime=createPortedRuntime(layouts);
@@ -62,4 +64,4 @@ reset();floor(1,10,10,10,10);hero(6,1);hero(17,0);act(3);assert.ok(!trace().incl
 for(const stage of [1,2,3,4,5,6,7,8,9]){reset();opt(30,stage);opt(31,stage);const before=modules.map(m=>allocationMetric(m));if(stage<=2){call('add',0,L.OBJ_INVENT,10,10);equip(2,0);act(0,1);}else if(stage<=6){floor(1,10,10,10,10);act(3);act(2);}else if(stage===9){obj(0,0,8);rng([1,1]);act(1);}else{floor(1,7,8,8,8);hero(0,9);hero(1,8);terrain(8,8,0,L.POOL);if(stage===8){hero(14,8);hero(15,8);opt(6,30);}rng([0]);act(9,10,8,1);}assert.ok(trace().includes(`grow:${stage};`));assert.ok(trace().includes('nested;'));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));}
 reset();opt(0,0);obj(0,0,8);rng([1,1]);act(1);assert.ok(trace().includes('@;'));
 reset();floor(1,10,10,10,10);act(4);const held=snapshot(modules[1]);const other=await hybridFactory({nethackPorted:runtime});other._probe_reset(9);other._probe_action(2,0,0,0,0,0,0);assert.equal(other._probe_state(0,0),0);assert.equal(other._probe_action(6,0,0,0,0,0,0),1n);other._probe_action(4,0,0,0,0,0,0);assert.notEqual(other._probe_state(0,0),0);assert.deepEqual(snapshot(modules[1]),held);comparisons+=2;check();
-console.log(`BALL ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);
+console.log(`BALL ${referenceLabel}/pure-JS differential: ${comparisons} comparisons checked`);

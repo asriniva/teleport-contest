@@ -1,8 +1,13 @@
-import {DataView,Int32Array,referenceBackend,referenceLabel,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("dig");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView,Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
+import {DataView,Int32Array,referenceBackend,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
 import{callDig}from'../js/nethack/bindings/dig.js';import * as core from '../js/ported/dig.js';import{C,R,T}from'../js/c-runtime/context.js';
-const author=process.env.TELEPORT_DIG_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url),referenceFactory=(await import(new URL('dig-reference.mjs',dir))).default,hybridFactory=(await import(new URL('dig-hybrid.mjs',dir))).default,ref=await referenceBackend('dig',referenceFactory)();
+const author=process.env.TELEPORT_DIG_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url),referenceFactory=(await loadFixture("dig",new URL('dig-reference.mjs',dir))).default,hybridFactory=(await loadFixture("dig",new URL('dig-hybrid.mjs',dir))).default,ref=await referenceBackend('dig',referenceFactory)();
 function text(m,p){if(!p)return null;let e=Number(p);while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(Number(p),e)).toString();}
 const L={size:Number(ref._probe_context_size())};for(let i=0;i<ref._probe_layout_count();i++){const k=text(ref,ref._probe_layout_name(i)),v=ref._probe_layout_value(i);L[k]=/^(M1_|M2_|W_)/.test(k)||['LEFT_SIDE','RIGHT_SIDE'].includes(k)?BigInt.asUintN(64,v).toString():Number(BigInt.asIntN(64,v));}
 if(!author)assert.deepEqual(L,JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).dig);
@@ -112,7 +117,7 @@ function snapshot(m){const objects=Array.from({length:m._probe_count(0)},(_,i)=>
 function state(label='state'){assert.deepEqual(bytes(modules[1],0,64),hybridNullGuard,'hybrid NULL output guard');assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]),label);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m,stacks[i]));comparisons++;}
 function call(fn,...args){if(process.env.TELEPORT_DIG_DEBUG)console.error(fn,...args);const out=modules.map(m=>m['_probe_'+fn](...args));assert.deepEqual(out[1],out[0],fn+' '+args);state(fn+' '+args);comparisons++;return out[0];}
 const reset=(seed=42)=>call('reset',seed),option=(k,v)=>call('option',k,v),hero=(k,v)=>call('hero',k,BigInt(v)),context=(k,v)=>call('digging',k,BigInt(v)),obj=(slot,k,v)=>call('object',slot,k,BigInt(v)),result=(name,v)=>{assert.ok(returnKeys.includes(name),name);return call('return',returnKeys.indexOf(name),BigInt(v));},act=(name,a=0,b=0,c=0)=>{assert.ok(names.includes(name),name);return call('action',names.indexOf(name),a,b,c);},tile=(x,y,k,v)=>call('tile',x,y,k,v),property=(id,k,v)=>call('property',id,k,BigInt(v));
-function rolls(values){modules.forEach(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});state();}
+function rolls(values){modules.forEach(m=>{new FixtureInt32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});state();}
 function tool(type=L.PICK_AXE){const n=call('new',type,10,10);call('equipment',0,n);return n;}
 for(const k of ['PICK_AXE','DWARVISH_MATTOCK','AXE','BATTLE_AXE','DAGGER','ROOM','STONE','POOL','MOAT','LAVAPOOL','ICE','PM_HUMAN','PM_WATCHMAN','PM_EARTH_ELEMENTAL','PM_XORN','PM_PURPLE_WORM','PIT','HOLE','SHOPBASE','NUMMONS'])assert.ok(Number.isSafeInteger(L[k]),k);
 // Actual compiler fields, all original functions, static enum projection and pointer callbacks.
@@ -157,8 +162,8 @@ reset();call('new',L.CHEST,10,10);call('place',0,L.OBJ_FLOOR,10,10);call('new',L
 for(const corpse of [false,true])for(const where of [L.OBJ_FLOOR,L.OBJ_INVENT,L.OBJ_MINVENT,L.OBJ_MIGRATING,L.OBJ_BURIED]){reset();call('new',corpse?L.CORPSE:L.CHEST,10,10);call('place',0,where,10,10);if(where===L.OBJ_MINVENT){call('new_monster',L.PM_HUMAN,11,10);obj(0,17,0);call('mon_field',0,7,0);}obj(0,11,-9223372036854775808n);call('timeout',9007199254740993n);act(corpse?'rot_corpse':'rot_organic',0);}
 reset();call('new',L.ROCK,10,10);call('place',0,L.OBJ_FLOOR,10,10);act('bury_an_obj',0,1);
 // Addressable output aliases actual global cells rather than copied JS locals.
-reset();call('new',L.HEAVY_IRON_BALL,11,10);call('place',0,L.OBJ_BURIED,11,10);context(1,10);context(2,10);option(55,1);act('buried_ball');assert.equal(new DataView(ref.HEAPU8.buffer).getInt16(Number(ref._probe_pointer(0,0))+L.digging_pos+L.coord_x,true),11);
-reset();call('new',L.ROCK,10,10);call('place',0,L.OBJ_FLOOR,10,10);context(6,-128);act('bury_an_obj',0,2);assert.equal(new DataView(ref.HEAPU8.buffer).getInt8(Number(ref._probe_pointer(0,0))+L.digging_down),1);
+reset();call('new',L.HEAVY_IRON_BALL,11,10);call('place',0,L.OBJ_BURIED,11,10);context(1,10);context(2,10);option(55,1);act('buried_ball');assert.equal(new FixtureDataView(ref.HEAPU8.buffer).getInt16(Number(ref._probe_pointer(0,0))+L.digging_pos+L.coord_x,true),11);
+reset();call('new',L.ROCK,10,10);call('place',0,L.OBJ_FLOOR,10,10);context(6,-128);act('bury_an_obj',0,2);assert.equal(new FixtureDataView(ref.HEAPU8.buffer).getInt8(Number(ref._probe_pointer(0,0))+L.digging_down),1);
 // Donations/damage costs and source move comparisons retain exact signed64 values.
 reset();call('new_monster',L.PM_HUMAN,15,10);option(5,0);option(6,1);result('costly_spot',1);result('stolen_value',9007199254740993n);for(let i=0;i<2;i++){call('new',L.CHEST,10,10);call('place',i,L.OBJ_FLOOR,10,10);}act('bury_objs',10,10);assert.ok(text(ref,ref._probe_trace()).includes('18014398509481986'));
 for(const delta of [2n,3n]){reset();const n=tool();hero(18,1);hero(25,9007199254740993n+delta);context(5,9007199254740993n);context(1,10);context(2,10);tile(11,10,0,L.STONE);act('use_pick_axe2',n);}
@@ -168,4 +173,4 @@ for(const debug of [0,1]){reset();option(1,debug);hero(20,123);call('new',L.CHES
 // Memory grows inside real world callbacks while native room/coord/object views remain live.
 for(const stage of [3,7]){reset();const n=tool();option(120,stage);const before=modules.map(m=>m.HEAPU8.buffer);if(stage===3){call('place',n,L.OBJ_FLOOR,10,10);act('bury_an_obj',n,0);}else{result('may_dig',1);context(0,120);tile(11,10,0,L.STONE);act('dig');}modules.forEach((m,i)=>assertMemoryGrowth(m,before[i]));}
 const extra=await hybridFactory({nethackPorted:runtime});extra._probe_reset(7);assert.equal(extra._probe_count(0),0);state('module isolation');comparisons++;
-console.log('DIG '+comparisons+' comparisons passed ('+referenceLabel+' vs JavaScript; controlled terrain/tool/world callbacks, actual native catalogues/allocator/helpers).');
+console.log('DIG '+comparisons+' comparisons passed ('+fixtureReferenceLabel+' vs JavaScript; controlled terrain/tool/world callbacks, actual native catalogues/allocator/helpers).');

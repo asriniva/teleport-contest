@@ -1,0 +1,18 @@
+import * as core from '../../js/ported/rnd.js';
+import {createRndState,createRndEnvironment} from '../../js/nethack/bindings/rnd.js';
+import {environment,probeModule,withoutWasm} from './common.mjs';
+export default async function createRndProbe(layouts){
+ const env=await environment(),L=layouts.rnd,m=env.memory;
+ withoutWasm(()=>env.enableStdio());
+ let seed=0n,step=0n,seedCalls=0,luck=0,more=0,level=0,strong=0;
+ const diagnostic=m.calloc(1,512),panic=m.calloc(1,512),put=(p,s)=>{const b=Buffer.from(s,'latin1').subarray(0,511);m.HEAPU8.set(b,p);m.HEAPU8[p+b.length]=0;};
+ const fn=[Number(env.functionPointer('rn2','ii')),Number(env.functionPointer('rn2_on_display_rng','ii')),0x7fffffff];
+ const services=Object.assign(Object.create(env.services),{fopen:env.services.fopen,setvbuf:env.services.setvbuf,fputc:env.services.fputc,heap:()=>m.HEAPU8,signedHeap:()=>m.HEAP8,coreFunction:()=>fn[0],displayFunction:()=>fn[1],luck:()=>luck+more,level:()=>level,strongSeed:()=>strong,getenv:name=>env.services.getenv(name),sys_random_seed(){const n=seed;seed=BigInt.asUintN(64,seed+step);seedCalls++;return n;},sgn:Math.sign,panicBadRng(){throw new Error('Bad rng function passed to init_isaac64().');},impossible:(format,...a)=>put(diagnostic,env.libc.format(format,...a)),snprintf(buffer,n,format,...a){const s=env.libc.format(format,...a),b=Buffer.from(s,'latin1').subarray(0,Number(n)-1);buffer.set(b);buffer[b.length]=0;return s.length;},fprintf:(file,format,...a)=>env.services.fprintf(file,format,...a.map(v=>v instanceof Uint8Array?String.fromCharCode(...v.subarray(0,v.indexOf(0)<0?v.length:v.indexOf(0))):v))});
+ const state=createRndState(services),context=createRndEnvironment(services,L,state);
+ env.register('rnd',core,context,{prepareArgs:(name,args)=>name==='shuffle_int_array'?[context.intArray(args[0]),args[1]]:args});
+ const call=(name,...args)=>env.call('rnd',name,...args),guard=fn=>{put(panic,'');try{fn();return 0;}catch(e){if(e.message!=='Bad rng function passed to init_isaac64().')throw e;put(panic,e.message);return -1;}};
+ const methods={_probe_seed(v,s){seed=BigInt.asUintN(64,v);step=BigInt.asUintN(64,s);seedCalls=0;},_probe_seed_calls:()=>seedCalls,_probe_seed_value:()=>BigInt.asIntN(64,seed),_probe_init:(v,which)=>guard(()=>call('init_isaac64',BigInt.asUintN(64,v),fn[which]??fn[2])),_probe_init_random:which=>guard(()=>call('init_random',fn[which]??fn[2])),_probe_reseed(which,value){strong=env.transport.char(value);return guard(()=>call('reseed_random',fn[which]??fn[2]));},_probe_hero(a,b,c){luck=env.transport.char(a);more=env.transport.char(b);level=env.transport.char(c);},_probe_shuffle:(p,n)=>call('shuffle_int_array',p,n),_probe_log_init:()=>call('rng_log_init'),_probe_enabled:()=>call('rng_log_enabled'),_probe_count:()=>call('rng_log_get_call_count'),_probe_caller:(file,line,name)=>call('rng_log_set_caller',Number(file),line,Number(name)),_probe_env(k,v){env.setEnvironment(m.readString(Number(k)),Number(v)?m.readString(Number(v)):null);return 0;},_probe_diagnostic:()=>BigInt(diagnostic),_probe_panic_message:()=>BigInt(panic),_probe_flush:p=>env.services.fflush(Number(p)),_probe_close:p=>env.services.fclose(Number(p))};
+ for(const [op,name]of Object.entries({rn2:'rn2',display:'rn2_on_display_rng',rnd:'rnd',rnd_display:'rnd_on_display_rng',rnl:'rnl',dice:'d',rne:'rne',rnz:'rnz'}))methods['_probe_'+op]=(...a)=>{put(diagnostic,'');return call(name,...a);};
+ const keys=Object.keys(L),names=keys.map(k=>m.cstring(k));Object.assign(methods,{_probe_layout_count:()=>keys.length,_probe_layout_name:i=>BigInt(names[i]),_probe_layout_value:i=>BigInt(L[keys[i]])});
+ return Object.assign(probeModule(env,methods),{FS:env.FS,rndState:state});
+}

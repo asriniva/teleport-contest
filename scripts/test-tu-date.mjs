@@ -1,3 +1,4 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('date', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
@@ -5,8 +6,7 @@ import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import emscriptenReferenceFactory from '../.cache/tu-probes/date-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/date-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/date.mjs';
 import { C, R, T } from '../js/c-runtime/context.js';
 
 if (!process.argv.includes('--worker')) {
@@ -20,7 +20,7 @@ if (!process.argv.includes('--worker')) {
 } else {
     const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
     const layout = layouts.date;
-    const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: createPortedRuntime(layouts) })];
+    const modules = [await referenceFactory(), await createPureJsProbe(layouts)];
     let comparisons = 0;
     const initialStack = modules.map(module => module._probe_stack());
     function scope() {
@@ -144,12 +144,12 @@ if (!process.argv.includes('--worker')) {
     modules.forEach(module => module._malloc(40n * 1024n * 1024n));
     modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
     state(); populate(cases[3], 'after growth', null); release();
-    const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
+    const independent = await createPureJsProbe(layouts);
     const before = state();
     assert.deepEqual(snapshot(independent).fields, initial.fields, 'Separate game starts with static defaults');
     const pointer = allocate(independent, 'independent');
     independent._probe_inputs(1n, 2n, 3n, 4n, BigInt(pointer)); independent._free(pointer);
     independent._probe_populate(); independent._probe_release();
     assert.deepEqual(state(), before); scope(); comparisons++;
-    console.log(`DATE (${process.env.TZ}): ${comparisons} ${referenceLabel}/hybrid layout, build metadata, version, lifecycle and stack comparisons checked.`);
+    console.log(`DATE (${process.env.TZ}): ${comparisons} ${referenceLabel}/pure-JS layout, build metadata, version, lifecycle and stack comparisons checked.`);
 }

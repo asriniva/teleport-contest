@@ -1,7 +1,10 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 import {spawnSync} from 'node:child_process';
 import {mkdirSync,writeFileSync} from 'node:fs';
 import {Session} from 'node:inspector';
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {writeFile,readFile} from 'node:fs/promises';
@@ -31,7 +34,7 @@ if(process.argv.includes('--build')){
   assert.equal(result.status,0,result.stderr);
  }
 }
-const rf=(await import(pathToFileURL(resolve(directory,'probe-reference'+suffix+'.mjs')))).default,hf=(await import(pathToFileURL(resolve(directory,'probe-hybrid'+suffix+'.mjs')))).default;
+const rf=(await loadFixture("nhlua",pathToFileURL(resolve(directory,'probe-reference'+suffix+'.mjs')))).default,hf=(await loadFixture("nhlua",pathToFileURL(resolve(directory,'probe-hybrid'+suffix+'.mjs')))).default;
 const options=()=>({nethackLua:backend==='js'?createLuaAbi({vmFactory:createLuaBytecodeVM}):undefined});
 const runtime={nhlua:(services,name,...args)=>{invoked.add(name);return callNhlua(services,name,...args);}};
 const reference=await rf(options());
@@ -45,7 +48,7 @@ function compare(values){try{assert.deepEqual(values[1],values[0],label);checks+
 function call(name,...args){label=name;invoked.add(name);cases++;const values=modules.map(m=>m['_probe_call_'+name](...args.map(a=>typeof a==='function'?a(m):a)));const ret=schema.functions.find(f=>f.name===name).returnType;compare(values.map((v,i)=>ret.includes('*')?(ret.includes('char')?text(modules[i],v):Boolean(v)):v));compare(modules.map(m=>text(m,m._probe_trace())));return values;}
 function stack(m,L){const out=[];for(let i=1;i<=m._probe_lua_top(L);i++){const type=m._probe_lua_type(L,i);out.push(type===3?['number',m._probe_lua_isinteger(L,i)?m._probe_lua_integer(L,i).toString():m._probe_lua_number(L,i)]:type===1?['boolean',m._probe_lua_boolean_value(L,i)]:type===4?['string',text(m,m._probe_lua_text(L,i))]:[type]);}return out;}
 function dataImage(m,at,type){
- const v=new DataView(m.HEAPU8.buffer);at=Number(at);
+ const v=new FixtureDataView(m.HEAPU8.buffer);at=Number(at);
  if(typeof type==='string'){const method={i8:'getInt8',u8:'getUint8',i16:'getInt16',u16:'getUint16',i32:'getInt32',u32:'getUint32',i64:'getBigInt64',u64:'getBigUint64'}[type];return v[method](at,true);}
  if(type.pointer){const p=v.getBigUint64(at,true);if(!p)return null;return type.pointer==='function'?text(m,m._probe_function_name(p)):type.pointer==='char'?text(m,p):'non-null';}
  if(type.record)return Object.fromEntries(schema.records[type.record].fields.map(f=>[f.name,dataImage(m,at+f.offset,f.type)]));
@@ -88,7 +91,7 @@ clear();modules.forEach(m=>m._probe_lua_table(state(m)));
 for(const [name,value]of [['nhl_add_table_entry_int',123456],['nhl_add_table_entry_char',65],['nhl_add_table_entry_bool',1]]){call(name,state,m=>string(m,name),name.endsWith('_int')?BigInt(value):value);modules.forEach(m=>m._probe_lua_field(state(m),1,string(m,name)));compareStack();modules.forEach(m=>m._probe_lua_settop(state(m),1));}
 call('nhl_add_table_entry_str',state,m=>string(m,'str'),m=>string(m,'value'));call('get_table_str',state,m=>string(m,'str'));
 call('nhl_add_table_entry_str',state,m=>string(m,'map'),m=>string(m,'.'));call('get_table_mapchr',state,m=>string(m,'map'));call('get_table_mapchr_opt',state,m=>string(m,'absent'),schema.constants.ROOM);
-const optionsPointer=m=>{const at=m._probe_alloc(24n);const view=new DataView(m.HEAPU8.buffer);view.setBigUint64(Number(at),string(m,'one'),true);view.setBigUint64(Number(at)+8,string(m,'two'),true);return at;};call('get_table_option',state,m=>string(m,'absent'),m=>string(m,'two'),optionsPointer);
+const optionsPointer=m=>{const at=m._probe_alloc(24n);const view=new FixtureDataView(m.HEAPU8.buffer);view.setBigUint64(Number(at),string(m,'one'),true);view.setBigUint64(Number(at)+8,string(m,'two'),true);return at;};call('get_table_option',state,m=>string(m,'absent'),m=>string(m,'two'),optionsPointer);
 call('nhl_add_table_entry_region',state,m=>string(m,'region'),1,2,3,4);
 call('get_table_int',state,m=>string(m,'nhl_add_table_entry_int'));compareStack();
 call('get_table_int_opt',state,m=>string(m,'absent'),19);compareStack();
@@ -102,7 +105,7 @@ for(const [script,nresults]of [['return 7+8',1],['local s=0 for i=1,100 do s=s+i
 for(const script of ["error('fixture error')","return nil.no_such_field"]){modules.forEach(m=>m._probe_lua_load(state(m),string(m,script)));call('nhl_pcall',state,0,1,m=>string(m,'fixture'));compareStack();clear();}
 for(const s of ['warning','@off','@on','fixture warning']){call('nhl_warn',0n,m=>string(m,s),0);}
 modules.forEach((m,i)=>m._probe_lua_close(states[i]));
-const configs=modules.map(m=>{const p=m._probe_alloc(16n);const v=new DataView(m.HEAPU8.buffer);v.setUint32(Number(p),2147483648,true);v.setUint32(Number(p)+4,1048576,true);return p;});
+const configs=modules.map(m=>{const p=m._probe_alloc(16n);const v=new FixtureDataView(m.HEAPU8.buffer);v.setUint32(Number(p),2147483648,true);v.setUint32(Number(p)+4,1048576,true);return p;});
 states=call('nhl_init',m=>configs[modules.indexOf(m)]);
 assert(states.every(Boolean),'nhl_init source succeeds with actual nhlib.lua');
 modules.forEach(m=>m._probe_core(state(m)));
@@ -177,7 +180,7 @@ call('l_nhcore_init');for(const n of [-1,0,1,2,3,4,7])call('l_nhcore_call',n);ca
 
 // Native signatures are exercised by a separate no-LTO C caller.
 for(const counter of [0,4294967,4294968,4294967294,4294967295]){
- const cs=modules.map(m=>{const at=m._probe_alloc(16n),v=new DataView(m.HEAPU8.buffer);v.setUint32(Number(at),2147483648,true);v.setUint32(Number(at)+4,1048576,true);v.setUint32(Number(at)+8,5000,true);return at;});
+ const cs=modules.map(m=>{const at=m._probe_alloc(16n),v=new FixtureDataView(m.HEAPU8.buffer);v.setUint32(Number(at),2147483648,true);v.setUint32(Number(at)+4,1048576,true);v.setUint32(Number(at)+8,5000,true);return at;});
  states=call('nhlL_newstate',m=>cs[modules.indexOf(m)],m=>string(m,'stat-state'));
  modules.forEach(m=>{m._probe_clear_trace();m._probe_nudfield(state(m),0,counter);m._probe_loglua(1);});
  call('nhl_getmeminuse',state);
@@ -202,13 +205,13 @@ async function quotaCase(steps,perpcall,source,fatal){
  const ms=[await rf(options()),await hf({...options(),nethackPorted:runtime})];
  const observed=[];
  for(const m of ms){
-  m._probe_setup();const config=m._probe_alloc(16n),dv=new DataView(m.HEAPU8.buffer),at=Number(config);
+  m._probe_setup();const config=m._probe_alloc(16n),dv=new FixtureDataView(m.HEAPU8.buffer),at=Number(config);
   for(const [offset,value]of [[0,2147483648],[4,1048576],[8,steps],[12,perpcall]])dv.setUint32(at+offset,value,true);
   const L=m._probe_call_nhlL_newstate(config,string(m,'quota-state'));
   const ud=Number(m._probe_userdata(L));assert(ud);
   assert.equal(m._probe_lua_load(L,string(m,source)),0);
   let status,message='';try{status=m._probe_call_nhl_pcall(L,0,1,string(m,'quota-case'));}catch(error){message=error.message;}
-  const v=new DataView(m.HEAPU8.buffer);
+  const v=new FixtureDataView(m.HEAPU8.buffer);
   const result={status,message,trace:text(m,m._probe_trace()),steps:v.getUint32(ud+nudOffset('steps'),true),statctr:v.getUint32(ud+nudOffset('statctr'),true)};
   if(fatal){assert.equal(message,'fixture-fatal:Lua time exceeded 1:quota-case');assert.equal(status,undefined);if(m.teleportNhluaTransport)assert.equal(m.teleportNhluaTransport.continuations.size,0);/* Fatal callback chains are intentionally abandoned. No Lua API or close follows. */}
   else{assert.equal(message,'');assert.equal(status,0);result.value=m._probe_lua_integer(L,-1).toString();m._probe_call_nhl_done(L);}
@@ -221,7 +224,7 @@ async function quotaCase(steps,perpcall,source,fatal){
 for(const failure of [1,2,3,10,55]){
  const result=[];
  for(const factory of [rf,hf]){
-  const m=await factory({...options(),nethackPorted:runtime});m._probe_setup();m._probe_option(30,failure);const config=m._probe_alloc(16n),v=new DataView(m.HEAPU8.buffer);v.setUint32(Number(config),2147483648,true);v.setUint32(Number(config)+4,1048576,true);
+  const m=await factory({...options(),nethackPorted:runtime});m._probe_setup();m._probe_option(30,failure);const config=m._probe_alloc(16n),v=new FixtureDataView(m.HEAPU8.buffer);v.setUint32(Number(config),2147483648,true);v.setUint32(Number(config)+4,1048576,true);
   let pointer,message='';try{pointer=m._probe_call_nhlL_newstate(config,string(m,'allocation-refusal'));}catch(error){message=error.message;}
   assert.equal(pointer,undefined);assert.equal(message,'fixture-fatal:controlled re_alloc OOM');
   result.push({pointer,message,trace:text(m,m._probe_trace())});/* Failed construction/fatal panic is never followed by Lua calls. */

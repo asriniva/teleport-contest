@@ -1,14 +1,18 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("bones");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import assert from './native-test-assert.mjs';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
-import {referenceBackend,referenceLabel,memoryCheckpoint,assertMemoryGrowth,assertStackRestored} from './native-test-backend.mjs';
+import {referenceBackend,memoryCheckpoint,assertMemoryGrowth,assertStackRestored} from './native-test-backend.mjs';
 import {withCEnvironment,C} from '../js/c-runtime/context.js';
 import {createBonesEnvironment} from '../js/nethack/bindings/bones.js';
 import * as core from '../js/ported/bones.js';
 const probeDir=resolve(process.env.BONES_PROBE_DIR??'.cache/tu-probes');
-const factory=async mode=>(await import(pathToFileURL(resolve(probeDir,'bones-'+mode+'.mjs')).href)).default;
+const factory=async mode=>(await loadFixture("bones",pathToFileURL(resolve(probeDir,'bones-'+mode+'.mjs')).href)).default;
 // Scratch builds use the same names as shared probes after integration.
-const importFactory=async mode=>{try{return await factory(mode);}catch(error){if(!process.env.BONES_PROBE_DIR)throw error;return (await import(pathToFileURL(resolve(probeDir,mode+'.mjs')).href)).default;}};
+const importFactory=async mode=>{try{return await factory(mode);}catch(error){if(!process.env.BONES_PROBE_DIR)throw error;return (await loadFixture("bones",pathToFileURL(resolve(probeDir,mode+'.mjs')).href)).default;}};
 const referenceFactory=await importFactory('reference'),hybridFactory=await importFactory('hybrid');
 const reference=await referenceBackend('bones',referenceFactory)();
 function text(m,p){p=Number(p);let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');}
@@ -53,4 +57,4 @@ for(let i=0;i<8;i++){reset();field('monster',i,'m_id',0xffffffffn-BigInt(i));act
 reset();field('object',0,'oclass',L.FOOD_CLASS);field('object',0,'oeaten',4);field('object',0,'where',L.OBJ_FLOOR);for(const i of [11,12,13,14,26])option(i,1);const checkpoints=modules.map(memoryCheckpoint);action(4,0,1);modules.forEach((m,i)=>assertMemoryGrowth(m,checkpoints[i]));comparisons+=2;
 // Inventory list extraction, curse RNG and monster/container/floor destinations.
 for(const monster of [-1,0])for(const container of [-1,3])for(const seed of [1,2,6,9,18]){reset();option(22,seed);option(23,1);field('hero',0,'twoweap',1);for(let i=0;i<3;i++){field('object',i,'otyp',i?L.EGG:L.SLIME_MOLD);field('object',i,'spe',1);field('object',i,'lamplit',1);field('object',i,'owornmask',0x8000000000000001n);}both('link',0,0,1);both('link',0,1,2);both('link',1,0,0);action(10,monster,container);}
-console.log(`bones: ${comparisons} ${referenceLabel}/JS state, trace, return and stack comparisons; focused 11/16-function harness, full save/getbones file paths not covered`);
+console.log(`bones: ${comparisons} ${fixtureReferenceLabel}/JS state, trace, return and stack comparisons; focused 11/16-function harness, full save/getbones file paths not covered`);

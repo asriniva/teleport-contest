@@ -1,12 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
 // Configured EmC first pass: actual C streams and imported JS original bodies.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import * as topten from '../js/ported/topten.js';
 import {createToptenEnvironment} from '../js/nethack/bindings/topten.js';
 import {withCEnvironment,C} from '../js/c-runtime/context.js';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw new Error('TOPTEN native oracle pending; this staged suite compares configured Emscripten C only.');
-const dir=resolve(process.env.TELEPORT_TOPTEN_PROBE_DIR??'.cache/tu-probes'),refFactory=(await import(pathToFileURL(resolve(dir,'topten-reference.mjs')))).default,hybridFactory=(await import(pathToFileURL(resolve(dir,'topten-hybrid.mjs')))).default;
+// Reference selection is handled by the original-C fixture backend.
+const dir=resolve(process.env.TELEPORT_TOPTEN_PROBE_DIR??'.cache/tu-probes'),refFactory=(await loadFixture("topten",pathToFileURL(resolve(dir,'topten-reference.mjs')))).default,hybridFactory=(await loadFixture("topten",pathToFileURL(resolve(dir,'topten-hybrid.mjs')))).default;
 const text=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.subarray(p,e)).toString('latin1');};
 const layout=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 const reference=await refFactory(),L=layout(reference),envs=new WeakMap();
@@ -20,7 +23,7 @@ const reset=(seed=1)=>call('reset',seed),opt=(k,v)=>call('option',k,v),entry=(id
 function put(name,args,value){modules.forEach(m=>{const p=Number(m['_probe_'+name](...args));m.HEAPU8.set(Buffer.from(value+'\0','latin1'),p);});check();}
 const name=s=>put('text',[0],s),reason=s=>put('text',[1],s),output=s=>put('text',[2],s),file=(id,s)=>put('file',[id],s),entryText=(id,k,s)=>put('entry_text',[id,k],s),input=s=>{put('input',[],s);call('load');};
 function args(values){values.forEach((v,i)=>put('argument',[i],v));call('argc',values.length);}
-function rolls(v){modules.forEach(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_rolls()),v.length).set(v);m._probe_roll_count(v.length);});check();}
+function rolls(v){modules.forEach(m=>{new FixtureInt32Array(m.HEAPU8.buffer,Number(m._probe_rolls()),v.length).set(v);m._probe_roll_count(v.length);});check();}
 const ver=`${L.VERSION_MAJOR}.${L.VERSION_MINOR}.${L.PATCHLEVEL}`;
 const record=(points=100,who='Player',role='Arc',death='killed by a newt',uid=42,version=ver)=>`${version} ${points} 0 3 7 4 20 0 20241109 20240101 ${uid} ${role} Hum Mal Neu ${who},${death}\n`;
 const trace=()=>text(reference,reference._probe_trace());
@@ -54,4 +57,4 @@ scenario='growth and C reentry';reset();opt(30,1);opt(31,1);const oldBuffers=mod
 for(const when of[0n,-86400n,(1n<<53n)+3n,-(1n<<53n)-5n,9223372036854775807n]){scenario='signed64 time and log quantities';reset();opt(122,when);opt(123,when);opt(124,(1n<<53n)+9n);opt(125,9223372036854775807n);call('time_action',0,when);}
 scenario='separate Modules and retained static record';const other=await hybridFactory({nethackPorted:runtime});other._probe_reset(77);other.HEAPU8.set(Buffer.from(record(333,'OtherMod')+'\0','latin1'),Number(other._probe_file(0)));other._probe_action(21,0,0,0);const otherState=snap(other);reset();file(0,record(444,'ThisMod'));act(21);act(15,0,172800);assert.deepEqual(snap(other),otherState);assert.equal(C,undefined);comparisons++;
 scenario='dependency throw binding cleanup';let failedServices,entryStack;const throwingRuntime={topten(services,name,...a){failedServices=services;entryStack=services.stackSave();const e=getEnv(services),saved=e.raw_print;e.raw_print=()=>{throw new Error('controlled TOPTEN dependency throw');};try{return runtime.topten(services,name,...a);}finally{e.raw_print=saved;}}};const throwing=await hybridFactory({nethackPorted:throwingRuntime});throwing._probe_reset(1);const outerStack=throwing._probe_stack();assert.throws(()=>throwing._probe_action(1,0,0,0),/controlled TOPTEN dependency throw/);assert.equal(C,undefined);assert.equal(throwing._probe_stack(),BigInt(entryStack));failedServices.stackRestore(Number(outerStack));assert.equal(throwing._probe_stack(),outerStack);comparisons++;
-console.log(`TOPTEN: ${comparisons} configured Emscripten-C/JS comparisons passed; native, real record IO and production promotion pending.`);
+console.log(`TOPTEN: ${comparisons} configured original-C/pure-JS comparisons passed; native, real record IO and production promotion pending.`);

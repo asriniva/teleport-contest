@@ -1,3 +1,5 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // EmC-first original C against imported JS. Native parity is a follow-up;
 // controlled dependencies are described in the integration plan.
 import assert from './native-test-assert.mjs';
@@ -7,8 +9,8 @@ import { callWeapon } from '../js/nethack/bindings/weapon.js';
 import * as core from '../js/ported/weapon.js';
 import { C,R,T } from '../js/c-runtime/context.js';
 const dir=resolve(process.env.TELEPORT_WEAPON_PROBE_DIR??'.cache/tu-probes');
-const {default:rf}=await import(pathToFileURL(resolve(dir,process.env.TELEPORT_WEAPON_PROBE_DIR?'reference.mjs':'weapon-reference.mjs')));
-const {default:hf}=await import(pathToFileURL(resolve(dir,process.env.TELEPORT_WEAPON_PROBE_DIR?'hybrid.mjs':'weapon-hybrid.mjs')));
+const {default:rf}=await loadFixture("weapon",pathToFileURL(resolve(dir,process.env.TELEPORT_WEAPON_PROBE_DIR?'reference.mjs':'weapon-reference.mjs')));
+const {default:hf}=await loadFixture("weapon",pathToFileURL(resolve(dir,process.env.TELEPORT_WEAPON_PROBE_DIR?'hybrid.mjs':'weapon-hybrid.mjs')));
 const reference=await rf();
 function text(m,p){p=Number(p);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 const L={};for(let i=0;i<reference._probe_layout_count();i++)L[text(reference,reference._probe_layout_name(i))]=Number(reference._probe_layout_value(i));
@@ -123,4 +125,4 @@ for(const stage of [1,2,3,4,5,6,7,8,9,10,11,12,13,14]){
  assert.match(trace(),new RegExp('nested:'+L.P_BARE_HANDED_COMBAT+';'));assert.match(trace(),new RegExp('grow:'+stage+';'));modules.forEach((m,i)=>assert.ok(m.HEAPU8.buffer.byteLength>before[i]));
 }
 reset();item(L.AKLYS);action(7);const saved=snapshot(modules[1]),ptr=modules[1]._probe_pointer(4);const independent=await hf({nethackPorted:runtime});independent._probe_reset();independent._probe_item(0,L.AKLYS,L.NON_PM,L.OBJ_INVENT,0);independent._probe_action(7,0,0,0,0n);assert.deepEqual(snapshot(modules[1]),saved);assert.equal(modules[1]._probe_pointer(4),ptr);
-console.log(`WEAPON: ${comparisons} Emscripten-C/hybrid damage, selection, skill/table, menu, lifetime, callbacks and growth comparisons checked.`);
+console.log(`WEAPON: ${comparisons} Emscripten-C/pure-JS damage, selection, skill/table, menu, lifetime, callbacks and growth comparisons checked.`);

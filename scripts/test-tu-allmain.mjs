@@ -1,12 +1,14 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Configured first-pass C/hybrid test. Native/game/public parity are separate gates.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createAllmainBridge} from '../js/nethack/bindings/allmain.js';
 import {C} from '../js/c-runtime/context.js';
 const directory=resolve(process.env.ALLMAIN_PROBE_DIR??'.cache/tu-probes');
-const refFactory=(await import(pathToFileURL(resolve(directory,'allmain-reference.mjs')))).default;
-const jsFactory=(await import(pathToFileURL(resolve(directory,'allmain-hybrid.mjs')))).default;
+const refFactory=(await loadFixture("allmain",pathToFileURL(resolve(directory,'allmain-reference.mjs')))).default;
+const jsFactory=(await loadFixture("allmain",pathToFileURL(resolve(directory,'allmain-hybrid.mjs')))).default;
 const text=(m,at)=>{at=Number(at);let end=at;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.subarray(at,end)).toString('latin1');};
 const layouts=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 let modules,L,bridge,fields,observe,lifetime,beforeWelcome,comparisons=0,scenario='initial';
@@ -80,4 +82,4 @@ scenario='moveloop controlled callback exit';reset();option(22,3);modules.forEac
 scenario='billion-turn cap';reset();field('svc.context.move',1);field('svm.moves',999999999n);modules.forEach(m=>assert.throws(()=>m._probe_call(4,0),new RegExp('ALLMAIN fixture exit '+L.ESCAPED)));assert.equal(C,undefined);compare();
 // Module isolation of the two original file-scope mutable mainloop values.
 const old=modules;await pair();scenario='second Module';invoke(1);field('svc.context.move',1);invoke(4);modules=old;reset(83);scenario='original Module reused';invoke(1);field('svc.context.move',1);invoke(4);
-console.log(`ALLMAIN: ${comparisons} configured Emscripten-C/JS comparisons passed; native/game/public gates pending.`);
+console.log(`ALLMAIN: ${comparisons} configured original-C/pure-JS comparisons passed; native/game/public gates pending.`);

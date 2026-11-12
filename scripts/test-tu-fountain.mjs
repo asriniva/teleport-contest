@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('fountain', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/fountain-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/fountain-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('fountain',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.fountain,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
@@ -76,4 +78,4 @@ for(const hands of [0,1]){reset();call('terrain',10,10,L.SINK,0,0);call('prop',L
 reset();obj(0,L.LEATHER_GLOVES);rng([1]);act(14,0);assert.match(trace(),/hold the fixture item/);
 for(const blind of [0,1])for(const deaf of [0,1])for(const looted of [0,1]){reset();call('terrain',10,10,L.SINK,looted?L.S_LRING:0,0);if(blind)call('prop',L.BLINDED,0,1);if(deaf)call('hero',8,1);act(15,10,10);assert.ok(cell()[4]&L.S_LRING);assert.equal(trace().includes('mkobj-at:'),!looted);if(blind&&deaf)assert.match(trace(),/splashes you in the face/);}
 reset();call('option',0,0);rng([1]);act(13);const saved=snapshot(modules[0]);modules[1]._probe_hero(2,-3n);assert.deepEqual(snapshot(modules[0]),saved);reset();
-console.log(`FOUNTAIN: ${comparisons} ${referenceLabel}/hybrid fountain, sink, callback, property, inventory and RNG-site comparisons checked.`);
+console.log(`FOUNTAIN: ${comparisons} ${referenceLabel}/pure-JS fountain, sink, callback, property, inventory and RNG-site comparisons checked.`);

@@ -1,0 +1,30 @@
+--- a/js/c-runtime/stdio.js
++++ b/js/c-runtime/stdio.js
+@@ -17,7 +17,7 @@
+ }
+ export function createStdio(memory,filesystem,libc,{stdin=new Uint8Array(),readStdin,stdout,stderr}={}) {
+     if(readStdin!==undefined&&typeof readStdin!=='function')throw new TypeError('Expected synchronous readStdin callback');
+-    const files=new Map(),output=[[],[]],closedStandard=new Set(),standardFlags=[0,O_WRONLY|O_CREAT,O_WRONLY|O_CREAT];let inputOffset=0;
++    const files=new Map(),output=[[],[]],closedStandard=new Set(),standardFlags=[0,O_WRONLY|O_CREAT,O_WRONLY|O_CREAT];let inputOffset=0,temporarySequence=0;
+     const text=v=>typeof v==='string'?v:memory.readString(address(v));
+     const pathText=v=>readSdkUtf8(memory,v);
+     const fail=(error,value)=>{if(!(error instanceof VFSError))throw error;libc.errno=error.errno;return value;};
+@@ -102,6 +102,7 @@
+         mkdir:(p,mode)=>capture(()=>{filesystem.mkdir(pathText(p),Number(mode));return 0;},-1),
+         chdir:p=>capture(()=>{filesystem.chdir(pathText(p));return 0;},-1),
+         fopen:(path,mode)=>capture(()=>{mode=text(mode);if(!validMode(mode))throw new VFSError('EINVAL');const fd=openDescriptor(pathText(path),modeFlags(mode),0o666);try{return allocate(fd,0,mode);}catch(error){closeDescriptor(fd);throw error;}},0),
++        tmpfile:()=>capture(()=>{let path,fd;for(;;){path='/.tmpfile-'+temporarySequence++;try{fd=openDescriptor(path,O_RDWR|O_CREAT|O_EXCL,0o600);break;}catch(error){if(error.code!=='EEXIST')throw error;}}try{filesystem.unlink(path);return allocate(fd,0,'w+');}catch(error){closeDescriptor(fd);throw error;}},0),
+         fdopen:(fd,mode)=>capture(()=>{fd=Number(fd);validateDescriptor(fd);mode=text(mode);if(!validMode(mode))throw new VFSError('EINVAL');if(mode[0]==='a')api.addDescriptorFlags(fd,O_APPEND);return allocate(fd,0,mode);},0),
+         fclose:p=>operation(p,f=>{let result=0;try{flush(f);discardInput(f,Boolean(readStdin&&f.fd===0&&!regular(0)));}catch(error){result=fail(error,-1);}try{closeDescriptor(f.fd);}catch(error){result=fail(error,-1);}files.delete(address(p));if(f.ownsBuffer&&f.buffer)memory.free(f.buffer);memory.free(address(p));return result;},-1),
+         fileno:p=>operation(p,f=>f.fd,-1),
+@@ -164,5 +165,10 @@
+     api.fprintf=(p,format,...args)=>{const value=libc.format(format,...args);return api.fputs(value,p)===-1?-1:value.length;};
+     api.printf=(format,...args)=>api.fprintf(api.stdout,format,...args);api.puts=str=>api.fputs(str,api.stdout)===-1?-1:api.fputc(10,api.stdout);
+     api.remove=p=>capture(()=>{const path=pathText(p);if(filesystem.isDir(filesystem.stat(path).mode))filesystem.rmdir(path);else filesystem.unlink(path);return 0;},-1);
++    // Original musl __stdio_exit: flush writes and seek unread input without closing.
++    api.__stdio_exit=()=>{
++        const finish=f=>{if(!f)return;try{if(f.writeEnd)flush(f);}catch(error){fail(error,0);}const unread=f.readEnd-f.readPos+f.unget.length;if(unread)try{seekDescriptor(f.fd,-unread,1);}catch(error){fail(error,0);}};
++        const standard=[api.stdin,api.stdout,api.stderr],ordinary=[...files.entries()].filter(([p])=>!standard.includes(p));for(const[,f]of ordinary.reverse())finish(f);for(const p of standard)finish(files.get(p));
++    };
+     return api;
+ }

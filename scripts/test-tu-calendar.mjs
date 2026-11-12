@@ -1,3 +1,4 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('calendar', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
@@ -5,8 +6,7 @@ import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import emscriptenReferenceFactory from '../.cache/tu-probes/calendar-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/calendar-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/calendar.mjs';
 import { C, R, T } from '../js/c-runtime/context.js';
 
 if (!process.argv.includes('--worker')) {
@@ -28,7 +28,7 @@ if (!process.argv.includes('--worker')) {
         static now() { return clock; }
     };
     try {
-        const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: createPortedRuntime(layouts) })];
+        const modules = [await referenceFactory(), await createPureJsProbe(layouts)];
         const initialStack = modules.map(module => module._probe_stack());
         let comparisons = 0;
         function cstring(module, pointer) {
@@ -118,13 +118,13 @@ if (!process.argv.includes('--worker')) {
             assert.equal(cstring(module, datePointers[i]), before);
         });
         format(1n); parse('20261101013000'); scope();
-        const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
+        const independent = await createPureJsProbe(layouts);
         const kept = cstring(modules[1], datePointers[1]);
         independent._probe_format(946684800n);
         assert.equal(cstring(modules[1], datePointers[1]), kept);
         // A replay clock is an explicit Module service input. The native oracle
         // receives the same time_t via its existing Date.now() clock transport,
-        // while the hybrid's host clock deliberately uses a different season.
+        // while the pure-JS host clock deliberately uses a different season.
         function clearFixedDatetime(module) {
             const key = allocate(module, 'NETHACK_FIXED_DATETIME');
             assert.equal(module._probe_set_env(BigInt(key), 0n), 0);
@@ -152,10 +152,7 @@ if (!process.argv.includes('--worker')) {
         setEnv('NETHACK_RECORDING_EPOCH', null);
         clearFixedDatetime(modules[0]);
         for (const epoch of [1777723200n, 0n, -1n]) {
-            const replay = await hybridFactory({
-                nethackPorted: createPortedRuntime(layouts),
-                nethackCalendarTime: () => epoch,
-            });
+            const replay = await createPureJsProbe(layouts, {now: () => epoch});
             clearFixedDatetime(replay);
             const stack = replay._probe_stack();
             clock = Number(epoch) * 1000;
@@ -181,6 +178,6 @@ if (!process.argv.includes('--worker')) {
             assertStackRestored(replay, stack);
             scope();
         }
-        console.log(`CALENDAR ${process.env.TZ}: ${comparisons} effective-C/hybrid clock, parsing and calendar comparisons checked.`);
+        console.log(`CALENDAR ${process.env.TZ}: ${comparisons} effective-C/pure-JS clock, parsing and calendar comparisons checked.`);
     } finally { globalThis.Date = NativeDate; }
 }

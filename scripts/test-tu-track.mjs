@@ -1,16 +1,17 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('track', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/track-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/track-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/track.mjs';
 import { C, R, T } from '../js/c-runtime/context.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 const layout = layouts.track;
-const runtime = createPortedRuntime(layouts);
-const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: runtime })];
+const implementation = await createPureJsProbe(layouts);
+const runtime = { trackState: implementation.environment.state('track') };
+const modules = [await referenceFactory(), implementation];
 let comparisons = 0;
 function scope() {
     assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined);
@@ -138,11 +139,11 @@ call('save', layout.WRITING | layout.FREEING);
 assert.deepEqual(call('rest'), [0, 0]);
 serialization();
 
-const independentRuntime = createPortedRuntime(layouts);
-const independent = await hybridFactory({ nethackPorted: independentRuntime });
+const independent = await createPureJsProbe(layouts);
+const independentRuntime = { trackState: independent.environment.state('track') };
 const before = state();
 independent._probe_init(); independent._probe_hero(1, 2, -1, -1); independent._probe_set();
 assert.equal(independentRuntime.trackState.utcnt, 1);
 assert.deepEqual(state(), before);
 scope();
-console.log(`TRACK: ${comparisons} ${referenceLabel}/hybrid ring-buffer, pointer and serialization comparisons checked.`);
+console.log(`TRACK: ${comparisons} ${referenceLabel}/pure-JS ring-buffer, pointer and serialization comparisons checked.`);

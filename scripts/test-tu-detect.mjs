@@ -1,5 +1,10 @@
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("detect");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import assert from './native-test-assert.mjs';
-import {referenceBackend,referenceLabel} from './native-test-backend.mjs';
+import {referenceBackend} from './native-test-backend.mjs';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -7,14 +12,14 @@ import {withCEnvironment,C} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/detect.js';
 import {createDetectEnvironment} from '../js/nethack/bindings/detect.js';
 const dir=resolve(process.env.DETECT_PROBE_DIR??'.cache/tu-probes'),schema=JSON.parse(await readFile(new URL('../nethack-c/wasm/tu-fragments/detect-schema.json',import.meta.url),'utf8'));
-const factory=async mode=>(await import(pathToFileURL(resolve(dir,'detect-'+mode+'.mjs')).href)).default;
+const factory=async mode=>(await loadFixture("detect",pathToFileURL(resolve(dir,'detect-'+mode+'.mjs')).href)).default;
 const rf=await factory('reference'),hf=await factory('hybrid'),reference=await referenceBackend('detect',rf)();
 function text(m,p){p=Number(p);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('utf8');}
 function layout(m){const out={};for(let i=0;i<m._probe_layout_count();i++)out[text(m,m._probe_layout_name(i))]=Number(BigInt.asIntN(64,m._probe_layout_value(i)));return out;}
 const L=layout(reference),envs=new WeakMap(),ops=Object.keys(schema.functionTypes),index=name=>{const i=ops.indexOf(name);if(i<0)throw Error(name);return i;};
 const runtime={detect(services,name,...args){let e=envs.get(services.moduleKey);if(!e){e=createDetectEnvironment(services,L,core);envs.set(services.moduleKey,e);}const stack=services.stackSave();try{const v=withCEnvironment(e,core[name],...args.map(e.ptr));return schema.functionTypes[name].split('(')[0].includes('*')?BigInt(v??0):v;}finally{services.stackRestore(stack);}}};
 const hybrid=await hf({nethackPorted:runtime}),modules=[reference,hybrid];
-function manual(m){let next=0;const cache=new Map();const ptr=Number;return {moduleKey:m,heap:()=>m.HEAPU8,global:i=>ptr(m._teleport_detect_global(i)),read:(k,a,f)=>m._teleport_detect_read(k,BigInt(a),f),write:(k,a,f,v)=>m._teleport_detect_write(k,BigInt(a),f,v),address:(k,a,f)=>ptr(m._teleport_detect_address(k,BigInt(a),f)),literal:s=>{if(cache.has(s))return cache.get(s);const at=ptr(m._teleport_detect_literal_storage())+next;next+=m.lengthBytesUTF8(s)+1;m.stringToUTF8(s,at,next);cache.set(s,at);return at;},stackAlloc:n=>ptr(m.stackAlloc(n)),stackSave:()=>m.stackSave(),stackRestore:v=>m.stackRestore(v)};}
+function manual(m){let next=0;const cache=new Map();const ptr=Number;return {moduleKey:m,heap:()=>m.HEAPU8,dataView:()=>new FixtureDataView(m.HEAPU8.buffer),global:i=>ptr(m._teleport_detect_global(i)),read:(k,a,f)=>m._teleport_detect_read(k,BigInt(a),f),write:(k,a,f,v)=>m._teleport_detect_write(k,BigInt(a),f,v),address:(k,a,f)=>ptr(m._teleport_detect_address(k,BigInt(a),f)),literal:s=>{if(cache.has(s))return cache.get(s);const at=ptr(m._teleport_detect_literal_storage())+next;next+=m.lengthBytesUTF8(s)+1;m.stringToUTF8(s,at,next);cache.set(s,at);return at;},stackAlloc:n=>ptr(m.stackAlloc(n)),stackSave:()=>m.stackSave(),stackRestore:v=>m.stackRestore(v)};}
 const re=createDetectEnvironment(manual(reference),L,core);envs.set(reference,re);
 hybrid._probe_reset();hybrid._probe_action(index('detecting'),0n,0n,0n,0n,0n);
 const he=envs.get(hybrid),stacks=modules.map(m=>m._probe_stack());let comparisons=0,active='',called=new Set();
@@ -101,4 +106,4 @@ reset();each(m=>field(m,pool(m,0),'obj','quan',BigInt(pool(reference,0,1))+(m===
 const savedStack=hybrid._probe_stack(),oldgetpos=he.getpos;he.getpos=()=>{throw Error('fixture getpos throw');};try{assert.throws(()=>withCEnvironment(he,core.browse_map,K.TER_OBJ,pool(hybrid,8)),/fixture getpos throw/);}finally{delete he.getpos;}assert.equal(C,undefined);assert.equal(hybrid._probe_stack(),savedStack);comparisons+=2;
 const hybrid2=await hf({nethackPorted:runtime});hybrid2._probe_reset();hybrid2._probe_action(index('detecting'),0n,0n,0n,0n,0n);const he2=envs.get(hybrid2);assert.notEqual(he,he2);assert.notEqual(he.level_detects,he2.level_detects);he2.field(he2.dummytrap,'trap','ttyp').value=L.TRAPPED_DOOR;assert.notEqual(he2.field(he2.dummytrap,'trap','ttyp').value,he.field(he.dummytrap,'trap','ttyp').value);comparisons+=3;
 
-assert.equal(called.size,42);console.log('DETECT '+comparisons+' comparisons, '+called.size+'/42 directly selected; '+referenceLabel+' controlled dependencies; native/public pending for this first pass');
+assert.equal(called.size,42);console.log('DETECT '+comparisons+' comparisons, '+called.size+'/42 directly selected; '+fixtureReferenceLabel+' controlled dependencies; native/public pending for this first pass');

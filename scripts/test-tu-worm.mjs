@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('worm', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/worm-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/worm-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('worm',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url)));
@@ -93,4 +95,4 @@ for(const input of [0,1])for(const nested of [0,1]){linear(2);mf(1,21);if(input)
 for(const stage of [1,2,3,4,5,6,7,8,9,10]){linear(3);opt(30,stage);opt(31,stage);const before=modules.map(m=>allocationMetric(m));if(stage===1)act(26);else if(stage===2){time(1,1);mf(1,21);act(4);}else if(stage===3){hero(0,18);act(7);}else if(stage===4){rng([19,0,...Array(30).fill(0)]);act(8,0,18,10,1);}else if(stage===5){act(16);act(17,0,20,10);}else if(stage===6)act(10,0,1);else if(stage===7)act(3,0,1);else if(stage===8||stage===10){mode(L.WRITING);act(11);}else{mode(L.WRITING|L.FREEING);act(11);mode(L.READING);act(12);}assert.ok(trace().includes(`grew:${stage};`),`growth stage ${stage}`);assert.ok(trace().includes('nested-slot:'));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));}
 setup(1);opt(0,0);mf(1,21);rng([0,0,0]);act(4);assert.ok(trace().includes('@;'));
 linear(2);time(1,(1n<<53n)+3n);const held=snapshot(modules[1]);const other=await hybridFactory({nethackPorted:runtime});other._probe_reset(77);other._probe_monster_field(0,0,1n);other._probe_action(1,0,2,0,0,0);assert.equal(other._probe_action(19,0,0,0,0,0),2n);other._probe_action(6,0,0,0,0,0);assert.equal(other._probe_free_count(),3);assert.deepEqual(snapshot(modules[1]),held);comparisons+=3;check();
-console.log(`WORM ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);
+console.log(`WORM ${referenceLabel}/pure-JS differential: ${comparisons} comparisons checked`);

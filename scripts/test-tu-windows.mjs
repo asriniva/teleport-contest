@@ -1,13 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Actual configured memory64 C/JS differential. Native/game/public pending.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {C} from '../js/c-runtime/context.js';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw new Error('WINDOWS has no native fixture backend; this runner supports Emscripten-only comparisons.');
-const {callWindows,initializeWindows}=await import(process.env.WINDOWS_RUNTIME?pathToFileURL(resolve(process.env.WINDOWS_RUNTIME)):new URL('../js/nethack/bindings/windows.js',import.meta.url));
+// Reference selection is handled by the original-C fixture backend.
+const {callWindows,initializeWindows}=await loadFixture("windows",process.env.WINDOWS_RUNTIME?pathToFileURL(resolve(process.env.WINDOWS_RUNTIME)):new URL('../js/nethack/bindings/windows.js',import.meta.url));
 const dir=resolve(process.env.WINDOWS_PROBE_DIR??'.cache/windows-first-pass');
-const ref=(await import(pathToFileURL(resolve(dir,'windows-reference.mjs')))).default;
-const hybrid=(await import(pathToFileURL(resolve(dir,'windows-hybrid.mjs')))).default;
+const ref=(await loadFixture("windows",pathToFileURL(resolve(dir,'windows-reference.mjs')))).default;
+const hybrid=(await loadFixture("windows",pathToFileURL(resolve(dir,'windows-hybrid.mjs')))).default;
 const text=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.subarray(p,e)).toString('latin1');};
 const layouts=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 let modules,L,comparisons=0,scenario='initial',invoked=new Set();
@@ -45,4 +47,4 @@ scenario='debug macro';reset();choose();option(7,1);action(67,0,0,0n);
 for(const n of[8,38,72]){scenario='foreign callback throw '+n;reset();choose();option(5,1);input('throw fixture');input('throw?',2);modules.forEach(m=>assert.throws(()=>m._probe_call(n,0,0,0n),/WINDOWS fixture exit 5/));assert.equal(C,undefined);compare();}
 const old=modules;await pair();scenario='second Module startup';choose();action(12);table();modules=old;scenario='original Module reuse';reset();choose();action(12);table();
 assert.equal(invoked.size,73,'all original configured WINDOWS bodies invoked');comparisons++;
-console.log(`WINDOWS: ${comparisons} configured Emscripten-C/JS comparisons passed; ${invoked.size}/73 bodies invoked; native/game/public pending.`);
+console.log(`WINDOWS: ${comparisons} configured original-C/pure-JS comparisons passed; ${invoked.size}/73 bodies invoked; native/game/public pending.`);

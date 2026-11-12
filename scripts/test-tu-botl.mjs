@@ -1,3 +1,6 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {referenceBackend,assertStackRestored} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
@@ -5,10 +8,10 @@ import {callBotl,botlSchema,botlGlobals} from '../js/nethack/bindings/botl.js';
 import * as data from '../js/ported/botl-data.js';
 import {memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
 import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
-if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('BOTL has no native reference fixture; set TELEPORT_NATIVE_TESTS=0 only for explicit Emscripten diagnostics.');
+// Original C reference is available through the isolated reference process.
 const own=process.env.TELEPORT_BOTL_AUTHOR==='1';
-const referenceFactory=(await import(own?'../.cache/botl-author/reference.mjs':'../.cache/tu-probes/botl-reference.mjs')).default;
-const hybridFactory=(await import(own?'../.cache/botl-author/hybrid.mjs':'../.cache/tu-probes/botl-hybrid.mjs')).default;
+const referenceFactory=(await loadFixture("botl",own?'../.cache/botl-author/reference.mjs':'../.cache/tu-probes/botl-reference.mjs')).default;
+const hybridFactory=(await loadFixture("botl",own?'../.cache/botl-author/hybrid.mjs':'../.cache/tu-probes/botl-hybrid.mjs')).default;
 const text=(m,p)=>{p=Number(p);let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');};
 const reference=await referenceBackend('botl',referenceFactory)();
 const measured={};for(let i=0;i<reference._probe_layout_count();i++){const raw=BigInt.asIntN(64,reference._probe_layout_value(i));measured[text(reference,reference._probe_layout_name(i))]=Number.isSafeInteger(Number(raw))?Number(raw):String(raw);}
@@ -18,7 +21,7 @@ for(const m of readFileSync(new URL('./test-tu-botl.mjs',import.meta.url),'utf8'
 const servicesByModule=new Map();const ported={callBotl(s,n,...a){servicesByModule.set(s.moduleKey,s);return callBotl(s,L,n,...a);}};
 let modules=[reference,await hybridFactory({nethackPorted:ported})],stacks=modules.map(m=>m._probe_stack()),comparisons=0,expectedScope;
 const names=Array.from({length:76},(_,i)=>text(reference,reference._probe_function_name(i))),exercised=new Set();
-const snapshot=m=>({state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace())});
+const snapshot=m=>m.isolatedCReference?m.observe('const text='+text.toString()+';return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace())};',{}):({state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace())});
 function check(){const pair=modules.map(snapshot);if(pair[0].state!==pair[1].state||pair[0].trace!==pair[1].trace)writeFileSync(new URL('../.cache/botl-author/difference.json',import.meta.url),JSON.stringify(pair,null,2));assert.deepEqual(pair[1],pair[0]);modules.forEach((m,i)=>assertStackRestored(m,stacks[i],m._probe_stack()));assert.equal(C,expectedScope);assert.equal(R,expectedScope?.rectState);assert.equal(T,expectedScope?.trackState);comparisons++;}
 function call(n,...a){const pair=modules.map(m=>m['_probe_'+n](...a));assert.deepEqual(pair[1],pair[0],n);comparisons++;return pair[0];}
 function act(n,...a){const op=names.indexOf(n);assert.ok(op>=0,n);exercised.add(n);const result=call('action',op,...Array.from({length:6},(_,i)=>BigInt(a[i]??0)));check();return result;}
@@ -33,8 +36,8 @@ for(const [ti,n]of ['initblstats','condition_aliases','fieldids_alias'].entries(
  const rows=data[n+'_initial'];assert.equal(reference._probe_private_count(ti),rows.length);
  for(let i=0;i<rows.length;i++){const row=rows[i];if(ti===0){for(const [j,key]of ['fldname','fldfmt'].entries())assert.equal(text(reference,reference._probe_private_text(ti,i,j)),row[key]||'');for(const [j,key]of ['anytype','valwidth','idxmax','fld','percent_matters'].entries())assert.equal(reference._probe_private_number(ti,i,j),BigInt(resolve(row[key])));}else{assert.equal(text(reference,reference._probe_private_text(ti,i,0)),row[ti===1?'id':'fieldname']||'');assert.equal(reference._probe_private_number(ti,i,0),BigInt(resolve(row[ti===1?'bitmask':'fldid'])));}comparisons++;}
 }
-function publicPointers(m){const points=[];for(const name of ['enc_stat','terrain_descr']){const gi=botlGlobals.findIndex(g=>g.name===name),g=botlGlobals[gi],p=Number(m._probe_global(gi));for(let i=0;i<g.d.a[0];i++)points.push(new DataView(m.HEAPU8.buffer).getBigUint64(p+8*i,true));}
- for(const name of ['conditions','condtests']){const gi=botlGlobals.findIndex(g=>g.name===name),g=botlGlobals[gi],kind=g.d.e.s,k=Object.keys(botlSchema).indexOf(kind),p=Number(m._probe_global(gi));for(let i=0;i<g.d.a[0];i++){for(const [j,f]of botlSchema[kind].fields.entries())if(f.d.q||f.d.p!==undefined)points.push(m._probe_read(k,BigInt(p+i*L[kind+'Size']),j));else if(f.d.a&&f.d.e.q){const base=Number(m._probe_read(k,BigInt(p+i*L[kind+'Size']),j));for(let z=0;z<f.d.a[0];z++)points.push(new DataView(m.HEAPU8.buffer).getBigUint64(base+8*z,true));}}}
+function publicPointers(m){const points=[];for(const name of ['enc_stat','terrain_descr']){const gi=botlGlobals.findIndex(g=>g.name===name),g=botlGlobals[gi],p=Number(m._probe_global(gi));for(let i=0;i<g.d.a[0];i++)points.push(new FixtureDataView(m.HEAPU8.buffer).getBigUint64(p+8*i,true));}
+ for(const name of ['conditions','condtests']){const gi=botlGlobals.findIndex(g=>g.name===name),g=botlGlobals[gi],kind=g.d.e.s,k=Object.keys(botlSchema).indexOf(kind),p=Number(m._probe_global(gi));for(let i=0;i<g.d.a[0];i++){for(const [j,f]of botlSchema[kind].fields.entries())if(f.d.q||f.d.p!==undefined)points.push(m._probe_read(k,BigInt(p+i*L[kind+'Size']),j));else if(f.d.a&&f.d.e.q){const base=Number(m._probe_read(k,BigInt(p+i*L[kind+'Size']),j));for(let z=0;z<f.d.a[0];z++)points.push(new FixtureDataView(m.HEAPU8.buffer).getBigUint64(base+8*z,true));}}}
  return {strings:points.map(p=>p?text(m,p):null),aliases:points.map(p=>points.map(q=>p===q))};}
 assert.deepEqual(publicPointers(modules[1]),publicPointers(reference),'all public string values, nulls and pointer alias clusters');comparisons++;
 reset();
@@ -57,7 +60,7 @@ reset();stat(0,1,L.ANY_INT);stat(1,1,L.ANY_INT);for(const [v,max]of[[0,100],[1,3
 // The native union and formatter are exercised with actual compiled type tags.
 for(const type of [L.ANY_INT,L.ANY_UINT,L.ANY_LONG,L.ANY_ULONG,L.ANY_MASK32])for(const value of [0n,1n,-1n,2147483647n,-2147483648n,9007199254740993n]){
  call('any',0,value);act('anything_to_s',0,0,type);result();input(1,String(value));act('s_to_anything',0,1,type);
- const raw=modules.map(m=>new DataView(m.HEAPU8.buffer).getBigUint64(Number(m._probe_pointer(2,0)),true));assert.equal(raw[1],raw[0]);comparisons++;
+ const raw=modules.map(m=>new FixtureDataView(m.HEAPU8.buffer).getBigUint64(Number(m._probe_pointer(2,0)),true));assert.equal(raw[1],raw[0]);comparisons++;
 }
 for(const inputText of ['hitpoints/<50%/red','strength/always/green','condition/blind/red','power/>20/blue','hitpoints/criticalhp/red','bogus/always/red','hitpoints/<bad/red','hitpoints/up/green','hitpoints/down/red','hitpoints/changed/yellow']){
  reset();input(0,inputText);act('parse_status_hl1',0,0);act('count_status_hilites');act('status_hilite_linestr_gather');act('status_hilite_linestr_countfield',L.BL_FLUSH);act('all_options_statushilites',0);act('status_hilites_viewall');act('status_hilite_linestr_done');act('clear_status_hilites');
@@ -65,7 +68,7 @@ for(const inputText of ['hitpoints/<50%/red','strength/always/green','condition/
 reset();
 for(const line of ['blind','conf','none','bogus']){input(0,line);act('parse_cond_option',0,0);act('parse_cond_option',1,0);}
 for(const idx of [0,1,15,29]){input(0,'');act('opt_next_cond',idx,0);}
-for(const line of ['stone+slime','blind&deaf','foo','a+b+c+d',''])for(const max of [0,1,2,16]){input(0,line);exercised.add('splitsubfields');const count=call('action',names.indexOf('splitsubfields'),0n,64n,BigInt(max),0n,0n,0n);const lists=modules.map(m=>{const cell=Number(m._probe_pointer(0,64)),dv=new DataView(m.HEAPU8.buffer),p=Number(dv.getBigUint64(cell,true));const entries=[];if(count>=0n){assert.ok(p>0);for(let i=0;i<Number(count);i++){const item=Number(dv.getBigUint64(p+8*i,true));entries.push([text(m,item),item-Number(m._probe_pointer(3,0))]);}}dv.setBigUint64(cell,0n,true);return entries;});assert.deepEqual(lists[1],lists[0]);comparisons++;check();}
+for(const line of ['stone+slime','blind&deaf','foo','a+b+c+d',''])for(const max of [0,1,2,16]){input(0,line);exercised.add('splitsubfields');const count=call('action',names.indexOf('splitsubfields'),0n,64n,BigInt(max),0n,0n,0n);const lists=modules.map(m=>{const cell=Number(m._probe_pointer(0,64)),dv=new FixtureDataView(m.HEAPU8.buffer),p=Number(dv.getBigUint64(cell,true));const entries=[];if(count>=0n){assert.ok(p>0);for(let i=0;i<Number(count);i++){const item=Number(dv.getBigUint64(p+8*i,true));entries.push([text(m,item),item-Number(m._probe_pointer(3,0))]);}}dv.setBigUint64(cell,0n,true);return entries;});assert.deepEqual(lists[1],lists[0]);comparisons++;check();}
 for(const idx of [L.ATR_NONE,L.ATR_BOLD,L.ATR_INVERSE]){act('hlattr2attrname',idx,0,128);result();}
 for(const n of ['reset_status_hilites','status_eval_next_unhilite','status_hilite_linestr_gather_conditions','init_blstats'])act(n);
 // Cancellation traverses each real menu function without inventing menu policy.
@@ -80,7 +83,7 @@ act('bot_via_windowport');act('bot');act('timebot');
 
 reset();act('status_initialize',1);
 act('condopt',0,-1,0);for(let i=0;i<30;i++){act('condopt',i,1,1);act('condopt',i,1,0);}
-for(let i=0;i<30;i++)for(const j of [0,15,29]){for(const m of modules){const dv=new DataView(m.HEAPU8.buffer),p=Number(m._probe_pointer(0,0));dv.setInt32(p,i,true);dv.setInt32(p+4,j,true);}act('cond_cmp',0,4);act('menualpha_cmp',0,4);}
+for(let i=0;i<30;i++)for(const j of [0,15,29]){for(const m of modules){const dv=new FixtureDataView(m.HEAPU8.buffer),p=Number(m._probe_pointer(0,0));dv.setInt32(p,i,true);dv.setInt32(p+4,j,true);}act('cond_cmp',0,4);act('menualpha_cmp',0,4);}
 reset();act('eval_notify_windowport_field',L.BL_TIME,0,0);act('evaluate_and_notify_windowport',0,0);
 for(const type of [L.ANY_LONG,L.ANY_UINT,L.ANY_ULONG,L.ANY_MASK32]){stat(0,1,type);stat(1,1,type);stat(0,2,25);stat(1,2,100);act('compare_blstats',0,1);if(type!==L.ANY_MASK32)act('percentage',0,1);}
 reset();for(const t of [0n,1n,9007199254740993n])act('hilite_reset_needed',0,t);
@@ -88,7 +91,7 @@ for(const fields of [['hitpoints','<50%','red'],['condition','blind','red'],['al
 function setNative(kind,offset,name,value){const k=Object.keys(botlSchema).indexOf(kind),f=botlSchema[kind].fields.findIndex(f=>f.name===name);assert.ok(f>=0,name);for(const m of modules)m._probe_write(k,BigInt(m._probe_pointer(0,offset)),f,BigInt.asUintN(64,BigInt(value)));comparisons++;}
 reset();setNative('hilite_s',128,'behavior',L.BL_TH_ALWAYS_HILITE);setNative('hilite_s',128,'anytype',L.ANY_INT);setNative('hilite_s',128,'coloridx',L.CLR_RED);setNative('hilite_s',128,'rel',L.EQ_VALUE);
 act('status_hilite_add_threshold',L.BL_HP,128);assert.equal(act('count_status_hilites'),1n);act('status_hilite2str',128);result();
-for(const hp of [0,4,5,10]){for(const m of modules)new DataView(m.HEAPU8.buffer).setInt32(Number(m._probe_pointer(0,0)),hp,true);act('get_hilite',0,L.BL_HP,0,0,50,8);}
+for(const hp of [0,4,5,10]){for(const m of modules)new FixtureDataView(m.HEAPU8.buffer).setInt32(Number(m._probe_pointer(0,0)),hp,true);act('get_hilite',0,L.BL_HP,0,0,50,8);}
 input(0,'hitpoints/always/red');act('status_hilite_linestr_add',L.BL_HP,-1,0,0);assert.equal(act('status_hilite_linestr_countfield',L.BL_HP),1n);act('status_hilite_linestr_done');act('clear_status_hilites');
 // Unsigned multiplication wraps at its original C width before division.
 for(const [type,bits]of [[L.ANY_UINT,32],[L.ANY_ULONG,64]])for(const value of [1n,(1n<<BigInt(bits))-1n,(1n<<BigInt(bits-1))+1n])for(const max of [3n,100n]){reset();stat(0,1,type);stat(1,1,type);stat(0,2,BigInt.asIntN(64,value));stat(1,2,max);const quotient=BigInt.asIntN(32,BigInt.asUintN(bits,100n*value)/max);assert.equal(act('percentage',0,1),quotient===0n?1n:quotient);}
@@ -116,7 +119,7 @@ for(let slot=2;slot<=8;slot++)call('equipment',slot,slot);act('armor_status',0);
 for(let slot=2;slot<=8;slot++)call('equipment',slot,-1);for(const [slot,typ]of [[9,L.RIN_PROTECTION],[10,L.RIN_PROTECTION],[11,L.AMULET_OF_GUARDING]]){for(const m of modules)m._probe_object(slot,typ);call('equipment',slot,slot);act('armor_status',0);assert.equal(result(),'Naked+');call('equipment',slot,-1);}
 reset();
 // Native pointer variants and nullable/aliased scalar outputs retain live cells.
-for(const type of [L.ANY_IPTR,L.ANY_UPTR,L.ANY_LPTR,L.ANY_ULPTR]){reset();for(const m of modules){const ptr=m._probe_pointer(0,128);new DataView(m.HEAPU8.buffer).setBigUint64(Number(ptr),0xa5a5a5a500000005n,true);m._probe_any(0,BigInt(ptr));}act('anything_to_s',0,0,type);result();input(1,'27');act('s_to_anything',0,1,type);}
+for(const type of [L.ANY_IPTR,L.ANY_UPTR,L.ANY_LPTR,L.ANY_ULPTR]){reset();for(const m of modules){const ptr=m._probe_pointer(0,128);new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(ptr),0xa5a5a5a500000005n,true);m._probe_any(0,BigInt(ptr));}act('anything_to_s',0,0,type);result();input(1,'27');act('s_to_anything',0,1,type);}
 for(const [a,b]of [[-1,-1],[-1,0],[0,-1],[0,0]])act('split_clridx',511,a,b);
 input(0,'Ranger');for(const [a,b]of [[-1,-1],[-1,0],[0,-1],[0,0]])act('title_to_mon',0,a,b);
 reset();act('get_strength_str');const savedPointers=modules.map(m=>m._probe_lastptr());for(let i=0;i<3;i++){act('do_statusline1');act('get_strength_str');modules.forEach((m,j)=>assert.equal(m._probe_lastptr(),savedPointers[j]));comparisons++;}

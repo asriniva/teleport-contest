@@ -1,14 +1,16 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // First-pass configured Emscripten-C differential gate. Native macOS coverage
 // and actual production mixed-link promotion are separate, still pending.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import * as explode from '../js/ported/explode.js';
 import { createExplodeEnvironment } from '../js/nethack/bindings/explode.js';
 import { withCEnvironment, C } from '../js/c-runtime/context.js';
 const probeDirectory=resolve(process.env.TELEPORT_EXPLODE_PROBE_DIR??'.cache/tu-probes');
-const referenceFactory=(await import(pathToFileURL(resolve(probeDirectory,'explode-reference.mjs')))).default;
-const hybridFactory=(await import(pathToFileURL(resolve(probeDirectory,'explode-hybrid.mjs')))).default;
+const referenceFactory=(await loadFixture("explode",pathToFileURL(resolve(probeDirectory,'explode-reference.mjs')))).default;
+const hybridFactory=(await loadFixture("explode",pathToFileURL(resolve(probeDirectory,'explode-hybrid.mjs')))).default;
 const text=(m,value)=>{const p=Number(value);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.subarray(p,e)).toString('latin1');};
 const layout=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 const reference=await referenceFactory();let L=layout(reference),environments=new WeakMap();
@@ -62,4 +64,4 @@ for(const damage of[65537,100000,2147483647,-2147483648]){scenario='32-bit noise
 for(const terrainByte of[0x7f,0x80,0xff])for(const seed of[1,2,3,4,5,6,7,8]){scenario='unsigned terrain local';reset(seed);opt(118,0);opt(107,L.ROCK);opt(108,0);for(let x=8;x<=12;x++)for(let y=8;y<=12;y++)call('cell',x,y,terrainByte,0);act(8,10,10);act(3,10,10,2,0,1);}
 // Bounds, empty chain and invalid blast type must remain diagnostic/no-op paths.
 for(const [x,y] of[[0,0],[1,0],[79,20],[80,21]]){scenario='boundary';reset();opt(118,0);act(2,x,y,3,0,L.SCROLL_CLASS,L.EXPL_FIERY);act(3,10,10,1,0,0);}
-console.log(`EXPLODE: ${comparisons} configured Emscripten-C/JS comparisons passed; native and production promotion pending.`);
+console.log(`EXPLODE: ${comparisons} configured original-C/pure-JS comparisons passed; native and production promotion pending.`);

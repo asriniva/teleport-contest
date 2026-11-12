@@ -1,8 +1,13 @@
-import {DataView,Int32Array,referenceBackend,referenceLabel,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("potion");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView,Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
+import {DataView,Int32Array,referenceBackend,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync}from'node:fs';import {resolve}from'node:path';import {pathToFileURL}from'node:url';
 import {callPotion,createPotionEnvironment}from'../js/nethack/bindings/potion.js';import * as core from'../js/ported/potion.js';import {C,R,T}from'../js/c-runtime/context.js';
-const author=process.env.TELEPORT_POTION_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url),referenceFactory=(await import(new URL('potion-reference.mjs',dir))).default,hybridFactory=(await import(new URL('potion-hybrid.mjs',dir))).default,ref=await referenceBackend('potion',referenceFactory)();
+const author=process.env.TELEPORT_POTION_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url),referenceFactory=(await loadFixture("potion",new URL('potion-reference.mjs',dir))).default,hybridFactory=(await loadFixture("potion",new URL('potion-hybrid.mjs',dir))).default,ref=await referenceBackend('potion',referenceFactory)();
 function text(m,p){if(!p)return null;let q=Number(p),end=q;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(q,end)).toString();}
 const L={size:Number(ref._probe_context_size())};for(let i=0;i<ref._probe_layout_count();i++){const k=text(ref,ref._probe_layout_name(i)),v=ref._probe_layout_value(i);L[k]=/^(M1_|M2_|W_)/.test(k)?BigInt.asUintN(64,v).toString():Number(BigInt.asIntN(64,v));}
 if(!author)assert.deepEqual(L,JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).potion);
@@ -176,11 +181,11 @@ function bytes(m,p,n,offsets=[]){const b=raw(m,p,n);for(const off of offsets)b.f
 const setReturn=(m,name,v)=>{const i=returns.indexOf(name);assert.notEqual(i,-1,'native scripted dependency '+name);m._probe_return(i,BigInt(v));};
 const mb=(m,slot,key,v)=>{const i=bits.mon.indexOf(key);assert.notEqual(i,-1,key);m._probe_mon_bit(slot,i,v);},ob=(m,slot,key,v)=>{const i=bits.obj.indexOf(key);assert.notEqual(i,-1,key);m._probe_obj_bit(slot,i,v);};
 function reset(seed=19){for(const m of mods){m._probe_reset(seed);m._probe_new_mon(value('PM_HUMAN'),11,10);m._probe_new_mon(value('PM_GHOST'),12,10);m._probe_new_obj(value('POT_HEALING'),value('OBJ_INVENT'));m._probe_new_obj(value('POT_WATER'),value('OBJ_INVENT'));m._probe_new_obj(value('LONG_SWORD'),value('OBJ_INVENT'));setReturn(m,'mksobj',1);setReturn(m,'mkobj',1);} }
-function pointerField(m,p,offset){return new DataView(m.HEAPU8.buffer).getBigUint64(Number(p)+offset,true);}
+function pointerField(m,p,offset){return new FixtureDataView(m.HEAPU8.buffer).getBigUint64(Number(p)+offset,true);}
 function snapshot(m){const mon=[],obj=[];for(let i=0;i<m._probe_count(0);i++)mon.push(bytes(m,m._probe_pointer(1,i),L.monSize,[L.mon_data]));for(let i=0;i<m._probe_count(1);i++)obj.push(bytes(m,m._probe_pointer(2,i),L.objSize,[L.obj_nobj,L.obj_nexthere,L.obj_cobj]));const gm=m._probe_pointer(7,0),gn=m._probe_pointer(12,0);return{mon,obj,u:bytes(m,m._probe_pointer(0,0),L.youSize,[L.you_usteed,L.you_ustuck]),youmon:bytes(m,m._probe_pointer(10,0),L.monSize,[L.mon_data]),gp:raw(m,m._probe_pointer(6,0),L.gpSize),gm:bytes(m,gm,L.gmSize,[L.gm_multi_reason]),reason:text(m,pointerField(m,gm,L.gm_multi_reason)),gn:bytes(m,gn,L.gnSize,[L.gn_nomovemsg]),nomove:text(m,pointerField(m,gn,L.gn_nomovemsg)),disp:raw(m,m._probe_pointer(8,0),L.dispSize),map:raw(m,m._probe_pointer(3,0),L.COLNO*L.ROWNO*L.rmSize),vision:raw(m,m._probe_pointer(4,0),L.COLNO*L.ROWNO),cells:raw(m,m._probe_pointer(5,0),64),fake:raw(m,m._probe_pointer(14,0),L.objSize),scalar:Array.from({length:11},(_,i)=>m._probe_scalar(i)),result:text(m,m._probe_result_string()),trace:text(m,m._probe_trace()),rng:m._probe_rng_count(),rngstate:m._probe_rng_state()};}
 function action(name,a=0n,b=0n,c=0n,d=0n){const op=names.indexOf(name);assert.notEqual(op,-1,name);reached.add(name);const before={C,R,T},result=mods.map(m=>m._probe_action(op,BigInt(a),BigInt(b),BigInt(c),BigInt(d)));assert.deepEqual(result[1],result[0],name+' result');assert.deepEqual(snapshot(mods[1]),snapshot(mods[0]),name+' state '+a+','+b+','+c+','+d);mods.forEach((m,i)=>assertStackRestored(m,stacks[i],name));assert.equal(C,before.C);assert.equal(R,before.R);assert.equal(T,before.T);count+=2;return result[0];}
 function setup(fn){for(const m of mods)fn(m);}
-function rolls(values){setup(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});}
+function rolls(values){setup(m=>{new FixtureInt32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});}
 for(const k of ['PM_HUMAN','PM_GHOST','POT_HEALING','POT_WATER','LONG_SWORD','OBJ_INVENT','NUMMONS','NUM_OBJECTS','BLINDED','HALLUC','SICK','CONFUSION','STUNNED','DEAF','FAST'])value(k);
 // Every original entrypoint, including private effects/selectors and native address-taken output cells.
 for(const name of names){reset();let args=[0,0,0,0];if(name.startsWith('make_'))args=[1,0,0,0];if(name==='make_sick')args=[1,0,0,value('SICK_ALL')];if(['itimeout','itimeout_incr','set_itimeout','incr_itimeout','speed_up'].includes(name))args=[10,2,0,0];if(['potion_dip','mixtype','impact_arti_light','H2Opotion_dip'].includes(name))args=[0,1,0,0];if(name==='potionhit')args=[0,0,value('POTHIT_HERO_THROW'),0];if(name==='dip_potion_explosion')args=[0,1,0,0];if(name==='mongrantswish')setup(m=>m._probe_moncell(0));action(name,...args);}
@@ -237,4 +242,4 @@ reset(3);setup(m=>{m._probe_obj(0,0,BigInt(value('UNICORN_HORN')));m._probe_obj(
 const other=await hybridFactory({nethackPorted:runtime});mods.push(other);stacks.push(other._probe_stack());reset(7);setup(m=>{m._probe_option(11,0);m._probe_obj(0,0,BigInt(value('POT_CONFUSION')));});action('dodrink');assert.deepEqual(snapshot(other),snapshot(ref),'independent Module native state');count++;mods.pop();stacks.pop();
 
 assert.equal(reached.size,names.length,'all66 original functions reached');
-console.log('POTION '+count+' comparisons passed ('+referenceLabel+' vs JavaScript; unchanged actual source/catalogues/heap, controlled foreign world, all66 original entrypoints).');
+console.log('POTION '+count+' comparisons passed ('+fixtureReferenceLabel+' vs JavaScript; unchanged actual source/catalogues/heap, controlled foreign world, all66 original entrypoints).');

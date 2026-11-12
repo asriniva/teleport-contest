@@ -1,3 +1,5 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Actual configured original MAKEMON versus JS; dungeon/world callbacks controlled.
 import assert from './native-test-assert.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
@@ -6,9 +8,9 @@ import {pathToFileURL} from 'node:url';
 import {callMakemon} from '../js/nethack/bindings/makemon.js';
 import * as core from '../js/ported/makemon.js';
 import {C,R,T} from '../js/c-runtime/context.js';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw Error('MAKEMON native-host gate pending; original configured EmC first-pass only.');
+// Reference selection is handled by the original-C fixture backend.
 const dir=resolve(process.env.TELEPORT_MAKEMON_PROBE_DIR??'.cache/makemon-author');
-const {default:rf}=await import(pathToFileURL(resolve(dir,'reference.mjs'))),{default:hf}=await import(pathToFileURL(resolve(dir,'hybrid.mjs')));
+const {default:rf}=await loadFixture("makemon",pathToFileURL(resolve(dir,'reference.mjs'))),{default:hf}=await loadFixture("makemon",pathToFileURL(resolve(dir,'hybrid.mjs')));
 const reference=await rf(),L={};
 const text=(m,p)=>{let i=Number(p);if(!i)return null;let e=i;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.subarray(i,e)).toString('latin1');};
 for(let i=0;i<reference._probe_layout_count();i++)L[text(reference,reference._probe_layout_name(i))]=Number(reference._probe_layout_value(i));
@@ -57,4 +59,4 @@ for(const m of[isolatedReference,isolatedHybrid]){m._probe_reset();m._probe_seed
 assert.deepEqual(snapshot(isolatedHybrid),snapshot(isolatedReference),'independent Module state');assert.equal(C,undefined);comparisons++;
 const expected=Object.entries(core).filter(([,v])=>typeof v==='function').map(([k])=>k).sort();assert.deepEqual([...entered].sort(),expected,'all configured entrypoints imported/reached');
 writeFileSync(resolve(dir,'summary.json'),JSON.stringify({status:'PASS',comparisons,entered:[...entered].sort(),reference:'actual configured original memory64 C',scope:'41 entrypoints reached; controlled foreign world; not all branches; native-host/production/public pending'},null,2));
-console.log(`MAKEMON PASS ${comparisons} original C/hybrid comparisons; ${entered.size} configured entrypoints reached.`);
+console.log(`MAKEMON PASS ${comparisons} original C/pure-JS comparisons; ${entered.size} configured entrypoints reached.`);

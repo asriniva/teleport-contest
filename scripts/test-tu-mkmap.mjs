@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('mkmap', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/mkmap-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/mkmap-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('mkmap',options);
 import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 import { C, R, T } from '../js/c-runtime/context.js';
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
@@ -59,4 +61,4 @@ for(const [smooth,join,wall] of [[0,1,256],[256,256,1],[255,255,-1]]){reset(37);
 reset(17);call('options',0,0,1);call('lit',-1);call('init',layout.STONE);call('fill',layout.STONE,layout.ROOM);call('pass',2,layout.STONE,layout.ROOM);
 reset(7);const isolated=snapshot(modules[0]);modules[1]._probe_init(layout.TREE);assert.deepEqual(snapshot(modules[0]),isolated);reset(7);
 const grown=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(grown.every(Boolean));call('init',layout.STONE);call('fill',layout.STONE,layout.ROOM);call('pass',2,layout.STONE,layout.ROOM);call('join',layout.STONE,layout.ROOM);modules.forEach((m,i)=>m._free(grown[i]));state();
-console.log(`MKMAP: ${comparisons} ${referenceLabel}/hybrid terrain, scratch-buffer, flood, room-copy, lighting and RNG-site comparisons checked.`);
+console.log(`MKMAP: ${comparisons} ${referenceLabel}/pure-JS terrain, scratch-buffer, flood, room-copy, lighting and RNG-site comparisons checked.`);

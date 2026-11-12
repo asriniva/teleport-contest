@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('wizard', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/wizard-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/wizard-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('wizard',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 import * as wizard from '../js/ported/wizard.js';
@@ -98,4 +100,4 @@ for(const kind of ['laugh','amulet','hero-near-death','wizard-near-death','maled
 for(const stage of [1,2,3,4,5,6,7,8,9,10,11]){reset();opt(30,stage);opt(31,stage);const before=modules.map(m=>allocationMetric(m));if(stage===1)act(14);else if(stage===2){hero(14,1);hero(2,1);act(11);}else if(stage===3){mf(1,5);stair(0,40,10);rng([0]);act(11);}else if(stage===4||stage===5){hero(14,1);ground();act(11);}else if(stage===6){hero(16,7);rng([0]);act(16,-1);}else if(stage===7){hero(12,3);rng(Array(128).fill(1));act(16);}else if(stage===8||stage===9){hero(13,1);mf(9,1);mf(19,0);act(17);}else if(stage===10){rng([2]);act(18);}else{mf(10,0);mf(0,L.PM_HORNED_DEVIL);rng([1]);act(20);}assert.ok(trace().includes(`grew:${stage};`),`growth ${stage}`);assert.ok(trace().includes('nested-aggravate:'));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));}
 reset();opt(0,0);rng([0]);act(20);assert.ok(trace().includes('@;'));
 healthy();mf(5,1n<<63n);const held=snapshot(modules[1]);const other=await hybridFactory({nethackPorted:runtime});other._probe_reset(77);other._probe_action(14,0,0,0,0);assert.equal(fields('hero',other)[4],'1');other._probe_hero(13,1n);other._probe_action(19,0,0,0,0);assert.equal(fields('hero',other)[4],'0');assert.equal(fields('hero',other)[12],'1');assert.deepEqual(snapshot(modules[1]),held);comparisons+=4;check();
-console.log(`WIZARD ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);
+console.log(`WIZARD ${referenceLabel}/pure-JS differential: ${comparisons} comparisons checked`);

@@ -1,8 +1,10 @@
+import './pure-js-probes/deny-wasm.mjs';
 import {DataView,Int32Array,referenceBackend,referenceLabel,assertStackRestored,memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import referenceFactory from '../.cache/tu-probes/mkroom-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/mkroom-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('mkroom',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {squadprob} from '../js/ported/mkroom.js';
 import {C,R,T} from '../js/c-runtime/context.js';
@@ -59,4 +61,4 @@ reset();room(0,5,4,7,6);call('grid',L.ROOM,L.ROOMOFFSET);call('option',15,1);
 const beforeGrowth=modules.map(memoryCheckpoint);act(12);
 modules.forEach((m,i)=>assertMemoryGrowth(m,beforeGrowth[i]));
 for(let sym=-2;sym<=160;sym++)act(28,sym);
-console.log(`MKROOM: ${comparisons} ${referenceLabel}/hybrid room generation, geometry, selection, serialization and RNG comparisons checked.`);
+console.log(`MKROOM: ${comparisons} ${referenceLabel}/pure-JS room generation, geometry, selection, serialization and RNG comparisons checked.`);

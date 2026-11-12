@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('dbridge', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/dbridge-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/dbridge-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('dbridge',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.dbridge,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
@@ -61,4 +63,4 @@ reset();entity(0,0);entity(1,1);hero(9,5);act(24);assert.ok(state().includes('ki
 for(let stage=1;stage<=23;stage++){reset();opt(30,stage===22?0:stage);opt(31,stage===22?0:stage);const before=modules.map(m=>allocationMetric(m));if(stage===1){entity(0,0);rng([7]);act(21,0,0);}else if(stage<=7){hero(0,10);hero(1,10);entity(0,4);terrain(10,10,0,L.DBWALL);if(stage===2)act(19,0,0,L.DROWNING);else if(stage===3)act(19,0,0,L.BURNING);else if(stage===7){call('add_monster',0,10,10);entity(0,0);act(19,0,0,L.CRUSHING);}else act(19,0,0,L.CRUSHING);}else if(stage===8||stage===9){bridge(L.DB_NORTH,0,L.DB_MOAT);call('add_monster',0,10,9);entity(0,0,10,9);rng([7,0]);act(23,0);}else if(stage===10){bridge(L.DB_NORTH,0,L.DB_MOAT);hero(0,10);hero(1,10);hero(2,L.PM_GHOST);entity(0,4);act(23,0);}else if(stage===11){bridge(L.DB_NORTH,0,L.DB_MOAT);mon(0,0,L.PM_GHOST);call('add_monster',0,10,10);rng([0]);act(27,10,10);}else{const [wx,wy]=bridge(L.DB_NORTH,stage===17?1:0,L.DB_MOAT);call('trap',0,10,10);call('trap',1,wx,wy);call('add_object',L.BOULDER,10,10);if(stage===22){opt(30,22);opt(31,22);}rng([1,0,0]);act(stage===17?25:stage<=18?26:27,10,10);}assert.ok(trace().includes(`grow:${stage};`),`growth${stage}`);assert.ok(trace().includes('nested:'));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));}
 reset();opt(0,0);entity(0,0);rng([0]);act(22,0);assert.ok(trace().includes('@;'));
 reset();bridge();const held=snap(modules[1]),other=await hybridFactory({nethackPorted:runtime});other._probe_reset(9);other._probe_terrain(10,9,0,L.HWALL);assert.equal(other._probe_action(11,10,10,L.DB_NORTH,0),1n);other._probe_action(26,10,10,0,0);assert.ok(text(other,other._probe_trace()).includes('unblock:'));assert.deepEqual(snap(modules[1]),held);comparisons+=2;check();
-console.log(`DBRIDGE ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);
+console.log(`DBRIDGE ${referenceLabel}/pure-JS differential: ${comparisons} comparisons checked`);

@@ -1,14 +1,17 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 // Original EmC INSIGHT versus actual imported JS; foreign game/UI dependencies controlled.
-import assert from 'node:assert/strict';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
+import assert from './native-test-assert.mjs';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
 import * as data from '../js/ported/insight.js';import{callInsight,initializeInsight}from'../js/nethack/bindings/insight.js';import{C,R,T}from'../js/c-runtime/context.js';
 const custom=process.env.TELEPORT_INSIGHT_PROBE_DIR,dir=resolve(custom??'.cache/tu-probes'),path=k=>pathToFileURL(resolve(dir,(custom?'':'insight-')+k+'.mjs'));
-const{default:rf}=await import(path('reference')),{default:hf}=await import(path('hybrid'));const reference=await rf();
+const{default:rf}=await loadFixture("insight",path('reference')),{default:hf}=await loadFixture("insight",path('hybrid'));const reference=await rf();
 function text(m,p){p=Number(p);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 const L={};for(let i=0;i<reference._probe_layout_count();i++){const k=text(reference,reference._probe_layout_name(i)),v=reference._probe_layout_value(i);L[k]=/^(?:M1_|M2_|W_|LL_|STRAT_|I_SPECIAL$|TIMEOUT$|INTRINSIC$|FROMOUTSIDE$|FROMFORM$)/.test(k)?String(BigInt.asUintN(64,v)):Number(BigInt.asIntN(64,v));}
 const runtime={initializeInsight:s=>initializeInsight(s,L),insight:(s,n,...a)=>callInsight(new Proxy(s,{get(t,k,r){if(['rectState','trackState'].includes(k))return t[k];if(!Reflect.has(t,k))throw Error('Missing INSIGHT service '+String(k));return Reflect.get(t,k,r);}}),L,n,...a)};
 const modules=[reference,await hf({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0,context='';
 const names=['enlght_out','enlght_line','enlght_combatinc','enlght_halfdmg','walking_on_water','trap_predicament','cause_known','attrval','fmt_elapsed_time','N_times','enlightenment','background_enlightenment','basics_enlightenment','characteristics_enlightenment','one_characteristic','status_enlightenment','weapon_insight','item_resistance_message','attributes_enlightenment','doattributes','youhiding','doconduct','show_conduct','show_achievements','record_achievement','remove_achievement','count_achievements','achieve_rank','sokoban_in_play','do_gamelog','show_gamelog','vanqsort_cmp','set_vanq_order','dovanquished','list_vanquished','num_genocides','num_extinct','num_gone','list_genocided','dogenocided','doborn','align_str','size_str','piousness','mstatusline','ustatusline'];
-for(const k of [...new Set((await import('node:fs')).readFileSync(new URL(import.meta.url),'utf8').match(/L\.([A-Z][A-Z_0-9]+)/g))])assert.notEqual(L[k.slice(2)],undefined,'Compiled constant '+k);
+for(const k of [...new Set((await loadFixture("insight",'node:fs')).readFileSync(new URL(import.meta.url),'utf8').match(/L\.([A-Z][A-Z_0-9]+)/g))])assert.notEqual(L[k.slice(2)],undefined,'Compiled constant '+k);
 const returnsPointer=new Set(['enlght_combatinc','trap_predicament','attrval','fmt_elapsed_time','N_times','align_str','size_str','piousness']),reached=new Set();
 function snapshot(m){return{trace:text(m,m._probe_trace()),result:text(m,m._probe_result()),state:text(m,m._probe_snapshot())};}
 function check(){assert.deepEqual(snapshot(modules[1]),snapshot(reference),context);for(let i=0;i<2;i++)assert.equal(modules[i]._probe_stack(),stacks[i]);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);comparisons++;}
@@ -38,7 +41,7 @@ for(const achievement of [L.ACH_BELL,L.ACH_HELL,L.ACH_SOKO,L.ACH_TOWN,L.ACH_RNK1
 for(const pick of [-1,0,1,2])for(const forVanq of [0,1]){reset();option(220,pick);option(221,0);invoke('set_vanq_order',forVanq);}
 for(const mode of [L.VANQ_MLVL_MNDX,L.VANQ_MSTR_MNDX,L.VANQ_ALPHA_SEP,L.VANQ_ALPHA_MIX,L.VANQ_MCLS_HTOL,L.VANQ_MCLS_LTOH,L.VANQ_COUNT_H_L,L.VANQ_COUNT_L_H]){reset();global(6,mode);for(const[i,k]of [L.PM_HUMAN,L.PM_GIANT_ANT,L.PM_DEATH].entries())call('vital',k,i+1,i+2,i===1?L.G_GENOD:0);invoke('list_vanquished',121,0);invoke('list_genocided',121,0);invoke('num_genocides');invoke('num_extinct');invoke('num_gone',L.G_GONE,ints);invoke('doborn');}
 for(const n of ['dovanquished','dogenocided']){reset();invoke(n);}
-reset();for(const m of modules){const a=Number(m._probe_buffer(0)),v=new DataView(m.HEAPU8.buffer);v.setInt16(a,L.PM_HUMAN,true);v.setInt16(a+2,L.PM_GIANT_ANT,true);}invoke('vanqsort_cmp',buf(0),m=>m._probe_buffer(0)+2n);
+reset();for(const m of modules){const a=Number(m._probe_buffer(0)),v=new FixtureDataView(m.HEAPU8.buffer);v.setInt16(a,L.PM_HUMAN,true);v.setInt16(a+2,L.PM_GIANT_ANT,true);}invoke('vanqsort_cmp',buf(0),m=>m._probe_buffer(0)+2n);
 for(const bit of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]){reset();call('monset',0,L.PM_HUMAN,bit,1n);invoke('mstatusline',mon(0));}
 // Exercise every configured property independently through the actual source
 // report, including wide intrinsic/extrinsic/block masks and final-state tense.

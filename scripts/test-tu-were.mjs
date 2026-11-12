@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('were', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/were-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/were-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('were',options);
 import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 import { C, R, T } from '../js/c-runtime/context.js';
 
@@ -139,4 +141,4 @@ reset(); rng([4, 0, 1, 0, 0]); call('summon', layout.PM_WEREWOLF, 1, 1);
 const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
 const before = state(); independent._probe_reset(); independent._probe_change(); independent._probe_you();
 assert.deepEqual(state(), before); scope(); comparisons++;
-console.log(`WERE: ${comparisons} ${referenceLabel}/hybrid mapping, monster, player-property, summoning, callback and RNG-site comparisons checked.`);
+console.log(`WERE: ${comparisons} ${referenceLabel}/pure-JS mapping, monster, player-property, summoning, callback and RNG-site comparisons checked.`);

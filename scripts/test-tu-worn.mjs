@@ -1,8 +1,10 @@
+import './pure-js-probes/deny-wasm.mjs';
 import {DataView,Int32Array,assertStackRestored,allocationMetric,referenceBackend,referenceLabel} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/worn-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/worn-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('worn',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/worn.js';
@@ -113,4 +115,4 @@ reset();inventory([0]);obj(0,0,L.SPEED_BOOTS);for(let i=0;i<120;i++)act(13,0,1);
 reset();opt(0,0);mon(0,0,L.PM_COCKATRICE);hero(7,0);opt(4,0);rng([1]);act(23);assert.ok(trace().includes('rnl:3:1@;'));
 // Same runtime, a second actual module, and a real JS equipment update.
 reset();obj(0,0,L.HELMET);act(1,0,0,0,mask('W_ARMH'));const saved=modules.map(snapshot),other=await hybridFactory({nethackPorted:runtime});other._probe_reset(7);other._probe_action(1,0,0,0,mask('W_ARMH'));assert.ok(text(other,other._probe_snapshot()).includes('equip:-1,-1,0,'));modules.forEach((m,i)=>assert.deepEqual(snapshot(m),saved[i]));check();
-console.log(`WORN: ${comparisons} ${referenceLabel}/hybrid full state, equipment, armor, ownership, callbacks and RNG comparisons checked.`);
+console.log(`WORN: ${comparisons} ${referenceLabel}/pure-JS full state, equipment, armor, ownership, callbacks and RNG comparisons checked.`);

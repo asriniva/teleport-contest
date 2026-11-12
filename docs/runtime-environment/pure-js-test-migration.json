@@ -1,0 +1,1253 @@
+{
+  "registeredSuites": 138,
+  "migratedSuites": 138,
+  "runtimeWasmRequired": false,
+  "reference": "original C; native Node addon where its ABI matches, otherwise separate original-C process",
+  "recorderRun": false,
+  "implementationReadyForRecordings": false,
+  "validation": "pure-js-test-validation.json",
+  "suites": [
+    {
+      "name": "isaac64",
+      "test": "scripts/test-tu-isaac64.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 3,
+      "assertionSitesAfter": 3
+    },
+    {
+      "name": "nhmd4",
+      "test": "scripts/test-tu-nhmd4.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 4,
+      "assertionSitesAfter": 4
+    },
+    {
+      "name": "strutil",
+      "test": "scripts/test-tu-strutil.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 10,
+      "assertionSitesAfter": 10
+    },
+    {
+      "name": "rect",
+      "test": "scripts/test-tu-rect.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 20,
+      "assertionSitesAfter": 20
+    },
+    {
+      "name": "track",
+      "test": "scripts/test-tu-track.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 33,
+      "assertionSitesAfter": 33
+    },
+    {
+      "name": "calendar",
+      "test": "scripts/test-tu-calendar.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 19,
+      "assertionSitesAfter": 19
+    },
+    {
+      "name": "stairs",
+      "test": "scripts/test-tu-stairs.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 22,
+      "assertionSitesAfter": 22
+    },
+    {
+      "name": "sys",
+      "test": "scripts/test-tu-sys.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 32,
+      "assertionSitesAfter": 32
+    },
+    {
+      "name": "rip",
+      "test": "scripts/test-tu-rip.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 25,
+      "assertionSitesAfter": 25
+    },
+    {
+      "name": "date",
+      "test": "scripts/test-tu-date.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 32,
+      "assertionSitesAfter": 32
+    },
+    {
+      "name": "alloc",
+      "test": "scripts/test-tu-alloc.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 57,
+      "assertionSitesAfter": 57
+    },
+    {
+      "name": "utf8map",
+      "test": "scripts/test-tu-utf8map.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 37,
+      "assertionSitesAfter": 37
+    },
+    {
+      "name": "drawing",
+      "test": "scripts/test-tu-drawing.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 22,
+      "assertionSitesAfter": 22
+    },
+    {
+      "name": "posixregex",
+      "test": "scripts/test-tu-posixregex.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 30,
+      "assertionSitesAfter": 30
+    },
+    {
+      "name": "rnd",
+      "test": "scripts/test-tu-rnd.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 30,
+      "assertionSitesAfter": 30
+    },
+    {
+      "name": "ioctl",
+      "test": "scripts/test-tu-ioctl.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 26,
+      "assertionSitesAfter": 26
+    },
+    {
+      "name": "unixtty",
+      "test": "scripts/test-tu-unixtty.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 33,
+      "assertionSitesAfter": 33
+    },
+    {
+      "name": "were",
+      "test": "scripts/test-tu-were.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 28,
+      "assertionSitesAfter": 28
+    },
+    {
+      "name": "extralev",
+      "test": "scripts/test-tu-extralev.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 33,
+      "assertionSitesAfter": 33
+    },
+    {
+      "name": "mplayer",
+      "test": "scripts/test-tu-mplayer.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 43,
+      "assertionSitesAfter": 43
+    },
+    {
+      "name": "exper",
+      "test": "scripts/test-tu-exper.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 20,
+      "assertionSitesAfter": 20
+    },
+    {
+      "name": "mkmap",
+      "test": "scripts/test-tu-mkmap.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 19,
+      "assertionSitesAfter": 19
+    },
+    {
+      "name": "getline",
+      "test": "scripts/test-tu-getline.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 15,
+      "assertionSitesAfter": 15
+    },
+    {
+      "name": "write",
+      "test": "scripts/test-tu-write.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 29,
+      "assertionSitesAfter": 29
+    },
+    {
+      "name": "mdlib",
+      "test": "scripts/test-tu-mdlib.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 33,
+      "assertionSitesAfter": 33
+    },
+    {
+      "name": "quest",
+      "test": "scripts/test-tu-quest.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 36,
+      "assertionSitesAfter": 36
+    },
+    {
+      "name": "minion",
+      "test": "scripts/test-tu-minion.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 43,
+      "assertionSitesAfter": 43
+    },
+    {
+      "name": "iactions",
+      "test": "scripts/test-tu-iactions.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 35,
+      "assertionSitesAfter": 35
+    },
+    {
+      "name": "selvar",
+      "test": "scripts/test-tu-selvar.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 36,
+      "assertionSitesAfter": 36
+    },
+    {
+      "name": "steal",
+      "test": "scripts/test-tu-steal.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 78,
+      "assertionSitesAfter": 78
+    },
+    {
+      "name": "sit",
+      "test": "scripts/test-tu-sit.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 100,
+      "assertionSitesAfter": 100
+    },
+    {
+      "name": "fountain",
+      "test": "scripts/test-tu-fountain.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 103,
+      "assertionSitesAfter": 103
+    },
+    {
+      "name": "objects",
+      "test": "scripts/test-tu-objects.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 36,
+      "assertionSitesAfter": 36
+    },
+    {
+      "name": "monst",
+      "test": "scripts/test-tu-monst.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 42,
+      "assertionSitesAfter": 42
+    },
+    {
+      "name": "shknam",
+      "test": "scripts/test-tu-shknam.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 77,
+      "assertionSitesAfter": 77
+    },
+    {
+      "name": "rumors",
+      "test": "scripts/test-tu-rumors.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 82,
+      "assertionSitesAfter": 82
+    },
+    {
+      "name": "music",
+      "test": "scripts/test-tu-music.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 86,
+      "assertionSitesAfter": 86
+    },
+    {
+      "name": "version",
+      "test": "scripts/test-tu-version.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 77,
+      "assertionSitesAfter": 77
+    },
+    {
+      "name": "coloratt",
+      "test": "scripts/test-tu-coloratt.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 83,
+      "assertionSitesAfter": 83
+    },
+    {
+      "name": "priest",
+      "test": "scripts/test-tu-priest.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 104,
+      "assertionSitesAfter": 104
+    },
+    {
+      "name": "light",
+      "test": "scripts/test-tu-light.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 93,
+      "assertionSitesAfter": 93
+    },
+    {
+      "name": "lock",
+      "test": "scripts/test-tu-lock.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 77,
+      "assertionSitesAfter": 77
+    },
+    {
+      "name": "steed",
+      "test": "scripts/test-tu-steed.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 82,
+      "assertionSitesAfter": 82
+    },
+    {
+      "name": "wizard",
+      "test": "scripts/test-tu-wizard.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 91,
+      "assertionSitesAfter": 91
+    },
+    {
+      "name": "worm",
+      "test": "scripts/test-tu-worm.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 107,
+      "assertionSitesAfter": 107
+    },
+    {
+      "name": "o_init",
+      "test": "scripts/test-tu-o_init.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 89,
+      "assertionSitesAfter": 89
+    },
+    {
+      "name": "ball",
+      "test": "scripts/test-tu-ball.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 58,
+      "assertionSitesAfter": 58
+    },
+    {
+      "name": "mcastu",
+      "test": "scripts/test-tu-mcastu.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 51,
+      "assertionSitesAfter": 51
+    },
+    {
+      "name": "dbridge",
+      "test": "scripts/test-tu-dbridge.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 63,
+      "assertionSitesAfter": 63
+    },
+    {
+      "name": "mondata",
+      "test": "scripts/test-tu-mondata.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 55,
+      "assertionSitesAfter": 55
+    },
+    {
+      "name": "hacklib",
+      "test": "scripts/test-tu-hacklib.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "handwritten-js-setup",
+      "wasmDenied": true,
+      "assertionSitesBefore": 40,
+      "assertionSitesAfter": 40
+    },
+    {
+      "name": "worn",
+      "test": "scripts/test-tu-worn.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 87,
+      "assertionSitesAfter": 87
+    },
+    {
+      "name": "wield",
+      "test": "scripts/test-tu-wield.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 106,
+      "assertionSitesAfter": 106
+    },
+    {
+      "name": "mkroom",
+      "test": "scripts/test-tu-mkroom.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 10,
+      "assertionSitesAfter": 10
+    },
+    {
+      "name": "sfstruct",
+      "test": "scripts/test-tu-sfstruct.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 61,
+      "assertionSitesAfter": 61
+    },
+    {
+      "name": "earlyarg",
+      "test": "scripts/test-tu-earlyarg.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 33,
+      "assertionSitesAfter": 33
+    },
+    {
+      "name": "report",
+      "test": "scripts/test-tu-report.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 11,
+      "assertionSitesAfter": 11
+    },
+    {
+      "name": "bones",
+      "test": "scripts/test-tu-bones.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 9,
+      "assertionSitesAfter": 9
+    },
+    {
+      "name": "explode",
+      "test": "scripts/test-tu-explode.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 8,
+      "assertionSitesAfter": 8
+    },
+    {
+      "name": "questpgr",
+      "test": "scripts/test-tu-questpgr.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 7,
+      "assertionSitesAfter": 7
+    },
+    {
+      "name": "symbols",
+      "test": "scripts/test-tu-symbols.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 60,
+      "assertionSitesAfter": 60
+    },
+    {
+      "name": "mail",
+      "test": "scripts/test-tu-mail.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 47,
+      "assertionSitesAfter": 47
+    },
+    {
+      "name": "pline",
+      "test": "scripts/test-tu-pline.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 12,
+      "assertionSitesAfter": 12
+    },
+    {
+      "name": "attrib",
+      "test": "scripts/test-tu-attrib.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 15,
+      "assertionSitesAfter": 15
+    },
+    {
+      "name": "sfbase",
+      "test": "scripts/test-tu-sfbase.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 12,
+      "assertionSitesAfter": 12
+    },
+    {
+      "name": "dog",
+      "test": "scripts/test-tu-dog.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 12,
+      "assertionSitesAfter": 12
+    },
+    {
+      "name": "region",
+      "test": "scripts/test-tu-region.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 44,
+      "assertionSitesAfter": 44
+    },
+    {
+      "name": "weapon",
+      "test": "scripts/test-tu-weapon.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 41,
+      "assertionSitesAfter": 41
+    },
+    {
+      "name": "vault",
+      "test": "scripts/test-tu-vault.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 17,
+      "assertionSitesAfter": 17
+    },
+    {
+      "name": "u_init",
+      "test": "scripts/test-tu-u_init.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 15,
+      "assertionSitesAfter": 15
+    },
+    {
+      "name": "sounds",
+      "test": "scripts/test-tu-sounds.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 16,
+      "assertionSitesAfter": 16
+    },
+    {
+      "name": "save",
+      "test": "scripts/test-tu-save.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 17,
+      "assertionSitesAfter": 17
+    },
+    {
+      "name": "mhitm",
+      "test": "scripts/test-tu-mhitm.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 20,
+      "assertionSitesAfter": 20
+    },
+    {
+      "name": "getpos",
+      "test": "scripts/test-tu-getpos.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 19,
+      "assertionSitesAfter": 19
+    },
+    {
+      "name": "allmain",
+      "test": "scripts/test-tu-allmain.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 16,
+      "assertionSitesAfter": 16
+    },
+    {
+      "name": "mthrowu",
+      "test": "scripts/test-tu-mthrowu.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 72,
+      "assertionSitesAfter": 72
+    },
+    {
+      "name": "role",
+      "test": "scripts/test-tu-role.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 11,
+      "assertionSitesAfter": 11
+    },
+    {
+      "name": "engrave",
+      "test": "scripts/test-tu-engrave.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 32,
+      "assertionSitesAfter": 32
+    },
+    {
+      "name": "glyphs",
+      "test": "scripts/test-tu-glyphs.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 18,
+      "assertionSitesAfter": 18
+    },
+    {
+      "name": "topten",
+      "test": "scripts/test-tu-topten.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 13,
+      "assertionSitesAfter": 13
+    },
+    {
+      "name": "dogmove",
+      "test": "scripts/test-tu-dogmove.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 10,
+      "assertionSitesAfter": 10
+    },
+    {
+      "name": "windows",
+      "test": "scripts/test-tu-windows.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 17,
+      "assertionSitesAfter": 17
+    },
+    {
+      "name": "cfgfiles",
+      "test": "scripts/test-tu-cfgfiles.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 26,
+      "assertionSitesAfter": 26
+    },
+    {
+      "name": "restore",
+      "test": "scripts/test-tu-restore.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 93,
+      "assertionSitesAfter": 93
+    },
+    {
+      "name": "nhlobj",
+      "test": "scripts/test-tu-nhlobj.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 16,
+      "assertionSitesAfter": 16
+    },
+    {
+      "name": "do_name",
+      "test": "scripts/test-tu-do_name.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 21,
+      "assertionSitesAfter": 21
+    },
+    {
+      "name": "vision",
+      "test": "scripts/test-tu-vision.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 54,
+      "assertionSitesAfter": 54
+    },
+    {
+      "name": "mkmaze",
+      "test": "scripts/test-tu-mkmaze.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 17,
+      "assertionSitesAfter": 17
+    },
+    {
+      "name": "dokick",
+      "test": "scripts/test-tu-dokick.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 20,
+      "assertionSitesAfter": 20
+    },
+    {
+      "name": "dig",
+      "test": "scripts/test-tu-dig.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 19,
+      "assertionSitesAfter": 19
+    },
+    {
+      "name": "end",
+      "test": "scripts/test-tu-end.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 33,
+      "assertionSitesAfter": 33
+    },
+    {
+      "name": "polyself",
+      "test": "scripts/test-tu-polyself.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 26,
+      "assertionSitesAfter": 26
+    },
+    {
+      "name": "wizcmds",
+      "test": "scripts/test-tu-wizcmds.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 24,
+      "assertionSitesAfter": 24
+    },
+    {
+      "name": "detect",
+      "test": "scripts/test-tu-detect.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 41,
+      "assertionSitesAfter": 41
+    },
+    {
+      "name": "teleport",
+      "test": "scripts/test-tu-teleport.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 10,
+      "assertionSitesAfter": 10
+    },
+    {
+      "name": "mklev",
+      "test": "scripts/test-tu-mklev.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 18,
+      "assertionSitesAfter": 18
+    },
+    {
+      "name": "monmove",
+      "test": "scripts/test-tu-monmove.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 52,
+      "assertionSitesAfter": 53
+    },
+    {
+      "name": "spell",
+      "test": "scripts/test-tu-spell.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 30,
+      "assertionSitesAfter": 30
+    },
+    {
+      "name": "do",
+      "test": "scripts/test-tu-do.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 121,
+      "assertionSitesAfter": 121
+    },
+    {
+      "name": "timeout",
+      "test": "scripts/test-tu-timeout.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 31,
+      "assertionSitesAfter": 31
+    },
+    {
+      "name": "potion",
+      "test": "scripts/test-tu-potion.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 23,
+      "assertionSitesAfter": 23
+    },
+    {
+      "name": "pray",
+      "test": "scripts/test-tu-pray.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 42,
+      "assertionSitesAfter": 42
+    },
+    {
+      "name": "dothrow",
+      "test": "scripts/test-tu-dothrow.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 23,
+      "assertionSitesAfter": 23
+    },
+    {
+      "name": "pager",
+      "test": "scripts/test-tu-pager.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 25,
+      "assertionSitesAfter": 25
+    },
+    {
+      "name": "muse",
+      "test": "scripts/test-tu-muse.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 30,
+      "assertionSitesAfter": 30
+    },
+    {
+      "name": "dungeon",
+      "test": "scripts/test-tu-dungeon.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 23,
+      "assertionSitesAfter": 23
+    },
+    {
+      "name": "makemon",
+      "test": "scripts/test-tu-makemon.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 11,
+      "assertionSitesAfter": 11
+    },
+    {
+      "name": "mhitu",
+      "test": "scripts/test-tu-mhitu.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 32,
+      "assertionSitesAfter": 32
+    },
+    {
+      "name": "artifact",
+      "test": "scripts/test-tu-artifact.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 30,
+      "assertionSitesAfter": 30
+    },
+    {
+      "name": "decl",
+      "test": "scripts/test-tu-decl.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 30,
+      "assertionSitesAfter": 30
+    },
+    {
+      "name": "do_wear",
+      "test": "scripts/test-tu-do_wear.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 69,
+      "assertionSitesAfter": 69
+    },
+    {
+      "name": "insight",
+      "test": "scripts/test-tu-insight.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 19,
+      "assertionSitesAfter": 19
+    },
+    {
+      "name": "read",
+      "test": "scripts/test-tu-read.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 14,
+      "assertionSitesAfter": 14
+    },
+    {
+      "name": "apply",
+      "test": "scripts/test-tu-apply.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 16,
+      "assertionSitesAfter": 16
+    },
+    {
+      "name": "eat",
+      "test": "scripts/test-tu-eat.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 16,
+      "assertionSitesAfter": 16
+    },
+    {
+      "name": "objnam",
+      "test": "scripts/test-tu-objnam.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 41,
+      "assertionSitesAfter": 41
+    },
+    {
+      "name": "mkobj",
+      "test": "scripts/test-tu-mkobj.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 43,
+      "assertionSitesAfter": 43
+    },
+    {
+      "name": "nhlua",
+      "test": "scripts/test-tu-nhlua.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 36,
+      "assertionSitesAfter": 36
+    },
+    {
+      "name": "files",
+      "test": "scripts/test-tu-files.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 23,
+      "assertionSitesAfter": 23
+    },
+    {
+      "name": "display",
+      "test": "scripts/test-tu-display.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 38,
+      "assertionSitesAfter": 38
+    },
+    {
+      "name": "invent",
+      "test": "scripts/test-tu-invent.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 34,
+      "assertionSitesAfter": 34
+    },
+    {
+      "name": "cmd",
+      "test": "scripts/test-tu-cmd.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 44,
+      "assertionSitesAfter": 44
+    },
+    {
+      "name": "hack",
+      "test": "scripts/test-tu-hack.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 44,
+      "assertionSitesAfter": 44
+    },
+    {
+      "name": "uhitm",
+      "test": "scripts/test-tu-uhitm.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 21,
+      "assertionSitesAfter": 21
+    },
+    {
+      "name": "mon",
+      "test": "scripts/test-tu-mon.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 60,
+      "assertionSitesAfter": 60
+    },
+    {
+      "name": "pickup",
+      "test": "scripts/test-tu-pickup.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 43,
+      "assertionSitesAfter": 43
+    },
+    {
+      "name": "shk",
+      "test": "scripts/test-tu-shk.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 30,
+      "assertionSitesAfter": 30
+    },
+    {
+      "name": "sp_lev",
+      "test": "scripts/test-tu-sp_lev.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 50,
+      "assertionSitesAfter": 50
+    },
+    {
+      "name": "trap",
+      "test": "scripts/test-tu-trap.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 36,
+      "assertionSitesAfter": 36
+    },
+    {
+      "name": "termcap",
+      "test": "scripts/test-tu-termcap.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 70,
+      "assertionSitesAfter": 70
+    },
+    {
+      "name": "topl",
+      "test": "scripts/test-tu-topl.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 77,
+      "assertionSitesAfter": 77
+    },
+    {
+      "name": "wintty",
+      "test": "scripts/test-tu-wintty.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 70,
+      "assertionSitesAfter": 70
+    },
+    {
+      "name": "unixunix",
+      "test": "scripts/test-tu-unixunix.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 38,
+      "assertionSitesAfter": 38
+    },
+    {
+      "name": "unixmain",
+      "test": "scripts/test-tu-unixmain.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 53,
+      "assertionSitesAfter": 53
+    },
+    {
+      "name": "options",
+      "test": "scripts/test-tu-options.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 85,
+      "assertionSitesAfter": 85
+    },
+    {
+      "name": "botl",
+      "test": "scripts/test-tu-botl.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 56,
+      "assertionSitesAfter": 56
+    },
+    {
+      "name": "zap",
+      "test": "scripts/test-tu-zap.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 56,
+      "assertionSitesAfter": 56
+    },
+    {
+      "name": "nhlsel",
+      "test": "scripts/test-tu-nhlsel.mjs",
+      "implementation": "pure-javascript",
+      "fixture": "generated-setup-and-abi",
+      "wasmDenied": true,
+      "assertionSitesBefore": 2,
+      "assertionSitesAfter": 2
+    }
+  ]
+}

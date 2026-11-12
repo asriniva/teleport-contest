@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('o_init', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/o_init-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/o_init-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('o_init',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/o_init.js';
@@ -111,4 +113,4 @@ reset();hero(5,1);rec(L.POT_HEALING,3,1);act(3);assert.equal(value(L.POT_HEALING
 for(const stage of [1,2,3,4,5,6,7,8,9,10,11,12,13]){setup();opt(30,stage);opt(31,stage);const before=modules.map(x=>allocationMetric(x));if(stage===1||stage===2){hero(6,1);rec(L.DIAMOND,3,0);act(12,L.DIAMOND,1,0,1);}else if(stage===3)act(18,L.POT_HEALING);else if(stage===4){input(1,'');act(19,L.POT_HEALING);}else if(stage===5)act(16,L.POT_HEALING);else if(stage===6||stage===7){sorted(0,'  zebra');sorted(1,'* apple');act(21,2,0);}else if(stage===8){known(L.POT_HEALING);act(22);}else if(stage===9||stage===10){opt(12,1);call('pick_input',0,111);act(17,1);}else if(stage===11){known(L.POT_HEALING);opt(12,1);call('pick_input',0,L.POT_HEALING);act(25);}else{uname(L.POT_HEALING,'growth');if(stage===12){call('nhfile',0,L.WRITING);act(9);}else{call('nhfile',0,L.WRITING|L.FREEING);act(9);call('nhfile',0,L.READING);act(10);}}assert.ok(trace().includes(`grew:${stage};`),`growth ${stage}`);assert.ok(trace().includes('nested-sort:'));modules.forEach((x,i)=>assert.ok(allocationMetric(x)>before[i]));}
 reset();opt(0,0);act(3);assert.ok(trace().includes('@;'));
 setup();known(L.POT_HEALING);const held=snapshot(modules[1]);const other=await hybridFactory({nethackPorted:runtime});other._probe_reset(77);other._probe_action(3,0,0,0,0);other._probe_record(L.POT_HEALING,3,0n);other._probe_action(12,L.POT_HEALING,1,1,1);assert.equal(other._probe_row_value(L.POT_HEALING,3),1n);other._probe_action(22,0,0,0,0);assert.deepEqual(snapshot(modules[1]),held);comparisons+=2;check();
-console.log(`O_INIT ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);
+console.log(`O_INIT ${referenceLabel}/pure-JS differential: ${comparisons} comparisons checked`);

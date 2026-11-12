@@ -96,12 +96,15 @@ int probe_alloc_live(unsigned id) {
 }
 long*__real_alloc(unsigned);
 long*__wrap_alloc(unsigned n){long*p=__real_alloc(n);if(allocated>=32768)abort();allocations[allocated].p=p;allocations[allocated].size=n;allocations[allocated].live=1;allocated++;memset(p,0xa5,n);append("alloc:%u:%u;",allocated,n);checkpoint(6);return p;}
+static int dependency_depth;
+int __real_tgetent(char*,const char*);int __wrap_tgetent(char*b,const char*n){dependency_depth++;int r=__real_tgetent(b,n);dependency_depth--;return r;}
+int __real_fclose(FILE*);int __wrap_fclose(FILE*f){dependency_depth++;int r=__real_fclose(f);dependency_depth--;return r;}
 void __real_free(void*);
-void __wrap_free(void*p){unsigned id=0;for(unsigned i=allocated;i>0;i--)if(allocations[i-1].p==p&&allocations[i-1].live){id=i;allocations[i-1].live=0;break;}append("free:%u;",id);__real_free(p);}
+void __wrap_free(void*p){if(dependency_depth){__real_free(p);return;}unsigned id=0;for(unsigned i=allocated;i>0;i--)if(allocations[i-1].p==p&&allocations[i-1].live){id=i;allocations[i-1].live=0;break;}append("free:%u;",id);__real_free(p);}
 int __real_putchar(int);int __wrap_putchar(int c){checkpoint(5);return __real_putchar(c);}
 int __real_puts(const char*);int __wrap_puts(const char*s){return __real_puts(s);}
 int __real_fputs(const char*,FILE*);int __wrap_fputs(const char*s,FILE*f){return __real_fputs(s,f);}
-int __real_fflush(FILE*);int __wrap_fflush(FILE*f){append("fflush:%d;",!f?0:f==stdout?1:2);return __real_fflush(f);}
+int __real_fflush(FILE*);int __wrap_fflush(FILE*f){if(dependency_depth)return __real_fflush(f);append("fflush:%d;",!f?0:f==stdout?1:2);dependency_depth++;int r=__real_fflush(f);dependency_depth--;return r;}
 void __real_setbuf(FILE*,char*);void __wrap_setbuf(FILE*f,char*p){append("setbuf:%d:%d;",f==stdout,p==teleport_wintty_data_storage(5));__real_setbuf(f,p);}
 ssize_t __real_read(int,void*,size_t);ssize_t __wrap_read(int fd,void*p,size_t n){ssize_t got=__real_read(fd,p,n);append("read:%d:%lu:%ld;",fd,(unsigned long)n,(long)got);return got;}
 void clearlocks(){append("clearlocks;");}

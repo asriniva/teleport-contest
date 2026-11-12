@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('steed', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/steed-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/steed-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('steed',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url)));
@@ -112,4 +114,4 @@ reset();opt(0,0);act(2);assert.ok(trace().includes('rn2:100:')&&trace().includes
 modules.forEach((m,i)=>{assert.equal(m._probe_pointer(9,0),classifierPointers[i]);assert.deepEqual(Buffer.from(m.HEAPU8.slice(Number(m._probe_pointer(9,0)),Number(m._probe_pointer(9,0))+7)),classifiers[i]);});comparisons++;
 saddled();act(6,0,1);const held=snapshot(modules[1]);
 const other=await hybridFactory({nethackPorted:runtime});other._probe_reset(77);other._probe_action(3,0,0,0,0);assert.equal(other._probe_action(6,0,1,0,0),1n);assert.equal(fields('hero',other)[4],'0');other._probe_action(10,0,L.DISMOUNT_GENERIC,0,0);assert.equal(fields('hero',other)[4],'-1');assert.deepEqual(snapshot(modules[1]),held);comparisons+=4;check();
-console.log(`STEED ${referenceLabel}/hybrid differential: ${comparisons} comparisons checked`);
+console.log(`STEED ${referenceLabel}/pure-JS differential: ${comparisons} comparisons checked`);

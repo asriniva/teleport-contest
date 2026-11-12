@@ -1,14 +1,14 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('objects', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/objects-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/objects-hybrid.mjs';
-import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/catalogues.mjs';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.objects;
-const runtime=createPortedRuntime(layouts);
-const modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
+const runtime=layouts;
+const modules=[await referenceFactory(),await createPureJsProbe('objects', layouts)],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function string(m,p){if(p===0n||p===0)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 function bytes(m,p,size){return Buffer.from(m.HEAPU8.slice(Number(p),Number(p)+size));}
 function snapshot(m){const count=m._probe_count(),fields=m._probe_field_count(),alias=new Map(),strings=[],values=[];let next=0;for(let row=0;row<count;row++){values.push(Array.from({length:fields},(_,f)=>m._probe_value(row,f)));strings.push(Array.from({length:3},(_,f)=>{const p=m._probe_string(row,f);if(p===0n)return {value:null,alias:-1};const key=p.toString();if(!alias.has(key))alias.set(key,next++);return {value:string(m,p),alias:alias.get(key)};}));}const objects=bytes(m,m._probe_objects(),count*L.objectSize),descriptors=bytes(m,m._probe_descriptors(),count*L.descriptorSize);for(let row=0;row<count;row++){objects.fill(0,row*L.objectSize+L.oc_uname,row*L.objectSize+L.oc_uname+L.pointerSize);for(const field of ['oc_name','oc_descr'])descriptors.fill(0,row*L.descriptorSize+L[field],row*L.descriptorSize+L[field]+L.pointerSize);}return {values,strings,objects,descriptors};}
@@ -35,6 +35,6 @@ for(let row=0;row<L.rowCount;row++){for(let f=0;f<names.length;f++){const v=BigI
 for(const seed of [0,1,0xffffffff]){modules.forEach(m=>m._probe_poison(seed));init();assert.deepEqual(snapshot(modules[0]),oracle);stablePointers();}
 // Two JS modules sharing one runtime must still allocate independent mutable
 // output and templates, keyed by their actual native module identities.
-const other=await hybridFactory({nethackPorted:runtime}),otherStack=other._probe_stack();other._probe_init();assert.deepEqual(snapshot(other),oracle);modules[1]._probe_strings(0,2);modules[1]._probe_mutate(0,0,65535n);assert.deepEqual(snapshot(other),oracle);assert.deepEqual(snapshot(modules[0]),oracle);modules[1]._probe_init();check();
+const other=await createPureJsProbe('objects', layouts),otherStack=other._probe_stack();other._probe_init();assert.deepEqual(snapshot(other),oracle);modules[1]._probe_strings(0,2);modules[1]._probe_mutate(0,0,65535n);assert.deepEqual(snapshot(other),oracle);assert.deepEqual(snapshot(modules[0]),oracle);modules[1]._probe_init();check();
 const before=modules.map(m=>allocationMetric(m)),allocations=modules.map(m=>m._malloc(BigInt(allocationMetric(m)+16*1024*1024)));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));init();assert.deepEqual(snapshot(modules[0]),oracle);assert.deepEqual(snapshot(other),oracle);modules.forEach((m,i)=>m._free(allocations[i]));assertStackRestored(other, otherStack);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);
-console.log(`OBJECTS: ${comparisons} ${referenceLabel}/hybrid full-catalogue field, string, alias, padding and reinitialization comparisons checked.`);
+console.log(`OBJECTS: ${comparisons} ${referenceLabel}/pure-JS full-catalogue field, string, alias, padding and reinitialization comparisons checked.`);

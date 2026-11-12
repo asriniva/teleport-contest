@@ -1,11 +1,13 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // First-pass memory64 C/JS differential; native/game/public remain separate.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-const {createGlyphsBridge}=await import(process.env.GLYPHS_RUNTIME?pathToFileURL(resolve(process.env.GLYPHS_RUNTIME)):new URL('../js/nethack/bindings/glyphs.js',import.meta.url));
+const {createGlyphsBridge}=await loadFixture("glyphs",process.env.GLYPHS_RUNTIME?pathToFileURL(resolve(process.env.GLYPHS_RUNTIME)):new URL('../js/nethack/bindings/glyphs.js',import.meta.url));
 import {C} from '../js/c-runtime/context.js';
 const directory=resolve(process.env.GLYPHS_PROBE_DIR??'.cache/glyphs-first-pass');
-const factory=async name=>(await import(pathToFileURL(resolve(directory,'glyphs-'+name+'.mjs')))).default;
+const factory=async name=>(await loadFixture("glyphs",pathToFileURL(resolve(directory,'glyphs-'+name+'.mjs')))).default;
 const ref=await factory('reference'),hybrid=await factory('hybrid');
 const text=(m,p)=>{p=Number(p);let q=p;while(m.HEAPU8[q])q++;return Buffer.from(m.HEAPU8.subarray(p,q)).toString('latin1');};
 const layouts=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
@@ -40,4 +42,4 @@ scenario='optimized source static records';reset();input('G_warning3/#123456');a
 for(const value of[2147483647,-2147483648,734193]){scenario='mutable backing witness '+value;assert.equal(call('backing',0,1,BigInt(value)),BigInt(value));comparisons++;}call('backing',0,1,0n);
 scenario='preserve first Module cache';action(6);const old=modules;await pair();scenario='second Module';assert.equal(action(12),0n);comparisons++;input('G_warning1/red');action(3);action(6);action(7);modules=old;scenario='old Module retains its private cache';assert.equal(action(12),1n);comparisons++;reset();scenario='first Module reused';input('G_warning2/blue');action(3);
 assert.equal(invoked.size,27,'all configured original source bodies called');comparisons++;
-console.log(`GLYPHS: ${comparisons} configured Emscripten-C/JS comparisons passed; ${invoked.size}/27 bodies invoked; native/game/public pending.`);
+console.log(`GLYPHS: ${comparisons} configured original-C/pure-JS comparisons passed; ${invoked.size}/27 bodies invoked; native/game/public pending.`);

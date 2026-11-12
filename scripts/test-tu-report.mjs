@@ -1,14 +1,17 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 // REPORT first-pass differential: actual prepared C and JS through memory64 ABI.
 // Both modules use the production native ABI header. Native libc stacktrace
 // branches require a separate oracle pass; this suite makes no native claim.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import { createReportBridge } from '../js/nethack/bindings/report.js';
 import { C } from '../js/c-runtime/context.js';
 const probeDir = resolve(process.env.TELEPORT_REPORT_PROBE_DIR ?? '.cache/tu-probes');
-const { default: referenceFactory } = await import(pathToFileURL(resolve(probeDir, 'report-reference.mjs')));
-const { default: hybridFactory } = await import(pathToFileURL(resolve(probeDir, 'report-hybrid.mjs')));
+const { default: referenceFactory } = await loadFixture("report",pathToFileURL(resolve(probeDir, 'report-reference.mjs')));
+const { default: hybridFactory } = await loadFixture("report",pathToFileURL(resolve(probeDir, 'report-hybrid.mjs')));
 let comparisons = 0;
 function text(m, at) {
     if (!at) return null;
@@ -59,13 +62,13 @@ for (const mark of [false,true]) {
     const results = modules.map(m => {
         const source = put(m,input), buffer = BigInt(m._malloc(512n)), out = BigInt(m._malloc(8n)), left = BigInt(m._malloc(4n));
         m.HEAPU8.fill(0xa5,Number(buffer),Number(buffer)+512);
-        new DataView(m.HEAPU8.buffer).setBigUint64(Number(out), buffer+32n,true);
-        new DataView(m.HEAPU8.buffer).setInt32(Number(left),remaining,true);
+        new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(out), buffer+32n,true);
+        new FixtureDataView(m.HEAPU8.buffer).setInt32(Number(left),remaining,true);
         const stack = m._probe_stack();
         const rv = m._probe_encode(source,out,left,mark?buffer+16n:0n);
         assert.equal(m._probe_stack(),stack);
-        const result = {rv, offset:new DataView(m.HEAPU8.buffer).getBigUint64(Number(out),true)-buffer,
-            left:new DataView(m.HEAPU8.buffer).getInt32(Number(left),true),
+        const result = {rv, offset:new FixtureDataView(m.HEAPU8.buffer).getBigUint64(Number(out),true)-buffer,
+            left:new FixtureDataView(m.HEAPU8.buffer).getInt32(Number(left),true),
             bytes:Buffer.from(m.HEAPU8.slice(Number(buffer),Number(buffer)+512))};
         [source,buffer,out,left].forEach(p=>m._free(p));return result;
     });
@@ -120,4 +123,4 @@ for (const [cos,msg,why] of [[1,'panic','bad #thing\nnext'],[2,null,'#bugreport 
     });
     assert.deepEqual(values[1],values[0]);assert.equal(C,undefined);comparisons++;
 }
-console.log(`REPORT: ${comparisons} prepared Emscripten-C/JS comparisons passed; native platform branches pending.`);
+console.log(`REPORT: ${comparisons} prepared original-C/pure-JS comparisons passed; native platform branches pending.`);

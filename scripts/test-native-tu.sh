@@ -1,20 +1,5 @@
 #!/usr/bin/env bash
+# Native C is the preferred reference where its fixture ABI matches. Every
+# implementation runs as pure JavaScript; remaining C references are isolated.
 set -euo pipefail
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-EMSDK="${EMSDK:-$ROOT/.cache/emsdk}"
-if [[ -f "$EMSDK/emsdk_env.sh" ]]; then
-    source "$EMSDK/emsdk_env.sh" >/dev/null 2>&1
-fi
-cd "$ROOT"
-selection=()
-for name in "$@"; do selection+=(--only "$name"); done
-if (( $# )); then
-    python3 -B scripts/build-tu-probes.py --native-only "${selection[@]}"
-else
-    python3 -B scripts/build-tu-probes.py --native-only
-fi
-node scripts/test-native-existing.mjs "$@"
-if (( $# == 0 )); then
-    node scripts/test-native-terminal-transport.mjs
-    node scripts/test-native-library-differences.mjs
-fi
+exec bash "$(dirname "$0")/test-pure-js-tu.sh" "$@"

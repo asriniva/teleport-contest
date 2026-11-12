@@ -1,14 +1,14 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Uint8Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('nhmd4', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/nhmd4-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/nhmd4-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/crypto.mjs';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 const layout = layouts.nhmd4;
-const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: createPortedRuntime(layouts) })];
+const modules = [await referenceFactory(), await createPureJsProbe('nhmd4', layouts)];
 let comparisons = 0;
 function contexts() {
     return modules.map(module => {
@@ -89,7 +89,7 @@ for (const length of [0, 1, 54, 55, 56, 57, 63, 64, 65, 119, 120, 127, 128, 129,
     }
 }
 // Exercise counter carry without constructing a half-gigabyte input, and preserve
-// complete C state across copies, independent contexts, and Wasm memory growth.
+// complete C state across copies, independent contexts, and implementation memory growth.
 const pointers = contexts(), copies = contexts(), independent = contexts();
 update(pointers, Uint8Array.from({ length: 61 }, (_, i) => i));
 update(independent, Uint8Array.of(9, 8, 7));
@@ -108,4 +108,4 @@ update(copies, Uint8Array.of(1, 2, 3, 4));
 const digest = final(pointers);
 final(copies, digest);
 final(independent);
-console.log(`NHMD4: ${comparisons} ${referenceLabel}/hybrid state and digest comparisons checked, including RFC vectors.`);
+console.log(`NHMD4: ${comparisons} ${referenceLabel}/pure-JS state and digest comparisons checked, including RFC vectors.`);

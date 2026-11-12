@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('steal', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/steal-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/steal-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('steal',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.steal,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
@@ -77,4 +79,4 @@ for(const guard of [0,1])for(const pet of [0,1,256])for(const show of [0,1]){res
 // Native inventory callback reenters an imported function and grows memory.
 reset();obj(0,L.LONG_SWORD,1n,L.OBJ_FREE);call('hero',0,-1);str('reason','frozen solid');call('option',29,1);call('option',30,1);call('option',15,1);call('option',20,1);const before=modules.map(m=>allocationMetric(m));act(7,0);modules.forEach((m,i)=>assert.ok(allocationMetric(m)>before[i]));assert.match(trace(),/nested:1;grow;snuff:11:10;/);
 reset();call('option',0,0);act(0,-1,99999n);const saved=snapshot(modules[0]);modules[1]._probe_hero(0,-5n);assert.deepEqual(snapshot(modules[0]),saved);reset();
-console.log(`STEAL: ${comparisons} ${referenceLabel}/hybrid inventory, equipment, callback, ownership, gold and RNG-site comparisons checked.`);
+console.log(`STEAL: ${comparisons} ${referenceLabel}/pure-JS inventory, equipment, callback, ownership, gold and RNG-site comparisons checked.`);

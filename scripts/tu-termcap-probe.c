@@ -46,6 +46,7 @@ static int ints[8],options[16],error_code,tracepos,allocated,reentered;
 static char inputs[4][8192],tracebuf[1048576];
 static uintptr_t last_output_pointer,last_area_pointer;
 static jmp_buf escapes[16];static int escape_depth;static void*growth;
+static int dependency_depth;
 static struct {uintptr_t pointer;size_t bytes;int live;} allocations[4096];
 static struct {int kind,key,value;char text[512];} overrides[128];static int override_count;
 static void append(const char*format,...){if(tracepos>sizeof tracebuf-20000)abort();va_list ap;va_start(ap,format);tracepos+=vsnprintf(tracebuf+tracepos,sizeof tracebuf-tracepos,format,ap);va_end(ap);}
@@ -54,15 +55,15 @@ static void checkpoint(void){if(options[0]&&!growth){growth=malloc(emscripten_ge
 static int key(const char*id){return((unsigned char)id[0]<<8)|(unsigned char)id[1];}
 static int override(int kind,const char*id){for(int i=0;i<override_count;i++)if(overrides[i].kind==kind&&overrides[i].key==key(id))return i;return-1;}
 char*__real_getenv(const char*);
-char*__wrap_getenv(const char*name){char*v=__real_getenv(name);append("getenv:%s:",name);hex(v);append(";");return v;}
+char*__wrap_getenv(const char*name){char*v=__real_getenv(name);if(dependency_depth)return v;append("getenv:%s:",name);hex(v);append(";");return v;}
 int __real_putchar(int);
 int __wrap_putchar(int c){append("putchar:%d;",c);checkpoint();return __real_putchar(c);}
 int __real_fflush(FILE*);
-int __wrap_fflush(FILE*f){append("fflush:%d;",!f?0:f==stdout?1:2);checkpoint();return __real_fflush(f);}
+int __wrap_fflush(FILE*f){if(dependency_depth)return __real_fflush(f);append("fflush:%d;",!f?0:f==stdout?1:2);checkpoint();dependency_depth++;int r=__real_fflush(f);dependency_depth--;return r;}
 void __real_free(void*);
-void __wrap_free(void*p){int found=0;for(int i=allocated-1;i>=0;i--)if(allocations[i].pointer==(uintptr_t)p&&allocations[i].live){found=i+1;allocations[i].live=0;break;}append("free:%d;",found);__real_free(p);}
+void __wrap_free(void*p){if(dependency_depth){__real_free(p);return;}int found=0;for(int i=allocated-1;i>=0;i--)if(allocations[i].pointer==(uintptr_t)p&&allocations[i].live){found=i+1;allocations[i].live=0;break;}append("free:%d;",found);__real_free(p);}
 int __real_tgetent(char*,const char*);
-int __wrap_tgetent(char*b,const char*name){append("tgetent:");hex(name);append(";");int i=override(3,"en");return i>=0?overrides[i].value:__real_tgetent(b,name);}
+int __wrap_tgetent(char*b,const char*name){append("tgetent:");hex(name);append(";");int i=override(3,"en");if(i>=0)return overrides[i].value;dependency_depth++;int value=__real_tgetent(b,name);dependency_depth--;return value;}
 int __real_tgetnum(const char*);
 int __wrap_tgetnum(const char*id){int i=override(1,id),v=i>=0?overrides[i].value:__real_tgetnum(id);append("tgetnum:%s:%d;",id,v);return v;}
 int __real_tgetflag(const char*);

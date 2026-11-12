@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('shknam', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/shknam-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/shknam-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('shknam',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.shknam,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
@@ -70,4 +72,4 @@ reset();call('room',0,2,2,40,18,1,0,0,L.SHOPBASE+10);call('door',0,1,3);for(let 
 // Saleability across every shop/catalogue type, including custom food payloads.
 for(let shop=0;shop<tableCount-1;shop++){reset();name(0,'shopkeeper');call('mbit',0,1,1);modules.forEach(m=>{const p=Number(m._probe_extra_pointer(0));new DataView(m.HEAPU8.buffer).setInt32(p+L.eshk_shoptype,L.SHOPBASE+shop,true);});for(let type=0;type<L.NUM_OBJECTS;type+=7){call('obj',type,L.PM_LICHEN,0);act(11);}}
 reset();call('option',0,0);rng([0]);act(12);const saved=snapshot(modules[0]);modules[1]._probe_hero(0,1n);assert.deepEqual(snapshot(modules[0]),saved);reset();
-console.log(`SHKNAM: ${comparisons} ${referenceLabel}/hybrid shop catalogue, names, stock, geometry, allocation and RNG-site comparisons checked.`);
+console.log(`SHKNAM: ${comparisons} ${referenceLabel}/pure-JS shop catalogue, names, stock, geometry, allocation and RNG-site comparisons checked.`);

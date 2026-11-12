@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('mdlib', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/mdlib-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/mdlib-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('mdlib',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import * as mdlib from '../js/ported/mdlib.js';
 import {C,R,T} from '../js/c-runtime/context.js';
@@ -40,4 +42,4 @@ for(const nested of [0,1]){reset();call('nested',nested);call('init');assert.equ
 reset();next(null);assert.equal(call('calls',0),1);call('release');reset();setScalar(1,1);assert.equal(next(0)[0].after,0);
 reset();const saved=snapshot(modules[0],0);runtime.mdlibState.window_opts[0].valid=0;assert.deepEqual(snapshot(modules[0],0),saved);reset();
 call('nested',1);call('init');const livePointers=modules.map((m,i)=>BigInt(i?runtime.mdlibState.opttext[0]:m._probe_opt(0))),oldSizes=modules.map(m=>allocationMetric(m));const grown=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(grown.every(Boolean));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>oldSizes[i]));const afterGrowth=next(0);modules.forEach((m,i)=>assert.equal(BigInt(afterGrowth[i].value),livePointers[i]));textCall('version_id','after growth',1024n);call('release');modules.forEach((m,i)=>m._free(grown[i]));state();
-console.log(`MDLIB: ${comparisons} ${referenceLabel}/hybrid static-table, version, option-wrapping, lifecycle and native-format comparisons checked.`);
+console.log(`MDLIB: ${comparisons} ${referenceLabel}/pure-JS static-table, version, option-wrapping, lifecycle and native-format comparisons checked.`);

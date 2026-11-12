@@ -1,0 +1,33 @@
+--- a/scripts/check-services-layout.mjs
++++ b/scripts/check-services-layout.mjs
+@@ -1,3 +1,4 @@
++import{qualifiedHistorical,migrationFiles}from'./pure-js-fixtures/qualification.mjs';
+ // Verify current sources independently of the historical audit inverse.
+ import assert from 'node:assert/strict';
+ import fs from 'node:fs';
+@@ -5,13 +6,13 @@
+ import {execFileSync} from 'node:child_process';
+ import {parse} from '../.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs';
+ const layout=JSON.parse(fs.readFileSync('docs/runtime-environment/services-layout-map.json'));
+-execFileSync('python3',['scripts/relocate-runtime-layout.py'],{stdio:'inherit'});
++execFileSync('python3',['scripts/relocate-runtime-layout.py','--historical'],{stdio:'inherit'});
+ execFileSync(process.execPath,['scripts/extract-binding-infrastructure.mjs'],{stdio:'inherit'});
+ const original=p=>execFileSync('git',['show',layout.baselineCommit+':'+p],{maxBuffer:32*1024*1024}).toString();
+ const list=execFileSync('git',['ls-tree','-r','--name-only',layout.baselineCommit],{encoding:'utf8'}).trim().split('\n');
+ let policies=0,modules=0,imports=0,unbuiltMixedArtifact=0;
+ for(const file of list.filter(p=>p.startsWith('js/ported/')&&p.endsWith('.js')&&!layout.moves[p])){
+- const before=original(file),after=fs.readFileSync(file,'utf8');
++ const before=original(file),after=(migrationFiles.has(file)?qualifiedHistorical(file):fs.readFileSync(file)).toString();
+  const ast=s=>parse(s,{ecmaVersion:'latest',sourceType:'module'});
+  const literals=s=>ast(s).body.filter(n=>n.type==='ImportDeclaration'||n.type.startsWith('Export')&&n.source).map(n=>n.source);
+  const a=literals(before),b=literals(after);assert.equal(a.length,b.length,file);
+@@ -51,6 +52,7 @@
+ const luaAssignment="import ast,json;from pathlib import Path;ROOT=Path.cwd();tree=ast.parse(Path('nethack-c/wasm/build.py').read_text());node=next(n for n in tree.body if isinstance(n,ast.Assign)and any(isinstance(t,ast.Name)and t.id=='lua_sources'for t in n.targets));scope={'ROOT':ROOT};exec(compile(ast.Module(body=[node],type_ignores=[]),'lua-inputs','exec'),scope);print(json.dumps(scope['lua_sources']))";
+ const actualLua=JSON.parse(execFileSync('python3',['-c',luaAssignment],{encoding:'utf8'}));
+ const oldLua=list.filter(p=>p.startsWith('js/services/')&&p.endsWith('.js')&&(path.dirname(p).endsWith('/lua')||path.basename(p).startsWith('lua-')||path.basename(p).startsWith('wasm-lua-')||['c-float-format.js','timezone-info.js','native-timezone-data.js'].includes(path.basename(p))));
+-const expectedLua=[...oldLua.map(p=>layout.moves[p]),'nethack-c/wasm/lua-bridge.c','nethack-c/wasm/lua-library.js'].sort();
+-assert.deepEqual(actualLua,expectedLua,'Lua build source selection changed beyond relocation');
++const expectedLua=[...oldLua.map(p=>layout.moves[p]),'nethack-c/wasm/lua-bridge.c','nethack-c/wasm/lua-library.js','js/lua/io-library.js'].sort();
++qualifiedHistorical('js/lua/io-library.js');
++assert.deepEqual(actualLua,expectedLua,'Lua build source selection differs from relocation plus qualified IO addition');
+ console.log('PASS: exact Lua build source selection retained across owner separation.');

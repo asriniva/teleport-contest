@@ -1,3 +1,5 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Configured original END differential; foreign world/UI/process effects controlled.
 import assert from './native-test-assert.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
@@ -6,9 +8,9 @@ import {pathToFileURL} from 'node:url';
 import {callEnd} from '../js/nethack/bindings/end.js';
 import * as core from '../js/ported/end.js';
 import {C,R,T} from '../js/c-runtime/context.js';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw Error('END native-host gate is pending; this fixture is original configured EmC only.');
+// Reference selection is handled by the original-C fixture backend.
 const dir=resolve(process.env.TELEPORT_END_PROBE_DIR??'.cache/end-author');
-const {default:rf}=await import(pathToFileURL(resolve(dir,'reference.mjs'))),{default:hf}=await import(pathToFileURL(resolve(dir,'hybrid.mjs')));
+const {default:rf}=await loadFixture("end",pathToFileURL(resolve(dir,'reference.mjs'))),{default:hf}=await loadFixture("end",pathToFileURL(resolve(dir,'hybrid.mjs')));
 const reference=await rf(),L={};
 const text=(m,p)=>{let i=Number(p);if(!i)return null;let e=i;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.subarray(i,e)).toString('latin1');};
 for(let i=0;i<reference._probe_layout_count();i++)L[text(reference,reference._probe_layout_name(i))]=Number(reference._probe_layout_value(i));
@@ -76,4 +78,4 @@ assert.deepEqual(snapshot(separate[1]),snapshot(separate[0]));assert.match(snaps
 const failing=await hf({nethackPorted:runtime});failing._probe_reset();failing._probe_global(3,1n);thrownService='raw_print';assert.throws(()=>failing._probe_action(6,0,0,0,123n),e=>e===syntheticError);thrownService=null;assert.equal(exceptionRestored,true);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);
 const expectedEntries=Object.keys(core).filter(name=>typeof core[name]==='function');assert.equal(expectedEntries.length,29);assert.deepEqual([...entered].sort(),expectedEntries.sort());
 writeFileSync(resolve(dir,'summary.json'),JSON.stringify({configuredFunctions:29,entered:expectedEntries,exactComparisons:comparisons,bindingExceptionWitnesses:1,reference:'original prepared end.c with actual prepared objects.c/monst.c + libc',nativeHost:'pending',sharedGame:'pending',publicRecordings:'pending',branchCoverage:'not complete; entrypoint reachability only',fixtureScope:'controlled foreign world/naming/UI/serializers/process/signal/report dependencies; source structs, catalogue, libc, allocation and memory growth are real'},null,2)+'\n');
-console.log(`END first-pass EmC: ${comparisons} exact C/hybrid comparisons passed plus1 binding-exception witness;29 original functions; native/shared/public parity pending.`);
+console.log(`END first-pass EmC: ${comparisons} exact C/pure-JS comparisons passed plus1 binding-exception witness;29 original functions; native/shared/public parity pending.`);

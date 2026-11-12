@@ -1,15 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('posixregex', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/posixregex-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/posixregex-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/posixregex.mjs';
 import { C, R, T } from '../js/c-runtime/context.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 const layout = layouts.posixregex;
-const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: createPortedRuntime(layouts) })];
+const modules = [await referenceFactory(), await createPureJsProbe(layouts)];
 const stacks = modules.map(module => module._probe_stack());
 let comparisons = 0;
 function scope() {
@@ -129,11 +129,11 @@ for (let i = 0; i < 50; i++) {
     if (i % 2) { assert.equal(match('repeat123', regexes).status, 1); assert.equal(match('repeatX', regexes).status, 0); }
     error(regexes); free(regexes);
 }
-const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
+const independent = await createPureJsProbe(layouts);
 assert.equal(bytes(independent, independent._probe_identifier()).toString(), 'posixregex');
 const independentRegex = independent._probe_init(), pattern = allocate(independent, '^independent$'), string = allocate(independent, 'independent');
 assert.equal(independent._probe_compile(BigInt(pattern), BigInt(independentRegex)), 1);
 assert.equal(independent._probe_match(BigInt(string), BigInt(independentRegex)), 1);
 independent._probe_free(BigInt(independentRegex)); independent._free(pattern); independent._free(string);
 scope(); comparisons++;
-console.log(`POSIXREGEX: ${comparisons} ${referenceLabel}/hybrid native-engine, error-buffer, lifecycle and startup comparisons checked.`);
+console.log(`POSIXREGEX: ${comparisons} ${referenceLabel}/pure-JS native-engine, error-buffer, lifecycle and startup comparisons checked.`);

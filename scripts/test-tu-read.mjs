@@ -1,3 +1,5 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Private actual configured original-C versus JS READ; foreign world controlled.
 import assert from './native-test-assert.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
@@ -6,10 +8,10 @@ import {pathToFileURL} from 'node:url';
 import {callRead,createReadEnvironment} from '../js/nethack/bindings/read.js';
 import * as core from '../js/ported/read.js';
 import {C,R,T} from '../js/c-runtime/context.js';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw Error('READ native-host gate pending; this is isolated configured EmC first pass.');
+// Reference selection is handled by the original-C fixture backend.
 const directory=resolve(process.env.TELEPORT_READ_PROBE_DIR??'.cache/read-author');
-const {default:rf}=await import(pathToFileURL(resolve(directory,'reference.mjs')));
-const {default:hf}=await import(pathToFileURL(resolve(directory,'hybrid.mjs')));
+const {default:rf}=await loadFixture("read",pathToFileURL(resolve(directory,'reference.mjs')));
+const {default:hf}=await loadFixture("read",pathToFileURL(resolve(directory,'hybrid.mjs')));
 const original=await rf(),layout={};
 const text=(m,p)=>{let at=Number(p);if(!at)return null;let end=at;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.subarray(at,end)).toString('latin1');};
 for(let i=0;i<original._probe_layout_count();i++)layout[text(original,original._probe_layout_name(i))]=Number(original._probe_layout_value(i));
@@ -122,4 +124,4 @@ for(let kind=0;kind<projectionNames.length;kind++)for(const missing of[0,1]){
 }
 assert.deepEqual([...entered].sort(),Object.entries(core).filter(([,v])=>typeof v==='function').map(([name])=>name).sort(),'all62configuredentrypoints reached');
 writeFileSync(resolve(directory,'summary.json'),JSON.stringify({status:'PASS',comparisons,entered:[...entered].sort(),reference:'actual configured memory64 original C',typedReturnMatrix:projectionNames.map(name=>({name,positiveAlias:true,nullNativeCase:!['mkobj','mksobj'].includes(name),nonnullAttribute:['mkobj','mksobj'].includes(name)})),bindingProjectionCases:14,scope:'controlled private fixture; incomplete branch/native-host/shared/public coverage; mkobj/mksobj NULL forbidden by original NONNULL contract'},null,2));
-console.log(`READ PASS ${comparisons} original C/hybrid comparisons; ${entered.size} entrypoints reached.`);
+console.log(`READ PASS ${comparisons} original C/pure-JS comparisons; ${entered.size} entrypoints reached.`);

@@ -1,11 +1,14 @@
-import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
+import './pure-js-probes/deny-wasm.mjs';
+import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabelFor} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/sfstruct-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/sfstruct-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('sfstruct',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 import * as sfstruct from '../js/ported/sfstruct.js';
+const referenceLabel=referenceLabelFor('sfstruct');
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.sfstruct,runtime=createPortedRuntime(layouts);
 const modules=[await referenceBackend('sfstruct',emscriptenReferenceFactory)(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 function text(m,p){if(!p)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
@@ -62,4 +65,4 @@ reset();open();fill(13);opt(22,1);opt(23,1);io(6,0,9);assert.equal(modules[0]._p
 reset();open();fill(1);for(let i=0;i<100;i++){io(1);io(5,0,2);io(2);}io(3);
 // Actual JS execution in another Module shares no descriptor tracking or tables.
 reset();open();io(5,0,3);const savedPrimary=modules.map(snapshot),other=await hybridFactory({nethackPorted:runtime});other._probe_reset();other._probe_open(0,0);other._probe_io(1,0,0);assert.equal(other._probe_state(1,0),1n);modules.forEach((m,i)=>assert.deepEqual(snapshot(m),savedPrimary[i]));check();
-console.log(`SFSTRUCT: ${comparisons} ${referenceLabel}/hybrid serializers, native bytes, IO state, errors and callback comparisons checked.`);
+console.log(`SFSTRUCT: ${comparisons} ${referenceLabel}/pure-JS serializers, native bytes, IO state, errors and callback comparisons checked.`);

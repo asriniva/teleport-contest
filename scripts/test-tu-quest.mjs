@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('quest', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/quest-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/quest-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('quest',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),layout=layouts.quest;
@@ -62,4 +64,4 @@ reset();call('option',3,1);action(0);assert.equal(call('qget',2),1);
 reset();call('option',7,0);call('qset',4,7);call('qset',10,1);rng([0]);action(12);
 reset();const saved=snapshot(modules[0]);modules[1]._probe_qset(1,7);assert.deepEqual(snapshot(modules[0]),saved);reset();
 const sizes=modules.map(m=>allocationMetric(m)),pointers=modules.map(m=>m._malloc(40n*1024n*1024n));assert.ok(pointers.every(Boolean));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));action(9);victim(layout.MS_NEMESIS);action(17);call('inventory',7);action(8,0);modules.forEach((m,i)=>m._free(pointers[i]));state();
-console.log(`QUEST: ${comparisons} ${referenceLabel}/hybrid quest-state, dispatch, dialogue, expulsion, monster and RNG-site comparisons checked.`);
+console.log(`QUEST: ${comparisons} ${referenceLabel}/pure-JS quest-state, dispatch, dialogue, expulsion, monster and RNG-site comparisons checked.`);

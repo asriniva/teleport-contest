@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('unixtty', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/unixtty-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/unixtty-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('unixtty',options);
 import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 import { C, R, T } from '../js/c-runtime/context.js';
 
@@ -145,4 +147,4 @@ const independentRuntime = createPortedRuntime(layouts), independent = await hyb
 const beforeIndependent = state(); independent._probe_fixup(); independent._probe_options(0, 0, layout.B50, 0n, 1, 0);
 independent._probe_get(); independent._probe_fast(); independent._probe_set(0n);
 assert.deepEqual(state(), beforeIndependent); scope(); comparisons++;
-console.log(`UNIXTTY: ${comparisons} ${referenceLabel}/hybrid terminal-byte, baud, control-flag, variadic-error and nested-cleanup comparisons checked.`);
+console.log(`UNIXTTY: ${comparisons} ${referenceLabel}/pure-JS terminal-byte, baud, control-flag, variadic-error and nested-cleanup comparisons checked.`);

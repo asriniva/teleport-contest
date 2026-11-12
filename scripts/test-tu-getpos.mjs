@@ -1,13 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Configured Emscripten-C first pass. This cannot silently count as native C.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import * as getpos from '../js/ported/getpos.js';
 import {createGetposEnvironment} from '../js/nethack/bindings/getpos.js';
 import {withCEnvironment,C} from '../js/c-runtime/context.js';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw new Error('GETPOS native oracle pending; this staged suite compares configured Emscripten C only.');
+// Reference selection is handled by the original-C fixture backend.
 const dir=resolve(process.env.TELEPORT_GETPOS_PROBE_DIR??'.cache/tu-probes');
-const refFactory=(await import(pathToFileURL(resolve(dir,'getpos-reference.mjs')))).default,hybridFactory=(await import(pathToFileURL(resolve(dir,'getpos-hybrid.mjs')))).default;
+const refFactory=(await loadFixture("getpos",pathToFileURL(resolve(dir,'getpos-reference.mjs')))).default,hybridFactory=(await loadFixture("getpos",pathToFileURL(resolve(dir,'getpos-hybrid.mjs')))).default;
 const text=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.subarray(p,e)).toString('latin1');};
 const layout=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 const reference=await refFactory(),L=layout(reference),envs=new WeakMap();
@@ -52,4 +54,4 @@ scenario='default null goal help identity';reset();key('?');key('.');act(21,0,2)
 scenario='growth during pointer outputs';reset();act(0,1,2);opt(30,1);opt(31,1);key(0,7,8,1);act(21);assert.ok(trace().includes('growth;'));assert.ok(trace().includes('reentry:'));
 scenario='separate Module state and static buffers';const other=await hybridFactory({nethackPorted:runtime});other._probe_reset();other._probe_action(0,1,2,0);other._probe_action(15,44,33,1);const otherSnapshot=snap(other),otherEnv=envs.get(other),otherState=[otherEnv.getpos_hilitefunc,otherEnv.getpos_getvalid,otherEnv.getpos_hilite_state];reset();act(0,1,1);act(1);act(15,9,8,0);assert.deepEqual(snap(other),otherSnapshot);assert.deepEqual([otherEnv.getpos_hilitefunc,otherEnv.getpos_getvalid,otherEnv.getpos_hilite_state],otherState);comparisons++;
 scenario='dependency throw binding cleanup';let failedServices,entryStack;const throwingRuntime={getpos(services,name,...a){failedServices=services;entryStack=services.stackSave();const e=getEnv(services),saved=e.putstr;e.putstr=()=>{throw new Error('controlled GETPOS dependency throw');};try{return runtime.getpos(services,name,...a);}finally{e.putstr=saved;}}};const throwing=await hybridFactory({nethackPorted:throwingRuntime});throwing._probe_reset();const outerStack=throwing._probe_stack();assert.throws(()=>throwing._probe_action(5,0,0,0),/controlled GETPOS dependency throw/);assert.equal(C,undefined);assert.equal(throwing._probe_stack(),BigInt(entryStack));failedServices.stackRestore(Number(outerStack));assert.equal(throwing._probe_stack(),outerStack);comparisons++;
-console.log(`GETPOS: ${comparisons} configured Emscripten-C/JS comparisons passed; native and production promotion pending.`);
+console.log(`GETPOS: ${comparisons} configured original-C/pure-JS comparisons passed; native and production promotion pending.`);

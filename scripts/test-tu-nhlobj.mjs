@@ -1,4 +1,8 @@
-import {DataView,referenceBackend,referenceLabel,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("nhlobj");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView,referenceBackend,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -7,7 +11,7 @@ import {callNhlobj} from '../js/nethack/bindings/nhlobj.js';
 import * as core from '../js/ported/nhlobj.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const author=process.env.TELEPORT_NHLOBJ_PROBES,dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url);
-const referenceFactory=(await import(new URL('nhlobj-reference.mjs',dir))).default,hybridFactory=(await import(new URL('nhlobj-hybrid.mjs',dir))).default;
+const referenceFactory=(await loadFixture("nhlobj",new URL('nhlobj-reference.mjs',dir))).default,hybridFactory=(await loadFixture("nhlobj",new URL('nhlobj-hybrid.mjs',dir))).default;
 const ref=await referenceBackend('nhlobj',referenceFactory)();
 function text(m,p){if(!p)return null;let end=Number(p);while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(Number(p),end)).toString();}
 const L={size:Number(ref._probe_context_size())};for(let i=0;i<ref._probe_layout_count();i++){const k=text(ref,ref._probe_layout_name(i)),v=ref._probe_layout_value(i);L[k]=['NON_PM','LUA_REGISTRYINDEX'].includes(k)?Number(BigInt.asIntN(64,v)):Number(v);}
@@ -52,4 +56,4 @@ reset();call('new',L.ROCK);stringCall('push','o',0);call('release',0);check("ret
 reset();check("for i=1,96 do local x=obj.new('rock');getmetatable(x).__gc(x) end return '96'",'96');assert.equal(ref._probe_count(1),96);
 // Two actual Module instances share one JS runtime without sharing registration/native addresses.
 const other=await hybridFactory({nethackPorted:runtime});other._probe_reset();const before=modules[1]._probe_count(0);other._probe_new(L.CHEST);assert.equal(modules[1]._probe_count(0),before);comparisons++;
-console.log('NHLOBJ '+comparisons+' comparisons passed ('+referenceLabel+' vs JavaScript; actual C Lua5.4.8 + controlled object/timer world).');
+console.log('NHLOBJ '+comparisons+' comparisons passed ('+fixtureReferenceLabel+' vs JavaScript; actual C Lua5.4.8 + controlled object/timer world).');

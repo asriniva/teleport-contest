@@ -1,13 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Configured PLINE first-pass memory64 differential. Native and actual-game
 // gates are separate and remain pending until the integrating owner runs them.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createPlineBridge} from '../js/nethack/bindings/pline.js';
 import {C} from '../js/c-runtime/context.js';
 const directory=resolve(process.env.PLINE_PROBE_DIR??'.cache/tu-probes');
-const referenceFactory=(await import(pathToFileURL(resolve(directory,'pline-reference.mjs')))).default;
-const hybridFactory=(await import(pathToFileURL(resolve(directory,'pline-hybrid.mjs')))).default;
+const referenceFactory=(await loadFixture("pline",pathToFileURL(resolve(directory,'pline-reference.mjs')))).default;
+const hybridFactory=(await loadFixture("pline",pathToFileURL(resolve(directory,'pline-hybrid.mjs')))).default;
 const text=(m,at)=>{at=Number(at);let end=at;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.subarray(at,end)).toString('latin1');};
 const layouts=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 let comparisons=0,scenario='initial',sharedBridge;
@@ -51,4 +53,4 @@ for(const fork of[41,-1]){modules=await pair();scenario='handler '+fork;field(18
 modules=await pair();scenario='handler child failure';field(18,1);option(1,0);input('child payload');
 const child=modules.map(m=>{assert.throws(()=>m._probe_message(0,1),/PLINE fixture exit 1/);return{state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace())};});assert.deepEqual(child[1],child[0]);assert.equal(C,undefined);comparisons++;
 for(const fn of[0,1]){modules=await pair();scenario='format overflow panic';input('x'.repeat(1400));const states=modules.map(m=>{assert.throws(()=>m._probe_message(fn,1),/PLINE fixture exit 2/);return text(m,m._probe_trace());});assert.equal(states[1],states[0]);assert.equal(C,undefined);comparisons++;}
-console.log(`PLINE: ${comparisons} configured Emscripten-C/JS comparisons passed; native/production gates pending.`);
+console.log(`PLINE: ${comparisons} configured original-C/pure-JS comparisons passed; native/production gates pending.`);

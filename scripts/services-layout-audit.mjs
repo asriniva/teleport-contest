@@ -1,5 +1,6 @@
 // Development-only exact inverse for the preceding cleanup's historical audits.
 // Actual source hashes and the reproducible relocation are checked separately.
+import {migrationFiles,qualifiedHistorical} from './pure-js-fixtures/qualification.mjs';
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import{execFileSync}from'node:child_process';
 const recipe=()=>JSON.parse(fs.readFileSync('docs/runtime-environment/services-layout.json'));
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -16,7 +17,7 @@ export function currentSourcePath(file){const d=recipe(),p=path.relative(process
 export function readBeforeLayout(file,encoding){
  const d=recipe(),p=path.relative(process.cwd(),path.resolve(file)),row=d.files.find(r=>r.file===p||r.destination===p);
  let bytes;
- if(row){const actual=beforeFeatureBytes(row.destination);if(hash(actual)!==row.afterSha256){if(!successors.has(row.destination))throw Error('Relocated source changed: '+row.destination);historicalAfter(row.destination,row.afterSha256);}bytes=execFileSync('git',['show',d.baselineCommit+':'+row.file],{maxBuffer:32*1024*1024});if(hash(bytes)!==row.beforeSha256)throw Error('Historical source inverse differs: '+row.file);}
+ if(row){const actual=beforeFeatureBytes(row.destination);if(hash(actual)!==row.afterSha256){if(migrationFiles.has(row.destination))qualifiedHistorical(row.destination,row.afterSha256);else if(!successors.has(row.destination))throw Error('Relocated source changed: '+row.destination);if(!migrationFiles.has(row.destination))historicalAfter(row.destination,row.afterSha256);}bytes=execFileSync('git',['show',d.baselineCommit+':'+row.file],{maxBuffer:32*1024*1024});if(hash(bytes)!==row.beforeSha256)throw Error('Historical source inverse differs: '+row.file);}
  else bytes=successors.has(p)?historicalAfter(p):beforeFeatureBytes(p);
  return encoding?bytes.toString(encoding):bytes;
 }

@@ -1,5 +1,8 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 // Configured original-C/JS first pass; native-host and game parity remain separate.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {spawnSync} from 'node:child_process';
@@ -22,9 +25,9 @@ if(process.argv.includes('--build')) {
   if(r.status!==0)throw Error('ARTIFACT '+mode+' build failed; see private build log');
  }
 }
-const imports=new Set(WebAssembly.Module.imports(new WebAssembly.Module(await readFile(resolve(dir,'artifact-hybrid.wasm')))).filter(e=>e.kind==='function').map(e=>e.name));
+const imports=new Set((await fixtureImports("artifact")).filter(e=>e.kind==='function').map(e=>e.name));
 for(const f of schema.functions)assert.ok(imports.has(f.static?'teleport_artifact_test_'+f.name:f.name),'JS policy import '+f.name);
-const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathToFileURL(resolve(dir,'artifact-'+mode+'.mjs')).href)).default));
+const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await loadFixture("artifact",pathToFileURL(resolve(dir,'artifact-'+mode+'.mjs')).href)).default));
 const text=(m,p)=>{let i=Number(p),end=i;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(i,end)).toString('latin1');};
 function layout(m){const out={};for(let i=0;i<m._probe_layout_count();i++)out[text(m,m._probe_layout_name(i))]=m._probe_layout_value(i);return out;}
 const reference=await factories[0](),L=layout(reference),servicesByModule=new WeakMap(),environments=new WeakMap(),callbackCalls=new Map();
@@ -51,11 +54,11 @@ function input(s){for(const m of modules)m.HEAPU8.set(Buffer.from(s+'\0','latin1
 function arti(m,i){return global(m,'artilist')+BigInt(i*N('artifactSize'));}
 function afield(i,n,v){for(const m of modules)write(m,'artifact',arti(m,i),n,v);}
 function attack(i,member,n,v){for(const m of modules)write(m,'attack',read(m,'artifact',arti(m,i),member),n,v);}
-function gptr(name,v){for(const m of modules)new DataView(m.HEAPU8.buffer).setBigUint64(Number(global(m,name)),typeof v==='function'?v(m):BigInt(v),true);}
+function gptr(name,v){for(const m of modules)new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(global(m,name)),typeof v==='function'?v(m):BigInt(v),true);}
 function location(m,x,y){return nested(m,'svl',['level','locations']).at+BigInt((x*N('ROWNO')+y)*N('rmSize'));}
 function property(p,member,v){for(const m of modules){const at=read(m,'you',global(m,'u'),'uprops')+BigInt(N(p)*N('propSize'));write(m,'prop',at,member,v);}}
 const width=d=>d.t?Number(d.t.slice(1))/8:d.p!==undefined||d.f?8:d.s?N(d.s+'Size'):d.a.reduce((a,b)=>a*b,1)*width(d.e);
-function state(m){const out=[],dv=new DataView(m.HEAPU8.buffer);
+function state(m){if(m.isolatedCReference)return m.observe('const {L,schema,testConstantNames}=context;const reference=m,globals=schema.globals,kinds=Object.keys(schema.schema),FixtureDataView=DataView;const text='+text.toString()+';const ptr='+ptr.toString()+';const global='+global.toString()+';const N='+N.toString()+';const width='+width.toString()+';'+state.toString()+';return state(m);',{L,schema,testConstantNames});const out=[],dv=new FixtureDataView(m.HEAPU8.buffer);
  const scalar=(d,v,ct)=>{if(d.p!==undefined){if(/^(?:const )?char \*(?:const)?$/.test(ct))out.push(v?text(m,v):null);else out.push(m._probe_canonical(v).toString());}else if(d.f)out.push(v?1:0);else out.push(v.toString());};
  const value=(d,at,ct='')=>{if(d.s){for(const [i,f]of schema.schema[d.s].fields.entries()){const v=m._teleport_artifact_read(kinds.indexOf(d.s),at,i);if(f.d.s||f.d.a)value(f.d,v,f.ctype);else scalar(f.d,v,f.ctype);}return;}
   if(d.a){const child=d.a.length===1?d.e:{a:d.a.slice(1),e:d.e};for(let i=0;i<d.a[0];i++)value(child,at+BigInt(i*width(child)),ct.replace(/\[\d*\]/g,''));return;}
@@ -152,7 +155,7 @@ for(const mode of ['hidden','shown','door','container']) {
  if(mode==='hidden'||mode==='shown')option('t_at',1);
  if(mode==='shown')option('glyph_at',reference._probe_test_trap_glyph());
  if(mode==='door')for(const m of modules){write(m,'rm',location(m,20,10),'typ',N('DOOR'));write(m,'rm',location(m,20,10),'flags',N('D_TRAPPED'));}
- if(mode==='container')for(const m of modules){write(m,'obj',ptr(m,1),'otyp',N('CHEST'));write(m,'obj',ptr(m,1),'otrapped',1);const objects=nested(m,'svl',['level','objects']).at;new DataView(m.HEAPU8.buffer).setBigUint64(Number(objects)+((20*N('ROWNO')+10)*8),ptr(m,1),true);}
+ if(mode==='container')for(const m of modules){write(m,'obj',ptr(m,1),'otyp',N('CHEST'));write(m,'obj',ptr(m,1),'otrapped',1);const objects=nested(m,'svl',['level','objects']).at;new FixtureDataView(m.HEAPU8.buffer).setBigUint64(Number(objects)+((20*N('ROWNO')+10)*8),ptr(m,1),true);}
  action('count_surround_traps',20,10);gptr('uwep',m=>ptr(m,1,1));pfield('obj',1,1,'oartifact',N('ART_MASTER_KEY_OF_THIEVERY'));action('mkot_trap_warn');action('mkot_trap_warn');
 }
 for(const blind of [0,1])for(const count of [-1,0,1,5,13]) {

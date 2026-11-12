@@ -1,14 +1,14 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('isaac64', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/isaac64-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/isaac64-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/crypto.mjs';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 const reference = await referenceFactory();
-const hybrid = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
+const hybrid = await createPureJsProbe('isaac64', layouts);
 const modules = [reference, hybrid];
 const size = layouts.isaac64.size;
 const unsigned = value => BigInt.asUintN(64, value);
@@ -82,4 +82,4 @@ for (const [i, module] of modules.entries()) {
     assertMemoryGrowth(module, oldBuffer);
 }
 draw(original, 700);
-console.log(`ISAAC64: ${comparisons} ${referenceLabel} versus hybrid output/state comparisons checked.`);
+console.log(`ISAAC64: ${comparisons} ${referenceLabel} versus pure-JS output/state comparisons checked.`);

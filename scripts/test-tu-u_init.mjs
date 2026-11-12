@@ -1,13 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // First-pass configured Emscripten-C/JS differential; native/game/public pending.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import * as core from '../js/ported/u_init.js';
 import {createUInitBridge} from '../js/nethack/bindings/u_init.js';
 import {C} from '../js/c-runtime/context.js';
 const directory=resolve(process.env.U_INIT_PROBE_DIR??'.cache/tu-probes');
-const referenceFactory=(await import(pathToFileURL(resolve(directory,'u_init-reference.mjs')))).default;
-const hybridFactory=(await import(pathToFileURL(resolve(directory,'u_init-hybrid.mjs')))).default;
+const referenceFactory=(await loadFixture("u_init",pathToFileURL(resolve(directory,'u_init-reference.mjs')))).default;
+const hybridFactory=(await loadFixture("u_init",pathToFileURL(resolve(directory,'u_init-hybrid.mjs')))).default;
 const text=(m,at)=>{at=Number(at);let end=at;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.subarray(at,end)).toString('latin1');};
 const layouts=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 let comparisons=0,scenario='initial',bridge,modules,L,observe;
@@ -81,4 +83,4 @@ scenario='nudist pending quantity';reset();flags(0,1);call('trop',0,L.LEATHER_JA
 scenario='addinv merge identity';reset(777);role(12,1);option(11,1);invoke(1);invoke(2);invoke(1);invoke(2);
 // Separate actual modules share one runtime bridge while private data stays local.
 const old=modules;await pair();scenario='second Module';role(12,1);invoke(0);invoke(1);invoke(2);modules=old;reset(912);role(5,4);invoke(0);invoke(1);invoke(2);
-console.log(`U_INIT: ${comparisons} configured Emscripten-C/JS comparisons passed; native/game/public gates pending.`);
+console.log(`U_INIT: ${comparisons} configured original-C/pure-JS comparisons passed; native/game/public gates pending.`);

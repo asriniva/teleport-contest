@@ -1,15 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { DataView, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('stairs', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/stairs-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/stairs-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/stairs.mjs';
 import { C, R, T } from '../js/c-runtime/context.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 const layout = layouts.stairs;
-const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: createPortedRuntime(layouts) })];
+const modules = [await referenceFactory(), await createPureJsProbe(layouts)];
 let comparisons = 0;
 function scope() { assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined); }
 function cstring(module, pointer) {
@@ -170,10 +170,10 @@ modules.forEach(module => module._malloc(40n * 1024n * 1024n));
 modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 assert.deepEqual(state(), before);
 queries(0, 0, 1, 3); describe(0, 1); call('add', 77, 19, 0, 1, 2, 5);
-const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
+const independent = await createPureJsProbe(layouts);
 const unchanged = state();
 independent._probe_init(); independent._probe_hero(1, 1, 1); independent._probe_add(1, 1, 1, 1, 1, 2);
 assert.equal(nodes(independent).length, 1);
 independent._probe_free(); assert.deepEqual(state(), unchanged);
 call('free'); assert.equal(state().nodes.length, 0); scope();
-console.log(`STAIRS: ${comparisons} ${referenceLabel}/hybrid list, pointer, placement and description comparisons checked.`);
+console.log(`STAIRS: ${comparisons} ${referenceLabel}/pure-JS list, pointer, placement and description comparisons checked.`);

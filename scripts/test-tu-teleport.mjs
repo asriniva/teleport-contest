@@ -1,13 +1,15 @@
-import assert from 'node:assert/strict';
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import assert from './native-test-assert.mjs';
 import {readFile} from 'node:fs/promises';
 import {resolve,dirname,join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {createTeleportBridge} from '../js/nethack/bindings/teleport.js';
-if(process.env.TELEPORT_NATIVE_TESTS==='1')throw new Error('TELEPORT has no native reference fixture; Emscripten results cannot be labeled native.');
+// Reference selection is handled by the original-C fixture backend.
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dir=resolve(process.env.TELEPORT_PROBE_DIR??join(root,'.cache/teleport-first-pass'));
 const meta=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/teleport-abi.json'),'utf8'));
 const options=JSON.parse(await readFile(join(root,'nethack-c/wasm/tu-fragments/teleport-probe-options.json'),'utf8'));
-const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathToFileURL(join(dir,`teleport-${mode}.mjs`)).href)).default));
+const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await loadFixture("teleport",pathToFileURL(join(dir,`teleport-${mode}.mjs`)).href)).default));
 const decode=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return new TextDecoder().decode(m.HEAPU8.subarray(p,e));};
 const mods=await Promise.all(factories.map(f=>f()));
 const layout={};for(let i=0;i<mods[0]._probe_layout_count();i++){const n=decode(mods[0],mods[0]._probe_layout_name(i));layout[n]=Number(mods[0]._probe_layout_value(i));assert.equal(mods[1]._probe_layout_value(i),mods[0]._probe_layout_value(i));assert.equal(decode(mods[1],mods[1]._probe_layout_name(i)),n);}
@@ -85,4 +87,4 @@ equal(decode(isolated[0],isolated[0]._probe_trace()),decode(isolated[1],isolated
 const thrown=mods.map(m=>{m._probe_reset(91);m._probe_trap(0,layout.TELEP_TRAP,40,10,15,15,0);m._probe_option(32,1n);assert.throws(()=>call(m,'tele_trap',[ptr(m,3)]),/TELEPORT controlled callback/);m._probe_clear();call(m,'tele_trap',[ptr(m,3)]);return decode(m,m._probe_trace());});
 equal(thrown[0],thrown[1],'C recursion guard remains set after nonlocal callback exit');equal(thrown[0],'','guard rejects reentry after callback exit');
 const unaffected=isolated.map(m=>{m._probe_clear();call(m,'tele_trap',[ptr(m,3)]);return decode(m,m._probe_trace());});equal(unaffected[0],unaffected[1],'same bridge isolates another Module after thrown guard');assert.notEqual(unaffected[0],'','independent C guard remains clear');checks++;
-console.log(`TELEPORT: ${checks} actual Emscripten-C/JS comparisons, ${invoked.size}/${meta.names.length} configured functions invoked.`);
+console.log(`TELEPORT: ${checks} actual original-C/pure-JS comparisons, ${invoked.size}/${meta.names.length} configured functions invoked.`);

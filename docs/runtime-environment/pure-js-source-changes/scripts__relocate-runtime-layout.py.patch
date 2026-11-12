@@ -1,0 +1,22 @@
+--- a/scripts/relocate-runtime-layout.py
++++ b/scripts/relocate-runtime-layout.py
+@@ -4,6 +4,7 @@
+ from functools import lru_cache
+ from pathlib import Path
+ from services_layout_successors import ALLOWED,AUDIT_TOOLS,historical_after,historical_audit_tool,validate_cohort,verify_historical_output,CLEANUP_COMMIT
++from post_default_successors import validate_cohort as validate_post_default
+ ROOT=Path(__file__).resolve().parents[1]
+ MAP=ROOT/'docs/runtime-environment/services-layout-map.json'
+ config=json.loads(MAP.read_text());BASE=config['baselineCommit'];MOVES=config['moves'];NAMES=config['identifiers']
+@@ -151,6 +152,11 @@
+ def main():
+  parser=argparse.ArgumentParser();parser.add_argument('--write',action='store_true');parser.add_argument('--historical',action='store_true');args=parser.parse_args()
+  assert not(args.historical and args.write),'Historical reproduction is read-only; --historical --write is forbidden'
++ # The separate current native feature cohort is verified before reproducing
++ # any original cleanup outputs. A historical pass never accepts live outputs.
++ if(ROOT/'docs/runtime-environment/post-default-source-successors.json').exists():
++  validate_post_default(ROOT)
++  assert not args.write,'Refusing to overwrite qualified post-default features'
+  receipt_path=ROOT/'docs/runtime-environment/services-layout.json';prior=json.loads(receipt_path.read_text())if receipt_path.exists()else{}
+  post=lambda p:subprocess.check_output(['git','show',CLEANUP_COMMIT+':'+p],cwd=ROOT)
+  if args.historical:

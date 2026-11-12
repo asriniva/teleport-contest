@@ -1,11 +1,16 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("mthrowu");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
-import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend,referenceLabel} from './native-test-backend.mjs';
+import {DataView,assertStackRestored,memoryCheckpoint,assertMemoryGrowth,referenceBackend} from './native-test-backend.mjs';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {callMthrowu} from '../js/nethack/bindings/mthrowu.js';
 import * as core from '../js/ported/mthrowu.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const own=process.env.TELEPORT_MTHROWU_AUTHOR==='1';
-const ref=(await import(own?'../.cache/mthrowu-author/reference.mjs':'../.cache/tu-probes/mthrowu-reference.mjs')).default,hyb=(await import(own?'../.cache/mthrowu-author/hybrid.mjs':'../.cache/tu-probes/mthrowu-hybrid.mjs')).default;
+const ref=(await loadFixture("mthrowu",own?'../.cache/mthrowu-author/reference.mjs':'../.cache/tu-probes/mthrowu-reference.mjs')).default,hyb=(await loadFixture("mthrowu",own?'../.cache/mthrowu-author/hybrid.mjs':'../.cache/tu-probes/mthrowu-hybrid.mjs')).default;
 let reference=await referenceBackend('mthrowu',ref)();
 function text(m,p){p=Number(p);if(!p)return null;let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');}
 const measured={};for(let i=0;i<reference._probe_layout_count();i++)measured[text(reference,reference._probe_layout_name(i))]=Number(BigInt.asIntN(64,reference._probe_layout_value(i)));
@@ -48,7 +53,7 @@ reset();object(0,0,L.POT_ACID);attach(0,0);terrain(13,10,L.IRONBARS);opt('breaks
 for(const property of [null,L.CONFUSION,L.STUNNED,L.FUMBLING,L.BLINDED])for(const external of [0,1]){reset();opt('freehand',1);opt('acurr',18);if(property!==null)prop(property,external,1);rolls(0);const caught=act(8,0);const blocks=property!==null&&(property===L.CONFUSION||property===L.STUNNED?external===0:true);assert.equal(caught,blocks?0:1);}
 for(const gem of [L.FIRST_REAL_GEM,L.FIRST_GLASS_GEM,L.ROCK]){reset();mon(-1,0,L.PM_WHITE_UNICORN);object(0,0,gem);object(0,13,L.GEM_CLASS);const caught=act(7,0,0);assert.equal(caught,gem===L.ROCK?0:1);}
 // Returning weapons: persistent source timer, exact raw64 worn masks and damage cell.
-for(const tethered of [0,1])for(const outcome of [0,1,2]){reset();object(0,0,tethered?L.AKLYS:L.WAR_HAMMER);if(!tethered)object(0,10,L.ART_MJOLLNIR);object(0,11,1n<<63n);call('bhit',12,10);if(outcome===2)mon(0,3,1);rolls(outcome?1:0,1,1,2);act(10,0,0,tethered);if(outcome===1){assert.equal(Number(monster(0)[15]),tethered?0:-1);if(tethered){const p=Number(reference._probe_pointer(0,0));assert.ok(new DataView(reference.HEAPU8.buffer).getBigUint64(p+L.obj_owornmask,true)&(1n<<63n));}}}
+for(const tethered of [0,1])for(const outcome of [0,1,2]){reset();object(0,0,tethered?L.AKLYS:L.WAR_HAMMER);if(!tethered)object(0,10,L.ART_MJOLLNIR);object(0,11,1n<<63n);call('bhit',12,10);if(outcome===2)mon(0,3,1);rolls(outcome?1:0,1,1,2);act(10,0,0,tethered);if(outcome===1){assert.equal(Number(monster(0)[15]),tethered?0:-1);if(tethered){const p=Number(reference._probe_pointer(0,0));assert.ok(new FixtureDataView(reference.HEAPU8.buffer).getBigUint64(p+L.obj_owornmask,true)&(1n<<63n));}}}
 reset();hero(5,2000);call('bhit',12,10);rolls(1,1,1,1,1,1);act(10,0,0,1);const first=trace().match(/Projectile return/g)?.length??0;hero(5,2200);act(10,0,1,1);assert.equal(trace().match(/Projectile return/g)?.length??0,first);hero(5,2601);act(10,0,2,1);assert.ok((trace().match(/Projectile return/g)?.length??0)>first);
 // Inventory consumption and hero-versus-monster list identity.
 for(const qty of [1n,2n,(1n<<53n)+7n]){reset();object(0,1,qty);attach(0,0);assert.equal(act(25,0,L.DAGGER),0);act(16,0,0);if(qty===1n)assert.equal(obj(0),undefined);else assert.equal(BigInt(obj(0)[4]),qty-1n);}
@@ -70,4 +75,4 @@ reset();call('option',500,1n);object(0,1,4);rolls(1);act(4,0,0,-1);assert.ok(!tr
 for(const name of ['xname','obj_extract_self','place_object','dmgval','select_rwep']){reset();reference=await referenceBackend('mthrowu',ref)();modules[0]=reference;modules[1]=await hyb({nethackPorted:ported});stacks.splice(0,stacks.length,...modules.map(m=>m._probe_stack()));reset();const before=modules.map(memoryCheckpoint);call('callback',dependencies[name],dependencies[name]);object(0,1,2);attach(0,0,1);rolls(1,1,1,1,1);if(name==='xname'){act(22,10,10,15,10,1);act(5,0,0,-1);}else if(name==='dmgval'){call('bhit',15,10);rolls(0);act(6,0,0,0,1);}else if(name==='select_rwep')act(17,0);else act(9,0,15,10,-1,0,3,0);assert.ok(trace().includes('grow:'),name+': '+trace());assert.ok(trace().includes('reenter:'),name+': '+trace());modules.forEach((m,i)=>assertMemoryGrowth(m,before[i]));}
 // One dispatcher, two actual Modules; the second runs source functions and owns state.
 reset();call('bhit',12,10);hero(5,100000);rolls(1,1);act(10,0,0,1);const primary=snapshot(modules[1]),other=await hyb({nethackPorted:ported});other._probe_reset();other._probe_bhit(12,10);other._probe_roll(1);other._probe_roll(1);other._probe_action(10,0,0,1,0,0,0,0);assert.ok(text(other,other._probe_trace()).includes('Projectile return'));assert.deepEqual(snapshot(modules[1]),primary);check();
-console.log('MTHROWU: '+comparisons+' '+referenceLabel+'/hybrid tables, projectile ownership, combat state, callbacks and isolation comparisons passed.');
+console.log('MTHROWU: '+comparisons+' '+fixtureReferenceLabel+'/pure-JS tables, projectile ownership, combat state, callbacks and isolation comparisons passed.');

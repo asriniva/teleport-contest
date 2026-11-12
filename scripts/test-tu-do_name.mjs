@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Exact original EmC versus imported JS; foreign naming/UI dependencies controlled.
 import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';import{pathToFileURL}from'node:url';
 import * as data from '../js/ported/do_name.js';import{callDoName,initializeDoName}from'../js/nethack/bindings/do_name.js';import{C,R,T}from'../js/c-runtime/context.js';
 const dir=resolve(process.env.TELEPORT_DO_NAME_PROBE_DIR??'.cache/tu-probes');const path=k=>pathToFileURL(resolve(dir,(process.env.TELEPORT_DO_NAME_PROBE_DIR?'':'do_name-')+k+'.mjs'));
-const{default:rf}=await import(path('reference')),{default:hf}=await import(path('hybrid'));const reference=await rf();
+const{default:rf}=await loadFixture("do_name",path('reference')),{default:hf}=await loadFixture("do_name",path('hybrid'));const reference=await rf();
 function text(m,p){p=Number(p);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 const L={strings:{}};for(let i=0;i<reference._probe_layout_count();i++)L[text(reference,reference._probe_layout_name(i))]=Number(reference._probe_layout_value(i));for(let i=0;i<reference._probe_string_count();i++)L.strings[text(reference,reference._probe_string_name(i))]=text(reference,reference._probe_string_value(i));
 const runtime={initializeDoName,do_name:(services,name,...args)=>callDoName(new Proxy(services,{get(target,key,receiver){if(['rectState','trackState'].includes(key))return target[key];if(!Reflect.has(target,key))throw Error('Missing DO_NAME service '+String(key));return Reflect.get(target,key,receiver);}}),L,name,...args)};

@@ -1,7 +1,9 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Original configured EmC versus actual imported JS, controlled foreign world.
 import assert from './native-test-assert.mjs';import{resolve}from'node:path';import{pathToFileURL}from'node:url';import{callDokick}from'../js/nethack/bindings/dokick.js';import{C,R,T}from'../js/c-runtime/context.js';
 const dir=resolve(process.env.TELEPORT_DOKICK_PROBE_DIR??'.cache/tu-probes'),path=k=>pathToFileURL(resolve(dir,(process.env.TELEPORT_DOKICK_PROBE_DIR?'':'dokick-')+k+'.mjs'));
-const{default:rf}=await import(path('reference')),{default:hf}=await import(path('hybrid'));const reference=await rf();
+const{default:rf}=await loadFixture("dokick",path('reference')),{default:hf}=await loadFixture("dokick",path('hybrid'));const reference=await rf();
 function text(m,p){p=Number(p);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 const L={};for(let i=0;i<reference._probe_layout_count();i++)L[text(reference,reference._probe_layout_name(i))]=Number(reference._probe_layout_value(i));
 const runtime={dokick:(services,name,...args)=>callDokick(new Proxy(services,{get(o,k,r){if(['rectState','trackState'].includes(k))return o[k];if(!Reflect.has(o,k))throw Error('Missing DOKICK service '+String(k));return Reflect.get(o,k,r);}}),L,name,...args)};

@@ -1,13 +1,17 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("cfgfiles");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import assert from './native-test-assert.mjs';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {referenceBackend,referenceLabel,memoryCheckpoint,assertMemoryGrowth,assertStackRestored} from './native-test-backend.mjs';
+import {referenceBackend,memoryCheckpoint,assertMemoryGrowth,assertStackRestored} from './native-test-backend.mjs';
 import {withCEnvironment,C} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/cfgfiles.js';
 import {createCfgfilesEnvironment} from '../js/nethack/bindings/cfgfiles.js';
 const dir=resolve(process.env.CFGFILES_PROBE_DIR??'.cache/tu-probes'),schema=JSON.parse(await readFile(new URL('../nethack-c/wasm/tu-fragments/cfgfiles-schema.json',import.meta.url),'utf8'));
-const factory=async mode=>(await import(pathToFileURL(resolve(dir,'cfgfiles-'+mode+'.mjs')).href)).default;
+const factory=async mode=>(await loadFixture("cfgfiles",pathToFileURL(resolve(dir,'cfgfiles-'+mode+'.mjs')).href)).default;
 const rf=await factory('reference'),hf=await factory('hybrid'),reference=await referenceBackend('cfgfiles',rf)();
 function text(m,p){p=Number(p);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('utf8');}
 function layout(m){const out={};for(let i=0;i<m._probe_layout_count();i++)out[text(m,m._probe_layout_name(i))]=Number(BigInt.asIntN(64,m._probe_layout_value(i)));return out;}
@@ -30,7 +34,7 @@ for(const value of ['',',a','a,b,c','one,,three','abc,','a'])for(const rng of [0
 for(const value of ['[ choice ] # comment','[x]junk','[]','[ x ]',' x ','[x','[x] #ok','[ ]']){reset();action('is_config_section',m=>[input(m,value)]);action('handle_config_section',m=>[input(m,value)]);action('free_config_sections');}
 for(const value of ['NAME=value','NAME:value','a:b=c','noequal','']){reset();action('find_optparam',m=>[input(m,value)]);}
 // Every configured directive body runs through the actual imported ABI.
-for(const name of ops.filter(n=>n.startsWith('cnf_line_')))for(const value of ['5','0','-2','abc']){reset();option(5,L.set_in_sysconf);action(name,m=>[input(m,name==='cnf_line_WARNINGS'?'1 2 3 4 5 6':value)]);}
+for(const name of ops.filter(n=>n.startsWith('cnf_line_')))for(const value of ['5','0','-2','abc']){reset();option(5,L.set_in_sysconf);action(name,m=>[input(m,name==='cnf_line_WARNINGS'?'1 2 3 4 5 6':name==='cnf_line_OPTIONS'?'OPTIONS='+value:value)]);}
 for(const value of ['OPTIONS= a, b','NAME=  Test\t Name  ','CHARACTER=wizard','LEVELS=/tmp/fixture','SOUND=ignored','SOUNDDIR=ignored','unknown=3','missing','  dogname : Fido ','BOULDER=42','WARNINGS=1 2 3 4 5 6','LIVELOG=0xffff','LIVELOG=0x10000'])for(const src of [L.set_in_config,L.set_in_sysconf]){reset();option(5,src);action('parse_config_line',m=>[input(m,value)]);}
 reset();action('disregard_all_config_statements');action('parse_config_line',m=>[input(m,'NAME=ignored')]);for(const id of [-1,0,10,58,59,99]){action('heed_this_config_statement',[id]);action('disregard_this_config_statement',[id]);}action('heed_all_config_statements');action('set_ignore_errors_on_unmatched');action('config_unmatched_ignored');action('clear_ignore_errors_on_unmatched');action('config_unmatched_ignored');
 // Nested frames, secure early stop, Lua error list ownership and actual varargs.
@@ -63,4 +67,4 @@ const he=envs.get(hybrid),savedStack=hybrid._probe_stack(),savedFopen=he.fopen;h
 const hybrid2=await hf({nethackPorted:runtime});hybrid2._probe_reset();const he2=envs.get(hybrid2);assert.notEqual(he,he2);assert.notEqual(he.config_line_stmt,he2.config_line_stmt);assert.notEqual(he.disregarded_config_lines,he2.disregarded_config_lines);withCEnvironment(he2,core.set_ignore_errors_on_unmatched);assert.equal(he2.ignore_errors_on_unmatched,1);assert.equal(he.ignore_errors_on_unmatched,0);comparisons+=5;
 assert.equal(called.size,92);assert.equal(C,undefined);
 
-console.log(`cfgfiles: ${comparisons} ${referenceLabel}/JS state/trace/stdio/heap/varargs/callback/stack comparisons; all ${called.size} configured bodies directly exercised; controlled dependencies`);
+console.log(`cfgfiles: ${comparisons} ${fixtureReferenceLabel}/JS state/trace/stdio/heap/varargs/callback/stack comparisons; all ${called.size} configured bodies directly exercised; controlled dependencies`);

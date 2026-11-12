@@ -1,15 +1,15 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('rip', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/rip-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/rip-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/rip.mjs';
 import { C, R, T } from '../js/c-runtime/context.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
 const layout = layouts.rip;
-const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: createPortedRuntime(layouts) })];
+const modules = [await referenceFactory(), await createPureJsProbe(layouts)];
 let comparisons = 0;
 function scope() { assert.equal(C, undefined); assert.equal(R, undefined); assert.equal(T, undefined); }
 function bytes(module, pointer) {
@@ -107,10 +107,10 @@ const oldBuffers = modules.map(module => memoryCheckpoint(module));
 modules.forEach(module => module._malloc(40n * 1024n * 1024n));
 modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 run({ name: 'After growth', death: 'killed after memory grew', window: 0 });
-const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
+const independent = await createPureJsProbe(layouts);
 const before = modules.map(snapshot);
 inputs(independent, 'Independent', 42n, 'independent death', 19991231n);
 independent._probe_run(3, 19, -123n);
 assert.equal(Number(independent._probe_head()), 0);
 assert.deepEqual(modules.map(snapshot), before); scope(); comparisons++;
-console.log(`RIP: ${comparisons} ${referenceLabel}/hybrid byte-exact tombstone, callback, allocation and stack comparisons checked.`);
+console.log(`RIP: ${comparisons} ${referenceLabel}/pure-JS byte-exact tombstone, callback, allocation and stack comparisons checked.`);

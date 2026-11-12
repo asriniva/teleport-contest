@@ -1779,7 +1779,7 @@ void probe_reset(void){
  windowprocs.name="tty";windowprocs.wp_id=wp_tty;windowprocs.win_display_file=backend_file;windowprocs.win_number_pad=backend_pad;windowprocs.win_preference_update=backend_preference;windowprocs.win_create_nhwindow=create;windowprocs.win_destroy_nhwindow=destroy;windowprocs.win_clear_nhwindow=clear;windowprocs.win_display_nhwindow=display;windowprocs.win_putstr=put;windowprocs.win_start_menu=start;windowprocs.win_end_menu=end;windowprocs.win_curs=backend_curs;windowprocs.win_wait_synch=syncwin;windowprocs.win_mark_synch=syncwin;
  windowprocs.wincap=WC_COLOR|WC_HILITE_PET;windowprocs.wincap2=WC2_HITPOINTBAR|WC2_FLUSH_STATUS;
  flags.initrole=flags.initrace=flags.initgend=flags.initalign=ROLE_NONE;u.umonnum=u.umonster=PM_HUMAN;u.ulevel=1;u.ux=10;u.uy=8;u.uz.dnum=1;u.uz.dlevel=2;svp.plname[0]=0;strcpy(svp.pl_fruit,"slime mold");strcpy(flags.inv_order,"$)[%?+!=/(*`0_");go.opt_initial=TRUE;go.opt_phase=builtin_opt;
- if(grown){free(grown);grown=0;}memset(buf,0,sizeof buf);memset(opts,0,sizeof opts);memset(returns,0,sizeof returns);memset(replies,0,sizeof replies);input_n=input_i=select_n=select_i=callback_depth=0;rngstate=1;rngline=0;rngfile=rngfn=0;lastptr=0;free_count=0;strbuf_empty(&stringbuf);strbuf_init(&stringbuf);probe_clear();
+ if(grown){free(grown);grown=0;}memset(buf,0,sizeof buf);memset(opts,0,sizeof opts);memset(returns,0,sizeof returns);memset(replies,0,sizeof replies);strcpy(replies[42],"fixture");input_n=input_i=select_n=select_i=callback_depth=0;rngstate=1;rngline=0;rngfile=rngfn=0;lastptr=0;free_count=0;strbuf_empty(&stringbuf);strbuf_init(&stringbuf);probe_clear();
  if(!baseline_ready){allopt_array_init();memcpy(baseline,data_at(1),sizeof baseline);baseline_ready=1;probe_clear();}
 }
 

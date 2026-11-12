@@ -1,12 +1,16 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("dogmove");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {readFile} from 'node:fs/promises';
-import {referenceBackend,referenceLabel,memoryCheckpoint,assertMemoryGrowth,assertStackRestored} from './native-test-backend.mjs';
+import {referenceBackend,memoryCheckpoint,assertMemoryGrowth,assertStackRestored} from './native-test-backend.mjs';
 import {withCEnvironment,C} from '../js/c-runtime/context.js';
 import {createDogmoveEnvironment} from '../js/nethack/bindings/dogmove.js';
 import * as core from '../js/ported/dogmove.js';
-const dir=resolve(process.env.DOGMOVE_PROBE_DIR??'.cache/tu-probes'),factory=async mode=>(await import(pathToFileURL(resolve(dir,'dogmove-'+mode+'.mjs')).href)).default;
+const dir=resolve(process.env.DOGMOVE_PROBE_DIR??'.cache/tu-probes'),factory=async mode=>(await loadFixture("dogmove",pathToFileURL(resolve(dir,'dogmove-'+mode+'.mjs')).href)).default;
 const referenceFactory=await factory('reference'),hybridFactory=await factory('hybrid'),reference=await referenceBackend('dogmove',referenceFactory)();
 function text(m,p){p=Number(p);let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');}
 function readLayout(m){const l={};for(let i=0;i<m._probe_layout_count();i++)l[text(m,m._probe_layout_name(i))]=Number(m._probe_layout_value(i));return l;}
@@ -98,4 +102,4 @@ reset();pfield('edog',2,0,'hungrytime',coincident);field(hybrid,'edog',pointer(h
 reset();inv(0);option(29,1);option(30,1);option(31,1);const checkpoints=modules.map(memoryCheckpoint);action(6,0,4);modules.forEach((m,i)=>assertMemoryGrowth(m,checkpoints[i]));comparisons+=2;
 // Independent Modules retain distinct canonical records and private dummy storage.
 const hybrid2=await hybridFactory({nethackPorted:runtime});hybrid2._probe_reset();hybrid2._probe_action(0,0,0,0,0,0);const e1=environments.get(hybrid),e2=environments.get(hybrid2);assert.notEqual(e1.dummy,e2.dummy);assert.notEqual(e1.view('monst',pointer(hybrid,0)),e2.view('monst',pointer(hybrid2,0)));comparisons+=2;
-console.log(`dogmove: ${comparisons} ${referenceLabel}/JS raw-state, trace, pointer, long64, callback and stack comparisons; all 20 configured functions invoked, controlled world dependencies`);
+console.log(`dogmove: ${comparisons} ${fixtureReferenceLabel}/JS raw-state, trace, pointer, long64, callback and stack comparisons; all 20 configured functions invoked, controlled world dependencies`);

@@ -1,9 +1,11 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('iactions', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/iactions-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/iactions-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('iactions',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import * as actions from '../js/ported/iactions.js';
 import {C,R,T} from '../js/c-runtime/context.js';
@@ -50,4 +52,4 @@ reset();call('option',12,1);call('run');assert.ok(call('menu_count')>3);assert.o
 reset();item(layout.DAGGER,{unpaid:1});call('option',6,1);call('option',7,1);call('option',13,1);const callbackSizes=modules.map(m=>allocationMetric(m));call('run');modules.forEach((m,i)=>assert.ok(allocationMetric(m)>callbackSizes[i]));assert.ok(trace().includes('shop:-128;'));assert.ok(has(layout.IA_BUY_OBJ));
 reset();const saved=snapshot(modules[0]);modules[1]._probe_push(layout.IA_EAT_OBJ);assert.deepEqual(snapshot(modules[0]),saved);reset();
 const sizes=modules.map(m=>allocationMetric(m)),grown=modules.map(m=>m._malloc(BigInt(allocationMetric(m))+16n*1024n*1024n));assert.ok(grown.every(Boolean));modules.forEach((m,i)=>assert.ok(allocationMetric(m)>sizes[i]));item(layout.POT_OIL,{quantity:9007199254740993n});call('known',1);call('names',3,2);call('select',2,layout.IA_QUAFF_OBJ,9223372036854775807n);call('run');assert.equal(call('freed'),1);modules.forEach((m,i)=>m._free(grown[i]));state();
-console.log(`IACTIONS: ${comparisons} ${referenceLabel}/hybrid catalogue, naming, menu-union, selection ownership and command-queue comparisons checked.`);
+console.log(`IACTIONS: ${comparisons} ${referenceLabel}/pure-JS catalogue, naming, menu-union, selection ownership and command-queue comparisons checked.`);

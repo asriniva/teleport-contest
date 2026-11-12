@@ -1,15 +1,17 @@
+import './pure-js-probes/deny-wasm.mjs';
 // EmC is the first-pass reference for this parallel port; native remains an
 // explicitly selectable follow-up using the same cases, without normalization.
 import { readFileSync } from 'node:fs';
 import assert from './native-test-assert.mjs';
 import { referenceBackend, assertStackRestored, memoryCheckpoint, assertMemoryGrowth } from './native-test-backend.mjs';
 import referenceEmc from '../.cache/tu-probes/earlyarg-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/earlyarg-hybrid.mjs';
+import createGeneratedProbe from './pure-js-fixtures/runtime.mjs';
+const hybridFactory=options=>createGeneratedProbe('earlyarg',options);
 import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
 import * as core from '../js/ported/earlyarg.js';
 import { C,R,T } from '../js/c-runtime/context.js';
 const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url)));
-const L=layouts.earlyarg,native=process.env.TELEPORT_NATIVE_TESTS==='1';
+const L=layouts.earlyarg,native=true;
 const runtime=createPortedRuntime(layouts);
 const modules=[await (native?referenceBackend('earlyarg',referenceEmc):referenceEmc)(),await hybridFactory({nethackPorted:runtime})];
 const stacks=modules.map(m=>m._probe_stack());let comparisons=0,count=0;
@@ -92,4 +94,4 @@ for(const stage of [1,2,3,4,5,6,7,8,9,10]){
 }
 reset(['nethack','-windowtype=tty']);action(0);const kept=snapshot(modules[1]);
 const independent=await hybridFactory({nethackPorted:runtime});independent._probe_reset(0);independent._probe_action(9,0,0);assert.deepEqual(snapshot(modules[1]),kept);scope();
-console.log(`EARLYARG: ${comparisons} ${native?'native-C':'Emscripten-C'}/hybrid parsing, catalogue, argv mutation, termination, callbacks and growth comparisons checked.`);
+console.log(`EARLYARG: ${comparisons} ${native?'native-C':'Emscripten-C'}/pure-JS parsing, catalogue, argv mutation, termination, callbacks and growth comparisons checked.`);

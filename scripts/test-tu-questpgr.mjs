@@ -1,4 +1,9 @@
-import {DataView,Int32Array,referenceBackend,referenceLabel,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
+import './pure-js-probes/deny-wasm.mjs';
+import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
+const fixtureReferenceLabel=fixtureReferenceLabelFor("questpgr");
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
+import {DataView,Int32Array,referenceBackend,assertStackRestored,assertMemoryGrowth} from './native-test-backend.mjs';
 import assert from './native-test-assert.mjs';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -7,7 +12,7 @@ import {callQuestpgr} from '../js/nethack/bindings/questpgr.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 const author=process.env.TELEPORT_QUESTPGR_PROBES;
 const dir=author?pathToFileURL(resolve(author)+'/'):new URL('../.cache/tu-probes/',import.meta.url);
-const referenceFactory=(await import(new URL('questpgr-reference.mjs',dir))).default,hybridFactory=(await import(new URL('questpgr-hybrid.mjs',dir))).default;
+const referenceFactory=(await loadFixture("questpgr",new URL('questpgr-reference.mjs',dir))).default,hybridFactory=(await loadFixture("questpgr",new URL('questpgr-hybrid.mjs',dir))).default;
 const ref=await referenceBackend('questpgr',referenceFactory)();
 function text(m,p){let end=Number(p);while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(Number(p),end)).toString();}
 const L={size:Number(ref._probe_context_size())};for(let i=0;i<ref._probe_layout_count();i++){const k=text(ref,ref._probe_layout_name(i)),v=ref._probe_layout_value(i);L[k]=['NON_PM','A_CHAOTIC'].includes(k)?Number(BigInt.asIntN(64,v)):k==='M2_PNAME'?BigInt.asUintN(64,v).toString():Number(v);}
@@ -21,7 +26,7 @@ function state(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));ass
 function call(fn,...args){const result=modules.map(m=>m['_probe_'+fn](...args));assert.deepEqual(result[1],result[0],fn+'('+args+')');state();comparisons++;return result[0];}
 function string(fn,value){modules.forEach(m=>{const b=Buffer.from(value),p=m._malloc(BigInt(b.length+1));m.HEAPU8.set(b,Number(p));m.HEAPU8[Number(p)+b.length]=0;m['_probe_'+fn](BigInt(p));m._free(BigInt(p));});state();}
 const input=value=>string('input',value),source=value=>string('source',value),reset=(seed=42)=>call('reset',seed),act=(op,a=0,b=0,c=0)=>call('action',op,a,b,c);
-function rolls(values){modules.forEach(m=>{new Int32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});state();}
+function rolls(values){modules.forEach(m=>{new FixtureInt32Array(m.HEAPU8.buffer,Number(m._probe_rng_pointer()),values.length).set(values);m._probe_rng_length(values.length);});state();}
 // All original function entries, role names, articles and exact substitutions.
 reset();for(const typ of [0,L.MS_LEADER,L.MS_NEMESIS,L.MS_GUARDIAN,999])act(0,typ);for(const op of [1,2,6,7,8])act(op);
 for(const female of [0,1,-1,127])for(const level of [1,14,30]){reset();call('hero',0,BigInt(female));call('hero',1,BigInt(level));for(const ch of 'pcrRsSlioOn gGHaAdDCNLxZ%?'.replaceAll(' ',''))act(11,ch.charCodeAt(0));}
@@ -62,4 +67,4 @@ reset();string('level_message','Arrive %p\nAt %H');act(20);act(20);
 for(const body of ["text='Outer %p'","text='Outer one\\nOuter two'"]){reset();source("questtext={common={hello={"+body+"},nested={text='Nested %l'}}}");call('option',5,1);input('hello');act(17);}
 // Native Lua allocation grows memory while JS buffers and role views are live.
 reset();call('option',4,1);input('hello');const before=modules.map(m=>m.HEAPU8.buffer);act(17);modules.forEach((m,i)=>assertMemoryGrowth(m,before[i]));
-console.log('QUESTPGR '+comparisons+' comparisons passed ('+referenceLabel+' vs JavaScript; actual Lua5.4.8, controlled qtext/world).');
+console.log('QUESTPGR '+comparisons+' comparisons passed ('+fixtureReferenceLabel+' vs JavaScript; actual Lua5.4.8, controlled qtext/world).');

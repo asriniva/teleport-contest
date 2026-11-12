@@ -1,4 +1,6 @@
-import assert from 'node:assert/strict';
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
@@ -26,7 +28,7 @@ if(process.argv.includes('--build')){
  }
 }
 const text=(m,p)=>{p=Number(p);if(!p)return null;let end=p;while(end<m.HEAPU8.length&&m.HEAPU8[end])end++;assert.ok(end<m.HEAPU8.length,'terminated native string');return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');};
-const rf=(await import(pathToFileURL(resolve(dir,'decl-reference.mjs')))).default,hf=(await import(pathToFileURL(resolve(dir,'decl-hybrid.mjs')))).default;
+const rf=(await loadFixture("decl",pathToFileURL(resolve(dir,'decl-reference.mjs')))).default,hf=(await loadFixture("decl",pathToFileURL(resolve(dir,'decl-hybrid.mjs')))).default;
 const reference=await rf();const L={};for(let i=0;i<reference._teleport_decl_layout_count();i++)L[text(reference,reference._teleport_decl_layout_name(i))]=reference._teleport_decl_layout_value(i);
 const serviceObjects=new WeakMap(),environments=new WeakMap();
 const runtime={initializeDecl(s){serviceObjects.set(s.moduleKey,s);const env=initializeDecl(s,L);environments.set(s.moduleKey,env);},decl(s,n,...a){serviceObjects.set(s.moduleKey,s);return callDecl(s,L,n,...a);}};

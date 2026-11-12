@@ -1,13 +1,16 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
+import {DataView as FixtureDataView} from './native-test-backend.mjs';
 // Actual configured memory64 C vs imported JS; controlled world/window only.
-import assert from 'node:assert/strict';
+import assert from './native-test-assert.mjs';
 import{readFileSync,writeFileSync}from'node:fs';
 import {resolve as resolveProbe,dirname as dirnameProbe} from 'node:path';
 import {fileURLToPath as fileURLProbe,pathToFileURL as pathURLProbe} from 'node:url';
-if(process.env.TELEPORT_NATIVE_TESTS!=='0')throw Error('DISPLAY has no native reference fixture; Emscripten results cannot be labeled native.');
+// Original C reference is available through the isolated reference process.
 const displayProbeRoot=resolveProbe(dirnameProbe(fileURLProbe(import.meta.url)),'..');
 const displayProbeDir=resolveProbe(process.env.DISPLAY_PROBE_DIR??resolveProbe(displayProbeRoot,'.cache/display-first-pass'));
-const [refFactory,hybridFactory]=await Promise.all(['reference','hybrid'].map(async mode=>(await import(pathURLProbe(resolveProbe(displayProbeDir,'display-'+mode+'.mjs')).href)).default));
-const{callDisplay,initializeDisplay}=await import(process.env.DISPLAY_RUNTIME??'../js/nethack/bindings/display.js');
+const [refFactory,hybridFactory]=await Promise.all(['reference','hybrid'].map(async mode=>(await loadFixture("display",pathURLProbe(resolveProbe(displayProbeDir,'display-'+mode+'.mjs')).href)).default));
+const{callDisplay,initializeDisplay}=await loadFixture("display",process.env.DISPLAY_RUNTIME??'../js/nethack/bindings/display.js');
 const schema=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/display-schema.json',import.meta.url))),functions=JSON.parse(readFileSync(new URL('../nethack-c/wasm/tu-fragments/display-source-metadata.json',import.meta.url))).functions,names=functions.map(f=>f.name),kinds=Object.keys(schema.schema),covered=new Set();
 
 const output=[[],[]],ref=await refFactory({print:s=>output[0].push(['out',s]),printErr:s=>output[0].push(['err',s])}),hybrid=await hybridFactory({nethackPorted:{display:callDisplay,initializeDisplay:process.env.DISPLAY_STARTUP_NEGATIVE?()=>{}:initializeDisplay},print:s=>output[1].push(['out',s]),printErr:s=>output[1].push(['err',s])});const mods=[ref,hybrid];
@@ -37,7 +40,7 @@ const rawRegions=m=>{
   else if(t.includes('*'))result=[[0,t]];
   else if(!t.startsWith('union ')){const key=typeKey(t);if(key)for(const f of schema.schema[key].fields){if(f.bit)continue;const pattern=offsets(f.canonical);if(pattern.length){const base=ptr(m,0),off=addr(m,base,key,f.name)-base;for(const[o,ft]of pattern)result.push([off+o,ft]);}}}
   pointerLayouts.set(t,result);return result;};
- const visit=(at,t)=>{if(visited.has(at+':'+t))return;visited.add(at+':'+t);const dv=new DataView(m.HEAPU8.buffer);for(const[off,ft]of offsets(t)){const p=at+off,v=dv.getBigUint64(p,true),id=pointerID(m,v),r=regions.find(r=>p>=r.p&&p+8<=r.p+r.size);if(r&&!id.startsWith('UNKNOWN:')){r.pointers.push([p-r.p,id]);r.bytes.fill(0,p-r.p,p-r.p+8);}if(v&&v<=BigInt(Number.MAX_SAFE_INTEGER)){const pointee=ft.replace(/\s*\*\s*$/,'').trim(),key=typeKey(pointee);if(key&&rs.some(r=>v>=BigInt(r.p)&&v+BigInt(sizeOf(pointee)??0)<=BigInt(r.p+r.size)))visit(Number(v),pointee);}}};
+ const visit=(at,t)=>{if(visited.has(at+':'+t))return;visited.add(at+':'+t);const dv=new FixtureDataView(m.HEAPU8.buffer);for(const[off,ft]of offsets(t)){const p=at+off,v=dv.getBigUint64(p,true),id=pointerID(m,v),r=regions.find(r=>p>=r.p&&p+8<=r.p+r.size);if(r&&!id.startsWith('UNKNOWN:')){r.pointers.push([p-r.p,id]);r.bytes.fill(0,p-r.p,p-r.p+8);}if(v&&v<=BigInt(Number.MAX_SAFE_INTEGER)){const pointee=ft.replace(/\s*\*\s*$/,'').trim(),key=typeKey(pointee);if(key&&rs.some(r=>v>=BigInt(r.p)&&v+BigInt(sizeOf(pointee)??0)<=BigInt(r.p+r.size)))visit(Number(v),pointee);}}};
 
  for(const g of schema.globals)if(!['windowprocs','cg','shield_static','defsyms','def_warnsyms'].includes(g.name))visit(global(m,g.name),g.canonical);
  for(const [offset,t]of scratchTypes)visit(ptr(m,0)+offset,t);
@@ -62,7 +65,7 @@ assert.deepEqual(startup(hybrid),startup(ref),'all seven public full native byte
 assert.equal(Number(ref._probe_startup_size()),308125);
 console.log('PASS DISPLAY eager optimized extern constructor: all7/full308125bytes before first body');
 reset();
-const scalar=(m,off,t,v)=>{const p=ptr(m,0)+off,dv=new DataView(m.HEAPU8.buffer);if(t===8)dv.setBigInt64(p,BigInt(v),true);else if(t===4)dv.setInt32(p,v,true);else if(t===2)dv.setInt16(p,v,true);else dv.setInt8(p,v);};
+const scalar=(m,off,t,v)=>{const p=ptr(m,0)+off,dv=new FixtureDataView(m.HEAPU8.buffer);if(t===8)dv.setBigInt64(p,BigInt(v),true);else if(t===4)dv.setInt32(p,v,true);else if(t===2)dv.setInt16(p,v,true);else dv.setInt8(p,v);};
 const rec=(m,off)=>ptr(m,0)+off;
 const C=Object.fromEntries(schema.layoutKeys.map(k=>[k,L[k]]));
 for(const [,name,n]of readFileSync(new URL('../.cache/display-first-pass/macros.txt',import.meta.url),'utf8').matchAll(/^#define (DISP_\w+) \((-?\d+)\)$/gm))C[name]=+n;
@@ -90,7 +93,7 @@ for(const [x,y]of [[-32768,32767],[0,0],[40,10],[12345,-23456]]){
 }
 // Eager initialization occurs once, including native mutable public storage.
 setter(m=>m._probe_wallcolor(2,19));action('fn_cmap_to_glyph',[0]);
-for(const m of mods){const at=Number(m._teleport_display_storage(schema.statics.findIndex(s=>s.name==='wallcolors')));assert.equal(new DataView(m.HEAPU8.buffer).getInt32(at+8,true),19);}
+for(const m of mods){const at=Number(m._teleport_display_storage(schema.statics.findIndex(s=>s.name==='wallcolors')));assert.equal(new FixtureDataView(m.HEAPU8.buffer).getInt32(at+8,true),19);}
 
 // Exhaust all byte seenv vectors and eight packed wall modes across original
 // wall families. Native result, full packed map and accumulated diagnostics
@@ -131,7 +134,7 @@ for(const hallucinating of [0,1]){
   action('display_monster',m=>[35,10,ptr(m,1),sight,tail]);
  }
  setter(m=>{set(m,ptr(m,1),'monst','m_ap_type',0);set(m,ptr(m,1),'monst','m_lev',20);property(m,'WARNING',1);});action('display_warning',m=>[ptr(m,1)]);
- setter(m=>{const level=root(m,'svl','instance_globals_saved_l','level'),grid=addr(m,level,'dlevel_t','monsters');new DataView(m.HEAPU8.buffer).setBigUint64(grid+(35*21+10)*8,BigInt(ptr(m,1)),true);});
+ setter(m=>{const level=root(m,'svl','instance_globals_saved_l','level'),grid=addr(m,level,'dlevel_t','monsters');new FixtureDataView(m.HEAPU8.buffer).setBigUint64(grid+(35*21+10)*8,BigInt(ptr(m,1)),true);});
  action('newsym',[35,10]);setter(m=>set(m,global(m,'u'),'you','ustuck',ptr(m,1)));action('swallowed',[1]);
  for(const loc of [C.S_sw_tl,C.S_sw_br])action('swallow_to_glyph',[1,loc]);
  deferred=false;compare('positive display RNG/mimics '+hallucinating);if(hallucinating)assert.ok(ref._probe_draws()>30);
@@ -149,7 +152,7 @@ for(const style of [C.DISP_BEAM,C.DISP_ALL,C.DISP_TETHER,C.DISP_FLASH,C.DISP_ALW
 action('tmp_at',[C.DISP_ALL,C.GLYPH_CMAP_A_OFF]);for(let i=0;i<162;i++)action('tmp_at',[1+i%79,Math.floor(i/79)]);action('tmp_at',[C.DISP_FREEMEM,0]);
 deferred=false;compare('temporary glyph styles/nesting160bound/ownership');assert.ok(ref._probe_count()>=5);for(let i=0;i<ref._probe_count();i++)assert.equal(ref._probe_alloc_live(i),0);
 // Full aggregate copies preserve user unicode pointer aliases and padding.
-reset();setter(m=>{const row=Number(m._teleport_display_storage(schema.statics.findIndex(s=>s.name==='glyphmap')))+C.GLYPH_CMAP_A_OFF*32;m.HEAPU8.fill(0xA5,row,row+32);set(m,row,'glyph_map_entry','u',rec(m,6000));const sym=addr(m,row,'glyph_map_entry','sym');set(m,sym,'classic_representation','symidx',0);m.HEAPU8.fill(0x5A,rec(m,0),rec(m,48));});scratchTypes=[[0,'struct glyphinfo']];action('map_glyphinfo',m=>[35,10,C.GLYPH_CMAP_A_OFF,0,rec(m,0)]);for(const m of mods)assert.equal(new DataView(m.HEAPU8.buffer).getUint32(rec(m,8),true),0x5A5A5A5A,'map_glyphinfo leaves framecolor untouched');
+reset();setter(m=>{const row=Number(m._teleport_display_storage(schema.statics.findIndex(s=>s.name==='glyphmap')))+C.GLYPH_CMAP_A_OFF*32;m.HEAPU8.fill(0xA5,row,row+32);set(m,row,'glyph_map_entry','u',rec(m,6000));const sym=addr(m,row,'glyph_map_entry','sym');set(m,sym,'classic_representation','symidx',0);m.HEAPU8.fill(0x5A,rec(m,0),rec(m,48));});scratchTypes=[[0,'struct glyphinfo']];action('map_glyphinfo',m=>[35,10,C.GLYPH_CMAP_A_OFF,0,rec(m,0)]);for(const m of mods)assert.equal(new FixtureDataView(m.HEAPU8.buffer).getUint32(rec(m,8),true),0x5A5A5A5A,'map_glyphinfo leaves framecolor untouched');
 action('show_glyph',[35,10,C.GLYPH_CMAP_A_OFF]);action('flush_screen',[1]);
 // Accessibility's actual source caller reaches native by-value coord wrapper.
 reset();action('clear_glyph_buffer');setter(m=>set(m,global(m,'a11y'),'accessibility_data','glyph_updates',1));action('show_glyph',[37,9,C.GLYPH_CMAP_A_OFF]);assert.match(ref.UTF8ToString(Number(ref._probe_trace())),/coord-before:37,9/);

@@ -1,3 +1,5 @@
+import './pure-js-probes/deny-wasm.mjs';
+import {loadFixture} from './pure-js-fixtures/load.mjs';
 // Generated inputs; original compiled C supplies every expected result.
 import assert from 'node:assert/strict';
 import {readFileSync, mkdirSync, writeFileSync} from 'node:fs';
@@ -9,8 +11,8 @@ import {C} from '../js/c-runtime/context.js';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const directory=path.resolve(process.env.TELEPORT_NHLSEL_PROBE_DIR||path.join(root,'.cache/tu-probes'));
 const layouts=JSON.parse(readFileSync(path.join(root,'js/wasm/tu-layouts.json')));
-const referenceFactory=(await import(pathToFileURL(path.join(directory,'nhlsel-reference.mjs')))).default;
-const hybridFactory=(await import(pathToFileURL(path.join(directory,'nhlsel-hybrid.mjs')))).default;
+const referenceFactory=(await loadFixture('nhlsel',pathToFileURL(path.join(directory,'nhlsel-reference.mjs')))).default;
+const hybridFactory=(await loadFixture('nhlsel',pathToFileURL(path.join(directory,'nhlsel-hybrid.mjs')))).default;
 const reference=await referenceFactory();
 const hybrid=await hybridFactory({nethackPorted:createPortedRuntime(layouts)});
 const text=(m,p)=>{const heap=m.HEAPU8;let at=Number(p),end=at;while(heap[end])end++;return Buffer.from(heap.subarray(at,end)).toString();};

@@ -1,14 +1,14 @@
+import './pure-js-probes/deny-wasm.mjs';
 import { assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('drawing', emscriptenReferenceFactory);
 import assert from './native-test-assert.mjs';
 import { readFileSync } from 'node:fs';
 import emscriptenReferenceFactory from '../.cache/tu-probes/drawing-reference.mjs';
-import hybridFactory from '../.cache/tu-probes/drawing-hybrid.mjs';
-import { createPortedRuntime } from '../js/backends/emscripten/runtime.js';
+import createPureJsProbe from './pure-js-probes/drawing.mjs';
 import { C, R, T } from '../js/c-runtime/context.js';
 
 const layouts = JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json', import.meta.url)));
-const modules = [await referenceFactory(), await hybridFactory({ nethackPorted: createPortedRuntime(layouts) })];
+const modules = [await referenceFactory(), await createPureJsProbe(layouts)];
 const stacks = modules.map(module => module._probe_stack());
 let comparisons = 0;
 function scope() {
@@ -91,9 +91,9 @@ modules.forEach(module => module._malloc(40n * 1024n * 1024n));
 modules.forEach((module, i) => assertMemoryGrowth(module, oldBuffers[i]));
 modules.forEach((module, i) => assert.deepEqual(snapshot(module), initial[i]));
 for (let byte = 0; byte <= 255; byte++) for (const name of ['object', 'monclass', 'furniture']) lookup(name, byte);
-const independent = await hybridFactory({ nethackPorted: createPortedRuntime(layouts) });
+const independent = await createPureJsProbe(layouts);
 assert.deepEqual(snapshot(independent), initial[0], 'A fresh module also initializes every table before any lookup');
 independent._probe_object(65); independent._probe_monclass(64); independent._probe_furniture(60);
 modules.forEach((module, i) => assert.deepEqual(snapshot(module), initial[i]));
 scope(); comparisons++;
-console.log(`DRAWING: ${comparisons} ${referenceLabel}/hybrid startup-table, string-alias, char-lookup and memory-growth comparisons checked.`);
+console.log(`DRAWING: ${comparisons} ${referenceLabel}/pure-JS startup-table, string-alias, char-lookup and memory-growth comparisons checked.`);
