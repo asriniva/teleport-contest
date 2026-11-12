@@ -19,6 +19,12 @@ source.add('docs/runtime-environment/scalar-load-validation.json')
 source.update(json.loads((root/'docs/runtime-environment/scalar-load-validation.json').read_text())['rawProofs'])
 source.add('docs/runtime-environment/free-list-paired-ci-validation.json')
 source.update(json.loads((root/'docs/runtime-environment/free-list-paired-ci-validation.json').read_text())['rawProofs'])
+source.update(['scripts/load_plan_source_successor.py','scripts/test-load-plan-source-successor.py','scripts/test-c-runtime-load-plans.mjs','scripts/test-c-runtime-load-plan-mutations.mjs','scripts/benchmark-c-runtime-load-plans.mjs','docs/runtime-environment/load-plan-source-successor.patch'])
+source.add('docs/runtime-environment/numeric-guards-paired-ci-validation.json')
+source.update(json.loads((root/'docs/runtime-environment/numeric-guards-paired-ci-validation.json').read_text())['rawProofs'])
+for name in ['load-plan-validation.json','scalar-load-paired-ci-validation.json']:
+ source.add('docs/runtime-environment/'+name)
+ source.update(json.loads((root/'docs/runtime-environment'/name).read_text())['rawProofs'])
 proof=json.loads((root/'docs/runtime-environment/transport-allocation-native-evidence.json').read_text());source.update(proof['rawProofs']);decl=json.loads((root/'docs/runtime-environment/transport-allocation-source-successors.json').read_text());source.update(r['patch']for r in decl['files'].values());sha=lambda p:hashlib.sha256((root/p).read_bytes()).hexdigest();data={'version':1,'baseCommit':'1dab2c64a80d86e2398875c0e3d45017f174abf1','scope':'Current implementation/tool/evidence source closure; historical391-hash receipt remains unchanged. Not runtime/game acceptance.','sha256':{p:sha(p)for p in sorted(source)}};target=root/'docs/runtime-environment/transport-allocation-current-source.json'
 if '--check'in sys.argv:assert json.loads(target.read_text())==data,'Current transport source manifest changed';print('PASS',len(source),'current source/evidence hashes')
 else:target.write_text(json.dumps(data,indent=2)+'\n');print('Bound',len(source),'current source/evidence hashes')

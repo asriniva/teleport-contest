@@ -1,0 +1,4 @@
+{
+  "checks": 48,
+  "scope": "Pinned ec9917 vs actual production load-plan candidate: address-hook alias mutation, undefined-size reevaluation, repeated failures, enum replacement and view replacement."
+}

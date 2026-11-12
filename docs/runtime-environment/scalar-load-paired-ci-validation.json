@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "complete": true,
+  "ciRun": 43311304397,
+  "baselineCommit": "819d16fb5bcb59c96065a3519aa643a117cfc601",
+  "candidateCommit": "3107ac750ff06fd1556c5130d9d6be38bb5b386a",
+  "strictPublicPassed": {
+    "baseline": 44,
+    "candidate": 44
+  },
+  "changedInputs": [
+    "js/c-runtime/types.js"
+  ],
+  "baselineWallSeconds": 1222.6522068977356,
+  "candidateWallSeconds": 1213.2951278686523,
+  "wallRatio": 0.9923469004707192,
+  "geometricMeanSessionRatio": 0.9913237668541377,
+  "robustWholeGameSpeedupEstablished": false,
+  "deadlineTargetMet": false,
+  "rawProofs": {
+    "docs/runtime-environment/scalar-load-paired-ci-evidence/baseline-commit.txt": "d3aa4de686084ef36a7eb4a15f29c028a7045ef84caced2d9f26b38ddbc13ca3",
+    "docs/runtime-environment/scalar-load-paired-ci-evidence/baseline-post-run-integrity.json": "fa0853defd7e6d94bb419c17cffce35fd9799171819f143885ab4db55eb02404",
+    "docs/runtime-environment/scalar-load-paired-ci-evidence/baseline-pre-run-manifest.json": "94200002cc1b12abc0cd5b69929e768a8c69b0e1f1ce322ee0a87a06b4ccca7b",
+    "docs/runtime-environment/scalar-load-paired-ci-evidence/baseline-summary.json": "807835a936d726348e87dee29d2901f6a43eb494cf6f6b6ab46e8b82018b9ee3",
+    "docs/runtime-environment/scalar-load-paired-ci-evidence/candidate-commit.txt": "8f4820910795e5521fcbbee34bde71d1b2cb8baa2c61b4ac17568ccf50ee7817",
+    "docs/runtime-environment/scalar-load-paired-ci-evidence/candidate-post-run-integrity.json": "8202472107d85f4d06b6c6fbfae9a5090b18e56d95ec44e94bc0431b9e3ff1b8",
+    "docs/runtime-environment/scalar-load-paired-ci-evidence/candidate-pre-run-manifest.json": "270af28b23e04dfeb21324b6281c8de41b006c8ff28dc1d429c7ce6d53c16046",
+    "docs/runtime-environment/scalar-load-paired-ci-evidence/candidate-summary.json": "dd03444295fbfa86296a2e17d7e6d87036a0eb44b348e604e335ca0e8b3062d7",
+    "docs/runtime-environment/scalar-load-paired-ci-evidence/runtime-comparison.json": "484afac2d9d43448f3c5fa7c97ecd7d9832edb895e74ce0bb21df5cca828650a"
+  },
+  "limits": [
+    "Diagnostic timings with deadlines disabled; regular CI independently enforces upstream45-second per-session cutoff.",
+    "One sequential baseline/candidate pair on one host is descriptive; order, CPU frequency and host load may affect the result.",
+    "Public44 only; no held-out56 acceptance.",
+    "The45-second flags compare official replay durations; actual worker deadlines additionally include process/module overhead.",
+    "Measured reduction0.77% is small and one pair does not establish a robust whole-game speedup. This measures scalar method names, not the new load-plan candidate."
+  ]
+}

@@ -10,6 +10,9 @@ with tempfile.TemporaryDirectory()as temp:
   for file,row in q.FILES.items():
    for path in [file,row['patch']]:
     p=target/path;p.parent.mkdir(parents=True,exist_ok=True);data=(root/path).read_bytes()
+    if path=='js/c-runtime/types.js'and(root/'scripts/load_plan_source_successor.py').exists():
+     from load_plan_source_successor import qualified_before
+     data=qualified_before(root,path)
     p.write_bytes(data)
  def rejected(fn):
   global checks

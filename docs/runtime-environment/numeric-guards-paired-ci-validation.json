@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "complete": true,
+  "numericPairedCiRun": 43309071378,
+  "baselineCommit": "32d7615adb8338891bc29c0f73638fbee3bab830",
+  "candidateCommit": "819d16fb5bcb59c96065a3519aa643a117cfc601",
+  "strictPublicPassed": {
+    "baseline": 44,
+    "candidate": 44
+  },
+  "changedInputs": [
+    "js/c-runtime/adapter-factories.js"
+  ],
+  "baselineWallSeconds": 965.9370768070221,
+  "candidateWallSeconds": 956.117267370224,
+  "wallRatio": 0.9898339036024394,
+  "geometricMeanSessionRatio": 0.987003209851332,
+  "robustWholeGameSpeedupEstablished": false,
+  "scalarLoadDeadlineCiRun": 43311231800,
+  "scalarLoadDeadlineCommit": "3107ac750ff06fd1556c5130d9d6be38bb5b386a",
+  "deadlineMs": 45000,
+  "deadlinePassed": 39,
+  "deadlineTotal": 44,
+  "deadlineFailures": [
+    "seed0014-dequa-fountain-explore.session.json",
+    "seed0030-ten-diverse-deaths.session.json",
+    "seed0360-wizard-world-tour.session.json",
+    "seed0367-priest-quest-tour.session.json",
+    "seed4500-knight-coverage.session.json"
+  ],
+  "deadlineTargetMet": false,
+  "rawProofs": {
+    "docs/runtime-environment/numeric-guards-paired-ci-evidence/baseline-commit.txt": "ee0aefdba29976a82106926648a83e5ca475162e34b5ff7b95c4988e514fb69c",
+    "docs/runtime-environment/numeric-guards-paired-ci-evidence/baseline-post-run-integrity.json": "cbbc3b3d5ba5588d766404e24f50b04b9c2a90deb6d6f25a6f76bac1e1c471cb",
+    "docs/runtime-environment/numeric-guards-paired-ci-evidence/baseline-pre-run-manifest.json": "5361d2d18866d39f8a8b07fac565cf412b56752fac858e51365e80231a88ccce",
+    "docs/runtime-environment/numeric-guards-paired-ci-evidence/baseline-summary.json": "5f0bd11cd6c8c3a221e7061b94bfef0f98528936af4136236f7d9668ccf72ee7",
+    "docs/runtime-environment/numeric-guards-paired-ci-evidence/candidate-commit.txt": "d3aa4de686084ef36a7eb4a15f29c028a7045ef84caced2d9f26b38ddbc13ca3",
+    "docs/runtime-environment/numeric-guards-paired-ci-evidence/candidate-post-run-integrity.json": "dc51dcb6ea1bbbd86977097017759ed60a24a22a576db0ec01c5541e17a61f51",
+    "docs/runtime-environment/numeric-guards-paired-ci-evidence/candidate-pre-run-manifest.json": "94200002cc1b12abc0cd5b69929e768a8c69b0e1f1ce322ee0a87a06b4ccca7b",
+    "docs/runtime-environment/numeric-guards-paired-ci-evidence/candidate-summary.json": "f8ee0d14e80e78bd5557a60cdf3f305c36c1f077690bcc875c89808f040f170f",
+    "docs/runtime-environment/numeric-guards-paired-ci-evidence/runtime-comparison.json": "4626290a57e2b2c11ef6d1161fcc821fdd5a71f5e6cccd030d7a9aaf10fe5c61",
+    "docs/runtime-environment/numeric-guards-paired-ci-evidence/scalar-load-deadline-score-stderr.txt": "3577a13f6f4ea08525e1c8f6733fb21214aff5a0dacc9e8d137d65f3442fdba8",
+    "docs/runtime-environment/numeric-guards-paired-ci-evidence/scalar-load-deadline-score-stdout.txt": "40df9aabe54e84571d2f9ccfa898182a7d4a0e03c371d422b66a3a8c27ef925d"
+  },
+  "limits": [
+    "Diagnostic timings with deadlines disabled; regular CI independently enforces upstream45-second per-session cutoff.",
+    "One sequential baseline/candidate pair on one host is descriptive; order, CPU frequency and host load may affect the result.",
+    "Public44 only; no held-out56 acceptance.",
+    "The45-second flags compare official replay durations; actual worker deadlines additionally include process/module overhead.",
+    "Measured numeric batch reduction1.02% on CI is much smaller than the local unpaired timing difference; no causal interpretation of the local difference. One sequential pair does not establish a robust speedup. Scalar39/44 enforced gate is a separate host/run; passing one more session is not attributed to this one-file change. Scalar paired43311304397 remains pending."
+  ]
+}

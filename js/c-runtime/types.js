@@ -30,14 +30,23 @@ export function createCTypes(memory,metadata,bitfields,aliases={}) {
         return record(type).size;
     }
     const scalarLoads=new Map(Object.entries(scalars).map(([name,scalar])=>[name,'get'+scalar]));
+    const loadPlans=new Map();
+    function rememberLoad(input,bytes,method,enumType){if(typeof input==='string'&&Number.isSafeInteger(bytes)&&bytes>=0)loadPlans.set(input,{bytes,method,enumType});}
     function load(type,at) {
-        type=canonical(type);at=address(at);memory.bounds(at,size(type));
-        if(type.includes('['))return BigInt(at);
-        if(type.includes('*'))return memory.view.getBigUint64(at,true);
-        if(type.startsWith('enum ')){const item=metadata.enums[type];return memory.view['get'+(item.signed?'Int':'Uint')+item.size*8](at,true);}
-        const scalarLoad=scalarLoads.get(type);if(!scalarLoad){if(!scalars[type])return BigInt(at);return memory.view['get'+scalars[type]](at,true);}
-        return memory.view[scalarLoad](at,true);
+        const plan=typeof type==='string'?loadPlans.get(type):undefined;
+        if(!plan)return loadUncached(type,at);
+        at=address(at);memory.bounds(at,plan.bytes);if(plan.method)return memory.view[plan.method](at,true);if(plan.enumType){const item=metadata.enums[plan.enumType];return memory.view['get'+(item.signed?'Int':'Uint')+item.size*8](at,true);}return BigInt(at);
     }
+    function loadUncached(type,at) {
+        const input=type;
+        type=canonical(type);at=address(at);const bytes=size(type);memory.bounds(at,bytes);
+        if(type.includes('[')){rememberLoad(input,bytes);return BigInt(at);}
+        if(type.includes('*')){rememberLoad(input,bytes,'getBigUint64');return memory.view.getBigUint64(at,true);}
+        if(type.startsWith('enum ')){rememberLoad(input,bytes,undefined,type);const item=metadata.enums[type];return memory.view['get'+(item.signed?'Int':'Uint')+item.size*8](at,true);}
+        const scalarLoad=scalarLoads.get(type);if(!scalarLoad){if(!scalars[type]){rememberLoad(input,bytes);return BigInt(at);}return memory.view['get'+scalars[type]](at,true);}
+        rememberLoad(input,bytes,scalarLoad);return memory.view[scalarLoad](at,true);
+    }
+
     function store(type,at,value) {
         type=canonical(type);at=address(at);memory.bounds(at,size(type));
         if(type.includes('[')){memory.memmove(at,address(value),size(type));return;}

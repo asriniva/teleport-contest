@@ -1,0 +1,41 @@
+{
+  "results": [
+    {
+      "index": 0,
+      "variant": "combined",
+      "sourceSha256": "9df4138a1ba3e897d1d98b18d4cd6f8e6c7d2858738b56bab0c7078e7bcaa203",
+      "cpuSeconds": 137.076382,
+      "wallSeconds": 111.24031525012106,
+      "officialReplayMs": 110543.6,
+      "passed": true
+    },
+    {
+      "index": 1,
+      "variant": "split",
+      "sourceSha256": "21a3ca97e98fcf85032458a6a737e496d4c54fff1bb1d32822d3da305ae18ac5",
+      "cpuSeconds": 141.744989,
+      "wallSeconds": 115.52076683286577,
+      "officialReplayMs": 114924.95,
+      "passed": true
+    },
+    {
+      "index": 2,
+      "variant": "split",
+      "sourceSha256": "21a3ca97e98fcf85032458a6a737e496d4c54fff1bb1d32822d3da305ae18ac5",
+      "cpuSeconds": 146.636722,
+      "wallSeconds": 119.41078333277255,
+      "officialReplayMs": 118939.76,
+      "passed": true
+    },
+    {
+      "index": 3,
+      "variant": "combined",
+      "sourceSha256": "9df4138a1ba3e897d1d98b18d4cd6f8e6c7d2858738b56bab0c7078e7bcaa203",
+      "cpuSeconds": 162.714733,
+      "wallSeconds": 139.97749483259395,
+      "officialReplayMs": 139493.15,
+      "passed": true
+    }
+  ],
+  "scope": "ABBA diagnostic on one world-tour session in a plain751-input cache snapshot, not a Git worktree; no frozen/ported edits or sampler. No whole44/per-deadline speed claim."
+}
