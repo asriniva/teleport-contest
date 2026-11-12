@@ -1,5 +1,23 @@
 # Upstream divergence register
 
+Natural Mines progression verification (2026-11-12): the normal seed3 Samurai
+reaches D2/D3, enters The Gnomish Mines and descends through its first three levels
+using frozen literal MAIN keys. Five ordinary progression/return/revisit cases,
+real compressed save and four fresh C/JS producer/consumer restores pass61 checks.
+Complete recordings, input snapshots, both full RNG states/logs, raw TTY and
+normalized world identity graphs match original C. Restored consumers also travel
+up/down between Mines levels. Read-only map/stair/object observations are confined
+to the separate original-C route author; it reproduces the exact217-key route.
+No setup calls, game/RNG/input-depth writes, translated policy or frozen changes.
+
+Production sources remain d9554ab; all743 scored inputs match that checkpoint's
+strict44/44 proof, so this adds evidence without a new public replay invocation.
+An earlier evidence-write attempt failed with ENOSPC and remains recorded; only
+the complete final10-case run is accepted. Raw evidence archives now use gzip;
+all comparisons retain the full uncompressed data. See mines-main-validation.json.
+The optional mines-progression job extends the plan to28 jobs; combined28-job and
+natural complete-game victory remain unverified.
+
 Shared window-header integration (2026-11-12): eight missing windows.h aliases
 (create/destroy window, cursor, display, plain/mixed text and start/end menu)
 now delegate through the existing window owner and measured callback dispatchers.

@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "profile": {
+    "seed": 3,
+    "timezone": "UTC",
+    "options": "OPTIONS=!news,autopickup\n",
+    "argv": [
+      "-u",
+      "Ada-male-lawful",
+      "-p",
+      "Samurai",
+      "-r",
+      "human"
+    ]
+  },
+  "authorScope": "Original C with read-only terrain/stairs/object observations and literal keyboard actions only; no setup calls or game/RNG writes. BFS author ignores boulders instead of changing them.",
+  "dungeon": "The Gnomish Mines",
+  "cases": [
+    {
+      "name": "mines-arrival",
+      "keys": "  nhhhhjhhhhhhhhhkhhhhhhkohhhhkk> hhhhhhhkhhkhhhkkkhhkkkohhhhhhhhhhhhk> llkklllllkllollllllllllll> ",
+      "dnum": 2,
+      "dlevel": 1,
+      "moves": "68"
+    },
+    {
+      "name": "mines-second-level",
+      "keys": "  nhhhhjhhhhhhhhhkhhhhhhkohhhhkk> hhhhhhhkhhkhhhkkkhhkkkohhhhhhhhhhhhk> llkklllllkllollllllllllll> hhkhhhhhhjhhjjhj jjhh  hhhjhhhhhjjjjhjjjj> ",
+      "dnum": 2,
+      "dlevel": 2,
+      "moves": "102"
+    },
+    {
+      "name": "mines-third-level",
+      "keys": "  nhhhhjhhhhhhhhhkhhhhhhkohhhhkk> hhhhhhhkhhkhhhkkkhhkkkohhhhhhhhhhhhk> llkklllllkllollllllllllll> hhkhhhhhhjhhjjhj jjhh  hhhjhhhhhjjjjhjjjj> llllllklllllklklllllkkkllklljjjjjjj  lljjljjljjllll ll lllll ll kll  lljj> ",
+      "dnum": 2,
+      "dlevel": 3,
+      "moves": "161"
+    },
+    {
+      "name": "branch-return",
+      "keys": "  nhhhhjhhhhhhhhhkhhhhhhkohhhhkk> hhhhhhhkhhkhhhkkkhhkkkohhhhhhhhhhhhk> llkklllllkllollllllllllll> < ",
+      "dnum": 0,
+      "dlevel": 3,
+      "moves": "69"
+    },
+    {
+      "name": "branch-revisit",
+      "keys": "  nhhhhjhhhhhhhhhkhhhhhhkohhhhkk> hhhhhhhkhhkhhhkkkhhkkkohhhhhhhhhhhhk> llkklllllkllollllllllllll> < > ",
+      "dnum": 2,
+      "dlevel": 1,
+      "moves": "69"
+    }
+  ],
+  "saveKeys": "  nhhhhjhhhhhhhhhkhhhhhhkohhhhkk> hhhhhhhkhhkhhhkkkhhkkkohhhhhhhhhhhhk> llkklllllkllollllllllllll> hhkhhhhhhjhhjjhj jjhh  hhhjhhhhhjjjjhjjjj> Sy",
+  "restoreKeys": " < > ",
+  "restoreLevel": {
+    "dnum": 2,
+    "dlevel": 2
+  }
+}
