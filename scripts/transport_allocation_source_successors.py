@@ -53,6 +53,9 @@ def validate_cohort(root):
   if path=='js/c-runtime/heap.js'and(root/'scripts/free_list_source_successor.py').exists():
    from free_list_source_successor import qualified_before as allocator_before
    actual=allocator_before(root,path)
+  if path=='js/c-runtime/adapter-factories.js'and(root/'scripts/numeric_guards_source_successor.py').exists():
+   from numeric_guards_source_successor import qualified_before as numeric_before
+   actual=numeric_before(root,path)
   assert sha(actual)==row['afterSha256'],'Unqualified current transport allocation source: '+path
   patch_path=row['patch']
   assert patch_path.startswith('docs/runtime-environment/transport-allocation-source-successors/')and patch_path.endswith('.patch'),'Unexpected transport allocation patch path'

@@ -1,0 +1,26 @@
+{
+  "node": "v22.23.5",
+  "checks": 24985,
+  "timings": [
+    {
+      "name": "exactAddress Number",
+      "baselineMs": 13.256332999999984,
+      "candidateMs": 2.3307079999999587,
+      "speedup": 5.687685029613413
+    },
+    {
+      "name": "descriptor i32 Number",
+      "baselineMs": 36.684916999999984,
+      "candidateMs": 20.88712499999997,
+      "speedup": 1.7563411431683411
+    },
+    {
+      "name": "descriptor u32 Number",
+      "baselineMs": 36.563999999999965,
+      "candidateMs": 21.279292000000055,
+      "speedup": 1.7182902513861773
+    }
+  ],
+  "sink": 0,
+  "scope": "Synthetic outcome/side-effect checks and microbenchmarks; no C/recorder acceptance. Production candidate versus immutable 32d7615adb8338891bc29c0f73638fbee3bab830."
+}
