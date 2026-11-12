@@ -11,6 +11,11 @@ jobs:
   compare:
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    env:
+      STANDALONE_RECORDER_ASSETS: ''
+      STANDALONE_RECORDER_LAYOUTS: ''
+      STANDALONE_RECORD_LAYOUTS: ''
+      NODE_OPTIONS: ''
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

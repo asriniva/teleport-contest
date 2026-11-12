@@ -1,0 +1,7 @@
+{
+  "runtimeInputMembershipAndBytesUnchanged": true,
+  "filesChecked": 751,
+  "assetLayoutOverridesAbsent": true,
+  "overrideCheck": "Read-only live recorder parent9672 environment check found no STANDALONE_RECORDER_ASSETS, STANDALONE_RECORDER_LAYOUTS or legacy STANDALONE_RECORD_LAYOUTS entries. Other environment values were not displayed or retained.",
+  "launcherNote": "After launch, the new verifier guard was corrected to include the actual RECORDER_LAYOUTS variable name. After completion it was strengthened with its own hash, exact membership comparison and automatic strict postprocessing. These launcher changes did not alter any of this replay\u2019s751 runtime/harness/session inputs. This run was strictly postprocessed separately."
+}

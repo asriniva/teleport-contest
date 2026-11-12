@@ -18,6 +18,7 @@
   },
   "nativeAcceptancePending": false,
   "recorderAcceptancePassed": 44,
-  "performanceAcceptancePending": true,
-  "nativeEvidence": "docs/runtime-environment/type-metadata-validation.json"
+  "performanceAcceptancePending": false,
+  "nativeEvidence": "docs/runtime-environment/type-metadata-validation.json",
+  "pairedComparison": "docs/runtime-environment/type-metadata-paired-ci-validation.json"
 }

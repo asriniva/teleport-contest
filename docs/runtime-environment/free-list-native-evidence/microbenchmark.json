@@ -1,0 +1,313 @@
+{
+  "node": "v22.23.5",
+  "iterations": 12000,
+  "samples": 5,
+  "results": {
+    "1": {
+      "baselineMedianCpuMs": 3.703,
+      "candidateMedianCpuMs": 2.234,
+      "cpuRatio": 0.603294625978936,
+      "samples": {
+        "baseline": [
+          {
+            "cpuMs": 12.897,
+            "wallMs": 7.894959,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 4.015,
+            "wallMs": 2.5877499999999998,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 3.703,
+            "wallMs": 2.408416999999986,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 1.381,
+            "wallMs": 1.432374999999979,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 1.374,
+            "wallMs": 1.4521670000000029,
+            "checksum": 192000
+          }
+        ],
+        "candidate": [
+          {
+            "cpuMs": 10.253,
+            "wallMs": 5.3930839999999876,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 5.771,
+            "wallMs": 2.0459579999999846,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 2.234,
+            "wallMs": 1.5856670000000008,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 2.089,
+            "wallMs": 1.5691250000000139,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 1.015,
+            "wallMs": 1.060750000000013,
+            "checksum": 192000
+          }
+        ]
+      }
+    },
+    "2": {
+      "baselineMedianCpuMs": 2.285,
+      "candidateMedianCpuMs": 1.477,
+      "cpuRatio": 0.6463894967177243,
+      "samples": {
+        "baseline": [
+          {
+            "cpuMs": 4.928,
+            "wallMs": 3.49404100000001,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 2.355,
+            "wallMs": 2.5118339999999932,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 2.285,
+            "wallMs": 2.414332999999999,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 2.281,
+            "wallMs": 2.4285840000000007,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 2.278,
+            "wallMs": 2.4354999999999905,
+            "checksum": 192000
+          }
+        ],
+        "candidate": [
+          {
+            "cpuMs": 3.672,
+            "wallMs": 2.3120420000000195,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 3.016,
+            "wallMs": 2.178167000000002,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 1.471,
+            "wallMs": 1.4991249999999923,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 1.477,
+            "wallMs": 1.503124999999983,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 1.462,
+            "wallMs": 1.4738329999999848,
+            "checksum": 192000
+          }
+        ]
+      }
+    },
+    "8": {
+      "baselineMedianCpuMs": 3.985,
+      "candidateMedianCpuMs": 1.856,
+      "cpuRatio": 0.46574654956085326,
+      "samples": {
+        "baseline": [
+          {
+            "cpuMs": 3.985,
+            "wallMs": 4.171375000000012,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 3.985,
+            "wallMs": 4.134791000000007,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 3.987,
+            "wallMs": 4.127958000000007,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 3.914,
+            "wallMs": 4.008915999999999,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 3.667,
+            "wallMs": 3.741917000000001,
+            "checksum": 192000
+          }
+        ],
+        "candidate": [
+          {
+            "cpuMs": 1.889,
+            "wallMs": 1.9168749999999761,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 1.846,
+            "wallMs": 1.873207999999977,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 1.857,
+            "wallMs": 1.8826669999999979,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 1.856,
+            "wallMs": 1.8843749999999773,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 1.76,
+            "wallMs": 1.769042000000013,
+            "checksum": 192000
+          }
+        ]
+      }
+    },
+    "64": {
+      "baselineMedianCpuMs": 18.099,
+      "candidateMedianCpuMs": 5.557,
+      "cpuRatio": 0.3070335377645174,
+      "samples": {
+        "baseline": [
+          {
+            "cpuMs": 18.099,
+            "wallMs": 18.281750000000017,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 18.075,
+            "wallMs": 18.243291999999997,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 18.013,
+            "wallMs": 18.209959000000026,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 18.103,
+            "wallMs": 18.282875000000047,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 18.273,
+            "wallMs": 18.449292000000014,
+            "checksum": 192000
+          }
+        ],
+        "candidate": [
+          {
+            "cpuMs": 5.647,
+            "wallMs": 5.68462500000004,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 5.532,
+            "wallMs": 5.568417000000011,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 5.568,
+            "wallMs": 5.600250000000017,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 5.557,
+            "wallMs": 5.592457999999965,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 5.553,
+            "wallMs": 5.591083000000026,
+            "checksum": 192000
+          }
+        ]
+      }
+    },
+    "512": {
+      "baselineMedianCpuMs": 132.919,
+      "candidateMedianCpuMs": 34.122,
+      "cpuRatio": 0.2567127348234639,
+      "samples": {
+        "baseline": [
+          {
+            "cpuMs": 132.919,
+            "wallMs": 133.63008399999995,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 133.155,
+            "wallMs": 133.64158399999997,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 131.442,
+            "wallMs": 132.07387500000004,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 131.171,
+            "wallMs": 131.58362499999998,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 137.573,
+            "wallMs": 134.16558399999985,
+            "checksum": 192000
+          }
+        ],
+        "candidate": [
+          {
+            "cpuMs": 34.347,
+            "wallMs": 34.45324999999991,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 34.538,
+            "wallMs": 34.64104099999997,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 34.122,
+            "wallMs": 34.21249999999998,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 34.109,
+            "wallMs": 34.22249999999997,
+            "checksum": 192000
+          },
+          {
+            "cpuMs": 33.953,
+            "wallMs": 34.00845800000002,
+            "checksum": 192000
+          }
+        ]
+      }
+    }
+  },
+  "scope": "Synthetic fragmented allocation/free loops. Not native or whole-game performance acceptance."
+}

@@ -1,0 +1,5 @@
+{
+  "checks": 1129366,
+  "steps": 86284,
+  "scope": "Synthetic differential allocator experiment; not native or recorder acceptance."
+}

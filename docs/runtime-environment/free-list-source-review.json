@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "scope": "Exact allocator source inverse only, not native acceptance.",
+  "baseCommit": "28ec0f3a921fe472b505242e1bc005aeba44b700",
+  "file": "js/c-runtime/heap.js",
+  "beforeSha256": "0322705c885350962c95f3a587316725114bd4c334dc85e42466843c30827686",
+  "afterSha256": "7f1694bd3dc090cc19e3c65b71475015b822c15b0936909d50de64bfcfd4d3fa",
+  "patch": "docs/runtime-environment/free-list-source-successor.patch",
+  "patchSha256": "05026e1c0f242f49c63d7324ae7e49fac6e5421ece476bac64f42cb3dc5c08bb",
+  "nativeAcceptancePending": false,
+  "recorderAcceptancePending": false,
+  "strictPublicPassed": 44,
+  "nativeEvidence": "docs/runtime-environment/free-list-validation.json",
+  "performanceAcceptancePending": true
+}

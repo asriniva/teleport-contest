@@ -25,12 +25,12 @@
     "docs/runtime-environment/type-metadata-native-evidence/public-cpu-profile.json": "fd6339bfd0c30dd050231094741813f145976c6e875068e406f92b12b4f68767",
     "docs/runtime-environment/type-metadata-native-evidence/microbenchmark.json": "04f1120d68220d98142eb90b82d4c1f5a43c4be89d1e7c508f1cefdfb71d9929"
   },
-  "scope": "Two-file metadata optimization.69 connected original-C checks,1294 shared runtime comparisons,478 synthetic API contracts and44 strict public sessions pass. Whole-game speed comparison remains pending because local timing was CPU-contended; paired same-runner CI is prepared. Upstream45-second per-session target is not achieved or claimed.",
+  "scope": "Two-file metadata optimization at28ec0f3:69 connected C checks,1294 shared runtime checks,478 differential contracts and44 strict public recordings pass. Paired CI43292886673 also passes44/44 on each side and improves batch wall time by11.82% on one sequential same-host pair. Separate enforced45-second CI passes38/44; target remains unmet. Not a universal speed guarantee or held-out acceptance.",
   "strictPublicPassed": 44,
   "allProfiledWorkers": 44,
   "profileWallSeconds": 1239.7770371437073,
-  "performanceAcceptancePending": true,
-  "wholeGameSpeedupAccepted": false,
+  "performanceAcceptancePending": false,
+  "wholeGameSpeedupAccepted": true,
   "microbenchmarkCpuRatios": {
     "description": 0.43759117698547,
     "fieldRead": 0.4949859699158195,
@@ -135,5 +135,9 @@
       "sampledMs": 14130.957,
       "percent": 1.151
     }
-  ]
+  ],
+  "validatedProductionCommit": "28ec0f3a921fe472b505242e1bc005aeba44b700",
+  "pairedComparison": "docs/runtime-environment/type-metadata-paired-ci-validation.json",
+  "upstream45GatePassed": 38,
+  "upstream45GateTotal": 44
 }

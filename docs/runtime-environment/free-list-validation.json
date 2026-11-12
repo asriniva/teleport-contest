@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "complete": true,
+  "baseCommit": "28ec0f3a921fe472b505242e1bc005aeba44b700",
+  "candidateRuntimeSourceSha256": {
+    "js/c-runtime/heap.js": "7f1694bd3dc090cc19e3c65b71475015b822c15b0936909d50de64bfcfd4d3fa"
+  },
+  "nativeGameChecks": 69,
+  "sharedOriginalCRuntimeChecks": 1294,
+  "syntheticAllocatorChecks": 1129366,
+  "syntheticAllocatorOperations": 86284,
+  "sourceQualificationNegativeChecks": 7,
+  "strictPublicPassed": 44,
+  "performanceAcceptancePending": true,
+  "wholeGameSpeedupAccepted": false,
+  "microbenchmarkCpuRatios": {
+    "1": 0.603294625978936,
+    "2": 0.6463894967177243,
+    "8": 0.46574654956085326,
+    "64": 0.3070335377645174,
+    "512": 0.2567127348234639
+  },
+  "localUnprofiledWallSeconds": 675.4838681221008,
+  "rawProofs": {
+    "docs/runtime-environment/free-list-native-evidence/differential.json": "c0d4750e4e722a253b65466a36687161884c1b0cb412bb4f1f111b1454e5deab",
+    "docs/runtime-environment/free-list-native-evidence/differential.log": "81b6259e0a74e51c8f29e169ea86cc7787572f5ccebdd894aaac2c93af990337",
+    "docs/runtime-environment/free-list-native-evidence/microbenchmark.json": "286187998ecd81d9603a5de8ca7c6b50b564a2af31359529f0b6d39198d8d039",
+    "docs/runtime-environment/free-list-native-evidence/native-runtime.log": "e543ecb72d2d6b8685fef88ee30558fdb0d7c2a40a43a63237ddcaf6081d2410",
+    "docs/runtime-environment/free-list-native-evidence/ordinary-game.json": "cb4bf288e24b0c83bbe9e86a31fe57c37defa6f2bb669f6fdd9ebb00167d1d66",
+    "docs/runtime-environment/free-list-native-evidence/engulf.json": "f790d52de09db4f63bce1d654c8d077661d1aa8223cf141abec3905b6c9ef4fa",
+    "docs/runtime-environment/free-list-native-evidence/public-summary.json": "902366547a9c436b2ced2d81efd1249284fa67d69f1ed1725047af84308fd1b6",
+    "docs/runtime-environment/free-list-native-evidence/public-official-results.json": "6db87292868e1b73cad9ba455a6d90414f7c2fa563b695120c0899c151bb6dc7",
+    "docs/runtime-environment/free-list-native-evidence/public-pre-run.json": "d663d672e80d6ce5949c2db995aa3ec54d7d7c78114392556589570b0b64d0c2",
+    "docs/runtime-environment/free-list-native-evidence/public-integrity.json": "8ad96b6d13f8743127b5b8c656241abcc43cb5dc7c3bbb3d2a2c26d037d224cd",
+    "docs/runtime-environment/free-list-native-evidence/launcher-integrity-note.json": "d447127fe502d939b0064d76ee53f580e2c6e621415ba4b6e42e4c74c008a320"
+  },
+  "scope": "Sorted insertion/local neighbor coalescing preserves preceding JS allocator results, heap bytes, first-fit addresses, available-array and block aliases, allocation identity and errors.69 connected C comparisons,1294 shared C-runtime comparisons and44 strict recordings pass. Microbenchmarks are synthetic; paired CI whole-game speed comparison and upstream45-second success remain unproved. No translated/frozen changes."
+}

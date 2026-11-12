@@ -50,6 +50,9 @@ def validate_cohort(root):
   assert(old is None)==(path in NEW_FILES),'Unexpected historically absent source: '+path
   assert row.get('beforeSha256')==(None if old is None else sha(old)),'transport allocation baseline source differs: '+path
   actual=(root/path).read_bytes()
+  if path=='js/c-runtime/heap.js'and(root/'scripts/free_list_source_successor.py').exists():
+   from free_list_source_successor import qualified_before as allocator_before
+   actual=allocator_before(root,path)
   assert sha(actual)==row['afterSha256'],'Unqualified current transport allocation source: '+path
   patch_path=row['patch']
   assert patch_path.startswith('docs/runtime-environment/transport-allocation-source-successors/')and patch_path.endswith('.patch'),'Unexpected transport allocation patch path'
