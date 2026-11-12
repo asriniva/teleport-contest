@@ -4,12 +4,12 @@
   "acceptedCheckpoint": "d3f8cce27971690b66ef42555070b5d0eef252d2",
   "counts": {
     "canonical-dependency": 1,
-    "in-progress": 48,
-    "not-connected": 9,
+    "in-progress": 56,
+    "not-connected": 2,
     "provider-only": 1,
     "transport-only": 3,
     "verified-component": 10,
-    "verified-subset": 66
+    "verified-subset": 65
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -95,8 +95,10 @@
     {
       "module": "utf8map",
       "source": "src/utf8map.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Existing merged Unicode provider has503 configured component comparisons; no natural full-game or wider Unicode acceptance.",
+      "evidence": "docs/runtime-environment/utf8map.json",
+      "qualification": "These are retained merged checkpoint results, not freshly rerun current-assembly comparisons; they establish connection, not complete module or game acceptance."
     },
     {
       "module": "drawing",
@@ -142,8 +144,10 @@
     {
       "module": "extralev",
       "source": "src/extralev.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Existing merged Rogue generator has43 source-created level-generation comparisons; ordinary Rogue-level traversal remains unverified.",
+      "evidence": "docs/runtime-environment/obscure-interactions.json and special-interactions.json",
+      "qualification": "These are retained merged checkpoint results, not freshly rerun current-assembly comparisons; they establish connection, not complete module or game acceptance."
     },
     {
       "module": "mplayer",
@@ -176,8 +180,10 @@
     {
       "module": "write",
       "source": "src/write.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Existing merged source writing subset is covered in corrected413-check interaction cohort; other writing/device variants remain unverified.",
+      "evidence": "docs/runtime-environment/obscure-interactions.json and special-interactions.json",
+      "qualification": "These are retained merged checkpoint results, not freshly rerun current-assembly comparisons; they establish connection, not complete module or game acceptance."
     },
     {
       "module": "mdlib",
@@ -203,8 +209,10 @@
     {
       "module": "iactions",
       "source": "src/iactions.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Existing merged item menus have289 selected comparisons, including real queued actions; broader menu matrix remains unverified.",
+      "evidence": "docs/runtime-environment/obscure-interactions.json and special-interactions.json",
+      "qualification": "These are retained merged checkpoint results, not freshly rerun current-assembly comparisons; they establish connection, not complete module or game acceptance."
     },
     {
       "module": "selvar",
@@ -223,14 +231,18 @@
     {
       "module": "sit",
       "source": "src/sit.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Existing merged source sit entry has selected corrected interaction coverage; throne and rare outcomes remain unverified.",
+      "evidence": "docs/runtime-environment/obscure-interactions.json and special-interactions.json",
+      "qualification": "These are retained merged checkpoint results, not freshly rerun current-assembly comparisons; they establish connection, not complete module or game acceptance."
     },
     {
       "module": "fountain",
       "source": "src/fountain.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Existing merged source sink/fountain subset has corrected component coverage with source terrain setup; natural encounter matrix remains unverified.",
+      "evidence": "docs/runtime-environment/obscure-interactions.json and special-interactions.json",
+      "qualification": "These are retained merged checkpoint results, not freshly rerun current-assembly comparisons; they establish connection, not complete module or game acceptance."
     },
     {
       "module": "objects",
@@ -263,8 +275,10 @@
     {
       "module": "music",
       "source": "src/music.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "in-progress",
+      "scope": "Existing merged source instruments have321 selected comparisons plus corrected interaction coverage; optional variants remain unverified.",
+      "evidence": "docs/runtime-environment/obscure-interactions.json and special-interactions.json",
+      "qualification": "These are retained merged checkpoint results, not freshly rerun current-assembly comparisons; they establish connection, not complete module or game acceptance."
     },
     {
       "module": "version",
@@ -307,9 +321,10 @@
     {
       "module": "steed",
       "source": "src/steed.c",
-      "status": "verified-subset",
-      "scope": "Real place_monster/can_saddle plus put_saddle_on_mon verified in actual pony creation, including complete saddle nonpointer bytes, owner ID, worn mask, discovery and RNG. Riding/world cleanup remain unfinished.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
+      "status": "in-progress",
+      "scope": "Existing merged source riding subset has171 comparisons, real saddling/mount/dismount and prompt cancellation; rare riding/petrification variants remain unverified.",
+      "evidence": "docs/runtime-environment/obscure-interactions.json and special-interactions.json",
+      "qualification": "These are retained merged checkpoint results, not freshly rerun current-assembly comparisons; they establish connection, not complete module or game acceptance."
     },
     {
       "module": "wizard",
@@ -413,7 +428,7 @@
       "module": "bones",
       "source": "src/bones.c",
       "status": "in-progress",
-      "scope": "Original single BONES context supports nonempty real death writing and fresh cross-loading. Four C/JS producer-consumer combinations pass31 grouped recording/RNG/world checks for captured Samurai D5 artifacts. Complete current producer recording rerun pending caller-label correction; other bones variants remain unverified.",
+      "scope": "Original single BONES context supports nonempty real death writing and fresh cross-loading. Four C/JS producer-consumer combinations pass31 grouped recording/RNG/world checks for captured Samurai D5 artifacts. Current depth5 ordinary producer recording passes20 comparisons through move2376/2752inputs/2945frames with exact RNG logs and stable543-file assembly; post-cleanup heap graph outside acceptance; other bones variants remain unverified.",
       "evidence": "scripts/test-standalone-bones-consumer.mjs and docs/runtime-environment/progression-evidence.json"
     },
     {
@@ -673,8 +688,8 @@
       "module": "detect",
       "source": "src/detect.c",
       "status": "in-progress",
-      "scope": "24 public entries share original cached native context/private backing. Genuine Tourist initial mapping-scroll read passes157 comparisons, consumes one scroll at turn2, with exact recording/full RNG/world. Other detection variants remain separately scoped.",
-      "evidence": "scripts/test-standalone-detect.mjs"
+      "scope": "24 public entries share original cached native context/private backing. Genuine Tourist initial mapping-scroll read passes157 comparisons, consumes one scroll at turn2, with exact recording/full RNG/world. Other detection variants remain separately scoped. Three source-created devices at actual MAIN read/quaff/zap boundaries pass190 comparisons: gold scroll, monster potion, secret-detection wand; actual trap discovery and charge consumption. Device acquisition is controlled, other variants unverified.",
+      "evidence": "scripts/test-standalone-detect.mjs and scripts/test-standalone-detect-devices.mjs"
     },
     {
       "module": "teleport",
