@@ -1,5 +1,19 @@
 # Upstream divergence register
 
+Natural Knight riding verification (2026-11-12): all8 new ordinary MAIN cases
+pass51 checks against the complete configured original-C reference: natural pony
+mounting, movement, dismount, mounted save and all4 fresh C/JS save consumers.
+All672 tested JS/data files match published a17b98d. No production, translated
+policy or frozen changes. The fixture uses literal keys, naturally generated
+starting inventory/pet and read-only observers; no debug wishes, source setup
+calls, game-field writes or paused-input cleanup. The source uses a special
+unnamed-pony dismount message, which is asserted exactly. Complete recordings,
+raw terminal bytes, two RNG states/logs and normalized world graphs compare.
+See docs/runtime-environment/riding-main-validation.json and the new optional
+`riding` integration job. This is bounded riding coverage; natural ordinary
+full-game victory and remaining special effects remain unverified. The prior
+23-job core result is historical and is not relabelled as a new24-job full run.
+
 Terminal, signal, CLI and RNG lifecycle integration follow-up (2026-11-12):
 the clean combined implementation passes44/44 strict public recordings and all23
 core integration jobs. All743 recorded inputs remain unchanged. One native run

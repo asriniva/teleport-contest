@@ -1,5 +1,7 @@
 # Extend the JavaScript C environment
 
+Natural riding follow-up (2026-11-12): [eight ordinary MAIN riding/save cases](riding-main-validation.json) pass51 checks on published a17b98d production sources. The new `riding` integration job extends the plan to24 jobs; the existing23-job result remains a separate historical run. No natural full-game victory claim is made.
+
 Runtime ownership separation and factory consolidation are documented in [SERVICES_CLEANUP_PLAN.md](SERVICES_CLEANUP_PLAN.md); earlier source paths in recorded evidence remain historical.
 
 Verification update (2026-11-12): the44 public recordings pass strict checks and

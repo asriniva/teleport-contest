@@ -1,0 +1,12 @@
+{
+  "profile": {"seed":1,"timezone":"UTC","options":"OPTIONS=!news\n","argv":["-u","Ada-male-lawful","-p","Knight","-r","human"]},
+  "position": [14,9],
+  "pets": [{"id":"mon:60","position":[15,8],"tameness":10,"inventory":{"$ref":"obj:61"}}],
+  "cases": [
+    {"name":"mount","keys":"  n#ride\nu","mounted":true,"messages":["You mount"]},
+    {"name":"mounted-movement","keys":"  n#ride\nub","mounted":true,"position":[14,9],"messages":["You mount"]},
+    {"name":"ride-dismount","keys":"  n#ride\nu.#ride\n","mounted":false,"messages":["You mount","You've been through the dungeon on a pony with no name."]}
+  ],
+  "saveKeys": "  n#ride\nubSy",
+  "restoreKeys": " #ride\n"
+}
