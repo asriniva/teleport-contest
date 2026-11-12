@@ -5311,7 +5311,7 @@
     "nethack-c/wasm/tu-support.c": "4acc049213a8c67b069b71315406f58409100db195df2dadbc5d4bcd7184f875",
     "js/ported/wasm-runtime.js": "73030532670eaaf8740f50d4556a89a62faf70cde679c19af22285d52286d6d4",
     "js/standalone/special-interactions.js": "2a16e9ed446870e1d0205a3ae555e4873abfe3c54a60fa729be9579127088450",
-    "js/standalone/vision.js": "d3e54afd4edb8d08313eaa987eef128259bb370b14826f0c189836a1c29554b4",
+    "js/standalone/vision.js": "dd43f560699abfe76a1d3a49a3f2bcaa2d041aa675c8b5d810c4deefa51e65c5",
     "js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34",
     "nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",
     "js/standalone/public-functions.json": "75774661072653bbd6c90bce1e837fac87a998b5e9139f6f5012878057779e12",

@@ -4,12 +4,11 @@
   "acceptedCheckpoint": "d3f8cce27971690b66ef42555070b5d0eef252d2",
   "counts": {
     "canonical-dependency": 1,
-    "in-progress": 56,
-    "not-connected": 2,
+    "in-progress": 55,
     "provider-only": 1,
     "transport-only": 3,
     "verified-component": 10,
-    "verified-subset": 65
+    "verified-subset": 68
   },
   "fullGameAccepted": false,
   "meaning": "Statuses describe standalone evidence, not mixed-game port completion. verified-component is component/profile acceptance, not full-game integration or portable/all-libc equivalence. verified-subset/transport-only/in-progress never count as completed modules. Update this ledger only with specific evidence. Lua/stdio/CVFS/libc/transport are providers outside the 138 game-TU denominator.",
@@ -350,8 +349,9 @@
     {
       "module": "ball",
       "source": "src/ball.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "All12 original public entries share one cached native-shaped context. Controlled real MAIN punishment/movement/drop/remove-curse proof passes22 comparisons,18 frames,15 host and2 raw inputs with connected terminal. Punished Water/levitation combinations remain unverified.",
+      "evidence": "scripts/test-standalone-ball.mjs"
     },
     {
       "module": "mcastu",
@@ -364,8 +364,8 @@
       "module": "dbridge",
       "source": "src/dbridge.c",
       "status": "verified-subset",
-      "scope": "is_pool/is_lava/is_waterwall/db_under_typ on explicit terrain/bridge inputs; bridge manipulation/destruction/world effects unfinished.",
-      "evidence": "scripts/test-standalone-world-position.mjs:4998 C comparisons; explicit profile/limits in README.md"
+      "scope": "Original create/open/close/destroy enrich the same world-water-terrain context and retain prior eight query wrappers. Actual source-generated Castle bridge plus controlled open/boulder-close-crush/reopen/destroy matches26 comparisons,8 live worlds,22 frames and full RNG/TTY. Natural Castle journey/tune and all variants unverified.",
+      "evidence": "scripts/test-standalone-dbridge.mjs"
     },
     {
       "module": "mondata",
@@ -631,17 +631,17 @@
       "module": "do_name",
       "source": "src/do_name.c",
       "status": "verified-subset",
-      "scope": "Existing object naming plus original monster christening/name ownership used by default/named starting pets, verified against allocated C names. Interactive naming remains unfinished.",
+      "scope": "Canonical original context aliases existing five rotating buffers/index and preserves33 prior callback identities;14 missing publics exposed. Generated-pet/shared-buffer/random-name component and actual MAIN starter-item naming each pass22 checks,4/12 frames with full world/RNG/TTY equality. Other naming branches remain unverified.",
       "priorStatus": "not-connected",
       "newComponentEvidence": "scripts/test-standalone-item-inventory.mjs:11970 comparisons/2988 constructors/669 callbacks for the explicit ordinary-item component profile; module remains partial.",
-      "evidence": "scripts/test-standalone-item-naming.mjs:11046 C comparisons/2760 constructors/28 artifacts; explicit profile in README.md; scripts/test-standalone-pet-startup.mjs:385 original-C comparisons (includes terminal setup controls); 34-check full regression gate PASS; actual level/room/pet startup reaches inventory setup with Wasm/network forbidden."
+      "evidence": "scripts/test-standalone-do-name.mjs (default and STANDALONE_DO_NAME_UI=1)"
     },
     {
       "module": "vision",
       "source": "src/vision.c",
       "status": "verified-subset",
-      "scope": "Prior initialization/generation subset plus actual source vision_recalc, light-source traversal and live vision root/row storage through first display. Arbitrary lighting changes and full turn/game visibility remain unaccepted.",
-      "evidence": "scripts/test-standalone-level-contents.mjs:4416 original-C comparisons over12 role/seed first-level builds,46 shared roots plus dynamic graphs/text/timers/rumor caches/21 accessible vision workspaces and exact RNG logs; actual mklev finishes before the same unset cliparound callback. Full game/recordings unaccepted.; scripts/test-standalone-vision-display.mjs:10881 comparisons/39 role-seed cases, Wasm/network forbidden JS prefix; 38-check regression gate PASS at9e849bd."
+      "scope": "Existing private buffers/context expose get_viz_clear and howmonseen with native monster-pointer forwarding. Starting world matches all1680 cell queries and all actual monster visibility masks in1703 comparisons; read-only queries preserve world. Prior elemental visibility evidence uses the explicit user-approved one-line C boolean correction; special vision modes remain unverified.",
+      "evidence": "scripts/test-standalone-vision-public.mjs; scripts/diagnose-elemental-visibility.mjs"
     },
     {
       "module": "mkmaze",
@@ -675,14 +675,15 @@
       "module": "polyself",
       "source": "src/polyself.c",
       "status": "verified-subset",
-      "scope": "Original POLYSELF adapter executes set_uasmon, form resistance/property/header macros, float_vs_flight/steed_vs_stealth/polysense during hero startup. Actual polymorph/reversion and UI branches remain unfinished.",
-      "evidence": "scripts/test-standalone-hero-startup.mjs:58212 C comparisons; scripts/test-standalone-isolation.mjs reaches original has_color boundary with Wasm/network forbidden."
+      "scope": "All26 public functions share one cached original context, replacing per-call recreation. Source polymon/damage/rehumanize and actual MAIN polymorph-potion jaguar/damage/return comparisons each pass22 checks with full recording/world/RNG equality. Source-created setup is controlled; other forms and abilities remain unverified.",
+      "evidence": "scripts/test-standalone-polyself.mjs (default and STANDALONE_POLYSELF_POTION=1 STANDALONE_POLYSELF_SEED=7)"
     },
     {
       "module": "wizcmds",
       "source": "src/wizcmds.c",
-      "status": "not-connected",
-      "scope": "No standalone connection accepted yet."
+      "status": "verified-subset",
+      "scope": "All35 configured public functions share one native-shaped context. Actual debug MAIN mapping/wish-nothing passes171 checks; positive wish184; actual two-monster migration sorting156. Rare/destructive debug branches remain unverified.",
+      "evidence": "scripts/test-standalone-wizcmds.mjs; scripts/test-standalone-positive-wish.mjs; scripts/test-standalone-migration-sorting.mjs"
     },
     {
       "module": "detect",
@@ -785,8 +786,8 @@
       "module": "makemon",
       "source": "src/makemon.c",
       "status": "verified-subset",
-      "scope": "18-species construction/propagation/health/alignment/sex/extra flags, normal inventory and equipment; random placement/groups, shape changes and full world closure unfinished. Giant-ant random coordinates/groups now have full list/map/vital/RNG component evidence with no-inventory caller flags.",
-      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md",
+      "scope": "18-species construction/propagation/health/alignment/sex/extra flags, normal inventory and equipment; random placement/groups, shape changes and full world closure unfinished. Giant-ant random coordinates/groups now have full list/map/vital/RNG component evidence with no-inventory caller flags. Seven remaining public functions exposed on same creation context. Native prototypes/widths checked by Clang;84 original-C comparisons cover integer class boundaries including264/65574 and pet clone/uncreation. Bag/furies/mimic/dump branches are connected but not behaviorally accepted.",
+      "evidence": "scripts/test-standalone-monster-creation.mjs and test-standalone-monster-inventory.mjs:1299 C comparisons each; explicit map-generation cohort and limits in README.md; scripts/test-standalone-makemon-public.mjs",
       "newWorldEvidence": "scripts/test-standalone-world-position.mjs; full random catalogue and inventory-bearing group closure unfinished."
     },
     {
@@ -1023,9 +1024,9 @@
     {
       "module": "zap",
       "source": "src/zap.c",
-      "status": "in-progress",
-      "scope": "Canonical ZAP now exposes location/resistance/history/exclamation queries plus dozap/buzz/flash_str. Actual-main normal Wizard create-monster, striking and lightning wand cohorts pass169/168/168 checks with exact recordings/RNG/selected world. Monster beams and other wand/variant/dependency branches remain unverified; expanded regression pending.",
-      "evidence": "scripts/test-standalone-wand-program.mjs"
+      "status": "verified-subset",
+      "scope": "All configured public functions are exposed late through the existing cached factory, preserving prior services/callback identities. Native unsigned-long strlen transport allows real positive wishes: ordinary wishing wand156 checks, one charge spent, rock added and conduct incremented; debug positive wish184. Existing create/striking/lightning wand comparisons remain scoped evidence; other variants unverified.",
+      "evidence": "scripts/test-standalone-wishing-wand.mjs; scripts/test-standalone-positive-wish.mjs"
     },
     {
       "module": "nhlsel",
@@ -1043,5 +1044,6 @@
     "ordinaryMain": "Frozen complete starvation main PASS20:2028turns,3576input boundaries,3731frames,204539TTYbytes; exact RNG/recordings/selected postexit world;516 source/data+157assets unchanged.",
     "travelAndRanking": "Four C/JS save crosses each for down/up/down-up-down pass;50-point quit/nonempty ranking and four histories match.",
     "scope": "See ordinary-game-evidence.json. Full-game/registry/victory/bones acceptance remains false; newer unimported WIZARD/MPLAYER/MINION work is separate."
-  }
+  },
+  "publicEntryAudit": "scripts/audit-standalone-public-closure.mjs distinguishes registered functions from behavioral acceptance; owner counts do not prove full support."
 }

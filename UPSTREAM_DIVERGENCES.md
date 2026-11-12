@@ -1,5 +1,60 @@
 # Upstream divergence register
 
+Remaining naming and monster-creation public surface (2026-11-11):
+`do-name.js` uses one original native-shaped naming context while aliasing the
+existing five-buffer pool and its actual rotating index; prior registered
+callbacks forward to it without replacing their public identities. Fourteen
+missing public functions become reachable. Component naming comparisons pass22
+checks on a real generated pet, including christening, twelve buffer rotations,
+monster/orc random names and novel indices. The final actual MAIN menu command
+names a starter item Nori, passing22 checks/12 frames/11 host inputs with exact
+world, dual RNG, logs, raw TTY and frames;567 source files and157 assets stay
+stable before imports and after both naming proofs. Shared bogon_codes remains
+the existing global; other interactive naming variants remain unverified.
+`monster-creation.js` adds the seven remaining MAKEMON functions on the existing
+creation/selection context. mkclass_poly preserves its native int class argument,
+clone coordinates and creation masks retain their declared widths, and bagotricks
+has an actual optional int output cell. Clang verifies all seven original
+prototypes. The genuine-world component passes84 comparisons including eight
+class inputs (264/65574 included), pet clone/uncreation and eleven complete
+world/dual-RNG/log checkpoints. Bag, furies, mimic and dump branches are connected
+but not behaviorally accepted. All policies and frozen files remain unchanged.
+
+Public runtime, vision and drawbridge boundaries (2026-11-11):
+`environment.js` registers ALLOC, five STRUTIL string-buffer APIs and moon/Friday
+queries through the same original runtime policies, memory and private state.
+The wrappers convert native pointer/integer arguments; no policy is duplicated.
+`vision.js` exposes get_viz_clear/howmonseen on its existing context and converts
+six native monster-pointer dependency arguments as the original native library
+does. The full starting map and live-monster queries match C in1,703 checks;
+special vision modes are not covered by that receipt.
+`dbridge.js` enriches the existing world-water-terrain context in place, retaining
+all eight query wrappers, shared DECL occupants and one measured80-byte static
+phrase buffer. Four original create/open/close/destroy functions become public.
+Actual Castle generation also requires original MKROOM fill_zoo/cmap_to_type on
+the existing room-queries context,265 measured native constants and the exact
+SPACE_POS/IS_THRONE macros. The controlled original-source Castle scenario passed
+26 checks,768 cmap inputs, eight live worlds and22 frames against sealed C;
+the integrated-assembly rerun passes with567 source files and157 assets stable. Natural Castle travel, command-loop
+tune opening and every bridge/monster-crushing variant remain unverified.
+
+Remaining public entry integration (2026-11-11, after e9207d8):
+`js/standalone/program.js` exposes all configured public ZAP functions late in
+assembly through the existing cached ZAP factory; existing service and namespace
+function identities are checked before and after exposure. `environment.js`
+provides the matching facade and the canonical POLYSELF facade used by hero
+startup. The scope checker includes the measured POLYSELF ABI. These changes
+connect callers to existing source policy and do not establish branch coverage;
+Both controlled form-change/return and actual MAIN polymorph-potion comparisons
+pass22 checks each on the rebased runtime. Ordinary wishing-wand comparison
+passes156 checks with charge consumption, actual inventory rock and conduct.
+The43-check runtime public-boundary proof covers all five string-buffer APIs,
+normal allocation/reallocation, valid FITS integer limits and current moon/Friday
+queries. The independent runtime suite passes1,294 original-C comparisons and
+6,000 ISAAC values/full states; actual MAIN startup/save/four fresh restore
+combinations and ball-chain18-frame recording regressions also pass. No new
+translated-policy or frozen-infrastructure changes are made by this addition.
+
 Latest-main cleanup rebase (2026-11-11): fetched8cf4880
 and replayed all four cleanup commits. Main's new subsystem owners/composition,
 all measured FILES/HACK declarations and the explicit VISION boolean correction

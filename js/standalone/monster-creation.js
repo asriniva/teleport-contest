@@ -101,8 +101,13 @@ export function enableMonsterCreation(environment,layouts,selection){
  env.cansee=(x,y)=>Number(Boolean(transport.read('Uint8',transport.read('ptr',env.gv.viz_array+y*8)+x)&L.IN_SIGHT));
  for(const[name,type]of Object.entries({mksobj:'struct obj',mkobj:'struct obj',mkobj_at:'struct obj',which_armor:'struct obj',findgold:'struct obj',oname:'struct obj',christen_monst:'struct monst',Is_special:'struct s_level',qt_montype:'struct permonst'}))env[name]=(...args)=>record(type,environment.resolve(name)(...args));
  env.zeromextra=record('struct mextra',environment.allocateGlobal('makemon.zeromextra',ctypes.size('struct mextra')));
- const names=['makemon','propagate','mbirth_limit','monhp_per_lvl','newmonhp','init_mextra','newmextra','adj_lev','golemhp','peace_minded','set_malign','newmcorpsenm','freemcorpsenm','mongets','m_initweap','m_initinv','m_initthrow','mkmonmoney','grow_up','create_critters','mkclass','mkclass_aligned'];
+ const names=['makemon','propagate','mbirth_limit','monhp_per_lvl','newmonhp','init_mextra','newmextra','adj_lev','golemhp','peace_minded','set_malign','newmcorpsenm','freemcorpsenm','mongets','m_initweap','m_initinv','m_initthrow','mkmonmoney','grow_up','create_critters','mkclass','mkclass_aligned','mkclass_poly','clone_mon','unmakemon','set_mimic_sym','bagotricks','summon_furies','dump_mongen'];
  environment.register('monster-creation',Object.fromEntries(names.map(n=>[n,makemon[n]])),env,{prepareArgs:(fn,args)=>{
+  if(fn==='mkclass_poly'||fn==='summon_furies')return [transport.int(args[0])];
+  if(fn==='dump_mongen')return [];
+  if(fn==='bagotricks'){const p=environment.address(args[2]);return [record('struct obj',args[0]),transport.char(args[1]),p?Object.defineProperty({address:p},'value',{get:()=>memory.view.getInt32(p,true),set:v=>memory.view.setInt32(p,transport.int(v),true)}):0];}
+  if(fn==='clone_mon')return [record('struct monst',args[0]),transport.short(args[1]),transport.short(args[2])];
+  if(fn==='unmakemon')return [record('struct monst',args[0]),transport.uint(args[1])];
   if(fn==='mkclass'||fn==='mkclass_aligned')return [transport.char(args[0]),transport.int(args[1]),...(fn==='mkclass_aligned'?[transport.char(args[2])]:[])];
   if(fn==='create_critters')return [transport.int(args[0]),record('struct permonst',args[1]),transport.char(args[2])];
   if(fn==='makemon'||fn==='adj_lev'||fn==='peace_minded')args[0]=record('struct permonst',args[0]);

@@ -72,7 +72,8 @@ import {enableRestoreLifecycle} from './restore-lifecycle.js';
 import {enableKillerState} from './killer-state.js';
 import {enableEndLifecycle} from './end-lifecycle.js';
 import {enablePotion} from './potion.js';
-import {enableZap} from './zap.js';
+import {enableZap,enableZapPublic} from './zap.js';
+import {enablePolyself} from './polyself.js';
 import {enableWere} from './were.js';
 import {enableDogmove} from './dogmove.js';
 import {enableMhitu} from './mhitu.js';
@@ -97,6 +98,8 @@ import {enableLight} from './light.js';
 import {enableDetect} from './detect.js';
 import {enableRegion} from './region-services.js';
 import {enableBall} from './ball.js';
+import {enableDbridge} from './dbridge.js';
+import {enableDoName} from './do-name.js';
 import {enableWizcmds} from './wizcmds.js';
 import {enableRip} from './rip.js';
 import {enableShknam} from './shknam.js';
@@ -301,6 +304,8 @@ export function createStandaloneEnvironment(options={}) {
         enableEndLifecycle:layouts=>enableEndLifecycle(environment,layouts),
         enablePotion:layouts=>enablePotion(environment,layouts),
         enableZap:(layouts,options)=>enableZap(environment,layouts,options),
+        enableZapPublic:layouts=>enableZapPublic(environment,layouts),
+        enablePolyself:layouts=>enablePolyself(environment,layouts),
         enableWere:layouts=>were??=enableWere(environment,layouts),
         enableDogmove:layouts=>dogmove??=enableDogmove(environment,layouts),
         enableMhitu:layouts=>enableMhitu(environment,layouts),
@@ -325,6 +330,8 @@ export function createStandaloneEnvironment(options={}) {
         enableDetect:layouts=>enableDetect(environment,layouts),
         enableRegion:layouts=>enableRegion(environment,layouts),
         enableBall:layouts=>enableBall(environment,layouts),
+        enableDbridge:layouts=>enableDbridge(environment,layouts),
+        enableDoName:layouts=>enableDoName(environment,layouts),
         enableWizcmds:layouts=>enableWizcmds(environment,layouts),
         enableRip:layouts=>enableRip(environment,layouts),
         enableShknam:layouts=>enableShknam(environment,layouts),
@@ -352,5 +359,20 @@ export function createStandaloneEnvironment(options={}) {
         status:linker.status,
         record:transport.record,array:transport.array,address};
     register('runtime-string-helpers',{__isspace:c=>services.isspace(c),Strlen_:(value,caller,line)=>base.strutil('Strlen_',typeof value==='string'?services.literal(value):address(value),typeof caller==='string'?services.literal(caller):address(caller),transport.int(line))});
+    register('runtime-public-allocation',{
+        alloc:n=>base.alloc('alloc',transport.uint(n)),
+        re_alloc:(p,n)=>base.alloc('re_alloc',address(p),transport.uint(n)),
+        fmt_ptr:p=>base.alloc('fmt_ptr',address(p)),
+        FITSint_:(n,file,line)=>base.alloc('FITSint_',transport.long(n),typeof file==='string'?services.literal(file):address(file),transport.int(line)),
+        FITSuint_:(n,file,line)=>base.alloc('FITSuint_',transport.ulong(n),typeof file==='string'?services.literal(file):address(file),transport.int(line)),
+    });
+    register('runtime-public-string-buffers',{
+        strbuf_init:p=>base.strutil('strbuf_init',base.strbuf(address(p))),
+        strbuf_append:(p,text)=>base.strutil('strbuf_append',base.strbuf(address(p)),typeof text==='string'?services.literal(text):address(text)),
+        strbuf_reserve:(p,n)=>base.strutil('strbuf_reserve',base.strbuf(address(p)),transport.int(n)),
+        strbuf_empty:p=>base.strutil('strbuf_empty',base.strbuf(address(p))),
+        strbuf_nl_to_crlf:p=>base.strutil('strbuf_nl_to_crlf',base.strbuf(address(p))),
+    });
+    register('runtime-public-calendar',Object.fromEntries(['phase_of_the_moon','friday_13th'].map(name=>[name,()=>base.calendar(name)])));
     return environment;
 }

@@ -1,5 +1,6 @@
 // Fresh actual-main cross-restoration of source-created Air/Water saves.
 import assert from'node:assert/strict';import fs from'node:fs';import path from'node:path';import crypto from'node:crypto';import{builtinModules}from'node:module';import{createBubbleProjection}from'./elemental-bubble-world.mjs';import{elementalRegions}from'./elemental-region-world.mjs';
+import{elementalApprovedCorrection}from'./elemental-approved-correction.mjs';
 const directory=path.resolve(process.env.STANDALONE_FULL_C_REFERENCE??'.cache/full-original-c-v1'),plane=process.env.STANDALONE_PLANE??'water',out=path.resolve('.cache/elemental-'+plane+'-restore'),producer=path.resolve('.cache/elemental-'+plane+'-save'),fixture=out+'/input.json';fs.mkdirSync(out,{recursive:true});const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),input={seed:1,timezone:'UTC',options:'OPTIONS=!news\n',keys:'m.    m.    '};fs.writeFileSync(fixture,JSON.stringify(input));
 // Snapshot before dynamically importing production modules: imports themselves
 // must not race ahead of the source revision which the evidence identifies.
@@ -19,7 +20,7 @@ function productionFiles(){
  return [...files].sort();
 }
 function assetFiles(dir,files=[]){for(const name of fs.readdirSync(dir)){const file=path.join(dir,name),stat=fs.statSync(file);if(stat.isDirectory())assetFiles(file,files);else if(stat.isFile())files.push(file);}return files.sort();}
-const snapshot=()=>({sourceSha256:Object.fromEntries(productionFiles().map(file=>[path.relative(root,file),sha(file)])),assetSha256:Object.fromEntries(assetFiles(directory+'/assets').map(file=>[path.relative(directory+'/assets',file),sha(file)])),referenceReceiptSha256:sha(directory+'/receipt.json'),fixtureSha256:sha(fixture)});
+const snapshot=()=>({approvedCorrection:elementalApprovedCorrection(directory),sourceSha256:Object.fromEntries(productionFiles().map(file=>[path.relative(root,file),sha(file)])),assetSha256:Object.fromEntries(assetFiles(directory+'/assets').map(file=>[path.relative(directory+'/assets',file),sha(file)])),referenceReceiptSha256:sha(directory+'/receipt.json'),fixtureSha256:sha(fixture)});
 const producerEvidence=JSON.parse(fs.readFileSync(producer+'/evidence.json'));assert.equal(producerEvidence.mode,'save');assert.ok(producerEvidence.complete);const bytes=Object.fromEntries(['c','js'].map(k=>[k,fs.readFileSync(producer+'/'+k+'-result.json')])),saved=Object.fromEntries(Object.entries(bytes).map(([k,b])=>[k,JSON.parse(b).saveFile]));for(const k of['c','js']){assert.ok(saved[k]);fs.writeFileSync(out+'/producer-'+k+'.json',bytes[k]);}
 const startProvenance=snapshot(),sealed=JSON.parse(fs.readFileSync(directory+'/receipt.json'));assert.deepEqual(startProvenance.assetSha256,Object.fromEntries(Object.entries(sealed.sourceSha256).filter(([p])=>p.includes('/assets/')).map(([p,h])=>[p.slice(p.lastIndexOf('/assets/')+8),h])));
 const{runFullOriginalC}=await import('./full-original-c-run.mjs'),{runStandaloneProgram}=await import('./run-standalone-program.mjs'),{worldGraph}=await import('./restoration-world-graph.mjs'),{encodeRecorderScreen}=await import('../js/wasm-replay-support.js');

@@ -1,5 +1,6 @@
 // Read-only complete local import/resource closure for the elemental test harnesses.
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import{builtinModules}from'node:module';
+import{elementalApprovedCorrection}from'./elemental-approved-correction.mjs';
 export function elementalSourceSnapshot(directory,entries,resources=[]){
  const root=process.cwd(),files=new Set(),external=new Set(),builtins=new Set(builtinModules),hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
  const visit=file=>{file=path.resolve(file);if(files.has(file))return;assertFile(file);files.add(file);if(!/\.m?js$/.test(file))return;const source=fs.readFileSync(file,'utf8'),imports=new Set();
@@ -9,5 +10,5 @@ export function elementalSourceSnapshot(directory,entries,resources=[]){
  };
  function assertFile(p){if(!fs.statSync(p).isFile())throw Error('Expected elemental source file '+p);}
  entries.forEach(visit);const assets=[];function walk(dir){for(const n of fs.readdirSync(dir)){const p=path.join(dir,n);if(fs.statSync(p).isDirectory())walk(p);else assets.push(p);}}walk(path.resolve(directory,'assets'));
- return{sourceSha256:Object.fromEntries([...files].sort().map(p=>[path.relative(root,p),hash(p)])),assetSha256:Object.fromEntries(assets.sort().map(p=>[path.relative(path.resolve(directory,'assets'),p),hash(p)])),referenceReceiptSha256:hash(path.resolve(directory,'receipt.json')),resourceSha256:Object.fromEntries(resources.filter(p=>fs.existsSync(p)).map(p=>[path.relative(root,path.resolve(p)),hash(p)])),externalImports:[...external].sort()};
+ return{approvedCorrection:elementalApprovedCorrection(directory),sourceSha256:Object.fromEntries([...files].sort().map(p=>[path.relative(root,p),hash(p)])),assetSha256:Object.fromEntries(assets.sort().map(p=>[path.relative(path.resolve(directory,'assets'),p),hash(p)])),referenceReceiptSha256:hash(path.resolve(directory,'receipt.json')),resourceSha256:Object.fromEntries(resources.filter(p=>fs.existsSync(p)).map(p=>[path.relative(root,path.resolve(p)),hash(p)])),externalImports:[...external].sort()};
 }

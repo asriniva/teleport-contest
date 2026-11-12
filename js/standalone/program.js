@@ -23,6 +23,9 @@ export function createStandaloneProgram({layouts,runtime={},stdio:stdioOptions={
  env.enableRegion(layouts);
  env.enableBall(layouts);
  env.enableWizcmds(layouts);
+ env.enableZapPublic(layouts);
+ env.enableDbridge(layouts);
+ env.enableDoName(layouts);
  let started=false;
  return{environment,stdio,terminal:window.terminal,
   run(argv=[],{programName='./this.program'}={}){
