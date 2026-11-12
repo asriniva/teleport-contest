@@ -1,0 +1,727 @@
+{
+  "date": "2026-11-11",
+  "scope": "Latest-main rebase and regression validation of pre-completion C-runtime cleanup; no arbitrary complete-game/native-host/public44/performance acceptance",
+  "integrationBaseCommit": "8cf4880d8cf7fb9104635f068564a5de87523fe7",
+  "preHelperAuditCommit": "c0740becc16e413e0eab9bc55747381841faf80b",
+  "originalScopeBaselineUnchanged": true,
+  "preservedMainCorrection": "js/ported/vision.js; exact authorized-port-corrections.json from integration base",
+  "mainRegisterHistoryPreserved": true,
+  "sourceManifestSha256": "036ad2cfcd37f0f5b7ba98b8dbb1031f4c60f0f6e784fd6a1ad913183c0ad4e4",
+  "sourceManifestFiles": 215,
+  "ownedProvenanceOutputs": 72,
+  "productionImportFiles": 558,
+  "sourceSnapshotsStable": {
+    "componentMatrixFiles": 59,
+    "mainAndExtraBatchesFiles": 215,
+    "finalManifestVerified": true
+  },
+  "componentMatrix": {
+    "results": [
+      {
+        "name": "apply",
+        "exitCode": 0,
+        "seconds": 1.599
+      },
+      {
+        "name": "artifact",
+        "exitCode": 0,
+        "seconds": 3.081
+      },
+      {
+        "name": "ball",
+        "exitCode": 0,
+        "seconds": 3.083
+      },
+      {
+        "name": "botl",
+        "exitCode": 0,
+        "seconds": 2.321
+      },
+      {
+        "name": "cfgfiles",
+        "exitCode": 0,
+        "seconds": 0.34
+      },
+      {
+        "name": "cmd",
+        "exitCode": 0,
+        "seconds": 11.168
+      },
+      {
+        "name": "coloratt",
+        "exitCode": 0,
+        "seconds": 0.697
+      },
+      {
+        "name": "dbridge",
+        "exitCode": 0,
+        "seconds": 22.061
+      },
+      {
+        "name": "detect",
+        "exitCode": 0,
+        "seconds": 0.478
+      },
+      {
+        "name": "display",
+        "exitCode": 0,
+        "seconds": 3.735
+      },
+      {
+        "name": "do",
+        "exitCode": 0,
+        "seconds": 0.464
+      },
+      {
+        "name": "do_wear",
+        "exitCode": 0,
+        "seconds": 0.962
+      },
+      {
+        "name": "dogmove",
+        "exitCode": 0,
+        "seconds": 0.592
+      },
+      {
+        "name": "dothrow",
+        "exitCode": 0,
+        "seconds": 50.489
+      },
+      {
+        "name": "dungeon",
+        "exitCode": 0,
+        "seconds": 22.557
+      },
+      {
+        "name": "end",
+        "exitCode": 0,
+        "seconds": 0.305
+      },
+      {
+        "name": "exper",
+        "exitCode": 0,
+        "seconds": 0.457
+      },
+      {
+        "name": "explode",
+        "exitCode": 0,
+        "seconds": 0.123
+      },
+      {
+        "name": "extralev",
+        "exitCode": 0,
+        "seconds": 0.414
+      },
+      {
+        "name": "files",
+        "exitCode": 0,
+        "seconds": 0.462
+      },
+      {
+        "name": "hack",
+        "exitCode": 0,
+        "seconds": 28.188
+      },
+      {
+        "name": "invent",
+        "exitCode": 0,
+        "seconds": 0.28
+      },
+      {
+        "name": "light",
+        "exitCode": 1,
+        "seconds": 0.403
+      },
+      {
+        "name": "makemon",
+        "exitCode": 0,
+        "seconds": 4.883
+      },
+      {
+        "name": "mcastu",
+        "exitCode": 0,
+        "seconds": 1.585
+      },
+      {
+        "name": "mhitu",
+        "exitCode": 0,
+        "seconds": 1.906
+      },
+      {
+        "name": "mklev",
+        "exitCode": 0,
+        "seconds": 86.069
+      },
+      {
+        "name": "mkmaze",
+        "exitCode": 0,
+        "seconds": 2.647
+      },
+      {
+        "name": "mkobj",
+        "exitCode": 0,
+        "seconds": 17.591
+      },
+      {
+        "name": "mondata",
+        "exitCode": 0,
+        "seconds": 24.48
+      },
+      {
+        "name": "muse",
+        "exitCode": 0,
+        "seconds": 0.702
+      },
+      {
+        "name": "music",
+        "exitCode": 0,
+        "seconds": 10.403
+      },
+      {
+        "name": "nhlua",
+        "exitCode": 0,
+        "seconds": 0.443
+      },
+      {
+        "name": "o_init",
+        "exitCode": 0,
+        "seconds": 25.027
+      },
+      {
+        "name": "options",
+        "exitCode": 0,
+        "seconds": 5.161
+      },
+      {
+        "name": "pickup",
+        "exitCode": 0,
+        "seconds": 22.88
+      },
+      {
+        "name": "polyself",
+        "exitCode": 0,
+        "seconds": 4.953
+      },
+      {
+        "name": "pray",
+        "exitCode": 0,
+        "seconds": 0.747
+      },
+      {
+        "name": "priest",
+        "exitCode": 0,
+        "seconds": 2.381
+      },
+      {
+        "name": "quest",
+        "exitCode": 0,
+        "seconds": 0.467
+      },
+      {
+        "name": "read",
+        "exitCode": 0,
+        "seconds": 2.504
+      },
+      {
+        "name": "restore",
+        "exitCode": 0,
+        "seconds": 8.218
+      },
+      {
+        "name": "save",
+        "exitCode": 0,
+        "seconds": 1.493
+      },
+      {
+        "name": "shk",
+        "exitCode": 0,
+        "seconds": 0.192
+      },
+      {
+        "name": "sp_lev",
+        "exitCode": 0,
+        "seconds": 11.694
+      },
+      {
+        "name": "termcap",
+        "exitCode": 0,
+        "seconds": 3.79
+      },
+      {
+        "name": "topl",
+        "exitCode": 0,
+        "seconds": 2.641
+      },
+      {
+        "name": "trap",
+        "exitCode": 0,
+        "seconds": 0.351
+      },
+      {
+        "name": "uhitm",
+        "exitCode": 0,
+        "seconds": 3.598
+      },
+      {
+        "name": "unixmain",
+        "exitCode": 0,
+        "seconds": 0.15
+      },
+      {
+        "name": "unixunix",
+        "exitCode": 0,
+        "seconds": 0.178
+      },
+      {
+        "name": "version",
+        "exitCode": 0,
+        "seconds": 1.512
+      },
+      {
+        "name": "vision",
+        "exitCode": 0,
+        "seconds": 14.457
+      },
+      {
+        "name": "wield",
+        "exitCode": 0,
+        "seconds": 7.767
+      },
+      {
+        "name": "wizard",
+        "exitCode": 0,
+        "seconds": 1.232
+      },
+      {
+        "name": "wizcmds",
+        "exitCode": 0,
+        "seconds": 2.287
+      },
+      {
+        "name": "worm",
+        "exitCode": 0,
+        "seconds": 1.528
+      },
+      {
+        "name": "worn",
+        "exitCode": 0,
+        "seconds": 11.428
+      }
+    ],
+    "passes": 57,
+    "failures": 1,
+    "lightBaselineComparison": {
+      "baselineCommit": "c0740becc16e413e0eab9bc55747381841faf80b",
+      "baselineExitCode": 1,
+      "candidateExitCode": 1,
+      "byteIdenticalFailure": true,
+      "failureLogSha256": "d0aa2607ec2070fdfffadd28245c00a2fc508350f68f220ada665597b5546bf1"
+    },
+    "referenceKind": "Original Emscripten-C; TELEPORT_NATIVE_TESTS=0, not native-host parity"
+  },
+  "runtimeAndLatestMainBatch": {
+    "complete": true,
+    "results": [
+      {
+        "name": "check-c-runtime-boundaries",
+        "exitCode": 0,
+        "seconds": 0.074
+      },
+      {
+        "name": "check-c-runtime-relocation",
+        "exitCode": 0,
+        "seconds": 0.158
+      },
+      {
+        "name": "check-c-runtime-extraction",
+        "exitCode": 0,
+        "seconds": 5.17
+      },
+      {
+        "name": "test-c-runtime-memory",
+        "exitCode": 0,
+        "seconds": 0.035
+      },
+      {
+        "name": "test-c-runtime-contracts",
+        "exitCode": 0,
+        "seconds": 0.043
+      },
+      {
+        "name": "test-c-runtime-adapter-memory",
+        "exitCode": 0,
+        "seconds": 0.04
+      },
+      {
+        "name": "test-js-runtime",
+        "exitCode": 0,
+        "seconds": 1.02
+      },
+      {
+        "name": "test-standalone-environment",
+        "exitCode": 0,
+        "seconds": 0.431
+      },
+      {
+        "name": "test-standalone-address-ports",
+        "exitCode": 0,
+        "seconds": 0.699
+      },
+      {
+        "name": "test-standalone-libc",
+        "exitCode": 0,
+        "seconds": 0.741
+      },
+      {
+        "name": "test-standalone-scanf",
+        "exitCode": 0,
+        "seconds": 0.416
+      },
+      {
+        "name": "test-standalone-stdio-buffers",
+        "exitCode": 0,
+        "seconds": 0.433
+      },
+      {
+        "name": "test-standalone-io-lua",
+        "exitCode": 0,
+        "seconds": 0.375
+      },
+      {
+        "name": "test-standalone-serialization",
+        "exitCode": 0,
+        "seconds": 0.406
+      },
+      {
+        "name": "test-standalone-terminal",
+        "exitCode": 0,
+        "seconds": 0.398
+      },
+      {
+        "name": "test-standalone-isolation",
+        "exitCode": 0,
+        "seconds": 2.069
+      },
+      {
+        "name": "check-standalone-special-interactions",
+        "exitCode": 0,
+        "seconds": 1.551
+      },
+      {
+        "name": "test-standalone-program",
+        "exitCode": 0,
+        "seconds": 28.331
+      },
+      {
+        "name": "test-standalone-death-program",
+        "exitCode": 0,
+        "seconds": 196.674
+      },
+      {
+        "name": "test-standalone-light",
+        "exitCode": 0,
+        "seconds": 8.552
+      },
+      {
+        "name": "test-standalone-getpos",
+        "exitCode": 0,
+        "seconds": 14.925
+      },
+      {
+        "name": "test-standalone-mondata",
+        "exitCode": 0,
+        "seconds": 13.625
+      },
+      {
+        "name": "test-standalone-minion",
+        "exitCode": 0,
+        "seconds": 9.368
+      },
+      {
+        "name": "test-standalone-mplayer",
+        "exitCode": 0,
+        "seconds": 8.304
+      },
+      {
+        "name": "test-standalone-steal",
+        "exitCode": 0,
+        "seconds": 8.669
+      },
+      {
+        "name": "test-standalone-wizard",
+        "exitCode": 0,
+        "seconds": 10.13
+      },
+      {
+        "name": "test-standalone-dokick",
+        "exitCode": 1,
+        "seconds": 0.405
+      },
+      {
+        "name": "test-standalone-detect",
+        "exitCode": 0,
+        "seconds": 8.224
+      },
+      {
+        "name": "test-standalone-detect-devices",
+        "exitCode": 0,
+        "seconds": 22.575
+      },
+      {
+        "name": "test-standalone-ball",
+        "exitCode": 0,
+        "seconds": 9.418
+      },
+      {
+        "name": "test-standalone-mon-alignment",
+        "exitCode": 0,
+        "seconds": 0.726
+      },
+      {
+        "name": "test-standalone-wizcmds",
+        "exitCode": 0,
+        "seconds": 17.829
+      },
+      {
+        "name": "test-standalone-invocation",
+        "exitCode": 0,
+        "seconds": 13.268
+      },
+      {
+        "name": "test-standalone-ranged-program",
+        "exitCode": 0,
+        "seconds": 18.776
+      },
+      {
+        "name": "test-standalone-quest-travel",
+        "exitCode": 0,
+        "seconds": 17.723
+      },
+      {
+        "name": "test-standalone-quest-completion",
+        "exitCode": 1,
+        "seconds": 144.56
+      },
+      {
+        "name": "test-standalone-elemental-planes",
+        "exitCode": 0,
+        "seconds": 17.657
+      },
+      {
+        "name": "test-standalone-astral-victory",
+        "exitCode": 0,
+        "seconds": 16.956
+      }
+    ]
+  },
+  "extraBatch": {
+    "complete": true,
+    "results": [
+      {
+        "name": "test-standalone-dokick",
+        "exitCode": 0,
+        "seconds": 17.75
+      },
+      {
+        "name": "test-js-game-files",
+        "exitCode": 0,
+        "seconds": 1.096
+      },
+      {
+        "name": "test-js-runtime-regex",
+        "exitCode": 0,
+        "seconds": 0.41
+      },
+      {
+        "name": "test-js-time",
+        "exitCode": 0,
+        "seconds": 1.962
+      },
+      {
+        "name": "test-standalone-level-persistence",
+        "exitCode": 0,
+        "seconds": 0.88
+      },
+      {
+        "name": "test-standalone-pager-startup",
+        "exitCode": 0,
+        "seconds": 306.188
+      },
+      {
+        "name": "test-standalone-death-program",
+        "exitCode": 0,
+        "seconds": 314.179
+      },
+      {
+        "name": "test-standalone-bones-consumer",
+        "exitCode": 1,
+        "seconds": 0.04
+      }
+    ]
+  },
+  "resolvedFixtureFailures": [
+    {
+      "test": "test-standalone-dokick",
+      "originalFailure": "Missing worktree-local native replay receipt",
+      "rerun": "PASS in extra batch after independent exact receipt copy"
+    },
+    {
+      "test": "test-standalone-bones-consumer",
+      "originalFailure": "Missing worktree-local native replay receipt",
+      "rerun": {
+        "name": "test-standalone-bones-consumer",
+        "exitCode": 0,
+        "seconds": 38.028
+      }
+    }
+  ],
+  "copiedFixtureSha256": {
+    "native-deeper-bones-sam3/input.json": "b4fd1f8245ce25d645ee9cd090e99a5637c211800222900f05c05dacb1247728",
+    "native-deeper-bones-sam3/replay-evidence.json": "1dc42f6bcb99f5929aaa9c38b975c5b222e458849007f77e53d5ab3ada4380ed",
+    "native-bones-consumer-seed16/input.json": "155f4d74f44cdecb4fbd8d6d7c33957e7cffb7b2b2f9ad06f56fd73bd5d48197",
+    "elemental-water/literal-host-keys.json": "8051d54d6119fb817f32d35e035796a3e5c48503343933fb976d4ada93367986",
+    "native-bones-consumer-seed16/replay-evidence.json": "c7539418dbac001b34fadb746084293b7ce74459bf64c3c984e0ba3132cda290"
+  },
+  "questCompletionBaselineComparison": {
+    "baselineCommit": "8cf4880d8cf7fb9104635f068564a5de87523fe7",
+    "baselineSource": "Exact git archive in independent temporary directory; CoW original-C cache copy",
+    "baselineExitCode": 1,
+    "candidateExitCode": 1,
+    "sameAssertion": "native source eligible Quest scenario finishes: exited vs input-exhausted",
+    "waived": false,
+    "resultFiles": {
+      "c": {
+        "bytes": 57628854,
+        "baselineSha256": "cfc4a7a432b723fc1eadbcc55d175872865400cba0b5177746c303c8371bd8b0",
+        "candidateSha256": "cfc4a7a432b723fc1eadbcc55d175872865400cba0b5177746c303c8371bd8b0",
+        "byteIdentical": true,
+        "status": "exited",
+        "stage": -1,
+        "frames": 2985
+      },
+      "js": {
+        "bytes": 57628854,
+        "baselineSha256": "cfc4a7a432b723fc1eadbcc55d175872865400cba0b5177746c303c8371bd8b0",
+        "candidateSha256": "cfc4a7a432b723fc1eadbcc55d175872865400cba0b5177746c303c8371bd8b0",
+        "byteIdentical": true,
+        "status": "exited",
+        "stage": -1,
+        "frames": 2985
+      }
+    }
+  },
+  "depthOneDeath": {
+    "complete": true,
+    "deathRecordingAccepted": true,
+    "checks": 20,
+    "moves": "2028",
+    "inputBoundaries": 3576,
+    "frames": 3731,
+    "rawTerminalBytes": 204539,
+    "postMainWorldAccepted": true,
+    "binaryPersistence": [],
+    "assemblyProvenanceStable": true,
+    "fullGameAccepted": false
+  },
+  "depthFiveDeath": {
+    "complete": true,
+    "deathRecordingAccepted": true,
+    "checks": 20,
+    "moves": "2376",
+    "inputBoundaries": 2752,
+    "frames": 2945,
+    "rawTerminalBytes": 96190,
+    "postMainWorldAccepted": false,
+    "binaryPersistence": [
+      {
+        "path": "/nethack/bonD0.5.Z",
+        "cBytes": 5078,
+        "jsBytes": 5032,
+        "byteIdentical": false,
+        "semanticEquivalenceAccepted": false
+      }
+    ],
+    "assemblyProvenanceStable": true,
+    "fullGameAccepted": false
+  },
+  "fourWayBones": {
+    "complete": true,
+    "bonesSemanticFourWayAccepted": true,
+    "producerRecordingAccepted": true,
+    "checks": 31,
+    "moves": "145",
+    "consumed": 210,
+    "frames": 211,
+    "worldCoverage": {
+      "counts": {
+        "monst": 36,
+        "permonst": 22,
+        "branch": 7,
+        "obj": 44,
+        "oextra": 1,
+        "mextra": 1,
+        "ebones": 1,
+        "cemetery": 1,
+        "mapseen": 5,
+        "s_level": 36,
+        "fe": 1,
+        "trap": 3,
+        "stairway": 2
+      },
+      "serializedRecordBytes": 171282,
+      "serializedPaddingByteOccurrences": 3244,
+      "uniqueScalarBytes": 37108,
+      "pointerEdges": 251
+    },
+    "producerFiles": {
+      "c": {
+        "resultSha256": "a41de1ce5eec1e65c1fb0f6c3fd0e3186f37c2d4145b5bbeba9c5e66bca5d738",
+        "boneSha256": "39b838ac12a8b594f40d5b3d579156474fa726a97252af18cfe257e0359edb2e",
+        "bytes": 5078
+      },
+      "js": {
+        "resultSha256": "69d5516f56df0fc7915d53299f78405b73871085ce947cb0b8379a07b8d5f623",
+        "boneSha256": "5e3d394840cb9da8605591ad233d1f93715fca03f3205e067e8d3a4fa93edfef",
+        "bytes": 5032
+      }
+    },
+    "fullGameAccepted": false
+  },
+  "compiledInputControlsLogSha256": "3471e2546e677588f52b22132f9979c6af1bb8f1be39c97ba045a74c9f1ceb9a",
+  "sourceSize": {
+    "baselineCommit": "8cf4880d8cf7fb9104635f068564a5de87523fe7",
+    "scope": "Production js/**/*.js raw UTF-8 bytes; not bundle size or performance",
+    "before": {
+      "files": 503,
+      "bytes": 19655231,
+      "lines": 301253
+    },
+    "after": {
+      "files": 518,
+      "bytes": 19649740,
+      "lines": 301416
+    },
+    "delta": {
+      "files": 15,
+      "bytes": -5491,
+      "lines": 163
+    }
+  },
+  "publication": {
+    "requestedRemoteRef": "origin/main",
+    "fastForwardOnly": true,
+    "status": "Validated for requested push; actual commit and remote verification reported in chat"
+  },
+  "limitations": [
+    "LIGHT diagnostic mismatch and default Quest-eligibility scenario assertion remain failures reproduced without cleanup. Neither is waived or relabeled a pass.",
+    "Default Quest-completion C and JS result files are individually byte-identical between untouched main and cleanup; this does not accept Quest completion.",
+    "Deep death compressed C/JS bones files have different raw bytes; actual fresh four-way consumer recordings and live graphs are accepted for this fixture.",
+    "Complete registry/standalone aggregate execution, arbitrary complete-game acceptance, public44/native-host parity and speed are not claimed.",
+    "Historical git anchors and inherited absolute reference paths remain development-input requirements."
+  ],
+  "localEvidenceDirectories": [
+    ".cache/c-runtime-cleanup/helper-components/20261111-181846-42627",
+    ".cache/c-runtime-cleanup/rebase-8cf4880",
+    ".cache/c-runtime-cleanup/rebase-8cf4880-extra"
+  ]
+}

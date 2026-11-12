@@ -1,0 +1,137 @@
+{
+  "baselineCommit": "c0740becc16e413e0eab9bc55747381841faf80b",
+  "removed": [
+    {
+      "file": "js/standalone/bitfields.js",
+      "beforeSha256": "2f1e357e831ad480e8a25f6ef4d3363d4aac87038aa0639fac930b902d5051e1"
+    },
+    {
+      "file": "js/standalone/environment-inputs.js",
+      "beforeSha256": "f06762953cf3095b7164277325a0d9d14972d5c1945aa36adec911b5df32f154"
+    },
+    {
+      "file": "js/standalone/qsort.js",
+      "beforeSha256": "6494d08901484738d194ffa822d0b0abf2b644da1a47d5f589cb1d0c76cce699"
+    },
+    {
+      "file": "js/standalone/scanf.js",
+      "beforeSha256": "7a2b3b50be886ad5ad87124f08266d30c72a385b90ec63057ba14f7148e9d458"
+    },
+    {
+      "file": "js/standalone/stdio.js",
+      "beforeSha256": "656cc3661cc78b528e42735270cba5cb0c7ed1aeceb4a891fa032f7341c26bd6"
+    },
+    {
+      "file": "js/ported/js-runtime.js",
+      "beforeSha256": "b720a507bb2c7354c19c54dd66abbee590dd64f42b3e8cfd9700a58c4db39979"
+    }
+  ],
+  "consumers": [
+    {
+      "file": "js/standalone/object-state.js",
+      "beforeSha256": "e9d936701059429847968f4b300a6c44b110c63b672af1f446c36dbc307f21b8",
+      "afterSha256": "8636f5ffe8459d55501f27aefd5f494ee6b973cf9036d38bafab016ee6ba09f1",
+      "edits": [
+        {
+          "file": "js/standalone/object-state.js",
+          "before": "../ported/js-runtime.js",
+          "after": "../nethack/runtime.js"
+        }
+      ]
+    },
+    {
+      "file": "scripts/test-js-game-files.mjs",
+      "beforeSha256": "f9fc56e6c9b8df2de70b026edc75a38bbbfb9c1fb9e0b83c8bb0168cef8642e2",
+      "afterSha256": "e8e1a75fcba83de423ab613549ea1067122281fcbc380641bbee368007614589",
+      "edits": [
+        {
+          "file": "scripts/test-js-game-files.mjs",
+          "before": "../js/ported/js-runtime.js",
+          "after": "../js/nethack/runtime.js"
+        }
+      ]
+    },
+    {
+      "file": "scripts/test-js-runtime-regex.mjs",
+      "beforeSha256": "4dc2e097d15412b3339a50b8ad3d5177c4ea6c297ef6f92ce1b8ef07a47e50bf",
+      "afterSha256": "be180e743a9dc05c761287264a0327eaea291a159b2f4df81302b9c85ca94c74",
+      "edits": [
+        {
+          "file": "scripts/test-js-runtime-regex.mjs",
+          "before": "../js/ported/js-runtime.js",
+          "after": "../js/nethack/runtime.js"
+        }
+      ]
+    },
+    {
+      "file": "scripts/test-js-time.mjs",
+      "beforeSha256": "5d74476299b02f9132a7bd1f29d422fb6442eee2d86c5a1d5876d87b1fb48716",
+      "afterSha256": "4cf53c9a1693c0b372e057bd4b1e2c7ac9f96bd80c987fba29c5cbc1efc93fe1",
+      "edits": [
+        {
+          "file": "scripts/test-js-time.mjs",
+          "before": "../js/ported/js-runtime.js",
+          "after": "../js/nethack/runtime.js"
+        }
+      ]
+    },
+    {
+      "file": "scripts/test-js-runtime.mjs",
+      "beforeSha256": "05cce9e0f31283a6adbd707e8fe9ec5592c447c970d24b4a783c493d84e6412c",
+      "afterSha256": "bc15b3713e1d660dcc2e35c8c71a30a687a260169f4f998d8a5bb80ef2656a5b",
+      "edits": [
+        {
+          "file": "scripts/test-js-runtime.mjs",
+          "before": "../js/ported/js-runtime.js",
+          "after": "../js/nethack/runtime.js"
+        }
+      ]
+    },
+    {
+      "file": "scripts/export-standalone-were-abi.py",
+      "beforeSha256": "d6f3e3556b6121edc84f605e86ff915199494695a6262d93334cb363e6b34c8b",
+      "afterSha256": "9c78df5094289a940f00bd678236b8c39d16c4cdec05eff5a88e672a3e67a5d9",
+      "edits": [
+        {
+          "file": "scripts/export-standalone-were-abi.py",
+          "before": "'js/ported/js-runtime.js',",
+          "after": ""
+        }
+      ]
+    },
+    {
+      "file": "scripts/export-standalone-scanf-abi.py",
+      "beforeSha256": "5f2b4351bd750ff05f3db50322fb37e96294ffbcad2ed1f1579b1f7c6cbd44f9",
+      "afterSha256": "c9d13bc0e91765628e82138de8834ec74fd4824932cd41e93dc29b2636467eb7",
+      "edits": [
+        {
+          "file": "scripts/export-standalone-scanf-abi.py",
+          "before": "'js/standalone/scanf.js',",
+          "after": ""
+        },
+        {
+          "file": "scripts/export-standalone-scanf-abi.py",
+          "before": "'js/standalone/stdio.js',",
+          "after": ""
+        }
+      ]
+    },
+    {
+      "file": "scripts/test-standalone-scanf.mjs",
+      "beforeSha256": "3c69e0a9892bda55fd00bde1c369c4ceadc224893f9255b11e776f9ff6e5ae69",
+      "afterSha256": "53fc33cab8e61cbd0fa4b3eee9c7269e8baf7814cda45f9da6afe8bc23b502e0",
+      "edits": [
+        {
+          "file": "scripts/test-standalone-scanf.mjs",
+          "before": "js/standalone/scanf.js",
+          "after": "js/c-runtime/scanf.js"
+        },
+        {
+          "file": "scripts/test-standalone-scanf.mjs",
+          "before": "js/standalone/stdio.js",
+          "after": "js/c-runtime/stdio.js"
+        }
+      ]
+    }
+  ]
+}

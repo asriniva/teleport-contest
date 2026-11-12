@@ -1,0 +1,550 @@
+{
+  "scope": "Completed pre-completion C-runtime cleanup; no full-game/native-host/public44 or performance acceptance",
+  "branch": "cleanup/c-runtime-rect",
+  "integrationBaseCommit": "059e17579a72ec6325e7b4d7e7fd7eead577d79b",
+  "auditBaselineCommit": "5937d1695e5ee9f7de44c7a59d539ce64fa7e025",
+  "sourceManifestSha256": "998738a000eee95cc4a788df4c221fa257cf2d5c8e5d67e7c62c27eb3323c9cb",
+  "sourceManifestFiles": 198,
+  "finalSourceManifestVerified": true,
+  "componentMatrix": {
+    "referenceKind": "Original Emscripten-C, not native host",
+    "environment": {
+      "TELEPORT_NATIVE_TESTS": "0",
+      "INVENT_PROBE_DIR": ".cache/tu-probes"
+    },
+    "commandPattern": "node scripts/test-tu-<name>.mjs",
+    "results": [
+      {
+        "name": "apply",
+        "exitCode": 0,
+        "seconds": 1.574
+      },
+      {
+        "name": "artifact",
+        "exitCode": 0,
+        "seconds": 3.196
+      },
+      {
+        "name": "ball",
+        "exitCode": 0,
+        "seconds": 3.188
+      },
+      {
+        "name": "botl",
+        "exitCode": 0,
+        "seconds": 2.471
+      },
+      {
+        "name": "cfgfiles",
+        "exitCode": 0,
+        "seconds": 0.372
+      },
+      {
+        "name": "cmd",
+        "exitCode": 0,
+        "seconds": 11.388
+      },
+      {
+        "name": "coloratt",
+        "exitCode": 0,
+        "seconds": 0.684
+      },
+      {
+        "name": "dbridge",
+        "exitCode": 0,
+        "seconds": 21.615
+      },
+      {
+        "name": "detect",
+        "exitCode": 0,
+        "seconds": 0.433
+      },
+      {
+        "name": "display",
+        "exitCode": 0,
+        "seconds": 3.512
+      },
+      {
+        "name": "do",
+        "exitCode": 0,
+        "seconds": 0.411
+      },
+      {
+        "name": "do_wear",
+        "exitCode": 0,
+        "seconds": 0.858
+      },
+      {
+        "name": "dogmove",
+        "exitCode": 0,
+        "seconds": 0.519
+      },
+      {
+        "name": "dothrow",
+        "exitCode": 0,
+        "seconds": 48.638
+      },
+      {
+        "name": "dungeon",
+        "exitCode": 0,
+        "seconds": 20.802
+      },
+      {
+        "name": "end",
+        "exitCode": 0,
+        "seconds": 0.26
+      },
+      {
+        "name": "exper",
+        "exitCode": 0,
+        "seconds": 0.381
+      },
+      {
+        "name": "explode",
+        "exitCode": 0,
+        "seconds": 0.099
+      },
+      {
+        "name": "extralev",
+        "exitCode": 0,
+        "seconds": 0.347
+      },
+      {
+        "name": "files",
+        "exitCode": 0,
+        "seconds": 0.396
+      },
+      {
+        "name": "hack",
+        "exitCode": 0,
+        "seconds": 22.99
+      },
+      {
+        "name": "invent",
+        "exitCode": 0,
+        "seconds": 0.209
+      },
+      {
+        "name": "light",
+        "exitCode": 1,
+        "seconds": 0.278
+      },
+      {
+        "name": "makemon",
+        "exitCode": 0,
+        "seconds": 3.742
+      },
+      {
+        "name": "mcastu",
+        "exitCode": 0,
+        "seconds": 1.193
+      },
+      {
+        "name": "mhitu",
+        "exitCode": 0,
+        "seconds": 1.282
+      },
+      {
+        "name": "mklev",
+        "exitCode": 0,
+        "seconds": 61.173
+      },
+      {
+        "name": "mkmaze",
+        "exitCode": 0,
+        "seconds": 1.763
+      },
+      {
+        "name": "mkobj",
+        "exitCode": 0,
+        "seconds": 12.076
+      },
+      {
+        "name": "mondata",
+        "exitCode": 0,
+        "seconds": 21.684
+      },
+      {
+        "name": "muse",
+        "exitCode": 0,
+        "seconds": 0.704
+      },
+      {
+        "name": "music",
+        "exitCode": 0,
+        "seconds": 9.232
+      },
+      {
+        "name": "nhlua",
+        "exitCode": 0,
+        "seconds": 0.406
+      },
+      {
+        "name": "o_init",
+        "exitCode": 0,
+        "seconds": 22.896
+      },
+      {
+        "name": "options",
+        "exitCode": 0,
+        "seconds": 4.86
+      },
+      {
+        "name": "pickup",
+        "exitCode": 0,
+        "seconds": 22.041
+      },
+      {
+        "name": "polyself",
+        "exitCode": 0,
+        "seconds": 5.186
+      },
+      {
+        "name": "pray",
+        "exitCode": 0,
+        "seconds": 0.794
+      },
+      {
+        "name": "priest",
+        "exitCode": 0,
+        "seconds": 2.441
+      },
+      {
+        "name": "quest",
+        "exitCode": 0,
+        "seconds": 0.512
+      },
+      {
+        "name": "read",
+        "exitCode": 0,
+        "seconds": 2.807
+      },
+      {
+        "name": "restore",
+        "exitCode": 0,
+        "seconds": 8.716
+      },
+      {
+        "name": "save",
+        "exitCode": 0,
+        "seconds": 1.625
+      },
+      {
+        "name": "shk",
+        "exitCode": 0,
+        "seconds": 0.228
+      },
+      {
+        "name": "sp_lev",
+        "exitCode": 0,
+        "seconds": 10.426
+      },
+      {
+        "name": "termcap",
+        "exitCode": 0,
+        "seconds": 3.658
+      },
+      {
+        "name": "topl",
+        "exitCode": 0,
+        "seconds": 2.253
+      },
+      {
+        "name": "trap",
+        "exitCode": 0,
+        "seconds": 0.267
+      },
+      {
+        "name": "uhitm",
+        "exitCode": 0,
+        "seconds": 3.272
+      },
+      {
+        "name": "unixmain",
+        "exitCode": 0,
+        "seconds": 0.125
+      },
+      {
+        "name": "unixunix",
+        "exitCode": 0,
+        "seconds": 0.144
+      },
+      {
+        "name": "version",
+        "exitCode": 0,
+        "seconds": 1.288
+      },
+      {
+        "name": "vision",
+        "exitCode": 0,
+        "seconds": 11.667
+      },
+      {
+        "name": "wield",
+        "exitCode": 0,
+        "seconds": 5.757
+      },
+      {
+        "name": "wizard",
+        "exitCode": 0,
+        "seconds": 0.588
+      },
+      {
+        "name": "wizcmds",
+        "exitCode": 0,
+        "seconds": 1.066
+      },
+      {
+        "name": "worm",
+        "exitCode": 0,
+        "seconds": 0.868
+      },
+      {
+        "name": "worn",
+        "exitCode": 0,
+        "seconds": 6.468
+      }
+    ],
+    "passed": 57,
+    "failed": 1,
+    "failure": {
+      "name": "light",
+      "baselineFailure": {
+        "sameFailure": true,
+        "baselineLogSha256": "d0aa2607ec2070fdfffadd28245c00a2fc508350f68f220ada665597b5546bf1",
+        "finalLogSha256": "d0aa2607ec2070fdfffadd28245c00a2fc508350f68f220ada665597b5546bf1",
+        "baselineExitCode": 1,
+        "finalExitCode": 1
+      },
+      "difference": "JS diagnostic id=null versus C id=0; exact baseline adapter fails identically",
+      "waived": false
+    }
+  },
+  "focusedRuntimeAndGameChecks": [
+    {
+      "name": "check-c-runtime-boundaries",
+      "exitCode": 0,
+      "seconds": 0.073
+    },
+    {
+      "name": "check-c-runtime-relocation",
+      "exitCode": 0,
+      "seconds": 0.146
+    },
+    {
+      "name": "check-c-runtime-extraction",
+      "exitCode": 0,
+      "seconds": 4.492
+    },
+    {
+      "name": "test-c-runtime-memory",
+      "exitCode": 0,
+      "seconds": 0.035
+    },
+    {
+      "name": "test-c-runtime-contracts",
+      "exitCode": 0,
+      "seconds": 0.041
+    },
+    {
+      "name": "test-c-runtime-adapter-memory",
+      "exitCode": 0,
+      "seconds": 0.037
+    },
+    {
+      "name": "test-js-runtime",
+      "exitCode": 0,
+      "seconds": 1.534
+    },
+    {
+      "name": "test-standalone-environment",
+      "exitCode": 0,
+      "seconds": 0.44
+    },
+    {
+      "name": "test-standalone-address-ports",
+      "exitCode": 0,
+      "seconds": 0.676
+    },
+    {
+      "name": "test-standalone-libc",
+      "exitCode": 0,
+      "seconds": 0.813
+    },
+    {
+      "name": "test-standalone-scanf",
+      "exitCode": 0,
+      "seconds": 0.389
+    },
+    {
+      "name": "test-standalone-stdio-buffers",
+      "exitCode": 0,
+      "seconds": 0.415
+    },
+    {
+      "name": "test-standalone-io-lua",
+      "exitCode": 0,
+      "seconds": 0.353
+    },
+    {
+      "name": "test-standalone-serialization",
+      "exitCode": 0,
+      "seconds": 0.389
+    },
+    {
+      "name": "test-standalone-terminal",
+      "exitCode": 0,
+      "seconds": 0.386
+    },
+    {
+      "name": "test-standalone-isolation",
+      "exitCode": 0,
+      "seconds": 2.008
+    },
+    {
+      "name": "check-standalone-special-interactions",
+      "exitCode": 0,
+      "seconds": 1.452
+    },
+    {
+      "name": "test-standalone-program",
+      "exitCode": 0,
+      "seconds": 26.781
+    },
+    {
+      "name": "test-standalone-death-program",
+      "exitCode": 0,
+      "seconds": 168.457
+    }
+  ],
+  "focusedChecksNote": "These nineteen passed on the final production runtime; later edits corrected one owned libc metadata pin and distinguished original/actual TOPL summary hashes. Final audits and TOPL were rerun below.",
+  "additionalChecks": [
+    {
+      "name": "check-standalone-scope",
+      "exitCode": 0,
+      "seconds": 1.682
+    },
+    {
+      "name": "check-c-runtime-extraction",
+      "exitCode": 0,
+      "seconds": 4.481
+    },
+    {
+      "name": "check-c-runtime-relocation",
+      "exitCode": 0,
+      "seconds": 0.145
+    },
+    {
+      "name": "test-js-game-files",
+      "exitCode": 1,
+      "seconds": 0.036
+    },
+    {
+      "name": "test-js-runtime-regex",
+      "exitCode": 0,
+      "seconds": 0.468
+    },
+    {
+      "name": "test-js-time",
+      "exitCode": 0,
+      "seconds": 1.949
+    },
+    {
+      "name": "test-standalone-level-persistence",
+      "exitCode": 0,
+      "seconds": 0.649
+    },
+    {
+      "name": "test-standalone-pager-startup",
+      "exitCode": 0,
+      "seconds": 240.968
+    }
+  ],
+  "filesystemRerun": {
+    "name": "test-js-game-files",
+    "initialFailure": "Local MEMFS oracle missing; original attempt retained",
+    "result": "PASS after independently copying exact existing reference artifacts",
+    "artifactSha256": {
+      "memfs-oracle.mjs": "a03ddc52e429ef6832c38f1a93f422dd3ff8be2bb49f1e90ec7025654cdc5883",
+      "memfs-oracle.wasm": "4a3e063e8bbf827c212c5090c64ef35ad4a9b77c23e5eec0bc073fa5dea76602"
+    }
+  },
+  "finalChecks": [
+    {
+      "name": "check-c-runtime-boundaries",
+      "exitCode": 0,
+      "seconds": 0.072
+    },
+    {
+      "name": "check-c-runtime-relocation",
+      "exitCode": 0,
+      "seconds": 0.143
+    },
+    {
+      "name": "check-c-runtime-extraction",
+      "exitCode": 0,
+      "seconds": 4.511
+    },
+    {
+      "name": "check-standalone-scope",
+      "exitCode": 0,
+      "seconds": 1.699
+    },
+    {
+      "name": "test-c-runtime-adapter-memory",
+      "exitCode": 0,
+      "seconds": 0.038
+    },
+    {
+      "name": "test-js-game-files",
+      "exitCode": 0,
+      "seconds": 0.895
+    },
+    {
+      "name": "test-tu-topl",
+      "exitCode": 0,
+      "seconds": 1.649
+    }
+  ],
+  "compiledInputNegativeControls": {
+    "exactInverseAccepted": true,
+    "wrongOriginalPinRejected": true,
+    "unrelatedFileRejected": true,
+    "logSha256": "e7abf3d6e55d674f60135e6ec7e5caf138b6152cb650b693434b05f08272cd61"
+  },
+  "sourceSize": {
+    "baselineCommit": "059e17579a72ec6325e7b4d7e7fd7eead577d79b",
+    "scope": "All production js/**/*.js; raw UTF-8 bytes and physical lines, not bundle size or performance",
+    "before": {
+      "files": 488,
+      "bytes": 19544589,
+      "lines": 300765
+    },
+    "after": {
+      "files": 503,
+      "bytes": 19539098,
+      "lines": 300928
+    },
+    "delta": {
+      "files": 15,
+      "bytes": -5491,
+      "lines": 163
+    }
+  },
+  "limitations": [
+    "LIGHT remains a failing baseline component; no expectation or input changed.",
+    "The complete standalone/registry aggregate was not executed as one green gate.",
+    "Inherited absolute reference paths and exact historical git objects remain development-input requirements.",
+    "Mixed-backend retirement awaits complete pure-JS acceptance.",
+    "Main advanced after the recorded rebase; integration into later main is separate."
+  ],
+  "localEvidenceDirectories": [
+    ".cache/c-runtime-cleanup/helper-components/20261111-163343-30353",
+    ".cache/c-runtime-cleanup/final-plan",
+    ".cache/c-runtime-cleanup/final-remainder"
+  ],
+  "matrixAdapterSourcesUnchangedSinceComponentRun": true,
+  "matrixVerifiedSourceFiles": 59,
+  "historicalPreLatestMainRebase": true,
+  "latestRebaseRecord": "docs/runtime-environment/c-runtime-rebase-validation.json"
+}

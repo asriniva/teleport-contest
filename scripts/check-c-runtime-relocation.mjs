@@ -29,6 +29,15 @@ for(const name of ['scanf-abi','were-abi']) {
 // All translated policies and frozen inputs retain the established baseline.
 const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const policies=JSON.parse(read('docs/runtime-environment/scope-baseline.json'));
-for(const [file,expected]of Object.entries(policies.sha256))assert.equal(sha(file),expected,'Changed policy '+file);
+// Preserve main's explicitly approved VISION exception without refreshing the
+// immutable policy baseline or accepting additional correction declarations.
+const integrationBase=JSON.parse(read('docs/runtime-environment/c-runtime-manifest.json')).integrationBaseCommit;
+const correctionFile='docs/runtime-environment/authorized-port-corrections.json';
+assert.equal(read(correctionFile),execFileSync('git',['show',integrationBase+':'+correctionFile],{encoding:'utf8'}),'Changed main-approved correction declaration');
+const {corrections}=JSON.parse(read(correctionFile));
+assert.deepEqual(corrections.map(row=>row.file),['js/ported/vision.js']);
+for(const row of corrections)assert.equal(policies.sha256[row.file],row.baselineSha256);
+const corrected=new Map(corrections.map(row=>[row.file,row.correctedSha256]));
+for(const [file,expected]of Object.entries(policies.sha256))assert.equal(sha(file),corrected.get(file)??expected,'Changed policy '+file);
 for(const name of ['isaac64','terminal','storage'])assert.equal(read('js/'+name+'.js'),read('frozen/'+name+'.js'));
-console.log('PASS: 9 relocated factory bodies mechanically preserved (platform getpid and typedef declarations explicitly separated); '+Object.keys(policies.sha256).length+' baseline inputs and 3 frozen files unchanged.');
+console.log('PASS: 9 relocated factory bodies mechanically preserved (platform getpid and typedef declarations explicitly separated); '+Object.keys(policies.sha256).length+' baseline inputs checked, including main\'s exact approved VISION correction; 3 frozen files unchanged.');

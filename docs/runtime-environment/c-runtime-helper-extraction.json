@@ -1,0 +1,1603 @@
+{
+  "baselineCommit": "c0740becc16e413e0eab9bc55747381841faf80b",
+  "helperFile": "js/c-runtime/adapter-memory.js",
+  "helperSha256": "367d136b77392b9b13595e89e0dad8b2a2a8553e9ab0fda02768dc112edea7d7",
+  "importStyle": "namespace",
+  "specifications": [
+    {
+      "name": "descriptorArray",
+      "bodySha256": "6aa8a047432b533178cabbaae475fb13c3c5bb2947cc88d9557c99cf89a3c6e5",
+      "dependencies": [
+        "cache",
+        "width",
+        "read",
+        "write"
+      ],
+      "parameters": [
+        "d",
+        "at"
+      ],
+      "expectedOccurrences": 9
+    },
+    {
+      "name": "writeIntegerCell",
+      "bodySha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+      "dependencies": [
+        "memory",
+        "address",
+        "bits"
+      ],
+      "parameters": [
+        "v"
+      ],
+      "expectedOccurrences": 17
+    },
+    {
+      "name": "narrowInteger",
+      "bodySha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+      "dependencies": [
+        "signed",
+        "bits"
+      ],
+      "parameters": [
+        "v"
+      ],
+      "expectedOccurrences": 17
+    },
+    {
+      "name": "writeDescriptor",
+      "bodySha256": "f974a6cc1362c09bd3b58c0ae72c972e5e5e23f588a9789a332a913ab856f810",
+      "dependencies": [
+        "services",
+        "addr",
+        "width",
+        "memory",
+        "raw"
+      ],
+      "parameters": [
+        "d",
+        "at",
+        "v"
+      ],
+      "expectedOccurrences": 9
+    },
+    {
+      "name": "readIntegerCell",
+      "bodySha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+      "dependencies": [
+        "memory",
+        "decode",
+        "t",
+        "bits",
+        "address"
+      ],
+      "parameters": [],
+      "expectedOccurrences": 15
+    },
+    {
+      "name": "scalarMethod",
+      "bodySha256": "ac23a515bb1249ccd836106c67fe363892975a936e6ba51085f7e97e6308e5da",
+      "dependencies": [],
+      "parameters": [
+        "t"
+      ],
+      "expectedOccurrences": 6,
+      "expression": true
+    },
+    {
+      "name": "advanceDescriptor",
+      "bodySha256": "e0c2d6d58945eed1df5ca63230532cebcfa2c9db4d9c913a4d91f22b2879b9e4",
+      "dependencies": [
+        "view",
+        "addr",
+        "layout",
+        "array",
+        "width",
+        "read",
+        "write"
+      ],
+      "parameters": [
+        "v",
+        "n"
+      ],
+      "expectedOccurrences": 4
+    },
+    {
+      "name": "defineScalarField",
+      "bodySha256": "2d93bfa39a0c7c2879dfc7200a00376fd7f30745808f33fcf540f3a05e1dfd7b",
+      "dependencies": [
+        "view"
+      ],
+      "parameters": [
+        "obj",
+        "key",
+        "at",
+        "kind"
+      ],
+      "expectedOccurrences": 7,
+      "expression": true
+    },
+    {
+      "name": "pointerSequence",
+      "bodySha256": "f442525b229588133b33a347fc21ee0f32ad220f54c6a7426a5edd19e823ad4d",
+      "dependencies": [
+        "read",
+        "write",
+        "records",
+        "record"
+      ],
+      "parameters": [
+        "p",
+        "t",
+        "stride"
+      ],
+      "expectedOccurrences": 6,
+      "expression": true
+    },
+    {
+      "name": "definePointerField",
+      "bodySha256": "666144a96e370900558cc9d2a35eb2150029928b4fd97cc6c0ff2967195c6c0f",
+      "dependencies": [
+        "pointer",
+        "view",
+        "raw"
+      ],
+      "parameters": [
+        "obj",
+        "key",
+        "at",
+        "wrap"
+      ],
+      "expectedOccurrences": 9,
+      "expression": true
+    },
+    {
+      "name": "initializeRecord",
+      "bodySha256": "6d8754488682de0efa85aaa2f4211d109f5b8b3c53f1631addc86e6a91e0ea9a",
+      "dependencies": [
+        "address",
+        "services",
+        "sizeof",
+        "write",
+        "fieldInfo",
+        "env",
+        "initialValue"
+      ],
+      "parameters": [
+        "at",
+        "type",
+        "value"
+      ],
+      "expectedOccurrences": 2
+    },
+    {
+      "name": "indexedArray",
+      "bodySha256": "fe270d4e1c09a3af83f187bf2f6443c9a78d800834ce7f1095a5f336014dd8d2",
+      "dependencies": [],
+      "parameters": [
+        "length",
+        "getter",
+        "setter"
+      ],
+      "expectedOccurrences": 3,
+      "expression": true
+    },
+    {
+      "name": "typeSize",
+      "bodySha256": "b8d32eb723837485c7153ddce990907ff16cde729ab08179df13c0ae45514d57",
+      "dependencies": [
+        "types",
+        "env",
+        "sizeOf"
+      ],
+      "parameters": [
+        "t"
+      ],
+      "expectedOccurrences": 6
+    },
+    {
+      "name": "formatShape",
+      "bodySha256": "88614c96d51964f92c8db17d8bec9f1e566626d86c5626ae82b5ae3c9ea5086f",
+      "dependencies": [
+        "cString"
+      ],
+      "parameters": [
+        "fmt"
+      ],
+      "expectedOccurrences": 4
+    },
+    {
+      "name": "readDescriptor",
+      "bodySha256": "d2b7c56772e8edbe0d232ee68363e817c50b1af1cbbd6d428d484f1acef82307",
+      "dependencies": [
+        "decode",
+        "memory"
+      ],
+      "parameters": [
+        "d",
+        "at"
+      ],
+      "expectedOccurrences": 5
+    },
+    {
+      "name": "writeTypedValue",
+      "bodySha256": "d8fc0abd2541bbc0f9c0902151561be6b3c93e4cb6b8d374d8d404afdd169c73",
+      "dependencies": [
+        "scalarType",
+        "view",
+        "raw",
+        "literal",
+        "services",
+        "address",
+        "size"
+      ],
+      "parameters": [
+        "t",
+        "p",
+        "v"
+      ],
+      "expectedOccurrences": 4
+    },
+    {
+      "name": "decodeDescriptor",
+      "bodySha256": "e396e11dbad62401e1a3ca8f974370588fa719d38b47b662fca9c6b674c7120d",
+      "dependencies": [
+        "view",
+        "array",
+        "addr"
+      ],
+      "parameters": [
+        "d",
+        "v"
+      ],
+      "expectedOccurrences": 4
+    },
+    {
+      "name": "defineScalarValue",
+      "bodySha256": "9800e2f7f077418a79932183f8e46c13bd50eb907a97489f987a6b4f2bb01dbc",
+      "dependencies": [
+        "view"
+      ],
+      "parameters": [
+        "o",
+        "key",
+        "at",
+        "kind"
+      ],
+      "expectedOccurrences": 5,
+      "expression": true
+    }
+  ],
+  "files": [
+    {
+      "file": "js/ported/apply-runtime.js",
+      "beforeSha256": "18fa800fb8709365e1ab08bb359d3bed75fc05d74f2822ad67cff08508f2765f",
+      "afterSha256": "e535d192120737498eed1d4ef617cfa743db1ee227405ec326dd69ab34cbafe5",
+      "edits": [
+        {
+          "start": 33896,
+          "end": 34141,
+          "helper": "scalarMethod",
+          "beforeSha256": "ac23a515bb1249ccd836106c67fe363892975a936e6ba51085f7e97e6308e5da",
+          "after": "Crt.scalarMethod(t)"
+        },
+        {
+          "start": 34453,
+          "end": 34730,
+          "helper": "writeTypedValue",
+          "beforeSha256": "d8fc0abd2541bbc0f9c0902151561be6b3c93e4cb6b8d374d8d404afdd169c73",
+          "after": "{return Crt.writeTypedValue(scalarType,view,raw,literal,services,address,size,t,p,v);}"
+        },
+        {
+          "start": 34757,
+          "end": 34990,
+          "helper": "pointerSequence",
+          "beforeSha256": "f442525b229588133b33a347fc21ee0f32ad220f54c6a7426a5edd19e823ad4d",
+          "after": "Crt.pointerSequence(read,write,records,record,p,t,stride)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/artifact-runtime.js",
+      "beforeSha256": "05a9f1acb105ee666af1b70ca0168a388f35692b95681164365ab63811ba4075",
+      "afterSha256": "d505451d8452c301eec1fc7509ba283d6dc88289bdf5a67c25514409b06ae982",
+      "edits": [
+        {
+          "start": 21430,
+          "end": 21651,
+          "helper": "writeDescriptor",
+          "beforeSha256": "f974a6cc1362c09bd3b58c0ae72c972e5e5e23f588a9789a332a913ab856f810",
+          "after": "{return Crt.writeDescriptor(services,addr,width,memory,raw,d,at,v);}"
+        },
+        {
+          "start": 21677,
+          "end": 22200,
+          "helper": "descriptorArray",
+          "beforeSha256": "6aa8a047432b533178cabbaae475fb13c3c5bb2947cc88d9557c99cf89a3c6e5",
+          "after": "{return Crt.descriptorArray(cache,width,read,write,d,at);}"
+        },
+        {
+          "start": 57989,
+          "end": 58313,
+          "helper": "formatShape",
+          "beforeSha256": "88614c96d51964f92c8db17d8bec9f1e566626d86c5626ae82b5ae3c9ea5086f",
+          "after": "{return Crt.formatShape(cString,fmt);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/ball-runtime.js",
+      "beforeSha256": "97909212d53485a7326fa279fbcb7e890d90cdaa6415baeacc346c29d59e2dd3",
+      "afterSha256": "724596dcc97bb1407d205c8385864c991107d0edc244f973bf39a7cb60359c93",
+      "edits": [
+        {
+          "start": 1809,
+          "end": 2004,
+          "helper": "defineScalarField",
+          "beforeSha256": "2d93bfa39a0c7c2879dfc7200a00376fd7f30745808f33fcf540f3a05e1dfd7b",
+          "after": "Crt.defineScalarField(view,obj,key,at,kind)"
+        },
+        {
+          "start": 2048,
+          "end": 2185,
+          "helper": "definePointerField",
+          "beforeSha256": "666144a96e370900558cc9d2a35eb2150029928b4fd97cc6c0ff2967195c6c0f",
+          "after": "Crt.definePointerField(pointer,view,raw,obj,key,at,wrap)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/botl-runtime.js",
+      "beforeSha256": "84aeb17d71b5c6a2d498610c0257d3194da5a12894bee1824f99bbcab00002b1",
+      "afterSha256": "c727759cef7fb2f74c63996bc8417b3196025f1017313aee4120a273424bc77c",
+      "edits": [
+        {
+          "start": 88452,
+          "end": 88858,
+          "helper": "advanceDescriptor",
+          "beforeSha256": "e0c2d6d58945eed1df5ca63230532cebcfa2c9db4d9c913a4d91f22b2879b9e4",
+          "after": "{return Crt.advanceDescriptor(view,addr,layout,array,width,read,write,v,n);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/cfgfiles-runtime.js",
+      "beforeSha256": "34cca46021459743c2b38100eb3b85203dc1ffa533e8d0df6c170f70100c66ea",
+      "afterSha256": "31e1faa8246a9f00f037ffdf9c8d1983a062152dd7147bda40cab0352ff94078",
+      "edits": [
+        {
+          "start": 56563,
+          "end": 56692,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 57131,
+          "end": 57241,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 57254,
+          "end": 57394,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/cmd-runtime.js",
+      "beforeSha256": "dc67068547b98478aeba9f0eb6c8df4f480b224b6f43ba3dfd3458c83deb5f34",
+      "afterSha256": "7b3d1713901a29db64c5c9a841e7d99d82b7b1b9fc8988d5597951043a2f6bbc",
+      "edits": [
+        {
+          "start": 155385,
+          "end": 155514,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 155943,
+          "end": 156053,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 156066,
+          "end": 156206,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/coloratt-runtime.js",
+      "beforeSha256": "d1f74d2b6195f10c0e2e77664649e68db7ebb1f5a768adb7b3408dcab342c6ef",
+      "afterSha256": "5501314390ad94956fc9a33b471b94dd5dab1687adb8a67a45643ff9d509f7e9",
+      "edits": [
+        {
+          "start": 3261,
+          "end": 3459,
+          "helper": "defineScalarValue",
+          "beforeSha256": "9800e2f7f077418a79932183f8e46c13bd50eb907a97489f987a6b4f2bb01dbc",
+          "after": "Crt.defineScalarValue(view,o,key,at,kind)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/dbridge-runtime.js",
+      "beforeSha256": "e49c15412bed57fc340817c4f143f2b594da71638e5116b26eb41a2c039e86fe",
+      "afterSha256": "0e128edc773131bf880cbbdbe04677db14cd9edebe692a29730ae0341ac9685b",
+      "edits": [
+        {
+          "start": 1544,
+          "end": 1739,
+          "helper": "defineScalarField",
+          "beforeSha256": "2d93bfa39a0c7c2879dfc7200a00376fd7f30745808f33fcf540f3a05e1dfd7b",
+          "after": "Crt.defineScalarField(view,obj,key,at,kind)"
+        },
+        {
+          "start": 1796,
+          "end": 1933,
+          "helper": "definePointerField",
+          "beforeSha256": "666144a96e370900558cc9d2a35eb2150029928b4fd97cc6c0ff2967195c6c0f",
+          "after": "Crt.definePointerField(pointer,view,raw,obj,key,at,wrap)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/detect-runtime.js",
+      "beforeSha256": "9a5266282e83d51e8516220839d6cbb9f38cf3d7c2be5e1237be42c1d419cf0a",
+      "afterSha256": "2459a22bcee78f403e38976f3a7077e95df579bd818cae7e23858bac27b0f351",
+      "edits": [
+        {
+          "start": 78539,
+          "end": 78668,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 79103,
+          "end": 79213,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 79226,
+          "end": 79366,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/display-runtime.js",
+      "beforeSha256": "03300103eec3035e8c10620ac8da9ced5212110ba7c9a4dc0afdbec7ad9cd44a",
+      "afterSha256": "e26f2d33357eb06a1afce1bb6f7f51c61ac502fda11652e241ac11fcaccfe152",
+      "edits": [
+        {
+          "start": 38613,
+          "end": 38753,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        },
+        {
+          "start": 41763,
+          "end": 41963,
+          "helper": "typeSize",
+          "beforeSha256": "b8d32eb723837485c7153ddce990907ff16cde729ab08179df13c0ae45514d57",
+          "after": "{return Crt.typeSize(types,env,sizeOf,t);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/do-runtime.js",
+      "beforeSha256": "13d23c8f595691cb80772e342f8d13295f87e94731a0f77181b015fffcc15d5e",
+      "afterSha256": "699ce680dc203c809bd96f92bdcb5ad115fc537ee675c7c6cbbe4c55a85840f8",
+      "edits": [
+        {
+          "start": 23245,
+          "end": 23768,
+          "helper": "descriptorArray",
+          "beforeSha256": "6aa8a047432b533178cabbaae475fb13c3c5bb2947cc88d9557c99cf89a3c6e5",
+          "after": "{return Crt.descriptorArray(cache,width,read,write,d,at);}"
+        },
+        {
+          "start": 29227,
+          "end": 29633,
+          "helper": "advanceDescriptor",
+          "beforeSha256": "e0c2d6d58945eed1df5ca63230532cebcfa2c9db4d9c913a4d91f22b2879b9e4",
+          "after": "{return Crt.advanceDescriptor(view,addr,layout,array,width,read,write,v,n);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/do_wear-runtime.js",
+      "beforeSha256": "df01d45e24c0690d9dbe1948e61f4c3b07200ba8f452e4b1b22825a8e4d1f3b2",
+      "afterSha256": "3593cc93fcede7b4a26cb0bafdf7a50f6f455bf838fefef859169ab57e6bcdc4",
+      "edits": [
+        {
+          "start": 14303,
+          "end": 14826,
+          "helper": "descriptorArray",
+          "beforeSha256": "6aa8a047432b533178cabbaae475fb13c3c5bb2947cc88d9557c99cf89a3c6e5",
+          "after": "{return Crt.descriptorArray(cache,width,read,write,d,at);}"
+        },
+        {
+          "start": 21921,
+          "end": 22327,
+          "helper": "advanceDescriptor",
+          "beforeSha256": "e0c2d6d58945eed1df5ca63230532cebcfa2c9db4d9c913a4d91f22b2879b9e4",
+          "after": "{return Crt.advanceDescriptor(view,addr,layout,array,width,read,write,v,n);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/dogmove-runtime.js",
+      "beforeSha256": "68f39554a118125b30f1d49c37d1821aa1bbb3c21af34fc0d7f12808055703d9",
+      "afterSha256": "4b71d3b609ebf7976e9afd1593028dcc49d21a2bce03698fa9788e42f499826c",
+      "edits": [
+        {
+          "start": 15956,
+          "end": 16179,
+          "helper": "readDescriptor",
+          "beforeSha256": "d2b7c56772e8edbe0d232ee68363e817c50b1af1cbbd6d428d484f1acef82307",
+          "after": "{return Crt.readDescriptor(decode,memory,d,at);}"
+        },
+        {
+          "start": 16207,
+          "end": 16428,
+          "helper": "writeDescriptor",
+          "beforeSha256": "f974a6cc1362c09bd3b58c0ae72c972e5e5e23f588a9789a332a913ab856f810",
+          "after": "{return Crt.writeDescriptor(services,addr,width,memory,raw,d,at,v);}"
+        },
+        {
+          "start": 16454,
+          "end": 16977,
+          "helper": "descriptorArray",
+          "beforeSha256": "6aa8a047432b533178cabbaae475fb13c3c5bb2947cc88d9557c99cf89a3c6e5",
+          "after": "{return Crt.descriptorArray(cache,width,read,write,d,at);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/dothrow-runtime.js",
+      "beforeSha256": "0cd6faeade68ab85c7bbad80178d0eeb2d3143c470f1fedc6f64c242d964d080",
+      "afterSha256": "ae2c5517eb8581a84bac848dc68b10dff7794b459beddcf02cd5cadd264f1f3e",
+      "edits": [
+        {
+          "start": 39284,
+          "end": 39413,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 39831,
+          "end": 39941,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 39954,
+          "end": 40094,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        },
+        {
+          "start": 42410,
+          "end": 42610,
+          "helper": "typeSize",
+          "beforeSha256": "b8d32eb723837485c7153ddce990907ff16cde729ab08179df13c0ae45514d57",
+          "after": "{return Crt.typeSize(types,env,sizeOf,t);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/dungeon-runtime.js",
+      "beforeSha256": "e7c6a13b572ed0aae8fc67e7e08352a8cab251b9d0f51d4e8c3188bc5af97f39",
+      "afterSha256": "9617b5d938d3d0242db63d24a439fba01a131a1bacc077b7b42734139a82a4ae",
+      "edits": [
+        {
+          "start": 59677,
+          "end": 59806,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 60224,
+          "end": 60334,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 60347,
+          "end": 60487,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        },
+        {
+          "start": 62803,
+          "end": 63003,
+          "helper": "typeSize",
+          "beforeSha256": "b8d32eb723837485c7153ddce990907ff16cde729ab08179df13c0ae45514d57",
+          "after": "{return Crt.typeSize(types,env,sizeOf,t);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/end-runtime.js",
+      "beforeSha256": "5699956ba6558103b5908eead267b414f7f97863127d5308d7816538e9d4876d",
+      "afterSha256": "62c5cde362737e8d1bcf59e1abcaea59b94639d7ddee29baca07c5c9b96eb777",
+      "edits": [
+        {
+          "start": 21214,
+          "end": 21459,
+          "helper": "scalarMethod",
+          "beforeSha256": "ac23a515bb1249ccd836106c67fe363892975a936e6ba51085f7e97e6308e5da",
+          "after": "Crt.scalarMethod(t)"
+        },
+        {
+          "start": 21769,
+          "end": 22046,
+          "helper": "writeTypedValue",
+          "beforeSha256": "d8fc0abd2541bbc0f9c0902151561be6b3c93e4cb6b8d374d8d404afdd169c73",
+          "after": "{return Crt.writeTypedValue(scalarType,view,raw,literal,services,address,size,t,p,v);}"
+        },
+        {
+          "start": 22073,
+          "end": 22306,
+          "helper": "pointerSequence",
+          "beforeSha256": "f442525b229588133b33a347fc21ee0f32ad220f54c6a7426a5edd19e823ad4d",
+          "after": "Crt.pointerSequence(read,write,records,record,p,t,stride)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/exper-runtime.js",
+      "beforeSha256": "0084f11f1db52660e25892f241831b74c21ab106a4f383c65be37893cdb77634",
+      "afterSha256": "5f6486e7b13725ab2cdd17be399c550171f37a58711d21fee475c6ee2dc259a5",
+      "edits": [
+        {
+          "start": 2130,
+          "end": 2632,
+          "helper": "indexedArray",
+          "beforeSha256": "fe270d4e1c09a3af83f187bf2f6443c9a78d800834ce7f1095a5f336014dd8d2",
+          "after": "Crt.indexedArray(length,getter,setter)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/explode-runtime.js",
+      "beforeSha256": "5e2d134abe9b3161f1eb5387b687c3ca138e21d1dd19fa1b5fab5a6ccfd3fd7f",
+      "afterSha256": "77f938c6774d5d5a70dd49f95ba28a2f4a69368531b3d081686bd89d4a448605",
+      "edits": [
+        {
+          "start": 1565,
+          "end": 1760,
+          "helper": "defineScalarField",
+          "beforeSha256": "2d93bfa39a0c7c2879dfc7200a00376fd7f30745808f33fcf540f3a05e1dfd7b",
+          "after": "Crt.defineScalarField(view,obj,key,at,kind)"
+        },
+        {
+          "start": 1795,
+          "end": 1932,
+          "helper": "definePointerField",
+          "beforeSha256": "666144a96e370900558cc9d2a35eb2150029928b4fd97cc6c0ff2967195c6c0f",
+          "after": "Crt.definePointerField(pointer,view,raw,obj,key,at,wrap)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/extralev-runtime.js",
+      "beforeSha256": "40904e28e5aeccbd12eb84daa67490232832d956756b74d04fdb2601be1e3729",
+      "afterSha256": "5c3d46eda8b21652b4111f8dd2f7a4a0468aabfadc30853873fc4efdca346b83",
+      "edits": [
+        {
+          "start": 1406,
+          "end": 1908,
+          "helper": "indexedArray",
+          "beforeSha256": "fe270d4e1c09a3af83f187bf2f6443c9a78d800834ce7f1095a5f336014dd8d2",
+          "after": "Crt.indexedArray(length,getter,setter)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/files-runtime.js",
+      "beforeSha256": "999d3dde75cd6535fb0bfb38be1d08f9a58110d5ab840000a326d9b3a3afbf72",
+      "afterSha256": "9dcd7addcce56437a208a2c5e8e1b04080f41e994dff1be870d9e79cbd5588bb",
+      "edits": [
+        {
+          "start": 27519,
+          "end": 27648,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 28062,
+          "end": 28172,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 28185,
+          "end": 28325,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/hack-runtime.js",
+      "beforeSha256": "28c9bd4654efc153bd3cc4964c5165318c57a41991e527349f855b5fa309c259",
+      "afterSha256": "1f6fbc74b0b3604fcf7c5083ba954e73a46f3b231a4152ff9c61a42f36de2052",
+      "edits": [
+        {
+          "start": 30969,
+          "end": 31190,
+          "helper": "writeDescriptor",
+          "beforeSha256": "f974a6cc1362c09bd3b58c0ae72c972e5e5e23f588a9789a332a913ab856f810",
+          "after": "{return Crt.writeDescriptor(services,addr,width,memory,raw,d,at,v);}"
+        },
+        {
+          "start": 92423,
+          "end": 92747,
+          "helper": "formatShape",
+          "beforeSha256": "88614c96d51964f92c8db17d8bec9f1e566626d86c5626ae82b5ae3c9ea5086f",
+          "after": "{return Crt.formatShape(cString,fmt);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/invent-runtime.js",
+      "beforeSha256": "6219ddc555f15b88a68c972ca23e94a023026c85aeeea5da2e5559a9c4e43b3c",
+      "afterSha256": "46ed1b2ca6b1fdae22c9fa3986d1302ededa0ad71e58eb06e947917c95ca94db",
+      "edits": [
+        {
+          "start": 61617,
+          "end": 61757,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/light-runtime.js",
+      "beforeSha256": "c6eb816a8cd414a8b896561c039e44266df3ccc662b62ef423c16ccd0dda967f",
+      "afterSha256": "8009743140af1e2b8a7139d82f48f1261fe79163a2b8a86ab66618b62139b7d6",
+      "edits": [
+        {
+          "start": 1945,
+          "end": 2143,
+          "helper": "defineScalarValue",
+          "beforeSha256": "9800e2f7f077418a79932183f8e46c13bd50eb907a97489f987a6b4f2bb01dbc",
+          "after": "Crt.defineScalarValue(view,o,key,at,kind)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/makemon-runtime.js",
+      "beforeSha256": "8858da6aba755b449224492ff5495e5f21be5b69dfbf5359250069abbfc6e882",
+      "afterSha256": "a9fc850998099704dc7d735972d15c2aeffdfe018083dc414a4fea6379380ad8",
+      "edits": [
+        {
+          "start": 22753,
+          "end": 22998,
+          "helper": "scalarMethod",
+          "beforeSha256": "ac23a515bb1249ccd836106c67fe363892975a936e6ba51085f7e97e6308e5da",
+          "after": "Crt.scalarMethod(t)"
+        },
+        {
+          "start": 23312,
+          "end": 23589,
+          "helper": "writeTypedValue",
+          "beforeSha256": "d8fc0abd2541bbc0f9c0902151561be6b3c93e4cb6b8d374d8d404afdd169c73",
+          "after": "{return Crt.writeTypedValue(scalarType,view,raw,literal,services,address,size,t,p,v);}"
+        },
+        {
+          "start": 23616,
+          "end": 23849,
+          "helper": "pointerSequence",
+          "beforeSha256": "f442525b229588133b33a347fc21ee0f32ad220f54c6a7426a5edd19e823ad4d",
+          "after": "Crt.pointerSequence(read,write,records,record,p,t,stride)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/mcastu-runtime.js",
+      "beforeSha256": "97e06a5a74f1039d8c6f9e3bd53fd0b077f4138f4addec4dbe88ccffd5d81a70",
+      "afterSha256": "9bbc89583f00cc35ad3bac25b1dbcf35fc49dc43edafa23ce8d53b31ceae935d",
+      "edits": [
+        {
+          "start": 1548,
+          "end": 1743,
+          "helper": "defineScalarField",
+          "beforeSha256": "2d93bfa39a0c7c2879dfc7200a00376fd7f30745808f33fcf540f3a05e1dfd7b",
+          "after": "Crt.defineScalarField(view,obj,key,at,kind)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/mhitu-runtime.js",
+      "beforeSha256": "803afa0bb357d63eb4273fec624359a852d4feaf09421f4b361c119b49699961",
+      "afterSha256": "9e74ef8aab7de25a57f9e31757a9ff34678805927fc52953248b4f27d18693aa",
+      "edits": [
+        {
+          "start": 17081,
+          "end": 17347,
+          "helper": "decodeDescriptor",
+          "beforeSha256": "e396e11dbad62401e1a3ca8f974370588fa719d38b47b662fca9c6b674c7120d",
+          "after": "{return Crt.decodeDescriptor(view,array,addr,d,v);}"
+        },
+        {
+          "start": 17372,
+          "end": 17595,
+          "helper": "readDescriptor",
+          "beforeSha256": "d2b7c56772e8edbe0d232ee68363e817c50b1af1cbbd6d428d484f1acef82307",
+          "after": "{return Crt.readDescriptor(decode,memory,d,at);}"
+        },
+        {
+          "start": 17623,
+          "end": 17844,
+          "helper": "writeDescriptor",
+          "beforeSha256": "f974a6cc1362c09bd3b58c0ae72c972e5e5e23f588a9789a332a913ab856f810",
+          "after": "{return Crt.writeDescriptor(services,addr,width,memory,raw,d,at,v);}"
+        },
+        {
+          "start": 17870,
+          "end": 18393,
+          "helper": "descriptorArray",
+          "beforeSha256": "6aa8a047432b533178cabbaae475fb13c3c5bb2947cc88d9557c99cf89a3c6e5",
+          "after": "{return Crt.descriptorArray(cache,width,read,write,d,at);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/mklev-runtime.js",
+      "beforeSha256": "7b20fc236cc03022fb918d7575eed61bad9646e0b3ce13a9f42a5d31f13f115a",
+      "afterSha256": "6fc9474a714a54e84e89fcb90e68fc2000bd49fdf67a85287db248462164dc1c",
+      "edits": [
+        {
+          "start": 29123,
+          "end": 29252,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 29666,
+          "end": 29776,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 29789,
+          "end": 29929,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        },
+        {
+          "start": 32229,
+          "end": 32429,
+          "helper": "typeSize",
+          "beforeSha256": "b8d32eb723837485c7153ddce990907ff16cde729ab08179df13c0ae45514d57",
+          "after": "{return Crt.typeSize(types,env,sizeOf,t);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/mkmaze-runtime.js",
+      "beforeSha256": "d2b80b879a2f1a43cafca0460009595c51e6e63ef98bce7df53cc705875d4c18",
+      "afterSha256": "0f8cf2ef7a517506c0d671ac12463195f32db6c93bff3f92f6a76e85b8387a48",
+      "edits": [
+        {
+          "start": 31924,
+          "end": 32053,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 32469,
+          "end": 32579,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 32592,
+          "end": 32732,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/mkobj-runtime.js",
+      "beforeSha256": "b17bcf6ff440538987a593bf78eae014fb85711e14257f0b1b638a9147f2af5c",
+      "afterSha256": "84e1d27c00837a5f3b9243cef7aa6d8628426191ff0ee27dff928b32892d8b6c",
+      "edits": [
+        {
+          "start": 88814,
+          "end": 88943,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 89376,
+          "end": 89486,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 89499,
+          "end": 89639,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/mondata-runtime.js",
+      "beforeSha256": "b89de1f4bd451a986a10d76f901b463260666899ffcc37abdf3f59e08497530e",
+      "afterSha256": "74fee645727896c78f953a30e30c418747ebfd4bd887c8642cf1f08e58095917",
+      "edits": [
+        {
+          "start": 3117,
+          "end": 3312,
+          "helper": "defineScalarField",
+          "beforeSha256": "2d93bfa39a0c7c2879dfc7200a00376fd7f30745808f33fcf540f3a05e1dfd7b",
+          "after": "Crt.defineScalarField(view,obj,key,at,kind)"
+        },
+        {
+          "start": 3667,
+          "end": 3804,
+          "helper": "definePointerField",
+          "beforeSha256": "666144a96e370900558cc9d2a35eb2150029928b4fd97cc6c0ff2967195c6c0f",
+          "after": "Crt.definePointerField(pointer,view,raw,obj,key,at,wrap)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/muse-runtime.js",
+      "beforeSha256": "8abb7746c4943d5ed11354006e0d4f54357f67066ca62e46eaeaf70453d7038d",
+      "afterSha256": "386fb005a8769eb8b5de54fbdf159468657d33fdbf747f4e08bdd1dcad1a2af5",
+      "edits": [
+        {
+          "start": 124094,
+          "end": 124223,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 124654,
+          "end": 124764,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 124777,
+          "end": 124917,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/music-runtime.js",
+      "beforeSha256": "a78ee9d9494aaba6f4473ec16737ac5b171273177e0f175845e6a6fc6c47cf90",
+      "afterSha256": "a99a2ec6f849ca47035446d36ac4c19337b080fcbf1a8f2e968ae3cb455af528",
+      "edits": [
+        {
+          "start": 2151,
+          "end": 2349,
+          "helper": "defineScalarValue",
+          "beforeSha256": "9800e2f7f077418a79932183f8e46c13bd50eb907a97489f987a6b4f2bb01dbc",
+          "after": "Crt.defineScalarValue(view,o,key,at,kind)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/nhlua-runtime.js",
+      "beforeSha256": "4583ee28526deabd0cd43fbb9b3af5f6f1b11f7b75ecc3793a3cf0172d54ddeb",
+      "afterSha256": "aa889aece6dbcc5f08b89efc54363da2530108d3275351faf343caaeb22f6669",
+      "edits": [
+        {
+          "start": 5192,
+          "end": 6247,
+          "helper": "initializeRecord",
+          "beforeSha256": "6d8754488682de0efa85aaa2f4211d109f5b8b3c53f1631addc86e6a91e0ea9a",
+          "after": "{return Crt.initializeRecord(address,services,sizeof,write,fieldInfo,env,initialValue,at,type,value);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/o_init-runtime.js",
+      "beforeSha256": "0ae03ace273afa0303df0bd6b182dcca39049805b04fea347d837f634a01103a",
+      "afterSha256": "2d16d1ce4d0012a4ffaee79323abdb7c50136dab75a10918e25a190c7f7ee83b",
+      "edits": [
+        {
+          "start": 2181,
+          "end": 2318,
+          "helper": "definePointerField",
+          "beforeSha256": "666144a96e370900558cc9d2a35eb2150029928b4fd97cc6c0ff2967195c6c0f",
+          "after": "Crt.definePointerField(pointer,view,raw,obj,key,at,wrap)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/options-runtime.js",
+      "beforeSha256": "72e955d9160d64ffa4dfb96bf4f66605010071bc00f181865dbb6a30f9577d87",
+      "afterSha256": "2a63f9e9533b40f01de1fd099d620c48be401a77ce23ac1d7644b76747cb5f5d",
+      "edits": [
+        {
+          "start": 204403,
+          "end": 204532,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 204991,
+          "end": 205101,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 205114,
+          "end": 205254,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/pickup-runtime.js",
+      "beforeSha256": "17f3c8419e062397fd2951790f2872f5aa5fd3fbea007ee4603b00b2ab4428f1",
+      "afterSha256": "75bf2a5d3b85b67728064b5570a887a1495a0e18d8d2cc3fad189ca1b87855c9",
+      "edits": [
+        {
+          "start": 53848,
+          "end": 53977,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 54393,
+          "end": 54503,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 54516,
+          "end": 54656,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        },
+        {
+          "start": 56964,
+          "end": 57164,
+          "helper": "typeSize",
+          "beforeSha256": "b8d32eb723837485c7153ddce990907ff16cde729ab08179df13c0ae45514d57",
+          "after": "{return Crt.typeSize(types,env,sizeOf,t);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/polyself-runtime.js",
+      "beforeSha256": "572478f04a63318b15a3839e10d5da6df1f163eeeb227dc440937ef16839f30d",
+      "afterSha256": "ec4545d54e1084a33ad6c3c847fff66b2a2db250143bb87c04833fb0de7a1adf",
+      "edits": [
+        {
+          "start": 17105,
+          "end": 17371,
+          "helper": "decodeDescriptor",
+          "beforeSha256": "e396e11dbad62401e1a3ca8f974370588fa719d38b47b662fca9c6b674c7120d",
+          "after": "{return Crt.decodeDescriptor(view,array,addr,d,v);}"
+        },
+        {
+          "start": 17396,
+          "end": 17619,
+          "helper": "readDescriptor",
+          "beforeSha256": "d2b7c56772e8edbe0d232ee68363e817c50b1af1cbbd6d428d484f1acef82307",
+          "after": "{return Crt.readDescriptor(decode,memory,d,at);}"
+        },
+        {
+          "start": 17647,
+          "end": 17868,
+          "helper": "writeDescriptor",
+          "beforeSha256": "f974a6cc1362c09bd3b58c0ae72c972e5e5e23f588a9789a332a913ab856f810",
+          "after": "{return Crt.writeDescriptor(services,addr,width,memory,raw,d,at,v);}"
+        },
+        {
+          "start": 17894,
+          "end": 18417,
+          "helper": "descriptorArray",
+          "beforeSha256": "6aa8a047432b533178cabbaae475fb13c3c5bb2947cc88d9557c99cf89a3c6e5",
+          "after": "{return Crt.descriptorArray(cache,width,read,write,d,at);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/pray-runtime.js",
+      "beforeSha256": "06ae62f04536c4692eb9eea98f993ff3bba734003daccd2e40f6ad1100d98f0e",
+      "afterSha256": "4b1bd74d01040282a133468a87bd2199b124b309ee6aa20db85544e62871b0f8",
+      "edits": [
+        {
+          "start": 105519,
+          "end": 105648,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 106079,
+          "end": 106189,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 106202,
+          "end": 106342,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/priest-runtime.js",
+      "beforeSha256": "54beb884688a5237e6a2cbb0aeb2a3ee67957d7f493c6880847dc356490ef62e",
+      "afterSha256": "1d55ad4506bf795df62bfe1f3115fb014701d5480ffa8c9009fe761858b1f03e",
+      "edits": [
+        {
+          "start": 2414,
+          "end": 2612,
+          "helper": "defineScalarValue",
+          "beforeSha256": "9800e2f7f077418a79932183f8e46c13bd50eb907a97489f987a6b4f2bb01dbc",
+          "after": "Crt.defineScalarValue(view,o,key,at,kind)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/quest-runtime.js",
+      "beforeSha256": "6f456ab8582d2d1d40bf7964f125263d41ec8344d1bb395444f0d6f9cadc31a5",
+      "afterSha256": "a778adcf2534a474040b3aeabdf70d93857e26c9395b7f4e34ef51bf5a8d4551",
+      "edits": [
+        {
+          "start": 1438,
+          "end": 1940,
+          "helper": "indexedArray",
+          "beforeSha256": "fe270d4e1c09a3af83f187bf2f6443c9a78d800834ce7f1095a5f336014dd8d2",
+          "after": "Crt.indexedArray(length,getter,setter)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/read-runtime.js",
+      "beforeSha256": "ce740547797f732cd63e0a350bb47860702a72978df5ccecc152ecc765801db2",
+      "afterSha256": "6cd44d6d27a14b5bfc497e2d546d59641c14b0ecb28868b6a35f353d417b7960",
+      "edits": [
+        {
+          "start": 28035,
+          "end": 28280,
+          "helper": "scalarMethod",
+          "beforeSha256": "ac23a515bb1249ccd836106c67fe363892975a936e6ba51085f7e97e6308e5da",
+          "after": "Crt.scalarMethod(t)"
+        },
+        {
+          "start": 28591,
+          "end": 28868,
+          "helper": "writeTypedValue",
+          "beforeSha256": "d8fc0abd2541bbc0f9c0902151561be6b3c93e4cb6b8d374d8d404afdd169c73",
+          "after": "{return Crt.writeTypedValue(scalarType,view,raw,literal,services,address,size,t,p,v);}"
+        },
+        {
+          "start": 28895,
+          "end": 29128,
+          "helper": "pointerSequence",
+          "beforeSha256": "f442525b229588133b33a347fc21ee0f32ad220f54c6a7426a5edd19e823ad4d",
+          "after": "Crt.pointerSequence(read,write,records,record,p,t,stride)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/restore-runtime.js",
+      "beforeSha256": "2c4cafaa9acfc6c9581a104daf8acfa1de3212bccebcdeeea5414c44ed03430f",
+      "afterSha256": "aff166900e2ce06537d0889d14dcf61a2e887898a952dd640956c63f5bdd7006",
+      "edits": [
+        {
+          "start": 25506,
+          "end": 25772,
+          "helper": "decodeDescriptor",
+          "beforeSha256": "e396e11dbad62401e1a3ca8f974370588fa719d38b47b662fca9c6b674c7120d",
+          "after": "{return Crt.decodeDescriptor(view,array,addr,d,v);}"
+        },
+        {
+          "start": 25797,
+          "end": 26020,
+          "helper": "readDescriptor",
+          "beforeSha256": "d2b7c56772e8edbe0d232ee68363e817c50b1af1cbbd6d428d484f1acef82307",
+          "after": "{return Crt.readDescriptor(decode,memory,d,at);}"
+        },
+        {
+          "start": 26048,
+          "end": 26269,
+          "helper": "writeDescriptor",
+          "beforeSha256": "f974a6cc1362c09bd3b58c0ae72c972e5e5e23f588a9789a332a913ab856f810",
+          "after": "{return Crt.writeDescriptor(services,addr,width,memory,raw,d,at,v);}"
+        },
+        {
+          "start": 26295,
+          "end": 26818,
+          "helper": "descriptorArray",
+          "beforeSha256": "6aa8a047432b533178cabbaae475fb13c3c5bb2947cc88d9557c99cf89a3c6e5",
+          "after": "{return Crt.descriptorArray(cache,width,read,write,d,at);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/save-runtime.js",
+      "beforeSha256": "50c0b0d0edf0e369916e334931dd3d9ba6d3d3dc7dc7d33e752727bbe38b8d51",
+      "afterSha256": "9d5a721884d1f4f51e0d3e6121676f7f1e4db4141282366bbb4ea1cc4e1a12b5",
+      "edits": [
+        {
+          "start": 21635,
+          "end": 21858,
+          "helper": "readDescriptor",
+          "beforeSha256": "d2b7c56772e8edbe0d232ee68363e817c50b1af1cbbd6d428d484f1acef82307",
+          "after": "{return Crt.readDescriptor(decode,memory,d,at);}"
+        },
+        {
+          "start": 21886,
+          "end": 22107,
+          "helper": "writeDescriptor",
+          "beforeSha256": "f974a6cc1362c09bd3b58c0ae72c972e5e5e23f588a9789a332a913ab856f810",
+          "after": "{return Crt.writeDescriptor(services,addr,width,memory,raw,d,at,v);}"
+        },
+        {
+          "start": 22133,
+          "end": 22656,
+          "helper": "descriptorArray",
+          "beforeSha256": "6aa8a047432b533178cabbaae475fb13c3c5bb2947cc88d9557c99cf89a3c6e5",
+          "after": "{return Crt.descriptorArray(cache,width,read,write,d,at);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/shk-runtime.js",
+      "beforeSha256": "e14bbfdfdf0da4603afdfee94dbeedb4f990181269d16331a316e37774459623",
+      "afterSha256": "5597ce491c604af2ab30c989bd708328e69069e50ff8f833f09ccbc08f02f4a0",
+      "edits": [
+        {
+          "start": 68337,
+          "end": 68466,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/sp_lev-runtime.js",
+      "beforeSha256": "f70e3d12c034acd9545503650005a378c258760a3f3c22ef30cf601393ca0227",
+      "afterSha256": "9c1bdcd22b3e2a124f040492f6c9949cc2cf18b8935177efa46b2f32090eeb2d",
+      "edits": [
+        {
+          "start": 150384,
+          "end": 150513,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 150948,
+          "end": 151058,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 151071,
+          "end": 151211,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/termcap-runtime.js",
+      "beforeSha256": "74ccdf315d0d414a22885a636806e9ec571b195623d7b980883fd8f99d31689e",
+      "afterSha256": "a59105a12a62b99e325560aac296e1dac5c58fb96b9c72f012053b03bef41fcd",
+      "edits": [
+        {
+          "start": 7272,
+          "end": 7493,
+          "helper": "writeDescriptor",
+          "beforeSha256": "f974a6cc1362c09bd3b58c0ae72c972e5e5e23f588a9789a332a913ab856f810",
+          "after": "{return Crt.writeDescriptor(services,addr,width,memory,raw,d,at,v);}"
+        },
+        {
+          "start": 20310,
+          "end": 20634,
+          "helper": "formatShape",
+          "beforeSha256": "88614c96d51964f92c8db17d8bec9f1e566626d86c5626ae82b5ae3c9ea5086f",
+          "after": "{return Crt.formatShape(cString,fmt);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/topl-runtime.js",
+      "beforeSha256": "c18f78b56dc60adbb2d0dbe8166080d2fed3eb81442402613a24a0f26b2a3dfe",
+      "afterSha256": "29ee2169c061ffdafe84ed852a90b83aa0b8e50fad98d66798b61527d9af5ba9",
+      "edits": [
+        {
+          "start": 6113,
+          "end": 6358,
+          "helper": "scalarMethod",
+          "beforeSha256": "ac23a515bb1249ccd836106c67fe363892975a936e6ba51085f7e97e6308e5da",
+          "after": "Crt.scalarMethod(t)"
+        },
+        {
+          "start": 6988,
+          "end": 7221,
+          "helper": "pointerSequence",
+          "beforeSha256": "f442525b229588133b33a347fc21ee0f32ad220f54c6a7426a5edd19e823ad4d",
+          "after": "Crt.pointerSequence(read,write,records,record,p,t,stride)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/trap-runtime.js",
+      "beforeSha256": "5ac5cb5976b626619f4727d14cf3a248874768390e9a465d5df40884a77163e2",
+      "afterSha256": "6de9245023e28d17d2db279a790ee349b191e527b3a4b42bd9612f85ea09d377",
+      "edits": [
+        {
+          "start": 5178,
+          "end": 6233,
+          "helper": "initializeRecord",
+          "beforeSha256": "6d8754488682de0efa85aaa2f4211d109f5b8b3c53f1631addc86e6a91e0ea9a",
+          "after": "{return Crt.initializeRecord(address,services,sizeof,write,fieldInfo,env,initialValue,at,type,value);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/uhitm-runtime.js",
+      "beforeSha256": "8496f21feb2befd72dd6bd8e40977c298e4ae03e9e4cde78f3f605fd0614e542",
+      "afterSha256": "59ed73ee40eccb45a9bd6b3375dd81e7b158f4295f261bcdcfaa52fcf33b466c",
+      "edits": [
+        {
+          "start": 45161,
+          "end": 45406,
+          "helper": "scalarMethod",
+          "beforeSha256": "ac23a515bb1249ccd836106c67fe363892975a936e6ba51085f7e97e6308e5da",
+          "after": "Crt.scalarMethod(t)"
+        },
+        {
+          "start": 46037,
+          "end": 46270,
+          "helper": "pointerSequence",
+          "beforeSha256": "f442525b229588133b33a347fc21ee0f32ad220f54c6a7426a5edd19e823ad4d",
+          "after": "Crt.pointerSequence(read,write,records,record,p,t,stride)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/unixmain-runtime.js",
+      "beforeSha256": "ad26be79117ad1ea9c872eb693e50e39fc28c1164f8a5382e30b54c694f3a10e",
+      "afterSha256": "8de3862a7bb00894330fe68a607515175f5e41b938b7787f36c5e7d6be6d327d",
+      "edits": [
+        {
+          "start": 11358,
+          "end": 11487,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/unixunix-runtime.js",
+      "beforeSha256": "257495f26b963a29c0afb58e02bb619d4b282cd594616e9e86ef6f93d4407c4c",
+      "afterSha256": "2b1e23734d383d72a9e0361f949f8bcef00ccbc9c49cf1007994ca7fca504c75",
+      "edits": [
+        {
+          "start": 9844,
+          "end": 9973,
+          "helper": "narrowInteger",
+          "beforeSha256": "dee6d03090d11754d63e36442cbf352e8ca609ed481e90f61e4b075a20c2387a",
+          "after": "{return Crt.narrowInteger(signed,bits,v);}"
+        },
+        {
+          "start": 10393,
+          "end": 10503,
+          "helper": "readIntegerCell",
+          "beforeSha256": "60f41ab5fe568ff3933087168edd7bc3b824b7fd2bcb6511ece361b0240686b8",
+          "after": "{return Crt.readIntegerCell(memory,decode,t,bits,address);}"
+        },
+        {
+          "start": 10516,
+          "end": 10656,
+          "helper": "writeIntegerCell",
+          "beforeSha256": "394b401bf610c12735d85a2c61d001b00336827d9f5f201673da2d851b40668e",
+          "after": "{return Crt.writeIntegerCell(memory,address,bits,v);}"
+        },
+        {
+          "start": 13026,
+          "end": 13226,
+          "helper": "typeSize",
+          "beforeSha256": "b8d32eb723837485c7153ddce990907ff16cde729ab08179df13c0ae45514d57",
+          "after": "{return Crt.typeSize(types,env,sizeOf,t);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/version-runtime.js",
+      "beforeSha256": "7135ac34d8d60bf87dbcb2c1c856b112ef4ca98ddb57fea22bd38e4cad5cebb6",
+      "afterSha256": "0a83b8118391c3280e0b2036219b7624eb4c79ec0d09e66b7c20746cd9cfe9e7",
+      "edits": [
+        {
+          "start": 3138,
+          "end": 3336,
+          "helper": "defineScalarValue",
+          "beforeSha256": "9800e2f7f077418a79932183f8e46c13bd50eb907a97489f987a6b4f2bb01dbc",
+          "after": "Crt.defineScalarValue(view,o,key,at,kind)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/vision-runtime.js",
+      "beforeSha256": "a74156a69e3e30d033ed97fbffbe641b1b093e58a31f46ca005cf77e933c374e",
+      "afterSha256": "c64df5dfe113e7acf1e1664a45882b2e3fe81f57db6868ddb9f4d77a6facf8d8",
+      "edits": [
+        {
+          "start": 12758,
+          "end": 13164,
+          "helper": "advanceDescriptor",
+          "beforeSha256": "e0c2d6d58945eed1df5ca63230532cebcfa2c9db4d9c913a4d91f22b2879b9e4",
+          "after": "{return Crt.advanceDescriptor(view,addr,layout,array,width,read,write,v,n);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/wield-runtime.js",
+      "beforeSha256": "c25ec34234202712beec185d825f867aa4a7340edd1495f7bece592ad6f05cf1",
+      "afterSha256": "64b45ffc1d0c07856e30c61a88dcb390f95385f03ceab1a3c391d224c14ff790",
+      "edits": [
+        {
+          "start": 997,
+          "end": 1192,
+          "helper": "defineScalarField",
+          "beforeSha256": "2d93bfa39a0c7c2879dfc7200a00376fd7f30745808f33fcf540f3a05e1dfd7b",
+          "after": "Crt.defineScalarField(view,obj,key,at,kind)"
+        },
+        {
+          "start": 1245,
+          "end": 1382,
+          "helper": "definePointerField",
+          "beforeSha256": "666144a96e370900558cc9d2a35eb2150029928b4fd97cc6c0ff2967195c6c0f",
+          "after": "Crt.definePointerField(pointer,view,raw,obj,key,at,wrap)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/wizard-runtime.js",
+      "beforeSha256": "2e9af9c5f34ab9d813ff6ffb3d7e18da0a5077229ef7ddbde2c7d5745081ec1f",
+      "afterSha256": "c96b8744a6beee12f5c12f7b92cd8af6e11facc075b29e852b085c4a0d11d25a",
+      "edits": [
+        {
+          "start": 2531,
+          "end": 2668,
+          "helper": "definePointerField",
+          "beforeSha256": "666144a96e370900558cc9d2a35eb2150029928b4fd97cc6c0ff2967195c6c0f",
+          "after": "Crt.definePointerField(pointer,view,raw,obj,key,at,wrap)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/wizcmds-runtime.js",
+      "beforeSha256": "9223e72b83cf12c1c39929fdf27c9d829660d7f70ac0c07cfb1766b804a71b65",
+      "afterSha256": "f73acf45f1453ae2d94d076e06b3bf7afd189d1f53d176912cfba34b751361ed",
+      "edits": [
+        {
+          "start": 23000,
+          "end": 23266,
+          "helper": "decodeDescriptor",
+          "beforeSha256": "e396e11dbad62401e1a3ca8f974370588fa719d38b47b662fca9c6b674c7120d",
+          "after": "{return Crt.decodeDescriptor(view,array,addr,d,v);}"
+        },
+        {
+          "start": 23624,
+          "end": 23845,
+          "helper": "writeDescriptor",
+          "beforeSha256": "f974a6cc1362c09bd3b58c0ae72c972e5e5e23f588a9789a332a913ab856f810",
+          "after": "{return Crt.writeDescriptor(services,addr,width,memory,raw,d,at,v);}"
+        },
+        {
+          "start": 23871,
+          "end": 24394,
+          "helper": "descriptorArray",
+          "beforeSha256": "6aa8a047432b533178cabbaae475fb13c3c5bb2947cc88d9557c99cf89a3c6e5",
+          "after": "{return Crt.descriptorArray(cache,width,read,write,d,at);}"
+        },
+        {
+          "start": 54687,
+          "end": 55011,
+          "helper": "formatShape",
+          "beforeSha256": "88614c96d51964f92c8db17d8bec9f1e566626d86c5626ae82b5ae3c9ea5086f",
+          "after": "{return Crt.formatShape(cString,fmt);}"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/worm-runtime.js",
+      "beforeSha256": "29a0925b562d488044a901e7f16f3fd566bb3773e0b4536767e46638762c7122",
+      "afterSha256": "ef678c4cbc55d427fdf33b7d6e21eb14c9bcbf06cb441863c37e3fb5a62c3f60",
+      "edits": [
+        {
+          "start": 4262,
+          "end": 4399,
+          "helper": "definePointerField",
+          "beforeSha256": "666144a96e370900558cc9d2a35eb2150029928b4fd97cc6c0ff2967195c6c0f",
+          "after": "Crt.definePointerField(pointer,view,raw,obj,key,at,wrap)"
+        }
+      ]
+    },
+    {
+      "file": "js/ported/worn-runtime.js",
+      "beforeSha256": "d397cf6428b52a80843d74a95e90154b5b704cea2d50196ef4d89954b2ebbe41",
+      "afterSha256": "6b0c91d03fbc69b6b519247a0b7989e52f50ce54562b70cf6d2b536788743eb5",
+      "edits": [
+        {
+          "start": 1069,
+          "end": 1264,
+          "helper": "defineScalarField",
+          "beforeSha256": "2d93bfa39a0c7c2879dfc7200a00376fd7f30745808f33fcf540f3a05e1dfd7b",
+          "after": "Crt.defineScalarField(view,obj,key,at,kind)"
+        },
+        {
+          "start": 1317,
+          "end": 1454,
+          "helper": "definePointerField",
+          "beforeSha256": "666144a96e370900558cc9d2a35eb2150029928b4fd97cc6c0ff2967195c6c0f",
+          "after": "Crt.definePointerField(pointer,view,raw,obj,key,at,wrap)"
+        }
+      ]
+    }
+  ]
+}

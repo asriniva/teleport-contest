@@ -6,10 +6,8 @@
   "pointerBytes": 8,
   "EOF": -1,
   "sourceSha256": {
-    "scripts/export-standalone-scanf-abi.py": "5f2b4351bd750ff05f3db50322fb37e96294ffbcad2ed1f1579b1f7c6cbd44f9",
-    "js/standalone/scanf.js": "7a2b3b50be886ad5ad87124f08266d30c72a385b90ec63057ba14f7148e9d458",
+    "scripts/export-standalone-scanf-abi.py": "c9d13bc0e91765628e82138de8834ec74fd4824932cd41e93dc29b2636467eb7",
     "js/standalone/libc.js": "098638b3aeddafdb54b7b54cb470f8de1bb5ab176625bd2fab2fa98622379e76",
-    "js/standalone/stdio.js": "656cc3661cc78b528e42735270cba5cb0c7ed1aeceb4a891fa032f7341c26bd6",
     "js/c-runtime/scanf.js": "a18c2548d566723374e227fb978c8927aef3334141637095d010a39d5dae417d",
     "js/c-runtime/libc.js": "d34ae87cb41caa8132448cc63c1a17dcff032d430344eabe932c14822c52e556",
     "js/c-runtime/stdio.js": "651307c9c33b12a2022bc5ae1a32be0a19a88236bea6e6707b9809fc411df9d0",

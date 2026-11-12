@@ -1,0 +1,398 @@
+{
+  "baselineCommit": "c0740becc16e413e0eab9bc55747381841faf80b",
+  "helperSha256": "367d136b77392b9b13595e89e0dad8b2a2a8553e9ab0fda02768dc112edea7d7",
+  "shimRecipeSha256": "18b4d9d81a71987ca79e01cda26b6cd58232a5f689313052d5c7a7173c968db1",
+  "foundationLibcMove": {
+    "baselineCommit": "df33dd4d8cbb9ea2268b51385c37c4ad5cdd3a31",
+    "file": "js/standalone/libc.js",
+    "beforeSha256": "a9499db3b7960af4e546095c49993d2559109885ab063f8e2912dd38de8094da",
+    "afterSha256": "098638b3aeddafdb54b7b54cb470f8de1bb5ab176625bd2fab2fa98622379e76",
+    "factoryBodyUnchangedExceptGetpid": true
+  },
+  "foundationAddressMove": {
+    "originalBaselineCommit": "df33dd4d8cbb9ea2268b51385c37c4ad5cdd3a31",
+    "reviewedFoundationCommit": "c0740becc16e413e0eab9bc55747381841faf80b",
+    "file": "js/standalone/address-ports.js",
+    "beforeSha256": "751adcee57a25babf8ea7f46d3e557408b1a12d50cd262207ac743c183bf56ff",
+    "packageSha256": {
+      "js/standalone/address-ports.js": "c0119a9b835996af35fb659e9d045c544d1ee77ae20bf1a9d4e134f252ddebf7",
+      "js/nethack/address-ports.js": "d36d12fec10dc70ecdc42f185fef72432968cad863ec68808747776a897dcabd",
+      "js/c-runtime/address-bindings.js": "356e68eb124886364a45828d5098c919454775c30f42849398f7d0d9e0815cb9"
+    }
+  },
+  "targetedScopeGuard": {
+    "file": "scripts/check-standalone-special-interactions.mjs",
+    "beforeSha256": "9ae2057b189d6e351faedcae62dc9fc1e60759536b7faf0c7666ff998cf5151c",
+    "afterSha256": "a1a99c2ae3e17e0aeed9608ac16fae14737772023a34a5810116f1650ee36b2b",
+    "onlyExactApprovedCorrectionAndReportingEdits": true
+  },
+  "registrySourceSelectionUnchanged": true,
+  "existingMakefileProfilesUnchanged": true,
+  "newFiniteProfiles": [
+    "production138-overhead-provenance-prelink137-shared-c-runtime",
+    "production138-overhead-provenance-linked138-shared-c-runtime"
+  ],
+  "files": [
+    {
+      "file": "nethack-c/wasm/tu-ports.json",
+      "beforeSha256": "e44e3bc8e88b79a0820de5c93ca658d67df10c06fb89e40edf9357a1bd470b61",
+      "afterSha256": "f56c6baccfab034b1da444c45898f825c793c6c4200259ac670042ab09561be9"
+    },
+    {
+      "file": "nethack-c/wasm/tu-fragments/unixunix-reviewed-makefile.py",
+      "beforeSha256": "013b54f7904f0695ee98e3f5a551c36372ee29cb351c1c6581113dd4f1608d60",
+      "afterSha256": "70dbe4f033c237586a01ea7fc98d7e48cd82b8863f5b2cac896c46886a598113"
+    },
+    {
+      "file": "js/standalone/dokick-abi.json",
+      "beforeSha256": "684cf653352db51f59de3185994206a13cbea5204cc9759f6b1e63048fd57995",
+      "afterSha256": "de356d9394a5e98955011b9346bffb0a994c5d23b81da34f0e72ddb4aa3c9e73"
+    },
+    {
+      "file": "js/standalone/ball-abi.json",
+      "beforeSha256": "5a4e4dc046ce660605f30bd92869945199ff0196c879401a89b3a20cdb01c1ab",
+      "afterSha256": "eec6b80f76a2ddd83dfa8ac19ae0e7af18e72ab0401ffd4dcff873934c2a9d25"
+    },
+    {
+      "file": "js/standalone/status-abi.json",
+      "beforeSha256": "c9bb0a203b55f1a59b4eea1f1e358b9e0d80b66e67a83aa2efbfb763b6c55d7a",
+      "afterSha256": "c96fac6f626975b38911af67044a7f5faad53b8910c7c16672a7a023864bdde3"
+    },
+    {
+      "file": "js/standalone/killer-state-abi.json",
+      "beforeSha256": "0c00fa82ebf64ca0f65a6b41970f2a9d795bfa3a680d29cc3a1093f45bc13efb",
+      "afterSha256": "ceb0ebc0e38950f5f6caa18840aee5d3e79614f22f34332c722d987a6c3d8c44"
+    },
+    {
+      "file": "js/standalone/steal-abi.json",
+      "beforeSha256": "b2329f56fbac420b5fb15a337b1ca64286345ea9ba326b8f282ab5a8dc832e64",
+      "afterSha256": "f0403877f81c4be457ff17ef72fd4c6a8a80f3420bd916610e12ef064471cd22"
+    },
+    {
+      "file": "js/standalone/apply-abi.json",
+      "beforeSha256": "d692da904db8367635af0970070a3d3ac3ddfac4d1b3c5baff0ad04a666763dd",
+      "afterSha256": "58cf2810f1f9575b52fe39b752ad997cd20c352023da084ba7b6d3d774ba09d7"
+    },
+    {
+      "file": "js/standalone/attribute-abi.json",
+      "beforeSha256": "7e0cd8795b20272ea82650dabda0bd56ccb35c642bf4b32949bccd8c38134b8f",
+      "afterSha256": "fef7723fcfd47fcfef276c359533e4560b3fe9b786aabeb25d247bcb639c574a"
+    },
+    {
+      "file": "js/standalone/pager-target-abi.json",
+      "beforeSha256": "e815a56e8ceae7b6cf1b3424defe374ebf09fa832cbfb3f0b2caf3d0414b784d",
+      "afterSha256": "8c5f453192e97bf6d492171d9cc7b1cb9b06c9373cc0892b73d66f23d3c0d79f"
+    },
+    {
+      "file": "js/standalone/makemon-private-abi.json",
+      "beforeSha256": "973cec7a805ce8ae2bd6c22336e7fc7805c8c4bf8180d014c4d71166670528db",
+      "afterSha256": "f8c7c21e4f6c2a461a526825d45f105dcda96fa5cd1dae44e994622e38f366f8"
+    },
+    {
+      "file": "js/standalone/teleport-abi.json",
+      "beforeSha256": "5910506e9ff867e532a2c642cf8f7df5a90fdf436d77a03ba4456cdaaf6b0e84",
+      "afterSha256": "f3a67b5fcbbb90d4351c4e6d4fe72249c49292b9cf780ac3c02ed433f9b430f9"
+    },
+    {
+      "file": "js/standalone/mthrowu-abi.json",
+      "beforeSha256": "9a1f569381391abe2b393840d01a2d7052633e566d7da223541735f0a20a877a",
+      "afterSha256": "abce0193b7d04c68ff274d7b801db1aeb077b258c1310f4af57fd42c4dc5c3cb"
+    },
+    {
+      "file": "js/standalone/vault-abi.json",
+      "beforeSha256": "3ebea90a38aad4243ff1e0176375d2a331646f2aa97b551813123d30f4f12ff0",
+      "afterSha256": "86af0a9dc4d990a3562106c1b8fc646f435c2afc730b0292e8696c48a2c2d49d"
+    },
+    {
+      "file": "js/standalone/options-abi.json",
+      "beforeSha256": "41aad6d82f890285aacc8c119dd904e5be81faba79babccdfc4abaa303174757",
+      "afterSha256": "27e004c78cb9d9c76257bee7bbd173165df9f08a906208e98f923d28327e6151"
+    },
+    {
+      "file": "js/standalone/getpos-abi.json",
+      "beforeSha256": "4216a3ce21f301956c04587643c6ec81b62f5017d9552e49604fad7898f77465",
+      "afterSha256": "f3c4b05e412dec3dce0dd6a116868f9f87e7ba4e031859363639f2af927bee0d"
+    },
+    {
+      "file": "js/standalone/wizard-abi.json",
+      "beforeSha256": "2c63515226a994871059b3835bcc198ede3dcc9dcf8a4ccb306f4a6e57ff8568",
+      "afterSha256": "a4e1cd8502c6669af0babb192d2cf931a17918c6d3ac18ead02f049f0044e448"
+    },
+    {
+      "file": "js/standalone/rip-abi.json",
+      "beforeSha256": "5d779e1427231680f90407152e8bc39f277096288f72e3f9d133743ec46496ca",
+      "afterSha256": "87584474eb173543bd123ce41c94a7c76834db9b834129dc6e89c319607a6c51"
+    },
+    {
+      "file": "js/standalone/terminal-metadata.json",
+      "beforeSha256": "eb966ed7d486447f4f026be3e7c0e75c9c0946834a3fec402184d327dad70c58",
+      "afterSha256": "bd4743f63bba2ae8ffb05307fc711306616718411ec1a90a1634880fb036c2a1"
+    },
+    {
+      "file": "js/standalone/shknam-abi.json",
+      "beforeSha256": "67925a24d6d380b17096ee20f806f266bc2a834863251786c5ddc15b882a5da5",
+      "afterSha256": "61928b1662e3ecd0a8dde441ae9434bebe3c2255fa211770896682a1b4968e89"
+    },
+    {
+      "file": "js/standalone/mcastu-abi.json",
+      "beforeSha256": "b18e608d176c0577c1b69b2658d221ab0b6d23b085922e143cc6756cc16c06d6",
+      "afterSha256": "28abaf8770511606e18aea79c4b196b5816213e9e3274bfa28804134d616913c"
+    },
+    {
+      "file": "js/standalone/dogmove-abi.json",
+      "beforeSha256": "d15e859850e643351d6595cf99803581a9bfd4eb3d3ed5ddc39fb96da554a4ee",
+      "afterSha256": "ebfcb8b855c1274dc7ce9817e78895caeed1eaf769eac7e2d497896880a4a6b7"
+    },
+    {
+      "file": "js/standalone/runtime-info-abi.json",
+      "beforeSha256": "b9db5b00d7c9af6afa2415a7d893c4bca7d7c9cf199e22f2363aa238a2c50824",
+      "afterSha256": "a8d7199ea2c6dd85ea49ec2b8cac78f6f5ddfff918aeea1ac2f4c69e9662c971"
+    },
+    {
+      "file": "js/standalone/topten-abi.json",
+      "beforeSha256": "4b9a1906f920c5036b46ac47082244052ca2fe144bea60c72d73e14b2f30b4d0",
+      "afterSha256": "9c3c137cb3cebaf1d620c7b460fcfd5f65a826364cecf4030e1868e808e7554b"
+    },
+    {
+      "file": "js/standalone/were-abi.json",
+      "beforeSha256": "a6e02a1b78277a78c5ad8e3d699e15fac7c60db4c3c67eb3ddb8f31572082e87",
+      "afterSha256": "40e0d8322484e98450185303334785ecf11a8aac230945f7ec0a9ca5d8d8705d"
+    },
+    {
+      "file": "js/standalone/mondata-abi.json",
+      "beforeSha256": "e98a7e9190f1ae2d3b6f2535513b22d39a2e324faa6e95ab2ae87d8de22a850a",
+      "afterSha256": "20dcedf8cae811fae5b6fa23d99ef808a8ce50caf2989cc12ceeaf78f127a1f4"
+    },
+    {
+      "file": "js/standalone/save-lifecycle-abi.json",
+      "beforeSha256": "2bbe62d98d9de9ba76791ef8b4f986b696c20b489264f66faeec502fc9719eab",
+      "afterSha256": "169f3f96e4ebb09d07f0e6c02f83d463a3c97847511591294ae2ecaaea15c85f"
+    },
+    {
+      "file": "js/standalone/quest-abi.json",
+      "beforeSha256": "471e88759981ef32a481dc19f6d95915e56743ee32ed5c1c50a2c7c03c6961e8",
+      "afterSha256": "390af3d13cc97e96c5418b94ce42d22b0786549594c659b260ae98fe013bfac8"
+    },
+    {
+      "file": "js/standalone/read-abi.json",
+      "beforeSha256": "d61ab4fbaba17f0915092613ce2757c175085b176d1688a3c16f6d4a9fa43b14",
+      "afterSha256": "a22d98b0f6f85e7b8d6b788ed279e8740e81d370c0b41ae7ebd7ca5493b889b4"
+    },
+    {
+      "file": "js/standalone/vision-abi.json",
+      "beforeSha256": "ab13e5f5e5e64da1257d79cd549bc66ae131c42e31b3e034bac711f6ffcef436",
+      "afterSha256": "3a750012fc49f8dcd7cce600aa7d7954cc298c5f8b34f7bb031c18b7c2edf6b4"
+    },
+    {
+      "file": "js/standalone/equipment-abi.json",
+      "beforeSha256": "93c65e8b29879d612f6e59e2f239bcc8631c1ab828d137f5fe2d9cd0168aee80",
+      "afterSha256": "b7f78feb6a02328d6c1d91e86e87bd68e950e74ddd4164b738276e6fb88b6bde"
+    },
+    {
+      "file": "js/standalone/light-abi.json",
+      "beforeSha256": "0a38fdb75d24dadc7fe59c8e069ad5bf41d6646233d45b5267c8daf97d6cd6fe",
+      "afterSha256": "e0290fbf1a1d5e9bd15ab83f40808bbe82b4795f3513bae0a0d20205e2ba2d73"
+    },
+    {
+      "file": "js/standalone/messages-abi.json",
+      "beforeSha256": "316f924130a447c2543f78b098d46a1c8e3e47f75e4c97f8b8b51d8c00492bb6",
+      "afterSha256": "c62108b231c000b749a28aad0ffed333307bd009167cb816ac134ae4561e82b0"
+    },
+    {
+      "file": "js/standalone/hero-abi.json",
+      "beforeSha256": "a45bdd45143b862f5c379868775e2e77c8587858d7a27972079547fb5c27edb3",
+      "afterSha256": "a187ae16acd04b0909bef0afb818391cee82c5b2b3280fb654014e07c46b43e4"
+    },
+    {
+      "file": "js/standalone/quest-pager-abi.json",
+      "beforeSha256": "e0453af215faeb7d8675f7e86aada5f477029fe87021cdb2e0ccfe7e809c1bf7",
+      "afterSha256": "2b82728384245f7f46be3522b3c02590302130b40d6c9bf236cc74ea118d1551"
+    },
+    {
+      "file": "js/standalone/region-services-abi.json",
+      "beforeSha256": "e0917a810c13e5fd1709cdaa948f447af2153d761fae994fb84531a87b21ce9d",
+      "afterSha256": "2cf5a387a7d5c7965024d60a7d8291625b20c9e37a3dfc79ac205a460ea2bb55"
+    },
+    {
+      "file": "js/standalone/restore-lifecycle-abi.json",
+      "beforeSha256": "68c1addda75fbce56295e41586d45c1acacc06c4c44ad312bad2537921a88455",
+      "afterSha256": "369fd8439b016d38a3b41c58a1e3982551043aec2425b431de156084005b500b"
+    },
+    {
+      "file": "js/standalone/spell-abi.json",
+      "beforeSha256": "da9b64195e65fc815d3122636bca4fef890bdcaf2828d9cb5fcd5f5c09bfbb77",
+      "afterSha256": "87c6b54d96d866c3d05f1b3b7165fe2e9eeaed3cedf7f07479b7dbb99ad5014d"
+    },
+    {
+      "file": "js/standalone/hack-abi.json",
+      "beforeSha256": "d32e8f9e8f48f8d4dea600026c13057b113fb7e405ff95b39f9b71378d29afa4",
+      "afterSha256": "d44b3d8508daf1bd69a80c28267efa666c9dc5db80ee90b25a1a2f153bb959c3"
+    },
+    {
+      "file": "js/standalone/persistence-transport-abi.json",
+      "beforeSha256": "0295e2d49550bcdb290afeddac643f6a80d44671429f820965b2220c546073ea",
+      "afterSha256": "ea991e0a58eeb2a7010b3210969fbc6795507967f95f55c4f970d3748c3541f6"
+    },
+    {
+      "file": "js/standalone/trap-abi.json",
+      "beforeSha256": "1597ad552040201f904c73c8932a85400c5d2f78b404e779145f66a89d64f8a6",
+      "afterSha256": "8e9045fedf9107023eeceae95da76ee3013cb1cbd9afbf18d84de3c6e1f54c6e"
+    },
+    {
+      "file": "js/standalone/priest-abi.json",
+      "beforeSha256": "652ed636522da18a3c98d6fe0594237eb580967e4c46efc31514917e039285ce",
+      "afterSha256": "b29f364de0480b5bebbb56ee2a11e5e4fb1c3daf33d1a5d60b71c9018cb4294d"
+    },
+    {
+      "file": "js/standalone/mhitu-abi.json",
+      "beforeSha256": "dd1c56aebb140f8f8ac46bbffefe4105d211ed2f1c5d0242a5b0eb6ee595dbf7",
+      "afterSha256": "f24280aee1ae81e4e528f63e31e0400b1738ee002de4f23f4309b9bb6c3a4071"
+    },
+    {
+      "file": "js/standalone/worm-abi.json",
+      "beforeSha256": "c01d0684a43b0268fcc75f5b5b12100c190c31245e9f46be45ffd58e3f229fa3",
+      "afterSha256": "b0e0e3824d2d1cf45923c1e2f6a206f71b28c77bbc30555bc7868df25464733e"
+    },
+    {
+      "file": "js/standalone/do-lifecycle-abi.json",
+      "beforeSha256": "4f91d231b7a87703cf4f4def83869667b03802590ee0dbe47fa3bcd2b14fb8dd",
+      "afterSha256": "e1a8df9ba544843fd430785ebd43baa1eed37c2eadabd533d6f0af6b23d2bcb9"
+    },
+    {
+      "file": "js/standalone/terminal-messages-abi.json",
+      "beforeSha256": "f6001ad93269d3184472884cee699e34d6104a27250db83300ca2258c3810178",
+      "afterSha256": "e1f902636359e3ff50dc6cfb9e5d4ff2524f50bd153a87406c06c6ababa154b1"
+    },
+    {
+      "file": "js/standalone/files-abi.json",
+      "beforeSha256": "775b38382b665dbbff3bf672def32f7d9d819fbfe7e8cca9a1bcea760f90b3f3",
+      "afterSha256": "0ff2ff603d036ca9bec9f7470288557d579b2eb12e6e53baa3ac562d45237e45"
+    },
+    {
+      "file": "js/standalone/scanf-abi.json",
+      "beforeSha256": "f8f40cc9ea8184b3f6dc368f2042249743e1e36003684992336d7283e02a586f",
+      "afterSha256": "5b5bdfa71d168e3794f2c0ca7dcde33d9e3d098e442d055bc758bd957964cfc4"
+    },
+    {
+      "file": "js/standalone/configuration-abi.json",
+      "beforeSha256": "133ec8e2f6d18e7cfae3701acbc5e6c592318d2b9e0a4510e122c0173927f7fa",
+      "afterSha256": "fa22ceffa5953ea6e2343f68b0d468af46889bf0ce9e83a1d9750d7cc9110ff2"
+    },
+    {
+      "file": "js/standalone/mail-abi.json",
+      "beforeSha256": "80c8dfef3118602fb8d09532c211ee79bcde95d3005745fca1c1ec69008a6a3d",
+      "afterSha256": "d01b944cdace76641e370cc4bb973a53b03f99d26ca50b831946b584323b7f7a"
+    },
+    {
+      "file": "js/standalone/records.json",
+      "beforeSha256": "d29a68b050cdcbc3b5c1ad9f274a1f993352cfe1a0c334bf110c0d08a614ed52",
+      "afterSha256": "b0e9d94ad00af9838c21971dc7f682ea87634c8d19000e6c1940208ee1ed01b2"
+    },
+    {
+      "file": "js/standalone/wizcmds-abi.json",
+      "beforeSha256": "4964982e0662101a4693af45f728e1b87df718076fa4e638c98bf5a6cfb596a3",
+      "afterSha256": "4d958e68a263ee00599e7dbb881caee93e40af6d779bff41fcaf8a67b2ff0ced"
+    },
+    {
+      "file": "js/standalone/exper-abi.json",
+      "beforeSha256": "661d55024ff369ef4b5b071f628bbd0adb23b7f085351eda4563a3007a020e89",
+      "afterSha256": "712b03d6a2bcc39c88e8fdd744104e7fa5e20ea5de43b9732b1647dff043b094"
+    },
+    {
+      "file": "js/standalone/minion-abi.json",
+      "beforeSha256": "4d859cd7266edde102a9c250b990dc9729ff06133744144049cf28b1dfad3810",
+      "afterSha256": "002ec697dc54c3a111ae4fff8288e073b75d2fe18635dd75d64545e845873a0d"
+    },
+    {
+      "file": "js/standalone/artifact-abi.json",
+      "beforeSha256": "db3a9c917f2494c68b49fc7de11a64f636132a1aeeb75713a86f9819ad0c0329",
+      "afterSha256": "e92d78a704e078c9f225830b04fb5ed115c4251841d2f87b6f1073b8be418606"
+    },
+    {
+      "file": "js/standalone/command-abi.json",
+      "beforeSha256": "4b15030b475a7ba821b61428543e2fbf609ff303d2f94d60a9864b5b650ec04a",
+      "afterSha256": "1c1aa3eb28b58c46ec3baf4ffb9bfd7c62c178180124a690a1c603de66ae2773"
+    },
+    {
+      "file": "js/standalone/mplayer-abi.json",
+      "beforeSha256": "7f87e3dedc4c042bb0095eddbf72bdfb2c72d50da768e8ae2e017b211fb489ae",
+      "afterSha256": "06dedbfa38caa40224a3cd2ac6097b69638e41737b923025b2f65d50dfd7fe60"
+    },
+    {
+      "file": "js/standalone/lock-abi.json",
+      "beforeSha256": "664bce3b1dde06e3496d4e3222cf36cd6a6cc89ea258deeefb107cd95f90b3b2",
+      "afterSha256": "52d517277ab3c47b06af19730cd34d1667bef528a75a128df62382a6bb42d75f"
+    },
+    {
+      "file": "js/standalone/special-interactions-abi.json",
+      "beforeSha256": "d3717af79685a8073c67fb25244268a00ed5133535e7ccc091a1e184b2b83f65",
+      "afterSha256": "87d77ec544eaa5cd28d59e1f52f189ada59ef663a9627ef88d0714af87646d81"
+    },
+    {
+      "file": "js/standalone/uhitm-abi.json",
+      "beforeSha256": "8c7a295ea9eb9dd04f0091c81859456a465cac0aceb88f529fef3ca6cfc650ce",
+      "afterSha256": "63fcdae6136f27fb245af4778009183ce1437fd72ae21b88a2b45a54f6749b1a"
+    },
+    {
+      "file": "js/standalone/armor-abi.json",
+      "beforeSha256": "28bc92393cbcf3f9ac2b322d254ffa4c2bca7bebe96d15c496f55489eb238217",
+      "afterSha256": "1e0d3fbddcd239bb34b28b65f84b49716492a394b59f568908b81becd3b20353"
+    },
+    {
+      "file": "js/standalone/utf8map-abi.json",
+      "beforeSha256": "69414cec8d59ebe8b25613b8700fa66410105c90d63f266c8c0352a041bb0cdf",
+      "afterSha256": "76202537ca80ae0f45618c59524f54b5de2eb83cc8ef0d3f9efbddbb644945ed"
+    },
+    {
+      "file": "js/standalone/unix-platform-abi.json",
+      "beforeSha256": "3a5fd44829f9d840fc36f720c4385620986d331ffcc6e072445544997d164782",
+      "afterSha256": "8355e7dfa324e32e6613c8744498f1a3fc6a77cc628668da5f48d52f840c271a"
+    },
+    {
+      "file": "js/standalone/color-attributes-abi.json",
+      "beforeSha256": "38512b44ac8b685ba25171020c2ae1ac82300ed9679118c4596c08bb8b0b1139",
+      "afterSha256": "dd94e47cbeecdc9a148a1112b41e21b2685d467be4a7014ad27c181e365dc8aa"
+    },
+    {
+      "file": "js/standalone/insight-abi.json",
+      "beforeSha256": "387d9d784808a7a3e31ccc6d153ea97ce319b50c36cd8938f38b1c85a429ba4e",
+      "afterSha256": "2fdc1204490cb3f9d3b027ac8d1c1f96f923b2525a759609a44edee74ce3cfff"
+    },
+    {
+      "file": "js/standalone/end-lifecycle-abi.json",
+      "beforeSha256": "3c8c45cc129ae055966744308a6568f5fd233777811bc652b9241f4efd74610f",
+      "afterSha256": "70f91cdb23ea3ac88a47934063a2cb434029cf9d12366d37c7271e0d8425c243"
+    },
+    {
+      "file": "js/standalone/callback-address-abi.json",
+      "beforeSha256": "ec0f800c99f68efa855d291fbd6beb9800879263c4a5834856437f629f279d4f",
+      "afterSha256": "358860adfee16a46a2d44bb85aaccc84c5f9a9a8267e4e1e9e7510f435bcc99c"
+    },
+    {
+      "file": "js/standalone/address-ports.json",
+      "beforeSha256": "19e8e97122ba43699b635fe5f1aa0dc3a5c874e9e593b5e310a1d2930b1b6942",
+      "afterSha256": "d3c11f793a63fbeadfcab9a1a37a6180b5f57af9c1a1baf87790bcfd39ec0416"
+    },
+    {
+      "file": "js/standalone/detect-abi.json",
+      "beforeSha256": "67f4dd7731859809fb9e26ef5fd1690d853e29f406da0c275d3c7a2759f355f5",
+      "afterSha256": "72d85c4b184e959b5ad29f8c4f6ea5a7e70ce0c0e3ed46956624382b6c6e44b8"
+    },
+    {
+      "file": "js/standalone/explode-abi.json",
+      "beforeSha256": "4a55a64c0a7e81aaa0715fd984504fcd84ae9f46a456d3981a0226026aefdb56",
+      "afterSha256": "f91cc01d540046a063aaecb494dbf506bfb240e2868e9b39d3f9ca9e0d869359"
+    },
+    {
+      "file": "js/standalone/dig-abi.json",
+      "beforeSha256": "1602e6f73f80720371f280a409402ab7a05d349a7c20c02783151e57fc037a55",
+      "afterSha256": "49db3193b7df41eea5f8d56505d004352f4f83ab60b39e1076d6764f8d763629"
+    },
+    {
+      "file": "js/standalone/mhitm-abi.json",
+      "beforeSha256": "e801873f16a9e6a67903c0f4d8dc8340ff113a0421616ec0347e742cfc76b2c5",
+      "afterSha256": "2ec4a55d685bcf7d4c73e462cbc28e3f2cd240fd74cf8077e925446ad6cb9f48"
+    }
+  ],
+  "limitations": "Only proven extraction/pruning/relocation dependencies and their transitive metadata hashes change. Historical aggregate scope/persistence pin failures are not waived."
+}

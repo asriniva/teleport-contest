@@ -10,6 +10,7 @@ not a complete implementation of every C/Unix facility.
 | Files | Responsibility |
 | --- | --- |
 | `runtime.js` | Per-instance assembly; caller-injected declarations, inherited services and conversion aliases |
+| `adapter-memory.js` |18 shared legacy-profile primitives replacing132 helper bodies across58 translation adapters |
 | `memory.js` | Addresses, scalar loads/stores/conversions, allocation, stack scopes and literals |
 | `records.js` | Shared record identity, field properties and indexed-view machinery |
 | `types.js`, `bitfields.js`, `record-views.js` | Measured types, unions, arrays, pointers, bitfields and live property views |
@@ -28,9 +29,10 @@ NetHack's declarations to the common instance factory. `../nethack/runtime.js`
 provides allocation/string/calendar/regex/RNG policies from translated sources.
 The standalone environment composes these owners and game subsystems.
 
-Old standalone utility paths and `../ported/js-runtime.js` are compatibility
-entries, not second implementations. They preserve existing imports and class
-identities. NetHack's platform `getpid` default remains in its provider wrapper.
+Required standalone entry points (`memory-services`, `functions`, `c-types`,
+`record-views`, `address-ports`, and the platform `libc` wrapper) retain existing
+interfaces and class identities. Six unused forwarding files were removed after
+migrating their consumers; the old `ported/js-runtime.js` provider path is retired. NetHack's platform `getpid` default remains in its provider wrapper.
 The synchronous `C/R/T` scope facade and translation-specific adapters remain at
 their established paths so existing pure-JS and mixed callers keep working.
 
@@ -61,10 +63,17 @@ With the configured SDK Node and `STANDALONE_REFERENCE_ROOT` set:
 ```sh
 node scripts/check-c-runtime-boundaries.mjs
 node scripts/check-c-runtime-relocation.mjs
+node scripts/check-c-runtime-extraction.mjs
+node scripts/test-c-runtime-adapter-memory.mjs
 node scripts/test-c-runtime-memory.mjs
 node scripts/test-c-runtime-contracts.mjs
 node scripts/write-c-runtime-manifest.mjs --check
 ```
+
+The adapter profiles also cover scalar/pointer fields, pointer sequences, C
+aggregate initialization, type sizes and vararg-format classification. Their
+source-specific conventions remain explicit. Adapters use one `Crt` namespace
+import; the shared functions do not observe a call receiver or implicit arguments.
 
 The checks enforce generic dependency boundaries, mechanical relocation of
 existing factories, unchanged game policy/frozen inputs, memory and linker

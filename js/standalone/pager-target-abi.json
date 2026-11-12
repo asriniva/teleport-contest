@@ -771,7 +771,7 @@
     "js/ported/pager.js": "6c13cf9d9e88fd0db37ad0c77c64d3f4bd2389eedbdfc44b1f1dca16cbebd934",
     "js/ported/pager-runtime.js": "6bf8a2bfc708578490798a30be117d9c7eb7e2798036c1a3cc198cd459922155",
     "nethack-c/wasm/tu-libraries/pager.js": "0100bde0d32f02960fe21df964f32445400d493366eea3f21f1b12a5fce2fbc9",
-    "js/standalone/records.json": "d29a68b050cdcbc3b5c1ad9f274a1f993352cfe1a0c334bf110c0d08a614ed52",
+    "js/standalone/records.json": "b0e9d94ad00af9838c21971dc7f682ea87634c8d19000e6c1940208ee1ed01b2",
     "nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2"
   },
   "referenceHeaderSha256": {

@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { createJsRuntime } from '../js/ported/js-runtime.js';
+import { createJsRuntime } from '../js/nethack/runtime.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 if (!process.argv.includes('--worker')) {

@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
-import { createJsRuntime, JS_RUNTIME_LAYOUTS } from '../js/ported/js-runtime.js';
+import { createJsRuntime, JS_RUNTIME_LAYOUTS } from '../js/nethack/runtime.js';
 import { C, R, T } from '../js/ported/c-runtime.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));

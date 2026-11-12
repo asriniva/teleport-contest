@@ -17,3 +17,4 @@ export {scanFormatted} from './scanf.js';
 export {muslQsort} from './qsort.js';
 export {createEnvironmentInputs} from './environment-inputs.js';
 export {createRuntime} from './runtime.js';
+export {descriptorArray,writeIntegerCell,narrowInteger,writeDescriptor,readIntegerCell,scalarMethod,advanceDescriptor,defineScalarField,pointerSequence,definePointerField,initializeRecord,indexedArray,typeSize,formatShape,readDescriptor,writeTypedValue,decodeDescriptor,defineScalarValue} from './adapter-memory.js';

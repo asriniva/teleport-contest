@@ -1,7 +1,7 @@
 // Compare the extracted persistence protocol on independent JS and real MEMFS.
 import assert from 'node:assert/strict';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { createJsRuntime } from '../js/ported/js-runtime.js';
+import { createJsRuntime } from '../js/nethack/runtime.js';
 import { filesUnder, encodeFileBytes, decodeFileBytes, captureGameFiles,
     restoreGameFiles } from '../js/services/game-files.js';
 

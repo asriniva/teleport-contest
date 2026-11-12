@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { createJsRuntime, JS_RUNTIME_LAYOUTS, CPanic } from '../js/ported/js-runtime.js';
+import { createJsRuntime, JS_RUNTIME_LAYOUTS, CPanic } from '../js/nethack/runtime.js';
 import { CMemory } from '../js/services/c-memory.js';
 import { C_ERRNO } from '../js/services/c-stdlib.js';
 import { C, R, T, withCEnvironment } from '../js/ported/c-runtime.js';

@@ -87,8 +87,8 @@
     "js/ported/weapon.js": "edd0319a89e6fcecd69f5f6962f812e5aa5ad7f71a8eeda11bee98fe13b47edd",
     "js/ported/weapon-runtime.js": "a7fa7b16ded8ddccbf84be84529dd7e46dff6a66f43b851fd99550e554b9dd73",
     "js/ported/worn.js": "43624f0cf7f2fa808f0bba08d0bc123d693bf951570f8872298d7670a7a00008",
-    "js/ported/worn-runtime.js": "d397cf6428b52a80843d74a95e90154b5b704cea2d50196ef4d89954b2ebbe41",
+    "js/ported/worn-runtime.js": "6b0c91d03fbc69b6b519247a0b7989e52f50ce54562b70cf6d2b536788743eb5",
     "js/ported/wield.js": "7c4052a40ad20eec5b6a5918597dc800165cb77694472e7aa0b8aed112f54583",
-    "js/ported/wield-runtime.js": "c25ec34234202712beec185d825f867aa4a7340edd1495f7bece592ad6f05cf1"
+    "js/ported/wield-runtime.js": "64b45ffc1d0c07856e30c61a88dcb390f95385f03ceab1a3c391d224c14ff790"
   }
 }

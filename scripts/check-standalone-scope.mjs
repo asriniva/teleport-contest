@@ -11,6 +11,9 @@ const read=file=>fs.readFileSync(path.resolve(root,file));
 const json=file=>JSON.parse(read(file));
 const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const check=(file,expected)=>assert.equal(sha(path.resolve(root,file)),expected,'Bound source changed: '+file);
+// Add the cleanup's complete owned runtime/declaration closure; retain every
+// historical source/header check below, including known failing pins.
+for(const [file,hash]of Object.entries(json('docs/runtime-environment/c-runtime-manifest.json').sha256))check(file,hash);
 const baseline=json('docs/runtime-environment/scope-baseline.json');
 const corrections=json('docs/runtime-environment/authorized-port-corrections.json').corrections;
 assert.deepEqual(corrections.map(row=>row.file),['js/ported/vision.js'],'Only the explicitly approved correction is allowed');

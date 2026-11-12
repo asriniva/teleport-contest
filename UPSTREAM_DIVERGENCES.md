@@ -1,5 +1,101 @@
 # Upstream divergence register
 
+Latest-main cleanup rebase (2026-11-11): fetched8cf4880
+and replayed all four cleanup commits. Main's new subsystem owners/composition,
+all measured FILES/HACK declarations and the explicit VISION boolean correction
+are preserved. Register conflict resolution was checked after detecting a
+truncated conflict-marker edit; the complete rebased register was restored,
+with cleanup entries added separately. No main history is discarded.
+
+All58 adapter baselines match before/after rebase. Extraction/pruning recipes
+now reference reachable rebased foundationc0740be, with72 regenerated owned
+provenance outputs and215 bound source inputs. DETECT's original address-adapter
+pin migrates only after exact equality of the reviewed three-file foundation
+package. The cleanup relocation checker also binds main's correction declaration
+byte-for-byte against8cf4880. The targeted interaction guard follows main's
+canonical single-file VISION exception and reports137 unchanged policies plus1
+explicit correction; its own source pin migrates only through the exact two
+validation/reporting edits. Original scope baseline, other assertions, C flags,
+C source, recorder and frozen files stay unchanged by this integration.
+The complete source-scope gate passes558 imports without Wasm/host/network
+production dependencies. All58 component suites were rerun:57 pass; LIGHT
+fails byte-identically with the exact baseline adapter, as before. Main startup,
+save/restore, ordinary starvation death, expanded connected subsystems, ranged
+commands, invocation, Quest travel, elemental Water turns and Astral victory
+pass. The DOKICK fixture-receipt omission is resolved by an exact independent
+copy; its original assertions pass. Full47-case pager rerun passes14,805 checks.
+The default Quest-completion scenario fails its original-C eligibility assertion
+on untouched8cf4880 as well as cleanup. Each full57,628,854-byte C/JS result is
+byte-identical across main and cleanup; this is a retained acceptance failure,
+not a completed Quest claim. No game policy, test expectation or input is changed
+to force either baseline failure green. Actual post-rebase execution outcomes
+are recorded in docs/runtime-environment/c-runtime-rebase-validation.json;
+publication is a user-requested fast-forward-only update of origin/main.
+Fresh depth5 main starvation passes20 checks at2,376 moves/2,752 inputs/2,945
+frames, followed by all four fresh C/JS bones-consumer recording/live-world
+comparisons. Raw C5,078-byte/JS5,032-byte bones identity is not claimed. An
+initial missing consumer replay receipt is resolved with an exact independent
+copy and passing rerun. All215 owned inputs and59 component adapter/helper
+inputs remain stable across their execution batches. Final pre-push fetch is
+still8cf4880; no other worktree or shared oracle artifact is modified.
+
+
+C-runtime pre-completion cleanup continuation (2026-11-11, isolated
+`cleanup/c-runtime-rect`): `js/c-runtime/adapter-memory.js` replaces132 exact
+helper bodies in58 `js/ported/*-runtime.js` adapters with18 shared integer,
+descriptor, field/pointer/array, initialization, size and format primitives.
+Each adapter retains its local names/formals/conventions and one namespace
+import. No source-shaped game policy or C/header algorithm changes. Generic
+runtime closure remains free of NetHack, host, network and Wasm imports.
+Game/header aliases and active mixed-provider bridges retain their owners.
+
+Six unused forwarding files are deleted: standalone bitfields, environment
+inputs, qsort, scanf and stdio, plus ported/js-runtime.js. Eight consumer/tool
+files change only declared import/evidence/source-list points. The generator
+checks complete byte inverses, occurrences, original helper hashes, receiver
+independence and syntax; pruning checks tracked literal consumers. A generator
+parenthesized-arrow syntax defect was found and corrected before final tests;
+all output candidates now parse before mutation.
+
+The138-unit build registry declares the helper and affected runtime adapters as
+inputs without changing ordered C selection. The UNIXUNIX Makefile checker keeps
+all old finite profiles and adds exactly two complete dependency-only aliases;
+actual inverse and one-byte-negative checks pass. Fifty-eight owned provenance
+outputs update only these dependencies, exact retired forwarding pins and
+transitive hashes. One missed foundation libc pin is migrated only after full
+factory equality, documented getpid separation and unchanged-wrapper checks.
+TOPL retains all178 original compiled-input pins: an exact helper-extraction
+inverse is allowed only for its reviewed JS adapter, binding the new helper and
+recipe and snapshotting actual replay inputs. No C/compiler/header pin refresh,
+coverage assertion change or guard bypass. The result summary distinguishes
+original compiled pins from actual migrated replay inputs. Wrong-pin and unrelated-file negative
+controls reject; original TOPL comparisons pass1826 checks across15 entries.
+The198-source cleanup manifest supplements existing source checks.
+
+Final validation and limitations are recorded in
+`docs/runtime-environment/c-runtime-validation.json` and `C_RUNTIME_CLEANUP.md`.
+The58-component matrix has57 passes; LIGHT retains the exact same diagnostic
+failure under the baseline adapter (`id=null` versus original-C `id=0`), verified
+by identical failing logs, not accepted as equivalence. Nineteen focused/runtime/
+game checks pass, including actual original-C main startup/save/restore and the
+bounded2,028-turn starvation recording. Final aggregate source-scope passes138
+policy/3 frozen/528 production-import checks; old failed attempts stay historical.
+The unbounded pager rerun passes14,805 comparisons/47 cases; level persistence
+passes852 comparisons. Provider regex770, five-timezone calendar996 each and
+actual MEMFS persistence checks pass. Missing local MEMFS oracle artifacts were
+independently CoW-copied from the existing reference; failed attempt and rerun
+are retained.
+The remaining inherited absolute reference paths are an input portability limit.
+A selected probe rebuild stopped before compilation on missing UHitM AST; the
+existing source-matched central INVENT pair passed without disabling that check.
+Full aggregate execution, arbitrary game/public44/native-host parity and speed
+are not claimed. Mixed-backend retirement remains gated on complete pure-JS
+acceptance. Against pinned rebased main059e175, production JavaScript is5,491
+bytes smaller,163 physical lines larger and15 files larger; no bundle or speed
+claim. Other agents' worktrees and shared reference artifacts remain untouched.
+
+
+
 USER-AUTHORIZED TRANSLATION CORRECTION: js/ported/vision.js vision_reset now converts its logical-OR result to numeric boolean before comparing the blocking state. Original C vision.c233 yields0/1; JavaScript previously retained does_block's documented opaque-region value2 and alternated blocked/clear cells. Read-only sealed-native private-grid diagnostics found all30 disagreements inside gas, with Fire cell(13,5) seenv C01/JS00 and a visible frame difference. The user approved this specific one-line exception. Original scope-baseline.json stays immutable; authorized-port-corrections.json records before/after/native hashes and the gate permits only this file correction, reporting137 unchanged policies plus1 explicit correction. All3 frozen dependencies remain unchanged; no original C policy or public does_block return value changes. Final private-grid/recording regression is pending.
 
 MON alignment carrier now supports the full native signedlong move domain at its four guarded source sites. The adapter projects native A through signed remainder A % (8*2^32), yielding an exactly representable Number whose int32 casts and /2-after-cast, /4 and /8 observations equal original C; this is not a general long-valued macro replacement. Runtime verifies the four unchanged xkilled source-use lines against the source-bound ABI before enabling it. A zero-import pinned-SDK C leaf includes original hack.h/align.h with an automatic local svm-type shadow, never game globals, and compares the actual source-extracted MON int primitive against native across10470 signedlong cases/41880 results. Compiler/linker/headers/source sites/artifacts are pinned; the probe now tests the production projection directly. No port/frozen files or game fields are modified.

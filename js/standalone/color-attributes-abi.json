@@ -142,7 +142,7 @@
     "scripts/export-standalone-color-attributes-abi.py": "ecd9ba28daaecc285d0e9382518c95720df9e2767c4d01c49ef77303cbbe5537",
     "js/standalone/color-attributes.js": "94118fb729119d1a3ff85b7f84bb56b7cbd0ab02c0546d8b78cb82dd9e732e77",
     "js/ported/coloratt.js": "69015b3c4ec0ed11d4e60f04eea21f7559fafb72073c10e0028c2e285a45a7e7",
-    "js/ported/coloratt-runtime.js": "d1f74d2b6195f10c0e2e77664649e68db7ebb1f5a768adb7b3408dcab342c6ef",
+    "js/ported/coloratt-runtime.js": "5501314390ad94956fc9a33b471b94dd5dab1687adb8a67a45643ff9d509f7e9",
     "js/ported/posixregex.js": "3389499c549a670141e87d8dcb42d1caf50419a24c7e8a7751a8bfdfcecfcf41",
     "js/ported/posixregex-runtime.js": "567795a5ccac27c7109b250e1e88f8b050da006f163d916f72173901660ee1bf",
     "js/services/wasm-dependency-runtime.js": "bd1d7924891463c2261c6907a2c58adc32744be8b37b0ad35179db727a0692a0",
@@ -155,7 +155,7 @@
     "scripts/tu-coloratt-layout.h": "c5d25a05b847a4b6fe685e9057cf4df57c91931e7a2d912879f9f13f50b11b0e",
     "scripts/tu-posixregex-layout.h": "6c5221c08c43067314e53039524339abd17594575963248f76a3a36d6dd14bde",
     "js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34",
-    "js/standalone/records.json": "d29a68b050cdcbc3b5c1ad9f274a1f993352cfe1a0c334bf110c0d08a614ed52"
+    "js/standalone/records.json": "b0e9d94ad00af9838c21971dc7f682ea87634c8d19000e6c1940208ee1ed01b2"
   },
   "referenceHeaderSha256": {
     ".cache/wasm64-build/tree/sys/share/posixregex.c": "81e556cb5cfd0f1307b97df5bf4132c6a58fa6938d3f5b5b98aef766fe95a4a5",

@@ -21,7 +21,7 @@
     "js/standalone/monster-selection.js": "d69cd3d7414a1e8921f2dd5d1532d993aa59f59a8cdb0f2f1538bd1be8e07598",
     "js/standalone/monster-creation.js": "c60499442494de2bc1ec337b082d249e1136d065b243a9b9807004cb68953033",
     "js/ported/makemon.js": "f88948f12832888a3352ed42ef04c71dc2cc1cbb57f8ae78a8fd895619f832f8",
-    "js/ported/makemon-runtime.js": "8858da6aba755b449224492ff5495e5f21be5b69dfbf5359250069abbfc6e882",
+    "js/ported/makemon-runtime.js": "a9fc850998099704dc7d735972d15c2aeffdfe018083dc414a4fea6379380ad8",
     "nethack-c/wasm/tu-fragments/makemon-support.inc": "de19d3be6489c15b31b7e4832f5bb64f02cb645f16a0577efc99a17571237a93",
     "js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34"
   },

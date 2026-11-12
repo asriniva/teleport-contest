@@ -791,7 +791,7 @@
     "js/standalone/level-startup.js": "876eedadaddb455480c901e58aab7ea4232fb6eab6e9ae5935a044183967fe62",
     "js/ported/region.js": "485cddec0667f511de5f0299488e12f8dd5f9aa071edb27a3f6e109f2291c63e",
     "js/ported/region-runtime.js": "10cea5a999fb3cd9ad8cddf1725cb8688b6bfc4e0dfeb61f76e2fb32650d88a3",
-    "js/standalone/records.json": "d29a68b050cdcbc3b5c1ad9f274a1f993352cfe1a0c334bf110c0d08a614ed52",
+    "js/standalone/records.json": "b0e9d94ad00af9838c21971dc7f682ea87634c8d19000e6c1940208ee1ed01b2",
     "js/standalone/public-functions.json": "75774661072653bbd6c90bce1e837fac87a998b5e9139f6f5012878057779e12",
     "js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34"
   },

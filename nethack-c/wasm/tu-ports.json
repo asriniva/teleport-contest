@@ -122,7 +122,11 @@
     "name": "extralev",
     "source": "src/extralev.c",
     "javascript": "js/ported/extralev.js",
-    "library": "nethack-c/wasm/tu-libraries/extralev.js"
+    "library": "nethack-c/wasm/tu-libraries/extralev.js",
+    "adapterSources": [
+      "js/ported/extralev-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "mplayer",
@@ -134,7 +138,11 @@
     "name": "exper",
     "source": "src/exper.c",
     "javascript": "js/ported/exper.js",
-    "library": "nethack-c/wasm/tu-libraries/exper.js"
+    "library": "nethack-c/wasm/tu-libraries/exper.js",
+    "adapterSources": [
+      "js/ported/exper-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "mkmap",
@@ -166,7 +174,11 @@
     "name": "quest",
     "source": "src/quest.c",
     "javascript": "js/ported/quest.js",
-    "library": "nethack-c/wasm/tu-libraries/quest.js"
+    "library": "nethack-c/wasm/tu-libraries/quest.js",
+    "adapterSources": [
+      "js/ported/quest-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "minion",
@@ -246,7 +258,11 @@
     "source": "src/music.c",
     "javascript": "js/ported/music.js",
     "library": "nethack-c/wasm/tu-libraries/music.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/music-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "version",
@@ -254,7 +270,11 @@
     "javascript": "js/ported/version.js",
     "library": "nethack-c/wasm/tu-libraries/version.js",
     "configuredFunctions": true,
-    "startup": "$teleportVersionInit"
+    "startup": "$teleportVersionInit",
+    "adapterSources": [
+      "js/ported/version-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "coloratt",
@@ -262,21 +282,33 @@
     "javascript": "js/ported/coloratt.js",
     "library": "nethack-c/wasm/tu-libraries/coloratt.js",
     "configuredFunctions": true,
-    "startup": "$teleportColorattInit"
+    "startup": "$teleportColorattInit",
+    "adapterSources": [
+      "js/ported/coloratt-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "priest",
     "source": "src/priest.c",
     "javascript": "js/ported/priest.js",
     "library": "nethack-c/wasm/tu-libraries/priest.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/priest-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "light",
     "source": "src/light.c",
     "javascript": "js/ported/light.js",
     "library": "nethack-c/wasm/tu-libraries/light.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/light-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "lock",
@@ -297,7 +329,11 @@
     "source": "src/wizard.c",
     "javascript": "js/ported/wizard.js",
     "library": "nethack-c/wasm/tu-libraries/wizard.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/wizard-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "worm",
@@ -306,7 +342,8 @@
     "library": "nethack-c/wasm/tu-libraries/worm.js",
     "configuredFunctions": true,
     "adapterSources": [
-      "js/ported/worm-runtime.js"
+      "js/ported/worm-runtime.js",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -314,35 +351,55 @@
     "source": "src/o_init.c",
     "javascript": "js/ported/o_init.js",
     "library": "nethack-c/wasm/tu-libraries/o_init.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/o_init-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "ball",
     "source": "src/ball.c",
     "javascript": "js/ported/ball.js",
     "library": "nethack-c/wasm/tu-libraries/ball.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/ball-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "mcastu",
     "source": "src/mcastu.c",
     "javascript": "js/ported/mcastu.js",
     "library": "nethack-c/wasm/tu-libraries/mcastu.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/mcastu-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "dbridge",
     "source": "src/dbridge.c",
     "javascript": "js/ported/dbridge.js",
     "library": "nethack-c/wasm/tu-libraries/dbridge.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/dbridge-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "mondata",
     "source": "src/mondata.c",
     "javascript": "js/ported/mondata.js",
     "library": "nethack-c/wasm/tu-libraries/mondata.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/mondata-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "hacklib",
@@ -357,14 +414,22 @@
     "source": "src/worn.c",
     "javascript": "js/ported/worn.js",
     "library": "nethack-c/wasm/tu-libraries/worn.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/worn-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "wield",
     "source": "src/wield.c",
     "javascript": "js/ported/wield.js",
     "library": "nethack-c/wasm/tu-libraries/wield.js",
-    "configuredFunctions": true
+    "configuredFunctions": true,
+    "adapterSources": [
+      "js/ported/wield-runtime.js",
+      "js/c-runtime/adapter-memory.js"
+    ]
   },
   {
     "name": "mkroom",
@@ -446,7 +511,8 @@
     "probeContext": false,
     "adapterSources": [
       "js/ported/explode-runtime.js",
-      "nethack-c/wasm/tu-fragments/explode-support.inc"
+      "nethack-c/wasm/tu-fragments/explode-support.inc",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -633,7 +699,8 @@
       "nethack-c/wasm/tu-fragments/save-source-data.h",
       "nethack-c/wasm/tu-fragments/save-schema.json",
       "nethack-c/wasm/tu-fragments/save-source-check.mjs",
-      "scripts/tu-save-layout.h"
+      "scripts/tu-save-layout.h",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -784,7 +851,8 @@
       "nethack-c/wasm/tu-fragments/dogmove-source-data.h",
       "nethack-c/wasm/tu-fragments/dogmove-schema.json",
       "nethack-c/wasm/tu-fragments/dogmove-source-check.mjs",
-      "scripts/tu-dogmove-layout.h"
+      "scripts/tu-dogmove-layout.h",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -820,7 +888,8 @@
       "nethack-c/wasm/tu-fragments/cfgfiles-types.h",
       "nethack-c/wasm/tu-fragments/cfgfiles-source-data.h",
       "nethack-c/wasm/tu-fragments/cfgfiles-schema.json",
-      "nethack-c/wasm/tu-fragments/cfgfiles-source-check.mjs"
+      "nethack-c/wasm/tu-fragments/cfgfiles-source-check.mjs",
+      "js/c-runtime/adapter-memory.js"
     ],
     "probeExtraExports": [
       "_teleport_cfgfiles_global",
@@ -842,7 +911,8 @@
       "nethack-c/wasm/tu-restore-support.inc",
       "scripts/tu-restore-layout.h",
       "scripts/check-restore-data.mjs",
-      "nethack-c/wasm/tu-restore-types.h"
+      "nethack-c/wasm/tu-restore-types.h",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -889,7 +959,8 @@
       "nethack-c/wasm/tu-vision-support.inc",
       "scripts/tu-vision-layout.h",
       "scripts/check-vision-data.mjs",
-      "nethack-c/wasm/tu-vision-storage.c"
+      "nethack-c/wasm/tu-vision-storage.c",
+      "js/c-runtime/adapter-memory.js"
     ],
     "startup": "$teleportVisionInit",
     "nativeStorageSources": [
@@ -912,7 +983,8 @@
     "adapterSources": [
       "js/ported/mkmaze-runtime.js",
       "nethack-c/wasm/tu-fragments/mkmaze-schema.json",
-      "nethack-c/wasm/tu-fragments/mkmaze-source-metadata.json"
+      "nethack-c/wasm/tu-fragments/mkmaze-source-metadata.json",
+      "js/c-runtime/adapter-memory.js"
     ],
     "nativeStorageSources": [
       {
@@ -970,7 +1042,8 @@
       "js/ported/end-runtime.js",
       "nethack-c/wasm/tu-fragments/end-support.inc",
       "scripts/tu-end-layout.h",
-      "nethack-c/wasm/tu-fragments/end-metadata.py"
+      "nethack-c/wasm/tu-fragments/end-metadata.py",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1033,7 +1106,8 @@
       "nethack-c/wasm/tu-fragments/polyself-schema.json",
       "nethack-c/wasm/tu-fragments/polyself-source-check.mjs",
       "scripts/tu-polyself-layout.h",
-      "scripts/check-polyself-data.mjs"
+      "scripts/check-polyself-data.mjs",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1106,7 +1180,8 @@
       "nethack-c/wasm/tu-fragments/wizcmds-source-check.mjs",
       "nethack-c/wasm/tu-fragments/wizcmds-metadata.py",
       "scripts/tu-wizcmds-layout.h",
-      "scripts/check-wizcmds-data.mjs"
+      "scripts/check-wizcmds-data.mjs",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1141,7 +1216,8 @@
       "nethack-c/wasm/tu-fragments/detect-schema.json",
       "nethack-c/wasm/tu-fragments/detect-provenance.json",
       "nethack-c/wasm/tu-fragments/detect-check-source.py",
-      "nethack-c/wasm/tu-fragments/detect-check-members.mjs"
+      "nethack-c/wasm/tu-fragments/detect-check-members.mjs",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1170,7 +1246,8 @@
     "adapterSources": [
       "js/ported/mklev-runtime.js",
       "nethack-c/wasm/tu-fragments/mklev-schema.json",
-      "nethack-c/wasm/tu-fragments/mklev-source-metadata.json"
+      "nethack-c/wasm/tu-fragments/mklev-source-metadata.json",
+      "js/c-runtime/adapter-memory.js"
     ],
     "nativeStorageSources": [
       {
@@ -1233,7 +1310,8 @@
       "nethack-c/wasm/tu-do-support.inc",
       "nethack-c/wasm/tu-do-varargs.inc",
       "scripts/tu-do-layout.h",
-      "scripts/check-do-data.mjs"
+      "scripts/check-do-data.mjs",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1296,7 +1374,8 @@
       "nethack-c/wasm/tu-fragments/pray-schema.json",
       "nethack-c/wasm/tu-fragments/pray-provenance.json",
       "nethack-c/wasm/tu-fragments/pray-check-source.py",
-      "nethack-c/wasm/tu-fragments/pray-check-members.mjs"
+      "nethack-c/wasm/tu-fragments/pray-check-members.mjs",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1308,7 +1387,8 @@
       "nethack-c/wasm/tu-fragments/dothrow-schema.json",
       "nethack-c/wasm/tu-fragments/dothrow-source-metadata.json",
       "scripts/check-dothrow-source.py",
-      "scripts/check-dothrow-imports.mjs"
+      "scripts/check-dothrow-imports.mjs",
+      "js/c-runtime/adapter-memory.js"
     ],
     "nativeStorageSources": [
       {
@@ -1399,7 +1479,8 @@
       "nethack-c/wasm/tu-fragments/muse-provenance.json",
       "nethack-c/wasm/tu-fragments/muse-check-source.py",
       "nethack-c/wasm/tu-fragments/muse-check-members.mjs",
-      "nethack-c/wasm/tu-fragments/muse-fixture-constants.json"
+      "nethack-c/wasm/tu-fragments/muse-fixture-constants.json",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1428,7 +1509,8 @@
       "nethack-c/wasm/tu-fragments/dungeon-schema.json",
       "nethack-c/wasm/tu-fragments/dungeon-source-metadata.json",
       "scripts/check-dungeon-source.py",
-      "scripts/check-dungeon-imports.mjs"
+      "scripts/check-dungeon-imports.mjs",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1445,7 +1527,8 @@
       "nethack-c/wasm/tu-fragments/makemon-runtime-method.inc",
       "nethack-c/wasm/tu-fragments/makemon-integration.md",
       "nethack-c/wasm/tu-fragments/makemon-metadata.py",
-      "scripts/tu-makemon-layout.h"
+      "scripts/tu-makemon-layout.h",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1505,7 +1588,8 @@
       "nethack-c/wasm/tu-fragments/mhitu-schema.json",
       "nethack-c/wasm/tu-fragments/mhitu-source-check.mjs",
       "scripts/tu-mhitu-layout.h",
-      "scripts/check-mhitu-data.mjs"
+      "scripts/check-mhitu-data.mjs",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1606,7 +1690,8 @@
       "nethack-c/wasm/tu-fragments/artifact-source-check.mjs",
       "nethack-c/wasm/tu-fragments/artifact-metadata.py",
       "scripts/tu-artifact-layout.h",
-      "scripts/check-artifact-data.mjs"
+      "scripts/check-artifact-data.mjs",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1656,7 +1741,8 @@
       "nethack-c/wasm/tu-do_wear-support.inc",
       "nethack-c/wasm/tu-do_wear-varargs.inc",
       "scripts/tu-do_wear-layout.h",
-      "scripts/check-do_wear-data.mjs"
+      "scripts/check-do_wear-data.mjs",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1687,7 +1773,8 @@
       "js/ported/read-runtime.js",
       "nethack-c/wasm/tu-fragments/read-support.inc",
       "nethack-c/wasm/tu-fragments/read-metadata.py",
-      "scripts/tu-read-layout.h"
+      "scripts/tu-read-layout.h",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1702,7 +1789,8 @@
       "js/ported/apply-runtime.js",
       "nethack-c/wasm/tu-fragments/apply-support.inc",
       "nethack-c/wasm/tu-fragments/apply-metadata.py",
-      "scripts/tu-apply-layout.h"
+      "scripts/tu-apply-layout.h",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1777,7 +1865,8 @@
       "js/ported/mkobj-dispatch-data.js",
       "scripts/test-tu-mkobj-dispatch-loader.mjs",
       "scripts/test-tu-mkobj-dispatch-witness.mjs",
-      "scripts/check-mkobj-dispatch.mjs"
+      "scripts/check-mkobj-dispatch.mjs",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1800,7 +1889,8 @@
       "scripts/tu-nhlua-probe-consumer.c",
       "scripts/test-tu-nhlua.mjs",
       "scripts/check-nhlua-data.mjs",
-      "nethack-c/wasm/tu-fragments/nhlua-probe-library.js"
+      "nethack-c/wasm/tu-fragments/nhlua-probe-library.js",
+      "js/c-runtime/adapter-memory.js"
     ],
     "probeExtraExports": [
       "_probe_call_l_nhcore_init",
@@ -1917,7 +2007,8 @@
       "nethack-c/wasm/tu-fragments/files-support.c",
       "nethack-c/wasm/tu-fragments/files-schema.json",
       "nethack-c/wasm/tu-fragments/files-source-inventory.json",
-      "nethack-c/wasm/tu-fragments/files-source-check.py"
+      "nethack-c/wasm/tu-fragments/files-source-check.py",
+      "js/c-runtime/adapter-memory.js"
     ],
     "nativeStorageSources": [
       {
@@ -1957,7 +2048,8 @@
       "scripts/check-display-source.py",
       "scripts/check-display-imports.mjs",
       "scripts/reviewed_build_provenance.py",
-      "scripts/tu-display-early-reader.c"
+      "scripts/tu-display-early-reader.c",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -1974,7 +2066,8 @@
       "nethack-c/wasm/tu-fragments/invent-support.c",
       "nethack-c/wasm/tu-fragments/invent-schema.json",
       "nethack-c/wasm/tu-fragments/invent-source-inventory.json",
-      "nethack-c/wasm/tu-fragments/invent-source-check.py"
+      "nethack-c/wasm/tu-fragments/invent-source-check.py",
+      "js/c-runtime/adapter-memory.js"
     ],
     "nativeStorageSources": [
       {
@@ -2014,7 +2107,8 @@
       "nethack-c/wasm/tu-fragments/cmd-schema.json",
       "nethack-c/wasm/tu-fragments/cmd-source-data.h",
       "nethack-c/wasm/tu-fragments/cmd-support.c",
-      "nethack-c/wasm/tu-fragments/cmd-types.h"
+      "nethack-c/wasm/tu-fragments/cmd-types.h",
+      "js/c-runtime/adapter-memory.js"
     ],
     "startup": "$teleportCmdInit"
   },
@@ -2140,7 +2234,8 @@
       "nethack-c/wasm/tu-fragments/tu137-group-a-probes.json",
       "scripts/build-tu-probes.py",
       "scripts/test-tu-structure.py",
-      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json"
+      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -2175,7 +2270,8 @@
       ".cache/uhitm-author/macros.txt",
       ".cache/uhitm-author/automatic-storage.json",
       ".cache/uhitm-author/schema.json",
-      ".cache/uhitm-author/record-projections.json"
+      ".cache/uhitm-author/record-projections.json",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -2236,7 +2332,8 @@
       ".cache/pickup-first-pass/macros.txt",
       ".cache/pickup-first-pass/configured.c",
       ".cache/pickup-first-pass/fixture-regions.json",
-      ".cache/pickup-first-pass/fixture-constants.json"
+      ".cache/pickup-first-pass/fixture-constants.json",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -2262,7 +2359,8 @@
       "scripts/build-tu-probes.py",
       "scripts/test-tu-structure.py",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
-      ".cache/shk-first-pass/schema.json"
+      ".cache/shk-first-pass/schema.json",
+      "js/c-runtime/adapter-memory.js"
     ],
     "nativeStorageSources": [
       {
@@ -2302,7 +2400,8 @@
       "scripts/test-tu-structure.py",
       "nethack-c/wasm/tu-fragments/tu137-group-b/b_probe_support.py",
       "nethack-c/wasm/tu-fragments/tu137-group-b/b-probe-commands.json",
-      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json"
+      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -2330,7 +2429,8 @@
       "scripts/test-tu-structure.py",
       "nethack-c/wasm/tu-fragments/tu137-group-b/b_probe_support.py",
       "nethack-c/wasm/tu-fragments/tu137-group-b/b-probe-commands.json",
-      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json"
+      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
+      "js/c-runtime/adapter-memory.js"
     ],
     "probeExtraExports": [
       "_probe_call_burnarmor",
@@ -2542,7 +2642,8 @@
       "scripts/test-tu-structure.py",
       "nethack-c/wasm/tu-fragments/tu137-group-b/b_probe_support.py",
       "nethack-c/wasm/tu-fragments/tu137-group-b/b-probe-commands.json",
-      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json"
+      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -2572,7 +2673,8 @@
       "nethack-c/wasm/tu-fragments/tu137-group-b/topl-source-tools/canonical-logicals.mjs",
       "nethack-c/wasm/tu-fragments/tu137-group-b/topl-source-tools/integer-divisions.mjs",
       "nethack-c/wasm/tu-fragments/tu137-group-b/topl-source-tools/scalar-coercions.mjs",
-      "nethack-c/wasm/tu-fragments/tu137-group-b/topl-source-tools/integer-promotions.mjs"
+      "nethack-c/wasm/tu-fragments/tu137-group-b/topl-source-tools/integer-promotions.mjs",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -2636,7 +2738,8 @@
       "scripts/test-tu-structure.py",
       "scripts/reviewed_build_provenance.py",
       "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
-      "nethack-c/wasm/tu-fragments/unixunix-reviewed-makefile.py"
+      "nethack-c/wasm/tu-fragments/unixunix-reviewed-makefile.py",
+      "js/c-runtime/adapter-memory.js"
     ]
   },
   {
@@ -2659,7 +2762,8 @@
       "nethack-c/wasm/tu-fragments/unixmain-check-metadata.mjs",
       "scripts/build-tu-probes.py",
       "scripts/test-tu-structure.py",
-      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json"
+      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
+      "js/c-runtime/adapter-memory.js"
     ],
     "nativeStorageSources": [
       {
@@ -2686,7 +2790,8 @@
       "scripts/check-options-data.mjs",
       "scripts/build-tu-probes.py",
       "scripts/test-tu-structure.py",
-      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json"
+      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
+      "js/c-runtime/adapter-memory.js"
     ],
     "data": [
       "js/ported/options-data.js"
@@ -2708,7 +2813,8 @@
       "scripts/check-botl-data.mjs",
       "scripts/build-tu-probes.py",
       "scripts/test-tu-structure.py",
-      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json"
+      "nethack-c/wasm/tu-fragments/tu137-source-check-order.json",
+      "js/c-runtime/adapter-memory.js"
     ],
     "data": [
       "js/ported/botl-data.js"
