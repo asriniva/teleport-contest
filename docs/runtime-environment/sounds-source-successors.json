@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "baseCommit": "5031c28c9fc7e2b158ecb8e270a3060d8ca488ef",
+  "nativeProof": "docs/runtime-environment/sounds-native-evidence.json",
+  "nativeProofSha256": "a18a9d7a24515af14adec7e42958548005a2e94bbccccd8d254c273f0ab4ed4a",
+  "files": {
+    "js/standalone/game-windows.js": {
+      "beforeSha256": "618355091f3a93bb74c08cebe2627b7a047aabbb6055350e56eb1a398ca16284",
+      "afterSha256": "4b4f0a0ee5af5d738252057d268a82b609ba2bd2ecaf0b7844e001bd2d0808dc",
+      "patch": "docs/runtime-environment/sounds-source-successors/game-windows.patch",
+      "patchSha256": "7531af9286de869b5812896a9d291c4375e1af79d733e5a26058b0b3c0907c0f"
+    }
+  }
+}

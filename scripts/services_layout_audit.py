@@ -9,7 +9,10 @@ ROOT=Path(__file__).resolve().parents[1]
 def read_before(path):
  path=Path(path);relative=str(path.resolve().relative_to(ROOT));d=json.loads((ROOT/'docs/runtime-environment/services-layout.json').read_text());row=next((r for r in d['files']if relative in [r['file'],r['destination']]),None)
  if row:
-  actual=window_headers_before(ROOT,row['destination'])if row['destination']in WINDOW_HEADERS else monmove_before(ROOT,row['destination'])if row['destination']in MONMOVE else qualified_before(ROOT,row['destination'])if row['destination']in POST_DEFAULT else(ROOT/row['destination']).read_bytes()
+  if row['destination']=='js/standalone/game-windows.js':
+   from sounds_source_successors import qualified_before as sounds_before
+   actual=sounds_before(ROOT,row['destination'])
+  else:actual=window_headers_before(ROOT,row['destination'])if row['destination']in WINDOW_HEADERS else monmove_before(ROOT,row['destination'])if row['destination']in MONMOVE else qualified_before(ROOT,row['destination'])if row['destination']in POST_DEFAULT else(ROOT/row['destination']).read_bytes()
   assert actual is not None,'Historically absent relocated source '+relative
   if hashlib.sha256(actual).hexdigest()!=row['afterSha256']:
    node=ROOT/'.cache/emsdk/node/24.19.0_64bit/bin/node'
@@ -26,7 +29,13 @@ def read_before(path):
   old=qualified_before(ROOT,relative)
   if old is None:raise FileNotFoundError('Historically absent post-default source: '+relative)
   return old
- return historical_after(ROOT,relative)if relative in ALLOWED else path.read_bytes()
+ if relative in ALLOWED:return historical_after(ROOT,relative)
+ migration=ROOT/'docs/runtime-environment/pure-js-source-changes.json'
+ if migration.exists()and relative in json.loads(migration.read_bytes())['files']:
+  node=ROOT/'.cache/emsdk/node/24.19.0_64bit/bin/node'
+  program="import {qualifiedHistorical} from './scripts/pure-js-fixtures/qualification.mjs';process.stdout.write(qualifiedHistorical(process.argv[1]));"
+  return subprocess.check_output([str(node),'--input-type=module','-e',program,relative],cwd=ROOT)
+ return path.read_bytes()
 def text_before(path):return read_before(path).decode()
 def write_before(path,b):
  b=b.encode()if isinstance(b,str)else b

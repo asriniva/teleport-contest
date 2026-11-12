@@ -51,6 +51,8 @@ const allocationCliPatches='docs/runtime-environment/allocation-cli-source-succe
 if(fs.existsSync(allocationCliPatches))for(const file of fs.readdirSync(allocationCliPatches).filter(name=>name.endsWith('.patch')))paths.push(allocationCliPatches+'/'+file);
 const allocationCliProof='docs/runtime-environment/allocation-cli-native-evidence.json';
 if(fs.existsSync(allocationCliProof))paths.push(...Object.keys(JSON.parse(fs.readFileSync(allocationCliProof)).rawProofs??{}));
+// Exact natural SOUNDS callback integration proof.
+paths.push('js/standalone/game-windows.js','scripts/sounds_source_successors.py','scripts/test-sounds-source-successors.py','scripts/test-standalone-sounds-main.mjs','scripts/author-standalone-ordinary-progression.mjs','scripts/fixtures/standalone-sounds-main.json','docs/runtime-environment/sounds-native-evidence.json','docs/runtime-environment/sounds-source-successors.json','docs/runtime-environment/sounds-source-successors/game-windows.patch',...Object.keys(JSON.parse(fs.readFileSync('docs/runtime-environment/sounds-native-evidence.json')).rawProofs));
 const sha256=Object.fromEntries([...new Set(paths)].sort().map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')]));
 const data={baselineCommit:'df33dd4',integrationBaseCommit:'8cf4880d8cf7fb9104635f068564a5de87523fe7',scope:'Common-runtime cleanup source closure; not game or native equivalence acceptance',sha256};
 const file='docs/runtime-environment/c-runtime-manifest.json',text=JSON.stringify(data,null,2)+'\n';

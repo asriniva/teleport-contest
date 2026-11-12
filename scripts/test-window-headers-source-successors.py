@@ -41,6 +41,7 @@ with tempfile.TemporaryDirectory(prefix='window-headers-source-qualification-')a
  # Exercise real layered JavaScript/Python readers with an isolated read-only Git shim.
  for name in ['services-layout-audit.mjs','services_layout_audit.py','services_layout_successors.py','post_default_successors.py','monmove_source_successors.py','window_headers_source_successors.py']:
   (root/'scripts').mkdir(exist_ok=True);shutil.copyfile(source/'scripts'/name,root/'scripts'/name)
+ (root/'scripts/pure-js-fixtures').mkdir();shutil.copyfile(source/'scripts/pure-js-fixtures/qualification.mjs',root/'scripts/pure-js-fixtures/qualification.mjs')
  put('history.json',json.dumps({p:b.decode()for p,b in before.items()}).encode())
  put('docs/runtime-environment/services-layout.json',json.dumps({'baselineCommit':'fixture-layout','moves':{},'files':[{'file':sibling,'destination':sibling,'beforeSha256':q.sha(b'pre-layout '+before[sibling]),'afterSha256':q.sha(before[sibling])}]}).encode())
  put('bin/git',('#!/usr/bin/env python3\nimport json,sys,pathlib\nh=json.loads((pathlib.Path(__file__).parent.parent/"history.json").read_text())\nif sys.argv[1]=="ls-tree":\n assert sys.argv[4]=="'+q.BASE_COMMIT+'";print(sys.argv[-1])\nelse:\n assert sys.argv[1]=="show";c,p=sys.argv[2].split(":",1);assert c in ["'+q.BASE_COMMIT+'","fixture-layout"];sys.stdout.write(("pre-layout "if c=="fixture-layout"else"")+h[p])\n').encode());(root/'bin/git').chmod(0o755)

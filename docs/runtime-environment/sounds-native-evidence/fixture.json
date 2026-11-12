@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "profile": {
+    "seed": 3,
+    "timezone": "UTC",
+    "options": "OPTIONS=!news,autopickup\n",
+    "argv": [
+      "-u",
+      "Ada-male-lawful",
+      "-p",
+      "Samurai",
+      "-r",
+      "human"
+    ]
+  },
+  "authorScope": "Read-only original-C map, monster, HP and food observations author ordinary keyboard input; no setup APIs or game/RNG/input-state writes.",
+  "cases": [
+    {
+      "name": "natural-minetown",
+      "keys": "  nhhhhjhhhhhhhhhkhhhhhhkohhhhkk> hhhhhhhkhhkhhhkkkhhkkkohhhhhhhhhhhhk> llkklllllkllollll......llllllll> l> hhkhhhkhkhhkk> kkhhhhhhhhhhhkhhhh  hhhhjhhhhhhhhhh> ",
+      "moves": "110",
+      "dnum": 2,
+      "dlevel": 4,
+      "hp": 15
+    },
+    {
+      "name": "temple-ambience",
+      "keys": "  nhhhhjhhhhhhhhhkhhhhhhkohhhhkk> hhhhhhhkhhkhhhkkkhhkkkohhhhhhhhhhhhk> llkklllllkllollll......llllllll> l> hhkhhhkhkhhkk> kkhhhhhhhhhhhkhhhh  hhhhjhhhhhhhhhh> hk\u0004hhhhhhhhhhhhhkkkkkkkkkkkkkkhhhjhkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hb b........................l.......................l ll llll.......l l l  l l  l..................hjhjhjj",
+      "dnum": 2,
+      "dlevel": 4,
+      "positiveTemple": true
+    },
+    {
+      "name": "natural-mines-death",
+      "keys": "  nhhhhjhhhhhhhhhkhhhhhhkohhhhkk> hhhhhhhkhhkhhhkkkhhkkkohhhhhhhhhhhhk> llkklllllkllollll......llllllll> l> hhkhhhkhkhhkk> kkhhhhhhhhhhhkhhhh  hhhhjhhhhhhhhhh> hk\u0004hhhhhhhhhhhhhkkkkkkkkkkkkkkhhhjhkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hb b........................l.......................l ll llll.......l l l  l l  l..................hjhjhjjhjjjhjjjhh> .kkkhhhhhhhhjjjjjhbbhjjjhjjhjjhjhjhhhhkkh...yhhh .. ...  ... yy h   hh..hh hh.  ......y.................................................................................................................................................................................................................................................................................ef  ef................y.........................................................................y.hhhh............................................................................................................................................................nn .........................................................................................................................................................................................................n...................h ............................... ......................................lllllll......... .hh..................................................................................................................................................................................ll ll lll .................................. ..............kkk.......l........................................hhhh.....................................................................................hhhhhhkkkkkkkkkkk> klll        h              ",
+      "moves": "1338",
+      "experienceLevel": 6,
+      "score": 1713,
+      "death": true
+    }
+  ]
+}

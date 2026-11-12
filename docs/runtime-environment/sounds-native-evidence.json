@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "complete": true,
+  "originalNativeCompared": true,
+  "baseCommit": "5031c28c9fc7e2b158ecb8e270a3060d8ca488ef",
+  "qualifiedSourceSha256": {
+    "js/standalone/game-windows.js": "4b4f0a0ee5af5d738252057d268a82b609ba2bd2ecaf0b7844e001bd2d0808dc"
+  },
+  "rawProofs": {
+    "docs/runtime-environment/sounds-native-evidence/author-standalone-ordinary-progression.mjs": "c3b98af331032a722aa510383759888cf9a06e2f2718ba4b1fa150cffa36b606",
+    "docs/runtime-environment/sounds-native-evidence/baseline-failure.log": "120bfbda3277de51d447215106173858bd8d15dc47683460a2e052fb066117a8",
+    "docs/runtime-environment/sounds-native-evidence/comparison.json": "58aace08e3b7d09a59b4137c340324262f30918dbbb03c48015fbcfe725b2fcf",
+    "docs/runtime-environment/sounds-native-evidence/fixture.json": "97c8d6cbb2a11d246d5cea1ff24e88eca78ad85f103dc6912206a49ba809f57d",
+    "docs/runtime-environment/sounds-native-evidence/test-standalone-sounds-main.mjs": "dd75475d82a282eb3ac451da7a507810e3e5dadc2c571e9aec287ad486e9b3e9"
+  },
+  "fullGameAccepted": false,
+  "checks": 54,
+  "scope": "Exact indexed SOUNDS callback bridge. Three ordinary literal-key C/JS comparisons, positive natural temple predicate, full live world graphs and final score files; not full-game victory or time-limit acceptance."
+}

@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "complete": true,
+  "fullGameAccepted": false,
+  "originalNativeCompared": true,
+  "nativeChecks": 54,
+  "nativeCases": 3,
+  "strictPublicSessionsPassed": 44,
+  "sessionTimeoutMs": 0,
+  "sourceManifestHashes": 371,
+  "syntheticSoundsRejectionChecks": 20,
+  "monmoveSyntheticAndApiChecks": 30,
+  "windowHeaderSyntheticAndApiChecks": 32,
+  "allocationLayeredApiChecks": 77,
+  "historicalReproduction": {
+    "commit": "390281578eb48723c2e6f564b2e2bddd3f15e884",
+    "sourceRelocations": 189,
+    "changedSourcesAndMetadata": 1017,
+    "currentSourceAcceptance": false
+  },
+  "checks": [
+    "scripts/sounds_source_successors.py --check",
+    "scripts/test-sounds-source-successors.py",
+    "scripts/test-monmove-source-successors.py",
+    "scripts/test-window-headers-source-successors.py",
+    "scripts/test-allocation-cli-layered-audits.py",
+    "scripts/check-standalone-scope.mjs",
+    "scripts/check-c-runtime-boundaries.mjs",
+    "scripts/check-c-runtime-extraction.mjs",
+    "scripts/relocate-runtime-layout.py --historical",
+    "scripts/write-c-runtime-manifest.mjs --check"
+  ],
+  "developmentFailuresCorrected": [
+    "Historical non-relocated migrated libc bytes were read directly; existing exact migration qualification now projects them.",
+    "Two isolated synthetic fixtures omitted the migration helper imported by the JS audit reader; helper is copied explicitly."
+  ],
+  "setupRecovery": [
+    "Extraction checker first lacked STANDALONE_REFERENCE_ROOT; rerun with the real reference root.",
+    "Makefile fixture required .cache/c-runtime-cleanup; directory created and full extraction/provenance checks rerun successfully."
+  ],
+  "limitations": [
+    "Public timeouts disabled; performance/time-limit acceptance remains separate.",
+    "No ordinary natural victory or every special interaction claim."
+  ],
+  "sourceManifestSha256": "5525f697251c9259ca2b4cac0c48ff24ad905e4b127ee430141294d5d0bfcdf3"
+}

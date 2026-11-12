@@ -11,7 +11,8 @@ const monmove=new Set(['js/standalone/monster-movement.js','js/standalone/monmov
 const beforeMonmove=(file,exists=false)=>execFileSync('python3',['scripts/monmove_source_successors.py','--file',file,...(exists?['--exists']:[])],{maxBuffer:32*1024*1024});
 const windowHeaders=new Set(['js/standalone/window-system.js','js/standalone/window-abi.json','js/standalone/turn-loop-abi.json']);
 const beforeWindowHeaders=(file,exists=false)=>execFileSync('python3',['scripts/window_headers_source_successors.py','--file',file,...(exists?['--exists']:[])],{maxBuffer:32*1024*1024});
-const beforeFeatureBytes=file=>windowHeaders.has(file)?beforeWindowHeaders(file):monmove.has(file)?beforeMonmove(file):postDefault.has(file)?beforeFeature(file):fs.readFileSync(file);
+const beforeSounds=file=>execFileSync('python3',['scripts/sounds_source_successors.py','--file',file],{maxBuffer:32*1024*1024});
+const beforeFeatureBytes=file=>file==='js/standalone/game-windows.js'?beforeSounds(file):windowHeaders.has(file)?beforeWindowHeaders(file):monmove.has(file)?beforeMonmove(file):postDefault.has(file)?beforeFeature(file):migrationFiles.has(file)?qualifiedHistorical(file):fs.readFileSync(file);
 const historicalAfter=(file,after)=>execFileSync('python3',['scripts/services_layout_successors.py','--file',file,...(after?['--layout-after',after]:[])],{maxBuffer:32*1024*1024});
 export function currentSourcePath(file){const d=recipe(),p=path.relative(process.cwd(),path.resolve(file));return d.moves[p]??file;}
 export function readBeforeLayout(file,encoding){
