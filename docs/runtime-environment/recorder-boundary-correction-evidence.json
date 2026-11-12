@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "complete": true,
+  "scope": "Exact STAIRS formatting carriers and Clang MemberExpr pointer dereference transport, qualified across the mechanically preserved ownership cleanup. Native component coverage is separate from the full public-recorder gate.",
+  "qualifiedSourceSha256": {
+    "js/standalone/level-startup.js": "108f712ab804c15f88bc8632b00a0399bc6c1e7b1f7c89ec4405acbab304ba32",
+    "scripts/export-standalone-pager-target-abi.py": "f7b78c8910e8d9d5bc5d19b9da2ecc8a2c3453d3f422a66ae7c59af4c784c4b6",
+    "js/standalone/pager-target-header-functions.js": "39e397ff487a910e77457b218d6981615ec49afcd4011152fdf3ce9d8da930bb",
+    "js/standalone/pager-target-abi.json": "4288b2bed69a96e527a41a935921ae1c62b94d38f72cb69b491024f102e1da71",
+    "js/standalone/dbridge-abi.json": "d58c2144f4af3a6728cb9fc8214af1e87695a9d8fb050835424e696294280f22",
+    "js/standalone/region-services-abi.json": "c962f70bad2524fc42651e99e14afb81dda97ab05042085632d832cc4bbaa394"
+  },
+  "projection": {
+    "js/standalone/level-startup.js": "Identical sole source-body edit before and after independently verified cleanup/import relocation",
+    "scripts/export-standalone-pager-target-abi.py": "Identical sole source-body edit before and after independently verified cleanup/import relocation",
+    "js/standalone/pager-target-header-functions.js": "Exact byte identity with native-tested generated expressions",
+    "js/standalone/pager-target-abi.json": "Every measured declaration, original native/header pin and non-source-pin field identical",
+    "js/standalone/dbridge-abi.json": "Every measured declaration, original native/header pin and non-source-pin field identical",
+    "js/standalone/region-services-abi.json": "Every measured declaration, original native/header pin and non-source-pin field identical"
+  },
+  "artifacts": {
+    "docs/runtime-environment/recorder-boundary-evidence/knight-stairs-native-prefix.json": "5d5d0708589fdcfd66091d3e6f7fe15c64024d0eb16737679406446577fb3194",
+    "docs/runtime-environment/recorder-boundary-evidence/knight-stairs.json": "032d30ebeabbf7d65ef0756a0f61389366102407e9ebaf8291718978ebd535c9",
+    "docs/runtime-environment/recorder-boundary-evidence/pager-arrow-native-proof.json": "d7382837a475ab54da77245f4e6a749caa6bcefa65258fce55e111286c3b4452",
+    "docs/runtime-environment/recorder-boundary-evidence/pager-arrow-component.json": "e0cdfac22cdafbe5e83c8b0b718a48e49bf07a094143285a33935e610a94c2e7",
+    "docs/runtime-environment/recorder-boundary-evidence/native-query-receipt.json": "d0734b881adba772a7e250b35df07393f2457f02177d68ca89fbc40a36b7cc1c",
+    "docs/runtime-environment/recorder-boundary-evidence/expression-diff.json": "32f557fe7a67113b9053dac703dd396836083676359081ce3921d4aab313d33e",
+    "docs/runtime-environment/recorder-boundary-evidence/verification-copy-qualification.json": "1c0fa1ca5766ce961d0d40acd5a9408b6361b3e8f5e27144f4102c3d12964484"
+  },
+  "scriptsSha256": {
+    "scripts/build-stairs-pager-native-queries.py": "e5218bde3070a549d55669b760eb17775a49ec3c44c23ec27267f277078da9ac",
+    "scripts/test-standalone-pager-arrow-native.mjs": "692922662bca6afcd1d77548755eadeecc738d7e6d7f6316b9435dce73521f32",
+    "scripts/test-standalone-pager-arrow-component.mjs": "974b1dd7fb6211ea8fe7dd419b4b094818bd85024a9c6786e032e37d150e3e5e",
+    "scripts/test-standalone-public-knight-stairs.mjs": "00bf856e7fb858fa4db6a3e7121efe8b61e6aff5ff1b705ec213f52f76623d53",
+    "scripts/test-standalone-knight-stairs-native-prefix.mjs": "e231b4362979e6876b8cb3ffb11d41a3cfbcaf9c9b4c86a805779642aa938a0a"
+  },
+  "coverage": {
+    "changedGeneratedHelpers": 20,
+    "readOnlyNativeQueries": 2059,
+    "additionalSourceCreatedHelperCases": 3,
+    "nativePublicPrefixKeys": 1002,
+    "separateBranchStairsNativeKeys": 815,
+    "completeKnightPublicKeys": 1813,
+    "completeKnightScreensAndCursors": 1814,
+    "completeKnightRng": 108275,
+    "completeKnightAnimationsAndCursors": 37,
+    "referenceHeadersPreserved": 123
+  },
+  "limits": [
+    "Read-only native queries cover17 helpers; three additional helpers use explicitly declared original source API continuations.",
+    "Component source-created setup is not natural gameplay acceptance and does not alter the full public input-only replay.",
+    "The separately retained Knight receipt corrects an executed-script scope sentence and discloses metadata-only restoration of all original header pins after that replay.",
+    "This qualification preserves original cleanup receipts and SDK proofs; it does not convert their historical source snapshots into current game acceptance.",
+    "Native oracle uses Wasm only in development; production engine imports and runtime capability checks are separate gates."
+  ],
+  "nativeVerificationCopyProposal": {
+    "base": "/Users/arj/Desktop/nethack_comp/teleport-contest/.cache/main-checkpoint-20261111-r2",
+    "cacheOnly": true,
+    "changes": {
+      "js/standalone/level-startup.js": {
+        "baseSha256": "acaf0c90a65ed9c437a6cc3b2e1a6f38663b7ab539de19bbdd14ae28ce854a70",
+        "patchedSha256": "8e464519553037eba85a1ad37d007effcd3d6862bd08a02a6569c2f9764ce1f2"
+      },
+      "scripts/export-standalone-pager-target-abi.py": {
+        "baseSha256": "00c2a2e2f71b2c01b425716d428a708ab55c7693c0ea972b6de98403e798c1ba",
+        "patchedSha256": "1327852ea9a61d3a18666c69260e0bfd317dcaf76218f9a137f9cfa36d0e9df0"
+      },
+      "js/standalone/pager-target-header-functions.js": {
+        "baseSha256": "f9cfb0b5983a9ad05ab79aa8ef70bb35fc1ff1762233425b7d01e8d814112ae5",
+        "patchedSha256": "39e397ff487a910e77457b218d6981615ec49afcd4011152fdf3ce9d8da930bb"
+      },
+      "js/standalone/pager-target-abi.json": {
+        "baseSha256": "1c89b8fc7b516b173a250ecae2e0a3049ecfd95217ec41e354cd85cbd15771a6",
+        "patchedSha256": "4a7647ad927d9ff877e309b2d571e80973673901b5642ff59c0458a084249a8d"
+      }
+    },
+    "patchSha256": "2aec97eba7535012108d16532134c58e779a7f401b75e631d821f7e6b414b3bb",
+    "mainTrackedFilesEdited": false,
+    "immutableR2orRound6Edited": false
+  },
+  "testScopeLabelCorrection": {
+    "file": "scripts/test-standalone-public-knight-stairs.mjs",
+    "executedScriptSha256": "8e246c801b92090f883289a50e5c54d86e157418c470343a0d8fa887e002360e",
+    "currentScriptSha256": "00bf856e7fb858fa4db6a3e7121efe8b61e6aff5ff1b705ec213f52f76623d53",
+    "scope": "Only the emitted evidence scope string changes; executed script byte hash remains in retained original receipts. Runtime inputs, comparisons and engine code are unchanged."
+  }
+}

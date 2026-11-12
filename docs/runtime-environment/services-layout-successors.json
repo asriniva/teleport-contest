@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "cleanupCommit": "390281578eb48723c2e6f564b2e2bddd3f15e884",
+  "files": {
+    "js/standalone/level-startup.js": {
+      "beforeSha256": "65a37c2a5a9ab662fd2b1886b2067276a6f52289a33db2aed93b0082ad89de78",
+      "afterSha256": "108f712ab804c15f88bc8632b00a0399bc6c1e7b1f7c89ec4405acbab304ba32",
+      "patch": "docs/runtime-environment/services-layout-successors/level-startup.patch",
+      "patchSha256": "4e54cba8f8592fb529a071798c38c41b8307acff828203cb4077356f9ffe766c",
+      "nativeProof": "docs/runtime-environment/recorder-boundary-correction-evidence.json",
+      "nativeProofSha256": "8737f2a4be89aeddf382b0c123bfa16bb9452d027f125758873ae14983b88ee5"
+    },
+    "scripts/export-standalone-pager-target-abi.py": {
+      "beforeSha256": "dbb35218bfe1114e6fe7ff428048984dce92446de77fb2abc62eba724758bf74",
+      "afterSha256": "f7b78c8910e8d9d5bc5d19b9da2ecc8a2c3453d3f422a66ae7c59af4c784c4b6",
+      "patch": "docs/runtime-environment/services-layout-successors/export-standalone-pager-target-abi.patch",
+      "patchSha256": "a98036d1395533e3104f3b848b7c54f6390ca163901ab599c14e465798b359b0",
+      "nativeProof": "docs/runtime-environment/recorder-boundary-correction-evidence.json",
+      "nativeProofSha256": "8737f2a4be89aeddf382b0c123bfa16bb9452d027f125758873ae14983b88ee5"
+    },
+    "js/standalone/pager-target-header-functions.js": {
+      "beforeSha256": "f9cfb0b5983a9ad05ab79aa8ef70bb35fc1ff1762233425b7d01e8d814112ae5",
+      "afterSha256": "39e397ff487a910e77457b218d6981615ec49afcd4011152fdf3ce9d8da930bb",
+      "patch": "docs/runtime-environment/services-layout-successors/pager-target-header-functions.patch",
+      "patchSha256": "7cf0053167ca774388cf086f9ee590404e06ed5d1a5af3833911f97b72cbb064",
+      "nativeProof": "docs/runtime-environment/recorder-boundary-correction-evidence.json",
+      "nativeProofSha256": "8737f2a4be89aeddf382b0c123bfa16bb9452d027f125758873ae14983b88ee5"
+    },
+    "js/standalone/pager-target-abi.json": {
+      "beforeSha256": "11c6af656b27b15af42f4e568d3b8ec320c72bad57e81b8629cf22e55a2d1d60",
+      "afterSha256": "4288b2bed69a96e527a41a935921ae1c62b94d38f72cb69b491024f102e1da71",
+      "patch": "docs/runtime-environment/services-layout-successors/pager-target-abi.patch",
+      "patchSha256": "8a2d9551bf616f6cf146c0bc0b31794dcb645bf8d438d514eae46c23b24315ef",
+      "nativeProof": "docs/runtime-environment/recorder-boundary-correction-evidence.json",
+      "nativeProofSha256": "8737f2a4be89aeddf382b0c123bfa16bb9452d027f125758873ae14983b88ee5"
+    },
+    "js/standalone/dbridge-abi.json": {
+      "beforeSha256": "44d1f3304a97ffd133a5279be754a355529990dd902f0b9b24c2bb0d941b983e",
+      "afterSha256": "d58c2144f4af3a6728cb9fc8214af1e87695a9d8fb050835424e696294280f22",
+      "patch": "docs/runtime-environment/services-layout-successors/dbridge-abi.patch",
+      "patchSha256": "b502156097309313afff672c9b4571639cf3766e83d06644bebcf705c746ba92",
+      "nativeProof": "docs/runtime-environment/recorder-boundary-correction-evidence.json",
+      "nativeProofSha256": "8737f2a4be89aeddf382b0c123bfa16bb9452d027f125758873ae14983b88ee5"
+    },
+    "js/standalone/region-services-abi.json": {
+      "beforeSha256": "4deab90f61e491b54e0625b4812808014328a2073d7ce0235ed885fe84638824",
+      "afterSha256": "c962f70bad2524fc42651e99e14afb81dda97ab05042085632d832cc4bbaa394",
+      "patch": "docs/runtime-environment/services-layout-successors/region-services-abi.patch",
+      "patchSha256": "baa46debdf4afaee7a49782e8e6a1f2dd2f9f3498d379bdaab75952f06abf428",
+      "nativeProof": "docs/runtime-environment/recorder-boundary-correction-evidence.json",
+      "nativeProofSha256": "8737f2a4be89aeddf382b0c123bfa16bb9452d027f125758873ae14983b88ee5"
+    }
+  }
+}

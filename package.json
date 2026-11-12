@@ -4,7 +4,7 @@
   "description": "The Teleport Coding Challenge \u2014 Port NetHack C to JavaScript",
   "type": "module",
   "scripts": {
-    "score": "bash scripts/score-wasm.sh",
+    "score": "bash scripts/score-js.sh",
     "play": "echo 'Open index.html in a browser to play'",
     "setup:wasm": "bash nethack-c/setup-wasm.sh",
     "build:wasm": "bash nethack-c/build-wasm.sh",

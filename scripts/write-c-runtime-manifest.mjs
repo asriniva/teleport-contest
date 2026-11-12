@@ -18,6 +18,13 @@ const paths=[...roots.flatMap(root=>fs.readdirSync(root).filter(file=>/\.(js|jso
     ...['test-js-game-files','test-js-runtime-regex','test-js-time','test-js-runtime'].map(name=>'scripts/'+name+'.mjs'),
     ...['heap','stdlib','time','vfs','float-format'].map(name=>'js/c-runtime/'+name+'.js')];
 for(const file of ['scripts/check-sdk-runtime-extension.mjs','docs/runtime-environment/c-runtime-sdk-extension.json','docs/runtime-environment/c-runtime-sdk-extension.patch','docs/runtime-environment/sdk-boundary-evidence.json','docs/runtime-environment/c-runtime-metadata-successors.json','scripts/check-c-runtime-mkobj-address.py','scripts/test-c-runtime-mkobj-address-qualification.py','docs/runtime-environment/c-runtime-mkobj-address-extension.json','docs/runtime-environment/c-runtime-mkobj-address-extension.patch','docs/runtime-environment/mkobj-address-evidence.json'])if(fs.existsSync(file))paths.push(file);
+// Exact later boundary corrections are qualified separately from historical cleanup.
+for(const file of ['scripts/services-layout-audit.mjs','scripts/services_layout_audit.py','scripts/relocate-runtime-layout.py','scripts/services_layout_successors.py','scripts/test-services-layout-successors.py','docs/runtime-environment/services-layout-successors.json','docs/runtime-environment/recorder-boundary-correction-evidence.json'])if(fs.existsSync(file))paths.push(file);
+const successorPatches='docs/runtime-environment/services-layout-successors';
+if(fs.existsSync(successorPatches))for(const file of fs.readdirSync(successorPatches).filter(name=>name.endsWith('.patch')))paths.push(successorPatches+'/'+file);
+for(const file of ['build-stairs-pager-native-queries.py','test-standalone-pager-arrow-native.mjs','test-standalone-pager-arrow-component.mjs','test-standalone-public-knight-stairs.mjs','test-standalone-knight-stairs-native-prefix.mjs'])paths.push('scripts/'+file);
+const boundaryEvidence='docs/runtime-environment/recorder-boundary-evidence';
+if(fs.existsSync(boundaryEvidence))for(const file of fs.readdirSync(boundaryEvidence).filter(name=>name.endsWith('.json')))paths.push(boundaryEvidence+'/'+file);
 const sha256=Object.fromEntries([...new Set(paths)].sort().map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')]));
 const data={baselineCommit:'df33dd4',integrationBaseCommit:'8cf4880d8cf7fb9104635f068564a5de87523fe7',scope:'Common-runtime cleanup source closure; not game or native equivalence acceptance',sha256};
 const file='docs/runtime-environment/c-runtime-manifest.json',text=JSON.stringify(data,null,2)+'\n';

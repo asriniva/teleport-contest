@@ -1,15 +1,34 @@
 # The Teleport Coding Challenge
 
-**Local port status:** all three fixed infrastructure files match `frozen/`.
+**Current scoring default: pure JavaScript.** The default
+`runSegment` uses the standalone JavaScript engine, checked-in game assets and
+layouts, and the unchanged frozen PRNG, terminal and storage contracts. It needs
+Node.js 22 or newer; scoring needs no C build, SDK, Wasm artifact or asset cache.
+The existing browser `NethackGame` API remains separate from this Node recorder.
+
+Verified through the normal entry and unchanged harness: **44/44 public sessions**,
+**792,838 RNG entries**, **11,405 screens/cursors**, and **1,483 animation
+frames/cursors**, with exact output counts and zero forbidden capabilities. See
+[the pinned validation record](docs/runtime-environment/pure-js-public-recorder-validation.json).
+
+`npm score` runs the original frozen harness with the recording timezone and
+session timeouts disabled by default. An explicit `SESSION_REPLAY_TIMEOUT_MS`
+overrides this setting. Directly invoking the frozen runner retains its original
+45-second default unless that variable is set. Public recording equivalence
+under the no-timeout profile does not establish held-out results or acceptance
+under the original time limits.
+
+
+**Historical mixed/Wasm status:** all three fixed infrastructure files match `frozen/`.
 The canonical PRNG/VFS and scoring overlays remain restored. The extra screen
 conversion has been reverted: screens again use the original recorder shadow
 encoding, and Ghostty stays removed from the active runtime. Verified result:
 **44/44 sessions**, **11,405/11,405 screens and cursors**, **792,838/792,838 RNG
-calls**, **1,483/1,483 animation frames**, no runtime errors. The remaining
+calls**, **1,483/1,483 animation frames**, no runtime errors. That historical
 Wasm engine is **not an eligible contest submission**. See the
 [current status and limitations](UPSTREAM_DIVERGENCES.md#active-frozen-infrastructure-restoration-fr01fr04).
 
-**Dependency migration:** JavaScript compression, terminfo, POSIX regex and
+**Historical mixed-build dependency migration:** JavaScript compression, terminfo, POSIX regex and
 configured Lua now pass the full dependency suite. The frozen liblua-free game
 passes all44 recordings,378 original level loads and wizard OS/debug probes
 exactly. The normal builder now selects JavaScript Lua; `--c-lua` retains the
@@ -22,13 +41,13 @@ Later staged ports require fresh game gates. Remaining game
 C/Wasm memory and callback transport still needs migration. See
 [dependency/runtime scope](nethack-c/wasm/README.md#javascript-dependencies-and-runtime-migration).
 
-**Native parity tests:** all 53 existing suites pass directly against host-native
+**Historical native parity tests:** all 53 existing suites pass directly against host-native
 C: 1,496,451 assertions, zero failures. JS implementation fixes replace the
 rejected platform-specific expectations. Explicit three-way libc tests retain
 known Emscripten differences while requiring JS to match native C. See
 [native test scope and results](nethack-c/wasm/README.md#native-c-parity-coverage).
 
-This fork includes a reproducible wasm64 build. See [build and test instructions](nethack-c/wasm/README.md). All inherited and added changes are listed in the [upstream divergence register](UPSTREAM_DIVERGENCES.md).
+A reproducible wasm64 reference build remains available for development. See [build and test instructions](nethack-c/wasm/README.md). All inherited and added changes are listed in the [upstream divergence register](UPSTREAM_DIVERGENCES.md).
 
 *A guide to porting the Mazes of Menace from C to JavaScript, for
 adventurers traveling with a small swarm of LLM coding assistants.
@@ -101,11 +120,13 @@ If your plans don't fit in either category, you can select "other" and reach out
 ```
 # First, set your category to one of: agentic, transpiled, other .
 bash frozen/set-category.sh <CATEGORY>
-# Score locally against all 44 public sessions
-bash frozen/score.sh
+# Score the standalone pure-JS engine against all 44 public sessions
+npm score
+# To request the original per-session deadline explicitly:
+SESSION_REPLAY_TIMEOUT_MS=45000 npm score
 ```
 
-Out of the box, the skeleton scores partial credit on
+Historically, the original skeleton scored partial credit on
 `seed8000-tourist-starter` — its `fastforward.js` replay nails most
 of the early-game PRNG and the first dozen-or-so screens. That's
 your hello world: getting it from "partial" to "full pass," and

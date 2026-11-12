@@ -1,0 +1,11 @@
+--- a/js/standalone/region-services-abi.json
++++ b/js/standalone/region-services-abi.json
+@@ -788,7 +788,7 @@
+     "nethack-c/wasm/tu-region-support.inc": "b4013edea010659f1382a7fcab85a9cfb453b1b581006803e5b0c4d77d44b080",
+     "nethack-c/wasm/tu-libraries/region.js": "9316950a375daabb26529e41e5ca7138a3deb1dde2dcc7ef7f5a0594de3e4ed0",
+     "js/standalone/region-services.js": "8fa637be144a92f387076847c5eb84621a25a08e34667896ca6ca535f98107dc",
+-    "js/standalone/level-startup.js": "65a37c2a5a9ab662fd2b1886b2067276a6f52289a33db2aed93b0082ad89de78",
++    "js/standalone/level-startup.js": "108f712ab804c15f88bc8632b00a0399bc6c1e7b1f7c89ec4405acbab304ba32",
+     "js/ported/region.js": "4a3cd642d2dc0a7ce8613e18ac2b91ccaae006e97acf69fa023c7cdd4de88666",
+     "js/nethack/bindings/region.js": "8114c61cea770d4c709e595b5f79fa79b19756022fbf1877dd49955a3ff9fcd0",
+     "js/standalone/records.json": "7b7ddc59f45ea73a8077a3ad96f5bc89cdc70920d136b1e64c706f94efaa3c9d",

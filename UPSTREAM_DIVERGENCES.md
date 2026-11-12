@@ -1,5 +1,53 @@
 # Upstream divergence register
 
+Pure-JS contest default promoted after the complete public gate (2026-11-12):
+`js/jsmain.js` now lazily delegates runSegment to the standalone recorder. The
+existing NethackGame/browser API remains separate. `package.json` selects the
+new `scripts/score-js.sh`; repository CI uses that same launcher and removes its
+explicit20-minute job cutoff. The launcher defaults to the recording timezone
+and SESSION_REPLAY_TIMEOUT_MS=0, honoring explicit overrides. The original frozen
+runner and its45-second default are unchanged. No C/SDK build, Wasm artifact or
+asset cache is needed for scoring; tracked game assets/layouts are used.
+
+The clean proposed entry, without a jsmain staging overlay, passes44/44 official
+and44/44 supplemental strict checks:792,838 RNG entries,11,405 screens/cursors,
+1,483 animation screens/cursors,56 segments and11,349 consumed keys. All742
+pre-run file hashes are unchanged afterward, with zero errors, forbidden
+capability attempts or pending animations. Storage reads/writes are observed
+for every segment. The source-bound report is pure-js-public-recorder-validation.json.
+These are no-timeout public results, not held-out, original-time-limit, browser
+recorder or full natural-gameplay acceptance. Broader native/game gates remain.
+
+Two native boundary corrections enable the last Knight recording. In
+`js/standalone/level-startup.js`, the STAIRS-local Sprintf/strsubst adapters now
+materialize native text addresses, unwrap inline dungeon-name record addresses,
+and use the measured integer carrier. The original STAIRS policy is unchanged.
+The PAGER Clang exporter now dereferences MemberExpr arrow operands through their
+measured pointee type before field loads; regenerated header projections change
+20 helpers/72 typed loads. All original123 native/header pins and measured ABI
+data remain intact, with source pins refreshed only. Native proof includes an
+815-key original-C branch-stair prefix, a full1002-key C/JS recording comparison,
+2,059 read-only queries across17 helpers and separately declared source-API
+fixtures for the other3. Complete1813-key Knight public replay matches all1814
+screens/cursors,108275 RNG entries and37 animation frames/cursors. Exact proofs,
+source projections, limitations and a disclosed old test-scope label correction
+are retained in recorder-boundary-correction-evidence.json and its evidence folder.
+The native oracle is the sealed configured contest C build, not a claim of an
+unmodified pristine executable; original build/source patch receipts are retained.
+
+Historical cleanup evidence is preserved. A finite services-layout-successors
+qualification binds exactly6 later source/ABI files to original3902815 bytes,
+exact patches and the native proof. Current source checks remain independent.
+The relocation tool adds a read-only --historical mode which reproduces the
+original189 moves/1017 outputs and exact old receipt; it explicitly does not claim
+current-source acceptance and refuses --write. Nested-copy Git inventories use
+--full-tree; two unchanged historical extraction checks use an explicit read-only
+Git context. All28 positive/adversarial cases pass, as do the current269-source
+manifest,579-file pure production closure,137 unchanged translated policies plus
+the existing approved VISION correction,3 frozen inputs,72-file historical
+provenance and exact SDK feature qualification. Historical source/header evidence
+is neither overwritten nor relabeled as fresh gameplay proof.
+
 Final main handoff of ownership cleanup (2026-11-11): replayed on
 b81b413 after the recorder agent's checkpoint, retaining the default contest
 entry and all committed Lua/geometry/data/telemetry repairs. The SDK qualifier

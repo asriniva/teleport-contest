@@ -1,0 +1,11 @@
+--- a/js/standalone/dbridge-abi.json
++++ b/js/standalone/dbridge-abi.json
+@@ -1095,7 +1095,7 @@
+     "js/standalone/dbridge.js": "1e63dfd22c47b32b243389aa7c696947bb4804403dc606306359c725d5785204",
+     "js/standalone/level-contents.js": "54d5d1ed899533ffa8174f01646da74849886fb407e474b024c8fc270efd4846",
+     "js/nethack/address-ports.js": "9837eedc12d6a8a428cfc0e1eebaf262bee55967fcfba760f99d4ff53fe856bc",
+-    "js/standalone/level-startup.js": "65a37c2a5a9ab662fd2b1886b2067276a6f52289a33db2aed93b0082ad89de78",
++    "js/standalone/level-startup.js": "108f712ab804c15f88bc8632b00a0399bc6c1e7b1f7c89ec4405acbab304ba32",
+     "js/ported/mkmap.js": "a3579696a222189ccfe3274dab2f54c2607d28d1c982d57902ac92adfc3506ef",
+     "js/nethack/bindings/mkmap.js": "5452fd6a68910d9e428515c32eace55be89a4029d00add6c70e7487e53fc5818",
+     "nethack-c/wasm/tu-mkroom-support.inc": "c431a8ca0c20768dfc48474f2120e78ec7790cdd3e21ef8f750eccc3339fb0c9",

@@ -3,6 +3,7 @@
 import argparse,hashlib,json,posixpath,re,subprocess
 from functools import lru_cache
 from pathlib import Path
+from services_layout_successors import ALLOWED,AUDIT_TOOLS,historical_after,historical_audit_tool,validate_cohort,verify_historical_output,CLEANUP_COMMIT
 ROOT=Path(__file__).resolve().parents[1]
 MAP=ROOT/'docs/runtime-environment/services-layout-map.json'
 config=json.loads(MAP.read_text());BASE=config['baselineCommit'];MOVES=config['moves'];NAMES=config['identifiers']
@@ -15,7 +16,7 @@ def original(p):
  header=objects.stdout.readline().split();assert len(header)==3 and header[1]==b'blob',('Missing baseline blob',p,header)
  data=objects.stdout.read(int(header[2]));assert objects.stdout.read(1)==b'\n'
  return data
-TRACKED=subprocess.check_output(['git','ls-tree','-r','--name-only',BASE],cwd=ROOT,text=True).splitlines();KNOWN=set(TRACKED)
+TRACKED=subprocess.check_output(['git','ls-tree','--full-tree','-r','--name-only',BASE],cwd=ROOT,text=True).splitlines();KNOWN=set(TRACKED)
 PATCHES=ROOT/'docs/runtime-environment/services-layout-edits.json'
 patches=json.loads(PATCHES.read_text()) if PATCHES.exists()else{}
 INFRA=ROOT/'docs/runtime-environment/binding-infrastructure.json'
@@ -65,7 +66,10 @@ def render_source(p,b):
   assert s.count(before)==count,(p,'Changed explicit edit inventory',before,s.count(before))
   s=s.replace(before,after)
  return s.encode()
-def render():
+def render(historical=False):
+ post=lambda p:subprocess.check_output(['git','show',CLEANUP_COMMIT+':'+p],cwd=ROOT)
+ post_paths=set(subprocess.check_output(['git','ls-tree','--full-tree','-r','--name-only',CLEANUP_COMMIT],cwd=ROOT,text=True).splitlines())if historical else None
+ source=lambda p:post(p)if historical else(ROOT/p).read_bytes()
  outputs={};sources={}
  for p in TRACKED:
   if not(active(p)or p in MOVES):continue
@@ -90,7 +94,7 @@ def render():
    return result
   return value
  current={p:sha(b)for p,b in outputs.items()}
- for p in ['js/c-runtime/adapter-factories.js','js/nethack/header-aliases.js']:current[p]=sha((ROOT/p).read_bytes())
+ for p in ['js/c-runtime/adapter-factories.js','js/nethack/header-aliases.js']:current[p]=sha(source(p))
  for iteration in range(40):
   hashes={r['beforeSha256']:current[r['destination']]for r in sources.values()if r['destination']in current}
   next_meta={}
@@ -104,8 +108,10 @@ def render():
       name=pending.pop();body=outputs.get(name)
       if body is None:
        candidate=ROOT/name
-       if not candidate.is_file():continue
-       body=candidate.read_bytes()
+       if historical:
+        if name not in post_paths:continue
+       elif not candidate.is_file():continue
+       body=source(name)
       for spec in re.findall(r'''(?:from\s*|import\s*)['"](\.[^'"]+)['"]''',body.decode()):
        target=posixpath.normpath(posixpath.join(posixpath.dirname(name),spec))
        if target in seen:continue
@@ -134,7 +140,7 @@ def render():
   for p,b in next_meta.items():
    if p not in sources:sources[p]={'file':p,'destination':p,'beforeSha256':sha(meta[p]if p in meta else original(p)),'afterSha256':sha(b)}
   nxt={p:sha(b)for p,b in updates.items()}
-  for p in ['js/c-runtime/adapter-factories.js','js/nethack/header-aliases.js']:nxt[p]=sha((ROOT/p).read_bytes())
+  for p in ['js/c-runtime/adapter-factories.js','js/nethack/header-aliases.js']:nxt[p]=sha(source(p))
   if nxt==current:
    outputs=updates;break
   current=nxt
@@ -143,9 +149,18 @@ def render():
  return outputs,sources
 
 def main():
- parser=argparse.ArgumentParser();parser.add_argument('--write',action='store_true');args=parser.parse_args()
- outputs,sources=render();receipt_path=ROOT/'docs/runtime-environment/services-layout.json';prior=json.loads(receipt_path.read_text())if receipt_path.exists()else{}
+ parser=argparse.ArgumentParser();parser.add_argument('--write',action='store_true');parser.add_argument('--historical',action='store_true');args=parser.parse_args()
+ assert not(args.historical and args.write),'Historical reproduction is read-only; --historical --write is forbidden'
+ receipt_path=ROOT/'docs/runtime-environment/services-layout.json';prior=json.loads(receipt_path.read_text())if receipt_path.exists()else{}
+ post=lambda p:subprocess.check_output(['git','show',CLEANUP_COMMIT+':'+p],cwd=ROOT)
+ if args.historical:
+  for path in ['docs/runtime-environment/services-layout.json','docs/runtime-environment/services-layout-map.json','docs/runtime-environment/services-layout-edits.json','docs/runtime-environment/binding-infrastructure.json']:
+   assert(ROOT/path).read_bytes()==post(path),'Historical cleanup recipe/evidence changed: '+path
  prior_after={r['destination']:r['afterSha256']for r in prior.get('files',[])}
+ # Validate the complete finite later-feature cohort, including its non-recipe
+ # generated header functions; never let --write replace a qualified feature.
+ validate_cohort(ROOT,prior_after,write=args.write)
+ outputs,sources=render(historical=args.historical)
  # Whole-candidate syntax preflight before any mutation.
  syntax={p:b.decode()for p,b in outputs.items()if p.endswith(('.js','.mjs'))and(p.startswith('js/')or p.startswith('scripts/'))}
  validator="import fs from 'node:fs';import{parse}from './.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs';for(const[p,s]of Object.entries(JSON.parse(fs.readFileSync(0,'utf8')))){try{parse(s,{ecmaVersion:'latest',sourceType:'module'});}catch(e){throw Error(p+': '+e.message);}}"
@@ -153,14 +168,24 @@ def main():
  for p in HISTORICAL:assert (ROOT/p).read_bytes()==original(p),('Historical artifact receipt changed',p)
  # Whole-candidate ownership preflight before any mutation.
  for p,b in outputs.items():
+  if args.historical:
+   verify_historical_output(ROOT,p,b)
+   continue
   q=ROOT/p
   if q.exists():
    actual=q.read_bytes();old=original(p)if p in KNOWN else None
-   if args.write:assert actual in [b,old]or sha(actual)==prior_after.get(p),('Refusing unrelated edit',p)
+   if actual!=b and p in ALLOWED:
+    historical_after(ROOT,p,sha(b))
+    assert not args.write,('Refusing to overwrite qualified post-cleanup feature',p)
+   elif args.write:assert actual in [b,old]or sha(actual)==prior_after.get(p),('Refusing unrelated edit',p)
    else:assert actual==b,('Relocation differs',p)
   else:assert args.write,('Missing relocated source',p)
- for old,new in MOVES.items():
-  if(ROOT/old).exists():assert args.write and(ROOT/old).read_bytes()==original(old),('Old or edited source remains',old)
+ if args.historical:
+  historical_paths=set(subprocess.check_output(['git','ls-tree','--full-tree','-r','--name-only',CLEANUP_COMMIT],cwd=ROOT,text=True).splitlines())
+  for old in MOVES:assert old not in historical_paths,('Old source remained in historical cleanup',old)
+ else:
+  for old,new in MOVES.items():
+   if(ROOT/old).exists():assert args.write and(ROOT/old).read_bytes()==original(old),('Old or edited source remains',old)
  if args.write:
   for p,b in outputs.items():(ROOT/p).parent.mkdir(parents=True,exist_ok=True);(ROOT/p).write_bytes(b)
   for old in MOVES:
@@ -169,9 +194,9 @@ def main():
   for p in sorted((ROOT/'js/services').rglob('*'),reverse=True)if(ROOT/'js/services').exists()else[]:
    if p.is_dir():p.rmdir()
   if(ROOT/'js/services').exists():(ROOT/'js/services').rmdir()
- receipt={'baselineCommit':BASE,'historicalReceiptSha256':{p:sha(original(p))for p in sorted(HISTORICAL)},'moves':MOVES,'identifiers':NAMES,'files':list(sources.values()),'mapSha256':sha(MAP.read_bytes()),'editsSha256':sha(PATCHES.read_bytes()),'toolSha256':sha(Path(__file__).read_bytes()),'infrastructureRecipeSha256':sha(INFRA.read_bytes()),'supportSourceSha256':{p:sha((ROOT/p).read_bytes())for p in ['scripts/services-layout-audit.mjs','scripts/services_layout_audit.py','scripts/extract-binding-infrastructure.mjs','js/c-runtime/adapter-factories.js','js/nethack/header-aliases.js','scripts/test-binding-infrastructure.mjs','scripts/check-services-layout.mjs','scripts/test-module-imports.mjs','scripts/test_module_imports.py']},'scope':'Exact source/import/API relocations plus proven source-pin propagation. Historical receipts and compiled artifacts are not refreshed.'}
+ receipt={'baselineCommit':BASE,'historicalReceiptSha256':{p:sha(original(p))for p in sorted(HISTORICAL)},'moves':MOVES,'identifiers':NAMES,'files':list(sources.values()),'mapSha256':sha(post('docs/runtime-environment/services-layout-map.json')if args.historical else MAP.read_bytes()),'editsSha256':sha(post('docs/runtime-environment/services-layout-edits.json')if args.historical else PATCHES.read_bytes()),'toolSha256':sha(historical_audit_tool(ROOT,'scripts/relocate-runtime-layout.py',prior['toolSha256'])),'infrastructureRecipeSha256':sha(post('docs/runtime-environment/binding-infrastructure.json')if args.historical else INFRA.read_bytes()),'supportSourceSha256':{p:sha(historical_audit_tool(ROOT,p,prior['supportSourceSha256'][p])if p in AUDIT_TOOLS else(post(p)if args.historical else(ROOT/p).read_bytes()))for p in ['scripts/services-layout-audit.mjs','scripts/services_layout_audit.py','scripts/extract-binding-infrastructure.mjs','js/c-runtime/adapter-factories.js','js/nethack/header-aliases.js','scripts/test-binding-infrastructure.mjs','scripts/check-services-layout.mjs','scripts/test-module-imports.mjs','scripts/test_module_imports.py']},'scope':'Exact source/import/API relocations plus proven source-pin propagation. Historical receipts and compiled artifacts are not refreshed.'}
  text=json.dumps(receipt,indent=2)+'\n'
  if args.write:receipt_path.write_text(text)
  else:assert receipt_path.read_text()==text,'Relocation receipt differs'
- print('PASS:',len(MOVES),'source relocations;',len(sources),'exact changed sources/metadata; original declarations and algorithms retained')
+ print('PASS historical390 reproduction (NOT current-source acceptance):'if args.historical else'PASS:',len(MOVES),'source relocations;',len(sources),'exact changed sources/metadata; original declarations and algorithms retained')
 if __name__=='__main__':main()

@@ -46,7 +46,12 @@ def lower(n):
    assert re.fullmatch(r'a\d+',name),name;return 'A['+name[1:]+']'
   if d['kind']=='FunctionDecl':functions.add(name);return 'N.'+name
   assert d['kind']=='VarDecl',d;roots[name]=d['type']['qualType'];return 'G.'+name
- if k=='MemberExpr':return '('+lower(cs[0])+').'+n['name']
+ if k=='MemberExpr':
+  base=lower(cs[0])
+  if n.get('isArrow'):
+   pointer=cs[0]['type'].get('desugaredQualType',cs[0]['type']['qualType']);assert pointer.rstrip().endswith('*'),pointer
+   base='N.deref('+json.dumps(pointer.rstrip()[:-1].strip())+','+base+')'
+  return '('+base+').'+n['name']
  if k=='ArraySubscriptExpr':return 'N.index('+json.dumps(t)+','+lower(cs[0])+','+lower(cs[1])+')'
  if k=='UnaryOperator':
   op=n['opcode'];e=lower(cs[0])

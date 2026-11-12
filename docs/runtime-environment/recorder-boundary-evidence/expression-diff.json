@@ -1,0 +1,168 @@
+{
+  "groups": {
+    "pagerNativeAddress": {
+      "total": 8,
+      "changed": 0
+    },
+    "pagerNativeDep": {
+      "total": 167,
+      "changed": 20
+    },
+    "pagerNativeGet": {
+      "total": 37,
+      "changed": 0
+    },
+    "pagerNativeHero": {
+      "total": 15,
+      "changed": 0
+    },
+    "pagerNativeSet": {
+      "total": 34,
+      "changed": 0
+    }
+  },
+  "changedFunctions": 20,
+  "newTypedDereferences": 72,
+  "rows": [
+    {
+      "group": "pagerNativeDep",
+      "name": "Is_airlevel",
+      "before": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((((((G.svd).dungeon_topology).d_air_level).address??((G.svd).dungeon_topology).d_air_level)).dlevel)|0))||Boolean((Number((((((G.svd).dungeon_topology).d_air_level).address??((G.svd).dungeon_topology).d_air_level)).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_air_level).address??((G.svd).dungeon_topology).d_air_level)))|0)))",
+      "after": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_air_level).address??((G.svd).dungeon_topology).d_air_level))).dlevel)|0))||Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_air_level).address??((G.svd).dungeon_topology).d_air_level))).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_air_level).address??((G.svd).dungeon_topology).d_air_level)))|0)))",
+      "newTypedDereferences": 2
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "Is_astralevel",
+      "before": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((((((G.svd).dungeon_topology).d_astral_level).address??((G.svd).dungeon_topology).d_astral_level)).dlevel)|0))||Boolean((Number((((((G.svd).dungeon_topology).d_astral_level).address??((G.svd).dungeon_topology).d_astral_level)).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_astral_level).address??((G.svd).dungeon_topology).d_astral_level)))|0)))",
+      "after": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_astral_level).address??((G.svd).dungeon_topology).d_astral_level))).dlevel)|0))||Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_astral_level).address??((G.svd).dungeon_topology).d_astral_level))).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_astral_level).address??((G.svd).dungeon_topology).d_astral_level)))|0)))",
+      "newTypedDereferences": 2
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "Is_juiblex_level",
+      "before": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((((((G.svd).dungeon_topology).d_juiblex_level).address??((G.svd).dungeon_topology).d_juiblex_level)).dlevel)|0))||Boolean((Number((((((G.svd).dungeon_topology).d_juiblex_level).address??((G.svd).dungeon_topology).d_juiblex_level)).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_juiblex_level).address??((G.svd).dungeon_topology).d_juiblex_level)))|0)))",
+      "after": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_juiblex_level).address??((G.svd).dungeon_topology).d_juiblex_level))).dlevel)|0))||Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_juiblex_level).address??((G.svd).dungeon_topology).d_juiblex_level))).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_juiblex_level).address??((G.svd).dungeon_topology).d_juiblex_level)))|0)))",
+      "newTypedDereferences": 2
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "Is_medusa_level",
+      "before": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((((((G.svd).dungeon_topology).d_medusa_level).address??((G.svd).dungeon_topology).d_medusa_level)).dlevel)|0))||Boolean((Number((((((G.svd).dungeon_topology).d_medusa_level).address??((G.svd).dungeon_topology).d_medusa_level)).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_medusa_level).address??((G.svd).dungeon_topology).d_medusa_level)))|0)))",
+      "after": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_medusa_level).address??((G.svd).dungeon_topology).d_medusa_level))).dlevel)|0))||Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_medusa_level).address??((G.svd).dungeon_topology).d_medusa_level))).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_medusa_level).address??((G.svd).dungeon_topology).d_medusa_level)))|0)))",
+      "newTypedDereferences": 2
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "Is_qstart",
+      "before": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((((((G.svd).dungeon_topology).d_qstart_level).address??((G.svd).dungeon_topology).d_qstart_level)).dlevel)|0))||Boolean((Number((((((G.svd).dungeon_topology).d_qstart_level).address??((G.svd).dungeon_topology).d_qstart_level)).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_qstart_level).address??((G.svd).dungeon_topology).d_qstart_level)))|0)))",
+      "after": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_qstart_level).address??((G.svd).dungeon_topology).d_qstart_level))).dlevel)|0))||Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_qstart_level).address??((G.svd).dungeon_topology).d_qstart_level))).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_qstart_level).address??((G.svd).dungeon_topology).d_qstart_level)))|0)))",
+      "newTypedDereferences": 2
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "Is_rogue_level",
+      "before": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((((((G.svd).dungeon_topology).d_rogue_level).address??((G.svd).dungeon_topology).d_rogue_level)).dlevel)|0))||Boolean((Number((((((G.svd).dungeon_topology).d_rogue_level).address??((G.svd).dungeon_topology).d_rogue_level)).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_rogue_level).address??((G.svd).dungeon_topology).d_rogue_level)))|0)))",
+      "after": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_rogue_level).address??((G.svd).dungeon_topology).d_rogue_level))).dlevel)|0))||Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_rogue_level).address??((G.svd).dungeon_topology).d_rogue_level))).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_rogue_level).address??((G.svd).dungeon_topology).d_rogue_level)))|0)))",
+      "newTypedDereferences": 2
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "Is_waterlevel",
+      "before": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((((((G.svd).dungeon_topology).d_water_level).address??((G.svd).dungeon_topology).d_water_level)).dlevel)|0))||Boolean((Number((((((G.svd).dungeon_topology).d_water_level).address??((G.svd).dungeon_topology).d_water_level)).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_water_level).address??((G.svd).dungeon_topology).d_water_level)))|0)))",
+      "after": "(G,N,A)=>Number(Boolean(Number(Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_water_level).address??((G.svd).dungeon_topology).d_water_level))).dlevel)|0))||Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_water_level).address??((G.svd).dungeon_topology).d_water_level))).dnum)|0))))&&Boolean((Number(N.on_level(A[0],((((G.svd).dungeon_topology).d_water_level).address??((G.svd).dungeon_topology).d_water_level)))|0)))",
+      "newTypedDereferences": 2
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "MCORPSENM",
+      "before": "(G,N,A)=>((A[0]).mextra).mcorpsenm",
+      "after": "(G,N,A)=>(N.deref(\"struct mextra\",(N.deref(\"struct monst\",A[0])).mextra)).mcorpsenm",
+      "newTypedDereferences": 2
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "M_AP_FLAG",
+      "before": "(G,N,A)=>(Number(((Number((A[0]).m_ap_type)|0)&(~7)))|0)",
+      "after": "(G,N,A)=>(Number(((Number((N.deref(\"struct monst\",A[0])).m_ap_type)|0)&(~7)))|0)",
+      "newTypedDereferences": 1
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "M_AP_TYPE",
+      "before": "(G,N,A)=>(Number(((Number((A[0]).m_ap_type)|0)&7))|0)",
+      "after": "(G,N,A)=>(Number(((Number((N.deref(\"struct monst\",A[0])).m_ap_type)|0)&7))|0)",
+      "newTypedDereferences": 1
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "ceiling_hider",
+      "before": "(G,N,A)=>Number(Boolean((BigInt.asUintN(64,B(((A[0]).mflags1&BigInt.asUintN(64,B(256n)))))!=BigInt.asUintN(64,B(0n))))&&Boolean(Number(Boolean(Number(Boolean((BigInt.asUintN(64,B(((A[0]).mflags1&BigInt.asUintN(64,B(16n)))))!=BigInt.asUintN(64,B(0n))))&&Boolean(((Number((A[0]).mlet)|0)!=13))))||Boolean((BigInt.asUintN(64,B(((A[0]).mflags1&BigInt.asUintN(64,B(1n)))))!=BigInt.asUintN(64,B(0n)))))))",
+      "after": "(G,N,A)=>Number(Boolean((BigInt.asUintN(64,B(((N.deref(\"struct permonst\",A[0])).mflags1&BigInt.asUintN(64,B(256n)))))!=BigInt.asUintN(64,B(0n))))&&Boolean(Number(Boolean(Number(Boolean((BigInt.asUintN(64,B(((N.deref(\"struct permonst\",A[0])).mflags1&BigInt.asUintN(64,B(16n)))))!=BigInt.asUintN(64,B(0n))))&&Boolean(((Number((N.deref(\"struct permonst\",A[0])).mlet)|0)!=13))))||Boolean((BigInt.asUintN(64,B(((N.deref(\"struct permonst\",A[0])).mflags1&BigInt.asUintN(64,B(1n)))))!=BigInt.asUintN(64,B(0n)))))))",
+      "newTypedDereferences": 4
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "cmap_to_glyph",
+      "before": "(G,N,A)=>((A[0]==0)?3929:((A[0]<=11)?(Number(((Number((A[0]-1))|0)+((Number(N.In_mines((((G.u).uz).address??(G.u).uz)))|0)?3941:((Number(N.In_hell((((G.u).uz).address??(G.u).uz)))|0)?3952:(Number(Boolean(Number(Boolean((Number((((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)).dlevel)|0))||Boolean((Number((((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)).dnum)|0))))&&Boolean((Number(N.on_level((((G.u).uz).address??(G.u).uz),((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)))|0)))?3963:(((Number(((((G.u).uz).address??(G.u).uz)).dnum)|0)==(Number(((G.svd).dungeon_topology).d_sokoban_dnum)|0))?3974:3930))))))|0):((A[0]<33)?(Number(((Number((A[0]-12))|0)+3985))|0):((A[0]==33)?(((Number((2&16))|0)==16)?(Number((4006+4))|0):(((Number((2&7))|0)==4)?(Number((4006+3))|0):(((Number((2&7))|0)==2)?(Number((4006+2))|0):(((Number((2&7))|0)==1)?(Number((4006+1))|0):(Number((4006+0))|0))))):((A[0]<(Number((49+(Number((26-1))|0)))|0))?(Number(((Number((A[0]-34))|0)+4011))|0):((A[0]<=87)?(Number(((Number((A[0]-78))|0)+4083))|0):9624))))))",
+      "after": "(G,N,A)=>((A[0]==0)?3929:((A[0]<=11)?(Number(((Number((A[0]-1))|0)+((Number(N.In_mines((((G.u).uz).address??(G.u).uz)))|0)?3941:((Number(N.In_hell((((G.u).uz).address??(G.u).uz)))|0)?3952:(Number(Boolean(Number(Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level))).dlevel)|0))||Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level))).dnum)|0))))&&Boolean((Number(N.on_level((((G.u).uz).address??(G.u).uz),((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)))|0)))?3963:(((Number((N.deref(\"d_level\",(((G.u).uz).address??(G.u).uz))).dnum)|0)==(Number(((G.svd).dungeon_topology).d_sokoban_dnum)|0))?3974:3930))))))|0):((A[0]<33)?(Number(((Number((A[0]-12))|0)+3985))|0):((A[0]==33)?(((Number((2&16))|0)==16)?(Number((4006+4))|0):(((Number((2&7))|0)==4)?(Number((4006+3))|0):(((Number((2&7))|0)==2)?(Number((4006+2))|0):(((Number((2&7))|0)==1)?(Number((4006+1))|0):(Number((4006+0))|0))))):((A[0]<(Number((49+(Number((26-1))|0)))|0))?(Number(((Number((A[0]-34))|0)+4011))|0):((A[0]<=87)?(Number(((Number((A[0]-78))|0)+4083))|0):9624))))))",
+      "newTypedDereferences": 3
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "engraving_to_glyph",
+      "before": "(G,N,A)=>(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(A[0]).engr_x),(A[0]).engr_y)).typ)|0)==24)?24:21)==0)?3929:(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(A[0]).engr_x),(A[0]).engr_y)).typ)|0)==24)?24:21)<=11)?(Number(((Number(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(A[0]).engr_x),(A[0]).engr_y)).typ)|0)==24)?24:21)-1))|0)+((Number(N.In_mines((((G.u).uz).address??(G.u).uz)))|0)?3941:((Number(N.In_hell((((G.u).uz).address??(G.u).uz)))|0)?3952:(Number(Boolean(Number(Boolean((Number((((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)).dlevel)|0))||Boolean((Number((((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)).dnum)|0))))&&Boolean((Number(N.on_level((((G.u).uz).address??(G.u).uz),((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)))|0)))?3963:(((Number(((((G.u).uz).address??(G.u).uz)).dnum)|0)==(Number(((G.svd).dungeon_topology).d_sokoban_dnum)|0))?3974:3930))))))|0):(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(A[0]).engr_x),(A[0]).engr_y)).typ)|0)==24)?24:21)<33)?(Number(((Number(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(A[0]).engr_x),(A[0]).engr_y)).typ)|0)==24)?24:21)-12))|0)+3985))|0):(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(A[0]).engr_x),(A[0]).engr_y)).typ)|0)==24)?24:21)==33)?(((Number((2&16))|0)==16)?(Number((4006+4))|0):(((Number((2&7))|0)==4)?(Number((4006+3))|0):(((Number((2&7))|0)==2)?(Number((4006+2))|0):(((Number((2&7))|0)==1)?(Number((4006+1))|0):(Number((4006+0))|0))))):(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(A[0]).engr_x),(A[0]).engr_y)).typ)|0)==24)?24:21)<(Number((49+(Number((26-1))|0)))|0))?(Number(((Number(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(A[0]).engr_x),(A[0]).engr_y)).typ)|0)==24)?24:21)-34))|0)+4011))|0):(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(A[0]).engr_x),(A[0]).engr_y)).typ)|0)==24)?24:21)<=87)?(Number(((Number(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(A[0]).engr_x),(A[0]).engr_y)).typ)|0)==24)?24:21)-78))|0)+4083))|0):9624))))))",
+      "after": "(G,N,A)=>(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(N.deref(\"struct engr\",A[0])).engr_x),(N.deref(\"struct engr\",A[0])).engr_y)).typ)|0)==24)?24:21)==0)?3929:(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(N.deref(\"struct engr\",A[0])).engr_x),(N.deref(\"struct engr\",A[0])).engr_y)).typ)|0)==24)?24:21)<=11)?(Number(((Number(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(N.deref(\"struct engr\",A[0])).engr_x),(N.deref(\"struct engr\",A[0])).engr_y)).typ)|0)==24)?24:21)-1))|0)+((Number(N.In_mines((((G.u).uz).address??(G.u).uz)))|0)?3941:((Number(N.In_hell((((G.u).uz).address??(G.u).uz)))|0)?3952:(Number(Boolean(Number(Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level))).dlevel)|0))||Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level))).dnum)|0))))&&Boolean((Number(N.on_level((((G.u).uz).address??(G.u).uz),((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)))|0)))?3963:(((Number((N.deref(\"d_level\",(((G.u).uz).address??(G.u).uz))).dnum)|0)==(Number(((G.svd).dungeon_topology).d_sokoban_dnum)|0))?3974:3930))))))|0):(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(N.deref(\"struct engr\",A[0])).engr_x),(N.deref(\"struct engr\",A[0])).engr_y)).typ)|0)==24)?24:21)<33)?(Number(((Number(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(N.deref(\"struct engr\",A[0])).engr_x),(N.deref(\"struct engr\",A[0])).engr_y)).typ)|0)==24)?24:21)-12))|0)+3985))|0):(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(N.deref(\"struct engr\",A[0])).engr_x),(N.deref(\"struct engr\",A[0])).engr_y)).typ)|0)==24)?24:21)==33)?(((Number((2&16))|0)==16)?(Number((4006+4))|0):(((Number((2&7))|0)==4)?(Number((4006+3))|0):(((Number((2&7))|0)==2)?(Number((4006+2))|0):(((Number((2&7))|0)==1)?(Number((4006+1))|0):(Number((4006+0))|0))))):(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(N.deref(\"struct engr\",A[0])).engr_x),(N.deref(\"struct engr\",A[0])).engr_y)).typ)|0)==24)?24:21)<(Number((49+(Number((26-1))|0)))|0))?(Number(((Number(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(N.deref(\"struct engr\",A[0])).engr_x),(N.deref(\"struct engr\",A[0])).engr_y)).typ)|0)==24)?24:21)-34))|0)+4011))|0):(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(N.deref(\"struct engr\",A[0])).engr_x),(N.deref(\"struct engr\",A[0])).engr_y)).typ)|0)==24)?24:21)<=87)?(Number(((Number(((((Number((N.index(\"struct rm\",N.index(\"struct rm[21]\",((G.svl).level).locations,(N.deref(\"struct engr\",A[0])).engr_x),(N.deref(\"struct engr\",A[0])).engr_y)).typ)|0)==24)?24:21)-78))|0)+4083))|0):9624))))))",
+      "newTypedDereferences": 23
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "has_mcorpsenm",
+      "before": "(G,N,A)=>Number(Boolean((A[0]).mextra)&&Boolean((((A[0]).mextra).mcorpsenm!=-1)))",
+      "after": "(G,N,A)=>Number(Boolean((N.deref(\"struct monst\",A[0])).mextra)&&Boolean(((N.deref(\"struct mextra\",(N.deref(\"struct monst\",A[0])).mextra)).mcorpsenm!=-1)))",
+      "newTypedDereferences": 3
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "hides_under",
+      "before": "(G,N,A)=>(BigInt.asUintN(64,B(((A[0]).mflags1&BigInt.asUintN(64,B(128n)))))!=BigInt.asUintN(64,B(0n)))",
+      "after": "(G,N,A)=>(BigInt.asUintN(64,B(((N.deref(\"struct permonst\",A[0])).mflags1&BigInt.asUintN(64,B(128n)))))!=BigInt.asUintN(64,B(0n)))",
+      "newTypedDereferences": 1
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "is_hider",
+      "before": "(G,N,A)=>(BigInt.asUintN(64,B(((A[0]).mflags1&BigInt.asUintN(64,B(256n)))))!=BigInt.asUintN(64,B(0n)))",
+      "after": "(G,N,A)=>(BigInt.asUintN(64,B(((N.deref(\"struct permonst\",A[0])).mflags1&BigInt.asUintN(64,B(256n)))))!=BigInt.asUintN(64,B(0n)))",
+      "newTypedDereferences": 1
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "is_obj_mappear",
+      "before": "(G,N,A)=>Number(Boolean(((Number(((Number((A[0]).m_ap_type)|0)&7))|0)==2))&&Boolean(((A[0]).mappearance==A[1])))",
+      "after": "(G,N,A)=>Number(Boolean(((Number(((Number((N.deref(\"struct monst\",A[0])).m_ap_type)|0)&7))|0)==2))&&Boolean(((N.deref(\"struct monst\",A[0])).mappearance==A[1])))",
+      "newTypedDereferences": 2
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "is_orc",
+      "before": "(G,N,A)=>(BigInt.asUintN(64,B(((A[0]).mflags2&BigInt.asUintN(64,B(128n)))))!=BigInt.asUintN(64,B(0n)))",
+      "after": "(G,N,A)=>(BigInt.asUintN(64,B(((N.deref(\"struct permonst\",A[0])).mflags2&BigInt.asUintN(64,B(128n)))))!=BigInt.asUintN(64,B(0n)))",
+      "newTypedDereferences": 1
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "mon_to_glyph",
+      "before": "(G,N,A)=>(Number(((Number(Boolean((N.index(\"struct prop\",(G.u).uprops,23)).intrinsic)&&Boolean((!Number(Boolean((N.index(\"struct prop\",(G.u).uprops,24)).intrinsic)||Boolean((N.index(\"struct prop\",(G.u).uprops,24)).extrinsic)))))?N.indirect(\"int (*)(int)\",A[1],383):(Number((((G.u).ustuck).data).pmidx)|0))+(((Number(((G.u).ustuck).female)|0)==0)?0:383)))|0)",
+      "after": "(G,N,A)=>(Number(((Number(Boolean((N.index(\"struct prop\",(G.u).uprops,23)).intrinsic)&&Boolean((!Number(Boolean((N.index(\"struct prop\",(G.u).uprops,24)).intrinsic)||Boolean((N.index(\"struct prop\",(G.u).uprops,24)).extrinsic)))))?N.indirect(\"int (*)(int)\",A[1],383):(Number((N.deref(\"struct permonst\",(N.deref(\"struct monst\",(G.u).ustuck)).data)).pmidx)|0))+(((Number((N.deref(\"struct monst\",(G.u).ustuck)).female)|0)==0)?0:383)))|0)",
+      "newTypedDereferences": 3
+    },
+    {
+      "group": "pagerNativeDep",
+      "name": "trap_to_glyph",
+      "before": "(G,N,A)=>(((Number(((Number((49+(Number((A[0]).ttyp)|0)))|0)-1))|0)==0)?3929:(((Number(((Number((49+(Number((A[0]).ttyp)|0)))|0)-1))|0)<=11)?(Number(((Number(((Number(((Number((49+(Number((A[0]).ttyp)|0)))|0)-1))|0)-1))|0)+((Number(N.In_mines((((G.u).uz).address??(G.u).uz)))|0)?3941:((Number(N.In_hell((((G.u).uz).address??(G.u).uz)))|0)?3952:(Number(Boolean(Number(Boolean((Number((((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)).dlevel)|0))||Boolean((Number((((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)).dnum)|0))))&&Boolean((Number(N.on_level((((G.u).uz).address??(G.u).uz),((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)))|0)))?3963:(((Number(((((G.u).uz).address??(G.u).uz)).dnum)|0)==(Number(((G.svd).dungeon_topology).d_sokoban_dnum)|0))?3974:3930))))))|0):(((Number(((Number((49+(Number((A[0]).ttyp)|0)))|0)-1))|0)<33)?(Number(((Number(((Number(((Number((49+(Number((A[0]).ttyp)|0)))|0)-1))|0)-12))|0)+3985))|0):(((Number(((Number((49+(Number((A[0]).ttyp)|0)))|0)-1))|0)==33)?(((Number((2&16))|0)==16)?(Number((4006+4))|0):(((Number((2&7))|0)==4)?(Number((4006+3))|0):(((Number((2&7))|0)==2)?(Number((4006+2))|0):(((Number((2&7))|0)==1)?(Number((4006+1))|0):(Number((4006+0))|0))))):(((Number(((Number((49+(Number((A[0]).ttyp)|0)))|0)-1))|0)<(Number((49+(Number((26-1))|0)))|0))?(Number(((Number(((Number(((Number((49+(Number((A[0]).ttyp)|0)))|0)-1))|0)-34))|0)+4011))|0):(((Number(((Number((49+(Number((A[0]).ttyp)|0)))|0)-1))|0)<=87)?(Number(((Number(((Number(((Number((49+(Number((A[0]).ttyp)|0)))|0)-1))|0)-78))|0)+4083))|0):9624))))))",
+      "after": "(G,N,A)=>(((Number(((Number((49+(Number((N.deref(\"struct trap\",A[0])).ttyp)|0)))|0)-1))|0)==0)?3929:(((Number(((Number((49+(Number((N.deref(\"struct trap\",A[0])).ttyp)|0)))|0)-1))|0)<=11)?(Number(((Number(((Number(((Number((49+(Number((N.deref(\"struct trap\",A[0])).ttyp)|0)))|0)-1))|0)-1))|0)+((Number(N.In_mines((((G.u).uz).address??(G.u).uz)))|0)?3941:((Number(N.In_hell((((G.u).uz).address??(G.u).uz)))|0)?3952:(Number(Boolean(Number(Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level))).dlevel)|0))||Boolean((Number((N.deref(\"d_level\",((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level))).dnum)|0))))&&Boolean((Number(N.on_level((((G.u).uz).address??(G.u).uz),((((G.svd).dungeon_topology).d_knox_level).address??((G.svd).dungeon_topology).d_knox_level)))|0)))?3963:(((Number((N.deref(\"d_level\",(((G.u).uz).address??(G.u).uz))).dnum)|0)==(Number(((G.svd).dungeon_topology).d_sokoban_dnum)|0))?3974:3930))))))|0):(((Number(((Number((49+(Number((N.deref(\"struct trap\",A[0])).ttyp)|0)))|0)-1))|0)<33)?(Number(((Number(((Number(((Number((49+(Number((N.deref(\"struct trap\",A[0])).ttyp)|0)))|0)-1))|0)-12))|0)+3985))|0):(((Number(((Number((49+(Number((N.deref(\"struct trap\",A[0])).ttyp)|0)))|0)-1))|0)==33)?(((Number((2&16))|0)==16)?(Number((4006+4))|0):(((Number((2&7))|0)==4)?(Number((4006+3))|0):(((Number((2&7))|0)==2)?(Number((4006+2))|0):(((Number((2&7))|0)==1)?(Number((4006+1))|0):(Number((4006+0))|0))))):(((Number(((Number((49+(Number((N.deref(\"struct trap\",A[0])).ttyp)|0)))|0)-1))|0)<(Number((49+(Number((26-1))|0)))|0))?(Number(((Number(((Number(((Number((49+(Number((N.deref(\"struct trap\",A[0])).ttyp)|0)))|0)-1))|0)-34))|0)+4011))|0):(((Number(((Number((49+(Number((N.deref(\"struct trap\",A[0])).ttyp)|0)))|0)-1))|0)<=87)?(Number(((Number(((Number(((Number((49+(Number((N.deref(\"struct trap\",A[0])).ttyp)|0)))|0)-1))|0)-78))|0)+4083))|0):9624))))))",
+      "newTypedDereferences": 13
+    }
+  ]
+}
