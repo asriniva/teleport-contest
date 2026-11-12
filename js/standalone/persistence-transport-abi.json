@@ -1,12 +1,39 @@
 {
+  "versionWindows": {
+    "create_nhwindow": {
+      "field": "win_create_nhwindow",
+      "signature": "ii",
+      "nativeType": "winid (*)(int) win_create_nhwindow"
+    },
+    "putstr": {
+      "field": "win_putstr",
+      "signature": "viip",
+      "nativeType": "void (*)(winid, int, const char *) win_putstr"
+    },
+    "display_nhwindow": {
+      "field": "win_display_nhwindow",
+      "signature": "vii",
+      "nativeType": "void (*)(winid, boolean) win_display_nhwindow"
+    },
+    "destroy_nhwindow": {
+      "field": "win_destroy_nhwindow",
+      "signature": "vi",
+      "nativeType": "void (*)(winid) win_destroy_nhwindow"
+    },
+    "wait_synch": {
+      "field": "win_wait_synch",
+      "signature": "v",
+      "nativeType": "void (*)(void) win_wait_synch"
+    }
+  },
   "sourceSha256": {
-    "scripts/export-standalone-persistence-transport-abi.py": "715350244f6be2a50928fa92c156a7c60c04f579f217a8d39e1870678fe10d1d",
+    "scripts/export-standalone-persistence-transport-abi.py": "65d61add495229767983ed954964a40408ee6b0096e67f4195dbbc903ea64895",
     "nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",
     "nethack-c/wasm/tu-support.c": "4acc049213a8c67b069b71315406f58409100db195df2dadbc5d4bcd7184f875",
     "js/standalone/records.json": "b0e9d94ad00af9838c21971dc7f682ea87634c8d19000e6c1940208ee1ed01b2",
     "js/wasm/tu-layouts.json": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34",
     "js/standalone/level-persistence.js": "fc342b2bb1df81b3dbc880d318cf53d79ba42b4e7e4e782015c4835ebef23f57",
-    "js/standalone/version-info.js": "7734043ef0788feb7a0ec140a9066e061d46932c39036f9d11b0b28638101116",
+    "js/standalone/version-info.js": "d089fabed5bfb585858945c5f7fb944eb1bad6d29f29fd2095e2d818765a7b5f",
     "js/standalone/libc.js": "098638b3aeddafdb54b7b54cb470f8de1bb5ab176625bd2fab2fa98622379e76",
     "js/standalone/random-text.js": "4de3076cac8de7aace03a029c11818a7372b2a5fb290d3b68d9ff29393d0d0f1",
     "js/ported/timeout.js": "5997f356dd0f273fb5ea23aba23b099a602137928f1dd1d679938616518e6c33",

@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+// Development orchestration only. Existing assertions and production policies stay unchanged.
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+
+const root=path.resolve(new URL('..',import.meta.url).pathname);
+process.chdir(root);
+const options={run:false,preflight:false,only:null,out:'.cache/integrated-checks',reference:'.cache/full-original-c-v1',node:'.cache/emsdk/node/24.19.0_64bit/bin/node'};
+for(let i=2;i<process.argv.length;i++){
+ const a=process.argv[i];
+ if(a==='--run')options.run=true;
+ else if(a==='--preflight')options.preflight=true;
+ else if(a==='--list'){}
+ else if(['--only','--out','--reference','--node'].includes(a)){const value=process.argv[++i];if(!value||value.startsWith('--'))throw Error('Missing value for '+a);options[a.slice(2)]=value;}
+ else if(a==='--help'){console.log('Usage: node scripts/run-standalone-integrated-checks.mjs [--list | --preflight | --run] [--only id,id] [--out DIR] [--reference DIR] [--node NODE]\nDefault lists the exact jobs without executing them. --only includes prerequisite jobs. Run only after the shared assembly is frozen.');process.exit(0);}
+ else throw Error('Unknown argument '+a);
+}
+const output=path.resolve(options.out),reference=path.resolve(options.reference),node=path.resolve(options.node),sha=p=>{const hash=crypto.createHash('sha256'),fd=fs.openSync(p,'r'),buffer=Buffer.alloc(1024*1024);try{for(let n;(n=fs.readSync(fd,buffer,0,buffer.length,null))>0;)hash.update(buffer.subarray(0,n));}finally{fs.closeSync(fd);}return hash.digest('hex');},read=p=>JSON.parse(fs.readFileSync(p));
+const file=(id,name)=>path.join(output,id,name),questProducer='.cache/quest-eligible-bootstrap-save/c-result.json',deathFixture='.cache/native-deeper-bones-sam3/input.json';
+const jobs=[];
+function add(id,script,evidence,{deps=[],env={},requires=[],scope,kind='ordinary-main'}={}){jobs.push({id,script:'scripts/'+script+'.mjs',deps,env,evidence,requires,kind,scope});}
+add('main','test-standalone-program','.cache/standalone-program/evidence.json',{scope:'Actual startup, first wait, real initial saves and four fresh C/JS save-stream consumers.'});
+add('ordinary-commands','test-standalone-ordinary-commands','.cache/ordinary-commands/evidence.json',{scope:'All five ordinary inventory/eating/wield/wear/drop-pickup cases, combined play/save and four fresh resumed consumers; no source setup.'});
+add('restored-world','test-standalone-restored-world',file('restored-world','evidence.json'),{deps:['main'],env:{RESTORED_OUTPUT:file('restored-world','')},scope:'Eight ordinary initial-save/rested-world cases, pointer identity graph and complete recordings.'});
+add('stairs','test-standalone-restored-world',file('stairs','evidence.json'),{deps:['main'],env:{RESTORED_TRAVEL:'roundtrip',RESTORED_OUTPUT:file('stairs','')},scope:'Four fresh cross-fed ordinary walking down/up/down runs; original level transitions, final D2/move62.'});
+add('positive-quit','test-standalone-end-program','.cache/standalone-end-travel-program/evidence.json',{deps:['main'],env:{STANDALONE_END_TRAVEL:'1'},scope:'Ordinary D2 route and genuine positive-score quit, then four fresh score-file producer/consumer combinations.'});
+add('d5-death','test-standalone-death-program',file('d5-death','evidence.json'),{env:{STANDALONE_DEATH_FIXTURE:deathFixture,STANDALONE_DEATH_OUTPUT:file('d5-death',''),STANDALONE_DEATH_EXPECT_BONES:'1'},requires:[deathFixture,'.cache/native-deeper-bones-sam3/evidence.json'],scope:'Literal ordinary Samurai D5 death, 2376 moves/2752 consumed keys; actual newly generated C/JS bones. No post-cleanup heap claim.'});
+add('bones-four-way','test-standalone-bones-consumer',file('bones-four-way','evidence.json'),{deps:['d5-death'],env:{STANDALONE_BONES_PRODUCER:file('d5-death',''),STANDALONE_BONES_CONSUMER_OUTPUT:file('bones-four-way','')},requires:['.cache/native-bones-consumer-seed16/input.json','.cache/native-bones-consumer-seed16/replay-evidence.json'],scope:'Four fresh ordinary D5 C/JS consumers of THIS RUN\'S death streams, including current JS artifact (historically 5027 bytes), full recordings and live restored identity graphs.'});
+add('quest-portals','test-standalone-quest-travel','.cache/quest-travel-ordinary/evidence.json',{kind:'source-created-fixture',scope:'Source-generated Quest entrance/approach, then actual MAIN portal round trip; connected raw stdin required. Not natural travel.'});
+add('quest-leader','test-standalone-quest-travel','.cache/quest-leader-ordinary/evidence.json',{env:{STANDALONE_QUEST_TRAVEL_LEADER:'1'},kind:'source-created-fixture',scope:'Actual low-level leader dialogue/expulsion following source-created approach; connected raw stdin. Not natural progression.'});
+add('quest-assignment','test-standalone-quest-completion','.cache/quest-completion-restored/evidence.json',{env:{STANDALONE_QUEST_COMPLETION_PRODUCER:questProducer},requires:[questProducer],kind:'source-created-fixture',scope:'Fresh load of pinned ORIGINAL-C eligible save, source-created Quest approach and actual assignment. No new native-only producer run.'});
+add('quest-return','test-standalone-quest-completion','.cache/quest-completion-artifact-return/evidence.json',{env:{STANDALONE_QUEST_COMPLETION_PRODUCER:questProducer,STANDALONE_QUEST_COMPLETION_RETURN_ARTIFACT:'1'},requires:[questProducer],kind:'source-created-fixture',scope:'Pinned eligible save, controlled source nemesis death/relic pickup and actual leader acceptance; real poison cloud observed. Not natural Quest completion.'});
+add('invocation','test-standalone-invocation','.cache/invocation-ordinary/evidence.json',{kind:'source-created-fixture',scope:'Original source-created ritual items/site followed by actual MAIN Bell/candelabrum/Book invocation; connected terminal, no natural acquisition claim.'});
+for(const plane of ['water','air']){
+ const recipe='.cache/elemental-'+plane+'/literal-host-keys.json';
+ add(plane+'-turns','test-standalone-elemental-planes','.cache/elemental-'+plane+'/evidence.json',{env:{STANDALONE_PLANE:plane,STANDALONE_ELEMENTAL_MODE:'turns'},requires:[recipe],kind:'source-created-fixture',scope:'Source level30/Amulet/plane arrival, frozen literal main inputs, actual bubble turns; only approved visibility correction and source-defined active bubble extent.'});
+ add(plane+'-save','test-standalone-elemental-planes','.cache/elemental-'+plane+'-save/evidence.json',{env:{STANDALONE_PLANE:plane,STANDALONE_ELEMENTAL_MODE:'save'},requires:[recipe],kind:'source-created-fixture',scope:'Source-created plane, actual MAIN bubble turns and fresh compressed save; producer prerequisite for four-way restore.'});
+ add(plane+'-restore','test-standalone-elemental-restore','.cache/elemental-'+plane+'-restore/evidence.json',{deps:[plane+'-save'],env:{STANDALONE_PLANE:plane},kind:'source-created-fixture',scope:'Four fresh C/JS consumers of THIS RUN\'S plane saves; bubble/region/world/recordings strict with inventoried inactive bitmap tails.'});
+ add(plane+'-portal','test-standalone-elemental-portals','.cache/elemental-'+plane+'-portal/evidence.json',{env:{STANDALONE_PLANE:plane},requires:['.cache/elemental-'+plane+'-portal/literal-host-keys.json'],kind:'source-created-fixture',scope:plane==='air'?'Actual source-generated Air→Fire portal through MAIN; controlled initial plane setup.':'Actual source-generated Water→Astral portal through MAIN; controlled initial plane setup.'});
+}
+add('astral-zero','test-standalone-astral-victory','.cache/astral-victory/evidence.json',{kind:'source-created-fixture',scope:'Source-created Amulet/Earth/Astral/altar then genuine MAIN offering/ascension; first-turn zero ranking, connected dual input carriers.'});
+add('astral-positive','test-standalone-astral-victory-ranking','.cache/astral-victory-ranking/evidence.json',{deps:['main','water-save'],kind:'source-created-fixture',scope:'Ordinary D2 travel and actual save; four fresh C/JS consumers source-create endgame arrival and genuinely offer, producing native 100-point ranking. Not natural ascension.'});
+add('wizard-victory','test-standalone-wizard-victory','.cache/wizard-victory-paired/evidence.json',{requires:['scripts/fixtures/standalone-wizard-victory.json','scripts/fixtures/standalone-wizard-victory-native-receipt.json','scripts/author-standalone-wizard-victory.mjs'],kind:'debug-main-journey',scope:'One continuous new MAIN -D startup→real debug wishes/levelports/cursor teleport→actual offering/normal exit with147literal inputs; no policy setup calls/raw game writes. Exact native replay, four live worlds, full recordings/files. Debug journey, not natural ordinary ascension.'});
+const ids=new Map(jobs.map(j=>[j.id,j])),selected=new Set();
+function select(id){const j=ids.get(id);if(!j)throw Error('Unknown job '+id);if(selected.has(id))return;j.deps.forEach(select);selected.add(id);}
+(options.only?options.only.split(','):jobs.map(j=>j.id)).forEach(select);
+const plan=jobs.filter(j=>selected.has(j.id)),manifest={version:1,fullGameAccepted:false,reference,node,output,executionRequested:options.run,jobs:plan,limits:['Selected bounded ordinary MAIN and explicitly controlled source fixtures only; public registration does not establish complete gameplay.','Quest, invocation, plane and ascension fixtures do not establish natural acquisition/journey.','Raw compressed files may differ by pointer/layout bytes; acceptance comes from fresh cross-fed consumers, not presence or byte-count masking.','No old/degraded terminal Quest profiles, native-only discovery/generation modes, source toggles or assertion relaxations are selected.']};
+if(!options.run&&!options.preflight){console.log(JSON.stringify(manifest,null,2));process.exit(0);}
+for(const p of [node,reference+'/receipt.json',...plan.flatMap(j=>[j.script,...j.requires])])assert.ok(fs.statSync(p).isFile(),'Required fixed-profile input '+p);
+const receipt=read(reference+'/receipt.json');assert.equal(receipt.gameTranslationUnits,140);assert.equal(receipt.luaTranslationUnits,32);assert.deepEqual(receipt.abortBoundaries,[]);assert.deepEqual(receipt.portedTranslationUnits,[]);assert.deepEqual(receipt.syntheticGameGlobals,[]);
+for(const[p,h]of Object.entries(receipt.sourceSha256))assert.equal(sha(p),h,'Sealed original-C source '+p);for(const[p,h]of Object.entries(receipt.artifactSha256))assert.equal(sha(path.join(reference,p)),h,'Sealed original-C artifact '+p);
+if(selected.has('quest-assignment')||selected.has('quest-return'))assert.equal(sha(questProducer),'9a83d984c4d1aea5c7a5f99999a9f2fe68498bd0c613ada35d24b15316a5df88','Pinned source-created ORIGINAL-C eligible producer');
+if(selected.has('d5-death')){const accepted=read('.cache/native-deeper-bones-sam3/evidence.json');assert.equal(accepted.complete,true);assert.equal(accepted.literalInputSha256,sha(deathFixture));assert.equal(accepted.referenceReceiptSha256,sha(reference+'/receipt.json'));}
+if(selected.has('bones-four-way')){const accepted=read('.cache/native-bones-consumer-seed16/replay-evidence.json');assert.equal(accepted.nativeConsumerAccepted,true);assert.equal(accepted.literalReplayAccepted,true);assert.equal(accepted.fixtureSha256,sha('.cache/native-bones-consumer-seed16/input.json'));}
+if(!options.run){console.log(JSON.stringify({...manifest,preflightPassed:true},null,2));process.exit(0);}
+function walk(dir,filter=()=>true){return fs.readdirSync(dir).sort().flatMap(n=>{const p=path.join(dir,n);return fs.statSync(p).isDirectory()?walk(p,filter):filter(p)?[p]:[];});}
+function sourceSnapshot(){const files=new Set(walk('js',p=>/\.(?:m?js|json)$/.test(p)));for(const p of walk('scripts',p=>/\.(?:m?js|py|h|c)$/.test(p)))files.add(p);for(const p of walk('nethack-c/wasm',p=>/\.(?:m?js|json|inc|h|c|py)$/.test(p)))files.add(p);for(const p of plan.flatMap(j=>j.requires))files.add(p);return{sourceSha256:Object.fromEntries([...files].sort().map(p=>[p,sha(p)])),assetSha256:Object.fromEntries(walk(reference+'/assets').map(p=>[path.relative(reference+'/assets',p),sha(p)])),referenceReceiptSha256:sha(reference+'/receipt.json'),referenceArtifactSha256:Object.fromEntries(Object.keys(receipt.artifactSha256).sort().map(p=>[p,sha(path.join(reference,p))]))};}
+fs.mkdirSync(output,{recursive:true});const before=sourceSnapshot(),started=new Date().toISOString(),summary={...manifest,started,complete:false,productionProvenanceStable:false,productionProvenance:before,results:[]};
+const write=()=>fs.writeFileSync(file('','evidence.json'),JSON.stringify(summary,null,2)+'\n');fs.writeFileSync(file('','plan.json'),JSON.stringify(manifest,null,2)+'\n');write();
+const baseEnv={...process.env,TZ:'UTC'};for(const k of Object.keys(baseEnv))if(/^(?:STANDALONE_|RESTORED_|ORDINARY_COMMAND_|NETHACK_)/.test(k)||['NODE_OPTIONS','NODE_PATH'].includes(k))delete baseEnv[k];Object.assign(baseEnv,{STANDALONE_FULL_C_REFERENCE:reference,STANDALONE_REFERENCE_ROOT:root});
+try{
+ for(const job of plan){
+  const log=file('',job.id+'.log'),fd=fs.openSync(log,'w'),begin=Date.now(),row={id:job.id,kind:job.kind,status:'running',started:new Date().toISOString(),log};summary.results.push(row);write();console.log('Running '+job.id+' ('+job.kind+')');
+  let code,signal;try{({code,signal}=await new Promise((resolve,reject)=>{const child=spawn(node,[job.script],{cwd:root,env:{...baseEnv,...job.env},stdio:['ignore',fd,fd]});child.once('error',reject);child.once('exit',(code,signal)=>resolve({code,signal}));}));}finally{fs.closeSync(fd);}
+  Object.assign(row,{code,signal,status:'verifying',elapsedSeconds:(Date.now()-begin)/1000});write();assert.equal(code,0,job.id+' failed; inspect '+log);assert.deepEqual(sourceSnapshot(),before,'Fixed source/assets changed while running '+job.id);
+  assert.ok(fs.statSync(job.evidence).mtimeMs>=begin,job.id+' did not write fresh evidence in this run');const evidence=read(job.evidence);assert.equal(evidence.complete,true,job.id+' incomplete evidence');assert.notEqual(evidence.nativeOnly,true,job.id+' must include JS comparison');assert.notEqual(evidence.fullGameAccepted,true,job.id+' overclaims full-game acceptance');
+  const archived=file('',job.id+'-evidence.json');fs.copyFileSync(job.evidence,archived);Object.assign(row,{evidence:archived,evidenceSha256:sha(archived),checks:evidence.checks??null,inputBoundaries:evidence.inputBoundaries??null,frames:evidence.frames??null});
+  if(job.id==='d5-death'){row.bones=evidence.binaryPersistence.filter(r=>/\/bon[^/]*$/.test(r.path));assert.ok(row.bones.length,'Fresh producer must supply actual bones');}
+  row.status='passed';write();console.log('Passed '+job.id);
+ }
+ summary.complete=true;summary.productionProvenanceStable=true;summary.finished=new Date().toISOString();write();console.log('PASS '+JSON.stringify({jobs:summary.results.length,complete:true,fullGameAccepted:false,evidence:file('','evidence.json')}));
+}catch(error){const current=summary.results.at(-1);if(current&&current.status!=='passed')current.status='failed';summary.error=String(error.stack??error);summary.finished=new Date().toISOString();write();throw error;}

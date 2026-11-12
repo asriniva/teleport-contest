@@ -554,7 +554,7 @@
   },
   "sourceSha256": {
     "scripts/export-standalone-engrave-abi.py": "d9e5091b53114fe9affd84c91602562f3eb2bd29468f6542f7c368c813d1f38c",
-    "js/standalone/engrave.js": "9b9453ce6f12cb46c7609351ec422708bfaecdf25369cf07876a935dc352b578",
+    "js/standalone/engrave.js": "f5215ca99739c924054c0b6d1aecc2238f1f50da88862d2400a4ef307dd1e696",
     "scripts/tu-engrave-layout.h": "24bbdd2fbe9a1e070c97f81e6d38616071fdea4cd18ac3b29b1398830341ecf9",
     "nethack-c/wasm/tu-engrave-support.inc": "a6d7a5ad0207a1252233e8c62d43082cb68f2a28dc413d9c5aa76ca15130b654",
     "nethack-c/wasm/tu-engrave-support.h": "22135df9fe7bb933cbd437ca2ab2013bd385740d50e7d088d7e63b51ded3fceb",

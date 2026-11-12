@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "targetMoves": 70,
+  "options": "OPTIONS=!news,disclose:-i -a -v -g -c -o\n",
+  "startupKeys": "  n",
+  "firstCommands": "i ",
+  "repeatedCommands": "mh ml mk mj . . . . . i \\ : ",
+  "repetitions": 40,
+  "profiles": [
+    {
+      "id": "archeologist",
+      "role": "Archeologist",
+      "roleIndex": 0,
+      "gender": "male",
+      "alignment": "lawful",
+      "alignType": 1,
+      "seeds": [
+        1
+      ]
+    },
+    {
+      "id": "barbarian",
+      "role": "Barbarian",
+      "roleIndex": 1,
+      "gender": "female",
+      "alignment": "neutral",
+      "alignType": 0,
+      "seeds": [
+        1,
+        7
+      ]
+    },
+    {
+      "id": "caveman",
+      "role": "Caveman",
+      "roleIndex": 2,
+      "gender": "female",
+      "alignment": "neutral",
+      "alignType": 0,
+      "seeds": [
+        1
+      ]
+    },
+    {
+      "id": "healer",
+      "role": "Healer",
+      "roleIndex": 3,
+      "gender": "male",
+      "alignment": "neutral",
+      "alignType": 0,
+      "seeds": [
+        1
+      ]
+    },
+    {
+      "id": "knight",
+      "role": "Knight",
+      "roleIndex": 4,
+      "gender": "female",
+      "alignment": "lawful",
+      "alignType": 1,
+      "seeds": [
+        1
+      ]
+    },
+    {
+      "id": "monk",
+      "role": "Monk",
+      "roleIndex": 5,
+      "gender": "male",
+      "alignment": "lawful",
+      "alignType": 1,
+      "seeds": [
+        1
+      ]
+    },
+    {
+      "id": "priest",
+      "role": "Priest",
+      "roleIndex": 6,
+      "gender": "female",
+      "alignment": "chaotic",
+      "alignType": -1,
+      "seeds": [
+        1,
+        7
+      ]
+    },
+    {
+      "id": "ranger",
+      "role": "Ranger",
+      "roleIndex": 8,
+      "gender": "male",
+      "alignment": "neutral",
+      "alignType": 0,
+      "seeds": [
+        1
+      ]
+    },
+    {
+      "id": "rogue",
+      "role": "Rogue",
+      "roleIndex": 7,
+      "gender": "female",
+      "alignment": "chaotic",
+      "alignType": -1,
+      "seeds": [
+        1
+      ]
+    },
+    {
+      "id": "samurai",
+      "role": "Samurai",
+      "roleIndex": 9,
+      "gender": "female",
+      "alignment": "lawful",
+      "alignType": 1,
+      "seeds": [
+        1
+      ]
+    },
+    {
+      "id": "tourist",
+      "role": "Tourist",
+      "roleIndex": 10,
+      "gender": "male",
+      "alignment": "neutral",
+      "alignType": 0,
+      "seeds": [
+        1
+      ]
+    },
+    {
+      "id": "valkyrie",
+      "role": "Valkyrie",
+      "roleIndex": 11,
+      "gender": "female",
+      "alignment": "lawful",
+      "alignType": 1,
+      "seeds": [
+        1
+      ]
+    },
+    {
+      "id": "wizard",
+      "role": "Wizard",
+      "roleIndex": 12,
+      "gender": "male",
+      "alignment": "chaotic",
+      "alignType": -1,
+      "seeds": [
+        1,
+        7
+      ]
+    }
+  ]
+}

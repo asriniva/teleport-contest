@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "targetMoves": 3,
+  "options": "OPTIONS=!news\n",
+  "startupKeys": "  n",
+  "firstCommands": "..",
+  "repeatedCommands": "..",
+  "repetitions": 10,
+  "profiles": [
+    {
+      "id": "contained-timer",
+      "role": "Samurai",
+      "roleIndex": 9,
+      "gender": "male",
+      "alignment": "lawful",
+      "alignType": 1,
+      "seeds": [
+        1
+      ]
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "nativeOnly": true,
+  "fullGameAccepted": false,
+  "ordinaryJourneyAccepted": false,
+  "continuousMainInputs": true,
+  "sourcePolicyCallsFromFixture": 0,
+  "rawGameWrites": 0,
+  "readOnlyHostObservations": 147,
+  "rawStdinReads": 0,
+  "liveVictoryAccepted": true,
+  "postCleanupGraphAccepted": false,
+  "waypoints": [
+    {
+      "termGone": 0,
+      "readDepth": 1,
+      "gameover": 0,
+      "wizard": 1,
+      "inputState": 1,
+      "moves": "1",
+      "position": [
+        11,
+        5
+      ],
+      "level": [
+        0,
+        1
+      ],
+      "amulet": 0,
+      "ascended": 0
+    },
+    {
+      "termGone": 0,
+      "readDepth": 1,
+      "gameover": 0,
+      "wizard": 1,
+      "inputState": 1,
+      "moves": "1",
+      "position": [
+        16,
+        4
+      ],
+      "level": [
+        0,
+        2
+      ],
+      "amulet": 0,
+      "ascended": 0
+    },
+    {
+      "termGone": 0,
+      "readDepth": 1,
+      "gameover": 0,
+      "wizard": 1,
+      "inputState": 1,
+      "moves": "2",
+      "position": [
+        16,
+        4
+      ],
+      "level": [
+        0,
+        2
+      ],
+      "amulet": 1,
+      "ascended": 0
+    },
+    {
+      "termGone": 0,
+      "readDepth": 1,
+      "gameover": 0,
+      "wizard": 1,
+      "inputState": 1,
+      "moves": "2",
+      "position": [
+        32,
+        5
+      ],
+      "level": [
+        7,
+        1
+      ],
+      "amulet": 1,
+      "ascended": 0
+    }
+  ],
+  "complete": true,
+  "inputSha256": "94e6e8ee6f6b04872afc7ec018a58311f802d6d7431190963a6ee11f7f7e4c1b",
+  "scriptSha256": "85893aa5537b69c8e2624897e19383d20e8890d27988138d6390d16de36547c2",
+  "referenceReceiptSha256": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+  "observation": {
+    "status": {
+      "kind": "exited",
+      "code": 0
+    },
+    "consumed": 147,
+    "frames": 148,
+    "moves": "3",
+    "position": [
+      70,
+      11
+    ],
+    "level": [
+      7,
+      1
+    ],
+    "inputState": 0,
+    "termGone": 0,
+    "wizard": 1,
+    "ascended": 1,
+    "amulet": 0,
+    "score": "100"
+  },
+  "literalNativeReplayAccepted": true,
+  "resultSha256": "cdf6a3bd3ecae40af89da41cdfec4ca393f340669605caa58099d1700096c893",
+  "readOnlyObservationsSha256": "c7615850fb046c308390f91c7ca23bbf9dce8734b2d04da60c6dfdd1490be673",
+  "scope": "Native-only frozen continuous MAIN wizard victory and exact second literal replay; ordinary journey and JS acceptance unclaimed."
+}

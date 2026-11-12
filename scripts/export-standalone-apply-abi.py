@@ -29,7 +29,8 @@ for name,index in callbackIds.items():
  if name in public:prototype=public[name]
  else:
   match=re.search(r'extern (.*?) teleport_apply_callback_'+name+r'\((.*?)\);',native);assert match,name;prototype=match[1]+' ('+match[2]+')'
- callbacks[name]={'index':index,'prototype':prototype}
+ is_local=bool(re.search(r'^export function '+re.escape(name)+r'\b',(root/'js/ported/apply.js').read_text(),re.M));assert is_local or name in public,'Unknown original APPLY callback owner '+name
+ callbacks[name]={'index':index,'prototype':prototype,'sourceOwner':'apply'if is_local else'foreign'}
 formats={}
 for name,mapping in re.findall(r'^(\w+):[^\n]*?var fn=(\{[^\n]*?\})\[shape\]',lib,re.M):
  shapes=json.loads(mapping);rows={}

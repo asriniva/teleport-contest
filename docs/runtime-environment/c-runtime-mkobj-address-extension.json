@@ -1,0 +1,13 @@
+{
+  "baselineCommit": "c0740becc16e413e0eab9bc55747381841faf80b",
+  "file": "js/nethack/address-ports.js",
+  "beforeSha256": "d36d12fec10dc70ecdc42f185fef72432968cad863ec68808747776a897dcabd",
+  "afterSha256": "d31660ad0ecb1012fbf2938a1877706c4e94b10fe2289466831a0ece6f1e2464",
+  "patch": "docs/runtime-environment/c-runtime-mkobj-address-extension.patch",
+  "patchSha256": "cc6960bf365270d7055113ae6e82feff0ec3cab35e34ba2680944a57790c46ec",
+  "evidence": "docs/runtime-environment/mkobj-address-evidence.json",
+  "evidenceSha256": "a3b875416072470e8ec759bbb9ee5a39ccf578fe26c239bc1cab0f8490d4eef5",
+  "originalCReceiptSha256": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+  "scope": "Exact two-line post-foundation MKOBJ native pointer-parameter normalization from measured prototypes. Original helper-extraction/foundation recipe, package bytes and historical output receipt remain unchanged and separately reproduced. No other address owner, policy, frozen file, or baseline hash is refreshed.",
+  "limitations": "Source-controlled COURT/object-deallocation proof17/786; full-game equivalence and other post-baseline changes remain separate gates."
+}

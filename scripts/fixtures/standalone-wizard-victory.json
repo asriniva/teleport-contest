@@ -1,0 +1,30 @@
+{
+  "seed": 1,
+  "timezone": "UTC",
+  "options": "OPTIONS=!news\n",
+  "argv": [
+    "-D",
+    "-u",
+    "Ada-male-lawful",
+    "-p",
+    "Archeologist",
+    "-r",
+    "human"
+  ],
+  "keys": "yy  n#wizlevelport\n2\n.#wizwish\nAmulet of Yendor\n  nothing\n#wizlevelport\n?\n J    \u0014  lllllllllllllllllllllllllllllllllllllljjjjjj. #offer\nj          ",
+  "expected": {
+    "consumed": 147,
+    "frames": 148,
+    "moves": "3",
+    "score": "100",
+    "position": [
+      70,
+      11
+    ],
+    "level": [
+      7,
+      1
+    ]
+  },
+  "scope": "Continuous original MAIN wizard-mode journey using only literal inputs: legitimate argv-D, real D2 levelport/wait, Amulet wish, extra wish decline, Astral levelport menu, cursor teleport to aligned high altar and actual offering. No natural ordinary ascension claim."
+}

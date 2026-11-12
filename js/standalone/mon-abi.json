@@ -1,4 +1,48 @@
 {
+  "assertions": [
+    {
+      "expression": "has_egd(mtmp2)",
+      "function": "copy_mextra",
+      "line": 2611,
+      "file": "mon.c"
+    },
+    {
+      "expression": "has_epri(mtmp2)",
+      "function": "copy_mextra",
+      "line": 2617,
+      "file": "mon.c"
+    },
+    {
+      "expression": "has_eshk(mtmp2)",
+      "function": "copy_mextra",
+      "line": 2623,
+      "file": "mon.c"
+    },
+    {
+      "expression": "has_emin(mtmp2)",
+      "function": "copy_mextra",
+      "line": 2629,
+      "file": "mon.c"
+    },
+    {
+      "expression": "has_edog(mtmp2)",
+      "function": "copy_mextra",
+      "line": 2635,
+      "file": "mon.c"
+    },
+    {
+      "expression": "has_ebones(mtmp2)",
+      "function": "copy_mextra",
+      "line": 2641,
+      "file": "mon.c"
+    },
+    {
+      "expression": "ga.animal_list != 0",
+      "function": "pick_animal",
+      "line": 4861,
+      "file": "mon.c"
+    }
+  ],
   "argumentKinds": {
     "pet_sanity_check": [
       "mon",
@@ -1186,11 +1230,12 @@
     "c_obj_colors"
   ],
   "sourceSha256": {
-    "scripts/export-standalone-mon-abi.py": "1fe65d4a9bc68c86295cd4ae58c45883fe956e6b687321a90d98ed5d1fcc7fe9",
+    "scripts/export-standalone-mon-abi.py": "be0bda1d7415868fbc317ab0635ab65af85ef6bae280ca1046408ecf3782a63f",
     "js/ported/mon-runtime.js": "7f6b8799961859dfa0e4d14d82efba8aea4744fa0786bb0e934d2bfd5755fa16",
     "nethack-c/wasm/tu-mon-support.inc": "e7638f31a72c5098cd585e3c8b3acc34d67860092c08143017624f4a8e5d7ba2",
+    "nethack-c/wasm/tu-libraries/mon.js": "61f56e2f378f8b79f09c86d6ccf6d9d361c1fc39097d156b4cf73feac669f86e",
     "js/ported/mon.js": "05f3f39643975e5f2861c8b9cbdc617eaf9b4e5ae8a644efa616a7a49a9aaa4e",
     "nethack-c/wasm/compile-defines.json": "da6efbc3c955b8f4a019ae063eda7222293d7b076725a5029edccd68a3af77c2",
-    "js/standalone/monster-lifecycle.js": "e11bc51d2070acbd405a1c3b998343484529f5aa2f8e25fec7f1cf3ccf1beaf3"
+    "js/standalone/monster-lifecycle.js": "fd2b9d30c03a7ecc810c13cf9a0ac460adc06272d66332d7c2b501ed07bb2679"
   }
 }

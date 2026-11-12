@@ -1,0 +1,35 @@
+{
+  "baselineCommit": "460d483",
+  "scope": "Exact qualified runtime feature additions, not a change to translated game policies or the original cleanup baseline. Prior stdio factory is checked against the original relocation; current files must match this exact original-SDK-tested delta.",
+  "files": {
+    "js/c-runtime/stdio.js": {
+      "beforeSha256": "651307c9c33b12a2022bc5ae1a32be0a19a88236bea6e6707b9809fc411df9d0",
+      "afterSha256": "3a28e3ff3e0b3140b1d1f30586e8f2fa22c7ea23c3b9d1e1035e2948708a10f3"
+    },
+    "js/services/c-vfs.js": {
+      "beforeSha256": "d0dc38142c684306bb4752b3518020f3313f98c737e7b47e7f7faa7176143fe4",
+      "afterSha256": "69e9c4a7dc3b3aa686859059190c10341935cc30bbb19b005da40a537ad8389d"
+    },
+    "js/standalone/unix-platform-syscalls.js": {
+      "beforeSha256": "26d497a6aa7167f6b31760af8808e9c367f75009c3224cb0f126c78f2d234ec7",
+      "afterSha256": "2d56778c2aa6cfeee5341bf2a936a0dd0cef089378335775f3370b57066b0d61"
+    }
+  },
+  "patch": "docs/runtime-environment/c-runtime-sdk-extension.patch",
+  "patchSha256": "ce6e036fd5a2a87bc3587f37cfd5f891bfb3a919542f435073c63cdfc4795419",
+  "evidence": "docs/runtime-environment/sdk-boundary-evidence.json",
+  "evidenceSha256": "7e68fff989859f006bc6d9cb5efa560fa9ce351d4fabc3d5c2575b981640861b",
+  "features": [
+    "Actual musl stdio modes, shared descriptor flags/position and freopen including standard streams",
+    "Explicit callback stdin with nonseekable semantics; finite-array compatibility preserved",
+    "SDK UTF8 filesystem boundaries and host abort output",
+    "SDK-initialized actual null character device and typed snapshot codec; --no-nethackrc verified",
+    "Private geometric file capacity with exact logical EOF, sparse/truncate/snapshot/size-limit behavior; native C/MEMFS/stdio66588 comparisons"
+  ],
+  "limits": [
+    "Pure-JS SdkAbortError has matching RuntimeError name/message/hoststderr/onAbort, but a different constructor/prototype from WebAssembly.RuntimeError.",
+    "SDK sleep has no armed SDK timers; configured game src/sys/win and translated policies have no alarm/setitimer/getitimer/ualarm callers.",
+    "CVFS existing symlink/other-devicepath/mount exclusions and configured resource bounds remain; dup/dup2 support regular file sources and stdFDtargets, not originalTTY source duplication.",
+    "Callbackstdin is nonseekable; finite-array default retains its existing compatibility discard behavior."
+  ]
+}

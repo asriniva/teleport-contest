@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Bind exact helper extraction and dependency metadata; never refresh unrelated pins."""
-import argparse,copy,hashlib,importlib.util,json,subprocess
+import argparse,copy,hashlib,importlib.util,json,re,subprocess
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
-parser=argparse.ArgumentParser();parser.add_argument('--write',action='store_true');args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--write',action='store_true');parser.add_argument('--audit-successors',action='store_true');args=parser.parse_args()
 receipt=json.loads((root/'docs/runtime-environment/c-runtime-helper-extraction.json').read_text());baseline=receipt['baselineCommit']
 sha=lambda b:hashlib.sha256(b).hexdigest()
 original=lambda p:subprocess.check_output(['git','show',baseline+':'+p],cwd=root)
@@ -50,7 +50,9 @@ assert {k:v for k,v in namespace_after['PROFILES'].items()if k not in aliases}==
 outputs={registry_path:registry_after,profile_path:profile_after}
 # Replace only proven old hashes, starting from original live declaration JSON.
 # Re-evaluate from the originals to propagate changed metadata hashes exactly.
-paths=[str(p.relative_to(root))for p in (root/'js/standalone').glob('*.json')]
+# Reproduce the original cleanup against its original owned JSON inventory.
+# Later declarations have their own current compiler/source checks.
+paths=[p for p in subprocess.check_output(['git','ls-tree','--full-tree','-r','--name-only',baseline,'--','js/standalone'],cwd=root,text=True).splitlines()if p.endswith('.json')]
 originals={p:original(p)for p in paths};bases={p:json.loads(b)for p,b in originals.items()}
 base_hashes={**{p:sha(b)for p,b in originals.items()},registry_path:sha(registry_before),profile_path:sha(profile_before),**{p:r['beforeSha256']for p,r in changes.items()}}
 helper_updates={p:r['afterSha256']for p,r in changes.items()}
@@ -75,7 +77,12 @@ address_before=subprocess.check_output(['git','show',foundation_baseline+':'+add
 address_package=[address_path,'js/nethack/address-ports.js','js/c-runtime/address-bindings.js']
 address_hashes={}
 for path in address_package:
- assert (root/path).read_bytes()==original(path),'Changed foundation address binding '+path
+ if (root/path).read_bytes()!=original(path):
+  assert path=='js/nethack/address-ports.js','Changed foundation address binding '+path
+  spec=importlib.util.spec_from_file_location('qualified_mkobj_address',root/'scripts/check-c-runtime-mkobj-address.py')
+  qualifier=importlib.util.module_from_spec(spec);spec.loader.exec_module(qualifier)
+  qualifier.verify(root,baseline,original)
+ # Reproduce the ORIGINAL package receipt, never substitute later feature bytes.
  address_hashes[path]=sha(original(path))
 base_hashes[address_path]=sha(address_before);helper_updates[address_path]=address_hashes[address_path]
 # Bring the targeted guard into agreement with main's canonical scope guard.
@@ -140,15 +147,49 @@ prior_path=root/'docs/runtime-environment/c-runtime-provenance-update.json'
 prior=json.loads(prior_path.read_text())if prior_path.exists()else{}
 assert prior.get('baselineCommit',baseline)==baseline
 prior_hashes={row['file']:row['afterSha256']for row in prior.get('files',[])if row['beforeSha256']==sha(original(row['file']))}
-records=[]
+successor_path=root/'docs/runtime-environment/c-runtime-metadata-successors.json'
+successors=json.loads(successor_path.read_text())if successor_path.exists()else {'files':{}}
+assert not successors.get('baselineCommit')or successors['baselineCommit']==baseline
+records=[];audited=[]
 for p,expected in outputs.items():
  before=originals.get(p,registry_before if p==registry_path else profile_before)
  actual=(root/p).read_bytes()
  if args.write:
   assert actual in [before,intermediate.get(p,before),expected]or sha(actual)==prior_hashes.get(p),'Refusing unrelated edits '+p
- else:assert actual==expected,'Provenance differs '+p
+ elif actual!=expected:
+  assert p.startswith('js/standalone/')and p.endswith('.json'),'Only declaration metadata may have a qualified successor '+p
+  older=json.loads(expected);newer=json.loads(actual)
+  for key,value in older.items():
+   if key not in ['sourceSha256','referenceHeaderSha256','scope']:
+    expected_value=value
+    # Only these exact additive native transport descriptions are qualified;
+    # every historical callback index/prototype and weapon field stays equal.
+    if p=='js/standalone/apply-abi.json' and key=='callbacks':
+     source=(root/'js/ported/apply.js').read_text()
+     expected_value={name:{**row,'sourceOwner':'apply'if re.search(r'^export function '+re.escape(name)+r'\b',source,re.M)else'foreign'}for name,row in value.items()}
+    elif p=='js/standalone/equipment-abi.json' and key=='weapon':
+     fields=json.loads((root/'js/standalone/records.json').read_text())['records']['window_procs']['fields']
+     windows={'create_nhwindow':('win_create_nhwindow','ii'),'start_menu':('win_start_menu','vij'),'end_menu':('win_end_menu','vip'),'destroy_nhwindow':('win_destroy_nhwindow','vi')}
+     assert 'windows'not in value
+     expected_value={**value,'windows':{name:{'field':field,'signature':sig,'nativeType':fields[field]['ctype']}for name,(field,sig)in windows.items()}}
+    assert newer.get(key)==expected_value,'Changed historical measured declaration '+p+':'+key
+  for key,value in older.get('referenceHeaderSha256',{}).items():
+   assert newer.get('referenceHeaderSha256',{}).get(key)==value,'Changed original native header '+p+':'+key
+  row=successors['files'].get(p)
+  audited.append({'file':p,'beforeSha256':sha(expected),'afterSha256':sha(actual),'historicalMeasuredDeclarationsPreserved':True,'addedTopLevelKeys':sorted(set(newer)-set(older))})
+  if not args.audit_successors:
+   assert row and row['beforeSha256']==sha(expected)and row['afterSha256']==sha(actual),'Unreviewed later provenance change '+p
+   assert row['reason']and row['verification'],'Missing successor qualification '+p
  records.append({'file':p,'beforeSha256':sha(before),'afterSha256':sha(expected)})
+if args.audit_successors:
+ print(json.dumps({'complete':False,'scope':'Read-only candidate inventory; not an acceptance or write operation','baselineCommit':baseline,'files':audited},indent=2));raise SystemExit(0)
+# Preserve the historical receipt ordering as well as its exact contents.
+if prior.get('files'):
+ order={row['file']:i for i,row in enumerate(prior['files'])}
+ assert set(order)=={row['file']for row in records},'Changed historical provenance output inventory'
+ records.sort(key=lambda row:order[row['file']])
 if args.write:
+ assert not any((root/p).read_bytes()!=expected and p in successors['files']for p,expected in outputs.items()),'Use the current feature exporters; do not overwrite qualified successor declarations'
  for p,expected in outputs.items():(root/p).write_bytes(expected)
 result={'baselineCommit':baseline,'helperSha256':receipt['helperSha256'],'shimRecipeSha256':sha((root/'docs/runtime-environment/c-runtime-shim-pruning.json').read_bytes()),'foundationLibcMove':{'baselineCommit':foundation_baseline,'file':libc_path,'beforeSha256':sha(libc_before),'afterSha256':sha(libc_after),'factoryBodyUnchangedExceptGetpid':True},'foundationAddressMove':{'originalBaselineCommit':foundation_baseline,'reviewedFoundationCommit':baseline,'file':address_path,'beforeSha256':sha(address_before),'packageSha256':address_hashes},'targetedScopeGuard':{'file':guard_path,'beforeSha256':sha(guard_before),'afterSha256':sha(guard_after.encode()),'onlyExactApprovedCorrectionAndReportingEdits':True},'registrySourceSelectionUnchanged':True,'existingMakefileProfilesUnchanged':True,'newFiniteProfiles':list(aliases),'files':records,'limitations':'Only proven extraction/pruning/relocation dependencies and their transitive metadata hashes change. Historical aggregate scope/persistence pin failures are not waived.'}
 target=root/'docs/runtime-environment/c-runtime-provenance-update.json';expected=json.dumps(result,indent=2)+'\n'

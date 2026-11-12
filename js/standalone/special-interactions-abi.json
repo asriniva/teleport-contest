@@ -5350,7 +5350,7 @@
     "scripts/tu-pager-layout.h": "50400b4752384d779b1e8db5a3d945116f8d49aacc41e72f17777ad8e2a8c41d",
     "js/ported/pager-runtime.js": "6bf8a2bfc708578490798a30be117d9c7eb7e2798036c1a3cc198cd459922155",
     "js/ported/pager.js": "6c13cf9d9e88fd0db37ad0c77c64d3f4bd2389eedbdfc44b1f1dca16cbebd934",
-    "js/standalone/pager-lookup.js": "243c7cd86277d521e96d220a820c6dfc4636f33e8950d0d40b626ea69d21a471",
+    "js/standalone/pager-lookup.js": "f8f439a87860b3c48037ba3459efc246e3baef07501ba8125fc7e0a60fbfc882",
     "scripts/test-standalone-obscure-interactions.mjs": "e638b3ba5e447480920a9f322ac680f90ad157d87dcc3edc9d2e6119e83ab96e",
     "js/standalone/special-interaction-services.js": "70c5da58f4acb53f9c4dc01f5a175743931b6ea486399ed81b70a3f8cc22bd00"
   },

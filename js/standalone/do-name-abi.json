@@ -533,7 +533,7 @@
   },
   "sourceSha256": {
     "scripts/export-standalone-do-name-abi.py": "96738ee382961ac5f438eee0d78adbb5e0f6420aacef42d7fcf1dee4522b1665",
-    "js/standalone/do-name.js": "66b1b615432ff11603d4f075f6b1a057d6da9d2c4ae66b9b94cb2e008d806faa",
+    "js/standalone/do-name.js": "75df5703b0e66f56badb5577ae72c351be7b511a8ca10f03ce52ba63f2fb1b01",
     "scripts/tu-do_name-layout.h": "6781c5afa1c602958cf2dd9e90d059d059caa569584526a28979da7a6a71f8de",
     "nethack-c/wasm/tu-do_name-support.inc": "122ed95614977c9d4c202f67618a3d6bfa395d5ee82cd5216181f67f80eeb65d",
     "nethack-c/wasm/tu-libraries/do_name.js": "9f6676f8a04572c911e78d779d1b83a819a73cd3d6ad8cd0405e3a3480f45312",

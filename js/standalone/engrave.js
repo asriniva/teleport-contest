@@ -18,7 +18,7 @@ export function enableEngrave(environment,layouts){
   storage:i=>{if(i!==0)throw Error('Unknown ENGRAVE storage');return encoded;},storageSize:i=>{if(i!==0)throw Error('Unknown ENGRAVE storage size');return encodedSize;},
   objectBit:(p,i)=>packed('struct obj',p,abi.bits.object[i]),setObjectBit:(p,i,v)=>packed('struct obj',p,abi.bits.object[i],v),classBit:(p,i)=>packed('struct objclass',p,abi.bits.class[i]),engrBit:(p,i)=>packed('struct engr',p,abi.bits.engr[i]),setEngrBit:(p,i,v)=>packed('struct engr',p,abi.bits.engr[i],v),terrainBit:(p,i)=>packed('struct rm',p,abi.bits.terrain[i]),setTerrainBit:(p,i,v)=>packed('struct rm',p,abi.bits.terrain[i],v),
   heroBit:i=>{const k=['uswallow','uundetected','uroleplay.deaf'][i];if(!k)throw Error('Unknown ENGRAVE hero bit '+i);return packed('struct you',environment.requireGlobal('u'),k);},
-  commonString:i=>{if(i===3)return environment.requireGlobal('ynqchars');const n=['c_Something','c_Never_mind','c_vision_clears'][i];if(!n)throw Error('Unknown ENGRAVE common string');return ctypes.getField('struct c_common_strings',environment.requireGlobal('c_common_strings'),n,'const char *');},
+  commonString:i=>{if(i===3)return environment.requireGlobal('ynqchars');const n=['c_Something','c_Never_mind','c_vision_clears'][i];if(!n)throw Error('Unknown ENGRAVE common string');return address(ctypes.getField('struct c_common_strings',environment.requireGlobal('c_common_strings'),n,'const char *'));},
  };
  for(const[n,p]of Object.entries(abi.dependencies)){const row=prototype(p);local[n]=(...args)=>scalar(row.ret,resolve(n)(...args.map((v,i)=>scalar(row.args[i],v))));}
  local.Strcpy=local.strcpy;local.Strcat=local.strcat;local.free=p=>resolve('free')(address(p));

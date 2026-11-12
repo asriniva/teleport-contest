@@ -134,6 +134,12 @@ export function enableHeroStartup(environment,layouts,creation,inventory){
   try{return environment.resolve('pline')(typeof format==='string'?services.literal(format):address(format),...values());}finally{flags.last_msg=previous;}
  };
  const attributeText=value=>typeof value==='string'?services.literal(value):address(value);
+ // Match the native ATTRIB text() boundary for literals and C string addresses.
+ a.strcmp=(left,right)=>transport.int(services.strcmp(attributeText(left),attributeText(right)));
+ a.strcpy=(out,value)=>address(services.strcpy(attributeText(out),attributeText(value)));
+ a.strlen=value=>transport.ulong(services.strlen(attributeText(value)));
+ a.strncmpi=(left,right,n)=>transport.int(environment.resolve('strncmpi')(attributeText(left),attributeText(right),transport.int(n)));
+ a.strstri=(haystack,needle)=>address(environment.resolve('strstri')(attributeText(haystack),attributeText(needle)));
  a.debugpline0=format=>attributeDebug(format,()=>[0]);
  a.debugpline1=(format,value)=>attributeDebug(format,()=>[(typeof format==='string'?format:memory.readString(address(format))).includes('%ld')?transport.long(value):transport.int(value)]);
  a.debugpline2=(format,one,two)=>attributeDebug(format,()=>[attributeText(one),transport.int(two)]);

@@ -3339,7 +3339,7 @@
   "sourceSha256": {
     "scripts/export-standalone-polyself-abi.py": "05d671b0839584afd8456535ada136431b7525cdd0ddebdd532d51fd41fa82c9",
     "js/standalone/polyself.js": "8eb74e67e1d16c63ea951621c78509403d05ad008b8084e1e10f476f87c23b4f",
-    "js/standalone/hero-startup.js": "64d105630e245ae69850c0b12f0c645be062f4f603e304ff49ef69e772199c51",
+    "js/standalone/hero-startup.js": "ede908dc5667db890e49b0dbd673a9c7164bf02b04acaca6b6d61ffde400e78e",
     "scripts/tu-polyself-layout.h": "67da0abadda5eb49b7d57d7eae746f70e930503a2826c652f676d168c18295e8",
     "nethack-c/wasm/tu-fragments/polyself-schema.json": "b1635d05f03da9f5897ccec59e69730d5a8caa3eac30320ab4abc716f5bbc2ad",
     "nethack-c/wasm/tu-libraries/polyself.js": "97bfe618d0c0f0f006cc49bf2fb4f72d667662245961c857583b7146e4e8fabc",

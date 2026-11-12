@@ -10,7 +10,7 @@
     "js/standalone/libc.js": "098638b3aeddafdb54b7b54cb470f8de1bb5ab176625bd2fab2fa98622379e76",
     "js/c-runtime/scanf.js": "a18c2548d566723374e227fb978c8927aef3334141637095d010a39d5dae417d",
     "js/c-runtime/libc.js": "d34ae87cb41caa8132448cc63c1a17dcff032d430344eabe932c14822c52e556",
-    "js/c-runtime/stdio.js": "651307c9c33b12a2022bc5ae1a32be0a19a88236bea6e6707b9809fc411df9d0",
+    "js/c-runtime/stdio.js": "3a28e3ff3e0b3140b1d1f30586e8f2fa22c7ea23c3b9d1e1035e2948708a10f3",
     "js/c-runtime/memory.js": "ab6ee12e2a976ab5b47bfab6939d98e4ea01a638fe238f67ce28ed4d23996562",
     "js/c-runtime/records.js": "0bc1a8704fd2eedd74cd12b98f8c5f567f40467a58c820818e5c931d40bbce4c",
     "js/c-runtime/qsort.js": "b900e5f0cf14d079dde0cea2fa80b8c9ac68bdc277402cdd1eaebe48a8707d9a",

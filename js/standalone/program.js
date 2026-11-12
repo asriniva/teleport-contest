@@ -3,11 +3,12 @@ import {createStandaloneEnvironment} from './environment.js';
 export function createStandaloneProgram({layouts,runtime={},stdio:stdioOptions={},assets={},filesystemSnapshot,directories=[],readKey}={}){
  if(!layouts)throw new TypeError('Standalone program requires the configured layout profile');
  if(typeof readKey!=='function')throw new TypeError('Standalone program requires a synchronous keyboard boundary');
- const now=runtime.now??Date.now,environment=createStandaloneEnvironment({...runtime,filesystem:{clock:now,...runtime.filesystem}}),env=environment;
+ const now=runtime.now??Date.now,environment=createStandaloneEnvironment({...runtime,now:()=>Number(now())/1000,filesystem:{clock:now,...runtime.filesystem}}),env=environment;
  if(filesystemSnapshot)env.filesystem.importSnapshot(filesystemSnapshot);
  for(const name of directories)env.filesystem.mkdirTree(name);
  for(const[name,value]of Object.entries(assets)){const slash=name.lastIndexOf('/');if(slash>0)env.filesystem.mkdirTree(name.slice(0,slash));const row=value instanceof Uint8Array||typeof value==='string'?{bytes:value}:value;env.filesystem.writeFile(name,row.bytes,{mode:row.mode});}
  const stdio=env.enableStdio(stdioOptions);
+ env.enableSdkBoundary();
  env.enableDecl(layouts.decl);env.enableDrawing(layouts.drawing);env.enableObjects(layouts.objects);env.enableMonst(layouts.monst);
  env.enableSerialization(layouts);env.enableRnd(layouts.rnd,{seed:BigInt(runtime.environment?.NETHACK_SEED??1)});
  env.enableAddressPort('dungeon',{only:['ledger_no','maxledgerno']});env.enableObjectState(layouts);env.enableObjectRecords(layouts);env.enableItemInventory(layouts);env.enableTimers(layouts);env.enableItemNaming(layouts);env.enableMonsterSelection(layouts);env.enableMonsterCreation(layouts);

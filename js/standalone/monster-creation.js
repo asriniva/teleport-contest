@@ -96,7 +96,7 @@ export function enableMonsterCreation(environment,layouts,selection){
  env.newmonst=()=>env.monster(services.alloc(L.monsterSize));env.makeknown=n=>services.discover_object(n,1,1,1);env.canspotmon=m=>Number(Boolean(services.canseemon(m)||services.sensemon(m)));
  env.u_wield_art=n=>services.is_art(env.uwep,n);env.cansee=(x,y)=>Number(Boolean(env.gv.viz_array[y][x]&L.IN_SIGHT));env.next2u=(x,y)=>Number(env.distu(x,y)<=2);env.greatest_erosion=o=>env.max(o.oeroded,o.oeroded2);env.race_hostile=p=>Number(Boolean(p.mflags2&BigInt(env.gu.urace.hatemask)));env.race_peaceful=p=>Number(Boolean(p.mflags2&BigInt(env.gu.urace.lovemask)));env.showdebug=f=>services.debugcore(f,1);env.pline1=s=>services.pline('%s',s);env.emits_light=p=>Number(p.mlet===L.S_LIGHT||[L.PM_FLAMING_SPHERE,L.PM_SHOCKING_SPHERE,L.PM_BABY_GOLD_DRAGON,L.PM_FIRE_VORTEX,L.PM_FIRE_ELEMENTAL,L.PM_GOLD_DRAGON].some(n=>env.samePtr(p,env.mons[n])));
 
- env.qsort=(p,n,width,fn)=>services.qsort(p,n,width,(a,b)=>transport.scoped(()=>withCEnvironment(env,fn,a,b)));
+ env.qsort=(p,n,width,fn)=>environment.resolve('nh_deterministic_qsort')(environment.address(p),transport.ulong(n),transport.ulong(width),(a,b)=>transport.scoped(()=>withCEnvironment(env,fn,a,b)));
  env.rn1=(range,base)=>services.rn2(range)+base;
  env.cansee=(x,y)=>Number(Boolean(transport.read('Uint8',transport.read('ptr',env.gv.viz_array+y*8)+x)&L.IN_SIGHT));
  for(const[name,type]of Object.entries({mksobj:'struct obj',mkobj:'struct obj',mkobj_at:'struct obj',which_armor:'struct obj',findgold:'struct obj',oname:'struct obj',christen_monst:'struct monst',Is_special:'struct s_level',qt_montype:'struct permonst'}))env[name]=(...args)=>record(type,environment.resolve(name)(...args));

@@ -31,6 +31,12 @@ export function enableLevelContents(environment,layouts,creation){
  environment.register('level-invocation',{invocation_pos,in_rooms},position);
  const traps=enableSchemaPort(environment,'trap',trap,trap.trapSchema,abi.layout,callTrap,['maketrap','t_at']);
  const room=creation.context(layouts.mkroom),{views}=creation;
+ // Original MKROOM bridge materializes these native struct obj* returns.
+ for(const name of ['mkgold','mk_tt_object','mksobj_at','mkobj','add_to_container','mkobj_at','mksobj','sobj_at'])room[name]=(...args)=>views.record('struct obj',environment.resolve(name)(...args.map(v=>v?.address??v)));
+ const shrine=environment.allocateGlobal('mkroom.shrine',environment.ctypes.size('coord'));room.shrineCoord=()=>views.record('coord',shrine);
+ // Native rm.altarmask aliases the measured flags field.
+ const roomCells=new WeakMap(),roomCell=cell=>{if(!roomCells.has(cell))roomCells.set(cell,new Proxy(cell,{get:(o,k,r)=>k==='altarmask'?o.flags:Reflect.get(o,k,r),set:(o,k,v,r)=>k==='altarmask'?(o.flags=v,true):Reflect.set(o,k,v,r)}));return roomCells.get(cell);};
+ Object.defineProperty(room,'levl',{value:new Proxy({}, {get:(_,x)=>new Proxy({}, {get:(_,y)=>roomCell(creation.environment.levl[x][y])})})});
  Object.defineProperty(room,'shtypes',{get:()=>new Proxy({}, {get:(_,key)=>{if(typeof key!=='string'||!/^\d+$/.test(key))return undefined;const at=environment.requireGlobal('shtypes')+Number(key)*layouts.mkroom.shopSize;return {name:Number(environment.memory.view.getBigUint64(at+layouts.mkroom.shop_name,true)),prob:environment.memory.view.getInt32(at+layouts.mkroom.shop_prob,true),symb:environment.memory.view.getInt8(at+layouts.mkroom.shop_symb)};}})});
 
  for(const [name,type]of [['gn','struct instance_globals_n'],['svr','struct instance_globals_saved_r']])Object.defineProperty(room,name,{value:views.record(type,environment.requireGlobal(name))});

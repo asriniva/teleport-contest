@@ -1,5 +1,207 @@
 # Upstream divergence register
 
+Latest completed public-recorder run, round4 (2026-11-11): all44 sessions
+completed with deadlines disabled;29/44 official and strict passes,15 failures,
+zero timeout errors and zero forbidden Wasm/network attempts. RNG303,243/792,838;
+combined screens5,370/11,405; cursors5,470/11,405; animations186/1,483. Results
+remain under `.cache/standalone-public-recorder-round4/`. Round5 tests the owned
+checkpoint repairs in another immutable no-timeout snapshot; its result is
+pending. These results do not claim full-game acceptance.
+
+Further recorder-driven runtime repairs (2026-11-11; next aggregate pending):
+The fourth immutable no-timeout public run is retained under
+`.cache/standalone-public-recorder-round4`. Its snapshot includes the preceding
+directory/MON/MKMAP/timer repairs, but predates the repairs below. In that run,
+all ten segments of seed0030 now pass105,529 RNG calls and1,953 screens. A full
+aggregate result, rather than successful individual replays, remains required.
+
+Existing ATTRIB services in `hero-startup.js` now apply native text/address
+carriers to strcmp/strcpy/strlen/strncmpi/strstri. Existing PAGER services in
+`pager-lookup.js` decode the unchanged compiler-generated eight-byte varargs
+packet before calling pure-JS nh_snprintf. Original-C/SDK checks pass79 with82
+reference pins. This fixes engraving formats and waterbody names; the complete
+seed0383 replay has all219 recorded screens and16,915 RNG records matching.
+WORN's existing `monster-inventory.js` context now implements the configured
+strcmpi macro via strncmpi(a,b,-1) and text carriers for strncmpi/strsubst.
+The new measured `worn-text-abi.json` and exporter bind original declarations;
+native checks pass157 and complete seed0399 strictly matches11,409 RNG records
+and532 screens/cursors. No source policies or private state are replaced.
+
+Existing MKROOM services in `level-contents.js` now expose eight native object
+pointer returns as live shared record views, the original static shrine coord
+buffer, and the measured rm.altarmask alias of rm.flags. MKOBJ's existing cached
+address adapter normalizes only its public pointer parameters according to the
+original prototypes, accepting native-shaped record carriers. WIELD reads the
+original shared black/blue/amber color strings. Full original-C court, temple,
+priest and object-deallocation comparisons pass17 with786 reference hashes.
+Long Wizard/Archeologist/Healer inputs finish without exceptions; that alone
+does not establish their recorded output or RNG equality.
+
+`apply.js` now distinguishes original foreign callbacks from source-private
+APPLY callbacks using source-derived ownership metadata. Original DOTHROW
+hurtle_jump uses its canonical lazy function address; private callbacks retain
+the same cached APPLY context. All23 old callback indices/prototypes remain.
+Existing component checks pass423; the actual Knight menu-prefix comparison
+below exercises the previously failing jump path.
+
+`options.js` preserves native MEMORY64 unsigned strlen results. WINDOWS in
+`window-system.js` materializes native text operands for libc string calls and
+preserves native strlen width. `terminal.js` returns compound-field addresses
+instead of loading a pointer from array contents, matching original native
+TERMCAP. This restores the nine DECgraphics initialization bytes; they are not
+removed or normalized in comparisons. INSIGHT links exported vanqorders to its
+existing initialized table and calls original nh_deterministic_qsort after the
+configured macro expansion. Tables, comparators and contexts remain unchanged.
+Existing INSIGHT checks pass127. New actual MAIN public menu-prefix comparisons
+pass91 checks across316 literal keys/324 frames: every raw terminal byte, all
+snapshots, both RNG states/logs, complete live worlds and connected depth-one
+input reads match. Receipt: `.cache/public-menu-prefixes/evidence.json`.
+Dedicated nonempty vanquished-sort gameplay remains separately unaccepted.
+
+MAKEMON in `monster-creation.js` now calls the configured original HACKLIB
+nh_deterministic_qsort, retaining the same comparator/context. Raw SDK qsort had
+reordered28 equal-key species and caused seed0700's first RNG divergence at
+draw1728. Native comparison now matches all330 monster-order slots, initial2,728
+RNG calls and complete live world. Full public Samurai replay matches all50
+keys,51 screens/cursors and3,230 RNG records. No sort/generation policy changes.
+
+`js/services/c-vfs.js` keeps geometric file capacity in a module-private WeakMap
+while node.bytes, stat, reads and snapshots retain exact logical EOF. Sparse
+gaps remain zeroed, truncation releases backing, existing size limits remain,
+and spare-allocation failure retries the exact requested size. This removes
+quadratic copying from line-flushed RNG logs. Native C/MEMFS/stdio checks
+pass66,588;32,768 appends totaling524,288 bytes use14 backing allocations.
+Existing filesystem comparisons pass501 host-native plus523 MEMFS, and SDK
+helper checks pass1,931 against330 native pins after this change. These are
+component results, not a new44/44 claim.
+
+The historical provenance recipe separately qualifies the exact two-line
+post-foundation MKOBJ address conversion against exact patch bytes and tracked
+native proof. Original foundation hashes and the historical72-output receipt
+remain unchanged; four adversarial cases reject unrelated address edits.
+Fifteen exact later ABI successors retain every historical measured value and
+native header pin, allowing only source-derived APPLY owner labels and measured
+WEAPON callback descriptors as nested additions. Unrelated working-tree LIGHT
+changes remain outside this checkpoint's qualification and ownership.
+
+Earlier completed pure-JS public-recorder snapshot, round3 (2026-11-11):
+All 44 public sessions were run through the unchanged frozen scorer with
+`SESSION_REPLAY_TIMEOUT_MS=0` (no subprocess deadline). Round 3 passes 23/44,
+both officially and under supplemental animation/exact-count checks; 21 fail.
+There were zero timeout errors and zero denied Wasm/network attempts. RNG matches
+146,350/792,838; combined screens 2,483/11,405; cursors 2,490/11,405; animations
+66/1,483. Nineteen sessions stop on runtime errors: directory services (9), MKMAP
+(3), MON assert, WIELD ynq, contained-timer aliases, MKROOM object transport,
+another pointer transport, printf arguments, and APPLY hurtle_jump (one each).
+Two sessions complete but differ: seed0383 has exact RNG with 218/219 matching
+screens/cursors, while seed0700 has RNG and screen divergence. These are failures.
+The 44 sessions contain 56 segments; 47 were reached because a failed segment
+prevents later segments in its session. Three multi-segment sessions pass,
+including Friday13 save/restore, Wizard coverage, and Tourist stress.
+
+Evidence is retained in `.cache/standalone-public-recorder-round3/`: immutable
+`score-repo`, `results.stdout.log`, `results.stderr.log`, `summary.json`,
+`official-results.json`, `stage-manifest.json`, and `pre-post-verification.json`.
+All 725 pre-run input files retain their original hashes; the only new staged
+file is the frozen scorer's generated advisory result. The pre-run manifest SHA
+is 1c432fbe7cf2524e3e45b56f1afff09275a05c9d0a0bf9fd0cda4e84034fd187.
+`scripts/score-standalone.mjs` only summarizes completed runs; timeout detection
+uses actual error markers on the error headline, not a `timeout.js` stack path.
+Round 2 is separately preserved at 6/44 strict passes with no timeouts.
+Historical mixed-build 44/44 still does not apply. The root default scorer entry
+remains unchanged; the staged `jsmain.js` selects the standalone adapter.
+
+Runtime repairs after the round-3 snapshot are not included in that score:
+`sdk-directory.js`/`sdk-directory-abi.json`, initialized by existing `files.js`,
+add original SDK opendir/readdir/closedir on shared CVFS with measured DIR/dirent
+records, original flags, buffer reuse, listing order, cursors, EOF/error errno,
+and close/free behavior. Native SDK comparisons pass591; the affected public
+starter reaches the name prompt. Other directory APIs and undefined released-DIR
+access are not supported. A separate strict paired startup still fails raw TTY
+output on nine missing DECgraphics charset-initialization bytes, despite equal
+rendered frames/state/RNG; that failure is not normalized or accepted.
+
+The post-snapshot MON local assertion bridge uses seven mechanically exported
+original assertion sites and actual SDK __assert_fail (native PASS35). Existing
+WIELD context expands native ynq and converts strcmp text arguments; affected
+Valkyrie/Ranger inputs now replay without runtime errors. The new native MKMAP
+context in `mkmap.js` replaces only the legacy map-lighting construction block
+in `level-startup.js`, preserving the original four source function objects and
+sharing terrain/rooms/source-allocated scratch state; measured ABI plus original-C
+component comparisons pass77 and existing startup passes84. TIMEOUT locally
+projects measured obj.ocontainer/ocarry aliases on the same heap and stable view
+cache; the original nested-container timer comparison passes17. Wizard traversal
+now gets past that error but stops at a separate MKOBJ pointer boundary. These
+focused checks do not establish a new 44-session score. All repairs retain
+translated policies, source factories, recorded sessions and frozen files.
+
+Round 3 includes the complete native SYMBOLS foreign-service transport in
+`symbols.js`: text/address and scalar conversions, original window callbacks,
+callback dispatch, nul_glyphinfo and source formatting sites on the same cached
+context. Exact native strcmpi remains strncmpi(a,b,-1). Original-C strcmpi
+comparisons pass1554 and genuine IBMgraphics parser/MAIN comparison passes8,
+including complete state/RNG/TTY/frames/live-world equality. Unreached parser/menu
+branches are not accepted merely by being connected.
+
+First pure-JS public-recorder run (2026-11-11): all44 public sessions executed
+with the original frozen scorer and SESSION_REPLAY_TIMEOUT_MS=0; no timeout
+errors and no forbidden Wasm/network attempts occurred. Official and stricter
+supplemental/count checks both pass4/44. RNG26,643/792,838; screens/cells/cursors
+446/11,405; animations6/1,483. The immutable stage/results are retained under
+.cache/standalone-public-recorder-now. Thirty-eight sessions stop on SYMBOLS'
+missing strcmpi header transport; one stops on CMD's JavaScript literal prompt
+passed without a C-address conversion; one stops on WEAPON's missing native
+window macro dispatch. These are failures, not partially accepted sessions.
+`commands.js` now converts string pointer arguments using the unchanged source
+parameter descriptors before calling the existing CMD factory. Original source
+policies remain unchanged. The exact native getdir prompt exposed this path;
+replaying it proceeds to VERSION window dispatch, which is also being connected.
+SYMBOLS' native strcmpi alias and WEAPON/VERSION window transports have independent
+focused proof work; a second complete no-timeout run is required for acceptance.
+
+Public recorder verification path (2026-11-11, in progress):
+`js/standalone-recorder-adapter.js` implements runSegment directly on the pure-JS
+program, receiving only seed/date/rc/keys and the frozen session-storage handle.
+It installs the documented recorder HOME/TZ/terminal/sysconf profile, preserves
+source RNG-log normalization, recorder screens/cursors/animation grouping and
+existing file-persistence payload semantics. Game data/layouts are host-loaded;
+Wasm/network capabilities are denied before engine imports and throughout play.
+Optional host-only telemetry records actual output counts, uncommitted animation
+counts and storage operations; session filename is used only to label telemetry.
+No expected session data is read by this adapter. The frozen scorer is retained
+byte-for-byte and SESSION_REPLAY_TIMEOUT_MS=0 disables its subprocess deadline.
+The previous44/44 result belongs to the mixed JS/Wasm path. Complete pure-JS runs
+are recorded above; all-session acceptance remains unmet and must not be inferred
+from subsystem or continuous wizard-victory proofs.
+
+Program clock units (2026-11-11, verification pending):
+`program.js` converts its Date.now-style millisecond clock to seconds when
+constructing the C-time provider, while retaining milliseconds for filesystem
+metadata. Direct environment/runtime clock APIs retain their existing second
+units. Fixed calendar-date fixtures had hidden the incorrect fallback time.
+The terminal launcher sets the actual Node timezone to its declared UTC profile.
+No calendar translation or frozen infrastructure is changed; no-fixed-calendar
+original-C comparison and existing fixed-date regressions are pending.
+
+Tutorial Lua callback transport (2026-11-11, verification pending): real terminal
+play exposed a missing function-pointer signature for original NHLUA's addressed
+parse_config_line callback. `lua-sandbox.js` now binds that exact callback using
+`lua-callbacks-abi.json`; the exporter verifies the original native callback-table
+index, public C prototype boolean(char *), compiler-measured one-byte boolean and
+eight-byte pointer. Existing callback owners and translated Lua/configuration
+policies stay unchanged. The missing-call error is not bypassed; original-C
+tutorial entry/recording comparison remains pending.
+
+Direct terminal host work (2026-11-11, verification pending):
+`scripts/play-standalone.mjs` runs the same standalone engine with actual process
+keyboard/byte output and atomic durable save-file payloads. Wasm/network globals
+are denied before importing the engine. Normal save/quit owns game state; no
+source policy calls or forced snapshots are used. Node file/terminal access is
+confined to the external launcher. The shared stdio SDK extension supplies a
+synchronous readStdin callback for source nested input; finite fixture input is
+preserved. The process/durable cross-consumer comparison is being prepared;
+first actual PTY play reached the tutorial and exposed the callback above.
+
 Final game-public assembly gate (2026-11-11): the linker audit finds all
 3,125 configured-native public game functions callable (2,643 owned and482
 resolved deferred entries), with zero missing game public entries. Normal

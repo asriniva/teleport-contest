@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "targetMoves": 3,
+  "options": "OPTIONS=!news\n",
+  "startupKeys": "  n",
+  "firstCommands": "#version\n    i ",
+  "repeatedCommands": "..i ",
+  "repetitions": 10,
+  "profiles": [
+    {
+      "id": "priest-version",
+      "role": "Priest",
+      "roleIndex": 6,
+      "gender": "male",
+      "alignment": "lawful",
+      "alignType": 1,
+      "seeds": [
+        1
+      ]
+    }
+  ]
+}

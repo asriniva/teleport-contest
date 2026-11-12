@@ -20,7 +20,7 @@ for i,name in enumerate(sorted(missing)):
  row=schema['schema'][name];record={'size':value(str(i)+'_size'),'alignment':value(str(i)+'_align'),'fields':{f['name']:{'offset':value(str(i)+'_'+str(j)),'ctype':f['canonical']+' '+f['name']}for j,f in enumerate(row['fields'])}}
  records[row['ctype'].removeprefix('struct ')]=record
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();deps=subprocess.check_output([str(clang),*flags,'-M',str(scratch)],text=True);headers=sorted(set(Path(p).resolve()for p in shlex.split(deps.split(':',1)[1].replace('\\\n',''))))
-inputs=[Path(__file__).resolve(),schema_path,root/'js/ported/options.js',root/'js/ported/options-runtime.js',root/'nethack-c/wasm/compile-defines.json',header]
+inputs=[Path(__file__).resolve(),schema_path,root/'js/ported/options.js',root/'js/ported/options-runtime.js',root/'js/standalone/options.js',root/'nethack-c/wasm/tu-libraries/options.js',root/'nethack-c/wasm/compile-defines.json',header]
 enumData={'enum '+name:{'size':int(re.search(r'@enum_'+str(i)+r'_size = .*?constant i64 (\d+)',ir)[1]),'signed':bool(int(re.search(r'@enum_'+str(i)+r'_signed = .*?constant i64 (\d+)',ir)[1]))}for i,name in enumerate(enums)}
 data={'enums':enumData,'schema':schema,'records':records,'sourceSha256':{str(p.relative_to(root)):sha(p)for p in inputs},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in headers if p.is_relative_to(ref)}}
 (root/'js/standalone/options-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Exported OPTIONS schema and '+str(len(records))+' private record layouts.')

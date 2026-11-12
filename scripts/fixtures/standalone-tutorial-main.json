@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "targetMoves": 8,
+  "options": "OPTIONS=!news\n",
+  "startupKeys": "  y   ",
+  "firstCommands": "i ",
+  "repeatedCommands": "mhmlmkmj..i : ",
+  "repetitions": 12,
+  "profiles": [
+    {
+      "id": "tutorial",
+      "role": "Archeologist",
+      "roleIndex": 0,
+      "gender": "male",
+      "alignment": "lawful",
+      "alignType": 1,
+      "seeds": [
+        1
+      ]
+    }
+  ]
+}

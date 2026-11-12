@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
+import {sdkRuntimeExtensionBaseline} from './check-sdk-runtime-extension.mjs';
 const baseline='df33dd4',reference=process.env.STANDALONE_REFERENCE_ROOT;
 if(!reference)throw new Error('Missing STANDALONE_REFERENCE_ROOT');
 const {parse}=await import(pathToFileURL(reference+'/.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs'));
@@ -17,7 +18,8 @@ const body=(source,name)=>{
 };
 assert.equal(body(read('js/nethack/runtime.js'),'createJsRuntime'),body(old('js/ported/js-runtime.js'),'createJsRuntime'),'Changed NetHack runtime provider');
 const moves=[['functions','createFunctions'],['bitfields','createBitfields'],['stdio','createStdio'],['qsort','muslQsort'],['scanf','scanFormatted'],['environment-inputs','createEnvironmentInputs']];
-for(const [file,name]of moves)assert.equal(body(read('js/c-runtime/'+file+'.js'),name),body(old('js/standalone/'+file+'.js'),name),'Changed moved factory '+name);
+const sdkBaseline=sdkRuntimeExtensionBaseline();
+for(const [file,name]of moves)assert.equal(body(file==='stdio'&&sdkBaseline!==null?sdkBaseline:read('js/c-runtime/'+file+'.js'),name),body(old('js/standalone/'+file+'.js'),name),'Changed moved factory '+name);
 assert.equal(body(read('js/c-runtime/libc.js'),'createStandaloneLibc'),body(old('js/standalone/libc.js'),'createStandaloneLibc').replace('        // Match the configured SDK single-process syscall profile.\n        getpid:()=>42,\n',''));
 const oldTypes=body(old('js/standalone/c-types.js'),'createCTypes').replace(/    const aliases=.*;\n/,'');
 assert.equal(body(read('js/c-runtime/types.js'),'createCTypes'),oldTypes,'Changed type engine beyond injected aliases');
@@ -40,4 +42,4 @@ for(const row of corrections)assert.equal(policies.sha256[row.file],row.baseline
 const corrected=new Map(corrections.map(row=>[row.file,row.correctedSha256]));
 for(const [file,expected]of Object.entries(policies.sha256))assert.equal(sha(file),corrected.get(file)??expected,'Changed policy '+file);
 for(const name of ['isaac64','terminal','storage'])assert.equal(read('js/'+name+'.js'),read('frozen/'+name+'.js'));
-console.log('PASS: 9 relocated factory bodies mechanically preserved (platform getpid and typedef declarations explicitly separated); '+Object.keys(policies.sha256).length+' baseline inputs checked, including main\'s exact approved VISION correction; 3 frozen files unchanged.');
+console.log('PASS: 9 original relocated factory bodies mechanically preserved; current stdio SDK feature delta separately bound when declared (platform getpid and typedef declarations explicitly separated); '+Object.keys(policies.sha256).length+' baseline inputs checked, including main\'s exact approved VISION correction; 3 frozen files unchanged.');

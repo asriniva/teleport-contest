@@ -1,0 +1,161 @@
+{
+  "baselineCommit": "c0740becc16e413e0eab9bc55747381841faf80b",
+  "scope": "Exact later declaration successors after the historical cleanup. Original baseline recipes/package bytes/output receipt are still reproduced. Every historical measured value and original native-header pin remains equal; only precisely enumerated additive APPLY callback ownership and WEAPON window descriptions are qualified. Current source/header checks and behavioral evidence remain separate gates. User-dirty LIGHT metadata has no qualification here. No policy or frozen baseline is refreshed.",
+  "files": {
+    "js/standalone/apply-abi.json": {
+      "file": "js/standalone/apply-abi.json",
+      "beforeSha256": "58cf2810f1f9575b52fe39b752ad997cd20c352023da084ba7b6d3d774ba09d7",
+      "afterSha256": "6afe761eeaf41df333fdaa870d7f28d8d5f9407533b4b30d2a3f73e63cd02a8f",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Add source-derived local/foreign callback ownership only; preserve all23 historical indices/prototypes and all measured data/headers.",
+      "verification": "scripts/test-standalone-public-menu-prefixes.mjs; .cache/public-menu-prefixes/evidence.json:91 comparisons, Knight4500 first244keys includes actual jumping/hurtle_jump,248frames/fullRNG/rawTTY/liveworld; existing APPLY423 component proof remains explicitly limited.",
+      "exactNestedAdditions": {
+        "callbacks.*": [
+          "sourceOwner (derived from unchanged APPLY source exports)"
+        ]
+      }
+    },
+    "js/standalone/color-attributes-abi.json": {
+      "file": "js/standalone/color-attributes-abi.json",
+      "beforeSha256": "dd94e47cbeecdc9a148a1112b41e21b2685d467be4a7014ad27c181e365dc8aa",
+      "afterSha256": "938d6c871f255fd01a68017bbe592a4510fb76011d0e96b0ec988a13b64a8d5f",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [
+        "assertion",
+        "measuredColorLayoutValues",
+        "public",
+        "snprintfSites"
+      ],
+      "reason": "Original COLORATT factory gained22 public transports;119 values/24 prototypes remeasured, prior layouts preserved.",
+      "verification": "docs/runtime-environment/public-entry-evidence.json: coloratt-public87 checks"
+    },
+    "js/standalone/command-abi.json": {
+      "file": "js/standalone/command-abi.json",
+      "beforeSha256": "1c1aa3eb28b58c46ec3baf4ffb9bfd7c62c178180124a690a1c603de66ae2773",
+      "afterSha256": "43b541697179e7016270a34cc793313ec7d1820f9d95c618919e7b9b866bf1cc",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Bind existing CMD native-pointer/text argument transport to its native library/exporter without changing historical command schemas/layouts.",
+      "verification": ".cache/standalone-public-recorder-round3/summary.json and pre-run-manifest.json: seed0106-priest-extcmd-sweep strict267screens/cursors,4194RNG,6animations exact; aggregate23/44 is not full acceptance."
+    },
+    "js/standalone/equipment-abi.json": {
+      "file": "js/standalone/equipment-abi.json",
+      "beforeSha256": "b7f78feb6a02328d6c1d91e86e87bd68e950e74ddd4164b738276e6fb88b6bde",
+      "afterSha256": "abef18241d80c28ba81ba2c40d4320075ebddb631f6604da78a4f48fddfd12f6",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Add only four measured WEAPON window-proc macro descriptions and bind existing WIELD/WEAPON native transport; all historical globals/equipment maps remain exact.",
+      "verification": ".cache/weapon-menu/paired-evidence.json: actual MAIN Samurai #enhance16checks/786pins,17keys18frames,strict liveworld/dualISAAC/rawTTY; scripts/test-standalone-public-menu-prefixes.mjs OPTIONS-enhance case also accepted.",
+      "exactNestedAdditions": {
+        "weapon": [
+          "windows (four measured native window-proc field/signature pairs)"
+        ]
+      }
+    },
+    "js/standalone/insight-abi.json": {
+      "file": "js/standalone/insight-abi.json",
+      "beforeSha256": "2fdc1204490cb3f9d3b027ac8d1c1f96f923b2525a759609a44edee74ce3cfff",
+      "afterSha256": "cf9b916b158fce10410e92a49960296d40aee496db0557b52e5d49a45717596e",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [
+        "publicStorage",
+        "qsort"
+      ],
+      "reason": "Add native-bound public storage and canonical qsort transport on the original INSIGHT context; preserve every historical layout/global/callback map and header pin.",
+      "verification": ".cache/insight-public-alias-test.log:127 original-C piety/rank/achievement/genocide comparisons,1543 JS preservation checks,1060hashes; default disclosure/menu/monster/format branches remain separately unaccepted."
+    },
+    "js/standalone/makemon-private-abi.json": {
+      "file": "js/standalone/makemon-private-abi.json",
+      "beforeSha256": "f8c7c21e4f6c2a461a526825d45f105dcda96fa5cd1dae44e994622e38f366f8",
+      "afterSha256": "f46013ecda80cb97e75873fb41ce1bfab4429653d60724f0fb3f4f68142416cc",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Existing MAKEMON owner gains public transports and exact configured stable qsort native dispatch; source private table sizes/declarations remain unchanged.",
+      "verification": "scripts/test-standalone-mongen-order.mjs:8 original-C checks/330privateorder slots/2728initialRNG/strict liveworld; scripts/test-standalone-public-samurai-order.mjs:5checks,full50keys51screens3230exactRNG. Original makemon-public84 comparison remains historical."
+    },
+    "js/standalone/options-abi.json": {
+      "file": "js/standalone/options-abi.json",
+      "beforeSha256": "27e004c78cb9d9c76257bee7bbd173165df9f08a906208e98f923d28327e6151",
+      "afterSha256": "7e32456f5391922e1d29e43f93a4807d55b94369cb660361924d9f3e732b3493",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Bind existing OPTIONS literal/address/size_t native-call conversions; historical schemas/layouts remain equal.",
+      "verification": "scripts/test-standalone-public-menu-prefixes.mjs; .cache/public-menu-prefixes/evidence.json:91 grouped native comparisons across Knight classes and Priest OPTIONS prefixes, exact frames/RNG/TTY/liveworld with precise owner/source pins."
+    },
+    "js/standalone/pager-target-abi.json": {
+      "file": "js/standalone/pager-target-abi.json",
+      "beforeSha256": "8c5f453192e97bf6d492171d9cc7b1cb9b06c9373cc0892b73d66f23d3c0d79f",
+      "afterSha256": "1c89b8fc7b516b173a250ecae2e0a3049ecfd95217ec41e354cd85cbd15771a6",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Bind original PAGER compiler-varargs packet decoding at canonical nh_snprintf; all historical native header expressions and helper types remain exact.",
+      "verification": "scripts/test-standalone-attribute-pager-text.mjs:79 comparisons plus82 pinned SDK inputs; original-C packet1/2string/truncation/sentinels; complete public0383 rawscreen219boundary comparison passes and2200 all229inputs completes; full44 separate."
+    },
+    "js/standalone/persistence-transport-abi.json": {
+      "file": "js/standalone/persistence-transport-abi.json",
+      "beforeSha256": "ea991e0a58eeb2a7010b3210969fbc6795507967f95f55c4f970d3748c3541f6",
+      "afterSha256": "133e2d4da2f19b6e867bf9f016376b0d938a4e868fe282dd6fb011b8aa51670e",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [
+        "versionWindows"
+      ],
+      "reason": "Add measured VERSION window-proc macro descriptions and updated provider binding; retain all prior serialization/storage/header measurements.",
+      "verification": ".cache/version-window/paired-evidence.json:16checks/786pins,actualMAINPriest #version20keys21frames,moves3,strict liveworld/dualISAAC/rawTTY."
+    },
+    "js/standalone/region-services-abi.json": {
+      "file": "js/standalone/region-services-abi.json",
+      "beforeSha256": "2cf5a387a7d5c7965024d60a7d8291625b20c9e37a3dfc79ac205a460ea2bb55",
+      "afterSha256": "6d9f90747670951b512885bd385d1d0e03abea99fed75ac583a4df31dfbe835b",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Source binding follows additional MKROOM/MKMAP exports in existing level owner; original REGION measurements/calls unchanged.",
+      "verification": "docs/runtime-environment/public-entry-evidence.json: room-world26 and Castle26 checks"
+    },
+    "js/standalone/scanf-abi.json": {
+      "file": "js/standalone/scanf-abi.json",
+      "beforeSha256": "5b5bdfa71d168e3794f2c0ca7dcde33d9e3d098e442d055bc758bd957964cfc4",
+      "afterSha256": "9e366aa2b5f8db71917d45d99539ad17dbacfcdf27f0f14e6d25894a4eca2189",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Rebind shared stdio source after independently SDK-tested extensions; actual original scanf oracle/compiler/constants/receipt retained exactly.",
+      "verification": "scripts/test-standalone-sdk-boundary.mjs; scripts/test-standalone-scanf.mjs; exact c-runtime-sdk-extension.json evidence"
+    },
+    "js/standalone/special-interactions-abi.json": {
+      "file": "js/standalone/special-interactions-abi.json",
+      "beforeSha256": "87d77ec544eaa5cd28d59e1f52f189ada59ef663a9627ef88d0714af87646d81",
+      "afterSha256": "7626400131f38bd290a9c0f7a9aa6b12c8f7d0e201a3e323aed6a7cc74cb662a",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Bind existing original-context VISION public queries and PAGER native varargs packet decoding; all historical interaction declarations remain exact.",
+      "verification": "docs/runtime-environment/public-entry-evidence.json:vision-public1703; scripts/test-standalone-attribute-pager-text.mjs:79 native comparisons+82SDKpins; live public0383 all219screens exact. Raw DEC charset-init stdout remains separately unaccepted."
+    },
+    "js/standalone/terminal-metadata.json": {
+      "file": "js/standalone/terminal-metadata.json",
+      "beforeSha256": "bd4743f63bba2ae8ffb05307fc711306616718411ec1a90a1634880fb036c2a1",
+      "afterSha256": "8f56eaba890d2df35ea48cbea714eb02279ef281fec6d13832079e28efc586cc",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Bind TERMCAP native-call argument conversions and existing standalone provider alongside unchanged source-terminal tables/measurements.",
+      "verification": "scripts/test-standalone-public-menu-prefixes.mjs; .cache/public-menu-prefixes/evidence.json:91 native prefix comparisons, exact terminal frames/rawTTY/RNG/liveworld, precise TERMCAP native source/provider pins."
+    },
+    "js/standalone/vision-abi.json": {
+      "file": "js/standalone/vision-abi.json",
+      "beforeSha256": "3a750012fc49f8dcd7cce600aa7d7954cc298c5f8b34f7bb031c18b7c2edf6b4",
+      "afterSha256": "17729a97c360fba291251d2604c43953a5f836fe2d76b8560eab8e77a0b10968",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Bind original-context vision provider/native library and exporter alongside existing schemas/storage; all historical measured values preserved.",
+      "verification": "docs/runtime-environment/public-entry-evidence.json: vision-public1703 checks"
+    },
+    "js/standalone/files-abi.json": {
+      "file": "js/standalone/files-abi.json",
+      "beforeSha256": "0ff2ff603d036ca9bec9f7470288557d579b2eb12e6e53baa3ac562d45237e45",
+      "afterSha256": "0b0f4207eb72ef6a0db0896323ce610ea4c56925a9931ec7ccb07709ef034299",
+      "historicalMeasuredDeclarationsPreserved": true,
+      "addedTopLevelKeys": [],
+      "reason": "Refresh only the FILES owner source pin after actual SDK opendir/readdir/closedir registration before its unchanged original factory; all historical FILES descriptors/private records/callback maps/header pins stay exact.",
+      "verification": "scripts/export-standalone-files-abi.py original Clang remeasurement; scripts/test-standalone-sdk-directory.mjs591 originalSDK comparisons; affected actual public startup reaches nameprompt with zero forbidden attempts. Raw DEC charset-init stdout remains separately unaccepted."
+    }
+  }
+}

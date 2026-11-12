@@ -27,6 +27,6 @@ header=Path('nethack-c/wasm/tu-fragments/termcap-source-data.h')
 values['typeAliases']=dict(re.findall(r'^#define (TELEPORT_TERMCAP_TI_MAP_TYPE) (struct \w+)$',header.read_text(),re.M))
 values['bufferSizes']=[int(n) for _,n in re.findall(r'static char teleport_termcap_buffer_(\d+)\[(\d+)\];',support.read_text())]
 if len(values['bufferSizes'])!=len(values['bufferKeys']):raise ValueError('Terminal static buffer ABI mismatch')
-values['sourceSha256']={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__).relative_to(Path.cwd()),source,library,support,header]}
+values['sourceSha256']={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__).relative_to(Path.cwd()),source,Path('js/standalone/terminal.js'),library,support,header]}
 Path('js/standalone/terminal-metadata.json').write_text(json.dumps(values,indent=2)+'\n')
 print('Exported terminal storage, callback signatures and buffer descriptors')
