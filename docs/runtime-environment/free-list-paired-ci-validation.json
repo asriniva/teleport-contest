@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "complete": true,
+  "allocatorPairedCiRun": 43307134476,
+  "baselineCommit": "28ec0f3a921fe472b505242e1bc005aeba44b700",
+  "candidateCommit": "32d7615adb8338891bc29c0f73638fbee3bab830",
+  "strictPublicPassed": {
+    "baseline": 44,
+    "candidate": 44
+  },
+  "changedInputs": [
+    "js/c-runtime/heap.js"
+  ],
+  "baselineWallSeconds": 723.919410943985,
+  "candidateWallSeconds": 719.0560641288757,
+  "wallRatio": 0.9932819223499374,
+  "geometricMeanSessionRatio": 0.9850526531287972,
+  "robustWholeGameSpeedupEstablished": false,
+  "numericDeadlineCiRun": 43309042327,
+  "numericDeadlineCommit": "819d16fb5bcb59c96065a3519aa643a117cfc601",
+  "deadlineMs": 45000,
+  "deadlinePassed": 38,
+  "deadlineTotal": 44,
+  "deadlineFailures": [
+    "seed0014-dequa-fountain-explore.session.json",
+    "seed0030-ten-diverse-deaths.session.json",
+    "seed0360-wizard-world-tour.session.json",
+    "seed0361-archeologist-tour.session.json",
+    "seed0367-priest-quest-tour.session.json",
+    "seed4500-knight-coverage.session.json"
+  ],
+  "deadlineTargetMet": false,
+  "rawProofs": {
+    "docs/runtime-environment/free-list-paired-ci-evidence/baseline-commit.txt": "8d53d4650595d9dfbb3b902ad81c630fccec91d4cd628f9f424844222693d8e7",
+    "docs/runtime-environment/free-list-paired-ci-evidence/baseline-post-run-integrity.json": "6cf795e236cd545ab19621c24de2be6af7780f98cfd72fa4a85c8fe11a075f18",
+    "docs/runtime-environment/free-list-paired-ci-evidence/baseline-pre-run-manifest.json": "f426d34d742729fad4a559170e0673b0833a48de599efd30990b90616cc549b6",
+    "docs/runtime-environment/free-list-paired-ci-evidence/baseline-summary.json": "340d888cb09fc250ff5d56c852f55da2a70c5c61077d64af523d50ee1801ed97",
+    "docs/runtime-environment/free-list-paired-ci-evidence/candidate-commit.txt": "ee0aefdba29976a82106926648a83e5ca475162e34b5ff7b95c4988e514fb69c",
+    "docs/runtime-environment/free-list-paired-ci-evidence/candidate-post-run-integrity.json": "77781240a6d238551299eabde0e071a372217629a9f3186318067d572c7cf4e1",
+    "docs/runtime-environment/free-list-paired-ci-evidence/candidate-pre-run-manifest.json": "5361d2d18866d39f8a8b07fac565cf412b56752fac858e51365e80231a88ccce",
+    "docs/runtime-environment/free-list-paired-ci-evidence/candidate-summary.json": "2ee5f6ed9b19571bd9bcfe6604197bfea500898abef806347d2863f547248b64",
+    "docs/runtime-environment/free-list-paired-ci-evidence/numeric-guards-deadline-score-stderr.txt": "2b9688b693179b9e208bbe03fc28114f1b8dc6b8a3395acc5dcec07d8ee0defc",
+    "docs/runtime-environment/free-list-paired-ci-evidence/numeric-guards-deadline-score-stdout.txt": "6fbeed758ba7d454f00c4cec4d35085df1ba9ffffe27f6be4354b4e1144f3d87",
+    "docs/runtime-environment/free-list-paired-ci-evidence/runtime-comparison.json": "994e543cd1f34617734bddf803aa09d60df589f2db8364fa34012ac50d740575"
+  },
+  "limits": [
+    "Diagnostic timings with deadlines disabled; regular CI independently enforces upstream45-second per-session cutoff.",
+    "One sequential baseline/candidate pair on one host is descriptive; order, CPU frequency and host load may affect the result.",
+    "Public44 only; no held-out56 acceptance.",
+    "The45-second flags compare official replay durations; actual worker deadlines additionally include process/module overhead.",
+    "Allocator gain0.67% in one pair is small; not a robust whole-game speedup claim. Numeric-guard paired CI43309071378 and scalar-load paired CI43311304397 still pending. Numeric enforced gate is from a different host and is not a paired speed comparison."
+  ]
+}
