@@ -16,8 +16,31 @@ import re
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('directory', type=pathlib.Path)
 parser.add_argument('--output', type=pathlib.Path, required=True)
+parser.add_argument('--native-kernels', action='store_true', help='Recognize generated native policy modules from this source checkout')
 args = parser.parse_args()
 root = args.directory.resolve()
+native_sources = {}
+if args.native_kernels:
+    repository = pathlib.Path(__file__).resolve().parent.parent
+    for source in (repository / 'js/nethack/native').rglob('*.js'):
+        if 'Generated' in source.read_text().splitlines()[0]:
+            native_sources[str(source.relative_to(repository))] = hashlib.sha256(source.read_bytes()).hexdigest()
+
+def policy(file):
+    return file.startswith('js/ported/') or file in native_sources
+
+def group(frame):
+    file, function, _ = frame
+    if function == '(garbage collector)': return 'garbageCollection'
+    if file.startswith('js/c-runtime/'): return 'genericRuntime'
+    if file.startswith('js/nethack/bindings/'): return 'bindings'
+    if file in native_sources: return 'nativePolicy'
+    if file.startswith('js/nethack/native/'): return 'nativeStateHelpers'
+    if file.startswith('js/ported/'): return 'retainedPolicy'
+    if file == 'js/isaac64.js': return 'isaac64'
+    if file.startswith('js/nethack/'): return 'gameIntegration'
+    return 'loaderHarnessOther'
+
 workers = {}
 for file in (root / 'stats').glob('*.json'):
     row = json.loads(file.read_text())
@@ -39,6 +62,8 @@ def ranked(counter, total, limit=20):
             for k, v in counter.most_common(limit)]
 
 all_owners = collections.Counter()
+all_self = collections.Counter()
+self_groups = collections.Counter()
 sessions = []
 seen = set()
 for file in sorted((root / 'profiles').glob('*.cpuprofile*')):
@@ -65,7 +90,9 @@ for file in sorted((root / 'profiles').glob('*.cpuprofile*')):
                 current = parents.get(current)
             stacks[sample] = chain
         chain = stacks[sample]
-        owner = next((f for f in chain if f[0].startswith('js/ported/')), chain[0])
+        owner = next((f for f in chain if policy(f[0])), chain[0])
+        all_self[chain[0]] += delta
+        self_groups[group(chain[0])] += delta
         owners[owner] += delta
         helpers[owner][chain[0]] += delta
     total = sum(owners.values())
@@ -81,6 +108,8 @@ result = dict(version=1, method=__doc__.split('\n\n', 1)[1].strip(),
               workerProfiles=len(sessions), sampledMs=round(total / 1000, 3),
               owners=ranked(all_owners, total, 30),
               sessions=sorted(sessions, key=lambda row: -row['sampledMs']))
+if args.native_kernels:
+    result.update(nativeKernels=True, nativeSourceSha256=native_sources, topSelf=ranked(all_self,total,40), selfGroups=[dict(group=k,sampledMs=round(v/1000,3),percent=round(v*100/total,3)) for k,v in self_groups.most_common()])
 args.output.write_text(json.dumps(result, indent=2) + '\n')
 print(json.dumps(dict(workerProfiles=len(sessions), sampledMs=result['sampledMs'],
                       owners=result['owners'][:10]), indent=2))

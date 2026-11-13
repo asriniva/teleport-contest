@@ -1,0 +1,603 @@
+{
+  "commit": "a49c248",
+  "scope": "Current native build, one diagnostic world-tour recording only",
+  "session": "seed0360-wizard-world-tour.session.json",
+  "node": "v22.23.5",
+  "intervalUs": 1000,
+  "samplingOverhead": true,
+  "comparedAsTiming": false,
+  "strictAllMetricsPassed": true,
+  "matchedAcceptedCurrentBuildMetrics": {
+    "rngCalls": {
+      "matched": 120639,
+      "total": 120639
+    },
+    "screens": {
+      "matched": 833,
+      "total": 833
+    },
+    "cellsOnly": {
+      "matched": 833,
+      "total": 833
+    },
+    "cursors": {
+      "matched": 833,
+      "total": 833
+    },
+    "animFrames": {
+      "matched": 12,
+      "total": 12
+    }
+  },
+  "segments": 1,
+  "animationCursorTelemetryMatched": true,
+  "sourceIdenticalToAcceptedCurrentBuild": true,
+  "integrity": {
+    "filesChecked": 780,
+    "changed": [],
+    "exitCode": 0,
+    "wallSeconds": 35.32397345872596,
+    "sessionSelectionMatched": true,
+    "childUserSeconds": 46.915668000000004,
+    "childSystemSeconds": 0.8331249999999999
+  },
+  "selfGroups": [
+    {
+      "group": "bindings",
+      "sampledMs": 10630.009,
+      "percent": 30.299
+    },
+    {
+      "group": "genericRuntime",
+      "sampledMs": 10367.622,
+      "percent": 29.552
+    },
+    {
+      "group": "garbageCollection",
+      "sampledMs": 3442.668,
+      "percent": 9.813
+    },
+    {
+      "group": "nativePolicy",
+      "sampledMs": 2849.619,
+      "percent": 8.122
+    },
+    {
+      "group": "gameIntegration",
+      "sampledMs": 2765.497,
+      "percent": 7.883
+    },
+    {
+      "group": "retainedPolicy",
+      "sampledMs": 1861.836,
+      "percent": 5.307
+    },
+    {
+      "group": "nativeStateHelpers",
+      "sampledMs": 1812.428,
+      "percent": 5.166
+    },
+    {
+      "group": "loaderHarnessOther",
+      "sampledMs": 1332.53,
+      "percent": 3.798
+    },
+    {
+      "group": "isaac64",
+      "sampledMs": 20.916,
+      "percent": 0.06
+    }
+  ],
+  "owners": [
+    {
+      "file": "",
+      "function": "(garbage collector)",
+      "line": 0,
+      "sampledMs": 3442.668,
+      "percent": 9.813
+    },
+    {
+      "file": "js/ported/getpos.js",
+      "function": "getpos",
+      "line": 729,
+      "sampledMs": 2750.463,
+      "percent": 7.84
+    },
+    {
+      "file": "js/nethack/native/hero-movement.js",
+      "function": "test_move",
+      "line": 955,
+      "sampledMs": 2357.553,
+      "percent": 6.72
+    },
+    {
+      "file": "js/nethack/native/hero-movement.js",
+      "function": "findtravelpath",
+      "line": 1225,
+      "sampledMs": 2209.124,
+      "percent": 6.297
+    },
+    {
+      "file": "js/ported/mondata.js",
+      "function": "name_to_monplus",
+      "line": 857,
+      "sampledMs": 1003.875,
+      "percent": 2.861
+    },
+    {
+      "file": "js/nethack/native/rng.js",
+      "function": "rng_log_write",
+      "line": 94,
+      "sampledMs": 903.913,
+      "percent": 2.576
+    },
+    {
+      "file": "js/nethack/native/address/display.js",
+      "function": "reset_glyphmap",
+      "line": 2322,
+      "sampledMs": 841.458,
+      "percent": 2.398
+    },
+    {
+      "file": "js/ported/wintty.js",
+      "function": "tty_print_glyph",
+      "line": 2839,
+      "sampledMs": 730.796,
+      "percent": 2.083
+    },
+    {
+      "file": "js/nethack/native/address/display.js",
+      "function": "show_glyph",
+      "line": 1659,
+      "sampledMs": 635.792,
+      "percent": 1.812
+    },
+    {
+      "file": "js/nethack/native/address/display.js",
+      "function": "newsym",
+      "line": 834,
+      "sampledMs": 463.123,
+      "percent": 1.32
+    },
+    {
+      "file": "js/ported/nhlua.js",
+      "function": "nhl_loadlua",
+      "line": 2155,
+      "sampledMs": 455.457,
+      "percent": 1.298
+    },
+    {
+      "file": "js/nethack/native/address/invent.js",
+      "function": "sobj_at",
+      "line": 1525,
+      "sampledMs": 381.078,
+      "percent": 1.086
+    },
+    {
+      "file": "js/nethack/native/vision.js",
+      "function": "vision_reset",
+      "line": 200,
+      "sampledMs": 370.961,
+      "percent": 1.057
+    },
+    {
+      "file": "js/ported/save.js",
+      "function": "savelevl",
+      "line": 525,
+      "sampledMs": 363.377,
+      "percent": 1.036
+    },
+    {
+      "file": "js/ported/do.js",
+      "function": "goto_level",
+      "line": 1478,
+      "sampledMs": 344.831,
+      "percent": 0.983
+    },
+    {
+      "file": "js/ported/selvar.js",
+      "function": "selection_setpoint",
+      "line": 168,
+      "sampledMs": 329.834,
+      "percent": 0.94
+    },
+    {
+      "file": "js/ported/wintty.js",
+      "function": "tty_curs",
+      "line": 1805,
+      "sampledMs": 308.711,
+      "percent": 0.88
+    },
+    {
+      "file": "js/nethack/native/hero-movement.js",
+      "function": "bad_rock",
+      "line": 898,
+      "sampledMs": 302.494,
+      "percent": 0.862
+    },
+    {
+      "file": "js/ported/options.js",
+      "function": "determine_ambiguities",
+      "line": 5327,
+      "sampledMs": 276.916,
+      "percent": 0.789
+    },
+    {
+      "file": "js/ported/save.js",
+      "function": "savelev_core",
+      "line": 402,
+      "sampledMs": 248.16,
+      "percent": 0.707
+    },
+    {
+      "file": "js/nethack/native/address/display.js",
+      "function": "map_glyphinfo",
+      "line": 2227,
+      "sampledMs": 240.458,
+      "percent": 0.685
+    },
+    {
+      "file": "js/ported/wintty.js",
+      "function": "process_menu_window",
+      "line": 1116,
+      "sampledMs": 239.249,
+      "percent": 0.682
+    },
+    {
+      "file": "js/nethack/native/address/sp_lev.js",
+      "function": "lspo_map",
+      "line": 5242,
+      "sampledMs": 236.795,
+      "percent": 0.675
+    },
+    {
+      "file": "js/ported/wintty.js",
+      "function": "g_putch",
+      "line": 2721,
+      "sampledMs": 232.463,
+      "percent": 0.663
+    },
+    {
+      "file": "js/ported/nhlua.js",
+      "function": "",
+      "line": 2099,
+      "sampledMs": 232.331,
+      "percent": 0.662
+    },
+    {
+      "file": "js/nethack/native/vision.js",
+      "function": "vision_recalc",
+      "line": 462,
+      "sampledMs": 221.919,
+      "percent": 0.633
+    },
+    {
+      "file": "node:internal/modules/esm/utils",
+      "function": "compileSourceTextModule",
+      "line": 344,
+      "sampledMs": 218.79,
+      "percent": 0.624
+    },
+    {
+      "file": "js/ported/makemon.js",
+      "function": "makemon",
+      "line": 1116,
+      "sampledMs": 218.216,
+      "percent": 0.622
+    },
+    {
+      "file": "js/nethack/native/address/display.js",
+      "function": "flush_screen",
+      "line": 1893,
+      "sampledMs": 214.829,
+      "percent": 0.612
+    },
+    {
+      "file": "js/nethack/native/monster-lifecycle.js",
+      "function": "mfndpos",
+      "line": 2013,
+      "sampledMs": 202.791,
+      "percent": 0.578
+    }
+  ],
+  "topSelf": [
+    {
+      "file": "",
+      "function": "(garbage collector)",
+      "line": 0,
+      "sampledMs": 3442.668,
+      "percent": 9.813
+    },
+    {
+      "file": "js/nethack/bindings/glyphs.js",
+      "function": "",
+      "line": 37,
+      "sampledMs": 1779.042,
+      "percent": 5.071
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "insertFreeRange",
+      "line": 11,
+      "sampledMs": 1333.579,
+      "percent": 3.801
+    },
+    {
+      "file": "js/c-runtime/context.js",
+      "function": "withCEnvironment",
+      "line": 8,
+      "sampledMs": 563.75,
+      "percent": 1.607
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "env.cell",
+      "line": 135,
+      "sampledMs": 553.243,
+      "percent": 1.577
+    },
+    {
+      "file": "js/nethack/bindings/glyphs.js",
+      "function": "",
+      "line": 89,
+      "sampledMs": 533.086,
+      "percent": 1.519
+    },
+    {
+      "file": "js/c-runtime/adapter-memory.js",
+      "function": "defineScalarProperty",
+      "line": 63,
+      "sampledMs": 488.213,
+      "percent": 1.392
+    },
+    {
+      "file": "js/nethack/movement.js",
+      "function": "get",
+      "line": 15,
+      "sampledMs": 475.871,
+      "percent": 1.356
+    },
+    {
+      "file": "js/nethack/native/hero-movement.js",
+      "function": "test_move",
+      "line": 955,
+      "sampledMs": 472.659,
+      "percent": 1.347
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "currentDataView",
+      "line": 12,
+      "sampledMs": 445.753,
+      "percent": 1.271
+    },
+    {
+      "file": "js/nethack/native/hero-movement.js",
+      "function": "findtravelpath",
+      "line": 1225,
+      "sampledMs": 429.921,
+      "percent": 1.225
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "function": "get",
+      "line": 36,
+      "sampledMs": 362.214,
+      "percent": 1.032
+    },
+    {
+      "file": "js/c-runtime/memory.js",
+      "function": "stackSave",
+      "line": 98,
+      "sampledMs": 353.047,
+      "percent": 1.006
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "malloc",
+      "line": 67,
+      "sampledMs": 344.957,
+      "percent": 0.983
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "decode",
+      "line": 89,
+      "sampledMs": 313.586,
+      "percent": 0.894
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "array",
+      "line": 95,
+      "sampledMs": 308.962,
+      "percent": 0.881
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "get HEAPU8",
+      "line": 40,
+      "sampledMs": 304.745,
+      "percent": 0.869
+    },
+    {
+      "file": "js/nethack/bindings/mondata.js",
+      "function": "fields",
+      "line": 31,
+      "sampledMs": 300.121,
+      "percent": 0.855
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "invoke",
+      "line": 15,
+      "sampledMs": 289.579,
+      "percent": 0.825
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "requireGlobal",
+      "line": 73,
+      "sampledMs": 262.252,
+      "percent": 0.748
+    },
+    {
+      "file": "js/nethack/bindings/wintty.js",
+      "function": "",
+      "line": 11,
+      "sampledMs": 248.745,
+      "percent": 0.709
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "",
+      "line": 22,
+      "sampledMs": 241.666,
+      "percent": 0.689
+    },
+    {
+      "file": "js/c-runtime/records.js",
+      "function": "record",
+      "line": 7,
+      "sampledMs": 237.035,
+      "percent": 0.676
+    },
+    {
+      "file": "js/c-runtime/records.js",
+      "function": "get",
+      "line": 48,
+      "sampledMs": 230.497,
+      "percent": 0.657
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "function": "view",
+      "line": 61,
+      "sampledMs": 228.166,
+      "percent": 0.65
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "get",
+      "line": 181,
+      "sampledMs": 222.753,
+      "percent": 0.635
+    },
+    {
+      "file": "node:internal/modules/esm/utils",
+      "function": "compileSourceTextModule",
+      "line": 344,
+      "sampledMs": 218.79,
+      "percent": 0.624
+    },
+    {
+      "file": "js/nethack/native/address-state.js",
+      "function": "read",
+      "line": 27,
+      "sampledMs": 212.125,
+      "percent": 0.605
+    },
+    {
+      "file": "js/nethack/native/address-state.js",
+      "function": "",
+      "line": 46,
+      "sampledMs": 206.707,
+      "percent": 0.589
+    },
+    {
+      "file": "js/nethack/bindings/wintty.js",
+      "function": "get",
+      "line": 182,
+      "sampledMs": 193.005,
+      "percent": 0.55
+    },
+    {
+      "file": "js/c-runtime/stdlib.js",
+      "function": "api.format",
+      "line": 163,
+      "sampledMs": 188.957,
+      "percent": 0.539
+    },
+    {
+      "file": "js/nethack/address-ports.js",
+      "function": "rawCall",
+      "line": 61,
+      "sampledMs": 185.794,
+      "percent": 0.53
+    },
+    {
+      "file": "js/nethack/bindings/display.js",
+      "function": "get",
+      "line": 42,
+      "sampledMs": 181.963,
+      "percent": 0.519
+    },
+    {
+      "file": "js/nethack/bindings/mondata.js",
+      "function": "permonst",
+      "line": 41,
+      "sampledMs": 176.252,
+      "percent": 0.502
+    },
+    {
+      "file": "js/nethack/native/address/display.js",
+      "function": "reset_glyphmap",
+      "line": 2322,
+      "sampledMs": 174.289,
+      "percent": 0.497
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "readRaw",
+      "line": 90,
+      "sampledMs": 170.084,
+      "percent": 0.485
+    },
+    {
+      "file": "js/nethack/bindings/wintty.js",
+      "function": "scalar",
+      "line": 31,
+      "sampledMs": 165.082,
+      "percent": 0.471
+    },
+    {
+      "file": "js/nethack/bindings/selvar.js",
+      "function": "rect",
+      "line": 35,
+      "sampledMs": 159.209,
+      "percent": 0.454
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "",
+      "line": 131,
+      "sampledMs": 155.869,
+      "percent": 0.444
+    },
+    {
+      "file": "js/nethack/native/record-views.js",
+      "function": "record",
+      "line": 75,
+      "sampledMs": 153.67,
+      "percent": 0.438
+    }
+  ],
+  "evidenceSha256": {
+    ".cache/native-a49c248-worldtour-diagnostic-02/pre-run-manifest.json": "40e06eee97ae2eab4bd7aa3363420f2d91d5eb24b71ec9e16ab86bd380cdcdd8",
+    ".cache/native-a49c248-worldtour-diagnostic-02/post-run-integrity.json": "eda4e6f20445c7801a5b5095a5654c4efc212f5c94c57b5facf125eb80528783",
+    ".cache/native-a49c248-worldtour-diagnostic-02/results.stdout.log": "01c3dce3f0a281419cf3835d6a61a7bb30ccba26310043f815f34925029fa665",
+    ".cache/native-a49c248-worldtour-diagnostic-02/results.stderr.log": "f62ddd593809561a538f52b63ce1b16ba495780cc00ab0b6d2ebc58d6caa91f1",
+    ".cache/native-a49c248-worldtour-diagnostic-02/hotpaths.json": "5d3afd7a57837f50a75e6c5f866467f0e36cf6d91610ecf16e11f950423259ae",
+    ".cache/native-a49c248-worldtour-diagnostic-02/profiles/CPU.20261113.103007.28338.0.001.cpuprofile.gz": "a11fd6457573c3741af393f7202a4dac6c2c4577b815ed1b8202854bc6d51ed6",
+    ".cache/native-a49c248-worldtour-diagnostic-02/profiles/CPU.20261113.103007.28335.0.001.cpuprofile.gz": "0e08cf5e09abaa5b32c86dafbfcb36c9b77d6f55956fba9c97be5d316a78d5a5",
+    ".cache/native-a49c248-worldtour-diagnostic-02/stats/seed0360-wizard-world-tour.session.json.28338.0.json": "173d9d0f72333a7eef1a92419c99324f5b7de5ce4b162d9248acbeaaab31ee4d"
+  },
+  "nextTarget": "Native per-game glyph state and direct glyph calls; bridge environment construction dominates target selection samples.",
+  "limits": [
+    "One existing current candidate session, not an older-baseline rerun or baseline CPU profile.",
+    "Sample percentages describe this recording and include startup/module loading; they do not establish public44 shares or predict a speedup.",
+    "Exclusive owner attribution includes descendants until the next retained/generated native policy routine; self categories form a separate partition and must not be added to owner shares.",
+    "The earlier diagnostic01 command had an invalid executable path and exited before any replay; diagnostic02 is the completed run.",
+    "The required 20x and a runtime-free ordinary turn remain unachieved."
+  ]
+}

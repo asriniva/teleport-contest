@@ -1,3 +1,32 @@
+## Current native-build diagnostic trace (worktree evidence, 2026-11-13)
+
+After a49c248, a single current-build world-tour recording is sampled to locate
+remaining costs. This is separate from the accepted unprofiled public-44 timing
+and does not rerun an older baseline. `scripts/analyze-replay-hotpaths.py` adds an
+opt-in `--native-kernels` analysis mode recognizing generated native policy
+sources, alongside retained policy, with exclusive owner attribution and self
+categories. The original default owner mode remains available. No game source,
+C reference, RNG policy, assets or recorder changes are made by this diagnostic.
+Completed `.cache/native-a49c248-worldtour-diagnostic-02` uses Node 22.23.5
+and 1ms sampling on the existing world-tour recording. All 780 scoring inputs
+are stable and source-identical to the accepted unprofiled a49c248 replay. The
+selected recording matches all frozen metrics and the accepted current build's
+per-segment counts, animations, ordered animation cursor triples and persistence
+traffic. Its sampled timing is not used as an optimization timing comparison.
+The initial diagnostic01 command exited on an invalid executable path before
+starting a replay; only diagnostic02 supplies trace evidence.
+
+In this one recording, self CPU partitions are bindings 30.299%, generic runtime
+29.552%, GC 9.813%, native policy 8.122%, game integration 7.883%, retained policy
+5.307%, native state helpers 5.166%, loader/harness/other 3.798%, ISAAC64 0.060%.
+Exclusive policy attribution puts getpos at 7.840%, test_move at 6.720%,
+findtravelpath at 6.297% and name_to_monplus at 2.861%. Within getpos, glyph bridge
+setup is 5.028% of all samples and glyph header-wrapper setup another 1.508%.
+The next migration therefore targets stable per-game native glyph state and
+direct glyph calls. These percentages are one session's evidence, not public44
+shares or a predicted speedup. Receipt:
+`docs/runtime-environment/native-a49c248-worldtour-diagnostic.json`.
+
 ## Direct native field mutations, movement and RNG execution (worktree, 2026-11-13)
 
 Additional work after 4e1b4d7. `native/address-fields.js` compiles typed-state
