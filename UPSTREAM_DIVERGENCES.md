@@ -1,3 +1,37 @@
+## Native artifact combat and equipment state (2026-11-13)
+
+`native/artifact.js` binds all 77 original source exports, including initialization,
+combat bonuses/damage, inventory intrinsics, invocation, callbacks and trap warning,
+to one game context. `artifact.js` reconnects the actual public owner with native
+argument preparation and direct native dependencies where available. Canonical
+hero, monster, species, item, attack, terrain and property identities are shared
+with movement and combat. All 53 measured record schemas (183 fields) use compiled
+field plans; source/header width checks remain enforced. Original catalogue bytes,
+callback tokens, RNG sites/order, mutation order and save/restore formats remain.
+
+Native record type identity is discoverable for nested canonical records, allowing
+addressed property fields to avoid reconstructing a wrapper. Private pointer-style
+numeric indexing and visualization rows retain explicit compatibility adapters;
+shared actors/items retain canonical identity. Character buffers, reference
+arguments, private arrays, window callbacks and automatic C stack frames remain
+boundaries. This does not meet the zero-bridge/zero-allocation or 20x target.
+Original-C verification passes 3,261 checks across 381 cases and all 76 gameplay
+routines, including callback identities/reentry, growth, artifact invocation,
+equipment mutation and wide opaque pointers. All 77 source exports match the
+original policy AST. Live-main canonical identities, nested property addresses,
+direct entries and exception cleanup pass. The actual ordinary-turn C comparison
+matches state, tty, ordered RNG logs and frames; bridge calls drop from 33/80/168
+to 28/74/144 and generic fields from 65/127/251 to 53/113/189 for walk/wait/attack.
+Allocations remain 45/166/117. All 44 recordings pass with 795 scoring inputs
+unchanged: 792,838 RNG entries, 11,405 screens/cursors and 1,483 animations match.
+Unprofiled Node 22.23.5 batch time is 295.156s versus 290.430s for the prior I/O
+step, about 1.6% higher: this step does not demonstrate a timing improvement.
+These are separate single runs; original-C verification overlapped the beginning
+of this batch. Evidence is in `docs/runtime-environment/native-artifact-validation.json`
+and its source manifest. Validation reads the existing pristine checkout's header
+through an ignored worktree symlink; the reference/header bytes are unchanged.
+No upstream C, RNG algorithm, recording inputs or capture policy change.
+
 ## Native byte input/output transport (2026-11-13)
 
 The production stdio implementation writes JavaScript strings and individual

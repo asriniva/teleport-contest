@@ -1,3 +1,7 @@
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+import {createArtifactFieldPlans} from '../js/nethack/artifact.js';
+const nativeExecution=process.env.NATIVE_ARTIFACT_FIXTURE==='1',nativeServices=new WeakMap();
+function artifactServices(s){if(!nativeExecution)return s;let local=nativeServices.get(s);if(!local){local=nativeFixtureServices(s,{}).services;local.nativeFieldPlans=createArtifactFieldPlans(s.moduleKey.environment);nativeServices.set(s,local);}return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import {DataView as FixtureDataView} from './native-test-backend.mjs';
@@ -31,7 +35,7 @@ const factories=await Promise.all(['reference','hybrid'].map(async mode=>(await 
 const text=(m,p)=>{let i=Number(p),end=i;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(i,end)).toString('latin1');};
 function layout(m){const out={};for(let i=0;i<m._probe_layout_count();i++)out[text(m,m._probe_layout_name(i))]=m._probe_layout_value(i);return out;}
 const reference=await factories[0](),L=layout(reference),servicesByModule=new WeakMap(),environments=new WeakMap(),callbackCalls=new Map();
-const runtime={artifact(services,name,...args){callbackCalls.set(name,(callbackCalls.get(name)??0)+1);servicesByModule.set(services.moduleKey,services);environments.set(services.moduleKey,createArtifactEnvironment(services,L,core));return callArtifact(services,L,name,...args);}};
+const runtime={artifact(services,name,...args){services=artifactServices(services);callbackCalls.set(name,(callbackCalls.get(name)??0)+1);servicesByModule.set(services.moduleKey,services);environments.set(services.moduleKey,createArtifactEnvironment(services,L,core));return callArtifact(services,L,name,...args);}};
 const hybrid=await factories[1]({nethackPorted:runtime}),modules=[reference,hybrid];assert.deepEqual(layout(hybrid),L);
 // Both copies capture their independently initialized original catalogue before reset.
 hybrid._probe_call_artiname(0);
@@ -188,4 +192,4 @@ checkArtifactSource(guardRoot,{preprocess:false});
 for(const [p,transform]of [[guardPaths[0],s=>'/* changed */'+s],[guardPaths[1],s=>'/* changed */'+s],[guardPaths[2],s=>'/* changed */'+s],[guardPaths[3],s=>'/* changed */'+s],[guardPaths[4],s=>s.replace('export function mk_artifact(','export function changed_mk_artifact(')],[guardPaths[4],s=>s.replace('/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */','')],[guardPaths[5],s=>s.replace(schema.preparedSha256,'0'.repeat(64))]]){await writeFile(resolve(guardRoot,p),transform(guardOriginal.get(p)));assert.throws(()=>checkArtifactSource(guardRoot,{preprocess:false}),/Review changed|Missing original/);comparisons++;await writeFile(resolve(guardRoot,p),guardOriginal.get(p));}
 assert.equal(invoked.size,76);
 console.log(`artifact: ${cases} cases, ${comparisons} EmC/JS state/trace/result/stack checks, ${invoked.size}/76 routines; native host pending`);
-await writeFile(resolve(dir,'summary.json'),JSON.stringify({status:'pass',oracle:'configured Emscripten memory64 original source',nativeHost:'pending',cases,comparisons,functions:invoked.size,jsPolicyImports:schema.functions.length,nativeCallbackCalls:Object.fromEntries(callbackCalls)},null,2)+'\n');
+await writeFile(resolve(dir,'summary.json'),JSON.stringify({status:'pass',oracle:'configured Emscripten memory64 original source',nativeHost:'pending',nativeExecution,cases,comparisons,functions:invoked.size,jsPolicyImports:schema.functions.length,nativeCallbackCalls:Object.fromEntries(callbackCalls)},null,2)+'\n');

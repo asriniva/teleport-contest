@@ -193,4 +193,20 @@ for(const[key,monster]of owner.records){
  assert.equal(monster.mhp,hp);monsters++;
 }
 assert.ok(monsters>0);assert.ok(owner.nativeArena||owner.hits>0);
+
+const artifacts=environment.start('artifact-properties').environment;
+assert.equal(artifacts.u,hero,'artifact combat consumes the canonical native hero');
+assert.equal(artifacts.gy.youmonst,owner.nativeRecords.record('struct monst',environment.requireGlobal('gy')+environment.ctypes.record('struct instance_globals_y').fields.youmonst.offset),'artifact combat shares the hero monster record');
+const artifactItem=[...owner.records].find(([key])=>key.startsWith('struct obj:'))?.[1];assert.ok(artifactItem);
+assert.equal(artifacts.view('obj',artifactItem),artifactItem,'artifact inventory shares canonical item identity');
+for(const name of ['is_art','artifact_hit','spec_dbon','touch_artifact','retouch_object','mkot_trap_warn'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' connects native artifact execution');
+assert.equal(Object.keys(artifacts.nativeNamespace).length,77,'all artifact source exports are bound');
+const fireProp=hero.uprops[layouts.artifact.FIRE_RES],firePointer=artifacts.fieldPointer(fireProp,'extrinsic');
+assert.equal(firePointer.address,hero.address+environment.ctypes.record('struct you').fields.uprops.offset+layouts.artifact.FIRE_RES*environment.ctypes.size('struct prop')+environment.ctypes.record('struct prop').fields.extrinsic.offset,'field pointers resolve canonical nested records without a descriptor wrapper');
+const artifactMarker={nativeArtifactCaller:true},artifactView=artifacts.view,liveBeforeArtifact=environment.memory.live.size;
+try{artifacts.view=(kind,value)=>{assert.equal(C,artifactMarker);return artifactView(kind,value);};withCEnvironment(artifactMarker,()=>assert.equal(environment.services.is_art(artifactItem,artifactItem.oartifact),1));
+ artifacts.view=()=>{assert.equal(C,artifactMarker);environment.transport.stackAlloc(24);throw Error('native artifact cleanup');};withCEnvironment(artifactMarker,()=>assert.throws(()=>environment.services.is_art(artifactItem,0),/native artifact cleanup/));
+}finally{artifacts.view=artifactView;}
+assert.equal(environment.memory.live.size,liveBeforeArtifact,'native artifact callback exceptions restore the C stack');
+
 console.log(JSON.stringify({passed:true,monsters,nativeFunctions:owner.functions.size,nativeFields:owner.fields,nativeStorage:owner.nativeArena?'typed-arrays':'cached-fields',cachedReads:owner.hits,legacyBoundaries:owner.boundaries,moves:result.state.moves}));
