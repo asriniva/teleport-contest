@@ -1,0 +1,301 @@
+{
+  "date": "2026-11-12",
+  "status": "historical-pre-rebase-only",
+  "scope": "Four standalone monster-data JS entry points; same-store live record arguments bypass description and cache lookup. Full existing dispatch scopes retained.",
+  "before": {
+    "js/c-runtime/records.js": "0bc1a8704fd2eedd74cd12b98f8c5f567f40467a58c820818e5c931d40bbce4c",
+    "js/c-runtime/record-views.js": "c4d56acd7b15eed199014840fcf134375a1ef075035199d33f72b33a009b9ba8",
+    "js/standalone/monster-creation.js": "c60499442494de2bc1ec337b082d249e1136d065b243a9b9807004cb68953033"
+  },
+  "after": {
+    "js/c-runtime/records.js": "eaf2ebc2dbb0405681d93a3245175ee54b0714dfdbbd1a65a0a236b0cc325696",
+    "js/c-runtime/record-views.js": "3fa6d4152df505d4b59661d8c377d9f94cdaf0e4816fe74232d07b2a19308237",
+    "js/standalone/monster-creation.js": "deffed34dcf895e14e8bf7868a7a408b901aef12de3e2ab4690f27df842a9f34",
+    "scripts/monster-data-view-harness.mjs": "6c29c8604a22807f1ce8e0d8a13558ee6358674c6bc61adbf04879dbbea43872",
+    "scripts/test-monster-data-views.mjs": "c5d5f73d708d4625aa281119d328a397272e2a42c80eab955349d351cce60744",
+    "scripts/test-monster-data-view-replay.mjs": "76bda1fa967bd4fc1e457208ad89771dfa099d152cbac07e89813c9f91c6d852",
+    "scripts/benchmark-monster-data-views.mjs": "9e75721f8c84dab83b0cb7b46cfe50b9ff013ac57b261cc93c255e54f5b6db81"
+  },
+  "validation": {
+    "focused": {
+      "status": "PASS",
+      "checks": 2642,
+      "baseline": "original monster-data prepareArgs",
+      "heapGrowth": true,
+      "fullHeapComparisons": true
+    },
+    "originalCMonsterConstructionComparisons": 1299,
+    "originalCMondataChecks": 525,
+    "originalCMondataCapabilityGuards": 111,
+    "runtimeContracts": "PASS",
+    "runtimeMemory": "PASS",
+    "recordingEquivalence": {
+      "status": "PASS",
+      "cases": 4,
+      "frames": 50,
+      "inputBoundaries": 50,
+      "comparison": "entire result including recording frames, raw terminal, world globals, both RNG logs/images, files and process status"
+    }
+  },
+  "benchmark": {
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "comparison": "full registered JS calls, original argument conversion versus store-owned view reuse; setup excluded; alternating order after warmup",
+    "results": [
+      {
+        "name": "set_mon_data/views",
+        "callsPerSample": 10000,
+        "rounds": 11,
+        "baselineMs": 632.6290420000005,
+        "optimizedMs": 610.3681669999987,
+        "speedup": 1.036471225407143,
+        "reductionPercent": 3.518788029336428,
+        "pairedSpeedupRange": [
+          0.7864575475232748,
+          1.3148123967536272
+        ],
+        "baselineSamplesMs": [
+          606.1144590000004,
+          618.0062909999997,
+          585.5064590000011,
+          648.0109590000011,
+          819.8729160000003,
+          607.336374999999,
+          581.685125,
+          632.6290420000005,
+          636.109625000001,
+          652.6266250000008,
+          856.7934999999998
+        ],
+        "optimizedSamplesMs": [
+          579.8429159999996,
+          614.2002499999999,
+          610.3681669999987,
+          578.7484999999997,
+          1042.4884579999998,
+          606.7250409999997,
+          610.8431249999994,
+          584.3302920000006,
+          592.5744579999991,
+          651.0640419999982,
+          651.6469589999979
+        ]
+      },
+      {
+        "name": "mon_learns_traps/views",
+        "callsPerSample": 10000,
+        "rounds": 11,
+        "baselineMs": 129.5532920000005,
+        "optimizedMs": 119.91962499999863,
+        "speedup": 1.0803343656219904,
+        "reductionPercent": 7.436064997871172,
+        "pairedSpeedupRange": [
+          0.9766648616227919,
+          1.171226388825275
+        ],
+        "baselineSamplesMs": [
+          136.53308300000208,
+          125.32495799999742,
+          123.187417000001,
+          130.6397500000021,
+          128.20912500000122,
+          146.544332999998,
+          129.95670800000153,
+          128.0589170000021,
+          126.317874999997,
+          138.1004589999975,
+          129.5532920000005
+        ],
+        "optimizedSamplesMs": [
+          119.91962499999863,
+          119.57116699999824,
+          117.01537500000268,
+          120.39904100000058,
+          124.07495800000106,
+          125.12041600000157,
+          117.08245900000111,
+          115.66979100000026,
+          119.23587500000212,
+          126.97345900000073,
+          132.64866699999766
+        ]
+      },
+      {
+        "name": "attacktype/views",
+        "callsPerSample": 10000,
+        "rounds": 11,
+        "baselineMs": 210.82025000000067,
+        "optimizedMs": 194.62125000000015,
+        "speedup": 1.0832334598611433,
+        "reductionPercent": 7.683796978706015,
+        "pairedSpeedupRange": [
+          0.8696371716050096,
+          1.1228540048941205
+        ],
+        "baselineSamplesMs": [
+          213.70166700000118,
+          202.92975000000297,
+          218.53125,
+          194.68987500000003,
+          216.8838340000002,
+          207.4596249999995,
+          207.42820799999754,
+          204.90049999999974,
+          211.11395900000207,
+          210.93095800000083,
+          210.82025000000067
+        ],
+        "optimizedSamplesMs": [
+          245.7365830000017,
+          186.64516599999843,
+          194.62125000000015,
+          185.85945800000263,
+          194.36012499999924,
+          194.9588330000006,
+          204.0912500000013,
+          197.86520799999926,
+          188.58141700000124,
+          191.65004200000112,
+          205.0279589999991
+        ]
+      },
+      {
+        "name": "attacktype_fordmg/views",
+        "callsPerSample": 10000,
+        "rounds": 11,
+        "baselineMs": 235.66124999999738,
+        "optimizedMs": 224.88633400000253,
+        "speedup": 1.0479127202100005,
+        "reductionPercent": 4.57220523102333,
+        "pairedSpeedupRange": [
+          0.5602265608057394,
+          1.1698346230862173
+        ],
+        "baselineSamplesMs": [
+          224.70887499999662,
+          247.32200000000012,
+          239.42262499999924,
+          228.30429200000071,
+          265.43408400000044,
+          235.66124999999738,
+          233.75450000000274,
+          248.0449579999986,
+          240.77449999999953,
+          222.77291700000205,
+          229.82024999999703
+        ],
+        "optimizedSamplesMs": [
+          205.17337500000212,
+          211.41620800000237,
+          225.30625000000146,
+          220.90479200000118,
+          473.7977500000052,
+          224.88633400000253,
+          221.60862500000076,
+          229.44004199999472,
+          235.2019169999985,
+          226.91054099999747,
+          213.1586249999964
+        ]
+      },
+      {
+        "name": "mixed/views",
+        "callsPerSample": 10000,
+        "rounds": 11,
+        "baselineMs": 326.86516599999595,
+        "optimizedMs": 326.908875000001,
+        "speedup": 0.9998662960740817,
+        "reductionPercent": -0.01337218050485589,
+        "pairedSpeedupRange": [
+          0.8082552922668631,
+          1.5955046024474668
+        ],
+        "baselineSamplesMs": [
+          332.29329199999484,
+          330.3483750000014,
+          332.93283299999894,
+          321.4646250000005,
+          322.9517500000002,
+          310.74016700000357,
+          319.73266599999624,
+          492.7974580000009,
+          376.7835419999974,
+          326.86516599999595,
+          308.66579200000706
+        ],
+        "optimizedSamplesMs": [
+          316.68670900000143,
+          334.0972910000055,
+          310.0211249999993,
+          352.6167920000007,
+          326.908875000001,
+          318.8070829999997,
+          315.21066599999904,
+          308.8662089999998,
+          350.2720419999969,
+          331.5872920000038,
+          381.89145799999824
+        ]
+      },
+      {
+        "name": "mixed/pointers",
+        "callsPerSample": 10000,
+        "rounds": 11,
+        "baselineMs": 267.5410420000044,
+        "optimizedMs": 257.3666250000024,
+        "speedup": 1.0395327754715744,
+        "reductionPercent": 3.8029368966881028,
+        "pairedSpeedupRange": [
+          0.95825244382802,
+          1.0940010868808112
+        ],
+        "baselineSamplesMs": [
+          299.7904169999965,
+          288.0767500000002,
+          289.0486249999958,
+          295.6134170000005,
+          263.8241659999985,
+          267.5410420000044,
+          274.7884580000027,
+          259.07808300000033,
+          257.06987500000105,
+          263.85154099999636,
+          252.9936250000028
+        ],
+        "optimizedSamplesMs": [
+          288.12625000000116,
+          287.21491600000445,
+          301.6414169999989,
+          302.7874589999992,
+          257.3666250000024,
+          254.5791670000035,
+          251.17749999999796,
+          247.22616700000071,
+          254.93570799999725,
+          248.99216700000397,
+          258.91095900000073
+        ]
+      }
+    ],
+    "sink": 1189419792
+  },
+  "interpretation": "Individual-call median reductions of 3.5\u20137.7%; mixed-view median effectively unchanged. Wide paired-sample variation means these medians do not establish a general speedup. No whole-game speedup claim.",
+  "commands": [
+    "node scripts/test-monster-data-views.mjs",
+    "STANDALONE_MONSTER_CREATION_ORACLE=.cache/c-runtime-cleanup/oracles/standalone-monster-creation-files-guard node scripts/test-standalone-monster-creation.mjs",
+    "node scripts/test-standalone-mondata.mjs",
+    "node scripts/test-c-runtime-contracts.mjs",
+    "node scripts/test-c-runtime-memory.mjs",
+    "node scripts/test-monster-data-view-replay.mjs compare .cache/full-original-c-v1/assets .cache/monster-view-fastpath/replays .cache/monster-view-fastpath/baseline-loader.mjs",
+    "BENCH_ITERATIONS=10000 node scripts/benchmark-monster-data-views.mjs"
+  ],
+  "limits": [
+    "Benchmarks measure steady-state registered calls; exclude setup and new-view construction.",
+    "Baseline benchmark restores the exact old argument converter on the same runtime; separate-process replay uses exact original bytes of all three production files.",
+    "Configured immutable record declarations; arbitrary schema mutation is outside this runtime contract.",
+    "Bounded cases establish no observed behavior change, not an exhaustive proof over all game inputs."
+  ],
+  "historicalStatus": "PASS",
+  "warning": "Collected before rebasing onto main. Superseded by monster-main-rebase-validation.json for current integration."
+}

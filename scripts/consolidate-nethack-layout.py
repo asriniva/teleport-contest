@@ -102,6 +102,8 @@ def plan():
  return rows
 
 def qualified_current(file):
+ from monster_view_source_successor import ALLOWED as VIEW_ALLOWED,qualified_before as view_before
+ if file in VIEW_ALLOWED:return view_before(ROOT,file)
  from engine_service_source_successors import ALLOWED as SERVICE_ALLOWED,qualified_before as service_before
  if file in SERVICE_ALLOWED and file!='js/nethack/bindings/mon.js':return service_before(ROOT,file)
  from engine_test_source_successors import ALLOWED as TEST_ALLOWED,qualified_before as test_before

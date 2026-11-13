@@ -1,0 +1,240 @@
+{
+  "date": "2026-11-12",
+  "status": "PASS targeted checks; inherited broader scope failure",
+  "base": "8b5ecaf1581a03e4c565ca4706150f45666bdb9b",
+  "rebase": "Applied on main; its type cache, isRecord classifier, load plans and configurable record/array profiles retained. No types.js changes.",
+  "productionFiles": {
+    "js/c-runtime/records.js": "a3ee9c8b18f283bbc540bc546a68ea7c470c25a3641f74a56336207adbdef328",
+    "js/c-runtime/record-views.js": "8ed4f2187396be0f3ab528738cb727864da0e0bcdc920fd4321f1fbaf0a46f08",
+    "js/nethack/monster-creation.js": "92c19ddf57c251ccfabfc98ea77b0779f128833c41d91c72df933afddc9255fe",
+    "js/ported-utilities/sfctool-helpers.js": "c17360b8fb061f8617b48911bbb94cfe4a80e92b82596aa3e70e07e72f113fb2",
+    "js/ported-utilities/sfctool-runtime.js": "23daa3ae0df8a02ca5833286004db0abb76838f47cb1b80c3afa472b60ae890d",
+    "js/ported-utilities/tile2bmp/runtime.mjs": "14ed21063e44f056eacf60bd6b24bf10594b219dc890a5d0d3dbce627bea5b8a"
+  },
+  "validation": {
+    "directViews": 2642,
+    "metadataContracts": 478,
+    "classification": 85,
+    "byteops": 1182,
+    "originalCMonsterConstructionComparisons": 1299,
+    "originalCMondataChecks": 525,
+    "runtimeContracts": "PASS",
+    "sourceLayout": "PASS 593 exact transitions",
+    "sourceInverse": "PASS six files and 12 source/patch mutation negatives",
+    "sfctoolChecks": {
+      "helpers": 739,
+      "full": 137,
+      "extra": 101,
+      "growthReentry": 17
+    },
+    "tile2bmp": {
+      "fullComparisons": 28,
+      "helperAssertions": 40
+    },
+    "replays": {
+      "status": "PASS",
+      "cases": 4,
+      "frames": 50,
+      "inputBoundaries": 50,
+      "comparison": "entire result including recording frames, raw terminal, world globals, both RNG logs/images, files and process status"
+    },
+    "broaderHistoricalScope": {
+      "status": "FAIL on unchanged main and candidate",
+      "reason": "Measured .cache/tu-probes/tu-source-locations.h hash mismatch",
+      "expected": "c73f5a566678e52c87dfa0bd1d2b1f0c3e286ff1d1855af098078e27419a6fa0",
+      "actual": "01ec1bfa8d6e9c73eb0e8d5f60b4b854943c165ea181e16b1f2975b1204a45eb",
+      "expectationsChanged": false
+    }
+  },
+  "benchmark": {
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "rounds": 9,
+    "callsPerSample": 40000,
+    "warmupCalls": 20000,
+    "beforeMs": 168.12579200000016,
+    "afterMs": 153.10958399999993,
+    "speedup": 1.0980749056179282,
+    "reductionPercent": 8.931531457112907,
+    "pairedSpeedups": [
+      1.0924077048720788,
+      1.1419001929548216,
+      1.0746557861812966,
+      1.0327679794343279,
+      1.0304250466030653,
+      1.020170548579012,
+      1.011368730823496,
+      1.0011543954034923,
+      1.2154257428901984
+    ],
+    "results": {
+      "before": [
+        {
+          "count": 40000,
+          "ms": 158.48491599999988,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 173.48637499999995,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 169.61341599999992,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 155.87683300000003,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 201.56475,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 164.28537499999993,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 179.90041599999995,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 153.28633300000013,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 168.12579200000016,
+          "sink": -1678339592
+        }
+      ],
+      "after": [
+        {
+          "count": 40000,
+          "ms": 145.0785410000001,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 151.92779199999995,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 157.83045900000002,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 150.93112500000007,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 195.61320899999987,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 161.03716699999995,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 177.87816700000008,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 153.10958399999993,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 138.32666700000004,
+          "sink": -1678339592
+        }
+      ]
+    }
+  },
+  "interpretation": "Against current main: median batch 168.13 ms to 153.11 ms (1.098x), all nine paired samples faster. Earlier 2.55x result is historical and not a main gain. Steady mixed-call setup excluded; no whole-game speed claim.",
+  "otherCases": {
+    "diagnosticOnly": true,
+    "results": [
+      {
+        "name": "local-look",
+        "recordCalls": 3836,
+        "nativeArgFailures": {},
+        "totalFailures": 0,
+        "frames": 5
+      },
+      {
+        "name": "farlook",
+        "recordCalls": 4566,
+        "nativeArgFailures": {
+          "signed char": 1,
+          "char": 159,
+          "short": 28,
+          "int": 70,
+          "unsigned int": 2,
+          "unsigned long": 18
+        },
+        "totalFailures": 278,
+        "frames": 10
+      },
+      {
+        "name": "symbol",
+        "recordCalls": 4478,
+        "nativeArgFailures": {
+          "int": 66,
+          "unsigned long": 9,
+          "char": 117,
+          "unsigned int": 11,
+          "menu_item *": 1,
+          "void": 1
+        },
+        "totalFailures": 205,
+        "frames": 8
+      },
+      {
+        "name": "help",
+        "recordCalls": 4143,
+        "nativeArgFailures": {
+          "int": 51,
+          "unsigned long": 1,
+          "char": 91,
+          "unsigned int": 15,
+          "int (*)(void)": 4,
+          "signed char": 2,
+          "menu_item *": 1,
+          "void": 1
+        },
+        "totalFailures": 166,
+        "frames": 16
+      }
+    ]
+  },
+  "otherCasesInterpretation": "Pager nativeArg performs exception-based scalar argument classification during genuine input-driven far-look, symbol lookup and help. No pager production change in this commit. ALLMAIN root classification and scalar array one-past also contain this pattern but are startup/edge paths; no hot-path speed claim.",
+  "sourceQualification": "Pinned exact six-file inverse to base 8b5ecaf, including canonical patches; no old oracle expectations rewritten.",
+  "commands": [
+    "node scripts/test-monster-data-views.mjs",
+    "node scripts/test-record-classification.mjs",
+    "node scripts/test-c-runtime-type-metadata.mjs",
+    "node scripts/test-c-runtime-contracts.mjs",
+    "node scripts/test-utility-byteops.mjs .cache/byteops-sfctool .cache/byteops-tile2bmp-final",
+    "node scripts/test-standalone-mondata.mjs",
+    "python3 scripts/consolidate-nethack-layout.py",
+    "python3 scripts/monster_view_source_successor.py",
+    "node scripts/test-monster-data-view-replay.mjs compare .cache/full-original-c-v1/assets .cache/monster-main-rebase/replays .cache/monster-main-rebase/main-loader.mjs",
+    "node scripts/benchmark-monster-mixed.mjs compare .cache/monster-main-rebase/main-loader.mjs",
+    "node scripts/count-pager-record-probes.mjs .cache/full-original-c-v1/assets"
+  ]
+}

@@ -1,0 +1,38 @@
+--- a/js/c-runtime/records.js
++++ b/js/c-runtime/records.js
+@@ -1,8 +1,9 @@
+ // Common live-record identity and indexed-view machinery. Declarations supply
+ // field semantics; callers choose explicit array and publication profiles.
+ export function createRecordStore({memory,address,describe,createView,fieldDescriptor,decorate,
+-    cache=new Map(),cacheKey,initialize,finalize,publish='early',checked=true,trackDefinitions=true}) {
++    cache=new Map(),cacheKey,initialize,finalize,publish='early',checked=true,trackDefinitions=true,reuseArguments=false}) {
+     const definitions=trackDefinitions?new WeakMap():null;
++    const argumentViews=reuseArguments?new WeakMap():null;
+     function record(type,pointer) {
+         const at=address(pointer);if(!at)return 0;
+         let definition,key;
+@@ -13,6 +14,7 @@
+         const view=createView(definition,at);
+         if(cache&&publish==='early')cache.set(key,view);
+         if(definitions)definitions.set(view,definition);
++        if(argumentViews)argumentViews.set(view,{type:definition.type,at});
+         if(initialize)initialize(view,definition,at);
+         else for(const [name,field]of Object.entries(definition.fields))
+             Object.defineProperty(view,name,fieldDescriptor(type,at,name,field));
+@@ -21,7 +23,15 @@
+         if(cache&&publish!=='early')cache.set(key,result);
+         return result;
+     }
+-    return {record,advance(view,n) {
++    return {record,argument(type,pointer) {
++        const entry=argumentViews?.get(pointer);
++        if(entry&&entry.type===type){
++            const at=address(pointer);
++            if(at===entry.at)return pointer;
++            return record(type,at);
++        }
++        return record(type,pointer);
++    },advance(view,n) {
+         const definition=definitions?.get(view);
+         if(!definition)throw new TypeError('Unrecognized measured record view');
+         return record(definition.type,view.address+Number(n)*definition.size);

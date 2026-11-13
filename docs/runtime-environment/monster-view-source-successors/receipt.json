@@ -1,0 +1,41 @@
+{
+  "base": "8b5ecaf",
+  "files": {
+    "js/c-runtime/records.js": {
+      "beforeSha256": "3fa3684e7ac4a35a644aa9521b0427438c3e8f01974c181744608452d4fd77fa",
+      "afterSha256": "a3ee9c8b18f283bbc540bc546a68ea7c470c25a3641f74a56336207adbdef328",
+      "patch": "docs/runtime-environment/monster-view-source-successors/0.patch",
+      "patchSha256": "00168183f5b5c189002ef7e0b1d44e1042e09a5b9a526b39343f9dfdd74c5243"
+    },
+    "js/c-runtime/record-views.js": {
+      "beforeSha256": "e85e5e2ee3ceb54dc19ac5b690c32a49121c0fb700eccfe392b0bf892e416562",
+      "afterSha256": "8ed4f2187396be0f3ab528738cb727864da0e0bcdc920fd4321f1fbaf0a46f08",
+      "patch": "docs/runtime-environment/monster-view-source-successors/1.patch",
+      "patchSha256": "6002853018f0387ecbe59d9f014b7d9b4f811e51707ec3aa07ba3908f4746f3a"
+    },
+    "js/nethack/monster-creation.js": {
+      "beforeSha256": "12a41b3c3dd3ddb4a972bfddddc86661fdb7160ae474a60f314192c11d0411ee",
+      "afterSha256": "92c19ddf57c251ccfabfc98ea77b0779f128833c41d91c72df933afddc9255fe",
+      "patch": "docs/runtime-environment/monster-view-source-successors/2.patch",
+      "patchSha256": "b3fcd0574c72e8b6191b768246fe39a68b7fe0b860b2991c65bbe464e12f19f7"
+    },
+    "js/ported-utilities/sfctool-helpers.js": {
+      "beforeSha256": "82ff860d87a67ae9b21acbe25f84f2f84472d5d2b1749af1055d680dcf3eebe5",
+      "afterSha256": "c17360b8fb061f8617b48911bbb94cfe4a80e92b82596aa3e70e07e72f113fb2",
+      "patch": "docs/runtime-environment/monster-view-source-successors/3.patch",
+      "patchSha256": "57763e6597c3b60554f4155adbf53f924bab5ef48f6363f67b55d11a6ac4c039"
+    },
+    "js/ported-utilities/sfctool-runtime.js": {
+      "beforeSha256": "d98186efa35050b622fb08bc0b861603c86b4d5391a4e47651f98bca50c8705e",
+      "afterSha256": "23daa3ae0df8a02ca5833286004db0abb76838f47cb1b80c3afa472b60ae890d",
+      "patch": "docs/runtime-environment/monster-view-source-successors/4.patch",
+      "patchSha256": "4aa6e737e8dbfc2978007e03242b53e02c03e1d4e5f5965b35ef8beb4fb64eb4"
+    },
+    "js/ported-utilities/tile2bmp/runtime.mjs": {
+      "beforeSha256": "b90a9ee9901939ffde8604c1c64e64aeae47078b0f8c335d504ccc384a6d6b4d",
+      "afterSha256": "14ed21063e44f056eacf60bd6b24bf10594b219dc890a5d0d3dbce627bea5b8a",
+      "patch": "docs/runtime-environment/monster-view-source-successors/5.patch",
+      "patchSha256": "96aeff401f25f6b20c52c20044c7a7c7fd13f884ea9bc1c192a16ca60df6849d"
+    }
+  }
+}

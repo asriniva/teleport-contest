@@ -1,5 +1,159 @@
 # Upstream divergence register
 
+Completed main rebase (2026-11-12, base8b5ecaf): main already contains the
+scalar no-throw classifier and type/load caches. Its complete types.js is
+unchanged. The integrated change is limited to utility fixed-size byte copies
+and clearing plus opt-in same-store argument reuse for four monster-data
+functions. General record-store definition/publication/cache profiles remain
+intact; a separate argument identity map is enabled only by createRecordViews.
+The new argument route retains the existing dispatch/lifetime/module scopes.
+Current paths use js/nethack and js/c-runtime/context.js. No game policy,
+C/header/compiler/default or recorder change.
+
+Fresh validation on main passes2,642 focused view checks,478 current metadata
+contracts,85 classification checks,1,182 byte-operation checks, all existing
+utility suites,1,299 original-C construction comparisons and525 MONDATA checks.
+Four full-result main/candidate replays across two seeds match50 frames and50
+input boundaries, files, world globals and both RNG logs/images. The current
+source-layout gate passes593 exact transitions. A six-file source inverse
+binds each actual source and canonical patch to the exact8b5ecaf predecessor;
+12 source/patch mutation negatives fail. It is registered only for those files
+in the existing historical layout audit; old oracle pins stay unchanged.
+
+Isolated current-main mixed benchmark: median40,000-call batch168.13ms→153.11ms,
+1.098x throughput, with all9 alternating process pairs faster. This is a local
+steady-call measurement, not whole-game acceleration. The historical2.55x
+classifier result below was against the old checkout and is not a new main
+speedup. Main already fixed that bottleneck in56ac9cb and later commits.
+Evidence: docs/runtime-environment/monster-main-rebase-validation.json.
+The broader historical scope audit still fails the generated
+.cache/tu-probes/tu-source-locations.h pin with the same actual/expected hashes
+on unchanged8b5ecaf and this candidate. That inherited failure is retained;
+no header or oracle expectation is changed to force it green.
+
+Additional search found current PAGER nativeArg classifying scalar arguments
+with caught record errors:278 during real far-look,205 symbol lookup and166
+help; local look0. scripts/count-pager-record-probes.mjs reproduces these
+counts without runtime changes. Startup ALLMAIN root probes and scalar-array
+one-past checks are lower-frequency cases. No new pager optimization or speed
+claim is included. The pre-rebase notes/results below are historical only.
+
+Mixed monster-data profile and non-throwing classification (2026-11-12,
+this workspace): CPU profiles of the same mixed workload show original argument
+conversion at3.61% inclusive sampled time, while the post-view-reuse workload
+spends55.08% self time in measured record lookup and24.28% in type
+normalization. These are sampling estimates, not additive inclusive costs.
+A separate diagnostic counts1,750 internally caught missing-record exceptions
+per1,000 mixed calls, all from ordinary scalar/enum type probes. The previous
+individual-call median gains were small relative to this remaining field-access
+cost and the observed timing variation; unchanged mixed timings did not establish
+that direct-view reuse had no benefit.
+
+`js/c-runtime/types.js` adds `recordIfKnown`, which performs the same fresh
+canonicalization, metadata lookup and descriptor construction as `record`,
+returning null at the existing caught-failure boundary without constructing a
+missing-record Error. `js/c-runtime/record-views.js` uses it at the existing
+scalar, pointer-target and array one-past classification sites. No type/value
+memoization, metadata freezing, field snapshots, allocator policy, module scope,
+C/header, source-shaped game logic, recorder, compiler flag or default changes.
+This is new shared JS runtime work, not an inherited contest patch. Numeric
+reads/writes and pointers still use their original access paths; unknown types,
+metadata access failures and scalar-array one-past failures retain their old
+results/errors. Live metadata changes are tested; no immutable-schema assumption
+is added. The ordinary throwing `record` API is unchanged. Internal expected
+classification Error construction is intentionally removed.
+
+Verification:85 dedicated classification checks against the prior caught-record
+lookup cover scalar/enum/alias/record/pointer/array results, errors, metadata
+changes/access errors, growth and aliasing. Existing2,642 monster-view checks,
+1,299 original-C construction comparisons,525 MONDATA checks/111 capability
+guards and both shared-runtime memory/contract suites pass. Four full-result
+before/after replays across two seeds are identical, including50 frames/50 input
+boundaries, world globals, files, status and both RNG logs/images. Their loader
+uses exact pre-change types.js and record-views.js bytes, preserving the earlier
+view-reuse change. The expected classification exception count becomes zero.
+Raw profiles, lookup counts, replay outputs, baseline bytes and isolated
+benchmark samples are retained under `.cache/monster-mixed-profile/`;
+`docs/runtime-environment/monster-mixed-profile-validation.json` records hashes,
+commands and final timing results. Timings compare warmed full registered mixed
+calls in separate alternating processes; setup is excluded and return checksums
+must match. No whole-game speedup or exhaustive all-input equivalence is claimed.
+
+Monster-data live-view argument reuse (2026-11-12, this workspace):
+`js/c-runtime/records.js` records each view's creation address alongside its
+existing measured definition and provides `argument(canonicalType, value)`.
+A same-store view of the expected type at its original effective address is
+passed through unchanged; all other inputs use the existing record resolver.
+`js/c-runtime/record-views.js` exposes that operation, and only the four
+monster-data registrations in `js/standalone/monster-creation.js` opt in:
+set_mon_data, mon_learns_traps, attacktype and attacktype_fordmg. This removes
+repeated type-description/string-key/cache lookup for live JS arguments. Those
+calls were already JS-to-JS; no actual C function is replaced by this change.
+The source-shaped MONDATA/MAKEMON implementations, live field access, pointer
+identity, shared byte storage, integer conversion, module initialization,
+environment switching, temporary-storage scope and unwinding are preserved.
+No plain field snapshots, native-value caches, new default, compiler/C/header,
+allocator policy or recorder changes. This is new workspace adapter/runtime
+work, not an inherited contest patch. Record declarations remain immutable
+runtime metadata; arbitrary mutation of declaration schemas is not an accepted
+compatibility contract.
+
+Verification: 2,642 focused original-converter/candidate checks include complete
+heap bytes and allocation maps, return/pointer identity, all four functions,
+hero movement, two independent worlds, growth, foreign/wrong-type/retargeted
+views, raw/null/invalid pointers, nested calls and exception-scope restoration.
+The original-C monster-construction suite passes1,299 state/RNG comparisons;
+the MONDATA suite passes525 checks and111 capability guards, including original-C
+world, terminal and recording comparisons. Shared runtime memory and contract
+suites pass. Four separate-process baseline/candidate game replays across two
+seeds match their complete outputs, including50 frames/50 input boundaries,
+world globals, files, process status and both RNG logs/images. The baseline
+loader uses exact pre-edit bytes of all three affected production files, not
+an expected-result normalization. Focused baseline-converter benchmarking is
+implemented in `scripts/benchmark-monster-data-views.mjs`; setup is excluded and
+calls retain full registered dispatch/environment/storage scope. It alternates
+order over11 paired samples after warmup, with both view and pointer workloads.
+Final measured timings and provenance are recorded in
+`docs/runtime-environment/monster-data-view-validation.json`. Initial timings
+collected concurrently with replay verification are retained separately and
+are not the reported isolated result. Bounded recording/source-call equivalence
+is verified; exhaustive arbitrary-input/full-game coverage and overall game
+speedup are not claimed. Baseline snapshots, full replay outputs and raw timings
+are retained under `.cache/monster-view-fastpath/`.
+
+Utility byte-operation cleanup (2026-11-12, this workspace):
+`js/ported-utilities/sfctool-runtime.js` copies the four fixed-size procedure
+record arrays directly in the current Module heap;
+`js/ported-utilities/tile2bmp/runtime.mjs` copies the configured bitmap header
+record directly; `js/ported-utilities/sfctool-helpers.js` clears/fills valid
+ranges directly. No upstream C/header, source-shaped utility policy, allocator,
+compiler flag, default, recorder or game adapter changes. These are new adapter
+changes, not inherited contest patches. Purpose: remove C crossings for pure
+byte operations. Copy fast paths require in-bounds non-overlapping ranges;
+other cases retain the original C call. Clearing requires an in-bounds range
+and a numeric fill value; byte conversion remains low eight bits. Every call
+reads the current heap, including after growth. Return contracts remain true
+for procedure setters, Number for the bitmap memcpy wrapper, and BigInt for
+utility_memset. No allocation or string/locale behavior is replaced.
+
+Verification: fresh original-C/mixed MEMORY64 utility builds; original SFCTOOL
+helper suite739 checks/35 helpers, full suite137 checks/46 cases, extra suite101
+checks/36 cases, growth/reentry17 checks; TILE2BMP28 full status/stdout/stderr/BMP
+comparisons plus40 helper assertions. Added `scripts/test-utility-byteops.mjs`
+passes1,182 checks against actual C bytes/return types, guard bytes, unaligned
+and zero-length fills, signed/truncated fill bytes, all four procedure arrays,
+two independent Modules and actual heap growth. Throwing C-call spies establish
+that fast paths do not enter C; fallback spies check invalid ranges and copy
+overlap. An initial direct test caught and corrected a Number/BigInt bitmap
+return mismatch before final verification. Evidence is in
+`.cache/byteops-evidence/direct.json`, `.cache/byteops-sfctool/*results.json`,
+and `.cache/byteops-tile2bmp-final/results.json`. Reproduce the focused check
+with `node scripts/test-utility-byteops.mjs <sfctool-pair> <tile2bmp-pair>`.
+This establishes byte-operation equivalence for configured valid memory and
+passes the bounded original-C utility scenarios; it is not exhaustive proof
+for arbitrary reflective JS inputs, undefined C memory access, native hosts,
+or full game recording equivalence. No public-score or speed claim is made.
+
 APPLY timeout investigation (2026-11-13): the reported leaderboard failure is the overall900-second budget, with apply.js:16:451 mapping to ctypes.size(type). No production fix is justified from that interrupted stack alone. An isolated instrumented current-main Knight replay passes all expected RNG108275, screens/cursors1814 and animations37;21729 foreign calls, maximum nesting3, final nesting0. Most calls are isok/dist2 from jump-target coordinate validation. No APPLY non-progress reproduced; the failed leaderboard session is unknown. The completed reverse-order pinned CI43351254256 passes44/44 both versions, baseline1092.26s/candidate1086.85s (ratio0.9950), versus prior forward ratio1.0467: no consistent whole-game pointer-limit speedup established. Candidate sampling attributes2.91s inclusive (0.272%) to APPLY invoke, so that bridge is a small public-suite contributor. Profiling/instrumentation affect timing; no900-second or hidden-session acceptance. Fresh unmodified current-main25ce012 replay passes44/44 strict including all1483 animation cursors;792838 RNG and11405 screens/cursors match. Local profiled batch785.76s, initially concurrent with two diagnostic replays: not a paired speed comparison or leaderboard acceptance. All751 input hashes remain unchanged. Diagnostic proof: docs/runtime-environment/apply-timeout-diagnostic.json. Runtime, ports and frozen files are unchanged by this evidence update. Earlier pending-repeat statements below are historical.
 
 Callback boundary follow-up: all23 declared APPLY callbacks have available implementations and register BigInt IDs; registration does not prove every callback branch. Current audits pass451 literal service dependencies and613 literal window/sound field lookups;40 dynamic lookups remain runtime obligations. A second isolated Knight replay instruments functions.indirect pointer argument positions and observes no object/function values; all recorded metrics pass. APPLY pcall deliberately carries record views into its typed scalar layer, which extracts addresses before foreign dispatch. Generic indirect bridges still trust callers and do not validate/normalize every argument; no violating game call site was found. No runtime correction is claimed.

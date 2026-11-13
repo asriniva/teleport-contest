@@ -40,6 +40,7 @@ function previous(){
 }
 const featurePaths=new Set(["js/c-runtime/heap.js", "js/c-runtime/adapter-factories.js", "js/nethack/movement.js", "js/nethack/serialization.js", "js/standalone-recorder-adapter.js", "scripts/pure-js-probes/deny-wasm.mjs", "js/nethack/uhitm.js"]);
 function beforeFeature(file){
+ if(["js/c-runtime/records.js", "js/c-runtime/record-views.js", "js/nethack/monster-creation.js", "js/ported-utilities/sfctool-helpers.js", "js/ported-utilities/sfctool-runtime.js", "js/ported-utilities/tile2bmp/runtime.mjs"].includes(file))return execFileSync('python3',[path.join(root,'scripts/monster_view_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
  if(['js/nethack/bindings/hack.js','js/nethack/bindings/mon.js','js/nethack/bindings/wintty.js'].includes(file)&&fs.existsSync(path.join(root,'scripts/pointer_limit_source_successor.py')))return execFileSync('python3',[path.join(root,'scripts/pointer_limit_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
  if(['js/nethack/object-state.js','js/nethack/shknam.js','js/nethack/teleport.js'].includes(file))return execFileSync('python3',[path.join(root,'scripts/engine_service_source_successors.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
  if(['scripts/test-standalone-game-assets.mjs','scripts/test-standalone-mon-assert.mjs','scripts/test-tu-display.mjs','scripts/test-tu-shk.mjs'].includes(file))return execFileSync('python3',[path.join(root,'scripts/engine_test_source_successors.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
