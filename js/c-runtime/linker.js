@@ -13,6 +13,7 @@ export function createLinker({memory,transport,functions,services,ctypes,prototy
     function publishFunction(module,name){
         if(name in services)return;
         const invoke=(...args)=>call(module,name,...args),prototype=prototypes[name];
+        Object.defineProperty(invoke,'nativeEntry',{get(){const fn=modules.get(module)?.namespace[name];return fn?.nativeDirect?fn:undefined;}});
         if(prototype)Object.defineProperty(invoke,'address',{get(){
             const match=prototype.match(/^(.+?)\s*\((.*)\)$/);if(!match)throw new Error('Unknown C function address prototype '+name);
             const args=[];let depth=0,start=0;for(let i=0;i<match[2].length;i++){const ch=match[2][i];if(ch==='('||ch==='[')depth++;else if(ch===')'||ch===']')depth--;else if(ch===','&&!depth){args.push(match[2].slice(start,i).trim());start=i+1;}}args.push(match[2].slice(start).trim());

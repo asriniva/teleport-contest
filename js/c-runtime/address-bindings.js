@@ -1,12 +1,13 @@
 // Generic measured-schema transport for address-based translated functions.
 // Application types, function declarations and module invocation are injected.
 export function createAddressBindings({environment,name,schema,layout,namespace,backings,
-    ctypes=environment.ctypes,publicFunctions,callbackTypes,fallbackSignatures={},indirectCalls={},bind}) {
+    ctypes=environment.ctypes,publicFunctions,callbackTypes,fallbackSignatures={},indirectCalls={},resolveFunction,bind}) {
     const {services,transport}=environment,local=Object.create(services),records=Object.keys(schema.schema);
     const keys=schema.layoutKeys?Object.fromEntries(schema.layoutKeys.map((key,i)=>[key,BigInt(layout[i])])):layout;
     const resolve=fn=>{
-        if(typeof services[fn]==='function')return services[fn];
-        return environment.resolve(fn);
+        const native=resolveFunction?.(fn);if(native)return native;
+        if(typeof services[fn]==='function')return services[fn].nativeEntry??services[fn];
+        const selected=environment.resolve(fn);return services[fn]?.nativeEntry??selected;
     };
     const fieldDeclarations=new WeakMap();
     function field(kind,at,index) {

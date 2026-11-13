@@ -368,7 +368,7 @@ export function createStandaloneEnvironment(options={}) {
         enableLuaSandbox:layouts=>enableLuaSandbox(environment,layouts),
         state:name=>states.get(name),hasFunction:linker.hasFunction,
         resolve,
-        status:linker.status,
+        status:linker.status,startModule:linker.start,
         record:transport.record,array:transport.array,address};
     register('runtime-string-helpers',{__isspace:c=>services.isspace(c),Strlen_:(value,caller,line)=>base.strutil('Strlen_',typeof value==='string'?services.literal(value):address(value),typeof caller==='string'?services.literal(caller):address(caller),transport.int(line))});
     register('runtime-public-allocation',{
