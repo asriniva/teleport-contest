@@ -1,3 +1,54 @@
+## Native hero movement checkpoint (worktree, 2026-11-12)
+
+Additional work after lifecycle checkpoint608c1c9. `js/nethack/native/hero-movement.js`
+is generated from unchanged HACK policy by `scripts/generate-native-hack.py`.
+HACK runs in a game-bound closure with direct local calls, and its registered
+entries participate in the connected native dispatch table. Measured layout
+metadata replaces per-access generic `services.read/write/address` and type
+lookup. Compatible hero/property/level/monster/object/map/coordinate records share
+identities with MON/MONMOVE; native scalar and packed fields use the common owner. Unions stay
+live byte views with explicit publication/invalidation so overlapping members
+preserve aliasing. Raw byte access, pointer loads and record copies likewise
+publish pending fields. Callback metadata is forwarded lazily. Native views
+retain their per-game identity across calls, including when a pooled frame is
+released; their heap source remains tied to the actual game memory.
+
+Source policies, initializer/private-state ordering, RNG algorithm, call sites,
+caller metadata and call order, C sources/compiler flags, assets and frozen
+recorder are unchanged. Arrays/temporary pointers and save serialization still
+use compatibility storage. This is a connected gameplay checkpoint; a fully native ordinary turn and20x
+remain unachieved. The original-C MAIN check through716 keys/238 turns matches frames, both RNG
+logs and normalized world graph. The HACK differential suite passes426 cases,
+4,338 state/trace/result/stack checks and all95 routines, plus runtime reuse,
+service replacement, reentry, exception cleanup, signed arrays and heap growth.
+The original95-policy source remains unchanged; the generator emits the native
+closure. Original callable references remain accepted when resolving callback
+IDs. Live-main checks confirm169 native dispatch entries and shared hero/monster
+identity. MON14,731 and MONMOVE5,550 comparisons remain green. The first public replay caught the missing MON header alias
+`obj.opoisoned → obj.otrapped` after shared objects acquired HACK's strict field
+diagnostics. The alias is now explicit; this also corrects inherited poison-flag
+observations on the two MON eating paths. Directed original-C poisoned/unpoisoned
+floor-object tests have been added. The failed replay is retained and unaccepted.
+Final source-stable public replay: **44/44 strict all-metric passes** with
+all792,838 RNG calls,11,405 boundary screens/cursors,1,483 animation screens
+and cursor triples, output counts and persistence telemetry matching. All754
+scoring inputs stayed unchanged. Engine time415.238s →410.209s,1.01226x or
+1.2111% less, versus the already-completed lifecycle replay; fitted cost
+24.5450ms →24.2205ms per input move. Batch wall415.233s. This is a modest
+historical comparison, not proof of a large gain or20x. MON poison regression
+raises the original-C MON check count to14,737. Evidence:
+`docs/runtime-environment/native-hero-public-validation.json` and
+`docs/runtime-environment/native-hero-timing.json`.
+
+Next priority under the active goal: connect the common address-based engine
+field pipeline to canonical native records and direct calls. The stored
+profile attributes most type-record lookup caller samples to that shared
+pipeline. This is planned work, not an implemented capability. No new baseline
+profiling or baseline replay is authorized or needed. The HACK source guard reads the existing
+reference checkout through a local src symlink; no C bytes or compiler inputs
+were edited or rebuilt by this validation. The previous lifecycle checkpoint remains
+available at608c1c9; none of this candidate is pushed to main.
+
 ## Connected native lifecycle checkpoint (worktree, 2026-11-12)
 
 The movement change and main display integration were pushed to main at

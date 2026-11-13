@@ -13,11 +13,14 @@ assert.deepEqual(result.status,{kind:'input-exhausted'});
 const {environment}=runtime,owner=nativeStateFor(environment);
 assert.equal(owner.depth,0,'input exhaustion publishes the entire connected native graph');
 assert.equal(owner.dirty.size,0);
-for(const name of ['movemon','mcalcdistress','healmon','mfndpos','dochugw','m_move']){
+for(const name of ['movemon','mcalcdistress','healmon','mfndpos','dochugw','m_move','domove','lookaround','test_move']){
  assert.ok(owner.functions.has(name),name+' has native dispatch');
  assert.equal(owner.functions.get(name).nativeState,owner,name+' uses the common native owner');
 }
 const lifecycle=enableMonsterLifecycle(environment,layouts);
+const hero=owner.records.get('struct you:'+environment.requireGlobal('u'));assert.ok(hero);
+assert.equal(lifecycle.context.u,hero,'hero has one identity across native providers');
+for(const provider of owner.providers){const read=provider.get('struct you');if(read)assert.equal(read(hero.address),hero);}
 let monsters=0;
 for(const[key,monster]of owner.records){
  if(!key.startsWith('struct monst:'))continue;

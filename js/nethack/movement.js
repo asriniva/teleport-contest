@@ -4,14 +4,16 @@ import records from './records.json' with {type:'json'};
 import publicFunctions from './public-functions.json' with {type:'json'};
 import {createCTypes} from './c-types.js';
 import * as hack from '../ported/hack.js';
+import {nativeStateFor} from './native/state-bridge.js';
 import {createHackEnvironment,callHack} from './bindings/hack.js';
 export function enableMovement(environment,layouts){
  const {services,memory,functions}=environment,L=Object.freeze({...layouts.hack});
  const ctypes=createCTypes(memory,{...records,records:{...records.records,...abi.records}},environment.bitfields);
  const text=v=>typeof v==='string'?services.literal(v):environment.address(v),families=['Norep','There','You','You_cant','You_feel','You_hear','Your','impossible','livelog_printf','nh_snprintf','panic','pline','pline_The','pline_dir','pline_xy','raw_printf','sprintf','urgent_pline','verbalize'];
  const resolve=name=>typeof services[name]==='function'?services[name]:environment.resolve(name);
- const inheritedWrappers=new Map(),resolvedWrappers=new Map();
+ const nativeState=nativeStateFor(environment),inheritedWrappers=new Map(),resolvedWrappers=new Map();
  const local=new Proxy(Object.create(services),{get:(o,k,r)=>{
+  if(!Object.hasOwn(o,k)&&nativeState.functions.has(k))return nativeState.functions.get(k);
   if(Reflect.has(o,k)){const value=Reflect.get(o,k,r);if(typeof value!=='function'||Object.hasOwn(o,k))return value;const previous=inheritedWrappers.get(k);if(previous?.source===value)return previous.wrapper;const wrapper=(...args)=>value(...args.map(v=>v?.address??v));inheritedWrappers.set(k,{source:value,wrapper});return wrapper;}if(typeof k!=='string')return undefined;
   if(resolvedWrappers.has(k))return resolvedWrappers.get(k);
   const family=families.find(name=>k.startsWith(name+'_')&&/^[pijd]+$/.test(k.slice(name.length+1)));
@@ -36,6 +38,7 @@ export function enableMovement(environment,layouts){
  // Preserve it while installing the rest of the original once-per-module data.
  const prior=memory.readBytes(buffer,5),context=createHackEnvironment(local,L,hack);hack.initializeHackData(context);memory.HEAPU8.set(prior,buffer);
  const names=abi.functions.filter(name=>Object.hasOwn(publicFunctions.functions,name)&&!environment.hasFunction(name));
- environment.register('movement',Object.fromEntries(names.map(name=>[name,(...args)=>callHack(local,L,name,...args)])));
+ const exports=Object.fromEntries(names.map(name=>{const call=(...args)=>callHack(local,L,name,...args);call.nativeState=nativeState;nativeState.functions.set(name,call);return [name,call];}));
+ environment.register('movement',exports);
  return {services:local,context,ctypes,pointer,call:(name,...args)=>callHack(local,L,name,...args),limitation:'Movement/room integration in progress; complete HACK policies and game lifecycle require original-C verification.'};
 }

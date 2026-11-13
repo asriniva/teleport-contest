@@ -56,6 +56,13 @@ for(const name of names.filter(n=>!reached.has(n))){
  if(process.env.TELEPORT_MON_DEBUG)console.error('RUN',name,a,b,c,d,e);
  action(name,a,b,c,d,e);
 }
+// The C header aliases the poison flag to otrapped. Both branches must
+// agree with C even when the object identity was shared with hero movement.
+for(const poisoned of [0,1]){
+ reset();setup(m=>{m._probe_put_object(1,value('OBJ_FLOOR'),0);m._probe_bit(bitTypes.indexOf('obj'),m._probe_pointer(1,1),bits.obj.indexOf('otrapped'),poisoned);});
+ action('meatmetal',0);
+ assert.equal(text(ref,ref._probe_trace()).includes('obj_resists:'),!poisoned,'poisoned floor object is skipped before resistance checks');count++;
+}
 // Entire real catalogue: pointer inputs remain actual native permonst records.
 for(let pm=0;pm<value('NUMMONS');pm++){
  reset(pm+3);setup(m=>{putPointer(m,pointer(m,0,0)+L.mon_data,m._probe_pointer(2,pm));field(m,0,0,'mon','mnum',pm);field(m,1,0,'obj','corpsenm',value('PM_HUMAN'));});
