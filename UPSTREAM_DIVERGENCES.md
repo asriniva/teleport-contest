@@ -1,3 +1,35 @@
+## Native string and arithmetic execution (2026-11-13)
+
+The actual HACKLIB owner uses all 50 original utility bodies bound to one native
+context, retaining its original model table and private buffers. Internal lexical
+calls are direct JS calls. Native byte scans reuse the growing typed arena instead
+of creating a DataView or Int8Array on every access. Small-integer casts use native
+Number arithmetic with the original BigInt fallback; safe numeric pointer addition
+avoids conversions while wrapping/opaque values retain their measured C behavior.
+Sort comparator identity selects the bound source callback, with per-game state,
+callback order, reentry and memory-growth semantics retained. Native geometry
+entries keep their existing owner. Byte copying, C strings, sort scratch storage,
+I/O callbacks and variadic formatting remain explicit boundaries.
+
+All 50 source routines and 51 exports match the original policy AST. Original-C
+verification passes 6,046 comparisons, including byte/int limits, strings, exact
+sort callback order, allocation failures, cleanup, nested callbacks, actual growth,
+partial/error I/O and independent instances. Native value checks still pass 1,261
+cases. Live-main proves direct dispatch, stable/growing signed-byte views, pointer
+wrapping, signed narrowing and exception cleanup. Existing SDK `highc`/`lowc`
+services remain distinct from the published game utility owner; their contracts
+are preserved. Metadata and all 42 dynamic lookup-site audits pass.
+
+Actual C state, tty, ordered RNG logs and frames match for ordinary turns. Generic
+calls fall to 27/50/109 and C scope entries to 52/93/207 for walk/wait/attack;
+C allocations remain 45/166/113 and generic fields 51/94/141. All 44 recordings
+pass with 800 scoring inputs unchanged: 792,838 RNG entries, 11,405 screens/cursors
+and 1,483 animations match. Unprofiled Node 22.23.5 batch time is 290.132s versus
+292.230s previously (about 0.7% lower). These separate single runs demonstrate
+no large or controlled speedup; zero-bridge/allocation and 20x remain unmet.
+Evidence is in `docs/runtime-environment/native-utilities-validation.json` and its
+source manifest. No upstream C, RNG algorithm, inputs or capture policy change.
+
 ## Native monster selection and creation execution (2026-11-13)
 
 `native/makemon.js` binds all 41 original monster-creation/selection bodies and the

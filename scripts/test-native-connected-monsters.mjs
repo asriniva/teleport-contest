@@ -242,4 +242,16 @@ try{nativeSelection.namespace.is_home_elemental=()=>{assert.equal(C,selectionMar
  nativeSelection.namespace.is_home_elemental=()=>{assert.equal(C,selectionMarker);environment.transport.stackAlloc(24);throw Error('native selection cleanup');};withCEnvironment(selectionMarker,()=>assert.throws(()=>environment.services.is_home_elemental(selectionEnvironment.mons[0]),/native selection cleanup/));
 }finally{nativeSelection.namespace.is_home_elemental=sourceElemental;}
 assert.equal(environment.memory.live.size,liveBeforeSelection,'selection callback exceptions restore temporary C bytes');
+
+const utility=environment.start('hacklib').environment;
+assert.equal(Object.keys(utility.nativeNamespace).length,51,'all 50 utility bodies and the data-model table are bound');
+for(const name of ['digit','eos','highc','strcasecpy','strncmpi','strNsubst','nh_snprintf'])assert.equal(environment.start('hacklib').namespace[name],owner.functions.get(name),name+' has direct native utility execution');
+assert.equal(utility.HEAP8,owner.nativeArena.Int8,'byte scans reuse the native signed arena view');
+const previousUtilityView=utility.HEAP8;environment.memory.grow(environment.memory.buffer.byteLength+1);assert.notEqual(utility.HEAP8,previousUtilityView);assert.equal(utility.HEAP8,owner.nativeArena.Int8,'byte view follows actual memory growth');
+assert.equal(utility.ptrAdd(1024,-3),1021);assert.equal(utility.ptrAdd(0,-1),(1n<<64n)-1n,'opaque wrapping pointers retain C64 semantics');
+assert.equal(utility.char(255),-1);assert.equal(utility.char(255n),-1);assert.equal(utility.coordxy(65536),0);
+const utilityMarker={nativeUtilityCaller:true},utilityLoad=utility.loadChar,liveBeforeUtility=environment.memory.live.size;
+try{utility.loadChar=()=>{assert.equal(C,utilityMarker);environment.transport.stackAlloc(24);throw Error('native utility cleanup');};withCEnvironment(utilityMarker,()=>assert.throws(()=>environment.services.eos(1024),/native utility cleanup/));
+}finally{utility.loadChar=utilityLoad;}
+assert.equal(environment.memory.live.size,liveBeforeUtility,'utility exceptions restore temporary C bytes');
 console.log(JSON.stringify({passed:true,monsters,nativeFunctions:owner.functions.size,nativeFields:owner.fields,nativeStorage:owner.nativeArena?'typed-arrays':'cached-fields',cachedReads:owner.hits,legacyBoundaries:owner.boundaries,moves:result.state.moves}));
