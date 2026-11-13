@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import {pathToFileURL} from 'node:url';
 const {parse}=await import(pathToFileURL(process.argv[2]??'.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs'));
 const ports=JSON.parse(fs.readFileSync('js/nethack/address-ports.json')).ports;
+ports.cmd={schema:JSON.parse(fs.readFileSync('js/nethack/command-abi.json')).schema};
 const identifier=name=>({type:'Identifier',name});
 const literal=value=>({type:'Literal',value});
 const member=(object,property)=>({type:'MemberExpression',object,property:identifier(property),computed:false,optional:false});

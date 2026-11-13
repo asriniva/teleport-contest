@@ -35,11 +35,11 @@ import {callSpLev} from './bindings/sp_lev.js';
 import {withCEnvironment} from '../c-runtime/context.js';
 const ports={mklev:[mklev,callMklev],mkmaze:[mkmaze,callMkmaze],pickup:[pickup,callPickup],shk:[shk,callShk],invent:[invent,callInvent],dothrow:[dothrow,callDothrow],display:[display,callDisplay],dungeon:[dungeon,callDungeon],
     mkobj:[mkobj,createMkobjEnvironment,'factory'],muse:[muse,createMuseEnvironment,'factory'],pray:[pray,createPrayEnvironment,'factory'],detect:[detect,createDetectEnvironment,'factory'],sp_lev:[spLev,(s,l,n,...a)=>callSpLev(s,l,spLev,n,...a),'layout']};
-export function enableAddressPort(environment,name,{only,definition:providedDefinition,adapter:providedAdapter,ctypes:providedTypes,backingAddresses={}}={}) {
+export function enableAddressPort(environment,name,{only,definition:providedDefinition,adapter:providedAdapter,ctypes:providedTypes,backingAddresses={},nativeRuntime=false}={}) {
     const definition=providedDefinition??metadata.ports[name],pair=providedAdapter??ports[name];if(!definition||!pair)throw new Error('Unsupported address adapter '+name);
     const {schema,layout}=definition,{services,transport}=environment,ctypes=providedTypes??environment.ctypes;
     const nativeState=nativeStateFor(environment),namespace=pair[0],bridge=pair[1];
-    const nativeMode=!providedDefinition&&!providedAdapter&&!providedTypes&&pair===ports[name];
+    const nativeMode=nativeRuntime||(!providedDefinition&&!providedAdapter&&!providedTypes&&pair===ports[name]);
     const backings=(schema.statics??schema.backings??[]).map(row=>Object.hasOwn(backingAddresses,row.name)?environment.address(backingAddresses[row.name]):environment.allocateGlobal(name+'.'+row.name,ctypes.size(row.type)));
     if(['muse','pray'].includes(name))backings.push(environment.allocateGlobal(name+'.localStrings',Math.max(1,...schema.localStatics.map(r=>r.offset+r.bytes))));
     if(name==='detect')backings.push(environment.allocateGlobal('detect.dummytrap',ctypes.size('struct trap')));

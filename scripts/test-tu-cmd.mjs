@@ -1,3 +1,15 @@
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+import {compileNativeFieldPlans} from '../js/nethack/native/address-fields.js';
+import {createCTypes} from '../js/nethack/c-types.js';
+import records from '../js/nethack/records.json' with {type:'json'};
+import commandAbi from '../js/nethack/command-abi.json' with {type:'json'};
+const nativeExecution=process.env.NATIVE_CMD_FIXTURE==='1',nativeServices=new WeakMap();
+function commandServices(services){
+ if(!nativeExecution)return services;
+ let local=nativeServices.get(services);
+ if(!local){local=nativeFixtureServices(services,{}).services;const e=services.moduleKey.environment;const types=createCTypes(e.memory,{...records,records:{...records.records,...commandAbi.records}},e.bitfields);local.nativeFieldPlans=compileNativeFieldPlans(e,commandAbi.schema,types);nativeServices.set(services,local);}
+ return local;
+}
 import './pure-js-probes/deny-wasm.mjs';
 import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
 const fixtureReferenceLabel=fixtureReferenceLabelFor("cmd");
@@ -14,7 +26,7 @@ function text(m,p){p=Number(p);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;r
 function layout(m){const l={};for(let i=0;i<m._probe_layout_count();i++)l[text(m,m._probe_layout_name(i))]=Number(BigInt.asIntN(64,m._probe_layout_value(i)));return l;}
 const rawServices=new WeakMap();
 const L=layout(reference),envs=new WeakMap(),ops=Object.keys(schema.functionTypes),index=n=>ops.indexOf(n);let sourceCalls=0,callbackException=false;
-const runtime={initializeCmd(services){if(process.env.CMD_NEGATIVE_STARTUP)return;rawServices.set(services.moduleKey,services);assert.ok(!envs.has(services.moduleKey));envs.set(services.moduleKey,initializeCmd(services,L,core));},cmd(services,name,...args){rawServices.set(services.moduleKey,services);sourceCalls++;if(callbackException&&name==='isok')throw Error('CMD real native callback marker');return callCmd(services,L,core,name,...args);}};
+const runtime={initializeCmd(services){if(process.env.CMD_NEGATIVE_STARTUP)return;rawServices.set(services.moduleKey,services);assert.ok(!envs.has(services.moduleKey));envs.set(services.moduleKey,initializeCmd(commandServices(services),L,core));},cmd(services,name,...args){rawServices.set(services.moduleKey,services);sourceCalls++;if(callbackException&&name==='isok')throw Error('CMD real native callback marker');return callCmd(commandServices(services),L,core,name,...args);}};
 const hybrid=await(await factory('hybrid'))({nethackPorted:runtime}),modules=[reference,hybrid];assert.equal(sourceCalls,0);
 for(let i=0;i<7;i++)assert.equal(hybrid._probe_ctor(i),reference._probe_ctor(i),'foreign O2 constructor '+i);assert.equal(text(hybrid,hybrid._probe_ctor_text()),text(reference,reference._probe_ctor_text()));assert.ok(hybrid._probe_ctor(1));
 function manual(m){let next=0;const cache=new Map();return{referenceData:true,moduleKey:m,heap:()=>m.HEAPU8,dataView:()=>new FixtureDataView(m.HEAPU8.buffer),global:i=>Number(m._teleport_cmd_global(i)),read:(k,a,f)=>m._teleport_cmd_read(k,BigInt(a),f),write:(k,a,f,v)=>m._teleport_cmd_write(k,BigInt(a),f,v),address:(k,a,f)=>Number(m._teleport_cmd_address(k,BigInt(a),f)),literal:s=>{if(cache.has(s))return cache.get(s);const at=Number(m._teleport_cmd_literal_storage())+next,n=m.lengthBytesUTF8(s)+1;next+=n;assert.ok(next<=schema.literalBytes);m.stringToUTF8(s,at,n);cache.set(s,at);return at;},functionPointers:Object.fromEntries(Object.keys(schema.functionPointers).map((n,i)=>[n,()=>m._probe_function(i)])),copyRecord:(to,from,n)=>Number(m._teleport_cmd_copy(BigInt(to),BigInt(from),BigInt(n))),stackAlloc:n=>Number(m.stackAlloc(n)),stackSave:()=>m.stackSave(),stackRestore:v=>m.stackRestore(v)};}
@@ -87,14 +99,14 @@ reset();action('cmdq_add_ec',m=>[0,Number(m._probe_function(Object.keys(schema.f
 // A real native window callback reenters an imported CMD function, then throws through both seams.
 reset();hybrid._probe_option(4,1n);callbackException=true;assert.throws(()=>callCmd(rawServices.get(hybrid),L,core,'doterrain'),/CMD real native callback marker/);callbackException=false;assert.equal(C,undefined);assert.equal(hybrid._probe_stack(),stacks[1]);comparisons+=3;
 // Per-call services are forwarded through one stable env, restored after native-style nested calls and throws.
-const serviceBase=rawServices.get(hybrid),events=[];
+const serviceBase=commandServices(rawServices.get(hybrid)),events=[];
 const scoped=(tag,overrides={})=>Object.assign(Object.create(serviceBase),{moduleKey:hybrid,...overrides});
 const inner=scoped('inner',{reset_remarm(){events.push('inner-remarm');throw Error('CMD nested marker');}});
-const outer=scoped('outer',{reset_remarm(){events.push('outer-remarm');assert.throws(()=>callCmd(inner,L,core,'reset_occupations'),/CMD nested marker/);assert.equal(C,he);},reset_pick(){events.push('outer-pick');},reset_trapset(){events.push('outer-trap');}});
+const outer=scoped('outer',{reset_remarm(){events.push('outer-remarm');assert.throws(()=>callCmd(inner,L,core,'reset_occupations'),/CMD nested marker/);assert.equal(C,nativeExecution?undefined:he);},reset_pick(){events.push('outer-pick');},reset_trapset(){events.push('outer-trap');}});
 callCmd(outer,L,core,'reset_occupations');assert.deepEqual(events,['outer-remarm','inner-remarm','outer-pick','outer-trap']);assert.equal(C,undefined);assert.equal(hybrid._probe_stack(),stacks[1]);comparisons+=3;
 const later=scoped('later',{reset_remarm(){events.push('later-remarm');},reset_pick(){events.push('later-pick');},reset_trapset(){events.push('later-trap');}});callCmd(later,L,core,'reset_occupations');assert.deepEqual(events.slice(-3),['later-remarm','later-pick','later-trap']);comparisons++;
 // Real native callback transport throws through JS, then the later call uses its own services.
 const throwing=scoped('throwing',{call2(){throw Error('CMD callback marker');}});assert.throws(()=>callCmd(throwing,L,core,'doterrain'),/CMD callback marker/);assert.equal(C,undefined);assert.equal(hybrid._probe_stack(),stacks[1]);callCmd(later,L,core,'reset_occupations');comparisons+=3;
 // Independent Module: fresh public initialization, statics, services and ownership.
 const second=await(await factory('hybrid'))({nethackPorted:runtime});assert.notEqual(envs.get(second),he);assert.equal(second._probe_ctor(1),reference._probe_ctor(1));second._probe_reset();second._probe_action(index('cmdq_add_key'),0n,66n,0n,0n,0n,0n);assert.equal(second._probe_block_count(),1);assert.equal(C,undefined);comparisons+=4;
-console.log('CMD first-pass comparisons='+comparisons+' direct='+called.size+'/'+ops.length+' (reference='+fixtureReferenceLabel+'; native/full-world pending; uninitialized cmdstr branches unproven)');
+console.log('CMD first-pass comparisons='+comparisons+' direct='+called.size+'/'+ops.length+' (reference='+fixtureReferenceLabel+'; native execution='+nativeExecution+'; uninitialized cmdstr branches unproven)');
