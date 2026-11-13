@@ -45,6 +45,15 @@ owner.completeRecordTypes.delete('struct you');
 try{assert.throws(()=>hero.table,/Unknown HACK record field/,'partial legacy projections retain their unknown-field guard');}
 finally{owner.completeRecordTypes.add('struct you');}
 const turn=environment.state('game-startup-context');
+const savedNativeTurn=turn.nativeTurn,dispatchMarker={nativeLinkerCaller:true};
+turn.nativeTurn=fn=>{assert.equal(C,dispatchMarker,'published native calls do not switch the caller environment');return savedNativeTurn(fn);};
+try{withCEnvironment(dispatchMarker,()=>{
+ assert.equal(environment.services.timet_delta(10n,4n),6n);
+ assert.equal(environment.resolve('timet_to_seconds')(10n),10n);
+ assert.equal(environment.call('game-startup','timet_delta',10n,4n),6n);
+});}finally{turn.nativeTurn=savedNativeTurn;}
+assert.equal(environment.services.m_move.nativeEntry,owner.functions.get('m_move'));
+assert.equal(environment.services.movemon.nativeEntry,owner.functions.get('movemon'));
 assert.equal(turn.u,hero,'turn loop consumes the canonical hero');
 assert.equal(turn.movemon,owner.functions.get('movemon'),'turn dependencies call the native engine directly');
 assert.equal(environment.services.moveloop_core.nativeEntry,owner.functions.get('moveloop_core'));

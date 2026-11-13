@@ -24,7 +24,7 @@ export function enableMonsterMovement(environment,layouts){
  local.display_nhwindow=(win,blocking)=>environment.functions.indirect(ctypes.getField('struct window_procs',environment.requireGlobal('windowprocs'),'win_display_nhwindow','void *'),'vii',environment.transport.int(win),environment.transport.char(blocking));
  for(const name of ['strlen','strcpy','strcat','strcmp','strchr','strncmpi'])local[name]=(...args)=>services[name](text(args[0]),...args.slice(1).map(v=>typeof v==='string'?text(v):v?.address??v));
  const names=Object.keys(monmove).filter(name=>typeof monmove[name]==='function'&&Object.hasOwn(publicFunctions.functions,name)&&!environment.hasFunction(name));
- const exports=Object.fromEntries(names.map(name=>{const call=(...args)=>callMonmove(local,L,name,...args);call.nativeState=nativeState;nativeState.functions.set(name,call);return [name,call];}));
+ const exports=Object.fromEntries(names.map(name=>{const call=(...args)=>callMonmove(local,L,name,...args);call.nativeState=nativeState;call.nativeDirect=true;nativeState.functions.set(name,call);return [name,call];}));
  environment.register('monster-movement',exports);
  return {services:local,storage,call:(name,...args)=>callMonmove(local,L,name,...args),limitation:'Native per-game MONMOVE execution with transactional native fields and legacy service boundaries; strict public recordings and C world/RNG validation required for acceptance.'};
 }

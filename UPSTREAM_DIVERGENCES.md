@@ -1,3 +1,47 @@
+## Stable native state roots, direct dispatch and integer transport (worktree, 2026-11-13)
+
+Additional work after7962216. Published and resolved functions retain their
+module entry directly. After normal lazy initialization, `nativeDirect` entries
+without a separate argument preparer invoke the native wrapper directly, avoiding
+the generic C temporary scope/environment switch. Legacy entries and entries
+requiring argument preparation retain the existing scope and context. Dynamic
+namespace replacement, deferred ownership and initializer retry remain live;
+native results still receive the synchronous-return check. Native HACK, VISION,
+DOGMOVE and MHITU also retain lazy inline struct/array global projections and
+their nested inline aggregates as stable JS identities. Pointer and scalar globals remain live reads, writes retain
+their byte-level semantics, replacing a global resolver invalidates a projection,
+and legacy/custom providers retain the uncached default. Inline caching requires
+the native owner's fixed C-global-address contract. MON and MONMOVE now
+mark their existing game-bound, frame-owning public wrappers `nativeDirect`.
+`js/c-runtime/memory.js` narrows integer Number inputs through native8/16/32-bit
+operations; noninteger/non-Number inputs retain original BigInt coercion and
+errors, and64-bit values retain their original representation. Standard JS
+intrinsics are assumed, as in the earlier numeric fast paths. No RNG algorithm,
+sites/order, game policy, save format, assets, C reference or recorder change is
+intended. Directed dispatch checks preserve lazy initialization/retry, live
+namespace replacement, caller context, synchronous-result checks and prepared
+arguments. All9,904 actual integer conversions match pinned7962216, including
+errors/coercion order. Stable root/nested identity, byte aliasing, assignment,
+growth and provider replacement checks pass. Native DOGMOVE2,469 comparisons
+and MHITU623 cases/7,179 comparisons across all78 configured RNG sites pass.
+Original-C main matches716 inputs/238 turns,717 frames, normalized world graph
+and both RNG histories. These finite/controlled checks do not cover every branch.
+Component receipt: `docs/runtime-environment/native-shared-dispatch-component-validation.json`.
+
+Final source-stable `.cache/native-shared-public-04` passes44/44 strict
+recordings:792,838 RNG entries,11,405 screens/cursors,1,483 animation frames and
+ordered cursor triples, all56 persistence segments and zero forbidden attempts.
+All777 scoring inputs remain unchanged during replay; frozen/session bytes are
+unchanged. Engine356.49322s →345.64437s is3.0432% lower; geometric mean session
+speedup1.01635x. Fit20.1750ms/turn →19.3847ms/turn; wall350.72638s. This is a
+single historical-reference comparison, not a robust paired causal estimate.
+The earlier intermediate `.cache/native-shared-public-02` passed44/44 at352.59885s
+before native inline-root/nested caching; it is not final-source evidence.
+Receipts: `native-shared-dispatch-public-validation.json` and
+`native-shared-dispatch-timing.json` under `docs/runtime-environment`.
+No new baseline replay or CPU profiling. Remaining combat adapters and generic
+runtime work persist; a runtime-free ordinary turn and20x remain unachieved.
+
 ## Native pet movement and monster attacks (worktree, 2026-11-13)
 
 Additional work aftera77389a. `scripts/generate-native-pet-combat.py` binds

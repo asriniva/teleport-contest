@@ -11,7 +11,7 @@ export function enableVision(environment,layouts){
  const rows=[...abi.privateStorage,...['circle_data','circle_start'].map(name=>({name,d:{a:[source[name].length],e:{t:'i16'}}}))];
  const storage=rows.map(row=>environment.allocateGlobal('vision.'+row.name,width(row.d))),names=Object.keys(abi.schemas);
  function field(kind,p,i){const schema=abi.schemas[names[kind]],f=schema?.fields[i];if(!f)throw new Error('Unknown VISION field '+kind+':'+i);return{schema,f,at:ctypes.locate(schema.ctype,environment.address(p),f.name).at};}
- Object.assign(local,{moduleKey:environment,global:i=>{const row=abi.globals[i];if(!row)throw new Error('Unknown VISION global '+i);return environment.requireGlobal(row.name);},storage:i=>{if(storage[i]===undefined)throw new Error('Unknown VISION storage '+i);return storage[i];},
+ Object.assign(local,{moduleKey:environment,nativeGlobalBindings:true,global:i=>{const row=abi.globals[i];if(!row)throw new Error('Unknown VISION global '+i);return environment.requireGlobal(row.name);},storage:i=>{if(storage[i]===undefined)throw new Error('Unknown VISION storage '+i);return storage[i];},
   read:(k,p,i)=>{const {schema,f,at}=field(k,p,i);return f.d.a||f.d.s?at:ctypes.getField(schema.ctype,environment.address(p),f.name,f.ctype);},
   write:(k,p,i,value)=>{const {schema,f,at}=field(k,p,i);return f.d.a||f.d.s?memory.memmove(at,environment.address(value),width(f.d)):ctypes.setField(schema.ctype,environment.address(p),f.name,f.ctype,value);},
   address:(k,p,i)=>field(k,p,i).at,

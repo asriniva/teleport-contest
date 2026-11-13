@@ -1,6 +1,6 @@
 // Measured native fields shared by game-bound descriptor-style engine kernels.
 // Arrays retain addressable transport; scalar/pointer state has one JS owner.
-export function createNativeDescriptorViews({owner,schemas,records,memory,addr,raw,read,write,decode,decorate,decodedFunctions=false}) {
+export function createNativeDescriptorViews({owner,schemas,records,memory,addr,raw,read,write,decode,decorate,decodedFunctions=false,stableInline=false}) {
  const views=new Map(),scalar={i8:'Int8',u8:'Uint8',i16:'Int16',u16:'Uint16',i32:'Int32',u32:'Uint32',i64:'BigInt64',u64:'BigUint64'};
  const canonical=type=>owner.sharedTypes.has('struct '+type)?'struct '+type:type;
  const definitions=new Map(Object.entries(schemas).map(([name,row])=>{
@@ -21,7 +21,7 @@ export function createNativeDescriptorViews({owner,schemas,records,memory,addr,r
   for(const f of row.fields){
    if(Object.hasOwn(out,f.name))continue;
    const field=definitions.get(name).fields[f.name],p=at+field.offset;
-   if(f.d.s||f.d.a){Object.defineProperty(out,f.name,{enumerable:true,get:()=>read(f.d,p),set:v=>write(f.d,p,v)});continue;}
+   if(f.d.s||f.d.a){let ready=false,projection;Object.defineProperty(out,f.name,{enumerable:true,get(){if(!stableInline)return read(f.d,p);if(!ready){const value=read(f.d,p);projection=value;ready=true;}return projection;},set:v=>write(f.d,p,v)});continue;}
    let get,set,normalize,pointerDecode;
    if(f.bit){
     if(field.bits===undefined||field.shift+field.bits>8)throw Error('Review native descriptor packed field '+name+'.'+f.name);

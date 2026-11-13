@@ -1,0 +1,141 @@
+{
+  "baseCommit": "7962216",
+  "scope": "Direct native linker calls, stable native inline state roots and aggregates, shared integer transport",
+  "dispatch": {
+    "passed": true,
+    "directServiceResolveAndCall": true,
+    "lazyInitialization": true,
+    "dynamicReplacement": true,
+    "legacyBoundaries": true,
+    "preparedArguments": true,
+    "synchronousResults": true,
+    "exceptions": true,
+    "retry": true,
+    "deferredOwnership": true
+  },
+  "integerTransport": {
+    "passed": true,
+    "checks": 9904,
+    "baseCommit": "7962216",
+    "widths": [
+      8,
+      16,
+      32,
+      64
+    ],
+    "hugeNumbers": true,
+    "errorsAndCoercionOrder": true,
+    "scope": "Actual transport against the pinned prior transport; standard JS intrinsics. Synthetic correctness only; no baseline timing or profiling."
+  },
+  "inlineState": {
+    "passed": true,
+    "lazyStableRoots": true,
+    "livePointersAndScalars": true,
+    "providerReplacement": true,
+    "structAssignment": true,
+    "heapGrowth": true,
+    "retry": true,
+    "legacyProvidersUnchanged": true,
+    "nestedInlineRecordsAndArrays": true
+  },
+  "actualGameplay": {
+    "passed": true,
+    "monsters": 11,
+    "nativeFunctions": 530,
+    "nativeFields": 21389,
+    "nativeStorage": "typed-arrays",
+    "cachedReads": 0,
+    "legacyBoundaries": 54626,
+    "moves": "85"
+  },
+  "originalCWorldComparison": {
+    "profile": "Strict original full-C main against pure JS finite ordinary movement; source death fixture input prefix",
+    "checks": 3,
+    "cases": [
+      {
+        "keys": 716,
+        "moves": "238",
+        "frames": 717,
+        "worldRecords": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 37,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        }
+      }
+    ],
+    "completeGameAccepted": false,
+    "sourceSha256": {
+      "scripts/test-standalone-monster-movement-program.mjs": "56b8be40dfff104fb388f634daceee36fad1400d7003fef953569588ed181906",
+      "scripts/restoration-world-graph.mjs": "a64d28a6a5974a89672ecedd637ebe89b706afb81b87267d8cb18684459907db",
+      "scripts/run-standalone-program.mjs": "29d76709123ab2b78c6e5dc45452b722b58cffc89b1afe1d5e4c2a384f00a479",
+      "scripts/full-original-c-run.mjs": "3da8b7a3dd0b2c1f60eb6a986bcb70c0bb79d120e50a007c1558569301978a9a",
+      "js/nethack/monster-movement.js": "da26ad77eeb123321502049bb4e7857312bb0a5c0a2c45c80868b5721c81cef2",
+      "js/nethack/monster-lifecycle.js": "619e230d8da987e63b0094790d2dc933655d0d23b90971efcc78c8617a5c39f9",
+      "js/nethack/bindings/monmove.js": "4ee2c2084aa357384454a16cd6fbd94dd6069387bf40934feb40f4b0732d4aeb",
+      "js/ported/monmove.js": "c15e91a573c5a8a8eda8c4d7cda18ef6966645f50ad515382a8dc027c717dc39",
+      "js/nethack/bindings/mon.js": "38616849c82cc2d759e54e01cb21656d180e247a0558b8af97b99b0a8b988674",
+      "js/ported/mon.js": "b76ebfece2f87288bd21915219cb8db7d00652399901b58f8463958a71ca3fe0"
+    },
+    "limitation": "Only these finite recordings and normalized world graphs are accepted; later death, victory, other seeds and unreached movement branches remain separate requirements."
+  },
+  "regressions": {
+    "visibility": "passed",
+    "addressDispatch": "passed",
+    "runtimeContracts": "passed"
+  },
+  "controlledCComparisons": {
+    "dogmove": {
+      "passed": true,
+      "comparisons": 2469,
+      "functions": 20
+    },
+    "mhitu": {
+      "passed": true,
+      "cases": 623,
+      "comparisons": 7179,
+      "rngSites": 78
+    }
+  },
+  "rawProofSha256": {
+    ".cache/native-shared-dispatch-01.log": "c0b11dd49c3784670004d8d00af0e0a62276ed27026716f640b8e18a78d8d6f1",
+    ".cache/native-shared-integers-02.log": "748716f107db0ff2d06fd0e9fc1b35c2fbb65f40ef35c6a498ec3e77e98e0e46",
+    ".cache/native-shared-globals-04.log": "443fb111c1a6c1d389f23ae0e5aef1c165b04b62de488317c33f9559b56ffc27",
+    ".cache/native-shared-connected-04.log": "9a1daaefd001a2b4f6e1e0057e4a66cd8f61cd769f0685cba3582a59181030be",
+    ".cache/native-shared-vision-04.log": "0624974090cb55db0e33887933e77d82c04a7f98de6c6ea5aeb416c0078af5d4",
+    ".cache/native-shared-address-03.log": "b95ddf395e94942180729126fc15d95c42a82175d8218402ea0590468072d0fc",
+    ".cache/native-shared-contracts-01.log": "07ee503dea72061c94bf7121c2a8c00362b57e4afd8b17fd7a9b9ffb10910d42",
+    ".cache/native-shared-main-716-04.log": "48355c6cbff435538ad3f2203e31f929739217abcfe2cc37db6f2388a304ffe6",
+    ".cache/native-shared-dogmove-04.log": "0f0992307b60011db110e09054d44d2eb44fa68695ce545bcee383986c3115c4",
+    ".cache/native-shared-mhitu-04.log": "15d194cbd47773ce44f8f5c6102c67d4323913a7af2a8c4e4dc51dc6b7d28661"
+  },
+  "sourceSha256": {
+    "js/c-runtime/adapter-factories.js": "d2d6272dc04e3a2402cb1ab25953bb0845ed1e4d73925d2d767ceec5c930b442",
+    "js/c-runtime/linker.js": "26f18024bae454592fb9f1c1fbd2abb6d382d7a1de93f96622ebc8b145b1a975",
+    "js/c-runtime/memory.js": "3ed10ec29c755be0af0dd0180b6d5188d73ff125509ea87af107065509cfed0a",
+    "js/nethack/bindings/dogmove.js": "c6c38a4c38d02d07dc0bf9ed1924c02d14b613fd130c0c9d28e67b5d3c554db8",
+    "js/nethack/bindings/hack.js": "b2381944743407a868795db7031bf1bec53baeda3211d094323c929c0e9a6682",
+    "js/nethack/bindings/mhitu.js": "c185db026b14f54bc4e342d25ff8410180d2124b5a0473f1557e78885b7b9d69",
+    "js/nethack/bindings/vision.js": "db290be3f066a82dc4ac5c5c57026dafa45b3d788549cdb7937f0b271466e460",
+    "js/nethack/monster-lifecycle.js": "619e230d8da987e63b0094790d2dc933655d0d23b90971efcc78c8617a5c39f9",
+    "js/nethack/monster-movement.js": "da26ad77eeb123321502049bb4e7857312bb0a5c0a2c45c80868b5721c81cef2",
+    "js/nethack/movement.js": "5ca0fd8d164f3839ad70048e519d0e9ff9bba1902b600503143ce2d903439c13",
+    "js/nethack/native/descriptor-state.js": "95c5deb8874f4d30a7b73f78fd62041e0b5a3bc7f8d55e1aea397056249c9580",
+    "js/nethack/vision.js": "9d78c7d860d0257206217ed3b0e6ce52f39c7ecb1ba2443aea83a61b22c5e2e7",
+    "scripts/test-native-connected-monsters.mjs": "f7aaf0232a25afe3ae364ee9a6d804d5203a5a57be1f1fb28906fee659d5400e",
+    "scripts/test-native-linker-dispatch.mjs": "685e8472961abd897ad880b702291ab3f62c12edfe403e3cfbc8842e84349660",
+    "scripts/test-native-integer-transport.mjs": "bb1aa41b0046c0ad2d4c6910079bc0daf291e7a200dfec2ba1f6797e712924b7",
+    "scripts/test-native-inline-globals.mjs": "1644023a2b01c777e7d4101fd10344318a00d545b582b67e77428a9a201bf7f8"
+  },
+  "limits": [
+    "Finite original-C comparison and isolated controlled C matrices do not establish all seeds or branches.",
+    "Inline caching is enabled only for the native fixed-address game global providers; custom/default providers remain uncached.",
+    "Integer fast paths assume standard JavaScript intrinsics; noninteger and non-Number inputs retain the original BigInt conversion.",
+    "No new baseline replay or CPU profiling. A runtime-free ordinary turn and the required 20x remain unachieved."
+  ]
+}

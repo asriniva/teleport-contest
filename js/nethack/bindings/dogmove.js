@@ -16,7 +16,7 @@ export function createDogmoveEnvironment(services,layout,namespace) {
 
 
     function legacyViews(){const view=CAdapter.createDescriptorViewFactory({services,schemas,address:addr,raw,cache,names,decode,decorate:(kind,result)=>applyRecordAliases(kind,result,'dogmove')});return view;}
-    const view=native?createNativeDescriptorViews({owner:native,schemas,records:services.nativeRecordLayouts,memory,addr,raw,read,write,decode,decodedFunctions:true,decorate:(kind,result)=>applyRecordAliases(kind,result,'dogmove',true)}):legacyViews();
+    const view=native?createNativeDescriptorViews({owner:native,schemas,stableInline:Boolean(native?.nativeArena),records:services.nativeRecordLayouts,memory,addr,raw,read,write,decode,decodedFunctions:true,decorate:(kind,result)=>applyRecordAliases(kind,result,'dogmove',true)}):legacyViews();
     const env=Object.assign(Object.create(services),layout,{sizes:Object.fromEntries(names.map(n=>[n,layout[n+'Size']])),view,
         fieldPointer:(o,f)=>({get value(){return o[f];},set value(v){o[f]=v;}}),localPointer:(get,set)=>({get value(){return get();},set value(v){set(v);}}),
         pointerCell:(name,value)=>({get value(){return view(name,memory().getBigUint64(addr(value),true));},set value(v){memory().setBigUint64(addr(value),raw(v),true);}}),
@@ -25,7 +25,7 @@ export function createDogmoveEnvironment(services,layout,namespace) {
         loadChar:v=>memory().getInt8(addr(v)),storeChar:(v,b)=>memory().setInt8(addr(v),b),
     });
     for(const [name,sch]of Object.entries(schemas))for(const f of sch.fields)if(!f.bit&&width(f.d)!==layout['width_'+name+'_'+f.name])throw Error('Review changed DOGMOVE field width: '+name+'.'+f.name);
-    CAdapter.installDescriptorGlobals(globals,env,services,read,write,addr);
+    CAdapter.installDescriptorGlobals(globals,env,services,read,write,addr,Boolean(native?.nativeArena));
     // All three original private data objects are scoped to this Module.
     env.dummy=view('obj',services.global(globals.length));
     env.nofetch=addr(services.global(globals.length+1));

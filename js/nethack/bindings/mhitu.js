@@ -23,7 +23,7 @@ export function createMhituEnvironment(services,layout) {
 
 
     function legacyViews(){const view=CAdapter.createDescriptorViewFactory({services,schemas,address:addr,raw,cache,names,decode,decorate:(kind,result)=>applyRecordAliases(kind,result,'mhitu')});return view;}
-    const view=native?createNativeDescriptorViews({owner:native,schemas,records:services.nativeRecordLayouts,memory,addr,raw,read,write,decode,decodedFunctions:false,decorate:(kind,result)=>applyRecordAliases(kind,result,'mhitu',true)}):legacyViews();
+    const view=native?createNativeDescriptorViews({owner:native,schemas,stableInline:Boolean(native?.nativeArena),records:services.nativeRecordLayouts,memory,addr,raw,read,write,decode,decodedFunctions:false,decorate:(kind,result)=>applyRecordAliases(kind,result,'mhitu',true)}):legacyViews();
     const env=Object.assign(Object.create(services),layout,{view,
         callLocal:(fn,...args)=>{return CAdapter.callWithStack(services,fn,...args);},
         addressOf:(o,f)=>addr(services.address(names.indexOf(o.kind),o.address,schemas[o.kind].fields.findIndex(x=>x.name===f))),
@@ -36,7 +36,7 @@ export function createMhituEnvironment(services,layout) {
     for(const [name,value]of Object.entries(layout))if(name.startsWith('constwidth_')){const k=name.slice(11);env[k]=Number(value)===8?BigInt(layout[k]):Number(BigInt.asIntN(32,BigInt(layout[k])));}
     for(const [name,sch]of Object.entries(schemas))for(const f of sch.fields)if(!f.bit&&width(f.d)!==Number(layout['width_'+name+'_'+f.name]))throw Error('Review changed MHITU field width: '+name+'.'+f.name);
     Object.defineProperty(env,'mon_currwep',{get:()=>view('obj',state.mon_currwep),set:v=>{state.mon_currwep=addr(v);}});
-    CAdapter.installDescriptorGlobals(globals,env,services,read,write,addr);
+    CAdapter.installDescriptorGlobals(globals,env,services,read,write,addr,Boolean(native?.nativeArena));
     env.propertyReference=name=>{const match=/^env\.u\.uprops\[env\.(\w+)\]\.(\w+)$/.exec(propertyExpressions[name]);if(!match)throw Error('MHITU non-addressable property '+name);return env.addressOf(env.u.uprops[env[match[1]]],match[2]);};
     for(const kind of ['rn2','rnd','rnl'])env[kind]=(bound,site)=>{services.rngCaller(site);return services[kind+'Value'](bound());};
     env.rn1=(bound,offset,site)=>{services.rngCaller(site);return env.int(services.rn2Value(bound())+offset());};

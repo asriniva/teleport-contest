@@ -17,7 +17,11 @@ export function readPointerNumber(view,at){return Number(view().getBigUint64(at,
 
 export function createScalarEnvironment(services,layout,ptr){return Object.assign(Object.create(services),layout,{ptr,sizes:Object.fromEntries(Object.entries(layout).filter(([k])=>k.startsWith('size:')).map(([k,v])=>[k.slice(5),v]))});}
 
-export function installDescriptorGlobals(globals,env,services,read,write,addr){globals.forEach((g,i)=>Object.defineProperty(env,g.name,{get:()=>read(g.d,addr(services.global(i))),set:v=>write(g.d,addr(services.global(i)),v)}));}
+export function installDescriptorGlobals(globals,env,services,read,write,addr,stableInline=false){globals.forEach((g,i)=>{
+ let ready=false,provider,projection;
+ const get=stableInline&&(g.d.s||g.d.a)?()=>{const current=services.global;if(!ready||current!==provider){const value=read(g.d,addr(current.call(services,i)));projection=value;provider=current;ready=true;}return projection;}:()=>read(g.d,addr(services.global(i)));
+ Object.defineProperty(env,g.name,{get,set:v=>write(g.d,addr(services.global(i)),v)});
+});}
 
 export function installAddressGlobals(globals,env,services,ptr){globals.forEach((g,i)=>Object.defineProperty(env,g.name,{get:()=>ptr(services.global(i))}));}
 

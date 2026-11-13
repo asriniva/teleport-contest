@@ -52,7 +52,7 @@ export function createVisionEnvironment(services,layout){
         let lo=0,hi=regions.length;while(lo<hi){const mid=(lo+hi)>>>1;if(regions[mid][0]<=at)lo=mid+1;else hi=mid;}
         const row=regions[lo-1];if(row&&at>=row[0]&&at+bytes<=row[1]){lastRegion=row;return true;}return false;
     }
-    const view=createNativeDescriptorViews({owner:nativeState,schemas,records:{...measuredRecords.records,...hackAbi.records},memory,addr,raw,read,write,decode,decorate:(kind,result)=>applyRecordAliases(kind,result,'vision',true)});
+    const view=createNativeDescriptorViews({owner:nativeState,schemas,stableInline:Boolean(nativeState.nativeArena&&services.nativeGlobalBindings===true),records:{...measuredRecords.records,...hackAbi.records},memory,addr,raw,read,write,decode,decorate:(kind,result)=>applyRecordAliases(kind,result,'vision',true)});
     const env=Object.assign(Object.create(services),layout,{sizes:Object.fromEntries(names.map(n=>[n,layout[n+'Size']])),view,nativeState,
         boolean:v=>Number(v)<<24>>24,samePointer:(a,b)=>addr(a)===addr(b),reference:(get,set)=>({get value(){return get();},set value(v){set(v);}}),
         element:(a,i)=>({address:addr(a)+i*width(a.descriptor.e),descriptor:a.descriptor.e,get value(){return a[i];},set value(v){a[i]=v;}}),
@@ -63,7 +63,7 @@ export function createVisionEnvironment(services,layout){
 
     // Arrays carry their actual descriptor, including primitive multidimensional strides.
     env.arrayAddress=(o,...ix)=>{let d=o.descriptor,at=o.address;for(const i of ix){const child=d.a.length===1?d.e:{a:d.a.slice(1),e:d.e};at+=i*width(child);d=child;}return at;};
-    CAdapter.installDescriptorGlobals(globals,env,services,read,write,addr);
+    CAdapter.installDescriptorGlobals(globals,env,services,read,write,addr,Boolean(nativeState.nativeArena&&services.nativeGlobalBindings===true));
 
 
     privateStorage.forEach((g,i)=>Object.defineProperty(env,g.name,{get:()=>read(g.d,addr(services.storage(i))),set:v=>write(g.d,addr(services.storage(i)),v)}));
