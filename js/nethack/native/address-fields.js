@@ -14,7 +14,7 @@ export function createNativeAddressFields(env,services,schema,decode,convert=env
   const native=connected?.accessor(row,field),pointer=field.canonical.includes('*');
   const read=plan&&!field.bit&&nativeScalars.has(field.canonical)?readRaw:(at=>decode(field.canonical,readRaw(at)));
   readers[id]=owner?.nativeArena&&plan?.nativeRead?(nativeScalars.has(field.canonical)&&!field.bit?at=>plan.nativeRead(convert(at?.address??at)):at=>decode(field.canonical,plan.nativeRead(convert(at?.address??at)))):at=>{at=convert(at?.address??at);const record=native?.(at);if(record){const value=record[field.name];return decode(field.canonical,value?.address??value);}if(owner?.depth)owner.flush();return read(at);};
-  writers[id]=(at,value)=>{
+  writers[id]=owner?.nativeArena&&plan?.nativeWrite?((at,value)=>{at=convert(at?.address??at);plan.nativeWrite(at,value);return value;}):(at,value)=>{
    at=convert(at?.address??at);const record=native?.(at);let encoded;
    if(record&&(nativeScalars.has(field.canonical)||pointer||field.canonical.startsWith('enum '))){
     if(typeof value==='number'&&Number.isInteger(value)){
@@ -66,12 +66,14 @@ export function compileNativeFieldPlans(environment,schema,ctypes=environment.ct
    const address=base=>{if(field.bits!==undefined)throw Error('C bitfields have no address');return at(base)+field.offset;};
    const shared=owner.sharedTypes.has(row.ctype)||owner.sharedTypes.has('struct '+row.ctype);
    const nativeReader=(bytes,read)=>{if(!arena)return;let lastBase;return base=>{base=at(base);if(shared&&base>=16&&base!==lastBase){memory.bounds(base,definition.size);lastBase=base;}const p=base+field.offset;if(p<16)memory.bounds(p,bytes);return read(p);};};
+   const nativeWriter=(bytes,write)=>{if(!arena)return;let lastBase;return (base,value)=>{base=at(base);if(shared&&base>=16&&base!==lastBase){memory.bounds(base,definition.size);lastBase=base;}value=typeof value==='number'&&Number.isInteger(value)?value:BigInt.asUintN(64,BigInt(value));const p=base+field.offset;if(p<16)memory.bounds(p,bytes);write(p,value);};};
    if(field.bits!==undefined){
     const bytes=Math.ceil((field.shift+field.bits)/8),mask=2**field.bits-1;
     if(field.shift+field.bits>32){
      return {address,read:base=>ctypes.getField(row.ctype,base,declaration.name,declaration.canonical),write:(base,v)=>ctypes.setField(row.ctype,base,declaration.name,declaration.canonical,v)};
     }
     return {address,nativeRead:nativeReader(bytes,p=>{memory.bounds(p,bytes);let raw=0;for(let i=0;i<bytes;i++)raw+=arena.Uint8[p+i]*2**(i*8);return ((raw>>>field.shift)&mask)>>>0;}),
+     nativeWrite:nativeWriter(bytes,(p,v)=>{memory.bounds(p,bytes);const packed=mask<<field.shift,value=typeof v==='number'?v:Number(BigInt.asUintN(field.bits,v));let old=0;for(let i=0;i<bytes;i++)old+=arena.Uint8[p+i]*2**(i*8);const raw=((old&~packed)|((value&mask)<<field.shift))>>>0;for(let i=0;i<bytes;i++)arena.Uint8[p+i]=raw/2**(i*8)&255;}),
      read:base=>{const p=at(base)+field.offset;memory.bounds(p,bytes);return ((readBytes(p,bytes)>>>field.shift)&mask)>>>0;},
      write:(base,v)=>{const p=at(base)+field.offset;memory.bounds(p,bytes);const packed=mask<<field.shift,old=readBytes(p,bytes),value=Number(BigInt.asUintN(field.bits,BigInt(v)));writeBytes(p,bytes,((old&~packed)|((value&mask)<<field.shift))>>>0);},
     };
@@ -81,7 +83,8 @@ export function compileNativeFieldPlans(environment,schema,ctypes=environment.ct
    if(type.startsWith('enum '))return {address,read:base=>ctypes.load(type,at(base)+field.offset),write:(base,v)=>ctypes.store(type,at(base)+field.offset,v)};
    const method=pointer?'BigUint64':scalarMethods[type],bytes=Number(method.match(/\d+/)[0])/8;
    const nativeRead=pointer?nativeReader(bytes,p=>arena.pointer(p)):bytes<=4&&!method.startsWith('Float')?nativeReader(bytes,p=>{const value=littleHost?arena[method][p/bytes]:undefined;if(value!==undefined)return value;memory.bounds(p,bytes);return memory.view['get'+method](p,true);}):undefined;
-   return {address,nativeRead,
+   const nativeWrite=pointer?nativeWriter(bytes,(p,v)=>arena.storePointer(p,v)):!method.startsWith('Float')?nativeWriter(bytes,(p,v)=>{if(bytes===8){if(typeof v!=='bigint')v=BigInt(v);}else if(typeof v==='bigint')v=Number(BigInt[method.startsWith('Uint')?'asUintN':'asIntN'](bytes*8,v));const index=p/bytes;if(littleHost&&Number.isInteger(index)&&index>=0&&index<arena[method].length)arena[method][index]=v;else{memory.bounds(p,bytes);memory.view['set'+method](p,v,true);}}):undefined;
+   return {address,nativeRead,nativeWrite,
     read:base=>{const p=at(base)+field.offset;memory.bounds(p,bytes);return memory.view['get'+method](p,true);},
     write:(base,v)=>{const p=at(base)+field.offset;memory.bounds(p,bytes);const value=method.startsWith('Big')?BigInt.asUintN(64,BigInt(v)):method.startsWith('Float')?Number(v):Number(BigInt[method.startsWith('Uint')?'asUintN':'asIntN'](bytes*8,BigInt(v)));memory.view['set'+method](p,value,true);},
    };

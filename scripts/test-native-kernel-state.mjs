@@ -19,6 +19,7 @@ const monster=owner.records.get('struct monst:'+game.address(game.ctypes.getFiel
 assert.ok(hero&&monster);
 const mapCell=[...owner.records.entries()].find(([key])=>key.startsWith('struct rm:'))[1];
 const schema={schema:{monst:{ctype:'struct monst',fields:[{name:'mhp',canonical:'int'},{name:'mx',canonical:'short'}]},you:{ctype:'struct you',fields:[{name:'ux',canonical:'short'},{name:'ustuck',canonical:'struct monst *'}]},gv:{ctype:'struct instance_globals_v',fields:[{name:'vision_full_recalc',canonical:'signed char'}]},rm:{ctype:'struct rm',fields:[{name:'lit',canonical:'unsigned int',bit:true}]}},globals:[]};
+schema.schema.wide={ctype:'struct monst',fields:[{name:'mstrategy',canonical:'unsigned long'}]};
 const plans=compileNativeFieldPlans(game,schema),services={nativeOwner:owner,nativeModuleName:'_unit',nativeFieldPlans:plans,heap:()=>memory.HEAPU8,read:(k,p,i)=>plans[k][i].read(p),write:(k,p,i,v)=>plans[k][i].write(p,v),address:(k,p,i)=>plans[k][i].address(p)};
 const {env,decode}=createScalarAdapter(services,{},schema,game.address,{profile:'cached-fields',errors:['scalar ','cell ','field '],fieldMetadata:createImmutableFieldMetadata(schema)});
 const hpAt=game.ctypes.fieldAddress('struct monst',monster.address,'mhp'),uxAt=game.ctypes.fieldAddress('struct you',hero.address,'ux');
@@ -27,6 +28,7 @@ env.foreignFailure=function(){assert.equal(owner.depth,0);memory.view.setInt32(h
 installDirectDisplayFields(env,()=>memory.view,game.address);
 const fields=createNativeAddressFields(env,services,schema,decode,game.address);
 const old={hp:monster.mhp,mx:monster.mx,ux:hero.ux,stuck:hero.ustuck,lit:mapCell.lit};
+const strategyBefore=monster.mstrategy;
 const nextHP=old.hp===17?16:17,nextUX=old.ux===1?2:1;
 owner.enter();
 try {
@@ -61,13 +63,16 @@ try {
  assert.equal(fields.writers[0](monster.address,'17'),'17');assert.equal(monster.mhp,17,'numeric string coercion occurs before a native setter');
  for(const invalid of [undefined,NaN,Infinity,1.5])assert.throws(()=>fields.writers[0](monster.address,invalid));
  assert.equal(monster.mhp,17,'failed coercions retain the prior native mutation');
+ const wideValue=0xa5abcdef12345678n;assert.equal(fields.writers[6](monster.address,wideValue),wideValue);assert.equal(monster.mstrategy,wideValue,'a direct 64-bit store refreshes the canonical cached value');
+ const strategyAt=game.ctypes.fieldAddress('struct monst',monster.address,'mstrategy');owner.nativeArena.Uint32[strategyAt/4]^=1;assert.equal(monster.mstrategy,wideValue^1n,'byte aliases invalidate the 64-bit value cache');fields.writers[6](monster.address,strategyBefore);
+ fields.writers[5](mapCell.address,7);assert.equal(mapCell.lit,1,'direct packed writes preserve the measured width');
  const stuckAt=game.ctypes.fieldAddress('struct you',hero.address,'ustuck');
  const opaque=0xa5abcdef12345678n;
  assert.equal(fields.writers[3](hero.address,opaque),opaque);assert.equal(memory.view.getBigUint64(stuckAt,true),opaque,'opaque pointer bits use the exact byte boundary');
  hero.ustuck=old.stuck;
  binding.services._native_kernel_probe=()=>11;assert.equal(binding.services._native_kernel_probe(),11,'local dependency replacement remains writable');
  delete game.services._native_kernel_probe;
-} finally {monster.mhp=old.hp;monster.mx=old.mx;hero.ux=old.ux;hero.ustuck=old.stuck;mapCell.lit=old.lit;owner.leave();}
+} finally {monster.mhp=old.hp;monster.mx=old.mx;monster.mstrategy=strategyBefore;hero.ux=old.ux;hero.ustuck=old.stuck;mapCell.lit=old.lit;owner.leave();}
 assert.equal(owner.depth,0);assert.equal(owner.dirty.size,0);
 // Native reads consume typed state directly, even before a projection exists.
 const freshMon=memory.calloc(1,game.ctypes.size('struct monst')+1)+1,freshHero=memory.calloc(1,game.ctypes.size('struct you'));
@@ -77,7 +82,10 @@ const recordsBefore=owner.records.size;assert.ok(!Object.hasOwn(owner.records,'g
 owner.records.get=()=>{throw Error('native field read rebuilt a record');};
 try{
  assert.equal(fields.readers[0](freshMon),31);assert.equal(fields.readers[1](freshMon),5);assert.equal(fields.readers[2](freshHero),7);assert.equal(fields.readers[3](freshHero),freshMon);
- memory.grow(memory.buffer.byteLength+1);assert.equal(fields.readers[0](freshMon),31);assert.equal(fields.readers[3](freshHero),freshMon);
- assert.equal(owner.records.size,recordsBefore,'typed reads retain handles without materializing record wrappers');
+ assert.equal(fields.writers[0](freshMon,37),37);assert.equal(fields.readers[0](freshMon),37);
+ assert.equal(fields.writers[1](freshMon,65537),65537);assert.equal(fields.readers[1](freshMon),1);
+ assert.equal(fields.writers[3](freshHero,0),0);assert.equal(fields.readers[3](freshHero),0);fields.writers[3](freshHero,freshMon);
+ memory.grow(memory.buffer.byteLength+1);assert.equal(fields.readers[0](freshMon),37);assert.equal(fields.readers[3](freshHero),freshMon);fields.writers[0](freshMon,41);assert.equal(fields.readers[0](freshMon),41);
+ assert.equal(owner.records.size,recordsBefore,'typed reads and writes retain handles without materializing record wrappers');
 }finally{delete owner.records.get;}
-console.log(JSON.stringify({passed:true,gameKernels,canonicalFields:true,displayNativeReads:true,byteAliases:true,foreignReentry:true,exceptions:true,serviceReplacement:true,legacyMutableMetadata:true,directTypedReads:true,unalignedReads:true,growth:true,noReadProjection:true}));
+console.log(JSON.stringify({passed:true,gameKernels,canonicalFields:true,displayNativeReads:true,byteAliases:true,foreignReentry:true,exceptions:true,serviceReplacement:true,legacyMutableMetadata:true,directTypedReads:true,unalignedReads:true,growth:true,noReadProjection:true,directTypedWrites:true,noWriteProjection:true,wideValueCacheCoherence:true,packedWrites:true}));

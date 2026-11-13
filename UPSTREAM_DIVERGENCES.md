@@ -1,3 +1,66 @@
+## Direct native field mutations, movement and RNG execution (worktree, 2026-11-13)
+
+Additional work after 4e1b4d7. `native/address-fields.js` compiles typed-state
+writes for ordinary integers including 64-bit fields, pointers and packed flags
+across the connected address kernels. The generated field writers use these
+stores without reconstructing or projecting a record. Assignment returns the
+original RHS. Non-integer/non-Number values retain the prior BigInt coercion;
+integer Number stores narrow through native typed operations. Shared record
+range checks, unaligned fallback, opaque pointer precision, packed neighbors and
+heap growth remain explicit. Existing records and 64-bit value caches observe
+the same physical bytes. Aggregate copies, enums, floats and wide packed fields
+retain their previous paths. No RNG sites/order, game policy, save format, assets,
+C reference or frozen recordings change. Directed byte/coercion/order, gameplay, recording and timing evidence follows. HACK's frame-owning published movement wrappers
+also select direct linker dispatch, with explicit first-call module startup.
+Their native policy and frame/temporary cleanup remain; generic outer C scopes
+and environment switches are removed. Caller-context and native publication
+checks are added. The initial writer checks caught BigInt-to-small-typed-array
+stores before narrowing; the writer now explicitly narrows BigInt values to the
+measured width before those Number stores.
+
+The existing RND policy is also bound to one per-game context by
+`scripts/generate-native-rng.py`, without changing its algorithm, local calls,
+seed/init decisions, logger annotations or ISAAC state. Native entry wrappers
+own outer temporary cleanup and retain the shuffle pointer adapter; nested
+calls consume the already active game state. Function-pointer identities and
+first-call module startup remain. Production `enableRnd` selects these entries;
+`NATIVE_RNG_FIXTURE=1` selects the same bindings in the independent C RNG matrix.
+Configured luck, level, strong-seed and seed callbacks retain explicit foreign
+state/C-context boundaries; core execution retains its caller context. Source,
+RNG-state/log-byte, callback/cleanup, lifecycle and gameplay evidence is below.
+
+Actual field writers match pinned 4e1b4d7 in 77,868 comparisons across 2,163 fields
+in 13 address modules, including coercion traces, failures, RHS identity and exact
+bytes. Field plans pass 42,569 checks, including 8,652 native writes and 10,085
+native reads across 2,603 fields. Live game checks prove direct writes avoid
+record lookup/materialization, support unaligned addresses and growth, preserve
+packed widths and update the canonical 64-bit value cache through byte aliases.
+Published movement caller-context and outer cleanup checks pass. Original-C main
+matches 716 inputs/238 turns, 717 frames, normalized world graph and both RNG
+histories. These finite comparisons do not cover every seed or branch.
+
+The RNG's 20 function bodies have identical policy AST and unchanged local calls.
+Native execution and the retained adapter each pass 962 independent C comparisons:
+full ISAAC state, operation results/draw effects, seeds/init, shuffle, exact core
+and display log bytes, growth and independent game isolation. The 16 lifecycle
+checks and directed caller-context, function-pointer, foreign-callback boundary,
+normal/exception cleanup checks pass. Source equality and the RNG matrix are
+separate from the whole-game recording proof. Component receipt:
+`docs/runtime-environment/native-field-writes-rng-component-validation.json`.
+
+Final source-stable `.cache/native-field-writes-rng-public-07` passes 44/44 strict
+recordings: 792,838 ordered RNG entries, 11,405 screens/cursors, 1,483 animation
+frames and ordered cursor triples, all 56 persistence segments and zero forbidden
+attempts. All 780 scoring inputs remain unchanged; frozen/session bytes are
+unchanged. Engine time 339.36452s → 336.83989s is 0.7439% lower; geometric mean
+session speedup 1.00569x. Fit 18.9384ms/turn → 18.8509ms/turn; wall 341.63661s.
+This small single historical-reference difference is not a robust paired causal
+estimate or a substantial speedup. Receipts: `native-field-writes-rng-public-validation.json`
+and `native-field-writes-rng-timing.json` under `docs/runtime-environment`.
+No new baseline replay or baseline CPU profiling. Remaining generic actor/hero
+adapters, execution, initialization and end-to-end display costs persist. A
+runtime-free ordinary turn and the required 20x remain unachieved.
+
 ## Shared native state accessors and direct field reads (worktree, 2026-11-13)
 
 Additional work after b80a6c3. Complete native records share per-type ordinary

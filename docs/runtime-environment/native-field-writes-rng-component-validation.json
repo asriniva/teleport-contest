@@ -1,0 +1,190 @@
+{
+  "baseCommit": "4e1b4d7",
+  "scope": "Direct native field mutations, published native movement and per-game native RNG execution",
+  "priorWriterDifferential": {
+    "passed": true,
+    "baseCommit": "4e1b4d7",
+    "ports": 13,
+    "fields": 2163,
+    "checks": 77868,
+    "actualPriorWriters": true,
+    "assignmentRhs": true,
+    "coercionOrder": true,
+    "exactBytes": true,
+    "scope": "Synthetic correctness against pinned prior writers; no baseline timing or CPU profiling."
+  },
+  "fieldPlans": {
+    "passed": true,
+    "ports": 13,
+    "fields": 2603,
+    "checks": 42569,
+    "nativeReads": 10085,
+    "nativeWrites": 8652,
+    "evaluationOrder": true
+  },
+  "liveKernelState": {
+    "passed": true,
+    "gameKernels": [
+      "detect",
+      "display",
+      "dungeon",
+      "invent",
+      "mklev",
+      "mkmaze",
+      "mkobj",
+      "muse",
+      "pickup",
+      "pray",
+      "shk",
+      "sp_lev"
+    ],
+    "canonicalFields": true,
+    "displayNativeReads": true,
+    "byteAliases": true,
+    "foreignReentry": true,
+    "exceptions": true,
+    "serviceReplacement": true,
+    "legacyMutableMetadata": true,
+    "directTypedReads": true,
+    "unalignedReads": true,
+    "growth": true,
+    "noReadProjection": true,
+    "directTypedWrites": true,
+    "noWriteProjection": true,
+    "wideValueCacheCoherence": true,
+    "packedWrites": true
+  },
+  "actualGameplay": {
+    "passed": true,
+    "monsters": 11,
+    "nativeFunctions": 558,
+    "nativeFields": 21290,
+    "nativeStorage": "typed-arrays",
+    "cachedReads": 0,
+    "legacyBoundaries": 52561,
+    "moves": "85"
+  },
+  "originalCWorldComparison": {
+    "profile": "Strict original full-C main against pure JS finite ordinary movement; source death fixture input prefix",
+    "checks": 3,
+    "cases": [
+      {
+        "keys": 716,
+        "moves": "238",
+        "frames": 717,
+        "worldRecords": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 37,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        }
+      }
+    ],
+    "completeGameAccepted": false,
+    "sourceSha256": {
+      "scripts/test-standalone-monster-movement-program.mjs": "56b8be40dfff104fb388f634daceee36fad1400d7003fef953569588ed181906",
+      "scripts/restoration-world-graph.mjs": "a64d28a6a5974a89672ecedd637ebe89b706afb81b87267d8cb18684459907db",
+      "scripts/run-standalone-program.mjs": "29d76709123ab2b78c6e5dc45452b722b58cffc89b1afe1d5e4c2a384f00a479",
+      "scripts/full-original-c-run.mjs": "3da8b7a3dd0b2c1f60eb6a986bcb70c0bb79d120e50a007c1558569301978a9a",
+      "js/nethack/monster-movement.js": "da26ad77eeb123321502049bb4e7857312bb0a5c0a2c45c80868b5721c81cef2",
+      "js/nethack/monster-lifecycle.js": "619e230d8da987e63b0094790d2dc933655d0d23b90971efcc78c8617a5c39f9",
+      "js/nethack/bindings/monmove.js": "4ee2c2084aa357384454a16cd6fbd94dd6069387bf40934feb40f4b0732d4aeb",
+      "js/ported/monmove.js": "c15e91a573c5a8a8eda8c4d7cda18ef6966645f50ad515382a8dc027c717dc39",
+      "js/nethack/bindings/mon.js": "e81fe61548076f0ea9dc7aaa9b5364cb8b14c41719f16bbf4d8a9314ef313be5",
+      "js/ported/mon.js": "b76ebfece2f87288bd21915219cb8db7d00652399901b58f8463958a71ca3fe0"
+    },
+    "limitation": "Only these finite recordings and normalized world graphs are accepted; later death, victory, other seeds and unreached movement branches remain separate requirements."
+  },
+  "linkerRegression": {
+    "passed": true,
+    "directServiceResolveAndCall": true,
+    "lazyInitialization": true,
+    "dynamicReplacement": true,
+    "legacyBoundaries": true,
+    "preparedArguments": true,
+    "synchronousResults": true,
+    "exceptions": true,
+    "retry": true,
+    "deferredOwnership": true
+  },
+  "rngSource": {
+    "passed": true,
+    "modules": 1,
+    "functions": 20,
+    "localCallConversions": 0,
+    "sourcePolicyAstEqual": true
+  },
+  "rngIndependentCMatrix": {
+    "nativeExecutionPassed": true,
+    "retainedAdapterPassed": true,
+    "comparisonsPerMode": 962,
+    "checks": [
+      "Full ISAAC state after operations",
+      "Random operations and internal draw order",
+      "Seeds, lifecycle and shuffle",
+      "Byte-exact core and display logs",
+      "Memory growth and independent game isolation"
+    ]
+  },
+  "rngLifecycle": {
+    "passed": true,
+    "checks": 16
+  },
+  "rngDispatch": {
+    "passed": true,
+    "nativeEntries": 16,
+    "callerContext": true,
+    "foreignCallbackContext": true,
+    "foreignCallbackBoundary": true,
+    "functionPointers": true,
+    "exceptionCleanup": true,
+    "temporaryCleanup": true
+  },
+  "integrationFindings": [
+    "Small typed stores explicitly narrow BigInt values to the measured width before Number assignment; the first directed test caught the missing conversion.",
+    "Native writes retain original RHS identity and exact coercion traces against actual pinned prior writers, not a synthetic mirror implementation.",
+    "The RNG dispatch fixture permits the original rng_state assignment during seeding; a getter-only observation trap was corrected.",
+    "Configured RNG callbacks retain foreign state and C-context boundaries. Core source executes with the caller context and own outer cleanup."
+  ],
+  "rawProofSha256": {
+    ".cache/native-field-writes-differential-02.log": "8f88632a720c49f898dc1b090066aac7fa539ba03da58fb4312e7375429fd56f",
+    ".cache/native-field-writes-plans-02.log": "9b06c48d94eb9ad64a0a3dcb96e9cf15ee5b4233fb598148a643761282efe135",
+    ".cache/native-field-writes-kernels-06.log": "757516d07bbfa8ea6127a92a7e013d2276c916ab6983ad53e4dc6d2c111d40fa",
+    ".cache/native-field-writes-connected-06.log": "f0e8a0edaa108d4018002b26df2e5e7337049a0e92a55fa36deabf1451c1aa4c",
+    ".cache/native-field-writes-main-716-05.log": "0cbc517a0fe97605a2e61371d61efca89521a0573842d714bff5818db4f5822e",
+    ".cache/native-field-writes-linker-03.log": "c0b11dd49c3784670004d8d00af0e0a62276ed27026716f640b8e18a78d8d6f1",
+    ".cache/native-field-writes-dispatch-03.log": "b95ddf395e94942180729126fc15d95c42a82175d8218402ea0590468072d0fc",
+    ".cache/native-rng-source-04.log": "301b11a71dbd9e718618cf67baec9504ba27bed2fb021eb1f3f1f686f24a32db",
+    ".cache/native-rng-matrix-05.log": "225d8381102d9771455192e1201b9669bc88c883f2556e4b384ee72cc5d74d23",
+    ".cache/native-rng-legacy-matrix-06.log": "225d8381102d9771455192e1201b9669bc88c883f2556e4b384ee72cc5d74d23",
+    ".cache/native-rng-lifecycle-04.log": "9c4c187b013f095853248e1a9947dffbdd9d46f2fa7341f4c912a6c0c7389b1f",
+    ".cache/native-rng-dispatch-07.log": "c18b525452d2a6e3d2528cb23acffc134e2984dcada5b995210e639f3e56c204"
+  },
+  "sourceSha256": {
+    "js/nethack/native/address-fields.js": "f9acde8aa78dd8f40185b95235ec8f079028b22b63fd5381ff5929a25174c31a",
+    "js/nethack/native/rng.js": "682a23425c51002dd80db61d4be2e5819a61cb2839e8e51d5ea9246a7b9c3797",
+    "js/nethack/native/rng-bindings.js": "2d6fe917dac3fee43c4f3c4aee1ed4e7a1f6761673ed5ca93d1902147d3a7a42",
+    "js/nethack/environment.js": "00ae2832f82d06aa8da5c98174f4a77e15733712c4afd9578dec469a70a7099b",
+    "js/nethack/movement.js": "7b76422920177c6eeadf56c52b054d945efa794617284238ac32c95ce95a28b4",
+    "scripts/generate-native-rng.py": "8b596c0fe68b37eab93bf57297c71ba39fa1f76756699357a9a50aa11110bb30",
+    "scripts/test-native-field-writes.mjs": "031bc9ed5d8db5eb143fd956c354738854bccd1042935904e3680aa702bcb4c4",
+    "scripts/test-native-address-plans.mjs": "4911575be90bf720236d210acf2fd0ce4f8f294258edd7a2df65010a9df248c3",
+    "scripts/test-native-kernel-state.mjs": "2a3fb830a31d5f73388b063c5c0cce49bf263106625f9a716443e13b21914a64",
+    "scripts/test-native-connected-monsters.mjs": "4eeebb07afa580fd7bc1bb7a33a16ec2c64bd6a1e266374725413754c3a03e77",
+    "scripts/test-native-rng-source.mjs": "27e41193ff81705e80b5c3e692c8b7606ccfb20707e7aff97f07370c7b710569",
+    "scripts/test-native-rng-dispatch.mjs": "06fbaa6a35781c2120c9377a0d42307de5a8201551b367151cee0cad7be7c247",
+    "scripts/pure-js-probes/rnd.mjs": "51cf334d1d385f6d28a4ddc7eeac91bbb1af7574cb007646df9f8ae9fa42b351"
+  },
+  "limits": [
+    "Native writer differential is synthetic correctness against pinned prior writers. The independent original-C finite world and RNG comparisons are separate.",
+    "Finite 716-input/238-turn main and RNG controlled matrix do not establish every game seed, branch or host; full strict recording evidence is separate.",
+    "Aggregate copies, enums, floats and packed fields wider than 32 bits retain their previous mutation paths.",
+    "Save format remains unchanged; public persistence coverage is API traffic and complete replay segments, not independent binary save-byte equality.",
+    "No new baseline replay or CPU profiling. Required 20x and a runtime-free ordinary turn remain unachieved."
+  ]
+}

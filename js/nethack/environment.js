@@ -1,3 +1,4 @@
+import {createNativeRngBindings} from './native/rng-bindings.js';
 import {createNativeRecordViews} from './native/record-views.js';
 import {createEnvironmentServices} from '../c-runtime/environment.js';
 import {address} from '../c-runtime/memory.js';
@@ -25,7 +26,6 @@ import {createMonstState,createMonstEnvironment} from './bindings/monst.js';
 import records from './records.json' with {type:'json'};
 import {createStdio} from '../c-runtime/stdio.js';
 import {createStandaloneLua} from './lua.js';
-import * as rnd from '../ported/rnd.js';
 import {createRndState,createRndEnvironment} from './bindings/rnd.js';
 import * as sys from '../ported/sys.js';
 import {enableAddressPort} from './address-ports.js';
@@ -234,7 +234,7 @@ export function createStandaloneEnvironment(options={}) {
             snprintf:(buffer,n,format,...args)=>{const value=base.libc.format(format,...args),bytes=Uint8Array.from(value.slice(0,Number(n)-1),c=>c.charCodeAt(0));buffer.set(bytes);buffer[bytes.length]=0;return value.length;},
         });
         const state=createRndState(local),env=createRndEnvironment(local,layout,state);
-        register('rnd',rnd,env,{prepareArgs:(fn,args)=>fn==='shuffle_int_array'?[env.intArray(args[0]),args[1]]:args});
+        register('rnd',createNativeRngBindings(environment,env),env);
         // These three APIs only inspect/update the RNG logger's JS state.
         // They neither step the generator nor inspect native actor/map bytes.
         for(const name of ['rng_log_enabled','rng_log_set_caller','rng_log_get_call_count'])if(Object.getOwnPropertyDescriptor(services[name],'nativeEntry')?.get)Object.defineProperty(services[name],'nativeStateIndependent',{value:true});

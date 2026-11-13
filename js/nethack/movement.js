@@ -38,7 +38,7 @@ export function enableMovement(environment,layouts){
  // Preserve it while installing the rest of the original once-per-module data.
  const prior=memory.readBytes(buffer,5),context=createHackEnvironment(local,L,hack);hack.initializeHackData(context);memory.HEAPU8.set(prior,buffer);
  const names=abi.functions.filter(name=>Object.hasOwn(publicFunctions.functions,name)&&!environment.hasFunction(name));
- const exports=Object.fromEntries(names.map(name=>{const call=(...args)=>callHack(local,L,name,...args);call.nativeState=nativeState;nativeState.functions.set(name,call);return [name,call];}));
+ const exports=Object.fromEntries(names.map(name=>{let started=false;const call=(...args)=>{if(!started){environment.startModule('movement');started=true;}return callHack(local,L,name,...args);};call.nativeState=nativeState;call.nativeDirect=true;nativeState.functions.set(name,call);return [name,call];}));
  environment.register('movement',exports);
  return {services:local,context,ctypes,pointer,call:(name,...args)=>callHack(local,L,name,...args),limitation:'Movement/room integration in progress; complete HACK policies and game lifecycle require original-C verification.'};
 }

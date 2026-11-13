@@ -6,7 +6,7 @@ import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {compileNativeFieldPlans,createNativeAddressFields} from '../js/nethack/native/address-fields.js';
 const metadata=JSON.parse(fs.readFileSync('js/nethack/address-ports.json')).ports;
 const env=createStandaloneEnvironment({initialBytes:1024,maximumBytes:128*1024*1024});
-let checks=0,fields=0,nativeReads=0;
+let checks=0,fields=0,nativeReads=0,nativeWrites=0;
 for(const[name,{schema}]of Object.entries(metadata)){
  const plans=compileNativeFieldPlans(env,schema);
  for(const[kind,[key,row]]of Object.entries(schema.schema).entries()){
@@ -27,6 +27,7 @@ for(const[name,{schema}]of Object.entries(metadata)){
      env.memory.HEAPU8.fill(165,p,p+bytes);env.memory.HEAPU8.fill(165,q,q+bytes);
      plan.write(p,value);env.ctypes.setField(row.ctype,q,f.name,f.canonical,value);
      assert.deepEqual(env.memory.readBytes(p,bytes),env.memory.readBytes(q,bytes),name+':'+key+'.'+f.name+' write');checks++;
+     if(plan.nativeWrite){env.memory.HEAPU8.fill(165,p,p+bytes);plan.nativeWrite(p,value);assert.deepEqual(env.memory.readBytes(p,bytes),env.memory.readBytes(q,bytes),name+':'+key+'.'+f.name+' native write');nativeWrites++;checks++;}
     }
    }
   }
@@ -38,4 +39,4 @@ const f=createNativeAddressFields({ptr:Number},services,{schema:{x:{fields:[{can
 assert.equal(f.compound(f.readers[0],f.writers[0],12,'+=',()=>{trace.push('rhs');return 3;}),7);
 assert.deepEqual(trace,['read','rhs','write:7']);
 trace.length=0;assert.equal(f.update(f.readers[0],f.writers[0],12,'++',false),4);assert.deepEqual(trace,['read','write:5']);
-console.log(JSON.stringify({passed:true,ports:Object.keys(metadata).length,fields,checks,nativeReads,evaluationOrder:true}));
+console.log(JSON.stringify({passed:true,ports:Object.keys(metadata).length,fields,checks,nativeReads,nativeWrites,evaluationOrder:true}));

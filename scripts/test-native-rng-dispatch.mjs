@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
+import {nativeStateFor} from '../js/nethack/native/state-bridge.js';
+import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
+const L=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json')),game=createStandaloneEnvironment(),owner=nativeStateFor(game);
+game.enableStdio();game.enableDecl(L.decl);
+let rng,failSeed=false,callbackChecks=0;
+const checkCallback=()=>{assert.ok(C.rndState===rng.state,'foreign callbacks retain their RNG C context');assert.equal(owner.depth,0,'foreign callbacks use an explicit state boundary');callbackChecks++;};
+rng=game.enableRnd(L.rnd,{initialize:false,luck(){checkCallback();return 1;},level(){checkCallback();return 7;},strongSeed(){checkCallback();return true;},randomSeed(){checkCallback();game.transport.stackAlloc(24);if(failSeed)throw Error('rng seed callback failure');return 123n;}});
+for(const name of ['rn2','rn2_on_display_rng','rnd','rnl','d','rne','rnz','init_isaac64','shuffle_int_array','rng_log_set_caller'])assert.ok(game.services[name].nativeEntry===owner.functions.get(name),name+' uses native dispatch');
+const marker={nativeRngCaller:true,rectState:{callerRect:true},trackState:{callerTrack:true}};let state=rng.state.rnglist[0].rng_state;
+let coreChecks=0;
+Object.defineProperty(rng.state.rnglist[0],'rng_state',{configurable:true,get(){assert.equal(C,marker,'native RNG policy retains the caller C context');coreChecks++;return state;},set(value){assert.equal(C,marker);state=value;}});
+withCEnvironment(marker,()=>{
+ game.services.init_isaac64(123n,Number(rng.core));const first=game.services.rn2(17);
+ game.services.init_isaac64(123n,Number(rng.core));assert.equal(game.functions.indirect(rng.core,'ii',17),first,'function-pointer identity invokes the same native generator');
+ game.services.rnl(5);game.services.rne(3);
+ const before=game.memory.live.size;game.services.init_random(Number(rng.core));assert.equal(game.memory.live.size,before,'native initialization frees callback temporaries');
+ failSeed=true;assert.throws(()=>game.services.init_random(Number(rng.core)),/rng seed callback failure/);assert.equal(game.memory.live.size,before);failSeed=false;
+ assert.equal(C,marker);assert.equal(R,marker.rectState);assert.equal(T,marker.trackState);
+});
+assert.ok(coreChecks>0);assert.ok(callbackChecks>0);assert.equal(owner.depth,0);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);
+console.log(JSON.stringify({passed:true,nativeEntries:owner.functions.size,callerContext:true,foreignCallbackContext:true,foreignCallbackBoundary:true,functionPointers:true,exceptionCleanup:true,temporaryCleanup:true}));

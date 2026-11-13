@@ -69,6 +69,11 @@ try{withCEnvironment(dispatchMarker,()=>{
  assert.equal(environment.call('game-startup','timet_delta',10n,4n),6n);
 });}finally{turn.nativeTurn=savedNativeTurn;}
 assert.equal(environment.services.m_move.nativeEntry,owner.functions.get('m_move'));
+for(const name of ['domove','lookaround','test_move','money_cnt'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' is published as direct native movement');
+const movementMarker={nativeMovementCaller:true},priorStackSave=environment.services.stackSave;let movementStackChecks=0;
+try{environment.services.stackSave=()=>{assert.equal(C,movementMarker,'published native movement retains the caller environment');movementStackChecks++;return priorStackSave();};withCEnvironment(movementMarker,()=>assert.equal(environment.services.money_cnt(0),0n));assert.ok(movementStackChecks>0);}
+finally{environment.services.stackSave=priorStackSave;}
+
 assert.equal(environment.services.movemon.nativeEntry,owner.functions.get('movemon'));
 assert.equal(turn.u,hero,'turn loop consumes the canonical hero');
 assert.equal(turn.movemon,owner.functions.get('movemon'),'turn dependencies call the native engine directly');
