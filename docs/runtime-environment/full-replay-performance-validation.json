@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "complete": true,
+  "date": "2026-11-12",
+  "baseCommit": "25ce0121f6f011b59ec201652d2eadae320d0baf",
+  "branch": "perf/full-replay-verified",
+  "nodeVersion": "v22.23.5",
+  "runtimeSources": {
+    "js/c-runtime/adapter-factories.js": "b1d2880f501c399a3421b6cbbdfd548d7a6fbbdcd08b090a385f84ea68252b1b",
+    "js/c-runtime/records.js": "518a6f5d2ddf7affaf3b02866a6a783916cb1c94ac1521bccc2e2990f2a5dd31",
+    "js/nethack/bindings/termcap.js": "7b5292e9b7acf326647a7740c5f727164eb92ef89ac92e5060db4625a3cb4ff0"
+  },
+  "pairedFullCorpus": {
+    "strictSessions": {
+      "baseline": 44,
+      "candidate": 44
+    },
+    "sampling": false,
+    "baselineReplaySeconds": 670.16622,
+    "candidateReplaySeconds": 626.47527,
+    "replayReductionPercent": 6.51941991346564,
+    "baselineSummedScorerSeconds": 678.5579687119462,
+    "candidateSummedScorerSeconds": 634.7923915814608,
+    "fasterSessions": 42,
+    "totalSessions": 44,
+    "method": "One complete frozen-scorer invocation per session and source, alternating the first source; sums include repeated parent startup."
+  },
+  "normalBatch": {
+    "wallSeconds": 529.1819777078927,
+    "strictSessions": 44,
+    "metrics": {
+      "rngCalls": {
+        "matched": 792838,
+        "total": 792838
+      },
+      "screens": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "cellsOnly": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "cursors": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "animFrames": {
+        "matched": 1483,
+        "total": 1483
+      }
+    },
+    "segments": 56,
+    "inputFilesUnchanged": 747,
+    "deadlineMs": 0
+  },
+  "originalCComponents": {
+    "HACK": {
+      "cases": 426,
+      "checks": 4338,
+      "routines": 95
+    },
+    "TERMCAP": {
+      "cases": 223,
+      "checks": 2472,
+      "routines": 56
+    },
+    "reference": "Isolated configured Emscripten memory64 original-C routine fixtures; synthetic component worlds; no native-host/full-game claim.",
+    "referenceInputsChecked": 229
+  },
+  "sourceInverseControls": 11,
+  "evidenceSha256": {
+    "docs/runtime-environment/full-replay-performance-evidence/allocation-baseline-post.json": "928f5f53b33a53cb7752445b8106a9a2fd81f5c1b35000bb2566d7734f1f47d7",
+    "docs/runtime-environment/full-replay-performance-evidence/allocation-baseline-summary.json": "cf44cc6bc12926ed53b004e8d933d19664f8d07a96a8e208f8dfb57eb7886c41",
+    "docs/runtime-environment/full-replay-performance-evidence/baseline-cpu-post.json": "fc2a0134f1bbeebb8fa046568722946e42af3132ad5f7121246bd1d8cfaec4b1",
+    "docs/runtime-environment/full-replay-performance-evidence/baseline-cpu-pre.json": "d6b6aef6baf3b54d7b1a53cf4b066c4f6985763335ffd905773bdedfc4f9d2f2",
+    "docs/runtime-environment/full-replay-performance-evidence/baseline-cpu-summary.json": "9efc1ee207409dccf15e8e69352c266ee2aa7d9b9c6f575091c426e773c40b72",
+    "docs/runtime-environment/full-replay-performance-evidence/baseline-hotpaths.json": "bafd948576201733470bd6fde1d26f0ee81327aa452085b95c220810a5c3aff3",
+    "docs/runtime-environment/full-replay-performance-evidence/c-reference-inputs.json": "7069f538b8380849e506b7768abfc25c3752dffe843870b1d7796f5aec488a9b",
+    "docs/runtime-environment/full-replay-performance-evidence/concurrent-run-post.json": "224cc40db27a2645526cc9303c1874581ac9f4ee5da37f62b42db4af474a532e",
+    "docs/runtime-environment/full-replay-performance-evidence/final-slow-cpu-post.json": "9b1952e10a9805236ed01631ec19bea696226fb58d78523813c81e05f9e291cc",
+    "docs/runtime-environment/full-replay-performance-evidence/final-slow-cpu-pre.json": "7a7d5f49870af4c8b7a70c9bd0e36635440c39a9d95defe3a6141671485f30d2",
+    "docs/runtime-environment/full-replay-performance-evidence/final-slow-hotpaths.json": "4e5b9aeda71e3ed784a5c50ea3e305d12fb177b2b62b4196ac1d543156a62131",
+    "docs/runtime-environment/full-replay-performance-evidence/final-slow-strict.json": "f92a60524efe7288d7c7fea1d68379cbff032e311630afa930ab96369f4beb55",
+    "docs/runtime-environment/full-replay-performance-evidence/hack-c-comparisons.log": "96d7b8287ed2baa4eeeec4e766174be84c221a7d6e762542d5504ee8db325403",
+    "docs/runtime-environment/full-replay-performance-evidence/normal-batch-official.json": "61a8cf3654a6cc9d24093999755897fb020d135919d952b2fc02601f7384e08c",
+    "docs/runtime-environment/full-replay-performance-evidence/normal-batch-post.json": "af3e15a06806e2da1f9e1244dd961e826f6a03f7f78279030bd8caca98fbc66b",
+    "docs/runtime-environment/full-replay-performance-evidence/normal-batch-pre.json": "1b11c4aebcf041d852b02fa01a1f36964de45098800a78131b876ea8da013315",
+    "docs/runtime-environment/full-replay-performance-evidence/normal-batch-strict.json": "2a603a6beba1b2cf7c022d66143be99bb75e6b306b97b22e8d4f017cfa637bc0",
+    "docs/runtime-environment/full-replay-performance-evidence/paired-baseline-source.json": "ac0bc785a2b166115c973f74eebe7dca8116f74d9fe19c851955dc67b53c188c",
+    "docs/runtime-environment/full-replay-performance-evidence/paired-candidate-source.json": "cffcd6a14faf319033378a328717e24fa9cac69bd7c36e0ae954c56397f26ac7",
+    "docs/runtime-environment/full-replay-performance-evidence/paired-comparison.json": "bdeb1691460bb1e543281fda5043e7830d39b0c0960e6ec1a1209e17f83e8ced",
+    "docs/runtime-environment/full-replay-performance-evidence/paired-validation.json": "84e7c3351360e997b62be36c4b926c5d88f214dabbb704d431eec7477b6d2cce",
+    "docs/runtime-environment/full-replay-performance-evidence/rejected-variant-comparison.json": "07216c7a7550bddd68aa9bb7570d97a56918d0edcfe57465d12b3b8f7221277e",
+    "docs/runtime-environment/full-replay-performance-evidence/termcap-c-comparisons.log": "90a2d597fd650cd1a5a5b69bd6baa34aa04a89e3678d6766fdc5f81f812f2b69"
+  },
+  "rawEvidenceDirectories": [
+    ".cache/full-run-baseline",
+    ".cache/full-run-candidate",
+    ".cache/final-slow-cpu",
+    ".cache/paired-full-corpus",
+    ".cache/final-normal-batch",
+    ".cache/allocation-baseline-fountain"
+  ],
+  "limits": [
+    "Public44 only; no held-out or hosted-judge deadline acceptance.",
+    "Diagnostic and normal validation replays disable worker deadlines; no claim of passing the45-second CI gate.",
+    "A single alternating pair per session reduces but does not eliminate host timing variation.",
+    "Normal-batch wall time is a separate unprofiled run; it must not be compared causally with the sampled baseline.",
+    "Fixed indices are non-enumerable own properties on private transport objects; no reflected-property equivalence is claimed."
+  ],
+  "toolSourceSha256": {
+    "scripts/profile-public-recorder.py": "83f29ac56e2be796447362f940e0a2e1b854dade293c492150fbfb6785f61769",
+    "scripts/profile-recorder-cpu.py": "8b6798ab3cd02d8ea449fb5da0dfc80a32033093abe29ad3a24090a3b9fabe3d",
+    "scripts/analyze-replay-hotpaths.py": "c01e541d4b9938277bc4364ec0b3aee30aca3c110033a84bd2f015879e091d52",
+    "scripts/time-public-recorder.py": "91834b9a7f0eda784921356a22923c08644893a1df738cae07f4f439ba09b693",
+    "scripts/compare-paired-replay-corpus.py": "7c62e90fbb4876bf06eca16bd6538e708b2428525699af26e950e866900c6b6c",
+    "scripts/verify-selected-replay.mjs": "54c7d7dd3b1fb823de46bd1c01c1df7645eb9304242ca279f4a1c76b0096a754",
+    "scripts/score-standalone.mjs": "e1d1d62a55e01e70c49820eab630b5e86c8acf9e35736752e08d90a50b42dc49",
+    "scripts/compare-full-replays.py": "4c5e82c35347ff9c7d62c1dc4bc74329f99be5cc252dccba6791f1400248f201"
+  }
+}

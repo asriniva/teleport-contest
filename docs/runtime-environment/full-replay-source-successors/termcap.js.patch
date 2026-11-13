@@ -1,0 +1,21 @@
+--- a/js/nethack/bindings/termcap.js
++++ b/js/nethack/bindings/termcap.js
+@@ -15,7 +15,7 @@
+     const addr=v=>Number(v?.address??v??0),raw=v=>BigInt.asUintN(64,BigInt(typeof v==='function'?functionPointer(v):typeof v==='string'?services.literal(v):typeof v==='boolean'?Number(v):typeof v==='number'?Math.trunc(v):v?.address??v??0));
+     let dataView;
+     const memory=()=>{const buffer=services.heap().buffer;if(dataView?.buffer!==buffer)dataView=new DataView(buffer);return dataView;},cache=new Map(),names=Object.keys(schemas);
+-    const {width,decode,read,write,array}=CAdapter.createDescriptorMemory({services,layout,addr,raw,memory,cache,view:(name,value)=>view(name,value),pointerArrays:false,rows:false,coerceRecordSize:true,directIntegerReads:true,voidPointer:pointerValue,arrays:{profile:'identity',get types(){return arrayTypes;},cacheChildren:true}});
++    const {width,decode,read,write,array}=CAdapter.createDescriptorMemory({services,layout,addr,raw,memory,cache,view:(name,value)=>view(name,value),pointerArrays:false,rows:false,coerceRecordSize:true,directIntegerReads:true,voidPointer:pointerValue,arrays:{profile:'identity',get types(){return arrayTypes;},cacheChildren:true,fixedProperties:d=>d.e.s==='nomux_cell'}});
+ 
+ 
+ 
+@@ -28,7 +28,8 @@
+                     // access still reads/writes live memory, including growth.
+                     const offset=addr(services.address(ki,at,i))-addr(at);
+                     if(!Number.isInteger(offset)||offset<0||offset+width(f.d)>Number(layout.nomux_cellSize))throw Error('Review changed TERMCAP cell offset '+f.name);
+-                    Object.defineProperty(prototype,f.name,{get(){return read(f.d,addr(this.address)+offset);},set(v){write(f.d,addr(this.address)+offset,v);}});
++                    const load='get'+(f.d.t[0]==='i'?'Int':'Uint')+f.d.t.slice(1),store='setUint'+f.d.t.slice(1);
++                    Object.defineProperty(prototype,f.name,{get(){return memory()[load](addr(this.address)+offset,true);},set(v){memory()[store](addr(this.address)+offset,Number(v),true);}});
+                 }else Object.defineProperty(prototype,f.name,{get(){return decode(f.d,services.read(ki,this.address,i));},set(v){services.write(ki,this.address,i,raw(v));}});
+             }
+ applyPrototypeAliases(name,prototype,'termcap');return prototype;});

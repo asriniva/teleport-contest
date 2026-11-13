@@ -1,0 +1,11 @@
+{
+  "filesChecked": 747,
+  "changed": [
+    "js/c-runtime/address-bindings.js",
+    "js/c-runtime/runtime.js",
+    "js/nethack/c-types.js",
+    "js/nethack/runtime-bindings.js"
+  ],
+  "exitCode": 0,
+  "wallSeconds": 413.24137592315674
+}

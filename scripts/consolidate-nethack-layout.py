@@ -102,6 +102,9 @@ def plan():
  return rows
 
 def qualified_current(file):
+ if file in {'js/c-runtime/records.js','js/nethack/bindings/termcap.js'}:
+  from full_replay_source_successor import qualified_before
+  return qualified_before(ROOT,file)
  from engine_service_source_successors import ALLOWED as SERVICE_ALLOWED,qualified_before as service_before
  if file in SERVICE_ALLOWED and file!='js/nethack/bindings/mon.js':return service_before(ROOT,file)
  from engine_test_source_successors import ALLOWED as TEST_ALLOWED,qualified_before as test_before

@@ -1,0 +1,332 @@
+{
+  "version": 1,
+  "complete": true,
+  "strictPublicPassed": {
+    "baseline": 44,
+    "candidate": 44
+  },
+  "nodeVersion": "v22.23.5",
+  "samplingIntervalUs": 1000,
+  "baselineWallSeconds": 750.0639708042145,
+  "candidateWallSeconds": 907.2804679870605,
+  "wallRatio": 1.2096041181851187,
+  "geometricMeanSessionRatio": 1.2731968371904097,
+  "changedInputs": [
+    "js/c-runtime/adapter-factories.js",
+    "js/nethack/bindings/hack.js"
+  ],
+  "sessions": [
+    {
+      "session": "seed0002-healer-reflection-drummer.session.json",
+      "recordedInputs": 594,
+      "baselineMs": 19670.37,
+      "candidateMs": 30489.5,
+      "ratio": 1.55002168235778
+    },
+    {
+      "session": "seed0004-feeding-pony.session.json",
+      "recordedInputs": 408,
+      "baselineMs": 14987.39,
+      "candidateMs": 24923.01,
+      "ratio": 1.6629319714773552
+    },
+    {
+      "session": "seed0006-wizard-water-demon.session.json",
+      "recordedInputs": 122,
+      "baselineMs": 8642,
+      "candidateMs": 15769.8,
+      "ratio": 1.8247859291830595
+    },
+    {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "recordedInputs": 301,
+      "baselineMs": 17011.29,
+      "candidateMs": 29084.47,
+      "ratio": 1.7097157240867682
+    },
+    {
+      "session": "seed0009-swimmer-mforce.session.json",
+      "recordedInputs": 72,
+      "baselineMs": 5436.14,
+      "candidateMs": 10079.88,
+      "ratio": 1.8542348063147747
+    },
+    {
+      "session": "seed0012-monk-vault-escort.session.json",
+      "recordedInputs": 307,
+      "baselineMs": 13105.96,
+      "candidateMs": 26437.09,
+      "ratio": 2.0171807330405405
+    },
+    {
+      "session": "seed0013-friday13-save-then-fullmoon-restore.session.json",
+      "recordedInputs": 97,
+      "baselineMs": 7938.93,
+      "candidateMs": 14754.96,
+      "ratio": 1.858557765341173
+    },
+    {
+      "session": "seed0013-rogue-friday13-combat.session.json",
+      "recordedInputs": 58,
+      "baselineMs": 5093.54,
+      "candidateMs": 8012.67,
+      "ratio": 1.5731043635663997
+    },
+    {
+      "session": "seed0014-dequa-fountain-explore.session.json",
+      "recordedInputs": 713,
+      "baselineMs": 44511,
+      "candidateMs": 73216.53,
+      "ratio": 1.6449086742602952
+    },
+    {
+      "session": "seed0015-valk-level2-pit-dog-wait.session.json",
+      "recordedInputs": 43,
+      "baselineMs": 5285.09,
+      "candidateMs": 8162.74,
+      "ratio": 1.544484578313709
+    },
+    {
+      "session": "seed0016-healer-newmoon-eat-zap.session.json",
+      "recordedInputs": 35,
+      "baselineMs": 4650.22,
+      "candidateMs": 7111.72,
+      "ratio": 1.5293297951494769
+    },
+    {
+      "session": "seed0017-samurai-altar-pray.session.json",
+      "recordedInputs": 66,
+      "baselineMs": 5467.31,
+      "candidateMs": 7837.41,
+      "ratio": 1.433503862045503
+    },
+    {
+      "session": "seed0030-ten-diverse-deaths.session.json",
+      "recordedInputs": 1943,
+      "baselineMs": 94433.46,
+      "candidateMs": 115162.69,
+      "ratio": 1.2195114951840162
+    },
+    {
+      "session": "seed0060-orc-rogue-kick-search.session.json",
+      "recordedInputs": 40,
+      "baselineMs": 6426.82,
+      "candidateMs": 8373.66,
+      "ratio": 1.3029243078225312
+    },
+    {
+      "session": "seed0077-rogue-chargen.session.json",
+      "recordedInputs": 32,
+      "baselineMs": 4788.13,
+      "candidateMs": 7071.3,
+      "ratio": 1.476839601263959
+    },
+    {
+      "session": "seed0101-ranger-quiver-throw-travel-engrave.session.json",
+      "recordedInputs": 26,
+      "baselineMs": 4614.33,
+      "candidateMs": 6405.16,
+      "ratio": 1.3881018479389207
+    },
+    {
+      "session": "seed0102-ranger-name-cancel.session.json",
+      "recordedInputs": 24,
+      "baselineMs": 4825.94,
+      "candidateMs": 6938.22,
+      "ratio": 1.4376929675876617
+    },
+    {
+      "session": "seed0103-knight-ride-pony.session.json",
+      "recordedInputs": 59,
+      "baselineMs": 4233,
+      "candidateMs": 6068.47,
+      "ratio": 1.4336097330498465
+    },
+    {
+      "session": "seed0104-knight-ride-combat.session.json",
+      "recordedInputs": 42,
+      "baselineMs": 5218.34,
+      "candidateMs": 7261.8,
+      "ratio": 1.3915919621948742
+    },
+    {
+      "session": "seed0105-valk-chat-lamp-ration.session.json",
+      "recordedInputs": 29,
+      "baselineMs": 4469.46,
+      "candidateMs": 6822.01,
+      "ratio": 1.5263611264000574
+    },
+    {
+      "session": "seed0106-priest-extcmd-sweep.session.json",
+      "recordedInputs": 266,
+      "baselineMs": 7859.05,
+      "candidateMs": 10402.49,
+      "ratio": 1.3236319911439678
+    },
+    {
+      "session": "seed0107-samurai-twoweapon-enhance.session.json",
+      "recordedInputs": 97,
+      "baselineMs": 4954.65,
+      "candidateMs": 7441.71,
+      "ratio": 1.5019648209257972
+    },
+    {
+      "session": "seed0108-wizard-extcmd-wishlist.session.json",
+      "recordedInputs": 302,
+      "baselineMs": 11364.31,
+      "candidateMs": 13418.66,
+      "ratio": 1.1807720838308706
+    },
+    {
+      "session": "seed0116-wizard-wear-shop.session.json",
+      "recordedInputs": 126,
+      "baselineMs": 13803.33,
+      "candidateMs": 15784.32,
+      "ratio": 1.143515369117452
+    },
+    {
+      "session": "seed0200-monk-north-search.session.json",
+      "recordedInputs": 39,
+      "baselineMs": 5138.46,
+      "candidateMs": 6704.53,
+      "ratio": 1.3047741930461656
+    },
+    {
+      "session": "seed0360-wizard-world-tour.session.json",
+      "recordedInputs": 832,
+      "baselineMs": 90171.34,
+      "candidateMs": 105276.04,
+      "ratio": 1.167511096097718
+    },
+    {
+      "session": "seed0361-archeologist-tour.session.json",
+      "recordedInputs": 365,
+      "baselineMs": 33133.73,
+      "candidateMs": 32018.81,
+      "ratio": 0.9663509058593764
+    },
+    {
+      "session": "seed0367-priest-quest-tour.session.json",
+      "recordedInputs": 323,
+      "baselineMs": 50722.25,
+      "candidateMs": 34794.47,
+      "ratio": 0.6859804129351518
+    },
+    {
+      "session": "seed0373-barbarian-quest-tour.session.json",
+      "recordedInputs": 123,
+      "baselineMs": 34430.38,
+      "candidateMs": 26087.09,
+      "ratio": 0.757676505458261
+    },
+    {
+      "session": "seed0383-wizard-hallucinate.session.json",
+      "recordedInputs": 218,
+      "baselineMs": 12385.25,
+      "candidateMs": 14795.48,
+      "ratio": 1.1946048727316767
+    },
+    {
+      "session": "seed0398-wizard-wandpoly-pile.session.json",
+      "recordedInputs": 86,
+      "baselineMs": 5495.79,
+      "candidateMs": 6367.14,
+      "ratio": 1.1585486345002267
+    },
+    {
+      "session": "seed0399-wizard-hallu-actions.session.json",
+      "recordedInputs": 531,
+      "baselineMs": 12633.83,
+      "candidateMs": 15054.11,
+      "ratio": 1.1915713603871512
+    },
+    {
+      "session": "seed0501-priest-cast-read-turn.session.json",
+      "recordedInputs": 27,
+      "baselineMs": 5088.05,
+      "candidateMs": 5892.1,
+      "ratio": 1.1580271420288717
+    },
+    {
+      "session": "seed0700-samurai-explore-descend.session.json",
+      "recordedInputs": 50,
+      "baselineMs": 5559.18,
+      "candidateMs": 6736.84,
+      "ratio": 1.2118405951956943
+    },
+    {
+      "session": "seed0900-tourist-explore-actions.session.json",
+      "recordedInputs": 83,
+      "baselineMs": 6354.64,
+      "candidateMs": 7214.93,
+      "ratio": 1.1353798169526519
+    },
+    {
+      "session": "seed1150-caveman-explore-move.session.json",
+      "recordedInputs": 50,
+      "baselineMs": 6895.79,
+      "candidateMs": 7264.56,
+      "ratio": 1.053477556596126
+    },
+    {
+      "session": "seed1500-rogue-explore-move.session.json",
+      "recordedInputs": 39,
+      "baselineMs": 6927.03,
+      "candidateMs": 6496.77,
+      "ratio": 0.9378867999705502
+    },
+    {
+      "session": "seed1800-tourist-eat-throw.session.json",
+      "recordedInputs": 25,
+      "baselineMs": 5179.65,
+      "candidateMs": 5895.11,
+      "ratio": 1.1381290241618642
+    },
+    {
+      "session": "seed2200-wizard-quaff-zap-read.session.json",
+      "recordedInputs": 229,
+      "baselineMs": 23085.35,
+      "candidateMs": 23401.65,
+      "ratio": 1.013701330064305
+    },
+    {
+      "session": "seed2600-wizard-custom-binds.session.json",
+      "recordedInputs": 37,
+      "baselineMs": 9614.35,
+      "candidateMs": 10149.58,
+      "ratio": 1.0556699100823248
+    },
+    {
+      "session": "seed4500-knight-coverage.session.json",
+      "recordedInputs": 1813,
+      "baselineMs": 75696.58,
+      "candidateMs": 77705.19,
+      "ratio": 1.0265350165093323
+    },
+    {
+      "session": "seed5002-wizard-coverage-pair.session.json",
+      "recordedInputs": 408,
+      "baselineMs": 13114.47,
+      "candidateMs": 12622.71,
+      "ratio": 0.96250248771014
+    },
+    {
+      "session": "seed5006-tourist-stress-disaster.session.json",
+      "recordedInputs": 247,
+      "baselineMs": 12415.04,
+      "candidateMs": 12312.3,
+      "ratio": 0.9917245534448539
+    },
+    {
+      "session": "seed8000-tourist-starter.session.json",
+      "recordedInputs": 22,
+      "baselineMs": 5145.31,
+      "candidateMs": 4775.02,
+      "ratio": 0.9280334906934665
+    }
+  ],
+  "limits": [
+    "Sequential same-host timings are affected by run order and host load.",
+    "Public44 only; no hosted-judge or held-out deadline acceptance."
+  ]
+}

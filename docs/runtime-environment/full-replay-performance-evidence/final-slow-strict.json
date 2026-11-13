@@ -1,0 +1,28 @@
+{
+  "complete": true,
+  "strictAllMetricsPassed": 4,
+  "segments": 13,
+  "animationCursorTriplesMatched": 1084,
+  "timings": [
+    {
+      "session": "seed0014-dequa-fountain-explore.session.json",
+      "ms": 52882.11,
+      "moves": 713
+    },
+    {
+      "session": "seed0030-ten-diverse-deaths.session.json",
+      "ms": 87474.34,
+      "moves": 1943
+    },
+    {
+      "session": "seed0360-wizard-world-tour.session.json",
+      "ms": 91606.82,
+      "moves": 832
+    },
+    {
+      "session": "seed4500-knight-coverage.session.json",
+      "ms": 70975.01,
+      "moves": 1813
+    }
+  ]
+}

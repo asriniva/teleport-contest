@@ -1,0 +1,18 @@
+{
+  "complete": true,
+  "Node": "v22.23.5",
+  "counts": {
+    "baseline": {
+      "strictSessions": 44,
+      "segments": 56,
+      "animationCursorTriples": 1483
+    },
+    "candidate": {
+      "strictSessions": 44,
+      "segments": 56,
+      "animationCursorTriples": 1483
+    }
+  },
+  "all88InputChecksPassed": true,
+  "sourceHashesConsistentWithinEachVersion": true
+}

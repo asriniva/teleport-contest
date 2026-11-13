@@ -1,5 +1,94 @@
 # Upstream divergence register
 
+Full-replay performance work (2026-11-12): active branch
+`perf/full-replay-verified`, based on freshly pulled main25ce012. The final screen
+transport change improves the complete paired44 public replay from670.166s to
+626.475s (6.52%), with42/44 sessions faster and44/44 strict parity on both
+versions. Summed independent scorer wall time falls678.558s→634.792s (6.45%);
+these totals include repeated parent startup, not one continuous batch. The
+first source alternates between sessions to reduce order bias. An independent
+normal whole44 batch completes in529.182s,44/44 strict with all747 inputs
+unchanged. That absolute run is not a causal comparison with the sampled baseline.
+The unchanged-source Node22.23.5 CPU baseline passes44/44 strict in750.064s,
+including792838 RNG calls,11405 screens/cursors,1483 animation frames/cursors and
+56 segments. All747 scoring inputs remain unchanged. Replay deadlines were
+explicitly disabled. Hosted-judge/held-out and CI deadline acceptance are not
+established by these diagnostic results.
+
+Rejected first experiment: ordinary known-field accessors plus cross-call HACK
+view retention passes44/44 strict with747 unchanged inputs, but takes907.280s
+(+20.96%) in the full profiled batch. This is no useful full-run improvement;
+run order/host conditions also prevent causal attribution from that pair alone.
+HACK cross-call retention has been removed; `bindings/hack.js` matches main.
+Preserve `.cache/full-run-candidate/` and `.cache/first-variant-comparison.json`.
+Its component tests pass426 HACK cases/4338 checks/95 routines and223 TERMCAP
+cases/2472 checks/56 routines against isolated configured Emscripten memory64 C.
+Those historical source-version-specific results do not certify the final change.
+
+Invalid concurrent-source run: four unrelated runtime files changed during the
+first attempt, causing19 module-load failures after25 passes. Its413s elapsed
+is not a speed result. Preserve `.cache/invalidated-concurrent-run/`. This task's
+owned changes were copied to a fresh worktree; unrelated edits remain in the
+original worktree. Subsequent timing uses independent exact source snapshots.
+`.cache/source-baseline/` matches all747 baseline inputs; the first fixed
+candidate snapshot matches its original747 pre-run inputs. Source hashes are
+checked before and after every timed run.
+
+The final change touches only three runtime files:
+
+- `js/c-runtime/adapter-factories.js`: declared HACK/TERMCAP record fields use
+  ordinary prototype accessors; a fallback proxy retains numeric pointer indexing
+  and strict unknown-field errors. Inline aggregate arrays may opt into indexed
+  properties and retain address projections; scalar/pointer loads remain fresh.
+- `js/c-runtime/records.js`: explicit non-enumerable indexed accessors for fixed
+  inline storage bypass numeric-index proxy dispatch. Unusual indices, pointer
+  arithmetic and checked bounds use the existing semantics. Indices become own
+  non-enumerable properties on private transport objects; reflected-property
+  equivalence is not claimed.
+- `js/nethack/bindings/termcap.js`: only the fixed NOMUX screen grid opts in;
+  measured scalar read/write methods are selected once per cell record type,
+  while every access refreshes the current memory view. Original capture policy,
+  live characters/colors/attributes, aggregate copying,
+  heap growth and dynamic providers remain required equivalence obligations.
+No translated policy, C source, asset, compiler option, frozen dependency,
+scoring rule or deadline is changed.
+
+Current synthetic contracts pass complete1920-cell memory/copy/growth and unusual
+index comparisons against the previous proxy transport, fresh scalar loads,
+record identity/aliases/provider replacement and strict unknown-field checks.
+Current original-C component reruns pass426 HACK cases/4338 checks/95 routines
+and223 TERMCAP cases/2472 checks/56 routines. Current runtime dependency
+boundaries (33 files) and the593-transition predecessor layout audit pass.
+The final four slow-session CPU run passes4/4 strict,13 segments and1084
+animation cursor triples, with all747 source inputs unchanged. Their capture
+transport sampled time falls29.887s→19.927s; this is attribution, not an
+unprofiled whole-run speed claim. The completed paired44 comparison verifies
+all88 input-integrity receipts and
+Node22.23.5/sampling0 on every invocation; source hashes are consistent within
+each version. The paired long sessions improve: fountain59.666→53.298s, ten
+deaths80.063→73.660s, world tour81.824→76.380s, knight52.271→49.419s. Two
+small-session regressions (0.59% and2.81%) remain in the evidence. Exact
+historical source projection covers all three modified complete files and
+canonical patches;11 controls reject unrelated changes and undeclared policies.
+The projection preserves old audit receipts and is not current-game acceptance.
+
+Diagnostic tools: `scripts/analyze-replay-hotpaths.py` assigns each CPU sample
+once to its nearest translated routine plus its helpers; GC remains unattributed.
+This avoids double-counting inclusive stacks. `scripts/time-public-recorder.py`
+times complete normal public replays without sampling, or profiles explicit
+complete sessions. It records source integrity, wall/child-CPU time and normal
+entry provenance. `scripts/compare-full-replays.py` requires complete strict44
+parity, identical frozen/session inputs, Node version and sampling settings.
+The complete-corpus comparison runs each full session on both sources,
+alternating the first version to reduce run-order bias. Raw individual results
+are retained; summed scorer times include repeated parent startup and are not a
+single continuous batch. The independent normal full-batch run also passes all
+strict count, animation
+cursor and persistence checks; no worker deadline acceptance is claimed.
+Current source/evidence hashes and limitations are recorded in
+`docs/runtime-environment/full-replay-performance-validation.json` and
+`docs/runtime-environment/full-replay-performance.md`.
+
 Runtime performance follow-up (2026-11-13): pointer-limit paired CI43339646128 passes44/44 strict for both b65bb00 and238be60, with the three threshold-binding files the only runtime differences. Batch1182.87→1238.06s (4.67%higher), geometric mean ratio1.0433. This contradicts the earlier local one-session4.40%lower CPU result; no whole44 speedup is established. A reverse-order repeat of the identical commits is pending to distinguish code effect from run order/host drift. Pointer238 deadline CI43339622465 passes38/44 with six ETIMEDOUT failures; current maina62 CI43343610810 passes40/44 with four ETIMEDOUT failures (fountain, ten deaths, world tour, knight). Completed sessions match. Different hosts/commits prevent causal pass-count attribution;45-second target remains unmet. Proof: docs/runtime-environment/pointer-limit-paired-ci-validation.json. Earlier pending statements below are historical.
 
 Profiling controls: .github/workflows/profile-runtime.yml now accepts an optional pinned candidate commit and baseline-first/candidate-first order, exports both versions as plain archives, and runs the same current profiling/summarization tools for both through scripts/profile-runtime-pair.sh. Commit/order/tool receipts and raw profiles are uploaded. Existing strict44/source-integrity/sampler/frozen/session comparison gates and independent45000ms score gate are retained.11 synthetic runner checks cover both orders, provenance links, removal of inherited overrides, invalid order and fail-fast propagation; shell/YAML syntax checked. These checks provide no new game acceptance. Runtime/ports/frozen files are unchanged in this diagnostic change.

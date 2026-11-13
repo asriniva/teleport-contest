@@ -1,0 +1,920 @@
+{
+  "version": 1,
+  "complete": true,
+  "strictPublicPassed": {
+    "baseline": 44,
+    "candidate": 44
+  },
+  "method": "Replay every public session on both sources, alternating the first version.\n\nEach invocation uses the unchanged frozen scorer and a complete session. Raw\nper-session results remain authoritative; totals are sums of independent scorer\ninvocations, not a single continuous batch. No synthetic game timing is used.",
+  "samplingIntervalUs": 0,
+  "elapsedSeconds": 1342.0984914582223,
+  "totals": {
+    "baseline": {
+      "replayMs": 670166.22,
+      "scorerWallSeconds": 678.5579687119462,
+      "childCpuSeconds": 951.954038
+    },
+    "candidate": {
+      "replayMs": 626475.27,
+      "scorerWallSeconds": 634.7923915814608,
+      "childCpuSeconds": 902.333827
+    }
+  },
+  "replayRatio": 0.9348058008653436,
+  "scorerWallRatio": 0.9355020806644389,
+  "geometricMeanSessionRatio": 0.9505555756532563,
+  "medianSessionRatio": 0.9556529743638618,
+  "fasterSessions": 42,
+  "changedInputs": [
+    "js/c-runtime/adapter-factories.js",
+    "js/c-runtime/records.js",
+    "js/nethack/bindings/termcap.js"
+  ],
+  "sessions": [
+    {
+      "session": "seed0002-healer-reflection-drummer.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 26754.41,
+        "recordedInputs": 594,
+        "scorerWallSeconds": 27.054967749863863,
+        "childCpuSeconds": 37.07097
+      },
+      "candidate": {
+        "replayMs": 25254.98,
+        "recordedInputs": 594,
+        "scorerWallSeconds": 25.551903957966715,
+        "childCpuSeconds": 35.410562000000006
+      },
+      "ratio": 0.9439557814954619
+    },
+    {
+      "session": "seed0004-feeding-pony.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 19634.67,
+        "recordedInputs": 408,
+        "scorerWallSeconds": 19.889875167049468,
+        "childCpuSeconds": 27.721110999999997
+      },
+      "baseline": {
+        "replayMs": 20653.93,
+        "recordedInputs": 408,
+        "scorerWallSeconds": 20.890465334057808,
+        "childCpuSeconds": 28.98408
+      },
+      "ratio": 0.950650554156037
+    },
+    {
+      "session": "seed0006-wizard-water-demon.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 11601.31,
+        "recordedInputs": 122,
+        "scorerWallSeconds": 11.764387666713446,
+        "childCpuSeconds": 17.438264
+      },
+      "candidate": {
+        "replayMs": 11088.18,
+        "recordedInputs": 122,
+        "scorerWallSeconds": 11.255946999881417,
+        "childCpuSeconds": 17.032318
+      },
+      "ratio": 0.9557696501515778
+    },
+    {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 22271.98,
+        "recordedInputs": 301,
+        "scorerWallSeconds": 22.488512290641665,
+        "childCpuSeconds": 31.303552000000003
+      },
+      "baseline": {
+        "replayMs": 24701.56,
+        "recordedInputs": 301,
+        "scorerWallSeconds": 24.980100166983902,
+        "childCpuSeconds": 34.236528
+      },
+      "ratio": 0.9016426492901662
+    },
+    {
+      "session": "seed0009-swimmer-mforce.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 7697.27,
+        "recordedInputs": 72,
+        "scorerWallSeconds": 7.885513707995415,
+        "childCpuSeconds": 13.030358
+      },
+      "candidate": {
+        "replayMs": 7672.49,
+        "recordedInputs": 72,
+        "scorerWallSeconds": 7.843309834133834,
+        "childCpuSeconds": 13.104254999999998
+      },
+      "ratio": 0.9967806767854056
+    },
+    {
+      "session": "seed0012-monk-vault-escort.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 16131.92,
+        "recordedInputs": 307,
+        "scorerWallSeconds": 16.350091041065753,
+        "childCpuSeconds": 23.577248
+      },
+      "baseline": {
+        "replayMs": 17608.39,
+        "recordedInputs": 307,
+        "scorerWallSeconds": 17.825470042414963,
+        "childCpuSeconds": 25.37931
+      },
+      "ratio": 0.9161496309429766
+    },
+    {
+      "session": "seed0013-friday13-save-then-fullmoon-restore.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 10810.16,
+        "recordedInputs": 97,
+        "scorerWallSeconds": 10.97597033297643,
+        "childCpuSeconds": 18.084138000000003
+      },
+      "candidate": {
+        "replayMs": 10694.84,
+        "recordedInputs": 97,
+        "scorerWallSeconds": 10.882661625277251,
+        "childCpuSeconds": 18.082524
+      },
+      "ratio": 0.9893322578019197
+    },
+    {
+      "session": "seed0013-rogue-friday13-combat.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 6537.79,
+        "recordedInputs": 58,
+        "scorerWallSeconds": 6.70271508442238,
+        "childCpuSeconds": 11.000499
+      },
+      "baseline": {
+        "replayMs": 6925.52,
+        "recordedInputs": 58,
+        "scorerWallSeconds": 7.082737832795829,
+        "childCpuSeconds": 11.492188
+      },
+      "ratio": 0.9440143122826877
+    },
+    {
+      "session": "seed0014-dequa-fountain-explore.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 59665.5,
+        "recordedInputs": 713,
+        "scorerWallSeconds": 60.24822195759043,
+        "childCpuSeconds": 76.867688
+      },
+      "candidate": {
+        "replayMs": 53297.63,
+        "recordedInputs": 713,
+        "scorerWallSeconds": 53.82730920892209,
+        "childCpuSeconds": 69.864338
+      },
+      "ratio": 0.8932738349632534
+    },
+    {
+      "session": "seed0015-valk-level2-pit-dog-wait.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 6145.49,
+        "recordedInputs": 43,
+        "scorerWallSeconds": 6.311447666026652,
+        "childCpuSeconds": 10.583393000000001
+      },
+      "baseline": {
+        "replayMs": 6638.15,
+        "recordedInputs": 43,
+        "scorerWallSeconds": 6.8022039998322725,
+        "childCpuSeconds": 11.135385
+      },
+      "ratio": 0.9257835390884509
+    },
+    {
+      "session": "seed0016-healer-newmoon-eat-zap.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 5613.75,
+        "recordedInputs": 35,
+        "scorerWallSeconds": 5.768323291093111,
+        "childCpuSeconds": 9.583588
+      },
+      "candidate": {
+        "replayMs": 5646.63,
+        "recordedInputs": 35,
+        "scorerWallSeconds": 5.796313124708831,
+        "childCpuSeconds": 9.682474
+      },
+      "ratio": 1.0058570474281898
+    },
+    {
+      "session": "seed0017-samurai-altar-pray.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 5940.36,
+        "recordedInputs": 66,
+        "scorerWallSeconds": 6.1014172080904245,
+        "childCpuSeconds": 9.945956
+      },
+      "baseline": {
+        "replayMs": 6589.31,
+        "recordedInputs": 66,
+        "scorerWallSeconds": 6.758578832726926,
+        "childCpuSeconds": 10.781307
+      },
+      "ratio": 0.9015147261245865
+    },
+    {
+      "session": "seed0030-ten-diverse-deaths.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 80062.56,
+        "recordedInputs": 1943,
+        "scorerWallSeconds": 80.65160441724584,
+        "childCpuSeconds": 111.014239
+      },
+      "candidate": {
+        "replayMs": 73660.02,
+        "recordedInputs": 1943,
+        "scorerWallSeconds": 74.26382308313623,
+        "childCpuSeconds": 104.17659900000001
+      },
+      "ratio": 0.9200307859254064
+    },
+    {
+      "session": "seed0060-orc-rogue-kick-search.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 5024.81,
+        "recordedInputs": 40,
+        "scorerWallSeconds": 5.156357166823,
+        "childCpuSeconds": 8.335543
+      },
+      "baseline": {
+        "replayMs": 5034.66,
+        "recordedInputs": 40,
+        "scorerWallSeconds": 5.171106417197734,
+        "childCpuSeconds": 8.269271
+      },
+      "ratio": 0.9980435620280219
+    },
+    {
+      "session": "seed0077-rogue-chargen.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 4368.58,
+        "recordedInputs": 32,
+        "scorerWallSeconds": 4.497761667240411,
+        "childCpuSeconds": 7.093664
+      },
+      "candidate": {
+        "replayMs": 4315.72,
+        "recordedInputs": 32,
+        "scorerWallSeconds": 4.446775124873966,
+        "childCpuSeconds": 7.210425
+      },
+      "ratio": 0.9878999583388653
+    },
+    {
+      "session": "seed0101-ranger-quiver-throw-travel-engrave.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 4105.47,
+        "recordedInputs": 26,
+        "scorerWallSeconds": 4.2326509999111295,
+        "childCpuSeconds": 6.945537000000001
+      },
+      "baseline": {
+        "replayMs": 4553.33,
+        "recordedInputs": 26,
+        "scorerWallSeconds": 4.683528416790068,
+        "childCpuSeconds": 7.74773
+      },
+      "ratio": 0.9016412164284162
+    },
+    {
+      "session": "seed0102-ranger-name-cancel.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 5284.73,
+        "recordedInputs": 24,
+        "scorerWallSeconds": 5.427967458963394,
+        "childCpuSeconds": 8.873437
+      },
+      "candidate": {
+        "replayMs": 5001.43,
+        "recordedInputs": 24,
+        "scorerWallSeconds": 5.144852499943227,
+        "childCpuSeconds": 8.55107
+      },
+      "ratio": 0.946392720157889
+    },
+    {
+      "session": "seed0103-knight-ride-pony.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 4476.85,
+        "recordedInputs": 59,
+        "scorerWallSeconds": 4.621595959179103,
+        "childCpuSeconds": 7.731839000000001
+      },
+      "baseline": {
+        "replayMs": 4685.17,
+        "recordedInputs": 59,
+        "scorerWallSeconds": 4.825143958907574,
+        "childCpuSeconds": 7.9940869999999995
+      },
+      "ratio": 0.9555362985761456
+    },
+    {
+      "session": "seed0104-knight-ride-combat.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 5020.07,
+        "recordedInputs": 42,
+        "scorerWallSeconds": 5.161828042007983,
+        "childCpuSeconds": 8.500335
+      },
+      "candidate": {
+        "replayMs": 4932.24,
+        "recordedInputs": 42,
+        "scorerWallSeconds": 5.083629083354026,
+        "childCpuSeconds": 8.281771
+      },
+      "ratio": 0.9825042280286929
+    },
+    {
+      "session": "seed0105-valk-chat-lamp-ration.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 4589.62,
+        "recordedInputs": 29,
+        "scorerWallSeconds": 4.7373198750428855,
+        "childCpuSeconds": 7.969673
+      },
+      "baseline": {
+        "replayMs": 4464.06,
+        "recordedInputs": 29,
+        "scorerWallSeconds": 4.606351291295141,
+        "childCpuSeconds": 7.730813
+      },
+      "ratio": 1.0281268620941473
+    },
+    {
+      "session": "seed0106-priest-extcmd-sweep.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 7996.55,
+        "recordedInputs": 266,
+        "scorerWallSeconds": 8.153230124618858,
+        "childCpuSeconds": 12.264631999999999
+      },
+      "candidate": {
+        "replayMs": 7462.95,
+        "recordedInputs": 266,
+        "scorerWallSeconds": 7.63569675013423,
+        "childCpuSeconds": 11.710871
+      },
+      "ratio": 0.9332712232150114
+    },
+    {
+      "session": "seed0107-samurai-twoweapon-enhance.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 5115.15,
+        "recordedInputs": 97,
+        "scorerWallSeconds": 5.264442624989897,
+        "childCpuSeconds": 8.582289999999999
+      },
+      "baseline": {
+        "replayMs": 5311.81,
+        "recordedInputs": 97,
+        "scorerWallSeconds": 5.457475250121206,
+        "childCpuSeconds": 8.766675000000001
+      },
+      "ratio": 0.9629768384034819
+    },
+    {
+      "session": "seed0108-wizard-extcmd-wishlist.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 11429.12,
+        "recordedInputs": 302,
+        "scorerWallSeconds": 11.59836612502113,
+        "childCpuSeconds": 17.392207
+      },
+      "candidate": {
+        "replayMs": 10311.8,
+        "recordedInputs": 302,
+        "scorerWallSeconds": 10.483854082878679,
+        "childCpuSeconds": 16.435838
+      },
+      "ratio": 0.902239192518759
+    },
+    {
+      "session": "seed0116-wizard-wear-shop.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 11313.91,
+        "recordedInputs": 126,
+        "scorerWallSeconds": 11.471662709023803,
+        "childCpuSeconds": 17.477708000000003
+      },
+      "baseline": {
+        "replayMs": 11364.38,
+        "recordedInputs": 126,
+        "scorerWallSeconds": 11.518185500055552,
+        "childCpuSeconds": 17.357692999999998
+      },
+      "ratio": 0.99555893062358
+    },
+    {
+      "session": "seed0200-monk-north-search.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 4594.54,
+        "recordedInputs": 39,
+        "scorerWallSeconds": 4.759343000128865,
+        "childCpuSeconds": 7.639303
+      },
+      "candidate": {
+        "replayMs": 4423.24,
+        "recordedInputs": 39,
+        "scorerWallSeconds": 4.591179500333965,
+        "childCpuSeconds": 7.418188
+      },
+      "ratio": 0.9627166158091995
+    },
+    {
+      "session": "seed0360-wizard-world-tour.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 76380.05,
+        "recordedInputs": 832,
+        "scorerWallSeconds": 76.78783129202202,
+        "childCpuSeconds": 96.409091
+      },
+      "baseline": {
+        "replayMs": 81823.72,
+        "recordedInputs": 832,
+        "scorerWallSeconds": 82.20014708396047,
+        "childCpuSeconds": 102.97744499999999
+      },
+      "ratio": 0.9334707588459679
+    },
+    {
+      "session": "seed0361-archeologist-tour.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 28377.98,
+        "recordedInputs": 365,
+        "scorerWallSeconds": 28.585664874874055,
+        "childCpuSeconds": 40.298770000000005
+      },
+      "candidate": {
+        "replayMs": 27310.42,
+        "recordedInputs": 365,
+        "scorerWallSeconds": 27.51275970833376,
+        "childCpuSeconds": 38.657096
+      },
+      "ratio": 0.9623806909441757
+    },
+    {
+      "session": "seed0367-priest-quest-tour.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 30808.63,
+        "recordedInputs": 323,
+        "scorerWallSeconds": 31.02813445823267,
+        "childCpuSeconds": 42.962438999999996
+      },
+      "baseline": {
+        "replayMs": 32162.67,
+        "recordedInputs": 323,
+        "scorerWallSeconds": 32.399907417129725,
+        "childCpuSeconds": 43.99616700000001
+      },
+      "ratio": 0.9579002613899904
+    },
+    {
+      "session": "seed0373-barbarian-quest-tour.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 22583.85,
+        "recordedInputs": 123,
+        "scorerWallSeconds": 22.761307124979794,
+        "childCpuSeconds": 32.277394
+      },
+      "candidate": {
+        "replayMs": 19004.16,
+        "recordedInputs": 123,
+        "scorerWallSeconds": 19.148767082951963,
+        "childCpuSeconds": 26.823749999999997
+      },
+      "ratio": 0.8414933680484064
+    },
+    {
+      "session": "seed0383-wizard-hallucinate.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 8310.5,
+        "recordedInputs": 218,
+        "scorerWallSeconds": 8.447166416794062,
+        "childCpuSeconds": 12.250670000000001
+      },
+      "baseline": {
+        "replayMs": 8850.69,
+        "recordedInputs": 218,
+        "scorerWallSeconds": 8.991513708140701,
+        "childCpuSeconds": 13.043066999999999
+      },
+      "ratio": 0.938966340477409
+    },
+    {
+      "session": "seed0398-wizard-wandpoly-pile.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 3768.78,
+        "recordedInputs": 86,
+        "scorerWallSeconds": 3.8760530408471823,
+        "childCpuSeconds": 5.800118
+      },
+      "candidate": {
+        "replayMs": 3599.69,
+        "recordedInputs": 86,
+        "scorerWallSeconds": 3.7085730000399053,
+        "childCpuSeconds": 5.69139
+      },
+      "ratio": 0.9551340221504041
+    },
+    {
+      "session": "seed0399-wizard-hallu-actions.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 8268.87,
+        "recordedInputs": 531,
+        "scorerWallSeconds": 8.460504416842014,
+        "childCpuSeconds": 12.318732
+      },
+      "baseline": {
+        "replayMs": 9277.39,
+        "recordedInputs": 531,
+        "scorerWallSeconds": 9.46065316721797,
+        "childCpuSeconds": 13.417988999999999
+      },
+      "ratio": 0.8912927019344882
+    },
+    {
+      "session": "seed0501-priest-cast-read-turn.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 3539.2,
+        "recordedInputs": 27,
+        "scorerWallSeconds": 3.643835666589439,
+        "childCpuSeconds": 5.687206
+      },
+      "candidate": {
+        "replayMs": 3525.52,
+        "recordedInputs": 27,
+        "scorerWallSeconds": 3.6283616246655583,
+        "childCpuSeconds": 5.697635999999999
+      },
+      "ratio": 0.9961347197106691
+    },
+    {
+      "session": "seed0700-samurai-explore-descend.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 3936.96,
+        "recordedInputs": 50,
+        "scorerWallSeconds": 4.048319874797016,
+        "childCpuSeconds": 6.307557999999999
+      },
+      "baseline": {
+        "replayMs": 4095.62,
+        "recordedInputs": 50,
+        "scorerWallSeconds": 4.201706959400326,
+        "childCpuSeconds": 6.457395
+      },
+      "ratio": 0.9612610544923602
+    },
+    {
+      "session": "seed0900-tourist-explore-actions.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 4201.99,
+        "recordedInputs": 83,
+        "scorerWallSeconds": 4.31149341724813,
+        "childCpuSeconds": 6.5942
+      },
+      "candidate": {
+        "replayMs": 4128.44,
+        "recordedInputs": 83,
+        "scorerWallSeconds": 4.240662666037679,
+        "childCpuSeconds": 6.5506020000000005
+      },
+      "ratio": 0.9824963886158701
+    },
+    {
+      "session": "seed1150-caveman-explore-move.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 4160.3,
+        "recordedInputs": 50,
+        "scorerWallSeconds": 4.269606249872595,
+        "childCpuSeconds": 6.712166
+      },
+      "baseline": {
+        "replayMs": 4239.4,
+        "recordedInputs": 50,
+        "scorerWallSeconds": 4.352029916830361,
+        "childCpuSeconds": 6.770476
+      },
+      "ratio": 0.9813416992970705
+    },
+    {
+      "session": "seed1500-rogue-explore-move.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 3927.94,
+        "recordedInputs": 39,
+        "scorerWallSeconds": 4.037101791240275,
+        "childCpuSeconds": 6.289118
+      },
+      "candidate": {
+        "replayMs": 3790.99,
+        "recordedInputs": 39,
+        "scorerWallSeconds": 3.8966606659814715,
+        "childCpuSeconds": 6.117523
+      },
+      "ratio": 0.9651343961465806
+    },
+    {
+      "session": "seed1800-tourist-eat-throw.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 3324.44,
+        "recordedInputs": 25,
+        "scorerWallSeconds": 3.4311517076566815,
+        "childCpuSeconds": 5.445851
+      },
+      "baseline": {
+        "replayMs": 3341.51,
+        "recordedInputs": 25,
+        "scorerWallSeconds": 3.4480527504347265,
+        "childCpuSeconds": 5.478376000000001
+      },
+      "ratio": 0.9948915310742747
+    },
+    {
+      "session": "seed2200-wizard-quaff-zap-read.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 14964.56,
+        "recordedInputs": 229,
+        "scorerWallSeconds": 15.095092041883618,
+        "childCpuSeconds": 18.408889
+      },
+      "candidate": {
+        "replayMs": 13824.01,
+        "recordedInputs": 229,
+        "scorerWallSeconds": 13.959143624641001,
+        "childCpuSeconds": 17.216151
+      },
+      "ratio": 0.9237832585789358
+    },
+    {
+      "session": "seed2600-wizard-custom-binds.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 6099.58,
+        "recordedInputs": 37,
+        "scorerWallSeconds": 6.21550895832479,
+        "childCpuSeconds": 9.58669
+      },
+      "baseline": {
+        "replayMs": 6210.95,
+        "recordedInputs": 37,
+        "scorerWallSeconds": 6.327787917107344,
+        "childCpuSeconds": 9.722227
+      },
+      "ratio": 0.9820687656477672
+    },
+    {
+      "session": "seed4500-knight-coverage.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 52270.75,
+        "recordedInputs": 1813,
+        "scorerWallSeconds": 52.713690042030066,
+        "childCpuSeconds": 66.65655100000001
+      },
+      "candidate": {
+        "replayMs": 49418.55,
+        "recordedInputs": 1813,
+        "scorerWallSeconds": 49.86386850010604,
+        "childCpuSeconds": 63.538393
+      },
+      "ratio": 0.9454341098989397
+    },
+    {
+      "session": "seed5002-wizard-coverage-pair.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 9338.49,
+        "recordedInputs": 408,
+        "scorerWallSeconds": 9.484496042132378,
+        "childCpuSeconds": 15.092055
+      },
+      "baseline": {
+        "replayMs": 10615.35,
+        "recordedInputs": 408,
+        "scorerWallSeconds": 10.793010749854147,
+        "childCpuSeconds": 16.522598
+      },
+      "ratio": 0.8797156947250915
+    },
+    {
+      "session": "seed5006-tourist-stress-disaster.session.json",
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "replayMs": 11771.76,
+        "recordedInputs": 247,
+        "scorerWallSeconds": 11.956319582648575,
+        "childCpuSeconds": 19.231833
+      },
+      "candidate": {
+        "replayMs": 11559.12,
+        "recordedInputs": 247,
+        "scorerWallSeconds": 11.747122458182275,
+        "childCpuSeconds": 19.192867
+      },
+      "ratio": 0.9819364309160228
+    },
+    {
+      "session": "seed8000-tourist-starter.session.json",
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "replayMs": 4636.38,
+        "recordedInputs": 22,
+        "scorerWallSeconds": 4.778410166036338,
+        "childCpuSeconds": 7.627585
+      },
+      "baseline": {
+        "replayMs": 4713.29,
+        "recordedInputs": 22,
+        "scorerWallSeconds": 4.853768874891102,
+        "childCpuSeconds": 7.596329000000001
+      },
+      "ratio": 0.9836823110820679
+    }
+  ],
+  "limits": [
+    "One pair per session; alternating order reduces but does not eliminate host-load effects.",
+    "Summed independent full-session scorer invocations include repeated parent startup.",
+    "Public44 only; no hosted-judge or held-out deadline acceptance."
+  ]
+}

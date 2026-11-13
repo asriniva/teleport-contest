@@ -1,0 +1,416 @@
+{
+  "version": 1,
+  "nodeVersion": "v22.23.5",
+  "parameters": {
+    "samplingInterval": 65536,
+    "stackDepth": 128,
+    "includeObjectsCollectedByMajorGC": true,
+    "includeObjectsCollectedByMinorGC": true
+  },
+  "estimatedAllocatedBytes": 25144477424,
+  "rawSha256": "2fd6b8abb4d812bd0d7ffdf4f5814573ae2c02cd0bf63c94e6ab0898b5d97a29",
+  "topSelf": [
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "get",
+      "line": 37,
+      "estimatedBytes": 1219306784,
+      "percent": 4.849203120985092
+    },
+    {
+      "file": "js/c-runtime/linker.js",
+      "function": "call",
+      "line": 54,
+      "estimatedBytes": 988859520,
+      "percent": 3.932710564333103
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "array",
+      "line": 64,
+      "estimatedBytes": 894033952,
+      "percent": 3.555587721805898
+    },
+    {
+      "file": "js/nethack/movement.js",
+      "function": "get",
+      "line": 14,
+      "estimatedBytes": 858036400,
+      "percent": 3.412424865831644
+    },
+    {
+      "file": "js/nethack/bindings/mondata.js",
+      "function": "attack",
+      "line": 39,
+      "estimatedBytes": 709310488,
+      "percent": 2.8209394692886898
+    },
+    {
+      "file": "",
+      "function": "next",
+      "line": 0,
+      "estimatedBytes": 495883208,
+      "percent": 1.9721356687520077
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "function": "get",
+      "line": 46,
+      "estimatedBytes": 473580904,
+      "percent": 1.883439039174362
+    },
+    {
+      "file": "js/ported/termcap.js",
+      "function": "nomux_capture_screen",
+      "line": 784,
+      "estimatedBytes": 450558336,
+      "percent": 1.7918779078301676
+    },
+    {
+      "file": "js/nethack/bindings/mondata.js",
+      "function": "permonst",
+      "line": 41,
+      "estimatedBytes": 449300256,
+      "percent": 1.7868745029918582
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "env.cell",
+      "line": 102,
+      "estimatedBytes": 434118248,
+      "percent": 1.726495407638264
+    },
+    {
+      "file": "js/nethack/bindings/dbridge.js",
+      "function": "",
+      "line": 63,
+      "estimatedBytes": 434115000,
+      "percent": 1.7264824902888782
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "env.field",
+      "line": 141,
+      "estimatedBytes": 420736808,
+      "percent": 1.6732772008155297
+    },
+    {
+      "file": "",
+      "function": "keys",
+      "line": 0,
+      "estimatedBytes": 419661064,
+      "percent": 1.668998949246168
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "function": "get",
+      "line": 31,
+      "estimatedBytes": 408141904,
+      "percent": 1.623187060592618
+    },
+    {
+      "file": "js/nethack/bindings/mkmap.js",
+      "function": "terrain",
+      "line": 52,
+      "estimatedBytes": 344290504,
+      "percent": 1.3692489933053063
+    },
+    {
+      "file": "file:///Users/arj/Desktop/nethack_comp/full-replay-profile-verified/.cache/source-baseline/frozen/ps_test_runner.mjs",
+      "function": "screensVisuallyEqual",
+      "line": 202,
+      "estimatedBytes": 338081856,
+      "percent": 1.3445570981614685
+    },
+    {
+      "file": "js/nethack/bindings/trap.js",
+      "function": "createTrapEnvironment",
+      "line": 16,
+      "estimatedBytes": 316902992,
+      "percent": 1.260328407929135
+    },
+    {
+      "file": "js/c-runtime/records.js",
+      "function": "createArrayView",
+      "line": 31,
+      "estimatedBytes": 306259368,
+      "percent": 1.217998540338247
+    },
+    {
+      "file": "file:///Users/arj/Desktop/nethack_comp/full-replay-profile-verified/.cache/source-baseline/frozen/screen-decode.mjs",
+      "function": "decodeScreen",
+      "line": 21,
+      "estimatedBytes": 305949888,
+      "percent": 1.216767733291509
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "cacheKey",
+      "line": 36,
+      "estimatedBytes": 281022048,
+      "percent": 1.1176293038874967
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "function": "pointerValue",
+      "line": 33,
+      "estimatedBytes": 276834728,
+      "percent": 1.1009762634230198
+    },
+    {
+      "file": "js/c-runtime/memory.js",
+      "function": "int",
+      "line": 94,
+      "estimatedBytes": 270277032,
+      "percent": 1.0748961986460888
+    },
+    {
+      "file": "js/c-runtime/stdlib.js",
+      "function": "api.format",
+      "line": 163,
+      "estimatedBytes": 264370104,
+      "percent": 1.0514042489014426
+    },
+    {
+      "file": "",
+      "function": "add",
+      "line": 0,
+      "estimatedBytes": 264267520,
+      "percent": 1.0509962706473306
+    },
+    {
+      "file": "js/nethack/movement.js",
+      "function": "wrapper",
+      "line": 15,
+      "estimatedBytes": 261545056,
+      "percent": 1.0401689865718167
+    },
+    {
+      "file": "",
+      "function": "match",
+      "line": 0,
+      "estimatedBytes": 260654064,
+      "percent": 1.0366254967431134
+    },
+    {
+      "file": "file:///Users/arj/Desktop/nethack_comp/full-replay-profile-verified/.cache/source-baseline/frozen/screen-decode.mjs",
+      "function": "makeBlankGrid",
+      "line": 96,
+      "estimatedBytes": 246572360,
+      "percent": 0.9806223284825583
+    },
+    {
+      "file": "js/c-runtime/record-views.js",
+      "function": "read",
+      "line": 12,
+      "estimatedBytes": 245066912,
+      "percent": 0.9746351370424091
+    },
+    {
+      "file": "js/c-runtime/records.js",
+      "function": "record",
+      "line": 6,
+      "estimatedBytes": 228066920,
+      "percent": 0.9070258894396978
+    },
+    {
+      "file": "js/nethack/bindings/trap.js",
+      "function": "read",
+      "line": 39,
+      "estimatedBytes": 223500952,
+      "percent": 0.8888669596556098
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "free",
+      "line": 91,
+      "estimatedBytes": 214909240,
+      "percent": 0.854697579814773
+    },
+    {
+      "file": "js/c-runtime/bitfields.js",
+      "function": "get",
+      "line": 9,
+      "estimatedBytes": 197320840,
+      "percent": 0.784748223924751
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "function": "get",
+      "line": 55,
+      "estimatedBytes": 187045728,
+      "percent": 0.7438839346148743
+    },
+    {
+      "file": "js/nethack/monster-movement.js",
+      "function": "get",
+      "line": 8,
+      "estimatedBytes": 178398768,
+      "percent": 0.7094948325699593
+    },
+    {
+      "file": "js/c-runtime/memory.js",
+      "function": "short",
+      "line": 95,
+      "estimatedBytes": 173060672,
+      "percent": 0.6882651370388647
+    },
+    {
+      "file": "js/c-runtime/record-views.js",
+      "function": "get",
+      "line": 34,
+      "estimatedBytes": 172964792,
+      "percent": 0.6878838207029425
+    },
+    {
+      "file": "js/ported/cmd.js",
+      "function": "isok",
+      "line": 3207,
+      "estimatedBytes": 170765128,
+      "percent": 0.6791357208203795
+    },
+    {
+      "file": "js/nethack/bindings/monmove.js",
+      "function": "get",
+      "line": 18,
+      "estimatedBytes": 165874192,
+      "percent": 0.6596843879589868
+    },
+    {
+      "file": "js/nethack/bindings/wintty.js",
+      "function": "ptr",
+      "line": 38,
+      "estimatedBytes": 165743048,
+      "percent": 0.6591628261154512
+    },
+    {
+      "file": "js/nethack/bindings/wintty.js",
+      "function": "record",
+      "line": 60,
+      "estimatedBytes": 159962760,
+      "percent": 0.6361745257323109
+    }
+  ],
+  "captureTop": [
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "get",
+      "line": 37,
+      "estimatedBytes": 936582816
+    },
+    {
+      "file": "js/ported/termcap.js",
+      "function": "nomux_capture_screen",
+      "line": 784,
+      "estimatedBytes": 450558336
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "function": "get",
+      "line": 31,
+      "estimatedBytes": 408141904
+    },
+    {
+      "file": "js/c-runtime/adapter-factories.js",
+      "function": "array",
+      "line": 64,
+      "estimatedBytes": 398327168
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "function": "get",
+      "line": 55,
+      "estimatedBytes": 185537568
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "function": "env.sprintf",
+      "line": 116,
+      "estimatedBytes": 57313872
+    },
+    {
+      "file": "js/c-runtime/stdlib.js",
+      "function": "api.format",
+      "line": 163,
+      "estimatedBytes": 45432576
+    },
+    {
+      "file": "",
+      "function": "slice",
+      "line": 0,
+      "estimatedBytes": 32136792
+    },
+    {
+      "file": "js/c-runtime/heap.js",
+      "function": "byteString",
+      "line": 169,
+      "estimatedBytes": 31021704
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "function": "env.int",
+      "line": 58,
+      "estimatedBytes": 27860280
+    },
+    {
+      "file": "",
+      "function": "next",
+      "line": 0,
+      "estimatedBytes": 25604152
+    },
+    {
+      "file": "",
+      "function": "matchAll",
+      "line": 0,
+      "estimatedBytes": 20585808
+    },
+    {
+      "file": "",
+      "function": "exec",
+      "line": 0,
+      "estimatedBytes": 15285528
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "function": "env.char",
+      "line": 58,
+      "estimatedBytes": 12914128
+    },
+    {
+      "file": "js/nethack/terminal.js",
+      "function": "sprintf_ppi",
+      "line": 52,
+      "estimatedBytes": 9111144
+    },
+    {
+      "file": "",
+      "function": "split",
+      "line": 0,
+      "estimatedBytes": 9046264
+    },
+    {
+      "file": "js/nethack/terminal.js",
+      "function": "sprintf_pp",
+      "line": 51,
+      "estimatedBytes": 4850544
+    },
+    {
+      "file": "",
+      "function": "add",
+      "line": 0,
+      "estimatedBytes": 3492640
+    },
+    {
+      "file": "js/c-runtime/memory.js",
+      "function": "stackSave",
+      "line": 98,
+      "estimatedBytes": 1311160
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "function": "invoke",
+      "line": 52,
+      "estimatedBytes": 786832
+    }
+  ]
+}
