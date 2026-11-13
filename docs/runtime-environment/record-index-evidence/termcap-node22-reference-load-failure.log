@@ -1,0 +1,14 @@
+file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34
+ let ready=rpc.receive();while(ready.callback){try{rpc.send({value:callbacks.get(ready.callback)(...ready.args)});}catch(error){rpc.send({error:error.message});}ready=rpc.receive();}deliver(ready.events);if(Object.hasOwn(ready,'error'))throw Error(ready.error??'Original C reference initialization failed');
+                                                                                                                                                                                                                                                  ^
+
+Error: RuntimeError: Aborted(CompileError: WebAssembly.instantiate(): invalid table elements limits flags @+1412). Build with -sASSERTIONS for more info.
+    at abort (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/tu-probes/termcap-reference.mjs:7:2947)
+    at instantiateArrayBuffer (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/tu-probes/termcap-reference.mjs:7:3809)
+    at async createWasm (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/tu-probes/termcap-reference.mjs:7:5078)
+    at async Module.<anonymous> (file:///Users/arj/Desktop/nethack_comp/teleport-contest/.cache/tu-probes/termcap-reference.mjs:7:75338)
+    at async file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference-worker.mjs:15:9
+    at referenceFactory (file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/pure-js-fixtures/reference.mjs:34:243)
+    at async file:///Users/arj/Desktop/nethack_comp/teleport-contest/scripts/test-tu-termcap.mjs:40:17
+
+Node.js v22.23.5

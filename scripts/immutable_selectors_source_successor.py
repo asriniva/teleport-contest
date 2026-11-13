@@ -15,6 +15,9 @@ def validate_cohort(root):
  for file,row in FILES.items():
   before=baseline_bytes(root,file);after=(root/file).read_bytes();patch=(root/row['patch']).read_bytes()
   assert sha(before)==row['beforeSha256'],'Wrong immutable-selector predecessor: '+file
+  if file=='js/c-runtime/adapter-factories.js'and sha(after)!=row['afterSha256']:
+   from record_index_source_successor import qualified_before as index_before
+   after=index_before(root,file)
   assert sha(after)==row['afterSha256'],'Unknown immutable-selector source change: '+file
   assert sha(patch)==row['patchSha256']and patch==canonical_patch(file,before,after),'Wrong immutable-selector source patch: '+file
   before_images[file]=before

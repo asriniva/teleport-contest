@@ -1,0 +1,14 @@
+[
+  {
+    "phase": "baseline",
+    "exitCode": 0,
+    "wallSeconds": 748.3828542083502,
+    "cpuSeconds": 1061.97764
+  },
+  {
+    "phase": "candidate",
+    "exitCode": 0,
+    "wallSeconds": 693.118251292035,
+    "cpuSeconds": 975.1223930000001
+  }
+]

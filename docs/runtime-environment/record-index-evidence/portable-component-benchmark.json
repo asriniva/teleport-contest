@@ -1,0 +1,440 @@
+{
+  "node": "v22.23.5",
+  "iterations": 100000,
+  "warmup": 20000,
+  "cycles": 4,
+  "sink": 0,
+  "rows": [
+    {
+      "pattern": "monoField",
+      "ratio": 0.9194524577181967,
+      "trials": [
+        {
+          "variant": "baseline",
+          "cpuUs": 7762,
+          "checksum": 19200000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 5826,
+          "checksum": 19200000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 5773,
+          "checksum": 19200000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6072,
+          "checksum": 19200000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6075,
+          "checksum": 19200000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6716,
+          "checksum": 19200000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6099,
+          "checksum": 19200000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6531,
+          "checksum": 19200000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6277,
+          "checksum": 19200000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6076,
+          "checksum": 19200000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6083,
+          "checksum": 19200000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6578,
+          "checksum": 19200000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 7134,
+          "checksum": 19200000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6311,
+          "checksum": 19200000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 5881,
+          "checksum": 19200000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6608,
+          "checksum": 19200000
+        }
+      ]
+    },
+    {
+      "pattern": "mixedFields",
+      "ratio": 0.9631256325548533,
+      "trials": [
+        {
+          "variant": "baseline",
+          "cpuUs": 6827,
+          "checksum": 941400000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6554,
+          "checksum": 941400000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6577,
+          "checksum": 941400000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6955,
+          "checksum": 941400000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6520,
+          "checksum": 941400000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6441,
+          "checksum": 941400000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6058,
+          "checksum": 941400000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6348,
+          "checksum": 941400000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6277,
+          "checksum": 941400000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6062,
+          "checksum": 941400000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6071,
+          "checksum": 941400000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6308,
+          "checksum": 941400000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6302,
+          "checksum": 941400000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6471,
+          "checksum": 941400000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6202,
+          "checksum": 941400000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6830,
+          "checksum": 941400000
+        }
+      ]
+    },
+    {
+      "pattern": "aliases",
+      "ratio": 0.9409789335988598,
+      "trials": [
+        {
+          "variant": "baseline",
+          "cpuUs": 8684,
+          "checksum": 940800000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6149,
+          "checksum": 940800000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6139,
+          "checksum": 940800000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6287,
+          "checksum": 940800000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6313,
+          "checksum": 940800000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6183,
+          "checksum": 940800000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 5950,
+          "checksum": 940800000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 6166,
+          "checksum": 940800000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 5964,
+          "checksum": 940800000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6168,
+          "checksum": 940800000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 6003,
+          "checksum": 940800000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 5915,
+          "checksum": 940800000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 5954,
+          "checksum": 940800000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 5792,
+          "checksum": 940800000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 5812,
+          "checksum": 940800000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 5936,
+          "checksum": 940800000
+        }
+      ]
+    },
+    {
+      "pattern": "numericIndex",
+      "ratio": 1.0086479107509103,
+      "trials": [
+        {
+          "variant": "baseline",
+          "cpuUs": 35171,
+          "checksum": 969600000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 38009,
+          "checksum": 969600000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 36245,
+          "checksum": 969600000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 37477,
+          "checksum": 969600000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 38777,
+          "checksum": 969600000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 39688,
+          "checksum": 969600000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 36411,
+          "checksum": 969600000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 35702,
+          "checksum": 969600000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 37135,
+          "checksum": 969600000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 37412,
+          "checksum": 969600000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 39196,
+          "checksum": 969600000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 39421,
+          "checksum": 969600000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 38448,
+          "checksum": 969600000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 38670,
+          "checksum": 969600000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 38786,
+          "checksum": 969600000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 39676,
+          "checksum": 969600000
+        }
+      ]
+    },
+    {
+      "pattern": "mixedKeys",
+      "ratio": 0.983641425704514,
+      "trials": [
+        {
+          "variant": "baseline",
+          "cpuUs": 17696,
+          "checksum": 950550000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 17641,
+          "checksum": 950550000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 16319,
+          "checksum": 950550000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 16990,
+          "checksum": 950550000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 17060,
+          "checksum": 950550000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 17164,
+          "checksum": 950550000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 17848,
+          "checksum": 950550000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 19300,
+          "checksum": 950550000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 18642,
+          "checksum": 950550000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 17608,
+          "checksum": 950550000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 17759,
+          "checksum": 950550000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 17663,
+          "checksum": 950550000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 17421,
+          "checksum": 950550000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 17236,
+          "checksum": 950550000
+        },
+        {
+          "variant": "candidate",
+          "cpuUs": 17626,
+          "checksum": 950550000
+        },
+        {
+          "variant": "baseline",
+          "cpuUs": 16744,
+          "checksum": 950550000
+        }
+      ]
+    }
+  ],
+  "scope": "Actual exported prototype factory, record-store, proxy traps and alias installer; synthetic live DataView-backed fields. Component only, not whole-game attribution."
+}
