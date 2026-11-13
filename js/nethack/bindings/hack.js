@@ -67,8 +67,8 @@ export function createHackEnvironment(services,layout,namespace,servicePrototype
         if(!prototype){
             prototype={};applyPrototypeAliases(name,prototype,'hack');
             Object.setPrototypeOf(prototype,new Proxy(Object.prototype,{
-                get(target,key,receiver){if(typeof key==='string'&&/^\d+$/.test(key))return view(name,addr(receiver)+Number(key)*Number(layout[name+'Size']));if(typeof key==='string'&&!Reflect.has(target,key))throw Error('Unknown HACK record field '+name+'.'+key);return Reflect.get(target,key,receiver);},
-                set(target,key,value,receiver){if(!Reflect.has(target,key))throw Error('Unknown HACK record field '+name+'.'+String(key));return Reflect.set(target,key,value,receiver);}
+                get(target,key,receiver){if(typeof key==='string'&&/^\d+$/.test(key))return view(name,addr(receiver)+Number(key)*Number(layout[name+'Size']));if(typeof key==='string'&&!Reflect.has(target,key)&&!nativeState.completeRecordTypes?.has(type))throw Error('Unknown HACK record field '+name+'.'+key);return Reflect.get(target,key,receiver);},
+                set(target,key,value,receiver){if(!Reflect.has(target,key)&&!nativeState.completeRecordTypes?.has(type))throw Error('Unknown HACK record field '+name+'.'+String(key));return Reflect.set(target,key,value,receiver);}
             }));recordTypes.set(name,prototype);
         }
         const identity=type+':'+at,shared=nativeState.sharedTypes.has(type);

@@ -1,0 +1,143 @@
+{
+  "baseCommit": "9c3b506",
+  "scope": "Game-bound ALLMAIN turn closure, per-turn temporary scopes, direct native dependencies and complete canonical typed record views for all default generic game adapters",
+  "sourcePolicy": {
+    "passed": true,
+    "functions": 16,
+    "localCallConversions": 1,
+    "perTurnScopes": 1,
+    "sourcePolicyAstEqual": true
+  },
+  "recordTransportDifferential": {
+    "passed": true,
+    "fields": 285,
+    "checks": 4212,
+    "canonicalIdentity": true,
+    "aliases": true,
+    "narrowing": true,
+    "arrays": true,
+    "growth": true,
+    "isolation": true
+  },
+  "actualGameplay": {
+    "passed": true,
+    "monsters": 11,
+    "nativeFunctions": 502,
+    "nativeFields": 21376,
+    "nativeStorage": "typed-arrays",
+    "cachedReads": 0,
+    "legacyBoundaries": 55069,
+    "moves": "85"
+  },
+  "originalCWorldComparison": {
+    "profile": "Strict original full-C main against pure JS finite ordinary movement; source death fixture input prefix",
+    "checks": 3,
+    "cases": [
+      {
+        "keys": 716,
+        "moves": "238",
+        "frames": 717,
+        "worldRecords": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 37,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        }
+      }
+    ],
+    "completeGameAccepted": false,
+    "sourceSha256": {
+      "scripts/test-standalone-monster-movement-program.mjs": "56b8be40dfff104fb388f634daceee36fad1400d7003fef953569588ed181906",
+      "scripts/restoration-world-graph.mjs": "a64d28a6a5974a89672ecedd637ebe89b706afb81b87267d8cb18684459907db",
+      "scripts/run-standalone-program.mjs": "29d76709123ab2b78c6e5dc45452b722b58cffc89b1afe1d5e4c2a384f00a479",
+      "scripts/full-original-c-run.mjs": "3da8b7a3dd0b2c1f60eb6a986bcb70c0bb79d120e50a007c1558569301978a9a",
+      "js/nethack/monster-movement.js": "dfdff47b8401bdba8bccee21659e4badfca28484685b15a342e699459ec42012",
+      "js/nethack/monster-lifecycle.js": "e5ce76d444cef171008397c687f5c5b4dcc3917a9766799d65101f0a92c66949",
+      "js/nethack/bindings/monmove.js": "4ee2c2084aa357384454a16cd6fbd94dd6069387bf40934feb40f4b0732d4aeb",
+      "js/ported/monmove.js": "c15e91a573c5a8a8eda8c4d7cda18ef6966645f50ad515382a8dc027c717dc39",
+      "js/nethack/bindings/mon.js": "38616849c82cc2d759e54e01cb21656d180e247a0558b8af97b99b0a8b988674",
+      "js/ported/mon.js": "b76ebfece2f87288bd21915219cb8db7d00652399901b58f8463958a71ca3fe0"
+    },
+    "limitation": "Only these finite recordings and normalized world graphs are accepted; later death, victory, other seeds and unreached movement branches remain separate requirements."
+  },
+  "directedLiveAssertions": [
+    "Native turn roots consume the canonical hero and properties",
+    "Turn-loop movemon dependency resolves directly to the common native function",
+    "Linker nativeEntry exposes the native turn core",
+    "Native scopes preserve an unrelated caller C environment",
+    "Exceptions unwind depth and release turn temporaries",
+    "Canonical records remain synchronous values through legacy scope checks",
+    "Complete shared objects return undefined for absent table/promise protocol properties",
+    "The existing guarded behavior is retained when the type has only a partial projection"
+  ],
+  "rejectedExperiment": {
+    "directory": ".cache/native-allmain-focused-04",
+    "passed": 3,
+    "sessions": 3,
+    "reason": "Canonical tracking-coordinate arrays lacked the iteration interface consumed by native mon_track_clear.",
+    "fix": "Native arrays expose ordered indexed iteration; tracking mutation and replay regression checked.",
+    "correctedFocusedProbe": ".cache/native-allmain-focused-05",
+    "scope": "Turn-loop-only variant predating default generic-view migration; its timing is not evidence for the final broader candidate."
+  },
+  "integrationFixes": [
+    "Function-pointer string assignments use the original literal-string boundary",
+    "Null primitive-array accesses preserve address guard failures",
+    "Nested named record fields without an explicit metadata record annotation resolve to native records",
+    "Complete shared HACK record types use ordinary JS missing-property probes and metadata assignment, while partial/private views retain their unknown-field guard; synchronous/promise and table-protocol queries are tested."
+  ],
+  "rawProofSha256": {
+    ".cache/native-allmain-source-04.log": "3fc9e49337604f7e06e3374c010677f91f979e1d5be1ebd639ac3aba6d482ba5",
+    ".cache/native-allmain-record-views-09.log": "81295fb4b56d28d3a408af00e38ddbdc1be1a9ed0cfcf06c8dd439e1c2379436",
+    ".cache/native-allmain-connected-10.log": "a76fb10e659c20f534165d76163c6f240be7c79c6980f0909f6eebc5414fbed4",
+    ".cache/native-allmain-main-716-09.log": "5c6c5e696b9ce9ae39f599064c42a74192ac1757ce20ec6a8af6c1483ea48628",
+    ".cache/native-allmain-kernel-state-09.log": "cef092dd71123fabd56ce3fc508001f2d2b568335445b152f091a3775b9607f4",
+    ".cache/native-allmain-address-dispatch-09.log": "b95ddf395e94942180729126fc15d95c42a82175d8218402ea0590468072d0fc",
+    ".cache/native-allmain-vision-dispatch-09.log": "0624974090cb55db0e33887933e77d82c04a7f98de6c6ea5aeb416c0078af5d4",
+    ".cache/native-allmain-hack-10.log": "96d7b8287ed2baa4eeeec4e766174be84c221a7d6e762542d5504ee8db325403",
+    ".cache/native-allmain-runtime-contracts-10.log": "07ee503dea72061c94bf7121c2a8c00362b57e4afd8b17fd7a9b9ffb10910d42",
+    ".cache/native-allmain-hack-reuse-10.log": "30e49faf720828fb4a28788e812572a2af56f03df0c26b68823d7dff0f34ff59"
+  },
+  "sourceSha256": {
+    "js/nethack/record-views.js": "21f768a2eb512283121a9275abdeb6573baf5ca033abd582880862efb8dae06b",
+    "js/nethack/native/record-views.js": "84f3271a1291e70428485f8349ed319117ba26e694cc9ea6ef2b0a02fbbe47bf",
+    "js/nethack/turn-loop.js": "2dab8a614c40c18e6980f9f23fd032572715d7f910c23507d113c747b766ed1d",
+    "js/nethack/native/turn-loop.js": "3902e7bd0f55e6727f8f22ff4254465d7011e4cd8f39b7b9a75ed4244ea59dfb",
+    "scripts/generate-native-allmain.py": "6197b56f9de30a4ec4efb59b5cca12fb605cf3c895296aab30cfd42798c0153d",
+    "scripts/test-native-allmain-source.mjs": "a241960ac42169987c841fc21ea9c4e70b489f09ef3c7ffbf083eb5efae903d6",
+    "scripts/test-native-record-views.mjs": "570c5957ebc6312e2cfed3f5d9e1f612d2bb74b54a1cc74e5466c135f9010c41",
+    "scripts/test-native-connected-monsters.mjs": "eb7e1a107f096599b2943ccb6a919ec725ee6dd1ca2f7ca843718f6f4a1d875a",
+    "js/nethack/bindings/hack.js": "b7d6cb2e0d44139e1c76a75f332a9ef9a97a97d28f71ccb413b8b2cd2f6caadf"
+  },
+  "limits": [
+    "Directed differential covers285 scalar/packed fields and4212 checks against retained byte transport, plus nested records, tracking iteration, array copies, aliases, growth and instance isolation.",
+    "Original-C gameplay comparison covers716 inputs/238 turns and its normalized world graph, both RNG histories and717 frames; no claim of all possible games.",
+    "Full final-source strict recording acceptance and timing are reported separately.",
+    "Complete measured record views retain C-compatible physical storage. Legacy functions, dynamic callbacks, enum/float fallbacks and unconverted engine owners remain.",
+    "Twentyfold speedup remains unproven; no new baseline replay or CPU profiling."
+  ],
+  "rejectedPublicCandidate": {
+    "directory": ".cache/native-allmain-public-08",
+    "passed": 43,
+    "sessions": 44,
+    "reason": "Object naming queried an absent table protocol property on a canonical object; the guarded HACK partial-view prototype threw.",
+    "fix": "Complete native record types have ordinary JS missing-property behavior; private and partial guards remain. Directed live checks and the affected recording pass.",
+    "affectedRecordingReplay": ".cache/native-allmain-probes-10",
+    "affectedRecordingsPassed": 1,
+    "timingAccepted": false
+  },
+  "publicNativeEntries": 6,
+  "retainedPartialHackComparison": {
+    "cases": 426,
+    "checks": 4338,
+    "routines": 95,
+    "passed": true,
+    "scope": "Independent configured C/JS component comparison of retained HACK adapter; complete native game behavior is validated separately by original-C gameplay and strict recordings."
+  },
+  "runtimeContracts": "passed",
+  "hackReuse": "passed"
+}

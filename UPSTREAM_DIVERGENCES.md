@@ -1,3 +1,63 @@
+## Native ALLMAIN turns and complete shared record views (worktree, 2026-11-13)
+
+Additional work after9c3b506. `scripts/generate-native-allmain.py` generates a
+per-game ALLMAIN closure from unchanged source policy; local calls remain direct.
+The loop calls its existing core body through one native turn scope, which owns
+temporary lifetimes per turn rather than retaining scratch memory for an entire
+game. `js/nethack/native/record-views.js` compiles complete measured record
+projections, joins canonical shared actors/properties/map cells, caches inline
+aggregate identities and uses typed scalar/packed fields and numeric references.
+`js/nethack/turn-loop.js` installs these views and direct native dependency
+getters. The default game `record-views.js` entry now supplies this same per-game
+owner to inventory, monster creation, timers, turn handling, persistence and
+other generic record consumers; component owners without a typed arena retain
+their original byte projections. Legacy functions and window callbacks retain ABI conversions and their
+context boundaries. Native entries preserve lazy module startup and share the
+existing ALLMAIN startup context/private values. No RNG/source policy, compiled
+C reference, assets, recorder, save format or session change is intended.
+This is an accepted finite equivalence checkpoint with measured timing below;
+an ordinary turn free of the generic C runtime and20x remain unachieved.
+
+Current checks pass: all16 generated functions have identical policy/RNG AST
+after reversing the one per-turn scope and local-call lowering;285 scalar/packed
+fields pass4,212 differential byte/coercion checks against retained transport,
+plus nested records, ordered tracking iteration, array copies, growth and
+isolation. Actual85-turn gameplay proves canonical turn-loop hero/properties,
+direct movemon dispatch, no native C-environment switch, exceptional depth and
+temporary cleanup. Original-C main matches716 inputs/238 turns,717 frames,
+normalized world graph and both RNG histories. Kernel/address/visibility
+dispatch regressions pass. Component evidence is recorded in
+`docs/runtime-environment/native-allmain-component-validation.json`.
+
+The turn-loop-only focused04 candidate was rejected after tracking-coordinate
+arrays lacked the iterator consumed by `mon_track_clear`; ordered iteration and
+a regression were added, and focused05 passed all three selected recordings.
+That probe predates the wider default record migration. Full public08 is
+rejected at43/44: object naming queried an optional JS `table` property on a
+canonical object, but the HACK partial-view prototype threw. Complete native
+record types now use ordinary JS missing-property/metadata assignment behavior
+through that prototype; numeric row access and header aliases remain. Partial
+and private HACK projections retain their unknown-field guard. Directed tests
+cover both modes, including promise-protocol queries at synchronous boundaries.
+Intermediate integration also corrected named nested structs lacking an explicit
+metadata record annotation, function-pointer string literal conversion and null
+array address guards. No rejected timing is accepted as a speed result.
+
+Final source-stable `.cache/native-allmain-public-10` passes44/44 strict metrics:
+792,838 RNG entries,11,405 screens/cursors,1,483 animation frames with ordered
+cursor triples, all56 persistence segments and zero forbidden capability
+attempts. All774 scoring inputs remain unchanged during the run; frozen/session
+bytes are unchanged. Engine time374.62943s →359.21536s is4.1145% lower versus
+the preceding typed-state checkpoint; geometric mean session speedup1.02721x.
+Against the earlier address-engine checkpoint377.40465s the reduction is4.8196%.
+Fit changes21.4156ms/turn →20.3633ms/turn; wall time364.12218s. These are single
+same-host historical comparisons, not a fresh paired estimate. No baseline
+replay or profiling. Receipts are `native-allmain-public-validation.json`,
+`native-allmain-timing.json` and `native-allmain-timing-address.json` under
+`docs/runtime-environment`. The next connected migration is native pet/combat
+execution and removal of the remaining internal ABI wrappers; those are not
+claimed converted by this checkpoint.
+
 ## Connected typed native state (worktree, 2026-11-13)
 
 Additional work after visibility checkpoint2322664. The thirteen default address
