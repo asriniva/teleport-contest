@@ -29,6 +29,9 @@ assert.ok(combat.services.healmon===owner.functions.get('healmon'),'combat calls
 for(const name of ['mattackm','fightm','mdisplacem','sleep_monst'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' is published directly');
 const combatActor=[...owner.records].find(([key])=>key.startsWith('struct monst:'))?.[1];assert.ok(combatActor);assert.equal(combat.context.monster(combatActor.address),combatActor);
 assert.equal(combat.context.permonst(combatActor.data.address),combatActor.data);
+const allActors=[...owner.records].filter(([key])=>key.startsWith('struct monst:')).map(([,value])=>value);assert.ok(allActors.length>1);
+for(const field of ['mhp','mx','mcan']){const first=Object.getOwnPropertyDescriptor(allActors[0],field).get;assert.ok(allActors.every(actor=>Object.getOwnPropertyDescriptor(actor,field).get===first),'live monsters share '+field+' accessors');}
+
 const priorKilled=owner.functions.get('monkilled'),stringMarker={nativeStringCaller:true};let stringChecks=0;
 const killedProbe=(actor,why,how)=>{assert.ok(actor===combatActor);assert.ok(why,'an empty C string remains a non-null pointer');assert.equal(environment.memory.readString(why),'');assert.equal(how,7);assert.equal(C,stringMarker);stringChecks++;};killedProbe.nativeState=owner;
 try{owner.functions.set('monkilled',killedProbe);withCEnvironment(stringMarker,()=>combat.services.monkilled(combatActor,'',7));assert.equal(stringChecks,1);}

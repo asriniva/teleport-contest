@@ -72,7 +72,7 @@ export function createHackEnvironment(services,layout,namespace,servicePrototype
             }));recordTypes.set(name,prototype);
         }
         const identity=type+':'+at,shared=nativeState.sharedTypes.has(type);
-        const out=(shared?nativeState.records.get(identity):undefined)??{address:at};
+        const out=(shared&&nativeState.nativeArena&&nativeState.nativeRecords?nativeState.nativeRecords.record(type,at):shared?nativeState.records.get(identity):undefined)??{address:at};
         if(shared)nativeState.records.set(identity,out);
         if(!Object.hasOwn(out,'kind'))Object.defineProperty(out,'kind',{value:name,enumerable:true});
         Object.setPrototypeOf(out,prototype);

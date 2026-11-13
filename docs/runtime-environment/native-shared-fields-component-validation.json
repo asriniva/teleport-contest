@@ -1,0 +1,166 @@
+{
+  "baseCommit": "b80a6c3",
+  "scope": "Canonical shared integer/packed accessors and direct typed-state reads across native address kernels",
+  "allMeasuredRecordCoercion": {
+    "passed": true,
+    "recordTypes": 380,
+    "fields": 2689,
+    "checks": 39722,
+    "canonicalIdentity": true,
+    "aliases": true,
+    "narrowing": true,
+    "arrays": true,
+    "growth": true,
+    "isolation": true,
+    "sharedScalarAndBitAccessors": true,
+    "fixedStorageAddress": true,
+    "unalignedRecords": true
+  },
+  "fieldPlans": {
+    "passed": true,
+    "ports": 13,
+    "fields": 2603,
+    "checks": 33917,
+    "nativeReads": 10085,
+    "evaluationOrder": true
+  },
+  "liveKernelState": {
+    "passed": true,
+    "gameKernels": [
+      "detect",
+      "display",
+      "dungeon",
+      "invent",
+      "mklev",
+      "mkmaze",
+      "mkobj",
+      "muse",
+      "pickup",
+      "pray",
+      "shk",
+      "sp_lev"
+    ],
+    "canonicalFields": true,
+    "displayNativeReads": true,
+    "byteAliases": true,
+    "foreignReentry": true,
+    "exceptions": true,
+    "serviceReplacement": true,
+    "legacyMutableMetadata": true,
+    "directTypedReads": true,
+    "unalignedReads": true,
+    "growth": true,
+    "noReadProjection": true
+  },
+  "actualGameplay": {
+    "passed": true,
+    "monsters": 11,
+    "nativeFunctions": 542,
+    "nativeFields": 21456,
+    "nativeStorage": "typed-arrays",
+    "cachedReads": 0,
+    "legacyBoundaries": 54626,
+    "moves": "85"
+  },
+  "originalCWorldComparison": {
+    "profile": "Strict original full-C main against pure JS finite ordinary movement; source death fixture input prefix",
+    "checks": 3,
+    "cases": [
+      {
+        "keys": 716,
+        "moves": "238",
+        "frames": 717,
+        "worldRecords": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 37,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        }
+      }
+    ],
+    "completeGameAccepted": false,
+    "sourceSha256": {
+      "scripts/test-standalone-monster-movement-program.mjs": "56b8be40dfff104fb388f634daceee36fad1400d7003fef953569588ed181906",
+      "scripts/restoration-world-graph.mjs": "a64d28a6a5974a89672ecedd637ebe89b706afb81b87267d8cb18684459907db",
+      "scripts/run-standalone-program.mjs": "29d76709123ab2b78c6e5dc45452b722b58cffc89b1afe1d5e4c2a384f00a479",
+      "scripts/full-original-c-run.mjs": "3da8b7a3dd0b2c1f60eb6a986bcb70c0bb79d120e50a007c1558569301978a9a",
+      "js/nethack/monster-movement.js": "da26ad77eeb123321502049bb4e7857312bb0a5c0a2c45c80868b5721c81cef2",
+      "js/nethack/monster-lifecycle.js": "619e230d8da987e63b0094790d2dc933655d0d23b90971efcc78c8617a5c39f9",
+      "js/nethack/bindings/monmove.js": "4ee2c2084aa357384454a16cd6fbd94dd6069387bf40934feb40f4b0732d4aeb",
+      "js/ported/monmove.js": "c15e91a573c5a8a8eda8c4d7cda18ef6966645f50ad515382a8dc027c717dc39",
+      "js/nethack/bindings/mon.js": "e81fe61548076f0ea9dc7aaa9b5364cb8b14c41719f16bbf4d8a9314ef313be5",
+      "js/ported/mon.js": "b76ebfece2f87288bd21915219cb8db7d00652399901b58f8463958a71ca3fe0"
+    },
+    "limitation": "Only these finite recordings and normalized world graphs are accepted; later death, victory, other seeds and unreached movement branches remain separate requirements."
+  },
+  "nativeControlledMatrices": {
+    "dogmove": {
+      "comparisons": 2469,
+      "functions": 20,
+      "passed": true
+    },
+    "mhitu": {
+      "cases": 623,
+      "comparisons": 7179,
+      "rngSites": 78,
+      "passed": true
+    },
+    "mhitm": {
+      "comparisons": 3326,
+      "functions": 22,
+      "passed": true
+    },
+    "expandedMhitm": {
+      "cases": 992,
+      "seeds": 32,
+      "attackConfigurations": 12,
+      "passed": true
+    }
+  },
+  "regressions": {
+    "directDispatch": "passed",
+    "inlineGlobals": "passed",
+    "visibilityDispatch": "passed"
+  },
+  "integrationFindings": [
+    "All measured record types are checked against retained record transport for scalar/pointer/packed writes, coercion failures and exact bytes. Aggregate-copy behavior has directed checks, not exhaustive all-aggregate field copying.",
+    "All-record check exposed a pre-existing pointer-typedef numeric-string mismatch. Native setter now follows the retained spelled-type literal-conversion rule.",
+    "Native game monsters share ordinary scalar and packed accessor functions, with private immutable storage anchoring public metadata changes.",
+    "Direct typed reads avoid materializing record wrappers and preserve unaligned access and heap growth. Writes, aggregate copies and 64-bit value-cache paths retain their existing handling."
+  ],
+  "rawProofSha256": {
+    ".cache/native-shared-fields-all-records-04.log": "4b19eda251dc95282a3234a928384693f4987725502ca04589f3fca93e48e15c",
+    ".cache/native-shared-fields-plans-05.log": "29be7be51f18915957d4a470a8443a4fdf9de9493a0cbc4002bf10a0f48fefaf",
+    ".cache/native-shared-fields-kernels-06.log": "7839b64cfea3f57aed32494c00d6d3b544124206bad4d00ddd503643231d13ff",
+    ".cache/native-shared-fields-connected-05.log": "85adc0f13df557f8c058a73cb54885c3672365d957d1211dbed1425c516665a8",
+    ".cache/native-shared-fields-main-716-05.log": "0cbc517a0fe97605a2e61371d61efca89521a0573842d714bff5818db4f5822e",
+    ".cache/native-shared-fields-dogmove-04.log": "0f0992307b60011db110e09054d44d2eb44fa68695ce545bcee383986c3115c4",
+    ".cache/native-shared-fields-mhitu-04.log": "15d194cbd47773ce44f8f5c6102c67d4323913a7af2a8c4e4dc51dc6b7d28661",
+    ".cache/native-shared-fields-mhitm-04.log": "6490dfd7208b465b909f5977d76ef77cd78474c1573d9ea49c79a46648f8ec25",
+    ".cache/native-shared-fields-mhitm-branches-02.log": "823d19349688964d71e121fad2a528a5bc6b693b5e83edc5e5c77051bea05df5",
+    ".cache/native-shared-fields-dispatch-05.log": "b95ddf395e94942180729126fc15d95c42a82175d8218402ea0590468072d0fc",
+    ".cache/native-shared-fields-globals-02.log": "443fb111c1a6c1d389f23ae0e5aef1c165b04b62de488317c33f9559b56ffc27",
+    ".cache/native-shared-fields-vision-02.log": "0624974090cb55db0e33887933e77d82c04a7f98de6c6ea5aeb416c0078af5d4"
+  },
+  "sourceSha256": {
+    "js/nethack/native/record-views.js": "3a6dde64e74e72ea9e2a3e16d23da9900493d0c3ef9997c6a918a5c4ba741c6b",
+    "js/nethack/native/address-fields.js": "09fdae314618f470eae64ea588e2cff540e7351768ef8113e66bef3d7e6b29de",
+    "js/nethack/environment.js": "851b076b330c77ac2ea4fe79f2404f4fb38985a505868856ae1d30aa57b76be2",
+    "js/nethack/bindings/hack.js": "568789797fce0fa117f91aedba6cf9a0946c8d4674d87f916e872814ea5c273f",
+    "js/nethack/bindings/mon.js": "e81fe61548076f0ea9dc7aaa9b5364cb8b14c41719f16bbf4d8a9314ef313be5",
+    "scripts/test-native-record-views.mjs": "d7252325f7b46c84018cf01841b389fa0979b425f64e635b0e34567f5df8539b",
+    "scripts/test-native-address-plans.mjs": "ad4e828b431055311320d30766f6b93bff84b8644f379bdf5c6e2c600a8fed62",
+    "scripts/test-native-kernel-state.mjs": "d03bedbe6a76795afc15d559e6c7cf36566c2fc59b4b00704b92a554832061c4",
+    "scripts/test-native-connected-monsters.mjs": "169125529b1e779245a4de569291495c4c37086940e32cc36b427402b2007d6f"
+  },
+  "limits": [
+    "Finite original-C main and controlled C matrices do not establish every seed, game branch or host. Strict full recording evidence is separate.",
+    "Shared JS accessors use their native receiver; borrowed getter reflection is not the prior per-instance closure interface or a C gameplay interface.",
+    "No new baseline replay or CPU profiling. Required 20x and a runtime-free ordinary turn remain unachieved."
+  ]
+}

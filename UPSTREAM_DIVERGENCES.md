@@ -1,3 +1,60 @@
+## Shared native state accessors and direct field reads (worktree, 2026-11-13)
+
+Additional work after b80a6c3. Complete native records share per-type ordinary
+8/16/32-bit integer and packed-bit accessors instead of allocating those getter
+and setter functions separately for every record. A private immutable storage
+address anchors fields; changing public address metadata does not rebind storage.
+BigInt value caches, pointer projections, lazy nested aggregates, byte aliases,
+unaligned access and heap growth retain their existing paths. Native record
+ownership is installed when the game memory owner is created. HACK and MON obtain
+complete shared records first, so live hero/monster/map access uses the canonical
+layout and shared accessors rather than retaining partial adapter fields.
+Legacy component owners without a typed arena keep their old paths. No C source,
+RNG sites/order, game policy, save format, assets or frozen recordings are changed.
+The accessor reflection interface now uses the receiver's native storage, as a
+shared JS accessor does; borrowed getters were not a C engine interface. Native
+field coercion and integration are validated below.
+A broader all-record comparison exposed a pre-existing pointer-typedef setter
+mismatch: retained setters interpret a numeric string as an address when the
+spelled field type contains no explicit `*`, while the native setter materialized
+a string literal after expanding the typedef. Native setters now preserve that
+spelled-type conversion rule; explicit pointer fields still materialize strings.
+`native/address-fields.js` also compiles typed-state reads for measured ordinary
+integers, pointers and packed fields across the connected address kernels. These
+reads consume the same physical native state without constructing/decoding a
+record view on every access. First-use shared-record range validation, unaligned
+fallback, pointer precision and packed widths remain explicit; aggregate, 64-bit
+value-cache and write paths retain their prior handling. Validation/timing of
+this combined change are recorded below.
+
+All 380 measured record types pass 39,722 transport/byte comparisons over 2,689
+eligible scalar, pointer and packed fields. Directed tests verify shared getter/
+setter identities, receiver behavior, fixed storage anchoring, arrays, aliases,
+unaligned records, isolation and growth. Field plans pass 33,917 comparisons over
+2,603 fields in 13 address modules, including 10,085 direct typed reads. Actual
+gameplay proves shared monster accessor identities and canonical state. A
+lookup trap proves typed reads avoid record materialization, including unaligned
+records and heap growth. Native controlled C matrices pass DOGMOVE 2,469 checks,
+MHITU 623 cases/7,179 checks across 78 RNG sites, MHITM 3,326 checks and its 992-case
+expanded matrix. Original-C main matches 716 inputs/238 turns, 717 frames,
+normalized world graph and both RNG histories. These finite/controlled checks
+are not acceptance of every seed, branch or host. Aggregate copies have directed
+checks, not an exhaustive every-aggregate-field proof. Component receipt:
+`docs/runtime-environment/native-shared-fields-component-validation.json`.
+
+Final source-stable `.cache/native-shared-fields-public-06` passes 44/44 strict
+recordings: 792,838 RNG entries, 11,405 screens/cursors, 1,483 animation frames and
+ordered cursor triples, all 56 persistence segments and zero forbidden attempts.
+All 778 scoring inputs remain unchanged; frozen/session bytes are unchanged.
+Engine time 347.46933s → 339.36452s is 2.3325% lower; geometric mean session
+speedup 1.01904x. Fit 19.4606ms/turn → 18.9384ms/turn; wall 344.40671s. This is a
+single historical-reference comparison, not a robust paired causal estimate.
+Receipts: `native-shared-fields-public-validation.json` and
+`native-shared-fields-timing.json` under `docs/runtime-environment`.
+No new baseline replay or CPU profiling. Native field writes, remaining generic
+adapters/engine execution, initialization and end-to-end display costs remain.
+A runtime-free ordinary turn and 20x remain unachieved.
+
 ## Connected native monster combat (worktree, 2026-11-13)
 
 Additional work after 15da33d. `scripts/generate-native-monster-combat.py` binds

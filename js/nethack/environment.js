@@ -1,3 +1,4 @@
+import {createNativeRecordViews} from './native/record-views.js';
 import {createEnvironmentServices} from '../c-runtime/environment.js';
 import {address} from '../c-runtime/memory.js';
 import {createNetHackRuntime} from './runtime-bindings.js';
@@ -392,5 +393,6 @@ export function createStandaloneEnvironment(options={}) {
     });
     register('runtime-public-calendar',Object.fromEntries(['phase_of_the_moon','friday_13th'].map(name=>[name,()=>base.calendar(name)])));
     nativeStateFor(environment).nativeArena=new NativeTypedState(memory);
+    createNativeRecordViews(environment);
     return environment;
 }

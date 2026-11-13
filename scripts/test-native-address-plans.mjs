@@ -6,7 +6,7 @@ import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {compileNativeFieldPlans,createNativeAddressFields} from '../js/nethack/native/address-fields.js';
 const metadata=JSON.parse(fs.readFileSync('js/nethack/address-ports.json')).ports;
 const env=createStandaloneEnvironment({initialBytes:1024,maximumBytes:128*1024*1024});
-let checks=0,fields=0;
+let checks=0,fields=0,nativeReads=0;
 for(const[name,{schema}]of Object.entries(metadata)){
  const plans=compileNativeFieldPlans(env,schema);
  for(const[kind,[key,row]]of Object.entries(schema.schema).entries()){
@@ -19,6 +19,7 @@ for(const[name,{schema}]of Object.entries(metadata)){
     const actual=plan.read(p),expected=env.ctypes.getField(row.ctype,q,f.name,f.canonical);
     const field=env.ctypes.record(row.ctype).fields[f.name],aggregate=field.record||f.canonical.includes('[')||(!f.canonical.includes('*')&&!/^(enum |char$|signed char$|unsigned char$|short$|unsigned short$|int$|unsigned int$|unsigned$|long$|unsigned long$|long long$|unsigned long long$|float$|double$)/.test(f.canonical));
     assert.equal(aggregate?Number(actual)-p:actual,aggregate?Number(expected)-q:expected,name+':'+key+'.'+f.name);checks++;
+    if(plan.nativeRead){const typed=plan.nativeRead(p);assert.equal(typeof expected==='bigint'?BigInt(typed):typed,expected,name+':'+key+'.'+f.name+' native read');nativeReads++;checks++;}
    }
    const field=env.ctypes.record(row.ctype).fields[f.name],type=env.ctypes.canonical(f.canonical);
    if(!field.record&&!type.includes('[')&&(/^(enum |char$|signed char$|unsigned char$|short$|unsigned short$|int$|unsigned int$|unsigned$|long$|unsigned long$|long long$|unsigned long long$|float$|double$)/.test(type)||type.includes('*'))){
@@ -37,4 +38,4 @@ const f=createNativeAddressFields({ptr:Number},services,{schema:{x:{fields:[{can
 assert.equal(f.compound(f.readers[0],f.writers[0],12,'+=',()=>{trace.push('rhs');return 3;}),7);
 assert.deepEqual(trace,['read','rhs','write:7']);
 trace.length=0;assert.equal(f.update(f.readers[0],f.writers[0],12,'++',false),4);assert.deepEqual(trace,['read','write:5']);
-console.log(JSON.stringify({passed:true,ports:Object.keys(metadata).length,fields,checks,evaluationOrder:true}));
+console.log(JSON.stringify({passed:true,ports:Object.keys(metadata).length,fields,checks,nativeReads,evaluationOrder:true}));

@@ -69,4 +69,15 @@ try {
  delete game.services._native_kernel_probe;
 } finally {monster.mhp=old.hp;monster.mx=old.mx;hero.ux=old.ux;hero.ustuck=old.stuck;mapCell.lit=old.lit;owner.leave();}
 assert.equal(owner.depth,0);assert.equal(owner.dirty.size,0);
-console.log(JSON.stringify({passed:true,gameKernels,canonicalFields:true,displayNativeReads:true,byteAliases:true,foreignReentry:true,exceptions:true,serviceReplacement:true,legacyMutableMetadata:true}));
+// Native reads consume typed state directly, even before a projection exists.
+const freshMon=memory.calloc(1,game.ctypes.size('struct monst')+1)+1,freshHero=memory.calloc(1,game.ctypes.size('struct you'));
+game.ctypes.setField('struct monst',freshMon,'mhp','int',31);game.ctypes.setField('struct monst',freshMon,'mx','short',5);
+game.ctypes.setField('struct you',freshHero,'ux','short',7);game.ctypes.setField('struct you',freshHero,'ustuck','struct monst *',BigInt(freshMon));
+const recordsBefore=owner.records.size;assert.ok(!Object.hasOwn(owner.records,'get'));
+owner.records.get=()=>{throw Error('native field read rebuilt a record');};
+try{
+ assert.equal(fields.readers[0](freshMon),31);assert.equal(fields.readers[1](freshMon),5);assert.equal(fields.readers[2](freshHero),7);assert.equal(fields.readers[3](freshHero),freshMon);
+ memory.grow(memory.buffer.byteLength+1);assert.equal(fields.readers[0](freshMon),31);assert.equal(fields.readers[3](freshHero),freshMon);
+ assert.equal(owner.records.size,recordsBefore,'typed reads retain handles without materializing record wrappers');
+}finally{delete owner.records.get;}
+console.log(JSON.stringify({passed:true,gameKernels,canonicalFields:true,displayNativeReads:true,byteAliases:true,foreignReentry:true,exceptions:true,serviceReplacement:true,legacyMutableMetadata:true,directTypedReads:true,unalignedReads:true,growth:true,noReadProjection:true}));
