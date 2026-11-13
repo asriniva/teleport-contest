@@ -1,3 +1,42 @@
+## Native eating, hunger and occupation execution ( 2026-11-13)
+
+`native/eat.js` binds all 77 original eating routines and source data to one game
+context, with 11 direct local calls. `bindings/eat.js` uses the complete canonical
+native hero, monster, item, species, map and other measured records. Object
+`nexthere` explicitly follows its shared union member when not already supplied
+by another native owner. Occupation and after-move globals retain their measured
+callback-token projections. A mutable per-game namespace updates all six
+occupation callbacks and all selection/monster callback identity checks together;
+source functions never alternate between old and new identities.
+
+`eat.js` publishes direct native entries, including the earlier inventory and
+nutrition hooks, prepares native ABI parameters, selects native dependency
+entries when available and preserves the legacy boundary for other providers.
+`callEat` retains provider ownership, automatic temporary cleanup, literal
+conversion and callback transport; native calls retain their caller's C scope.
+Remaining pointer-based local buffers, naming, menu/targeting adapters, aggregate
+array views and foreign dependencies are explicit limitations. No source eating
+policy, hunger arithmetic, mutation order, RNG site/call/order, upstream C,
+recording input, save format or capture encoding is changed.
+
+The source test matches all 77 bodies after the declared context/local-call
+lowering. Native fixture mode passes 7,332 original-C comparisons across all 77
+routines, including visible tables, inventory and selection, occupations,
+callback reentry, growth, unknown callback pointers and game isolation. Actual
+main checks establish the shared hero/item identities, native entry publication,
+real occupation tokens, stable function identities and cleanup after a throwing
+callback. Metadata and all 42 dynamic dispatcher sites still pass. The actual
+walk/wait/attack comparison preserves complete C RNG logs, state, tty and frames.
+Generic calls are 36/99/191, C scope entries 66/173/337, fields 65/129/1,283,
+pointer dispatches 10/13/25 and C allocations 54/194/156. The strict zero-bridge
+and zero-allocation gate still fails. Public verification passes 44/44, all 789 scoring inputs unchanged: 792,838
+RNG entries, 11,405 screens/cursors and 1,483 animations match. Unprofiled Node
+22.23.5 batch time is 307.764s versus 307.927s for the preceding movement-local
+step; these separate single runs show essentially unchanged total time, not 20x
+performance. Evidence: `docs/runtime-environment/native-eating-validation.json`
+and source manifest. CI adds the eating source
+check without changing scoring requirements.
+
 ## Native monster movement scalar locals ( 2026-11-13)
 
 `native/scalar-local.js` keeps short/int local references as narrowed JS Numbers

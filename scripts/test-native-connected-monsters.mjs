@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import {runStandaloneProgram} from './run-standalone-program.mjs';
 import {enableMonsterLifecycle} from '../js/nethack/monster-lifecycle.js';
 import {nativeStateFor} from '../js/nethack/native/state-bridge.js';
+import {eatContext} from '../js/nethack/bindings/eat.js';
 import {callVision} from '../js/nethack/bindings/vision.js';
 import {C,withCEnvironment} from '../js/c-runtime/context.js';
 const reference='.cache/full-original-c-v1';
@@ -60,6 +61,22 @@ try{attributes.assert=valid=>{assert.ok(valid);assert.equal(C,attributeMarker);}
 assert.equal(environment.memory.live.size,liveBeforeAttributes,'attribute callback temporaries are freed after exceptions');
 const oldStrength=attributes.ABASE[layouts.attrib.A_STR];
 try{attributes.ABASE[layouts.attrib.A_STR]=oldStrength===18?17:18;assert.equal(hero.acurr.a[layouts.attrib.A_STR],attributes.ABASE[layouts.attrib.A_STR]);environment.memory.grow(environment.memory.buffer.byteLength+1);assert.equal(hero.acurr.a[layouts.attrib.A_STR],attributes.ABASE[layouts.attrib.A_STR],'canonical attributes remain connected after growth');}finally{attributes.ABASE[layouts.attrib.A_STR]=oldStrength;}
+const eatingServices=environment.start('hero-hunger').environment,eating=eatContext(eatingServices,layouts.eat);
+assert.ok(eating.u===hero,'eating consumes the shared native hero');
+for(const name of ['gethungry','morehungry','doeat','is_edible','food_disappears','obj_nutrition','eaten_stat'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' uses connected native eating execution');
+const priorOccupation=eating.go.occupation,priorAfterMove=eating.ga.afternmv;
+try{eating.go.occupation=eating.nativeNamespace.eatfood;eating.ga.afternmv=eating.nativeNamespace.Hear_again;
+ assert.equal(eating.go.occupation,eating.nativeNamespace.eatfood,'occupation reads return the game-owned function identity');
+ assert.equal(eating.ga.afternmv,eating.nativeNamespace.Hear_again,'after-move reads return the game-owned function identity');
+ assert.equal(BigInt(owner.nativeArena.pointer(environment.ctypes.locate('struct instance_globals_o',environment.requireGlobal('go'),'occupation').at)),BigInt(eatingServices.callbackPointer(1)),'native occupation writes use the real typed callback token');
+}finally{eating.go.occupation=priorOccupation;eating.ga.afternmv=priorAfterMove;}
+const eatingObjectAt=environment.memory.calloc(1,layouts.eat.objSize),eatingObject=eating.object(eatingObjectAt),priorEatingInt=eating.int,eatingMarker={nativeEatingCaller:true};
+assert.equal(eatingObject,owner.nativeRecords.record('struct obj',eatingObjectAt),'eating and movement share item identities');
+try{eatingObject.otyp=layouts.eat.FOOD_RATION;eatingObject.oclass=layouts.eat.FOOD_CLASS;
+ const before=environment.memory.live.size;eating.int=value=>{assert.equal(C,eatingMarker);return priorEatingInt(value);};withCEnvironment(eatingMarker,()=>assert.equal(environment.services.is_edible(eatingObject),1));
+ eating.int=()=>{assert.equal(C,eatingMarker);environment.transport.stackAlloc(24);throw Error('native eating cleanup');};withCEnvironment(eatingMarker,()=>assert.throws(()=>environment.services.is_edible(eatingObject),/native eating cleanup/));
+ assert.equal(environment.memory.live.size,before,'eating callback temporaries are freed after exceptions');
+}finally{eating.int=priorEatingInt;environment.memory.free(eatingObjectAt);}
 const pets=environment.enableDogmove(layouts),attacks=environment.enableMhitu(layouts);
 assert.equal(pets.context.u,hero);assert.equal(attacks.context.u,hero);
 const combat=environment.enableMhitm(layouts);assert.equal(combat.context.u,hero);assert.equal(combat.context.levl[hero.ux][hero.uy],pets.context.levl[hero.ux][hero.uy],'combat and pets share canonical map cells across their array interfaces');

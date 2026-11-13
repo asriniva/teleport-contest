@@ -29,6 +29,7 @@ jobs:
         run: |
           node scripts/test-native-address-source.mjs
           node scripts/test-native-attrib-source.mjs
+          node scripts/test-native-eat-source.mjs
           node scripts/test-native-termcap-source.mjs
           node scripts/test-native-scalar-local.mjs
 
