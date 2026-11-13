@@ -36,7 +36,7 @@ export function enableEating(environment,layouts,hungerTable){
   if(!abi.shapes.includes(shape))throw new Error('Review EAT format '+f);
   return args.map((v,i)=>shape[i]==='p'?text(v):shape[i]==='l'?transport.long(v):transport.int(v));
  };
- const window=(name,signature,...args)=>{const at=field('struct window_procs',environment.requireGlobal('windowprocs'),name);return functions.indirect(memory.view.getBigUint64(at,true),signature,...args);};
+ const window=(name,signature,...args)=>{if(environment.nativeWindowCallbacks)return environment.nativeWindowCallbacks.invoke(name,signature,...args);const at=field('struct window_procs',environment.requireGlobal('windowprocs'),name);return functions.indirect(memory.view.getBigUint64(at,true),signature,...args);};
  Object.assign(local,{
   nativeOwner:native,moduleKey:environment,heap:()=>memory.HEAPU8,
   global:i=>{const name=abi.globals[i];if(!name)throw new Error('Unknown EAT global '+i);return environment.requireGlobal(name);},

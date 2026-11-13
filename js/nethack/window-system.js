@@ -1,3 +1,4 @@
+import {createNativeWindowCallbacks} from './native/window-callbacks.js';
 import {nativeStateFor} from './native/state-bridge.js';
 import {createNativeRecordViews} from './native/record-views.js';
 import {enableUnixTerminal} from './unix-terminal.js';
@@ -23,6 +24,7 @@ export function enableWindowSystem(environment,layouts){
  const terminal=Object.hasOwn(environment.status(),'termcap')?null:environment.enableTerminal(layouts.termcap);
  const proxy=()=>new Proxy(Object.create(services),{get:(o,k,r)=>Reflect.has(o,k)?Reflect.get(o,k,r):typeof k==='string'?(...args)=>environment.resolve(k)(...args):undefined});
  const owner=nativeStateFor(environment);createNativeRecordViews(environment);
+ const windowCallbacks=createNativeWindowCallbacks(environment,owner);environment.nativeWindowCallbacks=windowCallbacks;
  const t=proxy(),w=proxy();for(const root of ['windowprocs','cg','gs','hexdd','def_monsyms','def_oc_syms',...W.globalfields.map(path=>path.split('.')[0])])Object.defineProperty(w,root,{value:undefined,writable:true,configurable:true});
  // The native WINDOWS service materializes text operands before libc calls.
  // Keep its MEMORY64 strlen result rather than inheriting the host Number.
@@ -31,7 +33,13 @@ export function enableWindowSystem(environment,layouts){
  const signature=row=>[row.result,...row.parameters].map(code).join('');
  function prototype(type){const match=type.match(/^(.+?)\s*\(\s*\*\s*\)\s*\((.*)\)$/)??type.match(/^(.+?)\s*\((.*)\)$/);if(!match)throw new Error('Unknown window callback ABI '+type);return{result:match[1].trim(),parameters:match[2].split(',').map(s=>s.trim()).filter(s=>s&&s!=='void')};}
  const normalize=(type,value)=>code(type)==='p'?(typeof value==='string'?services.literal(value):address(value)):type==='void'?undefined:code(type)==='j'?BigInt(value):Number(value);
- function callback(module,name){const own=abi.callbacks[module][name],row=own??prototype(publicFunctions.functions[name]??'');return environment.functionPointer(own&&!Object.hasOwn(publicFunctions.functions,name)?module+'::'+name:name,signature(row),own?((...args)=>normalize(row.result,module==='wintty'?callWintty(t,L,name,...args):callWindows(w,layouts.windows,name,...args))):undefined);}
+ function callback(module,name){
+  const own=abi.callbacks[module][name],row=own??prototype(publicFunctions.functions[name]??'');
+  let invoke;
+  if(own){invoke=(...args)=>normalize(row.result,module==='wintty'?callWintty(t,L,name,...args):callWindows(w,layouts.windows,name,...args));
+   if(module==='wintty'){invoke.nativeState=owner;invoke.nativeDirect=true;}}
+  return environment.functionPointer(own&&!Object.hasOwn(publicFunctions.functions,name)?module+'::'+name:name,signature(row),invoke);
+ }
  const statics=new Map();Object.assign(t,{nativeOwner:owner,moduleKey:environment,global:i=>{const name=Object.keys(schema.globals)[i];if(!name)throw new Error('Unknown WINTTY global '+i);return environment.requireGlobal(name);},
   staticStorage:name=>{const count={'tty_askname.who_are_you':14,'compress_str.cbuf':L.BUFSZ}[name];if(!count)throw new Error('Unknown WINTTY static '+name);if(!statics.has(name))statics.set(name,environment.allocateGlobal('wintty.'+name,count));return statics.get(name);},
   callbackPointer:name=>callback('wintty',name),teleport_native_signal:(sig,fn)=>platform.signal(sig,fn),callIndirect:(fn,type,...args)=>functions.indirect(fn,signature(prototype(type)),...args),
@@ -62,13 +70,14 @@ export function enableWindowSystem(environment,layouts){
  for(const name of ['formatEncode','formatChar','formatStrings'])w[name]=(out,format,...args)=>services.sprintf(address(out),text(format),...args.map(v=>v?.address??v));
  for(const name of ['fprintfChar','fprintfString'])w[name]=(fp,format,...args)=>services.fprintf(address(fp),text(format),...args.map(v=>v?.address??v));
  w.map_glyphinfo=(x,y,glyph,flags,out)=>environment.resolve('map_glyphinfo')(x,y,glyph,flags,address(out));
- for(const [name,type]of Object.entries(W.callbacks)){const row=prototype(type);w['call_'+name]=(...args)=>{const field=ctypes.record('struct window_procs').fields[name],fn=ctypes.load(field.ctype.replace(new RegExp('\\s+'+name+'$'),''),environment.requireGlobal('windowprocs')+field.offset);return functions.indirect(fn,signature(row),...args.map((v,i)=>normalize(row.parameters[i],v)));};}
+ for(const [name,type]of Object.entries(W.callbacks)){const row=prototype(type);w['call_'+name]=(...args)=>{if(environment.nativeWindowCallbacks)return environment.nativeWindowCallbacks.invoke(name,signature(row),...args.map((v,i)=>normalize(row.parameters[i],v)));const field=ctypes.record('struct window_procs').fields[name],fn=ctypes.load(field.ctype.replace(new RegExp('\\s+'+name+'$'),''),environment.requireGlobal('windowprocs')+field.offset);return functions.indirect(fn,signature(row),...args.map((v,i)=>normalize(row.parameters[i],v)));};}
  initializeWindows(w,layouts.windows);
  const names=W.names.filter(name=>Object.hasOwn(publicFunctions.functions,name)&&typeof windows[name]==='function'&&!environment.hasFunction(name));
  environment.register('windows',Object.fromEntries(names.map(name=>[name,(...args)=>callWindows(w,layouts.windows,name,...args)])));
  // Shared windows.h macros dispatch through the existing active window owner.
- const headerWindows=Object.fromEntries(['create_nhwindow','destroy_nhwindow','curs','display_nhwindow','putstr','putmixed','start_menu','end_menu','raw_print'].map(name=>{const field='win_'+name;if(!Object.hasOwn(W.callbacks,field)||environment.hasFunction(name))throw Error('Review shared window macro '+name);return[name,(...args)=>w['call_'+field](...args)];}));
- environment.register('window-macros',{...headerWindows,nh_delay_output:()=>{const at=ctypes.locate('struct window_procs',environment.requireGlobal('windowprocs'),'win_delay_output').at;return functions.indirect(memory.view.getBigUint64(at,true),'v');}});
+ const headerWindows=Object.fromEntries(['create_nhwindow','destroy_nhwindow','curs','display_nhwindow','putstr','putmixed','start_menu','end_menu','raw_print'].map(name=>{const field='win_'+name;if(!Object.hasOwn(W.callbacks,field)||environment.hasFunction(name))throw Error('Review shared window macro '+name);const fn=(...args)=>w['call_'+field](...args);fn.nativeState=owner;fn.nativeDirect=true;fn.nativePrepared=true;owner.functions.set(name,fn);return[name,fn];}));
+ const delay=()=>windowCallbacks.invoke('win_delay_output','v');delay.nativeState=owner;delay.nativeDirect=true;delay.nativePrepared=true;owner.functions.set('nh_delay_output',delay);
+ environment.register('window-macros',{...headerWindows,nh_delay_output:delay});
  const platform=enableUnixTerminal(environment,layouts);
  // Original UNI XTTY error() receives a JS vararg packet on this boundary.
  // Keep native va_list packets on their existing transport path.

@@ -13,7 +13,7 @@ const hybridFactory=(await loadFixture("pline",pathToFileURL(resolve(directory,'
 const text=(m,at)=>{at=Number(at);let end=at;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.subarray(at,end)).toString('latin1');};
 const layouts=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 let comparisons=0,scenario='initial',sharedBridge;
-async function pair(){const reference=await referenceFactory(),L=layouts(reference);const hybrid=await hybridFactory({nethackPorted:{pline:(sharedBridge??=createPlineBridge(L))}});assert.deepEqual(layouts(hybrid),L);comparisons++;const modules=[reference,hybrid];modules.forEach(m=>m._probe_reset());return modules;}
+async function pair(){const reference=await referenceFactory(),L=layouts(reference);const hybrid=await hybridFactory({nethackPorted:{pline:(sharedBridge??=createPlineBridge(L,{nativeExecution:process.env.NATIVE_PLINE_FIXTURE==='1'}))}});assert.deepEqual(layouts(hybrid),L);comparisons++;const modules=[reference,hybrid];modules.forEach(m=>m._probe_reset());return modules;}
 let modules=await pair();
 function compare(){const states=modules.map(m=>({state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace())}));assert.deepEqual(states[1],states[0],scenario);assert.equal(C,undefined);comparisons++;}
 function call(name,...args){const stacks=modules.map(m=>m._probe_stack());const values=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(values[1],values[0]);modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i],scenario+' stack'));compare();}
@@ -53,4 +53,4 @@ for(const fork of[41,-1]){modules=await pair();scenario='handler '+fork;field(18
 modules=await pair();scenario='handler child failure';field(18,1);option(1,0);input('child payload');
 const child=modules.map(m=>{assert.throws(()=>m._probe_message(0,1),/PLINE fixture exit 1/);return{state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace())};});assert.deepEqual(child[1],child[0]);assert.equal(C,undefined);comparisons++;
 for(const fn of[0,1]){modules=await pair();scenario='format overflow panic';input('x'.repeat(1400));const states=modules.map(m=>{assert.throws(()=>m._probe_message(fn,1),/PLINE fixture exit 2/);return text(m,m._probe_trace());});assert.equal(states[1],states[0]);assert.equal(C,undefined);comparisons++;}
-console.log(`PLINE: ${comparisons} configured original-C/pure-JS comparisons passed; native/production gates pending.`);
+console.log(`PLINE: ${comparisons} configured original-C/pure-JS comparisons passed; ${process.env.NATIVE_PLINE_FIXTURE==='1'?'native source execution':'legacy execution'}; actual gameplay verified separately.`);

@@ -43,6 +43,14 @@ const oldPutchar=Object.getOwnPropertyDescriptor(terminal.services,'putchar'),te
 try{terminal.services.putchar=value=>{assert.equal(C,terminalMarker,'native terminal retains its caller scope');environment.transport.stackAlloc(24);if(value===67)throw Error('native terminal cleanup');return value;};withCEnvironment(terminalMarker,()=>{assert.equal(environment.services.xputc(65),65);assert.throws(()=>environment.services.xputc(67),/native terminal cleanup/);assert.equal(C,terminalMarker);});}finally{if(oldPutchar)Object.defineProperty(terminal.services,'putchar',oldPutchar);else delete terminal.services.putchar;}
 assert.equal(environment.memory.live.size,liveBeforeTerminal,'native terminal frees callback temporaries on normal and exceptional exit');
 
+const messages=environment.start('messages').environment;
+for(const [name,type]of [['u','struct you'],['gy','struct instance_globals_y'],['gp','struct instance_globals_p']])assert.equal(messages[name],owner.nativeRecords.record(type,environment.requireGlobal(name)),'messages shares '+name);
+for(const name of ['pline','You','set_msg_xy','gamelog_add'])assert.equal(environment.services[name].nativeEntry,owner.functions.get(name),name+' has direct message execution');
+const messageMonster=messages.gy.youmonst;assert.equal(messages.monster(messageMonster),messageMonster,'message monster arguments keep their shared identity');
+const oldMessageSet=messages.nativeNamespace.set_msg_xy,messageMarker={nativeMessageCaller:true},liveBeforeMessages=environment.memory.live.size;
+try{messages.nativeNamespace.set_msg_xy=()=>{assert.equal(C,messageMarker);environment.transport.stackAlloc(24);throw Error('native message cleanup');};withCEnvironment(messageMarker,()=>assert.throws(()=>environment.services.set_msg_xy(1,2),/native message cleanup/));}finally{messages.nativeNamespace.set_msg_xy=oldMessageSet;}
+assert.equal(environment.memory.live.size,liveBeforeMessages,'message exceptions restore their temporary bytes');
+
 assert.equal(owner.depth,0,'input exhaustion publishes the entire connected native graph');
 assert.equal(owner.dirty.size,0);
 for(const name of ['movemon','mcalcdistress','healmon','mfndpos','dochugw','m_move','domove','lookaround','test_move','vision_recalc','clear_path','does_block','moveloop','moveloop_core','moveloop_preamble','stop_occupation','timet_to_seconds','timet_delta','dog_move','dog_eat','mattacku','magic_negation','getmattk']){

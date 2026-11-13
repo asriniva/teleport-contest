@@ -38,6 +38,7 @@ export function enableTerminalInput(environment,layouts,{readKey}={}){
  local.tty_clear_nhwindow=win=>resolve('tty_clear_nhwindow')(transport.int(win));
  for(const name of ['addtopl','putsyms','dumplogmsg'])local[name]=value=>resolve(name)(text(value));
  local.clear_nhwindow=win=>{
+  if(environment.nativeWindowCallbacks)return environment.nativeWindowCallbacks.invoke('win_clear_nhwindow','vi',transport.int(win));
   const field=ctypes.record('struct window_procs').fields.win_clear_nhwindow;
   const callback=memory.view.getBigUint64(environment.requireGlobal('windowprocs')+field.offset,true);
   return functions.indirect(callback,'vi',transport.int(win));

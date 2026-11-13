@@ -37,7 +37,7 @@ export function upgradeArtifact(environment,layouts,legacy){
  const invoke=(name,args)=>{const saved=owner.depth?undefined:transport.stackSave();owner.enter();try{const value=context.nativeNamespace[name](...prepare(name,args));return typeof value==='string'?text(value):value;}finally{try{owner.leave();}finally{if(saved!==undefined)transport.stackRestore(saved);}}};
  const bind=name=>{const fn=(...args)=>invoke(name,args);fn.nativeState=owner;fn.nativeDirect=true;fn.nativePrepared=true;owner.functions.set(name,fn);return fn;};
  const pointer=(name,signature)=>environment.functionPointer(Object.hasOwn(publicFunctions.functions,name)?name:'artifact::'+name,signature,(...args)=>{const value=invoke(name,args);return typeof value==='string'?text(value):value?.address??value;});
- const window=(field,signature,...args)=>{const at=ctypes.locate('struct window_procs',environment.requireGlobal('windowprocs'),field).at;return functions.indirect(memory.view.getBigUint64(at,true),signature,...args);};
+ const window=(field,signature,...args)=>{if(environment.nativeWindowCallbacks)return environment.nativeWindowCallbacks.invoke(field,signature,...args);const at=ctypes.locate('struct window_procs',environment.requireGlobal('windowprocs'),field).at;return functions.indirect(memory.view.getBigUint64(at,true),signature,...args);};
  Object.assign(local,{
   nativeOwner:owner,nativeFieldPlans:createArtifactFieldPlans(environment),moduleKey:environment,heap:()=>memory.HEAPU8,
   global:i=>{const row=abi.globals[i];if(!row)throw new Error('Unknown ARTIFACT global '+i);return environment.requireGlobal(row.name);},resbuf:()=>resbuf,

@@ -1,3 +1,55 @@
+## Native window callback state and message execution (2026-11-13)
+
+`native/window-callbacks.js` gives each game 46 compiled, signature-checked
+window slots holding stable JS function identities. A changed byte token is
+validated before publishing a replacement; unchanged slots call their native
+TTY functions directly. Foreign, opaque and other-game callbacks retain the
+original checked dispatcher. `c-runtime/functions.js` adds typed lookup at this
+mutation boundary without changing generic dispatch. `window-system.js` tags
+actual native TTY callbacks and header macro entries. Messages, TOPL, input,
+status, ALLMAIN, APPLY, artifact combat, eating and UHITM use named window slots.
+`native/display-window-callbacks.js` connects all ten compiler DISPLAY sites,
+including glyphs, cursors, refresh and animation delays; it preserves the token
+captured before argument evaluation. Source checks guard every site/field in
+both original and native display bodies; signature equality is checked at setup.
+These changes do not reinterpret arbitrary C callback pointers as native calls.
+
+`native/pline.js` binds all 31 unchanged original message bodies to one game
+context. `messages.js` publishes direct native entries, sharing canonical hero,
+monster, properties, history and other message roots. `bindings/pline.js` consumes
+those same records, uses the growing typed arena, and uses caller-owned lazy
+integer locals. Width/config guards remain. Original lexical calls execute
+directly; public entry frames retain exception cleanup. JS vararg packets keep
+existing formatting behavior. Opaque SDK va_list, formatting, mutable C string
+buffers, pointer arrays, history allocation, handler processes and foreign
+routines remain explicit boundaries. This is actual default gameplay execution,
+not an optional experiment. No source policy, RNG algorithm/order, recording
+input or capture policy changes.
+
+Verification: 1,046 window checks cover all 46 signatures, native/foreign/other-game
+identity, byte replacement, invalid tokens, wrong signatures, nested replacement,
+throws, memory growth, no C allocation on steady dispatch and captured tokens.
+Both Node 24 and scoring Node 22 pass. Native and legacy PLINE each pass 1,620
+original-C comparisons. A test-only source observer confirms all 31 native
+bodies execute in that differential; unchanged AST checks guard their complete
+policies. This is not a claim that every branch is reached. Live-main confirms canonical hero/monster/
+message roots, direct execution and cleanup. All 100 metadata files pass; all
+42 inventoried dynamic sites (215 dispatcher probes, all 46 names, 34 live
+replacement calls) resolve. SDK checks pass 1,931. The earlier shared scalar
+lifetime checks still pass 809.
+
+Walk/wait/attack still match original C state, output, ordered RNG and frames.
+Generic callback calls fall from 10/13/25 to 4/3/7; generic engine calls are now
+26/45/93 and scope entries 42/74/162. C heap allocations remain 44/165/109.
+The zero-bridge/zero-allocation gate remains false; 20x is not achieved.
+All 44 recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors and
+1,483 animations match, with 804 scoring inputs unchanged. The unprofiled Node
+22.23.5 batch took 284.783s versus 286.069s before this step, about 0.45% lower
+in separate single runs. This small change establishes no controlled speedup.
+Evidence and the pre-run manifest are in
+`docs/runtime-environment/native-window-messages-validation.json` and
+`native-window-messages-public44-manifest.json`.
+
 ## Native terminal input and display execution (2026-11-13)
 
 `native/wintty.js` binds all 72 original TTY routines and their original catalogue
