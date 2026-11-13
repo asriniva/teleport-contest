@@ -1,3 +1,7 @@
+import * as commandSource from '../js/ported/cmd.js';
+import commandAbi from '../js/nethack/command-abi.json' with {type:'json'};
+import {initializeCmd} from '../js/nethack/bindings/cmd.js';
+import {callDo} from '../js/nethack/bindings/do.js';
 import {connectNativeMakemon} from '../js/nethack/native/makemon-state.js';
 // Live-main ownership and direct-dispatch checks, beyond isolated provider tests.
 import assert from 'node:assert/strict';
@@ -50,6 +54,24 @@ const messageMonster=messages.gy.youmonst;assert.equal(messages.monster(messageM
 const oldMessageSet=messages.nativeNamespace.set_msg_xy,messageMarker={nativeMessageCaller:true},liveBeforeMessages=environment.memory.live.size;
 try{messages.nativeNamespace.set_msg_xy=()=>{assert.equal(C,messageMarker);environment.transport.stackAlloc(24);throw Error('native message cleanup');};withCEnvironment(messageMarker,()=>assert.throws(()=>environment.services.set_msg_xy(1,2),/native message cleanup/));}finally{messages.nativeNamespace.set_msg_xy=oldMessageSet;}
 assert.equal(environment.memory.live.size,liveBeforeMessages,'message exceptions restore their temporary bytes');
+
+const actions=callDo(environment.start('do-lifecycle').environment,layouts.do,'environment');
+assert.equal(actions.u,messages.u,'waiting and item/level actions share the message and movement hero');
+assert.equal(actions.view('monst',messages.gy.youmonst),messages.gy.youmonst,'action monster arguments retain identity');
+for(const name of ['donull','cmd_safety_prevention','dodown','revive_corpse'])assert.equal(environment.services[name].nativeEntry,owner.functions.get(name),name+' connects native action execution');
+const oldWait=actions.nativeNamespace.donull,actionMarker={nativeActionCaller:true},liveBeforeActions=environment.memory.live.size;
+try{actions.nativeNamespace.donull=()=>{assert.equal(C,actionMarker);environment.transport.stackAlloc(24);throw Error('native action cleanup');};withCEnvironment(actionMarker,()=>assert.throws(()=>environment.services.donull(),/native action cleanup/));}finally{actions.nativeNamespace.donull=oldWait;}
+assert.equal(environment.memory.live.size,liveBeforeActions,'native action exceptions free temporaries');
+const commandContext=initializeCmd(environment.start('cmd').environment,layouts.cmd,commandSource);
+const commandFields=Object.entries(commandAbi.schema.schema).flatMap(([kind,row])=>row.fields.map(f=>({kind,name:f.name})));
+const commandFunctionIndex=commandFields.findIndex(f=>f.kind==='ext_func_tab'&&f.name==='ef_funct');assert.ok(commandFunctionIndex>=0);
+const commandRow=environment.memory.calloc(1,commandContext.sizes.ext_func_tab),commandSlot=commandContext.nativeFields.addresses[commandFunctionIndex](commandRow),readCommand=()=>commandContext.nativeFields.readers[commandFunctionIndex](commandRow);
+try{const first=()=>123,second=()=>127;for(const fn of [first,second])Object.assign(fn,{nativeState:owner,nativeDirect:true});
+ const firstToken=environment.functions.functionPointer(first,'i'),secondToken=environment.functions.functionPointer(second,'i');
+ environment.memory.view.setBigUint64(commandSlot,firstToken,true);const held=readCommand();assert.equal(BigInt(held),firstToken);assert.equal(readCommand(),held);assert.equal(commandContext.callProc(held,'int (void)'),123);
+ environment.memory.view.setBigUint64(commandSlot,secondToken,true);assert.notEqual(readCommand(),held);assert.equal(commandContext.callProc(readCommand(),'int (void)'),127);assert.equal(commandContext.callProc(held,'int (void)'),123,'captured command function retains its identity after byte replacement');
+ environment.memory.grow(environment.memory.buffer.byteLength+1);assert.equal(commandContext.callProc(readCommand(),'int (void)'),127,'command state survives growth');
+}finally{environment.memory.free(commandRow);}
 
 assert.equal(owner.depth,0,'input exhaustion publishes the entire connected native graph');
 assert.equal(owner.dirty.size,0);

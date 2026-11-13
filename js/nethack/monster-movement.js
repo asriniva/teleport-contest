@@ -21,7 +21,7 @@ export function enableMonsterMovement(environment,layouts){
  // Original MONMOVE header helpers share the active strings and window owner.
  local.winMessage=()=>ctypes.load('int',environment.requireGlobal('WIN_MESSAGE'));
  local.commonString=()=>environment.address(ctypes.getField('struct c_common_strings',environment.requireGlobal('c_common_strings'),'c_something','const char *'));
- local.display_nhwindow=(win,blocking)=>environment.functions.indirect(ctypes.getField('struct window_procs',environment.requireGlobal('windowprocs'),'win_display_nhwindow','void *'),'vii',environment.transport.int(win),environment.transport.char(blocking));
+ local.display_nhwindow=(win,blocking)=>environment.nativeWindowCallbacks?environment.nativeWindowCallbacks.invoke('win_display_nhwindow','vii',environment.transport.int(win),environment.transport.char(blocking)):environment.functions.indirect(ctypes.getField('struct window_procs',environment.requireGlobal('windowprocs'),'win_display_nhwindow','void *'),'vii',environment.transport.int(win),environment.transport.char(blocking));
  for(const name of ['strlen','strcpy','strcat','strcmp','strchr','strncmpi'])local[name]=(...args)=>services[name](text(args[0]),...args.slice(1).map(v=>typeof v==='string'?text(v):v?.address??v));
  const names=Object.keys(monmove).filter(name=>typeof monmove[name]==='function'&&Object.hasOwn(publicFunctions.functions,name)&&!environment.hasFunction(name));
  const exports=Object.fromEntries(names.map(name=>{const call=(...args)=>callMonmove(local,L,name,...args);call.nativeState=nativeState;call.nativeDirect=true;nativeState.functions.set(name,call);return [name,call];}));

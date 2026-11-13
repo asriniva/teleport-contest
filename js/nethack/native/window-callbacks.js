@@ -21,8 +21,8 @@ export function createNativeWindowCallbacks(environment, owner) {
     // must never leave a previous callback callable under a new token.
     const fn=functions.typedCallback(token,signature);slot.fn=fn;slot.token=token;
    }
-   const fn=slot.fn;
-   return fn.nativeState===owner&&fn.nativeDirect?fn(...args):functions.indirect(token,signature,...args);
+   const fn=slot.fn,native=fn.prepareNativeEntry?.()??fn.nativeEntry??fn;
+   return native.nativeState===owner&&native.nativeDirect?native(...args):functions.indirect(token,signature,...args);
  }
  return Object.freeze({
   invoke(name,signature,...args){const slot=slots.get(name);if(!slot)throw new TypeError('Unknown native window callback '+name);return invokeCaptured(name,signature,owner.nativeArena.pointer(slot.at),...args);},

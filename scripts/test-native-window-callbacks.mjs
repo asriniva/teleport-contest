@@ -1,3 +1,4 @@
+import {connectNativeDungeonWindows,dungeonWindowFields} from '../js/nethack/native/dungeon-window-callbacks.js';
 // Every measured window slot, live byte replacement and opaque fallback.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -81,5 +82,26 @@ for(const source of ['js/ported/display.js','js/nethack/native/address/display.j
   }
   for(const [key,value]of Object.entries(n))if(!['start','end','loc'].includes(key))visit(value);
  }visit(ast);assert.deepEqual([...seen].sort((a,b)=>a-b),displayWindowFields.map((_,i)=>i));checks++;
+}
+const dungeonSchema=metadata.ports.dungeon.schema,dungeonServices={};
+for(const row of dungeonSchema.callbackCalls)dungeonServices['indirect'+row.site]=()=>{throw Error('dungeon fallback reached');};
+connectNativeDungeonWindows(environment,dungeonServices,dungeonSchema);
+for(const [site,name]of dungeonWindowFields.entries()){
+ const row=dungeonSchema.callbackCalls[site],sig=[row.ret,...row.types].map(code).join(''),args=row.types.map((_,i)=>i+1);
+ const fn=(...actual)=>{assert.deepEqual(actual,args);return 67;};fn.nativeState=owner;fn.nativeDirect=true;
+ assert.equal(dungeonServices['indirect'+site](functions.functionPointer(fn,sig),...args),67);checks++;
+}
+const dungeonFields=Object.entries(dungeonSchema.schema).flatMap(([kind,row])=>row.fields.map(f=>({kind,field:f.name})));
+for(const source of ['js/ported/dungeon.js','js/nethack/native/address/dungeon.js']){
+ const ast=parse(fs.readFileSync(source,'utf8'),{ecmaVersion:'latest',sourceType:'module'}),seen=new Set();
+ function visit(n){if(!n||typeof n!=='object')return;if(Array.isArray(n)){n.forEach(visit);return;}
+  if(n.type==='CallExpression'&&n.callee.object?.name==='C'&&n.callee.property?.name==='indirect'){
+   const site=n.arguments[0].value,read=n.arguments[1];let field;
+   if(read.type==='MemberExpression'){assert.equal(read.property.name,'value');assert.equal(read.object.callee.property.name,'field');assert.equal(read.object.arguments[1].value,'window_procs');field=read.object.arguments[2].value;}
+   else{const index=Number(read.callee.name.match(/^R(\d+)$/)[1]);assert.equal(dungeonFields[index].kind,'window_procs');field=dungeonFields[index].field;}
+   assert.equal(field,dungeonWindowFields[site]);seen.add(site);checks++;
+  }
+  for(const [key,value]of Object.entries(n))if(!['start','end','loc'].includes(key))visit(value);
+ }visit(ast);assert.deepEqual([...seen].sort((a,b)=>a-b),dungeonWindowFields.map((_,i)=>i));checks++;
 }
 console.log(JSON.stringify({passed:true,callbacks:Object.keys(abi.windows.callbacks).length,checks,resolutions,foreignDispatches:fallbacks}));

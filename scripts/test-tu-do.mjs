@@ -1,3 +1,7 @@
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+import {createDoFieldPlans} from '../js/nethack/do-lifecycle.js';
+const nativeDoServices=new WeakMap();
+function doServices(s){if(process.env.NATIVE_DO_FIXTURE!=='1')return s;let local=nativeDoServices.get(s);if(!local){const e=s.moduleKey.environment;local=nativeFixtureServices(s,{}).services;local.nativeFieldPlans=createDoFieldPlans(e);nativeDoServices.set(s,local);}return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
 const fixtureReferenceLabel=fixtureReferenceLabelFor("do");
@@ -19,7 +23,7 @@ const constant=n=>{assert.ok(Object.hasOwn(L,'lo_'+n),n);let v=BigInt(L['lo_'+n]
 const source=readFileSync(new URL('../js/ported/do.js',import.meta.url),'utf8').replace(/\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"/g,'');
 const externals=new Set([...source.matchAll(/\bC\.(\w+)/g)].map(m=>m[1]));const validated=new WeakSet();
 function validate(s){if(validated.has(s.moduleKey))return;const e=createDoEnvironment(s,L);for(const k of externals)assert.ok(k in e,'native/header binding '+k);validated.add(s.moduleKey);}
-const ported={callDo(s,n,...a){validate(s);return callDo(s,L,n,...a);}};
+const ported={callDo(s,n,...a){validate(s);return callDo(doServices(s),L,n,...a);}};
 let modules=[reference,await hyb({nethackPorted:ported})],stacks=modules.map(m=>m._probe_stack()),comparisons=0;
 const names=Array.from({length:44},(_,i)=>text(reference,reference._probe_function_name(i))),op=n=>{const i=names.indexOf(n);assert.ok(i>=0,n);return i;};
 const deps=Object.fromEntries(Array.from({length:reference._probe_dep_count()},(_,i)=>[text(reference,reference._probe_dep_name(i)),i]));

@@ -1,3 +1,60 @@
+## Native command functions and connected action policies (2026-11-13)
+
+The CMD lowering now compiles 115 window call sites into 18 bound JS calls in
+`native/address/cmd.js`. Each call retains the token selected before argument
+evaluation. `generate-native-address.mjs` and its inverse AST guard validate this
+lowering against the entire original command policy. The binders in
+`native/command-window-callbacks.js` validate field names/prototypes at setup.
+`native/command-functions.js` supplies stable callable identities for command-table
+`ef_funct` values, retaining the original numeric token for comparisons, argument
+decay and byte aliases. Native callbacks execute directly; foreign callbacks
+retain checked dispatch. `c-runtime/linker.js` exposes initialized native targets
+and a preparation boundary that preserves real module initialization and live
+namespace replacements. Explicit callback overrides retain their own behavior.
+No native marker is applied to the original generic C dispatcher.
+
+`native/do.js` binds all 44 unchanged DO bodies to their real game context.
+`do-lifecycle.js` installs direct entries and compiled field plans for all 61
+measured record schemas. Hero, monsters, items, coordinates, map cells and other
+shared records keep canonical identities; private descriptor fields use compiled
+typed accessors. `bindings/do.js` uses the growing native arena, native integer
+casts, canonical record-kind lookup for references/copies and preserved callback
+identities for native drop/wipe handlers. Wait safety, dropping, level transitions,
+revival and other original action policies remain intact. Foreign dependencies,
+C string/array temporaries, byte copies, callback tokens and file/Lua boundaries
+remain adapters; this does not claim fully native ordinary turns.
+
+All 25 DUNGEON window sites now join the native callback owner, including movement
+clipping and level overview menus. Every original/native site is checked against
+its exact source field and measured signature. MONMOVE's direct display helper
+also uses the shared slots. Native window state recognizes initialized named
+native targets while preserving foreign fallback and callback replacement.
+
+Verification: native and legacy CMD each pass 1,562 original-C comparisons over
+all 148 routines. The inherited fixture's uninitialized `cmdstr` branch caveat
+remains; no claim of all branch coverage is made. Native and legacy DO each pass
+1,719 original-C comparisons over all 44 routines, including safety flags,
+53-bit values, transitions, corpse revival, memory growth, reentry and two-game
+isolation. The inverse source AST check passes all 1,163 address routines and
+23,489 field operations; all 44 bound DO bodies match their original source AST.
+Command identity/readiness/replacement/foreign-boundary checks pass 173; window
+checks pass 1,123 over all 46 signatures and all 35 DISPLAY/DUNGEON sites on both
+Node 24 and scoring Node 22. Live-main checks actual command-table byte aliases,
+captured identity, memory growth, shared action actors, direct dispatch and
+exception cleanup. All 100 metadata files, all 42 dynamic sites (215 probes and
+34 live replacement calls) and 1,931 SDK checks pass.
+
+Actual C state, output, ordered RNG and frames still match for walk/wait/attack.
+Generic pointer calls are now 0/0/1, generic engine calls 26/44/93, scope entries
+42/72/162 and generic field operations 51/78/141. Heap allocations remain
+44/165/109; zero-bridge/zero-allocation and 20x acceptance remain false.
+All 44 recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors and
+1,483 animations match, with 808 scoring inputs unchanged. The unprofiled Node
+22.23.5 batch took 285.786s versus 284.783s before this step (about 0.35% higher).
+These separate single runs demonstrate no timing improvement. Receipts and the
+pre-run manifest are in `docs/runtime-environment/native-command-actions-validation.json`
+and `native-command-actions-public44-manifest.json`.
+
 ## Native window callback state and message execution (2026-11-13)
 
 `native/window-callbacks.js` gives each game 46 compiled, signature-checked

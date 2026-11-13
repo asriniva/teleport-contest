@@ -36,6 +36,7 @@ jobs:
           node scripts/test-native-scalar-local.mjs
           node scripts/test-native-state-values.mjs
           node scripts/test-native-window-callbacks.mjs
+          node scripts/test-native-command-functions.mjs
 
       - name: Score public sessions
         env:

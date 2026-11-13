@@ -14,6 +14,11 @@ let functions=0,operations=0;
 for(const[name,{schema}]of Object.entries(ports)){
  const old=parse(fs.readFileSync('js/ported/'+name+'.js','utf8'),{ecmaVersion:'latest',sourceType:'module'});
  const next=parse(fs.readFileSync('js/nethack/native/address/'+name+'.js','utf8'),{ecmaVersion:'latest',sourceType:'module'});
+ const windowBindings=new Map();
+ for(const n of next.body[0].declaration.body.body)if(n.type==='VariableDeclaration')for(const d of n.declarations)if(/^NWC\d+$/.test(d.id.name)){
+  assert.equal(name,'cmd');assert.equal(d.init.callee.object.name,'C');assert.equal(d.init.callee.property.name,'nativeWindowCall');
+  assert.ok(d.init.arguments.every(a=>a.type==='Literal'&&typeof a.value==='string'));windowBindings.set(d.id.name,d.init.arguments);
+ }
  const fields=Object.entries(schema.schema).flatMap(([kind,row])=>row.fields.map(f=>({kind,field:f.name})));
  function lvalue(id,at,property='value'){
   const f=fields[id];assert.ok(f);operations++;
@@ -23,6 +28,7 @@ for(const[name,{schema}]of Object.entries(ports)){
   if(Array.isArray(node))return node.map(invert);if(!node||typeof node!=='object')return node;
   node=Object.fromEntries(Object.entries(node).map(([k,v])=>[k,invert(v)]));
   if(node.type==='CallExpression'&&node.callee.type==='Identifier'){
+   if(windowBindings.has(node.callee.name)){const [field,prototype]=windowBindings.get(node.callee.name),value=node.arguments[0];assert.equal(value.object.arguments[1].value,'window_procs');assert.equal(value.object.arguments[2].value,field.value);return call(member(identifier('C'),'callProc'),[value,prototype,...node.arguments.slice(1)]);}
    const m=node.callee.name.match(/^([RWA])(\d+)$/);
    if(m){const id=Number(m[2]);if(m[1]==='W')return {type:'AssignmentExpression',operator:'=',left:lvalue(id,node.arguments[0]),right:node.arguments[1]};return lvalue(id,node.arguments[0],m[1]==='A'?'address':'value');}
   }
@@ -31,7 +37,7 @@ for(const[name,{schema}]of Object.entries(ports)){
  const factory=next.body[0].declaration;assert.equal(factory.id.name,'createNativeAddressNamespace');
  const actual=factory.body.body.filter((n,i,all)=>{
   if(i===all.length-1){assert.equal(n.type,'ReturnStatement');return false;}
-  if(n.type==='VariableDeclaration'&&n.declarations.every(d=>d.id.name==='NF'||/^[RWA]\d+$/.test(d.id.name)))return false;
+  if(n.type==='VariableDeclaration'&&n.declarations.every(d=>d.id.name==='NF'||/^(?:[RWA]|NWC)\d+$/.test(d.id.name)))return false;
   return true;
  });
  const expected=old.body.filter(n=>n.type!=='ImportDeclaration').map(n=>n.type==='ExportNamedDeclaration'?n.declaration:n);
