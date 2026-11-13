@@ -1,0 +1,186 @@
+{
+  "branch": "perf/display-direct",
+  "runtimeSha256": {
+    "js/nethack/bindings/termcap.js": "cc7817560bb908d90f9af5e6792428a7a0a89ddac2229f458b157f6da942e151",
+    "js/ported/termcap.js": "629ef0890a81cf0ebfcd04599ef84962ed27edfac9d9f18ec1b99667ded96778"
+  },
+  "changedRuntimeFilesComparedWithPreviousSavedCandidate": [
+    "js/nethack/bindings/termcap.js",
+    "js/ported/termcap.js"
+  ],
+  "strictPublicReplay": {
+    "officialPassed": 44,
+    "strictAllMetricsPassed": 44,
+    "animationCursorCoverage": {
+      "status": "matched",
+      "recorded": 1483,
+      "matched": 1483,
+      "mismatched": 0,
+      "unverified": 0,
+      "actual": 1483,
+      "observedActual": 1483,
+      "missingTelemetrySegments": 0,
+      "shapeIssueCount": 0
+    },
+    "metrics": {
+      "rngCalls": {
+        "matched": 792838,
+        "total": 792838
+      },
+      "screens": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "cellsOnly": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "cursors": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "animFrames": {
+        "matched": 1483,
+        "total": 1483
+      }
+    },
+    "expectedTotals": {
+      "segments": 56,
+      "keys": 11349,
+      "rngCalls": 792838,
+      "screens": 11405,
+      "cursors": 11405,
+      "animations": 1483
+    },
+    "persistenceCoverage": {
+      "expectedSegments": 56,
+      "observedSegments": 56,
+      "multiSegmentSessions": 4,
+      "operations": {
+        "get": 56,
+        "set": 56,
+        "remove": 0
+      },
+      "scope": "Observed shared-storage API traffic and end-to-end multi-segment score coverage; public data provides no independent saved-file-byte metric."
+    },
+    "forbiddenCapabilityAttempts": 0
+  },
+  "replayIntegrity": {
+    "filesChecked": 749,
+    "changed": [],
+    "exitCode": 0,
+    "wallSeconds": 529.4183279592544,
+    "sessionSelectionMatched": true,
+    "childUserSeconds": 741.032881,
+    "childSystemSeconds": 14.594537
+  },
+  "component": {
+    "summary": {
+      "status": "pass",
+      "oracle": "unchanged configured original C and actual configured ncurses6.5 libtinfo; controlled foreign terminal transport",
+      "nativeHost": "pending",
+      "game": "pending",
+      "captureEncoder": "unchanged and outside this private fixture",
+      "cases": 223,
+      "comparisons": 2472,
+      "functions": 56,
+      "policyImports": 56,
+      "calls": {
+        "nomux_end_attr": 8,
+        "term_startup": 22,
+        "tty_number_pad": 1,
+        "xputc": 816,
+        "tty_decgraphics_termcap_fixup": 4,
+        "term_start_screen": 11,
+        "term_end_screen": 11,
+        "nocmov": 7,
+        "cmov": 1,
+        "nomux_markers_enabled": 11,
+        "nomux_emit_marker": 1,
+        "nomux_capture_write_screen": 3,
+        "nomux_capture_write_input_boundary": 16,
+        "nomux_clear_screen": 2,
+        "nomux_clear_to_eol": 6,
+        "nomux_putch": 9,
+        "nomux_set_attr": 1,
+        "nomux_set_fg": 12,
+        "nomux_end_fg": 1,
+        "nomux_sgr_fg": 10,
+        "nomux_capture_screen": 12,
+        "nomux_enter_raw_mode": 2,
+        "nomux_raw_putch": 6,
+        "nomux_raw_emit": 12,
+        "nomux_raw_emit_eol": 2,
+        "nomux_get_cursor": 7,
+        "xputs": 1,
+        "cl_end": 1,
+        "term_clear_screen": 1,
+        "home": 1,
+        "standoutbeg": 1,
+        "standoutend": 1,
+        "backsp": 1,
+        "tty_nhbell": 1,
+        "graph_on": 1,
+        "graph_off": 1,
+        "tty_delay_output": 6,
+        "cl_eos": 1,
+        "init_hilite": 1,
+        "s_atr2str": 20,
+        "e_atr2str": 20,
+        "term_attr_fixup": 20,
+        "term_start_attr": 11,
+        "term_end_attr": 11,
+        "term_start_raw_bold": 1,
+        "term_end_raw_bold": 1,
+        "term_end_color": 1,
+        "term_start_color": 1,
+        "term_start_bgcolor": 1,
+        "term_curs_set": 7,
+        "emit24bit": 8,
+        "emit256": 9,
+        "term_start_extracolor": 4,
+        "term_end_extracolor": 1,
+        "term_shutdown": 22,
+        "kill_hilite": 1
+      },
+      "dependencyCalls": null,
+      "provider": "private typed routing through same real C observation wrappers"
+    },
+    "integrity": {
+      "exitCode": 0,
+      "seconds": 316.5219531250186,
+      "before": {
+        "js/nethack/bindings/termcap.js": "cc7817560bb908d90f9af5e6792428a7a0a89ddac2229f458b157f6da942e151",
+        "js/ported/termcap.js": "629ef0890a81cf0ebfcd04599ef84962ed27edfac9d9f18ec1b99667ded96778"
+      },
+      "after": {
+        "js/nethack/bindings/termcap.js": "cc7817560bb908d90f9af5e6792428a7a0a89ddac2229f458b157f6da942e151",
+        "js/ported/termcap.js": "629ef0890a81cf0ebfcd04599ef84962ed27edfac9d9f18ec1b99667ded96778"
+      },
+      "sourceStable": true
+    },
+    "log": "termcap: 223 cases, 2472 EmC/JS state/trace/result/stack checks, 56/56 routines; native host and game pending\n"
+  },
+  "viewDifferential": {
+    "passed": true,
+    "checks": 441,
+    "seeds": 9,
+    "scope": "Immutable previous policy differential: complete heap and formatting traces, signed bytes, clipping, alias visibility, cache identity, separate games and heap growth during capture formatting."
+  },
+  "sourceChecks": [
+    "PASS 8 shadow-screen predecessor/patch/cohort and rejection controls; not game acceptance\n",
+    "PASS 11 full-replay predecessor/patch/cohort and rejection controls; not game acceptance\n",
+    "PASS 51 synthetic immutable-selector cohort/composition rejection checks; no runtime acceptance\n"
+  ],
+  "runtimeBoundary": "PASS: 33 runtime/dependency files; no game modules, host imports, Wasm or network capabilities; configured libc profile matches measured declarations.\n",
+  "comparisonFiles": [
+    "shadow-screen-vs-display-direct.json",
+    "shadow-screen-vs-main.json"
+  ],
+  "limits": [
+    "Existing saved baselines only; no newly paired timing experiment.",
+    "C component testing overlaps part of timing run; host variation may affect absolute timings.",
+    "Public44 exact recordings only; deadlines disabled; no hidden or hosted acceptance.",
+    "Terminal shadow-screen and output stores remain in the original heap; no duplicate state or changed serialization."
+  ]
+}

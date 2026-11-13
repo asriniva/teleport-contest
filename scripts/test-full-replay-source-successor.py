@@ -17,6 +17,10 @@ with tempfile.TemporaryDirectory(prefix='full-replay-inverse-') as directory:
             dest = private / path
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes((root / path).read_bytes())
+    from shadow_screen_source_successor import FILES as SHADOW_FILES
+    for file,row in SHADOW_FILES.items():
+        for path in [file,row['patch']]:
+            dest=private/path;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes((root/path).read_bytes())
     assert validate_cohort(private) == images
     checks += 1
     for file, row in FILES.items():

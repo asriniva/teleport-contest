@@ -102,6 +102,13 @@ def plan():
  return rows
 
 def qualified_current(file):
+ if file=='js/ported/termcap.js':
+  from shadow_screen_source_successor import qualified_before as shadow_before
+  return shadow_before(ROOT,file)
+ if file=='js/ported/display.js':
+  from display_direct_source_successor import qualified_before as display_before
+  return display_before(ROOT,file)
+
  if file=='js/nethack/pager-lookup.js':
   from pager_callback_source_successor import qualified_before
   return qualified_before(ROOT,file)
@@ -159,6 +166,9 @@ def main():
    if file.startswith(('js/','scripts/','frozen/','docs/runtime-environment/','nethack-c/'))and Path(file).suffix in {'.js','.mjs','.json','.patch','.c','.h','.inc','.py','.sh'}:
     assert qualified_current(current(file))==original(file),'Unrelated source/evidence change: '+file
   expected={current(f)for f in inventory()if f.startswith('js/')and Path(f).suffix in {'.js','.json'}and f!='js/standalone/address-ports.js'}
+  from display_direct_source_successor import FILES as DISPLAY_FILES,validate_cohort as validate_display
+  validate_display(ROOT)
+  expected.update(file for file,row in DISPLAY_FILES.items() if not row['existed'])
   actual={str(p.relative_to(ROOT))for p in(ROOT/'js').rglob('*')if p.is_file()and p.suffix in {'.js','.json'}}
   assert actual==expected,('Unexpected runtime source membership',sorted(actual-expected),sorted(expected-actual))
  print('PASS NetHack layout:230 former standalone files consolidated; one forwarding wrapper removed;',len(rows),'exact path/source transitions.')

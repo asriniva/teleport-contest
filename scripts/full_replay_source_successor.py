@@ -14,8 +14,11 @@ def validate_cohort(root):
  for file,row in FILES.items():
   before=subprocess.check_output(['git','show',BASE_COMMIT+':'+file],cwd=root)
   after=(root/file).read_bytes();patch=(root/row['patch']).read_bytes()
-  expected=''.join(difflib.unified_diff(before.decode().splitlines(True),after.decode().splitlines(True),fromfile='a/'+file,tofile='b/'+file)).encode()
   assert sha(before)==row['beforeSha256'],'Wrong full-replay predecessor: '+file
+  if file=='js/nethack/bindings/termcap.js' and sha(after)!=row['afterSha256']:
+   from shadow_screen_source_successor import qualified_before as shadow_before
+   after=shadow_before(root,file)
+  expected=''.join(difflib.unified_diff(before.decode().splitlines(True),after.decode().splitlines(True),fromfile='a/'+file,tofile='b/'+file)).encode()
   assert sha(after)==row['afterSha256'],'Unknown full-replay source change: '+file
   assert sha(patch)==row['patchSha256'] and patch==expected,'Wrong full-replay patch: '+file
   result[file]=before
