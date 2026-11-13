@@ -73,6 +73,30 @@ try{const first=()=>123,second=()=>127;for(const fn of [first,second])Object.ass
  environment.memory.grow(environment.memory.buffer.byteLength+1);assert.equal(commandContext.callProc(readCommand(),'int (void)'),127,'command state survives growth');
 }finally{environment.memory.free(commandRow);}
 
+const weaponServices=environment.start('hero-weapons').environment,weaponContext=weaponServices.nativeContext;
+assert.equal(weaponServices.nativeContext,weaponContext,'weapon execution caches one context per game');
+assert.equal(weaponContext.doname,weaponContext.doname,'equipment naming callbacks retain identity');
+assert.equal(weaponContext.spec_abon,owner.functions.get('spec_abon'),'weapon calls native artifact calculations without a forwarding packet');
+assert.equal(weaponContext.u,messages.u,'weapon and skill execution share the movement hero');
+assert.equal(weaponContext.monster(messages.gy.youmonst),messages.gy.youmonst,'weapon routines retain monster identity');
+for(const name of ['abon','dbon','hitval','dmgval','weapon_hit_bonus','weapon_dam_bonus','use_skill'])assert.equal(environment.services[name].nativeEntry,owner.functions.get(name),name+' has direct weapon execution');
+const weaponClass=weaponContext.objects[layouts.weapon.DAGGER],oldHitBonus=weaponClass.oc_oc1;
+try{weaponClass.oc_hitbon=oldHitBonus===7?8:7;assert.equal(weaponContext.objects[layouts.weapon.DAGGER],weaponClass);assert.equal(weaponClass.oc_hitbon,weaponClass.oc_oc1,'weapon hit bonus alias uses the underlying native field');}finally{weaponClass.oc_hitbon=oldHitBonus;}
+const weaponCarrierAt=environment.memory.calloc(1,environment.ctypes.size('struct monst')),weaponItemAt=environment.memory.calloc(1,environment.ctypes.size('struct obj'));
+try{const carrier=weaponContext.monster(weaponCarrierAt),item=weaponContext.object(weaponItemAt);item.ocarry=carrier;
+ assert.equal(item.v.v_ocarry,carrier);assert.equal(weaponContext.object(weaponItemAt).ocarry,carrier,'native item carrier header alias retains monster identity');
+ assert.equal(owner.nativeArena.pointer(weaponItemAt+layouts.weapon.obj_ocarry),weaponCarrierAt,'carrier alias writes compiler-measured bytes');
+ item.ocarry=0;assert.equal(item.v.v_ocarry,0);
+ item.otyp=layouts.weapon.AKLYS;
+ const nativeReturn=environment.services.autoreturn_weapon(item);assert.equal(nativeReturn,weaponContext.nativeNamespace.autoreturn_weapon(item),'native weapon records cross engine calls without pointer reboxing');assert.equal(nativeReturn.tethered,1);
+
+}finally{environment.memory.free(weaponItemAt);environment.memory.free(weaponCarrierAt);}
+const namingDescriptor=Object.getOwnPropertyDescriptor(weaponServices,'distant_name');
+try{weaponServices.distant_name=value=>value;const item=weaponContext.object(environment.requireGlobal('hands_obj'));assert.equal(weaponContext.distant_name(item,weaponContext.doname),item,'actual weapon naming guard accepts its stable callback identity');}finally{if(namingDescriptor)Object.defineProperty(weaponServices,'distant_name',namingDescriptor);else delete weaponServices.distant_name;}
+const oldWeaponAbon=weaponContext.nativeNamespace.abon,weaponMarker={nativeWeaponCaller:true},liveBeforeWeapons=environment.memory.live.size;
+try{weaponContext.nativeNamespace.abon=()=>{assert.equal(C,weaponMarker);environment.transport.stackAlloc(24);throw Error('native weapon cleanup');};withCEnvironment(weaponMarker,()=>assert.throws(()=>environment.services.abon(),/native weapon cleanup/));}finally{weaponContext.nativeNamespace.abon=oldWeaponAbon;}
+assert.equal(environment.memory.live.size,liveBeforeWeapons,'native weapon exceptions restore temporary storage');assert.equal(weaponServices.nativeContext,weaponContext,'weapon failure retains its real game owner');
+
 assert.equal(owner.depth,0,'input exhaustion publishes the entire connected native graph');
 assert.equal(owner.dirty.size,0);
 for(const name of ['movemon','mcalcdistress','healmon','mfndpos','dochugw','m_move','domove','lookaround','test_move','vision_recalc','clear_path','does_block','moveloop','moveloop_core','moveloop_preamble','stop_occupation','timet_to_seconds','timet_delta','dog_move','dog_eat','mattacku','magic_negation','getmattk']){

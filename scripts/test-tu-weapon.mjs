@@ -1,3 +1,6 @@
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+const nativeWeaponServices=new WeakMap();
+function weaponServices(s){if(process.env.NATIVE_WEAPON_FIXTURE!=='1')return s;let local=nativeWeaponServices.get(s);if(!local){local=nativeFixtureServices(s,{}).services;local.nativeWeaponTypes=s.moduleKey.environment.ctypes;nativeWeaponServices.set(s,local);}return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // EmC-first original C against imported JS. Native parity is a follow-up;
@@ -14,7 +17,7 @@ const {default:hf}=await loadFixture("weapon",pathToFileURL(resolve(dir,process.
 const reference=await rf();
 function text(m,p){p=Number(p);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 const L={};for(let i=0;i<reference._probe_layout_count();i++)L[text(reference,reference._probe_layout_name(i))]=Number(reference._probe_layout_value(i));
-const runtime={weapon:(services,name,...args)=>callWeapon(services,L,name,...args)};
+const runtime={weapon:(services,name,...args)=>callWeapon(weaponServices(services),L,name,...args)};
 const modules=[reference,await hf({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0,context="";
 function snapshot(m){return{trace:text(m,m._probe_trace()),state:text(m,m._probe_snapshot()),output:text(m,m._probe_output())};}
 function check(){assert.deepEqual(snapshot(modules[1]),snapshot(modules[0]));modules.forEach((m,i)=>assert.equal(m._probe_stack(),stacks[i]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);comparisons++;}

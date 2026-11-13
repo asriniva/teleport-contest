@@ -37,6 +37,8 @@ jobs:
           node scripts/test-native-state-values.mjs
           node scripts/test-native-window-callbacks.mjs
           node scripts/test-native-command-functions.mjs
+          node scripts/test-native-weapon-layout.mjs
+          node scripts/test-native-equipment-services.mjs
 
       - name: Score public sessions
         env:

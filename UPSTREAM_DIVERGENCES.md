@@ -1,3 +1,63 @@
+## Native weapon state, execution and stable equipment callbacks (2026-11-13)
+
+`native/weapon.js` binds all 40 unchanged WEAPON bodies and original data exports
+to a game context. `bindings/weapon.js` now retains one context per game/ABI
+instead of rebuilding its wrappers on each call. Its forwarding facade restores
+the caller's active services after nested calls and exceptions. Hero, monsters,
+items, skill records, species and weapon classes use canonical native records;
+private table rows and class-symbol/name lookups use native records as well.
+Native record returns retain their identities between engine routines instead
+of converting to addresses. Byte consumers still use the real backing address.
+Ordinary integer casts, practice arithmetic and safe pointer comparisons use
+Number operations with original narrowing/opaque-handle fallbacks.
+
+Four C header aliases are explicit: `oc_skill -> oc_subtyp`,
+`oc_bimanual -> oc_big`, `oc_hitbon -> oc_oc1`, and `ocarry -> v.v_ocarry`.
+The initial uncommitted attempt omitted `oc_hitbon`; both the C differential and
+real attack comparison rejected it. That attempt was not pushed. Alias setup
+is cached per record, and live-main tests validate mutation/carrier byte aliases.
+`weapon-native-layout.json` and `native/weapon-layout.js` independently compare
+all 147 existing compiler-measured sizes/offsets/widths, including nested/aliased
+fields, against canonical native types. Every single changed measurement is
+rejected; the measuring-header hash is checked. No C header or policy changes.
+
+`native/equipment-services.js` replaces the equipment service factory in
+`hero-equipment.js`: each inherited symbol retains one forwarding function
+identity across weapon/worn/wield access. Previously each read made a fresh
+function, invalidating naming callback identity checks and potentially losing
+callback-address metadata attached by a provider. The actual naming guard is
+exercised. Retained references follow global symbol replacement/deferred
+publication and cannot recurse through a later local override. Known native
+scalar/void dependencies receive native arguments directly; explicit macros,
+pointer/aggregate/function-pointer returns, pointer typedefs and foreign/other-game
+services retain their existing conversion boundary. Native window calls share
+the game-owned callback slots. Existing private C byte tables, local buffers,
+formatting, opaque pointers and foreign dependencies remain boundaries.
+
+Verification: native and legacy each pass 11,450 original-C weapon comparisons
+covering damage, selection, skills, menus, lifetimes, callbacks and growth.
+Test-only body-entry observation confirms every one of the 40 native bodies
+executes, and their complete policy AST matches upstream. Native layout and
+mutation checks pass on Node 24 and scoring Node 22. Service tests cover identity,
+replacement, deferred symbols, macros, non-recursive overrides, direct native
+values and foreign/pointer-typedef boundaries. Actual main proves stable context,
+shared hero/monster/item state, native return identity, all relevant aliases and
+exception cleanup. Metadata (all 100 files), dynamic dispatch (42 sites, 215 probes,
+34 live replacement calls) and SDK boundaries (1,931 checks) pass.
+
+Walk/wait/attack still match C state, output, ordered RNG and frames. Generic
+engine calls are 26/44/85, C scope entries 42/72/146, generic field operations
+51/78/134 and pointer calls 0/0/1. C heap allocations remain 44/165/109;
+zero-bridge/zero-allocation and 20x acceptance are not achieved. The first weapon
+candidate passed 44/44 in 283.797s before the stable-forwarding review fix.
+The final combined version passes 44/44: 792,838 ordered RNG entries, 11,405
+screens/cursors and 1,483 animations match, with 812 scoring inputs unchanged.
+The unprofiled Node 22.23.5 batch took 283.169s versus 285.786s before this step
+(about 0.9% lower in separate single runs). This small change establishes no
+controlled speedup. Receipts and the pre-run manifest are in
+`docs/runtime-environment/native-weapon-validation.json` and
+`native-weapon-public44-manifest.json`.
+
 ## Native command functions and connected action policies (2026-11-13)
 
 The CMD lowering now compiles 115 window call sites into 18 bound JS calls in

@@ -1,3 +1,6 @@
+import {createEquipmentServices} from './native/equipment-services.js';
+import {nativeStateFor} from './native/state-bridge.js';
+import {createNativeRecordViews} from './native/record-views.js';
 // Shared storage transport for unchanged WEAPON, WORN, WIELD and DO_WEAR.
 import abi from './equipment-abi.json' with {type:'json'};
 import wornTextAbi from './worn-text-abi.json' with {type:'json'};
@@ -15,11 +18,7 @@ import {callDoWear} from './bindings/do_wear.js';
 import {attachEquipmentFormatting} from './equipment-format.js';
 export function enableHeroEquipment(environment,layouts,hero){
  const {services,ctypes,memory,transport}=environment,address=environment.address;
- const forward=()=>new Proxy(Object.create(services),{get:(o,k,r)=>{
-  if(Object.hasOwn(o,k))return Reflect.get(o,k,r);
-  const fn=Reflect.has(o,k)?Reflect.get(o,k,r):typeof k==='string'?(...args)=>environment.resolve(k)(...args):undefined;
-  return typeof fn==='function'?(...args)=>fn(...args.map(v=>v?.address??v)):fn;
- }});
+ const forward=()=>createEquipmentServices(environment);
  const bit=(type,p,key)=>ctypes.getField(type,address(p),key,'unsigned int');
  const setBit=(type,p,key,v)=>ctypes.setField(type,address(p),key,'unsigned int',v);
  const locals={};
@@ -31,7 +30,10 @@ export function enableHeroEquipment(environment,layouts,hero){
    equipmentCell:i=>environment.requireGlobal(abi[name].equipment[i]),
   });
  }
+ const nativeOwner=nativeStateFor(environment);createNativeRecordViews(environment);
  const W=layouts.weapon,ws=locals.weapon,arw=environment.allocateGlobal('weapon.arwep',W.arwSize*weapon.arwep.length),kebab=environment.allocateGlobal('weapon.kebabable',weapon.kebabable.length);
+ ws.nativeOwner=nativeOwner;ws.nativeWeaponTypes=ctypes;
+ Object.defineProperty(ws,'nativeContext',{get:()=>callWeapon(ws,W,'environment')});
  ws.y_n=prompt=>transport.char(environment.resolve('yn_function')(typeof prompt==='string'?services.literal(prompt):address(prompt),environment.requireGlobal('ynchars'),110,1));
  Object.assign(ws,{storage:i=>[arw,kebab][i],storageCount:i=>[weapon.arwep.length,weapon.kebabable.length][i],
   equipment:i=>address(ctypes.load('struct obj *',environment.requireGlobal(['uleft','uright','uwep','uswapwep'][i]))),
@@ -43,7 +45,7 @@ export function enableHeroEquipment(environment,layouts,hero){
  });
  // Original WEAPON window macros dispatch through the same live windowprocs.
  // Keep the namespace/callback identities; only native argument carriers change.
- const weaponWindow=(name,...args)=>{const row=abi.weapon.windows[name];if(!row||ctypes.record('struct window_procs').fields[row.field]?.ctype!==row.nativeType)throw Error('Review WEAPON native window '+name);return environment.functions.indirect(ctypes.getField('struct window_procs',environment.requireGlobal('windowprocs'),row.field,'void *'),row.signature,...args);};
+ const weaponWindow=(name,...args)=>{const row=abi.weapon.windows[name];if(!row||ctypes.record('struct window_procs').fields[row.field]?.ctype!==row.nativeType)throw Error('Review WEAPON native window '+name);if(environment.nativeWindowCallbacks)return environment.nativeWindowCallbacks.invoke(row.field,row.signature,...args);return environment.functions.indirect(ctypes.getField('struct window_procs',environment.requireGlobal('windowprocs'),row.field,'void *'),row.signature,...args);};
  Object.assign(ws,{
   create_nhwindow:type=>weaponWindow('create_nhwindow',transport.int(type)),
   start_menu:(win,flags)=>weaponWindow('start_menu',transport.int(win),transport.ulong(flags)),
@@ -66,7 +68,8 @@ export function enableHeroEquipment(environment,layouts,hero){
  const logged=(file,kind)=>(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal(file),line,services.literal(caller));return services[kind](transport.int(n));};
  wn.rnl=logged('worn.c','rnl');for(const kind of ['rn2','rnd'])wd[kind]=logged('wield.c',kind);
  const owned=(namespace)=>Object.fromEntries(Object.entries(namespace).filter(([name,fn])=>typeof fn==='function'&&Object.hasOwn(publicFunctions.functions,name)&&!environment.hasFunction(name)));
- environment.register('hero-weapons',Object.fromEntries(Object.keys(owned(weapon)).map(name=>[name,(...args)=>callWeapon(ws,W,name,...args)])));
+ const weaponEntries=Object.fromEntries(Object.keys(owned(weapon)).map(name=>{const fn=(...args)=>callWeapon(ws,W,name,...args);fn.nativeState=nativeOwner;fn.nativeDirect=true;fn.nativePrepared=true;nativeOwner.functions.set(name,fn);return[name,fn];}));
+ environment.register('hero-weapons',weaponEntries,ws);
  const wornEnv=createWornEnvironment(wn,layouts.worn,worn),wieldEnv=createWieldEnvironment(wd,layouts.wield,wield);
  // The unchanged wield bridge indexes its two private getobj filters in this order.
  // Re-enter this same context when INVENT calls the native-shaped selector token.
