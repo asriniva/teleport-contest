@@ -1,3 +1,41 @@
+## Shared enum metadata and production APPLY boundary fix (2026-11-13)
+
+`js/nethack/c-types.js` now merges the compiler-measured window and options enum
+inventories into every game type environment, including the common runtime via
+`runtime-bindings.js`. The record-only inventory contained four enums; the union
+contains 127, including `enum bhit_call_types`. Conflicting measurements fail
+explicitly. No enum widths or signs are inferred. `js/c-runtime/types.js` adds
+`abiType`, preserving enum identity for fields while giving scalar call adapters
+and the native ABI caster the measured signed or unsigned integer representation.
+Scalar dispatchers throughout the game use this representation. Pointer identity,
+callback tables, original policy, RNG ordering and save formats are unchanged.
+
+The full leaderboard diagnostic reaches `do_blinding_ray` → `bhit`. Its exact
+scalar/Array.map stack reproduces when the enum measurement is absent, before
+`bhit` executes. This establishes a conversion defect, not an infinite loop in
+Array.map. Why the external judge labels this stack `timeout (900s)` remains
+unverified; no hidden-recording or deadline-success claim is made.
+
+`scripts/test-engine-type-metadata.mjs`, now required in Score CI, checks 100
+configured ABI metadata files, 6,544 prototypes, 386 structured signatures, 215
+nested callback types, all 127 measured enums, signedness boundaries, metadata
+conflicts and two real production APPLY conversions with null and live callbacks.
+The original-C `test-standalone-apply.mjs` now includes actual camera selection
+and direction through `doapply`: 433 checks preserve both complete ISAAC states,
+raw tty, recorder frames and selected final live world graph. It validates the
+current path-relocated APPLY inventory directly; the relocated exporter is pinned
+separately, while original policy, bridge and measured C ABI hashes are retained.
+This avoids an unrelated, already broken historical global layout inverse.
+
+Also passed: 640 native execution checks; generic runtime contracts; 5,583 ABI
+rejection checks across 17 production owners; 81 literal callback declarations
+and live UHITM callback replacement. Static callback audit checks 29,805 record
+fields and 603 literal callback field lookups across 542 modules. Its 40 dynamic
+lookups remain runtime coverage obligations. Full 44 public recording verification
+is running at commit time; its outcome is not yet accepted here. Hidden recordings
+and comprehensive advanced-tool branch coverage remain unverified. Unfinished
+native glyph work is excluded. See `docs/runtime-environment/abi-enum-fix.json`.
+
 ## Current native-build diagnostic trace (worktree evidence, 2026-11-13)
 
 After a49c248, a single current-build world-tour recording is sampled to locate

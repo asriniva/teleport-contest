@@ -1,0 +1,137 @@
+{
+  "defect": "Missing enum bhit_call_types in common runtime; measured inventories were only connected to selected UI/options owners.",
+  "fix": "Share all 127 measured enums across game type environments; retain measured enum sign at scalar ABI boundaries.",
+  "leaderboard": {
+    "url": "https://mazesofmenace.ai/leaderboard/data.json",
+    "scoringErrorAt": "2026-11-13T12:41:09.156Z",
+    "reported": "timeout (900s)",
+    "stackTail": "do_blinding_ray (js/ported/apply.js:61:18)",
+    "timeoutLabelExplanationVerified": false
+  },
+  "productionMetadataAudit": {
+    "files": 100,
+    "prototypes": 6544,
+    "structured": 386,
+    "nestedCallbackTypes": 215,
+    "distinctTypes": 138,
+    "enums": 127,
+    "applyCalls": 2
+  },
+  "originalCApply": {
+    "provenance": {
+      "receipt": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+      "provider": "1c2081168ab1a9ac9109f5de1cc3d57a121a2ea87cd018a0e0ae591a4b854245",
+      "test": "253198735d225b95fcdc3638046b82a1623aebe5319a7d5454e049a358928ab2",
+      "abi": "1edd43ab1c6ac6b73da64296648fb42ec2d7f01270eb132adb0661f134ccadbf"
+    },
+    "checks": 433,
+    "guards": 30,
+    "hashes": 133,
+    "calls": [
+      {
+        "name": "reset_trapset",
+        "keys": "",
+        "frames": 0
+      },
+      {
+        "name": "reset_trapset",
+        "keys": "",
+        "frames": 0
+      },
+      {
+        "name": "number_leashed",
+        "keys": "",
+        "frames": 0
+      },
+      {
+        "name": "check_leash",
+        "keys": "",
+        "frames": 0
+      },
+      {
+        "name": "next_to_u",
+        "keys": "",
+        "frames": 0
+      },
+      {
+        "name": "um_dist",
+        "keys": "",
+        "frames": 0
+      },
+      {
+        "name": "um_dist",
+        "keys": "",
+        "frames": 0
+      },
+      {
+        "name": "um_dist",
+        "keys": "",
+        "frames": 0
+      },
+      {
+        "name": "um_dist",
+        "keys": "",
+        "frames": 0
+      },
+      {
+        "name": "doapply",
+        "keys": "il",
+        "frames": 3
+      },
+      {
+        "name": "doapply",
+        "keys": "j",
+        "frames": 1
+      },
+      {
+        "name": "doapply",
+        "keys": " k",
+        "frames": 2
+      },
+      {
+        "name": "doapply",
+        "keys": " l",
+        "frames": 2
+      },
+      {
+        "name": "doapply",
+        "keys": " my",
+        "frames": 3
+      },
+      {
+        "name": "doapply",
+        "keys": " l ",
+        "frames": 3
+      }
+    ],
+    "worldCoverage": {
+      "counts": {
+        "monst": 4,
+        "permonst": 4,
+        "branch": 7,
+        "obj": 38,
+        "mextra": 1,
+        "edog": 1,
+        "mapseen": 1,
+        "s_level": 36,
+        "ls_t": 1,
+        "fe": 1,
+        "stairway": 2
+      },
+      "serializedRecordBytes": 158494,
+      "serializedPaddingByteOccurrences": 1646,
+      "uniqueScalarBytes": 30454,
+      "pointerEdges": 130
+    },
+    "externalUnwindFixtureCleanup": "Matched getting_char1\u21920 after genuine main external read unwind; actual finite tool/More keys thereafter.",
+    "completeInvocationAccepted": false,
+    "limitations": "Controlled ordinary tool/reset and invocation-item ABI calls after genuine main; no full invocation ritual, advanced tool matrices or integrated action scheduling claim."
+  },
+  "public44": "In progress at fix commit; no full-run acceptance asserted.",
+  "limits": [
+    "Hidden recordings unavailable.",
+    "Advanced tool interactions are not comprehensively executed.",
+    "Static callback audit retains 40 dynamic lookup obligations.",
+    "Production scalar stack reproduction establishes conversion failure; external timeout classification remains unexplained."
+  ]
+}

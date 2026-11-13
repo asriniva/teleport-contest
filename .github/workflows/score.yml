@@ -13,6 +13,9 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Check production type metadata and nested callbacks
+        run: node scripts/test-engine-type-metadata.mjs
+
       - name: Check window callback declarations and engulf dispatch
         run: node scripts/test-uhitm-delay-callback.mjs
 

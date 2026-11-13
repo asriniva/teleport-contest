@@ -1,8 +1,8 @@
 {
   "version": 1,
   "runtimeCommit": "25ce0121f6f011b59ec201652d2eadae320d0baf",
-  "report": "Leaderboard overall timeout900s, scalar apply.js:16:451, Array.map/invoke/local/pcall. Column451 maps to ctypes.size(type).",
-  "status": "No APPLY non-progress reproduced in the public Knight session; leaderboard failure remains unresolved.",
+  "report": "Historical leaderboard timeout (900s) report; deadline scope unverified. scalar apply.js:16:451 maps to ctypes.size(type).",
+  "status": "Superseded by abi-enum-fix.json: production camera/bhit conversion reproduces the reported stack due to missing enum metadata. Earlier Knight-only diagnostic did not exercise this path.",
   "instrumentedKnight": {
     "passed": true,
     "rng": 108275,
@@ -23,7 +23,7 @@
     "APPLYInvokeInclusivePercent": 0.27154200396342787
   },
   "limits": [
-    "Screenshot is a global deadline interruption, not evidence that scalar itself loops.",
+    "A timeout label alone does not establish either a global deadline scope or an infinite loop; the full later stack identifies do_blinding_ray.",
     "Knight is a diagnostic reproduction candidate; the failed leaderboard session is unknown.",
     "Instrumentation and CPU sampling add overhead. Instrumented Knight ran concurrently with a full replay; timing is not a performance comparison.",
     "Repeated target and primitive arguments do not establish non-progress: iterator results and memory can change.",

@@ -11,7 +11,7 @@ export function installNativeIntegerCasts(env){
 export function createNativeAbiCaster(ctypes,transport,pointer){
  const cache=new Map();
  return source=>{
-  const type=ctypes.canonical(source);if(cache.has(type))return cache.get(type);
+  const type=ctypes.abiType(source);if(cache.has(type))return cache.get(type);
   let cast,legacy;
   if(type.includes('*'))cast=pointer;
   else if(type==='void')cast=()=>undefined;
