@@ -102,6 +102,9 @@ def plan():
  return rows
 
 def qualified_current(file):
+ if file=='js/nethack/pager-lookup.js':
+  from pager_callback_source_successor import qualified_before
+  return qualified_before(ROOT,file)
  if file in {'js/nethack/bindings/termcap.js'}:
   from full_replay_source_successor import qualified_before
   return qualified_before(ROOT,file)
