@@ -4,6 +4,8 @@ import assert from 'node:assert/strict';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {loadFixture} from './pure-js-fixtures/load.mjs';
+import {nativeMhitmFixture} from './native-mhitm-fixture.mjs';
+const nativeExecution=process.env.NATIVE_MONSTER_COMBAT_FIXTURE==='1';
 import {callMhitm} from '../js/nethack/bindings/mhitm.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 
@@ -13,7 +15,7 @@ const jsFactory=(await loadFixture('mhitm',url('hybrid'))).default;
 const reference=await refFactory(),layout={};
 function text(m,p){let at=Number(p),end=at;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(at,end)).toString('latin1');}
 for(let i=0;i<reference._probe_layout_count();i++)layout[text(reference,reference._probe_layout_name(i))]=Number(reference._probe_layout_value(i));
-const implementation=await jsFactory({nethackPorted:{mhitm:(services,name,...args)=>callMhitm(services,layout,name,...args)}});
+const implementation=await jsFactory({nethackPorted:{mhitm:nativeExecution?nativeMhitmFixture(layout):(services,name,...args)=>callMhitm(services,layout,name,...args)}});
 const modules=[reference,implementation],snapshot=m=>({state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace())});
 let cases=0;
 function compare(label,seed,op,type,damage){
@@ -42,3 +44,5 @@ for(const [attack,damage]of configurations){
  for(let seed=1;seed<=8;seed++)for(const op of ops)compare(attack+'/'+damage+',routine='+op+',seed='+seed,seed,op,layout[attack],layout[damage]);
 }
 console.log('PASS: MHITM '+cases+' original-C/pure-JS return, state, trace, stack and context cases across22 routines,32 routine seeds and12 attack configurations.');
+
+if(nativeExecution)console.log('Native MHITM expanded state/execution matrix PASS');

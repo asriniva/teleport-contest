@@ -1,7 +1,8 @@
 // Native engine calls keep ordinary values. Foreign functions retain the
 // supplied ABI conversion and the byte/callback boundary.
-export function installNativeDependency(local,name,target,owner,legacy){
- Object.defineProperty(local,name,{configurable:true,enumerable:true,get(){const selected=owner.functions.get(target);return selected?.nativeState===owner?selected:legacy;},set(value){Object.defineProperty(this,name,{value,writable:true,configurable:true,enumerable:true});}});
+export function installNativeDependency(local,name,target,owner,legacy,prepareNative){
+ let previous,adapted;
+ Object.defineProperty(local,name,{configurable:true,enumerable:true,get(){const selected=owner.functions.get(target);if(selected?.nativeState!==owner)return legacy;if(!prepareNative)return selected;if(selected!==previous){adapted=(...args)=>selected(...prepareNative(args));previous=selected;}return adapted;},set(value){Object.defineProperty(this,name,{value,writable:true,configurable:true,enumerable:true});}});
 }
 export function installNativeIntegerCasts(env){
  const casts={int:v=>v|0,uint:v=>v>>>0,short:v=>v<<16>>16,ushort:v=>v&65535,char:v=>v<<24>>24,uchar:v=>v&255,byte:v=>v<<24>>24,boolean:v=>v<<24>>24,xint8:v=>v<<24>>24,xint16:v=>v<<16>>16,coordxy:v=>v<<16>>16};

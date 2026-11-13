@@ -24,6 +24,19 @@ const vision=callVision({moduleKey:environment},layouts.vision,'environment');
 const hero=owner.records.get('struct you:'+environment.requireGlobal('u'));assert.ok(hero);
 const pets=environment.enableDogmove(layouts),attacks=environment.enableMhitu(layouts);
 assert.equal(pets.context.u,hero);assert.equal(attacks.context.u,hero);
+const combat=environment.enableMhitm(layouts);assert.equal(combat.context.u,hero);assert.equal(combat.context.levl[hero.ux][hero.uy],pets.context.levl[hero.ux][hero.uy],'combat and pets share canonical map cells across their array interfaces');
+assert.ok(combat.services.healmon===owner.functions.get('healmon'),'combat calls native healing directly');
+for(const name of ['mattackm','fightm','mdisplacem','sleep_monst'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' is published directly');
+const combatActor=[...owner.records].find(([key])=>key.startsWith('struct monst:'))?.[1];assert.ok(combatActor);assert.equal(combat.context.monster(combatActor.address),combatActor);
+assert.equal(combat.context.permonst(combatActor.data.address),combatActor.data);
+const priorKilled=owner.functions.get('monkilled'),stringMarker={nativeStringCaller:true};let stringChecks=0;
+const killedProbe=(actor,why,how)=>{assert.ok(actor===combatActor);assert.ok(why,'an empty C string remains a non-null pointer');assert.equal(environment.memory.readString(why),'');assert.equal(how,7);assert.equal(C,stringMarker);stringChecks++;};killedProbe.nativeState=owner;
+try{owner.functions.set('monkilled',killedProbe);withCEnvironment(stringMarker,()=>combat.services.monkilled(combatActor,'',7));assert.equal(stringChecks,1);}
+finally{owner.functions.set('monkilled',priorKilled);}
+const combatScopeCount=environment.memory.live.size,priorDistance=combat.context.mdistu;
+try{combat.context.mdistu=()=>{environment.transport.stackAlloc(16);throw Error('native combat cleanup');};withCEnvironment(stringMarker,()=>assert.throws(()=>combat.call('noises',combatActor,0),/native combat cleanup/));}
+finally{combat.context.mdistu=priorDistance;}
+assert.equal(environment.memory.live.size,combatScopeCount);assert.equal(owner.depth,0);
 assert.equal(pets.services.mfndpos,owner.functions.get('mfndpos'),'pet movement calls native candidate search directly');
 const candidateAt=environment.memory.calloc(1,environment.ctypes.size('struct mfndposdata'));
 try{const candidates=pets.context.view('mfndposdata',candidateAt);assert.equal(candidates.info.length,9);assert.equal(candidates.poss.length,9);}

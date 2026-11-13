@@ -1,0 +1,117 @@
+{
+  "baseCommit": "15da33d",
+  "scope": "Native MHITM canonical actor/hero/map state, typed private scalars, direct calls and remaining string-pointer boundary",
+  "sourcePolicy": {
+    "passed": true,
+    "modules": 1,
+    "functions": 22,
+    "localCallConversions": 13,
+    "sourcePolicyAstEqual": true
+  },
+  "nativeControlledCMatrix": {
+    "passed": true,
+    "comparisons": 3326,
+    "functions": 22
+  },
+  "expandedNativeControlledCMatrix": {
+    "passed": true,
+    "cases": 992,
+    "routineSeeds": 32,
+    "attackConfigurations": 12
+  },
+  "actualGameplay": {
+    "passed": true,
+    "monsters": 11,
+    "nativeFunctions": 542,
+    "nativeFields": 21476,
+    "nativeStorage": "typed-arrays",
+    "cachedReads": 0,
+    "legacyBoundaries": 54626,
+    "moves": "85"
+  },
+  "executionRegressions": {
+    "passed": true,
+    "checks": 640,
+    "nativeArguments": true,
+    "dependencyReplacement": true,
+    "contextOverrides": true,
+    "foreignOwnerIsolation": true,
+    "decodedCallbacks": true
+  },
+  "originalCWorldComparison": {
+    "profile": "Strict original full-C main against pure JS finite ordinary movement; source death fixture input prefix",
+    "checks": 3,
+    "cases": [
+      {
+        "keys": 716,
+        "moves": "238",
+        "frames": 717,
+        "worldRecords": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 37,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        }
+      }
+    ],
+    "completeGameAccepted": false,
+    "sourceSha256": {
+      "scripts/test-standalone-monster-movement-program.mjs": "56b8be40dfff104fb388f634daceee36fad1400d7003fef953569588ed181906",
+      "scripts/restoration-world-graph.mjs": "a64d28a6a5974a89672ecedd637ebe89b706afb81b87267d8cb18684459907db",
+      "scripts/run-standalone-program.mjs": "29d76709123ab2b78c6e5dc45452b722b58cffc89b1afe1d5e4c2a384f00a479",
+      "scripts/full-original-c-run.mjs": "3da8b7a3dd0b2c1f60eb6a986bcb70c0bb79d120e50a007c1558569301978a9a",
+      "js/nethack/monster-movement.js": "da26ad77eeb123321502049bb4e7857312bb0a5c0a2c45c80868b5721c81cef2",
+      "js/nethack/monster-lifecycle.js": "619e230d8da987e63b0094790d2dc933655d0d23b90971efcc78c8617a5c39f9",
+      "js/nethack/bindings/monmove.js": "4ee2c2084aa357384454a16cd6fbd94dd6069387bf40934feb40f4b0732d4aeb",
+      "js/ported/monmove.js": "c15e91a573c5a8a8eda8c4d7cda18ef6966645f50ad515382a8dc027c717dc39",
+      "js/nethack/bindings/mon.js": "38616849c82cc2d759e54e01cb21656d180e247a0558b8af97b99b0a8b988674",
+      "js/ported/mon.js": "b76ebfece2f87288bd21915219cb8db7d00652399901b58f8463958a71ca3fe0"
+    },
+    "limitation": "Only these finite recordings and normalized world graphs are accepted; later death, victory, other seeds and unreached movement branches remain separate requirements."
+  },
+  "liveAssertions": [
+    "Canonical monsters, species, hero and map cells shared with movement/pets",
+    "Native healing dependency and public dispatch",
+    "Empty JS string becomes a non-null empty C-string pointer for native MON",
+    "Foreign caller context and throwing combat cleanup"
+  ],
+  "integrationFailure": {
+    "run": ".cache/native-mhitm-main-716-03.log",
+    "sha256": "461c414d7b09a2f30ac97f125e506fa132af7a8c177693a84cc26ccf6eb017db",
+    "effect": "Empty string truthiness suppressed kill messages; direct char-pointer preparation restores byte-string pointer semantics.",
+    "fixedBy": "Precompiled char-pointer argument positions and optional native dependency preparation; accepted finite game run04 and public44 run05"
+  },
+  "rawProofSha256": {
+    ".cache/native-mhitm-source-05.log": "9d162f28209c62a254dbd7056c2bd50f1a7967337b5d2759abd22f7fec069316",
+    ".cache/native-mhitm-matrix-05.log": "6490dfd7208b465b909f5977d76ef77cd78474c1573d9ea49c79a46648f8ec25",
+    ".cache/native-mhitm-legacy-01.log": "319f3d971fd963110666afe82783697a897780b8dc28b684981402143f43135c",
+    ".cache/native-mhitm-branches-03.log": "823d19349688964d71e121fad2a528a5bc6b693b5e83edc5e5c77051bea05df5",
+    ".cache/native-mhitm-connected-04.log": "08f5dc27f00e3b2632f586196ddd9293f526e6b460d8f29d1cc7167166a43d5e",
+    ".cache/native-mhitm-main-716-04.log": "48355c6cbff435538ad3f2203e31f929739217abcfe2cc37db6f2388a304ffe6",
+    ".cache/native-mhitm-execution-04.log": "bc4f8f77cd592464d1c679829d00456a2de59d498359411777f1eb6f5779997b"
+  },
+  "sourceSha256": {
+    "js/nethack/mhitm.js": "0d181ebcc35939c1f676037258a9ee85642ad249028b41ac828cbfe1637ede1a",
+    "js/nethack/bindings/mhitm.js": "a4030cd050bb641cfc34808b5528f5beb4f680222cd6d456dd7321d58b8af728",
+    "js/nethack/native/mhitm.js": "e4ccd0f56bf5fffb187100e73c89690319fd2067233d243638f68aaeaae105b8",
+    "js/nethack/native/execution.js": "85e08d42b0e5c62228be23f1454f09f5be69f8989b21c1852aa3744c5dcfd58a",
+    "scripts/generate-native-monster-combat.py": "f9c71a32dab33710e216704441a562bd31d1331843ae286822e14872d8b4f58b",
+    "scripts/native-mhitm-fixture.mjs": "2394cf303bee3669094c3ae8d42600341bbc54979a33b2f4c4c2b6a558a8a498",
+    "scripts/test-tu-mhitm.mjs": "f01eaa00c6aae652cc70fbf070e70634cbf1c43a743bea6a8cebf9ff1fae37bf",
+    "scripts/test-mhitm-branch-matrix.mjs": "3f4c6da2dfba9b666c823325daa556503662e44a71d1fe6f334fe8b9bc64deaa",
+    "scripts/test-native-monster-combat-source.mjs": "34f5303243598b6ae844f9cb8f3d391067e7c7e33c05f3afbebe895dbdaa37fa",
+    "scripts/test-native-connected-monsters.mjs": "1994d669441805bacac9b9d3009c587b228e0a1beaaf11b5d2617a78c15f1888"
+  },
+  "limits": [
+    "Controlled configured C matrices and finite main input prefix do not cover all game seeds/branches or native hosts.",
+    "Outer map-array interfaces remain adapter-specific; cells and bytes share canonical state.",
+    "Final public recording evidence is separate. Current historical timing comparison is 0.528% slower, not a performance gain.",
+    "Hero combat and remaining generic adapters/state accessor overhead persist. A runtime-free ordinary turn and the required 20x remain unachieved.",
+    "No new baseline replay or CPU profiling."
+  ]
+}

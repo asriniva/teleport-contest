@@ -6,6 +6,8 @@ import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {callMhitm} from '../js/nethack/bindings/mhitm.js';
+import {nativeMhitmFixture} from './native-mhitm-fixture.mjs';
+const nativeExecution=process.env.NATIVE_MONSTER_COMBAT_FIXTURE==='1';
 import {C,R,T} from '../js/c-runtime/context.js';
 const dir=resolve(process.env.TELEPORT_MHITM_PROBE_DIR??'.cache/tu-probes');
 const path=kind=>pathToFileURL(resolve(dir,(process.env.TELEPORT_MHITM_PROBE_DIR?'':'mhitm-')+kind+'.mjs'));
@@ -14,7 +16,7 @@ const reference=await rf();
 function text(m,p){p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 const L={};for(let i=0;i<reference._probe_layout_count();i++)L[text(reference,reference._probe_layout_name(i))]=Number(reference._probe_layout_value(i));
 for(const m of readFileSync(new URL(import.meta.url),'utf8').matchAll(/L\.([A-Z][A-Z_0-9]+)\b/g))assert.ok(m[1] in L,'Missing fixture constant '+m[1]);
-const runtime={mhitm:(services,name,...args)=>callMhitm(services,L,name,...args)};
+const runtime={mhitm:nativeExecution?nativeMhitmFixture(L):(services,name,...args)=>callMhitm(services,L,name,...args)};
 const modules=[reference,await hf({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0,context='';
 function snapshot(m){return{state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace())};}
 function call(name,...args){let vals=modules.map(m=>m['_probe_'+name](...args));assert.deepEqual(vals[1],vals[0],context+':'+name);assert.deepEqual(snapshot(modules[1]),snapshot(reference),context+':'+name);for(let i=0;i<2;i++)assert.equal(modules[i]._probe_stack(),stacks[i]);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);comparisons++;return vals[0];}
@@ -74,3 +76,5 @@ for(const stage of [1,2,3,4,5,6,7,8,9,10,11,12,13,14]){reset();const before=modu
 // Same dispatcher serves two independent real hybrid Modules without state leakage.
 const other=await hf({nethackPorted:runtime});other._probe_reset();other._probe_field(0,14,18n);other._probe_option(35,1);other._probe_action(20,0,1,-1,1);assert.match(text(other,other._probe_snapshot()),/rng:2;/);assert.equal(C,undefined);
 console.log(`MHITM first-pass EmC: ${comparisons} exact comparisons passed; 22 original functions; native parity pending.`);
+
+if(nativeExecution)console.log('Native MHITM state/execution matrix PASS');

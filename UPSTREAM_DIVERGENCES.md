@@ -1,3 +1,43 @@
+## Connected native monster combat (worktree, 2026-11-13)
+
+Additional work after 15da33d. `scripts/generate-native-monster-combat.py` binds
+22 unchanged MHITM functions to a per-game native context and lowers 13 local
+calls directly. The game adapter selects canonical monsters, species, attacks,
+hero properties and map cells; private scalar projections use the typed arena.
+Native dependencies dispatch directly. Legacy calls, byte references, indirect
+callbacks and string-pointer parameters keep their required boundary semantics.
+Public native calls own temporary cleanup and game-state depth. Legacy component
+adapters remain available. RNG sites/order, source policy, save format, C
+reference, assets and frozen recordings are unchanged. Outer map-array
+interfaces remain adapter-specific; their cells and bytes share native state.
+
+The first 716-input comparison exposed a direct-call ABI error: an empty JS
+string passed to MON's raw pointer parameter became false and suppressed kill
+messages. MHITM now precompiles char-pointer positions and materializes strings
+at that byte-string boundary, retaining native actor arguments. The dependency
+installer supports optional preparation and live function replacement. A directed
+empty-string/caller-context check and the fixed full-C main comparison pass.
+Source/RNG AST equality covers all 22 functions and 13 lowered calls. Native and
+retained adapters pass 3,326 C comparisons; an expanded native matrix passes 992
+cases across 22 routines, 32 seeds and 12 attack configurations. Actual gameplay
+checks shared state/dispatch and exception cleanup. The original-C main matches
+716 inputs/238 turns, 717 frames, normalized world graph and both RNG histories.
+These finite/controlled checks do not establish every seed, branch or host.
+Component receipt: `docs/runtime-environment/native-mhitm-component-validation.json`.
+
+Final source-stable `.cache/native-mhitm-public-05` passes 44/44 strict recordings:
+792,838 RNG entries, 11,405 screens/cursors, 1,483 animation frames and ordered
+cursor triples, all 56 persistence segments and zero forbidden attempts. All 778
+scoring inputs remain unchanged during replay; frozen/session bytes are unchanged.
+Engine time 345.64437s → 347.46933s is 0.5280% slower; geometric mean session
+speedup 0.99366x. Fit 19.3847ms/turn → 19.4606ms/turn; wall 352.59594s. This is an
+architectural conversion with a measured regression, not an accepted speed gain;
+a single historical-reference comparison does not establish a robust causal
+estimate. Receipts: `native-mhitm-public-validation.json` and
+`native-mhitm-timing.json` under `docs/runtime-environment`.
+No new baseline replay or CPU profiling. Hero combat, generic adapters and shared
+state-access overhead remain. A runtime-free ordinary turn and 20x are unachieved.
+
 ## Stable native state roots, direct dispatch and integer transport (worktree, 2026-11-13)
 
 Additional work after7962216. Published and resolved functions retain their
