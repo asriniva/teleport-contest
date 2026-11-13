@@ -1,3 +1,27 @@
+## Native byte input/output transport (2026-11-13)
+
+The production stdio implementation writes JavaScript strings and individual
+bytes directly from native byte arrays. `fputs` no longer constructs and frees a
+C string, and slow-path `fgetc`/`fputc` no longer allocate one-byte C buffers.
+Numeric C pointer operations retain their existing byte boundary. Strict Latin-1
+validation, embedded-NUL truncation, buffering, partial/error returns, stream
+position, input pushback and memory-growth behavior remain explicit. Original-C
+comparison also exposed and fixed caller-buffer pushback aliasing and buffered
+append `ftell`; named and unnamed `freopen` retain musl's distinct append-flag
+semantics. The SDK receipt is regenerated; measured constants/layouts are unchanged.
+
+Independent original-C checks pass: 4,083 byte-I/O checks, 1,931 SDK-boundary checks
+and 1,657 native-string checks across 23 cases. Actual walk/wait/attack state,
+ordered RNG logs, tty and frames remain equivalent. C allocations fall from
+54/194/156 to 45/166/117; generic calls remain 33/80/168, so the zero-bridge and
+zero-allocation acceptance remains unmet. All 44 recordings pass with all 794
+scoring inputs unchanged: 792,838 RNG entries, 11,405 screens/cursors and 1,483
+animations match. Unprofiled Node 22.23.5 batch time is 290.430s versus 295.457s
+for the preceding biology/stair step (about 1.7% lower). These separate single
+runs do not establish a controlled speedup or the 20x target. Evidence is in
+`docs/runtime-environment/native-byte-transport-validation.json` and its source
+manifest. No upstream C, RNG policy, recording input or capture policy changes.
+
 ## Native monster biology and stair movement queries ( 2026-11-13)
 
 `native/mondata.js` binds all 59 original monster-biology routines to one game
