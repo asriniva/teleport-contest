@@ -96,7 +96,7 @@ export function createHackEnvironment(services,layout,namespace,servicePrototype
                 normalize=v=>decode(f.d,raw(v));
             }
             if(type.startsWith('union '))Object.defineProperty(out,f.name,{enumerable:true,get(){nativeState.flush();return get();},set(v){nativeState.flush();set(normalize(v));nativeState.invalidate();}});
-            else Object.defineProperty(out,f.name,nativeState.field(get,set,normalize));
+            else Object.defineProperty(out,f.name,nativeState.field(get,set,normalize,type==='struct instance_globals_v'?p:undefined));
         }
         nativeViews.set(key,out);nativeState.enrich(out,type,at);return out;
     }

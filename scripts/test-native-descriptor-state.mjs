@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import {CMemory} from '../js/c-runtime/heap.js';
+import {createDescriptorMemory} from '../js/c-runtime/adapter-factories.js';
+import {NativeStateBridge} from '../js/nethack/native/state-bridge.js';
+import {createNativeDescriptorViews} from '../js/nethack/native/descriptor-state.js';
+const memory=new CMemory({initialBytes:256,maximumBytes:16384});
+const owner=new NativeStateBridge();owner.records=new Map();
+owner.sharedTypes.add('struct cell');owner.sharedTypes.add('union overlay');
+const schemas={cell:{ctype:'struct cell',fields:[
+ {name:'x',d:{t:'i32'}},{name:'a',d:{t:'u32'},bit:true},{name:'b',d:{t:'u32'},bit:true},
+ {name:'overlay',d:{s:'overlay'}},{name:'next',d:{p:'cell'}}
+]},overlay:{ctype:'union overlay',fields:[{name:'wide',d:{t:'u64'}},{name:'low',d:{t:'u32'}}]}};
+const records={cell:{fields:{x:{offset:0},a:{offset:4,bits:3,shift:0},b:{offset:4,bits:2,shift:3},overlay:{offset:8},next:{offset:16}}},overlay:{fields:{wide:{offset:0},low:{offset:0}}}};
+const addr=v=>Number(v?.address??v??0),raw=v=>BigInt.asUintN(64,BigInt(v?.address??v??0));
+let view;
+const transport=createDescriptorMemory({services:{heap:()=>memory.HEAPU8},layout:{cellSize:24,overlaySize:8},addr,raw,memory:()=>memory.view,cache:new Map(),view:(...a)=>view(...a),pointerArrays:true,directIntegerReads:true,beforeRead:()=>owner.flush(),beforeWrite:()=>{owner.flush();owner.invalidate();}});
+const make=()=>createNativeDescriptorViews({owner,schemas,records,memory:()=>memory.view,addr,raw,...transport,decorate(){}});
+view=make();
+const p=memory.calloc(1,24),q=memory.calloc(1,24),left=view('cell',p),right=view('cell',q);
+assert.equal(make()('cell',p),left,'a second provider retains the canonical object');
+owner.enter();
+left.x=18;assert.equal(memory.view.getInt32(p,true),0,'ordinary native mutation stays native until publication');
+assert.equal(transport.read({t:'i32'},p),18,'byte reads publish pending native mutations');
+left.x=19;
+const alias=transport.array({a:[2],e:{t:'i32'}},p);
+alias[0]=-3;assert.equal(left.x,-3,'byte array mutation invalidates a cached native scalar');
+left.a=7;left.b=2;owner.flush();assert.equal(memory.view.getUint8(p+4),23,'packed publication preserves neighboring bits');
+left.a=10;assert.equal(left.a,2,'packed native value narrows before publication');
+left.next=right;right.next=left;assert.equal(left.next,right);assert.equal(left.next.next,left,'pointer cycles retain identities');
+left.overlay.wide=0xffffffffffffffffn;assert.equal(left.overlay.low,0xffffffff);
+left.overlay.low=0x89abcdef;assert.equal(left.overlay.wide,0xffffffff89abcdefn,'overlapping union views stay live');
+left.x=41;
+const previousBuffer=memory.buffer;
+owner.boundary(()=>{assert.equal(memory.view.getInt32(p,true),41);assert.ok(memory.malloc(8192));assert.notEqual(memory.buffer,previousBuffer);memory.view.setInt32(p,42,true);});
+assert.equal(left.x,42,'retained native references follow memory growth and foreign writes');
+assert.throws(()=>owner.boundary(()=>{memory.view.setInt32(p,43,true);throw Error('foreign failure');}),/foreign failure/);
+assert.equal(left.x,43,'exceptional boundaries invalidate stale native values');
+owner.boundary(()=>{owner.enter();left.x=44;owner.leave();assert.equal(memory.view.getInt32(p,true),44);});
+assert.equal(left.x,44,'nested native reentry publishes to its foreign caller');
+owner.leave();assert.equal(owner.depth,0);assert.equal(owner.dirty.size,0);
+console.log('PASS native descriptor ownership, dirty publication, byte-array aliasing, packed neighbors, pointer cycles, unions, growth, exceptions and reentry');

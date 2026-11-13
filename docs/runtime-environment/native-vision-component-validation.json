@@ -1,0 +1,101 @@
+{
+  "baseCommit": "46ec284",
+  "scope": "Game-bound native VISION, shared canonical hero/monster/map fields and direct execution",
+  "componentComparisons": 27128,
+  "sourceFunctions": 19,
+  "publicNativeEntries": 11,
+  "liveOwnership": {
+    "passed": true,
+    "monsters": 6,
+    "nativeFunctions": 496,
+    "nativeFields": 21737,
+    "cachedReads": 31655,
+    "legacyBoundaries": 42967,
+    "moves": "85"
+  },
+  "originalCWorldComparison": {
+    "profile": "Strict original full-C main against pure JS finite ordinary movement; source death fixture input prefix",
+    "checks": 3,
+    "cases": [
+      {
+        "keys": 716,
+        "moves": "238",
+        "frames": 717,
+        "worldRecords": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 37,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        }
+      }
+    ],
+    "completeGameAccepted": false,
+    "sourceSha256": {
+      "scripts/test-standalone-monster-movement-program.mjs": "56b8be40dfff104fb388f634daceee36fad1400d7003fef953569588ed181906",
+      "scripts/restoration-world-graph.mjs": "a64d28a6a5974a89672ecedd637ebe89b706afb81b87267d8cb18684459907db",
+      "scripts/run-standalone-program.mjs": "29d76709123ab2b78c6e5dc45452b722b58cffc89b1afe1d5e4c2a384f00a479",
+      "scripts/full-original-c-run.mjs": "3da8b7a3dd0b2c1f60eb6a986bcb70c0bb79d120e50a007c1558569301978a9a",
+      "js/nethack/monster-movement.js": "dfdff47b8401bdba8bccee21659e4badfca28484685b15a342e699459ec42012",
+      "js/nethack/monster-lifecycle.js": "e5ce76d444cef171008397c687f5c5b4dcc3917a9766799d65101f0a92c66949",
+      "js/nethack/bindings/monmove.js": "2f2605a5813a82bec234dcd6d7dbc31fb195d5c0c7895bdd1c8dcdacf0c9bb08",
+      "js/ported/monmove.js": "c15e91a573c5a8a8eda8c4d7cda18ef6966645f50ad515382a8dc027c717dc39",
+      "js/nethack/bindings/mon.js": "c31dd69a5cca949c32bd0756fb3a8962a92db938e74a8520799808c4bc002062",
+      "js/ported/mon.js": "b76ebfece2f87288bd21915219cb8db7d00652399901b58f8463958a71ca3fe0"
+    },
+    "limitation": "Only these finite recordings and normalized world graphs are accepted; later death, victory, other seeds and unreached movement branches remain separate requirements."
+  },
+  "rawProofSha256": {
+    ".cache/native-vision-component-06.log": "f31bfc09098b8db2aa63615d1de6670d4e2cfd4c6c1eb36b28cf1a353083b7ca",
+    ".cache/native-vision-connected-06.log": "56a8e06b8a5b91ad2ebedeb8d7de6eb09c508dca508f51da69f1ab3181d89e61",
+    ".cache/native-vision-main-716-06.log": "8277e1ba3363dd3c614f41f3005c94603f0b69f6b5205dcd5688ff769fdb03e9",
+    ".cache/native-vision-state-bridge-06.log": "3d2b4ec08eb66e2fef2bb037f990514f2f6dbaa35a9730beb82a685c3c402c4c",
+    ".cache/native-vision-descriptor-state-06.log": "83d435b244b0ca5a1eb229031be5704729e621b323a51c794d97b8da8c831b7e",
+    ".cache/native-vision-dispatch-06.log": "0624974090cb55db0e33887933e77d82c04a7f98de6c6ea5aeb416c0078af5d4",
+    ".cache/native-vision-runtime-contracts-06.log": "07ee503dea72061c94bf7121c2a8c00362b57e4afd8b17fd7a9b9ffb10910d42",
+    ".cache/native-vision-mon-06.log": "0a42be5423dd0e0ab536280f83ec8cf7043a9268555000b52bc18512673d21bb",
+    ".cache/native-vision-monmove-06.log": "4749951ee1a10b3b551f30cef7252b0540c3202498b4b9584fca58c8536ea86e",
+    ".cache/native-vision-hack-06.log": "96d7b8287ed2baa4eeeec4e766174be84c221a7d6e762542d5504ee8db325403"
+  },
+  "sourceSha256": {
+    "js/nethack/native/vision.js": "fec52ec991b71b3654fc5d6d4d1fde74b448b7f6e925f74852a3bb489fda0e36",
+    "js/nethack/native/descriptor-state.js": "cf90e71f7ef1e442ba829e2e035f406580b922ae3d6699c55f38d04a90cddfa5",
+    "js/nethack/vision.js": "f5629e3ed3044d37ab6f836c676b49c7d416cce10540e35c0f1536bdcb30d961",
+    "js/nethack/bindings/vision.js": "d99d8db9d66b1630e82ef0f77cde461be94d8a24e5dc79c0d18bdfb45c7d6c27",
+    "js/nethack/header-aliases.js": "5759e9ddfa9076d9ef723cf33aa6279d1b1613b89a890c26de00ffcfa4e59352",
+    "js/c-runtime/adapter-factories.js": "8825dc6705f4636e4680fc480ea5046f9699be6c9f49099531545126cc1fc3d1",
+    "scripts/generate-native-vision.py": "6641a36881d31ed0b0aa67ee4ebad82fcfc7130663ed355dce866e703820dbc6",
+    "scripts/test-native-descriptor-state.mjs": "598f9543dc0f398cf2d18686e836010f2efaa6fcc2a0f09b22d98aa53629a4c3",
+    "scripts/test-native-vision-dispatch.mjs": "56abd6b16b0b9e61175b378417ac2a94ea02ef10d1eb8635c94cb0daa2f312f1",
+    "scripts/test-native-connected-monsters.mjs": "742942077c20d1c01ff9ca963f37e63bad8a5ef200030807173b058c4b0c9df7",
+    "scripts/test-tu-vision.mjs": "c2df9c6eb8323545a482e5ab565a5b44e289c68d746e8c25ced8ecd7b4698641",
+    "js/nethack/native/state-bridge.js": "b9b93cbf589f605936adcc8ffd9314b259775870e1d2437e78cf558e816111e4",
+    "js/nethack/bindings/mon.js": "c31dd69a5cca949c32bd0756fb3a8962a92db938e74a8520799808c4bc002062",
+    "js/nethack/bindings/monmove.js": "2f2605a5813a82bec234dcd6d7dbc31fb195d5c0c7895bdd1c8dcdacf0c9bb08",
+    "js/nethack/bindings/hack.js": "434b030a8c50c5b9aae3f5b3c1711958b2a586256b2c30a050f6a27da021c83a",
+    "scripts/test-native-state-bridge.mjs": "76efa48de6020b726b20c1ebe819be8180f4b3ba6aad9fd43285293d53cd768d"
+  },
+  "limits": [
+    "Component suite uses configured independent C with controlled world dependencies; complete recording verification remains separate.",
+    "Final focused tests cover the direct-service lookup correction, memory-view caching, exact private workspace bounds, two-way global field aliases and alternating alias writers. The complete public recording/timing gate remains separate.",
+    "VISION policy is retained verbatim in a game-bound closure. C-compatible backing bytes and addressable workspace arrays remain. A fully native ordinary turn and20x are not established.",
+    "The first public replay failed and was stopped; no timing from the rejected run is accepted."
+  ],
+  "affectedComponentChecks": {
+    "MON": 14737,
+    "MONMOVE": 5550,
+    "HACK": 4338,
+    "HACKCases": 426,
+    "HACKRoutines": 95
+  },
+  "knownRejectedCandidates": {
+    "public01": "Stopped after deferred-service lookup error on restore.",
+    "public02": "Finite44 strict recordings passed but timing regressed2.0646%; later directed alias test uncovered an unrecorded defect.",
+    "public03": "Finite44 strict recordings passed but timing regressed1.4979%; later directed alias test uncovered an unrecorded defect.",
+    "public04": "Stopped after new directed cross-provider test exposed separate cached global projections."
+  }
+}

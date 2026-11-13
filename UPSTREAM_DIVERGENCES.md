@@ -1,3 +1,76 @@
+## Native visibility state checkpoint (worktree, 2026-11-13)
+
+Additional work after address-engine checkpoint46ec284. VISION policy is copied
+verbatim into a game-bound closure by `scripts/generate-native-vision.py`.
+`js/nethack/native/descriptor-state.js` supplies measured scalar/pointer/packed
+fields and joins hero, monsters, properties and map cells to the common native
+owner; aliasing unions remain live byte views. VISION entries join direct native
+dispatch. Descriptor arrays retain addressable storage with cached immutable
+metadata and native integer reads. Optional descriptor transport read/write hooks
+publish dirty native fields before byte reads and invalidate after writes;
+legacy services/callbacks publish and invalidate at their boundary. Native root
+calls retain temporary storage until the common scope exits. No source-policy,
+RNG algorithm/order/metadata, catalogue, serialization format, C compiler input
+or frozen recorder change is intended. Header alias installation can skip
+already-installed aliases on canonical shared objects; older callers retain the
+original installation behavior. Focused VISION tests pass27,128 configured
+independent-C comparisons (complete maps, paths, bounds, lighting, callbacks,
+growth, reentry and isolation). Live checks confirm canonical hero/monster/map
+identities and native dispatch; original full-C MAIN through716 keys/238 turns
+matches717 frames, normalized world graph and both RNG histories. Directed
+ownership tests cover packed neighbors, pointer cycles, overlapping unions,
+byte-array mutation, dirty publication, growth, exceptions and reentry.
+
+The first public replay was stopped and rejected after the restored segment of
+the save/restore recording exposed a first-lookup bug in the new deferred-symbol
+cache (`undefined` source compared equal to a missing cache entry). The guard now
+requires an actual cache entry. A directed first/deferred/repeated lookup test
+passes, as does the entire affected save/restore recording. Failed evidence is
+retained at `.cache/native-vision-public-01`. The final source-stable strict
+public44 recording gate subsequently passes all44 strict metrics with unchanged
+inputs, but engine time377.40465s →385.1964s is a2.0646% regression, not an accepted
+speed gain (`native-vision-timing-first.json`). A further candidate caches the
+current memory view with growth detection and uses exact measured private
+workspace address ranges to avoid publishing/invalidating unrelated native
+record fields on private array accesses. Shared/foreign/overlapping writes still
+publish and invalidate; callback boundaries still publish before foreign code.
+Descriptor transport hooks now receive their actual descriptor/address. The
+refined full replay passes44/44 strict metrics, but383.05778s remains1.4979%
+slower than the address-engine checkpoint (`native-vision-timing-refined.json`).
+A further dispatch correction returns existing service functions directly,
+removing an unnecessary argument-array normalization layer on memory and helper
+calls; selected native entries and missing/deferred symbols retain their explicit
+resolution. A directed cross-provider witness then exposed an unrecorded alias
+defect: native MON and VISION cached independent projections of the same vision
+global. Public run04 was stopped and rejected. `NativeStateBridge.field` now
+supports physical-field mutation versions and latest-pending-writer ownership;
+MON, MONMOVE, HACK and VISION bind their differently represented vision globals
+to the same keys. Reading a stale projection publishes pending alias writes and
+decodes the new representation; ordinary repeated reads stay cached. Alternating
+writes cancel superseded pending cells so publication preserves the actual last
+mutation. Nonshared aggregates/globals otherwise remain live byte views; the
+shared hero/monster/map identities stay native. Directed tests cover two-way
+cross-provider reads, alternating writers, rejected normalization and exceptional
+boundaries. Prior44/44 receipts establish only their finite recordings and do
+not cover this later-discovered defect. Final component/world/public checks and
+timing for the alias correction are now complete. All44 strict public metrics
+pass:792,838 RNG calls,11,405 screens/cursors and1,483 animation screens/cursor
+triples; all56 persistence segments and zero forbidden attempts. All770 scoring
+inputs remain unchanged. MON14,737, MONMOVE5,550, HACK4,338 checks/426 cases and
+VISION27,128 independent-C comparisons pass after the storage-key correction.
+Final engine time **382.41025s** is **1.3263% slower** than the saved377.40465s
+address-engine checkpoint; per-input fit22.0655ms versus21.6829ms, batch wall
+387.354s. This is a connected state/equivalence checkpoint with a documented
+performance regression, not an accepted speed gain. Evidence is in
+`docs/runtime-environment/native-vision-component-validation.json`,
+`native-vision-public-validation.json` and `native-vision-timing.json`; earlier
+slower/defective candidates remain documented separately. Fully native backing
+storage, a fully native ordinary turn and20x remain unachieved. No baseline replay
+or profiling. Next high-value migration: route the thirteen compiled engine
+kernels through canonical native records and retain native scopes across those
+calls, replacing their remaining byte-state execution boundary. This is planned,
+not an implemented capability. None of this checkpoint has been pushed to main.
+
 ## Native address-engine checkpoint (worktree, 2026-11-13)
 
 Additional work after native hero checkpoint `c0388c9`. Thirteen connected

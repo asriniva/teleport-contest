@@ -1,0 +1,340 @@
+{
+  "reference": "/Users/arj/Desktop/nethack_comp/native-game-state/.cache/native-address-public-02/results.stdout.log",
+  "candidate": "/Users/arj/Desktop/nethack_comp/native-game-state/.cache/native-vision-public-06/results.stdout.log",
+  "sourceLogSha256": {
+    "/Users/arj/Desktop/nethack_comp/native-game-state/.cache/native-address-public-02/results.stdout.log": "0d21ea28eac820b473b7191f52d42f3cd82410421d993ec93a4f6d733e5064b2",
+    "/Users/arj/Desktop/nethack_comp/native-game-state/.cache/native-vision-public-06/results.stdout.log": "a52de8796cd793e865a661e2d064e9fa3ac76993b18b65403063dcb0789c7749"
+  },
+  "sessions": 44,
+  "strictPassed": 44,
+  "referenceTotalMs": 377404.65,
+  "candidateTotalMs": 382410.25,
+  "totalSpeedup": 0.9869103926999865,
+  "timeReductionPercent": -1.326321761006377,
+  "geometricMeanSessionSpeedup": 0.9946946431669206,
+  "referenceFit": {
+    "startup_ms": 2984.7,
+    "per_move_ms": 21.6829,
+    "r2": 0.77,
+    "label": "2985+21.68/turn",
+    "sessions": 44
+  },
+  "candidateFit": {
+    "startup_ms": 2999.7,
+    "per_move_ms": 22.0655,
+    "r2": 0.76,
+    "label": "3000+22.07/turn",
+    "sessions": 44
+  },
+  "rows": [
+    {
+      "session": "seed0002-healer-reflection-drummer.session.json",
+      "referenceMs": 13093.62,
+      "candidateMs": 13371.65,
+      "speedup": 0.9792075024398635,
+      "moves": 594
+    },
+    {
+      "session": "seed0004-feeding-pony.session.json",
+      "referenceMs": 10380.7,
+      "candidateMs": 10743.52,
+      "speedup": 0.9662289454480468,
+      "moves": 408
+    },
+    {
+      "session": "seed0006-wizard-water-demon.session.json",
+      "referenceMs": 5889.99,
+      "candidateMs": 6028.33,
+      "speedup": 0.977051687614978,
+      "moves": 122
+    },
+    {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "referenceMs": 12006.76,
+      "candidateMs": 12518.4,
+      "speedup": 0.9591289621676892,
+      "moves": 301
+    },
+    {
+      "session": "seed0009-swimmer-mforce.session.json",
+      "referenceMs": 4186.24,
+      "candidateMs": 4255.73,
+      "speedup": 0.9836714265237692,
+      "moves": 72
+    },
+    {
+      "session": "seed0012-monk-vault-escort.session.json",
+      "referenceMs": 8300.03,
+      "candidateMs": 8528.86,
+      "speedup": 0.9731699195437609,
+      "moves": 307
+    },
+    {
+      "session": "seed0013-friday13-save-then-fullmoon-restore.session.json",
+      "referenceMs": 5951.17,
+      "candidateMs": 5986.21,
+      "speedup": 0.9941465468134262,
+      "moves": 97
+    },
+    {
+      "session": "seed0013-rogue-friday13-combat.session.json",
+      "referenceMs": 3791.28,
+      "candidateMs": 3785.11,
+      "speedup": 1.001630071517076,
+      "moves": 58
+    },
+    {
+      "session": "seed0014-dequa-fountain-explore.session.json",
+      "referenceMs": 26496.9,
+      "candidateMs": 27430.91,
+      "speedup": 0.9659504551617136,
+      "moves": 713
+    },
+    {
+      "session": "seed0015-valk-level2-pit-dog-wait.session.json",
+      "referenceMs": 3613.64,
+      "candidateMs": 3648.34,
+      "speedup": 0.9904888250546823,
+      "moves": 43
+    },
+    {
+      "session": "seed0016-healer-newmoon-eat-zap.session.json",
+      "referenceMs": 3278,
+      "candidateMs": 3260.49,
+      "speedup": 1.0053703584430562,
+      "moves": 35
+    },
+    {
+      "session": "seed0017-samurai-altar-pray.session.json",
+      "referenceMs": 3418.05,
+      "candidateMs": 3399.1,
+      "speedup": 1.0055750051484218,
+      "moves": 66
+    },
+    {
+      "session": "seed0030-ten-diverse-deaths.session.json",
+      "referenceMs": 43858.29,
+      "candidateMs": 44365.44,
+      "speedup": 0.9885688049076037,
+      "moves": 1943
+    },
+    {
+      "session": "seed0060-orc-rogue-kick-search.session.json",
+      "referenceMs": 3584.21,
+      "candidateMs": 3463.19,
+      "speedup": 1.0349446608473691,
+      "moves": 40
+    },
+    {
+      "session": "seed0077-rogue-chargen.session.json",
+      "referenceMs": 3036.47,
+      "candidateMs": 3016.8,
+      "speedup": 1.0065201538053565,
+      "moves": 32
+    },
+    {
+      "session": "seed0101-ranger-quiver-throw-travel-engrave.session.json",
+      "referenceMs": 2950.12,
+      "candidateMs": 2947.42,
+      "speedup": 1.000916055397602,
+      "moves": 26
+    },
+    {
+      "session": "seed0102-ranger-name-cancel.session.json",
+      "referenceMs": 3122.82,
+      "candidateMs": 3127.6,
+      "speedup": 0.9984716715692544,
+      "moves": 24
+    },
+    {
+      "session": "seed0103-knight-ride-pony.session.json",
+      "referenceMs": 2764.07,
+      "candidateMs": 2721.75,
+      "speedup": 1.015548819693212,
+      "moves": 59
+    },
+    {
+      "session": "seed0104-knight-ride-combat.session.json",
+      "referenceMs": 3036.17,
+      "candidateMs": 3005.16,
+      "speedup": 1.0103189181274874,
+      "moves": 42
+    },
+    {
+      "session": "seed0105-valk-chat-lamp-ration.session.json",
+      "referenceMs": 2815.65,
+      "candidateMs": 2794.04,
+      "speedup": 1.0077343201958455,
+      "moves": 29
+    },
+    {
+      "session": "seed0106-priest-extcmd-sweep.session.json",
+      "referenceMs": 4022.54,
+      "candidateMs": 4057.74,
+      "speedup": 0.9913252204429067,
+      "moves": 266
+    },
+    {
+      "session": "seed0107-samurai-twoweapon-enhance.session.json",
+      "referenceMs": 2941.47,
+      "candidateMs": 2955.58,
+      "speedup": 0.9952259793340055,
+      "moves": 97
+    },
+    {
+      "session": "seed0108-wizard-extcmd-wishlist.session.json",
+      "referenceMs": 5293.53,
+      "candidateMs": 5395.28,
+      "speedup": 0.9811409231772957,
+      "moves": 302
+    },
+    {
+      "session": "seed0116-wizard-wear-shop.session.json",
+      "referenceMs": 6260.62,
+      "candidateMs": 6323,
+      "speedup": 0.990134429859244,
+      "moves": 126
+    },
+    {
+      "session": "seed0200-monk-north-search.session.json",
+      "referenceMs": 3064.42,
+      "candidateMs": 3056.85,
+      "speedup": 1.0024764054500548,
+      "moves": 39
+    },
+    {
+      "session": "seed0360-wizard-world-tour.session.json",
+      "referenceMs": 44206.71,
+      "candidateMs": 45916.23,
+      "speedup": 0.9627687203413694,
+      "moves": 832
+    },
+    {
+      "session": "seed0361-archeologist-tour.session.json",
+      "referenceMs": 15656.97,
+      "candidateMs": 15706.38,
+      "speedup": 0.996854144621485,
+      "moves": 365
+    },
+    {
+      "session": "seed0367-priest-quest-tour.session.json",
+      "referenceMs": 17530.43,
+      "candidateMs": 17680.22,
+      "speedup": 0.9915278203551765,
+      "moves": 323
+    },
+    {
+      "session": "seed0373-barbarian-quest-tour.session.json",
+      "referenceMs": 13253.4,
+      "candidateMs": 13125.06,
+      "speedup": 1.0097782410137555,
+      "moves": 123
+    },
+    {
+      "session": "seed0383-wizard-hallucinate.session.json",
+      "referenceMs": 6206.59,
+      "candidateMs": 6200.2,
+      "speedup": 1.0010306119157446,
+      "moves": 218
+    },
+    {
+      "session": "seed0398-wizard-wandpoly-pile.session.json",
+      "referenceMs": 2975.37,
+      "candidateMs": 2970.58,
+      "speedup": 1.0016124797177655,
+      "moves": 86
+    },
+    {
+      "session": "seed0399-wizard-hallu-actions.session.json",
+      "referenceMs": 5935.62,
+      "candidateMs": 5902.1,
+      "speedup": 1.0056793344741701,
+      "moves": 531
+    },
+    {
+      "session": "seed0501-priest-cast-read-turn.session.json",
+      "referenceMs": 2967.97,
+      "candidateMs": 2913.26,
+      "speedup": 1.0187796489156475,
+      "moves": 27
+    },
+    {
+      "session": "seed0700-samurai-explore-descend.session.json",
+      "referenceMs": 3281.84,
+      "candidateMs": 3390.49,
+      "speedup": 0.9679544844550494,
+      "moves": 50
+    },
+    {
+      "session": "seed0900-tourist-explore-actions.session.json",
+      "referenceMs": 3244.71,
+      "candidateMs": 3254.49,
+      "speedup": 0.9969949208631768,
+      "moves": 83
+    },
+    {
+      "session": "seed1150-caveman-explore-move.session.json",
+      "referenceMs": 3381.69,
+      "candidateMs": 3375.52,
+      "speedup": 1.0018278665213063,
+      "moves": 50
+    },
+    {
+      "session": "seed1500-rogue-explore-move.session.json",
+      "referenceMs": 3193.55,
+      "candidateMs": 3161.33,
+      "speedup": 1.01019191289742,
+      "moves": 39
+    },
+    {
+      "session": "seed1800-tourist-eat-throw.session.json",
+      "referenceMs": 2845.25,
+      "candidateMs": 2898.39,
+      "speedup": 0.9816656833621424,
+      "moves": 25
+    },
+    {
+      "session": "seed2200-wizard-quaff-zap-read.session.json",
+      "referenceMs": 10579.27,
+      "candidateMs": 10568.36,
+      "speedup": 1.0010323266807717,
+      "moves": 229
+    },
+    {
+      "session": "seed2600-wizard-custom-binds.session.json",
+      "referenceMs": 4731.38,
+      "candidateMs": 4710.1,
+      "speedup": 1.0045179507866075,
+      "moves": 37
+    },
+    {
+      "session": "seed4500-knight-coverage.session.json",
+      "referenceMs": 33609.5,
+      "candidateMs": 33785.49,
+      "speedup": 0.9947909590774028,
+      "moves": 1813
+    },
+    {
+      "session": "seed5002-wizard-coverage-pair.session.json",
+      "referenceMs": 6718.57,
+      "candidateMs": 6708.66,
+      "speedup": 1.0014771951477641,
+      "moves": 408
+    },
+    {
+      "session": "seed5006-tourist-stress-disaster.session.json",
+      "referenceMs": 6920.05,
+      "candidateMs": 6961.5,
+      "speedup": 0.9940458234575882,
+      "moves": 247
+    },
+    {
+      "session": "seed8000-tourist-starter.session.json",
+      "referenceMs": 3009.02,
+      "candidateMs": 2995.39,
+      "speedup": 1.0045503256671084,
+      "moves": 22
+    }
+  ],
+  "limits": "Historical same-host unprofiled reference versus current candidate; not a fresh paired causal estimate. No baseline run or baseline CPU profiling performed. Target 20x is not established."
+}

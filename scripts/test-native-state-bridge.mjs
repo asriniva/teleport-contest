@@ -29,4 +29,20 @@ let buffer=new ArrayBuffer(8);const value={};
 Object.defineProperty(value,'count',owner.field(()=>new DataView(buffer).getInt32(0,true),v=>new DataView(buffer).setInt32(0,v,true),v=>v|0));
 value.count=42;owner.boundary(()=>{const next=new ArrayBuffer(16);new Uint8Array(next).set(new Uint8Array(buffer));buffer=next;new DataView(buffer).setInt32(0,88,true);});
 assert.equal(value.count,88);owner.leave();
-console.log('PASS native state publication, invalidation, reentry, exceptions, widths, identities and memory growth');
+// Different native projections can alias one physical global field while
+// exposing different JS values. Their mutations share a version and last writer.
+const aliases=new NativeStateBridge();let raw=10;
+const numeric={},projected={};
+Object.defineProperty(numeric,'value',aliases.field(()=>raw,v=>{raw=v;},Number,128));
+Object.defineProperty(projected,'value',aliases.field(()=>({address:raw}),v=>{raw=v.address;},v=>({address:Number(v.address)}),128));
+aliases.enter();assert.equal(numeric.value,10);assert.equal(projected.value.address,10);
+numeric.value=20;assert.equal(projected.value.address,20);
+projected.value={address:30};assert.equal(numeric.value,30);
+numeric.value=40;projected.value={address:50};numeric.value=60;
+aliases.flush();assert.equal(raw,60,'alternating alias writes publish the actual last mutation');
+assert.equal(projected.value.address,60);assert.equal(projected.value,projected.value,'unchanged projected projected identity remains stable');
+assert.throws(()=>{projected.value={get address(){throw Error('failed conversion');}};},/failed conversion/);
+assert.equal(numeric.value,60,'rejected alias normalization retains the prior mutation');
+aliases.boundary(()=>{raw=70;});assert.equal(projected.value.address,70);
+aliases.leave();assert.equal(aliases.pendingAliases.size,0);
+console.log('PASS native state publication, invalidation, reentry, exceptions, widths, identities, memory growth and differently represented field aliases');
