@@ -1,3 +1,41 @@
+## Native hero attributes connected to movement and combat ( 2026-11-13)
+
+`native/attrib.js` retains all 34 ATTRIB routines and source data in a per-game
+closure. The generator binds C to that game; three explicit attribute-array
+aliases use the same compiled ABASE/ABON/ATEMP elements. Every other policy AST
+node is unchanged, including RNG sites/order. `bindings/attrib.js` uses canonical
+native hero, object, species, role and race records for native owners. Its six
+attribute arrays are stable plain JS arrays over typed scalar cells, refreshed
+through the native arena on growth. Root scalars use those cells too; private
+innate/property-pointer projections have stable identities. Legacy component
+providers keep their original record/array projections.
+
+`hero-startup.js` publishes direct attribute entries, prepares native arguments
+using measured prototypes, restores stack temporaries on success and exceptions,
+and reads equipment pointers and property/header helpers through the common
+native owner. Movement and combat now call these entries during actual gameplay.
+The innate C-shaped tables, some aggregate/property array views, string naming,
+header dependencies and compatibility boundaries elsewhere in a turn remain.
+No save format, input policy, arithmetic widths, mutation order, upstream C,
+recording, capture encoding or RNG call/site/order is changed.
+
+The source test checks all 34 retained bodies after only the declared binding
+and three array aliases. Native mode passes 18,224 original-C matrix comparisons
+across the existing complete configured attribute corpus, including role/race
+innate tables, equipment modifiers, poison, luck, exercise, growth, exceptions
+and independent games. Live-main checks prove shared hero identity, direct entry
+publication, plain attribute arrays, writes visible to combat, memory growth,
+caller context and cleanup after a throwing callback. The actual walk/wait/attack
+check still matches complete C RNG logs, state, tty and normalized frames. Generic
+calls are 37/100/193, C scope entries 68/175/341, generic fields 66/130/1,285,
+pointer dispatches 10/13/25 and C allocations 54/212/183. The strict zero-bridge
+and zero-allocation gate still fails. Public verification passes 44/44, all 787 scoring inputs unchanged: 792,838
+RNG entries, 11,405 screens/cursors and 1,483 animations match. Unprofiled Node
+22.23.5 batch time is 309.179s versus 312.272s for the preceding command step;
+these separate single runs show a small timing change, not 20x performance.
+Evidence: `docs/runtime-environment/native-attribute-validation.json` and source
+manifest.
+
 ## Native command execution and command-table field access ( 2026-11-13)
 
 `native/address/cmd.js` retains CMD's source bodies in one game-owned closure.

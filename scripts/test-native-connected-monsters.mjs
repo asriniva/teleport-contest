@@ -49,6 +49,17 @@ for(const name of ['movemon','mcalcdistress','healmon','mfndpos','dochugw','m_mo
 const lifecycle=enableMonsterLifecycle(environment,layouts);
 const vision=callVision({moduleKey:environment},layouts.vision,'environment');
 const hero=owner.records.get('struct you:'+environment.requireGlobal('u'));assert.ok(hero);
+const attributes=environment.start('hero-attributes').environment;
+assert.ok(attributes.u===hero,'attribute policy consumes the same native hero as movement and combat');
+assert.ok(Array.isArray(attributes.ABASE)&&Array.isArray(attributes.ABON)&&Array.isArray(attributes.ATEMP),'attribute arrays are stable plain JS arrays');
+for(const name of ['acurr','acurrstr','exerchk','adjattrib'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' is connected directly');
+const attributeMarker={nativeAttributeCaller:true},priorAttributeAssert=Object.getOwnPropertyDescriptor(attributes,'assert'),liveBeforeAttributes=environment.memory.live.size;
+try{attributes.assert=valid=>{assert.ok(valid);assert.equal(C,attributeMarker);};withCEnvironment(attributeMarker,()=>assert.ok(environment.services.acurr(layouts.attrib.A_STR)>=3));
+ attributes.assert=()=>{assert.equal(C,attributeMarker);environment.transport.stackAlloc(24);throw Error('native attribute cleanup');};withCEnvironment(attributeMarker,()=>assert.throws(()=>environment.services.acurr(layouts.attrib.A_STR),/native attribute cleanup/));
+}finally{if(priorAttributeAssert)Object.defineProperty(attributes,'assert',priorAttributeAssert);else delete attributes.assert;}
+assert.equal(environment.memory.live.size,liveBeforeAttributes,'attribute callback temporaries are freed after exceptions');
+const oldStrength=attributes.ABASE[layouts.attrib.A_STR];
+try{attributes.ABASE[layouts.attrib.A_STR]=oldStrength===18?17:18;assert.equal(hero.acurr.a[layouts.attrib.A_STR],attributes.ABASE[layouts.attrib.A_STR]);environment.memory.grow(environment.memory.buffer.byteLength+1);assert.equal(hero.acurr.a[layouts.attrib.A_STR],attributes.ABASE[layouts.attrib.A_STR],'canonical attributes remain connected after growth');}finally{attributes.ABASE[layouts.attrib.A_STR]=oldStrength;}
 const pets=environment.enableDogmove(layouts),attacks=environment.enableMhitu(layouts);
 assert.equal(pets.context.u,hero);assert.equal(attacks.context.u,hero);
 const combat=environment.enableMhitm(layouts);assert.equal(combat.context.u,hero);assert.equal(combat.context.levl[hero.ux][hero.uy],pets.context.levl[hero.ux][hero.uy],'combat and pets share canonical map cells across their array interfaces');

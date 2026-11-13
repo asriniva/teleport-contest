@@ -1,3 +1,6 @@
+import {nativeFixtureServices,nativeFixtureCall} from './native-pet-combat-fixture.mjs';
+const nativeExecution=process.env.NATIVE_ATTRIB_FIXTURE==='1',nativeServices=new WeakMap();
+function attributeServices(s){if(!nativeExecution)return s;let local=nativeServices.get(s);if(!local){local=nativeFixtureServices(s,{}).services;nativeServices.set(s,local);}return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import {Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
@@ -16,8 +19,8 @@ const hybridFactory=(await loadFixture("attrib",pathToFileURL(resolve(dir,'attri
 const text=(m,p)=>{p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.subarray(p,e)).toString('latin1');};
 const layout=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 const reference=await refFactory(),L=layout(reference),envs=new WeakMap();
-const getEnv=s=>{let e=envs.get(s.moduleKey);if(!e){e=createAttribEnvironment(s,L,attrib);envs.set(s.moduleKey,e);}return e;};
-const runtime={initializeAttrib:getEnv,attrib(services,name,...args){const e=getEnv(services);if(name==='gainstr')args[0]=e.object(args[0]);if(['postadjabil','check_innate_abil','innately'].includes(name))args[0]=e.longPointer(args[0]);const r=withCEnvironment(e,attrib[name],...args);return r?.address??r??0;}};
+const getEnv=s=>{let e=envs.get(s.moduleKey);if(!e){e=createAttribEnvironment(attributeServices(s),L,attrib);envs.set(s.moduleKey,e);}return e;};
+const runtime={initializeAttrib:getEnv,attrib(services,name,...args){const e=getEnv(services);if(name==='gainstr')args[0]=e.object(args[0]);if(['postadjabil','check_innate_abil','innately'].includes(name))args[0]=e.longPointer(args[0]);const local=attributeServices(services);const r=nativeExecution?nativeFixtureCall(local.nativeOwner,local,e.nativeNamespace[name],...args):withCEnvironment(e,attrib[name],...args);return r?.address??r??0;}};
 const hybrid=await hybridFactory({nethackPorted:runtime}),modules=[reference,hybrid],stacks=modules.map(m=>m._probe_stack());
 assert.deepEqual(layout(hybrid),L);let comparisons=1,scenario='startup';
 // Public C data must exist before the first original ATTRIB call or probe reset.
@@ -81,4 +84,4 @@ scenario='dependency exception cleanup';reset();const env=envs.get(hybrid),saved
 const other=await hybridFactory({nethackPorted:runtime});for(let i=0;i<6;i++){assert.equal(text(other,other._probe_attrname(i)),attrib.attrname[i]);comparisons++;}
 other._probe_reset(17);other._probe_option(116,1n);other._probe_prop(L.FIRE_RES,0,BigInt(L.FROMOUTSIDE));other._probe_action(23,L.FIRE_RES,0,0);const otherState=snap(other);reset(31);act(0,L.A_INT,1,0);assert.deepEqual(snap(other),otherState);assert.equal(C,undefined);comparisons++;
 
-console.log(`ATTRIB: ${comparisons} configured original-C/pure-JS comparisons passed; native and production promotion pending.`);
+console.log(`ATTRIB: ${comparisons} configured original-C/pure-JS comparisons passed; native execution=${nativeExecution}; complete game acceptance recorded separately.`);
