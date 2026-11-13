@@ -13,7 +13,12 @@ shadowing, which the accessor transport does not preserve; all ordinary indexed,
 provider, reentry, identity, alias and error comparisons remain checked. No game
 policy, frozen scorer, deadline or C source changes. Focused tests, runtime
 boundaries and593 historical transitions pass. A fresh whole44 strict replay of
-the combined runtime is in progress; final results will be recorded separately.
+the combined runtime passes44/44 in617.308s, with747 inputs unchanged,56 segments,
+792838 RNG calls,11405 screens/cursors and1483 animation cursors matched. Worker
+deadlines are disabled; hosted/held-out acceptance is unverified. This absolute
+run is not a paired speed comparison. See full-replay-merge-validation.json.
+The current-source receipt is regenerated for the combined implementation and
+its evidence; historical receipts remain unchanged.
 
 Full-replay performance work (2026-11-12): active branch
 `perf/full-replay-verified`, based on freshly pulled main25ce012. The final screen

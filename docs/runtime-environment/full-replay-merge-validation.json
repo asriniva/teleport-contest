@@ -1,0 +1,36 @@
+{
+  "runtimeCommit": "cdb45e7",
+  "measuredPerformanceCommit": "29ab502",
+  "integratedMain": "3b6db96",
+  "strictSessions": 44,
+  "wallSeconds": 617.3082624576055,
+  "scoringInputsUnchanged": 747,
+  "deadlineMs": 0,
+  "runtimeSources": {
+    "js/c-runtime/adapter-factories.js": "cf982699d7dc1a30902aa9543550d6a9c1dd7b8a9af5e537dcd1b78824ed8498",
+    "js/c-runtime/records.js": "aaa628dc6bc3b41d3e69b03d29a25673319bc0b26274d67320dfdd9a60dbea3f",
+    "js/nethack/bindings/termcap.js": "7b5292e9b7acf326647a7740c5f727164eb92ef89ac92e5060db4625a3cb4ff0"
+  },
+  "evidenceSha256": {
+    "docs/runtime-environment/full-replay-merge-evidence/post-run-integrity.json": "574b144de74643c2714f7ea9665a6c8cc4d0e10d71047938e696c911a4de99c8",
+    "docs/runtime-environment/full-replay-merge-evidence/pre-run-manifest.json": "3d3df7691199935bfb8adfb98b0e5020935629375ec6d206c3e74fdd56ac1168",
+    "docs/runtime-environment/full-replay-merge-evidence/summary.json": "825eb2a7939a10ec45f5a02eb238ec17f14cbb83bd62139b44bf49615373de9a"
+  },
+  "focusedChecks": [
+    "record transport",
+    "1920-cell fixed projection",
+    "66-event/42-observation ordinary record-index contracts",
+    "2642 monster-view checks",
+    "HACK runtime reuse",
+    "adapter memory",
+    "33-file runtime boundaries",
+    "593 layout transitions",
+    "46 record-index inverse controls",
+    "11 full-replay inverse controls"
+  ],
+  "limits": [
+    "Worker deadlines disabled; hosted and held-out acceptance unverified.",
+    "617.308-second wall time is validation, not a paired performance comparison.",
+    "Historical timing and original-C evidence remain specific to their original source commits."
+  ]
+}

@@ -1,7 +1,9 @@
 # Full replay performance
 
 These measurements bind commit `29ab502` before integration with newer main.
-The combined runtime has a separate merge-validation receipt; the 6.52% result
+The combined runtime passes44/44 strictly in617.308s with747 unchanged inputs;
+see `full-replay-merge-validation.json`. This absolute validation run is not a
+paired performance comparison. The 6.52% result
 is not a new measurement against main `3b6db96`.
 
 The final transport change reduces paired replay time across all 44 public
