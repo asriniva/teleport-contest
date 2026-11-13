@@ -9,6 +9,7 @@ function clean(node){
  return Object.fromEntries(Object.entries(node).filter(([key])=>!['start','end','raw'].includes(key)).map(([key,value])=>[key,clean(value)]));
 }
 const before=parse(fs.readFileSync('js/ported/attrib.js','utf8'),{ecmaVersion:'latest',sourceType:'module'}),after=parse(fs.readFileSync('js/nethack/native/attrib.js','utf8'),{ecmaVersion:'latest',sourceType:'module'}),factory=after.body[0].declaration;
+assert.equal(factory.id.name,'createNativeAttrib','native factory export remains connected');
 const expected=before.body.filter(n=>n.type!=='ImportDeclaration').map(n=>n.type==='ExportNamedDeclaration'?n.declaration:n),actual=factory.body.body.slice(0,-1);
 assert.deepEqual(clean(actual),clean(expected),'complete original attribute policy AST, with direct local calls');
 const functions=expected.filter(n=>n.type==='FunctionDeclaration').length;assert.equal(functions,34);console.log(JSON.stringify({passed:true,functions,localCallConversions:locals,sourcePolicyAstEqual:true}));

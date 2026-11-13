@@ -1,3 +1,50 @@
+## Native status rendering and compiled shared record fields ( 2026-11-13)
+
+`native/botl.js` binds all 76 original status routines to one per-game context.
+`status.js` compiles the 46 measured record schemas (185 fields), publishes native
+entries and reconnects the earlier rank-size hook. `native/descriptor-views.js`
+uses shared field accessor functions over those compiled plans; scalar reads
+and ordinary integral writes avoid redundant generic conversions. Hero, monster,
+item, species and map records reuse the same native identities as movement and
+combat. Private status records retain their measured byte aliases. Native arrays
+use direct integer reads and the existing typed arena, with exact wide-pointer
+handling. Callback readback selects the same game-owned function identities.
+The private namespace, mutable provider rebinding, automatic temporary frames,
+BOTL vararg special cast and exception cleanup remain explicit.
+
+Header aliases retain their original own-field reflection requirements; actual
+field descriptors are own properties even when their accessor functions are
+shared. Existing aliases on shared records are preserved. An earlier candidate
+incorrectly skipped weapon-skill aliases when fields were inherited, and failed
+the original-C two-handed-sword case. That failure is retained, the ownership
+rule is corrected, and all original assertions/cases are unchanged. No status
+policy, source body, field width/sign, RNG call/site/order, upstream C, recording,
+save format or capture encoding is modified. Pointer-based strings, automatic
+scratch allocations, descriptor array carriers, dependency adapters and genuine
+window callbacks remain; this is not the complete zero-bridge display pipeline.
+
+The complete policy AST matches after context binding only; original local-call
+frames are retained. The final native candidate passes 3,607 original-C checks
+across all 76 routines, including catalogue/weapon/armor cases, highlighting,
+menus, callbacks/reentry, wide values, growth, provider restoration, exceptions
+and game isolation. The JS component matrix uses the previously required
+`--jitless` test profile; the independent C process and production/timing runtime
+do not. Live-main checks prove shared hero/item identity, real two-handed-sword
+output, shared accessor functions, preserved own fields, native dispatch and
+cleanup after a throwing dependency. The source checks also assert factory
+export names, preventing a disconnected renamed factory from passing an AST-only
+check. No checker requirement or C expectation is weakened.
+
+The real walk/wait/attack comparison still matches complete C RNG logs, state,
+tty and normalized frames. Generic calls are 36/99/190, C scope entries
+66/173/335, fields 65/129/252 (attack reduced from 1,283), pointer dispatches
+10/13/25 and C allocations 54/194/156. The strict zero-bridge/zero-allocation gate
+still fails. Public verification passes 44/44, all 791 scoring inputs unchanged: 792,838
+RNG entries, 11,405 screens/cursors and 1,483 animations match. Unprofiled Node
+22.23.5 batch time is 310.095s versus 307.764s for the preceding eating step;
+these separate single runs show no overall speedup or 20x performance. Evidence:
+`docs/runtime-environment/native-status-validation.json` and source manifest.
+
 ## Native eating, hunger and occupation execution ( 2026-11-13)
 
 `native/eat.js` binds all 77 original eating routines and source data to one game

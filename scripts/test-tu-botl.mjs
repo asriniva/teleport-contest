@@ -1,3 +1,9 @@
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+import {createStatusFieldPlans} from '../js/nethack/status.js';
+import {pathToFileURL} from 'node:url';
+import {resolve as resolvePath} from 'node:path';
+const nativeExecution=process.env.NATIVE_BOTL_FIXTURE==='1',nativeServices=new WeakMap();
+function statusServices(s){if(!nativeExecution)return s;let local=nativeServices.get(s);if(!local){local=nativeFixtureServices(s,{}).services;local.nativeFieldPlans=createStatusFieldPlans(s.moduleKey.environment);nativeServices.set(s,local);}return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import {DataView as FixtureDataView} from './native-test-backend.mjs';
@@ -10,15 +16,15 @@ import {memoryCheckpoint,assertMemoryGrowth} from './native-test-backend.mjs';
 import {C,R,T,withCEnvironment} from '../js/c-runtime/context.js';
 // Original C reference is available through the isolated reference process.
 const own=process.env.TELEPORT_BOTL_AUTHOR==='1';
-const referenceFactory=(await loadFixture("botl",own?'../.cache/botl-author/reference.mjs':'../.cache/tu-probes/botl-reference.mjs')).default;
-const hybridFactory=(await loadFixture("botl",own?'../.cache/botl-author/hybrid.mjs':'../.cache/tu-probes/botl-hybrid.mjs')).default;
+const referenceFactory=(await loadFixture("botl",process.env.BOTL_PROBE_DIR?pathToFileURL(resolvePath(process.env.BOTL_PROBE_DIR,'reference.mjs')):own?'../.cache/botl-author/reference.mjs':'../.cache/tu-probes/botl-reference.mjs')).default;
+const hybridFactory=(await loadFixture("botl",process.env.BOTL_PROBE_DIR?pathToFileURL(resolvePath(process.env.BOTL_PROBE_DIR,'hybrid.mjs')):own?'../.cache/botl-author/hybrid.mjs':'../.cache/tu-probes/botl-hybrid.mjs')).default;
 const text=(m,p)=>{p=Number(p);let end=p;while(m.HEAPU8[end])end++;return Buffer.from(m.HEAPU8.slice(p,end)).toString('latin1');};
 const reference=await referenceBackend('botl',referenceFactory)();
 const measured={};for(let i=0;i<reference._probe_layout_count();i++){const raw=BigInt.asIntN(64,reference._probe_layout_value(i));measured[text(reference,reference._probe_layout_name(i))]=Number.isSafeInteger(Number(raw))?Number(raw):String(raw);}
 const L=own?measured:JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))).botl;
 if(own)writeFileSync(new URL('../.cache/botl-author/layout.json',import.meta.url),JSON.stringify(L,null,2));
 for(const m of readFileSync(new URL('./test-tu-botl.mjs',import.meta.url),'utf8').matchAll(/\bL\.([A-Z]\w*)/g))assert.ok(Object.hasOwn(L,m[1]),'compiled fixture value '+m[1]);
-const servicesByModule=new Map();const ported={callBotl(s,n,...a){servicesByModule.set(s.moduleKey,s);return callBotl(s,L,n,...a);}};
+const servicesByModule=new Map();const ported={callBotl(s,n,...a){s=statusServices(s);servicesByModule.set(s.moduleKey,s);return callBotl(s,L,n,...a);}};
 let modules=[reference,await hybridFactory({nethackPorted:ported})],stacks=modules.map(m=>m._probe_stack()),comparisons=0,expectedScope;
 const names=Array.from({length:76},(_,i)=>text(reference,reference._probe_function_name(i))),exercised=new Set();
 const snapshot=m=>m.isolatedCReference?m.observe('const text='+text.toString()+';return {state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace())};',{}):({state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace())});

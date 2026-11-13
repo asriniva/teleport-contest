@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import {runStandaloneProgram} from './run-standalone-program.mjs';
 import {enableMonsterLifecycle} from '../js/nethack/monster-lifecycle.js';
 import {nativeStateFor} from '../js/nethack/native/state-bridge.js';
+import {callBotl} from '../js/nethack/bindings/botl.js';
 import {eatContext} from '../js/nethack/bindings/eat.js';
 import {callVision} from '../js/nethack/bindings/vision.js';
 import {C,withCEnvironment} from '../js/c-runtime/context.js';
@@ -77,6 +78,18 @@ try{eatingObject.otyp=layouts.eat.FOOD_RATION;eatingObject.oclass=layouts.eat.FO
  eating.int=()=>{assert.equal(C,eatingMarker);environment.transport.stackAlloc(24);throw Error('native eating cleanup');};withCEnvironment(eatingMarker,()=>assert.throws(()=>environment.services.is_edible(eatingObject),/native eating cleanup/));
  assert.equal(environment.memory.live.size,before,'eating callback temporaries are freed after exceptions');
 }finally{eating.int=priorEatingInt;environment.memory.free(eatingObjectAt);}
+const status=callBotl({moduleKey:environment},layouts.botl,'environment');
+assert.ok(status.u===hero,'status reads the same native hero as movement and combat');
+for(const name of ['bot','do_statusline1','weapon_status','max_rank_sz'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' is connected native status execution');
+const statA=status.initblstats[1],statB=status.initblstats[2];
+assert.equal(Object.getOwnPropertyDescriptor(statA,'fld').get,Object.getOwnPropertyDescriptor(statB,'fld').get,'status records share their compiled field accessors');
+const swordClass=status.objects[layouts.botl.TWO_HANDED_SWORD];
+assert.ok(Object.hasOwn(swordClass,'oc_subtyp'),'native status fields preserve header ownership checks');assert.equal(swordClass.oc_skill,swordClass.oc_subtyp,'weapon skill alias remains connected');
+const statusWeaponAt=environment.memory.calloc(1,layouts.botl.objSize),statusWeapon=status.view('obj',statusWeaponAt),statusOutput=environment.memory.calloc(1,64),weaponSlot=environment.requireGlobal('uwep'),oldWeapon=owner.nativeArena.pointer(weaponSlot),oldTwoWeapon=hero.twoweap;
+try{statusWeapon.otyp=layouts.botl.TWO_HANDED_SWORD;statusWeapon.oclass=layouts.botl.WEAPON_CLASS;hero.twoweap=0;owner.nativeArena.storePointer(weaponSlot,statusWeaponAt);environment.services.weapon_status(statusOutput);assert.equal(environment.memory.readString(statusOutput),'2H-Sword','actual status rendering retains two-handed sword description');}finally{owner.nativeArena.storePointer(weaponSlot,oldWeapon);hero.twoweap=oldTwoWeapon;environment.memory.free(statusWeaponAt);environment.memory.free(statusOutput);}
+const statusInt=status.int,statusMarker={nativeStatusCaller:true},liveBeforeStatus=environment.memory.live.size;
+try{status.int=()=>{assert.equal(C,statusMarker);environment.transport.stackAlloc(24);throw Error('native status cleanup');};withCEnvironment(statusMarker,()=>assert.throws(()=>environment.services.get_strength_str(),/native status cleanup/));}finally{status.int=statusInt;}
+assert.equal(environment.memory.live.size,liveBeforeStatus,'native status frees temporaries after throwing dependencies');
 const pets=environment.enableDogmove(layouts),attacks=environment.enableMhitu(layouts);
 assert.equal(pets.context.u,hero);assert.equal(attacks.context.u,hero);
 const combat=environment.enableMhitm(layouts);assert.equal(combat.context.u,hero);assert.equal(combat.context.levl[hero.ux][hero.uy],pets.context.levl[hero.ux][hero.uy],'combat and pets share canonical map cells across their array interfaces');
