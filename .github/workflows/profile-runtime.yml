@@ -4,8 +4,21 @@ on:
     inputs:
       baseline_commit:
         description: Baseline commit to compare on the same runner
+        type: string
         required: true
         default: a2adb495bee21ccbc2ceb9ead95a8083be342df0
+      candidate_commit:
+        description: Candidate commit (empty means workflow commit)
+        type: string
+        required: false
+        default: ''
+      comparison_order:
+        description: Which version runs first
+        type: choice
+        options:
+          - baseline-first
+          - candidate-first
+        default: baseline-first
 
 jobs:
   compare:
@@ -16,33 +29,31 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Export baseline without a Git worktree
+      - name: Export pinned versions without Git worktrees
         env:
           BASELINE_COMMIT: ${{ inputs.baseline_commit }}
+          CANDIDATE_COMMIT: ${{ inputs.candidate_commit }}
+          COMPARISON_ORDER: ${{ inputs.comparison_order }}
         run: |
           [[ "$BASELINE_COMMIT" =~ ^[0-9a-fA-F]{40}$ ]]
+          CANDIDATE_COMMIT="${CANDIDATE_COMMIT:-$(git rev-parse HEAD)}"
+          [[ "$CANDIDATE_COMMIT" =~ ^[0-9a-fA-F]{40}$ ]]
+          COMPARISON_ORDER="${COMPARISON_ORDER:-baseline-first}"
+          case "$COMPARISON_ORDER" in baseline-first|candidate-first) ;; *) exit 2 ;; esac
+          git rev-parse HEAD > "$RUNNER_TEMP/tool-commit.txt"
           git fetch --depth=1 origin "$BASELINE_COMMIT"
           mkdir "$RUNNER_TEMP/runtime-baseline"
           git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/runtime-baseline"
           git rev-parse FETCH_HEAD > "$RUNNER_TEMP/baseline-commit.txt"
-          git rev-parse HEAD > "$RUNNER_TEMP/candidate-commit.txt"
-      - name: Profile and strictly verify all 44 baseline sessions
-        run: |
-          unset STANDALONE_RECORDER_ASSETS STANDALONE_RECORDER_LAYOUTS STANDALONE_RECORD_LAYOUTS NODE_OPTIONS
-          python3 scripts/profile-public-recorder.py "$RUNNER_TEMP/runtime-baseline" \
-            --node "$(command -v node)" --output "$RUNNER_TEMP/profile-baseline"
-          ln -s "$RUNNER_TEMP/runtime-baseline" "$RUNNER_TEMP/profile-baseline/score-repo"
-          node "$RUNNER_TEMP/runtime-baseline/scripts/score-standalone.mjs" \
-            --summarize "$RUNNER_TEMP/profile-baseline"
-          python3 scripts/profile-recorder-cpu.py "$RUNNER_TEMP/profile-baseline"
-      - name: Profile and strictly verify all 44 candidate sessions
-        run: |
-          unset STANDALONE_RECORDER_ASSETS STANDALONE_RECORDER_LAYOUTS STANDALONE_RECORD_LAYOUTS NODE_OPTIONS
-          python3 scripts/profile-public-recorder.py . --node "$(command -v node)" \
-            --output "$RUNNER_TEMP/profile-candidate"
-          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/profile-candidate/score-repo"
-          node scripts/score-standalone.mjs --summarize "$RUNNER_TEMP/profile-candidate"
-          python3 scripts/profile-recorder-cpu.py "$RUNNER_TEMP/profile-candidate"
+          git fetch --depth=1 origin "$CANDIDATE_COMMIT"
+          mkdir "$RUNNER_TEMP/runtime-candidate"
+          git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/runtime-candidate"
+          git rev-parse FETCH_HEAD > "$RUNNER_TEMP/candidate-commit.txt"
+          printf '%s\n' "$COMPARISON_ORDER" > "$RUNNER_TEMP/comparison-order.txt"
+      - name: Profile and strictly verify both sets of 44 sessions
+        env:
+          COMPARISON_ORDER: ${{ inputs.comparison_order }}
+        run: bash scripts/profile-runtime-pair.sh
       - name: Compare verified runtime profiles
         run: |
           python3 scripts/compare-recorder-profiles.py \
@@ -54,8 +65,10 @@ jobs:
         with:
           name: runtime-profile-comparison
           path: |
+            ${{ runner.temp }}/tool-commit.txt
             ${{ runner.temp }}/baseline-commit.txt
             ${{ runner.temp }}/candidate-commit.txt
+            ${{ runner.temp }}/comparison-order.txt
             ${{ runner.temp }}/runtime-comparison.json
             ${{ runner.temp }}/profile-baseline/*.json
             ${{ runner.temp }}/profile-baseline/*.log

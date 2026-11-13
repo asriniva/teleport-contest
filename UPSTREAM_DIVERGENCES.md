@@ -1,5 +1,9 @@
 # Upstream divergence register
 
+Runtime performance follow-up (2026-11-13): pointer-limit paired CI43339646128 passes44/44 strict for both b65bb00 and238be60, with the three threshold-binding files the only runtime differences. Batch1182.87→1238.06s (4.67%higher), geometric mean ratio1.0433. This contradicts the earlier local one-session4.40%lower CPU result; no whole44 speedup is established. A reverse-order repeat of the identical commits is pending to distinguish code effect from run order/host drift. Pointer238 deadline CI43339622465 passes38/44 with six ETIMEDOUT failures; current maina62 CI43343610810 passes40/44 with four ETIMEDOUT failures (fountain, ten deaths, world tour, knight). Completed sessions match. Different hosts/commits prevent causal pass-count attribution;45-second target remains unmet. Proof: docs/runtime-environment/pointer-limit-paired-ci-validation.json. Earlier pending statements below are historical.
+
+Profiling controls: .github/workflows/profile-runtime.yml now accepts an optional pinned candidate commit and baseline-first/candidate-first order, exports both versions as plain archives, and runs the same current profiling/summarization tools for both through scripts/profile-runtime-pair.sh. Commit/order/tool receipts and raw profiles are uploaded. Existing strict44/source-integrity/sampler/frozen/session comparison gates and independent45000ms score gate are retained.11 synthetic runner checks cover both orders, provenance links, removal of inherited overrides, invalid order and fail-fast propagation; shell/YAML syntax checked. These checks provide no new game acceptance. Runtime/ports/frozen files are unchanged in this diagnostic change.
+
 Engine-wide branch-test expansion in progress (2026-11-12, separate worktree,
 initialbasee807e4b, rebased onto238be60): `scripts/branch-coverage/` instruments all510 selected engine
 modules in a test-only loader. Four production binding fixes are described

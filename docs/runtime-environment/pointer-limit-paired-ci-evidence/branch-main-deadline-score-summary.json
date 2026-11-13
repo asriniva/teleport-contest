@@ -1,0 +1,536 @@
+{
+  "passed": 40,
+  "total": 44,
+  "rngPct": "100.0",
+  "timestamp": "2026-11-13T01:27:14.657Z",
+  "results": [
+    {
+      "session": "seed0002-healer-reflection-drummer.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 27158,
+        "total": 27158
+      },
+      "screen": {
+        "matched": 595,
+        "total": 595
+      }
+    },
+    {
+      "session": "seed0004-feeding-pony.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 12084,
+        "total": 12084
+      },
+      "screen": {
+        "matched": 409,
+        "total": 409
+      }
+    },
+    {
+      "session": "seed0006-wizard-water-demon.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 6736,
+        "total": 6736
+      },
+      "screen": {
+        "matched": 123,
+        "total": 123
+      }
+    },
+    {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 16373,
+        "total": 16373
+      },
+      "screen": {
+        "matched": 302,
+        "total": 302
+      }
+    },
+    {
+      "session": "seed0009-swimmer-mforce.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3713,
+        "total": 3713
+      },
+      "screen": {
+        "matched": 73,
+        "total": 73
+      }
+    },
+    {
+      "session": "seed0012-monk-vault-escort.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 13878,
+        "total": 13878
+      },
+      "screen": {
+        "matched": 308,
+        "total": 308
+      }
+    },
+    {
+      "session": "seed0013-friday13-save-then-fullmoon-restore.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 4804,
+        "total": 4804
+      },
+      "screen": {
+        "matched": 99,
+        "total": 99
+      }
+    },
+    {
+      "session": "seed0013-rogue-friday13-combat.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 4838,
+        "total": 4838
+      },
+      "screen": {
+        "matched": 59,
+        "total": 59
+      }
+    },
+    {
+      "session": "seed0014-dequa-fountain-explore.session.json",
+      "passed": false,
+      "rng": {
+        "matched": 0,
+        "total": 0
+      },
+      "screen": {
+        "matched": 0,
+        "total": 0
+      }
+    },
+    {
+      "session": "seed0015-valk-level2-pit-dog-wait.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 8563,
+        "total": 8563
+      },
+      "screen": {
+        "matched": 44,
+        "total": 44
+      }
+    },
+    {
+      "session": "seed0016-healer-newmoon-eat-zap.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3656,
+        "total": 3656
+      },
+      "screen": {
+        "matched": 36,
+        "total": 36
+      }
+    },
+    {
+      "session": "seed0017-samurai-altar-pray.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3465,
+        "total": 3465
+      },
+      "screen": {
+        "matched": 67,
+        "total": 67
+      }
+    },
+    {
+      "session": "seed0030-ten-diverse-deaths.session.json",
+      "passed": false,
+      "rng": {
+        "matched": 0,
+        "total": 0
+      },
+      "screen": {
+        "matched": 0,
+        "total": 0
+      }
+    },
+    {
+      "session": "seed0060-orc-rogue-kick-search.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3626,
+        "total": 3626
+      },
+      "screen": {
+        "matched": 41,
+        "total": 41
+      }
+    },
+    {
+      "session": "seed0077-rogue-chargen.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3242,
+        "total": 3242
+      },
+      "screen": {
+        "matched": 33,
+        "total": 33
+      }
+    },
+    {
+      "session": "seed0101-ranger-quiver-throw-travel-engrave.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 2371,
+        "total": 2371
+      },
+      "screen": {
+        "matched": 27,
+        "total": 27
+      }
+    },
+    {
+      "session": "seed0102-ranger-name-cancel.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 4485,
+        "total": 4485
+      },
+      "screen": {
+        "matched": 25,
+        "total": 25
+      }
+    },
+    {
+      "session": "seed0103-knight-ride-pony.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 2640,
+        "total": 2640
+      },
+      "screen": {
+        "matched": 60,
+        "total": 60
+      }
+    },
+    {
+      "session": "seed0104-knight-ride-combat.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3223,
+        "total": 3223
+      },
+      "screen": {
+        "matched": 43,
+        "total": 43
+      }
+    },
+    {
+      "session": "seed0105-valk-chat-lamp-ration.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 2499,
+        "total": 2499
+      },
+      "screen": {
+        "matched": 30,
+        "total": 30
+      }
+    },
+    {
+      "session": "seed0106-priest-extcmd-sweep.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 4194,
+        "total": 4194
+      },
+      "screen": {
+        "matched": 267,
+        "total": 267
+      }
+    },
+    {
+      "session": "seed0107-samurai-twoweapon-enhance.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 2902,
+        "total": 2902
+      },
+      "screen": {
+        "matched": 98,
+        "total": 98
+      }
+    },
+    {
+      "session": "seed0108-wizard-extcmd-wishlist.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 16958,
+        "total": 16958
+      },
+      "screen": {
+        "matched": 303,
+        "total": 303
+      }
+    },
+    {
+      "session": "seed0116-wizard-wear-shop.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 12562,
+        "total": 12562
+      },
+      "screen": {
+        "matched": 127,
+        "total": 127
+      }
+    },
+    {
+      "session": "seed0200-monk-north-search.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3822,
+        "total": 3822
+      },
+      "screen": {
+        "matched": 40,
+        "total": 40
+      }
+    },
+    {
+      "session": "seed0360-wizard-world-tour.session.json",
+      "passed": false,
+      "rng": {
+        "matched": 0,
+        "total": 0
+      },
+      "screen": {
+        "matched": 0,
+        "total": 0
+      }
+    },
+    {
+      "session": "seed0361-archeologist-tour.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 53865,
+        "total": 53865
+      },
+      "screen": {
+        "matched": 366,
+        "total": 366
+      }
+    },
+    {
+      "session": "seed0367-priest-quest-tour.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 50125,
+        "total": 50125
+      },
+      "screen": {
+        "matched": 324,
+        "total": 324
+      }
+    },
+    {
+      "session": "seed0373-barbarian-quest-tour.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 35386,
+        "total": 35386
+      },
+      "screen": {
+        "matched": 124,
+        "total": 124
+      }
+    },
+    {
+      "session": "seed0383-wizard-hallucinate.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 16915,
+        "total": 16915
+      },
+      "screen": {
+        "matched": 219,
+        "total": 219
+      }
+    },
+    {
+      "session": "seed0398-wizard-wandpoly-pile.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3026,
+        "total": 3026
+      },
+      "screen": {
+        "matched": 87,
+        "total": 87
+      }
+    },
+    {
+      "session": "seed0399-wizard-hallu-actions.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 11409,
+        "total": 11409
+      },
+      "screen": {
+        "matched": 532,
+        "total": 532
+      }
+    },
+    {
+      "session": "seed0501-priest-cast-read-turn.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 2238,
+        "total": 2238
+      },
+      "screen": {
+        "matched": 28,
+        "total": 28
+      }
+    },
+    {
+      "session": "seed0700-samurai-explore-descend.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3230,
+        "total": 3230
+      },
+      "screen": {
+        "matched": 51,
+        "total": 51
+      }
+    },
+    {
+      "session": "seed0900-tourist-explore-actions.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 2983,
+        "total": 2983
+      },
+      "screen": {
+        "matched": 84,
+        "total": 84
+      }
+    },
+    {
+      "session": "seed1150-caveman-explore-move.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3137,
+        "total": 3137
+      },
+      "screen": {
+        "matched": 51,
+        "total": 51
+      }
+    },
+    {
+      "session": "seed1500-rogue-explore-move.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 2768,
+        "total": 2768
+      },
+      "screen": {
+        "matched": 40,
+        "total": 40
+      }
+    },
+    {
+      "session": "seed1800-tourist-eat-throw.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 2458,
+        "total": 2458
+      },
+      "screen": {
+        "matched": 26,
+        "total": 26
+      }
+    },
+    {
+      "session": "seed2200-wizard-quaff-zap-read.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3018,
+        "total": 3018
+      },
+      "screen": {
+        "matched": 230,
+        "total": 230
+      }
+    },
+    {
+      "session": "seed2600-wizard-custom-binds.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 11647,
+        "total": 11647
+      },
+      "screen": {
+        "matched": 38,
+        "total": 38
+      }
+    },
+    {
+      "session": "seed4500-knight-coverage.session.json",
+      "passed": false,
+      "rng": {
+        "matched": 0,
+        "total": 0
+      },
+      "screen": {
+        "matched": 0,
+        "total": 0
+      }
+    },
+    {
+      "session": "seed5002-wizard-coverage-pair.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 12167,
+        "total": 12167
+      },
+      "screen": {
+        "matched": 410,
+        "total": 410
+      }
+    },
+    {
+      "session": "seed5006-tourist-stress-disaster.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 13923,
+        "total": 13923
+      },
+      "screen": {
+        "matched": 249,
+        "total": 249
+      }
+    },
+    {
+      "session": "seed8000-tourist-starter.session.json",
+      "passed": true,
+      "rng": {
+        "matched": 3130,
+        "total": 3130
+      },
+      "screen": {
+        "matched": 23,
+        "total": 23
+      }
+    }
+  ]
+}

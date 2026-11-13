@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "complete": true,
+  "strictPublicPassed": {
+    "baseline": 44,
+    "candidate": 44
+  },
+  "changedInputs": [
+    "js/nethack/bindings/hack.js",
+    "js/nethack/bindings/mon.js",
+    "js/nethack/bindings/wintty.js"
+  ],
+  "baselineWallSeconds": 1182.8733189105988,
+  "candidateWallSeconds": 1238.0621268749237,
+  "wallRatio": 1.0466565667531944,
+  "geometricMeanSessionRatio": 1.0432790204865297,
+  "ciRun": 43339646128,
+  "baselineCommit": "b65bb00d46b4eaceb05e099bf61f946ea33956d2",
+  "candidateCommit": "238be60d445dfdc9f1d47942bc0434b9ea3e6f39",
+  "robustWholeGameSpeedupEstablished": false,
+  "reverseOrderRepeatPending": true,
+  "pointerDeadline": {
+    "ciRun": 43339622465,
+    "passed": 38,
+    "total": 44,
+    "timeoutMs": 45000
+  },
+  "latestMainDeadline": {
+    "ciRun": 43343610810,
+    "commit": "a62eaae94cc629054734857264053c30ca5fa130",
+    "passed": 40,
+    "total": 44,
+    "timeoutMs": 45000
+  },
+  "deadlineTargetMet": false,
+  "limits": [
+    "Paired strict44 correctness is proven for both pinned versions with deadlines disabled.",
+    "Candidate batch time4.67%higher contradicts the earlier one-session local4.40%lower CPU. No whole-game gain established.",
+    "One sequential pair on one host does not identify code effect versus order/host drift. Repeat identical commits in reverse order before a keep/revert decision.",
+    "Latest main a62 includes separate binding fixes; its deadline score is a separate run/host, not a performance comparison for pointer literals.",
+    "Four latest-main failures are ETIMEDOUT; completed sessions match. No held-out56/leaderboard900-second success claim."
+  ],
+  "rawProofs": {
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/baseline-commit.txt": "5a958e260de96a40f7ca85f10c73a5386f3d7ae4c4d1ca7e7af3ce98d2705d4f",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/baseline-post-run-integrity.json": "3cffabd7d87049e20f9433239bc5687dedeef2e23bce18447a05672932e8a28f",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/baseline-pre-run-manifest.json": "526132ba039e0632d9b6730e7447976deb986403e0d72f37f4dc281e4e8f3bec",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/baseline-summary.json": "6828f16c05689f07cc19872dbab8e69e1b48c0ca3251b4fdc21e4b01365312e8",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/branch-main-deadline-score-stderr.txt": "348de3946808004019a960a6ae9aa6d5136d8a98daf9b9976b888899c177ed88",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/branch-main-deadline-score-stdout.txt": "7a4cbb92c90398c0491e939544ec8409b942b4786b27d368c99940f3a9487f9c",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/branch-main-deadline-score-summary.json": "3cc98326bd5c8b71a59b1a2563eab4957c43edaf2e573392a3b21229be70bc82",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/candidate-commit.txt": "3f6082f710e338d7b52257c4edaf681c7a1e9dd1a1d32a522445724a7134bf1c",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/candidate-post-run-integrity.json": "9fe8c8391d7959f4d0baae711333fab43d07c4f3e56fa5ec5ff0e2bd9300ef46",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/candidate-pre-run-manifest.json": "f4da539d836d557f9bb403b10b709f19f30d502299181b2d102cce1d4afac5a5",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/candidate-summary.json": "edb80e902374367c1ae32e18a906ef81777c8525e24fd99d6a0e429f41d68f93",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/pointer-deadline-score-stderr.txt": "1cfc9bda2eba9f4ce1f2e228916b417365a6bddf43d0c497dd47ff8d5a414ea4",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/pointer-deadline-score-stdout.txt": "24dd4a7e80ad665aa9eebd3fdace45dafde1fc522c1d1743fae70de7a9e9ade2",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/pointer-deadline-score-summary.json": "02f933ffcbc64403c086ab61c1833d82fa241dd1a50e508a174be14387cc0df7",
+    "docs/runtime-environment/pointer-limit-paired-ci-evidence/runtime-comparison.json": "b07e936c9e8df36ab4a136bc9e73b23c6e4988717334d0fc58417b8dd83c802b"
+  }
+}

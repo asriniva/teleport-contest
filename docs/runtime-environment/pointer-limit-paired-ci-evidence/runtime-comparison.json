@@ -1,0 +1,690 @@
+{
+  "version": 1,
+  "complete": true,
+  "strictPublicPassed": {
+    "baseline": 44,
+    "candidate": 44
+  },
+  "nodeVersion": "v22.23.4",
+  "samplingIntervalUs": 1000,
+  "deadlinesEnforced": false,
+  "changedInputs": [
+    "js/nethack/bindings/hack.js",
+    "js/nethack/bindings/mon.js",
+    "js/nethack/bindings/wintty.js"
+  ],
+  "baselineWallSeconds": 1182.8733189105988,
+  "candidateWallSeconds": 1238.0621268749237,
+  "wallRatio": 1.0466565667531944,
+  "geometricMeanSessionRatio": 1.0432790204865297,
+  "sessionsAbove45Seconds": {
+    "baseline": 6,
+    "candidate": 6
+  },
+  "speedFits": {
+    "baseline": {
+      "startup_ms": 8055.1,
+      "per_move_ms": 70.9058,
+      "r2": 0.76,
+      "label": "8055+70.91/turn",
+      "sessions": 44
+    },
+    "candidate": {
+      "startup_ms": 8138.2,
+      "per_move_ms": 75.5201,
+      "r2": 0.753,
+      "label": "8138+75.52/turn",
+      "sessions": 44
+    }
+  },
+  "topSelf": {
+    "baseline": [
+      {
+        "file": "",
+        "function": "(garbage collector)",
+        "line": 0,
+        "column": 0,
+        "sampledMs": 88022.434,
+        "percent": 7.556
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.field",
+        "line": 109,
+        "column": 14,
+        "sampledMs": 28255.696,
+        "percent": 2.426
+      },
+      {
+        "file": "js/ported/termcap.js",
+        "function": "nomux_capture_screen",
+        "line": 784,
+        "column": 37,
+        "sampledMs": 27836.277,
+        "percent": 2.389
+      },
+      {
+        "file": "js/c-runtime/heap.js",
+        "function": "insertFreeRange",
+        "line": 11,
+        "column": 25,
+        "sampledMs": 27346.74,
+        "percent": 2.347
+      },
+      {
+        "file": "js/c-runtime/context.js",
+        "function": "withCEnvironment",
+        "line": 8,
+        "column": 33,
+        "sampledMs": 22317.211,
+        "percent": 1.916
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "currentDataView",
+        "line": 12,
+        "column": 32,
+        "sampledMs": 18617.683,
+        "percent": 1.598
+      },
+      {
+        "file": "js/c-runtime/records.js",
+        "function": "record",
+        "line": 6,
+        "column": 20,
+        "sampledMs": 18482.105,
+        "percent": 1.587
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "get",
+        "line": 37,
+        "column": 144,
+        "sampledMs": 18285.828,
+        "percent": 1.57
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.field",
+        "line": 141,
+        "column": 13,
+        "sampledMs": 16994.849,
+        "percent": 1.459
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.cell",
+        "line": 102,
+        "column": 11,
+        "sampledMs": 16596.439,
+        "percent": 1.425
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "read",
+        "line": 61,
+        "column": 13,
+        "sampledMs": 15456.988,
+        "percent": 1.327
+      },
+      {
+        "file": "node:internal/modules/esm/utils",
+        "function": "compileSourceTextModule",
+        "line": 344,
+        "column": 33,
+        "sampledMs": 15179.053,
+        "percent": 1.303
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "array",
+        "line": 64,
+        "column": 16,
+        "sampledMs": 15020.651,
+        "percent": 1.289
+      },
+      {
+        "file": "js/c-runtime/heap.js",
+        "function": "get HEAPU8",
+        "line": 40,
+        "column": 15,
+        "sampledMs": 11666.204,
+        "percent": 1.001
+      },
+      {
+        "file": "js/c-runtime/types.js",
+        "function": "load",
+        "line": 35,
+        "column": 18,
+        "sampledMs": 10680.787,
+        "percent": 0.917
+      }
+    ],
+    "candidate": [
+      {
+        "file": "",
+        "function": "(garbage collector)",
+        "line": 0,
+        "column": 0,
+        "sampledMs": 93790.739,
+        "percent": 7.679
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.field",
+        "line": 109,
+        "column": 14,
+        "sampledMs": 31204.94,
+        "percent": 2.555
+      },
+      {
+        "file": "js/ported/termcap.js",
+        "function": "nomux_capture_screen",
+        "line": 784,
+        "column": 37,
+        "sampledMs": 27972.003,
+        "percent": 2.29
+      },
+      {
+        "file": "js/c-runtime/heap.js",
+        "function": "insertFreeRange",
+        "line": 11,
+        "column": 25,
+        "sampledMs": 27789.972,
+        "percent": 2.275
+      },
+      {
+        "file": "js/c-runtime/context.js",
+        "function": "withCEnvironment",
+        "line": 8,
+        "column": 33,
+        "sampledMs": 23983.751,
+        "percent": 1.964
+      },
+      {
+        "file": "js/c-runtime/records.js",
+        "function": "record",
+        "line": 6,
+        "column": 20,
+        "sampledMs": 19555.747,
+        "percent": 1.601
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "get",
+        "line": 37,
+        "column": 144,
+        "sampledMs": 18982.193,
+        "percent": 1.554
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "currentDataView",
+        "line": 12,
+        "column": 32,
+        "sampledMs": 18645.902,
+        "percent": 1.527
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.field",
+        "line": 141,
+        "column": 13,
+        "sampledMs": 17465.215,
+        "percent": 1.43
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "env.cell",
+        "line": 102,
+        "column": 11,
+        "sampledMs": 16728.611,
+        "percent": 1.37
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "read",
+        "line": 61,
+        "column": 13,
+        "sampledMs": 15798.675,
+        "percent": 1.294
+      },
+      {
+        "file": "js/c-runtime/adapter-factories.js",
+        "function": "array",
+        "line": 64,
+        "column": 16,
+        "sampledMs": 15762.598,
+        "percent": 1.291
+      },
+      {
+        "file": "node:internal/modules/esm/utils",
+        "function": "compileSourceTextModule",
+        "line": 344,
+        "column": 33,
+        "sampledMs": 15621.744,
+        "percent": 1.279
+      },
+      {
+        "file": "js/c-runtime/heap.js",
+        "function": "get HEAPU8",
+        "line": 40,
+        "column": 15,
+        "sampledMs": 11666.004,
+        "percent": 0.955
+      },
+      {
+        "file": "js/c-runtime/types.js",
+        "function": "load",
+        "line": 35,
+        "column": 18,
+        "sampledMs": 11263.217,
+        "percent": 0.922
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "session": "seed0002-healer-reflection-drummer.session.json",
+      "recordedInputs": 594,
+      "baselineMs": 43663.68,
+      "candidateMs": 43762.95,
+      "ratio": 1.0022735142800605,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0004-feeding-pony.session.json",
+      "recordedInputs": 408,
+      "baselineMs": 34180.92,
+      "candidateMs": 34243.38,
+      "ratio": 1.0018273352501923,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0006-wizard-water-demon.session.json",
+      "recordedInputs": 122,
+      "baselineMs": 17605.93,
+      "candidateMs": 18968.94,
+      "ratio": 1.077417665525195,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "recordedInputs": 301,
+      "baselineMs": 38956.28,
+      "candidateMs": 43086.72,
+      "ratio": 1.1060275775818431,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0009-swimmer-mforce.session.json",
+      "recordedInputs": 72,
+      "baselineMs": 11348.12,
+      "candidateMs": 12408.67,
+      "ratio": 1.093456008572345,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0012-monk-vault-escort.session.json",
+      "recordedInputs": 307,
+      "baselineMs": 26261.99,
+      "candidateMs": 29539.15,
+      "ratio": 1.1247871924404815,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0013-friday13-save-then-fullmoon-restore.session.json",
+      "recordedInputs": 97,
+      "baselineMs": 15996.29,
+      "candidateMs": 17568.15,
+      "ratio": 1.0982640349731094,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0013-rogue-friday13-combat.session.json",
+      "recordedInputs": 58,
+      "baselineMs": 10128.28,
+      "candidateMs": 11357.28,
+      "ratio": 1.1213434067778536,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0014-dequa-fountain-explore.session.json",
+      "recordedInputs": 713,
+      "baselineMs": 91723.36,
+      "candidateMs": 106291.55,
+      "ratio": 1.1588274786270367,
+      "baselineOver45s": true,
+      "candidateOver45s": true
+    },
+    {
+      "session": "seed0015-valk-level2-pit-dog-wait.session.json",
+      "recordedInputs": 43,
+      "baselineMs": 9919.38,
+      "candidateMs": 10531.92,
+      "ratio": 1.061751843361178,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0016-healer-newmoon-eat-zap.session.json",
+      "recordedInputs": 35,
+      "baselineMs": 8447.91,
+      "candidateMs": 9315.71,
+      "ratio": 1.1027236322356653,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0017-samurai-altar-pray.session.json",
+      "recordedInputs": 66,
+      "baselineMs": 9229.91,
+      "candidateMs": 10476.56,
+      "ratio": 1.1350663224235122,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0030-ten-diverse-deaths.session.json",
+      "recordedInputs": 1943,
+      "baselineMs": 132558.57,
+      "candidateMs": 148908.82,
+      "ratio": 1.1233435906859888,
+      "baselineOver45s": true,
+      "candidateOver45s": true
+    },
+    {
+      "session": "seed0060-orc-rogue-kick-search.session.json",
+      "recordedInputs": 40,
+      "baselineMs": 9322.17,
+      "candidateMs": 10291.38,
+      "ratio": 1.1039682820630818,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0077-rogue-chargen.session.json",
+      "recordedInputs": 32,
+      "baselineMs": 7838.21,
+      "candidateMs": 8370.22,
+      "ratio": 1.0678739150903076,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0101-ranger-quiver-throw-travel-engrave.session.json",
+      "recordedInputs": 26,
+      "baselineMs": 7617.14,
+      "candidateMs": 8125.17,
+      "ratio": 1.0666956364199687,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0102-ranger-name-cancel.session.json",
+      "recordedInputs": 24,
+      "baselineMs": 8170.87,
+      "candidateMs": 8708.53,
+      "ratio": 1.0658020504548475,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0103-knight-ride-pony.session.json",
+      "recordedInputs": 59,
+      "baselineMs": 6994.36,
+      "candidateMs": 7598.85,
+      "ratio": 1.086425348423587,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0104-knight-ride-combat.session.json",
+      "recordedInputs": 42,
+      "baselineMs": 7875.55,
+      "candidateMs": 8691.42,
+      "ratio": 1.103595304454927,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0105-valk-chat-lamp-ration.session.json",
+      "recordedInputs": 29,
+      "baselineMs": 7144.54,
+      "candidateMs": 7568.52,
+      "ratio": 1.0593432187376655,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0106-priest-extcmd-sweep.session.json",
+      "recordedInputs": 266,
+      "baselineMs": 12636.34,
+      "candidateMs": 14156.31,
+      "ratio": 1.1202856206781393,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0107-samurai-twoweapon-enhance.session.json",
+      "recordedInputs": 97,
+      "baselineMs": 8056.78,
+      "candidateMs": 8867.47,
+      "ratio": 1.1006220847534622,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0108-wizard-extcmd-wishlist.session.json",
+      "recordedInputs": 302,
+      "baselineMs": 16728.8,
+      "candidateMs": 18337.35,
+      "ratio": 1.0961545358902014,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0116-wizard-wear-shop.session.json",
+      "recordedInputs": 126,
+      "baselineMs": 18559.17,
+      "candidateMs": 20492.39,
+      "ratio": 1.1041652185954438,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0200-monk-north-search.session.json",
+      "recordedInputs": 39,
+      "baselineMs": 8030.94,
+      "candidateMs": 8657.56,
+      "ratio": 1.0780257354680771,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0360-wizard-world-tour.session.json",
+      "recordedInputs": 832,
+      "baselineMs": 146650.73,
+      "candidateMs": 153968.98,
+      "ratio": 1.0499025814600444,
+      "baselineOver45s": true,
+      "candidateOver45s": true
+    },
+    {
+      "session": "seed0361-archeologist-tour.session.json",
+      "recordedInputs": 365,
+      "baselineMs": 49387.71,
+      "candidateMs": 49091.37,
+      "ratio": 0.9939997217931344,
+      "baselineOver45s": true,
+      "candidateOver45s": true
+    },
+    {
+      "session": "seed0367-priest-quest-tour.session.json",
+      "recordedInputs": 323,
+      "baselineMs": 54555.98,
+      "candidateMs": 53081.66,
+      "ratio": 0.9729760147283579,
+      "baselineOver45s": true,
+      "candidateOver45s": true
+    },
+    {
+      "session": "seed0373-barbarian-quest-tour.session.json",
+      "recordedInputs": 123,
+      "baselineMs": 39829.89,
+      "candidateMs": 38214.86,
+      "ratio": 0.9594518086793612,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0383-wizard-hallucinate.session.json",
+      "recordedInputs": 218,
+      "baselineMs": 19393.28,
+      "candidateMs": 18730.56,
+      "ratio": 0.9658273381294965,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0398-wizard-wandpoly-pile.session.json",
+      "recordedInputs": 86,
+      "baselineMs": 7817.16,
+      "candidateMs": 7544.45,
+      "ratio": 0.9651139288437233,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0399-wizard-hallu-actions.session.json",
+      "recordedInputs": 531,
+      "baselineMs": 19519.25,
+      "candidateMs": 18751.37,
+      "ratio": 0.9606603737336219,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0501-priest-cast-read-turn.session.json",
+      "recordedInputs": 27,
+      "baselineMs": 7540.7,
+      "candidateMs": 7524.56,
+      "ratio": 0.9978596151550918,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0700-samurai-explore-descend.session.json",
+      "recordedInputs": 50,
+      "baselineMs": 8482.89,
+      "candidateMs": 8477.41,
+      "ratio": 0.9993539937450563,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed0900-tourist-explore-actions.session.json",
+      "recordedInputs": 83,
+      "baselineMs": 8777.9,
+      "candidateMs": 8542.26,
+      "ratio": 0.9731553104956767,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed1150-caveman-explore-move.session.json",
+      "recordedInputs": 50,
+      "baselineMs": 8782.92,
+      "candidateMs": 8809.9,
+      "ratio": 1.0030718713138682,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed1500-rogue-explore-move.session.json",
+      "recordedInputs": 39,
+      "baselineMs": 8337.2,
+      "candidateMs": 8040.46,
+      "ratio": 0.9644077148203233,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed1800-tourist-eat-throw.session.json",
+      "recordedInputs": 25,
+      "baselineMs": 7001.07,
+      "candidateMs": 6831.65,
+      "ratio": 0.975800841871314,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed2200-wizard-quaff-zap-read.session.json",
+      "recordedInputs": 229,
+      "baselineMs": 31556.65,
+      "candidateMs": 31189.66,
+      "ratio": 0.9883704385604936,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed2600-wizard-custom-binds.session.json",
+      "recordedInputs": 37,
+      "baselineMs": 13195.96,
+      "candidateMs": 13330.17,
+      "ratio": 1.0101705370431557,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed4500-knight-coverage.session.json",
+      "recordedInputs": 1813,
+      "baselineMs": 111918.61,
+      "candidateMs": 110070.08,
+      "ratio": 0.9834832652049557,
+      "baselineOver45s": true,
+      "candidateOver45s": true
+    },
+    {
+      "session": "seed5002-wizard-coverage-pair.session.json",
+      "recordedInputs": 408,
+      "baselineMs": 20701.84,
+      "candidateMs": 20219.62,
+      "ratio": 0.9767064183666765,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed5006-tourist-stress-disaster.session.json",
+      "recordedInputs": 247,
+      "baselineMs": 19308.56,
+      "candidateMs": 19097.06,
+      "ratio": 0.9890463089945599,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    },
+    {
+      "session": "seed8000-tourist-starter.session.json",
+      "recordedInputs": 22,
+      "baselineMs": 7381.72,
+      "candidateMs": 7315.64,
+      "ratio": 0.9910481567981446,
+      "baselineOver45s": false,
+      "candidateOver45s": false
+    }
+  ],
+  "limits": [
+    "Diagnostic timings with deadlines disabled; regular CI independently enforces upstream45-second per-session cutoff.",
+    "One sequential baseline/candidate pair on one host is descriptive; order, CPU frequency and host load may affect the result.",
+    "Public44 only; no held-out56 acceptance.",
+    "The45-second flags compare official replay durations; actual worker deadlines additionally include process/module overhead."
+  ]
+}
