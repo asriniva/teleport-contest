@@ -108,6 +108,10 @@ def qualified_current(file):
  if file=='js/ported/display.js':
   from display_direct_source_successor import qualified_before as display_before
   return display_before(ROOT,file)
+
+ if file=='js/nethack/pager-lookup.js':
+  from pager_callback_source_successor import qualified_before
+  return qualified_before(ROOT,file)
  if file in {'js/nethack/bindings/termcap.js'}:
   from full_replay_source_successor import qualified_before
   return qualified_before(ROOT,file)

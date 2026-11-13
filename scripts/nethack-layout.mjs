@@ -42,6 +42,8 @@ const featurePaths=new Set(["js/c-runtime/heap.js", "js/c-runtime/adapter-factor
 function beforeFeature(file){
  if(file==='js/ported/termcap.js')return execFileSync('python3',[path.join(root,'scripts/shadow_screen_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
  if(file==='js/ported/display.js')return execFileSync('python3',[path.join(root,'scripts/display_direct_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
+
+ if(file==='js/nethack/pager-lookup.js')return execFileSync('python3',[path.join(root,'scripts/pager_callback_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
  if(['js/nethack/bindings/termcap.js'].includes(file))return execFileSync('python3',[path.join(root,'scripts/full_replay_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
  if(["js/c-runtime/records.js", "js/c-runtime/record-views.js", "js/nethack/monster-creation.js", "js/ported-utilities/sfctool-helpers.js", "js/ported-utilities/sfctool-runtime.js", "js/ported-utilities/tile2bmp/runtime.mjs"].includes(file))return execFileSync('python3',[path.join(root,'scripts/monster_view_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
  if(['js/nethack/bindings/hack.js','js/nethack/bindings/mon.js','js/nethack/bindings/wintty.js'].includes(file)&&fs.existsSync(path.join(root,'scripts/pointer_limit_source_successor.py')))return execFileSync('python3',[path.join(root,'scripts/pointer_limit_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});

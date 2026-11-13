@@ -1,0 +1,355 @@
+{
+  "date": "2026-11-12",
+  "status": "PASS targeted behavior checks; clear converter improvement; full-action speedup uncertain",
+  "base": "3b6db964b55ec253e6f624f524c351d75d5ea6c5",
+  "rebaseFirst": true,
+  "baselineSourceSha256": "4cf2851f6403a8932e5262be18476d5b6b015dc2c9a88f640abaa003f2733732",
+  "files": {
+    "js/nethack/pager-lookup.js": "b9394076a4b1534f1fc731f3ccf2b2d6cab2f94bac90224d1f369fee80e95c58",
+    "scripts/test-pager-native-args.mjs": "63779fc881fc59db2ce11a81084c044745c366a0aba1641985bfb805f58f0ef4",
+    "scripts/pager-callback-workload.mjs": "5737d427b15bd58a9f24cfd568ec1be4d8c7879ed309ae97c80d2d514239af5c",
+    "scripts/benchmark-pager-native-args.mjs": "0ff31087785c6e39537f8120253a0072febac54d5d4e2e81a68aa2bbcc0fc62a",
+    "scripts/pager_callback_source_successor.py": "71b0de488d663823d522e4de75920cf989f4c6e50334ac6b9e3cf6c25e236e87",
+    "docs/runtime-environment/pager-callback-source.patch": "dddc8e127e61b6038fbd60052ec89adba55b4b2bd463d0e5d07518cfbe918535",
+    "scripts/consolidate-nethack-layout.py": "9899dc47d6ea38987b94630c7f90deeb7f5fefad5b34a714a91888479efb0a4f",
+    "scripts/nethack-layout.mjs": "b0a1176849d7d30eba04edd7eebf0f916be0674dd3f4c24c99a3b3d57ff247a6"
+  },
+  "change": "Use existing isRecord for private pager nativeArg classification; successful record conversion, scalar conversions, opaque pointers and narrow error propagation retained.",
+  "validation": {
+    "converter": {
+      "status": "PASS",
+      "checks": 1371,
+      "types": 38,
+      "base": "3b6db96",
+      "heapGrowth": true,
+      "actualSourceConverters": true
+    },
+    "originalCPager": {
+      "status": "PASS",
+      "checks": 54,
+      "scenarios": 5,
+      "comparison": "status/TTY/ISAAC/RNG logs/recording and selected world graph",
+      "revalidatedAfterLatestRebase": true
+    },
+    "replays": {
+      "status": "PASS",
+      "cases": 12,
+      "frames": 246,
+      "inputBoundaries": 246,
+      "comparison": "complete results including status, raw output, recordings, RNG state/logs, globals and files"
+    },
+    "runtimeContracts": "PASS",
+    "sourceLayout": "PASS 593 exact transitions after f58b27e rebase",
+    "sourceInverse": "PASS exact one-file source/patch; two unrelated source/patch mutations rejected",
+    "caughtProbeCountsAfter": {
+      "diagnosticOnly": true,
+      "results": [
+        {
+          "name": "local-look",
+          "recordCalls": 3836,
+          "nativeArgFailures": {},
+          "totalFailures": 0,
+          "frames": 5
+        },
+        {
+          "name": "farlook",
+          "recordCalls": 4288,
+          "nativeArgFailures": {},
+          "totalFailures": 0,
+          "frames": 10
+        },
+        {
+          "name": "symbol",
+          "recordCalls": 4273,
+          "nativeArgFailures": {},
+          "totalFailures": 0,
+          "frames": 8
+        },
+        {
+          "name": "help",
+          "recordCalls": 3977,
+          "nativeArgFailures": {},
+          "totalFailures": 0,
+          "frames": 16
+        }
+      ]
+    },
+    "converterAfterLatestRebase": {
+      "status": "PASS",
+      "checks": 1371,
+      "types": 38,
+      "base": "3b6db96",
+      "heapGrowth": true,
+      "actualSourceConverters": true
+    }
+  },
+  "limits": [
+    "Bounded converter/input scenarios establish no observed difference, not exhaustive proof over every game input.",
+    "Existing fixed type-declaration contract retained; no value or memory-view caching added.",
+    "Known broader historical generated-header mismatch from preceding work remains; no broad-scope pass claimed or old expectations changed."
+  ],
+  "commands": [
+    "node scripts/test-pager-native-args.mjs",
+    "node scripts/test-standalone-pager.mjs",
+    "node scripts/test-c-runtime-contracts.mjs",
+    "python3 scripts/consolidate-nethack-layout.py",
+    "node scripts/pager-callback-workload.mjs compare .cache/full-original-c-v1/assets .cache/pager-callback/latest/replays .cache/pager-callback/baseline-loader.mjs",
+    "node scripts/benchmark-pager-native-args.mjs",
+    "PAGER_BENCH_ROUNDS=5 node scripts/pager-callback-workload.mjs benchmark .cache/full-original-c-v1/assets .cache/pager-callback/latest/unused .cache/pager-callback/baseline-loader.mjs",
+    "node scripts/count-pager-record-probes.mjs .cache/full-original-c-v1/assets"
+  ],
+  "historicalBenchmarksOn3b6db96": {
+    "converter": {
+      "node": "v24.19.0",
+      "callsPerSample": 40000,
+      "rounds": 9,
+      "beforeMs": 152.2418749999997,
+      "afterMs": 4.600458000000344,
+      "speedup": 33.092764894275376,
+      "reductionPercent": 96.97819144699818,
+      "pairedSpeedups": [
+        30.897451379715903,
+        31.10160400748887,
+        34.2479233572368,
+        35.665193340459005,
+        31.576774960584547,
+        31.95256573304218,
+        34.20378049229067,
+        32.288574760336985,
+        33.092764894275376
+      ],
+      "before": [
+        153.71741600000018,
+        153.66525000000001,
+        145.673542,
+        151.23083399999996,
+        152.7171249999999,
+        157.12808400000017,
+        145.99312499999996,
+        146.28070799999978,
+        152.2418749999997
+      ],
+      "after": [
+        4.975083999999924,
+        4.94074999999998,
+        4.2534999999998035,
+        4.240291999999954,
+        4.836375000000089,
+        4.9175420000001395,
+        4.268332999999984,
+        4.530416999999943,
+        4.600458000000344
+      ],
+      "sink": 0,
+      "scope": "actual private argument converters; observed scalar mix plus record/opaque pointers; excludes setup"
+    },
+    "wholeActions": {
+      "node": "v24.19.0",
+      "rounds": 9,
+      "beforeMs": 9627.476874999998,
+      "afterMs": 9355.266959,
+      "reductionPercent": 2.827427367879276,
+      "speedup": 1.0290969693535175,
+      "pairedSpeedups": [
+        0.932975692222574,
+        0.9532393956454338,
+        1.044736101650061,
+        1.067274770450671,
+        0.9793503642589698,
+        1.030079064865188,
+        0.9148187969804089,
+        0.901580955485126,
+        1.0495422039076527
+      ],
+      "before": [
+        {
+          "ms": 8728.236667000001,
+          "checksum": 40449
+        },
+        {
+          "ms": 8829.633582999999,
+          "checksum": 40449
+        },
+        {
+          "ms": 9786.987374999999,
+          "checksum": 40449
+        },
+        {
+          "ms": 9799.832875,
+          "checksum": 40449
+        },
+        {
+          "ms": 8912.423374999998,
+          "checksum": 40449
+        },
+        {
+          "ms": 11140.213667000002,
+          "checksum": 40449
+        },
+        {
+          "ms": 11420.429458,
+          "checksum": 40449
+        },
+        {
+          "ms": 9572.660249999999,
+          "checksum": 40449
+        },
+        {
+          "ms": 9627.476874999998,
+          "checksum": 40449
+        }
+      ],
+      "after": [
+        {
+          "ms": 9355.266959,
+          "checksum": 40449
+        },
+        {
+          "ms": 9262.766125000002,
+          "checksum": 40449
+        },
+        {
+          "ms": 9367.903875,
+          "checksum": 40449
+        },
+        {
+          "ms": 9182.108624999999,
+          "checksum": 40449
+        },
+        {
+          "ms": 9100.342125000001,
+          "checksum": 40449
+        },
+        {
+          "ms": 10814.91125,
+          "checksum": 40449
+        },
+        {
+          "ms": 12483.815916,
+          "checksum": 40449
+        },
+        {
+          "ms": 10617.638040999998,
+          "checksum": 40449
+        },
+        {
+          "ms": 9173.025000000001,
+          "checksum": 40449
+        }
+      ],
+      "scope": "whole real runs: 12 farlooks, symbol lookup and help; includes initialization; one untimed warmup per process"
+    },
+    "pairedActionMedianSpeedup": 0.9793503642589698,
+    "interpretation": "Converter median 152.24 to 4.60 ms per 40000 conversions (~33.09x), all nine pairs faster. Whole-action median 9627.48 to 9355.27 ms (~2.83% lower) but pair ratios 0.902 to 1.067 and median paired ratio 0.979: no consistent end-to-end gain established. Whole runs include setup/rendering/recording; do not present microbenchmark gains as gameplay gains."
+  },
+  "rebaseBaseAfterConcurrentTransportMerge": "f58b27e92880b3ffd61d992a1a1d14994f2cec4a",
+  "latestMainPagerBaselineEqualsOriginal": true,
+  "benchmarks": {
+    "converter": {
+      "node": "v24.19.0",
+      "callsPerSample": 40000,
+      "rounds": 9,
+      "beforeMs": 149.36145899999974,
+      "afterMs": 4.578625000000102,
+      "speedup": 32.6214658330823,
+      "reductionPercent": 96.93453382776603,
+      "pairedSpeedups": [
+        35.09017445193619,
+        33.36564219632188,
+        32.777196951447394,
+        32.88750744249003,
+        32.53235157858523,
+        31.624489355401494,
+        32.342367173682135,
+        35.05466286404092,
+        34.037291461345866
+      ],
+      "before": [
+        160.6647499999999,
+        154.62195800000018,
+        146.67933300000004,
+        145.8232079999998,
+        149.36145899999974,
+        147.68108400000028,
+        148.57679199999984,
+        159.7879170000001,
+        153.2047080000002
+      ],
+      "after": [
+        4.578625000000102,
+        4.634166999999934,
+        4.47504200000003,
+        4.433999999999969,
+        4.591167000000041,
+        4.669832999999926,
+        4.5938750000000255,
+        4.558249999999589,
+        4.501083999999992
+      ],
+      "sink": 0,
+      "scope": "actual private argument converters; observed scalar mix plus record/opaque pointers; excludes setup"
+    },
+    "wholeActions": {
+      "node": "v24.19.0",
+      "rounds": 5,
+      "beforeMs": 10021.266916,
+      "afterMs": 9171.681417000002,
+      "reductionPercent": 8.477825270211559,
+      "speedup": 1.0926313791738629,
+      "pairedSpeedups": [
+        1.003432562220258,
+        1.0123605894559333,
+        1.1248704651774322,
+        1.0356247560070844,
+        0.9741267889153841
+      ],
+      "before": [
+        {
+          "ms": 8644.942333,
+          "checksum": 40449
+        },
+        {
+          "ms": 8923.281833000001,
+          "checksum": 40449
+        },
+        {
+          "ms": 10316.953542000001,
+          "checksum": 40449
+        },
+        {
+          "ms": 10029.706833,
+          "checksum": 40449
+        },
+        {
+          "ms": 10021.266916,
+          "checksum": 40449
+        }
+      ],
+      "after": [
+        {
+          "ms": 8615.369541000002,
+          "checksum": 40449
+        },
+        {
+          "ms": 8814.3315,
+          "checksum": 40449
+        },
+        {
+          "ms": 9171.681417000002,
+          "checksum": 40449
+        },
+        {
+          "ms": 9684.692041999999,
+          "checksum": 40449
+        },
+        {
+          "ms": 10287.435917,
+          "checksum": 40449
+        }
+      ],
+      "scope": "whole real runs: 12 farlooks, symbol lookup and help; includes initialization; one untimed warmup per process"
+    },
+    "pairedActionMedianSpeedup": 1.0123605894559333,
+    "interpretation": "On f58b27e: converter median 149.36 to 4.58 ms per 40000 conversions (32.62x). Full-action ratio of independent medians is 1.093x (10021 to 9172 ms), but paired median is only 1.012x, one of five pairs is slower, and pair ratios span 0.974\u20131.125. Timing variation is substantial: no robust overall gameplay gain established."
+  }
+}

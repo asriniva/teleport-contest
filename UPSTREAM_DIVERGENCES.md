@@ -1,5 +1,14 @@
 # Upstream divergence register
 
+Main integration (2026-11-12): merge the verified display/terminal work with
+local main8b0eb8b, preserving its pager callback scalar-classification change.
+Only the change-log and historical source-projection dispatch conflicted; both
+sets of entries and exact source guards are retained. Display/terminal runtime
+bytes remain identical to the strict44-tested candidate. Focused direct-field,
+shadow-screen, pager converter and source-history/boundary checks validate the
+combined tree; the recorded523.648s timing predates this pager integration and
+is not a new measurement of the merged tree.
+
 Direct NOMUX shadow-screen views (2026-11-12, public44 verified):
 `js/nethack/bindings/termcap.js` exposes cached signed/unsigned byte views over
 exactly the existing24x80x4-byte NOMUX heap region, validating measured field
@@ -68,6 +77,51 @@ causal speed guarantee, enforced deadline or held-out acceptance is claimed.
 Evidence: `docs/runtime-environment/display-direct-comparison.json` and
 `display-direct-validation.json`. The initial replay attempt was stopped after
 boundary handling changed and is explicitly invalidated in its cache receipt.
+
+Pager callback scalar classification (2026-11-12, rebased first onto
+main3b6db96, then onto f58b27e after a concurrent capture-transport merge): `js/nethack/pager-lookup.js` uses the existing ctypes.isRecord
+predicate before its nativeArg record conversion. Ordinary scalar and opaque
+pointer arguments reach the same prior conversion/return paths without an
+internally caught missing-record Error. Valid records retain the original
+ctypes.record and views.record calls, pointer identity and address validation;
+the existing narrow catch still propagates unrelated failures. Integer widths,
+null handling, callbacks, module/stack scopes, underlying memory, game policy,
+C/header/compiler/defaults and recorder are unchanged. This is new workspace
+adapter work; main's earlier classifier/type caches and numeric-index regexp
+optimization are preserved.
+
+Verification:1,371 comparisons of the actual predecessor/current private
+converters cover all38 helper/boundary types, scalar values, pointer/view
+identity, null/invalid values, heap growth and unrelated errors. The original-C
+pager suite passes54 checks across ordinary local look, far-look selection and
+cancel, symbol lookup and help, including world/TTY/RNG/recording comparisons.
+Twelve separate-process before/after replays across two seeds, including12
+repeated far-looks, match complete results with246 frames/input boundaries.
+Record-probe diagnostics fall from278/205/166 caught failures for far-look/
+symbol/help to zero; local look stays zero. Shared-runtime contracts pass.
+The source-layout gate passes593 exact transitions. A pinned single-file
+source/patch inverse projects only this pager adapter to its exact3b6db96
+predecessor for historical receipts; current runtime tests execute the candidate.
+Source and patch mutation negatives reject unrelated changes. No old oracle
+pins or generated headers are rewritten.
+
+The initial timings on3b6db96 are retained as historical evidence in
+`docs/runtime-environment/pager-callback-validation.json`. All converter,
+original-C pager, source-layout and12/246-frame replay checks pass again after
+rebasing onto f58b27e; its newer transport/runtime changes remain unchanged.
+On f58b27e, converter median149.36ms→4.58ms per40,000 conversions
+(32.62x). Full-action independent medians10021ms→9172ms, but paired median
+speedup is1.012x with range0.974–1.125 and one slower pair: the local gain is
+clear; a robust overall gameplay gain is not established. Latest raw results
+are recorded in that JSON; raw baseline source,
+outputs and replay results remain under `.cache/pager-callback/`. Converter
+benchmarks use observed scalar-type proportions plus record/opaque pointers;
+full-action benchmarks run real input-driven repeated far-look, symbol lookup
+and help, including initialization. Both alternate paired samples after warmup: nine converter samples and
+five full-action samples for the final f58b27e integration. Setup is excluded only in the converter benchmark. No exhaustive
+all-input equivalence or general gameplay speedup is claimed. The broader
+historical generated-header mismatch documented in the preceding main rebase
+remains an inherited limitation; no new broad-scope pass is claimed here.
 
 Merge integration (2026-11-13): combine the measured full-replay transport
 commit29ab502 with main3b6db96, preserving utility byte operations, opt-in
