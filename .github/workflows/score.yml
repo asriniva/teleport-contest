@@ -13,6 +13,12 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Install audit dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Check all dynamic window callbacks
+        run: node scripts/test-dynamic-window-callbacks.mjs
+
       - name: Check production type metadata and nested callbacks
         run: node scripts/test-engine-type-metadata.mjs
 

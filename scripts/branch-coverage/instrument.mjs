@@ -1,6 +1,6 @@
 // Test-only instrumentation: preserve operand values, evaluation order and source files.
 import crypto from 'node:crypto';
-import {parse} from '../../.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs';
+import {parse} from 'acorn';
 import {closedParameterProofs} from './closed-parameters.mjs';
 export const version=1;
 export function instrument(source,file){

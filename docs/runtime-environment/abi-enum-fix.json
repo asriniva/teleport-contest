@@ -127,7 +127,38 @@
     "completeInvocationAccepted": false,
     "limitations": "Controlled ordinary tool/reset and invocation-item ABI calls after genuine main; no full invocation ritual, advanced tool matrices or integrated action scheduling claim."
   },
-  "public44": "In progress at fix commit; no full-run acceptance asserted.",
+  "public44": {
+    "commit": "8164370",
+    "passed": 44,
+    "total": 44,
+    "integrity": {
+      "filesChecked": 780,
+      "changed": [],
+      "exitCode": 0,
+      "wallSeconds": 365.5992487920448,
+      "sessionSelectionMatched": true,
+      "childUserSeconds": 536.4024909999999,
+      "childSystemSeconds": 12.351328
+    },
+    "metrics": {
+      "rngCalls": {
+        "matched": 792838,
+        "total": 792838
+      },
+      "screens": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "cursors": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "animFrames": {
+        "matched": 1483,
+        "total": 1483
+      }
+    }
+  },
   "limits": [
     "Hidden recordings unavailable.",
     "Advanced tool interactions are not comprehensively executed.",

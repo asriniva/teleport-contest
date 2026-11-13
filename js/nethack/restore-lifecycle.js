@@ -23,7 +23,7 @@ export function enableRestoreLifecycle(environment,layouts){
  const field=(kind,index)=>{const name=kinds[kind],f=abi.schemas[name]?.fields[index];if(!f)throw new Error('Unknown RESTORE field '+kind+':'+index);return{type:abi.recordTypes[name],f};};
  const code=t=>{t=ctypes.canonical(t);return t.includes('*')?'p':t==='void'?'v':/\b(float|double)\b/.test(t)?'d':ctypes.size(t)===8?'j':'i';};
  function windowCall(name,...args){
-  const row=abi.schemas.window_procs.fields.find(f=>f.name===name),m=row?.ctype.match(/^(.+?)\s*\(\*\)\s*\((.*)\)$/);if(!m)throw new Error('Unknown RESTORE window callback '+name);
+  const row=ctypes.record('struct window_procs').fields[name],m=row?.ctype.replace(new RegExp('\\s+'+name+'$'),'').match(/^(.+?)\s*\(\*\)\s*\((.*)\)$/);if(!m)throw new Error('Unknown RESTORE window callback '+name);
   const signature=[m[1],...m[2].split(',').map(v=>v.trim()).filter(v=>v&&v!=='void')].map(code).join('');
   const at=ctypes.locate('struct window_procs',environment.requireGlobal('windowprocs'),name).at;
   return functions.indirect(memory.view.getBigUint64(at,true),signature,...boundary(args));

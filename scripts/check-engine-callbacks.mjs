@@ -1,6 +1,6 @@
 // Typed callback-field checks independent of reaching a runtime branch.
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
-import {parse} from '../.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs';
+import {parse} from 'acorn';
 import {isEngine} from './branch-coverage/loader.mjs';
 const metadata=JSON.parse(fs.readFileSync(new URL('../js/nethack/records.json',import.meta.url))),records=metadata.records;
 const recordFor=value=>value==='struct window_procs'||value==='window_procs'?records.window_procs:value==='struct sound_procs'||value==='sound_procs'?records.sound_procs:undefined;
@@ -59,5 +59,5 @@ if(process.argv[1]===new URL(import.meta.url).pathname){const result=checkEngine
  const uhitm=fs.readFileSync('js/nethack/uhitm.js','utf8');
  assert.ok(uhitm.includes("window('win_delay_output','v')"),'real UHITM dispatch site');
  assert.throws(()=>checkCallbackSource(uhitm.replace("window('win_delay_output','v')","window('win_nh_delay_output','v')"),'original-engulf-typo.js'),/unknown measured callback/);
- console.log('PASS: '+result.typedFields.length+' measured record fields and '+result.sites.length+' literal window/sound field lookups across '+result.modules+' engine modules; helper aliases/templates/escaped typos and incompatible literal signatures rejected. '+result.dynamic.length+' dynamic lookups remain runtime coverage obligations.');
+ console.log('PASS: '+result.typedFields.length+' measured record fields and '+result.sites.length+' literal window/sound field lookups across '+result.modules+' engine modules; helper aliases/templates/escaped typos and incompatible literal signatures rejected. '+result.dynamic.length+' dynamic lookup sites inventoried for the exhaustive dispatcher audit.');
 }

@@ -1,3 +1,42 @@
+## Exhaustive dynamic window dispatch contracts (2026-11-13)
+
+The original 40 dynamic window lookup locations have been traced through their
+finite callers and tables. `scripts/test-dynamic-window-callbacks.mjs` validates
+all 42 current locations across 33 modules (two additional metadata reads were
+introduced by the fix). It executes 216 production dispatcher cases, covering
+all 46 measured window callback names and their signatures. Every helper caller
+must resolve; helper escapes, unresolvable names, uncovered lookup sites and
+signature mismatches fail. This is a dispatch-contract audit, not exhaustive
+execution of all game-policy branches. Per-location callback names, signatures,
+caller cases and source fingerprints are recorded in
+`docs/runtime-environment/dynamic-window-callbacks.{md,json}`.
+
+A concrete RESTORE defect was found: its local schema omitted registered
+`win_select_menu` and `win_add_menu`, causing dispatch to reject those names.
+RESTORE and SAVE now derive callback prototypes from the complete shared measured
+`window_procs` declaration rather than local harvested field subsets. Their
+original callback tables, arguments, live function-pointer reads and game policies
+are retained. All 12 RESTORE and 5 SAVE callbacks additionally pass 34 calls
+through actual installed owners and the real function table, including callback
+replacement. Negative checks reject unknown names, wrong signatures, unresolved
+callers and restoration of the old RESTORE schema lookup.
+
+The audit is required in Score CI. `package.json` and `package-lock.json` pin
+Acorn 8.14.1 as a development dependency, matching the parser already used from
+the local SDK. The callback checker and its imported instrumentation module use
+that declared dependency. CI installs it with `npm ci --ignore-scripts`; the
+new audit passes without a local SDK. No production dependency, recorder,
+original C policy, RNG routine or save format is changed.
+
+The previously pushed enum fix 8164370 passes all 44 public recordings: 792,838
+ordered RNG entries, 11,405 screens/cursors and 1,483 animation frames match.
+All 780 scoring inputs are unchanged; Node 22.23.5, timeout disabled, 365.599s
+batch wall time. This is correctness evidence, not a new baseline profile or
+acceptance of CI's 45-second deadline. The fresh 44-session gate for the two lifecycle
+changes also passes 44/44 with identical matched metric totals and all 780 inputs
+unchanged (Node 22.23.5, timeout disabled, 364.651s batch wall time). Hidden recordings and
+full advanced-tool policy coverage remain unverified.
+
 ## Shared enum metadata and production APPLY boundary fix (2026-11-13)
 
 `js/nethack/c-types.js` now merges the compiler-measured window and options enum
@@ -31,8 +70,8 @@ Also passed: 640 native execution checks; generic runtime contracts; 5,583 ABI
 rejection checks across 17 production owners; 81 literal callback declarations
 and live UHITM callback replacement. Static callback audit checks 29,805 record
 fields and 603 literal callback field lookups across 542 modules. Its 40 dynamic
-lookups remain runtime coverage obligations. Full 44 public recording verification
-is running at commit time; its outcome is not yet accepted here. Hidden recordings
+lookups remain runtime coverage obligations. The enum-fix commit initially had full 44 public recording verification
+pending; it subsequently passed 44/44, as recorded above and in its receipt. Hidden recordings
 and comprehensive advanced-tool branch coverage remain unverified. Unfinished
 native glyph work is excluded. See `docs/runtime-environment/abi-enum-fix.json`.
 

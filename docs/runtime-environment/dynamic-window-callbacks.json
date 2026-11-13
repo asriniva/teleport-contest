@@ -1,0 +1,3352 @@
+{
+  "inventory": [
+    {
+      "file": "js/nethack/apply.js",
+      "line": 29
+    },
+    {
+      "file": "js/nethack/artifact.js",
+      "line": 30
+    },
+    {
+      "file": "js/nethack/color-attributes.js",
+      "line": 39
+    },
+    {
+      "file": "js/nethack/dig.js",
+      "line": 30
+    },
+    {
+      "file": "js/nethack/discoveries.js",
+      "line": 14
+    },
+    {
+      "file": "js/nethack/do-name.js",
+      "line": 24
+    },
+    {
+      "file": "js/nethack/end-lifecycle.js",
+      "line": 20
+    },
+    {
+      "file": "js/nethack/end-lifecycle.js",
+      "line": 20
+    },
+    {
+      "file": "js/nethack/end-lifecycle.js",
+      "line": 40
+    },
+    {
+      "file": "js/nethack/engrave.js",
+      "line": 25
+    },
+    {
+      "file": "js/nethack/game-startup.js",
+      "line": 21
+    },
+    {
+      "file": "js/nethack/game-windows.js",
+      "line": 41
+    },
+    {
+      "file": "js/nethack/getpos.js",
+      "line": 35
+    },
+    {
+      "file": "js/nethack/hero-equipment.js",
+      "line": 46
+    },
+    {
+      "file": "js/nethack/hero-equipment.js",
+      "line": 46
+    },
+    {
+      "file": "js/nethack/insight.js",
+      "line": 14
+    },
+    {
+      "file": "js/nethack/insight.js",
+      "line": 28
+    },
+    {
+      "file": "js/nethack/light.js",
+      "line": 26
+    },
+    {
+      "file": "js/nethack/mail.js",
+      "line": 30
+    },
+    {
+      "file": "js/nethack/messages.js",
+      "line": 59
+    },
+    {
+      "file": "js/nethack/quest-pager.js",
+      "line": 49
+    },
+    {
+      "file": "js/nethack/restore-lifecycle.js",
+      "line": 26
+    },
+    {
+      "file": "js/nethack/restore-lifecycle.js",
+      "line": 28
+    },
+    {
+      "file": "js/nethack/restore-lifecycle.js",
+      "line": 46
+    },
+    {
+      "file": "js/nethack/save-lifecycle.js",
+      "line": 26
+    },
+    {
+      "file": "js/nethack/save-lifecycle.js",
+      "line": 29
+    },
+    {
+      "file": "js/nethack/special-interactions.js",
+      "line": 83
+    },
+    {
+      "file": "js/nethack/spell.js",
+      "line": 32
+    },
+    {
+      "file": "js/nethack/status.js",
+      "line": 32
+    },
+    {
+      "file": "js/nethack/symbols.js",
+      "line": 15
+    },
+    {
+      "file": "js/nethack/teleport.js",
+      "line": 40
+    },
+    {
+      "file": "js/nethack/terminal-messages.js",
+      "line": 43
+    },
+    {
+      "file": "js/nethack/timeout-transport.js",
+      "line": 15
+    },
+    {
+      "file": "js/nethack/topten.js",
+      "line": 15
+    },
+    {
+      "file": "js/nethack/topten.js",
+      "line": 25
+    },
+    {
+      "file": "js/nethack/turn-loop.js",
+      "line": 93
+    },
+    {
+      "file": "js/nethack/uhitm.js",
+      "line": 21
+    },
+    {
+      "file": "js/nethack/unix-terminal.js",
+      "line": 44
+    },
+    {
+      "file": "js/nethack/version-info.js",
+      "line": 25
+    },
+    {
+      "file": "js/nethack/version-info.js",
+      "line": 25
+    },
+    {
+      "file": "js/nethack/window-system.js",
+      "line": 60
+    },
+    {
+      "file": "js/nethack/wizcmds.js",
+      "line": 27
+    }
+  ],
+  "results": [
+    {
+      "file": "js/nethack/apply.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 30,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 30,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 30,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 30,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/apply.js",
+          "line": 29,
+          "helper": "window",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_end_menu",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/artifact.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 40,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 41,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 41,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 42,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 42,
+          "names": [
+            "win_putstr"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/artifact.js",
+          "line": 30,
+          "helper": "window",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_putstr",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/color-attributes.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 40,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/color-attributes.js",
+          "line": 39,
+          "helper": "window",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_end_menu",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/dig.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 30,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 30,
+          "names": [
+            "win_delay_output"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/dig.js",
+          "line": 30,
+          "helper": "window",
+          "names": [
+            "win_delay_output",
+            "win_display_nhwindow"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/discoveries.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 15,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 15,
+          "names": [
+            "win_clear_nhwindow"
+          ]
+        },
+        {
+          "line": 15,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 15,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 15,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 15,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 15,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 15,
+          "names": [
+            "win_wait_synch"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/discoveries.js",
+          "line": 14,
+          "helper": "window",
+          "names": [
+            "win_clear_nhwindow",
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_putstr",
+            "win_start_menu",
+            "win_wait_synch"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/do-name.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 25,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 25,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 25,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 25,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 25,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 25,
+          "names": [
+            "win_getlin"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/do-name.js",
+          "line": 24,
+          "helper": "window",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_getlin",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/end-lifecycle.js",
+      "helpers": [
+        "windowCall"
+      ],
+      "calls": [
+        {
+          "line": 40,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_clear_nhwindow"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_exit_nhwindows"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_raw_print"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_mark_synch"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_wait_synch"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_outrip"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/end-lifecycle.js",
+          "line": 20,
+          "helper": "windowCall",
+          "names": [
+            "win_clear_nhwindow",
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_exit_nhwindows",
+            "win_mark_synch",
+            "win_outrip",
+            "win_putstr",
+            "win_raw_print",
+            "win_wait_synch"
+          ]
+        },
+        {
+          "file": "js/nethack/end-lifecycle.js",
+          "line": 20,
+          "helper": "windowCall",
+          "names": [
+            "win_clear_nhwindow",
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_exit_nhwindows",
+            "win_mark_synch",
+            "win_outrip",
+            "win_putstr",
+            "win_raw_print",
+            "win_wait_synch"
+          ]
+        },
+        {
+          "file": "js/nethack/end-lifecycle.js",
+          "line": 40,
+          "names": [
+            "win_clear_nhwindow",
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_exit_nhwindows",
+            "win_mark_synch",
+            "win_outrip",
+            "win_putstr",
+            "win_raw_print",
+            "win_wait_synch"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/engrave.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 26,
+          "names": [
+            "win_getlin"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/engrave.js",
+          "line": 25,
+          "helper": "window",
+          "names": [
+            "win_getlin"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/game-startup.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 33,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 34,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 35,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 36,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 37,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 38,
+          "names": [
+            "win_askname"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/game-startup.js",
+          "line": 21,
+          "helper": "window",
+          "names": [
+            "win_askname",
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_end_menu",
+            "win_putstr",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/game-windows.js",
+      "helpers": [],
+      "calls": [
+        {
+          "line": 41,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 41,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 41,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 41,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/game-windows.js",
+          "line": 41,
+          "names": [
+            "win_create_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/getpos.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 36,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 36,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 36,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 36,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 36,
+          "names": [
+            "win_clear_nhwindow"
+          ]
+        },
+        {
+          "line": 36,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 36,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 36,
+          "names": [
+            "win_curs"
+          ]
+        },
+        {
+          "line": 36,
+          "names": [
+            "win_cliparound"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/getpos.js",
+          "line": 35,
+          "helper": "window",
+          "names": [
+            "win_clear_nhwindow",
+            "win_cliparound",
+            "win_create_nhwindow",
+            "win_curs",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_putstr",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/hero-equipment.js",
+      "helpers": [
+        "weaponWindow"
+      ],
+      "calls": [
+        {
+          "line": 48,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 49,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 50,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 51,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/hero-equipment.js",
+          "line": 46,
+          "helper": "weaponWindow",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_end_menu",
+            "win_start_menu"
+          ]
+        },
+        {
+          "file": "js/nethack/hero-equipment.js",
+          "line": 46,
+          "helper": "weaponWindow",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_end_menu",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/insight.js",
+      "helpers": [
+        "windowCall"
+      ],
+      "calls": [
+        {
+          "line": 28,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 28,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 28,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 28,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 28,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 28,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 28,
+          "names": [
+            "win_putmixed"
+          ]
+        },
+        {
+          "line": 28,
+          "names": [
+            "win_raw_print"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/insight.js",
+          "line": 14,
+          "helper": "windowCall",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_putmixed",
+            "win_putstr",
+            "win_raw_print",
+            "win_start_menu"
+          ]
+        },
+        {
+          "file": "js/nethack/insight.js",
+          "line": 28,
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_putmixed",
+            "win_putstr",
+            "win_raw_print",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/light.js",
+      "helpers": [
+        "windowCall"
+      ],
+      "calls": [
+        {
+          "line": 28,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 29,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 30,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 31,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/light.js",
+          "line": 26,
+          "helper": "windowCall",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_putstr"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/mail.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 33,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 34,
+          "names": [
+            "win_delay_output"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/mail.js",
+          "line": 30,
+          "helper": "window",
+          "names": [
+            "win_delay_output",
+            "win_display_nhwindow"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/messages.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 64,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 65,
+          "names": [
+            "win_raw_print"
+          ]
+        },
+        {
+          "line": 66,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/messages.js",
+          "line": 59,
+          "helper": "window",
+          "names": [
+            "win_display_nhwindow",
+            "win_putstr",
+            "win_raw_print"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/quest-pager.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 54,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 55,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 56,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 57,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 58,
+          "names": [
+            "win_putmsghistory"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/quest-pager.js",
+          "line": 49,
+          "helper": "window",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_putmsghistory",
+            "win_putstr"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/restore-lifecycle.js",
+      "helpers": [
+        "windowCall"
+      ],
+      "calls": [
+        {
+          "line": 46,
+          "names": [
+            "win_cliparound"
+          ]
+        },
+        {
+          "line": 46,
+          "names": [
+            "win_clear_nhwindow"
+          ]
+        },
+        {
+          "line": 46,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 46,
+          "names": [
+            "win_wait_synch"
+          ]
+        },
+        {
+          "line": 46,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 46,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 46,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 46,
+          "names": [
+            "win_select_menu"
+          ]
+        },
+        {
+          "line": 46,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 46,
+          "names": [
+            "win_add_menu"
+          ]
+        },
+        {
+          "line": 46,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 46,
+          "names": [
+            "win_putmsghistory"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/restore-lifecycle.js",
+          "line": 26,
+          "helper": "windowCall",
+          "names": [
+            "win_add_menu",
+            "win_clear_nhwindow",
+            "win_cliparound",
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_putmsghistory",
+            "win_putstr",
+            "win_select_menu",
+            "win_start_menu",
+            "win_wait_synch"
+          ]
+        },
+        {
+          "file": "js/nethack/restore-lifecycle.js",
+          "line": 28,
+          "helper": "windowCall",
+          "names": [
+            "win_add_menu",
+            "win_clear_nhwindow",
+            "win_cliparound",
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_putmsghistory",
+            "win_putstr",
+            "win_select_menu",
+            "win_start_menu",
+            "win_wait_synch"
+          ]
+        },
+        {
+          "file": "js/nethack/restore-lifecycle.js",
+          "line": 46,
+          "names": [
+            "win_add_menu",
+            "win_clear_nhwindow",
+            "win_cliparound",
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_putmsghistory",
+            "win_putstr",
+            "win_select_menu",
+            "win_start_menu",
+            "win_wait_synch"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/save-lifecycle.js",
+      "helpers": [
+        "windowCall"
+      ],
+      "calls": [
+        {
+          "line": 39,
+          "names": [
+            "win_clear_nhwindow"
+          ]
+        },
+        {
+          "line": 40,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 41,
+          "names": [
+            "win_exit_nhwindows"
+          ]
+        },
+        {
+          "line": 42,
+          "names": [
+            "win_mark_synch"
+          ]
+        },
+        {
+          "line": 42,
+          "names": [
+            "win_getmsghistory"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/save-lifecycle.js",
+          "line": 26,
+          "helper": "windowCall",
+          "names": [
+            "win_clear_nhwindow",
+            "win_display_nhwindow",
+            "win_exit_nhwindows",
+            "win_getmsghistory",
+            "win_mark_synch"
+          ]
+        },
+        {
+          "file": "js/nethack/save-lifecycle.js",
+          "line": 29,
+          "helper": "windowCall",
+          "names": [
+            "win_clear_nhwindow",
+            "win_display_nhwindow",
+            "win_exit_nhwindows",
+            "win_getmsghistory",
+            "win_mark_synch"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/special-interactions.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 109,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 109,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 109,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 109,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 130,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 131,
+          "names": [
+            "win_end_menu"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/special-interactions.js",
+          "line": 83,
+          "helper": "window",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_putstr",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/spell.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 33,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 33,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 33,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 33,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 33,
+          "names": [
+            "win_clear_nhwindow"
+          ]
+        },
+        {
+          "line": 33,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 33,
+          "names": [
+            "win_delay_output"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/spell.js",
+          "line": 32,
+          "helper": "window",
+          "names": [
+            "win_clear_nhwindow",
+            "win_create_nhwindow",
+            "win_delay_output",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/status.js",
+      "helpers": [],
+      "calls": [
+        {
+          "line": 32,
+          "names": [
+            "win_status_init"
+          ]
+        },
+        {
+          "line": 32,
+          "names": [
+            "win_status_finish"
+          ]
+        },
+        {
+          "line": 32,
+          "names": [
+            "win_status_enablefield"
+          ]
+        },
+        {
+          "line": 32,
+          "names": [
+            "win_status_update"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/status.js",
+          "line": 32,
+          "names": [
+            "win_status_enablefield",
+            "win_status_finish",
+            "win_status_init",
+            "win_status_update"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/symbols.js",
+      "helpers": [
+        "windowCall"
+      ],
+      "calls": [
+        {
+          "line": 18,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 18,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 18,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 18,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 18,
+          "names": [
+            "win_preference_update"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/symbols.js",
+          "line": 15,
+          "helper": "windowCall",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_end_menu",
+            "win_preference_update",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/teleport.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 41,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 41,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 41,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 41,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 41,
+          "names": [
+            "win_end_menu"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/teleport.js",
+          "line": 40,
+          "helper": "window",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/terminal-messages.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 48,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 49,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 50,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 51,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/terminal-messages.js",
+          "line": 43,
+          "helper": "window",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_putstr"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/timeout-transport.js",
+      "helpers": [
+        "windowCall"
+      ],
+      "calls": [
+        {
+          "line": 35,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 35,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 35,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 35,
+          "names": [
+            "win_putstr"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/timeout-transport.js",
+          "line": 15,
+          "helper": "windowCall",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_putstr"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/topten.js",
+      "helpers": [
+        "windowCall"
+      ],
+      "calls": [
+        {
+          "line": 25,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 25,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 25,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 25,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 25,
+          "names": [
+            "win_raw_print"
+          ]
+        },
+        {
+          "line": 25,
+          "names": [
+            "win_raw_print_bold"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/topten.js",
+          "line": 15,
+          "helper": "windowCall",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_putstr",
+            "win_raw_print",
+            "win_raw_print_bold"
+          ]
+        },
+        {
+          "file": "js/nethack/topten.js",
+          "line": 25,
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_putstr",
+            "win_raw_print",
+            "win_raw_print_bold"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/turn-loop.js",
+      "helpers": [],
+      "calls": [
+        {
+          "line": 93,
+          "names": [
+            "win_cliparound"
+          ]
+        },
+        {
+          "line": 93,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 93,
+          "names": [
+            "win_display_file"
+          ]
+        },
+        {
+          "line": 93,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 93,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 93,
+          "names": [
+            "win_get_nh_event"
+          ]
+        },
+        {
+          "line": 93,
+          "names": [
+            "win_start_menu"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/turn-loop.js",
+          "line": 93,
+          "names": [
+            "win_cliparound",
+            "win_create_nhwindow",
+            "win_display_file",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_get_nh_event",
+            "win_start_menu"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/uhitm.js",
+      "helpers": [
+        "window"
+      ],
+      "calls": [
+        {
+          "line": 27,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 27,
+          "names": [
+            "win_delay_output"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/uhitm.js",
+          "line": 21,
+          "helper": "window",
+          "names": [
+            "win_delay_output",
+            "win_display_nhwindow"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/unix-terminal.js",
+      "helpers": [
+        "windowMacro"
+      ],
+      "calls": [
+        {
+          "line": 50,
+          "names": [
+            "win_raw_print"
+          ]
+        },
+        {
+          "line": 54,
+          "names": [
+            "win_exit_nhwindows"
+          ]
+        },
+        {
+          "line": 62,
+          "names": [
+            "win_suspend_nhwindows"
+          ]
+        },
+        {
+          "line": 63,
+          "names": [
+            "win_resume_nhwindows"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/unix-terminal.js",
+          "line": 44,
+          "helper": "windowMacro",
+          "names": [
+            "win_exit_nhwindows",
+            "win_resume_nhwindows",
+            "win_suspend_nhwindows"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/version-info.js",
+      "helpers": [
+        "windowCall"
+      ],
+      "calls": [
+        {
+          "line": 27,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 28,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 29,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 30,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 31,
+          "names": [
+            "win_wait_synch"
+          ]
+        },
+        {
+          "line": 32,
+          "names": [
+            "win_raw_print"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/version-info.js",
+          "line": 25,
+          "helper": "windowCall",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_putstr",
+            "win_wait_synch"
+          ]
+        },
+        {
+          "file": "js/nethack/version-info.js",
+          "line": 25,
+          "helper": "windowCall",
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_putstr",
+            "win_wait_synch"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/window-system.js",
+      "helpers": [],
+      "calls": [
+        {
+          "line": 60,
+          "names": [
+            "win_init_nhwindows"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_player_selection"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_askname"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_get_nh_event"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_exit_nhwindows"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_suspend_nhwindows"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_resume_nhwindows"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_clear_nhwindow"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_curs"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_putmixed"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_display_file"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_add_menu"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_end_menu"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_select_menu"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_message_menu"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_mark_synch"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_wait_synch"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_cliparound"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_print_glyph"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_raw_print"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_raw_print_bold"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_nhgetch"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_nh_poskey"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_nhbell"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_doprev_message"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_yn_function"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_getlin"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_get_ext_cmd"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_number_pad"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_delay_output"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_outrip"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_preference_update"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_getmsghistory"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_putmsghistory"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_status_init"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_status_finish"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_status_enablefield"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_status_update"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_can_suspend"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_update_inventory"
+          ]
+        },
+        {
+          "line": 60,
+          "names": [
+            "win_ctrl_nhwindow"
+          ]
+        },
+        {
+          "line": 66,
+          "names": [
+            "win_delay_output"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/window-system.js",
+          "line": 60,
+          "names": [
+            "win_add_menu",
+            "win_askname",
+            "win_can_suspend",
+            "win_clear_nhwindow",
+            "win_cliparound",
+            "win_create_nhwindow",
+            "win_ctrl_nhwindow",
+            "win_curs",
+            "win_delay_output",
+            "win_destroy_nhwindow",
+            "win_display_file",
+            "win_display_nhwindow",
+            "win_doprev_message",
+            "win_end_menu",
+            "win_exit_nhwindows",
+            "win_get_ext_cmd",
+            "win_get_nh_event",
+            "win_getlin",
+            "win_getmsghistory",
+            "win_init_nhwindows",
+            "win_mark_synch",
+            "win_message_menu",
+            "win_nh_poskey",
+            "win_nhbell",
+            "win_nhgetch",
+            "win_number_pad",
+            "win_outrip",
+            "win_player_selection",
+            "win_preference_update",
+            "win_print_glyph",
+            "win_putmixed",
+            "win_putmsghistory",
+            "win_putstr",
+            "win_raw_print",
+            "win_raw_print_bold",
+            "win_resume_nhwindows",
+            "win_select_menu",
+            "win_start_menu",
+            "win_status_enablefield",
+            "win_status_finish",
+            "win_status_init",
+            "win_status_update",
+            "win_suspend_nhwindows",
+            "win_update_inventory",
+            "win_wait_synch",
+            "win_yn_function"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "js/nethack/wizcmds.js",
+      "helpers": [],
+      "calls": [
+        {
+          "line": 27,
+          "names": [
+            "win_create_nhwindow"
+          ]
+        },
+        {
+          "line": 27,
+          "names": [
+            "win_putstr"
+          ]
+        },
+        {
+          "line": 27,
+          "names": [
+            "win_display_nhwindow"
+          ]
+        },
+        {
+          "line": 27,
+          "names": [
+            "win_destroy_nhwindow"
+          ]
+        },
+        {
+          "line": 27,
+          "names": [
+            "win_start_menu"
+          ]
+        },
+        {
+          "line": 27,
+          "names": [
+            "win_end_menu"
+          ]
+        }
+      ],
+      "coverage": [
+        {
+          "file": "js/nethack/wizcmds.js",
+          "line": 27,
+          "names": [
+            "win_create_nhwindow",
+            "win_destroy_nhwindow",
+            "win_display_nhwindow",
+            "win_end_menu",
+            "win_putstr",
+            "win_start_menu"
+          ]
+        }
+      ]
+    }
+  ],
+  "dispatches": [
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_delay_output",
+      "signature": "v"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_clear_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_wait_synch",
+      "signature": "v"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_getlin",
+      "signature": "vpp"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_clear_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_exit_nhwindows",
+      "signature": "vp"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_raw_print",
+      "signature": "vp"
+    },
+    {
+      "name": "win_mark_synch",
+      "signature": "v"
+    },
+    {
+      "name": "win_wait_synch",
+      "signature": "v"
+    },
+    {
+      "name": "win_outrip",
+      "signature": "viij"
+    },
+    {
+      "name": "win_getlin",
+      "signature": "vpp"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_askname",
+      "signature": "v"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_clear_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_curs",
+      "signature": "viii"
+    },
+    {
+      "name": "win_cliparound",
+      "signature": "vii"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_putmixed",
+      "signature": "viip"
+    },
+    {
+      "name": "win_raw_print",
+      "signature": "vp"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_delay_output",
+      "signature": "v"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_raw_print",
+      "signature": "vp"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_putmsghistory",
+      "signature": "vpi"
+    },
+    {
+      "name": "win_cliparound",
+      "signature": "vii"
+    },
+    {
+      "name": "win_clear_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_wait_synch",
+      "signature": "v"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_select_menu",
+      "signature": "iiip"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_add_menu",
+      "signature": "vippiiiipi"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_putmsghistory",
+      "signature": "vpi"
+    },
+    {
+      "name": "win_clear_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_exit_nhwindows",
+      "signature": "vp"
+    },
+    {
+      "name": "win_mark_synch",
+      "signature": "v"
+    },
+    {
+      "name": "win_getmsghistory",
+      "signature": "pi"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_clear_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_delay_output",
+      "signature": "v"
+    },
+    {
+      "name": "win_status_init",
+      "signature": "v"
+    },
+    {
+      "name": "win_status_finish",
+      "signature": "v"
+    },
+    {
+      "name": "win_status_enablefield",
+      "signature": "vippi"
+    },
+    {
+      "name": "win_status_update",
+      "signature": "vipiiip"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_preference_update",
+      "signature": "vp"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_raw_print",
+      "signature": "vp"
+    },
+    {
+      "name": "win_raw_print_bold",
+      "signature": "vp"
+    },
+    {
+      "name": "win_cliparound",
+      "signature": "vii"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_display_file",
+      "signature": "vpi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_get_nh_event",
+      "signature": "v"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_delay_output",
+      "signature": "v"
+    },
+    {
+      "name": "win_raw_print",
+      "signature": "vp"
+    },
+    {
+      "name": "win_exit_nhwindows",
+      "signature": "vp"
+    },
+    {
+      "name": "win_suspend_nhwindows",
+      "signature": "vp"
+    },
+    {
+      "name": "win_resume_nhwindows",
+      "signature": "v"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_wait_synch",
+      "signature": "v"
+    },
+    {
+      "name": "win_raw_print",
+      "signature": "vp"
+    },
+    {
+      "name": "win_init_nhwindows",
+      "signature": "vpp"
+    },
+    {
+      "name": "win_player_selection",
+      "signature": "v"
+    },
+    {
+      "name": "win_askname",
+      "signature": "v"
+    },
+    {
+      "name": "win_get_nh_event",
+      "signature": "v"
+    },
+    {
+      "name": "win_exit_nhwindows",
+      "signature": "vp"
+    },
+    {
+      "name": "win_suspend_nhwindows",
+      "signature": "vp"
+    },
+    {
+      "name": "win_resume_nhwindows",
+      "signature": "v"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_clear_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_curs",
+      "signature": "viii"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_putmixed",
+      "signature": "viip"
+    },
+    {
+      "name": "win_display_file",
+      "signature": "vpi"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_add_menu",
+      "signature": "vippiiiipi"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    },
+    {
+      "name": "win_select_menu",
+      "signature": "iiip"
+    },
+    {
+      "name": "win_message_menu",
+      "signature": "iiip"
+    },
+    {
+      "name": "win_mark_synch",
+      "signature": "v"
+    },
+    {
+      "name": "win_wait_synch",
+      "signature": "v"
+    },
+    {
+      "name": "win_cliparound",
+      "signature": "vii"
+    },
+    {
+      "name": "win_print_glyph",
+      "signature": "viiipp"
+    },
+    {
+      "name": "win_raw_print",
+      "signature": "vp"
+    },
+    {
+      "name": "win_raw_print_bold",
+      "signature": "vp"
+    },
+    {
+      "name": "win_nhgetch",
+      "signature": "i"
+    },
+    {
+      "name": "win_nh_poskey",
+      "signature": "ippp"
+    },
+    {
+      "name": "win_nhbell",
+      "signature": "v"
+    },
+    {
+      "name": "win_doprev_message",
+      "signature": "i"
+    },
+    {
+      "name": "win_yn_function",
+      "signature": "ippi"
+    },
+    {
+      "name": "win_getlin",
+      "signature": "vpp"
+    },
+    {
+      "name": "win_get_ext_cmd",
+      "signature": "i"
+    },
+    {
+      "name": "win_number_pad",
+      "signature": "vi"
+    },
+    {
+      "name": "win_delay_output",
+      "signature": "v"
+    },
+    {
+      "name": "win_outrip",
+      "signature": "viij"
+    },
+    {
+      "name": "win_preference_update",
+      "signature": "vp"
+    },
+    {
+      "name": "win_getmsghistory",
+      "signature": "pi"
+    },
+    {
+      "name": "win_putmsghistory",
+      "signature": "vpi"
+    },
+    {
+      "name": "win_status_init",
+      "signature": "v"
+    },
+    {
+      "name": "win_status_finish",
+      "signature": "v"
+    },
+    {
+      "name": "win_status_enablefield",
+      "signature": "vippi"
+    },
+    {
+      "name": "win_status_update",
+      "signature": "vipiiip"
+    },
+    {
+      "name": "win_can_suspend",
+      "signature": "i"
+    },
+    {
+      "name": "win_update_inventory",
+      "signature": "vi"
+    },
+    {
+      "name": "win_ctrl_nhwindow",
+      "signature": "piip"
+    },
+    {
+      "name": "win_delay_output",
+      "signature": "v"
+    },
+    {
+      "name": "win_create_nhwindow",
+      "signature": "ii"
+    },
+    {
+      "name": "win_putstr",
+      "signature": "viip"
+    },
+    {
+      "name": "win_display_nhwindow",
+      "signature": "vii"
+    },
+    {
+      "name": "win_destroy_nhwindow",
+      "signature": "vi"
+    },
+    {
+      "name": "win_start_menu",
+      "signature": "vij"
+    },
+    {
+      "name": "win_end_menu",
+      "signature": "vip"
+    }
+  ],
+  "liveCalls": 34,
+  "scope": "Finite callback names and signatures for all currently discovered dynamic window lookup sites. Extracted production dispatcher execution with checked table, plus actual installed SAVE/RESTORE owner calls. Not exhaustive game-policy branch coverage.",
+  "summary": {
+    "originalDynamicSites": 40,
+    "currentDynamicSites": 42,
+    "validatedSites": 42,
+    "modules": 33,
+    "dispatcherCases": 216,
+    "uniqueCallbackNames": 46,
+    "liveLifecycleCalls": 34,
+    "unresolved": 0
+  },
+  "sourceSha256": {
+    "js/nethack/apply-abi.json": "1edd43ab1c6ac6b73da64296648fb42ec2d7f01270eb132adb0661f134ccadbf",
+    "js/nethack/apply.js": "1c2081168ab1a9ac9109f5de1cc3d57a121a2ea87cd018a0e0ae591a4b854245",
+    "js/nethack/armor-abi.json": "5cddca218076a82e34888e81df5baa735656b7155141328532cf074907d860d2",
+    "js/nethack/artifact-abi.json": "8dc03d587fed0a0eaffe8d3825b16617f10d690a127cede05125850f5d73e7af",
+    "js/nethack/artifact.js": "0f0daacbeb1d80192a12fa8c4d04daf0df81b7f8adaeabfaefffe2f82a718080",
+    "js/nethack/color-attributes-abi.json": "add358964cb800bcbfacdf2687b889e3a2abd933f9cbf31f00915b7dbb41a8c0",
+    "js/nethack/color-attributes.js": "8077e56e22b5e5ec6f58cfcb7fa0785c2ee28b12bdb0d7bea56ab5e9a833f152",
+    "js/nethack/descriptions-abi.json": "743c1f7d652b2fdfa52cdb8446582be6ee513d730392f6ca914979aa53aa7f7c",
+    "js/nethack/dig-abi.json": "fb52fa8cb58100ad269da4e9ce796f40bfcaeee7a669090e8a9f1685a116e714",
+    "js/nethack/dig.js": "86c7dc535a2a9039dea3220209b7691ab95e955a91e329bed03fc1c9e84b834c",
+    "js/nethack/discoveries-abi.json": "17e58e417bf9efbbab41cfa61c30441401d97e5a2566c260800b49c3a1bfddde",
+    "js/nethack/discoveries.js": "d2a2346a9cec1d9d4b3edee027be91083e7ec7b8f65e9049edbf267afe83c1a2",
+    "js/nethack/do-name-abi.json": "2b64bc22d77bc28b8a2bd0dba839959bf6563432a12aee40dc9273fb9ca52048",
+    "js/nethack/do-name.js": "4a281514f0b181cc022c9647d4c660e2db97db5681a4c470a88c07a3befbaa6f",
+    "js/nethack/end-lifecycle-abi.json": "09fe8deeb41b0cb7c3e33f85177a29a25aeef69498ad51cb845f9ecd06191293",
+    "js/nethack/end-lifecycle.js": "4dd769f18c095a6f35dc3be7aa83f5ec52335482323482c70c198bc9d532579a",
+    "js/nethack/engrave-abi.json": "edd639ec4b51abbb956650cb493ffe32b2365dbf5eb9a9180d777a3fae249ac9",
+    "js/nethack/engrave.js": "e244bbbf71c0a50758c40caa50c836fb55f8b92f3d8b9d487a756fe4428431b2",
+    "js/nethack/equipment-abi.json": "8b8885342f22f69bbcd9dfda5d8b2e5ab4c8e6dd7f68ce0ccd8bdcfa41ae587a",
+    "js/nethack/game-startup.js": "8e5da46a983d06a2298136aa8aa535dbc14fae2be87e6a2a8e38905ea9c48d97",
+    "js/nethack/game-windows.js": "82dac707906d10fd5f2058d0895ff38b97326f1196ce8d3b377f764cb307ed92",
+    "js/nethack/getpos-abi.json": "a577226b635fa15a7bcf4e17d215c5014f3aa58584db21952fe19a415c228055",
+    "js/nethack/getpos.js": "db77c06c5040f786bb94be37af716edc99a95949516c224094a19b50034937ba",
+    "js/nethack/hero-equipment.js": "7b861f45a62e2864d1afcb33294d7877e49c955c010109dcb63fb321b9a95b58",
+    "js/nethack/insight-abi.json": "d1e7df7994303e15ac10bd3b08c1b4332d825e369b8eac1fa25167bd082527df",
+    "js/nethack/insight.js": "675d7337f7347730c3cc98258b763cfbc263d702d81e5f6921abc2fdebf22218",
+    "js/nethack/light-abi.json": "011cf56d996196b501f752f9b939d67b6f01058dd54c9066f8241c05d9d037eb",
+    "js/nethack/light.js": "2d28fda29b52935d146eb09fe5d566f9cd482b3e0b1bfcfa73ba36ab433af18c",
+    "js/nethack/mail-abi.json": "bb255c8a2246272c1c3ef34d405d7cbf71822600938e9c768aa99b5efd6b543e",
+    "js/nethack/mail.js": "c9643196f368709224d6ee09fbdf365087830bf883f8009848ad48ddc81a3da5",
+    "js/nethack/messages-abi.json": "71a2d1977ed00a2c74a7f4780c714091c6aafc87955a50defeed92c25af3fa2e",
+    "js/nethack/messages.js": "e42a59343cf94dc332f0aa111d09729529c367937a19c26de14d9e0eb2c0ebf3",
+    "js/nethack/persistence-transport-abi.json": "9f3feb12c2149288e38783c72a6db9b955c3a0bf5a3921f2d781852b5eed7891",
+    "js/nethack/public-functions.json": "75774661072653bbd6c90bce1e837fac87a998b5e9139f6f5012878057779e12",
+    "js/nethack/quest-pager-abi.json": "19b0e6d77a5aba99de3d46add81fca59366d6d2b7a6789b4b45dce5b9f8ec13b",
+    "js/nethack/quest-pager.js": "15c51967edad89e1d90cc89b93f1e83b8413f399f4defda5b77002827f3587c2",
+    "js/nethack/records.json": "7b7ddc59f45ea73a8077a3ad96f5bc89cdc70920d136b1e64c706f94efaa3c9d",
+    "js/nethack/restore-lifecycle-abi.json": "72695a3c1697b995214e83ccee6a3fc8dc4db93af3505645ca8d1181f1aeb951",
+    "js/nethack/restore-lifecycle.js": "d4f39cfe70687ab3555d3e91fb25ec00757ab5ebce443b32101971287271ad4e",
+    "js/nethack/role-transport-abi.json": "48287e532e8d05c22984b1d4d9c3bfeb073031f4b07eaf38ad7a3efb91fd45de",
+    "js/nethack/save-lifecycle-abi.json": "3ef4a697753008722b056fa93c5a245ace141b8cbcaa237664d2fe1bdf44583f",
+    "js/nethack/save-lifecycle.js": "92664b09f5648df3e0895c591db3aaf2b0d4bdffc85da33fb64e09cd41ffe380",
+    "js/nethack/special-interactions-abi.json": "29ac1f9dd8f92e417b6576246c9c3e078a07b4cee1f1a9287bbb028715ea7aea",
+    "js/nethack/special-interactions.js": "59ab4e0adf36af4c0881a2faed8f4a3f4e1e931187c3b3162725b6be678e8f51",
+    "js/nethack/spell-abi.json": "45b65ecebc43e5a4b3a78aef34042e3509f34575033c681cf62e5a89a09e59db",
+    "js/nethack/spell.js": "081bbd33420bd9a027d42e70e62bad838c4b0850257fd8c2635c9fbd4c88ff2e",
+    "js/nethack/status-abi.json": "0cf65b92c7b0f45db4791d9c3819bf08932879d575a0ddc6c0131c7b5cdc3502",
+    "js/nethack/status.js": "93fa297bbbeb794be4626511d2b890db6138dd7eb3a77c2c49c86be1195ac59d",
+    "js/nethack/symbols.js": "1008361940fbfbbf40933c3f6b16ed0fa1681d946f337859e9e140cd27501cb3",
+    "js/nethack/teleport-abi.json": "91f8c3bf483a0592236f5f3b276bd98f82045b1237ddc3e59b65f9988b22f50d",
+    "js/nethack/teleport.js": "10b17353f773bd04998fc210d1cfe85aefebda525e38f8c3d2e0c8cab6141c4c",
+    "js/nethack/terminal-messages-abi.json": "bd1260aae31bcbf8bf1d19c170299896f814142598bc4df45f79ff70c56080fc",
+    "js/nethack/terminal-messages.js": "c37aa1281761667db3226891f5ed9d64611d5db4be2b2b772efb8cbce5f9e0e0",
+    "js/nethack/timeout-abi.json": "5138fee3c4400e4d66200cadf1ae642c08bbf863633fe2c334034ab162946afd",
+    "js/nethack/timeout-transport.js": "e4fb246508d333d3827f11c2d647ae7d90b6c347ccfdc33d7115ad572c631585",
+    "js/nethack/topten-abi.json": "87028dad0992bff47196c79a360b50db49a9fb0c01d750ffec7edd3acce2596d",
+    "js/nethack/topten.js": "84fae7a86b691f844534125f85fab0363b8a3b1d10bfc169f049589c6562c740",
+    "js/nethack/turn-loop-abi.json": "e8b9bae1a71b69ac340cc53f30bbd269e37c4fcb4a104d10704cd9c3dc78527d",
+    "js/nethack/turn-loop.js": "2dab8a614c40c18e6980f9f23fd032572715d7f910c23507d113c747b766ed1d",
+    "js/nethack/uhitm-abi.json": "de85a45b9c32d07cbb83c2b7f21a8ad819e2f7fc7dcc5ba2af8834e7e7919cb5",
+    "js/nethack/uhitm.js": "d22d2c3c6d09c13a281bd4908156a5e9ad214974810902dd75becb09514f5aa0",
+    "js/nethack/unix-platform-abi.json": "51c0339bc2ae1e6f6a2bdb3e1ecb38d0a2786f46ff25fd615a4dda88c5703d19",
+    "js/nethack/unix-terminal.js": "38e0bdb8b20e0ccbae494fc1de7fa45b4dc45642813c3ec899daaedbb0374eea",
+    "js/nethack/version-info.js": "4f3e792ffa784b8f5cc9c528cd28251d1ee34326fdbbe27a99629070495f1835",
+    "js/nethack/window-abi.json": "73a01911a9f4ec1ce9d3fedece264e4cc3b2c8714391a0f2c63a55e890aa82cb",
+    "js/nethack/window-system.js": "93ffa8a188c7526e8b71f4831d8c487aa0fd1e0de602c7e4051c2e3d0cae6b38",
+    "js/nethack/wizcmds-abi.json": "a7258a57c1c4bd8c8d3262b374b8a47f9bf86f7c549979eb6962f8a67eaafd6d",
+    "js/nethack/wizcmds.js": "5ea1dd2d0f36fda99288a34134d67a90f2a7690fccf7b2118c04fa72c0fc3a66",
+    "js/nethack/worn-text-abi.json": "eff367699a643f84f2b7fedb4b616d076d1a9320fbc270acf9d8e067edbd58de",
+    "js/platform/darwin/terminal-abi.json": "660f6d0949661295d56077bd0c99ed53336f077c50eb7258dd09bae20476302e",
+    "package-lock.json": "bdbe835c5801f0324043d7840f6625fbf04ca40b5f292f6ee11ece3f59aeaa4d",
+    "package.json": "154689705014c6ebcac3af1336d0f7f4452071ec02de8227684674b284fbe310",
+    "scripts/branch-coverage/instrument.mjs": "2a3076b64730b282fe8ff214da574595b6bedaaf85b133e692c9e2eae3963528",
+    "scripts/check-engine-callbacks.mjs": "00d1cad6b73317ff611eca321cdb799bcb57651a4346f3d38d63642f43ff45e1",
+    "scripts/test-dynamic-window-callbacks.mjs": "aaf9712f7a947501a3dce23c0d8436e8d78e7d20b0f90226c597adf1ead75d7f"
+  },
+  "public44": {
+    "passed": 44,
+    "total": 44,
+    "integrity": {
+      "filesChecked": 780,
+      "changed": [],
+      "exitCode": 0,
+      "wallSeconds": 364.6513137090951,
+      "sessionSelectionMatched": true,
+      "childUserSeconds": 540.073994,
+      "childSystemSeconds": 9.981987
+    },
+    "metrics": {
+      "rngCalls": {
+        "matched": 792838,
+        "total": 792838
+      },
+      "screens": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "cursors": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "animFrames": {
+        "matched": 1483,
+        "total": 1483
+      }
+    },
+    "rawSha256": {
+      "pre-run-manifest.json": "4033d24b8c6928859cd95d0e702baa56ef80ef88ea99e29b9164d139c8a8f6ca",
+      "post-run-integrity.json": "8de37bcee9638b826efc7e5710d6badc89cd3c3ce51b06289e4ed91be64ce3a1",
+      "results.stdout.log": "3bd90be75293df6203af5fe7f6e1553be0b3bfc44b7da67df37839a40361628b",
+      "results.stderr.log": "035969cfbdfce9309a09976d349c945c8cb9486a749f4de48fb90a2c264541bd"
+    }
+  }
+}
