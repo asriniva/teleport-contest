@@ -1,3 +1,95 @@
+## Connected native spatial queries and ordinary-turn acceptance (candidate, 2026-11-13)
+
+`native/spatial-state.js` connects coordinate/distance arithmetic, terrain queries,
+trap lookup, engraving lookup and visible-region lookup to one game owner. Its
+plain map grid contains the existing canonical native cell identities; hero
+movement and vision read this grid directly. Native occupancy rows read/write
+stable actor handles in the same typed store, preserving aliases to retained
+byte-oriented providers. This is not yet an independent serialized JS world:
+the typed store still aliases the C-compatible byte layout.
+
+`generate-native-spatial.mjs` copies 19 original function bodies into per-game
+closures in `native/spatial-policy.js`. Direct sibling calls, iteration order
+and scalar narrowing remain explicit. Trap lookup traverses the same ordered
+list using canonical native records. Public coordinate parameters retain signed
+16-bit narrowing; private region helpers are not incorrectly published as
+address-taking native entries. Region/rectangle projections retain pointer and
+count changes and ordered first-match behavior. Native engraving lookup remains
+published when the later full engraving owner connects its other policies.
+
+`environment.js`, `world-position.js`, `level-startup.js` and `level-contents.js`
+register these native entries as actual gameplay defaults. A per-function
+`nativePrepared` marker in the common linker lets explicitly self-normalizing
+native entries bypass a mixed module's generic preparation; sibling legacy
+entries retain the original argument preparation and C environment. Contract
+checks exercise both paths. Original sources, RNG algorithms/call sites, frozen
+recordings, save encodings and asset data are unchanged.
+
+`test-native-spatial.mjs` passes 34,834 comparisons against the complete original
+C executable, including signed coordinate/metric boundaries, all tested terrain
+kinds and drawbridge masks, Juiblex-level behavior, ordered duplicate trap and
+engraving coordinates, strict/substr engraving text, headstones/future engraving
+times, overlapping visible regions, caller context and memory growth. Source AST
+checks verify all 19 copied bodies. Live-main connected identity checks pass.
+
+`check-native-ordinary-turns.mjs` adds a deliberately strict architectural gate:
+real main input `  nl.Fyy ` walks, waits and attacks, finishes pending output, and
+compares complete RNG logs/states, raw tty and normalized frames against C.
+Test-only loader hooks count generic dispatch, C scope entry, state boundaries,
+C malloc and this runtime's malloc-backed C stack. `--report` records counts;
+the default gate fails until walk/wait/attack have zero generic dispatch, C scope
+entry and C heap allocation. It currently fails that target. In this initial-turn
+sequence, generic calls fell from 260/863/1,649 to 94/235/532; C scope entries are
+175/437/989 and C allocations are 54/212/183 (including stack allocations). These
+are operation counts, not CPU profiles or speedup estimates. Cold initialization,
+formatting and retained adapters still allocate. No zero-bridge or 20x claim is
+made. The current spatial+glyph image passes 44/44 strict public recordings: 792,838
+RNG entries, 11,405 screens/cursors and 1,483 animation frames match; all 784
+inputs are unchanged. Node 22.23.5, timeout disabled, 316.769s wall time. Earlier
+metadata-only and glyph-only runs were 364.651s and 347.450s respectively; these
+separate single runs are descriptive, not a controlled 20x claim. See
+`docs/runtime-environment/native-spatial-validation.json` and its source manifest.
+
+## Native per-game glyph state and direct execution (candidate, 2026-11-13)
+
+After 9e27711, the GLYPHS adapter selects a lazy per-game/provider native context
+instead of reconstructing the bridge on every call. A generated closure retains
+source policy and lowers local calls directly. Private find/cache records keep
+stable identities and typed fields; real glyph maps, Unicode entries, details,
+objects and monsters use the complete native record owner. Private source
+statics and callback-pointer conversion remain explicit. Published game glyph
+entries use direct native dispatch with first-call module startup. The existing
+component adapter remains available. No RNG algorithm/sites/order, game policy,
+C reference, save format, assets or frozen recordings are changed. Source,
+independent native C matrix, callback/reentry/growth, gameplay, strict recording
+and timing evidence are reported below. The first integration check found missing
+private enum metadata in the general record model. Native symbol parse/set/
+customization records now use the separately measured glyph ABI integer layouts;
+glyph maps, Unicode, details and actors still use the complete native owner.
+Replacing/freeing a private cache drops its view lookup cache while retained
+views continue to read their original bytes. The native C matrix then exposed
+callback identity splitting when one module received distinct service objects.
+The native context is now keyed by module ownership; invocation binds/restores
+its provider, including reentry, while the private callback namespace stays
+stable. Native views read the game arena and retain their storage identity.
+Configured glyph header expressions dispatch directly in the native context;
+the legacy component bridge retains service-header dispatch. Foreign callbacks
+retain explicit state/C-context boundaries, while the native private callback
+uses its stable closure. Game initialization returns the existing glyph owner
+on repeated calls. Identity, direct publication and normal/throw cleanup checks
+are added. The optional standalone glyph-cache oracle is unavailable in this
+checkout (`.cache/standalone-glyph-cache-v1/receipt.json` is absent); it is not
+counted as passed. The existing independent configured C glyph matrix validates
+all 27 bodies and full cache/customization behavior, with signed-int cmap
+boundaries added. Direct header wiring is compared to the retained game header
+dispatch. Native source AST checks pass all 27 bodies; the independent original-C glyph
+matrix passes 41,358 comparisons with all 27 bodies invoked. Live-main identity,
+callback, exception cleanup and growth checks pass. The glyph-only public08 image
+passes 44/44 exact recordings with all 782 inputs stable, Node 22.23.5, no replay
+deadline, 347.450s wall time. That image includes the metadata/callback fixes and
+precedes this spatial migration. Its timing is one unprofiled current-image run,
+not a controlled estimate of the glyph contribution; no 20x is established.
+
 ## Exhaustive dynamic window dispatch contracts (2026-11-13)
 
 The original 40 dynamic window lookup locations have been traced through their

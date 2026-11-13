@@ -1,3 +1,6 @@
+import {createNativeGlyphsBridge} from '../js/nethack/native/glyph-state.js';
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+const nativeExecution=process.env.NATIVE_GLYPHS_FIXTURE==='1',nativeServices=new WeakMap();
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // First-pass memory64 C/JS differential; native/game/public remain separate.
@@ -12,7 +15,7 @@ const ref=await factory('reference'),hybrid=await factory('hybrid');
 const text=(m,p)=>{p=Number(p);let q=p;while(m.HEAPU8[q])q++;return Buffer.from(m.HEAPU8.subarray(p,q)).toString('latin1');};
 const layouts=m=>Object.fromEntries(Array.from({length:m._probe_layout_count()},(_,i)=>[text(m,m._probe_layout_name(i)),Number(m._probe_layout_value(i))]));
 let modules,L,bridge,comparisons=0,scenario='initial',invoked=new Set();
-async function pair(){const a=await ref();L=layouts(a);bridge??=createGlyphsBridge(L);const b=await hybrid({nethackPorted:{glyphs:(s,n,...a)=>{invoked.add(n);return bridge(s,n,...a);}}});assert.deepEqual(layouts(b),L);comparisons++;modules=[a,b];reset();}
+async function pair(){const a=await ref();L=layouts(a);bridge??=nativeExecution?createNativeGlyphsBridge(L):createGlyphsBridge(L);const b=await hybrid({nethackPorted:{glyphs:(s,n,...a)=>{invoked.add(n);if(nativeExecution){let local=nativeServices.get(s);if(!local){local=nativeFixtureServices(s,{}).services;nativeServices.set(s,local);}s=local;}return bridge(s,n,...a);}}});assert.deepEqual(layouts(b),L);comparisons++;modules=[a,b];reset();}
 await pair();
 function reset(){modules.forEach(m=>m._probe_reset());}
 function input(s){const data=typeof s==='string'?Buffer.from(s,'latin1'):s;for(const m of modules){const p=Number(m._probe_input());m.HEAPU8.set(data,p);m.HEAPU8[p+data.length]=0;}}
@@ -20,6 +23,7 @@ function compare(){const states=modules.map(m=>({snapshot:text(m,m._probe_snapsh
 function call(n,...a){const stack=modules.map(m=>m._probe_stack());const results=modules.map(m=>m['_probe_'+n](...a));assert.deepEqual(results[1],results[0],scenario+' return');comparisons++;modules.forEach((m,i)=>assert.equal(m._probe_stack(),stack[i],scenario+' stack'));compare();return results[0];}
 const action=(a,x=0,y=0)=>call('call',a,x,y);
 for(let g=-2;g<=L.MAX_GLYPH+2;g++){scenario='cmap '+g;action(0,g);}
+for(const g of [-2147483648,2147483647]){scenario='cmap integer boundary '+g;action(0,g);}
 for(const s of['','ABCxyz','G_invisible','g_InVisible','G_something_that_is_long_enough_to_rotate_hash_more_than_32_bits',Buffer.from([255,128,65,90,32,1])]){scenario='hash '+s;input(s);action(1);action(2);}
 for(const s of['','bad','G_bad','S_bad','G_invisible','G_nothing','G_unexplored','G_warning0','G_warning5','G_stone_substrate','G_male_giant_ant','G_female_giant_ant','G_dark_expl_tl','G_lawful_altar','G_missile_zap_vbeam']){scenario='parse '+s;reset();input(s);call('request',0,0,0);action(21,1);call('request',0,0,0);action(22);}
 for(let i=0;i<modules[0]._probe_loadsyms_count();i++){const s=text(modules[0],modules[0]._probe_loadsyms_name(i));if(!s||!modules[0]._probe_loadsyms_range(i))continue;scenario='symbol '+s;input(s);call('request',0,0,0);action(21,1);}
@@ -43,3 +47,5 @@ for(const value of[2147483647,-2147483648,734193]){scenario='mutable backing wit
 scenario='preserve first Module cache';action(6);const old=modules;await pair();scenario='second Module';assert.equal(action(12),0n);comparisons++;input('G_warning1/red');action(3);action(6);action(7);modules=old;scenario='old Module retains its private cache';assert.equal(action(12),1n);comparisons++;reset();scenario='first Module reused';input('G_warning2/blue');action(3);
 assert.equal(invoked.size,27,'all configured original source bodies called');comparisons++;
 console.log(`GLYPHS: ${comparisons} configured original-C/pure-JS comparisons passed; ${invoked.size}/27 bodies invoked; native/game/public pending.`);
+
+if(nativeExecution)console.log('Native GLYPHS state/execution matrix PASS');

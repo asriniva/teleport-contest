@@ -1,3 +1,4 @@
+import {nativeGeometryFor} from './native/spatial-state.js';
 import {createNativeRngBindings} from './native/rng-bindings.js';
 import {createNativeRecordViews} from './native/record-views.js';
 import {createEnvironmentServices} from '../c-runtime/environment.js';
@@ -175,7 +176,7 @@ export function createStandaloneEnvironment(options={}) {
         // Preserve the port's packet contract; the packet contains JS values,
         // not a native va_list pointer, in this provider.
         env.va_start=ap=>{ap.nativeVaList=ap[0]?.nativeVaList??ap;};
-        register('hacklib',hacklib,env);states.set('hacklib',state);return state;
+        register('hacklib',{...hacklib,...Object.fromEntries(Object.entries(nativeGeometryFor(environment)).filter(([name])=>name!=='isok'))},env);states.set('hacklib',state);return state;
     }
     function enableDecl(layout,{raw_printf}={}) {
         const pointers=declStorage.globals.map(g=>allocateGlobal(g.name,g.bytes));
@@ -278,7 +279,7 @@ export function createStandaloneEnvironment(options={}) {
         for(const key of ['uleft','uright'])Object.defineProperty(env,key,{get(){const pointer=services[key];return pointer?{otyp:ctypes.getField('struct obj',pointer,'otyp','short')}:0;}});
         register('track',track,env,{prepareArgs:(fn,args)=>['gettrack','hastrack'].includes(fn)?args.map(transport.coordxy):args});states.set('track',state);return state;
     }
-    function enableCommandGeometry(){register('cmd-geometry',{isok},Object.assign(Object.create(services),{i16:transport.short,i32:transport.int}));}
+    function enableCommandGeometry(){register('cmd-geometry',{isok:nativeGeometryFor(environment).isok});}
     function enableDependencies() {
         const runtime=createLibraryBindings({regex:true,regexDialect:'sdk'});
         for(const name of ['tgetent','tgetflag','tgetnum','tgetstr','tparm','tgoto','tputs','regcomp','regexec','regerror','regfree','compressFile'])services[name]=(...args)=>runtime[name](services,...args);

@@ -80,4 +80,12 @@ linker.start('retry');assert.equal(linker.status().retry,'ready');
 const result=functions.withJumpScope(scope=>functions.withJumpScope(()=>functions.longjmp(scope,7)));
 assert.equal(result,7);
 assert.throws(()=>functions.exit(4),error=>error instanceof CExit&&error.status===4);
+// A native entry may own normalization inside a mixed legacy/native module.
+let prepared=0;
+const native=x=>x+1;native.nativeDirect=true;native.nativePrepared=true;
+linker.register('mixed-native-preparation',{native,legacy:x=>x+1},services,{prepareArgs:(_name,args)=>{prepared++;return args.map(x=>x+10);}});
+assert.equal(linker.call('mixed-native-preparation','native',2),3);
+assert.equal(prepared,0,'self-prepared native entry bypasses generic argument preparation');
+assert.equal(linker.call('mixed-native-preparation','legacy',2),13);
+assert.equal(prepared,1,'sibling legacy entry retains the existing prepareArgs contract');
 console.log('PASS: shared typed records/aliases/unions of storage, pointers/arrays/bitfields/growth and linker globals/lazy ownership/callbacks/reentry/unwinding/initialization retry.');

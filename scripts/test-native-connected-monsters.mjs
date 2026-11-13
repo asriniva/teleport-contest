@@ -13,6 +13,23 @@ let runtime;
 const result=runStandaloneProgram(reference+'/assets',{...input,keys:input.keys.slice(0,256),observeRuntime:r=>{runtime=r;}});
 assert.deepEqual(result.status,{kind:'input-exhausted'});
 const {environment}=runtime,owner=nativeStateFor(environment);
+const glyphs=environment.enableGlyphs(layouts),glyphContext=glyphs.context;
+assert.ok(environment.enableGlyphs(layouts)===glyphs,'glyph initialization has one game owner');assert.ok(glyphs.context===glyphContext,'glyph calls retain one native context');
+const glyphAbi=JSON.parse(fs.readFileSync('js/nethack/glyph-abi.json'));for(const g of [-2147483648,-2,-1,0,layouts.glyphs.GLYPH_CMAP_MAIN_OFF,layouts.glyphs.MAX_GLYPH,2147483647])for(const [i,name]of glyphAbi.headers.entries())assert.equal(glyphContext.env[name](g),glyphs.services.header(i,g),'native header wiring '+name);
+for(const name of ['glyph_to_cmap','fill_glyphid_cache','glyphid_cache_status'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' has direct native dispatch');
+const glyphMap=glyphContext.env.glyphmap[0];assert.ok(glyphMap===owner.nativeRecords.record('glyph_map',glyphMap.address),'glyph model and display share a native glyph map record');
+assert.ok(glyphContext.env.mons[0]===owner.nativeRecords.record('struct permonst',environment.requireGlobal('mons')),'glyph lookup uses canonical monster species');
+const unicodeAt=environment.memory.calloc(1,layouts.glyphs.unicodeSize),unicode=owner.nativeRecords.record('struct unicode_representation',unicodeAt),priorUnicode=glyphMap.u;
+try{glyphMap.u=unicode;assert.ok(glyphContext.env.glyphmap[0].u===unicode);unicode.utf32ch=0x2603;assert.equal(glyphMap.u.utf32ch,0x2603);}finally{glyphMap.u=priorUnicode;environment.memory.free(unicodeAt);}
+const find=glyphContext.env.glyphsState.to_custom_symbol_find,priorGlyphCallback=find.callback;
+try{find.callback=glyphContext.native.to_custom_symset_entry_callback;assert.ok(find.callback===glyphContext.native.to_custom_symset_entry_callback);assert.equal(Number(glyphs.services.get(0,7,glyphs.finds+layouts.glyphs.findSize)),Number(glyphs.services.callbackAddress()));}finally{find.callback=priorGlyphCallback;}
+const glyphMarker={nativeGlyphCaller:true},oldHeader=glyphContext.env.glyph_is_cmap_main,liveBeforeGlyph=environment.memory.live.size;
+try{glyphContext.env.glyph_is_cmap_main=g=>{assert.equal(C,glyphMarker);return oldHeader(g);};withCEnvironment(glyphMarker,()=>assert.equal(environment.services.glyph_to_cmap(layouts.glyphs.GLYPH_CMAP_MAIN_OFF),layouts.glyphs.S_vwall));
+ glyphContext.env.glyph_is_cmap_main=()=>{assert.equal(C,glyphMarker);environment.transport.stackAlloc(24);throw Error('native glyph cleanup');};withCEnvironment(glyphMarker,()=>assert.throws(()=>environment.services.glyph_to_cmap(layouts.glyphs.GLYPH_CMAP_MAIN_OFF),/native glyph cleanup/));
+}finally{glyphContext.env.glyph_is_cmap_main=oldHeader;}
+assert.equal(environment.memory.live.size,liveBeforeGlyph);assert.equal(owner.depth,0);
+withCEnvironment(glyphMarker,()=>glyphContext.env.callFindCallback(()=>{assert.ok(C===glyphContext.env,'foreign glyph callbacks retain their C context');assert.equal(owner.depth,0);},0,find));
+
 assert.equal(owner.depth,0,'input exhaustion publishes the entire connected native graph');
 assert.equal(owner.dirty.size,0);
 for(const name of ['movemon','mcalcdistress','healmon','mfndpos','dochugw','m_move','domove','lookaround','test_move','vision_recalc','clear_path','does_block','moveloop','moveloop_core','moveloop_preamble','stop_occupation','timet_to_seconds','timet_delta','dog_move','dog_eat','mattacku','magic_negation','getmattk']){

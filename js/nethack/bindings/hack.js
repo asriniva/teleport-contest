@@ -597,9 +597,9 @@ export function createHackEnvironment(services,layout,namespace,servicePrototype
     env.is_rider=(ptr)=>Number(Boolean(((ptr) == env.mons[env.PM_DEATH] || (ptr) == env.mons[env.PM_FAMINE] || (ptr) == env.mons[env.PM_PESTILENCE])));
     env.is_weptool=(o)=>Number(Boolean(((o).oclass == env.TOOL_CLASS && env.objects[(o).otyp].oc_skill != env.P_NONE)));
     env.is_whirly=(ptr)=>Number(Boolean(((ptr).mlet == env.S_VORTEX || (ptr) == env.mons[env.PM_AIR_ELEMENTAL])));
-    Object.defineProperty(env,"levl",{get:()=>env.svl.level.locations,set:value=>{env.svl.level.locations=value;}});
+    Object.defineProperty(env,"levl",{get:()=>nativeState.spatial?.cells??env.svl.level.locations,set:value=>{env.svl.level.locations=value;}});
     env.likes_lava=(ptr)=>Number(Boolean((ptr == env.mons[env.PM_FIRE_ELEMENTAL] || ptr == env.mons[env.PM_SALAMANDER])));
-    env.m_at=(x,y)=>(env.svl.level.monsters[x][y]);
+    env.m_at=(x,y)=>(nativeState.spatial?.monsters??env.svl.level.monsters)[x][y];
     env.m_next2u=(m)=>Number(Boolean((env.distu((m).mx,(m).my) <= 2)));
     env.metallivorous=(ptr)=>Number(Boolean((((ptr).mflags1 & env.M1_METALLIVORE) != 0n)));
     env.monsndx=(ptr)=>((ptr).pmidx);
@@ -611,7 +611,7 @@ export function createHackEnvironment(services,layout,namespace,servicePrototype
     env.passes_walls=(ptr)=>Number(Boolean((((ptr).mflags1 & env.M1_WALLWALK) != 0n)));
     env.pline1=(cstr)=>env.pline("%s", cstr);
     env.qsort=(base,nmemb,size,compar)=>env.nh_deterministic_qsort((base), (nmemb), (size), (compar));
-    env.remove_monster=(x,y)=>env.svl.level.monsters[x][y] = 0;
+    env.remove_monster=(x,y)=>(nativeState.spatial?.monsters??env.svl.level.monsters)[x][y] = 0;
     env.resists_cold=(mon)=>env.Resists_Elem(mon, env.COLD_RES);
     env.slithy=(ptr)=>Number(Boolean((((ptr).mflags1 & env.M1_SLITHY) != 0n)));
     Object.defineProperty(env,"something",{get:()=>env.c_common_strings.c_something,set:value=>{env.c_common_strings.c_something=value;}});

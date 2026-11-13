@@ -70,7 +70,7 @@ export function createVisionEnvironment(services,layout){
     for(const[name,index]of [['circle_data',20],['circle_start',21]])env[name]=array({a:[core[name].length],e:{t:'i16'}},addr(services.storage(index)));
     env.workspaceSize=name=>width(privateStorage.find(x=>x.name===name).d);
     Object.defineProperties(env,{
-      wizard:{get:()=>env.flags.debug},levl:{get:()=>env.svl.level.locations},Underwater:{get:()=>env.u.uinwater},
+      wizard:{get:()=>env.flags.debug},levl:{get:()=>nativeState.spatial?.cells??env.svl.level.locations},Underwater:{get:()=>env.u.uinwater},
     });
     const prop=n=>env.u.uprops[n];for(const[key,name]of [['Blind','BLINDED'],['See_invisible','SEE_INVIS'],['Detect_monsters','DETECT_MONSTERS']])Object.defineProperty(env,key,{get(){const p=prop(layout[name]);return key==='Blind'?(p.intrinsic||p.extrinsic)&&!p.blocked:p.intrinsic||p.extrinsic;}});
     env.IS_OBSTRUCTED=t=>t<layout.POOL;env.IS_DOOR=t=>t===layout.DOOR;env.IS_WALL=t=>t&&t<=layout.DBWALL;env.IS_WATERWALL=t=>t===layout.WATER;

@@ -56,7 +56,7 @@ export function createLinker({memory,transport,functions,services,ctypes,prototy
         if(entry.status!=='ready')start(name);
         const callback=entry.namespace[fn];
         if(typeof callback!=='function')throw new Error('Unknown standalone function '+name+'.'+fn);
-        if(callback.nativeDirect&&!entry.prepareArgs){
+        if(callback.nativeDirect&&(!entry.prepareArgs||callback.nativePrepared)){
             const result=callback(...args);
             if(result&&typeof result.then==='function')throw new TypeError('C calls must be synchronous');
             return result;
