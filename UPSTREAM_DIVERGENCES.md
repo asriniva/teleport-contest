@@ -1,5 +1,140 @@
 # Upstream divergence register
 
+Engine-wide branch-test expansion in progress (2026-11-12, separate worktree,
+initialbasee807e4b, rebased onto238be60): `scripts/branch-coverage/` instruments all510 selected engine
+modules in a test-only loader. Four production binding fixes are described
+below; translated policy bodies, C, compiler flags and frozen files are unchanged.
+Source-bound compressed records exclude original-C reference
+workers and reference-side normalization calls. Failed or changed-test processes
+contribute no hits; legacy unknown-exit records remain diagnostic. Covered
+outcomes can identify a successful process/source witness. The strict gate fails
+on unhit or unsupported outcomes; function entry is included in counts and is
+not a substitute for decision coverage. Literal and validated private immutable
+parameter proofs exclude only their explicitly proved outcomes.
+
+Validation passes71 instrumentation equivalence cases,35 gate controls,19
+closed-parameter controls,9 test-source inverse controls and syntax checks for
+all510 transformed modules. The AST audit checks32,944 literal measured record
+fields and613 literal window/sound callback uses/signatures;40 dynamic lookups
+remain runtime obligations. The production-provider engulf matrix covers all
+8 visibility/digestion/enfolding combinations and callback replacement. A new
+real MAIN purple-worm/troll attack compares original C against pure JS worlds,
+RNG logs, TTY and frames, and requires real delegated swallow/two-delay events.
+Main's original callback regression remains unchanged. Window-binding contracts
+also pass68 dispatches,34 pointer rejections and real heap growth across17
+services/seven owners;5,583 invalid ABI-field contracts pass across17 owners.
+
+The assembled-program service audit exposed and reproduced three missing
+bindings, absent from current main too: TELEPORT's You1 macro, SHKNAM's display
+callback and O_INIT's wait_synch callback. TELEPORT now expands You1 as the
+configured hack.h You("%s",text) macro; the others dispatch measured window
+function pointers. The451 literal service checks include deferred resolution;
+three optional provider call sites remain explicit obligations. Percent-bearing
+macro text, live callback replacement and invalid pointers are checked. Eight
+real MAIN-world level-teleport calls match original C worlds, RNG logs, TTY and
+frames, including two You1 branches. Exact three-file historical inverses plus
+seven controls preserve old receipts without claiming old/new branch equivalence.
+MON also projected the native int wall flag W_NONDIGGABLE as a BigInt equipment
+mask, causing a TypeError in mfndpos's iron-bars branch. Its shared factory now
+projects that one flag as an int and preserves all seven equipment masks as
+BigInts. Header contracts and real MAIN-created rust-monster tests reproduce the
+failure; source-derived permissions and diggable/nondiggable bars compare complete
+candidate/info bytes, worlds, RNG logs, TTY and frames. A byte-exact proposed
+loader verified this fix before applying the same bytes; ordinary-source checks
+and the full matrix are required afterward. Four exact historical source inverses
+now pass13 controls, including composition with main's pointer-limit inverse. No ported policy or native source was changed.
+
+Additional tests pass40 full-map darkroom cases/80 comparisons over five dungeon
+contexts and29 remembered glyphs. A new MON matrix covers all383 catalogue forms
+and19 masks across three terrain patterns (21,831 cases); the rooms-only7,277
+subset passed before the wall fix; all21,831 cases then passed from ordinary
+source before rebasing. Rebased-source validation is recorded separately.
+Three real MAIN scenarios cover fatal death rays, disintegration and the direct
+ATTRIB poison handler, matching surviving worlds, consumed input boundaries,
+RNG logs, TTY, frames and all persisted bytes. The C-only author-trigger boundary
+is explicitly identified; initial reference lazy-file modes differ from JS disk
+modes, so persisted-byte equivalence is not a mode-equivalence claim. The poison
+case does not claim its ZAP caller covered.
+
+Earlier coverage133,699 hit/78,582 unhit predates these changes and cannot certify
+the four modified files. A later fresh run passed its matrix groups and47/138
+subsystems before being stopped because the fourth defect superseded its source.
+Its logs, partial records and interrupted.json remain; it is not a completed
+cohort. Fresh full-corpus validation is required. For space, all362 older coverage
+records, including failures, were losslessly archived after verifying byte-exact
+gzip reconstruction and every archived JSON hash. The archive/index remain in
+the original cache run directory; no current-run records were discarded.
+
+New original-C/pure-JS matrices pass15,432 UHITM cases (3,264 entry/seed,
+5,148 damage/species and7,020 property cases),992 MHITM,960 MHITU,15,852 TRAP
+(4,452 direct effects plus11,400 entry/property/species cases),168 DISPLAY cases
+with672 full comparisons,3,840 nonfatal ZAP beam/property cases,3,338 shop-pricing,
+66 STAIRS/RECT,252 WERE/MPLAYER/WRITE,80 calendar and64 leader-inventory cases.
+These are41,044 new policy cases; fixture dependencies remain controlled and
+snapshots cover the expressly declared fields/traces, not the entire game heap.
+The new DISPLAY/SHK helpers reuse existing assertions and preserve original test
+cases. Fatal ZAP death/poison paths remain outside that fixture. Explicit JS
+fault/provider/invalid-profile contracts are counted separately. See
+`docs/engine-branch-tests.md` for scope and commands.
+
+The earlier e807e4b138-suite subsystem cohort passed19,509,189 assertions with
+zero failures; this is historical evidence, not a complete rebased-source sweep.
+Dependency contracts pass after restoring the pinned missing Lua archive link;
+checksums remain enforced. The production-world runner selects98 scripts/101
+invocations, including four optional-interaction modes and private monster
+movement. Selected cases pass across the initial batch and targeted recoveries,
+not one immutable all-green run. The quest fixture's unswept default dies in
+original C; the runner selects its existing explicit controlled safety sweep and
+retains the positive quest-assignment assertions. Eight fresh generated keyboard
+scenarios pass87 comparisons.35 native MON assertion checks, corrected original
+bundled MAIN/assets,157 original-C asset byte/mode witnesses and two malformed
+bundle contracts also pass. Source-stability failures caused by editing the shared
+test helper during long tests, and pre-fix/missing-environment failures, are kept.
+
+Recorder sessions remain excluded. An initial overbroad selection accidentally
+ran the233-key public APPLY prefix before the batch was stopped; its result is
+excluded from non-session evidence and its coverage record is quarantined. The
+initial conservative filter also excluded ordinary tests merely using the word
+"recordings" in prose. That false positive is corrected: directory/path readers
+and frozen replay receipts remain excluded (eight qualified candidates), while
+12 reviewed independent tests, including main's literal engulf case, are retained.
+Wizard-victory's metadata preflight failed before gameplay. No full recorder driver
+was invoked. The selector audits literal imports/reexports/transitive script
+readers; computed paths still require source review. Native reference Wasm is
+available outside existing JS denial scopes; unused lazy network globals are
+removed before temporary capability guards to avoid Node Undici initialization.
+
+Old metadata retains its original expected hashes. Narrow exact inverses qualify
+5031c28's two reference-runtime pointer-format edits, one RUMORS buffer initializer
+and one JS-runtime libc-option addition, with3 rejection controls per inverse.
+These are provenance mappings, not claims that changed profiles or malformed-input
+behavior are equivalent. `layoutSourceSha` hashes raw byte views directly. Two
+post-consolidation test fixes resolve old MON provenance paths and the relocated
+asset exporter; two export-only changes expose DISPLAY/SHK comparison helpers.
+`docs/engine-test-source-successors.json` and its finite inverse extend the
+relocation checker for exactly those four files. Historical native evidence,
+successor patches, namespace receipt and391-file hashes are unchanged; only the
+current source-closure generator/receipt and qualification tools also bind the
+four binding fixes through docs/engine-service-source-successors.json. The MON
+inverse now composes with main's earlier pointer-limit layer; its immutable
+patches/hashes stay unchanged and41 original rejection controls still pass.
+
+Recorder CI is now authorized for the requested main push; it runs separately
+from this recorder-excluded branch corpus. No workflow defaults are changed.
+
+Complete engine branch acceptance is still unfinished: tens of thousands of
+outcomes remain unhit. Passing the expanded corpus does not establish full-game,
+recording, leaderboard-deadline or all-branch readiness.
+
+Rebased238be60 verification: all21,831 MON position cases pass from ordinary
+source, all14 targeted production/engulf/teleport/fatal/assets/assertion checks
+pass, and71 instrumentation,35 gate,19 closed-parameter controls plus510-module
+syntax and measured-callback audits pass. All2203 current source/evidence hashes
+qualify. The full138-suite/all-world corpus was not rerun after this rebase;
+earlier complete/partial runs above remain historical, and full branch readiness
+is not established. Normal recorder CI is permitted for the requested push.
+
+
 Immutable-selector CI (2026-11-12): paired43334428475 passes44/44 strict on both d9c2321 and b65bb00; only the reviewed factory/DISPLAY/INVENT files differ. Batch678.58→668.61s (1.47% lower), geometric mean ratio0.9753. One sequential same-host pair remains descriptive. Independent enforced45000ms run43334400385 passes40/44; fountain, ten deaths, world tour and knight remain ETIMEDOUT. Completed recordings match; the45-second goal is unmet. Proofs: docs/runtime-environment/immutable-selectors-paired-ci-validation.json and immutable-selectors-deadline-ci-validation.json. Earlier pending statements below are historical.
 
 Pointer-limit checkpoint (2026-11-12): HACK, MON and WINTTY transport bindings replace five repeated BigInt(Number.MAX_SAFE_INTEGER) threshold constructions with the identical9007199254740991n literal. Input coercions, pointer wrapping, return types, comparisons and range decisions are unchanged under ordinary JS intrinsics; translated policies, schemas and frozen files remain unchanged. One-session fresh-process ABBA passes all4 recordings with mean CPU42.7753→40.8946s (4.40% lower); this does not establish whole44 speed or deadline success. Validation passes4338 HACK,14728 MON and165 WINTTY original-C comparisons,69 connected game/engulf C checks,41 exact-cohort rejection checks and44/44 strict public recordings with751 inputs stable. Shared runtime source is unchanged from b65. The full replay overlaps C tests and is not a paired timing comparison. Proof: docs/runtime-environment/pointer-limit-validation.json. Paired whole44 performance and enforced45-second CI pending.

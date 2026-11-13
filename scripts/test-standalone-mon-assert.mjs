@@ -1,7 +1,7 @@
-import {layoutSourceSha} from './nethack-layout.mjs';
+import {layoutSourceSha,currentLayoutPath} from './nethack-layout.mjs';
 // Original MON assertion source sites against the pinned SDK abort implementation.
 import fs from 'node:fs';import assert from 'node:assert/strict';import crypto from 'node:crypto';import{pathToFileURL}from'node:url';
-const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),abi=JSON.parse(fs.readFileSync('js/nethack/mon-abi.json')),directory='.cache/standalone-sdk-boundary-v5',receipt=JSON.parse(fs.readFileSync(directory+'/receipt.json'));let checks=0;
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(currentLayoutPath(p))).digest('hex'),abi=JSON.parse(fs.readFileSync('js/nethack/mon-abi.json')),directory='.cache/standalone-sdk-boundary-v5',receipt=JSON.parse(fs.readFileSync(directory+'/receipt.json'));let checks=0;
 for(const[p,h]of Object.entries(abi.sourceSha256))assert.equal(layoutSourceSha(p,h),h,p);
 for(const[p,h]of Object.entries(receipt.sourceSha256))assert.equal(layoutSourceSha(p,h),h,p);
 for(const[p,h]of Object.entries(receipt.artifactSha256))assert.equal(layoutSourceSha(directory+'/'+p,h),h,p);

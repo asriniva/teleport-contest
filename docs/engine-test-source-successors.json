@@ -1,0 +1,49 @@
+{
+  "scope": "Exact test-only post-consolidation byte hashing/path corrections and DISPLAY helper exports. Original test cases and historical receipts remain unchanged.",
+  "files": {
+    "scripts/test-standalone-mon-assert.mjs": {
+      "beforeSha256": "6166f9034f54d5d0c298972c7abfa53f9f477499623cfb931a92479f0e1b8044",
+      "afterSha256": "fa339caff371947552392726f6b51588688c82cf476c20ba9dafc27198d14f58",
+      "replacements": [
+        {
+          "before": "import {layoutSourceSha} from './nethack-layout.mjs';",
+          "after": "import {layoutSourceSha,currentLayoutPath} from './nethack-layout.mjs';"
+        },
+        {
+          "before": "fs.readFileSync(p)",
+          "after": "fs.readFileSync(currentLayoutPath(p))"
+        }
+      ]
+    },
+    "scripts/test-standalone-game-assets.mjs": {
+      "beforeSha256": "dfa2b89f8f9af4e8f76f27b8203668370e65c96e7d05deb94299e03e03b352b9",
+      "afterSha256": "90623337194d60a75d494b95507040d848701c0ff7d8e9315620f8b4cf194f32",
+      "replacements": [
+        {
+          "before": "sha(fs.readFileSync('scripts/export-standalone-game-assets.py'))",
+          "after": "layoutSourceSha('scripts/export-standalone-game-assets.py',manifest.provenance.exporterSha256)"
+        }
+      ]
+    },
+    "scripts/test-tu-display.mjs": {
+      "beforeSha256": "385d53ba292f06899fb9dfe4cdf0a95a3d5388686b51267db97301f9bd574d90",
+      "afterSha256": "76b75047d77fd56e3ccc887a6f4b13b7682a1177c739a2f620b2767f764495eb",
+      "replacements": [
+        {
+          "before": "",
+          "after": "\n// Test-only shared differential harness; original cases above stay unchanged.\nexport {reset,setter,seed,action,set,global,ptr,property,sizeOf,C,root,addr};\n"
+        }
+      ]
+    },
+    "scripts/test-tu-shk.mjs": {
+      "beforeSha256": "8a527fd9a6d46c13f58f52700950941d7d4462988e35047ab48ad785a8080594",
+      "afterSha256": "f6c0c0a5e570a154684e22bc6b0da5f2f876c537b6816a5a2e1e95329814ee1e",
+      "replacements": [
+        {
+          "before": "",
+          "after": "\n// Shared test-only pricing/billing harness; original cases stay unchanged.\nexport {schema,mods,run,record,ptr,global,write64,option,constant,field,fieldAddress,get};\n"
+        }
+      ]
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import {layoutSourceSha} from './nethack-layout.mjs';
 // Checkout-only asset validation and genuine pure-JS MAIN smoke: no cache/reference.
 import fs from'node:fs';import assert from'node:assert/strict';import crypto from'node:crypto';
-const sha=bytes=>crypto.createHash('sha256').update(bytes).digest('hex'),file='js/nethack/game-assets.json',manifest=JSON.parse(fs.readFileSync('js/nethack/game-assets-manifest.json'));assert.equal(sha(fs.readFileSync(file)),manifest.bundleSha256);assert.equal(sha(fs.readFileSync('js/nethack/game-assets.js')),manifest.provenance.loaderSha256);assert.equal(sha(fs.readFileSync('scripts/export-standalone-game-assets.py')),manifest.provenance.exporterSha256);
+const sha=bytes=>crypto.createHash('sha256').update(bytes).digest('hex'),file='js/nethack/game-assets.json',manifest=JSON.parse(fs.readFileSync('js/nethack/game-assets-manifest.json'));assert.equal(sha(fs.readFileSync(file)),manifest.bundleSha256);assert.equal(sha(fs.readFileSync('js/nethack/game-assets.js')),manifest.provenance.loaderSha256);assert.equal(layoutSourceSha('scripts/export-standalone-game-assets.py',manifest.provenance.exporterSha256),manifest.provenance.exporterSha256);
 const names=['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'],saved=names.map(n=>Object.getOwnPropertyDescriptor(globalThis,n));let forbidden=0;const deny=()=>{forbidden++;throw Error('No Wasm/network allowed for bundled game');};for(const name of names)Object.defineProperty(globalThis,name,{configurable:true,value:name==='WebAssembly'?new Proxy({},{get:deny}):deny});
 let evidence;
 try{

@@ -187,3 +187,6 @@ for(let i=1;i<=256;i++)retainedEnv.field(Number(ptr(third,2))+i*8,'obj','otyp');
 assert.equal(held.address,heldAddress);assert.notEqual(retainedEnv.field(Number(ptr(third,2)),'obj','otyp'),held);checks++;
 assert.equal(covered.size,71);
 console.log('PASS DISPLAY FINAL',checks,'top-level state/result comparisons; all71 configured functions,22528 additional wall result checks, native constructor all7/full308125bytes before first body in independent Modules, typed coord-by-value, display RNG/native source callback, full9624 maps/80x21buffer/48byte window records, temporary ownership,64bit/raw witnesses,growth/reentry/stack cleanup. Controlled world/window dependency models only; native/full-game/public pending.');
+
+// Test-only shared differential harness; original cases above stay unchanged.
+export {reset,setter,seed,action,set,global,ptr,property,sizeOf,C,root,addr};

@@ -36,6 +36,22 @@ for name in ['pointer-limit-validation.json','immutable-selectors-deadline-ci-va
 source.update(['scripts/pointer_limit_source_successor.py','scripts/test-pointer-limit-source-successor.py','docs/runtime-environment/pointer-limit-source-successors/hack.js.patch','docs/runtime-environment/pointer-limit-source-successors/mon.js.patch','docs/runtime-environment/pointer-limit-source-successors/wintty.js.patch'])
 source.add('docs/runtime-environment/immutable-selectors-paired-ci-validation.json')
 source.update(json.loads((root/'docs/runtime-environment/immutable-selectors-paired-ci-validation.json').read_text())['rawProofs'])
+# Explicit additions bind branch tests and service fixes before their first commit.
+# Historical native evidence and the historical 391-file receipt stay immutable.
+source.update('scripts/'+name+'.mjs' for name in [
+ 'check-engine-callbacks','run-engine-branch-coverage',
+ 'test-engine-branch-gate','test-engine-branch-instrumentation','test-engine-branch-syntax',
+ 'test-engine-closed-parameters','test-engine-abi-rejections','test-display-branch-matrix','test-zap-branch-matrix','test-shop-pricing-branches',
+ 'test-engulf-branch-matrix','test-mhitm-branch-matrix','test-mhitu-branch-matrix',
+ 'test-production-window-bindings','test-trap-branch-matrix','test-uhitm-branch-matrix',
+ 'test-small-engine-branches',
+ 'test-policy-branch-gaps','test-calendar-branch-gaps','test-quest-inventory-branches','test-game-assets-branches','test-engine-reference-observers','test-engine-world-suite-selection','test-engine-reference-runtime-successor','run-production-world-branches','test-standalone-engulf-branches','test-standalone-keyboard-branches',
+])
+source.update('scripts/branch-coverage/'+name+'.mjs' for name in ['closed-parameters','collector','instrument','loader','production-world-suites','reference-runtime-successor','reference-setup','register','report','rumors-source-successor','runtime'])
+source.add('docs/engine-branch-tests.md')
+source.update(['scripts/engine_test_source_successors.py','scripts/test-engine-test-source-successors.py','docs/engine-test-source-successors.json'])
+source.update(['scripts/engine_service_source_successors.py','scripts/test-engine-service-source-successors.py','docs/engine-service-source-successors.json','scripts/test-production-service-resolution.mjs','scripts/test-standalone-teleport-branches.mjs'])
+source.update('scripts/'+name+'.mjs'for name in ['test-mon-header-constants','test-mon-position-branches','test-display-darkroom-branches','test-engine-mon-position-production','test-engine-fatal-zap-branches'])
 proof=json.loads((root/'docs/runtime-environment/transport-allocation-native-evidence.json').read_text());source.update(proof['rawProofs']);decl=json.loads((root/'docs/runtime-environment/transport-allocation-source-successors.json').read_text());source.update(r['patch']for r in decl['files'].values());sha=lambda p:hashlib.sha256((root/p).read_bytes()).hexdigest();data={'version':1,'baseCommit':'1dab2c64a80d86e2398875c0e3d45017f174abf1','scope':'Current implementation/tool/evidence source closure; historical391-hash receipt remains unchanged. Not runtime/game acceptance.','sha256':{p:sha(p)for p in sorted(source)}};target=root/'docs/runtime-environment/transport-allocation-current-source.json'
 if '--check'in sys.argv:assert json.loads(target.read_text())==data,'Current transport source manifest changed';print('PASS',len(source),'current source/evidence hashes')
 else:target.write_text(json.dumps(data,indent=2)+'\n');print('Bound',len(source),'current source/evidence hashes')

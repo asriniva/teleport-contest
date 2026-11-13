@@ -110,3 +110,6 @@ const other=await factories[1]({nethackPorted:{shk:checkedShk}});other._probe_re
 if(!process.env.SHK_ONE){assert.deepEqual([...origins].sort((a,b)=>a-b),[820,1865,1938,2600,3611,4661,4833,4924,5119,5155,5166,5218,5297,5470,5471,5596,5708,5715,5717,5721,5723]);checks++;}
 if(process.env.SHK_EVIDENCE_PATH)await writeFile(resolve(process.env.SHK_EVIDENCE_PATH),JSON.stringify({checks,functions:[...invoked],rngOrigins:[...origins].sort((a,b)=>a-b),caseReport},null,2)+'\n');
 console.log(JSON.stringify({checks,functions:invoked.size,rngOrigins:[...origins].sort((a,b)=>a-b),backend:'actual O2-g memory64 original shk.c vs JS',native:false},null,2));
+
+// Shared test-only pricing/billing harness; original cases stay unchanged.
+export {schema,mods,run,record,ptr,global,write64,option,constant,field,fieldAddress,get};

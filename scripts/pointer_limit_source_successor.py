@@ -10,10 +10,17 @@ FILES={'js/nethack/bindings/hack.js': {'beforeSha256': '3a6326e2db69108f77466a16
 sha=lambda b:hashlib.sha256(b).hexdigest()
 def baseline_bytes(root,file):return subprocess.check_output(['git','show',BASE_COMMIT+':'+file],cwd=root)
 def canonical_patch(file,before,after):return ''.join(difflib.unified_diff(before.decode().splitlines(True),after.decode().splitlines(True),fromfile='a/'+file,tofile='b/'+file)).encode()
+def current_bytes(root,file):
+ # The later integer-wall-flag fix has its own exact source inverse. Apply
+ # that layer before checking this immutable pointer-limit cohort.
+ if file=='js/nethack/bindings/mon.js'and(root/'docs/engine-service-source-successors.json').exists():
+  from engine_service_source_successors import qualified_before
+  return qualified_before(root,file)
+ return(root/file).read_bytes()
 def validate_cohort(root):
  root=Path(root);before_images={}
  for file,row in FILES.items():
-  before=baseline_bytes(root,file);after=(root/file).read_bytes();patch=(root/row['patch']).read_bytes()
+  before=baseline_bytes(root,file);after=current_bytes(root,file);patch=(root/row['patch']).read_bytes()
   assert sha(before)==row['beforeSha256'],'Wrong pointer-limit predecessor: '+file
   assert sha(after)==row['afterSha256'],'Unknown pointer-limit source change: '+file
   assert sha(patch)==row['patchSha256']and patch==canonical_patch(file,before,after),'Wrong pointer-limit source patch: '+file

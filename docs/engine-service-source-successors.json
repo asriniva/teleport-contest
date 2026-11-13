@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "baseCommit": "238be60d445dfdc9f1d47942bc0434b9ea3e6f39",
+  "scope": "Exact inverses for four production header/callback binding fixes. Preserves immutable historical source receipts; no behavioral equivalence claimed for the formerly failing branches.",
+  "files": {
+    "js/nethack/object-state.js": {
+      "beforeSha256": "9077858f87c4651ec3e2011fd620a5be7839aef603d49d805729323b59b3e5bc",
+      "afterSha256": "9ff098c0069e9d2c41e2c0bf79aac03604cc01d8e23e3b5c23678e3f934dffc8",
+      "replacements": [
+        {
+          "before": "wait_synch:()=>environment.resolve('wait_synch')(),",
+          "after": "wait_synch:()=>environment.functions.indirect(environment.ctypes.getField('struct window_procs',environment.requireGlobal('windowprocs'),'win_wait_synch','void *'),'v'),"
+        }
+      ]
+    },
+    "js/nethack/shknam.js": {
+      "beforeSha256": "7fe7692f768054955440fd66351338b475b5e56023cf28fee61bfd6b7eb99395",
+      "afterSha256": "5a3023913bd8867cc8f75af0ba0d29e235d42187c9d72e878fbdfdea13cff91a",
+      "replacements": [
+        {
+          "before": "local.display_nhwindow=(win,blocking)=>resolve('win_display_nhwindow')(transport.int(win),transport.char(blocking));",
+          "after": "local.display_nhwindow=(win,blocking)=>environment.functions.indirect(ctypes.getField('struct window_procs',environment.requireGlobal('windowprocs'),'win_display_nhwindow','void *'),'vii',transport.int(win),transport.char(blocking));"
+        }
+      ]
+    },
+    "js/nethack/teleport.js": {
+      "beforeSha256": "7a367a1c0ae8984dd9730b95facad743c3b592a051ab6c6910ebe466d6b6b7c0",
+      "afterSha256": "de47ee1ecd3e31615be6a95c75edeedf9bafe69cc09a3986f603159c59a5dc87",
+      "replacements": [
+        {
+          "before": "You1:s=>resolve('You1')(text(s))",
+          "after": "You1:s=>resolve('You')(text('%s'),text(s))"
+        }
+      ]
+    },
+    "js/nethack/bindings/mon.js": {
+      "beforeSha256": "1ba65ed250d94871359b1f33c5ad1f6c0df345dc0631f9436a1697f829a16563",
+      "afterSha256": "65097cb952e909f48daa3622a41e93685478a91c4c01dc8419c773cac6351ecf",
+      "replacements": [
+        {
+          "before": " for(const name of Object.keys(layout).filter(k=>/^W_|^M[12]_/.test(k)).concat([\"TIMEOUT\",\"FROMOUTSIDE\",\"INTRINSIC\",\"I_SPECIAL\",\"W_ARTI\",\"W_ART\"]))if(layout[name]!==undefined)env[name]=BigInt(layout[name]);",
+          "after": " // W_NONDIGGABLE is an int wall flag, distinct from long equipment masks.\n for(const name of Object.keys(layout).filter(k=>/^W_|^M[12]_/.test(k)).concat([\"TIMEOUT\",\"FROMOUTSIDE\",\"INTRINSIC\",\"I_SPECIAL\",\"W_ARTI\",\"W_ART\"]))if(layout[name]!==undefined)env[name]=name==='W_NONDIGGABLE'?int(layout[name]):BigInt(layout[name]);"
+        }
+      ]
+    }
+  }
+}

@@ -6,6 +6,8 @@ import {fileURLToPath,pathToFileURL} from 'node:url';
 import {execFileSync,spawnSync} from 'node:child_process';
 import v8 from 'node:v8';
 import crypto from 'node:crypto';
+import {priorReferenceRuntime,priorRuntimeSha,priorJsRuntimeSource,priorJsRuntimeSha} from './branch-coverage/reference-runtime-successor.mjs';
+import {priorRumorsSource,priorRumorsSha} from './branch-coverage/rumors-source-successor.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const base='e61e34c926bed5a098cf3142ba50fa6cf56d2b46';
 let checked=false,prior;
@@ -37,12 +39,24 @@ function previous(){
  prior=view;return view;
 }
 const featurePaths=new Set(["js/c-runtime/heap.js", "js/c-runtime/adapter-factories.js", "js/nethack/movement.js", "js/nethack/serialization.js", "js/standalone-recorder-adapter.js", "scripts/pure-js-probes/deny-wasm.mjs", "js/nethack/uhitm.js"]);
-function beforeFeature(file){if(['js/nethack/bindings/hack.js','js/nethack/bindings/mon.js','js/nethack/bindings/wintty.js'].includes(file)&&fs.existsSync(path.join(root,'scripts/pointer_limit_source_successor.py')))return execFileSync('python3',[path.join(root,'scripts/pointer_limit_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});if(['js/nethack/bindings/display.js','js/nethack/bindings/invent.js'].includes(file)&&fs.existsSync(path.join(root,'scripts/immutable_selectors_source_successor.py')))return execFileSync('python3',[path.join(root,'scripts/immutable_selectors_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});if(['js/c-runtime/types.js','js/c-runtime/address-bindings.js'].includes(file)&&fs.existsSync(path.join(root,'scripts/type_metadata_source_successor.py')))return execFileSync('python3',[path.join(root,'scripts/type_metadata_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});return featurePaths.has(file)&&fs.existsSync(path.join(root,'docs/runtime-environment/transport-allocation-source-successors.json'))?execFileSync('python3',[path.join(root,'scripts/transport_allocation_source_successors.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024}):fs.readFileSync(path.join(root,file));}
+function beforeFeature(file){
+ if(['js/nethack/bindings/hack.js','js/nethack/bindings/mon.js','js/nethack/bindings/wintty.js'].includes(file)&&fs.existsSync(path.join(root,'scripts/pointer_limit_source_successor.py')))return execFileSync('python3',[path.join(root,'scripts/pointer_limit_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
+ if(['js/nethack/object-state.js','js/nethack/shknam.js','js/nethack/teleport.js'].includes(file))return execFileSync('python3',[path.join(root,'scripts/engine_service_source_successors.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
+ if(['scripts/test-standalone-game-assets.mjs','scripts/test-standalone-mon-assert.mjs','scripts/test-tu-display.mjs','scripts/test-tu-shk.mjs'].includes(file))return execFileSync('python3',[path.join(root,'scripts/engine_test_source_successors.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
+ if(['js/nethack/bindings/display.js','js/nethack/bindings/invent.js'].includes(file)&&fs.existsSync(path.join(root,'scripts/immutable_selectors_source_successor.py')))return execFileSync('python3',[path.join(root,'scripts/immutable_selectors_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
+ if(['js/c-runtime/types.js','js/c-runtime/address-bindings.js'].includes(file)&&fs.existsSync(path.join(root,'scripts/type_metadata_source_successor.py')))return execFileSync('python3',[path.join(root,'scripts/type_metadata_source_successor.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024});
+ return featurePaths.has(file)&&fs.existsSync(path.join(root,'docs/runtime-environment/transport-allocation-source-successors.json'))?execFileSync('python3',[path.join(root,'scripts/transport_allocation_source_successors.py'),'--file',file],{cwd:root,maxBuffer:32*1024*1024}):fs.readFileSync(path.join(root,file));
+}
 // Accept either the exact current bytes or their verified path-only predecessor.
 export function layoutSourceSha(file,expected){
+ // Raw asset data always hashes its real bytes, independently of expected values.
+ if(ArrayBuffer.isView(file))return crypto.createHash('sha256').update(file).digest('hex');
  const absolute=path.isAbsolute(file)?file:path.join(root,file),logical=path.relative(root,absolute),actualFile=path.join(root,currentLayoutPath(logical));
  const sha=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
  const actual=sha(fs.readFileSync(actualFile));if(actual===expected)return actual;
+ if(logical==='js/backends/emscripten/runtime.js'&&expected===priorRuntimeSha)return sha(priorReferenceRuntime(fs.readFileSync(actualFile)));
+ if(logical==='js/nethack/runtime.js'&&expected===priorJsRuntimeSha)return sha(priorJsRuntimeSource(fs.readFileSync(actualFile)));
+ if(logical==='js/ported/rumors.js'&&expected===priorRumorsSha)return sha(priorRumorsSource(fs.readFileSync(actualFile)));
  if(sha(beforeFeature(path.relative(root,actualFile)))===expected)return expected;
  const before=relative(logical),receipt=JSON.parse(fs.readFileSync(path.join(root,'docs/runtime-environment/nethack-layout.json'))),row=receipt.files[before];
  if(!row)return actual;

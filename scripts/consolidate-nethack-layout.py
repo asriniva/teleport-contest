@@ -102,6 +102,10 @@ def plan():
  return rows
 
 def qualified_current(file):
+ from engine_service_source_successors import ALLOWED as SERVICE_ALLOWED,qualified_before as service_before
+ if file in SERVICE_ALLOWED and file!='js/nethack/bindings/mon.js':return service_before(ROOT,file)
+ from engine_test_source_successors import ALLOWED as TEST_ALLOWED,qualified_before as test_before
+ if file in TEST_ALLOWED:return test_before(ROOT,file)
  if file in {'js/nethack/bindings/hack.js','js/nethack/bindings/mon.js','js/nethack/bindings/wintty.js'}and(ROOT/'scripts/pointer_limit_source_successor.py').exists():
   from pointer_limit_source_successor import qualified_before
   return qualified_before(ROOT,file)

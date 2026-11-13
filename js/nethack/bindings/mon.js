@@ -94,7 +94,8 @@ export function createMonEnvironment(services,layout,state={itermonarr:0,itermon
  const {u,gy,gu,gm,svm,svl,svd,gv,svc,flags,genders,mons,objects,obj_descr}=env;
  env.levl=svl.level.locations;
  for(const[name,get,set]of [["fmon",()=>svl.level.monlist,v=>{svl.level.monlist=v;}],["fobj",()=>svl.level.objlist,v=>{svl.level.objlist=v;}],["itermonarr",()=>state.itermonarr?array(address(state.itermonarr),"ptr:mon",[state.itermonsiz]):0,v=>{state.itermonarr=raw(v);}],["itermonsiz",()=>state.itermonsiz,v=>{state.itermonsiz=uint(v);}],["fmonAddress",()=>svl.level.address+layout.dlevel_monlist]])Object.defineProperty(env,name,{get,set});
- for(const name of Object.keys(layout).filter(k=>/^W_|^M[12]_/.test(k)).concat(["TIMEOUT","FROMOUTSIDE","INTRINSIC","I_SPECIAL","W_ARTI","W_ART"]))if(layout[name]!==undefined)env[name]=BigInt(layout[name]);
+ // W_NONDIGGABLE is an int wall flag, distinct from long equipment masks.
+ for(const name of Object.keys(layout).filter(k=>/^W_|^M[12]_/.test(k)).concat(["TIMEOUT","FROMOUTSIDE","INTRINSIC","I_SPECIAL","W_ARTI","W_ART"]))if(layout[name]!==undefined)env[name]=name==='W_NONDIGGABLE'?int(layout[name]):BigInt(layout[name]);
  env.add_to_container=(...args)=>record(services.add_to_container(...args),"obj");
  env.attacktype_fordmg=(...args)=>record(services.attacktype_fordmg(...args),"attack");
  env.bury_an_obj=(...args)=>record(services.bury_an_obj(...args),"obj");

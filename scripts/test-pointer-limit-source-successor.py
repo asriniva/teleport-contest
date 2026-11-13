@@ -12,7 +12,7 @@ with tempfile.TemporaryDirectory()as directory:
   p=target/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
  def restore():
   for file,row in q.FILES.items():
-   for name in [file,row['patch']]:put(name,(root/name).read_bytes())
+   for name in [file,row['patch']]:put(name,q.current_bytes(root,name))
  def reject(fn):
   global checks
   try:fn()
