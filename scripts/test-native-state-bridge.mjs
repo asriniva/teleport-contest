@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import {NativeStateBridge} from '../js/nethack/native/state-bridge.js';
+const owner=new NativeStateBridge();
+let reads=0,writes=0,heap=2;
+const object={};
+Object.defineProperty(object,'hp',owner.field(()=>{reads++;return heap;},v=>{writes++;heap=v;},v=>Number(v)|0));
+owner.enter();
+assert.equal(object.hp,2);assert.equal(object.hp,2);assert.equal(reads,1);
+object.hp=9;assert.equal(object.hp,9);assert.equal(heap,2);
+assert.equal(owner.boundary(()=>{assert.equal(heap,9);heap=13;return 'ok';}),'ok');
+assert.equal(object.hp,13);assert.equal(writes,1);
+assert.throws(()=>owner.boundary(()=>{heap=17;throw new Error('unwind');}),/unwind/);
+assert.equal(object.hp,17,'exception invalidates cached state');
+object.hp=21;
+owner.boundary(()=>{
+ assert.equal(heap,21,'outer state published before reentry');
+ owner.enter();object.hp=30;owner.leave();
+ assert.equal(heap,30,'inner state published on exit');
+ heap=31;
+});
+assert.equal(object.hp,31,'outer native references see reentrant mutation');
+object.hp=0xffffffff;owner.leave();assert.equal(heap,-1,'assignment width is applied before publication');
+heap=99;owner.enter();assert.equal(object.hp,99,'next turn sees raw legacy writes');owner.leave();
+const identity={};let pointer=identity;const references={};
+Object.defineProperty(references,'monster',owner.field(()=>pointer,v=>{pointer=v;}));
+assert.equal(references.monster,identity);owner.boundary(()=>{});assert.equal(references.monster,identity);
+// Backing-memory growth and arbitrary overlapping byte writes are observed on return.
+let buffer=new ArrayBuffer(8);const value={};
+Object.defineProperty(value,'count',owner.field(()=>new DataView(buffer).getInt32(0,true),v=>new DataView(buffer).setInt32(0,v,true),v=>v|0));
+value.count=42;owner.boundary(()=>{const next=new ArrayBuffer(16);new Uint8Array(next).set(new Uint8Array(buffer));buffer=next;new DataView(buffer).setInt32(0,88,true);});
+assert.equal(value.count,88);owner.leave();
+console.log('PASS native state publication, invalidation, reentry, exceptions, widths, identities and memory growth');

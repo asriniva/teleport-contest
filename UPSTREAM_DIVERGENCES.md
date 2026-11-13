@@ -1,3 +1,105 @@
+## Active native monster movement (worktree, 2026-11-12)
+
+**Default gameplay now executes the per-game native MONMOVE module.**
+`js/nethack/bindings/monmove.js` connects all 52 policy entrypoints to
+`js/nethack/native/monster-movement.js`; `js/nethack/native/state-bridge.js`
+owns native scalar/pointer values during movement. This supersedes the
+experimental-only status in the historical entry below. It does not replace
+all other engine modules with native state.
+
+Added in this worktree, relative to main `8b0eb8b`:
+
+- The generated movement factory closes over its own game environment instead
+  of switching the global C environment. Four internal calls execute directly;
+  coordinate history and attack traversal use array indices, preserving bounds
+  and iteration order. Ordinary integer narrowing uses native Number arithmetic;
+  signed/unsigned 64-bit quantities retain BigInt.
+- Stable record identities, cached native field values and actual JS arrays
+  connect monster state, terrain, candidate storage and map occupancy to the
+  existing game. Byte storage is a compatibility boundary. Dirty native fields
+  are published before legacy services, cached reads are invalidated afterward,
+  including exceptions and nested movement. Unsuspended/unscoped access remains
+  live to preserve freed-address reuse and arbitrary legacy writes. Byte-copy
+  operations publish state and invalidate aliases. Heap growth reacquires views.
+- MONMOVE packed fields use the measured `records.json` offsets, bit widths
+  and shifts. Each is guarded to fit a byte, uses explicit masks, and publishes
+  through the native owner. This replaces repeated generic BigInt bit packing.
+- Movement dependency wrappers and array identities are reused. Class-list
+  membership consumes native selector arrays, retaining the terminating zero
+  and truth-value behavior of the source `strchr` uses. Legacy tables remain
+  initialized because other existing ABI consumers inspect their bytes.
+
+No game policy, RNG algorithm, RNG call site/order/metadata, frozen recorder,
+asset, original C source, compiler flag or recording deadline is changed.
+Pointer addresses and byte serialization remain at legacy/save boundaries;
+full-engine native ownership and a 20x speedup are not claimed. The separate
+`NativeGameState` object is retained as a test scaffold, not as a second state
+owner in the live engine. The live native owner is `NativeStateBridge`.
+
+Current checks: 5,550 original isolated-C/JS comparisons covering all 52
+MONMOVE entrypoints, including packed fields, history, structured returns,
+memory growth, callbacks, address reuse, high-bit masks, RNG and Module
+isolation. The final candidate also passes original full-C gameplay through
+716 keys / 238 turns with exact recording, normalized world graph and both RNG
+logs; the source-created vampire/spider live-MAIN private movement sequence
+matches complete C observations. Native owner tests cover exceptions,
+publication/reentry, assignment widths and backing-memory growth. The 2,400
+initial scaffold checks remain narrower supplemental coverage.
+
+Final source-stable public result: **44/44 strict all-metric passes** on Node
+22.23.5: 792,838/792,838 RNG calls, 11,405/11,405 boundary screens/cursors,
+1,483/1,483 animation screens and animation cursor triples. All 56 segments,
+per-step counts and persistence telemetry pass. All 750 scoring inputs are
+unchanged during the run. Deadlines were disabled; this is not proof of the
+45-second session deadline target. Proof:
+`docs/runtime-environment/native-movement-public-validation.json`.
+
+Timing versus the existing unprofiled `record-index-full-pair-7732c2a`
+verified-candidate run (same Node 22.23.5 and 44 sessions): total engine time
+685.832s → 502.319s, **1.3653x**, 26.7577% less time. Fitted input-move cost
+40.8792ms → 30.5687ms; startup fit 5,043.1ms → 3,531.7ms. Current batch wall
+507.422s. This is a historical comparison, not a new paired causal estimate;
+intervening main changes and host variance prevent attributing the whole gain
+solely to this migration. The 20x target remains unmet. Details and all per-
+session timings: `docs/runtime-environment/native-movement-timing.json`.
+
+The superseded first attempt was terminated after a boundary contract test
+caught an out-of-scope cache-read bug; its partial passes/timings are not final
+acceptance evidence. No baseline profiling or baseline timing rerun was done.
+
+## History: experimental native scaffold (superseded, 2026-11-12)
+
+Location: `js/nethack/native/game-state.js`,
+`js/nethack/native/monster-movement.js`, and
+`scripts/generate-native-monmove.py`. Added in this workspace; not an inherited
+contest patch. Default program/provider registration is unchanged.
+
+The native owner stores monsters as stable objects, occupancy as direct object
+references, terrain as JS cells and visibility as byte rows. Map removal and
+placement remain separate operations to preserve the source mutation ordering.
+The entire MONMOVE policy source is emitted inside a per-game closure: local
+calls bypass stack wrappers and global C environment switching. Tracking clear,
+attack iteration and coordinate iteration use arrays instead of pointer-shaped
+storage. Small integer conversions use JS arithmetic; 64-bit values retain
+BigInt. Source policy/RNG call ordering is otherwise retained by generation.
+
+This is an experimental migration, **not a replacement of the default game**.
+The dependency object must provide the remaining game policies. Combat, object
+ownership, formatted strings/temporary string storage, callbacks, visibility
+recalculation, save/restore and cross-module lifecycle integration remain
+unfinished. There is no heap/native synchronization adapter; the native owner
+must not be mixed with heap records. Monster fields are ordinary JS fields;
+full assignment-width/bitfield enforcement is not yet implemented. Native
+serialization and full ordinary turns are not supported by this change.
+
+Verification: `scripts/test-native-game-state.mjs` passes 2,400 checks on Node
+24.19.0: generation reproducibility; regeneration and event order, tracking,
+trapped movement outcomes, door/terrain queries compared to the existing
+translated policies; occupancy/reference identity and foreign-owner rejection.
+These compare to translated JS, not original C recordings. No full-turn or
+public-score equivalence is claimed. No new baseline profiling was performed.
+The 20x target is unmeasured and unmet by the evidence currently available.
+
 # Upstream divergence register
 
 Pager callback scalar classification (2026-11-12, rebased first onto

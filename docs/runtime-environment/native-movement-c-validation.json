@@ -1,0 +1,78 @@
+{
+  "profile": "Strict original full-C main against pure JS finite ordinary movement; source death fixture input prefix",
+  "checks": 3,
+  "cases": [
+    {
+      "keys": 716,
+      "moves": "238",
+      "frames": 717,
+      "worldRecords": {
+        "monst": 3,
+        "permonst": 3,
+        "branch": 7,
+        "obj": 37,
+        "mextra": 1,
+        "edog": 1,
+        "mapseen": 1,
+        "s_level": 36,
+        "stairway": 2
+      }
+    }
+  ],
+  "completeGameAccepted": false,
+  "sourceSha256": {
+    "scripts/test-standalone-monster-movement-program.mjs": "56b8be40dfff104fb388f634daceee36fad1400d7003fef953569588ed181906",
+    "scripts/restoration-world-graph.mjs": "a64d28a6a5974a89672ecedd637ebe89b706afb81b87267d8cb18684459907db",
+    "scripts/run-standalone-program.mjs": "29d76709123ab2b78c6e5dc45452b722b58cffc89b1afe1d5e4c2a384f00a479",
+    "scripts/full-original-c-run.mjs": "3da8b7a3dd0b2c1f60eb6a986bcb70c0bb79d120e50a007c1558569301978a9a",
+    "js/nethack/monster-movement.js": "509b411e2c3db7bcb7a56485d7d1ad15a36495aec4c3b2353b6e653ed7184577",
+    "js/nethack/monster-lifecycle.js": "b6144a67b494aea292cbbf4f2e097f0203c64f6caa0af256ad73b6b08122475e",
+    "js/nethack/bindings/monmove.js": "85a442df310377cfbbb98398ba48373d02c0c9e00885c18051919295e0b89611",
+    "js/ported/monmove.js": "c15e91a573c5a8a8eda8c4d7cda18ef6966645f50ad515382a8dc027c717dc39",
+    "js/nethack/bindings/mon.js": "65097cb952e909f48daa3622a41e93685478a91c4c01dc8419c773cac6351ecf",
+    "js/ported/mon.js": "b76ebfece2f87288bd21915219cb8db7d00652399901b58f8463958a71ca3fe0",
+    "js/nethack/native/state-bridge.js": "427ecf9741e37b877c160c05ffd0cafa086c8af3a508559a3a92848237ab6dd6",
+    "js/nethack/native/monster-movement.js": "a87fa0baf663afcd4c6e11e5f943ca1346be06ed3c04d4bfb2762f5a77406116",
+    "js/nethack/native/game-state.js": "28bf47fbf1a79abbccec6b3ce98ac4e7b96ae23c3735bbf091d9e0b9498b158c",
+    "scripts/test-tu-monmove.mjs": "0484873af4d670c5379b42c857e718ccb2895b8a7e3be3078e654f4d55a7168a",
+    "scripts/test-native-state-bridge.mjs": "eae76bc2129e50374b231e13ad38965fe328061c875892448d40d27982af7ad7",
+    "scripts/generate-native-monmove.py": "7c00f36797ca14b7238b9b466a66832051869a7c445b3bff408feca7f742edca",
+    "scripts/test-native-game-state.mjs": "bb194a0350a7c8dc157dd7911653cd76e5336ebcd23becfbe05ca800e5b14d44"
+  },
+  "limitation": "Only these finite recordings and normalized world graphs are accepted; later death, victory, other seeds and unreached movement branches remain separate requirements.",
+  "additionalChecks": {
+    "monmoveEntryPointComparisons": 5550,
+    "entryPoints": 52,
+    "unitLog": ".cache/native-monmove-unit-final.log",
+    "privateMain": ".cache/native-monmove-private-accepted.log",
+    "nativeStateOwner": ".cache/native-state-owner.log"
+  },
+  "rawProofs": {
+    ".cache/native-monmove-unit-final.log": "4749951ee1a10b3b551f30cef7252b0540c3202498b4b9584fca58c8536ea86e",
+    ".cache/native-movement-c-accepted.log": "4ad7c4f3c2cb36418f7f1ee6df1e0190f551296a3189d9e795da6f1dfcfc409c",
+    ".cache/native-monmove-private-accepted.log": "1faa0f6fad306aee52a4a82ab64a0786772cd655b9622f67dc17173ffb82feee",
+    ".cache/native-state-owner.log": "ce1c85a511c9c0c99e0c1a928d2fc1db8dd7815414b7311faa4820e220f1115e"
+  },
+  "privateMain": {
+    "complete": true,
+    "originalNativeCompared": true,
+    "productionProvenanceStable": true,
+    "fullGameAccepted": false,
+    "scope": "Source-created vampire/invisible spider in live MAIN input callback; original private functions are forwarding exports in the complete C oracle. No raw fields/input-depth/RNG writes or natural AI-journey claim.",
+    "positive": {
+      "label": "positive branches",
+      "shifted": 1,
+      "vampireForm": 106,
+      "spiderInvisible": 1,
+      "webType": 18,
+      "webSeen": 1,
+      "attempts": 68,
+      "messageWindow": 1,
+      "something": "something",
+      "messageBuffer": "The vampire turns into a fog cloud!  Something spins a web."
+    },
+    "frames": 5,
+    "inputBoundaries": 3,
+    "referenceReceiptSha256": "52a4c1f67fcd851a374b89ee521531c42d31dc2bc9fa7c01c3a1187c78d42395"
+  }
+}
