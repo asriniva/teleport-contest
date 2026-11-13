@@ -1,0 +1,367 @@
+{
+  "complete": true,
+  "nativeOnly": false,
+  "inventory": [
+    {
+      "identity": "obj:51",
+      "type": 82,
+      "letter": "a",
+      "quantity": 1,
+      "worn": 256
+    },
+    {
+      "identity": "obj:52",
+      "type": 135,
+      "letter": "b",
+      "quantity": 1,
+      "worn": 1
+    },
+    {
+      "identity": "obj:54",
+      "type": 92,
+      "letter": "c",
+      "quantity": 1,
+      "worn": 4
+    },
+    {
+      "identity": "obj:56",
+      "type": 293,
+      "letter": "d",
+      "quantity": 4,
+      "worn": 0
+    },
+    {
+      "identity": "obj:60",
+      "type": 259,
+      "letter": "e",
+      "quantity": 1,
+      "worn": 1024
+    },
+    {
+      "identity": "obj:61",
+      "type": 238,
+      "letter": "f",
+      "quantity": 1,
+      "worn": 0
+    },
+    {
+      "identity": "obj:62",
+      "type": 472,
+      "letter": "g",
+      "quantity": 1,
+      "worn": 0
+    },
+    {
+      "identity": "obj:64",
+      "type": 217,
+      "letter": "h",
+      "quantity": 1,
+      "worn": 0
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "inventory",
+      "keys": "  ni ",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "moves": "1",
+      "inputBoundaries": 6,
+      "frames": 6,
+      "worldCoverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      },
+      "aux": {
+        "occupationNull": true,
+        "readDepth": 1,
+        "victualEating": 0,
+        "victualPieceNull": true
+      }
+    },
+    {
+      "name": "eating",
+      "keys": "  nled   ",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "moves": "8",
+      "inputBoundaries": 10,
+      "frames": 10,
+      "worldCoverage": {
+        "counts": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157634,
+        "serializedPaddingByteOccurrences": 1571,
+        "uniqueScalarBytes": 29937,
+        "pointerEdges": 119
+      },
+      "aux": {
+        "occupationNull": true,
+        "readDepth": 1,
+        "victualEating": 0,
+        "victualPieceNull": true
+      }
+    },
+    {
+      "name": "wield",
+      "keys": "  nwe ",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "moves": "2",
+      "inputBoundaries": 7,
+      "frames": 7,
+      "worldCoverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      },
+      "aux": {
+        "occupationNull": true,
+        "readDepth": 1,
+        "victualEating": 0,
+        "victualPieceNull": true
+      }
+    },
+    {
+      "name": "takeoff-wear",
+      "keys": "  nTcWc",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "moves": "3",
+      "inputBoundaries": 8,
+      "frames": 8,
+      "worldCoverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      },
+      "aux": {
+        "occupationNull": true,
+        "readDepth": 1,
+        "victualEating": 0,
+        "victualPieceNull": true
+      }
+    },
+    {
+      "name": "drop-pickup",
+      "keys": "  ndh,",
+      "status": {
+        "kind": "input-exhausted"
+      },
+      "moves": "3",
+      "inputBoundaries": 7,
+      "frames": 7,
+      "worldCoverage": {
+        "counts": {
+          "monst": 4,
+          "permonst": 4,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157966,
+        "serializedPaddingByteOccurrences": 1589,
+        "uniqueScalarBytes": 30143,
+        "pointerEdges": 122
+      },
+      "aux": {
+        "occupationNull": true,
+        "readDepth": 1,
+        "victualEating": 0,
+        "victualPieceNull": true
+      }
+    },
+    {
+      "name": "combined",
+      "keys": "  nled   i we TcWcdh,",
+      "moves": "13",
+      "inputBoundaries": 22,
+      "frames": 22,
+      "worldCoverage": {
+        "counts": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157634,
+        "serializedPaddingByteOccurrences": 1571,
+        "uniqueScalarBytes": 29937,
+        "pointerEdges": 119
+      }
+    },
+    {
+      "name": "combined-save",
+      "keys": "  nled   i we TcWcdh,Sy",
+      "moves": "13",
+      "frames": 24,
+      "sourceStreams": {
+        "c": "733114ee427d57b84e650ca9f921ba76b9c1f975527ce57a456a13b52b24f190",
+        "js": "3fc8f9ff7e2e6601ccec4ae1b4ad1482828e5fa2afab7565440d79c2600dca27"
+      }
+    },
+    {
+      "name": "resume-c-in-c",
+      "keys": "i m.",
+      "moves": "14",
+      "inputBoundaries": 5,
+      "frames": 5,
+      "worldCoverage": {
+        "counts": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157634,
+        "serializedPaddingByteOccurrences": 1571,
+        "uniqueScalarBytes": 29937,
+        "pointerEdges": 119
+      }
+    },
+    {
+      "name": "resume-c-in-js",
+      "keys": "i m.",
+      "moves": "14",
+      "inputBoundaries": 5,
+      "frames": 5,
+      "worldCoverage": {
+        "counts": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157634,
+        "serializedPaddingByteOccurrences": 1571,
+        "uniqueScalarBytes": 29937,
+        "pointerEdges": 119
+      }
+    },
+    {
+      "name": "resume-js-in-c",
+      "keys": "i m.",
+      "moves": "14",
+      "inputBoundaries": 5,
+      "frames": 5,
+      "worldCoverage": {
+        "counts": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157634,
+        "serializedPaddingByteOccurrences": 1571,
+        "uniqueScalarBytes": 29937,
+        "pointerEdges": 119
+      }
+    },
+    {
+      "name": "resume-js-in-js",
+      "keys": "i m.",
+      "moves": "14",
+      "inputBoundaries": 5,
+      "frames": 5,
+      "worldCoverage": {
+        "counts": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 34,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        },
+        "serializedRecordBytes": 157634,
+        "serializedPaddingByteOccurrences": 1571,
+        "uniqueScalarBytes": 29937,
+        "pointerEdges": 119
+      }
+    }
+  ],
+  "fullGameAccepted": false,
+  "limitations": "Only the named literal ordinary-command paths; no component state writes, input-depth resets, debug/wish commands or direct game-policy calls.",
+  "provenance": {
+    "receipt": "f26b2573081243163c7c7fe77a985115fe6cfc036dedeecd9c9d852c2dbd4d58",
+    "script": "b002105ffc27a294650aa6ae7956ea46cb1c6ad694acfe70435d978af862f808",
+    "worldHelper": "a64d28a6a5974a89672ecedd637ebe89b706afb81b87267d8cb18684459907db"
+  },
+  "checks": 253
+}

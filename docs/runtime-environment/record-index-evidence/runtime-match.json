@@ -1,0 +1,5 @@
+{
+  "candidateInputFiles": 751,
+  "changed": [],
+  "meaning": "Current production game/scorer inputs exactly match the source-stable strict44 candidate image; tooling/docs are outside these751 runtime inputs."
+}

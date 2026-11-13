@@ -1,0 +1,7 @@
+{
+  "commit": "25ce0121f6f011b59ec201652d2eadae320d0baf",
+  "originalApplySha256": "d56d155b4e4be83fb6984ea411ac70d788f54f2cab080334ab6f472ed86774d0",
+  "diagnosticApplySha256": "5d82c78c8e2504f16345ec248ca23a5e14f018a9587a36e2b20192b4c7e3192e",
+  "onlyModifiedSource": "js/nethack/apply.js",
+  "scope": "diagnostic counters; frozen worker unchanged; timeout disabled; instrumented timing is not performance baseline"
+}

@@ -1,0 +1,152 @@
+{
+  "session": "seed4500-knight-coverage.session.json",
+  "passed": true,
+  "metrics": {
+    "rngCalls": {
+      "matched": 108275,
+      "total": 108275
+    },
+    "screens": {
+      "matched": 1814,
+      "total": 1814
+    },
+    "cellsOnly": {
+      "matched": 1814,
+      "total": 1814
+    },
+    "cursors": {
+      "matched": 1814,
+      "total": 1814
+    },
+    "animFrames": {
+      "matched": 37,
+      "total": 37
+    }
+  },
+  "frozenWorkerMs": 79135.37,
+  "moves": 1813,
+  "applyCalls": 21729,
+  "maxNesting": 3,
+  "exitNesting": 0,
+  "maxConsecutiveIdenticalTargetAndArguments": 43,
+  "topTargets": [
+    [
+      "isok",
+      {
+        "calls": 17359,
+        "maxDepth": 2
+      }
+    ],
+    [
+      "dist2",
+      {
+        "calls": 4050,
+        "maxDepth": 2
+      }
+    ],
+    [
+      "sobj_at",
+      {
+        "calls": 139,
+        "maxDepth": 3
+      }
+    ],
+    [
+      "walk_path",
+      {
+        "calls": 81,
+        "maxDepth": 2
+      }
+    ],
+    [
+      "get_iter_mons",
+      {
+        "calls": 53,
+        "maxDepth": 1
+      }
+    ],
+    [
+      "on_level",
+      {
+        "calls": 10,
+        "maxDepth": 1
+      }
+    ],
+    [
+      "near_capacity",
+      {
+        "calls": 5,
+        "maxDepth": 1
+      }
+    ],
+    [
+      "acurr",
+      {
+        "calls": 5,
+        "maxDepth": 1
+      }
+    ],
+    [
+      "pline",
+      {
+        "calls": 5,
+        "maxDepth": 1
+      }
+    ],
+    [
+      "getpos_sethilite",
+      {
+        "calls": 5,
+        "maxDepth": 1
+      }
+    ],
+    [
+      "getpos",
+      {
+        "calls": 5,
+        "maxDepth": 1
+      }
+    ],
+    [
+      "teleds",
+      {
+        "calls": 3,
+        "maxDepth": 1
+      }
+    ],
+    [
+      "nomul",
+      {
+        "calls": 3,
+        "maxDepth": 1
+      }
+    ],
+    [
+      "morehungry",
+      {
+        "calls": 3,
+        "maxDepth": 1
+      }
+    ],
+    [
+      "There",
+      {
+        "calls": 2,
+        "maxDepth": 1
+      }
+    ],
+    [
+      "You",
+      {
+        "calls": 1,
+        "maxDepth": 1
+      }
+    ]
+  ],
+  "limitations": [
+    "Instrumented timing with concurrent main44 is not performance attribution.",
+    "Identical invocation arguments do not prove non-progress: iterator results and game state may advance.",
+    "No infinite loop reproduced; session completed full strict metrics.",
+    "No enforced timeout in this diagnostic."
+  ]
+}

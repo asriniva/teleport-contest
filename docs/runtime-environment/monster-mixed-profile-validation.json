@@ -1,0 +1,844 @@
+{
+  "status": "historical-pre-rebase-only",
+  "baseline": "cleanup/c-runtime-rect at e9207d8, not current main",
+  "date": "2026-11-12",
+  "warning": "Main already contains equivalent scalar no-throw classification at 56ac9cb and subsequent optimizations. These timings do not establish a new gain over main. Rebase validation is required.",
+  "benchmark": {
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "rounds": 9,
+    "callsPerSample": 40000,
+    "warmupCalls": 20000,
+    "beforeMs": 1450.207333,
+    "afterMs": 568.0577499999999,
+    "speedup": 2.552922362207012,
+    "reductionPercent": 60.82920441280102,
+    "pairedSpeedups": [
+      2.2880553626234965,
+      2.235404833157589,
+      2.114651878342762,
+      2.2752145332182865,
+      2.619674012017265,
+      3.4441198856073365,
+      1.8916182704779516,
+      1.4711250184886804,
+      2.3892082585710166
+    ],
+    "results": {
+      "before": [
+        {
+          "count": 40000,
+          "ms": 1161.162166,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 1194.3161670000002,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 1191.2197920000003,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 1226.3464169999997,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 1488.1261250000002,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 2125.674916,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 1450.207333,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 1552.549458,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 1491.0823750000002,
+          "sink": -1678339592
+        }
+      ],
+      "after": [
+        {
+          "count": 40000,
+          "ms": 507.4886670000001,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 534.2728749999999,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 563.317208,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 539.002542,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 568.0577499999999,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 617.1895830000001,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 766.6490409999999,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 1055.3484160000003,
+          "sink": -1678339592
+        },
+        {
+          "count": 40000,
+          "ms": 624.0905829999999,
+          "sink": -1678339592
+        }
+      ]
+    }
+  },
+  "profiles": {
+    "baseline": {
+      "mode": "baseline",
+      "sink": -213644388,
+      "samples": 2447,
+      "profileMs": 3192.25,
+      "self": [
+        {
+          "functionLocation": "record c-runtime/types.js:16",
+          "percent": 51.8206594095074
+        },
+        {
+          "functionLocation": "canonical c-runtime/types.js:6",
+          "percent": 25.316626204088024
+        },
+        {
+          "functionLocation": "post node:inspector:115",
+          "percent": 3.5646017699115045
+        },
+        {
+          "functionLocation": "value c-runtime/record-views.js:6",
+          "percent": 2.3561124598637324
+        },
+        {
+          "functionLocation": "record c-runtime/records.js:5",
+          "percent": 2.117190069700055
+        },
+        {
+          "functionLocation": "load c-runtime/types.js:25",
+          "percent": 1.8065001174720026
+        },
+        {
+          "functionLocation": "size c-runtime/types.js:17",
+          "percent": 1.730785496123424
+        },
+        {
+          "functionLocation": "(program) :0",
+          "percent": 1.2490563082465347
+        },
+        {
+          "functionLocation": "set_mon_data ported/mondata.js:13",
+          "percent": 1.0101965698175268
+        },
+        {
+          "functionLocation": "withCEnvironment ported/c-runtime.js:8",
+          "percent": 0.942407392904691
+        },
+        {
+          "functionLocation": "attacktype_fordmg ported/mondata.js:41",
+          "percent": 0.8509358602866317
+        },
+        {
+          "functionLocation": "(garbage collector) :0",
+          "percent": 0.7153261805936252
+        },
+        {
+          "functionLocation": "get view services/c-memory.js:24",
+          "percent": 0.6878533949408724
+        },
+        {
+          "functionLocation": "store c-runtime/types.js:33",
+          "percent": 0.589960059519148
+        },
+        {
+          "functionLocation": "get c-runtime/record-views.js:33",
+          "percent": 0.5090453441929673
+        },
+        {
+          "functionLocation": "(anonymous) scripts/profile-monster-data-views.mjs:0",
+          "percent": 0.4281619547341217
+        },
+        {
+          "functionLocation": "view ported/decl-runtime.js:61",
+          "percent": 0.391542015819563
+        },
+        {
+          "functionLocation": "(anonymous) c-runtime/linker.js:57",
+          "percent": 0.3498472863967421
+        },
+        {
+          "functionLocation": "onePast c-runtime/record-views.js:13",
+          "percent": 0.27673271203696453
+        },
+        {
+          "functionLocation": "stackRestore c-runtime/memory.js:100",
+          "percent": 0.27673271203696453
+        },
+        {
+          "functionLocation": "mon_learns_traps ported/mondata.js:1581",
+          "percent": 0.26883859346855665
+        },
+        {
+          "functionLocation": "scoped c-runtime/memory.js:105",
+          "percent": 0.26623854647975564
+        },
+        {
+          "functionLocation": "shortRef standalone/monster-creation.js:118",
+          "percent": 0.23754405200093978
+        },
+        {
+          "functionLocation": "setField c-runtime/types.js:53",
+          "percent": 0.23234395802333777
+        },
+        {
+          "functionLocation": "get standalone/monster-selection.js:15",
+          "percent": 0.2323126321560028
+        }
+      ],
+      "inclusive": [
+        {
+          "functionLocation": "(root) :0",
+          "percent": 100
+        },
+        {
+          "functionLocation": "(anonymous) scripts/profile-monster-data-views.mjs:0",
+          "percent": 97.99646017699115
+        },
+        {
+          "functionLocation": "scoped c-runtime/memory.js:105",
+          "percent": 93.89145586968439
+        },
+        {
+          "functionLocation": "(anonymous) c-runtime/linker.js:57",
+          "percent": 93.18665518051532
+        },
+        {
+          "functionLocation": "withCEnvironment ported/c-runtime.js:8",
+          "percent": 89.22781737019343
+        },
+        {
+          "functionLocation": "value c-runtime/record-views.js:6",
+          "percent": 77.82921137128984
+        },
+        {
+          "functionLocation": "get c-runtime/record-views.js:33",
+          "percent": 74.36106194690265
+        },
+        {
+          "functionLocation": "record c-runtime/types.js:16",
+          "percent": 61.423259456496204
+        },
+        {
+          "functionLocation": "set_mon_data ported/mondata.js:13",
+          "percent": 46.66473490484768
+        },
+        {
+          "functionLocation": "attacktype_fordmg ported/mondata.js:41",
+          "percent": 31.96052940715796
+        },
+        {
+          "functionLocation": "canonical c-runtime/types.js:6",
+          "percent": 25.316626204088024
+        },
+        {
+          "functionLocation": "attacktype ported/mondata.js:54",
+          "percent": 16.402004855509436
+        },
+        {
+          "functionLocation": "load c-runtime/types.js:25",
+          "percent": 9.601472315764743
+        },
+        {
+          "functionLocation": "mon_learns_traps ported/mondata.js:1581",
+          "percent": 9.468274727856528
+        },
+        {
+          "functionLocation": "size c-runtime/types.js:17",
+          "percent": 9.045281541232672
+        },
+        {
+          "functionLocation": "get standalone/monster-creation.js:118",
+          "percent": 8.78684313571932
+        },
+        {
+          "functionLocation": "env.monsndx standalone/monster-creation.js:83",
+          "percent": 7.139697705380217
+        },
+        {
+          "functionLocation": "record c-runtime/records.js:5",
+          "percent": 6.413971336831389
+        },
+        {
+          "functionLocation": "get c-runtime/records.js:38",
+          "percent": 5.623149815960529
+        },
+        {
+          "functionLocation": "set c-runtime/record-views.js:34",
+          "percent": 4.678079724332368
+        },
+        {
+          "functionLocation": "setField c-runtime/types.js:53",
+          "percent": 4.556691988409429
+        },
+        {
+          "functionLocation": "describe c-runtime/record-views.js:24",
+          "percent": 4.255023885973843
+        },
+        {
+          "functionLocation": "read c-runtime/record-views.js:11",
+          "percent": 3.977194768580155
+        },
+        {
+          "functionLocation": "baseline scripts/monster-data-view-harness.mjs:15",
+          "percent": 3.608990523925131
+        },
+        {
+          "functionLocation": "post node:inspector:115",
+          "percent": 3.5646017699115045
+        }
+      ]
+    },
+    "optimized": {
+      "mode": "optimized",
+      "sink": -213644388,
+      "samples": 2324,
+      "profileMs": 3069.833,
+      "self": [
+        {
+          "functionLocation": "record c-runtime/types.js:16",
+          "percent": 55.075243506731475
+        },
+        {
+          "functionLocation": "canonical c-runtime/types.js:6",
+          "percent": 24.275164153880684
+        },
+        {
+          "functionLocation": "post node:inspector:115",
+          "percent": 2.962962480369453
+        },
+        {
+          "functionLocation": "value c-runtime/record-views.js:6",
+          "percent": 2.4349207269581115
+        },
+        {
+          "functionLocation": "size c-runtime/types.js:17",
+          "percent": 1.9421903406471948
+        },
+        {
+          "functionLocation": "(program) :0",
+          "percent": 1.4455509469081869
+        },
+        {
+          "functionLocation": "record c-runtime/records.js:5",
+          "percent": 1.3464901836679715
+        },
+        {
+          "functionLocation": "attacktype_fordmg ported/mondata.js:41",
+          "percent": 1.169933348165845
+        },
+        {
+          "functionLocation": "get view services/c-memory.js:24",
+          "percent": 1.0315544852114105
+        },
+        {
+          "functionLocation": "load c-runtime/types.js:25",
+          "percent": 0.9825615921126654
+        },
+        {
+          "functionLocation": "withCEnvironment ported/c-runtime.js:8",
+          "percent": 0.8577339549089478
+        },
+        {
+          "functionLocation": "get c-runtime/record-views.js:33",
+          "percent": 0.8252566181938887
+        },
+        {
+          "functionLocation": "store c-runtime/types.js:33",
+          "percent": 0.6854118774539202
+        },
+        {
+          "functionLocation": "(garbage collector) :0",
+          "percent": 0.6257995141755268
+        },
+        {
+          "functionLocation": "set_mon_data ported/mondata.js:13",
+          "percent": 0.4777784328984671
+        },
+        {
+          "functionLocation": "view ported/decl-runtime.js:61",
+          "percent": 0.4030838159600213
+        },
+        {
+          "functionLocation": "setField c-runtime/types.js:53",
+          "percent": 0.3420707250198952
+        },
+        {
+          "functionLocation": "(anonymous) c-runtime/linker.js:57",
+          "percent": 0.27955918123233414
+        },
+        {
+          "functionLocation": "mon_learns_traps ported/mondata.js:1581",
+          "percent": 0.24841742205520626
+        },
+        {
+          "functionLocation": "set c-runtime/record-views.js:34",
+          "percent": 0.24431296425571034
+        },
+        {
+          "functionLocation": "onePast c-runtime/record-views.js:13",
+          "percent": 0.24294481165587836
+        },
+        {
+          "functionLocation": "stackRestore c-runtime/memory.js:100",
+          "percent": 0.20633044207942255
+        },
+        {
+          "functionLocation": "shortRef standalone/monster-creation.js:118",
+          "percent": 0.2062978670175218
+        },
+        {
+          "functionLocation": "stackSave c-runtime/memory.js:98",
+          "percent": 0.20225855934182738
+        },
+        {
+          "functionLocation": "get ported/decl-runtime.js:93",
+          "percent": 0.16694719224140206
+        }
+      ],
+      "inclusive": [
+        {
+          "functionLocation": "(root) :0",
+          "percent": 100
+        },
+        {
+          "functionLocation": "(anonymous) scripts/profile-monster-data-views.mjs:0",
+          "percent": 97.92864953891629
+        },
+        {
+          "functionLocation": "scoped c-runtime/memory.js:105",
+          "percent": 94.76209292166708
+        },
+        {
+          "functionLocation": "(anonymous) c-runtime/linker.js:57",
+          "percent": 94.22997928551814
+        },
+        {
+          "functionLocation": "withCEnvironment ported/c-runtime.js:8",
+          "percent": 93.90562939417225
+        },
+        {
+          "functionLocation": "value c-runtime/record-views.js:6",
+          "percent": 82.78421008569522
+        },
+        {
+          "functionLocation": "get c-runtime/record-views.js:33",
+          "percent": 79.01504739834382
+        },
+        {
+          "functionLocation": "record c-runtime/types.js:16",
+          "percent": 63.39957255003774
+        },
+        {
+          "functionLocation": "set_mon_data ported/mondata.js:13",
+          "percent": 49.374737974345834
+        },
+        {
+          "functionLocation": "attacktype_fordmg ported/mondata.js:41",
+          "percent": 33.39862461573642
+        },
+        {
+          "functionLocation": "canonical c-runtime/types.js:6",
+          "percent": 24.275164153880684
+        },
+        {
+          "functionLocation": "attacktype ported/mondata.js:54",
+          "percent": 16.71491576251868
+        },
+        {
+          "functionLocation": "size c-runtime/types.js:17",
+          "percent": 10.422553930458106
+        },
+        {
+          "functionLocation": "mon_learns_traps ported/mondata.js:1581",
+          "percent": 10.233814021805095
+        },
+        {
+          "functionLocation": "get standalone/monster-creation.js:118",
+          "percent": 10.153842244838726
+        },
+        {
+          "functionLocation": "load c-runtime/types.js:25",
+          "percent": 9.841577701458027
+        },
+        {
+          "functionLocation": "env.monsndx standalone/monster-creation.js:83",
+          "percent": 6.143070323369382
+        },
+        {
+          "functionLocation": "get c-runtime/records.js:38",
+          "percent": 5.811781943838639
+        },
+        {
+          "functionLocation": "set c-runtime/record-views.js:34",
+          "percent": 5.096661609931224
+        },
+        {
+          "functionLocation": "setField c-runtime/types.js:53",
+          "percent": 4.852348645675514
+        },
+        {
+          "functionLocation": "read c-runtime/record-views.js:11",
+          "percent": 4.594419305545285
+        },
+        {
+          "functionLocation": "record c-runtime/records.js:5",
+          "percent": 3.4137036118902886
+        },
+        {
+          "functionLocation": "store c-runtime/types.js:33",
+          "percent": 3.1149902942603065
+        },
+        {
+          "functionLocation": "post node:inspector:115",
+          "percent": 2.962962480369453
+        },
+        {
+          "functionLocation": "(anonymous) scripts/profile-monster-data-views.mjs:12",
+          "percent": 2.962962480369453
+        }
+      ]
+    },
+    "after": {
+      "mode": "optimized",
+      "sink": -213644388,
+      "samples": 1049,
+      "profileMs": 1632.084,
+      "self": [
+        {
+          "functionLocation": "canonical c-runtime/types.js:6",
+          "percent": 47.43389433387007
+        },
+        {
+          "functionLocation": "post node:inspector:115",
+          "percent": 6.716872415880555
+        },
+        {
+          "functionLocation": "get view services/c-memory.js:24",
+          "percent": 6.068498925300413
+        },
+        {
+          "functionLocation": "value c-runtime/record-views.js:6",
+          "percent": 4.613120403116506
+        },
+        {
+          "functionLocation": "load c-runtime/types.js:34",
+          "percent": 4.324593587094782
+        },
+        {
+          "functionLocation": "record c-runtime/types.js:16",
+          "percent": 3.4058296019077448
+        },
+        {
+          "functionLocation": "size c-runtime/types.js:26",
+          "percent": 3.1453037956379695
+        },
+        {
+          "functionLocation": "recordIfKnown c-runtime/types.js:19",
+          "percent": 2.8668254820217585
+        },
+        {
+          "functionLocation": "attacktype_fordmg ported/mondata.js:41",
+          "percent": 2.6067285752449014
+        },
+        {
+          "functionLocation": "(program) :0",
+          "percent": 2.440683200129405
+        },
+        {
+          "functionLocation": "record c-runtime/records.js:5",
+          "percent": 1.8586665882393307
+        },
+        {
+          "functionLocation": "store c-runtime/types.js:42",
+          "percent": 1.8279083674614787
+        },
+        {
+          "functionLocation": "set_mon_data ported/mondata.js:13",
+          "percent": 1.5649929783025873
+        },
+        {
+          "functionLocation": "withCEnvironment ported/c-runtime.js:8",
+          "percent": 1.4501091855566257
+        },
+        {
+          "functionLocation": "get c-runtime/record-views.js:33",
+          "percent": 1.0008063310466864
+        },
+        {
+          "functionLocation": "(garbage collector) :0",
+          "percent": 0.9880006176152698
+        },
+        {
+          "functionLocation": "view ported/decl-runtime.js:61",
+          "percent": 0.6254580033870806
+        },
+        {
+          "functionLocation": "shortRef standalone/monster-creation.js:118",
+          "percent": 0.6050546417953978
+        },
+        {
+          "functionLocation": "set c-runtime/record-views.js:34",
+          "percent": 0.5692721698147889
+        },
+        {
+          "functionLocation": "stackRestore c-runtime/memory.js:100",
+          "percent": 0.5616132502983915
+        },
+        {
+          "functionLocation": "mon_learns_traps ported/mondata.js:1581",
+          "percent": 0.536185637503952
+        },
+        {
+          "functionLocation": "setField c-runtime/types.js:62",
+          "percent": 0.45438837706882734
+        },
+        {
+          "functionLocation": "(anonymous) c-runtime/linker.js:57",
+          "percent": 0.3906661666924006
+        },
+        {
+          "functionLocation": "scoped c-runtime/memory.js:105",
+          "percent": 0.36768940814320833
+        },
+        {
+          "functionLocation": "createArrayView c-runtime/records.js:33",
+          "percent": 0.3064180520120288
+        }
+      ],
+      "inclusive": [
+        {
+          "functionLocation": "(root) :0",
+          "percent": 100
+        },
+        {
+          "functionLocation": "(anonymous) scripts/profile-monster-data-views.mjs:0",
+          "percent": 96.57131618225533
+        },
+        {
+          "functionLocation": "scoped c-runtime/memory.js:105",
+          "percent": 89.31059920935442
+        },
+        {
+          "functionLocation": "(anonymous) c-runtime/linker.js:57",
+          "percent": 88.15146769406476
+        },
+        {
+          "functionLocation": "withCEnvironment ported/c-runtime.js:8",
+          "percent": 87.32418184358158
+        },
+        {
+          "functionLocation": "value c-runtime/record-views.js:6",
+          "percent": 59.91051931150603
+        },
+        {
+          "functionLocation": "get c-runtime/record-views.js:33",
+          "percent": 54.802081265425066
+        },
+        {
+          "functionLocation": "canonical c-runtime/types.js:6",
+          "percent": 47.43389433387007
+        },
+        {
+          "functionLocation": "set_mon_data ported/mondata.js:13",
+          "percent": 40.096649437161325
+        },
+        {
+          "functionLocation": "attacktype_fordmg ported/mondata.js:41",
+          "percent": 34.209881354145985
+        },
+        {
+          "functionLocation": "size c-runtime/types.js:26",
+          "percent": 21.342774023886026
+        },
+        {
+          "functionLocation": "load c-runtime/types.js:34",
+          "percent": 20.104234831050363
+        },
+        {
+          "functionLocation": "attacktype ported/mondata.js:54",
+          "percent": 17.273498177789868
+        },
+        {
+          "functionLocation": "set c-runtime/record-views.js:34",
+          "percent": 14.89653718803689
+        },
+        {
+          "functionLocation": "setField c-runtime/types.js:62",
+          "percent": 14.327265018222102
+        },
+        {
+          "functionLocation": "record c-runtime/types.js:16",
+          "percent": 12.137304207381483
+        },
+        {
+          "functionLocation": "mon_learns_traps ported/mondata.js:1581",
+          "percent": 11.567541866717644
+        },
+        {
+          "functionLocation": "store c-runtime/types.js:42",
+          "percent": 11.24317130735918
+        },
+        {
+          "functionLocation": "recordIfKnown c-runtime/types.js:19",
+          "percent": 9.968727099830646
+        },
+        {
+          "functionLocation": "get c-runtime/records.js:38",
+          "percent": 9.004070868901355
+        },
+        {
+          "functionLocation": "post node:inspector:115",
+          "percent": 6.716872415880555
+        },
+        {
+          "functionLocation": "(anonymous) scripts/profile-monster-data-views.mjs:12",
+          "percent": 6.716872415880555
+        },
+        {
+          "functionLocation": "post scripts/profile-monster-data-views.mjs:12",
+          "percent": 6.716872415880555
+        },
+        {
+          "functionLocation": "record c-runtime/records.js:5",
+          "percent": 6.574293970163301
+        },
+        {
+          "functionLocation": "read c-runtime/record-views.js:11",
+          "percent": 6.183260175334112
+        }
+      ]
+    }
+  },
+  "lookups": {
+    "before": {
+      "calls": 1000,
+      "lookups": [
+        {
+          "type": "struct permonst",
+          "calls": 1000,
+          "throws": 0
+        },
+        {
+          "type": "signed char",
+          "calls": 500,
+          "throws": 500
+        },
+        {
+          "type": "enum monnums",
+          "calls": 250,
+          "throws": 250
+        },
+        {
+          "type": "short",
+          "calls": 250,
+          "throws": 250
+        },
+        {
+          "type": "long",
+          "calls": 250,
+          "throws": 250
+        },
+        {
+          "type": "struct attack",
+          "calls": 1500,
+          "throws": 0
+        },
+        {
+          "type": "unsigned char",
+          "calls": 500,
+          "throws": 500
+        }
+      ],
+      "totalThrows": 1750
+    },
+    "after": {
+      "calls": 1000,
+      "lookups": [
+        {
+          "type": "struct permonst",
+          "calls": 500,
+          "throws": 0
+        },
+        {
+          "type": "struct attack",
+          "calls": 500,
+          "throws": 0
+        }
+      ],
+      "totalThrows": 0
+    }
+  },
+  "tests": {
+    "classification": {
+      "status": "PASS",
+      "checks": 85,
+      "classification": "same result as caught record lookup",
+      "freshMetadata": true,
+      "pointerAndArrayBounds": true,
+      "growthAndAliasing": true
+    },
+    "direct": {
+      "status": "PASS",
+      "checks": 2642,
+      "baseline": "original monster-data prepareArgs",
+      "heapGrowth": true,
+      "fullHeapComparisons": true
+    },
+    "replays": {
+      "status": "PASS",
+      "cases": 4,
+      "frames": 50,
+      "inputBoundaries": 50,
+      "comparison": "entire result including recording frames, raw terminal, world globals, both RNG logs/images, files and process status"
+    }
+  },
+  "baselineHashes": {
+    "types": "67c82c0585dac56e87d59fd0b0d43273d5a4edf31841a4de32688c52998ae8f7",
+    "record-views": "3fa6d4152df505d4b59661d8c377d9f94cdaf0e4816fe74232d07b2a19308237"
+  }
+}

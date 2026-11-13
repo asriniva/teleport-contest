@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "complete": true,
+  "baseCommit": "7732c2a2d8e09c38fd3215f2173490c424e8e9aa",
+  "runtimeSha256": {
+    "js/c-runtime/adapter-factories.js": "84b32a1e910f43c97ae8cbebc5d0aa4d8e1f50db7b7b094fb94ffda1bb603a93"
+  },
+  "change": "One private non-global numeric regexp per createPrototypeDescriptorFactory; same get/set branches and lookup order.",
+  "controlledOriginalC": {
+    "hackChecks": 4338,
+    "hackRoutines": 95,
+    "termcapChecks": 2472,
+    "termcapRoutines": 56,
+    "backend": "Configured original-C Emscripten memory64 reference in isolated workers; synthetic/controlled TU worlds, not native-host acceptance."
+  },
+  "connectedOriginalC": {
+    "ordinaryStateSaveRestoreChecks": 253,
+    "engulfChecks": 15,
+    "backend": "Configured original-C memory64 MAIN; actual literal command inputs and world/TTY/RNG/frames comparisons."
+  },
+  "sourceQualificationControls": {
+    "upperAndComposition": 46,
+    "selectorCohort": 51,
+    "numeric": 7
+  },
+  "proxyContracts": {
+    "events": 72,
+    "observations": 48
+  },
+  "strictPublicPassed": {
+    "baseline": 44,
+    "candidate": 44
+  },
+  "pairedPerformance": {
+    "rows": [
+      {
+        "phase": "baseline",
+        "exitCode": 0,
+        "wallSeconds": 748.3828542083502,
+        "cpuSeconds": 1061.97764
+      },
+      {
+        "phase": "candidate",
+        "exitCode": 0,
+        "wallSeconds": 693.118251292035,
+        "cpuSeconds": 975.1223930000001
+      }
+    ],
+    "strictPublicPassed": {
+      "baseline": 44,
+      "candidate": 44
+    },
+    "cpuRatio": 0.9182136763256146,
+    "wallRatio": 0.9261546378226758,
+    "limits": "One sequential same-host unprofiled baseline-first full44 pair; no enforced deadlines or leaderboard acceptance."
+  },
+  "limits": [
+    "One same-host sequential baseline-first unprofiled pair; host drift/order can affect timing.",
+    "Ordinary RegExp intrinsics. Receiver-observing patched RegExp.prototype.test can distinguish cached versus fresh private regexps.",
+    "No leaderboard900-second or upstream45-second deadline success claim; all diagnostic replay deadlines disabled.",
+    "Production game/probe JS forbids Wasm. Original-C memory64 reference loading requires pinned Node24; initial Node22 reference-load failures are retained. Full44 production verification uses Node22.23.5.",
+    "Current runtime751 inputs exactly match the strict44 candidate. Historical receipts are projected by exact inverses, not rewritten."
+  ],
+  "rawProofs": {
+    "docs/runtime-environment/record-index-evidence/baseline-post-run-integrity.json": "a994e4ae3ecd02bc4e4cdcf1d80e94eb15ca9d506e949734b7d0cfc35823c090",
+    "docs/runtime-environment/record-index-evidence/baseline-pre-run-manifest.json": "2726387cabbdd7a0d9fa15559221c10f1aca52a69cb42a9186a680295a6f1c6b",
+    "docs/runtime-environment/record-index-evidence/baseline-results.stderr.log": "f1d79e51445b4b657ffaf12d48744ca9278716a485d8e48969bc9a0eb6ff466a",
+    "docs/runtime-environment/record-index-evidence/baseline-results.stdout.log": "557e33fb2c40847e16369fdaccc096cca604619a3fdba5d948ac2a719d9fa4d2",
+    "docs/runtime-environment/record-index-evidence/baseline-summary.json": "a4731b4b0115b17d9f84ace4eea19b6ba4e31711a7ec28ce88cdda80a42c2fc3",
+    "docs/runtime-environment/record-index-evidence/baseline-verification-status.json": "62af517aa2b3764b5aabcde29cf9ef2d146f36399eccd0dae6b73dbb33d5abf5",
+    "docs/runtime-environment/record-index-evidence/candidate-post-run-integrity.json": "ed2bcf2aec8bbc0b1317e2c7c307c0f9ca5d2821a07ea0774f181b8f7349d8e0",
+    "docs/runtime-environment/record-index-evidence/candidate-pre-run-manifest.json": "f57fb9e992dd4ca4e3890266632d1e14cfd7b064aac762fe6a974fad32a41622",
+    "docs/runtime-environment/record-index-evidence/candidate-results.stderr.log": "386494b251c7ea6ac0ff34b007560373bba3cfc22ba7deb8bc43812643d99222",
+    "docs/runtime-environment/record-index-evidence/candidate-results.stdout.log": "614049dc0ebb755836b4c6388d84c4d1b8b59e4b849bd109e67ab61eaa4f0c48",
+    "docs/runtime-environment/record-index-evidence/candidate-summary.json": "ce2f083d0251f3c0bd998ae01c496a77d4db8e93906f7db05624b20d3cc9c0aa",
+    "docs/runtime-environment/record-index-evidence/candidate-verification-status.json": "62af517aa2b3764b5aabcde29cf9ef2d146f36399eccd0dae6b73dbb33d5abf5",
+    "docs/runtime-environment/record-index-evidence/comparison.json": "b02ca2020788d44a4dfcb35e9eaf0b631a7946335359b05040d19606c1ae7c1c",
+    "docs/runtime-environment/record-index-evidence/component-benchmark.json": "797649465addebc680481b008ed9aba7f0a28e198fa32faa835f1900630958c7",
+    "docs/runtime-environment/record-index-evidence/contracts.json": "458b098bb4259eb5f150694c13246ee997af9e101d368b3ee1c50861d88ac4c4",
+    "docs/runtime-environment/record-index-evidence/contracts.log": "e783975bcc2af642cdc47f1dc7d23248628977aebd997a9826732e2b4efcef7c",
+    "docs/runtime-environment/record-index-evidence/engulf-evidence.json": "85757cb0e77f5f4ac09ff7f71f5c1ca8e4031b11c0050a59e266a95bf7fd93c5",
+    "docs/runtime-environment/record-index-evidence/engulf.log": "ec2ea33da9bde98db0fe76b9178ed6ca223617e2f48c11fc13376458e9027c4d",
+    "docs/runtime-environment/record-index-evidence/hack-node22-reference-load-failure.log": "242e2fa5442d0a728eabe891d1121bdc776e4a72bce70b2cabe3da67470ab5f7",
+    "docs/runtime-environment/record-index-evidence/hack-summary.json": "bbe54c489ff41c4a08c4dfd34e104aa0bf1b41a462a68f3b3c6083e47dd17334",
+    "docs/runtime-environment/record-index-evidence/hack.log": "96d7b8287ed2baa4eeeec4e766174be84c221a7d6e762542d5504ee8db325403",
+    "docs/runtime-environment/record-index-evidence/integrity.json": "bfb174b687344b3d0ec92682edf4e0ed4b1aa85d54232f511ffe32a4ec1c1751",
+    "docs/runtime-environment/record-index-evidence/ordinary-evidence.json": "cff609710c49d5d67eaf32c63b3e208bac7f33750056bc7878e031f719413bc9",
+    "docs/runtime-environment/record-index-evidence/ordinary.log": "bc8d9d055c2aed09425c3051315c17107d086c00e9dd7e2b206da32fe148d665",
+    "docs/runtime-environment/record-index-evidence/portable-component-benchmark.json": "115cb6b7103ed4db087316614df86800f038bd426fe9380702b5796c3834e2cd",
+    "docs/runtime-environment/record-index-evidence/portable-component-benchmark.stdout.log": "79a44e472816cd816859634b584b26d1c3302c709f8a778eafe59fe4d48563bf",
+    "docs/runtime-environment/record-index-evidence/pre-run.json": "782ab077e1c1961728d09bca8543a6c7260545b71b96997641366e2010e31eb9",
+    "docs/runtime-environment/record-index-evidence/progress.json": "fb1b3fd0df95c0634b1279b314532b40dfe589f50fe1d61e482274e8b0d2d89d",
+    "docs/runtime-environment/record-index-evidence/runtime-match.json": "162f702e42d97a47e07c93bf5ccf4269103e51ab4188fa23405c0013057aa314",
+    "docs/runtime-environment/record-index-evidence/termcap-node22-reference-load-failure.log": "ba796e1455c5bb6f25bd7cb884ae5eb1f172c24007fc1bea11809f0fb5711ad5",
+    "docs/runtime-environment/record-index-evidence/termcap-summary.json": "af686a5e4d6bd413436f16175113f96e0ff859a5af7cd98b8161670d008dd9e1",
+    "docs/runtime-environment/record-index-evidence/termcap.log": "90a2d597fd650cd1a5a5b69bd6baa34aa04a89e3678d6766fdc5f81f812f2b69"
+  },
+  "componentRerun": {
+    "scope": "Portable benchmark runner executed on actual production factory; synthetic proxy accesses only.",
+    "ratios": {
+      "monoField": 0.9194524577181967,
+      "mixedFields": 0.9631256325548533,
+      "aliases": 0.9409789335988598,
+      "numericIndex": 1.0086479107509103,
+      "mixedKeys": 0.983641425704514
+    },
+    "interpretation": "Numeric indexing0.86%higher in this short rerun; no universal per-access gain. Full44 pair is separate acceptance evidence."
+  }
+}

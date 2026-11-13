@@ -1,6 +1,6 @@
 --- a/js/c-runtime/records.js
 +++ b/js/c-runtime/records.js
-@@ -29,11 +29,12 @@
+@@ -39,11 +39,12 @@
  }
  
  export function createArrayView(target,{read,write,allowLeadingZeroes=false,onePast,
@@ -15,7 +15,7 @@
          get(object,key) {
              if(exposeLength&&key==='length')return length;
              const i=index(key);if(i===null)return fallbackRead?fallbackRead(object,key):Reflect.get(object,key);
-@@ -46,5 +47,34 @@
+@@ -56,5 +57,34 @@
              if(checked&&i>=length)throw new RangeError('C array bounds');
              write(i,value);return true;
          },

@@ -1,0 +1,10 @@
+{
+  "sourceCommit": "25ce0121f6f011b59ec201652d2eadae320d0baf",
+  "differences": [
+    "js/c-runtime/functions.js"
+  ],
+  "node": ".cache/node-v22.23.5-darwin-arm64/bin/node",
+  "entry": "image/frozen/ps_test_runner.mjs --worker-session=<absolute Knight4500 session>",
+  "timeoutMs": 0,
+  "limitations": "Public Knight only; signature p slots checked at functions.indirect, no check of direct foreign calls. Concurrent instrumented timing is not a performance comparison."
+}

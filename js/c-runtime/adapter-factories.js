@@ -32,6 +32,7 @@ export function createDescriptorViewFactory({services,schemas,address,raw,cache,
 
 
 export function createPrototypeDescriptorFactory({address,cache,recordTypes,layout,errorPrefix},initializePrototype){
+ const numericIndex=/^\d+$/;
  let store;function view(name,value){return store.record(name,value);}
  store=createRecordStore({address,cache,cacheKey:(name,at)=>name+':'+at,describe:type=>({type}),checked:false,trackDefinitions:false,publish:'late',
   createView({type:name},at){
@@ -43,7 +44,7 @@ export function createPrototypeDescriptorFactory({address,cache,recordTypes,layo
     // the adapter's strict field diagnostic. Getters receive the live record.
     Object.setPrototypeOf(prototype,new Proxy(inherited??Object.create(null),{
      get(target,key,receiver){
-      if(typeof key==='string'&&/^\d+$/.test(key))return view(name,receiver.address+Number(key)*Number(layout[name+'Size']));
+      if(typeof key==='string'&&numericIndex.test(key))return view(name,receiver.address+Number(key)*Number(layout[name+'Size']));
       if(typeof key==='string'&&!Reflect.has(target,key))throw Error(errorPrefix+name+'.'+key);
       return Reflect.get(target,key,receiver);
      },

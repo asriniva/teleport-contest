@@ -1,5 +1,9 @@
 # Full replay performance
 
+These measurements bind commit `29ab502` before integration with newer main.
+The combined runtime has a separate merge-validation receipt; the 6.52% result
+is not a new measurement against main `3b6db96`.
+
 The final transport change reduces paired replay time across all 44 public
 sessions from **670.166 to 626.475 seconds (6.52%)**. Both versions pass every
 strict output check; **42 of 44 sessions are faster**. An independent ordinary

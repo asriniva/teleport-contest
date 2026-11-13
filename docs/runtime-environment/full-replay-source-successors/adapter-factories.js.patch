@@ -1,10 +1,10 @@
 --- a/js/c-runtime/adapter-factories.js
 +++ b/js/c-runtime/adapter-factories.js
-@@ -34,7 +34,31 @@
- export function createPrototypeDescriptorFactory({address,cache,recordTypes,layout,errorPrefix},initializePrototype){
+@@ -35,7 +35,31 @@
+  const numericIndex=/^\d+$/;
   let store;function view(name,value){return store.record(name,value);}
   store=createRecordStore({address,cache,cacheKey:(name,at)=>name+':'+at,describe:type=>({type}),checked:false,trackDefinitions:false,publish:'late',
--  createView({type:name},at){let type=recordTypes.get(name);if(!type){const prototype=initializePrototype(name,at);type={prototype,handler:{get(o,k){if(typeof k==='string'&&/^\d+$/.test(k))return view(name,o.address+Number(k)*Number(layout[name+'Size']));if(typeof k==='string'&&!Reflect.has(o,k))throw Error(errorPrefix+name+'.'+k);return Reflect.get(o,k);},set(o,k,v){if(!Reflect.has(o,k))throw Error(errorPrefix+name+'.'+String(k));return Reflect.set(o,k,v);}}};recordTypes.set(name,type);}return new Proxy(Object.assign(Object.create(type.prototype),{address:at,kind:name}),type.handler);},initialize(){}
+-  createView({type:name},at){let type=recordTypes.get(name);if(!type){const prototype=initializePrototype(name,at);type={prototype,handler:{get(o,k){if(typeof k==='string'&&numericIndex.test(k))return view(name,o.address+Number(k)*Number(layout[name+'Size']));if(typeof k==='string'&&!Reflect.has(o,k))throw Error(errorPrefix+name+'.'+k);return Reflect.get(o,k);},set(o,k,v){if(!Reflect.has(o,k))throw Error(errorPrefix+name+'.'+String(k));return Reflect.set(o,k,v);}}};recordTypes.set(name,type);}return new Proxy(Object.assign(Object.create(type.prototype),{address:at,kind:name}),type.handler);},initialize(){}
 +  createView({type:name},at){
 +   let type=recordTypes.get(name);
 +   if(!type){
@@ -14,7 +14,7 @@
 +    // the adapter's strict field diagnostic. Getters receive the live record.
 +    Object.setPrototypeOf(prototype,new Proxy(inherited??Object.create(null),{
 +     get(target,key,receiver){
-+      if(typeof key==='string'&&/^\d+$/.test(key))return view(name,receiver.address+Number(key)*Number(layout[name+'Size']));
++      if(typeof key==='string'&&numericIndex.test(key))return view(name,receiver.address+Number(key)*Number(layout[name+'Size']));
 +      if(typeof key==='string'&&!Reflect.has(target,key))throw Error(errorPrefix+name+'.'+key);
 +      return Reflect.get(target,key,receiver);
 +     },
@@ -33,7 +33,7 @@
   });return view;
  }
  
-@@ -69,8 +93,10 @@
+@@ -70,8 +94,10 @@
    }else{
     key='array:'+keyOf(d)+':'+at;if(cache.has(key))return cache.get(key);child=childOf(d);stride=width(child);bytes=width(d);
    }

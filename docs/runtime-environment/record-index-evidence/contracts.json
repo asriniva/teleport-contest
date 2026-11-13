@@ -1,0 +1,6 @@
+{
+  "baseCommit": "7732c2a2d8e09c38fd3215f2173490c424e8e9aa",
+  "events": 72,
+  "observations": 48,
+  "scope": "Actual prototype factory provider/reflection/index/identity/error/reentry comparisons under ordinary RegExp/Map intrinsics; no native or game acceptance."
+}

@@ -1,0 +1,144 @@
+{
+  "workerProfiles": 44,
+  "sampledSeconds": 1071.769729,
+  "applyInclusive": [
+    {
+      "function": "",
+      "line": 32,
+      "seconds": 3.698438,
+      "percent": 0.3450776691977275
+    },
+    {
+      "function": "call",
+      "line": 31,
+      "seconds": 3.697362,
+      "percent": 0.3449772744981119
+    },
+    {
+      "function": "",
+      "line": 31,
+      "seconds": 3.674774,
+      "percent": 0.34286973223517864
+    },
+    {
+      "function": "invoke",
+      "line": 17,
+      "seconds": 2.910305,
+      "percent": 0.27154200396342787
+    },
+    {
+      "function": "local.<computed>",
+      "line": 18,
+      "seconds": 2.83023,
+      "percent": 0.2640707162573725
+    },
+    {
+      "function": "",
+      "line": 20,
+      "seconds": 0.591183,
+      "percent": 0.05515951645243752
+    },
+    {
+      "function": "enableApply",
+      "line": 6,
+      "seconds": 0.229543,
+      "percent": 0.021417193804696456
+    },
+    {
+      "function": "local.<computed>",
+      "line": 28,
+      "seconds": 0.084382,
+      "percent": 0.00787314641539013
+    },
+    {
+      "function": "get",
+      "line": 12,
+      "seconds": 0.054776,
+      "percent": 0.005110799317975512
+    },
+    {
+      "function": "prototype",
+      "line": 15,
+      "seconds": 0.021497,
+      "percent": 0.0020057480089550094
+    },
+    {
+      "function": "scalar",
+      "line": 16,
+      "seconds": 0.014032,
+      "percent": 0.0013092364544660506
+    },
+    {
+      "function": "heap",
+      "line": 22,
+      "seconds": 0.012903,
+      "percent": 0.0012038966627690602
+    },
+    {
+      "function": "bit",
+      "line": 23,
+      "seconds": 0.009937,
+      "percent": 0.0009271581134570371
+    },
+    {
+      "function": "",
+      "line": 17,
+      "seconds": 0.009003,
+      "percent": 0.0008400125284747616
+    },
+    {
+      "function": "callback",
+      "line": 20,
+      "seconds": 0.008597,
+      "percent": 0.0008021312570584833
+    },
+    {
+      "function": "bit",
+      "line": 21,
+      "seconds": 0.005639,
+      "percent": 0.0005261391367398845
+    },
+    {
+      "function": "signature",
+      "line": 19,
+      "seconds": 0.005394,
+      "percent": 0.0005032797488162684
+    },
+    {
+      "function": "split",
+      "line": 14,
+      "seconds": 0.004261,
+      "percent": 0.00039756674262256573
+    },
+    {
+      "function": "shape",
+      "line": 27,
+      "seconds": 0.003217,
+      "percent": 0.00030015775898070734
+    },
+    {
+      "function": "resolve",
+      "line": 11,
+      "seconds": 0.002167,
+      "percent": 0.00020218895359378077
+    },
+    {
+      "function": "global",
+      "line": 23,
+      "seconds": 0.001089,
+      "percent": 0.00010160764672986953
+    },
+    {
+      "function": "rngSource",
+      "line": 24,
+      "seconds": 0.001068,
+      "percent": 9.964827062213099e-05
+    },
+    {
+      "function": "get",
+      "line": 10,
+      "seconds": 0.001065,
+      "percent": 9.936835974959692e-05
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "rows": [
+    {
+      "phase": "baseline",
+      "exitCode": 0,
+      "wallSeconds": 748.3828542083502,
+      "cpuSeconds": 1061.97764
+    },
+    {
+      "phase": "candidate",
+      "exitCode": 0,
+      "wallSeconds": 693.118251292035,
+      "cpuSeconds": 975.1223930000001
+    }
+  ],
+  "strictPublicPassed": {
+    "baseline": 44,
+    "candidate": 44
+  },
+  "cpuRatio": 0.9182136763256146,
+  "wallRatio": 0.9261546378226758,
+  "limits": "One sequential same-host unprofiled baseline-first full44 pair; no enforced deadlines or leaderboard acceptance."
+}

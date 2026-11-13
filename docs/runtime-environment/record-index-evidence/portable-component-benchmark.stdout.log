@@ -1,0 +1,22 @@
+[
+  {
+    "pattern": "monoField",
+    "ratio": 0.9194524577181967
+  },
+  {
+    "pattern": "mixedFields",
+    "ratio": 0.9631256325548533
+  },
+  {
+    "pattern": "aliases",
+    "ratio": 0.9409789335988598
+  },
+  {
+    "pattern": "numericIndex",
+    "ratio": 1.0086479107509103
+  },
+  {
+    "pattern": "mixedKeys",
+    "ratio": 0.983641425704514
+  }
+]

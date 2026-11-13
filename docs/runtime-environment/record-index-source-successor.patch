@@ -1,0 +1,14 @@
+--- a/js/c-runtime/adapter-factories.js
++++ b/js/c-runtime/adapter-factories.js
+@@ -32,9 +32,10 @@
+ 
+ 
+ export function createPrototypeDescriptorFactory({address,cache,recordTypes,layout,errorPrefix},initializePrototype){
++ const numericIndex=/^\d+$/;
+  let store;function view(name,value){return store.record(name,value);}
+  store=createRecordStore({address,cache,cacheKey:(name,at)=>name+':'+at,describe:type=>({type}),checked:false,trackDefinitions:false,publish:'late',
+-  createView({type:name},at){let type=recordTypes.get(name);if(!type){const prototype=initializePrototype(name,at);type={prototype,handler:{get(o,k){if(typeof k==='string'&&/^\d+$/.test(k))return view(name,o.address+Number(k)*Number(layout[name+'Size']));if(typeof k==='string'&&!Reflect.has(o,k))throw Error(errorPrefix+name+'.'+k);return Reflect.get(o,k);},set(o,k,v){if(!Reflect.has(o,k))throw Error(errorPrefix+name+'.'+String(k));return Reflect.set(o,k,v);}}};recordTypes.set(name,type);}return new Proxy(Object.assign(Object.create(type.prototype),{address:at,kind:name}),type.handler);},initialize(){}
++  createView({type:name},at){let type=recordTypes.get(name);if(!type){const prototype=initializePrototype(name,at);type={prototype,handler:{get(o,k){if(typeof k==='string'&&numericIndex.test(k))return view(name,o.address+Number(k)*Number(layout[name+'Size']));if(typeof k==='string'&&!Reflect.has(o,k))throw Error(errorPrefix+name+'.'+k);return Reflect.get(o,k);},set(o,k,v){if(!Reflect.has(o,k))throw Error(errorPrefix+name+'.'+String(k));return Reflect.set(o,k,v);}}};recordTypes.set(name,type);}return new Proxy(Object.assign(Object.create(type.prototype),{address:at,kind:name}),type.handler);},initialize(){}
+  });return view;
+ }
+ 

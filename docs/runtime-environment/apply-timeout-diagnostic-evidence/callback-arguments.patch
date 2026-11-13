@@ -1,0 +1,17 @@
+--- js/c-runtime/functions.js
++++ js/c-runtime/functions.js
+@@ -1,3 +1,5 @@
++import fs from 'node:fs';
++const callbackObjects=Object.create(null);process.on('exit',()=>fs.writeFileSync(process.env.CALLBACK_OBJECT_REPORT,JSON.stringify(callbackObjects,null,2)));
+ // Function identity and targeted nonlocal unwinding for standalone C adapters.
+ export class CExit extends Error {constructor(status){super('C exit '+status);this.status=status;}}
+ class CJump {constructor(scope,value){this.scope=scope;this.value=value||1;}}
+@@ -13,7 +15,7 @@
+     return {
+         functionPointer:register,
+         callback(id){const entry=entries.get(BigInt(id));if(!entry)throw new TypeError('Unknown C callback');return entry.fn;},
+-        indirect(id,signature,...args){const entry=entries.get(BigInt(id));if(!entry||entry.signature!==signature)throw new TypeError('Unknown or incompatible C callback');return entry.fn(...args);},
++        indirect(id,signature,...args){const entry=entries.get(BigInt(id));if(!entry||entry.signature!==signature)throw new TypeError('Unknown or incompatible C callback');for(let i=0;i<args.length;i++)if(signature[i+1]==='p'&&args[i]!==null&&(typeof args[i]==='object'||typeof args[i]==='function')){const k=String(id)+':'+signature+':'+i+':'+typeof args[i];callbackObjects[k]=(callbackObjects[k]??0)+1;}return entry.fn(...args);},
+         withJumpScope(callback){const scope={};frames.push(scope);try{return callback(scope);}catch(error){if(error instanceof CJump&&error.scope===scope)return error.value;throw error;}finally{frames.pop();}},
+         longjmp(scope,value){if(!frames.includes(scope))throw new Error('Expired C jump target');throw new CJump(scope,value);},
+         exit:status=>{throw new CExit(Number(status));},
