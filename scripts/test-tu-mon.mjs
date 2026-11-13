@@ -100,6 +100,12 @@ reset();setup(m=>{species(m,0,'PM_BLACK_PUDDING');m._probe_option(155,1);setRetu
 // Service forwarding remains current across cached entries, recursion, and errors.
 assert.ok(capturedServices);const svc=capturedServices,js=mods[1],savedBindings={C,R,T};
 const direct=createMonEnvironment(svc,L),fresh=createMonEnvironment(svc,L);assert.notEqual(direct,fresh);assert.equal(direct.monster(js._probe_pointer(0,1)),direct.monster(js._probe_pointer(0,1)));count+=2;
+// Tagged formatter callbacks retain a live address through native service boundaries.
+let formatterAddress=123456n;const formatter=()=>17;
+Object.defineProperty(formatter,'address',{get:()=>formatterAddress});
+const callbacks=createMonEnvironment({...svc,xname:formatter},L);
+assert.equal(callbacks.xname.address,123456n);formatterAddress=654321n;
+assert.equal(callbacks.xname.address,654321n);assert.equal(callbacks.xname(),17);count+=3;
 const cloned=Object.freeze({...L});assert.equal(monState(svc,L),monState(svc,cloned));count++;
 for(const bad of [{...L,mon_mx_size:4},{...L,pointerSize:4}])for(let attempt=0;attempt<2;attempt++){assert.throws(()=>callMon(svc,bad,'zombie_maker',js._probe_pointer(0,1)),/Review MON/);count++;}
 const failing={...svc,heap(){throw new Error('MON deliberate heap boundary exception');}};

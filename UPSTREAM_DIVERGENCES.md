@@ -1,3 +1,53 @@
+## Connected native lifecycle checkpoint (worktree, 2026-11-12)
+
+The movement change and main display integration were pushed to main at
+`1137037`. Their combined unprofiled replay subsequently passed all44 strict
+metrics with unchanged scoring inputs (batch447.321s). The following lifecycle
+changes are additional worktree changes, not part of that pushed commit.
+
+`js/nethack/native/monster-lifecycle.js` is generated from the unchanged MON
+policy by `scripts/generate-native-mon.py`. All129 source entrypoints close over
+a per-game environment; local calls execute directly. The MON provider and
+MONMOVE provider now share a native field owner, compatible record identities,
+and a tagged direct-dispatch table. Native-to-native calls retain the native
+scope and root stack lifetime. Legacy calls publish dirty fields and invalidate
+native reads on return, including exceptional/reentrant paths. Ordinary integer
+narrowing and measured byte-packed fields use Number arithmetic; 64-bit game
+values and wide pointer handles retain BigInt semantics.
+
+Shared identity covers monster/species/object/map/coordinate/attack/candidate/
+extra records. Provider-specific globals remain separate: incompatible views
+such as a raw visibility pointer versus row arrays are not interchangeable.
+Schema enrichment adds the union of fields needed by connected providers.
+Layout guards remain effective even when another provider already constructed
+a shared record. Addressable link/local reads publish dirty aliases first.
+
+Unchanged: original source policies, RNG algorithm/call ordering and caller
+metadata, iteration and mutation order, assets, frozen recorder, C source and
+compiler configuration. Iterator pointer-array allocation, byte serialization
+and remaining legacy providers are still heap-backed; this does not establish
+a fully native ordinary turn or20x performance.
+
+Checkpoint checks:14,731 original isolated-C comparisons across all129
+MON entrypoints;5,550 across all52 MONMOVE entrypoints;41,880 native alignment
+observations; full original-C main through716 keys/238 turns with equal frames,
+world graph and both RNG histories. A live-main ownership test confirms one
+object identity across both providers, direct native dispatch registration,
+root publication on input exhaustion and actual cached native reads. An early
+candidate exposed pointer-key rounding and incompatible visibility views;
+those versions are superseded, not accepted evidence. The first public replay
+also caught formatter callback address metadata lost by a service wrapper;
+metadata is now forwarded lazily and both affected recordings pass with exact
+RNG/screens. The failed replay is retained but not accepted. Final public44 result: **44/44 strict all-metric passes**, with all792,838
+RNG calls,11,405 boundary screens/cursors and1,483 animation screens/cursors
+matching, including exact output counts and persistence telemetry. All753
+scoring inputs stayed unchanged. Engine time442.004s →415.238s (6.0556% less,
+1.06446x) against the previously completed pushed-main integration run;
+fitted cost25.9669ms →24.5450ms per input move. Batch wall420.077s. No baseline
+was rerun or profiled. This comparison does not establish a paired causal
+estimate or20x. Proof: `native-lifecycle-public-validation.json` and
+`native-lifecycle-timing.json` in `docs/runtime-environment`.
+
 ## Active native monster movement (worktree, 2026-11-12)
 
 **Default gameplay now executes the per-game native MONMOVE module.**

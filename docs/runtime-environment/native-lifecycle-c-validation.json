@@ -1,0 +1,57 @@
+{
+  "profile": "Strict original full-C main against pure JS finite ordinary movement; source death fixture input prefix",
+  "checks": 3,
+  "cases": [
+    {
+      "keys": 716,
+      "moves": "238",
+      "frames": 717,
+      "worldRecords": {
+        "monst": 3,
+        "permonst": 3,
+        "branch": 7,
+        "obj": 37,
+        "mextra": 1,
+        "edog": 1,
+        "mapseen": 1,
+        "s_level": 36,
+        "stairway": 2
+      }
+    }
+  ],
+  "completeGameAccepted": false,
+  "sourceSha256": {
+    "scripts/test-standalone-monster-movement-program.mjs": "56b8be40dfff104fb388f634daceee36fad1400d7003fef953569588ed181906",
+    "scripts/restoration-world-graph.mjs": "a64d28a6a5974a89672ecedd637ebe89b706afb81b87267d8cb18684459907db",
+    "scripts/run-standalone-program.mjs": "29d76709123ab2b78c6e5dc45452b722b58cffc89b1afe1d5e4c2a384f00a479",
+    "scripts/full-original-c-run.mjs": "3da8b7a3dd0b2c1f60eb6a986bcb70c0bb79d120e50a007c1558569301978a9a",
+    "js/nethack/monster-movement.js": "dfdff47b8401bdba8bccee21659e4badfca28484685b15a342e699459ec42012",
+    "js/nethack/monster-lifecycle.js": "e5ce76d444cef171008397c687f5c5b4dcc3917a9766799d65101f0a92c66949",
+    "js/nethack/bindings/monmove.js": "cff10e7b9f7437eb91cf67913179c930d5b6aa061f53045695b1947b74d8a964",
+    "js/ported/monmove.js": "c15e91a573c5a8a8eda8c4d7cda18ef6966645f50ad515382a8dc027c717dc39",
+    "js/nethack/bindings/mon.js": "4f7dedab93839b2203103ae454ef58fb4aed6ea90da7b48787a5898abef19a31",
+    "js/ported/mon.js": "b76ebfece2f87288bd21915219cb8db7d00652399901b58f8463958a71ca3fe0",
+    "js/nethack/native/monster-lifecycle.js": "7d9d4144699165bd8c150ae8f5cb06797048b371ba422cfd81cd39bb54071153",
+    "js/nethack/native/state-bridge.js": "b5ab83b2b9365f3da49fa59738d6fcc40a4f0dfea98af4d77d834af6135a02f5",
+    "scripts/generate-native-mon.py": "b8ecf622762c49f1e23192665158c50efa7da0fb47f5a25e77b0736d71aaa4d2",
+    "scripts/test-native-connected-monsters.mjs": "db2d40a1e1177d1ab5881ea802a4ea18463a83819eb0a379d066f6cfb9e87e4d",
+    "scripts/test-tu-mon.mjs": "d0e4a282b3a01bad1a44bd3d00c653d823cba2a8ebfa9d225e326af0d815eec1"
+  },
+  "limitation": "Only these finite recordings and normalized world graphs are accepted; later death, victory, other seeds and unreached movement branches remain separate requirements.",
+  "rawProofs": {
+    ".cache/native-lifecycle-c-accepted.log": "cb17dda4f16c9e9def38d33e420c4e1f7ef94f8cbe76b1fb147ec0ce81aeed29",
+    ".cache/native-lifecycle-callback-unit.log": "00a36ca99eabb4aed002ef6a170eccd9e43dc789f51b183cb953590c3e129d9b",
+    ".cache/native-lifecycle-movement-accepted.log": "4749951ee1a10b3b551f30cef7252b0540c3202498b4b9584fca58c8536ea86e",
+    ".cache/native-lifecycle-alignment.log": "3e679d6fac225c863623adbd4f9d34aa883e0cb29a91cbdf5316ff937b5aa7cc",
+    ".cache/native-lifecycle-connected-final.log": "f49359e5c0b16f7f2d6aa129b612456cc1298f63dde7a13d9c3a4469ece65167"
+  },
+  "ownership": {
+    "passed": true,
+    "monsters": 6,
+    "nativeFunctions": 118,
+    "nativeFields": 13067,
+    "cachedReads": 27893,
+    "legacyBoundaries": 20987,
+    "moves": "85"
+  }
+}

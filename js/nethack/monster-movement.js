@@ -2,11 +2,12 @@
 import abi from './monmove-abi.json' with {type:'json'};
 import publicFunctions from './public-functions.json' with {type:'json'};
 import * as monmove from '../ported/monmove.js';
+import {nativeStateFor} from './native/state-bridge.js';
 import {callMonmove} from './bindings/monmove.js';
 export function enableMonsterMovement(environment,layouts){
  const {services,memory,ctypes}=environment,L=layouts.monmove;
- const wrappers=new Map();
- const local=new Proxy(Object.create(services),{get:(o,k,r)=>{const value=Reflect.get(o,k,r);if(Object.hasOwn(o,k)||typeof k!=='string')return value;if(typeof value!=='function'&&Reflect.has(o,k))return value;const old=wrappers.get(k);if(old&&old.source===value)return old.call;const call=(...args)=>(typeof value==='function'?value:environment.resolve(k))(...args.map(v=>v?.address??v));wrappers.set(k,{source:value,call});return call;}});
+ const nativeState=nativeStateFor(environment),wrappers=new Map();
+ const local=new Proxy(Object.create(services),{get:(o,k,r)=>{const value=Reflect.get(o,k,r);if(Object.hasOwn(o,k)||typeof k!=='string')return value;if(nativeState.functions.has(k))return nativeState.functions.get(k);if(typeof value!=='function'&&Reflect.has(o,k))return value;const old=wrappers.get(k);if(old&&old.source===value)return old.call;const call=(...args)=>(typeof value==='function'?value:environment.resolve(k))(...args.map(v=>v?.address??v));wrappers.set(k,{source:value,call});return call;}});
  // Shadow DECL setters so the unchanged factory installs its native record views.
  for(const name of abi.globals)Object.defineProperty(local,name,{value:services[name],writable:true,configurable:true});
 
@@ -23,6 +24,7 @@ export function enableMonsterMovement(environment,layouts){
  local.display_nhwindow=(win,blocking)=>environment.functions.indirect(ctypes.getField('struct window_procs',environment.requireGlobal('windowprocs'),'win_display_nhwindow','void *'),'vii',environment.transport.int(win),environment.transport.char(blocking));
  for(const name of ['strlen','strcpy','strcat','strcmp','strchr','strncmpi'])local[name]=(...args)=>services[name](text(args[0]),...args.slice(1).map(v=>typeof v==='string'?text(v):v?.address??v));
  const names=Object.keys(monmove).filter(name=>typeof monmove[name]==='function'&&Object.hasOwn(publicFunctions.functions,name)&&!environment.hasFunction(name));
- environment.register('monster-movement',Object.fromEntries(names.map(name=>[name,(...args)=>callMonmove(local,L,name,...args)])));
+ const exports=Object.fromEntries(names.map(name=>{const call=(...args)=>callMonmove(local,L,name,...args);call.nativeState=nativeState;nativeState.functions.set(name,call);return [name,call];}));
+ environment.register('monster-movement',exports);
  return {services:local,storage,call:(name,...args)=>callMonmove(local,L,name,...args),limitation:'Native per-game MONMOVE execution with transactional native fields and legacy service boundaries; strict public recordings and C world/RNG validation required for acceptance.'};
 }
