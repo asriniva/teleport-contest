@@ -1,3 +1,4 @@
+import {connectNativeMakemon} from '../js/nethack/native/makemon-state.js';
 // Live-main ownership and direct-dispatch checks, beyond isolated provider tests.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -227,4 +228,18 @@ try{combatContext.record=(type,value)=>{assert.equal(C,combatMarker);return comb
  combatContext.record=()=>{assert.equal(C,combatMarker);environment.transport.stackAlloc(24);throw Error('native combat cleanup');};withCEnvironment(combatMarker,()=>assert.throws(()=>environment.services.do_attack(combatContext.gy.youmonst),/native combat cleanup/));
 }finally{combatContext.record=combatRecord;}
 assert.equal(environment.memory.live.size,combatLive,'combat entry exceptions restore temporary C bytes');
+
+const nativeSelection=connectNativeMakemon(environment,'monster-selection',[]),nativeCreation=connectNativeMakemon(environment,'monster-creation',[]);
+assert.equal(Object.keys(nativeSelection.namespace).length,42,'selection binds all 41 source routines and the original symbol table');
+assert.equal(Object.keys(nativeCreation.namespace).length,42,'creation binds the complete source policy');
+const selectionEnvironment=environment.start('monster-selection').environment,creationEnvironment=environment.start('monster-creation').environment;
+assert.equal(selectionEnvironment.u,hero,'species selection shares the canonical hero');assert.equal(creationEnvironment.u,hero,'creation shares the canonical hero');
+assert.equal(creationEnvironment.mons[0],selectionEnvironment.mons[0],'selection and creation share species identity');
+for(const group of ['monster-selection','monster-creation'])for(const name of Object.keys(environment.start(group).namespace))assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),group+'.'+name+' has direct native execution');
+assert.equal(environment.services.makemon_rnd_goodpos.nativeEntry,owner.functions.get('makemon_rnd_goodpos'),'late-added random positions retain native dispatch');
+const sourceElemental=nativeSelection.namespace.is_home_elemental,selectionMarker={nativeSelectionCaller:true},liveBeforeSelection=environment.memory.live.size;
+try{nativeSelection.namespace.is_home_elemental=()=>{assert.equal(C,selectionMarker);return 0;};withCEnvironment(selectionMarker,()=>assert.equal(environment.services.is_home_elemental(selectionEnvironment.mons[0]),0));
+ nativeSelection.namespace.is_home_elemental=()=>{assert.equal(C,selectionMarker);environment.transport.stackAlloc(24);throw Error('native selection cleanup');};withCEnvironment(selectionMarker,()=>assert.throws(()=>environment.services.is_home_elemental(selectionEnvironment.mons[0]),/native selection cleanup/));
+}finally{nativeSelection.namespace.is_home_elemental=sourceElemental;}
+assert.equal(environment.memory.live.size,liveBeforeSelection,'selection callback exceptions restore temporary C bytes');
 console.log(JSON.stringify({passed:true,monsters,nativeFunctions:owner.functions.size,nativeFields:owner.fields,nativeStorage:owner.nativeArena?'typed-arrays':'cached-fields',cachedReads:owner.hits,legacyBoundaries:owner.boundaries,moves:result.state.moves}));

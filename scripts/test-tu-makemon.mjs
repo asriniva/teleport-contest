@@ -1,3 +1,5 @@
+const nativeExecution=process.env.NATIVE_MAKEMON_FIXTURE==='1',nativeServices=new WeakMap();
+function makemonServices(s){if(!nativeExecution)return s;let local=nativeServices.get(s);if(!local){local=Object.create(s);local.nativeExecution=true;nativeServices.set(s,local);}return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Actual configured original MAKEMON versus JS; dungeon/world callbacks controlled.
@@ -14,7 +16,7 @@ const {default:rf}=await loadFixture("makemon",pathToFileURL(resolve(dir,'refere
 const reference=await rf(),L={};
 const text=(m,p)=>{let i=Number(p);if(!i)return null;let e=i;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.subarray(i,e)).toString('latin1');};
 for(let i=0;i<reference._probe_layout_count();i++)L[text(reference,reference._probe_layout_name(i))]=Number(reference._probe_layout_value(i));
-const entered=new Set();const runtime={makemon:(services,name,...args)=>{entered.add(name);return callMakemon(services,L,name,...args);}};
+const entered=new Set();const runtime={makemon:(services,name,...args)=>{entered.add(name);return callMakemon(makemonServices(services),L,name,...args);}};
 const modules=[reference,await hf({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0,context='initial';
 const snapshot=m=>({state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace())});
 function check(){const actual=snapshot(modules[1]),expected=snapshot(reference);if(actual.state!==expected.state||actual.trace!==expected.trace){writeFileSync(resolve(dir,'failure-'+Date.now()+'.json'),JSON.stringify({context,actual,expected},null,2));for(const k of ['state','trace'])if(actual[k]!==expected[k]){let i=0;while(actual[k][i]===expected[k][i])i++;console.error(context,k,'first difference',i,'actual',actual[k].slice(i,i+160),'expected',expected[k].slice(i,i+160));}}assert.ok(actual.state===expected.state&&actual.trace===expected.trace,context);for(let i=0;i<2;i++)assert.equal(modules[i]._probe_stack(),stacks[i],context+':stack');assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);comparisons++;}
@@ -58,5 +60,5 @@ const isolatedReference=await rf(),isolatedHybrid=await hf({nethackPorted:runtim
 for(const m of[isolatedReference,isolatedHybrid]){m._probe_reset();m._probe_seed(314159);m._probe_action(25,0,0,0,0n);m._probe_action(27,L.S_ORC,0,0,0n);}
 assert.deepEqual(snapshot(isolatedHybrid),snapshot(isolatedReference),'independent Module state');assert.equal(C,undefined);comparisons++;
 const expected=Object.entries(core).filter(([,v])=>typeof v==='function').map(([k])=>k).sort();assert.deepEqual([...entered].sort(),expected,'all configured entrypoints imported/reached');
-writeFileSync(resolve(dir,'summary.json'),JSON.stringify({status:'PASS',comparisons,entered:[...entered].sort(),reference:'actual configured original memory64 C',scope:'41 entrypoints reached; controlled foreign world; not all branches; native-host/production/public pending'},null,2));
+writeFileSync(resolve(dir,'summary.json'),JSON.stringify({status:'PASS',nativeExecution,comparisons,entered:[...entered].sort(),reference:'actual configured original memory64 C',scope:'41 entrypoints reached; controlled foreign world; not all branches; native-host/production/public pending'},null,2));
 console.log(`MAKEMON PASS ${comparisons} original C/pure-JS comparisons; ${entered.size} configured entrypoints reached.`);

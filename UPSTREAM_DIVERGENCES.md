@@ -1,3 +1,49 @@
+## Native monster selection and creation execution (2026-11-13)
+
+`native/makemon.js` binds all 41 original monster-creation/selection bodies and the
+original symbol table to game contexts. `native/makemon-state.js` reconnects the
+existing selection and creation owners, including later position/group helpers,
+without changing public symbol identity. Calls preserve native species/actor/item
+records, use measured parameter casts and keep original reference preparation.
+The two contexts inherit the same live selection statics. Source RNG sites,
+mutation order, inventory construction, birth/death counts and placement policy
+remain unchanged. Ordinary elemental checks now execute directly on canonical
+species records; initialization, inventories and real construction use the same
+native source bodies. Byte buffers, private static arrays, legacy dependencies
+and per-function temporary frames remain explicit compatibility boundaries.
+
+Native enum fields use compiler-measured underlying widths/signs directly.
+Primitive native arrays write typed elements, and pointer arrays read/write native
+handles with canonical actor identity; neither goes through generic scalar I/O.
+Byte aliases and aligned/unaligned access survive growth. Aggregate copies keep
+their byte boundary. The seven-public ABI proof is regenerated with unchanged
+prototypes, parameter types and widths, binding its hashes to active sources.
+The bound source factory is also selectable in the original-C component fixture,
+including the measured sort-comparator identity; production uses it by default
+through the actual selection/creation owners. CI runs the native value checks.
+
+All 41 source routines and 42 exports match the original policy AST. Original-C
+verification passes 8,794 directed comparisons over all 41 entry points, 9,156
+selection/species/biology/elemental/difficulty/RNG and item-constructor comparisons,
+and 200,754 monster-biology comparisons. Another 84 checks compare genuine
+C-initialized worlds through class inputs, pet cloning and removal, complete
+ordered logs and both ISAAC states. Native values pass 1,261 checks on Node 24 and
+scoring Node 22: all 31 measured enum fields, nine scalar types, aligned/unaligned
+arrays, C byte aliases, growth, canonical occupancy and wide opaque handles.
+Generic scalar I/O is forbidden during those native operations. Live-main proves
+canonical identities, all 38 published direct entries including late position
+helpers, and exception cleanup. Source/metadata/callback audits pass.
+
+Actual C state, tty, ordered RNG logs and normalized frames match for ordinary
+turns. Generic calls are 28/56/131 and generic fields 51/94/141 for walk/wait/attack;
+C allocations remain 45/166/113. All 44 recordings pass with 798 scoring inputs
+unchanged: 792,838 RNG entries, 11,405 screens/cursors and 1,483 animations match.
+Unprofiled Node 22.23.5 batch time is 292.230s versus 292.330s previously:
+essentially unchanged, with no meaningful speedup demonstrated. These are
+separate single runs; zero-bridge/allocation and 20x acceptance remain unmet.
+Evidence is in `docs/runtime-environment/native-selection-validation.json` and
+its source manifest. No upstream C, RNG algorithm, inputs or capture policy change.
+
 ## Native main combat dispatcher (2026-11-13)
 
 `native/uhitm.js` binds all 102 original combat bodies to the game context.
