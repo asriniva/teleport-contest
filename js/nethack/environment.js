@@ -45,6 +45,8 @@ import {enableMonsterCreation} from './monster-creation.js';
 import {enableMonsterInventory} from './monster-inventory.js';
 import {enableWorldPosition} from './world-position.js';
 import {createEnvironmentInputs} from '../c-runtime/environment-inputs.js';
+import {nativeStateFor} from './native/state-bridge.js';
+import {NativeTypedState} from './native/typed-state.js';
 import {enableLuaSandbox} from './lua-sandbox.js';
 import {enableMonsterLifecycle} from './monster-lifecycle.js';
 import {enableMonsterMovement} from './monster-movement.js';
@@ -232,6 +234,9 @@ export function createStandaloneEnvironment(options={}) {
         });
         const state=createRndState(local),env=createRndEnvironment(local,layout,state);
         register('rnd',rnd,env,{prepareArgs:(fn,args)=>fn==='shuffle_int_array'?[env.intArray(args[0]),args[1]]:args});
+        // These three APIs only inspect/update the RNG logger's JS state.
+        // They neither step the generator nor inspect native actor/map bytes.
+        for(const name of ['rng_log_enabled','rng_log_set_caller','rng_log_get_call_count'])if(Object.getOwnPropertyDescriptor(services[name],'nativeEntry')?.get)Object.defineProperty(services[name],'nativeStateIndependent',{value:true});
         if(typeof initialize!=='boolean')throw new TypeError('RNG initialize must be boolean');
         if(initialize){call('rnd','init_isaac64',BigInt(seed),Number(core));call('rnd','init_isaac64',BigInt(displaySeed),Number(display));}
         states.set('rnd',state);return {core,display,state};
@@ -386,5 +391,6 @@ export function createStandaloneEnvironment(options={}) {
         strbuf_nl_to_crlf:p=>base.strutil('strbuf_nl_to_crlf',base.strbuf(address(p))),
     });
     register('runtime-public-calendar',Object.fromEntries(['phase_of_the_moon','friday_13th'].map(name=>[name,()=>base.calendar(name)])));
+    nativeStateFor(environment).nativeArena=new NativeTypedState(memory);
     return environment;
 }

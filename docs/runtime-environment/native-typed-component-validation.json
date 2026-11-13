@@ -1,0 +1,143 @@
+{
+  "baseCommit": "2322664",
+  "scope": "Actual gameplay uses one per-game typed state arena for MON, MONMOVE, HACK, VISION and canonical fields in thirteen compiled engine modules. Numeric handles, direct dependencies and root-owned scratch lifetimes replace repeated mirrored publication.",
+  "typedStorage": {
+    "passed": true,
+    "checks": 607,
+    "byteAliases": true,
+    "heldFieldsAcrossGrowth": true,
+    "oddCapacities": true,
+    "growthNotifications": true,
+    "lateProviderEnrichment": true
+  },
+  "actualGameplay": {
+    "passed": true,
+    "monsters": 6,
+    "nativeFunctions": 496,
+    "nativeFields": 24932,
+    "nativeStorage": "typed-arrays",
+    "cachedReads": 0,
+    "legacyBoundaries": 53604,
+    "moves": "85"
+  },
+  "kernelFields": {
+    "passed": true,
+    "gameKernels": [
+      "detect",
+      "display",
+      "dungeon",
+      "invent",
+      "mklev",
+      "mkmaze",
+      "mkobj",
+      "muse",
+      "pickup",
+      "pray",
+      "shk",
+      "sp_lev"
+    ],
+    "canonicalFields": true,
+    "displayNativeReads": true,
+    "byteAliases": true,
+    "foreignReentry": true,
+    "exceptions": true,
+    "serviceReplacement": true,
+    "legacyMutableMetadata": true
+  },
+  "originalCWorldComparison": {
+    "profile": "Strict original full-C main against pure JS finite ordinary movement; source death fixture input prefix",
+    "checks": 3,
+    "cases": [
+      {
+        "keys": 716,
+        "moves": "238",
+        "frames": 717,
+        "worldRecords": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 37,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        }
+      }
+    ],
+    "completeGameAccepted": false,
+    "sourceSha256": {
+      "scripts/test-standalone-monster-movement-program.mjs": "56b8be40dfff104fb388f634daceee36fad1400d7003fef953569588ed181906",
+      "scripts/restoration-world-graph.mjs": "a64d28a6a5974a89672ecedd637ebe89b706afb81b87267d8cb18684459907db",
+      "scripts/run-standalone-program.mjs": "29d76709123ab2b78c6e5dc45452b722b58cffc89b1afe1d5e4c2a384f00a479",
+      "scripts/full-original-c-run.mjs": "3da8b7a3dd0b2c1f60eb6a986bcb70c0bb79d120e50a007c1558569301978a9a",
+      "js/nethack/monster-movement.js": "dfdff47b8401bdba8bccee21659e4badfca28484685b15a342e699459ec42012",
+      "js/nethack/monster-lifecycle.js": "e5ce76d444cef171008397c687f5c5b4dcc3917a9766799d65101f0a92c66949",
+      "js/nethack/bindings/monmove.js": "4ee2c2084aa357384454a16cd6fbd94dd6069387bf40934feb40f4b0732d4aeb",
+      "js/ported/monmove.js": "c15e91a573c5a8a8eda8c4d7cda18ef6966645f50ad515382a8dc027c717dc39",
+      "js/nethack/bindings/mon.js": "38616849c82cc2d759e54e01cb21656d180e247a0558b8af97b99b0a8b988674",
+      "js/ported/mon.js": "b76ebfece2f87288bd21915219cb8db7d00652399901b58f8463958a71ca3fe0"
+    },
+    "limitation": "Only these finite recordings and normalized world graphs are accepted; later death, victory, other seeds and unreached movement branches remain separate requirements."
+  },
+  "runtimeValidation": {
+    "memory": "passed",
+    "freeLists": {
+      "passed": true,
+      "checks": 1129366,
+      "steps": 86284
+    },
+    "contracts": "passed",
+    "descriptorAdapter": "passed"
+  },
+  "rejectedCandidate": {
+    "directory": ".cache/native-typed-public-01",
+    "passed": 41,
+    "sessions": 44,
+    "reason": "Memoized monster-data pointers did not rerun schema enrichment after a new native provider registered; three recordings raised Unknown HACK record field permonst.msound. Failed timing is not accepted.",
+    "fix": "Pointer memoization now includes owner.schemaVersion; a directed late-provider test passes.",
+    "affectedRecordingsReplay": ".cache/native-typed-failures-04",
+    "affectedRecordingsPassed": 3
+  },
+  "rawProofSha256": {
+    ".cache/native-typed-storage-04.log": "175cae1f084f770727eb35e3f698f0cef2bb0043a8bc8a413e6b222a70033d3f",
+    ".cache/native-typed-connected-04.log": "6d9d20abf89ba3ea8aa28c81b2348851ffb04bd22679942cb9f9d9ff111f0f77",
+    ".cache/native-typed-kernel-state-04.log": "cef092dd71123fabd56ce3fc508001f2d2b568335445b152f091a3775b9607f4",
+    ".cache/native-typed-vision-dispatch-04.log": "0624974090cb55db0e33887933e77d82c04a7f98de6c6ea5aeb416c0078af5d4",
+    ".cache/native-typed-address-dispatch-04.log": "b95ddf395e94942180729126fc15d95c42a82175d8218402ea0590468072d0fc",
+    ".cache/native-typed-main-716-04.log": "5c6c5e696b9ce9ae39f599064c42a74192ac1757ce20ec6a8af6c1483ea48628",
+    ".cache/native-typed-memory.log": "a2d71e42d29b1b9bb085941c25fca1917b1e668686206dff6447b5e29bbb9eda",
+    ".cache/native-typed-free-lists.log": "81b6259e0a74e51c8f29e169ea86cc7787572f5ccebdd894aaac2c93af990337",
+    ".cache/native-typed-runtime-contracts.log": "07ee503dea72061c94bf7121c2a8c00362b57e4afd8b17fd7a9b9ffb10910d42",
+    ".cache/native-typed-adapter-memory.log": "d6b3a2487f446248e6dc54571288d93bbdc23126154dfcf61fb93a417394c5f0"
+  },
+  "sourceSha256": {
+    "js/c-runtime/adapter-factories.js": "96ed23950076350114c05e0a1ef178689af636808a4170bf866aaf19ce53b9dc",
+    "js/c-runtime/address-bindings.js": "8890aac5a4dd6781f2ff532463bfe82b641cfbf5db12a3dcc0d8c574f41c4ea5",
+    "js/c-runtime/heap.js": "488e207804f2be7d62183b31d403057cd5ea8319fc2022c544adeef05adf06b1",
+    "js/nethack/address-ports.js": "b4f5258798028ba642be6925e7805e5dd04dd86300287fd8895779dde3189ce7",
+    "js/nethack/bindings/display-direct.js": "0c4f00b5f7e39b465c09ce067b7f49e9d171f7d5bc98ee184c82f86d44c97aa4",
+    "js/nethack/bindings/hack.js": "be7e46d33c76208c9ea711fbf3b4287a7e6c2e5bf6b1c5a24ffa4f889c0b0d8e",
+    "js/nethack/bindings/mon.js": "38616849c82cc2d759e54e01cb21656d180e247a0558b8af97b99b0a8b988674",
+    "js/nethack/bindings/monmove.js": "4ee2c2084aa357384454a16cd6fbd94dd6069387bf40934feb40f4b0732d4aeb",
+    "js/nethack/bindings/vision.js": "f9409c915cc1fadd123b56a1046ee0df26605188beed96d8948b777ebf802da7",
+    "js/nethack/environment.js": "517fbe07dea8131628e909859f06da2a242f3a5ffbebc2e32f05c01e5613d4cf",
+    "js/nethack/native/address-fields.js": "6323513e5fabce570e88107d1e6fef3dcd23a76fd08b965f05208c9619c31c32",
+    "js/nethack/native/descriptor-state.js": "cd102755cc7cb9343a3ca8e36ad86f7ae50f373ca5139b98f76e8ea0bcc75464",
+    "js/nethack/native/state-bridge.js": "f9803fe4bd424d3d6f7da812f2a58b20b2587253836dd6888936f27de5eeae1a",
+    "scripts/test-native-address-dispatch.mjs": "bfed551f4d5ed62f76e1bea3d44a34fb698f4302a9e07ab263c92f9065cde4c0",
+    "scripts/test-native-connected-monsters.mjs": "3f0c968b19b895edc687d2c26a75dd3d0dccb8d03b28a94c84abb5b622a82c85",
+    "scripts/test-native-vision-dispatch.mjs": "10a96a861ed485ddfd23c56e095ffe196f3e2d9560d483df25bdd890d348ce39",
+    "js/nethack/native/address-state.js": "3241e9d4187b38301c34f6be291827bd039a63a9a80acd1cde2229bf96ee07be",
+    "js/nethack/native/typed-state.js": "983dd7036ce156a7bbfe47065ce2d407d9d52b99980347d332a24de6cfa3effc",
+    "scripts/test-native-kernel-state.mjs": "6bfbd16894854d7b27f48eae2ac7f2973dc23a21d0b675e50b5cd3d4797df203",
+    "scripts/test-native-typed-state.mjs": "de43a8b43733c380bdbc9c547e11f7ece445b8540b4c12c209e52a14cf830448"
+  },
+  "limits": [
+    "607 directed typed storage checks are synthetic; the original-C comparison covers a finite 716-input/238-turn prefix.",
+    "Connected ownership, kernel fields, direct/deferred dispatch, visibility dispatch and original-C world checks pass on the final source after the late-provider fix. Full recording acceptance is reported separately.",
+    "Typed state keeps the measured C-compatible physical layout; this is not complete structure-of-arrays storage or runtime-free execution.",
+    "Legacy modules, dynamic callbacks and byte-level services remain. Twentyfold speedup is not established.",
+    "No new baseline replay or CPU profiling."
+  ]
+}

@@ -39,6 +39,7 @@ export function enableAddressPort(environment,name,{only,definition:providedDefi
     const definition=providedDefinition??metadata.ports[name],pair=providedAdapter??ports[name];if(!definition||!pair)throw new Error('Unsupported address adapter '+name);
     const {schema,layout}=definition,{services,transport}=environment,ctypes=providedTypes??environment.ctypes;
     const nativeState=nativeStateFor(environment),namespace=pair[0],bridge=pair[1];
+    const nativeMode=!providedDefinition&&!providedAdapter&&!providedTypes&&pair===ports[name];
     const backings=(schema.statics??schema.backings??[]).map(row=>Object.hasOwn(backingAddresses,row.name)?environment.address(backingAddresses[row.name]):environment.allocateGlobal(name+'.'+row.name,ctypes.size(row.type)));
     if(['muse','pray'].includes(name))backings.push(environment.allocateGlobal(name+'.localStrings',Math.max(1,...schema.localStatics.map(r=>r.offset+r.bytes))));
     if(name==='detect')backings.push(environment.allocateGlobal('detect.dummytrap',ctypes.size('struct trap')));
@@ -47,10 +48,13 @@ export function enableAddressPort(environment,name,{only,definition:providedDefi
         fallbackSignatures:{mkroom_cmp:'ipp',rn2_on_display_rng:'ii'},
         indirectCalls:{callObject:'ipp',callMonster:'ipp',callBuzz:'viiiiii',callCursor:'vii',callWindow:'vii',callRng:'ii'},
         resolveFunction:fn=>nativeState.functions.get(fn),
+        nativeOwner:nativeMode?nativeState:undefined,
         bind:key=>bind(key),
     });
     const local=binding.services,keys=binding.layout,resolve=binding.resolve;
     local.nativeFieldPlans=compileNativeFieldPlans(environment,schema,ctypes);
+    if(nativeMode){local.nativeOwner=nativeState;local.nativeModuleName=name;local.stackSave=()=>nativeState.depth?undefined:transport.stackSave();local.stackRestore=saved=>{if(saved!==undefined)transport.stackRestore(saved);};}
+    let nativeInitialized=false;
     let factoryEnvironment;
     if(only)for(const key of only)if(typeof namespace[key]!=='function')throw new Error('Unknown address adapter export '+name+'.'+key);
     const calls=new Map();
@@ -61,7 +65,7 @@ export function enableAddressPort(environment,name,{only,definition:providedDefi
         if(pair[2]==='layout')return bridge(local,layout,key,...args);
         if(pair[2]==='factory'){factoryEnvironment??=bridge(local,layout,namespace);return factoryEnvironment.nativeNamespace?factoryEnvironment.nativeNamespace[key](...args):withCEnvironment(factoryEnvironment,namespace[key],...args);}
         return bridge(local,key,...args);
-    };let started=false;const call=(...args)=>{if(!started){environment.startModule(name);started=true;}const saved=transport.stackSave();try{return nativeState.boundary(rawCall,...args);}finally{transport.stackRestore(saved);}};call.nativeState=nativeState;call.nativeDirect=true;calls.set(key,call);return call;};
+    };let started=false;const call=(...args)=>{if(!started){environment.startModule(name);started=true;}if(!nativeMode){const saved=transport.stackSave();try{return nativeState.boundary(rawCall,...args);}finally{transport.stackRestore(saved);}}const saved=nativeState.depth?undefined:transport.stackSave();nativeState.enter();try{if(!nativeInitialized){const value=nativeState.boundary(rawCall,...args);nativeInitialized=true;return value;}return rawCall(...args);}finally{try{nativeState.leave();}finally{if(saved!==undefined)transport.stackRestore(saved);}}};call.nativeState=nativeState;call.nativeDirect=true;calls.set(key,call);return call;};
     const wrappers=Object.fromEntries(Object.entries(namespace).filter(([key,fn])=>typeof fn==='function'&&(!only||only.includes(key))&&!/StaticInitializers$/.test(key)&&(!schema.functionTypes||Object.hasOwn(schema.functionTypes,key))).map(([key])=>[key,bind(key)]));
     environment.register(name,wrappers,local);
     for(const[key,call]of Object.entries(wrappers))nativeState.functions.set(key,call);

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {C,withCEnvironment} from '../js/c-runtime/context.js';
 import {createJsRuntime,CPanic} from '../js/nethack/runtime.js';
+import {nativeStateFor} from '../js/nethack/native/state-bridge.js';
 // Retained runtime dependencies must work from a native closure with no C
 // context, and must not borrow another game's active context.
 const runtime=createJsRuntime({initialBytes:1024,maximumBytes:2048});
@@ -28,7 +29,17 @@ const a=env.memory.calloc(1,env.ctypes.size('struct d_level')),b=env.memory.call
 const field=(p,n,v)=>env.ctypes.setField('struct d_level',p,n,'short',v);
 field(a,'dnum',1);field(a,'dlevel',2);field(b,'dnum',1);field(b,'dlevel',2);
 const marker={nativeDispatchCaller:true};
+const owner=nativeStateFor(env);
+const level=p=>{const record={address:p};for(const key of ['dnum','dlevel']){const at=env.ctypes.fieldAddress('struct d_level',p,key);Object.defineProperty(record,key,owner.field(()=>env.memory.view.getInt16(at,true),v=>env.memory.view.setInt16(at,v,true),v=>Number(v)<<16>>16));}owner.records.set('struct d_level:'+p,record);return record;};
+const levelA=level(a),levelB=level(b);
+owner.enter();levelA.dnum=3;levelB.dnum=3;
+assert.equal(env.ctypes.getField('struct d_level',a,'dnum','short'),owner.nativeArena?3:1);
 withCEnvironment(marker,()=>{assert.equal(entry(a,b),1);assert.equal(C,marker,'native dispatch retains the caller context');});
+assert.equal(owner.depth,1);
+assert.equal(env.ctypes.getField('struct d_level',a,'dnum','short'),3,'first adapter construction publishes pending native state');
+levelB.dnum=4;assert.equal(entry(a,b),0,'a later native call consumes a dirty canonical field');
+assert.equal(env.ctypes.getField('struct d_level',b,'dnum','short'),owner.nativeArena?4:3,'nested native calls retain the current canonical state');
+if(!owner.nativeArena)assert.ok(owner.dirty.size>0);levelB.dnum=3;owner.leave();
 assert.equal(env.status().dungeon,'ready');assert.equal(C,undefined);
 field(b,'dlevel',3);assert.equal(entry(a,b),0);assert.equal(env.services.on_level(a,b),0);
 assert.equal(env.services.on_level.nativeEntry,entry);

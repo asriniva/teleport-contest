@@ -1,3 +1,67 @@
+## Connected typed native state (worktree, 2026-11-13)
+
+Additional work after visibility checkpoint2322664. The thirteen default address
+ports now retain native scopes across connected calls. Their lowered fields
+resolve existing canonical native hero/monster/object/map records when a native
+provider supplies the field; other fields retain explicit byte transport with
+publication/invalidation. `js/nethack/native/address-state.js` fences addressable
+cells, field carriers, raw helpers and foreign functions; pure numeric/address
+operations remain direct. `createAddressBindings` dispatches native dependencies
+directly and publishes state before legacy dependencies. Return type selection
+is compiled once. Per-game temporary storage remains alive until the native root
+exits; initial adapter construction and custom/unconverted adapters remain byte
+boundaries. Native field schemas, original source policy, integer widths,
+mutation/RNG call order and callback/save formats are intended to remain intact.
+The first canonical-field candidate passed the three focused recordings but
+was slower (38.34552s versus saved35.39819s for those inputs); no speed gain is
+accepted. It is now being replaced with a native typed state arena covering the
+core record providers, map occupancy and pointer handles. `NativeTypedState`
+uses direct typed-array elements with measured widths, fast numeric handles and
+byte-observed caches for unchanged64-bit values and references. Retained byte
+access and native fields share storage, so actor state has no dirty mirror to
+publish/invalidate. C-compatible layout/serialization remains deliberate. Memory
+growth updates the arena views through `CMemory.onGrow`; unaligned/other-endian
+operations retain explicit DataView semantics. Old standalone component owners
+retain the earlier cache bridge. Native execution scopes still own temporary
+lifetimes; true legacy/dynamic callbacks retain their calling boundary. The
+three RNG logging metadata APIs (not generator steps) are marked independent
+of actor/map storage only on their known linker exports; the RNG algorithm,
+state-step count and caller order are unchanged. Native direct display readers
+also consume canonical fields with explicit width normalization. This is an
+accepted architecture/equivalence checkpoint; it does not establish a substantial
+speed gain. The607 directed typed-storage checks pass, including signed widths,
+unaligned/endian access, opaque64-bit pointers, byte aliases, odd capacities,
+held fields after growth, notification unsubscribe/failure and lazy schema
+enrichment. Shared-memory/descriptor/runtime contracts and1,129,366 allocator
+checks pass. Actual gameplay uses typed storage across85 turns; the original-C
+world/frame/both-RNG comparison passes716 inputs/238 turns. Detailed evidence
+and source hashes are in
+`docs/runtime-environment/native-typed-component-validation.json`.
+
+The first full typed candidate (`.cache/native-typed-public-01`) is rejected:
+41/44 passed; three recordings raised `Unknown HACK record field permonst.msound`.
+A memoized pointer with unchanged address had skipped schema enrichment after
+a new provider registered. Reference memoization now also tracks schema version;
+the directed regression and all three affected recordings pass at
+`.cache/native-typed-failures-04`. Failed-run timing is not a performance result.
+The initial three-recording typed probe passed in33.89403s versus the existing
+35.39819s reference, but predates this fix and is only provisional. A fully
+native ordinary turn and20x remain unachieved. No baseline replay or profiling.
+
+The final source-stable `.cache/native-typed-public-04` run passes44/44 strict
+recordings:792,838 RNG entries,11,405 screens/cursors,1,483 animation frames and
+ordered cursor triples, all56 persistence segments and zero forbidden capability
+attempts. All772 scoring inputs are unchanged during the run; frozen/session
+bytes are unchanged. Engine time is374.62943s versus saved best377.40465s
+(0.7353% lower), or2.0347% below the preceding visibility checkpoint382.41025s.
+Geometric mean session speedup against best is0.99933x; this single historical
+comparison does not establish a broad or large performance gain. Fit is
+21.4156ms/turn versus21.6829ms/turn; wall time379.71454s. Receipts:
+`native-typed-public-validation.json`, `native-typed-timing.json` and
+`native-typed-timing-previous.json` under `docs/runtime-environment`.
+The next high-value migration is the remaining generic turn-loop state and
+internal execution convention; those are not claimed converted here.
+
 ## Native visibility state checkpoint (worktree, 2026-11-13)
 
 Additional work after address-engine checkpoint46ec284. VISION policy is copied

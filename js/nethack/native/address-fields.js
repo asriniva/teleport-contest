@@ -1,14 +1,30 @@
 // Native field operations used by the generated address-engine kernels.
 // Public byte-level transports remain available for lvalue carriers/ABI callbacks.
+import {connectNativeAddressState} from './address-state.js';
 export function createNativeAddressFields(env,services,schema,decode,convert=env.ptr) {
+ const connected=connectNativeAddressState(env,services),owner=connected?.owner;
  const readers=[],writers=[],addresses=[],nativeScalars=new Set(['char','signed char','unsigned char','short','unsigned short','int','unsigned int','unsigned','long','unsigned long','long long','unsigned long long']);
  Object.values(schema.schema).forEach((row,kind)=>row.fields.forEach((field,index)=>{
   const id=readers.length,plan=services.nativeFieldPlans?.[kind]?.[index];
   const readRaw=plan?plan.read:(at=>services.read(kind,at,index));
   const writeRaw=plan?plan.write:((at,value)=>services.write(kind,at,index,value));
   const addressRaw=plan?plan.address:(at=>services.address(kind,at,index));
-  readers[id]=plan&&!field.bit&&nativeScalars.has(field.canonical)?(at=>readRaw(convert(at?.address??at))):(at=>decode(field.canonical,readRaw(convert(at?.address??at))));
-  writers[id]=(at,value)=>{writeRaw(convert(at?.address??at),BigInt.asUintN(64,BigInt(value)));return value;};
+  const native=connected?.accessor(row,field),pointer=field.canonical.includes('*');
+  const read=plan&&!field.bit&&nativeScalars.has(field.canonical)?readRaw:(at=>decode(field.canonical,readRaw(at)));
+  readers[id]=at=>{at=convert(at?.address??at);const record=native?.(at);if(record){const value=record[field.name];return decode(field.canonical,value?.address??value);}if(owner?.depth)owner.flush();return read(at);};
+  writers[id]=(at,value)=>{
+   at=convert(at?.address??at);const record=native?.(at);let encoded;
+   if(record&&(nativeScalars.has(field.canonical)||pointer||field.canonical.startsWith('enum '))){
+    if(typeof value==='number'&&Number.isInteger(value)){
+     if(!pointer||(Number.isSafeInteger(value)&&value>=0)){record[field.name]=decode(field.canonical,value);return value;}
+    }else{
+     encoded=BigInt.asUintN(64,BigInt(value));
+     if(!pointer||encoded<=9007199254740991n){record[field.name]=decode(field.canonical,encoded);return value;}
+    }
+   }
+   encoded??=BigInt.asUintN(64,BigInt(value));
+   if(owner?.depth)owner.flush();try{writeRaw(at,encoded);}finally{if(owner)owner.invalidate();}return value;
+  };
   addresses[id]=at=>convert(addressRaw(convert(at?.address??at)));
  }));
  const compound=(get,set,at,op,rhs)=>{

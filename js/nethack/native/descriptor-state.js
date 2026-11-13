@@ -21,7 +21,7 @@ export function createNativeDescriptorViews({owner,schemas,records,memory,addr,r
    if(Object.hasOwn(out,f.name))continue;
    const field=definitions.get(name).fields[f.name],p=at+field.offset;
    if(f.d.s||f.d.a){Object.defineProperty(out,f.name,{enumerable:true,get:()=>read(f.d,p),set:v=>write(f.d,p,v)});continue;}
-   let get,set,normalize;
+   let get,set,normalize,pointerDecode;
    if(f.bit){
     if(field.bits===undefined||field.shift+field.bits>8)throw Error('Review native descriptor packed field '+name+'.'+f.name);
     const mask=(1<<field.bits)-1,packed=mask<<field.shift;
@@ -29,14 +29,15 @@ export function createNativeDescriptorViews({owner,schemas,records,memory,addr,r
     set=v=>memory().setUint8(p,(memory().getUint8(p)&~packed)|((v&mask)<<field.shift));
     normalize=v=>Number(v)&mask;
    }else if(f.d.p!==undefined||f.d.q||f.d.f){
-    get=()=>decode(f.d,memory().getBigUint64(p,true));set=v=>memory().setBigUint64(p,raw(v),true);normalize=v=>decode(f.d,raw(v));
+    pointerDecode=v=>decode(f.d,v);get=()=>pointerDecode(memory().getBigUint64(p,true));set=v=>memory().setBigUint64(p,raw(v),true);normalize=v=>pointerDecode(raw(v));
    }else{
     const method=scalar[f.d.t];if(!method)throw Error('Review native descriptor scalar '+name+'.'+f.name);
     get=()=>memory()['get'+method](p,true);set=v=>memory()['set'+method](p,v,true);normalize=v=>decode(f.d,raw(v));
    }
    // Unshared globals can have different pointer projections in other native
    // kernels. Their backing bytes are the common synchronization boundary.
-   if(type.startsWith('union ')||(!shared&&type!=='struct instance_globals_v'))Object.defineProperty(out,f.name,{enumerable:true,get(){owner.flush();return get();},set(v){owner.flush();set(normalize(v));owner.invalidate();}});
+   if(owner.nativeArena&&!f.bit)Object.defineProperty(out,f.name,pointerDecode&&!f.d.f?owner.pointer(p,pointerDecode,normalize,get,set):owner.scalar(p,f.d.f?'BigUint64':scalar[f.d.t],normalize,get,set));
+   else if(type.startsWith('union ')||(!shared&&type!=='struct instance_globals_v'))Object.defineProperty(out,f.name,{enumerable:true,get(){owner.flush();return get();},set(v){owner.flush();set(normalize(v));owner.invalidate();}});
    else Object.defineProperty(out,f.name,owner.field(get,set,normalize,type==='struct instance_globals_v'?p:undefined));
   }
   views.set(key,out);decorate(name,out);owner.enrich(out,type,at);return out;

@@ -12,6 +12,7 @@ export class NativeStateBridge {
  // Distinct packed members must not share it; overlapping unions stay live.
  field(read,write,normalize=v=>v,storageKey) {
   const owner=this;
+  if(this.nativeArena){this.fields++;return {enumerable:true,get:read,set(value){write(normalize(value));}};}
   const cell={epoch:-1,version:-1,value:undefined,read,write};this.fields++;
   return {enumerable:true,get(){
    if(!owner.depth)return read();
@@ -20,14 +21,20 @@ export class NativeStateBridge {
    return cell.value;
   },set(value){const normalized=normalize(value);if(!owner.depth){write(normalized);owner.invalidate();return;}cell.value=normalized;cell.epoch=owner.epoch;if(storageKey!==undefined){const previous=owner.pendingAliases.get(storageKey);if(previous&&previous!==cell)owner.dirty.delete(previous);cell.version=(owner.aliasVersions.get(storageKey)??0)+1;owner.aliasVersions.set(storageKey,cell.version);owner.pendingAliases.set(storageKey,cell);}else cell.version=0;owner.dirty.add(cell);}};
  }
- flush() {for(const cell of this.dirty)cell.write(cell.value);this.dirty.clear();this.pendingAliases.clear();}
- invalidate() {this.epoch++;}
- boundary(fn,...args) {
-  this.flush();this.boundaries++;const depth=this.depth;this.depth=0;
-  try {return fn(...args);}finally {this.depth=depth;this.invalidate();}
+ scalar(at,kind,normalize,read,write,key) {if(!this.nativeArena)return this.field(read,write,normalize,key);this.fields++;const cell=this.nativeArena.scalar(kind,at);return {enumerable:true,get:cell.get,set(value){cell.set(normalize(value));}};}
+ pointer(at,decode,normalize,read,write,key) {
+  if(!this.nativeArena)return this.field(read,write,normalize,key);
+  this.fields++;const arena=this.nativeArena,owner=this;let previous,value,version=-1;
+  return {enumerable:true,get(){const raw=arena.pointer(at);if(raw!==previous||version!==owner.schemaVersion){value=decode(raw);previous=raw;version=owner.schemaVersion;}return value;},set(input){const normalized=normalize(input),raw=arena.handle(normalized);arena.storePointer(at,raw);value=decode(raw);previous=raw;version=owner.schemaVersion;}};
  }
- enter() {if(!this.depth){this.flush();this.invalidate();}this.depth++;}
- leave() {this.depth--;if(!this.depth){this.flush();this.invalidate();}}
+ flush() {if(this.nativeArena)return;for(const cell of this.dirty)cell.write(cell.value);this.dirty.clear();this.pendingAliases.clear();}
+ invalidate() {if(!this.nativeArena)this.epoch++;}
+ boundary(fn,...args) {
+  if(!this.nativeArena)this.flush();this.boundaries++;const depth=this.depth;this.depth=0;
+  try {return fn(...args);}finally {this.depth=depth;if(this.nativeArena)this.nativeArena.sync();else this.invalidate();}
+ }
+ enter() {if(!this.depth){if(this.nativeArena)this.nativeArena.sync();else{this.flush();this.invalidate();}}this.depth++;}
+ leave() {this.depth--;if(!this.nativeArena&&!this.depth){this.flush();this.invalidate();}}
 }
 
 // Native providers in one game share identities and their synchronization owner.

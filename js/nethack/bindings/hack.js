@@ -38,11 +38,11 @@ export function createHackEnvironment(services,layout,namespace,servicePrototype
 
     for(const [k,v]of Object.entries({pointerSize:8,longSize:8,intSize:4,charSigned:1,littleEndian:1}))
         if(Number(layout[k])!==v)throw Error('Review changed HACK ABI: '+k);
-    const pointerValue=v=>{const r=BigInt.asUintN(64,BigInt(v?.address??v??0));return r<=9007199254740991n?Number(r):r;};
+    const pointerValue=v=>{if(nativeState.nativeArena)return nativeState.nativeArena.handle(v);const r=BigInt.asUintN(64,BigInt(v?.address??v??0));return r<=9007199254740991n?Number(r):r;};
     const addr=v=>Number(v?.address??v??0),raw=v=>BigInt.asUintN(64,BigInt(typeof v==='string'?services.literal(v):typeof v==='boolean'?Number(v):typeof v==='number'?Math.trunc(v):v?.address??v??0));
     let dataView;
-    const memory=()=>{const buffer=heapSource().buffer;if(dataView?.buffer!==buffer)dataView=new DataView(buffer);return dataView;},cache=new Map(),names=Object.keys(schemas);
-    const {width,decode,read,write:writeRaw,array}=CAdapter.createDescriptorMemory({services,layout,addr,raw,memory,cache,view:(name,value)=>view(name,value),pointerArrays:false,rows:true,coerceRecordSize:true,directIntegerReads:true,voidPointer:pointerValue,rowDescriptor:row=>rowDescriptor(row),arrays:{profile:'identity',get types(){return arrayTypes;}}});
+    const memory=()=>{if(nativeState.nativeArena)return nativeState.nativeArena.view;const buffer=heapSource().buffer;if(dataView?.buffer!==buffer)dataView=new DataView(buffer);return dataView;},cache=new Map(),names=Object.keys(schemas);
+    const {width,decode,read,write:writeRaw,array}=CAdapter.createDescriptorMemory({services,layout,addr,raw,memory,cache,view:(name,value)=>view(name,value),pointerArrays:false,rows:true,coerceRecordSize:true,directIntegerReads:true,pointerRead:nativeState.nativeArena?(at=>nativeState.nativeArena.pointer(at)):undefined,pointerWrite:nativeState.nativeArena?((at,v)=>nativeState.nativeArena.storePointer(at,typeof v==='string'||(typeof v==='number'&&(!Number.isSafeInteger(v)||v<0))?raw(v):v)):undefined,voidPointer:pointerValue,rowDescriptor:row=>rowDescriptor(row),arrays:{profile:'identity',get types(){return arrayTypes;}}});
 
 
 
@@ -80,7 +80,7 @@ export function createHackEnvironment(services,layout,namespace,servicePrototype
             if(Object.hasOwn(out,f.name))continue;
             const field=metadata.get(name).get(f.name),p=addr(at)+field.offset;
             if(f.d.s||f.d.a){Object.defineProperty(out,f.name,{enumerable:true,get:()=>read(f.d,p),set:v=>write(f.d,p,v)});continue;}
-            let get,set,normalize;
+            let get,set,normalize,pointerDecode;
             if(f.bit){
                 if(field.bits===undefined||field.shift+field.bits>8)throw Error('Review native HACK packed field '+name+'.'+f.name);
                 const mask=(1<<field.bits)-1,packed=mask<<field.shift;
@@ -89,13 +89,14 @@ export function createHackEnvironment(services,layout,namespace,servicePrototype
                 normalize=v=>Number(v)&mask;
             }else if(f.d.p!==undefined||f.d.f){
                 const convert=v=>name==='instance_globals_v'&&f.name==='viz_array'?array(vizDescriptor,addr(v)):decode(f.d,v);
-                get=()=>convert(memory().getBigUint64(p,true));set=v=>memory().setBigUint64(p,raw(v),true);normalize=v=>convert(raw(v));
+                pointerDecode=convert;get=()=>convert(memory().getBigUint64(p,true));set=v=>memory().setBigUint64(p,raw(v),true);normalize=v=>convert(raw(v));
             }else{
                 const method=scalarKind[f.d.t];if(!method)throw Error('Review native HACK scalar '+name+'.'+f.name);
                 get=()=>memory()['get'+method](p,true);set=v=>memory()['set'+method](p,v,true);
-                normalize=v=>decode(f.d,raw(v));
+                normalize=v=>decode(f.d,typeof v==='number'&&Number.isFinite(v)?Math.trunc(v):raw(v));
             }
-            if(type.startsWith('union '))Object.defineProperty(out,f.name,{enumerable:true,get(){nativeState.flush();return get();},set(v){nativeState.flush();set(normalize(v));nativeState.invalidate();}});
+            if(nativeState.nativeArena&&!f.bit)Object.defineProperty(out,f.name,pointerDecode&&!f.d.f?nativeState.pointer(p,pointerDecode,normalize,get,set):nativeState.scalar(p,f.d.f?'BigUint64':scalarKind[f.d.t],normalize,get,set));
+            else if(type.startsWith('union '))Object.defineProperty(out,f.name,{enumerable:true,get(){nativeState.flush();return get();},set(v){nativeState.flush();set(normalize(v));nativeState.invalidate();}});
             else Object.defineProperty(out,f.name,nativeState.field(get,set,normalize,type==='struct instance_globals_v'?p:undefined));
         }
         nativeViews.set(key,out);nativeState.enrich(out,type,at);return out;

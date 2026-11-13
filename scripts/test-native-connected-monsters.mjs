@@ -47,5 +47,5 @@ for(const[key,monster]of owner.records){
  const hp=environment.memory.view.getInt32(Number(monster.address)+layouts.mon.mon_mhp,true);
  assert.equal(monster.mhp,hp);monsters++;
 }
-assert.ok(monsters>0);assert.ok(owner.hits>0);
-console.log(JSON.stringify({passed:true,monsters,nativeFunctions:owner.functions.size,nativeFields:owner.fields,cachedReads:owner.hits,legacyBoundaries:owner.boundaries,moves:result.state.moves}));
+assert.ok(monsters>0);assert.ok(owner.nativeArena||owner.hits>0);
+console.log(JSON.stringify({passed:true,monsters,nativeFunctions:owner.functions.size,nativeFields:owner.fields,nativeStorage:owner.nativeArena?'typed-arrays':'cached-fields',cachedReads:owner.hits,legacyBoundaries:owner.boundaries,moves:result.state.moves}));
