@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "runtimeCommit": "25ce0121f6f011b59ec201652d2eadae320d0baf",
+  "report": "Leaderboard overall timeout900s, scalar apply.js:16:451, Array.map/invoke/local/pcall. Column451 maps to ctypes.size(type).",
+  "status": "No APPLY non-progress reproduced in the public Knight session; leaderboard failure remains unresolved.",
+  "instrumentedKnight": {
+    "passed": true,
+    "rng": 108275,
+    "screensAndCursors": 1814,
+    "animations": 37,
+    "calls": 21729,
+    "maxDepth": 3,
+    "exitDepth": 0,
+    "timeoutMs": 0,
+    "elapsedMs": 79135.37
+  },
+  "priorProfile": {
+    "ciRun": 43351254256,
+    "candidateCommit": "238be60d445dfdc9f1d47942bc0434b9ea3e6f39",
+    "passed": 44,
+    "suiteWallSeconds": 1086.8492958545685,
+    "APPLYInvokeInclusiveSeconds": 2.910305,
+    "APPLYInvokeInclusivePercent": 0.27154200396342787
+  },
+  "limits": [
+    "Screenshot is a global deadline interruption, not evidence that scalar itself loops.",
+    "Knight is a diagnostic reproduction candidate; the failed leaderboard session is unknown.",
+    "Instrumentation and CPU sampling add overhead. Instrumented Knight ran concurrently with a full replay; timing is not a performance comparison.",
+    "Repeated target and primitive arguments do not establish non-progress: iterator results and memory can change.",
+    "Prior profile uses238be60, not current main; no hidden-session or900-second success claim."
+  ],
+  "rawProofs": {
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/CALLBACK-BOUNDARY-AUDIT.md": "e3db6c169f67b1eca7126879a7f66a5eea7f737462817ff59c209e1f9e00d3fa",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/REPRODUCTION.md": "4bd4656bb2187ef2b59210fa18c3a8abb932d567f13659975d1fc827e6cdad96",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/callback-arguments-integrity.json": "c9b22f451f771634d37ef5270549e3208e916aeb955b17cab05fdfbf6b0dd3c0",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/callback-arguments-objects.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/callback-arguments-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/callback-arguments-stdout.log": "26134d940dca03bd3837f6f76f421c9e9323a90aa5e0aeae413a52c1331ca574",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/callback-arguments.patch": "33cc8ff8dcb48255cfce15f288b6a8d1b7133354a4481832ee44d80508a7e384",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/counts.json": "cc670b6622a4ecdb2792cc513f3b6d566721029bc2f3a41c689bc258a8243bc9",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/current-main-post-run-integrity.json": "6eff28e12bc2d7b0d365671390a21122dec7d54082cafa850faf8192eb1d6ac0",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/current-main-pre-run-manifest.json": "16e2aa02641be32e534fbcae0c5882d3a7a6e07814c7e70a04a36bce0edf8d45",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/current-main-summary.json": "13ff914a2bd74842bf9eafdea022b99440f5490d5e93b01bab1d0342e043bd68",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/diagnostic.patch": "787cfc6d1dfb1e82ea97a84ba3d56f29e0ee5b6dc56fef2c867c3a8e9a11daae",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/image-integrity.json": "2ea78b8ddbd414f91c005e4607842e8af5e49b125ce769db9d2fb22851ba994e",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/prior-profile-apply.json": "4930428142d7e214a45103fb05dd32b1580dbe94950cfe6d78b0cf094ed73f1e",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/reverse-baseline-commit.txt": "5a958e260de96a40f7ca85f10c73a5386f3d7ae4c4d1ca7e7af3ce98d2705d4f",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/reverse-baseline-post-run-integrity.json": "a8275c2c378c7f2cf0d802e1ad06887ee304fa590c00676f7ab61579116b6867",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/reverse-baseline-summary.json": "0e0db875379cec449c24728c97c2c312191b27be6b1912d9e8cd394a241eb852",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/reverse-candidate-commit.txt": "3f6082f710e338d7b52257c4edaf681c7a1e9dd1a1d32a522445724a7134bf1c",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/reverse-candidate-post-run-integrity.json": "ee40f9e33d6c3df0dfb0c7fc5dba3dcdb576c157f03a3715f850b6217b56defb",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/reverse-candidate-summary.json": "447ba5888f9a5b8f3efc439f6b221d0067c6ce1b7bd26f746f163631ddaaf242",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/reverse-comparison-order.txt": "ee84ed4869603f0b8cd3444d0ea4fa2ed02abaefe4bb071a76bf7c9a9d01c5ac",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/reverse-runtime-comparison.json": "11da57a6d3d1d6e0e4d11c2ffd24d77e677e2adfe50fafdbdfccae641a8b4390",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/reverse-tool-commit.txt": "677d4aaa936e720a0d5e4abafd41a0ae14f25a0670e852d7b7515bca35778c55",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/source.json": "842d0efc032bceefe7ed3a39782cb612d1dcbfd3f597a39034aefceb9c63548a",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/stderr.log": "d955347fe7e04264102be65cce88b871a7fa4af4c0289dc3231bf6d01bdc6001",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/stdout.log": "6aa85c16f660b8261cca519b8d1f19c95352eb20b274f3c6efe0a9596d2345f0",
+    "docs/runtime-environment/apply-timeout-diagnostic-evidence/summary.json": "2c2e987de181beb1db6df03723e870e65dac7995445a0de963c8707dd42824fc"
+  },
+  "callbackAudit": {
+    "APPLYDeclaredCallbacksAvailable": 23,
+    "callbackIds": "bigint",
+    "literalServicesPassed": 451,
+    "literalWindowSoundLookupsPassed": 613,
+    "dynamicLookupsRemaining": 40,
+    "instrumentedKnightPointerObjectsObserved": {},
+    "instrumentedKnightPassed": true,
+    "genericGap": "functions.indirect validates ID/signature but forwards pointer args unchanged. schema-port/address-bindings also rely on callers. No violating game caller found."
+  },
+  "currentMainPublicRun": {
+    "commit": "25ce0121f6f011b59ec201652d2eadae320d0baf",
+    "strictAllMetricsPassed": 44,
+    "rng": 792838,
+    "screensAndCursors": 11405,
+    "animationsWithCursors": 1483,
+    "wallSeconds": 785.7621991634369,
+    "timeoutsMs": 0,
+    "sourceFilesChecked": 751,
+    "sourceChanges": [],
+    "limits": "Local profiled replay, initially concurrent with two diagnostic replays; not a paired speed comparison or leaderboard acceptance."
+  }
+}

@@ -1,0 +1,2 @@
+__RESULT_ONE__
+{"session":"seed4500-knight-coverage.session.json","passed":true,"metrics":{"rngCalls":{"matched":108275,"total":108275},"screens":{"matched":1814,"total":1814},"cellsOnly":{"matched":1814,"total":1814},"cursors":{"matched":1814,"total":1814},"animFrames":{"matched":37,"total":37}},"error":null,"time":{"ms":83595.3,"moves":1813}}

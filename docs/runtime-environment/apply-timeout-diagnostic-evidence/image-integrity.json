@@ -1,0 +1,7 @@
+{
+  "mainCommitNow": "25ce0121f6f011b59ec201652d2eadae320d0baf",
+  "imageDifferencesFromCurrentProduction": [
+    "js/nethack/apply.js"
+  ],
+  "frozenWorkerUnchanged": true
+}

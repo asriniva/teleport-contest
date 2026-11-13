@@ -1,0 +1,76 @@
+{
+  "calls": 21729,
+  "depth": 0,
+  "maxDepth": 3,
+  "targets": {
+    "on_level": {
+      "calls": 10,
+      "maxDepth": 1
+    },
+    "near_capacity": {
+      "calls": 5,
+      "maxDepth": 1
+    },
+    "acurr": {
+      "calls": 5,
+      "maxDepth": 1
+    },
+    "pline": {
+      "calls": 5,
+      "maxDepth": 1
+    },
+    "getpos_sethilite": {
+      "calls": 5,
+      "maxDepth": 1
+    },
+    "isok": {
+      "calls": 17359,
+      "maxDepth": 2
+    },
+    "dist2": {
+      "calls": 4050,
+      "maxDepth": 2
+    },
+    "walk_path": {
+      "calls": 81,
+      "maxDepth": 2
+    },
+    "sobj_at": {
+      "calls": 139,
+      "maxDepth": 3
+    },
+    "getpos": {
+      "calls": 5,
+      "maxDepth": 1
+    },
+    "There": {
+      "calls": 2,
+      "maxDepth": 1
+    },
+    "get_iter_mons": {
+      "calls": 53,
+      "maxDepth": 1
+    },
+    "teleds": {
+      "calls": 3,
+      "maxDepth": 1
+    },
+    "nomul": {
+      "calls": 3,
+      "maxDepth": 1
+    },
+    "morehungry": {
+      "calls": 3,
+      "maxDepth": 1
+    },
+    "You": {
+      "calls": 1,
+      "maxDepth": 1
+    }
+  },
+  "last": "get_iter_mons|bigint:665",
+  "run": 7,
+  "maxRun": 43,
+  "started": 1794539771232,
+  "elapsedMs": 79009
+}

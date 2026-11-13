@@ -1,0 +1,27 @@
+--- a/js/nethack/apply.js
++++ b/js/nethack/apply.js
+@@ -1,3 +1,14 @@
++import {writeFileSync as diagnosticWrite} from 'node:fs';
++const diagnostic={calls:0,depth:0,maxDepth:0,targets:Object.create(null),last:null,run:0,maxRun:0,started:Date.now()};
++const diagnosticFlush=()=>{if(process.env.APPLY_DIAGNOSTIC_FILE)diagnosticWrite(process.env.APPLY_DIAGNOSTIC_FILE,JSON.stringify({...diagnostic,elapsedMs:Date.now()-diagnostic.started},null,2));};
++process.on('exit',diagnosticFlush);
++function diagnosticInvoke(row,args,invoke){
++ const key=row.target,entry=diagnostic.targets[key]??(diagnostic.targets[key]={calls:0,maxDepth:0});++entry.calls;++diagnostic.calls;++diagnostic.depth;diagnostic.maxDepth=Math.max(diagnostic.maxDepth,diagnostic.depth);entry.maxDepth=Math.max(entry.maxDepth,diagnostic.depth);
++ const fingerprint=key+'|'+args.map(v=>typeof v==='number'||typeof v==='bigint'||typeof v==='boolean'||typeof v==='string'?typeof v+':'+String(v):v===null?'null':typeof v).join('|');
++ diagnostic.run=fingerprint===diagnostic.last?diagnostic.run+1:1;diagnostic.last=fingerprint;diagnostic.maxRun=Math.max(diagnostic.maxRun,diagnostic.run);
++ if((diagnostic.calls&4095)===0)diagnosticFlush();
++ try{return invoke(row,args);}finally{--diagnostic.depth;}
++}
+ // One cached original APPLY context; all mutable tool/occupation state stays shared.
+ import abi from './apply-abi.json' with{type:'json'};
+ import * as source from '../ported/apply.js';
+@@ -14,7 +25,8 @@
+  const split=s=>{let depth=0,start=0,out=[];for(let i=0;i<s.length;i++){if(s[i]==='(')depth++;else if(s[i]===')')depth--;else if(s[i]===','&&!depth){out.push(s.slice(start,i).trim());start=i+1;}}out.push(s.slice(start).trim());return out.filter(t=>t&&t!=='void');};
+  const prototype=p=>{const m=p.match(/^(.+?)\s*\((.*)\)$/);if(!m)throw new Error('Unknown APPLY prototype '+p);return{result:m[1].trim(),params:split(m[2])};};
+  const scalar=(type,v)=>{type=ctypes.canonical(type);if(type==='void')return undefined;if(type.includes('*'))return text(v);if(type==='char'||type==='signed char')return transport.char(v);if(type==='unsigned char')return transport.uchar(v);if(type==='short')return transport.short(v);if(type==='unsigned short')return transport.ushort(v);if(type==='unsigned int')return transport.uint(v);if(type==='float'||type==='double')return Number(v);if(ctypes.size(type)===8)return type.startsWith('unsigned')?transport.ulong(v):transport.long(v);return transport.int(v);};
+- const invoke=(row,args)=>{const p=prototype(row.prototype);if(args.length!==p.params.length)throw new Error('APPLY foreign arity '+row.target+': '+args.length+'/'+p.params.length);return scalar(p.result,resolve(row.target)(...args.map((v,i)=>scalar(p.params[i],v))));};
++ const invokeOriginal=(row,args)=>{const p=prototype(row.prototype);if(args.length!==p.params.length)throw new Error('APPLY foreign arity '+row.target+': '+args.length+'/'+p.params.length);return scalar(p.result,resolve(row.target)(...args.map((v,i)=>scalar(p.params[i],v))));};
++ const invoke=(row,args)=>diagnosticInvoke(row,args,invokeOriginal);
+  for(const[n,row]of Object.entries(abi.calls))local[n]=(...args)=>invoke(row,args);
+  const signature=p=>{const row=prototype(p),one=t=>{t=ctypes.canonical(t);return t.includes('*')?'p':t==='void'?'v':t==='float'||t==='double'?'d':ctypes.size(t)===8?'j':'i';};return[one(row.result),...row.params.map(one)].join('');};
+  const callback=name=>{const row=abi.callbacks[name];if(!row)throw new Error('Unknown APPLY callback '+name);const sig=signature(row.prototype);return row.sourceOwner==='foreign'||environment.hasFunction(name)?environment.functionPointer(name,sig):environment.functionPointer('apply::'+name,sig,(...args)=>call(name,...args));};
