@@ -18,6 +18,9 @@ def validate_cohort(root):
   if file=='js/c-runtime/adapter-factories.js'and sha(after)!=row['afterSha256']:
    from record_index_source_successor import qualified_before as index_before
    after=index_before(root,file)
+  if file=='js/nethack/bindings/display.js' and sha(after)!=row['afterSha256']:
+   from display_direct_source_successor import qualified_before as display_before
+   after=display_before(root,file)
   assert sha(after)==row['afterSha256'],'Unknown immutable-selector source change: '+file
   assert sha(patch)==row['patchSha256']and patch==canonical_patch(file,before,after),'Wrong immutable-selector source patch: '+file
   before_images[file]=before

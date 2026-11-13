@@ -1,5 +1,74 @@
 # Upstream divergence register
 
+Direct NOMUX shadow-screen views (2026-11-12, public44 verified):
+`js/nethack/bindings/termcap.js` exposes cached signed/unsigned byte views over
+exactly the existing24x80x4-byte NOMUX heap region, validating measured field
+offsets0/1/2/3 and cell size4. `js/ported/termcap.js` clear, clear-to-EOL,
+normal/raw character writes and screen capture index these views directly;
+record/array proxies are bypassed. No state is duplicated or relocated. Views
+refresh on heap replacement/address changes, including after capture formatting
+callbacks; character reads remain signed and writes truncate to bytes. Existing
+capture output scratch storage (now written through a cached full-heap signed
+view), formatting calls, cursor behavior, markers,
+terminal emulation and serialization are unchanged. Baseline is the already
+saved display-direct replay578.802s, with original f58b27e611.273s also retained.
+All44 public sessions pass strict parity:792838 RNG calls,11405 screens/cursors,
+1483 animation screens/cursor triples and56 segments; all749 runtime input hashes
+remain unchanged. Against the existing display-direct run, replay578.802→523.648s
+(9.53%lower), fitted per-turn35.9727→30.3139ms (15.73%lower), fitted overhead
+3876.1→4082.2ms (5.32%higher);32/44 sessions improve. Against original f58b27e,
+replay611.273→523.648s (14.33%lower). These are descriptive saved-baseline
+comparisons with overlapping component tests and possible host variation; no
+paired causal guarantee,20x, enforced deadline or held-out acceptance is claimed.
+Direct-view differential checks441 cases against the immutable previous policy,
+including complete heap/format traces, signed bytes, clipping, live legacy aliases,
+separate games and memory growth during formatting. Original-C component suite
+passes223 cases/2472 checks across56/56 routines (configured isolated memory64 C,
+not native host). Source-history helpers `shadow_screen_source_successor.py`,
+`full_replay_source_successor.py`, `consolidate-nethack-layout.py` and
+`nethack-layout.mjs` compose the exact two-file change with prior receipts;
+canonical patches and8+11+51 source/cohort rejection checks pass. Historical
+hashes remain fixed. The full-replay and selector synthetic fixtures now copy
+the declared terminal cohort for these composition controls. The33-file runtime
+boundary check passes. Evidence: `shadow-screen-vs-display-direct.json`,
+`shadow-screen-vs-main.json` and `shadow-screen-validation.json` under
+`docs/runtime-environment/`.
+
+Direct DISPLAY field access (2026-11-12, verified local checkpoint):
+`js/ported/display.js` uses named measured field readers/address projections
+installed by `js/nethack/bindings/display-direct.js`, with the selected operations
+in `js/nethack/display-direct-fields.json`. Small scalar reads bypass generic
+lvalue wrappers, service dispatch, type lookup and BigInt conversion. Pointer
+reads and 64-bit integers retain exact conversion; each read refreshes its memory
+view. Bitfields, writes, compound assignments and other modules retain existing
+transport. No game decisions, C source, frozen scorer or recording policy change.
+`scripts/specialize-display-fields.mjs` reproduces the source transformation from
+f58b27e with Acorn; it preserves evaluation order and leaves writes untouched.
+The source-history integration in `scripts/display_direct_source_successor.py`,
+`immutable_selectors_source_successor.py`, `consolidate-nethack-layout.py` and
+`nethack-layout.mjs` checks all four complete runtime files and canonical patches
+before composing with existing historical receipts. Historical hashes stay fixed;
+14 new cohort/patch rejection controls and 51 selector composition controls pass.
+The selector test fixture now includes the upper cohorts and a Git pointer so
+these controls exercise the complete source-history chain. No production test
+executes the historical inverse. Direct-field differential checks pass4515 cases
+across150 operations, including signed scalars, exact pointers, boundary errors,
+heap growth, independent heaps and zero generic service dispatch. Original-C
+component checks pass all71 functions,140 state/result comparisons and22528 wall
+inputs; this is the isolated configured memory64 C reference, not a native-host
+or exhaustive claim. The33-file C-runtime boundary check passes. Whole44 replay passes44/44 strict:792838 RNG calls,11405 screens/cursors,
+1483 animation screens/cursor triples and56 segments; all749 runtime inputs
+remain unchanged. The additional168-case terrain matrix passes672 full
+state/result/trace comparisons. Against the existing exact f58b27e baseline,
+replay611.273→578.802s (5.31%lower); fitted overhead4378.3→3876.1ms and
+per-turn36.8866→35.9727ms (2.48%lower).26/44 sessions improve. These are
+unpaired saved-baseline observations: Node22.23.5 baseline versus22.23.4
+candidate, with component tests overlapping part of the candidate run. No20x,
+causal speed guarantee, enforced deadline or held-out acceptance is claimed.
+Evidence: `docs/runtime-environment/display-direct-comparison.json` and
+`display-direct-validation.json`. The initial replay attempt was stopped after
+boundary handling changed and is explicitly invalidated in its cache receipt.
+
 Merge integration (2026-11-13): combine the measured full-replay transport
 commit29ab502 with main3b6db96, preserving utility byte operations, opt-in
 monster argument-view reuse and the private numeric-index regexp. The capture

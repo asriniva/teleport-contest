@@ -5,6 +5,9 @@ from unittest.mock import patch
 import immutable_selectors_source_successor as q
 import numeric_guards_source_successor as numeric
 import record_index_source_successor as upper
+import full_replay_source_successor as full
+import display_direct_source_successor as display_direct
+import shadow_screen_source_successor as shadow_screen
 root=Path(__file__).resolve().parents[1]
 before={p:subprocess.check_output(['git','show',q.BASE_COMMIT+':'+p],cwd=root)for p in q.FILES}
 numeric_before=subprocess.check_output(['git','show',numeric.BASE_COMMIT+':'+numeric.FILE],cwd=root)
@@ -15,6 +18,10 @@ with tempfile.TemporaryDirectory()as directory:
  def put(name,data):
   p=target/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
  def restore():
+  put('.git',("gitdir: "+subprocess.check_output(['git','rev-parse','--absolute-git-dir'],cwd=root,text=True).strip()+"\n").encode())
+  for cohort in [full,display_direct,shadow_screen]:
+   for file,row in cohort.FILES.items():
+    for name in [file,row['patch']]:put(name,(root/name).read_bytes())
   for file,row in q.FILES.items():
    for name in [file,row['patch']]:put(name,(root/name).read_bytes())
   for name in ['scripts/immutable_selectors_source_successor.py',numeric.PATCH,upper.PATCH]:put(name,(root/name).read_bytes())
