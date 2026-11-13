@@ -209,4 +209,22 @@ try{artifacts.view=(kind,value)=>{assert.equal(C,artifactMarker);return artifact
 }finally{artifacts.view=artifactView;}
 assert.equal(environment.memory.live.size,liveBeforeArtifact,'native artifact callback exceptions restore the C stack');
 
+
+const mainCombat=environment.enableUhitm(layouts),combatContext=mainCombat.context;
+assert.equal(combatContext.u,hero,'main combat consumes the canonical hero');
+assert.equal(combatContext.record('struct obj',artifactItem),artifactItem,'main combat shares artifact item identity');
+assert.equal(combatContext.gy.youmonst,artifacts.gy.youmonst,'main combat and artifact damage share the hero monster');
+assert.equal(Object.keys(combatContext.nativeNamespace).length,102,'all combat source bodies are bound');
+for(const name of ['do_attack','shade_miss','mhitm_adtyping','mhitm_knockback'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' connects direct native combat');
+assert.equal(combatContext.record('struct attack',combatContext.gy.youmonst.data.mattk),combatContext.gy.youmonst.data.mattk[0],'native attack arrays decay to the canonical first attack record');
+const savedCombatStack=environment.transport.stackSave(),combatLive=environment.memory.live.size;
+try{const ordinary=combatContext.localScalar('int',-1);assert.equal(ordinary.value,-1);assert.equal(environment.memory.live.size,combatLive,'ordinary combat scalar references allocate no C bytes');ordinary.value=2147483648;assert.equal(ordinary.value,-2147483648);
+ const buffer=combatContext.localRecord('struct _hitmon_data').saved_oname;assert.equal(buffer+3,buffer.address+3,'char arrays expose addresses only for explicit pointer arithmetic');combatContext.byte(buffer+3).value=65;assert.equal(buffer[3],65,'byte addressing preserves native char-buffer aliases');
+}finally{environment.transport.stackRestore(savedCombatStack);}
+assert.equal(environment.memory.live.size,combatLive,'combat local verification restores temporary records');
+const combatRecord=combatContext.record,combatMarker={nativeCombatCaller:true};
+try{combatContext.record=(type,value)=>{assert.equal(C,combatMarker);return combatRecord(type,value);};withCEnvironment(combatMarker,()=>environment.services.m_is_steadfast(combatContext.gy.youmonst));
+ combatContext.record=()=>{assert.equal(C,combatMarker);environment.transport.stackAlloc(24);throw Error('native combat cleanup');};withCEnvironment(combatMarker,()=>assert.throws(()=>environment.services.do_attack(combatContext.gy.youmonst),/native combat cleanup/));
+}finally{combatContext.record=combatRecord;}
+assert.equal(environment.memory.live.size,combatLive,'combat entry exceptions restore temporary C bytes');
 console.log(JSON.stringify({passed:true,monsters,nativeFunctions:owner.functions.size,nativeFields:owner.fields,nativeStorage:owner.nativeArena?'typed-arrays':'cached-fields',cachedReads:owner.hits,legacyBoundaries:owner.boundaries,moves:result.state.moves}));

@@ -27,7 +27,7 @@ export function createNativeRecordViews(environment){
    const aligned=kind&&p>=16&&p%stride===0&&p+length*stride<=memory.buffer.byteLength;
    const cells=aligned&&kind.startsWith('Big')?new Map():undefined;
    const read=aligned?(cells?i=>{let cell=cells.get(i);if(!cell){cell=arena.scalar(kind,p+i*stride);cells.set(i,cell);}return cell.get();}:i=>arena[kind][p/stride+i]):i=>value(child,p+i*stride);
-   const target={address:p,length,[Symbol.iterator]:function*(){for(let i=0;i<length;i++)yield read(i);}};
+   const target={address:p,length,[Symbol.toPrimitive]:()=>p,[Symbol.iterator]:function*(){for(let i=0;i<length;i++)yield read(i);}};
    const out=createArrayView(target,{allowLeadingZeroes:true,propertyCount:aggregate?length:undefined,cacheReads:aggregate,
     read,write:(i,v)=>ctypes.store(child,p+i*stride,v),
     onePast:i=>{if(!isRecord(child))throw new RangeError('C array bounds');return Object.freeze({address:p+i*stride});},

@@ -1,3 +1,37 @@
+## Native main combat dispatcher (2026-11-13)
+
+`native/uhitm.js` binds all 102 original combat bodies to the game context.
+`uhitm.js` connects the actual dispatcher and all 65 public entries to canonical
+hero, monster, item, attack and property state and direct native dependencies
+where available. Measured record sizes and field offsets guard all 54 full record
+types. Internal calls explicitly decay native attack arrays to record pointers;
+char arrays expose their byte address at pointer-arithmetic boundaries. The
+visibility pointer table retains a local byte-row projection. Integer local
+references stay JS values until a byte consumer requests an address. The `byte`
+helper is explicitly excluded from integer-cast installation because it addresses
+memory. Existing numeric byte casts in other native owners remain unchanged.
+
+Callback identities, source RNG sites/order, narrowing, persistent storage and
+private source mutation policy remain original. Private arrays/records and true
+foreign calls still have byte/bridge boundaries; zero allocations/bridges and
+20x remain unmet. Function-pointer records keep explicit callback token views.
+
+Original-C verification passes 7,858 controlled comparisons across all 102 entry
+points, with callback identities/actions, growth/reentry and directed effects.
+All 102 source bodies match the original policy AST. Live-main checks prove
+shared hero/item/attack identities, native array decay, byte aliases, native
+scalar narrowing without allocation and entry-exception cleanup. Scalar boundary
+checks pass 455 cases; 81 literal window declarations and live delay callback
+replacement pass. The actual ordinary-turn comparison preserves C state, tty,
+ordered RNG logs and frames: generic calls are 28/68/143, generic fields 53/112/174
+and C allocations 45/166/113 (walk/wait/attack). All 44 recordings pass with 796
+scoring inputs unchanged: 792,838 RNG entries, 11,405 screens/cursors and 1,483
+animations match. Unprofiled Node 22.23.5 batch time is 292.330s versus 295.156s
+for the preceding artifact step (about 1.0% lower). These separate single runs
+establish no controlled speedup or 20x acceptance. Evidence is in
+`docs/runtime-environment/native-combat-validation.json` and its source manifest.
+No upstream C, recording inputs, RNG algorithm or capture policy changes.
+
 ## Native artifact combat and equipment state (2026-11-13)
 
 `native/artifact.js` binds all 77 original source exports, including initialization,

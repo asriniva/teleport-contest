@@ -1,3 +1,7 @@
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+import uhitmAbi from '../js/nethack/uhitm-abi.json' with {type:'json'};
+const nativeExecution=process.env.NATIVE_UHITM_FIXTURE==='1',nativeServices=new WeakMap();
+function combatServices(s){if(!nativeExecution)return s;let local=nativeServices.get(s);if(!local){local=nativeFixtureServices(s,{}).services;local.nativeRecordLayouts=Object.fromEntries(Object.keys(uhitmAbi.records).map(type=>[type,s.moduleKey.environment.ctypes.record(type)]));nativeServices.set(s,local);}return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import {C,R,T} from '../js/c-runtime/context.js';
@@ -12,7 +16,7 @@ const W=resolve(process.env.TELEPORT_UHITM_PROBE_DIR??'.cache/uhitm-author'), ur
 const factories=await Promise.all(['reference','hybrid'].map(async n=>(await loadFixture("uhitm",n==='reference'?pathToFileURL(resolve('.cache/tu-probes/uhitm/reference.mjs')):url(n+'.mjs'))).default));
 let lastServices;let layout={};const mods=[];let entries=new Set(),context='',comparisons=0;
 for(let i=0;i<2;i++){
- const m=await factories[i]({print:()=>{},printErr:()=>{},nethackPorted:{uhitm:(services,name,...args)=>{lastServices=services;entries.add(name);return callUhitm(services,layout,name,...args);}}});mods.push(m);
+ const m=await factories[i]({print:()=>{},printErr:()=>{},nethackPorted:{uhitm:(services,name,...args)=>{services=combatServices(services);lastServices=services;entries.add(name);return callUhitm(services,layout,name,...args);}}});mods.push(m);
 }
 const string=(m,p)=>{let i=Number(p),out='';for(;m.HEAPU8[i];i++)out+=String.fromCharCode(m.HEAPU8[i]);return out;};
 for(let i=0;i<mods[0]._probe_layout_count();i++)layout[string(mods[0],mods[0]._probe_layout_name(i))]=Number(mods[0]._probe_layout_value(i));
@@ -68,7 +72,7 @@ for(const alias of[0,1]){
 }
 context='controlled-C-unwind';reset();option(93,1);assert.equal(act('light_hits_gremlin',3),-999n);option(93,0);act('disguised_as_mon');
 const savedModules=[...mods],secondModules=[];
-for(let i=0;i<2;i++)secondModules.push(await factories[i]({print:()=>{},printErr:()=>{},nethackPorted:{uhitm:(services,name,...args)=>{lastServices=services;entries.add(name);return callUhitm(services,layout,name,...args);}}}));
+for(let i=0;i<2;i++)secondModules.push(await factories[i]({print:()=>{},printErr:()=>{},nethackPorted:{uhitm:(services,name,...args)=>{services=combatServices(services);lastServices=services;entries.add(name);return callUhitm(services,layout,name,...args);}}}));
 mods.splice(0,2,...secondModules);context='Module-B';reset();scene(9,1);option(3,1);act('hitum_cleave');act('light_hits_gremlin',5);const savedSnapshots=mods.map(snapshot);
 mods.splice(0,2,...savedModules);context='Module-A';reset();act('dynamic_multi_reason');act('hitum_cleave');assert.deepEqual(secondModules.map(snapshot),savedSnapshots,'Module-B state preserved by Module-A');
 for(const seed of[1,2,3,4,7]){context='char-stride-and-roomview:'+seed;reset();option(41,1);call('seed',seed);act('do_attack');}
@@ -84,4 +88,4 @@ for(const weight of[0,1,99,100,0xffffff00,0xfffffff0,0xffffffff]){
 }
 context='live-minvent-pointer-reorder';reset();option(3,1);option(1,1);scene(18,1);scene(1,layout.AT_TUCH,layout.AD_SEDU);act('steal_it');
 console.log('UHITM controlled comparisons',comparisons,'entrypoints',entries.size);
-writeFileSync(resolve(W,'summary.json'),JSON.stringify({status:'PASS',comparisons,entries:[...entries],scope:'controlled configured original-C/hybrid directed entry/effect/weapon comparisons; incomplete branches/native-host/shared/public unverified'},null,2));
+writeFileSync(resolve(W,'summary.json'),JSON.stringify({status:'PASS',nativeExecution,comparisons,entries:[...entries],scope:'controlled configured original-C/hybrid directed entry/effect/weapon comparisons; incomplete branches/native-host/shared/public unverified'},null,2));

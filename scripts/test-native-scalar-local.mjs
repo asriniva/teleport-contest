@@ -20,4 +20,6 @@ assert.throws(()=>createNativeScalarLocal(0,'Int8',()=>0,()=>0),/Unsupported/);c
 // Inspect only declared helpers on strict dependency namespaces.
 let legacyCasts=0;const strict=new Proxy(Object.create(null),{get(_target,key){throw Error('missing helper '+String(key));}}),scope=Object.assign(Object.create(strict),{int:value=>{legacyCasts++;return Number(BigInt.asIntN(32,value));}});
 installNativeIntegerCasts(scope);assert.equal(scope.int(4294967295),-1);assert.equal(legacyCasts,0);assert.equal(scope.int(4294967295n),-1);assert.equal(legacyCasts,1);assert.throws(()=>scope.char,/missing helper char/);checks+=5;
+// The UHITM byte helper addresses memory; it is not an integer cast.
+const byteAccessor=p=>({address:p}),pointerScope={byte:byteAccessor,int:v=>Number(v)};installNativeIntegerCasts(pointerScope,['byte']);assert.equal(pointerScope.byte,byteAccessor);assert.deepEqual(pointerScope.byte(1024),{address:1024});checks+=2;
 console.log(JSON.stringify({passed:true,checks,nativeReadsAllocate:false,lateByteAliasing:true,growth:true,allocationRetry:true}));
