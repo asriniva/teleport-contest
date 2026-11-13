@@ -80,6 +80,12 @@ export function createDescriptorMemory({services,layout,addr,raw,memory,cache,vi
 export function createDependencyCall(callNative,mapArgument,convertResult){return (...args)=>{args=args.map(mapArgument);try{const value=callNative(...args);return convertResult?convertResult(value,args):value;}finally{for(const arg of args)arg?.copyback?.();}};}
 
 export function createScalarTypes(){return {char:'i8','signed char':'i8','unsigned char':'u8',short:'i16','unsigned short':'u16',int:'i32','unsigned int':'u32',unsigned:'u32',long:'i64','unsigned long':'u64','long long':'i64','unsigned long long':'u64'};}
+const immutableFieldMetadata=new WeakMap();
+export function createImmutableFieldMetadata(schema){
+ const rows=new Map(Object.entries(schema.schema).map(([name,row],kind)=>[name,new Map(row.fields.map((field,index)=>[field.name,Object.freeze({kind,index,canonical:field.canonical})]))]));
+ const views=new Map(Array.from(rows,([name,fields])=>[name,Object.freeze({get:key=>fields.get(key)})]));
+ const facade=Object.freeze({get:name=>views.get(name)});immutableFieldMetadata.set(facade,rows);return facade;
+}
 export function createScalarAdapter(services,layout,schema,ptr,options){
  const {profile,errors,address,fieldMetadata}=options,cached=profile==='cached-fields',declaredEnum=profile==='declared-enum',addressCells=profile==='address-cells',abi=profile==='abi-globals';
  if(!['signed-enum','cached-fields','declared-enum','address-cells','abi-globals'].includes(profile))throw new TypeError('Unknown C scalar transport profile: '+profile);
@@ -97,6 +103,23 @@ export function createScalarAdapter(services,layout,schema,ptr,options){
  let kinds;
  if(cached){
   const fieldAccessors=new Map(),fieldBases=new WeakMap();
+  const ownedMetadata=immutableFieldMetadata.get(fieldMetadata);
+  if(ownedMetadata){
+   const selectors=new Map(Array.from(ownedMetadata,([name,fields])=>[name,new Map(Array.from(fields,([field,metadata])=>[field,{metadata,bucket:null}]))]));
+   env.field=(at,name,field)=>{
+    const selector=selectors.get(name)?.get(field);if(!selector)throw Error(errors[2]+name+'.'+field);at=ptr(at);
+    let bucket=selector.bucket;
+    if(bucket){if(bucket.last.at===at)return bucket.last.accessor;if(at!==0&&bucket.entries.has(at)){const entry=bucket.entries.get(at);bucket.last=entry;return entry.accessor;}}
+    else{
+     const {kind,index,canonical}=selector.metadata;
+     const prototype={get address(){return ptr(services.address(kind,fieldBases.get(this),index));},get value(){return decode(canonical,services.read(kind,fieldBases.get(this),index));},set value(v){services.write(kind,fieldBases.get(this),index,BigInt.asUintN(64,BigInt(v)));}};
+     bucket={entries:new Map(),prototype,last:null};selector.bucket=bucket;
+    }
+    const accessor=Object.create(bucket.prototype);fieldBases.set(accessor,at);const entry={at,accessor};bucket.last=entry;bucket.entries.set(at,entry);
+    if(bucket.entries.size>128)bucket.entries.delete(bucket.entries.keys().next().value);
+    return accessor;
+   };
+  }else{
   env.field=(at,name,field)=>{
    const metadata=fieldMetadata.get(name)?.get(field);if(!metadata)throw Error(errors[2]+name+'.'+field);at=ptr(at);
    let bucket=fieldAccessors.get(metadata);
@@ -110,6 +133,7 @@ export function createScalarAdapter(services,layout,schema,ptr,options){
    if(bucket.entries.size>128)bucket.entries.delete(bucket.entries.keys().next().value);
    return accessor;
   };
+  }
  }else{
   kinds=Object.keys(schema.schema);const convert=addressCells?address:ptr,readName=abi?'abiRead':'read',writeName=abi?'abiWrite':'write',addressName=abi?'abiAddress':'address';
   // Declaration lookup and bounded lvalue wrappers are stable; values stay live.

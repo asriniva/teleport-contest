@@ -1,0 +1,2966 @@
+{
+  "complete": true,
+  "engine": "Pure-JavaScript standalone recorder adapter",
+  "previousMixed44of44Applies": false,
+  "sessionCount": 44,
+  "officialPassed": 44,
+  "strictCountsAndAnimationScreensPassed": 44,
+  "strictAllMetricsPassed": 44,
+  "animationCursorCoverage": {
+    "status": "matched",
+    "recorded": 1483,
+    "matched": 1483,
+    "mismatched": 0,
+    "unverified": 0,
+    "actual": 1483,
+    "observedActual": 1483,
+    "missingTelemetrySegments": 0,
+    "shapeIssueCount": 0
+  },
+  "metrics": {
+    "rngCalls": {
+      "matched": 792838,
+      "total": 792838
+    },
+    "screens": {
+      "matched": 11405,
+      "total": 11405
+    },
+    "cellsOnly": {
+      "matched": 11405,
+      "total": 11405
+    },
+    "cursors": {
+      "matched": 11405,
+      "total": 11405
+    },
+    "animFrames": {
+      "matched": 1483,
+      "total": 1483
+    }
+  },
+  "expectedTotals": {
+    "segments": 56,
+    "keys": 11349,
+    "rngCalls": 792838,
+    "screens": 11405,
+    "cursors": 11405,
+    "animations": 1483
+  },
+  "timeoutDisabled": true,
+  "sessionTimeoutMs": 0,
+  "timeoutErrors": 0,
+  "frozenFilesUnchanged": true,
+  "sessionFilesUnchanged": true,
+  "errorGroups": {},
+  "errors": [],
+  "details": [
+    {
+      "session": "seed0002-healer-reflection-drummer.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 27158,
+          "total": 27158
+        },
+        "screens": {
+          "matched": 595,
+          "total": 595
+        },
+        "cellsOnly": {
+          "matched": 595,
+          "total": 595
+        },
+        "cursors": {
+          "matched": 595,
+          "total": 595
+        },
+        "animFrames": {
+          "matched": 128,
+          "total": 128
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 27076.44,
+        "moves": 594
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 128,
+        "matched": 128,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 128,
+        "observedActual": 128,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 128,
+          "matched": 128,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 128,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0004-feeding-pony.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 12084,
+          "total": 12084
+        },
+        "screens": {
+          "matched": 409,
+          "total": 409
+        },
+        "cellsOnly": {
+          "matched": 409,
+          "total": 409
+        },
+        "cursors": {
+          "matched": 409,
+          "total": 409
+        },
+        "animFrames": {
+          "matched": 47,
+          "total": 47
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 20112.08,
+        "moves": 408
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 47,
+        "matched": 47,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 47,
+        "observedActual": 47,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 47,
+          "matched": 47,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 47,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0006-wizard-water-demon.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 6736,
+          "total": 6736
+        },
+        "screens": {
+          "matched": 123,
+          "total": 123
+        },
+        "cellsOnly": {
+          "matched": 123,
+          "total": 123
+        },
+        "cursors": {
+          "matched": 123,
+          "total": 123
+        },
+        "animFrames": {
+          "matched": 8,
+          "total": 8
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 10879.19,
+        "moves": 122
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 8,
+        "matched": 8,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 8,
+        "observedActual": 8,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 8,
+          "matched": 8,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 8,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 16373,
+          "total": 16373
+        },
+        "screens": {
+          "matched": 302,
+          "total": 302
+        },
+        "cellsOnly": {
+          "matched": 302,
+          "total": 302
+        },
+        "cursors": {
+          "matched": 302,
+          "total": 302
+        },
+        "animFrames": {
+          "matched": 58,
+          "total": 58
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 22866.67,
+        "moves": 301
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 58,
+        "matched": 58,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 58,
+        "observedActual": 58,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 58,
+          "matched": 58,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 58,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0009-swimmer-mforce.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3713,
+          "total": 3713
+        },
+        "screens": {
+          "matched": 73,
+          "total": 73
+        },
+        "cellsOnly": {
+          "matched": 73,
+          "total": 73
+        },
+        "cursors": {
+          "matched": 73,
+          "total": 73
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 7166.58,
+        "moves": 72
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0012-monk-vault-escort.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 13878,
+          "total": 13878
+        },
+        "screens": {
+          "matched": 308,
+          "total": 308
+        },
+        "cellsOnly": {
+          "matched": 308,
+          "total": 308
+        },
+        "cursors": {
+          "matched": 308,
+          "total": 308
+        },
+        "animFrames": {
+          "matched": 49,
+          "total": 49
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 16900.47,
+        "moves": 307
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 49,
+        "matched": 49,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 49,
+        "observedActual": 49,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 49,
+          "matched": 49,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 49,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0013-friday13-save-then-fullmoon-restore.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 4804,
+          "total": 4804
+        },
+        "screens": {
+          "matched": 99,
+          "total": 99
+        },
+        "cellsOnly": {
+          "matched": 99,
+          "total": 99
+        },
+        "cursors": {
+          "matched": 99,
+          "total": 99
+        },
+        "animFrames": {
+          "matched": 10,
+          "total": 10
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 9984.5,
+        "moves": 97
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 10,
+        "matched": 10,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 10,
+        "observedActual": 10,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 10,
+          "matched": 10,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 10,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 2,
+      "actualSegments": 2
+    },
+    {
+      "session": "seed0013-rogue-friday13-combat.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 4838,
+          "total": 4838
+        },
+        "screens": {
+          "matched": 59,
+          "total": 59
+        },
+        "cellsOnly": {
+          "matched": 59,
+          "total": 59
+        },
+        "cursors": {
+          "matched": 59,
+          "total": 59
+        },
+        "animFrames": {
+          "matched": 10,
+          "total": 10
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 6451.28,
+        "moves": 58
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 10,
+        "matched": 10,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 10,
+        "observedActual": 10,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 10,
+          "matched": 10,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 10,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0014-dequa-fountain-explore.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 59178,
+          "total": 59178
+        },
+        "screens": {
+          "matched": 714,
+          "total": 714
+        },
+        "cellsOnly": {
+          "matched": 714,
+          "total": 714
+        },
+        "cursors": {
+          "matched": 714,
+          "total": 714
+        },
+        "animFrames": {
+          "matched": 995,
+          "total": 995
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 56686.08,
+        "moves": 713
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 995,
+        "matched": 995,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 995,
+        "observedActual": 995,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 995,
+          "matched": 995,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 995,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0015-valk-level2-pit-dog-wait.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 8563,
+          "total": 8563
+        },
+        "screens": {
+          "matched": 44,
+          "total": 44
+        },
+        "cellsOnly": {
+          "matched": 44,
+          "total": 44
+        },
+        "cursors": {
+          "matched": 44,
+          "total": 44
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 6110.7,
+        "moves": 43
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0016-healer-newmoon-eat-zap.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3656,
+          "total": 3656
+        },
+        "screens": {
+          "matched": 36,
+          "total": 36
+        },
+        "cellsOnly": {
+          "matched": 36,
+          "total": 36
+        },
+        "cursors": {
+          "matched": 36,
+          "total": 36
+        },
+        "animFrames": {
+          "matched": 4,
+          "total": 4
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 5350.41,
+        "moves": 35
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 4,
+        "matched": 4,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 4,
+        "observedActual": 4,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 4,
+          "matched": 4,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 4,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0017-samurai-altar-pray.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3465,
+          "total": 3465
+        },
+        "screens": {
+          "matched": 67,
+          "total": 67
+        },
+        "cellsOnly": {
+          "matched": 67,
+          "total": 67
+        },
+        "cursors": {
+          "matched": 67,
+          "total": 67
+        },
+        "animFrames": {
+          "matched": 33,
+          "total": 33
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 5877.02,
+        "moves": 66
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 33,
+        "matched": 33,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 33,
+        "observedActual": 33,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 33,
+          "matched": 33,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 33,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0030-ten-diverse-deaths.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 105529,
+          "total": 105529
+        },
+        "screens": {
+          "matched": 1953,
+          "total": 1953
+        },
+        "cellsOnly": {
+          "matched": 1953,
+          "total": 1953
+        },
+        "cursors": {
+          "matched": 1953,
+          "total": 1953
+        },
+        "animFrames": {
+          "matched": 40,
+          "total": 40
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 85254.77,
+        "moves": 1943
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 40,
+        "matched": 40,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 40,
+        "observedActual": 40,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 3,
+          "matched": 3,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 3,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 21,
+          "matched": 21,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 21,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 13,
+          "matched": 13,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 13,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 1,
+          "matched": 1,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 1,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 2,
+          "matched": 2,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 2,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 10,
+      "actualSegments": 10
+    },
+    {
+      "session": "seed0060-orc-rogue-kick-search.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3626,
+          "total": 3626
+        },
+        "screens": {
+          "matched": 41,
+          "total": 41
+        },
+        "cellsOnly": {
+          "matched": 41,
+          "total": 41
+        },
+        "cursors": {
+          "matched": 41,
+          "total": 41
+        },
+        "animFrames": {
+          "matched": 4,
+          "total": 4
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 5667.91,
+        "moves": 40
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 4,
+        "matched": 4,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 4,
+        "observedActual": 4,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 4,
+          "matched": 4,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 4,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0077-rogue-chargen.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3242,
+          "total": 3242
+        },
+        "screens": {
+          "matched": 33,
+          "total": 33
+        },
+        "cellsOnly": {
+          "matched": 33,
+          "total": 33
+        },
+        "cursors": {
+          "matched": 33,
+          "total": 33
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 4780.98,
+        "moves": 32
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0101-ranger-quiver-throw-travel-engrave.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 2371,
+          "total": 2371
+        },
+        "screens": {
+          "matched": 27,
+          "total": 27
+        },
+        "cellsOnly": {
+          "matched": 27,
+          "total": 27
+        },
+        "cursors": {
+          "matched": 27,
+          "total": 27
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 4499.04,
+        "moves": 26
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0102-ranger-name-cancel.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 4485,
+          "total": 4485
+        },
+        "screens": {
+          "matched": 25,
+          "total": 25
+        },
+        "cellsOnly": {
+          "matched": 25,
+          "total": 25
+        },
+        "cursors": {
+          "matched": 25,
+          "total": 25
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 4864.06,
+        "moves": 24
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0103-knight-ride-pony.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 2640,
+          "total": 2640
+        },
+        "screens": {
+          "matched": 60,
+          "total": 60
+        },
+        "cellsOnly": {
+          "matched": 60,
+          "total": 60
+        },
+        "cursors": {
+          "matched": 60,
+          "total": 60
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 4297.6,
+        "moves": 59
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0104-knight-ride-combat.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3223,
+          "total": 3223
+        },
+        "screens": {
+          "matched": 43,
+          "total": 43
+        },
+        "cellsOnly": {
+          "matched": 43,
+          "total": 43
+        },
+        "cursors": {
+          "matched": 43,
+          "total": 43
+        },
+        "animFrames": {
+          "matched": 2,
+          "total": 2
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 4848.31,
+        "moves": 42
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 2,
+        "matched": 2,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 2,
+        "observedActual": 2,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 2,
+          "matched": 2,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 2,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0105-valk-chat-lamp-ration.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 2499,
+          "total": 2499
+        },
+        "screens": {
+          "matched": 30,
+          "total": 30
+        },
+        "cellsOnly": {
+          "matched": 30,
+          "total": 30
+        },
+        "cursors": {
+          "matched": 30,
+          "total": 30
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 4190.06,
+        "moves": 29
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0106-priest-extcmd-sweep.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 4194,
+          "total": 4194
+        },
+        "screens": {
+          "matched": 267,
+          "total": 267
+        },
+        "cellsOnly": {
+          "matched": 267,
+          "total": 267
+        },
+        "cursors": {
+          "matched": 267,
+          "total": 267
+        },
+        "animFrames": {
+          "matched": 6,
+          "total": 6
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 7536.06,
+        "moves": 266
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 6,
+        "matched": 6,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 6,
+        "observedActual": 6,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 6,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0107-samurai-twoweapon-enhance.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 2902,
+          "total": 2902
+        },
+        "screens": {
+          "matched": 98,
+          "total": 98
+        },
+        "cellsOnly": {
+          "matched": 98,
+          "total": 98
+        },
+        "cursors": {
+          "matched": 98,
+          "total": 98
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 5028.5,
+        "moves": 97
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0108-wizard-extcmd-wishlist.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 16958,
+          "total": 16958
+        },
+        "screens": {
+          "matched": 303,
+          "total": 303
+        },
+        "cellsOnly": {
+          "matched": 303,
+          "total": 303
+        },
+        "cursors": {
+          "matched": 303,
+          "total": 303
+        },
+        "animFrames": {
+          "matched": 4,
+          "total": 4
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 10096.07,
+        "moves": 302
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 4,
+        "matched": 4,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 4,
+        "observedActual": 4,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 4,
+          "matched": 4,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 4,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0116-wizard-wear-shop.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 12562,
+          "total": 12562
+        },
+        "screens": {
+          "matched": 127,
+          "total": 127
+        },
+        "cellsOnly": {
+          "matched": 127,
+          "total": 127
+        },
+        "cursors": {
+          "matched": 127,
+          "total": 127
+        },
+        "animFrames": {
+          "matched": 8,
+          "total": 8
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 11023.72,
+        "moves": 126
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 8,
+        "matched": 8,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 8,
+        "observedActual": 8,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 8,
+          "matched": 8,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 8,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0200-monk-north-search.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3822,
+          "total": 3822
+        },
+        "screens": {
+          "matched": 40,
+          "total": 40
+        },
+        "cellsOnly": {
+          "matched": 40,
+          "total": 40
+        },
+        "cursors": {
+          "matched": 40,
+          "total": 40
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 4930.01,
+        "moves": 39
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0360-wizard-world-tour.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 120639,
+          "total": 120639
+        },
+        "screens": {
+          "matched": 833,
+          "total": 833
+        },
+        "cellsOnly": {
+          "matched": 833,
+          "total": 833
+        },
+        "cursors": {
+          "matched": 833,
+          "total": 833
+        },
+        "animFrames": {
+          "matched": 12,
+          "total": 12
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 80634.06,
+        "moves": 832
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 12,
+        "matched": 12,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 12,
+        "observedActual": 12,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 12,
+          "matched": 12,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 12,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0361-archeologist-tour.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 53865,
+          "total": 53865
+        },
+        "screens": {
+          "matched": 366,
+          "total": 366
+        },
+        "cellsOnly": {
+          "matched": 366,
+          "total": 366
+        },
+        "cursors": {
+          "matched": 366,
+          "total": 366
+        },
+        "animFrames": {
+          "matched": 10,
+          "total": 10
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 29312.19,
+        "moves": 365
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 10,
+        "matched": 10,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 10,
+        "observedActual": 10,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 10,
+          "matched": 10,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 10,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0367-priest-quest-tour.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 50125,
+          "total": 50125
+        },
+        "screens": {
+          "matched": 324,
+          "total": 324
+        },
+        "cellsOnly": {
+          "matched": 324,
+          "total": 324
+        },
+        "cursors": {
+          "matched": 324,
+          "total": 324
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 31983.18,
+        "moves": 323
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0373-barbarian-quest-tour.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 35386,
+          "total": 35386
+        },
+        "screens": {
+          "matched": 124,
+          "total": 124
+        },
+        "cellsOnly": {
+          "matched": 124,
+          "total": 124
+        },
+        "cursors": {
+          "matched": 124,
+          "total": 124
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 23489.5,
+        "moves": 123
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0383-wizard-hallucinate.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 16915,
+          "total": 16915
+        },
+        "screens": {
+          "matched": 219,
+          "total": 219
+        },
+        "cellsOnly": {
+          "matched": 219,
+          "total": 219
+        },
+        "cursors": {
+          "matched": 219,
+          "total": 219
+        },
+        "animFrames": {
+          "matched": 1,
+          "total": 1
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 11533.07,
+        "moves": 218
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 1,
+        "matched": 1,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 1,
+        "observedActual": 1,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 1,
+          "matched": 1,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 1,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0398-wizard-wandpoly-pile.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3026,
+          "total": 3026
+        },
+        "screens": {
+          "matched": 87,
+          "total": 87
+        },
+        "cellsOnly": {
+          "matched": 87,
+          "total": 87
+        },
+        "cursors": {
+          "matched": 87,
+          "total": 87
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 4749.97,
+        "moves": 86
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0399-wizard-hallu-actions.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 11409,
+          "total": 11409
+        },
+        "screens": {
+          "matched": 532,
+          "total": 532
+        },
+        "cellsOnly": {
+          "matched": 532,
+          "total": 532
+        },
+        "cursors": {
+          "matched": 532,
+          "total": 532
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 11661.01,
+        "moves": 531
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0501-priest-cast-read-turn.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 2238,
+          "total": 2238
+        },
+        "screens": {
+          "matched": 28,
+          "total": 28
+        },
+        "cellsOnly": {
+          "matched": 28,
+          "total": 28
+        },
+        "cursors": {
+          "matched": 28,
+          "total": 28
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 4550.43,
+        "moves": 27
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0700-samurai-explore-descend.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3230,
+          "total": 3230
+        },
+        "screens": {
+          "matched": 51,
+          "total": 51
+        },
+        "cellsOnly": {
+          "matched": 51,
+          "total": 51
+        },
+        "cursors": {
+          "matched": 51,
+          "total": 51
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 5163.47,
+        "moves": 50
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed0900-tourist-explore-actions.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 2983,
+          "total": 2983
+        },
+        "screens": {
+          "matched": 84,
+          "total": 84
+        },
+        "cellsOnly": {
+          "matched": 84,
+          "total": 84
+        },
+        "cursors": {
+          "matched": 84,
+          "total": 84
+        },
+        "animFrames": {
+          "matched": 3,
+          "total": 3
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 5348.52,
+        "moves": 83
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 3,
+        "matched": 3,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 3,
+        "observedActual": 3,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 3,
+          "matched": 3,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 3,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed1150-caveman-explore-move.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3137,
+          "total": 3137
+        },
+        "screens": {
+          "matched": 51,
+          "total": 51
+        },
+        "cellsOnly": {
+          "matched": 51,
+          "total": 51
+        },
+        "cursors": {
+          "matched": 51,
+          "total": 51
+        },
+        "animFrames": {
+          "matched": 6,
+          "total": 6
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 5503.94,
+        "moves": 50
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 6,
+        "matched": 6,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 6,
+        "observedActual": 6,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 6,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed1500-rogue-explore-move.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 2768,
+          "total": 2768
+        },
+        "screens": {
+          "matched": 40,
+          "total": 40
+        },
+        "cellsOnly": {
+          "matched": 40,
+          "total": 40
+        },
+        "cursors": {
+          "matched": 40,
+          "total": 40
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 5022.84,
+        "moves": 39
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed1800-tourist-eat-throw.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 2458,
+          "total": 2458
+        },
+        "screens": {
+          "matched": 26,
+          "total": 26
+        },
+        "cellsOnly": {
+          "matched": 26,
+          "total": 26
+        },
+        "cursors": {
+          "matched": 26,
+          "total": 26
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 4274.82,
+        "moves": 25
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed2200-wizard-quaff-zap-read.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3018,
+          "total": 3018
+        },
+        "screens": {
+          "matched": 230,
+          "total": 230
+        },
+        "cellsOnly": {
+          "matched": 230,
+          "total": 230
+        },
+        "cursors": {
+          "matched": 230,
+          "total": 230
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 17431.99,
+        "moves": 229
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed2600-wizard-custom-binds.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 11647,
+          "total": 11647
+        },
+        "screens": {
+          "matched": 38,
+          "total": 38
+        },
+        "cellsOnly": {
+          "matched": 38,
+          "total": 38
+        },
+        "cursors": {
+          "matched": 38,
+          "total": 38
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 7983.42,
+        "moves": 37
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed4500-knight-coverage.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 108275,
+          "total": 108275
+        },
+        "screens": {
+          "matched": 1814,
+          "total": 1814
+        },
+        "cellsOnly": {
+          "matched": 1814,
+          "total": 1814
+        },
+        "cursors": {
+          "matched": 1814,
+          "total": 1814
+        },
+        "animFrames": {
+          "matched": 37,
+          "total": 37
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 65409.34,
+        "moves": 1813
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 37,
+        "matched": 37,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 37,
+        "observedActual": 37,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 37,
+          "matched": 37,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 37,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    },
+    {
+      "session": "seed5002-wizard-coverage-pair.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 12167,
+          "total": 12167
+        },
+        "screens": {
+          "matched": 410,
+          "total": 410
+        },
+        "cellsOnly": {
+          "matched": 410,
+          "total": 410
+        },
+        "cursors": {
+          "matched": 410,
+          "total": 410
+        },
+        "animFrames": {
+          "matched": 8,
+          "total": 8
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 12468.75,
+        "moves": 408
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 8,
+        "matched": 8,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 8,
+        "observedActual": 8,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 8,
+          "matched": 8,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 8,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 2,
+      "actualSegments": 2
+    },
+    {
+      "session": "seed5006-tourist-stress-disaster.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 13923,
+          "total": 13923
+        },
+        "screens": {
+          "matched": 249,
+          "total": 249
+        },
+        "cellsOnly": {
+          "matched": 249,
+          "total": 249
+        },
+        "cursors": {
+          "matched": 249,
+          "total": 249
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 11700.84,
+        "moves": 247
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        },
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 2,
+      "actualSegments": 2
+    },
+    {
+      "session": "seed8000-tourist-starter.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 3130,
+          "total": 3130
+        },
+        "screens": {
+          "matched": 23,
+          "total": 23
+        },
+        "cellsOnly": {
+          "matched": 23,
+          "total": 23
+        },
+        "cursors": {
+          "matched": 23,
+          "total": 23
+        },
+        "animFrames": {
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 4532.56,
+        "moves": 22
+      },
+      "strictCountsAndAnimationScreensPassed": true,
+      "strictAllMetricsPassed": true,
+      "animationCursors": {
+        "status": "matched",
+        "recorded": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "unverified": 0,
+        "actual": 0,
+        "observedActual": 0,
+        "missingTelemetrySegments": 0,
+        "shapeIssueCount": 0
+      },
+      "animationCursorSegments": [
+        {
+          "status": "matched",
+          "telemetryPresent": true,
+          "recorded": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "unverified": 0,
+          "actual": 0,
+          "missingTelemetrySegments": 0,
+          "shapeIssues": [],
+          "firstMismatch": null,
+          "firstUnverified": null
+        }
+      ],
+      "supplementalIssues": [],
+      "expectedSegments": 1,
+      "actualSegments": 1
+    }
+  ],
+  "persistenceCoverage": {
+    "expectedSegments": 56,
+    "observedSegments": 56,
+    "multiSegmentSessions": 4,
+    "operations": {
+      "get": 56,
+      "set": 56,
+      "remove": 0
+    },
+    "scope": "Observed shared-storage API traffic and end-to-end multi-segment score coverage; public data provides no independent saved-file-byte metric."
+  },
+  "forbiddenCapabilityAttempts": 0,
+  "limits": [
+    "Official pass uses frozen RNG and grid+cursor scoring; animation score is supplemental in the original harness.",
+    "Strict all-metric status additionally requires animation screen equality, exact per-frame animation cursor triples at every recorded boundary, exact actual output/per-step counts, zero pending animations, no forbidden capability attempts and storage traffic.",
+    "Older telemetry without animationCursors is unverified for animation cursor equality, not a cursor mismatch. Historical count-and-animation-screen passes do not establish full animation cursor coverage.",
+    "On replay error the adapter may not extract partial emitted arrays; zero telemetry output counts do not establish that the engine made no RNG calls.",
+    "This is the current pure-JS result. Historical44/44 mixed/Wasm results do not apply."
+  ],
+  "provenance": {
+    "stageManifest": "stage-manifest.json",
+    "officialBundle": "official-results.json"
+  }
+}

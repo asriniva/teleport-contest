@@ -1,0 +1,2002 @@
+{
+  "baseCommit": "d9c2321e4799679f0b52c19722db6e2423119b07",
+  "productionUntouched": true,
+  "node": "v22.23.5",
+  "sourceSha256": {
+    "bench-worker.mjs": "4ccead4d798f32935d6f1d5afb3eda9cee16ff24ebb88f964f50b2b1cf517347",
+    "bench-driver.py": "db2b876681d1dd25226209f04ff859a05a383b47bb33490239d9015bbd8e236c",
+    "adapter-factories.js": "0b202c0ab92ab9eca26cbf5f4ad92af9a69f6d93a256c6a0051bc1a1f7d21b81",
+    "selector-state-factories.js": "a12022a1380216d383393dac72dd6c945089185803026d722bc1e529ab3ed1e4",
+    "control-factories.js": "c36b2d39b0ec2e1d3d69614fb2a72d1c5f22f46fa2cb36641d560a03506396c8"
+  },
+  "pairs": [
+    {
+      "variant": "control",
+      "modes": [
+        {
+          "mode": "mono",
+          "meanCpuRatio": 1.1372895006822221,
+          "meanWallRatio": 1.1372614849036475
+        },
+        {
+          "mode": "addresses",
+          "meanCpuRatio": 1.0887381060722923,
+          "meanWallRatio": 1.0885652194985953
+        },
+        {
+          "mode": "alternating",
+          "meanCpuRatio": 1.0033245885985729,
+          "meanWallRatio": 1.003460342048468
+        },
+        {
+          "mode": "uniform",
+          "meanCpuRatio": 1.027142830830205,
+          "meanWallRatio": 1.0271607123588455
+        },
+        {
+          "mode": "weighted",
+          "meanCpuRatio": 1.0867122993952574,
+          "meanWallRatio": 1.086694916269542
+        }
+      ],
+      "trials": [
+        {
+          "mode": "mono",
+          "round": 0,
+          "baselineCpuMs": 28.612000000000002,
+          "candidateCpuMs": 34.8805,
+          "cpuRatio": 1.2190863973158115,
+          "wallRatio": 1.219055863066243
+        },
+        {
+          "mode": "addresses",
+          "round": 0,
+          "baselineCpuMs": 43.7525,
+          "candidateCpuMs": 50.439,
+          "cpuRatio": 1.1528255528255529,
+          "wallRatio": 1.1525259584498007
+        },
+        {
+          "mode": "alternating",
+          "round": 0,
+          "baselineCpuMs": 48.3685,
+          "candidateCpuMs": 46.255,
+          "cpuRatio": 0.9563042062499355,
+          "wallRatio": 0.9561721835189497
+        },
+        {
+          "mode": "uniform",
+          "round": 0,
+          "baselineCpuMs": 47.495999999999995,
+          "candidateCpuMs": 48.334500000000006,
+          "cpuRatio": 1.0176541182415364,
+          "wallRatio": 1.0176690173276193
+        },
+        {
+          "mode": "weighted",
+          "round": 0,
+          "baselineCpuMs": 45.3645,
+          "candidateCpuMs": 51.2565,
+          "cpuRatio": 1.1298812948450883,
+          "wallRatio": 1.1298869647181407
+        },
+        {
+          "mode": "mono",
+          "round": 1,
+          "baselineCpuMs": 32.653,
+          "candidateCpuMs": 34.465,
+          "cpuRatio": 1.0554926040486328,
+          "wallRatio": 1.055467106741052
+        },
+        {
+          "mode": "addresses",
+          "round": 1,
+          "baselineCpuMs": 50.81,
+          "candidateCpuMs": 52.0625,
+          "cpuRatio": 1.0246506593190317,
+          "wallRatio": 1.0246044805473897
+        },
+        {
+          "mode": "alternating",
+          "round": 1,
+          "baselineCpuMs": 50.5115,
+          "candidateCpuMs": 53.0545,
+          "cpuRatio": 1.0503449709472101,
+          "wallRatio": 1.0507485005779864
+        },
+        {
+          "mode": "uniform",
+          "round": 1,
+          "baselineCpuMs": 47.4045,
+          "candidateCpuMs": 49.141,
+          "cpuRatio": 1.0366315434188738,
+          "wallRatio": 1.036652407390072
+        },
+        {
+          "mode": "weighted",
+          "round": 1,
+          "baselineCpuMs": 50.134,
+          "candidateCpuMs": 52.317,
+          "cpuRatio": 1.0435433039454263,
+          "wallRatio": 1.0435028678209433
+        }
+      ]
+    },
+    {
+      "variant": "candidate",
+      "modes": [
+        {
+          "mode": "mono",
+          "meanCpuRatio": 0.7993470443253269,
+          "meanWallRatio": 0.7991223026398234
+        },
+        {
+          "mode": "addresses",
+          "meanCpuRatio": 0.8180617766742995,
+          "meanWallRatio": 0.8180586206958591
+        },
+        {
+          "mode": "alternating",
+          "meanCpuRatio": 0.8886723326889097,
+          "meanWallRatio": 0.888570861016488
+        },
+        {
+          "mode": "uniform",
+          "meanCpuRatio": 0.9051713624055812,
+          "meanWallRatio": 0.9051605969845222
+        },
+        {
+          "mode": "weighted",
+          "meanCpuRatio": 0.8516149899065939,
+          "meanWallRatio": 0.8478006280184511
+        }
+      ],
+      "trials": [
+        {
+          "mode": "mono",
+          "round": 0,
+          "baselineCpuMs": 34.88,
+          "candidateCpuMs": 28.3735,
+          "cpuRatio": 0.8134604357798164,
+          "wallRatio": 0.8134497739903459
+        },
+        {
+          "mode": "addresses",
+          "round": 0,
+          "baselineCpuMs": 52.0805,
+          "candidateCpuMs": 44.289500000000004,
+          "cpuRatio": 0.8504046620136136,
+          "wallRatio": 0.8504042964449318
+        },
+        {
+          "mode": "alternating",
+          "round": 0,
+          "baselineCpuMs": 48.4775,
+          "candidateCpuMs": 43.259,
+          "cpuRatio": 0.8923521221185086,
+          "wallRatio": 0.8923715854492736
+        },
+        {
+          "mode": "uniform",
+          "round": 0,
+          "baselineCpuMs": 47.432500000000005,
+          "candidateCpuMs": 42.4455,
+          "cpuRatio": 0.8948611184314552,
+          "wallRatio": 0.8948805519393244
+        },
+        {
+          "mode": "weighted",
+          "round": 0,
+          "baselineCpuMs": 51.400999999999996,
+          "candidateCpuMs": 45.7415,
+          "cpuRatio": 0.8898951382268828,
+          "wallRatio": 0.8822632395345561
+        },
+        {
+          "mode": "mono",
+          "round": 1,
+          "baselineCpuMs": 34.9985,
+          "candidateCpuMs": 27.482,
+          "cpuRatio": 0.7852336528708374,
+          "wallRatio": 0.7847948312893009
+        },
+        {
+          "mode": "addresses",
+          "round": 1,
+          "baselineCpuMs": 54.2815,
+          "candidateCpuMs": 42.65,
+          "cpuRatio": 0.7857188913349852,
+          "wallRatio": 0.7857129449467866
+        },
+        {
+          "mode": "alternating",
+          "round": 1,
+          "baselineCpuMs": 48.949,
+          "candidateCpuMs": 43.3195,
+          "cpuRatio": 0.8849925432593106,
+          "wallRatio": 0.8847701365837022
+        },
+        {
+          "mode": "uniform",
+          "round": 1,
+          "baselineCpuMs": 47.1495,
+          "candidateCpuMs": 43.164500000000004,
+          "cpuRatio": 0.9154816063797071,
+          "wallRatio": 0.9154406420297201
+        },
+        {
+          "mode": "weighted",
+          "round": 1,
+          "baselineCpuMs": 53.0415,
+          "candidateCpuMs": 43.1405,
+          "cpuRatio": 0.8133348415863051,
+          "wallRatio": 0.8133380165023462
+        }
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "variant": "baseline",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 28.615,
+          "wallMs": 28.615499999999997,
+          "trials": [
+            {
+              "cpuMs": 31.515,
+              "wallMs": 29.469708000000004
+            },
+            {
+              "cpuMs": 28.558,
+              "wallMs": 28.55924999999999
+            },
+            {
+              "cpuMs": 28.615,
+              "wallMs": 28.615499999999997
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 44.256,
+          "wallMs": 44.26795799999999,
+          "trials": [
+            {
+              "cpuMs": 44.425,
+              "wallMs": 44.432625
+            },
+            {
+              "cpuMs": 44.256,
+              "wallMs": 44.26795799999999
+            },
+            {
+              "cpuMs": 43.846,
+              "wallMs": 43.85400000000001
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 48.982,
+          "wallMs": 48.995334000000014,
+          "trials": [
+            {
+              "cpuMs": 51.369,
+              "wallMs": 49.31495899999999
+            },
+            {
+              "cpuMs": 48.982,
+              "wallMs": 48.995334000000014
+            },
+            {
+              "cpuMs": 48.173,
+              "wallMs": 48.17341700000003
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 47.32,
+          "wallMs": 47.32216699999998,
+          "trials": [
+            {
+              "cpuMs": 47.125,
+              "wallMs": 47.12624999999997
+            },
+            {
+              "cpuMs": 47.32,
+              "wallMs": 47.32216699999998
+            },
+            {
+              "cpuMs": 48.027,
+              "wallMs": 48.06845899999996
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 45.574,
+          "wallMs": 45.57462499999997,
+          "trials": [
+            {
+              "cpuMs": 48.297,
+              "wallMs": 46.208417000000054
+            },
+            {
+              "cpuMs": 45.51,
+              "wallMs": 45.51158299999997
+            },
+            {
+              "cpuMs": 45.574,
+              "wallMs": 45.57462499999997
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 0,
+      "comparison": "control"
+    },
+    {
+      "variant": "control",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 33.116,
+          "wallMs": 33.11687499999998,
+          "trials": [
+            {
+              "cpuMs": 35.786,
+              "wallMs": 33.58083299999999
+            },
+            {
+              "cpuMs": 33.086,
+              "wallMs": 33.08708299999999
+            },
+            {
+              "cpuMs": 33.116,
+              "wallMs": 33.11687499999998
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 47.903,
+          "wallMs": 47.906125,
+          "trials": [
+            {
+              "cpuMs": 47.974,
+              "wallMs": 47.97341700000001
+            },
+            {
+              "cpuMs": 47.869,
+              "wallMs": 47.874750000000006
+            },
+            {
+              "cpuMs": 47.903,
+              "wallMs": 47.906125
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 47.008,
+          "wallMs": 47.00899999999996,
+          "trials": [
+            {
+              "cpuMs": 49.686,
+              "wallMs": 47.53212500000001
+            },
+            {
+              "cpuMs": 46.338,
+              "wallMs": 46.338374999999985
+            },
+            {
+              "cpuMs": 47.008,
+              "wallMs": 47.00899999999996
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 48.225,
+          "wallMs": 48.22837500000003,
+          "trials": [
+            {
+              "cpuMs": 48.225,
+              "wallMs": 48.22837500000003
+            },
+            {
+              "cpuMs": 48.385,
+              "wallMs": 48.385459000000026
+            },
+            {
+              "cpuMs": 48.208,
+              "wallMs": 48.209749999999985
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 49.99,
+          "wallMs": 49.99112500000001,
+          "trials": [
+            {
+              "cpuMs": 54.824,
+              "wallMs": 52.641000000000076
+            },
+            {
+              "cpuMs": 49.975,
+              "wallMs": 49.976249999999936
+            },
+            {
+              "cpuMs": 49.99,
+              "wallMs": 49.99112500000001
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 0,
+      "comparison": "control"
+    },
+    {
+      "variant": "control",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 36.645,
+          "wallMs": 36.643292,
+          "trials": [
+            {
+              "cpuMs": 38.323,
+              "wallMs": 36.158874999999995
+            },
+            {
+              "cpuMs": 36.644,
+              "wallMs": 36.643292
+            },
+            {
+              "cpuMs": 36.645,
+              "wallMs": 36.64545799999999
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 52.975,
+          "wallMs": 52.974999999999994,
+          "trials": [
+            {
+              "cpuMs": 52.975,
+              "wallMs": 52.974999999999994
+            },
+            {
+              "cpuMs": 53.245,
+              "wallMs": 53.249374999999986
+            },
+            {
+              "cpuMs": 52.845,
+              "wallMs": 52.847083
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 45.502,
+          "wallMs": 45.501417000000004,
+          "trials": [
+            {
+              "cpuMs": 48.959,
+              "wallMs": 46.817499999999995
+            },
+            {
+              "cpuMs": 45.502,
+              "wallMs": 45.501417000000004
+            },
+            {
+              "cpuMs": 45.464,
+              "wallMs": 45.464417000000026
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 48.444,
+          "wallMs": 48.44450000000006,
+          "trials": [
+            {
+              "cpuMs": 48.477,
+              "wallMs": 48.480166999999994
+            },
+            {
+              "cpuMs": 48.444,
+              "wallMs": 48.44450000000006
+            },
+            {
+              "cpuMs": 48.421,
+              "wallMs": 48.42183399999999
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 52.523,
+          "wallMs": 52.523708000000056,
+          "trials": [
+            {
+              "cpuMs": 54.774,
+              "wallMs": 52.58616600000005
+            },
+            {
+              "cpuMs": 52.523,
+              "wallMs": 52.52316700000006
+            },
+            {
+              "cpuMs": 52.523,
+              "wallMs": 52.523708000000056
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 0,
+      "comparison": "control"
+    },
+    {
+      "variant": "baseline",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 28.609,
+          "wallMs": 28.609250000000003,
+          "trials": [
+            {
+              "cpuMs": 31.487,
+              "wallMs": 29.45125
+            },
+            {
+              "cpuMs": 28.609,
+              "wallMs": 28.609250000000003
+            },
+            {
+              "cpuMs": 28.604,
+              "wallMs": 28.604875000000007
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 43.249,
+          "wallMs": 43.26249999999999,
+          "trials": [
+            {
+              "cpuMs": 43.505,
+              "wallMs": 43.505459
+            },
+            {
+              "cpuMs": 43.23,
+              "wallMs": 43.238833
+            },
+            {
+              "cpuMs": 43.249,
+              "wallMs": 43.26249999999999
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 47.755,
+          "wallMs": 47.75545900000003,
+          "trials": [
+            {
+              "cpuMs": 49.95,
+              "wallMs": 47.953332999999986
+            },
+            {
+              "cpuMs": 47.571,
+              "wallMs": 47.57091699999995
+            },
+            {
+              "cpuMs": 47.755,
+              "wallMs": 47.75545900000003
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 47.672,
+          "wallMs": 47.67225000000002,
+          "trials": [
+            {
+              "cpuMs": 47.672,
+              "wallMs": 47.67225000000002
+            },
+            {
+              "cpuMs": 47.867,
+              "wallMs": 47.868041999999946
+            },
+            {
+              "cpuMs": 47.656,
+              "wallMs": 47.65704200000005
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 45.155,
+          "wallMs": 45.15554200000008,
+          "trials": [
+            {
+              "cpuMs": 47.878,
+              "wallMs": 45.815083999999956
+            },
+            {
+              "cpuMs": 45.15,
+              "wallMs": 45.15112499999998
+            },
+            {
+              "cpuMs": 45.155,
+              "wallMs": 45.15554200000008
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 0,
+      "comparison": "control"
+    },
+    {
+      "variant": "control",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 32.951,
+          "wallMs": 32.951583,
+          "trials": [
+            {
+              "cpuMs": 35.582,
+              "wallMs": 33.41287499999999
+            },
+            {
+              "cpuMs": 32.931,
+              "wallMs": 32.931540999999996
+            },
+            {
+              "cpuMs": 32.951,
+              "wallMs": 32.951583
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 51.051,
+          "wallMs": 51.05475000000001,
+          "trials": [
+            {
+              "cpuMs": 51.147,
+              "wallMs": 51.147042
+            },
+            {
+              "cpuMs": 51.05,
+              "wallMs": 51.053708
+            },
+            {
+              "cpuMs": 51.051,
+              "wallMs": 51.05475000000001
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 53.885,
+          "wallMs": 53.886833999999965,
+          "trials": [
+            {
+              "cpuMs": 56.772,
+              "wallMs": 54.62908399999998
+            },
+            {
+              "cpuMs": 53.885,
+              "wallMs": 53.886833999999965
+            },
+            {
+              "cpuMs": 53.692,
+              "wallMs": 53.69408299999998
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 47.933,
+          "wallMs": 47.93466699999999,
+          "trials": [
+            {
+              "cpuMs": 48.242,
+              "wallMs": 48.24287499999997
+            },
+            {
+              "cpuMs": 47.862,
+              "wallMs": 47.863541000000055
+            },
+            {
+              "cpuMs": 47.933,
+              "wallMs": 47.93466699999999
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 51.647,
+          "wallMs": 51.64762500000006,
+          "trials": [
+            {
+              "cpuMs": 56.138,
+              "wallMs": 53.91874999999993
+            },
+            {
+              "cpuMs": 51.647,
+              "wallMs": 51.64762500000006
+            },
+            {
+              "cpuMs": 51.434,
+              "wallMs": 51.43491700000004
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 1,
+      "comparison": "control"
+    },
+    {
+      "variant": "baseline",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 32.662,
+          "wallMs": 32.66283399999999,
+          "trials": [
+            {
+              "cpuMs": 36.87,
+              "wallMs": 34.817417
+            },
+            {
+              "cpuMs": 32.646,
+              "wallMs": 32.64729199999999
+            },
+            {
+              "cpuMs": 32.662,
+              "wallMs": 32.66283399999999
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 50.644,
+          "wallMs": 50.64595800000001,
+          "trials": [
+            {
+              "cpuMs": 51.157,
+              "wallMs": 51.15662499999999
+            },
+            {
+              "cpuMs": 50.644,
+              "wallMs": 50.64595800000001
+            },
+            {
+              "cpuMs": 50.579,
+              "wallMs": 50.58262499999998
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 50.11,
+          "wallMs": 50.11054199999995,
+          "trials": [
+            {
+              "cpuMs": 52.918,
+              "wallMs": 50.90029199999998
+            },
+            {
+              "cpuMs": 50.11,
+              "wallMs": 50.11054199999995
+            },
+            {
+              "cpuMs": 49.805,
+              "wallMs": 49.806083
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 47.454,
+          "wallMs": 47.45466700000003,
+          "trials": [
+            {
+              "cpuMs": 47.454,
+              "wallMs": 47.45466700000003
+            },
+            {
+              "cpuMs": 47.357,
+              "wallMs": 47.358749999999986
+            },
+            {
+              "cpuMs": 47.911,
+              "wallMs": 47.913208000000054
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 50.212,
+          "wallMs": 50.214624999999955,
+          "trials": [
+            {
+              "cpuMs": 54.13,
+              "wallMs": 52.065291
+            },
+            {
+              "cpuMs": 49.953,
+              "wallMs": 49.953750000000014
+            },
+            {
+              "cpuMs": 50.212,
+              "wallMs": 50.214624999999955
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 1,
+      "comparison": "control"
+    },
+    {
+      "variant": "baseline",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 32.644,
+          "wallMs": 32.64612500000001,
+          "trials": [
+            {
+              "cpuMs": 36.811,
+              "wallMs": 34.767959
+            },
+            {
+              "cpuMs": 32.625,
+              "wallMs": 32.62504199999999
+            },
+            {
+              "cpuMs": 32.644,
+              "wallMs": 32.64612500000001
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 50.976,
+          "wallMs": 50.9785,
+          "trials": [
+            {
+              "cpuMs": 51.7,
+              "wallMs": 51.70070900000002
+            },
+            {
+              "cpuMs": 50.976,
+              "wallMs": 50.9785
+            },
+            {
+              "cpuMs": 50.752,
+              "wallMs": 50.766291000000024
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 50.913,
+          "wallMs": 50.886708,
+          "trials": [
+            {
+              "cpuMs": 52.747,
+              "wallMs": 50.72958399999999
+            },
+            {
+              "cpuMs": 50.913,
+              "wallMs": 50.90866699999998
+            },
+            {
+              "cpuMs": 50.885,
+              "wallMs": 50.886708
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 47.355,
+          "wallMs": 47.35495800000001,
+          "trials": [
+            {
+              "cpuMs": 47.355,
+              "wallMs": 47.35495800000001
+            },
+            {
+              "cpuMs": 47.268,
+              "wallMs": 47.268833000000086
+            },
+            {
+              "cpuMs": 47.395,
+              "wallMs": 47.39904100000001
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 50.056,
+          "wallMs": 50.057500000000005,
+          "trials": [
+            {
+              "cpuMs": 53.742,
+              "wallMs": 51.67370800000003
+            },
+            {
+              "cpuMs": 50.056,
+              "wallMs": 50.057500000000005
+            },
+            {
+              "cpuMs": 50.025,
+              "wallMs": 50.02674999999999
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 1,
+      "comparison": "control"
+    },
+    {
+      "variant": "control",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 35.979,
+          "wallMs": 35.97987499999999,
+          "trials": [
+            {
+              "cpuMs": 38.502,
+              "wallMs": 36.32045900000001
+            },
+            {
+              "cpuMs": 35.822,
+              "wallMs": 35.823499999999996
+            },
+            {
+              "cpuMs": 35.979,
+              "wallMs": 35.97987499999999
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 53.074,
+          "wallMs": 53.07012500000002,
+          "trials": [
+            {
+              "cpuMs": 53.074,
+              "wallMs": 53.07012500000002
+            },
+            {
+              "cpuMs": 52.73,
+              "wallMs": 52.73587499999999
+            },
+            {
+              "cpuMs": 53.313,
+              "wallMs": 53.38274999999999
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 52.224,
+          "wallMs": 52.23587500000002,
+          "trials": [
+            {
+              "cpuMs": 56.33,
+              "wallMs": 54.17208300000004
+            },
+            {
+              "cpuMs": 52.224,
+              "wallMs": 52.23587500000002
+            },
+            {
+              "cpuMs": 52.061,
+              "wallMs": 52.061082999999996
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 50.349,
+          "wallMs": 50.34995900000001,
+          "trials": [
+            {
+              "cpuMs": 50.423,
+              "wallMs": 50.42520900000005
+            },
+            {
+              "cpuMs": 50.349,
+              "wallMs": 50.34995900000001
+            },
+            {
+              "cpuMs": 50.195,
+              "wallMs": 50.196083000000044
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 52.987,
+          "wallMs": 52.986625000000004,
+          "trials": [
+            {
+              "cpuMs": 56.649,
+              "wallMs": 54.44229199999995
+            },
+            {
+              "cpuMs": 52.987,
+              "wallMs": 52.986625000000004
+            },
+            {
+              "cpuMs": 52.665,
+              "wallMs": 52.66529200000002
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 1,
+      "comparison": "control"
+    },
+    {
+      "variant": "baseline",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 35.542,
+          "wallMs": 35.54308399999999,
+          "trials": [
+            {
+              "cpuMs": 40.195,
+              "wallMs": 38.142625
+            },
+            {
+              "cpuMs": 35.542,
+              "wallMs": 35.54308399999999
+            },
+            {
+              "cpuMs": 35.48,
+              "wallMs": 35.48025000000001
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 52.925,
+          "wallMs": 52.921875,
+          "trials": [
+            {
+              "cpuMs": 52.925,
+              "wallMs": 52.921875
+            },
+            {
+              "cpuMs": 52.672,
+              "wallMs": 52.675250000000034
+            },
+            {
+              "cpuMs": 53.093,
+              "wallMs": 53.21787499999999
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 49.756,
+          "wallMs": 49.756416,
+          "trials": [
+            {
+              "cpuMs": 54.023,
+              "wallMs": 51.56262499999997
+            },
+            {
+              "cpuMs": 49.706,
+              "wallMs": 49.70687499999997
+            },
+            {
+              "cpuMs": 49.756,
+              "wallMs": 49.756416
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 48.183,
+          "wallMs": 48.18304199999994,
+          "trials": [
+            {
+              "cpuMs": 48.183,
+              "wallMs": 48.18304199999994
+            },
+            {
+              "cpuMs": 48.369,
+              "wallMs": 48.37033299999996
+            },
+            {
+              "cpuMs": 48.045,
+              "wallMs": 48.04533300000003
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 51.995,
+          "wallMs": 52.01966700000003,
+          "trials": [
+            {
+              "cpuMs": 56.113,
+              "wallMs": 54.02175
+            },
+            {
+              "cpuMs": 51.995,
+              "wallMs": 52.01966700000003
+            },
+            {
+              "cpuMs": 51.739,
+              "wallMs": 51.7394579999999
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 0,
+      "comparison": "candidate"
+    },
+    {
+      "variant": "candidate",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 28.099,
+          "wallMs": 28.099874999999997,
+          "trials": [
+            {
+              "cpuMs": 31.862,
+              "wallMs": 29.874333000000007
+            },
+            {
+              "cpuMs": 28.096,
+              "wallMs": 28.096209
+            },
+            {
+              "cpuMs": 28.099,
+              "wallMs": 28.099874999999997
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 43.824,
+          "wallMs": 43.827958000000024,
+          "trials": [
+            {
+              "cpuMs": 43.948,
+              "wallMs": 43.94716599999998
+            },
+            {
+              "cpuMs": 43.824,
+              "wallMs": 43.827958000000024
+            },
+            {
+              "cpuMs": 43.724,
+              "wallMs": 43.72649999999999
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 44.334,
+          "wallMs": 44.33541700000001,
+          "trials": [
+            {
+              "cpuMs": 46.902,
+              "wallMs": 44.93620800000002
+            },
+            {
+              "cpuMs": 43.942,
+              "wallMs": 43.94383399999998
+            },
+            {
+              "cpuMs": 44.334,
+              "wallMs": 44.33541700000001
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 42.74,
+          "wallMs": 42.74170799999996,
+          "trials": [
+            {
+              "cpuMs": 42.731,
+              "wallMs": 42.730583000000024
+            },
+            {
+              "cpuMs": 42.787,
+              "wallMs": 42.78866599999998
+            },
+            {
+              "cpuMs": 42.74,
+              "wallMs": 42.74170799999996
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 44.175,
+          "wallMs": 44.17679099999998,
+          "trials": [
+            {
+              "cpuMs": 47.202,
+              "wallMs": 45.187167000000045
+            },
+            {
+              "cpuMs": 44.175,
+              "wallMs": 44.17679099999998
+            },
+            {
+              "cpuMs": 44.14,
+              "wallMs": 44.139749999999935
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 0,
+      "comparison": "candidate"
+    },
+    {
+      "variant": "candidate",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 28.648,
+          "wallMs": 28.649500000000003,
+          "trials": [
+            {
+              "cpuMs": 32.226,
+              "wallMs": 30.236916
+            },
+            {
+              "cpuMs": 28.648,
+              "wallMs": 28.649500000000003
+            },
+            {
+              "cpuMs": 28.648,
+              "wallMs": 28.648541999999992
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 44.755,
+          "wallMs": 44.759792000000004,
+          "trials": [
+            {
+              "cpuMs": 45.224,
+              "wallMs": 45.22491600000001
+            },
+            {
+              "cpuMs": 44.755,
+              "wallMs": 44.759792000000004
+            },
+            {
+              "cpuMs": 44.54,
+              "wallMs": 44.54199999999997
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 42.184,
+          "wallMs": 42.185249999999996,
+          "trials": [
+            {
+              "cpuMs": 44.687,
+              "wallMs": 42.72675000000004
+            },
+            {
+              "cpuMs": 42.184,
+              "wallMs": 42.185249999999996
+            },
+            {
+              "cpuMs": 42.069,
+              "wallMs": 42.07045899999997
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 42.151,
+          "wallMs": 42.15158299999996,
+          "trials": [
+            {
+              "cpuMs": 41.968,
+              "wallMs": 41.96954199999999
+            },
+            {
+              "cpuMs": 42.204,
+              "wallMs": 42.205584000000044
+            },
+            {
+              "cpuMs": 42.151,
+              "wallMs": 42.15158299999996
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 47.308,
+          "wallMs": 46.54325000000006,
+          "trials": [
+            {
+              "cpuMs": 48.556,
+              "wallMs": 46.54325000000006
+            },
+            {
+              "cpuMs": 45.778,
+              "wallMs": 45.81016599999998
+            },
+            {
+              "cpuMs": 47.308,
+              "wallMs": 47.383083000000056
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 0,
+      "comparison": "candidate"
+    },
+    {
+      "variant": "baseline",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 34.218,
+          "wallMs": 34.220749999999995,
+          "trials": [
+            {
+              "cpuMs": 37.244,
+              "wallMs": 35.18325000000001
+            },
+            {
+              "cpuMs": 34.218,
+              "wallMs": 34.220749999999995
+            },
+            {
+              "cpuMs": 33.762,
+              "wallMs": 33.780292
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 51.236,
+          "wallMs": 51.24945900000003,
+          "trials": [
+            {
+              "cpuMs": 51.936,
+              "wallMs": 51.939459
+            },
+            {
+              "cpuMs": 51.236,
+              "wallMs": 51.24945900000003
+            },
+            {
+              "cpuMs": 51.228,
+              "wallMs": 51.23529099999996
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 47.199,
+          "wallMs": 47.19945799999999,
+          "trials": [
+            {
+              "cpuMs": 50.228,
+              "wallMs": 48.174667
+            },
+            {
+              "cpuMs": 47.199,
+              "wallMs": 47.19945799999999
+            },
+            {
+              "cpuMs": 47.194,
+              "wallMs": 47.19399999999996
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 46.682,
+          "wallMs": 46.682458,
+          "trials": [
+            {
+              "cpuMs": 46.435,
+              "wallMs": 46.434833000000026
+            },
+            {
+              "cpuMs": 46.71,
+              "wallMs": 46.75162499999999
+            },
+            {
+              "cpuMs": 46.682,
+              "wallMs": 46.682458
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 50.807,
+          "wallMs": 50.80683299999998,
+          "trials": [
+            {
+              "cpuMs": 53.835,
+              "wallMs": 51.75141600000006
+            },
+            {
+              "cpuMs": 50.742,
+              "wallMs": 50.74279200000001
+            },
+            {
+              "cpuMs": 50.807,
+              "wallMs": 50.80683299999998
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 0,
+      "comparison": "candidate"
+    },
+    {
+      "variant": "candidate",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 27.781,
+          "wallMs": 27.782207999999997,
+          "trials": [
+            {
+              "cpuMs": 30.523,
+              "wallMs": 28.52637500000001
+            },
+            {
+              "cpuMs": 27.773,
+              "wallMs": 27.774167000000006
+            },
+            {
+              "cpuMs": 27.781,
+              "wallMs": 27.782207999999997
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 43.854,
+          "wallMs": 43.85833400000001,
+          "trials": [
+            {
+              "cpuMs": 44.14,
+              "wallMs": 44.14058299999999
+            },
+            {
+              "cpuMs": 43.854,
+              "wallMs": 43.85833400000001
+            },
+            {
+              "cpuMs": 43.569,
+              "wallMs": 43.57254200000003
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 46.687,
+          "wallMs": 46.68729099999996,
+          "trials": [
+            {
+              "cpuMs": 49.751,
+              "wallMs": 47.79220800000002
+            },
+            {
+              "cpuMs": 46.687,
+              "wallMs": 46.68729099999996
+            },
+            {
+              "cpuMs": 46.64,
+              "wallMs": 46.639958999999976
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 44.563,
+          "wallMs": 44.56445800000006,
+          "trials": [
+            {
+              "cpuMs": 44.847,
+              "wallMs": 44.848415999999986
+            },
+            {
+              "cpuMs": 44.492,
+              "wallMs": 44.493250000000046
+            },
+            {
+              "cpuMs": 44.563,
+              "wallMs": 44.56445800000006
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 44.008,
+          "wallMs": 44.012374999999906,
+          "trials": [
+            {
+              "cpuMs": 47.824,
+              "wallMs": 45.81574999999998
+            },
+            {
+              "cpuMs": 44.008,
+              "wallMs": 44.012374999999906
+            },
+            {
+              "cpuMs": 44.004,
+              "wallMs": 44.005457999999976
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 1,
+      "comparison": "candidate"
+    },
+    {
+      "variant": "baseline",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 35.63,
+          "wallMs": 35.672083000000015,
+          "trials": [
+            {
+              "cpuMs": 39.66,
+              "wallMs": 37.619917
+            },
+            {
+              "cpuMs": 35.388,
+              "wallMs": 35.388334
+            },
+            {
+              "cpuMs": 35.63,
+              "wallMs": 35.672083000000015
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 54.97,
+          "wallMs": 54.97550000000001,
+          "trials": [
+            {
+              "cpuMs": 54.965,
+              "wallMs": 54.96391699999998
+            },
+            {
+              "cpuMs": 54.97,
+              "wallMs": 54.97550000000001
+            },
+            {
+              "cpuMs": 55.254,
+              "wallMs": 55.262541999999996
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 49.767,
+          "wallMs": 49.76891699999999,
+          "trials": [
+            {
+              "cpuMs": 52.333,
+              "wallMs": 50.251667
+            },
+            {
+              "cpuMs": 49.767,
+              "wallMs": 49.76891699999999
+            },
+            {
+              "cpuMs": 49.563,
+              "wallMs": 49.563417000000015
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 47.826,
+          "wallMs": 47.83166599999993,
+          "trials": [
+            {
+              "cpuMs": 47.547,
+              "wallMs": 47.550666999999976
+            },
+            {
+              "cpuMs": 49.788,
+              "wallMs": 49.87287499999991
+            },
+            {
+              "cpuMs": 47.826,
+              "wallMs": 47.83166599999993
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 53.82,
+          "wallMs": 53.822832999999946,
+          "trials": [
+            {
+              "cpuMs": 57.725,
+              "wallMs": 55.576459
+            },
+            {
+              "cpuMs": 53.698,
+              "wallMs": 53.69908299999997
+            },
+            {
+              "cpuMs": 53.82,
+              "wallMs": 53.822832999999946
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 1,
+      "comparison": "candidate"
+    },
+    {
+      "variant": "baseline",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 34.367,
+          "wallMs": 34.367666,
+          "trials": [
+            {
+              "cpuMs": 38.637,
+              "wallMs": 36.554666000000005
+            },
+            {
+              "cpuMs": 34.171,
+              "wallMs": 34.172167
+            },
+            {
+              "cpuMs": 34.367,
+              "wallMs": 34.367666
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 53.593,
+          "wallMs": 53.59770799999998,
+          "trials": [
+            {
+              "cpuMs": 53.39,
+              "wallMs": 53.389792
+            },
+            {
+              "cpuMs": 53.593,
+              "wallMs": 53.59770799999998
+            },
+            {
+              "cpuMs": 53.69,
+              "wallMs": 53.69475
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 48.131,
+          "wallMs": 48.131416,
+          "trials": [
+            {
+              "cpuMs": 51.434,
+              "wallMs": 49.41075000000001
+            },
+            {
+              "cpuMs": 48.131,
+              "wallMs": 48.131416
+            },
+            {
+              "cpuMs": 48.001,
+              "wallMs": 48.011792000000014
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 46.473,
+          "wallMs": 46.47387500000002,
+          "trials": [
+            {
+              "cpuMs": 46.485,
+              "wallMs": 46.484624999999994
+            },
+            {
+              "cpuMs": 46.473,
+              "wallMs": 46.47387500000002
+            },
+            {
+              "cpuMs": 46.432,
+              "wallMs": 46.43254200000001
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 52.263,
+          "wallMs": 52.26487499999996,
+          "trials": [
+            {
+              "cpuMs": 56.516,
+              "wallMs": 54.413916000000086
+            },
+            {
+              "cpuMs": 52.263,
+              "wallMs": 52.26487499999996
+            },
+            {
+              "cpuMs": 52.222,
+              "wallMs": 52.22387500000002
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 1,
+      "comparison": "candidate"
+    },
+    {
+      "variant": "candidate",
+      "node": "v22.23.5",
+      "rows": [
+        {
+          "name": "mono",
+          "checksum": 32000000,
+          "cpuMs": 27.183,
+          "wallMs": 27.184624999999997,
+          "trials": [
+            {
+              "cpuMs": 29.645,
+              "wallMs": 27.653416999999997
+            },
+            {
+              "cpuMs": 27.057,
+              "wallMs": 27.056708
+            },
+            {
+              "cpuMs": 27.183,
+              "wallMs": 27.184624999999997
+            }
+          ]
+        },
+        {
+          "name": "addresses",
+          "checksum": 157995904,
+          "cpuMs": 41.446,
+          "wallMs": 41.449040999999994,
+          "trials": [
+            {
+              "cpuMs": 41.491,
+              "wallMs": 41.490916999999996
+            },
+            {
+              "cpuMs": 41.446,
+              "wallMs": 41.449040999999994
+            },
+            {
+              "cpuMs": 41.339,
+              "wallMs": 41.348750000000024
+            }
+          ]
+        },
+        {
+          "name": "alternating",
+          "checksum": 158245904,
+          "cpuMs": 39.952,
+          "wallMs": 39.93199999999996,
+          "trials": [
+            {
+              "cpuMs": 41.462,
+              "wallMs": 39.317957999999976
+            },
+            {
+              "cpuMs": 39.952,
+              "wallMs": 39.95233400000001
+            },
+            {
+              "cpuMs": 39.93,
+              "wallMs": 39.93199999999996
+            }
+          ]
+        },
+        {
+          "name": "uniform",
+          "checksum": 287244876,
+          "cpuMs": 41.766,
+          "wallMs": 41.766666999999984,
+          "trials": [
+            {
+              "cpuMs": 41.987,
+              "wallMs": 41.987750000000005
+            },
+            {
+              "cpuMs": 41.756,
+              "wallMs": 41.756583000000035
+            },
+            {
+              "cpuMs": 41.766,
+              "wallMs": 41.766666999999984
+            }
+          ]
+        },
+        {
+          "name": "weighted",
+          "checksum": 183846418,
+          "cpuMs": 42.273,
+          "wallMs": 42.2727910000001,
+          "trials": [
+            {
+              "cpuMs": 45.172,
+              "wallMs": 43.14708299999995
+            },
+            {
+              "cpuMs": 42.263,
+              "wallMs": 42.26641700000005
+            },
+            {
+              "cpuMs": 42.273,
+              "wallMs": 42.2727910000001
+            }
+          ]
+        }
+      ],
+      "sink": 504907098,
+      "scope": "Actual env.field(...).value; schema3x4 int fields, stable services; no game replay.",
+      "round": 1,
+      "comparison": "candidate"
+    }
+  ],
+  "scope": "Actual env.field(...).value component CPU ABBA/BAAB, fresh Node workers, synthetic3-record12-field int schema, five selector/address mixes,500000 calls per sample, initialization excluded; no game replay or whole-game attribution.",
+  "scopeCorrection": "Description corrected after run from carried-over prepared-reader benchmark text; timings/checksums/source hashes unchanged."
+}

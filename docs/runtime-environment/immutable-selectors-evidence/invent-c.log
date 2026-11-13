@@ -1,0 +1,8 @@
+{
+  "backend": "Emscripten O2 memory64 original invent.c vs JS",
+  "checks": 1337,
+  "configuredFunctions": 119,
+  "native": false,
+  "limits": "Controlled foreign game/naming/menu dependencies; real hacklib/strutil/catalogues/libc. Native/full-game/public pending."
+}
+INVENT_ADDRESSED_FORMAL_POSITIVES {"added":4,"checks":1341,"functions":119,"source":"unchanged optimized Emscripten C vs cache-only corrected JS","native":false}

@@ -1,0 +1,16 @@
+{
+  "baseCommit": "32d7615adb8338891bc29c0f73638fbee3bab830",
+  "baselineFactorySha256": "3e930880e7597e2fba2e121472767fd0a03b121fb1f186d0eebbdf70a8cca0e3",
+  "candidateFactorySha256": "a12022a1380216d383393dac72dd6c945089185803026d722bc1e529ab3ed1e4",
+  "node": "v22.23.5",
+  "checks": 72602,
+  "ordinaryIntrinsicCounterexamples": 0,
+  "monkeypatchCounterexample": {
+    "sameNumericResult": true,
+    "baselineTrace": [
+      "BigInt"
+    ],
+    "candidateTrace": []
+  },
+  "scope": "Actual candidate vs pinned baseline synthetic descriptor getter/value coercion, huge Number, fractional profile and enum tests. Assumes ordinary JS intrinsics. This script supplies no native/recorder acceptance."
+}

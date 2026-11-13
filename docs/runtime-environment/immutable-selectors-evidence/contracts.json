@@ -1,0 +1,8 @@
+{
+  "checks": 19,
+  "actualFields": 387,
+  "actualFieldReads": 1161,
+  "baseCommit": "d9c2321e4799679f0b52c19722db6e2423119b07",
+  "candidate": "current production source",
+  "scope": "Detailed trace/identity scenarios, not native or recorder validation."
+}

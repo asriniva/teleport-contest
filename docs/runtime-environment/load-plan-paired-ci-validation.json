@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "complete": true,
+  "strictPublicPassed": {
+    "baseline": 44,
+    "candidate": 44
+  },
+  "changedInputs": [
+    "js/c-runtime/types.js"
+  ],
+  "baselineWallSeconds": 734.000955581665,
+  "candidateWallSeconds": 708.9954903125763,
+  "wallRatio": 0.9659326529768985,
+  "geometricMeanSessionRatio": 0.9704707259193424,
+  "ciRun": 43321234135,
+  "baselineCommit": "ec9917ff365eb631b51269fb728cb16c28fc5fb6",
+  "candidateCommit": "d9c2321e4799679f0b52c19722db6e2423119b07",
+  "enforcedDeadlineCiRun": 43321192555,
+  "enforcedTimeoutMs": 45000,
+  "enforcedDeadlinePassed": 40,
+  "enforcedDeadlineTotal": 44,
+  "deadlineTargetMet": false,
+  "robustWholeGameSpeedupEstablished": false,
+  "limits": [
+    "One sequential same-host pair is descriptive; order and host load may affect timing.",
+    "Deadlines disabled in paired profile; separate CI enforces 45000ms including worker startup.",
+    "All four deadline failures are ETIMEDOUT; public recordings only, no held-out acceptance."
+  ],
+  "rawProofs": {
+    "docs/runtime-environment/load-plan-paired-ci-evidence/baseline-commit.txt": "dea55b6c9c42d930eaf60f5bb15c62b472fc0fe66106cf66e6e1e07e0b80d636",
+    "docs/runtime-environment/load-plan-paired-ci-evidence/baseline-post-run-integrity.json": "7efeb2b3143d1efd08fe533f398a17d2433b4c355eea5c315927d268cbf8b172",
+    "docs/runtime-environment/load-plan-paired-ci-evidence/baseline-pre-run-manifest.json": "270af28b23e04dfeb21324b6281c8de41b006c8ff28dc1d429c7ce6d53c16046",
+    "docs/runtime-environment/load-plan-paired-ci-evidence/baseline-summary.json": "22d0a7ab198cf1e8f4ebb2cf99967889d012073adec0ce2b29941c083e3d69c3",
+    "docs/runtime-environment/load-plan-paired-ci-evidence/candidate-commit.txt": "9214f2ea0af46f0b826311f675db285ffa09ecaf8222a8e348b471e986ed2c8d",
+    "docs/runtime-environment/load-plan-paired-ci-evidence/candidate-post-run-integrity.json": "e85394612d5e04c31035254281ef268b6ac9b8180b697d6f019ee540413ecd47",
+    "docs/runtime-environment/load-plan-paired-ci-evidence/candidate-pre-run-manifest.json": "ec6de7a6dc9102c70e25c8dd9b036fa6d7e41de66f984b2bdabb963ce8a13671",
+    "docs/runtime-environment/load-plan-paired-ci-evidence/candidate-summary.json": "5b6e5c83de0a34ac42a7e039b8be9b7b9cd13c2ef8d5efcd8f29145fc7d1d9c9",
+    "docs/runtime-environment/load-plan-paired-ci-evidence/deadline-score-stderr.txt": "2ff5314f16604171ebc452c4cf91712eb3c60f4e4b5d7c4849b52527eed4e6dd",
+    "docs/runtime-environment/load-plan-paired-ci-evidence/deadline-score-stdout.txt": "a8d4b6099c52273e0c2065a3f69207d4437d47e388eafa9b98e7a37040ffea11",
+    "docs/runtime-environment/load-plan-paired-ci-evidence/deadline-score-summary.json": "b06cd899d9dfdc5682039b817715acdd4cab84c87f086afa662d0186dab9d53a",
+    "docs/runtime-environment/load-plan-paired-ci-evidence/runtime-comparison.json": "2b80ee0c4858591299da16d77b873ca1209ef2011e3fa3199500361ddfdc5916"
+  }
+}

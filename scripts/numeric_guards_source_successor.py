@@ -12,6 +12,9 @@ def baseline_bytes(root):return subprocess.check_output(['git','show',BASE_COMMI
 def qualified_before(root,file=FILE):
  assert file==FILE,'Only the exact reviewed numeric guards file is qualified'
  root=Path(root);before=baseline_bytes(root);after=(root/FILE).read_bytes();patch=(root/PATCH).read_bytes()
+ if(root/'scripts/immutable_selectors_source_successor.py').exists():
+  from immutable_selectors_source_successor import qualified_before as selector_before
+  after=selector_before(root,FILE)
  assert sha(before)==BEFORE_SHA256,'Wrong immutable numeric guards predecessor'
  assert sha(after)==AFTER_SHA256,'Unknown numeric guards source change'
  expected=''.join(difflib.unified_diff(before.decode().splitlines(True),after.decode().splitlines(True),fromfile='a/'+FILE,tofile='b/'+FILE)).encode()

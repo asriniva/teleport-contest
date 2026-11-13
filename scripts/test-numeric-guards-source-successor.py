@@ -8,7 +8,11 @@ with tempfile.TemporaryDirectory()as directory:
  target=Path(directory)
  def restore():
   for name in[q.FILE,q.PATCH]:
-   p=target/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes((root/name).read_bytes())
+   p=target/name;p.parent.mkdir(parents=True,exist_ok=True);data=(root/name).read_bytes()
+   if name==q.FILE:
+    from immutable_selectors_source_successor import qualified_before
+    data=qualified_before(root,name)
+   p.write_bytes(data)
  def reject(fn):
   global checks
   try:fn()

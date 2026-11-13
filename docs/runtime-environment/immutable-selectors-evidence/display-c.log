@@ -1,0 +1,5 @@
+PASS DISPLAY eager optimized extern constructor: all7/full308125bytes before first body
+DISPLAY draft 73 71 missing []
+PASS DISPLAY first extended 109 comparisons: all71, optimized constructor7/full308125, native coord4byte copy/caller mutation, full9624glyphmap/full80x21buf,22528wall inputs (normal mode ranges and defined diagnostic/fallback separately documented)
+PASS DISPLAY extended 126 comparisons; positive display RNG, actual native callback identity, all temporary styles/capacity/nesting/free, full aggregate48/32byte copies/framecolor/padding/unicode aliases, source by-value caller, exact64bit/raw pointer/scalar witnesses.
+PASS DISPLAY FINAL 140 top-level state/result comparisons; all71 configured functions,22528 additional wall result checks, native constructor all7/full308125bytes before first body in independent Modules, typed coord-by-value, display RNG/native source callback, full9624 maps/80x21buffer/48byte window records, temporary ownership,64bit/raw witnesses,growth/reentry/stack cleanup. Controlled world/window dependency models only; native/full-game/public pending.
