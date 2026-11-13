@@ -6,7 +6,7 @@ export function installNativeDependency(local,name,target,owner,legacy,prepareNa
 }
 export function installNativeIntegerCasts(env){
  const casts={int:v=>v|0,uint:v=>v>>>0,short:v=>v<<16>>16,ushort:v=>v&65535,char:v=>v<<24>>24,uchar:v=>v&255,byte:v=>v<<24>>24,boolean:v=>v<<24>>24,xint8:v=>v<<24>>24,xint16:v=>v<<16>>16,coordxy:v=>v<<16>>16};
- for(const[name,cast]of Object.entries(casts))if(typeof env[name]==='function'){const legacy=env[name];env[name]=value=>typeof value==='number'&&Number.isInteger(value)?cast(value):legacy(value);}
+ for(const[name,cast]of Object.entries(casts))if(name in env&&typeof env[name]==='function'){const legacy=env[name];env[name]=value=>typeof value==='number'&&Number.isInteger(value)?cast(value):legacy(value);}
 }
 export function createNativeAbiCaster(ctypes,transport,pointer){
  const cache=new Map();

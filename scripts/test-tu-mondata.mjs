@@ -1,3 +1,6 @@
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+const nativeExecution=process.env.NATIVE_MONDATA_FIXTURE==='1',nativeServices=new WeakMap();
+function monsterDataServices(s){if(!nativeExecution)return s;let local=nativeServices.get(s);if(!local){local=nativeFixtureServices(s,{}).services;nativeServices.set(s,local);}return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import { DataView, Int32Array, assertStackRestored, allocationMetric, assertMemoryGrowth, memoryCheckpoint, referenceBackend, referenceLabel } from './native-test-backend.mjs';
 const referenceFactory = referenceBackend('mondata', emscriptenReferenceFactory);
@@ -9,7 +12,9 @@ const hybridFactory=options=>createGeneratedProbe('mondata',options);
 import {createPortedRuntime} from '../js/backends/emscripten/runtime.js';
 import {C,R,T} from '../js/c-runtime/context.js';
 import * as core from '../js/ported/mondata.js';
-const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.mondata,runtime=createPortedRuntime(layouts),modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
+const layouts=JSON.parse(readFileSync(new URL('../js/wasm/tu-layouts.json',import.meta.url))),L=layouts.mondata,runtime=createPortedRuntime(layouts);
+const componentMondata=runtime.mondata;runtime.mondata=(s,n,...args)=>componentMondata(monsterDataServices(s),n,...args);
+const modules=[await referenceFactory(),await hybridFactory({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0;
 const text=(m,p)=>{if(!p)return null;p=Number(p);let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');};
 const snap=m=>({state:text(m,m._probe_snapshot()),trace:text(m,m._probe_trace()),rng:m._probe_rng_state()>>>0,count:m._probe_rng_count()});
 function check(){assert.deepEqual(snap(modules[1]),snap(modules[0]));assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);modules.forEach((m,i)=>assertStackRestored(m, stacks[i]));comparisons++;}

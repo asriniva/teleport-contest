@@ -74,7 +74,9 @@ export function createNativeRecordViews(environment){
  }
  function record(type,pointer){
   const at=address(pointer);if(!at)return 0;
-  const row=definition(type),key=row.type+':'+at,sharedType=owner.sharedTypes.has('struct '+row.type)?'struct '+row.type:undefined;
+  const row=definition(type),sharedType=owner.sharedTypes.has('struct '+row.type)?'struct '+row.type:undefined;
+  if(pointer&&typeof pointer==='object'&&viewDefinitions.get(pointer)?.type===row.type&&pointer[storageAddress]===at){if(sharedType)owner.enrich(pointer,sharedType,at);return pointer;}
+  const key=row.type+':'+at;
   if(records.has(key)){const out=records.get(key);if(sharedType)owner.enrich(out,sharedType,at);return out;}
   memory.bounds(at,row.size);
   const out=(sharedType?owner.records.get(sharedType+':'+at):undefined)??{address:at};records.set(key,out);

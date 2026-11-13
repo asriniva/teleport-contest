@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {installNativeIntegerCasts} from '../js/nethack/native/execution.js';
 import {createNativeScalarLocal} from '../js/nethack/native/scalar-local.js';
 let checks=0;
 for(const kind of ['Int16','Int32'])for(const initial of [-9007199254740991n,-65537,-32769,-1,0,1,32768,65536,2147483648,9007199254740991n,3.75,NaN,Infinity]){
@@ -16,4 +17,7 @@ for(const kind of ['Int16','Int32'])for(const initial of [-9007199254740991n,-65
 let attempts=0;const retryView=new DataView(new ArrayBuffer(64));const local=createNativeScalarLocal(8,'Int32',()=>{if(++attempts===1)throw Error('allocation marker');return 16;},()=>retryView);
 assert.throws(()=>local.address,/allocation marker/);assert.equal(local.value,8);assert.equal(local.address,16);assert.equal(local.value,8);assert.equal(attempts,2);checks+=5;
 assert.throws(()=>createNativeScalarLocal(0,'Int8',()=>0,()=>0),/Unsupported/);checks++;
+// Inspect only declared helpers on strict dependency namespaces.
+let legacyCasts=0;const strict=new Proxy(Object.create(null),{get(_target,key){throw Error('missing helper '+String(key));}}),scope=Object.assign(Object.create(strict),{int:value=>{legacyCasts++;return Number(BigInt.asIntN(32,value));}});
+installNativeIntegerCasts(scope);assert.equal(scope.int(4294967295),-1);assert.equal(legacyCasts,0);assert.equal(scope.int(4294967295n),-1);assert.equal(legacyCasts,1);assert.throws(()=>scope.char,/missing helper char/);checks+=5;
 console.log(JSON.stringify({passed:true,checks,nativeReadsAllocate:false,lateByteAliasing:true,growth:true,allocationRetry:true}));

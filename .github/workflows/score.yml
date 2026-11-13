@@ -31,6 +31,7 @@ jobs:
           node scripts/test-native-attrib-source.mjs
           node scripts/test-native-eat-source.mjs
           node scripts/test-native-botl-source.mjs
+          node scripts/test-native-bound-source.mjs
           node scripts/test-native-termcap-source.mjs
           node scripts/test-native-scalar-local.mjs
 

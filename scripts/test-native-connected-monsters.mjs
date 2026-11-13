@@ -90,6 +90,20 @@ try{statusWeapon.otyp=layouts.botl.TWO_HANDED_SWORD;statusWeapon.oclass=layouts.
 const statusInt=status.int,statusMarker={nativeStatusCaller:true},liveBeforeStatus=environment.memory.live.size;
 try{status.int=()=>{assert.equal(C,statusMarker);environment.transport.stackAlloc(24);throw Error('native status cleanup');};withCEnvironment(statusMarker,()=>assert.throws(()=>environment.services.get_strength_str(),/native status cleanup/));}finally{status.int=statusInt;}
 assert.equal(environment.memory.live.size,liveBeforeStatus,'native status frees temporaries after throwing dependencies');
+const monsterData=environment.enableMondata(layouts);
+assert.ok(monsterData.context.u===hero,'monster biology shares the native hero');
+for(const name of ['attacktype_fordmg','mon_hates_silver','passes_bars','Resists_Elem'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' executes native monster biology directly');
+const recordSize=environment.ctypes.size('struct obj'),recordPair=environment.memory.calloc(2,recordSize),firstRecord=owner.nativeRecords.record('struct obj',recordPair);
+try{assert.equal(owner.nativeRecords.record('struct obj',firstRecord),firstRecord,'a typed native argument keeps its identity');assert.notEqual(owner.nativeRecords.record('struct permonst',firstRecord),firstRecord,'a cast to another record type is still honored');firstRecord.address=recordPair+recordSize;assert.equal(owner.nativeRecords.record('struct obj',firstRecord),owner.nativeRecords.record('struct obj',recordPair+recordSize),'an altered address cannot bypass record validation');}finally{firstRecord.address=recordPair;environment.memory.free(recordPair);}
+const stairs=environment.start('stairs').environment;
+assert.equal(stairs.u,hero,'stairs and movement share the native hero');
+for(const name of ['stairway_at','stairway_find','known_branch_stairs','On_stairs'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' is connected native stair execution');
+const firstStair=stairs.gs.stairs;assert.ok(firstStair,'live level contains stair nodes');assert.equal(environment.services.stairway_at(firstStair.sx,firstStair.sy),firstStair,'movement queries return the canonical stair node');
+const stairGlobal=Object.getOwnPropertyDescriptor(stairs,'gs'),stairGlobals=stairs.gs,stairMarker={nativeStairCaller:true},liveBeforeStairs=environment.memory.live.size;
+try{Object.defineProperty(stairs,'gs',{configurable:true,get(){assert.equal(C,stairMarker);return stairGlobals;}});withCEnvironment(stairMarker,()=>assert.equal(environment.services.stairway_at(firstStair.sx,firstStair.sy),firstStair));
+ Object.defineProperty(stairs,'gs',{configurable:true,get(){assert.equal(C,stairMarker);environment.transport.stackAlloc(24);throw Error('native stairs cleanup');}});withCEnvironment(stairMarker,()=>assert.throws(()=>environment.services.stairway_at(1,1),/native stairs cleanup/));
+}finally{Object.defineProperty(stairs,'gs',stairGlobal);}
+assert.equal(environment.memory.live.size,liveBeforeStairs,'native stairs frees callback temporaries after exceptions');
 const pets=environment.enableDogmove(layouts),attacks=environment.enableMhitu(layouts);
 assert.equal(pets.context.u,hero);assert.equal(attacks.context.u,hero);
 const combat=environment.enableMhitm(layouts);assert.equal(combat.context.u,hero);assert.equal(combat.context.levl[hero.ux][hero.uy],pets.context.levl[hero.ux][hero.uy],'combat and pets share canonical map cells across their array interfaces');

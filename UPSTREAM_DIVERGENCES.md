@@ -1,3 +1,47 @@
+## Native monster biology and stair movement queries ( 2026-11-13)
+
+`native/mondata.js` binds all 59 original monster-biology routines to one game
+context. Native arguments preserve canonical actor/species/item/attack identity;
+the public owner reconnects all earlier biology symbol groups and chooses direct
+native dependencies where available. Ordinary integral parameters use measured
+native casts. Record-pointer results stay native objects inside the engine;
+string naming and genuine pointer/reference boundaries retain their existing
+representations. Shared hero, species, items, attacks and traps use complete
+native records; existing compiler field-width guards still reject changed layouts.
+The component runtime selects the same native namespace for explicitly native
+fixtures, with its existing legacy scope as fallback.
+
+`native/stairs.js` retains all 17 original routines. `native/stairs-state.js`
+connects the real level-startup owner to canonical hero, dungeon and stair-list
+records, prepares measured arguments and publishes direct calls. Allocation/free,
+list traversal, insertion order, coordinate narrowing, level copies and description
+policy remain original. Movement now reads the same live stair nodes directly;
+byte-level level-copy/string buffers remain explicit boundaries.
+
+`native/record-views.js` returns an already typed native object directly only
+when its type and original storage address match. Type casts, changed addresses,
+foreign objects and numeric pointers still take the normal view path. Tests
+explicitly cover those distinctions. Integer-cast installation checks declared
+helpers before reading them, preserving strict missing-helper diagnostics;
+453 scalar/strict-namespace checks pass. The generator/source checker retains
+all original policy AST nodes and every exported entry, with no RNG, mutation
+order, upstream C, record input, serialization or capture-policy change.
+
+Native original-C verification passes 200,754 monster-biology comparisons across
+all 59 routines and 3,830 stair-list/pointer/placement/description comparisons
+across all 17 routines. Actual-main checks prove shared hero/item/stair identities,
+direct dispatch, typed-argument reuse, type/address rejection, canonical list
+queries and cleanup after a throwing callback. Complete original-C ordered RNG
+logs, state, tty and normalized frames still match for the actual walk/wait/attack
+check. Generic calls are 33/80/168, C scope entries 63/135/291, generic fields
+65/127/251, pointer dispatches 10/13/25 and C allocations 54/194/156. The strict
+zero-bridge/zero-allocation gate remains unmet. Public verification passes 44/44, all 794 scoring inputs unchanged: 792,838
+RNG entries, 11,405 screens/cursors and 1,483 animations match. Unprofiled Node
+22.23.5 batch time is 295.457s versus 310.095s for the preceding status step
+(about 4.7% lower). These are separate single runs, not a controlled speedup or
+20x acceptance. Evidence: `docs/runtime-environment/native-biology-stairs-validation.json`
+and source manifest.
+
 ## Native status rendering and compiled shared record fields ( 2026-11-13)
 
 `native/botl.js` binds all 76 original status routines to one per-game context.
