@@ -1,0 +1,7 @@
+{
+  "baselineMeanCpuSeconds": 42.775297,
+  "candidateMeanCpuSeconds": 40.89461750000001,
+  "ratio": 0.9560335139227674,
+  "allFourPassed": true,
+  "scope": "One-session ABBA only; source stable; no whole44 speed or enforced-timeout claim."
+}

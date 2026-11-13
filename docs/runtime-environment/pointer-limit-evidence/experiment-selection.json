@@ -1,0 +1,56 @@
+{
+  "baseCommit": "b65bb00d46b4eaceb05e099bf61f946ea33956d2",
+  "experiments": [
+    {
+      "candidate": "private DataView reuse",
+      "decision": "Rejected: CPU mean1.98%higher; stage1 also has custom-constructor-before-import defect. Lazy variant not measured/adopted.",
+      "comparison": {
+        "baselineMeanCpuSeconds": 41.624164500000006,
+        "candidateMeanCpuSeconds": 42.446929,
+        "ratio": 1.0197665108689447,
+        "allFourPassed": true,
+        "scope": "One-session ABBA only; source stable; no whole44 speed or enforced-timeout claim."
+      },
+      "cpuSeconds": [
+        41.742751999999996,
+        41.85609399999999,
+        43.037764,
+        41.50557700000002
+      ],
+      "allFourPassed": true,
+      "retainedCacheDirectory": ".cache/private-view-recorder-pair-b65bb00",
+      "rawSha256": {
+        "pre-run.json": "32cf1fe8a7e22371fb3ba5be78aefa132adfe80c6df4089d1ed6b7795e29ea36",
+        "results.json": "9fa51c01b7f0e1192bbee2e8c364fae015ea1f1f9269b55c0012c6f48152b500",
+        "comparison.json": "6b9ebbd4df4b8d6042bb8437f6de4ff56c3cbc87b47e398666d1d71e72e1a85b",
+        "integrity.json": "bfb174b687344b3d0ec92682edf4e0ed4b1aa85d54232f511ffe32a4ec1c1751"
+      }
+    },
+    {
+      "candidate": "movement getter context extraction",
+      "decision": "Parked: CPU mean0.36%higher, essentially neutral; synthetic events/observations match but no game gain established.",
+      "comparison": {
+        "baselineMeanCpuSeconds": 45.696389499999995,
+        "candidateMeanCpuSeconds": 45.861053999999996,
+        "ratio": 1.0036034466136543,
+        "allFourPassed": true,
+        "scope": "One-session ABBA only; source stable; no whole44 speed or enforced-timeout claim."
+      },
+      "cpuSeconds": [
+        45.505160000000004,
+        46.21628899999999,
+        45.505819,
+        45.88761899999999
+      ],
+      "allFourPassed": true,
+      "retainedCacheDirectory": ".cache/movement-context-recorder-pair-b65bb00",
+      "rawSha256": {
+        "pre-run.json": "37136acce6cb47a572f10dd7676cbc64d0a3ef389dc82e947cf0c1fb11bd4c04",
+        "results.json": "c441c3ad99bfffc4426a8ea8327a90c7f43a70d09a8681eecd62196fe67bfb2f",
+        "comparison.json": "6415c7ee32c9432a0ec43b1c6fc7126016dcf9edf264be94c9cf10f378604dd1",
+        "integrity.json": "bfb174b687344b3d0ec92682edf4e0ed4b1aa85d54232f511ffe32a4ec1c1751"
+      }
+    }
+  ],
+  "scope": "Rejected cache-only experiments; neither code change is in production. Component/interpreter/allocation observations did not justify adoption over actual-game measurements."
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "complete": true,
+  "ciRun": 43334400385,
+  "commit": "b65bb00d46b4eaceb05e099bf61f946ea33956d2",
+  "timeoutMs": 45000,
+  "passed": 40,
+  "total": 44,
+  "deadlineTargetMet": false,
+  "failures": [
+    "seed0014-dequa-fountain-explore.session.json",
+    "seed0030-ten-diverse-deaths.session.json",
+    "seed0360-wizard-world-tour.session.json",
+    "seed4500-knight-coverage.session.json"
+  ],
+  "failureKind": "ETIMEDOUT in each of four workers; all completed recordings match.",
+  "scope": "Enforced upstream45000ms public44 gate including process/module startup. Distinct from uncensored strict44 parity and paired performance CI43334428475 (pending). Different host from preceding gate; no causal pass-count attribution.",
+  "rawProofs": {
+    "docs/runtime-environment/immutable-selectors-deadline-ci-evidence/score-stderr.txt": "d9ef7096a29294b3d0cca86eab8025260085bbd73d3a3bf68f2dfcad3c8bdfa4",
+    "docs/runtime-environment/immutable-selectors-deadline-ci-evidence/score-stdout.txt": "f819d5d8a12af2170cab281badd0fb0afc2b14727a37105c3d9c970dafe4aa5a",
+    "docs/runtime-environment/immutable-selectors-deadline-ci-evidence/score-summary.json": "0c5cdec8bfd5b6a9a9596254983448323529365c4eec10837e62d9260287e7d6"
+  }
+}

@@ -1,0 +1,2 @@
+__RESULT_ONE__
+{"session":"seed0007-rogue-snake-swamp.session.json","passed":true,"metrics":{"rngCalls":{"matched":16373,"total":16373},"screens":{"matched":302,"total":302},"cellsOnly":{"matched":302,"total":302},"cursors":{"matched":302,"total":302},"animFrames":{"matched":58,"total":58}},"error":null,"time":{"ms":35902.83,"moves":301}}

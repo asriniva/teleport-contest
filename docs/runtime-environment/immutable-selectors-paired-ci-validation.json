@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "complete": true,
+  "strictPublicPassed": {
+    "baseline": 44,
+    "candidate": 44
+  },
+  "changedInputs": [
+    "js/c-runtime/adapter-factories.js",
+    "js/nethack/bindings/display.js",
+    "js/nethack/bindings/invent.js"
+  ],
+  "baselineWallSeconds": 678.579568862915,
+  "candidateWallSeconds": 668.6052930355072,
+  "wallRatio": 0.9853012435312168,
+  "geometricMeanSessionRatio": 0.9752574051145573,
+  "ciRun": 43334428475,
+  "baselineCommit": "d9c2321e4799679f0b52c19722db6e2423119b07",
+  "candidateCommit": "b65bb00d46b4eaceb05e099bf61f946ea33956d2",
+  "robustWholeGameSpeedupEstablished": false,
+  "deadlineTargetMet": false,
+  "enforcedDeadlineCiRun": 43334400385,
+  "enforcedDeadlinePassed": 40,
+  "enforcedDeadlineTotal": 44,
+  "limits": [
+    "One sequential same-host pair is descriptive; order and host load can affect results.",
+    "Diagnostic paired profile disables deadlines; independent regularCI enforces45000ms/session.",
+    "Public44 only; no hidden56 or leaderboard900-second success claimed."
+  ],
+  "rawProofs": {
+    "docs/runtime-environment/immutable-selectors-paired-ci-evidence/baseline-commit.txt": "9214f2ea0af46f0b826311f675db285ffa09ecaf8222a8e348b471e986ed2c8d",
+    "docs/runtime-environment/immutable-selectors-paired-ci-evidence/baseline-post-run-integrity.json": "1afa3a7b3ad6d93f405a7247d4b5b39d200aa990ff11db771ca1ce1cfb36b1b0",
+    "docs/runtime-environment/immutable-selectors-paired-ci-evidence/baseline-pre-run-manifest.json": "ec6de7a6dc9102c70e25c8dd9b036fa6d7e41de66f984b2bdabb963ce8a13671",
+    "docs/runtime-environment/immutable-selectors-paired-ci-evidence/baseline-summary.json": "f83c4630919b39a576067f85eb06960d12e53e2b3a467f041baa863ed0b5941c",
+    "docs/runtime-environment/immutable-selectors-paired-ci-evidence/candidate-commit.txt": "5a958e260de96a40f7ca85f10c73a5386f3d7ae4c4d1ca7e7af3ce98d2705d4f",
+    "docs/runtime-environment/immutable-selectors-paired-ci-evidence/candidate-post-run-integrity.json": "4b52d9b336678b0e737f4e76ad3ac50ce709e0b56f93dc2832288d8063afdf4a",
+    "docs/runtime-environment/immutable-selectors-paired-ci-evidence/candidate-pre-run-manifest.json": "526132ba039e0632d9b6730e7447976deb986403e0d72f37f4dc281e4e8f3bec",
+    "docs/runtime-environment/immutable-selectors-paired-ci-evidence/candidate-summary.json": "716be3eb4295eeba289fc508748aae9de1ab3b0de3b9dfba1a80f47f294c966a",
+    "docs/runtime-environment/immutable-selectors-paired-ci-evidence/runtime-comparison.json": "f26de600da38e964b864fa221a0bfbf90504dc0aa2899b05f32abce310758606"
+  }
+}

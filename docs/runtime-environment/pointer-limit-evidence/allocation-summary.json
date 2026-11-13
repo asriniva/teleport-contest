@@ -1,0 +1,1776 @@
+{
+  "baseCommit": "b65bb00d46b4eaceb05e099bf61f946ea33956d2",
+  "session": "seed0007-rogue-snake-swamp.session.json",
+  "recordingPassed": true,
+  "inputsStable": 751,
+  "estimatedTotalAllocatedBytes": 10394111240,
+  "profileNodes": 154015,
+  "sampleCount": 313307,
+  "topSelf": [
+    {
+      "frame": [
+        "js/nethack/movement.js",
+        "get",
+        14
+      ],
+      "estimatedBytes": 422964160,
+      "percent": 4.069267205572066
+    },
+    {
+      "frame": [
+        "js/c-runtime/linker.js",
+        "call",
+        54
+      ],
+      "estimatedBytes": 400334656,
+      "percent": 3.8515525450543477
+    },
+    {
+      "frame": [
+        "",
+        "keys",
+        0
+      ],
+      "estimatedBytes": 321524936,
+      "percent": 3.0933374540255545
+    },
+    {
+      "frame": [
+        "js/c-runtime/adapter-factories.js",
+        "get",
+        37
+      ],
+      "estimatedBytes": 318425768,
+      "percent": 3.063520878770199
+    },
+    {
+      "frame": [
+        "js/c-runtime/adapter-factories.js",
+        "array",
+        64
+      ],
+      "estimatedBytes": 315525168,
+      "percent": 3.035614692921066
+    },
+    {
+      "frame": [
+        "js/c-runtime/adapter-factories.js",
+        "env.cell",
+        102
+      ],
+      "estimatedBytes": 279194544,
+      "percent": 2.6860838560738745
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/hack.js",
+        "get",
+        46
+      ],
+      "estimatedBytes": 223622872,
+      "percent": 2.1514381252667834
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/hack.js",
+        "pointerValue",
+        33
+      ],
+      "estimatedBytes": 205199536,
+      "percent": 1.9741903012383
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/wintty.js",
+        "ptr",
+        38
+      ],
+      "estimatedBytes": 169937464,
+      "percent": 1.634939823868962
+    },
+    {
+      "frame": [
+        "js/c-runtime/adapter-factories.js",
+        "env.field",
+        141
+      ],
+      "estimatedBytes": 166447464,
+      "percent": 1.6013631195272835
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/mondata.js",
+        "attack",
+        39
+      ],
+      "estimatedBytes": 165129592,
+      "percent": 1.5886840941679203
+    },
+    {
+      "frame": [
+        "",
+        "next",
+        0
+      ],
+      "estimatedBytes": 164672360,
+      "percent": 1.5842851418242085
+    },
+    {
+      "frame": [
+        "js/c-runtime/records.js",
+        "createArrayView",
+        31
+      ],
+      "estimatedBytes": 145581832,
+      "percent": 1.4006183755254864
+    },
+    {
+      "frame": [
+        "js/c-runtime/adapter-factories.js",
+        "cacheKey",
+        36
+      ],
+      "estimatedBytes": 144185776,
+      "percent": 1.3871871550222123
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/wintty.js",
+        "record",
+        60
+      ],
+      "estimatedBytes": 141692368,
+      "percent": 1.3631984950740244
+    },
+    {
+      "frame": [
+        "",
+        "match",
+        0
+      ],
+      "estimatedBytes": 132695744,
+      "percent": 1.2766434852971613
+    },
+    {
+      "frame": [
+        "js/c-runtime/memory.js",
+        "int",
+        94
+      ],
+      "estimatedBytes": 132551184,
+      "percent": 1.2752526977958338
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/dbridge.js",
+        "",
+        63
+      ],
+      "estimatedBytes": 132258000,
+      "percent": 1.2724320237311604
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/trap.js",
+        "createTrapEnvironment",
+        16
+      ],
+      "estimatedBytes": 129171280,
+      "percent": 1.2427352085949006
+    },
+    {
+      "frame": [
+        "js/nethack/movement.js",
+        "wrapper",
+        15
+      ],
+      "estimatedBytes": 127165024,
+      "percent": 1.223433356289537
+    },
+    {
+      "frame": [
+        "js/c-runtime/record-views.js",
+        "read",
+        12
+      ],
+      "estimatedBytes": 115060056,
+      "percent": 1.1069734905011466
+    },
+    {
+      "frame": [
+        "",
+        "add",
+        0
+      ],
+      "estimatedBytes": 110614536,
+      "percent": 1.064203888585668
+    },
+    {
+      "frame": [
+        "js/nethack/glyphs.js",
+        "get",
+        10
+      ],
+      "estimatedBytes": 104632728,
+      "percent": 1.0066539176273046
+    },
+    {
+      "frame": [
+        "js/ported/glyphs.js",
+        "free_glyphid_cache",
+        300
+      ],
+      "estimatedBytes": 103519008,
+      "percent": 0.9959390044011113
+    },
+    {
+      "frame": [
+        "js/c-runtime/records.js",
+        "record",
+        6
+      ],
+      "estimatedBytes": 101469400,
+      "percent": 0.9762200697786644
+    },
+    {
+      "frame": [
+        "js/ported/nhlua.js",
+        "nhl_loadlua",
+        2155
+      ],
+      "estimatedBytes": 100513416,
+      "percent": 0.9670227081387287
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/termcap.js",
+        "get",
+        31
+      ],
+      "estimatedBytes": 81753336,
+      "percent": 0.7865351265953933
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/engrave.js",
+        "engr",
+        22
+      ],
+      "estimatedBytes": 81038016,
+      "percent": 0.7796531529135338
+    },
+    {
+      "frame": [
+        "js/c-runtime/record-views.js",
+        "get",
+        34
+      ],
+      "estimatedBytes": 77020976,
+      "percent": 0.741005885174652
+    },
+    {
+      "frame": [
+        "js/ported/termcap.js",
+        "nomux_capture_screen",
+        784
+      ],
+      "estimatedBytes": 75541232,
+      "percent": 0.7267695164670953
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/o_init.js",
+        "objectClass",
+        45
+      ],
+      "estimatedBytes": 75132248,
+      "percent": 0.7228347500348669
+    },
+    {
+      "frame": [
+        "js/c-runtime/heap.js",
+        "free",
+        91
+      ],
+      "estimatedBytes": 75021184,
+      "percent": 0.7217662219285619
+    },
+    {
+      "frame": [
+        "js/nethack/window-system.js",
+        "get",
+        22
+      ],
+      "estimatedBytes": 74833952,
+      "percent": 0.71996489427604
+    },
+    {
+      "frame": [
+        "js/c-runtime/bitfields.js",
+        "get",
+        9
+      ],
+      "estimatedBytes": 74393968,
+      "percent": 0.7157318820459343
+    },
+    {
+      "frame": [
+        "js/c-runtime/memory.js",
+        "short",
+        95
+      ],
+      "estimatedBytes": 70358384,
+      "percent": 0.6769062055949288
+    },
+    {
+      "frame": [
+        "",
+        "set",
+        0
+      ],
+      "estimatedBytes": 69260904,
+      "percent": 0.6663475346834945
+    },
+    {
+      "frame": [
+        "js/c-runtime/stdlib.js",
+        "api.format",
+        163
+      ],
+      "estimatedBytes": 67906360,
+      "percent": 0.6533156941660747
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/wintty.js",
+        "get",
+        64
+      ],
+      "estimatedBytes": 63996048,
+      "percent": 0.6156952386051239
+    },
+    {
+      "frame": [
+        "frozen/ps_test_runner.mjs",
+        "screensVisuallyEqual",
+        202
+      ],
+      "estimatedBytes": 63382736,
+      "percent": 0.6097946667732603
+    },
+    {
+      "frame": [
+        "js/nethack/options.js",
+        "get",
+        14
+      ],
+      "estimatedBytes": 62855152,
+      "percent": 0.6047188696433462
+    }
+  ],
+  "nearestJsCaller": [
+    {
+      "frame": [
+        "js/c-runtime/linker.js",
+        "call",
+        54
+      ],
+      "estimatedBytes": 472231840,
+      "percent": 4.543263287222621
+    },
+    {
+      "frame": [
+        "js/nethack/movement.js",
+        "get",
+        14
+      ],
+      "estimatedBytes": 422997856,
+      "percent": 4.069591389133526
+    },
+    {
+      "frame": [
+        "js/c-runtime/adapter-factories.js",
+        "array",
+        64
+      ],
+      "estimatedBytes": 322057832,
+      "percent": 3.0984643570160597
+    },
+    {
+      "frame": [
+        "js/c-runtime/adapter-factories.js",
+        "get",
+        37
+      ],
+      "estimatedBytes": 318425768,
+      "percent": 3.063520878770199
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/wintty.js",
+        "get",
+        147
+      ],
+      "estimatedBytes": 313351360,
+      "percent": 3.0147008509406716
+    },
+    {
+      "frame": [
+        "js/c-runtime/adapter-factories.js",
+        "env.cell",
+        102
+      ],
+      "estimatedBytes": 279194544,
+      "percent": 2.6860838560738745
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/hack.js",
+        "get",
+        46
+      ],
+      "estimatedBytes": 223622872,
+      "percent": 2.1514381252667834
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/mondata.js",
+        "attack",
+        39
+      ],
+      "estimatedBytes": 209009944,
+      "percent": 2.0108495971801816
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/hack.js",
+        "pointerValue",
+        33
+      ],
+      "estimatedBytes": 205199536,
+      "percent": 1.9741903012383
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/wintty.js",
+        "ptr",
+        38
+      ],
+      "estimatedBytes": 182632168,
+      "percent": 1.7570734407495143
+    },
+    {
+      "frame": [
+        "js/c-runtime/adapter-factories.js",
+        "env.field",
+        141
+      ],
+      "estimatedBytes": 177069536,
+      "percent": 1.7035562917450555
+    },
+    {
+      "frame": [
+        "js/c-runtime/record-views.js",
+        "read",
+        12
+      ],
+      "estimatedBytes": 156871408,
+      "percent": 1.5092334917131405
+    },
+    {
+      "frame": [
+        "js/c-runtime/records.js",
+        "createArrayView",
+        31
+      ],
+      "estimatedBytes": 155780600,
+      "percent": 1.4987390109940752
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/wintty.js",
+        "record",
+        60
+      ],
+      "estimatedBytes": 152763536,
+      "percent": 1.4697123445448137
+    },
+    {
+      "frame": [
+        "js/c-runtime/adapter-factories.js",
+        "cacheKey",
+        36
+      ],
+      "estimatedBytes": 144185776,
+      "percent": 1.3871871550222123
+    },
+    {
+      "frame": [
+        "js/ported/glyphs.js",
+        "free_glyphid_cache",
+        300
+      ],
+      "estimatedBytes": 141827312,
+      "percent": 1.3644967686530167
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/dbridge.js",
+        "",
+        63
+      ],
+      "estimatedBytes": 134653128,
+      "percent": 1.2954751482917553
+    },
+    {
+      "frame": [
+        "js/c-runtime/memory.js",
+        "int",
+        94
+      ],
+      "estimatedBytes": 132551184,
+      "percent": 1.2752526977958338
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/trap.js",
+        "createTrapEnvironment",
+        16
+      ],
+      "estimatedBytes": 129236840,
+      "percent": 1.2433659503532501
+    },
+    {
+      "frame": [
+        "js/nethack/movement.js",
+        "wrapper",
+        15
+      ],
+      "estimatedBytes": 127394592,
+      "percent": 1.2256419914936374
+    },
+    {
+      "frame": [
+        "js/c-runtime/records.js",
+        "record",
+        6
+      ],
+      "estimatedBytes": 115307192,
+      "percent": 1.1093511444851536
+    },
+    {
+      "frame": [
+        "js/nethack/glyphs.js",
+        "get",
+        10
+      ],
+      "estimatedBytes": 104666008,
+      "percent": 1.0069740989225742
+    },
+    {
+      "frame": [
+        "js/c-runtime/stdlib.js",
+        "api.format",
+        163
+      ],
+      "estimatedBytes": 103884296,
+      "percent": 0.9994533789499832
+    },
+    {
+      "frame": [
+        "js/ported/nhlua.js",
+        "nhl_loadlua",
+        2155
+      ],
+      "estimatedBytes": 100513416,
+      "percent": 0.9670227081387287
+    },
+    {
+      "frame": [
+        "js/c-runtime/heap.js",
+        "free",
+        91
+      ],
+      "estimatedBytes": 91647896,
+      "percent": 0.8817290279452503
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/engrave.js",
+        "engr",
+        22
+      ],
+      "estimatedBytes": 89727888,
+      "percent": 0.8632569531745746
+    },
+    {
+      "frame": [
+        "js/c-runtime/record-views.js",
+        "get",
+        34
+      ],
+      "estimatedBytes": 88244104,
+      "percent": 0.8489817163049719
+    },
+    {
+      "frame": [
+        "js/c-runtime/types.js",
+        "store",
+        50
+      ],
+      "estimatedBytes": 86941680,
+      "percent": 0.8364513135612738
+    },
+    {
+      "frame": [
+        "js/c-runtime/adapter-factories.js",
+        "env.field",
+        109
+      ],
+      "estimatedBytes": 84645848,
+      "percent": 0.8143634991537766
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/termcap.js",
+        "get",
+        31
+      ],
+      "estimatedBytes": 81897112,
+      "percent": 0.7879183713642841
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/o_init.js",
+        "objectClass",
+        45
+      ],
+      "estimatedBytes": 80150496,
+      "percent": 0.7711144719286264
+    },
+    {
+      "frame": [
+        "js/ported/termcap.js",
+        "nomux_capture_screen",
+        784
+      ],
+      "estimatedBytes": 75541232,
+      "percent": 0.7267695164670953
+    },
+    {
+      "frame": [
+        "js/nethack/window-system.js",
+        "get",
+        22
+      ],
+      "estimatedBytes": 74870048,
+      "percent": 0.7203121678347556
+    },
+    {
+      "frame": [
+        "js/c-runtime/bitfields.js",
+        "get",
+        9
+      ],
+      "estimatedBytes": 74393968,
+      "percent": 0.7157318820459343
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/mondata.js",
+        "fields",
+        31
+      ],
+      "estimatedBytes": 71153008,
+      "percent": 0.6845511497527518
+    },
+    {
+      "frame": [
+        "js/c-runtime/memory.js",
+        "short",
+        95
+      ],
+      "estimatedBytes": 70358384,
+      "percent": 0.6769062055949288
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/dog.js",
+        "record",
+        16
+      ],
+      "estimatedBytes": 67158336,
+      "percent": 0.6461190807882868
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/mondata.js",
+        "permonst",
+        41
+      ],
+      "estimatedBytes": 64950192,
+      "percent": 0.6248748979138307
+    },
+    {
+      "frame": [
+        "js/nethack/bindings/wintty.js",
+        "get",
+        64
+      ],
+      "estimatedBytes": 64094400,
+      "percent": 0.6166414666926348
+    },
+    {
+      "frame": [
+        "frozen/ps_test_runner.mjs",
+        "screensVisuallyEqual",
+        202
+      ],
+      "estimatedBytes": 63382736,
+      "percent": 0.6097946667732603
+    }
+  ],
+  "topAllocationStackSuffixes": [
+    {
+      "frame": [
+        [
+          "js/c-runtime/adapter-factories.js",
+          "decode",
+          60
+        ],
+        [
+          "js/nethack/bindings/hack.js",
+          "view",
+          37
+        ],
+        [
+          "js/c-runtime/records.js",
+          "record",
+          6
+        ],
+        [
+          "js/nethack/bindings/hack.js",
+          "pointerValue",
+          33
+        ]
+      ],
+      "estimatedBytes": 194184240,
+      "percent": 1.8682139869036076
+    },
+    {
+      "frame": [
+        [
+          "js/nethack/bindings/termcap.js",
+          "callLocal",
+          36
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "callWithStack",
+          4
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          37
+        ]
+      ],
+      "estimatedBytes": 174806096,
+      "percent": 1.6817801153338436
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/adapter-factories.js",
+          "decode",
+          60
+        ],
+        [
+          "js/nethack/bindings/hack.js",
+          "view",
+          37
+        ],
+        [
+          "js/c-runtime/records.js",
+          "record",
+          6
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "cacheKey",
+          36
+        ]
+      ],
+      "estimatedBytes": 135823952,
+      "percent": 1.306739449519303
+    },
+    {
+      "frame": [
+        [
+          "js/ported/options.js",
+          "initoptions_init",
+          5694
+        ],
+        [
+          "js/ported/options.js",
+          "allopt_array_init",
+          5902
+        ],
+        [
+          "js/ported/options.js",
+          "determine_ambiguities",
+          5327
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "env.cell",
+          102
+        ]
+      ],
+      "estimatedBytes": 135557880,
+      "percent": 1.3041796154569536
+    },
+    {
+      "frame": [
+        [
+          "js/nethack/schema-port.js",
+          "",
+          32
+        ],
+        [
+          "js/nethack/schema-port.js",
+          "call",
+          7
+        ],
+        [
+          "js/nethack/bindings/trap.js",
+          "callTrap",
+          155
+        ],
+        [
+          "js/nethack/bindings/trap.js",
+          "createTrapEnvironment",
+          16
+        ]
+      ],
+      "estimatedBytes": 127241552,
+      "percent": 1.224169619335342
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/linker.js",
+          "call",
+          54
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/cmd.js",
+          "isok",
+          3207
+        ],
+        [
+          "js/c-runtime/memory.js",
+          "int",
+          94
+        ]
+      ],
+      "estimatedBytes": 126682328,
+      "percent": 1.2187894190749493
+    },
+    {
+      "frame": [
+        [
+          "js/nethack/glyphs.js",
+          "call",
+          20
+        ],
+        [
+          "js/nethack/bindings/glyphs.js",
+          "",
+          37
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/glyphs.js",
+          "free_glyphid_cache",
+          300
+        ]
+      ],
+      "estimatedBytes": 103519008,
+      "percent": 0.9959390044011113
+    },
+    {
+      "frame": [
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          20
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "decode",
+          60
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "array",
+          64
+        ]
+      ],
+      "estimatedBytes": 95285312,
+      "percent": 0.9167239968849901
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/adapter-factories.js",
+          "callWithStack",
+          4
+        ],
+        [
+          "js/ported/wintty.js",
+          "check_fields",
+          3635
+        ],
+        [
+          "js/nethack/bindings/wintty.js",
+          "get",
+          147
+        ],
+        [
+          "",
+          "keys",
+          0
+        ]
+      ],
+      "estimatedBytes": 91576240,
+      "percent": 0.8810396375938728
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/linker.js",
+          "invoke",
+          15
+        ],
+        [
+          "js/c-runtime/linker.js",
+          "call",
+          54
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/nhlua.js",
+          "nhl_loadlua",
+          2155
+        ]
+      ],
+      "estimatedBytes": 89427960,
+      "percent": 0.8603713962176145
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/adapter-factories.js",
+          "callWithStack",
+          4
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          37
+        ],
+        [
+          "js/nethack/bindings/termcap.js",
+          "get",
+          31
+        ]
+      ],
+      "estimatedBytes": 81753336,
+      "percent": 0.7865351265953933
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/dbridge.js",
+          "is_pool_or_lava",
+          81
+        ],
+        [
+          "js/c-runtime/records.js",
+          "get",
+          37
+        ],
+        [
+          "js/c-runtime/record-views.js",
+          "read",
+          12
+        ]
+      ],
+      "estimatedBytes": 75844136,
+      "percent": 0.7296837050206517
+    },
+    {
+      "frame": [
+        [
+          "js/ported/termcap.js",
+          "nomux_emit_marker",
+          641
+        ],
+        [
+          "js/nethack/bindings/termcap.js",
+          "callLocal",
+          36
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "callWithStack",
+          4
+        ],
+        [
+          "js/ported/termcap.js",
+          "nomux_capture_screen",
+          784
+        ]
+      ],
+      "estimatedBytes": 75541232,
+      "percent": 0.7267695164670953
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/dbridge.js",
+          "is_pool",
+          48
+        ],
+        [
+          "js/nethack/bindings/dbridge.js",
+          "get",
+          26
+        ],
+        [
+          "js/nethack/bindings/dbridge.js",
+          "",
+          63
+        ]
+      ],
+      "estimatedBytes": 73675072,
+      "percent": 0.7088155042681649
+    },
+    {
+      "frame": [
+        [
+          "js/ported/dbridge.js",
+          "is_pool_or_lava",
+          81
+        ],
+        [
+          "js/c-runtime/records.js",
+          "get",
+          37
+        ],
+        [
+          "js/c-runtime/record-views.js",
+          "read",
+          12
+        ],
+        [
+          "js/c-runtime/records.js",
+          "createArrayView",
+          31
+        ]
+      ],
+      "estimatedBytes": 70158960,
+      "percent": 0.6749875807563515
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/records.js",
+          "get",
+          37
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "read",
+          73
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "decode",
+          60
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "array",
+          64
+        ]
+      ],
+      "estimatedBytes": 64255848,
+      "percent": 0.61819473080798
+    },
+    {
+      "frame": [
+        [
+          "",
+          "(root)",
+          0
+        ],
+        [
+          "",
+          "",
+          0
+        ],
+        [
+          "frozen/ps_test_runner.mjs",
+          "runSession",
+          276
+        ],
+        [
+          "frozen/ps_test_runner.mjs",
+          "screensVisuallyEqual",
+          202
+        ]
+      ],
+      "estimatedBytes": 63382736,
+      "percent": 0.6097946667732603
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/adapter-factories.js",
+          "callWithStack",
+          4
+        ],
+        [
+          "js/ported/wintty.js",
+          "check_fields",
+          3635
+        ],
+        [
+          "js/nethack/bindings/wintty.js",
+          "C.ptrAdd",
+          88
+        ],
+        [
+          "js/nethack/bindings/wintty.js",
+          "ptr",
+          38
+        ]
+      ],
+      "estimatedBytes": 58560752,
+      "percent": 0.5634031678883591
+    },
+    {
+      "frame": [
+        [
+          "",
+          "",
+          0
+        ],
+        [
+          "frozen/ps_test_runner.mjs",
+          "runSession",
+          276
+        ],
+        [
+          "frozen/ps_test_runner.mjs",
+          "screensVisuallyEqual",
+          202
+        ],
+        [
+          "frozen/screen-decode.mjs",
+          "decodeScreen",
+          21
+        ]
+      ],
+      "estimatedBytes": 58406960,
+      "percent": 0.5619235608642572
+    },
+    {
+      "frame": [
+        [
+          "js/ported/wintty.js",
+          "check_fields",
+          3635
+        ],
+        [
+          "js/nethack/bindings/wintty.js",
+          "C.deref",
+          99
+        ],
+        [
+          "js/nethack/bindings/wintty.js",
+          "read",
+          45
+        ],
+        [
+          "js/nethack/bindings/wintty.js",
+          "record",
+          60
+        ]
+      ],
+      "estimatedBytes": 57970240,
+      "percent": 0.5577219510304182
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/adapter-factories.js",
+          "callWithStack",
+          4
+        ],
+        [
+          "js/ported/wintty.js",
+          "render_status",
+          3881
+        ],
+        [
+          "js/nethack/bindings/wintty.js",
+          "get",
+          147
+        ],
+        [
+          "",
+          "keys",
+          0
+        ]
+      ],
+      "estimatedBytes": 56412720,
+      "percent": 0.5427373124784838
+    },
+    {
+      "frame": [
+        [
+          "js/ported/hack.js",
+          "test_move",
+          953
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          37
+        ],
+        [
+          "js/nethack/bindings/hack.js",
+          "get",
+          46
+        ],
+        [
+          "js/nethack/movement.js",
+          "get",
+          14
+        ]
+      ],
+      "estimatedBytes": 56399168,
+      "percent": 0.5426069309606504
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/adapter-factories.js",
+          "callWithStack",
+          4
+        ],
+        [
+          "js/ported/hack.js",
+          "test_move",
+          953
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          37
+        ],
+        [
+          "js/nethack/bindings/hack.js",
+          "get",
+          46
+        ]
+      ],
+      "estimatedBytes": 55993032,
+      "percent": 0.5386995646584979
+    },
+    {
+      "frame": [
+        [
+          "js/ported/hack.js",
+          "findtravelpath",
+          1223
+        ],
+        [
+          "js/nethack/bindings/hack.js",
+          "env.callLocal",
+          79
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "callWithStack",
+          4
+        ],
+        [
+          "js/ported/hack.js",
+          "test_move",
+          953
+        ]
+      ],
+      "estimatedBytes": 52437032,
+      "percent": 0.504487885392306
+    },
+    {
+      "frame": [
+        [
+          "js/ported/mondata.js",
+          "attacktype_fordmg",
+          41
+        ],
+        [
+          "js/nethack/bindings/mondata.js",
+          "get",
+          38
+        ],
+        [
+          "js/nethack/bindings/mondata.js",
+          "",
+          44
+        ],
+        [
+          "js/nethack/bindings/mondata.js",
+          "attack",
+          39
+        ]
+      ],
+      "estimatedBytes": 52413904,
+      "percent": 0.5042653747854251
+    },
+    {
+      "frame": [
+        [
+          "js/ported/symbols.js",
+          "proc_symset_line",
+          320
+        ],
+        [
+          "js/ported/symbols.js",
+          "parse_sym_line",
+          326
+        ],
+        [
+          "js/ported/symbols.js",
+          "match_sym",
+          717
+        ],
+        [
+          "js/nethack/bindings/symbols.js",
+          "symparse",
+          12
+        ]
+      ],
+      "estimatedBytes": 49171992,
+      "percent": 0.47307548345999806
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/linker.js",
+          "call",
+          54
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/timeout.js",
+          "nh_timeout",
+          559
+        ],
+        [
+          "js/nethack/bindings/timeout.js",
+          "get",
+          13
+        ]
+      ],
+      "estimatedBytes": 46349800,
+      "percent": 0.4459236478211869
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/rnd.js",
+          "rn2",
+          230
+        ],
+        [
+          "js/c-runtime/stdio.js",
+          "api.fprintf",
+          167
+        ],
+        [
+          "js/c-runtime/stdlib.js",
+          "api.format",
+          163
+        ]
+      ],
+      "estimatedBytes": 43359048,
+      "percent": 0.41715012470849794
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/dbridge.js",
+          "is_lava",
+          65
+        ],
+        [
+          "js/nethack/bindings/dbridge.js",
+          "get",
+          26
+        ],
+        [
+          "js/nethack/bindings/dbridge.js",
+          "",
+          63
+        ]
+      ],
+      "estimatedBytes": 43277152,
+      "percent": 0.416362217035499
+    },
+    {
+      "frame": [
+        [
+          "",
+          "",
+          0
+        ],
+        [
+          "frozen/ps_test_runner.mjs",
+          "runSession",
+          276
+        ],
+        [
+          "frozen/ps_test_runner.mjs",
+          "screensVisuallyEqual",
+          202
+        ],
+        [
+          "frozen/screen-decode.mjs",
+          "makeBlankGrid",
+          96
+        ]
+      ],
+      "estimatedBytes": 43153096,
+      "percent": 0.4151686950773869
+    },
+    {
+      "frame": [
+        [
+          "js/ported/mondata.js",
+          "dmgtype_fromattack",
+          669
+        ],
+        [
+          "js/nethack/bindings/mondata.js",
+          "get",
+          38
+        ],
+        [
+          "js/nethack/bindings/mondata.js",
+          "",
+          44
+        ],
+        [
+          "js/nethack/bindings/mondata.js",
+          "attack",
+          39
+        ]
+      ],
+      "estimatedBytes": 43049328,
+      "percent": 0.41417036056273726
+    },
+    {
+      "frame": [
+        [
+          "js/nethack/address-ports.js",
+          "",
+          52
+        ],
+        [
+          "js/nethack/bindings/invent.js",
+          "callInvent",
+          40
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/invent.js",
+          "sobj_at",
+          1313
+        ]
+      ],
+      "estimatedBytes": 42198064,
+      "percent": 0.40598049246969575
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/linker.js",
+          "call",
+          54
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/cmd.js",
+          "isok",
+          3207
+        ],
+        [
+          "js/c-runtime/memory.js",
+          "short",
+          95
+        ]
+      ],
+      "estimatedBytes": 41899904,
+      "percent": 0.4031119451440468
+    },
+    {
+      "frame": [
+        [
+          "js/nethack/bindings/hack.js",
+          "get",
+          543
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          37
+        ],
+        [
+          "js/nethack/bindings/hack.js",
+          "get",
+          46
+        ],
+        [
+          "js/nethack/movement.js",
+          "get",
+          14
+        ]
+      ],
+      "estimatedBytes": 41417496,
+      "percent": 0.3984707787291297
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          37
+        ],
+        [
+          "js/nethack/bindings/hack.js",
+          "get",
+          46
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "decode",
+          60
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "array",
+          64
+        ]
+      ],
+      "estimatedBytes": 39466920,
+      "percent": 0.3797046143600826
+    },
+    {
+      "frame": [
+        [
+          "js/nethack/engrave.js",
+          "",
+          36
+        ],
+        [
+          "js/ported/engrave.js",
+          "engr_at",
+          209
+        ],
+        [
+          "js/nethack/bindings/engrave.js",
+          "get",
+          44
+        ],
+        [
+          "js/nethack/bindings/engrave.js",
+          "engr",
+          22
+        ]
+      ],
+      "estimatedBytes": 39334016,
+      "percent": 0.378425967278757
+    },
+    {
+      "frame": [
+        [
+          "js/nethack/bindings/glyphs.js",
+          "",
+          37
+        ],
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/glyphs.js",
+          "free_glyphid_cache",
+          300
+        ],
+        [
+          "",
+          "splice",
+          0
+        ]
+      ],
+      "estimatedBytes": 37849512,
+      "percent": 0.36414380340997776
+    },
+    {
+      "frame": [
+        [
+          "js/c-runtime/context.js",
+          "withCEnvironment",
+          8
+        ],
+        [
+          "js/ported/dbridge.js",
+          "is_pool_or_lava",
+          81
+        ],
+        [
+          "js/c-runtime/linker.js",
+          "invoke",
+          15
+        ],
+        [
+          "js/c-runtime/linker.js",
+          "call",
+          54
+        ]
+      ],
+      "estimatedBytes": 37463568,
+      "percent": 0.36043070095139756
+    },
+    {
+      "frame": [
+        [
+          "js/nethack/bindings/hack.js",
+          "env.callLocal",
+          79
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "callWithStack",
+          4
+        ],
+        [
+          "js/ported/hack.js",
+          "test_move",
+          953
+        ],
+        [
+          "js/c-runtime/adapter-factories.js",
+          "get",
+          37
+        ]
+      ],
+      "estimatedBytes": 37420264,
+      "percent": 0.3600140804342594
+    },
+    {
+      "frame": [
+        [
+          "js/nethack/bindings/hack.js",
+          "invoke",
+          63
+        ],
+        [
+          "js/nethack/movement.js",
+          "wrapper",
+          15
+        ],
+        [
+          "js/c-runtime/linker.js",
+          "invoke",
+          15
+        ],
+        [
+          "js/c-runtime/linker.js",
+          "call",
+          54
+        ]
+      ],
+      "estimatedBytes": 36709888,
+      "percent": 0.3531796721467453
+    }
+  ],
+  "scope": "One allocation-sampled session including collected objects. Estimated allocation bytes, not retained memory, exact constructor counts, CPU shares, GC attribution or whole44 performance. Native/inlined allocations may be attributed to caller frames."
+}

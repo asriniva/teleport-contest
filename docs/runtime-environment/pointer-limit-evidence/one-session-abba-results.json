@@ -1,0 +1,150 @@
+[
+  {
+    "phase": "baseline",
+    "index": 0,
+    "cpuSeconds": 44.254208,
+    "wallSeconds": 33.53926420863718,
+    "recording": {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 16373,
+          "total": 16373
+        },
+        "screens": {
+          "matched": 302,
+          "total": 302
+        },
+        "cellsOnly": {
+          "matched": 302,
+          "total": 302
+        },
+        "cursors": {
+          "matched": 302,
+          "total": 302
+        },
+        "animFrames": {
+          "matched": 58,
+          "total": 58
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 33181.25,
+        "moves": 301
+      }
+    }
+  },
+  {
+    "phase": "candidate",
+    "index": 1,
+    "cpuSeconds": 40.817355,
+    "wallSeconds": 29.891411665827036,
+    "recording": {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 16373,
+          "total": 16373
+        },
+        "screens": {
+          "matched": 302,
+          "total": 302
+        },
+        "cellsOnly": {
+          "matched": 302,
+          "total": 302
+        },
+        "cursors": {
+          "matched": 302,
+          "total": 302
+        },
+        "animFrames": {
+          "matched": 58,
+          "total": 58
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 29684.13,
+        "moves": 301
+      }
+    }
+  },
+  {
+    "phase": "candidate",
+    "index": 2,
+    "cpuSeconds": 40.97188000000001,
+    "wallSeconds": 29.70233695814386,
+    "recording": {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 16373,
+          "total": 16373
+        },
+        "screens": {
+          "matched": 302,
+          "total": 302
+        },
+        "cellsOnly": {
+          "matched": 302,
+          "total": 302
+        },
+        "cursors": {
+          "matched": 302,
+          "total": 302
+        },
+        "animFrames": {
+          "matched": 58,
+          "total": 58
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 29499.3,
+        "moves": 301
+      }
+    }
+  },
+  {
+    "phase": "baseline",
+    "index": 3,
+    "cpuSeconds": 41.296386000000005,
+    "wallSeconds": 29.323933499865234,
+    "recording": {
+      "session": "seed0007-rogue-snake-swamp.session.json",
+      "passed": true,
+      "metrics": {
+        "rngCalls": {
+          "matched": 16373,
+          "total": 16373
+        },
+        "screens": {
+          "matched": 302,
+          "total": 302
+        },
+        "cellsOnly": {
+          "matched": 302,
+          "total": 302
+        },
+        "cursors": {
+          "matched": 302,
+          "total": 302
+        },
+        "animFrames": {
+          "matched": 58,
+          "total": 58
+        }
+      },
+      "error": null,
+      "time": {
+        "ms": 29122.41,
+        "moves": 301
+      }
+    }
+  }
+]

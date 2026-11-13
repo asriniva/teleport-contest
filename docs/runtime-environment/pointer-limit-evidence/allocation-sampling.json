@@ -1,0 +1,10 @@
+{
+  "node": "v22.23.5",
+  "parameters": {
+    "samplingInterval": 32768,
+    "includeObjectsCollectedByMajorGC": true,
+    "includeObjectsCollectedByMinorGC": true
+  },
+  "started": true,
+  "scope": "Diagnostic allocation sampling including collected objects; not a performance or deadline measurement."
+}

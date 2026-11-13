@@ -102,6 +102,9 @@ def plan():
  return rows
 
 def qualified_current(file):
+ if file in {'js/nethack/bindings/hack.js','js/nethack/bindings/mon.js','js/nethack/bindings/wintty.js'}and(ROOT/'scripts/pointer_limit_source_successor.py').exists():
+  from pointer_limit_source_successor import qualified_before
+  return qualified_before(ROOT,file)
  if file in {'js/nethack/bindings/display.js','js/nethack/bindings/invent.js'}and(ROOT/'scripts/immutable_selectors_source_successor.py').exists():
   from immutable_selectors_source_successor import qualified_before
   return qualified_before(ROOT,file)
