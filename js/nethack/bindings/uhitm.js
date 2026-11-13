@@ -52,7 +52,7 @@ export function createUhitmEnvironment(services,L){
   boolean:v=>Number(BigInt.asIntN(8,(typeof v==='bigint'?v:BigInt(Math.trunc(v))))),long:v=>BigInt.asIntN(64,BigInt(v)),
   byte:p=>Object.defineProperty({address:literal(p)},'value',{get:()=>view().getInt8(literal(p)),set:v=>view().setInt8(literal(p),Number(v))}),
   ref:(t,p)=>{p=address(p);return p?Object.defineProperty({address:p},'value',{get:()=>read(t,p),set:v=>write(t,p,v)}):0;},
-  localScalar:(t,v)=>{if(native&&(t==='int'||t==='short'))return createNativeScalarLocal(v,t==='int'?'Int32':'Int16',services.stackAlloc,view);const p=Number(services.stackAlloc(size(t)));write(t,p,v);return env.ref(t,p);},
+  localScalar:(t,v)=>{if(native&&(t==='int'||t==='short'))return createNativeScalarLocal(v,t==='int'?'Int32':'Int16',services.stackAlloc,view,{requireLifetime:true});const p=Number(services.stackAlloc(size(t)));write(t,p,v);return env.ref(t,p);},
   localArray:(t,n)=>seq(Number(services.stackAlloc(size(t)*n)),t,size(t)),
   localRecord:t=>record(t,services.stackAlloc(size(t))),
   fieldRef:(o,name)=>{const f=records[recordType(o)][fieldAliases[name]??name];if(!f||f.bit||f.const)throw Error('Review UHITM addressable field '+name);return env.ref(f.type,o.address+L[f.key]);},

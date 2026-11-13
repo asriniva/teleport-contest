@@ -1,3 +1,6 @@
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+const nativeExecution=process.env.NATIVE_WINTTY_FIXTURE==='1',nativeServices=new WeakMap();
+function ttyServices(s){if(!nativeExecution)return s;let local=nativeServices.get(s);if(!local){local=nativeFixtureServices(s,{}).services;Object.setPrototypeOf(local,Object.getPrototypeOf(s));Object.defineProperties(local,Object.getOwnPropertyDescriptors(s));nativeServices.set(s,local);}return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import {DataView as FixtureDataView,Int32Array as FixtureInt32Array} from './native-test-backend.mjs';
@@ -23,7 +26,7 @@ const raw={};for(let i=0;i<reference._probe_layout_count();i++)raw[text(referenc
 const L={};for(const[k,v]of Object.entries(raw))L[k]=raw['constwidth_'+k]===8n?(raw['constsigned_'+k]?BigInt.asIntN(64,v):BigInt.asUintN(64,v)):Number(BigInt.asIntN(64,v));
 for(const[,name]of fs.readFileSync(new URL(import.meta.url),'utf8').matchAll(/\bL\.([A-Z][A-Z_0-9]*)/g))assert.notEqual(L[name],undefined,'Actual compiler constant '+name);
 const services=new WeakMap();
-const runtime={wintty(s,n,...a){services.set(s.moduleKey,s);return callWintty(s,L,n,...a);},initializeWintty(s){services.set(s.moduleKey,s);return initializeWintty(s,L);},winttyState};
+const runtime={wintty(s,n,...a){s=ttyServices(s);services.set(s.moduleKey,s);return callWintty(s,L,n,...a);},initializeWintty(s){s=ttyServices(s);services.set(s.moduleKey,s);return initializeWintty(s,L);},winttyState};
 const hybrid=await hybridFactory({...options(1),nethackPorted:runtime});moduleRefs[1]=hybrid;
 const modules=[reference,hybrid],names=["bail","winch_handler","resize_tty","newclipping","new_status_window","tty_init_nhwindows","tty_preference_update","tty_player_selection","tty_askname","tty_get_nh_event","getret","tty_suspend_nhwindows","tty_resume_nhwindows","tty_exit_nhwindows","tty_create_nhwindow","erase_menu_or_text","free_window_info","tty_clear_nhwindow","toggle_menu_curr","dmore","set_item_state","set_all_on_page","unset_all_on_page","invert_all_on_page","invert_all","toggle_menu_attr","process_menu_window","process_text_window","tty_display_nhwindow","tty_dismiss_nhwindow","tty_destroy_nhwindow","erase_tty_screen","tty_curs","compress_str","tty_putstr","tty_display_file","tty_start_menu","tty_add_menu","reverse","tty_end_menu","tty_select_menu","tty_message_menu","tty_ctrl_nhwindow","tty_update_inventory","tty_mark_synch","tty_wait_synch","docorner","end_glyphout","g_putch","g_pututf8","setclipped","tty_cliparound","tty_print_glyph","tty_raw_print","tty_raw_print_bold","tty_nhgetch","tty_nh_poskey","win_tty_init","tty_putmixed","tty_status_init","tty_status_enablefield","tty_status_update","make_things_fit","check_fields","tty_putstatusfield","set_condition_length","shrink_enc","shrink_dlvl","check_windowdata","condcolor","condattr","render_status"];
 let comparisons=0;const seen=new Set();
@@ -226,7 +229,7 @@ assert.equal(leakedOverride,0,'A previous facade override cannot leak into later
 const facade=overrides=>Object.assign(Object.create(baseServices),overrides);
 let reenter=false;
 const inner=facade({fflush:()=>{events.push('inner');return 0;}});
-const outer=facade({fflush:()=>{events.push('outer');if(!reenter){reenter=true;callWintty(inner,L,'tty_mark_synch');core.tty_mark_synch();}return 0;}});
+const outer=facade({fflush:()=>{events.push('outer');if(!reenter){reenter=true;callWintty(inner,L,'tty_mark_synch');if(nativeExecution)winttyState(baseServices).environments.get(L).environment.nativeNamespace.tty_mark_synch();else core.tty_mark_synch();}return 0;}});
 const env=createWinttyEnvironment(baseServices,L,winttyState(baseServices));
 const oldMask=env.tty_procs.wincap2;
 hybrid._probe_mutate_catalogue(0,0xfedcba9876543210n);

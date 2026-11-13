@@ -1,3 +1,5 @@
+import {nativeStateFor} from './native/state-bridge.js';
+import {createNativeRecordViews} from './native/record-views.js';
 import {enableUnixTerminal} from './unix-terminal.js';
 // Existing window/tty adapters on JS-owned storage and canonical C callbacks.
 import records from './records.json' with {type:'json'};
@@ -5,7 +7,7 @@ import {createCTypes} from './c-types.js';
 import abi from './window-abi.json' with {type:'json'};
 import publicFunctions from './public-functions.json' with {type:'json'};
 import * as tty from '../ported/wintty.js';
-import {initializeWintty,callWintty} from './bindings/wintty.js';
+import {initializeWintty,callWintty,winttyState} from './bindings/wintty.js';
 import * as windows from '../ported/windows.js';
 import {initializeWindows,callWindows} from './bindings/windows.js';
 export function enableWindowSystem(environment,layouts){
@@ -20,6 +22,7 @@ export function enableWindowSystem(environment,layouts){
  if(typeof services.tgetent!=='function')environment.enableDependencies();
  const terminal=Object.hasOwn(environment.status(),'termcap')?null:environment.enableTerminal(layouts.termcap);
  const proxy=()=>new Proxy(Object.create(services),{get:(o,k,r)=>Reflect.has(o,k)?Reflect.get(o,k,r):typeof k==='string'?(...args)=>environment.resolve(k)(...args):undefined});
+ const owner=nativeStateFor(environment);createNativeRecordViews(environment);
  const t=proxy(),w=proxy();for(const root of ['windowprocs','cg','gs','hexdd','def_monsyms','def_oc_syms',...W.globalfields.map(path=>path.split('.')[0])])Object.defineProperty(w,root,{value:undefined,writable:true,configurable:true});
  // The native WINDOWS service materializes text operands before libc calls.
  // Keep its MEMORY64 strlen result rather than inheriting the host Number.
@@ -29,7 +32,7 @@ export function enableWindowSystem(environment,layouts){
  function prototype(type){const match=type.match(/^(.+?)\s*\(\s*\*\s*\)\s*\((.*)\)$/)??type.match(/^(.+?)\s*\((.*)\)$/);if(!match)throw new Error('Unknown window callback ABI '+type);return{result:match[1].trim(),parameters:match[2].split(',').map(s=>s.trim()).filter(s=>s&&s!=='void')};}
  const normalize=(type,value)=>code(type)==='p'?(typeof value==='string'?services.literal(value):address(value)):type==='void'?undefined:code(type)==='j'?BigInt(value):Number(value);
  function callback(module,name){const own=abi.callbacks[module][name],row=own??prototype(publicFunctions.functions[name]??'');return environment.functionPointer(own&&!Object.hasOwn(publicFunctions.functions,name)?module+'::'+name:name,signature(row),own?((...args)=>normalize(row.result,module==='wintty'?callWintty(t,L,name,...args):callWindows(w,layouts.windows,name,...args))):undefined);}
- const statics=new Map();Object.assign(t,{moduleKey:environment,global:i=>{const name=Object.keys(schema.globals)[i];if(!name)throw new Error('Unknown WINTTY global '+i);return environment.requireGlobal(name);},
+ const statics=new Map();Object.assign(t,{nativeOwner:owner,moduleKey:environment,global:i=>{const name=Object.keys(schema.globals)[i];if(!name)throw new Error('Unknown WINTTY global '+i);return environment.requireGlobal(name);},
   staticStorage:name=>{const count={'tty_askname.who_are_you':14,'compress_str.cbuf':L.BUFSZ}[name];if(!count)throw new Error('Unknown WINTTY static '+name);if(!statics.has(name))statics.set(name,environment.allocateGlobal('wintty.'+name,count));return statics.get(name);},
   callbackPointer:name=>callback('wintty',name),teleport_native_signal:(sig,fn)=>platform.signal(sig,fn),callIndirect:(fn,type,...args)=>functions.indirect(fn,signature(prototype(type)),...args),
   alloc:n=>environment.alloc('alloc',n),free:p=>services.free(address(p)),memset:(p,v,n)=>services.memset(address(p),v,n),memcpy:(a,b,n)=>services.memcpy(address(a),address(b),n),
@@ -37,8 +40,10 @@ export function enableWindowSystem(environment,layouts){
  for(const name of ['strlen','strcpy','strcat','strcmp','strncmp','strncpy','strchr','strrchr','strstr','puts','fputs'])if(typeof services[name]==='function')t[name]=(...args)=>{const count=['strncmp','strncpy','strcpy','strcat','strcmp','strstr'].includes(name)?2:1;return services[name](...args.map((v,i)=>i<count?text(v):v));};
  t.strlen=p=>BigInt(services.strlen(text(p)));
  initializeWintty(t,L);
+ Object.defineProperty(t,'nativeContext',{value:winttyState(t).environments.get(L).environment});
  const ttyNames=Object.keys(abi.callbacks.wintty).filter(name=>Object.hasOwn(publicFunctions.functions,name)&&typeof tty[name]==='function'&&!environment.hasFunction(name));
- environment.register('wintty',Object.fromEntries(ttyNames.map(name=>[name,(...args)=>callWintty(t,L,name,...args)])));
+ const ttyEntries=Object.fromEntries(ttyNames.map(name=>{const fn=(...args)=>callWintty(t,L,name,...args);fn.nativeState=owner;fn.nativeDirect=true;fn.nativePrepared=true;owner.functions.set(name,fn);return[name,fn];}));
+ environment.register('wintty',ttyEntries,t);
  const kinds=Object.keys(W.fields),types={procs:'struct window_procs',choice:'struct win_choices',glyph:'struct glyphinfo',any:'union any',menu:'struct mi',request:'struct win_request_info_t',style:'color_attr',cmdq:'struct _cmd_queue',menucolor:'struct menucoloring',class:'struct class_sym'};
  function locate(type,at,path){for(const key of path.split('.')){const extra=abi.records[type.replace(/^struct /,'')],entry=extra?{definition:{type:type.replace(/^struct /,'')},field:extra.fields[key],at:at+extra.fields[key].offset}:ctypes.locate(type,at,key);at=entry.at;type=entry.field.record??entry.field.ctype.replace(new RegExp('\\s+'+key+'$'),'');if(key===path.split('.').at(-1))return {...entry,type};}throw new Error('Invalid window field');}
 

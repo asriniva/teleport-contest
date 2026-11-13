@@ -254,4 +254,17 @@ const utilityMarker={nativeUtilityCaller:true},utilityLoad=utility.loadChar,live
 try{utility.loadChar=()=>{assert.equal(C,utilityMarker);environment.transport.stackAlloc(24);throw Error('native utility cleanup');};withCEnvironment(utilityMarker,()=>assert.throws(()=>environment.services.eos(1024),/native utility cleanup/));
 }finally{utility.loadChar=utilityLoad;}
 assert.equal(environment.memory.live.size,liveBeforeUtility,'utility exceptions restore temporary C bytes');
+
+const ttyPacket=environment.start('wintty').environment,ttyContext=ttyPacket.nativeContext;
+assert.ok(ttyContext.nativeNamespace,'actual window owner holds the native TTY context');
+for(const name of ['tty_nhgetch','tty_curs','tty_print_glyph','tty_putstr'])assert.equal(environment.services[name].nativeEntry,owner.functions.get(name),name+' connects native TTY execution');
+assert.equal(environment.services.teleport_getch.nativeEntry,owner.functions.get('teleport_getch'),'host key input has direct native dispatch');
+const displayAt=owner.nativeArena.pointer(environment.requireGlobal('ttyDisplay'));
+assert.equal(ttyContext.deref(displayAt,'struct DisplayDesc'),owner.nativeRecords.record('struct DisplayDesc',displayAt),'terminal rendering uses the canonical display record');
+const ttyFlags=ttyContext.deref(environment.requireGlobal('iflags'),'struct instance_flags');
+for(const [alias,field]of Object.entries({eight_bit_tty:'wc_eight_bit_input',use_color:'wc_color',hilite_pet:'wc_hilite_pet',use_inverse:'wc_inverse'}))assert.equal(ttyFlags[alias],ttyFlags[field],'native TTY alias '+alias);
+const ttyEvent=ttyContext.nativeNamespace.tty_get_nh_event,ttyMarker={nativeTtyCaller:true},liveBeforeTty=environment.memory.live.size;
+try{ttyContext.nativeNamespace.tty_get_nh_event=()=>{assert.equal(C,ttyMarker);environment.transport.stackAlloc(24);throw Error('native TTY cleanup');};withCEnvironment(ttyMarker,()=>assert.throws(()=>environment.services.tty_get_nh_event(),/native TTY cleanup/));
+}finally{ttyContext.nativeNamespace.tty_get_nh_event=ttyEvent;}
+assert.equal(environment.memory.live.size,liveBeforeTty,'TTY entry exceptions restore temporary C bytes');
 console.log(JSON.stringify({passed:true,monsters,nativeFunctions:owner.functions.size,nativeFields:owner.fields,nativeStorage:owner.nativeArena?'typed-arrays':'cached-fields',cachedReads:owner.hits,legacyBoundaries:owner.boundaries,moves:result.state.moves}));

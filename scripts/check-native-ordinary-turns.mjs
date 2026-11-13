@@ -22,7 +22,7 @@ try{
  const {runFullOriginalC}=await import('./full-original-c-run.mjs'),{runStandaloneProgram}=await import('./run-standalone-program.mjs');
  const expected=await runFullOriginalC(reference,input);
  const actual=runStandaloneProgram(reference+'/assets',{...input,observeRuntime:({environment})=>{const entry=environment.start('terminal-key-input'),read=entry.namespace.teleport_getch;
-  entry.namespace.teleport_getch=()=>{current=undefined;const index=reads++;const result=read();if(index>=3){current={keyIndex:index,key:input.keys[index]};intervals.push(current);}return result;};
+  const wrapped=()=>{current=undefined;const index=reads++;const result=read();if(index>=3){current={keyIndex:index,key:input.keys[index]};intervals.push(current);}return result;};Object.assign(wrapped,read);entry.namespace.teleport_getch=wrapped;
  }});
  current=undefined;
  for(const key of ['status','state','stdout','stderr','rngLog','displayRngLog'])assert.deepEqual(actual[key],expected[key],key+' original-C equivalence');

@@ -1,3 +1,51 @@
+## Native terminal input and display execution (2026-11-13)
+
+`native/wintty.js` binds all 72 original TTY routines and their original catalogue
+to a game context. The host key reader is also a direct native entry; its test
+observer preserves production dispatch flags so it does not introduce a C bridge.
+The actual window owner publishes direct entries; display,
+menus, input, status and private callbacks use the same native bodies. All 30
+measured record types consume canonical native records. Four TTY flag aliases
+are explicitly installed on native records; their omission in the initial
+uncommitted attempt changed colors/attributes and was caught by both C fixtures
+and real-turn comparison. Existing independent field-width/signedness checks
+remain. Signed numeric casts use native arithmetic with original fallback.
+
+Initialized scalar locals stay native; uninitialized byte/short/int locals retain
+uninitialized backing behavior when actually read/addressed, with no C allocation
+until a byte consumer needs one. Int8 support and 809 scalar/alias/growth/error
+checks cover this extension. A full-recording screen regression then exposed
+an ownership defect in the earlier lazy-scalar mechanism: first materialization
+inside a callee attached storage to that callee's frame, producing dangling
+caller references. The transport now reserves a non-allocating slot in the
+caller frame at declaration and materializes into that slot. Expired reservations
+reject access; providers without lifetime support allocate eagerly in the caller.
+MONMOVE, UHITM and WINTTY all require this ownership contract. Nested callee
+restoration, allocator reuse, unmaterialized expiry and failed-allocation retry
+are explicitly tested. Lifetimes are required by default; only explicitly permanent test allocations may opt out. The regression was not pushed. Byte consumers, window callback tokens, private
+arrays and output transport remain explicit boundaries.
+
+Original-C checks pass 165 native and 165 legacy terminal comparisons covering
+all 72 source routines, exact stdio/cursors/shadow, menus, status, signals, mutable
+catalogues, reentry and cleanup. Movement passes 5,550 comparisons over all 52
+routines; combat passes 7,858 over all 102 entries. SDK checks pass 1,931. Native
+scalar/lifetime checks pass 809 on both Node 24 and scoring Node 22. Live-main
+proves canonical display identity, all four aliases, direct TTY/host input and
+exception cleanup. The test input observer preserves native dispatch metadata;
+production dispatch itself changes in `terminal-input.js`, not just the counter.
+Source/metadata/callback audits pass. The rejected 7/44 attempt is retained in
+the validation receipt, with the ownership failure and its now-passing reproducer.
+
+Actual C state, tty, ordered RNG logs and frames match for ordinary turns. Generic
+calls are 26/47/98, C scope entries 42/76/167, generic fields 51/94/141 and C heap
+allocations 44/165/109 for walk/wait/attack. The zero gate remains false. All 44
+recordings pass with 801 scoring inputs unchanged: 792,838 RNG entries, 11,405
+screens/cursors and 1,483 animations match. Unprofiled Node 22.23.5 batch time is
+286.069s versus 290.132s previously (about 1.4% lower). These separate single runs
+establish no controlled speedup or 20x acceptance. Evidence is in
+`docs/runtime-environment/native-tty-validation.json` and its source manifest.
+No upstream C, source policy AST, RNG algorithm, inputs or capture policy change.
+
 ## Native string and arithmetic execution (2026-11-13)
 
 The actual HACKLIB owner uses all 50 original utility bodies bound to one native

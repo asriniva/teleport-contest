@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {parse} from 'acorn';
 function clean(v){if(Array.isArray(v))return v.map(clean);if(!v||typeof v!=='object')return v;return Object.fromEntries(Object.entries(v).filter(([k])=>!['start','end','raw'].includes(k)).map(([k,x])=>[k,clean(x)]));}
-for(const [name,factory]of [['mondata','createNativeMondata'],['stairs','createNativeStairs'],['artifact','createNativeArtifact'],['uhitm','createNativeUhitm'],['makemon','createNativeMakemon'],['hacklib','createNativeHacklib']]){
+for(const [name,factory]of [['mondata','createNativeMondata'],['stairs','createNativeStairs'],['artifact','createNativeArtifact'],['uhitm','createNativeUhitm'],['makemon','createNativeMakemon'],['hacklib','createNativeHacklib'],['wintty','createNativeWintty']]){
  const before=parse(fs.readFileSync('js/ported/'+name+'.js','utf8'),{ecmaVersion:'latest',sourceType:'module'}),after=parse(fs.readFileSync('js/nethack/native/'+name+'.js','utf8'),{ecmaVersion:'latest',sourceType:'module'});
  const fn=after.body[0].declaration;assert.equal(fn.id.name,factory);assert.deepEqual(fn.params.map(x=>x.name),['C']);
  const expected=before.body.filter(n=>n.type!=='ImportDeclaration').map(n=>n.type==='ExportNamedDeclaration'?n.declaration:n);
