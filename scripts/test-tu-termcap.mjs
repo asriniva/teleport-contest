@@ -1,3 +1,5 @@
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+const nativeExecution=process.env.NATIVE_TERMCAP_FIXTURE==='1',nativeServices=new WeakMap();
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import {DataView as FixtureDataView} from './native-test-backend.mjs';
@@ -45,7 +47,7 @@ function observeServices(services){const m=services.moduleKey,p=v=>BigInt(v?.add
  getenv:v=>ptr(m.___wrap_getenv(str(v))),putchar:v=>m.___wrap_putchar(Number(v)|0),fflush:v=>m.___wrap_fflush(p(v)),free:v=>m.___wrap_free(p(v)),
  tgetent:(b,n)=>m.___wrap_tgetent(str(b),str(n)),tgetnum:n=>m.___wrap_tgetnum(str(n)),tgetflag:n=>m.___wrap_tgetflag(str(n)),tgetstr:(n,a)=>ptr(m.___wrap_tgetstr(str(n),p(a))),tputs:(v,n,c)=>m.___wrap_tputs(str(v),Number(n)|0,p(c)),
 });}
-const runtime={termcap(services,name,...args){servicesByModule.set(services.moduleKey,services);calls.set(name,(calls.get(name)??0)+1);return callTermcap(unwrapped||callbackOnly?services:observeServices(services),L,name,...args);}};
+const runtime={termcap(services,name,...args){if(nativeExecution){let local=nativeServices.get(services);if(!local){local=nativeFixtureServices(services,{}).services;local.nativeTypes=services.moduleKey.environment.ctypes;nativeServices.set(services,local);}services=local;}servicesByModule.set(services.moduleKey,services);calls.set(name,(calls.get(name)??0)+1);return callTermcap(unwrapped||callbackOnly?services:observeServices(services),L,name,...args);}};
 const hybrid=await factories[1]({...moduleOptions(),nethackPorted:runtime}),modules=[reference,hybrid];assert.deepEqual(layout(hybrid),L);
 let cases=0,comparisons=0,active='';const invoked=new Set(),names=Object.keys(schema.schema),globals=schema.globals;
 const both=(name,...args)=>modules.map(m=>m['_probe_'+name](...args));

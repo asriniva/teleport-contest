@@ -30,6 +30,16 @@ try{glyphContext.env.glyph_is_cmap_main=g=>{assert.equal(C,glyphMarker);return o
 assert.equal(environment.memory.live.size,liveBeforeGlyph);assert.equal(owner.depth,0);
 withCEnvironment(glyphMarker,()=>glyphContext.env.callFindCallback(()=>{assert.ok(C===glyphContext.env,'foreign glyph callbacks retain their C context');assert.equal(owner.depth,0);},0,find));
 
+// Actual terminal owner publishes direct execution and consumes the canonical
+// cursor record, rather than only proving a standalone source factory.
+const terminal=runtime.program.terminal;
+for(const name of ['xputc','nomux_putch','term_curs_set','nomux_capture_write_input_boundary'])assert.ok(environment.services[name].nativeEntry===owner.functions.get(name),name+' is connected native terminal execution');
+const display=owner.nativeRecords.record('struct DisplayDesc',environment.ctypes.load('struct DisplayDesc *',terminal.global('ttyDisplay'))),displayXY=[display.curx,display.cury],cellAt=terminal.global('nomux_buf')+(4*80+3)*4,cellBefore=environment.memory.readBytes(cellAt,4);
+try{display.curx=3;display.cury=4;environment.services.nomux_putch(65);assert.equal(environment.memory.HEAPU8[cellAt],65,'native cursor/character state reaches actual capture cells');environment.memory.grow(environment.memory.buffer.byteLength+1);environment.services.nomux_putch(66);assert.equal(environment.memory.HEAPU8[cellAt],66,'terminal state survives actual memory growth');}finally{display.curx=displayXY[0];display.cury=displayXY[1];environment.memory.HEAPU8.set(cellBefore,cellAt);}
+const oldPutchar=Object.getOwnPropertyDescriptor(terminal.services,'putchar'),terminalMarker={nativeTerminalCaller:true},liveBeforeTerminal=environment.memory.live.size;
+try{terminal.services.putchar=value=>{assert.equal(C,terminalMarker,'native terminal retains its caller scope');environment.transport.stackAlloc(24);if(value===67)throw Error('native terminal cleanup');return value;};withCEnvironment(terminalMarker,()=>{assert.equal(environment.services.xputc(65),65);assert.throws(()=>environment.services.xputc(67),/native terminal cleanup/);assert.equal(C,terminalMarker);});}finally{if(oldPutchar)Object.defineProperty(terminal.services,'putchar',oldPutchar);else delete terminal.services.putchar;}
+assert.equal(environment.memory.live.size,liveBeforeTerminal,'native terminal frees callback temporaries on normal and exceptional exit');
+
 assert.equal(owner.depth,0,'input exhaustion publishes the entire connected native graph');
 assert.equal(owner.dirty.size,0);
 for(const name of ['movemon','mcalcdistress','healmon','mfndpos','dochugw','m_move','domove','lookaround','test_move','vision_recalc','clear_path','does_block','moveloop','moveloop_core','moveloop_preamble','stop_occupation','timet_to_seconds','timet_delta','dog_move','dog_eat','mattacku','magic_negation','getmattk']){
