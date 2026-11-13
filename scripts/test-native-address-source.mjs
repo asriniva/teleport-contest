@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {pathToFileURL} from 'node:url';
-const {parse}=await import(pathToFileURL(process.argv[2]??'.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs'));
+const {parse}=await import(process.argv[2]?pathToFileURL(process.argv[2]):'acorn');
 const ports=JSON.parse(fs.readFileSync('js/nethack/address-ports.json')).ports;
 ports.cmd={schema:JSON.parse(fs.readFileSync('js/nethack/command-abi.json')).schema};
 const identifier=name=>({type:'Identifier',name});

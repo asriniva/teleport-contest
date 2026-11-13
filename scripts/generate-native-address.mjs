@@ -1,7 +1,7 @@
 // Generate game-bound kernels and eliminate ordinary C.field lvalue carriers.
 import fs from 'node:fs';
 import {pathToFileURL} from 'node:url';
-const {parse}=await import(pathToFileURL(process.argv[2]??'.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs'));
+const {parse}=await import(process.argv[2]?pathToFileURL(process.argv[2]):'acorn');
 const metadata=JSON.parse(fs.readFileSync('js/nethack/address-ports.json')).ports;
 metadata.cmd={schema:JSON.parse(fs.readFileSync('js/nethack/command-abi.json')).schema};
 const chosen=process.argv.slice(3).filter(x=>x!=='--check'),names=chosen.length?chosen:Object.keys(metadata);

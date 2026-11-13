@@ -1,3 +1,38 @@
+## Native monster movement scalar locals ( 2026-11-13)
+
+`native/scalar-local.js` keeps short/int local references as narrowed JS Numbers
+until a genuine byte-level consumer requests their address. Only that first
+request obtains existing stack storage; subsequent reads observe external byte
+writes, and writes through the JS reference update the same bytes. Repeated
+addresses remain stable, memory growth uses the current view, and a failed first
+allocation can be retried. `bindings/monmove.js` uses these locals for native
+owners; legacy component owners retain eager C storage. `monster-movement.js`
+explicitly provides the shared native owner. Source movement bodies, call and
+mutation order, integer widths and RNG calls/sites/order are unchanged. Record
+locals, genuine pointer callbacks and compatibility work elsewhere remain.
+
+The native fixture mode passes all 52 movement routines and 5,550 original-C
+comparisons, including history, structured returns, field/bit/pointer mutation,
+growth, reentry, live address reuse and game isolation. Focused scalar tests
+pass 448 checks for signed narrowing, allocation-free native use, late pointer
+materialization/aliasing, growth and allocation retry. Actual walk/wait/attack
+still match complete original-C RNG logs, state, tty and normalized frames.
+C allocations are 54/194/156 instead of 54/212/183; C-stack allocations are
+30/46/83 instead of 30/64/110. Remaining generic calls (37/100/193), C scope
+entries (68/175/341), generic fields (66/130/1,285) and pointer dispatches
+(10/13/25) keep the strict zero-bridge/zero-allocation gate failing. Public verification passes 44/44, all 788 scoring inputs unchanged: 792,838
+RNG entries, 11,405 screens/cursors and 1,483 animations match. Unprofiled Node
+22.23.5 batch time is 307.927s versus 309.179s for the preceding attribute step;
+these separate single runs show a small timing change, not 20x performance.
+Evidence: `docs/runtime-environment/native-movement-locals-validation.json` and
+source manifest.
+
+CI now runs the address, attribute and terminal source-equivalence checks and
+the scalar-local boundary tests before public scoring. Address source tooling
+uses the installed pinned Acorn package by default (an explicit SDK path remains
+supported), so these checks do not require the local SDK. No CI scoring threshold,
+recording input, timeout, game policy or assertion is relaxed.
+
 ## Native hero attributes connected to movement and combat ( 2026-11-13)
 
 `native/attrib.js` retains all 34 ATTRIB routines and source data in a per-game
