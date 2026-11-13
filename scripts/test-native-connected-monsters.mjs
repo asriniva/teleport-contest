@@ -15,13 +15,29 @@ assert.deepEqual(result.status,{kind:'input-exhausted'});
 const {environment}=runtime,owner=nativeStateFor(environment);
 assert.equal(owner.depth,0,'input exhaustion publishes the entire connected native graph');
 assert.equal(owner.dirty.size,0);
-for(const name of ['movemon','mcalcdistress','healmon','mfndpos','dochugw','m_move','domove','lookaround','test_move','vision_recalc','clear_path','does_block','moveloop','moveloop_core','moveloop_preamble','stop_occupation','timet_to_seconds','timet_delta']){
+for(const name of ['movemon','mcalcdistress','healmon','mfndpos','dochugw','m_move','domove','lookaround','test_move','vision_recalc','clear_path','does_block','moveloop','moveloop_core','moveloop_preamble','stop_occupation','timet_to_seconds','timet_delta','dog_move','dog_eat','mattacku','magic_negation','getmattk']){
  assert.ok(owner.functions.has(name),name+' has native dispatch');
  assert.equal(owner.functions.get(name).nativeState,owner,name+' uses the common native owner');
 }
 const lifecycle=enableMonsterLifecycle(environment,layouts);
 const vision=callVision({moduleKey:environment},layouts.vision,'environment');
 const hero=owner.records.get('struct you:'+environment.requireGlobal('u'));assert.ok(hero);
+const pets=environment.enableDogmove(layouts),attacks=environment.enableMhitu(layouts);
+assert.equal(pets.context.u,hero);assert.equal(attacks.context.u,hero);
+assert.equal(pets.services.mfndpos,owner.functions.get('mfndpos'),'pet movement calls native candidate search directly');
+const candidateAt=environment.memory.calloc(1,environment.ctypes.size('struct mfndposdata'));
+try{const candidates=pets.context.view('mfndposdata',candidateAt);assert.equal(candidates.info.length,9);assert.equal(candidates.poss.length,9);}
+finally{environment.memory.free(candidateAt);}
+const petMarker={nativePetCaller:true};
+withCEnvironment(petMarker,()=>{
+ let distance=0;pets.context.do_clear_area(hero.ux,hero.uy,1,pets.native.wantdoor,{reference:true,type:'int',get:()=>distance,set:v=>{distance=v;}});
+ assert.equal(distance,0);assert.equal(C,petMarker,'native search callbacks retain caller context');
+ const object=[...owner.records].find(([key])=>key.startsWith('struct obj:'))?.[1];assert.ok(object);
+ const previous=attacks.context.mon_currwep;
+ try{attacks.context.mon_currwep=object;assert.equal(attacks.context.mon_currwep,object);}
+ finally{attacks.context.mon_currwep=previous;}
+ assert.equal(C,petMarker);
+});
 assert.equal(environment.transport.scoped(()=>hero),hero,'canonical records remain synchronous values across legacy scopes');
 assert.equal(hero.table,undefined,'legacy table probes observe ordinary missing JS properties on complete records');
 assert.equal(hero.then,undefined,'complete records are not promises');

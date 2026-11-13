@@ -74,5 +74,5 @@ export function createNativeRecordViews(environment){
  owner.completeRecordTypes=new Set([...owner.sharedTypes].filter(isRecord));
  owner.registerSchemas(new Map([...owner.completeRecordTypes].map(type=>[type,p=>record(type,p)])));
  const result={record,value,argument:record,array:(type,p,length)=>value(type+'['+length+']',p),advance(view,n){const row=viewDefinitions.get(view);if(!row)throw new TypeError('Unrecognized native record view');return record(row.type,view.address+Number(n)*row.size);}};
- owners.set(environment,result);return result;
+ owner.nativeRecords=result;owners.set(environment,result);return result;
 }

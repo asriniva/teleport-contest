@@ -1,3 +1,51 @@
+## Native pet movement and monster attacks (worktree, 2026-11-13)
+
+Additional work aftera77389a. `scripts/generate-native-pet-combat.py` binds
+unchanged DOGMOVE and MHITU policy to per-game native contexts and lowers local
+calls directly. Their default game bindings select canonical native actors and
+typed measured fields; partial component owners retain their existing adapters.
+Internal native dependencies dispatch directly; foreign functions, indirect
+callbacks, windows and pointer references retain explicit boundaries. MHITU
+construction remains lazy, source-private weapon state remains per game, and
+the pet door-search callback uses the same generated namespace identity as its
+policy. Ordinary finite small-integer casts use native arithmetic while other
+inputs retain the original conversions. No RNG sites, source policy, callback
+ABI, serialization, assets, C reference or frozen recording change is intended.
+The remaining legacy ABI conversions are compiled once, with native narrowing
+for integer Number inputs and original conversion behavior for other inputs.
+Existing linker/callback context boundaries remain; redundant state-publication
+fences are not added around already-bound legacy functions. A first live check
+exposed incomplete pet-created candidate arrays later consumed by movement;
+shared descriptor views now obtain the complete canonical record first, with a
+directed nine-element scratch-array regression. Decoded function-pointer fields
+retain their per-read callback projection and precise64-bit stored values.
+
+The50 generated functions have identical policy/RNG AST after reversing43 local
+call lowerings. Directed execution/conversion checks pass640 cases plus decoded
+callback/growth checks. Both retained adapters and the actual native-state/native
+closure path pass the existing independent C matrices: DOGMOVE2,469 comparisons
+across20 configured functions, including callback/reference and mid-call growth;
+MHITU623 cases/7,179 comparisons across30 functions and all78 configured RNG
+sites. The native matrix mode reuses the real production fixture memory, typed
+arena and canonical record owner (`NATIVE_PET_COMBAT_FIXTURE=1`); reference
+backends are isolated configured C, not acceptance of every native host. Actual
+gameplay verifies shared hero/monster/weapon identities, direct pet candidate
+search, callback namespace identity and caller context. Original-C main matches
+716 inputs/238 turns,717 frames, normalized world graph and both RNG histories.
+Evidence: `docs/runtime-environment/native-pet-combat-component-validation.json`.
+
+Final source-stable `.cache/native-pet-combat-public-08` passes44/44 strict
+recordings:792,838 RNG entries,11,405 screens/cursors,1,483 animation frames and
+ordered cursor triples, all56 persistence segments and zero forbidden capability
+attempts. All777 scoring inputs remain unchanged during replay; frozen/session
+bytes are unchanged. Engine time359.21536s →356.49322s is0.7578% lower; geometric
+mean session speedup1.00664x. Fit20.3633ms/turn →20.1750ms/turn; wall361.53316s.
+This small single historical difference does not establish a substantial or
+robust speed gain. Receipts: `native-pet-combat-public-validation.json` and
+`native-pet-combat-timing.json` under `docs/runtime-environment`. No new baseline
+replay or profiling. Other combat peers, generic internal ABI wrappers and native
+arithmetic across remaining contexts are still work;20x remains unachieved.
+
 ## Native ALLMAIN turns and complete shared record views (worktree, 2026-11-13)
 
 Additional work after9c3b506. `scripts/generate-native-allmain.py` generates a

@@ -1,0 +1,145 @@
+{
+  "baseCommit": "a77389a",
+  "scope": "Native DOGMOVE and MHITU contexts, canonical actor state, typed private fields, direct native dependencies and precompiled integer/ABI conversions",
+  "sourcePolicy": {
+    "passed": true,
+    "modules": 2,
+    "functions": 50,
+    "localCallConversions": 43,
+    "sourcePolicyAstEqual": true
+  },
+  "integerAndExecutionChecks": {
+    "passed": true,
+    "checks": 640,
+    "nativeArguments": true,
+    "dependencyReplacement": true,
+    "contextOverrides": true,
+    "foreignOwnerIsolation": true,
+    "decodedCallbacks": true
+  },
+  "actualGameplay": {
+    "passed": true,
+    "monsters": 11,
+    "nativeFunctions": 530,
+    "nativeFields": 21371,
+    "nativeStorage": "typed-arrays",
+    "cachedReads": 0,
+    "legacyBoundaries": 54623,
+    "moves": "85"
+  },
+  "originalCWorldComparison": {
+    "profile": "Strict original full-C main against pure JS finite ordinary movement; source death fixture input prefix",
+    "checks": 3,
+    "cases": [
+      {
+        "keys": 716,
+        "moves": "238",
+        "frames": 717,
+        "worldRecords": {
+          "monst": 3,
+          "permonst": 3,
+          "branch": 7,
+          "obj": 37,
+          "mextra": 1,
+          "edog": 1,
+          "mapseen": 1,
+          "s_level": 36,
+          "stairway": 2
+        }
+      }
+    ],
+    "completeGameAccepted": false,
+    "sourceSha256": {
+      "scripts/test-standalone-monster-movement-program.mjs": "56b8be40dfff104fb388f634daceee36fad1400d7003fef953569588ed181906",
+      "scripts/restoration-world-graph.mjs": "a64d28a6a5974a89672ecedd637ebe89b706afb81b87267d8cb18684459907db",
+      "scripts/run-standalone-program.mjs": "29d76709123ab2b78c6e5dc45452b722b58cffc89b1afe1d5e4c2a384f00a479",
+      "scripts/full-original-c-run.mjs": "3da8b7a3dd0b2c1f60eb6a986bcb70c0bb79d120e50a007c1558569301978a9a",
+      "js/nethack/monster-movement.js": "dfdff47b8401bdba8bccee21659e4badfca28484685b15a342e699459ec42012",
+      "js/nethack/monster-lifecycle.js": "e5ce76d444cef171008397c687f5c5b4dcc3917a9766799d65101f0a92c66949",
+      "js/nethack/bindings/monmove.js": "4ee2c2084aa357384454a16cd6fbd94dd6069387bf40934feb40f4b0732d4aeb",
+      "js/ported/monmove.js": "c15e91a573c5a8a8eda8c4d7cda18ef6966645f50ad515382a8dc027c717dc39",
+      "js/nethack/bindings/mon.js": "38616849c82cc2d759e54e01cb21656d180e247a0558b8af97b99b0a8b988674",
+      "js/ported/mon.js": "b76ebfece2f87288bd21915219cb8db7d00652399901b58f8463958a71ca3fe0"
+    },
+    "limitation": "Only these finite recordings and normalized world graphs are accepted; later death, victory, other seeds and unreached movement branches remain separate requirements."
+  },
+  "publicNativeEntries": 28,
+  "independentControlledMatrices": {
+    "dogmove": {
+      "comparisons": 2469,
+      "functions": 20,
+      "legacyAdapterPassed": true,
+      "nativeStateAndExecutionPassed": true,
+      "scope": "Existing independent configured C state/trace/pointer/long64/callback/stack matrix, including mid-call memory growth; controlled world dependencies."
+    },
+    "mhitu": {
+      "cases": 623,
+      "comparisons": 7179,
+      "functions": 30,
+      "rngSitesMatched": 78,
+      "rngSitesTotal": 78,
+      "legacyAdapterPassed": true,
+      "nativeStateAndExecutionPassed": true,
+      "scope": "Existing independent configured C matrix, per-module private state, controlled rare/fatal combat dependencies and all configured RNG sites."
+    },
+    "nativeMode": "NATIVE_PET_COMBAT_FIXTURE=1 reuses each real production fixture environment, canonical record owner, typed arena and generated native policy closures. This is separate from the legacy adapter comparison.",
+    "referenceLimit": "These fixture references are isolated configured C; the test output labels native host pending. This does not establish every host/platform or uncontrolled full game."
+  },
+  "liveAssertions": [
+    "Pet and attack contexts use the canonical hero",
+    "Pet candidate-search dependency is the native engine entry",
+    "Fresh candidate arrays expose the complete nine-element interface",
+    "Generated pet search callback identity and reference update are preserved",
+    "Native callbacks preserve an unrelated C caller environment",
+    "The per-game current-weapon reference retains canonical object identity"
+  ],
+  "integrationFixes": [
+    "Shared descriptor views obtain the complete canonical record before constructing field projections; this prevents partial scratch arrays from losing their length interface.",
+    "Existing linker ABI/context boundaries remain for legacy dependencies; no redundant native-state publication fence is added to those already-bound calls.",
+    "The original MHITU argument projection sequence is shared by legacy and native entry paths; lazy context creation and private state remain."
+  ],
+  "rawProofSha256": {
+    ".cache/native-pet-combat-source-05.log": "d4365a50b6cbb2fd9eb596d9624bf8a2533228ae9cf65f9a3bd1737c74f63a8b",
+    ".cache/native-pet-combat-execution-06.log": "bc4f8f77cd592464d1c679829d00456a2de59d498359411777f1eb6f5779997b",
+    ".cache/native-pet-combat-connected-06.log": "e0a52c934e3f846cce90bec88a7b45a22e0ccc592b2ca261b3ac532354af4170",
+    ".cache/native-pet-combat-main-716-08.log": "5c6c5e696b9ce9ae39f599064c42a74192ac1757ce20ec6a8af6c1483ea48628",
+    ".cache/native-pet-combat-dogmove-component-06.log": "acf7a1e8bd8543c751599cc70a060af44a198305be40731c16ea6358f4f42986",
+    ".cache/native-pet-combat-mhitu-component-08.log": "b1bbb824ba40c5fb4f9737ef7b5b0657012a6e407379bd0583f74bf99c70654d",
+    ".cache/native-pet-combat-dogmove-native-10.log": "0f0992307b60011db110e09054d44d2eb44fa68695ce545bcee383986c3115c4",
+    ".cache/native-pet-combat-mhitu-native-09.log": "15d194cbd47773ce44f8f5c6102c67d4323913a7af2a8c4e4dc51dc6b7d28661",
+    ".cache/native-pet-combat-descriptor-06.log": "83d435b244b0ca5a1eb229031be5704729e621b323a51c794d97b8da8c831b7e",
+    ".cache/native-pet-combat-records-06.log": "81295fb4b56d28d3a408af00e38ddbdc1be1a9ed0cfcf06c8dd439e1c2379436",
+    ".cache/native-pet-combat-vision-dispatch-10.log": "0624974090cb55db0e33887933e77d82c04a7f98de6c6ea5aeb416c0078af5d4",
+    ".cache/native-pet-combat-kernel-state-10.log": "cef092dd71123fabd56ce3fc508001f2d2b568335445b152f091a3775b9607f4",
+    ".cache/native-pet-combat-address-dispatch-10.log": "b95ddf395e94942180729126fc15d95c42a82175d8218402ea0590468072d0fc"
+  },
+  "sourceSha256": {
+    "js/nethack/dogmove.js": "48df471951113fc9ba7d401e85e32f3d727839501b67c90cfc6da7d5353907fb",
+    "js/nethack/mhitu.js": "71879181559105973422b888942b7e3f759e2e6bbb116f9c2e370e1cec420cbe",
+    "js/nethack/bindings/dogmove.js": "67437a0a0828b82e9932e3e139045fadbbf9bdf8f0783c70c2328376b06d1579",
+    "js/nethack/bindings/mhitu.js": "5d32f88b2e4b7a8df11db5da909f78d58cbb36505fca812bb2c7b279277aca1b",
+    "js/nethack/native/dogmove.js": "d755e5c86b21bbd7a9bb24a92a83a111f66872b4314d6630ec9b5ce61861ff94",
+    "js/nethack/native/mhitu.js": "1b1278d64c259356cc791be01a07671eb6b76893a7afef2ab2f8da637931ea32",
+    "js/nethack/native/execution.js": "fc29122cdea837a271394d58ab592459a53ef0f843f5a6f9f2b264a8cf05bb1d",
+    "js/nethack/native/descriptor-state.js": "4d331603a4603b07e6faa8589fee740837cad561a3661b934a54ec89c2767c0b",
+    "js/nethack/native/record-views.js": "e2034dab805dcb40b9fbedde35e5264d5c2bb99a7d11bb85cee0f6696b1d4228",
+    "scripts/generate-native-pet-combat.py": "f110b85f4790af8efddec3e55ae9f4ab7abb6b53372ad11bcae1a009c215e903",
+    "scripts/test-native-pet-combat-source.mjs": "65b4f80d6bc1e42db02a7eaf44d130ecfe9a0490000d6988626bf8542de731a8",
+    "scripts/test-native-execution.mjs": "afbf7f7c01e9293881db1358c0bec6a4d4bc80c5caa4f42fe96422ba80e84429",
+    "scripts/test-native-connected-monsters.mjs": "c97dd7bb7a0622afb0555df182c99b81f37a05ea0d0c874710824c4436b20c50",
+    "scripts/native-pet-combat-fixture.mjs": "0f248f58d001d67a7e156c05da555f9dcb2e121ccef73b5f07cd948e128e8318",
+    "scripts/test-tu-dogmove.mjs": "d9485606937b769a28625a7c592c2c81f2c480dc7ac795421f3fa1355427a514",
+    "scripts/test-tu-mhitu.mjs": "198f54583cbf65adf7ac356da74c6b947167f51f01b8e306bda1942f32b6de47"
+  },
+  "limits": [
+    "Source/RNG AST equivalence covers50 functions and43 lowered local calls; the directed execution check covers640 cases plus decoded callback/growth checks.",
+    "Original-C main comparison is a finite716-input/238-turn prefix with717 frames, normalized world graph and both RNG histories. Full strict recording evidence is separate.",
+    "Other combat peers, generic internal ABI wrappers and byte-shaped lookup/initialization structures remain. An ordinary turn free of the generic C runtime and20x remain unachieved.",
+    "No new baseline replay or CPU profiling."
+  ],
+  "connectedRegressionChecks": {
+    "visibilityDispatch": "passed",
+    "canonicalKernelFieldsAndByteAliases": "passed",
+    "directDeferredAddressDispatch": "passed"
+  }
+}
