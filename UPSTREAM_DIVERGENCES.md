@@ -12,7 +12,9 @@ source count/growth/release decisions, traversal, callback and mutation order
 remain explicit. Native lookup tables use measured sizes and existing shared
 storage only where actual bytes are required. The legacy isolated factory is
 retained. Locals/strings and foreign routines remain; zero-allocation/zero-bridge
-turns and 20x are not claimed. The generator removes 159 immediately nested identical pure conversions (73 long,
+turns and 20x are not claimed.
+
+The generator removes 159 immediately nested identical pure conversions (73 long,
 54 int, 7 uint, 13 coordinate and 12 ulong). The inner cast and every operand
 remain, retaining original widths/errors and evaluation/RNG order; different
 casts and arithmetic are untouched. Generation uses existing Node/Acorn tooling;
@@ -2063,7 +2065,7 @@ and both RNG histories. These finite/controlled checks do not cover every branch
 Component receipt: `docs/runtime-environment/native-shared-dispatch-component-validation.json`.
 
 Final source-stable `.cache/native-shared-public-04` passes44/44 strict
-recordings:792,838 RNG entries, 11,405 screens/cursors,1,483 animation frames and
+recordings:792,838 RNG entries,11,405 screens/cursors,1,483 animation frames and
 ordered cursor triples, all56 persistence segments and zero forbidden attempts.
 All777 scoring inputs remain unchanged during replay; frozen/session bytes are
 unchanged. Engine356.49322s →345.64437s is3.0432% lower; geometric mean session
@@ -2113,7 +2115,7 @@ search, callback namespace identity and caller context. Original-C main matches
 Evidence: `docs/runtime-environment/native-pet-combat-component-validation.json`.
 
 Final source-stable `.cache/native-pet-combat-public-08` passes44/44 strict
-recordings:792,838 RNG entries, 11,405 screens/cursors,1,483 animation frames and
+recordings:792,838 RNG entries,11,405 screens/cursors,1,483 animation frames and
 ordered cursor triples, all56 persistence segments and zero forbidden capability
 attempts. All777 scoring inputs remain unchanged during replay; frozen/session
 bytes are unchanged. Engine time359.21536s →356.49322s is0.7578% lower; geometric
@@ -2170,7 +2172,7 @@ metadata record annotation, function-pointer string literal conversion and null
 array address guards. No rejected timing is accepted as a speed result.
 
 Final source-stable `.cache/native-allmain-public-10` passes44/44 strict metrics:
-792,838 RNG entries, 11,405 screens/cursors,1,483 animation frames with ordered
+792,838 RNG entries,11,405 screens/cursors,1,483 animation frames with ordered
 cursor triples, all56 persistence segments and zero forbidden capability
 attempts. All774 scoring inputs remain unchanged during the run; frozen/session
 bytes are unchanged. Engine time374.62943s →359.21536s is4.1145% lower versus
@@ -2235,7 +2237,7 @@ The initial three-recording typed probe passed in33.89403s versus the existing
 native ordinary turn and20x remain unachieved. No baseline replay or profiling.
 
 The final source-stable `.cache/native-typed-public-04` run passes44/44 strict
-recordings:792,838 RNG entries, 11,405 screens/cursors,1,483 animation frames and
+recordings:792,838 RNG entries,11,405 screens/cursors,1,483 animation frames and
 ordered cursor triples, all56 persistence segments and zero forbidden capability
 attempts. All772 scoring inputs are unchanged during the run; frozen/session
 bytes are unchanged. Engine time is374.62943s versus saved best377.40465s
@@ -2303,8 +2305,8 @@ shared hero/monster/map identities stay native. Directed tests cover two-way
 cross-provider reads, alternating writers, rejected normalization and exceptional
 boundaries. Prior44/44 receipts establish only their finite recordings and do
 not cover this later-discovered defect. Final component/world/public checks and
-timing for the alias correction are now complete. All 44 strict public metrics
-pass:792,838 RNG calls,11,405 screens/cursors and 1,483 animation screens/cursor
+timing for the alias correction are now complete. All44 strict public metrics
+pass:792,838 RNG calls,11,405 screens/cursors and1,483 animation screens/cursor
 triples; all56 persistence segments and zero forbidden attempts. All770 scoring
 inputs remain unchanged. MON14,737, MONMOVE5,550, HACK4,338 checks/426 cases and
 VISION27,128 independent-C comparisons pass after the storage-key correction.
@@ -2369,7 +2371,7 @@ no timing improvement is claimed from it. After repair, three affected full
 recordings pass (including save/restore), the original-C runtime suite passes
 1,294 comparisons plus6,000 ISAAC values/full states, and the final source-stable
 public replay passes **44/44 strict all-metric gates**. All792,838 RNG calls,
-11,405 boundary screens/cursors and 1,483 animation screens/cursor triples match;
+11,405 boundary screens/cursors and1,483 animation screens/cursor triples match;
 all56 segments retain persistence traffic and zero forbidden capability attempts.
 All768 scoring inputs remain unchanged during the replay. Engine time falls
 410.20881s →377.40465s (**8.00% less,1.08692x**), fitted per-input cost
@@ -2473,7 +2475,7 @@ those versions are superseded, not accepted evidence. The first public replay
 also caught formatter callback address metadata lost by a service wrapper;
 metadata is now forwarded lazily and both affected recordings pass with exact
 RNG/screens. The failed replay is retained but not accepted. Final public44 result: **44/44 strict all-metric passes**, with all792,838
-RNG calls,11,405 boundary screens/cursors and 1,483 animation screens/cursors
+RNG calls,11,405 boundary screens/cursors and1,483 animation screens/cursors
 matching, including exact output counts and persistence telemetry. All753
 scoring inputs stayed unchanged. Engine time442.004s →415.238s (6.0556% less,
 1.06446x) against the previously completed pushed-main integration run;
@@ -2607,7 +2609,7 @@ capture output scratch storage (now written through a cached full-heap signed
 view), formatting calls, cursor behavior, markers,
 terminal emulation and serialization are unchanged. Baseline is the already
 saved display-direct replay578.802s, with original f58b27e611.273s also retained.
-All 44 public sessions pass strict parity:792838 RNG calls,11405 screens/cursors,
+All44 public sessions pass strict parity:792838 RNG calls,11405 screens/cursors,
 1483 animation screens/cursor triples and56 segments; all749 runtime input hashes
 remain unchanged. Against the existing display-direct run, replay578.802→523.648s
 (9.53%lower), fitted per-turn35.9727→30.3139ms (15.73%lower), fitted overhead
@@ -2713,7 +2715,7 @@ Merge integration (2026-11-13): combine the measured full-replay transport
 commit29ab502 with main3b6db96, preserving utility byte operations, opt-in
 monster argument-view reuse and the private numeric-index regexp. The capture
 fallback uses that regexp; known fields and fixed NOMUX projections retain the
-measured accessor path. Historical 6.52% timing is specific to29ab502 versus 25ce012,
+measured accessor path. Historical 6.52% timing is specific to29ab502 versus25ce012,
 not this merged runtime. Exact upper source projection now maps all three
 combined files to3b6db96; record-index and monster-view inverses compose afterward.
 Canonical patches and mutation controls remain mandatory. The upstream proxy
@@ -3215,7 +3217,7 @@ Public-recorder performance baseline (2026-11-12): all44 strict recordings pass 
 
 Development audit follow-up (2026-11-12): the JS/Python historical readers apply the existing exact per-file migration qualification to non-relocated migrated inputs. MONMOVE and window-header synthetic fixtures also copy the existing migration helper imported by the audit reader. These are development-only changes; historical pins remain immutable, unknown source bytes still fail qualification, and game behavior is unchanged. Verification passes: 371 current runtime hashes, exact helper/provenance reproduction, 30 MONMOVE and 32 window-header synthetic/API checks, and 77 layered allocation checks. Earlier missing-helper and historical-libc audit failures were development-check defects, corrected here.
 
-SOUNDS predicate integration follow-up (2026-11-12): game-windows.js now translates the binding's six source-predicate indices into stable typed boolean(monster*) callbacks through the existing function table, invoking the original predicates in the same SOUNDS owner. Natural Minetown ambience previously passed index4 as if it were a callback pointer and failed at turn261. No source predicate, MON iterator or callback compatibility check is changed. Three fresh original-C/JS literal-key comparisons pass 54 checks, including positive temple ambience, complete live world graphs, 1,338 ordinary turns and exact final score files. The profiled normal-entry public gate passes44/44 strict:792,838 RNG calls,11,405 screens/cursors and 1,483 animation screens/cursor triples,56 segments/11,349 keys, zero forbidden attempts/errors/pending frames. All744 pre-run inputs remain unchanged and equal current main. Node24.19.0 CPU sampling at1ms, replay timeout0; this is not acceptance of the original45-second deadline. Policies/frozen files unchanged by this fix.
+SOUNDS predicate integration follow-up (2026-11-12): game-windows.js now translates the binding's six source-predicate indices into stable typed boolean(monster*) callbacks through the existing function table, invoking the original predicates in the same SOUNDS owner. Natural Minetown ambience previously passed index4 as if it were a callback pointer and failed at turn261. No source predicate, MON iterator or callback compatibility check is changed. Three fresh original-C/JS literal-key comparisons pass 54 checks, including positive temple ambience, complete live world graphs, 1,338 ordinary turns and exact final score files. The profiled normal-entry public gate passes44/44 strict:792,838 RNG calls,11,405 screens/cursors and1,483 animation screens/cursor triples,56 segments/11,349 keys, zero forbidden attempts/errors/pending frames. All744 pre-run inputs remain unchanged and equal current main. Node24.19.0 CPU sampling at1ms, replay timeout0; this is not acceptance of the original45-second deadline. Policies/frozen files unchanged by this fix.
 
 Ordinary progression author follow-up (2026-11-12): new author-standalone-ordinary-progression.mjs extends the read-only original-C route author with ordinary adjacent combat, resting for HP recovery, starting food selection and peaceful-monster/boulder avoidance. Output remains literal keyboard replay; no setup calls or game/RNG/input-depth writes. Seed3 reaches six Mines levels, gains experience level6 and then dies while fainted from hunger after 1,703 keys. That route matches original C through final recordings and score files. This is deeper ordinary progression, not a natural victory or full Mines completion. No production changes.
 
@@ -3236,7 +3238,7 @@ retains137 policies, only approved VISION,3 frozen files,580 production files an
 dependencies;354 runtime source hashes and extraction/historical guards pass.
 
 The final public round13 passes44/44 strict with timeout0:792,838 RNG calls,
-11,405 screens/cursors and 1,483 animation screens/cursor triples,56 segments and
+11,405 screens/cursors and1,483 animation screens/cursor triples,56 segments and
 11,349 keys,56 storage gets/sets. All743 pre-run scored inputs remain unchanged.
 All30 integration jobs are verified on the same sources/assets: the first
 invocation passed29 before ENOSPC stopped final wizard-victory evidence writing;
@@ -3318,7 +3320,7 @@ read-only original rule counts prove0→1→0 effects. No source setup, raw game
 input-depth writes, translated-policy or frozen changes.
 
 The final snapshot passes44/44 strict public recordings through normal jsmain
-with timeout0:792,838 RNG calls,11,405 screens/cursors and 1,483 animation screens
+with timeout0:792,838 RNG calls,11,405 screens/cursors and1,483 animation screens
 and cursor triples. All743 scored inputs remain unchanged;56 segments consume
 11,349 keys with56 storage gets and sets. Exact three-file qualification,
 32 new adversarial/API checks and the preserved older cohorts pass alongside
@@ -3331,7 +3333,7 @@ and natural ordinary full-game victory remain unverified.
 MONMOVE header-helper integration (2026-11-12): the new candidate passes44/44
 strict public recordings through the normal pure-JS entry with the launcher's
 zero session-timeout default. All743 pre-run inputs are byte-identical afterward;
-792,838 RNG calls,11,405 screens/cursors and 1,483 animation screens/cursor triples
+792,838 RNG calls,11,405 screens/cursors and1,483 animation screens/cursor triples
 match. Shared storage spans all56 segments. See monmove-public-recorder-validation.json.
 
 monster-movement.js now supplies three missing original header helpers from the
@@ -3490,7 +3492,7 @@ runner and its45-second default are unchanged. No C/SDK build, Wasm artifact or
 asset cache is needed for scoring; tracked game assets/layouts are used.
 
 The clean proposed entry, without a jsmain staging overlay, passes44/44 official
-and44/44 supplemental strict checks:792,838 RNG entries, 11,405 screens/cursors,
+and44/44 supplemental strict checks:792,838 RNG entries,11,405 screens/cursors,
 1,483 animation screens/cursors,56 segments and11,349 consumed keys. All742
 pre-run file hashes are unchanged afterward, with zero errors, forbidden
 capability attempts or pending animations. Storage reads/writes are observed
@@ -5002,7 +5004,7 @@ Private Lua proofs and selected artifact proofs remain separate in DEP03 below.
 
 **Historical81 provenance:**81-TU actual root build passes417declared hashes and563unchanged captured files before/after integration and all44 public recordings. Evidence `.cache/tu81-door-fixed-gate-snapshot/acceptance.json` binds full manifest SHA256c1244d85b3b0d0b582f57e8a30cc2a5420893b0a4982e851ce3271dd091442ed and runtime identities, because JS-only fixes leave the compiled Wasm hash unchanged. Earlier77/75/70/67v3 checkpoints and failed81 bundle remain preserved. Original timeouts and frozen comparator are unchanged.
 
-**Historical81 migration checkpoint:**81 accepted TUs (twenty-eight new EmC-first-pass ports). Integration/all44 public sessions pass792,838 RNG calls,11,405 screens/cells/cursors and 1,483 animation frames exactly. New28nativeparitypending;53-suite nativeproof below covers earlierbaselineonly. New ENGRAVE/GLYPHS/TOPTEN/DOGMOVE use actual JS imports with all81 original objects excluded; private aliases and C Lua interpreter symbols are absent. DOGMOVE central wiring and doormask field alias are corrected; the measured ENGRAVE wrapper cache is applied. The earlier43/44 seed0014 failure remains at `.cache/tu81-active-gate-snapshot/failure.json`; a closed-door regression rejects the old adapter. Sourcepolicy staysJS; typed C memory/call bridges remain temporary. Nine authors continue on disjoint unregistered files.
+**Historical81 migration checkpoint:**81 accepted TUs (twenty-eight new EmC-first-pass ports). Integration/all44 public sessions pass792,838 RNG calls,11,405 screens/cells/cursors and1,483 animation frames exactly. New28nativeparitypending;53-suite nativeproof below covers earlierbaselineonly. New ENGRAVE/GLYPHS/TOPTEN/DOGMOVE use actual JS imports with all81 original objects excluded; private aliases and C Lua interpreter symbols are absent. DOGMOVE central wiring and doormask field alias are corrected; the measured ENGRAVE wrapper cache is applied. The earlier43/44 seed0014 failure remains at `.cache/tu81-active-gate-snapshot/failure.json`; a closed-door regression rejects the old adapter. Sourcepolicy staysJS; typed C memory/call bridges remain temporary. Nine authors continue on disjoint unregistered files.
 
 **Historical87 pre-acceptance staging:**the registry and shared adapters then selected87 TUs, adding
 WINDOWS/CFGFILES/RESTORE/NHLOBJ/DO_NAME/VISION. All six shared comparisons pass
@@ -6149,7 +6151,7 @@ J34 first unit gate: 12,423 original-C/hybrid comparisons pass, covering the ent
 
 J34 memory-order review: the `*in_rooms(...)` expression now uses the outside-TU loadChar helper so the native call completes before acquiring a fresh heap view. JavaScript's computed-index evaluation otherwise captures HEAP8 before the callback and could retain detached memory after growth. Other direct heap indices in this TU use pure pointer reads without native allocation callbacks. A focused callback-growth fixture is being added. Native command tokens now retain uintptr BigInt end to end, global access preserves cg constness, and the duplicate plur bridge was removed. The game builds with iactions.o excluded and only itemactions as the active TU import; all four private test imports are absent. Initial mixed Wasm SHA-256 is `1ec6c92861135781c1680ae6966c069782cb62121083fca79a7639c28848f265`; final source-manifest/full gates pending the reviewed dereference change.
 
-J34 completed verification: full integration passes 12,451 iactions comparisons, including actual growth inside native in_rooms followed by signed -128 room lookup and the Buy row, nested menu callbacks, and later heap growth. All 44 public sessions match 11,405 screens/cursors, 792,838 RNG calls and 1,483 animation frames with no errors. The game excludes iactions.o and all four private test imports; itemactions is the sole live Wasm import for this TU, with the other four functions called directly within JS. Final source manifest matches current core JS; Wasm SHA-256 `1ec6c92861135781c1680ae6966c069782cb62121083fca79a7639c28848f265`. Logs: `.cache/build-wasm-iactions-final.log`, `.cache/test-wasm-iactions.log`, `.cache/iactions-public.stdout.txt` (machine-readable results), `.cache/iactions-public.stderr.txt` (summary). Controlled dependency/inactive/OOM/assertion limits above remain. Frozen harness, recordings, inherited patches and upstream sources remain unchanged.
+J34 completed verification: full integration passes 12,451 iactions comparisons, including actual growth inside native in_rooms followed by signed -128 room lookup and the Buy row, nested menu callbacks, and later heap growth. All44 public sessions match 11,405 screens/cursors, 792,838 RNG calls and 1,483 animation frames with no errors. The game excludes iactions.o and all four private test imports; itemactions is the sole live Wasm import for this TU, with the other four functions called directly within JS. Final source manifest matches current core JS; Wasm SHA-256 `1ec6c92861135781c1680ae6966c069782cb62121083fca79a7639c28848f265`. Logs: `.cache/build-wasm-iactions-final.log`, `.cache/test-wasm-iactions.log`, `.cache/iactions-public.stdout.txt` (machine-readable results), `.cache/iactions-public.stderr.txt` (summary). Controlled dependency/inactive/OOM/assertion limits above remain. Frozen harness, recordings, inherited patches and upstream sources remain unchanged.
 
 ### Deferred proposal — dlb.c data-library translation (inactive in configured game)
 
@@ -6243,7 +6245,7 @@ J38 fixture limits: area point generation and monster iteration are controlled t
 
 J38 mixed-link gate: actual game excludes fountain.o and all six private test imports; all ten public entry points and the two required traversal callback imports are live. Current core source hash matches the manifest. Wasm SHA-256 `2d693994c676e6beb7aad9395b04b4159e34b34c0dbe24c8bf2c885581449b69`. Full integration and public sessions are running.
 
-J38 completed verification: full integration reruns all6,766 comparisons and all32 source/lexical checks successfully; all44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animation frames without errors. Ten public imports plus two live callback imports, original-object/private-test exclusions and current core hash verified. Logs: `.cache/build-wasm-fountain.log`, `.cache/test-wasm-fountain.log`, `.cache/fountain-public.stdout.txt`, `.cache/fountain-public.stderr.txt`. Wasm SHA-256 `2d693994c676e6beb7aad9395b04b4159e34b34c0dbe24c8bf2c885581449b69`. Fixture/deallocation/configuration limits above remain. Frozen harness, recordings, inherited patches and pristine upstream unchanged.
+J38 completed verification: full integration reruns all6,766 comparisons and all32 source/lexical checks successfully; all44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animation frames without errors. Ten public imports plus two live callback imports, original-object/private-test exclusions and current core hash verified. Logs: `.cache/build-wasm-fountain.log`, `.cache/test-wasm-fountain.log`, `.cache/fountain-public.stdout.txt`, `.cache/fountain-public.stderr.txt`. Wasm SHA-256 `2d693994c676e6beb7aad9395b04b4159e34b34c0dbe24c8bf2c885581449b69`. Fixture/deallocation/configuration limits above remain. Frozen harness, recordings, inherited patches and pristine upstream unchanged.
 
 ### J39 — objects.c object catalogue data and initialization (validated)
 
@@ -6263,9 +6265,9 @@ J39 unit gate: all16,882 original-C/hybrid comparisons pass over482 rows (481 ob
 
 J39 scope/limits: tests exhaust the catalogue in the unchanged current configuration and pinned compiler ABI, including static-initializer padding. They do not establish other feature configurations. Cross-module pointer addresses are normalized, while per-module pointer restoration and alias relationships are checked exactly. Source preprocessing retains original row IDs/comments and symbolic enum expressions; the limited projection parser fails on a changed final OBJECT macro or an unhandled division form. No executable oracle or serialized native memory is used to generate the authoritative JS records.
 
-J39 mixed/public gate: actual game excludes objects.o and uses the single objects_globals_init Wasm→JS import. Core and separate authoritative data hashes match the manifest; data SHA-256 `77b0fb752b7cf40547e034f77189b82f913f13da719d7e547a65eb1465dfb6f0`, Wasm SHA-256 `85dbc7188a7a895945c43c6512f76e433906eb9136d42e855f352a2552651671`. All 44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animation frames without errors. Full integration remains running.
+J39 mixed/public gate: actual game excludes objects.o and uses the single objects_globals_init Wasm→JS import. Core and separate authoritative data hashes match the manifest; data SHA-256 `77b0fb752b7cf40547e034f77189b82f913f13da719d7e547a65eb1465dfb6f0`, Wasm SHA-256 `85dbc7188a7a895945c43c6512f76e433906eb9136d42e855f352a2552651671`. All44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animation frames without errors. Full integration remains running.
 
-J39 completed verification: full integration reruns all16,882 catalogue comparisons, all33 source/lexical checks and source-projection reproducibility successfully; all44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animation frames without errors. objects.o exclusion, single live initializer import and core/data hashes verified. Logs: `.cache/build-wasm-objects.log`, `.cache/test-wasm-objects.log`, `.cache/objects-public.stdout.txt`, `.cache/objects-public.stderr.txt`. Wasm SHA-256 `85dbc7188a7a895945c43c6512f76e433906eb9136d42e855f352a2552651671`. Configuration/parser/pointer limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
+J39 completed verification: full integration reruns all16,882 catalogue comparisons, all33 source/lexical checks and source-projection reproducibility successfully; all44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animation frames without errors. objects.o exclusion, single live initializer import and core/data hashes verified. Logs: `.cache/build-wasm-objects.log`, `.cache/test-wasm-objects.log`, `.cache/objects-public.stdout.txt`, `.cache/objects-public.stderr.txt`. Wasm SHA-256 `85dbc7188a7a895945c43c6512f76e433906eb9136d42e855f352a2552651671`. Configuration/parser/pointer limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
 
 ### J40 — monst.c monster catalogue and static attacks (validated)
 
@@ -6281,7 +6283,7 @@ J40 unit gate: all17,683 original-C/hybrid comparisons pass on first behavioral 
 
 J40 mixed-link gate: actual game excludes monst.o and uses its single monst_globals_init Wasm→JS import; startup retains private source/constant attack availability while the function remains the original copy+return. Current core and separate data hashes match the build manifest. Data SHA-256 `ebc870fe73ae7bf7428b5a1b7fa44b68d41010fafbc97f82fc2d8a07bb072666`; Wasm SHA-256 `228e6aa0bfd741ba78b0dbac565901da3e673a04d58db03446799526d8fc515c`. Full integration/public gates are running.
 
-J40 completed verification: full integration reruns all17,683 comparisons, all34 source/lexical checks and both data projections successfully; all44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Original-object exclusion, sole initializer import and core/data hashes verified. Logs: `.cache/build-wasm-monst.log`, `.cache/test-wasm-monst.log`, `.cache/monst-public.stdout.txt`, `.cache/monst-public.stderr.txt`. Wasm SHA-256 `228e6aa0bfd741ba78b0dbac565901da3e673a04d58db03446799526d8fc515c`. Startup/configuration/pointer limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
+J40 completed verification: full integration reruns all17,683 comparisons, all34 source/lexical checks and both data projections successfully; all44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Original-object exclusion, sole initializer import and core/data hashes verified. Logs: `.cache/build-wasm-monst.log`, `.cache/test-wasm-monst.log`, `.cache/monst-public.stdout.txt`, `.cache/monst-public.stderr.txt`. Wasm SHA-256 `228e6aa0bfd741ba78b0dbac565901da3e673a04d58db03446799526d8fc515c`. Startup/configuration/pointer limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
 
 ### J41 — shknam.c shops, stocking and shopkeeper names (validated)
 
@@ -6301,7 +6303,7 @@ J41 completed unit coverage now23,507 comparisons after adding reallocation with
 
 J41 mixed-link gate: actual game excludes shknam.o and all eight private test imports, with eight public imports live (shkname,Shknam,shkname_is_pname,neweshk,get_shop_item,saleable,is_izchak,stock_room). free_eshk retains its original JS function and actual-free unit coverage but has no live caller in this configured game, so it is not forced into the link. Core hash matches manifest. Wasm SHA-256 `08396515ad75f45bb7a9eb1cdc521a522b8eaaa350dc5e76e387b06b3f2b4e6f`. Full integration/public gates running.
 
-J41 completed verification: full integration reruns all23,507 comparisons, all35 source/lexical checks and both catalogue projections successfully. All 44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Eight live public imports, original/private-test exclusions and current core hash verified. Logs: `.cache/build-wasm-shknam.log`, `.cache/test-wasm-shknam.log`, `.cache/shknam-public.stdout.txt`, `.cache/shknam-public.stderr.txt`; Wasm SHA-256 `08396515ad75f45bb7a9eb1cdc521a522b8eaaa350dc5e76e387b06b3f2b4e6f`. Native effect/assert/configuration limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
+J41 completed verification: full integration reruns all23,507 comparisons, all35 source/lexical checks and both catalogue projections successfully. All44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Eight live public imports, original/private-test exclusions and current core hash verified. Logs: `.cache/build-wasm-shknam.log`, `.cache/test-wasm-shknam.log`, `.cache/shknam-public.stdout.txt`, `.cache/shknam-public.stderr.txt`; Wasm SHA-256 `08396515ad75f45bb7a9eb1cdc521a522b8eaaa350dc5e76e387b06b3f2b4e6f`. Native effect/assert/configuration limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
 
 ### J42 — rumors.c rumor/oracle selection and capitalized-name cache (in progress)
 
@@ -6319,7 +6321,7 @@ J42 unit gate: all2,178 original-C/hybrid comparisons pass using real native fil
 
 J42 mixed-link gate: actual game excludes rumors.o and all nine private probe imports (seven original private entry points plus two cache getters). Nine public APIs are live Wasm imports: getrumor,get_rnd_text,outrumor,restore_oracles,save_oracles,free_CapMons,doconsult,rumor_check,CapitalMon. outoracle remains its original JS function exercised in probes/direct JS dependencies but has no separate native game import in this configuration. Current core hash matches the manifest; Wasm SHA-256 `5f1d6178dc7752c6dc9218ca06c9ae468eab48a0bafd50895144cc7d973432f8`. Full integration/public gates running. Synthetic encoded unit files do not prove real save framing or enormous ranges; actual gameplay dependencies remain native in the mixed game.
 
-J42 completed verification: full integration reruns all2,178 comparisons and all36 source/lexical checks successfully, with both catalogue projection checks and existing terminal/platform/save/codec tests. All 44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Nine live public imports, original/private-test exclusion and current core hash verified. Logs: `.cache/build-wasm-rumors.log`, `.cache/test-wasm-rumors.log`, `.cache/rumors-public.stdout.txt`, `.cache/rumors-public.stderr.txt`; Wasm SHA-256 `5f1d6178dc7752c6dc9218ca06c9ae468eab48a0bafd50895144cc7d973432f8`. Unit controlled-dependency/configuration/invalid-input limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
+J42 completed verification: full integration reruns all2,178 comparisons and all36 source/lexical checks successfully, with both catalogue projection checks and existing terminal/platform/save/codec tests. All44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Nine live public imports, original/private-test exclusion and current core hash verified. Logs: `.cache/build-wasm-rumors.log`, `.cache/test-wasm-rumors.log`, `.cache/rumors-public.stdout.txt`, `.cache/rumors-public.stderr.txt`; Wasm SHA-256 `5f1d6178dc7752c6dc9218ca06c9ae468eab48a0bafd50895144cc7d973432f8`. Unit controlled-dependency/configuration/invalid-input limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
 
 ### J43 — music.c instruments, monster responses and earthquakes (in progress)
 
@@ -6347,7 +6349,7 @@ J43 limits: current SND_LIB_INTEGRATED=0 means sound/playnotes macros evaluate n
 
 J43 final unit/mixed gate: a focused public successful-play return check brings the unit total to5,687 comparisons. Actual game excludes music.o and all11 private test imports, with do_play_instrument and awaken_soldiers as its two live public JS imports. obj_to_instr remains implemented/tested but has no live native caller under disabled sound macros, so it is not forced into the link. Current core hash matches the manifest; Wasm SHA-256 `b1f71248678cc78ba04ae3075216fff4bdda5641433baa82b30531a595e7167c`. Full integration/public gates running.
 
-J43 completed verification: full integration reruns all5,687 comparisons, all37 source/lexical checks, catalogue projection reproducibility and existing terminal/platform/save/codec tests successfully. All 44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Two live imports, original/private-test exclusion and current core hash verified. Logs: `.cache/build-wasm-music.log`, `.cache/test-wasm-music.log`, `.cache/music-public.stdout.txt`, `.cache/music-public.stderr.txt`; Wasm SHA-256 `b1f71248678cc78ba04ae3075216fff4bdda5641433baa82b30531a595e7167c`. Configured audio/control-dependency/invalid-input limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
+J43 completed verification: full integration reruns all5,687 comparisons, all37 source/lexical checks, catalogue projection reproducibility and existing terminal/platform/save/codec tests successfully. All44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Two live imports, original/private-test exclusion and current core hash verified. Logs: `.cache/build-wasm-music.log`, `.cache/test-wasm-music.log`, `.cache/music-public.stdout.txt`, `.cache/music-public.stderr.txt`; Wasm SHA-256 `b1f71248678cc78ba04ae3075216fff4bdda5641433baa82b30531a595e7167c`. Configured audio/control-dependency/invalid-input limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
 
 ### J44 — version.c version strings and save compatibility (in progress)
 
@@ -6379,9 +6381,9 @@ J44 mixed/bridge gate: game now excludes version.o and its private insert probe 
 
 J44 real clipboard integration: new local scripts/test-version-bridge.mjs runs the actual game's --version:copy and --version:show command paths in fresh modules, asserting printed text equals module clipboard for copy and no clipboard for show, with no stderr. This explicitly exercises C→ported JS→native forwarding→existing EM_JS, beyond the controlled unit fixture. The local full runner includes it; frozen harness/recordings are unchanged. No host clipboard is accessed. Full integration/public gates pending.
 
-J44 public gate: all44 sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors on mixed Wasm `bcd21439c9bbfb0cc707e5b7fbe403ae6aaa5c5c6b8c913055b2a1ede77fbada`. Full integration, including new real clipboard command test and revalidation after forwarding changes, remains running. Logs: `.cache/build-wasm-version.log`, `.cache/test-wasm-version.log`, `.cache/version-public.stdout.txt`, `.cache/version-public.stderr.txt`.
+J44 public gate: all44 sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors on mixed Wasm `bcd21439c9bbfb0cc707e5b7fbe403ae6aaa5c5c6b8c913055b2a1ede77fbada`. Full integration, including new real clipboard command test and revalidation after forwarding changes, remains running. Logs: `.cache/build-wasm-version.log`, `.cache/test-wasm-version.log`, `.cache/version-public.stdout.txt`, `.cache/version-public.stderr.txt`.
 
-J44 completed verification: full integration reruns all6,513 comparisons, all38 source/lexical checks, catalogue projection reproducibility and existing terminal/platform/save/codec tests successfully, plus the actual-game clipboard copy/show test. All 44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Twelve live imports, original/private-test exclusion and current core hash verified. Logs: `.cache/build-wasm-version.log`, `.cache/test-wasm-version.log`, `.cache/version-public.stdout.txt`, `.cache/version-public.stderr.txt`; Wasm SHA-256 `bcd21439c9bbfb0cc707e5b7fbe403ae6aaa5c5c6b8c913055b2a1ede77fbada`. Configuration/controlled model/serialization/invalid-input limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
+J44 completed verification: full integration reruns all6,513 comparisons, all38 source/lexical checks, catalogue projection reproducibility and existing terminal/platform/save/codec tests successfully, plus the actual-game clipboard copy/show test. All44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Twelve live imports, original/private-test exclusion and current core hash verified. Logs: `.cache/build-wasm-version.log`, `.cache/test-wasm-version.log`, `.cache/version-public.stdout.txt`, `.cache/version-public.stderr.txt`; Wasm SHA-256 `bcd21439c9bbfb0cc707e5b7fbe403ae6aaa5c5c6b8c913055b2a1ede77fbada`. Configuration/controlled model/serialization/invalid-input limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
 
 ### J45 — coloratt.c color parsing, attributes and palettes (in progress)
 
@@ -6407,9 +6409,9 @@ J45 final unit coverage/limits:7,753 comparisons exercise all24 functions and ev
 
 J45 mixed-link gate: actual game excludes coloratt.o and uses18 live public JS imports: clr2colorname,match_str2attr,match_str2clr,query_color,query_attr,add_menu_coloring,rgbstr_to_int32,set_map_customcolor,count_menucolors,attr2attrname,color_attr_parse_str,color_attr_to_str,query_color_attr,add_menu_coloring_parsed,free_one_menu_coloring,check_enhanced_colors,wc_color_name,free_menu_coloring. All24 original functions are implemented/unit-tested; unused/direct-JS dependencies are not forced into the link. Core hash matches manifest. Wasm SHA-256 `c93f24d1790a50a83726776cc6ae33684dcfa928e64ab6ff19cde4ed3cf2a4c6`. Full integration/public gates running.
 
-J45 public gate: all44 sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors on mixed Wasm `c93f24d1790a50a83726776cc6ae33684dcfa928e64ab6ff19cde4ed3cf2a4c6`. Full integration remains running. Frozen harness, recordings, inherited patches and pristine upstream checks remain clean. Logs: `.cache/build-wasm-coloratt.log`, `.cache/test-wasm-coloratt.log`, `.cache/coloratt-public.stdout.txt`, `.cache/coloratt-public.stderr.txt`.
+J45 public gate: all44 sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors on mixed Wasm `c93f24d1790a50a83726776cc6ae33684dcfa928e64ab6ff19cde4ed3cf2a4c6`. Full integration remains running. Frozen harness, recordings, inherited patches and pristine upstream checks remain clean. Logs: `.cache/build-wasm-coloratt.log`, `.cache/test-wasm-coloratt.log`, `.cache/coloratt-public.stdout.txt`, `.cache/coloratt-public.stderr.txt`.
 
-J45 completed verification: full integration reruns all7,753 comparisons, all39 source/lexical checks, catalogue projections and existing terminal/platform/save/codec/clipboard-command tests successfully. All 44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Eighteen live imports, original object exclusion and current core hash verified. Logs: `.cache/build-wasm-coloratt.log`, `.cache/test-wasm-coloratt.log`, `.cache/coloratt-public.stdout.txt`, `.cache/coloratt-public.stderr.txt`; Wasm SHA-256 `c93f24d1790a50a83726776cc6ae33684dcfa928e64ab6ff19cde4ed3cf2a4c6`. POSIX/configuration/invalid-input limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
+J45 completed verification: full integration reruns all7,753 comparisons, all39 source/lexical checks, catalogue projections and existing terminal/platform/save/codec/clipboard-command tests successfully. All44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Eighteen live imports, original object exclusion and current core hash verified. Logs: `.cache/build-wasm-coloratt.log`, `.cache/test-wasm-coloratt.log`, `.cache/coloratt-public.stdout.txt`, `.cache/coloratt-public.stderr.txt`; Wasm SHA-256 `c93f24d1790a50a83726776cc6ae33684dcfa928e64ab6ff19cde4ed3cf2a4c6`. POSIX/configuration/invalid-input limits above remain; frozen harness, recordings, inherited patches and pristine upstream unchanged.
 
 ### J46 — priest.c temples, priest movement and donations (in progress)
 
@@ -6435,9 +6437,9 @@ J46 expanded differential gate: final coverage audit found initially untested pa
 
 J46 mixed-link gate: actual game excludes priest.o and uses20 public JS imports, all public functions except free_epri (still implemented and tested, not forced into the game link). Both private priest test imports are absent. Core source hash matches manifest; Wasm SHA-256 `5ae06c4515817245c8770942f28e5d605fe68846a17008e35ecaab6240c7c10b`. Full integration and public gates are running. Logs: `.cache/build-wasm-priest.log`, `.cache/test-wasm-priest.log`, `.cache/priest-public.stdout.txt`, `.cache/priest-public.stderr.txt`.
 
-J46 public gate: all44 sessions pass with11,405 matching screens/cursors,792,838 matching RNG calls and 1,483 matching animation frames, without errors. Every reported matched/total metric is equal. Full integration remains running; TU40 remains in progress until that gate completes. Frozen harness, inherited patches and pristine upstream checks remain clean.
+J46 public gate: all44 sessions pass with11,405 matching screens/cursors,792,838 matching RNG calls and1,483 matching animation frames, without errors. Every reported matched/total metric is equal. Full integration remains running; TU40 remains in progress until that gate completes. Frozen harness, inherited patches and pristine upstream checks remain clean.
 
-J46 completed verification: full integration passes all40 registered source/lexical checks, all9,358 priest comparisons, earlier TU tests and existing terminal/platform/save/codec/clipboard-command checks. All 44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Actual game excludes priest.o, uses20 live priest imports and excludes its two private test entry points; manifest core and Wasm hashes verified. Wasm SHA-256 `5ae06c4515817245c8770942f28e5d605fe68846a17008e35ecaab6240c7c10b`. Logs: `.cache/build-wasm-priest.log`, `.cache/test-wasm-priest.log`, `.cache/priest-public.stdout.txt`, `.cache/priest-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
+J46 completed verification: full integration passes all40 registered source/lexical checks, all9,358 priest comparisons, earlier TU tests and existing terminal/platform/save/codec/clipboard-command checks. All44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Actual game excludes priest.o, uses20 live priest imports and excludes its two private test entry points; manifest core and Wasm hashes verified. Wasm SHA-256 `5ae06c4515817245c8770942f28e5d605fe68846a17008e35ecaab6240c7c10b`. Logs: `.cache/build-wasm-priest.log`, `.cache/test-wasm-priest.log`, `.cache/priest-public.stdout.txt`, `.cache/priest-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
 
 ### J47 — light.c mobile light sources, maps and persistence (in progress)
 
@@ -6459,9 +6461,9 @@ J47 unit coverage/limits: all29 functions execute across zeroing/full8-byte IDs/
 
 J47 mixed-link gate: actual game excludes light.o, uses22 live public light JS imports and excludes all six private test imports. All29 functions remain implemented and unit-tested; public obj_move_light_source is not forced into the game link when unused. Manifest core hash matches source; Wasm SHA-256 `a9cd9e50e767a6346b03970bee678a6cd7637d3044fa7de115bd38ef82ecf526`. Full integration/public gates are running. Logs: `.cache/build-wasm-light.log`, `.cache/test-wasm-light.log`, `.cache/light-public.stdout.txt`, `.cache/light-public.stderr.txt`.
 
-J47 public gate: all44 sessions pass with11,405 matching screens/cursors,792,838 matching RNG calls and 1,483 matching animation frames, without errors; every reported matched/total metric is equal. Frozen harness, inherited patches and pristine upstream checks remain clean. Full integration remains running; TU41 stays in progress until it completes.
+J47 public gate: all44 sessions pass with11,405 matching screens/cursors,792,838 matching RNG calls and1,483 matching animation frames, without errors; every reported matched/total metric is equal. Frozen harness, inherited patches and pristine upstream checks remain clean. Full integration remains running; TU41 stays in progress until it completes.
 
-J47 completed verification: full integration passes all41 registered source/lexical checks, all2,576 light comparisons, prior TU tests and existing terminal/platform/save/codec/clipboard-command checks. All 44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Actual game excludes light.o and all six private test imports, with22 live public light imports; core and Wasm manifest hashes verified. Wasm SHA-256 `a9cd9e50e767a6346b03970bee678a6cd7637d3044fa7de115bd38ef82ecf526`. Logs: `.cache/build-wasm-light.log`, `.cache/test-wasm-light.log`, `.cache/light-public.stdout.txt`, `.cache/light-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
+J47 completed verification: full integration passes all41 registered source/lexical checks, all2,576 light comparisons, prior TU tests and existing terminal/platform/save/codec/clipboard-command checks. All44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Actual game excludes light.o and all six private test imports, with22 live public light imports; core and Wasm manifest hashes verified. Wasm SHA-256 `a9cd9e50e767a6346b03970bee678a6cd7637d3044fa7de115bd38ef82ecf526`. Logs: `.cache/build-wasm-light.log`, `.cache/test-wasm-light.log`, `.cache/light-public.stdout.txt`, `.cache/light-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
 
 ### J48 — lock.c locks, doors and occupation callbacks (in progress)
 
@@ -6527,9 +6529,9 @@ J50 final differential/limits: 4,800 comparisons pass after the three focused co
 
 J50 mixed-link gate: actual game excludes wizard.o, uses all14 public wizard JS imports and excludes all seven private test imports. Core and Wasm manifest hashes match actual files; Wasm SHA-256 `5290f83ca72e16a53399fd86b63dd458e500095b57117b6ac59d06c7fbaa64d9`. Build log has no compiler errors; existing dynamic-format warnings and Emscripten debug-info optimization notice remain. Full integration and public recordings are running. Logs: `.cache/build-wasm-wizard.log`, `.cache/test-wasm-wizard.log`, `.cache/wizard-public.stdout.txt`, `.cache/wizard-public.stderr.txt`. TU44 remains in progress until both gates pass.
 
-J50 public gate: all44 sessions pass without errors, with11,405 screens/cursors/cells-only frames,792,838 RNG calls and 1,483 animation frames matching exactly; every matched/total metric is equal. Frozen harness, inherited patches and pristine upstream remain unchanged. Full integration remains running; TU44 stays in progress until it completes.
+J50 public gate: all44 sessions pass without errors, with11,405 screens/cursors/cells-only frames,792,838 RNG calls and1,483 animation frames matching exactly; every matched/total metric is equal. Frozen harness, inherited patches and pristine upstream remain unchanged. Full integration remains running; TU44 stays in progress until it completes.
 
-J50 completed verification: full integration passes all44 source/lexical checks, all4,800 wizard comparisons, prior TU tests and existing terminal/platform/save/codec/clipboard-command checks. All 44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Actual game excludes wizard.o and all seven private aliases, with14 public imports; core/Wasm manifest hashes verified. Wasm SHA-256 `5290f83ca72e16a53399fd86b63dd458e500095b57117b6ac59d06c7fbaa64d9`. Logs: `.cache/build-wasm-wizard.log`, `.cache/test-wasm-wizard.log`, `.cache/wizard-public.stdout.txt`, `.cache/wizard-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
+J50 completed verification: full integration passes all44 source/lexical checks, all4,800 wizard comparisons, prior TU tests and existing terminal/platform/save/codec/clipboard-command checks. All44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Actual game excludes wizard.o and all seven private aliases, with14 public imports; core/Wasm manifest hashes verified. Wasm SHA-256 `5290f83ca72e16a53399fd86b63dd458e500095b57117b6ac59d06c7fbaa64d9`. Logs: `.cache/build-wasm-wizard.log`, `.cache/test-wasm-wizard.log`, `.cache/wizard-public.stdout.txt`, `.cache/wizard-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
 
 ### J51 — worm.c segment lists, movement, cutting and serialization (completed)
 
@@ -6553,9 +6555,9 @@ J51 final unit coverage/limits: latest direct unit passes2,995 comparisons after
 
 J51 mixed-link gate: actual game excludes worm.o, uses all24 public worm JS imports and excludes the three private algorithm aliases plus three fixture-only state hooks. Core/Wasm manifest hashes match files; Wasm SHA-256 `0fdfb5c02489935b9a1f168f02f4941d44b99b7214d82a7e6909c7aac2d4a3af`. Full integration and public sessions are running against this artifact. Logs: `.cache/build-wasm-worm.log`, `.cache/test-wasm-worm.log`, `.cache/worm-public.stdout.txt`, `.cache/worm-public.stderr.txt`. TU45 remains in progress until both gates pass.
 
-J51 public gate: all44 sessions pass without errors, with11,405 screens/cursors/cells-only frames,792,838 RNG calls and 1,483 animation frames matching exactly; every matched/total metric is equal. Frozen harness, inherited patches and pristine upstream checks remain clean. Full integration remains running; TU45 stays in progress until it completes.
+J51 public gate: all44 sessions pass without errors, with11,405 screens/cursors/cells-only frames,792,838 RNG calls and1,483 animation frames matching exactly; every matched/total metric is equal. Frozen harness, inherited patches and pristine upstream checks remain clean. Full integration remains running; TU45 stays in progress until it completes.
 
-J51 completed verification: full integration passes all45 source/lexical checks, all2,995 worm comparisons, prior TU tests and existing terminal/platform/save/codec/clipboard-command checks. All 44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Actual game excludes worm.o and six private test hooks, with24 public imports; core/Wasm manifest hashes verified. Wasm SHA-256 `0fdfb5c02489935b9a1f168f02f4941d44b99b7214d82a7e6909c7aac2d4a3af`. Logs: `.cache/build-wasm-worm.log`, `.cache/test-wasm-worm.log`, `.cache/worm-public.stdout.txt`, `.cache/worm-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
+J51 completed verification: full integration passes all45 source/lexical checks, all2,995 worm comparisons, prior TU tests and existing terminal/platform/save/codec/clipboard-command checks. All44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Actual game excludes worm.o and six private test hooks, with24 public imports; core/Wasm manifest hashes verified. Wasm SHA-256 `0fdfb5c02489935b9a1f168f02f4941d44b99b7214d82a7e6909c7aac2d4a3af`. Logs: `.cache/build-wasm-worm.log`, `.cache/test-wasm-worm.log`, `.cache/worm-public.stdout.txt`, `.cache/worm-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
 
 ### J52 — o_init.c object probabilities, shuffling, names and discoveries (completed)
 
@@ -6577,9 +6579,9 @@ J52 final unit coverage/limits: latest direct suite passes6,636 comparisons, inc
 
 J52 mixed-link gate: actual game excludes o_init.o, uses15 public o_init JS imports plus the live original-comparator bridge teleport_o_init_compare, and excludes all11 private test aliases. Public interesting_to_discover remains implemented/tested and is called directly from JS, not forced into the C import list. Actual prepared deterministic sorter is retained. Core/Wasm manifest hashes match files; Wasm SHA-256 `678be98dc41e893bf70e84f9e0bf1ad1e1d41b185173a5939b9bea8448d3f2ed`. Full integration and public sessions are running. Logs: `.cache/build-wasm-o_init.log`, `.cache/test-wasm-o_init.log`, `.cache/o_init-public.stdout.txt`, `.cache/o_init-public.stderr.txt`. TU46 remains in progress until both gates pass.
 
-J52 public gate: all44 sessions pass without errors, with11,405 screens/cursors/cells-only frames,792,838 RNG calls and 1,483 animation frames matching exactly; every matched/total metric is equal. Frozen harness, inherited patches and pristine upstream checks remain clean. Full integration remains running; TU46 stays in progress until it completes.
+J52 public gate: all44 sessions pass without errors, with11,405 screens/cursors/cells-only frames,792,838 RNG calls and1,483 animation frames matching exactly; every matched/total metric is equal. Frozen harness, inherited patches and pristine upstream checks remain clean. Full integration remains running; TU46 stays in progress until it completes.
 
-J52 completed verification: full integration passes all46 source/lexical checks, all6,636 o_init comparisons, prior TU tests and existing terminal/platform/save/codec/clipboard-command checks. All 44 public sessions match11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Actual game excludes o_init.o and11 private aliases, with15 public imports plus live comparator bridge; core/Wasm manifest hashes verified. Wasm SHA-256 `678be98dc41e893bf70e84f9e0bf1ad1e1d41b185173a5939b9bea8448d3f2ed`. Logs: `.cache/build-wasm-o_init.log`, `.cache/test-wasm-o_init.log`, `.cache/o_init-public.stdout.txt`, `.cache/o_init-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
+J52 completed verification: full integration passes all46 source/lexical checks, all6,636 o_init comparisons, prior TU tests and existing terminal/platform/save/codec/clipboard-command checks. All44 public sessions match11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Actual game excludes o_init.o and11 private aliases, with15 public imports plus live comparator bridge; core/Wasm manifest hashes verified. Wasm SHA-256 `678be98dc41e893bf70e84f9e0bf1ad1e1d41b185173a5939b9bea8448d3f2ed`. Logs: `.cache/build-wasm-o_init.log`, `.cache/test-wasm-o_init.log`, `.cache/o_init-public.stdout.txt`, `.cache/o_init-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
 
 ### J53 — ball.c ball-and-chain placement, dragging and falls
 
@@ -6603,9 +6605,9 @@ J53 callback limitation: equipment setter callbacks exercise reentry/growth but 
 
 J53 mixed-link gate: actual game imports all12 public ball functions from JS and excludes ball.o and all6 private/state test aliases. Compiler/source/Wasm manifest hashes verified; final Wasm SHA-256 `8a72a657554247674f6f0b129443e337239daf16e8742e63e6ed6eb68431d1a8`, ball core SHA-256 `22ea211af35ee180a290faec481a18158821fb477d7266d882394ebd7d9630bd`. All47 source/comment and lexical checks pass; latest direct suite4,339. Full integration and all44 public recording checks now running. Logs `.cache/build-wasm-ball.log`, `.cache/test-wasm-ball.log`, `.cache/ball-public.stdout.txt`, `.cache/ball-public.stderr.txt`. TU47 remains in progress.
 
-J53 public gate: all44 sessions pass without runtime errors; all11,405 screens/cursors/cells-only frames,792,838 RNG calls and 1,483 animation frames match exactly, with every matched/total field equal. Full integration remains running; TU47 stays in progress until that completes.
+J53 public gate: all44 sessions pass without runtime errors; all11,405 screens/cursors/cells-only frames,792,838 RNG calls and1,483 animation frames match exactly, with every matched/total field equal. Full integration remains running; TU47 stays in progress until that completes.
 
-J53 completed verification: full integration passes all47 source/lexical checks,4,339 ball comparisons, all prior TU suites and existing terminal/platform/save/codec/timezone/macOS/clipboard checks. All 44 public recordings remain exact at11,405 screens/cursors,792,838 RNG calls and 1,483 animations, with no errors. Actual game excludes ball.o/all6 private/state hooks and imports all12 public functions; source/Wasm manifest hashes verified. Wasm SHA-256 `8a72a657554247674f6f0b129443e337239daf16e8742e63e6ed6eb68431d1a8`. Logs `.cache/build-wasm-ball.log`, `.cache/test-wasm-ball.log`, `.cache/ball-public.stdout.txt`, `.cache/ball-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
+J53 completed verification: full integration passes all47 source/lexical checks,4,339 ball comparisons, all prior TU suites and existing terminal/platform/save/codec/timezone/macOS/clipboard checks. All44 public recordings remain exact at11,405 screens/cursors,792,838 RNG calls and1,483 animations, with no errors. Actual game excludes ball.o/all6 private/state hooks and imports all12 public functions; source/Wasm manifest hashes verified. Wasm SHA-256 `8a72a657554247674f6f0b129443e337239daf16e8742e63e6ed6eb68431d1a8`. Logs `.cache/build-wasm-ball.log`, `.cache/test-wasm-ball.log`, `.cache/ball-public.stdout.txt`, `.cache/ball-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
 
 ### J54 — mcastu.c monster spell selection and effects
 
@@ -6629,7 +6631,7 @@ J54 mixed-link gate: actual game excludes mcastu.o and all22 private test aliase
 
 J54 public gate: all44 sessions pass without errors, with every matched/total metric equal:11,405 screens/cursors/cells-only frames,792,838 RNG calls,1,483 animation frames. Full integration remains running, so TU48 stays in progress.
 
-J54 completed verification: full integration passes all48 source/lexical checks,5,406 mcastu comparisons, all prior TU suites and existing terminal/platform/save/codec/timezone/macOS/clipboard checks. All 44 public sessions remain exact at11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Actual game excludes mcastu.o/all22 private aliases and imports all4 public functions; core/Wasm manifest hashes verified. Wasm SHA-256 `dba48b71529fc4f85d74cffe673beba7f99537776c97819fd7671f10a85af833`. Logs `.cache/build-wasm-mcastu.log`, `.cache/test-wasm-mcastu.log`, `.cache/mcastu-public.stdout.txt`, `.cache/mcastu-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
+J54 completed verification: full integration passes all48 source/lexical checks,5,406 mcastu comparisons, all prior TU suites and existing terminal/platform/save/codec/timezone/macOS/clipboard checks. All44 public sessions remain exact at11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Actual game excludes mcastu.o/all22 private aliases and imports all4 public functions; core/Wasm manifest hashes verified. Wasm SHA-256 `dba48b71529fc4f85d74cffe673beba7f99537776c97819fd7671f10a85af833`. Logs `.cache/build-wasm-mcastu.log`, `.cache/test-wasm-mcastu.log`, `.cache/mcastu-public.stdout.txt`, `.cache/mcastu-public.stderr.txt`. Coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
 
 ### J55 — dbridge.c terrain queries and drawbridge entities
 
@@ -6651,9 +6653,9 @@ J55 differential gate:11,669 original-C/hybrid comparisons pass across all28 fun
 
 J55 mixed-link gate: actual game excludes dbridge.o and all14 private aliases and imports all14 public terrain/drawbridge functions from JS. Native occupant storage and the stable phrase buffer remain real Module memory. Core/Wasm manifest hashes verified; Wasm SHA-256 `a62a9eafa669c48aef3d8fee5847ec4078313f9a24f060e1504af449c358b405`, dbridge core SHA-256 `91844831154f6d128e50d762d0763ecf2b3b845111e91ae5d0e537d10d25bd27`. Latest direct suite11,669 and all49 source/lexical checks pass. Full integration/all44 public sessions now running. Logs `.cache/build-wasm-dbridge.log`, `.cache/test-wasm-dbridge.log`, `.cache/dbridge-public.stdout.txt`, `.cache/dbridge-public.stderr.txt`. TU49 remains in progress.
 
-J55 public gate: all44 sessions pass without errors, every matched/total metric equal:11,405 screens/cursors/cells-only frames,792,838 RNG calls and 1,483 animations. The scorer reports a slower timing fit on this run (838+6.97ms/turn,R²0.426); this is measured runner output, not a controlled benchmark or a performance guarantee. Repeated creation of the native view environment for frequent terrain-query calls remains a possible performance cost; no caching/behavior adaptation is added during this migration gate. Full integration remains running; TU49 stays in progress.
+J55 public gate: all44 sessions pass without errors, every matched/total metric equal:11,405 screens/cursors/cells-only frames,792,838 RNG calls and1,483 animations. The scorer reports a slower timing fit on this run (838+6.97ms/turn,R²0.426); this is measured runner output, not a controlled benchmark or a performance guarantee. Repeated creation of the native view environment for frequent terrain-query calls remains a possible performance cost; no caching/behavior adaptation is added during this migration gate. Full integration remains running; TU49 stays in progress.
 
-J55 completed verification: full integration passes all49 source/lexical checks,11,669 dbridge comparisons, all prior TU suites and existing terminal/platform/save/codec/timezone/macOS/clipboard checks. All 44 public sessions remain exact at11,405 screens/cursors,792,838 RNG calls and 1,483 animations without errors. Actual game excludes dbridge.o/all14 private aliases and imports all14 public functions; core/Wasm manifest hashes verified. Wasm SHA-256 `a62a9eafa669c48aef3d8fee5847ec4078313f9a24f060e1504af449c358b405`. Logs `.cache/build-wasm-dbridge.log`, `.cache/test-wasm-dbridge.log`, `.cache/dbridge-public.stdout.txt`, `.cache/dbridge-public.stderr.txt`. Timing/coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
+J55 completed verification: full integration passes all49 source/lexical checks,11,669 dbridge comparisons, all prior TU suites and existing terminal/platform/save/codec/timezone/macOS/clipboard checks. All44 public sessions remain exact at11,405 screens/cursors,792,838 RNG calls and1,483 animations without errors. Actual game excludes dbridge.o/all14 private aliases and imports all14 public functions; core/Wasm manifest hashes verified. Wasm SHA-256 `a62a9eafa669c48aef3d8fee5847ec4078313f9a24f060e1504af449c358b405`. Logs `.cache/build-wasm-dbridge.log`, `.cache/test-wasm-dbridge.log`, `.cache/dbridge-public.stdout.txt`, `.cache/dbridge-public.stderr.txt`. Timing/coverage/configuration limits above remain; frozen harness, inherited patches and pristine upstream unchanged.
 
 
 
@@ -7939,7 +7941,7 @@ SYMBOLS first-pass details: the prepared header defines strcmpi(a,b) as strncmpi
 
 J72/TU66 DOG plan before implementation: all 21 configured original `src/dog.c` functions and their pet/migration/taming policy move into their original JavaScript boundaries. The sole private `failed_arrivals` pointer is per actual Wasm Module; native monster, object, EDOG and extension storage stays live in C memory. Pointer-to-link locals become typed live link references; the address of the private pointer used by native `relmon` is represented by an actively borrowed native cell with fresh read/write-through during callbacks, synchronized on release, rather than a second persistent list. Original `iter_mons(set_mon_lastmove)` uses a fixed C ABI trampoline into that same original JS function, preserving callback identity. Source addressable coordinate/level locals use compiler-derived native stack storage with scoped caller lifetimes. Original header macros and C integer/long/mask widths are explicitly represented outside the TU where necessary; no pet policy is added to C helpers. First-pass evidence is original Emscripten C versus JS; native and actual mixed-game link remain separate gates.
 
-Six-TU checkpoint accepted: `.cache/public-six-tu-first-pass-results.json` contains44/44 passing sessions, all792,838 RNG calls,11,405 screen/cell/cursor snapshots and 1,483 animation frames matching. The159 captured selected sources/artifacts remained unchanged through both runs. `.cache/six-tu-first-pass-import-audit.json` records live JS imports16MKROOM/141SFSTRUCT/2EARLYARG/7REPORT/9BONES/5EXPLODE, with no private test aliases. BONES focused coverage remains11/16functions; successful public saves/restores do not prove all world/file branches. Native validation remains pending. Next shared changes register QUESTPGR (and ready SYMBOLS) in the TU list, add their typed support includes and main dispatch, derive actual compiler layouts, and add reproducible C/hybrid probe recipes. Original C objects will be excluded only after those real probes compile; production behavior is intended to match the prepared Emscripten C.
+Six-TU checkpoint accepted: `.cache/public-six-tu-first-pass-results.json` contains44/44 passing sessions, all792,838 RNG calls,11,405 screen/cell/cursor snapshots and1,483 animation frames matching. The159 captured selected sources/artifacts remained unchanged through both runs. `.cache/six-tu-first-pass-import-audit.json` records live JS imports16MKROOM/141SFSTRUCT/2EARLYARG/7REPORT/9BONES/5EXPLODE, with no private test aliases. BONES focused coverage remains11/16functions; successful public saves/restores do not prove all world/file branches. Native validation remains pending. Next shared changes register QUESTPGR (and ready SYMBOLS) in the TU list, add their typed support includes and main dispatch, derive actual compiler layouts, and add reproducible C/hybrid probe recipes. Original C objects will be excluded only after those real probes compile; production behavior is intended to match the prepared Emscripten C.
 
 MAIL J70 first-pass checkpoint: isolated pristine-C and imported-JS MEMORY64 probes pass 1,086 comparisons, including exact stat struct bytes/padding, source state/RNG/grid traces, high signed64 values, aliased coord output, both cleanup labels, controlled child/exec termination, fourteen native callback/reentry/growth boundaries, and separate Module state. Source function inventory/order/parameters/all block comments and lexical scope checks pass. Correction to the planned description above: four goto statements share three destinations, represented by one retry loop and two labelled blocks. Actual Clang d_level.dnum and vision row limits are signed16; actual stat mtime/size are signed64. Fixture OS/UI/geometry/naming callbacks are controlled; real mailbox/process/terminal behavior and native parity are not established. Mixed-game linkage/integration/public checks remain pending; no claim of completing the TU gate.
 
@@ -8816,7 +8818,7 @@ with135 actual original variadic call sites. Exact configured CallExpr auditing
 finds9 indirect CALL SITES using6 native callback prototypes and9 function
 DESIGNATORS; the initial7/5/8 count omitted two rn2_on_display_rng calls produced
 by the original mon_to_glyph macro at source2639. Those two display draws remain
-unlogged and distinct from50 original logged RNG expansions. All 44 source bodies
+unlogged and distinct from50 original logged RNG expansions. All44 source bodies
 and typed ABI are generated; syntax checks pass, while actual original/import
 behavior, guards, negative control, native-host/full-game/public gates remain
 pending. Source algorithm/data/control requirements and unique private ownership
@@ -11335,7 +11337,7 @@ Pure-JS test migration closing repairs (2026-11-12): CMD's controlled strsubst d
 
 CMD observation follow-up: the setter trace now records the identity of dolookaround_floodfill_findroom through the fixture's existing probe_function table instead of its engine-specific raw table index; a different callback still produces a different trace. Allocation canonicalization prefers live ranges and then the newest freed identity, retaining raw unknown pointer bits and all lifetime/byte observations. All138 test files retain their original assertion-site inventory; MONMOVE adds one small-corpse assertion (52→53).
 
-Pure-JS subsystem migration completion: 138/138 registered suites pass against original C with Wasm denied in the implementation process; 19,509,107 assertions, zero assertion failures. docs/runtime-environment/pure-js-test-validation.json records the completed 138-suite cohort plus successful targeted reruns of ARTIFACT, NHLUA, CMD, HACK and TOPL, retaining the original failures and timeouts rather than representing a single clean invocation. Sixteen auxiliary checks pass, including the full dependency suite, 672 binding contracts, source structure/scope, native-reference mutation checks, generated selection negative controls and Lua IO. Final scope contains584 production files with no forbidden dependencies; current runtime manifest verifies311 hashes. All 44 recorder sessions remain unrun by this migration; full-game readiness is not established here. Existing unrelated recorder evidence elsewhere in this file is unchanged.
+Pure-JS subsystem migration completion: 138/138 registered suites pass against original C with Wasm denied in the implementation process; 19,509,107 assertions, zero assertion failures. docs/runtime-environment/pure-js-test-validation.json records the completed 138-suite cohort plus successful targeted reruns of ARTIFACT, NHLUA, CMD, HACK and TOPL, retaining the original failures and timeouts rather than representing a single clean invocation. Sixteen auxiliary checks pass, including the full dependency suite, 672 binding contracts, source structure/scope, native-reference mutation checks, generated selection negative controls and Lua IO. Final scope contains584 production files with no forbidden dependencies; current runtime manifest verifies311 hashes. All44 recorder sessions remain unrun by this migration; full-game readiness is not established here. Existing unrelated recorder evidence elsewhere in this file is unchanged.
 
 Historical audit guard verification also passes55 post-default positive/adversarial/API checks and9 current-source guard checks. The synthetic layered-inverse fixture now copies the exact migration qualification helper imported by the current audit module; its assertions and write-refusal checks are retained. Immutable historical pins can be projected through an exact-qualified current migration to either their original baseline or the independently committed post-default feature bytes, with the original native proof verified for feature members. Unknown hashes, source drift and proof replacement remain rejected.
 
