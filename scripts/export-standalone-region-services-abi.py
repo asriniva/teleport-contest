@@ -2,6 +2,7 @@
 """Measure unchanged REGION headers and bind the original native service maps."""
 import hashlib,json,re,subprocess,tempfile,shlex
 from pathlib import Path
+from service_abi_output import write_service_abi
 root=Path(__file__).resolve().parents[1];tree=root/'.cache/wasm64-build/tree';clang=root/'.cache/emsdk/upstream/bin/clang';header=root/'scripts/tu-region-layout.h';support=root/'nethack-c/wasm/tu-region-support.inc';library=root/'nethack-c/wasm/tu-libraries/region.js'
 flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(root/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(root/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(root/'.cache/ncurses-wasm64-build/include'),*['-D'+v for v in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]]
 with tempfile.TemporaryDirectory(prefix='standalone-region-abi-')as scratch:
@@ -39,4 +40,4 @@ messages={int(i):name for i,name in re.findall(r'case (\d+):(\w+)\(fmt,a,b\);',n
 paths=[Path(__file__).resolve(),header,support,library,root/'js/nethack/region-services.js',root/'js/nethack/level-startup.js',root/'js/ported/region.js',root/'js/nethack/bindings/region.js',root/'js/nethack/records.json',root/'js/nethack/public-functions.json',root/'js/wasm/tu-layouts.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 policyNames=re.findall(r'^export function (\w+)\(', (root/'js/ported/region.js').read_text(),re.M)
 data={'layout':layout,'globals':globals,'calls':calls,'sf':sf,'messages':messages,'rngCallers':['inside_gas_cloud','create_gas_cloud','region_safety'],'monsterBits':['mcansee','mblinded'],'heroBits':['uswallow','uinwater'],'public':{n:public[n]for n in policyNames if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(root)):sha(p)for p in sorted(set(headers+[tree/'src/region.c']))}}
-(root/'js/nethack/region-services-abi.json').write_text(json.dumps(data,indent=2)+'\n');print(f'Bound REGION: {len(layout)} native values/{len(calls)} foreign calls/{len(sf)} SF aliases')
+write_service_abi(root,root/'js/nethack/region-services-abi.json',data,dependencies=deps,extra=[tree/'src/region.c']);print(f'Bound REGION: {len(layout)} native values/{len(calls)} foreign calls/{len(sf)} SF aliases')

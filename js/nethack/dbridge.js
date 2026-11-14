@@ -1,3 +1,5 @@
+import {validateServiceCoercions} from './service-coercions.js';
+import publicFunctions from './public-functions.json' with {type:'json'};
 import {recordNativeRngCaller} from './native/rng-output.js';
 // Full native DBRIDGE transport on the existing terrain-query context.
 import abi from './dbridge-abi.json' with {type:'json'};
@@ -10,6 +12,7 @@ export function enableDbridge(environment,layouts){
  for(const[k,v]of Object.entries(abi.layout))if(L[k]!==v)throw new Error('Review DBRIDGE native ABI '+k);
  for(const[k,v]of Object.entries(abi.roomClosure.layout))if(layouts.mkroom[k]!==v)throw new Error('Review Castle MKROOM native ABI '+k);
  const resolve=n=>environment.hasFunction(n)?environment.resolve(n):typeof services[n]==='function'?services[n]:environment.resolve(n),coerce={pointer:address,text,char:transport.char,short:transport.short,int:transport.int,uint:transport.uint},local=Object.create(services);
+ validateServiceCoercions('DBRIDGE',abi.calls,publicFunctions.functions,coerce);
  for(const[name,row]of Object.entries(abi.calls))local[name]=(...args)=>{const result=resolve(row.target)(...row.coercions.map(([kind,i])=>coerce[kind](args[i])));return row.number?Number(result?.address??result):result;};
  const field=(type,p,key,value)=>{key=type==='struct rm'?(abi.terrainAliases[key]??key):key;const f=ctypes.record(type).fields[key];if(!f)throw new Error('Unknown DBRIDGE field '+key);const scalar=f.ctype.replace(new RegExp('\\s+'+key+'$'),'');return value===undefined?ctypes.getField(type,address(p),key,scalar):ctypes.setField(type,address(p),key,scalar,value);};
  const terrain=(x,y)=>environment.requireGlobal('svl')+L.locations+(transport.short(x)*L.ROWNO+transport.short(y))*L.rmSize;

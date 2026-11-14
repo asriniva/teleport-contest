@@ -1,0 +1,59 @@
+{
+  "reportedFailure": {
+    "error": "Unknown DOKICK argument Strcpy:0",
+    "callChain": [
+      "ship_object",
+      "otransit_msg",
+      "Strcpy"
+    ],
+    "cause": "The exporter ignored named a,b parameters and generated an empty coercion list for two declared arguments.",
+    "reproducedBeforeFix": true
+  },
+  "audit": {
+    "passed": true,
+    "catalogs": {
+      "bones-services-abi.json": 86,
+      "dbridge-abi.json": 42,
+      "dokick-abi.json": 175,
+      "region-services-abi.json": 34
+    },
+    "rows": 337,
+    "argumentsChecked": 625,
+    "negativeControls": 1884,
+    "otherArgumentSchemas": 490,
+    "variadicSchemas": 27,
+    "sdkDeclarations": 2,
+    "scope": "Every fixed-coercion catalog: each target C signature, original wrapper converter and source argument order. Empty/truncated/unknown/out-of-range metadata fails before gameplay. This is static wiring coverage, not execution of every game policy."
+  },
+  "actualOriginalCTransit": {
+    "passed": true,
+    "checks": 65,
+    "transitCopies": 4,
+    "shipped": 2,
+    "stairs": [
+      40,
+      16
+    ],
+    "scope": "Real original-C and JS MAIN worlds; source teleport, visibility, object creation, ship_object and cleanup. Both ordinary-object and corpse transit branches execute the actual Strcpy adapter. Complete ordered core/display RNG, world graph, raw terminal and frames match. This is a targeted reproduction, not every shipping/shop/trap branch."
+  },
+  "public44": "pending isolated committed candidate validation",
+  "scope": "No engine policy/RNG/frozen source changes. Guards cover all four fixed-coercion catalogs; other argument-list rows receive static arity checks. Does not prove every hidden policy branch.",
+  "sourceSha256": {
+    "js/nethack/service-coercions.js": "522f960a28da495fc132eebe67b5c2ff166b9abb5073bdfe7787c7eb90d68651",
+    "js/nethack/dokick.js": "40db3c9abb6ee9fa8f8be64bf1daac29e3cc3e66088742d50276343f183a8e69",
+    "js/nethack/dokick-abi.json": "bc6d6d42a15b00da4ec7d3329464327d6bd2651099d295f3a7a84b86bff3e0ea",
+    "js/nethack/bones-services.js": "84e33ab2f3593318dc1a60f73d9dc8cae406a5e07a2bd474ff867034850e14b4",
+    "js/nethack/bones-services-abi.json": "584b0e7a4cf2ccf1a9063ff4e95b339037f53fd40d52e1db772270d06ee52be9",
+    "js/nethack/dbridge.js": "88370361de51800c820d271dad7586a40c81c9d46fed945106ca81b486c2871a",
+    "js/nethack/dbridge-abi.json": "52f49eb8efe702fc6452f7565b99db6d5784c867f92a76c02fe230aa20b3ece7",
+    "js/nethack/region-services.js": "64fe45734ac1373dbc6f34a696b25131e1510db245ad652f2d991d9479672145",
+    "js/nethack/region-services-abi.json": "195224e549460c8d6bd72e4d5a6e910088f3a77cbda71627f1d31c864d5a8b00",
+    "scripts/export-standalone-dokick-abi.py": "c2a3c5d586f5e03c68a5f4eb48b8a61d5088201c5182f99605ecc57a18ac7d45",
+    "scripts/export-standalone-bones-services-abi.py": "f3217a458178098e269a5046e34c40f080cc3adfce9b3cd3a8bcb1c4cd7718ad",
+    "scripts/export-standalone-dbridge-abi.py": "335d0a8e5324fa2eb38a04c8d46562f02aee7a6b5123f20b566aa9e5b7ee7377",
+    "scripts/export-standalone-region-services-abi.py": "38388d4228278d85a24f52f3cdc5cf9f92d2ba7cf163e18564af078cd6bae9ed",
+    "scripts/service_abi_output.py": "0fc345f96351fb16f871fe0637037bb58102676dda646e9e329abc21f5b6a306",
+    "scripts/test-service-coercions.mjs": "e27658f8670ceb7925e5c3a8468045b63f9c12ef556906315330069c102c5b4e",
+    "scripts/test-standalone-dokick-transit.mjs": "19b9ec40c679450809ec62848a24199640c6d4a466f68a7354682116f49439a6"
+  }
+}

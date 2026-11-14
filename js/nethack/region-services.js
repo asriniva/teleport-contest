@@ -1,3 +1,5 @@
+import {validateServiceCoercions} from './service-coercions.js';
+import publicFunctions from './public-functions.json' with {type:'json'};
 import {recordNativeRngCaller} from './native/rng-output.js';
 // Original native REGION transport, installed on its existing services/context.
 import abi from './region-services-abi.json' with {type:'json'};
@@ -22,6 +24,7 @@ export function bindRegionServices(environment,local,layout,speciesCount){
  if(!Number.isSafeInteger(speciesCount)||speciesCount<1)throw Error('REGION requires the measured species count');
  const native=nativeStateFor(environment);
  const resolve=n=>environment.hasFunction(n)?environment.resolve(n):typeof services[n]==='function'?services[n]:environment.resolve(n),coerce={pointer:address,text,long:v=>BigInt(v),char:transport.char,short:transport.short,int:transport.int,uint:transport.uint};
+ validateServiceCoercions('REGION',abi.calls,publicFunctions.functions,coerce);
  for(const[name,row]of Object.entries(abi.calls))local[name]=(...args)=>{const direct=native.functions.get(row.target);if(direct?.nativeState===native)return direct(...args);const value=native.boundary(resolve(row.target),...row.coercions.map(([kind,i])=>coerce[kind](args[i])));return row.number?typeof value==='string'?text(value):Number(value?.address??value):value;};
  const field=(type,p,key,value)=>{const record=native.nativeRecords.record(type,p);if(!(key in record))throw Error('Unknown REGION measured field '+key);if(value===undefined)return record[key];record[key]=value;return record[key];};
  Object.assign(local,{nativeOwner:native,nativeSpeciesCount:speciesCount,nativeGlobal:name=>environment.requireGlobal(name),nativeAllocationSize:p=>{const block=memory.live.get(address(p));if(!block)throw Error('REGION array is not a complete live allocation');return block.size;},moduleKey:local.moduleKey??environment,heap:()=>memory.HEAPU8,stackSave:transport.stackSave,stackRestore:transport.stackRestore,stackAlloc:transport.stackAlloc,literal:services.literal,

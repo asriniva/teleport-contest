@@ -61,7 +61,7 @@
     {
       "file": "js/nethack/bones-services-abi.json",
       "group": "component_abis",
-      "sha256": "8d0481a6dbd8b6dc980af53b2cfd504b716224be76becc3c9f338dd0b48d2e29"
+      "sha256": "584b0e7a4cf2ccf1a9063ff4e95b339037f53fd40d52e1db772270d06ee52be9"
     },
     {
       "file": "js/nethack/callback-address-abi.json",
@@ -86,7 +86,7 @@
     {
       "file": "js/nethack/dbridge-abi.json",
       "group": "component_abis",
-      "sha256": "d58c2144f4af3a6728cb9fc8214af1e87695a9d8fb050835424e696294280f22"
+      "sha256": "52f49eb8efe702fc6452f7565b99db6d5784c867f92a76c02fe230aa20b3ece7"
     },
     {
       "file": "js/nethack/decl-storage.json",
@@ -146,7 +146,7 @@
     {
       "file": "js/nethack/dokick-abi.json",
       "group": "component_abis",
-      "sha256": "14fd00c1700e8f1c804fc0ffdfdb77af4b6ab9d147f9c0a13b83d2e2f2645c27"
+      "sha256": "bc6d6d42a15b00da4ec7d3329464327d6bd2651099d295f3a7a84b86bff3e0ea"
     },
     {
       "file": "js/nethack/eat-abi.json",
@@ -396,7 +396,7 @@
     {
       "file": "js/nethack/region-services-abi.json",
       "group": "component_abis",
-      "sha256": "c962f70bad2524fc42651e99e14afb81dda97ab05042085632d832cc4bbaa394"
+      "sha256": "195224e549460c8d6bd72e4d5a6e910088f3a77cbda71627f1d31c864d5a8b00"
     },
     {
       "file": "js/nethack/report-abi.json",

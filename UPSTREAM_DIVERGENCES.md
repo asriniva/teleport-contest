@@ -1,3 +1,40 @@
+## Fixed incomplete service argument metadata (2026-11-14)
+
+The reported `ship_object -> otransit_msg -> Strcpy` failure is reproduced in
+an actual standalone game as `Unknown DOKICK argument Strcpy:0`. The generated
+`dokick-abi.json` declared two `strcpy` parameters but recorded no conversions:
+its exporter recognized `a0`-style names while this wrapper used `a,b`. The
+exporter now binds the actual formal names and rejects incomplete/reordered
+extractions. BONES' exporter receives the same named-parameter correction.
+`Strcpy` now converts both text/pointer operands before dispatch. DOKICK also
+checks incoming argument counts explicitly. No engine policy or RNG site changes.
+
+`service-coercions.js` checks every fixed conversion row against the actual C
+prototype, including target existence, complete arity, converter membership and
+source indices. DOKICK, BONES, DBRIDGE and REGION run this check when binding
+services, so incomplete metadata fails during construction. The regression audit
+also compares each conversion and argument order to the original wrapper AST.
+It checks the separate argument-list catalog family, including fixed variadic
+prefixes and the two MAIL SDK declarations. This does not prove execution of
+every game-policy branch or every possible hidden recording.
+
+The four ABI catalogs are regenerated. Their measured layouts and conversion
+rows are unchanged except the two missing Strcpy entries. A shared exporter
+writer resolves symlinked SDK/build dependencies to verified repository paths;
+all 123 DOKICK, 126 DBRIDGE and 123 REGION reference-header fingerprints remain
+present rather than silently disappearing during regeneration. Current source
+hashes include the validator and writer. Production remains JavaScript; no
+WebAssembly, Node filesystem API or frozen-source change is introduced.
+
+Targeted verification reproduces actual visible shipping of a normal object and
+a corpse in independently initialized C/JS worlds: four calls traverse the real
+Strcpy adapter, two objects migrate, and 65 world/RNG/terminal/frame comparisons
+pass. The catalog audit covers all 337 fixed rows and 625 source conversions;
+490 other argument-list rows are checked, including 27 variadic prefixes.
+The fresh 44-recording verification is pending at this commit. Earlier component
+DOKICK tests used a separate provider and the prior gameplay check exercised a
+door kick, so neither verified this standalone shipping adapter.
+
 ## Connected native visibility workspace (2026-11-14)
 
 The standalone JavaScript game now requests a resizable JavaScript ArrayBuffer

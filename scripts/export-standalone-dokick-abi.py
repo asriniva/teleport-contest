@@ -2,6 +2,7 @@
 """Measure DOKICK native field/macro/callback boundaries; policies unchanged."""
 import hashlib,json,os,re,shlex,subprocess,tempfile
 from pathlib import Path
+from service_abi_output import write_service_abi
 root=Path(__file__).resolve().parents[1];ref=Path(os.environ.get('STANDALONE_REFERENCE_ROOT',root)).resolve();tree=ref/'.cache/wasm64-build/tree';clang=ref/'.cache/emsdk/upstream/bin/clang';header=root/'scripts/tu-dokick-layout.h';support=root/'nethack-c/wasm/tu-dokick-support.inc';library=root/'nethack-c/wasm/tu-libraries/dokick.js';runtime=root/'js/nethack/bindings/dokick.js';source=root/'js/ported/dokick.js';layout=json.loads((root/'js/wasm/tu-layouts.json').read_text())['dokick']
 flags=['--target=wasm64-unknown-emscripten','--sysroot='+str(ref/'.cache/emsdk/upstream/emscripten/cache/sysroot'),'-include',str(ref/'nethack-c/wasm/native-terminal.h'),'-I'+str(tree/'include'),'-I'+str(ref/'.cache/ncurses-wasm64-build/include'),*['-D'+v for v in json.loads((root/'nethack-c/wasm/compile-defines.json').read_text())]]
 with tempfile.TemporaryDirectory(prefix='standalone-dokick-abi-')as scratch:
@@ -25,11 +26,13 @@ for kind,typ in [('monster','struct monst'),('object','struct obj'),('terrain','
 body=expanded_support.split('teleport_dokick_class_bit',1)[1].split('}',1)[0];m=re.search(r'return i\?p->(\w+):p->(\w+);',body);assert m
 bits['class']={'type':'struct objclass','fields':[m[2],m[1]]}
 calls={}
-for name,target,args in re.findall(r'^\s*(\w+):\([^)]*\)=>(?:Number\()?_(\w+)\(([^\n]*)',lib,re.M):
+for name,params,target,args in re.findall(r'^\s*(\w+):\(([^)]*)\)=>(?:Number\()?_(\w+)\(([^\n]*)',lib,re.M):
  if target.startswith('teleport_dokick_'):continue
  assert target in public,target
- coercions=[(k,int(i))for k,i in re.findall(r'\b(pointer|integer|byte|coord|long|text|size)\(a(\d+)\)',args)]
- assert [i for _,i in coercions]==list(range(len(coercions))),(name,args)
+ params=[p.strip()for p in params.split(',')if p.strip()]
+ coercions=re.findall(r'\b(pointer|integer|byte|coord|long|text|size)\((\w+)\)',args)
+ assert [p for _,p in coercions]==params,(name,params,args)
+ assert all(re.fullmatch(r'[A-Za-z_$]\w*',p)for p in params),(name,params)
  calls[name]={'target':target,'prototype':public[target],'coercions':[k for k,_ in coercions]}
 formats={}
 for name,shape,params,target in re.findall(r'^(?:void|int) teleport_dokick_(\w+)_([a-z]+)\(([^)]*)\)\{(?:return )?(\w+)\(',native,re.M):
@@ -42,4 +45,4 @@ assert len(formats)==11,len(formats)
 names=re.findall(r'^export function (\w+)\(',source.read_text(),re.M)
 paths=[Path(__file__).resolve(),root/'js/nethack/dokick.js',header,support,library,runtime,source,root/'js/backends/emscripten/runtime.js',root/'js/nethack/records.json',root/'js/nethack/public-functions.json',root/'js/wasm/tu-layouts.json',root/'nethack-c/wasm/compile-defines.json'];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 data={'layout':layout,'globals':globals,'bits':bits,'calls':calls,'formats':formats,'public':{n:public[n]for n in names if n in public},'sourceSha256':{str(p.relative_to(root)):sha(p)for p in paths},'referenceHeaderSha256':{str(p.relative_to(ref)):sha(p)for p in sorted(set(headers+[tree/'src/dokick.c']))}}
-(root/'js/nethack/dokick-abi.json').write_text(json.dumps(data,indent=2)+'\n');print('Bound original DOKICK: '+str(len(data['public']))+' public entries/'+str(len(calls))+' foreign calls/'+str(len(layout))+' native values.')
+write_service_abi(root,root/'js/nethack/dokick-abi.json',data,dependencies=deps,reference_root=ref,extra=[tree/'src/dokick.c']);print('Bound original DOKICK: '+str(len(data['public']))+' public entries/'+str(len(calls))+' foreign calls/'+str(len(layout))+' native values.')
