@@ -10,8 +10,8 @@
   },
   "jsonSources": 120,
   "coreJsonSources": 112,
-  "inlineTableDeclarations": 127,
-  "inlineTableFiles": 91,
+  "inlineTableDeclarations": 128,
+  "inlineTableFiles": 92,
   "adapterFiles": 129,
   "sharedAliasSource": {
     "file": "js/nethack/declarations.js",
@@ -1173,6 +1173,11 @@
     {
       "file": "js/nethack/lua-sandbox.js",
       "line": 74,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/native/apply-state.js",
+      "line": 3,
       "name": "globals"
     },
     {

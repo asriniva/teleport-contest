@@ -1,0 +1,36 @@
+import {createNativeApply} from './apply.js';
+import {nativeStateFor} from './state-bridge.js';
+import {createNativeAbiCaster} from './execution.js';
+import {createNativeLocalReference,isNativeLocalReference} from './local-reference.js';
+import {nativeStateLinksFor} from './state-links.js';
+import {createFieldAliases} from '../header-aliases.js';
+export function createNativeApplyState(services,L){
+ const environment=services.nativeEnvironment,{memory,transport,ctypes}=environment,owner=nativeStateFor(environment),views=owner.nativeRecords,arena=owner.nativeArena,links=nativeStateLinksFor(environment),fieldAliases=createFieldAliases('apply');
+ const address=environment.address,raw=v=>BigInt.asUintN(64,BigInt(typeof v==='string'?services.literal(v):v?.address??v??0)),view=()=>arena.view,literal=v=>typeof v==='string'?services.literal(v):address(v);
+ const caster=createNativeAbiCaster(ctypes,transport,literal),nativeType=t=>t.replace(/\bstruct _globals\b/g,'struct const_globals'),record=(t,p)=>views.record(nativeType(t),p),size=t=>ctypes.size(nativeType(t)),refs=new Map();
+ const argumentPlans=new Map();function nativeArgumentPlan(t){if(argumentPlans.has(t))return argumentPlans.get(t);let plan;const target=t.replace(/\s*\*$/,'');if(t.endsWith('**')||t.endsWith('* *')||['int *','long *','short *'].includes(t))plan=v=>ref(t.slice(0,-1).trim(),v);else if(t.endsWith('*')&&records[target])plan=v=>record(target,v);else plan=caster(t);argumentPlans.set(t,plan);return plan;}
+ const nativeArgument=(t,v)=>nativeArgumentPlan(t)(v);
+ function read(t,p){p=address(p);if(t.endsWith('*')){const target=t.slice(0,-1).trim(),at=arena.pointer(p);return records[target]?record(target,at):at;}return ctypes.load(t,p);}
+ function write(t,p,v){if(t.endsWith('*')){arena.storePointer(address(p),v);return read(t,p);}return ctypes.store(t,address(p),v);}
+ function ref(t,p){if(isNativeLocalReference(p,owner,t)||links.owns(p))return p;p=address(p);if(!p)return 0;const key=t+':'+p;if(!refs.has(key))refs.set(key,{address:p,get value(){return read(t,p);},set value(v){write(t,p,v);}});return refs.get(key);}
+ const env=Object.assign(Object.create(services),L,{record,nativeArgument,nativeArgumentPlan,readVisibility:(y,x)=>arena.Uint8[arena.pointer(address(env.gv.viz_array)+Number(y)*8)+Number(x)],
+  int:caster('int'),uint:caster('unsigned int'),char:caster('signed char'),short:caster('short'),boolean:caster('signed char'),long:caster('long'),
+  byte:p=>ref('signed char',literal(p)),ref,
+  localScalar:(t,v)=>createNativeLocalReference({owner,kind:t,descriptor:t,width:size(t),allocate:transport.stackAlloc,get:()=>v,set:()=>{},normalize:value=>nativeArgument(t,value),read:p=>read(t,p),write:(p,value)=>write(t,p,value),uninitialized:v===undefined}),
+  localArray:(t,n)=>views.array(t,transport.stackAlloc(size(t)*n),n),localRecord:t=>record(t,transport.stackAlloc(size(t))),
+  fieldRef:(o,name)=>{const type=views.kindOf(o),key=fieldAliases[name]??name,f=ctypes.record(type).fields[key];if(!f||f.bits!==undefined)throw Error('Review native APPLY addressable field '+name);if(f.ctype.includes('*'))return links.record(o,key);return ref(f.ctype,o.address+f.offset);},
+  assignField:(o,k,v)=>{o[k]=v;return o[k];},samePtr:(a,b)=>raw(a)===raw(b),SIZE:a=>a.length,min:(a,b)=>a<b?a:b,max:(a,b)=>a>b?a:b,abs:Math.abs,
+ });
+ // Verify every measured field before publishing the complete native context.
+ for(const [type,fields]of Object.entries(records)){const measured=ctypes.record(nativeType(type));for(const [name,f]of Object.entries(fields)){const field=measured.fields[name];if(!field)throw Error('Unknown native APPLY field '+type+'.'+name);if(f.bit){const bit=services.nativeApplyAbi.bits[f.bitIndex];if(bit.type!==type||bit.field!==name)throw Error('Native APPLY bit metadata '+name);}else if(field.offset!==L[f.key]||size(f.type)!==L[f.key+'_size'])throw Error('Native APPLY layout drift '+type+'.'+name);}}
+ const globalNames=Object.keys(globals);
+ for(const [name,t]of Object.entries(globals)){
+  const p=environment.requireGlobal(name),a=t.match(/^(.*?)\[(\d*)\]$/);
+  if(records[t])env[name]=record(t,p);
+  else if(a&&a[1]!=='char'){
+   const n=a[2]?Number(a[2]):name==='genders'?services.nativeLayouts.role.genderCount:name==='c_obj_colors'?services.nativeLayouts.decl.size_c_obj_colors/8:services.nativeLayouts.decl['size_'+name]/ctypes.size(a[1]);
+   if(!Number.isInteger(n)||n<=0)throw Error('Unknown native APPLY table extent '+name);
+   if(records[a[1]]){const out=Array(n);Object.defineProperty(out,'address',{value:p});for(let i=0;i<n;i++)Object.defineProperty(out,i,{configurable:true,enumerable:true,get(){const value=record(a[1],p+i*size(a[1]));Object.defineProperty(out,i,{value,enumerable:true});return value;}});env[name]=out;}else env[name]=views.array(a[1],p,n);
+  }else if(a)env[name]=p;
+  else Object.defineProperty(env,name,{get:()=>read(t,p),set:v=>write(t,p,v)});
+ }

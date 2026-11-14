@@ -1,3 +1,58 @@
+## Native complete APPLY state and execution (2026-11-14)
+
+`apply.js`, `native/apply{,-state,-entries,-calls}.js`,
+`generate-native-apply.mjs` and its state header/footer compile all76 tool,
+leash and trap-setting functions onto canonical records and one plain context.
+Private calls are lexical with bound argument plans. All303 named external call
+plans use fixed positional arguments and prebound casts/results; same-game
+native owners consume record/output identities directly, while foreign calls
+cross the explicit owner boundary. Dynamic message format plans are cached.
+Hero/map and native lookup tables are shared with movement/monsters; item/output
+reference cells materialize only for byte access and retain declaring-frame
+lifetime. No live global initialization is changed. The source `struct _globals`
+is explicitly mapped to the measured `struct const_globals`. Named callbacks
+retain measured signatures and stable identities. Field/color lookup no longer
+uses generic C-field dispatch. Record fields still share typed memory. Actual
+byte buffers, local records, menus, persistence and foreign callbacks retain
+compatibility boundaries; this is live production assembly, not an optional mode.
+
+The first jump candidate failed because original macros indexed raw
+`gv.viz_array` as nested arrays. Both visibility macros now use an explicit native
+byte reader; the generator audits the complete APPLY primitive pointer-array
+inventory and rejects unhandled additions. No source RNG/decision/mutation order
+was changed. The inherited jump test's relocation-ledger prerequisite rejected
+prior authorized runtime edits before gameplay; `test-native-apply-jump.mjs`
+keeps original policy/binding hashes and the sealed original-C runtime receipt,
+and compares the same actual233-key public prefix without that stale relocation
+assertion. It passes16 checks,237 frames and exact raw terminal/world/RNG output.
+
+`test-native-apply-context.mjs` passes4,248 checks: all76 entries,303 actual
+service plans,23 callback signatures/identities and incompatible-signature
+rejections, all768 source context members, widths/results/arity, native versus
+foreign ownership, local pointer materialization, cross-width byte aliasing,
+growth, frame lifetime and exceptional cleanup. Controlled ABI fixture values
+are not presented as gameplay branches. `test-standalone-apply.mjs` passes433
+checks and30 pure-JS guards across actual camera, whistle, leash/reset and
+invocation-item actions, final world/light/timer graph and exact RNG/terminal
+recording. Full ritual/advanced-tool coverage is not claimed. Type metadata,
+production window callbacks, assembly wiring and generation checks pass. The
+metadata inventory adds the generated APPLY globals table: still120 JSON sources
+(112 core/eight supporting), now128 named inline declarations in92 files and129
+adapters. The census is not execution coverage.
+
+The original-C-equivalent ordinary-turn counter remains below acceptance:
+walk generic calls7→5, C contexts12→8 and generic fields3→1; walk C allocations
+remain24. Wait/attack remain13/31 generic calls,18/43 C contexts,65/93 C
+allocations. Other engine work remains; zero-bridge/zero-allocation and20x are
+not achieved. All44 public recordings pass with792,838 ordered RNG calls,11,405 screens/cursors
+and1,483 animation frames. Unprofiled timing is267.436341s versus existing prior
+266.236831s (+0.4505%, slower; no speedup claimed). All860 frozen scoring input
+hashes were unchanged during replay and match the current candidate. The pre-format candidate also passed44/44 at267.962403s; both observations
+are retained. A final replay followed inherited generated whitespace cleanup.
+No new baseline or CPU profiling was performed. Detailed source hashes, checks, limits
+and timing/session receipts are in `native-apply-validation.json` with the input
+manifest `native-apply-public44-manifest.json`, under `docs/runtime-environment/`.
+
 ## Native connected traps, movement and terrain effects (2026-11-14)
 
 `trap.js`, `native/trap{,-state,-entries}.js` and `level-contents.js` wire the

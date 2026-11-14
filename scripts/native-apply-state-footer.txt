@@ -1,0 +1,13 @@
+ const callback=fn=>{for(const name of CALLBACK_NAMES)if(fn===env.nativeNamespace?.[name]||fn===services[name])return services.callback(name);if(typeof fn==='number'||typeof fn==='bigint'||fn===null)return fn??0;throw Error('Review native APPLY callback identity');};
+ env.callbackAddress=callback;
+ const pcall=(name,...args)=>services[name](...args.map(v=>typeof v==='function'?callback(v):v));
+ for(const[name,type]of Object.entries(returnRecords))if(services[name])env[name]=(...args)=>record(type,pcall(name,...args));
+ for(const name of CALLBACK_CONSUMERS)if(services[name]&&!returnRecords[name])env[name]=(...args)=>pcall(name,...args);
+ env.propertyRef=n=>env.fieldRef(env.u.uprops[n],'intrinsic');
+ env.copyRecord=(target,source)=>{memory.HEAPU8.copyWithin(address(target),address(source),address(source)+ctypes.record(views.kindOf(target)).size);return target;};
+ env.rngSource=(line,index)=>services.rngSource(line,CALLER_NAMES[index]);
+ for(const name of LONG_CONSTANTS)if(name in env)env[name]=BigInt(env[name]);
+ env.Strcpy=(a,b)=>services.Strcpy(a,b);
+ env.div=(a,b)=>typeof a==='bigint'||typeof b==='bigint'?env.long(a)/env.long(b):Math.trunc(a/b);
+ env.nativeNamespace=createNativeApply(env);return env;
+}
