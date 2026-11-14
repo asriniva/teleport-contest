@@ -1,3 +1,54 @@
+## Native monster reactions and ambient sound queries (2026-11-14)
+
+`js/nethack/native/sounds.js` binds all 28 original SOUNDS functions to the game
+context and replaces six local-call adapters with direct source calls. Its
+reproducible generator and whole-policy AST check retain all original exports,
+source RNG sites and statement order. `bindings/sounds.js` now uses the canonical
+native hero, properties, monsters, species, inventory objects, extras, rooms,
+level globals, map cells and occupancy rather than creating SOUNDS-specific
+record wrappers and nested numeric proxies. Ordinary equipment/common-string
+queries use the native record owner, and RNG uses the existing direct provider
+with the same source logging sites. Sound procedure tables and numeric foreign
+callbacks retain their ABI representation and original callback machinery.
+
+`game-windows.js` owns one cached sound environment per game, publishes native
+entries, resolves other native engine owners directly, and keeps foreign calls
+at explicit boundaries. An exact owner token selects separate native and
+compatibility caches, so temporary providers cannot inherit native execution
+from the game and bypass their own field overrides. Six known monster predicates carry the original `ip`
+signature. The MON boolean callback path accepts those same-game native entries
+directly and keeps checked indirect dispatch for numeric/foreign callbacks.
+MON still reads the next link before callbacks, skips dead/off-map monsters,
+and terminates at the first match. Native context fields are installed before
+attaching services, avoiding inherited DECL setters that could otherwise replace
+canonical objects with compatibility pointer carriers. Generic fixture providers
+retain their original byte-field path.
+
+Current checks: production canonical-state/predicate/iteration checks pass 56
+assertions, including six predicates and all six positive RNG paths, shared occupancy,
+next-link mutation ordering, zero indirect native-predicate dispatches and checked
+numeric callback signatures. The original policy AST and generator freshness
+checks pass. The controlled original-C SOUNDS suite passes 15,200 comparisons
+using its generic fixture providers; this does not exhaust native gameplay.
+Actual original-C walk/wait/attack comparisons preserve complete state, stdout,
+stderr, RNG logs and normalized frames. Generic calls decrease from 5/12/30 to
+4/11/28; heap allocations remain 14/27/34, so the zero-bridge/no-C-heap gate remains
+false. Browser denial of Node APIs passes two segments/seven checks, and window
+callbacks pass 25 bindings/100 live dispatches/50 invalid-pointer rejections.
+All 43 known dynamic sites pass 223 dispatches/34 live calls with none unresolved.
+
+All 44 public recordings (56 segments) pass: 792,838 ordered RNG entries,
+11,405 screens/cursors and 1,483 animation frames match. The 869-input manifest
+has no changes during scoring. Elapsed time is 255.3034s versus the previous
+pushed 256.8312s, 0.59% lower in this run; this small change does not establish a
+substantial overall speed gain. The frozen runner's regression fit is 2547.3ms
+startup plus 12.1996ms/move, not separately measured phases. No new baseline or
+CPU profiling was performed. The 20x ambition and 40–55s budget remain unfulfilled.
+Detailed scope, source hashes, full-turn counters and scoring receipts are in
+`docs/runtime-environment/native-sounds-state-validation.json` and its linked
+input manifest. Hidden recordings and every advanced chat branch are not proven
+by these public and controlled component checks.
+
 ## Direct native terminal byte output (2026-11-14)
 
 `js/c-runtime/library-bindings.js`, `js/nethack/environment.js`,

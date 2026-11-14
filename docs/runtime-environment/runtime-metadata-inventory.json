@@ -10,7 +10,7 @@
   },
   "jsonSources": 120,
   "coreJsonSources": 112,
-  "inlineTableDeclarations": 132,
+  "inlineTableDeclarations": 133,
   "inlineTableFiles": 93,
   "adapterFiles": 129,
   "sharedAliasSource": {
@@ -992,7 +992,12 @@
     },
     {
       "file": "js/nethack/bindings/sounds.js",
-      "line": 7,
+      "line": 10,
+      "name": "types"
+    },
+    {
+      "file": "js/nethack/bindings/sounds.js",
+      "line": 11,
       "name": "schemas"
     },
     {
@@ -1672,7 +1677,7 @@
     },
     {
       "file": "js/nethack/bindings/sounds.js",
-      "sha256": "a891c00f96a874f5f7d7bd390a3d69f643a89adfffd04e2b020d899b66c92634"
+      "sha256": "f9626a55084e086c9a86ea7f4dc7f1bef3a4b0456d846330a8b8dbc7f7c9d769"
     },
     {
       "file": "js/nethack/bindings/sp_lev.js",
