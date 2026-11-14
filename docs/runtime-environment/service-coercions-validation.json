@@ -36,7 +36,40 @@
     ],
     "scope": "Real original-C and JS MAIN worlds; source teleport, visibility, object creation, ship_object and cleanup. Both ordinary-object and corpse transit branches execute the actual Strcpy adapter. Complete ordered core/display RNG, world graph, raw terminal and frames match. This is a targeted reproduction, not every shipping/shop/trap branch."
   },
-  "public44": "pending isolated committed candidate validation",
+  "public44": {
+    "passed": 44,
+    "total": 44,
+    "metrics": {
+      "rngCalls": {
+        "matched": 792838,
+        "total": 792838
+      },
+      "screens": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "cursors": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "animFrames": {
+        "matched": 1483,
+        "total": 1483
+      }
+    },
+    "integrity": {
+      "filesChecked": 872,
+      "changed": [],
+      "exitCode": 0,
+      "wallSeconds": 249.95326970890164,
+      "sessionSelectionMatched": true,
+      "childUserSeconds": 380.926562,
+      "childSystemSeconds": 7.697582000000001
+    },
+    "sampling": false,
+    "candidateCommit": "8fff9f0db9f248237e83fe527e0954161dec03b9",
+    "scope": "Isolated committed bug-fix checkout; unfinished message-performance work excluded."
+  },
   "scope": "No engine policy/RNG/frozen source changes. Guards cover all four fixed-coercion catalogs; other argument-list rows receive static arity checks. Does not prove every hidden policy branch.",
   "sourceSha256": {
     "js/nethack/service-coercions.js": "522f960a28da495fc132eebe67b5c2ff166b9abb5073bdfe7787c7eb90d68651",

@@ -31,7 +31,11 @@ a corpse in independently initialized C/JS worlds: four calls traverse the real
 Strcpy adapter, two objects migrate, and 65 world/RNG/terminal/frame comparisons
 pass. The catalog audit covers all 337 fixed rows and 625 source conversions;
 490 other argument-list rows are checked, including 27 variadic prefixes.
-The fresh 44-recording verification is pending at this commit. Earlier component
+The isolated committed candidate passes all 44 public recordings: 792,838
+ordered RNG calls, 11,405 screens/cursors and 1,483 animation frames match
+exactly. All 872 scoring inputs remained unchanged. Evidence and source hashes
+are in `docs/runtime-environment/service-coercions-validation.json` and its
+public44 manifest. Earlier component
 DOKICK tests used a separate provider and the prior gameplay check exercised a
 door kick, so neither verified this standalone shipping adapter.
 
