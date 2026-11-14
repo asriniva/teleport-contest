@@ -1,3 +1,52 @@
+## Native connected engraving state and execution (2026-11-14)
+
+`engrave.js` and `native/engrave{,-state}.js` now share one native graph across
+world lookup/mutation, the complete engraving command/occupation, level generation
+and save/restore. `world-position.js`, `level-contents.js` and `level-persistence.js`
+register the same native entries; the spatial lookup surface selects those native
+value entries too. Engraving records join canonical shared state and text slots
+use direct typed-arena access. Private calls are lexical and source policies/RNG
+sites retain their order. `generate-native-engrave.mjs` records the explicit text
+slot, context and byte-access substitutions.
+
+The synthetic 1,224-byte heap command record is replaced by a native JS object
+with measured integer widths, canonical item/engraving identities, native strings
+and lazy scratch byte values. Lookup tables remain JS until a byte consumer needs
+a literal address. `byte-values.js` supports explicit numeric address coercion at
+pointer-arithmetic boundaries. Text bytes and pointer-shaped serialization remain
+real byte consumers; record/text allocation and mutation order are still explicit.
+No claim of zero-bridge/zero-allocation turns or 20x.
+
+Validation: 414 focused C comparisons cover the shared live owner, every generated
+context member, native command width/identity/lifetime and zero pre-byte C record
+allocation, creation/read/feel/wiping, seeded and actual RNG degradation,
+forgetting/sanitizing, and nonempty source save/free/restore. C and JS restore
+one another's raw engraving saves; only observed list IDs and intra-allocation
+text offsets are normalized for byte comparison. Natural MAIN finger, marker,
+athame, fire-wand and light-wand commands complete and match full C, including
+ordered RNG, world, terminal and frames. A long literal engraving is genuinely
+interrupted with a positive source-written prefix. The wand fixtures declare the
+extra message-prompt spaces observed in C before supplying the engraving text.
+The actual native test entry roots its production manifest; historical relocated
+JS-owner fingerprints are not used as current evidence. All original C receipt
+and ENGRAVE header hashes are checked directly. These finite tests do not cover
+every tool/form/terrain/menu branch or hidden recording. All 396 record types
+(46,087 comparisons), connected monsters, 574 WORN, 514 TOPL and 51 natural
+mounted-save checks pass. Byte-value tests explicitly verify numeric offset and
+one-past address coercion. Generator freshness and metadata gates pass.
+
+Ordinary walk/wait/attack remain C-equivalent: generic calls fall from 10/18/38
+to 8/16/34, contexts from 17/26/55 to 13/22/47, and generic field calls from
+6/9/31 to 3/7/25. C-heap allocations remain 25/158/93. The strict zero gate fails.
+All 44 public recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors
+and 1,483 animations match. All 846 scoring inputs stayed unchanged, and final
+source hashes match the run. Candidate elapsed time was 272.452s versus existing
+pushed 270.811s, about 0.61% MORE time in separate single runs. This is no measured
+overall speedup and does not meet the required 20x. No new baseline or CPU
+profiling was performed. Evidence:
+`docs/runtime-environment/native-engrave-validation.json` and
+`native-engrave-public44-manifest.json`.
+
 ## Native movement local references (2026-11-14)
 
 `native/local-reference.js`, `bindings/hack.js` and `movement.js` now keep HACK
