@@ -500,7 +500,7 @@ function moverock_core(sx,sy)
                        the pit will temporarily be seen even
                        if this is one among multiple boulders */
                     if (!C.Blind)
-                        ((_hackTarget,_hackIndex)=>_hackTarget[_hackIndex] = ((((C.int(_hackTarget[_hackIndex]) | C.int(C.IN_SIGHT))|0))&255))(C.gv.viz_array[ry],rx);
+                        C.writeVisibility(ry,rx,((((C.int(C.readVisibility(ry,rx)) | C.int(C.IN_SIGHT))|0))&255));
                     if (!C.flooreffects(otmp, rx, ry, "fall")) {
                         C.place_object(otmp, rx, ry);
                     }
@@ -1248,9 +1248,9 @@ function findtravelpath(mode)
     }
     found: {
     if (Number(Boolean(C.u.tx != C.u.ux || C.u.ty != C.u.uy))) {
-        let travel = C.localArray("coordxy",[80, 21]);
-        let travelstepx = C.localArray("coordxy",[2, 1680]);
-        let travelstepy = C.localArray("coordxy",[2, 1680]);
+        let travel = C.nativeTravelGrid(80,21);
+        let travelstepx = C.nativeTravelGrid(2,1680);
+        let travelstepy = C.nativeTravelGrid(2,1680);
         let tx; let ty; let ux; let uy;
         let n = ((1)|0);      /* max offset in travelsteps */
         let set = ((0)|0);    /* two sets current and previous */
@@ -1274,7 +1274,7 @@ function findtravelpath(mode)
         }
 
  noguess: for (;;) {
-        void (C.memset(( travel), 0, BigInt(2*80*21)));
+        void (C.clearTravelGrid(travel));
         travelstepx[0][0] = C.short(tx);
         travelstepy[0][0] = C.short(ty);
 
@@ -2465,7 +2465,7 @@ function avoid_running_into_trap_or_liquid(x,y)
 function avoid_trap_andor_region(x,y)
 {
     x=C.short(x);y=C.short(y);
-    let qbuf = C.localArray("char",[128]);
+    let qbuf = C.nativePromptBuffer(128);
     let newreg; let oldreg;
     let trap = C.NULL;
 
@@ -3468,19 +3468,19 @@ function in_rooms(x,y,typewanted)
     for (x = C.short(min_x); x <= max_x; x = ((((C.int(x) + C.int(step))|0))<<16>>16)) {
         lev = C.levl[x][min_y];
         y = ((0)<<16>>16);
-        if (Number(Boolean((rno = C.char(lev[y].roomno)) >= C.ROOMOFFSET && !C.strchr(ptr, rno)
+        if (Number(Boolean((rno = C.char(C.advanceRecord(lev,y).roomno)) >= C.ROOMOFFSET && !C.strchr(ptr, rno)
             && (!typewanted || (typefound = C.svr.rooms[rno - C.ROOMOFFSET].rtype) == typewanted || (typewanted == C.SHOPBASE && typefound > C.SHOPBASE)))))
             C.HEAP8[C.charPointer((--ptr))] = C.char(rno);
         y = ((((C.int(y) + C.int(step))|0))<<16>>16);
         if (y > max_y_offset)
             continue;
-        if (Number(Boolean((rno = C.char(lev[y].roomno)) >= C.ROOMOFFSET && !C.strchr(ptr, rno)
+        if (Number(Boolean((rno = C.char(C.advanceRecord(lev,y).roomno)) >= C.ROOMOFFSET && !C.strchr(ptr, rno)
             && (!typewanted || (typefound = C.svr.rooms[rno - C.ROOMOFFSET].rtype) == typewanted || (typewanted == C.SHOPBASE && typefound > C.SHOPBASE)))))
             C.HEAP8[C.charPointer((--ptr))] = C.char(rno);
         y = ((((C.int(y) + C.int(step))|0))<<16>>16);
         if (y > max_y_offset)
             continue;
-        if (Number(Boolean((rno = C.char(lev[y].roomno)) >= C.ROOMOFFSET && !C.strchr(ptr, rno)
+        if (Number(Boolean((rno = C.char(C.advanceRecord(lev,y).roomno)) >= C.ROOMOFFSET && !C.strchr(ptr, rno)
             && (!typewanted || (typefound = C.svr.rooms[rno - C.ROOMOFFSET].rtype) == typewanted || (typewanted == C.SHOPBASE && typefound > C.SHOPBASE)))))
             C.HEAP8[C.charPointer((--ptr))] = C.char(rno);
     }
@@ -4426,17 +4426,17 @@ function dump_weights()
         if (i != C.PM_LONG_WORM_TAIL) {
             let cm;
 
-            C.weightlist[cnt].wt = ((((C.mons[i].cwt)|0))|0);
-            C.weightlist[cnt].idx = C.int(i);
-            C.weightlist[cnt].wtyp = ((1)>>>0);
-            C.weightlist[cnt].unique = (((C.mons[i].geno & C.G_UNIQ) != 0)<<24>>24);
-            C.nh_snprintf("dump_weights",4439,nmbuf, BigInt(1*256), "%07u", C.weightlist[cnt].wt);
+            C.weightAt(cnt).wt = ((((C.mons[i].cwt)|0))|0);
+            C.weightAt(cnt).idx = C.int(i);
+            C.weightAt(cnt).wtyp = ((1)>>>0);
+            C.weightAt(cnt).unique = (((C.mons[i].geno & C.G_UNIQ) != 0)<<24>>24);
+            C.nh_snprintf("dump_weights",4439,nmbuf, BigInt(1*256), "%07u", C.weightAt(cnt).wt);
             cm = C.char(C.CapitalMon(C.mons[i].pmnames[C.NEUTRAL]));
             C.nh_snprintf("dump_weights",4444,(C.charPointer(nmbuf) + 7), C.ulong((C.ulong(BigInt(1*256))) - ((7n))), "%s%s", "the body of ",
                      (cm)                     ? C.the(C.mons[i].pmnames[C.NEUTRAL])
-                     : C.weightlist[cnt].unique ? C.mons[i].pmnames[C.NEUTRAL]
+                     : C.weightAt(cnt).unique ? C.mons[i].pmnames[C.NEUTRAL]
                                               : C.an(C.mons[i].pmnames[C.NEUTRAL]));
-            C.weightlist[cnt].nm = C.charPointer(C.dupstr(nmbuf));
+            C.weightAt(cnt).nm = C.charPointer(C.dupstr(nmbuf));
             cnt++;
         }
     }
@@ -4446,16 +4446,16 @@ function dump_weights()
         let wt = ((((C.objects[i].oc_weight)|0))|0);
 
         if (Number(Boolean(wt && oc_name))) {
-            C.weightlist[cnt].idx = C.int(i);
-            C.weightlist[cnt].wt = C.int(wt);
-            C.weightlist[cnt].wtyp = ((2)>>>0);
-            C.weightlist[cnt].unique = ((C.objects[i].oc_unique != 0)<<24>>24);
+            C.weightAt(cnt).idx = C.int(i);
+            C.weightAt(cnt).wt = C.int(wt);
+            C.weightAt(cnt).wtyp = ((2)>>>0);
+            C.weightAt(cnt).unique = ((C.objects[i].oc_unique != 0)<<24>>24);
             C.objects[i].oc_name_known = ((1)>>>0);
             C.Strcpy(nmbufbase, C.simple_typename(i));
             C.nh_snprintf("dump_weights",4463,nmbuf, BigInt(1*256), "%07u%s", wt,
-                     (C.weightlist[cnt].unique) ? C.the(nmbufbase)
+                     (C.weightAt(cnt).unique) ? C.the(nmbufbase)
                                               : C.an(nmbufbase));
-            C.weightlist[cnt].nm = C.charPointer(C.dupstr(nmbuf));
+            C.weightAt(cnt).nm = C.charPointer(C.dupstr(nmbuf));
             cnt++;
         }
     }
@@ -4463,11 +4463,11 @@ function dump_weights()
           BigInt(C.sizes["weight_table_entry"]), cmp_weights);
     C.raw_printf("int all_weights[] = {");
     for (i = ((0)|0); i < cnt; ++i) {
-        if (C.weightlist[i].nm) {
-            C.raw_printf("    %7u%s /* %*s */", C.weightlist[i].wt,
+        if (C.weightAt(i).nm) {
+            C.raw_printf("    %7u%s /* %*s */", C.weightAt(i).wt,
                        (i == cnt - 1) ? " " : ",", -nmwidth,
-                       (C.charPointer(C.weightlist[i].nm) + 7));
-            C.free(( C.weightlist[i].nm)), C.weightlist[i].nm = C.charPointer(0);
+                       (C.charPointer(C.weightAt(i).nm) + 7));
+            C.free(( C.weightAt(i).nm)), C.weightAt(i).nm = C.charPointer(0);
         }
     }
     C.raw_print("};");

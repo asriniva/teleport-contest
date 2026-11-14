@@ -1,0 +1,32 @@
+import * as CAdapter from '../../c-runtime/adapter-factories.js';
+import * as Crt from '../../c-runtime/adapter-memory.js';
+import * as core from '../../ported/hack.js';
+import {createNativeHeroMovement} from './hero-movement.js';
+import {createNativeLocalReference,isNativeLocalReference} from './local-reference.js';
+import {createNativeByteValues} from './byte-values.js';
+import {nativeStateFor} from './state-bridge.js';
+import hackAbi from '../hack-abi.json' with {type:'json'};
+const moduleStates=new WeakMap();
+export function createNativeHackState(services,layout){
+ const environment=services.nativeEnvironment,{ctypes,memory:heap,transport}=environment,nativeState=nativeStateFor(environment),arena=nativeState.nativeArena,views=nativeState.nativeRecords,heapSource=services.heap;
+ const addr=environment.address,raw=v=>BigInt.asUintN(64,BigInt(typeof v==='string'?services.literal(v):typeof v==='boolean'?Number(v):typeof v==='number'?Math.trunc(v):v?.address??v??0)),pointerValue=v=>arena.handle(v),memory=()=>arena.view,names=Object.keys(schemas),extra=new Map();
+ const scalarKinds={i8:'Int8',u8:'Uint8',i16:'Int16',u16:'Uint16',i32:'Int32',u32:'Uint32',i64:'BigInt64',u64:'BigUint64'},scalarTypes={i8:'signed char',u8:'unsigned char',i16:'short',u16:'unsigned short',i32:'int',u32:'unsigned int',i64:'long',u64:'unsigned long'};
+ let namespace;
+ function view(name,value){if(!schemas[name])throw Error('Unknown native HACK record '+name);const at=addr(value);if(!at)return 0;if(name!=='weight_table_entry')return views.record(schemas[name].ctype,value);const key=name+':'+at;if(extra.has(key))return extra.get(key);const out={address:at,[Symbol.toPrimitive]:()=>at},row=hackAbi.records.weight_table_entry;for(const[field,f]of Object.entries(row.fields)){const t=f.ctype.replace(new RegExp('\\s+'+field+'$'),''),kind=f.d?.t;Object.defineProperty(out,field,{enumerable:true,get:()=>t.includes('*')?arena.pointer(at+f.offset):ctypes.load(t,at+f.offset),set:v=>t.includes('*')?arena.storePointer(at+f.offset,v):ctypes.store(t,at+f.offset,v)});}extra.set(key,out);return out;}
+ const width=d=>d.row?8:d.t?Number(d.t.slice(1))/8:d.p!==undefined||d.f?8:d.s?Number(layout[d.s+'Size']):d.a.reduce((n,x)=>n*x,1)*width(d.e);
+ const decode=(d,v)=>{if(d.p!==undefined)return d.p?view(d.p,v):pointerValue(v);if(d.s)return view(d.s,v);if(d.a)return array(d,addr(v));if(d.f)return v;const bits=+d.t.slice(1),n=d.t[0]==='i'?BigInt.asIntN(bits,BigInt(v)):BigInt.asUintN(bits,BigInt(v));return bits===64?n:Number(n);};
+ function read(d,p){if(d.s||d.a)return decode(d,p);if(d.p!==undefined)return decode(d,arena.pointer(p));if(d.f)return arena.BigUint64[p/8];return arena.view['get'+scalarKinds[d.t]](p,true);}
+ function write(d,p,v){if(d.s){heap.HEAPU8.copyWithin(p,addr(v),addr(v)+width(d));return;}if(d.p!==undefined||d.f||d.t?.slice(1)==='64')arena.storePointer(p,raw(v));else arena.view['setUint'+d.t.slice(1)](p,Number(v),true);}
+ const arrays=new Map();function array(d,p){const key=JSON.stringify(d)+':'+p;if(arrays.has(key))return arrays.get(key);if(d.a.every(n=>n>0)){const type=(d.e.t?scalarTypes[d.e.t]:d.e.p!==undefined?(d.e.p?schemas[d.e.p].ctype:'void')+' *':schemas[d.e.s].ctype)+d.a.map(n=>'['+n+']').join(''),out=views.value(type,p);if(!Object.hasOwn(out,'descriptor'))Object.defineProperty(out,'descriptor',{value:d});arrays.set(key,out);return out;}const child=d.a.length===1?d.e:{a:d.a.slice(1),e:d.e},stride=width(child);return new Proxy({address:p,descriptor:d},{get:(o,k)=>typeof k==='string'&&/^\d+$/.test(k)?read(child,p+Number(k)*stride):Reflect.get(o,k),set:(o,k,v)=>{if(typeof k==='string'&&/^\d+$/.test(k)){write(child,p+Number(k)*stride,v);return true;}return Reflect.set(o,k,v);}});}
+ const metadata=new Map(names.map(n=>{const row=n==='weight_table_entry'?hackAbi.records.weight_table_entry:ctypes.record(schemas[n].ctype);if(row.size!==Number(layout[n+'Size']))throw Error('Native HACK record size '+n);return[n,new Map(schemas[n].fields.map(f=>{const field=row.fields[f.name];if(!field)throw Error('Missing native HACK field '+n+'.'+f.name);if(Boolean(f.bit)!==(field.bits!==undefined))throw Error('Native HACK packed metadata '+n+'.'+f.name);return[f.name,field];}))];}));
+ const byteValues=createNativeByteValues(environment),grids=new WeakSet(),env=Object.assign(Object.create(services),layout,{
+  view,nativeState,addressOf:(o,f)=>ctypes.fieldAddress(views.kindOf(o),o.address,f),
+  int:v=>Number(BigInt.asIntN(32,raw(v))),char:v=>Number(BigInt.asIntN(8,raw(v))),uchar:v=>Number(BigInt.asUintN(8,raw(v))),boolean:v=>Number(BigInt.asIntN(8,raw(v))),short:v=>Number(BigInt.asIntN(16,raw(v))),long:v=>BigInt.asIntN(64,raw(v)),ulong:raw,
+  charPointer:v=>typeof v==='string'?services.literal(v):Array.isArray(v)?services.literal(String.fromCharCode(...v.slice(0,v.indexOf(0)<0?v.length:v.indexOf(0)))):addr(v),
+  loadChar:v=>memory().getInt8(addr(v)),storeChar:(v,b)=>memory().setInt8(addr(v),Number(b)),intReference:(get,set)=>({get,set}),
+  readVisibility:(y,x)=>arena.Uint8[arena.pointer(addr(env.gv.viz_array)+Number(y)*8)+Number(x)],
+  writeVisibility:(y,x,v)=>{v=env.uchar(v);arena.Uint8[arena.pointer(addr(env.gv.viz_array)+Number(y)*8)+Number(x)]=v;return v;},
+  nativeTravelGrid:(x,y)=>{const out=Array.from({length:x},()=>new Int16Array(y));Object.defineProperty(out,'address',{get(){throw Error('Native travel grid has no byte address');}});grids.add(out);return out;},clearTravelGrid:grid=>{if(!grids.has(grid))throw Error('Foreign native travel grid');for(const row of grid)row.fill(0);},
+  nativePromptBuffer:size=>{const out=byteValues(size);Object.defineProperty(out,'descriptor',{value:{a:[size],e:{t:'i8'}}});return out;},
+ });
+ for(const[k,n]of Object.entries({pointerSize:8,longSize:8,intSize:4,charSigned:1,littleEndian:1}))if(Number(layout[k])!==n)throw Error('Review native HACK ABI '+k);

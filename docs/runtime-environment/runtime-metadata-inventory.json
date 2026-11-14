@@ -10,8 +10,8 @@
   },
   "jsonSources": 120,
   "coreJsonSources": 112,
-  "inlineTableDeclarations": 128,
-  "inlineTableFiles": 92,
+  "inlineTableDeclarations": 132,
+  "inlineTableFiles": 93,
   "adapterFiles": 129,
   "sharedAliasSource": {
     "file": "js/nethack/declarations.js",
@@ -1179,6 +1179,26 @@
       "file": "js/nethack/native/apply-state.js",
       "line": 3,
       "name": "globals"
+    },
+    {
+      "file": "js/nethack/native/hack-state.js",
+      "line": 2,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/native/hack-state.js",
+      "line": 3,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/native/hack-state.js",
+      "line": 16,
+      "name": "scalarTypes"
+    },
+    {
+      "file": "js/nethack/native/hack-state.js",
+      "line": 50,
+      "name": "aliases"
     },
     {
       "file": "js/nethack/native/mon-state.js",

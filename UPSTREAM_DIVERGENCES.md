@@ -1,3 +1,42 @@
+## Native complete hero movement context and calls (2026-11-14)
+
+`movement.js`, `native/hack{,-state,-entries,-calls}.js` and their generators
+replace the HACK proxy context, repeated binding frames and record factory with
+one per-game native owner. All 95 source entries and 257 typed service calls have
+fixed argument plans; canonical actors, hero, map and lookup arrays are shared.
+The earlier `in_rooms` and `invocation_pos` exports upgrade to this owner.
+Travel grids use JS-owned signed 16-bit arrays with explicit zeroing; optional
+prompt bytes materialize only when consumed. Visibility byte accesses, debug
+weight-record indexing and all three room-pointer advances are explicit native
+consumers. Source decisions, RNG and mutation order are retained. Genuine byte
+copies, other local records, formatting, unbounded byte/pointer helpers and
+foreign calls retain boundaries; native records still use typed ABI storage and
+field accessors. This does not make complete turns native or allocation-free.
+
+The first full candidate passed only 41/44: room-pointer numeric indexing failed
+in Dequa, hallucination and Knight sessions. Its 254.343s timing is rejected.
+After replacing all three `lev[y]` accesses with explicit record advancement,
+those three complete sessions pass, followed by final 44/44 with all 792,838 RNG
+entries, 11,405 screens/cursors and 1,483 animation frames matching. The final
+864-file receipt reports no source changes. Elapsed time is 273.4513s versus the
+existing accepted 264.9469s: 3.21% slower. No speed gain or 20x claim is made.
+No new baseline profiling was performed.
+
+Final context checks pass 2,888 comparisons; native local references pass 5,099;
+25 production window bindings pass 100 dispatches/50 invalid-target rejections.
+Strict source inversion passes all 14 ports, 1,163 functions and 23,489 operations;
+the dynamic callback audit resolves every current site. Original-C ordinary turn
+comparison passes, but walk/wait/attack still allocate 23/65/93 C heap blocks and
+make 5/12/30 generic calls, so the zero-cost acceptance gate remains false.
+Earlier original-C checks cover actual travel (14 checks/24 native grids),
+confused/stunned movement, jumping, save/restore and inventory commands, and the
+complete weight diagnostic (20 checks/59,226 stdout bytes). An initial diagnostic
+probe incorrectly added an extra terminal synchronization after input exhaustion;
+that probe looped in terminal input and was stopped. The invalid extra wait was
+removed; it is not evidence of an engine hang. These finite checks do not prove
+all possible movement branches. Full receipts and limitations are retained in
+`docs/runtime-environment/native-hack-validation.json` and its public44 manifest.
+
 ## Browser recorder host boundary (2026-11-14)
 
 The production standalone recorder no longer imports Node filesystem/path/URL

@@ -6,6 +6,7 @@ import {createStandaloneProgram} from '../js/nethack/program.js';
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));
 const {environment:env}=createStandaloneProgram({layouts,readKey(){throw Error('Unexpected input');}});
 const owners=[
+ ['HACK',env.enableMovement(layouts),['create_nhwindow','destroy_nhwindow','display_nhwindow','putstr','start_menu','end_menu','nh_delay_output','raw_print']],
  ['UHITM',env.enableUhitm(layouts),['display_nhwindow','nh_delay_output']],
  ['APPLY',env.enableApply(layouts),['create_nhwindow','start_menu','end_menu','destroy_nhwindow']],
  ['ENGRAVE',env.enableEngrave(layouts),['getlin']],
@@ -16,6 +17,7 @@ const owners=[
 ];
 const pointer=env.services.literal('production binding probe'),output=env.memory.calloc(128,1);
 const contracts={
+ raw_print:{field:'win_raw_print',signature:'vp',values:mode=>({args:[mode?pointer:0],expected:[mode?pointer:0]})},
  create_nhwindow:{field:'win_create_nhwindow',signature:'ii',values:mode=>({args:[mode?4294967299:0],expected:[mode?3:0]})},
  destroy_nhwindow:{field:'win_destroy_nhwindow',signature:'vi',values:mode=>({args:[mode?-1:0],expected:[mode?-1:0]})},
  display_nhwindow:{field:'win_display_nhwindow',signature:'vii',values:mode=>({args:[mode?4294967313:0,mode?257:0],expected:[mode?17:0,mode?1:0]})},
@@ -56,5 +58,5 @@ for(const [name,owner,methods]of owners)for(const method of methods){
  }finally{env.memory.view.setBigUint64(at,original,true);env.transport.stackRestore(stack);}
  bindings++;
 }
-assert.equal(bindings,17);assert.equal(dispatches,68);assert.equal(rejections,34);assert.equal(growths,1);
-console.log('PASS: '+bindings+' production window bindings across7 owners, '+dispatches+' live dispatches, '+rejections+' invalid-pointer/signature rejections, verified callback-time growth, replacement, integer/boolean narrowing, full-width menu flags, pointers and stack preservation.');
+assert.equal(bindings,25);assert.equal(dispatches,100);assert.equal(rejections,50);assert.equal(growths,1);
+console.log('PASS: '+bindings+' production window bindings across8 owners, '+dispatches+' live dispatches, '+rejections+' invalid-pointer/signature rejections, verified callback-time growth, replacement, integer/boolean narrowing, full-width menu flags, pointers and stack preservation.');
