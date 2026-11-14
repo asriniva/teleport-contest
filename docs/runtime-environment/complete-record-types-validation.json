@@ -851,8 +851,43 @@
     "limits": "Component generation on source-initialized real C/JS worlds; all map bytes, world graph and complete ordered main/display RNG logs compared. Does not identify the unavailable leaderboard recording."
   },
   "public44": {
-    "status": "pending",
-    "previousPassingCommit": "bf908bc",
-    "previousResultDoesNotValidateThisCommit": true
+    "commit": "4fef211",
+    "passed": 44,
+    "total": 44,
+    "integrity": {
+      "filesChecked": 817,
+      "changed": [],
+      "exitCode": 0,
+      "wallSeconds": 298.3500287090428,
+      "sessionSelectionMatched": true,
+      "childUserSeconds": 445.09218000000004,
+      "childSystemSeconds": 10.077710000000002
+    },
+    "metrics": {
+      "rngCalls": {
+        "matched": 792838,
+        "total": 792838
+      },
+      "screens": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "cursors": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "animFrames": {
+        "matched": 1483,
+        "total": 1483
+      }
+    },
+    "manifestSha256": "5772e94fcead74fe0def188b13501c362e0ed0d3ca989e31a967c165cc56c323",
+    "resultsSha256": "2eb66d1f2afd4bcaaa03c9ebfd58b1ca6deeb74f518de805ca0ca28d9d45331d"
+  },
+  "timingComparison": {
+    "previousSeconds": 299.25148770865053,
+    "currentSeconds": 298.3500287090428,
+    "controlled": false,
+    "conclusion": "Effectively flat separate single runs; no demonstrated timing gain."
   }
 }

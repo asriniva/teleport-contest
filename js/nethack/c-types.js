@@ -10,8 +10,10 @@ import optionsAbi from './options-abi.json' with {type:'json'};
 const enriched=new WeakMap();
 export function withNetHackEnums(metadata) {
     if(enriched.has(metadata))return enriched.get(metadata);
+    const boolLayout=supplemental.scalarLayouts.bool;
+    if(boolLayout.size!==1||boolLayout.alignment!==1||boolLayout.negative!==1)throw new Error('Review measured C bool representation');
     const enums={...metadata.enums};
-    for(const source of [windowAbi.enums,optionsAbi.enums])for(const [name,layout] of Object.entries(source)){
+    for(const source of [windowAbi.enums,optionsAbi.enums,supplemental.enums])for(const [name,layout] of Object.entries(source)){
         const previous=enums[name];
         if(previous&&(previous.size!==layout.size||previous.signed!==layout.signed))throw new Error('Conflicting measured C enum '+name);
         enums[name]=layout;

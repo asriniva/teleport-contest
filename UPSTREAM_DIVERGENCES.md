@@ -1,3 +1,39 @@
+## Public catalog types and returned-callback ABI parsing (2026-11-13)
+
+The full public catalog was outside the prior per-module prototype audit.
+Auditing all 4,279 declarations found 54 unresolved type positions: C `bool`
+(53) and `enum idtype_t` (one). The configured compiler now measures C bool
+(size/alignment 1, negative-to-bool conversion 1) and idtype_t (four-byte unsigned
+enum). The supplemental-layout generator records both and all transitive header
+hashes in separate public-header/private-Lua translation units. Generic C storage
+and native ABI conversion implement bool truth conversion, including NaN, while
+NetHack's signed-char `boolean` retains its existing narrowing behavior.
+
+The catalog also exposed two function-pointer return declarations, `signal` and
+`sigset`. The old linker inferred their callback addresses from the first open
+parenthesis and produced the wrong signature. `c-runtime/prototypes.js` parses
+balanced parameter/array groups and returned callback pointers. The real linker
+now uses it; source signal/sigset declarations yield `pip`. The callback tests
+register, call, return and reinvoke real registry handlers, and test nested qsort
+callbacks. The previous linker fails that same dispatcher regression. Aggregate
+aliases and extended opaque scalar values require an explicit callback ABI;
+they are not silently inferred as ordinary integers.
+
+The metadata gate now checks the entire public catalog plus per-module ABIs:
+10,823 prototypes, canonical callback typedefs, 128 measured enums, 3,202 record
+fields and all 81 finite selector tables (399 names). No game policies, C source,
+RNG calls, captures, recording inputs or timeout settings change. Focused checks pass: 23 prototype/dispatcher checks, both synthetic and real
+signal-provider handler returns/reinvocation, compiler layout checks, shared
+runtime contracts, 478 field contracts, 1,931 SDK checks, actual gameplay,
+original-C ordinary-turn equivalence and all 32 production ice/lava cases.
+All 44 recordings for this final candidate pass: 792,838 ordered RNG entries,
+11,405 screens/cursors and 1,483 animations match. All 818 scoring inputs stayed
+unchanged. The unprofiled Node 22 run took 289.713s versus 298.350s previously;
+these are separate single runs, with no controlled speedup claimed. Both Node 24
+and scoring Node 22 pass the 23 callback/prototype checks and 169 field/scalar
+checks. Receipt and pre-run manifest:
+`docs/runtime-environment/public-prototypes-validation.json`.
+
 ## Complete record-type audit and supplemental measured declarations (2026-11-13)
 
 The follow-on census checks every shared record-field type, rather than only
@@ -27,8 +63,10 @@ No source game policies, C sources, RNG calls, input/capture or timeout settings
 change. Focused Node 24 and scoring Node 22 checks pass (123 checks each), as
 do 2,261 alias/aggregate checks, 478 runtime field contracts, numeric/coercion
 contracts, 1,931 SDK checks, actual gameplay, original-C ordinary-turn equivalence
-and all 32 production ice/lava cases. Public 44-recording verification for this
-new candidate is pending; bf908bc's 44/44 does not validate it. Receipt:
+and all 32 production ice/lava cases. All 44 recordings for 4fef211 pass: 792,838 ordered RNG entries,
+11,405 screens/cursors and 1,483 animations match. All 817 scoring inputs stayed
+unchanged. The unprofiled Node 22 run took 298.350s versus 299.251s previously,
+effectively flat in separate single runs. Receipt and pre-run manifest:
 `docs/runtime-environment/complete-record-types-validation.json`.
 
 ## Shared header field aliases and aggregate classification (2026-11-13)

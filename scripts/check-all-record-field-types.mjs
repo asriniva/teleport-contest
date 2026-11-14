@@ -42,6 +42,12 @@ if(process.argv[1]===new URL(import.meta.url).pathname){
   assert.ok(Object.is(cast(type)(value),type==='float'?Math.fround(value):value));checks++;
  }
  assert.throws(()=>cast('long double'),/Opaque alignment storage/);checks++;
+ for(const type of ['bool','_Bool'])for(const value of [0,-0,1,-1,2,1.25,NaN,Infinity,-Infinity,0n,1n]){
+  const p=env.memory.calloc(1,1),expected=Number(Number(value)!==0);
+  env.ctypes.store(type,p,value);assert.equal(env.ctypes.load(type,p),expected);checks++;
+  assert.equal(cast(type)(value),expected);checks++;env.memory.free(p);
+ }
+ const booleanAt=env.memory.calloc(1,1);env.ctypes.store('boolean',booleanAt,255);assert.equal(env.ctypes.load('boolean',booleanAt),-1);checks++;assert.equal(cast('boolean')(2),2);checks++;env.memory.free(booleanAt);
  const first=Object.keys(measured.records)[0];assert.throws(()=>withNetHackEnums({...raw,records:{...raw.records,[first]:{...measured.records[first],size:measured.records[first].size+1}}}),/Conflicting supplemental record/);checks++;
  console.log(JSON.stringify({passed:true,...result,checks,opaqueAlignmentBytes:16}));
 }

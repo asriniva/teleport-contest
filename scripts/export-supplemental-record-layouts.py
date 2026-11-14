@@ -14,9 +14,14 @@ def canonical(t):
 def anonymous_refs(t):return re.findall(r'(?:struct|union) (?:\w+::)?\(unnamed(?: struct| union)? at [^)]*\)',t)
 with tempfile.TemporaryDirectory(prefix='record-fields-')as d:
  source=Path(d)/'measure.c';source.write_text('#include "hack.h"\n#include <signal.h>\n#include <stddef.h>\n#include "lstate.h"\n#include "lauxlib.h"\nconst unsigned long opaque_size=sizeof(long double),opaque_alignment=_Alignof(long double);\n')
+ public=Path(d)/'public.c';public.write_text('#include "hack.h"\n#include "wintty.h"\n#include <sys/wait.h>\nconst unsigned long bool_size=sizeof(bool),bool_alignment=_Alignof(bool),bool_negative=(bool)-1;\nconst unsigned long idtype_size=sizeof(idtype_t),idtype_signed=((idtype_t)-1)<0;\n')
  dump=subprocess.check_output([str(clang),*flags,'-Xclang','-fdump-record-layouts-complete','-fsyntax-only',str(source)],text=True)
  ir=subprocess.check_output([str(clang),*flags,'-S','-emit-llvm','-O0','-o','-',str(source)],text=True)
+ ir+=subprocess.check_output([str(clang),*flags,'-S','-emit-llvm','-O0','-o','-',str(public)],text=True)
  scalar={key:int(re.search('@opaque_'+key+r' = .*?constant i64 (\d+)',ir)[1])for key in ['size','alignment']}
+ boolean={key:int(re.search('@bool_'+key+r' = .*?constant i64 (\d+)',ir)[1])for key in ['size','alignment','negative']}
+ enum={key:int(re.search('@idtype_'+key+r' = .*?constant i64 (\d+)',ir)[1])for key in ['size','signed']}
+ assert boolean=={'size':1,'alignment':1,'negative':1},'Review configured bool representation'
  known={};paths={}
  for block in dump.split('*** Dumping AST Record Layout'):
   name=re.search(r'^\s*0 \| (.+)$',block,re.M);size=re.search(r'\[sizeof=(\d+), align=(\d+)\]',block)
@@ -54,16 +59,17 @@ with tempfile.TemporaryDirectory(prefix='record-fields-')as d:
    for candidate in re.findall(r'@[\w.]+:\d+:\d+',declared):
     if candidate not in raw['records']:pending.append(candidate)
   assert all(f['offset']<=row['size']for f in row['fields'].values())
- deps=subprocess.check_output([str(clang),*flags,'-M',str(source)],text=True)
  headers={}
- for name in shlex.split(deps.split(':',1)[1].replace(chr(92)+chr(10),'')):
-  header=Path(name).resolve()
-  if header==source.resolve():continue
-  if header.is_relative_to(ref):key='reference/'+str(header.relative_to(ref))
-  elif header.is_relative_to(root):key='project/'+str(header.relative_to(root))
-  else:raise AssertionError('Untracked compiler header '+str(header))
-  headers[key]=sha(header)
- result={'profile':raw['profile'],'compilerSha256':sha(clang),'definesSha256':sha(root/'nethack-c/wasm/compile-defines.json'),'sourceSha256':dict(sorted(headers.items())),'records':dict(sorted(records.items())),'parentLayoutsChecked':len(parents),'opaqueScalars':{'long double':{**scalar,'purpose':'Byte-preserving alignment storage only; no floating arithmetic or numeric conversions.'}}}
+ for unit in [source,public]:
+  deps=subprocess.check_output([str(clang),*flags,'-M',str(unit)],text=True)
+  for name in shlex.split(deps.split(':',1)[1].replace(chr(92)+chr(10),'')):
+   header=Path(name).resolve()
+   if header in [source.resolve(),public.resolve()]:continue
+   if header.is_relative_to(ref):key='reference/'+str(header.relative_to(ref))
+   elif header.is_relative_to(root):key='project/'+str(header.relative_to(root))
+   else:raise AssertionError('Untracked compiler header '+str(header))
+   headers[key]=sha(header)
+ result={'profile':raw['profile'],'compilerSha256':sha(clang),'definesSha256':sha(root/'nethack-c/wasm/compile-defines.json'),'sourceSha256':dict(sorted(headers.items())),'records':dict(sorted(records.items())),'parentLayoutsChecked':len(parents),'scalarLayouts':{'bool':boolean},'enums':{'enum idtype_t':{'size':enum['size'],'signed':bool(enum['signed'])}},'opaqueScalars':{'long double':{**scalar,'purpose':'Byte-preserving alignment storage only; no floating arithmetic or numeric conversions.'}}}
  target=root/'js/nethack/supplemental-record-layouts.json'
  if args.check:assert json.loads(target.read_text())==result,'Changed measured supplemental record layouts'
  else:target.write_text(json.dumps(result,indent=2)+'\n')
