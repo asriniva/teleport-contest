@@ -1,3 +1,47 @@
+## Native glyph values across display and terminal calls (2026-11-14)
+
+The generated native DISPLAY policies now create JS value records for the four
+local `glyph_info` declarations in `show_glyph`, `redraw_map`, `row_refresh` and
+`flush_screen`. Glyph mapping, nested field access, structured copies and the
+owned terminal callback consume those same values directly. Measured integer
+widths and nested record identities are retained. C bytes are materialized only
+when a foreign callback requests an address; the reserved declaring-frame
+lifetime survives nested calls, and subsequent foreign writes remain visible.
+
+Implementation: `native/value-records.js`, `native/display-values.js`, the
+DISPLAY adapter/generator, WINTTY record arguments and native window callbacks.
+The original translated gameplay policies, call/RNG order and record layouts
+are unchanged. Persistent glyph-map and display-buffer storage still use the
+shared native arena over byte storage. This does not yet make the complete
+ordinary turn allocation-free or remove all generic bridge calls. Arrays and
+bitfields are outside this value-record policy; structured copies preserve
+measured fields, not unspecified C padding bytes.
+
+Validation so far: 58 production-runtime checks cover extreme integer widths,
+nested copies, aliasing, deferred allocation/lifetime, foreign window callback
+materialization and writeback, heap growth and expired references. Actual
+original-C walk/wait/attack results, output, frames and ordered RNG remain exact.
+C-heap allocations fall from 44/165/109 to 30/160/101; generic calls remain
+12/30/61. An additional 38,496 complete-original-C comparisons cover every valid
+glyph, hero and nonhero coordinates and both override modes, including all
+measured fields, preserved framecolor and resolved Unicode contents. Native
+mapping allocates no C storage. Other graphics configurations are covered only
+where exercised by recordings. Metadata and production wiring gates pass.
+
+An initial value-reference implementation passed all 44 recordings but took
+293.644s versus the existing 283.445s (~3.6% longer). It was replaced before
+commit with shared reference methods, cached field lookups and direct copies
+when source/destination cannot overlap. The second version passed all 44 in 284.059s (0.22% longer than the existing
+283.445s; effectively flat in separate single runs). A final revision skips
+record-marker property access for numeric addresses and repeated scalar decoding
+for values already normalized on write/copy. The final revision passes all 44 recordings: 792,838 ordered RNG entries,
+11,405 screens/cursors and 1,483 animation frames match exactly. All 826 scoring
+inputs stayed unchanged. It took 282.874s versus the existing 283.445s (0.20%
+less time): effectively flat in separate single runs, not a meaningful speedup
+or the required 20x. Receipts and unchanged-input manifest are recorded in
+`docs/runtime-environment/native-display-values-validation.json` and
+`native-display-values-public44-manifest.json`. No new baseline or CPU profiling was performed.
+
 ## Native NHLUA graph, typed Lua API and allocation policies (2026-11-13)
 
 `native/nhlua.js` binds all 94 original NHLUA policies to a per-game context;

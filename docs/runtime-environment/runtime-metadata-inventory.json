@@ -737,7 +737,7 @@
     },
     {
       "file": "js/nethack/bindings/display.js",
-      "line": 10,
+      "line": 11,
       "name": "schema"
     },
     {
@@ -1062,17 +1062,17 @@
     },
     {
       "file": "js/nethack/bindings/wintty.js",
-      "line": 8,
+      "line": 9,
       "name": "schema"
     },
     {
       "file": "js/nethack/bindings/wintty.js",
-      "line": 9,
+      "line": 10,
       "name": "nativeReturns"
     },
     {
       "file": "js/nethack/bindings/wintty.js",
-      "line": 25,
+      "line": 26,
       "name": "primitive"
     },
     {
@@ -1328,7 +1328,7 @@
     },
     {
       "file": "js/nethack/bindings/display.js",
-      "sha256": "0ab3f58f62d4e55a2e2e8bc818cf79db70ec5f9ddd1232e8f194e222f767b5a3"
+      "sha256": "df5298940bb8edeef0527844a18dc4d8f948123673b5933be19ff890eeef4062"
     },
     {
       "file": "js/nethack/bindings/do.js",
@@ -1752,7 +1752,7 @@
     },
     {
       "file": "js/nethack/bindings/wintty.js",
-      "sha256": "9777c0d3f7a4db1f51d8101d957986504c9f5fa06a055c7fb43517f8d33b1b4b"
+      "sha256": "7bf63335ea9b5ef29c95b2457786f07bc0a63be21f2941eb5a2bf71e3063bfa5"
     },
     {
       "file": "js/nethack/bindings/wizard.js",

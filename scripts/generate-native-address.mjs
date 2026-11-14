@@ -32,6 +32,8 @@ for(const name of names){
   }
   if(/Function|ArrowFunctionExpression/.test(node.type)&&node.params?.some(p=>p.name==='C'))shadow=true;
   if(!shadow){
+   if(name==='display'&&node.type==='CallExpression'&&node.callee.object?.name==='C'&&node.callee.property?.name==='stackAlloc'&&node.arguments[0]?.object?.object?.name==='C'&&node.arguments[0]?.object?.property?.name==='sizes'&&node.arguments[0]?.property?.value==='struct glyphinfo')return 'C.nativeLocalRecord("struct glyphinfo")';
+
    if(name==='cmd'&&node.type==='CallExpression'&&node.callee.object?.name==='C'&&node.callee.property?.name==='callProc'){
     const value=node.arguments[0],access=value?.object;
     if(value?.type==='MemberExpression'&&value.property.name==='value'&&access?.type==='CallExpression'&&access.callee.object?.name==='C'&&access.callee.property?.name==='field'&&access.arguments[0].object?.name==='C'&&access.arguments[0].property?.name==='windowprocs'&&access.arguments[1].value==='window_procs'){
