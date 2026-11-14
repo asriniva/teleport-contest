@@ -1,3 +1,48 @@
+## Native STEED placement, riding and shared occupancy (2026-11-14)
+
+Construction, ordinary monster movement and riding now select the same native
+STEED functions. Canonical actors, hero properties, equipment/classes and map
+occupancy replace the module's record wrappers and indexed proxies. Private
+STEED calls and mounted-stealth execute directly. Coordinate locals/arrays are
+native; their addresses are materialized only for byte consumers. Diagnostic
+buffers are reserved in the declaring frame and allocated only when consumed.
+The steed class lookup uses a native table, preserving the terminating-NUL case.
+
+The native policy generator retains source statements/RNG order except explicit
+private-call, buffer and predicate adaptations. The existing placement, saddle and special-interaction owners select the same
+function identities; the `hero-form` owner of mounted-stealth is replaced too.
+Native context roots are installed before attaching services, preventing
+inherited DECL global setters from intercepting initialization and retaining
+legacy wrappers. Identity and context-member checks cover those paths. Legacy adapters remain for independent ABI/reference tests. Other
+engine owners and genuine formatting/byte boundaries remain; this does not yet
+satisfy the zero-bridge/zero-C-allocation turn or the required 20x ambition.
+Validation so far: source-policy AST equivalence covers 15 STEED functions and
+the mounted-stealth body, with explicit native-field/buffer/predicate adaptations.
+1,721 component comparisons include all species saddle/ride queries, canonical
+identity changes, overlap/invalid-position/dead-actor diagnostics, controlled
+vault-guard origin fixtures, native coordinates, classifier bytes, growth,
+writeback and lifetime expiry. Full world/RNG logs/terminal/frame comparisons
+follow placement actions. The test reports function identity failures as booleans
+to avoid inspecting entire live runtimes on assertion failure.
+
+A separate 51-check literal MAIN suite passes natural Knight mount, mounted
+movement, dismount and mounted save, plus all four C/JS save-producer/consumer
+combinations; world identity, input snapshots, both RNG states/logs, raw terminal
+output and normalized frames match. Compressed save bytes are not claimed
+identical; pointer-bearing streams are accepted by the fresh opposite runtime.
+Forced dismount, riding damage, saddle application and polymorph combinations
+beyond exercised recordings remain unaccepted. Ordinary walk/wait/attack stays
+original-C equivalent: generic calls 10/28/58, contexts 17/44/92, C-heap
+allocations 30/159/100 and generic fields 6/13/40. The zero gate remains false.
+Metadata and actual production wiring pass. All 44 recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors and
+1,483 animation frames match. All 831 scoring inputs stayed unchanged. The
+unprofiled Node 22 candidate took 282.694s versus the existing native LIGHT run's
+281.351s, about 0.48% longer in separate single runs. There is no demonstrated
+wall-time gain; the native connection and allocation reductions do not establish
+the required 20x. No baseline or CPU profiling was performed. Evidence:
+`docs/runtime-environment/native-steed-validation.json` and
+`native-steed-public44-manifest.json`.
+
 ## Native connected LIGHT graph and visibility rows (2026-11-14)
 
 All LIGHT policies now bind to one per-game native context, with lexical private
