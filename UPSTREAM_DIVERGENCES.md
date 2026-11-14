@@ -1,3 +1,46 @@
+## Native WERE turn path and metadata source ledger (2026-11-13)
+
+`were.js` now registers all eight original WERE entries as direct native
+functions. `native/were.js` binds the unchanged source policies to one game
+context; internal calls and RNG sites retain their exact source order.
+`bindings/were.js` uses the canonical native monster, species, hero, property,
+flag and instance-state records in production. Native dependencies receive
+native values directly; genuine foreign calls retain explicit conversion and
+state synchronization. The legacy factory storage path remains for isolated
+C/JS fixtures. String formatting and addressable output parameters still use
+byte storage; this does not claim a fully allocation-free turn.
+
+`scripts/test-native-were.mjs` verifies the full policy AST and the immutable
+complete original-C build, then runs real source-initialized worlds. Night and
+day checks pass 1,085 and 1,042 comparisons respectively, including three species,
+transformations/reversions, protection, moon/deafness, successful hostile/tame
+summons, monster/pet state, full hero bytes and ordered RNG/state equality.
+Hero polymorph branches beyond the explicit guards remain unaccepted by this
+focused check. The old standalone WERE test currently stops on its historical
+layout-consolidation provenance guard before reaching gameplay; the new test
+validates original C source/artifact hashes directly instead.
+
+The actual original-C walk/wait/attack check remains equivalent. Generic bridge
+calls fall from 23/39/73 to 20/36/70 and context switches from 37/62/122 to
+34/59/119. Heap allocations remain 44/165/109. The strict zero-bridge,
+zero-allocation acceptance gate remains unmet. All 44 recordings pass with exact ordered output/RNG metrics: 792,838
+RNG entries, 11,405 screens/cursors and 1,483 animations.
+All 819 scoring inputs stayed unchanged. The unprofiled Node 22 candidate took
+298.180s versus the existing 289.713s, 2.92% slower in separate single runs;
+no overall speedup is established. No baseline or CPU profiling was performed.
+Original C checks use Node 24: scoring Node 22 cannot instantiate the C oracle's
+memory64 tables under its default settings, independently of production JS.
+Evidence: `docs/runtime-environment/native-were-validation.json`.
+
+`check-runtime-metadata-inventory.mjs` and the accompanying JSON ledger enumerate
+every runtime JSON file, named literal metadata declarations and adapter files.
+This is a source inventory, not proof that all gameplay branches execute.
+Unknown JSON catalogs and unreviewed source/hash changes fail its check.
+`check-game-metadata-wiring.mjs` independently assembles the actual game graph
+and resolves public dependencies from nested ABI tables; it also checks terminal
+policy presence and Lua recipe return representations and argument indices.
+This checks linkage and declarations, not execution of every callback branch.
+
 ## Public catalog types and returned-callback ABI parsing (2026-11-13)
 
 The full public catalog was outside the prior per-module prototype audit.

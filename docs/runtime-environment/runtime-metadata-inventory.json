@@ -1,0 +1,1782 @@
+{
+  "scope": "Every JSON file under js; named literal metadata declarations across non-Wasm JS; all adapter files listed separately. Inline table detection is a source census, not proof of execution coverage. Registration code and computed/unnamed tables require wiring/source checks.",
+  "counts": {
+    "component_abis": 101,
+    "layouts_and_plans": 4,
+    "public_functions": 1,
+    "runtime_recipes_profiles": 4,
+    "shared_declarations": 2,
+    "supporting_data_manifests": 8
+  },
+  "jsonSources": 120,
+  "coreJsonSources": 112,
+  "inlineTableDeclarations": 128,
+  "inlineTableFiles": 91,
+  "adapterFiles": 129,
+  "sharedAliasSource": {
+    "file": "js/nethack/declarations.js",
+    "sha256": "88739906d97c4ac041bcda7dabf49e6b9490179f90db57d4f539b1ab1749dcd5"
+  },
+  "sources": [
+    {
+      "file": "js/c-runtime/errno-messages.json",
+      "group": "supporting_data_manifests",
+      "sha256": "05c914e49c0a49672d416e757b6cc6b3dff526e60c6c1446aee3abf05027fd97"
+    },
+    {
+      "file": "js/c-runtime/libc-profile.json",
+      "group": "runtime_recipes_profiles",
+      "sha256": "e9cb03fc7f234ee78d5943279a04969d684ef1f718b93b8782ff89010a4f78c3"
+    },
+    {
+      "file": "js/nethack/address-ports.json",
+      "group": "component_abis",
+      "sha256": "4bf03630b9589c38201e9eba90fef226660a6da6af55640d35908591a61f8934"
+    },
+    {
+      "file": "js/nethack/apply-abi.json",
+      "group": "component_abis",
+      "sha256": "1edd43ab1c6ac6b73da64296648fb42ec2d7f01270eb132adb0661f134ccadbf"
+    },
+    {
+      "file": "js/nethack/armor-abi.json",
+      "group": "component_abis",
+      "sha256": "5cddca218076a82e34888e81df5baa735656b7155141328532cf074907d860d2"
+    },
+    {
+      "file": "js/nethack/artifact-abi.json",
+      "group": "component_abis",
+      "sha256": "8dc03d587fed0a0eaffe8d3825b16617f10d690a127cede05125850f5d73e7af"
+    },
+    {
+      "file": "js/nethack/attribute-abi.json",
+      "group": "component_abis",
+      "sha256": "e24a13cd449dc82df7441664e2ddce1db3deba9fd7f240cf9521c574cc7799ac"
+    },
+    {
+      "file": "js/nethack/ball-abi.json",
+      "group": "component_abis",
+      "sha256": "1c7d198cada3c0bc0c4e33bff84cc527355a790d134a69803b35cc89d991bda5"
+    },
+    {
+      "file": "js/nethack/bones-services-abi.json",
+      "group": "component_abis",
+      "sha256": "8d0481a6dbd8b6dc980af53b2cfd504b716224be76becc3c9f338dd0b48d2e29"
+    },
+    {
+      "file": "js/nethack/callback-address-abi.json",
+      "group": "component_abis",
+      "sha256": "ef1c4be6e8a73746b5820f90e2cf28651f76b71ec966198a17c63de0404c7920"
+    },
+    {
+      "file": "js/nethack/color-attributes-abi.json",
+      "group": "component_abis",
+      "sha256": "add358964cb800bcbfacdf2687b889e3a2abd933f9cbf31f00915b7dbb41a8c0"
+    },
+    {
+      "file": "js/nethack/command-abi.json",
+      "group": "component_abis",
+      "sha256": "a38d6cd6a9f1aba343a275cc7a555addcc17f3f8f436d8c20be1a04835f2af84"
+    },
+    {
+      "file": "js/nethack/configuration-abi.json",
+      "group": "component_abis",
+      "sha256": "3fc1762b62040dbbe481fb096f08143bff99409b6e098c50713276ffdc6fc8be"
+    },
+    {
+      "file": "js/nethack/dbridge-abi.json",
+      "group": "component_abis",
+      "sha256": "d58c2144f4af3a6728cb9fc8214af1e87695a9d8fb050835424e696294280f22"
+    },
+    {
+      "file": "js/nethack/decl-storage.json",
+      "group": "runtime_recipes_profiles",
+      "sha256": "85c0affd41ebce7c5e6488990d28a24373d33a6cdea358057fb2cd797b19462c"
+    },
+    {
+      "file": "js/nethack/descriptions-abi.json",
+      "group": "component_abis",
+      "sha256": "743c1f7d652b2fdfa52cdb8446582be6ee513d730392f6ca914979aa53aa7f7c"
+    },
+    {
+      "file": "js/nethack/detect-abi.json",
+      "group": "component_abis",
+      "sha256": "33964a65888d48e47765a1cf4c9c63e47ae18d6a18c86ca5e8e4edda1c415341"
+    },
+    {
+      "file": "js/nethack/dig-abi.json",
+      "group": "component_abis",
+      "sha256": "fb52fa8cb58100ad269da4e9ce796f40bfcaeee7a669090e8a9f1685a116e714"
+    },
+    {
+      "file": "js/nethack/discoveries-abi.json",
+      "group": "component_abis",
+      "sha256": "17e58e417bf9efbbab41cfa61c30441401d97e5a2566c260800b49c3a1bfddde"
+    },
+    {
+      "file": "js/nethack/display-abi.json",
+      "group": "component_abis",
+      "sha256": "af6b3189d27572e1b108b876ae7372b16168f347e67b2157c5901a7c3600c4f4"
+    },
+    {
+      "file": "js/nethack/display-direct-fields.json",
+      "group": "layouts_and_plans",
+      "sha256": "5a51a67f83c04a56f371e4c56b7f2522dc98013228d42003ef5a6a6d00bb6d28"
+    },
+    {
+      "file": "js/nethack/do-lifecycle-abi.json",
+      "group": "component_abis",
+      "sha256": "7d70b98e9dee2c106c32cd617cbbced2aaeb85240dbf08cb0ceda5d13c258a4a"
+    },
+    {
+      "file": "js/nethack/do-name-abi.json",
+      "group": "component_abis",
+      "sha256": "2b64bc22d77bc28b8a2bd0dba839959bf6563432a12aee40dc9273fb9ca52048"
+    },
+    {
+      "file": "js/nethack/do-name-native-layout.json",
+      "group": "layouts_and_plans",
+      "sha256": "6a1c9d306450ef3e967a641a372e25bb0fc162af248607fccaf45855f9cddf2c"
+    },
+    {
+      "file": "js/nethack/dogmove-abi.json",
+      "group": "component_abis",
+      "sha256": "87b118a2afb3e0a0b3347f9733fc988d977ee1814f27d834fb78abb5ff4df9cb"
+    },
+    {
+      "file": "js/nethack/dokick-abi.json",
+      "group": "component_abis",
+      "sha256": "14fd00c1700e8f1c804fc0ffdfdb77af4b6ab9d147f9c0a13b83d2e2f2645c27"
+    },
+    {
+      "file": "js/nethack/eat-abi.json",
+      "group": "component_abis",
+      "sha256": "f7e5954c887119351d9f0b6094f15cf3fddb93ad1c6072b58b0ef91344c76446"
+    },
+    {
+      "file": "js/nethack/end-lifecycle-abi.json",
+      "group": "component_abis",
+      "sha256": "09fe8deeb41b0cb7c3e33f85177a29a25aeef69498ad51cb845f9ecd06191293"
+    },
+    {
+      "file": "js/nethack/engrave-abi.json",
+      "group": "component_abis",
+      "sha256": "edd639ec4b51abbb956650cb493ffe32b2365dbf5eb9a9180d777a3fae249ac9"
+    },
+    {
+      "file": "js/nethack/equipment-abi.json",
+      "group": "component_abis",
+      "sha256": "8b8885342f22f69bbcd9dfda5d8b2e5ab4c8e6dd7f68ce0ccd8bdcfa41ae587a"
+    },
+    {
+      "file": "js/nethack/equipment-format-abi.json",
+      "group": "component_abis",
+      "sha256": "d09cf2d854c5a4cb6799a3e9a918de50545f331ca084b9626b4792440154f5b0"
+    },
+    {
+      "file": "js/nethack/exper-abi.json",
+      "group": "component_abis",
+      "sha256": "d6ae590409e93ae257c0cdae0d556877bccf211c30732087e48ea8f5ecb45adc"
+    },
+    {
+      "file": "js/nethack/explode-abi.json",
+      "group": "component_abis",
+      "sha256": "c21a342e17281b4e06d2b52240c8ffcf5531cd69dfc5586b0f6509c74837845d"
+    },
+    {
+      "file": "js/nethack/files-abi.json",
+      "group": "component_abis",
+      "sha256": "930a81145090dedec20500d0c1fdaef87a6ed0526e54ff3f5e8173ba8610ebb8"
+    },
+    {
+      "file": "js/nethack/game-assets-manifest.json",
+      "group": "supporting_data_manifests",
+      "sha256": "3d9bdf0c84252e4ed97782f7eeffa63120ba5988acd88ed717284052afb0f5aa"
+    },
+    {
+      "file": "js/nethack/game-assets.json",
+      "group": "supporting_data_manifests",
+      "sha256": "6efb6155a2861536bc335e3be7a80c2b00148725f0cd304789d2827bc8ad68ba"
+    },
+    {
+      "file": "js/nethack/getpos-abi.json",
+      "group": "component_abis",
+      "sha256": "a577226b635fa15a7bcf4e17d215c5014f3aa58584db21952fe19a415c228055"
+    },
+    {
+      "file": "js/nethack/glyph-abi.json",
+      "group": "component_abis",
+      "sha256": "1e375cf1331683afd1e4d5c59afc73ebbf24a9c89cc363b9a2b761c00e482782"
+    },
+    {
+      "file": "js/nethack/hack-abi.json",
+      "group": "component_abis",
+      "sha256": "1ce62b1b5ce4a9d591eaf4a0440a5d42b6982cef09d5d48fc5ec50c84fc88fbc"
+    },
+    {
+      "file": "js/nethack/hero-abi.json",
+      "group": "component_abis",
+      "sha256": "dbc9730aabe163ad81468f77de941fb5840f2b86e67b8de126221f140b9f7269"
+    },
+    {
+      "file": "js/nethack/hunger-data-abi.json",
+      "group": "component_abis",
+      "sha256": "940ffee7b5d9591a4ee98d34135318a5b4474778f46c4413d154cc62ebba0dbd"
+    },
+    {
+      "file": "js/nethack/insight-abi.json",
+      "group": "component_abis",
+      "sha256": "d1e7df7994303e15ac10bd3b08c1b4332d825e369b8eac1fa25167bd082527df"
+    },
+    {
+      "file": "js/nethack/killer-state-abi.json",
+      "group": "component_abis",
+      "sha256": "4781a9a631a188ed6078a9e5dd29d3d18b087bf44a1f8a89f8a09bad2c7d2aaa"
+    },
+    {
+      "file": "js/nethack/level-abi.json",
+      "group": "component_abis",
+      "sha256": "e83ab25d1d19a809391cda33e5a850160654a192c284b4b7315adc2d1f50251a"
+    },
+    {
+      "file": "js/nethack/light-abi.json",
+      "group": "component_abis",
+      "sha256": "011cf56d996196b501f752f9b939d67b6f01058dd54c9066f8241c05d9d037eb"
+    },
+    {
+      "file": "js/nethack/lock-abi.json",
+      "group": "component_abis",
+      "sha256": "8b07e13ba74d32123e88a7a53f1c46fb720afe7e21d761b39bb89eb3d01ffa11"
+    },
+    {
+      "file": "js/nethack/lua-api.json",
+      "group": "runtime_recipes_profiles",
+      "sha256": "c2cb99cb4283fcffed5c4999a48fef9caccc4e1795c225de3c755f0d6385ec25"
+    },
+    {
+      "file": "js/nethack/lua-callbacks-abi.json",
+      "group": "component_abis",
+      "sha256": "c32ed7f8df8926b7a5cae0b824367151d4cb08cac0d8a310b0a6559a6fbfc86a"
+    },
+    {
+      "file": "js/nethack/mail-abi.json",
+      "group": "component_abis",
+      "sha256": "bb255c8a2246272c1c3ef34d405d7cbf71822600938e9c768aa99b5efd6b543e"
+    },
+    {
+      "file": "js/nethack/makemon-private-abi.json",
+      "group": "component_abis",
+      "sha256": "459f03a4f86a99ad3436149f5d528a5217b50bf0c630ec231d8432be349242d3"
+    },
+    {
+      "file": "js/nethack/makemon-public-abi.json",
+      "group": "component_abis",
+      "sha256": "4e1aafc8e08406e20f133efceaf7527457fae83094307640e6ca82d425c5340d"
+    },
+    {
+      "file": "js/nethack/mcastu-abi.json",
+      "group": "component_abis",
+      "sha256": "b9b2c04bf59dfd3545885d9f1fe20e95fb48124d4cc6e14c9a04420d682c2125"
+    },
+    {
+      "file": "js/nethack/messages-abi.json",
+      "group": "component_abis",
+      "sha256": "71a2d1977ed00a2c74a7f4780c714091c6aafc87955a50defeed92c25af3fa2e"
+    },
+    {
+      "file": "js/nethack/mhitm-abi.json",
+      "group": "component_abis",
+      "sha256": "e2e72000326df76e96d7448bf32d83dedf84101407504463c320a94ce525c2bc"
+    },
+    {
+      "file": "js/nethack/mhitu-abi.json",
+      "group": "component_abis",
+      "sha256": "0642282e81d91f1c3865d75a7feeeaab867ddf7ec80593b2325bad7877e397c7"
+    },
+    {
+      "file": "js/nethack/minion-abi.json",
+      "group": "component_abis",
+      "sha256": "12fc40dfd44006bd2a2f98e0419f4a70822ced84eb9b32fe518f1f543da35340"
+    },
+    {
+      "file": "js/nethack/mkmap-abi.json",
+      "group": "component_abis",
+      "sha256": "471a0aa5937c3beed598d6077bfa78cc5d9ebcadca92e5ce7ea220c1316b9ec7"
+    },
+    {
+      "file": "js/nethack/mon-abi.json",
+      "group": "component_abis",
+      "sha256": "c5f309d822a472dd1e3f0c1eff6594b5ed1aacfd67f9f6775a86449eb541c040"
+    },
+    {
+      "file": "js/nethack/mondata-abi.json",
+      "group": "component_abis",
+      "sha256": "91bf714717b26ab3d8e3a6323d4e88739a6506b3769d4a44c06abf9343f7d487"
+    },
+    {
+      "file": "js/nethack/monmove-abi.json",
+      "group": "component_abis",
+      "sha256": "9242d2b32239734679b15e1b3e1d0959257433b51500b68f23c7f99918989769"
+    },
+    {
+      "file": "js/nethack/mplayer-abi.json",
+      "group": "component_abis",
+      "sha256": "49034ef1fa7b69b0d258736cb41a1b93e9f94ba4bf5434b5feeacb073314cbc9"
+    },
+    {
+      "file": "js/nethack/mthrowu-abi.json",
+      "group": "component_abis",
+      "sha256": "a82dfd1bb665dbc28c954fd896e1183707453af215ec03f89b1a7fecdc7da08d"
+    },
+    {
+      "file": "js/nethack/object-language-abi.json",
+      "group": "component_abis",
+      "sha256": "d871eca648bb7cedebc2bba4d15eda0d1d40c4968c21ed4ed0834918ddd8d4e3"
+    },
+    {
+      "file": "js/nethack/options-abi.json",
+      "group": "component_abis",
+      "sha256": "0f13cf6aca28f85867c1e9eeadeff28306af29b5009127c761366ef5e43b5bba"
+    },
+    {
+      "file": "js/nethack/pager-target-abi.json",
+      "group": "component_abis",
+      "sha256": "4288b2bed69a96e527a41a935921ae1c62b94d38f72cb69b491024f102e1da71"
+    },
+    {
+      "file": "js/nethack/persistence-transport-abi.json",
+      "group": "component_abis",
+      "sha256": "9f3feb12c2149288e38783c72a6db9b955c3a0bf5a3921f2d781852b5eed7891"
+    },
+    {
+      "file": "js/nethack/pet-abi.json",
+      "group": "component_abis",
+      "sha256": "efb43b9ef065309c69e7e5289c0c291d553b29d79cbc5609ecf0f8e6a6838f50"
+    },
+    {
+      "file": "js/nethack/polyself-abi.json",
+      "group": "component_abis",
+      "sha256": "d869d062c3f34f699957a8bbfae917a54de3ce785c886c0ac65b23f7b0a6d365"
+    },
+    {
+      "file": "js/nethack/potion-abi.json",
+      "group": "component_abis",
+      "sha256": "65a0465ac285580e603555269c0ab5e62ad4d7e313cde27bd3ffb93da56ab011"
+    },
+    {
+      "file": "js/nethack/priest-abi.json",
+      "group": "component_abis",
+      "sha256": "9c887181f6571ef6855916ca5146fa5238dea63f0a492d9665c1069401204470"
+    },
+    {
+      "file": "js/nethack/public-functions.json",
+      "group": "public_functions",
+      "sha256": "75774661072653bbd6c90bce1e837fac87a998b5e9139f6f5012878057779e12"
+    },
+    {
+      "file": "js/nethack/quest-abi.json",
+      "group": "component_abis",
+      "sha256": "b3e2f896e7088059df63c4de80405239d29411728b3c4d08df8351edfc2480f0"
+    },
+    {
+      "file": "js/nethack/quest-pager-abi.json",
+      "group": "component_abis",
+      "sha256": "19b0e6d77a5aba99de3d46add81fca59366d6d2b7a6789b4b45dce5b9f8ec13b"
+    },
+    {
+      "file": "js/nethack/read-abi.json",
+      "group": "component_abis",
+      "sha256": "82b0b6a340c77e55d1aec54373eb319f0f67d4928af30174d521076a2812202a"
+    },
+    {
+      "file": "js/nethack/records.json",
+      "group": "shared_declarations",
+      "sha256": "7b7ddc59f45ea73a8077a3ad96f5bc89cdc70920d136b1e64c706f94efaa3c9d"
+    },
+    {
+      "file": "js/nethack/region-services-abi.json",
+      "group": "component_abis",
+      "sha256": "c962f70bad2524fc42651e99e14afb81dda97ab05042085632d832cc4bbaa394"
+    },
+    {
+      "file": "js/nethack/report-abi.json",
+      "group": "component_abis",
+      "sha256": "361e61fced289d22e62b839f2f47933f3ddd279afa3c76001a4dd226035eefdd"
+    },
+    {
+      "file": "js/nethack/restore-lifecycle-abi.json",
+      "group": "component_abis",
+      "sha256": "72695a3c1697b995214e83ccee6a3fc8dc4db93af3505645ca8d1181f1aeb951"
+    },
+    {
+      "file": "js/nethack/rip-abi.json",
+      "group": "component_abis",
+      "sha256": "2245be5cf94e59958ee25832e303977ecfe05c29e9a21f367eda8aa6a8db38af"
+    },
+    {
+      "file": "js/nethack/role-transport-abi.json",
+      "group": "component_abis",
+      "sha256": "48287e532e8d05c22984b1d4d9c3bfeb073031f4b07eaf38ad7a3efb91fd45de"
+    },
+    {
+      "file": "js/nethack/runtime-info-abi.json",
+      "group": "component_abis",
+      "sha256": "989458a236a1ee8f55a03466a2ba067c1562552931162855e73e837847a63f56"
+    },
+    {
+      "file": "js/nethack/save-lifecycle-abi.json",
+      "group": "component_abis",
+      "sha256": "3ef4a697753008722b056fa93c5a245ace141b8cbcaa237664d2fe1bdf44583f"
+    },
+    {
+      "file": "js/nethack/scanf-abi.json",
+      "group": "component_abis",
+      "sha256": "3142d5d9adefa379843d8426d8f75dc7efe1be1416f8326527bbc9092704e5fe"
+    },
+    {
+      "file": "js/nethack/sdk-boundary-abi.json",
+      "group": "component_abis",
+      "sha256": "2cb81a55c312fb5f0140941477c378403c318c3c75a551503f27f4f5fe383441"
+    },
+    {
+      "file": "js/nethack/sdk-directory-abi.json",
+      "group": "component_abis",
+      "sha256": "5065f589e874f2b829e09224dc5d442508ca12b5c610fa1cdc1c59122a631c1e"
+    },
+    {
+      "file": "js/nethack/shknam-abi.json",
+      "group": "component_abis",
+      "sha256": "ee55f6cdb111aec9b2f3f809319bb38327603e18165174751f5acc8a4352d3da"
+    },
+    {
+      "file": "js/nethack/signal-delivery-abi.json",
+      "group": "component_abis",
+      "sha256": "1ea8dfa4a887d143b6b4dc790620dc914e7b3939897acd0f27df76dfe799648d"
+    },
+    {
+      "file": "js/nethack/special-interactions-abi.json",
+      "group": "component_abis",
+      "sha256": "29ac1f9dd8f92e417b6576246c9c3e078a07b4cee1f1a9287bbb028715ea7aea"
+    },
+    {
+      "file": "js/nethack/spell-abi.json",
+      "group": "component_abis",
+      "sha256": "45b65ecebc43e5a4b3a78aef34042e3509f34575033c681cf62e5a89a09e59db"
+    },
+    {
+      "file": "js/nethack/status-abi.json",
+      "group": "component_abis",
+      "sha256": "0cf65b92c7b0f45db4791d9c3819bf08932879d575a0ddc6c0131c7b5cdc3502"
+    },
+    {
+      "file": "js/nethack/steal-abi.json",
+      "group": "component_abis",
+      "sha256": "1e8eef64dfce8fe2de2c6618c2ecd35e8b2c1259f4088e220b941546da7c945c"
+    },
+    {
+      "file": "js/nethack/supplemental-record-layouts.json",
+      "group": "shared_declarations",
+      "sha256": "42c60049f4426ba97d875c71495973ad27bf66aed116973783aea40d181d69f6"
+    },
+    {
+      "file": "js/nethack/teleport-abi.json",
+      "group": "component_abis",
+      "sha256": "91f8c3bf483a0592236f5f3b276bd98f82045b1237ddc3e59b65f9988b22f50d"
+    },
+    {
+      "file": "js/nethack/terminal-input-abi.json",
+      "group": "component_abis",
+      "sha256": "7b1f160d6ac38fb2312141c5c514ee916092fd603405245339e2d0ff0c7d68ad"
+    },
+    {
+      "file": "js/nethack/terminal-messages-abi.json",
+      "group": "component_abis",
+      "sha256": "bd1260aae31bcbf8bf1d19c170299896f814142598bc4df45f79ff70c56080fc"
+    },
+    {
+      "file": "js/nethack/terminal-metadata.json",
+      "group": "runtime_recipes_profiles",
+      "sha256": "5b22ef9ee0ce0bf264a972445e4ece113d3898f4f437c44435909fd6c6808f9a"
+    },
+    {
+      "file": "js/nethack/timeout-abi.json",
+      "group": "component_abis",
+      "sha256": "5138fee3c4400e4d66200cadf1ae642c08bbf863633fe2c334034ab162946afd"
+    },
+    {
+      "file": "js/nethack/topten-abi.json",
+      "group": "component_abis",
+      "sha256": "87028dad0992bff47196c79a360b50db49a9fb0c01d750ffec7edd3acce2596d"
+    },
+    {
+      "file": "js/nethack/trap-abi.json",
+      "group": "component_abis",
+      "sha256": "910bc2e2005a1d7db6b00ed54afaa4ac91bc353ef15f781f5d399a15bbfc1601"
+    },
+    {
+      "file": "js/nethack/turn-loop-abi.json",
+      "group": "component_abis",
+      "sha256": "e8b9bae1a71b69ac340cc53f30bbd269e37c4fcb4a104d10704cd9c3dc78527d"
+    },
+    {
+      "file": "js/nethack/uhitm-abi.json",
+      "group": "component_abis",
+      "sha256": "de85a45b9c32d07cbb83c2b7f21a8ad819e2f7fc7dcc5ba2af8834e7e7919cb5"
+    },
+    {
+      "file": "js/nethack/unix-platform-abi.json",
+      "group": "component_abis",
+      "sha256": "51c0339bc2ae1e6f6a2bdb3e1ecb38d0a2786f46ff25fd615a4dda88c5703d19"
+    },
+    {
+      "file": "js/nethack/utf8map-abi.json",
+      "group": "component_abis",
+      "sha256": "afb66da4ce8da1e9d045d09b366b7db854aafbc03a1508c68ef8b45f188316c1"
+    },
+    {
+      "file": "js/nethack/vault-abi.json",
+      "group": "component_abis",
+      "sha256": "6a3e95d75c07669eb485e24ad13767b60a6eafa1bb53269b04d97fd1ecc4af72"
+    },
+    {
+      "file": "js/nethack/vision-abi.json",
+      "group": "component_abis",
+      "sha256": "40b542219d831d1ef1a77adecf2556ec1d94f6f73fd976ecbb10c0203a8b41e2"
+    },
+    {
+      "file": "js/nethack/weapon-native-layout.json",
+      "group": "layouts_and_plans",
+      "sha256": "281a2f4d83fd87ddd94805df6cebeab7ccbcaf91139fc008aecd56e0a5d61a10"
+    },
+    {
+      "file": "js/nethack/were-abi.json",
+      "group": "component_abis",
+      "sha256": "0b8239bf6e9ecd592fbd9fa227bcc895861a557860bd804eb21738a59022ad5c"
+    },
+    {
+      "file": "js/nethack/window-abi.json",
+      "group": "component_abis",
+      "sha256": "73a01911a9f4ec1ce9d3fedece264e4cc3b2c8714391a0f2c63a55e890aa82cb"
+    },
+    {
+      "file": "js/nethack/wizard-abi.json",
+      "group": "component_abis",
+      "sha256": "2736982994ab4490348bb8aced0bda34591efe52540be4f3ec543e14f152aa74"
+    },
+    {
+      "file": "js/nethack/wizcmds-abi.json",
+      "group": "component_abis",
+      "sha256": "a7258a57c1c4bd8c8d3262b374b8a47f9bf86f7c549979eb6962f8a67eaafd6d"
+    },
+    {
+      "file": "js/nethack/worm-abi.json",
+      "group": "component_abis",
+      "sha256": "6a1ce3deb88cb1effca607064256a152e084abf870a41445edda93cc05137563"
+    },
+    {
+      "file": "js/nethack/worn-text-abi.json",
+      "group": "component_abis",
+      "sha256": "eff367699a643f84f2b7fedb4b616d076d1a9320fbc270acf9d8e067edbd58de"
+    },
+    {
+      "file": "js/nethack/zap-abi.json",
+      "group": "component_abis",
+      "sha256": "70eef0d8273aee7134c7d8e3e7c6caa98c8b0c6a6b20f6193dbab5cb8e442eb2"
+    },
+    {
+      "file": "js/platform/darwin/terminal-abi.json",
+      "group": "component_abis",
+      "sha256": "660f6d0949661295d56077bd0c99ed53336f077c50eb7258dd09bae20476302e"
+    },
+    {
+      "file": "js/ported-utilities/random-data.json",
+      "group": "supporting_data_manifests",
+      "sha256": "6740eeba610a0055d39d9f550038d3825beca6f086838ee2ae0cdd3ccc886230"
+    },
+    {
+      "file": "js/ported-utilities/tilemap-generator-constants.json",
+      "group": "supporting_data_manifests",
+      "sha256": "3db5d6ac70ae9d8d84828ebedcf3462a95fe15fc2c8bfb722fcbeea96e8885c8"
+    },
+    {
+      "file": "js/ported-utilities/tilemap-generator-formats.json",
+      "group": "supporting_data_manifests",
+      "sha256": "011748a170ef1a072febb71f670c8fdb07437b4db6f407168c306c4441e45f61"
+    },
+    {
+      "file": "js/wasm/build.json",
+      "group": "supporting_data_manifests",
+      "sha256": "1816a82d66ecd6e92f708ea3584fda13eb751fe1128ec3196bf94d7828c11f32"
+    },
+    {
+      "file": "js/wasm/drawing-constants.json",
+      "group": "supporting_data_manifests",
+      "sha256": "15974aea82719a957fa64240ca64adde102553b497e409fec91dffa7b1a25514"
+    },
+    {
+      "file": "js/wasm/tu-layouts.json",
+      "group": "layouts_and_plans",
+      "sha256": "05e7ac27a1b3f20ad003121357cabb273f6a375f2c8f55838eea81155ececf34"
+    }
+  ],
+  "inlineTables": [
+    {
+      "file": "js/c-runtime/memory.js",
+      "line": 3,
+      "name": "types"
+    },
+    {
+      "file": "js/c-runtime/types.js",
+      "line": 5,
+      "name": "scalars"
+    },
+    {
+      "file": "js/lua/lparser.js",
+      "line": 147,
+      "name": "fields"
+    },
+    {
+      "file": "js/lua/os-library.js",
+      "line": 8,
+      "name": "fields"
+    },
+    {
+      "file": "js/lua/source-compiler.js",
+      "line": 49,
+      "name": "fields"
+    },
+    {
+      "file": "js/lua/source-compiler.js",
+      "line": 71,
+      "name": "fields"
+    },
+    {
+      "file": "js/nethack/artifact.js",
+      "line": 12,
+      "name": "nativeSchema"
+    },
+    {
+      "file": "js/nethack/bindings/allmain.js",
+      "line": 4,
+      "name": "fields"
+    },
+    {
+      "file": "js/nethack/bindings/apply.js",
+      "line": 9,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/apply.js",
+      "line": 295,
+      "name": "primitive"
+    },
+    {
+      "file": "js/nethack/bindings/artifact.js",
+      "line": 10,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/artifact.js",
+      "line": 11,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/artifact.js",
+      "line": 46,
+      "name": "aliases"
+    },
+    {
+      "file": "js/nethack/bindings/bones.js",
+      "line": 3,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/botl.js",
+      "line": 12,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/botl.js",
+      "line": 13,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/cfgfiles.js",
+      "line": 4,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/cmd.js",
+      "line": 7,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/decl.js",
+      "line": 5,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/decl.js",
+      "line": 6,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/detect.js",
+      "line": 6,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/dig.js",
+      "line": 6,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/dig.js",
+      "line": 67,
+      "name": "types"
+    },
+    {
+      "file": "js/nethack/bindings/display.js",
+      "line": 10,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/do.js",
+      "line": 7,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/do.js",
+      "line": 8,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/do_wear.js",
+      "line": 11,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/do_wear.js",
+      "line": 12,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/do_wear.js",
+      "line": 55,
+      "name": "aliases"
+    },
+    {
+      "file": "js/nethack/bindings/dog.js",
+      "line": 9,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/dogmove.js",
+      "line": 6,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/dogmove.js",
+      "line": 7,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/dothrow.js",
+      "line": 9,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/dungeon.js",
+      "line": 9,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/eat.js",
+      "line": 8,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/end.js",
+      "line": 9,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/files.js",
+      "line": 7,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/glyphs.js",
+      "line": 4,
+      "name": "fields"
+    },
+    {
+      "file": "js/nethack/bindings/glyphs.js",
+      "line": 6,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "line": 10,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "line": 11,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "line": 124,
+      "name": "aliases"
+    },
+    {
+      "file": "js/nethack/bindings/insight.js",
+      "line": 5,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/insight.js",
+      "line": 10,
+      "name": "primitive"
+    },
+    {
+      "file": "js/nethack/bindings/invent.js",
+      "line": 9,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/makemon.js",
+      "line": 11,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/mhitu.js",
+      "line": 12,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/mhitu.js",
+      "line": 13,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/mklev.js",
+      "line": 9,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/mkmaze.js",
+      "line": 9,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/mkobj.js",
+      "line": 6,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/mon.js",
+      "line": 8,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/monmove.js",
+      "line": 10,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/muse.js",
+      "line": 6,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/nhlobj.js",
+      "line": 6,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/objnam.js",
+      "line": 8,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/objnam.js",
+      "line": 9,
+      "name": "nativeReturns"
+    },
+    {
+      "file": "js/nethack/bindings/objnam.js",
+      "line": 26,
+      "name": "primitive"
+    },
+    {
+      "file": "js/nethack/bindings/options.js",
+      "line": 8,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/pager.js",
+      "line": 48,
+      "name": "types"
+    },
+    {
+      "file": "js/nethack/bindings/pickup.js",
+      "line": 9,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/pline.js",
+      "line": 7,
+      "name": "fields"
+    },
+    {
+      "file": "js/nethack/bindings/polyself.js",
+      "line": 7,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/polyself.js",
+      "line": 8,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/potion.js",
+      "line": 6,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/pray.js",
+      "line": 6,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/read.js",
+      "line": 9,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/region.js",
+      "line": 27,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/restore.js",
+      "line": 4,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/restore.js",
+      "line": 5,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/role.js",
+      "line": 6,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/save.js",
+      "line": 4,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/save.js",
+      "line": 5,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/shk.js",
+      "line": 9,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/sounds.js",
+      "line": 7,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/sp_lev.js",
+      "line": 7,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "line": 9,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "line": 10,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "line": 80,
+      "name": "aliases"
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "line": 81,
+      "name": "scalars"
+    },
+    {
+      "file": "js/nethack/bindings/topl.js",
+      "line": 10,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/u_init.js",
+      "line": 3,
+      "name": "fields"
+    },
+    {
+      "file": "js/nethack/bindings/uhitm.js",
+      "line": 13,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/unixmain.js",
+      "line": 7,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/unixunix.js",
+      "line": 7,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/vision.js",
+      "line": 9,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/vision.js",
+      "line": 10,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/windows.js",
+      "line": 4,
+      "name": "fields"
+    },
+    {
+      "file": "js/nethack/bindings/wintty.js",
+      "line": 8,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/wintty.js",
+      "line": 9,
+      "name": "nativeReturns"
+    },
+    {
+      "file": "js/nethack/bindings/wintty.js",
+      "line": 25,
+      "name": "primitive"
+    },
+    {
+      "file": "js/nethack/bindings/wizcmds.js",
+      "line": 7,
+      "name": "schemas"
+    },
+    {
+      "file": "js/nethack/bindings/wizcmds.js",
+      "line": 8,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/bindings/wizcmds.js",
+      "line": 37,
+      "name": "aliases"
+    },
+    {
+      "file": "js/nethack/bindings/zap.js",
+      "line": 6,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/bindings/zap.js",
+      "line": 7,
+      "name": "nativeReturns"
+    },
+    {
+      "file": "js/nethack/bindings/zap.js",
+      "line": 18,
+      "name": "primitive"
+    },
+    {
+      "file": "js/nethack/c-types.js",
+      "line": 55,
+      "name": "fields"
+    },
+    {
+      "file": "js/nethack/color-attributes.js",
+      "line": 19,
+      "name": "sizes"
+    },
+    {
+      "file": "js/nethack/configuration.js",
+      "line": 16,
+      "name": "schema"
+    },
+    {
+      "file": "js/nethack/declarations.js",
+      "line": 2,
+      "name": "typeAliases"
+    },
+    {
+      "file": "js/nethack/declarations.js",
+      "line": 5,
+      "name": "fieldAliases"
+    },
+    {
+      "file": "js/nethack/do-lifecycle.js",
+      "line": 11,
+      "name": "nativeSchema"
+    },
+    {
+      "file": "js/nethack/environment.js",
+      "line": 196,
+      "name": "sizes"
+    },
+    {
+      "file": "js/nethack/environment.js",
+      "line": 207,
+      "name": "sizes"
+    },
+    {
+      "file": "js/nethack/environment.js",
+      "line": 217,
+      "name": "sizes"
+    },
+    {
+      "file": "js/nethack/game-startup.js",
+      "line": 17,
+      "name": "types"
+    },
+    {
+      "file": "js/nethack/hero-equipment.js",
+      "line": 21,
+      "name": "armorNativeSchema"
+    },
+    {
+      "file": "js/nethack/hero-equipment.js",
+      "line": 106,
+      "name": "types"
+    },
+    {
+      "file": "js/nethack/hero-startup.js",
+      "line": 41,
+      "name": "aliases"
+    },
+    {
+      "file": "js/nethack/lua-sandbox.js",
+      "line": 54,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/native/record-views.js",
+      "line": 8,
+      "name": "scalars"
+    },
+    {
+      "file": "js/nethack/object-state.js",
+      "line": 8,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/pets.js",
+      "line": 9,
+      "name": "fields"
+    },
+    {
+      "file": "js/nethack/pets.js",
+      "line": 9,
+      "name": "types"
+    },
+    {
+      "file": "js/nethack/random-text.js",
+      "line": 7,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/status.js",
+      "line": 12,
+      "name": "nativeSchema"
+    },
+    {
+      "file": "js/nethack/symbols.js",
+      "line": 23,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/uhitm.js",
+      "line": 16,
+      "name": "signatures"
+    },
+    {
+      "file": "js/nethack/unix-platform.js",
+      "line": 41,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/unix-terminal.js",
+      "line": 38,
+      "name": "scalarTypes"
+    },
+    {
+      "file": "js/nethack/version-info.js",
+      "line": 15,
+      "name": "globals"
+    },
+    {
+      "file": "js/nethack/window-system.js",
+      "line": 18,
+      "name": "primitive"
+    },
+    {
+      "file": "js/nethack/window-system.js",
+      "line": 55,
+      "name": "types"
+    },
+    {
+      "file": "js/ported-utilities/gifread/runtime.js",
+      "line": 4,
+      "name": "sizes"
+    },
+    {
+      "file": "js/ported-utilities/sfexpasc/runtime.js",
+      "line": 7,
+      "name": "fields"
+    },
+    {
+      "file": "js/ported/nhlua.js",
+      "line": 2887,
+      "name": "nhluaSchema"
+    },
+    {
+      "file": "js/ported/trap.js",
+      "line": 7640,
+      "name": "trapSchema"
+    }
+  ],
+  "adapters": [
+    {
+      "file": "js/nethack/bindings/allmain.js",
+      "sha256": "085de55ded74d19dd751461ecc0c6fadc1caaf8ac7dd6d21591f88417d0467ed"
+    },
+    {
+      "file": "js/nethack/bindings/apply.js",
+      "sha256": "61f5e810e722eeef4961d97ccf0710aecd83b03d998291a65df48f173381082d"
+    },
+    {
+      "file": "js/nethack/bindings/artifact.js",
+      "sha256": "1121123cd8ac9cc048547818dd4a1864cf756782c67a91329aac903ce2f66307"
+    },
+    {
+      "file": "js/nethack/bindings/attrib.js",
+      "sha256": "957a7aeba5b869c82b4d426312c625e628ff72f148140738fc8e0d99cc08712b"
+    },
+    {
+      "file": "js/nethack/bindings/ball.js",
+      "sha256": "ce1da0b25ac6a7aa50c6af23412cd4cde0c0917072adcf9822613a55df0eed8f"
+    },
+    {
+      "file": "js/nethack/bindings/bones.js",
+      "sha256": "f7368dea26e24710d670d73a41dbecd2fe8e54950e063ea7fa3680f6d294bc41"
+    },
+    {
+      "file": "js/nethack/bindings/botl.js",
+      "sha256": "a3105ca7c5b06d0241dbcdc39c5244e7995aff30748b56b3a61f9d1783273f02"
+    },
+    {
+      "file": "js/nethack/bindings/cfgfiles.js",
+      "sha256": "96d7903d4df66f44ed2f27d731b6f2cf5e224bb6c53143595c94947e17dc3d24"
+    },
+    {
+      "file": "js/nethack/bindings/cmd.js",
+      "sha256": "60a03f8b4cc56c6c8f9bd1ccdcd88aa2f5bf50a6af7de7779b5caac4cea497bf"
+    },
+    {
+      "file": "js/nethack/bindings/coloratt.js",
+      "sha256": "229cae64ebf74fc6e34621f08428ce1d84eaa904ffaac9a86737e63235b0cebc"
+    },
+    {
+      "file": "js/nethack/bindings/date.js",
+      "sha256": "0f76a1805921dd35332953db1a2cce6eb7524a6b6644ea0aec1a9cec0ad14da8"
+    },
+    {
+      "file": "js/nethack/bindings/dbridge.js",
+      "sha256": "fd87d7d6fd0cecc4b8889bb8f8c5a7e6375da72ab1af3389ae14cef9174589d0"
+    },
+    {
+      "file": "js/nethack/bindings/decl.js",
+      "sha256": "7fba6bcd7d9431765c166024e55256bb57f1287b5eb1207b1db1fb25a55b6457"
+    },
+    {
+      "file": "js/nethack/bindings/detect.js",
+      "sha256": "0bcb2e1bb88a9234afe7c22a5646c23be4f9b7356f6697ba011acb5d1f7828fb"
+    },
+    {
+      "file": "js/nethack/bindings/dig.js",
+      "sha256": "4d37698204d42c8883ace394aa522eedcc391945854e7eb3dbe39842a9417273"
+    },
+    {
+      "file": "js/nethack/bindings/display-direct.js",
+      "sha256": "0c4f00b5f7e39b465c09ce067b7f49e9d171f7d5bc98ee184c82f86d44c97aa4"
+    },
+    {
+      "file": "js/nethack/bindings/display.js",
+      "sha256": "0ab3f58f62d4e55a2e2e8bc818cf79db70ec5f9ddd1232e8f194e222f767b5a3"
+    },
+    {
+      "file": "js/nethack/bindings/do.js",
+      "sha256": "0de53aaf654302fbe303a20e6433d82531916e1af4823f1f0f100113898fd2e2"
+    },
+    {
+      "file": "js/nethack/bindings/do_name.js",
+      "sha256": "bfd7cfb27a28607e8bd6d91b07626d740c03ef94debaf92cb33a805971c5b670"
+    },
+    {
+      "file": "js/nethack/bindings/do_wear.js",
+      "sha256": "27ec1637495aa25f7aa852579baf84b8bc91a4396b290d654a87810cae30adbe"
+    },
+    {
+      "file": "js/nethack/bindings/dog.js",
+      "sha256": "b680aa2a4f650bbcbbaf4cf76fe7718d3b17a22e6638ffcef73371c5cb1a4c6b"
+    },
+    {
+      "file": "js/nethack/bindings/dogmove.js",
+      "sha256": "c6c38a4c38d02d07dc0bf9ed1924c02d14b613fd130c0c9d28e67b5d3c554db8"
+    },
+    {
+      "file": "js/nethack/bindings/dokick.js",
+      "sha256": "24ddc9d3d2d44eb19110756746ea8bfcac9aa5e8909c1c1806612983733efec8"
+    },
+    {
+      "file": "js/nethack/bindings/dothrow.js",
+      "sha256": "f07e712fe3f5dbda5984364495d779d629c8b32abd7575133c88ae1a3e6c1a47"
+    },
+    {
+      "file": "js/nethack/bindings/drawing.js",
+      "sha256": "52681b59c194e6af98bdf2c12122d905533cfe07978e9256aaad2aecad838658"
+    },
+    {
+      "file": "js/nethack/bindings/dungeon.js",
+      "sha256": "3e09b2ac672b6c345fe1e43d5ac71258efc1d4d1a7d7704ad4add025362b23f3"
+    },
+    {
+      "file": "js/nethack/bindings/earlyarg.js",
+      "sha256": "98e8ce117e7454256fcc6c3495686d49e7721bb15ffc7e545f278655b93db141"
+    },
+    {
+      "file": "js/nethack/bindings/eat.js",
+      "sha256": "65524c4bdaddd3c828246f5e84661f1ff944ec6ca01b47e588464ac5b26ef648"
+    },
+    {
+      "file": "js/nethack/bindings/end.js",
+      "sha256": "f7111284db595666e5c4701f5112b76265bcf357c50f7de06b324e49923f3f54"
+    },
+    {
+      "file": "js/nethack/bindings/engrave.js",
+      "sha256": "245c9960fd602feb4fce97265ac6e1f3eccbd533b33aca3b7e1da151bc46fe26"
+    },
+    {
+      "file": "js/nethack/bindings/exper.js",
+      "sha256": "c037a1f7188a25c6536f74cacad9e346a7199620b751efcfdcc8712c4f82a449"
+    },
+    {
+      "file": "js/nethack/bindings/explode.js",
+      "sha256": "6b6cf5ed19226bfe326c483403fb6b9a27ecd7e3f2e3884ca803bbaa63502580"
+    },
+    {
+      "file": "js/nethack/bindings/extralev.js",
+      "sha256": "fd5ee876506d77d6e7a724261ebdfbc0166a82f4a303095b1b61f15dd7b43a4d"
+    },
+    {
+      "file": "js/nethack/bindings/files.js",
+      "sha256": "944d93c2ff2044bc28a2697a2e1d9ce6f1931df9d269e227c320ee31116edac1"
+    },
+    {
+      "file": "js/nethack/bindings/fountain.js",
+      "sha256": "d1ce2bfb806acbc9caf8fc08106a8efb68dfe027ceb53d465da3f2519b9a9001"
+    },
+    {
+      "file": "js/nethack/bindings/getline.js",
+      "sha256": "56e4c509c014ad5668af09b69e148eb032505ba599868e82a7821d9845a41673"
+    },
+    {
+      "file": "js/nethack/bindings/getpos.js",
+      "sha256": "07e1ec364cad2d01bcfa75fcfc958d4bf09acebbd6a4433898217d9a8565a0a6"
+    },
+    {
+      "file": "js/nethack/bindings/glyphs.js",
+      "sha256": "01f456e710097eda9f906c6bd62a2377d9f13b9c9062719308c8078e946d6111"
+    },
+    {
+      "file": "js/nethack/bindings/hack.js",
+      "sha256": "d64d77e4210b7473e891d5caa031d081158a81b7c8c58f117a46009623607f2b"
+    },
+    {
+      "file": "js/nethack/bindings/hacklib.js",
+      "sha256": "0ba3190fb864d564f8183cdf752f52e3447aaa29437fae9973e87ae647cc0b2d"
+    },
+    {
+      "file": "js/nethack/bindings/iactions.js",
+      "sha256": "4419e069f4c586907e40eb70be1ad672cb0dc4614bd403cc346506f9e2e96fef"
+    },
+    {
+      "file": "js/nethack/bindings/insight.js",
+      "sha256": "14fc0593436660288147966a3f7b75e52ce79a6faa2d207592991f0c2a57c1f5"
+    },
+    {
+      "file": "js/nethack/bindings/invent.js",
+      "sha256": "bfda59bd6dfdc35a52a64f0b71ef41456744da0a30807d041811ef2103ce7bbb"
+    },
+    {
+      "file": "js/nethack/bindings/ioctl.js",
+      "sha256": "df134eb90aa6250729352dc38245e9211dd66618488cdeb24344eb21b9ca970f"
+    },
+    {
+      "file": "js/nethack/bindings/light.js",
+      "sha256": "5f988389de4341a7699d373b402467298f17d5c9f9612814ebef82ef5d8e9572"
+    },
+    {
+      "file": "js/nethack/bindings/lock.js",
+      "sha256": "5be7c13e4a78e145001602173fbdcdae3597d02d5c5db30ee77fee695b3ffc67"
+    },
+    {
+      "file": "js/nethack/bindings/mail.js",
+      "sha256": "bfe715c629a51d061b1ec4f239049d2527efd03a8cc293b586e8af45d01cfa54"
+    },
+    {
+      "file": "js/nethack/bindings/makemon.js",
+      "sha256": "5777cfb56169226fc684aaa47cff580b99cae2bf8438b679eb6adaf20f630539"
+    },
+    {
+      "file": "js/nethack/bindings/mcastu.js",
+      "sha256": "baf642e3bd5e9da1b0839048a404f728ce4c313d68fe7e0261da1ec2f486d56e"
+    },
+    {
+      "file": "js/nethack/bindings/mdlib.js",
+      "sha256": "141aad14def4bc5827eca14ad5c487cc115a354e0bff05aadaa388a3399755bc"
+    },
+    {
+      "file": "js/nethack/bindings/mhitm.js",
+      "sha256": "a4030cd050bb641cfc34808b5528f5beb4f680222cd6d456dd7321d58b8af728"
+    },
+    {
+      "file": "js/nethack/bindings/mhitu.js",
+      "sha256": "c185db026b14f54bc4e342d25ff8410180d2124b5a0473f1557e78885b7b9d69"
+    },
+    {
+      "file": "js/nethack/bindings/minion.js",
+      "sha256": "cc49b4aa5524375b26a8e3a843a56b0dbccb0a3409c1159da1cfb102144ae58d"
+    },
+    {
+      "file": "js/nethack/bindings/mklev.js",
+      "sha256": "51336d8c2adb1fc3d34e5ba850c3fbc81449066a535ef33e11da7a9b1d2d4e22"
+    },
+    {
+      "file": "js/nethack/bindings/mkmap.js",
+      "sha256": "5452fd6a68910d9e428515c32eace55be89a4029d00add6c70e7487e53fc5818"
+    },
+    {
+      "file": "js/nethack/bindings/mkmaze.js",
+      "sha256": "da3eda56d435290b92552538fcc2b1da9360214a6f850cac07c4c26579b880ec"
+    },
+    {
+      "file": "js/nethack/bindings/mkobj.js",
+      "sha256": "1003cdd0633ea59141809d8abf172aad31f8ac2159267de9de96edcb7b9fa4e7"
+    },
+    {
+      "file": "js/nethack/bindings/mkroom.js",
+      "sha256": "3359ee346222b0ab223673fd61a5b1e5165675f7e01b89262078d189bc5ea137"
+    },
+    {
+      "file": "js/nethack/bindings/mon.js",
+      "sha256": "e81fe61548076f0ea9dc7aaa9b5364cb8b14c41719f16bbf4d8a9314ef313be5"
+    },
+    {
+      "file": "js/nethack/bindings/mondata.js",
+      "sha256": "d802e9b56db24978cdaaaa3dda346204423746544735932c0edc97cae601cb42"
+    },
+    {
+      "file": "js/nethack/bindings/monmove.js",
+      "sha256": "ab56ed49e8b2c91381fe41ba3df768269e8ae681340143a646bea22801809de1"
+    },
+    {
+      "file": "js/nethack/bindings/monst.js",
+      "sha256": "8253a1fcfc87a56001050389431d26543c5213a4ed911090ecf4c4a150347d89"
+    },
+    {
+      "file": "js/nethack/bindings/mplayer.js",
+      "sha256": "650c2fca1db26eab3a5d0ac24ad185a6d5108782dd7dfd750c156a987d9f23c3"
+    },
+    {
+      "file": "js/nethack/bindings/mthrowu.js",
+      "sha256": "f71e2c0e107c7b36dd6279fcc730a540c4345b7b773784a85cb4386d8a5477be"
+    },
+    {
+      "file": "js/nethack/bindings/muse.js",
+      "sha256": "ea7c6c6df1bf862f0e676063a6cddeb034ee1ce813154a885da7a4cc0bdbb1ba"
+    },
+    {
+      "file": "js/nethack/bindings/music.js",
+      "sha256": "c6e339e2590963197d79737388af2dcdbec66b278326962050a05ad5433e81fe"
+    },
+    {
+      "file": "js/nethack/bindings/nhlobj.js",
+      "sha256": "ac85a000e22f47c929d414cdf192672b7f470611dd8244d30d893f339eb10d4d"
+    },
+    {
+      "file": "js/nethack/bindings/nhlsel.js",
+      "sha256": "9a729464989daaa7cfe4eb2acc85e96b51b9c5836c4b0f4a72733822212fc722"
+    },
+    {
+      "file": "js/nethack/bindings/nhlua.js",
+      "sha256": "e16244e4fd606abdf09c605f185c89e0008a7bf70234b766f6558761cc5034a3"
+    },
+    {
+      "file": "js/nethack/bindings/o_init.js",
+      "sha256": "21376a05fe875c8688ffdf884667ff9f91960267354b127706be6e3108ca8b9e"
+    },
+    {
+      "file": "js/nethack/bindings/objects.js",
+      "sha256": "7615d6fe4ec5eae488f030ca70cb52ea532bc1f971b19bdbcb56666f7bec5d03"
+    },
+    {
+      "file": "js/nethack/bindings/objnam.js",
+      "sha256": "0a2f931fe27682dedd788f9ab29620aea1322309b6ef1dc5fffb4922e0801503"
+    },
+    {
+      "file": "js/nethack/bindings/options.js",
+      "sha256": "c39bf0e7813e83cd3d479aaeeca8a3504e48f0cf4191ea672f9984ce7267c417"
+    },
+    {
+      "file": "js/nethack/bindings/pager.js",
+      "sha256": "0d5585251aec2c83472490ac412965734a56fdd191d4bdf10cc52eec5c69b0f8"
+    },
+    {
+      "file": "js/nethack/bindings/pickup.js",
+      "sha256": "fc87d154d3f083dbbf98398dedbe9b484a08c5b58b30ace5b522376efd30ddd6"
+    },
+    {
+      "file": "js/nethack/bindings/pline.js",
+      "sha256": "70da3a3944a7d9e291dc962efd05652f8f9c501d88a98a8e884cedc0e9c7f370"
+    },
+    {
+      "file": "js/nethack/bindings/polyself.js",
+      "sha256": "f40e1bb9e78c8982f93c7981c762a7aa9a5bf7acf32e72877a858b80868ecdd6"
+    },
+    {
+      "file": "js/nethack/bindings/posixregex.js",
+      "sha256": "567795a5ccac27c7109b250e1e88f8b050da006f163d916f72173901660ee1bf"
+    },
+    {
+      "file": "js/nethack/bindings/potion.js",
+      "sha256": "73f183a078bf675255ad65d6da774e91dc1cf9590973b51dcf442dca2003cac7"
+    },
+    {
+      "file": "js/nethack/bindings/pray.js",
+      "sha256": "38d0a5a30f57322163ffb0c79fb3d67f24ef68bf8f31f57dca66f2d15b93b8ae"
+    },
+    {
+      "file": "js/nethack/bindings/priest.js",
+      "sha256": "90c5bf4c5025bada87aa88f08718348828a76239b5ce752fd5067b2f67c79bec"
+    },
+    {
+      "file": "js/nethack/bindings/quest.js",
+      "sha256": "38afdd3b3181a0bee9a8f5f46ead85053a9fd43667773c907dffbaf068d48b12"
+    },
+    {
+      "file": "js/nethack/bindings/questpgr.js",
+      "sha256": "13b478281ab6eab79a11c8eddbd09b0dd1f8d0b1d21b279489ac38125d925c2b"
+    },
+    {
+      "file": "js/nethack/bindings/read.js",
+      "sha256": "cd5d29d445e92a8cc840afa57d6c64d44609b11b523db479cbd683d6e590eaf1"
+    },
+    {
+      "file": "js/nethack/bindings/region.js",
+      "sha256": "8114c61cea770d4c709e595b5f79fa79b19756022fbf1877dd49955a3ff9fcd0"
+    },
+    {
+      "file": "js/nethack/bindings/report.js",
+      "sha256": "8da8cd740a8dab9c7f9d12ad532883bfacc905f84ac3fe7613c157901676f7c3"
+    },
+    {
+      "file": "js/nethack/bindings/restore.js",
+      "sha256": "8e23dd074d655e1c924a38952409fb6885d6b3988781c1986454d4053bba9bb9"
+    },
+    {
+      "file": "js/nethack/bindings/rnd.js",
+      "sha256": "d4486e4214d9bda9dcbcfa30dbbe2b605bd0d9fb8ddd9617e4c8ae1553247fc4"
+    },
+    {
+      "file": "js/nethack/bindings/role.js",
+      "sha256": "eb79fdb933ed8df00061cffbc1a64becee053e9208a11a20bc31b30b80da026e"
+    },
+    {
+      "file": "js/nethack/bindings/rumors.js",
+      "sha256": "0d8d3765905c4e76b32bee33bc836a3f176ce58f4c2ab9d6a4b03d11502313cf"
+    },
+    {
+      "file": "js/nethack/bindings/save.js",
+      "sha256": "0b9e6c533fd560b097464869ec709b979a4191d7a5146d56d43382f5dc0fe10c"
+    },
+    {
+      "file": "js/nethack/bindings/selvar.js",
+      "sha256": "7d6ec44be81455e1849dd10b0578ceed42bc8064a3f1462d34b1037ef9da95c5"
+    },
+    {
+      "file": "js/nethack/bindings/sfbase.js",
+      "sha256": "7ff1dcb5bd9a9ecc58755c997cf70dd1d0e759e6b2e8d0e74f0d185438beae8b"
+    },
+    {
+      "file": "js/nethack/bindings/sfstruct.js",
+      "sha256": "5edacac73260b69c53fa8ba18d01bac009e2c82b5559111eaa37add21a340380"
+    },
+    {
+      "file": "js/nethack/bindings/shk.js",
+      "sha256": "03a261bdd3735618e7a325e9f05b059e4e52e0e542ddda58c893ac3b9ad079a7"
+    },
+    {
+      "file": "js/nethack/bindings/shknam.js",
+      "sha256": "a62026b62f8acd06389f6de871fd9f07032e7f3a303a78377874090d4666ba3c"
+    },
+    {
+      "file": "js/nethack/bindings/sit.js",
+      "sha256": "9a3bdf9915a7af29e5ebea6cf2e4bcde1822595204de48e9ad32e313377af382"
+    },
+    {
+      "file": "js/nethack/bindings/sounds.js",
+      "sha256": "a891c00f96a874f5f7d7bd390a3d69f643a89adfffd04e2b020d899b66c92634"
+    },
+    {
+      "file": "js/nethack/bindings/sp_lev.js",
+      "sha256": "f30237e171326d8bdeee13a9a9d4f13c7046bd797bd2d2d6fa3f30a621e1a832"
+    },
+    {
+      "file": "js/nethack/bindings/spell.js",
+      "sha256": "6bf30d4952ab13b531ecc2ff1ab9033afb6b4b7039dd782c3f85359dd6e08b7a"
+    },
+    {
+      "file": "js/nethack/bindings/steal.js",
+      "sha256": "f84004010a861a7b727c97cd4d9df00b22f9bd98022699ee763934336f9849ac"
+    },
+    {
+      "file": "js/nethack/bindings/steed.js",
+      "sha256": "092649cbab7556fb28f5feef4e4c12c095545acb3e1ce8546be31b73ddb8847a"
+    },
+    {
+      "file": "js/nethack/bindings/symbols.js",
+      "sha256": "7268fe11793582cd4931159ea1adbe6655febd8465be54fbd78919b14124f5f6"
+    },
+    {
+      "file": "js/nethack/bindings/teleport.js",
+      "sha256": "025eff4d099982ed27dc9a9d6b683ec966e5a3478589ad9d70fcf77b34fab553"
+    },
+    {
+      "file": "js/nethack/bindings/termcap.js",
+      "sha256": "0f71d97c77df4cc74c31bb0ba66d08686a24741a368473e76f66e353a5277efc"
+    },
+    {
+      "file": "js/nethack/bindings/timeout.js",
+      "sha256": "df6be8d256fd43a26083f7dd4c9a2f3309c4b038521b711327b731b7e8bae679"
+    },
+    {
+      "file": "js/nethack/bindings/topl.js",
+      "sha256": "caa5829ff02ae54afd8289f6e5a436c193fea8f55827eb90564d034404b5c878"
+    },
+    {
+      "file": "js/nethack/bindings/topten.js",
+      "sha256": "c2fbb96c576596b7746fd56c500d425060de8f00fd43db1b8b05c3f53cfa8603"
+    },
+    {
+      "file": "js/nethack/bindings/trap.js",
+      "sha256": "60c546b07e12f31b4d058bdf805a40ed2bd4b7eb368c9f5878b9ae410b35c173"
+    },
+    {
+      "file": "js/nethack/bindings/u_init.js",
+      "sha256": "671a024697ef895fbf243e951f4e9b3fe864ba16668079c65f452df5407e6d6b"
+    },
+    {
+      "file": "js/nethack/bindings/uhitm.js",
+      "sha256": "e26ff0f6cfbd80bac70330341133e7dfae8b05fde3b2570d03b8eeba344909d9"
+    },
+    {
+      "file": "js/nethack/bindings/unixmain.js",
+      "sha256": "9df08425f8d5a7e40aca90deb67d31b7c6f37121ceb00ac8ddc1a7f68eef32d5"
+    },
+    {
+      "file": "js/nethack/bindings/unixtty.js",
+      "sha256": "9b9e651962c4f1aec4e2cecc25e60415537eacb713a89767553535b8bd4b6ec8"
+    },
+    {
+      "file": "js/nethack/bindings/unixunix.js",
+      "sha256": "df5a4a4ceedc9e2068405b89efacd43ddc88a2e4ada60e6808b3bab28e30dcaa"
+    },
+    {
+      "file": "js/nethack/bindings/utf8.js",
+      "sha256": "21c7f213a6db31f31c0b6d59a321d999e2c041e25a12533c72f5dcb67f190431"
+    },
+    {
+      "file": "js/nethack/bindings/vault.js",
+      "sha256": "effe5dacf078a6f1b1caa2db230fe70b9591dfda7954ce3fb1459cfe6b0fdc01"
+    },
+    {
+      "file": "js/nethack/bindings/version.js",
+      "sha256": "16ecd00bf203bcdac7689af3b6209e2e5cc89afbbc013a3b7136b5f43720b064"
+    },
+    {
+      "file": "js/nethack/bindings/vision.js",
+      "sha256": "bdd492b812c61ad48dc321fd890c4e22124977a1740ec43407ec9ab1cac56ec0"
+    },
+    {
+      "file": "js/nethack/bindings/weapon.js",
+      "sha256": "6a5e2f50a48593daec3b79a83f7c9ee25bc65d421757be3e504793c5e6c33361"
+    },
+    {
+      "file": "js/nethack/bindings/were.js",
+      "sha256": "06d6abe6f2ee55cfe6c1e0ba29b811f632e156ef7078ac071d4c5a4491085fb8"
+    },
+    {
+      "file": "js/nethack/bindings/wield.js",
+      "sha256": "56c52a48ff796a8c0bf524015112f6b05c5f58d0e3cd4fee452b19e384b6a01c"
+    },
+    {
+      "file": "js/nethack/bindings/windows.js",
+      "sha256": "fa1ab9ee173fd56a21f528c396eb05f8d38bfa1263e0439a00980f273b929684"
+    },
+    {
+      "file": "js/nethack/bindings/wintty.js",
+      "sha256": "9777c0d3f7a4db1f51d8101d957986504c9f5fa06a055c7fb43517f8d33b1b4b"
+    },
+    {
+      "file": "js/nethack/bindings/wizard.js",
+      "sha256": "ba78233d7dfbd0b2cab0fb3f63641dc0b723c87ed0c9522ebd53741d8adc21ed"
+    },
+    {
+      "file": "js/nethack/bindings/wizcmds.js",
+      "sha256": "c27e8b1f92748f949edef832cf94c2ee0d860e6065013fb72eaa5aaaabf1d446"
+    },
+    {
+      "file": "js/nethack/bindings/worm.js",
+      "sha256": "12120d967b9a8cfebd39b6c627a9316bc1836f27dee6e75540f21d874cebdf9a"
+    },
+    {
+      "file": "js/nethack/bindings/worn.js",
+      "sha256": "92dfabdf9eda685d61c2f912346c2f2a229086eb2118cc6cc2e01fee10343b09"
+    },
+    {
+      "file": "js/nethack/bindings/write.js",
+      "sha256": "6622deb6ac1c48c6bb5ed39d3ee6391a9063fdf9dafe547daa4f910093504083"
+    },
+    {
+      "file": "js/nethack/bindings/zap.js",
+      "sha256": "45b386e46db830a851ba00bd320cbc61d9f859256a73c2256ff32d51e031ae48"
+    }
+  ]
+}
