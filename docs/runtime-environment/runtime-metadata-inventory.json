@@ -1052,12 +1052,12 @@
     },
     {
       "file": "js/nethack/bindings/vision.js",
-      "line": 9,
+      "line": 10,
       "name": "schemas"
     },
     {
       "file": "js/nethack/bindings/vision.js",
-      "line": 10,
+      "line": 11,
       "name": "globals"
     },
     {
@@ -1757,7 +1757,7 @@
     },
     {
       "file": "js/nethack/bindings/vision.js",
-      "sha256": "bdd492b812c61ad48dc321fd890c4e22124977a1740ec43407ec9ab1cac56ec0"
+      "sha256": "4a5355f7529374945f2d62b6e64a188e46572b860dd0c2854d9eec980a44509a"
     },
     {
       "file": "js/nethack/bindings/weapon.js",

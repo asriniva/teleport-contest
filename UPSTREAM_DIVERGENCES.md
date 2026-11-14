@@ -1,3 +1,46 @@
+## Connected native visibility workspace (2026-11-14)
+
+The standalone JavaScript game now requests a resizable JavaScript ArrayBuffer
+in `environment.js`/`c-runtime/heap.js`; generic runtime users retain the prior
+replacement-buffer default. Unsupported hosts retain replacement buffers and
+the descriptor visibility adapter. No WebAssembly is introduced. Stable buffer
+identity allows typed visibility rows to survive callback-triggered growth.
+`native/visibility-state.js` provides typed visibility grids, coordinate arrays,
+scalar references and native row tables that share existing save/byte storage.
+`bindings/vision.js` connects them to the actual visibility engine. The vision
+generator replaces its three pointer-table initialization assignments with
+explicit native row setters that also update the byte representation. Successful
+assertions remain local; failures retain the existing assertion provider.
+`state-bridge.js` advances its epoch around external calls even with typed state,
+so native pointer-reference caches observe external mutations. Scan, mutation
+and RNG ordering are preserved in the current original-C and public recordings
+listed below; this does not prove every possible input branch.
+Movement, monster movement/lifecycle and lighting now consume the same owned
+visibility rows, retaining their prior byte adapters for unsupported hosts.
+Seven visibility dependency calls select same-owner native entries and retain
+explicit boundaries and address conversion for foreign providers. Growth tests
+now assert increased capacity plus the runtime-selected identity contract;
+subsequent live-data and callback checks remain in place.
+The actual-game workspace check passes 232 comparisons, including ordered real
+visibility callbacks during memory growth, active-buffer and row-pointer rewrites,
+byte aliases, narrowing and replacement-memory fallback. All 27,128 isolated-C
+vision comparisons pass, including callbacks and growth. The full vision AST
+matches after reversing exactly three row setters. Connected original-C travel,
+jump, light, region, timeout and ordinary-turn checks pass. Window callback
+validation covers all 43 current dynamic sites with no unresolved metadata;
+this does not establish coverage for every hidden recording.
+
+All 44 public recordings pass: 792,838 ordered RNG calls, 11,405 screens/cursors
+and 1,483 animation frames match exactly. The unprofiled candidate took
+251.550910 seconds versus existing 251.934070 seconds, only 0.15% lower and
+**effectively flat**. No baseline was rerun and no CPU profiles were collected.
+The 871 scoring inputs were unchanged during measurement. Evidence and hashes:
+`docs/runtime-environment/native-visibility-state-validation.json` and the
+matching public44 manifest. Ordinary walk/wait/attack still use 4/11/28 generic
+calls and 6/15/25 heap allocations. Successful visibility guards avoid external
+dispatch, but other C-shaped fields, calls and storage remain. This does not
+establish a zero-bridge complete turn or the 20x target.
+
 ## Native RNG caller state and recording output (2026-11-14)
 
 `native/rng-output.js` keeps owned source file/function metadata as JavaScript

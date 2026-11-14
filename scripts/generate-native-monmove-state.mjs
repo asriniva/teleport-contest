@@ -7,6 +7,8 @@ const begin=binding.indexOf(' const prop='),finish=binding.indexOf('\n env.nativ
 const change=(before,after)=>{assert.equal(body.split(before).length,2,before);body=body.replace(before,after);};
 const start=body.indexOf(' const cell='),end=body.indexOf(' const env=',start);assert.ok(start>=0&&end>start);body=body.slice(0,start)+body.slice(end);
 change('Object.assign(Object.create(services),layout,','Object.assign({},layout,');
+for(const mask of ['IN_SIGHT','COULD_SEE'])change('(view().getUint8(pointer(pointer(global(5)+layout.gv_viz_array)+y*8)+x)&layout.'+mask+')','((state.visibilityState?state.visibilityState.read(y,x):view().getUint8(pointer(pointer(global(5)+layout.gv_viz_array)+y*8)+x))&layout.'+mask+')');
+
 change('callLocal(fn,...args){return CAdapter.callWithStack(services,fn,...args);}','callLocal(fn,...args){return fn(...args);}')
 change('services.strchr(tables.get(a)??a,c)','services.strchr(a,c)');
 const header=fs.readFileSync('scripts/native-monmove-state-header.txt','utf8');

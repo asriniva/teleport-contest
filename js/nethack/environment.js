@@ -131,7 +131,7 @@ import {enableTurnLoop} from './turn-loop.js';
 import {enableGameStartup} from './game-startup.js';
 
 export function createStandaloneEnvironment(options={}) {
-    const base=createJsRuntime(options),{memory}=base,nativeRngFormat=base.libc.format;
+    const base=createJsRuntime({...options,resizable:options.resizable??true}),{memory}=base,nativeRngFormat=base.libc.format;
     const inputs=createEnvironmentInputs(base,options.environment);
     const {transport,functions,bitfields,ctypes,services}=createNetHackRuntime(base,records,inputs.getenv);
     const variables=createEnvironmentServices(base.memory,{get:inputs.getenv,set:inputs.setEnvironment},base.libc);

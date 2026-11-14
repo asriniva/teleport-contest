@@ -1,0 +1,500 @@
+{
+  "completeObjective": false,
+  "scope": "Actual native visibility workspace and connected movement/monster/light consumers; pure JavaScript resizable memory with descriptor fallback. Full-turn zero-bridge and 20x targets remain unmet.",
+  "public44": {
+    "passed": 44,
+    "total": 44,
+    "metrics": {
+      "rngCalls": {
+        "matched": 792838,
+        "total": 792838
+      },
+      "screens": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "cursors": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "animFrames": {
+        "matched": 1483,
+        "total": 1483
+      }
+    },
+    "integrity": {
+      "filesChecked": 871,
+      "changed": [],
+      "exitCode": 0,
+      "wallSeconds": 251.55091004166752,
+      "sessionSelectionMatched": true,
+      "childUserSeconds": 383.07284000000004,
+      "childSystemSeconds": 7.764241
+    },
+    "priorWallSeconds": 251.93407025001943,
+    "wallReductionPercent": 0.15208749176784941,
+    "interpretation": "Effectively flat; one candidate run against existing evidence does not establish a performance improvement."
+  },
+  "checks": {
+    "nativeVisibilityState": 232,
+    "visionSourceInverseAst": true,
+    "isolatedCVisionComparisons": 27128,
+    "nativeMonContext": 1821,
+    "nativeRecordViews": 5189,
+    "lightComparisons": 1212,
+    "timeoutComparisons": 4987,
+    "stdioChecks": 1657,
+    "dynamicCallbackSites": 43,
+    "dynamicUnresolved": 0,
+    "travelOriginalC": true,
+    "jumpOriginalC": true,
+    "regionsOriginalC": true,
+    "productionWindowBindings": 25,
+    "displayValueChecks": 71
+  },
+  "ordinaryTurns": {
+    "passed": false,
+    "originalCEquivalent": true,
+    "input": {
+      "seed": 1,
+      "timezone": "UTC",
+      "options": "OPTIONS=!news\n",
+      "keys": "  nl.Fyy "
+    },
+    "cases": [
+      {
+        "kind": "walk",
+        "totals": {
+          "stateBoundary": {
+            "calls": 25,
+            "bytes": 0,
+            "names": {
+              "apply": 11,
+              "<anonymous>": 3,
+              "invoke": 4,
+              "strcpy": 3,
+              "strchr": 1,
+              "rawCall": 1,
+              "stackSave": 1,
+              "stackRestore": 1
+            }
+          },
+          "heapAllocation": {
+            "calls": 6,
+            "bytes": 131,
+            "names": {
+              "    at Object.malloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/stdlib.js:15:29) |     at Object.alloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/alloc.js:93:13) |     at Object.alloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/runtime.js:158:51)": 1,
+              "    at CMemory.realloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:110:40) |     at Object.realloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/stdlib.js:16:35) |     at Object.re_alloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/alloc.js:109:16)": 1,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at level_detects (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/ported/detect.js:982:13)": 1,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at level_detects (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/ported/detect.js:983:13)": 1,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at level_detects (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/ported/detect.js:984:13)": 1,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at level_detects (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/ported/detect.js:985:13)": 1
+            }
+          },
+          "nativeAddressFast": {
+            "calls": 67,
+            "bytes": 0,
+            "names": {
+              "cmd.do_move_east": 1,
+              "dungeon.on_level": 16,
+              "display.glyph_at": 1,
+              "invent.sobj_at": 1,
+              "dungeon.u_on_newpos": 1,
+              "display.see_nearby_objects": 1,
+              "cmd.reset_occupations": 1,
+              "display.canseemon": 1,
+              "display.newsym": 13,
+              "dungeon.update_lastseentyp": 11,
+              "dungeon.In_mines": 4,
+              "dungeon.In_hell": 4,
+              "dungeon.Invocation_lev": 1,
+              "pickup.pickup": 1,
+              "dungeon.surface": 1,
+              "mkobj.dobjsfree": 1,
+              "pickup.encumber_msg": 2,
+              "mkobj.clear_splitobjs": 2,
+              "dungeon.depth": 2,
+              "cmd.rhack": 1,
+              "display.flush_screen": 1
+            }
+          },
+          "stackReservation": {
+            "calls": 21,
+            "bytes": 937,
+            "names": {
+              "nativeStackReserve": 21
+            }
+          },
+          "addressLegacyAdapter": {
+            "calls": 4,
+            "bytes": 0,
+            "names": {
+              "display.glyph_at": 1,
+              "display.unmap_invisible": 1,
+              "mkmaze.maybe_adjust_hero_bubble": 1,
+              "detect.dosearch0": 1
+            }
+          },
+          "genericCall": {
+            "calls": 4,
+            "bytes": 0,
+            "names": {
+              "lock.reset_pick": 1,
+              "initial-spells.age_spells": 1,
+              "vault.invault": 1,
+              "unix-platform-mail.ckmailstatus": 1
+            }
+          },
+          "cContext": {
+            "calls": 6,
+            "bytes": 0,
+            "names": {
+              "<anonymous>": 4,
+              "reset_pick": 1,
+              "ckmailstatus": 1
+            }
+          },
+          "stackAllocation": {
+            "calls": 7,
+            "bytes": 180,
+            "names": {
+              "nativeStackAlloc": 7
+            }
+          },
+          "nativeRngCaller": {
+            "calls": 9,
+            "bytes": 0,
+            "names": {
+              "metadata": 9
+            }
+          },
+          "nativeRngOutput": {
+            "calls": 9,
+            "bytes": 0,
+            "names": {
+              "fprintf": 9
+            }
+          },
+          "cFieldAccess": {
+            "calls": 1,
+            "bytes": 0,
+            "names": {
+              "struct you": 1
+            }
+          }
+        }
+      },
+      {
+        "kind": "wait",
+        "totals": {
+          "stateBoundary": {
+            "calls": 27,
+            "bytes": 0,
+            "names": {
+              "apply": 14,
+              "free": 1,
+              "<anonymous>": 4,
+              "rawCall": 1,
+              "memset": 2,
+              "stackSave": 1,
+              "stackRestore": 1,
+              "invoke": 3
+            }
+          },
+          "heapAllocation": {
+            "calls": 15,
+            "bytes": 308,
+            "names": {
+              "    at Object.malloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/stdlib.js:15:29) |     at Object.alloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/alloc.js:93:13) |     at Object.alloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/runtime.js:158:51)": 2,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at text (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/do-lifecycle.js:17:45)": 2,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at obj_resists (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/object-appraisal.js:62:73)": 1,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at obj_resists (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/object-appraisal.js:62:99)": 1,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at text (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/do-name.js:13:92)": 1,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at text (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/mhitm.js:12:135)": 4,
+              "    at Object.malloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/stdlib.js:15:29) |     at alloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/alloc.js:93:13) |     at Object.dupstr (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/alloc.js:263:21)": 2,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at text (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/terminal-messages.js:13:81)": 2
+            }
+          },
+          "stackAllocation": {
+            "calls": 36,
+            "bytes": 6932,
+            "names": {
+              "nativeStackAlloc": 36
+            }
+          },
+          "nativeAddressFast": {
+            "calls": 102,
+            "bytes": 0,
+            "names": {
+              "cmd.cmd_from_func": 1,
+              "mkobj.dobjsfree": 1,
+              "pickup.encumber_msg": 2,
+              "dungeon.on_level": 17,
+              "mkobj.clear_splitobjs": 4,
+              "display.canseemon": 17,
+              "invent.sobj_at": 43,
+              "muse.find_misc": 2,
+              "dungeon.On_W_tower_level": 2,
+              "display.flush_screen": 3,
+              "muse.find_defensive": 1,
+              "display.sensemon": 1,
+              "shk.costly_spot": 1,
+              "display.newsym": 2,
+              "muse.find_offensive": 1,
+              "dungeon.depth": 2,
+              "detect.dosearch0": 1,
+              "cmd.rhack": 1
+            }
+          },
+          "stackReservation": {
+            "calls": 26,
+            "bytes": 561,
+            "names": {
+              "nativeStackReserve": 26
+            }
+          },
+          "genericCall": {
+            "calls": 11,
+            "bytes": 0,
+            "names": {
+              "quest.quest_stat_check": 2,
+              "allocation-strings.dupstr": 2,
+              "options.msgtype_type": 2,
+              "quest.quest_talk": 1,
+              "mthrowu.lined_up": 1,
+              "initial-spells.age_spells": 1,
+              "vault.invault": 1,
+              "unix-platform-mail.ckmailstatus": 1
+            }
+          },
+          "cContext": {
+            "calls": 15,
+            "bytes": 0,
+            "names": {
+              "quest_stat_check": 2,
+              "dupstr": 2,
+              "<anonymous>": 6,
+              "msgtype_type": 2,
+              "quest_talk": 1,
+              "lined_up": 1,
+              "ckmailstatus": 1
+            }
+          },
+          "nativeRngCaller": {
+            "calls": 26,
+            "bytes": 0,
+            "names": {
+              "metadata": 26
+            }
+          },
+          "nativeRngOutput": {
+            "calls": 28,
+            "bytes": 0,
+            "names": {
+              "fprintf": 28
+            }
+          },
+          "addressLegacyAdapter": {
+            "calls": 1,
+            "bytes": 0,
+            "names": {
+              "muse.find_defensive": 1
+            }
+          },
+          "cFieldAccess": {
+            "calls": 7,
+            "bytes": 0,
+            "names": {
+              "struct instance_globals_p": 2,
+              "struct plinemsg_type *": 2,
+              "void *": 2,
+              "struct you": 1
+            }
+          }
+        }
+      },
+      {
+        "kind": "attack",
+        "totals": {
+          "stateBoundary": {
+            "calls": 43,
+            "bytes": 0,
+            "names": {
+              "apply": 24,
+              "free": 1,
+              "<anonymous>": 7,
+              "rawCall": 1,
+              "stackSave": 2,
+              "stackRestore": 2,
+              "memset": 3,
+              "invoke": 3
+            }
+          },
+          "heapAllocation": {
+            "calls": 25,
+            "bytes": 603,
+            "names": {
+              "    at Object.malloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/stdlib.js:15:29) |     at Object.alloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/alloc.js:93:13) |     at Object.alloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/runtime.js:158:51)": 6,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/uhitm.js:15:142)": 4,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at Object.prepareArgs (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/world-position.js:54:144)": 1,
+              "    at Object.malloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/stdlib.js:15:29) |     at alloc (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/alloc.js:93:13) |     at Object.dupstr (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/alloc.js:263:21)": 5,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at Proxy.<anonymous> (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/item-naming.js:40:334)": 5,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at text (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/messages.js:12:81)": 2,
+              "    at CMemory.cstring (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js:172:30) |     at Object.literal (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js:89:72) |     at text (file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/mhitm.js:12:135)": 2
+            }
+          },
+          "nativeAddressFast": {
+            "calls": 166,
+            "bytes": 0,
+            "names": {
+              "cmd.do_fight": 1,
+              "display.flush_screen": 6,
+              "cmd.do_move_northwest": 1,
+              "dungeon.on_level": 28,
+              "display.glyph_at": 1,
+              "display.is_safemon": 2,
+              "cmd.cmdq_clear": 1,
+              "pickup.encumber_msg": 3,
+              "display.canseemon": 22,
+              "display.suppress_map_output": 1,
+              "dungeon.In_quest": 1,
+              "dungeon.depth": 3,
+              "mkobj.dobjsfree": 1,
+              "mkobj.clear_splitobjs": 6,
+              "invent.sobj_at": 72,
+              "muse.find_defensive": 3,
+              "muse.find_misc": 3,
+              "dungeon.On_W_tower_level": 4,
+              "display.sensemon": 1,
+              "shk.costly_spot": 1,
+              "display.newsym": 2,
+              "muse.find_offensive": 1,
+              "detect.dosearch0": 1,
+              "cmd.rhack": 1
+            }
+          },
+          "stackReservation": {
+            "calls": 53,
+            "bytes": 897,
+            "names": {
+              "nativeStackReserve": 53
+            }
+          },
+          "stackAllocation": {
+            "calls": 49,
+            "bytes": 10504,
+            "names": {
+              "nativeStackAlloc": 49
+            }
+          },
+          "addressLegacyAdapter": {
+            "calls": 2,
+            "bytes": 0,
+            "names": {
+              "display.is_safemon": 1,
+              "files.livelog_add": 1
+            }
+          },
+          "nativeRngCaller": {
+            "calls": 35,
+            "bytes": 0,
+            "names": {
+              "metadata": 35
+            }
+          },
+          "nativeRngOutput": {
+            "calls": 39,
+            "bytes": 0,
+            "names": {
+              "fprintf": 39
+            }
+          },
+          "genericCall": {
+            "calls": 28,
+            "bytes": 0,
+            "names": {
+              "source-debug-guard.debugcore": 4,
+              "object-state.observe_object": 1,
+              "zap.get_obj_location": 1,
+              "allocation-strings.dupstr": 5,
+              "options.msgtype_type": 4,
+              "windows.encglyph": 1,
+              "version.status_version": 1,
+              "zap.exclam": 1,
+              "quest.quest_stat_check": 3,
+              "terminal-input.xwaitforspace": 1,
+              "quest.quest_talk": 2,
+              "mthrowu.lined_up": 1,
+              "initial-spells.age_spells": 1,
+              "vault.invault": 1,
+              "unix-platform-mail.ckmailstatus": 1
+            }
+          },
+          "cContext": {
+            "calls": 38,
+            "bytes": 0,
+            "names": {
+              "debugcore": 4,
+              "observe_object": 1,
+              "<anonymous>": 13,
+              "dupstr": 5,
+              "livelog_add": 1,
+              "msgtype_type": 4,
+              "encglyph": 1,
+              "status_version": 1,
+              "quest_stat_check": 3,
+              "xwaitforspace": 1,
+              "quest_talk": 2,
+              "lined_up": 1,
+              "ckmailstatus": 1
+            }
+          },
+          "cFieldAccess": {
+            "calls": 25,
+            "bytes": 0,
+            "names": {
+              "flag": 4,
+              "boolean": 4,
+              "struct obj *": 1,
+              "struct sysopt_s": 1,
+              "long": 1,
+              "struct instance_globals_p": 4,
+              "struct plinemsg_type *": 4,
+              "int": 1,
+              "char": 2,
+              "void *": 2,
+              "struct you": 1
+            }
+          }
+        }
+      }
+    ],
+    "instrumentedModules": [
+      "file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/rng-output.js",
+      "file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/state-bridge.js",
+      "file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/context.js",
+      "file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/memory.js",
+      "file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/native-stack.js",
+      "file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/functions.js",
+      "file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/types.js",
+      "file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/heap.js",
+      "file:///Users/arj/Desktop/nethack_comp/native-game-state/js/c-runtime/linker.js",
+      "file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/address-ports.js",
+      "file:///Users/arj/Desktop/nethack_comp/native-game-state/js/nethack/native/address-entries.js"
+    ],
+    "scope": "Real initial walk, wait and forced attack; input through pending output and next read. Generic C field access and pointer-table dispatch are also counted; C malloc includes legacy stack allocations; the native arena has separate allocation/reservation counters and may allocate a backing chunk when it grows. Counters are architectural acceptance, not CPU or timing samples."
+  },
+  "sourceSha256": {
+    "js/c-runtime/heap.js": "b115212634833842f7a811979f2eea2a8184c971a488d8ff97167096125b8889",
+    "js/nethack/environment.js": "4c50e23e8610ced21091e5d1b2c7afd1c4079b02ef3bf4a221865ec606e83618",
+    "js/nethack/vision.js": "e9990fd3d7cf470db0dd9c31a529e186d907ef0756aa0cd12ee4fa475a0b2377",
+    "js/nethack/bindings/vision.js": "4a5355f7529374945f2d62b6e64a188e46572b860dd0c2854d9eec980a44509a",
+    "js/nethack/native/visibility-state.js": "3d79f4cbcd02de9a9cdcfb50069325c0657c6954505ab9cf491a722743d92cac",
+    "js/nethack/native/state-bridge.js": "58ef38daf50bfc00ebbf3cb8e54374d9f141fb21e9d77fcf144332feb4bc3165",
+    "js/nethack/native/vision.js": "aa98ceb51b4a21ccfcdefc64e787ba57063810049c551c212555f2ac9961a37f",
+    "js/nethack/native/mon-state.js": "9e6e6f0d85fb784e7a6a93cf648c286860a13ee10253fb33ba72b8d3191bc67c",
+    "js/nethack/native/monmove-state.js": "63d6d7a27fcb2e11c4f37a822c721b80619a1ce3c6bb18d8342f1b1adb02682f",
+    "js/nethack/native/hack-state.js": "d4dbcdfb0e830596b22da86b1583d37dc0645fe3c09b4a662767e9bc154af459",
+    "js/nethack/native/light-state.js": "134446cfaa63dededfb7afd989d5e749835077a6b10b646fadd4889feb682ee9"
+  }
+}

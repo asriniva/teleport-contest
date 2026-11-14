@@ -64,7 +64,7 @@ for(const [v,p,fd]of [[jv(),file,jfd],[cv(),cfile,cfd]]){for(const [key,value]of
 call('save_regions',[file],[BigInt(cfile)],{returns:false});S.bflush(jfd);module._bflush(cfd);equal(Buffer.from(env.filesystem.readFile(filename)),Buffer.from(module.FS.readFile(filename)),'all actual region checkpoint bytes without pointer normalization');
 S.lseek(jfd,0,0);module.FS.llseek(module.FS.getStream(cfd),0,0);jv().setInt32(file+field('nh_file','mode'),0,true);cv().setInt32(cfile+field('nh_file','mode'),0,true);
 call('rest_regions',[file,0],[BigInt(cfile),0],{returns:false});S.bclose(jfd);module._bclose(cfd);env.memory.free(file);module._free(BigInt(cfile));
-const before=env.memory.buffer,grow=env.memory.malloc(env.memory.buffer.byteLength+16*1024*1024);env.memory.free(grow);assert.notEqual(env.memory.buffer,before);compare('live native regions after heap growth');
+const before=env.memory.buffer,previousBytes=before.byteLength,grow=env.memory.malloc(env.memory.buffer.byteLength+16*1024*1024);env.memory.free(grow);assert.ok(env.memory.buffer.byteLength>previousBytes);assert.equal(env.memory.buffer===before,env.memory.stableBuffer);compare('live native regions after heap growth');
 for(let i=0;i<20;i++)call('run_regions',[],[],{returns:false});
 call('clear_regions',[],[],{returns:false});
 // Real poison damage connects region callbacks to the current monster list and

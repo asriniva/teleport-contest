@@ -6,12 +6,15 @@ for(const text of [binding,policy])visit(parse(text,options));
 const begin=binding.indexOf(' const ushort='),finish=binding.indexOf('\n return env;',begin);assert.ok(begin>=0&&finish>begin);let body=binding.slice(begin,finish);
 const change=(before,after)=>{assert.equal(body.split(before).length,2,before);body=body.replace(before,after);};
 change('Object.assign(Object.create(services),layout,','Object.assign({},layout,');
+change('readVisibility:(y,x)=>{nativeState.flush();','readVisibility:(y,x)=>{if(nativeState.visibilityState)return nativeState.visibilityState.read(y,x);nativeState.flush();');
+change('writeVisibility:(y,x,value)=>{nativeState.flush();','writeVisibility:(y,x,value)=>{if(nativeState.visibilityState)return nativeState.visibilityState.write(y,x,uchar(value)),value;nativeState.flush();');
+
 const tables={mons:['pm','layout.NUMMONS+1'],objects:['cls','services.nativeLayouts.o_init.NUM_OBJECTS'],genders:['gender','services.nativeLayouts.role.genderCount'],obj_descr:['descr','services.nativeLayouts.o_init.NUM_OBJECTS'],def_monsyms:['classsym','services.nativeLayouts.drawing.MAXMCLASSES'],shtypes:['shclass','services.nativeLayouts.shknam.shopCount']};
 for(const[name,[kind,length]]of Object.entries(tables)){const pattern=new RegExp('env\\.'+name+'=array\\(global\\((\\d+)\\),"'+kind+'",\\[0\\]\\);');assert.equal([...body.matchAll(new RegExp(pattern,'g'))].length,1);body=body.replace(pattern,(_,i)=>'env.'+name+'=table(global('+i+'),"'+kind+'",'+length+');');}
 change('env.c_obj_colors=array(global(34),"ptr:raw",[0]);','env.c_obj_colors=array(global(34),"ptr:raw",[Number(services.nativeLayouts.decl.size_c_obj_colors)/layout.pointerSize]);');
 change('env.levl=svl.level.locations;','env.levl=nativeState.spatial.cells;');
 change('()=>state.itermonarr?array(address(state.itermonarr),"ptr:mon",[state.itermonsiz]):0,v=>{state.itermonarr=raw(v);}','()=>state.itermonarr,v=>{if(v!==0&&!snapshots.has(v))throw Error("Foreign MON snapshot");state.itermonarr=v;}');
-for(const[name,mask]of [['cansee','IN_SIGHT'],['couldsee','COULD_SEE']])change('env.'+name+'=(x,y)=>(((env.gv.viz_array[y][x] & env.'+mask+') != 0));','env.'+name+'=(x,y)=>Boolean(view().getUint8(pointer(pointer(global(16)+layout.gv_viz_array)+y*8)+x)&env.'+mask+');');
+for(const[name,mask]of [['cansee','IN_SIGHT'],['couldsee','COULD_SEE']])change('env.'+name+'=(x,y)=>(((env.gv.viz_array[y][x] & env.'+mask+') != 0));','env.'+name+'=(x,y)=>Boolean(env.readVisibility(y,x)&env.'+mask+');');
 change('Object.defineProperty(env,"ALIGNLIM",{get:()=>((10n + (env.svm.moves / 200n)))});','Object.defineProperty(env,"ALIGNLIM",{get:()=>services.projectAlignmentLimit(10n + (env.svm.moves / 200n))});');
 change(' env.nativeLifecycle=createNativeMonsterLifecycle(env);',' Object.assign(env,{nativeMonsterSnapshot,freeMonsterSnapshot,nativeIntPointer:intPointer,nativeMonLink:value=>links.owns(value)?value:env.monLink(value)});\n Object.setPrototypeOf(env,services);env.nativeLifecycle=createNativeMonsterLifecycle(env);');
 const header=fs.readFileSync('scripts/native-mon-state-header.txt','utf8'),validation=binding.slice(binding.indexOf(' for(const[k,n]of Object.entries({pointerSize:'),binding.indexOf(' const indexed='));assert.ok(validation.includes('Review MON ABI field'));

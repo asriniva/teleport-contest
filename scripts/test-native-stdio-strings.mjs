@@ -54,7 +54,7 @@ for(const buffered of [false,true]){
  try{if(!buffered)eq(io.getchar(),0,'unbuffered zero');for(const byte of [255,65,10])eq(io.getchar(),byte,'native read');eq(io.getchar(),-1,'native EOF');eq(io.feof(io.stdin),1,'EOF flag');eq(io.ungetc(7,io.stdin),7,'unget after EOF');eq(io.getchar(),7,'native pushback');eq(io.putchar(255),255,'native output byte');eq(io.puts('line'),10,'native puts');eq(io.printf('%s:%d\n','count',42),9,'native formatted output');eq(allocations,0,'no C heap scratch allocations');eq(chunks.flat(),[255,...CMemory.byteString('line\ncount:42\n')],'native captured bytes');}
  finally{e.memory.malloc=original;}
  assert.throws(()=>io.fputs('prefix\0\u0100',io.stdout),/explicit UTF-8/);checks++;
- const old=e.memory.buffer;io.fputs('x',io.stdout);e.memory.grow(old.byteLength+1);assert.notEqual(e.memory.buffer,old);io.fputs('y\n',io.stdout);checks++;
+ const old=e.memory.buffer,previousBytes=old.byteLength;io.fputs('x',io.stdout);e.memory.grow(old.byteLength+1);assert.ok(e.memory.buffer.byteLength>previousBytes);assert.equal(e.memory.buffer===old,e.memory.stableBuffer);io.fputs('y\n',io.stdout);checks++;
 }
 const report={passed:true,cases,checks,originalCByteWrites:true,encodingAndNul:true,bufferAliases:true,inputPushbackAndEof:true,mallocFreeNativeBytes:true};
 fs.mkdirSync('.cache/native-stdio-strings',{recursive:true});fs.writeFileSync('.cache/native-stdio-strings/evidence.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

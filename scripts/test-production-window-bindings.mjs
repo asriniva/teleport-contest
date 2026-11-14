@@ -39,7 +39,7 @@ for(const [name,owner,methods]of owners)for(const method of methods){
    const second=env.functions.functionPointer((...values)=>{seen.push(['second',values]);return result(1);},contract.signature);
    const first=env.functions.functionPointer((...values)=>{
     seen.push(['first',values]);
-    if(!growths&&mode===1){const buffer=env.memory.buffer;assert.equal(env.memory.grow(buffer.byteLength+16),true,'verified callback-time growth');assert.notEqual(env.memory.buffer,buffer);growths++;}
+    if(!growths&&mode===1){const buffer=env.memory.buffer,previousBytes=buffer.byteLength;assert.equal(env.memory.grow(buffer.byteLength+16),true,'verified callback-time growth');assert.ok(env.memory.buffer.byteLength>previousBytes);assert.equal(env.memory.buffer===buffer,env.memory.stableBuffer);growths++;}
     env.memory.view.setBigUint64(at,second,true);return result(0);
    },contract.signature);
    env.memory.view.setBigUint64(at,first,true);

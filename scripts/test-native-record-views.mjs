@@ -45,7 +45,7 @@ assert.equal(props[69].address,propAt+69*ctypes.size('struct prop'));assert.thro
 props[1].intrinsic=123n;props[2]=props[1];props[1].intrinsic=456n;assert.equal(props[2].intrinsic,123n);
 const intsAt=memory.calloc(4,4),ints=native.array('int',intsAt,4);ints[1]=4294967297;assert.equal(ints[1],1);assert.equal(ints['01'],1);
 assert.throws(()=>ints[4],RangeError);assert.throws(()=>native.array('int',0,4)[0],RangeError);
-const before=memory.buffer;assert.equal(memory.grow(before.byteLength+1),true);assert.notEqual(memory.buffer,before);
+const before=memory.buffer,firstGrowthBytes=before.byteLength;assert.equal(memory.grow(before.byteLength+1),true);assert.ok(memory.buffer.byteLength>firstGrowthBytes);assert.equal(memory.buffer===before,memory.stableBuffer);
 assert.equal(props[1].intrinsic,456n);monster.mhp=42;assert.equal(legacy.record('struct monst',monAt).mhp,42);
 assert.equal(native.advance(props[1],1),props[2]);
 const pairAt=memory.calloc(2,ctypes.size('struct monst')),left=native.record('struct monst',pairAt),right=native.record('struct monst',pairAt+ctypes.size('struct monst'));

@@ -45,7 +45,7 @@ const callbacks=createNativeWindowCallbacks(e,owner),signature='viiipp';let invo
 const token=e.functions.functionPointer((win,x,y,fg,bg)=>{invoked++;eq([win,x,y],[1,2,3]);eq(typeof fg,'number');eq(views.record('struct glyphinfo',fg).glyph,456);views.record('struct glyphinfo',bg).glyph=789;},signature);
 callbacks.invokeCaptured('win_print_glyph',signature,token,1,2,3,v,other);
 eq(invoked,1);eq(other.read('glyph'),789);
-const oldBuffer=m.HEAPU8.buffer;m.grow(m.HEAPU8.byteLength+65536);assert.notEqual(m.HEAPU8.buffer,oldBuffer);checks++;
+const oldBuffer=m.HEAPU8.buffer,previousBytes=oldBuffer.byteLength;m.grow(m.HEAPU8.byteLength+65536);assert.ok(m.HEAPU8.byteLength>previousBytes);assert.equal(m.HEAPU8.buffer===oldBuffer,m.stableBuffer);checks++;
 eq(v.read('glyph'),456);eq(other.read('glyph'),789);
 t.stackRestore(mark);eq(t.stackPosition(),beforePosition);eq(m.live.size,before);assert.throws(()=>v.read('glyph'),/Expired/);checks++;assert.throws(()=>other.address,/Expired/);checks++;
 fs.mkdirSync('.cache/native-display-values',{recursive:true});fs.writeFileSync('.cache/native-display-values/values.json',JSON.stringify({checks,scope:'Source-initialized production runtime; byte-only fallback with/without owner, warm-arena materialization without heap allocation, explicit stack position/lifetime expiry; exact integer widths including extreme BigInts, nested copies/aliasing, zero C allocations before address acquisition, declaring-frame deferred lifetime, foreign win_print_glyph token materialization and writeback, memory growth and expired references.'},null,2));

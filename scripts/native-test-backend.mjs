@@ -70,10 +70,11 @@ export function assertStackRestored(module, before, message) {
     else assert.equal(module._probe_stack(), before, message);
 }
 export function memoryCheckpoint(module) {
-    return module.nativeC ? { nativeAllocated: module._allocated() } : module.HEAPU8.buffer;
+    return module.nativeC ? { nativeAllocated: module._allocated() } : module.HEAPU8.buffer.resizable ? {resizableBuffer:module.HEAPU8.buffer,byteLength:module.HEAPU8.buffer.byteLength} : module.HEAPU8.buffer;
 }
 export function assertMemoryGrowth(module, before, message) {
     if (module.nativeC) caseAssert.ok(module._allocated() > before.nativeAllocated, message || 'The same allocation case must allocate native memory');
+    else if(before.resizableBuffer){assert.equal(module.HEAPU8.buffer,before.resizableBuffer,message);assert.ok(module.HEAPU8.buffer.byteLength>before.byteLength,message || 'Resizable JS memory must actually increase capacity');}
     else assert.notEqual(module.HEAPU8.buffer, before, message);
 }
 export function allocationMetric(module) {

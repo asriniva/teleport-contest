@@ -18,7 +18,7 @@ const root=ctx.root;root.x=7;assert.equal(ctx.root,root);assert.equal(globalRead
 assert.equal(ctx.list[0],root);const list=ctx.list;assert.equal(ctx.list,list);assert.equal(projections,2);
 assert.equal(ctx.dynamic,root);memory.view.setBigUint64(pointer,BigInt(b),true);assert.equal(ctx.dynamic.address,b,'pointer globals remain live');
 memory.view.setInt32(count,17,true);assert.equal(ctx.count,17);memory.view.setInt32(count,18,true);assert.equal(ctx.count,18);
-const before=memory.buffer;memory.grow(before.byteLength+1);assert.notEqual(memory.buffer,before);assert.equal(ctx.root,root);assert.equal(ctx.root.x,7);root.y=9;assert.equal(memory.view.getInt16(a+2,true),9);
+const before=memory.buffer,previousBytes=before.byteLength;memory.grow(before.byteLength+1);assert.ok(memory.buffer.byteLength>previousBytes);assert.equal(memory.buffer===before,memory.stableBuffer);assert.equal(ctx.root,root);assert.equal(ctx.root.x,7);root.y=9;assert.equal(memory.view.getInt16(a+2,true),9);
 services.global=function(i){assert.equal(this,services);globalReads++;return i===0?b:locations[i];};
 const replaced=ctx.root;assert.equal(replaced.address,b);assert.notEqual(replaced,root);
 ctx.root=root;assert.equal(ctx.root,replaced);assert.equal(replaced.x,7,'struct assignment updates the live fixed storage rather than rebinding it');

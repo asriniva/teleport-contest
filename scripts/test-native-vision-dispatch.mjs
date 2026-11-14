@@ -33,3 +33,5 @@ if(!owner.nativeArena)assert.notEqual(owner.epoch,epoch,'an overlapping byte wri
 assert.equal(cell.typ,layouts.vision.DOOR);
 owner.leave();assert.equal(owner.dirty.size,0);
 console.log('PASS native visibility first/deferred service lookup, publication, repeated lookup and caller context restoration');
+
+let assertionCalls=0;env.register('native-vision-assertion-test',{__assert_fail(){assertionCalls++;throw Error('expected failed visibility guard');}});context.assert(true,'ok','test',1);assert.equal(assertionCalls,0);assert.throws(()=>context.assert(false,'bad','test',2),/expected failed visibility guard/);assert.equal(assertionCalls,1);assert.equal(owner.depth,0);
