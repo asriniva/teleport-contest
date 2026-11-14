@@ -1,4 +1,5 @@
 import measured from '../js/nethack/records.json' with {type:'json'};
+import supplemental from '../js/nethack/supplemental-record-layouts.json' with {type:'json'};
 import assert from 'node:assert/strict';
 import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {createNativeRecordViews} from '../js/nethack/native/record-views.js';
@@ -9,7 +10,7 @@ const env=createStandaloneEnvironment(),{memory,ctypes}=env;
 const native=createNativeRecordViews(env),legacy=createRecordViews(env,fieldAliases),owner=nativeStateFor(env);
 assert.equal(createNativeRecordViews(env),native,'all game adapters use one complete native record owner');
 let checks=0,fields=0;
-const types=process.env.NATIVE_RECORD_VIEW_ALL_TYPES==='1'?Object.keys(measured.records):['struct monst','struct you','struct prop','struct permonst','struct obj','struct rm','struct instance_globals_saved_c','struct window_procs'];
+const types=process.env.NATIVE_RECORD_VIEW_ALL_TYPES==='1'?Object.keys({...measured.records,...supplemental.records}):['struct monst','struct you','struct prop','struct permonst','struct obj','struct rm','struct instance_globals_saved_c','struct window_procs'];
 for(const type of types){
  const row=ctypes.record(type),at=memory.calloc(1,row.size),a=native.record(type,at),b=legacy.record(type,at);
  assert.equal(native.record(type,at),a);
@@ -18,7 +19,7 @@ for(const type of types){
   const scalar=ctypes.canonical(field.ctype.replace(new RegExp('\\s+'+name+'$'),''));
   if(field.record||scalar.includes('[')||(!field.bits&&!scalar.includes('*')&&!/^(?:unsigned |signed )?(?:char|short|int|long|long long|float|double)$/.test(scalar)&&!scalar.startsWith('enum ')))continue;
   fields++;
-  for(const value of [0,-1,65537,4294967297,2n**80n+1n,'17',undefined,NaN,Infinity,1.5]){
+  for(const value of [0,-0,-1,65537,4294967297,2n**80n+1n,'17',undefined,NaN,Infinity,1.5]){
    memory.HEAPU8.fill(0xa5,at,at+row.size);const initial=memory.readBytes(at,row.size);
    let expectedError,actualError;
    try{b[name]=value;}catch(e){expectedError=e.constructor;}
@@ -48,10 +49,11 @@ const before=memory.buffer;assert.equal(memory.grow(before.byteLength+1),true);a
 assert.equal(props[1].intrinsic,456n);monster.mhp=42;assert.equal(legacy.record('struct monst',monAt).mhp,42);
 assert.equal(native.advance(props[1],1),props[2]);
 const pairAt=memory.calloc(2,ctypes.size('struct monst')),left=native.record('struct monst',pairAt),right=native.record('struct monst',pairAt+ctypes.size('struct monst'));
-for(const field of ['mhp','mx','my','m_lev','mcan','mpeaceful']){
+for(const field of ['mhp','mx','my','m_lev','mcan','mpeaceful','nmon','data','mtrack','misc_worn_check','mstrategy']){
  const a=Object.getOwnPropertyDescriptor(left,field),b=Object.getOwnPropertyDescriptor(right,field);
  assert.ok(a.get===b.get,field+' getters are shared across real actor records');assert.ok(a.set===b.set,field+' setters are shared');
 }
+assert.equal(left[Symbol.toPrimitive],right[Symbol.toPrimitive],'native address coercion shares its method');
 left.mhp=17;right.mhp=29;assert.equal(left.mhp,17);assert.equal(right.mhp,29);
 const oldAddress=left.address;try{left.address=right.address;left.mhp=18;assert.equal(right.mhp,29);assert.equal(memory.view.getInt32(ctypes.fieldAddress('struct monst',oldAddress,'mhp'),true),18,'public address metadata never rebinds native storage');}finally{left.address=oldAddress;}
 assert.equal(Object.getOwnPropertyDescriptor(left,'mhp').get.call(right),29,'a shared accessor reads its native receiver');
@@ -59,6 +61,16 @@ const coordAt=memory.calloc(1,ctypes.size('struct nhcoord')+1)+1,unaligned=nativ
 const cellAt=memory.calloc(2,ctypes.size('struct rm')),cellA=native.record('struct rm',cellAt),cellB=native.record('struct rm',cellAt+ctypes.size('struct rm'));
 assert.ok(Object.getOwnPropertyDescriptor(cellA,'lit').get===Object.getOwnPropertyDescriptor(cellB,'lit').get);cellA.lit=1;cellB.lit=0;assert.equal(cellA.lit,1);
 const previousBytes=memory.buffer.byteLength;memory.grow(previousBytes+1);left.mhp=19;assert.equal(memory.view.getInt32(ctypes.fieldAddress('struct monst',left.address,'mhp'),true),19);assert.equal(unaligned.y,321);assert.equal(cellA.lit,1);
+// Pointer/aggregate/wide caches belong to records, not to the shared accessor.
+left.nmon=right;right.nmon=left;assert.equal(left.nmon,right);assert.equal(right.nmon,left);
+left.mstrategy=-1n;right.mstrategy=123n;assert.equal(left.mstrategy,2n**64n-1n);assert.equal(right.mstrategy,123n);
+const strategy=ctypes.fieldAddress('struct monst',pairAt,'mstrategy');memory.view.setBigUint64(strategy,7n,true);assert.equal(left.mstrategy,7n);assert.equal(right.mstrategy,123n);
+left.mtrack[0].x=11;right.mtrack[0].x=22;assert.equal(left.mtrack[0].x,11);assert.equal(right.mtrack[0].x,22);assert.notEqual(left.mtrack,right.mtrack);
+assert.ok(Object.keys(left).includes('nmon'));assert.ok(Object.keys(left).includes('mtrack'));assert.ok(Object.hasOwn(left,'nmon'));
+let late=0;owner.registerSchemas(new Map([['struct monst',p=>{if(p===right.address){late++;Object.defineProperty(right,'nativeLateProvider',{value:17,configurable:true});}}]]));assert.equal(left.nmon,right);assert.equal(right.nativeLateProvider,17);assert.ok(late>0,'pointer cache adopts late native providers');
+const signedAt=memory.calloc(2,ctypes.size('struct prop')),signedA=native.record('struct prop',signedAt),signedB=native.record('struct prop',signedAt+ctypes.size('struct prop'));
+signedA.intrinsic=-1n;signedB.intrinsic=2n**63n;assert.equal(signedA.intrinsic,-1n);assert.equal(signedB.intrinsic,-(2n**63n));memory.view.setUint32(ctypes.fieldAddress('struct prop',signedAt,'intrinsic'),7,true);assert.equal(signedA.intrinsic,-4294967289n);assert.equal(signedB.intrinsic,-(2n**63n));
+const wideUnalignedAt=memory.calloc(1,ctypes.size('struct prop')+1)+1,wideUnaligned=native.record('struct prop',wideUnalignedAt);wideUnaligned.intrinsic=-123n;assert.equal(wideUnaligned.intrinsic,-123n);assert.equal(memory.view.getBigInt64(ctypes.fieldAddress('struct prop',wideUnalignedAt,'intrinsic'),true),-123n);
 const second=createStandaloneEnvironment(),other=createNativeRecordViews(second),otherAt=second.memory.calloc(1,second.ctypes.size('struct monst'));
 assert.notEqual(other.record('struct monst',otherAt),monster);
-console.log(JSON.stringify({passed:true,recordTypes:types.length,fields,checks,canonicalIdentity:true,aliases:true,narrowing:true,arrays:true,growth:true,isolation:true,sharedScalarAndBitAccessors:true,fixedStorageAddress:true,unalignedRecords:true}));
+console.log(JSON.stringify({passed:true,recordTypes:types.length,fields,checks,canonicalIdentity:true,aliases:true,narrowing:true,arrays:true,growth:true,isolation:true,sharedScalarAndBitAccessors:true,sharedPointerAggregateAndWideAccessors:true,projectionCacheIsolation:true,lateProviderRefresh:true,ownEnumerableFields:true,fixedStorageAddress:true,unalignedRecords:true}));

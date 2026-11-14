@@ -1,3 +1,41 @@
+## Shared native record field plans (2026-11-14)
+
+Native record types now compile field/accessor plans once per runtime instead of
+rebuilding pointer, aggregate and 64-bit accessor closures for each instance.
+Each record retains its immutable storage identity and a separate projection
+cache. Fields remain own enumerable properties; aliases retain their existing
+visibility. Pointer caches refresh on pointer or provider-version changes, nested
+values retain stable identities, and cached 64-bit values observe byte aliases.
+Float fields access measured storage directly; unsupported opaque fields retain
+their existing compatibility path. No gameplay source, RNG calls or serialization
+layout changes. This addresses shared state construction/access across hero,
+monsters, inventory, map and display; the ordinary-turn zero gate and required
+20x goal remain unmet. Pointer and wide-value cache entries update in place,
+and numeric address coercion uses a shared method over immutable private storage.
+The existing field-accounting scope is preserved.
+
+Validation so far: 46,087 matrix comparisons across all 396 core/supplemental
+record types and 2,769 eligible fields preserve coercion errors and bytes,
+including signed zero and extreme values. Additional assertions cover shared
+pointer/aggregate/wide methods, per-record cache isolation, late provider
+refresh, own enumerable fields, unaligned storage, byte mutations, growth and
+fixed storage identity. Scalar/enum/array and typed-arena gates pass (1,261 and
+607 checks), as do descriptor ownership/reentry and connected-monster checks.
+Original-C ordinary-turn equivalence, 1,721 placement/STEED comparisons, 1,212
+LIGHT comparisons (including nonempty light save/restore) and 51 natural Knight
+riding/cross-runtime mounted-save checks pass. The exact zero gate remains false:
+generic calls 10/28/58 and C-heap allocations 30/159/100 for walk/wait/attack.
+
+An initial shared-plan version passed all 44 public recordings in 277.303s versus
+the existing 282.694s (~1.9% less time in separate single runs). The final version
+also reuses changed cache entries and the address-coercion method. The final version passes all 44 recordings: 792,838 ordered RNG entries,
+11,405 screens/cursors and 1,483 animations match exactly. All 831 scoring inputs
+stayed unchanged. It took 277.553s versus the existing pushed 282.694s, about
+1.82% less time in separate single runs. This is a modest improvement, not a
+controlled speedup or the required 20x. No baseline or CPU profiling was performed.
+Evidence: `docs/runtime-environment/native-record-plans-validation.json` and
+`native-record-plans-public44-manifest.json`.
+
 ## Native STEED placement, riding and shared occupancy (2026-11-14)
 
 Construction, ordinary monster movement and riding now select the same native
