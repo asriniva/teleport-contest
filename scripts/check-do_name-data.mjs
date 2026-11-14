@@ -1,3 +1,4 @@
+import {genders} from '../js/ported/role.js';
 // Source-preservation guard, not an equivalence proof or replacement for C tests.
 import assert from 'node:assert/strict';import{readFileSync}from'node:fs';import * as data from '../js/ported/do_name.js';
 const source=readFileSync(new URL('../nethack-c/upstream/src/do_name.c',import.meta.url),'utf8'),js=readFileSync(new URL('../js/ported/do_name.js',import.meta.url),'utf8');
@@ -11,3 +12,12 @@ assert.match(js,/docallcmd: \{/);assert.match(js,/break docallcmd;/);assert.does
 const rng=[['rndghostname',774],['x_monnam',881],['rndcolor',1472],['roguename',1437],['rndorcname',1543],['rndorcname',1549],['rndorcname',1550],['noveltitle',1615]];for(const[fn,line]of rng)assert.ok(js.includes(`${line}, '${fn}'`),'Missing source attribution '+fn+':'+line);
 const support=readFileSync(new URL('../nethack-c/wasm/tu-do_name-support.inc',import.meta.url),'utf8');assert.match(support,/TELEPORT_DO_NAME_ASSERT_LINE/);assert.match(support,/TELEPORT_REFERENCE_DO_NAME/);assert.match(support,/static char teleport_do_name_buffers\[5\]\[BUFSZ\],teleport_do_name_rndbuf\[BUFSZ\];/);assert.match(support,/const char bogon_codes\[6\]=\{0\};/);
 console.log('DO_NAME data/source guard passed: five file tables, two local tables, bogon codes, five-buffer bound, original comments, callback storage and source attribution.');
+
+const roleSource=readFileSync(new URL('../nethack-c/upstream/src/role.c',import.meta.url),'utf8');
+const genderRows=strip(/const struct Gender genders\[\] = \{([\s\S]*?)\};/.exec(roleSource)[1]).match(/\{[^{}]*\}/g);
+assert.equal(genders.length,genderRows.length,'native gender extent follows every original row, including hallucination group');
+for(const file of ['bindings/do_name.js','teleport.js','explode.js']){
+ const body=readFileSync(new URL('../js/nethack/'+file,import.meta.url),'utf8');
+ assert.match(body,/genders as sourceGenders/);assert.doesNotMatch(body,/struct Gender\[3\]/);assert.ok(body.includes('sourceGenders.length'));
+}
+console.log('DO_NAME gender extents pass: four original rows in naming, teleport and explosion adapters');

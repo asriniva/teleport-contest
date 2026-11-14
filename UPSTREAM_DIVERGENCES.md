@@ -1,3 +1,48 @@
+## Native monster naming and connected naming UI (2026-11-13)
+
+`native/do_name.js` binds all 55 unchanged DO_NAME bodies. `do-name.js` replaces
+all existing naming group entries with stable direct native entries, preserving
+module ownership and callback names. Dependencies select existing same-game
+native entries; foreign/non-migrated dependencies retain their conversions.
+Canonical hero, monsters, inventory, species, object classes, names, properties
+and map occupancy replace per-call record wrappers. Scalar locals use existing
+caller-lifetime reservations. Real buffer pools and their five-row overwrite
+behavior remain. Naming menus use the shared typed window callback slots;
+foreign window replacement still uses the original dispatcher. C strings, raw
+byte copies, menu output buffers and non-migrated dependencies remain boundaries.
+
+The 67 field plans and nine record sizes in `do-name-native-layout.json` check
+canonical records against original compiler measurements before initialization;
+all 76 individually changed measurements are rejected. Native and legacy each
+pass 1,534 original-C comparisons, with every one of the 55 source bodies entered.
+This includes naming UI, hallucination/display RNG, seventeen nested callback
+and memory-growth paths and independent modules. Live gameplay checks shared
+identities, real direct dispatch, caller C-context preservation and exception
+cleanup. Bound-source AST, all metadata, all 42 dynamic sites and 1,931 SDK checks
+pass. No upstream C, source algorithm, RNG order or recording policy changes.
+
+Actual walk/wait/attack still match original C state, output, ordered RNG and
+frames. Generic engine calls are 23/39/73; C scopes 37/62/122, generic field
+operations 11/18/45 and pointer callbacks 0/0/0. C heap allocations remain
+44/165/109. Zero-bridge/zero-allocation and 20x acceptance remain false.
+A review found an uncommitted three-row native gender view, while original C
+also has a fourth hallucination group row. All 55 bodies and a provisional
+44/44 batch passed without exercising its matching branch. A new differential
+case rejected that candidate (`they hit...` versus original `them hit...`).
+Naming, teleport and explosion descriptors now derive their extent from the
+actual source gender table. A source guard checks all three and compares the
+row count with original role.c; live main verifies the fourth row's real strings.
+The rejected candidate was never pushed; its provisional run is not accepted
+as final evidence. The corrected final candidate passes all 44 recordings:
+792,838 ordered RNG entries, 11,405 screens/cursors and 1,483 animations match.
+All 816 scoring inputs remained unchanged. The unprofiled Node 22.23.5 batch
+took 284.075s versus 284.203s for the preceding item-naming commit, effectively
+flat in separate single runs. Before both naming changes it was 283.188s; no
+meaningful timing gain has been demonstrated. Final receipts, the retained
+regression rejection and manifest are in
+`docs/runtime-environment/native-monster-naming-validation.json` and
+`native-monster-naming-public44-manifest.json`.
+
 ## Native item naming, grammar and formatter dispatch (2026-11-13)
 
 `native/objnam.js` binds all 87 unchanged OBJNAM bodies to the actual game

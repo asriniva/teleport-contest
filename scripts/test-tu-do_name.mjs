@@ -1,14 +1,18 @@
+import nativeLayout from '../js/nethack/do-name-native-layout.json' with {type:'json'};
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+function namingServices(services){if(process.env.NATIVE_DO_NAME_FIXTURE!=='1')return services;const local=nativeFixtureServices(services,{}).services;local.nativeDoNameTypes=services.moduleKey.environment.ctypes;return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 // Exact original EmC versus imported JS; foreign naming/UI dependencies controlled.
 import assert from './native-test-assert.mjs';
 import {resolve} from 'node:path';import{pathToFileURL}from'node:url';
-import * as data from '../js/ported/do_name.js';import{callDoName,initializeDoName}from'../js/nethack/bindings/do_name.js';import{C,R,T}from'../js/c-runtime/context.js';
+import * as data from '../js/ported/do_name.js';import{callDoName,initializeDoName,createDoNameEnvironment}from'../js/nethack/bindings/do_name.js';import{C,R,T}from'../js/c-runtime/context.js';
 const dir=resolve(process.env.TELEPORT_DO_NAME_PROBE_DIR??'.cache/tu-probes');const path=k=>pathToFileURL(resolve(dir,(process.env.TELEPORT_DO_NAME_PROBE_DIR?'':'do_name-')+k+'.mjs'));
 const{default:rf}=await loadFixture("do_name",path('reference')),{default:hf}=await loadFixture("do_name",path('hybrid'));const reference=await rf();
 function text(m,p){p=Number(p);if(!p)return null;let e=p;while(m.HEAPU8[e])e++;return Buffer.from(m.HEAPU8.slice(p,e)).toString('latin1');}
 const L={strings:{}};for(let i=0;i<reference._probe_layout_count();i++)L[text(reference,reference._probe_layout_name(i))]=Number(reference._probe_layout_value(i));for(let i=0;i<reference._probe_string_count();i++)L.strings[text(reference,reference._probe_string_name(i))]=text(reference,reference._probe_string_value(i));
-const runtime={initializeDoName,do_name:(services,name,...args)=>callDoName(new Proxy(services,{get(target,key,receiver){if(['rectState','trackState'].includes(key))return target[key];if(!Reflect.has(target,key))throw Error('Missing DO_NAME service '+String(key));return Reflect.get(target,key,receiver);}}),L,name,...args)};
+let lastNamingServices;
+const runtime={initializeDoName,do_name:(services,name,...args)=>{lastNamingServices=services;return callDoName(new Proxy(namingServices(services),{get(target,key,receiver){if(['rectState','trackState'].includes(key))return target[key];if(!Reflect.has(target,key))throw Error('Missing DO_NAME service '+String(key));return Reflect.get(target,key,receiver);}}),L,name,...args);}};
 const modules=[reference,await hf({nethackPorted:runtime})],stacks=modules.map(m=>m._probe_stack());let comparisons=0,context='';
 for(let i=0;i<6;i++){assert.equal(modules[1]._probe_startup_bogon(i),reference._probe_startup_bogon(i),'Native constructor observes original bogon byte '+i);comparisons++;}
 
@@ -37,6 +41,7 @@ for(const visible of [0,1])for(const augmented of [0,L.AUGMENT_IT])for(const hal
 for(const name of ['Fido','Killer the Student','Ghostly'])for(const typ of [L.PM_HUMAN,L.PM_GHOST,L.PM_WIZARD]){reset();field(0,0,0,typ);invoke('christen_monst',mon(0),str(name));invoke('x_monnam',mon(0),L.ARTICLE_THE,str('angry'),0,0);invoke('x_monnam',mon(0),L.ARTICLE_THE,0,0,1);}
 for(const name of ['l_monnam','mon_nam','noit_mon_nam','some_mon_nam','Monnam','noit_Monnam','Some_Monnam','noname_monnam','m_monnam','y_monnam','YMonnam','Adjmonnam','a_monnam','Amonnam']){reset();invoke(name,mon(0),name==='Adjmonnam'?str('silly'):0);}
 for(const same of [0,1])for(const gender of [0,1,2,3]){reset();opt(16,gender);invoke('mon_nam_too',mon(0),mon(same?0:1));invoke('monverbself',mon(0),str('Human'),'hit'&&str('hit'),str('with a stick'));}
+for(const word of ['they','They','THEY']){reset();opt(16,3);invoke('monverbself',mon(0),str(word),str('hit'),str('with a stick'));}
 for(const who of [-1,0,3]){reset();invoke('minimal_monnam',mon(who),1);invoke('Mgender',mon(who<0?0:who));}
 reset();invoke('pmname',pm(L.PM_HUMAN),-1);invoke('pmname',pm(L.PM_HUMAN),0);invoke('mon_pmname',mon(0));
 for(const typ of [L.CORPSE,L.STATUE,L.FIGURINE,L.DAGGER])for(const flags of [L.CORPSTAT_MALE,L.CORPSTAT_FEMALE,L.CORPSTAT_RANDOM]){reset();item(typ,1n,10,L.PM_ALIGNED_CLERIC);item(typ,1n,9,flags);invoke('obj_pmname',obj(0));}
@@ -69,4 +74,10 @@ for(const stage of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]){reset();opt(50,s
  assert.match(trace(),/nested:/,'stage '+stage);assert.match(trace(),new RegExp('grow:'+stage+';'),'stage '+stage);modules.forEach((m,i)=>assert.ok(m.HEAPU8.byteLength>before[i],'growth '+stage));}
 assert.deepEqual([...reached].sort(),names.slice().sort());
 const other=await hf({nethackPorted:runtime});other._probe_reset();other._probe_invoke(names.indexOf('mon_nam'),other._probe_mon(0),0n,0n,0n,0n);assert.equal(text(other,other._probe_result()),'the human');assert.equal(C,undefined);
+if(process.env.NATIVE_DO_NAME_FIXTURE==='1'){
+ const services=namingServices(lastNamingServices),before=[C,R,T];
+ for(const [key]of [...nativeLayout.fields,...nativeLayout.sizes])assert.throws(()=>createDoNameEnvironment(services,{...L,[key]:L[key]+1}),/Review native DO_NAME/,'reject changed compiler layout '+key);
+ assert.deepEqual([C,R,T],before,'layout rejection preserves caller contexts');
+ console.log('DO_NAME: 76 changed compiler layouts rejected');
+}
 console.log(`DO_NAME first-pass EmC: ${comparisons} exact comparisons passed; all 55 functions; native/shared/public gates pending.`);

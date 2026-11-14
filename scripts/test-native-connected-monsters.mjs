@@ -1,3 +1,4 @@
+import {enableDoName} from '../js/nethack/do-name.js';
 import armorAbi from '../js/nethack/armor-abi.json' with {type:'json'};
 import {callDoWear} from '../js/nethack/bindings/do_wear.js';
 import * as commandSource from '../js/ported/cmd.js';
@@ -354,4 +355,16 @@ const ttyEvent=ttyContext.nativeNamespace.tty_get_nh_event,ttyMarker={nativeTtyC
 try{ttyContext.nativeNamespace.tty_get_nh_event=()=>{assert.equal(C,ttyMarker);environment.transport.stackAlloc(24);throw Error('native TTY cleanup');};withCEnvironment(ttyMarker,()=>assert.throws(()=>environment.services.tty_get_nh_event(),/native TTY cleanup/));
 }finally{ttyContext.nativeNamespace.tty_get_nh_event=ttyEvent;}
 assert.equal(environment.memory.live.size,liveBeforeTty,'TTY entry exceptions restore temporary C bytes');
+const monsterNaming=enableDoName(environment,layouts),monsterNamingContext=monsterNaming.context;
+assert.equal(Object.keys(monsterNamingContext.nativeNamespace).filter(k=>typeof monsterNamingContext.nativeNamespace[k]==='function').length,55,'all monster naming bodies are connected');
+assert.equal(monsterNamingContext.u,hero,'monster naming shares the hero');
+assert.equal(monsterNamingContext.genders.length,4,'native naming includes the hallucination group row');assert.equal(environment.memory.readString(monsterNamingContext.genders[3].he),'they');assert.equal(environment.memory.readString(monsterNamingContext.genders[3].him),'them');
+assert.equal(monsterNamingContext.gy.youmonst,owner.nativeRecords.record('struct monst',environment.requireGlobal('gy')+environment.ctypes.record('struct instance_globals_y').fields.youmonst.offset),'monster naming shares youmonst');
+for(const name of ['Monnam','mon_nam','mon_nam_too','x_monnam','docallcmd','oname'])assert.equal(environment.services[name].nativeEntry,owner.functions.get(name),name+' dispatches to native naming');
+const originalMonsterNamer=monsterNamingContext.nativeNamespace.mon_nam,monsterNamingMarker={nativeMonsterNamingCaller:true},liveBeforeMonsterNaming=environment.memory.live.size;
+try{monsterNamingContext.nativeNamespace.mon_nam=mon=>{assert.equal(C,monsterNamingMarker);assert.equal(mon,monsterNamingContext.gy.youmonst);return monsterNamingContext.bufs[0];};withCEnvironment(monsterNamingMarker,()=>environment.services.mon_nam(monsterNamingContext.gy.youmonst));
+ monsterNamingContext.nativeNamespace.mon_nam=()=>{assert.equal(C,monsterNamingMarker);environment.transport.stackAlloc(24);throw Error('native monster naming cleanup');};withCEnvironment(monsterNamingMarker,()=>assert.throws(()=>environment.services.mon_nam(monsterNamingContext.gy.youmonst),/native monster naming cleanup/));
+}finally{monsterNamingContext.nativeNamespace.mon_nam=originalMonsterNamer;}
+assert.equal(environment.memory.live.size,liveBeforeMonsterNaming,'monster naming exceptions restore temporary bytes');
+
 console.log(JSON.stringify({passed:true,monsters,nativeFunctions:owner.functions.size,nativeFields:owner.fields,nativeStorage:owner.nativeArena?'typed-arrays':'cached-fields',cachedReads:owner.hits,legacyBoundaries:owner.boundaries,moves:result.state.moves}));
