@@ -1,3 +1,17 @@
+## Rejected direct scalar-read experiment (2026-11-14)
+
+A candidate generated 1,262 direct typed-array reads across hero movement,
+monster movement and monster lifecycle, retaining writes and compatibility
+fallbacks. It passed all 44 recordings, 25,625 component comparisons, original-C
+ordinary turns, travel/jump/status and monster checks. Its elapsed time was
+276.7344s versus the existing 273.4513s (1.20% slower); it did not establish an
+improvement. All engine and generator changes from this experiment are reverted.
+No experimental runtime module is shipped. The candidate source manifest,
+timing and explicit rejection are retained in
+`docs/runtime-environment/rejected-native-state-reads.json`. The next priority is
+larger startup construction and complete-turn execution costs, using the user's
+40–55s total target budget. No new baseline profiling was performed.
+
 ## Native complete hero movement context and calls (2026-11-14)
 
 `movement.js`, `native/hack{,-state,-entries,-calls}.js` and their generators
