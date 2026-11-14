@@ -39,6 +39,51 @@ public44 manifest. Earlier component
 DOKICK tests used a separate provider and the prior gameplay check exercised a
 door kick, so neither verified this standalone shipping adapter.
 
+## Connected native message history and filtering (2026-11-14)
+
+`native/message-history.js` owns the 50-slot message history as a JavaScript
+array and a persistent typed byte arena. The PLINE generator lowers only history
+slot reads, writes and the history-specific duplication call. Writes immediately
+update original pointer slots; report, shutdown and byte readers retain their
+existing interface. Pointer-backed messages copy bytes directly, without decoding and re-encoding
+text. JS string inputs use the existing checked byte encoder. Normal messages
+up to BUFSZ-1 use the owned arena rather
+than per-line C malloc/free. Longer direct history messages allocate and release
+separate storage. Foreign changes to pointer slots refresh across native entry
+and callback epochs. Generic PLINE fixtures keep their original provider path.
+`native/message-filter.js` extracts the complete OPTIONS message-filter policy
+and consumes canonical linked-list records directly. OPTIONS keeps its generic
+context for other policies; regex matching retains the existing checked provider
+and byte arguments. Message dependencies now choose same-owner native entries.
+The real replaced-window callback check exposed that
+`native/window-callbacks.js`'s foreign branch performed typed dispatch while
+retaining native scope. That branch now uses `owner.boundary` so scope restores
+and pointer-reference epochs refresh on success or exception; same-owner native
+window calls remain direct. PLINE's foreign dependencies use the same explicit
+boundary rule. Ring setters refresh other slots after intervening callbacks.
+The architectural test now records seven allocator stack frames rather than
+three to identify the actual remaining command/Lua/string allocation callers.
+The ordinary source ring index, suppression, reuse decisions and message/RNG
+ordering are retained. The 684 actual-game component checks cover ring wrap,
+zero C malloc calls during ordinary history insertion, raw/report readers,
+foreign rows, overflow release, growth, signed/live regex filtering, pointer and
+boolean coercion/error behavior, and window callback mutation/exception scope.
+All 31 native PLINE bodies execute in 1,620 controlled C comparisons through the
+compatibility fixture; native history ownership is checked separately in actual
+gameplay. Five complete C/JS MAIN scenarios match ordered RNG logs, raw terminal
+and all 219 frames, including configured hide/norep/stop regexes and recall.
+
+All 44 recordings pass: 792,838 ordered RNG calls, 11,405 screens/cursors and
+1,483 animation frames match exactly, with 874 scoring inputs unchanged.
+Candidate timing is 250.049077 seconds against existing 249.953270 seconds:
+0.04% higher and **effectively flat**, not a demonstrated speed improvement.
+No new baseline or CPU profile was collected. Evidence and hashes are in
+`docs/runtime-environment/native-message-state-validation.json` and its public44
+manifest. Walk/wait/attack retain 4/7/20 generic calls (previously 4/11/28) and
+6/13/21 C heap allocations (previously 6/15/25). The real acceptance gate remains
+false. Command queues, Lua allocations, naming/string adapters and other turn
+compatibility still exist. This is not the complete zero-bridge turn or 20x target.
+
 ## Connected native visibility workspace (2026-11-14)
 
 The standalone JavaScript game now requests a resizable JavaScript ArrayBuffer

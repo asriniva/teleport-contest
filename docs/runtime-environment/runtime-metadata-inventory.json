@@ -1589,7 +1589,7 @@
     },
     {
       "file": "js/nethack/bindings/pline.js",
-      "sha256": "70da3a3944a7d9e291dc962efd05652f8f9c501d88a98a8e884cedc0e9c7f370"
+      "sha256": "8a0278934da3125a1b89150078a011b561bdcb44dd1755bbfd68343c869197aa"
     },
     {
       "file": "js/nethack/bindings/polyself.js",
