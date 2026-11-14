@@ -1,3 +1,4 @@
+import {compileNativeFieldPlans} from './native/address-fields.js';
 import {createEquipmentServices} from './native/equipment-services.js';
 import {nativeStateFor} from './native/state-bridge.js';
 import {createNativeRecordViews} from './native/record-views.js';
@@ -16,6 +17,9 @@ import {withCEnvironment} from '../c-runtime/context.js';
 import * as armor from '../ported/do_wear.js';
 import {callDoWear} from './bindings/do_wear.js';
 import {attachEquipmentFormatting} from './equipment-format.js';
+const armorScalar=d=>d.t?{i8:'signed char',u8:'unsigned char',i16:'short',u16:'unsigned short',i32:'int',u32:'unsigned int',i64:'long',u64:'unsigned long'}[d.t]:'void *';
+const armorNativeSchema={schema:Object.fromEntries(Object.entries(armorAbi.schemas).map(([name,row])=>[name,{ctype:row.ctype,fields:row.fields.map(f=>({name:f.name,canonical:f.d.s||f.d.a?f.ctype:armorScalar(f.d),bit:f.bit}))}]))};
+export function createArmorFieldPlans(environment){return compileNativeFieldPlans(environment,armorNativeSchema);}
 export function enableHeroEquipment(environment,layouts,hero){
  const {services,ctypes,memory,transport}=environment,address=environment.address;
  const forward=()=>createEquipmentServices(environment);
@@ -95,7 +99,7 @@ export function enableHeroEquipment(environment,layouts,hero){
  const local=forward(),schemas=Object.keys(armorAbi.schemas),scalar=d=>d.t?{i8:'signed char',u8:'unsigned char',i16:'short',u16:'unsigned short',i32:'int',u32:'unsigned int',i64:'long',u64:'unsigned long'}[d.t]:'void *';
  const field=(k,i)=>{const row=armorAbi.schemas[schemas[k]],f=row?.fields[i];if(!f)throw new Error('Unknown DO_WEAR field');return{type:row.ctype,f};};
  const width=d=>d.t?Number(d.t.slice(1))/8:d.p!==undefined||d.q||d.f?8:d.s?layouts.do_wear[d.s+'Size']:d.a.reduce((a,b)=>a*b,1)*width(d.e);
- Object.assign(local,{moduleKey:environment,heap:()=>memory.HEAPU8,
+ Object.assign(local,{nativeOwner,nativeFieldPlans:createArmorFieldPlans(environment),moduleKey:environment,heap:()=>memory.HEAPU8,
   getobj,
   unmul:message=>environment.resolve('unmul')(typeof message==='string'?services.literal(message):address(message)),
   buffer:()=>offdelaybuf,
@@ -107,7 +111,8 @@ export function enableHeroEquipment(environment,layouts,hero){
   address:(k,p,i)=>{const {type,f}=field(k,i);return ctypes.locate(type,address(p),f.name).at;},
  });
  const offdelaybuf=environment.allocateGlobal('do_wear.armoroff.offdelaybuf',armorAbi.bufferBytes);
- environment.register('hero-armor',Object.fromEntries(Object.keys(owned(armor)).map(name=>[name,(...args)=>callDoWear(local,layouts.do_wear,name,...args)])));
+ const armorEntries=Object.fromEntries(Object.keys(owned(armor)).map(name=>{const fn=(...args)=>callDoWear(local,layouts.do_wear,name,...args);fn.nativeState=nativeOwner;fn.nativeDirect=true;fn.nativePrepared=true;nativeOwner.functions.set(name,fn);return[name,fn];}));
+ environment.register('hero-armor',armorEntries,local);
  attachEquipmentFormatting(environment,{weapon:ws,worn:wn,wield:wd,armor:local},layouts);
  hero.enableSkills();
  return {weapon:ws,worn:wornEnv,wield:wieldEnv,armor:local,limitation:'Shared equipment/skills transport connected; startup and later gear lifecycle require original-C verification.'};

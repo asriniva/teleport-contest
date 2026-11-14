@@ -1,3 +1,5 @@
+import armorAbi from '../js/nethack/armor-abi.json' with {type:'json'};
+import {callDoWear} from '../js/nethack/bindings/do_wear.js';
 import * as commandSource from '../js/ported/cmd.js';
 import commandAbi from '../js/nethack/command-abi.json' with {type:'json'};
 import {initializeCmd} from '../js/nethack/bindings/cmd.js';
@@ -96,6 +98,22 @@ try{weaponServices.distant_name=value=>value;const item=weaponContext.object(env
 const oldWeaponAbon=weaponContext.nativeNamespace.abon,weaponMarker={nativeWeaponCaller:true},liveBeforeWeapons=environment.memory.live.size;
 try{weaponContext.nativeNamespace.abon=()=>{assert.equal(C,weaponMarker);environment.transport.stackAlloc(24);throw Error('native weapon cleanup');};withCEnvironment(weaponMarker,()=>assert.throws(()=>environment.services.abon(),/native weapon cleanup/));}finally{weaponContext.nativeNamespace.abon=oldWeaponAbon;}
 assert.equal(environment.memory.live.size,liveBeforeWeapons,'native weapon exceptions restore temporary storage');assert.equal(weaponServices.nativeContext,weaponContext,'weapon failure retains its real game owner');
+
+const armorServices=environment.start('hero-armor').environment,armorContext=callDoWear(armorServices,layouts.do_wear,'environment');
+assert.equal(armorContext.u,messages.u,'armor maintenance consumes the shared hero');
+assert.equal(armorContext.view('monst',messages.gy.youmonst),messages.gy.youmonst,'armor callbacks retain monster identity');
+for(const name of ['find_ac','reset_remarm','dowear','dotakeoff'])assert.equal(environment.services[name].nativeEntry,owner.functions.get(name),name+' has connected native armor execution');
+const armorPriorAfterMove=armorContext.ga.afternmv;
+try{let checkedAfterMove=0;for(const [index,name]of armorAbi.callbacks.entries()){
+ if(!/^int\s*\(\s*void\s*\)$/.test(armorAbi.callbackTypes[name])||typeof armorContext.nativeNamespace[name]!=='function')continue;
+ armorContext.ga.afternmv=armorContext.nativeNamespace[name];assert.equal(armorContext.ga.afternmv,armorContext.nativeNamespace[name],'delayed equipment callback identity '+name);
+ const token=owner.nativeArena.pointer(environment.ctypes.locate('struct instance_globals_a',environment.requireGlobal('ga'),'afternmv').at);assert.equal(BigInt(token),BigInt(armorServices.callbackPointer(index)),'measured callback token '+name);checkedAfterMove++;
+ }assert.equal(checkedAfterMove,15,'all fourteen native on/off callbacks and take_off exercised');
+}finally{armorContext.ga.afternmv=armorPriorAfterMove;}
+const priorFindAc=armorContext.nativeNamespace.find_ac,armorMarker={nativeArmorCaller:true},liveBeforeArmor=environment.memory.live.size;
+try{armorContext.nativeNamespace.find_ac=()=>{assert.equal(C,armorMarker);environment.transport.stackAlloc(24);throw Error('native armor cleanup');};withCEnvironment(armorMarker,()=>assert.throws(()=>environment.services.find_ac(),/native armor cleanup/));}finally{armorContext.nativeNamespace.find_ac=priorFindAc;}
+assert.equal(environment.memory.live.size,liveBeforeArmor,'native armor failures free temporary storage');
+for(const name of ['closed_door','accessible'])assert.equal(environment.services[name].nativeEntry,owner.functions.get(name),name+' upgrades the earlier movement access owner');
 
 assert.equal(owner.depth,0,'input exhaustion publishes the entire connected native graph');
 assert.equal(owner.dirty.size,0);

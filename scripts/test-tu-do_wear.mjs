@@ -1,3 +1,7 @@
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+import {createArmorFieldPlans} from '../js/nethack/hero-equipment.js';
+const nativeArmorServices=new WeakMap();
+function armorServices(s){if(process.env.NATIVE_DO_WEAR_FIXTURE!=='1')return s;let local=nativeArmorServices.get(s);if(!local){local=nativeFixtureServices(s,{}).services;local.nativeFieldPlans=createArmorFieldPlans(s.moduleKey.environment);nativeArmorServices.set(s,local);}return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import {referenceLabelFor as fixtureReferenceLabelFor} from './native-test-backend.mjs';
 const fixtureReferenceLabel=fixtureReferenceLabelFor("do_wear");
@@ -22,7 +26,7 @@ const source=readFileSync(new URL('../js/ported/do_wear.js',import.meta.url),'ut
 const externals=new Set([...source.matchAll(/\bC\.(\w+)/g)].map(m=>m[1]));const validated=new WeakSet();
 function validate(s){if(validated.has(s.moduleKey))return;const e=createDoWearEnvironment(s,L);assert.deepEqual([...externals].filter(k=>!(k in e)),[],'all native/header bindings exist');validated.add(s.moduleKey);}
 const servicesByModule=new Map();
-const ported={callDoWear(s,n,...a){servicesByModule.set(s.moduleKey,s);validate(s);return callDoWear(s,L,n,...a);}};
+const ported={callDoWear(s,n,...a){servicesByModule.set(s.moduleKey,s);validate(s);return callDoWear(armorServices(s),L,n,...a);}};
 let modules=[reference,await hyb({nethackPorted:ported})],stacks=modules.map(m=>m._probe_stack()),comparisons=0;
 const names=Array.from({length:79},(_,i)=>text(reference,reference._probe_function_name(i))),op=n=>{const i=names.indexOf(n);assert.ok(i>=0,n);return i;};
 const deps=Object.fromEntries(Array.from({length:reference._probe_dep_count()},(_,i)=>[text(reference,reference._probe_dep_name(i)),i]));

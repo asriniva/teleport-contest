@@ -26,5 +26,16 @@ export function enableMonsterMovement(environment,layouts){
  const names=Object.keys(monmove).filter(name=>typeof monmove[name]==='function'&&Object.hasOwn(publicFunctions.functions,name)&&!environment.hasFunction(name));
  const exports=Object.fromEntries(names.map(name=>{const call=(...args)=>callMonmove(local,L,name,...args);call.nativeState=nativeState;call.nativeDirect=true;nativeState.functions.set(name,call);return [name,call];}));
  environment.register('monster-movement',exports);
+ // These original MONMOVE helpers were installed by world startup before this
+ // connected owner existed. Upgrade that owner rather than leaving gameplay on
+ // a second, pointer-oriented implementation of the same source routines.
+ const earlierAccess=['closed_door','accessible'].filter(name=>!Object.hasOwn(exports,name));
+ const access=earlierAccess.length?environment.start('world-accessibility'):undefined;
+ for(const name of earlierAccess){
+  if(access.namespace[name]!==monmove[name])throw Error('Unexpected earlier movement access owner '+name);
+  const fn=(...args)=>callMonmove(local,L,name,...args);fn.nativeState=nativeState;fn.nativeDirect=true;fn.nativePrepared=true;
+  access.namespace[name]=fn;nativeState.functions.set(name,fn);
+ }
+
  return {services:local,storage,call:(name,...args)=>callMonmove(local,L,name,...args),limitation:'Native per-game MONMOVE execution with transactional native fields and legacy service boundaries; strict public recordings and C world/RNG validation required for acceptance.'};
 }

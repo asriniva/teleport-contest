@@ -1,3 +1,46 @@
+## Native armor/status maintenance and movement access ownership (2026-11-13)
+
+`native/do_wear.js` binds all 79 unchanged armor/equipment policies to the actual
+game context. `hero-equipment.js` publishes direct entries and compiled field
+plans for all 35 measured armor schemas. Hero, monsters, inventory and properties
+use canonical native records. `bindings/do_wear.js` uses the shared growing
+native arena, native integer operations and record-kind metadata for field
+references/copies; original width checks remain. It preserves all 26 callback
+names and signatures. Callback writes recognize both original and bound native
+functions; reads compare tokens without Number/BigInt identity mistakes and
+return the matching bound function. This preserves delayed on/off identity
+checks against the functions actually executing. Foreign callbacks, file/string
+buffers, pointer-shaped aliases and non-migrated dependencies remain boundaries.
+
+`monster-movement.js` also upgrades the earlier `world-accessibility` owner for
+`closed_door` and `accessible`. Those routines already existed in the connected
+MONMOVE factory, but the startup registration had kept other gameplay callers
+on their old context. Both earlier exports now use the same native movement
+owner and preserve their original policies, narrowing and map data. Isolated
+setups that publish them directly do not require the earlier owner.
+
+Native and legacy armor each pass 5,704 original-C comparisons, with every one
+of the 79 original bodies entered. This includes delayed/live callbacks, item
+ownership, actual memory growth and per-game isolation. Native movement passes
+5,550 original-C comparisons over all 52 entries. Complete bound-source and
+inverse address-source policy checks pass, as do all 100 metadata files, all 42
+dynamic sites (215 dispatcher probes, 34 live replacement calls) and 1,931 SDK
+checks. Actual main proves shared actors, direct armor dispatch, all fourteen
+on/off callback identities plus `take_off`, their real stored tokens, exception
+cleanup and replacement of both earlier movement exports. No upstream C,
+source algorithm, RNG order, recording input or capture policy changes.
+
+The actual walk/wait/attack comparison still matches C state, output, ordered RNG
+and frames. Generic engine calls are 23/43/84; C scopes 37/70/144, generic field
+operations 11/42/98 and pointer calls 0/0/1. C heap allocations remain 44/165/109.
+Zero-bridge/zero-allocation and 20x acceptance remain false.
+All 44 recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors and
+1,483 animations match, with 813 scoring inputs unchanged. The unprofiled Node
+22.23.5 batch took 283.188s versus 283.169s before this step, effectively flat.
+These separate single runs demonstrate no timing improvement. Receipts and the
+pre-run manifest are in `docs/runtime-environment/native-armor-validation.json`
+and `native-armor-public44-manifest.json`.
+
 ## Native weapon state, execution and stable equipment callbacks (2026-11-13)
 
 `native/weapon.js` binds all 40 unchanged WEAPON bodies and original data exports

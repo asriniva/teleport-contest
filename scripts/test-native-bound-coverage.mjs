@@ -3,8 +3,8 @@ import {registerHooks} from 'node:module';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {parse} from 'acorn';
-const moduleName=process.argv[2],targets={weapon:{flag:'NATIVE_WEAPON_FIXTURE',count:40},do:{flag:'NATIVE_DO_FIXTURE',count:44},pline:{flag:'NATIVE_PLINE_FIXTURE',count:31}};
-const target=targets[moduleName];if(!target)throw Error('Expected weapon, do or pline');
+const moduleName=process.argv[2],targets={do_wear:{flag:'NATIVE_DO_WEAR_FIXTURE',count:79},weapon:{flag:'NATIVE_WEAPON_FIXTURE',count:40},do:{flag:'NATIVE_DO_FIXTURE',count:44},pline:{flag:'NATIVE_PLINE_FIXTURE',count:31}};
+const target=targets[moduleName];if(!target)throw Error('Expected weapon, do_wear, do or pline');
 const called=new Set();let expected=[];globalThis.__nativeBoundBodyEntries=called;
 const hook=registerHooks({load(url,context,next){
  const result=next(url,context);if(!url.endsWith('/js/nethack/native/'+moduleName+'.js'))return result;
