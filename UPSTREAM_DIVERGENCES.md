@@ -1,3 +1,37 @@
+## Native temporary stack arena (2026-11-14)
+
+The production NetHack runtime opts into an instance-owned temporary byte arena
+instead of malloc/free for each stack local. All engine owners share the existing
+transport. Numeric frame marks rewind chunk cursors and expire reservations;
+reservations use logical space in their declaring frame, with physical chunks
+allocated only on byte use. Native reservations require valid measured dimensions.
+Chunks retain uninitialized bytes until the instance is released. This changes
+allocation/address reuse and retained scratch capacity. Generic runtime users
+keep the prior allocator by default. Production remains entirely JavaScript.
+Byte-oriented storage and generic execution boundaries remain; this is not the
+complete native-state architecture or the zero-bridge/allocation turn goal.
+
+All 44 recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors and
+1,483 animation frames match. The 865-file timing receipt has no source changes.
+Elapsed time is 268.5907s versus the latest pushed-runtime receipt of 273.4513s
+(1.78% lower), but remains 1.38% slower than the earlier accepted 264.9469s.
+This is a modest candidate result, not a large established performance gain.
+No new baseline or CPU profiling was performed.
+
+Component checks pass 10,029 comparisons including 10,000 temporary scopes with
+zero additional heap allocations after warmup. They cover mark ownership/stale
+marks, unwind, delayed parent reservations materialized in callees, rollover,
+growth, uninitialized byte retention, invalid sizes and constrained memory.
+Original-C walk/wait/attack equivalence passes; heap calls fall from 23/65/93 to
+14/27/34. Generic calls remain 5/12/30, so the strict gate remains false. Counters
+now include arena allocations/reservations explicitly rather than silently omitting
+them. Native references pass 5,099 checks; 25 production window bindings pass
+100 dispatches/50 invalid-target rejections; original-C travel/jump and 212
+ordinary inventory/save/restore checks pass. Browser save/restore passes with
+Node imports denied and process removed. Generic runtime memory/contracts still
+pass. Evidence and full source manifest are in native-stack-validation.json and
+native-stack-public44-manifest.json under docs/runtime-environment.
+
 ## Rejected direct scalar-read experiment (2026-11-14)
 
 A candidate generated 1,262 direct typed-array reads across hero movement,
