@@ -20,6 +20,7 @@ const record=()=>({fields}),locate=(type,at,name)=>{assert.ok(fields[name],'unkn
 const ctypes={...runtime.ctypes,record,locate,getField:(t,p,k)=>{locate(t,p,k);return BigInt(fields[k].offset+1);},load:(t,at)=>BigInt(at+1)};
 const indirect=(id,sig,...args)=>{const name=byId.get(BigInt(id));assert.ok(name,'callback address '+id);assert.equal(sig,signature(fields[name].ctype),'signature '+name);dispatches.push({name,signature:sig});return 0;};
 const memory={view:{getBigUint64:at=>BigInt(at+1)}},functions={indirect};
+const native={nativeArena:{pointer:at=>BigInt(at+1)},boundary:(fn,...args)=>fn(...args)};
 const environment={ctypes,memory,functions,requireGlobal:()=>0,address:v=>v};
 const transport=new Proxy({},{get:()=>v=>v}),services={literal:()=>0};
 Object.assign(environment,{transport,services});
@@ -28,7 +29,7 @@ function children(n){return Object.entries(n).filter(([k])=>!['loc','start','end
 function pattern(p,v,scope){if(p.type==='Identifier'){if(v!==unknown||!['ctypes','memory','functions','environment','transport','services','boundary','text','address','cptr','size'].includes(p.name))scope[p.name]=v;}else if(p.type==='ArrayPattern')p.elements.forEach((e,i)=>e&&pattern(e,v===unknown?unknown:v?.[i],scope));else if(p.type==='ObjectPattern')p.properties.forEach(e=>pattern(e.value,v===unknown?unknown:v?.[e.key.name],scope));}
 export function auditDynamicFile(file,source,sites=checkCallbackSource(source,file).dynamic){
  const ast=parse(source,{ecmaVersion:'latest',sourceType:'module',locations:true});
- const scope={ctypes,memory,functions,environment,transport,services,boundary,text:()=>0,address:v=>v,cptr:()=>0,size:runtime.ctypes.size};
+ const scope={ctypes,memory,functions,environment,transport,services,boundary,nativeStateFor:()=>native,text:()=>0,address:v=>v,cptr:()=>0,size:runtime.ctypes.size};
  const covered=new Map(),definitions=new Map(),helperNames=new Map(),helpers=new Set(),calls=[],unresolved=[];
  function hasLookup(n){if(n.type==='MemberExpression'&&n.object.type==='MemberExpression'&&n.object.property.name==='fields'&&n.object.object.type==='CallExpression'&&n.object.object.callee.property?.name==='record'&&n.object.object.arguments[0]?.value==='struct window_procs')return true;if(n.type==='CallExpression'&&n.callee.type==='MemberExpression'&&['locate','getField'].includes(n.callee.property.name)&&n.arguments[0]?.value==='struct window_procs'&&(n.arguments[2]?.type!=='Literal'||/\(\s*\*/.test(fields[n.arguments[2].value]?.ctype??'')))return true;return children(n).some(c=>!['ArrowFunctionExpression','FunctionExpression','FunctionDeclaration'].includes(c.type)&&hasLookup(c));}
  function discover(n){if(n.type==='VariableDeclarator'&&['ArrowFunctionExpression','FunctionExpression'].includes(n.init?.type)&&hasLookup(n.init.body))helpers.add(n.id.name);if(n.type==='FunctionDeclaration'&&hasLookup(n.body))helpers.add(n.id.name);children(n).forEach(discover);}discover(ast);
@@ -68,6 +69,11 @@ const apply=fs.readFileSync('js/nethack/apply.js','utf8');
 assert.throws(()=>auditDynamicFile('js/nethack/apply.js',apply.replace("window('win_create_nhwindow','ii'","window('win_create_nhwindow','vi'")),/signature win_create_nhwindow/);
 assert.throws(()=>auditDynamicFile('js/nethack/apply.js',apply.replace("window('win_create_nhwindow'","window('win_typo'")),/finite callback name|unknown window field|unknown measured callback field/);
 assert.throws(()=>auditDynamicFile('js/nethack/apply.js',apply+'\nwindow(runtimeUnknown,\'v\');'),/all dispatcher callers must resolve/);
+// Native arena reads must still select exactly the measured field/token.
+const light=fs.readFileSync('js/nethack/light.js','utf8');
+assert.ok(light.includes('native.nativeArena.pointer('),'native LIGHT callback reader remains audited');
+assert.throws(()=>auditDynamicFile('js/nethack/light.js',light.replace('native.nativeArena.pointer(','native.nativeArena.pointer(1+')),/callback address/);
+assert.throws(()=>auditDynamicFile('js/nethack/light.js',light.replace("windowCall('win_create_nhwindow','ii'","windowCall('win_create_nhwindow','vi'")),/signature win_create_nhwindow/);
 const restore=fs.readFileSync('js/nethack/restore-lifecycle.js','utf8');
 assert.throws(()=>auditDynamicFile('js/nethack/restore-lifecycle.js',restore.replace("ctypes.record('struct window_procs').fields[name]","abi.schemas.window_procs.fields.find(f=>f.name===name)")),/Unknown RESTORE window callback win_select_menu/);
 assert.equal(results.reduce((n,r)=>n+r.coverage.length,0),inventory.length);

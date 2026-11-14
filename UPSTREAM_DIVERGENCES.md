@@ -1,3 +1,27 @@
+## Restore native display and window verification (2026-11-14)
+
+Two previously omitted checker updates are restored without changing runtime
+window dispatch. `test-native-address-source.mjs` now inverses exactly the four
+DISPLAY glyph-value allocations introduced in93e277f back to their original
+`C.stackAlloc(C.sizes["struct glyphinfo"])` nodes. Unknown record types, extra
+arguments and an unexpected allocation count fail; the complete source/RNG AST
+comparison remains mandatory. `test-dynamic-window-callbacks.mjs` models the
+native pointer reader used by LIGHT after78074e7 through a checked per-field
+function table. Wrong native pointer offsets and callback signatures remain
+negative cases. No dynamic lookup is skipped. Both regressions were missed by
+previous validation and are acknowledged; passing recordings did not prove these
+source-audit tools remained current.
+
+Verified against main runtime code without pending movement changes: all14 ports,
+1,163 functions and23,489 inverted field operations compare exactly, with allfour
+native glyph allocations inverted. The dynamic audit resolves all42 sites in33
+files,215 checked dispatches and34 live save/restore calls, with no unresolved
+lookups. All46 native window callbacks pass1,123 checks;17 production bindings
+pass68 live dispatches and34 invalid-token/signature rejections, including
+callback-time growth. Native display-value tests pass58 checks, including foreign
+glyph-pointer materialization/writeback and lifetime. Unknown native allocations,
+wrong pointer offsets and changed callback signatures remain failing controls.
+
 ## Native ordinary numeric execution (2026-11-14)
 
 `native-scalar-casts.mjs` specializes proven finite integer/boolean expressions
