@@ -1,3 +1,64 @@
+## Native RNG caller state and recording output (2026-11-14)
+
+`native/rng-output.js` keeps owned source file/function metadata as JavaScript
+strings and formats the existing logger's fixed integer/byte-string shapes
+directly. `environment.js` installs it only in the per-game RNG context. The
+original RNG source/factory, ISAAC implementation, draws, nested caller
+propagation, count updates and individual FILE writes remain unchanged. Each
+formatted fragment still uses the same stdio `fputs` operation, buffering,
+flush and error handling; display logging retains its original separate
+fragments and final `fputc`. Live numeric pointer callers still read memory.
+The fixed argument formatter handles the source's 32/64-byte JS arrays through
+a bounded native encoder. Unknown shapes, undersized arrays, nonintegral sizes,
+mismatched capacities and replaced formatter/output providers use the old path.
+No WebAssembly, Node filesystem APIs or frozen-source changes are introduced.
+
+The caller helper connects 76 sites across 65 game-glue files, including the
+monster lifecycle, movement, combat, startup, tools and turn loop. Its exact
+service-owner, literal-provider and setter checks prevent foreign providers
+from inheriting the owned shortcut. Empty strings retain non-NULL C semantics;
+non-byte characters still fail even after NUL. The address-kernel generator
+also lowers 526 static source call sites in 14 modules to this native metadata
+path. The inverse AST check restores all original RNG statements and field
+operations across all 1,163 functions. Explicit provider identities keep
+foreign kernel contexts on their checked literal/setter route. Other retained
+C-shaped calls still exist; this is not the complete zero-bridge turn target.
+
+Current component checks pass 3,170 comparisons against the existing formatter,
+including int32 narrowing, argument bytes, capacity/coercion errors, NUL/high
+bytes, live pointer mutation, FILE sink fragments and provider overrides. The
+20-function RNG policy AST is unchanged. Whole-glue AST equality holds for 64
+files, with the environment's separate assembly checked at its caller sites.
+The native RNG dispatch test now warms the retained stack arena and checks its
+real cursor on success and failure; its old live-allocation assertion assumed
+that stack storage was freed rather than retained. No runtime allocation policy
+was changed by that test correction. All 14 controlled original-C kernel suites
+pass, and the original-C RNG suite passes 962 state/operation/log comparisons.
+Actual original-C walk/wait/attack state, logs and normalized output match;
+heap allocations decrease from 14/27/34 to 6/15/25. The new native logger performs
+9/28/39 writes during those actual turns, with 9/26/35 native metadata updates;
+the extra writes preserve nested RNG caller inheritance. Generic calls remain
+4/11/28, so the strict ordinary-turn gate is still false.
+
+The advanced jump comparison also exposed a terminal defect introduced by the
+earlier `b18b0f6` native output shortcut: stack-array carriers have an `address`
+but do not necessarily coerce to a number. `library-bindings.js` now unwraps
+that address at the native `tputs` boundary, restoring missing background-color
+ANSI sequences. Source-only correctness overlays reproduce the raw-TTY gap on
+b18/main and not on 88a; no baseline timing/profiling was performed. Terminal
+components pass 75 checks, including nine background-color cases and an explicit
+address carrier. Actual 233-key Knight jump gameplay passes all 16 checks,
+237 frames, exact RNG/world state and complete raw TTY equality to original C.
+All 44 public recordings (56 segments) pass: 792,838 ordered RNG entries,
+11,405 screens/cursors and 1,483 animation frames match. The 870-input receipt
+has no changes during scoring. Elapsed time is 251.9341s versus the previous
+pushed 255.3034s, 1.32% lower in this run. This is not a substantial or 20x gain.
+The frozen runner fits 2521.4ms startup plus 12.0164ms/move (a regression fit,
+not separately measured phases). No baseline or CPU profiling was performed.
+Source hashes, full-turn counters, oracle scope, regression reproduction and
+recording receipts are in `docs/runtime-environment/native-rng-output-validation.json`
+and its linked input manifest. The 20x / 40–55s objective remains unmet.
+
 ## Native monster reactions and ambient sound queries (2026-11-14)
 
 `js/nethack/native/sounds.js` binds all 28 original SOUNDS functions to the game

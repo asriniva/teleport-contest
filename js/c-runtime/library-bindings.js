@@ -94,7 +94,7 @@ export function createLibraryBindings({ regex = false, regexDialect = 'native' }
             if (typeof value === 'string') {
                 for (let i = 0; i < value.length; i++)
                     if (value.charCodeAt(i) > 255) throw new TypeError('C byte strings require explicit UTF-8 encoding');
-            } else value = string(services, value);
+            } else value = string(services, value?.address ?? value);
             return terminfo.tputs(value, lines, emit);
         },
         tputsPrepare(services, pointer, lines) {

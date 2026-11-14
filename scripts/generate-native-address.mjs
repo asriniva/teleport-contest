@@ -32,6 +32,12 @@ for(const name of names){
   }
   if(/Function|ArrowFunctionExpression/.test(node.type)&&node.params?.some(p=>p.name==='C'))shadow=true;
   if(!shadow){
+   if(node.type==='CallExpression'&&node.callee.object?.name==='C'&&node.callee.property?.name==='rng_log_set_caller'){
+    if(node.arguments.length!==3)throw Error('Review native RNG caller arity '+name);
+    const [file,line,caller]=node.arguments;
+    for(const arg of [file,caller])if(arg.type!=='CallExpression'||arg.callee.object?.name!=='C'||arg.callee.property?.name!=='literal'||arg.arguments.length!==1||arg.arguments[0].type!=='Literal'||typeof arg.arguments[0].value!=='string')throw Error('Review native RNG caller text '+name);
+    return 'C.nativeRngCaller('+render(file.arguments[0])+','+render(line)+','+render(caller.arguments[0])+')';
+   }
    if(name==='display'&&node.type==='CallExpression'&&node.callee.object?.name==='C'&&node.callee.property?.name==='stackAlloc'&&node.arguments[0]?.object?.object?.name==='C'&&node.arguments[0]?.object?.property?.name==='sizes'&&node.arguments[0]?.property?.value==='struct glyphinfo')return 'C.nativeLocalRecord("struct glyphinfo")';
 
    if(name==='cmd'&&node.type==='CallExpression'&&node.callee.object?.name==='C'&&node.callee.property?.name==='callProc'){

@@ -10,7 +10,7 @@ const literal=value=>({type:'Literal',value});
 const member=(object,property)=>({type:'MemberExpression',object,property:identifier(property),computed:false,optional:false});
 const call=(callee,args)=>({type:'CallExpression',callee,arguments:args,optional:false});
 function clean(v){if(Array.isArray(v))return v.map(clean);if(!v||typeof v!=='object')return v;return Object.fromEntries(Object.entries(v).filter(([k])=>!['start','end','raw'].includes(k)).map(([k,x])=>[k,clean(x)]));}
-let functions=0,operations=0,nativeValueAllocations=0;
+let functions=0,operations=0,nativeValueAllocations=0,nativeRngCallers=0;
 for(const[name,{schema}]of Object.entries(ports)){
  const old=parse(fs.readFileSync('js/ported/'+name+'.js','utf8'),{ecmaVersion:'latest',sourceType:'module'});
  const next=parse(fs.readFileSync('js/nethack/native/address/'+name+'.js','utf8'),{ecmaVersion:'latest',sourceType:'module'});
@@ -27,6 +27,10 @@ for(const[name,{schema}]of Object.entries(ports)){
  function invert(node){
   if(Array.isArray(node))return node.map(invert);if(!node||typeof node!=='object')return node;
   node=Object.fromEntries(Object.entries(node).map(([k,v])=>[k,invert(v)]));
+  if(node.type==='CallExpression'&&node.callee.type==='MemberExpression'&&node.callee.object.name==='C'&&node.callee.property.name==='nativeRngCaller'){
+   assert.equal(node.arguments.length,3);for(const arg of [node.arguments[0],node.arguments[2]])assert.ok(arg.type==='Literal'&&typeof arg.value==='string');nativeRngCallers++;
+   return call(member(identifier('C'),'rng_log_set_caller'),node.arguments.map((arg,i)=>i===1?arg:call(member(identifier('C'),'literal'),[arg])));
+  }
   if(node.type==='CallExpression'&&node.callee.type==='MemberExpression'&&node.callee.object.name==='C'&&node.callee.property.name==='nativeLocalRecord'){
    assert.ok(name==='display'&&node.arguments.length===1&&node.arguments[0].type==='Literal'&&node.arguments[0].value==='struct glyphinfo','Unexpected native display value allocation');
    nativeValueAllocations++;
@@ -52,4 +56,5 @@ for(const[name,{schema}]of Object.entries(ports)){
  functions+=expected.filter(n=>n.type==='FunctionDeclaration').length;
 }
 assert.equal(nativeValueAllocations,4,'all four native DISPLAY glyph values invert to their original allocations');
-console.log(JSON.stringify({passed:true,nativeValueAllocations,ports:Object.keys(ports).length,functions,invertedFieldOperations:operations,sourcePolicyAstEqual:true}));
+assert.equal(nativeRngCallers,526);
+console.log(JSON.stringify({passed:true,nativeRngCallers,nativeValueAllocations,ports:Object.keys(ports).length,functions,invertedFieldOperations:operations,sourcePolicyAstEqual:true}));

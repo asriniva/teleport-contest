@@ -1,3 +1,4 @@
+import {recordNativeRngCaller} from './native/rng-output.js';
 // One original DOKICK context on shared DECL; native transport only.
 import abi from './dokick-abi.json' with {type:'json'};
 import * as source from '../ported/dokick.js';
@@ -35,7 +36,7 @@ export function enableDokick(environment,layouts){
   bhit:(dx,dy,range,type,a,b,cell)=>{if(a||b)throw new Error('Unexpected original DOKICK bhit callback');return resolve('bhit')(transport.int(dx),transport.int(dy),transport.int(range),transport.int(type),0,0,address(cell));},
   display_nhwindow:(win,blocking)=>{const f=ctypes.locate('struct window_procs',environment.requireGlobal('windowprocs'),'win_display_nhwindow');return functions.indirect(memory.view.getBigUint64(f.at,true),'vii',transport.int(win),transport.char(blocking));},
  });
- for(const name of ['rn2','rnd','rnl'])local[name]=(n,line,fn)=>{if(services.rng_log_enabled())services.rng_log_set_caller(text('dokick.c'),transport.int(line),text(fn));return resolve(name)(transport.int(n));};
+ for(const name of ['rn2','rnd','rnl'])local[name]=(n,line,fn)=>{if(services.rng_log_enabled())recordNativeRngCaller(services,'dokick.c',transport.int(line),fn);return resolve(name)(transport.int(n));};
  local.rn1=(n,b,line,fn)=>transport.int(local.rn2(n,line,fn)+transport.int(b));
  for(const[name,rows]of Object.entries(abi.formats))local[name]=(...args)=>{const prefix=name==='Sprintf'||name==='mon_yells'?2:1,fmt=args[prefix-1];if(typeof fmt!=='string')throw new Error('Review DOKICK native format pointer '+name);const shape=(fmt.match(/%(?:l)?[sdiuc]/g)||[]).map(v=>v.endsWith('s')?'p':v.startsWith('%l')?'l':'i').join(''),row=rows[shape];if(!row||args.length!==row.types.length)throw new Error('Review DOKICK native format '+name+':'+fmt);return resolve(row.target)(...args.map((v,i)=>scalar(row.types[i],v)));};
  // Prevent inherited DECL setters from swallowing the factory's native views.

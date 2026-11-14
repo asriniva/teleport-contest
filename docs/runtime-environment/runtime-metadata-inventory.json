@@ -652,7 +652,7 @@
     },
     {
       "file": "js/nethack/artifact.js",
-      "line": 12,
+      "line": 13,
       "name": "nativeSchema"
     },
     {
@@ -1137,42 +1137,42 @@
     },
     {
       "file": "js/nethack/do-lifecycle.js",
-      "line": 11,
+      "line": 12,
       "name": "nativeSchema"
     },
     {
       "file": "js/nethack/environment.js",
-      "line": 196,
+      "line": 198,
       "name": "sizes"
     },
     {
       "file": "js/nethack/environment.js",
-      "line": 207,
+      "line": 209,
       "name": "sizes"
     },
     {
       "file": "js/nethack/environment.js",
-      "line": 217,
+      "line": 219,
       "name": "sizes"
     },
     {
       "file": "js/nethack/game-startup.js",
-      "line": 17,
+      "line": 18,
       "name": "types"
     },
     {
       "file": "js/nethack/hero-equipment.js",
-      "line": 20,
+      "line": 21,
       "name": "armorNativeSchema"
     },
     {
       "file": "js/nethack/hero-equipment.js",
-      "line": 102,
+      "line": 103,
       "name": "types"
     },
     {
       "file": "js/nethack/hero-startup.js",
-      "line": 41,
+      "line": 42,
       "name": "aliases"
     },
     {
@@ -1217,12 +1217,12 @@
     },
     {
       "file": "js/nethack/object-state.js",
-      "line": 8,
+      "line": 9,
       "name": "globals"
     },
     {
       "file": "js/nethack/random-text.js",
-      "line": 7,
+      "line": 8,
       "name": "globals"
     },
     {
@@ -1237,7 +1237,7 @@
     },
     {
       "file": "js/nethack/uhitm.js",
-      "line": 16,
+      "line": 17,
       "name": "signatures"
     },
     {

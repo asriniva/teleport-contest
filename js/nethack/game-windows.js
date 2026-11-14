@@ -1,3 +1,4 @@
+import {recordNativeRngCaller} from './native/rng-output.js';
 import {nativeStateFor} from './native/state-bridge.js';
 // Original pre-game window/sound startup, in the order used by Unix main.
 import {init_sound_disp_gamewindows} from '../ported/allmain.js';
@@ -27,7 +28,7 @@ export function enableGameWindows(environment,layouts){
  local.terrainBit=(x,y,i)=>{if(i!==0)throw new Error('Unknown SOUNDS terrain bit');return views.record('struct instance_globals_saved_l',environment.requireGlobal('svl')).level.locations[x][y].roomno;};
  local.equipment=i=>nativeOwner.nativeRecords.value('struct obj *',environment.requireGlobal(['uwep','uarm','uarmc','uarmh','uarms','uarmg','uarmf','uarmu'][i]));
  local.commonString=i=>{if(i!==0)throw new Error('Unknown SOUNDS common string');return nativeOwner.nativeRecords.record('struct c_common_strings',environment.requireGlobal('c_common_strings')).c_nothing_happens;};
- local.rn2=(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('sounds.c'),line,services.literal(caller));return services.rn2(n);};
+ local.rn2=(n,line,caller)=>{if(services.rng_log_enabled())recordNativeRngCaller(services,'sounds.c',line,caller);return services.rn2(n);};
  // The binding passes a source-predicate index, not a native callback address.
  const predicates=['throne_mon_sound','beehive_mon_sound','morgue_mon_sound','zoo_mon_sound','temple_priest_sound','oracle_sound'];
  local.get_iter_mons=i=>{const name=predicates[environment.transport.int(i)];if(!name)throw new Error('Unknown SOUNDS predicate '+i);const selected=nativeOwner.functions.get('get_iter_mons'),predicate=nativeOwner.functions.get(name);if(nativeOwner.depth&&selected?.nativeState===nativeOwner&&predicate?.nativeSignature==='ip')return (selected.nativeValuesEntry??selected)(predicate);return environment.resolve('get_iter_mons')(environment.functionPointer('sounds::'+name,'ip',m=>callSounds(local,layouts.sounds,name,m)));};

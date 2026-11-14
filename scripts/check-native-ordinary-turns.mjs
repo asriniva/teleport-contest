@@ -9,6 +9,10 @@ const count=(kind,name,size=0)=>{if(!current)return;const row=current[kind]??={c
 globalThis.__nativeOrdinaryTurnCounter=count;
 const touched=[];
 const hooks=registerHooks({load(url,context,next){const result=next(url,context);let source=typeof result.source==='string'?result.source:Buffer.from(result.source??'').toString();const original=source;
+ if(url.endsWith('/js/nethack/native/rng-output.js')){
+  const output='return ownedOutput.fputs(value,file)===-1?-1:value.length;';assert.equal(source.split(output).length,2);source=source.replace(output,"globalThis.__nativeOrdinaryTurnCounter?.('nativeRngOutput','fprintf');"+output);
+  const caller='return native(file,line,caller);';assert.equal(source.split(caller).length,2);source=source.replace(caller,"{globalThis.__nativeOrdinaryTurnCounter?.('nativeRngCaller','metadata');"+caller+"}");
+ }
  if(url.endsWith('/js/c-runtime/context.js')){const before='export function withCEnvironment(environment, callback, ...args) {';assert.equal(source.split(before).length,2);source=source.replace(before,before+"\n globalThis.__nativeOrdinaryTurnCounter?.('cContext',callback.name||'<anonymous>');");}
  if(url.endsWith('/js/c-runtime/linker.js')){const before='return transport.scoped(()=>withEnvironment(entry.environment,callback,...';assert.equal(source.split(before).length,2);source=source.replace(before,"globalThis.__nativeOrdinaryTurnCounter?.('genericCall',name+'.'+fn);\n        "+before);}
  if(url.endsWith('/js/c-runtime/heap.js')){const before='malloc(size) {';assert.equal(source.split(before).length,2);source=source.replace(before,before+"\n globalThis.__nativeOrdinaryTurnCounter?.('heapAllocation',new Error().stack.split('\\n').slice(2,5).join(' | '),size);");}

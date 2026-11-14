@@ -1,3 +1,4 @@
+import {recordNativeRngCaller} from './native/rng-output.js';
 import {createNativeMonEntries} from './native/mon-entries.js';
 import {nativeMonMembers} from './native/mon-state.js';
 // Shared field/dependency transport for unchanged MON policies.
@@ -32,7 +33,7 @@ export function enableMonsterLifecycle(environment,layouts){
  const catalogue=getShknamCatalogue(environment,layouts);
  function field(kind,p,i,value){const key=abi.bits[kind]?.[i],type=abi.schema[kind]?.[0];if(!key||!type)throw new Error('Unknown MON packed field');const f=ctypes.record(type).fields[key];const scalar=f.ctype.replace(new RegExp(' '+key+'$'),'');return value===undefined?ctypes.getField(type,environment.address(p),key,scalar):ctypes.setField(type,environment.address(p),key,scalar,value);}
  Object.assign(local,{nativeEnvironment:environment,nativeLayouts:layouts,projectAlignmentLimit:projectMonAlignmentLimit,stackAlloc:transport.stackAlloc,alloc:n=>environment.alloc('alloc',transport.uint(n)),moduleKey:environment,heap:()=>memory.HEAPU8,signedHeap:()=>memory.HEAP8,global:i=>environment.requireGlobal(abi.globals[i]),displayRngPointer:()=>environment.functionPointer('rn2_on_display_rng','ii'),winMessage:()=>nativeState.nativeArena.view.getInt32(environment.requireGlobal('WIN_MESSAGE'),true),bit:(kind,p,i)=>field(kind,p,i),setBit:(kind,p,i,v)=>field(kind,p,i,v),equipment:i=>nativeState.nativeRecords.record('struct obj',nativeState.nativeArena.pointer(environment.requireGlobal(['uwep','uball','uchain'][i])))});
- for(const name of ['rn2','rnd'])local[name]=(n,line,caller)=>{if(services.rng_log_enabled())services.rng_log_set_caller(services.literal('mon.c'),line,services.literal(caller));return services[name](n);};
+ for(const name of ['rn2','rnd'])local[name]=(n,line,caller)=>{if(services.rng_log_enabled())recordNativeRngCaller(services,'mon.c',line,caller);return services[name](n);};
  const text=v=>typeof v==='string'?services.literal(v):environment.address(v);
  // Native MON assert macro preserves its measured source site and SDK abort owner.
  local.assert=(condition,index)=>{condition=transport.int(condition);index=transport.int(index);if(condition)return;const site=abi.assertions[index];if(!site)throw new Error('Unknown MON assertion '+index);return environment.resolve('__assert_fail')(text(site.expression),text(site.file),site.line,text(site.function));};

@@ -16,8 +16,8 @@ withCEnvironment(marker,()=>{
  game.services.init_isaac64(123n,Number(rng.core));const first=game.services.rn2(17);
  game.services.init_isaac64(123n,Number(rng.core));assert.equal(game.functions.indirect(rng.core,'ii',17),first,'function-pointer identity invokes the same native generator');
  game.services.rnl(5);game.services.rne(3);
- const before=game.memory.live.size;game.services.init_random(Number(rng.core));assert.equal(game.memory.live.size,before,'native initialization frees callback temporaries');
- failSeed=true;assert.throws(()=>game.services.init_random(Number(rng.core)),/rng seed callback failure/);assert.equal(game.memory.live.size,before);failSeed=false;
+ const warm=game.transport.stackSave();game.transport.stackAlloc(24);game.transport.stackRestore(warm);const before=game.memory.live.size,position=game.transport.stackPosition();game.services.init_random(Number(rng.core));assert.equal(game.memory.live.size,before,'native initialization reuses the retained stack arena');assert.equal(game.transport.stackPosition(),position,'native initialization restores the real stack cursor');
+ failSeed=true;assert.throws(()=>game.services.init_random(Number(rng.core)),/rng seed callback failure/);assert.equal(game.memory.live.size,before);assert.equal(game.transport.stackPosition(),position,'seed failure restores the real stack cursor');failSeed=false;
  assert.equal(C,marker);assert.equal(R,marker.rectState);assert.equal(T,marker.trackState);
 });
 assert.ok(coreChecks>0);assert.ok(callbackChecks>0);assert.equal(owner.depth,0);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);

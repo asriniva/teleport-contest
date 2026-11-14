@@ -56,6 +56,13 @@ const coldCall=cold.call;cold.call=(module,name,...args)=>{if(module==='termcap'
 coldLocal.putchar=byte=>{coldBytes.push(byte);return byte;};
 cold.call('termcap','xputs','cold native');
 assert.deepEqual(coldBytes,[99,111,108,100,32,110,97,116,105,118,101]);assert.equal(coldEntries,0);checks+=2;
+// Stack character arrays have an address but need not coerce to a number.
+// Background color is an actual source path through such a temporary view.
+for(const color of [-9,-1,0,1,4,7,8,15,2**32+4]){
+ output=[];entries=0;e.call('termcap','term_start_bgcolor',color);
+ const narrowed=color|0,expected='\x1b['+((narrowed%8)+40)+'m';
+ assert.deepEqual(output,[...expected].map(c=>c.charCodeAt(0)));assert.equal(entries,0);checks+=2;
+}
 // Library API uses the same parser/counters for pointer and direct callback modes.
 const runtime=createLibraryBindings(),services=e.services;
 for(const text of cases){
@@ -64,4 +71,5 @@ for(const text of cases){
  runtime.tputsNative(services,text,3,byte=>{b.push(byte);return byte;});
  assert.deepEqual(a,b);checks++;
 }
+const carrierBytes=[];runtime.tputsNative(services,{address:e.services.literal('carrier')},1,b=>{carrierBytes.push(b);return b;});assert.deepEqual(carrierBytes,[99,97,114,114,105,101,114]);checks++;
 console.log(JSON.stringify({passed:true,checks,scope:'Production termcap native bytes, every nonzero byte, NUL, padding, pointer/string input, zero per-byte binding entries, primary/foreign provider overrides, nested error restoration and stack cursor preservation. Full recording equivalence is separate.'}));

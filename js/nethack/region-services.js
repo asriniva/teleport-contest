@@ -1,3 +1,4 @@
+import {recordNativeRngCaller} from './native/rng-output.js';
 // Original native REGION transport, installed on its existing services/context.
 import abi from './region-services-abi.json' with {type:'json'};
 import * as region from '../ported/region.js';
@@ -35,7 +36,7 @@ export function bindRegionServices(environment,local,layout,speciesCount){
  for(const name of Object.values(abi.messages))local[name]=(fmt,a=0,b=0)=>resolve(name)(text(fmt),text(a),text(b));
  local.impossible=(fmt,...a)=>a.length===1?resolve('impossible')(text(fmt),transport.int(a[0])):resolve('impossible')(text(fmt),text(a[0]),transport.uint(a[1]??0));
  local.Sprintf=(out,fmt,...a)=>{let values;if(fmt==='%5ld')values=[transport.long(a[0])];else if(fmt==='poison gas (%d)')values=[transport.int(a[0])];else if(a.length===2&&typeof a[0]==='bigint')values=a.map(transport.long);else if(a.length===2)values=a.map(text);else if(a.length===5)values=[text(a[0]),...a.slice(1).map(transport.int)];else throw new Error('Review REGION native format '+fmt);return resolve('sprintf')(address(out),text(fmt),...values);};
- const rng=(name,caller,line,args)=>{if(services.rng_log_enabled())services.rng_log_set_caller(text('region.c'),transport.int(line),text(abi.rngCallers[caller]));return resolve(name)(...args.map(transport.int));};
+ const rng=(name,caller,line,args)=>{if(services.rng_log_enabled())recordNativeRngCaller(services,'region.c',transport.int(line),abi.rngCallers[caller]);return resolve(name)(...args.map(transport.int));};
  local.rnd=(n,line)=>rng('rnd',0,line,[n]);local.rn2=(n,line)=>rng('rn2',1,line,[n]);local.rn1=(n,b,line)=>transport.int(local.rn2(n,line)+transport.int(b));local.d=(n,s,line)=>rng('d',2,line,[n,s]);
  for(const[method,target]of Object.entries(abi.sf)){const name=method[0].toUpperCase()+method.slice(1);local[name]=(f,p,s,n)=>resolve(target)(address(f),address(p),text(s),...(method.endsWith('_char')?[transport.int(n)]:[]));}
  return local;

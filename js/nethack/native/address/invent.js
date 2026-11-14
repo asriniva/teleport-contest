@@ -1597,7 +1597,7 @@ function currency(amount)
 {
     amount=C.i64(amount);
     let res;
-    (res=((Number(!!(R143(A200(C.u)+Number(C.HALLUC)*C.sizes["struct prop"])&&Number(!((Number(!!(R143(A200(C.u)+Number(C.HALLUC_RES)*C.sizes["struct prop"])||R141(A200(C.u)+Number(C.HALLUC_RES)*C.sizes["struct prop"])))))))))?C.cell((C.staticAddress("currencies")+Number(((C.i32(C.rng_log_enabled())?((C.rng_log_set_caller(C.literal("invent.c"),1550,(C.literal("currency"))),C.rn2(C.i32((C.u64((BigInt((8*21))/BigInt(8)))))))):C.rn2(C.i32((C.u64((BigInt((8*21))/BigInt(8)))))))))*8),"char *").value:C.literal("zorkmid")));
+    (res=((Number(!!(R143(A200(C.u)+Number(C.HALLUC)*C.sizes["struct prop"])&&Number(!((Number(!!(R143(A200(C.u)+Number(C.HALLUC_RES)*C.sizes["struct prop"])||R141(A200(C.u)+Number(C.HALLUC_RES)*C.sizes["struct prop"])))))))))?C.cell((C.staticAddress("currencies")+Number(((C.i32(C.rng_log_enabled())?((C.nativeRngCaller("invent.c",1550,"currency"),C.rn2(C.i32((C.u64((BigInt((8*21))/BigInt(8)))))))):C.rn2(C.i32((C.u64((BigInt((8*21))/BigInt(8)))))))))*8),"char *").value:C.literal("zorkmid")));
     if(Number(amount!=1n)) (res=C.makeplural(res));
     return res;
 }
@@ -1733,7 +1733,7 @@ function mime_action(word)
     }
     if(Number(((bp=C.strstr(buf,C.literal(" or "))))!=0)) {
         (C.cell(bp,"char").value=C.i8(0));
-        (bp=((((C.i32(C.rng_log_enabled())?((C.rng_log_set_caller(C.literal("invent.c"),1700,(C.literal("mime_action"))),C.rn2(2))):C.rn2(2)))?buf:((bp+Number(4)*1)))));
+        (bp=((((C.i32(C.rng_log_enabled())?((C.nativeRngCaller("invent.c",1700,"mime_action"),C.rn2(2))):C.rn2(2)))?buf:((bp+Number(4)*1)))));
     } else (bp=buf);
     C.variadic(19,C.literal("mime %s%s%s something%s%s."),C.ing_suffix(bp),(pfx?C.literal(" "):C.literal("")),(pfx?pfx:C.literal("")),(sfx?C.literal(" "):C.literal("")),(sfx?sfx:C.literal("")));
     } finally {C.leaveAutomatic(automaticFrame);C.stackRestore(stackFrame); }
