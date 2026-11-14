@@ -1,3 +1,48 @@
+## Native NHLUA graph, typed Lua API and allocation policies (2026-11-13)
+
+`native/nhlua.js` binds all 94 original NHLUA policies to a per-game context;
+private policy calls execute directly. The shared source schema stays in its
+original module. `lua-sandbox.js` registers actual native entries and selects
+native engine dependencies directly. Typed memory operations use the shared
+native arena and cache measured field/global/storage locations. The ordinary
+Lua core hook and its owned allocator callback no longer install C contexts.
+
+The standalone Lua API now passes native values to `createLuaAbi.invoke`.
+It avoids converting all arguments to BigInt packets, encoding/decoding floating
+values and resolving operation-name C strings inside the JavaScript engine.
+The existing byte dispatch remains available and independently tested. Native
+numbers preserve fractions, infinities, NaNs and signed zero; 64-bit integers,
+opaque values, byte strings, callback signatures and pending-error behavior
+retain their explicit domains. Both zero Number and zero BigInt continuation
+pointers mean no continuation; nonzero C continuations remain unsupported.
+
+All six original `alloc.c` bodies are bound to the runtime's per-instance state.
+Public allocation wrappers select those native bodies directly. Alignment,
+unsigned wrapping, overflow checks, failure/panic behavior, pointer-format
+buffer rotation, allocation ownership and memory growth are retained. Actual
+allocations still use the C-shaped heap: logical Lua objects have not yet been
+separated from their allocator-backed accounting/storage. The zero-allocation
+ordinary-turn gate and the required 20x ambition remain unmet.
+
+Validation includes exact source-policy AST checks (100 NHLUA/allocation bodies),
+1,294 original-C runtime comparisons, 35 native Lua C-API snapshots, and 54
+opcode-backend C-driver snapshots each through legacy byte dispatch and native
+invoke. The latter cover callback reentry/errors, out parameters, native
+userdata, growth, GC/finalizers, forced allocator failure/limits and recovery.
+A production NHLUA/full-C check passes 792 comparisons, rejects legacy packet
+dispatch and exercises
+real string/integer helpers, numeric F64 extremes and genuine NHLOBJ callbacks.
+Normal walk/wait/attack remains original-C equivalent. Generic bridge calls
+fall from 16/32/66 to 12/30/61, C contexts from 28/53/113 to 21/47/97; heap
+allocations remain 44/165/109 and generic fields remain 6/13/40. No RNG calls,
+C source, recording inputs or source gameplay policies change. All 44 public
+recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors and 1,483
+animations match exactly. All 824 scoring inputs stayed unchanged. The unprofiled
+Node 22 run took 283.445s versus the existing 285.832s, about 0.83% less time in
+separate single runs. This is a modest reduction, not the required 20x or a
+controlled speedup. No baseline or CPU profiling was performed. Evidence:
+`docs/runtime-environment/native-nhlua-validation.json`.
+
 ## Connected native region movement, effects and persistence (2026-11-13)
 
 All 23 published REGION entries now use a per-game native policy graph with

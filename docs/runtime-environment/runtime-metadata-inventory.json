@@ -1172,7 +1172,7 @@
     },
     {
       "file": "js/nethack/lua-sandbox.js",
-      "line": 54,
+      "line": 74,
       "name": "globals"
     },
     {
@@ -1536,7 +1536,7 @@
     },
     {
       "file": "js/nethack/bindings/nhlua.js",
-      "sha256": "e16244e4fd606abdf09c605f185c89e0008a7bf70234b766f6558761cc5034a3"
+      "sha256": "96fb4b886230933f9702f2022811293aed0ec1f2e237331deddb6891437d75dc"
     },
     {
       "file": "js/nethack/bindings/o_init.js",

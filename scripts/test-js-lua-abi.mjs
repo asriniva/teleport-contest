@@ -11,7 +11,7 @@ import { createLuaAbi } from '../js/lua/abi.js';
 import { createLuaBytecodeVM } from '../js/lua/bytecode-vm.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const bytecode = process.argv.includes('--bytecode');
+const bytecode = process.argv.includes('--bytecode'),nativeInvoke=process.argv.includes('--native-invoke');
 const work = path.join(root, '.cache/js-lua-abi'); fs.mkdirSync(work, { recursive: true });
 const sdk = process.env.EMSDK || path.join(root, '.cache/emsdk');
 const lua = path.join(root, '.cache/wasm64-build/tree/lib/lua-5.4.8/src');
@@ -166,11 +166,25 @@ const symbols = fs.readFileSync(path.join(work, 'probe.mjs.symbols'), 'utf8');
 for (const name of ['luaV_execute', 'luaD_call', 'luaC_step', 'luaY_parser']) assert.ok(!symbols.includes(name), `compiled Lua algorithm ${name}`);
 const factory = (await import(pathToFileURL(factoryPath).href + '?abi=' + Date.now())).default;
 const runtimeOptions = bytecode ? {vmFactory:createLuaBytecodeVM} : {};
-const runtime = createLuaAbi(runtimeOptions); const lines = [];
+function bridge(options){
+ const runtime=createLuaAbi(options);if(!nativeInvoke)return runtime;
+ // Test-only C packet decoding feeds native JS values into the production
+ // invoke entry. The unchanged compiled C caller remains the oracle driver.
+ const float=new DataView(new ArrayBuffer(8));
+ return {...runtime,dispatch(host,handle,p,...args){
+  const heap=host.heap(),at=Number(p),end=heap.indexOf(0,at),operation=Buffer.from(heap.subarray(at,end)).toString();
+  const values=args.map(value=>value>=0n&&value<=9007199254740991n?Number(value):value);
+  if(operation==='lua_pushnumber'||operation==='luaL_checkversion_'){float.setBigUint64(0,args[0],true);values[0]=float.getFloat64(0,true);}
+  const result=runtime.invoke(host,handle,operation,...values);
+  if(operation==='lua_tonumberx'){float.setFloat64(0,Number(result),true);return float.getBigUint64(0,true);}
+  return BigInt.asUintN(64,BigInt(result??0));
+ }};
+}
+const runtime = bridge(runtimeOptions); const lines = [];
 const module = await factory({ nethackLua: runtime, print: line => lines.push(line), printErr: line => process.stderr.write(line + '\n') });
 module.callMain([]);
 assert.equal(lines.join('\n') + '\n', expected);
 for (const operation of ['lua_newstate','lua_pushcclosure','lua_newuserdatauv','lua_pcallk','luaL_setfuncs','luaL_loadbufferx']) assert.ok(runtime.counters[operation] > 0, operation);
-const bounded = await factory({ nethackLua: createLuaAbi({...runtimeOptions,transportLimit:128}), print: () => {} });
+const bounded = await factory({ nethackLua: bridge({...runtimeOptions,transportLimit:128}), print: () => {} });
 assert.equal(bounded._budget_probe(), 4, 'bounded ABI transport must return LUA_ERRMEM through C pcall');
-console.log(`PASS: ${lines.length} configured native Lua5.4.8 snapshots through actual memory64 C ABI (${bytecode?'opcode':'AST'} backend); callbacks/reentry/errors, byte strings/outparams, native userdata/memory growth, real GC/finalizers, forced allocator failures/limits and recovery; separate bounded transport error. No compiled Lua algorithms.`);
+console.log(`PASS: ${lines.length} configured native Lua5.4.8 snapshots through ${nativeInvoke?'native invoke via unchanged C caller':'actual memory64 C ABI'} (${bytecode?'opcode':'AST'} backend); callbacks/reentry/errors, byte strings/outparams, native userdata/memory growth, real GC/finalizers, forced allocator failures/limits and recovery; separate bounded transport error. No compiled Lua algorithms.`);
