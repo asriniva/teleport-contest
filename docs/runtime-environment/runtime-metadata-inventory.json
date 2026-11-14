@@ -882,7 +882,7 @@
     },
     {
       "file": "js/nethack/bindings/monmove.js",
-      "line": 10,
+      "line": 11,
       "name": "schema"
     },
     {
@@ -1494,7 +1494,7 @@
     },
     {
       "file": "js/nethack/bindings/monmove.js",
-      "sha256": "ab56ed49e8b2c91381fe41ba3df768269e8ae681340143a646bea22801809de1"
+      "sha256": "45631cd779e6fad431393b5a56d036b767eeddf79545b5f4c73e5a3340f2a6c4"
     },
     {
       "file": "js/nethack/bindings/monst.js",

@@ -1,3 +1,59 @@
+## Native complete monster-movement context (2026-11-14)
+
+`native/monmove-state.js` replaces production MONMOVE's compatibility field
+factory with canonical native hero, monsters, species, inventory, occupation and
+map state. Native species/item lookup tables use stable JS arrays; class-list
+searches retain native source arrays instead of constructing a byte table.
+`monster-movement.js` replaces its universal service Proxy with an explicit
+source-derived member surface, selecting same-game native values directly and
+retaining foreign byte calls as explicit boundaries. The source header decisions
+are reproduced by `generate-native-monmove-state.mjs` and its checked header
+input. Existing MONMOVE policies and RNG sites are unchanged. Local int/coordinate
+references use the same native reference protocol as MON/HACK; compatible native
+calls keep their identity and values until a real byte consumer needs an address.
+All 52 public/private function plans also compile to fixed-arity native entries;
+internal native values avoid per-call rest arrays, parameter-plan enumeration
+and record-to-pointer-to-record conversions. Public entries retain pointer-shaped
+returns. Legacy component fixtures retain their original factory. Candidate record and
+other real byte locals remain; this is not the strict zero-allocation turn or 20x.
+Validation: 1,296 checks on the actual MAIN owner prove canonical shared state,
+all 454 source context members resolve, native class lookup requires no C table,
+and int/coordinate locals retain widths, alias outputs, declaring-frame lifetime
+and heap-growth behavior. Pointer output setters retain their original Number
+conversion before narrowing, including large BigInt inputs. A throwing argument
+converter proves the native-value entry actually bypasses conversion, while the
+public path restores depth and releases real C temporaries on failure. Lazy
+functions are promoted through the existing registry, rather than mistaken for
+missing symbols. No unknown symbol is accepted by name alone. Metadata type,
+production wiring, inventory and generator freshness checks pass.
+
+A complete original-C oracle with forwarding exports compares genuine MAIN
+vampire shifting/window display and an invisible spider's positive web creation
+(after 68 actual source RNG attempts), including full world, both ISAAC states
+and ordered logs, terminal bytes/frames and literal input. Receipt bytes and
+unchanged original-C source/artifacts are checked directly. Current production
+hashes are captured before/after; historical relocated JS-owner fingerprints
+are not used as current evidence. Source confusion/stun/reset command turns,
+1,440 pet/appraisal comparisons and 51 natural mounted-save comparisons pass.
+The preserved isolated fixture passes 5,550 C comparisons across all 52 source
+entrypoints with controlled foreign dependencies; that fixture is explicitly
+not presented as all production-branch coverage.
+
+Ordinary walk/wait/attack remain exactly C-equivalent. Explicit state-boundary
+crossings fall from pushed 94/54/90 to 94/41/70. Generic calls stay 7/14/32 and
+C-heap allocations stay 25/158/93, so the strict zero gate fails. The connected
+85-turn scenario has 26,378 explicit crossings and shares 11 actual monsters;
+its 70,301 native field registrations include fewer duplicate projections.
+All 44 public recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors
+and 1,483 animations match. All 850 scoring inputs stayed unchanged; final hashes
+match the run. Candidate elapsed time was 268.492s versus existing pushed
+270.480s, about 0.73% less time in separate single runs. This is a small observed
+difference, not a controlled speedup or the required 20x. No new baseline or CPU
+profiling was performed. Other byte locals/strings/global helpers, foreign
+routines and unexercised form/terrain/tool/menu/hidden-recording paths remain.
+Evidence: `docs/runtime-environment/native-monmove-context-validation.json` and
+`native-monmove-context-public44-manifest.json`.
+
 ## Native connected hero tracking and monster pursuit (2026-11-14)
 
 `native/track{,-state}.js` and `environment.js` replace TRACK's generic C context,
@@ -2201,7 +2257,7 @@ lowers ordinary field reads, writes and address calculations to bound field
 operations, eliminating per-access lvalue objects and record/type lookup. It
 retains C-compatible backing bytes, explicit integer widths and byte-level
 aliasing. This is not yet a replacement of all backing storage with plain JS
-objects or compact arrays, nor proof of a fully native ordinary turn or20x.
+objects or compact arrays, nor proof of a fully native ordinary turn or 20x.
 
 `js/nethack/native/address-fields.js` compiles measured field declarations once
 for the live game and supplies direct scalar/packed operations. Existing field
@@ -2288,7 +2344,7 @@ and cursor triples, output counts and persistence telemetry matching. All754
 scoring inputs stayed unchanged. Engine time415.238s →410.209s,1.01226x or
 1.2111% less, versus the already-completed lifecycle replay; fitted cost
 24.5450ms →24.2205ms per input move. Batch wall415.233s. This is a modest
-historical comparison, not proof of a large gain or20x. MON poison regression
+historical comparison, not proof of a large gain or 20x. MON poison regression
 raises the original-C MON check count to14,737. Evidence:
 `docs/runtime-environment/native-hero-public-validation.json` and
 `docs/runtime-environment/native-hero-timing.json`.
@@ -2349,7 +2405,7 @@ scoring inputs stayed unchanged. Engine time442.004s →415.238s (6.0556% less,
 1.06446x) against the previously completed pushed-main integration run;
 fitted cost25.9669ms →24.5450ms per input move. Batch wall420.077s. No baseline
 was rerun or profiled. This comparison does not establish a paired causal
-estimate or20x. Proof: `native-lifecycle-public-validation.json` and
+estimate or 20x. Proof: `native-lifecycle-public-validation.json` and
 `native-lifecycle-timing.json` in `docs/runtime-environment`.
 
 ## Active native monster movement (worktree, 2026-11-12)

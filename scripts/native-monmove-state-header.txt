@@ -1,0 +1,20 @@
+import abi from '../monmove-abi.json' with {type:'json'};
+import {createNativeMonsterMovement} from './monster-movement.js';
+import {createNativeLocalReference,isNativeLocalReference} from './local-reference.js';
+import {nativeStateFor} from './state-bridge.js';
+export function createNativeMonmoveState(services,layout){
+ const environment=services.nativeEnvironment,{memory,transport:t,ctypes}=environment,state=nativeStateFor(environment),arena=state.nativeArena,views=state.nativeRecords;
+ for(const[k,n]of Object.entries({pointerSize:8,intSize:4,longSize:8,coordxySize:2,booleanSize:1}))if(layout[k]!==n)throw Error('Review native MONMOVE ABI '+k);
+ const int=v=>typeof v==='bigint'?Number(BigInt.asIntN(32,v)):Number(v)|0,uint=v=>typeof v==='bigint'?Number(BigInt.asUintN(32,v)):Number(v)>>>0,coordxy=v=>typeof v==='bigint'?Number(BigInt.asIntN(16,v)):Number(v)<<16>>16,char=v=>int(v)<<24>>24,uchar=v=>int(v)&255,boolean=char,long=v=>BigInt.asIntN(64,BigInt(v)),ulong=v=>BigInt.asUintN(64,BigInt(v));
+ const address=environment.address,view=()=>arena.view,pointer=p=>arena.pointer(p),global=i=>environment.requireGlobal(abi.globals[i]),samePtr=(a,b)=>arena.handle(a)===arena.handle(b);
+ const widths={Int8:1,Uint8:1,Int16:2,Uint16:2,Int32:4,Uint32:4,BigInt64:8,BigUint64:8},record=(v,type)=>{const row=abi.schema[type];if(!row)throw Error('Unknown native MONMOVE record '+type);return views.record(row[0],v);};
+ for(const[kind,[type,fields]]of Object.entries(abi.schema))for(const[key,kind_]of Object.entries(fields))if(widths[kind_]&&layout[kind+'_'+key+'_size']!==widths[kind_])throw Error('Review native MONMOVE field '+kind+'.'+key);
+ const u=record(global(0),'you'),svc=record(global(1),'svc'),svm=record(global(2),'svm'),svl=record(global(3),'svl'),gy=record(global(4),'gy'),gv=record(global(5),'gv'),gm=record(global(6),'gm'),go=record(global(7),'go'),gn=record(global(8),'gn'),gi=record(global(9),'gi'),gb=record(global(10),'gb'),gk=record(global(11),'gk'),svd=record(global(12),'svd'),flags=record(global(13),'flags'),a11y=record(global(14),'a11y');
+ function table(type,base,stride,length){const out=Array(length);Object.defineProperty(out,'address',{value:base});for(let i=0;i<length;i++)Object.defineProperty(out,i,{enumerable:true,configurable:true,get(){const v=views.record(type,base+i*stride);Object.defineProperty(out,i,{value:v,enumerable:true});return v;}});return out;}
+ const mons=table('struct permonst',global(15),layout.pmSize,services.nativeLayouts.makemon.NUMMONS+1),objects=table('struct objclass',global(16),layout.clsSize,services.nativeLayouts.o_init.NUM_OBJECTS),levl=state.spatial.cells;
+ const object=v=>record(v,'obj'),monster=v=>record(v,'mon'),permonst=v=>record(v,'pm'),attack=v=>record(v,'attack'),coord=v=>record(v,'coord'),mfndpos=v=>record(v,'mfp');
+ function copyStruct(out,src,n){const heap=memory.HEAPU8;heap.copyWithin(address(out),address(src),address(src)+Number(n));return out;}
+ const kinds={Int16:'i16',Int32:'i32'},normalize={Int16:coordxy,Int32:int};
+ const local=(value,kind)=>createNativeLocalReference({owner:state,kind:kinds[kind],width:widths[kind],allocate:t.stackAlloc,get:()=>value,set:()=>{},normalize:normalize[kind],read:p=>arena.view['get'+kind](p,true),write:(p,v)=>arena.view['set'+kind](p,v,true)});
+ const nativeCells=new WeakMap();
+ const cell=(value,kind)=>{if(isNativeLocalReference(value,state,kinds[kind])){let result=nativeCells.get(value);if(!result){result={get address(){return value.address;},get value(){return value.value;},set value(v){value.value=Number(v);}};nativeCells.set(value,result);}return result;}const p=address(value);return p?{address:p,get value(){return arena.view['get'+kind](p,true);},set value(v){arena.view['set'+kind](p,Number(v),true);}}:0;};
