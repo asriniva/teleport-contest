@@ -1,3 +1,43 @@
+## Native connected traps, movement and terrain effects (2026-11-14)
+
+`trap.js`, `native/trap{,-state,-entries}.js` and `level-contents.js` wire the
+complete 124-function TRAP source graph into actual hero/monster gameplay.
+Generated field reads/writes consume canonical native records, including packed
+fields; 346 private call sites are lexical, scalar/binary type plans bind once
+and 1,988 external call sites have fixed arguments and typed results. Same-game
+native values cross directly; genuine foreign byte calls remain explicit.
+Source RNG/decision/mutation order remains unchanged. Static initialization owns
+JS values and lazy byte carriers, avoiding construction of unused C-shaped tables.
+Unaliased table reads/writes stay native; byte materialization uses the original
+initializer and applies prior native mutations. Native record fields still use
+shared typed memory. Byte copies, locals, persistence and dynamic callbacks
+retain their ABI. `generate-native-trap.mjs` reproduces both generated files.
+
+Validation: `test-native-trap-context.mjs` passes 19,429 component checks across
+97 records, 1,338 fields, 19 private tables and 124 entries, including narrowing,
+packed field error semantics, lazy reads/writes and full byte materialization.
+`test-native-trap-actions.mjs` passes 180 checks at 38 actual original-C MAIN
+world checkpoints: source creation/deletion and hero/monster effects for web,
+bear, squeaky-board and rust traps. Full worlds, both ISAAC states and ordered
+logs, terminal bytes, frames and actual More input match. Its initial harness
+attempt incorrectly requested a trap on the starting stairs; the harness now
+moves through actual commands to a legal floor and asserts source acceptance.
+That invalid fixture is not reported as a production bug. Monster iteration
+(860 checks), connected monsters (85 turns), movement/status command effects
+(16 checks), metadata types/wiring/inventory and generator freshness also pass.
+These checks do not exercise every trap/tool/form/transition or hidden recording.
+The ordinary-turn gate remains false with original-C output equivalence true:
+walk/wait/attack C allocations are 24/65/93; wait was previously 158. Generic
+calls remain 7/13/31 and C contexts 12/18/43. Zero-bridge turns and20x remain
+unachieved. All44 public recordings pass: 792,838 ordered RNG calls, 11,405 screens/cursors
+and 1,483 animation frames. Unprofiled candidate time is 266.236831s against
+existing accepted evidence 264.674110s (0.5904% slower; no speedup claimed).
+All856 scoring input hashes remain unchanged during replay and match current
+files. Detailed checks, timing receipt, exact session results and source hashes
+are in `docs/runtime-environment/native-trap-validation.json`; the frozen input
+manifest is `native-trap-public44-manifest.json`. No new baseline/CPU profiling
+was performed.
+
 ## Native complete monster lifecycle and iteration (2026-11-14)
 
 `native/mon-state.js` and `native/mon-entries.js` replace production MON's

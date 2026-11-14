@@ -5,12 +5,9 @@ import {nativeEngraveFor} from './engrave.js';
 import {enableRandomText} from './random-text.js';
 import {nativeSpatialFor} from './native/spatial-state.js';
 import {enableVision} from './vision.js';
-import abi from './trap-abi.json' with {type:'json'};
-import * as trap from '../ported/trap.js';
+import {enableTrap} from './trap.js';
 import {invocation_pos,in_rooms} from '../ported/hack.js';
-import {callTrap} from './bindings/trap.js';
 import {antholemon,courtmon,mkundead,squadprob,fill_zoo,cmap_to_type,do_mkroom,has_dnstairs,has_upstairs,inside_room,somex,somey,somexy,somexyspace,save_rooms,rest_rooms,search_special} from '../ported/mkroom.js';
-import {enableSchemaPort} from './schema-port.js';
 export function enableLevelContents(environment,layouts,creation){
  if(!environment.hasFunction('m_dowear'))environment.enableMonsterInventory(layouts);
  const randomText=enableRandomText(environment,layouts),engraving=nativeEngraveFor(environment,layouts);
@@ -24,7 +21,7 @@ export function enableLevelContents(environment,layouts,creation){
  const numeric=k=>typeof k==='string'&&/^-?\d+$/.test(k),cell=(x,y)=>new Proxy(creation.environment.levl[x][y],{get:(o,k,r)=>numeric(k)?creation.views.advance(o,Number(k)):Reflect.get(o,k,r)});
  Object.defineProperty(position,'levl',{value:new Proxy({}, {get:(_,x)=>new Proxy({}, {get:(_,y)=>cell(Number(x),Number(y))})})});
  environment.register('level-invocation',{invocation_pos,in_rooms},position);
- const traps=enableSchemaPort(environment,'trap',trap,trap.trapSchema,abi.layout,callTrap,['maketrap']);environment.extend('trap',{t_at:nativeSpatialFor(environment,layouts).t_at});
+ const traps=enableTrap(environment,layouts);
  const room=creation.context(layouts.mkroom),{views}=creation;
  // Original MKROOM bridge materializes these native struct obj* returns.
  for(const name of ['mkgold','mk_tt_object','mksobj_at','mkobj','add_to_container','mkobj_at','mksobj','sobj_at'])room[name]=(...args)=>views.record('struct obj',environment.resolve(name)(...args.map(v=>v?.address??v)));
