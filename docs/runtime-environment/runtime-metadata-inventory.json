@@ -10,8 +10,8 @@
   },
   "jsonSources": 120,
   "coreJsonSources": 112,
-  "inlineTableDeclarations": 126,
-  "inlineTableFiles": 90,
+  "inlineTableDeclarations": 127,
+  "inlineTableFiles": 91,
   "adapterFiles": 129,
   "sharedAliasSource": {
     "file": "js/nethack/declarations.js",
@@ -877,7 +877,7 @@
     },
     {
       "file": "js/nethack/bindings/mon.js",
-      "line": 10,
+      "line": 11,
       "name": "schema"
     },
     {
@@ -1174,6 +1174,11 @@
       "file": "js/nethack/lua-sandbox.js",
       "line": 74,
       "name": "globals"
+    },
+    {
+      "file": "js/nethack/native/mon-state.js",
+      "line": 15,
+      "name": "scalarTypes"
     },
     {
       "file": "js/nethack/native/record-views.js",
@@ -1486,7 +1491,7 @@
     },
     {
       "file": "js/nethack/bindings/mon.js",
-      "sha256": "e5672dcfbb39a291c65ec94f2b33a021b9fdcf6344dbbc735b215409d76e60af"
+      "sha256": "45e7cb895bd0fdc5456f2fad2aee576b66bddd9a3c913e775824e9fc3ad3865e"
     },
     {
       "file": "js/nethack/bindings/mondata.js",

@@ -1,0 +1,21 @@
+import abi from '../mon-abi.json' with {type:'json'};
+import {createNativeMonsterLifecycle} from './monster-lifecycle.js';
+import {createNativeByteValues} from './byte-values.js';
+import {createNativeLocalReference,isNativeLocalReference} from './local-reference.js';
+import {nativeStateLinksFor} from './state-links.js';
+import {nativeStateFor} from './state-bridge.js';
+export function createNativeMonState(services,layout,state={itermonarr:0,itermonsiz:0,statics:new Map()}){
+ const environment=services.nativeEnvironment,{memory,transport,ctypes}=environment,nativeState=nativeStateFor(environment),arena=nativeState.nativeArena,views=nativeState.nativeRecords,schema=abi.schema;
+ const address=environment.address,raw=v=>BigInt.asUintN(64,BigInt(typeof v==='string'?services.literal(v):v?.address??v??0)),samePtr=(a,b)=>raw(a)===raw(b);
+ const int=v=>typeof v==='bigint'?Number(BigInt.asIntN(32,v)):Number(v)|0,uint=v=>typeof v==='bigint'?Number(BigInt.asUintN(32,v)):Number(v)>>>0,coordxy=v=>typeof v==='bigint'?Number(BigInt.asIntN(16,v)):Number(v)<<16>>16,char=v=>int(v)<<24>>24,uchar=v=>int(v)&255,boolean=char,long=v=>BigInt.asIntN(64,(typeof v==='number'?BigInt(Math.trunc(v)):BigInt(v))),ulong=v=>BigInt.asUintN(64,(typeof v==='number'?BigInt(Math.trunc(v)):BigInt(v)));
+ const normalize=(kind,v)=>kind==='BigInt64'?long(v):kind==='BigUint64'?ulong(v):kind==='Int8'?char(v):kind==='Uint8'?uchar(v):kind==='Int16'?coordxy(v):kind==='Uint16'?int(v)&65535:kind==='Uint32'?uint(v):int(v);
+ const view=()=>arena.view,global=i=>environment.requireGlobal(abi.globals[i]),pointer=p=>arena.pointer(p),widths={Int8:1,Uint8:1,Int16:2,Uint16:2,Int32:4,Uint32:4,BigInt64:8,BigUint64:8};
+ const record=(value,kind)=>{if(!schema[kind])throw Error('Unknown native MON record '+kind);return views.record(kind==='dlevel'?'dlevel_t':schema[kind][0],value);};
+ const scalarTypes={Int8:'signed char',Uint8:'unsigned char',Int16:'short',Uint16:'unsigned short',Int32:'int',Uint32:'unsigned int',BigInt64:'long',BigUint64:'unsigned long'};
+ function array(at,kind,dims){if(dims.length!==1||!dims[0])throw Error('Native MON array needs a fixed extent');const type=scalarTypes[kind]??(kind==='ptr:raw'?'char *':kind==='ptr:mon'?'struct monst *':schema[kind]?.[0]);if(!type)throw Error('Unknown native MON array '+kind);return views.array(type,at,dims[0]);}
+ function table(at,kind,length){const type=schema[kind]?.[0];if(!type)throw Error('Unknown native MON table '+kind);const stride=ctypes.size(type),out=Array(length);Object.defineProperty(out,'address',{value:at});for(let i=0;i<length;i++)Object.defineProperty(out,i,{enumerable:true,configurable:true,get(){const v=record(at+i*stride,kind);Object.defineProperty(out,i,{value:v,enumerable:true});return v;}});return out;}
+ function copyStruct(out,src,n){const heap=memory.HEAPU8;heap.copyWithin(address(out),address(src),address(src)+Number(n));return out;}
+ const snapshots=new WeakSet(),links=nativeStateLinksFor(environment),nativeIntCells=new WeakMap();
+ function nativeMonsterSnapshot(count){const out=Array(uint(count));snapshots.add(out);return out;}
+ function freeMonsterSnapshot(value){if(!snapshots.has(value))throw Error('Foreign MON snapshot release');snapshots.delete(value);}
+ function intPointer(value){if(isNativeLocalReference(value,nativeState,'i32')){let cell=nativeIntCells.get(value);if(!cell){cell={get address(){return value.address;},get value(){return value.value;},set value(v){value.value=int(v);}};nativeIntCells.set(value,cell);}return cell;}const at=address(value);return at?{address:at,get value(){return view().getInt32(at,true);},set value(v){view().setInt32(at,int(v),true);}}:0;}

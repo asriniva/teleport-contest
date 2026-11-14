@@ -254,7 +254,7 @@ function mon_sanity_check()
     for ((mtmp = C.gm.migrating_mons); mtmp; (mtmp = mtmp.nmon)) {
         sanity_check_single_mon(mtmp, 0, "migr");
 
-        if ((((C.long(C.long((C.long(mtmp.mstate) & C.long(~(C.int((C.int((C.int((C.MON_MIGRATING) | (C.MON_LIMBO))) | (C.MON_ENDGAME_MIGR))) | (C.MON_OFFMAP))))))) != C.long(0n)) || !(C.long((C.long(mtmp.mstate) & C.long(C.MON_MIGRATING))))) ? 1 : 0))
+        if ((((C.long((C.long(mtmp.mstate) & C.long(~(C.int((C.int((C.int((C.MON_MIGRATING) | (C.MON_LIMBO))) | (C.MON_ENDGAME_MIGR))) | (C.MON_OFFMAP)))))) != C.long(0n)) || !(C.long((C.long(mtmp.mstate) & C.long(C.MON_MIGRATING))))) ? 1 : 0))
             C.impossible("migrating mon (%s) with mstate set to 0x%08lx",
                        C.fmt_ptr( mtmp), mtmp.mstate);
     }
@@ -352,7 +352,7 @@ function zombie_form(pm)
 function undead_to_corpse(mndx)
 
 {
-    (mndx = C.int(C.int(mndx)));
+    (mndx = C.int(mndx));
     switch (mndx) {
     case C.PM_KOBOLD_ZOMBIE:
     case C.PM_KOBOLD_MUMMY:
@@ -406,7 +406,7 @@ function undead_to_corpse(mndx)
 function genus(mndx,mode)
 
 {
-    (mndx = C.int(C.int(mndx))); (mode = C.int(C.int(mode)));
+    (mndx = C.int(mndx)); (mode = C.int(mode));
     switch (mndx) {
     /* Quest guardians */
     case C.PM_STUDENT:
@@ -472,7 +472,7 @@ function genus(mndx,mode)
 function pm_to_cham(mndx)
 
 {
-    (mndx = C.int(C.int(mndx)));
+    (mndx = C.int(mndx));
     let mcham = C.int(C.NON_PM);
 
     /*
@@ -494,7 +494,7 @@ function pm_to_cham(mndx)
 function make_corpse(mtmp,corpseflags)
 
 {
-    (corpseflags = C.uint(C.uint(corpseflags)));
+    (corpseflags = C.uint(corpseflags));
     let mdat = mtmp.data;
     let num;
     const obj = C.objectPointerLocal(0);
@@ -529,7 +529,7 @@ function make_corpse(mtmp,corpseflags)
         /* Make dragon scales.  This assumes that the order of the
            dragons is the same as the order of the scales. */
         if (!C.rn2((mtmp.mrevived ? 20 : 3), 597, "make_corpse")) {
-            (num = C.int(C.int(((C.GRAY_DRAGON_SCALES + C.monsndx(mdat))) - (C.PM_GRAY_DRAGON))));
+            (num = C.int(((C.GRAY_DRAGON_SCALES + C.monsndx(mdat))) - (C.PM_GRAY_DRAGON)));
             (obj.value = C.mksobj_at(num, x, y, 0, 0));
             (obj.value.spe = C.char(0));
             (obj.value.cursed = (obj.value.blessed = 0));
@@ -558,7 +558,7 @@ function make_corpse(mtmp,corpseflags)
         (num = C.int(undead_to_corpse(mndx)));
         (corpstatflags = C.uint((corpstatflags) | (C.CORPSTAT_INIT)));
         (obj.value = C.mkcorpstat(C.CORPSE, mtmp, C.mons[num], x, y, corpstatflags));
-        (obj.value.age = C.long(C.long(C.long(obj.value.age) - C.long(C.long((C.long(C.TAINT_AGE) + C.long(1))))))); /* this is an *OLD* corpse */
+        (obj.value.age = C.long(C.long(obj.value.age) - C.long((C.long(C.TAINT_AGE) + C.long(1))))); /* this is an *OLD* corpse */
         break;
     case C.PM_KOBOLD_MUMMY:
     case C.PM_DWARF_MUMMY:
@@ -579,7 +579,7 @@ function make_corpse(mtmp,corpseflags)
         (num = C.int(undead_to_corpse(mndx)));
         (corpstatflags = C.uint((corpstatflags) | (C.CORPSTAT_INIT)));
         (obj.value = C.mkcorpstat(C.CORPSE, mtmp, C.mons[num], x, y, corpstatflags));
-        (obj.value.age = C.long(C.long(C.long(obj.value.age) - C.long(C.long((C.long(C.TAINT_AGE) + C.long(1))))))); /* this is an *OLD* corpse */
+        (obj.value.age = C.long(C.long(obj.value.age) - C.long((C.long(C.TAINT_AGE) + C.long(1))))); /* this is an *OLD* corpse */
         break;
     case C.PM_IRON_GOLEM:
         (num = C.int(C.d(2, 6, 651, "make_corpse")));
@@ -596,7 +596,7 @@ function make_corpse(mtmp,corpseflags)
         break;
     case C.PM_CLAY_GOLEM:
         (obj.value = C.mksobj_at(C.ROCK, x, y, 0, 0));
-        (obj.value.quan = C.long(C.long((C.int((C.rn2(20, 665, "make_corpse")) + (50))))));
+        (obj.value.quan = C.long((C.int((C.rn2(20, 665, "make_corpse")) + (50)))));
         (obj.value.owt = C.uint(C.weight(obj.value)));
         C.free_mgivenname(mtmp);
         break;
@@ -1065,17 +1065,17 @@ function mcalcmove(mon,m_moving)
         /* slow-monster effects work better against faster monsters: they
            lose 1/3 of their speed below 12 but 2/3 of their speed above */
         if ((mmove < C.NORMAL_SPEED))
-            (mmove = C.int(C.int((C.int((Math.imul(2, mmove)) + (1))) / (3))));
+            (mmove = C.int((C.int((Math.imul(2, mmove)) + (1))) / (3)));
         else
-            (mmove = C.int(C.int((4) + (C.int((mmove) / (3))))));
+            (mmove = C.int((4) + (C.int((mmove) / (3)))));
     } else if ((mon.mspeed == C.MFAST))
-        (mmove = C.int(C.int((C.int((Math.imul(4, mmove)) + (2))) / (3))));
+        (mmove = C.int((C.int((Math.imul(4, mmove)) + (2))) / (3)));
 
     if (((((C.samePtr(mon, C.u.usteed) && C.u.ugallop) ? 1 : 0) && C.svc.context.mv) ? 1 : 0)) {
         /* increase movement by a factor of 1.5; also increase variance of
            movement speed (if it's naturally 24, we don't want it to always
            become 36) */
-        (mmove = C.int(C.int((Math.imul((C.rn2(2, 1152, "mcalcmove") ? 4 : 5), mmove)) / (3))));
+        (mmove = C.int((Math.imul((C.rn2(2, 1152, "mcalcmove") ? 4 : 5), mmove)) / (3)));
     }
 
     if (m_moving) {
@@ -1198,7 +1198,7 @@ function movemon_singlemon(mtmp)
          * that it can be checked again on subsequent moves until the hero
          * is perceived to be farther away. */
         if (((((mtmp.mpeaceful || mtmp.mtame) ? 1 : 0) || (C.dist2(mtmp.mx, mtmp.my, mtmp.mux, mtmp.muy) > Math.imul(3, 3))) ? 1 : 0)) {
-            (mtmp.misc_worn_check = C.long(C.long(C.long(mtmp.misc_worn_check) & C.long(~C.I_SPECIAL))));
+            (mtmp.misc_worn_check = C.long(C.long(mtmp.misc_worn_check) & C.long(~C.I_SPECIAL)));
             (oldworn = C.long(mtmp.misc_worn_check));
             C.m_dowear(mtmp, 0);
             if ((((C.long(mtmp.misc_worn_check) != C.long(oldworn)) || !mtmp.mcanmove) ? 1 : 0))
@@ -1618,7 +1618,7 @@ function meatcorpse(mtmp)
 function mon_give_prop(mtmp,prop)
 
 {
-    (prop = C.int(C.int(prop)));
+    (prop = C.int(prop));
     let msg = 0;
     let intrinsic = C.ushort(0); /* MR_* constant */
 
@@ -1826,19 +1826,19 @@ function max_mon_load(mtmp)
      * proportional to their size instead of weight.
      */
     if (!mtmp.data.cwt)
-        (maxload = C.long(C.long((C.long(C.long((C.long(C.MAX_CARR_CAP) * C.long(C.long(mtmp.data.msize))))) / C.long(C.MZ_HUMAN)))));
+        (maxload = C.long((C.long((C.long(C.MAX_CARR_CAP) * C.long(mtmp.data.msize))) / C.long(C.MZ_HUMAN))));
     else if (((!C.strongmonst(mtmp.data) || ((C.strongmonst(mtmp.data) && (mtmp.data.cwt > C.WT_HUMAN)) ? 1 : 0)) ? 1 : 0))
-        (maxload = C.long(C.long((C.long(C.long((C.long(C.MAX_CARR_CAP) * C.long(C.long(mtmp.data.cwt))))) / C.long(C.WT_HUMAN)))));
+        (maxload = C.long((C.long((C.long(C.MAX_CARR_CAP) * C.long(mtmp.data.cwt))) / C.long(C.WT_HUMAN))));
     else
         (maxload = C.long(C.MAX_CARR_CAP)); /*strong monsters w/cwt <= WT_HUMAN*/
 
     if (!C.strongmonst(mtmp.data))
-        (maxload = C.long(C.long(C.long(maxload) / C.long(2))));
+        (maxload = C.long(C.long(maxload) / C.long(2)));
 
     if ((C.long(maxload) < C.long(1)))
         (maxload = C.long(1));
 
-    return C.int(C.int(maxload));
+    return C.int(maxload);
 }
 
 /* can monster touch object safely? */
@@ -1887,7 +1887,7 @@ function can_carry(mtmp,otmp)
 
     /* hostile monsters who like gold will pick up the whole stack;
        tame monsters with hands will pick up the partial stack */
-    (iquan = C.int(((C.long(otmp.quan) > C.long(C.long(C.LARGEST_INT))) ? C.int((20000) + (C.rn2(C.int((C.int((C.LARGEST_INT) - (20000))) + (1)), 2005, "can_carry"))) : C.int(otmp.quan))));
+    (iquan = C.int(((C.long(otmp.quan) > C.long(C.LARGEST_INT)) ? C.int((20000) + (C.rn2(C.int((C.int((C.LARGEST_INT) - (20000))) + (1)), 2005, "can_carry"))) : C.int(otmp.quan))));
 
     /* monsters without hands can't pick up multiple objects at once
      * unless they have an engulfing attack
@@ -1938,7 +1938,7 @@ function can_carry(mtmp,otmp)
 function monlineu(mon,nx,ny)
 
 {
-    (nx = C.int(C.int(nx))); (ny = C.int(C.int(ny)));
+    (nx = C.int(nx)); (ny = C.int(ny));
     return C.char(C.online2(nx, ny, mon.mux, mon.muy));
 }
 
@@ -1958,44 +1958,44 @@ function mon_allowflags(mtmp)
         (can_tunnel = C.char(0));
 
     if (mtmp.mtame)
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.long((C.long(C.long((C.long(C.long((C.long(C.ALLOW_M) | C.long(C.ALLOW_TRAPS)))) | C.long(C.ALLOW_SANCT)))) | C.long(C.ALLOW_SSM)))))));
+        (allowflags = C.long(C.long(allowflags) | C.long((C.long((C.long((C.long(C.ALLOW_M) | C.long(C.ALLOW_TRAPS))) | C.long(C.ALLOW_SANCT))) | C.long(C.ALLOW_SSM)))));
     else if (mtmp.mpeaceful)
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.long((C.long(C.ALLOW_SANCT) | C.long(C.ALLOW_SSM)))))));
+        (allowflags = C.long(C.long(allowflags) | C.long((C.long(C.ALLOW_SANCT) | C.long(C.ALLOW_SSM)))));
     else
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.ALLOW_U))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.ALLOW_U)));
     if (((C.Conflict && !C.resist_conflict(mtmp)) ? 1 : 0))
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.ALLOW_U))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.ALLOW_U)));
     if (mtmp.isshk)
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.ALLOW_SSM))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.ALLOW_SSM)));
     if (mtmp.ispriest)
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.long((C.long(C.ALLOW_SSM) | C.long(C.ALLOW_SANCT)))))));
+        (allowflags = C.long(C.long(allowflags) | C.long((C.long(C.ALLOW_SSM) | C.long(C.ALLOW_SANCT)))));
     if (C.passes_walls(mtmp.data))
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.long((C.long(C.ALLOW_ROCK) | C.long(C.ALLOW_WALL)))))));
+        (allowflags = C.long(C.long(allowflags) | C.long((C.long(C.ALLOW_ROCK) | C.long(C.ALLOW_WALL)))));
     if (((C.throws_rocks(mtmp.data) || C.m_can_break_boulder(mtmp)) ? 1 : 0))
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.ALLOW_ROCK))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.ALLOW_ROCK)));
     if (can_tunnel)
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.ALLOW_DIG))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.ALLOW_DIG)));
     if (doorbuster)
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.BUSTDOOR))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.BUSTDOOR)));
     if (can_open)
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.OPENDOOR))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.OPENDOOR)));
     if (can_unlock)
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.UNLOCKDOOR))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.UNLOCKDOOR)));
     if (/* restrict engulfer or holder who might try to pass iron bars while
            carrying hero; accept small subset for poly'd hero passes_bars() */
 ((C.passes_bars(mtmp.data) && ((!C.samePtr(mtmp, C.u.ustuck) || ((C.unsolid(C.gy.youmonst.data) || C.verysmall(C.gy.youmonst.data)) ? 1 : 0)) ? 1 : 0)) ? 1 : 0))
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.ALLOW_BARS))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.ALLOW_BARS)));
 
 
 
 
     if (((C.is_minion(mtmp.data) || C.is_rider(mtmp.data)) ? 1 : 0))
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.ALLOW_SANCT))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.ALLOW_SANCT)));
     /* unicorn may not be able to avoid hero on a noteleport level */
     if (((C.is_unicorn(mtmp.data) && !C.noteleport_level(mtmp)) ? 1 : 0))
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.NOTONL))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.NOTONL)));
     if (((C.is_human(mtmp.data) || C.samePtr(mtmp.data, C.mons[C.PM_MINOTAUR])) ? 1 : 0))
-        (allowflags = C.long(C.long(C.long(allowflags) | C.long(C.ALLOW_SSM))));
+        (allowflags = C.long(C.long(allowflags) | C.long(C.ALLOW_SSM)));
     if (((((C.is_undead(mtmp.data) && (mtmp.data.mlet != C.S_GHOST)) ? 1 : 0) || C.is_vampshifter(mtmp)) ? 1 : 0))
         (allowflags = C.long(C.ulong(C.ulong(allowflags) | C.ulong(C.NOGARLIC))));
 
@@ -2013,7 +2013,7 @@ function m_in_air(mtmp)
 function mfndpos(mon,data,flag)
 
 {
-    (flag = C.long(C.long(flag)));
+    (flag = C.long(flag));
     let mdat = mon.data;
     let ttmp;
     let x, y, nx, ny;
@@ -2039,7 +2039,7 @@ function mfndpos(mon,data,flag)
     (lavaok = C.char(((m_in_air(mon) || C.likes_lava(mdat)) ? 1 : 0)));
     if (C.samePtr(mdat, C.mons[C.PM_FLOATING_EYE])) /* prefers to avoid heat */
         (lavaok = C.char(0));
-    (thrudoor = C.char((C.long(C.long((C.long(flag) & C.long(C.long((C.long(C.ALLOW_WALL) | C.long(C.BUSTDOOR))))))) != C.long(0n))));
+    (thrudoor = C.char((C.long((C.long(flag) & C.long((C.long(C.ALLOW_WALL) | C.long(C.BUSTDOOR))))) != C.long(0n))));
     (poisongas_ok = C.char((m_poisongas_ok(mon) == C.M_POISONGAS_OK)));
     (in_poisongas = C.char(((!C.samePtr((gas_reg = C.visible_region_at(x,y)), 0) && (gas_reg.glyph == gas_glyph)) ? 1 : 0)));
 
@@ -2064,11 +2064,11 @@ function mfndpos(mon,data,flag)
  /* eels prefer the water, but if there is no water nearby,
              they will crawl over land */
     if (mon.mconf) {
-        (flag = C.long(C.long(C.long(flag) | C.long(C.ALLOW_ALL))));
-        (flag = C.long(C.long(C.long(flag) & C.long(~C.NOTONL))));
+        (flag = C.long(C.long(flag) | C.long(C.ALLOW_ALL)));
+        (flag = C.long(C.long(flag) & C.long(~C.NOTONL)));
     }
     if (!mon.mcansee)
-        (flag = C.long(C.long(C.long(flag) | C.long(C.ALLOW_SSM))));
+        (flag = C.long(C.long(flag) | C.long(C.ALLOW_SSM)));
     (maxx = C.int(((C.int((x) + (1)) < C.int((C.COLNO) - (1))) ? C.int((x) + (1)) : C.int((C.COLNO) - (1)))));
     (maxy = C.int(((C.int((y) + (1)) < C.int((C.ROWNO) - (1))) ? C.int((y) + (1)) : C.int((C.ROWNO) - (1)))));
     for ((nx = C.coordxy(((1 > C.int((x) - (1))) ? 1 : C.int((x) - (1))))); (nx <= maxx); nx++)
@@ -2120,7 +2120,7 @@ function mfndpos(mon,data,flag)
                 if (C.onscary(dispx, dispy, mon)) {
                     if (!(C.long((C.long(flag) & C.long(C.ALLOW_SSM)))))
                         continue;
-                    (data.info[cnt] = C.long(C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_SSM))));
+                    (data.info[cnt] = C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_SSM)));
                 }
                 if (((C.u_at(nx, ny) || (((nx == mon.mux) && (ny == mon.muy)) ? 1 : 0)) ? 1 : 0)) {
                     if (C.u_at(nx, ny)) {
@@ -2135,25 +2135,25 @@ function mfndpos(mon,data,flag)
                     }
                     if (!(C.long((C.long(flag) & C.long(C.ALLOW_U)))))
                         continue;
-                    (data.info[cnt] = C.long(C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_U))));
+                    (data.info[cnt] = C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_U)));
                 } else {
                     if (C.MON_AT(nx, ny)) {
                         let mtmp2 = C.m_at(nx, ny);
-                        let mmflag = C.long(C.long((C.long(flag) | C.long(mm_aggression(mon, mtmp2)))));
+                        let mmflag = C.long((C.long(flag) | C.long(mm_aggression(mon, mtmp2))));
 
                         if (C.long((C.long(mmflag) & C.long(C.ALLOW_M)))) {
-                            (data.info[cnt] = C.long(C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_M))));
+                            (data.info[cnt] = C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_M)));
                             if (mtmp2.mtame) {
                                 if (!(C.long((C.long(mmflag) & C.long(C.ALLOW_TM)))))
                                     continue;
-                                (data.info[cnt] = C.long(C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_TM))));
+                                (data.info[cnt] = C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_TM)));
                             }
                         } else {
-                            (flag = C.long(C.long(C.long(flag) & C.long(~C.ALLOW_MDISP)))); /* depends upon defender */
-                            (mmflag = C.long(C.long((C.long(flag) | C.long(mm_displacement(mon, mtmp2))))));
+                            (flag = C.long(C.long(flag) & C.long(~C.ALLOW_MDISP))); /* depends upon defender */
+                            (mmflag = C.long((C.long(flag) | C.long(mm_displacement(mon, mtmp2)))));
                             if (!(C.long((C.long(mmflag) & C.long(C.ALLOW_MDISP)))))
                                 continue;
-                            (data.info[cnt] = C.long(C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_MDISP))));
+                            (data.info[cnt] = C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_MDISP)));
                         }
                     }
                     /* Note: ALLOW_SANCT only prevents movement, not
@@ -2161,7 +2161,7 @@ function mfndpos(mon,data,flag)
                     if (((((((C.svl.level.flags.has_temple && C.loadChar(C.in_rooms(nx, ny, C.TEMPLE))) ? 1 : 0) && !C.loadChar(C.in_rooms(x, y, C.TEMPLE))) ? 1 : 0) && C.in_your_sanctuary(0, nx, ny)) ? 1 : 0)) {
                         if (!(C.long((C.long(flag) & C.long(C.ALLOW_SANCT)))))
                             continue;
-                        (data.info[cnt] = C.long(C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_SANCT))));
+                        (data.info[cnt] = C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_SANCT)));
                     }
                 }
                 if (((checkobj && C.sobj_at(C.CLOVE_OF_GARLIC, nx, ny)) ? 1 : 0)) {
@@ -2172,12 +2172,12 @@ function mfndpos(mon,data,flag)
                 if (((checkobj && C.sobj_at(C.BOULDER, nx, ny)) ? 1 : 0)) {
                     if (!(C.long((C.long(flag) & C.long(C.ALLOW_ROCK)))))
                         continue;
-                    (data.info[cnt] = C.long(C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_ROCK))));
+                    (data.info[cnt] = C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_ROCK)));
                 }
                 if (((monseeu && monlineu(mon, nx, ny)) ? 1 : 0)) {
                     if (C.long((C.long(flag) & C.long(C.NOTONL))))
                         continue;
-                    (data.info[cnt] = C.long(C.long(C.long(data.info[cnt]) | C.long(C.NOTONL))));
+                    (data.info[cnt] = C.long(C.long(data.info[cnt]) | C.long(C.NOTONL)));
                 }
                 /* check for diagonal tight squeeze */
                 if ((((((((((nx != x) && (ny != y)) ? 1 : 0) && C.bad_rock(mdat, x, ny)) ? 1 : 0) && C.bad_rock(mdat, nx, y)) ? 1 : 0) && C.cant_squeeze_thru(mon)) ? 1 : 0))
@@ -2195,13 +2195,13 @@ function mfndpos(mon,data,flag)
                     }
                     /* fixed-destination teleport trap, was used by hero */
                     if (((C.fixed_tele_trap(ttmp) && C.hastrack(nx, ny)) ? 1 : 0))
-                        (data.info[cnt] = C.long(C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_TRAPS))));
+                        (data.info[cnt] = C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_TRAPS)));
                     else if (!C.m_harmless_trap(mon, ttmp)) {
                         if (!(C.long((C.long(flag) & C.long(C.ALLOW_TRAPS))))) {
                             if (C.mon_knows_traps(mon, ttmp.ttyp))
                                 continue;
                         }
-                        (data.info[cnt] = C.long(C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_TRAPS))));
+                        (data.info[cnt] = C.long(C.long(data.info[cnt]) | C.long(C.ALLOW_TRAPS)));
                     }
                 }
                 (data.poss[cnt].x = C.coordxy(nx));
@@ -2247,7 +2247,7 @@ function mm_2way_aggression(magr,mdef)
         if (((magr.mgenmklev && mdef.mgenmklev) ? 1 : 0))
             return C.long(0n);
         if (((((!C.Is_stronghold(C.u.uz) && !C.unique_corpstat(magr.data)) ? 1 : 0) && !C.unique_corpstat(mdef.data)) ? 1 : 0))
-            return C.long(C.long((C.long(C.ALLOW_M) | C.long(C.ALLOW_TM))));
+            return C.long((C.long(C.ALLOW_M) | C.long(C.ALLOW_TM)));
     }
     return C.long(0n);
 }
@@ -2269,11 +2269,11 @@ function mm_aggression(magr,/* monster that is currently deciding where to move 
     /* supposedly purple worms are attracted to shrieking because they
        like to eat shriekers, so attack the latter when feasible */
     if ((((((mndx == C.PM_PURPLE_WORM) || (mndx == C.PM_BABY_PURPLE_WORM)) ? 1 : 0) && C.samePtr(mdef.data, C.mons[C.PM_SHRIEKER])) ? 1 : 0))
-        return C.long(C.long((C.long(C.ALLOW_M) | C.long(C.ALLOW_TM))));
+        return C.long((C.long(C.ALLOW_M) | C.long(C.ALLOW_TM)));
     /* Various other combinations such as dog vs cat, cat vs rat, and
        elf vs orc have been suggested.  For the time being we don't
        support those. */
-    return C.long(C.long((C.long(mm_2way_aggression(magr, mdef)) | C.long(mm_2way_aggression(mdef, magr)))));
+    return C.long((C.long(mm_2way_aggression(magr, mdef)) | C.long(mm_2way_aggression(mdef, magr))));
 }
 
 /* Monster displacing another monster out of the way */
@@ -2299,7 +2299,7 @@ function mm_displacement(magr,/* monster that is currently deciding where to mov
 function monnear(mon,x,y)
 
 {
-    (x = C.coordxy(C.coordxy(x))); (y = C.coordxy(C.coordxy(y)));
+    (x = C.coordxy(x)); (y = C.coordxy(y));
     let distance = C.int(C.dist2(mon.mx, mon.my, x, y));
 
     if ((((distance == 2) && C.NODIAG(C.long((C.rawPointer(mon.data)-C.rawPointer(C.mons))/BigInt(C.pmSize)))) ? 1 : 0))
@@ -2607,13 +2607,13 @@ function m_detach(mtmp,mptr,/* reflects mtmp->data _prior_ to mtmp's death */ du
     if (mtmp.wormno)
         C.wormgone(mtmp);
     if (C.In_endgame(C.u.uz))
-        (mtmp.mstate = C.long(C.long(C.long(mtmp.mstate) | C.long(C.MON_ENDGAME_FREE))));
+        (mtmp.mstate = C.long(C.long(mtmp.mstate) | C.long(C.MON_ENDGAME_FREE)));
 
-    if ((C.long(C.long((C.long(mtmp.mstate) & C.long(C.MON_DETACH)))) != C.long(0))) {
+    if ((C.long((C.long(mtmp.mstate) & C.long(C.MON_DETACH))) != C.long(0))) {
         C.impossible("m_detach: %s is already detached?",
                    C.minimal_monnam(mtmp, 0));
     } else {
-        (mtmp.mstate = C.long(C.long(C.long(mtmp.mstate) | C.long(C.MON_DETACH))));
+        (mtmp.mstate = C.long(C.long(mtmp.mstate) | C.long(C.MON_DETACH)));
         C.iflags.purge_monsters++;
     }
 
@@ -2628,12 +2628,12 @@ function m_detach(mtmp,mptr,/* reflects mtmp->data _prior_ to mtmp's death */ du
 function set_mon_min_mhpmax(mon,minimum_mhpmax)
  /* monster life-saving has traditionally used 10 */
 {
-    (minimum_mhpmax = C.int(C.int(minimum_mhpmax)));
+    (minimum_mhpmax = C.int(minimum_mhpmax));
     /* can't be less than m_lev+1 (if we just used m_lev itself, level 0
        monsters would end up allowing a minimum of 0); since life draining
        reduces m_lev, this usually won't give the monster much of a boost */
     if ((mon.mhpmax < C.int((C.int(mon.m_lev)) + (1))))
-        (mon.mhpmax = C.int(C.int((C.int(mon.m_lev)) + (1))));
+        (mon.mhpmax = C.int((C.int(mon.m_lev)) + (1)));
     /* caller can specify an alternate minimum; we'll honor it iff it is
        greater than m_lev+1; the traditional arbitrary value of 10 always
        gives level 0 and level 1 monsters a boost and has a moderate
@@ -2807,7 +2807,7 @@ function vamprises(mtmp)
 function logdeadmon(mtmp,mndx)
 
 {
-    (mndx = C.int(C.int(mndx)));
+    (mndx = C.int(mndx));
     let howmany = C.int(C.svm.mvitals[mndx].died);
 
     if ((((mndx == C.PM_MEDUSA) && (howmany == 1)) ? 1 : 0)) {
@@ -2857,7 +2857,7 @@ function logdeadmon(mtmp,mndx)
                all kills of the Wizard and the Riders are major when
                they're logged but they still don't get logged every time */
             if ((((((howmany == 1) || mtmp.iswiz) ? 1 : 0) || C.is_rider(mtmp.data)) ? 1 : 0))
-                (llevent_type = C.long(C.long(C.long(llevent_type) | C.long(C.LL_ACHIEVE))));
+                (llevent_type = C.long(C.long(llevent_type) | C.long(C.LL_ACHIEVE)));
             C.storeChar(C.ptrOffset(xtra, 0), 0);
             if ((howmany > 1)) /* "(2nd time)" or "(50th time)" */
                 C.Sprintf(xtra, " (%d%s time)", howmany, C.ordin(howmany));
@@ -3020,7 +3020,7 @@ function corpse_chance(mon,magr,/* killer, if swallowed */ was_swallowed)
                     C.There("is an explosion in your %s!", C.body_part(C.STOMACH));
                     C.Sprintf(C.svk.killer.name, "%s explosion",
                             C.s_suffix(C.pmname(mdat, C.Mgender(mon))));
-                    C.losehp(((C.Half_physical_damage ? C.int(C.int((C.int(C.int((tmp) + (1)))) / (2))) : tmp)), C.svk.killer.name,
+                    C.losehp(((C.Half_physical_damage ? C.int((C.int((tmp) + (1))) / (2)) : tmp)), C.svk.killer.name,
                            C.KILLED_BY_AN);
                 } else {
                     C.You_hear("an explosion.");
@@ -3111,7 +3111,7 @@ function monstone(mdef)
 
     (mdef.mtrapped = 0); /* (see m_detach) */
 
-    if ((((C.int(mdef.data.msize) > C.MZ_TINY) || !C.rn2(C.int((2) + ((C.int((C.int((mdef.data.geno) & (C.G_FREQ)))) > 2))), 3310, "monstone")) ? 1 : 0)) {
+    if ((((C.int(mdef.data.msize) > C.MZ_TINY) || !C.rn2(C.int((2) + ((C.int((mdef.data.geno) & (C.G_FREQ)) > 2))), 3310, "monstone")) ? 1 : 0)) {
         let corpstatflags = C.uint(C.CORPSTAT_NONE);
 
         (oldminvent = 0);
@@ -3175,7 +3175,7 @@ function monstone(mdef)
 function monkilled(mdef,fltxt,how)
 
 {
-    (how = C.int(C.int(how)));
+    (how = C.int(how));
     let mptr = mdef.data;
 
     if (((fltxt && (mdef.wormno ? C.worm_known(mdef) : C.cansee(mdef.mx, mdef.my))) ? 1 : 0))
@@ -3265,7 +3265,7 @@ function killed(mtmp)
 function xkilled(mtmp,xkill_flags)
  /* 1: suppress mesg, 2: suppress corpse, 4: pacifist */
 {
-    (xkill_flags = C.int(C.int(xkill_flags)));
+    (xkill_flags = C.int(xkill_flags));
     let tmp, mndx;
     let x = C.coordxy(mtmp.mx), y = C.coordxy(mtmp.my);
     const museum=C.monLocal(C.cg.zeromonst);
@@ -3427,7 +3427,7 @@ function xkilled(mtmp,xkill_flags)
            a corpse or animating a statue and usually will be hostile */
 ((/* exclude role monsters */
 ((((C.is_human(mdat) && ((!C.always_hostile(mdat) && (mtmp.malign <= 0)) ? 1 : 0)) ? 1 : 0) && (((mndx < C.PM_ARCHEOLOGIST) || (mndx > C.PM_WIZARD)) ? 1 : 0)) ? 1 : 0) && (mndx != C.PM_HUMAN)) ? 1 : 0) && (C.u.ualign.type != C.A_CHAOTIC)) ? 1 : 0)) {
-        (C.HTelepat = C.long(C.long(C.long(C.HTelepat) & C.long(~C.INTRINSIC))));
+        (C.HTelepat = C.long(C.long(C.HTelepat) & C.long(~C.INTRINSIC)));
         C.change_luck(-2);
         C.You("murderer!");
         if (((C.Blind && !C.Blind_telepat) ? 1 : 0))
@@ -3456,9 +3456,9 @@ function xkilled(mtmp,xkill_flags)
             iter_mons(anger_quest_guardians);
     } else if ((mdat.msound == C.MS_NEMESIS)) { /* Real good! */
         if (!C.svq.quest_status.killed_leader)
-            C.adjalign(C.int((C.int((C.ALIGNLIM) / (4)))));
+            C.adjalign(C.int((C.ALIGNLIM) / (4)));
     } else if ((mdat.msound == C.MS_GUARDIAN)) { /* Bad */
-        C.adjalign(-C.int((C.int((C.ALIGNLIM) / (8)))));
+        C.adjalign(-C.int((C.ALIGNLIM) / (8)));
         C.u.ugangr++;
         C.change_luck(-4);
         if (!C.Hallucination)
@@ -3471,7 +3471,7 @@ function xkilled(mtmp,xkill_flags)
         if (C.p_coaligned(mtmp))
             (C.u.ublessed = C.int(0));
         if ((mdat.maligntyp == C.A_NONE))
-            C.adjalign(C.int((C.int((C.ALIGNLIM) / (4))))); /* BIG bonus */
+            C.adjalign(C.int((C.ALIGNLIM) / (4))); /* BIG bonus */
     } else if (mtmp.mtame) {
         C.adjalign(-15); /* bad!! */
         /* your god is mighty displeased... */
@@ -3600,7 +3600,7 @@ function m_into_limbo(mtmp)
 {
     let target_lev = C.coordxy(C.ledger_no(C.u.uz)), xyloc = C.coordxy(C.MIGR_APPROX_XY);
 
-    (mtmp.mstate = C.long(C.long(C.long(mtmp.mstate) | C.long(C.MON_LIMBO))));
+    (mtmp.mstate = C.long(C.long(mtmp.mstate) | C.long(C.MON_LIMBO)));
     migrate_mon(mtmp, target_lev, xyloc);
 }
 
@@ -3689,7 +3689,7 @@ function elemental_clog(mon)
         if (mtmp) {
             let mx = C.int(mtmp.mx), my = C.int(mtmp.my);
 
-            (mtmp.mstate = C.long(C.long(C.long(mtmp.mstate) | C.long(C.MON_OBLITERATE))));
+            (mtmp.mstate = C.long(C.long(mtmp.mstate) | C.long(C.MON_OBLITERATE)));
             mongone(mtmp);
             /* places in the code might still reference mtmp->mx, mtmp->my */
             /* mtmp->mx = mtmp->my = 0; */
@@ -3703,7 +3703,7 @@ function elemental_clog(mon)
             (dest = C.u.uz);
             dest.dlevel--;
             (target_lev = C.coordxy(C.ledger_no(dest)));
-            (mon.mstate = C.long(C.long(C.long(mon.mstate) | C.long(C.MON_ENDGAME_MIGR))));
+            (mon.mstate = C.long(C.long(mon.mstate) | C.long(C.MON_ENDGAME_MIGR)));
             migrate_mon(mon, target_lev, C.MIGR_RANDOM);
         }
     }
@@ -3714,7 +3714,7 @@ function elemental_clog(mon)
 function mnexto(mtmp,rlocflags)
 
 {
-    (rlocflags = C.uint(C.uint(rlocflags)));
+    (rlocflags = C.uint(rlocflags));
     const mm=C.coordLocal();
 
     if (C.samePtr(mtmp, C.u.usteed)) {
@@ -3790,7 +3790,7 @@ function maybe_mnexto(mtmp)
 function mnearto(mtmp,x,y,move_other,/* make sure mtmp gets to x, y! so move m_at(x, y) */ rlocflags)
 
 {
-    (x = C.coordxy(C.coordxy(x))); (y = C.coordxy(C.coordxy(y))); (move_other = C.char(C.boolean(move_other))); (rlocflags = C.uint(C.uint(rlocflags)));
+    (x = C.coordxy(x)); (y = C.coordxy(y)); (move_other = C.char(C.boolean(move_other))); (rlocflags = C.uint(rlocflags));
     let othermon = 0;
     let newx, newy;
     const mm=C.coordLocal();
@@ -3804,7 +3804,7 @@ function mnearto(mtmp,x,y,move_other,/* make sure mtmp gets to x, y! so move m_a
            but for the moment it is leaving */
         mon_leaving_level(othermon);
         (othermon.mx = C.coordxy((othermon.my = C.coordxy(0)))); /* 'othermon' is not on the map */
-        (othermon.mstate = C.long(C.long(C.long(othermon.mstate) | C.long(C.MON_OFFMAP))));
+        (othermon.mstate = C.long(C.long(othermon.mstate) | C.long(C.MON_OFFMAP)));
     }
 
     (newx = C.coordxy(x));
@@ -3979,7 +3979,7 @@ function peacefuls_respond(mtmp)
                            * perhaps reduce tameness? */
                     } else {
                         (mon.mpeaceful = 0);
-                        (mon.mstrategy = C.ulong(C.ulong(C.ulong(mon.mstrategy) & C.ulong(~C.STRAT_WAITMASK))));
+                        (mon.mstrategy = C.ulong(C.ulong(mon.mstrategy) & C.ulong(~C.STRAT_WAITMASK)));
                         C.adjalign(-1);
                         if (!exclaimed)
                             C.pline_mon(mon, "%s gets angry!", C.Monnam(mon));
@@ -4032,7 +4032,7 @@ function setmangry(mtmp,via_attack)
     }
 
     /* AIS: Should this be in both places, or just in wakeup()? */
-    (mtmp.mstrategy = C.ulong(C.ulong(C.ulong(mtmp.mstrategy) & C.ulong(~C.STRAT_WAITMASK))));
+    (mtmp.mstrategy = C.ulong(C.ulong(mtmp.mstrategy) & C.ulong(~C.STRAT_WAITMASK)));
     if (!mtmp.mpeaceful)
         return;
     /* [FIXME: this logic seems wrong; peaceful humanoids gasp or exclaim
@@ -4122,7 +4122,7 @@ function wake_nearby(petcall)
 function wake_nearto_core(x,y,distance,petcall)
 
 {
-    (x = C.coordxy(C.coordxy(x))); (y = C.coordxy(C.coordxy(y))); (distance = C.int(C.int(distance))); (petcall = C.char(C.boolean(petcall)));
+    (x = C.coordxy(x)); (y = C.coordxy(y)); (distance = C.int(distance)); (petcall = C.char(C.boolean(petcall)));
     let mtmp;
 
     for ((mtmp = C.fmon); mtmp; (mtmp = mtmp.nmon)) {
@@ -4134,7 +4134,7 @@ function wake_nearto_core(x,y,distance,petcall)
             wake_msg(mtmp, 0);
             (mtmp.msleeping = 0); /* wake indeterminate sleep */
             if (!(C.int((mtmp.data.geno) & (C.G_UNIQ))))
-                (mtmp.mstrategy = C.ulong(C.ulong(C.ulong(mtmp.mstrategy) & C.ulong(~C.STRAT_WAITMASK)))); /* wake 'meditation' */
+                (mtmp.mstrategy = C.ulong(C.ulong(mtmp.mstrategy) & C.ulong(~C.STRAT_WAITMASK))); /* wake 'meditation' */
             if (((C.svc.context.mon_moving || !petcall) ? 1 : 0))
                 continue;
             if (mtmp.mtame) {
@@ -4151,7 +4151,7 @@ function wake_nearto_core(x,y,distance,petcall)
 function wake_nearto(x,y,distance)
 
 {
-    (x = C.coordxy(C.coordxy(x))); (y = C.coordxy(C.coordxy(y))); (distance = C.int(C.int(distance)));
+    (x = C.coordxy(x)); (y = C.coordxy(y)); (distance = C.int(distance));
     wake_nearto_core(x, y, distance, 0);
 }
 
@@ -4180,7 +4180,7 @@ function seemimic(mtmp)
 function normal_shape(mon)
 
 {
-    let mcham = C.int(C.int(mon.cham));
+    let mcham = C.int(mon.cham);
 
     if (C.ismnum(mcham)) {
         let mcan = C.uint(mon.mcan);
@@ -4220,12 +4220,12 @@ const itermonsiz_initial = 0; /* size in 'monst *' pointers */
 function alloc_itermonarr(count)
 
 {
-    (count = C.uint(C.uint(count)));
+    (count = C.uint(count));
     /* if count is 0 or bigger than itermonsiz or much smaller than
        itermonsiz, release itermonarr (and reset itermonsiz to 0) */
     if (((((!count || (count > C.itermonsiz)) ? 1 : 0) || (C.uint((count) + (40)) < C.itermonsiz)) ? 1 : 0)) {
         if (C.itermonarr)
-            C.free( C.itermonarr), (C.itermonarr = 0);
+            C.freeMonsterSnapshot(C.itermonarr), (C.itermonarr = 0);
         (C.itermonsiz = C.uint(0));
     }
     /* when count is more than itermonsiz (including when that just
@@ -4234,9 +4234,8 @@ function alloc_itermonarr(count)
     if ((count > C.itermonsiz)) {
         /* overallocate to reduce free/alloc-again thrashing when the
            number of monsters varies from turn to turn */
-        (C.itermonsiz = C.uint(C.uint((count) + (20))));
-        (C.itermonarr = C.alloc(
-                                        C.ulong((C.ulong(C.itermonsiz) * C.ulong(C.pointerSize)))));
+        (C.itermonsiz = C.uint((count) + (20)));
+        (C.itermonarr = C.nativeMonsterSnapshot(C.itermonsiz));
     }
 }
 
@@ -4312,7 +4311,7 @@ function get_iter_mons(bfunc)
 function get_iter_mons_xy(bfunc,x,y)
 
 {
-    (x = C.coordxy(C.coordxy(x))); (y = C.coordxy(C.coordxy(y)));
+    (x = C.coordxy(x)); (y = C.coordxy(y));
     let mtmp, mtmp2;
 
     for ((mtmp = C.fmon); mtmp; (mtmp = mtmp2)) {
@@ -4345,11 +4344,11 @@ function get_iter_mons_xy(bfunc,x,y)
 function healmon(mtmp,amt,overheal)
 
 {
-    (amt = C.int(C.int(amt))); (overheal = C.int(C.int(overheal)));
+    (amt = C.int(amt)); (overheal = C.int(overheal));
     if (C.samePtr(mtmp, C.gy.youmonst)) {
         let oldhp = C.int((C.Upolyd ? C.u.mh : C.u.uhp));
         C.healup(amt, 0, 0, 0);
-        return C.int(C.int(((C.Upolyd ? C.u.mh : C.u.uhp)) - (oldhp)));
+        return C.int(((C.Upolyd ? C.u.mh : C.u.uhp)) - (oldhp));
     } else {
         let oldhp = C.int(mtmp.mhp);
         if ((C.int((mtmp.mhp) + (amt)) > C.int((mtmp.mhpmax) + (overheal)))) {
@@ -4360,7 +4359,7 @@ function healmon(mtmp,amt,overheal)
             if ((mtmp.mhp > mtmp.mhpmax))
                 (mtmp.mhpmax = C.int(mtmp.mhp));
         }
-        return C.int(C.int((mtmp.mhp) - (oldhp)));
+        return C.int((mtmp.mhp) - (oldhp));
     }
 }
 
@@ -4443,7 +4442,7 @@ function restrap(mtmp)
 function maybe_unhide_at(x,y)
 
 {
-    (x = C.coordxy(C.coordxy(x))); (y = C.coordxy(C.coordxy(y)));
+    (x = C.coordxy(x)); (y = C.coordxy(y));
     let mtmp;
     let undetected = C.char(0), trapped = C.char(0);
 
@@ -4544,16 +4543,16 @@ function hide_monst(mon)
 
     if (((((C.is_hider(mon.data) || hider_under) ? 1 : 0) && !(((mon.mundetected || C.M_AP_TYPE(mon)) ? 1 : 0))) ? 1 : 0)) {
         let x = C.coordxy(mon.mx), y = C.coordxy(mon.my);
-        let save_viz = C.char(C.gv.viz_array[y][x]);
+        let save_viz = C.char(C.readVisibility(y,x));
 
         /* override vision, forcing hero to be unable to see monster's spot */
-        (C.gv.viz_array[y][x] = C.uchar((C.gv.viz_array[y][x]) & (~(C.int((C.IN_SIGHT) | (C.COULD_SEE))))));
+        (C.writeVisibility(y,x,C.uchar((C.readVisibility(y,x)) & (~(C.int((C.IN_SIGHT) | (C.COULD_SEE)))))));
         if (C.is_hider(mon.data))
             restrap(mon);
         /* try again if mimic missed its 1/3 chance to hide */
         if ((((mon.data.mlet == C.S_MIMIC) && !C.M_AP_TYPE(mon)) ? 1 : 0))
             restrap(mon);
-        (C.gv.viz_array[y][x] = C.uchar(save_viz));
+        (C.writeVisibility(y,x,C.uchar(save_viz)));
         if (hider_under)
             hideunder(mon);
     }
@@ -4594,12 +4593,12 @@ function pick_animal()
     if (!C.ga.animal_list)
         mon_animal_list(1);
     C.assert(!C.samePtr(C.ga.animal_list, 0), 6);
-    (res = C.int(C.ga.animal_list[C.rn2(C.ga.animal_list_count, 4862, "pick_animal")]));
+    (res = C.int(C.readAnimalList(C.rn2(C.ga.animal_list_count, 4862, "pick_animal"))));
     /* rogue level should use monsters represented by uppercase letters
        only, but since chameleons aren't generated there (not uppercase!)
        we don't perform a lot of retries */
     if (((C.Is_rogue_level(C.u.uz) && !C.isupper(C.monsym(C.mons[res]))) ? 1 : 0))
-        (res = C.int(C.ga.animal_list[C.rn2(C.ga.animal_list_count, 4867, "pick_animal")]));
+        (res = C.int(C.readAnimalList(C.rn2(C.ga.animal_list_count, 4867, "pick_animal"))));
     return C.int(res);
 }
 
@@ -4615,7 +4614,7 @@ function decide_to_shapeshift(mon)
         /* regular shapeshifter; 'ptr' is Null */
         if (((!mon.mspec_used && !C.rn2(6, 4881, "decide_to_shapeshift")) ? 1 : 0)) {
             (dochng = C.char(1));
-            (mon.mspec_used = C.int(C.int((3) + (C.rn2(10, 4883, "decide_to_shapeshift")))));
+            (mon.mspec_used = C.int((3) + (C.rn2(10, 4883, "decide_to_shapeshift"))));
         }
     } else if (!(C.ulong((C.ulong(mon.mstrategy) & C.ulong(C.STRAT_WAITFORU))))) {
         /* The vampire has to be in good health (mhp) to maintain
@@ -4717,7 +4716,7 @@ function isspecmon(mon)
 function validspecmon(mon,mndx)
 
 {
-    (mndx = C.int(C.int(mndx)));
+    (mndx = C.int(mndx));
     if ((mndx == C.NON_PM))
         return C.char(1); /* caller wants random */
 
@@ -4740,7 +4739,7 @@ function validspecmon(mon,mndx)
 function valid_vampshiftform(base,form)
 
 {
-    (base = C.int(C.int(base))); (form = C.int(C.int(form)));
+    (base = C.int(base)); (form = C.int(form));
     if ((((base >= C.LOW_PM) && C.is_vampire(C.mons[base])) ? 1 : 0)) {
         if ((((((form == C.PM_VAMPIRE_BAT) || (form == C.PM_FOG_CLOUD)) ? 1 : 0) || (((form == C.PM_WOLF) && (base != C.PM_VAMPIRE)) ? 1 : 0)) ? 1 : 0))
             return C.char(1);
@@ -4753,7 +4752,7 @@ function valid_vampshiftform(base,form)
 function validvamp(mon,mndx_p,monclass)
 
 {
-    (monclass = C.int(C.int(monclass)));
+    (monclass = C.int(monclass));
     /* simplify caller's usage */
     if (!C.is_vampshifter(mon))
         return C.char(validspecmon(mon, mndx_p.value));
@@ -4815,7 +4814,7 @@ function wiz_force_cham_form(mon)
     /* combine the two parts, not exceeding QBUFSZ-1 in overall length;
        if combined length is too long it has to be due to monster's
        name so we'll chop enough of that off to fit the second part */
-    if (((len = C.int(C.int((C.int(C.strlen(pprompt))) + (C.int(C.strlen(parttwo)))))) >= C.QBUFSZ))
+    if (((len = C.int((C.int(C.strlen(pprompt))) + (C.int(C.strlen(parttwo))))) >= C.QBUFSZ))
         /* strlen(parttwo) is less than QBUFSZ/2 so strlen(pprompt) is
            more than QBUFSZ/2 and excess amount being truncated can't
            exceed pprompt's length and back up to before &pprompt[0]) */
@@ -4827,7 +4826,7 @@ function wiz_force_cham_form(mon)
     do {
         if ((tryct == C.int((5) - (1)))) { /* first retry */
             /* change "into what?" to "into what kind of monster?" */
-            if ((C.ulong(C.ulong((C.ulong(C.ulong((C.ulong(C.strlen(pprompt)) + C.ulong(C.ulong(17))))) - C.ulong(1)))) < C.ulong(C.QBUFSZ)))
+            if ((C.ulong((C.ulong((C.ulong(C.strlen(pprompt)) + C.ulong(17))) - C.ulong(1))) < C.ulong(C.QBUFSZ)))
                 C.Strcpy(C.ptrOffset(C.eos(pprompt), -(1)), " kind of monster?");
         }
         (monclass = C.int(0));
@@ -4893,14 +4892,14 @@ function select_newcham_form(mon)
         } else if (C.rn2(3, 5169, "select_newcham_form")) { /* role monsters */
             (mndx = C.int(C.tt_doppel(mon)));
         } else if (!C.rn2(3, 5171, "select_newcham_form")) { /* quest guardians */
-            (mndx = C.int(C.int(C.int((C.rn2(C.int((C.int((C.PM_APPRENTICE) - (C.PM_STUDENT))) + (1)), 5172, "select_newcham_form")) + (C.PM_STUDENT)))));
+            (mndx = C.int((C.rn2(C.int((C.int((C.PM_APPRENTICE) - (C.PM_STUDENT))) + (1)), 5172, "select_newcham_form")) + (C.PM_STUDENT)));
             /* avoid own role's guardian */
             if ((mndx == C.gu.urole.guardnum))
                 (mndx = C.int(C.NON_PM));
         } else { /* general humanoids */
             (tryct = C.int(5));
             do {
-                (mndx = C.int(C.int(C.int((C.rn2(C.int((C.SPECIAL_PM) - (C.LOW_PM)), 5179, "select_newcham_form")) + (C.LOW_PM)))));
+                (mndx = C.int((C.rn2(C.int((C.SPECIAL_PM) - (C.LOW_PM)), 5179, "select_newcham_form")) + (C.LOW_PM)));
                 /* assert(ismnum(mndx)); */
                 if (((C.humanoid(C.mons[mndx]) && C.polyok(C.mons[mndx])) ? 1 : 0))
                     break;
@@ -4923,9 +4922,9 @@ function select_newcham_form(mon)
         let m_armr = C.which_armor(mon, C.W_ARM);
 
         if (((m_armr && C.Is_dragon_scales(m_armr)) ? 1 : 0))
-            (mndx = C.int(C.int(((C.Dragon_scales_to_pm(m_armr) - C.mons)))));
+            (mndx = C.int(((C.Dragon_scales_to_pm(m_armr) - C.mons))));
         else if (((m_armr && C.Is_dragon_mail(m_armr)) ? 1 : 0))
-            (mndx = C.int(C.int(((C.Dragon_mail_to_pm(m_armr) - C.mons)))));
+            (mndx = C.int(((C.Dragon_mail_to_pm(m_armr) - C.mons))));
       }
         break;
     }
@@ -4938,7 +4937,7 @@ function select_newcham_form(mon)
     if ((mndx == C.NON_PM)) {
         (tryct = C.int(50));
         do {
-            (mndx = C.int(C.int(C.int((C.rn2(C.int((C.SPECIAL_PM) - (C.LOW_PM)), 5217, "select_newcham_form")) + (C.LOW_PM)))));
+            (mndx = C.int((C.rn2(C.int((C.SPECIAL_PM) - (C.LOW_PM)), 5217, "select_newcham_form")) + (C.LOW_PM)));
             /* assert(ismnum(mndx); */
         } while (/* try harder to select uppercase monster on rogue level */
 (((((--tryct > 0) && !validspecmon(mon, mndx)) ? 1 : 0) && (((((tryct > 40) && C.Is_rogue_level(C.u.uz)) ? 1 : 0) && !C.isupper(C.monsym(C.mons[mndx]))) ? 1 : 0)) ? 1 : 0));
@@ -4950,7 +4949,7 @@ function select_newcham_form(mon)
 function accept_newcham_form(mon,mndx)
 
 {
-    (mndx = C.int(C.int(mndx)));
+    (mndx = C.int(mndx));
     let mdat;
 
     if ((mndx == C.NON_PM))
@@ -4997,7 +4996,7 @@ function mgender_from_permonst(mtmp,mdat)
 function newcham(mtmp,mdat,ncflags)
 
 {
-    (ncflags = C.uint(C.uint(ncflags)));
+    (ncflags = C.uint(ncflags));
     let polyspot = (C.char((C.uint((ncflags) & (C.NC_VIA_WAND_OR_SPELL)) != 0))),
             /* "The oldmon turns into a newmon!" */
             msg = (C.char((C.uint((ncflags) & (C.NC_SHOW_MSG)) != 0))),
@@ -5087,7 +5086,7 @@ function newcham(mtmp,mdat,ncflags)
     /* set level and hit points */
     C.newmonhp(mtmp, C.monsndx(mdat));
     /* new hp: same fraction of max as before */
-    (mtmp.mhp = C.int(C.int((C.long((C.long(C.long((C.long(C.long(hpn)) * C.long(C.long(mtmp.mhp))))) / C.long(C.long(hpd))))))));
+    (mtmp.mhp = C.int((C.long((C.long((C.long(hpn) * C.long(mtmp.mhp))) / C.long(hpd))))));
     /* sanity check (potential overflow) */
     if ((((mtmp.mhp < 0) || (mtmp.mhp > mtmp.mhpmax)) ? 1 : 0))
         (mtmp.mhp = C.int(mtmp.mhpmax));
@@ -5237,7 +5236,7 @@ function newcham(mtmp,mdat,ncflags)
         /* if hero is on Elbereth or scare monster, mtmp in new form might
            become scared */
         if (((((!mtmp.mpeaceful && C.onscary(mtmp.mux, mtmp.muy, mtmp)) ? 1 : 0) && monnear(mtmp, mtmp.mux, mtmp.muy)) ? 1 : 0))
-            C.monflee(mtmp, C.int(C.int((C.rn2(9, 5531, "newcham")) + (2))), 1, 1); /* 2..10 turns */
+            C.monflee(mtmp, C.int((C.rn2(9, 5531, "newcham")) + (2)), 1, 1); /* 2..10 turns */
     }
 
     return C.int(1);
@@ -5253,7 +5252,7 @@ function newcham(mtmp,mdat,ncflags)
 function can_be_hatched(mnum)
 
 {
-    (mnum = C.int(C.int(mnum)));
+    (mnum = C.int(mnum));
     /* ranger quest nemesis has the oviparous bit set, making it
        be possible to wish for eggs of that unique monster; turn
        such into ordinary eggs rather than forbidding them outright */
@@ -5274,7 +5273,7 @@ function can_be_hatched(mnum)
 function egg_type_from_parent(mnum,/* parent monster; caller must handle lays_eggs() check */ force_ordinary)
 
 {
-    (mnum = C.int(C.int(mnum))); (force_ordinary = C.char(C.boolean(force_ordinary)));
+    (mnum = C.int(mnum)); (force_ordinary = C.char(C.boolean(force_ordinary)));
     if (((force_ordinary || !(!C.rn2(77, 5573, "egg_type_from_parent"))) ? 1 : 0)) {
         if ((mnum == C.PM_QUEEN_BEE))
             (mnum = C.int(C.PM_KILLER_BEE));
@@ -5290,7 +5289,7 @@ function egg_type_from_parent(mnum,/* parent monster; caller must handle lays_eg
 function dead_species(m_idx,egg)
 
 {
-    (m_idx = C.int(C.int(m_idx))); (egg = C.char(C.boolean(egg)));
+    (m_idx = C.int(m_idx)); (egg = C.char(C.boolean(egg)));
     let alt_idx;
 
     /* generic eggs are unhatchable and have corpsenm of NON_PM */
@@ -5382,12 +5381,12 @@ function kill_genocided_monsters()
 function golemeffects(mon,damtype,dam)
 
 {
-    (damtype = C.int(C.int(damtype))); (dam = C.int(C.int(dam)));
+    (damtype = C.int(damtype)); (dam = C.int(dam));
     let heal = C.int(0), slow = C.int(0);
 
     if (C.samePtr(mon.data, C.mons[C.PM_FLESH_GOLEM])) {
         if ((damtype == C.AD_ELEC))
-            (heal = C.int(C.int((C.int((dam) + (5))) / (6))));
+            (heal = C.int((C.int((dam) + (5))) / (6)));
         else if ((((damtype == C.AD_FIRE) || (damtype == C.AD_COLD)) ? 1 : 0))
             (slow = C.int(1));
     } else if (C.samePtr(mon.data, C.mons[C.PM_IRON_GOLEM])) {
@@ -5480,7 +5479,7 @@ function pacify_guards()
 function mimic_hit_msg(mtmp,otyp)
 
 {
-    (otyp = C.coordxy(C.coordxy(otyp)));
+    (otyp = C.coordxy(otyp));
     let ap = C.coordxy(mtmp.mappearance);
 
     switch (C.M_AP_TYPE(mtmp)) {
@@ -5620,34 +5619,34 @@ function usmellmon(mdat)
 function check_gear_next_turn(mon)
 
 {
-    (mon.misc_worn_check = C.long(C.long(C.long(mon.misc_worn_check) | C.long(C.I_SPECIAL))));
+    (mon.misc_worn_check = C.long(C.long(mon.misc_worn_check) | C.long(C.I_SPECIAL)));
 }
 
 /* make erinyes more dangerous based on your alignment abuse */
 function adj_erinys(abuse)
 
 {
-    (abuse = C.uint(C.uint(abuse)));
+    (abuse = C.uint(abuse));
     let pm = C.mons[C.PM_ERINYS];
 
     if ((C.long(abuse) > C.long(5n))) {
-        (pm.mflags1 = C.ulong(C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_SEE_INVIS))));
+        (pm.mflags1 = C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_SEE_INVIS)));
     }
     if ((C.long(abuse) > C.long(10n))) {
-        (pm.mflags1 = C.ulong(C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_AMPHIBIOUS))));
+        (pm.mflags1 = C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_AMPHIBIOUS)));
     }
     if ((C.long(abuse) > C.long(15n))) {
-        (pm.mflags1 = C.ulong(C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_FLY))));
+        (pm.mflags1 = C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_FLY)));
     }
     if ((C.long(abuse) > C.long(20n))) {
         /* more powerful attack */
         (pm.mattk[0].damn = C.uchar(3));
     }
     if ((C.long(abuse) > C.long(25n))) {
-        (pm.mflags1 = C.ulong(C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_REGEN))));
+        (pm.mflags1 = C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_REGEN)));
     }
     if ((C.long(abuse) > C.long(30n))) {
-        (pm.mflags1 = C.ulong(C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_TPORT_CNTRL))));
+        (pm.mflags1 = C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_TPORT_CNTRL)));
     }
     if ((C.long(abuse) > C.long(35n))) {
         /* second attack */
@@ -5657,7 +5656,7 @@ function adj_erinys(abuse)
         (pm.mattk[1].damd = C.uchar(4));
     }
     if ((C.long(abuse) > C.long(40n))) {
-        (pm.mflags1 = C.ulong(C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_TPORT))));
+        (pm.mflags1 = C.ulong(C.ulong(pm.mflags1) | C.ulong(C.M1_TPORT)));
     }
     if ((C.long(abuse) > C.long(50n))) {
         /* third (spellcasting) attack */
@@ -5771,13 +5770,13 @@ function flash_mon(mtmp)
 {
     let mx = C.coordxy(mtmp.mx), my = C.coordxy(mtmp.my);
     let count = C.int((C.couldsee(mx, my) ? 8 : 4));
-    let saveviz = C.char(C.gv.viz_array[my][mx]);
+    let saveviz = C.char(C.readVisibility(my,mx));
 
     if (!C.flags.sparkle)
         (count = C.int((count) / (2)));
-    (C.gv.viz_array[my][mx] = C.uchar((C.gv.viz_array[my][mx]) | (C.int((C.IN_SIGHT) | (C.COULD_SEE)))));
+    (C.writeVisibility(my,mx,C.uchar((C.readVisibility(my,mx)) | (C.int((C.IN_SIGHT) | (C.COULD_SEE))))));
     C.flash_glyph_at(mx, my, C.mon_to_glyph(mtmp, C.newsym_rn2), count);
-    (C.gv.viz_array[my][mx] = C.uchar(saveviz));
+    (C.writeVisibility(my,mx,C.uchar(saveviz)));
     C.newsym(mx, my);
 }
 
