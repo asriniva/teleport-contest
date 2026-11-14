@@ -1,3 +1,46 @@
+## Native connected LIGHT graph and visibility rows (2026-11-14)
+
+All LIGHT policies now bind to one per-game native context, with lexical private
+calls, canonical monster/object identities, cached light nodes, typed visibility
+rows and cached immutable circle tables. Public LIGHT entries and native
+engine dependencies call directly. Pointer/ID union values preserve all 64 bits,
+including during save fixup. Scratch scalar/union values remain native until a
+real byte consumer requests an address; reference fields alias measured storage.
+
+Locations: `light.js`, `native/light-state.js`, generated `native/light.js` and
+`scripts/generate-native-light.mjs`. Original source policies and RNG order are
+retained. Light-node allocation and serialized bytes still use the shared arena;
+remaining foreign services retain explicit boundaries. This does not complete
+the ordinary-turn zero-bridge/zero-allocation gate or the required 20x goal.
+The existing `inventory-context` owner of `obj_sheds_light` is also switched to
+the native implementation (including its own argument preparation), instead of
+silently skipping it. Its previous source call used the inventory context,
+which lacked LIGHT's `ignitable` helper. Unexpected additional owners now fail
+explicitly. The test graph reader recognizes pre-relink LIGHT ID tags and
+compares their complete raw bits instead of interpreting them as actor pointers.
+
+Validation so far: original-source AST equality covers all 29 LIGHT policy
+bodies. 1,212 full-C comparisons across 105 actions cover actual camera flash,
+empty wizard light menus, source-created lamps/lanterns/candles/candelabrum with
+explicit quantity/age fixtures, real burn, source transfer, public stats out parameters, candle split/merge, gold dragon mail
+bless/curse brightness, luminous monsters, all `find_mid` flag combinations,
+heap growth and nonempty save/release/restore/relink (only observed serialized
+next links normalized). World graph, both full RNG states and ordered logs,
+terminal bytes and recording frames are compared after actions. Other artifacts,
+embedded scales, ghost mapping and nonempty debug menus remain unaccepted.
+Actual ordinary walk/wait/attack remains original-C equivalent. Generic calls
+fall from 12/30/61 to 10/29/59 and contexts from 21/47/97 to 17/45/93; C-heap
+allocations remain 30/160/101 and generic fields 6/13/40. Metadata and actual
+production wiring gates pass. All 23 public service native-entry identities and
+every generated LIGHT context member are checked explicitly. All 44 public
+recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors and 1,483
+animation frames match. All 828 scoring inputs stayed unchanged. The unprofiled
+Node 22 run took 281.351s versus the existing pushed glyph-value run's 282.874s,
+about 0.54% less time in separate single runs. This is a small change, not the
+required 20x or a controlled speedup. No baseline or CPU profiling was performed.
+Evidence: `docs/runtime-environment/native-light-validation.json` and
+`native-light-public44-manifest.json`.
+
 ## Native glyph values across display and terminal calls (2026-11-14)
 
 The generated native DISPLAY policies now create JS value records for the four

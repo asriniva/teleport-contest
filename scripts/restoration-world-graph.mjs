@@ -53,7 +53,7 @@ export function worldGraph({module,environment}){
    assert.equal(ptr(at),0,'inactive object union must be zero '+path);return {inactive:where,raw:'0000000000000000'};
   }
   if(name==='any'){
-   let pointee;if(path.endsWith('.id')){const kind=view.getInt16(owner+records.ls_t.fields.type.offset,true);pointee=kind===1?'struct obj':kind===2?'struct monst':null;}
+   let pointee;if(path.endsWith('.id')){const kind=view.getInt16(owner+records.ls_t.fields.type.offset,true);if(view.getInt16(owner+records.ls_t.fields.flags.offset,true)&2){assert.ok(kind===1||kind===2,'known LIGHT fixup ID domain');for(let i=0;i<8;i++)scalarMasks.set(at+i,255);return {lightFixupType:kind,idBits:view.getBigUint64(at,true).toString(16)};}pointee=kind===1?'struct obj':kind===2?'struct monst':null;}
    if(path.endsWith('.arg')){const kind=view.getInt16(owner+records.fe.fields.kind.offset,true);pointee=kind===3?'struct obj':kind===4?'struct monst':null;}
    if(pointee)return target(ptr(at),pointee,path);assert.equal(ptr(at),0,'unsupported nonempty union '+path);return {zero:true};
   }
