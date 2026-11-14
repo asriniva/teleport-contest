@@ -1,3 +1,20 @@
+## Browser recorder host boundary (2026-11-14)
+
+The production standalone recorder no longer imports Node filesystem/path/URL
+modules or reads layout JSON through readFileSync. It imports the bundled layout
+as JSON, like the existing bundled game assets. Persistent state still uses the
+unchanged frozen storage.js VFS. Optional local data overrides and diagnostic
+files move to standalone-recorder-node.js, dynamically imported only under Node
+when explicitly configured. Browser timezone and worker detection tolerate the
+absence of process. Engine policy and recording format are unchanged.
+
+The browser-boundary regression test removes process and rejects every node:
+module import while replaying both segments of the Friday13 save/fullmoon restore
+recording: seven checks pass, including exact screens, cursors, ordered RNG and
+VFS state persistence. This models browser capabilities under Node24; an actual
+browser UI run is not claimed. Previous Node-only replay checks missed this host
+compatibility defect. Full candidate timing is recorded separately.
+
 ## Restore native display and window verification (2026-11-14)
 
 Two previously omitted checker updates are restored without changing runtime
