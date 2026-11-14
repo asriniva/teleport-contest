@@ -37,6 +37,7 @@ export function createCTypes(memory,metadata,bitfields,aliases={}) {
         if(type.includes('*'))return 8;
         if(type.startsWith('enum ')){if(!metadata.enums[type])throw new Error('Unmeasured C enum '+type);return metadata.enums[type].size;}
         if(scalars[type])return Number(scalars[type].match(/\d+/)[0])/8;
+        if(metadata.opaqueScalars?.[type])return metadata.opaqueScalars[type].size;
         return record(type).size;
     }
     const scalarLoads=new Map(Object.entries(scalars).map(([name,scalar])=>[name,'get'+scalar]));
@@ -81,6 +82,7 @@ export function createCTypes(memory,metadata,bitfields,aliases={}) {
         const name=recordName(type),definition=recordDefinition(name),field=definition.fields[key];
         if(!field)throw new Error('Unmeasured C field '+type+'.'+key);
         const pos=address(at)+field.offset;
+        if(field.storageType)return load(field.storageType,pos);
         if(field.record)return BigInt(pos);
         if(field.bits!==undefined)return bitfields.get(Object.prototype.propertyIsEnumerable.call(definition,'type')?definition.type:name,key,at);
         return load(scalar,pos);
@@ -89,6 +91,7 @@ export function createCTypes(memory,metadata,bitfields,aliases={}) {
         const name=recordName(type),definition=recordDefinition(name),field=definition.fields[key];
         if(!field)throw new Error('Unmeasured C field '+type+'.'+key);
         const pos=address(at)+field.offset;
+        if(field.storageType)return store(field.storageType,pos,value);
         if(field.record)return memory.memmove(pos,address(value),record(field.record).size);
         if(field.bits!==undefined)return bitfields.set(Object.prototype.propertyIsEnumerable.call(definition,'type')?definition.type:name,key,at,value);
         return store(scalar,pos,value);

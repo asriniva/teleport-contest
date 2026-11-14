@@ -15,6 +15,9 @@ export function createNativeAbiCaster(ctypes,transport,pointer){
   let cast,legacy;
   if(type.includes('*'))cast=pointer;
   else if(type==='void')cast=()=>undefined;
+  else if(type==='float')cast=value=>Math.fround(Number(value));
+  else if(type==='double')cast=Number;
+  else if(type==='long double')throw new TypeError('Opaque alignment storage has no native numeric ABI: '+type);
   else if(type==='char'||type==='signed char'){cast=v=>v<<24>>24;legacy=transport.char;}
   else if(type==='unsigned char'){cast=v=>v&255;legacy=transport.uchar;}
   else if(type==='short'){cast=v=>v<<16>>16;legacy=transport.short;}

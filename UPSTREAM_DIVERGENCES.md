@@ -1,3 +1,36 @@
+## Complete record-type audit and supplemental measured declarations (2026-11-13)
+
+The follow-on census checks every shared record-field type, rather than only
+function prototypes and selected field tables. It found 13 unresolved fields:
+eleven anonymous struct/union types in Lua and signal records, plus two
+`long double` alignment fields. `supplemental-record-layouts.json` supplies the
+16 anonymous records (45 fields) needed by those eleven types and their nested
+dependencies. `export-supplemental-record-layouts.py` obtains layouts from the
+same configured wasm64 clang, checks all existing affected parent layouts and
+records header/compiler/define hashes. No offsets, sizes or widths are guessed.
+`c-types.js` merges these definitions before aggregate classification.
+
+The generic type engine recognizes measured opaque scalar storage and preserves
+all 16 bytes for the two alignment-only `long double` fields. Their loads expose
+storage addresses and stores copy bytes, as at aggregate memory boundaries.
+This adds no float128 arithmetic or numeric conversions; native numeric ABI
+conversion explicitly rejects opaque alignment storage. Ordinary native
+`float`/`double` conversion also had a separate latent bug: it used integer casts.
+`native/execution.js` now uses float32 rounding and Number conversion respectively.
+Fractional values, negative zero, NaN and infinities are tested.
+
+`check-all-record-field-types.mjs`, also invoked by the normal metadata gate,
+resolves all 3,202 fields in all 396 record types. It tests supplemental field
+offsets, whole-record byte copies, native views, opaque alignment storage and
+floating conversion. This does not substitute for gameplay branch coverage.
+No source game policies, C sources, RNG calls, input/capture or timeout settings
+change. Focused Node 24 and scoring Node 22 checks pass (123 checks each), as
+do 2,261 alias/aggregate checks, 478 runtime field contracts, numeric/coercion
+contracts, 1,931 SDK checks, actual gameplay, original-C ordinary-turn equivalence
+and all 32 production ice/lava cases. Public 44-recording verification for this
+new candidate is pending; bf908bc's 44/44 does not validate it. Receipt:
+`docs/runtime-environment/complete-record-types-validation.json`.
+
 ## Shared header field aliases and aggregate classification (2026-11-13)
 
 The leaderboard stack in `bindings/mkmap.js:62` is reproducible as an actual

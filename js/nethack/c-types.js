@@ -1,3 +1,4 @@
+import supplemental from './supplemental-record-layouts.json' with {type:'json'};
 // Compatibility entry supplies NetHack declarations to the generic type engine.
 import {createCTypes as createTypes} from '../c-runtime/types.js';
 import {typeAliases,fieldAliases} from './declarations.js';
@@ -18,7 +19,18 @@ export function withNetHackEnums(metadata) {
     // Apply header member aliases to the same measured descriptors used by
     // the type engine, bitfield engine and native record views. Do not mutate
     // compiler metadata or invent offsets/widths for aliases.
-    const records={...metadata.records};
+    if(metadata.compilerSha256&&metadata.compilerSha256!==supplemental.compilerSha256)throw new Error('Conflicting supplemental record compiler');
+    for(const [type,measured]of Object.entries(supplemental.records)){
+        const existing=metadata.records[type];if(!existing)continue;
+        if(existing.size!==measured.size||existing.alignment!==measured.alignment||Object.keys(existing.fields).length!==Object.keys(measured.fields).length)throw new Error('Conflicting supplemental record '+type);
+        for(const [name,field]of Object.entries(measured.fields))if(!existing.fields[name]||['offset','ctype','bits','shift'].some(key=>existing.fields[name][key]!==field[key]))throw new Error('Conflicting supplemental field '+type+'.'+name);
+    }
+    const records={...supplemental.records,...metadata.records};
+    const opaqueScalars={...metadata.opaqueScalars};
+    for(const [type,plan]of Object.entries(supplemental.opaqueScalars)){
+        const existing=opaqueScalars[type];if(existing&&(existing.size!==plan.size||existing.alignment!==plan.alignment))throw new Error('Conflicting measured opaque storage '+type);
+        opaqueScalars[type]=plan;
+    }
     const recordType=type=>{
         type=type.replace(/\b(?:const|volatile|restrict)\b/g,'').trim().replace(/\s+/g,' ');
         const seen=new Set();while(!seen.has(type)){seen.add(type);const next=metadata.aliases?.[type]??typeAliases[type];if(!next)break;type=next;}
@@ -29,6 +41,7 @@ export function withNetHackEnums(metadata) {
         let fields;
         for(const [name,field]of Object.entries(row.fields)){
             const declared=field.ctype.replace(new RegExp('\\b'+name+'$'),'').trim(),target=recordType(declared);
+            if(opaqueScalars[declared]){fields??={...row.fields};fields[name]={...field,storageType:declared};continue;}
             if(!records[target])continue;
             if(field.record&&field.record!==target)throw new Error('Conflicting measured record field '+type+'.'+name);
             if(!field.record){fields??={...row.fields};fields[name]={...field,record:target};}
@@ -55,7 +68,7 @@ export function withNetHackEnums(metadata) {
         }
         records[type]={...row,fields};
     }
-    const result={...metadata,records,enums};enriched.set(metadata,result);return result;
+    const result={...metadata,records,enums,opaqueScalars};enriched.set(metadata,result);return result;
 }
 export function createCTypes(memory,metadata,bitfields) {
     // A direct caller may supply a bitfield driver built from raw compiler
