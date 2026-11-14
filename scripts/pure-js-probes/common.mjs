@@ -14,7 +14,7 @@ export async function environment(options={}){
 }
 export function probeModule(env,methods){
  const result={pureJS:true,environment:env,get HEAPU8(){return env.memory.HEAPU8;}};
- const all={_probe_stack(){const mark=env.transport.stackSave();try{return mark.index;}finally{env.transport.stackRestore(mark);}},_malloc:n=>BigInt(env.memory.malloc(Number(n))),_free:p=>env.memory.free(Number(p)),...methods};
+ const all={_probe_stack(){const position=env.transport.stackPosition();assert.notEqual(position,undefined,'real stack position');return position;},_malloc:n=>BigInt(env.memory.malloc(Number(n))),_free:p=>env.memory.free(Number(p)),...methods};
  for(const[name,fn]of Object.entries(all))result[name]=(...args)=>withoutWasm(()=>fn(...args));
  return result;
 }

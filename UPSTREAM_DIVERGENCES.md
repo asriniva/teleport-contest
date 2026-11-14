@@ -1,3 +1,55 @@
+## Direct entries for connected address-engine calls (2026-11-14)
+
+Generated fixed-argument entries remove repeated binding invocations and argument
+packing from already prepared native command, inventory, display, map, shop,
+object, tool, prayer and level execution. All 1,163 fixed source declarations in
+14 existing modules have plans derived from source/ABI metadata. Initial calls,
+foreign providers, calls outside native execution and arity mismatches keep the
+checked adapter; public pointer result conventions remain intact. Explicit
+provider identities prevent callbacks from inheriting foreign services. MKLEV,
+MKMAZE and DOTHROW now keep stable forwarding providers rather than changing
+environment prototypes on every call, and restore providers on reentry/error.
+Native command callbacks stay native; foreign command callbacks retain an
+explicit boundary. Shared byte-oriented state/field plans and normalization at
+necessary edges remain. No new metadata authority or WebAssembly is introduced.
+
+All 44 recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors and
+1,483 animation frames match. The 868-file receipt has no source changes. Elapsed
+time is 256.5851s versus the prior pushed 267.9833s: 4.25% lower in this candidate
+run. This does not establish the required 20x or 40–55s result. No new baseline
+or CPU profiling was performed. Actual ordinary walk/wait/attack match original C
+and use 65/101/165 fast entries. They still make 5/12/30 generic calls and
+14/27/34 heap allocations; the complete-turn acceptance gate remains false.
+
+All 14 original-C component suites pass with their controlled dependency worlds.
+Fixed entry probes pass 17,460 checks, including all arities, ordered plans,
+foreign/cold/outside/extra-argument fallback, actual registered wrapper dispatch,
+checked arity failure without recursion and provider restoration. Native field
+plans pass 42,569 checks over 2,603 fields. Source inversion preserves every one
+of the 1,163 functions/23,489 operations, all original namespace exports and four
+native glyph allocations. Command callback checks cover 46 signatures/175 checks;
+25 production window bindings pass 100 dispatches/50 bad-target rejections, and
+all 43 dynamic sites resolve. Original-C inventory/save/restore, travel and jump
+journeys and browser save/restore with Node capabilities blocked pass.
+
+Broader checking found a preexisting missing DISPLAY byte fallback: lowered
+C.nativeLocalRecord existed only for native owners. It now uses the original
+measured stack allocation in byte-only contexts, while native glyph storage is
+unchanged with its required capabilities. The initial DISPLAY suite failed;
+a cache-isolated fix and then the actual fixed worktree pass its complete suite.
+Native/byte glyph checks pass 71 comparisons, including warm-arena materialization,
+aliases, lifetime and growth. Previous stack tests also read obsolete mark.index
+values after marks became numeric, making those comparisons vacuous. An explicit
+stackPosition API now reports actual cursor/reservation positions; affected
+probes/callback/ABI checks use it, with allocation/rewind checks of the API itself.
+ABI discovery now accepts both Error constructor forms and explicitly covers
+18 owners/5,712 rejection cases, preserving LIGHT and adding previously omitted
+BALL. Old staged startup/persistence scripts have corrected observations but
+were not rerun as full staged workflows; current combined C command/save/restore
+journeys were exercised. These finite checks do not establish all game branches.
+Full receipts, source hashes and limits are in native-address-execution-validation.json
+and native-address-execution-public44-manifest.json under docs/runtime-environment.
+
 ## Native marker-to-recording frame capture (2026-11-14)
 
 Production TERMCAP marker capture serializes existing NOMUX cells directly into

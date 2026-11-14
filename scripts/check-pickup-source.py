@@ -36,7 +36,7 @@ assert s['ownedFunctionPointers']==['all_but_uchain','allow_all','allow_category
 assert s['nativeFunctionPointers']==['Yname2','Ysimple_name2','ansimpleoname','doforce','doname','is_worn','yname','ysimple_name']
 assert j.count('const __old=')==61 and 'C.sizes["struct mi"]'in j and 'C.sizes["struct sortloot_item"]'in j
 assert 'const states=new WeakMap()'in runtime and 'finally{services.stackRestore(stackFrame);}'in runtime
-assert 'const forwarding=new Proxy(Object.create(null)'in runtime and 'state.env=createPickupEnvironment(forwarding)'in runtime and 'finally{state.services=previous;}'in runtime
+assert 'const forwarding=createServiceForwarder(state)'in runtime and "import {createServiceForwarder} from '../../c-runtime/service-scope.js';"in runtime and 'state.env=createPickupEnvironment(forwarding)'in runtime and 'finally{state.services=previous;}'in runtime
 assert 'Object.setPrototypeOf'not in runtime and 'initializePickup'not in runtime
 # Compiler computation types govern compound operations independently of the
 # stored lvalue type. Audit every configured body, not a text-only int/long seam.

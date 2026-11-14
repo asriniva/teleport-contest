@@ -2730,5 +2730,5 @@ function green_mon(mon)
 /*muse.c*/
 const initialState=C=>({});
 
-return Object.freeze({precheck,mzapwand,mplayhorn,mreadmsg,mquaffmsg,m_use_healing,m_sees_sleepy_soldier,m_tele,m_next2m,find_defensive,reveal_trap,mon_escape,use_defensive,rnd_defensive_item,linedup_chk_corpse,m_use_undead_turning,hero_behind_chokepoint,mon_has_friends,mon_likes_objpile_at,find_offensive,mbhitm,fhito_loc,mbhit,buzz_force_miss,use_offensive,rnd_offensive_item,find_misc,muse_newcham_mon,mloot_container,use_misc,you_aggravate,rnd_misc_item,searches_for_item,mon_reflects,ureflects,mcureblindness,munstone,mon_consume_unstone,cures_stoning,mcould_eat_tin,munslime,muse_unslime,cures_sliming,green_mon,initialState});
+return C.nativeAddressNamespaceReady(Object.freeze({precheck,mzapwand,mplayhorn,mreadmsg,mquaffmsg,m_use_healing,m_sees_sleepy_soldier,m_tele,m_next2m,find_defensive,reveal_trap,mon_escape,use_defensive,rnd_defensive_item,linedup_chk_corpse,m_use_undead_turning,hero_behind_chokepoint,mon_has_friends,mon_likes_objpile_at,find_offensive,mbhitm,fhito_loc,mbhit,buzz_force_miss,use_offensive,rnd_offensive_item,find_misc,muse_newcham_mon,mloot_container,use_misc,you_aggravate,rnd_misc_item,searches_for_item,mon_reflects,ureflects,mcureblindness,munstone,mon_consume_unstone,cures_stoning,mcould_eat_tin,munslime,muse_unslime,cures_sliming,green_mon,initialState}),C);
 }

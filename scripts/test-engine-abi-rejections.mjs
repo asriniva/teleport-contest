@@ -8,7 +8,7 @@ for(const name of fs.readdirSync('js/nethack').filter(name=>name.endsWith('.js')
  const file='js/nethack/'+name,source=fs.readFileSync(file,'utf8');
  // Select only the simple, early, named-field ABI guard. Unsupported factory
  // shapes are reported by the coverage inventory, never silently called tested.
- const abiImport=source.match(/import\s+abi\s+from\s*['"]([^'"]+)['"]/),factory=source.match(/export function (enable\w+)\(environment,layouts\)/),layout=source.match(/\bL=layouts\.(\w+)/),guard=source.match(/for\s*\(\s*const\s*\[k,v\]\s*of\s*Object\.entries\(abi\.layout\)\s*\)\s*if\s*\(L\[k\]!==v\)\s*throw new Error\((['"])(.*?)\1\s*\+\s*k\)/);
+ const abiImport=source.match(/import\s+abi\s+from\s*['"]([^'"]+)['"]/),factory=source.match(/export function (enable\w+)\(environment,layouts\)/),layout=source.match(/\bL=layouts\.(\w+)/),guard=source.match(/for\s*\(\s*const\s*\[k,v\]\s*of\s*Object\.entries\(abi\.layout\)\s*\)\s*if\s*\(L\[k\]!==v\)\s*throw\s+(?:new\s+)?Error\((['"])(.*?)\1\s*\+\s*k\)/);
  if(!abiImport||!factory||!layout||!guard)continue;
  const abi=JSON.parse(fs.readFileSync(path.resolve(path.dirname(file),abiImport[1]))),profile=layout[1],enable=(await import(pathToFileURL(path.resolve(file))))[factory[1]],env=createStandaloneEnvironment();
  if(profile==='dbridge'){
@@ -20,7 +20,7 @@ for(const name of fs.readdirSync('js/nethack').filter(name=>name.endsWith('.js')
   env.enableGameStartup(layouts);env.enableHeroStartup(layouts);env.enableWorldPosition(layouts);
  }
  assert.ok(Object.keys(abi.layout).length);owners++;
- function stack(){const mark=env.transport.stackSave();try{return mark.index;}finally{env.transport.stackRestore(mark);}}
+ function stack(){const position=env.transport.stackPosition();assert.notEqual(position,undefined);return position;}
  const before=stack(),buffer=env.memory.HEAPU8.buffer;
  for(const [field,value]of Object.entries(abi.layout)){
   assert.deepEqual(layouts[profile][field],value,'configured C ABI baseline '+file+':'+field);
@@ -32,6 +32,6 @@ for(const name of fs.readdirSync('js/nethack').filter(name=>name.endsWith('.js')
  }
  inventory.push({file,profile,factory:factory[1],fields:Object.keys(abi.layout).length});
 }
-assert.equal(owners,17,'review discovery changes explicitly');assert.ok(contracts>1000);
+assert.deepEqual(inventory.map(row=>row.file),['ball','dbridge','dig','dogmove','dokick','exper','getpos','light','lock','mhitm','mhitu','mkmap','mthrowu','read','rip','spell','uhitm','utf8map'].map(name=>'js/nethack/'+name+'.js'),'review discovery changes explicitly');assert.equal(owners,18);assert.ok(contracts>1000);
 fs.mkdirSync('.cache/engine-abi-rejections',{recursive:true});fs.writeFileSync('.cache/engine-abi-rejections/evidence.json',JSON.stringify({owners,contracts,inventory,scope:'Malformed measured-ABI JS boundary contracts, not original-C game-policy cases.'},null,2)+'\n');
 console.log('PASS:'+contracts+' single-field ABI rejection contracts across'+owners+' production owners; exact diagnostics, stack/context restoration and no heap growth; Wasm/network unavailable.');

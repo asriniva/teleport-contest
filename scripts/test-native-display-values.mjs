@@ -1,3 +1,4 @@
+import {installNativeDisplayValues} from '../js/nethack/native/display-values.js';
 // Production native glyph values: widths, aliasing, lifetime and foreign windows.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -9,7 +10,17 @@ let e;runStandaloneProgram('.cache/full-original-c-v1/assets',{keys:'',observeRu
 const owner=nativeStateFor(e),t=e.transport,m=e.memory,views=owner.nativeRecords;
 const values=createNativeValueRecords({...e,nativeRecords:views},t.stackAlloc);
 let checks=0;const eq=(a,b)=>{assert.deepEqual(a,b);checks++;};
-const mark=t.stackSave(),before=m.live.size,v=values.local('struct glyphinfo');
+// The same lowered source must remain connected in byte-only contexts.
+for(const nativeOwner of [undefined,owner]){
+ const legacy={sizes:{'struct glyphinfo':48}},sizes=[],saved=t.stackSave();
+ installNativeDisplayValues(legacy,{nativeOwner,stackAlloc:n=>{sizes.push(n);return t.stackAlloc(n);}},{},()=>{});
+ const at=legacy.nativeLocalRecord('struct glyphinfo');eq(typeof at,'number');m.bounds(at,48);eq(sizes,[48]);
+ m.view.setInt32(at,0x12345678,true);eq(m.view.getInt32(at,true),0x12345678);
+ assert.throws(()=>legacy.nativeLocalRecord('unknown record'),/Unknown display local record/);checks++;
+ t.stackRestore(saved);
+}
+const mark=t.stackSave(),before=m.live.size,beforePosition=t.stackPosition(),v=values.local('struct glyphinfo');
+const reservedPosition=t.stackPosition();assert.notEqual(reservedPosition,beforePosition);checks++;
 eq(m.live.size,before);eq(v.read('glyph'),0);
 for(const n of [0n,1n,-1n,0x7fffffffffffffffn,-0x8000000000000000n,0x100000001n]){
  v.write('glyph',n);eq(v.read('glyph'),Number(BigInt.asIntN(32,n)));
@@ -20,7 +31,7 @@ for(const n of [0n,1n,-1n,0x7fffffffffffffffn,-0x8000000000000000n,0x100000001n]
 }
 eq(m.live.size,before);
 const frame=()=>v.field('framecolor').value;v.write('framecolor',123);eq(frame(),123);v.field('framecolor').value=456;eq(v.read('framecolor'),456);
-const nested=t.stackSave(),at=v.address;eq(m.live.size,before+1);t.stackRestore(nested);
+const nested=t.stackSave();eq(v.root.at,undefined);const at=v.address;eq(v.root.at,at);eq(m.live.size,before);eq(t.stackPosition(),reservedPosition);t.stackRestore(nested);
 eq(v.address,at);const physical=views.record('struct glyphinfo',at);
 physical.glyph=123;eq(v.read('glyph'),123);v.write('glyph',456);eq(physical.glyph,456);
 const other=values.local('struct glyphinfo');values.copy(other,at,e.ctypes.size('struct glyphinfo'));eq(other.read('glyph'),456);
@@ -36,6 +47,6 @@ callbacks.invokeCaptured('win_print_glyph',signature,token,1,2,3,v,other);
 eq(invoked,1);eq(other.read('glyph'),789);
 const oldBuffer=m.HEAPU8.buffer;m.grow(m.HEAPU8.byteLength+65536);assert.notEqual(m.HEAPU8.buffer,oldBuffer);checks++;
 eq(v.read('glyph'),456);eq(other.read('glyph'),789);
-t.stackRestore(mark);eq(m.live.has(at),false);assert.throws(()=>v.read('glyph'),/Expired/);checks++;assert.throws(()=>other.address,/Expired/);checks++;
-fs.mkdirSync('.cache/native-display-values',{recursive:true});fs.writeFileSync('.cache/native-display-values/values.json',JSON.stringify({checks,scope:'Source-initialized production runtime; exact integer widths including extreme BigInts, nested copies/aliasing, zero C allocations before address acquisition, declaring-frame deferred lifetime, foreign win_print_glyph token materialization and writeback, memory growth and expired references.'},null,2));
+t.stackRestore(mark);eq(t.stackPosition(),beforePosition);eq(m.live.size,before);assert.throws(()=>v.read('glyph'),/Expired/);checks++;assert.throws(()=>other.address,/Expired/);checks++;
+fs.mkdirSync('.cache/native-display-values',{recursive:true});fs.writeFileSync('.cache/native-display-values/values.json',JSON.stringify({checks,scope:'Source-initialized production runtime; byte-only fallback with/without owner, warm-arena materialization without heap allocation, explicit stack position/lifetime expiry; exact integer widths including extreme BigInts, nested copies/aliasing, zero C allocations before address acquisition, declaring-frame deferred lifetime, foreign win_print_glyph token materialization and writeback, memory growth and expired references.'},null,2));
 console.log('PASS native display values '+checks);

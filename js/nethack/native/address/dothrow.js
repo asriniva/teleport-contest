@@ -2495,5 +2495,5 @@ const dothrowStaticInitializers = C => [
     {name:"addluck",type:"char[12]",size:(1*12),values:C.literal(" gratefully")},
 ];
 
-return Object.freeze({multishot_class_bonus,throw_obj,ok_to_throw,throw_ok,dothrow,autoquiver,find_launcher,dofire,endmultishot,hitfloor,walk_path,hurtle_jump,hurtle_step,will_hurtle,mhurtle_step,hurtle,mhurtle,check_shop_obj,harmless_missile,toss_up,throwing_weapon,sho_obj_return_to_u,throwit_return,swallowit,throwit_mon_hit,throwit,return_throw_to_inv,omon_adj,tmiss,should_mulch_missile,thitmonst,gem_accept,hero_breaks,breaks,release_camera_demon,breakobj,breaktest,breakmsg,throw_gold,dothrowStaticInitializers});
+return C.nativeAddressNamespaceReady(Object.freeze({multishot_class_bonus,throw_obj,ok_to_throw,throw_ok,dothrow,autoquiver,find_launcher,dofire,endmultishot,hitfloor,walk_path,hurtle_jump,hurtle_step,will_hurtle,mhurtle_step,hurtle,mhurtle,check_shop_obj,harmless_missile,toss_up,throwing_weapon,sho_obj_return_to_u,throwit_return,swallowit,throwit_mon_hit,throwit,return_throw_to_inv,omon_adj,tmiss,should_mulch_missile,thitmonst,gem_accept,hero_breaks,breaks,release_camera_demon,breakobj,breaktest,breakmsg,throw_gold,dothrowStaticInitializers}),C);
 }

@@ -43,7 +43,7 @@ for(const[name,{schema}]of Object.entries(ports)){
  if(name==='display'){assert.throws(()=>invert(call(member(identifier('C'),'nativeLocalRecord'),[literal('struct monst')])),/Unexpected native display value allocation/);assert.throws(()=>invert(call(member(identifier('C'),'nativeLocalRecord'),[literal('struct glyphinfo'),literal(1)])),/Unexpected native display value allocation/);}
  const factory=next.body[0].declaration;assert.equal(factory.id.name,'createNativeAddressNamespace');
  const actual=factory.body.body.filter((n,i,all)=>{
-  if(i===all.length-1){assert.equal(n.type,'ReturnStatement');return false;}
+  if(i===all.length-1){assert.equal(n.type,'ReturnStatement');assert.equal(n.argument.callee.object.name,'C');assert.equal(n.argument.callee.property.name,'nativeAddressNamespaceReady');assert.equal(n.argument.arguments.length,2);assert.equal(n.argument.arguments[1].name,'C');assert.equal(n.argument.arguments[0].callee.object.name,'Object');assert.equal(n.argument.arguments[0].callee.property.name,'freeze');assert.equal(n.argument.arguments[0].arguments.length,1);const exported=n.argument.arguments[0].arguments[0];assert.equal(exported.type,'ObjectExpression');const names=old.body.filter(x=>x.type==='ExportNamedDeclaration').flatMap(x=>x.declaration.id?[x.declaration.id.name]:x.declaration.declarations.map(d=>d.id.name));assert.deepEqual(exported.properties.map(p=>{assert.equal(p.type,'Property');assert.equal(p.shorthand,true);assert.equal(p.computed,false);assert.equal(p.key.name,p.value.name);return p.key.name;}),names,'every original namespace export stays connected');return false;}
   if(n.type==='VariableDeclaration'&&n.declarations.every(d=>d.id.name==='NF'||/^(?:[RWA]|NWC)\d+$/.test(d.id.name)))return false;
   return true;
  });

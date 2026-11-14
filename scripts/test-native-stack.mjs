@@ -6,7 +6,8 @@ let checks=0;const eq=(a,b)=>{assert.deepEqual(a,b);checks++;},throws=(fn,re)=>{
 const memory=new CMemory({initialBytes:128,maximumBytes:4*1024*1024});let allocations=0;
 const malloc=memory.malloc.bind(memory);memory.malloc=n=>{allocations++;return malloc(n);};
 const C=createMemoryServices(memory,{nativeStack:true}),outer=C.stackSave();
-const reserve=C.stackAlloc.reserve(8);eq(allocations,0);
+const initialPosition=C.stackPosition();assert.notEqual(initialPosition,undefined);
+const reserve=C.stackAlloc.reserve(8);assert.notEqual(C.stackPosition(),initialPosition);checks+=2;eq(allocations,0);
 const nested=C.stackSave(),temporary=C.stackAlloc(32),parent=reserve();C.storeInt(parent,123);C.storeInt(temporary,-456);C.stackRestore(nested);eq(C.read('Int32',parent),123);throws(()=>C.stackRestore(nested),/Invalid/);
 const reused=C.stackAlloc(32);eq(reused,temporary);eq(C.read('Int32',reused),-456);
 const allocationCount=allocations;for(let i=0;i<10000;i++)C.scoped(()=>{const at=C.stackAlloc(128);C.storeInt(at,i);eq(C.read('Int32',at),i);});eq(allocations,allocationCount);const loopHeapAllocations=allocations-allocationCount;
@@ -18,7 +19,7 @@ const m1=C.stackSave(),m2=C.stackSave();C.stackRestore(m1);throws(()=>C.stackRes
 throws(()=>C.scoped(()=>{C.stackAlloc(64);throw Error('unwind');}),/unwind/);
 const mark=C.stackSave(),initialized=C.stackAlloc(4);C.storeInt(initialized,0x12345678);C.stackRestore(mark);eq(C.stackAlloc(4),initialized);eq(C.read('Int32',initialized),0x12345678);
 for(const n of [-1,1.25,NaN,Infinity,Number.MAX_SAFE_INTEGER])throws(()=>C.stackAlloc(n),/allocation failed/);
-C.stackRestore(outer);throws(()=>reserve(),/Expired/);throws(()=>C.stackRestore({index:0}),/Invalid/);
+C.stackRestore(outer);eq(C.stackPosition(),initialPosition);throws(()=>reserve(),/Expired/);throws(()=>C.stackRestore({index:0}),/Invalid/);
 const smallMemory=new CMemory({initialBytes:64,maximumBytes:128}),small=createMemoryServices(smallMemory,{nativeStack:true}),sm=small.stackSave(),first=small.stackAlloc(16);eq(first>=16,true);throws(()=>small.stackAlloc(1024),/allocation failed/);small.stackRestore(sm);eq(small.stackAlloc(16),first);
 const evidence={passed:true,checks,heapAllocationsFor10000Scopes:loopHeapAllocations,scope:'Reusable arena with nested/out-of-order/stale/foreign marks, 10000 temporary scopes, delayed parent reservations materialized in children, chunk rollover, memory growth, exception unwinding, retained uninitialized bytes, invalid sizes, constrained memory and lifetime expiry. Heap allocations for the loop asserted zero before later growth tests.'};
 fs.mkdirSync('.cache/native-stack',{recursive:true});fs.writeFileSync('.cache/native-stack/evidence.json',JSON.stringify(evidence,null,2));console.log(JSON.stringify(evidence));

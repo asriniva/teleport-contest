@@ -22,10 +22,11 @@ entry.namespace.native=()=>13;assert.equal(cell(),13);assert.equal(fallbacks,1,'
 entry.namespace.native=old;assert.equal(cell(),7);checks++;
 for(const signature of ['v','vi','ii','j']){const other=functions.functionPointer(native,signature),value=model.view(other);assert.equal(BigInt(value),other);assert.throws(()=>value(),/Unknown or incompatible C callback/);checks+=2;}
 for(const value of [99999999n,1n<<63n]){const unknown=model.view(value);assert.equal(BigInt(unknown),value);assert.throws(()=>unknown(),/Unknown or incompatible C callback/);checks+=2;}
-const foreign=()=>17;Object.assign(foreign,{nativeState:{},nativeDirect:true});const foreignToken=functions.functionPointer(foreign,'i');assert.equal(model.view(foreignToken)(),17);assert.equal(fallbacks,2);checks+=2;
+const foreign=()=>{assert.equal(owner.depth,0,'foreign command callback owns a real boundary');return 17;};Object.assign(foreign,{nativeState:{},nativeDirect:true});const foreignToken=functions.functionPointer(foreign,'i');assert.equal(model.view(foreignToken)(),17);assert.equal(fallbacks,2);checks+=2;
+owner.enter();try{assert.equal(model.view(foreignToken)(),17);assert.equal(owner.depth,1);checks+=2;}finally{owner.leave();}
 const throwing=()=>{throw Error('command callback failure');};Object.assign(throwing,{nativeState:owner,nativeDirect:true});const throwingCell=model.view(functions.functionPointer(throwing,'i'));assert.throws(()=>throwingCell(),/command callback failure/);assert.equal(cell(),7);checks+=2;
 // Explicit linker callback overrides must retain their custom behavior.
-const overridden=environment.functionPointer('native-explicit','i',()=>19);assert.equal(model.view(overridden)(),19);assert.equal(fallbacks,3);checks+=2;
+const overridden=environment.functionPointer('native-explicit','i',()=>19);assert.equal(model.view(overridden)(),19);assert.equal(fallbacks,4);checks+=2;
 const table=environment.allocateGlobal('windowprocs',ctypes.size('struct window_procs'));
 environment.nativeWindowCallbacks=createNativeWindowCallbacks(environment,owner);
 const dispatch=createNativeCommandWindowDispatch(environment,owner);

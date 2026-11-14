@@ -31,7 +31,7 @@ const contracts={
 let bindings=0,dispatches=0,rejections=0,growths=0;
 for(const [name,owner,methods]of owners)for(const method of methods){
  const contract=contracts[method],at=env.ctypes.locate('struct window_procs',env.requireGlobal('windowprocs'),contract.field).at;
- const original=env.memory.view.getBigUint64(at,true),stack=env.transport.stackSave();
+ const original=env.memory.view.getBigUint64(at,true),stack=env.transport.stackSave(),position=env.transport.stackPosition();assert.notEqual(position,undefined);
  try{
   for(const mode of [0,1]){
    const {args,expected}=contract.values(mode),seen=[];
@@ -47,7 +47,7 @@ for(const [name,owner,methods]of owners)for(const method of methods){
    assert.equal(owner.services[method](...args),result(1),name+'.'+method+' replacement return');
    assert.deepEqual(seen,[['first',expected],['second',expected]],name+'.'+method+' measured arguments and live replacement');
    const after=env.transport.stackSave();
-   assert.equal(after.index,stack.index,name+'.'+method+' stack depth');env.transport.stackRestore(after);dispatches+=2;
+   assert.equal(env.transport.stackPosition(),position,name+'.'+method+' stack depth');env.transport.stackRestore(after);dispatches+=2;
   }
   const {args}=contract.values(1);
   const incompatible=env.functions.functionPointer(()=>0,contract.signature==='v'?'i':'v');

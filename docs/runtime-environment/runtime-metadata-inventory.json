@@ -707,7 +707,7 @@
     },
     {
       "file": "js/nethack/bindings/cmd.js",
-      "line": 7,
+      "line": 8,
       "name": "schema"
     },
     {
@@ -737,7 +737,7 @@
     },
     {
       "file": "js/nethack/bindings/display.js",
-      "line": 11,
+      "line": 12,
       "name": "schema"
     },
     {
@@ -782,12 +782,12 @@
     },
     {
       "file": "js/nethack/bindings/dothrow.js",
-      "line": 9,
+      "line": 10,
       "name": "schema"
     },
     {
       "file": "js/nethack/bindings/dungeon.js",
-      "line": 9,
+      "line": 10,
       "name": "schema"
     },
     {
@@ -842,7 +842,7 @@
     },
     {
       "file": "js/nethack/bindings/invent.js",
-      "line": 9,
+      "line": 10,
       "name": "schema"
     },
     {
@@ -862,12 +862,12 @@
     },
     {
       "file": "js/nethack/bindings/mklev.js",
-      "line": 9,
+      "line": 10,
       "name": "schema"
     },
     {
       "file": "js/nethack/bindings/mkmaze.js",
-      "line": 9,
+      "line": 10,
       "name": "schema"
     },
     {
@@ -922,7 +922,7 @@
     },
     {
       "file": "js/nethack/bindings/pickup.js",
-      "line": 9,
+      "line": 10,
       "name": "schema"
     },
     {
@@ -987,7 +987,7 @@
     },
     {
       "file": "js/nethack/bindings/shk.js",
-      "line": 9,
+      "line": 10,
       "name": "schema"
     },
     {
@@ -997,7 +997,7 @@
     },
     {
       "file": "js/nethack/bindings/sp_lev.js",
-      "line": 7,
+      "line": 8,
       "name": "schema"
     },
     {
@@ -1316,7 +1316,7 @@
     },
     {
       "file": "js/nethack/bindings/cmd.js",
-      "sha256": "60a03f8b4cc56c6c8f9bd1ccdcd88aa2f5bf50a6af7de7779b5caac4cea497bf"
+      "sha256": "10321adccf1508389fb0d0b46e1b12597488b4c10d728286f57fb383707e1f4f"
     },
     {
       "file": "js/nethack/bindings/coloratt.js",
@@ -1348,7 +1348,7 @@
     },
     {
       "file": "js/nethack/bindings/display.js",
-      "sha256": "df5298940bb8edeef0527844a18dc4d8f948123673b5933be19ff890eeef4062"
+      "sha256": "2d51ad0f9cef86dad8d8f7cb77db45e9b604939b045742118f5e729ef48448af"
     },
     {
       "file": "js/nethack/bindings/do.js",
@@ -1376,7 +1376,7 @@
     },
     {
       "file": "js/nethack/bindings/dothrow.js",
-      "sha256": "f07e712fe3f5dbda5984364495d779d629c8b32abd7575133c88ae1a3e6c1a47"
+      "sha256": "29b68c51c8fa169bec021ef4ec1d948327d1bf79e755bf10151336e17dba82b4"
     },
     {
       "file": "js/nethack/bindings/drawing.js",
@@ -1384,7 +1384,7 @@
     },
     {
       "file": "js/nethack/bindings/dungeon.js",
-      "sha256": "3e09b2ac672b6c345fe1e43d5ac71258efc1d4d1a7d7704ad4add025362b23f3"
+      "sha256": "849f871b4e560b8b20dbbf06458c82bada5fb9507f947f941c22e1e710ea44b8"
     },
     {
       "file": "js/nethack/bindings/earlyarg.js",
@@ -1452,7 +1452,7 @@
     },
     {
       "file": "js/nethack/bindings/invent.js",
-      "sha256": "bfda59bd6dfdc35a52a64f0b71ef41456744da0a30807d041811ef2103ce7bbb"
+      "sha256": "f215cd84eba20a61b85784c0c309ec86f6c8f28853ad9822a6f22eefa6d89b2c"
     },
     {
       "file": "js/nethack/bindings/ioctl.js",
@@ -1496,7 +1496,7 @@
     },
     {
       "file": "js/nethack/bindings/mklev.js",
-      "sha256": "51336d8c2adb1fc3d34e5ba850c3fbc81449066a535ef33e11da7a9b1d2d4e22"
+      "sha256": "16846a4d490f66be64f2bd1d1c7a874eca8b5059695ce7ea3ce29e800d54fcf3"
     },
     {
       "file": "js/nethack/bindings/mkmap.js",
@@ -1504,7 +1504,7 @@
     },
     {
       "file": "js/nethack/bindings/mkmaze.js",
-      "sha256": "da3eda56d435290b92552538fcc2b1da9360214a6f850cac07c4c26579b880ec"
+      "sha256": "8679a7ff0e94ea863b48a7092f5ccfc8a7125556fb825021f383d6917589b77c"
     },
     {
       "file": "js/nethack/bindings/mkobj.js",
@@ -1580,7 +1580,7 @@
     },
     {
       "file": "js/nethack/bindings/pickup.js",
-      "sha256": "fc87d154d3f083dbbf98398dedbe9b484a08c5b58b30ace5b522376efd30ddd6"
+      "sha256": "791c3c3db327cd737dbcc351b5af23ed67262d564c1a1f80cf5d29c983c36070"
     },
     {
       "file": "js/nethack/bindings/pline.js",
@@ -1660,7 +1660,7 @@
     },
     {
       "file": "js/nethack/bindings/shk.js",
-      "sha256": "03a261bdd3735618e7a325e9f05b059e4e52e0e542ddda58c893ac3b9ad079a7"
+      "sha256": "61d15545e15816baec2d2bb7abac05a6beeb1298e13ddce7a18e982f14c30500"
     },
     {
       "file": "js/nethack/bindings/shknam.js",
@@ -1676,7 +1676,7 @@
     },
     {
       "file": "js/nethack/bindings/sp_lev.js",
-      "sha256": "f30237e171326d8bdeee13a9a9d4f13c7046bd797bd2d2d6fa3f30a621e1a832"
+      "sha256": "a9cd57d2729f669539bf7b453c6d45c9e699457f0f120f49135e1cdfea1aaeba"
     },
     {
       "file": "js/nethack/bindings/spell.js",
