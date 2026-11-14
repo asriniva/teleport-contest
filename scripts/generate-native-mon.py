@@ -41,6 +41,9 @@ print(visibility.stderr.strip())
 compiled=subprocess.run([os.environ.get('NATIVE_NODE','node'),str(root/'scripts/native-idempotent-casts.mjs')],input=result,text=True,capture_output=True,check=True)
 result=compiled.stdout
 print(compiled.stderr.strip())
+compiled=subprocess.run([os.environ.get('NATIVE_NODE','node'),str(root/'scripts/native-scalar-casts.mjs'),'--measured-roots','--unit','mon'],input=result,text=True,capture_output=True,check=True)
+result=compiled.stdout
+print(compiled.stderr.strip())
 target=root/'js/nethack/native/monster-lifecycle.js'
 if '--check' in sys.argv:
  assert target.read_text()==result

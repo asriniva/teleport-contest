@@ -1,3 +1,45 @@
+## Native ordinary numeric execution (2026-11-14)
+
+`native-scalar-casts.mjs` specializes proven finite integer/boolean expressions
+and literal64-bit conversions in generated HACK hero movement, MONMOVE monster
+movement and MON lifecycle policies. Existing measured record fields and native
+argument plans prove widths; no metadata catalog is added. The generated bodies
+remove932 runtime cast calls:431 small/28 wide literal calls in MON,129/one in
+MONMOVE and324/19 in HACK. Direct narrowing uses signed8/16/32-bit shifts or
+unsigned masks/shifts. Constant64-bit conversions fold with the original signed
+or unsigned width. All surviving operands still execute once in source order.
+Unknown values, fractional/nonfinite inputs, potentially fractional or unsafe
+division, unconstrained ranges and nonliteral full-width values retain helpers.
+Nested function argument/helper shadowing invalidates assumptions. Type proofs
+rely on the actual native entry/view contracts; they are not a general arbitrary
+user-JS optimization. No decision, RNG site or mutation policy is replaced.
+The three source generators apply the pass reproducibly and now all support
+`--check`. The generated MONMOVE context member census removes one unused key;
+its record/call policies are unchanged. Original ported sources are untouched.
+
+`test-native-scalar-casts.mjs` passes6,465 comparisons using actual production
+MON/MONMOVE helpers and live records, covering widths, wide overflow, unknown
+and fractional/nonfinite preservation, exception messages/classes, side-effect
+and primitive-coercion order, assignments, typed actor parameters and shadowing.
+Original-C comparisons pass for actual walk/wait/attack, confused/stunned/reset
+movement (16 checks), MON iterators/hiding/flashing (860 checks/120 checkpoints),
+private source vampire and invisible-spider actions, and pet actions (1,440
+checks/222 actions). Context checks pass1,821 for MON and1,295 for MONMOVE.
+Generation, metadata inventory and assembly wiring checks pass. These are bounded
+component/gameplay proofs, not every hidden recording or branch. The strict
+ordinary-turn gate still fails despite exact C output/RNG equivalence: this
+change removes compatibility arithmetic inside native bodies, not remaining
+C bridges/allocations. All44 public recordings pass:792,838 ordered RNG calls,11,405 screens/cursors,
+and1,483 animation frames. Unprofiled candidate time is264.946935s against prior
+pushed267.436341s (0.9308% lower); earlier accepted evidence264.674110s remains
+0.1031% faster than this candidate. This is a modest timing observation, not a
+large overall speedup. All860 scoring inputs were unchanged during replay and
+match current files. Exact source hashes, bounded checks and session/timing
+receipts are in `docs/runtime-environment/native-scalar-validation.json`, with
+`native-scalar-public44-manifest.json` preserving the frozen inputs. Native-authoritative state throughout the engine, zero-
+bridge/zero-allocation turns and20x remain unachieved. No new baseline or CPU
+profiling is performed.
+
 ## Native complete APPLY state and execution (2026-11-14)
 
 `apply.js`, `native/apply{,-state,-entries,-calls}.js`,
