@@ -957,7 +957,7 @@
     },
     {
       "file": "js/nethack/bindings/region.js",
-      "line": 27,
+      "line": 31,
       "name": "globals"
     },
     {
@@ -1600,7 +1600,7 @@
     },
     {
       "file": "js/nethack/bindings/region.js",
-      "sha256": "8114c61cea770d4c709e595b5f79fa79b19756022fbf1877dd49955a3ff9fcd0"
+      "sha256": "f87802e77ec9200ea68713c3cbbb30f810e62dd2a20e15ceb6fdc4835e176991"
     },
     {
       "file": "js/nethack/bindings/report.js",

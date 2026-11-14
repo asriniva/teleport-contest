@@ -1,3 +1,49 @@
+## Connected native region movement, effects and persistence (2026-11-13)
+
+All 23 published REGION entries now use a per-game native policy graph with
+33 unchanged source function bodies and the original two ordered callbacks.
+Earlier level-startup, level-persistence and steed hooks register native entries
+from construction; visibility queries are explicitly upgraded while their
+published service identities remain stable. Common no-argument turn entries
+call their bound native body without constructing argument arrays or a dispatch
+set. No C source, RNG sites, callback order or gameplay decisions change.
+
+`native/region-state.js` joins canonical native actors, species, properties,
+map occupancy and instance globals. Region mutation and spatial queries share
+one cached region view; native fixed-capacity arrays expose rectangle records,
+monster IDs and region slots over the same measured storage. They replace
+repeated array proxies and keep reads valid after allocation growth. Actual
+allocation extents bound newly allocated arrays; external rectangle arguments
+use their explicit count. The fixed storage profile is compiler-validated.
+
+Persistent regions/arrays, addressable locals, strings and serialization still
+have byte representations. Unknown foreign dependencies retain explicit
+conversion/synchronization boundaries. The isolated legacy REGION fixture
+factory remains available. This does not establish native authoritative state
+for the entire engine, a zero-allocation turn or the required 20x improvement.
+
+`test-native-region.mjs` verifies the entire policy AST and the immutable full
+original-C oracle, then starts genuine main worlds. It checks overlapping and
+selection-created clouds, real actor creation, hero/monster movement membership,
+monster-ID capacity growth, rectangle/region array growth, heap growth, expiry,
+poison callbacks, and a nonempty save/release/restore round trip. Complete
+region/world/visibility state, ordered RNG logs/full states, actual terminal
+bytes, frames and More inputs match. Identity checks use strict JS identity.
+All 617 focused comparisons pass across 73 actions, with 23 native published
+entries and 33 source policy functions. Ghost-ID restoration and other advanced
+branches remain separately unaccepted.
+
+Original-C walk/wait/attack equivalence passes. Generic calls decrease from
+18/34/68 to 16/32/66, and C context entries from 32/57/117 to 28/53/113.
+Heap allocations remain 44/165/109 and generic field accesses 6/13/40; strict
+architectural acceptance remains false. All 44 public recordings pass with
+792,838 ordered RNG entries, 11,405 screens/cursors and 1,483 animations matching
+exactly. All 822 scoring inputs stayed unchanged. The unprofiled Node 22 run
+took 285.832s versus the existing 286.144s, about 0.11% less time in separate
+single runs: essentially flat, with no meaningful overall speedup established.
+No baseline or CPU profiling was performed. Exact source hashes and evidence:
+`docs/runtime-environment/native-region-validation.json`.
+
 ## Native timer, status and event execution (2026-11-13)
 
 `timers.js` now registers 32 TIMEOUT entries as native calls, with one per-game

@@ -9,7 +9,7 @@ import * as steed from '../ported/steed.js';
 import * as iactions from '../ported/iactions.js';
 import * as extralev from '../ported/extralev.js';
 import * as mondata from '../ported/mondata.js';
-import {callRegion} from './bindings/region.js';
+import {createRegionEntry} from './bindings/region.js';
 import {enablePagerLookup} from './pager-lookup.js';
 import {is_moat} from '../ported/dbridge.js';
 import {steed_vs_stealth} from '../ported/polyself.js';
@@ -44,7 +44,7 @@ export function enableSpecialInteractions(environment,layouts,{only=['rumors','f
   const additions={defended:(p,type)=>withCEnvironment(ctx,mondata.defended,views.record('struct monst',p),type),locomotion:(p,def)=>{const v=withCEnvironment(ctx,mondata.locomotion,views.record('struct permonst',p),text(def));return typeof v==='string'?text(v):v;}};environment.register('special-locomotion',Object.fromEntries(Object.entries(additions).filter(([name])=>!environment.hasFunction(name))),ctx);
  }
  if(only.includes('iactions'))enablePagerLookup(environment,layouts);
- if(only.includes('steed')&&!environment.hasFunction('update_player_regions')){const regions=environment.start('region-reset').environment;environment.extend('region-reset',{update_player_regions:()=>callRegion(regions,layouts.region,'update_player_regions')});}
+ if(only.includes('steed')&&!environment.hasFunction('update_player_regions')){const regions=environment.start('region-reset').environment;environment.extend('region-reset',{update_player_regions:createRegionEntry(regions,layouts.region,'update_player_regions')});}
  // Additional leaves reuse existing contexts, with their own source RNG attribution.
  if((only.includes('iactions')||only.includes('extralev'))&&!environment.hasFunction('name_ok')){
   const {services:S,transport,ctypes}=environment,views=createRecordViews(environment),base=environment.start('item-naming').environment,naming=Object.create(base),text=v=>typeof v==='string'?S.literal(v):environment.address(v);
