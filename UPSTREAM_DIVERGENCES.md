@@ -1,3 +1,44 @@
+## Native TOPL window, prompt and history context (2026-11-14)
+
+`terminal-messages.js` now assembles one `native/topl-state.js` context and native
+source policy factory per game, replacing per-call typed environment construction.
+Window handles have stable native projections onto canonical scalar storage and
+cached native arrays of history pointers/lengths; live window slots derive their
+count from the measured ABI. Explicit-width private indices and display/global state use the
+shared native arena. TOPL private snapshot pointers and indices now live in JS;
+source snapshot allocation becomes a native array, with the same copy/purge,
+sentinel and release order. Source-private calls execute directly with scalar/text argument conversions
+compiled from the existing binding plan; public entries retain their measured
+argument/result widths. `generate-native-topl.mjs` records these explicit source
+adaptations and rejects changed private names, arity, types or nested calls. Mutable text buffers, history strings,
+terminal calls and save bytes retain their existing byte boundary. No claim of
+an entirely native string/display pipeline, zero-allocation turns or 20x.
+Focused validation passes 514 comparisons across 71 real source actions on a
+genuine MAIN world: message folding/wrapping and Latin1 bytes, explicitly asserted
+choice/default/numeric/case/escape/raw-0x80 prompt answers, passive/destructive
+snapshots, restoration/recall order, all four history modes through parseoptions,
+and stable window identity after heap growth. Complete game graphs, both ISAAC
+states and ordered logs, terminal bytes/frames and every consumed raw input byte
+match full original C. The corrected input carrier has explicit expected-answer
+and exact-choice-consumption checks, so spaces cannot silently replace choices.
+Those checks exposed the numeric prompt's private literal-string conversion;
+all private calls now compile their conversions from the existing measured plan.
+Generator freshness, metadata types/production wiring, 1,440 pet/appraisal checks,
+574 WORN checks and 51 natural Knight riding/four-way mounted-save checks pass.
+Ordinary walk/wait/attack still match C exactly: generic calls 10/18/38 versus
+pushed 10/20/42, contexts 17/26/55 versus 17/30/63; C-heap allocations remain
+30/159/100. Source byte strings/history storage and foreign dependencies remain.
+Every prompt control sequence, signal/reentrant failure and save branch is not
+exercised; the zero-bridge/zero-allocation turn and required 20x remain unmet.
+All 44 public recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors
+and 1,483 animations match. All 843 scoring inputs stayed unchanged and final
+source hashes match the run. Candidate elapsed time was 272.271s versus the
+existing pushed 275.482s, about 1.17% less time in separate single runs. This is
+modest observed improvement, not a controlled speedup or the required 20x.
+No new baseline or CPU profiling was performed. Evidence:
+`docs/runtime-environment/native-topl-validation.json` and
+`native-topl-public44-manifest.json`.
+
 ## Native pet decisions and lifecycle lists (2026-11-14)
 
 DOG creation, taming, appraisal, elapsed-time and migration policies now share
