@@ -24,7 +24,7 @@ export function enableTerminal(environment,layout,{onCapture}={}) {
         const record=schemas[kind]?.[1],f=record?.fields[index];if(!f)throw new Error('Unknown terminal C field');
         return{type:metadata.typeAliases[record.ctype]??record.ctype,f,p};
     }
-    Object.assign(local,{nativeOwner,nativeTypes:ctypes,moduleKey:environment,
+    Object.assign(local,{nativeTerminalOwner:local,nativeOwner,nativeTypes:ctypes,moduleKey:environment,
         global:i=>{if(!globals[i])throw new Error('Unknown terminal global');return globals[i];},
         read:(kind,p,i)=>{const e=field(kind,p,i);return e.f.d.a||e.f.d.s?BigInt(ctypes.locate(e.type,p,e.f.name).at):ctypes.getField(e.type,p,e.f.name,scalar(e.f.d));},
         write:(kind,p,i,v)=>{const e=field(kind,p,i);return ctypes.setField(e.type,p,e.f.name,scalar(e.f.d),v);},

@@ -271,6 +271,7 @@ export function createStandaloneEnvironment(options={}) {
     function enableDependencies() {
         const runtime=createLibraryBindings({regex:true,regexDialect:'sdk'});
         for(const name of ['tgetent','tgetflag','tgetnum','tgetstr','tparm','tgoto','tputs','regcomp','regexec','regerror','regfree','compressFile'])services[name]=(...args)=>runtime[name](services,...args);
+        services.nativeTputs=(text,lines,emit)=>runtime.tputsNative(services,text,lines,emit);
         services.tgetent=(_buffer,name)=>runtime.tgetent(services,name);
         return runtime;
     }

@@ -1,3 +1,50 @@
+## Direct native terminal byte output (2026-11-14)
+
+`js/c-runtime/library-bindings.js`, `js/nethack/environment.js`,
+`js/nethack/terminal.js` and `js/nethack/bindings/termcap.js` now connect the
+owned game's native `tputs` callback directly to the native source `xputc`
+and a scalar `putchar` provider call. The unchanged Terminfo instance still
+selects capabilities and parses padding; the existing output transport,
+shadow cells and recording codec remain separate and unchanged. Pointer text
+uses the existing byte decoder. Native strings avoid temporary C strings and
+reject non-byte characters, including after NUL, as the former string
+materialization did. This removes per-byte function-table callback lookup,
+terminal binding reentry, stack scopes and generic argument arrays. Production
+remains JavaScript; no WebAssembly or new Node-only APIs are introduced.
+
+An explicit terminal owner identity and active-provider/function checks retain
+the old checked path for foreign providers, overridden `tputs` and callbacks
+other than the exact native `xputc`. Nested calls and exceptions restore the
+existing provider/stack scope. The active `putchar` provider is read for each
+byte. Public terminal entries and byte-oriented terminal state still use the
+existing adapters; this is not the complete zero-bridge ordinary-turn target.
+
+Verification: `scripts/test-native-terminal-output.mjs` passes 56 checks
+against the actual production terminal owner, including all nonzero byte
+values, control bytes, NUL, padding, pointer/string input, zero per-byte binding
+entries, foreign-first cache construction, overrides, nested calls, error
+recovery and real stack cursor preservation. Native source AST equality passes
+for all 57 functions/79 local call conversions; the generator freshness check
+passes. Production window callbacks pass 25 bindings/100 dispatches/50 invalid
+callback rejections and memory growth. Native frame capture passes 172 checks
+and 84 frames. Browser execution passes two segments/seven checks with Node
+imports denied and `process` unavailable. All 43 dynamic callback sites pass
+223 dispatches and 34 live calls with no unresolved sites. The controlled
+original-C terminal suite passes all 56 routines, 223 cases and 2,472 comparisons;
+its foreign providers use compatibility routing, while the production component
+exercises the new owned route.
+
+All 44 public recordings (56 segments) pass: 792,838 ordered RNG entries,
+11,405 screens/cursors and 1,483 animation frames match. All 868 scoring inputs
+remain unchanged during the run. Elapsed time is 256.8312s versus the previous
+pushed candidate's 256.5851s, a 0.096% increase: flat, with no demonstrated overall
+speed gain. The frozen runner's fitted startup/per-move timing is 2536.7ms /
+12.3687ms (a regression fit, not separately measured phases). No new baseline
+or CPU profiling was performed. The 20x / 40–55s objective remains unmet. Receipts
+and limitations are recorded in
+`docs/runtime-environment/native-terminal-output-validation.json` and its linked
+input manifest.
+
 ## Direct entries for connected address-engine calls (2026-11-14)
 
 Generated fixed-argument entries remove repeated binding invocations and argument

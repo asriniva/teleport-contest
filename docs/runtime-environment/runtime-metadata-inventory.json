@@ -1700,7 +1700,7 @@
     },
     {
       "file": "js/nethack/bindings/termcap.js",
-      "sha256": "1eafcbd22ab34f4bac91fb3eb68006d6d59bc4560bb33e50e50dbbe556336330"
+      "sha256": "8540a9b69a0f7c9329fc2d91bf8156e3e6925a23a2df86c7260cee24da15bf7a"
     },
     {
       "file": "js/nethack/bindings/timeout.js",

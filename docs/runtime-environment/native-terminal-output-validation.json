@@ -1,0 +1,109 @@
+{
+  "sourceSha256": {
+    "js/c-runtime/library-bindings.js": "548d8bc9a2b8ce3a8e6a7038954d1b15589e8c3dff3bba4baa9e59c7a1e67b8d",
+    "js/nethack/environment.js": "c72aa408ed535e28a0759c9e778d9725092c2595dcd9b70d2043265b01f0a14e",
+    "js/nethack/terminal.js": "8428bbc3ce6eea560d5bcf4535d76ccc88594721230709ceda63d5a6ac427c36",
+    "js/nethack/bindings/termcap.js": "8540a9b69a0f7c9329fc2d91bf8156e3e6925a23a2df86c7260cee24da15bf7a",
+    "scripts/test-native-terminal-output.mjs": "60902033c0b433dc5959f1196783c06de4052f75ac94ee1ed4962ef3f59e10fc"
+  },
+  "productionLanguage": "JavaScript",
+  "productionWebAssembly": false,
+  "component": {
+    "passed": true,
+    "checks": 56,
+    "scope": "Production termcap native bytes, every nonzero byte, NUL, padding, pointer/string input, zero per-byte binding entries, primary/foreign provider overrides, nested error restoration and stack cursor preservation. Full recording equivalence is separate."
+  },
+  "nativeSource": {
+    "passed": true,
+    "functions": 57,
+    "localCallConversions": 79,
+    "sourcePolicyAstEqual": true
+  },
+  "originalCControlledTerminalSuite": {
+    "passed": true,
+    "cases": 223,
+    "comparisons": 2472,
+    "functions": 56,
+    "nativeFixture": true,
+    "scope": "Configured source state/trace/result/stack comparison with controlled foreign terminal transport; its foreign providers retain compatibility routing. Direct owned callback route is covered by production component and full recordings.",
+    "logSha256": "90a2d597fd650cd1a5a5b69bd6baa34aa04a89e3678d6766fdc5f81f812f2b69"
+  },
+  "browserBoundary": {
+    "passed": true,
+    "segments": 2,
+    "checks": 7,
+    "nodeImportsAllowed": false,
+    "processAvailable": false
+  },
+  "dynamicCallbacks": {
+    "files": 34,
+    "dispatches": 223,
+    "liveCalls": 34,
+    "dynamicSites": 43,
+    "validatedSites": 43,
+    "unresolved": 0
+  },
+  "productionWindowCallbacks": {
+    "bindings": 25,
+    "dispatches": 100,
+    "invalidCallbackRejections": 50,
+    "callbackMemoryGrowth": true
+  },
+  "frameCapture": {
+    "checks": 172,
+    "frames": 84,
+    "sourceFormattingCalls": 378928
+  },
+  "recordings": {
+    "passed": true,
+    "sessions": 44,
+    "segments": 56,
+    "metrics": {
+      "rngCalls": {
+        "matched": 792838,
+        "total": 792838
+      },
+      "screens": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "cursors": {
+        "matched": 11405,
+        "total": 11405
+      },
+      "animFrames": {
+        "matched": 1483,
+        "total": 1483
+      }
+    },
+    "integrity": {
+      "filesChecked": 868,
+      "changed": [],
+      "exitCode": 0,
+      "wallSeconds": 256.83120916597545,
+      "sessionSelectionMatched": true,
+      "childUserSeconds": 384.563093,
+      "childSystemSeconds": 7.881677
+    },
+    "speedFit": {
+      "startup_ms": 2536.7,
+      "per_move_ms": 12.3687,
+      "r2": 0.841,
+      "label": "2537+12.37/turn",
+      "sessions": 44
+    },
+    "previousCandidateWallSeconds": 256.5850789169781,
+    "wallSecondsDifference": 0.24613024899736047,
+    "percentWallChange": 0.0959253944291083,
+    "conclusion": "Flat overall runtime; this candidate establishes a direct owned terminal callback path, not an end-to-end speed gain. No baseline or CPU profiling was performed.",
+    "runnerReportedParentCommit": "88a4d74",
+    "scoreLogSha256": "d86696c38741dd7b50bfdc886d8463033981229deb07e517e3fa29e55f53c9ec",
+    "manifest": "native-terminal-output-public44-manifest.json"
+  },
+  "remainingLimitations": [
+    "The 20x / 40\u201355s target is unproven and not achieved by prior evidence.",
+    "Terminal public entry wrappers and C-shaped shared terminal state remain.",
+    "Connected ordinary turns still have generic bridge, C heap and field access costs.",
+    "44 public recordings do not exhaust every hidden recording or advanced gameplay branch."
+  ]
+}
