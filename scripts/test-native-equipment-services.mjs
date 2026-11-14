@@ -13,6 +13,8 @@ const owner={functions:new Map()},native=value=>value;Object.assign(native,{nati
 assert.equal(local.abon,native);const record={address:31};assert.equal(local.abon(record),record,'native values retain identity');
 owner.functions.set('doname',native);assert.equal(local.doname,first,'pointer-return service keeps its boundary and callback identity');
 services.lua_atpanic=()=>53;owner.functions.set('lua_atpanic',native);assert.notEqual(local.lua_atpanic,native,'pointer typedef return retains its callback boundary');assert.equal(local.lua_atpanic(),53);
+const nativeValues=value=>value;Object.assign(nativeValues,{nativeState:owner,nativeDirect:true});native.nativeValuesEntry=nativeValues;
+assert.equal(local.doname,nativeValues,'explicit native record result bypasses foreign pointer conversion');assert.equal(local.doname(record),record);delete native.nativeValuesEntry;
 const custom=()=>37;local.abon=custom;assert.equal(local.abon,custom,'explicit macros retain their source ABI');delete local.abon;
 const other=()=>41;Object.assign(other,{nativeState:{},nativeDirect:true});owner.functions.set('abon',other);
 assert.notEqual(local.abon,other);assert.equal(local.abon(43),44,'other-game functions cannot bypass the service boundary');

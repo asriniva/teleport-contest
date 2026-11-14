@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import {createStandaloneEnvironment} from '../js/nethack/environment.js';
+import {createNativeByteValues} from '../js/nethack/native/byte-values.js';
+const env=createStandaloneEnvironment(),{memory,transport:t}=env,buffer=createNativeByteValues(env);
+const mark=t.stackSave(),before=memory.live.size,a=buffer(8);
+a.copyCString('abc');assert.deepEqual([...a.cstringBytes()],[97,98,99,0]);
+assert.equal(memory.live.size,before,'native snapshots allocate no C storage');
+const p=memory.cstring('first'),b=buffer(8);b.copyCString(p);memory.view.setInt8(p,88);
+assert.deepEqual([...b.cstringBytes()],[102,105,114,115,116,0],'name snapshot survives source mutation');
+const c=buffer(8);c.copyCString(b);b.store(0,89);assert.equal(c.load(),102,'native snapshots do not alias');
+c.copyCString('x\0ignored');assert.deepEqual([...c.cstringBytes()],[120,0]);
+c.copyCString('\xff\x80');assert.deepEqual([...c.cstringBytes()],[255,128,0]);assert.equal(c.load(),-1);
+assert.equal(c.store(0,257),1);assert.equal(c.store(0,-129),127);
+assert.throws(()=>c.copyCString('\u0100'),/explicit UTF-8/);
+assert.throws(()=>buffer(2).copyCString('ab'),/exceeds buffer/);
+const full=buffer(2);full.store(0,1);full.store(1,2);assert.throws(()=>full.cstringBytes(),/Unterminated/);
+for(const n of [-1,1.5,NaN,Infinity])assert.throws(()=>buffer(n),/extent/);
+for(const i of [-1,8,1.5,NaN]){assert.throws(()=>a.store(i,0),/extent/);assert.throws(()=>a.load(i),/extent/);}
+const nested=t.stackSave(),at=a.address;t.stackRestore(nested);assert.equal(a.address,at,'deferred materialization belongs to declaring frame');
+memory.view.setInt8(at,90);assert.equal(a.load(),90,'foreign writes remain visible');
+memory.grow(memory.buffer.byteLength+65536);assert.equal(a.address,at);assert.equal(a.load(),90,'buffer follows heap growth');
+a.copyCString('grown');assert.equal(memory.view.getInt8(at),103,'native writes update materialized storage');
+t.stackRestore(mark);
+for(const read of [()=>a.address,()=>a.load(),()=>a.store(0,0),()=>a.cstringBytes(),()=>a.copyCString('x')])assert.throws(read,/Expired/);
+console.log(JSON.stringify({passed:true,nativeSnapshots:true,sourceMutation:true,byteWidths:true,bounds:true,declaringFrame:true,foreignWriteback:true,heapGrowth:true,expiredLifetime:true}));

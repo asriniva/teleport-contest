@@ -1157,12 +1157,12 @@
     },
     {
       "file": "js/nethack/hero-equipment.js",
-      "line": 21,
+      "line": 20,
       "name": "armorNativeSchema"
     },
     {
       "file": "js/nethack/hero-equipment.js",
-      "line": 106,
+      "line": 102,
       "name": "types"
     },
     {

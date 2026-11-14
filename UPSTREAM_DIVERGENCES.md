@@ -1,3 +1,57 @@
+## Native connected WORN equipment and extrinsic state (2026-11-14)
+
+Hero and monster WORN owners now share native policies and canonical actor,
+object, property and slot identities. Private calls execute lexically. Engine
+pointer-return calls may select native record values; public byte-shaped results
+retain their measured ABI conversions. Wearing lookup rows are native structures
+and their labels remain JS strings until an actual byte consumer needs them.
+Unused hero/monster compatibility WORN contexts have been removed; the remaining
+WEAPON/WIELD formatter also accepts owners without a legacy WORN context.
+The original policies, RNG calls and mutation order are retained. Other engine
+owners and string/serialization boundaries remain; the ordinary-turn zero gate
+and required 20x ambition are not yet met.
+
+Locations: `js/nethack/native/worn{,-state,-graph}.js`, `byte-values.js`,
+`hero-equipment.js`, `monster-inventory.js` and `native/equipment-services.js`.
+`generate-native-worn.mjs` retains all 27 source policy bodies with explicit
+lexical-call and native scratch-byte substitutions. The two existing equipment
+owners register one shared graph; the existing private `m_dowear_type` service
+keeps its signature. Other private helpers remain lexical. Explicit native-value
+entries preserve object identity for native consumers; foreign/public pointer
+results and named function-pointer callbacks keep their ABI. Checked formatting
+keeps its original source attribution. Native scratch bytes snapshot C names
+without allocating C storage, preserve byte-string encoding, and materialize at
+actual byte consumers with the declaring frame's lifetime.
+
+Validation: 574 comparisons across 61 actions on genuine source MAIN worlds
+match complete C world graphs, both full ISAAC states and ordered logs, terminal
+bytes, raw nested More input and frozen frames. Real source-created actors/items
+exercise armor replacement, positive cap autocursing, unseen dragon-mail light,
+armor removal through public inventory extraction, speed/invisibility/resistance
+extrinsics, armor lookup and bypass traversal. AST checks verify all 27 policy
+bodies/RNG order and actual context member presence. Dedicated scratch-byte checks
+cover snapshot independence, widths/encoding/bounds, nested lifetime, byte
+writeback, heap growth and expiry. These component checks use source actions on
+ready worlds, not natural item acquisition, and do not cover every optional
+armor/polymorph or ghost-save combination. Complete original-C input/artifact
+provenance is checked independently; historical JS-owner hashes in the old text
+ABI are not asserted against intentionally replaced owners.
+
+Light handling (1,212 comparisons), placement/STEED (1,721), natural Knight
+riding and four-way mounted save/restore (51) pass, as do connected-monster,
+equipment dispatch, generator freshness, metadata types and actual production
+wiring checks. The ordinary walk/wait/attack sequence remains exactly C-equivalent;
+generic calls are 10/26/55 versus 10/28/58 previously, contexts 17/42/89 versus
+17/44/92, and C-heap allocations remain 30/159/100. This is not a zero-bridge or
+zero-allocation turn. All 44 public recordings pass: 792,838 ordered RNG entries, 11,405 screens and
+cursors, and 1,483 animation frames match. All 835 scoring inputs stayed unchanged
+and were rechecked against the final source. Candidate elapsed time was 278.169s
+versus the existing pushed 277.553s, about 0.22% longer in separate single runs.
+This does not demonstrate an overall speedup; the required 20x remains unmet.
+No new baseline or CPU profiling was performed. Evidence:
+`docs/runtime-environment/native-worn-validation.json` and
+`native-worn-public44-manifest.json`.
+
 ## Shared native record field plans (2026-11-14)
 
 Native record types now compile field/accessor plans once per runtime instead of
