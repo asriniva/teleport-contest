@@ -43,10 +43,12 @@ export function enableTerminal(environment,layout,{onCapture}={}) {
         getenv:name=>environment.services.nh_getenv(typeof name==='string'?name:memory.readString(cptr(name))),
         alloc:n=>environment.alloc('alloc',Number(n)),
         dupstr:p=>environment.libc.strdup(cptr(p)),
-        teleport_capture:(screen,x,y,animation)=>{
-            const frame={screen:encodeRecorderScreen(memory.readString(cptr(screen))),cursor:[Number(x),Number(y),1],animation:Boolean(animation)};
+        nativeMarkerKind:kind=>typeof kind==='string'?kind.split('\0',1)[0]:memory.readString(address(kind)),
+        nativeFrameCapture:(screen,x,y,animation)=>{
+            const frame={screen:encodeRecorderScreen(screen),cursor:[Number(x),Number(y),1],animation:Boolean(animation)};
             frames.push(frame);if(onCapture)onCapture(frame);
         },
+        teleport_capture:(screen,x,y,animation)=>local.nativeFrameCapture(memory.readString(cptr(screen)),x,y,animation),
         error_p:(...args)=>environment.resolve('error')(...args),error_pp:(...args)=>environment.resolve('error')(...args),
         fprintf_pppiiiij:(...args)=>services.fprintf(...args),
         sprintf_pp:(out,fmt)=>environment.libc.sprintf(cptr(out),memory.readString(cptr(fmt))),

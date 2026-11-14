@@ -1,3 +1,37 @@
+## Native marker-to-recording frame capture (2026-11-14)
+
+Production TERMCAP marker capture serializes existing NOMUX cells directly into
+a JS byte string, then uses the unchanged recording codec and sink. This removes
+the intermediate C output buffer, printf formatting, strlen and cursor pointer
+locals from marker capture. Source enablement, cell/color/DEC semantics, cursor
+policy, snapshot/flush/classification order and frame shape are preserved in the
+verified cases. The public byte serializer remains unchanged and is the fallback
+without a native sink. Native markers no longer populate its private scratch
+buffer as a side effect; genuine byte-pointer callers still request the original
+serializer. Terminal emulation/capabilities, glyph policy and persistent storage
+are unchanged. No WebAssembly is introduced.
+
+All 44 recordings pass, including every 792,838 ordered RNG entry, 11,405
+screens/cursors and 1,483 animation frame. The 866-file receipt has no source
+changes. Elapsed time is 267.9833s versus the stack-only 268.5907s (0.23% lower):
+this small difference does not establish a meaningful speed gain, and the earlier
+accepted 264.9469s remains faster. The 40–55s and zero-bridge/allocation turn goals
+remain unmet. No new baseline or CPU profiling was performed.
+
+Serializer components pass 172 checks over 84 frames: all cell-byte values,
+every adjacent attribute pair, color/DEC transitions, control/high bytes, dense
+frames, growth, unchanged codec, and snapshot/cursor/flush/classification order.
+The original serializer performs 378,928 formatting calls on those same fixtures;
+the native serializer performs none. Strict source inversion checks the exact
+added native branch and all 57 original function bodies/fallbacks. Original-C
+walk/wait/attack, travel/jumping and 212 ordinary inventory/save/restore checks
+pass. The 25 production window bindings, all 43 dynamic sites, and browser
+save/restore with process removed/Node modules blocked pass. The metadata ledger
+is refreshed for changed source lines/hashes; catalog/declaration/adapter counts
+remain unchanged. Finite checks do not establish all possible game branches.
+Full receipts and limitations are in native-frame-capture-validation.json and
+native-frame-capture-public44-manifest.json under docs/runtime-environment.
+
 ## Native temporary stack arena (2026-11-14)
 
 The production NetHack runtime opts into an instance-owned temporary byte arena

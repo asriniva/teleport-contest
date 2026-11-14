@@ -1,3 +1,4 @@
+import {createNativeFrameCapture} from '../native/frame-capture.js';
 import {createNativeTermcap} from '../native/termcap.js';
 import {installNativeIntegerCasts} from '../native/execution.js';
 import * as CAdapter from '../../c-runtime/adapter-factories.js';
@@ -69,6 +70,7 @@ applyPrototypeAliases(name,prototype,'termcap');return prototype;});
         }
         return screenViews;
     };
+    if(services.nativeOwner&&typeof services.nativeFrameCapture==='function'&&typeof services.nativeMarkerKind==='function')env.captureNativeFrame=createNativeFrameCapture(env,namespace,services);
     const expectedRecordSizes={"flag": 208, "tc_gbl_data": 24, "instance_globals_t": 456, "tc_lcl_data": 64, "symsetentry": 40, "instance_globals_s": 1408, "instance_globals_c": 584, "cmd": 80, "DisplayDesc": 60, "nomux_cell": 4, "instance_flags": 424, "ti_map_entry": 12};
     for(const[name,size]of Object.entries(expectedRecordSizes))if(Number(layout[name+'Size'])!==size)throw Error('TERMCAP native record size '+name);
     const functions=["term_startup", "term_shutdown", "tty_number_pad", "tty_decgraphics_termcap_fixup", "term_start_screen", "term_end_screen", "nocmov", "cmov", "xputc", "nomux_markers_enabled", "nomux_emit_marker", "nomux_capture_write_screen", "nomux_capture_write_input_boundary", "nomux_clear_screen", "nomux_clear_to_eol", "nomux_putch", "nomux_set_attr", "nomux_end_attr", "nomux_set_fg", "nomux_end_fg", "nomux_sgr_fg", "nomux_capture_screen", "nomux_enter_raw_mode", "nomux_raw_putch", "nomux_raw_emit", "nomux_raw_emit_eol", "nomux_get_cursor", "xputs", "cl_end", "term_clear_screen", "home", "standoutbeg", "standoutend", "backsp", "tty_nhbell", "graph_on", "graph_off", "tty_delay_output", "cl_eos", "init_hilite", "kill_hilite", "s_atr2str", "e_atr2str", "term_attr_fixup", "term_start_attr", "term_end_attr", "term_start_raw_bold", "term_end_raw_bold", "term_end_color", "term_start_color", "term_start_bgcolor", "term_curs_set", "emit24bit", "emit256", "term_start_extracolor", "term_end_extracolor"];

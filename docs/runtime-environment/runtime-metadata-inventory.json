@@ -622,7 +622,7 @@
   "inlineTables": [
     {
       "file": "js/c-runtime/memory.js",
-      "line": 3,
+      "line": 4,
       "name": "types"
     },
     {
@@ -1002,22 +1002,22 @@
     },
     {
       "file": "js/nethack/bindings/termcap.js",
-      "line": 9,
+      "line": 10,
       "name": "schemas"
     },
     {
       "file": "js/nethack/bindings/termcap.js",
-      "line": 10,
+      "line": 11,
       "name": "globals"
     },
     {
       "file": "js/nethack/bindings/termcap.js",
-      "line": 80,
+      "line": 82,
       "name": "aliases"
     },
     {
       "file": "js/nethack/bindings/termcap.js",
-      "line": 81,
+      "line": 83,
       "name": "scalars"
     },
     {
@@ -1700,7 +1700,7 @@
     },
     {
       "file": "js/nethack/bindings/termcap.js",
-      "sha256": "0f71d97c77df4cc74c31bb0ba66d08686a24741a368473e76f66e353a5277efc"
+      "sha256": "1eafcbd22ab34f4bac91fb3eb68006d6d59bc4560bb33e50e50dbbe556336330"
     },
     {
       "file": "js/nethack/bindings/timeout.js",
