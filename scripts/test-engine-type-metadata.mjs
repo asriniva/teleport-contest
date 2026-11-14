@@ -1,3 +1,4 @@
+import {checkAbiFieldTables} from './check-abi-field-tables.mjs';
 // Audit configured production ABI declarations, including nested callback types.
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
@@ -42,4 +43,5 @@ assert.equal(apply.services.bhit(1,0,80,L.apply.FLASHED_LIGHT,0,0,0),0);
 assert.deepEqual(seen.pop(),[1,0,80,L.apply.FLASHED_LIGHT,0,0,0]);
 const fp=env.functions.functionPointer(()=>{callbacks++;return 0;},'ipp');apply.services.bhit(1,0,80,4294967295,fp,fp,at);
 assert.deepEqual(seen.pop(),[1,0,80,4294967295,Number(fp),Number(fp),at]);assert.equal(callbacks,2);
-console.log('PASS '+JSON.stringify({files,prototypes,structured,nestedCallbacks,distinctTypes:types.size,enums:127,productionApplyCalls:2}));
+const fieldTables=checkAbiFieldTables();
+console.log('PASS '+JSON.stringify({abiFieldTables:fieldTables.tables,abiFieldNames:fieldTables.fields,files,prototypes,structured,nestedCallbacks,distinctTypes:types.size,enums:127,productionApplyCalls:2}));

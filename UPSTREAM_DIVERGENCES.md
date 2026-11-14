@@ -1,3 +1,55 @@
+## Shared header field aliases and aggregate classification (2026-11-13)
+
+The leaderboard stack in `bindings/mkmap.js:62` is reproducible as an actual
+adapter error: original `finish_map` writes `rm.icedpool`, while shared metadata
+only defined its physical `rm.flags` member. The TU fixture used C field helpers,
+and the earlier real-world generation check only made stone/room terrain. Both
+missed the production ice setter. A new original-C/production regression rejects
+the previous metadata implementation with the exact missing-field stack.
+The 900s label alone did not identify this failure; the actual missing alias is
+confirmed independently. The unavailable leaderboard session is not reproduced.
+
+`declarations.js` now records all 47 simple member aliases in rm.h, obj.h,
+objclass.h, trap.h and flag.h, including nested union paths. `c-types.js` expands
+them into measured descriptors before constructing shared types, bitfields and
+native views. Aliases retain offsets, widths and backing bytes; conflicting
+metadata is rejected. Direct NetHack type construction also routes alias keys
+to a raw bitfield driver's physical field name. The same normalization derives
+106 missing aggregate classifications from existing C type declarations and
+known measured record types. No offsets or widths are invented. Raw compiler
+metadata is unchanged. Existing enum enrichment remains in place.
+
+The header census reviews all 53 member-like defines across the include tree:
+47 member aliases and six explicit global aliases. All 47 aliases and all 106
+restored aggregate fields pass 2,221 checks, including generic/native/direct
+access, entire record copying, collateral byte preservation and actual memory
+growth, on Node 24 and scoring Node 22. `check-abi-field-tables.mjs`, also called
+by the normal metadata test, validates all 81 finite bit-field selector tables
+(399 names), including nested paths and aliases; injected bad names and the old
+unexpanded ice descriptor are rejected. The existing literal-field/callback
+auditor now uses the same expanded declarations. It previously did not inspect
+these data-selected field names. This is an exhaustive audit of those tables
+and header aliases, not a claim of exhaustive gameplay branch coverage.
+
+Actual production cave generation passes 32 original-C cases (16 with ice),
+13,593 checks: complete terrain bytes, world graphs, both complete ISAAC states
+and ordered main/display RNG logs agree. The old metadata code fails that same
+regression before the fix. No C source, source game algorithms, RNG ordering,
+recording inputs, captures or timeout policies change. Additional original-C
+checks pass: TRAP 640 cases / 2,482 checks with all 124 bodies, DBRIDGE 11,669,
+WEAPON 11,450, OBJNAM 9,268, DO_NAME 1,534, DO_WEAR 5,704 and the earlier MKMAP
+matrix 807. SDK (1,931), state values (1,261), metadata and all 42 callback sites
+also pass. Actual walk/wait/attack remain original-C equivalent. Their existing
+zero-bridge/zero-allocation and 20x gates remain unmet.
+All 44 recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors and
+1,483 animations match, with all 816 scoring inputs unchanged. The unprofiled
+Node 22.23.5 run took 299.251s versus 284.075s previously, about 5.34% slower in
+separate single runs. This correctness fix has a measured timing regression;
+no performance gain is claimed. Detailed receipts, the before-fix production
+rejection and the pre-run manifest are in
+`docs/runtime-environment/header-field-validation.json` and
+`header-field-public44-manifest.json`.
+
 ## Native monster naming and connected naming UI (2026-11-13)
 
 `native/do_name.js` binds all 55 unchanged DO_NAME bodies. `do-name.js` replaces

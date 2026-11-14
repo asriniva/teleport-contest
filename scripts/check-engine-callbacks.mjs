@@ -1,8 +1,9 @@
+import {withNetHackEnums} from '../js/nethack/c-types.js';
 // Typed callback-field checks independent of reaching a runtime branch.
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {parse} from 'acorn';
 import {isEngine} from './branch-coverage/loader.mjs';
-const metadata=JSON.parse(fs.readFileSync(new URL('../js/nethack/records.json',import.meta.url))),records=metadata.records;
+const metadata=withNetHackEnums(JSON.parse(fs.readFileSync(new URL('../js/nethack/records.json',import.meta.url)))),records=metadata.records;
 const recordFor=value=>value==='struct window_procs'||value==='window_procs'?records.window_procs:value==='struct sound_procs'||value==='sound_procs'?records.sound_procs:undefined;
 const literal=node=>node?.type==='Literal'?node.value:node?.type==='TemplateLiteral'&&!node.expressions.length?node.quasis[0].value.cooked:undefined;
 function walk(node,fn,parent){if(!node||typeof node!=='object')return;if(Array.isArray(node)){for(const n of node)walk(n,fn,parent);return;}if(!node.type)return;fn(node,parent);for(const[k,v]of Object.entries(node))if(!['loc','start','end','type'].includes(k))walk(v,fn,node);}
