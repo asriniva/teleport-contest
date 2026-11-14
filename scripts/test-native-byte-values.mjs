@@ -16,6 +16,7 @@ assert.throws(()=>buffer(2).copyCString('ab'),/exceeds buffer/);
 const full=buffer(2);full.store(0,1);full.store(1,2);assert.throws(()=>full.cstringBytes(),/Unterminated/);
 for(const n of [-1,1.5,NaN,Infinity])assert.throws(()=>buffer(n),/extent/);
 for(const i of [-1,8,1.5,NaN]){assert.throws(()=>a.store(i,0),/extent/);assert.throws(()=>a.load(i),/extent/);}
+const offsetBuffer=buffer(16);offsetBuffer.copyCString('abcdef');const tail=offsetBuffer.at(2);assert.equal(tail,offsetBuffer.at(2));assert.equal(tail.at(-2),offsetBuffer);assert.deepEqual([...tail.cstringBytes()],[99,100,101,102,0]);tail.store(0,90);assert.equal(offsetBuffer.load(2),90);tail.copyCString('xy');assert.deepEqual([...offsetBuffer.cstringBytes()],[97,98,120,121,0]);assert.throws(()=>offsetBuffer.at(17),/extent/);assert.throws(()=>offsetBuffer.at(16).load(),/extent/);assert.equal(offsetBuffer.at(16).address,offsetBuffer.address+16);memory.view.setInt8(offsetBuffer.address+3,67);assert.equal(tail.load(1),67);
 const nested=t.stackSave(),at=a.address;t.stackRestore(nested);assert.equal(a.address,at,'deferred materialization belongs to declaring frame');
 memory.view.setInt8(at,90);assert.equal(a.load(),90,'foreign writes remain visible');
 memory.grow(memory.buffer.byteLength+65536);assert.equal(a.address,at);assert.equal(a.load(),90,'buffer follows heap growth');

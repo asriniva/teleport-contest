@@ -817,17 +817,17 @@
     },
     {
       "file": "js/nethack/bindings/hack.js",
-      "line": 10,
+      "line": 11,
       "name": "schemas"
     },
     {
       "file": "js/nethack/bindings/hack.js",
-      "line": 11,
+      "line": 12,
       "name": "globals"
     },
     {
       "file": "js/nethack/bindings/hack.js",
-      "line": 124,
+      "line": 125,
       "name": "aliases"
     },
     {
@@ -877,7 +877,7 @@
     },
     {
       "file": "js/nethack/bindings/mon.js",
-      "line": 8,
+      "line": 10,
       "name": "schema"
     },
     {
@@ -1406,7 +1406,7 @@
     },
     {
       "file": "js/nethack/bindings/hack.js",
-      "sha256": "d64d77e4210b7473e891d5caa031d081158a81b7c8c58f117a46009623607f2b"
+      "sha256": "aa9247cfe7db27ef1ceb24954706773c6d36add5a53214af46417b5b628fe4d1"
     },
     {
       "file": "js/nethack/bindings/hacklib.js",
@@ -1486,7 +1486,7 @@
     },
     {
       "file": "js/nethack/bindings/mon.js",
-      "sha256": "e81fe61548076f0ea9dc7aaa9b5364cb8b14c41719f16bbf4d8a9314ef313be5"
+      "sha256": "e5672dcfbb39a291c65ec94f2b33a021b9fdcf6344dbbc735b215409d76e60af"
     },
     {
       "file": "js/nethack/bindings/mondata.js",

@@ -1,3 +1,51 @@
+## Native movement local references (2026-11-14)
+
+`native/local-reference.js`, `bindings/hack.js` and `movement.js` now keep HACK
+scalar/object by-reference locals in JS between native calls. Native-compatible
+pointer parameters retain the same same-game reference; a genuine byte consumer
+materializes a correctly sized cell in its declaring frame. Native mutation and
+post-call writeback retain the existing order, including finally blocks, and
+byte aliases remain visible after materialization. Different-type aliases retain
+the byte path. The actual allocator is supplied directly so deferred reservations
+retain their lifetime; legacy component adapters keep their existing path.
+No source policy, RNG call, integer width, map/monster order or save layout changes.
+MON scalar/object locals and int-pointer consumers now use the same native
+reference protocol, including uninitialized cells and cross-owner writeback.
+MON int-pointer views retain their existing explicit int conversion on writes.
+`byte-values.js` now supplies cached offset views over shared native bytes;
+`generate-native-mon.py` replaces the dead-monster cleanup diagnostic buffer with
+native bytes and its zero-byte initialization with an offset-aware store. The
+actual diagnostic still materializes real bytes when needed; no diagnostic is
+removed. Other MON buffers/struct/array locals retain their existing path.
+Validation: 5,099 comparisons against actual HACK byte-backed scalar/object
+cells and MON locals cover signed/unsigned widths, fractions/overflow/nonfinite,
+BigInt/string/undefined/null inputs, native identity/adoption, native writeback,
+zero pre-address allocation, declaring-frame materialization, foreign writes,
+type-punned aliases, growth/expiry and uninitialized output assignment. A real
+command sequence invokes source confusion/stun/reset at declared input boundaries;
+changed-direction RNG genuinely executes and every command snapshot, complete
+world, both final ISAAC states/ordered logs, terminal bytes and 16 frames match C.
+A separate explicitly inconsistent purge-count diagnostic fixture matches C over
+26 checks and proves cleanup/describe_level/impossible still materialize bytes and
+emit the actual diagnostic. It is not presented as natural gameplay. Byte-offset
+views additionally verify shared mutation, copied strings, identity and one-past
+bounds. Generator freshness, metadata types/production wiring, 1,440 pet/appraisal,
+574 WORN, 514 TOPL and 51 natural mounted-save comparisons pass.
+
+Ordinary walk/wait/attack remain exactly C-equivalent. Heap allocations fall from
+pushed 30/159/100 to 25/158/93, and stack allocations from 15/39/66 to 10/38/59;
+generic calls remain 10/18/38. Other locals/byte/string services and C bridges
+remain. Every water/air, punishment, bars, polymorph and hidden-recording path is
+not exercised. All 44 public recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors
+and 1,483 animations match. All 844 scoring inputs stayed unchanged and final
+source hashes match the run. Candidate elapsed time was 270.811s versus the
+existing pushed 272.271s, about 0.54% less time in separate single runs. This is
+a small observed difference, not a controlled speedup or the required 20x.
+No new baseline or CPU profiling was performed. The strict zero turn and 20x
+remain unmet. Evidence:
+`docs/runtime-environment/native-movement-references-validation.json` and
+`native-movement-references-public44-manifest.json`.
+
 ## Native TOPL window, prompt and history context (2026-11-14)
 
 `terminal-messages.js` now assembles one `native/topl-state.js` context and native
