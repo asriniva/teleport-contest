@@ -1,3 +1,41 @@
+## Native item naming, grammar and formatter dispatch (2026-11-13)
+
+`native/objnam.js` binds all 87 unchanged OBJNAM bodies to the actual game
+context. `item-naming.js` registers direct native entries with the shared owner.
+The 41 public record types use canonical native records; the five private table
+and wish-parser types use cached identities and compiled field accessors, with
+explicit rejection of unsupported private bitfields. Record-kind metadata
+preserves field references. Integer casts use native arithmetic where exact;
+64-bit and opaque pointer operations retain the original conversions. Cached
+schema resolution replaces repeated parsing. Scalar locals use the existing
+caller-lifetime reservation mechanism when the transport supports it.
+
+Formatter callbacks validate their real `pp` signature. Same-game native
+formatters run directly with the shared item identity. Foreign callbacks retain
+indirect dispatch and numeric addresses; wrong signatures are rejected. Cached
+contexts preserve changing service facades, callback reentry, memory growth and
+exception/constructor cleanup. C string buffers, formatting, allocation,
+non-migrated dependencies and save/restore boundaries remain. This is connected
+native naming, not a claim that all naming-related byte work is gone. No upstream
+C, source algorithm, RNG order, recording input or capture policy changes.
+
+Native and legacy each pass 9,268 independent original-C comparisons; all 87
+bodies execute. Source-policy AST comparison passes. Live gameplay verifies
+shared hero/item identities, native formatter calls, foreign callback fallback,
+signature rejection and exception cleanup. Metadata validation, all 42 dynamic
+sites and 1,931 SDK checks pass. Actual walk/wait/attack still match original C
+state, output, ordered RNG and frames. Generic engine calls are 23/43/79, C
+scopes 37/70/134, generic field operations 11/42/81 and pointer callbacks 0/0/0.
+C heap allocations remain 44/165/109. Zero-bridge/zero-allocation and 20x
+acceptance remain false.
+All 44 recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors and
+1,483 animations match, with all 814 scoring inputs unchanged. The unprofiled
+Node 22.23.5 batch took 284.203s versus 283.188s before this step, about 0.36%
+slower in separate single runs. There is no demonstrated timing improvement.
+Receipts and the pre-run manifest are in
+`docs/runtime-environment/native-naming-validation.json` and
+`native-naming-public44-manifest.json`.
+
 ## Native armor/status maintenance and movement access ownership (2026-11-13)
 
 `native/do_wear.js` binds all 79 unchanged armor/equipment policies to the actual

@@ -115,6 +115,21 @@ try{armorContext.nativeNamespace.find_ac=()=>{assert.equal(C,armorMarker);enviro
 assert.equal(environment.memory.live.size,liveBeforeArmor,'native armor failures free temporary storage');
 for(const name of ['closed_door','accessible'])assert.equal(environment.services[name].nativeEntry,owner.functions.get(name),name+' upgrades the earlier movement access owner');
 
+const namingServices=environment.start('japanese-item-names').environment,namingContext=namingServices.nativeContext;
+assert.ok(namingContext?.nativeNamespace,'actual naming owner holds native execution');assert.equal(namingServices.nativeContext,namingContext,'naming context remains stable');
+for(const name of ['xname','cxname','obj_is_pname','vtense','readobjnam'])assert.equal(environment.services[name].nativeEntry,owner.functions.get(name),name+' has direct naming execution');
+const oldNamedTest=namingContext.nativeNamespace.obj_is_pname,namingMarker={nativeNamingCaller:true},liveBeforeNaming=environment.memory.live.size;
+try{namingContext.nativeNamespace.obj_is_pname=value=>{assert.equal(C,namingMarker);assert.equal(namingContext.u,messages.u,'naming uses the same hero during an active call');assert.equal(namingContext.object(value),weaponContext.object(value),'naming and weapon calculations share item identities');return oldNamedTest(value);};withCEnvironment(namingMarker,()=>environment.services.obj_is_pname(environment.requireGlobal('hands_obj')));
+ namingContext.nativeNamespace.obj_is_pname=()=>{assert.equal(C,namingMarker);environment.transport.stackAlloc(24);throw Error('native naming cleanup');};withCEnvironment(namingMarker,()=>assert.throws(()=>environment.services.obj_is_pname(environment.requireGlobal('hands_obj')),/native naming cleanup/));
+}finally{namingContext.nativeNamespace.obj_is_pname=oldNamedTest;}
+assert.equal(environment.memory.live.size,liveBeforeNaming,'native naming failures restore temporary storage');
+const formatterItem=weaponContext.object(environment.requireGlobal('hands_obj')),oldXname=namingContext.nativeNamespace.xname;
+try{namingContext.nativeNamespace.xname=value=>{assert.equal(namingContext.object(value),formatterItem);return 71;};assert.equal(namingServices.callFormatter(environment.functionPointer('xname','pp'),formatterItem),71,'named native formatter receives the shared item');}finally{namingContext.nativeNamespace.xname=oldXname;}
+let foreignFormatterCalls=0;const foreignFormatter=environment.functions.functionPointer(value=>{assert.equal(value,formatterItem.address);foreignFormatterCalls++;return 73;},'pp');
+assert.equal(namingServices.callFormatter(foreignFormatter,formatterItem),73);assert.equal(foreignFormatterCalls,1,'foreign formatter retains pointer arguments');
+assert.throws(()=>namingServices.callFormatter(environment.functions.functionPointer(()=>0,'ip'),formatterItem),/Unknown or incompatible C callback/,'formatter signatures remain checked');
+
+
 assert.equal(owner.depth,0,'input exhaustion publishes the entire connected native graph');
 assert.equal(owner.dirty.size,0);
 for(const name of ['movemon','mcalcdistress','healmon','mfndpos','dochugw','m_move','domove','lookaround','test_move','vision_recalc','clear_path','does_block','moveloop','moveloop_core','moveloop_preamble','stop_occupation','timet_to_seconds','timet_delta','dog_move','dog_eat','mattacku','magic_negation','getmattk']){

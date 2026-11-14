@@ -1,3 +1,6 @@
+import {nativeFixtureServices} from './native-pet-combat-fixture.mjs';
+const nativeObjnamServices=new WeakMap();
+function objnamServices(s){if(process.env.NATIVE_OBJNAM_FIXTURE!=='1')return s;let local=nativeObjnamServices.get(s);if(!local){local=nativeFixtureServices(s,{}).services;local.nativeObjnamTypes=s.moduleKey.environment.ctypes;nativeObjnamServices.set(s,local);}return local;}
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
 import {DataView as FixtureDataView} from './native-test-backend.mjs';
@@ -21,14 +24,14 @@ const L={};for(const[k,v]of Object.entries(raw))L[k]=raw['constwidth_'+k]===8n?(
 const contexts=new WeakMap(),lastServices=new WeakMap();
 const runtime={objnam(s,n,...a){
  lastServices.set(s.moduleKey,s);const cfg=contexts.get(s.moduleKey);
- if(!cfg)return callObjnam(s,L,n,...a);
+ if(!cfg)return callObjnam(objnamServices(s),L,n,...a);
  const label=cfg.depth?'nested':cfg.label;cfg.depth++;
  const current=new Proxy(s,{get(t,k,r){
   const value=Reflect.get(t,k,r);
   if(k==='strlen'||k==='Strlen_')return(...args)=>{cfg.events.push(label);return value(...args);};
   return value;
  }});
- try{return callObjnam(current,cfg.layout??L,n,...a);}finally{cfg.depth--;}
+ try{return callObjnam(objnamServices(current),cfg.layout??L,n,...a);}finally{cfg.depth--;}
 },objnamState(s){lastServices.set(s.moduleKey,s);return objnamState(s);}};
 const hybrid=await hybridFactory({nethackPorted:runtime});const modules=[reference,hybrid];
 const names=['strprepend','nextobuf','releaseobuf','maybereleaseobuf','obj_typename','simple_typename','safe_typename','obj_is_pname','distant_name','fruitname','fruit_from_indx','fruit_from_name','reorder_fruit','xcalled','xname','xname_flags','minimal_xname','mshot_xname','the_unique_obj','the_unique_pm','add_erosion_words','erosion_matters','doname_base','doname','doname_with_price','doname_vague_quan','not_fully_identified','corpse_xname','cxname','cxname_singular','killer_xname','short_oname','singular','just_an','an','An','the','The','aobjnam','yobjnam','Yobjnam2','Tobjnam','Doname2','paydoname','yname','Yname2','ysimple_name','Ysimple_name2','simpleonames','ansimpleoname','thesimpleoname','actualoname','bare_artifactname','otense','vtense','singplur_lookup','singplur_compound','makeplural','makesingular','ch_ksound','badman','wishymatch','rnd_otyp_by_wpnskill','rnd_otyp_by_namedesc','shiny_obj','set_wallprop_from_str','wizterrainwish','dbterrainmesg','readobjnam_init','readobjnam_preparse','readobjnam_parse_charges','readobjnam_postparse1','readobjnam_postparse2','readobjnam_postparse3','readobjnam','rnd_class','Japanese_item_name','armor_simple_name','suit_simple_name','cloak_simple_name','helm_simple_name','gloves_simple_name','boots_simple_name','shield_simple_name','shirt_simple_name','mimic_obj_name','safe_qbuf'];
@@ -166,7 +169,7 @@ contexts.delete(hybrid);
 const services=lastServices.get(hybrid),sentinel={rectState:{marker:'R'},trackState:{marker:'T'}},savedStack=hybrid._probe_stack();
 const throwing=new Proxy(services,{get(t,k,r){if(k==='strlen'||k==='Strlen_')return()=>{throw Error('OBJNAM dependency exception witness');};return Reflect.get(t,k,r);}});
 withCEnvironment(sentinel,()=>{
- assert.throws(()=>callObjnam(throwing,L,'an',write(hybrid,0,'apple')),/OBJNAM dependency exception witness/);
+ assert.throws(()=>callObjnam(objnamServices(throwing),L,'an',write(hybrid,0,'apple')),/OBJNAM dependency exception witness/);
  assert.equal(C,sentinel);assert.equal(R,sentinel.rectState);assert.equal(T,sentinel.trackState);
 });
 assert.equal(hybrid._probe_stack(),savedStack);assert.equal(C,undefined);assert.equal(R,undefined);assert.equal(T,undefined);
@@ -174,17 +177,17 @@ reset();assert.equal(run('an',m=>[write(m,0,'apple')],'normal services restored 
 // Cache identity includes external immutable layout identity; direct constructor
 // calls themselves remain fresh and do not publish their result as the cache.
 let layoutReads=0;const otherLayout={...L};Object.defineProperty(otherLayout,'BUFSZ',{enumerable:true,get(){layoutReads++;return L.BUFSZ;}});
-callObjnam(services,otherLayout,'an',write(hybrid,0,'apple'));const firstReads=layoutReads;assert.ok(firstReads>0);
-callObjnam(services,otherLayout,'an',write(hybrid,0,'orange'));assert.equal(layoutReads,firstReads,'Same external layout identity reuses validated environment');
-assert.notEqual(createObjnamEnvironment(services,L,objnamState(services)),createObjnamEnvironment(services,L,objnamState(services)),'Direct constructor remains fresh');
+callObjnam(objnamServices(services),otherLayout,'an',write(hybrid,0,'apple'));const firstReads=layoutReads;assert.ok(firstReads>0);
+callObjnam(objnamServices(services),otherLayout,'an',write(hybrid,0,'orange'));assert.equal(layoutReads,firstReads,'Same external layout identity reuses validated environment');
+assert.notEqual(createObjnamEnvironment(objnamServices(services),L,objnamState(services)),createObjnamEnvironment(objnamServices(services),L,objnamState(services)),'Direct constructor remains fresh');
 // A failed constructor is never published. Retry uses the original native
 // helpers on another actual Module, and source static state never crosses it.
 const second=await hybridFactory({nethackPorted:runtime});second._probe_reset();const s2=lastServices.get(second);let fail=true;
 const failed=new Proxy(s2,{get(t,k,r){const value=Reflect.get(t,k,r);if(k==='literal')return(...a)=>{if(fail){fail=false;throw Error('OBJNAM constructor failure witness');}return value(...a);};return value;}});
-const secondStack=second._probe_stack();assert.throws(()=>callObjnam(failed,L,'an',write(second,0,'apple')),/OBJNAM constructor failure witness/);
+const secondStack=second._probe_stack();assert.throws(()=>callObjnam(objnamServices(failed),L,'an',write(second,0,'apple')),/OBJNAM constructor failure witness/);
 assert.equal(second._probe_stack(),secondStack);assert.equal(C,undefined);
-assert.equal(text(second,callObjnam(s2,L,'an',write(second,0,'apple'))),'an apple','Successful constructor retry');
-const secondIndex=objnamState(s2).obufidx;callObjnam(services,L,'an',write(hybrid,0,'orange'));assert.equal(objnamState(s2).obufidx,secondIndex,'Independent Module buffer index');
+assert.equal(text(second,callObjnam(objnamServices(s2),L,'an',write(second,0,'apple'))),'an apple','Successful constructor retry');
+const secondIndex=objnamState(s2).obufidx;callObjnam(objnamServices(services),L,'an',write(hybrid,0,'orange'));assert.equal(objnamState(s2).obufidx,secondIndex,'Independent Module buffer index');
 const secondPool=Number(second._probe_pool()),primaryPool=Number(hybrid._probe_pool());second.HEAPU8[secondPool]=37;hybrid.HEAPU8[primaryPool]=91;assert.equal(second.HEAPU8[secondPool],37,'Independent actual native storage');
 // Run a real comparison pair on the second Module after its independent cache
 // construction and a second native C-to-JS reentry/growth event.
