@@ -1,3 +1,50 @@
+## Native pet decisions and lifecycle lists (2026-11-14)
+
+DOG creation, taming, appraisal, elapsed-time and migration policies now share
+canonical hero, monster, inventory and map state through `native/dog{,-state,-graph}.js`
+and `pets.js`. Private source calls execute lexically; RNG attribution/order are
+retained. `native/state-links.js` carries native references to measured list cells
+and lazily materializes private list backing only at an actual byte consumer.
+`monster-lifecycle.js` accepts these same-game references for native `relmon`;
+foreign references retain their existing pointer path. Iteration passes native
+callbacks to native MON; a genuine foreign iterator retains its named ABI token.
+Native coordinate/level locals acquire bytes only when required by a byte consumer.
+The earlier monster-companion-extra newedog/free_edog entries are upgraded to
+the same native functions; native livelog retains its fixed flag/format ABI.
+`native/object-appraisal{,-graph}.js` also binds the five source query bodies for
+quest artifact classification/recursive search and object resistance/shudder.
+The existing QUESTPGR/ZAP public owners select these entries; pet movement and
+native DOG see the same canonical objects and RNG owner. Source species-pointer
+expressions retain 64-bit wrap semantics. Other owners and foreign
+string/serialization boundaries remain. Focused validation passes 1,440 checks over 222 source actions on genuine MAIN
+worlds, including food appraisal across five source-created species and twelve
+source-created item types, actual artifact gifts, resistance thresholds and unique
+object immunity, shudder checks, taming, elapsed-time catchup, native iterator
+callbacks and same-level keepdogs/migrate/arrival. Complete world graphs, both
+ISAAC states/ordered logs, terminal bytes/frames and input consumption match C.
+All 21 DOG bodies are AST-compared with only explicit lexical-call adaptations;
+the five query bodies are generated directly from source without policy edits.
+Private find_qarti remains lexical rather than acquiring an invented public ABI.
+List-reference tests cover native identity, canonical mutation, foreign aliases,
+private-head allocation only on address access, heap growth and per-game isolation.
+Earlier companion allocation and all selected public query owners are checked
+against their exact native entries. WORN component checks (574), natural Knight
+riding/cross-runtime saves (51), connected monsters, metadata types and actual
+production wiring pass. Ordinary turns still match C exactly: walk/wait/attack
+generic calls 10/20/42 versus pushed 10/26/55, contexts 17/30/63 versus 17/42/89,
+and generic fields 6/9/31 versus 6/13/40; heap allocations remain 30/159/100.
+
+These actions do not exercise every optional item/species, failed placement,
+alternate-level/endgame migration or hidden recording. All 44 public recordings pass: 792,838 ordered RNG entries, 11,405 screens/cursors
+and 1,483 animations match. All 841 scoring inputs stayed unchanged and final
+source hashes match the run. Candidate elapsed time was 275.482s versus the
+existing pushed 278.169s, about 0.97% less time in separate single runs. This is
+modest observed improvement, not a controlled speedup or the required 20x.
+No new baseline or CPU profiling was performed. Evidence:
+`docs/runtime-environment/native-pet-appraisal-validation.json` and
+`native-pet-appraisal-public44-manifest.json`.
+The ordinary-turn zero gate and 20x objective remain unmet.
+
 ## Native connected WORN equipment and extrinsic state (2026-11-14)
 
 Hero and monster WORN owners now share native policies and canonical actor,

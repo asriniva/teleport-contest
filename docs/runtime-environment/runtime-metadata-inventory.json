@@ -10,8 +10,8 @@
   },
   "jsonSources": 120,
   "coreJsonSources": 112,
-  "inlineTableDeclarations": 128,
-  "inlineTableFiles": 91,
+  "inlineTableDeclarations": 126,
+  "inlineTableFiles": 90,
   "adapterFiles": 129,
   "sharedAliasSource": {
     "file": "js/nethack/declarations.js",
@@ -1184,16 +1184,6 @@
       "file": "js/nethack/object-state.js",
       "line": 8,
       "name": "globals"
-    },
-    {
-      "file": "js/nethack/pets.js",
-      "line": 9,
-      "name": "fields"
-    },
-    {
-      "file": "js/nethack/pets.js",
-      "line": 9,
-      "name": "types"
     },
     {
       "file": "js/nethack/random-text.js",
