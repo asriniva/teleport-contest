@@ -1,3 +1,52 @@
+## Native timer, status and event execution (2026-11-13)
+
+`timers.js` now registers 32 TIMEOUT entries as native calls, with one per-game
+`native/timeout.js` policy graph containing all 54 source function bodies.
+The generator removes private C calling-convention dispatch and replaces the
+pointer/index property scan with an ordered numeric loop over the same 69
+properties. A structural policy check permits only those explicit rewrites;
+statements, condition order and source RNG caller sites otherwise match.
+
+The timer context uses canonical native hero, species, monster, object, map,
+property, queue and instance records. The old timer-specific generic record
+proxies and union-alias wrappers are removed. Equipment, packed fields and
+shared strings use native records/typed storage; visibility reads native row
+handles and bytes. Native dependencies receive native values directly. Known
+event destinations skip pointer dispatch while retaining the existing callback
+IDs and original table order. Unknown callbacks and genuine foreign routines
+retain their explicit boundary. The shared `obj_to_any` union remains the same
+stable, addressable per-game storage, now returned by a native entry.
+
+Serialization, C-shaped event records, addressable locals and remaining foreign
+owners still use byte storage; this is not a zero-allocation turn claim.
+The standalone legacy TIMEOUT factory remains available for isolated fixtures.
+Original C source, initialization policy, RNG rules and recordings are unchanged.
+
+`test-native-timeout.mjs` starts genuine C and JS main worlds, verifies policy
+structure and checks randomized queue operations, opaque 64-bit union values,
+unsigned timer-ID wrap, live view growth, sterile and viable egg expiry with
+actual hostile/tame monster creation, status countdown/real POTION expiry,
+burning oil/lamp expiry and cleanup, and nonempty save/release/restore/relink.
+It also checks timer moves/splits, property-name lookup, spot queries, statistics
+output/copyback and sleep state. All 4,987 focused comparisons pass.
+It compares actual queue/serialization bytes, complete reachable world state,
+ordered main/display RNG logs and full ISAAC states, terminal bytes, frames,
+and More inputs. Production calls deny Wasm/network and leave C contexts clear.
+Fatal-status and other foreign-event branches remain separately unaccepted.
+
+The actual ordinary-turn original-C equivalence check passes. Relative to the
+WERE candidate, bridge calls fall from 20/36/70 to 18/34/68 and generic field
+accesses from 11/18/45 to 6/13/40 for walk/wait/attack. C heap allocations remain
+44/165/109, so the strict acceptance gate and the 20x ambition remain unmet.
+All 44 public recordings pass: 792,838 ordered RNG entries, 11,405 screens and
+cursors, and 1,483 animations match exactly. All 820 scoring inputs remained
+unchanged. The unprofiled Node 22 run took 286.144s versus the existing 298.180s
+(previous WERE candidate) and 289.713s (earlier public-prototype candidate),
+4.04% and 1.23% less time respectively in separate single runs. This establishes
+a modest measured reduction, not a controlled speedup or the required 20x.
+No new baseline or CPU profiling was performed. Evidence and exact source hashes:
+`docs/runtime-environment/native-timeout-validation.json`.
+
 ## Native WERE turn path and metadata source ledger (2026-11-13)
 
 `were.js` now registers all eight original WERE entries as direct native

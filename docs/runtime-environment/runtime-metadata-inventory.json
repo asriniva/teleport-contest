@@ -1684,7 +1684,7 @@
     },
     {
       "file": "js/nethack/bindings/timeout.js",
-      "sha256": "df6be8d256fd43a26083f7dd4c9a2f3309c4b038521b711327b731b7e8bae679"
+      "sha256": "7f4d1660dfebdf3ea14cfc63d89c55fb2e0451c311cab6da1367be8052f94143"
     },
     {
       "file": "js/nethack/bindings/topl.js",
