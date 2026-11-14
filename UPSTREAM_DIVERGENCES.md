@@ -1,3 +1,39 @@
+## Native connected hero tracking and monster pursuit (2026-11-14)
+
+`native/track{,-state}.js` and `environment.js` replace TRACK's generic C context,
+proxy coordinate array and freshly constructed coordinate views with one native
+owner, stable canonical coordinates and direct entries for all six source
+functions. Hero/equipment reads use shared native records; private counters use
+the typed arena. The original ring/nearest-point traversal, stealth checks and
+mutation order are retained verbatim by `generate-native-track.mjs`. The original
+one-past coordinate sentinel is explicit and never dereferenced. Save/restore
+retain the measured state bytes and original serializer calls, modes and panic.
+This removes compatibility work between hero movement and monster pursuit;
+backing storage still has a fixed measured allocation at initialization. No
+claim of entirely pointer-free tracking, zero-allocation turns or 20x.
+Validation: 11,835 actual native-C ring-buffer/pointer/serialization comparisons
+pass, including wraparound, both stealth ring slots, mutable coordinate aliases,
+all source file modes, count guards (including original negative-count acceptance),
+heap growth and game isolation. An additional 3,496 original-C comparisons pass
+through real SFBASE/SFSTRUCT historical files. Actual MAIN movement with source
+confusion/stun/reset matches C over complete world/RNG/logs/terminal/frames;
+51 natural mounted-save comparisons also pass. Generator freshness, metadata
+types, production wiring and inventory checks pass. Distance calls bind the
+existing native HACKLIB function once; public query inputs retain coordinate
+narrowing, including the compatibility fallback for noninteger inputs.
+
+Walk/wait/attack remain C-equivalent. Generic calls fall from pushed 8/16/34 to
+7/14/32 and contexts from 13/22/47 to 12/20/45. C-heap allocations remain
+25/158/93, and the strict zero gate fails. All 44 public recordings pass:
+792,838 ordered RNG entries, 11,405 screens/cursors and 1,483 animations match.
+All 848 scoring inputs stayed unchanged and final hashes match the run.
+Candidate elapsed time was 270.480s versus existing pushed 272.452s, about 0.72%
+less time in separate single runs. This is a small observed difference, not a
+controlled speedup or the required 20x. No new baseline or CPU profiling was
+performed. Other turn dependencies and unexercised hidden/gameplay branches
+remain. Evidence: `docs/runtime-environment/native-track-validation.json` and
+`native-track-public44-manifest.json`.
+
 ## Native connected engraving state and execution (2026-11-14)
 
 `engrave.js` and `native/engrave{,-state}.js` now share one native graph across
