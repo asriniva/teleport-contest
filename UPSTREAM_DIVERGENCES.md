@@ -1,3 +1,30 @@
+## Rejected fixed NHLUA operation experiment (2026-11-14)
+
+The active production engine is unchanged from `7c8bea9`. An uncommitted
+experiment replaced 2,248 typed/API dispatch operations in the 94-function
+NHLUA graph with 719 prebound operation plans and fixed-arity API calls. It
+retained byte-backed storage, field projections, pointer conversion and other
+engine compatibility. The experiment is removed from production after timing;
+its source snapshot and patch remain in the local recording evidence directory.
+No production policy, callback, RNG, storage or browser capability changes.
+
+All 44 public recordings passed: 792,838 ordered RNG calls, 11,405 screens and
+cursors, and 1,483 animation frames matched. All 875 scoring inputs were
+unchanged during replay. Runtime was 258.7353 s against the existing 250.0491 s
+result, 3.47% slower in this single comparison. No new baseline or CPU profiling
+was performed. Component validation passed 5,755 operation checks and 792
+original-C checks; inverse source-policy equality covered all 94 functions.
+These checks establish correctness within their scope, not a speed benefit.
+
+The whole-turn original-C comparison passed, but zero generic execution/C-field/
+pointer dispatch and C-heap allocation acceptance remains false. Walk/wait/attack
+still have 4/7/20 generic calls and 6/13/21 heap allocations. The next architecture
+must remove byte-backed field projections and pointer/call adapters from the
+connected turn path, with authoritative native actor, inventory and occupancy
+values. Converting more module bodies alone is not an accepted speed outcome.
+Evidence: `docs/runtime-environment/rejected-nhlua-fixed-operations-validation.json`.
+The 20x and 40–55 s objectives remain unmet.
+
 ## Fixed incomplete service argument metadata (2026-11-14)
 
 The reported `ship_object -> otransit_msg -> Strcpy` failure is reproduced in
