@@ -1,3 +1,42 @@
+## Inventory text-pointer entry repair (2026-11-15)
+
+The leaderboard's complete failure trace identifies
+`wield.doquiver_core("fire") -> equipment-services -> INVENT.prinv`.
+With autoquiver disabled, removing readied ammunition and manually choosing
+arrows during `fire` passes the JavaScript prefix `"You ready:"` into `prinv`.
+The adapter tried to interpret that text as a numeric address and threw
+`INVENT pointer exceeds exact address range`. Authored input `Q- f c<Esc>`
+reproduces the same call chain on submitted main. The site's outer error was
+labelled `timeout (900s)`; the reproduced defect is an argument-conversion error,
+not an inventory loop. The leaderboard's next score remains external verification.
+
+`generate-native-address-entries.mjs` now reads the original C function types
+for every generated entry, resolves typedefs and qualifiers during generation,
+and checks fixed parameter counts. It emits text-to-literal-address conversion
+for declared character-pointer arguments on both direct entries and the cold/
+compatibility path in `address-ports.js`. Numeric pointers, nontext parameters,
+wide scalar values and parameter order retain their existing behavior. Address
+carriers are read once. The generated `native/address-entries.js` contains the
+fixed operations; there is no new runtime type parser or metadata catalogue.
+No game policy, source-shaped `js/ported/` body, RNG, frozen file, browser
+capability or external filesystem access changes.
+
+Validation: all 1,163 fixed entry plans pass 25,737 checks, including 114 text
+parameters, empty strings, retained numeric pointers, cold/direct conversion,
+2,001 address getters, provider restoration and existing arity/exception guards.
+Five authored gameplay cases cover manual firing, inventory-menu selection,
+counted stack splitting, cancellation and normal quiver feedback. They match
+original C state, stdout/stderr, every ordered core/display RNG call and every
+screen/cursor/animation frame (55 assertions). The browser boundary test passes
+save/restore with `process` absent and Node imports denied. Full 44-recording
+regression is running; no new baseline profile or speed claim is made.
+
+The earlier checks exercised numeric argument plans and existing recordings,
+which did not cover this literal prefix on manual ammunition refill. The
+configuration varargs fix below was separate and did not repair this path.
+The opaque compiler candidate remains local-only and is not installed or
+published as gameplay code; readable source-shaped JavaScript remains required.
+
 ## Native configuration varargs profile (2026-11-15)
 
 `js/nethack/configuration.js` explicitly selects value packets for the pure-JS
@@ -13,7 +52,8 @@ pointer profile. Two invalid-option runs match the complete original C engine's
 state, stdout/stderr, core/display RNG logs, and all 10 warning frames each.
 Optional `--original-c=...` repeats that independent reference check. Ten
 inventory option combinations were explored with test-only loop counters; the
-reported 900-second inventory failure remains unreproduced. This diagnostic fix
+reported inventory failure was not reproduced in those initial checks (see the
+subsequent repair above). This diagnostic fix
 is not claimed to fix that deadline or establish a speed improvement. All 44 public recordings pass with exact ordered RNG and screen
 comparisons; all 873 hashed scoring inputs remained unchanged during replay.
 The run overlapped compiler feasibility work and is excluded from speed comparisons. The separate native-state migration
