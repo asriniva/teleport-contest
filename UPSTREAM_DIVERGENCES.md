@@ -1,3 +1,31 @@
+## Browser UTF-8 decoding of resizable heap views (2026-11-15)
+
+`js/c-runtime/stdio.js::readSdkUtf8` now copies the selected long string bytes
+into a fixed-size buffer before `TextDecoder.decode` when the source buffer is
+resizable. Fixed buffers retain the existing view path. CMemory still uses its
+resizable heap; byte-string/Latin1 behavior, SDK's short-string decoder, UTF-8
+replacement/BOM rules and frozen storage are unchanged. This affects stdio's
+UTF-8 path decoding, including configuration-file startup and reopening files.
+There are no new external filesystem, Node, network or Wasm APIs.
+
+The prior code's long-path view is rejected by browsers with the older
+TextDecoder buffer-source restriction (see Mozilla issue
+https://bugzilla.mozilla.org/show_bug.cgi?id=2024868). The test harness enforces
+that rejection and reproduces the old stack exactly at `readSdkUtf8:16:39 ->
+pathText -> fopen -> fopen_config_file -> read_config_file`. With the fix,
+`test-browser-resizable-stdio.mjs` passes 34 checks: fixed/resizable heaps,
+ASCII/multibyte/non-BMP/BOM/malformed UTF-8, heap growth, unchanged short-string
+path, and both recorded save/restore segments with exact screens, cursors and
+ordered RNG. Production imports run with `process` absent and Node imports
+rejected. This is a strict decoder compatibility simulation, not a completed
+Firefox UI automation run. The native stdio suite additionally passes 23 cases /
+1,657 original-C checks. Other TextDecoder sites in the active runtime consume
+copied VFS file bytes or fixed bundled asset arrays, not live heap views.
+
+The inventory fix immediately below finished all 44 public recordings after
+its push; this separate decoding change has the focused checks above. No new
+baseline profiling or speed claim accompanies this browser repair.
+
 ## Inventory text-pointer entry repair (2026-11-15)
 
 The leaderboard's complete failure trace identifies
@@ -28,8 +56,9 @@ Five authored gameplay cases cover manual firing, inventory-menu selection,
 counted stack splitting, cancellation and normal quiver feedback. They match
 original C state, stdout/stderr, every ordered core/display RNG call and every
 screen/cursor/animation frame (55 assertions). The browser boundary test passes
-save/restore with `process` absent and Node imports denied. Full 44-recording
-regression is running; no new baseline profile or speed claim is made.
+save/restore with `process` absent and Node imports denied. All 44 public recordings pass with all 873 hashed scoring inputs unchanged.
+This correctness run overlapped focused tests and is excluded from speed
+comparisons; no new baseline profile or speed claim is made.
 
 The earlier checks exercised numeric argument plans and existing recordings,
 which did not cover this literal prefix on manual ammunition refill. The
