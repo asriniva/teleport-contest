@@ -1,3 +1,24 @@
+## Native configuration varargs profile (2026-11-15)
+
+`js/nethack/configuration.js` explicitly selects value packets for the pure-JS
+CFGFILES adapter. `bindings/cfgfiles.js` preserves the default compiled-C
+memory64 pointer profile and adds a values profile; zero or one arguments are
+never guessed to be pointer carriers. Invalid options previously crashed with
+`Standalone varargs require a value packet` instead of producing C's warning.
+No game algorithm, RNG order, frozen file, or production Node API changes.
+
+`test-configuration-varargs.mjs` checks the production configuration call path,
+empty/single/mixed packets, wide values above 2^53, floats, and the retained
+pointer profile. Two invalid-option runs match the complete original C engine's
+state, stdout/stderr, core/display RNG logs, and all 10 warning frames each.
+Optional `--original-c=...` repeats that independent reference check. Ten
+inventory option combinations were explored with test-only loop counters; the
+reported 900-second inventory failure remains unreproduced. This diagnostic fix
+is not claimed to fix that deadline or establish a speed improvement. All 44 public recordings pass with exact ordered RNG and screen
+comparisons; all 873 hashed scoring inputs remained unchanged during replay.
+The run overlapped compiler feasibility work and is excluded from speed comparisons. The separate native-state migration
+is not part of this change.
+
 ## Rejected fixed NHLUA operation experiment (2026-11-14)
 
 The active production engine is unchanged from `7c8bea9`. An uncommitted
