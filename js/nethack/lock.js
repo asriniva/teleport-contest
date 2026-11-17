@@ -45,5 +45,7 @@ export function enableLock(environment,layouts){
   const entry=environment.start('inventory-context');if(entry.namespace.maybe_reset_pick!==source.maybe_reset_pick)throw new Error('Unexpected earlier LOCK inventory hook');
   entry.namespace.maybe_reset_pick=(...args)=>call('maybe_reset_pick',...args);inherited.add('maybe_reset_pick');
  }
- environment.register('lock',Object.fromEntries(owner.exports.filter(n=>!inherited.has(n)).map(n=>[n,(...args)=>call(n,...args)])),local);owners.set(environment,owner);return owner;
+ const resetPick=()=>source.reset_pick(owner.context);
+ resetPick.nativeDirect=true;
+ environment.register('lock',Object.fromEntries(owner.exports.filter(n=>!inherited.has(n)).map(n=>[n,n==='reset_pick'?resetPick:(...args)=>call(n,...args)])),local);owners.set(environment,owner);return owner;
 }

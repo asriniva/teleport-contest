@@ -62,7 +62,7 @@ export function enableAddressPort(environment,name,{only,definition:providedDefi
     if(nativeMode&&name==='dungeon')connectNativeDungeonWindows(environment,local,schema);
     local.nativeFieldPlans=compileNativeFieldPlans(environment,schema,ctypes);
     if(nativeMode)local.nativeAddressRngCaller=(provider,file,line,caller)=>recordNativeRngCaller(provider===local?services:provider,file,line,caller);
-    if(nativeMode){local.nativeOwner=nativeState;local.nativeModuleName=name;local.stackSave=()=>nativeState.depth?undefined:transport.stackSave();local.stackRestore=saved=>{if(saved!==undefined)transport.stackRestore(saved);};}
+    if(nativeMode){local.nativeFixedProvider=true;local.nativeOwner=nativeState;local.nativeModuleName=name;local.stackSave=()=>nativeState.depth?undefined:transport.stackSave();local.stackRestore=saved=>{if(saved!==undefined)transport.stackRestore(saved);};}
     const execution={ready:false,namespace:null,context:null,scope:null};
     if(nativeMode)local.nativeAddressNamespaceReady=(namespace,context,scope)=>{execution.namespace=namespace;execution.context=context;execution.scope=scope;};
     const pointerArguments=new Map();

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';import fs from 'node:fs';import {parse} 
 import {createScalarAdapter,exactAddress} from '../js/c-runtime/adapter-factories.js';
 import {runStandaloneProgram} from './run-standalone-program.mjs';
 import {nativeStateFor} from '../js/nethack/native/state-bridge.js';
+import {createNativePline} from '../js/nethack/native/pline.js';
 import * as sourceOptions from '../js/ported/options.js';import {withCEnvironment} from '../js/c-runtime/context.js';
 let runtime,checks=0;const eq=(a,b,label)=>{assert.deepEqual(a,b,label);checks++;};
 const result=runStandaloneProgram('.cache/full-original-c-v1/assets',{keys:'  nl.Fyy ',options:'OPTIONS=!news\n',observeRuntime:r=>{runtime=r;}});eq(result.status.kind,'input-exhausted','actual walk, wait and attack');
@@ -83,4 +84,24 @@ owner.enter();try{history.rows();owner.nativeArena.storePointer(win,callback);en
 const exceptional=memory.cstring('exception callback row'),throwing=env.functionPointer('native-history-window-exception','vp',()=>{eq(owner.depth,0,'throwing callback is outside native scope');owner.nativeArena.storePointer(history.pointerAt+16,exceptional);throw Error('expected foreign window failure');});
 owner.enter();try{history.rows();owner.nativeArena.storePointer(win,throwing);assert.throws(()=>env.nativeWindowCallbacks.invoke('win_raw_print','vp',input),/expected foreign window failure/);checks++;eq(owner.depth,1,'exception restores native caller scope');eq(history.rows()[2],exceptional,'exception invalidates pointer reference cache');}finally{owner.nativeArena.storePointer(win,oldWindow);owner.leave();}
 messages.namespace.dumplogfreemessages();memory.free(input);
+// The chronicle stores the original text. The external log substitutes tabs
+// and truncates only if a tab occurs within the substitution buffer.
+const bufferSize=layouts.pline.BUFSZ;
+const beforeBoundary='x'.repeat(bufferSize-2);
+const beyondBoundary=beforeBoundary+'x\ttail';
+const chronicle=[];
+let externalLog;
+const {livelog_printf}=createNativePline({
+ BUFSZ:bufferSize,
+ svm:{moves:7n},
+ chronicle,
+ formatChronicle:text=>text,
+ messageText:text=>text.split('\0',1)[0],
+ livelog_add:(flags,text)=>{externalLog={flags,text};},
+});
+for(const [input,expected] of [[beforeBoundary+'\ttail',beforeBoundary+'_'],[beyondBoundary,beyondBoundary],['a\tb\tc','a_b_c'],['x\0\t','x'],['y'.repeat(bufferSize*3),'y'.repeat(bufferSize*2-1)]]){
+ livelog_printf(1n,input);
+ eq(externalLog,{flags:1n,text:expected},'external log substitution preserves the legacy buffer limit');
+ eq(chronicle.at(-1),{flags:1n,turn:7n,text:input.slice(0,bufferSize*2-1).split('\0',1)[0]},'chronicle stores the unsubstituted message');
+}
 console.log('PASS native message state '+checks+' checks: actual gameplay, ring reuse/wrap, zero normal history allocations, raw readers, overflow release, foreign rows, growth and ordered signed filtering');

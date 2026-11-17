@@ -1,3 +1,289 @@
+## Frame capture, histories, and allocation-free ordinary turns (2026-11-17)
+
+Frame capture uses the terminal's native shadow cell bytes. It compares all
+four bytes of each cell, re-encodes changed rows, and passes the encoded frame
+directly to the recorder. The raw capture API remains available for byte
+consumers. A literal newline inside a cell takes the original recorder codec
+path so that physical row limits and blank-line behavior remain exact.
+
+TTY history reuses per-slot byte storage. Passive saves still borrow the
+existing history and lock updates while their snapshot is live. Destructive
+restore snapshots detach an owned copy before recycling a slot. The chronicle
+now keeps event text, flags, and turns in JavaScript. The original save path
+writes legacy records through one temporary byte buffer, and the restore
+path calls the same chronicle append operation. Report and end-game output
+read the same ordered events.
+
+Combat prompts, weapon messages, article checks, and verb agreement retain
+JavaScript text through their source policies. Mail, equipment, glyph nonce,
+and terminal scalar accesses use measured widths on the live game state.
+Live logging checks the original mask and still uses the configured file
+locking and write policy when enabled. Its tab substitution preserves the
+original byte limit. It truncates to that limit only when a tab within it
+was replaced. Message-state checks cover tabs on either side of the limit,
+embedded terminators, and chronicle text before substitution.
+
+The NetHack-owned Lua allocator uses native short strings and the native
+intern directory without redundant byte backing. Lua still counts the
+configured allocation sizes for limits and collection thresholds. Pointer
+consumers use the existing byte transport. A foreign allocator remains on
+the callback path, and replacing the allocator sends new reservations there.
+
+The strict walk, wait, and attack check passed ordered original-C output and
+state equivalence with zero generic linker calls, global context switches,
+generic field or pointer-table calls, or C heap allocations in those cases.
+Stack storage and legacy address adapters remain separately counted.
+
+The final pure-JavaScript candidate passed 44 of 44 public recordings in
+234.64908 seconds against the saved 250.04910-second timing. The earlier
+candidate measured 228.09321 seconds before the live-log edge-case fix.
+All 792,838 ordered RNG calls, 11,405 screens and cursors, and 1,483
+animations matched. None of the 880 hashed replay inputs changed during
+the run. The frozen fit was 2,545 ms startup plus 10.81 ms per recorded
+input, with R² of 0.842.
+
+A candidate-only CPU profile of the wizard world tour sampled 40.4% of
+self time in C runtime files and binding files combined. Adapter factories
+accounted for 7.5%, garbage collection 7.1%, terminal bindings 3.9%, and
+native record views 3.0%. The walk, wait, and attack checks still counted
+13, 1, and 9 legacy address adapters respectively. The profile covers
+one recording and includes startup, level generation, and other gameplay
+outside the three focused turn cases. The existing baseline was not rerun.
+
+Validation also passed browser startup without Node APIs, 1,123 window
+callback comparisons, four authored wasm2js comparisons, three command
+repeat comparisons, 38,496 glyph comparisons, timer, mail, Lua collection,
+terminal history and message state checks. The source checks verified the
+generated JavaScript against the authored policy and preserved existing
+comments in the edited source files. The combat source checks use the
+project's Acorn dependency by default and still accept an explicit path.
+After the timed run, the generated projectile file was stripped of trailing
+spaces. Its complete parsed program and original comments compared equal.
+
+## Direct turn dependencies, combat fields, messages, and command repeat (2026-11-17)
+
+Normal turns invoke lock reset, spell aging, vault checks, mail polling,
+quest checks, monster line checks, object observation and location,
+version status, glyph encoding, and the terminal more prompt without
+switching the global C execution context. The public entries use the same
+live owners and preserve their existing argument, return, and stack
+lifetimes. The debug guard checks configured state before allocating a
+filename. The game supplies one current view of its heap to the adapters.
+
+The original combat policies read and write 37 monster scalar and packed
+fields by measured widths and offsets on the shared typed arena. Actual
+actor identities and structures with real address consumers remain shared.
+The field writes preserve neighbouring bits, signedness, expression
+values and mutation order. The object resistance roll records its original
+RNG site directly. Ordinary searches no longer construct the crystal
+ball's level-description table.
+
+Combat messages use native text through formatting, prefixing and
+truncation where the source already has text values. Conversion occurs
+when the output needs bytes. The same suppression, accessibility,
+history, and window rules still apply. Repeat commands are JS entries
+shared by command execution, directions and prompts. Public command-list
+operations that return pointers still produce byte nodes, and a public
+peek transfers ownership of the repeat queue to the linked nodes until
+it is cleared. Other canned commands retain their existing queue ABI.
+
+The focused walk, wait and attack check passed recording and original-C
+state equivalence after the combat changes. It reported zero generic
+linker calls on all three cases. C heap allocations and other remaining
+field or bridge operations still fail the strict architecture check.
+
+The display source now resolves the appearance once per cell, compares it
+directly against the buffered glyph, and copies its glyph-map entry only
+on a changed cell. Flush reads the typed dirty-row ranges and uses the
+background glyph's own field as the location helper's output slot. The
+active window callback remains authoritative, including replacements and
+foreign callers. The 38,496 glyph checks against original C passed.
+
+An initial run exposed an original ZAP context treating an optional RNG
+provider as a dynamic foreign symbol. The source now explicitly checks
+context ownership before using it. The corrected wand-polymorph replay
+matched all 3,026 RNG calls and 87 frames. All 44 public recordings then
+passed in 235.37030 seconds against the saved 250.04910-second baseline
+and the prior 246.68037-second candidate. All 792,838 ordered RNG calls,
+11,405 screens and cursors and 1,483 animations matched. Browser stdio,
+the 1,123 window callback checks, and four wasm2js scenarios passed.
+
+## Profile-guided source turn changes (2026-11-17)
+
+A candidate-only V8 profile of the wizard world tour sampled 9.2% of its time
+in C adapter factories, 5.7% in record views, 7.2% in garbage collection,
+3.8% in DISPLAY source and 3.6% in terminal bindings. Level generation and
+save paths also account for adapter work. These are exclusive samples from
+one recording, not an attribution for the entire 44-recording run.
+The existing engine baseline was not rerun or profiled. Profiling the same
+recording on the verified candidate put record views at 3.0%, adapter factories
+at 8.5%, and C runtime and bindings combined at 41.0%. Before the first turn,
+module compilation, adapter factories, and heap work were the three largest
+identified file categories. Directly attributing adapter-factory samples to
+their nearest engine callers puts special-level generation, save processing,
+and options ahead of DISPLAY individually.
+
+INVENT and DISPLAY source now issue fixed-width reads and writes for literal
+scalar cells without constructing a temporary cell with a value property.
+Address-taken and dynamically typed cells retain their reference contract.
+Writes return the same assigned value, and genuine DISPLAY value references
+keep their read/write semantics. Canonical record lookup uses per-type numeric
+address keys and preserves the shared record identity, legacy enrichment and
+bounds checks on first access.
+
+The TIMEOUT runtime root now has only explicitly declared dependency
+bindings, with known native entries bound on the first turn. The timeout
+body and indexed expiry scan remain in the source port. Monster attack damage
+scratch state is JS-owned in normal gameplay. The generic source projection
+of `mhitm_data` is bypassed on those paths. Damage effects and knockback call
+the same source routines directly. Int pointer consumers can still request a
+byte slot for the damage field. That slot belongs to the calling attack's
+stack scope, so a nested damage effect cannot release it early. The attack
+effect dispatcher retains the JS damage object rather than interpreting it as
+a numeric address. Signed widths, RNG sites and existing source comments are
+preserved.
+
+All 44 public recordings passed in 246.68037 seconds, compared with
+250.04910 seconds from the saved baseline and 251.18612 seconds from the
+preceding worktree candidate. The runner matched all 792,838 ordered RNG calls,
+11,405 screens, 11,405 cursors, and 1,483 animation frames. The four wasm2js
+comparison scenarios, browser stdio check, and 1,123 window callback checks
+also passed, along with 4,987 timer and 38,496 glyph checks against the C
+reference. Syntax tree checks confirmed the source and the lowered execution
+bodies agree. All original comments remain in order in the five edited
+combat, timeout, inventory, and display source files.
+
+Live creature record views and compatibility calls remain. The real walk,
+wait, and attack turns matched the original C output and state, but still
+made 4, 7, and 20 generic calls and 6, 13, and 21 C heap allocations,
+respectively. Component contexts still use the byte-oriented entry points.
+The zero-bridge and zero-heap criteria remain unmet.
+
+## Shared heap in combat, timeout, inventory and glyph lookup (2026-11-17)
+
+`js/ported/{uhitm,mhitu,mhitm}.js` uses named, fixed-width health and coordinate
+operations from `js/ported/actor-fields.js`. The turn binds the measured
+`mhp`, `mx`, and `my` offsets once. Those accesses use typed heap elements
+and preserve health write and argument evaluation order. The source tests
+can still pass ordinary records. Other combat fields and several callers
+still use game record projections.
+
+The source timeout scheduler scans property slots by index and decrements the
+live signed 64-bit intrinsic field with the same mask and expiry order. The
+turn calls the timeout source body directly. The inventory floor and hero list
+lookups share the measured object links with vision and return numeric object
+handles. Timeout and combat use the handle directly for their presence checks.
+DISPLAY reads the glyph for a valid cell through its fixed heap index. Bounds,
+out-of-map glyph selection, terminal callbacks and RNG sites retain their
+source behavior. The existing JavaScript policy generators were updated for
+the imported source helpers and indexed timeout loop. No frozen files or C
+sources are modified.
+
+These changes remove selected adapters across four areas. The entire combat
+actor representation and all inventory/display dependencies have not migrated.
+The original source comment sequences were checked in all six edited policy
+files. All 44 recordings passed, including 792,838 ordered RNG calls,
+11,405 screens and cursors, and 1,483 animation frames. The four wasm2js
+scenarios, browser boundary checks and 4,987 timeout assertions passed.
+The isolated replay time was 251.18612 s against the existing 250.0491 s
+measurement. All 873 hashed replay inputs remained unchanged. The walk,
+wait and attack acceptance check still reports respectively 4, 7 and 20
+generic calls, 13, 1 and 10 compatibility adapter calls, and 6, 13 and 21
+C heap allocations. It did not pass the wrapper-free requirement. The
+candidate remains uncommitted in the worktree. Per-recording results and
+acceptance evidence are in `.cache/shared-turn-public44/`.
+
+## Direct calls through the connected source turn (2026-11-17)
+
+`js/ported/allmain.js` uses the same live hero and turn-state fields through
+`js/ported/turn-state.js`. Measured indices select the signed 16-bit action
+budget and byte-sized moved, level transition, turn and monster phase fields.
+Native scheduling reads and writes the authoritative heap. Component
+harnesses can continue to supply a plain record context for these operations.
+`js/ported/vision.js` scans numeric object links for blockers in their existing
+order and projects a monster only when it needs the actor for sight policy.
+
+`js/nethack/program.js` and `js/nethack/turn-loop.js` link the per-game source
+targets at the first turn. This binds command keys, hero movement, all three
+attack directions, monster scheduling, visibility and display updates directly
+between participating factories so those calls receive the already valid game
+values. Command table initialization still belongs to CMD. Genuine command
+function-pointer dispatch and window callbacks still use their existing
+providers. `js/nethack/bindings/cmd.js` binds the standalone CMD provider once.
+`js/c-runtime/linker.js` reuses the resolved callable for each owned symbol
+but still reads the module's current implementation on invocation. Existing
+Clang-produced JS is used only as an independent comparison reference.
+
+The changes retain control flow, calls to the frozen RNG and source comments.
+Combat bodies still use record projections, and several turn dependencies
+including timeout, inventory and terminal formatting retain compatibility
+service calls. This is a partial conversion toward the requested whole-turn
+model. The isolated Node 22 run passed 44/44 public recordings, matching
+792,838 ordered RNG calls, 11,405 screens and cursors, and 1,483 animation
+frames. All 872 scoring inputs remained unchanged. Four wasm2js comparisons,
+browser-restricted save/restore, 34 decoder checks and 1,123 window callback
+checks passed. The summed replay time was 251.97448 s versus the existing
+250.0491 s and the previous source-edit candidate's 257.36837 s. The fitted
+startup was 2,615.2 ms plus 12.0632 ms per input step. No baseline was rerun.
+The candidate stays in the worktree pending a meaningful speed improvement.
+The detailed results are in `.cache/connected-turn-public44/recordings.md`.
+
+## Source JavaScript turn and display execution (2026-11-17)
+
+The standalone program runs the turn body directly from `js/ported/allmain.js`.
+The retired generated turn body and its generator no longer participate in
+the build. ALLMAIN passes a per-game context to the turn, speed, regeneration,
+occupation and clock functions. The original entry arities remain available
+for component callers. The standalone program binds the native monster turn,
+movement and vision routines after initialization. Those selected calls use
+native arguments and stay inside the existing turn scope.
+
+The HACK, MON, MONMOVE and VISION source modules read terrain and packed door
+flags through a shared grid over the live level bytes. Component contexts
+still use their existing records. The standalone movement budget walks the
+same live monster links in the same order, reads and writes the measured
+16-bit movement field in the typed heap, and retains each call to
+`mcalcmove` in its original place. Legacy callers retain the same record
+layout. No hero, inventory or map state is duplicated for this path.
+
+DISPLAY source now computes each glyph's buffer address once and fills blank
+glyph entries by copying contiguous prefixes. It still computes the initial
+changed flag from the same fields and sets the same row refresh limits.
+DISPLAY, INVENT, PICKUP, SHK, DOTHROW, DUNGEON, MKLEVEL and MKMAZE use their
+fixed native service provider in standalone gameplay. Callers that supply
+different compatibility providers for one module retain the reentrant
+forwarding behavior. Existing native JS generators reproduce the revised
+`js/ported/` bodies from JavaScript. The same window callbacks, terminal
+capture, frozen storage and frozen ISAAC serve normal gameplay.
+
+The complete C-to-wasm2js artifact is a development reference. The four
+authored comparisons use the real standalone entry point and compare
+ordered core/display RNG, terminal bytes, state, screens, cursors and
+animation. The first whole-session validation exposed a legacy teleport
+scope whose proxy synthesized a missing grid property. Grid reads now
+require an explicitly installed grid before using the direct path.
+The final isolated Node 22 run passed all 44 public recordings, matching
+792,838 ordered RNG calls, 11,405 screens, 11,405 cursors and 1,483 animation
+frames. All 871 hashed scoring inputs remained unchanged. Browser-restricted
+save/restore, resizable-buffer decoding, 1,123 window callback checks and
+38,496 original-C glyph checks also passed. The summed replay time was
+257.36837 s versus the existing 250.0491 s measurement, a 2.93% regression.
+The scorer fit was 2,680 ms startup plus 12.2872 ms per input step.
+The candidate remains in the worktree. Unmigrated routines still use the
+compatibility runtime. The zero-bridge ordinary-turn criterion, performance
+target and hidden-recording equivalence remain unverified.
+
+## Archived performance experiments (2026-11-17)
+
+The whole-program Clang AST translation is parked in
+`.cache/parked-clang-engine/`. Its earlier 91.62703 s timing and 44/44
+public replays apply only to that alternate implementation. Its compiler
+and engine modules are not dependencies of the installed source JavaScript
+path. The three earlier fixed-field/cell experiments are also parked. All
+44 public recordings passed each of those experiments, at 256.61013 s,
+252.747 s and 257.62942 s, respectively. The existing timing for comparison
+is 250.0491 s. No new baseline run or baseline profile was taken.
+
 ## Browser UTF-8 decoding of resizable heap views (2026-11-15)
 
 `js/c-runtime/stdio.js::readSdkUtf8` now copies the selected long string bytes

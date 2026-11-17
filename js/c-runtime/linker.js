@@ -4,7 +4,7 @@ import {parseCPrototype} from './prototypes.js';
 import {address} from './memory.js';
 export function createLinker({memory,transport,functions,services,ctypes,prototypes={},withEnvironment,resolveFunction}) {
     const modules=new Map(),owners=new Map(),globals=new Map();
-    const deferredFunctions=new Map(),symbolPointers=new Map();
+    const deferredFunctions=new Map(),symbolPointers=new Map(),resolvedFunctions=new Map();
     function functionPointer(name,signature,invoke) {
         const previous=symbolPointers.get(name);
         if(previous){if(previous.signature!==signature)throw new Error('Conflicting C function prototype '+name);return previous.id;}
@@ -32,12 +32,14 @@ export function createLinker({memory,transport,functions,services,ctypes,prototy
     }
     function deferFunctions(module,namespace){for(const [name,callback]of Object.entries(namespace)){const candidates=deferredFunctions.get(name)??new Map();candidates.set(module,callback);deferredFunctions.set(name,candidates);}}
     function resolve(name){
+        const resolved=resolvedFunctions.get(name);if(resolved)return resolved;
         if(!owners.has(name)){
             const candidates=deferredFunctions.get(name);
             if(candidates?.size>1)throw new Error('Ambiguous standalone public symbol '+name);
             if(candidates?.size===1){const [module,callback]=candidates.entries().next().value;extend(module,{[name]:callback});}
         }
-        const owner=owners.get(name);if(!owner)throw new Error('Unresolved standalone function '+name);const entry=modules.get(owner);return (...args)=>invokeEntry(entry,owner,name,args);
+        const owner=owners.get(name);if(!owner)throw new Error('Unresolved standalone function '+name);const entry=modules.get(owner),invoke=(...args)=>invokeEntry(entry,owner,name,args);
+        resolvedFunctions.set(name,invoke);return invoke;
     }
     function extend(name,namespace) {
         const entry=modules.get(name);if(!entry)throw new Error('Unknown standalone module '+name);

@@ -44,17 +44,17 @@ export function createCmdEnvironment(services,layout,namespace) {
 // Runtime scope only: no source CMD algorithm or data.
 const cmdStates=new WeakMap();
 export function initializeCmd(services,layout,namespace){
- let state=cmdStates.get(services.moduleKey);
+ let state=cmdStates.get(services.nativeFixedProvider ? services : services.moduleKey);
  if(!state){
   state={services};
-  const forwarding=createServiceForwarder(state);
+  const forwarding=services.nativeFixedProvider ? services : createServiceForwarder(state);
   state.env=createCmdEnvironment(forwarding,layout,namespace);
-  cmdStates.set(services.moduleKey,state);
+  cmdStates.set(services.nativeFixedProvider ? services : services.moduleKey,state);
  }
  return state.env;
 }
 export function callCmd(services,layout,namespace,name,...args){
- const env=initializeCmd(services,layout,namespace),state=cmdStates.get(services.moduleKey),previous=state.services;
+ const env=initializeCmd(services,layout,namespace),state=cmdStates.get(services.nativeFixedProvider ? services : services.moduleKey),previous=state.services;
  if(typeof namespace[name]!=='function')throw Error('Unknown original CMD function '+name);
  state.services=services;
  try{

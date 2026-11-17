@@ -397,6 +397,11 @@ cmdq_print(int q)
 function cmdq_add_ec(q,fn)
 {
     q=C.i32(q);
+    const repeat = repeatEntries(q);
+    if (repeat) {
+        repeat.push({ typ: C.CMDQ_EXTCMD, ec_entry: ext_func_tab_from_func(fn) });
+        return;
+    }
     let tmp=C.alloc(C.u32(BigInt(C.sizes["struct _cmd_queue"])));
     let cq=C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value;
     (W6(tmp,C.CMDQ_EXTCMD));
@@ -413,6 +418,11 @@ function cmdq_add_key(q,key)
 {
     q=C.i32(q);
     key=C.i8(key);
+    const repeat = repeatEntries(q);
+    if (repeat) {
+        repeat.push({ typ: C.CMDQ_KEY, key });
+        return;
+    }
     let tmp=C.alloc(C.u32(BigInt(C.sizes["struct _cmd_queue"])));
     let cq=C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value;
     (W6(tmp,C.CMDQ_KEY));
@@ -431,6 +441,11 @@ function cmdq_add_dir(q,dx,dy,dz)
     dx=C.i8(dx);
     dy=C.i8(dy);
     dz=C.i8(dz);
+    const repeat = repeatEntries(q);
+    if (repeat) {
+        repeat.push({ typ: C.CMDQ_DIR, dirx: dx, diry: dy, dirz: dz });
+        return;
+    }
     let tmp=C.alloc(C.u32(BigInt(C.sizes["struct _cmd_queue"])));
     let cq=C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value;
     (W6(tmp,C.CMDQ_DIR));
@@ -448,6 +463,11 @@ function cmdq_add_dir(q,dx,dy,dz)
 function cmdq_add_userinput(q)
 {
     q=C.i32(q);
+    const repeat = repeatEntries(q);
+    if (repeat) {
+        repeat.push({ typ: C.CMDQ_USER_INPUT });
+        return;
+    }
     let tmp=C.alloc(C.u32(BigInt(C.sizes["struct _cmd_queue"])));
     let cq=C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value;
     (W6(tmp,C.CMDQ_USER_INPUT));
@@ -463,6 +483,11 @@ function cmdq_add_int(q,val)
 {
     q=C.i32(q);
     val=C.i32(val);
+    const repeat = repeatEntries(q);
+    if (repeat) {
+        repeat.push({ typ: C.CMDQ_INT, intval: val });
+        return;
+    }
     let tmp=C.alloc(C.u32(BigInt(C.sizes["struct _cmd_queue"])));
     let cq=C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value;
     (W6(tmp,C.CMDQ_INT));
@@ -478,6 +503,12 @@ function cmdq_add_int(q,val)
 function cmdq_shift(q)
 {
     q=C.i32(q);
+    const repeat = repeatEntries(q);
+    if (repeat) {
+        if (repeat.length > 1)
+            repeat.unshift(repeat.pop());
+        return;
+    }
     let tmp=0;
     let cq=C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value;
     while(Number(!!(Number(!!(cq&&R13(cq)))&&R13(R13(cq))))) (cq=R13(cq));
@@ -505,6 +536,9 @@ function cmdq_reverse(head)
 function cmdq_copy(q)
 {
     q=C.i32(q);
+    const repeat = repeatEntries(q);
+    if (repeat)
+        return commandListBytes(repeat);
     let tmp=0;
     let cq=C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value;
     while(cq) {
@@ -524,6 +558,9 @@ function cmdq_copy(q)
 function cmdq_pop()
 {
     let q=((R98(C.gi))?C.CQ_REPEAT:C.CQ_CANNED);
+    const repeat = repeatEntries(q);
+    if (repeat)
+        return repeat.length ? commandBytes(repeat.shift(), 0) : 0;
     let tmp=C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value;
     if(tmp) {
         (C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value=R13(tmp));
@@ -536,6 +573,17 @@ function cmdq_pop()
 function cmdq_peek(q)
 {
     q=C.i32(q);
+    const repeat = repeatEntries(q);
+    if (repeat) {
+        if (!repeat.length)
+            return 0;
+        // An address returned by peek can be retained and mutated. Once
+        // exposed, the linked nodes own the queue until it is cleared.
+        const head = commandListBytes(repeat);
+        C.repeatCommands.entries = null;
+        C.cell(A90(C.gc) + q * 8, "struct _cmd_queue *").value = head;
+        return head;
+    }
     return C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value;
 }
 
@@ -543,6 +591,11 @@ function cmdq_peek(q)
 function cmdq_clear(q)
 {
     q=C.i32(q);
+    const repeat = repeatEntries(q);
+    if (repeat) {
+        repeat.length = 0;
+        return;
+    }
     let tmp=C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value;
     let tmp2;
     while(tmp) {
@@ -551,6 +604,59 @@ function cmdq_clear(q)
         (tmp=tmp2);
     }
     (C.cell((A90(C.gc)+Number(q)*8),"struct _cmd_queue *").value=0);
+    if (q === C.CQ_REPEAT && C.repeatCommands)
+        C.repeatCommands.entries = [];
+}
+
+function repeatEntries(q)
+{
+    return q === C.CQ_REPEAT ? C.repeatCommands?.entries : undefined;
+}
+
+function commandBytes(entry, next)
+{
+    const at = C.alloc(C.sizes["struct _cmd_queue"]);
+    for (const key of Object.keys(entry))
+        C.field(at, "_cmd_queue", key).value = entry[key];
+    W13(at,next);
+    return at;
+}
+
+function commandListBytes(entries)
+{
+    let head = 0;
+    for (let i = entries.length - 1; i >= 0; --i)
+        head = commandBytes(entries[i], head);
+    return head;
+}
+
+function takeCommand()
+{
+    const repeat = repeatEntries(C.CQ_REPEAT);
+    if (repeat && R98(C.gi))
+        return repeat.shift() ?? 0;
+    return cmdq_pop();
+}
+
+function commandField(entry, key)
+{
+    if (typeof entry === "object")
+        return entry[key];
+    switch (key) {
+    case "typ": return R6(entry);
+    case "key": return R7(entry);
+    case "ec_entry": return R12(entry);
+    case "dirx": return R8(entry);
+    case "diry": return R9(entry);
+    case "dirz": return R10(entry);
+    default: throw new Error('Unexpected command queue field ' + key);
+    }
+}
+
+function releaseCommand(entry)
+{
+    if (typeof entry !== "object")
+        C.free(entry);
 }
 
 function pgetchar()
@@ -1560,17 +1666,24 @@ function do_repeat()
     let res=0;
     if(Number(!(R98(C.gi)))) {
         let repeat_copy;
-        if(Number(!(cmdq_peek(C.CQ_REPEAT)))) {
+        const repeat = repeatEntries(C.CQ_REPEAT);
+        if (!(repeat ? repeat.length : cmdq_peek(C.CQ_REPEAT))) {
             C.variadic(35,C.literal("There is no command available to repeat."));
             return 4;
         }
-        (repeat_copy=cmdq_copy(C.CQ_REPEAT));
+        repeat_copy = repeat ? repeat.slice() : cmdq_copy(C.CQ_REPEAT);
         (W98(C.gi,C.i32((C.i8(1)))));
         rhack(0);
         /* read and execute command */
         (W98(C.gi,C.i32((C.i8(0)))));
         cmdq_clear(C.CQ_REPEAT);
-        (C.cell((A90(C.gc)+Number(C.CQ_REPEAT)*8),"struct _cmd_queue *").value=repeat_copy);
+        if (repeat) {
+            C.repeatCommands.entries = repeat_copy;
+        } else {
+            if (C.repeatCommands)
+                C.repeatCommands.entries = null;
+            C.cell(A90(C.gc) + C.CQ_REPEAT * 8, "struct _cmd_queue *").value = repeat_copy;
+        }
         (W84(C.iflags,C.i8(0)));
         if(R44(A108(C.svc))) (res=1);
     }
@@ -2834,7 +2947,7 @@ function rhack(key)
     const stackFrame=C.stackSave();
     try {
     let bad_command; let firsttime=C.i8((Number(key==0)));
-    let cq=C.stackAlloc(C.sizes["struct _cmd_queue"]); let cmdq=0;
+    let cmdq;
     let cmdq_ec=0; let prefix_seen=0;
     let was_m_prefix=(C.i8(0));
     let func=C.functionPointer("dummyfunction");
@@ -2844,15 +2957,18 @@ function rhack(key)
         let cmdqJoin=false;
         do_cmdq_extcmd: {
             if(R144(C.program_state)) end_of_input();
-            if(Number(((cmdq=cmdq_pop()))!=0)) {
+            if ((cmdq = takeCommand())) {
                 /* doing queued commands */
-                C.copyRecord(cq,cmdq,C.sizes["struct _cmd_queue"]);
-                C.free(cmdq);
-                if(Number(!!(Number(R6(cq)==C.CMDQ_EXTCMD)&&Number(((cmdq_ec=R12(cq)))!=0)))) { cmdqJoin=true; break do_cmdq_extcmd; }
+                const type = commandField(cmdq, "typ");
+                const queuedKey = type === C.CMDQ_KEY ? commandField(cmdq, "key") : 0;
+                if (type === C.CMDQ_EXTCMD)
+                    cmdq_ec = commandField(cmdq, "ec_entry");
+                releaseCommand(cmdq);
+                if (type === C.CMDQ_EXTCMD && cmdq_ec) { cmdqJoin=true; break do_cmdq_extcmd; }
                 /* already handled a queued command (goto do_cmdq_extcmd);
            if something other than a key is queued, we'll drop down
            to the !*cmd handling which clears out the command-queue */
-                (key=((Number(R6(cq)==C.CMDQ_KEY))?C.i32(R7(cq)):0));
+                key = C.i32(queuedKey);
             } else if(firsttime) {
                 (key=parse());
                 /* parse() pushed a cmd but didn't return any key */
@@ -3115,24 +3231,24 @@ function getdir(s)
     try {
     let dirsym;
     let is_mov;
-    let cmdq=cmdq_pop();
+    let cmdq=takeCommand();
     let queuedDirJoin=false;
     got_dirsym: {
         if(cmdq) {
-            if(Number(R6(cmdq)==C.CMDQ_DIR)) {
-                if(Number(!(R10(cmdq)))) {
-                    (dirsym=C.cell((R25(A91(C.gc))+Number(xytodir(C.i32(R8(cmdq)),C.i32(R9(cmdq))))*1),"char").value);
+            if(Number(commandField(cmdq, "typ")==C.CMDQ_DIR)) {
+                if(Number(!(commandField(cmdq, "dirz")))) {
+                    (dirsym=C.cell((R25(A91(C.gc))+Number(xytodir(C.i32(commandField(cmdq, "dirx")),C.i32(commandField(cmdq, "diry"))))*1),"char").value);
                 } else {
-                    (dirsym=C.cell((R25(A91(C.gc))+Number(((Number(C.i32(R10(cmdq))>0))?C.DIR_DOWN:C.DIR_UP))*1),"char").value);
+                    (dirsym=C.cell((R25(A91(C.gc))+Number(((Number(C.i32(commandField(cmdq, "dirz"))>0))?C.DIR_DOWN:C.DIR_UP))*1),"char").value);
                 }
-            } else if(Number(R6(cmdq)==C.CMDQ_KEY)) {
-                (dirsym=R7(cmdq));
+            } else if(Number(commandField(cmdq, "typ")==C.CMDQ_KEY)) {
+                (dirsym=commandField(cmdq, "key"));
             } else {
                 cmdq_clear(C.CQ_CANNED);
                 (dirsym=C.i8(0));
                 C.variadic(85,C.literal("getdir: command queue had no dir?"));
             }
-            C.free(cmdq);
+            releaseCommand(cmdq);
             { queuedDirJoin=true; break got_dirsym; }
         }
     }
@@ -4389,7 +4505,7 @@ function yn_function(query,resp,def,addcmdq)
     const stackFrame=C.stackSave();
     try {
     let resAddress=C.stackAlloc(1); C.cell(resAddress,"char").value=C.i8(27); let qbuf=C.stackAlloc((1*128));
-    let cq=C.stackAlloc(C.sizes["struct _cmd_queue"]); let cmdq;
+    let cmdq, queuedType = C.CMDQ_USER_INPUT, queuedKey = 0;
     let idx=R107(C.gs);
     /* buffer to hold query+space+formatted_single_char_response */
     let dumplog_buf=C.stackAlloc((1*144));
@@ -4404,16 +4520,16 @@ function yn_function(query,resp,def,addcmdq)
         C.strcpy((qbuf+Number(C.i32((C.i32((128-1))-3)))*1),C.literal("..."));
         (query=qbuf);
     }
-    if(Number(!!(C.i32(addcmdq)&&Number(((cmdq=cmdq_pop()))!=0)))) {
-        C.copyRecord(cq,cmdq,C.sizes["struct _cmd_queue"]);
-        C.free(cmdq);
-    } else {
-        (W6(cq,C.CMDQ_USER_INPUT));
-        (W7(cq,C.i8(0)));
-        /* lint suppression */
+    if (addcmdq && (cmdq = takeCommand())) {
+        queuedType = commandField(cmdq, "typ");
+        if (queuedType === C.CMDQ_KEY)
+            queuedKey = commandField(cmdq, "key");
+        releaseCommand(cmdq);
     }
-    if(Number(R6(cq)!=C.CMDQ_USER_INPUT)) {
-        if(Number(R6(cq)==C.CMDQ_KEY)) (C.cell(resAddress,"char").value=R7(cq));
+    /* lint suppression */
+    if (queuedType !== C.CMDQ_USER_INPUT) {
+        if (queuedType === C.CMDQ_KEY)
+            C.cell(resAddress, "char").value = queuedKey;
  else cmdq_clear(C.CQ_CANNED);
         /* 'res' is ESC */
         (addcmdq=(C.i8(0)));

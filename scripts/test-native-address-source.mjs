@@ -55,6 +55,6 @@ for(const[name,{schema}]of Object.entries(ports)){
  assert.deepEqual(clean(invert(actual)),clean(expected),name+' source policy/RNG AST after inverse lowering');
  functions+=expected.filter(n=>n.type==='FunctionDeclaration').length;
 }
-assert.equal(nativeValueAllocations,4,'all four native DISPLAY glyph values invert to their original allocations');
+assert.equal(nativeValueAllocations,3,'remaining native DISPLAY glyph values invert to their original allocations');
 assert.equal(nativeRngCallers,526);
 console.log(JSON.stringify({passed:true,nativeRngCallers,nativeValueAllocations,ports:Object.keys(ports).length,functions,invertedFieldOperations:operations,sourcePolicyAstEqual:true}));

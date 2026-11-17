@@ -18,6 +18,10 @@ export function enableTerminal(environment,layout,{onCapture}={}) {
     });
     const buffers=metadata.bufferSizes.map((n,i)=>environment.allocateGlobal('termcap.'+metadata.bufferKeys[i],n));
     const nativeOwner=nativeStateFor(environment),schemas=Object.entries(metadata.schemas),frames=[],callbackIds=new Map(),local=Object.create(services);
+    const appendFrame=(screen,x,y,animation)=>{
+        const frame={screen,cursor:[Number(x),Number(y),1],animation:Boolean(animation)};
+        frames.push(frame);if(onCapture)onCapture(frame);
+    };
     const cptr=v=>typeof v==='string'?services.literal(v):address(v);
     const scalar=d=>d.t?({i8:'signed char',u8:'unsigned char',i16:'short',u16:'unsigned short',i32:'int',u32:'unsigned int',i64:'long',u64:'unsigned long'})[d.t]:d.p!==undefined||d.f?'void *':d.s??'void *';
     function field(kind,p,index) {
@@ -44,10 +48,8 @@ export function enableTerminal(environment,layout,{onCapture}={}) {
         alloc:n=>environment.alloc('alloc',Number(n)),
         dupstr:p=>environment.libc.strdup(cptr(p)),
         nativeMarkerKind:kind=>typeof kind==='string'?kind.split('\0',1)[0]:memory.readString(address(kind)),
-        nativeFrameCapture:(screen,x,y,animation)=>{
-            const frame={screen:encodeRecorderScreen(screen),cursor:[Number(x),Number(y),1],animation:Boolean(animation)};
-            frames.push(frame);if(onCapture)onCapture(frame);
-        },
+        nativeEncodedFrameCapture:appendFrame,
+        nativeFrameCapture:(screen,x,y,animation)=>appendFrame(encodeRecorderScreen(screen),x,y,animation),
         teleport_capture:(screen,x,y,animation)=>local.nativeFrameCapture(memory.readString(cptr(screen)),x,y,animation),
         error_p:(...args)=>environment.resolve('error')(...args),error_pp:(...args)=>environment.resolve('error')(...args),
         fprintf_pppiiiij:(...args)=>services.fprintf(...args),

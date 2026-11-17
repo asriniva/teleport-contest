@@ -22,7 +22,7 @@ function policy(node){
 }
 const old=parse(fs.readFileSync('js/ported/timeout.js','utf8'),{ecmaVersion:'latest',sourceType:'module'}),next=parse(fs.readFileSync('js/nethack/native/timeout.js','utf8'),{ecmaVersion:'latest',sourceType:'module'});
 const expected=old.body.filter(n=>n.type!=='ImportDeclaration').map(n=>n.type==='ExportNamedDeclaration'?n.declaration:n);
-equal(policy(next.body[0].declaration.body.body.slice(0,-1)),policy(expected),'all policy statements and RNG ordering, with explicit native property iteration');
+equal(policy(next.body.find(node=>node.type==='ExportNamedDeclaration'&&node.declaration?.id?.name==='createNativeTimeout').declaration.body.body.slice(0,-1)),policy(expected),'all policy statements and RNG ordering, with explicit native property iteration');
 const dir='.cache/full-original-c-v1',input={seed:1,timezone:'UTC',options:'OPTIONS=!news\n',keys:'  n'};
 let module,env,program;const cOutput=[],cKeys=[],jKeys=[];
 const c=await runFullOriginalC(dir,{...input,observeRuntime:r=>{module=r.module;const tty=module.FS.getStream(1).tty,put=tty.ops.put_char;tty.ops={...tty.ops,put_char(t,ch){if(ch!==null)cOutput.push(ch);return put(t,ch);}};}});

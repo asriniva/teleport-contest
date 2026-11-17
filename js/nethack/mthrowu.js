@@ -2,6 +2,7 @@ import {recordNativeRngCaller} from './native/rng-output.js';
 // One original projectile/line-check context and private state on shared bytes.
 import abi from './mthrowu-abi.json' with {type:'json'};
 import {callMthrowu} from './bindings/mthrowu.js';
+import {createNativeMthrowu} from './native/mthrowu.js';
 import {createRecordViews} from './record-views.js';
 const owners=new WeakMap();
 export function enableMthrowu(environment,layouts){
@@ -41,5 +42,8 @@ export function enableMthrowu(environment,layouts){
  // The original header's role mnum is short; this projection uses its measured field.
  context.Role_if=n=>ctypes.getField('struct Role',ctypes.locate('struct instance_globals_u',environment.requireGlobal('gu'),'urole').at,'mnum','short')===n;
  const owner={services:local,context,call:(name,...args)=>{const value=callMthrowu(local,L,name,...args.map(v=>v?.address??v));return value?.address??value;},limitation:'Original MTHROWU transport; line checks, thrown objects, callbacks and combat/fatal effects require connected original-C acceptance.'};
- environment.register('mthrowu',Object.fromEntries(abi.public.filter(n=>!environment.hasFunction(n)).map(n=>[n,(...args)=>owner.call(n,...args)])),local);owners.set(environment,owner);return owner;
+ const policy=createNativeMthrowu(context);
+ const linedUp=mon=>policy.lined_up(context.monster(mon?.address??mon));
+ linedUp.nativeDirect=true;
+ environment.register('mthrowu',Object.fromEntries(abi.public.filter(n=>!environment.hasFunction(n)).map(n=>[n,n==='lined_up'?linedUp:(...args)=>owner.call(n,...args)])),local);owners.set(environment,owner);return owner;
 }
