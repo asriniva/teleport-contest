@@ -92,6 +92,8 @@ addToLibrary({
  teleport_termcap_test_nomux_sgr_fg:function(a0){return Module['nethackPorted'].termcap(teleportTermcapServices(),"nomux_sgr_fg",a0);},
  nomux_capture_screen__deps:['$teleportTermcapServices'],nomux_capture_screen__sig:"p",
  nomux_capture_screen:function(){return Module['nethackPorted'].termcap(teleportTermcapServices(),"nomux_capture_screen");},
+ nomux_reset_raw_mode__deps:['$teleportTermcapServices'],nomux_reset_raw_mode__sig:"v",
+ nomux_reset_raw_mode:function(){Module['nethackPorted'].termcap(teleportTermcapServices(),"nomux_reset_raw_mode");},
  nomux_enter_raw_mode__deps:['$teleportTermcapServices'],nomux_enter_raw_mode__sig:"v",
  nomux_enter_raw_mode:function(){Module['nethackPorted'].termcap(teleportTermcapServices(),"nomux_enter_raw_mode");},
  teleport_termcap_test_nomux_raw_putch__deps:['$teleportTermcapServices'],teleport_termcap_test_nomux_raw_putch__sig:"vi",

@@ -108,6 +108,7 @@ void teleport_wintty_dep_term_start_extracolor(uint32 a0,uint16 a1){term_start_e
 void teleport_wintty_dep_term_start_bgcolor(int a0){term_start_bgcolor(a0);}
 void teleport_wintty_dep_term_end_extracolor(){term_end_extracolor();}
 int teleport_wintty_dep_puts(const char * a0){return puts(a0);}
+void teleport_wintty_dep_nomux_reset_raw_mode(void){nomux_reset_raw_mode();}
 void teleport_wintty_dep_nomux_raw_emit(const char * a0,int a1){nomux_raw_emit(a0,a1);}
 void teleport_wintty_dep_term_start_raw_bold(){term_start_raw_bold();}
 int teleport_wintty_dep_fputs(const char *restrict a0,FILE *restrict a1){return fputs(a0,a1);}

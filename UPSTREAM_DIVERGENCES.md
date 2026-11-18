@@ -1,3 +1,67 @@
+## Recorder key encoding and terminal teardown (2026-11-18)
+
+Contest upstream `6ee30e6` is already merged. Its local C recorder writes
+one byte per key and patches the native capture buffer and raw-mode teardown.
+The standalone JS recorder already consumes one code unit per 8-bit session
+key. The end-to-end fixture sends U+00E5 as M-e, opens Current skills in one
+input boundary, and preserves the ordered RNG log.
+
+The production frame encoder builds a dynamically sized string. Both the JS
+compatibility serializer and the hybrid fixture's backing allocation now
+reserve 61,825 bytes, matching the patched recorder. The dense frame check
+exceeds the old 6,144-byte allocation and verifies the adjacent raw state.
+
+The translated TTY resets raw screen state directly after suspend. Fresh
+native-reference replay clears the raw row and column immediately. The
+published replay entry keeps the historical final save cursor and clears on
+the next raw print. The two modes share the serializer, input path and game
+logic. The focused test checks both the retained save frame and the first
+score line on a fresh screen. The native-reference test compares freshly
+recorded C frames, cursors, animation frames and ordered RNG values without
+screen normalization. Caller annotations in RNG logs are diagnostic metadata.
+
+A fresh arm64 macOS recorder was built from pinned NetHack and the six
+upstream recorder patches with Apple Clang 21 and system ncurses. For the
+matched replay, both engines used the release clock and New York timezone.
+The C install ran from a physical temporary directory with the same sysconf
+profile as JS. There were four distinct causes of apparent mismatches:
+
+- The native fixed-date parser inherits the current clock's daylight-saving
+  flag. Pinning native `time()` to the existing JS recording epoch fixed
+  shopkeeper names, the vault guard name and the time-of-day results without
+  changing the recorder source.
+- The Desktop install caused `compress` to fail when it reopened inherited
+  descriptors. A physical temporary install fixed save and bones capture.
+  A separate bootstrap issue is that native `nh_getenv` ignores install
+  paths longer than 128 bytes. This can produce blank captures, which the
+  standalone native-reference test rejects.
+- `seed5002` ends its first wizard game while it is still alive. The capture
+  script kills that process at its final checkpoint, leaving a lock for the
+  next wizard. Independently re-recording the second segment matched all
+  286 published checkpoints exactly. `seed2200` reports the configuration
+  filename in one help frame. Giving JS the actual native capture home makes
+  that session match without rewriting any output.
+- The fresh recorder resets its cursor to `[0, 0, 1]` after final save
+  teardown. The published `seed0013` records `[0, 1, 1]` at both boundaries.
+  The fresh-native regression and the published scorer exercise their
+  respective expectations.
+
+The existing WINTTY and TERMCAP component tests use isolated reference
+fixtures. The cached prepared C trees inspected for this audit predate
+`6ee30e6`. The fresh whole-game recordings passed all 44 recipes after
+matching the environment and re-recording the independent wizard segment
+with fresh state. They matched 792,838 ordered RNG calls, 11,405 screens
+and cursors, and 1,483 animation frames. A separate native record/replay
+also verified that M-e opens Current skills in one key. The isolated
+terminal component comparison passed 445 checks using its pinned reference.
+The full component suite and held-out recordings were not rerun.
+
+Run `node scripts/test-native-macos-replay.mjs <fresh.session.json>` on a
+fresh native capture. Provide the actual capture home through the existing
+`TELEPORT_RECORDING_HOME` option for commands which display it. No frozen
+scorer, terminal, storage, public session, upstream recorder script or
+workflow changed.
+
 ## Direct special-level map lookup, reflection, and reset (2026-11-17)
 
 NHLUA builds a signed-byte terrain lookup from the existing configured

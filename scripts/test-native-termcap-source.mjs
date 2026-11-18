@@ -16,4 +16,4 @@ assert.equal(marker.body.body[0].type,'IfStatement','source markers-enabled deci
 assert.deepEqual(clean(marker.body.body[1]),clean(opt),'exact native frame branch');
 marker.body.body.splice(1,1);
 assert.deepEqual(clean(actual),clean(expected),'complete original terminal policy AST, with direct local calls');
-const functions=expected.filter(n=>n.type==='FunctionDeclaration').length;assert.equal(functions,57);console.log(JSON.stringify({passed:true,functions,localCallConversions:locals,sourcePolicyAstEqual:true}));
+const functions=expected.filter(n=>n.type==='FunctionDeclaration').length;assert.equal(functions,58);console.log(JSON.stringify({passed:true,functions,localCallConversions:locals,sourcePolicyAstEqual:true}));

@@ -55,7 +55,7 @@ nomux_cell nomux_buf[24][80];
 static unsigned char teleport_termcap_nomux_fg_cur;
 static unsigned char teleport_termcap_nomux_attr_cur;
 static unsigned char teleport_termcap_nomux_decgfx_cur;
-static char teleport_termcap_nomux_out[6144];
+static char teleport_termcap_nomux_out[(24 * 80 * 32) + (24 * 16) + 1];
 static int teleport_termcap_nomux_raw_active;
 static int teleport_termcap_nomux_raw_row;
 static int teleport_termcap_nomux_raw_col;
