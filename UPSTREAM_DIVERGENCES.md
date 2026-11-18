@@ -1,3 +1,38 @@
+## Direct display reads, level terrain serialization, and symbol lookup (2026-11-17)
+
+The display reads measured fields from the same native arena as the actor
+and map records. VISION advances canonical map cells using their typed
+record identity. This makes the vision scan independent of a previous
+display read installing a legacy descriptor. Glyph reset combines each
+glyph's flags in a local value and writes the result before accessibility
+and color handling. It snapshots the color option, level flags and
+accessibility flag when the native port supplies its color table. A
+fixture or window path without that capability uses live queries.
+
+Save and restore of the historical last-seen terrain grid take the
+contiguous column-major bytes through the original signed-char I/O.
+Each byte still uses the original read or write, preserving EOF handling.
+The fast path checks the measured field extent, serializer identity and
+file mode. Logged, converted and custom-format files use the original
+dispatch. No save format or block order changes.
+
+The production symbol reader indexes the existing table by its ASCII
+case-folded name and returns the original typed row. The source parser
+still chooses the name extent, applies the same alias list and preserves
+the first match. The original iteration stays available to reference
+fixtures. The focused differential check matched 848 lookups and verified
+the 1,680 terrain bytes through the old and new paths and round-trip
+restore. The complete C display test matched 38,496 glyph results.
+The ordinary-turn counters still pass. The unchanged upstream scorer
+passed all 44 public recordings on a UTC host in 159.01340 seconds,
+down from 178.15972 seconds on `7a17c2a`. It matched 792,838 ordered
+RNG calls, 11,405 screens and cursors, and 1,483 animations. The wizard
+world tour is one sampled recording. Compared with the saved
+`aa03ff5` profile, the display address-to-record bridge fell from
+622 to 72 ms of sampled CPU and runtime/binding work under
+`savelev_core` fell from 212 to 35 ms. Hidden judge timings remain
+unverified.
+
 ## Upstream scoring and a host-independent replay clock (2026-11-17)
 
 Upstream commit `6ee30e6` is merged. The scoring workflows, frozen
