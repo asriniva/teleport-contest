@@ -34,6 +34,7 @@ subsequent movement and damage turns.
 | `hole-return` | Fall through a hole to level two, then revisit level one through wizard level teleport |
 | `icebox-tip` | Put a troll corpse and food rations into an icebox, tip the contents into a carried sack, then empty that sack onto the floor |
 | `inventory-reletter` | Split a dagger stack into an occupied letter, move the displaced stack, merge the daggers, then cancel another split |
+| `levelchange-overflow` | Enter a signed overflow value in the experience-level prompt, then advance normally to level 2 |
 | `lit-save-restore` | Light an oil lamp, candles, a potion of oil and a lantern, then save, restore, inspect inventory and switch off lights |
 | `lock-container` | Lock and unlock a floor chest, split a potion stack into it, inspect and retrieve the potion, grease inventory |
 | `melting-ice` | Step off ice that has a melt timer, then melt it with a bouncing bolt of fire |

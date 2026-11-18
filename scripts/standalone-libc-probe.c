@@ -39,6 +39,16 @@ static int bounded_copies(void) {
     }
     return 0;
 }
+static int signed_scans(int argc, char **argv) {
+    for (int i=2;i<argc;i++) {
+        long value=0;
+        int consumed=-1;
+        errno=0;
+        int assigned=sscanf(argv[i],"%li%n",&value,&consumed);
+        printf("%d,%ld,%d,%d\n",assigned,value,consumed,errno==ERANGE);
+    }
+    return 0;
+}
 int main(int argc,char **argv) {
     if(argc>2&&argv[1][0]=='c'){
         mode_t prior=umask(0);int fd=creat(argv[2],0640);if(fd<0)return 77;
@@ -52,6 +62,7 @@ int main(int argc,char **argv) {
     }
     if(argc>1&&argv[1][0]=='d'){long long end,start;while(scanf("%lld %lld",&end,&start)==2)printf("%.17g\n",difftime((time_t)end,(time_t)start));return 0;}
     if(argc>1&&argv[1][0]=='b')return bounded_copies();
+    if(argc>1&&strcmp(argv[1],"signed-scans")==0)return signed_scans(argc,argv);
     if(argc>1)return scans();
     int n;
     while(scanf("%d",&n)==1) {

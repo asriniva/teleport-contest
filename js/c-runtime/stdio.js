@@ -202,7 +202,7 @@ export function createStdio(memory,filesystem,libc,{stdin=new Uint8Array(),readS
         }
         return address(p);
     },0);
-    api.fscanf=(file,format,...outputs)=>operation(file,f=>{flush(f);if(!f.readable){f.error=true;return -1;}return scanFormatted(memory,libc,{get:()=>api.fgetc(file),unget:c=>api.ungetc(c,file)},text(format).split('\0')[0],outputs);},-1);
+    api.fscanf=(file,format,...outputs)=>operation(file,f=>{flush(f);if(!f.readable){f.error=true;return -1;}return scanFormatted(memory,libc,{get:()=>api.fgetc(file),unget:c=>api.ungetc(c,file)},text(format).split('\0')[0],outputs,{signedSaturation:true});},-1);
     api.getc=api.fgetc;api.putc=api.fputc;api.getchar=()=>api.fgetc(api.stdin);api.putchar=c=>api.fputc(c,api.stdout);
     api.creat=(path,mode)=>api.open(path,O_WRONLY|O_CREAT|O_TRUNC,mode);
     api.rewind=p=>{api.fseek(p,0,0);api.clearerr(p);};

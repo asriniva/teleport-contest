@@ -10,7 +10,7 @@ export function createStandaloneLibc(memory,libc,transport,functions) {
     const text=v=>typeof v==='string'?v:memory.readString(address(v));
     function sscanf(input,format,...outputs) {
         input=text(input).split('\0')[0];let at=0;
-        return scanFormatted(memory,libc,{get:()=>at<input.length?input.charCodeAt(at++):-1,unget:()=>{at--;}},text(format).split('\0')[0],outputs);
+        return scanFormatted(memory,libc,{get:()=>at<input.length?input.charCodeAt(at++):-1,unget:()=>{at--;}},text(format).split('\0')[0],outputs,{signedSaturation:true});
     }
     function strncasecmp(a,b,n){
         const count=Number(transport.ulong(n));if(!count)return 0;

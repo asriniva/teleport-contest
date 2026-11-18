@@ -1,3 +1,31 @@
+## Deterministic game sorting and signed numeric scans (2026-11-18)
+
+The discoveries and status-condition bindings now route sorting through
+the existing JavaScript port of the contest-patched C
+`nh_deterministic_qsort`. It sorts an array of original indices and
+breaks comparison ties by index before copying whole records. Its inner
+sort remains an explicit JavaScript implementation of libc sorting.
+Discoveries previously skipped the wrapper and could reorder equal keys.
+Option-name abbreviation setup now uses the C routine's pairwise prefix
+checks on native JavaScript strings.
+
+The production `sscanf` and `fscanf` paths both select the existing
+signed-saturation policy for Darwin. Signed `%d` and `%i` conversions
+clamp at the signed 64-bit limit before storing at the requested width
+and set the runtime's range-error code. The existing unsigned conversion
+path and scan widths are preserved. This change targets overflow in the
+configured conversions.
+
+The regression checks exercise alternating equal keys through the
+production discoveries binding and compare signed decimal and hexadecimal
+overflow, assignment counts, consumed bytes and range errors against
+native C. Both string and stream scans are covered.
+The new native experience-level recording covers a signed overflow
+through a gameplay prompt, followed by a normal change to level 2. The
+old code advanced a level on the overflowing input. All 44 public and
+59 supplemental recordings passed with exact PRNG order, screens,
+cursors and animations.
+
 ## Native regex dialect for display rules (2026-11-18)
 
 The standalone game now selects the native macOS regex dialect for

@@ -3,6 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {createStandaloneEnvironment} from '../js/nethack/environment.js';
+import {createStandaloneProgram} from '../js/nethack/program.js';
+import {C_ERRNO} from '../js/c-runtime/stdlib.js';
 import {VFSError} from '../js/c-runtime/vfs.js';
 const root=process.env.STANDALONE_REFERENCE_ROOT;if(!root)throw new Error('Missing STANDALONE_REFERENCE_ROOT');
 const scratch=path.resolve('.cache/standalone-libc');fs.mkdirSync(scratch,{recursive:true});
@@ -35,6 +37,19 @@ items.forEach(([key,id],i)=>{memory.view.setInt32(arr+i*8,key,true);memory.view.
 const cmp=runtime.functions.functionPointer((a,b)=>Math.sign(memory.view.getInt32(Number(a),true)-memory.view.getInt32(Number(b),true)),'ipp');
 runtime.call('hacklib','nh_deterministic_qsort',arr,5n,8n,cmp);
 assert.deepEqual(Array.from({length:5},(_,i)=>memory.view.getInt32(arr+i*8+4,true)),[3,1,4,0,2]);
+
+const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));
+const {environment:game}=createStandaloneProgram({layouts,readKey(){throw Error('Unexpected input');}});
+const discoverySort=game.enableDiscoveries(layouts).services.qsort;
+const discoveryRows=Array.from({length:64},(_,i)=>game.services.literal(
+    (i%2===0?'* ':'  ')+String.fromCharCode(97+i%3).repeat(2)+' '+(i%4<2?'x':'X')));
+const discoveryPointers=game.memory.calloc(discoveryRows.length,8);
+discoveryRows.forEach((pointer,i)=>game.memory.view.setBigUint64(discoveryPointers+i*8,BigInt(pointer),true));
+discoverySort(discoveryPointers,discoveryRows.length,8);
+assert.deepEqual(Array.from({length:discoveryRows.length},(_,i)=>Number(
+    game.memory.view.getBigUint64(discoveryPointers+i*8,true))),
+    [0,1,2].flatMap(group=>discoveryRows.filter((_,i)=>i%3===group)));
+
 const out=memory.calloc(1,64),other=memory.calloc(1,64),end=memory.calloc(1,8);
 assert.equal(s.sscanf(' -17 0xff word!','%d %x %4s%n',out,other,other+8,end),3);
 assert.equal(memory.view.getInt32(out,true),-17);assert.equal(memory.view.getInt32(other,true),255);assert.equal(memory.readString(other+8),'word');assert.equal(memory.view.getInt32(end,true),14);
@@ -48,6 +63,27 @@ result=s.sscanf('abc123','%3[a-z]%d%n',out,other,end);actual.push([result,memory
 result=s.sscanf('-9223372036854775808 18446744073709551615','%ld %lu',out,other);actual.push([result,memory.view.getBigInt64(out,true),memory.view.getBigUint64(other,true)].join(','));
 memory.view.setInt32(out,19,true);actual.push([s.sscanf('','%d',out),memory.view.getInt32(out,true)].join(','));actual.push([s.sscanf('x','%d',out),memory.view.getInt32(out,true)].join(','));
 assert.deepEqual(actual,scan.stdout.trim().split('\n'));
+const signedInputs=['9223372036854775807!', '9223372036854775808!', '18446744073709551616!',
+    '-9223372036854775808!', '-9223372036854775809!', '0x8000000000000000!', '-0x8000000000000001!'];
+const signedOracle=spawnSync(path.join(scratch,'probe'),['signed-scans',...signedInputs],{encoding:'utf8'});
+assert.equal(signedOracle.status,0,signedOracle.stderr);
+const signedExpected=signedOracle.stdout.trim().split('\n');
+const stream=runtime.enableStdio();
+const scanPath=memory.cstring('/signed-scan');
+const scanFormat='%li%n';
+const scannedLong=assigned=>[assigned,memory.view.getBigInt64(out,true),memory.view.getInt32(end,true),
+    Number(runtime.libc.errno===C_ERRNO.ERANGE)].join(',');
+for (const [i,input] of signedInputs.entries()) {
+    runtime.libc.errno=0;
+    assert.equal(scannedLong(s.sscanf(input,scanFormat,out,end)),signedExpected[i],input);
+    runtime.filesystem.writeFile('/signed-scan',input);
+    const file=stream.fopen(scanPath,'r');
+    assert.ok(file);
+    runtime.libc.errno=0;
+    assert.equal(scannedLong(stream.fscanf(file,scanFormat,out,end)),signedExpected[i],input);
+    assert.equal(stream.fgetc(file),33);
+    assert.equal(stream.fclose(file),0);
+}
 assert.equal(s.strcasecmp('\xc0','\xe0'),-32);assert.equal(s.strcasecmp('AbC','aBc'),0);
 const comparisonText = memory.cstring('The lance');
 assert.equal(s.strncmp(comparisonText, 'The ', 4n), 0);
