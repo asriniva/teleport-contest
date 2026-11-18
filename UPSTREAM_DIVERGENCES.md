@@ -1,3 +1,64 @@
+## Direct special-level map lookup, reflection, and reset (2026-11-17)
+
+NHLUA builds a signed-byte terrain lookup from the existing configured
+map-character table. It keeps the first occurrence of each character,
+the original NUL sentinel, and the invalid-terrain fallback. The
+standalone source uses the lookup after the original signed-byte
+conversion. The compatible fixture path retains the original table
+walk.
+
+SP_LEV reads map-fragment dimensions and stride once per character read.
+Map reflection computes its grid addresses and bounds once, then swaps
+the original terrain bytes and live object and monster occupancy. The
+vertical reflection still precedes horizontal reflection. Each pair
+updates drawbridge orientation before any record swap. The actor,
+timer, wall and visibility policies remain in the same source order.
+MKLEV resets the three contiguous grids, including column zero, from
+the existing zero record. The callback-free reset copies a nonzero
+template if supplied. List cleanup and level-flag updates follow the
+grid reset in their original order.
+
+Using the complete original-C reference, the focused test matched 768
+character inputs, all three reflection orientations, the 13,440 terrain
+bytes, both 1,680-cell occupancy grids, and reset. The native NHLUA
+check passed 792 comparisons and the generated-source check matched
+all 526 RNG caller sites. The ordinary walk, wait, and attack checks
+also passed. The unchanged upstream scorer passed 44/44 under UTC in
+148.71835 seconds against 153.27387 seconds for the prior worktree.
+All 792,838 ordered RNG calls, 11,405 screens and cursors, and 1,483
+animations matched. On the wizard world tour, sampled time under
+map reset fell from 71.5 to 3.6 ms, reflection from 97.2 to 57.0 ms,
+and map-fragment lookup from 61.0 to 13.6 ms. Hosted held-out timing
+remains unverified.
+
+## Direct targeting and a shared object catalogue (2026-11-17)
+
+The production GETPOS entry binds the original source to the game once.
+It reads the canonical spatial map and the live visibility rows and
+uses the existing native window callbacks. The original coordinate
+sort, highlight callbacks, local scratch scope, argument widths and
+cursor policy remain in place. The foreign window-token route still
+uses the measured callback signature.
+
+The fixed object-class catalogue now has one view per row backed by
+the existing live object bytes. O_INIT reuses its fixed discovery and
+class-base arrays and enters its original save and restore policies
+directly. The name pointers, packed discovery flags and serializer
+formats retain the prior storage and mutation semantics. Scoped
+reference fixtures retain the dynamic catalogue adapter.
+
+The normal-main target selection, cancellation and monster-cycle
+comparisons matched original C, including cursor state, ordered RNG and
+the reachable world graph. An uninterrupted UTC run of the upstream
+scorer passed 44/44 in 153.27387 seconds against 159.01340 seconds for
+`258faca`. It matched 792,838 ordered RNG calls, 11,405 screens and
+cursors, and 1,483 animations. Two workers exceeded the 45-second
+deadline in an earlier attempt. Both passed their isolated reruns and
+the complete rerun with the original deadline. The wizard-tour sample
+attributed 24 ms to the GETPOS binding, down from 80 ms, and 8 ms to
+the O_INIT binding, down from 102 ms. These checks do not cover every
+foreign targeting callback or alternate window implementation.
+
 ## Direct display reads, level terrain serialization, and symbol lookup (2026-11-17)
 
 The display reads measured fields from the same native arena as the actor
