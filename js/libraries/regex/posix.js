@@ -66,6 +66,23 @@ const EMPTY = Object.freeze({ kind: 'empty' });
 const MAX_STATES = 1000000;
 const CLASS_NAMES = new Set(['alnum', 'alpha', 'blank', 'cntrl', 'digit',
   'graph', 'lower', 'print', 'punct', 'space', 'upper', 'xdigit']);
+// Names for single-byte collating elements in the macOS C locale.
+const nativeCollatingElements = new Map(Object.entries({
+  alert: 7, backspace: 8, tab: 9, newline: 10, 'vertical-tab': 11,
+  'form-feed': 12, 'carriage-return': 13, DEL: 127,
+  space: ' ', 'exclamation-mark': '!', 'quotation-mark': '"', 'number-sign': '#',
+  'dollar-sign': '$', 'percent-sign': '%', ampersand: '&', apostrophe: "'",
+  'left-parenthesis': '(', 'right-parenthesis': ')', asterisk: '*', 'plus-sign': '+',
+  comma: ',', hyphen: '-', 'hyphen-minus': '-', period: '.', slash: '/', solidus: '/',
+  zero: '0', one: '1', two: '2', three: '3', four: '4',
+  five: '5', six: '6', seven: '7', eight: '8', nine: '9',
+  colon: ':', semicolon: ';', 'less-than-sign': '<', 'equals-sign': '=',
+  'greater-than-sign': '>', 'question-mark': '?', 'commercial-at': '@',
+  'left-square-bracket': '[', backslash: '\\', 'reverse-solidus': '\\',
+  'right-square-bracket': ']', circumflex: '^', underscore: '_', 'grave-accent': '`',
+  'left-brace': '{', 'left-curly-bracket': '{', 'vertical-line': '|',
+  'right-brace': '}', 'right-curly-bracket': '}', tilde: '~',
+}).map(([name, value]) => [name, typeof value === 'number' ? value : value.charCodeAt(0)]));
 const codeUnit = byte => byte < 128 ? byte : 0xdf00 | byte;
 const alpha = c => c >= 65 && c <= 90 || c >= 97 && c <= 122;
 const digit = c => c >= 48 && c <= 57;
@@ -120,12 +137,16 @@ class Parser {
     const delimiter = this.peek(1);
     if (this.peek() !== 91 || delimiter !== 46 && delimiter !== 61)
       return { value: codeUnit(this.bytes[this.at++]), equivalent: false };
-    const byte = this.peek(2);
-    if (!this.native || !byte || byte > 127 || this.peek(3) !== delimiter || this.peek(4) !== 93)
-      fail(REG_ECOLLATE);
-    // In the C locale a single ASCII byte sorts and matches as itself.
-    this.at += 5;
-    return { value: byte, equivalent: delimiter === 61 };
+    if (!this.native) fail(REG_ECOLLATE);
+    this.at += 2;
+    let name = '';
+    while (this.peek() && !(this.peek() === delimiter && this.peek(1) === 93))
+      name += String.fromCharCode(this.bytes[this.at++]);
+    const value = name.length === 1 && name.charCodeAt(0) <= 127
+      ? name.charCodeAt(0) : nativeCollatingElements.get(name);
+    if (!this.peek() || value === undefined) fail(REG_ECOLLATE);
+    this.at += 2;
+    return { value, equivalent: delimiter === 61, collating: delimiter === 46 };
   }
   bracket() {
     let negate = false;
@@ -155,7 +176,7 @@ class Parser {
           const last = this.native ? this.bracketElement()
             : { value: codeUnit(this.bytes[this.at++]), equivalent: false };
           max = last.value;
-          if (first.equivalent || last.equivalent || min > max) fail(REG_ERANGE);
+          if (first.equivalent && !last.collating || last.equivalent || min > max) fail(REG_ERANGE);
         }
         ranges.push([min, max]);
       }
@@ -168,9 +189,6 @@ class Parser {
         && this.peek(5) === 93 && this.peek(6) === 93) {
       const assertion = this.peek(3) === 60 ? 'bow' : 'eow';
       this.at += 7;
-      const next = this.peek();
-      if (next === 42 || next === 43 || next === 63 || next === 123 && digit(this.peek(1)))
-        fail(REG_BADRPT);
       return { kind: 'assert', assertion };
     }
     const b = this.bytes[this.at++];
@@ -204,7 +222,8 @@ class Parser {
     }
     return literal(codeUnit(escaped));
   }
-  repetitions(node) {
+  repetitions(node, assertionAtom = false) {
+    let repeated = false;
     while ([42, 43, 63, 123].includes(this.peek())) {
       if (this.native && this.peek() === 123 && !digit(this.peek(1))) break;
       const b = this.bytes[this.at++];
@@ -221,11 +240,13 @@ class Parser {
         };
         min = count(); max = this.peek() === 44 ? (++this.at, count()) : min;
         if (this.native && (min > 255 || max > 255)) fail(18);
-        if (min < 0 || min > 255 || max > 255 || max >= 0 && max < min || this.bytes[this.at++] !== 125)
-          fail(REG_BADBR);
+        if (min < 0 || min > 255 || max > 255 || max >= 0 && max < min) fail(REG_BADBR);
+        if (this.native && !this.peek()) fail(REG_EBRACE);
+        if (this.bytes[this.at++] !== 125) fail(REG_BADBR);
       }
+      if (this.native && (assertionAtom || repeated)) fail(REG_BADRPT);
       node = max === 0 ? EMPTY : { kind: 'repeat', child: node, min, max };
-      if (this.native && [42,43,63,123].includes(this.peek())) fail(REG_BADRPT);
+      repeated = true;
     }
     return node;
   }
@@ -253,7 +274,10 @@ class Parser {
         ++this.at;
         ({ parts, choices } = stack.pop());
         parts.push(this.repetitions(result));
-      } else parts.push(this.repetitions(this.atom()));
+      } else {
+        const atom = this.atom();
+        parts.push(this.repetitions(atom, atom.kind === 'assert'));
+      }
     }
   }
 }

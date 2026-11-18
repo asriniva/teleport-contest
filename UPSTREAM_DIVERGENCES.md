@@ -1,3 +1,23 @@
+## Additional native regex syntax for message and menu rules (2026-11-18)
+
+The active macOS regex profile in `js/libraries/regex/posix.js` accepts
+the measured single-byte C-locale collating names in bracket expressions,
+including `[[.space.]]` and its equivalence form. It distinguishes a
+literal brace after a repeated expression from a second quantifier, and
+matches the measured errors for incomplete counts and repeated anchors.
+Locale-dependent and multi-byte collation remain outside this change.
+
+The new native recording hides the unknown-command message with a named
+space and loads a second rule with a literal brace after repetition.
+Before the fix both valid rules caused configuration errors at startup.
+The corrected replay matches all 19 screens and cursors and all 2,868
+ordered PRNG calls. The native libc comparison covered 136 compile
+cases and all printable ASCII inputs for each successful pattern. The
+regex test retains focused macOS comparisons for compilation and matching.
+All 44 public and 61 supplemental recordings matched PRNG order, screens,
+cursors and animation frames. The browser startup and pinned musl regex
+checks also passed.
+
 ## File paths, diagnostics and scan fields visible in play (2026-11-18)
 
 The virtual filesystem checks that a path with a trailing slash resolves

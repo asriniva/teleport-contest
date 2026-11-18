@@ -26,6 +26,7 @@ subsequent movement and damage turns.
 | `camera-mirror` | Aim a camera at the hero and the stairs, and aim a mirror at the hero and the ceiling |
 | `cloud-save-restore` | Highlight jump and cloud targets, jump with boots, then save in a stinking cloud and take damage from it after restoring |
 | `corpse-genders` | Revive explicitly male and female newt corpses, using a downward zap |
+| `display-regex-collation` | Load message filters using a named space and a literal brace after repetition, then suppress the unknown-command message |
 | `display-regex-dialect` | Exercise escaped letters in message and inventory color rules that the native C and SDK regex engines interpret differently |
 | `floor-cancellation` | Cancel and recover a pile containing an enchanted sword, a potion of speed, a scroll of identify and a charged wand |
 | `forced-lock` | Pry open a locked chest with a sword and trigger its trap when looting |

@@ -1,4 +1,4 @@
-// Native oracle compiles the pinned musl regex sources, never host regcomp.
+// The SDK oracle compiles pinned musl sources. On macOS, also compare the native dialect.
 // Only test code depends on Node/fs/subprocesses; the production service does not.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -182,6 +182,50 @@ for (let i = 0; i < cases.length; ++i) {
   assert.equal(regex.posixRegexError(js.status), Buffer.from(error, 'hex').toString(), `error ${context}`);
   if (js.status === 0) assert.equal(regex.execPosixRegex(js.handle, bytes(test.text), test.eflags), Number(execute), `match ${context}`);
   ++comparisons;
+}
+if (process.platform === 'darwin') {
+  const source = path.join(work, 'darwin-oracle.c');
+  const binary = path.join(work, 'darwin-oracle');
+  fs.writeFileSync(source, `
+#include <regex.h>
+#include <stdio.h>
+
+int main(int argc, char **argv) {
+  for (int i = 1; i + 1 < argc; i += 2) {
+    regex_t compiled;
+    int status = regcomp(&compiled, argv[i], REG_EXTENDED | REG_NOSUB);
+    printf("%d", status);
+    if (!status) {
+      printf(" %d", regexec(&compiled, argv[i + 1], 0, NULL, 0));
+      regfree(&compiled);
+    }
+    puts("");
+  }
+  return 0;
+}
+`);
+  command(compiler, [...compilerArgs, source, '-o', binary]);
+  const cases = [
+    ['Unknown[[.space.]]command', 'Unknown command'],
+    ['Unknown[[.space.]]command', 'Unknown.command'],
+    ['[[=space=]]', ' '], ['[[.tab.]]', '\t'],
+    ['[[.space.]-[.slash.]]', '.'], ['[[=space=]-[.slash.]]', '.'],
+    ['[[.space.]-[=slash=]]', '.'], ['[[=a=]-c]', 'b'],
+    ['[[.unknown-name.]]', 'a'], ['a*{b', 'aaa{b'],
+    ['a{2}{again}', 'aa{again}'], ['a{1', 'a'], ['a{1x}', 'a'],
+    ['a?{2', 'a'], ['a{1}+', 'a'], ['^*', 'a'], ['(^)*', 'a'],
+  ];
+  const output = command(binary, cases.flat()).trimEnd().split('\n');
+  for (const [index, [pattern, text]] of cases.entries()) {
+    const [compiled, executed] = output[index].split(' ').map(Number);
+    const actual = regex.compilePosixRegex(pattern, regex.REG_EXTENDED | regex.REG_NOSUB, true);
+    assert.equal(actual.status, compiled, 'macOS regex compile ' + pattern);
+    if (!actual.status) {
+      assert.equal(regex.execPosixRegex(actual.handle, text), executed, 'macOS regex match ' + pattern);
+      regex.freePosixRegex(actual.handle);
+    }
+  }
+  console.log('PASS: ' + cases.length + ' macOS regex compile and match comparisons');
 }
 let wasmComparisons = 0;
 if (process.argv.includes('--wasm-cross-check')) {
