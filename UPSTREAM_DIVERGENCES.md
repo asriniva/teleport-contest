@@ -1,3 +1,29 @@
+## Upstream scoring and a host-independent replay clock (2026-11-17)
+
+Upstream commit `6ee30e6` is merged. The scoring workflows, frozen
+runner, public recordings and original C recorder tools match upstream.
+`npm run score` uses `frozen/score.sh`. The retired fork wrapper and its
+host timezone and deadline defaults are removed. Local diagnostic tools
+call the frozen scorer and inherit the caller's timezone.
+
+The port's `runSegment` creates a replay clock in the documented recording
+timezone, `America/New_York`, using the bundled timezone data. The recorded
+wall time, reference epoch, inherited daylight-saving flag and local
+date conversions use that clock. Ordinary play still uses the host clock.
+Lua sees the same replay timezone through the virtual environment. The
+scorer still sends the same seed, date, options and keys. The replay
+receives no expected screens, cursors, animations or RNG log.
+
+The former UTC divergence affected shopkeeper names and message boundaries.
+The focused timezone check covers winter and summer offsets, repeated and
+missing hours, and the engine's inherited daylight-saving flag under UTC
+and Los Angeles hosts. The unchanged upstream CI command passed 44/44
+public recordings with a UTC host and its default worker deadline in
+178.16 seconds. All 792,838 ordered RNG calls, 11,405 screens and
+cursors, and 1,483 animations matched. The three previously failing
+recordings downloaded directly from the leaderboard viewer also passed
+under UTC. Private judge results remain external.
+
 ## Direct ordinary turns, display, level creation, and startup (2026-11-17)
 
 The published wizard world tour profile attributed 7.25 of 17.94 sampled

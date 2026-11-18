@@ -15,13 +15,13 @@ for key in ['STANDALONE_RECORDER_ASSETS','STANDALONE_RECORD_LAYOUTS','NODE_OPTIO
 profiles=out/'profiles'; profiles.mkdir(exist_ok=True)
 def manifest():
  paths=[p for d in ['js','frozen','sessions'] for p in sorted((candidate/d).rglob('*')) if p.is_file()]
- paths += [candidate/p for p in ['package.json','scripts/score-js.sh','.teleport/repo-metadata.json']]
+ paths += [candidate/p for p in ['package.json','frozen/score.sh','.teleport/repo-metadata.json']]
  return {str(p.relative_to(candidate)):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
-pre=manifest(); (out/'pre-run-manifest.json').write_text(json.dumps({'sourceSha256':pre,'effectiveTimeoutMs':0,'normalEntry':True,'jsMainOverlay':False,'assetOverride':False,'layoutOverride':False,'samplingIntervalUs':1000,'nodeVersion':node_version,'timeoutPolicy':'SESSION_REPLAY_TIMEOUT_MS=0 disables frozen worker deadlines','command':['bash','scripts/score-js.sh','sessions/']},indent=2))
-env=os.environ.copy(); env['PATH']=str(node.parent)+':'+env['PATH']; env['TZ']='America/New_York'; env['SESSION_REPLAY_TIMEOUT_MS']='0'; env['STANDALONE_RECORDER_STATS_DIR']=str(out/'stats'); env['NODE_OPTIONS']=f'--cpu-prof --cpu-prof-dir={profiles} --cpu-prof-interval=1000'
+pre=manifest(); (out/'pre-run-manifest.json').write_text(json.dumps({'sourceSha256':pre,'effectiveTimeoutMs':0,'normalEntry':True,'jsMainOverlay':False,'assetOverride':False,'layoutOverride':False,'samplingIntervalUs':1000,'nodeVersion':node_version,'timeoutPolicy':'SESSION_REPLAY_TIMEOUT_MS=0 disables frozen worker deadlines','command':['bash','frozen/score.sh','sessions/']},indent=2))
+env=os.environ.copy(); env['PATH']=str(node.parent)+':'+env['PATH']; env['SESSION_REPLAY_TIMEOUT_MS']='0'; env['STANDALONE_RECORDER_STATS_DIR']=str(out/'stats'); env['NODE_OPTIONS']=f'--cpu-prof --cpu-prof-dir={profiles} --cpu-prof-interval=1000'
 started=time.time()
 with (out/'results.stdout.log').open('wb') as stdout, (out/'results.stderr.log').open('wb') as stderr:
- p=subprocess.Popen(['bash','scripts/score-js.sh','sessions/'],cwd=candidate,env=env,stdout=stdout,stderr=stderr)
+ p=subprocess.Popen(['bash','frozen/score.sh','sessions/'],cwd=candidate,env=env,stdout=stdout,stderr=stderr)
  print(json.dumps({'pid':p.pid,'output':str(out)}),flush=True)
  while True:
   code=p.poll()

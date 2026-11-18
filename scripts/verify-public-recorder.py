@@ -13,12 +13,12 @@ for name in ['STANDALONE_RECORDER_ASSETS','STANDALONE_RECORDER_LAYOUTS','STANDAL
 out.mkdir(parents=True,exist_ok=False)
 def manifest():
     paths=[p for name in ['js','frozen','sessions']for p in sorted((root/name).rglob('*'))if p.is_file()]
-    paths.extend(root/name for name in ['package.json','scripts/score-js.sh','.teleport/repo-metadata.json'])
+    paths.extend(root/name for name in ['package.json','frozen/score.sh','.teleport/repo-metadata.json'])
     return {str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest()for p in paths}
 before=manifest();version=subprocess.check_output([str(node),'--version'],text=True).strip()
-pre={'sourceSha256':before,'nodeVersion':version,'launcherSha256':hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest(),'effectiveTimeoutMs':0,'normalEntry':True,'jsMainOverlay':False,'assetOverride':False,'layoutOverride':False,'cpuProfiling':False,'command':['bash','scripts/score-js.sh','sessions/']}
+pre={'sourceSha256':before,'nodeVersion':version,'launcherSha256':hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest(),'effectiveTimeoutMs':0,'normalEntry':True,'jsMainOverlay':False,'assetOverride':False,'layoutOverride':False,'cpuProfiling':False,'command':['bash','frozen/score.sh','sessions/']}
 (out/'pre-run-manifest.json').write_text(json.dumps(pre,indent=2)+'\n')
-env=os.environ.copy();env.update(PATH=str(node.parent)+':'+env['PATH'],TZ='America/New_York',SESSION_REPLAY_TIMEOUT_MS='0',STANDALONE_RECORDER_STATS_DIR=str(out/'stats'))
+env=os.environ.copy();env.update(PATH=str(node.parent)+':'+env['PATH'],SESSION_REPLAY_TIMEOUT_MS='0',STANDALONE_RECORDER_STATS_DIR=str(out/'stats'))
 started=time.time()
 with(out/'results.stdout.log').open('wb')as stdout,(out/'results.stderr.log').open('wb')as stderr:
     child=subprocess.Popen(pre['command'],cwd=root,env=env,stdout=stdout,stderr=stderr)

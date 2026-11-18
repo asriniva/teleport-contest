@@ -25,7 +25,7 @@ output.mkdir(parents=True)
 
 def manifest():
     paths = [p for d in ['js', 'frozen', 'sessions'] for p in sorted((root / d).rglob('*')) if p.is_file()]
-    paths += [root / p for p in ['package.json', 'scripts/score-js.sh', '.teleport/repo-metadata.json']]
+    paths += [root / p for p in ['package.json', 'frozen/score.sh', '.teleport/repo-metadata.json']]
     return {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
 
 before = manifest()
@@ -34,7 +34,7 @@ if args.session:
     assert len(set(args.session)) == len(args.session), 'Duplicate session selection'
     assert all(pathlib.Path(name).name == name and (root / 'sessions' / name).is_file() for name in args.session)
     targets = ['sessions/' + name for name in args.session]
-command = ['bash', 'scripts/score-js.sh', *targets]
+command = ['bash', 'frozen/score.sh', *targets]
 if args.session:
     # score.sh accepts only its first argument. The frozen runner accepts all
     # explicit targets; require the same canonical infrastructure overlay first.
@@ -48,7 +48,7 @@ if args.session:
     selectedSessions=args.session, nodeVersion=subprocess.check_output([str(node), '--version'], text=True).strip(),
     timeoutPolicy='SESSION_REPLAY_TIMEOUT_MS=0 disables frozen worker deadlines', command=command), indent=2))
 env = {**os.environ, 'PATH': str(node.parent) + ':' + os.environ['PATH'],
-       'TZ': 'America/New_York', 'SESSION_REPLAY_TIMEOUT_MS': '0',
+       'SESSION_REPLAY_TIMEOUT_MS': '0',
        'STANDALONE_RECORDER_STATS_DIR': str(output / 'stats')}
 if args.cpu_profile:
     (output / 'profiles').mkdir()
