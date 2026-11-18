@@ -74,6 +74,7 @@ subsequent movement and damage turns.
 | `timed-potions` | Apply speed, levitation, sleep and full healing, including landing and waking up |
 | `tools-corpses` | Tin a corpse, identify glass with a touchstone, apply a cream pie |
 | `tools` | Apply a bag of tricks, horn of plenty, magic whistle, unicorn horn and towel |
+| `trailing-path` | Ask the wizard Lua loader to open a regular file with a trailing slash, dismiss the error and redraw |
 | `traps` | Arm traps, disarm a land mine, animate a figurine and attempt pet and riding interactions |
 | `undead-turning` | Revive a lichen and a newt from the floor, then probe downward |
 | `wand-break` | Break charged and empty wands after wearing gauntlets of power |

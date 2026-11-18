@@ -49,6 +49,35 @@ static int signed_scans(int argc, char **argv) {
     }
     return 0;
 }
+static int screen_edges(const char *directory) {
+    if (chdir(directory)) return 1;
+    const char *plain="screen-path-plain";
+    const char *marked="\xef\xbb\xbf""screen-path-plain";
+    FILE *file=fopen(plain,"w");
+    if (!file) return 2;
+    fputc('A',file);fclose(file);
+    file=fopen(marked,"w");
+    if (!file) return 3;
+    fputc('B',file);fclose(file);
+    errno=0;file=fopen("screen-path-plain/","r");
+    printf("%d %d\n",file!=NULL,errno==ENOTDIR);
+    if (file) fclose(file);
+    file=fopen(marked,"r");
+    if (!file) return 4;
+    printf("%d\n",fgetc(file));fclose(file);
+    unlink(plain);unlink(marked);
+    const int errors[]={0,EIO,EMFILE,ENAMETOOLONG,ENOMEM,ENOTSUP,ENOTTY,ERANGE,ESPIPE};
+    for (size_t i=0;i<sizeof(errors)/sizeof(errors[0]);i++) puts(strerror(errors[i]));
+    int value=88,n=-1;
+    char data[2]={88,88};
+    int result=sscanf("0xg","%i%n",&value,&n);
+    printf("%d %d %d\n",result,value,n);
+    errno=0;result=sscanf("+","%d%n",&value,&n);
+    printf("%d %d\n",result,errno!=0);
+    n=-1;result=sscanf("a","%2c%n",data,&n);
+    printf("%d %d %d %d\n",result,data[0],data[1],n);
+    return 0;
+}
 int main(int argc,char **argv) {
     if(argc>2&&argv[1][0]=='c'){
         mode_t prior=umask(0);int fd=creat(argv[2],0640);if(fd<0)return 77;
@@ -63,6 +92,7 @@ int main(int argc,char **argv) {
     if(argc>1&&argv[1][0]=='d'){long long end,start;while(scanf("%lld %lld",&end,&start)==2)printf("%.17g\n",difftime((time_t)end,(time_t)start));return 0;}
     if(argc>1&&argv[1][0]=='b')return bounded_copies();
     if(argc>1&&strcmp(argv[1],"signed-scans")==0)return signed_scans(argc,argv);
+    if(argc==3&&strcmp(argv[1],"screen-edges")==0)return screen_edges(argv[2]);
     if(argc>1)return scans();
     int n;
     while(scanf("%d",&n)==1) {

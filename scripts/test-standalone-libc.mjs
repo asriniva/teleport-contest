@@ -5,7 +5,7 @@ import {spawnSync} from 'node:child_process';
 import {createStandaloneEnvironment} from '../js/nethack/environment.js';
 import {createStandaloneProgram} from '../js/nethack/program.js';
 import {C_ERRNO} from '../js/c-runtime/stdlib.js';
-import {VFSError} from '../js/c-runtime/vfs.js';
+import {VFSError,VFS_ERRNO} from '../js/c-runtime/vfs.js';
 const root=process.env.STANDALONE_REFERENCE_ROOT;if(!root)throw new Error('Missing STANDALONE_REFERENCE_ROOT');
 const scratch=path.resolve('.cache/standalone-libc');fs.mkdirSync(scratch,{recursive:true});
 // musl's atomic header supplies this mathematical trailing-zero operation.
@@ -39,7 +39,7 @@ runtime.call('hacklib','nh_deterministic_qsort',arr,5n,8n,cmp);
 assert.deepEqual(Array.from({length:5},(_,i)=>memory.view.getInt32(arr+i*8+4,true)),[3,1,4,0,2]);
 
 const layouts=JSON.parse(fs.readFileSync('js/wasm/tu-layouts.json'));
-const {environment:game}=createStandaloneProgram({layouts,readKey(){throw Error('Unexpected input');}});
+const {environment:game,stdio:gameStdio}=createStandaloneProgram({layouts,readKey(){throw Error('Unexpected input');}});
 const discoverySort=game.enableDiscoveries(layouts).services.qsort;
 const discoveryRows=Array.from({length:64},(_,i)=>game.services.literal(
     (i%2===0?'* ':'  ')+String.fromCharCode(97+i%3).repeat(2)+' '+(i%4<2?'x':'X')));
@@ -84,6 +84,49 @@ for (const [i,input] of signedInputs.entries()) {
     assert.equal(stream.fgetc(file),33);
     assert.equal(stream.fclose(file),0);
 }
+const edgeActual=[];
+const plainPath='screen-path-plain',markedPath='\uFEFF'+plainPath;
+game.filesystem.writeFile('/'+plainPath,'A');
+game.filesystem.writeFile('/'+markedPath,'B');
+game.libc.errno=0;
+const trailingFile=gameStdio.fopen(plainPath+'/','r');
+edgeActual.push([Number(Boolean(trailingFile)),Number(game.libc.errno===VFS_ERRNO.ENOTDIR)].join(' '));
+const markedFile=gameStdio.fopen(game.memory.cstring(new TextEncoder().encode(markedPath)),'r');
+assert.ok(markedFile);
+edgeActual.push(String(gameStdio.fgetc(markedFile)));
+assert.equal(gameStdio.fclose(markedFile),0);
+const strerror=game.resolve('strerror');
+for (const code of [0,VFS_ERRNO.EIO,VFS_ERRNO.EMFILE,VFS_ERRNO.ENAMETOOLONG,VFS_ERRNO.ENOMEM,
+    VFS_ERRNO.ENOTSUP,59,C_ERRNO.ERANGE,VFS_ERRNO.ESPIPE])
+    edgeActual.push(game.memory.readString(Number(strerror(code))));
+game.libc.errno=VFS_ERRNO.ENOTSUP;
+game.resolve('perror')(game.services.literal('test'));
+gameStdio.fflush(gameStdio.stderr);
+assert.equal(new TextDecoder().decode(gameStdio.captured(2)),'test: Operation not supported\n');
+memory.view.setInt32(out,88,true);
+memory.view.setInt32(end,-1,true);
+let edgeResult=s.sscanf('0xg','%i%n',out,end);
+edgeActual.push([edgeResult,memory.view.getInt32(out,true),memory.view.getInt32(end,true)].join(' '));
+runtime.libc.errno=0;
+edgeResult=s.sscanf('+','%d%n',out,end);
+edgeActual.push([edgeResult,Number(runtime.libc.errno!==0)].join(' '));
+memory.memset(out,88,2);
+memory.view.setInt32(end,-1,true);
+edgeResult=s.sscanf('a','%2c%n',out,end);
+edgeActual.push([edgeResult,memory.HEAPU8[out],memory.HEAPU8[out+1],memory.view.getInt32(end,true)].join(' '));
+if (process.platform==='darwin') {
+    const edgeOracle=spawnSync(path.join(scratch,'probe'),['screen-edges',scratch],{encoding:'utf8'});
+    assert.equal(edgeOracle.status,0,edgeOracle.stderr);
+    assert.deepEqual(edgeActual,edgeOracle.stdout.trim().split('\n'));
+}
+runtime.filesystem.writeFile('/signed-scan','0xg');
+const hexFile=stream.fopen(scanPath,'r');
+assert.ok(hexFile);
+assert.equal(stream.fscanf(hexFile,'%i',out),1);
+assert.equal(memory.view.getInt32(out,true),0);
+assert.equal(stream.fgetc(hexFile),120);
+assert.equal(stream.fgetc(hexFile),103);
+assert.equal(stream.fclose(hexFile),0);
 assert.equal(s.strcasecmp('\xc0','\xe0'),-32);assert.equal(s.strcasecmp('AbC','aBc'),0);
 const comparisonText = memory.cstring('The lance');
 assert.equal(s.strncmp(comparisonText, 'The ', 4n), 0);

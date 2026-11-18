@@ -1,3 +1,29 @@
+## File paths, diagnostics and scan fields visible in play (2026-11-18)
+
+The virtual filesystem checks that a path with a trailing slash resolves
+to a directory, and checks that a component is traversable before
+processing a following dot or parent component. The new native replay
+asks the wizard Lua loader to open `nhlib.lua/`. The old port opened the
+file and made two extra PRNG calls. The corrected port shows the native
+file-open failure and matches the replay.
+
+Stdio, access, directory opening and Unix metadata calls use a shared
+UTF-8 path decoder that retains a leading U+FEFF. A native libc comparison
+opens two distinct files whose names differ only by that character.
+The port compares valid UTF-8 names. Arbitrary non-UTF-8 host filenames
+remain outside this contract.
+
+The nine measured Darwin error text differences use a shared
+`strerror` implementation for game diagnostics and `perror`. Internal
+errno numbers remain the values expected by the translated code.
+The scanner now matches native C when an incomplete hex prefix follows a
+zero, a character field reaches EOF after some bytes, and a signed field
+contains no digits. The regression checks compare values, byte counts,
+error text and unread stream bytes.
+All 44 public and 60 supplemental macOS recordings passed with matching
+PRNG order, screens, cursors and animation frames. The browser stdio check
+also passed with resizable heap views rejected by the decoder.
+
 ## Deterministic game sorting and signed numeric scans (2026-11-18)
 
 The discoveries and status-condition bindings now route sorting through
