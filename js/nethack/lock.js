@@ -1,4 +1,5 @@
 import {recordNativeRngCaller} from './native/rng-output.js';
+import {nativeStateFor} from './native/state-bridge.js';
 // Original LOCK policies on one native context and live GX occupation state.
 import abi from './lock-abi.json' with{type:'json'};
 import * as source from '../ported/lock.js';
@@ -47,5 +48,8 @@ export function enableLock(environment,layouts){
  }
  const resetPick=()=>source.reset_pick(owner.context);
  resetPick.nativeDirect=true;
+ const native=nativeStateFor(environment);
+ resetPick.nativeState=native;
+ if(!inherited.has('reset_pick'))native.functions.set('reset_pick',resetPick);
  environment.register('lock',Object.fromEntries(owner.exports.filter(n=>!inherited.has(n)).map(n=>[n,n==='reset_pick'?resetPick:(...args)=>call(n,...args)])),local);owners.set(environment,owner);return owner;
 }

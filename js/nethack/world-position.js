@@ -94,7 +94,7 @@ export function enableWorldPosition(environment,layouts,creation){
  Object.defineProperty(liquid,'Hallucination',{get:()=>{const p=world.u.uprops[layouts.do_name.HALLUC],r=world.u.uprops[layouts.do_name.HALLUC_RES];return Number(Boolean(p.intrinsic&&!r.intrinsic&&!r.extrinsic));}});
  if(!environment.hasFunction('hliquid'))environment.register('surface-liquid-naming',{hliquid},liquid);
  environment.exposeAddressPort('invent',['sobj_at']);
- environment.enableAddressPort('mkmaze',{only:['is_exclusion_zone']});
+ environment.enableAddressPort('mkmaze',{only:['is_exclusion_zone','maybe_adjust_hero_bubble']});
  environment.exposeAddressPort('dungeon',['has_ceiling','surface'].filter(name=>!environment.hasFunction(name)));
  environment.extend('monster-creation',{makemon_rnd_goodpos,m_initgrp});
  connectNativeMakemon(environment,'monster-creation',['makemon_rnd_goodpos','m_initgrp']);

@@ -146,7 +146,7 @@ export function enableTurnLoop(environment,layouts,startup){
  const implementations=Object.fromEntries(entries.filter(name=>!environment.hasFunction(name)).map(name=>{let started=false;const invoke=(...args)=>{if(!started){environment.startModule('game-startup');started=true;}if(name==='moveloop_preamble'||name==='moveloop')args[0]=transport.char(args[0]);else if(name==='timet_to_seconds'||name==='timet_delta')args=args.map(transport.long);return name==='moveloop'?native[name](...args):C.nativeTurn(()=>native[name](...args));};invoke.nativeState=nativeState;invoke.nativeDirect=true;nativeState.functions.set(name,invoke);return [name,invoke];}));
  environment.extend('game-startup',implementations);
  return {environment:C,state:C.allmainState,entries:Object.keys(implementations),native,views,
-  displayExecution:()=>nativeState.functions.get('newsym')?.nativeValuesEntry?.nativeExecutionState,
+  displayExecution:()=>nativeState.functions.get('suppress_map_output')?.nativeValuesEntry?.nativeExecutionState,
   limitation:'Native ALLMAIN turns share startup state and canonical typed actors; finite recording acceptance is required separately.'};
 }
 
@@ -208,17 +208,22 @@ export function connectTurnPolicies({turn,monsters,monsterMovement,vision,heroMo
   const attackMonster=monsterCombat.native.mattackm;
   const hero=heroMovement.context;
   const moveHero=hero.nativeMovement.domove;
+  Object.assign(moveHero,{nativeState:sharedState,nativeDirect:true});
   hero.do_attack=heroCombat.context.nativeNamespace.do_attack;
   Object.assign(monsterContext,{mattacku:attackHero,mattackm:attackMonster,vision_recalc:sight.vision_recalc});
   monsterAttack.context.mattackm=attackMonster;
   context.domove=moveHero;
   const display=turn.displayExecution()?.namespace;
   if (display) {
+   const canSee=monster=>display.canseemon(environment.address(monster));
+   const safeMonster=monster=>display.is_safemon(environment.address(monster));
    for (const policy of [hero,lifecycle,monsterContext,vision.context,
                          heroCombat.context,monsterAttack.context,monsterCombat.context]) {
     policy.newsym=display.newsym;
     policy.glyph_at=display.glyph_at;
    }
+   Object.assign(hero,{is_safemon:safeMonster,unmap_invisible:display.unmap_invisible});
+   Object.assign(heroCombat.context,{canseemon:canSee,is_safemon:safeMonster});
    context.see_monsters=display.see_monsters;
   }
 

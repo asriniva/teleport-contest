@@ -40,9 +40,10 @@ try{
  assert.match(expected.rngLog,/@ hitum\(uhitm.c:/,'actual hero attack executes');
  assert.ok(BigInt(expected.state.moves)>BigInt(expected.snapshots[5].state.moves),'attack turn finishes after prompt output');
  const cases=[['walk',3,4],['wait',4,5],['attack',5,input.keys.length]].map(([kind,start,end])=>{const rows=intervals.filter(r=>r.keyIndex>=start&&r.keyIndex<end),totals={};for(const row of rows)for(const [key,value]of Object.entries(row)){if(!value?.names)continue;const out=totals[key]??={calls:0,bytes:0,names:{}};out.calls+=value.calls;out.bytes+=value.bytes;for(const [name,count]of Object.entries(value.names))out.names[name]=(out.names[name]??0)+count;}return{kind,totals};});
- const passed=cases.every(c=>!c.totals.cContext?.calls&&!c.totals.genericCall?.calls&&!c.totals.heapAllocation?.calls&&!c.totals.cFieldAccess?.calls&&!c.totals.cPointerCall?.calls);
+ const compatibilityCounters=['cContext','genericCall','heapAllocation','cFieldAccess','cPointerCall','addressLegacyAdapter','stateBoundary'];
+ const passed=cases.every(c=>compatibilityCounters.every(name=>!c.totals[name]?.calls));
  const evidence={passed,originalCEquivalent:true,input,cases,instrumentedModules:touched,scope:'Real initial walk, wait and forced attack; input through pending output and next read. Generic C field access and pointer-table dispatch are also counted; C malloc includes legacy stack allocations; the native arena has separate allocation/reservation counters and may allocate a backing chunk when it grows. Counters are architectural acceptance, not CPU or timing samples.'};
  fs.mkdirSync('.cache/native-ordinary-turns',{recursive:true});fs.writeFileSync('.cache/native-ordinary-turns/evidence.json',JSON.stringify(evidence,null,2)+'\n');
  console.log(JSON.stringify({passed,originalCEquivalent:true,cases:cases.map(c=>({kind:c.kind,...Object.fromEntries(Object.entries(c.totals).map(([k,v])=>[k,v.calls]))}))},null,2));
- if(!process.argv.includes('--report'))assert.ok(passed,'ordinary turns still enter generic C execution, C fields/pointer dispatch, or allocate C heap storage');
+ if(!process.argv.includes('--report'))assert.ok(passed,'ordinary turns still enter a compatibility adapter or allocate C heap storage');
 }finally{hooks.deregister();delete globalThis.__nativeOrdinaryTurnCounter;}

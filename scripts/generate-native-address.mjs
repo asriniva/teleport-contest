@@ -4,15 +4,21 @@ import {pathToFileURL} from 'node:url';
 const {parse}=await import(process.argv[2]?pathToFileURL(process.argv[2]):'acorn');
 const metadata=JSON.parse(fs.readFileSync('js/nethack/address-ports.json')).ports;
 metadata.cmd={schema:JSON.parse(fs.readFileSync('js/nethack/command-abi.json')).schema};
+const scalarCells=Object.entries({
+ char:'Int8','signed char':'Int8','unsigned char':'Uint8',short:'Int16','unsigned short':'Uint16',
+ int:'Int32','unsigned int':'Uint32',unsigned:'Uint32',long:'BigInt64',
+ 'unsigned long':'BigUint64','long long':'BigInt64','unsigned long long':'BigUint64',
+});
 const chosen=process.argv.slice(3).filter(x=>x!=='--check'),names=chosen.length?chosen:Object.keys(metadata);
 const report={};
 for(const name of names){
  const source=fs.readFileSync('js/ported/'+name+'.js','utf8'),ast=parse(source,{ecmaVersion:'latest',sourceType:'module'}),schema=metadata[name].schema;
  const fields=new Map();let flat=0;
  for(const[kind,row]of Object.entries(schema.schema))for(const field of row.fields)fields.set(kind+'.'+field.name,{id:flat++,field});
- function hygiene(node){if(!node||typeof node!=='object')return;const bound=node.type==='VariableDeclarator'?[node.id]:/Function/.test(node.type)?[node.id,...(node.params??[])]:[];for(const id of bound)if(id?.type==='Identifier'&&(id.name==='NF'||/^(?:[RWA]|NWC)\d+$/.test(id.name)))throw Error('Native binding collision '+name+':'+id.name);for(const value of Object.values(node))if(Array.isArray(value))value.forEach(hygiene);else if(value&&typeof value==='object')hygiene(value);}
+ function hygiene(node){if(!node||typeof node!=='object')return;const bound=node.type==='VariableDeclarator'?[node.id]:/Function/.test(node.type)?[node.id,...(node.params??[])]:[];for(const id of bound)if(id?.type==='Identifier'&&(id.name==='NF'||/^(?:[RWA]|NWC|RC|WC)\d+$/.test(id.name)))throw Error('Native binding collision '+name+':'+id.name);for(const value of Object.values(node))if(Array.isArray(value))value.forEach(hygiene);else if(value&&typeof value==='object')hygiene(value);}
  hygiene(ast);
  const windowCalls=new Map();
+ const cells=new Set();
  const exports=[],used=new Set(),counts={reads:0,writes:0,addresses:0,compound:0,updates:0};
  function match(node){
   if(node?.type!=='MemberExpression'||node.computed||!['value','address'].includes(node.property.name))return;
@@ -21,6 +27,17 @@ for(const name of names){
   const[at,kind,field]=call.arguments;if(kind.type!=='Literal'||field.type!=='Literal')return;
   const entry=fields.get(kind.value+'.'+field.value);if(!entry)throw Error('Unknown native field '+name+':'+kind.value+'.'+field.value);
   used.add(entry.id);return {...entry,at,op:node.property.name};
+ }
+ function matchCell(node){
+  if(node?.type!=='MemberExpression'||node.computed||node.property.name!=='value')return;
+  const {object:call}=node;
+  if(call.type!=='CallExpression'||call.callee.object?.name!=='C'||call.callee.property?.name!=='cell'||call.arguments.length!==2)return;
+  const [at,type]=call.arguments;
+  if(type.type!=='Literal')return;
+  const id=scalarCells.findIndex(([name])=>name===type.value);
+  if(id<0)return;
+  cells.add(id);
+  return {id,at};
  }
  function render(node,shadow=false){
   if(!node||typeof node!=='object'||node.start===undefined)return '';
@@ -50,6 +67,12 @@ for(const name of names){
     }
    }
    if(node.type==='AssignmentExpression'){
+    const cell=matchCell(node.left);
+    if(cell){
+     const {id}=cell,at=render(cell.at,shadow),rhs=render(node.right,shadow);
+     if(node.operator==='=')return 'WC'+id+'('+at+','+rhs+')';
+     return 'NF.compound(RC'+id+',WC'+id+','+at+','+JSON.stringify(node.operator)+',()=>('+rhs+'))';
+    }
     const field=match(node.left);
     if(field?.op==='value'){
      counts.writes++;const at=render(field.at,shadow),rhs=render(node.right,shadow);
@@ -58,8 +81,11 @@ for(const name of names){
     }
    }
    if(node.type==='UpdateExpression'){
+    const cell=matchCell(node.argument);
+    if(cell)return 'NF.update(RC'+cell.id+',WC'+cell.id+','+render(cell.at,shadow)+','+JSON.stringify(node.operator)+','+node.prefix+')';
     const field=match(node.argument);if(field?.op==='value'){counts.updates++;return `NF.update(R${field.id},W${field.id},${render(field.at,shadow)},${JSON.stringify(node.operator)},${node.prefix})`;}
    }
+   const cell=matchCell(node);if(cell)return 'RC'+cell.id+'('+render(cell.at,shadow)+')';
    const field=match(node);if(field){counts[field.op==='address'?'addresses':'reads']++;return `${field.op==='address'?'A':'R'}${field.id}(${render(field.at,shadow)})`;}
   }
   const children=[];
@@ -73,7 +99,11 @@ for(const name of names){
  }
  const body=render(ast),bindings=[...used].sort((a,b)=>a-b).map(i=>`const R${i}=NF.readers[${i}],W${i}=NF.writers[${i}],A${i}=NF.addresses[${i}];`).join('\n');
  const windowBindings=[...windowCalls.values()].map(({id,field,prototype})=>`const NWC${id}=C.nativeWindowCall(${JSON.stringify(field)},${JSON.stringify(prototype)});`).join('\n');
- const result=`// Generated by scripts/generate-native-address.mjs; original policy and RNG order retained.\nexport function createNativeAddressNamespace(C) {\nconst NF=C.nativeFields;\n${bindings}${windowBindings?'\n'+windowBindings:''}\n${body}\nreturn C.nativeAddressNamespaceReady(Object.freeze({${exports.join(',')}}),C);\n}\n`;
+ const cellBindings=[...cells].sort((a,b)=>a-b).map(id=>{
+  const method=scalarCells[id][1];
+  return 'const RC'+id+'=C.read'+method+'At,WC'+id+'=C.write'+method+'At;';
+ }).join('\n');
+ const result=`// Generated by scripts/generate-native-address.mjs; original policy and RNG order retained.\nexport function createNativeAddressNamespace(C) {\nconst NF=C.nativeFields;\n${bindings}${windowBindings?'\n'+windowBindings:''}${cellBindings?'\n'+cellBindings:''}\n${body}\nreturn C.nativeAddressNamespaceReady(Object.freeze({${exports.join(',')}}),C);\n}\n`;
  parse(result,{ecmaVersion:'latest',sourceType:'module'});
  const path='js/nethack/native/address/'+name+'.js';
  if(process.argv.includes('--check')){if(fs.readFileSync(path,'utf8')!==result)throw Error('Native address generator drift '+name);}else fs.writeFileSync(path,result);

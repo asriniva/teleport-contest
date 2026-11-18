@@ -67,6 +67,20 @@ for(const [site,name]of displayWindowFields.entries()){
  assert.equal(services['indirect'+site](token,...args),61);checks++;
 }
 assert.equal(legacy,1,'connected display no longer enters fallback');checks++;
+const glyphSignature='viiipp',glyphArgs=[1,2,3,4,8];
+const nativeGlyph=()=>{throw Error('TTY glyph frame should use the scalar entry');};
+nativeGlyph.nativeState=owner;
+nativeGlyph.nativeGlyphFrame=(...actual)=>assert.deepEqual(actual,glyphArgs);
+const nativeGlyphToken=functions.functionPointer(nativeGlyph,glyphSignature);
+assert.equal(slots.printGlyphFrame(nativeGlyphToken,...glyphArgs),true);checks++;
+let glyphFallbacks=0;
+const foreignGlyph=()=>{glyphFallbacks++;};
+foreignGlyph.nativeGlyphFrame=nativeGlyph.nativeGlyphFrame;
+const foreignGlyphToken=functions.functionPointer(foreignGlyph,glyphSignature);
+assert.equal(slots.printGlyphFrame(foreignGlyphToken,...glyphArgs),false);
+assert.equal(glyphFallbacks,0);checks+=2;
+slots.invokeCaptured('win_print_glyph',glyphSignature,foreignGlyphToken,1,2,3,4,5);
+assert.equal(glyphFallbacks,1);checks++;
 assert.throws(()=>connectNativeDisplayWindows(environment,services,{callbackCalls:schema.callbackCalls.slice(1)}),/Review native display window sites/);checks++;
 const changed=structuredClone(schema);changed.callbackCalls[3].types[0]='long';
 assert.throws(()=>connectNativeDisplayWindows(environment,services,changed),/Review native display window ABI 3/);checks++;

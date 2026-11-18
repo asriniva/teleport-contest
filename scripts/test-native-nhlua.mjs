@@ -3,9 +3,53 @@ import {parse} from 'acorn';
 import {registerHooks} from 'node:module';
 // Actual original-C NHLUA table helpers against their canonical JS entry owner.
 import fs from'node:fs';import path from'node:path';import assert from'node:assert/strict';import crypto from'node:crypto';import{pathToFileURL}from'node:url';
-function policy(n){if(Array.isArray(n))return n.map(policy);if(!n||typeof n!=='object')return n;if(n.type==='CallExpression'&&n.callee.type==='MemberExpression'&&n.callee.object.name==='C'&&n.callee.property.name==='callLocal')n={...n,callee:n.arguments[0],arguments:n.arguments.slice(1)};return Object.fromEntries(Object.entries(n).filter(([k])=>!['start','end','raw'].includes(k)).map(([k,v])=>[k,policy(v)]));}
+
+function policy(n,bindings=new Map()){
+ if(Array.isArray(n))return n.map(value=>policy(value,bindings));
+ if(!n||typeof n!=='object')return n;
+ if(n.type==='CallExpression'){
+  if(n.callee.type==='MemberExpression'&&n.callee.object.name==='C'&&n.callee.property.name==='callLocal')
+   n={...n,callee:n.arguments[0],arguments:n.arguments.slice(1)};
+  const fixed=bindings.get(n.callee.name);
+  if(fixed){
+   const callee={type:'MemberExpression',object:{type:'Identifier',name:'C'},property:{type:'Identifier',name:fixed.operation},computed:false,optional:false};
+   n={...n,callee,arguments:[n.arguments[0],...fixed.parameters,...n.arguments.slice(1)]};
+  }
+ }
+ return Object.fromEntries(Object.entries(n).filter(([key])=>!['start','end','raw'].includes(key)).map(([key,value])=>[key,policy(value,bindings)]));
+}
 let policyFunctions=0;
-for(const name of ['nhlua','alloc']){const old=parse(fs.readFileSync('js/ported/'+name+'.js','utf8'),{ecmaVersion:'latest',sourceType:'module'}),next=parse(fs.readFileSync('js/nethack/native/'+name+'.js','utf8'),{ecmaVersion:'latest',sourceType:'module'});const expected=old.body.filter(n=>n.type!=='ImportDeclaration').map(n=>n.type==='ExportNamedDeclaration'?n.declaration:n).filter(n=>!(n.type==='VariableDeclaration'&&n.declarations[0].id.name==='nhluaSchema'));assert.deepEqual(policy(next.body[0].declaration.body.body.slice(0,-1)),policy(expected),name+' source/RNG AST');policyFunctions+=expected.filter(n=>n.type==='FunctionDeclaration').length;}
+for(const name of ['nhlua','alloc']){
+ const parser={ecmaVersion:'latest',sourceType:'module'};
+ const old=parse(fs.readFileSync('js/ported/'+name+'.js','utf8'),parser);
+ const next=parse(fs.readFileSync('js/nethack/native/'+name+'.js','utf8'),parser);
+ const expected=old.body.filter(n=>n.type!=='ImportDeclaration')
+  .map(n=>n.type==='ExportNamedDeclaration'?n.declaration:n)
+  .filter(n=>!(n.type==='VariableDeclaration'&&n.declarations[0].id.name==='nhluaSchema'));
+ const bindings=new Map();
+ const generated=next.body[0].declaration.body.body.slice(0,-1).filter(n=>{
+  const binding=n.type==='VariableDeclaration'&&n.declarations[0];
+  const local=binding?.id?.name;
+  if(!local)return true;
+  if(/^fieldAt\d+$/.test(local)){
+   assert.equal(binding.init.callee.object.name,'C');
+   assert.equal(binding.init.callee.property.name,'bindField');
+   assert.ok(binding.init.arguments.every(arg=>arg.type==='Literal'&&typeof arg.value==='string'));
+   bindings.set(local,{operation:'field',parameters:binding.init.arguments});
+   return false;
+  }
+  const scalar=local.match(/^(read|write)At_(\w+)$/);
+  if(!scalar)return true;
+  const [,operation,type]=scalar;
+  assert.equal(binding.init.object.object.name,'C');
+  assert.equal(binding.init.object.property.name,operation==='read'?'scalarReads':'scalarWrites');
+  assert.equal(binding.init.property.name,type);
+  bindings.set(local,{operation,parameters:[{type:'Literal',value:type}]});
+  return false;
+ });
+ assert.deepEqual(policy(generated,bindings),policy(expected),name+' source/RNG AST');
+ policyFunctions+=expected.filter(n=>n.type==='FunctionDeclaration').length;
+}
 const nativeOnly=registerHooks({load(url,context,next){const result=next(url,context);if(!url.endsWith('/js/nethack/lua.js'))return result;let source=typeof result.source==='string'?result.source:Buffer.from(result.source).toString();const entry='function dispatch(L,operation,...args) {';assert.equal(source.split(entry).length,2);return {...result,source:source.replace(entry,entry+"throw Error('Production Lua entered legacy packet dispatch');")};}});
 const dir=path.resolve('.cache/full-original-c-v1'),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const{runStandaloneProgram}=await import('./run-standalone-program.mjs'),{runFullOriginalC}=await import('./full-original-c-run.mjs');let runtime,nativeRuntime;const startup=runStandaloneProgram(dir+'/assets',{keys:'',observeRuntime:r=>runtime=r});assert.deepEqual(startup.status,{kind:'input-exhausted'});const e=runtime.environment,m=e.memory,a=e.start('lua-api').namespace;const nativeStartup=await runFullOriginalC(dir,{keys:'',observeRuntime:r=>nativeRuntime=r}),c=nativeRuntime.module;assert.deepEqual(nativeStartup.status,startup.status);let checks=0;const eq=(a,b,s)=>{assert.deepEqual(a,b,s);checks++;};function pure(fn){const keys=['WebAssembly','fetch','Worker','WebSocket','XMLHttpRequest'],old=keys.map(k=>Object.getOwnPropertyDescriptor(globalThis,k));for(const k of keys)Object.defineProperty(globalThis,k,{configurable:true,get(){throw Error('Forbidden production capability');}});try{return fn();}finally{keys.forEach((k,i)=>old[i]?Object.defineProperty(globalThis,k,old[i]):delete globalThis[k]);}}

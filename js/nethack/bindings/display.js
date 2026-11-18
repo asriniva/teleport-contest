@@ -35,6 +35,8 @@ export function createDisplayEnvironment(services){
 
  const envOwner=services.nativeEnvironment,arena=services.nativeOwner?.nativeArena;
  if(envOwner&&arena){
+  // The bound sites enforce their own callback boundary for foreign handlers.
+  env.indirect.nativeAddress=true;
   const {ctypes}=envOwner;
   const base=ctypes.fieldAddress('struct instance_globals_g',envOwner.requireGlobal('gg'),'gbuf');
   const glyphOffset=ctypes.record('gbuf_entry').fields.glyphinfo.offset+
@@ -44,6 +46,15 @@ export function createDisplayEnvironment(services){
   const glyphAtCell=(x,y)=>arena.Int32[start+(y*80+x)*stride];
   Object.defineProperty(glyphAtCell,'nativeAddress',{value:true});
   Object.defineProperty(env,'glyphAtCell',{value:glyphAtCell});
+  if(envOwner.displayColorMask)Object.defineProperty(env,'displayColorMask',{value:envOwner.displayColorMask});
+  const printGlyphFrame=(token,win,x,y,foreground,frame)=>
+   envOwner.nativeWindowCallbacks?.printGlyphFrame(token,win,x,y,foreground,frame)??false;
+  printGlyphFrame.nativeAddress=true;
+  Object.defineProperty(env,'printGlyphFrame',{value:printGlyphFrame});
+  const mapWindow=envOwner.bindGlobal('WIN_MAP');
+  const mapWindowIdentifier=()=>arena.view.getInt32(mapWindow(),true);
+  mapWindowIdentifier.nativeAddress=true;
+  Object.defineProperty(env,'mapWindowIdentifier',{value:mapWindowIdentifier});
  }
  env.nativeFields=createNativeAddressFields(env,services,schema,decode,ptr);
  installNativeDisplayValues(env,services,schema,decode);

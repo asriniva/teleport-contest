@@ -10,7 +10,9 @@ let runtime,checks=0,entries=0,textArguments=0,addressGetters=0;const eq=(a,b,la
 const result=runStandaloneProgram(process.env.STANDALONE_ORIGINAL_ASSETS??'.cache/full-original-c-v1/assets',{seed:1,timezone:'UTC',options:'OPTIONS=!news\n',keys:'  nl.Fyy ',observeRuntime:r=>runtime=r});eq(result.status.kind,'input-exhausted','actual complete turns');
 const env=runtime.environment,owner=nativeStateFor(env),byPort={};
 const publicEntry=env.start('cmd').namespace.rhack;
-eq(publicEntry.nativeValuesEntry.nativeExecutionState.ready,true,'actual command owner prepared');eq(publicEntry.nativeValuesEntry.nativeExecutionState.scope.services,env.start('cmd').environment,'actual primary command services');
+eq(publicEntry.nativeValuesEntry.nativeExecutionState.ready,true,'actual command owner prepared');
+eq(env.start('cmd').environment.nativeFixedProvider,true,'actual command uses its permanent services');
+eq(publicEntry.nativeValuesEntry.nativeExecutionState.scope,undefined,'permanent command services need no forwarding scope');
 let readyOwners=0;
 for(const [port,{schema}]of Object.entries(ports)){
  const sourceTypes=JSON.parse(fs.readFileSync('nethack-c/wasm/tu-fragments/'+port+'-schema.json')).functionTypes;
@@ -57,18 +59,17 @@ for(const [port,{schema}]of Object.entries(ports)){
 }
 // Exercise the real ABI wrapper's hot dispatch and recursion guards without
 // performing another game command: substitute only this component's core body.
-const execution=publicEntry.nativeValuesEntry.nativeExecutionState,originalNamespace=execution.namespace,originalContextNamespace=execution.context.nativeNamespace,primary=execution.scope.services;
-const calls=[];const fake={rhack:(...values)=>{calls.push({values,provider:execution.scope.services});return 23;}};
+const execution=publicEntry.nativeValuesEntry.nativeExecutionState,originalNamespace=execution.namespace,originalContextNamespace=execution.context.nativeNamespace;
+const calls=[];const fake={rhack:(...values)=>{calls.push(values);return 23;}};
 const position=env.transport.stackPosition();owner.enter();
 try{
  execution.namespace=fake;execution.context.nativeNamespace=fake;
  const args=Array(publicEntry.nativeValuesEntry.length).fill(0);
- eq(publicEntry(...args),23,'actual registered ABI wrapper reaches direct core');eq(calls.pop(),{values:args,provider:primary},'actual direct core arguments/provider');
- const foreign=Object.create(primary);execution.scope.services=foreign;
- eq(publicEntry(...args),23,'foreign scope falls back through real adapter');eq(calls.pop(),{values:args,provider:primary},'adapter installs correct primary during foreign reentry');eq(execution.scope.services,foreign,'adapter restores foreign provider');execution.scope.services=primary;
+ eq(publicEntry(...args),23,'actual registered ABI wrapper reaches direct core');
+ eq(calls.pop(),args,'actual direct core arguments');
  assert.throws(()=>publicEntry(...args,99),TypeError,'mismatched arity reaches checked legacy path without recursion');checks++;
  eq(owner.depth,1,'ABI wrapper and errors preserve owner');
-}finally{execution.namespace=originalNamespace;execution.context.nativeNamespace=originalContextNamespace;execution.scope.services=primary;owner.leave();}
+}finally{execution.namespace=originalNamespace;execution.context.nativeNamespace=originalContextNamespace;owner.leave();}
 eq(env.transport.stackPosition(),position,'actual wrapper restores stack position');
 const state={services:{value:1}},forwarding=createServiceForwarder(state);eq(serviceScopeFor(forwarding),state,'explicit provider identity');eq(forwarding.value,1,'primary forwarding');const first=state.services;try{state.services={value:2};eq(forwarding.value,2,'nested provider live');}finally{state.services=first;}eq(forwarding.value,1,'nested provider restored');
 const evidence={passed:true,entries,checks,textArguments,addressGetters,readyOwners,byPort,scope:'All original fixed entry arities and ordered plans, cold/foreign/outside/extra-argument fallbacks, exception/provider preservation, explicit forwarding identities, actual MAIN command owner and ordinary walk/wait/attack assembly. Plans are controlled component probes; C gameplay and public recording comparisons are separate.'};fs.mkdirSync('.cache/native-address-entries',{recursive:true});fs.writeFileSync('.cache/native-address-entries/evidence.json',JSON.stringify(evidence,null,2));console.log(JSON.stringify(evidence));

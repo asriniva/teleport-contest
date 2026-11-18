@@ -1,3 +1,75 @@
+## Direct ordinary turns, display, level creation, and startup (2026-11-17)
+
+The published wizard world tour profile attributed 7.25 of 17.94 sampled
+seconds to C runtime and binding files. Of that time, 6.24 seconds were
+inside the turn loop and 1.01 seconds were before the first turn. The
+first candidate moved those figures to 3.96 and 0.59 seconds. These are
+exclusive samples from one recording. The file groups also include real
+terminal and save-file work.
+
+OPTIONS calculates minimum unique prefixes from sorted name neighbors
+while writing the original option table. The per-game glyph name cache
+keeps names and hash slots in JavaScript with the same byte case folding,
+probe order, duplicate policy, and first-slot reverse lookup. A consumer
+that needs a byte address receives a stable string until the cache is freed.
+
+Address-based source uses fixed-width reads and writes at 1,944 literal
+cell sites. Dynamic and address-taken cells keep the original reference
+interface. Bound globals resolve to stable per-game addresses when their
+owners publish them. Missing names and duplicate publication retain the
+same errors. Native stack restores use the top mark directly or search
+for an older active mark, preserving out-of-order restores and expiry.
+
+TTY takes the live glyph fields and frame color directly. The full
+background glyph is constructed when another window handler needs it.
+Bound DISPLAY callback sites retain the exact live token, signature, and
+foreign handler boundary. The permanent terminal provider binds source
+functions once. Cursor escape expansion goes directly to the terminfo
+output parser for the built-in provider. Foreign or replaced providers
+retain the pointer path and padding semantics. Glyph reset reads the
+current port color table once. Travel reads terrain
+and visibility from live map bytes, checks closed doors before querying
+whether the hero can ooze, and uses shared monster occupancy for worm
+crossings. The reordered travel predicates are read-only. Level selections
+use the same bitmap and bounds with their source policy bound to one game.
+
+The historical save format reads and writes the contiguous map in the
+original order while avoiding per-cell record lookup and serializer
+dispatch. The fast path verifies the active serializer identity and retains
+each original read or write, including the short-read and error behavior.
+Logging, custom formats, and converted reads use the original dispatch.
+SFBASE and SFSTRUCT bind the source functions to the current game and use
+the same file view and serializer callback identities. The persisted
+layout, write order, and pointer normalization retain their source policy.
+A typed Lua binding resolves literal fields once. Dynamic and foreign Lua
+calls retain their checked entry points.
+
+The turn loop uses the initialized DISPLAY namespace even when the first
+command has yet to request a public display entry. Movement, position
+updates, equipment effects, spells, quest messages, and end-of-turn
+services agree on the state owner and use the direct entry when available.
+Real byte interfaces and foreign callbacks retain their existing checks.
+The focused walk, wait, and attack comparison matches original C and
+reports zero C execution contexts, generic calls, C heap allocations,
+generic field and indirect pointer calls, legacy address adapters, or
+native-to-legacy state crossings. Native stack slots remain in use.
+
+All 44 recordings passed in 184.08345 seconds against the published
+234.64908-second timing. Earlier candidates measured 188.27095 and
+165.09082 seconds. Each matched 792,838 ordered RNG calls, 11,405 screens
+and cursors, and 1,483 animations. The final run included one 21.39-second
+tourist stress recording, which took 3.94 seconds on the prior candidate
+and 4.69 seconds when repeated in isolation on the final candidate.
+
+On the final wizard-tour sample, runtime and binding files used 4.27 of
+13.36 sampled seconds (31.9%, down from 40.4%). Within the turn loop
+they used 3.70 seconds, down from 6.24 seconds. Before the first turn
+they used 0.57 seconds, down from 1.01 seconds. This file grouping
+includes byte reads, terminal operations, and serialization that remain
+in use. Level transitions and interactive menus still use parts of the
+compatibility runtime. The zero-adapter result covers the focused walk,
+wait, and attack cases.
+
 ## Frame capture, histories, and allocation-free ordinary turns (2026-11-17)
 
 Frame capture uses the terminal's native shadow cell bytes. It compares all

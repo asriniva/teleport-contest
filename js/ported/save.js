@@ -541,6 +541,8 @@ export function save_adjust_levelflags()
 
 export function savelevl(nhfp)
 {
+    if (Object.hasOwn(C, "saveMapLocations") && C.saveMapLocations(nhfp))
+        return;
     let x, y;
 
     for (x = 0; x < C.COLNO; x++) {

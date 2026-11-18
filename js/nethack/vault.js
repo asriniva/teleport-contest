@@ -1,4 +1,5 @@
 import {recordNativeRngCaller} from './native/rng-output.js';
+import {nativeStateFor} from './native/state-bridge.js';
 // Original whole VAULT context on measured shared DECL/record transport.
 import abi from './vault-abi.json' with {type:'json'};
 import {createNativeVault} from './native/vault.js';
@@ -37,6 +38,7 @@ export function enableVault(environment,layouts){
  const parameters=name=>abi.public[name].match(/\(([^)]*)\)/)[1].split(',').map(v=>v.trim()).filter(v=>v&&v!=='void');
  const prepare=(name,args)=>{const types=parameters(name);args=args.map((value,i)=>{const type=types[i];if(!type)throw new Error('Extra VAULT argument '+name);return type.includes('*')?text(value):type==='boolean'||type==='schar'?transport.char(value):type==='coordxy'?transport.short(value):type==='long'?transport.long(value):type==='unsigned int'?transport.uint(value):transport.int(value);});if(monsterArgs.includes(name))args[0]=context.monster(args[0]);if(name==='move_gold')args[0]=context.object(args[0]);if(name==='find_guard_dest'){args[1]=context.coordPointer(args[1]);args[2]=context.coordPointer(args[2]);}return args;};
  const policy=createNativeVault(context);
+ const native=nativeStateFor(environment);
  const entries=Object.fromEntries(names.map(name=>{
   const type=abi.public[name].split(' (')[0];
   const invoke=(...args)=>transport.scoped(()=>{
@@ -44,6 +46,8 @@ export function enableVault(environment,layouts){
    return type==='boolean'?Number(Boolean(result)):type==='char'?transport.char(result):result?.address??result??0;
   });
   invoke.nativeDirect=true;
+  invoke.nativeState=native;
+  native.functions.set(name,invoke);
   return [name,invoke];
  }));
  environment.register('vault',entries,context);

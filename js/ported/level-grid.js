@@ -7,3 +7,7 @@ export function terrainAt(game, x, y) {
 export function doorMaskAt(game, x, y) {
     return Object.hasOwn(game, 'levelGrid') && game.levelGrid ? game.levelGrid.flagsAt(x, y) : game.levl[x][y].doormask;
 }
+
+export function seenAt(game, x, y) {
+    return Object.hasOwn(game, 'levelGrid') && game.levelGrid ? game.levelGrid.seenAt(x, y) : game.levl[x][y].seenv;
+}

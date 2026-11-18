@@ -41,6 +41,7 @@ export function nativeSpatialFor(environment,layouts){
  };
  const grid={
   terrainAt:(x,y)=>arena.Int8[map+(x*height+y)*stride+cellTypeOffset],
+  seenAt:(x,y)=>arena.Uint8[map+(x*height+y)*stride+mapLayout.seenv.offset],
   flagsAt:(x,y)=>(arena.Uint8[map+(x*height+y)*stride+flags.offset]>>>flags.shift)&flagMask,
   monsterAt:(x,y)=>views.record('struct monst',arena.pointer(monsterBase+(x*height+y)*8)),
   containsObjectType:(x,y,type)=>itemLists.floor(type,x,y)!==0,

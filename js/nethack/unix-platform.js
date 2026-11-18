@@ -15,6 +15,7 @@ import {getmailstatus,free_maildata} from '../ported/mail.js';
 import {createNativeMail} from './native/mail.js';
 import {createMailEnvironment} from './bindings/mail.js';
 import {extendMail} from './mail.js';
+import {nativeStateFor} from './native/state-bridge.js';
 export function enableUnixPlatform(environment,layouts){
  const ctypes=createCTypes(environment.memory,{...records,aliases:{...records.aliases,...abi.aliases},records:{...records.records,...abi.records}},environment.bitfields);
  const syscalls=connectUnixPlatformSyscalls(environment,ctypes),groups={};
@@ -64,6 +65,8 @@ export function enableUnixPlatform(environment,layouts){
  const ckmailstatus=()=>environment.transport.scoped(mailPolicy.ckmailstatus);
  ckmailstatus.nativeDirect=true;
  ckmailstatus.nativePrepared=true;
+ ckmailstatus.nativeState=nativeStateFor(environment);
+ ckmailstatus.nativeState.functions.set('ckmailstatus',ckmailstatus);
  environment.register('unix-platform-mail',{getmailstatus,free_maildata,ckmailstatus},mailContext);
  const mail=extendMail(environment,layouts,{context:mailContext,services:mailServices});
  return {...groups,ctypes,syscalls,limitation:'Original platform owners linked; main executes real dependencies and fails explicitly where the startup closure is incomplete.'};

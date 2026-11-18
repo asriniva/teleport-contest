@@ -9,7 +9,7 @@ source=(root/'js/ported/hack.js').read_text()
 assert source.count("import { C } from '../c-runtime/context.js';")==1
 names=re.findall(r'^export (?:function|const|let|var) (\w+)',source,re.M)
 source=source.replace("import { C } from '../c-runtime/context.js';",'')
-grid_import = "import { terrainAt } from './level-grid.js';"
+grid_import = "import { doorMaskAt, seenAt, terrainAt } from './level-grid.js';"
 source = source.replace(grid_import, '')
 source=re.sub(r'^export ','',source,flags=re.M)
 source=re.sub(r'C\.callLocal\((\w+),\s*',r'\1(',source)

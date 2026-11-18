@@ -60,6 +60,7 @@ export function enableSaveLifecycle(environment,layouts){
  for(const [name,target]of Object.entries(abi.serializers))local[name]=(...args)=>resolve(target)(...boundary(args));
  const context=createSaveEnvironment(local,L);
  const owner=nativeStateFor(environment);
+ if(owner.saveMapLocations)context.saveMapLocations=owner.saveMapLocations;
  if(owner.chronicle){
   context.chronicle=owner.chronicle;
   context.chronicleBuffer=()=>{

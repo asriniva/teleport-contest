@@ -9,8 +9,13 @@ const identifier=name=>({type:'Identifier',name});
 const literal=value=>({type:'Literal',value});
 const member=(object,property)=>({type:'MemberExpression',object,property:identifier(property),computed:false,optional:false});
 const call=(callee,args)=>({type:'CallExpression',callee,arguments:args,optional:false});
+const scalarCells=[
+ ['char','Int8'],['signed char','Int8'],['unsigned char','Uint8'],['short','Int16'],['unsigned short','Uint16'],
+ ['int','Int32'],['unsigned int','Uint32'],['unsigned','Uint32'],['long','BigInt64'],
+ ['unsigned long','BigUint64'],['long long','BigInt64'],['unsigned long long','BigUint64'],
+];
 function clean(v){if(Array.isArray(v))return v.map(clean);if(!v||typeof v!=='object')return v;return Object.fromEntries(Object.entries(v).filter(([k])=>!['start','end','raw'].includes(k)).map(([k,x])=>[k,clean(x)]));}
-let functions=0,operations=0,nativeValueAllocations=0,nativeRngCallers=0;
+let functions=0,operations=0,nativeValueAllocations=0,nativeRngCallers=0,cellOperations=0;
 for(const[name,{schema}]of Object.entries(ports)){
  const old=parse(fs.readFileSync('js/ported/'+name+'.js','utf8'),{ecmaVersion:'latest',sourceType:'module'});
  const next=parse(fs.readFileSync('js/nethack/native/address/'+name+'.js','utf8'),{ecmaVersion:'latest',sourceType:'module'});
@@ -20,6 +25,10 @@ for(const[name,{schema}]of Object.entries(ports)){
   assert.ok(d.init.arguments.every(a=>a.type==='Literal'&&typeof a.value==='string'));windowBindings.set(d.id.name,d.init.arguments);
  }
  const fields=Object.entries(schema.schema).flatMap(([kind,row])=>row.fields.map(f=>({kind,field:f.name})));
+ function cellValue(id,at){
+  const [type]=scalarCells[id];cellOperations++;
+  return member(call(member(identifier('C'),'cell'),[at,literal(type)]),'value');
+ }
  function lvalue(id,at,property='value'){
   const f=fields[id];assert.ok(f);operations++;
   return member(call(member(identifier('C'),'field'),[at,literal(f.kind),literal(f.field)]),property);
@@ -38,9 +47,26 @@ for(const[name,{schema}]of Object.entries(ports)){
    return call(member(identifier('C'),'stackAlloc'),[size]);
   }
   if(node.type==='CallExpression'&&node.callee.type==='Identifier'){
+   const cell=node.callee.name.match(/^(RC|WC)(\d+)$/);
+   if(cell){
+    const left=cellValue(Number(cell[2]),node.arguments[0]);
+    if(cell[1]==='RC'){assert.equal(node.arguments.length,1);return left;}
+    assert.equal(node.arguments.length,2);
+    return {type:'AssignmentExpression',operator:'=',left,right:node.arguments[1]};
+   }
    if(windowBindings.has(node.callee.name)){const [field,prototype]=windowBindings.get(node.callee.name),value=node.arguments[0];assert.equal(value.object.arguments[1].value,'window_procs');assert.equal(value.object.arguments[2].value,field.value);return call(member(identifier('C'),'callProc'),[value,prototype,...node.arguments.slice(1)]);}
    const m=node.callee.name.match(/^([RWA])(\d+)$/);
    if(m){const id=Number(m[2]);if(m[1]==='W')return {type:'AssignmentExpression',operator:'=',left:lvalue(id,node.arguments[0]),right:node.arguments[1]};return lvalue(id,node.arguments[0],m[1]==='A'?'address':'value');}
+  }
+  if(node.type==='CallExpression'&&node.callee.object?.name==='NF'&&['compound','update'].includes(node.callee.property?.name)){
+   const [read,write,at,operator,rhs]=node.arguments;
+   const match=read.name?.match(/^(R|RC)(\d+)$/);
+   assert.ok(match);
+   const id=Number(match[2]),cell=match[1]==='RC';
+   assert.equal(write.name,(cell?'WC':'W')+id);
+   const value=cell?cellValue(id,at):lvalue(id,at);
+   if(node.callee.property.name==='update')return {type:'UpdateExpression',operator:operator.value,argument:value,prefix:rhs.value};
+   return {type:'AssignmentExpression',operator:operator.value,left:value,right:rhs.body};
   }
   return node;
  }
@@ -48,7 +74,16 @@ for(const[name,{schema}]of Object.entries(ports)){
  const factory=next.body[0].declaration;assert.equal(factory.id.name,'createNativeAddressNamespace');
  const actual=factory.body.body.filter((n,i,all)=>{
   if(i===all.length-1){assert.equal(n.type,'ReturnStatement');assert.equal(n.argument.callee.object.name,'C');assert.equal(n.argument.callee.property.name,'nativeAddressNamespaceReady');assert.equal(n.argument.arguments.length,2);assert.equal(n.argument.arguments[1].name,'C');assert.equal(n.argument.arguments[0].callee.object.name,'Object');assert.equal(n.argument.arguments[0].callee.property.name,'freeze');assert.equal(n.argument.arguments[0].arguments.length,1);const exported=n.argument.arguments[0].arguments[0];assert.equal(exported.type,'ObjectExpression');const names=old.body.filter(x=>x.type==='ExportNamedDeclaration').flatMap(x=>x.declaration.id?[x.declaration.id.name]:x.declaration.declarations.map(d=>d.id.name));assert.deepEqual(exported.properties.map(p=>{assert.equal(p.type,'Property');assert.equal(p.shorthand,true);assert.equal(p.computed,false);assert.equal(p.key.name,p.value.name);return p.key.name;}),names,'every original namespace export stays connected');return false;}
-  if(n.type==='VariableDeclaration'&&n.declarations.every(d=>d.id.name==='NF'||/^(?:[RWA]|NWC)\d+$/.test(d.id.name)))return false;
+  if(n.type==='VariableDeclaration'&&n.declarations.every(d=>d.id.name==='NF'||/^(?:[RWA]|NWC|RC|WC)\d+$/.test(d.id.name))){
+   for(const d of n.declarations){
+    const match=d.id.name.match(/^(RC|WC)(\d+)$/);
+    if(!match)continue;
+    const method=scalarCells[Number(match[2])][1];
+    assert.equal(d.init.object.name,'C');
+    assert.equal(d.init.property.name,(match[1]==='RC'?'read':'write')+method+'At');
+   }
+   return false;
+  }
   return true;
  });
  const expected=old.body.filter(n=>n.type!=='ImportDeclaration').map(n=>n.type==='ExportNamedDeclaration'?n.declaration:n);
@@ -57,4 +92,4 @@ for(const[name,{schema}]of Object.entries(ports)){
 }
 assert.equal(nativeValueAllocations,3,'remaining native DISPLAY glyph values invert to their original allocations');
 assert.equal(nativeRngCallers,526);
-console.log(JSON.stringify({passed:true,nativeRngCallers,nativeValueAllocations,ports:Object.keys(ports).length,functions,invertedFieldOperations:operations,sourcePolicyAstEqual:true}));
+console.log(JSON.stringify({passed:true,nativeRngCallers,nativeValueAllocations,ports:Object.keys(ports).length,functions,invertedFieldOperations:operations,invertedCellOperations:cellOperations,sourcePolicyAstEqual:true}));

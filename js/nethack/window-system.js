@@ -37,10 +37,17 @@ export function enableWindowSystem(environment,layouts){
   const own=abi.callbacks[module][name],row=own??prototype(publicFunctions.functions[name]??'');
   let invoke;
   if(own){invoke=(...args)=>normalize(row.result,module==='wintty'?callWintty(t,L,name,...args):callWindows(w,layouts.windows,name,...args));
-   if(module==='wintty'){invoke.nativeState=owner;invoke.nativeDirect=true;}}
+   if(module==='wintty'){
+    invoke.nativeState=owner;invoke.nativeDirect=true;
+    if(name==='tty_print_glyph')invoke.nativeGlyphFrame=(win,x,y,foreground,frame)=>
+     callWintty(t,L,name,win,x,y,foreground,0,frame);
+   }}
   return environment.functionPointer(own&&!Object.hasOwn(publicFunctions.functions,name)?module+'::'+name:name,signature(row),invoke);
  }
- const statics=new Map();Object.assign(t,{nativeOwner:owner,moduleKey:environment,global:i=>{const name=Object.keys(schema.globals)[i];if(!name)throw new Error('Unknown WINTTY global '+i);return environment.requireGlobal(name);},
+ const statics=new Map(),ttyGlobals=Object.keys(schema.globals),ttyAddresses=ttyGlobals.map(environment.bindGlobal);
+ Object.assign(t,{nativeOwner:owner,moduleKey:environment,nativeFixedProvider:true,
+  global:i=>{const name=ttyGlobals[i];if(!name)throw new Error('Unknown WINTTY global '+i);return environment.requireGlobal(name);},
+  bindGlobal:i=>ttyAddresses[i],
   staticStorage:name=>{const count={'tty_askname.who_are_you':14,'compress_str.cbuf':L.BUFSZ}[name];if(!count)throw new Error('Unknown WINTTY static '+name);if(!statics.has(name))statics.set(name,environment.allocateGlobal('wintty.'+name,count));return statics.get(name);},
   callbackPointer:name=>callback('wintty',name),teleport_native_signal:(sig,fn)=>platform.signal(sig,fn),callIndirect:(fn,type,...args)=>functions.indirect(fn,signature(prototype(type)),...args),
   alloc:n=>environment.alloc('alloc',n),free:p=>{const at=address(p);if(!owner.toplHistory?.owns(at))services.free(at);},memset:(p,v,n)=>services.memset(address(p),v,n),memcpy:(a,b,n)=>services.memcpy(address(a),address(b),n),

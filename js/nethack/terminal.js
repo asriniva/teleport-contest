@@ -3,7 +3,7 @@ import {nativeStateFor} from './native/state-bridge.js';
 // The source port owns terminal policy; this file supplies memory and transport.
 import metadata from './terminal-metadata.json' with {type:'json'};
 import * as termcap from '../ported/termcap.js';
-import {callTermcap} from './bindings/termcap.js';
+import {bindNativeTermcap} from './bindings/termcap.js';
 import {encodeRecorderScreen} from '../wasm-replay-support.js';
 import {address} from './memory-services.js';
 export function enableTerminal(environment,layout,{onCapture}={}) {
@@ -67,7 +67,8 @@ export function enableTerminal(environment,layout,{onCapture}={}) {
     local.tgetstr=(name,area)=>services.tgetstr(cptr(name),address(area));
     local.tgoto=(format,col,row)=>services.tgoto(cptr(format),col,row);
     local.tputs=(text,lines,fn)=>services.tputs(cptr(text),lines,fn);
-    const wrappers=Object.fromEntries(metadata.functions.map(name=>{const call=(...args)=>callTermcap(local,layout,name,...args);call.nativeState=nativeOwner;call.nativeDirect=true;nativeOwner.functions.set(name,call);return[name,call];}));
+    const bindTermcap=bindNativeTermcap(local,layout);
+    const wrappers=Object.fromEntries(metadata.functions.map(name=>{const call=bindTermcap(name);call.nativeState=nativeOwner;call.nativeDirect=true;nativeOwner.functions.set(name,call);return[name,call];}));
     environment.register('termcap',wrappers,local);
     return{frames,globals,services:local,global:name=>{const i=metadata.globals.findIndex(g=>g.name===name);if(i<0)throw new Error('Unknown terminal global '+name);return globals[i];}};
 }

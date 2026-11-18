@@ -5,7 +5,7 @@
 
 // Configured source policy. Typed runtime transport is separate.
 import { C } from '../c-runtime/context.js';
-import { terrainAt } from './level-grid.js';
+import { doorMaskAt, seenAt, terrainAt } from './level-grid.js';
 
 const TRAVP_TRAVEL = 0, TRAVP_GUESS = 1, TRAVP_VALID = 2;
 
@@ -877,17 +877,16 @@ export function dosinkfall()
 export function may_dig(x,y)
 {
     x=C.short(x);y=C.short(y);
-    let lev = C.levl[x][y];
-
-    return C.char(C.char( !(Number(Boolean((C.IS_STWALL(lev.typ) || C.IS_TREE(lev.typ))
-                       && (lev.wall_info & C.W_NONDIGGABLE))))));
+    const terrain = terrainAt(C, x, y);
+    return Number(!((C.IS_STWALL(terrain) || C.IS_TREE(terrain))
+                    && (doorMaskAt(C, x, y) & C.W_NONDIGGABLE)));
 }
 
 export function may_passwall(x,y)
 {
     x=C.short(x);y=C.short(y);
     return C.char(C.char( !(Number(Boolean(C.IS_STWALL(terrainAt(C, x, y))
-                       && (C.levl[x][y].wall_info & C.W_NONPASSWALL))))));
+                       && (doorMaskAt(C, x, y) & C.W_NONPASSWALL))))));
 }
 
 /* caller has already decided that it's a tight diagonal; check whether a
@@ -956,20 +955,18 @@ export function test_move(ux,uy,dx,dy,mode)
     ux=C.short(ux);uy=C.short(uy);dx=C.short(dx);dy=C.short(dy);mode=C.int(mode);
     let x = C.short(ux + dx);
     let y = C.short(uy + dy);
-    let tmpr;
-    let ust;
 
     C.svc.context.door_opened = C.char(C.FALSE);
 
     if (!C.isok(x, y))
         return C.char(C.FALSE);
 
-    tmpr = C.levl[x][y];
+    const terrain = terrainAt(C, x, y);
 
     /*
      *  Check for physical obstacles.  First, the place we are going.
      */
-    if (Number(Boolean(C.IS_OBSTRUCTED(tmpr.typ) || tmpr.typ == C.IRONBARS))) {
+    if (C.IS_OBSTRUCTED(terrain) || terrain === C.IRONBARS) {
         if (Number(Boolean(C.Blind && mode == C.DO_MOVE)))
             C.feel_location(x, y);
         if (Number(Boolean(C.Passes_walls && C.callLocal(may_passwall,x, y)))) {
@@ -982,7 +979,7 @@ export function test_move(ux,uy,dx,dy,mode)
             if (mode == C.DO_MOVE)
                 C.There("is an obstacle there.");
             return C.char(C.FALSE);
-        } else if (tmpr.typ == C.IRONBARS) {
+        } else if (terrainAt(C, x, y) === C.IRONBARS) {
             if (Number(Boolean(mode == C.DO_MOVE
                 && (C.dmgtype(C.gy.youmonst.data, C.AD_RUST)
                     || C.dmgtype(C.gy.youmonst.data, C.AD_CORR)
@@ -1031,7 +1028,7 @@ export function test_move(ux,uy,dx,dy,mode)
             }
             return C.char(C.FALSE);
         }
-    } else if (C.IS_DOOR(tmpr.typ)) {
+    } else if (C.IS_DOOR(terrain)) {
         skip_testdiag: {
         testdiag: {
         if (C.closed_door(x, y)) {
@@ -1151,7 +1148,7 @@ export function test_move(ux,uy,dx,dy,mode)
 
         /* FIXME: should be using lastseentyp[x][y] rather than seen vector
          */
-        if (Number(Boolean((C.levl[x][y].seenv && C.is_pool_or_lava(x, y)) /* known pool/lava */
+        if (Number(Boolean((seenAt(C, x, y) && C.is_pool_or_lava(x, y)) /* known pool/lava */
             && ((C.IS_WATERWALL(terrainAt(C, x, y)) /* never enter wall of liquid */
                  || terrainAt(C, x, y) == C.LAVAWALL)
                 /* don't enter pool or lava (must be one of the two to
@@ -1167,10 +1164,8 @@ export function test_move(ux,uy,dx,dy,mode)
     if (mode == C.TEST_TRAP)
         return C.char(C.FALSE); /* do not move through traps */
 
-    ust = C.levl[ux][uy];
-
     /* Now see if other things block our way . . */
-    if (Number(Boolean(dx && dy && !C.Passes_walls && C.IS_DOOR(ust.typ)
+    if (Number(Boolean(dx && dy && !C.Passes_walls && C.IS_DOOR(terrainAt(C, ux, uy))
         && (!C.callLocal(doorless_door,ux, uy) || C.block_entry(x, y))))) {
         /* Can't move at a diagonal out of a doorway with door. */
         if (Number(Boolean(mode == C.DO_MOVE && C.flags.mention_walls)))
@@ -1332,8 +1327,7 @@ export function findtravelpath(mode)
                     if (Number(Boolean(!C.isok(nx, ny)
                         || ((mode == TRAVP_GUESS) && !C.couldsee(nx, ny)))))
                         continue;
-                    if (Number(Boolean((!C.Passes_walls && !C.can_ooze(C.gy.youmonst)
-                         && C.closed_door(x, y))
+                    if (Number(Boolean((C.closed_door(x, y) && !C.Passes_walls && !C.can_ooze(C.gy.youmonst))
                         || (C.sobj_at(C.BOULDER, x, y)
                             && !C.callLocal(could_move_onto_boulder,x, y))
                         || C.callLocal(test_move,x, y, nx - x, ny - y, C.TEST_TRAP)))) {
@@ -1353,7 +1347,7 @@ export function findtravelpath(mode)
                         }
                     }
                     if (Number(Boolean(C.callLocal(test_move,x, y, nx - x, ny - y, C.TEST_TRAV)
-                        && (C.levl[nx][ny].seenv
+                        && (seenAt(C, nx, ny)
                             || (!C.Blind && C.couldsee(nx, ny)))))) {
                         if (Number(Boolean(nx == ux && ny == uy))) {
                             if (Number(Boolean(mode == TRAVP_TRAVEL || mode == TRAVP_VALID))) {

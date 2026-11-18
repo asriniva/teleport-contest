@@ -75,18 +75,31 @@ export function createLinker({memory,transport,functions,services,ctypes,prototy
     }
     function call(name,fn,...args) {return invokeEntry(start(name),name,fn,args);}
     function allocateGlobal(name,size,initial) {
-        if(globals.has(name))throw new Error('Duplicate standalone global '+name);
+        if(globals.get(name)?.address!==undefined)throw new Error('Duplicate standalone global '+name);
         const at=memory.calloc(1,size);if(!at)throw new RangeError('Global allocation failed');
         if(initial) {if(initial.length>size){memory.free(at);throw new RangeError('Global initializer too large');}memory.HEAPU8.set(initial,at);}
-        globals.set(name,at);return at;
+        globalSlot(name).address=at;return at;
     }
-    const requireGlobal=name=>{if(!globals.has(name))throw new Error('Unresolved standalone global '+name);return globals.get(name);};
+    function globalSlot(name){
+        let slot=globals.get(name);
+        if(!slot){slot={address:undefined};globals.set(name,slot);}
+        return slot;
+    }
+    function checkedAddress(slot,name){
+        if(slot?.address===undefined)throw new Error('Unresolved standalone global '+name);
+        return slot.address;
+    }
+    const requireGlobal=name=>checkedAddress(globals.get(name),name);
+    function bindGlobal(name){
+        const slot=globalSlot(name);
+        return ()=>checkedAddress(slot,name);
+    }
     function linkGlobal(name,pointer) {
-        if(globals.has(name))throw new Error('Duplicate standalone global alias '+name);
-        globals.set(name,address(pointer));
+        if(globals.get(name)?.address!==undefined)throw new Error('Duplicate standalone global alias '+name);
+        globalSlot(name).address=address(pointer);
     }
     return {functionPointer,deferFunctions,resolve,extend,register,start,call,
-        allocateGlobal,requireGlobal,linkGlobal,
+        allocateGlobal,requireGlobal,bindGlobal,linkGlobal,
         hasFunction:name=>owners.has(name),
         status:()=>Object.fromEntries([...modules].map(([k,v])=>[k,v.status])),
     };

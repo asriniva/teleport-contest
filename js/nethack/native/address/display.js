@@ -1696,8 +1696,6 @@ function show_glyph(x,y,glyph)
     x=C.i16(x);
     y=C.i16(y);
     glyph=C.i32(glyph);
-    const stackFrame=C.stackSave();
-    try {
     let announce = false;
     /* don't process map glyphs when saving, restoring, or in_mklev */
     if (drawingSuspended()) return;
@@ -1860,6 +1858,8 @@ function show_glyph(x,y,glyph)
         if (C.readInt16At(last) < x) C.writeInt16At(last, x);
     }
     if (announce) {
+        const stackFrame=C.stackSave();
+        try {
         let buf=C.stackAlloc((1*256));
         let cc=C.stackAlloc(C.sizes["struct nhcoord"]);
         let sym=0;
@@ -1870,8 +1870,8 @@ function show_glyph(x,y,glyph)
         C.do_screen_description(cc,(C.i8(1)),sym,buf,firstmatch.address,0);
         C.variadic(5,x,y,C.literal("%s."),firstmatch.value);
         (W2(C.a11y,tmp_accessiblemsg));
+        } finally {C.stackRestore(stackFrame);}
     }
-    } finally {C.stackRestore(stackFrame); }
 }
 
 /*
@@ -1985,27 +1985,44 @@ function flush_screen(cursor_on_u)
         const base = C.display_address_instance_globals_g_gbuf(C.gg);
         const start = C.display_address_instance_globals_g_gbuf_start(C.gg);
         const stop = C.display_address_instance_globals_g_gbuf_stop(C.gg);
-        const background = C.nativeLocalRecord("struct glyphinfo");
-        C.copy(background, C.staticAddress("nul_glyphinfo"), C.sizes["struct glyphinfo"]);
-        const frameColor = C.display_address_glyphinfo_framecolor(background);
-        // The background glyph's own field gives the helper its output slot.
-        const glyphSlot = C.display_address_glyphinfo_glyph(background);
+        const nativeFrame = Object.hasOwn(C, "printGlyphFrame");
+        let background, frameColor, glyphSlot;
+        function allocateBackground() {
+            background = C.nativeLocalRecord("struct glyphinfo");
+            C.copy(background, C.staticAddress("nul_glyphinfo"), C.sizes["struct glyphinfo"]);
+            frameColor = C.display_address_glyphinfo_framecolor(background);
+            // The background glyph's own field gives the helper its output slot.
+            glyphSlot = C.display_address_glyphinfo_glyph(background);
+        }
+        if (!nativeFrame) allocateBackground();
 
         for (let y = 0; y < 21; y++) {
             let x = C.readInt16At(start + y * 2);
             let cell = base + y * strideRow + x * stride;
             for (; x <= C.readInt16At(stop + y * 2); x = C.i16(x + 1), cell += stride) {
-                get_bkglyph_and_framecolor(x, y, glyphSlot, frameColor);
+                let frame;
+                if (nativeFrame) {
+                    // TTY displays the frame color. Other ports receive the full background glyph.
+                    frame = backgroundFrameColor(x, y);
+                } else {
+                    get_bkglyph_and_framecolor(x, y, glyphSlot, frameColor);
+                    frame = C.display_read_glyphinfo_framecolor(background);
+                }
                 const changed = C.display_read_gbuf_entry_gnew(cell);
-                const frame = C.display_read_glyphinfo_framecolor(background);
-                const settings = C.display_address_instance_globals_w_wsettings(C.gw);
-                if (changed || (C.display_read_win_settings_map_frame_color(settings) !== 8 && frame !== 8)) {
-                    /* map_glyphinfo() won't touch framecolor */
-                    map_glyphinfo(x, y, C.display_read_glyphinfo_glyph(background), 0, background);
+                if (changed || frame !== 8) {
                     const foreground = x < 0 || x >= 80 ? C.staticAddress("no_ginfo")
                         : C.display_address_gbuf_entry_glyphinfo(cell);
-                    C.indirect(7, C.display_read_window_procs_win_print_glyph(C.windowprocs),
-                        C.global("WIN_MAP").value, x, y, foreground, background);
+                    if (!nativeFrame || !C.printGlyphFrame(C.display_read_window_procs_win_print_glyph(C.windowprocs),
+                        C.mapWindowIdentifier(), x, y, foreground, frame)) {
+                        if (nativeFrame) {
+                            if (!background) allocateBackground();
+                            get_bkglyph_and_framecolor(x, y, glyphSlot, frameColor);
+                        }
+                        /* map_glyphinfo() won't touch framecolor */
+                        map_glyphinfo(x, y, C.display_read_glyphinfo_glyph(background), 0, background);
+                        C.indirect(7, C.display_read_window_procs_win_print_glyph(C.windowprocs),
+                            C.global("WIN_MAP").value, x, y, foreground, background);
+                    }
                     W35(cell,0);
                 }
             }
@@ -2305,10 +2322,20 @@ function get_bkglyph_and_framecolor(x,y,bkglyph,framecolor)
         }
         if(Number(idx!=C.S_room)) (tmp_bkglyph=(((Number((idx)==C.S_stone))?C.GLYPH_CMAP_STONE_OFF:((Number((idx)<=C.S_trwall))?(C.i32((C.i32(((idx)-C.S_vwall))+((C.i32(C.In_mines(C.display_address_you_uz(C.u)))?C.GLYPH_CMAP_MINES_OFF:(C.i32(C.In_hell(C.display_address_you_uz(C.u)))?C.GLYPH_CMAP_GEH_OFF:(((Number(!!((Number(!!(C.i32(C.display_read_d_level_dlevel(C.display_address_dgn_topology_d_knox_level(C.display_address_instance_globals_saved_d_dungeon_topology(C.svd))))||C.i32(C.display_read_d_level_dnum(C.display_address_dgn_topology_d_knox_level(C.display_address_instance_globals_saved_d_dungeon_topology(C.svd)))))))&&C.i32(C.on_level(C.display_address_you_uz(C.u),C.display_address_dgn_topology_d_knox_level(C.display_address_instance_globals_saved_d_dungeon_topology(C.svd))))))))?C.GLYPH_CMAP_KNOX_OFF:((Number(C.i32(C.display_read_d_level_dnum(C.display_address_you_uz(C.u)))==C.i32((C.display_read_dgn_topology_d_sokoban_dnum(C.display_address_instance_globals_saved_d_dungeon_topology(C.svd))))))?C.GLYPH_CMAP_SOKO_OFF:C.GLYPH_CMAP_MAIN_OFF)))))))):((Number((idx)<C.S_altar))?(C.i32(((C.i32(((idx)-C.S_ndoor)))+C.GLYPH_CMAP_A_OFF))):((Number((idx)==C.S_altar))?(((Number((C.i32(((2)&16)))==16))?(C.i32((C.GLYPH_ALTAR_OFF+C.altar_other))):((Number((C.i32(((2)&7)))==4))?(C.i32((C.GLYPH_ALTAR_OFF+C.altar_lawful))):((Number((C.i32(((2)&7)))==2))?(C.i32((C.GLYPH_ALTAR_OFF+C.altar_neutral))):((Number((C.i32(((2)&7)))==1))?(C.i32((C.GLYPH_ALTAR_OFF+C.altar_chaotic))):(C.i32((C.GLYPH_ALTAR_OFF+C.altar_unaligned)))))))):((Number((idx)<C.i32((C.S_arrow_trap+(C.i32((C.TRAPNUM-1)))))))?(C.i32(((C.i32(((idx)-C.S_grave)))+C.GLYPH_CMAP_B_OFF))):((Number((idx)<=C.S_goodpos))?(C.i32(((C.i32(((idx)-C.S_digbeam)))+C.GLYPH_CMAP_C_OFF))):C.MAX_GLYPH))))))));
     }
-    (C.writeInt32At(bkglyph, tmp_bkglyph));
+    C.writeInt32At(bkglyph, tmp_bkglyph);
+    C.writeUint32At(framecolor, backgroundFrameColor(x,y));
+}
+
+function backgroundFrameColor(x,y)
+{
     /* this guard should be unnecessary */
-    if(Number(!!(Number(!!(C.i32(C.display_read_instance_flags_bgcolors(C.iflags))&&Number(C.display_read_win_settings_map_frame_color(C.display_address_instance_globals_w_wsettings(C.gw))!=C.u32(8))))&&C.i32(C.mapxy_valid(x,y))))) (C.writeUint32At(framecolor, C.display_read_win_settings_map_frame_color(C.display_address_instance_globals_w_wsettings(C.gw))));
- else (C.writeUint32At(framecolor, C.u32(8)));
+    if (C.display_read_instance_flags_bgcolors(C.iflags)) {
+        const settings = C.display_address_instance_globals_w_wsettings(C.gw);
+        const color = C.display_read_win_settings_map_frame_color(settings);
+        if (color !== 8 && C.mapxy_valid(x,y))
+            return color;
+    }
+    return 8;
 }
 
 /* masks for per-level variances kept in gg.glyphmap_perlevel_flags */
@@ -2465,8 +2492,11 @@ function reset_glyphmap(trigger)
             (W57(C.gg,C.i64(C.display_read_instance_globals_g_glyphmap_perlevel_flags(C.gg)|C.i64(2))));
         }
     }
-    for((glyph=0);Number(glyph<C.MAX_GLYPH);(glyph=C.i32((glyph+1)))) {
-        let gmap=(C.staticAddress("glyphmap")+Number(glyph)*C.sizes["struct glyph_map_entry"]);
+    const colorMask = Object.hasOwn(C, "displayColorMask") ? C.displayColorMask() : null;
+    const glyphMap = C.staticAddress("glyphmap");
+    const glyphSize = C.sizes["struct glyph_map_entry"];
+    for (glyph = 0; glyph < C.MAX_GLYPH; glyph++) {
+        const gmap = glyphMap + glyph * glyphSize;
         (W37(gmap,0));
         /*
          *  Map the glyph to a character and color.
@@ -2722,7 +2752,9 @@ function reset_glyphmap(trigger)
         }
         /* Turn off color if no color defined, or rogue level w/o PC graphics.
          */
-        if(Number(!!((Number(!!(Number(!(C.has_color(color)))||(Number(!!((C.i64((C.display_read_instance_globals_g_glyphmap_perlevel_flags(C.gg)&C.i64(2))))&&Number(!(has_rogue_color))))))))||Number(!(C.display_read_instance_flags_wc_color(C.iflags)))))) (color=8);
+        const colorSupported = colorMask === null ? C.has_color(color) : color >= 0 && color < 16 && (colorMask & (1 << color));
+        if (!colorSupported || ((C.display_read_instance_globals_g_glyphmap_perlevel_flags(C.gg) & 2n) && !has_rogue_color)
+            || !C.display_read_instance_flags_wc_color(C.iflags)) color = 8;
         (W6(C.display_address_glyph_map_entry_sym(gmap),color));
     }
     (W56(C.gg,C.display_read_instance_globals_saved_m_moves(C.svm)));

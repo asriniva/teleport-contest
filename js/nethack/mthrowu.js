@@ -4,6 +4,7 @@ import abi from './mthrowu-abi.json' with {type:'json'};
 import {callMthrowu} from './bindings/mthrowu.js';
 import {createNativeMthrowu} from './native/mthrowu.js';
 import {createRecordViews} from './record-views.js';
+import {nativeStateFor} from './native/state-bridge.js';
 const owners=new WeakMap();
 export function enableMthrowu(environment,layouts){
  if(owners.has(environment))return owners.get(environment);
@@ -45,5 +46,7 @@ export function enableMthrowu(environment,layouts){
  const policy=createNativeMthrowu(context);
  const linedUp=mon=>policy.lined_up(context.monster(mon?.address??mon));
  linedUp.nativeDirect=true;
+ linedUp.nativeState=nativeStateFor(environment);
+ if(!environment.hasFunction('lined_up'))linedUp.nativeState.functions.set('lined_up',linedUp);
  environment.register('mthrowu',Object.fromEntries(abi.public.filter(n=>!environment.hasFunction(n)).map(n=>[n,n==='lined_up'?linedUp:(...args)=>owner.call(n,...args)])),local);owners.set(environment,owner);return owner;
 }

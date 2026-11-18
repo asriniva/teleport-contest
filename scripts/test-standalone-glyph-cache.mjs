@@ -47,9 +47,28 @@ const jbuf=env.memory.malloc(256),cbuf=Number(ref._malloc(256n));for(let i=0;i<2
 for(const n of [0,1,7,63,255,256])for(const byte of [-257,-1,0,1,7,63,254,255,256,511]){const j=env.services.memchr(jbuf,byte,n),c=Number(ref._memchr(BigInt(cbuf),byte,BigInt(n)));assert.equal(j?j-jbuf:-1,c?c-cbuf:-1,'original libc bounded byte search '+byte+':'+n);checks++;}
 assert.equal(env.services.glyphid_cache_status(),ref._glyphid_cache_status(),'initial cache absence');checks++;
 env.services.fill_glyphid_cache();ref._fill_glyphid_cache();assert.equal(env.services.glyphid_cache_status(),ref._glyphid_cache_status(),'source cache construction');checks++;
-const count=Number(ref._probe_glyph_cache_count()),cachePointer=Number(glyphs.services.get(0,9,glyphs.finds));assert.ok(cachePointer&&count);assert.equal(env.memory.live.get(cachePointer).size,count*layouts.glyphs.cacheEntrySize,'source allocated cache extent');checks++;
-const text=(heap,p)=>{p=Number(p);if(!p)return null;let end=p;while(heap[end])end++;return Buffer.from(heap.slice(p,end)).toString('latin1');};let entries=0;const ownedIds=[];
-for(let i=0;i<count;i++){const cp=Number(ref._probe_glyph_cache_entry(BigInt(i))),j=cachePointer+i*layouts.glyphs.cacheEntrySize,cv=new DataView(ref.HEAPU8.buffer);assert.equal(Number(glyphs.services.get(1,0,j)),cv.getInt32(cp,true),'source hash table slot '+i);checks++;const idPointer=Number(glyphs.services.get(1,1,j)),id=text(env.memory.HEAPU8,idPointer),cid=text(ref.HEAPU8,cv.getBigUint64(cp+8,true));assert.equal(id,cid,'source cache ID '+i);if(id){entries++;assert.ok(env.memory.live.has(idPointer),'source cache ID allocation is owned');ownedIds.push(idPointer);checks++;}checks++;}
+const count=Number(ref._probe_glyph_cache_count()),cache=glyphs.services.glyphCache;
+assert.equal(cache.entries.length,count,'same number of hash slots');checks++;
+const text=(heap,p)=>{p=Number(p);if(!p)return null;let end=p;while(heap[end])end++;return Buffer.from(heap.slice(p,end)).toString('latin1');};
+let entries=0;
+const expectedFirstSlots=new Map();
+const cv=new DataView(ref.HEAPU8.buffer);
+for(let i=0;i<count;i++){
+ const cp=Number(ref._probe_glyph_cache_entry(BigInt(i))),entry=cache.entries[i];
+ const id=text(ref.HEAPU8,cv.getBigUint64(cp+8,true)),glyphnum=cv.getInt32(cp,true);
+ assert.equal(entry?.glyphnum??0,glyphnum,'source hash table slot '+i);
+ assert.equal(entry?.original??null,id,'source cache ID '+i);
+ checks+=2;
+ if(entry){
+  entries++;
+  assert.equal(entry.pointer,0,'untouched cache name owns no C byte allocation');checks++;
+  if(!expectedFirstSlots.has(glyphnum))expectedFirstSlots.set(glyphnum,i);
+ }
+}
+assert.deepEqual(cache.byGlyph,expectedFirstSlots,'reverse lookup uses the first occupied slot');checks++;
 assert.ok(entries>0&&entries<=layouts.glyphs.MAX_GLYPH,'source ID catalogue has populated entries and skips unsupported IDs');checks++;
-env.services.free_glyphid_cache();ref._free_glyphid_cache();assert.equal(env.services.glyphid_cache_status(),ref._glyphid_cache_status(),'cache cleanup state');assert.ok(!env.memory.live.has(cachePointer),'cache allocation freed');checks+=2;for(const p of ownedIds){assert.ok(!env.memory.live.has(p),'source cache ID freed during cleanup');checks++;}
+env.services.free_glyphid_cache();ref._free_glyphid_cache();
+assert.equal(env.services.glyphid_cache_status(),ref._glyphid_cache_status(),'cache cleanup state');
+assert.equal(cache.entries,null,'JS table released');
+assert.equal(cache.byGlyph.size,0,'reverse lookup cleared');checks+=3;
 console.log(`PASS: ${checks} original-C glyph headers, full cache slots/${entries} IDs, cleanup and bounded memchr comparisons; full options/display remain unfinished.`);
