@@ -1,3 +1,42 @@
+## Supplemental native recordings and potion alchemy (2026-11-18)
+
+Fifteen fresh native macOS recordings outside the public scoring corpus cover
+2,230 input boundaries across 16 segments. They include floor-container
+stack splitting, instrument improvisation, artifact invocation, wand
+breakage, trap setup and disarming, simultaneous terminal option changes,
+map target menus, polyform abilities, and a save/restore during overlapping
+blindness, confusion and hallucination.
+
+`potion_dip` now compares the dipped stack size with the full C conditional
+threshold. The translated expression previously compared the size with the
+dilution flag and used that boolean to choose a nonzero constant. That
+entered the split branch for stacks that should mix whole. The captured
+two-potion mix called `rnd(0)` in the previous JS and threw while native C
+continued. The corrected bounds preserve the original split sizes and
+ordered PRNG calls. The two alchemy recordings exercise a whole small stack
+and the three large-stack cases for magical, diluted and nonmagical results.
+The POTION ABI records the updated source hash, with the same signatures
+and layouts.
+
+The isolated hero-combat parity adapter also checks whether its native state
+is installed before reading it. The strict environment accessor previously
+threw on the missing optional state before the original JS fixture path ran.
+The ordinary recorder's directly connected hero-combat path is separate.
+The original-C hero-combat matrix passes 15,432 cases. The display
+fixture now uses the shared heap-growth assertion for both resizable and
+replacement buffers, preserving the callback reentry and C comparisons.
+
+All 15 new recordings match native C on 43,397 ordered PRNG calls, 2,230
+screens and cursors, and 23 animation frames. The unchanged scorer also
+passes all 44 public recordings with exact order and output. The recording
+coverage tool runs the normal leaderboard entry on both recording sets.
+The supplemental cases enter 460 additional V8-reported functions and
+245 previously zero-count block ranges across 101 JS files. The combined
+runs still leave 18,377 public-inventoried function entries unobserved.
+The default replay produces the published final save cursor for the new
+`status` recording, accounting for its one cursor difference from fresh C.
+Exhaustive engine and held-out parity remain unverified.
+
 ## Recorder key encoding and terminal teardown (2026-11-18)
 
 Contest upstream `6ee30e6` is already merged. Its local C recorder writes

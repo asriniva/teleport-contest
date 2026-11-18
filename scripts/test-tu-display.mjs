@@ -1,6 +1,6 @@
 import './pure-js-probes/deny-wasm.mjs';
 import {createProbe,createReference,loadFixture,fixtureImports} from './pure-js-fixtures/load.mjs';
-import {DataView as FixtureDataView} from './native-test-backend.mjs';
+import {DataView as FixtureDataView, assertMemoryGrowth, memoryCheckpoint} from './native-test-backend.mjs';
 // Actual configured memory64 C vs imported JS; controlled world/window only.
 import assert from './native-test-assert.mjs';
 import{readFileSync,writeFileSync}from'node:fs';
@@ -172,7 +172,7 @@ reset();setter(m=>set(m,global(m,'u'),'you','ustuck',ptr(m,1)));for(const n of [
 // Independent factory instances: all7 ctor bytes again, native heap growth,
 // native C -> imported JS reentry and outer/inner stack cleanup.
 const fresh=await refFactory();let retainedEnv,third,grown=false,reentered=false,initializations=0;
-third=await hybridFactory({nethackPorted:{initializeDisplay(services){initializations++;return retainedEnv=initializeDisplay(services);},display(services,name,...args){const native=services.rn2_on_display_rng;services.rn2_on_display_rng=n=>{if(!grown){grown=true;const old=third.HEAPU8.buffer;third._probe_growth();assert.notEqual(third.HEAPU8.buffer,old);const sp=third.stackSave();third._probe_action(names.indexOf('fn_cmap_to_glyph'),BigInt(C.S_room),0n,0n,0n,0n,0n,0n,0n,0n,0n);assert.equal(third.stackSave(),sp);reentered=true;}return native(n);};return callDisplay(services,name,...args);}}});
+third=await hybridFactory({nethackPorted:{initializeDisplay(services){initializations++;return retainedEnv=initializeDisplay(services);},display(services,name,...args){const native=services.rn2_on_display_rng;services.rn2_on_display_rng=n=>{if(!grown){grown=true;const before=memoryCheckpoint(third);third._probe_growth();assertMemoryGrowth(third,before,'Display RNG callback must grow the heap');const sp=third.stackSave();third._probe_action(names.indexOf('fn_cmap_to_glyph'),BigInt(C.S_room),0n,0n,0n,0n,0n,0n,0n,0n,0n);assert.equal(third.stackSave(),sp);reentered=true;}return native(n);};return callDisplay(services,name,...args);}}});
 assert.equal(initializations,1);assert.deepEqual(startup(third),startup(fresh));for(const m of[fresh,third]){returnedTypes.set(m,[]);m._probe_reset();property(m,'HALLUC',1);}
 scratchTypes=[];
 for(const m of[fresh,third]){const sp=m.stackSave();m._probe_action(names.indexOf('map_object'),BigInt(ptr(m,2)),1n,0n,0n,0n,0n,0n,0n,0n,0n);assert.equal(m.stackSave(),sp);}
