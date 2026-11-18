@@ -1,3 +1,19 @@
+## Native interaction and persistence recordings (2026-11-18)
+
+Eight native macOS C recordings extend the supplemental suite to 39.
+They cover jump and stinking-cloud targeting, a cloud's damage after
+restoration, cancellation across four item classes on the floor, a forced
+chest lock and its trap, interrupted grave digging, a timed ice tile melted
+with fire, immediate and delayed petrification, and sink behavior with
+dropped rings and levitation. The new recordings add 933 screens and
+cursors, 31,243 ordered PRNG calls and 15 animation frames. On source files
+with identical hashes across the three coverage reports, the new recordings
+entered 137 V8-reported functions and 76 block ranges that had zero counts
+in both the public report and the previous 31 supplemental recordings.
+All 39 supplemental and all 44 public recordings matched exactly on PRNG
+order, screens, cursors and animations. The game port passed with its
+existing code. The new fixtures live outside the public scoring corpus.
+
 ## Cursed weapon comparisons and more native recordings (2026-11-18)
 
 Wielding a cursed lance reached `ready_weapon` with native JavaScript names
