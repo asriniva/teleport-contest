@@ -57,9 +57,12 @@ assert.deepEqual(error(0, 0n), ['no regexp', 'no regexp']);
 const patterns = ['', 'a', '^a$', 'a|b', '(ab)+', '[a-z]+', '[[:digit:]]{2,4}',
     '.', 'a.*b', 'a?b*', '(a)\\1', '\\bword\\b', 'a{0}', 'a{2,3}', '[^x]',
     '^[[:space:]]*$', '[', '(', '*a', 'a{', 'a{3,2}', '[z-a]', 'a\\',
-    '[[:nope:]]', 'a{999999999999}', Buffer.from([65, 0, 91]), Buffer.from([0xff, 0x80])];
+    '[[:nope:]]', 'a{999999999999}', '[[:<:]]word[[:>:]]', '[[:<:]]+', '[^[:<:]]',
+    '[[=a=]]', '[[.a.]-[.c.]]', '[[=a=]-c]', '[^[=a=]]', '[[=aa=]]',
+    Buffer.from([65, 0, 91]), Buffer.from([0xff, 0x80])];
 const texts = [null, '', 'a', 'b', 'A', 'aa', 'abab', 'word', 'wordy', '12',
-    '12345', 'a\nb', ' ', '\n', Buffer.from([0xff, 0x80]), Buffer.from([65, 0, 66])];
+    'sword', 'word!', 'word_item', '_word', 'pre-word', '12345', 'a\nb', ' ', '\n',
+    Buffer.from([0xff, 0x80]), Buffer.from([65, 0, 66])];
 const initial = memory.live.size;
 for (const pattern of patterns) {
     const address = runtime.posixregex('regex_init'), re = runtime.regexContext(address);

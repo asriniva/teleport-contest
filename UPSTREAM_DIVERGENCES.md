@@ -1,3 +1,27 @@
+## Native regex dialect for display rules (2026-11-18)
+
+The standalone game now selects the native macOS regex dialect for
+message filters, inventory colors and other configured regex callers.
+Previously it selected the SDK dialect, which interpreted `\\b` as a
+word boundary. Native C interprets it as the escaped literal letter.
+The native parser now also accepts native whole-word assertions and
+single ASCII character collation and equivalence forms. Named collation
+elements and locale-specific collation remain outside the supported scope.
+The separate SDK regex backend retains its established behavior.
+
+The frozen scorer gave the original JavaScript port 4/19 screens in
+the native display dialect recording, with all 3,271 ordered PRNG calls
+and all cursors matching. The first miss was the hidden unknown-command
+message at input boundary two. The corrected port matches the recording
+exactly. Native libc wrapper checks and the pinned musl oracle both pass.
+Three additional native recordings cover whole-word message and menu
+rules and a single-character equivalence class. Across all four new
+fixtures there are 88 screens and cursors and 10,991 ordered PRNG calls.
+All 44 public and 58 supplemental recordings passed with exact PRNG
+order, screens, cursors and animations.
+The leaderboard does not expose enough information to connect these
+reproductions to specific held-out sessions.
+
 ## Native prompt, status and redraw recordings (2026-11-18)
 
 Nine native macOS C recordings extend the supplemental suite to 54.

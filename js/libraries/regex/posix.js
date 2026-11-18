@@ -116,6 +116,17 @@ function alternative(parts) { return parts.length === 1 ? parts[0] : { kind: 'al
 class Parser {
   constructor(bytes, native = false) { this.bytes = bytes; this.at = 0; this.groups = 0; this.native = native; }
   peek(n = 0) { return this.bytes[this.at + n] || 0; }
+  bracketElement() {
+    const delimiter = this.peek(1);
+    if (this.peek() !== 91 || delimiter !== 46 && delimiter !== 61)
+      return { value: codeUnit(this.bytes[this.at++]), equivalent: false };
+    const byte = this.peek(2);
+    if (!this.native || !byte || byte > 127 || this.peek(3) !== delimiter || this.peek(4) !== 93)
+      fail(REG_ECOLLATE);
+    // In the C locale a single ASCII byte sorts and matches as itself.
+    this.at += 5;
+    return { value: byte, equivalent: delimiter === 61 };
+  }
   bracket() {
     let negate = false;
     if (this.peek() === 94) { negate = true; ++this.at; }
@@ -126,7 +137,6 @@ class Parser {
       if (b === 93 && this.at !== start) { ++this.at; return character(ranges, classes, negate); }
       if (b === 45 && this.at !== start && this.peek(1) !== 93
           && (this.peek(1) !== 45 || this.peek(2) === 93)) fail(REG_ERANGE);
-      if (b === 91 && (this.peek(1) === 46 || this.peek(1) === 61)) fail(REG_ECOLLATE);
       if (b === 91 && this.peek(1) === 58) {
         this.at += 2;
         let name = '';
@@ -136,13 +146,16 @@ class Parser {
         this.at += 2; classes.push(name);
         if (negate && classes.length > 64) fail(REG_ESPACE);
       } else {
-        const min = codeUnit(this.bytes[this.at++]);
+        const first = this.bracketElement();
+        const min = first.value;
         let max = min;
         if (this.peek() === 45 && this.peek(1) !== 93) {
           ++this.at;
           if (!this.peek()) fail(REG_ERANGE);
-          max = codeUnit(this.bytes[this.at++]);
-          if (min > max) fail(REG_ERANGE);
+          const last = this.native ? this.bracketElement()
+            : { value: codeUnit(this.bytes[this.at++]), equivalent: false };
+          max = last.value;
+          if (first.equivalent || last.equivalent || min > max) fail(REG_ERANGE);
         }
         ranges.push([min, max]);
       }
@@ -150,6 +163,16 @@ class Parser {
     }
   }
   atom() {
+    if (this.native && this.peek() === 91 && this.peek(1) === 91 && this.peek(2) === 58
+        && (this.peek(3) === 60 || this.peek(3) === 62) && this.peek(4) === 58
+        && this.peek(5) === 93 && this.peek(6) === 93) {
+      const assertion = this.peek(3) === 60 ? 'bow' : 'eow';
+      this.at += 7;
+      const next = this.peek();
+      if (next === 42 || next === 43 || next === 63 || next === 123 && digit(this.peek(1)))
+        fail(REG_BADRPT);
+      return { kind: 'assert', assertion };
+    }
     const b = this.bytes[this.at++];
     if (b === 91) return this.bracket();
     if (b === 46) return character([[0, 0x10ffff]]);

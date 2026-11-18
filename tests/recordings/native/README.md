@@ -26,6 +26,7 @@ subsequent movement and damage turns.
 | `camera-mirror` | Aim a camera at the hero and the stairs, and aim a mirror at the hero and the ceiling |
 | `cloud-save-restore` | Highlight jump and cloud targets, jump with boots, then save in a stinking cloud and take damage from it after restoring |
 | `corpse-genders` | Revive explicitly male and female newt corpses, using a downward zap |
+| `display-regex-dialect` | Exercise escaped letters in message and inventory color rules that the native C and SDK regex engines interpret differently |
 | `floor-cancellation` | Cancel and recover a pile containing an enchanted sword, a potion of speed, a scroll of identify and a charged wand |
 | `forced-lock` | Pry open a locked chest with a sword and trigger its trap when looting |
 | `genocide-earth` | Genocide lichens, drop boulders with a scroll of earth, then read cursed fire magic |
@@ -36,6 +37,9 @@ subsequent movement and damage turns.
 | `lit-save-restore` | Light an oil lamp, candles, a potion of oil and a lantern, then save, restore, inspect inventory and switch off lights |
 | `lock-container` | Lock and unlock a floor chest, split a potion stack into it, inspect and retrieve the potion, grease inventory |
 | `melting-ice` | Step off ice that has a melt timer, then melt it with a bouncing bolt of fire |
+| `menu-word-boundary` | Underline and color only whole-word “blessed” inventory entries |
+| `message-equivalence` | Filter an unknown-command message using a single-character POSIX equivalence class |
+| `message-word-boundary` | Hide an unknown-command message using native whole-word assertions |
 | `mounted-lance` | Leash and saddle a pony, mount it, wield a cursed lance, target an empty square at reach, then dismount |
 | `music` | Improvise with a flute, horn, bugle and harp, then play a drum of earthquake |
 | `naming` | Name an individual object, call an object type, name the pet through map selection |
