@@ -56,9 +56,21 @@ assert.equal(s.strncmp('a\0suffix', 'a\0different', 20), 0);
 assert.equal(s.strcmp('\xff', '\x80'), 127);
 assert.equal(s.strncmp(0, 0, 0), 0);
 const copyOracle=spawnSync(path.join(scratch,'probe'),['bytes'],{encoding:'utf8'});assert.equal(copyOracle.status,0,copyOracle.stderr);
-const copyOut=memory.malloc(16),copySource=s.literal('ab'),copyActual=[];
-for(const n of [0,1,2,3,7,16]){memory.memset(copyOut,0xa5,16);const result=s.strncpy(copyOut,copySource,BigInt(n));copyActual.push([n,Number(result===copyOut),Buffer.from(memory.readBytes(copyOut,16)).toString('hex')].join(':'));}
-assert.deepEqual(copyActual,copyOracle.stdout.trim().split('\n'),'C size_t64 bounded copying and zero padding');
+const copyOut=memory.malloc(16);
+for (const source of [s.literal('ab'), 'ab', 'ab\0ignored']) {
+    const copyActual=[];
+    for (const n of [0,1,2,3,7,16]) {
+        memory.memset(copyOut,0xa5,16);
+        const result=s.strncpy(copyOut,source,BigInt(n));
+        copyActual.push([n,Number(result===copyOut),Buffer.from(memory.readBytes(copyOut,16)).toString('hex')].join(':'));
+    }
+    assert.deepEqual(copyActual,copyOracle.stdout.trim().split('\n'),'C size_t64 bounded copying and zero padding');
+}
+memory.writeString(copyOut,'ab');
+assert.equal(s.strncat(copyOut,'cd\0ignored',8),copyOut);
+assert.equal(memory.readString(copyOut),'abcd');
+assert.equal(s.strncat(copyOut,'efgh',2),copyOut);
+assert.equal(memory.readString(copyOut),'abcdef');
 const creatOracle=spawnSync(path.join(scratch,'probe'),['creat',path.join(scratch,'creat-native.bin')],{encoding:'utf8'});assert.equal(creatOracle.status,0,creatOracle.stderr);
 const files=createStandaloneEnvironment(),io=files.enableStdio(),payload=files.memory.cstring('abc');let fd=io.creat('/creat',0o640);assert.ok(fd>=3);assert.equal(io.write(fd,payload,3),3);assert.equal(io.close(fd),0);
 fd=io.creat('/creat',0o600);const stat=files.filesystem.fstat(fd),badRead=io.read(fd,payload,1),creatActual=[[Number(fd>=0),stat.size,(stat.mode&0o777).toString(8),Number(badRead===-1&&files.libc.errno===new VFSError('EBADF').errno)].join(',')];assert.equal(io.close(fd),0);

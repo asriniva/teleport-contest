@@ -20,6 +20,7 @@ subsequent movement and damage turns.
 
 | Recording | Interactions |
 | --- | --- |
+| `altar-offerings` | Offer a white unicorn corpse and a lichen corpse to Thoth, then bless a potion on the altar through prayer |
 | `artifacts` | Wear and invoke the Eye of the Aethiopica, wield and invoke Magicbane and Vorpal Blade |
 | `bag-cancellation` | Put a cancellation wand into a bag of holding, handle the blast, potion prompt and wizard survival |
 | `camera-mirror` | Aim a camera at the hero and the stairs, and aim a mirror at the hero and the ceiling |
@@ -29,6 +30,9 @@ subsequent movement and damage turns.
 | `forced-lock` | Pry open a locked chest with a sword and trigger its trap when looting |
 | `genocide-earth` | Genocide lichens, drop boulders with a scroll of earth, then read cursed fire magic |
 | `grave-dig` | Dig out a grave, animate its owner, and resume interrupted digging in the pit |
+| `hole-return` | Fall through a hole to level two, then revisit level one through wizard level teleport |
+| `icebox-tip` | Put a troll corpse and food rations into an icebox, tip the contents into a carried sack, then empty that sack onto the floor |
+| `inventory-reletter` | Split a dagger stack into an occupied letter, move the displaced stack, merge the daggers, then cancel another split |
 | `lit-save-restore` | Light an oil lamp, candles, a potion of oil and a lantern, then save, restore, inspect inventory and switch off lights |
 | `lock-container` | Lock and unlock a floor chest, split a potion stack into it, inspect and retrieve the potion, grease inventory |
 | `melting-ice` | Step off ice that has a melt timer, then melt it with a bouncing bolt of fire |
@@ -41,8 +45,10 @@ subsequent movement and damage turns.
 | `petrify-eggs` | Cure a cockatrice egg's delayed petrification with a lizard corpse, then let the next egg's timer expire |
 | `petrify-food` | Eat a cockatrice corpse from the floor, petrify immediately and decline death in wizard mode |
 | `poly-abilities` | Gremlin, floating eye, mind flayer and giant spider abilities and restrictions |
+| `polymorph-trap` | Trigger a polymorph trap with polymorph control, become a xorn and move through solid rock |
 | `potion-dip` | Uncurse and curse a sword with water, mix small potion stacks |
 | `potion-stack` | Mix large magical, diluted and nonmagical stacks, including partial-stack results |
+| `remove-armor` | Destroy a worn cloak with a scroll, unwield the weapon through take-off-all, then remove a helmet, boots and body armor through the same command |
 | `royal-jelly-hatch` | Rub royal jelly on a killer bee egg, cancel applying a second lump from a stack and wait for a queen bee to hatch |
 | `shop-billing` | Enter via the public healer’s route, purchase unpaid banded mail and sell it back |
 | `sink-rings` | Drop three rings into a sink, recover a ring previously dropped, then fall when a ring of levitation is put on over the sink |

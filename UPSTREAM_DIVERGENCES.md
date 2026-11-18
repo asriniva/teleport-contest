@@ -1,3 +1,26 @@
+## Bounded string copies and additional native gameplay recordings (2026-11-18)
+
+The take-off-all command writes its activity name into the equipment
+context using `strncpy`. Its native JavaScript source string reached
+`strnlen`, which treated it as a C heap address and threw. The shared
+bounded string routines now support JavaScript byte strings as sources
+while preserving pointer operands, the copy limit, NUL termination for
+`strncat`, and zero padding for `strncpy`. The new source path copies
+directly into the destination. Native libc checks compare both source
+forms at six lengths with prefilled destination buffers.
+
+Six new native macOS C recordings cover altar offerings and water prayer,
+a fall and return between dungeon levels, tipping an icebox into a sack,
+inventory splitting and merging at occupied letters, controlled trap
+polymorph, and take-off-all for weapons and armor. The take-off-all fixture
+reproduced the pre-fix crash. The new fixtures add 741 screens and cursors,
+19,960 ordered PRNG calls and two animation frames. Across source files
+with identical hashes in the four coverage reports, the new fixtures
+entered 98 functions and 25 code ranges with zero hits across the
+previous public and supplemental reports.
+All 44 public and 45 supplemental recordings passed with exact PRNG order,
+screens, cursors and animations.
+
 ## Native interaction and persistence recordings (2026-11-18)
 
 Eight native macOS C recordings extend the supplemental suite to 39.
