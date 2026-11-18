@@ -1,3 +1,14 @@
+## Additional spell, scroll and timed-potion recordings (2026-11-18)
+
+Three native C recordings extend the supplemental suite to 25. They cover
+an animated statue and pet combat, scrolls of genocide, earth and fire,
+and speed, levitation, sleep and full healing through landing and waking.
+All three pass exact replay on 338 screens and cursors, 10,326 ordered PRNG
+calls and 12 animation frames. Relative to the previous 22 supplemental
+recordings on the same JavaScript source, they enter 202 additional
+V8-reported functions and 98 previously zero-count block ranges. These
+fixtures live outside the public scoring corpus.
+
 ## Corpse revival flags and nested-container recordings (2026-11-18)
 
 `revive` now converts both gender constants to the same unsigned

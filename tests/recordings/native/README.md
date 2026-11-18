@@ -17,27 +17,30 @@ and hallucination before the next inventory and combat inputs.
 
 | Recording | Interactions |
 | --- | --- |
+| `artifacts` | Wear and invoke the Eye of the Aethiopica, wield and invoke Magicbane and Vorpal Blade |
 | `bag-cancellation` | Put a cancellation wand into a bag of holding, handle the blast, potion prompt and wizard survival |
 | `corpse-genders` | Revive explicitly male and female newt corpses, using a downward zap |
-| `nested-floor-revival` | Wait for a troll to revive from the inner sack of a container on the floor |
-| `nested-revival` | Wait for a troll to revive from an inner sack in the hero’s pack |
-| `shop-billing` | Enter via the public healer’s route, purchase unpaid banded mail and sell it back |
-| `undead-turning` | Revive a lichen and a newt from the floor, then probe downward |
-| `wizcast` | Cast chain lightning and protection through the wizard spell menu |
-| `artifacts` | Wear and invoke the Eye of the Aethiopica, wield and invoke Magicbane and Vorpal Blade |
+| `genocide-earth` | Genocide lichens, drop boulders with a scroll of earth, then read cursed fire magic |
 | `lock-container` | Lock and unlock a floor chest, split a potion stack into it, inspect and retrieve the potion, grease inventory |
 | `music` | Improvise with a flute, horn, bugle and harp, then play a drum of earthquake |
 | `naming` | Name an individual object, call an object type, name the pet through map selection |
+| `nested-floor-revival` | Wait for a troll to revive from the inner sack of a container on the floor |
+| `nested-revival` | Wait for a troll to revive from an inner sack in the hero’s pack |
 | `options-unicode` | Use Enhanced1, change the rogue symbol set and run mode together, redraw and reopen options |
 | `poly-abilities` | Gremlin, floating eye, mind flayer and giant spider abilities and restrictions |
 | `potion-dip` | Uncurse and curse a sword with water, mix small potion stacks |
 | `potion-stack` | Mix large magical, diluted and nonmagical stacks, including partial-stack results |
+| `shop-billing` | Enter via the public healer’s route, purchase unpaid banded mail and sell it back |
 | `status` | Save while blind, confused and hallucinating, restore, apply tools and take a combat turn |
+| `stone-to-flesh` | Animate a newt statue on the floor and resolve the pet’s attack |
 | `targeting` | Farlook help, monster/object/door cycling, target menu cancellation, fast cursor movement in travel targeting |
-| `tools` | Apply a bag of tricks, horn of plenty, magic whistle, unicorn horn and towel |
+| `timed-potions` | Apply speed, levitation, sleep and full healing, including landing and waking up |
 | `tools-corpses` | Tin a corpse, identify glass with a touchstone, apply a cream pie |
+| `tools` | Apply a bag of tricks, horn of plenty, magic whistle, unicorn horn and towel |
 | `traps` | Arm traps, disarm a land mine, animate a figurine and attempt pet and riding interactions |
+| `undead-turning` | Revive a lichen and a newt from the floor, then probe downward |
 | `wand-break` | Break charged and empty wands after wearing gauntlets of power |
+| `wizcast` | Cast chain lightning and protection through the wizard spell menu |
 | `writing` | Write known and unknown scrolls, charge a marker, read cursed armor magic and a cursed spellbook |
 
 To re-record a recipe, run the upstream `scripts/record-session.mjs` against
