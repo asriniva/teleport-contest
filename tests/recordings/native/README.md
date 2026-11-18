@@ -48,6 +48,14 @@ subsequent movement and damage turns.
 | `polymorph-trap` | Trigger a polymorph trap with polymorph control, become a xorn and move through solid rock |
 | `potion-dip` | Uncurse and curse a sword with water, mix small potion stacks |
 | `potion-stack` | Mix large magical, diluted and nonmagical stacks, including partial-stack results |
+| `prompt-combo` | Open combined message recall with repeated control-P, then return to a quit confirmation |
+| `prompt-history` | Open full message history after using inventory and during a prayer confirmation, then backspace and cancel two line prompts |
+| `prompt-reversed` | Open reversed message history, return to a quit confirmation, wrap an annotation prompt to a second row and erase the line |
+| `prompt-single` | Recall individual messages inside a prayer prompt, then edit a level name with backspace and line erase |
+| `redraw-enhanced-symbols` | Redraw with Enhanced1 after magic mapping and while hallucinating |
+| `redraw-engulfed` | Redraw and open inventory while swallowed by a purple worm |
+| `redraw-invisible` | Make a lichen invisible, attack it and redraw, then redraw while blind, change the travel target filter and open a target menu |
+| `redraw-water` | Enter a pool wearing an amulet of magical breathing, redraw and open inventory underwater, then climb out |
 | `remove-armor` | Destroy a worn cloak with a scroll, unwield the weapon through take-off-all, then remove a helmet, boots and body armor through the same command |
 | `royal-jelly-hatch` | Rub royal jelly on a killer bee egg, cancel applying a second lump from a stack and wait for a queen bee to hatch |
 | `shop-billing` | Enter via the public healer’s route, purchase unpaid banded mail and sell it back |
@@ -55,6 +63,7 @@ subsequent movement and damage turns.
 | `slime-expiry` | Eat a green slime glob and advance through the fatal timer and wizard survival |
 | `slime-fire` | Burn away active sliming with a wand of fire and survive lethal damage in wizard mode |
 | `status` | Save while blind, confused and hallucinating, restore, apply tools and take a combat turn |
+| `status-hilites` | Exercise three-line weapon and armor status, HP and ability changes, blindness and levitation colors, and a timed gold highlight that expires |
 | `stone-to-flesh` | Animate a newt statue on the floor and resolve the pet’s attack |
 | `targeting` | Farlook help, monster/object/door cycling, target menu cancellation, fast cursor movement in travel targeting |
 | `timed-potions` | Apply speed, levitation, sleep and full healing, including landing and waking up |

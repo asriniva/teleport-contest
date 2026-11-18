@@ -1,3 +1,23 @@
+## Native prompt, status and redraw recordings (2026-11-18)
+
+Nine native macOS C recordings extend the supplemental suite to 54.
+Message recall uses single, combined, full and reversed modes.
+The fixtures exercise entering and leaving confirmation prompts, editing
+wrapped input, and restoring the map cursor after menus. The three-line
+status case captures damage, recovery, blindness, levitation and expiry
+of the gold highlight. Map redraws cover underwater and engulfed views,
+an invisible monster, blindness, travel target menus, and Enhanced1
+with magic mapping and hallucination.
+
+The new fixtures add 1,033 screens and cursors and 24,410 ordered PRNG
+calls. On source files matching the current checkout, the new captures
+reached 146 functions and 90 code ranges with zero hits in earlier public
+and supplemental coverage reports. These include message recall,
+underwater redraw, weapon and armor status, and condition color handling.
+All 44 public and 54 supplemental recordings matched exactly on PRNG
+order, screens, cursors and animations with the existing port. These
+recordings live outside the public scoring corpus.
+
 ## Bounded string copies and additional native gameplay recordings (2026-11-18)
 
 The take-off-all command writes its activity name into the equipment
