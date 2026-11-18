@@ -11,17 +11,22 @@ node scripts/test-native-macos-replay.mjs tests/recordings/native/*.session.json
 ```
 
 The test compares every screen, cursor and animation frame, and the ordered
-PRNG values. It uses fresh-native teardown semantics for `status`. Both
-segments share one storage handle. The save restores blindness, confusion
-and hallucination before the next inventory and combat inputs.
+PRNG values. The save and restore cases use fresh-native teardown semantics
+and share one storage handle across both segments. The `status` save carries
+blindness, confusion and hallucination into inventory and combat inputs.
+The `lit-save-restore` save carries four active light sources into inventory
+and apply inputs.
 
 | Recording | Interactions |
 | --- | --- |
 | `artifacts` | Wear and invoke the Eye of the Aethiopica, wield and invoke Magicbane and Vorpal Blade |
 | `bag-cancellation` | Put a cancellation wand into a bag of holding, handle the blast, potion prompt and wizard survival |
+| `camera-mirror` | Aim a camera at the hero and the stairs, and aim a mirror at the hero and the ceiling |
 | `corpse-genders` | Revive explicitly male and female newt corpses, using a downward zap |
 | `genocide-earth` | Genocide lichens, drop boulders with a scroll of earth, then read cursed fire magic |
+| `lit-save-restore` | Light an oil lamp, candles, a potion of oil and a lantern, then save, restore, inspect inventory and switch off lights |
 | `lock-container` | Lock and unlock a floor chest, split a potion stack into it, inspect and retrieve the potion, grease inventory |
+| `mounted-lance` | Leash and saddle a pony, mount it, wield a cursed lance, target an empty square at reach, then dismount |
 | `music` | Improvise with a flute, horn, bugle and harp, then play a drum of earthquake |
 | `naming` | Name an individual object, call an object type, name the pet through map selection |
 | `nested-floor-revival` | Wait for a troll to revive from the inner sack of a container on the floor |
@@ -30,7 +35,10 @@ and hallucination before the next inventory and combat inputs.
 | `poly-abilities` | Gremlin, floating eye, mind flayer and giant spider abilities and restrictions |
 | `potion-dip` | Uncurse and curse a sword with water, mix small potion stacks |
 | `potion-stack` | Mix large magical, diluted and nonmagical stacks, including partial-stack results |
+| `royal-jelly-hatch` | Rub royal jelly on a killer bee egg, cancel applying a second lump from a stack and wait for a queen bee to hatch |
 | `shop-billing` | Enter via the public healer’s route, purchase unpaid banded mail and sell it back |
+| `slime-expiry` | Eat a green slime glob and advance through the fatal timer and wizard survival |
+| `slime-fire` | Burn away active sliming with a wand of fire and survive lethal damage in wizard mode |
 | `status` | Save while blind, confused and hallucinating, restore, apply tools and take a combat turn |
 | `stone-to-flesh` | Animate a newt statue on the floor and resolve the pet’s attack |
 | `targeting` | Farlook help, monster/object/door cycling, target menu cancellation, fast cursor movement in travel targeting |
@@ -49,7 +57,7 @@ epoch (`1777723200`). The native fixed-date parser inherits the live clock's
 DST flag. The original captures pinned native `time()` to that epoch and used
 a physical temporary install with the port's recording sysconf. Use an
 installation where the native compressor can reopen the save descriptors.
-The two `status` segments must run in the same recorder invocation.
+Run both segments of each save and restore case in one recorder invocation.
 
 To measure additional production JS execution, use the same source revision
 for both runs.

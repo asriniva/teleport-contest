@@ -1,3 +1,21 @@
+## Cursed weapon comparisons and more native recordings (2026-11-18)
+
+Wielding a cursed lance reached `ready_weapon` with native JavaScript names
+and an inline C string literal. The shared `strncmp` treated both operands
+as heap addresses and threw before printing the weld message. Both
+`strncmp` and `strcmp` now compare either representation as unsigned C bytes.
+They retain the comparison limit and stop at the first NUL. WIELD uses the
+same service for both functions, so its `strcmp` calls no longer intern
+temporary JavaScript strings.
+
+Six fresh native C recordings cover mounted lance targeting, photography
+and mirrors, a save and restore with four active lights, royal jelly and
+queen bee hatching, and both expiry and fire removal of sliming. The mounted
+lance recording reproduced the crash before the fix. The six new recordings
+add 790 screens and cursors, 40,841 ordered PRNG calls and 71 animation
+frames to the supplemental suite. The recordings live outside the public
+scoring corpus.
+
 ## Additional spell, scroll and timed-potion recordings (2026-11-18)
 
 Three native C recordings extend the supplemental suite to 25. They cover

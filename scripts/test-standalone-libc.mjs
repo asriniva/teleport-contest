@@ -49,6 +49,12 @@ result=s.sscanf('-9223372036854775808 18446744073709551615','%ld %lu',out,other)
 memory.view.setInt32(out,19,true);actual.push([s.sscanf('','%d',out),memory.view.getInt32(out,true)].join(','));actual.push([s.sscanf('x','%d',out),memory.view.getInt32(out,true)].join(','));
 assert.deepEqual(actual,scan.stdout.trim().split('\n'));
 assert.equal(s.strcasecmp('\xc0','\xe0'),-32);assert.equal(s.strcasecmp('AbC','aBc'),0);
+const comparisonText = memory.cstring('The lance');
+assert.equal(s.strncmp(comparisonText, 'The ', 4n), 0);
+assert.equal(s.strcmp('The lance\0suffix', BigInt(comparisonText)), 0);
+assert.equal(s.strncmp('a\0suffix', 'a\0different', 20), 0);
+assert.equal(s.strcmp('\xff', '\x80'), 127);
+assert.equal(s.strncmp(0, 0, 0), 0);
 const copyOracle=spawnSync(path.join(scratch,'probe'),['bytes'],{encoding:'utf8'});assert.equal(copyOracle.status,0,copyOracle.stderr);
 const copyOut=memory.malloc(16),copySource=s.literal('ab'),copyActual=[];
 for(const n of [0,1,2,3,7,16]){memory.memset(copyOut,0xa5,16);const result=s.strncpy(copyOut,copySource,BigInt(n));copyActual.push([n,Number(result===copyOut),Buffer.from(memory.readBytes(copyOut,16)).toString('hex')].join(':'));}
