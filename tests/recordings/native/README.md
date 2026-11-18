@@ -17,6 +17,13 @@ and hallucination before the next inventory and combat inputs.
 
 | Recording | Interactions |
 | --- | --- |
+| `bag-cancellation` | Put a cancellation wand into a bag of holding, handle the blast, potion prompt and wizard survival |
+| `corpse-genders` | Revive explicitly male and female newt corpses, using a downward zap |
+| `nested-floor-revival` | Wait for a troll to revive from the inner sack of a container on the floor |
+| `nested-revival` | Wait for a troll to revive from an inner sack in the hero’s pack |
+| `shop-billing` | Enter via the public healer’s route, purchase unpaid banded mail and sell it back |
+| `undead-turning` | Revive a lichen and a newt from the floor, then probe downward |
+| `wizcast` | Cast chain lightning and protection through the wizard spell menu |
 | `artifacts` | Wear and invoke the Eye of the Aethiopica, wield and invoke Magicbane and Vorpal Blade |
 | `lock-container` | Lock and unlock a floor chest, split a potion stack into it, inspect and retrieve the potion, grease inventory |
 | `music` | Improvise with a flute, horn, bugle and harp, then play a drum of earthquake |

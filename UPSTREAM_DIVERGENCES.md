@@ -1,3 +1,28 @@
+## Corpse revival flags and nested-container recordings (2026-11-18)
+
+`revive` now converts both gender constants to the same unsigned
+32-bit width as C's `mmflags_nht` before combining them with the existing
+flags. The original macro constants are C longs, which the ZAP adapter
+exposes as BigInts. The previous combination with a JS Number threw before
+monster creation. The fix preserves C's choice of sex, monster creation
+order and PRNG sequence. The existing union accessors still traverse one
+container link at a time.
+
+New native captures exercise male and female newt corpses, downward revival
+and probing, and troll revival from the inner bag of two nested containers.
+They cover an outer bag in the hero's pack and one on the floor. V8 observed
+both gender branches and the separate floor-location branch. Running the
+previous ZAP source in an isolated copy reproduced the exception in the
+gender, carried nested and floor nested recordings. Other new recordings
+cover bag-of-holding cancellation, buying and selling armor, and casting
+chain lightning and protection.
+
+All 22 supplemental recordings match fresh C on 83,475 ordered PRNG calls,
+3,249 screens and cursors, and 79 animation frames. The unmodified public
+scorer passes all 44 recordings with exact output and ordered PRNG calls.
+The public corpus, frozen files, recorder and workflow retain their upstream
+versions.
+
 ## Supplemental native recordings and potion alchemy (2026-11-18)
 
 Fifteen fresh native macOS recordings outside the public scoring corpus cover
