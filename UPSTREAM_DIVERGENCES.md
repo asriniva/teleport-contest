@@ -1,3 +1,25 @@
+## Linear transitions for repeated regex characters (2026-11-18)
+
+The JavaScript regex compiler emits one chain for an allowed range of
+repetitions of a character, character class, or wildcard. It connects
+allowed endpoints to the next expression and uses a loop for an
+unbounded count. Nested repetitions of a single optional character,
+zero-or-more character, or one-or-more character are reduced to their
+equivalent range. Repetitions of compound expressions keep using the
+existing position construction, including its assertion handling.
+
+Before the change, 20 failed matches on a 160-byte string took about
+2.6 seconds for either `(.*){255}z{literal}` or
+`(a?){255}z{literal}`. The patched build took about 5 ms and 23 ms,
+respectively, in the same focused check. The regression covers
+minimum and maximum counts, anchored matching, and repeated failures.
+A shop-billing replay with the added rule preserved captured screens and
+PRNG order and took 4.8 seconds, compared with 8.7 before the fix.
+All 44 public and 61 supplemental recordings matched PRNG order,
+screens, cursors and animations. The pinned musl and native macOS regex
+oracle checks also passed. No judge log identifies a regex in the
+held-out timeout.
+
 ## Bounded expansion of repeated zero-width regex groups (2026-11-18)
 
 The support for literal braces after a repetition made some previously

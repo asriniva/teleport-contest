@@ -201,6 +201,22 @@ command(process.execPath, ['--input-type=module', '-e', `
   assert.equal(anchor.status, 0);
   assert.equal(matchPosixRegex(anchor.handle, 'word'), true);
   assert.equal(matchPosixRegex(anchor.handle, 'prefix word'), false);
+  const bounded = compilePosixRegex('^(a?){255}z{literal}$', 9, true);
+  const unlimited = compilePosixRegex('^(.*){255}z{literal}$', 9, true);
+  const required = compilePosixRegex('^(a+){3}$', 9, true);
+  assert.equal(bounded.status, 0);
+  assert.equal(unlimited.status, 0);
+  assert.equal(required.status, 0);
+  assert.equal(matchPosixRegex(bounded.handle, 'a'.repeat(255) + 'z{literal}'), true);
+  assert.equal(matchPosixRegex(bounded.handle, 'a'.repeat(256) + 'z{literal}'), false);
+  assert.equal(matchPosixRegex(unlimited.handle, 'a'.repeat(256) + 'z{literal}'), true);
+  assert.equal(matchPosixRegex(required.handle, 'aaa'), true);
+  assert.equal(matchPosixRegex(required.handle, 'aa'), false);
+  const misses = 'a'.repeat(160);
+  for (let i = 0; i < 100; i++) {
+    assert.equal(matchPosixRegex(bounded.handle, misses), false);
+    assert.equal(matchPosixRegex(unlimited.handle, misses), false);
+  }
 `], { timeout: 5000 });
 
 if (process.platform === 'darwin') {
