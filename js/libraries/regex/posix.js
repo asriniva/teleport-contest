@@ -288,6 +288,7 @@ class Parser {
 // assertions even when a nullable iteration could instead be skipped.
 function compileNfa(root) {
   const states = [];
+  const zeroWidth = new WeakMap();
   let transitions = 0;
   const add = state => {
     if (states.length >= MAX_STATES) fail(REG_ESPACE);
@@ -316,6 +317,15 @@ function compileNfa(root) {
     return { ...child, nullable: min === 0 || child.nullable, empty: child.nullable ? child.empty : 0 };
   }
   function emit(node) {
+    const cached = zeroWidth.get(node);
+    if (cached) return cached;
+    const result = emitUncached(node);
+    // Empty groups and assertions have no state IDs to duplicate. Cache
+    // their summaries so nested repetition cannot expand them exponentially.
+    if (!result.first.length) zeroWidth.set(node, result);
+    return result;
+  }
+  function emitUncached(node) {
     switch (node.kind) {
       case 'empty': return empty();
       case 'assert': return { ...empty(), empty: ASSERTIONS[node.assertion] };

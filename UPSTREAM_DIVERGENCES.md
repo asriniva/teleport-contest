@@ -1,3 +1,25 @@
+## Bounded expansion of repeated zero-width regex groups (2026-11-18)
+
+The support for literal braces after a repetition made some previously
+rejected patterns reach an existing exponential loop in the regex
+compiler. Repeating an empty group can cause many compiler visits without
+emitting states or transitions, so their limits did not bound the work.
+With five nested counts of 255 followed by `{literal}`, the prior
+parser returned `REG_BADRPT`, while `dfb0e82` stalled in gameplay
+startup when the rule appeared in `MSGTYPE`.
+
+The compiler reuses the summaries of nodes that emit no states. Consuming
+nodes still get distinct state IDs at each occurrence, and existing
+assertion masks are retained. A timed regression checks matching results
+for nested empty groups and repeated anchors. The patched port replays
+a native startup recording with the extra rule, which matches no game
+message, and preserves all 19 captured boundaries and 2,868 ordered
+PRNG calls.
+All 44 public and 61 supplemental recordings matched PRNG order, screens,
+cursors and animation frames. The browser startup and regex oracle checks
+also passed. The leaderboard timeout has no public detail linking it to
+this pattern.
+
 ## Additional native regex syntax for message and menu rules (2026-11-18)
 
 The active macOS regex profile in `js/libraries/regex/posix.js` accepts

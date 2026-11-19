@@ -183,6 +183,26 @@ for (let i = 0; i < cases.length; ++i) {
   if (js.status === 0) assert.equal(regex.execPosixRegex(js.handle, bytes(test.text), test.eflags), Number(execute), `match ${context}`);
   ++comparisons;
 }
+// An empty group adds no NFA states, so the state limit alone cannot stop
+// a compile from expanding nested repetition. Run these in a timed worker.
+const regexModule = new URL('../js/libraries/regex/posix.js', import.meta.url).href;
+command(process.execPath, ['--input-type=module', '-e', `
+  import assert from 'node:assert/strict';
+  import { compilePosixRegex, matchPosixRegex } from ${JSON.stringify(regexModule)};
+  function repeat(group) {
+    for (let depth = 0; depth < 5; depth++) group = '(' + group + '){255}';
+    return group;
+  }
+  const empty = compilePosixRegex(repeat('()') + '{literal}', 9, true);
+  assert.equal(empty.status, 0);
+  assert.equal(matchPosixRegex(empty.handle, 'prefix{literal}'), true);
+  assert.equal(matchPosixRegex(empty.handle, 'literal'), false);
+  const anchor = compilePosixRegex(repeat('^') + 'word', 9, true);
+  assert.equal(anchor.status, 0);
+  assert.equal(matchPosixRegex(anchor.handle, 'word'), true);
+  assert.equal(matchPosixRegex(anchor.handle, 'prefix word'), false);
+`], { timeout: 5000 });
+
 if (process.platform === 'darwin') {
   const source = path.join(work, 'darwin-oracle.c');
   const binary = path.join(work, 'darwin-oracle');
