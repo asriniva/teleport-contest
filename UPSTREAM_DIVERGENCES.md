@@ -1,3 +1,39 @@
+## C source layout in the JavaScript port (2026-11-20)
+
+The readability pass from the `single-ported-source` worktree was applied
+to current ported functions where their syntax and comments matched.
+Across 134 files under `js/ported`, multi-statement lines, unbraced
+branches, long conditions and initializer tables have been laid out on
+separate lines where needed.
+Short tuples stay together, and labelled numeric rows retain their C
+grouping. Declarations, statements, comments and random-number calls
+keep their original order. The prior worktree's function factories
+changed callback identity in the lock-picking occupation check. Gameplay
+continues to use the entry points and table ownership from `e49c6c8`.
+
+Run `node scripts/check-ported-layout.mjs e49c6c8` to repeat the comparison
+of all 148 modules, including automatic semicolon insertion, literal
+spellings and comment positions relative to tokens. A separate comparison
+with the local C checkout found 5,199 matching function names in the same
+relative order across 137 translation units. This count covers definitions
+with matching names in same-named source files.
+
+The address generator now keeps existing output when only whitespace
+differs and both the token sequence and syntax tree agree. It still
+rejects stale operations and comments in check mode. All 14 generated
+address modules passed generation and inverse comparison, covering
+1,177 functions and 526 RNG caller annotations. The vision comparison
+now locates `createNativeVision` by name after its terrain import and
+continues to check the complete body and the three row setters.
+
+All 44 public recordings matched 792,838 ordered RNG calls, 11,405
+screens and cursors, and 1,483 animation frames. All 78 supplemental
+macOS C recordings matched their RNG logs, screens, cursors and animations.
+The native C comparisons for lock picking, theft, riding and line input
+passed all 56,023 assertions. The historical file-relocation audit still
+rejects `js/nethack/address-ports.js` on the parent revision and on this
+revision. It pins an earlier source snapshot.
+
 ## Character ranges in message and menu rules (2026-11-20)
 
 The Darwin branch of `js/libraries/regex/posix.js` now accepts a named

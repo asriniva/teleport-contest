@@ -1,7 +1,10 @@
 // Invert only the three row setters, then compare every original policy AST.
 import fs from 'node:fs';import assert from 'node:assert/strict';import {parse} from 'acorn';
 const options={ecmaVersion:'latest',sourceType:'module'},source=parse(fs.readFileSync('js/ported/vision.js','utf8'),options),native=parse(fs.readFileSync('js/nethack/native/vision.js','utf8'),options);
-const body=native.body[0].declaration.body.body.slice(0,-1);let setters=0;
+const factory = native.body.find(n => n.declaration?.id?.name === 'createNativeVision')?.declaration;
+assert.equal(factory?.type, 'FunctionDeclaration', 'gameplay vision factory');
+const body = factory.body.body.slice(0, -1);
+let setters = 0;
 function clean(n){if(Array.isArray(n))return n.map(clean);if(!n||typeof n!=='object')return n;
  if(n.type==='CallExpression'&&n.callee?.object?.name==='C'&&n.callee.property?.name==='nativeVisionRow'){
   setters++;assert.equal(n.arguments.length,3);assert.ok(['cs_rows0','cs_rows1','viz_clear_rows'].includes(n.arguments[0].property.name));
