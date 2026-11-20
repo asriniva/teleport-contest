@@ -1,35 +1,80 @@
-// Current-source relocation, imports, capability isolation and negative controls.
+// Inspect the current checkout. Historical source receipts have their own audit.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
-import {parse} from '../.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs';
-import {layoutSourceSha} from './nethack-layout.mjs';
-execFileSync('python3',['scripts/consolidate-nethack-layout.py'],{stdio:'inherit'});
-let modules=0,imports=0,unbuiltLegacy=0;
-function visit(directory){for(const row of fs.readdirSync(directory,{withFileTypes:true})){
- const file=path.join(directory,row.name);if(row.isDirectory()){visit(file);continue;}
- if(!/\.(?:js|mjs)$/.test(file)||file==='js/wasm/nethack.mjs')continue;
- const source=fs.readFileSync(file,'utf8');let ast;try{ast=parse(source,{ecmaVersion:'latest',sourceType:'module'});}catch(error){error.message=file+': '+error.message;throw error;}modules++;
- for(const node of ast.body)if(node.type==='ImportDeclaration'||node.type.startsWith('Export')&&node.source){
-  const name=node.source.value;if(!name.startsWith('.'))continue;imports++;
-  const target=path.resolve(path.dirname(file),name);
-  if(!fs.existsSync(target)&&file==='scripts/test-version-bridge.mjs'&&name==='../js/wasm/nethack.mjs'){unbuiltLegacy++;continue;}
-  assert.ok(fs.existsSync(target),file+': '+name);
- }
- if(file.startsWith('js/'))assert.ok(!source.includes('../standalone/'),'Old production import: '+file);
- if(/^scripts\/test-(?:tu-|standalone-)/.test(file))assert.ok(!source.includes('runPriorLayoutAudit'),'Runtime tests must execute current modules: '+file);
-}}
-visit('js');visit('scripts');
-const receipt=JSON.parse(fs.readFileSync('docs/runtime-environment/nethack-layout.json'));
-const file='js/nethack/light.js',row=receipt.files['js/standalone/light.js'];
-assert.equal(layoutSourceSha(file,row.beforeSha256),row.beforeSha256,'original source pin retained');
-const read=fs.readFileSync;
-fs.readFileSync=function(p,...args){const bytes=read.call(this,p,...args);return path.resolve(String(p))===path.resolve(file)?Buffer.concat([Buffer.from(bytes),Buffer.from('\n')]):bytes;};
-try{assert.throws(()=>layoutSourceSha(file,row.beforeSha256),/changed beyond NetHack path relocation/,'source drift rejected');}finally{fs.readFileSync=read;}
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { parse } from 'acorn';
+
+const ports = JSON.parse(fs.readFileSync('nethack-c/wasm/tu-ports.json', 'utf8'));
+const generatedProbes = new Set(ports.flatMap(({ name }) => [
+    `.cache/tu-probes/${name}-reference.mjs`, `.cache/tu-probes/${name}-hybrid.mjs`,
+]));
+const sdkParser = '.cache/emsdk/upstream/emscripten/node_modules/acorn/dist/acorn.mjs';
+let modules = 0, imports = 0, unbuilt = 0;
+
+function checkImport(file, specifier, dynamic) {
+    if (typeof specifier !== 'string' || !specifier.startsWith('.')) return;
+    const url = new URL(specifier, pathToFileURL(path.resolve(file)));
+    const target = path.relative(process.cwd(), fileURLToPath(url)).split(path.sep).join('/');
+    assert.ok(!target.startsWith('js/standalone/'), 'Obsolete module path in ' + file + ': ' + specifier);
+    if (!fs.statSync(target, { throwIfNoEntry: false })?.isFile()) {
+        const buildInput = file.startsWith('scripts/') && (target === sdkParser || generatedProbes.has(target));
+        // These test runners are written into .cache by the test before it imports them.
+        const testRunner = dynamic && file.startsWith('scripts/test-') && /^\.cache\/[^/]+-runner\.mjs$/.test(target);
+        const wasmBridge = target === 'js/wasm/nethack.mjs'
+            && (file === 'scripts/test-version-bridge.mjs' || file === 'js/wasm-adapter.js');
+        assert.ok(buildInput || testRunner || wasmBridge, 'Unresolved import in ' + file + ': ' + specifier);
+        unbuilt++;
+        return;
+    }
+    imports++;
+}
+
+function checkModuleReferences(file, node) {
+    if (node.type === 'ImportDeclaration' || node.type === 'ImportExpression'
+        || node.type === 'ExportNamedDeclaration' || node.type === 'ExportAllDeclaration') {
+        checkImport(file, node.source?.value, node.type === 'ImportExpression');
+    }
+    for (const child of Object.values(node)) {
+        if (Array.isArray(child)) {
+            for (const entry of child) if (entry?.type) checkModuleReferences(file, entry);
+        } else if (child?.type) {
+            checkModuleReferences(file, child);
+        }
+    }
+}
+
+function visit(directory) {
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+        const file = path.posix.join(directory, entry.name);
+        if (entry.isDirectory()) {
+            visit(file);
+            continue;
+        }
+        if (!/\.(?:js|mjs)$/.test(file) || file === 'js/wasm/nethack.mjs') continue;
+        const source = fs.readFileSync(file, 'utf8');
+        let ast;
+        try {
+            ast = parse(source, { ecmaVersion: 'latest', sourceType: 'module' });
+        } catch (error) {
+            throw new Error(file + ': ' + error.message, { cause: error });
+        }
+        modules++;
+        checkModuleReferences(file, ast);
+        if (/^scripts\/test-(?:tu-|standalone-)/.test(file)) {
+            assert.ok(!source.includes('runPriorLayoutAudit'), 'Runtime test uses historical modules: ' + file);
+        }
+        if (file.startsWith('js/')) {
+            assert.ok(!source.includes('../standalone/'), 'Obsolete production import in ' + file);
+        }
+    }
+}
+
+visit('js');
+visit('scripts');
+assert.ok(!fs.existsSync('js/standalone'), 'Old production directory remains');
 await import('./pure-js-probes/deny-wasm.mjs');
-const {createStandaloneEnvironment}=await import('../js/nethack/environment.js');
-const env=createStandaloneEnvironment();assert.ok(env.memory&&env.services);
-assert.equal(fs.existsSync('js/standalone'),false);
-console.log('PASS: '+modules+' current modules parse; '+imports+' relative imports resolve; '+unbuiltLegacy+' unchanged legacy generated imports await their own build.');
-console.log('PASS: consolidated environment initializes with Wasm denied; original source pins accepted and altered source rejected.');
+const { createStandaloneEnvironment } = await import('../js/nethack/environment.js');
+const env = createStandaloneEnvironment();
+assert.ok(env.memory && env.services);
+console.log(`PASS current layout: ${modules} modules parsed, ${imports} relative imports resolved, ${unbuilt} references to absent optional build outputs. The environment initialized with Wasm denied.`);

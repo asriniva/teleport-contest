@@ -12,9 +12,13 @@ const root=fileURLToPath(new URL('../',import.meta.url));
 const base='e61e34c926bed5a098cf3142ba50fa6cf56d2b46';
 let checked=false,prior;
 export function currentLayoutPath(file){return file.replace(/^js\/standalone(?=\/|$)/,'js/nethack');}
-function verify(){if(!checked){execFileSync('python3',[path.join(root,'scripts/consolidate-nethack-layout.py')],{cwd:root,stdio:'pipe'});checked=true;}}
+export function verifyHistoricalLayout() {
+    if (checked) return;
+    execFileSync('python3', [path.join(root, 'scripts/consolidate-nethack-layout.py')], { cwd: root });
+    checked = true;
+}
 function previous(){
- verify();if(prior)return prior;
+ verifyHistoricalLayout();if(prior)return prior;
  const dir=path.join(root,'.cache/nethack-layout'),view=path.join(dir,'prior'),ready=path.join(dir,'ready');
  fs.mkdirSync(dir,{recursive:true});
  if(fs.existsSync(ready)&&fs.readFileSync(ready,'utf8').trim()!==base)fs.unlinkSync(ready);
@@ -68,7 +72,7 @@ export function layoutSourceSha(file,expected){
  if(!row)return actual;
  const owner=row.destination===null?receipt.files['js/nethack/address-ports.js']:row;
  if(sha(beforeFeature(path.relative(root,actualFile)))!==owner.afterSha256)throw Error('Source changed beyond NetHack path relocation: '+logical);
- verify();
+ verifyHistoricalLayout();
  const bytes=execFileSync('git',['show',base+':'+before],{cwd:root,maxBuffer:32*1024*1024});
  return sha(bytes)===expected?expected:actual;
 }

@@ -1,3 +1,33 @@
+## Current layout checks, historical relocation and Ghostty removal (2026-11-20)
+
+`npm run test:layout` parses the working tree, resolves static imports,
+re-exports and literal relative dynamic imports, and starts the current
+engine with Wasm disabled. It uses the Acorn development dependency from
+`npm ci`. SDK tools, generated reference probes, test-created runners and
+the optional Wasm game have separate builds. Computed import specifiers
+are outside this source check.
+
+`npm run test:layout:history` verifies the recorded move from `e61e34c`
+to `1dab2c6` using the committed file trees and the original receipt.
+It requires both commits in local Git history. The reproduction script is
+read-only. The previous comparison against live gameplay files and its
+obsolete rewrite mode were removed. Per-file predecessor hash checks still
+reject changed bytes. These checks supersede the historical audit failure
+recorded below.
+
+The retired Ghostty terminal emulator, vendor directory, downloader and
+emulator-only test were removed. Its only caller was that test. The active
+recorder uses shadow screens. The historical dependency inventories retain
+their observations from the builds they describe.
+
+Both checks passed. The current check also passed in a clean source copy
+with no Git metadata or SDK cache. Negative controls rejected a missing
+static re-export, a missing lazy import, an altered receipt and altered
+source bytes. All 593 historical transitions matched. All 44 public
+recordings and all 78 supplemental macOS C recordings passed, including
+all 11,405 public screens and cursors, 792,838 ordered RNG calls and
+1,483 animation frames. The frame-capture and recorder teardown tests passed.
+
 ## C source layout in the JavaScript port (2026-11-20)
 
 The readability pass from the `single-ported-source` worktree was applied

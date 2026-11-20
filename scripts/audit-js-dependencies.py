@@ -872,7 +872,7 @@ def active_inventory(manifest):
         'ghostty': {'selected': False if 'createTerminalBackend' not in adapter and "import { createTerminalBackend" not in adapter else 'unresolved',
                     'standalone_diagnostic_file_present': (ROOT / 'js/terminal-backend.js').is_file(),
                     'evidence': [evidence('js/wasm-adapter.js', "const terminalDiagnostics = { backend: 'shadow' }")],
-                    'limitation': 'This is an adapter source observation; historical standalone diagnostic artifacts are not active runtime dependencies.'},
+                    'limitation': 'This is an adapter source observation; standalone diagnostic file presence is checked independently.'},
     }
 
 
@@ -1295,7 +1295,7 @@ def build_report():
             {'name': 'terminfo_capabilities', 'disposition': 'Pinned-entry JS terminfo selected; ncurses headers/data/reference build retained, C libtinfo excluded from selected runtime. C vararg/callback ABI support remains.', 'evidence': ['nethack-c/wasm/build.py', 'nethack-c/wasm/dependency-bridge.c', 'js/libraries/terminfo/index.js']},
             {'name': 'input_output_transport', 'disposition': 'preserve keyboard byte mapping and input-exhaustion boundary', 'evidence': ['nethack-c/wasm/bridge.c', 'js/wasm-adapter.js']},
             {'name': 'shadow_screen_capture', 'disposition': 'preserve inherited default capture and frame timing separately from transport/terminfo', 'evidence': ['nethack-c/wasm/build.py', 'js/wasm-adapter.js']},
-            {'name': 'historical_ghostty_emulation', 'disposition': 'Removed from active adapter selection/import path. Historical standalone diagnostic file remains outside selected game runtime.', 'evidence': ['js/wasm-adapter.js']},
+            {'name': 'historical_ghostty_emulation', 'disposition': 'Removed from active adapter selection/import path. The standalone diagnostic and its Wasm dependency were removed.', 'evidence': ['js/wasm-adapter.js']},
             {'name': 'snapshot_serialization', 'disposition': 'preserve recorder encoding/cursor/animation/RNG log conventions independently of terminal emulation', 'evidence': ['js/wasm-replay-support.js', 'js/wasm-adapter.js']},
         ],
         'migration_backlog': [

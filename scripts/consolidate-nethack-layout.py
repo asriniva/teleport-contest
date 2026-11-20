@@ -4,20 +4,27 @@ import argparse,hashlib,json,posixpath,re,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 BASE='e61e34c926bed5a098cf3142ba50fa6cf56d2b46'
+MOVED='1dab2c64a80d86e2398875c0e3d45017f174abf1'
 from functools import lru_cache
 RECEIPT='docs/runtime-environment/nethack-layout.json'
 EXT={'.js','.mjs','.py','.sh','.html'}
 sha=lambda b:hashlib.sha256(b).hexdigest()
 
 @lru_cache(maxsize=None)
-def inventory():
- return subprocess.check_output(['git','ls-tree','-r','--name-only',BASE],cwd=ROOT,text=True).splitlines()
+def tree(revision):
+    output = subprocess.check_output(['git', 'ls-tree', '-r', '-z', revision], cwd=ROOT)
+    entries = {}
+    for entry in output.split(b'\0'):
+        if entry:
+            metadata, name = entry.split(b'\t', 1)
+            entries[name.decode()] = metadata
+    return entries
 _objects=None
 @lru_cache(maxsize=None)
-def original(file):
+def original(file, revision=BASE):
  global _objects
  if _objects is None:_objects=subprocess.Popen(['git','cat-file','--batch'],cwd=ROOT,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
- _objects.stdin.write((BASE+':'+file+'\n').encode());_objects.stdin.flush()
+ _objects.stdin.write((revision+':'+file+'\n').encode());_objects.stdin.flush()
  header=_objects.stdout.readline().split();assert len(header)==3 and header[1]==b'blob',('Missing baseline blob',file)
  data=_objects.stdout.read(int(header[2]));assert _objects.stdout.read(1)==b'\n';return data
 def current(file):
@@ -89,7 +96,7 @@ export function writeBeforeLayout(file,bytes){return historicalCall('scripts/ser
  return text.encode()
 
 def plan():
- known=set(inventory());rows={}
+ known=set(tree(BASE));rows={}
  for file in sorted(known):
   if file.startswith(('docs/','frozen/','nethack-c/upstream/'))or Path(file).suffix not in EXT and not file.startswith('js/standalone/')and file!='package.json':continue
   before=original(file)
@@ -101,75 +108,34 @@ def plan():
   if dest!=file or after!=before:rows[file]={'destination':dest,'beforeSha256':sha(before),'afterSha256':sha(after),'bytes':after}
  return rows
 
-def qualified_current(file):
- if file=='js/ported/termcap.js':
-  from shadow_screen_source_successor import qualified_before as shadow_before
-  return shadow_before(ROOT,file)
- if file=='js/ported/display.js':
-  from display_direct_source_successor import qualified_before as display_before
-  return display_before(ROOT,file)
-
- if file=='js/nethack/pager-lookup.js':
-  from pager_callback_source_successor import qualified_before
-  return qualified_before(ROOT,file)
- if file in {'js/nethack/bindings/termcap.js'}:
-  from full_replay_source_successor import qualified_before
-  return qualified_before(ROOT,file)
- from monster_view_source_successor import ALLOWED as VIEW_ALLOWED,qualified_before as view_before
- if file in VIEW_ALLOWED:return view_before(ROOT,file)
- from engine_service_source_successors import ALLOWED as SERVICE_ALLOWED,qualified_before as service_before
- if file in SERVICE_ALLOWED and file!='js/nethack/bindings/mon.js':return service_before(ROOT,file)
- from engine_test_source_successors import ALLOWED as TEST_ALLOWED,qualified_before as test_before
- if file in TEST_ALLOWED:return test_before(ROOT,file)
- if file in {'js/nethack/bindings/hack.js','js/nethack/bindings/mon.js','js/nethack/bindings/wintty.js'}and(ROOT/'scripts/pointer_limit_source_successor.py').exists():
-  from pointer_limit_source_successor import qualified_before
-  return qualified_before(ROOT,file)
- if file in {'js/nethack/bindings/display.js','js/nethack/bindings/invent.js'}and(ROOT/'scripts/immutable_selectors_source_successor.py').exists():
-  from immutable_selectors_source_successor import qualified_before
-  return qualified_before(ROOT,file)
- if file in {'js/c-runtime/types.js','js/c-runtime/address-bindings.js'}and(ROOT/'scripts/type_metadata_source_successor.py').exists():
-  from type_metadata_source_successor import qualified_before
-  return qualified_before(ROOT,file)
- # A separate finite native/source successor precedes the immutable relocation.
- if (ROOT/'docs/runtime-environment/transport-allocation-source-successors.json').exists():
-  from transport_allocation_source_successors import ALLOWED,qualified_before
-  if file in ALLOWED:return qualified_before(ROOT,file)
- return (ROOT/file).read_bytes()
-
 def main():
- p=argparse.ArgumentParser();p.add_argument('--write',action='store_true');a=p.parse_args();
- assert not any(historical_cli(f)for f in ['scripts/test-native-existing.mjs','scripts/test-tu-light.mjs','scripts/run-standalone-program.mjs','scripts/test-standalone-allocation-cli.mjs']),'Runtime tests cannot use the historical audit view'
- rows=plan()
- if a.write:
-  assert not(ROOT/'docs/runtime-environment/transport-allocation-source-successors.json').exists(),'Refusing to overwrite independently qualified transport features; historical layout generation is read-only'
-  previous=json.loads((ROOT/RECEIPT).read_bytes())['files']if(ROOT/RECEIPT).exists()else{}
-  for old,row in previous.items():
-   if old not in rows and row['destination']==old:
-    assert sha((ROOT/old).read_bytes())in {row['afterSha256'],sha(original(old))},'Refusing to replace unreviewed work: '+old
-    (ROOT/old).write_bytes(original(old))
-  for old,row in rows.items():
-   if row['destination']is not None:
-    dest=ROOT/row['destination'];dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(row['bytes'])
-   if row['destination']!=old and(ROOT/old).exists():(ROOT/old).unlink()
-  if(ROOT/'js/standalone').exists():(ROOT/'js/standalone').rmdir()
-  record={'baseCommit':subprocess.check_output(['git','rev-parse',BASE],cwd=ROOT,text=True).strip(),'scope':'Exact path/import relocation; original metadata hashes retained. Historical audits execute the pinned preceding layout after this layout is verified. Current runtime tests import the consolidated modules.','files':{f:{k:v for k,v in row.items()if k!='bytes'}for f,row in rows.items()}}
-  (ROOT/RECEIPT).write_text(json.dumps(record,indent=2)+'\n')
- else:
-  record=json.loads((ROOT/RECEIPT).read_bytes());assert record['baseCommit']==subprocess.check_output(['git','rev-parse',BASE],cwd=ROOT,text=True).strip()
-  assert record['files']=={f:{k:v for k,v in row.items()if k!='bytes'}for f,row in rows.items()},'Consolidation recipe/receipt differs'
-  for old,row in rows.items():
-   if row['destination']is not None:assert qualified_current(row['destination'])==row['bytes'],'Changed beyond path relocation: '+row['destination']
-  assert not(ROOT/'js/standalone').exists(),'Old production directory remains'
-  # Historical evidence, frozen harnesses and C/compiler inputs must not drift.
-  for file in inventory():
-   if file in rows:continue
-   if file.startswith(('js/','scripts/','frozen/','docs/runtime-environment/','nethack-c/'))and Path(file).suffix in {'.js','.mjs','.json','.patch','.c','.h','.inc','.py','.sh'}:
-    assert qualified_current(current(file))==original(file),'Unrelated source/evidence change: '+file
-  expected={current(f)for f in inventory()if f.startswith('js/')and Path(f).suffix in {'.js','.json'}and f!='js/standalone/address-ports.js'}
-  from display_direct_source_successor import FILES as DISPLAY_FILES,validate_cohort as validate_display
-  validate_display(ROOT)
-  expected.update(file for file,row in DISPLAY_FILES.items() if not row['existed'])
-  actual={str(p.relative_to(ROOT))for p in(ROOT/'js').rglob('*')if p.is_file()and p.suffix in {'.js','.json'}}
-  assert actual==expected,('Unexpected runtime source membership',sorted(actual-expected),sorted(expected-actual))
- print('PASS NetHack layout:230 former standalone files consolidated; one forwarding wrapper removed;',len(rows),'exact path/source transitions.')
-if __name__=='__main__':main()
+    argparse.ArgumentParser(description=__doc__).parse_args()
+    rows = plan()
+    receipt = json.loads((ROOT / RECEIPT).read_bytes())
+    assert (ROOT / RECEIPT).read_bytes() == original(RECEIPT, MOVED), 'Historical layout receipt changed'
+    assert receipt['baseCommit'] == BASE
+    expected_rows = {name: {k: v for k, v in row.items() if k != 'bytes'} for name, row in rows.items()}
+    assert receipt['files'] == expected_rows, 'Consolidation recipe/receipt differs'
+
+    before, after = tree(BASE), tree(MOVED)
+    for old, row in rows.items():
+        dest = row['destination']
+        if dest is not None:
+            assert original(dest, MOVED) == row['bytes'], 'Changed beyond path relocation: ' + dest
+        if old != dest:
+            assert old not in after, 'Obsolete path survived consolidation: ' + old
+
+    # The original migration also promised to preserve unrelated sources and evidence.
+    prefixes = ('js/', 'scripts/', 'frozen/', 'docs/runtime-environment/', 'nethack-c/')
+    extensions = {'.js', '.mjs', '.json', '.patch', '.c', '.h', '.inc', '.py', '.sh'}
+    for file, entry in before.items():
+        if file not in rows and file.startswith(prefixes) and Path(file).suffix in extensions:
+            assert after.get(file) == entry, 'Unrelated source/evidence change: ' + file
+    def runtime_sources(entries):
+        return {f for f in entries if f.startswith('js/') and Path(f).suffix in {'.js', '.json'}}
+    expected = {current(f) for f in runtime_sources(before) if f != 'js/standalone/address-ports.js'}
+    assert runtime_sources(after) == expected, 'Unexpected runtime source membership'
+    print(f'PASS historical relocation at {MOVED[:12]}: {len(rows)} exact path/source transitions.')
+
+if __name__ == '__main__':
+    main()

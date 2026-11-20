@@ -139,13 +139,9 @@ processes, compares each replay under simulated winter and summer clocks, and
 checks the macOS apple message, option layout, corpse prompt and version/help
 features. The full public suite still checks the unchanged frozen comparator.
 
-## Historical terminal backend
+## Terminal capture
 
-Ghostty's implementation and setup script remain as standalone development
-artifacts. The active game adapter no longer selects it, including when
-`TELEPORT_TERMINAL=ghostty` is set. All scoring screens use the restored recorder
-shadow encoding. `node scripts/test-terminal.mjs` can still exercise the emulator
-separately after its dependency is installed.
+The adapter uses the recorder shadow encoding for scoring screens.
 
 `bash scripts/test-wasm.sh` checks native/Wasm terminfo, recorder screen
 encoding, and timezone/macOS regressions. The frozen harness and recordings

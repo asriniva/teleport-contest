@@ -16,17 +16,18 @@ to retain earlier immutable receipts. It does not change game-policy bodies,
 C/compiler inputs, ABI data or frozen harnesses. Original JSON metadata remains
 byte-identical even when its file moves.
 
-Run `npm run test:layout`. The check independently reproduces every transition
-from the pinned base, verifies unchanged sources and evidence, resolves current
-relative imports, initializes the consolidated environment with Wasm denied,
-and rejects source changes beyond the relocation.
+Run `npm ci` and `npm run test:layout` to check the current JavaScript
+modules and their relative imports and start the environment with Wasm
+disabled. Optional generated C-reference test fixtures can be built separately.
 
-Older source audits run in a separately labeled read-only prior-layout view under
-`.cache/nethack-layout`. The current relocation is verified first. That view is
-used for source/evidence checks, never as the implementation under test. Runtime
-and integration tests execute the current modules under `js/nethack`. Existing
-source-hash assertions retain their expected values and accept a predecessor only
-when its exact current path transformation has been independently verified.
+Run `npm run test:layout:history` in a clone containing the original commits
+to reproduce the move from `e61e34c` to `1dab2c6`. The audit compares the
+recipe and receipt against the committed destinations and checks that an
+altered source file cannot claim the original hash. Later gameplay edits
+are checked by current-source tests and recordings.
+
+Older source audits can also run the pre-move code in a separate view under
+`.cache/nethack-layout`. Runtime and integration tests execute current modules.
 
 The [validation record](nethack-layout-validation.json) distinguishes current
 runtime tests from historical source-audit reproduction. It also records the

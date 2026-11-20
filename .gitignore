@@ -4,6 +4,3 @@ node_modules/
 # Reproducible Emscripten outputs (build before scoring).
 js/wasm/nethack.mjs
 js/wasm/nethack.wasm
-
-# Temporary development terminal dependency; fetched with setup-terminal.sh.
-js/vendor/libghostty/*.wasm
