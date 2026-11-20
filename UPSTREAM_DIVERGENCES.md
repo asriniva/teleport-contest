@@ -1,3 +1,24 @@
+## Character ranges in message and menu rules (2026-11-20)
+
+The Darwin branch of `js/libraries/regex/posix.js` now accepts a named
+equivalence element such as `[=space=]` at the start of a character
+range. A single-character equivalence class cannot start a range, and
+a character class or equivalence class cannot end one. Previously the
+parser decided whether to accept a start element based on how the end
+was spelled, and could read the opening bracket of a class as a literal
+range endpoint. The revised parser also reports an unclosed bracket for
+an unfinished range and rejects attempts to start a second range from a
+completed range. [Apple’s range parser](https://github.com/apple-oss-distributions/Libc/blob/71bbe350ab79eef58113991d817ccc6165061a64/regex/TRE/lib/tre-parse.c#L256)
+
+The macOS recording `message-range-editor` enters the message rule
+`Unknown[[=space=]-~]command` in the options menu and selects Hide.
+The port previously showed an error at that point, matching 53 of 61
+screens with all 2,575 ordered RNG calls intact. All 61 screens and
+cursors now match. The Darwin libc comparison in
+`scripts/test-js-posix-regex.mjs` checks compilation and matching for
+normal, negated and incomplete ranges. All 44 public recordings and 78
+supplemental recordings passed. Held-out impact is unverified.
+
 ## Incomplete UTF-8 in save filenames (2026-11-20)
 
 NetHack can truncate the UTF-8 encoding of a player name at its 31-byte

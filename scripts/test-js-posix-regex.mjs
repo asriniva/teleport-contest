@@ -257,6 +257,8 @@ int main(int argc, char **argv) {
     ['[[=space=]]', ' '], ['[[.tab.]]', '\t'],
     ['[[.space.]-[.slash.]]', '.'], ['[[=space=]-[.slash.]]', '.'],
     ['[[.space.]-[=slash=]]', '.'], ['[[=a=]-c]', 'b'],
+    ['[a-', 'a'], ['[a-[', 'a'], ['[[:upper:]---]', 'Z'],
+    ['[a-b---]', 'b'], ['[----]', '-'], ['[a-b-]', '-'],
     ['[[.unknown-name.]]', 'a'], ['a*{b', 'aaa{b'],
     ['a{2}{again}', 'aa{again}'], ['a{1', 'a'], ['a{1x}', 'a'],
     ['a?{2', 'a'], ['a{1}+', 'a'], ['^*', 'a'], ['(^)*', 'a'],
@@ -266,6 +268,14 @@ int main(int argc, char **argv) {
       ['^[[:' + name + ':]]$', 'A'], ['^[^[:' + name + ':]]$', 'A'],
     ]),
   ];
+  for (const start of ['!', '[.hyphen.]', '[=hyphen=]', '[=a=]']) {
+    for (const end of ['z', '[.z.]', '[:lower:]', '[=z=]', '[=missing=]']) {
+      for (const text of ['!', '-', '0', 'z', '~']) {
+        cases.push(['[' + start + '-' + end + ']', text]);
+        cases.push(['[^' + start + '-' + end + ']', text]);
+      }
+    }
+  }
   const controls = 'NUL SOH STX ETX EOT ENQ ACK BEL BS HT LF VT FF CR SO SI DLE DC1 DC2 DC3 DC4 NAK SYN ETB CAN EM SUB ESC FS GS RS US'.split(' ');
   for (const [index, name] of controls.entries()) cases.push(['[[.' + name + '.]]', Buffer.from([index])]);
   for (const [name, char] of Object.entries({'full-stop': '.', 'circumflex-accent': '^', 'low-line': '_',

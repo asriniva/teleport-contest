@@ -45,6 +45,7 @@ subsequent movement and damage turns.
 | `lock-container` | Lock and unlock a floor chest, split a potion stack into it, inspect and retrieve the potion, grease inventory |
 | `melting-ice` | Step off ice that has a melt timer, then melt it with a bouncing bolt of fire |
 | `menu-word-boundary` | Underline and color only whole-word “blessed” inventory entries |
+| `message-range-editor` | Set a message-hiding rule with a named range endpoint in the options menu and apply it to unknown commands |
 | `message-equivalence` | Filter an unknown-command message using a single-character POSIX equivalence class |
 | `message-full-stop` | Suppress the unknown-command message using the macOS regex name `full-stop` for its final period |
 | `message-word-boundary` | Hide an unknown-command message using native whole-word assertions |

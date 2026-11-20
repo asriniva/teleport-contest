@@ -147,6 +147,7 @@ class Parser {
   peek(n = 0) { return this.bytes[this.at + n] || 0; }
   bracketElement() {
     const delimiter = this.peek(1);
+    if (this.native && this.peek() === 91 && !delimiter) fail(REG_EBRACK);
     if (this.peek() !== 91 || delimiter !== 46 && delimiter !== 61)
       return { value: codeUnit(this.bytes[this.at++]), equivalent: false };
     if (!this.native) fail(REG_ECOLLATE);
@@ -158,7 +159,10 @@ class Parser {
       ? codeUnit(name.charCodeAt(0)) : nativeCollatingElements.get(name);
     if (!this.peek() || value === undefined) fail(REG_ECOLLATE);
     this.at += 2;
-    return { value, equivalent: delimiter === 61, collating: delimiter === 46 };
+    // Darwin treats a named element such as [=space=] as its collating
+    // character when it starts a range. A one-byte equivalence class
+    // such as [=a=] cannot start one.
+    return { value, equivalent: delimiter === 61 && name.length === 1 };
   }
   bracket() {
     let negate = false;
@@ -168,8 +172,11 @@ class Parser {
       const b = this.peek();
       if (!b) fail(REG_EBRACK);
       if (b === 93 && this.at !== start) { ++this.at; return character(ranges, classes, negate); }
-      if (b === 45 && this.at !== start && this.peek(1) !== 93
-          && (this.peek(1) !== 45 || this.peek(2) === 93)) fail(REG_ERANGE);
+      if (b === 45 && this.at !== start && this.peek(1) !== 93) {
+        // A character class or a completed range cannot start a new range.
+        if (this.native && !this.peek(1)) fail(REG_EBRACK);
+        if (this.native || this.peek(1) !== 45 || this.peek(2) === 93) fail(REG_ERANGE);
+      }
       if (b === 91 && this.peek(1) === 58) {
         this.at += 2;
         let name = '';
@@ -185,11 +192,13 @@ class Parser {
         let max = min;
         if (this.peek() === 45 && this.peek(1) !== 93) {
           ++this.at;
-          if (!this.peek()) fail(REG_ERANGE);
-          const last = this.native ? this.bracketElement()
-            : { value: codeUnit(this.bytes[this.at++]), equivalent: false };
-          max = last.value;
-          if (first.equivalent && !last.collating || last.equivalent || min > max) fail(REG_ERANGE);
+          if (!this.peek()) fail(this.native ? REG_EBRACK : REG_ERANGE);
+          if (first.equivalent) fail(REG_ERANGE);
+          // A range must end in a character or a collating element.
+          if (this.native && this.peek() === 91 && (this.peek(1) === 58 || this.peek(1) === 61))
+            fail(REG_ERANGE);
+          max = this.native ? this.bracketElement().value : codeUnit(this.bytes[this.at++]);
+          if (min > max) fail(REG_ERANGE);
         }
         ranges.push([min, max]);
       }
