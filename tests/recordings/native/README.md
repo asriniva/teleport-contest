@@ -62,6 +62,7 @@ subsequent movement and damage turns.
 | `polymorph-trap` | Trigger a polymorph trap with polymorph control, become a xorn and move through solid rock |
 | `potion-dip` | Uncurse and curse a sword with water, mix small potion stacks |
 | `potion-stack` | Mix large magical, diluted and nonmagical stacks, including partial-stack results |
+| `prompt-key-bytes` | Edit a level annotation with Ā and an emoji, whose low input bytes include NUL, and submit it with Return |
 | `prompt-combo` | Open combined message recall with repeated control-P, then return to a quit confirmation |
 | `prompt-history` | Open full message history after using inventory and during a prayer confirmation, then backspace and cancel two line prompts |
 | `prompt-reversed` | Open reversed message history, return to a quit confirmation, wrap an annotation prompt to a second row and erase the line |

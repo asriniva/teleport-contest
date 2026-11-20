@@ -1,3 +1,20 @@
+## Byte input for level annotations and other keyboard prompts (2026-11-20)
+
+The pure JavaScript port in `js/standalone-recorder-adapter.js` now passes
+one byte per indexed session key to the game, as the upstream recorder
+does when it writes a key to stdin. Both translate a literal carriage
+return to a newline before taking the low eight bits. Previously a wider
+UTF-16 code unit could reach the terminal with its high bits intact. When
+its low byte was zero, native NetHack handled it as Escape and cleared the
+current prompt, while the port retained the entered text.
+
+The macOS C recording `prompt-key-bytes` exercises both Ā and an emoji
+during level annotation. Before the change, 30 of its 40 screens and
+cursors matched and all 2,983 ordered RNG calls matched. With the fix,
+all 40 screens and cursors match and the RNG log is identical. A second
+native capture with 14 boundary values matched on all 229 screens.
+The held-out recordings are unavailable for direct comparison.
+
 ## Terrain wish parser field alias (2026-11-20)
 
 In the C headers, `looted` expands to `flags`. The private wish-parser
