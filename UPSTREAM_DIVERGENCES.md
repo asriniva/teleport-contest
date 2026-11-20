@@ -1,3 +1,17 @@
+## Special levels in the character attributes report (2026-11-20)
+
+The attributes code in `js/nethack/bindings/insight.js` now uses the same
+two-coordinate layout for `struct d_level` and its typedef `d_level`.
+The former view exposed only the dungeon number. The Dungeons of Doom
+have dungeon number zero, so their special levels looked unassigned when
+the report checked their locations. This omitted the Big Room and Rogue
+level descriptions from the attributes screen.
+
+The macOS C recording `landmark-attributes` opens the report on both
+levels. Two further recordings reproduce the Big Room difference with
+different sequences of gameplay actions. Held-out verification awaits
+a leaderboard run that includes this change.
+
 ## Chronicle event turns and flags across save and restore (2026-11-20)
 
 `js/nethack/save-lifecycle.js` now writes both numeric fields of each
