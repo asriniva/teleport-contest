@@ -226,8 +226,18 @@ if (process.platform === 'darwin') {
 #include <regex.h>
 #include <stdio.h>
 
+static void unhex(char *arg) {
+  unsigned byte;
+  int i = 0;
+  for (; sscanf(arg + 1 + 2*i, "%2x", &byte) == 1; ++i)
+    arg[i] = (char)byte;
+  arg[i] = 0;
+}
+
 int main(int argc, char **argv) {
   for (int i = 1; i + 1 < argc; i += 2) {
+    unhex(argv[i]);
+    unhex(argv[i + 1]);
     regex_t compiled;
     int status = regcomp(&compiled, argv[i], REG_EXTENDED | REG_NOSUB);
     printf("%d", status);
@@ -256,10 +266,21 @@ int main(int argc, char **argv) {
       ['^[[:' + name + ':]]$', 'A'], ['^[^[:' + name + ':]]$', 'A'],
     ]),
   ];
-  const output = command(binary, cases.flat()).trimEnd().split('\n');
+  const controls = 'NUL SOH STX ETX EOT ENQ ACK BEL BS HT LF VT FF CR SO SI DLE DC1 DC2 DC3 DC4 NAK SYN ETB CAN EM SUB ESC FS GS RS US'.split(' ');
+  for (const [index, name] of controls.entries()) cases.push(['[[.' + name + '.]]', Buffer.from([index])]);
+  for (const [name, char] of Object.entries({'full-stop': '.', 'circumflex-accent': '^', 'low-line': '_',
+    IS1: '\x1f', IS2: '\x1e', IS3: '\x1d', IS4: '\x1c'})) cases.push(['[[=' + name + '=]]', char]);
+  for (let byte = 128; byte < 256; byte++) {
+    for (const delimiter of ['.', '=']) {
+      const pattern = Buffer.from('[[' + delimiter + String.fromCharCode(byte) + delimiter + ']]', 'latin1');
+      cases.push([pattern, Buffer.from([byte])], [pattern, 'A']);
+    }
+  }
+  cases.push(['[[.é.]]', 'é']); // UTF-8 consists of two bytes in the C locale.
+  const output = command(binary, cases.flat().map(hex)).trimEnd().split('\n');
   for (const [index, [pattern, text]] of cases.entries()) {
     const [compiled, executed] = output[index].split(' ').map(Number);
-    const actual = regex.compilePosixRegex(pattern, regex.REG_EXTENDED | regex.REG_NOSUB, true);
+    const actual = regex.compilePosixRegex(bytes(pattern), regex.REG_EXTENDED | regex.REG_NOSUB, true);
     assert.equal(actual.status, compiled, 'macOS regex compile ' + pattern);
     if (!actual.status) {
       assert.equal(regex.execPosixRegex(actual.handle, Buffer.from(text)), executed, 'macOS regex match ' + pattern);

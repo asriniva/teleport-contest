@@ -32,7 +32,17 @@ for (const {seed, datetime, nethackrc, moves, steps} of publishedSave.segments) 
     assert.deepEqual(game.getCursors(), steps.map(step => step.cursor));
 }
 
-const env = createStandaloneEnvironment({environment: {NOMUX_MARKERS: '1'}});
+const env = createStandaloneEnvironment({environment: {NOMUX_MARKERS: '1', HOME: '/旅é'}});
+const bytesAt = p => Buffer.from(env.memory.readBytes(p, env.memory.strlen(p)));
+assert.deepEqual(bytesAt(env.services.getenv('HOME')), Buffer.from('/旅é'));
+env.setEnvironment('旅', 'café');
+const envKey = env.memory.cstring(Buffer.from('旅'));
+assert.deepEqual(bytesAt(env.services.getenv(envKey)), Buffer.from('café'));
+const rawValue = env.memory.cstring(Uint8Array.of(0xff, 0x80));
+assert.equal(env.services.setenv(envKey, rawValue, 1), 0);
+assert.deepEqual(bytesAt(env.services.getenv(envKey)), Buffer.from([0xff, 0x80]));
+env.setEnvironment('旅', null);
+assert.equal(env.services.getenv(envKey), 0);
 env.enableStdio();
 env.enableDecl(layouts.decl);
 env.enableHacklib(layouts.hacklib);
