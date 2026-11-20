@@ -1,3 +1,32 @@
+## Filename lookup on the macOS recording volume (2026-11-20)
+
+Native NetHack opens `QuEsT.LuA` and `NHLIB.LUA` with the same contents as
+`quest.lua` and `nhlib.lua`. The JS port previously applied Unicode filename
+comparison only inside the save directory. Through the wizard Lua loader,
+both other spellings displayed a spurious file-open error. Skipping the
+library initialization also omitted two RNG calls.
+
+The port's recording adapter now enables case-insensitive lookup throughout
+its virtual filesystem. `js/c-runtime/vfs.js` indexes the original directory
+entry by its folded name and rebuilds the index on snapshot import. A rename
+that changes the spelling of a single entry records the new spelling.
+Replacing a different file preserves the existing destination spelling,
+as observed on the native macOS recording volume. The default filesystem
+for SDK comparisons still uses case-sensitive lookup.
+
+Two new recordings captured with native macOS NetHack cover the wizard
+loader and subsequent redraw. The parent commit missed three of forty
+screens in each recording. The quest case matched every RNG call even with
+the wrong screens. The fixed port matched all eighty screens and cursors,
+and all 5,456 ordered RNG events including caller locations. Lowercase
+controls also passed. The native filesystem comparison covers alias lookup,
+a decomposed accent, exclusive creation, case-only rename and replacement.
+All 44 public recordings passed with 11,405 screens and cursors, 792,838
+ordered RNG calls and 1,483 animation frames. All 82 supplemental recordings
+passed with 8,319 screens and cursors, 338,305 ordered RNG calls and 212
+animation frames. The inputs to the leaderboard's held-out misses remain
+unknown.
+
 ## Screen differences in message rules and numeric options (2026-11-20)
 
 In the message-rule editor, entering `{1` now reports “braces not balanced.”

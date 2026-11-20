@@ -52,6 +52,8 @@ subsequent movement and damage turns.
 | `message-word-boundary` | Hide an unknown-command message using native whole-word assertions |
 | `meta-escape` | Open skills with a one-byte Meta key and with Esc plus a key under altmeta, then edit a prompt |
 | `meta-raw` | Compare one-byte Meta with a separate Esc followed by a key, and check prompt handling |
+| `mixed-case-nhlib` | Load the NetHack Lua library as `NHLIB.LUA` and check its initialization RNG calls |
+| `mixed-case-quest` | Load the quest text as `QuEsT.LuA` and redraw after the load |
 | `mounted-lance` | Leash and saddle a pony, mount it, wield a cursed lance, target an empty square at reach, then dismount |
 | `music` | Improvise with a flute, horn, bugle and harp, then play a drum of earthquake |
 | `naming` | Name an individual object, call an object type, name the pet through map selection |

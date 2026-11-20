@@ -111,6 +111,30 @@ for (let i = 0; i < actual.length; ++i) {
   } else assert.equal(expected[i], actual[i], `native ${i}: ${commands[i]}`);
 }
 
+// The recorder models a case-insensitive macOS volume, including parent
+// directories and the stored spelling returned by directory enumeration.
+const recordingVolume = new CVFS({ caseInsensitive: true });
+const recordingOps = [
+  'MK Game', 'MK game/Data', 'OPEN GAME/DATA/Café 578', 'WRITE 3 h78 -', 'CLOSE 3',
+  'OPEN game/data/CAFE\u0301 193', 'RENAME Game/Data/Café GAME/DATA/CAFÉ', 'LS game/data',
+  'OPEN game/DATA/target 578', 'CLOSE 3', 'RENAME GAME/data/café game/data/TARGET',
+  'LS Game/DATA', 'STAT GAME/DATA/target', 'STAT game/data/Café',
+];
+const recordingResults = recordingOps.map(line => execute(recordingVolume, line));
+assert.deepEqual(recordingResults, [
+  'OK 0', 'OK 0', 'OK 3', 'OK 1', 'OK 0', 'ERR EEXIST', 'OK 0', 'OK .,..,CAFÉ',
+  'OK 3', 'OK 0', 'OK 0', 'OK .,..,target', 'OK file 1', 'ERR ENOENT',
+]);
+if (process.platform === 'darwin' && fs.existsSync(path.join(work, 'NATIVE-ROOT'))) {
+  const nativeResults = command(native, [nativeRoot], { input: recordingOps.join('\n') + '\n' });
+  assert.deepEqual(nativeResults.trimEnd().split('\n'), recordingResults);
+}
+const restoredVolume = new CVFS({ caseInsensitive: true });
+restoredVolume.importSnapshot(recordingVolume.exportSnapshot());
+assert.deepEqual(restoredVolume.readFile('/GAME/DATA/Target'), Uint8Array.of(0x78));
+restoredVolume.unlink('/gAmE/DaTa/target');
+assert.throws(() => restoredVolume.stat('/game/data/TARGET'), error => error.code === 'ENOENT');
+
 // Build a separate wasm32 MEMFS oracle for Node22; no current game module or
 // generated TU probes are modified. Files are exclusively under this scratch.
 const sdk = path.join(root, '.cache/emsdk'), memfsModule = path.join(work, 'memfs-oracle.mjs');
