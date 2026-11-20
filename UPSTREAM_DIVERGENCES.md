@@ -1,3 +1,32 @@
+## Readability of supporting JavaScript (2026-11-20)
+
+This fork reformats 218 existing modules outside `js/ported`. In the
+game startup code, for example, each subsystem registration now has its
+own line. The same pass separates statements and indents control flow in
+NetHack services, Lua, the C runtime, platform helpers and recorder glue.
+Across these files, lines longer than 200 characters fell from 1,699 to 34.
+The pass introduces no dependency. Generated gameplay copies, binding
+catalogs, embedded data and frozen contest code retain their existing
+layout. Some test instruments match exact source text, so their entry
+points retain the spelling and spacing used by the instruments.
+
+All 218 changed modules have the same parsed syntax trees, token and
+literal spellings, and ordered comments as the passing commit `6b0384f`.
+The ordinary walk, wait and attack comparison with the C reference passed,
+as did the independent native Lua string and browser recorder checks.
+All 44 public recordings and 82 supplemental macOS C recordings passed.
+The public replays matched all 11,405 screens and cursors, 792,838 ordered
+RNG calls and 1,483 animation frames. The private judge recordings and the
+organizer's readability benchmark were unavailable locally.
+
+Formatting does not consolidate gameplay copies. Commit `57c9ec7`, for
+example, applied the same hit-point bar rule to both versions of `botl.js`.
+On `6b0384f`, regenerating the dog and light modules in an empty output
+directory also produces 25 and 18 raw changed lines respectively, with
+identical tokens, comments and syntax. Their byte-for-byte generator
+checks already fail on that layout. These figures describe raw Git churn.
+The contest rules normalize whitespace in the Phase 2 diff.
+
 ## Filename lookup on the macOS recording volume (2026-11-20)
 
 Native NetHack opens `QuEsT.LuA` and `NHLIB.LUA` with the same contents as
