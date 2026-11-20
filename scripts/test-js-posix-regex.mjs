@@ -268,6 +268,11 @@ int main(int argc, char **argv) {
       ['^[[:' + name + ':]]$', 'A'], ['^[^[:' + name + ':]]$', 'A'],
     ]),
   ];
+  for (const prefix of ['', '(', 'x|', '^', 'x*', 'x']) {
+    for (const interval of ['{1', '{1,', '{2,1}', '{1x}', '{256}', '{1,256}', '{0}', '{2,}', '{,2}']) {
+      cases.push([prefix + interval + (prefix === '(' ? ')' : ''), 'xx']);
+    }
+  }
   for (const start of ['!', '[.hyphen.]', '[=hyphen=]', '[=a=]']) {
     for (const end of ['z', '[.z.]', '[:lower:]', '[=z=]', '[=missing=]']) {
       for (const text of ['!', '-', '0', 'z', '~']) {

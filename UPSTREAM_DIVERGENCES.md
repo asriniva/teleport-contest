@@ -1,3 +1,34 @@
+## Screen differences in message rules and numeric options (2026-11-20)
+
+In the message-rule editor, entering `{1` now reports “braces not balanced.”
+Darwin validates the bounds of a counted repetition before checking whether
+there is an expression to repeat. The port previously reversed those checks
+when a count began a pattern, group or alternative. The Darwin branch in
+`js/libraries/regex/posix.js` now uses the same interval parser in each
+position. A valid interval without an operand still reports the operand error.
+
+On macOS, `atoi` and `atol` parse decimal input as a signed long, including
+range saturation and errno, and `atoi` narrows the result to an int.
+`js/c-runtime/stdlib.js` now follows that behavior for gameplay. The musl
+fixture retains its direct decimal conversion. The signed and unsigned
+integer scanner consumes all digits on overflow while bounding its temporary
+value. With `number_pad:18446744073709551616`, native NetHack receives -1
+and starts normally. The previous port received 0 and inserted a startup
+error prompt.
+
+Two new macOS C recordings exercise these paths through actual game input.
+The parent commit matched 34 of 36 screens for `message-bound-error` and
+0 of 26 for `number-pad-overflow`. Both matched all 2,575 ordered RNG calls.
+All 62 screens now match. The native recording tool also reproduced the
+existing message-rule editor fixture exactly.
+
+All 44 public and 80 supplemental recordings passed, including all 792,838
+public RNG calls, 11,405 screens and cursors, and 1,483 animation frames.
+The libc checks passed 838 Darwin regex comparisons, 79,147 musl comparisons
+and 65,564 Emscripten reference comparisons. The runtime suite passed 1,294
+original-C comparisons and the new integer boundary cases. Held-out impact
+is unverified.
+
 ## Current layout checks, historical relocation and Ghostty removal (2026-11-20)
 
 `npm run test:layout` parses the working tree, resolves static imports,

@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { createJsRuntime, JS_RUNTIME_LAYOUTS, CPanic } from '../js/nethack/runtime.js';
 import { CMemory } from '../js/c-runtime/heap.js';
-import { C_ERRNO } from '../js/c-runtime/stdlib.js';
+import { C_ERRNO, createCStdlib } from '../js/c-runtime/stdlib.js';
 import { C, R, T, withCEnvironment } from '../js/c-runtime/context.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -153,15 +153,34 @@ assert.ok(memory.generation > 0, 'growth must occur while live buffer views exis
 assert.equal(libc.format('%f', 1.5), '1.500000');
 assert.throws(() => libc.format('%Lf', 1.5), /Long-double formatting is not supported/);
 const bounded = new CMemory({ initialBytes: 64, maximumBytes: 64 });
-const boundedRuntime = (await import('../js/c-runtime/stdlib.js')).createCStdlib(bounded);
+const boundedRuntime = createCStdlib(bounded);
 const unterminated = bounded.malloc(48);
 bounded.HEAPU8.fill(65, unterminated, 64);
 assert.equal(boundedRuntime.format('%.3s', unterminated), 'AAA');
 assert.equal(boundedRuntime.format('%.0s', 100000), '');
 memory.withScope(scope => {
-    const input = scope.cstring('abc'); libc.errno = 73;
-    assert.equal(libc.atoi(input), 0); assert.equal(libc.errno, 73);
-    assert.equal(libc.atol(input), 0n); assert.equal(libc.errno, 73);
+    const musl = createCStdlib(memory, { profile: 'musl' });
+    for (const [text, int, long, error] of [
+        ['abc', 0, 0n, C_ERRNO.EINVAL],
+        ['  -42tail', -42, -42n, 73],
+        ['2147483648', -2147483648, 2147483648n, 73],
+        ['9223372036854775807', -1, 9223372036854775807n, 73],
+        ['-9223372036854775808', 0, -9223372036854775808n, 73],
+        ['18446744073709551616', -1, 9223372036854775807n, C_ERRNO.ERANGE],
+        ['-9223372036854775809', 0, -9223372036854775808n, C_ERRNO.ERANGE],
+    ]) {
+        const p = scope.cstring(text);
+        libc.errno = 73;
+        assert.equal(libc.atoi(p), int); assert.equal(libc.errno, error);
+        libc.errno = 73;
+        assert.equal(libc.atol(p), long); assert.equal(libc.errno, error);
+    }
+    for (const text of ['abc', '18446744073709551616']) {
+        const p = scope.cstring(text);
+        musl.errno = 73;
+        assert.equal(musl.atoi(p), 0); assert.equal(musl.errno, 73);
+        assert.equal(musl.atol(p), 0n); assert.equal(musl.errno, 73);
+    }
 });
 const reused = new CMemory({ initialBytes: 128 });
 let retained;

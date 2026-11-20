@@ -46,6 +46,7 @@ subsequent movement and damage turns.
 | `melting-ice` | Step off ice that has a melt timer, then melt it with a bouncing bolt of fire |
 | `menu-word-boundary` | Underline and color only whole-word “blessed” inventory entries |
 | `message-range-editor` | Set a message-hiding rule with a named range endpoint in the options menu and apply it to unknown commands |
+| `message-bound-error` | Enter an incomplete repetition count in the message-rule editor and read its error prompt |
 | `message-equivalence` | Filter an unknown-command message using a single-character POSIX equivalence class |
 | `message-full-stop` | Suppress the unknown-command message using the macOS regex name `full-stop` for its final period |
 | `message-word-boundary` | Hide an unknown-command message using native whole-word assertions |
@@ -56,6 +57,7 @@ subsequent movement and damage turns.
 | `naming` | Name an individual object, call an object type, name the pet through map selection |
 | `nested-floor-revival` | Wait for a troll to revive from the inner sack of a container on the floor |
 | `nested-revival` | Wait for a troll to revive from an inner sack in the hero’s pack |
+| `number-pad-overflow` | Start with a number-pad option that exceeds the signed-long limit and open the options menu |
 | `options-unicode` | Use Enhanced1, change the rogue symbol set and run mode together, redraw and reopen options |
 | `petrify-eggs` | Cure a cockatrice egg's delayed petrification with a lizard corpse, then let the next egg's timer expire |
 | `petrify-food` | Eat a cockatrice corpse from the floor, petrify immediately and decline death in wizard mode |
