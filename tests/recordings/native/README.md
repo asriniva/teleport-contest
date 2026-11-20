@@ -68,6 +68,7 @@ subsequent movement and damage turns.
 | `remove-armor` | Destroy a worn cloak with a scroll, unwield the weapon through take-off-all, then remove a helmet, boots and body armor through the same command |
 | `royal-jelly-hatch` | Rub royal jelly on a killer bee egg, cancel applying a second lump from a stack and wait for a queen bee to hatch |
 | `shop-billing` | Enter via the public healer’s route, purchase unpaid banded mail and sell it back |
+| `startup-names` | Read the active name after a commented-out name, then launch with accented and Chinese player names |
 | `sink-rings` | Drop three rings into a sink, recover a ring previously dropped, then fall when a ring of levitation is put on over the sink |
 | `slime-expiry` | Eat a green slime glob and advance through the fatal timer and wizard survival |
 | `slime-fire` | Burn away active sliming with a wand of fire and survive lethal damage in wizard mode |

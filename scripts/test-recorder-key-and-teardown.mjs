@@ -55,6 +55,12 @@ assert.match(score.screen, /No {1,2}(?:\x1b\[\d+C)?Points/);
 assert.doesNotMatch(score.screen, /Saving/);
 assert.deepEqual(score.cursor, [0, 1, 1]);
 
+// A UTF-8 byte pair occupies two shadow cells. Native capture decodes the
+// completed payload, including replacement characters for malformed bytes.
+raw('caf\xc3\xa9/\xff');
+call('nomux_capture_write_input_boundary');
+assert.ok(terminal.frames.at(-1).screen.includes('café/\ufffd'));
+
 const cells = memory.HEAPU8.subarray(terminal.global('nomux_buf'), terminal.global('nomux_buf') + 24 * 80 * 4);
 for (let cell = 0; cell < 24 * 80; cell++) {
     cells.set(cell % 2 ? [65, 1, 7, 1] : [66, 2, 0, 0], cell * 4);
