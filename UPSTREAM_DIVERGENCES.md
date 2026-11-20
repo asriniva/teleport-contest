@@ -1,3 +1,35 @@
+## Darwin character classes and the published final-save cursor (2026-11-19)
+
+The game regex profile recognizes the Darwin C-locale character classes
+`rune`, `ideogram`, `phonogram`, and `special` in bracket expressions.
+`rune` matches the non-NUL ASCII bytes. The other three classes are
+empty in that locale. The SDK dialect still accepts its original set of
+classes. This change covers the C locale used by the recording path.
+
+A new native recording uses `rune` in a `MSGTYPE` rule and checks the
+effect on ordinary gameplay screens. A focused Darwin libc comparison
+checks acceptance and matching on ASCII and high bytes.
+
+The public save-and-restore recording is the oracle for the production
+cursor convention. Both final saves expect `[0,1,1]`. The end-to-end
+regression now checks every cursor in both segments with shared storage
+and the public replay entry. The separate fresh-native diagnostics still
+use the native capture convention and expect `[0,0,1]` on a final save.
+
+Additional native recordings exercise one-byte Meta, Esc plus a key
+with altmeta, and Meta during a line prompt. A separate two-segment
+recording creates and loads actual level 5 wizard bones, then unlinks
+them at the prompted choice. The JavaScript replay uses its own save
+and bones payload through the shared storage handle. The recording checks
+gameplay equivalence, with cross-platform binary interchange outside
+its scope.
+
+All 44 public recordings had exact PRNG, screen, cursor and animation
+matches across two scorer runs. Each run had a worker timeout on a
+different recording, and each timed-out recording passed in the other
+run. The Darwin and pinned musl regex checks and the focused public
+save-cursor check also passed.
+
 ## Linear transitions for repeated regex characters (2026-11-18)
 
 The JavaScript regex compiler emits one chain for an allowed range of

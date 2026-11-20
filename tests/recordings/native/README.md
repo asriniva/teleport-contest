@@ -26,6 +26,7 @@ subsequent movement and damage turns.
 | `camera-mirror` | Aim a camera at the hero and the stairs, and aim a mirror at the hero and the ceiling |
 | `cloud-save-restore` | Highlight jump and cloud targets, jump with boots, then save in a stinking cloud and take damage from it after restoring |
 | `corpse-genders` | Revive explicitly male and female newt corpses, using a downward zap |
+| `darwin-rune` | Hide unknown-command messages using the Darwin rune character class |
 | `display-regex-collation` | Load message filters using a named space and a literal brace after repetition, then suppress the unknown-command message |
 | `display-regex-dialect` | Exercise escaped letters in message and inventory color rules that the native C and SDK regex engines interpret differently |
 | `floor-cancellation` | Cancel and recover a pile containing an enchanted sword, a potion of speed, a scroll of identify and a charged wand |
@@ -42,6 +43,8 @@ subsequent movement and damage turns.
 | `menu-word-boundary` | Underline and color only whole-word “blessed” inventory entries |
 | `message-equivalence` | Filter an unknown-command message using a single-character POSIX equivalence class |
 | `message-word-boundary` | Hide an unknown-command message using native whole-word assertions |
+| `meta-escape` | Open skills with a one-byte Meta key and with Esc plus a key under altmeta, then edit a prompt |
+| `meta-raw` | Compare one-byte Meta with a separate Esc followed by a key, and check prompt handling |
 | `mounted-lance` | Leash and saddle a pony, mount it, wield a cursed lance, target an empty square at reach, then dismount |
 | `music` | Improvise with a flute, horn, bugle and harp, then play a drum of earthquake |
 | `naming` | Name an individual object, call an object type, name the pet through map selection |
@@ -79,6 +82,7 @@ subsequent movement and damage turns.
 | `traps` | Arm traps, disarm a land mine, animate a figurine and attempt pet and riding interactions |
 | `undead-turning` | Revive a lichen and a newt from the floor, then probe downward |
 | `wand-break` | Break charged and empty wands after wearing gauntlets of power |
+| `wizard-bones-pair` | Create level 5 bones, then load and unlink them from a second character sharing storage |
 | `wizcast` | Cast chain lightning and protection through the wizard spell menu |
 | `writing` | Write known and unknown scrolls, charge a marker, read cursed armor magic and a cursed spellbook |
 

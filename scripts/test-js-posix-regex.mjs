@@ -250,6 +250,11 @@ int main(int argc, char **argv) {
     ['[[.unknown-name.]]', 'a'], ['a*{b', 'aaa{b'],
     ['a{2}{again}', 'aa{again}'], ['a{1', 'a'], ['a{1x}', 'a'],
     ['a?{2', 'a'], ['a{1}+', 'a'], ['^*', 'a'], ['(^)*', 'a'],
+    ['Unknown[[:rune:]]command', 'Unknown command'],
+    ['^[[:rune:]]$', '\x7f'], ['^[[:rune:]]$', 'é'],
+    ...['ideogram', 'phonogram', 'special'].flatMap(name => [
+      ['^[[:' + name + ':]]$', 'A'], ['^[^[:' + name + ':]]$', 'A'],
+    ]),
   ];
   const output = command(binary, cases.flat()).trimEnd().split('\n');
   for (const [index, [pattern, text]] of cases.entries()) {
@@ -257,7 +262,7 @@ int main(int argc, char **argv) {
     const actual = regex.compilePosixRegex(pattern, regex.REG_EXTENDED | regex.REG_NOSUB, true);
     assert.equal(actual.status, compiled, 'macOS regex compile ' + pattern);
     if (!actual.status) {
-      assert.equal(regex.execPosixRegex(actual.handle, text), executed, 'macOS regex match ' + pattern);
+      assert.equal(regex.execPosixRegex(actual.handle, Buffer.from(text)), executed, 'macOS regex match ' + pattern);
       regex.freePosixRegex(actual.handle);
     }
   }

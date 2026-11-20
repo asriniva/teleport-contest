@@ -16,6 +16,22 @@ assert.equal(enhance.getScreens().length, idle.getScreens().length + 1);
 assert.match(decodeScreen(enhance.getScreens().at(-1))[0].map(cell => cell.ch).join(''), /Current skills:/);
 assert.deepEqual(enhance.getRngLog(), idle.getRngLog());
 
+const publishedSave = JSON.parse(readFileSync(new URL(
+    '../sessions/seed0013-friday13-save-then-fullmoon-restore.session.json', import.meta.url
+), 'utf8'));
+const files = new Map();
+const storage = {
+    getItem: key => files.get(key) ?? null,
+    setItem: (key, value) => files.set(key, String(value)),
+    removeItem: key => files.delete(key),
+    get length() { return files.size; },
+    key: index => [...files.keys()][index] ?? null,
+};
+for (const {seed, datetime, nethackrc, moves, steps} of publishedSave.segments) {
+    const game = await runSegment({seed, datetime, nethackrc, moves, storage});
+    assert.deepEqual(game.getCursors(), steps.map(step => step.cursor));
+}
+
 const env = createStandaloneEnvironment({environment: {NOMUX_MARKERS: '1'}});
 env.enableStdio();
 env.enableDecl(layouts.decl);
