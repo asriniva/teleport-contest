@@ -86,6 +86,7 @@ subsequent movement and damage turns.
 | `traps` | Arm traps, disarm a land mine, animate a figurine and attempt pet and riding interactions |
 | `undead-turning` | Revive a lichen and a newt from the floor, then probe downward |
 | `unicode-save-restore` | Save a rogue with an emoji in the player name, restore the character, and save again |
+| `wall-modes` | Inspect vision and wall modes, then display the level list and glyph diagnostics |
 | `wand-break` | Break charged and empty wands after wearing gauntlets of power |
 | `wizard-bones-pair` | Create level 5 bones, then load and unlink them from a second character sharing storage |
 | `wizcast` | Cast chain lightning and protection through the wizard spell menu |
