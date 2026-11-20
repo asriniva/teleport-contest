@@ -1,3 +1,14 @@
+## Terrain wish parser field alias (2026-11-20)
+
+In the C headers, `looted` expands to `flags`. The private wish-parser
+record in `js/nethack/bindings/objnam.js` now gives both names the same
+field accessor. Previously the parser stored `looted` on the JavaScript
+object and left old bytes at the C field offset when it reused a record.
+`scripts/test-wish-parser-flags.mjs` checks the bytes after initialization
+and after parsing ordinary, looted, and disturbed terrain wishes. A fresh
+macOS C recording also matched the JavaScript screens before this change,
+so the field defect has no established link to the held-out screen misses.
+
 ## Special levels in the character attributes report (2026-11-20)
 
 The attributes code in `js/nethack/bindings/insight.js` now uses the same
