@@ -6,6 +6,43 @@ layouts, and the unchanged frozen PRNG, terminal and storage contracts. It needs
 Node.js 22 or newer; scoring needs no C build, SDK, Wasm artifact or asset cache.
 The existing browser `NethackGame` API remains separate from this Node recorder.
 
+## How we ported NetHack
+
+We compiled the contest-patched NetHack C source with Emscripten to get an
+executable reference. An LLM then ported the game to JavaScript one C
+translation unit at a time (one `.c` file together with the headers it
+includes). The modules in [js/ported](js/ported/) follow the C file and
+function names so a routine can be read alongside its original.
+
+We built a [JavaScript C runtime](js/c-runtime/) to reproduce the compiled
+game's memory layout, including integer widths, pointers and struct field
+offsets. That let two routines holding pointers to the same monster observe
+each other's writes. The runtime handled C-style calls and callbacks, and
+the translated routines preserved the order of calls and mutations. We
+built regression tests by running the same inputs through Emscripten C and
+JavaScript and comparing the results. Even when the current screen looked
+right, an extra draw from the pseudorandom number generator (PRNG) could
+change every subsequent turn.
+
+The first working port was extremely slow. An ordinary turn repeatedly
+decoded pointers, looked up fields and packed arguments to call the next
+routine. We moved selected hot paths, including movement, monster state
+access and display, to [native JavaScript data structures and direct
+calls](js/nethack/native/). We checked walk, wait and attack turns against
+the compiled C reference and replayed complete recordings to compare the
+ordered PRNG log, screen cells, cursor positions and animation frames.
+
+For the final compatibility checks, we recorded games with the native macOS
+C build and replayed those inputs in JavaScript. Emscripten uses musl libc,
+and some string and numeric conversions differ from macOS libc. For example,
+an overflowing numeric option produced an extra startup prompt in JavaScript
+even though every PRNG call matched. A recording from macOS exposed the
+screen difference and became a regression test for the fix. The
+[supplemental macOS recordings](tests/recordings/native/) cover cases like
+this alongside the contest's public sessions.
+
+## Validation history
+
 Verified through the normal entry and unchanged harness: **44/44 public sessions**,
 **792,838 RNG entries**, **11,405 screens/cursors**, and **1,483 animation
 frames/cursors**, with exact output counts and zero forbidden capabilities. See

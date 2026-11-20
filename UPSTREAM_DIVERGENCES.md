@@ -1,3 +1,11 @@
+## Porting methodology in the README (2026-11-20)
+
+The fork's README now describes the Emscripten reference build, the LLM's
+translation-unit workflow, the JavaScript C runtime, the performance work
+and the final comparisons with macOS C. The numeric option example comes
+from the recorded case documented below. This change affects documentation
+only. Validation covered the relative links and the scope of the diff.
+
 ## Readability of supporting JavaScript (2026-11-20)
 
 This fork reformats 218 existing modules outside `js/ported`. In the
