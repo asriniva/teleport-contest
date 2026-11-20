@@ -90,6 +90,7 @@ subsequent movement and damage turns.
 | `trailing-path` | Ask the wizard Lua loader to open a regular file with a trailing slash, dismiss the error and redraw |
 | `traps` | Arm traps, disarm a land mine, animate a figurine and attempt pet and riding interactions |
 | `undead-turning` | Revive a lichen and a newt from the floor, then probe downward |
+| `truncated-save-name` | Attempt to save after the player name limit splits an accented character, then continue playing after the file error |
 | `unicode-save-restore` | Save a rogue with an emoji in the player name, restore the character, and save again |
 | `wall-modes` | Inspect vision and wall modes, then display the level list and glyph diagnostics |
 | `wand-break` | Break charged and empty wands after wearing gauntlets of power |

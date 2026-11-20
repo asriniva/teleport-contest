@@ -1,3 +1,23 @@
+## Incomplete UTF-8 in save filenames (2026-11-20)
+
+NetHack can truncate the UTF-8 encoding of a player name at its 31-byte
+limit. Previously, `js/c-runtime/file-path.js` decoded an incomplete byte
+sequence as U+FFFD. The port could then create a save that macOS refused
+or mistakenly look up an existing file whose name actually contained
+U+FFFD. Path decoding now preserves malformed components as invalid
+Unicode strings. In `js/c-runtime/vfs.js`, a lookup for such a component
+misses, and creating or renaming an entry to that name fails with
+`EILSEQ`. Valid components, including genuine U+FFFD, retain their
+original spelling.
+
+The macOS C recording `truncated-save-name` saves after the name limit
+cuts an accented character in half. The previous port matched 9 of 14
+screens and cursors and exited the game. The fix shows the native save
+error, returns to play, and matches all 14 screens and cursors and all
+6,326 ordered RNG calls. The file-path regression also checks lookup,
+creation, rename and unlink against a real U+FFFD name. All 44 public
+and 77 supplemental recordings passed. Held-out impact remains unverified.
+
 ## Byte input for level annotations and other keyboard prompts (2026-11-20)
 
 The pure JavaScript port in `js/standalone-recorder-adapter.js` now passes
