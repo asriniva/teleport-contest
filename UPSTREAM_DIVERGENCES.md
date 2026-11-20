@@ -1,3 +1,17 @@
+## Chronicle event turns and flags across save and restore (2026-11-20)
+
+`js/nethack/save-lifecycle.js` now writes both numeric fields of each
+chronicle entry into the save record using the measured `gamelog_line`
+layout. The previous writer assigned them to JavaScript properties that
+the serializer skipped. A restored game displayed turn zero and lost the
+flags that distinguish achievements, minor events, and spoilers. A save
+written by the previous writer already contains zeros for these fields.
+
+The native macOS `chronicle-save` recording displays the same six events
+before and after restoring. An additional check at event insertion
+confirmed that the restored turns, flags, text, and order matched the
+original six entries. The held-out result awaits a leaderboard run.
+
 ## Critical health on the tty hit-point bar (2026-11-20)
 
 The readable JavaScript status routine in `js/ported/botl.js` now reads

@@ -25,6 +25,7 @@ subsequent movement and damage turns.
 | `autopickup-all` | Open the character attributes screen with autopickup enabled for every object class |
 | `bag-cancellation` | Put a cancellation wand into a bag of holding, handle the blast, potion prompt and wizard survival |
 | `camera-mirror` | Aim a camera at the hero and the stairs, and aim a mirror at the hero and the ceiling |
+| `chronicle-save` | Display the entry turn and five level gains in the chronicle, save, restore, and display the same events again |
 | `cloud-save-restore` | Highlight jump and cloud targets, jump with boots, then save in a stinking cloud and take damage from it after restoring |
 | `corpse-genders` | Revive explicitly male and female newt corpses, using a downward zap |
 | `critical-hp-bar` | Take damage with the tty hit-point bar enabled and display dashed padding at critical health |
