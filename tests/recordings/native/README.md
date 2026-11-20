@@ -27,6 +27,7 @@ subsequent movement and damage turns.
 | `camera-mirror` | Aim a camera at the hero and the stairs, and aim a mirror at the hero and the ceiling |
 | `cloud-save-restore` | Highlight jump and cloud targets, jump with boots, then save in a stinking cloud and take damage from it after restoring |
 | `corpse-genders` | Revive explicitly male and female newt corpses, using a downward zap |
+| `critical-hp-bar` | Take damage with the tty hit-point bar enabled and display dashed padding at critical health |
 | `darwin-rune` | Hide unknown-command messages using the Darwin rune character class |
 | `display-regex-collation` | Load message filters using a named space and a literal brace after repetition, then suppress the unknown-command message |
 | `display-regex-dialect` | Exercise escaped letters in message and inventory color rules that the native C and SDK regex engines interpret differently |

@@ -1,3 +1,17 @@
+## Critical health on the tty hit-point bar (2026-11-20)
+
+The readable JavaScript status routine in `js/ported/botl.js` now reads
+and writes the bytes preceding the end of the padded title. The previous
+implementation used negative JavaScript property indices and left the
+padding blank at critical health. The updated routine follows the loop in
+the patched C `src/botl.c`. The gameplay copy in `js/nethack/native/botl.js`
+is generated from the readable source.
+
+The `critical-hp-bar` macOS C recording follows a tourist taking damage
+with the hit-point bar enabled. It checks the transition to dashed padding
+and the captured animation frames. The held-out score for this change
+awaits a leaderboard run.
+
 ## Darwin character classes and the published final-save cursor (2026-11-19)
 
 The game regex profile recognizes the Darwin C-locale character classes

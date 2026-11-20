@@ -1856,10 +1856,11 @@ export function bl_idx_to_fldname(idx)
 
 export function repad_with_dashes(inoutbuf)
 {
-    let p = C.eos(inoutbuf);
+    const start = Number(inoutbuf);
+    let p = Number(C.eos(inoutbuf));
 
-    while ((+!!((+!!(p >= inoutbuf + 2 && p[-1] == 32)) && p[-2] == 32))) {
-        p[-1] = 45;
+    while (p >= start + 2 && C.loadChar(p - 1) === 32 && C.loadChar(p - 2) === 32) {
+        C.storeChar(p - 1, 45);
         p -= 2;
     }
 }
