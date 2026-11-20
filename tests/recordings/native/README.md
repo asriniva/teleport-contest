@@ -67,6 +67,8 @@ subsequent movement and damage turns.
 | `redraw-invisible` | Make a lichen invisible, attack it and redraw, then redraw while blind, change the travel target filter and open a target menu |
 | `redraw-water` | Enter a pool wearing an amulet of magical breathing, redraw and open inventory underwater, then climb out |
 | `remove-armor` | Destroy a worn cloak with a scroll, unwield the weapon through take-off-all, then remove a helmet, boots and body armor through the same command |
+| `restore-accent` | Restore a save using the decomposed spelling of an accented player name |
+| `restore-case` | Restore a save after changing the player name from Sneaky to sneaky |
 | `royal-jelly-hatch` | Rub royal jelly on a killer bee egg, cancel applying a second lump from a stack and wait for a queen bee to hatch |
 | `shop-billing` | Enter via the public healer’s route, purchase unpaid banded mail and sell it back |
 | `startup-names` | Read the active name after a commented-out name, then launch with accented and Chinese player names |
