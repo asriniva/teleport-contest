@@ -22,6 +22,7 @@ subsequent movement and damage turns.
 | --- | --- |
 | `altar-offerings` | Offer a white unicorn corpse and a lichen corpse to Thoth, then bless a potion on the altar through prayer |
 | `artifacts` | Wear and invoke the Eye of the Aethiopica, wield and invoke Magicbane and Vorpal Blade |
+| `autopickup-all` | Open the character attributes screen with autopickup enabled for every object class |
 | `bag-cancellation` | Put a cancellation wand into a bag of holding, handle the blast, potion prompt and wizard survival |
 | `camera-mirror` | Aim a camera at the hero and the stairs, and aim a mirror at the hero and the ceiling |
 | `cloud-save-restore` | Highlight jump and cloud targets, jump with boots, then save in a stinking cloud and take damage from it after restoring |

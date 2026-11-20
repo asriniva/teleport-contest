@@ -758,8 +758,10 @@ export function basics_enlightenment(mode, final)
             C.Strcat(buf, ", but temporarily disabled while inside the shop");
         } else {
             C.oc_to_str(C.flags.pickup_types, ocl);
-            C.Sprintf(C.eos(buf), " for %s%s%s", ocl ? "'" : "", ocl ? ocl : "all types", ocl ? "'" : "");
-            if (C.flags.pickup_thrown && C.loadChar(ocl))
+            const hasPickupTypes = C.loadChar(ocl);
+            C.Sprintf(C.eos(buf), " for %s%s%s", hasPickupTypes ? "'" : "",
+                      hasPickupTypes ? ocl : "all types", hasPickupTypes ? "'" : "");
+            if (C.flags.pickup_thrown && hasPickupTypes)
                 C.Strcat(buf, " plus thrown"); /* show when not 'all types' */
             if (C.ga.apelist)
                 C.Strcat(buf, ", with exceptions");
